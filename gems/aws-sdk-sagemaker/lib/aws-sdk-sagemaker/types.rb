@@ -929,8 +929,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] training_job_name
     #   The name of the training job. The name must be unique within an AWS
-    #   Region in an AWS account. It appears in the Amazon SageMaker
-    #   console.
+    #   Region in an AWS account.
     #   @return [String]
     #
     # @!attribute [rw] hyper_parameters
@@ -1071,6 +1070,138 @@ module Aws::SageMaker
     #
     class CreateTrainingJobResponse < Struct.new(
       :training_job_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateTransformJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transform_job_name: "TransformJobName", # required
+    #         model_name: "ModelName", # required
+    #         max_concurrent_transforms: 1,
+    #         max_payload_in_mb: 1,
+    #         batch_strategy: "MultiRecord", # accepts MultiRecord, SingleRecord
+    #         environment: {
+    #           "TransformEnvironmentKey" => "TransformEnvironmentValue",
+    #         },
+    #         transform_input: { # required
+    #           data_source: { # required
+    #             s3_data_source: { # required
+    #               s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix
+    #               s3_uri: "S3Uri", # required
+    #             },
+    #           },
+    #           content_type: "ContentType",
+    #           compression_type: "None", # accepts None, Gzip
+    #           split_type: "None", # accepts None, Line, RecordIO
+    #         },
+    #         transform_output: { # required
+    #           s3_output_path: "S3Uri", # required
+    #           accept: "Accept",
+    #           assemble_with: "None", # accepts None, Line
+    #           kms_key_id: "KmsKeyId",
+    #         },
+    #         transform_resources: { # required
+    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
+    #           instance_count: 1, # required
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] transform_job_name
+    #   The name of the transform job. The name must be unique within an AWS
+    #   Region in an AWS account.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_name
+    #   The name of the model that you want to use for the transform job.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_concurrent_transforms
+    #   The maximum number of parallel requests on each instance node that
+    #   can be launched in a transform job. The default value is `1`. To
+    #   allow Amazon SageMaker to determine the appropriate number for
+    #   `MaxConcurrentTransforms`, set the value to `0`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_payload_in_mb
+    #   The maximum payload size allowed, in MB. A payload is the data
+    #   portion of a record (without metadata). The value in
+    #   `MaxPayloadInMB` must be greater than the size of a single
+    #   record.You can approximate the size of a record by dividing the size
+    #   of your dataset by the number of records. The value you enter should
+    #   be proportional to the number of records you want per batch. It is
+    #   recommended to enter a slightly higher value to ensure the records
+    #   will fit within the maximum payload size. The default value is `6`
+    #   MB. For an unlimited payload size, set the value to `0`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] batch_strategy
+    #   Determins the number of records included in a single batch.
+    #   `SingleRecord` means only one record is used per batch.
+    #   `MultiRecord` means a batch is set to contain as many records that
+    #   could possibly fit within the `MaxPayloadInMB` limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment
+    #   The environment variables to set in the Docker container. We support
+    #   up to 16 key and values entries in the map.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] transform_input
+    #   Describes the input source and the way the transform job consumes
+    #   it.
+    #   @return [Types::TransformInput]
+    #
+    # @!attribute [rw] transform_output
+    #   Describes the results of the transform job.
+    #   @return [Types::TransformOutput]
+    #
+    # @!attribute [rw] transform_resources
+    #   Describes the resources, including ML instance types and ML instance
+    #   count, to use for the transform job.
+    #   @return [Types::TransformResources]
+    #
+    # @!attribute [rw] tags
+    #   An array of key-value pairs. Adding tags is optional. For more
+    #   information, see [Using Cost Allocation Tags][1] in the *AWS Billing
+    #   and Cost Management User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTransformJobRequest AWS API Documentation
+    #
+    class CreateTransformJobRequest < Struct.new(
+      :transform_job_name,
+      :model_name,
+      :max_concurrent_transforms,
+      :max_payload_in_mb,
+      :batch_strategy,
+      :environment,
+      :transform_input,
+      :transform_output,
+      :transform_resources,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transform_job_arn
+    #   The Amazon Resource Name (ARN) of the transform job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTransformJobResponse AWS API Documentation
+    #
+    class CreateTransformJobResponse < Struct.new(
+      :transform_job_arn)
       include Aws::Structure
     end
 
@@ -1851,6 +1982,115 @@ module Aws::SageMaker
       :training_start_time,
       :training_end_time,
       :last_modified_time)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeTransformJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transform_job_name: "TransformJobName", # required
+    #       }
+    #
+    # @!attribute [rw] transform_job_name
+    #   The name of the transform job that you want to view details of.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTransformJobRequest AWS API Documentation
+    #
+    class DescribeTransformJobRequest < Struct.new(
+      :transform_job_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transform_job_name
+    #   The name of the transform job.
+    #   @return [String]
+    #
+    # @!attribute [rw] transform_job_arn
+    #   The Amazon Resource Name (ARN) of the transform job.
+    #   @return [String]
+    #
+    # @!attribute [rw] transform_job_status
+    #   The status of the transform job. If the transform job failed, the
+    #   reason is returned in the `FailureReason` field.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the transform job failed, the reason that it failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_name
+    #   The name of the model used in the transform job.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_concurrent_transforms
+    #   The maximum number of parallel requests on each instance node that
+    #   can be launched in a transform job. The default value is 1.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_payload_in_mb
+    #   The maximum payload size , in MB used in the transform job.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] batch_strategy
+    #   SingleRecord means only one record was used per a batch.
+    #   &lt;code&gt;MultiRecord&lt;/code&gt; means batches contained as many
+    #   records that could possibly fit within the `MaxPayloadInMB` limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] transform_input
+    #   Describes the dataset to be transformed and the Amazon S3 location
+    #   where it is stored.
+    #   @return [Types::TransformInput]
+    #
+    # @!attribute [rw] transform_output
+    #   Identifies the Amazon S3 location where you want Amazon SageMaker to
+    #   save the results from the transform job.
+    #   @return [Types::TransformOutput]
+    #
+    # @!attribute [rw] transform_resources
+    #   Describes the resources, including ML instance types and ML instance
+    #   count, to use for the transform job.
+    #   @return [Types::TransformResources]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp that shows when the transform Job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] transform_start_time
+    #   Indicates when the transform job starts on ML instances. You are
+    #   billed for the time interval between this time and the value of
+    #   `TransformEndTime`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] transform_end_time
+    #   Indicates when the transform job is `Completed`, `Stopped`, or
+    #   `Failed`. You are billed for the time interval between this time and
+    #   the value of `TransformStartTime`.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTransformJobResponse AWS API Documentation
+    #
+    class DescribeTransformJobResponse < Struct.new(
+      :transform_job_name,
+      :transform_job_arn,
+      :transform_job_status,
+      :failure_reason,
+      :model_name,
+      :max_concurrent_transforms,
+      :max_payload_in_mb,
+      :batch_strategy,
+      :environment,
+      :transform_input,
+      :transform_output,
+      :transform_resources,
+      :creation_time,
+      :transform_start_time,
+      :transform_end_time)
       include Aws::Structure
     end
 
@@ -3147,8 +3387,8 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] creation_time_after
-    #   A filter that only training jobs created after the specified time
-    #   (timestamp).
+    #   A filter that returns only training jobs created after the specified
+    #   time (timestamp).
     #   @return [Time]
     #
     # @!attribute [rw] creation_time_before
@@ -3214,6 +3454,104 @@ module Aws::SageMaker
     #
     class ListTrainingJobsResponse < Struct.new(
       :training_job_summaries,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTransformJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         creation_time_after: Time.now,
+    #         creation_time_before: Time.now,
+    #         last_modified_time_after: Time.now,
+    #         last_modified_time_before: Time.now,
+    #         name_contains: "NameContains",
+    #         status_equals: "InProgress", # accepts InProgress, Completed, Failed, Stopping, Stopped
+    #         sort_by: "Name", # accepts Name, CreationTime, Status
+    #         sort_order: "Ascending", # accepts Ascending, Descending
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] creation_time_after
+    #   A filter that returns only transform jobs created after the
+    #   specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   A filter that returns only transform jobs created before the
+    #   specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_after
+    #   A filter that returns only transform jobs modified after the
+    #   specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_before
+    #   A filter that returns only transform jobs modified before the
+    #   specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name_contains
+    #   A string in the transform job name. This filter returns only
+    #   transform jobs whose name contains the specified string.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_equals
+    #   A filter that retrieves only transform jobs with a specific status.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The field to sort results by. The default is `CreationTime`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order for results. The default is `Descending`.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous `ListTransformJobs` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of transform jobs, use the token in the next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of transform jobs to return in the response. The
+    #   default value is `10`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTransformJobsRequest AWS API Documentation
+    #
+    class ListTransformJobsRequest < Struct.new(
+      :creation_time_after,
+      :creation_time_before,
+      :last_modified_time_after,
+      :last_modified_time_before,
+      :name_contains,
+      :status_equals,
+      :sort_by,
+      :sort_order,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transform_job_summaries
+    #   An array of `TransformJobSummary` objects.
+    #   @return [Array<Types::TransformJobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon SageMaker returns this token.
+    #   To retrieve the next set of transform jobs, use it in the next
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTransformJobsResponse AWS API Documentation
+    #
+    class ListTransformJobsResponse < Struct.new(
+      :transform_job_summaries,
       :next_token)
       include Aws::Structure
     end
@@ -3892,6 +4230,24 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StopTransformJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transform_job_name: "TransformJobName", # required
+    #       }
+    #
+    # @!attribute [rw] transform_job_name
+    #   The name of the transform job to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopTransformJobRequest AWS API Documentation
+    #
+    class StopTransformJobRequest < Struct.new(
+      :transform_job_name)
+      include Aws::Structure
+    end
+
     # Specifies how long model training can run. When model training reaches
     # the limit, Amazon SageMaker ends the training job. Use this API to cap
     # model training cost.
@@ -4032,6 +4388,321 @@ module Aws::SageMaker
       :training_end_time,
       :last_modified_time,
       :training_job_status)
+      include Aws::Structure
+    end
+
+    # Describes the location of the channel data.
+    #
+    # @note When making an API call, you may pass TransformDataSource
+    #   data as a hash:
+    #
+    #       {
+    #         s3_data_source: { # required
+    #           s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_data_source
+    #   The S3 location of the data source that is associated with a
+    #   channel.
+    #   @return [Types::TransformS3DataSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformDataSource AWS API Documentation
+    #
+    class TransformDataSource < Struct.new(
+      :s3_data_source)
+      include Aws::Structure
+    end
+
+    # Describes the input source of a transform job and the way the
+    # transform job consumes it.
+    #
+    # @note When making an API call, you may pass TransformInput
+    #   data as a hash:
+    #
+    #       {
+    #         data_source: { # required
+    #           s3_data_source: { # required
+    #             s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix
+    #             s3_uri: "S3Uri", # required
+    #           },
+    #         },
+    #         content_type: "ContentType",
+    #         compression_type: "None", # accepts None, Gzip
+    #         split_type: "None", # accepts None, Line, RecordIO
+    #       }
+    #
+    # @!attribute [rw] data_source
+    #   Describes the location of the channel data, meaning the S3 location
+    #   of the input data that the model can consume.
+    #   @return [Types::TransformDataSource]
+    #
+    # @!attribute [rw] content_type
+    #   The multipurpose internet mail extension (MIME) type of the data.
+    #   Amazon SageMaker uses the MIME type with each http call to transfer
+    #   data to the transform job.
+    #   @return [String]
+    #
+    # @!attribute [rw] compression_type
+    #   Compressing data helps save on storage space. If your transform data
+    #   is compressed, specify the compression type.and Amazon SageMaker
+    #   will automatically decompress the data for the transform job
+    #   accordingly. The default value is `None`.
+    #   @return [String]
+    #
+    # @!attribute [rw] split_type
+    #   The method to use to split the transform job's data into smaller
+    #   batches. The default value is `None`. If you don't want to split
+    #   the data, specify (`None`). If you want to split records on a
+    #   newline character boundary, specify `Line`. To split records
+    #   according to the RecordIO format, specify `RecordIO`.
+    #
+    #   Amazon SageMaker will send maximum number of records per batch in
+    #   each request up to the MaxPayloadInMB limit. For more information,
+    #   see [RecordIO data format][1].
+    #
+    #   <note markdown="1"> For information about the `RecordIO` format, see [Data Format][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://mxnet.io/architecture/note_data_loading.html#data-format
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformInput AWS API Documentation
+    #
+    class TransformInput < Struct.new(
+      :data_source,
+      :content_type,
+      :compression_type,
+      :split_type)
+      include Aws::Structure
+    end
+
+    # Provides a summary information for a transform job. Multiple
+    # TransformJobSummary objects are returned as a list after calling
+    # ListTransformJobs.
+    #
+    # @!attribute [rw] transform_job_name
+    #   The name of the transform job.
+    #   @return [String]
+    #
+    # @!attribute [rw] transform_job_arn
+    #   The Amazon Resource Name (ARN) of the transform job.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp that shows when the transform Job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] transform_end_time
+    #   Indicates when the transform job ends on compute instances. For
+    #   successful jobs and stopped jobs, this is the exact time recorded
+    #   after the results are uploaded. For failed jobs, this is when Amazon
+    #   SageMaker detected that the job failed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   Indicates when the transform job was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] transform_job_status
+    #   The status of the transform job.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the transform job failed, the reason it failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformJobSummary AWS API Documentation
+    #
+    class TransformJobSummary < Struct.new(
+      :transform_job_name,
+      :transform_job_arn,
+      :creation_time,
+      :transform_end_time,
+      :last_modified_time,
+      :transform_job_status,
+      :failure_reason)
+      include Aws::Structure
+    end
+
+    # Describes the results of a transform job output.
+    #
+    # @note When making an API call, you may pass TransformOutput
+    #   data as a hash:
+    #
+    #       {
+    #         s3_output_path: "S3Uri", # required
+    #         accept: "Accept",
+    #         assemble_with: "None", # accepts None, Line
+    #         kms_key_id: "KmsKeyId",
+    #       }
+    #
+    # @!attribute [rw] s3_output_path
+    #   The Amazon S3 path where you want Amazon SageMaker to store the
+    #   results of the transform job. For example,
+    #   `s3://bucket-name/key-name-prefix`.
+    #
+    #   For every S3 object used as input for the transform job, the
+    #   transformed data is stored in a corresponding subfolder in the
+    #   location under the output prefix.For example, the input data
+    #   `s3://bucket-name/input-name-prefix/dataset01/data.csv` will have
+    #   the transformed data stored at
+    #   `s3://bucket-name/key-name-prefix/dataset01/`, based on the original
+    #   name, as a series of .part files (.part0001, part0002, etc).
+    #   @return [String]
+    #
+    # @!attribute [rw] accept
+    #   The MIME type used to specify the output data. Amazon SageMaker uses
+    #   the MIME type with each http call to transfer data from the
+    #   transform job.
+    #   @return [String]
+    #
+    # @!attribute [rw] assemble_with
+    #   Defines how to assemble the results of the transform job as a single
+    #   S3 object. You should select a format that is most convienant to
+    #   you. To concatenate the results in binary format, specify `None`. To
+    #   add a newline character at the end of every transformed record,
+    #   specify `Line`. To assemble the output in RecordIO format, specify
+    #   `RecordIO`. The default value is `None`.
+    #
+    #   For information about the `RecordIO` format, see [Data Format][1].
+    #
+    #
+    #
+    #   [1]: http://mxnet.io/architecture/note_data_loading.html#data-format
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The AWS Key Management Service (AWS KMS) key for Amazon S3
+    #   server-side encryption that Amazon SageMaker uses to encrypt the
+    #   transformed data.
+    #
+    #   If you don't provide a KMS key ID, Amazon SageMaker uses the
+    #   default KMS key for Amazon S3 for your role's account. For more
+    #   information, see [KMS-Managed Encryption Keys][1] in the *Amazon
+    #   Simple Storage Service Developer Guide.*
+    #
+    #   The KMS key policy must grant permission to the IAM role that you
+    #   specify in your `CreateTramsformJob` request. For more information,
+    #   see [Using Key Policies in AWS KMS][2] in the *AWS Key Management
+    #   Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+    #   [2]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformOutput AWS API Documentation
+    #
+    class TransformOutput < Struct.new(
+      :s3_output_path,
+      :accept,
+      :assemble_with,
+      :kms_key_id)
+      include Aws::Structure
+    end
+
+    # Describes the resources, including ML instance types and ML instance
+    # count, to use for transform job.
+    #
+    # @note When making an API call, you may pass TransformResources
+    #   data as a hash:
+    #
+    #       {
+    #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
+    #         instance_count: 1, # required
+    #       }
+    #
+    # @!attribute [rw] instance_type
+    #   The ML compute instance type for the transform job. For using
+    #   built-in algorithms to transform moderately sized datasets,
+    #   ml.m4.xlarge or `ml.m5.large` should suffice. There is no default
+    #   value for `InstanceType`.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_count
+    #   The number of ML compute instances to use in the transform job. For
+    #   distributed transform, provide a value greater than 1. The default
+    #   value is `1`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformResources AWS API Documentation
+    #
+    class TransformResources < Struct.new(
+      :instance_type,
+      :instance_count)
+      include Aws::Structure
+    end
+
+    # Describes the S3 data source.
+    #
+    # @note When making an API call, you may pass TransformS3DataSource
+    #   data as a hash:
+    #
+    #       {
+    #         s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix
+    #         s3_uri: "S3Uri", # required
+    #       }
+    #
+    # @!attribute [rw] s3_data_type
+    #   If you choose `S3Prefix`, `S3Uri` identifies a key name prefix.
+    #   Amazon SageMaker uses all objects with the specified key name prefix
+    #   for batch transform.
+    #
+    #   If you choose `ManifestFile`, `S3Uri` identifies an object that is a
+    #   manifest file containing a list of object keys that you want Amazon
+    #   SageMaker to use for batch transform.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_uri
+    #   Depending on the value specified for the `S3DataType`, identifies
+    #   either a key name prefix or a manifest. For example:
+    #
+    #   * A key name prefix might look like this:
+    #     `s3://bucketname/exampleprefix`.
+    #
+    #   * A manifest might look like this:
+    #     `s3://bucketname/example.manifest`
+    #
+    #     The manifest is an S3 object which is a JSON file with the
+    #     following format:
+    #
+    #     `[`
+    #
+    #     ` \{"prefix": "s3://customer_bucket/some/prefix/"\},`
+    #
+    #     ` "relative/path/to/custdata-1",`
+    #
+    #     ` "relative/path/custdata-2",`
+    #
+    #     ` ...`
+    #
+    #     ` ]`
+    #
+    #     The preceding JSON matches the following `S3Uris`\:
+    #
+    #     `s3://customer_bucket/some/prefix/relative/path/to/custdata-1`
+    #
+    #     `s3://customer_bucket/some/prefix/relative/path/custdata-1`
+    #
+    #     `...`
+    #
+    #     The complete set of `S3Uris` in this manifest constitutes the
+    #     input data for the channel for this datasource. The object that
+    #     each `S3Uris` points to must be readable by the IAM role that
+    #     Amazon SageMaker uses to perform tasks on your behalf.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformS3DataSource AWS API Documentation
+    #
+    class TransformS3DataSource < Struct.new(
+      :s3_data_type,
+      :s3_uri)
       include Aws::Structure
     end
 

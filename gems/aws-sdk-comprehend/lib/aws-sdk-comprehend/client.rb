@@ -355,6 +355,56 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Inspects the text of a batch of documents for the syntax and part of
+    # speech of the words in the document and returns information about
+    # them. For more information, see how-syntax.
+    #
+    # @option params [required, Array<String>] :text_list
+    #   A list containing the text of the input documents. The list can
+    #   contain a maximum of 25 documents. Each document must contain fewer
+    #   that 5,000 bytes of UTF-8 encoded characters.
+    #
+    # @option params [required, String] :language_code
+    #   The language of the input documents. You can specify English ("en")
+    #   or Spanish ("es"). All documents must be in the same language.
+    #
+    # @return [Types::BatchDetectSyntaxResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDetectSyntaxResponse#result_list #result_list} => Array&lt;Types::BatchDetectSyntaxItemResult&gt;
+    #   * {Types::BatchDetectSyntaxResponse#error_list #error_list} => Array&lt;Types::BatchItemError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_detect_syntax({
+    #     text_list: ["String"], # required
+    #     language_code: "en", # required, accepts en
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.result_list #=> Array
+    #   resp.result_list[0].index #=> Integer
+    #   resp.result_list[0].syntax_tokens #=> Array
+    #   resp.result_list[0].syntax_tokens[0].token_id #=> Integer
+    #   resp.result_list[0].syntax_tokens[0].text #=> String
+    #   resp.result_list[0].syntax_tokens[0].begin_offset #=> Integer
+    #   resp.result_list[0].syntax_tokens[0].end_offset #=> Integer
+    #   resp.result_list[0].syntax_tokens[0].part_of_speech.tag #=> String, one of "ADJ", "ADP", "ADV", "AUX", "CONJ", "DET", "INTJ", "NOUN", "NUM", "O", "PART", "PRON", "PROPN", "PUNCT", "SCONJ", "SYM", "VERB"
+    #   resp.result_list[0].syntax_tokens[0].part_of_speech.score #=> Float
+    #   resp.error_list #=> Array
+    #   resp.error_list[0].index #=> Integer
+    #   resp.error_list[0].error_code #=> String
+    #   resp.error_list[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectSyntax AWS API Documentation
+    #
+    # @overload batch_detect_syntax(params = {})
+    # @param [Hash] params ({})
+    def batch_detect_syntax(params = {}, options = {})
+      req = build_request(:batch_detect_syntax, params)
+      req.send_request(options)
+    end
+
     # Gets the properties associated with a dominant language detection job.
     # Use this operation to get the status of a detection job.
     #
@@ -383,6 +433,7 @@ module Aws::Comprehend
     #   resp.dominant_language_detection_job_properties.input_data_config.s3_uri #=> String
     #   resp.dominant_language_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.dominant_language_detection_job_properties.output_data_config.s3_uri #=> String
+    #   resp.dominant_language_detection_job_properties.data_access_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeDominantLanguageDetectionJob AWS API Documentation
     #
@@ -422,6 +473,7 @@ module Aws::Comprehend
     #   resp.entities_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.entities_detection_job_properties.output_data_config.s3_uri #=> String
     #   resp.entities_detection_job_properties.language_code #=> String, one of "en", "es"
+    #   resp.entities_detection_job_properties.data_access_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEntitiesDetectionJob AWS API Documentation
     #
@@ -461,6 +513,7 @@ module Aws::Comprehend
     #   resp.key_phrases_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.key_phrases_detection_job_properties.output_data_config.s3_uri #=> String
     #   resp.key_phrases_detection_job_properties.language_code #=> String, one of "en", "es"
+    #   resp.key_phrases_detection_job_properties.data_access_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeKeyPhrasesDetectionJob AWS API Documentation
     #
@@ -500,6 +553,7 @@ module Aws::Comprehend
     #   resp.sentiment_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.sentiment_detection_job_properties.output_data_config.s3_uri #=> String
     #   resp.sentiment_detection_job_properties.language_code #=> String, one of "en", "es"
+    #   resp.sentiment_detection_job_properties.data_access_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeSentimentDetectionJob AWS API Documentation
     #
@@ -703,6 +757,47 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Inspects text for syntax and the part of speech of words in the
+    # document. For more information, how-syntax.
+    #
+    # @option params [required, String] :text
+    #   A UTF-8 string. Each string must contain fewer that 5,000 bytes of UTF
+    #   encoded characters.
+    #
+    # @option params [required, String] :language_code
+    #   The language code of the input documents. You can specify English
+    #   ("en") or Spanish ("es").
+    #
+    # @return [Types::DetectSyntaxResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DetectSyntaxResponse#syntax_tokens #syntax_tokens} => Array&lt;Types::SyntaxToken&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.detect_syntax({
+    #     text: "String", # required
+    #     language_code: "en", # required, accepts en
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.syntax_tokens #=> Array
+    #   resp.syntax_tokens[0].token_id #=> Integer
+    #   resp.syntax_tokens[0].text #=> String
+    #   resp.syntax_tokens[0].begin_offset #=> Integer
+    #   resp.syntax_tokens[0].end_offset #=> Integer
+    #   resp.syntax_tokens[0].part_of_speech.tag #=> String, one of "ADJ", "ADP", "ADV", "AUX", "CONJ", "DET", "INTJ", "NOUN", "NUM", "O", "PART", "PRON", "PROPN", "PUNCT", "SCONJ", "SYM", "VERB"
+    #   resp.syntax_tokens[0].part_of_speech.score #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectSyntax AWS API Documentation
+    #
+    # @overload detect_syntax(params = {})
+    # @param [Hash] params ({})
+    def detect_syntax(params = {}, options = {})
+      req = build_request(:detect_syntax, params)
+      req.send_request(options)
+    end
+
     # Gets a list of the dominant language detection jobs that you have
     # submitted.
     #
@@ -748,6 +843,7 @@ module Aws::Comprehend
     #   resp.dominant_language_detection_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.dominant_language_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.dominant_language_detection_job_properties_list[0].output_data_config.s3_uri #=> String
+    #   resp.dominant_language_detection_job_properties_list[0].data_access_role_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDominantLanguageDetectionJobs AWS API Documentation
@@ -804,6 +900,7 @@ module Aws::Comprehend
     #   resp.entities_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.entities_detection_job_properties_list[0].output_data_config.s3_uri #=> String
     #   resp.entities_detection_job_properties_list[0].language_code #=> String, one of "en", "es"
+    #   resp.entities_detection_job_properties_list[0].data_access_role_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEntitiesDetectionJobs AWS API Documentation
@@ -860,6 +957,7 @@ module Aws::Comprehend
     #   resp.key_phrases_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.key_phrases_detection_job_properties_list[0].output_data_config.s3_uri #=> String
     #   resp.key_phrases_detection_job_properties_list[0].language_code #=> String, one of "en", "es"
+    #   resp.key_phrases_detection_job_properties_list[0].data_access_role_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListKeyPhrasesDetectionJobs AWS API Documentation
@@ -916,6 +1014,7 @@ module Aws::Comprehend
     #   resp.sentiment_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.sentiment_detection_job_properties_list[0].output_data_config.s3_uri #=> String
     #   resp.sentiment_detection_job_properties_list[0].language_code #=> String, one of "en", "es"
+    #   resp.sentiment_detection_job_properties_list[0].data_access_role_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListSentimentDetectionJobs AWS API Documentation
@@ -994,9 +1093,14 @@ module Aws::Comprehend
     #   Specifies where to send the output files.
     #
     # @option params [required, String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Management
-    #   (IAM) role that grants Amazon Comprehend read access to your input
-    #   data.
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   your input data. For more information, see
+    #   [https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
     #
     # @option params [String] :job_name
     #   An identifier for the job.
@@ -1052,9 +1156,14 @@ module Aws::Comprehend
     #   Specifies where to send the output files.
     #
     # @option params [required, String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Management
-    #   (IAM) role that grants Amazon Comprehend read access to your input
-    #   data.
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   your input data. For more information, see
+    #   [https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
     #
     # @option params [String] :job_name
     #   The identifier of the job.
@@ -1115,9 +1224,14 @@ module Aws::Comprehend
     #   Specifies where to send the output files.
     #
     # @option params [required, String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Management
-    #   (IAM) role that grants Amazon Comprehend read access to your input
-    #   data.
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   your input data. For more information, see
+    #   [https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
     #
     # @option params [String] :job_name
     #   The identifier of the job.
@@ -1178,9 +1292,14 @@ module Aws::Comprehend
     #   Specifies where to send the output files.
     #
     # @option params [required, String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Management
-    #   (IAM) role that grants Amazon Comprehend read access to your input
-    #   data.
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   your input data. For more information, see
+    #   [https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
     #
     # @option params [String] :job_name
     #   The identifier of the job.
@@ -1246,7 +1365,12 @@ module Aws::Comprehend
     # @option params [required, String] :data_access_role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
     #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data.
+    #   your input data. For more information, see
+    #   [https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
     #
     # @option params [String] :job_name
     #   The identifier of the job.
@@ -1298,15 +1422,17 @@ module Aws::Comprehend
 
     # Stops a dominant language detection job in progress.
     #
-    # If the job state is `IN_PROGRESS` the job will be marked for
-    # termination and put into the `STOPPING` state.
+    # If the job state is `IN_PROGRESS` the job is marked for termination
+    # and put into the `STOP_REQUESTED` state. If the job completes before
+    # it can be stopped, it is put into the `COMPLETED` state; otherwise the
+    # job is stopped and put into the `STOPPED` state.
     #
     # If the job is in the `COMPLETED` or `FAILED` state when you call the
-    # `StopDominantLanguageDetectionJob` operation, the operation will
-    # return a 400 Internal Request Exception.
+    # `StopDominantLanguageDetectionJob` operation, the operation returns a
+    # 400 Internal Request Exception.
     #
-    # When a job is stopped, any document that has already been processed
-    # will be written to the output location.
+    # When a job is stopped, any documents already processed are written to
+    # the output location.
     #
     # @option params [required, String] :job_id
     #   The identifier of the dominant language detection job to stop.
@@ -1338,15 +1464,17 @@ module Aws::Comprehend
 
     # Stops an entities detection job in progress.
     #
-    # If the job state is `IN_PROGRESS` the job will be marked for
-    # termination and put into the `STOPPING` state.
+    # If the job state is `IN_PROGRESS` the job is marked for termination
+    # and put into the `STOP_REQUESTED` state. If the job completes before
+    # it can be stopped, it is put into the `COMPLETED` state; otherwise the
+    # job is stopped and put into the `STOPPED` state.
     #
     # If the job is in the `COMPLETED` or `FAILED` state when you call the
-    # `StopDominantLanguageDetectionJob` operation, the operation will
-    # return a 400 Internal Request Exception.
+    # `StopDominantLanguageDetectionJob` operation, the operation returns a
+    # 400 Internal Request Exception.
     #
-    # When a job is stopped, any document that has already been processed
-    # will be written to the output location.
+    # When a job is stopped, any documents already processed are written to
+    # the output location.
     #
     # @option params [required, String] :job_id
     #   The identifier of the entities detection job to stop.
@@ -1378,15 +1506,17 @@ module Aws::Comprehend
 
     # Stops a key phrases detection job in progress.
     #
-    # If the job state is `IN_PROGRESS` the job will be marked for
-    # termination and put into the `STOPPING` state.
+    # If the job state is `IN_PROGRESS` the job is marked for termination
+    # and put into the `STOP_REQUESTED` state. If the job completes before
+    # it can be stopped, it is put into the `COMPLETED` state; otherwise the
+    # job is stopped and put into the `STOPPED` state.
     #
     # If the job is in the `COMPLETED` or `FAILED` state when you call the
-    # `StopDominantLanguageDetectionJob` operation, the operation will
-    # return a 400 Internal Request Exception.
+    # `StopDominantLanguageDetectionJob` operation, the operation returns a
+    # 400 Internal Request Exception.
     #
-    # When a job is stopped, any document that has already been processed
-    # will be written to the output location.
+    # When a job is stopped, any documents already processed are written to
+    # the output location.
     #
     # @option params [required, String] :job_id
     #   The identifier of the key phrases detection job to stop.
@@ -1418,15 +1548,17 @@ module Aws::Comprehend
 
     # Stops a sentiment detection job in progress.
     #
-    # If the job state is `IN_PROGRESS` the job will be marked for
-    # termination and put into the `STOPPING` state.
+    # If the job state is `IN_PROGRESS` the job is marked for termination
+    # and put into the `STOP_REQUESTED` state. If the job completes before
+    # it can be stopped, it is put into the `COMPLETED` state; otherwise the
+    # job is be stopped and put into the `STOPPED` state.
     #
     # If the job is in the `COMPLETED` or `FAILED` state when you call the
-    # `StopDominantLanguageDetectionJob` operation, the operation will
-    # return a 400 Internal Request Exception.
+    # `StopDominantLanguageDetectionJob` operation, the operation returns a
+    # 400 Internal Request Exception.
     #
-    # When a job is stopped, any document that has already been processed
-    # will be written to the output location.
+    # When a job is stopped, any documents already processed are written to
+    # the output location.
     #
     # @option params [required, String] :job_id
     #   The identifier of the sentiment detection job to stop.
@@ -1469,7 +1601,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

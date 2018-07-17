@@ -24,6 +24,9 @@ module Aws::Comprehend
     BatchDetectSentimentItemResult = Shapes::StructureShape.new(name: 'BatchDetectSentimentItemResult')
     BatchDetectSentimentRequest = Shapes::StructureShape.new(name: 'BatchDetectSentimentRequest')
     BatchDetectSentimentResponse = Shapes::StructureShape.new(name: 'BatchDetectSentimentResponse')
+    BatchDetectSyntaxItemResult = Shapes::StructureShape.new(name: 'BatchDetectSyntaxItemResult')
+    BatchDetectSyntaxRequest = Shapes::StructureShape.new(name: 'BatchDetectSyntaxRequest')
+    BatchDetectSyntaxResponse = Shapes::StructureShape.new(name: 'BatchDetectSyntaxResponse')
     BatchItemError = Shapes::StructureShape.new(name: 'BatchItemError')
     BatchItemErrorList = Shapes::ListShape.new(name: 'BatchItemErrorList')
     BatchSizeLimitExceededException = Shapes::StructureShape.new(name: 'BatchSizeLimitExceededException')
@@ -46,6 +49,8 @@ module Aws::Comprehend
     DetectKeyPhrasesResponse = Shapes::StructureShape.new(name: 'DetectKeyPhrasesResponse')
     DetectSentimentRequest = Shapes::StructureShape.new(name: 'DetectSentimentRequest')
     DetectSentimentResponse = Shapes::StructureShape.new(name: 'DetectSentimentResponse')
+    DetectSyntaxRequest = Shapes::StructureShape.new(name: 'DetectSyntaxRequest')
+    DetectSyntaxResponse = Shapes::StructureShape.new(name: 'DetectSyntaxResponse')
     DominantLanguage = Shapes::StructureShape.new(name: 'DominantLanguage')
     DominantLanguageDetectionJobFilter = Shapes::StructureShape.new(name: 'DominantLanguageDetectionJobFilter')
     DominantLanguageDetectionJobProperties = Shapes::StructureShape.new(name: 'DominantLanguageDetectionJobProperties')
@@ -82,9 +87,11 @@ module Aws::Comprehend
     ListOfDetectEntitiesResult = Shapes::ListShape.new(name: 'ListOfDetectEntitiesResult')
     ListOfDetectKeyPhrasesResult = Shapes::ListShape.new(name: 'ListOfDetectKeyPhrasesResult')
     ListOfDetectSentimentResult = Shapes::ListShape.new(name: 'ListOfDetectSentimentResult')
+    ListOfDetectSyntaxResult = Shapes::ListShape.new(name: 'ListOfDetectSyntaxResult')
     ListOfDominantLanguages = Shapes::ListShape.new(name: 'ListOfDominantLanguages')
     ListOfEntities = Shapes::ListShape.new(name: 'ListOfEntities')
     ListOfKeyPhrases = Shapes::ListShape.new(name: 'ListOfKeyPhrases')
+    ListOfSyntaxTokens = Shapes::ListShape.new(name: 'ListOfSyntaxTokens')
     ListSentimentDetectionJobsRequest = Shapes::StructureShape.new(name: 'ListSentimentDetectionJobsRequest')
     ListSentimentDetectionJobsResponse = Shapes::StructureShape.new(name: 'ListSentimentDetectionJobsResponse')
     ListTopicsDetectionJobsRequest = Shapes::StructureShape.new(name: 'ListTopicsDetectionJobsRequest')
@@ -92,6 +99,8 @@ module Aws::Comprehend
     MaxResultsInteger = Shapes::IntegerShape.new(name: 'MaxResultsInteger')
     NumberOfTopicsInteger = Shapes::IntegerShape.new(name: 'NumberOfTopicsInteger')
     OutputDataConfig = Shapes::StructureShape.new(name: 'OutputDataConfig')
+    PartOfSpeechTag = Shapes::StructureShape.new(name: 'PartOfSpeechTag')
+    PartOfSpeechTagType = Shapes::StringShape.new(name: 'PartOfSpeechTagType')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SentimentDetectionJobFilter = Shapes::StructureShape.new(name: 'SentimentDetectionJobFilter')
     SentimentDetectionJobProperties = Shapes::StructureShape.new(name: 'SentimentDetectionJobProperties')
@@ -118,6 +127,8 @@ module Aws::Comprehend
     StopSentimentDetectionJobResponse = Shapes::StructureShape.new(name: 'StopSentimentDetectionJobResponse')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
+    SyntaxLanguageCode = Shapes::StringShape.new(name: 'SyntaxLanguageCode')
+    SyntaxToken = Shapes::StructureShape.new(name: 'SyntaxToken')
     TextSizeLimitExceededException = Shapes::StructureShape.new(name: 'TextSizeLimitExceededException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
@@ -173,6 +184,18 @@ module Aws::Comprehend
     BatchDetectSentimentResponse.add_member(:result_list, Shapes::ShapeRef.new(shape: ListOfDetectSentimentResult, required: true, location_name: "ResultList"))
     BatchDetectSentimentResponse.add_member(:error_list, Shapes::ShapeRef.new(shape: BatchItemErrorList, required: true, location_name: "ErrorList"))
     BatchDetectSentimentResponse.struct_class = Types::BatchDetectSentimentResponse
+
+    BatchDetectSyntaxItemResult.add_member(:index, Shapes::ShapeRef.new(shape: Integer, location_name: "Index"))
+    BatchDetectSyntaxItemResult.add_member(:syntax_tokens, Shapes::ShapeRef.new(shape: ListOfSyntaxTokens, location_name: "SyntaxTokens"))
+    BatchDetectSyntaxItemResult.struct_class = Types::BatchDetectSyntaxItemResult
+
+    BatchDetectSyntaxRequest.add_member(:text_list, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "TextList"))
+    BatchDetectSyntaxRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: SyntaxLanguageCode, required: true, location_name: "LanguageCode"))
+    BatchDetectSyntaxRequest.struct_class = Types::BatchDetectSyntaxRequest
+
+    BatchDetectSyntaxResponse.add_member(:result_list, Shapes::ShapeRef.new(shape: ListOfDetectSyntaxResult, required: true, location_name: "ResultList"))
+    BatchDetectSyntaxResponse.add_member(:error_list, Shapes::ShapeRef.new(shape: BatchItemErrorList, required: true, location_name: "ErrorList"))
+    BatchDetectSyntaxResponse.struct_class = Types::BatchDetectSyntaxResponse
 
     BatchItemError.add_member(:index, Shapes::ShapeRef.new(shape: Integer, location_name: "Index"))
     BatchItemError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
@@ -239,6 +262,13 @@ module Aws::Comprehend
     DetectSentimentResponse.add_member(:sentiment_score, Shapes::ShapeRef.new(shape: SentimentScore, location_name: "SentimentScore"))
     DetectSentimentResponse.struct_class = Types::DetectSentimentResponse
 
+    DetectSyntaxRequest.add_member(:text, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Text"))
+    DetectSyntaxRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: SyntaxLanguageCode, required: true, location_name: "LanguageCode"))
+    DetectSyntaxRequest.struct_class = Types::DetectSyntaxRequest
+
+    DetectSyntaxResponse.add_member(:syntax_tokens, Shapes::ShapeRef.new(shape: ListOfSyntaxTokens, location_name: "SyntaxTokens"))
+    DetectSyntaxResponse.struct_class = Types::DetectSyntaxResponse
+
     DominantLanguage.add_member(:language_code, Shapes::ShapeRef.new(shape: String, location_name: "LanguageCode"))
     DominantLanguage.add_member(:score, Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
     DominantLanguage.struct_class = Types::DominantLanguage
@@ -257,6 +287,7 @@ module Aws::Comprehend
     DominantLanguageDetectionJobProperties.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
     DominantLanguageDetectionJobProperties.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
     DominantLanguageDetectionJobProperties.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig"))
+    DominantLanguageDetectionJobProperties.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
     DominantLanguageDetectionJobProperties.struct_class = Types::DominantLanguageDetectionJobProperties
 
     DominantLanguageDetectionJobPropertiesList.member = Shapes::ShapeRef.new(shape: DominantLanguageDetectionJobProperties)
@@ -276,6 +307,7 @@ module Aws::Comprehend
     EntitiesDetectionJobProperties.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
     EntitiesDetectionJobProperties.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig"))
     EntitiesDetectionJobProperties.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
+    EntitiesDetectionJobProperties.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
     EntitiesDetectionJobProperties.struct_class = Types::EntitiesDetectionJobProperties
 
     EntitiesDetectionJobPropertiesList.member = Shapes::ShapeRef.new(shape: EntitiesDetectionJobProperties)
@@ -312,6 +344,7 @@ module Aws::Comprehend
     KeyPhrasesDetectionJobProperties.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
     KeyPhrasesDetectionJobProperties.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig"))
     KeyPhrasesDetectionJobProperties.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
+    KeyPhrasesDetectionJobProperties.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
     KeyPhrasesDetectionJobProperties.struct_class = Types::KeyPhrasesDetectionJobProperties
 
     KeyPhrasesDetectionJobPropertiesList.member = Shapes::ShapeRef.new(shape: KeyPhrasesDetectionJobProperties)
@@ -351,11 +384,15 @@ module Aws::Comprehend
 
     ListOfDetectSentimentResult.member = Shapes::ShapeRef.new(shape: BatchDetectSentimentItemResult)
 
+    ListOfDetectSyntaxResult.member = Shapes::ShapeRef.new(shape: BatchDetectSyntaxItemResult)
+
     ListOfDominantLanguages.member = Shapes::ShapeRef.new(shape: DominantLanguage)
 
     ListOfEntities.member = Shapes::ShapeRef.new(shape: Entity)
 
     ListOfKeyPhrases.member = Shapes::ShapeRef.new(shape: KeyPhrase)
+
+    ListOfSyntaxTokens.member = Shapes::ShapeRef.new(shape: SyntaxToken)
 
     ListSentimentDetectionJobsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: SentimentDetectionJobFilter, location_name: "Filter"))
     ListSentimentDetectionJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -378,6 +415,10 @@ module Aws::Comprehend
     OutputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
     OutputDataConfig.struct_class = Types::OutputDataConfig
 
+    PartOfSpeechTag.add_member(:tag, Shapes::ShapeRef.new(shape: PartOfSpeechTagType, location_name: "Tag"))
+    PartOfSpeechTag.add_member(:score, Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
+    PartOfSpeechTag.struct_class = Types::PartOfSpeechTag
+
     SentimentDetectionJobFilter.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
     SentimentDetectionJobFilter.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     SentimentDetectionJobFilter.add_member(:submit_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeBefore"))
@@ -393,6 +434,7 @@ module Aws::Comprehend
     SentimentDetectionJobProperties.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
     SentimentDetectionJobProperties.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig"))
     SentimentDetectionJobProperties.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
+    SentimentDetectionJobProperties.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
     SentimentDetectionJobProperties.struct_class = Types::SentimentDetectionJobProperties
 
     SentimentDetectionJobPropertiesList.member = Shapes::ShapeRef.new(shape: SentimentDetectionJobProperties)
@@ -492,6 +534,13 @@ module Aws::Comprehend
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
+    SyntaxToken.add_member(:token_id, Shapes::ShapeRef.new(shape: Integer, location_name: "TokenId"))
+    SyntaxToken.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "Text"))
+    SyntaxToken.add_member(:begin_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "BeginOffset"))
+    SyntaxToken.add_member(:end_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "EndOffset"))
+    SyntaxToken.add_member(:part_of_speech, Shapes::ShapeRef.new(shape: PartOfSpeechTag, location_name: "PartOfSpeech"))
+    SyntaxToken.struct_class = Types::SyntaxToken
+
     TopicsDetectionJobFilter.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
     TopicsDetectionJobFilter.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     TopicsDetectionJobFilter.add_member(:submit_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeBefore"))
@@ -571,6 +620,19 @@ module Aws::Comprehend
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: BatchDetectSentimentRequest)
         o.output = Shapes::ShapeRef.new(shape: BatchDetectSentimentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
+        o.errors << Shapes::ShapeRef.new(shape: BatchSizeLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:batch_detect_syntax, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchDetectSyntax"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchDetectSyntaxRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchDetectSyntaxResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
@@ -679,6 +741,18 @@ module Aws::Comprehend
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DetectSentimentRequest)
         o.output = Shapes::ShapeRef.new(shape: DetectSentimentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:detect_syntax, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DetectSyntax"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DetectSyntaxRequest)
+        o.output = Shapes::ShapeRef.new(shape: DetectSyntaxResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedLanguageException)

@@ -286,6 +286,76 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # The result of calling the operation. The operation returns one object
+    # that is successfully processed by the operation.
+    #
+    # @!attribute [rw] index
+    #   The zero-based index of the document in the input list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] syntax_tokens
+    #   The syntax tokens for the words in the document, one token for each
+    #   word.
+    #   @return [Array<Types::SyntaxToken>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectSyntaxItemResult AWS API Documentation
+    #
+    class BatchDetectSyntaxItemResult < Struct.new(
+      :index,
+      :syntax_tokens)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchDetectSyntaxRequest
+    #   data as a hash:
+    #
+    #       {
+    #         text_list: ["String"], # required
+    #         language_code: "en", # required, accepts en
+    #       }
+    #
+    # @!attribute [rw] text_list
+    #   A list containing the text of the input documents. The list can
+    #   contain a maximum of 25 documents. Each document must contain fewer
+    #   that 5,000 bytes of UTF-8 encoded characters.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] language_code
+    #   The language of the input documents. You can specify English
+    #   ("en") or Spanish ("es"). All documents must be in the same
+    #   language.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectSyntaxRequest AWS API Documentation
+    #
+    class BatchDetectSyntaxRequest < Struct.new(
+      :text_list,
+      :language_code)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] result_list
+    #   A list of objects containing the results of the operation. The
+    #   results are sorted in ascending order by the `Index` field and match
+    #   the order of the documents in the input list. If all of the
+    #   documents contain an error, the `ResultList` is empty.
+    #   @return [Array<Types::BatchDetectSyntaxItemResult>]
+    #
+    # @!attribute [rw] error_list
+    #   A list containing one object for each document that contained an
+    #   error. The results are sorted in ascending order by the `Index`
+    #   field and match the order of the documents in the input list. If
+    #   there are no errors in the batch, the `ErrorList` is empty.
+    #   @return [Array<Types::BatchItemError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectSyntaxResponse AWS API Documentation
+    #
+    class BatchDetectSyntaxResponse < Struct.new(
+      :result_list,
+      :error_list)
+      include Aws::Structure
+    end
+
     # Describes an error that occurred while processing a document in a
     # batch. The operation returns on `BatchItemError` object for each
     # document that contained an error.
@@ -632,6 +702,47 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DetectSyntaxRequest
+    #   data as a hash:
+    #
+    #       {
+    #         text: "String", # required
+    #         language_code: "en", # required, accepts en
+    #       }
+    #
+    # @!attribute [rw] text
+    #   A UTF-8 string. Each string must contain fewer that 5,000 bytes of
+    #   UTF encoded characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the input documents. You can specify English
+    #   ("en") or Spanish ("es").
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectSyntaxRequest AWS API Documentation
+    #
+    class DetectSyntaxRequest < Struct.new(
+      :text,
+      :language_code)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] syntax_tokens
+    #   A collection of syntax tokens describing the text. For each token,
+    #   the response provides the text, the token type, where the text
+    #   begins and ends, and the level of confidence that Amazon Comprehend
+    #   has that the token is correct. For a list of token types, see
+    #   how-syntax.
+    #   @return [Array<Types::SyntaxToken>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectSyntaxResponse AWS API Documentation
+    #
+    class DetectSyntaxResponse < Struct.new(
+      :syntax_tokens)
+      include Aws::Structure
+    end
+
     # Returns the code for the dominant language in the input text and the
     # level of confidence that Amazon Comprehend has in the accuracy of the
     # detection.
@@ -744,6 +855,11 @@ module Aws::Comprehend
     #   dominant language detection job.
     #   @return [Types::OutputDataConfig]
     #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) that gives Amazon Comprehend read
+    #   access to your input data.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DominantLanguageDetectionJobProperties AWS API Documentation
     #
     class DominantLanguageDetectionJobProperties < Struct.new(
@@ -754,7 +870,8 @@ module Aws::Comprehend
       :submit_time,
       :end_time,
       :input_data_config,
-      :output_data_config)
+      :output_data_config,
+      :data_access_role_arn)
       include Aws::Structure
     end
 
@@ -846,6 +963,11 @@ module Aws::Comprehend
     #   The language code of the input documents.
     #   @return [String]
     #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) that gives Amazon Comprehend read
+    #   access to your input data.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntitiesDetectionJobProperties AWS API Documentation
     #
     class EntitiesDetectionJobProperties < Struct.new(
@@ -857,7 +979,8 @@ module Aws::Comprehend
       :end_time,
       :input_data_config,
       :output_data_config,
-      :language_code)
+      :language_code,
+      :data_access_role_arn)
       include Aws::Structure
     end
 
@@ -1072,6 +1195,11 @@ module Aws::Comprehend
     #   The language code of the input documents.
     #   @return [String]
     #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) that gives Amazon Comprehend read
+    #   access to your input data.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/KeyPhrasesDetectionJobProperties AWS API Documentation
     #
     class KeyPhrasesDetectionJobProperties < Struct.new(
@@ -1083,7 +1211,8 @@ module Aws::Comprehend
       :end_time,
       :input_data_config,
       :output_data_config,
-      :language_code)
+      :language_code,
+      :data_access_role_arn)
       include Aws::Structure
     end
 
@@ -1387,6 +1516,28 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # Identifies the part of speech represented by the token and gives the
+    # confidence that Amazon Comprehend has that the part of speech was
+    # correctly identified. For more information about the parts of speech
+    # that Amazon Comprehend can identify, see how-syntax.
+    #
+    # @!attribute [rw] tag
+    #   Identifies the part of speech that the token represents.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The confidence that Amazon Comprehend has that the part of speech
+    #   was correctly identified.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/PartOfSpeechTag AWS API Documentation
+    #
+    class PartOfSpeechTag < Struct.new(
+      :tag,
+      :score)
+      include Aws::Structure
+    end
+
     # Provides information for filtering a list of dominant language
     # detection jobs. For more information, see the operation.
     #
@@ -1475,6 +1626,11 @@ module Aws::Comprehend
     #   The language code of the input documents.
     #   @return [String]
     #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) that gives Amazon Comprehend read
+    #   access to your input data.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/SentimentDetectionJobProperties AWS API Documentation
     #
     class SentimentDetectionJobProperties < Struct.new(
@@ -1486,7 +1642,8 @@ module Aws::Comprehend
       :end_time,
       :input_data_config,
       :output_data_config,
-      :language_code)
+      :language_code,
+      :data_access_role_arn)
       include Aws::Structure
     end
 
@@ -1548,9 +1705,14 @@ module Aws::Comprehend
     #   @return [Types::OutputDataConfig]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Management
-    #   (IAM) role that grants Amazon Comprehend read access to your input
-    #   data.
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   your input data. For more information, see
+    #   [https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
     #   @return [String]
     #
     # @!attribute [rw] job_name
@@ -1630,9 +1792,14 @@ module Aws::Comprehend
     #   @return [Types::OutputDataConfig]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Management
-    #   (IAM) role that grants Amazon Comprehend read access to your input
-    #   data.
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   your input data. For more information, see
+    #   [https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
     #   @return [String]
     #
     # @!attribute [rw] job_name
@@ -1719,9 +1886,14 @@ module Aws::Comprehend
     #   @return [Types::OutputDataConfig]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Management
-    #   (IAM) role that grants Amazon Comprehend read access to your input
-    #   data.
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   your input data. For more information, see
+    #   [https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
     #   @return [String]
     #
     # @!attribute [rw] job_name
@@ -1808,9 +1980,14 @@ module Aws::Comprehend
     #   @return [Types::OutputDataConfig]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Management
-    #   (IAM) role that grants Amazon Comprehend read access to your input
-    #   data.
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   your input data. For more information, see
+    #   [https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
     #   @return [String]
     #
     # @!attribute [rw] job_name
@@ -1902,7 +2079,12 @@ module Aws::Comprehend
     # @!attribute [rw] data_access_role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
     #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data.
+    #   your input data. For more information, see
+    #   [https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
     #   @return [String]
     #
     # @!attribute [rw] job_name
@@ -1984,8 +2166,8 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] job_status
-    #   Either `STOPPING` if the job is currently running, or `STOPPED` if
-    #   the job was previously stopped with the
+    #   Either `STOP_REQUESTED` if the job is currently running, or
+    #   `STOPPED` if the job was previously stopped with the
     #   `StopDominantLanguageDetectionJob` operation.
     #   @return [String]
     #
@@ -2020,9 +2202,9 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] job_status
-    #   Either `STOPPING` if the job is currently running, or `STOPPED` if
-    #   the job was previously stopped with the `StopEntitiesDetectionJob`
-    #   operation.
+    #   Either `STOP_REQUESTED` if the job is currently running, or
+    #   `STOPPED` if the job was previously stopped with the
+    #   `StopEntitiesDetectionJob` operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopEntitiesDetectionJobResponse AWS API Documentation
@@ -2056,9 +2238,9 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] job_status
-    #   Either `STOPPING` if the job is currently running, or `STOPPED` if
-    #   the job was previously stopped with the `StopKeyPhrasesDetectionJob`
-    #   operation.
+    #   Either `STOP_REQUESTED` if the job is currently running, or
+    #   `STOPPED` if the job was previously stopped with the
+    #   `StopKeyPhrasesDetectionJob` operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopKeyPhrasesDetectionJobResponse AWS API Documentation
@@ -2092,9 +2274,9 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] job_status
-    #   Either `STOPPING` if the job is currently running, or `STOPPED` if
-    #   the job was previously stopped with the `StopSentimentDetectionJob`
-    #   operation.
+    #   Either `STOP_REQUESTED` if the job is currently running, or
+    #   `STOPPED` if the job was previously stopped with the
+    #   `StopSentimentDetectionJob` operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopSentimentDetectionJobResponse AWS API Documentation
@@ -2102,6 +2284,45 @@ module Aws::Comprehend
     class StopSentimentDetectionJobResponse < Struct.new(
       :job_id,
       :job_status)
+      include Aws::Structure
+    end
+
+    # Represents a work in the input text that was recognized and assigned a
+    # part of speech. There is one syntax token record for each word in the
+    # source text.
+    #
+    # @!attribute [rw] token_id
+    #   A unique identifier for a token.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] text
+    #   The word that was recognized in the source text.
+    #   @return [String]
+    #
+    # @!attribute [rw] begin_offset
+    #   The zero-based offset from the beginning of the source text to the
+    #   first character in the word.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_offset
+    #   The zero-based offset from the beginning of the source text to the
+    #   last character in the word.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] part_of_speech
+    #   Provides the part of speech label and the confidence level that
+    #   Amazon Comprehend has that the part of speech was correctly
+    #   identified. For more information, see how-syntax.
+    #   @return [Types::PartOfSpeechTag]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/SyntaxToken AWS API Documentation
+    #
+    class SyntaxToken < Struct.new(
+      :token_id,
+      :text,
+      :begin_offset,
+      :end_offset,
+      :part_of_speech)
       include Aws::Structure
     end
 

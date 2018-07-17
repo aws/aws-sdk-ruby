@@ -366,6 +366,51 @@ module Aws::Polly
       req.send_request(options)
     end
 
+    # Retrieves a specific SpeechSynthesisTask object based on its TaskID.
+    # This object contains information about the given speech synthesis
+    # task, including the status of the task, and a link to the S3 bucket
+    # containing the output of the task.
+    #
+    # @option params [required, String] :task_id
+    #   The Amazon Polly generated identifier for a speech synthesis task.
+    #
+    # @return [Types::GetSpeechSynthesisTaskOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSpeechSynthesisTaskOutput#synthesis_task #synthesis_task} => Types::SynthesisTask
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_speech_synthesis_task({
+    #     task_id: "TaskId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.synthesis_task.task_id #=> String
+    #   resp.synthesis_task.task_status #=> String, one of "scheduled", "inProgress", "completed", "failed"
+    #   resp.synthesis_task.task_status_reason #=> String
+    #   resp.synthesis_task.output_uri #=> String
+    #   resp.synthesis_task.creation_time #=> Time
+    #   resp.synthesis_task.request_characters #=> Integer
+    #   resp.synthesis_task.sns_topic_arn #=> String
+    #   resp.synthesis_task.lexicon_names #=> Array
+    #   resp.synthesis_task.lexicon_names[0] #=> String
+    #   resp.synthesis_task.output_format #=> String, one of "json", "mp3", "ogg_vorbis", "pcm"
+    #   resp.synthesis_task.sample_rate #=> String
+    #   resp.synthesis_task.speech_mark_types #=> Array
+    #   resp.synthesis_task.speech_mark_types[0] #=> String, one of "sentence", "ssml", "viseme", "word"
+    #   resp.synthesis_task.text_type #=> String, one of "ssml", "text"
+    #   resp.synthesis_task.voice_id #=> String, one of "Geraint", "Gwyneth", "Mads", "Naja", "Hans", "Marlene", "Nicole", "Russell", "Amy", "Brian", "Emma", "Raveena", "Ivy", "Joanna", "Joey", "Justin", "Kendra", "Kimberly", "Matthew", "Salli", "Conchita", "Enrique", "Miguel", "Penelope", "Chantal", "Celine", "Lea", "Mathieu", "Dora", "Karl", "Carla", "Giorgio", "Mizuki", "Liv", "Lotte", "Ruben", "Ewa", "Jacek", "Jan", "Maja", "Ricardo", "Vitoria", "Cristiano", "Ines", "Carmen", "Maxim", "Tatyana", "Astrid", "Filiz", "Vicki", "Takumi", "Seoyeon", "Aditi"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/GetSpeechSynthesisTask AWS API Documentation
+    #
+    # @overload get_speech_synthesis_task(params = {})
+    # @param [Hash] params ({})
+    def get_speech_synthesis_task(params = {}, options = {})
+      req = build_request(:get_speech_synthesis_task, params)
+      req.send_request(options)
+    end
+
     # Returns a list of pronunciation lexicons stored in an AWS Region. For
     # more information, see [Managing Lexicons][1].
     #
@@ -435,6 +480,62 @@ module Aws::Polly
       req.send_request(options)
     end
 
+    # Returns a list of SpeechSynthesisTask objects ordered by their
+    # creation date. This operation can filter the tasks by their status,
+    # for example, allowing users to list only tasks that are completed.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of speech synthesis tasks returned in a List operation.
+    #
+    # @option params [String] :next_token
+    #   The pagination token to use in the next request to continue the
+    #   listing of speech synthesis tasks.
+    #
+    # @option params [String] :status
+    #   Status of the speech synthesis tasks returned in a List operation
+    #
+    # @return [Types::ListSpeechSynthesisTasksOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSpeechSynthesisTasksOutput#next_token #next_token} => String
+    #   * {Types::ListSpeechSynthesisTasksOutput#synthesis_tasks #synthesis_tasks} => Array&lt;Types::SynthesisTask&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_speech_synthesis_tasks({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     status: "scheduled", # accepts scheduled, inProgress, completed, failed
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.synthesis_tasks #=> Array
+    #   resp.synthesis_tasks[0].task_id #=> String
+    #   resp.synthesis_tasks[0].task_status #=> String, one of "scheduled", "inProgress", "completed", "failed"
+    #   resp.synthesis_tasks[0].task_status_reason #=> String
+    #   resp.synthesis_tasks[0].output_uri #=> String
+    #   resp.synthesis_tasks[0].creation_time #=> Time
+    #   resp.synthesis_tasks[0].request_characters #=> Integer
+    #   resp.synthesis_tasks[0].sns_topic_arn #=> String
+    #   resp.synthesis_tasks[0].lexicon_names #=> Array
+    #   resp.synthesis_tasks[0].lexicon_names[0] #=> String
+    #   resp.synthesis_tasks[0].output_format #=> String, one of "json", "mp3", "ogg_vorbis", "pcm"
+    #   resp.synthesis_tasks[0].sample_rate #=> String
+    #   resp.synthesis_tasks[0].speech_mark_types #=> Array
+    #   resp.synthesis_tasks[0].speech_mark_types[0] #=> String, one of "sentence", "ssml", "viseme", "word"
+    #   resp.synthesis_tasks[0].text_type #=> String, one of "ssml", "text"
+    #   resp.synthesis_tasks[0].voice_id #=> String, one of "Geraint", "Gwyneth", "Mads", "Naja", "Hans", "Marlene", "Nicole", "Russell", "Amy", "Brian", "Emma", "Raveena", "Ivy", "Joanna", "Joey", "Justin", "Kendra", "Kimberly", "Matthew", "Salli", "Conchita", "Enrique", "Miguel", "Penelope", "Chantal", "Celine", "Lea", "Mathieu", "Dora", "Karl", "Carla", "Giorgio", "Mizuki", "Liv", "Lotte", "Ruben", "Ewa", "Jacek", "Jan", "Maja", "Ricardo", "Vitoria", "Cristiano", "Ines", "Carmen", "Maxim", "Tatyana", "Astrid", "Filiz", "Vicki", "Takumi", "Seoyeon", "Aditi"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ListSpeechSynthesisTasks AWS API Documentation
+    #
+    # @overload list_speech_synthesis_tasks(params = {})
+    # @param [Hash] params ({})
+    def list_speech_synthesis_tasks(params = {}, options = {})
+      req = build_request(:list_speech_synthesis_tasks, params)
+      req.send_request(options)
+    end
+
     # Stores a pronunciation lexicon in an AWS Region. If a lexicon with the
     # same name already exists in the region, it is overwritten by the new
     # lexicon. Lexicon operations have eventual consistency, therefore, it
@@ -484,6 +585,104 @@ module Aws::Polly
     # @param [Hash] params ({})
     def put_lexicon(params = {}, options = {})
       req = build_request(:put_lexicon, params)
+      req.send_request(options)
+    end
+
+    # Allows the creation of an asynchronous synthesis task, by starting a
+    # new `SpeechSynthesisTask`. This operation requires all the standard
+    # information needed for speech synthesis, plus the name of an Amazon S3
+    # bucket for the service to store the output of the synthesis task and
+    # two optional parameters (OutputS3KeyPrefix and SnsTopicArn). Once the
+    # synthesis task is created, this operation will return a
+    # SpeechSynthesisTask object, which will include an identifier of this
+    # task as well as the current status.
+    #
+    # @option params [Array<String>] :lexicon_names
+    #   List of one or more pronunciation lexicon names you want the service
+    #   to apply during synthesis. Lexicons are applied only if the language
+    #   of the lexicon is the same as the language of the voice.
+    #
+    # @option params [required, String] :output_format
+    #   The format in which the returned output will be encoded. For audio
+    #   stream, this will be mp3, ogg\_vorbis, or pcm. For speech marks, this
+    #   will be json.
+    #
+    # @option params [required, String] :output_s3_bucket_name
+    #   Amazon S3 bucket name to which the output file will be saved.
+    #
+    # @option params [String] :output_s3_key_prefix
+    #   The Amazon S3 Key prefix for the output speech file.
+    #
+    # @option params [String] :sample_rate
+    #   The audio frequency specified in Hz.
+    #
+    #   The valid values for mp3 and ogg\_vorbis are "8000", "16000", and
+    #   "22050". The default value is "22050".
+    #
+    #   Valid values for pcm are "8000" and "16000" The default value is
+    #   "16000".
+    #
+    # @option params [String] :sns_topic_arn
+    #   ARN for the SNS topic optionally used for providing status
+    #   notification for a speech synthesis task.
+    #
+    # @option params [Array<String>] :speech_mark_types
+    #   The type of speech marks returned for the input text.
+    #
+    # @option params [required, String] :text
+    #   The input text to synthesize. If you specify ssml as the TextType,
+    #   follow the SSML format for the input text.
+    #
+    # @option params [String] :text_type
+    #   Specifies whether the input text is plain text or SSML. The default
+    #   value is plain text.
+    #
+    # @option params [required, String] :voice_id
+    #   Voice ID to use for the synthesis.
+    #
+    # @return [Types::StartSpeechSynthesisTaskOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartSpeechSynthesisTaskOutput#synthesis_task #synthesis_task} => Types::SynthesisTask
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_speech_synthesis_task({
+    #     lexicon_names: ["LexiconName"],
+    #     output_format: "json", # required, accepts json, mp3, ogg_vorbis, pcm
+    #     output_s3_bucket_name: "OutputS3BucketName", # required
+    #     output_s3_key_prefix: "OutputS3KeyPrefix",
+    #     sample_rate: "SampleRate",
+    #     sns_topic_arn: "SnsTopicArn",
+    #     speech_mark_types: ["sentence"], # accepts sentence, ssml, viseme, word
+    #     text: "Text", # required
+    #     text_type: "ssml", # accepts ssml, text
+    #     voice_id: "Geraint", # required, accepts Geraint, Gwyneth, Mads, Naja, Hans, Marlene, Nicole, Russell, Amy, Brian, Emma, Raveena, Ivy, Joanna, Joey, Justin, Kendra, Kimberly, Matthew, Salli, Conchita, Enrique, Miguel, Penelope, Chantal, Celine, Lea, Mathieu, Dora, Karl, Carla, Giorgio, Mizuki, Liv, Lotte, Ruben, Ewa, Jacek, Jan, Maja, Ricardo, Vitoria, Cristiano, Ines, Carmen, Maxim, Tatyana, Astrid, Filiz, Vicki, Takumi, Seoyeon, Aditi
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.synthesis_task.task_id #=> String
+    #   resp.synthesis_task.task_status #=> String, one of "scheduled", "inProgress", "completed", "failed"
+    #   resp.synthesis_task.task_status_reason #=> String
+    #   resp.synthesis_task.output_uri #=> String
+    #   resp.synthesis_task.creation_time #=> Time
+    #   resp.synthesis_task.request_characters #=> Integer
+    #   resp.synthesis_task.sns_topic_arn #=> String
+    #   resp.synthesis_task.lexicon_names #=> Array
+    #   resp.synthesis_task.lexicon_names[0] #=> String
+    #   resp.synthesis_task.output_format #=> String, one of "json", "mp3", "ogg_vorbis", "pcm"
+    #   resp.synthesis_task.sample_rate #=> String
+    #   resp.synthesis_task.speech_mark_types #=> Array
+    #   resp.synthesis_task.speech_mark_types[0] #=> String, one of "sentence", "ssml", "viseme", "word"
+    #   resp.synthesis_task.text_type #=> String, one of "ssml", "text"
+    #   resp.synthesis_task.voice_id #=> String, one of "Geraint", "Gwyneth", "Mads", "Naja", "Hans", "Marlene", "Nicole", "Russell", "Amy", "Brian", "Emma", "Raveena", "Ivy", "Joanna", "Joey", "Justin", "Kendra", "Kimberly", "Matthew", "Salli", "Conchita", "Enrique", "Miguel", "Penelope", "Chantal", "Celine", "Lea", "Mathieu", "Dora", "Karl", "Carla", "Giorgio", "Mizuki", "Liv", "Lotte", "Ruben", "Ewa", "Jacek", "Jan", "Maja", "Ricardo", "Vitoria", "Cristiano", "Ines", "Carmen", "Maxim", "Tatyana", "Astrid", "Filiz", "Vicki", "Takumi", "Seoyeon", "Aditi"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/StartSpeechSynthesisTask AWS API Documentation
+    #
+    # @overload start_speech_synthesis_task(params = {})
+    # @param [Hash] params ({})
+    def start_speech_synthesis_task(params = {}, options = {})
+      req = build_request(:start_speech_synthesis_task, params)
       req.send_request(options)
     end
 
@@ -613,7 +812,7 @@ module Aws::Polly
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-polly'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

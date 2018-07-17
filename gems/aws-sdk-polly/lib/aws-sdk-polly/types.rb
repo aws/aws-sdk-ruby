@@ -115,6 +115,37 @@ module Aws::Polly
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetSpeechSynthesisTaskInput
+    #   data as a hash:
+    #
+    #       {
+    #         task_id: "TaskId", # required
+    #       }
+    #
+    # @!attribute [rw] task_id
+    #   The Amazon Polly generated identifier for a speech synthesis task.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/GetSpeechSynthesisTaskInput AWS API Documentation
+    #
+    class GetSpeechSynthesisTaskInput < Struct.new(
+      :task_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] synthesis_task
+    #   SynthesisTask object that provides information from the requested
+    #   task, including output format, creation time, task status, and so
+    #   on.
+    #   @return [Types::SynthesisTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/GetSpeechSynthesisTaskOutput AWS API Documentation
+    #
+    class GetSpeechSynthesisTaskOutput < Struct.new(
+      :synthesis_task)
+      include Aws::Structure
+    end
+
     # Provides lexicon name and lexicon content in string format. For more
     # information, see [Pronunciation Lexicon Specification (PLS) Version
     # 1.0][1].
@@ -243,6 +274,58 @@ module Aws::Polly
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListSpeechSynthesisTasksInput
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         status: "scheduled", # accepts scheduled, inProgress, completed, failed
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of speech synthesis tasks returned in a List
+    #   operation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use in the next request to continue the
+    #   listing of speech synthesis tasks.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of the speech synthesis tasks returned in a List operation
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ListSpeechSynthesisTasksInput AWS API Documentation
+    #
+    class ListSpeechSynthesisTasksInput < Struct.new(
+      :max_results,
+      :next_token,
+      :status)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   An opaque pagination token returned from the previous List operation
+    #   in this request. If present, this indicates where to continue the
+    #   listing.
+    #   @return [String]
+    #
+    # @!attribute [rw] synthesis_tasks
+    #   SynthesisTask object that provides information from the specified
+    #   task in the list request, including output format, creation time,
+    #   task status, and so on.
+    #   @return [Array<Types::SynthesisTask>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ListSpeechSynthesisTasksOutput AWS API Documentation
+    #
+    class ListSpeechSynthesisTasksOutput < Struct.new(
+      :next_token,
+      :synthesis_tasks)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutLexiconInput
     #   data as a hash:
     #
@@ -272,6 +355,190 @@ module Aws::Polly
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/PutLexiconOutput AWS API Documentation
     #
     class PutLexiconOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass StartSpeechSynthesisTaskInput
+    #   data as a hash:
+    #
+    #       {
+    #         lexicon_names: ["LexiconName"],
+    #         output_format: "json", # required, accepts json, mp3, ogg_vorbis, pcm
+    #         output_s3_bucket_name: "OutputS3BucketName", # required
+    #         output_s3_key_prefix: "OutputS3KeyPrefix",
+    #         sample_rate: "SampleRate",
+    #         sns_topic_arn: "SnsTopicArn",
+    #         speech_mark_types: ["sentence"], # accepts sentence, ssml, viseme, word
+    #         text: "Text", # required
+    #         text_type: "ssml", # accepts ssml, text
+    #         voice_id: "Geraint", # required, accepts Geraint, Gwyneth, Mads, Naja, Hans, Marlene, Nicole, Russell, Amy, Brian, Emma, Raveena, Ivy, Joanna, Joey, Justin, Kendra, Kimberly, Matthew, Salli, Conchita, Enrique, Miguel, Penelope, Chantal, Celine, Lea, Mathieu, Dora, Karl, Carla, Giorgio, Mizuki, Liv, Lotte, Ruben, Ewa, Jacek, Jan, Maja, Ricardo, Vitoria, Cristiano, Ines, Carmen, Maxim, Tatyana, Astrid, Filiz, Vicki, Takumi, Seoyeon, Aditi
+    #       }
+    #
+    # @!attribute [rw] lexicon_names
+    #   List of one or more pronunciation lexicon names you want the service
+    #   to apply during synthesis. Lexicons are applied only if the language
+    #   of the lexicon is the same as the language of the voice.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] output_format
+    #   The format in which the returned output will be encoded. For audio
+    #   stream, this will be mp3, ogg\_vorbis, or pcm. For speech marks,
+    #   this will be json.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_s3_bucket_name
+    #   Amazon S3 bucket name to which the output file will be saved.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_s3_key_prefix
+    #   The Amazon S3 Key prefix for the output speech file.
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_rate
+    #   The audio frequency specified in Hz.
+    #
+    #   The valid values for mp3 and ogg\_vorbis are "8000", "16000",
+    #   and "22050". The default value is "22050".
+    #
+    #   Valid values for pcm are "8000" and "16000" The default value is
+    #   "16000".
+    #   @return [String]
+    #
+    # @!attribute [rw] sns_topic_arn
+    #   ARN for the SNS topic optionally used for providing status
+    #   notification for a speech synthesis task.
+    #   @return [String]
+    #
+    # @!attribute [rw] speech_mark_types
+    #   The type of speech marks returned for the input text.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] text
+    #   The input text to synthesize. If you specify ssml as the TextType,
+    #   follow the SSML format for the input text.
+    #   @return [String]
+    #
+    # @!attribute [rw] text_type
+    #   Specifies whether the input text is plain text or SSML. The default
+    #   value is plain text.
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_id
+    #   Voice ID to use for the synthesis.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/StartSpeechSynthesisTaskInput AWS API Documentation
+    #
+    class StartSpeechSynthesisTaskInput < Struct.new(
+      :lexicon_names,
+      :output_format,
+      :output_s3_bucket_name,
+      :output_s3_key_prefix,
+      :sample_rate,
+      :sns_topic_arn,
+      :speech_mark_types,
+      :text,
+      :text_type,
+      :voice_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] synthesis_task
+    #   SynthesisTask object that provides information and attributes about
+    #   a newly submitted speech synthesis task.
+    #   @return [Types::SynthesisTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/StartSpeechSynthesisTaskOutput AWS API Documentation
+    #
+    class StartSpeechSynthesisTaskOutput < Struct.new(
+      :synthesis_task)
+      include Aws::Structure
+    end
+
+    # SynthesisTask object that provides information about a speech
+    # synthesis task.
+    #
+    # @!attribute [rw] task_id
+    #   The Amazon Polly generated identifier for a speech synthesis task.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_status
+    #   Current status of the individual speech synthesis task.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_status_reason
+    #   Reason for the current status of a specific speech synthesis task,
+    #   including errors if the task has failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_uri
+    #   Pathway for the output speech file.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   Timestamp for the time the synthesis task was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] request_characters
+    #   Number of billable characters synthesized.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sns_topic_arn
+    #   ARN for the SNS topic optionally used for providing status
+    #   notification for a speech synthesis task.
+    #   @return [String]
+    #
+    # @!attribute [rw] lexicon_names
+    #   List of one or more pronunciation lexicon names you want the service
+    #   to apply during synthesis. Lexicons are applied only if the language
+    #   of the lexicon is the same as the language of the voice.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] output_format
+    #   The format in which the returned output will be encoded. For audio
+    #   stream, this will be mp3, ogg\_vorbis, or pcm. For speech marks,
+    #   this will be json.
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_rate
+    #   The audio frequency specified in Hz.
+    #
+    #   The valid values for mp3 and ogg\_vorbis are "8000", "16000",
+    #   and "22050". The default value is "22050".
+    #
+    #   Valid values for pcm are "8000" and "16000" The default value is
+    #   "16000".
+    #   @return [String]
+    #
+    # @!attribute [rw] speech_mark_types
+    #   The type of speech marks returned for the input text.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] text_type
+    #   Specifies whether the input text is plain text or SSML. The default
+    #   value is plain text.
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_id
+    #   Voice ID to use for the synthesis.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/SynthesisTask AWS API Documentation
+    #
+    class SynthesisTask < Struct.new(
+      :task_id,
+      :task_status,
+      :task_status_reason,
+      :output_uri,
+      :creation_time,
+      :request_characters,
+      :sns_topic_arn,
+      :lexicon_names,
+      :output_format,
+      :sample_rate,
+      :speech_mark_types,
+      :text_type,
+      :voice_id)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass SynthesizeSpeechInput
     #   data as a hash:

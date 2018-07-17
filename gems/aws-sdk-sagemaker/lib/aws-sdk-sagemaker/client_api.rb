@@ -11,10 +11,13 @@ module Aws::SageMaker
 
     include Seahorse::Model
 
+    Accept = Shapes::StringShape.new(name: 'Accept')
     AddTagsInput = Shapes::StructureShape.new(name: 'AddTagsInput')
     AddTagsOutput = Shapes::StructureShape.new(name: 'AddTagsOutput')
     AlgorithmImage = Shapes::StringShape.new(name: 'AlgorithmImage')
     AlgorithmSpecification = Shapes::StructureShape.new(name: 'AlgorithmSpecification')
+    AssemblyType = Shapes::StringShape.new(name: 'AssemblyType')
+    BatchStrategy = Shapes::StringShape.new(name: 'BatchStrategy')
     CategoricalParameterRange = Shapes::StructureShape.new(name: 'CategoricalParameterRange')
     CategoricalParameterRanges = Shapes::ListShape.new(name: 'CategoricalParameterRanges')
     Channel = Shapes::StructureShape.new(name: 'Channel')
@@ -41,6 +44,8 @@ module Aws::SageMaker
     CreatePresignedNotebookInstanceUrlOutput = Shapes::StructureShape.new(name: 'CreatePresignedNotebookInstanceUrlOutput')
     CreateTrainingJobRequest = Shapes::StructureShape.new(name: 'CreateTrainingJobRequest')
     CreateTrainingJobResponse = Shapes::StructureShape.new(name: 'CreateTrainingJobResponse')
+    CreateTransformJobRequest = Shapes::StructureShape.new(name: 'CreateTransformJobRequest')
+    CreateTransformJobResponse = Shapes::StructureShape.new(name: 'CreateTransformJobResponse')
     CreationTime = Shapes::TimestampShape.new(name: 'CreationTime')
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
     DeleteEndpointConfigInput = Shapes::StructureShape.new(name: 'DeleteEndpointConfigInput')
@@ -66,6 +71,8 @@ module Aws::SageMaker
     DescribeNotebookInstanceOutput = Shapes::StructureShape.new(name: 'DescribeNotebookInstanceOutput')
     DescribeTrainingJobRequest = Shapes::StructureShape.new(name: 'DescribeTrainingJobRequest')
     DescribeTrainingJobResponse = Shapes::StructureShape.new(name: 'DescribeTrainingJobResponse')
+    DescribeTransformJobRequest = Shapes::StructureShape.new(name: 'DescribeTransformJobRequest')
+    DescribeTransformJobResponse = Shapes::StructureShape.new(name: 'DescribeTransformJobResponse')
     DesiredWeightAndCapacity = Shapes::StructureShape.new(name: 'DesiredWeightAndCapacity')
     DesiredWeightAndCapacityList = Shapes::ListShape.new(name: 'DesiredWeightAndCapacityList')
     DirectInternetAccess = Shapes::StringShape.new(name: 'DirectInternetAccess')
@@ -128,8 +135,12 @@ module Aws::SageMaker
     ListTrainingJobsForHyperParameterTuningJobResponse = Shapes::StructureShape.new(name: 'ListTrainingJobsForHyperParameterTuningJobResponse')
     ListTrainingJobsRequest = Shapes::StructureShape.new(name: 'ListTrainingJobsRequest')
     ListTrainingJobsResponse = Shapes::StructureShape.new(name: 'ListTrainingJobsResponse')
+    ListTransformJobsRequest = Shapes::StructureShape.new(name: 'ListTransformJobsRequest')
+    ListTransformJobsResponse = Shapes::StructureShape.new(name: 'ListTransformJobsResponse')
+    MaxConcurrentTransforms = Shapes::IntegerShape.new(name: 'MaxConcurrentTransforms')
     MaxNumberOfTrainingJobs = Shapes::IntegerShape.new(name: 'MaxNumberOfTrainingJobs')
     MaxParallelTrainingJobs = Shapes::IntegerShape.new(name: 'MaxParallelTrainingJobs')
+    MaxPayloadInMB = Shapes::IntegerShape.new(name: 'MaxPayloadInMB')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxRuntimeInSeconds = Shapes::IntegerShape.new(name: 'MaxRuntimeInSeconds')
     MetricDefinition = Shapes::StructureShape.new(name: 'MetricDefinition')
@@ -199,10 +210,12 @@ module Aws::SageMaker
     SessionExpirationDurationInSeconds = Shapes::IntegerShape.new(name: 'SessionExpirationDurationInSeconds')
     SortBy = Shapes::StringShape.new(name: 'SortBy')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
+    SplitType = Shapes::StringShape.new(name: 'SplitType')
     StartNotebookInstanceInput = Shapes::StructureShape.new(name: 'StartNotebookInstanceInput')
     StopHyperParameterTuningJobRequest = Shapes::StructureShape.new(name: 'StopHyperParameterTuningJobRequest')
     StopNotebookInstanceInput = Shapes::StructureShape.new(name: 'StopNotebookInstanceInput')
     StopTrainingJobRequest = Shapes::StructureShape.new(name: 'StopTrainingJobRequest')
+    StopTransformJobRequest = Shapes::StructureShape.new(name: 'StopTransformJobRequest')
     StoppingCondition = Shapes::StructureShape.new(name: 'StoppingCondition')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     Subnets = Shapes::ListShape.new(name: 'Subnets')
@@ -224,6 +237,21 @@ module Aws::SageMaker
     TrainingJobStatusCounters = Shapes::StructureShape.new(name: 'TrainingJobStatusCounters')
     TrainingJobSummaries = Shapes::ListShape.new(name: 'TrainingJobSummaries')
     TrainingJobSummary = Shapes::StructureShape.new(name: 'TrainingJobSummary')
+    TransformDataSource = Shapes::StructureShape.new(name: 'TransformDataSource')
+    TransformEnvironmentKey = Shapes::StringShape.new(name: 'TransformEnvironmentKey')
+    TransformEnvironmentMap = Shapes::MapShape.new(name: 'TransformEnvironmentMap')
+    TransformEnvironmentValue = Shapes::StringShape.new(name: 'TransformEnvironmentValue')
+    TransformInput = Shapes::StructureShape.new(name: 'TransformInput')
+    TransformInstanceCount = Shapes::IntegerShape.new(name: 'TransformInstanceCount')
+    TransformInstanceType = Shapes::StringShape.new(name: 'TransformInstanceType')
+    TransformJobArn = Shapes::StringShape.new(name: 'TransformJobArn')
+    TransformJobName = Shapes::StringShape.new(name: 'TransformJobName')
+    TransformJobStatus = Shapes::StringShape.new(name: 'TransformJobStatus')
+    TransformJobSummaries = Shapes::ListShape.new(name: 'TransformJobSummaries')
+    TransformJobSummary = Shapes::StructureShape.new(name: 'TransformJobSummary')
+    TransformOutput = Shapes::StructureShape.new(name: 'TransformOutput')
+    TransformResources = Shapes::StructureShape.new(name: 'TransformResources')
+    TransformS3DataSource = Shapes::StructureShape.new(name: 'TransformS3DataSource')
     UpdateEndpointInput = Shapes::StructureShape.new(name: 'UpdateEndpointInput')
     UpdateEndpointOutput = Shapes::StructureShape.new(name: 'UpdateEndpointOutput')
     UpdateEndpointWeightsAndCapacitiesInput = Shapes::StructureShape.new(name: 'UpdateEndpointWeightsAndCapacitiesInput')
@@ -355,6 +383,21 @@ module Aws::SageMaker
 
     CreateTrainingJobResponse.add_member(:training_job_arn, Shapes::ShapeRef.new(shape: TrainingJobArn, required: true, location_name: "TrainingJobArn"))
     CreateTrainingJobResponse.struct_class = Types::CreateTrainingJobResponse
+
+    CreateTransformJobRequest.add_member(:transform_job_name, Shapes::ShapeRef.new(shape: TransformJobName, required: true, location_name: "TransformJobName"))
+    CreateTransformJobRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
+    CreateTransformJobRequest.add_member(:max_concurrent_transforms, Shapes::ShapeRef.new(shape: MaxConcurrentTransforms, location_name: "MaxConcurrentTransforms"))
+    CreateTransformJobRequest.add_member(:max_payload_in_mb, Shapes::ShapeRef.new(shape: MaxPayloadInMB, location_name: "MaxPayloadInMB"))
+    CreateTransformJobRequest.add_member(:batch_strategy, Shapes::ShapeRef.new(shape: BatchStrategy, location_name: "BatchStrategy"))
+    CreateTransformJobRequest.add_member(:environment, Shapes::ShapeRef.new(shape: TransformEnvironmentMap, location_name: "Environment"))
+    CreateTransformJobRequest.add_member(:transform_input, Shapes::ShapeRef.new(shape: TransformInput, required: true, location_name: "TransformInput"))
+    CreateTransformJobRequest.add_member(:transform_output, Shapes::ShapeRef.new(shape: TransformOutput, required: true, location_name: "TransformOutput"))
+    CreateTransformJobRequest.add_member(:transform_resources, Shapes::ShapeRef.new(shape: TransformResources, required: true, location_name: "TransformResources"))
+    CreateTransformJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateTransformJobRequest.struct_class = Types::CreateTransformJobRequest
+
+    CreateTransformJobResponse.add_member(:transform_job_arn, Shapes::ShapeRef.new(shape: TransformJobArn, required: true, location_name: "TransformJobArn"))
+    CreateTransformJobResponse.struct_class = Types::CreateTransformJobResponse
 
     DataSource.add_member(:s3_data_source, Shapes::ShapeRef.new(shape: S3DataSource, required: true, location_name: "S3DataSource"))
     DataSource.struct_class = Types::DataSource
@@ -492,6 +535,26 @@ module Aws::SageMaker
     DescribeTrainingJobResponse.add_member(:training_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TrainingEndTime"))
     DescribeTrainingJobResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     DescribeTrainingJobResponse.struct_class = Types::DescribeTrainingJobResponse
+
+    DescribeTransformJobRequest.add_member(:transform_job_name, Shapes::ShapeRef.new(shape: TransformJobName, required: true, location_name: "TransformJobName"))
+    DescribeTransformJobRequest.struct_class = Types::DescribeTransformJobRequest
+
+    DescribeTransformJobResponse.add_member(:transform_job_name, Shapes::ShapeRef.new(shape: TransformJobName, required: true, location_name: "TransformJobName"))
+    DescribeTransformJobResponse.add_member(:transform_job_arn, Shapes::ShapeRef.new(shape: TransformJobArn, required: true, location_name: "TransformJobArn"))
+    DescribeTransformJobResponse.add_member(:transform_job_status, Shapes::ShapeRef.new(shape: TransformJobStatus, required: true, location_name: "TransformJobStatus"))
+    DescribeTransformJobResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    DescribeTransformJobResponse.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
+    DescribeTransformJobResponse.add_member(:max_concurrent_transforms, Shapes::ShapeRef.new(shape: MaxConcurrentTransforms, location_name: "MaxConcurrentTransforms"))
+    DescribeTransformJobResponse.add_member(:max_payload_in_mb, Shapes::ShapeRef.new(shape: MaxPayloadInMB, location_name: "MaxPayloadInMB"))
+    DescribeTransformJobResponse.add_member(:batch_strategy, Shapes::ShapeRef.new(shape: BatchStrategy, location_name: "BatchStrategy"))
+    DescribeTransformJobResponse.add_member(:environment, Shapes::ShapeRef.new(shape: TransformEnvironmentMap, location_name: "Environment"))
+    DescribeTransformJobResponse.add_member(:transform_input, Shapes::ShapeRef.new(shape: TransformInput, required: true, location_name: "TransformInput"))
+    DescribeTransformJobResponse.add_member(:transform_output, Shapes::ShapeRef.new(shape: TransformOutput, location_name: "TransformOutput"))
+    DescribeTransformJobResponse.add_member(:transform_resources, Shapes::ShapeRef.new(shape: TransformResources, required: true, location_name: "TransformResources"))
+    DescribeTransformJobResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    DescribeTransformJobResponse.add_member(:transform_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TransformStartTime"))
+    DescribeTransformJobResponse.add_member(:transform_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TransformEndTime"))
+    DescribeTransformJobResponse.struct_class = Types::DescribeTransformJobResponse
 
     DesiredWeightAndCapacity.add_member(:variant_name, Shapes::ShapeRef.new(shape: VariantName, required: true, location_name: "VariantName"))
     DesiredWeightAndCapacity.add_member(:desired_weight, Shapes::ShapeRef.new(shape: VariantWeight, location_name: "DesiredWeight"))
@@ -716,6 +779,22 @@ module Aws::SageMaker
     ListTrainingJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTrainingJobsResponse.struct_class = Types::ListTrainingJobsResponse
 
+    ListTransformJobsRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeAfter"))
+    ListTransformJobsRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeBefore"))
+    ListTransformJobsRequest.add_member(:last_modified_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTimeAfter"))
+    ListTransformJobsRequest.add_member(:last_modified_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTimeBefore"))
+    ListTransformJobsRequest.add_member(:name_contains, Shapes::ShapeRef.new(shape: NameContains, location_name: "NameContains"))
+    ListTransformJobsRequest.add_member(:status_equals, Shapes::ShapeRef.new(shape: TransformJobStatus, location_name: "StatusEquals"))
+    ListTransformJobsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortBy, location_name: "SortBy"))
+    ListTransformJobsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    ListTransformJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTransformJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListTransformJobsRequest.struct_class = Types::ListTransformJobsRequest
+
+    ListTransformJobsResponse.add_member(:transform_job_summaries, Shapes::ShapeRef.new(shape: TransformJobSummaries, required: true, location_name: "TransformJobSummaries"))
+    ListTransformJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTransformJobsResponse.struct_class = Types::ListTransformJobsResponse
+
     MetricDefinition.add_member(:name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "Name"))
     MetricDefinition.add_member(:regex, Shapes::ShapeRef.new(shape: MetricRegex, required: true, location_name: "Regex"))
     MetricDefinition.struct_class = Types::MetricDefinition
@@ -821,6 +900,9 @@ module Aws::SageMaker
     StopTrainingJobRequest.add_member(:training_job_name, Shapes::ShapeRef.new(shape: TrainingJobName, required: true, location_name: "TrainingJobName"))
     StopTrainingJobRequest.struct_class = Types::StopTrainingJobRequest
 
+    StopTransformJobRequest.add_member(:transform_job_name, Shapes::ShapeRef.new(shape: TransformJobName, required: true, location_name: "TransformJobName"))
+    StopTransformJobRequest.struct_class = Types::StopTransformJobRequest
+
     StoppingCondition.add_member(:max_runtime_in_seconds, Shapes::ShapeRef.new(shape: MaxRuntimeInSeconds, location_name: "MaxRuntimeInSeconds"))
     StoppingCondition.struct_class = Types::StoppingCondition
 
@@ -850,6 +932,43 @@ module Aws::SageMaker
     TrainingJobSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     TrainingJobSummary.add_member(:training_job_status, Shapes::ShapeRef.new(shape: TrainingJobStatus, required: true, location_name: "TrainingJobStatus"))
     TrainingJobSummary.struct_class = Types::TrainingJobSummary
+
+    TransformDataSource.add_member(:s3_data_source, Shapes::ShapeRef.new(shape: TransformS3DataSource, required: true, location_name: "S3DataSource"))
+    TransformDataSource.struct_class = Types::TransformDataSource
+
+    TransformEnvironmentMap.key = Shapes::ShapeRef.new(shape: TransformEnvironmentKey)
+    TransformEnvironmentMap.value = Shapes::ShapeRef.new(shape: TransformEnvironmentValue)
+
+    TransformInput.add_member(:data_source, Shapes::ShapeRef.new(shape: TransformDataSource, required: true, location_name: "DataSource"))
+    TransformInput.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType"))
+    TransformInput.add_member(:compression_type, Shapes::ShapeRef.new(shape: CompressionType, location_name: "CompressionType"))
+    TransformInput.add_member(:split_type, Shapes::ShapeRef.new(shape: SplitType, location_name: "SplitType"))
+    TransformInput.struct_class = Types::TransformInput
+
+    TransformJobSummaries.member = Shapes::ShapeRef.new(shape: TransformJobSummary)
+
+    TransformJobSummary.add_member(:transform_job_name, Shapes::ShapeRef.new(shape: TransformJobName, required: true, location_name: "TransformJobName"))
+    TransformJobSummary.add_member(:transform_job_arn, Shapes::ShapeRef.new(shape: TransformJobArn, required: true, location_name: "TransformJobArn"))
+    TransformJobSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    TransformJobSummary.add_member(:transform_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TransformEndTime"))
+    TransformJobSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    TransformJobSummary.add_member(:transform_job_status, Shapes::ShapeRef.new(shape: TransformJobStatus, required: true, location_name: "TransformJobStatus"))
+    TransformJobSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    TransformJobSummary.struct_class = Types::TransformJobSummary
+
+    TransformOutput.add_member(:s3_output_path, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3OutputPath"))
+    TransformOutput.add_member(:accept, Shapes::ShapeRef.new(shape: Accept, location_name: "Accept"))
+    TransformOutput.add_member(:assemble_with, Shapes::ShapeRef.new(shape: AssemblyType, location_name: "AssembleWith"))
+    TransformOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    TransformOutput.struct_class = Types::TransformOutput
+
+    TransformResources.add_member(:instance_type, Shapes::ShapeRef.new(shape: TransformInstanceType, required: true, location_name: "InstanceType"))
+    TransformResources.add_member(:instance_count, Shapes::ShapeRef.new(shape: TransformInstanceCount, required: true, location_name: "InstanceCount"))
+    TransformResources.struct_class = Types::TransformResources
+
+    TransformS3DataSource.add_member(:s3_data_type, Shapes::ShapeRef.new(shape: S3DataType, required: true, location_name: "S3DataType"))
+    TransformS3DataSource.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
+    TransformS3DataSource.struct_class = Types::TransformS3DataSource
 
     UpdateEndpointInput.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location_name: "EndpointName"))
     UpdateEndpointInput.add_member(:endpoint_config_name, Shapes::ShapeRef.new(shape: EndpointConfigName, required: true, location_name: "EndpointConfigName"))
@@ -982,6 +1101,16 @@ module Aws::SageMaker
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
       end)
 
+      api.add_operation(:create_transform_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTransformJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateTransformJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateTransformJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
+      end)
+
       api.add_operation(:delete_endpoint, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteEndpoint"
         o.http_method = "POST"
@@ -1085,6 +1214,15 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeTrainingJobRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeTrainingJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:describe_transform_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTransformJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTransformJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTransformJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
@@ -1215,6 +1353,20 @@ module Aws::SageMaker
         )
       end)
 
+      api.add_operation(:list_transform_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTransformJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTransformJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTransformJobsResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:start_notebook_instance, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartNotebookInstance"
         o.http_method = "POST"
@@ -1246,6 +1398,15 @@ module Aws::SageMaker
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StopTrainingJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:stop_transform_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopTransformJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopTransformJobRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)

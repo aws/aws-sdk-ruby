@@ -933,7 +933,7 @@ module Aws::SageMaker
     #
     # @option params [required, String] :training_job_name
     #   The name of the training job. The name must be unique within an AWS
-    #   Region in an AWS account. It appears in the Amazon SageMaker console.
+    #   Region in an AWS account.
     #
     # @option params [Hash<String,String>] :hyper_parameters
     #   Algorithm-specific parameters that influence the quality of the model.
@@ -1105,6 +1105,145 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def create_training_job(params = {}, options = {})
       req = build_request(:create_training_job, params)
+      req.send_request(options)
+    end
+
+    # Starts a transform job. After the results are obtained, Amazon
+    # SageMaker saves them to an Amazon S3 location that you specify.
+    #
+    # To perform batch transformations, you create a transform job and use
+    # the data that you have readily available.
+    #
+    # In the request body, you provide the following:
+    #
+    # * `TransformJobName` - Identifies the transform job. The name must be
+    #   unique within an AWS Region in an AWS account.
+    #
+    # * `ModelName` - Identifies the model to use.
+    #
+    # * `TransformInput` - Describes the dataset to be transformed and the
+    #   Amazon S3 location where it is stored.
+    #
+    # * `TransformOutput` - Identifies the Amazon S3 location where you want
+    #   Amazon SageMaker to save the results from the transform job.
+    #
+    # * `TransformResources` - Identifies the ML compute instances for the
+    #   transform job.
+    #
+    # For more information about how batch transformation works Amazon
+    # SageMaker, see [How It Works][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html
+    #
+    # @option params [required, String] :transform_job_name
+    #   The name of the transform job. The name must be unique within an AWS
+    #   Region in an AWS account.
+    #
+    # @option params [required, String] :model_name
+    #   The name of the model that you want to use for the transform job.
+    #
+    # @option params [Integer] :max_concurrent_transforms
+    #   The maximum number of parallel requests on each instance node that can
+    #   be launched in a transform job. The default value is `1`. To allow
+    #   Amazon SageMaker to determine the appropriate number for
+    #   `MaxConcurrentTransforms`, set the value to `0`.
+    #
+    # @option params [Integer] :max_payload_in_mb
+    #   The maximum payload size allowed, in MB. A payload is the data portion
+    #   of a record (without metadata). The value in `MaxPayloadInMB` must be
+    #   greater than the size of a single record.You can approximate the size
+    #   of a record by dividing the size of your dataset by the number of
+    #   records. The value you enter should be proportional to the number of
+    #   records you want per batch. It is recommended to enter a slightly
+    #   higher value to ensure the records will fit within the maximum payload
+    #   size. The default value is `6` MB. For an unlimited payload size, set
+    #   the value to `0`.
+    #
+    # @option params [String] :batch_strategy
+    #   Determins the number of records included in a single batch.
+    #   `SingleRecord` means only one record is used per batch. `MultiRecord`
+    #   means a batch is set to contain as many records that could possibly
+    #   fit within the `MaxPayloadInMB` limit.
+    #
+    # @option params [Hash<String,String>] :environment
+    #   The environment variables to set in the Docker container. We support
+    #   up to 16 key and values entries in the map.
+    #
+    # @option params [required, Types::TransformInput] :transform_input
+    #   Describes the input source and the way the transform job consumes it.
+    #
+    # @option params [required, Types::TransformOutput] :transform_output
+    #   Describes the results of the transform job.
+    #
+    # @option params [required, Types::TransformResources] :transform_resources
+    #   Describes the resources, including ML instance types and ML instance
+    #   count, to use for the transform job.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of key-value pairs. Adding tags is optional. For more
+    #   information, see [Using Cost Allocation Tags][1] in the *AWS Billing
+    #   and Cost Management User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #
+    # @return [Types::CreateTransformJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTransformJobResponse#transform_job_arn #transform_job_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_transform_job({
+    #     transform_job_name: "TransformJobName", # required
+    #     model_name: "ModelName", # required
+    #     max_concurrent_transforms: 1,
+    #     max_payload_in_mb: 1,
+    #     batch_strategy: "MultiRecord", # accepts MultiRecord, SingleRecord
+    #     environment: {
+    #       "TransformEnvironmentKey" => "TransformEnvironmentValue",
+    #     },
+    #     transform_input: { # required
+    #       data_source: { # required
+    #         s3_data_source: { # required
+    #           s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #       },
+    #       content_type: "ContentType",
+    #       compression_type: "None", # accepts None, Gzip
+    #       split_type: "None", # accepts None, Line, RecordIO
+    #     },
+    #     transform_output: { # required
+    #       s3_output_path: "S3Uri", # required
+    #       accept: "Accept",
+    #       assemble_with: "None", # accepts None, Line
+    #       kms_key_id: "KmsKeyId",
+    #     },
+    #     transform_resources: { # required
+    #       instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
+    #       instance_count: 1, # required
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transform_job_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTransformJob AWS API Documentation
+    #
+    # @overload create_transform_job(params = {})
+    # @param [Hash] params ({})
+    def create_transform_job(params = {}, options = {})
+      req = build_request(:create_transform_job, params)
       req.send_request(options)
     end
 
@@ -1691,6 +1830,71 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Returns information about a transform job.
+    #
+    # @option params [required, String] :transform_job_name
+    #   The name of the transform job that you want to view details of.
+    #
+    # @return [Types::DescribeTransformJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTransformJobResponse#transform_job_name #transform_job_name} => String
+    #   * {Types::DescribeTransformJobResponse#transform_job_arn #transform_job_arn} => String
+    #   * {Types::DescribeTransformJobResponse#transform_job_status #transform_job_status} => String
+    #   * {Types::DescribeTransformJobResponse#failure_reason #failure_reason} => String
+    #   * {Types::DescribeTransformJobResponse#model_name #model_name} => String
+    #   * {Types::DescribeTransformJobResponse#max_concurrent_transforms #max_concurrent_transforms} => Integer
+    #   * {Types::DescribeTransformJobResponse#max_payload_in_mb #max_payload_in_mb} => Integer
+    #   * {Types::DescribeTransformJobResponse#batch_strategy #batch_strategy} => String
+    #   * {Types::DescribeTransformJobResponse#environment #environment} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeTransformJobResponse#transform_input #transform_input} => Types::TransformInput
+    #   * {Types::DescribeTransformJobResponse#transform_output #transform_output} => Types::TransformOutput
+    #   * {Types::DescribeTransformJobResponse#transform_resources #transform_resources} => Types::TransformResources
+    #   * {Types::DescribeTransformJobResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeTransformJobResponse#transform_start_time #transform_start_time} => Time
+    #   * {Types::DescribeTransformJobResponse#transform_end_time #transform_end_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_transform_job({
+    #     transform_job_name: "TransformJobName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transform_job_name #=> String
+    #   resp.transform_job_arn #=> String
+    #   resp.transform_job_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
+    #   resp.failure_reason #=> String
+    #   resp.model_name #=> String
+    #   resp.max_concurrent_transforms #=> Integer
+    #   resp.max_payload_in_mb #=> Integer
+    #   resp.batch_strategy #=> String, one of "MultiRecord", "SingleRecord"
+    #   resp.environment #=> Hash
+    #   resp.environment["TransformEnvironmentKey"] #=> String
+    #   resp.transform_input.data_source.s3_data_source.s3_data_type #=> String, one of "ManifestFile", "S3Prefix"
+    #   resp.transform_input.data_source.s3_data_source.s3_uri #=> String
+    #   resp.transform_input.content_type #=> String
+    #   resp.transform_input.compression_type #=> String, one of "None", "Gzip"
+    #   resp.transform_input.split_type #=> String, one of "None", "Line", "RecordIO"
+    #   resp.transform_output.s3_output_path #=> String
+    #   resp.transform_output.accept #=> String
+    #   resp.transform_output.assemble_with #=> String, one of "None", "Line"
+    #   resp.transform_output.kms_key_id #=> String
+    #   resp.transform_resources.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge"
+    #   resp.transform_resources.instance_count #=> Integer
+    #   resp.creation_time #=> Time
+    #   resp.transform_start_time #=> Time
+    #   resp.transform_end_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTransformJob AWS API Documentation
+    #
+    # @overload describe_transform_job(params = {})
+    # @param [Hash] params ({})
+    def describe_transform_job(params = {}, options = {})
+      req = build_request(:describe_transform_job, params)
+      req.send_request(options)
+    end
+
     # Lists endpoint configurations.
     #
     # @option params [String] :sort_by
@@ -2214,8 +2418,8 @@ module Aws::SageMaker
     #   The maximum number of training jobs to return in the response.
     #
     # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
-    #   A filter that only training jobs created after the specified time
-    #   (timestamp).
+    #   A filter that returns only training jobs created after the specified
+    #   time (timestamp).
     #
     # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
     #   A filter that returns only training jobs created before the specified
@@ -2353,6 +2557,87 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Lists transform jobs.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   A filter that returns only transform jobs created after the specified
+    #   time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   A filter that returns only transform jobs created before the specified
+    #   time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_after
+    #   A filter that returns only transform jobs modified after the specified
+    #   time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_before
+    #   A filter that returns only transform jobs modified before the
+    #   specified time.
+    #
+    # @option params [String] :name_contains
+    #   A string in the transform job name. This filter returns only transform
+    #   jobs whose name contains the specified string.
+    #
+    # @option params [String] :status_equals
+    #   A filter that retrieves only transform jobs with a specific status.
+    #
+    # @option params [String] :sort_by
+    #   The field to sort results by. The default is `CreationTime`.
+    #
+    # @option params [String] :sort_order
+    #   The sort order for results. The default is `Descending`.
+    #
+    # @option params [String] :next_token
+    #   If the result of the previous `ListTransformJobs` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of transform jobs, use the token in the next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of transform jobs to return in the response. The
+    #   default value is `10`.
+    #
+    # @return [Types::ListTransformJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTransformJobsResponse#transform_job_summaries #transform_job_summaries} => Array&lt;Types::TransformJobSummary&gt;
+    #   * {Types::ListTransformJobsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_transform_jobs({
+    #     creation_time_after: Time.now,
+    #     creation_time_before: Time.now,
+    #     last_modified_time_after: Time.now,
+    #     last_modified_time_before: Time.now,
+    #     name_contains: "NameContains",
+    #     status_equals: "InProgress", # accepts InProgress, Completed, Failed, Stopping, Stopped
+    #     sort_by: "Name", # accepts Name, CreationTime, Status
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transform_job_summaries #=> Array
+    #   resp.transform_job_summaries[0].transform_job_name #=> String
+    #   resp.transform_job_summaries[0].transform_job_arn #=> String
+    #   resp.transform_job_summaries[0].creation_time #=> Time
+    #   resp.transform_job_summaries[0].transform_end_time #=> Time
+    #   resp.transform_job_summaries[0].last_modified_time #=> Time
+    #   resp.transform_job_summaries[0].transform_job_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
+    #   resp.transform_job_summaries[0].failure_reason #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTransformJobs AWS API Documentation
+    #
+    # @overload list_transform_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_transform_jobs(params = {}, options = {})
+      req = build_request(:list_transform_jobs, params)
+      req.send_request(options)
+    end
+
     # Launches an ML compute instance with the latest version of the
     # libraries and attaches your ML storage volume. After configuring the
     # notebook instance, Amazon SageMaker sets the notebook instance status
@@ -2384,7 +2669,7 @@ module Aws::SageMaker
     #
     # All model artifacts output from the training jobs are stored in Amazon
     # Simple Storage Service (Amazon S3). All data that the training jobs
-    # write toAmazon CloudWatch Logs are still available in CloudWatch.
+    # write to Amazon CloudWatch Logs are still available in CloudWatch.
     # After the tuning job moves to the `Stopped` state, it releases all
     # reserved resources for the tuning job.
     #
@@ -2469,6 +2754,34 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def stop_training_job(params = {}, options = {})
       req = build_request(:stop_training_job, params)
+      req.send_request(options)
+    end
+
+    # Stops a transform job.
+    #
+    # When Amazon SageMaker receives a `StopTransformJob` request, the
+    # status of the job changes to `Stopping`. After Amazon SageMaker stops
+    # the job, the status is set to `Stopped`. When you stop a transform job
+    # before it is completed, Amazon SageMaker doesn't store the job's
+    # output in Amazon S3.
+    #
+    # @option params [required, String] :transform_job_name
+    #   The name of the transform job to stop.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_transform_job({
+    #     transform_job_name: "TransformJobName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopTransformJob AWS API Documentation
+    #
+    # @overload stop_transform_job(params = {})
+    # @param [Hash] params ({})
+    def stop_transform_job(params = {}, options = {})
+      req = build_request(:stop_transform_job, params)
       req.send_request(options)
     end
 
@@ -2666,7 +2979,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
