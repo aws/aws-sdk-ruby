@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.90 (2018-07-17)
+------------------
+
 * Feature - Aws::Comprehend - Updated the API, and documentation for Amazon Comprehend.
 
 * Feature - Aws::Polly - Updated the API, documentation, and integration test for Amazon Polly.
