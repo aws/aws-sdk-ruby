@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Comprehend - Updated the API, and documentation for Amazon Comprehend.
+
+* Feature - Aws::Polly - Updated the API, documentation, and integration test for Amazon Polly.
+
+* Feature - Aws::SageMaker - Updated the API, and documentation for Amazon SageMaker Service.
+
+* Feature - Aws::Snowball - Updated the API, documentation, and integration test for Amazon Import/Export Snowball.
+
 2.11.89 (2018-07-13)
 ------------------
 
