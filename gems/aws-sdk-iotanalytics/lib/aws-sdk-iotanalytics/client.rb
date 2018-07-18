@@ -628,14 +628,19 @@ module Aws::IoTAnalytics
     # @option params [required, String] :channel_name
     #   The name of the channel whose information is retrieved.
     #
+    # @option params [Boolean] :include_statistics
+    #   If true, include statistics about the channel in the response.
+    #
     # @return [Types::DescribeChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeChannelResponse#channel #channel} => Types::Channel
+    #   * {Types::DescribeChannelResponse#statistics #statistics} => Types::ChannelStatistics
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_channel({
     #     channel_name: "ChannelName", # required
+    #     include_statistics: false,
     #   })
     #
     # @example Response structure
@@ -647,6 +652,8 @@ module Aws::IoTAnalytics
     #   resp.channel.retention_period.number_of_days #=> Integer
     #   resp.channel.creation_time #=> Time
     #   resp.channel.last_update_time #=> Time
+    #   resp.statistics.size.estimated_size_in_bytes #=> Float
+    #   resp.statistics.size.estimated_on #=> Time
     #
     # @overload describe_channel(params = {})
     # @param [Hash] params ({})
@@ -695,14 +702,19 @@ module Aws::IoTAnalytics
     # @option params [required, String] :datastore_name
     #   The name of the data store
     #
+    # @option params [Boolean] :include_statistics
+    #   If true, include statistics about the data store in the response.
+    #
     # @return [Types::DescribeDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeDatastoreResponse#datastore #datastore} => Types::Datastore
+    #   * {Types::DescribeDatastoreResponse#statistics #statistics} => Types::DatastoreStatistics
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_datastore({
     #     datastore_name: "DatastoreName", # required
+    #     include_statistics: false,
     #   })
     #
     # @example Response structure
@@ -714,6 +726,8 @@ module Aws::IoTAnalytics
     #   resp.datastore.retention_period.number_of_days #=> Integer
     #   resp.datastore.creation_time #=> Time
     #   resp.datastore.last_update_time #=> Time
+    #   resp.statistics.size.estimated_size_in_bytes #=> Float
+    #   resp.statistics.size.estimated_on #=> Time
     #
     # @overload describe_datastore(params = {})
     # @param [Hash] params ({})
@@ -1493,7 +1507,7 @@ module Aws::IoTAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotanalytics'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
