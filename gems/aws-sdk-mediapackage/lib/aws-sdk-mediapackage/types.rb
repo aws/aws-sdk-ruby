@@ -315,6 +315,7 @@ module Aws::MediaPackage
     #           manifest_window_seconds: 1,
     #           min_buffer_time_seconds: 1,
     #           min_update_period_seconds: 1,
+    #           period_triggers: ["ADS"], # accepts ADS
     #           profile: "NONE", # accepts NONE, HBBTV_1_5
     #           segment_duration_seconds: 1,
     #           stream_selection: {
@@ -545,6 +546,7 @@ module Aws::MediaPackage
     #         manifest_window_seconds: 1,
     #         min_buffer_time_seconds: 1,
     #         min_update_period_seconds: 1,
+    #         period_triggers: ["ADS"], # accepts ADS
     #         profile: "NONE", # accepts NONE, HBBTV_1_5
     #         segment_duration_seconds: 1,
     #         stream_selection: {
@@ -575,6 +577,15 @@ module Aws::MediaPackage
     #   Description (MPD).
     #   @return [Integer]
     #
+    # @!attribute [rw] period_triggers
+    #   A list of triggers that controls when the outgoing Dynamic Adaptive
+    #   Streaming over HTTP (DASH) Media Presentation Description (MPD) will
+    #   be partitioned into multiple periods. If empty, the content will not
+    #   be partitioned into more than one period. If the list contains
+    #   "ADS", new periods will be created where the Channel source
+    #   contains SCTE-35 ad markers.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] profile
     #   The Dynamic Adaptive Streaming over HTTP (DASH) profile type. When
     #   set to "HBBTV\_1\_5", HbbTV 1.5 compliant output is enabled.
@@ -600,6 +611,7 @@ module Aws::MediaPackage
       :manifest_window_seconds,
       :min_buffer_time_seconds,
       :min_update_period_seconds,
+      :period_triggers,
       :profile,
       :segment_duration_seconds,
       :stream_selection,
@@ -1686,6 +1698,7 @@ module Aws::MediaPackage
     #           manifest_window_seconds: 1,
     #           min_buffer_time_seconds: 1,
     #           min_update_period_seconds: 1,
+    #           period_triggers: ["ADS"], # accepts ADS
     #           profile: "NONE", # accepts NONE, HBBTV_1_5
     #           segment_duration_seconds: 1,
     #           stream_selection: {

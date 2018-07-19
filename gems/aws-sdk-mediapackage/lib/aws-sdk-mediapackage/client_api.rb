@@ -68,6 +68,7 @@ module Aws::MediaPackage
     UpdateChannelResponse = Shapes::StructureShape.new(name: 'UpdateChannelResponse')
     UpdateOriginEndpointRequest = Shapes::StructureShape.new(name: 'UpdateOriginEndpointRequest')
     UpdateOriginEndpointResponse = Shapes::StructureShape.new(name: 'UpdateOriginEndpointResponse')
+    __PeriodTriggersElement = Shapes::StringShape.new(name: '__PeriodTriggersElement')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
     __integer = Shapes::IntegerShape.new(name: '__integer')
@@ -76,6 +77,7 @@ module Aws::MediaPackage
     __listOfHlsManifestCreateOrUpdateParameters = Shapes::ListShape.new(name: '__listOfHlsManifestCreateOrUpdateParameters')
     __listOfIngestEndpoint = Shapes::ListShape.new(name: '__listOfIngestEndpoint')
     __listOfOriginEndpoint = Shapes::ListShape.new(name: '__listOfOriginEndpoint')
+    __listOf__PeriodTriggersElement = Shapes::ListShape.new(name: '__listOf__PeriodTriggersElement')
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __long = Shapes::IntegerShape.new(name: '__long')
     __string = Shapes::StringShape.new(name: '__string')
@@ -161,6 +163,7 @@ module Aws::MediaPackage
     DashPackage.add_member(:manifest_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "manifestWindowSeconds"))
     DashPackage.add_member(:min_buffer_time_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "minBufferTimeSeconds"))
     DashPackage.add_member(:min_update_period_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "minUpdatePeriodSeconds"))
+    DashPackage.add_member(:period_triggers, Shapes::ShapeRef.new(shape: __listOf__PeriodTriggersElement, location_name: "periodTriggers"))
     DashPackage.add_member(:profile, Shapes::ShapeRef.new(shape: Profile, location_name: "profile"))
     DashPackage.add_member(:segment_duration_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "segmentDurationSeconds"))
     DashPackage.add_member(:stream_selection, Shapes::ShapeRef.new(shape: StreamSelection, location_name: "streamSelection"))
@@ -384,6 +387,8 @@ module Aws::MediaPackage
     __listOfIngestEndpoint.member = Shapes::ShapeRef.new(shape: IngestEndpoint)
 
     __listOfOriginEndpoint.member = Shapes::ShapeRef.new(shape: OriginEndpoint)
+
+    __listOf__PeriodTriggersElement.member = Shapes::ShapeRef.new(shape: __PeriodTriggersElement)
 
     __listOf__string.member = Shapes::ShapeRef.new(shape: __string)
 
