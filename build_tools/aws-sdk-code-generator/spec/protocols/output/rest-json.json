@@ -665,5 +665,123 @@
         }
       }
     ]
+  },
+  {
+    "description": "Timestamp members with timestampFormat",
+    "metadata": {
+      "protocol": "rest-json"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "TimeMember": {
+            "shape": "TimeFormatType"
+          },
+          "TimeMemberOverride": {
+            "shape": "TimeFormatType",
+            "timestampFormat": "rfc822"
+          },
+          "StructMember": {
+            "shape": "TimeContainer"
+          }
+        }
+      },
+      "TimeFormatType": {
+        "type": "timestamp",
+        "timestampFormat": "iso8601"
+      },
+      "TimeContainer": {
+        "type": "structure",
+        "members": {
+          "foo": {
+            "shape": "TimeFormatType"
+          }
+        }
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "TimeMember": 1398796238,
+          "TimeMemberOverride": 1398796238,
+          "StructMember": {
+            "foo": 1398796238
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"TimeMember\": \"2014-04-29T18:30:38+00:00\", \"TimeMemberOverride\": \"Tue, 29 Apr 2014 18:30:38 GMT\", \"StructMember\": {\"foo\": \"2014-04-29T18:30:38+00:00\"}}"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Timestamp members with complex timestampFormat",
+    "metadata": {
+      "protocol": "rest-json",
+      "timestampFormat":"iso8601"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "TimeMember": {
+            "shape": "TimeType"
+          },
+          "TimeMemberOverride": {
+            "shape": "TimeFormatType",
+            "timestampFormat": "rfc822"
+          },
+          "StructMember": {
+            "shape": "TimeContainer"
+          }
+        }
+      },
+      "TimeType": {
+        "type": "timestamp"
+      },
+      "TimeFormatType": {
+        "type": "timestamp",
+        "timestampFormat": "unixTimestamp"
+      },
+      "TimeContainer": {
+        "type": "structure",
+        "members": {
+          "foo": {
+            "shape": "TimeFormatType"
+          }
+        }
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "TimeMember": 1398796238,
+          "TimeMemberOverride": 1398796238,
+          "StructMember": {
+            "foo": 1398796238
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"TimeMember\": \"2014-04-29T18:30:38+00:00\", \"TimeMemberOverride\": \"Tue, 29 Apr 2014 18:30:38 GMT\", \"StructMember\": {\"foo\": 1398796238}}"
+        }
+      }
+    ]
   }
 ]
