@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.93 (2018-07-20)
+------------------
+
 * Feature - Aws::ConfigService - Updated the API, and integration test for AWS Config.
 
 * Feature - Aws::DLM - Updated the documentation for Amazon Data Lifecycle Manager.
