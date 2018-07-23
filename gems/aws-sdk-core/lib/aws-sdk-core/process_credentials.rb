@@ -8,14 +8,7 @@ module Aws
   # Automatically handles refreshing credentials if an Expiration time is 
   # provided in the credentials payload
   #
-  #     credentials = Aws::ProcessCredentials.new(
-  #                   'echo \'{
-  #                             "Version": 1,
-  #                             "AccessKeyId": "AK_PROC1",
-  #                             "SecretAccessKey": "SECRET_AK_PROC1",
-  #                             "SessionToken": "TOKEN_PROC1"
-  #                            }\''
-  #                   ).credentials
+  #     credentials = Aws::ProcessCredentials.new('/usr/bin/credential_proc').credentials
   #
   #     ec2 = Aws::EC2::Client.new(credentials: credentials)
   #
