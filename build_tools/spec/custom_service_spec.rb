@@ -22,6 +22,23 @@ module BuildTools
       expect(cs.svc_name).to eq("SdkTestApi")
     end
 
+    it 'format svc_name with spaces' do
+      cs = CustomService.new(
+        service_name: "Sdk teSt api",
+        default_endpoint: "https://foo.com",
+        model_path: "foo/path"
+      )
+      expect(cs.svc_name).to eq("SdkTeStApi")
+    end
+
+    it 'strips off invalid characters' do
+      cs = CustomService.new(
+        service_name: "Sdk-test%api",
+        default_endpoint: "https://foo.com",
+        model_path: "foo/path"
+      )
+      expect(cs.svc_name).to eq("SdkTestApi")
+    end
   end
 
 end
