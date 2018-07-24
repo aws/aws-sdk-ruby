@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.94 (2018-07-24)
+------------------
+
 * Feature - Aws::DynamoDB - Updated the API, documentation, and integration test for Amazon DynamoDB.
 
 2.11.93 (2018-07-20)
