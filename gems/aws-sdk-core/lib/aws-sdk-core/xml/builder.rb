@@ -87,7 +87,7 @@ module Aws
         when StructureShape then structure(name, ref, value)
         when ListShape      then list(name, ref, value)
         when MapShape       then map(name, ref, value)
-        when TimestampShape then node(name, ref, timestamp(value))
+        when TimestampShape then node(name, ref, timestamp(ref, value))
         when BlobShape      then node(name, ref, blob(value))
         else
           node(name, ref, value.to_s)
@@ -99,8 +99,14 @@ module Aws
         Base64.strict_encode64(value)
       end
 
-      def timestamp(value)
-        value.utc.iso8601
+      def timestamp(ref, value)
+        case ref['timestampFormat'] || ref.shape['timestampFormat']
+        when 'unixTimestamp' then value.to_i
+        when 'rfc822' then value.utc.httpdate
+        else
+          # xml defaults to iso8601
+          value.utc.iso8601
+        end
       end
 
       # The `args` list may contain:

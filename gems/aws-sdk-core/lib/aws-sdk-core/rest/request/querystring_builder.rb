@@ -36,7 +36,7 @@ module Aws
             "#{param_name}=#{escape(param_value.to_s)}"
           when TimestampShape
             param_name = shape_ref.location_name
-            "#{param_name}=#{escape(param_value.utc.httpdate)}"
+            "#{param_name}=#{escape(timestamp(shape_ref, param_value))}"
           when MapShape
             if StringShape === shape_ref.shape.value.shape
               query_map_of_string(param_value)
@@ -56,6 +56,16 @@ module Aws
             end
           else
             raise NotImplementedError
+          end
+        end
+
+        def timestamp(ref, value)
+          case ref['timestampFormat'] || ref.shape['timestampFormat']
+          when 'unixTimestamp' then value.to_i
+          when 'rfc822' then value.utc.httpdate
+          else
+            # querystring defaults to iso8601
+            value.utc.iso8601
           end
         end
 
