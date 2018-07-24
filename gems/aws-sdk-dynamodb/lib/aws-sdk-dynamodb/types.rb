@@ -279,6 +279,250 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # Represents the properties of the scaling policy.
+    #
+    # @!attribute [rw] policy_name
+    #   The name of the scaling policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_tracking_scaling_policy_configuration
+    #   Represents a target tracking scaling policy configuration.
+    #   @return [Types::AutoScalingTargetTrackingScalingPolicyConfigurationDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/AutoScalingPolicyDescription AWS API Documentation
+    #
+    class AutoScalingPolicyDescription < Struct.new(
+      :policy_name,
+      :target_tracking_scaling_policy_configuration)
+      include Aws::Structure
+    end
+
+    # Represents the autoscaling policy to be modified.
+    #
+    # @note When making an API call, you may pass AutoScalingPolicyUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         policy_name: "AutoScalingPolicyName",
+    #         target_tracking_scaling_policy_configuration: { # required
+    #           disable_scale_in: false,
+    #           scale_in_cooldown: 1,
+    #           scale_out_cooldown: 1,
+    #           target_value: 1.0, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] policy_name
+    #   The name of the scaling policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_tracking_scaling_policy_configuration
+    #   Represents a target tracking scaling policy configuration.
+    #   @return [Types::AutoScalingTargetTrackingScalingPolicyConfigurationUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/AutoScalingPolicyUpdate AWS API Documentation
+    #
+    class AutoScalingPolicyUpdate < Struct.new(
+      :policy_name,
+      :target_tracking_scaling_policy_configuration)
+      include Aws::Structure
+    end
+
+    # Represents the autoscaling settings for a global table or global
+    # secondary index.
+    #
+    # @!attribute [rw] minimum_units
+    #   The minimum capacity units that a global table or global secondary
+    #   index should be scaled down to.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_units
+    #   The maximum capacity units that a global table or global secondary
+    #   index should be scaled up to.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] auto_scaling_disabled
+    #   Disabled autoscaling for this global table or global secondary
+    #   index.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] auto_scaling_role_arn
+    #   Role ARN used for configuring autoScaling policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] scaling_policies
+    #   Information about the scaling policies.
+    #   @return [Array<Types::AutoScalingPolicyDescription>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/AutoScalingSettingsDescription AWS API Documentation
+    #
+    class AutoScalingSettingsDescription < Struct.new(
+      :minimum_units,
+      :maximum_units,
+      :auto_scaling_disabled,
+      :auto_scaling_role_arn,
+      :scaling_policies)
+      include Aws::Structure
+    end
+
+    # Represents the autoscaling settings to be modified for a global table
+    # or global secondary index.
+    #
+    # @note When making an API call, you may pass AutoScalingSettingsUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         minimum_units: 1,
+    #         maximum_units: 1,
+    #         auto_scaling_disabled: false,
+    #         auto_scaling_role_arn: "AutoScalingRoleArn",
+    #         scaling_policy_update: {
+    #           policy_name: "AutoScalingPolicyName",
+    #           target_tracking_scaling_policy_configuration: { # required
+    #             disable_scale_in: false,
+    #             scale_in_cooldown: 1,
+    #             scale_out_cooldown: 1,
+    #             target_value: 1.0, # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] minimum_units
+    #   The minimum capacity units that a global table or global secondary
+    #   index should be scaled down to.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_units
+    #   The maximum capacity units that a global table or global secondary
+    #   index should be scaled up to.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] auto_scaling_disabled
+    #   Disabled autoscaling for this global table or global secondary
+    #   index.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] auto_scaling_role_arn
+    #   Role ARN used for configuring autoscaling policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] scaling_policy_update
+    #   The scaling policy to apply for scaling target global table or
+    #   global secondary index capacity units.
+    #   @return [Types::AutoScalingPolicyUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/AutoScalingSettingsUpdate AWS API Documentation
+    #
+    class AutoScalingSettingsUpdate < Struct.new(
+      :minimum_units,
+      :maximum_units,
+      :auto_scaling_disabled,
+      :auto_scaling_role_arn,
+      :scaling_policy_update)
+      include Aws::Structure
+    end
+
+    # Represents the properties of a target tracking scaling policy.
+    #
+    # @!attribute [rw] disable_scale_in
+    #   Indicates whether scale in by the target tracking policy is
+    #   disabled. If the value is true, scale in is disabled and the target
+    #   tracking policy won't remove capacity from the scalable resource.
+    #   Otherwise, scale in is enabled and the target tracking policy can
+    #   remove capacity from the scalable resource. The default value is
+    #   false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] scale_in_cooldown
+    #   The amount of time, in seconds, after a scale in activity completes
+    #   before another scale in activity can start. The cooldown period is
+    #   used to block subsequent scale in requests until it has expired. You
+    #   should scale in conservatively to protect your application's
+    #   availability. However, if another alarm triggers a scale out policy
+    #   during the cooldown period after a scale-in, application autoscaling
+    #   scales out your scalable target immediately.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scale_out_cooldown
+    #   The amount of time, in seconds, after a scale out activity completes
+    #   before another scale out activity can start. While the cooldown
+    #   period is in effect, the capacity that has been added by the
+    #   previous scale out event that initiated the cooldown is calculated
+    #   as part of the desired capacity for the next scale out. You should
+    #   continuously (but not excessively) scale out.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] target_value
+    #   The target value for the metric. The range is 8.515920e-109 to
+    #   1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2).
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/AutoScalingTargetTrackingScalingPolicyConfigurationDescription AWS API Documentation
+    #
+    class AutoScalingTargetTrackingScalingPolicyConfigurationDescription < Struct.new(
+      :disable_scale_in,
+      :scale_in_cooldown,
+      :scale_out_cooldown,
+      :target_value)
+      include Aws::Structure
+    end
+
+    # Represents the settings of a target tracking scaling policy that will
+    # be modified.
+    #
+    # @note When making an API call, you may pass AutoScalingTargetTrackingScalingPolicyConfigurationUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         disable_scale_in: false,
+    #         scale_in_cooldown: 1,
+    #         scale_out_cooldown: 1,
+    #         target_value: 1.0, # required
+    #       }
+    #
+    # @!attribute [rw] disable_scale_in
+    #   Indicates whether scale in by the target tracking policy is
+    #   disabled. If the value is true, scale in is disabled and the target
+    #   tracking policy won't remove capacity from the scalable resource.
+    #   Otherwise, scale in is enabled and the target tracking policy can
+    #   remove capacity from the scalable resource. The default value is
+    #   false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] scale_in_cooldown
+    #   The amount of time, in seconds, after a scale in activity completes
+    #   before another scale in activity can start. The cooldown period is
+    #   used to block subsequent scale in requests until it has expired. You
+    #   should scale in conservatively to protect your application's
+    #   availability. However, if another alarm triggers a scale out policy
+    #   during the cooldown period after a scale-in, application autoscaling
+    #   scales out your scalable target immediately.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scale_out_cooldown
+    #   The amount of time, in seconds, after a scale out activity completes
+    #   before another scale out activity can start. While the cooldown
+    #   period is in effect, the capacity that has been added by the
+    #   previous scale out event that initiated the cooldown is calculated
+    #   as part of the desired capacity for the next scale out. You should
+    #   continuously (but not excessively) scale out.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] target_value
+    #   The target value for the metric. The range is 8.515920e-109 to
+    #   1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2).
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/AutoScalingTargetTrackingScalingPolicyConfigurationUpdate AWS API Documentation
+    #
+    class AutoScalingTargetTrackingScalingPolicyConfigurationUpdate < Struct.new(
+      :disable_scale_in,
+      :scale_in_cooldown,
+      :scale_out_cooldown,
+      :target_value)
+      include Aws::Structure
+    end
+
     # Contains the description of the backup created for the table.
     #
     # @!attribute [rw] backup_details
@@ -2976,6 +3220,21 @@ module Aws::DynamoDB
     #       {
     #         index_name: "IndexName", # required
     #         provisioned_write_capacity_units: 1,
+    #         provisioned_write_capacity_auto_scaling_settings_update: {
+    #           minimum_units: 1,
+    #           maximum_units: 1,
+    #           auto_scaling_disabled: false,
+    #           auto_scaling_role_arn: "AutoScalingRoleArn",
+    #           scaling_policy_update: {
+    #             policy_name: "AutoScalingPolicyName",
+    #             target_tracking_scaling_policy_configuration: { # required
+    #               disable_scale_in: false,
+    #               scale_in_cooldown: 1,
+    #               scale_out_cooldown: 1,
+    #               target_value: 1.0, # required
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] index_name
@@ -2988,11 +3247,17 @@ module Aws::DynamoDB
     #   returns a `ThrottlingException.`
     #   @return [Integer]
     #
+    # @!attribute [rw] provisioned_write_capacity_auto_scaling_settings_update
+    #   AutoScaling settings for managing a global secondary index's write
+    #   capacity units.
+    #   @return [Types::AutoScalingSettingsUpdate]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalTableGlobalSecondaryIndexSettingsUpdate AWS API Documentation
     #
     class GlobalTableGlobalSecondaryIndexSettingsUpdate < Struct.new(
       :index_name,
-      :provisioned_write_capacity_units)
+      :provisioned_write_capacity_units,
+      :provisioned_write_capacity_auto_scaling_settings_update)
       include Aws::Structure
     end
 
@@ -4704,10 +4969,20 @@ module Aws::DynamoDB
     #   before DynamoDB returns a `ThrottlingException`.
     #   @return [Integer]
     #
+    # @!attribute [rw] provisioned_read_capacity_auto_scaling_settings
+    #   Autoscaling settings for a global secondary index replica's read
+    #   capacity units.
+    #   @return [Types::AutoScalingSettingsDescription]
+    #
     # @!attribute [rw] provisioned_write_capacity_units
     #   The maximum number of writes consumed per second before DynamoDB
     #   returns a `ThrottlingException`.
     #   @return [Integer]
+    #
+    # @!attribute [rw] provisioned_write_capacity_auto_scaling_settings
+    #   AutoScaling settings for a global secondary index replica's write
+    #   capacity units.
+    #   @return [Types::AutoScalingSettingsDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaGlobalSecondaryIndexSettingsDescription AWS API Documentation
     #
@@ -4715,7 +4990,9 @@ module Aws::DynamoDB
       :index_name,
       :index_status,
       :provisioned_read_capacity_units,
-      :provisioned_write_capacity_units)
+      :provisioned_read_capacity_auto_scaling_settings,
+      :provisioned_write_capacity_units,
+      :provisioned_write_capacity_auto_scaling_settings)
       include Aws::Structure
     end
 
@@ -4728,6 +5005,21 @@ module Aws::DynamoDB
     #       {
     #         index_name: "IndexName", # required
     #         provisioned_read_capacity_units: 1,
+    #         provisioned_read_capacity_auto_scaling_settings_update: {
+    #           minimum_units: 1,
+    #           maximum_units: 1,
+    #           auto_scaling_disabled: false,
+    #           auto_scaling_role_arn: "AutoScalingRoleArn",
+    #           scaling_policy_update: {
+    #             policy_name: "AutoScalingPolicyName",
+    #             target_tracking_scaling_policy_configuration: { # required
+    #               disable_scale_in: false,
+    #               scale_in_cooldown: 1,
+    #               scale_out_cooldown: 1,
+    #               target_value: 1.0, # required
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] index_name
@@ -4740,11 +5032,17 @@ module Aws::DynamoDB
     #   before DynamoDB returns a `ThrottlingException`.
     #   @return [Integer]
     #
+    # @!attribute [rw] provisioned_read_capacity_auto_scaling_settings_update
+    #   Autoscaling settings for managing a global secondary index
+    #   replica's read capacity units.
+    #   @return [Types::AutoScalingSettingsUpdate]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaGlobalSecondaryIndexSettingsUpdate AWS API Documentation
     #
     class ReplicaGlobalSecondaryIndexSettingsUpdate < Struct.new(
       :index_name,
-      :provisioned_read_capacity_units)
+      :provisioned_read_capacity_units,
+      :provisioned_read_capacity_auto_scaling_settings_update)
       include Aws::Structure
     end
 
@@ -4777,6 +5075,11 @@ module Aws::DynamoDB
     #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput
     #   @return [Integer]
     #
+    # @!attribute [rw] replica_provisioned_read_capacity_auto_scaling_settings
+    #   Autoscaling settings for a global table replica's read capacity
+    #   units.
+    #   @return [Types::AutoScalingSettingsDescription]
+    #
     # @!attribute [rw] replica_provisioned_write_capacity_units
     #   The maximum number of writes consumed per second before DynamoDB
     #   returns a `ThrottlingException`. For more information, see
@@ -4788,6 +5091,11 @@ module Aws::DynamoDB
     #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput
     #   @return [Integer]
     #
+    # @!attribute [rw] replica_provisioned_write_capacity_auto_scaling_settings
+    #   AutoScaling settings for a global table replica's write capacity
+    #   units.
+    #   @return [Types::AutoScalingSettingsDescription]
+    #
     # @!attribute [rw] replica_global_secondary_index_settings
     #   Replica global secondary index settings for the global table.
     #   @return [Array<Types::ReplicaGlobalSecondaryIndexSettingsDescription>]
@@ -4798,7 +5106,9 @@ module Aws::DynamoDB
       :region_name,
       :replica_status,
       :replica_provisioned_read_capacity_units,
+      :replica_provisioned_read_capacity_auto_scaling_settings,
       :replica_provisioned_write_capacity_units,
+      :replica_provisioned_write_capacity_auto_scaling_settings,
       :replica_global_secondary_index_settings)
       include Aws::Structure
     end
@@ -4812,10 +5122,40 @@ module Aws::DynamoDB
     #       {
     #         region_name: "RegionName", # required
     #         replica_provisioned_read_capacity_units: 1,
+    #         replica_provisioned_read_capacity_auto_scaling_settings_update: {
+    #           minimum_units: 1,
+    #           maximum_units: 1,
+    #           auto_scaling_disabled: false,
+    #           auto_scaling_role_arn: "AutoScalingRoleArn",
+    #           scaling_policy_update: {
+    #             policy_name: "AutoScalingPolicyName",
+    #             target_tracking_scaling_policy_configuration: { # required
+    #               disable_scale_in: false,
+    #               scale_in_cooldown: 1,
+    #               scale_out_cooldown: 1,
+    #               target_value: 1.0, # required
+    #             },
+    #           },
+    #         },
     #         replica_global_secondary_index_settings_update: [
     #           {
     #             index_name: "IndexName", # required
     #             provisioned_read_capacity_units: 1,
+    #             provisioned_read_capacity_auto_scaling_settings_update: {
+    #               minimum_units: 1,
+    #               maximum_units: 1,
+    #               auto_scaling_disabled: false,
+    #               auto_scaling_role_arn: "AutoScalingRoleArn",
+    #               scaling_policy_update: {
+    #                 policy_name: "AutoScalingPolicyName",
+    #                 target_tracking_scaling_policy_configuration: { # required
+    #                   disable_scale_in: false,
+    #                   scale_in_cooldown: 1,
+    #                   scale_out_cooldown: 1,
+    #                   target_value: 1.0, # required
+    #                 },
+    #               },
+    #             },
     #           },
     #         ],
     #       }
@@ -4835,6 +5175,11 @@ module Aws::DynamoDB
     #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput
     #   @return [Integer]
     #
+    # @!attribute [rw] replica_provisioned_read_capacity_auto_scaling_settings_update
+    #   Autoscaling settings for managing a global table replica's read
+    #   capacity units.
+    #   @return [Types::AutoScalingSettingsUpdate]
+    #
     # @!attribute [rw] replica_global_secondary_index_settings_update
     #   Represents the settings of a global secondary index for a global
     #   table that will be modified.
@@ -4845,6 +5190,7 @@ module Aws::DynamoDB
     class ReplicaSettingsUpdate < Struct.new(
       :region_name,
       :replica_provisioned_read_capacity_units,
+      :replica_provisioned_read_capacity_auto_scaling_settings_update,
       :replica_global_secondary_index_settings_update)
       include Aws::Structure
     end
@@ -6181,20 +6527,80 @@ module Aws::DynamoDB
     #       {
     #         global_table_name: "TableName", # required
     #         global_table_provisioned_write_capacity_units: 1,
+    #         global_table_provisioned_write_capacity_auto_scaling_settings_update: {
+    #           minimum_units: 1,
+    #           maximum_units: 1,
+    #           auto_scaling_disabled: false,
+    #           auto_scaling_role_arn: "AutoScalingRoleArn",
+    #           scaling_policy_update: {
+    #             policy_name: "AutoScalingPolicyName",
+    #             target_tracking_scaling_policy_configuration: { # required
+    #               disable_scale_in: false,
+    #               scale_in_cooldown: 1,
+    #               scale_out_cooldown: 1,
+    #               target_value: 1.0, # required
+    #             },
+    #           },
+    #         },
     #         global_table_global_secondary_index_settings_update: [
     #           {
     #             index_name: "IndexName", # required
     #             provisioned_write_capacity_units: 1,
+    #             provisioned_write_capacity_auto_scaling_settings_update: {
+    #               minimum_units: 1,
+    #               maximum_units: 1,
+    #               auto_scaling_disabled: false,
+    #               auto_scaling_role_arn: "AutoScalingRoleArn",
+    #               scaling_policy_update: {
+    #                 policy_name: "AutoScalingPolicyName",
+    #                 target_tracking_scaling_policy_configuration: { # required
+    #                   disable_scale_in: false,
+    #                   scale_in_cooldown: 1,
+    #                   scale_out_cooldown: 1,
+    #                   target_value: 1.0, # required
+    #                 },
+    #               },
+    #             },
     #           },
     #         ],
     #         replica_settings_update: [
     #           {
     #             region_name: "RegionName", # required
     #             replica_provisioned_read_capacity_units: 1,
+    #             replica_provisioned_read_capacity_auto_scaling_settings_update: {
+    #               minimum_units: 1,
+    #               maximum_units: 1,
+    #               auto_scaling_disabled: false,
+    #               auto_scaling_role_arn: "AutoScalingRoleArn",
+    #               scaling_policy_update: {
+    #                 policy_name: "AutoScalingPolicyName",
+    #                 target_tracking_scaling_policy_configuration: { # required
+    #                   disable_scale_in: false,
+    #                   scale_in_cooldown: 1,
+    #                   scale_out_cooldown: 1,
+    #                   target_value: 1.0, # required
+    #                 },
+    #               },
+    #             },
     #             replica_global_secondary_index_settings_update: [
     #               {
     #                 index_name: "IndexName", # required
     #                 provisioned_read_capacity_units: 1,
+    #                 provisioned_read_capacity_auto_scaling_settings_update: {
+    #                   minimum_units: 1,
+    #                   maximum_units: 1,
+    #                   auto_scaling_disabled: false,
+    #                   auto_scaling_role_arn: "AutoScalingRoleArn",
+    #                   scaling_policy_update: {
+    #                     policy_name: "AutoScalingPolicyName",
+    #                     target_tracking_scaling_policy_configuration: { # required
+    #                       disable_scale_in: false,
+    #                       scale_in_cooldown: 1,
+    #                       scale_out_cooldown: 1,
+    #                       target_value: 1.0, # required
+    #                     },
+    #                   },
+    #                 },
     #               },
     #             ],
     #           },
@@ -6209,6 +6615,11 @@ module Aws::DynamoDB
     #   The maximum number of writes consumed per second before DynamoDB
     #   returns a `ThrottlingException.`
     #   @return [Integer]
+    #
+    # @!attribute [rw] global_table_provisioned_write_capacity_auto_scaling_settings_update
+    #   AutoScaling settings for managing provisioned write capacity for the
+    #   global table.
+    #   @return [Types::AutoScalingSettingsUpdate]
     #
     # @!attribute [rw] global_table_global_secondary_index_settings_update
     #   Represents the settings of a global secondary index for a global
@@ -6225,6 +6636,7 @@ module Aws::DynamoDB
     class UpdateGlobalTableSettingsInput < Struct.new(
       :global_table_name,
       :global_table_provisioned_write_capacity_units,
+      :global_table_provisioned_write_capacity_auto_scaling_settings_update,
       :global_table_global_secondary_index_settings_update,
       :replica_settings_update)
       include Aws::Structure

@@ -1924,12 +1924,52 @@ module Aws::DynamoDB
     #   resp.replica_settings[0].region_name #=> String
     #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
     #   resp.replica_settings[0].replica_provisioned_read_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.minimum_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.maximum_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.auto_scaling_disabled #=> Boolean
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.auto_scaling_role_arn #=> String
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies #=> Array
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].policy_name #=> String
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
     #   resp.replica_settings[0].replica_provisioned_write_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.minimum_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.maximum_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.auto_scaling_disabled #=> Boolean
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.auto_scaling_role_arn #=> String
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies #=> Array
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].policy_name #=> String
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
     #   resp.replica_settings[0].replica_global_secondary_index_settings #=> Array
     #   resp.replica_settings[0].replica_global_secondary_index_settings[0].index_name #=> String
     #   resp.replica_settings[0].replica_global_secondary_index_settings[0].index_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
     #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.minimum_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.maximum_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.auto_scaling_disabled #=> Boolean
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.auto_scaling_role_arn #=> String
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies #=> Array
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].policy_name #=> String
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
     #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.minimum_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.maximum_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.auto_scaling_disabled #=> Boolean
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.auto_scaling_role_arn #=> String
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies #=> Array
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].policy_name #=> String
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeGlobalTableSettings AWS API Documentation
     #
@@ -4390,6 +4430,10 @@ module Aws::DynamoDB
     #   The maximum number of writes consumed per second before DynamoDB
     #   returns a `ThrottlingException.`
     #
+    # @option params [Types::AutoScalingSettingsUpdate] :global_table_provisioned_write_capacity_auto_scaling_settings_update
+    #   AutoScaling settings for managing provisioned write capacity for the
+    #   global table.
+    #
     # @option params [Array<Types::GlobalTableGlobalSecondaryIndexSettingsUpdate>] :global_table_global_secondary_index_settings_update
     #   Represents the settings of a global secondary index for a global table
     #   that will be modified.
@@ -4408,20 +4452,80 @@ module Aws::DynamoDB
     #   resp = client.update_global_table_settings({
     #     global_table_name: "TableName", # required
     #     global_table_provisioned_write_capacity_units: 1,
+    #     global_table_provisioned_write_capacity_auto_scaling_settings_update: {
+    #       minimum_units: 1,
+    #       maximum_units: 1,
+    #       auto_scaling_disabled: false,
+    #       auto_scaling_role_arn: "AutoScalingRoleArn",
+    #       scaling_policy_update: {
+    #         policy_name: "AutoScalingPolicyName",
+    #         target_tracking_scaling_policy_configuration: { # required
+    #           disable_scale_in: false,
+    #           scale_in_cooldown: 1,
+    #           scale_out_cooldown: 1,
+    #           target_value: 1.0, # required
+    #         },
+    #       },
+    #     },
     #     global_table_global_secondary_index_settings_update: [
     #       {
     #         index_name: "IndexName", # required
     #         provisioned_write_capacity_units: 1,
+    #         provisioned_write_capacity_auto_scaling_settings_update: {
+    #           minimum_units: 1,
+    #           maximum_units: 1,
+    #           auto_scaling_disabled: false,
+    #           auto_scaling_role_arn: "AutoScalingRoleArn",
+    #           scaling_policy_update: {
+    #             policy_name: "AutoScalingPolicyName",
+    #             target_tracking_scaling_policy_configuration: { # required
+    #               disable_scale_in: false,
+    #               scale_in_cooldown: 1,
+    #               scale_out_cooldown: 1,
+    #               target_value: 1.0, # required
+    #             },
+    #           },
+    #         },
     #       },
     #     ],
     #     replica_settings_update: [
     #       {
     #         region_name: "RegionName", # required
     #         replica_provisioned_read_capacity_units: 1,
+    #         replica_provisioned_read_capacity_auto_scaling_settings_update: {
+    #           minimum_units: 1,
+    #           maximum_units: 1,
+    #           auto_scaling_disabled: false,
+    #           auto_scaling_role_arn: "AutoScalingRoleArn",
+    #           scaling_policy_update: {
+    #             policy_name: "AutoScalingPolicyName",
+    #             target_tracking_scaling_policy_configuration: { # required
+    #               disable_scale_in: false,
+    #               scale_in_cooldown: 1,
+    #               scale_out_cooldown: 1,
+    #               target_value: 1.0, # required
+    #             },
+    #           },
+    #         },
     #         replica_global_secondary_index_settings_update: [
     #           {
     #             index_name: "IndexName", # required
     #             provisioned_read_capacity_units: 1,
+    #             provisioned_read_capacity_auto_scaling_settings_update: {
+    #               minimum_units: 1,
+    #               maximum_units: 1,
+    #               auto_scaling_disabled: false,
+    #               auto_scaling_role_arn: "AutoScalingRoleArn",
+    #               scaling_policy_update: {
+    #                 policy_name: "AutoScalingPolicyName",
+    #                 target_tracking_scaling_policy_configuration: { # required
+    #                   disable_scale_in: false,
+    #                   scale_in_cooldown: 1,
+    #                   scale_out_cooldown: 1,
+    #                   target_value: 1.0, # required
+    #                 },
+    #               },
+    #             },
     #           },
     #         ],
     #       },
@@ -4435,12 +4539,52 @@ module Aws::DynamoDB
     #   resp.replica_settings[0].region_name #=> String
     #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
     #   resp.replica_settings[0].replica_provisioned_read_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.minimum_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.maximum_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.auto_scaling_disabled #=> Boolean
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.auto_scaling_role_arn #=> String
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies #=> Array
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].policy_name #=> String
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
     #   resp.replica_settings[0].replica_provisioned_write_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.minimum_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.maximum_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.auto_scaling_disabled #=> Boolean
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.auto_scaling_role_arn #=> String
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies #=> Array
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].policy_name #=> String
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
     #   resp.replica_settings[0].replica_global_secondary_index_settings #=> Array
     #   resp.replica_settings[0].replica_global_secondary_index_settings[0].index_name #=> String
     #   resp.replica_settings[0].replica_global_secondary_index_settings[0].index_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
     #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.minimum_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.maximum_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.auto_scaling_disabled #=> Boolean
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.auto_scaling_role_arn #=> String
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies #=> Array
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].policy_name #=> String
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
     #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.minimum_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.maximum_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.auto_scaling_disabled #=> Boolean
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.auto_scaling_role_arn #=> String
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies #=> Array
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].policy_name #=> String
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateGlobalTableSettings AWS API Documentation
     #
@@ -5174,7 +5318,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
