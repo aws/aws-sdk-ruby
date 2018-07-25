@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the API, documentation, and integration test for Elastic Load Balancing.
+
 2.11.94 (2018-07-24)
 ------------------
 
