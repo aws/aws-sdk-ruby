@@ -302,23 +302,30 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [Array<Types::Certificate>] :certificates
     #   \[HTTPS listeners\] The default SSL server certificate. You must
-    #   provide exactly one certificate. To create a certificate list, use
-    #   AddListenerCertificates.
+    #   provide exactly one default certificate. To create a certificate list,
+    #   use AddListenerCertificates.
     #
     # @option params [required, Array<Types::Action>] :default_actions
     #   The actions for the default rule. The rule must include one forward
-    #   action.
+    #   action or one or more fixed-response actions.
     #
     #   If the action type is `forward`, you can specify a single target
     #   group. The protocol of the target group must be HTTP or HTTPS for an
     #   Application Load Balancer or TCP for a Network Load Balancer.
     #
-    #   If the action type is `authenticate-oidc`, you can use an identity
-    #   provider that is OpenID Connect (OIDC) compliant to authenticate users
-    #   as they access your application.
+    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you can
+    #   use an identity provider that is OpenID Connect (OIDC) compliant to
+    #   authenticate users as they access your application.
     #
-    #   If the action type is `authenticate-cognito`, you can use Amazon
-    #   Cognito to authenticate users as they access your application.
+    #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
+    #   can use Amazon Cognito to authenticate users as they access your
+    #   application.
+    #
+    #   \[Application Load Balancer\] If the action type is `redirect`, you
+    #   can redirect HTTP and HTTPS requests.
+    #
+    #   \[Application Load Balancer\] If the action type is `fixed-response`,
+    #   you can return a custom HTTP response.
     #
     # @return [Types::CreateListenerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -424,7 +431,7 @@ module Aws::ElasticLoadBalancingV2
     #     ],
     #     default_actions: [ # required
     #       {
-    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito
+    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #         target_group_arn: "TargetGroupArn",
     #         authenticate_oidc_config: {
     #           issuer: "AuthenticateOidcActionIssuer", # required
@@ -454,6 +461,19 @@ module Aws::ElasticLoadBalancingV2
     #           on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
     #         },
     #         order: 1,
+    #         redirect_config: {
+    #           protocol: "RedirectActionProtocol",
+    #           port: "RedirectActionPort",
+    #           host: "RedirectActionHost",
+    #           path: "RedirectActionPath",
+    #           query: "RedirectActionQuery",
+    #           status_code: "HTTP_301", # required, accepts HTTP_301, HTTP_302
+    #         },
+    #         fixed_response_config: {
+    #           message_body: "FixedResponseActionMessage",
+    #           status_code: "FixedResponseActionStatusCode", # required
+    #           content_type: "FixedResponseActionContentType",
+    #         },
     #       },
     #     ],
     #   })
@@ -470,7 +490,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].certificates[0].is_default #=> Boolean
     #   resp.listeners[0].ssl_policy #=> String
     #   resp.listeners[0].default_actions #=> Array
-    #   resp.listeners[0].default_actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito"
+    #   resp.listeners[0].default_actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.listeners[0].default_actions[0].target_group_arn #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -494,6 +514,15 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.authentication_request_extra_params["AuthenticateCognitoActionAuthenticationRequestParamName"] #=> String
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
     #   resp.listeners[0].default_actions[0].order #=> Integer
+    #   resp.listeners[0].default_actions[0].redirect_config.protocol #=> String
+    #   resp.listeners[0].default_actions[0].redirect_config.port #=> String
+    #   resp.listeners[0].default_actions[0].redirect_config.host #=> String
+    #   resp.listeners[0].default_actions[0].redirect_config.path #=> String
+    #   resp.listeners[0].default_actions[0].redirect_config.query #=> String
+    #   resp.listeners[0].default_actions[0].redirect_config.status_code #=> String, one of "HTTP_301", "HTTP_302"
+    #   resp.listeners[0].default_actions[0].fixed_response_config.message_body #=> String
+    #   resp.listeners[0].default_actions[0].fixed_response_config.status_code #=> String
+    #   resp.listeners[0].default_actions[0].fixed_response_config.content_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateListener AWS API Documentation
     #
@@ -573,7 +602,7 @@ module Aws::ElasticLoadBalancingV2
     #   addresses. The DNS name of an Internet-facing load balancer is
     #   publicly resolvable to the public IP addresses of the nodes.
     #   Therefore, Internet-facing load balancers can route requests from
-    #   clients over the Internet.
+    #   clients over the internet.
     #
     #   The nodes of an internal load balancer have only private IP addresses.
     #   The DNS name of an internal load balancer is publicly resolvable to
@@ -773,7 +802,7 @@ module Aws::ElasticLoadBalancingV2
     #   If the field name is `host-header`, you can specify a single host name
     #   (for example, my.example.com). A host name is case insensitive, can be
     #   up to 128 characters in length, and can contain any of the following
-    #   characters. Note that you can include up to three wildcard characters.
+    #   characters. You can include up to three wildcard characters.
     #
     #   * A-Z, a-z, 0-9
     #
@@ -784,9 +813,9 @@ module Aws::ElasticLoadBalancingV2
     #   * ? (matches exactly 1 character)
     #
     #   If the field name is `path-pattern`, you can specify a single path
-    #   pattern. A path pattern is case sensitive, can be up to 128 characters
-    #   in length, and can contain any of the following characters. Note that
-    #   you can include up to three wildcard characters.
+    #   pattern. A path pattern is case-sensitive, can be up to 128 characters
+    #   in length, and can contain any of the following characters. You can
+    #   include up to three wildcard characters.
     #
     #   * A-Z, a-z, 0-9
     #
@@ -803,17 +832,25 @@ module Aws::ElasticLoadBalancingV2
     #   priority.
     #
     # @option params [required, Array<Types::Action>] :actions
-    #   The actions. Each rule must include one forward action.
+    #   The actions. Each rule must include exactly one of the following types
+    #   of actions: `forward`, `fixed-response`, or `redirect`.
     #
     #   If the action type is `forward`, you can specify a single target
     #   group.
     #
-    #   If the action type is `authenticate-oidc`, you can use an identity
-    #   provider that is OpenID Connect (OIDC) compliant to authenticate users
-    #   as they access your application.
+    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you can
+    #   use an identity provider that is OpenID Connect (OIDC) compliant to
+    #   authenticate users as they access your application.
     #
-    #   If the action type is `authenticate-cognito`, you can use Amazon
-    #   Cognito to authenticate users as they access your application.
+    #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
+    #   can use Amazon Cognito to authenticate users as they access your
+    #   application.
+    #
+    #   \[Application Load Balancer\] If the action type is `redirect`, you
+    #   can redirect HTTP and HTTPS requests.
+    #
+    #   \[Application Load Balancer\] If the action type is `fixed-response`,
+    #   you can return a custom HTTP response.
     #
     # @return [Types::CreateRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -882,7 +919,7 @@ module Aws::ElasticLoadBalancingV2
     #     priority: 1, # required
     #     actions: [ # required
     #       {
-    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito
+    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #         target_group_arn: "TargetGroupArn",
     #         authenticate_oidc_config: {
     #           issuer: "AuthenticateOidcActionIssuer", # required
@@ -912,6 +949,19 @@ module Aws::ElasticLoadBalancingV2
     #           on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
     #         },
     #         order: 1,
+    #         redirect_config: {
+    #           protocol: "RedirectActionProtocol",
+    #           port: "RedirectActionPort",
+    #           host: "RedirectActionHost",
+    #           path: "RedirectActionPath",
+    #           query: "RedirectActionQuery",
+    #           status_code: "HTTP_301", # required, accepts HTTP_301, HTTP_302
+    #         },
+    #         fixed_response_config: {
+    #           message_body: "FixedResponseActionMessage",
+    #           status_code: "FixedResponseActionStatusCode", # required
+    #           content_type: "FixedResponseActionContentType",
+    #         },
     #       },
     #     ],
     #   })
@@ -926,7 +976,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].values #=> Array
     #   resp.rules[0].conditions[0].values[0] #=> String
     #   resp.rules[0].actions #=> Array
-    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito"
+    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.rules[0].actions[0].target_group_arn #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -950,6 +1000,15 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].authenticate_cognito_config.authentication_request_extra_params["AuthenticateCognitoActionAuthenticationRequestParamName"] #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
     #   resp.rules[0].actions[0].order #=> Integer
+    #   resp.rules[0].actions[0].redirect_config.protocol #=> String
+    #   resp.rules[0].actions[0].redirect_config.port #=> String
+    #   resp.rules[0].actions[0].redirect_config.host #=> String
+    #   resp.rules[0].actions[0].redirect_config.path #=> String
+    #   resp.rules[0].actions[0].redirect_config.query #=> String
+    #   resp.rules[0].actions[0].redirect_config.status_code #=> String, one of "HTTP_301", "HTTP_302"
+    #   resp.rules[0].actions[0].fixed_response_config.message_body #=> String
+    #   resp.rules[0].actions[0].fixed_response_config.status_code #=> String
+    #   resp.rules[0].actions[0].fixed_response_config.content_type #=> String
     #   resp.rules[0].is_default #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateRule AWS API Documentation
@@ -1023,14 +1082,14 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [Integer] :health_check_interval_seconds
     #   The approximate amount of time, in seconds, between health checks of
-    #   an individual target. For Application Load Balancers, the range is 5
-    #   to 300 seconds. For Network Load Balancers, the supported values are
-    #   10 or 30 seconds. The default is 30 seconds.
+    #   an individual target. For Application Load Balancers, the range is
+    #   5–300 seconds. For Network Load Balancers, the supported values are 10
+    #   or 30 seconds. The default is 30 seconds.
     #
     # @option params [Integer] :health_check_timeout_seconds
     #   The amount of time, in seconds, during which no response from a target
     #   means a failed health check. For Application Load Balancers, the range
-    #   is 2 to 60 seconds and the default is 5 seconds. For Network Load
+    #   is 2–60 seconds and the default is 5 seconds. For Network Load
     #   Balancers, this is 10 seconds for TCP and HTTPS health checks and 6
     #   seconds for HTTP health checks.
     #
@@ -1054,8 +1113,8 @@ module Aws::ElasticLoadBalancingV2
     #   The type of target that you must specify when registering targets with
     #   this target group. The possible values are `instance` (targets are
     #   specified by instance ID) or `ip` (targets are specified by IP
-    #   address). The default is `instance`. Note that you can't specify
-    #   targets for a target group using both instance IDs and IP addresses.
+    #   address). The default is `instance`. You can't specify targets for a
+    #   target group using both instance IDs and IP addresses.
     #
     #   If the target type is `ip`, specify IP addresses from the subnets of
     #   the virtual private cloud (VPC) for the target group, the RFC 1918
@@ -1155,7 +1214,7 @@ module Aws::ElasticLoadBalancingV2
     # Deletes the specified listener.
     #
     # Alternatively, your listener is deleted when you delete the load
-    # balancer it is attached to using DeleteLoadBalancer.
+    # balancer to which it is attached, using DeleteLoadBalancer.
     #
     # @option params [required, String] :listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
@@ -1502,7 +1561,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].certificates[0].is_default #=> Boolean
     #   resp.listeners[0].ssl_policy #=> String
     #   resp.listeners[0].default_actions #=> Array
-    #   resp.listeners[0].default_actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito"
+    #   resp.listeners[0].default_actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.listeners[0].default_actions[0].target_group_arn #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -1526,6 +1585,15 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.authentication_request_extra_params["AuthenticateCognitoActionAuthenticationRequestParamName"] #=> String
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
     #   resp.listeners[0].default_actions[0].order #=> Integer
+    #   resp.listeners[0].default_actions[0].redirect_config.protocol #=> String
+    #   resp.listeners[0].default_actions[0].redirect_config.port #=> String
+    #   resp.listeners[0].default_actions[0].redirect_config.host #=> String
+    #   resp.listeners[0].default_actions[0].redirect_config.path #=> String
+    #   resp.listeners[0].default_actions[0].redirect_config.query #=> String
+    #   resp.listeners[0].default_actions[0].redirect_config.status_code #=> String, one of "HTTP_301", "HTTP_302"
+    #   resp.listeners[0].default_actions[0].fixed_response_config.message_body #=> String
+    #   resp.listeners[0].default_actions[0].fixed_response_config.status_code #=> String
+    #   resp.listeners[0].default_actions[0].fixed_response_config.content_type #=> String
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeListeners AWS API Documentation
@@ -1798,7 +1866,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].values #=> Array
     #   resp.rules[0].conditions[0].values[0] #=> String
     #   resp.rules[0].actions #=> Array
-    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito"
+    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.rules[0].actions[0].target_group_arn #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -1822,6 +1890,15 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].authenticate_cognito_config.authentication_request_extra_params["AuthenticateCognitoActionAuthenticationRequestParamName"] #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
     #   resp.rules[0].actions[0].order #=> Integer
+    #   resp.rules[0].actions[0].redirect_config.protocol #=> String
+    #   resp.rules[0].actions[0].redirect_config.port #=> String
+    #   resp.rules[0].actions[0].redirect_config.host #=> String
+    #   resp.rules[0].actions[0].redirect_config.path #=> String
+    #   resp.rules[0].actions[0].redirect_config.query #=> String
+    #   resp.rules[0].actions[0].redirect_config.status_code #=> String, one of "HTTP_301", "HTTP_302"
+    #   resp.rules[0].actions[0].fixed_response_config.message_body #=> String
+    #   resp.rules[0].actions[0].fixed_response_config.status_code #=> String
+    #   resp.rules[0].actions[0].fixed_response_config.content_type #=> String
     #   resp.rules[0].is_default #=> Boolean
     #   resp.next_marker #=> String
     #
@@ -2374,23 +2451,30 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [Array<Types::Certificate>] :certificates
     #   \[HTTPS listeners\] The default SSL server certificate. You must
-    #   provide exactly one certificate. To create a certificate list, use
-    #   AddListenerCertificates.
+    #   provide exactly one default certificate. To create a certificate list,
+    #   use AddListenerCertificates.
     #
     # @option params [Array<Types::Action>] :default_actions
     #   The actions for the default rule. The rule must include one forward
-    #   action.
+    #   action or one or more fixed-response actions.
     #
     #   If the action type is `forward`, you can specify a single target
     #   group. The protocol of the target group must be HTTP or HTTPS for an
     #   Application Load Balancer or TCP for a Network Load Balancer.
     #
-    #   If the action type is `authenticate-oidc`, you can use an identity
-    #   provider that is OpenID Connect (OIDC) compliant to authenticate users
-    #   as they access your application.
+    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you can
+    #   use an identity provider that is OpenID Connect (OIDC) compliant to
+    #   authenticate users as they access your application.
     #
-    #   If the action type is `authenticate-cognito`, you can use Amazon
-    #   Cognito to authenticate users as they access your application.
+    #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
+    #   can use Amazon Cognito to authenticate users as they access your
+    #   application.
+    #
+    #   \[Application Load Balancer\] If the action type is `redirect`, you
+    #   can redirect HTTP and HTTPS requests.
+    #
+    #   \[Application Load Balancer\] If the action type is `fixed-response`,
+    #   you can return a custom HTTP response.
     #
     # @return [Types::ModifyListenerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2481,7 +2565,7 @@ module Aws::ElasticLoadBalancingV2
     #     ],
     #     default_actions: [
     #       {
-    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito
+    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #         target_group_arn: "TargetGroupArn",
     #         authenticate_oidc_config: {
     #           issuer: "AuthenticateOidcActionIssuer", # required
@@ -2511,6 +2595,19 @@ module Aws::ElasticLoadBalancingV2
     #           on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
     #         },
     #         order: 1,
+    #         redirect_config: {
+    #           protocol: "RedirectActionProtocol",
+    #           port: "RedirectActionPort",
+    #           host: "RedirectActionHost",
+    #           path: "RedirectActionPath",
+    #           query: "RedirectActionQuery",
+    #           status_code: "HTTP_301", # required, accepts HTTP_301, HTTP_302
+    #         },
+    #         fixed_response_config: {
+    #           message_body: "FixedResponseActionMessage",
+    #           status_code: "FixedResponseActionStatusCode", # required
+    #           content_type: "FixedResponseActionContentType",
+    #         },
     #       },
     #     ],
     #   })
@@ -2527,7 +2624,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].certificates[0].is_default #=> Boolean
     #   resp.listeners[0].ssl_policy #=> String
     #   resp.listeners[0].default_actions #=> Array
-    #   resp.listeners[0].default_actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito"
+    #   resp.listeners[0].default_actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.listeners[0].default_actions[0].target_group_arn #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -2551,6 +2648,15 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.authentication_request_extra_params["AuthenticateCognitoActionAuthenticationRequestParamName"] #=> String
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
     #   resp.listeners[0].default_actions[0].order #=> Integer
+    #   resp.listeners[0].default_actions[0].redirect_config.protocol #=> String
+    #   resp.listeners[0].default_actions[0].redirect_config.port #=> String
+    #   resp.listeners[0].default_actions[0].redirect_config.host #=> String
+    #   resp.listeners[0].default_actions[0].redirect_config.path #=> String
+    #   resp.listeners[0].default_actions[0].redirect_config.query #=> String
+    #   resp.listeners[0].default_actions[0].redirect_config.status_code #=> String, one of "HTTP_301", "HTTP_302"
+    #   resp.listeners[0].default_actions[0].fixed_response_config.message_body #=> String
+    #   resp.listeners[0].default_actions[0].fixed_response_config.status_code #=> String
+    #   resp.listeners[0].default_actions[0].fixed_response_config.content_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyListener AWS API Documentation
     #
@@ -2752,7 +2858,7 @@ module Aws::ElasticLoadBalancingV2
     #   If the field name is `host-header`, you can specify a single host name
     #   (for example, my.example.com). A host name is case insensitive, can be
     #   up to 128 characters in length, and can contain any of the following
-    #   characters. Note that you can include up to three wildcard characters.
+    #   characters. You can include up to three wildcard characters.
     #
     #   * A-Z, a-z, 0-9
     #
@@ -2763,9 +2869,9 @@ module Aws::ElasticLoadBalancingV2
     #   * ? (matches exactly 1 character)
     #
     #   If the field name is `path-pattern`, you can specify a single path
-    #   pattern. A path pattern is case sensitive, can be up to 128 characters
-    #   in length, and can contain any of the following characters. Note that
-    #   you can include up to three wildcard characters.
+    #   pattern. A path pattern is case-sensitive, can be up to 128 characters
+    #   in length, and can contain any of the following characters. You can
+    #   include up to three wildcard characters.
     #
     #   * A-Z, a-z, 0-9
     #
@@ -2848,7 +2954,7 @@ module Aws::ElasticLoadBalancingV2
     #     ],
     #     actions: [
     #       {
-    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito
+    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #         target_group_arn: "TargetGroupArn",
     #         authenticate_oidc_config: {
     #           issuer: "AuthenticateOidcActionIssuer", # required
@@ -2878,6 +2984,19 @@ module Aws::ElasticLoadBalancingV2
     #           on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
     #         },
     #         order: 1,
+    #         redirect_config: {
+    #           protocol: "RedirectActionProtocol",
+    #           port: "RedirectActionPort",
+    #           host: "RedirectActionHost",
+    #           path: "RedirectActionPath",
+    #           query: "RedirectActionQuery",
+    #           status_code: "HTTP_301", # required, accepts HTTP_301, HTTP_302
+    #         },
+    #         fixed_response_config: {
+    #           message_body: "FixedResponseActionMessage",
+    #           status_code: "FixedResponseActionStatusCode", # required
+    #           content_type: "FixedResponseActionContentType",
+    #         },
     #       },
     #     ],
     #   })
@@ -2892,7 +3011,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].values #=> Array
     #   resp.rules[0].conditions[0].values[0] #=> String
     #   resp.rules[0].actions #=> Array
-    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito"
+    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.rules[0].actions[0].target_group_arn #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -2916,6 +3035,15 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].authenticate_cognito_config.authentication_request_extra_params["AuthenticateCognitoActionAuthenticationRequestParamName"] #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
     #   resp.rules[0].actions[0].order #=> Integer
+    #   resp.rules[0].actions[0].redirect_config.protocol #=> String
+    #   resp.rules[0].actions[0].redirect_config.port #=> String
+    #   resp.rules[0].actions[0].redirect_config.host #=> String
+    #   resp.rules[0].actions[0].redirect_config.path #=> String
+    #   resp.rules[0].actions[0].redirect_config.query #=> String
+    #   resp.rules[0].actions[0].redirect_config.status_code #=> String, one of "HTTP_301", "HTTP_302"
+    #   resp.rules[0].actions[0].fixed_response_config.message_body #=> String
+    #   resp.rules[0].actions[0].fixed_response_config.status_code #=> String
+    #   resp.rules[0].actions[0].fixed_response_config.content_type #=> String
     #   resp.rules[0].is_default #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyRule AWS API Documentation
@@ -2950,9 +3078,9 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [Integer] :health_check_interval_seconds
     #   The approximate amount of time, in seconds, between health checks of
-    #   an individual target. For Application Load Balancers, the range is 5
-    #   to 300 seconds. For Network Load Balancers, the supported values are
-    #   10 or 30 seconds.
+    #   an individual target. For Application Load Balancers, the range is
+    #   5–300 seconds. For Network Load Balancers, the supported values are 10
+    #   or 30 seconds.
     #
     # @option params [Integer] :health_check_timeout_seconds
     #   \[HTTP/HTTPS health checks\] The amount of time, in seconds, during
@@ -3302,7 +3430,7 @@ module Aws::ElasticLoadBalancingV2
     # Sets the type of IP addresses used by the subnets of the specified
     # Application Load Balancer or Network Load Balancer.
     #
-    # Note that Network Load Balancers must use `ipv4`.
+    # Network Load Balancers must use `ipv4`.
     #
     # @option params [required, String] :load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
@@ -3409,7 +3537,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].values #=> Array
     #   resp.rules[0].conditions[0].values[0] #=> String
     #   resp.rules[0].actions #=> Array
-    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito"
+    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.rules[0].actions[0].target_group_arn #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -3433,6 +3561,15 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].authenticate_cognito_config.authentication_request_extra_params["AuthenticateCognitoActionAuthenticationRequestParamName"] #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
     #   resp.rules[0].actions[0].order #=> Integer
+    #   resp.rules[0].actions[0].redirect_config.protocol #=> String
+    #   resp.rules[0].actions[0].redirect_config.port #=> String
+    #   resp.rules[0].actions[0].redirect_config.host #=> String
+    #   resp.rules[0].actions[0].redirect_config.path #=> String
+    #   resp.rules[0].actions[0].redirect_config.query #=> String
+    #   resp.rules[0].actions[0].redirect_config.status_code #=> String, one of "HTTP_301", "HTTP_302"
+    #   resp.rules[0].actions[0].fixed_response_config.message_body #=> String
+    #   resp.rules[0].actions[0].fixed_response_config.status_code #=> String
+    #   resp.rules[0].actions[0].fixed_response_config.content_type #=> String
     #   resp.rules[0].is_default #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetRulePriorities AWS API Documentation
@@ -3448,8 +3585,7 @@ module Aws::ElasticLoadBalancingV2
     # Application Load Balancer. The specified security groups override the
     # previously associated security groups.
     #
-    # Note that you can't specify a security group for a Network Load
-    # Balancer.
+    # You can't specify a security group for a Network Load Balancer.
     #
     # @option params [required, String] :load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
@@ -3505,7 +3641,7 @@ module Aws::ElasticLoadBalancingV2
     # specified Application Load Balancer. The specified subnets replace the
     # previously enabled subnets.
     #
-    # Note that you can't change the subnets for a Network Load Balancer.
+    # You can't change the subnets for a Network Load Balancer.
     #
     # @option params [required, String] :load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
@@ -3597,7 +3733,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

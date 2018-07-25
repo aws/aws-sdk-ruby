@@ -331,7 +331,7 @@ module Aws::ECS
     #   The name of your service. Up to 255 letters (uppercase and lowercase),
     #   numbers, hyphens, and underscores are allowed. Service names must be
     #   unique within a cluster, but you can have similarly named services in
-    #   multiple clusters within a region or across multiple regions.
+    #   multiple clusters within a Region or across multiple Regions.
     #
     # @option params [required, String] :task_definition
     #   The `family` and `revision` (`family:revision`) or full ARN of the
@@ -367,8 +367,8 @@ module Aws::ECS
     #   network interface, not an Amazon EC2 instance.
     #
     # @option params [Array<Types::ServiceRegistry>] :service_registries
-    #   The details of the service discovery registries you want to assign to
-    #   this service. For more information, see [Service Discovery][1].
+    #   The details of the service discovery registries to assign to this
+    #   service. For more information, see [Service Discovery][1].
     #
     #   <note markdown="1"> Service discovery is supported for Fargate tasks if using platform
     #   version v1.1.0 or later. For more information, see [AWS Fargate
@@ -455,7 +455,7 @@ module Aws::ECS
     #   after a task has first started. This is only valid if your service is
     #   configured to use a load balancer. If your service's tasks take a
     #   while to start and respond to Elastic Load Balancing health checks,
-    #   you can specify a health check grace period of up to 1,800 seconds
+    #   you can specify a health check grace period of up to 7,200 seconds
     #   during which the ECS service scheduler ignores health check status.
     #   This grace period can prevent the ECS service scheduler from marking
     #   tasks as unhealthy and stopping them before they have time to come up.
@@ -997,7 +997,7 @@ module Aws::ECS
     # @option params [required, String] :container_instance
     #   The container instance ID or full ARN of the container instance to
     #   deregister. The ARN contains the `arn:aws:ecs` namespace, followed by
-    #   the region of the container instance, the AWS account ID of the
+    #   the Region of the container instance, the AWS account ID of the
     #   container instance owner, the `container-instance` namespace, and then
     #   the container instance ID. For example,
     #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID
@@ -1139,6 +1139,7 @@ module Aws::ECS
     #   resp.task_definition.container_definitions #=> Array
     #   resp.task_definition.container_definitions[0].name #=> String
     #   resp.task_definition.container_definitions[0].image #=> String
+    #   resp.task_definition.container_definitions[0].repository_credentials.credentials_parameter #=> String
     #   resp.task_definition.container_definitions[0].cpu #=> Integer
     #   resp.task_definition.container_definitions[0].memory #=> Integer
     #   resp.task_definition.container_definitions[0].memory_reservation #=> Integer
@@ -1745,6 +1746,7 @@ module Aws::ECS
     #   resp.task_definition.container_definitions #=> Array
     #   resp.task_definition.container_definitions[0].name #=> String
     #   resp.task_definition.container_definitions[0].image #=> String
+    #   resp.task_definition.container_definitions[0].repository_credentials.credentials_parameter #=> String
     #   resp.task_definition.container_definitions[0].cpu #=> Integer
     #   resp.task_definition.container_definitions[0].memory #=> Integer
     #   resp.task_definition.container_definitions[0].memory_reservation #=> Integer
@@ -2005,7 +2007,7 @@ module Aws::ECS
     #
     # @option params [String] :container_instance
     #   The container instance ID or full ARN of the container instance. The
-    #   ARN contains the `arn:aws:ecs` namespace, followed by the region of
+    #   ARN contains the `arn:aws:ecs` namespace, followed by the Region of
     #   the container instance, the AWS account ID of the container instance
     #   owner, the `container-instance` namespace, and then the container
     #   instance ID. For example,
@@ -2322,7 +2324,7 @@ module Aws::ECS
     #   and a `nextToken` value if applicable.
     #
     # @option params [String] :launch_type
-    #   The launch type for services you want to list.
+    #   The launch type for the services to list.
     #
     # @option params [String] :scheduling_strategy
     #   The scheduling strategy for services to list.
@@ -2677,7 +2679,7 @@ module Aws::ECS
     #    </note>
     #
     # @option params [String] :launch_type
-    #   The launch type for services you want to list.
+    #   The launch type for services to list.
     #
     # @return [Types::ListTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2947,7 +2949,7 @@ module Aws::ECS
     # task definition with the `networkMode` parameter. The available
     # network modes correspond to those described in [Network settings][3]
     # in the Docker run reference. If you specify the `awsvpc` network mode,
-    # the task is allocated an Elastic Network Interface, and you must
+    # the task is allocated an elastic network interface, and you must
     # specify a NetworkConfiguration when you create a service or run a task
     # with the task definition. For more information, see [Task
     # Networking][4] in the *Amazon Elastic Container Service Developer
@@ -3041,9 +3043,9 @@ module Aws::ECS
     # @option params [String] :cpu
     #   The number of CPU units used by the task. It can be expressed as an
     #   integer using CPU units, for example `1024`, or as a string using
-    #   vCPUs, for example `1 vCPU` or `1 vcpu`, in a task definition but will
-    #   be converted to an integer indicating the CPU units when the task
-    #   definition is registered.
+    #   vCPUs, for example `1 vCPU` or `1 vcpu`, in a task definition. String
+    #   values are converted to an integer indicating the CPU units when the
+    #   task definition is registered.
     #
     #   <note markdown="1"> Task-level CPU and memory parameters are ignored for Windows
     #   containers. We recommend specifying container-level resources for
@@ -3077,8 +3079,9 @@ module Aws::ECS
     # @option params [String] :memory
     #   The amount of memory (in MiB) used by the task. It can be expressed as
     #   an integer using MiB, for example `1024`, or as a string using GB, for
-    #   example `1GB` or `1 GB`, in a task definition but will be converted to
-    #   an integer indicating the MiB when the task definition is registered.
+    #   example `1GB` or `1 GB`, in a task definition. String values are
+    #   converted to an integer indicating the MiB when the task definition is
+    #   registered.
     #
     #   <note markdown="1"> Task-level CPU and memory parameters are ignored for Windows
     #   containers. We recommend specifying container-level resources for
@@ -3179,6 +3182,9 @@ module Aws::ECS
     #       {
     #         name: "String",
     #         image: "String",
+    #         repository_credentials: {
+    #           credentials_parameter: "String", # required
+    #         },
     #         cpu: 1,
     #         memory: 1,
     #         memory_reservation: 1,
@@ -3299,6 +3305,7 @@ module Aws::ECS
     #   resp.task_definition.container_definitions #=> Array
     #   resp.task_definition.container_definitions[0].name #=> String
     #   resp.task_definition.container_definitions[0].image #=> String
+    #   resp.task_definition.container_definitions[0].repository_credentials.credentials_parameter #=> String
     #   resp.task_definition.container_definitions[0].cpu #=> Integer
     #   resp.task_definition.container_definitions[0].memory #=> Integer
     #   resp.task_definition.container_definitions[0].memory_reservation #=> Integer
@@ -3426,7 +3433,7 @@ module Aws::ECS
     #   algorithm to ensure that you allow enough time for the previous
     #   command to propagate through the system. To do this, run the
     #   DescribeTasks command repeatedly, starting with a couple of seconds
-    #   of wait time, and increasing gradually up to five minutes of wait
+    #   of wait time and increasing gradually up to five minutes of wait
     #   time.
     #
     # * Add wait time between subsequent commands, even if the DescribeTasks
@@ -3740,7 +3747,7 @@ module Aws::ECS
     #
     # @option params [Types::NetworkConfiguration] :network_configuration
     #   The VPC subnet and security group configuration for tasks that receive
-    #   their own Elastic Network Interface by using the `awsvpc` networking
+    #   their own elastic network interface by using the `awsvpc` networking
     #   mode.
     #
     # @return [Types::StartTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -4484,7 +4491,7 @@ module Aws::ECS
     #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #
     # @option params [String] :platform_version
-    #   The platform version you want to update your service to run.
+    #   The platform version that your service should run.
     #
     # @option params [Boolean] :force_new_deployment
     #   Whether to force a new deployment of the service. Deployments are not
@@ -4642,7 +4649,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
