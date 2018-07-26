@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::Greengrass - Updated the documentation for AWS Greengrass.
+
+* Feature - Aws::Inspector - Updated the API, documentation, and integration test for Amazon Inspector.
+
+* Feature - Aws::Redshift - Updated the API, and documentation for Amazon Redshift.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
 2.11.95 (2018-07-25)
 ------------------
 
