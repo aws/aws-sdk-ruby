@@ -221,6 +221,15 @@ module Aws::CodeBuild
     #   Describes a network interface.
     #   @return [Types::NetworkInterface]
     #
+    # @!attribute [rw] encryption_key
+    #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
+    #   to be used for encrypting the build output artifacts.
+    #
+    #   This is expressed either as the CMK's Amazon Resource Name (ARN)
+    #   or, if specified, the CMK's alias (using the format
+    #   `alias/alias-name `).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Build AWS API Documentation
     #
     class Build < Struct.new(
@@ -243,7 +252,8 @@ module Aws::CodeBuild
       :build_complete,
       :initiator,
       :vpc_config,
-      :network_interface)
+      :network_interface,
+      :encryption_key)
       include Aws::Structure
     end
 
@@ -277,12 +287,18 @@ module Aws::CodeBuild
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] encryption_disabled
+    #   Information that tells you if encryption for build artifacts is
+    #   disabled.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BuildArtifacts AWS API Documentation
     #
     class BuildArtifacts < Struct.new(
       :location,
       :sha256sum,
-      :md5sum)
+      :md5sum,
+      :encryption_disabled)
       include Aws::Structure
     end
 
@@ -409,6 +425,7 @@ module Aws::CodeBuild
     #           namespace_type: "NONE", # accepts NONE, BUILD_ID
     #           name: "String",
     #           packaging: "NONE", # accepts NONE, ZIP
+    #           encryption_disabled: false,
     #         },
     #         cache: {
     #           type: "NO_CACHE", # required, accepts NO_CACHE, S3
@@ -1134,6 +1151,7 @@ module Aws::CodeBuild
     #         namespace_type: "NONE", # accepts NONE, BUILD_ID
     #         name: "String",
     #         packaging: "NONE", # accepts NONE, ZIP
+    #         encryption_disabled: false,
     #       }
     #
     # @!attribute [rw] type
@@ -1260,6 +1278,13 @@ module Aws::CodeBuild
     #       file containing the build output.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_disabled
+    #   Set to true if you do not want your output artifacts encrypted. This
+    #   option is only valid if your artifacts type is Amazon S3. If this is
+    #   set with another artifacts type, an invalidInputException will be
+    #   thrown.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectArtifacts AWS API Documentation
     #
     class ProjectArtifacts < Struct.new(
@@ -1268,7 +1293,8 @@ module Aws::CodeBuild
       :path,
       :namespace_type,
       :name,
-      :packaging)
+      :packaging,
+      :encryption_disabled)
       include Aws::Structure
     end
 
@@ -1590,6 +1616,7 @@ module Aws::CodeBuild
     #           namespace_type: "NONE", # accepts NONE, BUILD_ID
     #           name: "String",
     #           packaging: "NONE", # accepts NONE, ZIP
+    #           encryption_disabled: false,
     #         },
     #         environment_variables_override: [
     #           {
@@ -1870,6 +1897,7 @@ module Aws::CodeBuild
     #           namespace_type: "NONE", # accepts NONE, BUILD_ID
     #           name: "String",
     #           packaging: "NONE", # accepts NONE, ZIP
+    #           encryption_disabled: false,
     #         },
     #         cache: {
     #           type: "NO_CACHE", # required, accepts NO_CACHE, S3

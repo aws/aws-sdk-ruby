@@ -1777,13 +1777,6 @@ module Aws::EC2
     #
     #  </note>
     #
-    # For more information, see [Creating an Instance Store-Backed Windows
-    # AMI][1].
-    #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/Creating_InstanceStoreBacked_WinAMI.html
-    #
     # @option params [required, String] :instance_id
     #   The ID of the instance to bundle.
     #
@@ -3108,8 +3101,10 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [Types::SpotOptionsRequest] :spot_options
-    #   Includes `SpotAllocationStrategy` and
-    #   `SpotInstanceInterruptionBehavior` inside this structure.
+    #   Describes the configuration of Spot Instances in an EC2 Fleet.
+    #
+    # @option params [Types::OnDemandOptionsRequest] :on_demand_options
+    #   The allocation strategy of On-Demand Instances in an EC2 Fleet.
     #
     # @option params [String] :excess_capacity_termination_policy
     #   Indicates whether running instances should be terminated if the total
@@ -3176,6 +3171,10 @@ module Aws::EC2
     #     spot_options: {
     #       allocation_strategy: "lowest-price", # accepts lowest-price, diversified
     #       instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
+    #       instance_pools_to_use_count: 1,
+    #     },
+    #     on_demand_options: {
+    #       allocation_strategy: "lowest-price", # accepts lowest-price, prioritized
     #     },
     #     excess_capacity_termination_policy: "no-termination", # accepts no-termination, termination
     #     launch_template_configs: [ # required
@@ -3192,6 +3191,7 @@ module Aws::EC2
     #             subnet_id: "String",
     #             availability_zone: "String",
     #             weighted_capacity: 1.0,
+    #             priority: 1.0,
     #           },
     #         ],
     #       },
@@ -8296,11 +8296,11 @@ module Aws::EC2
     #
     #   * `public-ip` - The Elastic IP address.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -8721,8 +8721,11 @@ module Aws::EC2
     #
     #   * `instance-id` - The ID of the instance.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -8902,11 +8905,11 @@ module Aws::EC2
     #   * `type` - The type of customer gateway. Currently, the only supported
     #     type is `ipsec.1`.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -9003,11 +9006,11 @@ module Aws::EC2
     #
     #   * `value` - The value for one of the options.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -9481,6 +9484,7 @@ module Aws::EC2
     #   resp.fleets[0].launch_template_configs[0].overrides[0].subnet_id #=> String
     #   resp.fleets[0].launch_template_configs[0].overrides[0].availability_zone #=> String
     #   resp.fleets[0].launch_template_configs[0].overrides[0].weighted_capacity #=> Float
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].priority #=> Float
     #   resp.fleets[0].target_capacity_specification.total_target_capacity #=> Integer
     #   resp.fleets[0].target_capacity_specification.on_demand_target_capacity #=> Integer
     #   resp.fleets[0].target_capacity_specification.spot_target_capacity #=> Integer
@@ -9492,6 +9496,8 @@ module Aws::EC2
     #   resp.fleets[0].replace_unhealthy_instances #=> Boolean
     #   resp.fleets[0].spot_options.allocation_strategy #=> String, one of "lowest-price", "diversified"
     #   resp.fleets[0].spot_options.instance_interruption_behavior #=> String, one of "hibernate", "stop", "terminate"
+    #   resp.fleets[0].spot_options.instance_pools_to_use_count #=> Integer
+    #   resp.fleets[0].on_demand_options.allocation_strategy #=> String, one of "lowest-price", "prioritized"
     #   resp.fleets[0].tags #=> Array
     #   resp.fleets[0].tags[0].key #=> String
     #   resp.fleets[0].tags[0].value #=> String
@@ -9666,11 +9672,11 @@ module Aws::EC2
     #   * `state` - The state of the AFI (`pending` \| `failed` \| `available`
     #     \| `unavailable`).
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -9741,16 +9747,16 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the Dedicated Host Reservations that are available to
+    # Describes the Dedicated Host reservations that are available to
     # purchase.
     #
-    # The results describe all the Dedicated Host Reservation offerings,
+    # The results describe all the Dedicated Host reservation offerings,
     # including offerings that may not match the instance family and region
     # of your Dedicated Hosts. When purchasing an offering, ensure that the
-    # the instance family and region of the offering matches that of the
-    # Dedicated Host/s it will be associated with. For an overview of
-    # supported instance types, see [Dedicated Hosts Overview][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # instance family and Region of the offering matches that of the
+    # Dedicated Hosts with which it is to be associated . For more
+    # information about supported instance types, see [Dedicated Hosts
+    # Overview][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -9759,25 +9765,25 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filter
     #   One or more filters.
     #
-    #   * `instance-family` - The instance family of the offering (e.g.,
-    #     `m4`).
+    #   * `instance-family` - The instance family of the offering (for
+    #     example, `m4`).
     #
     #   * `payment-option` - The payment option (`NoUpfront` \|
     #     `PartialUpfront` \| `AllUpfront`).
     #
     # @option params [Integer] :max_duration
-    #   This is the maximum duration of the reservation you'd like to
-    #   purchase, specified in seconds. Reservations are available in one-year
-    #   and three-year terms. The number of seconds specified must be the
-    #   number of seconds in a year (365x24x60x60) times one of the supported
-    #   durations (1 or 3). For example, specify 94608000 for three years.
+    #   This is the maximum duration of the reservation to purchase, specified
+    #   in seconds. Reservations are available in one-year and three-year
+    #   terms. The number of seconds specified must be the number of seconds
+    #   in a year (365x24x60x60) times one of the supported durations (1 or
+    #   3). For example, specify 94608000 for three years.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return for the request in a single
     #   page. The remaining results can be seen by sending another request
     #   with the returned `nextToken` value. This value can be between 5 and
-    #   500; if `maxResults` is given a larger value than 500, you will
-    #   receive an error.
+    #   500. If `maxResults` is given a larger value than 500, you receive an
+    #   error.
     #
     # @option params [Integer] :min_duration
     #   This is the minimum duration of the reservation you'd like to
@@ -9834,13 +9840,13 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes Dedicated Host Reservations which are associated with
-    # Dedicated Hosts in your account.
+    # Describes reservations that are associated with Dedicated Hosts in
+    # your account.
     #
     # @option params [Array<Types::Filter>] :filter
     #   One or more filters.
     #
-    #   * `instance-family` - The instance family (e.g., `m4`).
+    #   * `instance-family` - The instance family (for example, `m4`).
     #
     #   * `payment-option` - The payment option (`NoUpfront` \|
     #     `PartialUpfront` \| `AllUpfront`).
@@ -9855,8 +9861,8 @@ module Aws::EC2
     #   The maximum number of results to return for the request in a single
     #   page. The remaining results can be seen by sending another request
     #   with the returned `nextToken` value. This value can be between 5 and
-    #   500; if `maxResults` is given a larger value than 500, you will
-    #   receive an error.
+    #   500.If `maxResults` is given a larger value than 500, you receive an
+    #   error.
     #
     # @option params [String] :next_token
     #   The token to use to retrieve the next page of results.
@@ -9912,8 +9918,8 @@ module Aws::EC2
     #
     # The results describe only the Dedicated Hosts in the region you're
     # currently using. All listed instances consume capacity on your
-    # Dedicated Host. Dedicated Hosts that have recently been released will
-    # be listed with the state `released`.
+    # Dedicated Host. Dedicated Hosts that have recently been released are
+    # listed with the state `released`.
     #
     # @option params [Array<Types::Filter>] :filter
     #   One or more filters.
@@ -9923,7 +9929,7 @@ module Aws::EC2
     #
     #   * `availability-zone` - The Availability Zone of the host.
     #
-    #   * `client-token` - The idempotency token you provided when you
+    #   * `client-token` - The idempotency token that you provided when you
     #     allocated the host.
     #
     #   * `host-reservation-id` - The ID of the reservation assigned to this
@@ -9948,9 +9954,9 @@ module Aws::EC2
     #   The maximum number of results to return for the request in a single
     #   page. The remaining results can be seen by sending another request
     #   with the returned `nextToken` value. This value can be between 5 and
-    #   500; if `maxResults` is given a larger value than 500, you will
-    #   receive an error. You cannot specify this parameter and the host IDs
-    #   parameter in the same request.
+    #   500. If `maxResults` is given a larger value than 500, you receive an
+    #   error. You cannot specify this parameter and the host IDs parameter in
+    #   the same request.
     #
     # @option params [String] :next_token
     #   The token to retrieve the next page of results.
@@ -10413,11 +10419,11 @@ module Aws::EC2
     #   * `sriov-net-support` - A value of `simple` indicates that enhanced
     #     networking with the Intel 82599 VF interface is enabled.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -10997,7 +11003,7 @@ module Aws::EC2
     #     (for example, `2014-09-15T17:15:20.000Z`).
     #
     #   * `instance-state-code` - The code for the instance state, as a 16-bit
-    #     unsigned integer. The high byte is an opaque internal value and
+    #     unsigned integer. The high byte is used for internal purposes and
     #     should be ignored. The low byte is set based on the state
     #     represented. The valid values are 0 (pending), 16 (running), 32
     #     (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).
@@ -11217,7 +11223,7 @@ module Aws::EC2
     #     a Scheduled Instance (`spot` \| `scheduled`).
     #
     #   * `instance-state-code` - The state of the instance, as a 16-bit
-    #     unsigned integer. The high byte is an opaque internal value and
+    #     unsigned integer. The high byte is used for internal purposes and
     #     should be ignored. The low byte is set based on the state
     #     represented. The valid values are: 0 (pending), 16 (running), 32
     #     (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).
@@ -11403,14 +11409,14 @@ module Aws::EC2
     #
     #   * `subnet-id` - The ID of the subnet for the instance.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
-    #     filter to find all resources assigned a tag with a specific key,
+    #     filter to find all resources that have a tag with a specific key,
     #     regardless of the tag value.
     #
     #   * `tenancy` - The tenancy of an instance (`dedicated` \| `default` \|
@@ -11652,11 +11658,11 @@ module Aws::EC2
     #
     #   * `internet-gateway-id` - The ID of the Internet gateway.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -12072,11 +12078,11 @@ module Aws::EC2
     #
     #   * `launch-template-name` - The name of the launch template.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -12259,11 +12265,11 @@ module Aws::EC2
     #
     #   * `subnet-id` - The ID of the subnet in which the NAT gateway resides.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -12428,11 +12434,11 @@ module Aws::EC2
     #
     #   * `network-acl-id` - The ID of the network ACL.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -12856,11 +12862,11 @@ module Aws::EC2
     #
     #   * `subnet-id` - The ID of the subnet for the network interface.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -13401,11 +13407,11 @@ module Aws::EC2
     #   * `state` - The state of the Reserved Instance (`payment-pending` \|
     #     `active` \| `payment-failed` \| `retired`).
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -13954,11 +13960,11 @@ module Aws::EC2
     #   * `route.vpc-peering-connection-id` - The ID of a VPC peering
     #     connection specified in a route in the table.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -14516,6 +14522,12 @@ module Aws::EC2
     #
     #   * `owner-id` - The AWS account ID of the owner of the security group.
     #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
+    #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
@@ -14820,11 +14832,11 @@ module Aws::EC2
     #   * `status` - The status of the snapshot (`pending` \| `completed` \|
     #     `error`).
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -15344,6 +15356,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].activity_status #=> String, one of "error", "pending_fulfillment", "pending_termination", "fulfilled"
     #   resp.spot_fleet_request_configs[0].create_time #=> Time
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.allocation_strategy #=> String, one of "lowestPrice", "diversified"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.on_demand_allocation_strategy #=> String, one of "lowestPrice", "prioritized"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.client_token #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.excess_capacity_termination_policy #=> String, one of "noTermination", "default"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.fulfilled_capacity #=> Float
@@ -15413,6 +15426,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].subnet_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].availability_zone #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].weighted_capacity #=> Float
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].priority #=> Float
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.spot_price #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.target_capacity #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.on_demand_target_capacity #=> Integer
@@ -15426,6 +15440,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.load_balancers_config.classic_load_balancers_config.classic_load_balancers[0].name #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.load_balancers_config.target_groups_config.target_groups #=> Array
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.load_balancers_config.target_groups_config.target_groups[0].arn #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.instance_pools_to_use_count #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_state #=> String, one of "submitted", "active", "cancelled", "failed", "cancelled_running", "cancelled_terminating", "modifying"
     #
@@ -15551,11 +15566,11 @@ module Aws::EC2
     #   * `status-message` - The message explaining the status of the Spot
     #     Instance request.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -16009,11 +16024,11 @@ module Aws::EC2
     #
     #   * `subnet-id` - The ID of the subnet.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -16563,11 +16578,11 @@ module Aws::EC2
     #   * `status` - The status of the volume (`creating` \| `available` \|
     #     `in-use` \| `deleting` \| `deleted` \| `error`).
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -16923,11 +16938,11 @@ module Aws::EC2
     #   * `is-classic-link-enabled` - Whether the VPC is enabled for
     #     ClassicLink (`true` \| `false`).
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -17524,11 +17539,11 @@ module Aws::EC2
     #   * `status-message` - A message that provides more information about
     #     the status of the VPC peering connection, if applicable.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -17640,11 +17655,11 @@ module Aws::EC2
     #
     #   * `state` - The state of the VPC (`pending` \| `available`).
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -17774,11 +17789,11 @@ module Aws::EC2
     #   * `bgp-asn` - The BGP Autonomous System Number (ASN) associated with a
     #     BGP device.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -17881,11 +17896,11 @@ module Aws::EC2
     #   * `state` - The state of the virtual private gateway (`pending` \|
     #     `available` \| `deleting` \| `deleted`).
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -18865,8 +18880,8 @@ module Aws::EC2
     # result in the offering being purchased.
     #
     # @option params [required, Array<String>] :host_id_set
-    #   The ID/s of the Dedicated Host/s that the reservation will be
-    #   associated with.
+    #   The IDs of the Dedicated Hosts with which the reservation is
+    #   associated.
     #
     # @option params [required, String] :offering_id
     #   The offering ID of the reservation.
@@ -19847,19 +19862,19 @@ module Aws::EC2
     end
 
     # Modify the auto-placement setting of a Dedicated Host. When
-    # auto-placement is enabled, AWS will place instances that you launch
-    # with a tenancy of `host`, but without targeting a specific host ID,
-    # onto any available Dedicated Host in your account which has
-    # auto-placement enabled. When auto-placement is disabled, you need to
-    # provide a host ID if you want the instance to launch onto a specific
-    # host. If no host ID is provided, the instance will be launched onto a
-    # suitable host which has auto-placement enabled.
+    # auto-placement is enabled, any instances that you launch with a
+    # tenancy of `host` but without a specific host ID are placed onto any
+    # available Dedicated Host in your account that has auto-placement
+    # enabled. When auto-placement is disabled, you need to provide a host
+    # ID ito have the instance launch onto a specific host. If no host ID is
+    # provided, the instance is launched onto a suitable host with
+    # auto-placement enabled.
     #
     # @option params [required, String] :auto_placement
     #   Specify whether to enable or disable auto-placement.
     #
     # @option params [required, Array<String>] :host_ids
-    #   The host IDs of the Dedicated Hosts you want to modify.
+    #   The IDs of the Dedicated Hosts to modify.
     #
     # @return [Types::ModifyHostsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -21797,15 +21812,15 @@ module Aws::EC2
     #   supported currency is `USD`.
     #
     # @option params [required, Array<String>] :host_id_set
-    #   The ID/s of the Dedicated Host/s that the reservation will be
-    #   associated with.
+    #   The IDs of the Dedicated Hosts with which the reservation will be
+    #   associated.
     #
     # @option params [String] :limit_price
     #   The specified limit is checked against the total upfront cost of the
     #   reservation (calculated as the offering's upfront cost multiplied by
     #   the host count). If the total upfront cost is greater than the
-    #   specified price limit, the request will fail. This is used to ensure
-    #   that the purchase does not exceed the expected upfront cost of the
+    #   specified price limit, the request fails. This is used to ensure that
+    #   the purchase does not exceed the expected upfront cost of the
     #   purchase. At this time, the only supported currency is `USD`. For
     #   example, to indicate a limit price of USD 100, specify 100.00.
     #
@@ -22128,9 +22143,14 @@ module Aws::EC2
     # SUSE Linux Enterprise Server (SLES), use the EC2 billing product code
     # associated with an AMI to verify the subscription status for package
     # updates. Creating an AMI from an EBS snapshot does not maintain this
-    # billing code, and subsequent instances launched from such an AMI will
-    # not be able to connect to package update infrastructure. To create an
-    # AMI that must retain billing codes, see CreateImage.
+    # billing code, and instances launched from such an AMI are not able to
+    # connect to package update infrastructure. If you purchase a Reserved
+    # Instance offering for one of these Linux distributions and launch
+    # instances using an AMI that does not contain the required billing
+    # code, your Reserved Instance is not applied to these instances.
+    #
+    # To create an AMI for operating systems that require a billing code,
+    # see CreateImage.
     #
     # If needed, you can deregister an AMI at any time. Any modifications
     # you make to an AMI backed by an instance store volume invalidates its
@@ -22412,19 +22432,19 @@ module Aws::EC2
     # When you no longer want to use an On-Demand Dedicated Host it can be
     # released. On-Demand billing is stopped and the host goes into
     # `released` state. The host ID of Dedicated Hosts that have been
-    # released can no longer be specified in another request, e.g.,
+    # released can no longer be specified in another request, for example,
     # ModifyHosts. You must stop or terminate all instances on a host before
     # it can be released.
     #
-    # When Dedicated Hosts are released, it make take some time for them to
+    # When Dedicated Hosts are released, it may take some time for them to
     # stop counting toward your limit and you may receive capacity errors
-    # when trying to allocate new Dedicated hosts. Try waiting a few
-    # minutes, and then try again.
+    # when trying to allocate new Dedicated Hosts. Wait a few minutes and
+    # then try again.
     #
-    # Released hosts will still appear in a DescribeHosts response.
+    # Released hosts still appear in a DescribeHosts response.
     #
     # @option params [required, Array<String>] :host_ids
-    #   The IDs of the Dedicated Hosts you want to release.
+    #   The IDs of the Dedicated Hosts to release.
     #
     # @return [Types::ReleaseHostsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -23108,6 +23128,7 @@ module Aws::EC2
     #     dry_run: false,
     #     spot_fleet_request_config: { # required
     #       allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified
+    #       on_demand_allocation_strategy: "lowestPrice", # accepts lowestPrice, prioritized
     #       client_token: "String",
     #       excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
     #       fulfilled_capacity: 1.0,
@@ -23212,6 +23233,7 @@ module Aws::EC2
     #               subnet_id: "String",
     #               availability_zone: "String",
     #               weighted_capacity: 1.0,
+    #               priority: 1.0,
     #             },
     #           ],
     #         },
@@ -23241,6 +23263,7 @@ module Aws::EC2
     #           ],
     #         },
     #       },
+    #       instance_pools_to_use_count: 1,
     #     },
     #   })
     #
@@ -24408,6 +24431,10 @@ module Aws::EC2
     #
     # @option params [Types::InstanceMarketOptionsRequest] :instance_market_options
     #   The market (purchasing) option for the instances.
+    #
+    #   For RunInstances, persistent Spot Instance requests are only supported
+    #   when **InstanceInterruptionBehavior** is set to either `hibernate` or
+    #   `stop`.
     #
     # @option params [Types::CreditSpecificationRequest] :credit_specification
     #   The credit option for CPU usage of the instance. Valid values are
@@ -25594,7 +25621,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

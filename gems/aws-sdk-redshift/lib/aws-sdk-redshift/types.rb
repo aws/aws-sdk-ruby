@@ -17,13 +17,14 @@ module Aws::Redshift
     #       }
     #
     # @!attribute [rw] reserved_node_id
-    #   A string representing the identifier of the Reserved Node to be
-    #   exchanged.
+    #   A string representing the node identifier of the DC1 Reserved Node
+    #   to be exchanged.
     #   @return [String]
     #
     # @!attribute [rw] target_reserved_node_offering_id
-    #   The unique identifier of the Reserved Node offering to be used for
-    #   the exchange.
+    #   The unique identifier of the DC2 Reserved Node offering to be used
+    #   for the exchange. You can obtain the value for the parameter by
+    #   calling GetReservedNodeExchangeOfferings
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AcceptReservedNodeExchangeInputMessage AWS API Documentation
@@ -401,6 +402,10 @@ module Aws::Redshift
     #   Cluster operations that are waiting to be started.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] maintenance_track_name
+    #   The name of the maintenance track for the cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -437,7 +442,8 @@ module Aws::Redshift
       :kms_key_id,
       :enhanced_vpc_routing,
       :iam_roles,
-      :pending_actions)
+      :pending_actions,
+      :maintenance_track_name)
       include Aws::Structure
     end
 
@@ -1087,6 +1093,7 @@ module Aws::Redshift
     #         enhanced_vpc_routing: false,
     #         additional_info: "String",
     #         iam_roles: ["String"],
+    #         maintenance_track_name: "String",
     #       }
     #
     # @!attribute [rw] db_name
@@ -1422,6 +1429,12 @@ module Aws::Redshift
     #   time.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] maintenance_track_name
+    #   An optional parameter for the name of the maintenance track for the
+    #   cluster. If you don't provide a maintenance track name, the cluster
+    #   is assigned to the `current` track.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterMessage AWS API Documentation
     #
     class CreateClusterMessage < Struct.new(
@@ -1451,7 +1464,8 @@ module Aws::Redshift
       :kms_key_id,
       :enhanced_vpc_routing,
       :additional_info,
-      :iam_roles)
+      :iam_roles,
+      :maintenance_track_name)
       include Aws::Structure
     end
 
@@ -2828,6 +2842,43 @@ module Aws::Redshift
       :marker,
       :tag_keys,
       :tag_values)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeClusterTracksMessage
+    #   data as a hash:
+    #
+    #       {
+    #         maintenance_track_name: "String",
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] maintenance_track_name
+    #   The name of the maintenance track.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   An integer value for the maximum number of maintenance tracks to
+    #   return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional parameter that specifies the starting point to return a
+    #   set of response records. When the results of a
+    #   `DescribeClusterTracks` request exceed the value specified in
+    #   `MaxRecords`, Amazon Redshift returns a value in the `Marker` field
+    #   of the response. You can retrieve the next set of response records
+    #   by providing the returned marker value in the `Marker` parameter and
+    #   retrying the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterTracksMessage AWS API Documentation
+    #
+    class DescribeClusterTracksMessage < Struct.new(
+      :maintenance_track_name,
+      :max_records,
+      :marker)
       include Aws::Structure
     end
 
@@ -4393,8 +4444,8 @@ module Aws::Redshift
     #       }
     #
     # @!attribute [rw] reserved_node_id
-    #   A string representing the node identifier for the Reserved Node to
-    #   be exchanged.
+    #   A string representing the node identifier for the DC1 Reserved Node
+    #   to be exchanged.
     #   @return [String]
     #
     # @!attribute [rw] max_records
@@ -4636,6 +4687,36 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # Defines a maintenance track that determines which Amazon Redshift
+    # version to apply during a maintenance window. If the value for
+    # `MaintenanceTrack` is `current`, the cluster is updated to the most
+    # recently certified maintenance release. If the value is `trailing`,
+    # the cluster is updated to the previously certified maintenance
+    # release.
+    #
+    # @!attribute [rw] maintenance_track_name
+    #   The name of the maintenance track. Possible values are `current` and
+    #   `trailing`.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_version
+    #   The version number for the cluster release.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_targets
+    #   An array of UpdateTarget objects to update with the maintenance
+    #   track.
+    #   @return [Array<Types::UpdateTarget>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/MaintenanceTrack AWS API Documentation
+    #
+    class MaintenanceTrack < Struct.new(
+      :maintenance_track_name,
+      :database_version,
+      :update_targets)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ModifyClusterDbRevisionMessage
     #   data as a hash:
     #
@@ -4743,6 +4824,7 @@ module Aws::Redshift
     #         publicly_accessible: false,
     #         elastic_ip: "String",
     #         enhanced_vpc_routing: false,
+    #         maintenance_track_name: "String",
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -4982,6 +5064,16 @@ module Aws::Redshift
     #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] maintenance_track_name
+    #   The name for the maintenance track that you want to assign for the
+    #   cluster. This name change is asynchronous. The new track name stays
+    #   in the `PendingModifiedValues` for the cluster until the next
+    #   maintenance window. When the maintenance track changes, the cluster
+    #   is switched to the latest cluster release available for the
+    #   maintenance track. At this point, the maintenance track name is
+    #   applied.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMessage AWS API Documentation
     #
     class ModifyClusterMessage < Struct.new(
@@ -5002,7 +5094,8 @@ module Aws::Redshift
       :new_cluster_identifier,
       :publicly_accessible,
       :elastic_ip,
-      :enhanced_vpc_routing)
+      :enhanced_vpc_routing,
+      :maintenance_track_name)
       include Aws::Structure
     end
 
@@ -5431,6 +5524,11 @@ module Aws::Redshift
     #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] maintenance_track_name
+    #   The name of the maintenance track that the cluster will change to
+    #   during the next maintenance window.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PendingModifiedValues AWS API Documentation
     #
     class PendingModifiedValues < Struct.new(
@@ -5442,7 +5540,8 @@ module Aws::Redshift
       :automated_snapshot_retention_period,
       :cluster_identifier,
       :publicly_accessible,
-      :enhanced_vpc_routing)
+      :enhanced_vpc_routing,
+      :maintenance_track_name)
       include Aws::Structure
     end
 
@@ -5896,6 +5995,7 @@ module Aws::Redshift
     #         enhanced_vpc_routing: false,
     #         additional_info: "String",
     #         iam_roles: ["String"],
+    #         maintenance_track_name: "String",
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -6112,6 +6212,17 @@ module Aws::Redshift
     #   A cluster can have up to 10 IAM roles associated at any time.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] maintenance_track_name
+    #   The name of the maintenance track for the restored cluster. When you
+    #   take a snapshot, the snapshot inherits the `MaintenanceTrack` value
+    #   from the cluster. The snapshot might be on a different track than
+    #   the cluster that was the source for the snapshot. For example,
+    #   suppose that you take a snapshot of a cluster that is on the current
+    #   track and then change the cluster to be on the trailing track. In
+    #   this case, the snapshot and the source cluster are on different
+    #   tracks.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshotMessage AWS API Documentation
     #
     class RestoreFromClusterSnapshotMessage < Struct.new(
@@ -6136,7 +6247,8 @@ module Aws::Redshift
       :node_type,
       :enhanced_vpc_routing,
       :additional_info,
-      :iam_roles)
+      :iam_roles,
+      :maintenance_track_name)
       include Aws::Structure
     end
 
@@ -6595,6 +6707,10 @@ module Aws::Redshift
     #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] maintenance_track_name
+    #   The name of the maintenance track for the snapshot.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Snapshot AWS API Documentation
     #
     class Snapshot < Struct.new(
@@ -6626,7 +6742,8 @@ module Aws::Redshift
       :source_region,
       :tags,
       :restorable_node_types,
-      :enhanced_vpc_routing)
+      :enhanced_vpc_routing,
+      :maintenance_track_name)
       include Aws::Structure
     end
 
@@ -6952,6 +7069,44 @@ module Aws::Redshift
     class TaggedResourceListMessage < Struct.new(
       :tagged_resources,
       :marker)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] maintenance_tracks
+    #   A list of maintenance tracks output by the `DescribeClusterTracks`
+    #   operation.
+    #   @return [Array<Types::MaintenanceTrack>]
+    #
+    # @!attribute [rw] marker
+    #   The starting point to return a set of response tracklist records.
+    #   You can retrieve the next set of response records by providing the
+    #   returned marker value in the `Marker` parameter and retrying the
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/TrackListMessage AWS API Documentation
+    #
+    class TrackListMessage < Struct.new(
+      :maintenance_tracks,
+      :marker)
+      include Aws::Structure
+    end
+
+    # A maintenance track that you can switch the current track to.
+    #
+    # @!attribute [rw] maintenance_track_name
+    #   The name of the new maintenance track.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_version
+    #   The cluster version for the new maintenance track.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/UpdateTarget AWS API Documentation
+    #
+    class UpdateTarget < Struct.new(
+      :maintenance_track_name,
+      :database_version)
       include Aws::Structure
     end
 

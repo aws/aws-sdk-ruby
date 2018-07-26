@@ -7013,6 +7013,43 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass LabelParameterVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "PSParameterName", # required
+    #         parameter_version: 1,
+    #         labels: ["ParameterLabel"], # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] parameter_version
+    #   @return [Integer]
+    #
+    # @!attribute [rw] labels
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/LabelParameterVersionRequest AWS API Documentation
+    #
+    class LabelParameterVersionRequest < Struct.new(
+      :name,
+      :parameter_version,
+      :labels)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] invalid_labels
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/LabelParameterVersionResult AWS API Documentation
+    #
+    class LabelParameterVersionResult < Struct.new(
+      :invalid_labels)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListAssociationVersionsRequest
     #   data as a hash:
     #
@@ -8657,13 +8694,42 @@ module Aws::SSM
     #   The parameter version.
     #   @return [Integer]
     #
+    # @!attribute [rw] selector
+    #   Either the version number or the label used to retrieve the
+    #   parameter value. Specify selectors by using one of the following
+    #   formats:
+    #
+    #   parameter\_name:version
+    #
+    #   parameter\_name:label
+    #   @return [String]
+    #
+    # @!attribute [rw] source_result
+    #   Applies to parameters that reference information in other AWS
+    #   services. SourceResult is the raw result or response from the
+    #   source.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   Date the parameter was last changed or updated and the parameter
+    #   version was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the parameter.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Parameter AWS API Documentation
     #
     class Parameter < Struct.new(
       :name,
       :type,
       :value,
-      :version)
+      :version,
+      :selector,
+      :source_result,
+      :last_modified_date,
+      :arn)
       include Aws::Structure
     end
 
@@ -8708,6 +8774,10 @@ module Aws::SSM
     #   The parameter version.
     #   @return [Integer]
     #
+    # @!attribute [rw] labels
+    #   Labels assigned to the parameter version.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterHistory AWS API Documentation
     #
     class ParameterHistory < Struct.new(
@@ -8719,7 +8789,8 @@ module Aws::SSM
       :description,
       :value,
       :allowed_pattern,
-      :version)
+      :version,
+      :labels)
       include Aws::Structure
     end
 
@@ -11074,34 +11145,25 @@ module Aws::SSM
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] is_end
-    #   Enable this option to stop an Automation execution at the end of a
-    #   specific step. The Automation execution stops if the step execution
-    #   failed or succeeded.
+    #   The flag which can be used to end automation no matter whether the
+    #   step succeeds or fails.
     #   @return [Boolean]
     #
     # @!attribute [rw] next_step
-    #   Specifies which step in an Automation to process next after
-    #   successfully completing a step.
+    #   The next step after the step succeeds.
     #   @return [String]
     #
     # @!attribute [rw] is_critical
-    #   Enable this option to designate a step as critical for the
-    #   successful completion of the Automation. If a step with this
-    #   designation fails, then Automation reports the final status of the
-    #   Automation as Failed.
+    #   The flag which can be used to help decide whether the failure of
+    #   current step leads to the Automation failure.
     #   @return [Boolean]
     #
     # @!attribute [rw] valid_next_steps
-    #   ValidNextSteps offer different strategies for managing an Automation
-    #   workflow when a step finishes. Automation dynamically processes
-    #   ValidNextSteps when a step is completed. For example, you can
-    #   specify `Abort` to stop the Automation when a step fails or
-    #   `Continue` to ignore the failure of the current step and allow
-    #   Automation to continue processing the next step. You can also
-    #   specify `step:step_name ` to jump to a designated step after a step
-    #   succeeds. The result of the current step dynamically determines the
-    #   ValidNextSteps. If a step finishes and no ValidNextStep is
-    #   designated, then the Automation stops.
+    #   Strategies used when step fails, we support Continue and Abort.
+    #   Abort will fail the automation when the step fails. Continue will
+    #   ignore the failure of current step and allow automation to execute
+    #   the next step. With conditional branching, we add step:stepName to
+    #   support the automation to go to another specific step.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StepExecution AWS API Documentation

@@ -3757,6 +3757,10 @@ module Aws::SSM
     #   resp.parameter.type #=> String, one of "String", "StringList", "SecureString"
     #   resp.parameter.value #=> String
     #   resp.parameter.version #=> Integer
+    #   resp.parameter.selector #=> String
+    #   resp.parameter.source_result #=> String
+    #   resp.parameter.last_modified_date #=> Time
+    #   resp.parameter.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameter AWS API Documentation
     #
@@ -3811,6 +3815,8 @@ module Aws::SSM
     #   resp.parameters[0].value #=> String
     #   resp.parameters[0].allowed_pattern #=> String
     #   resp.parameters[0].version #=> Integer
+    #   resp.parameters[0].labels #=> Array
+    #   resp.parameters[0].labels[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameterHistory AWS API Documentation
@@ -3852,6 +3858,10 @@ module Aws::SSM
     #   resp.parameters[0].type #=> String, one of "String", "StringList", "SecureString"
     #   resp.parameters[0].value #=> String
     #   resp.parameters[0].version #=> Integer
+    #   resp.parameters[0].selector #=> String
+    #   resp.parameters[0].source_result #=> String
+    #   resp.parameters[0].last_modified_date #=> Time
+    #   resp.parameters[0].arn #=> String
     #   resp.invalid_parameters #=> Array
     #   resp.invalid_parameters[0] #=> String
     #
@@ -3948,6 +3958,10 @@ module Aws::SSM
     #   resp.parameters[0].type #=> String, one of "String", "StringList", "SecureString"
     #   resp.parameters[0].value #=> String
     #   resp.parameters[0].version #=> Integer
+    #   resp.parameters[0].selector #=> String
+    #   resp.parameters[0].source_result #=> String
+    #   resp.parameters[0].last_modified_date #=> Time
+    #   resp.parameters[0].arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParametersByPath AWS API Documentation
@@ -4065,6 +4079,38 @@ module Aws::SSM
     # @param [Hash] params ({})
     def get_patch_baseline_for_patch_group(params = {}, options = {})
       req = build_request(:get_patch_baseline_for_patch_group, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :name
+    #
+    # @option params [Integer] :parameter_version
+    #
+    # @option params [required, Array<String>] :labels
+    #
+    # @return [Types::LabelParameterVersionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::LabelParameterVersionResult#invalid_labels #invalid_labels} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.label_parameter_version({
+    #     name: "PSParameterName", # required
+    #     parameter_version: 1,
+    #     labels: ["ParameterLabel"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.invalid_labels #=> Array
+    #   resp.invalid_labels[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/LabelParameterVersion AWS API Documentation
+    #
+    # @overload label_parameter_version(params = {})
+    # @param [Hash] params ({})
+    def label_parameter_version(params = {}, options = {})
+      req = build_request(:label_parameter_version, params)
       req.send_request(options)
     end
 
@@ -6805,7 +6851,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

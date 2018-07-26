@@ -686,6 +686,8 @@ module Aws::Inspector
     #
     # @!attribute [rw] resource_group_arn
     #   The ARN that specifies the resource group that is used to create the
+    #   assessment target. If resourceGroupArn is not specified, all EC2
+    #   instances in the current AWS account and region are included in the
     #   assessment target.
     #   @return [String]
     #
@@ -737,8 +739,7 @@ module Aws::Inspector
     #   @return [String]
     #
     # @!attribute [rw] duration_in_seconds
-    #   The duration of the assessment run in seconds. The default value is
-    #   3600 seconds (one hour).
+    #   The duration of the assessment run in seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] rules_package_arns

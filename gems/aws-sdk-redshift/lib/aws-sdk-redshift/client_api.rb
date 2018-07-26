@@ -121,6 +121,7 @@ module Aws::Redshift
     DescribeClusterSecurityGroupsMessage = Shapes::StructureShape.new(name: 'DescribeClusterSecurityGroupsMessage')
     DescribeClusterSnapshotsMessage = Shapes::StructureShape.new(name: 'DescribeClusterSnapshotsMessage')
     DescribeClusterSubnetGroupsMessage = Shapes::StructureShape.new(name: 'DescribeClusterSubnetGroupsMessage')
+    DescribeClusterTracksMessage = Shapes::StructureShape.new(name: 'DescribeClusterTracksMessage')
     DescribeClusterVersionsMessage = Shapes::StructureShape.new(name: 'DescribeClusterVersionsMessage')
     DescribeClustersMessage = Shapes::StructureShape.new(name: 'DescribeClustersMessage')
     DescribeDefaultClusterParametersMessage = Shapes::StructureShape.new(name: 'DescribeDefaultClusterParametersMessage')
@@ -146,6 +147,7 @@ module Aws::Redshift
     EC2SecurityGroup = Shapes::StructureShape.new(name: 'EC2SecurityGroup')
     EC2SecurityGroupList = Shapes::ListShape.new(name: 'EC2SecurityGroupList')
     ElasticIpStatus = Shapes::StructureShape.new(name: 'ElasticIpStatus')
+    EligibleTracksToUpdateList = Shapes::ListShape.new(name: 'EligibleTracksToUpdateList')
     EnableLoggingMessage = Shapes::StructureShape.new(name: 'EnableLoggingMessage')
     EnableSnapshotCopyMessage = Shapes::StructureShape.new(name: 'EnableSnapshotCopyMessage')
     EnableSnapshotCopyResult = Shapes::StructureShape.new(name: 'EnableSnapshotCopyResult')
@@ -197,6 +199,7 @@ module Aws::Redshift
     InvalidClusterStateFault = Shapes::StructureShape.new(name: 'InvalidClusterStateFault')
     InvalidClusterSubnetGroupStateFault = Shapes::StructureShape.new(name: 'InvalidClusterSubnetGroupStateFault')
     InvalidClusterSubnetStateFault = Shapes::StructureShape.new(name: 'InvalidClusterSubnetStateFault')
+    InvalidClusterTrackFault = Shapes::StructureShape.new(name: 'InvalidClusterTrackFault')
     InvalidElasticIpFault = Shapes::StructureShape.new(name: 'InvalidElasticIpFault')
     InvalidHsmClientCertificateStateFault = Shapes::StructureShape.new(name: 'InvalidHsmClientCertificateStateFault')
     InvalidHsmConfigurationStateFault = Shapes::StructureShape.new(name: 'InvalidHsmConfigurationStateFault')
@@ -214,6 +217,7 @@ module Aws::Redshift
     LoggingStatus = Shapes::StructureShape.new(name: 'LoggingStatus')
     Long = Shapes::IntegerShape.new(name: 'Long')
     LongOptional = Shapes::IntegerShape.new(name: 'LongOptional')
+    MaintenanceTrack = Shapes::StructureShape.new(name: 'MaintenanceTrack')
     ModifyClusterDbRevisionMessage = Shapes::StructureShape.new(name: 'ModifyClusterDbRevisionMessage')
     ModifyClusterDbRevisionResult = Shapes::StructureShape.new(name: 'ModifyClusterDbRevisionResult')
     ModifyClusterIamRolesMessage = Shapes::StructureShape.new(name: 'ModifyClusterIamRolesMessage')
@@ -320,10 +324,13 @@ module Aws::Redshift
     TaggedResource = Shapes::StructureShape.new(name: 'TaggedResource')
     TaggedResourceList = Shapes::ListShape.new(name: 'TaggedResourceList')
     TaggedResourceListMessage = Shapes::StructureShape.new(name: 'TaggedResourceListMessage')
+    TrackList = Shapes::ListShape.new(name: 'TrackList')
+    TrackListMessage = Shapes::StructureShape.new(name: 'TrackListMessage')
     UnauthorizedOperation = Shapes::StructureShape.new(name: 'UnauthorizedOperation')
     UnknownSnapshotCopyRegionFault = Shapes::StructureShape.new(name: 'UnknownSnapshotCopyRegionFault')
     UnsupportedOperationFault = Shapes::StructureShape.new(name: 'UnsupportedOperationFault')
     UnsupportedOptionFault = Shapes::StructureShape.new(name: 'UnsupportedOptionFault')
+    UpdateTarget = Shapes::StructureShape.new(name: 'UpdateTarget')
     VpcSecurityGroupIdList = Shapes::ListShape.new(name: 'VpcSecurityGroupIdList')
     VpcSecurityGroupMembership = Shapes::StructureShape.new(name: 'VpcSecurityGroupMembership')
     VpcSecurityGroupMembershipList = Shapes::ListShape.new(name: 'VpcSecurityGroupMembershipList')
@@ -398,6 +405,7 @@ module Aws::Redshift
     Cluster.add_member(:enhanced_vpc_routing, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnhancedVpcRouting"))
     Cluster.add_member(:iam_roles, Shapes::ShapeRef.new(shape: ClusterIamRoleList, location_name: "IamRoles"))
     Cluster.add_member(:pending_actions, Shapes::ShapeRef.new(shape: PendingActionsList, location_name: "PendingActions"))
+    Cluster.add_member(:maintenance_track_name, Shapes::ShapeRef.new(shape: String, location_name: "MaintenanceTrackName"))
     Cluster.struct_class = Types::Cluster
 
     ClusterCredentials.add_member(:db_user, Shapes::ShapeRef.new(shape: String, location_name: "DbUser"))
@@ -554,6 +562,7 @@ module Aws::Redshift
     CreateClusterMessage.add_member(:enhanced_vpc_routing, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnhancedVpcRouting"))
     CreateClusterMessage.add_member(:additional_info, Shapes::ShapeRef.new(shape: String, location_name: "AdditionalInfo"))
     CreateClusterMessage.add_member(:iam_roles, Shapes::ShapeRef.new(shape: IamRoleArnList, location_name: "IamRoles"))
+    CreateClusterMessage.add_member(:maintenance_track_name, Shapes::ShapeRef.new(shape: String, location_name: "MaintenanceTrackName"))
     CreateClusterMessage.struct_class = Types::CreateClusterMessage
 
     CreateClusterParameterGroupMessage.add_member(:parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ParameterGroupName"))
@@ -729,6 +738,11 @@ module Aws::Redshift
     DescribeClusterSubnetGroupsMessage.add_member(:tag_values, Shapes::ShapeRef.new(shape: TagValueList, location_name: "TagValues"))
     DescribeClusterSubnetGroupsMessage.struct_class = Types::DescribeClusterSubnetGroupsMessage
 
+    DescribeClusterTracksMessage.add_member(:maintenance_track_name, Shapes::ShapeRef.new(shape: String, location_name: "MaintenanceTrackName"))
+    DescribeClusterTracksMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeClusterTracksMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeClusterTracksMessage.struct_class = Types::DescribeClusterTracksMessage
+
     DescribeClusterVersionsMessage.add_member(:cluster_version, Shapes::ShapeRef.new(shape: String, location_name: "ClusterVersion"))
     DescribeClusterVersionsMessage.add_member(:cluster_parameter_group_family, Shapes::ShapeRef.new(shape: String, location_name: "ClusterParameterGroupFamily"))
     DescribeClusterVersionsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
@@ -846,6 +860,8 @@ module Aws::Redshift
     ElasticIpStatus.add_member(:elastic_ip, Shapes::ShapeRef.new(shape: String, location_name: "ElasticIp"))
     ElasticIpStatus.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     ElasticIpStatus.struct_class = Types::ElasticIpStatus
+
+    EligibleTracksToUpdateList.member = Shapes::ShapeRef.new(shape: UpdateTarget, location_name: "UpdateTarget")
 
     EnableLoggingMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
     EnableLoggingMessage.add_member(:bucket_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "BucketName"))
@@ -987,6 +1003,11 @@ module Aws::Redshift
     LoggingStatus.add_member(:last_failure_message, Shapes::ShapeRef.new(shape: String, location_name: "LastFailureMessage"))
     LoggingStatus.struct_class = Types::LoggingStatus
 
+    MaintenanceTrack.add_member(:maintenance_track_name, Shapes::ShapeRef.new(shape: String, location_name: "MaintenanceTrackName"))
+    MaintenanceTrack.add_member(:database_version, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseVersion"))
+    MaintenanceTrack.add_member(:update_targets, Shapes::ShapeRef.new(shape: EligibleTracksToUpdateList, location_name: "UpdateTargets"))
+    MaintenanceTrack.struct_class = Types::MaintenanceTrack
+
     ModifyClusterDbRevisionMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
     ModifyClusterDbRevisionMessage.add_member(:revision_target, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RevisionTarget"))
     ModifyClusterDbRevisionMessage.struct_class = Types::ModifyClusterDbRevisionMessage
@@ -1020,6 +1041,7 @@ module Aws::Redshift
     ModifyClusterMessage.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "PubliclyAccessible"))
     ModifyClusterMessage.add_member(:elastic_ip, Shapes::ShapeRef.new(shape: String, location_name: "ElasticIp"))
     ModifyClusterMessage.add_member(:enhanced_vpc_routing, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnhancedVpcRouting"))
+    ModifyClusterMessage.add_member(:maintenance_track_name, Shapes::ShapeRef.new(shape: String, location_name: "MaintenanceTrackName"))
     ModifyClusterMessage.struct_class = Types::ModifyClusterMessage
 
     ModifyClusterParameterGroupMessage.add_member(:parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ParameterGroupName"))
@@ -1094,6 +1116,7 @@ module Aws::Redshift
     PendingModifiedValues.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
     PendingModifiedValues.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "PubliclyAccessible"))
     PendingModifiedValues.add_member(:enhanced_vpc_routing, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnhancedVpcRouting"))
+    PendingModifiedValues.add_member(:maintenance_track_name, Shapes::ShapeRef.new(shape: String, location_name: "MaintenanceTrackName"))
     PendingModifiedValues.struct_class = Types::PendingModifiedValues
 
     PurchaseReservedNodeOfferingMessage.add_member(:reserved_node_offering_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReservedNodeOfferingId"))
@@ -1196,6 +1219,7 @@ module Aws::Redshift
     RestoreFromClusterSnapshotMessage.add_member(:enhanced_vpc_routing, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnhancedVpcRouting"))
     RestoreFromClusterSnapshotMessage.add_member(:additional_info, Shapes::ShapeRef.new(shape: String, location_name: "AdditionalInfo"))
     RestoreFromClusterSnapshotMessage.add_member(:iam_roles, Shapes::ShapeRef.new(shape: IamRoleArnList, location_name: "IamRoles"))
+    RestoreFromClusterSnapshotMessage.add_member(:maintenance_track_name, Shapes::ShapeRef.new(shape: String, location_name: "MaintenanceTrackName"))
     RestoreFromClusterSnapshotMessage.struct_class = Types::RestoreFromClusterSnapshotMessage
 
     RestoreFromClusterSnapshotResult.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
@@ -1281,6 +1305,7 @@ module Aws::Redshift
     Snapshot.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     Snapshot.add_member(:restorable_node_types, Shapes::ShapeRef.new(shape: RestorableNodeTypeList, location_name: "RestorableNodeTypes"))
     Snapshot.add_member(:enhanced_vpc_routing, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnhancedVpcRouting"))
+    Snapshot.add_member(:maintenance_track_name, Shapes::ShapeRef.new(shape: String, location_name: "MaintenanceTrackName"))
     Snapshot.struct_class = Types::Snapshot
 
     SnapshotCopyGrant.add_member(:snapshot_copy_grant_name, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotCopyGrantName"))
@@ -1358,6 +1383,16 @@ module Aws::Redshift
     TaggedResourceListMessage.add_member(:tagged_resources, Shapes::ShapeRef.new(shape: TaggedResourceList, location_name: "TaggedResources"))
     TaggedResourceListMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     TaggedResourceListMessage.struct_class = Types::TaggedResourceListMessage
+
+    TrackList.member = Shapes::ShapeRef.new(shape: MaintenanceTrack, location_name: "MaintenanceTrack")
+
+    TrackListMessage.add_member(:maintenance_tracks, Shapes::ShapeRef.new(shape: TrackList, location_name: "MaintenanceTracks"))
+    TrackListMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    TrackListMessage.struct_class = Types::TrackListMessage
+
+    UpdateTarget.add_member(:maintenance_track_name, Shapes::ShapeRef.new(shape: String, location_name: "MaintenanceTrackName"))
+    UpdateTarget.add_member(:database_version, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseVersion"))
+    UpdateTarget.struct_class = Types::UpdateTarget
 
     VpcSecurityGroupIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "VpcSecurityGroupId")
 
@@ -1459,6 +1494,7 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: DependentServiceRequestThrottlingFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterTrackFault)
       end)
 
       api.add_operation(:create_cluster_parameter_group, Seahorse::Model::Operation.new.tap do |o|
@@ -1775,6 +1811,16 @@ module Aws::Redshift
         )
       end)
 
+      api.add_operation(:describe_cluster_tracks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeClusterTracks"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeClusterTracksMessage)
+        o.output = Shapes::ShapeRef.new(shape: TrackListMessage)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterTrackFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperation)
+      end)
+
       api.add_operation(:describe_cluster_versions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeClusterVersions"
         o.http_method = "POST"
@@ -2084,6 +2130,7 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: DependentServiceRequestThrottlingFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidElasticIpFault)
         o.errors << Shapes::ShapeRef.new(shape: TableLimitExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterTrackFault)
       end)
 
       api.add_operation(:modify_cluster_db_revision, Seahorse::Model::Operation.new.tap do |o|
@@ -2219,6 +2266,7 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: ClusterSecurityGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: DependentServiceRequestThrottlingFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterTrackFault)
       end)
 
       api.add_operation(:restore_table_from_cluster_snapshot, Seahorse::Model::Operation.new.tap do |o|
