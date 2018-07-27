@@ -26,11 +26,11 @@ Version 2 differs from version 1 in a number of important ways.
 
   ```ruby
   # version 1
-  AWS::S3::Client.new(http_read_timeout: 10)
+  AWS::S3::Client.new(http_reed_timeout: 10)
   # oops, typo'd option is ignored
 
   # version 2
-  Aws::S3::Client.new(http_read_timeout: 10)
+  Aws::S3::Client.new(http_reed_timeout: 10)
   # => raises ArgumentError
   ```
 
