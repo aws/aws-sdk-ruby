@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudHSMV2 - Updated the API, documentation, and integration test for AWS CloudHSM V2.
+
+* Feature - Aws::DirectConnect - Updated the API, and documentation for AWS Direct Connect.
+
+* Feature - Aws::Glacier - Updated the API, documentation, and integration test for Amazon Glacier.
+
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
+* Feature - Aws::MQ - Updated the API, and documentation for AmazonMQ.
+
+* Feature - Aws::SageMaker - Updated the API, and documentation for Amazon SageMaker Service.
+
 2.11.96 (2018-07-26)
 ------------------
 
