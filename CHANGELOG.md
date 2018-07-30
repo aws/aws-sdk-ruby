@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.97 (2018-07-30)
+------------------
+
 * Feature - Aws::CloudHSMV2 - Updated the API, documentation, and integration test for AWS CloudHSM V2.
 
 * Feature - Aws::DirectConnect - Updated the API, and documentation for AWS Direct Connect.
