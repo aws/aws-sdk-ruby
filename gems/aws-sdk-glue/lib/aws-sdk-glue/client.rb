@@ -800,7 +800,23 @@ module Aws::Glue
     #   The subnet ID for the new DevEndpoint to use.
     #
     # @option params [String] :public_key
-    #   The public key to use for authentication.
+    #   The public key to be used by this DevEndpoint for authentication. This
+    #   attribute is provided for backward compatibility, as the recommended
+    #   attribute to use is public keys.
+    #
+    # @option params [Array<String>] :public_keys
+    #   A list of public keys to be used by the DevEndpoints for
+    #   authentication. The use of this attribute is preferred over a single
+    #   public key because the public keys allow you to have a different
+    #   private key per client.
+    #
+    #   <note markdown="1"> If you previously created an endpoint with a public key, you must
+    #   remove that key to be able to set a list of public keys: call the
+    #   `UpdateDevEndpoint` API with the public key content in the
+    #   `deletePublicKeys` attribute, and the list of new keys in the
+    #   `addPublicKeys` attribute.
+    #
+    #    </note>
     #
     # @option params [Integer] :number_of_nodes
     #   The number of AWS Glue Data Processing Units (DPUs) to allocate to
@@ -848,6 +864,7 @@ module Aws::Glue
     #     security_group_ids: ["GenericString"],
     #     subnet_id: "GenericString",
     #     public_key: "GenericString",
+    #     public_keys: ["GenericString"],
     #     number_of_nodes: 1,
     #     extra_python_libs_s3_path: "GenericString",
     #     extra_jars_s3_path: "GenericString",
@@ -2234,6 +2251,8 @@ module Aws::Glue
     #   resp.dev_endpoint.created_timestamp #=> Time
     #   resp.dev_endpoint.last_modified_timestamp #=> Time
     #   resp.dev_endpoint.public_key #=> String
+    #   resp.dev_endpoint.public_keys #=> Array
+    #   resp.dev_endpoint.public_keys[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDevEndpoint AWS API Documentation
     #
@@ -2287,6 +2306,8 @@ module Aws::Glue
     #   resp.dev_endpoints[0].created_timestamp #=> Time
     #   resp.dev_endpoints[0].last_modified_timestamp #=> Time
     #   resp.dev_endpoints[0].public_key #=> String
+    #   resp.dev_endpoints[0].public_keys #=> Array
+    #   resp.dev_endpoints[0].public_keys[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDevEndpoints AWS API Documentation
@@ -3957,6 +3978,12 @@ module Aws::Glue
     # @option params [String] :public_key
     #   The public key for the DevEndpoint to use.
     #
+    # @option params [Array<String>] :add_public_keys
+    #   The list of public keys for the DevEndpoint to use.
+    #
+    # @option params [Array<String>] :delete_public_keys
+    #   The list of public keys to be deleted from the DevEndpoint.
+    #
     # @option params [Types::DevEndpointCustomLibraries] :custom_libraries
     #   Custom Python or Java libraries to be loaded in the DevEndpoint.
     #
@@ -3971,6 +3998,8 @@ module Aws::Glue
     #   resp = client.update_dev_endpoint({
     #     endpoint_name: "GenericString", # required
     #     public_key: "GenericString",
+    #     add_public_keys: ["GenericString"],
+    #     delete_public_keys: ["GenericString"],
     #     custom_libraries: {
     #       extra_python_libs_s3_path: "GenericString",
     #       extra_jars_s3_path: "GenericString",
@@ -4361,7 +4390,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

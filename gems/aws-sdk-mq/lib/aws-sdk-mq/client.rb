@@ -170,10 +170,7 @@ module Aws::MQ
     #   not need to pass this option.**
     #
     # @option params [String] :deployment_mode
-    #   The deployment mode of the broker. Possible values: SINGLE\_INSTANCE,
-    #   ACTIVE\_STANDBY\_MULTI\_AZ SINGLE\_INSTANCE creates a single-instance
-    #   broker in a single Availability Zone. ACTIVE\_STANDBY\_MULTI\_AZ
-    #   creates an active/standby broker for high availability.
+    #   The deployment mode of the broker.
     #
     # @option params [String] :engine_type
     #   The type of broker engine. Note: Currently, Amazon MQ supports only
@@ -182,6 +179,10 @@ module Aws::MQ
     # @option params [String] :engine_version
     #
     # @option params [String] :host_instance_type
+    #
+    # @option params [Types::Logs] :logs
+    #   The list of information about logs to be enabled for the specified
+    #   broker.
     #
     # @option params [Types::WeeklyStartTime] :maintenance_window_start_time
     #   The scheduled time period relative to UTC during which Amazon MQ
@@ -214,6 +215,10 @@ module Aws::MQ
     #     engine_type: "ACTIVEMQ", # accepts ACTIVEMQ
     #     engine_version: "__string",
     #     host_instance_type: "__string",
+    #     logs: {
+    #       audit: false,
+    #       general: false,
+    #     },
     #     maintenance_window_start_time: {
     #       day_of_week: "MONDAY", # accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
     #       time_of_day: "__string",
@@ -248,8 +253,7 @@ module Aws::MQ
 
     # Creates a new configuration for the specified configuration name.
     # Amazon MQ uses the default configuration (the engine type and
-    # version). Note: If the configuration name already exists, Amazon MQ
-    # doesn't create a configuration.
+    # version).
     #
     # @option params [String] :engine_type
     #   The type of broker engine. Note: Currently, Amazon MQ supports only
@@ -262,6 +266,7 @@ module Aws::MQ
     # @return [Types::CreateConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateConfigurationResponse#arn #arn} => String
+    #   * {Types::CreateConfigurationResponse#created #created} => Time
     #   * {Types::CreateConfigurationResponse#id #id} => String
     #   * {Types::CreateConfigurationResponse#latest_revision #latest_revision} => Types::ConfigurationRevision
     #   * {Types::CreateConfigurationResponse#name #name} => String
@@ -277,7 +282,9 @@ module Aws::MQ
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.created #=> Time
     #   resp.id #=> String
+    #   resp.latest_revision.created #=> Time
     #   resp.latest_revision.description #=> String
     #   resp.latest_revision.revision #=> Integer
     #   resp.name #=> String
@@ -388,10 +395,12 @@ module Aws::MQ
     #   * {Types::DescribeBrokerResponse#broker_name #broker_name} => String
     #   * {Types::DescribeBrokerResponse#broker_state #broker_state} => String
     #   * {Types::DescribeBrokerResponse#configurations #configurations} => Types::Configurations
+    #   * {Types::DescribeBrokerResponse#created #created} => Time
     #   * {Types::DescribeBrokerResponse#deployment_mode #deployment_mode} => String
     #   * {Types::DescribeBrokerResponse#engine_type #engine_type} => String
     #   * {Types::DescribeBrokerResponse#engine_version #engine_version} => String
     #   * {Types::DescribeBrokerResponse#host_instance_type #host_instance_type} => String
+    #   * {Types::DescribeBrokerResponse#logs #logs} => Types::LogsSummary
     #   * {Types::DescribeBrokerResponse#maintenance_window_start_time #maintenance_window_start_time} => Types::WeeklyStartTime
     #   * {Types::DescribeBrokerResponse#publicly_accessible #publicly_accessible} => Boolean
     #   * {Types::DescribeBrokerResponse#security_groups #security_groups} => Array&lt;String&gt;
@@ -413,6 +422,7 @@ module Aws::MQ
     #   resp.broker_instances[0].console_url #=> String
     #   resp.broker_instances[0].endpoints #=> Array
     #   resp.broker_instances[0].endpoints[0] #=> String
+    #   resp.broker_instances[0].ip_address #=> String
     #   resp.broker_name #=> String
     #   resp.broker_state #=> String, one of "CREATION_IN_PROGRESS", "CREATION_FAILED", "DELETION_IN_PROGRESS", "RUNNING", "REBOOT_IN_PROGRESS"
     #   resp.configurations.current.id #=> String
@@ -422,10 +432,17 @@ module Aws::MQ
     #   resp.configurations.history[0].revision #=> Integer
     #   resp.configurations.pending.id #=> String
     #   resp.configurations.pending.revision #=> Integer
+    #   resp.created #=> Time
     #   resp.deployment_mode #=> String, one of "SINGLE_INSTANCE", "ACTIVE_STANDBY_MULTI_AZ"
     #   resp.engine_type #=> String, one of "ACTIVEMQ"
     #   resp.engine_version #=> String
     #   resp.host_instance_type #=> String
+    #   resp.logs.audit #=> Boolean
+    #   resp.logs.audit_log_group #=> String
+    #   resp.logs.general #=> Boolean
+    #   resp.logs.general_log_group #=> String
+    #   resp.logs.pending.audit #=> Boolean
+    #   resp.logs.pending.general #=> Boolean
     #   resp.maintenance_window_start_time.day_of_week #=> String, one of "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
     #   resp.maintenance_window_start_time.time_of_day #=> String
     #   resp.maintenance_window_start_time.time_zone #=> String
@@ -454,6 +471,7 @@ module Aws::MQ
     # @return [Types::DescribeConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeConfigurationResponse#arn #arn} => String
+    #   * {Types::DescribeConfigurationResponse#created #created} => Time
     #   * {Types::DescribeConfigurationResponse#description #description} => String
     #   * {Types::DescribeConfigurationResponse#engine_type #engine_type} => String
     #   * {Types::DescribeConfigurationResponse#engine_version #engine_version} => String
@@ -470,10 +488,12 @@ module Aws::MQ
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.created #=> Time
     #   resp.description #=> String
     #   resp.engine_type #=> String, one of "ACTIVEMQ"
     #   resp.engine_version #=> String
     #   resp.id #=> String
+    #   resp.latest_revision.created #=> Time
     #   resp.latest_revision.description #=> String
     #   resp.latest_revision.revision #=> Integer
     #   resp.name #=> String
@@ -497,6 +517,7 @@ module Aws::MQ
     # @return [Types::DescribeConfigurationRevisionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeConfigurationRevisionResponse#configuration_id #configuration_id} => String
+    #   * {Types::DescribeConfigurationRevisionResponse#created #created} => Time
     #   * {Types::DescribeConfigurationRevisionResponse#data #data} => String
     #   * {Types::DescribeConfigurationRevisionResponse#description #description} => String
     #
@@ -510,6 +531,7 @@ module Aws::MQ
     # @example Response structure
     #
     #   resp.configuration_id #=> String
+    #   resp.created #=> Time
     #   resp.data #=> String
     #   resp.description #=> String
     #
@@ -589,6 +611,7 @@ module Aws::MQ
     #   resp.broker_summaries[0].broker_id #=> String
     #   resp.broker_summaries[0].broker_name #=> String
     #   resp.broker_summaries[0].broker_state #=> String, one of "CREATION_IN_PROGRESS", "CREATION_FAILED", "DELETION_IN_PROGRESS", "RUNNING", "REBOOT_IN_PROGRESS"
+    #   resp.broker_summaries[0].created #=> Time
     #   resp.broker_summaries[0].deployment_mode #=> String, one of "SINGLE_INSTANCE", "ACTIVE_STANDBY_MULTI_AZ"
     #   resp.broker_summaries[0].host_instance_type #=> String
     #   resp.next_token #=> String
@@ -631,6 +654,7 @@ module Aws::MQ
     #   resp.max_results #=> Integer
     #   resp.next_token #=> String
     #   resp.revisions #=> Array
+    #   resp.revisions[0].created #=> Time
     #   resp.revisions[0].description #=> String
     #   resp.revisions[0].revision #=> Integer
     #
@@ -666,10 +690,12 @@ module Aws::MQ
     #
     #   resp.configurations #=> Array
     #   resp.configurations[0].arn #=> String
+    #   resp.configurations[0].created #=> Time
     #   resp.configurations[0].description #=> String
     #   resp.configurations[0].engine_type #=> String, one of "ACTIVEMQ"
     #   resp.configurations[0].engine_version #=> String
     #   resp.configurations[0].id #=> String
+    #   resp.configurations[0].latest_revision.created #=> Time
     #   resp.configurations[0].latest_revision.description #=> String
     #   resp.configurations[0].latest_revision.revision #=> Integer
     #   resp.configurations[0].name #=> String
@@ -754,10 +780,15 @@ module Aws::MQ
     # @option params [Types::ConfigurationId] :configuration
     #   A list of information about the configuration.
     #
+    # @option params [Types::Logs] :logs
+    #   The list of information about logs to be enabled for the specified
+    #   broker.
+    #
     # @return [Types::UpdateBrokerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateBrokerResponse#broker_id #broker_id} => String
     #   * {Types::UpdateBrokerResponse#configuration #configuration} => Types::ConfigurationId
+    #   * {Types::UpdateBrokerResponse#logs #logs} => Types::Logs
     #
     # @example Request syntax with placeholder values
     #
@@ -767,6 +798,10 @@ module Aws::MQ
     #       id: "__string",
     #       revision: 1,
     #     },
+    #     logs: {
+    #       audit: false,
+    #       general: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -774,6 +809,8 @@ module Aws::MQ
     #   resp.broker_id #=> String
     #   resp.configuration.id #=> String
     #   resp.configuration.revision #=> Integer
+    #   resp.logs.audit #=> Boolean
+    #   resp.logs.general #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBroker AWS API Documentation
     #
@@ -795,6 +832,7 @@ module Aws::MQ
     # @return [Types::UpdateConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateConfigurationResponse#arn #arn} => String
+    #   * {Types::UpdateConfigurationResponse#created #created} => Time
     #   * {Types::UpdateConfigurationResponse#id #id} => String
     #   * {Types::UpdateConfigurationResponse#latest_revision #latest_revision} => Types::ConfigurationRevision
     #   * {Types::UpdateConfigurationResponse#name #name} => String
@@ -811,7 +849,9 @@ module Aws::MQ
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.created #=> Time
     #   resp.id #=> String
+    #   resp.latest_revision.created #=> Time
     #   resp.latest_revision.description #=> String
     #   resp.latest_revision.revision #=> Integer
     #   resp.name #=> String
@@ -875,7 +915,7 @@ module Aws::MQ
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mq'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

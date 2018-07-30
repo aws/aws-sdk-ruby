@@ -22,6 +22,7 @@ module Aws::DirectConnect
     AssociateHostedConnectionRequest = Shapes::StructureShape.new(name: 'AssociateHostedConnectionRequest')
     AssociateVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'AssociateVirtualInterfaceRequest')
     AwsDevice = Shapes::StringShape.new(name: 'AwsDevice')
+    AwsDeviceV2 = Shapes::StringShape.new(name: 'AwsDeviceV2')
     BGPAuthKey = Shapes::StringShape.new(name: 'BGPAuthKey')
     BGPPeer = Shapes::StructureShape.new(name: 'BGPPeer')
     BGPPeerList = Shapes::ListShape.new(name: 'BGPPeerList')
@@ -213,6 +214,7 @@ module Aws::DirectConnect
     BGPPeer.add_member(:customer_address, Shapes::ShapeRef.new(shape: CustomerAddress, location_name: "customerAddress"))
     BGPPeer.add_member(:bgp_peer_state, Shapes::ShapeRef.new(shape: BGPPeerState, location_name: "bgpPeerState"))
     BGPPeer.add_member(:bgp_status, Shapes::ShapeRef.new(shape: BGPStatus, location_name: "bgpStatus"))
+    BGPPeer.add_member(:aws_device_v2, Shapes::ShapeRef.new(shape: AwsDeviceV2, location_name: "awsDeviceV2"))
     BGPPeer.struct_class = Types::BGPPeer
 
     BGPPeerList.member = Shapes::ShapeRef.new(shape: BGPPeer)
@@ -248,7 +250,8 @@ module Aws::DirectConnect
     Connection.add_member(:partner_name, Shapes::ShapeRef.new(shape: PartnerName, location_name: "partnerName"))
     Connection.add_member(:loa_issue_time, Shapes::ShapeRef.new(shape: LoaIssueTime, location_name: "loaIssueTime"))
     Connection.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, location_name: "lagId"))
-    Connection.add_member(:aws_device, Shapes::ShapeRef.new(shape: AwsDevice, location_name: "awsDevice"))
+    Connection.add_member(:aws_device, Shapes::ShapeRef.new(shape: AwsDevice, deprecated: true, location_name: "awsDevice"))
+    Connection.add_member(:aws_device_v2, Shapes::ShapeRef.new(shape: AwsDeviceV2, location_name: "awsDeviceV2"))
     Connection.struct_class = Types::Connection
 
     ConnectionList.member = Shapes::ShapeRef.new(shape: Connection)
@@ -460,7 +463,8 @@ module Aws::DirectConnect
     Interconnect.add_member(:bandwidth, Shapes::ShapeRef.new(shape: Bandwidth, location_name: "bandwidth"))
     Interconnect.add_member(:loa_issue_time, Shapes::ShapeRef.new(shape: LoaIssueTime, location_name: "loaIssueTime"))
     Interconnect.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, location_name: "lagId"))
-    Interconnect.add_member(:aws_device, Shapes::ShapeRef.new(shape: AwsDevice, location_name: "awsDevice"))
+    Interconnect.add_member(:aws_device, Shapes::ShapeRef.new(shape: AwsDevice, deprecated: true, location_name: "awsDevice"))
+    Interconnect.add_member(:aws_device_v2, Shapes::ShapeRef.new(shape: AwsDeviceV2, location_name: "awsDeviceV2"))
     Interconnect.struct_class = Types::Interconnect
 
     InterconnectList.member = Shapes::ShapeRef.new(shape: Interconnect)
@@ -477,7 +481,8 @@ module Aws::DirectConnect
     Lag.add_member(:location, Shapes::ShapeRef.new(shape: LocationCode, location_name: "location"))
     Lag.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "region"))
     Lag.add_member(:minimum_links, Shapes::ShapeRef.new(shape: Count, location_name: "minimumLinks"))
-    Lag.add_member(:aws_device, Shapes::ShapeRef.new(shape: AwsDevice, location_name: "awsDevice"))
+    Lag.add_member(:aws_device, Shapes::ShapeRef.new(shape: AwsDevice, deprecated: true, location_name: "awsDevice"))
+    Lag.add_member(:aws_device_v2, Shapes::ShapeRef.new(shape: AwsDeviceV2, location_name: "awsDeviceV2"))
     Lag.add_member(:connections, Shapes::ShapeRef.new(shape: ConnectionList, location_name: "connections"))
     Lag.add_member(:allows_hosted_connections, Shapes::ShapeRef.new(shape: BooleanFlag, location_name: "allowsHostedConnections"))
     Lag.struct_class = Types::Lag
@@ -493,6 +498,7 @@ module Aws::DirectConnect
 
     Location.add_member(:location_code, Shapes::ShapeRef.new(shape: LocationCode, location_name: "locationCode"))
     Location.add_member(:location_name, Shapes::ShapeRef.new(shape: LocationName, location_name: "locationName"))
+    Location.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "region"))
     Location.struct_class = Types::Location
 
     LocationList.member = Shapes::ShapeRef.new(shape: Location)
@@ -613,6 +619,8 @@ module Aws::DirectConnect
     VirtualInterface.add_member(:direct_connect_gateway_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayId, location_name: "directConnectGatewayId"))
     VirtualInterface.add_member(:route_filter_prefixes, Shapes::ShapeRef.new(shape: RouteFilterPrefixList, location_name: "routeFilterPrefixes"))
     VirtualInterface.add_member(:bgp_peers, Shapes::ShapeRef.new(shape: BGPPeerList, location_name: "bgpPeers"))
+    VirtualInterface.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "region"))
+    VirtualInterface.add_member(:aws_device_v2, Shapes::ShapeRef.new(shape: AwsDeviceV2, location_name: "awsDeviceV2"))
     VirtualInterface.struct_class = Types::VirtualInterface
 
     VirtualInterfaceList.member = Shapes::ShapeRef.new(shape: VirtualInterface)

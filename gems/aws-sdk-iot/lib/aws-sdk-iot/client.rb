@@ -645,9 +645,6 @@ module Aws::IoT
     # @option params [Types::JobExecutionsRolloutConfig] :job_executions_rollout_config
     #   Allows you to create a staged rollout of the job.
     #
-    # @option params [Hash<String,String>] :document_parameters
-    #   Parameters for the job document.
-    #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateJobResponse#job_arn #job_arn} => String
@@ -669,9 +666,6 @@ module Aws::IoT
     #     target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
     #     job_executions_rollout_config: {
     #       maximum_per_minute: 1,
-    #     },
-    #     document_parameters: {
-    #       "ParameterKey" => "ParameterValue",
     #     },
     #   })
     #
@@ -1020,6 +1014,15 @@ module Aws::IoT
 
     # Creates a thing record in the registry.
     #
+    # <note markdown="1"> This is a control plane operation. See [Authorization][1] for
+    # information about authorizing control plane actions.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/iot/latest/developerguide/authorization.html
+    #
     # @option params [required, String] :thing_name
     #   The name of the thing to create.
     #
@@ -1065,6 +1068,15 @@ module Aws::IoT
     end
 
     # Create a thing group.
+    #
+    # <note markdown="1"> This is a control plane operation. See [Authorization][1] for
+    # information about authorizing control plane actions.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/iot/latest/developerguide/authorization.html
     #
     # @option params [required, String] :thing_group_name
     #   The thing group name to create.
@@ -2053,8 +2065,6 @@ module Aws::IoT
     #   resp.job.job_process_details.number_of_queued_things #=> Integer
     #   resp.job.job_process_details.number_of_in_progress_things #=> Integer
     #   resp.job.job_process_details.number_of_removed_things #=> Integer
-    #   resp.job.document_parameters #=> Hash
-    #   resp.job.document_parameters["ParameterKey"] #=> String
     #
     # @overload describe_job(params = {})
     # @param [Hash] params ({})
@@ -2547,6 +2557,9 @@ module Aws::IoT
     end
 
     # Gets the logging options.
+    #
+    # NOTE: use of this command is not recommended. Use
+    # `GetV2LoggingOptions` instead.
     #
     # @return [Types::GetLoggingOptionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4634,6 +4647,9 @@ module Aws::IoT
 
     # Sets the logging options.
     #
+    # NOTE: use of this command is not recommended. Use
+    # `SetV2LoggingOptions` instead.
+    #
     # @option params [required, Types::LoggingOptionsPayload] :logging_options_payload
     #   The logging options payload.
     #
@@ -4685,13 +4701,13 @@ module Aws::IoT
     # Sets the logging options for the V2 logging service.
     #
     # @option params [String] :role_arn
-    #   The role ARN that allows IoT to write to Cloudwatch logs.
+    #   The ARN of the role that allows IoT to write to Cloudwatch logs.
     #
     # @option params [String] :default_log_level
     #   The default logging level.
     #
     # @option params [Boolean] :disable_all_logs
-    #   Set to true to disable all logs, otherwise set to false.
+    #   If true all logs are disabled. The default is false.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5334,7 +5350,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

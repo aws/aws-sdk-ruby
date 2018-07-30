@@ -257,7 +257,7 @@ module Aws::Glacier
     #   marker if you are continuing the pagination of results started in a
     #   previous List Parts request.
     # @option options [Integer] :limit
-    #   The maximum number of parts to be returned. The default limit is 1000.
+    #   The maximum number of parts to be returned. The default limit is 50.
     #   The number of parts returned might be fewer than the specified limit,
     #   but the number of returned parts never exceeds the limit.
     # @return [Types::ListPartsOutput]

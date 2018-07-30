@@ -1000,7 +1000,7 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] stream
-    #   A stream of the certificate chain files.
+    #   Describes a group of files that can be streamed.
     #   @return [Types::Stream]
     #
     # @!attribute [rw] certificate_name
@@ -1033,7 +1033,7 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] stream
-    #   A stream of the code signing signature.
+    #   Describes a group of files that can be streamed.
     #   @return [Types::Stream]
     #
     # @!attribute [rw] inline_document
@@ -1187,9 +1187,6 @@ module Aws::IoT
     #         job_executions_rollout_config: {
     #           maximum_per_minute: 1,
     #         },
-    #         document_parameters: {
-    #           "ParameterKey" => "ParameterValue",
-    #         },
     #       }
     #
     # @!attribute [rw] job_id
@@ -1231,10 +1228,6 @@ module Aws::IoT
     #   Allows you to create a staged rollout of the job.
     #   @return [Types::JobExecutionsRolloutConfig]
     #
-    # @!attribute [rw] document_parameters
-    #   Parameters for the job document.
-    #   @return [Hash<String,String>]
-    #
     class CreateJobRequest < Struct.new(
       :job_id,
       :targets,
@@ -1243,8 +1236,7 @@ module Aws::IoT
       :description,
       :presigned_url_config,
       :target_selection,
-      :job_executions_rollout_config,
-      :document_parameters)
+      :job_executions_rollout_config)
       include Aws::Structure
     end
 
@@ -3886,10 +3878,6 @@ module Aws::IoT
     #   Details about the job process.
     #   @return [Types::JobProcessDetails]
     #
-    # @!attribute [rw] document_parameters
-    #   The parameters specified for the job document.
-    #   @return [Hash<String,String>]
-    #
     class Job < Struct.new(
       :job_arn,
       :job_id,
@@ -3904,8 +3892,7 @@ module Aws::IoT
       :created_at,
       :last_updated_at,
       :completed_at,
-      :job_process_details,
-      :document_parameters)
+      :job_process_details)
       include Aws::Structure
     end
 
@@ -6532,8 +6519,6 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # The location in S3 the contains the files to stream.
-    #
     # @note When making an API call, you may pass S3Location
     #   data as a hash:
     #
@@ -6544,15 +6529,12 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] bucket
-    #   The S3 bucket that contains the file to stream.
     #   @return [String]
     #
     # @!attribute [rw] key
-    #   The name of the file within the S3 bucket to stream.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The file version.
     #   @return [String]
     #
     class S3Location < Struct.new(
@@ -6757,7 +6739,7 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The role ARN that allows IoT to write to Cloudwatch logs.
+    #   The ARN of the role that allows IoT to write to Cloudwatch logs.
     #   @return [String]
     #
     # @!attribute [rw] default_log_level
@@ -6765,7 +6747,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] disable_all_logs
-    #   Set to true to disable all logs, otherwise set to false.
+    #   If true all logs are disabled. The default is false.
     #   @return [Boolean]
     #
     class SetV2LoggingOptionsRequest < Struct.new(

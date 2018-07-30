@@ -205,6 +205,8 @@ module Aws::SageMaker
     S3DataType = Shapes::StringShape.new(name: 'S3DataType')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SecondaryStatus = Shapes::StringShape.new(name: 'SecondaryStatus')
+    SecondaryStatusTransition = Shapes::StructureShape.new(name: 'SecondaryStatusTransition')
+    SecondaryStatusTransitions = Shapes::ListShape.new(name: 'SecondaryStatusTransitions')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     SessionExpirationDurationInSeconds = Shapes::IntegerShape.new(name: 'SessionExpirationDurationInSeconds')
@@ -212,6 +214,7 @@ module Aws::SageMaker
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     SplitType = Shapes::StringShape.new(name: 'SplitType')
     StartNotebookInstanceInput = Shapes::StructureShape.new(name: 'StartNotebookInstanceInput')
+    StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
     StopHyperParameterTuningJobRequest = Shapes::StructureShape.new(name: 'StopHyperParameterTuningJobRequest')
     StopNotebookInstanceInput = Shapes::StructureShape.new(name: 'StopNotebookInstanceInput')
     StopTrainingJobRequest = Shapes::StructureShape.new(name: 'StopTrainingJobRequest')
@@ -534,6 +537,7 @@ module Aws::SageMaker
     DescribeTrainingJobResponse.add_member(:training_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TrainingStartTime"))
     DescribeTrainingJobResponse.add_member(:training_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TrainingEndTime"))
     DescribeTrainingJobResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    DescribeTrainingJobResponse.add_member(:secondary_status_transitions, Shapes::ShapeRef.new(shape: SecondaryStatusTransitions, location_name: "SecondaryStatusTransitions"))
     DescribeTrainingJobResponse.struct_class = Types::DescribeTrainingJobResponse
 
     DescribeTransformJobRequest.add_member(:transform_job_name, Shapes::ShapeRef.new(shape: TransformJobName, required: true, location_name: "TransformJobName"))
@@ -885,6 +889,14 @@ module Aws::SageMaker
     S3DataSource.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
     S3DataSource.add_member(:s3_data_distribution_type, Shapes::ShapeRef.new(shape: S3DataDistribution, location_name: "S3DataDistributionType"))
     S3DataSource.struct_class = Types::S3DataSource
+
+    SecondaryStatusTransition.add_member(:status, Shapes::ShapeRef.new(shape: SecondaryStatus, required: true, location_name: "Status"))
+    SecondaryStatusTransition.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
+    SecondaryStatusTransition.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    SecondaryStatusTransition.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "StatusMessage"))
+    SecondaryStatusTransition.struct_class = Types::SecondaryStatusTransition
+
+    SecondaryStatusTransitions.member = Shapes::ShapeRef.new(shape: SecondaryStatusTransition)
 
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 

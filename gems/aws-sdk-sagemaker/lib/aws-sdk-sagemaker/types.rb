@@ -1121,32 +1121,41 @@ module Aws::SageMaker
     #
     # @!attribute [rw] model_name
     #   The name of the model that you want to use for the transform job.
+    #   `ModelName` must be the name of an existing Amazon SageMaker model
+    #   within an AWS Region in an AWS account.
     #   @return [String]
     #
     # @!attribute [rw] max_concurrent_transforms
-    #   The maximum number of parallel requests on each instance node that
-    #   can be launched in a transform job. The default value is `1`. To
-    #   allow Amazon SageMaker to determine the appropriate number for
-    #   `MaxConcurrentTransforms`, set the value to `0`.
+    #   The maximum number of parallel requests that can be sent to each
+    #   instance in a transform job. This is good for algorithms that
+    #   implement multiple workers on larger instances . The default value
+    #   is `1`. To allow Amazon SageMaker to determine the appropriate
+    #   number for `MaxConcurrentTransforms`, set the value to `0`.
     #   @return [Integer]
     #
     # @!attribute [rw] max_payload_in_mb
     #   The maximum payload size allowed, in MB. A payload is the data
     #   portion of a record (without metadata). The value in
-    #   `MaxPayloadInMB` must be greater than the size of a single
-    #   record.You can approximate the size of a record by dividing the size
-    #   of your dataset by the number of records. The value you enter should
-    #   be proportional to the number of records you want per batch. It is
-    #   recommended to enter a slightly higher value to ensure the records
-    #   will fit within the maximum payload size. The default value is `6`
-    #   MB. For an unlimited payload size, set the value to `0`.
+    #   `MaxPayloadInMB` must be greater or equal to the size of a single
+    #   record. You can approximate the size of a record by dividing the
+    #   size of your dataset by the number of records. Then multiply this
+    #   value by the number of records you want in a mini-batch. It is
+    #   recommended to enter a value slightly larger than this to ensure the
+    #   records fit within the maximum payload size. The default value is
+    #   `6` MB. For an unlimited payload size, set the value to `0`.
     #   @return [Integer]
     #
     # @!attribute [rw] batch_strategy
-    #   Determins the number of records included in a single batch.
-    #   `SingleRecord` means only one record is used per batch.
-    #   `MultiRecord` means a batch is set to contain as many records that
-    #   could possibly fit within the `MaxPayloadInMB` limit.
+    #   Determines the number of records included in a single mini-batch.
+    #   `SingleRecord` means only one record is used per mini-batch.
+    #   `MultiRecord` means a mini-batch is set to contain as many records
+    #   that can fit within the `MaxPayloadInMB` limit.
+    #
+    #   Batch transform will automatically split your input data into
+    #   whatever payload size is specified if you set `SplitType` to `Line`
+    #   and `BatchStrategy` to `MultiRecord`. There's no need to split the
+    #   dataset into smaller files or to use larger payload sizes unless the
+    #   records in your dataset are very large.
     #   @return [String]
     #
     # @!attribute [rw] environment
@@ -1888,6 +1897,38 @@ module Aws::SageMaker
     # @!attribute [rw] secondary_status
     #   Provides granular information about the system state. For more
     #   information, see `TrainingJobStatus`.
+    #
+    #   * `Starting` - starting the training job.
+    #
+    #   * `LaunchingMLInstances` - launching ML instances for the training
+    #     job.
+    #
+    #   * `PreparingTrainingStack` - preparing the ML instances for the
+    #     training job.
+    #
+    #   * `Downloading` - downloading the input data.
+    #
+    #   * `DownloadingTrainingImage` - downloading the training algorithm
+    #     image.
+    #
+    #   * `Training` - model training is in progress.
+    #
+    #   * `Uploading` - uploading the trained model.
+    #
+    #   * `Stopping` - stopping the training job.
+    #
+    #   * `Stopped` - the training job has stopped.
+    #
+    #   * `MaxRuntimeExceeded` - the training job exceeded the specified max
+    #     run time and has been stopped.
+    #
+    #   * `Completed` - the training job has completed.
+    #
+    #   * `Failed` - the training job has failed. The failure reason is
+    #     provided in the `StatusMessage`.
+    #
+    #   The valid values for `SecondaryStatus` are subject to change. They
+    #   primarily provide information on the progress of the training job.
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
@@ -1960,6 +2001,12 @@ module Aws::SageMaker
     #   last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] secondary_status_transitions
+    #   To give an overview of the training job lifecycle,
+    #   `SecondaryStatusTransitions` is a log of time-ordered secondary
+    #   statuses that a training job has transitioned.
+    #   @return [Array<Types::SecondaryStatusTransition>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJobResponse AWS API Documentation
     #
     class DescribeTrainingJobResponse < Struct.new(
@@ -1981,7 +2028,8 @@ module Aws::SageMaker
       :creation_time,
       :training_start_time,
       :training_end_time,
-      :last_modified_time)
+      :last_modified_time,
+      :secondary_status_transitions)
       include Aws::Structure
     end
 
@@ -2035,8 +2083,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] batch_strategy
     #   SingleRecord means only one record was used per a batch.
-    #   &lt;code&gt;MultiRecord&lt;/code&gt; means batches contained as many
-    #   records that could possibly fit within the `MaxPayloadInMB` limit.
+    #   `MultiRecord` means batches contained as many records that could
+    #   possibly fit within the `MaxPayloadInMB` limit.
     #   @return [String]
     #
     # @!attribute [rw] environment
@@ -4158,6 +4206,45 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Specifies a secondary status the job has transitioned into. It
+    # includes a start timestamp and later an end timestamp. The end
+    # timestamp is added either after the job transitions to a different
+    # secondary status or after the job has ended.
+    #
+    # @!attribute [rw] status
+    #   Provides granular information about the system state. For more
+    #   information, see `SecondaryStatus` under the DescribeTrainingJob
+    #   response elements.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   A timestamp that shows when the training job has entered this
+    #   secondary status.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   A timestamp that shows when the secondary status has ended and the
+    #   job has transitioned into another secondary status. The `EndTime`
+    #   timestamp is also set after the training job has ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status_message
+    #   Shows a brief description and other information about the secondary
+    #   status. For example, the `LaunchingMLInstances` secondary status
+    #   could show a status message of "Insufficent capacity error while
+    #   launching instances".
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SecondaryStatusTransition AWS API Documentation
+    #
+    class SecondaryStatusTransition < Struct.new(
+      :status,
+      :start_time,
+      :end_time,
+      :status_message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartNotebookInstanceInput
     #   data as a hash:
     #
@@ -4454,9 +4541,9 @@ module Aws::SageMaker
     # @!attribute [rw] split_type
     #   The method to use to split the transform job's data into smaller
     #   batches. The default value is `None`. If you don't want to split
-    #   the data, specify (`None`). If you want to split records on a
-    #   newline character boundary, specify `Line`. To split records
-    #   according to the RecordIO format, specify `RecordIO`.
+    #   the data, specify `None`. If you want to split records on a newline
+    #   character boundary, specify `Line`. To split records according to
+    #   the RecordIO format, specify `RecordIO`.
     #
     #   Amazon SageMaker will send maximum number of records per batch in
     #   each request up to the MaxPayloadInMB limit. For more information,
@@ -4548,7 +4635,7 @@ module Aws::SageMaker
     #
     #   For every S3 object used as input for the transform job, the
     #   transformed data is stored in a corresponding subfolder in the
-    #   location under the output prefix.For example, the input data
+    #   location under the output prefix. For example, the input data
     #   `s3://bucket-name/input-name-prefix/dataset01/data.csv` will have
     #   the transformed data stored at
     #   `s3://bucket-name/key-name-prefix/dataset01/`, based on the original
@@ -4563,7 +4650,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] assemble_with
     #   Defines how to assemble the results of the transform job as a single
-    #   S3 object. You should select a format that is most convienant to
+    #   S3 object. You should select a format that is most convenient to
     #   you. To concatenate the results in binary format, specify `None`. To
     #   add a newline character at the end of every transformed record,
     #   specify `Line`. To assemble the output in RecordIO format, specify

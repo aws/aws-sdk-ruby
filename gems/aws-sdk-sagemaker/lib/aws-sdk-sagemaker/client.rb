@@ -1108,8 +1108,9 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Starts a transform job. After the results are obtained, Amazon
-    # SageMaker saves them to an Amazon S3 location that you specify.
+    # Starts a transform job. A transform job uses a trained model to get
+    # inferences on a dataset and saves these results to an Amazon S3
+    # location that you specify.
     #
     # To perform batch transformations, you create a transform job and use
     # the data that you have readily available.
@@ -1119,7 +1120,9 @@ module Aws::SageMaker
     # * `TransformJobName` - Identifies the transform job. The name must be
     #   unique within an AWS Region in an AWS account.
     #
-    # * `ModelName` - Identifies the model to use.
+    # * `ModelName` - Identifies the model to use. `ModelName` must be the
+    #   name of an existing Amazon SageMaker model within an AWS Region in
+    #   an AWS account.
     #
     # * `TransformInput` - Describes the dataset to be transformed and the
     #   Amazon S3 location where it is stored.
@@ -1143,29 +1146,38 @@ module Aws::SageMaker
     #
     # @option params [required, String] :model_name
     #   The name of the model that you want to use for the transform job.
+    #   `ModelName` must be the name of an existing Amazon SageMaker model
+    #   within an AWS Region in an AWS account.
     #
     # @option params [Integer] :max_concurrent_transforms
-    #   The maximum number of parallel requests on each instance node that can
-    #   be launched in a transform job. The default value is `1`. To allow
-    #   Amazon SageMaker to determine the appropriate number for
+    #   The maximum number of parallel requests that can be sent to each
+    #   instance in a transform job. This is good for algorithms that
+    #   implement multiple workers on larger instances . The default value is
+    #   `1`. To allow Amazon SageMaker to determine the appropriate number for
     #   `MaxConcurrentTransforms`, set the value to `0`.
     #
     # @option params [Integer] :max_payload_in_mb
     #   The maximum payload size allowed, in MB. A payload is the data portion
     #   of a record (without metadata). The value in `MaxPayloadInMB` must be
-    #   greater than the size of a single record.You can approximate the size
-    #   of a record by dividing the size of your dataset by the number of
-    #   records. The value you enter should be proportional to the number of
-    #   records you want per batch. It is recommended to enter a slightly
-    #   higher value to ensure the records will fit within the maximum payload
+    #   greater or equal to the size of a single record. You can approximate
+    #   the size of a record by dividing the size of your dataset by the
+    #   number of records. Then multiply this value by the number of records
+    #   you want in a mini-batch. It is recommended to enter a value slightly
+    #   larger than this to ensure the records fit within the maximum payload
     #   size. The default value is `6` MB. For an unlimited payload size, set
     #   the value to `0`.
     #
     # @option params [String] :batch_strategy
-    #   Determins the number of records included in a single batch.
-    #   `SingleRecord` means only one record is used per batch. `MultiRecord`
-    #   means a batch is set to contain as many records that could possibly
-    #   fit within the `MaxPayloadInMB` limit.
+    #   Determines the number of records included in a single mini-batch.
+    #   `SingleRecord` means only one record is used per mini-batch.
+    #   `MultiRecord` means a mini-batch is set to contain as many records
+    #   that can fit within the `MaxPayloadInMB` limit.
+    #
+    #   Batch transform will automatically split your input data into whatever
+    #   payload size is specified if you set `SplitType` to `Line` and
+    #   `BatchStrategy` to `MultiRecord`. There's no need to split the
+    #   dataset into smaller files or to use larger payload sizes unless the
+    #   records in your dataset are very large.
     #
     # @option params [Hash<String,String>] :environment
     #   The environment variables to set in the Docker container. We support
@@ -1249,6 +1261,14 @@ module Aws::SageMaker
 
     # Deletes an endpoint. Amazon SageMaker frees up all of the resources
     # that were deployed when the endpoint was created.
+    #
+    # Amazon SageMaker retires any custom KMS key grants associated with the
+    # endpoint, meaning you don't need to use the [RevokeGrant][1] API
+    # call.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_RevokeGrant.html
     #
     # @option params [required, String] :endpoint_name
     #   The name of the endpoint that you want to delete.
@@ -1776,6 +1796,7 @@ module Aws::SageMaker
     #   * {Types::DescribeTrainingJobResponse#training_start_time #training_start_time} => Time
     #   * {Types::DescribeTrainingJobResponse#training_end_time #training_end_time} => Time
     #   * {Types::DescribeTrainingJobResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeTrainingJobResponse#secondary_status_transitions #secondary_status_transitions} => Array&lt;Types::SecondaryStatusTransition&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1790,7 +1811,7 @@ module Aws::SageMaker
     #   resp.tuning_job_arn #=> String
     #   resp.model_artifacts.s3_model_artifacts #=> String
     #   resp.training_job_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
-    #   resp.secondary_status #=> String, one of "Starting", "Downloading", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Completed", "Failed"
+    #   resp.secondary_status #=> String, one of "Starting", "LaunchingMLInstances", "PreparingTrainingStack", "Downloading", "DownloadingTrainingImage", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Completed", "Failed"
     #   resp.failure_reason #=> String
     #   resp.hyper_parameters #=> Hash
     #   resp.hyper_parameters["ParameterKey"] #=> String
@@ -1820,6 +1841,11 @@ module Aws::SageMaker
     #   resp.training_start_time #=> Time
     #   resp.training_end_time #=> Time
     #   resp.last_modified_time #=> Time
+    #   resp.secondary_status_transitions #=> Array
+    #   resp.secondary_status_transitions[0].status #=> String, one of "Starting", "LaunchingMLInstances", "PreparingTrainingStack", "Downloading", "DownloadingTrainingImage", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Completed", "Failed"
+    #   resp.secondary_status_transitions[0].start_time #=> Time
+    #   resp.secondary_status_transitions[0].end_time #=> Time
+    #   resp.secondary_status_transitions[0].status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJob AWS API Documentation
     #
@@ -2979,7 +3005,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

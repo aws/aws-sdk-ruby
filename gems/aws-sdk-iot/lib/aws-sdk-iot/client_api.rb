@@ -273,7 +273,6 @@ module Aws::IoT
     JobArn = Shapes::StringShape.new(name: 'JobArn')
     JobDescription = Shapes::StringShape.new(name: 'JobDescription')
     JobDocument = Shapes::StringShape.new(name: 'JobDocument')
-    JobDocumentParameters = Shapes::MapShape.new(name: 'JobDocumentParameters')
     JobDocumentSource = Shapes::StringShape.new(name: 'JobDocumentSource')
     JobExecution = Shapes::StructureShape.new(name: 'JobExecution')
     JobExecutionStatus = Shapes::StringShape.new(name: 'JobExecutionStatus')
@@ -396,8 +395,6 @@ module Aws::IoT
     OutgoingCertificates = Shapes::ListShape.new(name: 'OutgoingCertificates')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     Parameter = Shapes::StringShape.new(name: 'Parameter')
-    ParameterKey = Shapes::StringShape.new(name: 'ParameterKey')
-    ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
     Parameters = Shapes::MapShape.new(name: 'Parameters')
     PartitionKey = Shapes::StringShape.new(name: 'PartitionKey')
     PayloadField = Shapes::StringShape.new(name: 'PayloadField')
@@ -831,7 +828,6 @@ module Aws::IoT
     CreateJobRequest.add_member(:presigned_url_config, Shapes::ShapeRef.new(shape: PresignedUrlConfig, location_name: "presignedUrlConfig"))
     CreateJobRequest.add_member(:target_selection, Shapes::ShapeRef.new(shape: TargetSelection, location_name: "targetSelection"))
     CreateJobRequest.add_member(:job_executions_rollout_config, Shapes::ShapeRef.new(shape: JobExecutionsRolloutConfig, location_name: "jobExecutionsRolloutConfig"))
-    CreateJobRequest.add_member(:document_parameters, Shapes::ShapeRef.new(shape: JobDocumentParameters, location_name: "documentParameters"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
 
     CreateJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, location_name: "jobArn"))
@@ -1325,11 +1321,7 @@ module Aws::IoT
     Job.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateType, location_name: "lastUpdatedAt"))
     Job.add_member(:completed_at, Shapes::ShapeRef.new(shape: DateType, location_name: "completedAt"))
     Job.add_member(:job_process_details, Shapes::ShapeRef.new(shape: JobProcessDetails, location_name: "jobProcessDetails"))
-    Job.add_member(:document_parameters, Shapes::ShapeRef.new(shape: JobDocumentParameters, location_name: "documentParameters"))
     Job.struct_class = Types::Job
-
-    JobDocumentParameters.key = Shapes::ShapeRef.new(shape: ParameterKey)
-    JobDocumentParameters.value = Shapes::ShapeRef.new(shape: ParameterValue)
 
     JobExecution.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
     JobExecution.add_member(:status, Shapes::ShapeRef.new(shape: JobExecutionStatus, location_name: "status"))

@@ -295,6 +295,7 @@ module Aws::Glue
     Predicate = Shapes::StructureShape.new(name: 'Predicate')
     PredicateString = Shapes::StringShape.new(name: 'PredicateString')
     PrincipalType = Shapes::StringShape.new(name: 'PrincipalType')
+    PublicKeysList = Shapes::ListShape.new(name: 'PublicKeysList')
     PythonScript = Shapes::StringShape.new(name: 'PythonScript')
     ResetJobBookmarkRequest = Shapes::StructureShape.new(name: 'ResetJobBookmarkRequest')
     ResetJobBookmarkResponse = Shapes::StructureShape.new(name: 'ResetJobBookmarkResponse')
@@ -650,6 +651,7 @@ module Aws::Glue
     CreateDevEndpointRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "SecurityGroupIds"))
     CreateDevEndpointRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "SubnetId"))
     CreateDevEndpointRequest.add_member(:public_key, Shapes::ShapeRef.new(shape: GenericString, location_name: "PublicKey"))
+    CreateDevEndpointRequest.add_member(:public_keys, Shapes::ShapeRef.new(shape: PublicKeysList, location_name: "PublicKeys"))
     CreateDevEndpointRequest.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "NumberOfNodes"))
     CreateDevEndpointRequest.add_member(:extra_python_libs_s3_path, Shapes::ShapeRef.new(shape: GenericString, location_name: "ExtraPythonLibsS3Path"))
     CreateDevEndpointRequest.add_member(:extra_jars_s3_path, Shapes::ShapeRef.new(shape: GenericString, location_name: "ExtraJarsS3Path"))
@@ -855,6 +857,7 @@ module Aws::Glue
     DevEndpoint.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "CreatedTimestamp"))
     DevEndpoint.add_member(:last_modified_timestamp, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "LastModifiedTimestamp"))
     DevEndpoint.add_member(:public_key, Shapes::ShapeRef.new(shape: GenericString, location_name: "PublicKey"))
+    DevEndpoint.add_member(:public_keys, Shapes::ShapeRef.new(shape: PublicKeysList, location_name: "PublicKeys"))
     DevEndpoint.struct_class = Types::DevEndpoint
 
     DevEndpointCustomLibraries.add_member(:extra_python_libs_s3_path, Shapes::ShapeRef.new(shape: GenericString, location_name: "ExtraPythonLibsS3Path"))
@@ -1308,6 +1311,8 @@ module Aws::Glue
     Predicate.add_member(:conditions, Shapes::ShapeRef.new(shape: ConditionList, location_name: "Conditions"))
     Predicate.struct_class = Types::Predicate
 
+    PublicKeysList.member = Shapes::ShapeRef.new(shape: GenericString)
+
     ResetJobBookmarkRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "JobName"))
     ResetJobBookmarkRequest.struct_class = Types::ResetJobBookmarkRequest
 
@@ -1522,6 +1527,8 @@ module Aws::Glue
 
     UpdateDevEndpointRequest.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "EndpointName"))
     UpdateDevEndpointRequest.add_member(:public_key, Shapes::ShapeRef.new(shape: GenericString, location_name: "PublicKey"))
+    UpdateDevEndpointRequest.add_member(:add_public_keys, Shapes::ShapeRef.new(shape: PublicKeysList, location_name: "AddPublicKeys"))
+    UpdateDevEndpointRequest.add_member(:delete_public_keys, Shapes::ShapeRef.new(shape: PublicKeysList, location_name: "DeletePublicKeys"))
     UpdateDevEndpointRequest.add_member(:custom_libraries, Shapes::ShapeRef.new(shape: DevEndpointCustomLibraries, location_name: "CustomLibraries"))
     UpdateDevEndpointRequest.add_member(:update_etl_libraries, Shapes::ShapeRef.new(shape: BooleanValue, location_name: "UpdateEtlLibraries"))
     UpdateDevEndpointRequest.struct_class = Types::UpdateDevEndpointRequest

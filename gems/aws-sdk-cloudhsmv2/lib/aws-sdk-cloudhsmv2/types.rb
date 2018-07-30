@@ -26,13 +26,29 @@ module Aws::CloudHSMV2
     #   The date and time when the backup was created.
     #   @return [Time]
     #
+    # @!attribute [rw] copy_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] source_region
+    #   @return [String]
+    #
+    # @!attribute [rw] source_backup
+    #   @return [String]
+    #
+    # @!attribute [rw] source_cluster
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/Backup AWS API Documentation
     #
     class Backup < Struct.new(
       :backup_id,
       :backup_state,
       :cluster_id,
-      :create_timestamp)
+      :create_timestamp,
+      :copy_timestamp,
+      :source_region,
+      :source_backup,
+      :source_cluster)
       include Aws::Structure
     end
 
@@ -148,6 +164,38 @@ module Aws::CloudHSMV2
       :subnet_mapping,
       :vpc_id,
       :certificates)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CopyBackupToRegionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         destination_region: "Region", # required
+    #         backup_id: "BackupId", # required
+    #       }
+    #
+    # @!attribute [rw] destination_region
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CopyBackupToRegionRequest AWS API Documentation
+    #
+    class CopyBackupToRegionRequest < Struct.new(
+      :destination_region,
+      :backup_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] destination_backup
+    #   @return [Types::DestinationBackup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CopyBackupToRegionResponse AWS API Documentation
+    #
+    class CopyBackupToRegionResponse < Struct.new(
+      :destination_backup)
       include Aws::Structure
     end
 
@@ -336,6 +384,7 @@ module Aws::CloudHSMV2
     #         filters: {
     #           "Field" => ["String"],
     #         },
+    #         sort_ascending: false,
     #       }
     #
     # @!attribute [rw] next_token
@@ -363,12 +412,16 @@ module Aws::CloudHSMV2
     #   specified state.
     #   @return [Hash<String,Array<String>>]
     #
+    # @!attribute [rw] sort_ascending
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DescribeBackupsRequest AWS API Documentation
     #
     class DescribeBackupsRequest < Struct.new(
       :next_token,
       :max_results,
-      :filters)
+      :filters,
+      :sort_ascending)
       include Aws::Structure
     end
 
@@ -450,6 +503,28 @@ module Aws::CloudHSMV2
     class DescribeClustersResponse < Struct.new(
       :clusters,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] create_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] source_region
+    #   @return [String]
+    #
+    # @!attribute [rw] source_backup
+    #   @return [String]
+    #
+    # @!attribute [rw] source_cluster
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DestinationBackup AWS API Documentation
+    #
+    class DestinationBackup < Struct.new(
+      :create_timestamp,
+      :source_region,
+      :source_backup,
+      :source_cluster)
       include Aws::Structure
     end
 

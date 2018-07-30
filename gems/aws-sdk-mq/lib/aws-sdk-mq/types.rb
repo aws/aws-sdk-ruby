@@ -18,11 +18,16 @@ module Aws::MQ
     #   The broker's wire-level protocol endpoints.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ip_address
+    #   The IP address of the ENI attached to the broker.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/BrokerInstance AWS API Documentation
     #
     class BrokerInstance < Struct.new(
       :console_url,
-      :endpoints)
+      :endpoints,
+      :ip_address)
       include Aws::Structure
     end
 
@@ -44,22 +49,19 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] broker_state
-    #   The status of the broker. Possible values: CREATION\_IN\_PROGRESS,
-    #   CREATION\_FAILED, DELETION\_IN\_PROGRESS, RUNNING,
-    #   REBOOT\_IN\_PROGRESS
+    #   The status of the broker.
     #   @return [String]
     #
+    # @!attribute [rw] created
+    #   The time when the broker was created.
+    #   @return [Time]
+    #
     # @!attribute [rw] deployment_mode
-    #   Required. The deployment mode of the broker. Possible values:
-    #   SINGLE\_INSTANCE, ACTIVE\_STANDBY\_MULTI\_AZ SINGLE\_INSTANCE
-    #   creates a single-instance broker in a single Availability Zone.
-    #   ACTIVE\_STANDBY\_MULTI\_AZ creates an active/standby broker for high
-    #   availability.
+    #   Required. The deployment mode of the broker.
     #   @return [String]
     #
     # @!attribute [rw] host_instance_type
-    #   The broker's instance type. Possible values: mq.t2.micro,
-    #   mq.m4.large
+    #   The broker's instance type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/BrokerSummary AWS API Documentation
@@ -69,6 +71,7 @@ module Aws::MQ
       :broker_id,
       :broker_name,
       :broker_state,
+      :created,
       :deployment_mode,
       :host_instance_type)
       include Aws::Structure
@@ -79,6 +82,10 @@ module Aws::MQ
     # @!attribute [rw] arn
     #   Required. The ARN of the configuration.
     #   @return [String]
+    #
+    # @!attribute [rw] created
+    #   Required. The date and time of the configuration revision.
+    #   @return [Time]
     #
     # @!attribute [rw] description
     #   Required. The description of the configuration.
@@ -112,6 +119,7 @@ module Aws::MQ
     #
     class Configuration < Struct.new(
       :arn,
+      :created,
       :description,
       :engine_type,
       :engine_version,
@@ -137,7 +145,7 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] revision
-    #   The Universally Unique Identifier (UUID) of the request.
+    #   The revision number of the configuration.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ConfigurationId AWS API Documentation
@@ -150,17 +158,22 @@ module Aws::MQ
 
     # Returns information about the specified configuration revision.
     #
+    # @!attribute [rw] created
+    #   Required. The date and time of the configuration revision.
+    #   @return [Time]
+    #
     # @!attribute [rw] description
     #   The description of the configuration revision.
     #   @return [String]
     #
     # @!attribute [rw] revision
-    #   Required. The revision of the configuration.
+    #   Required. The revision number of the configuration.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ConfigurationRevision AWS API Documentation
     #
     class ConfigurationRevision < Struct.new(
+      :created,
       :description,
       :revision)
       include Aws::Structure
@@ -216,11 +229,7 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] deployment_mode
-    #   Required. The deployment mode of the broker. Possible values:
-    #   SINGLE\_INSTANCE, ACTIVE\_STANDBY\_MULTI\_AZ SINGLE\_INSTANCE
-    #   creates a single-instance broker in a single Availability Zone.
-    #   ACTIVE\_STANDBY\_MULTI\_AZ creates an active/standby broker for high
-    #   availability.
+    #   Required. The deployment mode of the broker.
     #   @return [String]
     #
     # @!attribute [rw] engine_type
@@ -234,9 +243,12 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] host_instance_type
-    #   Required. The broker's instance type. Possible values: mq.t2.micro,
-    #   mq.m4.large
+    #   Required. The broker's instance type.
     #   @return [String]
+    #
+    # @!attribute [rw] logs
+    #   Enables Amazon CloudWatch logging for brokers.
+    #   @return [Types::Logs]
     #
     # @!attribute [rw] maintenance_window_start_time
     #   The parameters that determine the WeeklyStartTime.
@@ -248,14 +260,14 @@ module Aws::MQ
     #   @return [Boolean]
     #
     # @!attribute [rw] security_groups
-    #   Required. The list of rules (1 minimum, 125 maximum) that authorize
+    #   The list of rules (1 minimum, 125 maximum) that authorize
     #   connections to brokers.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_ids
-    #   Required. The list of groups (2 maximum) that define which subnets
-    #   and IP ranges the broker can use from different Availability Zones.
-    #   A SINGLE\_INSTANCE deployment requires one subnet (for example, the
+    #   The list of groups (2 maximum) that define which subnets and IP
+    #   ranges the broker can use from different Availability Zones. A
+    #   SINGLE\_INSTANCE deployment requires one subnet (for example, the
     #   default subnet). An ACTIVE\_STANDBY\_MULTI\_AZ deployment requires
     #   two subnets.
     #   @return [Array<String>]
@@ -278,6 +290,7 @@ module Aws::MQ
       :engine_type,
       :engine_version,
       :host_instance_type,
+      :logs,
       :maintenance_window_start_time,
       :publicly_accessible,
       :security_groups,
@@ -319,6 +332,10 @@ module Aws::MQ
     #         engine_type: "ACTIVEMQ", # accepts ACTIVEMQ
     #         engine_version: "__string",
     #         host_instance_type: "__string",
+    #         logs: {
+    #           audit: false,
+    #           general: false,
+    #         },
     #         maintenance_window_start_time: {
     #           day_of_week: "MONDAY", # accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
     #           time_of_day: "__string",
@@ -353,11 +370,7 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] deployment_mode
-    #   The deployment mode of the broker. Possible values:
-    #   SINGLE\_INSTANCE, ACTIVE\_STANDBY\_MULTI\_AZ SINGLE\_INSTANCE
-    #   creates a single-instance broker in a single Availability Zone.
-    #   ACTIVE\_STANDBY\_MULTI\_AZ creates an active/standby broker for high
-    #   availability.
+    #   The deployment mode of the broker.
     #   @return [String]
     #
     # @!attribute [rw] engine_type
@@ -370,6 +383,11 @@ module Aws::MQ
     #
     # @!attribute [rw] host_instance_type
     #   @return [String]
+    #
+    # @!attribute [rw] logs
+    #   The list of information about logs to be enabled for the specified
+    #   broker.
+    #   @return [Types::Logs]
     #
     # @!attribute [rw] maintenance_window_start_time
     #   The scheduled time period relative to UTC during which Amazon MQ
@@ -399,6 +417,7 @@ module Aws::MQ
       :engine_type,
       :engine_version,
       :host_instance_type,
+      :logs,
       :maintenance_window_start_time,
       :publicly_accessible,
       :security_groups,
@@ -423,8 +442,7 @@ module Aws::MQ
 
     # Creates a new configuration for the specified configuration name.
     # Amazon MQ uses the default configuration (the engine type and
-    # version). Note: If the configuration name already exists, Amazon MQ
-    # doesn't create a configuration.
+    # version).
     #
     # @!attribute [rw] engine_type
     #   Required. The type of broker engine. Note: Currently, Amazon MQ
@@ -457,6 +475,10 @@ module Aws::MQ
     #   Required. The Amazon Resource Name (ARN) of the configuration.
     #   @return [String]
     #
+    # @!attribute [rw] created
+    #   Required. The date and time of the configuration.
+    #   @return [Time]
+    #
     # @!attribute [rw] id
     #   Required. The unique ID that Amazon MQ generates for the
     #   configuration.
@@ -476,6 +498,7 @@ module Aws::MQ
     #
     class CreateConfigurationOutput < Struct.new(
       :arn,
+      :created,
       :id,
       :latest_revision,
       :name)
@@ -514,6 +537,9 @@ module Aws::MQ
     # @!attribute [rw] arn
     #   @return [String]
     #
+    # @!attribute [rw] created
+    #   @return [Time]
+    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -528,6 +554,7 @@ module Aws::MQ
     #
     class CreateConfigurationResponse < Struct.new(
       :arn,
+      :created,
       :id,
       :latest_revision,
       :name)
@@ -700,21 +727,19 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] broker_state
-    #   The status of the broker. Possible values: CREATION\_IN\_PROGRESS,
-    #   CREATION\_FAILED, DELETION\_IN\_PROGRESS, RUNNING,
-    #   REBOOT\_IN\_PROGRESS
+    #   The status of the broker.
     #   @return [String]
     #
     # @!attribute [rw] configurations
     #   The list of all revisions for the specified configuration.
     #   @return [Types::Configurations]
     #
+    # @!attribute [rw] created
+    #   The time when the broker was created.
+    #   @return [Time]
+    #
     # @!attribute [rw] deployment_mode
-    #   Required. The deployment mode of the broker. Possible values:
-    #   SINGLE\_INSTANCE, ACTIVE\_STANDBY\_MULTI\_AZ SINGLE\_INSTANCE
-    #   creates a single-instance broker in a single Availability Zone.
-    #   ACTIVE\_STANDBY\_MULTI\_AZ creates an active/standby broker for high
-    #   availability.
+    #   Required. The deployment mode of the broker.
     #   @return [String]
     #
     # @!attribute [rw] engine_type
@@ -728,9 +753,13 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] host_instance_type
-    #   The broker's instance type. Possible values: mq.t2.micro,
-    #   mq.m4.large
+    #   The broker's instance type.
     #   @return [String]
+    #
+    # @!attribute [rw] logs
+    #   The list of information about logs currently enabled and pending to
+    #   be deployed for the specified broker.
+    #   @return [Types::LogsSummary]
     #
     # @!attribute [rw] maintenance_window_start_time
     #   The parameters that determine the WeeklyStartTime.
@@ -768,10 +797,12 @@ module Aws::MQ
       :broker_name,
       :broker_state,
       :configurations,
+      :created,
       :deployment_mode,
       :engine_type,
       :engine_version,
       :host_instance_type,
+      :logs,
       :maintenance_window_start_time,
       :publicly_accessible,
       :security_groups,
@@ -813,21 +844,18 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] broker_state
-    #   The status of the broker. Possible values: CREATION\_IN\_PROGRESS,
-    #   CREATION\_FAILED, DELETION\_IN\_PROGRESS, RUNNING,
-    #   REBOOT\_IN\_PROGRESS
+    #   The status of the broker.
     #   @return [String]
     #
     # @!attribute [rw] configurations
     #   Broker configuration information
     #   @return [Types::Configurations]
     #
+    # @!attribute [rw] created
+    #   @return [Time]
+    #
     # @!attribute [rw] deployment_mode
-    #   The deployment mode of the broker. Possible values:
-    #   SINGLE\_INSTANCE, ACTIVE\_STANDBY\_MULTI\_AZ SINGLE\_INSTANCE
-    #   creates a single-instance broker in a single Availability Zone.
-    #   ACTIVE\_STANDBY\_MULTI\_AZ creates an active/standby broker for high
-    #   availability.
+    #   The deployment mode of the broker.
     #   @return [String]
     #
     # @!attribute [rw] engine_type
@@ -840,6 +868,11 @@ module Aws::MQ
     #
     # @!attribute [rw] host_instance_type
     #   @return [String]
+    #
+    # @!attribute [rw] logs
+    #   The list of information about logs currently enabled and pending to
+    #   be deployed for the specified broker.
+    #   @return [Types::LogsSummary]
     #
     # @!attribute [rw] maintenance_window_start_time
     #   The scheduled time period relative to UTC during which Amazon MQ
@@ -868,10 +901,12 @@ module Aws::MQ
       :broker_name,
       :broker_state,
       :configurations,
+      :created,
       :deployment_mode,
       :engine_type,
       :engine_version,
       :host_instance_type,
+      :logs,
       :maintenance_window_start_time,
       :publicly_accessible,
       :security_groups,
@@ -900,6 +935,9 @@ module Aws::MQ
     # @!attribute [rw] arn
     #   @return [String]
     #
+    # @!attribute [rw] created
+    #   @return [Time]
+    #
     # @!attribute [rw] description
     #   @return [String]
     #
@@ -925,6 +963,7 @@ module Aws::MQ
     #
     class DescribeConfigurationResponse < Struct.new(
       :arn,
+      :created,
       :description,
       :engine_type,
       :engine_version,
@@ -942,6 +981,10 @@ module Aws::MQ
     #   configuration.
     #   @return [String]
     #
+    # @!attribute [rw] created
+    #   Required. The date and time of the configuration.
+    #   @return [Time]
+    #
     # @!attribute [rw] data
     #   Required. The base64-encoded XML configuration.
     #   @return [String]
@@ -954,6 +997,7 @@ module Aws::MQ
     #
     class DescribeConfigurationRevisionOutput < Struct.new(
       :configuration_id,
+      :created,
       :data,
       :description)
       include Aws::Structure
@@ -984,6 +1028,9 @@ module Aws::MQ
     # @!attribute [rw] configuration_id
     #   @return [String]
     #
+    # @!attribute [rw] created
+    #   @return [Time]
+    #
     # @!attribute [rw] data
     #   @return [String]
     #
@@ -994,6 +1041,7 @@ module Aws::MQ
     #
     class DescribeConfigurationRevisionResponse < Struct.new(
       :configuration_id,
+      :created,
       :data,
       :description)
       include Aws::Structure
@@ -1091,11 +1139,11 @@ module Aws::MQ
     # Returns information about an error.
     #
     # @!attribute [rw] error_attribute
-    #   The error attribute.
+    #   The attribute which caused the error.
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   The error message.
+    #   The explanation of the error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/Error AWS API Documentation
@@ -1387,6 +1435,90 @@ module Aws::MQ
       include Aws::Structure
     end
 
+    # The list of information about logs to be enabled for the specified
+    # broker.
+    #
+    # @note When making an API call, you may pass Logs
+    #   data as a hash:
+    #
+    #       {
+    #         audit: false,
+    #         general: false,
+    #       }
+    #
+    # @!attribute [rw] audit
+    #   Enables audit logging. Every user management action made using JMX
+    #   or the ActiveMQ Web Console is logged.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] general
+    #   Enables general logging.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/Logs AWS API Documentation
+    #
+    class Logs < Struct.new(
+      :audit,
+      :general)
+      include Aws::Structure
+    end
+
+    # The list of information about logs currently enabled and pending to be
+    # deployed for the specified broker.
+    #
+    # @!attribute [rw] audit
+    #   Enables audit logging. Every user management action made using JMX
+    #   or the ActiveMQ Web Console is logged.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] audit_log_group
+    #   Location of CloudWatch Log group where audit logs will be sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] general
+    #   Enables general logging.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] general_log_group
+    #   Location of CloudWatch Log group where general logs will be sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] pending
+    #   The list of information about logs pending to be deployed for the
+    #   specified broker.
+    #   @return [Types::PendingLogs]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/LogsSummary AWS API Documentation
+    #
+    class LogsSummary < Struct.new(
+      :audit,
+      :audit_log_group,
+      :general,
+      :general_log_group,
+      :pending)
+      include Aws::Structure
+    end
+
+    # The list of information about logs to be enabled for the specified
+    # broker.
+    #
+    # @!attribute [rw] audit
+    #   Enables audit logging. Every user management action made using JMX
+    #   or the ActiveMQ Web Console is logged.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] general
+    #   Enables general logging.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/PendingLogs AWS API Documentation
+    #
+    class PendingLogs < Struct.new(
+      :audit,
+      :general)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RebootBrokerRequest
     #   data as a hash:
     #
@@ -1421,13 +1553,7 @@ module Aws::MQ
     #
     # @!attribute [rw] reason
     #   Required. The reason for which the XML elements or attributes were
-    #   sanitized. Possible values: DISALLOWED\_ELEMENT\_REMOVED,
-    #   DISALLOWED\_ATTRIBUTE\_REMOVED, INVALID\_ATTRIBUTE\_VALUE\_REMOVED
-    #   DISALLOWED\_ELEMENT\_REMOVED shows that the provided element isn't
-    #   allowed and has been removed. DISALLOWED\_ATTRIBUTE\_REMOVED shows
-    #   that the provided attribute isn't allowed and has been removed.
-    #   INVALID\_ATTRIBUTE\_VALUE\_REMOVED shows that the provided value for
-    #   the attribute isn't allowed and has been removed.
+    #   sanitized.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/SanitizationWarning AWS API Documentation
@@ -1445,10 +1571,15 @@ module Aws::MQ
     #   A list of information about the configuration.
     #   @return [Types::ConfigurationId]
     #
+    # @!attribute [rw] logs
+    #   Enables Amazon CloudWatch logging for brokers.
+    #   @return [Types::Logs]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerInput AWS API Documentation
     #
     class UpdateBrokerInput < Struct.new(
-      :configuration)
+      :configuration,
+      :logs)
       include Aws::Structure
     end
 
@@ -1462,11 +1593,17 @@ module Aws::MQ
     #   The ID of the updated configuration.
     #   @return [Types::ConfigurationId]
     #
+    # @!attribute [rw] logs
+    #   The list of information about logs to be enabled for the specified
+    #   broker.
+    #   @return [Types::Logs]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerOutput AWS API Documentation
     #
     class UpdateBrokerOutput < Struct.new(
       :broker_id,
-      :configuration)
+      :configuration,
+      :logs)
       include Aws::Structure
     end
 
@@ -1479,6 +1616,10 @@ module Aws::MQ
     #           id: "__string",
     #           revision: 1,
     #         },
+    #         logs: {
+    #           audit: false,
+    #           general: false,
+    #         },
     #       }
     #
     # @!attribute [rw] broker_id
@@ -1488,11 +1629,17 @@ module Aws::MQ
     #   A list of information about the configuration.
     #   @return [Types::ConfigurationId]
     #
+    # @!attribute [rw] logs
+    #   The list of information about logs to be enabled for the specified
+    #   broker.
+    #   @return [Types::Logs]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerRequest AWS API Documentation
     #
     class UpdateBrokerRequest < Struct.new(
       :broker_id,
-      :configuration)
+      :configuration,
+      :logs)
       include Aws::Structure
     end
 
@@ -1503,11 +1650,17 @@ module Aws::MQ
     #   A list of information about the configuration.
     #   @return [Types::ConfigurationId]
     #
+    # @!attribute [rw] logs
+    #   The list of information about logs to be enabled for the specified
+    #   broker.
+    #   @return [Types::Logs]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerResponse AWS API Documentation
     #
     class UpdateBrokerResponse < Struct.new(
       :broker_id,
-      :configuration)
+      :configuration,
+      :logs)
       include Aws::Structure
     end
 
@@ -1535,6 +1688,10 @@ module Aws::MQ
     #   Required. The Amazon Resource Name (ARN) of the configuration.
     #   @return [String]
     #
+    # @!attribute [rw] created
+    #   Required. The date and time of the configuration.
+    #   @return [Time]
+    #
     # @!attribute [rw] id
     #   Required. The unique ID that Amazon MQ generates for the
     #   configuration.
@@ -1559,6 +1716,7 @@ module Aws::MQ
     #
     class UpdateConfigurationOutput < Struct.new(
       :arn,
+      :created,
       :id,
       :latest_revision,
       :name,
@@ -1596,6 +1754,9 @@ module Aws::MQ
     # @!attribute [rw] arn
     #   @return [String]
     #
+    # @!attribute [rw] created
+    #   @return [Time]
+    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -1613,6 +1774,7 @@ module Aws::MQ
     #
     class UpdateConfigurationResponse < Struct.new(
       :arn,
+      :created,
       :id,
       :latest_revision,
       :name,
@@ -1752,8 +1914,7 @@ module Aws::MQ
     #   @return [Array<String>]
     #
     # @!attribute [rw] pending_change
-    #   Required. The type of change pending for the ActiveMQ user. Possible
-    #   values: CREATE, UPDATE, DELETE
+    #   Required. The type of change pending for the ActiveMQ user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UserPendingChanges AWS API Documentation
@@ -1768,8 +1929,7 @@ module Aws::MQ
     # Returns a list of all ActiveMQ users.
     #
     # @!attribute [rw] pending_change
-    #   The type of change pending for the ActiveMQ user. Possible values:
-    #   CREATE, UPDATE, DELETE
+    #   The type of change pending for the ActiveMQ user.
     #   @return [String]
     #
     # @!attribute [rw] username
@@ -1799,8 +1959,7 @@ module Aws::MQ
     #       }
     #
     # @!attribute [rw] day_of_week
-    #   Required. The day of the week. Possible values: MONDAY, TUESDAY,
-    #   WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    #   Required. The day of the week.
     #   @return [String]
     #
     # @!attribute [rw] time_of_day

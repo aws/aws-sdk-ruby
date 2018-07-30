@@ -166,6 +166,37 @@ module Aws::CloudHSMV2
 
     # @!group API Operations
 
+    # @option params [required, String] :destination_region
+    #
+    # @option params [required, String] :backup_id
+    #
+    # @return [Types::CopyBackupToRegionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CopyBackupToRegionResponse#destination_backup #destination_backup} => Types::DestinationBackup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.copy_backup_to_region({
+    #     destination_region: "Region", # required
+    #     backup_id: "BackupId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.destination_backup.create_timestamp #=> Time
+    #   resp.destination_backup.source_region #=> String
+    #   resp.destination_backup.source_backup #=> String
+    #   resp.destination_backup.source_cluster #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CopyBackupToRegion AWS API Documentation
+    #
+    # @overload copy_backup_to_region(params = {})
+    # @param [Hash] params ({})
+    def copy_backup_to_region(params = {}, options = {})
+      req = build_request(:copy_backup_to_region, params)
+      req.send_request(options)
+    end
+
     # Creates a new AWS CloudHSM cluster.
     #
     # @option params [required, Array<String>] :subnet_ids
@@ -418,6 +449,8 @@ module Aws::CloudHSMV2
     #   Use the `states` filter to return only backups that match the
     #   specified state.
     #
+    # @option params [Boolean] :sort_ascending
+    #
     # @return [Types::DescribeBackupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeBackupsResponse#backups #backups} => Array&lt;Types::Backup&gt;
@@ -431,6 +464,7 @@ module Aws::CloudHSMV2
     #     filters: {
     #       "Field" => ["String"],
     #     },
+    #     sort_ascending: false,
     #   })
     #
     # @example Response structure
@@ -440,6 +474,10 @@ module Aws::CloudHSMV2
     #   resp.backups[0].backup_state #=> String, one of "CREATE_IN_PROGRESS", "READY", "DELETED"
     #   resp.backups[0].cluster_id #=> String
     #   resp.backups[0].create_timestamp #=> Time
+    #   resp.backups[0].copy_timestamp #=> Time
+    #   resp.backups[0].source_region #=> String
+    #   resp.backups[0].source_backup #=> String
+    #   resp.backups[0].source_cluster #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DescribeBackups AWS API Documentation
@@ -713,7 +751,7 @@ module Aws::CloudHSMV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudhsmv2'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
