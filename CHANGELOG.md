@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Connect - Updated the API, and documentation for Amazon Connect Service.
+
+* Feature - Aws::ElasticsearchService - Updated the API, documentation, and integration test for Amazon Elasticsearch Service.
+
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
+* Feature - Aws::KMS - Updated the API, documentation, and integration test for AWS Key Management Service.
+
+* Feature - Aws::MediaConvert - Updated the API, and documentation for AWS Elemental MediaConvert.
+
 2.11.97 (2018-07-30)
 ------------------
 
