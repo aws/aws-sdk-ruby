@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.98 (2018-07-31)
+------------------
+
 * Feature - Aws::Connect - Updated the API, and documentation for Amazon Connect Service.
 
 * Feature - Aws::ElasticsearchService - Updated the API, documentation, and integration test for Amazon Elasticsearch Service.
