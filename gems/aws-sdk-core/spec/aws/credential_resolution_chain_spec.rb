@@ -69,6 +69,11 @@ module Aws
         expect(client.config.credentials.access_key_id).to eq("ACCESS_KEY_SC1")
       end
 
+      it 'prefers process credentials over metadata credentials' do
+        client = ApiHelper.sample_rest_xml::Client.new(profile: "creds_from_process", region: "us-east-1")
+        expect(client.config.credentials.access_key_id).to eq("AK_PROC1")
+      end
+
       it 'attempts to fetch metadata credentials last' do
         stub_request(
           :get,
