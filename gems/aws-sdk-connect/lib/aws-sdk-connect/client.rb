@@ -156,47 +156,562 @@ module Aws::Connect
 
     # @!group API Operations
 
+    # Creates a new user account in your Amazon Connect instance.
+    #
+    # @option params [required, String] :username
+    #   The user name in Amazon Connect for the user to create.
+    #
+    # @option params [String] :password
+    #   The password for the user account to create. This is required if you
+    #   are using Amazon Connect for identity management. If you are using
+    #   SAML for identity management and include this parameter, an
+    #   `InvalidRequestException` is returned.
+    #
+    # @option params [Types::UserIdentityInfo] :identity_info
+    #   Information about the user, including email address, first name, and
+    #   last name.
+    #
+    # @option params [required, Types::UserPhoneConfig] :phone_config
+    #   Specifies the phone settings for the user, including
+    #   AfterContactWorkTimeLimit, AutoAccept, DeskPhoneNumber, and PhoneType.
+    #
+    # @option params [String] :directory_user_id
+    #   The unique identifier for the user account in the directory service
+    #   directory used for identity management. If Amazon Connect is unable to
+    #   access the existing directory, you can use the `DirectoryUserId` to
+    #   authenticate users. If you include the parameter, it is assumed that
+    #   Amazon Connect cannot access the directory. If the parameter is not
+    #   included, the UserIdentityInfo is used to authenticate users from your
+    #   existing directory.
+    #
+    #   This parameter is required if you are using an existing directory for
+    #   identity management in Amazon Connect when Amazon Connect cannot
+    #   access your directory to authenticate users. If you are using SAML for
+    #   identity management and include this parameter, an
+    #   `InvalidRequestException` is returned.
+    #
+    # @option params [required, Array<String>] :security_profile_ids
+    #   The unique identifier of the security profile to assign to the user
+    #   created.
+    #
+    # @option params [required, String] :routing_profile_id
+    #   The unique identifier for the routing profile to assign to the user
+    #   created.
+    #
+    # @option params [String] :hierarchy_group_id
+    #   The unique identifier for the hierarchy group to assign to the user
+    #   created.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier for your Amazon Connect instance. To find the ID of
+    #   your instance, open the AWS console and select Amazon Connect. Select
+    #   the alias of the instance in the Instance alias column. The instance
+    #   ID is displayed in the Overview section of your instance settings. For
+    #   example, the instance ID is the set of characters at the end of the
+    #   instance ARN, after instance/, such as
+    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #
+    # @return [Types::CreateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateUserResponse#user_id #user_id} => String
+    #   * {Types::CreateUserResponse#user_arn #user_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_user({
+    #     username: "AgentUsername", # required
+    #     password: "Password",
+    #     identity_info: {
+    #       first_name: "AgentFirstName",
+    #       last_name: "AgentLastName",
+    #       email: "Email",
+    #     },
+    #     phone_config: { # required
+    #       phone_type: "SOFT_PHONE", # required, accepts SOFT_PHONE, DESK_PHONE
+    #       auto_accept: false,
+    #       after_contact_work_time_limit: 1,
+    #       desk_phone_number: "PhoneNumber",
+    #     },
+    #     directory_user_id: "DirectoryUserId",
+    #     security_profile_ids: ["SecurityProfileId"], # required
+    #     routing_profile_id: "RoutingProfileId", # required
+    #     hierarchy_group_id: "HierarchyGroupId",
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_id #=> String
+    #   resp.user_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUser AWS API Documentation
+    #
+    # @overload create_user(params = {})
+    # @param [Hash] params ({})
+    def create_user(params = {}, options = {})
+      req = build_request(:create_user, params)
+      req.send_request(options)
+    end
+
+    # Deletes a user account from Amazon Connect.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier for your Amazon Connect instance. To find the ID of
+    #   your instance, open the AWS console and select Amazon Connect. Select
+    #   the alias of the instance in the Instance alias column. The instance
+    #   ID is displayed in the Overview section of your instance settings. For
+    #   example, the instance ID is the set of characters at the end of the
+    #   instance ARN, after instance/, such as
+    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #
+    # @option params [required, String] :user_id
+    #   The unique identifier of the user to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_user({
+    #     instance_id: "InstanceId", # required
+    #     user_id: "UserId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteUser AWS API Documentation
+    #
+    # @overload delete_user(params = {})
+    # @param [Hash] params ({})
+    def delete_user(params = {}, options = {})
+      req = build_request(:delete_user, params)
+      req.send_request(options)
+    end
+
+    # Returns a `User` object that contains information about the user
+    # account specified by the `UserId`.
+    #
+    # @option params [required, String] :user_id
+    #   Unique identifier for the user account to return.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier for your Amazon Connect instance. To find the ID of
+    #   your instance, open the AWS console and select Amazon Connect. Select
+    #   the alias of the instance in the Instance alias column. The instance
+    #   ID is displayed in the Overview section of your instance settings. For
+    #   example, the instance ID is the set of characters at the end of the
+    #   instance ARN, after instance/, such as
+    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #
+    # @return [Types::DescribeUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeUserResponse#user #user} => Types::User
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_user({
+    #     user_id: "UserId", # required
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user.id #=> String
+    #   resp.user.arn #=> String
+    #   resp.user.username #=> String
+    #   resp.user.identity_info.first_name #=> String
+    #   resp.user.identity_info.last_name #=> String
+    #   resp.user.identity_info.email #=> String
+    #   resp.user.phone_config.phone_type #=> String, one of "SOFT_PHONE", "DESK_PHONE"
+    #   resp.user.phone_config.auto_accept #=> Boolean
+    #   resp.user.phone_config.after_contact_work_time_limit #=> Integer
+    #   resp.user.phone_config.desk_phone_number #=> String
+    #   resp.user.directory_user_id #=> String
+    #   resp.user.security_profile_ids #=> Array
+    #   resp.user.security_profile_ids[0] #=> String
+    #   resp.user.routing_profile_id #=> String
+    #   resp.user.hierarchy_group_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUser AWS API Documentation
+    #
+    # @overload describe_user(params = {})
+    # @param [Hash] params ({})
+    def describe_user(params = {}, options = {})
+      req = build_request(:describe_user, params)
+      req.send_request(options)
+    end
+
+    # Returns a `HierarchyGroup` object that includes information about a
+    # hierarchy group in your instance.
+    #
+    # @option params [required, String] :hierarchy_group_id
+    #   The identifier for the hierarchy group to return.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier for your Amazon Connect instance. To find the ID of
+    #   your instance, open the AWS console and select Amazon Connect. Select
+    #   the alias of the instance in the Instance alias column. The instance
+    #   ID is displayed in the Overview section of your instance settings. For
+    #   example, the instance ID is the set of characters at the end of the
+    #   instance ARN, after instance/, such as
+    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #
+    # @return [Types::DescribeUserHierarchyGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeUserHierarchyGroupResponse#hierarchy_group #hierarchy_group} => Types::HierarchyGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_user_hierarchy_group({
+    #     hierarchy_group_id: "HierarchyGroupId", # required
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hierarchy_group.id #=> String
+    #   resp.hierarchy_group.arn #=> String
+    #   resp.hierarchy_group.name #=> String
+    #   resp.hierarchy_group.level_id #=> String
+    #   resp.hierarchy_group.hierarchy_path.level_one.id #=> String
+    #   resp.hierarchy_group.hierarchy_path.level_one.arn #=> String
+    #   resp.hierarchy_group.hierarchy_path.level_one.name #=> String
+    #   resp.hierarchy_group.hierarchy_path.level_two.id #=> String
+    #   resp.hierarchy_group.hierarchy_path.level_two.arn #=> String
+    #   resp.hierarchy_group.hierarchy_path.level_two.name #=> String
+    #   resp.hierarchy_group.hierarchy_path.level_three.id #=> String
+    #   resp.hierarchy_group.hierarchy_path.level_three.arn #=> String
+    #   resp.hierarchy_group.hierarchy_path.level_three.name #=> String
+    #   resp.hierarchy_group.hierarchy_path.level_four.id #=> String
+    #   resp.hierarchy_group.hierarchy_path.level_four.arn #=> String
+    #   resp.hierarchy_group.hierarchy_path.level_four.name #=> String
+    #   resp.hierarchy_group.hierarchy_path.level_five.id #=> String
+    #   resp.hierarchy_group.hierarchy_path.level_five.arn #=> String
+    #   resp.hierarchy_group.hierarchy_path.level_five.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUserHierarchyGroup AWS API Documentation
+    #
+    # @overload describe_user_hierarchy_group(params = {})
+    # @param [Hash] params ({})
+    def describe_user_hierarchy_group(params = {}, options = {})
+      req = build_request(:describe_user_hierarchy_group, params)
+      req.send_request(options)
+    end
+
+    # Returns a `HiearchyGroupStructure` object, which contains data about
+    # the levels in the agent hierarchy.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier for your Amazon Connect instance. To find the ID of
+    #   your instance, open the AWS console and select Amazon Connect. Select
+    #   the alias of the instance in the Instance alias column. The instance
+    #   ID is displayed in the Overview section of your instance settings. For
+    #   example, the instance ID is the set of characters at the end of the
+    #   instance ARN, after instance/, such as
+    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #
+    # @return [Types::DescribeUserHierarchyStructureResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeUserHierarchyStructureResponse#hierarchy_structure #hierarchy_structure} => Types::HierarchyStructure
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_user_hierarchy_structure({
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hierarchy_structure.level_one.id #=> String
+    #   resp.hierarchy_structure.level_one.arn #=> String
+    #   resp.hierarchy_structure.level_one.name #=> String
+    #   resp.hierarchy_structure.level_two.id #=> String
+    #   resp.hierarchy_structure.level_two.arn #=> String
+    #   resp.hierarchy_structure.level_two.name #=> String
+    #   resp.hierarchy_structure.level_three.id #=> String
+    #   resp.hierarchy_structure.level_three.arn #=> String
+    #   resp.hierarchy_structure.level_three.name #=> String
+    #   resp.hierarchy_structure.level_four.id #=> String
+    #   resp.hierarchy_structure.level_four.arn #=> String
+    #   resp.hierarchy_structure.level_four.name #=> String
+    #   resp.hierarchy_structure.level_five.id #=> String
+    #   resp.hierarchy_structure.level_five.arn #=> String
+    #   resp.hierarchy_structure.level_five.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUserHierarchyStructure AWS API Documentation
+    #
+    # @overload describe_user_hierarchy_structure(params = {})
+    # @param [Hash] params ({})
+    def describe_user_hierarchy_structure(params = {}, options = {})
+      req = build_request(:describe_user_hierarchy_structure, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a token for federation.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier for your Amazon Connect instance. To find the ID of
+    #   your instance, open the AWS console and select Amazon Connect. Select
+    #   the alias of the instance in the Instance alias column. The instance
+    #   ID is displayed in the Overview section of your instance settings. For
+    #   example, the instance ID is the set of characters at the end of the
+    #   instance ARN, after instance/, such as
+    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #
+    # @return [Types::GetFederationTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFederationTokenResponse#credentials #credentials} => Types::Credentials
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_federation_token({
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.credentials.access_token #=> String
+    #   resp.credentials.access_token_expiration #=> Time
+    #   resp.credentials.refresh_token #=> String
+    #   resp.credentials.refresh_token_expiration #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetFederationToken AWS API Documentation
+    #
+    # @overload get_federation_token(params = {})
+    # @param [Hash] params ({})
+    def get_federation_token(params = {}, options = {})
+      req = build_request(:get_federation_token, params)
+      req.send_request(options)
+    end
+
+    # Returns an array of `RoutingProfileSummary` objects that includes
+    # information about the routing profiles in your instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier for your Amazon Connect instance. To find the ID of
+    #   your instance, open the AWS console and select Amazon Connect. Select
+    #   the alias of the instance in the Instance alias column. The instance
+    #   ID is displayed in the Overview section of your instance settings. For
+    #   example, the instance ID is the set of characters at the end of the
+    #   instance ARN, after instance/, such as
+    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of routing profiles to return in the response.
+    #
+    # @return [Types::ListRoutingProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRoutingProfilesResponse#routing_profile_summary_list #routing_profile_summary_list} => Array&lt;Types::RoutingProfileSummary&gt;
+    #   * {Types::ListRoutingProfilesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_routing_profiles({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.routing_profile_summary_list #=> Array
+    #   resp.routing_profile_summary_list[0].id #=> String
+    #   resp.routing_profile_summary_list[0].arn #=> String
+    #   resp.routing_profile_summary_list[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfiles AWS API Documentation
+    #
+    # @overload list_routing_profiles(params = {})
+    # @param [Hash] params ({})
+    def list_routing_profiles(params = {}, options = {})
+      req = build_request(:list_routing_profiles, params)
+      req.send_request(options)
+    end
+
+    # Returns an array of SecurityProfileSummary objects that contain
+    # information about the security profiles in your instance, including
+    # the ARN, Id, and Name of the security profile.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier for your Amazon Connect instance. To find the ID of
+    #   your instance, open the AWS console and select Amazon Connect. Select
+    #   the alias of the instance in the Instance alias column. The instance
+    #   ID is displayed in the Overview section of your instance settings. For
+    #   example, the instance ID is the set of characters at the end of the
+    #   instance ARN, after instance/, such as
+    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of security profiles to return.
+    #
+    # @return [Types::ListSecurityProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSecurityProfilesResponse#security_profile_summary_list #security_profile_summary_list} => Array&lt;Types::SecurityProfileSummary&gt;
+    #   * {Types::ListSecurityProfilesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_security_profiles({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_profile_summary_list #=> Array
+    #   resp.security_profile_summary_list[0].id #=> String
+    #   resp.security_profile_summary_list[0].arn #=> String
+    #   resp.security_profile_summary_list[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfiles AWS API Documentation
+    #
+    # @overload list_security_profiles(params = {})
+    # @param [Hash] params ({})
+    def list_security_profiles(params = {}, options = {})
+      req = build_request(:list_security_profiles, params)
+      req.send_request(options)
+    end
+
+    # Returns a `UserHierarchyGroupSummaryList`, which is an array of
+    # `HierarchyGroupSummary` objects that contain information about the
+    # hierarchy groups in your instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier for your Amazon Connect instance. To find the ID of
+    #   your instance, open the AWS console and select Amazon Connect. Select
+    #   the alias of the instance in the Instance alias column. The instance
+    #   ID is displayed in the Overview section of your instance settings. For
+    #   example, the instance ID is the set of characters at the end of the
+    #   instance ARN, after instance/, such as
+    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of hierarchy groups to return.
+    #
+    # @return [Types::ListUserHierarchyGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListUserHierarchyGroupsResponse#user_hierarchy_group_summary_list #user_hierarchy_group_summary_list} => Array&lt;Types::HierarchyGroupSummary&gt;
+    #   * {Types::ListUserHierarchyGroupsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_user_hierarchy_groups({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_hierarchy_group_summary_list #=> Array
+    #   resp.user_hierarchy_group_summary_list[0].id #=> String
+    #   resp.user_hierarchy_group_summary_list[0].arn #=> String
+    #   resp.user_hierarchy_group_summary_list[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUserHierarchyGroups AWS API Documentation
+    #
+    # @overload list_user_hierarchy_groups(params = {})
+    # @param [Hash] params ({})
+    def list_user_hierarchy_groups(params = {}, options = {})
+      req = build_request(:list_user_hierarchy_groups, params)
+      req.send_request(options)
+    end
+
+    # Returns a `UserSummaryList`, which is an array of `UserSummary`
+    # objects.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier for your Amazon Connect instance. To find the ID of
+    #   your instance, open the AWS console and select Amazon Connect. Select
+    #   the alias of the instance in the Instance alias column. The instance
+    #   ID is displayed in the Overview section of your instance settings. For
+    #   example, the instance ID is the set of characters at the end of the
+    #   instance ARN, after instance/, such as
+    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response.
+    #
+    # @return [Types::ListUsersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListUsersResponse#user_summary_list #user_summary_list} => Array&lt;Types::UserSummary&gt;
+    #   * {Types::ListUsersResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_users({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_summary_list #=> Array
+    #   resp.user_summary_list[0].id #=> String
+    #   resp.user_summary_list[0].arn #=> String
+    #   resp.user_summary_list[0].username #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUsers AWS API Documentation
+    #
+    # @overload list_users(params = {})
+    # @param [Hash] params ({})
+    def list_users(params = {}, options = {})
+      req = build_request(:list_users, params)
+      req.send_request(options)
+    end
+
     # The `StartOutboundVoiceContact` operation initiates a contact flow to
     # place an outbound call to a customer.
     #
     # There is a throttling limit placed on usage of the API that includes a
-    # `RateLimit` of 2 per second, and a `BurstLimit` of 5 per second.
+    # RateLimit of 2 per second, and a BurstLimit of 5 per second.
     #
-    # If you are using an IAM account, it must have permissions to the
+    # If you are using an IAM account, it must have permission to the
     # `connect:StartOutboundVoiceContact` action.
     #
     # @option params [required, String] :destination_phone_number
-    #   The phone number, in E.164 format, of the customer to call with the
-    #   outbound contact.
+    #   The phone number of the customer in E.164 format.
     #
     # @option params [required, String] :contact_flow_id
-    #   The identifier for the contact flow to execute for the outbound call.
-    #   This is a GUID value only. Amazon Resource Name (ARN) values are not
-    #   supported.
+    #   The identifier for the contact flow to connect the outbound call to.
     #
-    #   To find the `ContactFlowId`, open the contact flow to use in the
-    #   Amazon Connect contact flow designer. The ID for the contact flow is
-    #   displayed in the address bar as part of the URL. For example, an
-    #   address displayed when you open a contact flow is similar to the
-    #   following:
-    #   `https://myconnectinstance.awsapps.com/connect/contact-flows/edit?id=arn:aws:connect:us-east-1:361814831152:instance/2fb42df9-78a2-4b99-b484-f5cf80dc300c/contact-flow/b0b8f2dd-ed1b-4c44-af36-ce189a178181
-    #   `. At the end of the URL, you see
-    #   `contact-flow/b0b8f2dd-ed1b-4c44-af36-ce189a178181`. The
-    #   `ContactFlowID` for this contact flow is `
-    #   b0b8f2dd-ed1b-4c44-af36-ce189a178181 `. Make sure to include only the
-    #   GUID after the "contact-flow/" in your requests.
+    #   To find the `ContactFlowId`, open the contact flow you want to use in
+    #   the Amazon Connect contact flow editor. The ID for the contact flow is
+    #   displayed in the address bar as part of the URL. For example, the
+    #   contact flow ID is the set of characters at the end of the URL, after
+    #   'contact-flow/' such as `78ea8fd5-2659-4f2b-b528-699760ccfc1b`.
     #
     # @option params [required, String] :instance_id
-    #   The identifier for your Amazon Connect instance. To find the
-    #   `InstanceId` value for your Amazon Connect instance, open the [Amazon
-    #   Connect console][1]. Select the instance alias of the instance and
-    #   view the instance ID in the **Overview** section. For example, the
-    #   instance ID is the set of characters at the end of the instance ARN,
-    #   after "instance/", such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
-    #
-    #
-    #
-    #   [1]: https://console.aws.amazon.com/connect/
+    #   The identifier for your Amazon Connect instance. To find the ID of
+    #   your instance, open the AWS console and select Amazon Connect. Select
+    #   the alias of the instance in the Instance alias column. The instance
+    #   ID is displayed in the Overview section of your instance settings. For
+    #   example, the instance ID is the set of characters at the end of the
+    #   instance ARN, after instance/, such as
+    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -209,19 +724,19 @@ module Aws::Connect
     #
     # @option params [String] :source_phone_number
     #   The phone number, in E.164 format, associated with your Amazon Connect
-    #   instance to use to place the outbound call.
+    #   instance to use for the outbound call.
     #
     # @option params [String] :queue_id
-    #   The queue to which to add the call. If you specify a queue, the phone
-    #   displayed for caller ID is the phone number defined for the queue. If
-    #   you do not specify a queue, the queue used is the queue defined in the
-    #   contact flow specified by `ContactFlowId`.
+    #   The queue to add the call to. If you specify a queue, the phone
+    #   displayed for caller ID is the phone number specified in the queue. If
+    #   you do not specify a queue, the queue used will be the queue defined
+    #   in the contact flow.
     #
-    #   To find the `QueueId`, open the queue to use in the Amazon Connect
-    #   queue editor. The ID for the queue is displayed in the address bar as
-    #   part of the URL. For example, the `QueueId` value is the set of
-    #   characters at the end of the URL, after "queue/", such as
-    #   `aeg40574-2d01-51c3-73d6-bf8624d2168c`.
+    #   To find the `QueueId`, open the queue you want to use in the Amazon
+    #   Connect Queue editor. The ID for the queue is displayed in the address
+    #   bar as part of the URL. For example, the queue ID is the set of
+    #   characters at the end of the URL, after 'queue/' such as
+    #   `queue/aeg40574-2d01-51c3-73d6-bf8624d2168c`.
     #
     # @option params [Hash<String,String>] :attributes
     #   Specify a custom key-value pair using an attribute map. The attributes
@@ -232,8 +747,9 @@ module Aws::Connect
     #   Attribute keys can include only alphanumeric, dash, and underscore
     #   characters.
     #
-    #   For example, to play a greeting when the customer answers the call,
-    #   you can pass the customer name in attributes similar to the following:
+    #   For example, if you want play a greeting when the customer answers the
+    #   call, you can pass the customer name in attributes similar to the
+    #   following:
     #
     # @return [Types::StartOutboundVoiceContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -269,16 +785,20 @@ module Aws::Connect
     # Ends the contact initiated by the `StartOutboundVoiceContact`
     # operation.
     #
-    # If you are using an IAM account, it must have permissions to the
-    # `connect:StopContact` operation.
+    # If you are using an IAM account, it must have permission to the
+    # `connect:StopContact` action.
     #
     # @option params [required, String] :contact_id
-    #   The unique identifier of the contact to end. This is the `ContactId`
-    #   value returned from the `StartOutboundVoiceContact` operation.
+    #   The unique identifier of the contact to end.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance in which the contact is
-    #   active.
+    #   The identifier for your Amazon Connect instance. To find the ID of
+    #   your instance, open the AWS console and select Amazon Connect. Select
+    #   the alias of the instance in the Instance alias column. The instance
+    #   ID is displayed in the Overview section of your instance settings. For
+    #   example, the instance ID is the set of characters at the end of the
+    #   instance ARN, after instance/, such as
+    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -298,6 +818,200 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Assigns the specified hierarchy group to the user.
+    #
+    # @option params [String] :hierarchy_group_id
+    #   The identifier for the hierarchy group to assign to the user.
+    #
+    # @option params [required, String] :user_id
+    #   The identifier of the user account to assign the hierarchy group to.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier for your Amazon Connect instance. To find the ID of
+    #   your instance, open the AWS console and select Amazon Connect. Select
+    #   the alias of the instance in the Instance alias column. The instance
+    #   ID is displayed in the Overview section of your instance settings. For
+    #   example, the instance ID is the set of characters at the end of the
+    #   instance ARN, after instance/, such as
+    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_user_hierarchy({
+    #     hierarchy_group_id: "HierarchyGroupId",
+    #     user_id: "UserId", # required
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserHierarchy AWS API Documentation
+    #
+    # @overload update_user_hierarchy(params = {})
+    # @param [Hash] params ({})
+    def update_user_hierarchy(params = {}, options = {})
+      req = build_request(:update_user_hierarchy, params)
+      req.send_request(options)
+    end
+
+    # Updates the identity information for the specified user in a
+    # `UserIdentityInfo` object, including email, first name, and last name.
+    #
+    # @option params [required, Types::UserIdentityInfo] :identity_info
+    #   A `UserIdentityInfo` object.
+    #
+    # @option params [required, String] :user_id
+    #   The identifier for the user account to update identity information
+    #   for.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier for your Amazon Connect instance. To find the ID of
+    #   your instance, open the AWS console and select Amazon Connect. Select
+    #   the alias of the instance in the Instance alias column. The instance
+    #   ID is displayed in the Overview section of your instance settings. For
+    #   example, the instance ID is the set of characters at the end of the
+    #   instance ARN, after instance/, such as
+    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_user_identity_info({
+    #     identity_info: { # required
+    #       first_name: "AgentFirstName",
+    #       last_name: "AgentLastName",
+    #       email: "Email",
+    #     },
+    #     user_id: "UserId", # required
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserIdentityInfo AWS API Documentation
+    #
+    # @overload update_user_identity_info(params = {})
+    # @param [Hash] params ({})
+    def update_user_identity_info(params = {}, options = {})
+      req = build_request(:update_user_identity_info, params)
+      req.send_request(options)
+    end
+
+    # Updates the phone configuration settings in the `UserPhoneConfig`
+    # object for the specified user.
+    #
+    # @option params [required, Types::UserPhoneConfig] :phone_config
+    #   A `UserPhoneConfig` object that contains settings for
+    #   `AfterContactWorkTimeLimit`, `AutoAccept`, `DeskPhoneNumber`, and
+    #   `PhoneType` to assign to the user.
+    #
+    # @option params [required, String] :user_id
+    #   The identifier for the user account to change phone settings for.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier for your Amazon Connect instance. To find the ID of
+    #   your instance, open the AWS console and select Amazon Connect. Select
+    #   the alias of the instance in the Instance alias column. The instance
+    #   ID is displayed in the Overview section of your instance settings. For
+    #   example, the instance ID is the set of characters at the end of the
+    #   instance ARN, after instance/, such as
+    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_user_phone_config({
+    #     phone_config: { # required
+    #       phone_type: "SOFT_PHONE", # required, accepts SOFT_PHONE, DESK_PHONE
+    #       auto_accept: false,
+    #       after_contact_work_time_limit: 1,
+    #       desk_phone_number: "PhoneNumber",
+    #     },
+    #     user_id: "UserId", # required
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserPhoneConfig AWS API Documentation
+    #
+    # @overload update_user_phone_config(params = {})
+    # @param [Hash] params ({})
+    def update_user_phone_config(params = {}, options = {})
+      req = build_request(:update_user_phone_config, params)
+      req.send_request(options)
+    end
+
+    # Assigns the specified routing profile to a user.
+    #
+    # @option params [required, String] :routing_profile_id
+    #   The identifier of the routing profile to assign to the user.
+    #
+    # @option params [required, String] :user_id
+    #   The identifier for the user account to assign the routing profile to.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier for your Amazon Connect instance. To find the ID of
+    #   your instance, open the AWS console and select Amazon Connect. Select
+    #   the alias of the instance in the Instance alias column. The instance
+    #   ID is displayed in the Overview section of your instance settings. For
+    #   example, the instance ID is the set of characters at the end of the
+    #   instance ARN, after instance/, such as
+    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_user_routing_profile({
+    #     routing_profile_id: "RoutingProfileId", # required
+    #     user_id: "UserId", # required
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserRoutingProfile AWS API Documentation
+    #
+    # @overload update_user_routing_profile(params = {})
+    # @param [Hash] params ({})
+    def update_user_routing_profile(params = {}, options = {})
+      req = build_request(:update_user_routing_profile, params)
+      req.send_request(options)
+    end
+
+    # Update the security profiles assigned to the user.
+    #
+    # @option params [required, Array<String>] :security_profile_ids
+    #   The identifiers for the security profiles to assign to the user.
+    #
+    # @option params [required, String] :user_id
+    #   The identifier of the user account to assign the security profiles.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier for your Amazon Connect instance. To find the ID of
+    #   your instance, open the AWS console and select Amazon Connect. Select
+    #   the alias of the instance in the Instance alias column. The instance
+    #   ID is displayed in the Overview section of your instance settings. For
+    #   example, the instance ID is the set of characters at the end of the
+    #   instance ARN, after instance/, such as
+    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_user_security_profiles({
+    #     security_profile_ids: ["SecurityProfileId"], # required
+    #     user_id: "UserId", # required
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserSecurityProfiles AWS API Documentation
+    #
+    # @overload update_user_security_profiles(params = {})
+    # @param [Hash] params ({})
+    def update_user_security_profiles(params = {}, options = {})
+      req = build_request(:update_user_security_profiles, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -311,7 +1025,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

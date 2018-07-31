@@ -1057,7 +1057,7 @@ module Aws::MediaConvert
     InsertableImage.struct_class = Types::InsertableImage
 
     Job.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
-    Job.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdAt"))
+    Job.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "createdAt"))
     Job.add_member(:error_code, Shapes::ShapeRef.new(shape: __integer, location_name: "errorCode"))
     Job.add_member(:error_message, Shapes::ShapeRef.new(shape: __string, location_name: "errorMessage"))
     Job.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
@@ -1082,9 +1082,9 @@ module Aws::MediaConvert
 
     JobTemplate.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     JobTemplate.add_member(:category, Shapes::ShapeRef.new(shape: __string, location_name: "category"))
-    JobTemplate.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdAt"))
+    JobTemplate.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "createdAt"))
     JobTemplate.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
-    JobTemplate.add_member(:last_updated, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastUpdated"))
+    JobTemplate.add_member(:last_updated, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "lastUpdated"))
     JobTemplate.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     JobTemplate.add_member(:queue, Shapes::ShapeRef.new(shape: __string, location_name: "queue"))
     JobTemplate.add_member(:settings, Shapes::ShapeRef.new(shape: JobTemplateSettings, required: true, location_name: "settings"))
@@ -1319,9 +1319,9 @@ module Aws::MediaConvert
 
     Preset.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     Preset.add_member(:category, Shapes::ShapeRef.new(shape: __string, location_name: "category"))
-    Preset.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdAt"))
+    Preset.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "createdAt"))
     Preset.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
-    Preset.add_member(:last_updated, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastUpdated"))
+    Preset.add_member(:last_updated, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "lastUpdated"))
     Preset.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     Preset.add_member(:settings, Shapes::ShapeRef.new(shape: PresetSettings, required: true, location_name: "settings"))
     Preset.add_member(:type, Shapes::ShapeRef.new(shape: Type, location_name: "type"))
@@ -1347,9 +1347,9 @@ module Aws::MediaConvert
     ProresSettings.struct_class = Types::ProresSettings
 
     Queue.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
-    Queue.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdAt"))
+    Queue.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "createdAt"))
     Queue.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
-    Queue.add_member(:last_updated, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastUpdated"))
+    Queue.add_member(:last_updated, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "lastUpdated"))
     Queue.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     Queue.add_member(:progressing_jobs_count, Shapes::ShapeRef.new(shape: __integer, location_name: "progressingJobsCount"))
     Queue.add_member(:status, Shapes::ShapeRef.new(shape: QueueStatus, location_name: "status"))
@@ -1412,9 +1412,9 @@ module Aws::MediaConvert
     TimedMetadataInsertion.add_member(:id_3_insertions, Shapes::ShapeRef.new(shape: __listOfId3Insertion, required: true, location_name: "id3Insertions"))
     TimedMetadataInsertion.struct_class = Types::TimedMetadataInsertion
 
-    Timing.add_member(:finish_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "finishTime"))
-    Timing.add_member(:start_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "startTime"))
-    Timing.add_member(:submit_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "submitTime"))
+    Timing.add_member(:finish_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "finishTime"))
+    Timing.add_member(:start_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "startTime"))
+    Timing.add_member(:submit_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "submitTime"))
     Timing.struct_class = Types::Timing
 
     TtmlDestinationSettings.add_member(:style_passthrough, Shapes::ShapeRef.new(shape: TtmlStylePassthrough, location_name: "stylePassthrough"))

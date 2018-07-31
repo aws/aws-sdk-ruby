@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.23.0 (2018-07-31)
+------------------
+
 * Feature - Add Logged API Requests interface to stubbed clients
 
 3.22.1 (2018-06-28)
