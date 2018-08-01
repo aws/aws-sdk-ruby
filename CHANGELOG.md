@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.99 (2018-08-01)
+------------------
+
 * Feature - Aws::StorageGateway - Updated the API, and documentation for AWS Storage Gateway.
 
 * Feature - Aws::TranscribeService - Updated the API, and documentation for Amazon Transcribe Service.
