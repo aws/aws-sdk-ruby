@@ -364,6 +364,7 @@ module Aws::TranscribeService
     #         vocabulary_name: "VocabularyName",
     #         show_speaker_labels: false,
     #         max_speaker_labels: 1,
+    #         channel_identification: false,
     #       }
     #
     # @!attribute [rw] vocabulary_name
@@ -372,10 +373,15 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] show_speaker_labels
-    #   Determines whether the transcription job should use speaker
-    #   recognition to identify different speakers in the input audio. If
-    #   you set the `ShowSpeakerLabels` field to true, you must also set the
-    #   maximum number of speaker labels `MaxSpeakerLabels` field.
+    #   Determines whether the transcription job uses speaker recognition to
+    #   identify different speakers in the input audio. Speaker recognition
+    #   labels individual speakers in the audio file. If you set the
+    #   `ShowSpeakerLabels` field to true, you must also set the maximum
+    #   number of speaker labels `MaxSpeakerLabels` field.
+    #
+    #   You can't set both `ShowSpeakerLabels` and `ChannelIdentification`
+    #   in the same request. If you set both, your request returns a
+    #   `BadRequestException`.
     #   @return [Boolean]
     #
     # @!attribute [rw] max_speaker_labels
@@ -386,12 +392,28 @@ module Aws::TranscribeService
     #   to true.
     #   @return [Integer]
     #
+    # @!attribute [rw] channel_identification
+    #   Instructs Amazon Transcribe to process each audio channel separately
+    #   and then merge the transcription output of each channel into a
+    #   single transcription.
+    #
+    #   Amazon Transcribe also produces a transcription of each item
+    #   detected on an audio channel, including the start time and end time
+    #   of the item and alternative transcriptions of the item including the
+    #   confidence that Amazon Transcribe has in the transcription.
+    #
+    #   You can't set both `ShowSpeakerLabels` and `ChannelIdentification`
+    #   in the same request. If you set both, your request returns a
+    #   `BadRequestException`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/Settings AWS API Documentation
     #
     class Settings < Struct.new(
       :vocabulary_name,
       :show_speaker_labels,
-      :max_speaker_labels)
+      :max_speaker_labels,
+      :channel_identification)
       include Aws::Structure
     end
 
@@ -411,6 +433,7 @@ module Aws::TranscribeService
     #           vocabulary_name: "VocabularyName",
     #           show_speaker_labels: false,
     #           max_speaker_labels: 1,
+    #           channel_identification: false,
     #         },
     #       }
     #

@@ -442,6 +442,8 @@ module Aws::StorageGateway
     CreateStorediSCSIVolumeInput.add_member(:preserve_existing_data, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "PreserveExistingData"))
     CreateStorediSCSIVolumeInput.add_member(:target_name, Shapes::ShapeRef.new(shape: TargetName, required: true, location_name: "TargetName"))
     CreateStorediSCSIVolumeInput.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, required: true, location_name: "NetworkInterfaceId"))
+    CreateStorediSCSIVolumeInput.add_member(:kms_encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "KMSEncrypted"))
+    CreateStorediSCSIVolumeInput.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
     CreateStorediSCSIVolumeInput.struct_class = Types::CreateStorediSCSIVolumeInput
 
     CreateStorediSCSIVolumeOutput.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
@@ -938,6 +940,7 @@ module Aws::StorageGateway
     StorediSCSIVolume.add_member(:volume_iscsi_attributes, Shapes::ShapeRef.new(shape: VolumeiSCSIAttributes, location_name: "VolumeiSCSIAttributes"))
     StorediSCSIVolume.add_member(:created_date, Shapes::ShapeRef.new(shape: CreatedDate, location_name: "CreatedDate"))
     StorediSCSIVolume.add_member(:volume_used_in_bytes, Shapes::ShapeRef.new(shape: VolumeUsedInBytes, location_name: "VolumeUsedInBytes"))
+    StorediSCSIVolume.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
     StorediSCSIVolume.struct_class = Types::StorediSCSIVolume
 
     StorediSCSIVolumes.member = Shapes::ShapeRef.new(shape: StorediSCSIVolume)
