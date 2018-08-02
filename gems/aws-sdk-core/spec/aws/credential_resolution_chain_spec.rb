@@ -74,6 +74,15 @@ module Aws
         expect(client.config.credentials.access_key_id).to eq("AK_PROC1")
       end
 
+      it 'prefers direct credentials over process credentials' do
+        stub_const('ENV', {
+          "AWS_ACCESS_KEY_ID" => "AKID_ENV_STUB",
+          "AWS_SECRET_ACCESS_KEY" => "SECRET_ENV_STUB"
+        })
+        client = ApiHelper.sample_rest_xml::Client.new(profile: "creds_from_process", region: "us-east-1")
+        expect(client.config.credentials.access_key_id).to eq("AKID_ENV_STUB")
+      end
+
       it 'attempts to fetch metadata credentials last' do
         stub_request(
           :get,
