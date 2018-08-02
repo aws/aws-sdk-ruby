@@ -135,6 +135,11 @@ module Aws
       end
     end
 
+    def credentials_process(profile)
+      validate_profile_exists(profile)
+      @parsed_config[profile]['credential_process']
+    end
+
     private
     def credentials_present?
       (@parsed_credentials && !@parsed_credentials.empty?) ||
