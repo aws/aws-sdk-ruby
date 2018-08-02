@@ -26,7 +26,7 @@ module Aws::ResourceGroups
     # @!attribute [rw] name
     #   The name of the group, which is the identifier of the group in other
     #   operations. A resource group name cannot be updated after it is
-    #   created. A resource group name can have a maximum of 127 characters,
+    #   created. A resource group name can have a maximum of 128 characters,
     #   including letters, numbers, hyphens, dots, and underscores. The name
     #   cannot start with `AWS` or `aws`; these are reserved. A resource
     #   group name must be unique within your account.
@@ -45,8 +45,8 @@ module Aws::ResourceGroups
     #
     # @!attribute [rw] tags
     #   The tags to add to the group. A tag is a string-to-string map of
-    #   key-value pairs. Tag keys can have a maximum character length of 127
-    #   characters, and tag values can have a maximum length of 255
+    #   key-value pairs. Tag keys can have a maximum character length of 128
+    #   characters, and tag values can have a maximum length of 256
     #   characters.
     #   @return [Hash<String,String>]
     #
@@ -252,6 +252,12 @@ module Aws::ResourceGroups
     #
     #       {
     #         group_name: "GroupName", # required
+    #         filters: [
+    #           {
+    #             name: "resource-type", # required, accepts resource-type
+    #             values: ["ResourceFilterValue"], # required
+    #           },
+    #         ],
     #         max_results: 1,
     #         next_token: "NextToken",
     #       }
@@ -259,6 +265,17 @@ module Aws::ResourceGroups
     # @!attribute [rw] group_name
     #   The name of the resource group.
     #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters, formatted as ResourceFilter objects, that you want to apply
+    #   to a ListGroupResources operation.
+    #
+    #   * `resource-type` - Filter resources by their type. Specify up to
+    #     five resource types in the format AWS::ServiceCode::ResourceType.
+    #     For example, AWS::EC2::Instance, or AWS::S3::Bucket.
+    #
+    #   ^
+    #   @return [Array<Types::ResourceFilter>]
     #
     # @!attribute [rw] max_results
     #   The maximum number of group member ARNs that are returned in a
@@ -277,6 +294,7 @@ module Aws::ResourceGroups
     #
     class ListGroupResourcesInput < Struct.new(
       :group_name,
+      :filters,
       :max_results,
       :next_token)
       include Aws::Structure
@@ -341,6 +359,34 @@ module Aws::ResourceGroups
     class ListGroupsOutput < Struct.new(
       :groups,
       :next_token)
+      include Aws::Structure
+    end
+
+    # A filter name and value pair that is used to obtain more specific
+    # results from a list of resources.
+    #
+    # @note When making an API call, you may pass ResourceFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "resource-type", # required, accepts resource-type
+    #         values: ["ResourceFilterValue"], # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the filter. Filter names are case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   One or more filter values. Allowed filter values vary by resource
+    #   filter name, and are case-sensitive.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ResourceFilter AWS API Documentation
+    #
+    class ResourceFilter < Struct.new(
+      :name,
+      :values)
       include Aws::Structure
     end
 
@@ -472,8 +518,8 @@ module Aws::ResourceGroups
     # @!attribute [rw] tags
     #   The tags to add to the specified resource. A tag is a
     #   string-to-string map of key-value pairs. Tag keys can have a maximum
-    #   character length of 127 characters, and tag values can have a
-    #   maximum length of 255 characters.
+    #   character length of 128 characters, and tag values can have a
+    #   maximum length of 256 characters.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/TagInput AWS API Documentation

@@ -13,12 +13,22 @@ module Aws::Kinesis
 
     AddTagsToStreamInput = Shapes::StructureShape.new(name: 'AddTagsToStreamInput')
     BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
+    Consumer = Shapes::StructureShape.new(name: 'Consumer')
+    ConsumerARN = Shapes::StringShape.new(name: 'ConsumerARN')
+    ConsumerCountObject = Shapes::IntegerShape.new(name: 'ConsumerCountObject')
+    ConsumerDescription = Shapes::StructureShape.new(name: 'ConsumerDescription')
+    ConsumerList = Shapes::ListShape.new(name: 'ConsumerList')
+    ConsumerName = Shapes::StringShape.new(name: 'ConsumerName')
+    ConsumerStatus = Shapes::StringShape.new(name: 'ConsumerStatus')
     CreateStreamInput = Shapes::StructureShape.new(name: 'CreateStreamInput')
     Data = Shapes::BlobShape.new(name: 'Data')
     DecreaseStreamRetentionPeriodInput = Shapes::StructureShape.new(name: 'DecreaseStreamRetentionPeriodInput')
     DeleteStreamInput = Shapes::StructureShape.new(name: 'DeleteStreamInput')
+    DeregisterStreamConsumerInput = Shapes::StructureShape.new(name: 'DeregisterStreamConsumerInput')
     DescribeLimitsInput = Shapes::StructureShape.new(name: 'DescribeLimitsInput')
     DescribeLimitsOutput = Shapes::StructureShape.new(name: 'DescribeLimitsOutput')
+    DescribeStreamConsumerInput = Shapes::StructureShape.new(name: 'DescribeStreamConsumerInput')
+    DescribeStreamConsumerOutput = Shapes::StructureShape.new(name: 'DescribeStreamConsumerOutput')
     DescribeStreamInput = Shapes::StructureShape.new(name: 'DescribeStreamInput')
     DescribeStreamInputLimit = Shapes::IntegerShape.new(name: 'DescribeStreamInputLimit')
     DescribeStreamOutput = Shapes::StructureShape.new(name: 'DescribeStreamOutput')
@@ -42,6 +52,7 @@ module Aws::Kinesis
     HashKey = Shapes::StringShape.new(name: 'HashKey')
     HashKeyRange = Shapes::StructureShape.new(name: 'HashKeyRange')
     IncreaseStreamRetentionPeriodInput = Shapes::StructureShape.new(name: 'IncreaseStreamRetentionPeriodInput')
+    InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
     InvalidArgumentException = Shapes::StructureShape.new(name: 'InvalidArgumentException')
     KMSAccessDeniedException = Shapes::StructureShape.new(name: 'KMSAccessDeniedException')
     KMSDisabledException = Shapes::StructureShape.new(name: 'KMSDisabledException')
@@ -54,6 +65,9 @@ module Aws::Kinesis
     ListShardsInput = Shapes::StructureShape.new(name: 'ListShardsInput')
     ListShardsInputLimit = Shapes::IntegerShape.new(name: 'ListShardsInputLimit')
     ListShardsOutput = Shapes::StructureShape.new(name: 'ListShardsOutput')
+    ListStreamConsumersInput = Shapes::StructureShape.new(name: 'ListStreamConsumersInput')
+    ListStreamConsumersInputLimit = Shapes::IntegerShape.new(name: 'ListStreamConsumersInputLimit')
+    ListStreamConsumersOutput = Shapes::StructureShape.new(name: 'ListStreamConsumersOutput')
     ListStreamsInput = Shapes::StructureShape.new(name: 'ListStreamsInput')
     ListStreamsInputLimit = Shapes::IntegerShape.new(name: 'ListStreamsInputLimit')
     ListStreamsOutput = Shapes::StructureShape.new(name: 'ListStreamsOutput')
@@ -78,6 +92,8 @@ module Aws::Kinesis
     PutRecordsResultEntryList = Shapes::ListShape.new(name: 'PutRecordsResultEntryList')
     Record = Shapes::StructureShape.new(name: 'Record')
     RecordList = Shapes::ListShape.new(name: 'RecordList')
+    RegisterStreamConsumerInput = Shapes::StructureShape.new(name: 'RegisterStreamConsumerInput')
+    RegisterStreamConsumerOutput = Shapes::StructureShape.new(name: 'RegisterStreamConsumerOutput')
     RemoveTagsFromStreamInput = Shapes::StructureShape.new(name: 'RemoveTagsFromStreamInput')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -93,6 +109,7 @@ module Aws::Kinesis
     ShardList = Shapes::ListShape.new(name: 'ShardList')
     SplitShardInput = Shapes::StructureShape.new(name: 'SplitShardInput')
     StartStreamEncryptionInput = Shapes::StructureShape.new(name: 'StartStreamEncryptionInput')
+    StartingPosition = Shapes::StructureShape.new(name: 'StartingPosition')
     StopStreamEncryptionInput = Shapes::StructureShape.new(name: 'StopStreamEncryptionInput')
     StreamARN = Shapes::StringShape.new(name: 'StreamARN')
     StreamDescription = Shapes::StructureShape.new(name: 'StreamDescription')
@@ -100,6 +117,8 @@ module Aws::Kinesis
     StreamName = Shapes::StringShape.new(name: 'StreamName')
     StreamNameList = Shapes::ListShape.new(name: 'StreamNameList')
     StreamStatus = Shapes::StringShape.new(name: 'StreamStatus')
+    SubscribeToShardEvent = Shapes::StructureShape.new(name: 'SubscribeToShardEvent')
+    SubscribeToShardEventStream = Shapes::StructureShape.new(name: 'SubscribeToShardEventStream')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -114,6 +133,21 @@ module Aws::Kinesis
     AddTagsToStreamInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "Tags"))
     AddTagsToStreamInput.struct_class = Types::AddTagsToStreamInput
 
+    Consumer.add_member(:consumer_name, Shapes::ShapeRef.new(shape: ConsumerName, required: true, location_name: "ConsumerName"))
+    Consumer.add_member(:consumer_arn, Shapes::ShapeRef.new(shape: ConsumerARN, required: true, location_name: "ConsumerARN"))
+    Consumer.add_member(:consumer_status, Shapes::ShapeRef.new(shape: ConsumerStatus, required: true, location_name: "ConsumerStatus"))
+    Consumer.add_member(:consumer_creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ConsumerCreationTimestamp"))
+    Consumer.struct_class = Types::Consumer
+
+    ConsumerDescription.add_member(:consumer_name, Shapes::ShapeRef.new(shape: ConsumerName, required: true, location_name: "ConsumerName"))
+    ConsumerDescription.add_member(:consumer_arn, Shapes::ShapeRef.new(shape: ConsumerARN, required: true, location_name: "ConsumerARN"))
+    ConsumerDescription.add_member(:consumer_status, Shapes::ShapeRef.new(shape: ConsumerStatus, required: true, location_name: "ConsumerStatus"))
+    ConsumerDescription.add_member(:consumer_creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ConsumerCreationTimestamp"))
+    ConsumerDescription.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, required: true, location_name: "StreamARN"))
+    ConsumerDescription.struct_class = Types::ConsumerDescription
+
+    ConsumerList.member = Shapes::ShapeRef.new(shape: Consumer)
+
     CreateStreamInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
     CreateStreamInput.add_member(:shard_count, Shapes::ShapeRef.new(shape: PositiveIntegerObject, required: true, location_name: "ShardCount"))
     CreateStreamInput.struct_class = Types::CreateStreamInput
@@ -123,13 +157,27 @@ module Aws::Kinesis
     DecreaseStreamRetentionPeriodInput.struct_class = Types::DecreaseStreamRetentionPeriodInput
 
     DeleteStreamInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
+    DeleteStreamInput.add_member(:enforce_consumer_deletion, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnforceConsumerDeletion"))
     DeleteStreamInput.struct_class = Types::DeleteStreamInput
+
+    DeregisterStreamConsumerInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN"))
+    DeregisterStreamConsumerInput.add_member(:consumer_name, Shapes::ShapeRef.new(shape: ConsumerName, location_name: "ConsumerName"))
+    DeregisterStreamConsumerInput.add_member(:consumer_arn, Shapes::ShapeRef.new(shape: ConsumerARN, location_name: "ConsumerARN"))
+    DeregisterStreamConsumerInput.struct_class = Types::DeregisterStreamConsumerInput
 
     DescribeLimitsInput.struct_class = Types::DescribeLimitsInput
 
     DescribeLimitsOutput.add_member(:shard_limit, Shapes::ShapeRef.new(shape: ShardCountObject, required: true, location_name: "ShardLimit"))
     DescribeLimitsOutput.add_member(:open_shard_count, Shapes::ShapeRef.new(shape: ShardCountObject, required: true, location_name: "OpenShardCount"))
     DescribeLimitsOutput.struct_class = Types::DescribeLimitsOutput
+
+    DescribeStreamConsumerInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN"))
+    DescribeStreamConsumerInput.add_member(:consumer_name, Shapes::ShapeRef.new(shape: ConsumerName, location_name: "ConsumerName"))
+    DescribeStreamConsumerInput.add_member(:consumer_arn, Shapes::ShapeRef.new(shape: ConsumerARN, location_name: "ConsumerARN"))
+    DescribeStreamConsumerInput.struct_class = Types::DescribeStreamConsumerInput
+
+    DescribeStreamConsumerOutput.add_member(:consumer_description, Shapes::ShapeRef.new(shape: ConsumerDescription, required: true, location_name: "ConsumerDescription"))
+    DescribeStreamConsumerOutput.struct_class = Types::DescribeStreamConsumerOutput
 
     DescribeStreamInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
     DescribeStreamInput.add_member(:limit, Shapes::ShapeRef.new(shape: DescribeStreamInputLimit, location_name: "Limit"))
@@ -201,6 +249,16 @@ module Aws::Kinesis
     ListShardsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListShardsOutput.struct_class = Types::ListShardsOutput
 
+    ListStreamConsumersInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, required: true, location_name: "StreamARN"))
+    ListStreamConsumersInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListStreamConsumersInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListStreamConsumersInputLimit, location_name: "MaxResults"))
+    ListStreamConsumersInput.add_member(:stream_creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StreamCreationTimestamp"))
+    ListStreamConsumersInput.struct_class = Types::ListStreamConsumersInput
+
+    ListStreamConsumersOutput.add_member(:consumers, Shapes::ShapeRef.new(shape: ConsumerList, location_name: "Consumers"))
+    ListStreamConsumersOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListStreamConsumersOutput.struct_class = Types::ListStreamConsumersOutput
+
     ListStreamsInput.add_member(:limit, Shapes::ShapeRef.new(shape: ListStreamsInputLimit, location_name: "Limit"))
     ListStreamsInput.add_member(:exclusive_start_stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "ExclusiveStartStreamName"))
     ListStreamsInput.struct_class = Types::ListStreamsInput
@@ -270,6 +328,13 @@ module Aws::Kinesis
 
     RecordList.member = Shapes::ShapeRef.new(shape: Record)
 
+    RegisterStreamConsumerInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, required: true, location_name: "StreamARN"))
+    RegisterStreamConsumerInput.add_member(:consumer_name, Shapes::ShapeRef.new(shape: ConsumerName, required: true, location_name: "ConsumerName"))
+    RegisterStreamConsumerInput.struct_class = Types::RegisterStreamConsumerInput
+
+    RegisterStreamConsumerOutput.add_member(:consumer, Shapes::ShapeRef.new(shape: Consumer, required: true, location_name: "Consumer"))
+    RegisterStreamConsumerOutput.struct_class = Types::RegisterStreamConsumerOutput
+
     RemoveTagsFromStreamInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
     RemoveTagsFromStreamInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
     RemoveTagsFromStreamInput.struct_class = Types::RemoveTagsFromStreamInput
@@ -297,6 +362,11 @@ module Aws::Kinesis
     StartStreamEncryptionInput.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyId, required: true, location_name: "KeyId"))
     StartStreamEncryptionInput.struct_class = Types::StartStreamEncryptionInput
 
+    StartingPosition.add_member(:type, Shapes::ShapeRef.new(shape: ShardIteratorType, required: true, location_name: "Type"))
+    StartingPosition.add_member(:sequence_number, Shapes::ShapeRef.new(shape: SequenceNumber, location_name: "SequenceNumber"))
+    StartingPosition.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
+    StartingPosition.struct_class = Types::StartingPosition
+
     StopStreamEncryptionInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
     StopStreamEncryptionInput.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "EncryptionType"))
     StopStreamEncryptionInput.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyId, required: true, location_name: "KeyId"))
@@ -323,9 +393,27 @@ module Aws::Kinesis
     StreamDescriptionSummary.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType"))
     StreamDescriptionSummary.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyId, location_name: "KeyId"))
     StreamDescriptionSummary.add_member(:open_shard_count, Shapes::ShapeRef.new(shape: ShardCountObject, required: true, location_name: "OpenShardCount"))
+    StreamDescriptionSummary.add_member(:consumer_count, Shapes::ShapeRef.new(shape: ConsumerCountObject, location_name: "ConsumerCount"))
     StreamDescriptionSummary.struct_class = Types::StreamDescriptionSummary
 
     StreamNameList.member = Shapes::ShapeRef.new(shape: StreamName)
+
+    SubscribeToShardEvent.add_member(:records, Shapes::ShapeRef.new(shape: RecordList, required: true, location_name: "Records"))
+    SubscribeToShardEvent.add_member(:continuation_sequence_number, Shapes::ShapeRef.new(shape: SequenceNumber, required: true, location_name: "ContinuationSequenceNumber"))
+    SubscribeToShardEvent.add_member(:millis_behind_latest, Shapes::ShapeRef.new(shape: MillisBehindLatest, required: true, location_name: "MillisBehindLatest"))
+    SubscribeToShardEvent.struct_class = Types::SubscribeToShardEvent
+
+    SubscribeToShardEventStream.add_member(:subscribe_to_shard_event, Shapes::ShapeRef.new(shape: SubscribeToShardEvent, required: true, event: true, location_name: "SubscribeToShardEvent"))
+    SubscribeToShardEventStream.add_member(:resource_not_found_exception, Shapes::ShapeRef.new(shape: ResourceNotFoundException, location_name: "ResourceNotFoundException"))
+    SubscribeToShardEventStream.add_member(:resource_in_use_exception, Shapes::ShapeRef.new(shape: ResourceInUseException, location_name: "ResourceInUseException"))
+    SubscribeToShardEventStream.add_member(:kms_disabled_exception, Shapes::ShapeRef.new(shape: KMSDisabledException, location_name: "KMSDisabledException"))
+    SubscribeToShardEventStream.add_member(:kms_invalid_state_exception, Shapes::ShapeRef.new(shape: KMSInvalidStateException, location_name: "KMSInvalidStateException"))
+    SubscribeToShardEventStream.add_member(:kms_access_denied_exception, Shapes::ShapeRef.new(shape: KMSAccessDeniedException, location_name: "KMSAccessDeniedException"))
+    SubscribeToShardEventStream.add_member(:kms_not_found_exception, Shapes::ShapeRef.new(shape: KMSNotFoundException, location_name: "KMSNotFoundException"))
+    SubscribeToShardEventStream.add_member(:kms_opt_in_required, Shapes::ShapeRef.new(shape: KMSOptInRequired, location_name: "KMSOptInRequired"))
+    SubscribeToShardEventStream.add_member(:kms_throttling_exception, Shapes::ShapeRef.new(shape: KMSThrottlingException, location_name: "KMSThrottlingException"))
+    SubscribeToShardEventStream.add_member(:internal_failure_exception, Shapes::ShapeRef.new(shape: InternalFailureException, location_name: "InternalFailureException"))
+    SubscribeToShardEventStream.struct_class = Types::SubscribeToShardEventStream
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
@@ -358,6 +446,7 @@ module Aws::Kinesis
         "endpointPrefix" => "kinesis",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocolSettings" => {"h2"=>"eventstream"},
         "serviceFullName" => "Amazon Kinesis",
         "signatureVersion" => "v4",
         "targetPrefix" => "Kinesis_20131202",
@@ -406,6 +495,18 @@ module Aws::Kinesis
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:deregister_stream_consumer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeregisterStreamConsumer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeregisterStreamConsumerInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
       end)
 
       api.add_operation(:describe_limits, Seahorse::Model::Operation.new.tap do |o|
@@ -432,6 +533,17 @@ module Aws::Kinesis
             "stream_description.shards[-1].shard_id" => "exclusive_start_shard_id"
           }
         )
+      end)
+
+      api.add_operation(:describe_stream_consumer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeStreamConsumer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeStreamConsumerInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeStreamConsumerOutput)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
       end)
 
       api.add_operation(:describe_stream_summary, Seahorse::Model::Operation.new.tap do |o|
@@ -522,6 +634,25 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
+      api.add_operation(:list_stream_consumers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListStreamConsumers"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListStreamConsumersInput)
+        o.output = Shapes::ShapeRef.new(shape: ListStreamConsumersOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_streams, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListStreams"
         o.http_method = "POST"
@@ -593,6 +724,18 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: KMSOptInRequired)
         o.errors << Shapes::ShapeRef.new(shape: KMSThrottlingException)
+      end)
+
+      api.add_operation(:register_stream_consumer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegisterStreamConsumer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RegisterStreamConsumerInput)
+        o.output = Shapes::ShapeRef.new(shape: RegisterStreamConsumerOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:remove_tags_from_stream, Seahorse::Model::Operation.new.tap do |o|

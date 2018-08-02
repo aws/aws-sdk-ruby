@@ -7023,12 +7023,17 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] name
+    #   The parameter name on which you want to attach one or more labels.
     #   @return [String]
     #
     # @!attribute [rw] parameter_version
+    #   The specific version of the parameter on which you want to attach
+    #   one or more labels. If no version is specified, the system attaches
+    #   the label to the latest version.)
     #   @return [Integer]
     #
     # @!attribute [rw] labels
+    #   One or more labels to attach to the specified parameter version.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/LabelParameterVersionRequest AWS API Documentation
@@ -7041,6 +7046,13 @@ module Aws::SSM
     end
 
     # @!attribute [rw] invalid_labels
+    #   The label does not meet the requirements. For information about
+    #   parameter label requirements, see [Labeling Parameters][1] in the
+    #   *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/LabelParameterVersionResult AWS API Documentation
@@ -10179,7 +10191,7 @@ module Aws::SSM
     #           },
     #         ],
     #         task_arn: "MaintenanceWindowTaskArn", # required
-    #         service_role_arn: "ServiceRole", # required
+    #         service_role_arn: "ServiceRole",
     #         task_type: "RUN_COMMAND", # required, accepts RUN_COMMAND, AUTOMATION, STEP_FUNCTIONS, LAMBDA
     #         task_parameters: {
     #           "MaintenanceWindowTaskParameterName" => {
@@ -10254,7 +10266,24 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
-    #   The role that should be assumed when executing the task.
+    #   The role to assume when running the Maintenance Window task.
+    #
+    #   If you do not specify a service role ARN, Systems Manager will use
+    #   your account's service-linked role for Systems Manager by default.
+    #   If no service-linked role for Systems Manager exists in your
+    #   account, it will be created when you run
+    #   `RegisterTaskWithMaintenanceWindow` without specifying a service
+    #   role ARN.
+    #
+    #   For more information, see [Service-Linked Role Permissions for
+    #   Systems Manager][1] and [Should I Use a Service-Linked Role or a
+    #   Custom Service Role to Run Maintenance Window Tasks? ][2] in the
+    #   *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions
+    #   [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role
     #   @return [String]
     #
     # @!attribute [rw] task_type
@@ -11869,6 +11898,23 @@ module Aws::SSM
     # @!attribute [rw] service_role_arn
     #   The IAM service role ARN to modify. The system assumes this role
     #   during task execution.
+    #
+    #   If you do not specify a service role ARN, Systems Manager will use
+    #   your account's service-linked role for Systems Manager by default.
+    #   If no service-linked role for Systems Manager exists in your
+    #   account, it will be created when you run
+    #   `RegisterTaskWithMaintenanceWindow` without specifying a service
+    #   role ARN.
+    #
+    #   For more information, see [Service-Linked Role Permissions for
+    #   Systems Manager][1] and [Should I Use a Service-Linked Role or a
+    #   Custom Service Role to Run Maintenance Window Tasks? ][2] in the
+    #   *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions
+    #   [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role
     #   @return [String]
     #
     # @!attribute [rw] task_parameters

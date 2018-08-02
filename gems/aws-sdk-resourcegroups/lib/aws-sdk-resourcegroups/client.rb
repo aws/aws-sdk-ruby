@@ -162,7 +162,7 @@ module Aws::ResourceGroups
     # @option params [required, String] :name
     #   The name of the group, which is the identifier of the group in other
     #   operations. A resource group name cannot be updated after it is
-    #   created. A resource group name can have a maximum of 127 characters,
+    #   created. A resource group name can have a maximum of 128 characters,
     #   including letters, numbers, hyphens, dots, and underscores. The name
     #   cannot start with `AWS` or `aws`; these are reserved. A resource group
     #   name must be unique within your account.
@@ -178,8 +178,8 @@ module Aws::ResourceGroups
     #
     # @option params [Hash<String,String>] :tags
     #   The tags to add to the group. A tag is a string-to-string map of
-    #   key-value pairs. Tag keys can have a maximum character length of 127
-    #   characters, and tag values can have a maximum length of 255
+    #   key-value pairs. Tag keys can have a maximum character length of 128
+    #   characters, and tag values can have a maximum length of 256
     #   characters.
     #
     # @return [Types::CreateGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -353,6 +353,16 @@ module Aws::ResourceGroups
     # @option params [required, String] :group_name
     #   The name of the resource group.
     #
+    # @option params [Array<Types::ResourceFilter>] :filters
+    #   Filters, formatted as ResourceFilter objects, that you want to apply
+    #   to a ListGroupResources operation.
+    #
+    #   * `resource-type` - Filter resources by their type. Specify up to five
+    #     resource types in the format AWS::ServiceCode::ResourceType. For
+    #     example, AWS::EC2::Instance, or AWS::S3::Bucket.
+    #
+    #   ^
+    #
     # @option params [Integer] :max_results
     #   The maximum number of group member ARNs that are returned in a single
     #   call by ListGroupResources, in paginated output. By default, this
@@ -372,6 +382,12 @@ module Aws::ResourceGroups
     #
     #   resp = client.list_group_resources({
     #     group_name: "GroupName", # required
+    #     filters: [
+    #       {
+    #         name: "resource-type", # required, accepts resource-type
+    #         values: ["ResourceFilterValue"], # required
+    #       },
+    #     ],
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -491,7 +507,7 @@ module Aws::ResourceGroups
     # @option params [required, Hash<String,String>] :tags
     #   The tags to add to the specified resource. A tag is a string-to-string
     #   map of key-value pairs. Tag keys can have a maximum character length
-    #   of 127 characters, and tag values can have a maximum length of 255
+    #   of 128 characters, and tag values can have a maximum length of 256
     #   characters.
     #
     # @return [Types::TagOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -647,7 +663,7 @@ module Aws::ResourceGroups
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resourcegroups'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
