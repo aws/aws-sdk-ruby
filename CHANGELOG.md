@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.100 (2018-08-02)
+------------------
+
 * Feature - Aws::Kinesis - Updated the API, documentation, and integration test for Amazon Kinesis.
 
 * Feature - Aws::Polly - Updated the API, and documentation for Amazon Polly.
