@@ -580,8 +580,7 @@ module Aws::EMR
     end
 
     # Provides cluster-level details including status, hardware and software
-    # configuration, VPC settings, and so on. For information about the
-    # cluster steps, see ListSteps.
+    # configuration, VPC settings, and so on.
     #
     # @option params [required, String] :cluster_id
     #   The identifier of the cluster to describe.
@@ -1613,31 +1612,24 @@ module Aws::EMR
     #   A JSON string for selecting additional features.
     #
     # @option params [String] :ami_version
-    #   For Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR releases 4.0
-    #   and later, the Linux AMI is determined by the `ReleaseLabel` specified
-    #   or by `CustomAmiID`. The version of the Amazon Machine Image (AMI) to
-    #   use when launching Amazon EC2 instances in the job flow. For details
-    #   about the AMI versions currently supported in EMR version 3.x and 2.x,
-    #   see [AMI Versions Supported in
-    #   EMR](emr/latest/DeveloperGuide/emr-dg.pdf#nameddest=ami-versions-supported)
-    #   in the *Amazon EMR Developer Guide*.
-    #
-    #   If the AMI supports multiple versions of Hadoop (for example, AMI 1.0
-    #   supports both Hadoop 0.18 and 0.20), you can use the
-    #   JobFlowInstancesConfig `HadoopVersion` parameter to modify the version
-    #   of Hadoop from the defaults shown above.
-    #
-    #   <note markdown="1"> Previously, the EMR AMI version API parameter options allowed you to
-    #   use latest for the latest AMI version rather than specify a numerical
-    #   value. Some regions no longer support this deprecated option as they
-    #   only have a newer release label version of EMR, which requires you to
-    #   specify an EMR release label release (EMR 4.x or later).
-    #
-    #    </note>
+    #   Applies only to Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR
+    #   releases 4.0 and later, `ReleaseLabel` is used. To specify a custom
+    #   AMI, use `CustomAmiID`.
     #
     # @option params [String] :release_label
-    #   The release label for the Amazon EMR release. For Amazon EMR 3.x and
-    #   2.x AMIs, use `AmiVersion` instead.
+    #   The Amazon EMR release label, which determines the version of
+    #   open-source application packages installed on the cluster. Release
+    #   labels are in the form `emr-x.x.x`, where x.x.x is an Amazon EMR
+    #   release version, for example, `emr-5.14.0`. For more information about
+    #   Amazon EMR release versions and included application versions and
+    #   features, see
+    #   [http://docs.aws.amazon.com/emr/latest/ReleaseGuide/][1]. The release
+    #   label applies only to Amazon EMR releases versions 4.x and later.
+    #   Earlier versions use `AmiVersion`.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/emr/latest/ReleaseGuide/
     #
     # @option params [required, Types::JobFlowInstancesConfig] :instances
     #   A specification of the number and type of Amazon EC2 instances.
@@ -2178,7 +2170,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

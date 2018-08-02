@@ -411,7 +411,17 @@ module Aws::DirectConnect
     #
     #   * **Up**\: The BGP peer is established.
     #
+    #     <note markdown="1"> A state of `up` does not indicate the state of the routing
+    #     function. Ensure that you are receiving routes over the BGP
+    #     session.
+    #
+    #      </note>
+    #
     #   * **Down**\: The BGP peer is down.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_device_v2
+    #   The Direct Connection endpoint which the BGP peer terminates on.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/BGPPeer AWS API Documentation
@@ -423,7 +433,8 @@ module Aws::DirectConnect
       :amazon_address,
       :customer_address,
       :bgp_peer_state,
-      :bgp_status)
+      :bgp_status,
+      :aws_device_v2)
       include Aws::Structure
     end
 
@@ -754,6 +765,13 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] aws_device
+    #   Deprecated in favor of awsDeviceV2.
+    #
+    #   The Direct Connection endpoint which the physical connection
+    #   terminates on.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_device_v2
     #   The Direct Connection endpoint which the physical connection
     #   terminates on.
     #   @return [String]
@@ -772,7 +790,8 @@ module Aws::DirectConnect
       :partner_name,
       :loa_issue_time,
       :lag_id,
-      :aws_device)
+      :aws_device,
+      :aws_device_v2)
       include Aws::Structure
     end
 
@@ -2383,6 +2402,13 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] aws_device
+    #   Deprecated in favor of awsDeviceV2.
+    #
+    #   The Direct Connection endpoint which the physical connection
+    #   terminates on.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_device_v2
     #   The Direct Connection endpoint which the physical connection
     #   terminates on.
     #   @return [String]
@@ -2398,7 +2424,8 @@ module Aws::DirectConnect
       :bandwidth,
       :loa_issue_time,
       :lag_id,
-      :aws_device)
+      :aws_device,
+      :aws_device_v2)
       include Aws::Structure
     end
 
@@ -2492,6 +2519,12 @@ module Aws::DirectConnect
     #   @return [Integer]
     #
     # @!attribute [rw] aws_device
+    #   Deprecated in favor of awsDeviceV2.
+    #
+    #   The AWS Direct Connection endpoint that hosts the LAG.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_device_v2
     #   The AWS Direct Connection endpoint that hosts the LAG.
     #   @return [String]
     #
@@ -2520,6 +2553,7 @@ module Aws::DirectConnect
       :region,
       :minimum_links,
       :aws_device,
+      :aws_device_v2,
       :connections,
       :allows_hosted_connections)
       include Aws::Structure
@@ -2573,11 +2607,20 @@ module Aws::DirectConnect
     #   colocation partner name and the physical site of the lit building.
     #   @return [String]
     #
+    # @!attribute [rw] region
+    #   The AWS region where the AWS Direct connect location is located.
+    #
+    #   Example: us-east-1
+    #
+    #   Default: None
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Location AWS API Documentation
     #
     class Location < Struct.new(
       :location_code,
-      :location_name)
+      :location_name,
+      :region)
       include Aws::Structure
     end
 
@@ -3380,6 +3423,19 @@ module Aws::DirectConnect
     #   A list of the BGP peers configured on this virtual interface.
     #   @return [Array<Types::BGPPeer>]
     #
+    # @!attribute [rw] region
+    #   The AWS region where the virtual interface is located.
+    #
+    #   Example: us-east-1
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_device_v2
+    #   The Direct Connection endpoint which the virtual interface
+    #   terminates on.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/VirtualInterface AWS API Documentation
     #
     class VirtualInterface < Struct.new(
@@ -3401,7 +3457,9 @@ module Aws::DirectConnect
       :virtual_gateway_id,
       :direct_connect_gateway_id,
       :route_filter_prefixes,
-      :bgp_peers)
+      :bgp_peers,
+      :region,
+      :aws_device_v2)
       include Aws::Structure
     end
 

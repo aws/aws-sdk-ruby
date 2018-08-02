@@ -1136,6 +1136,12 @@ module Aws::APIGateway
     #       {
     #         api_id: "String",
     #         stage: "String",
+    #         throttle: {
+    #           "String" => {
+    #             burst_limit: 1,
+    #             rate_limit: 1.0,
+    #           },
+    #         },
     #       },
     #     ],
     #     throttle: {
@@ -1157,6 +1163,9 @@ module Aws::APIGateway
     #   resp.api_stages #=> Array
     #   resp.api_stages[0].api_id #=> String
     #   resp.api_stages[0].stage #=> String
+    #   resp.api_stages[0].throttle #=> Hash
+    #   resp.api_stages[0].throttle["String"].burst_limit #=> Integer
+    #   resp.api_stages[0].throttle["String"].rate_limit #=> Float
     #   resp.throttle.burst_limit #=> Integer
     #   resp.throttle.rate_limit #=> Float
     #   resp.quota.limit #=> Integer
@@ -3934,6 +3943,9 @@ module Aws::APIGateway
     #   resp.api_stages #=> Array
     #   resp.api_stages[0].api_id #=> String
     #   resp.api_stages[0].stage #=> String
+    #   resp.api_stages[0].throttle #=> Hash
+    #   resp.api_stages[0].throttle["String"].burst_limit #=> Integer
+    #   resp.api_stages[0].throttle["String"].rate_limit #=> Float
     #   resp.throttle.burst_limit #=> Integer
     #   resp.throttle.rate_limit #=> Float
     #   resp.quota.limit #=> Integer
@@ -4071,6 +4083,9 @@ module Aws::APIGateway
     #   resp.items[0].api_stages #=> Array
     #   resp.items[0].api_stages[0].api_id #=> String
     #   resp.items[0].api_stages[0].stage #=> String
+    #   resp.items[0].api_stages[0].throttle #=> Hash
+    #   resp.items[0].api_stages[0].throttle["String"].burst_limit #=> Integer
+    #   resp.items[0].api_stages[0].throttle["String"].rate_limit #=> Float
     #   resp.items[0].throttle.burst_limit #=> Integer
     #   resp.items[0].throttle.rate_limit #=> Float
     #   resp.items[0].quota.limit #=> Integer
@@ -6511,6 +6526,9 @@ module Aws::APIGateway
     #   resp.api_stages #=> Array
     #   resp.api_stages[0].api_id #=> String
     #   resp.api_stages[0].stage #=> String
+    #   resp.api_stages[0].throttle #=> Hash
+    #   resp.api_stages[0].throttle["String"].burst_limit #=> Integer
+    #   resp.api_stages[0].throttle["String"].rate_limit #=> Float
     #   resp.throttle.burst_limit #=> Integer
     #   resp.throttle.rate_limit #=> Float
     #   resp.quota.limit #=> Integer
@@ -6588,7 +6606,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -476,6 +476,8 @@ module Aws::SSM
     ItemContentMismatchException = Shapes::StructureShape.new(name: 'ItemContentMismatchException')
     ItemSizeLimitExceededException = Shapes::StructureShape.new(name: 'ItemSizeLimitExceededException')
     KeyList = Shapes::ListShape.new(name: 'KeyList')
+    LabelParameterVersionRequest = Shapes::StructureShape.new(name: 'LabelParameterVersionRequest')
+    LabelParameterVersionResult = Shapes::StructureShape.new(name: 'LabelParameterVersionResult')
     LastResourceDataSyncMessage = Shapes::StringShape.new(name: 'LastResourceDataSyncMessage')
     LastResourceDataSyncStatus = Shapes::StringShape.new(name: 'LastResourceDataSyncStatus')
     LastResourceDataSyncTime = Shapes::TimestampShape.new(name: 'LastResourceDataSyncTime')
@@ -585,6 +587,7 @@ module Aws::SSM
     OutputSourceType = Shapes::StringShape.new(name: 'OutputSourceType')
     OwnerInformation = Shapes::StringShape.new(name: 'OwnerInformation')
     PSParameterName = Shapes::StringShape.new(name: 'PSParameterName')
+    PSParameterSelector = Shapes::StringShape.new(name: 'PSParameterSelector')
     PSParameterValue = Shapes::StringShape.new(name: 'PSParameterValue')
     PSParameterVersion = Shapes::IntegerShape.new(name: 'PSParameterVersion')
     Parameter = Shapes::StructureShape.new(name: 'Parameter')
@@ -593,6 +596,8 @@ module Aws::SSM
     ParameterHistory = Shapes::StructureShape.new(name: 'ParameterHistory')
     ParameterHistoryList = Shapes::ListShape.new(name: 'ParameterHistoryList')
     ParameterKeyId = Shapes::StringShape.new(name: 'ParameterKeyId')
+    ParameterLabel = Shapes::StringShape.new(name: 'ParameterLabel')
+    ParameterLabelList = Shapes::ListShape.new(name: 'ParameterLabelList')
     ParameterLimitExceeded = Shapes::StructureShape.new(name: 'ParameterLimitExceeded')
     ParameterList = Shapes::ListShape.new(name: 'ParameterList')
     ParameterMaxVersionLimitExceeded = Shapes::StructureShape.new(name: 'ParameterMaxVersionLimitExceeded')
@@ -611,6 +616,7 @@ module Aws::SSM
     ParameterType = Shapes::StringShape.new(name: 'ParameterType')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
     ParameterValueList = Shapes::ListShape.new(name: 'ParameterValueList')
+    ParameterVersionLabelLimitExceeded = Shapes::StructureShape.new(name: 'ParameterVersionLabelLimitExceeded')
     ParameterVersionNotFound = Shapes::StructureShape.new(name: 'ParameterVersionNotFound')
     Parameters = Shapes::MapShape.new(name: 'Parameters')
     ParametersFilter = Shapes::StructureShape.new(name: 'ParametersFilter')
@@ -807,6 +813,8 @@ module Aws::SSM
     UpdatePatchBaselineRequest = Shapes::StructureShape.new(name: 'UpdatePatchBaselineRequest')
     UpdatePatchBaselineResult = Shapes::StructureShape.new(name: 'UpdatePatchBaselineResult')
     Url = Shapes::StringShape.new(name: 'Url')
+    ValidNextStep = Shapes::StringShape.new(name: 'ValidNextStep')
+    ValidNextStepList = Shapes::ListShape.new(name: 'ValidNextStepList')
     Version = Shapes::StringShape.new(name: 'Version')
 
     AccountIdList.member = Shapes::ShapeRef.new(shape: AccountId)
@@ -2077,6 +2085,14 @@ module Aws::SSM
 
     KeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
+    LabelParameterVersionRequest.add_member(:name, Shapes::ShapeRef.new(shape: PSParameterName, required: true, location_name: "Name"))
+    LabelParameterVersionRequest.add_member(:parameter_version, Shapes::ShapeRef.new(shape: PSParameterVersion, location_name: "ParameterVersion", metadata: {"box"=>true}))
+    LabelParameterVersionRequest.add_member(:labels, Shapes::ShapeRef.new(shape: ParameterLabelList, required: true, location_name: "Labels"))
+    LabelParameterVersionRequest.struct_class = Types::LabelParameterVersionRequest
+
+    LabelParameterVersionResult.add_member(:invalid_labels, Shapes::ShapeRef.new(shape: ParameterLabelList, location_name: "InvalidLabels"))
+    LabelParameterVersionResult.struct_class = Types::LabelParameterVersionResult
+
     ListAssociationVersionsRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, required: true, location_name: "AssociationId"))
     ListAssociationVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
     ListAssociationVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -2357,6 +2373,10 @@ module Aws::SSM
     Parameter.add_member(:type, Shapes::ShapeRef.new(shape: ParameterType, location_name: "Type"))
     Parameter.add_member(:value, Shapes::ShapeRef.new(shape: PSParameterValue, location_name: "Value"))
     Parameter.add_member(:version, Shapes::ShapeRef.new(shape: PSParameterVersion, location_name: "Version"))
+    Parameter.add_member(:selector, Shapes::ShapeRef.new(shape: PSParameterSelector, location_name: "Selector"))
+    Parameter.add_member(:source_result, Shapes::ShapeRef.new(shape: String, location_name: "SourceResult"))
+    Parameter.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastModifiedDate"))
+    Parameter.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
     Parameter.struct_class = Types::Parameter
 
     ParameterHistory.add_member(:name, Shapes::ShapeRef.new(shape: PSParameterName, location_name: "Name"))
@@ -2368,9 +2388,12 @@ module Aws::SSM
     ParameterHistory.add_member(:value, Shapes::ShapeRef.new(shape: PSParameterValue, location_name: "Value"))
     ParameterHistory.add_member(:allowed_pattern, Shapes::ShapeRef.new(shape: AllowedPattern, location_name: "AllowedPattern"))
     ParameterHistory.add_member(:version, Shapes::ShapeRef.new(shape: PSParameterVersion, location_name: "Version"))
+    ParameterHistory.add_member(:labels, Shapes::ShapeRef.new(shape: ParameterLabelList, location_name: "Labels"))
     ParameterHistory.struct_class = Types::ParameterHistory
 
     ParameterHistoryList.member = Shapes::ShapeRef.new(shape: ParameterHistory)
+
+    ParameterLabelList.member = Shapes::ShapeRef.new(shape: ParameterLabel)
 
     ParameterList.member = Shapes::ShapeRef.new(shape: Parameter)
 
@@ -2560,7 +2583,7 @@ module Aws::SSM
     RegisterTaskWithMaintenanceWindowRequest.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, required: true, location_name: "WindowId"))
     RegisterTaskWithMaintenanceWindowRequest.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, required: true, location_name: "Targets"))
     RegisterTaskWithMaintenanceWindowRequest.add_member(:task_arn, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskArn, required: true, location_name: "TaskArn"))
-    RegisterTaskWithMaintenanceWindowRequest.add_member(:service_role_arn, Shapes::ShapeRef.new(shape: ServiceRole, required: true, location_name: "ServiceRoleArn"))
+    RegisterTaskWithMaintenanceWindowRequest.add_member(:service_role_arn, Shapes::ShapeRef.new(shape: ServiceRole, location_name: "ServiceRoleArn"))
     RegisterTaskWithMaintenanceWindowRequest.add_member(:task_type, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskType, required: true, location_name: "TaskType"))
     RegisterTaskWithMaintenanceWindowRequest.add_member(:task_parameters, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskParameters, location_name: "TaskParameters"))
     RegisterTaskWithMaintenanceWindowRequest.add_member(:task_invocation_parameters, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskInvocationParameters, location_name: "TaskInvocationParameters"))
@@ -2702,6 +2725,10 @@ module Aws::SSM
     StepExecution.add_member(:failure_details, Shapes::ShapeRef.new(shape: FailureDetails, location_name: "FailureDetails"))
     StepExecution.add_member(:step_execution_id, Shapes::ShapeRef.new(shape: String, location_name: "StepExecutionId"))
     StepExecution.add_member(:overridden_parameters, Shapes::ShapeRef.new(shape: AutomationParameterMap, location_name: "OverriddenParameters"))
+    StepExecution.add_member(:is_end, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsEnd", metadata: {"box"=>true}))
+    StepExecution.add_member(:next_step, Shapes::ShapeRef.new(shape: String, location_name: "NextStep", metadata: {"box"=>true}))
+    StepExecution.add_member(:is_critical, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsCritical", metadata: {"box"=>true}))
+    StepExecution.add_member(:valid_next_steps, Shapes::ShapeRef.new(shape: ValidNextStepList, location_name: "ValidNextSteps"))
     StepExecution.struct_class = Types::StepExecution
 
     StepExecutionFilter.add_member(:key, Shapes::ShapeRef.new(shape: StepExecutionFilterKey, required: true, location_name: "Key"))
@@ -2879,6 +2906,8 @@ module Aws::SSM
     UpdatePatchBaselineResult.add_member(:description, Shapes::ShapeRef.new(shape: BaselineDescription, location_name: "Description"))
     UpdatePatchBaselineResult.add_member(:sources, Shapes::ShapeRef.new(shape: PatchSourceList, location_name: "Sources"))
     UpdatePatchBaselineResult.struct_class = Types::UpdatePatchBaselineResult
+
+    ValidNextStepList.member = Shapes::ShapeRef.new(shape: ValidNextStep)
 
 
     # @api private
@@ -3670,6 +3699,19 @@ module Aws::SSM
         o.input = Shapes::ShapeRef.new(shape: GetPatchBaselineForPatchGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: GetPatchBaselineForPatchGroupResult)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:label_parameter_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "LabelParameterVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: LabelParameterVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: LabelParameterVersionResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyUpdates)
+        o.errors << Shapes::ShapeRef.new(shape: ParameterNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ParameterVersionNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ParameterVersionLabelLimitExceeded)
       end)
 
       api.add_operation(:list_association_versions, Seahorse::Model::Operation.new.tap do |o|

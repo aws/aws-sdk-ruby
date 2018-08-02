@@ -25,7 +25,7 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] details
-    #   Details of the attachment. For Elastic Network Interfaces, this
+    #   Details of the attachment. For elastic network interfaces, this
     #   includes the network interface ID, the MAC address, the subnet ID,
     #   and the private IPv4 address.
     #   @return [Array<Types::KeyValuePair>]
@@ -131,14 +131,22 @@ module Aws::ECS
     #
     # @!attribute [rw] subnets
     #   The subnets associated with the task or service. There is a limit of
-    #   10 subnets able to be specified per AwsVpcConfiguration.
+    #   10 subnets able to be specified per `AwsVpcConfiguration`.
+    #
+    #   <note markdown="1"> All specified subnets must be from the same VPC.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_groups
     #   The security groups associated with the task or service. If you do
     #   not specify a security group, the default security group for the VPC
     #   is used. There is a limit of 5 security groups able to be specified
-    #   per AwsVpcConfiguration.
+    #   per `AwsVpcConfiguration`.
+    #
+    #   <note markdown="1"> All specified security groups must be from the same VPC.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] assign_public_ip
@@ -163,7 +171,7 @@ module Aws::ECS
     #
     # @!attribute [rw] cluster_arn
     #   The Amazon Resource Name (ARN) that identifies the cluster. The ARN
-    #   contains the `arn:aws:ecs` namespace, followed by the region of the
+    #   contains the `arn:aws:ecs` namespace, followed by the Region of the
     #   cluster, the AWS account ID of the cluster owner, the `cluster`
     #   namespace, and then the cluster name. For example,
     #   `arn:aws:ecs:region:012345678910:cluster/test `..
@@ -297,6 +305,9 @@ module Aws::ECS
     #       {
     #         name: "String",
     #         image: "String",
+    #         repository_credentials: {
+    #           credentials_parameter: "String", # required
+    #         },
     #         cpu: 1,
     #         memory: 1,
     #         memory_reservation: 1,
@@ -446,6 +457,10 @@ module Aws::ECS
     #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
+    #
+    # @!attribute [rw] repository_credentials
+    #   The private repository authentication credentials to use.
+    #   @return [Types::RepositoryCredentials]
     #
     # @!attribute [rw] cpu
     #   The number of `cpu` units reserved for the container. This parameter
@@ -643,8 +658,8 @@ module Aws::ECS
     #   <note markdown="1"> After a task reaches the `RUNNING` status, manual and automatic host
     #   and container port assignments are visible in the **Network
     #   Bindings** section of a container description for a selected task in
-    #   the Amazon ECS console, or the `networkBindings` section
-    #   DescribeTasks responses.
+    #   the Amazon ECS console. The assignments are also visible in the
+    #   `networkBindings` section DescribeTasks responses.
     #
     #    </note>
     #
@@ -897,8 +912,8 @@ module Aws::ECS
     # @!attribute [rw] extra_hosts
     #   A list of hostnames and IP address mappings to append to the
     #   `/etc/hosts` file on the container. If using the Fargate launch
-    #   type, this may be used to list non-Fargate hosts you want the
-    #   container to talk to. This parameter maps to `ExtraHosts` in the
+    #   type, this may be used to list non-Fargate hosts to which the
+    #   container can talk. This parameter maps to `ExtraHosts` in the
     #   [Create a container][1] section of the [Docker Remote API][2] and
     #   the `--add-host` option to [docker run][3].
     #
@@ -1047,6 +1062,7 @@ module Aws::ECS
     class ContainerDefinition < Struct.new(
       :name,
       :image,
+      :repository_credentials,
       :cpu,
       :memory,
       :memory_reservation,
@@ -1081,7 +1097,7 @@ module Aws::ECS
     #
     # @!attribute [rw] container_instance_arn
     #   The Amazon Resource Name (ARN) of the container instance. The ARN
-    #   contains the `arn:aws:ecs` namespace, followed by the region of the
+    #   contains the `arn:aws:ecs` namespace, followed by the Region of the
     #   container instance, the AWS account ID of the container instance
     #   owner, the `container-instance` namespace, and then the container
     #   instance ID. For example,
@@ -1148,7 +1164,7 @@ module Aws::ECS
     # @!attribute [rw] agent_connected
     #   This parameter returns `true` if the agent is connected to Amazon
     #   ECS. Registered instances with an agent that may be unhealthy or
-    #   stopped return `false`. Instances without a connected agent can't
+    #   stopped return `false`. Only instances connected to an agent can
     #   accept placement requests.
     #   @return [Boolean]
     #
@@ -1178,7 +1194,7 @@ module Aws::ECS
     #   @return [Time]
     #
     # @!attribute [rw] attachments
-    #   The Elastic Network Interfaces associated with the container
+    #   The elastic network interfaces associated with the container
     #   instance.
     #   @return [Array<Types::Attachment>]
     #
@@ -1420,8 +1436,8 @@ module Aws::ECS
     #   The name of your service. Up to 255 letters (uppercase and
     #   lowercase), numbers, hyphens, and underscores are allowed. Service
     #   names must be unique within a cluster, but you can have similarly
-    #   named services in multiple clusters within a region or across
-    #   multiple regions.
+    #   named services in multiple clusters within a Region or across
+    #   multiple Regions.
     #   @return [String]
     #
     # @!attribute [rw] task_definition
@@ -1462,8 +1478,8 @@ module Aws::ECS
     #   @return [Array<Types::LoadBalancer>]
     #
     # @!attribute [rw] service_registries
-    #   The details of the service discovery registries you want to assign
-    #   to this service. For more information, see [Service Discovery][1].
+    #   The details of the service discovery registries to assign to this
+    #   service. For more information, see [Service Discovery][1].
     #
     #   <note markdown="1"> Service discovery is supported for Fargate tasks if using platform
     #   version v1.1.0 or later. For more information, see [AWS Fargate
@@ -1564,7 +1580,7 @@ module Aws::ECS
     #   your service is configured to use a load balancer. If your
     #   service's tasks take a while to start and respond to Elastic Load
     #   Balancing health checks, you can specify a health check grace period
-    #   of up to 1,800 seconds during which the ECS service scheduler
+    #   of up to 7,200 seconds during which the ECS service scheduler
     #   ignores health check status. This grace period can prevent the ECS
     #   service scheduler from marking tasks as unhealthy and stopping them
     #   before they have time to come up.
@@ -1807,7 +1823,7 @@ module Aws::ECS
     #
     # @!attribute [rw] network_configuration
     #   The VPC subnet and security group configuration for tasks that
-    #   receive their own Elastic Network Interface by using the `awsvpc`
+    #   receive their own elastic network interface by using the `awsvpc`
     #   networking mode.
     #   @return [Types::NetworkConfiguration]
     #
@@ -1882,7 +1898,7 @@ module Aws::ECS
     # @!attribute [rw] container_instance
     #   The container instance ID or full ARN of the container instance to
     #   deregister. The ARN contains the `arn:aws:ecs` namespace, followed
-    #   by the region of the container instance, the AWS account ID of the
+    #   by the Region of the container instance, the AWS account ID of the
     #   container instance owner, the `container-instance` namespace, and
     #   then the container instance ID. For example,
     #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID
@@ -2219,7 +2235,7 @@ module Aws::ECS
     #
     # @!attribute [rw] container_instance
     #   The container instance ID or full ARN of the container instance. The
-    #   ARN contains the `arn:aws:ecs` namespace, followed by the region of
+    #   ARN contains the `arn:aws:ecs` namespace, followed by the Region of
     #   the container instance, the AWS account ID of the container instance
     #   owner, the `container-instance` namespace, and then the container
     #   instance ID. For example,
@@ -2317,13 +2333,13 @@ module Aws::ECS
     # @!attribute [rw] timeout
     #   The time period in seconds to wait for a health check to succeed
     #   before it is considered a failure. You may specify between 2 and 60
-    #   seconds. The default value is 5 seconds.
+    #   seconds. The default value is 5.
     #   @return [Integer]
     #
     # @!attribute [rw] retries
     #   The number of times to retry a failed health check before the
     #   container is considered unhealthy. You may specify between 1 and 10
-    #   retries. The default value is 3 retries.
+    #   retries. The default value is 3.
     #   @return [Integer]
     #
     # @!attribute [rw] start_period
@@ -2910,7 +2926,7 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] launch_type
-    #   The launch type for services you want to list.
+    #   The launch type for the services to list.
     #   @return [String]
     #
     # @!attribute [rw] scheduling_strategy
@@ -3217,7 +3233,7 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] launch_type
-    #   The launch type for services you want to list.
+    #   The launch type for services to list.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTasksRequest AWS API Documentation
@@ -3464,6 +3480,10 @@ module Aws::ECS
     #
     # @!attribute [rw] awsvpc_configuration
     #   The VPC subnets and security groups associated with a task.
+    #
+    #   <note markdown="1"> All specified subnets and security groups must be from the same VPC.
+    #
+    #    </note>
     #   @return [Types::AwsVpcConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/NetworkConfiguration AWS API Documentation
@@ -3473,7 +3493,7 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # An object representing the Elastic Network Interface for tasks that
+    # An object representing the elastic network interface for tasks that
     # use the `awsvpc` network mode.
     #
     # @!attribute [rw] attachment_id
@@ -3522,8 +3542,8 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] expression
-    #   A cluster query language expression to apply to the constraint. Note
-    #   you cannot specify an expression if the constraint type is
+    #   A cluster query language expression to apply to the constraint. You
+    #   cannot specify an expression if the constraint type is
     #   `distinctInstance`. For more information, see [Cluster Query
     #   Language][1] in the *Amazon Elastic Container Service Developer
     #   Guide*.
@@ -3831,6 +3851,9 @@ module Aws::ECS
     #           {
     #             name: "String",
     #             image: "String",
+    #             repository_credentials: {
+    #               credentials_parameter: "String", # required
+    #             },
     #             cpu: 1,
     #             memory: 1,
     #             memory_reservation: 1,
@@ -4037,9 +4060,9 @@ module Aws::ECS
     # @!attribute [rw] cpu
     #   The number of CPU units used by the task. It can be expressed as an
     #   integer using CPU units, for example `1024`, or as a string using
-    #   vCPUs, for example `1 vCPU` or `1 vcpu`, in a task definition but
-    #   will be converted to an integer indicating the CPU units when the
-    #   task definition is registered.
+    #   vCPUs, for example `1 vCPU` or `1 vcpu`, in a task definition.
+    #   String values are converted to an integer indicating the CPU units
+    #   when the task definition is registered.
     #
     #   <note markdown="1"> Task-level CPU and memory parameters are ignored for Windows
     #   containers. We recommend specifying container-level resources for
@@ -4075,9 +4098,9 @@ module Aws::ECS
     # @!attribute [rw] memory
     #   The amount of memory (in MiB) used by the task. It can be expressed
     #   as an integer using MiB, for example `1024`, or as a string using
-    #   GB, for example `1GB` or `1 GB`, in a task definition but will be
-    #   converted to an integer indicating the MiB when the task definition
-    #   is registered.
+    #   GB, for example `1GB` or `1 GB`, in a task definition. String values
+    #   are converted to an integer indicating the MiB when the task
+    #   definition is registered.
     #
     #   <note markdown="1"> Task-level CPU and memory parameters are ignored for Windows
     #   containers. We recommend specifying container-level resources for
@@ -4131,6 +4154,27 @@ module Aws::ECS
     #
     class RegisterTaskDefinitionResponse < Struct.new(
       :task_definition)
+      include Aws::Structure
+    end
+
+    # The repository credentials for private registry authentication.
+    #
+    # @note When making an API call, you may pass RepositoryCredentials
+    #   data as a hash:
+    #
+    #       {
+    #         credentials_parameter: "String", # required
+    #       }
+    #
+    # @!attribute [rw] credentials_parameter
+    #   The Amazon Resource Name (ARN) or name of the secret containing the
+    #   private repository credentials.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RepositoryCredentials AWS API Documentation
+    #
+    class RepositoryCredentials < Struct.new(
+      :credentials_parameter)
       include Aws::Structure
     end
 
@@ -4363,7 +4407,7 @@ module Aws::ECS
     #
     # @!attribute [rw] service_arn
     #   The ARN that identifies the service. The ARN contains the
-    #   `arn:aws:ecs` namespace, followed by the region of the service, the
+    #   `arn:aws:ecs` namespace, followed by the Region of the service, the
     #   AWS account ID of the service owner, the `service` namespace, and
     #   then the service name. For example,
     #   `arn:aws:ecs:region:012345678910:service/my-service `.
@@ -4373,8 +4417,8 @@ module Aws::ECS
     #   The name of your service. Up to 255 letters (uppercase and
     #   lowercase), numbers, hyphens, and underscores are allowed. Service
     #   names must be unique within a cluster, but you can have similarly
-    #   named services in multiple clusters within a region or across
-    #   multiple regions.
+    #   named services in multiple clusters within a Region or across
+    #   multiple Regions.
     #   @return [String]
     #
     # @!attribute [rw] cluster_arn
@@ -4476,7 +4520,7 @@ module Aws::ECS
     #
     # @!attribute [rw] network_configuration
     #   The VPC subnet and security group configuration for tasks that
-    #   receive their own Elastic Network Interface by using the `awsvpc`
+    #   receive their own elastic network interface by using the `awsvpc`
     #   networking mode.
     #   @return [Types::NetworkConfiguration]
     #
@@ -4716,7 +4760,7 @@ module Aws::ECS
     #
     # @!attribute [rw] network_configuration
     #   The VPC subnet and security group configuration for tasks that
-    #   receive their own Elastic Network Interface by using the `awsvpc`
+    #   receive their own elastic network interface by using the `awsvpc`
     #   networking mode.
     #   @return [Types::NetworkConfiguration]
     #
@@ -5001,9 +5045,9 @@ module Aws::ECS
     # @!attribute [rw] cpu
     #   The number of CPU units used by the task. It can be expressed as an
     #   integer using CPU units, for example `1024`, or as a string using
-    #   vCPUs, for example `1 vCPU` or `1 vcpu`, in a task definition but is
-    #   converted to an integer indicating the CPU units when the task
-    #   definition is registered.
+    #   vCPUs, for example `1 vCPU` or `1 vcpu`, in a task definition.
+    #   String values are converted to an integer indicating the CPU units
+    #   when the task definition is registered.
     #
     #   If using the EC2 launch type, this field is optional. Supported
     #   values are between `128` CPU units (`0.125` vCPUs) and `10240` CPU
@@ -5033,9 +5077,9 @@ module Aws::ECS
     # @!attribute [rw] memory
     #   The amount of memory (in MiB) used by the task. It can be expressed
     #   as an integer using MiB, for example `1024`, or as a string using
-    #   GB, for example `1GB` or `1 GB`, in a task definition but is
-    #   converted to an integer indicating the MiB when the task definition
-    #   is registered.
+    #   GB, for example `1GB` or `1 GB`, in a task definition. String values
+    #   are converted to an integer indicating the MiB when the task
+    #   definition is registered.
     #
     #   If using the EC2 launch type, this field is optional.
     #
@@ -5115,8 +5159,8 @@ module Aws::ECS
     #   @return [Time]
     #
     # @!attribute [rw] stopping_at
-    #   The Unix time stamp for when the task will stop (transitions from
-    #   the `RUNNING` state to `STOPPED`).
+    #   The Unix time stamp for when the task stops (transitions from the
+    #   `RUNNING` state to `STOPPED`).
     #   @return [Time]
     #
     # @!attribute [rw] stopped_at
@@ -5143,7 +5187,7 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] attachments
-    #   The Elastic Network Adapter associated with the task if the task
+    #   The elastic network adapter associated with the task if the task
     #   uses the `awsvpc` network mode.
     #   @return [Array<Types::Attachment>]
     #
@@ -5519,7 +5563,7 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] container_path
-    #   The absolute file path where the tmpfs volume will be mounted.
+    #   The absolute file path where the tmpfs volume is to be mounted.
     #   @return [String]
     #
     # @!attribute [rw] size
@@ -5742,7 +5786,7 @@ module Aws::ECS
     #   @return [Types::NetworkConfiguration]
     #
     # @!attribute [rw] platform_version
-    #   The platform version you want to update your service to run.
+    #   The platform version that your service should run.
     #   @return [String]
     #
     # @!attribute [rw] force_new_deployment

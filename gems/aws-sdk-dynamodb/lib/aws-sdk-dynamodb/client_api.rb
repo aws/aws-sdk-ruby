@@ -21,6 +21,15 @@ module Aws::DynamoDB
     AttributeValue = Shapes::StructureShape.new(name: 'AttributeValue')
     AttributeValueList = Shapes::ListShape.new(name: 'AttributeValueList')
     AttributeValueUpdate = Shapes::StructureShape.new(name: 'AttributeValueUpdate')
+    AutoScalingPolicyDescription = Shapes::StructureShape.new(name: 'AutoScalingPolicyDescription')
+    AutoScalingPolicyDescriptionList = Shapes::ListShape.new(name: 'AutoScalingPolicyDescriptionList')
+    AutoScalingPolicyName = Shapes::StringShape.new(name: 'AutoScalingPolicyName')
+    AutoScalingPolicyUpdate = Shapes::StructureShape.new(name: 'AutoScalingPolicyUpdate')
+    AutoScalingRoleArn = Shapes::StringShape.new(name: 'AutoScalingRoleArn')
+    AutoScalingSettingsDescription = Shapes::StructureShape.new(name: 'AutoScalingSettingsDescription')
+    AutoScalingSettingsUpdate = Shapes::StructureShape.new(name: 'AutoScalingSettingsUpdate')
+    AutoScalingTargetTrackingScalingPolicyConfigurationDescription = Shapes::StructureShape.new(name: 'AutoScalingTargetTrackingScalingPolicyConfigurationDescription')
+    AutoScalingTargetTrackingScalingPolicyConfigurationUpdate = Shapes::StructureShape.new(name: 'AutoScalingTargetTrackingScalingPolicyConfigurationUpdate')
     Backfilling = Shapes::BooleanShape.new(name: 'Backfilling')
     BackupArn = Shapes::StringShape.new(name: 'BackupArn')
     BackupCreationDateTime = Shapes::TimestampShape.new(name: 'BackupCreationDateTime')
@@ -90,6 +99,7 @@ module Aws::DynamoDB
     DescribeTableOutput = Shapes::StructureShape.new(name: 'DescribeTableOutput')
     DescribeTimeToLiveInput = Shapes::StructureShape.new(name: 'DescribeTimeToLiveInput')
     DescribeTimeToLiveOutput = Shapes::StructureShape.new(name: 'DescribeTimeToLiveOutput')
+    Double = Shapes::FloatShape.new(name: 'Double')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExpectedAttributeMap = Shapes::MapShape.new(name: 'ExpectedAttributeMap')
     ExpectedAttributeValue = Shapes::StructureShape.new(name: 'ExpectedAttributeValue')
@@ -121,6 +131,7 @@ module Aws::DynamoDB
     IndexNotFoundException = Shapes::StructureShape.new(name: 'IndexNotFoundException')
     IndexStatus = Shapes::StringShape.new(name: 'IndexStatus')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    IntegerObject = Shapes::IntegerShape.new(name: 'IntegerObject')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
     InvalidRestoreTimeException = Shapes::StructureShape.new(name: 'InvalidRestoreTimeException')
     ItemCollectionKeyAttributeMap = Shapes::MapShape.new(name: 'ItemCollectionKeyAttributeMap')
@@ -308,6 +319,42 @@ module Aws::DynamoDB
     AttributeValueUpdate.add_member(:value, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "Value"))
     AttributeValueUpdate.add_member(:action, Shapes::ShapeRef.new(shape: AttributeAction, location_name: "Action"))
     AttributeValueUpdate.struct_class = Types::AttributeValueUpdate
+
+    AutoScalingPolicyDescription.add_member(:policy_name, Shapes::ShapeRef.new(shape: AutoScalingPolicyName, location_name: "PolicyName"))
+    AutoScalingPolicyDescription.add_member(:target_tracking_scaling_policy_configuration, Shapes::ShapeRef.new(shape: AutoScalingTargetTrackingScalingPolicyConfigurationDescription, location_name: "TargetTrackingScalingPolicyConfiguration"))
+    AutoScalingPolicyDescription.struct_class = Types::AutoScalingPolicyDescription
+
+    AutoScalingPolicyDescriptionList.member = Shapes::ShapeRef.new(shape: AutoScalingPolicyDescription)
+
+    AutoScalingPolicyUpdate.add_member(:policy_name, Shapes::ShapeRef.new(shape: AutoScalingPolicyName, location_name: "PolicyName"))
+    AutoScalingPolicyUpdate.add_member(:target_tracking_scaling_policy_configuration, Shapes::ShapeRef.new(shape: AutoScalingTargetTrackingScalingPolicyConfigurationUpdate, required: true, location_name: "TargetTrackingScalingPolicyConfiguration"))
+    AutoScalingPolicyUpdate.struct_class = Types::AutoScalingPolicyUpdate
+
+    AutoScalingSettingsDescription.add_member(:minimum_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "MinimumUnits"))
+    AutoScalingSettingsDescription.add_member(:maximum_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "MaximumUnits"))
+    AutoScalingSettingsDescription.add_member(:auto_scaling_disabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "AutoScalingDisabled"))
+    AutoScalingSettingsDescription.add_member(:auto_scaling_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "AutoScalingRoleArn"))
+    AutoScalingSettingsDescription.add_member(:scaling_policies, Shapes::ShapeRef.new(shape: AutoScalingPolicyDescriptionList, location_name: "ScalingPolicies"))
+    AutoScalingSettingsDescription.struct_class = Types::AutoScalingSettingsDescription
+
+    AutoScalingSettingsUpdate.add_member(:minimum_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "MinimumUnits"))
+    AutoScalingSettingsUpdate.add_member(:maximum_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "MaximumUnits"))
+    AutoScalingSettingsUpdate.add_member(:auto_scaling_disabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "AutoScalingDisabled"))
+    AutoScalingSettingsUpdate.add_member(:auto_scaling_role_arn, Shapes::ShapeRef.new(shape: AutoScalingRoleArn, location_name: "AutoScalingRoleArn"))
+    AutoScalingSettingsUpdate.add_member(:scaling_policy_update, Shapes::ShapeRef.new(shape: AutoScalingPolicyUpdate, location_name: "ScalingPolicyUpdate"))
+    AutoScalingSettingsUpdate.struct_class = Types::AutoScalingSettingsUpdate
+
+    AutoScalingTargetTrackingScalingPolicyConfigurationDescription.add_member(:disable_scale_in, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DisableScaleIn"))
+    AutoScalingTargetTrackingScalingPolicyConfigurationDescription.add_member(:scale_in_cooldown, Shapes::ShapeRef.new(shape: IntegerObject, location_name: "ScaleInCooldown"))
+    AutoScalingTargetTrackingScalingPolicyConfigurationDescription.add_member(:scale_out_cooldown, Shapes::ShapeRef.new(shape: IntegerObject, location_name: "ScaleOutCooldown"))
+    AutoScalingTargetTrackingScalingPolicyConfigurationDescription.add_member(:target_value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "TargetValue"))
+    AutoScalingTargetTrackingScalingPolicyConfigurationDescription.struct_class = Types::AutoScalingTargetTrackingScalingPolicyConfigurationDescription
+
+    AutoScalingTargetTrackingScalingPolicyConfigurationUpdate.add_member(:disable_scale_in, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DisableScaleIn"))
+    AutoScalingTargetTrackingScalingPolicyConfigurationUpdate.add_member(:scale_in_cooldown, Shapes::ShapeRef.new(shape: IntegerObject, location_name: "ScaleInCooldown"))
+    AutoScalingTargetTrackingScalingPolicyConfigurationUpdate.add_member(:scale_out_cooldown, Shapes::ShapeRef.new(shape: IntegerObject, location_name: "ScaleOutCooldown"))
+    AutoScalingTargetTrackingScalingPolicyConfigurationUpdate.add_member(:target_value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "TargetValue"))
+    AutoScalingTargetTrackingScalingPolicyConfigurationUpdate.struct_class = Types::AutoScalingTargetTrackingScalingPolicyConfigurationUpdate
 
     BackupDescription.add_member(:backup_details, Shapes::ShapeRef.new(shape: BackupDetails, location_name: "BackupDetails"))
     BackupDescription.add_member(:source_table_details, Shapes::ShapeRef.new(shape: SourceTableDetails, location_name: "SourceTableDetails"))
@@ -582,6 +629,7 @@ module Aws::DynamoDB
 
     GlobalTableGlobalSecondaryIndexSettingsUpdate.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, required: true, location_name: "IndexName"))
     GlobalTableGlobalSecondaryIndexSettingsUpdate.add_member(:provisioned_write_capacity_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "ProvisionedWriteCapacityUnits"))
+    GlobalTableGlobalSecondaryIndexSettingsUpdate.add_member(:provisioned_write_capacity_auto_scaling_settings_update, Shapes::ShapeRef.new(shape: AutoScalingSettingsUpdate, location_name: "ProvisionedWriteCapacityAutoScalingSettingsUpdate"))
     GlobalTableGlobalSecondaryIndexSettingsUpdate.struct_class = Types::GlobalTableGlobalSecondaryIndexSettingsUpdate
 
     GlobalTableGlobalSecondaryIndexSettingsUpdateList.member = Shapes::ShapeRef.new(shape: GlobalTableGlobalSecondaryIndexSettingsUpdate)
@@ -777,13 +825,16 @@ module Aws::DynamoDB
     ReplicaGlobalSecondaryIndexSettingsDescription.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, required: true, location_name: "IndexName"))
     ReplicaGlobalSecondaryIndexSettingsDescription.add_member(:index_status, Shapes::ShapeRef.new(shape: IndexStatus, location_name: "IndexStatus"))
     ReplicaGlobalSecondaryIndexSettingsDescription.add_member(:provisioned_read_capacity_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "ProvisionedReadCapacityUnits"))
+    ReplicaGlobalSecondaryIndexSettingsDescription.add_member(:provisioned_read_capacity_auto_scaling_settings, Shapes::ShapeRef.new(shape: AutoScalingSettingsDescription, location_name: "ProvisionedReadCapacityAutoScalingSettings"))
     ReplicaGlobalSecondaryIndexSettingsDescription.add_member(:provisioned_write_capacity_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "ProvisionedWriteCapacityUnits"))
+    ReplicaGlobalSecondaryIndexSettingsDescription.add_member(:provisioned_write_capacity_auto_scaling_settings, Shapes::ShapeRef.new(shape: AutoScalingSettingsDescription, location_name: "ProvisionedWriteCapacityAutoScalingSettings"))
     ReplicaGlobalSecondaryIndexSettingsDescription.struct_class = Types::ReplicaGlobalSecondaryIndexSettingsDescription
 
     ReplicaGlobalSecondaryIndexSettingsDescriptionList.member = Shapes::ShapeRef.new(shape: ReplicaGlobalSecondaryIndexSettingsDescription)
 
     ReplicaGlobalSecondaryIndexSettingsUpdate.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, required: true, location_name: "IndexName"))
     ReplicaGlobalSecondaryIndexSettingsUpdate.add_member(:provisioned_read_capacity_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "ProvisionedReadCapacityUnits"))
+    ReplicaGlobalSecondaryIndexSettingsUpdate.add_member(:provisioned_read_capacity_auto_scaling_settings_update, Shapes::ShapeRef.new(shape: AutoScalingSettingsUpdate, location_name: "ProvisionedReadCapacityAutoScalingSettingsUpdate"))
     ReplicaGlobalSecondaryIndexSettingsUpdate.struct_class = Types::ReplicaGlobalSecondaryIndexSettingsUpdate
 
     ReplicaGlobalSecondaryIndexSettingsUpdateList.member = Shapes::ShapeRef.new(shape: ReplicaGlobalSecondaryIndexSettingsUpdate)
@@ -793,7 +844,9 @@ module Aws::DynamoDB
     ReplicaSettingsDescription.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, required: true, location_name: "RegionName"))
     ReplicaSettingsDescription.add_member(:replica_status, Shapes::ShapeRef.new(shape: ReplicaStatus, location_name: "ReplicaStatus"))
     ReplicaSettingsDescription.add_member(:replica_provisioned_read_capacity_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "ReplicaProvisionedReadCapacityUnits"))
+    ReplicaSettingsDescription.add_member(:replica_provisioned_read_capacity_auto_scaling_settings, Shapes::ShapeRef.new(shape: AutoScalingSettingsDescription, location_name: "ReplicaProvisionedReadCapacityAutoScalingSettings"))
     ReplicaSettingsDescription.add_member(:replica_provisioned_write_capacity_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "ReplicaProvisionedWriteCapacityUnits"))
+    ReplicaSettingsDescription.add_member(:replica_provisioned_write_capacity_auto_scaling_settings, Shapes::ShapeRef.new(shape: AutoScalingSettingsDescription, location_name: "ReplicaProvisionedWriteCapacityAutoScalingSettings"))
     ReplicaSettingsDescription.add_member(:replica_global_secondary_index_settings, Shapes::ShapeRef.new(shape: ReplicaGlobalSecondaryIndexSettingsDescriptionList, location_name: "ReplicaGlobalSecondaryIndexSettings"))
     ReplicaSettingsDescription.struct_class = Types::ReplicaSettingsDescription
 
@@ -801,6 +854,7 @@ module Aws::DynamoDB
 
     ReplicaSettingsUpdate.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, required: true, location_name: "RegionName"))
     ReplicaSettingsUpdate.add_member(:replica_provisioned_read_capacity_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "ReplicaProvisionedReadCapacityUnits"))
+    ReplicaSettingsUpdate.add_member(:replica_provisioned_read_capacity_auto_scaling_settings_update, Shapes::ShapeRef.new(shape: AutoScalingSettingsUpdate, location_name: "ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate"))
     ReplicaSettingsUpdate.add_member(:replica_global_secondary_index_settings_update, Shapes::ShapeRef.new(shape: ReplicaGlobalSecondaryIndexSettingsUpdateList, location_name: "ReplicaGlobalSecondaryIndexSettingsUpdate"))
     ReplicaSettingsUpdate.struct_class = Types::ReplicaSettingsUpdate
 
@@ -958,6 +1012,7 @@ module Aws::DynamoDB
 
     UpdateGlobalTableSettingsInput.add_member(:global_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "GlobalTableName"))
     UpdateGlobalTableSettingsInput.add_member(:global_table_provisioned_write_capacity_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "GlobalTableProvisionedWriteCapacityUnits"))
+    UpdateGlobalTableSettingsInput.add_member(:global_table_provisioned_write_capacity_auto_scaling_settings_update, Shapes::ShapeRef.new(shape: AutoScalingSettingsUpdate, location_name: "GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate"))
     UpdateGlobalTableSettingsInput.add_member(:global_table_global_secondary_index_settings_update, Shapes::ShapeRef.new(shape: GlobalTableGlobalSecondaryIndexSettingsUpdateList, location_name: "GlobalTableGlobalSecondaryIndexSettingsUpdate"))
     UpdateGlobalTableSettingsInput.add_member(:replica_settings_update, Shapes::ShapeRef.new(shape: ReplicaSettingsUpdateList, location_name: "ReplicaSettingsUpdate"))
     UpdateGlobalTableSettingsInput.struct_class = Types::UpdateGlobalTableSettingsInput

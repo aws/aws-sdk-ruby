@@ -6,6 +6,9 @@ module Aws
   # return when a client is using stubbed responses. Pass
   # `:stub_responses => true` to a client constructor to enable this
   # behavior.
+  #
+  # Also allows you to see the requests made by the client by reading the
+  # api_requests instance variable
   module ClientStubs
 
     # @api private
@@ -16,6 +19,19 @@ module Aws
         @config.stub_responses.each do |operation_name, stubs|
           apply_stubs(operation_name, Array === stubs ? stubs : [stubs])
         end
+      end
+
+      # When a client is stubbed allow the user to access the requests made
+      @api_requests = []
+
+      requests = @api_requests
+      self.handle do |context|
+        requests << {
+          operation_name: context.operation_name,
+          params: context.params,
+          context: context
+        }
+        @handler.call(context)
       end
     end
 
@@ -163,6 +179,21 @@ module Aws
         msg = 'stubbing is not enabled; enable stubbing in the constructor '
         msg << 'with `:stub_responses => true`'
         raise msg
+      end
+    end
+
+    # Allows you to access all of the requests that the stubbed client has made
+    #
+    # @return [Array] Returns an array of the api requests made, each request object contains the
+    #                 :operation_name, :params, and :context of the request. 
+    # @raise [NotImplementedError] Raises `NotImplementedError` when the client is not stubbed
+    def api_requests
+      if config.stub_responses
+        @api_requests
+      else
+        msg = 'This method is only implemented for stubbed clients, and is '
+        msg << 'available when you enable stubbing in the constructor with `stub_responses: true`'
+        raise NotImplementedError.new(msg)
       end
     end
 

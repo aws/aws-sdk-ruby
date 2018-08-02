@@ -125,13 +125,13 @@ module Aws::ServerlessApplicationRepository
     CreateApplicationInput.add_member(:template_url, Shapes::ShapeRef.new(shape: __string, location_name: "templateUrl"))
     CreateApplicationInput.struct_class = Types::CreateApplicationInput
 
-    CreateApplicationRequest.add_member(:author, Shapes::ShapeRef.new(shape: __string, location_name: "author"))
-    CreateApplicationRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
+    CreateApplicationRequest.add_member(:author, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "author"))
+    CreateApplicationRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "description"))
     CreateApplicationRequest.add_member(:home_page_url, Shapes::ShapeRef.new(shape: __string, location_name: "homePageUrl"))
     CreateApplicationRequest.add_member(:labels, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "labels"))
     CreateApplicationRequest.add_member(:license_body, Shapes::ShapeRef.new(shape: __string, location_name: "licenseBody"))
     CreateApplicationRequest.add_member(:license_url, Shapes::ShapeRef.new(shape: __string, location_name: "licenseUrl"))
-    CreateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    CreateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     CreateApplicationRequest.add_member(:readme_body, Shapes::ShapeRef.new(shape: __string, location_name: "readmeBody"))
     CreateApplicationRequest.add_member(:readme_url, Shapes::ShapeRef.new(shape: __string, location_name: "readmeUrl"))
     CreateApplicationRequest.add_member(:semantic_version, Shapes::ShapeRef.new(shape: __string, location_name: "semanticVersion"))
@@ -182,7 +182,7 @@ module Aws::ServerlessApplicationRepository
     CreateCloudFormationChangeSetRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "applicationId"))
     CreateCloudFormationChangeSetRequest.add_member(:parameter_overrides, Shapes::ShapeRef.new(shape: __listOfParameterValue, location_name: "parameterOverrides"))
     CreateCloudFormationChangeSetRequest.add_member(:semantic_version, Shapes::ShapeRef.new(shape: __string, location_name: "semanticVersion"))
-    CreateCloudFormationChangeSetRequest.add_member(:stack_name, Shapes::ShapeRef.new(shape: __string, location_name: "stackName"))
+    CreateCloudFormationChangeSetRequest.add_member(:stack_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "stackName"))
     CreateCloudFormationChangeSetRequest.struct_class = Types::CreateCloudFormationChangeSetRequest
 
     CreateCloudFormationChangeSetResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, location_name: "applicationId"))
@@ -254,7 +254,7 @@ module Aws::ServerlessApplicationRepository
     ParameterValue.struct_class = Types::ParameterValue
 
     PutApplicationPolicyRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "applicationId"))
-    PutApplicationPolicyRequest.add_member(:statements, Shapes::ShapeRef.new(shape: __listOfApplicationPolicyStatement, location_name: "statements"))
+    PutApplicationPolicyRequest.add_member(:statements, Shapes::ShapeRef.new(shape: __listOfApplicationPolicyStatement, required: true, location_name: "statements"))
     PutApplicationPolicyRequest.struct_class = Types::PutApplicationPolicyRequest
 
     PutApplicationPolicyResponse.add_member(:statements, Shapes::ShapeRef.new(shape: __listOfApplicationPolicyStatement, location_name: "statements"))

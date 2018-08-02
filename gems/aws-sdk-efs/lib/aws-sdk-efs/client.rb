@@ -229,7 +229,7 @@ module Aws::EFS
     #   changed after the file system has been created.
     #
     # @option params [Boolean] :encrypted
-    #   A boolean value that, if true, creates an encrypted file system. When
+    #   A Boolean value that, if true, creates an encrypted file system. When
     #   creating an encrypted file system, you have the option of specifying a
     #   CreateFileSystemRequest$KmsKeyId for an existing AWS Key Management
     #   Service (AWS KMS) customer master key (CMK). If you don't specify a
@@ -237,26 +237,45 @@ module Aws::EFS
     #   used to protect the encrypted file system.
     #
     # @option params [String] :kms_key_id
-    #   The id of the AWS KMS CMK that will be used to protect the encrypted
-    #   file system. This parameter is only required if you want to use a
+    #   The ID of the AWS KMS CMK to be used to protect the encrypted file
+    #   system. This parameter is only required if you want to use a
     #   non-default CMK. If this parameter is not specified, the default CMK
-    #   for Amazon EFS is used. This id can be in one of the following
+    #   for Amazon EFS is used. This ID can be in one of the following
     #   formats:
     #
-    #   * Key ID - A unique identifier of the key. For example,
+    #   * Key ID - A unique identifier of the key, for example,
     #     `1234abcd-12ab-34cd-56ef-1234567890ab`.
     #
-    #   * ARN - An Amazon Resource Name for the key. For example,
+    #   * ARN - An Amazon Resource Name (ARN) for the key, for example,
     #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
     #
     #   * Key alias - A previously created display name for a key. For
     #     example, `alias/projectKey1`.
     #
-    #   * Key alias ARN - An Amazon Resource Name for a key alias. For
-    #     example, `arn:aws:kms:us-west-2:444455556666:alias/projectKey1`.
+    #   * Key alias ARN - An ARN for a key alias, for example,
+    #     `arn:aws:kms:us-west-2:444455556666:alias/projectKey1`.
     #
-    #   Note that if the KmsKeyId is specified, the
-    #   CreateFileSystemRequest$Encrypted parameter must be set to true.
+    #   If KmsKeyId is specified, the CreateFileSystemRequest$Encrypted
+    #   parameter must be set to true.
+    #
+    # @option params [String] :throughput_mode
+    #   The throughput mode for the file system to be created. There are two
+    #   throughput modes to choose from for your file system: bursting and
+    #   provisioned. You can decrease your file system's throughput in
+    #   Provisioned Throughput mode or change between the throughput modes as
+    #   long as it’s been more than 24 hours since the last decrease or
+    #   throughput mode change.
+    #
+    # @option params [Float] :provisioned_throughput_in_mibps
+    #   The throughput, measured in MiB/s, that you want to provision for a
+    #   file system that you're creating. The limit on throughput is 1024
+    #   MiB/s. You can get these limits increased by contacting AWS Support.
+    #   For more information, see [Amazon EFS Limits That You Can Increase][1]
+    #   in the *Amazon EFS User Guide.*
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits
     #
     # @return [Types::FileSystemDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -271,6 +290,8 @@ module Aws::EFS
     #   * {Types::FileSystemDescription#performance_mode #performance_mode} => String
     #   * {Types::FileSystemDescription#encrypted #encrypted} => Boolean
     #   * {Types::FileSystemDescription#kms_key_id #kms_key_id} => String
+    #   * {Types::FileSystemDescription#throughput_mode #throughput_mode} => String
+    #   * {Types::FileSystemDescription#provisioned_throughput_in_mibps #provisioned_throughput_in_mibps} => Float
     #
     #
     # @example Example: To create a new file system
@@ -303,6 +324,8 @@ module Aws::EFS
     #     performance_mode: "generalPurpose", # accepts generalPurpose, maxIO
     #     encrypted: false,
     #     kms_key_id: "KmsKeyId",
+    #     throughput_mode: "bursting", # accepts bursting, provisioned
+    #     provisioned_throughput_in_mibps: 1.0,
     #   })
     #
     # @example Response structure
@@ -311,7 +334,7 @@ module Aws::EFS
     #   resp.creation_token #=> String
     #   resp.file_system_id #=> String
     #   resp.creation_time #=> Time
-    #   resp.life_cycle_state #=> String, one of "creating", "available", "deleting", "deleted"
+    #   resp.life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted"
     #   resp.name #=> String
     #   resp.number_of_mount_targets #=> Integer
     #   resp.size_in_bytes.value #=> Integer
@@ -319,6 +342,8 @@ module Aws::EFS
     #   resp.performance_mode #=> String, one of "generalPurpose", "maxIO"
     #   resp.encrypted #=> Boolean
     #   resp.kms_key_id #=> String
+    #   resp.throughput_mode #=> String, one of "bursting", "provisioned"
+    #   resp.provisioned_throughput_in_mibps #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateFileSystem AWS API Documentation
     #
@@ -504,7 +529,7 @@ module Aws::EFS
     #   resp.mount_target_id #=> String
     #   resp.file_system_id #=> String
     #   resp.subnet_id #=> String
-    #   resp.life_cycle_state #=> String, one of "creating", "available", "deleting", "deleted"
+    #   resp.life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted"
     #   resp.ip_address #=> String
     #   resp.network_interface_id #=> String
     #
@@ -832,7 +857,7 @@ module Aws::EFS
     #   resp.file_systems[0].creation_token #=> String
     #   resp.file_systems[0].file_system_id #=> String
     #   resp.file_systems[0].creation_time #=> Time
-    #   resp.file_systems[0].life_cycle_state #=> String, one of "creating", "available", "deleting", "deleted"
+    #   resp.file_systems[0].life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted"
     #   resp.file_systems[0].name #=> String
     #   resp.file_systems[0].number_of_mount_targets #=> Integer
     #   resp.file_systems[0].size_in_bytes.value #=> Integer
@@ -840,6 +865,8 @@ module Aws::EFS
     #   resp.file_systems[0].performance_mode #=> String, one of "generalPurpose", "maxIO"
     #   resp.file_systems[0].encrypted #=> Boolean
     #   resp.file_systems[0].kms_key_id #=> String
+    #   resp.file_systems[0].throughput_mode #=> String, one of "bursting", "provisioned"
+    #   resp.file_systems[0].provisioned_throughput_in_mibps #=> Float
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeFileSystems AWS API Documentation
@@ -983,7 +1010,7 @@ module Aws::EFS
     #   resp.mount_targets[0].mount_target_id #=> String
     #   resp.mount_targets[0].file_system_id #=> String
     #   resp.mount_targets[0].subnet_id #=> String
-    #   resp.mount_targets[0].life_cycle_state #=> String, one of "creating", "available", "deleting", "deleted"
+    #   resp.mount_targets[0].life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted"
     #   resp.mount_targets[0].ip_address #=> String
     #   resp.mount_targets[0].network_interface_id #=> String
     #   resp.next_marker #=> String
@@ -1121,6 +1148,73 @@ module Aws::EFS
       req.send_request(options)
     end
 
+    # Updates the throughput mode or the amount of provisioned throughput of
+    # an existing file system.
+    #
+    # @option params [required, String] :file_system_id
+    #   The ID of the file system that you want to update.
+    #
+    # @option params [String] :throughput_mode
+    #   (Optional) The throughput mode that you want your file system to use.
+    #   If you're not updating your throughput mode, you don't need to
+    #   provide this value in your request.
+    #
+    # @option params [Float] :provisioned_throughput_in_mibps
+    #   (Optional) The amount of throughput, in MiB/s, that you want to
+    #   provision for your file system. If you're not updating the amount of
+    #   provisioned throughput for your file system, you don't need to
+    #   provide this value in your request.
+    #
+    # @return [Types::FileSystemDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::FileSystemDescription#owner_id #owner_id} => String
+    #   * {Types::FileSystemDescription#creation_token #creation_token} => String
+    #   * {Types::FileSystemDescription#file_system_id #file_system_id} => String
+    #   * {Types::FileSystemDescription#creation_time #creation_time} => Time
+    #   * {Types::FileSystemDescription#life_cycle_state #life_cycle_state} => String
+    #   * {Types::FileSystemDescription#name #name} => String
+    #   * {Types::FileSystemDescription#number_of_mount_targets #number_of_mount_targets} => Integer
+    #   * {Types::FileSystemDescription#size_in_bytes #size_in_bytes} => Types::FileSystemSize
+    #   * {Types::FileSystemDescription#performance_mode #performance_mode} => String
+    #   * {Types::FileSystemDescription#encrypted #encrypted} => Boolean
+    #   * {Types::FileSystemDescription#kms_key_id #kms_key_id} => String
+    #   * {Types::FileSystemDescription#throughput_mode #throughput_mode} => String
+    #   * {Types::FileSystemDescription#provisioned_throughput_in_mibps #provisioned_throughput_in_mibps} => Float
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_file_system({
+    #     file_system_id: "FileSystemId", # required
+    #     throughput_mode: "bursting", # accepts bursting, provisioned
+    #     provisioned_throughput_in_mibps: 1.0,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.owner_id #=> String
+    #   resp.creation_token #=> String
+    #   resp.file_system_id #=> String
+    #   resp.creation_time #=> Time
+    #   resp.life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted"
+    #   resp.name #=> String
+    #   resp.number_of_mount_targets #=> Integer
+    #   resp.size_in_bytes.value #=> Integer
+    #   resp.size_in_bytes.timestamp #=> Time
+    #   resp.performance_mode #=> String, one of "generalPurpose", "maxIO"
+    #   resp.encrypted #=> Boolean
+    #   resp.kms_key_id #=> String
+    #   resp.throughput_mode #=> String, one of "bursting", "provisioned"
+    #   resp.provisioned_throughput_in_mibps #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/UpdateFileSystem AWS API Documentation
+    #
+    # @overload update_file_system(params = {})
+    # @param [Hash] params ({})
+    def update_file_system(params = {}, options = {})
+      req = build_request(:update_file_system, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1134,7 +1228,7 @@ module Aws::EFS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-efs'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

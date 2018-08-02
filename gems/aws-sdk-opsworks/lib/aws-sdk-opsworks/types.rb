@@ -208,8 +208,8 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] layer_id
-    #   The ID of the layer that the Elastic Load Balancing instance is to
-    #   be attached to.
+    #   The ID of the layer to which the Elastic Load Balancing instance is
+    #   to be attached.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AttachElasticLoadBalancerRequest AWS API Documentation
@@ -479,9 +479,9 @@ module Aws::OpsWorks
     #
     #   * You must specify a value for `DefaultSubnetId`.
     #
-    #   For more information on how to use AWS OpsWorks Stacks with a VPC,
-    #   see [Running a Stack in a VPC][1]. For more information on default
-    #   VPC and EC2 Classic, see [Supported Platforms][2].
+    #   For more information about how to use AWS OpsWorks Stacks with a
+    #   VPC, see [Running a Stack in a VPC][1]. For more information about
+    #   default VPC and EC2 Classic, see [Supported Platforms][2].
     #
     #
     #
@@ -548,11 +548,11 @@ module Aws::OpsWorks
     #     with SQL Server Web`.
     #
     #   * A custom AMI: `Custom`. You specify the custom AMI you want to use
-    #     when you create instances. For more information on how to use
+    #     when you create instances. For more information about how to use
     #     custom AMIs with OpsWorks, see [Using Custom AMIs][1].
     #
     #   The default option is the parent stack's operating system. For more
-    #   information on the supported operating systems, see [AWS OpsWorks
+    #   information about supported operating systems, see [AWS OpsWorks
     #   Stacks Operating Systems][2].
     #
     #   <note markdown="1"> You can specify a different Linux operating system for the cloned
@@ -629,8 +629,8 @@ module Aws::OpsWorks
     #
     #   `"\{"key1": "value1", "key2": "value2",...\}"`
     #
-    #   For more information on custom JSON, see [Use Custom JSON to Modify
-    #   the Stack Configuration Attributes][1]
+    #   For more information about custom JSON, see [Use Custom JSON to
+    #   Modify the Stack Configuration Attributes][1]
     #
     #
     #
@@ -1252,8 +1252,8 @@ module Aws::OpsWorks
     #
     #   `"\{"key1": "value1", "key2": "value2",...\}"`
     #
-    #   For more information on custom JSON, see [Use Custom JSON to Modify
-    #   the Stack Configuration Attributes][1].
+    #   For more information about custom JSON, see [Use Custom JSON to
+    #   Modify the Stack Configuration Attributes][1].
     #
     #
     #
@@ -1379,16 +1379,16 @@ module Aws::OpsWorks
     #
     #   * A custom AMI: `Custom`.
     #
-    #   For more information on the supported operating systems, see [AWS
+    #   For more information about the supported operating systems, see [AWS
     #   OpsWorks Stacks Operating Systems][1].
     #
     #   The default option is the current Amazon Linux version. If you set
     #   this parameter to `Custom`, you must use the CreateInstance
     #   action's AmiId parameter to specify the custom AMI that you want to
     #   use. Block device mappings are not supported if the value is
-    #   `Custom`. For more information on the supported operating systems,
-    #   see [Operating Systems][1]For more information on how to use custom
-    #   AMIs with AWS OpsWorks Stacks, see [Using Custom AMIs][2].
+    #   `Custom`. For more information about supported operating systems,
+    #   see [Operating Systems][1]For more information about how to use
+    #   custom AMIs with AWS OpsWorks Stacks, see [Using Custom AMIs][2].
     #
     #
     #
@@ -1833,8 +1833,29 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The stack's AWS region, such as "ap-south-1". For more
-    #   information about Amazon regions, see [Regions and Endpoints][1].
+    #   The stack's AWS region, such as `ap-south-1`. For more information
+    #   about Amazon regions, see [Regions and Endpoints][1].
+    #
+    #   <note markdown="1"> In the AWS CLI, this API maps to the `--stack-region` parameter. If
+    #   the `--stack-region` parameter and the AWS CLI common parameter
+    #   `--region` are set to the same value, the stack uses a *regional*
+    #   endpoint. If the `--stack-region` parameter is not set, but the AWS
+    #   CLI `--region` parameter is, this also results in a stack with a
+    #   *regional* endpoint. However, if the `--region` parameter is set to
+    #   `us-east-1`, and the `--stack-region` parameter is set to one of the
+    #   following, then the stack uses a legacy or *classic* region:
+    #   `us-west-1, us-west-2, sa-east-1, eu-central-1, eu-west-1,
+    #   ap-northeast-1, ap-southeast-1, ap-southeast-2`. In this case, the
+    #   actual API endpoint of the stack is in `us-east-1`. Only the
+    #   preceding regions are supported as classic regions in the
+    #   `us-east-1` API endpoint. Because it is a best practice to choose
+    #   the regional endpoint that is closest to where you manage AWS, we
+    #   recommend that you use regional endpoints for new stacks. The AWS
+    #   CLI common `--region` parameter always specifies a regional API
+    #   endpoint; it cannot be used to specify a classic AWS OpsWorks Stacks
+    #   region.
+    #
+    #    </note>
     #
     #
     #
@@ -1867,9 +1888,9 @@ module Aws::OpsWorks
     #
     #   * You must specify a value for `DefaultSubnetId`.
     #
-    #   For more information on how to use AWS OpsWorks Stacks with a VPC,
-    #   see [Running a Stack in a VPC][1]. For more information on default
-    #   VPC and EC2-Classic, see [Supported Platforms][2].
+    #   For more information about how to use AWS OpsWorks Stacks with a
+    #   VPC, see [Running a Stack in a VPC][1]. For more information about
+    #   default VPC and EC2-Classic, see [Supported Platforms][2].
     #
     #
     #
@@ -1932,7 +1953,7 @@ module Aws::OpsWorks
     #     Custom AMIs][1].
     #
     #   The default option is the current Amazon Linux version. For more
-    #   information on the supported operating systems, see [AWS OpsWorks
+    #   information about supported operating systems, see [AWS OpsWorks
     #   Stacks Operating Systems][2].
     #
     #
@@ -2004,8 +2025,8 @@ module Aws::OpsWorks
     #
     #   `"\{"key1": "value1", "key2": "value2",...\}"`
     #
-    #   For more information on custom JSON, see [Use Custom JSON to Modify
-    #   the Stack Configuration Attributes][1].
+    #   For more information about custom JSON, see [Use Custom JSON to
+    #   Modify the Stack Configuration Attributes][1].
     #
     #
     #
@@ -2016,7 +2037,7 @@ module Aws::OpsWorks
     #   The configuration manager. When you create a stack we recommend that
     #   you use the configuration manager to specify the Chef version: 12,
     #   11.10, or 11.4 for Linux stacks, or 12.2 for Windows stacks. The
-    #   default value for Linux stacks is currently 11.4.
+    #   default value for Linux stacks is currently 12.
     #   @return [Types::StackConfigurationManager]
     #
     # @!attribute [rw] chef_configuration
@@ -2543,7 +2564,7 @@ module Aws::OpsWorks
     #       }
     #
     # @!attribute [rw] ecs_cluster_arn
-    #   The cluster's ARN.
+    #   The cluster's Amazon Resource Number (ARN).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterEcsClusterRequest AWS API Documentation
@@ -3101,6 +3122,8 @@ module Aws::OpsWorks
     # The response to a `DescribeOperatingSystems` request.
     #
     # @!attribute [rw] operating_systems
+    #   Contains information in response to a `DescribeOperatingSystems`
+    #   request.
     #   @return [Array<Types::OperatingSystem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeOperatingSystemsResponse AWS API Documentation
@@ -3221,8 +3244,9 @@ module Aws::OpsWorks
     #       }
     #
     # @!attribute [rw] stack_id
-    #   The stack ID that the instances are registered with. The operation
-    #   returns descriptions of all registered Amazon RDS instances.
+    #   The ID of the stack with which the instances are registered. The
+    #   operation returns descriptions of all registered Amazon RDS
+    #   instances.
     #   @return [String]
     #
     # @!attribute [rw] rds_db_instance_arns
@@ -3308,7 +3332,7 @@ module Aws::OpsWorks
     #       }
     #
     # @!attribute [rw] stack_id
-    #   The stack ID
+    #   The stack ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStackProvisioningParametersRequest AWS API Documentation
@@ -3893,6 +3917,7 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] arn
+    #   The instance's Amazon Resource Number (ARN).
     #   @return [String]
     #
     # @!attribute [rw] auto_scaling_type
@@ -4245,6 +4270,7 @@ module Aws::OpsWorks
     #   @return [Integer]
     #
     # @!attribute [rw] stop_failed
+    #   The number of instances with `stop_failed` status.
     #   @return [Integer]
     #
     # @!attribute [rw] stopped
@@ -4296,6 +4322,7 @@ module Aws::OpsWorks
     # Describes a layer.
     #
     # @!attribute [rw] arn
+    #   The Amazon Resource Number (ARN) of a layer.
     #   @return [String]
     #
     # @!attribute [rw] stack_id
@@ -5328,7 +5355,7 @@ module Aws::OpsWorks
     #
     #   * `iam_only`
     #
-    #   For more information on the permissions associated with these
+    #   For more information about the permissions associated with these
     #   levels, see [Managing User Permissions][1].
     #
     #
@@ -5833,6 +5860,7 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] force
+    #   Specifies whether to force an instance to stop.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StopInstanceRequest AWS API Documentation
@@ -6147,7 +6175,7 @@ module Aws::OpsWorks
     #       }
     #
     # @!attribute [rw] elastic_ip
-    #   The address.
+    #   The IP address for which you want to update the name.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -6233,15 +6261,15 @@ module Aws::OpsWorks
     #     Standard`, or `Microsoft Windows Server 2012 R2 with SQL Server
     #     Web`.
     #
-    #   For more information on the supported operating systems, see [AWS
+    #   For more information about supported operating systems, see [AWS
     #   OpsWorks Stacks Operating Systems][1].
     #
     #   The default option is the current Amazon Linux version. If you set
     #   this parameter to `Custom`, you must use the AmiId parameter to
-    #   specify the custom AMI that you want to use. For more information on
-    #   the supported operating systems, see [Operating Systems][1]. For
-    #   more information on how to use custom AMIs with OpsWorks, see [Using
-    #   Custom AMIs][2].
+    #   specify the custom AMI that you want to use. For more information
+    #   about supported operating systems, see [Operating Systems][1]. For
+    #   more information about how to use custom AMIs with OpsWorks, see
+    #   [Using Custom AMIs][2].
     #
     #   <note markdown="1"> You can specify a different Linux operating system for the updated
     #   stack, but you cannot change from Linux to Windows or Windows to
@@ -6676,11 +6704,11 @@ module Aws::OpsWorks
     #     Web`.
     #
     #   * A custom AMI: `Custom`. You specify the custom AMI you want to use
-    #     when you create instances. For more information on how to use
+    #     when you create instances. For more information about how to use
     #     custom AMIs with OpsWorks, see [Using Custom AMIs][1].
     #
     #   The default option is the stack's current operating system. For
-    #   more information on the supported operating systems, see [AWS
+    #   more information about supported operating systems, see [AWS
     #   OpsWorks Stacks Operating Systems][2].
     #
     #
@@ -6752,8 +6780,8 @@ module Aws::OpsWorks
     #
     #   `"\{"key1": "value1", "key2": "value2",...\}"`
     #
-    #   For more information on custom JSON, see [Use Custom JSON to Modify
-    #   the Stack Configuration Attributes][1].
+    #   For more information about custom JSON, see [Use Custom JSON to
+    #   Modify the Stack Configuration Attributes][1].
     #
     #
     #
@@ -6764,7 +6792,7 @@ module Aws::OpsWorks
     #   The configuration manager. When you update a stack, we recommend
     #   that you use the configuration manager to specify the Chef version:
     #   12, 11.10, or 11.4 for Linux stacks, or 12.2 for Windows stacks. The
-    #   default value for Linux stacks is currently 11.4.
+    #   default value for Linux stacks is currently 12.
     #   @return [Types::StackConfigurationManager]
     #
     # @!attribute [rw] chef_configuration
@@ -7074,7 +7102,28 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] volume_type
-    #   The volume type, standard or PIOPS.
+    #   The volume type. For more information, see [ Amazon EBS Volume
+    #   Types][1].
+    #
+    #   * `standard` - Magnetic. Magnetic volumes must have a minimum size
+    #     of 1 GiB and a maximum size of 1024 GiB.
+    #
+    #   * `io1` - Provisioned IOPS (SSD). PIOPS volumes must have a minimum
+    #     size of 4 GiB and a maximum size of 16384 GiB.
+    #
+    #   * `gp2` - General Purpose (SSD). General purpose volumes must have a
+    #     minimum size of 1 GiB and a maximum size of 16384 GiB.
+    #
+    #   * `st1` - Throughput Optimized hard disk drive (HDD). Throughput
+    #     optimized HDD volumes must have a minimum size of 500 GiB and a
+    #     maximum size of 16384 GiB.
+    #
+    #   * `sc1` - Cold HDD. Cold HDD volumes must have a minimum size of 500
+    #     GiB and a maximum size of 16384 GiB.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     #   @return [String]
     #
     # @!attribute [rw] iops
@@ -7082,6 +7131,12 @@ module Aws::OpsWorks
     #   @return [Integer]
     #
     # @!attribute [rw] encrypted
+    #   Specifies whether an Amazon EBS volume is encrypted. For more
+    #   information, see [Amazon EBS Encryption][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/Volume AWS API Documentation
@@ -7143,15 +7198,21 @@ module Aws::OpsWorks
     #   The volume type. For more information, see [ Amazon EBS Volume
     #   Types][1].
     #
-    #   * `standard` - Magnetic
+    #   * `standard` - Magnetic. Magnetic volumes must have a minimum size
+    #     of 1 GiB and a maximum size of 1024 GiB.
     #
-    #   * `io1` - Provisioned IOPS (SSD)
+    #   * `io1` - Provisioned IOPS (SSD). PIOPS volumes must have a minimum
+    #     size of 4 GiB and a maximum size of 16384 GiB.
     #
-    #   * `gp2` - General Purpose (SSD)
+    #   * `gp2` - General Purpose (SSD). General purpose volumes must have a
+    #     minimum size of 1 GiB and a maximum size of 16384 GiB.
     #
-    #   * `st1` - Throughput Optimized hard disk drive (HDD)
+    #   * `st1` - Throughput Optimized hard disk drive (HDD). Throughput
+    #     optimized HDD volumes must have a minimum size of 500 GiB and a
+    #     maximum size of 16384 GiB.
     #
-    #   * `sc1` - Cold HDD
+    #   * `sc1` - Cold HDD. Cold HDD volumes must have a minimum size of 500
+    #     GiB and a maximum size of 16384 GiB.
     #
     #
     #

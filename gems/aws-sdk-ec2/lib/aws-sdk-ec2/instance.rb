@@ -1294,22 +1294,15 @@ module Aws::EC2
     #   * `status` - The status of the volume (`creating` \| `available` \|
     #     `in-use` \| `deleting` \| `deleted` \| `error`).
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
-    #     you get any resources assigned both the tag key Purpose (regardless
-    #     of what the tag's value is), and the tag value X (regardless of
-    #     what the tag's key is). If you want to list only resources where
-    #     Purpose is X, see the `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `volume-id` - The volume ID.
     #
@@ -1396,19 +1389,15 @@ module Aws::EC2
     #
     #   * `public-ip` - The Elastic IP address.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
-    #     you get any resources assigned both the tag key Purpose (regardless
-    #     of what the tag's value is), and the tag value X (regardless of the
-    #     tag's key). If you want to list only resources where Purpose is X,
-    #     see the `tag`\:*key*=*value* filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     # @option options [Array<String>] :public_ips
     #   \[EC2-Classic\] One or more Elastic IP addresses.
     #

@@ -202,8 +202,8 @@ module Aws::Snowball
 
     # Cancels the specified job. You can only cancel a job before its
     # `JobState` value changes to `PreparingAppliance`. Requesting the
-    # `ListJobs` or `DescribeJob` action will return a job's `JobState` as
-    # part of the response element data returned.
+    # `ListJobs` or `DescribeJob` action returns a job's `JobState` as part
+    # of the response element data returned.
     #
     # @option params [required, String] :job_id
     #   The 39-character job ID for the job that you want to cancel, for
@@ -346,17 +346,17 @@ module Aws::Snowball
     #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
     #
     # @option params [String] :snowball_type
-    #   The type of AWS Snowball appliance to use for this cluster. Currently,
-    #   the only supported appliance type for cluster jobs is `EDGE`.
+    #   The type of AWS Snowball device to use for this cluster. Currently,
+    #   the only supported device type for cluster jobs is `EDGE`.
     #
     # @option params [required, String] :shipping_option
     #   The shipping speed for each node in this cluster. This speed doesn't
-    #   dictate how soon you'll get each Snowball Edge appliance, rather it
-    #   represents how quickly each appliance moves to its destination while
-    #   in transit. Regional shipping speeds are as follows:
+    #   dictate how soon you'll get each Snowball Edge device, rather it
+    #   represents how quickly each device moves to its destination while in
+    #   transit. Regional shipping speeds are as follows:
     #
     #   * In Australia, you have access to express shipping. Typically,
-    #     appliances shipped express are delivered in about a day.
+    #     devices shipped express are delivered in about a day.
     #
     #   * In the European Union (EU), you have access to express shipping.
     #     Typically, Snowball Edges shipped express are delivered in about a
@@ -436,6 +436,12 @@ module Aws::Snowball
     #               event_resource_arn: "ResourceARN",
     #             },
     #           ],
+    #         },
+    #       ],
+    #       ec2_ami_resources: [
+    #         {
+    #           ami_id: "AmiId", # required
+    #           snowball_ami_id: "String",
     #         },
     #       ],
     #     },
@@ -547,8 +553,8 @@ module Aws::Snowball
     #   job attributes are inherited from the cluster.
     #
     # @option params [String] :snowball_type
-    #   The type of AWS Snowball appliance to use for this job. Currently, the
-    #   only supported appliance type for cluster jobs is `EDGE`.
+    #   The type of AWS Snowball device to use for this job. Currently, the
+    #   only supported device type for cluster jobs is `EDGE`.
     #
     # @option params [String] :forwarding_address_id
     #   The forwarding address ID for a job. This field is not supported in
@@ -617,6 +623,12 @@ module Aws::Snowball
     #               event_resource_arn: "ResourceARN",
     #             },
     #           ],
+    #         },
+    #       ],
+    #       ec2_ami_resources: [
+    #         {
+    #           ami_id: "AmiId", # required
+    #           snowball_ami_id: "String",
     #         },
     #       ],
     #     },
@@ -867,6 +879,9 @@ module Aws::Snowball
     #   resp.cluster_metadata.resources.lambda_resources[0].lambda_arn #=> String
     #   resp.cluster_metadata.resources.lambda_resources[0].event_triggers #=> Array
     #   resp.cluster_metadata.resources.lambda_resources[0].event_triggers[0].event_resource_arn #=> String
+    #   resp.cluster_metadata.resources.ec2_ami_resources #=> Array
+    #   resp.cluster_metadata.resources.ec2_ami_resources[0].ami_id #=> String
+    #   resp.cluster_metadata.resources.ec2_ami_resources[0].snowball_ami_id #=> String
     #   resp.cluster_metadata.address_id #=> String
     #   resp.cluster_metadata.shipping_option #=> String, one of "SECOND_DAY", "NEXT_DAY", "EXPRESS", "STANDARD"
     #   resp.cluster_metadata.notification.sns_topic_arn #=> String
@@ -959,6 +974,9 @@ module Aws::Snowball
     #   resp.job_metadata.resources.lambda_resources[0].lambda_arn #=> String
     #   resp.job_metadata.resources.lambda_resources[0].event_triggers #=> Array
     #   resp.job_metadata.resources.lambda_resources[0].event_triggers[0].event_resource_arn #=> String
+    #   resp.job_metadata.resources.ec2_ami_resources #=> Array
+    #   resp.job_metadata.resources.ec2_ami_resources[0].ami_id #=> String
+    #   resp.job_metadata.resources.ec2_ami_resources[0].snowball_ami_id #=> String
     #   resp.job_metadata.description #=> String
     #   resp.job_metadata.kms_key_arn #=> String
     #   resp.job_metadata.role_arn #=> String
@@ -996,6 +1014,9 @@ module Aws::Snowball
     #   resp.sub_job_metadata[0].resources.lambda_resources[0].lambda_arn #=> String
     #   resp.sub_job_metadata[0].resources.lambda_resources[0].event_triggers #=> Array
     #   resp.sub_job_metadata[0].resources.lambda_resources[0].event_triggers[0].event_resource_arn #=> String
+    #   resp.sub_job_metadata[0].resources.ec2_ami_resources #=> Array
+    #   resp.sub_job_metadata[0].resources.ec2_ami_resources[0].ami_id #=> String
+    #   resp.sub_job_metadata[0].resources.ec2_ami_resources[0].snowball_ami_id #=> String
     #   resp.sub_job_metadata[0].description #=> String
     #   resp.sub_job_metadata[0].kms_key_arn #=> String
     #   resp.sub_job_metadata[0].role_arn #=> String
@@ -1378,6 +1399,50 @@ module Aws::Snowball
       req.send_request(options)
     end
 
+    # This action returns a list of the different Amazon EC2 Amazon Machine
+    # Images (AMIs) that are owned by your AWS account that would be
+    # supported for use on a Snowball Edge device. Currently, supported AMIs
+    # are based on the CentOS 7 (x86\_64) - with Updates HVM, Ubuntu Server
+    # 14.04 LTS (HVM), and Ubuntu 16.04 LTS - Xenial (HVM) images, available
+    # on the AWS Marketplace.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results for the list of compatible images.
+    #   Currently, a Snowball Edge device can store 10 AMIs.
+    #
+    # @option params [String] :next_token
+    #   HTTP requests are stateless. To identify what object comes "next" in
+    #   the list of compatible images, you can specify a value for `NextToken`
+    #   as the starting point for your list of returned images.
+    #
+    # @return [Types::ListCompatibleImagesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCompatibleImagesResult#compatible_images #compatible_images} => Array&lt;Types::CompatibleImage&gt;
+    #   * {Types::ListCompatibleImagesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_compatible_images({
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.compatible_images #=> Array
+    #   resp.compatible_images[0].ami_id #=> String
+    #   resp.compatible_images[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListCompatibleImages AWS API Documentation
+    #
+    # @overload list_compatible_images(params = {})
+    # @param [Hash] params ({})
+    def list_compatible_images(params = {}, options = {})
+      req = build_request(:list_compatible_images, params)
+      req.send_request(options)
+    end
+
     # Returns an array of `JobListEntry` objects of the specified length.
     # Each `JobListEntry` object contains a job's state, a job's ID, and a
     # value that indicates whether the job is a job part, in the case of
@@ -1531,6 +1596,12 @@ module Aws::Snowball
     #           ],
     #         },
     #       ],
+    #       ec2_ami_resources: [
+    #         {
+    #           ami_id: "AmiId", # required
+    #           snowball_ami_id: "String",
+    #         },
+    #       ],
     #     },
     #     address_id: "AddressId",
     #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
@@ -1573,9 +1644,7 @@ module Aws::Snowball
     #   The new or updated Notification object.
     #
     # @option params [Types::JobResource] :resources
-    #   The updated S3Resource object (for a single Amazon S3 bucket or key
-    #   range), or the updated JobResource object (for multiple buckets or key
-    #   ranges).
+    #   The updated `JobResource` object, or the updated JobResource object.
     #
     # @option params [String] :address_id
     #   The ID of the updated Address object.
@@ -1641,6 +1710,12 @@ module Aws::Snowball
     #           ],
     #         },
     #       ],
+    #       ec2_ami_resources: [
+    #         {
+    #           ami_id: "AmiId", # required
+    #           snowball_ami_id: "String",
+    #         },
+    #       ],
     #     },
     #     address_id: "AddressId",
     #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
@@ -1671,7 +1746,7 @@ module Aws::Snowball
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-snowball'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

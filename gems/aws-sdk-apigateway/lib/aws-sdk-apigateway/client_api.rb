@@ -177,6 +177,7 @@ module Aws::APIGateway
     ListOfVpcLink = Shapes::ListShape.new(name: 'ListOfVpcLink')
     LocationStatusType = Shapes::StringShape.new(name: 'LocationStatusType')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MapOfApiStageThrottleSettings = Shapes::MapShape.new(name: 'MapOfApiStageThrottleSettings')
     MapOfHeaderValues = Shapes::MapShape.new(name: 'MapOfHeaderValues')
     MapOfIntegrationResponse = Shapes::MapShape.new(name: 'MapOfIntegrationResponse')
     MapOfKeyUsages = Shapes::MapShape.new(name: 'MapOfKeyUsages')
@@ -301,6 +302,7 @@ module Aws::APIGateway
 
     ApiStage.add_member(:api_id, Shapes::ShapeRef.new(shape: String, location_name: "apiId"))
     ApiStage.add_member(:stage, Shapes::ShapeRef.new(shape: String, location_name: "stage"))
+    ApiStage.add_member(:throttle, Shapes::ShapeRef.new(shape: MapOfApiStageThrottleSettings, location_name: "throttle"))
     ApiStage.struct_class = Types::ApiStage
 
     Authorizer.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
@@ -952,6 +954,9 @@ module Aws::APIGateway
     ListOfUsagePlanKey.member = Shapes::ShapeRef.new(shape: UsagePlanKey)
 
     ListOfVpcLink.member = Shapes::ShapeRef.new(shape: VpcLink)
+
+    MapOfApiStageThrottleSettings.key = Shapes::ShapeRef.new(shape: String)
+    MapOfApiStageThrottleSettings.value = Shapes::ShapeRef.new(shape: ThrottleSettings)
 
     MapOfHeaderValues.key = Shapes::ShapeRef.new(shape: String)
     MapOfHeaderValues.value = Shapes::ShapeRef.new(shape: String)

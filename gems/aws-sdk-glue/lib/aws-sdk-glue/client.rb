@@ -650,8 +650,9 @@ module Aws::Glue
     end
 
     # Creates a new crawler with specified targets, role, configuration, and
-    # optional schedule. At least one crawl target must be specified, in
-    # either the *s3Targets* or the *jdbcTargets* field.
+    # optional schedule. At least one crawl target must be specified, in the
+    # *s3Targets* field, the *jdbcTargets* field, or the *DynamoDBTargets*
+    # field.
     #
     # @option params [required, String] :name
     #   Name of the new crawler.
@@ -681,7 +682,7 @@ module Aws::Glue
     #
     # @option params [Array<String>] :classifiers
     #   A list of custom classifiers that the user has registered. By default,
-    #   all AWS classifiers are included in a crawl, but these custom
+    #   all built-in classifiers are included in a crawl, but these custom
     #   classifiers always override the default classifiers for a given
     #   classification.
     #
@@ -693,16 +694,12 @@ module Aws::Glue
     #
     # @option params [String] :configuration
     #   Crawler configuration information. This versioned JSON string allows
-    #   users to specify aspects of a Crawler's behavior.
+    #   users to specify aspects of a crawler's behavior. For more
+    #   information, see [Configuring a Crawler][1].
     #
-    #   You can use this field to force partitions to inherit metadata such as
-    #   classification, input format, output format, serde information, and
-    #   schema from their parent table, rather than detect this information
-    #   separately for each partition. Use the following JSON string to
-    #   specify that behavior:
     #
-    #   Example: `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
-    #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -725,6 +722,11 @@ module Aws::Glue
     #           connection_name: "ConnectionName",
     #           path: "Path",
     #           exclusions: ["Path"],
+    #         },
+    #       ],
+    #       dynamo_db_targets: [
+    #         {
+    #           path: "Path",
     #         },
     #       ],
     #     },
@@ -798,7 +800,23 @@ module Aws::Glue
     #   The subnet ID for the new DevEndpoint to use.
     #
     # @option params [String] :public_key
-    #   The public key to use for authentication.
+    #   The public key to be used by this DevEndpoint for authentication. This
+    #   attribute is provided for backward compatibility, as the recommended
+    #   attribute to use is public keys.
+    #
+    # @option params [Array<String>] :public_keys
+    #   A list of public keys to be used by the DevEndpoints for
+    #   authentication. The use of this attribute is preferred over a single
+    #   public key because the public keys allow you to have a different
+    #   private key per client.
+    #
+    #   <note markdown="1"> If you previously created an endpoint with a public key, you must
+    #   remove that key to be able to set a list of public keys: call the
+    #   `UpdateDevEndpoint` API with the public key content in the
+    #   `deletePublicKeys` attribute, and the list of new keys in the
+    #   `addPublicKeys` attribute.
+    #
+    #    </note>
     #
     # @option params [Integer] :number_of_nodes
     #   The number of AWS Glue Data Processing Units (DPUs) to allocate to
@@ -846,6 +864,7 @@ module Aws::Glue
     #     security_group_ids: ["GenericString"],
     #     subnet_id: "GenericString",
     #     public_key: "GenericString",
+    #     public_keys: ["GenericString"],
     #     number_of_nodes: 1,
     #     extra_python_libs_s3_path: "GenericString",
     #     extra_jars_s3_path: "GenericString",
@@ -1924,6 +1943,8 @@ module Aws::Glue
     #   resp.crawler.targets.jdbc_targets[0].path #=> String
     #   resp.crawler.targets.jdbc_targets[0].exclusions #=> Array
     #   resp.crawler.targets.jdbc_targets[0].exclusions[0] #=> String
+    #   resp.crawler.targets.dynamo_db_targets #=> Array
+    #   resp.crawler.targets.dynamo_db_targets[0].path #=> String
     #   resp.crawler.database_name #=> String
     #   resp.crawler.description #=> String
     #   resp.crawler.classifiers #=> Array
@@ -2035,6 +2056,8 @@ module Aws::Glue
     #   resp.crawlers[0].targets.jdbc_targets[0].path #=> String
     #   resp.crawlers[0].targets.jdbc_targets[0].exclusions #=> Array
     #   resp.crawlers[0].targets.jdbc_targets[0].exclusions[0] #=> String
+    #   resp.crawlers[0].targets.dynamo_db_targets #=> Array
+    #   resp.crawlers[0].targets.dynamo_db_targets[0].path #=> String
     #   resp.crawlers[0].database_name #=> String
     #   resp.crawlers[0].description #=> String
     #   resp.crawlers[0].classifiers #=> Array
@@ -2228,6 +2251,8 @@ module Aws::Glue
     #   resp.dev_endpoint.created_timestamp #=> Time
     #   resp.dev_endpoint.last_modified_timestamp #=> Time
     #   resp.dev_endpoint.public_key #=> String
+    #   resp.dev_endpoint.public_keys #=> Array
+    #   resp.dev_endpoint.public_keys[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDevEndpoint AWS API Documentation
     #
@@ -2281,6 +2306,8 @@ module Aws::Glue
     #   resp.dev_endpoints[0].created_timestamp #=> Time
     #   resp.dev_endpoints[0].last_modified_timestamp #=> Time
     #   resp.dev_endpoints[0].public_key #=> String
+    #   resp.dev_endpoints[0].public_keys #=> Array
+    #   resp.dev_endpoints[0].public_keys[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDevEndpoints AWS API Documentation
@@ -2541,6 +2568,13 @@ module Aws::Glue
     #           param: false,
     #         },
     #       ],
+    #       dynamo_db: [
+    #         {
+    #           name: "CodeGenArgName", # required
+    #           value: "CodeGenArgValue", # required
+    #           param: false,
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -2788,6 +2822,13 @@ module Aws::Glue
     #         },
     #       ],
     #       s3: [
+    #         {
+    #           name: "CodeGenArgName", # required
+    #           value: "CodeGenArgValue", # required
+    #           param: false,
+    #         },
+    #       ],
+    #       dynamo_db: [
     #         {
     #           name: "CodeGenArgName", # required
     #           value: "CodeGenArgValue", # required
@@ -3436,7 +3477,12 @@ module Aws::Glue
     end
 
     # Starts a crawl using the specified crawler, regardless of what is
-    # scheduled. If the crawler is already running, does nothing.
+    # scheduled. If the crawler is already running, returns a
+    # [CrawlerRunningException][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-exceptions.html#aws-glue-api-exceptions-CrawlerRunningException
     #
     # @option params [required, String] :name
     #   Name of the crawler to start.
@@ -3784,8 +3830,9 @@ module Aws::Glue
     #
     # @option params [Array<String>] :classifiers
     #   A list of custom classifiers that the user has registered. By default,
-    #   all classifiers are included in a crawl, but these custom classifiers
-    #   always override the default classifiers for a given classification.
+    #   all built-in classifiers are included in a crawl, but these custom
+    #   classifiers always override the default classifiers for a given
+    #   classification.
     #
     # @option params [String] :table_prefix
     #   The table prefix used for catalog tables that are created.
@@ -3795,16 +3842,12 @@ module Aws::Glue
     #
     # @option params [String] :configuration
     #   Crawler configuration information. This versioned JSON string allows
-    #   users to specify aspects of a Crawler's behavior.
+    #   users to specify aspects of a crawler's behavior. For more
+    #   information, see [Configuring a Crawler][1].
     #
-    #   You can use this field to force partitions to inherit metadata such as
-    #   classification, input format, output format, serde information, and
-    #   schema from their parent table, rather than detect this information
-    #   separately for each partition. Use the following JSON string to
-    #   specify that behavior:
     #
-    #   Example: `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
-    #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3827,6 +3870,11 @@ module Aws::Glue
     #           connection_name: "ConnectionName",
     #           path: "Path",
     #           exclusions: ["Path"],
+    #         },
+    #       ],
+    #       dynamo_db_targets: [
+    #         {
+    #           path: "Path",
     #         },
     #       ],
     #     },
@@ -3930,6 +3978,12 @@ module Aws::Glue
     # @option params [String] :public_key
     #   The public key for the DevEndpoint to use.
     #
+    # @option params [Array<String>] :add_public_keys
+    #   The list of public keys for the DevEndpoint to use.
+    #
+    # @option params [Array<String>] :delete_public_keys
+    #   The list of public keys to be deleted from the DevEndpoint.
+    #
     # @option params [Types::DevEndpointCustomLibraries] :custom_libraries
     #   Custom Python or Java libraries to be loaded in the DevEndpoint.
     #
@@ -3944,6 +3998,8 @@ module Aws::Glue
     #   resp = client.update_dev_endpoint({
     #     endpoint_name: "GenericString", # required
     #     public_key: "GenericString",
+    #     add_public_keys: ["GenericString"],
+    #     delete_public_keys: ["GenericString"],
     #     custom_libraries: {
     #       extra_python_libs_s3_path: "GenericString",
     #       extra_jars_s3_path: "GenericString",
@@ -4334,7 +4390,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

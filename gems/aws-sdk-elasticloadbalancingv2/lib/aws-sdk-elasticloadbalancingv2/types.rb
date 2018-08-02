@@ -14,7 +14,7 @@ module Aws::ElasticLoadBalancingV2
     #   data as a hash:
     #
     #       {
-    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito
+    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #         target_group_arn: "TargetGroupArn",
     #         authenticate_oidc_config: {
     #           issuer: "AuthenticateOidcActionIssuer", # required
@@ -44,19 +44,30 @@ module Aws::ElasticLoadBalancingV2
     #           on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
     #         },
     #         order: 1,
+    #         redirect_config: {
+    #           protocol: "RedirectActionProtocol",
+    #           port: "RedirectActionPort",
+    #           host: "RedirectActionHost",
+    #           path: "RedirectActionPath",
+    #           query: "RedirectActionQuery",
+    #           status_code: "HTTP_301", # required, accepts HTTP_301, HTTP_302
+    #         },
+    #         fixed_response_config: {
+    #           message_body: "FixedResponseActionMessage",
+    #           status_code: "FixedResponseActionStatusCode", # required
+    #           content_type: "FixedResponseActionContentType",
+    #         },
     #       }
     #
     # @!attribute [rw] type
-    #   The type of action. Each rule must include one forward action.
+    #   The type of action. Each rule must include exactly one of the
+    #   following types of actions: `forward`, `fixed-response`, or
+    #   `redirect`.
     #   @return [String]
     #
     # @!attribute [rw] target_group_arn
     #   The Amazon Resource Name (ARN) of the target group. Specify only
     #   when `Type` is `forward`.
-    #
-    #   For a default rule, the protocol of the target group must be HTTP or
-    #   HTTPS for an Application Load Balancer or TCP for a Network Load
-    #   Balancer.
     #   @return [String]
     #
     # @!attribute [rw] authenticate_oidc_config
@@ -74,8 +85,20 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] order
     #   The order for the action. This value is required for rules with
     #   multiple actions. The action with the lowest value for order is
-    #   performed first. The forward action must be performed last.
+    #   performed first. The final action to be performed must be a
+    #   `forward` or a `fixed-response` action.
     #   @return [Integer]
+    #
+    # @!attribute [rw] redirect_config
+    #   \[Application Load Balancer\] Information for creating a redirect
+    #   action. Specify only when `Type` is `redirect`.
+    #   @return [Types::RedirectActionConfig]
+    #
+    # @!attribute [rw] fixed_response_config
+    #   \[Application Load Balancer\] Information for creating an action
+    #   that returns a custom HTTP response. Specify only when `Type` is
+    #   `fixed-response`.
+    #   @return [Types::FixedResponseActionConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Action AWS API Documentation
     #
@@ -84,7 +107,9 @@ module Aws::ElasticLoadBalancingV2
       :target_group_arn,
       :authenticate_oidc_config,
       :authenticate_cognito_config,
-      :order)
+      :order,
+      :redirect_config,
+      :fixed_response_config)
       include Aws::Structure
     end
 
@@ -427,7 +452,7 @@ module Aws::ElasticLoadBalancingV2
     #         ],
     #         default_actions: [ # required
     #           {
-    #             type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito
+    #             type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #             target_group_arn: "TargetGroupArn",
     #             authenticate_oidc_config: {
     #               issuer: "AuthenticateOidcActionIssuer", # required
@@ -457,6 +482,19 @@ module Aws::ElasticLoadBalancingV2
     #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
     #             },
     #             order: 1,
+    #             redirect_config: {
+    #               protocol: "RedirectActionProtocol",
+    #               port: "RedirectActionPort",
+    #               host: "RedirectActionHost",
+    #               path: "RedirectActionPath",
+    #               query: "RedirectActionQuery",
+    #               status_code: "HTTP_301", # required, accepts HTTP_301, HTTP_302
+    #             },
+    #             fixed_response_config: {
+    #               message_body: "FixedResponseActionMessage",
+    #               status_code: "FixedResponseActionStatusCode", # required
+    #               content_type: "FixedResponseActionContentType",
+    #             },
     #           },
     #         ],
     #       }
@@ -483,24 +521,31 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] certificates
     #   \[HTTPS listeners\] The default SSL server certificate. You must
-    #   provide exactly one certificate. To create a certificate list, use
-    #   AddListenerCertificates.
+    #   provide exactly one default certificate. To create a certificate
+    #   list, use AddListenerCertificates.
     #   @return [Array<Types::Certificate>]
     #
     # @!attribute [rw] default_actions
     #   The actions for the default rule. The rule must include one forward
-    #   action.
+    #   action or one or more fixed-response actions.
     #
     #   If the action type is `forward`, you can specify a single target
     #   group. The protocol of the target group must be HTTP or HTTPS for an
     #   Application Load Balancer or TCP for a Network Load Balancer.
     #
-    #   If the action type is `authenticate-oidc`, you can use an identity
-    #   provider that is OpenID Connect (OIDC) compliant to authenticate
-    #   users as they access your application.
+    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
+    #   can use an identity provider that is OpenID Connect (OIDC) compliant
+    #   to authenticate users as they access your application.
     #
-    #   If the action type is `authenticate-cognito`, you can use Amazon
-    #   Cognito to authenticate users as they access your application.
+    #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
+    #   can use Amazon Cognito to authenticate users as they access your
+    #   application.
+    #
+    #   \[Application Load Balancer\] If the action type is `redirect`, you
+    #   can redirect HTTP and HTTPS requests.
+    #
+    #   \[Application Load Balancer\] If the action type is
+    #   `fixed-response`, you can return a custom HTTP response.
     #   @return [Array<Types::Action>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateListenerInput AWS API Documentation
@@ -595,7 +640,7 @@ module Aws::ElasticLoadBalancingV2
     #   addresses. The DNS name of an Internet-facing load balancer is
     #   publicly resolvable to the public IP addresses of the nodes.
     #   Therefore, Internet-facing load balancers can route requests from
-    #   clients over the Internet.
+    #   clients over the internet.
     #
     #   The nodes of an internal load balancer have only private IP
     #   addresses. The DNS name of an internal load balancer is publicly
@@ -660,7 +705,7 @@ module Aws::ElasticLoadBalancingV2
     #         priority: 1, # required
     #         actions: [ # required
     #           {
-    #             type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito
+    #             type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #             target_group_arn: "TargetGroupArn",
     #             authenticate_oidc_config: {
     #               issuer: "AuthenticateOidcActionIssuer", # required
@@ -690,6 +735,19 @@ module Aws::ElasticLoadBalancingV2
     #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
     #             },
     #             order: 1,
+    #             redirect_config: {
+    #               protocol: "RedirectActionProtocol",
+    #               port: "RedirectActionPort",
+    #               host: "RedirectActionHost",
+    #               path: "RedirectActionPath",
+    #               query: "RedirectActionQuery",
+    #               status_code: "HTTP_301", # required, accepts HTTP_301, HTTP_302
+    #             },
+    #             fixed_response_config: {
+    #               message_body: "FixedResponseActionMessage",
+    #               status_code: "FixedResponseActionStatusCode", # required
+    #               content_type: "FixedResponseActionContentType",
+    #             },
     #           },
     #         ],
     #       }
@@ -705,7 +763,7 @@ module Aws::ElasticLoadBalancingV2
     #   If the field name is `host-header`, you can specify a single host
     #   name (for example, my.example.com). A host name is case insensitive,
     #   can be up to 128 characters in length, and can contain any of the
-    #   following characters. Note that you can include up to three wildcard
+    #   following characters. You can include up to three wildcard
     #   characters.
     #
     #   * A-Z, a-z, 0-9
@@ -717,10 +775,9 @@ module Aws::ElasticLoadBalancingV2
     #   * ? (matches exactly 1 character)
     #
     #   If the field name is `path-pattern`, you can specify a single path
-    #   pattern. A path pattern is case sensitive, can be up to 128
+    #   pattern. A path pattern is case-sensitive, can be up to 128
     #   characters in length, and can contain any of the following
-    #   characters. Note that you can include up to three wildcard
-    #   characters.
+    #   characters. You can include up to three wildcard characters.
     #
     #   * A-Z, a-z, 0-9
     #
@@ -739,17 +796,25 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Integer]
     #
     # @!attribute [rw] actions
-    #   The actions. Each rule must include one forward action.
+    #   The actions. Each rule must include exactly one of the following
+    #   types of actions: `forward`, `fixed-response`, or `redirect`.
     #
     #   If the action type is `forward`, you can specify a single target
     #   group.
     #
-    #   If the action type is `authenticate-oidc`, you can use an identity
-    #   provider that is OpenID Connect (OIDC) compliant to authenticate
-    #   users as they access your application.
+    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
+    #   can use an identity provider that is OpenID Connect (OIDC) compliant
+    #   to authenticate users as they access your application.
     #
-    #   If the action type is `authenticate-cognito`, you can use Amazon
-    #   Cognito to authenticate users as they access your application.
+    #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
+    #   can use Amazon Cognito to authenticate users as they access your
+    #   application.
+    #
+    #   \[Application Load Balancer\] If the action type is `redirect`, you
+    #   can redirect HTTP and HTTPS requests.
+    #
+    #   \[Application Load Balancer\] If the action type is
+    #   `fixed-response`, you can return a custom HTTP response.
     #   @return [Array<Types::Action>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateRuleInput AWS API Documentation
@@ -837,17 +902,17 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] health_check_interval_seconds
     #   The approximate amount of time, in seconds, between health checks of
-    #   an individual target. For Application Load Balancers, the range is 5
-    #   to 300 seconds. For Network Load Balancers, the supported values are
+    #   an individual target. For Application Load Balancers, the range is
+    #   5–300 seconds. For Network Load Balancers, the supported values are
     #   10 or 30 seconds. The default is 30 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] health_check_timeout_seconds
     #   The amount of time, in seconds, during which no response from a
     #   target means a failed health check. For Application Load Balancers,
-    #   the range is 2 to 60 seconds and the default is 5 seconds. For
-    #   Network Load Balancers, this is 10 seconds for TCP and HTTPS health
-    #   checks and 6 seconds for HTTP health checks.
+    #   the range is 2–60 seconds and the default is 5 seconds. For Network
+    #   Load Balancers, this is 10 seconds for TCP and HTTPS health checks
+    #   and 6 seconds for HTTP health checks.
     #   @return [Integer]
     #
     # @!attribute [rw] healthy_threshold_count
@@ -873,8 +938,8 @@ module Aws::ElasticLoadBalancingV2
     #   The type of target that you must specify when registering targets
     #   with this target group. The possible values are `instance` (targets
     #   are specified by instance ID) or `ip` (targets are specified by IP
-    #   address). The default is `instance`. Note that you can't specify
-    #   targets for a target group using both instance IDs and IP addresses.
+    #   address). The default is `instance`. You can't specify targets for
+    #   a target group using both instance IDs and IP addresses.
     #
     #   If the target type is `ip`, specify IP addresses from the subnets of
     #   the virtual private cloud (VPC) for the target group, the RFC 1918
@@ -1526,6 +1591,41 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # Information about an action that returns a custom HTTP response.
+    #
+    # @note When making an API call, you may pass FixedResponseActionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         message_body: "FixedResponseActionMessage",
+    #         status_code: "FixedResponseActionStatusCode", # required
+    #         content_type: "FixedResponseActionContentType",
+    #       }
+    #
+    # @!attribute [rw] message_body
+    #   The message.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   The HTTP response code (2XX, 4XX, or 5XX).
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   The content type.
+    #
+    #   Valid Values: text/plain \| text/css \| text/html \|
+    #   application/javascript \| application/json
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/FixedResponseActionConfig AWS API Documentation
+    #
+    class FixedResponseActionConfig < Struct.new(
+      :message_body,
+      :status_code,
+      :content_type)
+      include Aws::Structure
+    end
+
     # Information about an Elastic Load Balancing resource limit for your
     # AWS account.
     #
@@ -1636,7 +1736,7 @@ module Aws::ElasticLoadBalancingV2
     #   addresses. The DNS name of an Internet-facing load balancer is
     #   publicly resolvable to the public IP addresses of the nodes.
     #   Therefore, Internet-facing load balancers can route requests from
-    #   clients over the Internet.
+    #   clients over the internet.
     #
     #   The nodes of an internal load balancer have only private IP
     #   addresses. The DNS name of an internal load balancer is publicly
@@ -1739,7 +1839,7 @@ module Aws::ElasticLoadBalancingV2
     #   * `access_logs.s3.bucket` - The name of the S3 bucket for the access
     #     logs. This attribute is required if access logs are enabled. The
     #     bucket must exist in the same region as the load balancer and have
-    #     a bucket policy that grants Elastic Load Balancing permission to
+    #     a bucket policy that grants Elastic Load Balancing permissions to
     #     write to the bucket.
     #
     #   * `access_logs.s3.prefix` - The prefix for the location in the S3
@@ -1813,7 +1913,7 @@ module Aws::ElasticLoadBalancingV2
     #   values (for example, "200,202") or a range of values (for example,
     #   "200-299").
     #
-    #   For Network Load Balancers, this is 200 to 399.
+    #   For Network Load Balancers, this is 200–399.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Matcher AWS API Documentation
@@ -1839,7 +1939,7 @@ module Aws::ElasticLoadBalancingV2
     #         ],
     #         default_actions: [
     #           {
-    #             type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito
+    #             type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #             target_group_arn: "TargetGroupArn",
     #             authenticate_oidc_config: {
     #               issuer: "AuthenticateOidcActionIssuer", # required
@@ -1869,6 +1969,19 @@ module Aws::ElasticLoadBalancingV2
     #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
     #             },
     #             order: 1,
+    #             redirect_config: {
+    #               protocol: "RedirectActionProtocol",
+    #               port: "RedirectActionPort",
+    #               host: "RedirectActionHost",
+    #               path: "RedirectActionPath",
+    #               query: "RedirectActionQuery",
+    #               status_code: "HTTP_301", # required, accepts HTTP_301, HTTP_302
+    #             },
+    #             fixed_response_config: {
+    #               message_body: "FixedResponseActionMessage",
+    #               status_code: "FixedResponseActionStatusCode", # required
+    #               content_type: "FixedResponseActionContentType",
+    #             },
     #           },
     #         ],
     #       }
@@ -1899,24 +2012,31 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] certificates
     #   \[HTTPS listeners\] The default SSL server certificate. You must
-    #   provide exactly one certificate. To create a certificate list, use
-    #   AddListenerCertificates.
+    #   provide exactly one default certificate. To create a certificate
+    #   list, use AddListenerCertificates.
     #   @return [Array<Types::Certificate>]
     #
     # @!attribute [rw] default_actions
     #   The actions for the default rule. The rule must include one forward
-    #   action.
+    #   action or one or more fixed-response actions.
     #
     #   If the action type is `forward`, you can specify a single target
     #   group. The protocol of the target group must be HTTP or HTTPS for an
     #   Application Load Balancer or TCP for a Network Load Balancer.
     #
-    #   If the action type is `authenticate-oidc`, you can use an identity
-    #   provider that is OpenID Connect (OIDC) compliant to authenticate
-    #   users as they access your application.
+    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
+    #   can use an identity provider that is OpenID Connect (OIDC) compliant
+    #   to authenticate users as they access your application.
     #
-    #   If the action type is `authenticate-cognito`, you can use Amazon
-    #   Cognito to authenticate users as they access your application.
+    #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
+    #   can use Amazon Cognito to authenticate users as they access your
+    #   application.
+    #
+    #   \[Application Load Balancer\] If the action type is `redirect`, you
+    #   can redirect HTTP and HTTPS requests.
+    #
+    #   \[Application Load Balancer\] If the action type is
+    #   `fixed-response`, you can return a custom HTTP response.
     #   @return [Array<Types::Action>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyListenerInput AWS API Documentation
@@ -1995,7 +2115,7 @@ module Aws::ElasticLoadBalancingV2
     #         ],
     #         actions: [
     #           {
-    #             type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito
+    #             type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #             target_group_arn: "TargetGroupArn",
     #             authenticate_oidc_config: {
     #               issuer: "AuthenticateOidcActionIssuer", # required
@@ -2025,6 +2145,19 @@ module Aws::ElasticLoadBalancingV2
     #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
     #             },
     #             order: 1,
+    #             redirect_config: {
+    #               protocol: "RedirectActionProtocol",
+    #               port: "RedirectActionPort",
+    #               host: "RedirectActionHost",
+    #               path: "RedirectActionPath",
+    #               query: "RedirectActionQuery",
+    #               status_code: "HTTP_301", # required, accepts HTTP_301, HTTP_302
+    #             },
+    #             fixed_response_config: {
+    #               message_body: "FixedResponseActionMessage",
+    #               status_code: "FixedResponseActionStatusCode", # required
+    #               content_type: "FixedResponseActionContentType",
+    #             },
     #           },
     #         ],
     #       }
@@ -2040,7 +2173,7 @@ module Aws::ElasticLoadBalancingV2
     #   If the field name is `host-header`, you can specify a single host
     #   name (for example, my.example.com). A host name is case insensitive,
     #   can be up to 128 characters in length, and can contain any of the
-    #   following characters. Note that you can include up to three wildcard
+    #   following characters. You can include up to three wildcard
     #   characters.
     #
     #   * A-Z, a-z, 0-9
@@ -2052,10 +2185,9 @@ module Aws::ElasticLoadBalancingV2
     #   * ? (matches exactly 1 character)
     #
     #   If the field name is `path-pattern`, you can specify a single path
-    #   pattern. A path pattern is case sensitive, can be up to 128
+    #   pattern. A path pattern is case-sensitive, can be up to 128
     #   characters in length, and can contain any of the following
-    #   characters. Note that you can include up to three wildcard
-    #   characters.
+    #   characters. You can include up to three wildcard characters.
     #
     #   * A-Z, a-z, 0-9
     #
@@ -2181,8 +2313,8 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] health_check_interval_seconds
     #   The approximate amount of time, in seconds, between health checks of
-    #   an individual target. For Application Load Balancers, the range is 5
-    #   to 300 seconds. For Network Load Balancers, the supported values are
+    #   an individual target. For Application Load Balancers, the range is
+    #   5–300 seconds. For Network Load Balancers, the supported values are
     #   10 or 30 seconds.
     #   @return [Integer]
     #
@@ -2230,6 +2362,86 @@ module Aws::ElasticLoadBalancingV2
     #
     class ModifyTargetGroupOutput < Struct.new(
       :target_groups)
+      include Aws::Structure
+    end
+
+    # Information about a redirect action.
+    #
+    # A URI consists of the following components:
+    # protocol://hostname:port/path?query. You must modify at least one of
+    # the following components to avoid a redirect loop: protocol, hostname,
+    # port, or path. Any components that you do not modify retain their
+    # original values.
+    #
+    # You can reuse URI components using the following reserved keywords:
+    #
+    # * \#\\\{protocol\\}
+    #
+    # * \#\\\{host\\}
+    #
+    # * \#\\\{port\\}
+    #
+    # * \#\\\{path\\} (the leading "/" is removed)
+    #
+    # * \#\\\{query\\}
+    #
+    # For example, you can change the path to "/new/#\\\{path\\}", the
+    # hostname to "example.#\\\{host\\}", or the query to
+    # "#\\\{query\\}&amp;value=xyz".
+    #
+    # @note When making an API call, you may pass RedirectActionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         protocol: "RedirectActionProtocol",
+    #         port: "RedirectActionPort",
+    #         host: "RedirectActionHost",
+    #         path: "RedirectActionPath",
+    #         query: "RedirectActionQuery",
+    #         status_code: "HTTP_301", # required, accepts HTTP_301, HTTP_302
+    #       }
+    #
+    # @!attribute [rw] protocol
+    #   The protocol. You can specify HTTP, HTTPS, or #\\\{protocol\\}. You
+    #   can redirect HTTP to HTTP, HTTP to HTTPS, and HTTPS to HTTPS. You
+    #   cannot redirect HTTPS to HTTP.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port. You can specify a value from 1 to 65535 or #\\\{port\\}.
+    #   @return [String]
+    #
+    # @!attribute [rw] host
+    #   The hostname. This component is not percent-encoded. The hostname
+    #   can contain #\\\{host\\}.
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The absolute path, starting with the leading "/". This component
+    #   is not percent-encoded. The path can contain #\\\{host\\},
+    #   #\\\{path\\}, and #\\\{port\\}.
+    #   @return [String]
+    #
+    # @!attribute [rw] query
+    #   The query parameters, URL-encoded when necessary, but not
+    #   percent-encoded. Do not include the leading "?", as it is
+    #   automatically added. You can specify any of the reserved keywords.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   The HTTP redirect code. The redirect is either permanent (HTTP 301)
+    #   or temporary (HTTP 302).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RedirectActionConfig AWS API Documentation
+    #
+    class RedirectActionConfig < Struct.new(
+      :protocol,
+      :port,
+      :host,
+      :path,
+      :query,
+      :status_code)
       include Aws::Structure
     end
 
@@ -2382,7 +2594,7 @@ module Aws::ElasticLoadBalancingV2
     #   If the field name is `host-header`, you can specify a single host
     #   name (for example, my.example.com). A host name is case insensitive,
     #   can be up to 128 characters in length, and can contain any of the
-    #   following characters. Note that you can include up to three wildcard
+    #   following characters. You can include up to three wildcard
     #   characters.
     #
     #   * A-Z, a-z, 0-9
@@ -2394,9 +2606,9 @@ module Aws::ElasticLoadBalancingV2
     #   * ? (matches exactly 1 character)
     #
     #   If the field name is `path-pattern`, you can specify a single path
-    #   pattern (for example, /img/*). A path pattern is case sensitive,
+    #   pattern (for example, /img/*). A path pattern is case-sensitive,
     #   can be up to 128 characters in length, and can contain any of the
-    #   following characters. Note that you can include up to three wildcard
+    #   following characters. You can include up to three wildcard
     #   characters.
     #
     #   * A-Z, a-z, 0-9

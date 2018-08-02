@@ -192,6 +192,7 @@ module Aws::Inspector
     ScopeType = Shapes::StringShape.new(name: 'ScopeType')
     ScopeValue = Shapes::StringShape.new(name: 'ScopeValue')
     ServiceName = Shapes::StringShape.new(name: 'ServiceName')
+    ServiceTemporarilyUnavailableException = Shapes::StructureShape.new(name: 'ServiceTemporarilyUnavailableException')
     SetTagsForResourceRequest = Shapes::StructureShape.new(name: 'SetTagsForResourceRequest')
     Severity = Shapes::StringShape.new(name: 'Severity')
     SeverityList = Shapes::ListShape.new(name: 'SeverityList')
@@ -792,6 +793,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:create_assessment_target, Seahorse::Model::Operation.new.tap do |o|
@@ -806,6 +808,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCrossAccountRoleException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:create_assessment_template, Seahorse::Model::Operation.new.tap do |o|
@@ -819,6 +822,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:create_exclusions_preview, Seahorse::Model::Operation.new.tap do |o|
@@ -832,6 +836,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:create_resource_group, Seahorse::Model::Operation.new.tap do |o|
@@ -844,6 +849,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:delete_assessment_run, Seahorse::Model::Operation.new.tap do |o|
@@ -857,6 +863,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: AssessmentRunInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:delete_assessment_target, Seahorse::Model::Operation.new.tap do |o|
@@ -870,6 +877,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: AssessmentRunInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:delete_assessment_template, Seahorse::Model::Operation.new.tap do |o|
@@ -883,6 +891,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: AssessmentRunInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:describe_assessment_runs, Seahorse::Model::Operation.new.tap do |o|
@@ -976,6 +985,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: AssessmentRunInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:get_exclusions_preview, Seahorse::Model::Operation.new.tap do |o|
@@ -1191,6 +1201,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCrossAccountRoleException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:remove_attributes_from_findings, Seahorse::Model::Operation.new.tap do |o|
@@ -1203,6 +1214,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:set_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1215,6 +1227,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:start_assessment_run, Seahorse::Model::Operation.new.tap do |o|
@@ -1230,6 +1243,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCrossAccountRoleException)
         o.errors << Shapes::ShapeRef.new(shape: AgentsAlreadyRunningAssessmentException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:stop_assessment_run, Seahorse::Model::Operation.new.tap do |o|
@@ -1242,6 +1256,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:subscribe_to_event, Seahorse::Model::Operation.new.tap do |o|
@@ -1255,6 +1270,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:unsubscribe_from_event, Seahorse::Model::Operation.new.tap do |o|
@@ -1267,6 +1283,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:update_assessment_target, Seahorse::Model::Operation.new.tap do |o|
@@ -1279,6 +1296,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
     end
 

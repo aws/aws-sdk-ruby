@@ -1,4 +1,5 @@
 require 'json'
+require 'cgi'
 
 module BuildTools
   class CustomService
@@ -19,6 +20,8 @@ module BuildTools
       @gem_name = options[:gem_name] || "#{@svc_name.downcase}-sdk"
       @output_dir = options[:output_dir] || File.expand_path('../../gems', __FILE__)
     end
+
+    attr_reader :svc_name
 
     def build
       AwsSdkCodeGenerator::Service.new(
@@ -75,9 +78,11 @@ module BuildTools
     end
 
     def validate(svc_name)
-      # replace all non alphanumber with space, can make camel case string
-      raw = svc_name.gsub(/[^0-9a-zA-Z]/i, ' ')
-      raw.split(' ').collect(&:capitalize).join
+      # replace all non alphanumber with space, and make camel case string
+      raw = CGI::unescape(svc_name)
+      raw.gsub(/[^0-9a-zA-Z]/i, ' ').split(' ').each do |part|
+        part[0] = part[0].upcase
+      end.join
     end
 
   end

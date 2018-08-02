@@ -382,6 +382,37 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # Contains information about an attached permissions boundary.
+    #
+    # An attached permissions boundary is a managed policy that has been
+    # attached to a user or role to set the permissions boundary.
+    #
+    # For more information about permissions boundaries, see [Permissions
+    # Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #
+    # @!attribute [rw] permissions_boundary_type
+    #   The permissions boundary usage type that indicates what type of IAM
+    #   resource is used as the permissions boundary for an entity. This
+    #   data type can only have a value of `Policy`.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions_boundary_arn
+    #   The ARN of the policy used to set the permissions boundary for the
+    #   user or role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachedPermissionsBoundary AWS API Documentation
+    #
+    class AttachedPermissionsBoundary < Struct.new(
+      :permissions_boundary_type,
+      :permissions_boundary_arn)
+      include Aws::Structure
+    end
+
     # Contains information about an attached policy.
     #
     # An attached policy is a managed policy that has been attached to a
@@ -1046,6 +1077,7 @@ module Aws::IAM
     #         assume_role_policy_document: "policyDocumentType", # required
     #         description: "roleDescriptionType",
     #         max_session_duration: 1,
+    #         permissions_boundary: "arnType",
     #       }
     #
     # @!attribute [rw] path
@@ -1132,6 +1164,11 @@ module Aws::IAM
     #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
     #   @return [Integer]
     #
+    # @!attribute [rw] permissions_boundary
+    #   The ARN of the policy that is used to set the permissions boundary
+    #   for the role.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateRoleRequest AWS API Documentation
     #
     class CreateRoleRequest < Struct.new(
@@ -1139,7 +1176,8 @@ module Aws::IAM
       :role_name,
       :assume_role_policy_document,
       :description,
-      :max_session_duration)
+      :max_session_duration,
+      :permissions_boundary)
       include Aws::Structure
     end
 
@@ -1323,6 +1361,7 @@ module Aws::IAM
     #       {
     #         path: "pathType",
     #         user_name: "userNameType", # required
+    #         permissions_boundary: "arnType",
     #       }
     #
     # @!attribute [rw] path
@@ -1360,11 +1399,17 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @!attribute [rw] permissions_boundary
+    #   The ARN of the policy that is used to set the permissions boundary
+    #   for the user.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateUserRequest AWS API Documentation
     #
     class CreateUserRequest < Struct.new(
       :path,
-      :user_name)
+      :user_name,
+      :permissions_boundary)
       include Aws::Structure
     end
 
@@ -1771,6 +1816,25 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteRolePermissionsBoundaryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         role_name: "roleNameType", # required
+    #       }
+    #
+    # @!attribute [rw] role_name
+    #   The name (friendly name, not ARN) of the IAM role from which you
+    #   want to remove the permissions boundary.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRolePermissionsBoundaryRequest AWS API Documentation
+    #
+    class DeleteRolePermissionsBoundaryRequest < Struct.new(
+      :role_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteRolePolicyRequest
     #   data as a hash:
     #
@@ -2040,6 +2104,25 @@ module Aws::IAM
     class DeleteSigningCertificateRequest < Struct.new(
       :user_name,
       :certificate_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteUserPermissionsBoundaryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_name: "userNameType", # required
+    #       }
+    #
+    # @!attribute [rw] user_name
+    #   The name (friendly name, not ARN) of the IAM user from which you
+    #   want to remove the permissions boundary.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteUserPermissionsBoundaryRequest AWS API Documentation
+    #
+    class DeleteUserPermissionsBoundaryRequest < Struct.new(
+      :user_name)
       include Aws::Structure
     end
 
@@ -3552,6 +3635,29 @@ module Aws::IAM
     #
     # @!attribute [rw] user
     #   A structure containing details about the IAM user.
+    #
+    #   Due to a service issue, password last used data does not include
+    #   password use from May 3rd 2018 22:50 PDT to May 23rd 2018 14:08 PDT.
+    #   This affects [last sign-in][1] dates shown in the IAM console and
+    #   password last used dates in the [IAM credential report][2], and
+    #   returned by this GetUser API. If users signed in during the affected
+    #   time, the password last used date that is returned is the date the
+    #   user last signed in before May 3rd 2018. For users that signed in
+    #   after May 23rd 2018 14:08 PDT, the returned password last used date
+    #   is accurate.
+    #
+    #    If you use password last used information to identify unused
+    #   credentials for deletion, such as deleting users who did not sign in
+    #   to AWS in the last 90 days, we recommend that you adjust your
+    #   evaluation window to include dates after May 23rd 2018.
+    #   Alternatively, if your users use access keys to access AWS
+    #   programmatically you can refer to access key last used information
+    #   because it is accurate for all dates.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_finding-unused.html
+    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html
     #   @return [Types::User]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUserResponse AWS API Documentation
@@ -4228,6 +4334,7 @@ module Aws::IAM
     #         policy_arn: "arnType", # required
     #         entity_filter: "User", # accepts User, Role, Group, LocalManagedPolicy, AWSManagedPolicy
     #         path_prefix: "pathType",
+    #         policy_usage_filter: "PermissionsPolicy", # accepts PermissionsPolicy, PermissionsBoundary
     #         marker: "markerType",
     #         max_items: 1,
     #       }
@@ -4271,6 +4378,18 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @!attribute [rw] policy_usage_filter
+    #   The policy usage method to use for filtering the results.
+    #
+    #   To list only permissions policies,
+    #   set `PolicyUsageFilter` to `PermissionsPolicy`. To list only the
+    #   policies used to set permissions boundaries, set the value
+    #   to `PermissionsBoundary`.
+    #
+    #   This parameter is optional. If it is not included, all policies are
+    #   returned.
+    #   @return [String]
+    #
     # @!attribute [rw] marker
     #   Use this parameter only when paginating results and only after you
     #   receive a response indicating that the results are truncated. Set it
@@ -4297,6 +4416,7 @@ module Aws::IAM
       :policy_arn,
       :entity_filter,
       :path_prefix,
+      :policy_usage_filter,
       :marker,
       :max_items)
       include Aws::Structure
@@ -4884,6 +5004,7 @@ module Aws::IAM
     #         scope: "All", # accepts All, AWS, Local
     #         only_attached: false,
     #         path_prefix: "policyPathType",
+    #         policy_usage_filter: "PermissionsPolicy", # accepts PermissionsPolicy, PermissionsBoundary
     #         marker: "markerType",
     #         max_items: 1,
     #       }
@@ -4923,6 +5044,18 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @!attribute [rw] policy_usage_filter
+    #   The policy usage method to use for filtering the results.
+    #
+    #   To list only permissions policies,
+    #   set `PolicyUsageFilter` to `PermissionsPolicy`. To list only the
+    #   policies used to set permissions boundaries, set the value
+    #   to `PermissionsBoundary`.
+    #
+    #   This parameter is optional. If it is not included, all policies are
+    #   returned.
+    #   @return [String]
+    #
     # @!attribute [rw] marker
     #   Use this parameter only when paginating results and only after you
     #   receive a response indicating that the results are truncated. Set it
@@ -4949,6 +5082,7 @@ module Aws::IAM
       :scope,
       :only_attached,
       :path_prefix,
+      :policy_usage_filter,
       :marker,
       :max_items)
       include Aws::Structure
@@ -5937,6 +6071,18 @@ module Aws::IAM
     #   policy is attached to.
     #   @return [Integer]
     #
+    # @!attribute [rw] permissions_boundary_usage_count
+    #   The number of entities (users and roles) for which the policy is
+    #   used as the permissions boundary.
+    #
+    #   For more information about permissions boundaries, see [Permissions
+    #   Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #   @return [Integer]
+    #
     # @!attribute [rw] is_attachable
     #   Specifies whether the policy can be attached to an IAM user, group,
     #   or role.
@@ -5982,6 +6128,7 @@ module Aws::IAM
       :path,
       :default_version_id,
       :attachment_count,
+      :permissions_boundary_usage_count,
       :is_attachable,
       :description,
       :create_date,
@@ -6156,6 +6303,18 @@ module Aws::IAM
     #   attached to.
     #   @return [Integer]
     #
+    # @!attribute [rw] permissions_boundary_usage_count
+    #   The number of entities (users and roles) for which the policy is
+    #   used to set the permissions boundary.
+    #
+    #   For more information about permissions boundaries, see [Permissions
+    #   Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #   @return [Integer]
+    #
     # @!attribute [rw] is_attachable
     #   Specifies whether the policy can be attached to an IAM user, group,
     #   or role.
@@ -6200,6 +6359,7 @@ module Aws::IAM
       :path,
       :default_version_id,
       :attachment_count,
+      :permissions_boundary_usage_count,
       :is_attachable,
       :description,
       :create_date,
@@ -6484,6 +6644,32 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutRolePermissionsBoundaryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         role_name: "roleNameType", # required
+    #         permissions_boundary: "arnType", # required
+    #       }
+    #
+    # @!attribute [rw] role_name
+    #   The name (friendly name, not ARN) of the IAM role for which you want
+    #   to set the permissions boundary.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions_boundary
+    #   The ARN of the policy that is used to set the permissions boundary
+    #   for the role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutRolePermissionsBoundaryRequest AWS API Documentation
+    #
+    class PutRolePermissionsBoundaryRequest < Struct.new(
+      :role_name,
+      :permissions_boundary)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutRolePolicyRequest
     #   data as a hash:
     #
@@ -6545,6 +6731,32 @@ module Aws::IAM
       :role_name,
       :policy_name,
       :policy_document)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutUserPermissionsBoundaryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_name: "userNameType", # required
+    #         permissions_boundary: "arnType", # required
+    #       }
+    #
+    # @!attribute [rw] user_name
+    #   The name (friendly name, not ARN) of the IAM user for which you want
+    #   to set the permissions boundary.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions_boundary
+    #   The ARN of the policy that is used to set the permissions boundary
+    #   for the user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutUserPermissionsBoundaryRequest AWS API Documentation
+    #
+    class PutUserPermissionsBoundaryRequest < Struct.new(
+      :user_name,
+      :permissions_boundary)
       include Aws::Structure
     end
 
@@ -6963,6 +7175,18 @@ module Aws::IAM
     #   `duration-seconds` CLI parameter.
     #   @return [Integer]
     #
+    # @!attribute [rw] permissions_boundary
+    #   The ARN of the policy used to set the permissions boundary for the
+    #   role.
+    #
+    #   For more information about permissions boundaries, see [Permissions
+    #   Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #   @return [Types::AttachedPermissionsBoundary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/Role AWS API Documentation
     #
     class Role < Struct.new(
@@ -6973,7 +7197,8 @@ module Aws::IAM
       :create_date,
       :assume_role_policy_document,
       :description,
-      :max_session_duration)
+      :max_session_duration,
+      :permissions_boundary)
       include Aws::Structure
     end
 
@@ -7045,6 +7270,18 @@ module Aws::IAM
     #   the role's access (permissions) policies.
     #   @return [Array<Types::AttachedPolicy>]
     #
+    # @!attribute [rw] permissions_boundary
+    #   The ARN of the policy used to set the permissions boundary for the
+    #   role.
+    #
+    #   For more information about permissions boundaries, see [Permissions
+    #   Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #   @return [Types::AttachedPermissionsBoundary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RoleDetail AWS API Documentation
     #
     class RoleDetail < Struct.new(
@@ -7056,7 +7293,8 @@ module Aws::IAM
       :assume_role_policy_document,
       :instance_profile_list,
       :role_policy_list,
-      :attached_managed_policies)
+      :attached_managed_policies,
+      :permissions_boundary)
       include Aws::Structure
     end
 
@@ -7561,16 +7799,22 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] resource_owner
-    #   An AWS account ID that specifies the owner of any simulated resource
-    #   that does not identify its owner in the resource ARN, such as an S3
-    #   bucket or object. If `ResourceOwner` is specified, it is also used
-    #   as the account owner of any `ResourcePolicy` included in the
-    #   simulation. If the `ResourceOwner` parameter is not specified, then
-    #   the owner of the resources and the resource policy defaults to the
-    #   account of the identity provided in `CallerArn`. This parameter is
-    #   required only if you specify a resource-based policy and account
-    #   that owns the resource is different from the account that owns the
-    #   simulated calling user `CallerArn`.
+    #   An ARN representing the AWS account ID that specifies the owner of
+    #   any simulated resource that does not identify its owner in the
+    #   resource ARN, such as an S3 bucket or object. If `ResourceOwner` is
+    #   specified, it is also used as the account owner of any
+    #   `ResourcePolicy` included in the simulation. If the `ResourceOwner`
+    #   parameter is not specified, then the owner of the resources and the
+    #   resource policy defaults to the account of the identity provided in
+    #   `CallerArn`. This parameter is required only if you specify a
+    #   resource-based policy and account that owns the resource is
+    #   different from the account that owns the simulated calling user
+    #   `CallerArn`.
+    #
+    #   The ARN for an account uses the following syntax:
+    #   `arn:aws:iam::AWS-account-ID:root`. For example, to represent the
+    #   account with the 112233445566 ID, use the following ARN:
+    #   `arn:aws:iam::112233445566-ID:root`.
     #   @return [String]
     #
     # @!attribute [rw] caller_arn
@@ -8055,7 +8299,7 @@ module Aws::IAM
     #   Specifies whether IAM user passwords must contain at least one of
     #   the following non-alphanumeric characters:
     #
-    #   ! @ # $ % ^ &amp;amp; * ( ) \_ + - = \[ \] \\\{ \\} \| '
+    #   ! @ # $ % ^ &amp; * ( ) \_ + - = \[ \] \\\{ \\} \| '
     #
     #   If you do not specify a value for this parameter, then the operation
     #   uses the default value of `false`. The result is that passwords do
@@ -8787,7 +9031,9 @@ module Aws::IAM
     #
     # @!attribute [rw] ssh_public_key_body
     #   The SSH public key. The public key must be encoded in ssh-rsa format
-    #   or PEM format.
+    #   or PEM format. The miminum bit-length of the public key is 2048
+    #   bits. For example, you can generate a 2048-bit key, and the
+    #   resulting PEM file is 1679 bytes long.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
     #   of characters consisting of the following:
@@ -9108,6 +9354,18 @@ module Aws::IAM
     #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
     #   @return [Time]
     #
+    # @!attribute [rw] permissions_boundary
+    #   The ARN of the policy used to set the permissions boundary for the
+    #   user.
+    #
+    #   For more information about permissions boundaries, see [Permissions
+    #   Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #   @return [Types::AttachedPermissionsBoundary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/User AWS API Documentation
     #
     class User < Struct.new(
@@ -9116,7 +9374,8 @@ module Aws::IAM
       :user_id,
       :arn,
       :create_date,
-      :password_last_used)
+      :password_last_used,
+      :permissions_boundary)
       include Aws::Structure
     end
 
@@ -9182,6 +9441,18 @@ module Aws::IAM
     #   A list of the managed policies attached to the user.
     #   @return [Array<Types::AttachedPolicy>]
     #
+    # @!attribute [rw] permissions_boundary
+    #   The ARN of the policy used to set the permissions boundary for the
+    #   user.
+    #
+    #   For more information about permissions boundaries, see [Permissions
+    #   Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #   @return [Types::AttachedPermissionsBoundary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UserDetail AWS API Documentation
     #
     class UserDetail < Struct.new(
@@ -9192,7 +9463,8 @@ module Aws::IAM
       :create_date,
       :user_policy_list,
       :group_list,
-      :attached_managed_policies)
+      :attached_managed_policies,
+      :permissions_boundary)
       include Aws::Structure
     end
 

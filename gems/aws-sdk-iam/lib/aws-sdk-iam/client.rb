@@ -899,6 +899,8 @@ module Aws::IAM
     #   resp.instance_profile.roles[0].assume_role_policy_document #=> String
     #   resp.instance_profile.roles[0].description #=> String
     #   resp.instance_profile.roles[0].max_session_duration #=> Integer
+    #   resp.instance_profile.roles[0].permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
+    #   resp.instance_profile.roles[0].permissions_boundary.permissions_boundary_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateInstanceProfile AWS API Documentation
     #
@@ -1227,6 +1229,7 @@ module Aws::IAM
     #   resp.policy.path #=> String
     #   resp.policy.default_version_id #=> String
     #   resp.policy.attachment_count #=> Integer
+    #   resp.policy.permissions_boundary_usage_count #=> Integer
     #   resp.policy.is_attachable #=> Boolean
     #   resp.policy.description #=> String
     #   resp.policy.create_date #=> Time
@@ -1420,6 +1423,10 @@ module Aws::IAM
     #
     #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
     #
+    # @option params [String] :permissions_boundary
+    #   The ARN of the policy that is used to set the permissions boundary for
+    #   the role.
+    #
     # @return [Types::CreateRoleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRoleResponse#role #role} => Types::Role
@@ -1456,6 +1463,7 @@ module Aws::IAM
     #     assume_role_policy_document: "policyDocumentType", # required
     #     description: "roleDescriptionType",
     #     max_session_duration: 1,
+    #     permissions_boundary: "arnType",
     #   })
     #
     # @example Response structure
@@ -1468,6 +1476,8 @@ module Aws::IAM
     #   resp.role.assume_role_policy_document #=> String
     #   resp.role.description #=> String
     #   resp.role.max_session_duration #=> Integer
+    #   resp.role.permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
+    #   resp.role.permissions_boundary.permissions_boundary_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateRole AWS API Documentation
     #
@@ -1613,6 +1623,8 @@ module Aws::IAM
     #   resp.role.assume_role_policy_document #=> String
     #   resp.role.description #=> String
     #   resp.role.max_session_duration #=> Integer
+    #   resp.role.permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
+    #   resp.role.permissions_boundary.permissions_boundary_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceLinkedRole AWS API Documentation
     #
@@ -1735,6 +1747,10 @@ module Aws::IAM
     #
     #   [1]: http://wikipedia.org/wiki/regex
     #
+    # @option params [String] :permissions_boundary
+    #   The ARN of the policy that is used to set the permissions boundary for
+    #   the user.
+    #
     # @return [Types::CreateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateUserResponse#user #user} => Types::User
@@ -1764,6 +1780,7 @@ module Aws::IAM
     #   resp = client.create_user({
     #     path: "pathType",
     #     user_name: "userNameType", # required
+    #     permissions_boundary: "arnType",
     #   })
     #
     # @example Response structure
@@ -1774,6 +1791,8 @@ module Aws::IAM
     #   resp.user.arn #=> String
     #   resp.user.create_date #=> Time
     #   resp.user.password_last_used #=> Time
+    #   resp.user.permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
+    #   resp.user.permissions_boundary.permissions_boundary_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateUser AWS API Documentation
     #
@@ -1858,6 +1877,8 @@ module Aws::IAM
     #   resp.virtual_mfa_device.user.arn #=> String
     #   resp.virtual_mfa_device.user.create_date #=> Time
     #   resp.virtual_mfa_device.user.password_last_used #=> Time
+    #   resp.virtual_mfa_device.user.permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
+    #   resp.virtual_mfa_device.user.permissions_boundary.permissions_boundary_arn #=> String
     #   resp.virtual_mfa_device.enable_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateVirtualMFADevice AWS API Documentation
@@ -2447,6 +2468,33 @@ module Aws::IAM
       req.send_request(options)
     end
 
+    # Deletes the permissions boundary for the specified IAM role.
+    #
+    # Deleting the permissions boundary for a role might increase its
+    # permissions by allowing anyone who assumes the role to perform all the
+    # actions granted in its permissions policies.
+    #
+    # @option params [required, String] :role_name
+    #   The name (friendly name, not ARN) of the IAM role from which you want
+    #   to remove the permissions boundary.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_role_permissions_boundary({
+    #     role_name: "roleNameType", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRolePermissionsBoundary AWS API Documentation
+    #
+    # @overload delete_role_permissions_boundary(params = {})
+    # @param [Hash] params ({})
+    def delete_role_permissions_boundary(params = {}, options = {})
+      req = build_request(:delete_role_permissions_boundary, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified inline policy that is embedded in the specified
     # IAM role.
     #
@@ -2847,6 +2895,33 @@ module Aws::IAM
     # @param [Hash] params ({})
     def delete_user(params = {}, options = {})
       req = build_request(:delete_user, params)
+      req.send_request(options)
+    end
+
+    # Deletes the permissions boundary for the specified IAM user.
+    #
+    # Deleting the permissions boundary for a user might increase its
+    # permissions by allowing the user to perform all the actions granted in
+    # its permissions policies.
+    #
+    # @option params [required, String] :user_name
+    #   The name (friendly name, not ARN) of the IAM user from which you want
+    #   to remove the permissions boundary.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_user_permissions_boundary({
+    #     user_name: "userNameType", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteUserPermissionsBoundary AWS API Documentation
+    #
+    # @overload delete_user_permissions_boundary(params = {})
+    # @param [Hash] params ({})
+    def delete_user_permissions_boundary(params = {}, options = {})
+      req = build_request(:delete_user_permissions_boundary, params)
       req.send_request(options)
     end
 
@@ -3350,6 +3425,8 @@ module Aws::IAM
     #   resp.user_detail_list[0].attached_managed_policies #=> Array
     #   resp.user_detail_list[0].attached_managed_policies[0].policy_name #=> String
     #   resp.user_detail_list[0].attached_managed_policies[0].policy_arn #=> String
+    #   resp.user_detail_list[0].permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
+    #   resp.user_detail_list[0].permissions_boundary.permissions_boundary_arn #=> String
     #   resp.group_detail_list #=> Array
     #   resp.group_detail_list[0].path #=> String
     #   resp.group_detail_list[0].group_name #=> String
@@ -3384,12 +3461,16 @@ module Aws::IAM
     #   resp.role_detail_list[0].instance_profile_list[0].roles[0].assume_role_policy_document #=> String
     #   resp.role_detail_list[0].instance_profile_list[0].roles[0].description #=> String
     #   resp.role_detail_list[0].instance_profile_list[0].roles[0].max_session_duration #=> Integer
+    #   resp.role_detail_list[0].instance_profile_list[0].roles[0].permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
+    #   resp.role_detail_list[0].instance_profile_list[0].roles[0].permissions_boundary.permissions_boundary_arn #=> String
     #   resp.role_detail_list[0].role_policy_list #=> Array
     #   resp.role_detail_list[0].role_policy_list[0].policy_name #=> String
     #   resp.role_detail_list[0].role_policy_list[0].policy_document #=> String
     #   resp.role_detail_list[0].attached_managed_policies #=> Array
     #   resp.role_detail_list[0].attached_managed_policies[0].policy_name #=> String
     #   resp.role_detail_list[0].attached_managed_policies[0].policy_arn #=> String
+    #   resp.role_detail_list[0].permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
+    #   resp.role_detail_list[0].permissions_boundary.permissions_boundary_arn #=> String
     #   resp.policies #=> Array
     #   resp.policies[0].policy_name #=> String
     #   resp.policies[0].policy_id #=> String
@@ -3397,6 +3478,7 @@ module Aws::IAM
     #   resp.policies[0].path #=> String
     #   resp.policies[0].default_version_id #=> String
     #   resp.policies[0].attachment_count #=> Integer
+    #   resp.policies[0].permissions_boundary_usage_count #=> Integer
     #   resp.policies[0].is_attachable #=> Boolean
     #   resp.policies[0].description #=> String
     #   resp.policies[0].create_date #=> Time
@@ -3776,6 +3858,8 @@ module Aws::IAM
     #   resp.users[0].arn #=> String
     #   resp.users[0].create_date #=> Time
     #   resp.users[0].password_last_used #=> Time
+    #   resp.users[0].permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
+    #   resp.users[0].permissions_boundary.permissions_boundary_arn #=> String
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
@@ -3941,6 +4025,8 @@ module Aws::IAM
     #   resp.instance_profile.roles[0].assume_role_policy_document #=> String
     #   resp.instance_profile.roles[0].description #=> String
     #   resp.instance_profile.roles[0].max_session_duration #=> Integer
+    #   resp.instance_profile.roles[0].permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
+    #   resp.instance_profile.roles[0].permissions_boundary.permissions_boundary_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetInstanceProfile AWS API Documentation
     #
@@ -4104,6 +4190,7 @@ module Aws::IAM
     #   resp.policy.path #=> String
     #   resp.policy.default_version_id #=> String
     #   resp.policy.attachment_count #=> Integer
+    #   resp.policy.permissions_boundary_usage_count #=> Integer
     #   resp.policy.is_attachable #=> Boolean
     #   resp.policy.description #=> String
     #   resp.policy.create_date #=> Time
@@ -4268,6 +4355,8 @@ module Aws::IAM
     #   resp.role.assume_role_policy_document #=> String
     #   resp.role.description #=> String
     #   resp.role.max_session_duration #=> Integer
+    #   resp.role.permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
+    #   resp.role.permissions_boundary.permissions_boundary_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRole AWS API Documentation
     #
@@ -4632,6 +4721,8 @@ module Aws::IAM
     #   resp.user.arn #=> String
     #   resp.user.create_date #=> Time
     #   resp.user.password_last_used #=> Time
+    #   resp.user.permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
+    #   resp.user.permissions_boundary.permissions_boundary_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUser AWS API Documentation
     #
@@ -5234,6 +5325,17 @@ module Aws::IAM
     #
     #   [1]: http://wikipedia.org/wiki/regex
     #
+    # @option params [String] :policy_usage_filter
+    #   The policy usage method to use for filtering the results.
+    #
+    #   To list only permissions policies,
+    #   set `PolicyUsageFilter` to `PermissionsPolicy`. To list only the
+    #   policies used to set permissions boundaries, set the value
+    #   to `PermissionsBoundary`.
+    #
+    #   This parameter is optional. If it is not included, all policies are
+    #   returned.
+    #
     # @option params [String] :marker
     #   Use this parameter only when paginating results and only after you
     #   receive a response indicating that the results are truncated. Set it
@@ -5266,6 +5368,7 @@ module Aws::IAM
     #     policy_arn: "arnType", # required
     #     entity_filter: "User", # accepts User, Role, Group, LocalManagedPolicy, AWSManagedPolicy
     #     path_prefix: "pathType",
+    #     policy_usage_filter: "PermissionsPolicy", # accepts PermissionsPolicy, PermissionsBoundary
     #     marker: "markerType",
     #     max_items: 1,
     #   })
@@ -5671,6 +5774,8 @@ module Aws::IAM
     #   resp.instance_profiles[0].roles[0].assume_role_policy_document #=> String
     #   resp.instance_profiles[0].roles[0].description #=> String
     #   resp.instance_profiles[0].roles[0].max_session_duration #=> Integer
+    #   resp.instance_profiles[0].roles[0].permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
+    #   resp.instance_profiles[0].roles[0].permissions_boundary.permissions_boundary_arn #=> String
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
@@ -5756,6 +5861,8 @@ module Aws::IAM
     #   resp.instance_profiles[0].roles[0].assume_role_policy_document #=> String
     #   resp.instance_profiles[0].roles[0].description #=> String
     #   resp.instance_profiles[0].roles[0].max_session_duration #=> Integer
+    #   resp.instance_profiles[0].roles[0].permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
+    #   resp.instance_profiles[0].roles[0].permissions_boundary.permissions_boundary_arn #=> String
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
@@ -5912,6 +6019,17 @@ module Aws::IAM
     #
     #   [1]: http://wikipedia.org/wiki/regex
     #
+    # @option params [String] :policy_usage_filter
+    #   The policy usage method to use for filtering the results.
+    #
+    #   To list only permissions policies,
+    #   set `PolicyUsageFilter` to `PermissionsPolicy`. To list only the
+    #   policies used to set permissions boundaries, set the value
+    #   to `PermissionsBoundary`.
+    #
+    #   This parameter is optional. If it is not included, all policies are
+    #   returned.
+    #
     # @option params [String] :marker
     #   Use this parameter only when paginating results and only after you
     #   receive a response indicating that the results are truncated. Set it
@@ -5942,6 +6060,7 @@ module Aws::IAM
     #     scope: "All", # accepts All, AWS, Local
     #     only_attached: false,
     #     path_prefix: "policyPathType",
+    #     policy_usage_filter: "PermissionsPolicy", # accepts PermissionsPolicy, PermissionsBoundary
     #     marker: "markerType",
     #     max_items: 1,
     #   })
@@ -5955,6 +6074,7 @@ module Aws::IAM
     #   resp.policies[0].path #=> String
     #   resp.policies[0].default_version_id #=> String
     #   resp.policies[0].attachment_count #=> Integer
+    #   resp.policies[0].permissions_boundary_usage_count #=> Integer
     #   resp.policies[0].is_attachable #=> Boolean
     #   resp.policies[0].description #=> String
     #   resp.policies[0].create_date #=> Time
@@ -6191,6 +6311,8 @@ module Aws::IAM
     #   resp.roles[0].assume_role_policy_document #=> String
     #   resp.roles[0].description #=> String
     #   resp.roles[0].max_session_duration #=> Integer
+    #   resp.roles[0].permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
+    #   resp.roles[0].permissions_boundary.permissions_boundary_arn #=> String
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
@@ -6734,6 +6856,8 @@ module Aws::IAM
     #   resp.users[0].arn #=> String
     #   resp.users[0].create_date #=> Time
     #   resp.users[0].password_last_used #=> Time
+    #   resp.users[0].permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
+    #   resp.users[0].permissions_boundary.permissions_boundary_arn #=> String
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
@@ -6823,6 +6947,8 @@ module Aws::IAM
     #   resp.virtual_mfa_devices[0].user.arn #=> String
     #   resp.virtual_mfa_devices[0].user.create_date #=> Time
     #   resp.virtual_mfa_devices[0].user.password_last_used #=> Time
+    #   resp.virtual_mfa_devices[0].user.permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
+    #   resp.virtual_mfa_devices[0].user.permissions_boundary.permissions_boundary_arn #=> String
     #   resp.virtual_mfa_devices[0].enable_date #=> Time
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
@@ -6934,6 +7060,50 @@ module Aws::IAM
       req.send_request(options)
     end
 
+    # Adds or updates the policy that is specified as the IAM role's
+    # permissions boundary. You can use an AWS managed policy or a customer
+    # managed policy to set the boundary for a role. Use the boundary to
+    # control the maximum permissions that the role can have. Setting a
+    # permissions boundary is an advanced feature that can affect the
+    # permissions for the role.
+    #
+    # You cannot set the boundary for a service-linked role.
+    #
+    # Policies used as permissions boundaries do not provide permissions.
+    # You must also attach a permissions policy to the role. To learn how
+    # the effective permissions for a role are evaluated, see [IAM JSON
+    # Policy Evaluation Logic][1] in the IAM User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
+    #
+    # @option params [required, String] :role_name
+    #   The name (friendly name, not ARN) of the IAM role for which you want
+    #   to set the permissions boundary.
+    #
+    # @option params [required, String] :permissions_boundary
+    #   The ARN of the policy that is used to set the permissions boundary for
+    #   the role.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_role_permissions_boundary({
+    #     role_name: "roleNameType", # required
+    #     permissions_boundary: "arnType", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutRolePermissionsBoundary AWS API Documentation
+    #
+    # @overload put_role_permissions_boundary(params = {})
+    # @param [Hash] params ({})
+    def put_role_permissions_boundary(params = {}, options = {})
+      req = build_request(:put_role_permissions_boundary, params)
+      req.send_request(options)
+    end
+
     # Adds or updates an inline policy document that is embedded in the
     # specified IAM role.
     #
@@ -7037,6 +7207,48 @@ module Aws::IAM
     # @param [Hash] params ({})
     def put_role_policy(params = {}, options = {})
       req = build_request(:put_role_policy, params)
+      req.send_request(options)
+    end
+
+    # Adds or updates the policy that is specified as the IAM user's
+    # permissions boundary. You can use an AWS managed policy or a customer
+    # managed policy to set the boundary for a user. Use the boundary to
+    # control the maximum permissions that the user can have. Setting a
+    # permissions boundary is an advanced feature that can affect the
+    # permissions for the user.
+    #
+    # Policies that are used as permissions boundaries do not provide
+    # permissions. You must also attach a permissions policy to the user. To
+    # learn how the effective permissions for a user are evaluated, see [IAM
+    # JSON Policy Evaluation Logic][1] in the IAM User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
+    #
+    # @option params [required, String] :user_name
+    #   The name (friendly name, not ARN) of the IAM user for which you want
+    #   to set the permissions boundary.
+    #
+    # @option params [required, String] :permissions_boundary
+    #   The ARN of the policy that is used to set the permissions boundary for
+    #   the user.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_user_permissions_boundary({
+    #     user_name: "userNameType", # required
+    #     permissions_boundary: "arnType", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutUserPermissionsBoundary AWS API Documentation
+    #
+    # @overload put_user_permissions_boundary(params = {})
+    # @param [Hash] params ({})
+    def put_user_permissions_boundary(params = {}, options = {})
+      req = build_request(:put_user_permissions_boundary, params)
       req.send_request(options)
     end
 
@@ -7583,16 +7795,21 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #
     # @option params [String] :resource_owner
-    #   An AWS account ID that specifies the owner of any simulated resource
-    #   that does not identify its owner in the resource ARN, such as an S3
-    #   bucket or object. If `ResourceOwner` is specified, it is also used as
-    #   the account owner of any `ResourcePolicy` included in the simulation.
-    #   If the `ResourceOwner` parameter is not specified, then the owner of
-    #   the resources and the resource policy defaults to the account of the
-    #   identity provided in `CallerArn`. This parameter is required only if
-    #   you specify a resource-based policy and account that owns the resource
-    #   is different from the account that owns the simulated calling user
-    #   `CallerArn`.
+    #   An ARN representing the AWS account ID that specifies the owner of any
+    #   simulated resource that does not identify its owner in the resource
+    #   ARN, such as an S3 bucket or object. If `ResourceOwner` is specified,
+    #   it is also used as the account owner of any `ResourcePolicy` included
+    #   in the simulation. If the `ResourceOwner` parameter is not specified,
+    #   then the owner of the resources and the resource policy defaults to
+    #   the account of the identity provided in `CallerArn`. This parameter is
+    #   required only if you specify a resource-based policy and account that
+    #   owns the resource is different from the account that owns the
+    #   simulated calling user `CallerArn`.
+    #
+    #   The ARN for an account uses the following syntax:
+    #   `arn:aws:iam::AWS-account-ID:root`. For example, to represent the
+    #   account with the 112233445566 ID, use the following ARN:
+    #   `arn:aws:iam::112233445566-ID:root`.
     #
     # @option params [String] :caller_arn
     #   The ARN of the IAM user that you want to use as the simulated caller
@@ -8144,7 +8361,7 @@ module Aws::IAM
     #   Specifies whether IAM user passwords must contain at least one of the
     #   following non-alphanumeric characters:
     #
-    #   ! @ # $ % ^ &amp;amp; * ( ) \_ + - = \[ \] \\\{ \\} \| '
+    #   ! @ # $ % ^ &amp; * ( ) \_ + - = \[ \] \\\{ \\} \| '
     #
     #   If you do not specify a value for this parameter, then the operation
     #   uses the default value of `false`. The result is that passwords do not
@@ -8623,6 +8840,8 @@ module Aws::IAM
     #   resp.role.assume_role_policy_document #=> String
     #   resp.role.description #=> String
     #   resp.role.max_session_duration #=> Integer
+    #   resp.role.permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
+    #   resp.role.permissions_boundary.permissions_boundary_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateRoleDescription AWS API Documentation
     #
@@ -8840,7 +9059,7 @@ module Aws::IAM
     # Sets the status of a service-specific credential to `Active` or
     # `Inactive`. Service-specific credentials that are inactive cannot be
     # used for authentication to the service. This operation can be used to
-    # disable a user’s service-specific credential as part of a credential
+    # disable a user's service-specific credential as part of a credential
     # rotation work flow.
     #
     # @option params [String] :user_name
@@ -9076,7 +9295,9 @@ module Aws::IAM
     #
     # @option params [required, String] :ssh_public_key_body
     #   The SSH public key. The public key must be encoded in ssh-rsa format
-    #   or PEM format.
+    #   or PEM format. The miminum bit-length of the public key is 2048 bits.
+    #   For example, you can generate a 2048-bit key, and the resulting PEM
+    #   file is 1679 bytes long.
     #
     #   The [regex pattern][1] used to validate this parameter is a string of
     #   characters consisting of the following:
@@ -9431,7 +9652,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

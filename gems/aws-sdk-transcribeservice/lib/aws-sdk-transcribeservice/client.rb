@@ -267,6 +267,7 @@ module Aws::TranscribeService
     #   resp.transcription_job.settings.vocabulary_name #=> String
     #   resp.transcription_job.settings.show_speaker_labels #=> Boolean
     #   resp.transcription_job.settings.max_speaker_labels #=> Integer
+    #   resp.transcription_job.settings.channel_identification #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetTranscriptionJob AWS API Documentation
     #
@@ -361,6 +362,7 @@ module Aws::TranscribeService
     #   resp.transcription_job_summaries[0].language_code #=> String, one of "en-US", "es-US"
     #   resp.transcription_job_summaries[0].transcription_job_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.transcription_job_summaries[0].failure_reason #=> String
+    #   resp.transcription_job_summaries[0].output_location_type #=> String, one of "CUSTOMER_BUCKET", "SERVICE_BUCKET"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListTranscriptionJobs AWS API Documentation
     #
@@ -430,7 +432,8 @@ module Aws::TranscribeService
     # Starts an asynchronous job to transcribe speech to text.
     #
     # @option params [required, String] :transcription_job_name
-    #   The name of the job. The name must be unique within an AWS account.
+    #   The name of the job. You can't use the strings "." or ".." in the
+    #   job name. The name must be unique within an AWS account.
     #
     # @option params [required, String] :language_code
     #   The language code for the language used in the input media file.
@@ -443,6 +446,25 @@ module Aws::TranscribeService
     #
     # @option params [required, Types::Media] :media
     #   An object that describes the input media for a transcription job.
+    #
+    # @option params [String] :output_bucket_name
+    #   The location where the transcription is stored.
+    #
+    #   If you set the `OutputBucketName`, Amazon Transcribe puts the
+    #   transcription in the specified S3 bucket. When you call the
+    #   GetTranscriptionJob operation, the operation returns this location in
+    #   the `TranscriptFileUri` field. The S3 bucket must have permissions
+    #   that allow Amazon Transcribe to put files in the bucket. For more
+    #   information, see [Permissions Required for IAM User Roles][1].
+    #
+    #   If you don't set the `OutputBucketName`, Amazon Transcribe generates
+    #   a pre-signed URL, a shareable URL that provides secure access to your
+    #   transcription, and returns it in the `TranscriptFileUri` field. Use
+    #   this URL to download the transcription.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/access-control-managing-permissions.html#auth-role-iam-user
     #
     # @option params [Types::Settings] :settings
     #   A `Settings` object that provides optional settings for a
@@ -462,10 +484,12 @@ module Aws::TranscribeService
     #     media: { # required
     #       media_file_uri: "Uri",
     #     },
+    #     output_bucket_name: "OutputBucketName",
     #     settings: {
     #       vocabulary_name: "VocabularyName",
     #       show_speaker_labels: false,
     #       max_speaker_labels: 1,
+    #       channel_identification: false,
     #     },
     #   })
     #
@@ -484,6 +508,7 @@ module Aws::TranscribeService
     #   resp.transcription_job.settings.vocabulary_name #=> String
     #   resp.transcription_job.settings.show_speaker_labels #=> Boolean
     #   resp.transcription_job.settings.max_speaker_labels #=> Integer
+    #   resp.transcription_job.settings.channel_identification #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartTranscriptionJob AWS API Documentation
     #
@@ -494,7 +519,9 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Updates an existing vocabulary with new values.
+    # Updates an existing vocabulary with new values. The `UpdateVocabulary`
+    # operation overwrites all of the existing information with the values
+    # that you provide in the request.
     #
     # @option params [required, String] :vocabulary_name
     #   The name of the vocabulary to update. The name is case-sensitive.
@@ -549,7 +576,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

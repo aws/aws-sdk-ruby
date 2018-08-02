@@ -64,6 +64,7 @@ module Aws::AppSync
     GraphQLSchemaException = Shapes::StructureShape.new(name: 'GraphQLSchemaException')
     GraphqlApi = Shapes::StructureShape.new(name: 'GraphqlApi')
     GraphqlApis = Shapes::ListShape.new(name: 'GraphqlApis')
+    HttpDataSourceConfig = Shapes::StructureShape.new(name: 'HttpDataSourceConfig')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
     LambdaDataSourceConfig = Shapes::StructureShape.new(name: 'LambdaDataSourceConfig')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -132,6 +133,7 @@ module Aws::AppSync
     CreateDataSourceRequest.add_member(:dynamodb_config, Shapes::ShapeRef.new(shape: DynamodbDataSourceConfig, location_name: "dynamodbConfig"))
     CreateDataSourceRequest.add_member(:lambda_config, Shapes::ShapeRef.new(shape: LambdaDataSourceConfig, location_name: "lambdaConfig"))
     CreateDataSourceRequest.add_member(:elasticsearch_config, Shapes::ShapeRef.new(shape: ElasticsearchDataSourceConfig, location_name: "elasticsearchConfig"))
+    CreateDataSourceRequest.add_member(:http_config, Shapes::ShapeRef.new(shape: HttpDataSourceConfig, location_name: "httpConfig"))
     CreateDataSourceRequest.struct_class = Types::CreateDataSourceRequest
 
     CreateDataSourceResponse.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "dataSource"))
@@ -174,6 +176,7 @@ module Aws::AppSync
     DataSource.add_member(:dynamodb_config, Shapes::ShapeRef.new(shape: DynamodbDataSourceConfig, location_name: "dynamodbConfig"))
     DataSource.add_member(:lambda_config, Shapes::ShapeRef.new(shape: LambdaDataSourceConfig, location_name: "lambdaConfig"))
     DataSource.add_member(:elasticsearch_config, Shapes::ShapeRef.new(shape: ElasticsearchDataSourceConfig, location_name: "elasticsearchConfig"))
+    DataSource.add_member(:http_config, Shapes::ShapeRef.new(shape: HttpDataSourceConfig, location_name: "httpConfig"))
     DataSource.struct_class = Types::DataSource
 
     DataSources.member = Shapes::ShapeRef.new(shape: DataSource)
@@ -273,6 +276,9 @@ module Aws::AppSync
     GraphqlApi.struct_class = Types::GraphqlApi
 
     GraphqlApis.member = Shapes::ShapeRef.new(shape: GraphqlApi)
+
+    HttpDataSourceConfig.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "endpoint"))
+    HttpDataSourceConfig.struct_class = Types::HttpDataSourceConfig
 
     LambdaDataSourceConfig.add_member(:lambda_function_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "lambdaFunctionArn"))
     LambdaDataSourceConfig.struct_class = Types::LambdaDataSourceConfig
@@ -379,6 +385,7 @@ module Aws::AppSync
     UpdateDataSourceRequest.add_member(:dynamodb_config, Shapes::ShapeRef.new(shape: DynamodbDataSourceConfig, location_name: "dynamodbConfig"))
     UpdateDataSourceRequest.add_member(:lambda_config, Shapes::ShapeRef.new(shape: LambdaDataSourceConfig, location_name: "lambdaConfig"))
     UpdateDataSourceRequest.add_member(:elasticsearch_config, Shapes::ShapeRef.new(shape: ElasticsearchDataSourceConfig, location_name: "elasticsearchConfig"))
+    UpdateDataSourceRequest.add_member(:http_config, Shapes::ShapeRef.new(shape: HttpDataSourceConfig, location_name: "httpConfig"))
     UpdateDataSourceRequest.struct_class = Types::UpdateDataSourceRequest
 
     UpdateDataSourceResponse.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "dataSource"))

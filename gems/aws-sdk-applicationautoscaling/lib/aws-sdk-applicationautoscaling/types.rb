@@ -80,9 +80,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         policy_name: "ResourceIdMaxLen1600", # required
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property
     #       }
     #
     # @!attribute [rw] policy_name
@@ -90,9 +90,10 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service. For more information, see [AWS
-    #   Service Namespaces][1] in the *Amazon Web Services General
-    #   Reference*.
+    #   The namespace of the AWS service that provides the resource or
+    #   `custom-resource` for a resource provided by your own application or
+    #   service. For more information, see [AWS Service Namespaces][1] in
+    #   the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -131,6 +132,11 @@ module Aws::ApplicationAutoScaling
     #   * Amazon SageMaker endpoint variants - The resource type is
     #     `variant` and the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
+    #   * Custom resources are not supported with a resource type. This
+    #     parameter must specify the `OutputValue` from the CloudFormation
+    #     template stack used to access the resources. The unique identifier
+    #     is defined by the service provider.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -167,6 +173,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
+    #
+    #   * `custom-resource:ResourceType:Property` - The scalable dimension
+    #     for a custom resource provided by your own application or service.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScalingPolicyRequest AWS API Documentation
@@ -187,16 +196,17 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource
     #         scheduled_action_name: "ResourceIdMaxLen1600", # required
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property
     #       }
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service. For more information, see [AWS
-    #   Service Namespaces][1] in the *Amazon Web Services General
-    #   Reference*.
+    #   The namespace of the AWS service that provides the resource or
+    #   `custom-resource` for a resource provided by your own application or
+    #   service. For more information, see [AWS Service Namespaces][1] in
+    #   the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -239,6 +249,11 @@ module Aws::ApplicationAutoScaling
     #   * Amazon SageMaker endpoint variants - The resource type is
     #     `variant` and the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
+    #   * Custom resources are not supported with a resource type. This
+    #     parameter must specify the `OutputValue` from the CloudFormation
+    #     template stack used to access the resources. The unique identifier
+    #     is defined by the service provider.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -275,6 +290,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
+    #
+    #   * `custom-resource:ResourceType:Property` - The scalable dimension
+    #     for a custom resource provided by your own application or service.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScheduledActionRequest AWS API Documentation
@@ -295,15 +313,16 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property
     #       }
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service. For more information, see [AWS
-    #   Service Namespaces][1] in the *Amazon Web Services General
-    #   Reference*.
+    #   The namespace of the AWS service that provides the resource or
+    #   `custom-resource` for a resource provided by your own application or
+    #   service. For more information, see [AWS Service Namespaces][1] in
+    #   the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -342,6 +361,11 @@ module Aws::ApplicationAutoScaling
     #   * Amazon SageMaker endpoint variants - The resource type is
     #     `variant` and the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
+    #   * Custom resources are not supported with a resource type. This
+    #     parameter must specify the `OutputValue` from the CloudFormation
+    #     template stack used to access the resources. The unique identifier
+    #     is defined by the service provider.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -379,6 +403,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
+    #
+    #   * `custom-resource:ResourceType:Property` - The scalable dimension
+    #     for a custom resource provided by your own application or service.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeregisterScalableTargetRequest AWS API Documentation
@@ -398,17 +425,18 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource
     #         resource_ids: ["ResourceIdMaxLen1600"],
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service. For more information, see [AWS
-    #   Service Namespaces][1] in the *Amazon Web Services General
-    #   Reference*.
+    #   The namespace of the AWS service that provides the resource or
+    #   `custom-resource` for a resource provided by your own application or
+    #   service. For more information, see [AWS Service Namespaces][1] in
+    #   the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -449,6 +477,11 @@ module Aws::ApplicationAutoScaling
     #   * Amazon SageMaker endpoint variants - The resource type is
     #     `variant` and the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
+    #   * Custom resources are not supported with a resource type. This
+    #     parameter must specify the `OutputValue` from the CloudFormation
+    #     template stack used to access the resources. The unique identifier
+    #     is defined by the service provider.
     #   @return [Array<String>]
     #
     # @!attribute [rw] scalable_dimension
@@ -487,6 +520,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
+    #
+    #   * `custom-resource:ResourceType:Property` - The scalable dimension
+    #     for a custom resource provided by your own application or service.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -536,17 +572,18 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource
     #         resource_id: "ResourceIdMaxLen1600",
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service. For more information, see [AWS
-    #   Service Namespaces][1] in the *Amazon Web Services General
-    #   Reference*.
+    #   The namespace of the AWS service that provides the resource or
+    #   `custom-resource` for a resource provided by your own application or
+    #   service. For more information, see [AWS Service Namespaces][1] in
+    #   the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -587,6 +624,11 @@ module Aws::ApplicationAutoScaling
     #   * Amazon SageMaker endpoint variants - The resource type is
     #     `variant` and the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
+    #   * Custom resources are not supported with a resource type. This
+    #     parameter must specify the `OutputValue` from the CloudFormation
+    #     template stack used to access the resources. The unique identifier
+    #     is defined by the service provider.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -624,6 +666,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
+    #
+    #   * `custom-resource:ResourceType:Property` - The scalable dimension
+    #     for a custom resource provided by your own application or service.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -674,9 +719,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         policy_names: ["ResourceIdMaxLen1600"],
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource
     #         resource_id: "ResourceIdMaxLen1600",
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -686,9 +731,10 @@ module Aws::ApplicationAutoScaling
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service. For more information, see [AWS
-    #   Service Namespaces][1] in the *Amazon Web Services General
-    #   Reference*.
+    #   The namespace of the AWS service that provides the resource or
+    #   `custom-resource` for a resource provided by your own application or
+    #   service. For more information, see [AWS Service Namespaces][1] in
+    #   the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -729,6 +775,11 @@ module Aws::ApplicationAutoScaling
     #   * Amazon SageMaker endpoint variants - The resource type is
     #     `variant` and the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
+    #   * Custom resources are not supported with a resource type. This
+    #     parameter must specify the `OutputValue` from the CloudFormation
+    #     template stack used to access the resources. The unique identifier
+    #     is defined by the service provider.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -766,6 +817,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
+    #
+    #   * `custom-resource:ResourceType:Property` - The scalable dimension
+    #     for a custom resource provided by your own application or service.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -817,9 +871,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         scheduled_action_names: ["ResourceIdMaxLen1600"],
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource
     #         resource_id: "ResourceIdMaxLen1600",
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -829,9 +883,10 @@ module Aws::ApplicationAutoScaling
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service. For more information, see [AWS
-    #   Service Namespaces][1] in the *Amazon Web Services General
-    #   Reference*.
+    #   The namespace of the AWS service that provides the resource or
+    #   `custom-resource` for a resource provided by your own application or
+    #   service. For more information, see [AWS Service Namespaces][1] in
+    #   the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -872,6 +927,11 @@ module Aws::ApplicationAutoScaling
     #   * Amazon SageMaker endpoint variants - The resource type is
     #     `variant` and the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
+    #   * Custom resources are not supported with a resource type. This
+    #     parameter must specify the `OutputValue` from the CloudFormation
+    #     template stack used to access the resources. The unique identifier
+    #     is defined by the service provider.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -909,6 +969,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
+    #
+    #   * `custom-resource:ResourceType:Property` - The scalable dimension
+    #     for a custom resource provided by your own application or service.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1026,9 +1089,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         policy_name: "PolicyName", # required
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property
     #         policy_type: "StepScaling", # accepts StepScaling, TargetTrackingScaling
     #         step_scaling_policy_configuration: {
     #           adjustment_type: "ChangeInCapacity", # accepts ChangeInCapacity, PercentChangeInCapacity, ExactCapacity
@@ -1072,9 +1135,10 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service. For more information, see [AWS
-    #   Service Namespaces][1] in the *Amazon Web Services General
-    #   Reference*.
+    #   The namespace of the AWS service that provides the resource or
+    #   `custom-resource` for a resource provided by your own application or
+    #   service. For more information, see [AWS Service Namespaces][1] in
+    #   the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -1113,6 +1177,11 @@ module Aws::ApplicationAutoScaling
     #   * Amazon SageMaker endpoint variants - The resource type is
     #     `variant` and the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
+    #   * Custom resources are not supported with a resource type. This
+    #     parameter must specify the `OutputValue` from the CloudFormation
+    #     template stack used to access the resources. The unique identifier
+    #     is defined by the service provider.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -1149,6 +1218,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
+    #
+    #   * `custom-resource:ResourceType:Property` - The scalable dimension
+    #     for a custom resource provided by your own application or service.
     #   @return [String]
     #
     # @!attribute [rw] policy_type
@@ -1208,11 +1280,11 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource
     #         schedule: "ResourceIdMaxLen1600",
     #         scheduled_action_name: "ScheduledActionName", # required
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property
     #         start_time: Time.now,
     #         end_time: Time.now,
     #         scalable_target_action: {
@@ -1222,9 +1294,10 @@ module Aws::ApplicationAutoScaling
     #       }
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service. For more information, see [AWS
-    #   Service Namespaces][1] in the *Amazon Web Services General
-    #   Reference*.
+    #   The namespace of the AWS service that provides the resource or
+    #   `custom-resource` for a resource provided by your own application or
+    #   service. For more information, see [AWS Service Namespaces][1] in
+    #   the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -1246,11 +1319,12 @@ module Aws::ApplicationAutoScaling
     #   For rate expressions, *value* is a positive integer and *unit* is
     #   `minute` \| `minutes` \| `hour` \| `hours` \| `day` \| `days`.
     #
-    #   For more information about cron expressions, see [Cron][1].
+    #   For more information about cron expressions, see [Cron
+    #   Expressions][1] in the *Amazon CloudWatch Events User Guide*.
     #
     #
     #
-    #   [1]: https://en.wikipedia.org/wiki/Cron
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
     #   @return [String]
     #
     # @!attribute [rw] scheduled_action_name
@@ -1289,6 +1363,11 @@ module Aws::ApplicationAutoScaling
     #   * Amazon SageMaker endpoint variants - The resource type is
     #     `variant` and the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
+    #   * Custom resources are not supported with a resource type. This
+    #     parameter must specify the `OutputValue` from the CloudFormation
+    #     template stack used to access the resources. The unique identifier
+    #     is defined by the service provider.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -1326,6 +1405,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
+    #
+    #   * `custom-resource:ResourceType:Property` - The scalable dimension
+    #     for a custom resource provided by your own application or service.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -1367,18 +1449,19 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property
     #         min_capacity: 1,
     #         max_capacity: 1,
     #         role_arn: "ResourceIdMaxLen1600",
     #       }
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service. For more information, see [AWS
-    #   Service Namespaces][1] in the *Amazon Web Services General
-    #   Reference*.
+    #   The namespace of the AWS service that provides the resource or
+    #   `custom-resource` for a resource provided by your own application or
+    #   service. For more information, see [AWS Service Namespaces][1] in
+    #   the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -1417,6 +1500,11 @@ module Aws::ApplicationAutoScaling
     #   * Amazon SageMaker endpoint variants - The resource type is
     #     `variant` and the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
+    #   * Custom resources are not supported with a resource type. This
+    #     parameter must specify the `OutputValue` from the CloudFormation
+    #     template stack used to access the resources. The unique identifier
+    #     is defined by the service provider.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -1454,6 +1542,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
+    #
+    #   * `custom-resource:ResourceType:Property` - The scalable dimension
+    #     for a custom resource provided by your own application or service.
     #   @return [String]
     #
     # @!attribute [rw] min_capacity
@@ -1479,7 +1570,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/application-autoscaling-service-linked-roles.html
+    #   [1]: http://docs.aws.amazon.com/autoscaling/application/userguide/application-autoscaling-service-linked-roles.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/RegisterScalableTargetRequest AWS API Documentation
@@ -1501,9 +1592,10 @@ module Aws::ApplicationAutoScaling
     # Represents a scalable target.
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service. For more information, see [AWS
-    #   Service Namespaces][1] in the *Amazon Web Services General
-    #   Reference*.
+    #   The namespace of the AWS service that provides the resource or
+    #   `custom-resource` for a resource provided by your own application or
+    #   service. For more information, see [AWS Service Namespaces][1] in
+    #   the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -1542,6 +1634,11 @@ module Aws::ApplicationAutoScaling
     #   * Amazon SageMaker endpoint variants - The resource type is
     #     `variant` and the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
+    #   * Custom resources are not supported with a resource type. This
+    #     parameter must specify the `OutputValue` from the CloudFormation
+    #     template stack used to access the resources. The unique identifier
+    #     is defined by the service provider.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -1579,6 +1676,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
+    #
+    #   * `custom-resource:ResourceType:Property` - The scalable dimension
+    #     for a custom resource provided by your own application or service.
     #   @return [String]
     #
     # @!attribute [rw] min_capacity
@@ -1644,9 +1744,10 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service. For more information, see [AWS
-    #   Service Namespaces][1] in the *Amazon Web Services General
-    #   Reference*.
+    #   The namespace of the AWS service that provides the resource or
+    #   `custom-resource` for a resource provided by your own application or
+    #   service. For more information, see [AWS Service Namespaces][1] in
+    #   the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -1685,6 +1786,11 @@ module Aws::ApplicationAutoScaling
     #   * Amazon SageMaker endpoint variants - The resource type is
     #     `variant` and the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
+    #   * Custom resources are not supported with a resource type. This
+    #     parameter must specify the `OutputValue` from the CloudFormation
+    #     template stack used to access the resources. The unique identifier
+    #     is defined by the service provider.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -1721,6 +1827,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
+    #
+    #   * `custom-resource:ResourceType:Property` - The scalable dimension
+    #     for a custom resource provided by your own application or service.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1780,9 +1889,10 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service. For more information, see [AWS
-    #   Service Namespaces][1] in the *Amazon Web Services General
-    #   Reference*.
+    #   The namespace of the AWS service that provides the resource or
+    #   `custom-resource` for a resource provided by your own application or
+    #   service. For more information, see [AWS Service Namespaces][1] in
+    #   the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -1821,6 +1931,11 @@ module Aws::ApplicationAutoScaling
     #   * Amazon SageMaker endpoint variants - The resource type is
     #     `variant` and the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
+    #   * Custom resources are not supported with a resource type. This
+    #     parameter must specify the `OutputValue` from the CloudFormation
+    #     template stack used to access the resources. The unique identifier
+    #     is defined by the service provider.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -1857,6 +1972,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
+    #
+    #   * `custom-resource:ResourceType:Property` - The scalable dimension
+    #     for a custom resource provided by your own application or service.
     #   @return [String]
     #
     # @!attribute [rw] policy_type
@@ -1906,9 +2024,10 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service. For more information, see [AWS
-    #   Service Namespaces][1] in the *Amazon Web Services General
-    #   Reference*.
+    #   The namespace of the AWS service that provides the resource or
+    #   `custom-resource` for a resource provided by your own application or
+    #   service. For more information, see [AWS Service Namespaces][1] in
+    #   the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -1930,11 +2049,12 @@ module Aws::ApplicationAutoScaling
     #   For rate expressions, *value* is a positive integer and *unit* is
     #   `minute` \| `minutes` \| `hour` \| `hours` \| `day` \| `days`.
     #
-    #   For more information about cron expressions, see [Cron][1].
+    #   For more information about cron expressions, see [Cron
+    #   Expressions][1] in the *Amazon CloudWatch Events User Guide*.
     #
     #
     #
-    #   [1]: https://en.wikipedia.org/wiki/Cron
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -1969,6 +2089,11 @@ module Aws::ApplicationAutoScaling
     #   * Amazon SageMaker endpoint variants - The resource type is
     #     `variant` and the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
+    #   * Custom resources are not supported with a resource type. This
+    #     parameter must specify the `OutputValue` from the CloudFormation
+    #     template stack used to access the resources. The unique identifier
+    #     is defined by the service provider.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -2005,6 +2130,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
+    #
+    #   * `custom-resource:ResourceType:Property` - The scalable dimension
+    #     for a custom resource provided by your own application or service.
     #   @return [String]
     #
     # @!attribute [rw] start_time

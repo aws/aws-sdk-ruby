@@ -219,6 +219,12 @@ module Aws::APIGateway
     #       {
     #         api_id: "String",
     #         stage: "String",
+    #         throttle: {
+    #           "String" => {
+    #             burst_limit: 1,
+    #             rate_limit: 1.0,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] api_id
@@ -229,9 +235,15 @@ module Aws::APIGateway
     #   API stage name of the associated API stage in a usage plan.
     #   @return [String]
     #
+    # @!attribute [rw] throttle
+    #   Map containing method level throttling information for API stage in
+    #   a usage plan.
+    #   @return [Hash<String,Types::ThrottleSettings>]
+    #
     class ApiStage < Struct.new(
       :api_id,
-      :stage)
+      :stage,
+      :throttle)
       include Aws::Structure
     end
 
@@ -1342,6 +1354,12 @@ module Aws::APIGateway
     #           {
     #             api_id: "String",
     #             stage: "String",
+    #             throttle: {
+    #               "String" => {
+    #                 burst_limit: 1,
+    #                 rate_limit: 1.0,
+    #               },
+    #             },
     #           },
     #         ],
     #         throttle: {

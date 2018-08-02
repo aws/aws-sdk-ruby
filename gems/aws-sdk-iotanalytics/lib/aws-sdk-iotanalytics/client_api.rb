@@ -27,6 +27,7 @@ module Aws::IoTAnalytics
     ChannelActivity = Shapes::StructureShape.new(name: 'ChannelActivity')
     ChannelArn = Shapes::StringShape.new(name: 'ChannelArn')
     ChannelName = Shapes::StringShape.new(name: 'ChannelName')
+    ChannelStatistics = Shapes::StructureShape.new(name: 'ChannelStatistics')
     ChannelStatus = Shapes::StringShape.new(name: 'ChannelStatus')
     ChannelSummaries = Shapes::ListShape.new(name: 'ChannelSummaries')
     ChannelSummary = Shapes::StructureShape.new(name: 'ChannelSummary')
@@ -59,6 +60,7 @@ module Aws::IoTAnalytics
     DatastoreActivity = Shapes::StructureShape.new(name: 'DatastoreActivity')
     DatastoreArn = Shapes::StringShape.new(name: 'DatastoreArn')
     DatastoreName = Shapes::StringShape.new(name: 'DatastoreName')
+    DatastoreStatistics = Shapes::StructureShape.new(name: 'DatastoreStatistics')
     DatastoreStatus = Shapes::StringShape.new(name: 'DatastoreStatus')
     DatastoreSummaries = Shapes::ListShape.new(name: 'DatastoreSummaries')
     DatastoreSummary = Shapes::StructureShape.new(name: 'DatastoreSummary')
@@ -83,10 +85,12 @@ module Aws::IoTAnalytics
     EntryName = Shapes::StringShape.new(name: 'EntryName')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    EstimatedResourceSize = Shapes::StructureShape.new(name: 'EstimatedResourceSize')
     FilterActivity = Shapes::StructureShape.new(name: 'FilterActivity')
     FilterExpression = Shapes::StringShape.new(name: 'FilterExpression')
     GetDatasetContentRequest = Shapes::StructureShape.new(name: 'GetDatasetContentRequest')
     GetDatasetContentResponse = Shapes::StructureShape.new(name: 'GetDatasetContentResponse')
+    IncludeStatisticsFlag = Shapes::BooleanShape.new(name: 'IncludeStatisticsFlag')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     LambdaActivity = Shapes::StructureShape.new(name: 'LambdaActivity')
@@ -145,6 +149,7 @@ module Aws::IoTAnalytics
     ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
     SelectAttributesActivity = Shapes::StructureShape.new(name: 'SelectAttributesActivity')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
+    SizeInBytes = Shapes::FloatShape.new(name: 'SizeInBytes')
     SqlQuery = Shapes::StringShape.new(name: 'SqlQuery')
     SqlQueryDatasetAction = Shapes::StructureShape.new(name: 'SqlQueryDatasetAction')
     StartPipelineReprocessingRequest = Shapes::StructureShape.new(name: 'StartPipelineReprocessingRequest')
@@ -212,6 +217,9 @@ module Aws::IoTAnalytics
     ChannelActivity.add_member(:channel_name, Shapes::ShapeRef.new(shape: ChannelName, required: true, location_name: "channelName"))
     ChannelActivity.add_member(:next, Shapes::ShapeRef.new(shape: ActivityName, location_name: "next"))
     ChannelActivity.struct_class = Types::ChannelActivity
+
+    ChannelStatistics.add_member(:size, Shapes::ShapeRef.new(shape: EstimatedResourceSize, location_name: "size"))
+    ChannelStatistics.struct_class = Types::ChannelStatistics
 
     ChannelSummaries.member = Shapes::ShapeRef.new(shape: ChannelSummary)
 
@@ -313,6 +321,9 @@ module Aws::IoTAnalytics
     DatastoreActivity.add_member(:datastore_name, Shapes::ShapeRef.new(shape: DatastoreName, required: true, location_name: "datastoreName"))
     DatastoreActivity.struct_class = Types::DatastoreActivity
 
+    DatastoreStatistics.add_member(:size, Shapes::ShapeRef.new(shape: EstimatedResourceSize, location_name: "size"))
+    DatastoreStatistics.struct_class = Types::DatastoreStatistics
+
     DatastoreSummaries.member = Shapes::ShapeRef.new(shape: DatastoreSummary)
 
     DatastoreSummary.add_member(:datastore_name, Shapes::ShapeRef.new(shape: DatastoreName, location_name: "datastoreName"))
@@ -338,9 +349,11 @@ module Aws::IoTAnalytics
     DeletePipelineRequest.struct_class = Types::DeletePipelineRequest
 
     DescribeChannelRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: ChannelName, required: true, location: "uri", location_name: "channelName"))
+    DescribeChannelRequest.add_member(:include_statistics, Shapes::ShapeRef.new(shape: IncludeStatisticsFlag, location: "querystring", location_name: "includeStatistics"))
     DescribeChannelRequest.struct_class = Types::DescribeChannelRequest
 
     DescribeChannelResponse.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
+    DescribeChannelResponse.add_member(:statistics, Shapes::ShapeRef.new(shape: ChannelStatistics, location_name: "statistics"))
     DescribeChannelResponse.struct_class = Types::DescribeChannelResponse
 
     DescribeDatasetRequest.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetName, required: true, location: "uri", location_name: "datasetName"))
@@ -350,9 +363,11 @@ module Aws::IoTAnalytics
     DescribeDatasetResponse.struct_class = Types::DescribeDatasetResponse
 
     DescribeDatastoreRequest.add_member(:datastore_name, Shapes::ShapeRef.new(shape: DatastoreName, required: true, location: "uri", location_name: "datastoreName"))
+    DescribeDatastoreRequest.add_member(:include_statistics, Shapes::ShapeRef.new(shape: IncludeStatisticsFlag, location: "querystring", location_name: "includeStatistics"))
     DescribeDatastoreRequest.struct_class = Types::DescribeDatastoreRequest
 
     DescribeDatastoreResponse.add_member(:datastore, Shapes::ShapeRef.new(shape: Datastore, location_name: "datastore"))
+    DescribeDatastoreResponse.add_member(:statistics, Shapes::ShapeRef.new(shape: DatastoreStatistics, location_name: "statistics"))
     DescribeDatastoreResponse.struct_class = Types::DescribeDatastoreResponse
 
     DescribeLoggingOptionsRequest.struct_class = Types::DescribeLoggingOptionsRequest
@@ -379,6 +394,10 @@ module Aws::IoTAnalytics
     DeviceShadowEnrichActivity.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     DeviceShadowEnrichActivity.add_member(:next, Shapes::ShapeRef.new(shape: ActivityName, location_name: "next"))
     DeviceShadowEnrichActivity.struct_class = Types::DeviceShadowEnrichActivity
+
+    EstimatedResourceSize.add_member(:estimated_size_in_bytes, Shapes::ShapeRef.new(shape: SizeInBytes, location_name: "estimatedSizeInBytes"))
+    EstimatedResourceSize.add_member(:estimated_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "estimatedOn"))
+    EstimatedResourceSize.struct_class = Types::EstimatedResourceSize
 
     FilterActivity.add_member(:name, Shapes::ShapeRef.new(shape: ActivityName, required: true, location_name: "name"))
     FilterActivity.add_member(:filter, Shapes::ShapeRef.new(shape: FilterExpression, required: true, location_name: "filter"))

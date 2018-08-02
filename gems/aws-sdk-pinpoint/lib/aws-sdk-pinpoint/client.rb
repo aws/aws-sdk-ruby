@@ -216,6 +216,7 @@ module Aws::Pinpoint
     #               media_url: "__string",
     #               raw_content: "__string",
     #               silent_push: false,
+    #               time_to_live: 1,
     #               title: "__string",
     #               url: "__string",
     #             },
@@ -229,6 +230,7 @@ module Aws::Pinpoint
     #               media_url: "__string",
     #               raw_content: "__string",
     #               silent_push: false,
+    #               time_to_live: 1,
     #               title: "__string",
     #               url: "__string",
     #             },
@@ -242,6 +244,7 @@ module Aws::Pinpoint
     #               media_url: "__string",
     #               raw_content: "__string",
     #               silent_push: false,
+    #               time_to_live: 1,
     #               title: "__string",
     #               url: "__string",
     #             },
@@ -255,6 +258,7 @@ module Aws::Pinpoint
     #               media_url: "__string",
     #               raw_content: "__string",
     #               silent_push: false,
+    #               time_to_live: 1,
     #               title: "__string",
     #               url: "__string",
     #             },
@@ -274,6 +278,7 @@ module Aws::Pinpoint
     #               media_url: "__string",
     #               raw_content: "__string",
     #               silent_push: false,
+    #               time_to_live: 1,
     #               title: "__string",
     #               url: "__string",
     #             },
@@ -324,6 +329,7 @@ module Aws::Pinpoint
     #           media_url: "__string",
     #           raw_content: "__string",
     #           silent_push: false,
+    #           time_to_live: 1,
     #           title: "__string",
     #           url: "__string",
     #         },
@@ -337,6 +343,7 @@ module Aws::Pinpoint
     #           media_url: "__string",
     #           raw_content: "__string",
     #           silent_push: false,
+    #           time_to_live: 1,
     #           title: "__string",
     #           url: "__string",
     #         },
@@ -350,6 +357,7 @@ module Aws::Pinpoint
     #           media_url: "__string",
     #           raw_content: "__string",
     #           silent_push: false,
+    #           time_to_live: 1,
     #           title: "__string",
     #           url: "__string",
     #         },
@@ -363,6 +371,7 @@ module Aws::Pinpoint
     #           media_url: "__string",
     #           raw_content: "__string",
     #           silent_push: false,
+    #           time_to_live: 1,
     #           title: "__string",
     #           url: "__string",
     #         },
@@ -382,6 +391,7 @@ module Aws::Pinpoint
     #           media_url: "__string",
     #           raw_content: "__string",
     #           silent_push: false,
+    #           time_to_live: 1,
     #           title: "__string",
     #           url: "__string",
     #         },
@@ -423,6 +433,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.media_url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.raw_content #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -434,6 +445,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.media_url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.raw_content #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -445,6 +457,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.media_url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.raw_content #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -456,6 +469,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.media_url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.raw_content #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.body #=> String
@@ -471,6 +485,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.media_url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.raw_content #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.body #=> String
@@ -484,12 +499,12 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].schedule.start_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.timezone #=> String
     #   resp.campaign_response.additional_treatments[0].size_percent #=> Integer
-    #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
+    #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
     #   resp.campaign_response.creation_date #=> String
-    #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
+    #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
     #   resp.campaign_response.hook.lambda_function_name #=> String
@@ -511,6 +526,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.adm_message.media_url #=> String
     #   resp.campaign_response.message_configuration.adm_message.raw_content #=> String
     #   resp.campaign_response.message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.adm_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.adm_message.title #=> String
     #   resp.campaign_response.message_configuration.adm_message.url #=> String
     #   resp.campaign_response.message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -522,6 +538,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.apns_message.media_url #=> String
     #   resp.campaign_response.message_configuration.apns_message.raw_content #=> String
     #   resp.campaign_response.message_configuration.apns_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.apns_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.apns_message.title #=> String
     #   resp.campaign_response.message_configuration.apns_message.url #=> String
     #   resp.campaign_response.message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -533,6 +550,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.baidu_message.media_url #=> String
     #   resp.campaign_response.message_configuration.baidu_message.raw_content #=> String
     #   resp.campaign_response.message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.baidu_message.title #=> String
     #   resp.campaign_response.message_configuration.baidu_message.url #=> String
     #   resp.campaign_response.message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -544,6 +562,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.default_message.media_url #=> String
     #   resp.campaign_response.message_configuration.default_message.raw_content #=> String
     #   resp.campaign_response.message_configuration.default_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.default_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.default_message.title #=> String
     #   resp.campaign_response.message_configuration.default_message.url #=> String
     #   resp.campaign_response.message_configuration.email_message.body #=> String
@@ -559,6 +578,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.gcm_message.media_url #=> String
     #   resp.campaign_response.message_configuration.gcm_message.raw_content #=> String
     #   resp.campaign_response.message_configuration.gcm_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.gcm_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.gcm_message.title #=> String
     #   resp.campaign_response.message_configuration.gcm_message.url #=> String
     #   resp.campaign_response.message_configuration.sms_message.body #=> String
@@ -574,7 +594,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.schedule.timezone #=> String
     #   resp.campaign_response.segment_id #=> String
     #   resp.campaign_response.segment_version #=> Integer
-    #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
+    #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -593,6 +613,7 @@ module Aws::Pinpoint
     # @option params [required, String] :application_id
     #
     # @option params [required, Types::ExportJobRequest] :export_job_request
+    #   Export job request.
     #
     # @return [Types::CreateExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -606,6 +627,7 @@ module Aws::Pinpoint
     #       role_arn: "__string",
     #       s3_url_prefix: "__string",
     #       segment_id: "__string",
+    #       segment_version: 1,
     #     },
     #   })
     #
@@ -618,6 +640,7 @@ module Aws::Pinpoint
     #   resp.export_job_response.definition.role_arn #=> String
     #   resp.export_job_response.definition.s3_url_prefix #=> String
     #   resp.export_job_response.definition.segment_id #=> String
+    #   resp.export_job_response.definition.segment_version #=> Integer
     #   resp.export_job_response.failed_pieces #=> Integer
     #   resp.export_job_response.failures #=> Array
     #   resp.export_job_response.failures[0] #=> String
@@ -642,6 +665,7 @@ module Aws::Pinpoint
     # @option params [required, String] :application_id
     #
     # @option params [required, Types::ImportJobRequest] :import_job_request
+    #   Import job request.
     #
     # @return [Types::CreateImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -756,6 +780,19 @@ module Aws::Pinpoint
     #             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
     #             values: ["__string"],
     #           },
+    #           gps_point: {
+    #             coordinates: {
+    #               latitude: 1.0,
+    #               longitude: 1.0,
+    #             },
+    #             range_in_kilometers: 1.0,
+    #           },
+    #         },
+    #         metrics: {
+    #           "__string" => {
+    #             comparison_operator: "__string",
+    #             value: 1.0,
+    #           },
     #         },
     #         user_attributes: {
     #           "__string" => {
@@ -765,6 +802,88 @@ module Aws::Pinpoint
     #         },
     #       },
     #       name: "__string",
+    #       segment_groups: {
+    #         groups: [
+    #           {
+    #             dimensions: [
+    #               {
+    #                 attributes: {
+    #                   "__string" => {
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"],
+    #                   },
+    #                 },
+    #                 behavior: {
+    #                   recency: {
+    #                     duration: "HR_24", # accepts HR_24, DAY_7, DAY_14, DAY_30
+    #                     recency_type: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #                   },
+    #                 },
+    #                 demographic: {
+    #                   app_version: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"],
+    #                   },
+    #                   channel: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"],
+    #                   },
+    #                   device_type: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"],
+    #                   },
+    #                   make: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"],
+    #                   },
+    #                   model: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"],
+    #                   },
+    #                   platform: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"],
+    #                   },
+    #                 },
+    #                 location: {
+    #                   country: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"],
+    #                   },
+    #                   gps_point: {
+    #                     coordinates: {
+    #                       latitude: 1.0,
+    #                       longitude: 1.0,
+    #                     },
+    #                     range_in_kilometers: 1.0,
+    #                   },
+    #                 },
+    #                 metrics: {
+    #                   "__string" => {
+    #                     comparison_operator: "__string",
+    #                     value: 1.0,
+    #                   },
+    #                 },
+    #                 user_attributes: {
+    #                   "__string" => {
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"],
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #             source_segments: [
+    #               {
+    #                 id: "__string",
+    #                 version: 1,
+    #               },
+    #             ],
+    #             source_type: "ALL", # accepts ALL, ANY
+    #             type: "ALL", # accepts ALL, ANY, NONE
+    #           },
+    #         ],
+    #         include: "ALL", # accepts ALL, ANY, NONE
+    #       },
     #     },
     #   })
     #
@@ -799,6 +918,12 @@ module Aws::Pinpoint
     #   resp.segment_response.dimensions.location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
     #   resp.segment_response.dimensions.location.country.values #=> Array
     #   resp.segment_response.dimensions.location.country.values[0] #=> String
+    #   resp.segment_response.dimensions.location.gps_point.coordinates.latitude #=> Float
+    #   resp.segment_response.dimensions.location.gps_point.coordinates.longitude #=> Float
+    #   resp.segment_response.dimensions.location.gps_point.range_in_kilometers #=> Float
+    #   resp.segment_response.dimensions.metrics #=> Hash
+    #   resp.segment_response.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.segment_response.dimensions.metrics["__string"].value #=> Float
     #   resp.segment_response.dimensions.user_attributes #=> Hash
     #   resp.segment_response.dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
     #   resp.segment_response.dimensions.user_attributes["__string"].values #=> Array
@@ -813,6 +938,51 @@ module Aws::Pinpoint
     #   resp.segment_response.import_definition.size #=> Integer
     #   resp.segment_response.last_modified_date #=> String
     #   resp.segment_response.name #=> String
+    #   resp.segment_response.segment_groups.groups #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes #=> Hash
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].behavior.recency.recency_type #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.app_version.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.app_version.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.app_version.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.channel.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.channel.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.channel.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.device_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.device_type.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.device_type.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.make.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.make.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.make.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.model.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.model.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.model.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.platform.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.platform.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.platform.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.country.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.country.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.gps_point.coordinates.latitude #=> Float
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.gps_point.coordinates.longitude #=> Float
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.gps_point.range_in_kilometers #=> Float
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].metrics #=> Hash
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].metrics["__string"].comparison_operator #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].metrics["__string"].value #=> Float
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes #=> Hash
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].source_segments #=> Array
+    #   resp.segment_response.segment_groups.groups[0].source_segments[0].id #=> String
+    #   resp.segment_response.segment_groups.groups[0].source_segments[0].version #=> Integer
+    #   resp.segment_response.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY"
+    #   resp.segment_response.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
+    #   resp.segment_response.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
     #   resp.segment_response.version #=> Integer
     #
@@ -825,7 +995,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Delete an ADM channel
+    # Delete an ADM channel.
     #
     # @option params [required, String] :application_id
     #
@@ -899,7 +1069,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Delete an APNS sandbox channel
+    # Delete an APNS sandbox channel.
     #
     # @option params [required, String] :application_id
     #
@@ -1108,6 +1278,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.media_url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.raw_content #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -1119,6 +1290,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.media_url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.raw_content #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -1130,6 +1302,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.media_url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.raw_content #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -1141,6 +1314,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.media_url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.raw_content #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.body #=> String
@@ -1156,6 +1330,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.media_url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.raw_content #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.body #=> String
@@ -1169,12 +1344,12 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].schedule.start_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.timezone #=> String
     #   resp.campaign_response.additional_treatments[0].size_percent #=> Integer
-    #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
+    #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
     #   resp.campaign_response.creation_date #=> String
-    #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
+    #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
     #   resp.campaign_response.hook.lambda_function_name #=> String
@@ -1196,6 +1371,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.adm_message.media_url #=> String
     #   resp.campaign_response.message_configuration.adm_message.raw_content #=> String
     #   resp.campaign_response.message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.adm_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.adm_message.title #=> String
     #   resp.campaign_response.message_configuration.adm_message.url #=> String
     #   resp.campaign_response.message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -1207,6 +1383,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.apns_message.media_url #=> String
     #   resp.campaign_response.message_configuration.apns_message.raw_content #=> String
     #   resp.campaign_response.message_configuration.apns_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.apns_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.apns_message.title #=> String
     #   resp.campaign_response.message_configuration.apns_message.url #=> String
     #   resp.campaign_response.message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -1218,6 +1395,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.baidu_message.media_url #=> String
     #   resp.campaign_response.message_configuration.baidu_message.raw_content #=> String
     #   resp.campaign_response.message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.baidu_message.title #=> String
     #   resp.campaign_response.message_configuration.baidu_message.url #=> String
     #   resp.campaign_response.message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -1229,6 +1407,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.default_message.media_url #=> String
     #   resp.campaign_response.message_configuration.default_message.raw_content #=> String
     #   resp.campaign_response.message_configuration.default_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.default_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.default_message.title #=> String
     #   resp.campaign_response.message_configuration.default_message.url #=> String
     #   resp.campaign_response.message_configuration.email_message.body #=> String
@@ -1244,6 +1423,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.gcm_message.media_url #=> String
     #   resp.campaign_response.message_configuration.gcm_message.raw_content #=> String
     #   resp.campaign_response.message_configuration.gcm_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.gcm_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.gcm_message.title #=> String
     #   resp.campaign_response.message_configuration.gcm_message.url #=> String
     #   resp.campaign_response.message_configuration.sms_message.body #=> String
@@ -1259,7 +1439,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.schedule.timezone #=> String
     #   resp.campaign_response.segment_id #=> String
     #   resp.campaign_response.segment_version #=> Integer
-    #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
+    #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -1273,7 +1453,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Delete an email channel
+    # Delete an email channel.
     #
     # @option params [required, String] :application_id
     #
@@ -1299,6 +1479,7 @@ module Aws::Pinpoint
     #   resp.email_channel_response.is_archived #=> Boolean
     #   resp.email_channel_response.last_modified_by #=> String
     #   resp.email_channel_response.last_modified_date #=> String
+    #   resp.email_channel_response.messages_per_second #=> Integer
     #   resp.email_channel_response.platform #=> String
     #   resp.email_channel_response.role_arn #=> String
     #   resp.email_channel_response.version #=> Integer
@@ -1377,7 +1558,6 @@ module Aws::Pinpoint
     # Deletes the event stream for an app.
     #
     # @option params [required, String] :application_id
-    #   Application Id.
     #
     # @return [Types::DeleteEventStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1492,6 +1672,12 @@ module Aws::Pinpoint
     #   resp.segment_response.dimensions.location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
     #   resp.segment_response.dimensions.location.country.values #=> Array
     #   resp.segment_response.dimensions.location.country.values[0] #=> String
+    #   resp.segment_response.dimensions.location.gps_point.coordinates.latitude #=> Float
+    #   resp.segment_response.dimensions.location.gps_point.coordinates.longitude #=> Float
+    #   resp.segment_response.dimensions.location.gps_point.range_in_kilometers #=> Float
+    #   resp.segment_response.dimensions.metrics #=> Hash
+    #   resp.segment_response.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.segment_response.dimensions.metrics["__string"].value #=> Float
     #   resp.segment_response.dimensions.user_attributes #=> Hash
     #   resp.segment_response.dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
     #   resp.segment_response.dimensions.user_attributes["__string"].values #=> Array
@@ -1506,6 +1692,51 @@ module Aws::Pinpoint
     #   resp.segment_response.import_definition.size #=> Integer
     #   resp.segment_response.last_modified_date #=> String
     #   resp.segment_response.name #=> String
+    #   resp.segment_response.segment_groups.groups #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes #=> Hash
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].behavior.recency.recency_type #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.app_version.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.app_version.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.app_version.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.channel.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.channel.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.channel.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.device_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.device_type.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.device_type.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.make.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.make.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.make.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.model.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.model.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.model.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.platform.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.platform.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.platform.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.country.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.country.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.gps_point.coordinates.latitude #=> Float
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.gps_point.coordinates.longitude #=> Float
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.gps_point.range_in_kilometers #=> Float
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].metrics #=> Hash
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].metrics["__string"].comparison_operator #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].metrics["__string"].value #=> Float
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes #=> Hash
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].source_segments #=> Array
+    #   resp.segment_response.segment_groups.groups[0].source_segments[0].id #=> String
+    #   resp.segment_response.segment_groups.groups[0].source_segments[0].version #=> Integer
+    #   resp.segment_response.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY"
+    #   resp.segment_response.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
+    #   resp.segment_response.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
     #   resp.segment_response.version #=> Integer
     #
@@ -1518,7 +1749,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Delete an SMS channel
+    # Delete an SMS channel.
     #
     # @option params [required, String] :application_id
     #
@@ -1543,8 +1774,10 @@ module Aws::Pinpoint
     #   resp.sms_channel_response.last_modified_by #=> String
     #   resp.sms_channel_response.last_modified_date #=> String
     #   resp.sms_channel_response.platform #=> String
+    #   resp.sms_channel_response.promotional_messages_per_second #=> Integer
     #   resp.sms_channel_response.sender_id #=> String
     #   resp.sms_channel_response.short_code #=> String
+    #   resp.sms_channel_response.transactional_messages_per_second #=> Integer
     #   resp.sms_channel_response.version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSmsChannel AWS API Documentation
@@ -1556,7 +1789,70 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Get an ADM channel
+    # Deletes endpoints associated with an user id.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, String] :user_id
+    #
+    # @return [Types::DeleteUserEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteUserEndpointsResponse#endpoints_response #endpoints_response} => Types::EndpointsResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_user_endpoints({
+    #     application_id: "__string", # required
+    #     user_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.endpoints_response.item #=> Array
+    #   resp.endpoints_response.item[0].address #=> String
+    #   resp.endpoints_response.item[0].application_id #=> String
+    #   resp.endpoints_response.item[0].attributes #=> Hash
+    #   resp.endpoints_response.item[0].attributes["__string"] #=> Array
+    #   resp.endpoints_response.item[0].attributes["__string"][0] #=> String
+    #   resp.endpoints_response.item[0].channel_type #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.endpoints_response.item[0].cohort_id #=> String
+    #   resp.endpoints_response.item[0].creation_date #=> String
+    #   resp.endpoints_response.item[0].demographic.app_version #=> String
+    #   resp.endpoints_response.item[0].demographic.locale #=> String
+    #   resp.endpoints_response.item[0].demographic.make #=> String
+    #   resp.endpoints_response.item[0].demographic.model #=> String
+    #   resp.endpoints_response.item[0].demographic.model_version #=> String
+    #   resp.endpoints_response.item[0].demographic.platform #=> String
+    #   resp.endpoints_response.item[0].demographic.platform_version #=> String
+    #   resp.endpoints_response.item[0].demographic.timezone #=> String
+    #   resp.endpoints_response.item[0].effective_date #=> String
+    #   resp.endpoints_response.item[0].endpoint_status #=> String
+    #   resp.endpoints_response.item[0].id #=> String
+    #   resp.endpoints_response.item[0].location.city #=> String
+    #   resp.endpoints_response.item[0].location.country #=> String
+    #   resp.endpoints_response.item[0].location.latitude #=> Float
+    #   resp.endpoints_response.item[0].location.longitude #=> Float
+    #   resp.endpoints_response.item[0].location.postal_code #=> String
+    #   resp.endpoints_response.item[0].location.region #=> String
+    #   resp.endpoints_response.item[0].metrics #=> Hash
+    #   resp.endpoints_response.item[0].metrics["__string"] #=> Float
+    #   resp.endpoints_response.item[0].opt_out #=> String
+    #   resp.endpoints_response.item[0].request_id #=> String
+    #   resp.endpoints_response.item[0].user.user_attributes #=> Hash
+    #   resp.endpoints_response.item[0].user.user_attributes["__string"] #=> Array
+    #   resp.endpoints_response.item[0].user.user_attributes["__string"][0] #=> String
+    #   resp.endpoints_response.item[0].user.user_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteUserEndpoints AWS API Documentation
+    #
+    # @overload delete_user_endpoints(params = {})
+    # @param [Hash] params ({})
+    def delete_user_endpoints(params = {}, options = {})
+      req = build_request(:delete_user_endpoints, params)
+      req.send_request(options)
+    end
+
+    # Get an ADM channel.
     #
     # @option params [required, String] :application_id
     #
@@ -1630,7 +1926,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Get an APNS sandbox channel
+    # Get an APNS sandbox channel.
     #
     # @option params [required, String] :application_id
     #
@@ -1909,6 +2205,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.media_url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.raw_content #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -1920,6 +2217,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.media_url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.raw_content #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -1931,6 +2229,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.media_url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.raw_content #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -1942,6 +2241,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.media_url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.raw_content #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.body #=> String
@@ -1957,6 +2257,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.media_url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.raw_content #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.body #=> String
@@ -1970,12 +2271,12 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].schedule.start_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.timezone #=> String
     #   resp.campaign_response.additional_treatments[0].size_percent #=> Integer
-    #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
+    #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
     #   resp.campaign_response.creation_date #=> String
-    #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
+    #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
     #   resp.campaign_response.hook.lambda_function_name #=> String
@@ -1997,6 +2298,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.adm_message.media_url #=> String
     #   resp.campaign_response.message_configuration.adm_message.raw_content #=> String
     #   resp.campaign_response.message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.adm_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.adm_message.title #=> String
     #   resp.campaign_response.message_configuration.adm_message.url #=> String
     #   resp.campaign_response.message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -2008,6 +2310,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.apns_message.media_url #=> String
     #   resp.campaign_response.message_configuration.apns_message.raw_content #=> String
     #   resp.campaign_response.message_configuration.apns_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.apns_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.apns_message.title #=> String
     #   resp.campaign_response.message_configuration.apns_message.url #=> String
     #   resp.campaign_response.message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -2019,6 +2322,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.baidu_message.media_url #=> String
     #   resp.campaign_response.message_configuration.baidu_message.raw_content #=> String
     #   resp.campaign_response.message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.baidu_message.title #=> String
     #   resp.campaign_response.message_configuration.baidu_message.url #=> String
     #   resp.campaign_response.message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -2030,6 +2334,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.default_message.media_url #=> String
     #   resp.campaign_response.message_configuration.default_message.raw_content #=> String
     #   resp.campaign_response.message_configuration.default_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.default_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.default_message.title #=> String
     #   resp.campaign_response.message_configuration.default_message.url #=> String
     #   resp.campaign_response.message_configuration.email_message.body #=> String
@@ -2045,6 +2350,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.gcm_message.media_url #=> String
     #   resp.campaign_response.message_configuration.gcm_message.raw_content #=> String
     #   resp.campaign_response.message_configuration.gcm_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.gcm_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.gcm_message.title #=> String
     #   resp.campaign_response.message_configuration.gcm_message.url #=> String
     #   resp.campaign_response.message_configuration.sms_message.body #=> String
@@ -2060,7 +2366,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.schedule.timezone #=> String
     #   resp.campaign_response.segment_id #=> String
     #   resp.campaign_response.segment_version #=> Integer
-    #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
+    #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -2156,6 +2462,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.media_url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.raw_content #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -2167,6 +2474,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.media_url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.raw_content #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -2178,6 +2486,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.media_url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.raw_content #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -2189,6 +2498,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.media_url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.raw_content #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.body #=> String
@@ -2204,6 +2514,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.media_url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.raw_content #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.body #=> String
@@ -2217,12 +2528,12 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].schedule.start_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.timezone #=> String
     #   resp.campaign_response.additional_treatments[0].size_percent #=> Integer
-    #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
+    #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
     #   resp.campaign_response.creation_date #=> String
-    #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
+    #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
     #   resp.campaign_response.hook.lambda_function_name #=> String
@@ -2244,6 +2555,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.adm_message.media_url #=> String
     #   resp.campaign_response.message_configuration.adm_message.raw_content #=> String
     #   resp.campaign_response.message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.adm_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.adm_message.title #=> String
     #   resp.campaign_response.message_configuration.adm_message.url #=> String
     #   resp.campaign_response.message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -2255,6 +2567,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.apns_message.media_url #=> String
     #   resp.campaign_response.message_configuration.apns_message.raw_content #=> String
     #   resp.campaign_response.message_configuration.apns_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.apns_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.apns_message.title #=> String
     #   resp.campaign_response.message_configuration.apns_message.url #=> String
     #   resp.campaign_response.message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -2266,6 +2579,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.baidu_message.media_url #=> String
     #   resp.campaign_response.message_configuration.baidu_message.raw_content #=> String
     #   resp.campaign_response.message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.baidu_message.title #=> String
     #   resp.campaign_response.message_configuration.baidu_message.url #=> String
     #   resp.campaign_response.message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -2277,6 +2591,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.default_message.media_url #=> String
     #   resp.campaign_response.message_configuration.default_message.raw_content #=> String
     #   resp.campaign_response.message_configuration.default_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.default_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.default_message.title #=> String
     #   resp.campaign_response.message_configuration.default_message.url #=> String
     #   resp.campaign_response.message_configuration.email_message.body #=> String
@@ -2292,6 +2607,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.gcm_message.media_url #=> String
     #   resp.campaign_response.message_configuration.gcm_message.raw_content #=> String
     #   resp.campaign_response.message_configuration.gcm_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.gcm_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.gcm_message.title #=> String
     #   resp.campaign_response.message_configuration.gcm_message.url #=> String
     #   resp.campaign_response.message_configuration.sms_message.body #=> String
@@ -2307,7 +2623,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.schedule.timezone #=> String
     #   resp.campaign_response.segment_id #=> String
     #   resp.campaign_response.segment_version #=> Integer
-    #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
+    #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -2358,6 +2674,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.media_url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.raw_content #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.time_to_live #=> Integer
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.title #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -2369,6 +2686,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.apns_message.media_url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.apns_message.raw_content #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.apns_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.apns_message.time_to_live #=> Integer
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.apns_message.title #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.apns_message.url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -2380,6 +2698,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.media_url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.raw_content #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.title #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -2391,6 +2710,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.media_url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.raw_content #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.time_to_live #=> Integer
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.title #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.email_message.body #=> String
@@ -2406,6 +2726,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.gcm_message.media_url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.gcm_message.raw_content #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.gcm_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.gcm_message.time_to_live #=> Integer
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.gcm_message.title #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.gcm_message.url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.body #=> String
@@ -2419,12 +2740,12 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.start_time #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.timezone #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].size_percent #=> Integer
-    #   resp.campaigns_response.item[0].additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
+    #   resp.campaigns_response.item[0].additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].application_id #=> String
     #   resp.campaigns_response.item[0].creation_date #=> String
-    #   resp.campaigns_response.item[0].default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
+    #   resp.campaigns_response.item[0].default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaigns_response.item[0].description #=> String
     #   resp.campaigns_response.item[0].holdout_percent #=> Integer
     #   resp.campaigns_response.item[0].hook.lambda_function_name #=> String
@@ -2446,6 +2767,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].message_configuration.adm_message.media_url #=> String
     #   resp.campaigns_response.item[0].message_configuration.adm_message.raw_content #=> String
     #   resp.campaigns_response.item[0].message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].message_configuration.adm_message.time_to_live #=> Integer
     #   resp.campaigns_response.item[0].message_configuration.adm_message.title #=> String
     #   resp.campaigns_response.item[0].message_configuration.adm_message.url #=> String
     #   resp.campaigns_response.item[0].message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -2457,6 +2779,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].message_configuration.apns_message.media_url #=> String
     #   resp.campaigns_response.item[0].message_configuration.apns_message.raw_content #=> String
     #   resp.campaigns_response.item[0].message_configuration.apns_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].message_configuration.apns_message.time_to_live #=> Integer
     #   resp.campaigns_response.item[0].message_configuration.apns_message.title #=> String
     #   resp.campaigns_response.item[0].message_configuration.apns_message.url #=> String
     #   resp.campaigns_response.item[0].message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -2468,6 +2791,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].message_configuration.baidu_message.media_url #=> String
     #   resp.campaigns_response.item[0].message_configuration.baidu_message.raw_content #=> String
     #   resp.campaigns_response.item[0].message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaigns_response.item[0].message_configuration.baidu_message.title #=> String
     #   resp.campaigns_response.item[0].message_configuration.baidu_message.url #=> String
     #   resp.campaigns_response.item[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -2479,6 +2803,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].message_configuration.default_message.media_url #=> String
     #   resp.campaigns_response.item[0].message_configuration.default_message.raw_content #=> String
     #   resp.campaigns_response.item[0].message_configuration.default_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].message_configuration.default_message.time_to_live #=> Integer
     #   resp.campaigns_response.item[0].message_configuration.default_message.title #=> String
     #   resp.campaigns_response.item[0].message_configuration.default_message.url #=> String
     #   resp.campaigns_response.item[0].message_configuration.email_message.body #=> String
@@ -2494,6 +2819,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].message_configuration.gcm_message.media_url #=> String
     #   resp.campaigns_response.item[0].message_configuration.gcm_message.raw_content #=> String
     #   resp.campaigns_response.item[0].message_configuration.gcm_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].message_configuration.gcm_message.time_to_live #=> Integer
     #   resp.campaigns_response.item[0].message_configuration.gcm_message.title #=> String
     #   resp.campaigns_response.item[0].message_configuration.gcm_message.url #=> String
     #   resp.campaigns_response.item[0].message_configuration.sms_message.body #=> String
@@ -2509,7 +2835,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].schedule.timezone #=> String
     #   resp.campaigns_response.item[0].segment_id #=> String
     #   resp.campaigns_response.item[0].segment_version #=> Integer
-    #   resp.campaigns_response.item[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
+    #   resp.campaigns_response.item[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaigns_response.item[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].version #=> Integer
@@ -2558,6 +2884,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.media_url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.raw_content #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.time_to_live #=> Integer
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.title #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -2569,6 +2896,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.apns_message.media_url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.apns_message.raw_content #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.apns_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.apns_message.time_to_live #=> Integer
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.apns_message.title #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.apns_message.url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -2580,6 +2908,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.media_url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.raw_content #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.title #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -2591,6 +2920,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.media_url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.raw_content #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.time_to_live #=> Integer
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.title #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.email_message.body #=> String
@@ -2606,6 +2936,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.gcm_message.media_url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.gcm_message.raw_content #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.gcm_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.gcm_message.time_to_live #=> Integer
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.gcm_message.title #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.gcm_message.url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.body #=> String
@@ -2619,12 +2950,12 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.start_time #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.timezone #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].size_percent #=> Integer
-    #   resp.campaigns_response.item[0].additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
+    #   resp.campaigns_response.item[0].additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].application_id #=> String
     #   resp.campaigns_response.item[0].creation_date #=> String
-    #   resp.campaigns_response.item[0].default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
+    #   resp.campaigns_response.item[0].default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaigns_response.item[0].description #=> String
     #   resp.campaigns_response.item[0].holdout_percent #=> Integer
     #   resp.campaigns_response.item[0].hook.lambda_function_name #=> String
@@ -2646,6 +2977,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].message_configuration.adm_message.media_url #=> String
     #   resp.campaigns_response.item[0].message_configuration.adm_message.raw_content #=> String
     #   resp.campaigns_response.item[0].message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].message_configuration.adm_message.time_to_live #=> Integer
     #   resp.campaigns_response.item[0].message_configuration.adm_message.title #=> String
     #   resp.campaigns_response.item[0].message_configuration.adm_message.url #=> String
     #   resp.campaigns_response.item[0].message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -2657,6 +2989,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].message_configuration.apns_message.media_url #=> String
     #   resp.campaigns_response.item[0].message_configuration.apns_message.raw_content #=> String
     #   resp.campaigns_response.item[0].message_configuration.apns_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].message_configuration.apns_message.time_to_live #=> Integer
     #   resp.campaigns_response.item[0].message_configuration.apns_message.title #=> String
     #   resp.campaigns_response.item[0].message_configuration.apns_message.url #=> String
     #   resp.campaigns_response.item[0].message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -2668,6 +3001,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].message_configuration.baidu_message.media_url #=> String
     #   resp.campaigns_response.item[0].message_configuration.baidu_message.raw_content #=> String
     #   resp.campaigns_response.item[0].message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaigns_response.item[0].message_configuration.baidu_message.title #=> String
     #   resp.campaigns_response.item[0].message_configuration.baidu_message.url #=> String
     #   resp.campaigns_response.item[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -2679,6 +3013,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].message_configuration.default_message.media_url #=> String
     #   resp.campaigns_response.item[0].message_configuration.default_message.raw_content #=> String
     #   resp.campaigns_response.item[0].message_configuration.default_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].message_configuration.default_message.time_to_live #=> Integer
     #   resp.campaigns_response.item[0].message_configuration.default_message.title #=> String
     #   resp.campaigns_response.item[0].message_configuration.default_message.url #=> String
     #   resp.campaigns_response.item[0].message_configuration.email_message.body #=> String
@@ -2694,6 +3029,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].message_configuration.gcm_message.media_url #=> String
     #   resp.campaigns_response.item[0].message_configuration.gcm_message.raw_content #=> String
     #   resp.campaigns_response.item[0].message_configuration.gcm_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].message_configuration.gcm_message.time_to_live #=> Integer
     #   resp.campaigns_response.item[0].message_configuration.gcm_message.title #=> String
     #   resp.campaigns_response.item[0].message_configuration.gcm_message.url #=> String
     #   resp.campaigns_response.item[0].message_configuration.sms_message.body #=> String
@@ -2709,7 +3045,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].schedule.timezone #=> String
     #   resp.campaigns_response.item[0].segment_id #=> String
     #   resp.campaigns_response.item[0].segment_version #=> Integer
-    #   resp.campaigns_response.item[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
+    #   resp.campaigns_response.item[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaigns_response.item[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].version #=> Integer
@@ -2724,7 +3060,43 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Get an email channel
+    # Get all channels.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @return [Types::GetChannelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetChannelsResponse#channels_response #channels_response} => Types::ChannelsResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_channels({
+    #     application_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channels_response.channels #=> Hash
+    #   resp.channels_response.channels["__string"].application_id #=> String
+    #   resp.channels_response.channels["__string"].creation_date #=> String
+    #   resp.channels_response.channels["__string"].enabled #=> Boolean
+    #   resp.channels_response.channels["__string"].has_credential #=> Boolean
+    #   resp.channels_response.channels["__string"].id #=> String
+    #   resp.channels_response.channels["__string"].is_archived #=> Boolean
+    #   resp.channels_response.channels["__string"].last_modified_by #=> String
+    #   resp.channels_response.channels["__string"].last_modified_date #=> String
+    #   resp.channels_response.channels["__string"].version #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetChannels AWS API Documentation
+    #
+    # @overload get_channels(params = {})
+    # @param [Hash] params ({})
+    def get_channels(params = {}, options = {})
+      req = build_request(:get_channels, params)
+      req.send_request(options)
+    end
+
+    # Get an email channel.
     #
     # @option params [required, String] :application_id
     #
@@ -2750,6 +3122,7 @@ module Aws::Pinpoint
     #   resp.email_channel_response.is_archived #=> Boolean
     #   resp.email_channel_response.last_modified_by #=> String
     #   resp.email_channel_response.last_modified_date #=> String
+    #   resp.email_channel_response.messages_per_second #=> Integer
     #   resp.email_channel_response.platform #=> String
     #   resp.email_channel_response.role_arn #=> String
     #   resp.email_channel_response.version #=> Integer
@@ -2828,7 +3201,6 @@ module Aws::Pinpoint
     # Returns the event stream for an app.
     #
     # @option params [required, String] :application_id
-    #   Application Id.
     #
     # @return [Types::GetEventStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2884,6 +3256,7 @@ module Aws::Pinpoint
     #   resp.export_job_response.definition.role_arn #=> String
     #   resp.export_job_response.definition.s3_url_prefix #=> String
     #   resp.export_job_response.definition.segment_id #=> String
+    #   resp.export_job_response.definition.segment_version #=> Integer
     #   resp.export_job_response.failed_pieces #=> Integer
     #   resp.export_job_response.failures #=> Array
     #   resp.export_job_response.failures[0] #=> String
@@ -2933,6 +3306,7 @@ module Aws::Pinpoint
     #   resp.export_jobs_response.item[0].definition.role_arn #=> String
     #   resp.export_jobs_response.item[0].definition.s3_url_prefix #=> String
     #   resp.export_jobs_response.item[0].definition.segment_id #=> String
+    #   resp.export_jobs_response.item[0].definition.segment_version #=> Integer
     #   resp.export_jobs_response.item[0].failed_pieces #=> Integer
     #   resp.export_jobs_response.item[0].failures #=> Array
     #   resp.export_jobs_response.item[0].failures[0] #=> String
@@ -3143,6 +3517,12 @@ module Aws::Pinpoint
     #   resp.segment_response.dimensions.location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
     #   resp.segment_response.dimensions.location.country.values #=> Array
     #   resp.segment_response.dimensions.location.country.values[0] #=> String
+    #   resp.segment_response.dimensions.location.gps_point.coordinates.latitude #=> Float
+    #   resp.segment_response.dimensions.location.gps_point.coordinates.longitude #=> Float
+    #   resp.segment_response.dimensions.location.gps_point.range_in_kilometers #=> Float
+    #   resp.segment_response.dimensions.metrics #=> Hash
+    #   resp.segment_response.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.segment_response.dimensions.metrics["__string"].value #=> Float
     #   resp.segment_response.dimensions.user_attributes #=> Hash
     #   resp.segment_response.dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
     #   resp.segment_response.dimensions.user_attributes["__string"].values #=> Array
@@ -3157,6 +3537,51 @@ module Aws::Pinpoint
     #   resp.segment_response.import_definition.size #=> Integer
     #   resp.segment_response.last_modified_date #=> String
     #   resp.segment_response.name #=> String
+    #   resp.segment_response.segment_groups.groups #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes #=> Hash
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].behavior.recency.recency_type #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.app_version.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.app_version.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.app_version.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.channel.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.channel.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.channel.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.device_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.device_type.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.device_type.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.make.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.make.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.make.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.model.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.model.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.model.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.platform.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.platform.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.platform.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.country.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.country.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.gps_point.coordinates.latitude #=> Float
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.gps_point.coordinates.longitude #=> Float
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.gps_point.range_in_kilometers #=> Float
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].metrics #=> Hash
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].metrics["__string"].comparison_operator #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].metrics["__string"].value #=> Float
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes #=> Hash
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].source_segments #=> Array
+    #   resp.segment_response.segment_groups.groups[0].source_segments[0].id #=> String
+    #   resp.segment_response.segment_groups.groups[0].source_segments[0].version #=> Integer
+    #   resp.segment_response.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY"
+    #   resp.segment_response.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
+    #   resp.segment_response.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
     #   resp.segment_response.version #=> Integer
     #
@@ -3202,6 +3627,7 @@ module Aws::Pinpoint
     #   resp.export_jobs_response.item[0].definition.role_arn #=> String
     #   resp.export_jobs_response.item[0].definition.s3_url_prefix #=> String
     #   resp.export_jobs_response.item[0].definition.segment_id #=> String
+    #   resp.export_jobs_response.item[0].definition.segment_version #=> Integer
     #   resp.export_jobs_response.item[0].failed_pieces #=> Integer
     #   resp.export_jobs_response.item[0].failures #=> Array
     #   resp.export_jobs_response.item[0].failures[0] #=> String
@@ -3331,6 +3757,12 @@ module Aws::Pinpoint
     #   resp.segment_response.dimensions.location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
     #   resp.segment_response.dimensions.location.country.values #=> Array
     #   resp.segment_response.dimensions.location.country.values[0] #=> String
+    #   resp.segment_response.dimensions.location.gps_point.coordinates.latitude #=> Float
+    #   resp.segment_response.dimensions.location.gps_point.coordinates.longitude #=> Float
+    #   resp.segment_response.dimensions.location.gps_point.range_in_kilometers #=> Float
+    #   resp.segment_response.dimensions.metrics #=> Hash
+    #   resp.segment_response.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.segment_response.dimensions.metrics["__string"].value #=> Float
     #   resp.segment_response.dimensions.user_attributes #=> Hash
     #   resp.segment_response.dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
     #   resp.segment_response.dimensions.user_attributes["__string"].values #=> Array
@@ -3345,6 +3777,51 @@ module Aws::Pinpoint
     #   resp.segment_response.import_definition.size #=> Integer
     #   resp.segment_response.last_modified_date #=> String
     #   resp.segment_response.name #=> String
+    #   resp.segment_response.segment_groups.groups #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes #=> Hash
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].behavior.recency.recency_type #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.app_version.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.app_version.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.app_version.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.channel.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.channel.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.channel.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.device_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.device_type.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.device_type.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.make.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.make.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.make.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.model.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.model.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.model.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.platform.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.platform.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.platform.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.country.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.country.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.gps_point.coordinates.latitude #=> Float
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.gps_point.coordinates.longitude #=> Float
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.gps_point.range_in_kilometers #=> Float
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].metrics #=> Hash
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].metrics["__string"].comparison_operator #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].metrics["__string"].value #=> Float
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes #=> Hash
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].source_segments #=> Array
+    #   resp.segment_response.segment_groups.groups[0].source_segments[0].id #=> String
+    #   resp.segment_response.segment_groups.groups[0].source_segments[0].version #=> Integer
+    #   resp.segment_response.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY"
+    #   resp.segment_response.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
+    #   resp.segment_response.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
     #   resp.segment_response.version #=> Integer
     #
@@ -3412,6 +3889,12 @@ module Aws::Pinpoint
     #   resp.segments_response.item[0].dimensions.location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
     #   resp.segments_response.item[0].dimensions.location.country.values #=> Array
     #   resp.segments_response.item[0].dimensions.location.country.values[0] #=> String
+    #   resp.segments_response.item[0].dimensions.location.gps_point.coordinates.latitude #=> Float
+    #   resp.segments_response.item[0].dimensions.location.gps_point.coordinates.longitude #=> Float
+    #   resp.segments_response.item[0].dimensions.location.gps_point.range_in_kilometers #=> Float
+    #   resp.segments_response.item[0].dimensions.metrics #=> Hash
+    #   resp.segments_response.item[0].dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.segments_response.item[0].dimensions.metrics["__string"].value #=> Float
     #   resp.segments_response.item[0].dimensions.user_attributes #=> Hash
     #   resp.segments_response.item[0].dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
     #   resp.segments_response.item[0].dimensions.user_attributes["__string"].values #=> Array
@@ -3426,6 +3909,51 @@ module Aws::Pinpoint
     #   resp.segments_response.item[0].import_definition.size #=> Integer
     #   resp.segments_response.item[0].last_modified_date #=> String
     #   resp.segments_response.item[0].name #=> String
+    #   resp.segments_response.item[0].segment_groups.groups #=> Array
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions #=> Array
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].attributes #=> Hash
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].attributes["__string"].values #=> Array
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].attributes["__string"].values[0] #=> String
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].behavior.recency.recency_type #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.app_version.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.app_version.values #=> Array
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.app_version.values[0] #=> String
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.channel.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.channel.values #=> Array
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.channel.values[0] #=> String
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.device_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.device_type.values #=> Array
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.device_type.values[0] #=> String
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.make.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.make.values #=> Array
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.make.values[0] #=> String
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.model.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.model.values #=> Array
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.model.values[0] #=> String
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.platform.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.platform.values #=> Array
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.platform.values[0] #=> String
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].location.country.values #=> Array
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].location.country.values[0] #=> String
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].location.gps_point.coordinates.latitude #=> Float
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].location.gps_point.coordinates.longitude #=> Float
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].location.gps_point.range_in_kilometers #=> Float
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].metrics #=> Hash
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].metrics["__string"].comparison_operator #=> String
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].metrics["__string"].value #=> Float
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].user_attributes #=> Hash
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].user_attributes["__string"].values #=> Array
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].user_attributes["__string"].values[0] #=> String
+    #   resp.segments_response.item[0].segment_groups.groups[0].source_segments #=> Array
+    #   resp.segments_response.item[0].segment_groups.groups[0].source_segments[0].id #=> String
+    #   resp.segments_response.item[0].segment_groups.groups[0].source_segments[0].version #=> Integer
+    #   resp.segments_response.item[0].segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY"
+    #   resp.segments_response.item[0].segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
+    #   resp.segments_response.item[0].segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segments_response.item[0].segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
     #   resp.segments_response.item[0].version #=> Integer
     #   resp.segments_response.next_token #=> String
@@ -3491,6 +4019,12 @@ module Aws::Pinpoint
     #   resp.segments_response.item[0].dimensions.location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
     #   resp.segments_response.item[0].dimensions.location.country.values #=> Array
     #   resp.segments_response.item[0].dimensions.location.country.values[0] #=> String
+    #   resp.segments_response.item[0].dimensions.location.gps_point.coordinates.latitude #=> Float
+    #   resp.segments_response.item[0].dimensions.location.gps_point.coordinates.longitude #=> Float
+    #   resp.segments_response.item[0].dimensions.location.gps_point.range_in_kilometers #=> Float
+    #   resp.segments_response.item[0].dimensions.metrics #=> Hash
+    #   resp.segments_response.item[0].dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.segments_response.item[0].dimensions.metrics["__string"].value #=> Float
     #   resp.segments_response.item[0].dimensions.user_attributes #=> Hash
     #   resp.segments_response.item[0].dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
     #   resp.segments_response.item[0].dimensions.user_attributes["__string"].values #=> Array
@@ -3505,6 +4039,51 @@ module Aws::Pinpoint
     #   resp.segments_response.item[0].import_definition.size #=> Integer
     #   resp.segments_response.item[0].last_modified_date #=> String
     #   resp.segments_response.item[0].name #=> String
+    #   resp.segments_response.item[0].segment_groups.groups #=> Array
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions #=> Array
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].attributes #=> Hash
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].attributes["__string"].values #=> Array
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].attributes["__string"].values[0] #=> String
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].behavior.recency.recency_type #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.app_version.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.app_version.values #=> Array
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.app_version.values[0] #=> String
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.channel.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.channel.values #=> Array
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.channel.values[0] #=> String
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.device_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.device_type.values #=> Array
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.device_type.values[0] #=> String
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.make.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.make.values #=> Array
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.make.values[0] #=> String
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.model.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.model.values #=> Array
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.model.values[0] #=> String
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.platform.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.platform.values #=> Array
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].demographic.platform.values[0] #=> String
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].location.country.values #=> Array
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].location.country.values[0] #=> String
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].location.gps_point.coordinates.latitude #=> Float
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].location.gps_point.coordinates.longitude #=> Float
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].location.gps_point.range_in_kilometers #=> Float
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].metrics #=> Hash
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].metrics["__string"].comparison_operator #=> String
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].metrics["__string"].value #=> Float
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].user_attributes #=> Hash
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].user_attributes["__string"].values #=> Array
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].user_attributes["__string"].values[0] #=> String
+    #   resp.segments_response.item[0].segment_groups.groups[0].source_segments #=> Array
+    #   resp.segments_response.item[0].segment_groups.groups[0].source_segments[0].id #=> String
+    #   resp.segments_response.item[0].segment_groups.groups[0].source_segments[0].version #=> Integer
+    #   resp.segments_response.item[0].segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY"
+    #   resp.segments_response.item[0].segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
+    #   resp.segments_response.item[0].segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segments_response.item[0].segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
     #   resp.segments_response.item[0].version #=> Integer
     #   resp.segments_response.next_token #=> String
@@ -3518,7 +4097,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Get an SMS channel
+    # Get an SMS channel.
     #
     # @option params [required, String] :application_id
     #
@@ -3543,8 +4122,10 @@ module Aws::Pinpoint
     #   resp.sms_channel_response.last_modified_by #=> String
     #   resp.sms_channel_response.last_modified_date #=> String
     #   resp.sms_channel_response.platform #=> String
+    #   resp.sms_channel_response.promotional_messages_per_second #=> Integer
     #   resp.sms_channel_response.sender_id #=> String
     #   resp.sms_channel_response.short_code #=> String
+    #   resp.sms_channel_response.transactional_messages_per_second #=> Integer
     #   resp.sms_channel_response.version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSmsChannel AWS API Documentation
@@ -3556,13 +4137,119 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
+    # Returns information about the endpoints associated with an user id.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, String] :user_id
+    #
+    # @return [Types::GetUserEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetUserEndpointsResponse#endpoints_response #endpoints_response} => Types::EndpointsResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_user_endpoints({
+    #     application_id: "__string", # required
+    #     user_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.endpoints_response.item #=> Array
+    #   resp.endpoints_response.item[0].address #=> String
+    #   resp.endpoints_response.item[0].application_id #=> String
+    #   resp.endpoints_response.item[0].attributes #=> Hash
+    #   resp.endpoints_response.item[0].attributes["__string"] #=> Array
+    #   resp.endpoints_response.item[0].attributes["__string"][0] #=> String
+    #   resp.endpoints_response.item[0].channel_type #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.endpoints_response.item[0].cohort_id #=> String
+    #   resp.endpoints_response.item[0].creation_date #=> String
+    #   resp.endpoints_response.item[0].demographic.app_version #=> String
+    #   resp.endpoints_response.item[0].demographic.locale #=> String
+    #   resp.endpoints_response.item[0].demographic.make #=> String
+    #   resp.endpoints_response.item[0].demographic.model #=> String
+    #   resp.endpoints_response.item[0].demographic.model_version #=> String
+    #   resp.endpoints_response.item[0].demographic.platform #=> String
+    #   resp.endpoints_response.item[0].demographic.platform_version #=> String
+    #   resp.endpoints_response.item[0].demographic.timezone #=> String
+    #   resp.endpoints_response.item[0].effective_date #=> String
+    #   resp.endpoints_response.item[0].endpoint_status #=> String
+    #   resp.endpoints_response.item[0].id #=> String
+    #   resp.endpoints_response.item[0].location.city #=> String
+    #   resp.endpoints_response.item[0].location.country #=> String
+    #   resp.endpoints_response.item[0].location.latitude #=> Float
+    #   resp.endpoints_response.item[0].location.longitude #=> Float
+    #   resp.endpoints_response.item[0].location.postal_code #=> String
+    #   resp.endpoints_response.item[0].location.region #=> String
+    #   resp.endpoints_response.item[0].metrics #=> Hash
+    #   resp.endpoints_response.item[0].metrics["__string"] #=> Float
+    #   resp.endpoints_response.item[0].opt_out #=> String
+    #   resp.endpoints_response.item[0].request_id #=> String
+    #   resp.endpoints_response.item[0].user.user_attributes #=> Hash
+    #   resp.endpoints_response.item[0].user.user_attributes["__string"] #=> Array
+    #   resp.endpoints_response.item[0].user.user_attributes["__string"][0] #=> String
+    #   resp.endpoints_response.item[0].user.user_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetUserEndpoints AWS API Documentation
+    #
+    # @overload get_user_endpoints(params = {})
+    # @param [Hash] params ({})
+    def get_user_endpoints(params = {}, options = {})
+      req = build_request(:get_user_endpoints, params)
+      req.send_request(options)
+    end
+
+    # Returns information about the specified phone number.
+    #
+    # @option params [required, Types::NumberValidateRequest] :number_validate_request
+    #   Phone Number Information request.
+    #
+    # @return [Types::PhoneNumberValidateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PhoneNumberValidateResponse#number_validate_response #number_validate_response} => Types::NumberValidateResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.phone_number_validate({
+    #     number_validate_request: { # required
+    #       iso_country_code: "__string",
+    #       phone_number: "__string",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.number_validate_response.carrier #=> String
+    #   resp.number_validate_response.city #=> String
+    #   resp.number_validate_response.cleansed_phone_number_e164 #=> String
+    #   resp.number_validate_response.cleansed_phone_number_national #=> String
+    #   resp.number_validate_response.country #=> String
+    #   resp.number_validate_response.country_code_iso_2 #=> String
+    #   resp.number_validate_response.country_code_numeric #=> String
+    #   resp.number_validate_response.county #=> String
+    #   resp.number_validate_response.original_country_code_iso_2 #=> String
+    #   resp.number_validate_response.original_phone_number #=> String
+    #   resp.number_validate_response.phone_type #=> String
+    #   resp.number_validate_response.phone_type_code #=> Integer
+    #   resp.number_validate_response.timezone #=> String
+    #   resp.number_validate_response.zip_code #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/PhoneNumberValidate AWS API Documentation
+    #
+    # @overload phone_number_validate(params = {})
+    # @param [Hash] params ({})
+    def phone_number_validate(params = {}, options = {})
+      req = build_request(:phone_number_validate, params)
+      req.send_request(options)
+    end
+
     # Use to create or update the event stream for an app.
     #
     # @option params [required, String] :application_id
-    #   Application Id.
     #
     # @option params [required, Types::WriteEventStream] :write_event_stream
-    #   Write event stream wrapper.
+    #   Request to save an EventStream.
     #
     # @return [Types::PutEventStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3596,7 +4283,54 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Send a batch of messages
+    # Used to remove the attributes for an app
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, String] :attribute_type
+    #
+    # @option params [required, Types::UpdateAttributesRequest] :update_attributes_request
+    #   Update attributes request
+    #
+    # @return [Types::RemoveAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RemoveAttributesResponse#attributes_resource #attributes_resource} => Types::AttributesResource
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_attributes({
+    #     application_id: "__string", # required
+    #     attribute_type: "__string", # required
+    #     update_attributes_request: { # required
+    #       blacklist: ["__string"],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attributes_resource.application_id #=> String
+    #   resp.attributes_resource.attribute_type #=> String
+    #   resp.attributes_resource.attributes #=> Array
+    #   resp.attributes_resource.attributes[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/RemoveAttributes AWS API Documentation
+    #
+    # @overload remove_attributes(params = {})
+    # @param [Hash] params ({})
+    def remove_attributes(params = {}, options = {})
+      req = build_request(:remove_attributes, params)
+      req.send_request(options)
+    end
+
+    # Use this resource to send a direct message, which is a one time
+    # message that you send to a limited audience without creating a
+    # campaign. You can send the message to up to 100 recipients. You cannot
+    # use the message to engage a segment. When you send the message, Amazon
+    # Pinpoint delivers it immediately, and you cannot schedule the
+    # delivery. To engage a user segment, and to schedule the message
+    # delivery, create a campaign instead of sending a direct message. You
+    # can send a direct message as a push notification to your mobile app or
+    # as an SMS message to SMS-enabled devices.
     #
     # @option params [required, String] :application_id
     #
@@ -3704,6 +4438,7 @@ module Aws::Pinpoint
     #           substitutions: {
     #             "__string" => ["__string"],
     #           },
+    #           time_to_live: 1,
     #           title: "__string",
     #           url: "__string",
     #         },
@@ -3751,6 +4486,7 @@ module Aws::Pinpoint
     #         },
     #         sms_message: {
     #           body: "__string",
+    #           keyword: "__string",
     #           message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #           origination_number: "__string",
     #           sender_id: "__string",
@@ -3768,12 +4504,14 @@ module Aws::Pinpoint
     #   resp.message_response.endpoint_result #=> Hash
     #   resp.message_response.endpoint_result["__string"].address #=> String
     #   resp.message_response.endpoint_result["__string"].delivery_status #=> String, one of "SUCCESSFUL", "THROTTLED", "TEMPORARY_FAILURE", "PERMANENT_FAILURE", "UNKNOWN_FAILURE", "OPT_OUT", "DUPLICATE"
+    #   resp.message_response.endpoint_result["__string"].message_id #=> String
     #   resp.message_response.endpoint_result["__string"].status_code #=> Integer
     #   resp.message_response.endpoint_result["__string"].status_message #=> String
     #   resp.message_response.endpoint_result["__string"].updated_token #=> String
     #   resp.message_response.request_id #=> String
     #   resp.message_response.result #=> Hash
     #   resp.message_response.result["__string"].delivery_status #=> String, one of "SUCCESSFUL", "THROTTLED", "TEMPORARY_FAILURE", "PERMANENT_FAILURE", "UNKNOWN_FAILURE", "OPT_OUT", "DUPLICATE"
+    #   resp.message_response.result["__string"].message_id #=> String
     #   resp.message_response.result["__string"].status_code #=> Integer
     #   resp.message_response.result["__string"].status_message #=> String
     #   resp.message_response.result["__string"].updated_token #=> String
@@ -3787,7 +4525,25 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Send a batch of messages to users
+    # Use this resource to message a list of users. Amazon Pinpoint sends
+    # the message to all of the endpoints that are associated with each
+    # user. A user represents an individual who is assigned a unique user
+    # ID, and this ID is assigned to one or more endpoints. For example, if
+    # an individual uses your app on multiple devices, your app could assign
+    # that person's user ID to the endpoint for each device. With the
+    # users-messages resource, you specify the message recipients as user
+    # IDs. For each user ID, Amazon Pinpoint delivers the message to all of
+    # the user's endpoints. Within the body of your request, you can
+    # specify a default message, and you can tailor your message for
+    # different channels, including those for mobile push and SMS. With this
+    # resource, you send a direct message, which is a one time message that
+    # you send to a limited audience without creating a campaign. You can
+    # send the message to up to 100 users per request. You cannot use the
+    # message to engage a segment. When you send the message, Amazon
+    # Pinpoint delivers it immediately, and you cannot schedule the
+    # delivery. To engage a user segment, and to schedule the message
+    # delivery, create a campaign instead of using the users-messages
+    # resource.
     #
     # @option params [required, String] :application_id
     #
@@ -3868,6 +4624,7 @@ module Aws::Pinpoint
     #           substitutions: {
     #             "__string" => ["__string"],
     #           },
+    #           time_to_live: 1,
     #           title: "__string",
     #           url: "__string",
     #         },
@@ -3915,6 +4672,7 @@ module Aws::Pinpoint
     #         },
     #         sms_message: {
     #           body: "__string",
+    #           keyword: "__string",
     #           message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #           origination_number: "__string",
     #           sender_id: "__string",
@@ -3947,6 +4705,7 @@ module Aws::Pinpoint
     #   resp.send_users_message_response.result["__string"] #=> Hash
     #   resp.send_users_message_response.result["__string"]["__string"].address #=> String
     #   resp.send_users_message_response.result["__string"]["__string"].delivery_status #=> String, one of "SUCCESSFUL", "THROTTLED", "TEMPORARY_FAILURE", "PERMANENT_FAILURE", "UNKNOWN_FAILURE", "OPT_OUT", "DUPLICATE"
+    #   resp.send_users_message_response.result["__string"]["__string"].message_id #=> String
     #   resp.send_users_message_response.result["__string"]["__string"].status_code #=> Integer
     #   resp.send_users_message_response.result["__string"]["__string"].status_message #=> String
     #   resp.send_users_message_response.result["__string"]["__string"].updated_token #=> String
@@ -3960,7 +4719,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Update an ADM channel
+    # Update an ADM channel.
     #
     # @option params [required, Types::ADMChannelRequest] :adm_channel_request
     #   Amazon Device Messaging channel definition.
@@ -4055,7 +4814,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Update an APNS sandbox channel
+    # Update an APNS sandbox channel.
     #
     # @option params [required, Types::APNSSandboxChannelRequest] :apns_sandbox_channel_request
     #   Apple Development Push Notification Service channel definition.
@@ -4229,6 +4988,7 @@ module Aws::Pinpoint
     #         mode: "DELIVERY", # accepts DELIVERY, FILTER
     #         web_url: "__string",
     #       },
+    #       cloud_watch_metrics_enabled: false,
     #       limits: {
     #         daily: 1,
     #         maximum_duration: 1,
@@ -4342,6 +5102,7 @@ module Aws::Pinpoint
     #               media_url: "__string",
     #               raw_content: "__string",
     #               silent_push: false,
+    #               time_to_live: 1,
     #               title: "__string",
     #               url: "__string",
     #             },
@@ -4355,6 +5116,7 @@ module Aws::Pinpoint
     #               media_url: "__string",
     #               raw_content: "__string",
     #               silent_push: false,
+    #               time_to_live: 1,
     #               title: "__string",
     #               url: "__string",
     #             },
@@ -4368,6 +5130,7 @@ module Aws::Pinpoint
     #               media_url: "__string",
     #               raw_content: "__string",
     #               silent_push: false,
+    #               time_to_live: 1,
     #               title: "__string",
     #               url: "__string",
     #             },
@@ -4381,6 +5144,7 @@ module Aws::Pinpoint
     #               media_url: "__string",
     #               raw_content: "__string",
     #               silent_push: false,
+    #               time_to_live: 1,
     #               title: "__string",
     #               url: "__string",
     #             },
@@ -4400,6 +5164,7 @@ module Aws::Pinpoint
     #               media_url: "__string",
     #               raw_content: "__string",
     #               silent_push: false,
+    #               time_to_live: 1,
     #               title: "__string",
     #               url: "__string",
     #             },
@@ -4450,6 +5215,7 @@ module Aws::Pinpoint
     #           media_url: "__string",
     #           raw_content: "__string",
     #           silent_push: false,
+    #           time_to_live: 1,
     #           title: "__string",
     #           url: "__string",
     #         },
@@ -4463,6 +5229,7 @@ module Aws::Pinpoint
     #           media_url: "__string",
     #           raw_content: "__string",
     #           silent_push: false,
+    #           time_to_live: 1,
     #           title: "__string",
     #           url: "__string",
     #         },
@@ -4476,6 +5243,7 @@ module Aws::Pinpoint
     #           media_url: "__string",
     #           raw_content: "__string",
     #           silent_push: false,
+    #           time_to_live: 1,
     #           title: "__string",
     #           url: "__string",
     #         },
@@ -4489,6 +5257,7 @@ module Aws::Pinpoint
     #           media_url: "__string",
     #           raw_content: "__string",
     #           silent_push: false,
+    #           time_to_live: 1,
     #           title: "__string",
     #           url: "__string",
     #         },
@@ -4508,6 +5277,7 @@ module Aws::Pinpoint
     #           media_url: "__string",
     #           raw_content: "__string",
     #           silent_push: false,
+    #           time_to_live: 1,
     #           title: "__string",
     #           url: "__string",
     #         },
@@ -4549,6 +5319,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.media_url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.raw_content #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -4560,6 +5331,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.media_url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.raw_content #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -4571,6 +5343,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.media_url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.raw_content #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -4582,6 +5355,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.media_url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.raw_content #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.body #=> String
@@ -4597,6 +5371,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.media_url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.raw_content #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.body #=> String
@@ -4610,12 +5385,12 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].schedule.start_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.timezone #=> String
     #   resp.campaign_response.additional_treatments[0].size_percent #=> Integer
-    #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
+    #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
     #   resp.campaign_response.creation_date #=> String
-    #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
+    #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
     #   resp.campaign_response.hook.lambda_function_name #=> String
@@ -4637,6 +5412,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.adm_message.media_url #=> String
     #   resp.campaign_response.message_configuration.adm_message.raw_content #=> String
     #   resp.campaign_response.message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.adm_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.adm_message.title #=> String
     #   resp.campaign_response.message_configuration.adm_message.url #=> String
     #   resp.campaign_response.message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -4648,6 +5424,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.apns_message.media_url #=> String
     #   resp.campaign_response.message_configuration.apns_message.raw_content #=> String
     #   resp.campaign_response.message_configuration.apns_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.apns_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.apns_message.title #=> String
     #   resp.campaign_response.message_configuration.apns_message.url #=> String
     #   resp.campaign_response.message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -4659,6 +5436,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.baidu_message.media_url #=> String
     #   resp.campaign_response.message_configuration.baidu_message.raw_content #=> String
     #   resp.campaign_response.message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.baidu_message.title #=> String
     #   resp.campaign_response.message_configuration.baidu_message.url #=> String
     #   resp.campaign_response.message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -4670,6 +5448,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.default_message.media_url #=> String
     #   resp.campaign_response.message_configuration.default_message.raw_content #=> String
     #   resp.campaign_response.message_configuration.default_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.default_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.default_message.title #=> String
     #   resp.campaign_response.message_configuration.default_message.url #=> String
     #   resp.campaign_response.message_configuration.email_message.body #=> String
@@ -4685,6 +5464,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.gcm_message.media_url #=> String
     #   resp.campaign_response.message_configuration.gcm_message.raw_content #=> String
     #   resp.campaign_response.message_configuration.gcm_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.gcm_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.gcm_message.title #=> String
     #   resp.campaign_response.message_configuration.gcm_message.url #=> String
     #   resp.campaign_response.message_configuration.sms_message.body #=> String
@@ -4700,7 +5480,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.schedule.timezone #=> String
     #   resp.campaign_response.segment_id #=> String
     #   resp.campaign_response.segment_version #=> Integer
-    #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
+    #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -4714,7 +5494,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Update an email channel
+    # Update an email channel.
     #
     # @option params [required, String] :application_id
     #
@@ -4749,6 +5529,7 @@ module Aws::Pinpoint
     #   resp.email_channel_response.is_archived #=> Boolean
     #   resp.email_channel_response.last_modified_by #=> String
     #   resp.email_channel_response.last_modified_date #=> String
+    #   resp.email_channel_response.messages_per_second #=> Integer
     #   resp.email_channel_response.platform #=> String
     #   resp.email_channel_response.role_arn #=> String
     #   resp.email_channel_response.version #=> Integer
@@ -4762,7 +5543,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Use to update an endpoint.
+    # Creates or updates an endpoint.
     #
     # @option params [required, String] :application_id
     #
@@ -5015,6 +5796,19 @@ module Aws::Pinpoint
     #             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
     #             values: ["__string"],
     #           },
+    #           gps_point: {
+    #             coordinates: {
+    #               latitude: 1.0,
+    #               longitude: 1.0,
+    #             },
+    #             range_in_kilometers: 1.0,
+    #           },
+    #         },
+    #         metrics: {
+    #           "__string" => {
+    #             comparison_operator: "__string",
+    #             value: 1.0,
+    #           },
     #         },
     #         user_attributes: {
     #           "__string" => {
@@ -5024,6 +5818,88 @@ module Aws::Pinpoint
     #         },
     #       },
     #       name: "__string",
+    #       segment_groups: {
+    #         groups: [
+    #           {
+    #             dimensions: [
+    #               {
+    #                 attributes: {
+    #                   "__string" => {
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"],
+    #                   },
+    #                 },
+    #                 behavior: {
+    #                   recency: {
+    #                     duration: "HR_24", # accepts HR_24, DAY_7, DAY_14, DAY_30
+    #                     recency_type: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #                   },
+    #                 },
+    #                 demographic: {
+    #                   app_version: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"],
+    #                   },
+    #                   channel: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"],
+    #                   },
+    #                   device_type: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"],
+    #                   },
+    #                   make: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"],
+    #                   },
+    #                   model: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"],
+    #                   },
+    #                   platform: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"],
+    #                   },
+    #                 },
+    #                 location: {
+    #                   country: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"],
+    #                   },
+    #                   gps_point: {
+    #                     coordinates: {
+    #                       latitude: 1.0,
+    #                       longitude: 1.0,
+    #                     },
+    #                     range_in_kilometers: 1.0,
+    #                   },
+    #                 },
+    #                 metrics: {
+    #                   "__string" => {
+    #                     comparison_operator: "__string",
+    #                     value: 1.0,
+    #                   },
+    #                 },
+    #                 user_attributes: {
+    #                   "__string" => {
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"],
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #             source_segments: [
+    #               {
+    #                 id: "__string",
+    #                 version: 1,
+    #               },
+    #             ],
+    #             source_type: "ALL", # accepts ALL, ANY
+    #             type: "ALL", # accepts ALL, ANY, NONE
+    #           },
+    #         ],
+    #         include: "ALL", # accepts ALL, ANY, NONE
+    #       },
     #     },
     #   })
     #
@@ -5058,6 +5934,12 @@ module Aws::Pinpoint
     #   resp.segment_response.dimensions.location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
     #   resp.segment_response.dimensions.location.country.values #=> Array
     #   resp.segment_response.dimensions.location.country.values[0] #=> String
+    #   resp.segment_response.dimensions.location.gps_point.coordinates.latitude #=> Float
+    #   resp.segment_response.dimensions.location.gps_point.coordinates.longitude #=> Float
+    #   resp.segment_response.dimensions.location.gps_point.range_in_kilometers #=> Float
+    #   resp.segment_response.dimensions.metrics #=> Hash
+    #   resp.segment_response.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.segment_response.dimensions.metrics["__string"].value #=> Float
     #   resp.segment_response.dimensions.user_attributes #=> Hash
     #   resp.segment_response.dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
     #   resp.segment_response.dimensions.user_attributes["__string"].values #=> Array
@@ -5072,6 +5954,51 @@ module Aws::Pinpoint
     #   resp.segment_response.import_definition.size #=> Integer
     #   resp.segment_response.last_modified_date #=> String
     #   resp.segment_response.name #=> String
+    #   resp.segment_response.segment_groups.groups #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes #=> Hash
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].behavior.recency.recency_type #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.app_version.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.app_version.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.app_version.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.channel.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.channel.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.channel.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.device_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.device_type.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.device_type.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.make.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.make.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.make.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.model.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.model.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.model.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.platform.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.platform.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].demographic.platform.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.country.values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.country.values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.gps_point.coordinates.latitude #=> Float
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.gps_point.coordinates.longitude #=> Float
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].location.gps_point.range_in_kilometers #=> Float
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].metrics #=> Hash
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].metrics["__string"].comparison_operator #=> String
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].metrics["__string"].value #=> Float
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes #=> Hash
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].values #=> Array
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].values[0] #=> String
+    #   resp.segment_response.segment_groups.groups[0].source_segments #=> Array
+    #   resp.segment_response.segment_groups.groups[0].source_segments[0].id #=> String
+    #   resp.segment_response.segment_groups.groups[0].source_segments[0].version #=> Integer
+    #   resp.segment_response.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY"
+    #   resp.segment_response.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
+    #   resp.segment_response.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
     #   resp.segment_response.version #=> Integer
     #
@@ -5084,7 +6011,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Update an SMS channel
+    # Update an SMS channel.
     #
     # @option params [required, String] :application_id
     #
@@ -5117,8 +6044,10 @@ module Aws::Pinpoint
     #   resp.sms_channel_response.last_modified_by #=> String
     #   resp.sms_channel_response.last_modified_date #=> String
     #   resp.sms_channel_response.platform #=> String
+    #   resp.sms_channel_response.promotional_messages_per_second #=> Integer
     #   resp.sms_channel_response.sender_id #=> String
     #   resp.sms_channel_response.short_code #=> String
+    #   resp.sms_channel_response.transactional_messages_per_second #=> Integer
     #   resp.sms_channel_response.version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateSmsChannel AWS API Documentation
@@ -5143,7 +6072,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2018-07-11)
+------------------
+
+* Feature - API update.
+
+1.16.1 (2018-07-10)
+------------------
+
+* Issue - Avoids region redirects for FIPS endpoints
+
 1.16.0 (2018-06-28)
 ------------------
 

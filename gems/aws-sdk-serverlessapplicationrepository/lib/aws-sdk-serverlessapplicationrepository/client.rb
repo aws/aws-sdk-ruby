@@ -159,9 +159,9 @@ module Aws::ServerlessApplicationRepository
     # Creates an application, optionally including an AWS SAM file to create
     # the first application version in the same call.
     #
-    # @option params [String] :author
+    # @option params [required, String] :author
     #
-    # @option params [String] :description
+    # @option params [required, String] :description
     #
     # @option params [String] :home_page_url
     #
@@ -171,7 +171,7 @@ module Aws::ServerlessApplicationRepository
     #
     # @option params [String] :license_url
     #
-    # @option params [String] :name
+    # @option params [required, String] :name
     #
     # @option params [String] :readme_body
     #
@@ -204,13 +204,13 @@ module Aws::ServerlessApplicationRepository
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_application({
-    #     author: "__string",
-    #     description: "__string",
+    #     author: "__string", # required
+    #     description: "__string", # required
     #     home_page_url: "__string",
     #     labels: ["__string"],
     #     license_body: "__string",
     #     license_url: "__string",
-    #     name: "__string",
+    #     name: "__string", # required
     #     readme_body: "__string",
     #     readme_url: "__string",
     #     semantic_version: "__string",
@@ -328,7 +328,7 @@ module Aws::ServerlessApplicationRepository
       req.send_request(options)
     end
 
-    # Creates an AWS CloudFormation ChangeSet for the given application.
+    # Creates an AWS CloudFormation change set for the given application.
     #
     # @option params [required, String] :application_id
     #
@@ -336,7 +336,7 @@ module Aws::ServerlessApplicationRepository
     #
     # @option params [String] :semantic_version
     #
-    # @option params [String] :stack_name
+    # @option params [required, String] :stack_name
     #
     # @return [Types::CreateCloudFormationChangeSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -356,7 +356,7 @@ module Aws::ServerlessApplicationRepository
     #       },
     #     ],
     #     semantic_version: "__string",
-    #     stack_name: "__string",
+    #     stack_name: "__string", # required
     #   })
     #
     # @example Response structure
@@ -467,7 +467,7 @@ module Aws::ServerlessApplicationRepository
       req.send_request(options)
     end
 
-    # Gets the policy for the specified application.
+    # Retrieves the policy for the application.
     #
     # @option params [required, String] :application_id
     #
@@ -579,11 +579,17 @@ module Aws::ServerlessApplicationRepository
       req.send_request(options)
     end
 
-    # Puts the policy for the specified application.
+    # Sets the permission policy for an application. See [Application
+    # Permissions][1] for the list of supported actions that can be used
+    # with this operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions
     #
     # @option params [required, String] :application_id
     #
-    # @option params [Array<Types::ApplicationPolicyStatement>] :statements
+    # @option params [required, Array<Types::ApplicationPolicyStatement>] :statements
     #
     # @return [Types::PutApplicationPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -593,7 +599,7 @@ module Aws::ServerlessApplicationRepository
     #
     #   resp = client.put_application_policy({
     #     application_id: "__string", # required
-    #     statements: [
+    #     statements: [ # required
     #       {
     #         actions: ["__string"], # required
     #         principals: ["__string"], # required
@@ -719,7 +725,7 @@ module Aws::ServerlessApplicationRepository
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-serverlessapplicationrepository'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -296,12 +296,10 @@ module Aws::EC2
     #   the destination region in a `PresignedUrl` parameter, where it is
     #   required.
     #
-    #   <note markdown="1"> `CopySnapshot` sends the snapshot copy to the regional endpoint that
-    #   you send the HTTP request to, such as `ec2.us-east-1.amazonaws.com`
-    #   (in the AWS CLI, this is specified with the `--region` parameter or
-    #   the default region in your AWS configuration file).
-    #
-    #    </note>
+    #   The snapshot copy is sent to the regional endpoint that you sent the
+    #   HTTP request to (for example, `ec2.us-east-1.amazonaws.com`). With the
+    #   AWS CLI, this is specified using the `--region` parameter or the
+    #   default region in your AWS configuration file.
     # @option options [Boolean] :encrypted
     #   Specifies whether the destination snapshot should be encrypted. You
     #   can encrypt a copy of an unencrypted snapshot using this flag, but you
@@ -476,12 +474,8 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [String] :attribute
-    #   The snapshot attribute to modify.
-    #
-    #   <note markdown="1"> Only volume creation permissions may be modified at the customer
-    #   level.
-    #
-    #    </note>
+    #   The snapshot attribute to modify. Only volume creation permissions can
+    #   be modified.
     # @option options [Types::CreateVolumePermissionModifications] :create_volume_permission
     #   A JSON representation of the snapshot attribute modification.
     # @option options [Array<String>] :group_names

@@ -221,6 +221,15 @@ module Aws::CodeBuild
     #   Describes a network interface.
     #   @return [Types::NetworkInterface]
     #
+    # @!attribute [rw] encryption_key
+    #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
+    #   to be used for encrypting the build output artifacts.
+    #
+    #   This is expressed either as the CMK's Amazon Resource Name (ARN)
+    #   or, if specified, the CMK's alias (using the format
+    #   `alias/alias-name `).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Build AWS API Documentation
     #
     class Build < Struct.new(
@@ -243,7 +252,8 @@ module Aws::CodeBuild
       :build_complete,
       :initiator,
       :vpc_config,
-      :network_interface)
+      :network_interface,
+      :encryption_key)
       include Aws::Structure
     end
 
@@ -277,12 +287,18 @@ module Aws::CodeBuild
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] encryption_disabled
+    #   Information that tells you if encryption for build artifacts is
+    #   disabled.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BuildArtifacts AWS API Documentation
     #
     class BuildArtifacts < Struct.new(
       :location,
       :sha256sum,
-      :md5sum)
+      :md5sum,
+      :encryption_disabled)
       include Aws::Structure
     end
 
@@ -399,6 +415,7 @@ module Aws::CodeBuild
     #             type: "OAUTH", # required, accepts OAUTH
     #             resource: "String",
     #           },
+    #           report_build_status: false,
     #           insecure_ssl: false,
     #         },
     #         artifacts: { # required
@@ -408,6 +425,7 @@ module Aws::CodeBuild
     #           namespace_type: "NONE", # accepts NONE, BUILD_ID
     #           name: "String",
     #           packaging: "NONE", # accepts NONE, ZIP
+    #           encryption_disabled: false,
     #         },
     #         cache: {
     #           type: "NO_CACHE", # required, accepts NO_CACHE, S3
@@ -427,7 +445,7 @@ module Aws::CodeBuild
     #           privileged_mode: false,
     #           certificate: "String",
     #         },
-    #         service_role: "NonEmptyString",
+    #         service_role: "NonEmptyString", # required
     #         timeout_in_minutes: 1,
     #         encryption_key: "NonEmptyString",
     #         tags: [
@@ -1133,6 +1151,7 @@ module Aws::CodeBuild
     #         namespace_type: "NONE", # accepts NONE, BUILD_ID
     #         name: "String",
     #         packaging: "NONE", # accepts NONE, ZIP
+    #         encryption_disabled: false,
     #       }
     #
     # @!attribute [rw] type
@@ -1259,6 +1278,13 @@ module Aws::CodeBuild
     #       file containing the build output.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_disabled
+    #   Set to true if you do not want your output artifacts encrypted. This
+    #   option is only valid if your artifacts type is Amazon S3. If this is
+    #   set with another artifacts type, an invalidInputException will be
+    #   thrown.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectArtifacts AWS API Documentation
     #
     class ProjectArtifacts < Struct.new(
@@ -1267,7 +1293,8 @@ module Aws::CodeBuild
       :path,
       :namespace_type,
       :name,
-      :packaging)
+      :packaging,
+      :encryption_disabled)
       include Aws::Structure
     end
 
@@ -1385,8 +1412,17 @@ module Aws::CodeBuild
     #   build environment image is provided by AWS CodeBuild with Docker
     #   support.)
     #
+    #   If the operating system's base image is Ubuntu Linux:
+    #
     #   `- nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock
-    #   --host=tcp://0.0.0.0:2375 --storage-driver=overlay& - timeout -t 15
+    #   --host=tcp://0.0.0.0:2375 --storage-driver=overlay& - timeout 15 sh
+    #   -c "until docker info; do echo .; sleep 1; done"`
+    #
+    #   If the operating system's base image is Alpine Linux, add the `-t`
+    #   argument to `timeout`\:
+    #
+    #   `- nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock
+    #   --host=tcp://0.0.0.0:2375 --storage-driver=overlay& - timeout 15 -t
     #   sh -c "until docker info; do echo .; sleep 1; done"`
     #   @return [Boolean]
     #
@@ -1420,6 +1456,7 @@ module Aws::CodeBuild
     #           type: "OAUTH", # required, accepts OAUTH
     #           resource: "String",
     #         },
+    #         report_build_status: false,
     #         insecure_ssl: false,
     #       }
     #
@@ -1509,6 +1546,13 @@ module Aws::CodeBuild
     #   build project's source `type` value is `BITBUCKET` or `GITHUB`).
     #   @return [Types::SourceAuth]
     #
+    # @!attribute [rw] report_build_status
+    #   Set to true to report the status of a build's start and finish to
+    #   your source provider. This option is only valid when your source
+    #   provider is GitHub. If this is set and you use a different source
+    #   provider, an invalidInputException is thrown.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] insecure_ssl
     #   Enable this flag to ignore SSL warnings while connecting to the
     #   project source code.
@@ -1522,6 +1566,7 @@ module Aws::CodeBuild
       :git_clone_depth,
       :buildspec,
       :auth,
+      :report_build_status,
       :insecure_ssl)
       include Aws::Structure
     end
@@ -1571,6 +1616,7 @@ module Aws::CodeBuild
     #           namespace_type: "NONE", # accepts NONE, BUILD_ID
     #           name: "String",
     #           packaging: "NONE", # accepts NONE, ZIP
+    #           encryption_disabled: false,
     #         },
     #         environment_variables_override: [
     #           {
@@ -1588,6 +1634,7 @@ module Aws::CodeBuild
     #         git_clone_depth_override: 1,
     #         buildspec_override: "String",
     #         insecure_ssl_override: false,
+    #         report_build_status_override: false,
     #         environment_type_override: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER
     #         image_override: "NonEmptyString",
     #         compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
@@ -1676,6 +1723,12 @@ module Aws::CodeBuild
     #   GitHub Enterprise.
     #   @return [Boolean]
     #
+    # @!attribute [rw] report_build_status_override
+    #   Set to true to report to your source provider the status of a
+    #   build's start and completion. If you use this option with a source
+    #   provider other than GitHub, an invalidInputException is thrown.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] environment_type_override
     #   A container type for this build that overrides the one specified in
     #   the build project.
@@ -1737,6 +1790,7 @@ module Aws::CodeBuild
       :git_clone_depth_override,
       :buildspec_override,
       :insecure_ssl_override,
+      :report_build_status_override,
       :environment_type_override,
       :image_override,
       :compute_type_override,
@@ -1833,6 +1887,7 @@ module Aws::CodeBuild
     #             type: "OAUTH", # required, accepts OAUTH
     #             resource: "String",
     #           },
+    #           report_build_status: false,
     #           insecure_ssl: false,
     #         },
     #         artifacts: {
@@ -1842,6 +1897,7 @@ module Aws::CodeBuild
     #           namespace_type: "NONE", # accepts NONE, BUILD_ID
     #           name: "String",
     #           packaging: "NONE", # accepts NONE, ZIP
+    #           encryption_disabled: false,
     #         },
     #         cache: {
     #           type: "NO_CACHE", # required, accepts NO_CACHE, S3

@@ -550,16 +550,16 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Classifiers are written in Python and triggered during a crawl task.
-    # You can write your own classifiers to best categorize your data
-    # sources and specify the appropriate schemas to use for them. A
-    # classifier checks whether a given file is in a format it can handle,
-    # and if it is, the classifier creates a schema in the form of a
-    # `StructType` object that matches that data format.
+    # Classifiers are triggered during a crawl task. A classifier checks
+    # whether a given file is in a format it can handle, and if it is, the
+    # classifier creates a schema in the form of a `StructType` object that
+    # matches that data format.
     #
-    # A classifier can be a `grok` classifier, an XML classifier, or a JSON
-    # classifier, asspecified in one of the fields in the `Classifier`
-    # object.
+    # You can use the standard classifiers that AWS Glue supplies, or you
+    # can write your own classifiers to best categorize your data sources
+    # and specify the appropriate schemas to use for them. A classifier can
+    # be a `grok` classifier, an `XML` classifier, or a `JSON` classifier,
+    # as specified in one of the fields in the `Classifier` object.
     #
     # @!attribute [rw] grok_classifier
     #   A `GrokClassifier` object.
@@ -962,16 +962,12 @@ module Aws::Glue
     #
     # @!attribute [rw] configuration
     #   Crawler configuration information. This versioned JSON string allows
-    #   users to specify aspects of a Crawler's behavior.
+    #   users to specify aspects of a crawler's behavior. For more
+    #   information, see [Configuring a Crawler][1].
     #
-    #   You can use this field to force partitions to inherit metadata such
-    #   as classification, input format, output format, serde information,
-    #   and schema from their parent table, rather than detect this
-    #   information separately for each partition. Use the following JSON
-    #   string to specify that behavior:
     #
-    #   Example: `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
-    #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Crawler AWS API Documentation
@@ -1064,6 +1060,11 @@ module Aws::Glue
     #             exclusions: ["Path"],
     #           },
     #         ],
+    #         dynamo_db_targets: [
+    #           {
+    #             path: "Path",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] s3_targets
@@ -1074,11 +1075,16 @@ module Aws::Glue
     #   Specifies JDBC targets.
     #   @return [Array<Types::JdbcTarget>]
     #
+    # @!attribute [rw] dynamo_db_targets
+    #   Specifies DynamoDB targets.
+    #   @return [Array<Types::DynamoDBTarget>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CrawlerTargets AWS API Documentation
     #
     class CrawlerTargets < Struct.new(
       :s3_targets,
-      :jdbc_targets)
+      :jdbc_targets,
+      :dynamo_db_targets)
       include Aws::Structure
     end
 
@@ -1192,6 +1198,11 @@ module Aws::Glue
     #               exclusions: ["Path"],
     #             },
     #           ],
+    #           dynamo_db_targets: [
+    #             {
+    #               path: "Path",
+    #             },
+    #           ],
     #         },
     #         schedule: "CronExpression",
     #         classifiers: ["NameString"],
@@ -1237,7 +1248,7 @@ module Aws::Glue
     #
     # @!attribute [rw] classifiers
     #   A list of custom classifiers that the user has registered. By
-    #   default, all AWS classifiers are included in a crawl, but these
+    #   default, all built-in classifiers are included in a crawl, but these
     #   custom classifiers always override the default classifiers for a
     #   given classification.
     #   @return [Array<String>]
@@ -1252,16 +1263,12 @@ module Aws::Glue
     #
     # @!attribute [rw] configuration
     #   Crawler configuration information. This versioned JSON string allows
-    #   users to specify aspects of a Crawler's behavior.
+    #   users to specify aspects of a crawler's behavior. For more
+    #   information, see [Configuring a Crawler][1].
     #
-    #   You can use this field to force partitions to inherit metadata such
-    #   as classification, input format, output format, serde information,
-    #   and schema from their parent table, rather than detect this
-    #   information separately for each partition. Use the following JSON
-    #   string to specify that behavior:
     #
-    #   Example: `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
-    #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCrawlerRequest AWS API Documentation
@@ -1330,6 +1337,7 @@ module Aws::Glue
     #         security_group_ids: ["GenericString"],
     #         subnet_id: "GenericString",
     #         public_key: "GenericString",
+    #         public_keys: ["GenericString"],
     #         number_of_nodes: 1,
     #         extra_python_libs_s3_path: "GenericString",
     #         extra_jars_s3_path: "GenericString",
@@ -1353,8 +1361,25 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] public_key
-    #   The public key to use for authentication.
+    #   The public key to be used by this DevEndpoint for authentication.
+    #   This attribute is provided for backward compatibility, as the
+    #   recommended attribute to use is public keys.
     #   @return [String]
+    #
+    # @!attribute [rw] public_keys
+    #   A list of public keys to be used by the DevEndpoints for
+    #   authentication. The use of this attribute is preferred over a single
+    #   public key because the public keys allow you to have a different
+    #   private key per client.
+    #
+    #   <note markdown="1"> If you previously created an endpoint with a public key, you must
+    #   remove that key to be able to set a list of public keys: call the
+    #   `UpdateDevEndpoint` API with the public key content in the
+    #   `deletePublicKeys` attribute, and the list of new keys in the
+    #   `addPublicKeys` attribute.
+    #
+    #    </note>
+    #   @return [Array<String>]
     #
     # @!attribute [rw] number_of_nodes
     #   The number of AWS Glue Data Processing Units (DPUs) to allocate to
@@ -1388,6 +1413,7 @@ module Aws::Glue
       :security_group_ids,
       :subnet_id,
       :public_key,
+      :public_keys,
       :number_of_nodes,
       :extra_python_libs_s3_path,
       :extra_jars_s3_path)
@@ -2548,7 +2574,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] private_address
-    #   The private address used by this DevEndpoint.
+    #   A private DNS to access the DevEndpoint within a VPC, if the
+    #   DevEndpoint is created within one.
     #   @return [String]
     #
     # @!attribute [rw] zeppelin_remote_spark_interpreter_port
@@ -2616,7 +2643,24 @@ module Aws::Glue
     #
     # @!attribute [rw] public_key
     #   The public key to be used by this DevEndpoint for authentication.
+    #   This attribute is provided for backward compatibility, as the
+    #   recommended attribute to use is public keys.
     #   @return [String]
+    #
+    # @!attribute [rw] public_keys
+    #   A list of public keys to be used by the DevEndpoints for
+    #   authentication. The use of this attribute is preferred over a single
+    #   public key because the public keys allow you to have a different
+    #   private key per client.
+    #
+    #   <note markdown="1"> If you previously created an endpoint with a public key, you must
+    #   remove that key to be able to set a list of public keys: call the
+    #   `UpdateDevEndpoint` API with the public key content in the
+    #   `deletePublicKeys` attribute, and the list of new keys in the
+    #   `addPublicKeys` attribute.
+    #
+    #    </note>
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DevEndpoint AWS API Documentation
     #
@@ -2639,7 +2683,8 @@ module Aws::Glue
       :last_update_status,
       :created_timestamp,
       :last_modified_timestamp,
-      :public_key)
+      :public_key,
+      :public_keys)
       include Aws::Structure
     end
 
@@ -2680,6 +2725,26 @@ module Aws::Glue
     class DevEndpointCustomLibraries < Struct.new(
       :extra_python_libs_s3_path,
       :extra_jars_s3_path)
+      include Aws::Structure
+    end
+
+    # Specifies a DynamoDB table to crawl.
+    #
+    # @note When making an API call, you may pass DynamoDBTarget
+    #   data as a hash:
+    #
+    #       {
+    #         path: "Path",
+    #       }
+    #
+    # @!attribute [rw] path
+    #   The name of the DynamoDB table to crawl.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DynamoDBTarget AWS API Documentation
+    #
+    class DynamoDBTarget < Struct.new(
+      :path)
       include Aws::Structure
     end
 
@@ -3437,6 +3502,13 @@ module Aws::Glue
     #               param: false,
     #             },
     #           ],
+    #           dynamo_db: [
+    #             {
+    #               name: "CodeGenArgName", # required
+    #               value: "CodeGenArgValue", # required
+    #               param: false,
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -3629,6 +3701,13 @@ module Aws::Glue
     #             },
     #           ],
     #           s3: [
+    #             {
+    #               name: "CodeGenArgName", # required
+    #               value: "CodeGenArgValue", # required
+    #               param: false,
+    #             },
+    #           ],
+    #           dynamo_db: [
     #             {
     #               name: "CodeGenArgName", # required
     #               value: "CodeGenArgValue", # required
@@ -4692,6 +4771,13 @@ module Aws::Glue
     #             param: false,
     #           },
     #         ],
+    #         dynamo_db: [
+    #           {
+    #             name: "CodeGenArgName", # required
+    #             value: "CodeGenArgValue", # required
+    #             param: false,
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] jdbc
@@ -4702,11 +4788,16 @@ module Aws::Glue
     #   An Amazon S3 location.
     #   @return [Array<Types::CodeGenNodeArg>]
     #
+    # @!attribute [rw] dynamo_db
+    #   A DynamoDB Table location.
+    #   @return [Array<Types::CodeGenNodeArg>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Location AWS API Documentation
     #
     class Location < Struct.new(
       :jdbc,
-      :s3)
+      :s3,
+      :dynamo_db)
       include Aws::Structure
     end
 
@@ -6193,6 +6284,11 @@ module Aws::Glue
     #               exclusions: ["Path"],
     #             },
     #           ],
+    #           dynamo_db_targets: [
+    #             {
+    #               path: "Path",
+    #             },
+    #           ],
     #         },
     #         schedule: "CronExpression",
     #         classifiers: ["NameString"],
@@ -6238,9 +6334,9 @@ module Aws::Glue
     #
     # @!attribute [rw] classifiers
     #   A list of custom classifiers that the user has registered. By
-    #   default, all classifiers are included in a crawl, but these custom
-    #   classifiers always override the default classifiers for a given
-    #   classification.
+    #   default, all built-in classifiers are included in a crawl, but these
+    #   custom classifiers always override the default classifiers for a
+    #   given classification.
     #   @return [Array<String>]
     #
     # @!attribute [rw] table_prefix
@@ -6253,16 +6349,12 @@ module Aws::Glue
     #
     # @!attribute [rw] configuration
     #   Crawler configuration information. This versioned JSON string allows
-    #   users to specify aspects of a Crawler's behavior.
+    #   users to specify aspects of a crawler's behavior. For more
+    #   information, see [Configuring a Crawler][1].
     #
-    #   You can use this field to force partitions to inherit metadata such
-    #   as classification, input format, output format, serde information,
-    #   and schema from their parent table, rather than detect this
-    #   information separately for each partition. Use the following JSON
-    #   string to specify that behavior:
     #
-    #   Example: `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
-    #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCrawlerRequest AWS API Documentation
@@ -6370,6 +6462,8 @@ module Aws::Glue
     #       {
     #         endpoint_name: "GenericString", # required
     #         public_key: "GenericString",
+    #         add_public_keys: ["GenericString"],
+    #         delete_public_keys: ["GenericString"],
     #         custom_libraries: {
     #           extra_python_libs_s3_path: "GenericString",
     #           extra_jars_s3_path: "GenericString",
@@ -6385,6 +6479,14 @@ module Aws::Glue
     #   The public key for the DevEndpoint to use.
     #   @return [String]
     #
+    # @!attribute [rw] add_public_keys
+    #   The list of public keys for the DevEndpoint to use.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] delete_public_keys
+    #   The list of public keys to be deleted from the DevEndpoint.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] custom_libraries
     #   Custom Python or Java libraries to be loaded in the DevEndpoint.
     #   @return [Types::DevEndpointCustomLibraries]
@@ -6399,6 +6501,8 @@ module Aws::Glue
     class UpdateDevEndpointRequest < Struct.new(
       :endpoint_name,
       :public_key,
+      :add_public_keys,
+      :delete_public_keys,
       :custom_libraries,
       :update_etl_libraries)
       include Aws::Structure

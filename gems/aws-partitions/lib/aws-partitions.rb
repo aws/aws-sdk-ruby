@@ -259,6 +259,7 @@ module Aws
             'CostExplorer' => 'ce',
             'CostandUsageReportService' => 'cur',
             'DAX' => 'dax',
+            'DLM' => 'dlm',
             'DataPipeline' => 'datapipeline',
             'DatabaseMigrationService' => 'dms',
             'DeviceFarm' => 'devicefarm',

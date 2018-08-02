@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2018-08-02)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.96.0 (2018-07-12)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::DLM`.
+
+1.95.0 (2018-07-03)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
 1.94.0 (2018-06-22)
 ------------------
 

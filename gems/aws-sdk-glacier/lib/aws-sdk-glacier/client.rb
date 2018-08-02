@@ -1966,7 +1966,7 @@ module Aws::Glacier
     #
     # You can set a maximum limit for the number of jobs returned in the
     # response by specifying the `limit` parameter in the request. The
-    # default limit is 1000. The number of jobs returned might be fewer than
+    # default limit is 50. The number of jobs returned might be fewer than
     # the limit, but the number of returned jobs never exceeds the limit.
     #
     # Additionally, you can filter the jobs list returned by specifying the
@@ -1996,7 +1996,7 @@ module Aws::Glacier
     #   The name of the vault.
     #
     # @option params [Integer] :limit
-    #   The maximum number of jobs to be returned. The default limit is 1000.
+    #   The maximum number of jobs to be returned. The default limit is 50.
     #   The number of jobs returned might be fewer than the specified limit,
     #   but the number of returned jobs never exceeds the limit.
     #
@@ -2145,14 +2145,14 @@ module Aws::Glacier
     # Upload response has no guaranteed order.
     #
     # The List Multipart Uploads operation supports pagination. By default,
-    # this operation returns up to 1,000 multipart uploads in the response.
-    # You should always check the response for a `marker` at which to
-    # continue the list; if there are no more items the `marker` is `null`.
-    # To return a list of multipart uploads that begins at a specific
-    # upload, set the `marker` request parameter to the value you obtained
-    # from a previous List Multipart Upload request. You can also limit the
-    # number of uploads returned in the response by specifying the `limit`
-    # parameter in the request.
+    # this operation returns up to 50 multipart uploads in the response. You
+    # should always check the response for a `marker` at which to continue
+    # the list; if there are no more items the `marker` is `null`. To return
+    # a list of multipart uploads that begins at a specific upload, set the
+    # `marker` request parameter to the value you obtained from a previous
+    # List Multipart Upload request. You can also limit the number of
+    # uploads returned in the response by specifying the `limit` parameter
+    # in the request.
     #
     # Note the difference between this operation and listing parts
     # (ListParts). The List Multipart Uploads operation lists all multipart
@@ -2197,7 +2197,7 @@ module Aws::Glacier
     # @option params [Integer] :limit
     #   Specifies the maximum number of uploads returned in the response body.
     #   If this value is not specified, the List Uploads operation returns up
-    #   to 1,000 uploads.
+    #   to 50 uploads.
     #
     # @return [Types::ListMultipartUploadsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2276,11 +2276,11 @@ module Aws::Glacier
     # sorted by part range.
     #
     # The List Parts operation supports pagination. By default, this
-    # operation returns up to 1,000 uploaded parts in the response. You
-    # should always check the response for a `marker` at which to continue
-    # the list; if there are no more items the `marker` is `null`. To return
-    # a list of parts that begins at a specific part, set the `marker`
-    # request parameter to the value you obtained from a previous List Parts
+    # operation returns up to 50 uploaded parts in the response. You should
+    # always check the response for a `marker` at which to continue the
+    # list; if there are no more items the `marker` is `null`. To return a
+    # list of parts that begins at a specific part, set the `marker` request
+    # parameter to the value you obtained from a previous List Parts
     # request. You can also limit the number of parts returned in the
     # response by specifying the `limit` parameter in the request.
     #
@@ -2322,7 +2322,7 @@ module Aws::Glacier
     #   previous List Parts request.
     #
     # @option params [Integer] :limit
-    #   The maximum number of parts to be returned. The default limit is 1000.
+    #   The maximum number of parts to be returned. The default limit is 50.
     #   The number of parts returned might be fewer than the specified limit,
     #   but the number of returned parts never exceeds the limit.
     #
@@ -2518,15 +2518,14 @@ module Aws::Glacier
     # This operation lists all vaults owned by the calling user's account.
     # The list returned in the response is ASCII-sorted by vault name.
     #
-    # By default, this operation returns up to 1,000 items. If there are
-    # more vaults to list, the response `marker` field contains the vault
-    # Amazon Resource Name (ARN) at which to continue the list with a new
-    # List Vaults request; otherwise, the `marker` field is `null`. To
-    # return a list of vaults that begins at a specific vault, set the
-    # `marker` request parameter to the vault ARN you obtained from a
-    # previous List Vaults request. You can also limit the number of vaults
-    # returned in the response by specifying the `limit` parameter in the
-    # request.
+    # By default, this operation returns up to 10 items. If there are more
+    # vaults to list, the response `marker` field contains the vault Amazon
+    # Resource Name (ARN) at which to continue the list with a new List
+    # Vaults request; otherwise, the `marker` field is `null`. To return a
+    # list of vaults that begins at a specific vault, set the `marker`
+    # request parameter to the vault ARN you obtained from a previous List
+    # Vaults request. You can also limit the number of vaults returned in
+    # the response by specifying the `limit` parameter in the request.
     #
     # An AWS account has full permission to perform all operations
     # (actions). However, AWS Identity and Access Management (IAM) users
@@ -2558,9 +2557,9 @@ module Aws::Glacier
     #   which the listing of vaults should begin.
     #
     # @option params [Integer] :limit
-    #   The maximum number of vaults to be returned. The default limit is
-    #   1000. The number of vaults returned might be fewer than the specified
-    #   limit, but the number of returned vaults never exceeds the limit.
+    #   The maximum number of vaults to be returned. The default limit is 10.
+    #   The number of vaults returned might be fewer than the specified limit,
+    #   but the number of returned vaults never exceeds the limit.
     #
     # @return [Types::ListVaultsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3191,7 +3190,7 @@ module Aws::Glacier
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glacier'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

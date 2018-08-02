@@ -328,6 +328,7 @@ module Aws::KMS
     KeyMetadata.add_member(:key_manager, Shapes::ShapeRef.new(shape: KeyManagerType, location_name: "KeyManager"))
     KeyMetadata.struct_class = Types::KeyMetadata
 
+    ListAliasesRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
     ListAliasesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: LimitType, location_name: "Limit"))
     ListAliasesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: MarkerType, location_name: "Marker"))
     ListAliasesRequest.struct_class = Types::ListAliasesRequest

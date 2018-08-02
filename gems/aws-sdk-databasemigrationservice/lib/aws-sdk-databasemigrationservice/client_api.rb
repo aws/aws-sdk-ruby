@@ -84,6 +84,7 @@ module Aws::DatabaseMigrationService
     DescribeTableStatisticsMessage = Shapes::StructureShape.new(name: 'DescribeTableStatisticsMessage')
     DescribeTableStatisticsResponse = Shapes::StructureShape.new(name: 'DescribeTableStatisticsResponse')
     DmsSslModeValue = Shapes::StringShape.new(name: 'DmsSslModeValue')
+    DmsTransferSettings = Shapes::StructureShape.new(name: 'DmsTransferSettings')
     DynamoDbSettings = Shapes::StructureShape.new(name: 'DynamoDbSettings')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     EndpointList = Shapes::ListShape.new(name: 'EndpointList')
@@ -132,6 +133,7 @@ module Aws::DatabaseMigrationService
     RefreshSchemasResponse = Shapes::StructureShape.new(name: 'RefreshSchemasResponse')
     RefreshSchemasStatus = Shapes::StructureShape.new(name: 'RefreshSchemasStatus')
     RefreshSchemasStatusTypeValue = Shapes::StringShape.new(name: 'RefreshSchemasStatusTypeValue')
+    ReloadOptionValue = Shapes::StringShape.new(name: 'ReloadOptionValue')
     ReloadTablesMessage = Shapes::StructureShape.new(name: 'ReloadTablesMessage')
     ReloadTablesResponse = Shapes::StructureShape.new(name: 'ReloadTablesResponse')
     RemoveTagsFromResourceMessage = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceMessage')
@@ -248,6 +250,7 @@ module Aws::DatabaseMigrationService
     CreateEndpointMessage.add_member(:external_table_definition, Shapes::ShapeRef.new(shape: String, location_name: "ExternalTableDefinition"))
     CreateEndpointMessage.add_member(:dynamo_db_settings, Shapes::ShapeRef.new(shape: DynamoDbSettings, location_name: "DynamoDbSettings"))
     CreateEndpointMessage.add_member(:s3_settings, Shapes::ShapeRef.new(shape: S3Settings, location_name: "S3Settings"))
+    CreateEndpointMessage.add_member(:dms_transfer_settings, Shapes::ShapeRef.new(shape: DmsTransferSettings, location_name: "DmsTransferSettings"))
     CreateEndpointMessage.add_member(:mongo_db_settings, Shapes::ShapeRef.new(shape: MongoDbSettings, location_name: "MongoDbSettings"))
     CreateEndpointMessage.struct_class = Types::CreateEndpointMessage
 
@@ -498,6 +501,10 @@ module Aws::DatabaseMigrationService
     DescribeTableStatisticsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeTableStatisticsResponse.struct_class = Types::DescribeTableStatisticsResponse
 
+    DmsTransferSettings.add_member(:service_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "ServiceAccessRoleArn"))
+    DmsTransferSettings.add_member(:bucket_name, Shapes::ShapeRef.new(shape: String, location_name: "BucketName"))
+    DmsTransferSettings.struct_class = Types::DmsTransferSettings
+
     DynamoDbSettings.add_member(:service_access_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceAccessRoleArn"))
     DynamoDbSettings.struct_class = Types::DynamoDbSettings
 
@@ -520,6 +527,7 @@ module Aws::DatabaseMigrationService
     Endpoint.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "ExternalId"))
     Endpoint.add_member(:dynamo_db_settings, Shapes::ShapeRef.new(shape: DynamoDbSettings, location_name: "DynamoDbSettings"))
     Endpoint.add_member(:s3_settings, Shapes::ShapeRef.new(shape: S3Settings, location_name: "S3Settings"))
+    Endpoint.add_member(:dms_transfer_settings, Shapes::ShapeRef.new(shape: DmsTransferSettings, location_name: "DmsTransferSettings"))
     Endpoint.add_member(:mongo_db_settings, Shapes::ShapeRef.new(shape: MongoDbSettings, location_name: "MongoDbSettings"))
     Endpoint.struct_class = Types::Endpoint
 
@@ -596,6 +604,7 @@ module Aws::DatabaseMigrationService
     ModifyEndpointMessage.add_member(:external_table_definition, Shapes::ShapeRef.new(shape: String, location_name: "ExternalTableDefinition"))
     ModifyEndpointMessage.add_member(:dynamo_db_settings, Shapes::ShapeRef.new(shape: DynamoDbSettings, location_name: "DynamoDbSettings"))
     ModifyEndpointMessage.add_member(:s3_settings, Shapes::ShapeRef.new(shape: S3Settings, location_name: "S3Settings"))
+    ModifyEndpointMessage.add_member(:dms_transfer_settings, Shapes::ShapeRef.new(shape: DmsTransferSettings, location_name: "DmsTransferSettings"))
     ModifyEndpointMessage.add_member(:mongo_db_settings, Shapes::ShapeRef.new(shape: MongoDbSettings, location_name: "MongoDbSettings"))
     ModifyEndpointMessage.struct_class = Types::ModifyEndpointMessage
 
@@ -697,6 +706,7 @@ module Aws::DatabaseMigrationService
 
     ReloadTablesMessage.add_member(:replication_task_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationTaskArn"))
     ReloadTablesMessage.add_member(:tables_to_reload, Shapes::ShapeRef.new(shape: TableListToReload, required: true, location_name: "TablesToReload"))
+    ReloadTablesMessage.add_member(:reload_option, Shapes::ShapeRef.new(shape: ReloadOptionValue, location_name: "ReloadOption"))
     ReloadTablesMessage.struct_class = Types::ReloadTablesMessage
 
     ReloadTablesResponse.add_member(:replication_task_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskArn"))
@@ -869,6 +879,7 @@ module Aws::DatabaseMigrationService
     TableStatistics.add_member(:validation_failed_records, Shapes::ShapeRef.new(shape: Long, location_name: "ValidationFailedRecords"))
     TableStatistics.add_member(:validation_suspended_records, Shapes::ShapeRef.new(shape: Long, location_name: "ValidationSuspendedRecords"))
     TableStatistics.add_member(:validation_state, Shapes::ShapeRef.new(shape: String, location_name: "ValidationState"))
+    TableStatistics.add_member(:validation_state_details, Shapes::ShapeRef.new(shape: String, location_name: "ValidationStateDetails"))
     TableStatistics.struct_class = Types::TableStatistics
 
     TableStatisticsList.member = Shapes::ShapeRef.new(shape: TableStatistics)

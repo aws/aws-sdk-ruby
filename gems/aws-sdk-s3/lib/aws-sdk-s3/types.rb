@@ -3642,7 +3642,7 @@ module Aws::S3
     #           quote_character: "QuoteCharacter",
     #           allow_quoted_record_delimiter: false,
     #         },
-    #         compression_type: "NONE", # accepts NONE, GZIP
+    #         compression_type: "NONE", # accepts NONE, GZIP, BZIP2
     #         json: {
     #           type: "DOCUMENT", # accepts DOCUMENT, LINES
     #         },
@@ -3653,8 +3653,8 @@ module Aws::S3
     #   @return [Types::CSVInput]
     #
     # @!attribute [rw] compression_type
-    #   Specifies object's compression format. Valid values: NONE, GZIP.
-    #   Default Value: NONE.
+    #   Specifies object's compression format. Valid values: NONE, GZIP,
+    #   BZIP2. Default Value: NONE.
     #   @return [String]
     #
     # @!attribute [rw] json
@@ -7529,7 +7529,7 @@ module Aws::S3
     #                 quote_character: "QuoteCharacter",
     #                 allow_quoted_record_delimiter: false,
     #               },
-    #               compression_type: "NONE", # accepts NONE, GZIP
+    #               compression_type: "NONE", # accepts NONE, GZIP, BZIP2
     #               json: {
     #                 type: "DOCUMENT", # accepts DOCUMENT, LINES
     #               },
@@ -7648,7 +7648,7 @@ module Aws::S3
     #               quote_character: "QuoteCharacter",
     #               allow_quoted_record_delimiter: false,
     #             },
-    #             compression_type: "NONE", # accepts NONE, GZIP
+    #             compression_type: "NONE", # accepts NONE, GZIP, BZIP2
     #             json: {
     #               type: "DOCUMENT", # accepts DOCUMENT, LINES
     #             },
@@ -8048,7 +8048,7 @@ module Aws::S3
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html
+    # [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html
     #
     # @note When making an API call, you may pass SelectObjectContentRequest
     #   data as a hash:
@@ -8074,7 +8074,7 @@ module Aws::S3
     #             quote_character: "QuoteCharacter",
     #             allow_quoted_record_delimiter: false,
     #           },
-    #           compression_type: "NONE", # accepts NONE, GZIP
+    #           compression_type: "NONE", # accepts NONE, GZIP, BZIP2
     #           json: {
     #             type: "DOCUMENT", # accepts DOCUMENT, LINES
     #           },
@@ -8108,7 +8108,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key
@@ -8117,7 +8117,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
@@ -8126,7 +8126,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
     #   @return [String]
     #
     # @!attribute [rw] expression
@@ -8184,7 +8184,7 @@ module Aws::S3
     #             quote_character: "QuoteCharacter",
     #             allow_quoted_record_delimiter: false,
     #           },
-    #           compression_type: "NONE", # accepts NONE, GZIP
+    #           compression_type: "NONE", # accepts NONE, GZIP, BZIP2
     #           json: {
     #             type: "DOCUMENT", # accepts DOCUMENT, LINES
     #           },

@@ -229,6 +229,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#loa_issue_time #loa_issue_time} => Time
     #   * {Types::Connection#lag_id #lag_id} => String
     #   * {Types::Connection#aws_device #aws_device} => String
+    #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -254,6 +255,7 @@ module Aws::DirectConnect
     #   resp.loa_issue_time #=> Time
     #   resp.lag_id #=> String
     #   resp.aws_device #=> String
+    #   resp.aws_device_v2 #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateConnectionOnInterconnect AWS API Documentation
     #
@@ -327,6 +329,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#loa_issue_time #loa_issue_time} => Time
     #   * {Types::Connection#lag_id #lag_id} => String
     #   * {Types::Connection#aws_device #aws_device} => String
+    #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -352,6 +355,7 @@ module Aws::DirectConnect
     #   resp.loa_issue_time #=> Time
     #   resp.lag_id #=> String
     #   resp.aws_device #=> String
+    #   resp.aws_device_v2 #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateHostedConnection AWS API Documentation
     #
@@ -408,6 +412,8 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#direct_connect_gateway_id #direct_connect_gateway_id} => String
     #   * {Types::VirtualInterface#route_filter_prefixes #route_filter_prefixes} => Array&lt;Types::RouteFilterPrefix&gt;
     #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
+    #   * {Types::VirtualInterface#region #region} => String
+    #   * {Types::VirtualInterface#aws_device_v2 #aws_device_v2} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -454,6 +460,9 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].customer_address #=> String
     #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
     #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #   resp.bgp_peers[0].aws_device_v2 #=> String
+    #   resp.region #=> String
+    #   resp.aws_device_v2 #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocatePrivateVirtualInterface AWS API Documentation
     #
@@ -518,6 +527,8 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#direct_connect_gateway_id #direct_connect_gateway_id} => String
     #   * {Types::VirtualInterface#route_filter_prefixes #route_filter_prefixes} => Array&lt;Types::RouteFilterPrefix&gt;
     #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
+    #   * {Types::VirtualInterface#region #region} => String
+    #   * {Types::VirtualInterface#aws_device_v2 #aws_device_v2} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -569,6 +580,9 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].customer_address #=> String
     #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
     #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #   resp.bgp_peers[0].aws_device_v2 #=> String
+    #   resp.region #=> String
+    #   resp.aws_device_v2 #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocatePublicVirtualInterface AWS API Documentation
     #
@@ -627,6 +641,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#loa_issue_time #loa_issue_time} => Time
     #   * {Types::Connection#lag_id #lag_id} => String
     #   * {Types::Connection#aws_device #aws_device} => String
+    #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -649,6 +664,7 @@ module Aws::DirectConnect
     #   resp.loa_issue_time #=> Time
     #   resp.lag_id #=> String
     #   resp.aws_device #=> String
+    #   resp.aws_device_v2 #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateConnectionWithLag AWS API Documentation
     #
@@ -697,6 +713,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#loa_issue_time #loa_issue_time} => Time
     #   * {Types::Connection#lag_id #lag_id} => String
     #   * {Types::Connection#aws_device #aws_device} => String
+    #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -719,6 +736,7 @@ module Aws::DirectConnect
     #   resp.loa_issue_time #=> Time
     #   resp.lag_id #=> String
     #   resp.aws_device #=> String
+    #   resp.aws_device_v2 #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateHostedConnection AWS API Documentation
     #
@@ -781,6 +799,8 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#direct_connect_gateway_id #direct_connect_gateway_id} => String
     #   * {Types::VirtualInterface#route_filter_prefixes #route_filter_prefixes} => Array&lt;Types::RouteFilterPrefix&gt;
     #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
+    #   * {Types::VirtualInterface#region #region} => String
+    #   * {Types::VirtualInterface#aws_device_v2 #aws_device_v2} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -818,6 +838,9 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].customer_address #=> String
     #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
     #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #   resp.bgp_peers[0].aws_device_v2 #=> String
+    #   resp.region #=> String
+    #   resp.aws_device_v2 #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateVirtualInterface AWS API Documentation
     #
@@ -1039,6 +1062,9 @@ module Aws::DirectConnect
     #   resp.virtual_interface.bgp_peers[0].customer_address #=> String
     #   resp.virtual_interface.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
     #   resp.virtual_interface.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #   resp.virtual_interface.bgp_peers[0].aws_device_v2 #=> String
+    #   resp.virtual_interface.region #=> String
+    #   resp.virtual_interface.aws_device_v2 #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateBGPPeer AWS API Documentation
     #
@@ -1109,6 +1135,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#loa_issue_time #loa_issue_time} => Time
     #   * {Types::Connection#lag_id #lag_id} => String
     #   * {Types::Connection#aws_device #aws_device} => String
+    #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1133,6 +1160,7 @@ module Aws::DirectConnect
     #   resp.loa_issue_time #=> Time
     #   resp.lag_id #=> String
     #   resp.aws_device #=> String
+    #   resp.aws_device_v2 #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateConnection AWS API Documentation
     #
@@ -1314,6 +1342,7 @@ module Aws::DirectConnect
     #   * {Types::Interconnect#loa_issue_time #loa_issue_time} => Time
     #   * {Types::Interconnect#lag_id #lag_id} => String
     #   * {Types::Interconnect#aws_device #aws_device} => String
+    #   * {Types::Interconnect#aws_device_v2 #aws_device_v2} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1335,6 +1364,7 @@ module Aws::DirectConnect
     #   resp.loa_issue_time #=> Time
     #   resp.lag_id #=> String
     #   resp.aws_device #=> String
+    #   resp.aws_device_v2 #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateInterconnect AWS API Documentation
     #
@@ -1418,6 +1448,7 @@ module Aws::DirectConnect
     #   * {Types::Lag#region #region} => String
     #   * {Types::Lag#minimum_links #minimum_links} => Integer
     #   * {Types::Lag#aws_device #aws_device} => String
+    #   * {Types::Lag#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Lag#connections #connections} => Array&lt;Types::Connection&gt;
     #   * {Types::Lag#allows_hosted_connections #allows_hosted_connections} => Boolean
     #
@@ -1443,6 +1474,7 @@ module Aws::DirectConnect
     #   resp.region #=> String
     #   resp.minimum_links #=> Integer
     #   resp.aws_device #=> String
+    #   resp.aws_device_v2 #=> String
     #   resp.connections #=> Array
     #   resp.connections[0].owner_account #=> String
     #   resp.connections[0].connection_id #=> String
@@ -1456,6 +1488,7 @@ module Aws::DirectConnect
     #   resp.connections[0].loa_issue_time #=> Time
     #   resp.connections[0].lag_id #=> String
     #   resp.connections[0].aws_device #=> String
+    #   resp.connections[0].aws_device_v2 #=> String
     #   resp.allows_hosted_connections #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateLag AWS API Documentation
@@ -1507,6 +1540,8 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#direct_connect_gateway_id #direct_connect_gateway_id} => String
     #   * {Types::VirtualInterface#route_filter_prefixes #route_filter_prefixes} => Array&lt;Types::RouteFilterPrefix&gt;
     #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
+    #   * {Types::VirtualInterface#region #region} => String
+    #   * {Types::VirtualInterface#aws_device_v2 #aws_device_v2} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1554,6 +1589,9 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].customer_address #=> String
     #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
     #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #   resp.bgp_peers[0].aws_device_v2 #=> String
+    #   resp.region #=> String
+    #   resp.aws_device_v2 #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePrivateVirtualInterface AWS API Documentation
     #
@@ -1609,6 +1647,8 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#direct_connect_gateway_id #direct_connect_gateway_id} => String
     #   * {Types::VirtualInterface#route_filter_prefixes #route_filter_prefixes} => Array&lt;Types::RouteFilterPrefix&gt;
     #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
+    #   * {Types::VirtualInterface#region #region} => String
+    #   * {Types::VirtualInterface#aws_device_v2 #aws_device_v2} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1659,6 +1699,9 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].customer_address #=> String
     #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
     #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #   resp.bgp_peers[0].aws_device_v2 #=> String
+    #   resp.region #=> String
+    #   resp.aws_device_v2 #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePublicVirtualInterface AWS API Documentation
     #
@@ -1733,6 +1776,9 @@ module Aws::DirectConnect
     #   resp.virtual_interface.bgp_peers[0].customer_address #=> String
     #   resp.virtual_interface.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
     #   resp.virtual_interface.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #   resp.virtual_interface.bgp_peers[0].aws_device_v2 #=> String
+    #   resp.virtual_interface.region #=> String
+    #   resp.virtual_interface.aws_device_v2 #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteBGPPeer AWS API Documentation
     #
@@ -1773,6 +1819,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#loa_issue_time #loa_issue_time} => Time
     #   * {Types::Connection#lag_id #lag_id} => String
     #   * {Types::Connection#aws_device #aws_device} => String
+    #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1794,6 +1841,7 @@ module Aws::DirectConnect
     #   resp.loa_issue_time #=> Time
     #   resp.lag_id #=> String
     #   resp.aws_device #=> String
+    #   resp.aws_device_v2 #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteConnection AWS API Documentation
     #
@@ -1946,6 +1994,7 @@ module Aws::DirectConnect
     #   * {Types::Lag#region #region} => String
     #   * {Types::Lag#minimum_links #minimum_links} => Integer
     #   * {Types::Lag#aws_device #aws_device} => String
+    #   * {Types::Lag#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Lag#connections #connections} => Array&lt;Types::Connection&gt;
     #   * {Types::Lag#allows_hosted_connections #allows_hosted_connections} => Boolean
     #
@@ -1967,6 +2016,7 @@ module Aws::DirectConnect
     #   resp.region #=> String
     #   resp.minimum_links #=> Integer
     #   resp.aws_device #=> String
+    #   resp.aws_device_v2 #=> String
     #   resp.connections #=> Array
     #   resp.connections[0].owner_account #=> String
     #   resp.connections[0].connection_id #=> String
@@ -1980,6 +2030,7 @@ module Aws::DirectConnect
     #   resp.connections[0].loa_issue_time #=> Time
     #   resp.connections[0].lag_id #=> String
     #   resp.connections[0].aws_device #=> String
+    #   resp.connections[0].aws_device_v2 #=> String
     #   resp.allows_hosted_connections #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteLag AWS API Documentation
@@ -2125,6 +2176,7 @@ module Aws::DirectConnect
     #   resp.connections[0].loa_issue_time #=> Time
     #   resp.connections[0].lag_id #=> String
     #   resp.connections[0].aws_device #=> String
+    #   resp.connections[0].aws_device_v2 #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnections AWS API Documentation
     #
@@ -2176,6 +2228,7 @@ module Aws::DirectConnect
     #   resp.connections[0].loa_issue_time #=> Time
     #   resp.connections[0].lag_id #=> String
     #   resp.connections[0].aws_device #=> String
+    #   resp.connections[0].aws_device_v2 #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionsOnInterconnect AWS API Documentation
     #
@@ -2428,6 +2481,7 @@ module Aws::DirectConnect
     #   resp.connections[0].loa_issue_time #=> Time
     #   resp.connections[0].lag_id #=> String
     #   resp.connections[0].aws_device #=> String
+    #   resp.connections[0].aws_device_v2 #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeHostedConnections AWS API Documentation
     #
@@ -2529,6 +2583,7 @@ module Aws::DirectConnect
     #   resp.interconnects[0].loa_issue_time #=> Time
     #   resp.interconnects[0].lag_id #=> String
     #   resp.interconnects[0].aws_device #=> String
+    #   resp.interconnects[0].aws_device_v2 #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnects AWS API Documentation
     #
@@ -2574,6 +2629,7 @@ module Aws::DirectConnect
     #   resp.lags[0].region #=> String
     #   resp.lags[0].minimum_links #=> Integer
     #   resp.lags[0].aws_device #=> String
+    #   resp.lags[0].aws_device_v2 #=> String
     #   resp.lags[0].connections #=> Array
     #   resp.lags[0].connections[0].owner_account #=> String
     #   resp.lags[0].connections[0].connection_id #=> String
@@ -2587,6 +2643,7 @@ module Aws::DirectConnect
     #   resp.lags[0].connections[0].loa_issue_time #=> Time
     #   resp.lags[0].connections[0].lag_id #=> String
     #   resp.lags[0].connections[0].aws_device #=> String
+    #   resp.lags[0].connections[0].aws_device_v2 #=> String
     #   resp.lags[0].allows_hosted_connections #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLags AWS API Documentation
@@ -2673,6 +2730,7 @@ module Aws::DirectConnect
     #   resp.locations #=> Array
     #   resp.locations[0].location_code #=> String
     #   resp.locations[0].location_name #=> String
+    #   resp.locations[0].region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLocations AWS API Documentation
     #
@@ -2812,6 +2870,9 @@ module Aws::DirectConnect
     #   resp.virtual_interfaces[0].bgp_peers[0].customer_address #=> String
     #   resp.virtual_interfaces[0].bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
     #   resp.virtual_interfaces[0].bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #   resp.virtual_interfaces[0].bgp_peers[0].aws_device_v2 #=> String
+    #   resp.virtual_interfaces[0].region #=> String
+    #   resp.virtual_interfaces[0].aws_device_v2 #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeVirtualInterfaces AWS API Documentation
     #
@@ -2864,6 +2925,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#loa_issue_time #loa_issue_time} => Time
     #   * {Types::Connection#lag_id #lag_id} => String
     #   * {Types::Connection#aws_device #aws_device} => String
+    #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2886,6 +2948,7 @@ module Aws::DirectConnect
     #   resp.loa_issue_time #=> Time
     #   resp.lag_id #=> String
     #   resp.aws_device #=> String
+    #   resp.aws_device_v2 #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DisassociateConnectionFromLag AWS API Documentation
     #
@@ -3010,6 +3073,7 @@ module Aws::DirectConnect
     #   * {Types::Lag#region #region} => String
     #   * {Types::Lag#minimum_links #minimum_links} => Integer
     #   * {Types::Lag#aws_device #aws_device} => String
+    #   * {Types::Lag#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Lag#connections #connections} => Array&lt;Types::Connection&gt;
     #   * {Types::Lag#allows_hosted_connections #allows_hosted_connections} => Boolean
     #
@@ -3033,6 +3097,7 @@ module Aws::DirectConnect
     #   resp.region #=> String
     #   resp.minimum_links #=> Integer
     #   resp.aws_device #=> String
+    #   resp.aws_device_v2 #=> String
     #   resp.connections #=> Array
     #   resp.connections[0].owner_account #=> String
     #   resp.connections[0].connection_id #=> String
@@ -3046,6 +3111,7 @@ module Aws::DirectConnect
     #   resp.connections[0].loa_issue_time #=> Time
     #   resp.connections[0].lag_id #=> String
     #   resp.connections[0].aws_device #=> String
+    #   resp.connections[0].aws_device_v2 #=> String
     #   resp.allows_hosted_connections #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateLag AWS API Documentation
@@ -3070,7 +3136,7 @@ module Aws::DirectConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directconnect'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

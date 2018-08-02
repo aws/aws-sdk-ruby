@@ -200,6 +200,17 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # Statistics information about the channel.
+    #
+    # @!attribute [rw] size
+    #   The estimated size of the channel.
+    #   @return [Types::EstimatedResourceSize]
+    #
+    class ChannelStatistics < Struct.new(
+      :size)
+      include Aws::Structure
+    end
+
     # A summary of information about a channel.
     #
     # @!attribute [rw] channel_name
@@ -758,6 +769,17 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # Statistics information about the data store.
+    #
+    # @!attribute [rw] size
+    #   The estimated size of the data store.
+    #   @return [Types::EstimatedResourceSize]
+    #
+    class DatastoreStatistics < Struct.new(
+      :size)
+      include Aws::Structure
+    end
+
     # A summary of information about a data store.
     #
     # @!attribute [rw] datastore_name
@@ -878,14 +900,20 @@ module Aws::IoTAnalytics
     #
     #       {
     #         channel_name: "ChannelName", # required
+    #         include_statistics: false,
     #       }
     #
     # @!attribute [rw] channel_name
     #   The name of the channel whose information is retrieved.
     #   @return [String]
     #
+    # @!attribute [rw] include_statistics
+    #   If true, include statistics about the channel in the response.
+    #   @return [Boolean]
+    #
     class DescribeChannelRequest < Struct.new(
-      :channel_name)
+      :channel_name,
+      :include_statistics)
       include Aws::Structure
     end
 
@@ -893,8 +921,14 @@ module Aws::IoTAnalytics
     #   An object that contains information about the channel.
     #   @return [Types::Channel]
     #
+    # @!attribute [rw] statistics
+    #   Statistics about the channel. Included if the 'includeStatistics'
+    #   parameter is set to true in the request.
+    #   @return [Types::ChannelStatistics]
+    #
     class DescribeChannelResponse < Struct.new(
-      :channel)
+      :channel,
+      :statistics)
       include Aws::Structure
     end
 
@@ -928,14 +962,20 @@ module Aws::IoTAnalytics
     #
     #       {
     #         datastore_name: "DatastoreName", # required
+    #         include_statistics: false,
     #       }
     #
     # @!attribute [rw] datastore_name
     #   The name of the data store
     #   @return [String]
     #
+    # @!attribute [rw] include_statistics
+    #   If true, include statistics about the data store in the response.
+    #   @return [Boolean]
+    #
     class DescribeDatastoreRequest < Struct.new(
-      :datastore_name)
+      :datastore_name,
+      :include_statistics)
       include Aws::Structure
     end
 
@@ -943,8 +983,14 @@ module Aws::IoTAnalytics
     #   Information about the data store.
     #   @return [Types::Datastore]
     #
+    # @!attribute [rw] statistics
+    #   Statistics about the data store. Included if the
+    #   'includeStatistics' parameter is set to true in the request.
+    #   @return [Types::DatastoreStatistics]
+    #
     class DescribeDatastoreResponse < Struct.new(
-      :datastore)
+      :datastore,
+      :statistics)
       include Aws::Structure
     end
 
@@ -1072,6 +1118,22 @@ module Aws::IoTAnalytics
       :thing_name,
       :role_arn,
       :next)
+      include Aws::Structure
+    end
+
+    # The estimated size of the resource.
+    #
+    # @!attribute [rw] estimated_size_in_bytes
+    #   The estimated size of the resource in bytes.
+    #   @return [Float]
+    #
+    # @!attribute [rw] estimated_on
+    #   The time when the estimate of the size of the resource was made.
+    #   @return [Time]
+    #
+    class EstimatedResourceSize < Struct.new(
+      :estimated_size_in_bytes,
+      :estimated_on)
       include Aws::Structure
     end
 
@@ -1457,7 +1519,9 @@ module Aws::IoTAnalytics
     #   @return [String]
     #
     # @!attribute [rw] payload
-    #   The payload of the message.
+    #   The payload of the message. This may be a JSON string or a
+    #   Base64-encoded string representing binary data (in which case you
+    #   must decode it by means of a pipeline activity).
     #   @return [String]
     #
     class Message < Struct.new(

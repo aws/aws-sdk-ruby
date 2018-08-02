@@ -18,9 +18,12 @@ module Aws::AppStream
     Applications = Shapes::ListShape.new(name: 'Applications')
     AppstreamAgentVersion = Shapes::StringShape.new(name: 'AppstreamAgentVersion')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    ArnList = Shapes::ListShape.new(name: 'ArnList')
     AssociateFleetRequest = Shapes::StructureShape.new(name: 'AssociateFleetRequest')
     AssociateFleetResult = Shapes::StructureShape.new(name: 'AssociateFleetResult')
     AuthenticationType = Shapes::StringShape.new(name: 'AuthenticationType')
+    AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
+    AwsAccountIdList = Shapes::ListShape.new(name: 'AwsAccountIdList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
     ComputeCapacity = Shapes::StructureShape.new(name: 'ComputeCapacity')
@@ -46,6 +49,8 @@ module Aws::AppStream
     DeleteFleetResult = Shapes::StructureShape.new(name: 'DeleteFleetResult')
     DeleteImageBuilderRequest = Shapes::StructureShape.new(name: 'DeleteImageBuilderRequest')
     DeleteImageBuilderResult = Shapes::StructureShape.new(name: 'DeleteImageBuilderResult')
+    DeleteImagePermissionsRequest = Shapes::StructureShape.new(name: 'DeleteImagePermissionsRequest')
+    DeleteImagePermissionsResult = Shapes::StructureShape.new(name: 'DeleteImagePermissionsResult')
     DeleteImageRequest = Shapes::StructureShape.new(name: 'DeleteImageRequest')
     DeleteImageResult = Shapes::StructureShape.new(name: 'DeleteImageResult')
     DeleteStackRequest = Shapes::StructureShape.new(name: 'DeleteStackRequest')
@@ -56,6 +61,9 @@ module Aws::AppStream
     DescribeFleetsResult = Shapes::StructureShape.new(name: 'DescribeFleetsResult')
     DescribeImageBuildersRequest = Shapes::StructureShape.new(name: 'DescribeImageBuildersRequest')
     DescribeImageBuildersResult = Shapes::StructureShape.new(name: 'DescribeImageBuildersResult')
+    DescribeImagePermissionsRequest = Shapes::StructureShape.new(name: 'DescribeImagePermissionsRequest')
+    DescribeImagePermissionsResult = Shapes::StructureShape.new(name: 'DescribeImagePermissionsResult')
+    DescribeImagesMaxResults = Shapes::IntegerShape.new(name: 'DescribeImagesMaxResults')
     DescribeImagesRequest = Shapes::StructureShape.new(name: 'DescribeImagesRequest')
     DescribeImagesResult = Shapes::StructureShape.new(name: 'DescribeImagesResult')
     DescribeSessionsRequest = Shapes::StructureShape.new(name: 'DescribeSessionsRequest')
@@ -93,6 +101,7 @@ module Aws::AppStream
     ImageBuilderStateChangeReason = Shapes::StructureShape.new(name: 'ImageBuilderStateChangeReason')
     ImageBuilderStateChangeReasonCode = Shapes::StringShape.new(name: 'ImageBuilderStateChangeReasonCode')
     ImageList = Shapes::ListShape.new(name: 'ImageList')
+    ImagePermissions = Shapes::StructureShape.new(name: 'ImagePermissions')
     ImageState = Shapes::StringShape.new(name: 'ImageState')
     ImageStateChangeReason = Shapes::StructureShape.new(name: 'ImageStateChangeReason')
     ImageStateChangeReasonCode = Shapes::StringShape.new(name: 'ImageStateChangeReasonCode')
@@ -109,6 +118,7 @@ module Aws::AppStream
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Metadata = Shapes::MapShape.new(name: 'Metadata')
     Name = Shapes::StringShape.new(name: 'Name')
     NetworkAccessConfiguration = Shapes::StructureShape.new(name: 'NetworkAccessConfiguration')
@@ -131,6 +141,8 @@ module Aws::AppStream
     Session = Shapes::StructureShape.new(name: 'Session')
     SessionList = Shapes::ListShape.new(name: 'SessionList')
     SessionState = Shapes::StringShape.new(name: 'SessionState')
+    SharedImagePermissions = Shapes::StructureShape.new(name: 'SharedImagePermissions')
+    SharedImagePermissionsList = Shapes::ListShape.new(name: 'SharedImagePermissionsList')
     Stack = Shapes::StructureShape.new(name: 'Stack')
     StackAttribute = Shapes::StringShape.new(name: 'StackAttribute')
     StackAttributes = Shapes::ListShape.new(name: 'StackAttributes')
@@ -166,6 +178,8 @@ module Aws::AppStream
     UpdateDirectoryConfigResult = Shapes::StructureShape.new(name: 'UpdateDirectoryConfigResult')
     UpdateFleetRequest = Shapes::StructureShape.new(name: 'UpdateFleetRequest')
     UpdateFleetResult = Shapes::StructureShape.new(name: 'UpdateFleetResult')
+    UpdateImagePermissionsRequest = Shapes::StructureShape.new(name: 'UpdateImagePermissionsRequest')
+    UpdateImagePermissionsResult = Shapes::StructureShape.new(name: 'UpdateImagePermissionsResult')
     UpdateStackRequest = Shapes::StructureShape.new(name: 'UpdateStackRequest')
     UpdateStackResult = Shapes::StructureShape.new(name: 'UpdateStackResult')
     UserId = Shapes::StringShape.new(name: 'UserId')
@@ -185,11 +199,15 @@ module Aws::AppStream
 
     Applications.member = Shapes::ShapeRef.new(shape: Application)
 
+    ArnList.member = Shapes::ShapeRef.new(shape: Arn)
+
     AssociateFleetRequest.add_member(:fleet_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "FleetName"))
     AssociateFleetRequest.add_member(:stack_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "StackName"))
     AssociateFleetRequest.struct_class = Types::AssociateFleetRequest
 
     AssociateFleetResult.struct_class = Types::AssociateFleetResult
+
+    AwsAccountIdList.member = Shapes::ShapeRef.new(shape: AwsAccountId)
 
     ComputeCapacity.add_member(:desired_instances, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "DesiredInstances"))
     ComputeCapacity.struct_class = Types::ComputeCapacity
@@ -218,7 +236,8 @@ module Aws::AppStream
     CreateDirectoryConfigResult.struct_class = Types::CreateDirectoryConfigResult
 
     CreateFleetRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
-    CreateFleetRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ImageName"))
+    CreateFleetRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: String, location_name: "ImageName"))
+    CreateFleetRequest.add_member(:image_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ImageArn"))
     CreateFleetRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceType"))
     CreateFleetRequest.add_member(:fleet_type, Shapes::ShapeRef.new(shape: FleetType, location_name: "FleetType"))
     CreateFleetRequest.add_member(:compute_capacity, Shapes::ShapeRef.new(shape: ComputeCapacity, required: true, location_name: "ComputeCapacity"))
@@ -235,7 +254,8 @@ module Aws::AppStream
     CreateFleetResult.struct_class = Types::CreateFleetResult
 
     CreateImageBuilderRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
-    CreateImageBuilderRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ImageName"))
+    CreateImageBuilderRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: String, location_name: "ImageName"))
+    CreateImageBuilderRequest.add_member(:image_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ImageArn"))
     CreateImageBuilderRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceType"))
     CreateImageBuilderRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateImageBuilderRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
@@ -296,6 +316,12 @@ module Aws::AppStream
     DeleteImageBuilderResult.add_member(:image_builder, Shapes::ShapeRef.new(shape: ImageBuilder, location_name: "ImageBuilder"))
     DeleteImageBuilderResult.struct_class = Types::DeleteImageBuilderResult
 
+    DeleteImagePermissionsRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
+    DeleteImagePermissionsRequest.add_member(:shared_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location_name: "SharedAccountId"))
+    DeleteImagePermissionsRequest.struct_class = Types::DeleteImagePermissionsRequest
+
+    DeleteImagePermissionsResult.struct_class = Types::DeleteImagePermissionsResult
+
     DeleteImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
     DeleteImageRequest.struct_class = Types::DeleteImageRequest
 
@@ -333,10 +359,26 @@ module Aws::AppStream
     DescribeImageBuildersResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeImageBuildersResult.struct_class = Types::DescribeImageBuildersResult
 
+    DescribeImagePermissionsRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
+    DescribeImagePermissionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeImagePermissionsRequest.add_member(:shared_aws_account_ids, Shapes::ShapeRef.new(shape: AwsAccountIdList, location_name: "SharedAwsAccountIds"))
+    DescribeImagePermissionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeImagePermissionsRequest.struct_class = Types::DescribeImagePermissionsRequest
+
+    DescribeImagePermissionsResult.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
+    DescribeImagePermissionsResult.add_member(:shared_image_permissions_list, Shapes::ShapeRef.new(shape: SharedImagePermissionsList, location_name: "SharedImagePermissionsList"))
+    DescribeImagePermissionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeImagePermissionsResult.struct_class = Types::DescribeImagePermissionsResult
+
     DescribeImagesRequest.add_member(:names, Shapes::ShapeRef.new(shape: StringList, location_name: "Names"))
+    DescribeImagesRequest.add_member(:arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "Arns"))
+    DescribeImagesRequest.add_member(:type, Shapes::ShapeRef.new(shape: VisibilityType, location_name: "Type"))
+    DescribeImagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeImagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeImagesMaxResults, location_name: "MaxResults"))
     DescribeImagesRequest.struct_class = Types::DescribeImagesRequest
 
     DescribeImagesResult.add_member(:images, Shapes::ShapeRef.new(shape: ImageList, location_name: "Images"))
+    DescribeImagesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeImagesResult.struct_class = Types::DescribeImagesResult
 
     DescribeSessionsRequest.add_member(:stack_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "StackName"))
@@ -390,7 +432,8 @@ module Aws::AppStream
     Fleet.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     Fleet.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "DisplayName"))
     Fleet.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    Fleet.add_member(:image_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ImageName"))
+    Fleet.add_member(:image_name, Shapes::ShapeRef.new(shape: String, location_name: "ImageName"))
+    Fleet.add_member(:image_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ImageArn"))
     Fleet.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceType"))
     Fleet.add_member(:fleet_type, Shapes::ShapeRef.new(shape: FleetType, location_name: "FleetType"))
     Fleet.add_member(:compute_capacity_status, Shapes::ShapeRef.new(shape: ComputeCapacityStatus, required: true, location_name: "ComputeCapacityStatus"))
@@ -428,6 +471,7 @@ module Aws::AppStream
     Image.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
     Image.add_member(:public_base_image_released_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "PublicBaseImageReleasedDate"))
     Image.add_member(:appstream_agent_version, Shapes::ShapeRef.new(shape: AppstreamAgentVersion, location_name: "AppstreamAgentVersion"))
+    Image.add_member(:image_permissions, Shapes::ShapeRef.new(shape: ImagePermissions, location_name: "ImagePermissions"))
     Image.struct_class = Types::Image
 
     ImageBuilder.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
@@ -454,6 +498,10 @@ module Aws::AppStream
     ImageBuilderStateChangeReason.struct_class = Types::ImageBuilderStateChangeReason
 
     ImageList.member = Shapes::ShapeRef.new(shape: Image)
+
+    ImagePermissions.add_member(:allow_fleet, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "allowFleet"))
+    ImagePermissions.add_member(:allow_image_builder, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "allowImageBuilder"))
+    ImagePermissions.struct_class = Types::ImagePermissions
 
     ImageStateChangeReason.add_member(:code, Shapes::ShapeRef.new(shape: ImageStateChangeReasonCode, location_name: "Code"))
     ImageStateChangeReason.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -513,6 +561,12 @@ module Aws::AppStream
     Session.struct_class = Types::Session
 
     SessionList.member = Shapes::ShapeRef.new(shape: Session)
+
+    SharedImagePermissions.add_member(:shared_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location_name: "sharedAccountId"))
+    SharedImagePermissions.add_member(:image_permissions, Shapes::ShapeRef.new(shape: ImagePermissions, required: true, location_name: "imagePermissions"))
+    SharedImagePermissions.struct_class = Types::SharedImagePermissions
+
+    SharedImagePermissionsList.member = Shapes::ShapeRef.new(shape: SharedImagePermissions)
 
     Stack.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     Stack.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
@@ -596,7 +650,8 @@ module Aws::AppStream
     UpdateDirectoryConfigResult.struct_class = Types::UpdateDirectoryConfigResult
 
     UpdateFleetRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: String, location_name: "ImageName"))
-    UpdateFleetRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
+    UpdateFleetRequest.add_member(:image_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ImageArn"))
+    UpdateFleetRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     UpdateFleetRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "InstanceType"))
     UpdateFleetRequest.add_member(:compute_capacity, Shapes::ShapeRef.new(shape: ComputeCapacity, location_name: "ComputeCapacity"))
     UpdateFleetRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
@@ -612,6 +667,13 @@ module Aws::AppStream
 
     UpdateFleetResult.add_member(:fleet, Shapes::ShapeRef.new(shape: Fleet, location_name: "Fleet"))
     UpdateFleetResult.struct_class = Types::UpdateFleetResult
+
+    UpdateImagePermissionsRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
+    UpdateImagePermissionsRequest.add_member(:shared_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location_name: "SharedAccountId"))
+    UpdateImagePermissionsRequest.add_member(:image_permissions, Shapes::ShapeRef.new(shape: ImagePermissions, required: true, location_name: "ImagePermissions"))
+    UpdateImagePermissionsRequest.struct_class = Types::UpdateImagePermissionsRequest
+
+    UpdateImagePermissionsResult.struct_class = Types::UpdateImagePermissionsResult
 
     UpdateStackRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
     UpdateStackRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -707,6 +769,7 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
       end)
 
       api.add_operation(:create_image_builder, Seahorse::Model::Operation.new.tap do |o|
@@ -724,6 +787,7 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
       end)
 
       api.add_operation(:create_image_builder_streaming_url, Seahorse::Model::Operation.new.tap do |o|
@@ -807,6 +871,16 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
+      api.add_operation(:delete_image_permissions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteImagePermissions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteImagePermissionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteImagePermissionsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotAvailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:delete_stack, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteStack"
         o.http_method = "POST"
@@ -845,13 +919,35 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:describe_image_permissions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeImagePermissions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeImagePermissionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeImagePermissionsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_images, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeImages"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeImagesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeImagesResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_sessions, Seahorse::Model::Operation.new.tap do |o|
@@ -1010,6 +1106,17 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+      end)
+
+      api.add_operation(:update_image_permissions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateImagePermissions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateImagePermissionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateImagePermissionsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotAvailableException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:update_stack, Seahorse::Model::Operation.new.tap do |o|

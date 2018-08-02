@@ -16,6 +16,7 @@ module Aws::CloudHSMV2
     BackupPolicy = Shapes::StringShape.new(name: 'BackupPolicy')
     BackupState = Shapes::StringShape.new(name: 'BackupState')
     Backups = Shapes::ListShape.new(name: 'Backups')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     Cert = Shapes::StringShape.new(name: 'Cert')
     Certificates = Shapes::StructureShape.new(name: 'Certificates')
     CloudHsmAccessDeniedException = Shapes::StructureShape.new(name: 'CloudHsmAccessDeniedException')
@@ -27,6 +28,8 @@ module Aws::CloudHSMV2
     ClusterId = Shapes::StringShape.new(name: 'ClusterId')
     ClusterState = Shapes::StringShape.new(name: 'ClusterState')
     Clusters = Shapes::ListShape.new(name: 'Clusters')
+    CopyBackupToRegionRequest = Shapes::StructureShape.new(name: 'CopyBackupToRegionRequest')
+    CopyBackupToRegionResponse = Shapes::StructureShape.new(name: 'CopyBackupToRegionResponse')
     CreateClusterRequest = Shapes::StructureShape.new(name: 'CreateClusterRequest')
     CreateClusterResponse = Shapes::StructureShape.new(name: 'CreateClusterResponse')
     CreateHsmRequest = Shapes::StructureShape.new(name: 'CreateHsmRequest')
@@ -39,6 +42,7 @@ module Aws::CloudHSMV2
     DescribeBackupsResponse = Shapes::StructureShape.new(name: 'DescribeBackupsResponse')
     DescribeClustersRequest = Shapes::StructureShape.new(name: 'DescribeClustersRequest')
     DescribeClustersResponse = Shapes::StructureShape.new(name: 'DescribeClustersResponse')
+    DestinationBackup = Shapes::StructureShape.new(name: 'DestinationBackup')
     EniId = Shapes::StringShape.new(name: 'EniId')
     ExternalAz = Shapes::StringShape.new(name: 'ExternalAz')
     ExternalSubnetMapping = Shapes::MapShape.new(name: 'ExternalSubnetMapping')
@@ -57,6 +61,7 @@ module Aws::CloudHSMV2
     MaxSize = Shapes::IntegerShape.new(name: 'MaxSize')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     PreCoPassword = Shapes::StringShape.new(name: 'PreCoPassword')
+    Region = Shapes::StringShape.new(name: 'Region')
     SecurityGroup = Shapes::StringShape.new(name: 'SecurityGroup')
     StateMessage = Shapes::StringShape.new(name: 'StateMessage')
     String = Shapes::StringShape.new(name: 'String')
@@ -80,6 +85,10 @@ module Aws::CloudHSMV2
     Backup.add_member(:backup_state, Shapes::ShapeRef.new(shape: BackupState, location_name: "BackupState"))
     Backup.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, location_name: "ClusterId"))
     Backup.add_member(:create_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateTimestamp"))
+    Backup.add_member(:copy_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CopyTimestamp"))
+    Backup.add_member(:source_region, Shapes::ShapeRef.new(shape: Region, location_name: "SourceRegion"))
+    Backup.add_member(:source_backup, Shapes::ShapeRef.new(shape: BackupId, location_name: "SourceBackup"))
+    Backup.add_member(:source_cluster, Shapes::ShapeRef.new(shape: ClusterId, location_name: "SourceCluster"))
     Backup.struct_class = Types::Backup
 
     Backups.member = Shapes::ShapeRef.new(shape: Backup)
@@ -107,6 +116,13 @@ module Aws::CloudHSMV2
     Cluster.struct_class = Types::Cluster
 
     Clusters.member = Shapes::ShapeRef.new(shape: Cluster)
+
+    CopyBackupToRegionRequest.add_member(:destination_region, Shapes::ShapeRef.new(shape: Region, required: true, location_name: "DestinationRegion"))
+    CopyBackupToRegionRequest.add_member(:backup_id, Shapes::ShapeRef.new(shape: BackupId, required: true, location_name: "BackupId"))
+    CopyBackupToRegionRequest.struct_class = Types::CopyBackupToRegionRequest
+
+    CopyBackupToRegionResponse.add_member(:destination_backup, Shapes::ShapeRef.new(shape: DestinationBackup, location_name: "DestinationBackup"))
+    CopyBackupToRegionResponse.struct_class = Types::CopyBackupToRegionResponse
 
     CreateClusterRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, required: true, location_name: "SubnetIds"))
     CreateClusterRequest.add_member(:hsm_type, Shapes::ShapeRef.new(shape: HsmType, required: true, location_name: "HsmType"))
@@ -142,6 +158,7 @@ module Aws::CloudHSMV2
     DescribeBackupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeBackupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxSize, location_name: "MaxResults"))
     DescribeBackupsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
+    DescribeBackupsRequest.add_member(:sort_ascending, Shapes::ShapeRef.new(shape: Boolean, location_name: "SortAscending"))
     DescribeBackupsRequest.struct_class = Types::DescribeBackupsRequest
 
     DescribeBackupsResponse.add_member(:backups, Shapes::ShapeRef.new(shape: Backups, location_name: "Backups"))
@@ -156,6 +173,12 @@ module Aws::CloudHSMV2
     DescribeClustersResponse.add_member(:clusters, Shapes::ShapeRef.new(shape: Clusters, location_name: "Clusters"))
     DescribeClustersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeClustersResponse.struct_class = Types::DescribeClustersResponse
+
+    DestinationBackup.add_member(:create_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateTimestamp"))
+    DestinationBackup.add_member(:source_region, Shapes::ShapeRef.new(shape: Region, location_name: "SourceRegion"))
+    DestinationBackup.add_member(:source_backup, Shapes::ShapeRef.new(shape: BackupId, location_name: "SourceBackup"))
+    DestinationBackup.add_member(:source_cluster, Shapes::ShapeRef.new(shape: ClusterId, location_name: "SourceCluster"))
+    DestinationBackup.struct_class = Types::DestinationBackup
 
     ExternalSubnetMapping.key = Shapes::ShapeRef.new(shape: ExternalAz)
     ExternalSubnetMapping.value = Shapes::ShapeRef.new(shape: SubnetId)
@@ -232,6 +255,19 @@ module Aws::CloudHSMV2
         "signingName" => "cloudhsm",
         "targetPrefix" => "BaldrApiService",
       }
+
+      api.add_operation(:copy_backup_to_region, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CopyBackupToRegion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CopyBackupToRegionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CopyBackupToRegionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmAccessDeniedException)
+      end)
 
       api.add_operation(:create_cluster, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateCluster"

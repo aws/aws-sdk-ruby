@@ -156,6 +156,57 @@ module Aws::Redshift
 
     # @!group API Operations
 
+    # Exchanges a DC1 Reserved Node for a DC2 Reserved Node with no changes
+    # to the configuration (term, payment type, or number of nodes) and no
+    # additional costs.
+    #
+    # @option params [required, String] :reserved_node_id
+    #   A string representing the node identifier of the DC1 Reserved Node to
+    #   be exchanged.
+    #
+    # @option params [required, String] :target_reserved_node_offering_id
+    #   The unique identifier of the DC2 Reserved Node offering to be used for
+    #   the exchange. You can obtain the value for the parameter by calling
+    #   GetReservedNodeExchangeOfferings
+    #
+    # @return [Types::AcceptReservedNodeExchangeOutputMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AcceptReservedNodeExchangeOutputMessage#exchanged_reserved_node #exchanged_reserved_node} => Types::ReservedNode
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_reserved_node_exchange({
+    #     reserved_node_id: "String", # required
+    #     target_reserved_node_offering_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.exchanged_reserved_node.reserved_node_id #=> String
+    #   resp.exchanged_reserved_node.reserved_node_offering_id #=> String
+    #   resp.exchanged_reserved_node.node_type #=> String
+    #   resp.exchanged_reserved_node.start_time #=> Time
+    #   resp.exchanged_reserved_node.duration #=> Integer
+    #   resp.exchanged_reserved_node.fixed_price #=> Float
+    #   resp.exchanged_reserved_node.usage_price #=> Float
+    #   resp.exchanged_reserved_node.currency_code #=> String
+    #   resp.exchanged_reserved_node.node_count #=> Integer
+    #   resp.exchanged_reserved_node.state #=> String
+    #   resp.exchanged_reserved_node.offering_type #=> String
+    #   resp.exchanged_reserved_node.recurring_charges #=> Array
+    #   resp.exchanged_reserved_node.recurring_charges[0].recurring_charge_amount #=> Float
+    #   resp.exchanged_reserved_node.recurring_charges[0].recurring_charge_frequency #=> String
+    #   resp.exchanged_reserved_node.reserved_node_offering_type #=> String, one of "Regular", "Upgradable"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AcceptReservedNodeExchange AWS API Documentation
+    #
+    # @overload accept_reserved_node_exchange(params = {})
+    # @param [Hash] params ({})
+    def accept_reserved_node_exchange(params = {}, options = {})
+      req = build_request(:accept_reserved_node_exchange, params)
+      req.send_request(options)
+    end
+
     # Adds an inbound (ingress) rule to an Amazon Redshift security group.
     # Depending on whether the application accessing your cluster is running
     # on the Internet or an Amazon EC2 instance, you can authorize inbound
@@ -316,6 +367,7 @@ module Aws::Redshift
     #   resp.snapshot.restorable_node_types #=> Array
     #   resp.snapshot.restorable_node_types[0] #=> String
     #   resp.snapshot.enhanced_vpc_routing #=> Boolean
+    #   resp.snapshot.maintenance_track_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeSnapshotAccess AWS API Documentation
     #
@@ -430,6 +482,7 @@ module Aws::Redshift
     #   resp.snapshot.restorable_node_types #=> Array
     #   resp.snapshot.restorable_node_types[0] #=> String
     #   resp.snapshot.enhanced_vpc_routing #=> Boolean
+    #   resp.snapshot.maintenance_track_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CopyClusterSnapshot AWS API Documentation
     #
@@ -442,8 +495,8 @@ module Aws::Redshift
 
     # Creates a new cluster.
     #
-    # To create the cluster in Virtual Private Cloud (VPC), you must provide
-    # a cluster subnet group name. The cluster subnet group identifies the
+    # To create a cluster in Virtual Private Cloud (VPC), you must provide a
+    # cluster subnet group name. The cluster subnet group identifies the
     # subnets of your VPC that Amazon Redshift uses when creating the
     # cluster. For more information about managing clusters, go to [Amazon
     # Redshift Clusters][1] in the *Amazon Redshift Cluster Management
@@ -755,6 +808,11 @@ module Aws::Redshift
     #
     #   A cluster can have up to 10 IAM roles associated with it at any time.
     #
+    # @option params [String] :maintenance_track_name
+    #   An optional parameter for the name of the maintenance track for the
+    #   cluster. If you don't provide a maintenance track name, the cluster
+    #   is assigned to the `current` track.
+    #
     # @return [Types::CreateClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResult#cluster #cluster} => Types::Cluster
@@ -794,6 +852,7 @@ module Aws::Redshift
     #     enhanced_vpc_routing: false,
     #     additional_info: "String",
     #     iam_roles: ["String"],
+    #     maintenance_track_name: "String",
     #   })
     #
     # @example Response structure
@@ -834,6 +893,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.cluster_identifier #=> String
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -867,6 +927,9 @@ module Aws::Redshift
     #   resp.cluster.iam_roles #=> Array
     #   resp.cluster.iam_roles[0].iam_role_arn #=> String
     #   resp.cluster.iam_roles[0].apply_status #=> String
+    #   resp.cluster.pending_actions #=> Array
+    #   resp.cluster.pending_actions[0] #=> String
+    #   resp.cluster.maintenance_track_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateCluster AWS API Documentation
     #
@@ -1131,6 +1194,7 @@ module Aws::Redshift
     #   resp.snapshot.restorable_node_types #=> Array
     #   resp.snapshot.restorable_node_types[0] #=> String
     #   resp.snapshot.enhanced_vpc_routing #=> Boolean
+    #   resp.snapshot.maintenance_track_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSnapshot AWS API Documentation
     #
@@ -1713,6 +1777,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.cluster_identifier #=> String
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -1746,6 +1811,9 @@ module Aws::Redshift
     #   resp.cluster.iam_roles #=> Array
     #   resp.cluster.iam_roles[0].iam_role_arn #=> String
     #   resp.cluster.iam_roles[0].apply_status #=> String
+    #   resp.cluster.pending_actions #=> Array
+    #   resp.cluster.pending_actions[0] #=> String
+    #   resp.cluster.maintenance_track_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCluster AWS API Documentation
     #
@@ -1896,6 +1964,7 @@ module Aws::Redshift
     #   resp.snapshot.restorable_node_types #=> Array
     #   resp.snapshot.restorable_node_types[0] #=> String
     #   resp.snapshot.enhanced_vpc_routing #=> Boolean
+    #   resp.snapshot.maintenance_track_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSnapshot AWS API Documentation
     #
@@ -2043,6 +2112,71 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def delete_tags(params = {}, options = {})
       req = build_request(:delete_tags, params)
+      req.send_request(options)
+    end
+
+    # Returns an array of `ClusterDbRevision` objects.
+    #
+    # @option params [String] :cluster_identifier
+    #   A unique identifier for a cluster whose `ClusterDbRevisions` you are
+    #   requesting. This parameter is case sensitive. All clusters defined for
+    #   an account are returned by default.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of response records to return in each call. If the
+    #   number of remaining response records exceeds the specified MaxRecords
+    #   value, a value is returned in the `marker` field of the response. You
+    #   can retrieve the next set of response records by providing the
+    #   returned `marker` value in the `marker` parameter and retrying the
+    #   request.
+    #
+    #   Default: 100
+    #
+    #   Constraints: minimum 20, maximum 100.
+    #
+    # @option params [String] :marker
+    #   An optional parameter that specifies the starting point for returning
+    #   a set of response records. When the results of a
+    #   `DescribeClusterDbRevisions` request exceed the value specified in
+    #   `MaxRecords`, Amazon Redshift returns a value in the `marker` field of
+    #   the response. You can retrieve the next set of response records by
+    #   providing the returned `marker` value in the `marker` parameter and
+    #   retrying the request.
+    #
+    #   Constraints: You can specify either the `ClusterIdentifier` parameter,
+    #   or the `marker` parameter, but not both.
+    #
+    # @return [Types::ClusterDbRevisionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ClusterDbRevisionsMessage#marker #marker} => String
+    #   * {Types::ClusterDbRevisionsMessage#cluster_db_revisions #cluster_db_revisions} => Array&lt;Types::ClusterDbRevision&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_cluster_db_revisions({
+    #     cluster_identifier: "String",
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.cluster_db_revisions #=> Array
+    #   resp.cluster_db_revisions[0].cluster_identifier #=> String
+    #   resp.cluster_db_revisions[0].current_database_revision #=> String
+    #   resp.cluster_db_revisions[0].database_revision_release_date #=> Time
+    #   resp.cluster_db_revisions[0].revision_targets #=> Array
+    #   resp.cluster_db_revisions[0].revision_targets[0].database_revision #=> String
+    #   resp.cluster_db_revisions[0].revision_targets[0].description #=> String
+    #   resp.cluster_db_revisions[0].revision_targets[0].database_revision_release_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterDbRevisions AWS API Documentation
+    #
+    # @overload describe_cluster_db_revisions(params = {})
+    # @param [Hash] params ({})
+    def describe_cluster_db_revisions(params = {}, options = {})
+      req = build_request(:describe_cluster_db_revisions, params)
       req.send_request(options)
     end
 
@@ -2520,6 +2654,7 @@ module Aws::Redshift
     #   resp.snapshots[0].restorable_node_types #=> Array
     #   resp.snapshots[0].restorable_node_types[0] #=> String
     #   resp.snapshots[0].enhanced_vpc_routing #=> Boolean
+    #   resp.snapshots[0].maintenance_track_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSnapshots AWS API Documentation
     #
@@ -2626,6 +2761,55 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def describe_cluster_subnet_groups(params = {}, options = {})
       req = build_request(:describe_cluster_subnet_groups, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of all the available maintenance tracks.
+    #
+    # @option params [String] :maintenance_track_name
+    #   The name of the maintenance track.
+    #
+    # @option params [Integer] :max_records
+    #   An integer value for the maximum number of maintenance tracks to
+    #   return.
+    #
+    # @option params [String] :marker
+    #   An optional parameter that specifies the starting point to return a
+    #   set of response records. When the results of a `DescribeClusterTracks`
+    #   request exceed the value specified in `MaxRecords`, Amazon Redshift
+    #   returns a value in the `Marker` field of the response. You can
+    #   retrieve the next set of response records by providing the returned
+    #   marker value in the `Marker` parameter and retrying the request.
+    #
+    # @return [Types::TrackListMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TrackListMessage#maintenance_tracks #maintenance_tracks} => Array&lt;Types::MaintenanceTrack&gt;
+    #   * {Types::TrackListMessage#marker #marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_cluster_tracks({
+    #     maintenance_track_name: "String",
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.maintenance_tracks #=> Array
+    #   resp.maintenance_tracks[0].maintenance_track_name #=> String
+    #   resp.maintenance_tracks[0].database_version #=> String
+    #   resp.maintenance_tracks[0].update_targets #=> Array
+    #   resp.maintenance_tracks[0].update_targets[0].maintenance_track_name #=> String
+    #   resp.maintenance_tracks[0].update_targets[0].database_version #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterTracks AWS API Documentation
+    #
+    # @overload describe_cluster_tracks(params = {})
+    # @param [Hash] params ({})
+    def describe_cluster_tracks(params = {}, options = {})
+      req = build_request(:describe_cluster_tracks, params)
       req.send_request(options)
     end
 
@@ -2827,6 +3011,7 @@ module Aws::Redshift
     #   resp.clusters[0].pending_modified_values.cluster_identifier #=> String
     #   resp.clusters[0].pending_modified_values.publicly_accessible #=> Boolean
     #   resp.clusters[0].pending_modified_values.enhanced_vpc_routing #=> Boolean
+    #   resp.clusters[0].pending_modified_values.maintenance_track_name #=> String
     #   resp.clusters[0].cluster_version #=> String
     #   resp.clusters[0].allow_version_upgrade #=> Boolean
     #   resp.clusters[0].number_of_nodes #=> Integer
@@ -2860,6 +3045,9 @@ module Aws::Redshift
     #   resp.clusters[0].iam_roles #=> Array
     #   resp.clusters[0].iam_roles[0].iam_role_arn #=> String
     #   resp.clusters[0].iam_roles[0].apply_status #=> String
+    #   resp.clusters[0].pending_actions #=> Array
+    #   resp.clusters[0].pending_actions[0] #=> String
+    #   resp.clusters[0].maintenance_track_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusters AWS API Documentation
     #
@@ -4125,6 +4313,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.cluster_identifier #=> String
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -4158,6 +4347,9 @@ module Aws::Redshift
     #   resp.cluster.iam_roles #=> Array
     #   resp.cluster.iam_roles[0].iam_role_arn #=> String
     #   resp.cluster.iam_roles[0].apply_status #=> String
+    #   resp.cluster.pending_actions #=> Array
+    #   resp.cluster.pending_actions[0] #=> String
+    #   resp.cluster.maintenance_track_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopy AWS API Documentation
     #
@@ -4325,6 +4517,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.cluster_identifier #=> String
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -4358,6 +4551,9 @@ module Aws::Redshift
     #   resp.cluster.iam_roles #=> Array
     #   resp.cluster.iam_roles[0].iam_role_arn #=> String
     #   resp.cluster.iam_roles[0].apply_status #=> String
+    #   resp.cluster.pending_actions #=> Array
+    #   resp.cluster.pending_actions[0] #=> String
+    #   resp.cluster.maintenance_track_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopy AWS API Documentation
     #
@@ -4525,6 +4721,59 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def get_cluster_credentials(params = {}, options = {})
       req = build_request(:get_cluster_credentials, params)
+      req.send_request(options)
+    end
+
+    # Returns an array of DC2 ReservedNodeOfferings that matches the payment
+    # type, term, and usage price of the given DC1 reserved node.
+    #
+    # @option params [required, String] :reserved_node_id
+    #   A string representing the node identifier for the DC1 Reserved Node to
+    #   be exchanged.
+    #
+    # @option params [Integer] :max_records
+    #   An integer setting the maximum number of ReservedNodeOfferings to
+    #   retrieve.
+    #
+    # @option params [String] :marker
+    #   A value that indicates the starting point for the next set of
+    #   ReservedNodeOfferings.
+    #
+    # @return [Types::GetReservedNodeExchangeOfferingsOutputMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetReservedNodeExchangeOfferingsOutputMessage#marker #marker} => String
+    #   * {Types::GetReservedNodeExchangeOfferingsOutputMessage#reserved_node_offerings #reserved_node_offerings} => Array&lt;Types::ReservedNodeOffering&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_reserved_node_exchange_offerings({
+    #     reserved_node_id: "String", # required
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.reserved_node_offerings #=> Array
+    #   resp.reserved_node_offerings[0].reserved_node_offering_id #=> String
+    #   resp.reserved_node_offerings[0].node_type #=> String
+    #   resp.reserved_node_offerings[0].duration #=> Integer
+    #   resp.reserved_node_offerings[0].fixed_price #=> Float
+    #   resp.reserved_node_offerings[0].usage_price #=> Float
+    #   resp.reserved_node_offerings[0].currency_code #=> String
+    #   resp.reserved_node_offerings[0].offering_type #=> String
+    #   resp.reserved_node_offerings[0].recurring_charges #=> Array
+    #   resp.reserved_node_offerings[0].recurring_charges[0].recurring_charge_amount #=> Float
+    #   resp.reserved_node_offerings[0].recurring_charges[0].recurring_charge_frequency #=> String
+    #   resp.reserved_node_offerings[0].reserved_node_offering_type #=> String, one of "Regular", "Upgradable"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetReservedNodeExchangeOfferings AWS API Documentation
+    #
+    # @overload get_reserved_node_exchange_offerings(params = {})
+    # @param [Hash] params ({})
+    def get_reserved_node_exchange_offerings(params = {}, options = {})
+      req = build_request(:get_reserved_node_exchange_offerings, params)
       req.send_request(options)
     end
 
@@ -4765,6 +5014,14 @@ module Aws::Redshift
     #
     #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
     #
+    # @option params [String] :maintenance_track_name
+    #   The name for the maintenance track that you want to assign for the
+    #   cluster. This name change is asynchronous. The new track name stays in
+    #   the `PendingModifiedValues` for the cluster until the next maintenance
+    #   window. When the maintenance track changes, the cluster is switched to
+    #   the latest cluster release available for the maintenance track. At
+    #   this point, the maintenance track name is applied.
+    #
     # @return [Types::ModifyClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyClusterResult#cluster #cluster} => Types::Cluster
@@ -4790,6 +5047,7 @@ module Aws::Redshift
     #     publicly_accessible: false,
     #     elastic_ip: "String",
     #     enhanced_vpc_routing: false,
+    #     maintenance_track_name: "String",
     #   })
     #
     # @example Response structure
@@ -4830,6 +5088,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.cluster_identifier #=> String
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -4863,6 +5122,9 @@ module Aws::Redshift
     #   resp.cluster.iam_roles #=> Array
     #   resp.cluster.iam_roles[0].iam_role_arn #=> String
     #   resp.cluster.iam_roles[0].apply_status #=> String
+    #   resp.cluster.pending_actions #=> Array
+    #   resp.cluster.pending_actions[0] #=> String
+    #   resp.cluster.maintenance_track_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyCluster AWS API Documentation
     #
@@ -4870,6 +5132,115 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def modify_cluster(params = {}, options = {})
       req = build_request(:modify_cluster, params)
+      req.send_request(options)
+    end
+
+    # Modifies the database revision of a cluster. The database revision is
+    # a unique revision of the database running in a cluster.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The unique identifier of a cluster whose database revision you want to
+    #   modify.
+    #
+    #   Example: `examplecluster`
+    #
+    # @option params [required, String] :revision_target
+    #   The identifier of the database revision. You can retrieve this value
+    #   from the response to the DescribeClusterDbRevisions request.
+    #
+    # @return [Types::ModifyClusterDbRevisionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyClusterDbRevisionResult#cluster #cluster} => Types::Cluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_cluster_db_revision({
+    #     cluster_identifier: "String", # required
+    #     revision_target: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster.cluster_identifier #=> String
+    #   resp.cluster.node_type #=> String
+    #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.modify_status #=> String
+    #   resp.cluster.master_username #=> String
+    #   resp.cluster.db_name #=> String
+    #   resp.cluster.endpoint.address #=> String
+    #   resp.cluster.endpoint.port #=> Integer
+    #   resp.cluster.cluster_create_time #=> Time
+    #   resp.cluster.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.cluster_security_groups #=> Array
+    #   resp.cluster.cluster_security_groups[0].cluster_security_group_name #=> String
+    #   resp.cluster.cluster_security_groups[0].status #=> String
+    #   resp.cluster.vpc_security_groups #=> Array
+    #   resp.cluster.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.cluster.vpc_security_groups[0].status #=> String
+    #   resp.cluster.cluster_parameter_groups #=> Array
+    #   resp.cluster.cluster_parameter_groups[0].parameter_group_name #=> String
+    #   resp.cluster.cluster_parameter_groups[0].parameter_apply_status #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list #=> Array
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_name #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_apply_status #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_apply_error_description #=> String
+    #   resp.cluster.cluster_subnet_group_name #=> String
+    #   resp.cluster.vpc_id #=> String
+    #   resp.cluster.availability_zone #=> String
+    #   resp.cluster.preferred_maintenance_window #=> String
+    #   resp.cluster.pending_modified_values.master_user_password #=> String
+    #   resp.cluster.pending_modified_values.node_type #=> String
+    #   resp.cluster.pending_modified_values.number_of_nodes #=> Integer
+    #   resp.cluster.pending_modified_values.cluster_type #=> String
+    #   resp.cluster.pending_modified_values.cluster_version #=> String
+    #   resp.cluster.pending_modified_values.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.pending_modified_values.cluster_identifier #=> String
+    #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
+    #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.cluster_version #=> String
+    #   resp.cluster.allow_version_upgrade #=> Boolean
+    #   resp.cluster.number_of_nodes #=> Integer
+    #   resp.cluster.publicly_accessible #=> Boolean
+    #   resp.cluster.encrypted #=> Boolean
+    #   resp.cluster.restore_status.status #=> String
+    #   resp.cluster.restore_status.current_restore_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.restore_status.snapshot_size_in_mega_bytes #=> Integer
+    #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
+    #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
+    #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
+    #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
+    #   resp.cluster.hsm_status.status #=> String
+    #   resp.cluster.cluster_snapshot_copy_status.destination_region #=> String
+    #   resp.cluster.cluster_snapshot_copy_status.retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.snapshot_copy_grant_name #=> String
+    #   resp.cluster.cluster_public_key #=> String
+    #   resp.cluster.cluster_nodes #=> Array
+    #   resp.cluster.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.elastic_ip_status.elastic_ip #=> String
+    #   resp.cluster.elastic_ip_status.status #=> String
+    #   resp.cluster.cluster_revision_number #=> String
+    #   resp.cluster.tags #=> Array
+    #   resp.cluster.tags[0].key #=> String
+    #   resp.cluster.tags[0].value #=> String
+    #   resp.cluster.kms_key_id #=> String
+    #   resp.cluster.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.iam_roles #=> Array
+    #   resp.cluster.iam_roles[0].iam_role_arn #=> String
+    #   resp.cluster.iam_roles[0].apply_status #=> String
+    #   resp.cluster.pending_actions #=> Array
+    #   resp.cluster.pending_actions[0] #=> String
+    #   resp.cluster.maintenance_track_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterDbRevision AWS API Documentation
+    #
+    # @overload modify_cluster_db_revision(params = {})
+    # @param [Hash] params ({})
+    def modify_cluster_db_revision(params = {}, options = {})
+      req = build_request(:modify_cluster_db_revision, params)
       req.send_request(options)
     end
 
@@ -4942,6 +5313,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.cluster_identifier #=> String
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -4975,6 +5347,9 @@ module Aws::Redshift
     #   resp.cluster.iam_roles #=> Array
     #   resp.cluster.iam_roles[0].iam_role_arn #=> String
     #   resp.cluster.iam_roles[0].apply_status #=> String
+    #   resp.cluster.pending_actions #=> Array
+    #   resp.cluster.pending_actions[0] #=> String
+    #   resp.cluster.maintenance_track_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRoles AWS API Documentation
     #
@@ -5259,6 +5634,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.cluster_identifier #=> String
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -5292,6 +5668,9 @@ module Aws::Redshift
     #   resp.cluster.iam_roles #=> Array
     #   resp.cluster.iam_roles[0].iam_role_arn #=> String
     #   resp.cluster.iam_roles[0].apply_status #=> String
+    #   resp.cluster.pending_actions #=> Array
+    #   resp.cluster.pending_actions[0] #=> String
+    #   resp.cluster.maintenance_track_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriod AWS API Documentation
     #
@@ -5426,6 +5805,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.cluster_identifier #=> String
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -5459,6 +5839,9 @@ module Aws::Redshift
     #   resp.cluster.iam_roles #=> Array
     #   resp.cluster.iam_roles[0].iam_role_arn #=> String
     #   resp.cluster.iam_roles[0].apply_status #=> String
+    #   resp.cluster.pending_actions #=> Array
+    #   resp.cluster.pending_actions[0] #=> String
+    #   resp.cluster.maintenance_track_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootCluster AWS API Documentation
     #
@@ -5743,6 +6126,15 @@ module Aws::Redshift
     #
     #   A cluster can have up to 10 IAM roles associated at any time.
     #
+    # @option params [String] :maintenance_track_name
+    #   The name of the maintenance track for the restored cluster. When you
+    #   take a snapshot, the snapshot inherits the `MaintenanceTrack` value
+    #   from the cluster. The snapshot might be on a different track than the
+    #   cluster that was the source for the snapshot. For example, suppose
+    #   that you take a snapshot of a cluster that is on the current track and
+    #   then change the cluster to be on the trailing track. In this case, the
+    #   snapshot and the source cluster are on different tracks.
+    #
     # @return [Types::RestoreFromClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreFromClusterSnapshotResult#cluster #cluster} => Types::Cluster
@@ -5772,6 +6164,7 @@ module Aws::Redshift
     #     enhanced_vpc_routing: false,
     #     additional_info: "String",
     #     iam_roles: ["String"],
+    #     maintenance_track_name: "String",
     #   })
     #
     # @example Response structure
@@ -5812,6 +6205,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.cluster_identifier #=> String
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -5845,6 +6239,9 @@ module Aws::Redshift
     #   resp.cluster.iam_roles #=> Array
     #   resp.cluster.iam_roles[0].iam_role_arn #=> String
     #   resp.cluster.iam_roles[0].apply_status #=> String
+    #   resp.cluster.pending_actions #=> Array
+    #   resp.cluster.pending_actions[0] #=> String
+    #   resp.cluster.maintenance_track_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshot AWS API Documentation
     #
@@ -6092,6 +6489,7 @@ module Aws::Redshift
     #   resp.snapshot.restorable_node_types #=> Array
     #   resp.snapshot.restorable_node_types[0] #=> String
     #   resp.snapshot.enhanced_vpc_routing #=> Boolean
+    #   resp.snapshot.maintenance_track_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeSnapshotAccess AWS API Documentation
     #
@@ -6159,6 +6557,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.cluster_identifier #=> String
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -6192,6 +6591,9 @@ module Aws::Redshift
     #   resp.cluster.iam_roles #=> Array
     #   resp.cluster.iam_roles[0].iam_role_arn #=> String
     #   resp.cluster.iam_roles[0].apply_status #=> String
+    #   resp.cluster.pending_actions #=> Array
+    #   resp.cluster.pending_actions[0] #=> String
+    #   resp.cluster.maintenance_track_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKey AWS API Documentation
     #
@@ -6215,7 +6617,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -76,6 +76,20 @@ module Aws::IAM
       data[:attachment_count]
     end
 
+    # The number of entities (users and roles) for which the policy is used
+    # to set the permissions boundary.
+    #
+    # For more information about permissions boundaries, see [Permissions
+    # Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    # @return [Integer]
+    def permissions_boundary_usage_count
+      data[:permissions_boundary_usage_count]
+    end
+
     # Specifies whether the policy can be attached to an IAM user, group, or
     # role.
     # @return [Boolean]
@@ -468,6 +482,7 @@ module Aws::IAM
     #
     #   attached_groups = policy.attached_groups({
     #     path_prefix: "pathType",
+    #     policy_usage_filter: "PermissionsPolicy", # accepts PermissionsPolicy, PermissionsBoundary
     #   })
     # @param [Hash] options ({})
     # @option options [String] :path_prefix
@@ -485,6 +500,16 @@ module Aws::IAM
     #
     #
     #   [1]: http://wikipedia.org/wiki/regex
+    # @option options [String] :policy_usage_filter
+    #   The policy usage method to use for filtering the results.
+    #
+    #   To list only permissions policies,
+    #   set `PolicyUsageFilter` to `PermissionsPolicy`. To list only the
+    #   policies used to set permissions boundaries, set the value
+    #   to `PermissionsBoundary`.
+    #
+    #   This parameter is optional. If it is not included, all policies are
+    #   returned.
     # @return [Group::Collection]
     def attached_groups(options = {})
       batches = Enumerator.new do |y|
@@ -512,6 +537,7 @@ module Aws::IAM
     #
     #   attached_roles = policy.attached_roles({
     #     path_prefix: "pathType",
+    #     policy_usage_filter: "PermissionsPolicy", # accepts PermissionsPolicy, PermissionsBoundary
     #   })
     # @param [Hash] options ({})
     # @option options [String] :path_prefix
@@ -529,6 +555,16 @@ module Aws::IAM
     #
     #
     #   [1]: http://wikipedia.org/wiki/regex
+    # @option options [String] :policy_usage_filter
+    #   The policy usage method to use for filtering the results.
+    #
+    #   To list only permissions policies,
+    #   set `PolicyUsageFilter` to `PermissionsPolicy`. To list only the
+    #   policies used to set permissions boundaries, set the value
+    #   to `PermissionsBoundary`.
+    #
+    #   This parameter is optional. If it is not included, all policies are
+    #   returned.
     # @return [Role::Collection]
     def attached_roles(options = {})
       batches = Enumerator.new do |y|
@@ -556,6 +592,7 @@ module Aws::IAM
     #
     #   attached_users = policy.attached_users({
     #     path_prefix: "pathType",
+    #     policy_usage_filter: "PermissionsPolicy", # accepts PermissionsPolicy, PermissionsBoundary
     #   })
     # @param [Hash] options ({})
     # @option options [String] :path_prefix
@@ -573,6 +610,16 @@ module Aws::IAM
     #
     #
     #   [1]: http://wikipedia.org/wiki/regex
+    # @option options [String] :policy_usage_filter
+    #   The policy usage method to use for filtering the results.
+    #
+    #   To list only permissions policies,
+    #   set `PolicyUsageFilter` to `PermissionsPolicy`. To list only the
+    #   policies used to set permissions boundaries, set the value
+    #   to `PermissionsBoundary`.
+    #
+    #   This parameter is optional. If it is not included, all policies are
+    #   returned.
     # @return [User::Collection]
     def attached_users(options = {})
       batches = Enumerator.new do |y|

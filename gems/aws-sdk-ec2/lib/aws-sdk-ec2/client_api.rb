@@ -530,6 +530,7 @@ module Aws::EC2
     FleetLaunchTemplateOverridesRequest = Shapes::StructureShape.new(name: 'FleetLaunchTemplateOverridesRequest')
     FleetLaunchTemplateSpecification = Shapes::StructureShape.new(name: 'FleetLaunchTemplateSpecification')
     FleetLaunchTemplateSpecificationRequest = Shapes::StructureShape.new(name: 'FleetLaunchTemplateSpecificationRequest')
+    FleetOnDemandAllocationStrategy = Shapes::StringShape.new(name: 'FleetOnDemandAllocationStrategy')
     FleetSet = Shapes::ListShape.new(name: 'FleetSet')
     FleetStateCode = Shapes::StringShape.new(name: 'FleetStateCode')
     FleetType = Shapes::StringShape.new(name: 'FleetType')
@@ -698,6 +699,8 @@ module Aws::EC2
     LaunchTemplateBlockDeviceMappingRequestList = Shapes::ListShape.new(name: 'LaunchTemplateBlockDeviceMappingRequestList')
     LaunchTemplateConfig = Shapes::StructureShape.new(name: 'LaunchTemplateConfig')
     LaunchTemplateConfigList = Shapes::ListShape.new(name: 'LaunchTemplateConfigList')
+    LaunchTemplateCpuOptions = Shapes::StructureShape.new(name: 'LaunchTemplateCpuOptions')
+    LaunchTemplateCpuOptionsRequest = Shapes::StructureShape.new(name: 'LaunchTemplateCpuOptionsRequest')
     LaunchTemplateEbsBlockDevice = Shapes::StructureShape.new(name: 'LaunchTemplateEbsBlockDevice')
     LaunchTemplateEbsBlockDeviceRequest = Shapes::StructureShape.new(name: 'LaunchTemplateEbsBlockDeviceRequest')
     LaunchTemplateErrorCode = Shapes::StringShape.new(name: 'LaunchTemplateErrorCode')
@@ -822,6 +825,9 @@ module Aws::EC2
     OccurrenceDaySet = Shapes::ListShape.new(name: 'OccurrenceDaySet')
     OfferingClassType = Shapes::StringShape.new(name: 'OfferingClassType')
     OfferingTypeValues = Shapes::StringShape.new(name: 'OfferingTypeValues')
+    OnDemandAllocationStrategy = Shapes::StringShape.new(name: 'OnDemandAllocationStrategy')
+    OnDemandOptions = Shapes::StructureShape.new(name: 'OnDemandOptions')
+    OnDemandOptionsRequest = Shapes::StructureShape.new(name: 'OnDemandOptionsRequest')
     OperationType = Shapes::StringShape.new(name: 'OperationType')
     OwnerStringList = Shapes::ListShape.new(name: 'OwnerStringList')
     PaymentOption = Shapes::StringShape.new(name: 'PaymentOption')
@@ -1688,6 +1694,7 @@ module Aws::EC2
     CreateFleetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateFleetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
     CreateFleetRequest.add_member(:spot_options, Shapes::ShapeRef.new(shape: SpotOptionsRequest, location_name: "SpotOptions"))
+    CreateFleetRequest.add_member(:on_demand_options, Shapes::ShapeRef.new(shape: OnDemandOptionsRequest, location_name: "OnDemandOptions"))
     CreateFleetRequest.add_member(:excess_capacity_termination_policy, Shapes::ShapeRef.new(shape: FleetExcessCapacityTerminationPolicy, location_name: "ExcessCapacityTerminationPolicy"))
     CreateFleetRequest.add_member(:launch_template_configs, Shapes::ShapeRef.new(shape: FleetLaunchTemplateConfigListRequest, required: true, location_name: "LaunchTemplateConfigs"))
     CreateFleetRequest.add_member(:target_capacity_specification, Shapes::ShapeRef.new(shape: TargetCapacitySpecificationRequest, required: true, location_name: "TargetCapacitySpecification"))
@@ -3318,6 +3325,7 @@ module Aws::EC2
     FleetData.add_member(:valid_until, Shapes::ShapeRef.new(shape: DateTime, location_name: "validUntil"))
     FleetData.add_member(:replace_unhealthy_instances, Shapes::ShapeRef.new(shape: Boolean, location_name: "replaceUnhealthyInstances"))
     FleetData.add_member(:spot_options, Shapes::ShapeRef.new(shape: SpotOptions, location_name: "spotOptions"))
+    FleetData.add_member(:on_demand_options, Shapes::ShapeRef.new(shape: OnDemandOptions, location_name: "onDemandOptions"))
     FleetData.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     FleetData.struct_class = Types::FleetData
 
@@ -3340,6 +3348,7 @@ module Aws::EC2
     FleetLaunchTemplateOverrides.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "subnetId"))
     FleetLaunchTemplateOverrides.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
     FleetLaunchTemplateOverrides.add_member(:weighted_capacity, Shapes::ShapeRef.new(shape: Double, location_name: "weightedCapacity"))
+    FleetLaunchTemplateOverrides.add_member(:priority, Shapes::ShapeRef.new(shape: Double, location_name: "priority"))
     FleetLaunchTemplateOverrides.struct_class = Types::FleetLaunchTemplateOverrides
 
     FleetLaunchTemplateOverridesList.member = Shapes::ShapeRef.new(shape: FleetLaunchTemplateOverrides, location_name: "item")
@@ -3351,6 +3360,7 @@ module Aws::EC2
     FleetLaunchTemplateOverridesRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "SubnetId"))
     FleetLaunchTemplateOverridesRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
     FleetLaunchTemplateOverridesRequest.add_member(:weighted_capacity, Shapes::ShapeRef.new(shape: Double, location_name: "WeightedCapacity"))
+    FleetLaunchTemplateOverridesRequest.add_member(:priority, Shapes::ShapeRef.new(shape: Double, location_name: "Priority"))
     FleetLaunchTemplateOverridesRequest.struct_class = Types::FleetLaunchTemplateOverridesRequest
 
     FleetLaunchTemplateSpecification.add_member(:launch_template_id, Shapes::ShapeRef.new(shape: String, location_name: "launchTemplateId"))
@@ -3509,6 +3519,7 @@ module Aws::EC2
     Host.add_member(:state, Shapes::ShapeRef.new(shape: AllocationState, location_name: "state"))
     Host.add_member(:allocation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "allocationTime"))
     Host.add_member(:release_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "releaseTime"))
+    Host.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     Host.struct_class = Types::Host
 
     HostInstance.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
@@ -4102,6 +4113,14 @@ module Aws::EC2
 
     LaunchTemplateConfigList.member = Shapes::ShapeRef.new(shape: LaunchTemplateConfig, location_name: "item")
 
+    LaunchTemplateCpuOptions.add_member(:core_count, Shapes::ShapeRef.new(shape: Integer, location_name: "coreCount"))
+    LaunchTemplateCpuOptions.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: Integer, location_name: "threadsPerCore"))
+    LaunchTemplateCpuOptions.struct_class = Types::LaunchTemplateCpuOptions
+
+    LaunchTemplateCpuOptionsRequest.add_member(:core_count, Shapes::ShapeRef.new(shape: Integer, location_name: "CoreCount"))
+    LaunchTemplateCpuOptionsRequest.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: Integer, location_name: "ThreadsPerCore"))
+    LaunchTemplateCpuOptionsRequest.struct_class = Types::LaunchTemplateCpuOptionsRequest
+
     LaunchTemplateEbsBlockDevice.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
     LaunchTemplateEbsBlockDevice.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "deleteOnTermination"))
     LaunchTemplateEbsBlockDevice.add_member(:iops, Shapes::ShapeRef.new(shape: Integer, location_name: "iops"))
@@ -4175,6 +4194,7 @@ module Aws::EC2
     LaunchTemplateOverrides.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "subnetId"))
     LaunchTemplateOverrides.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
     LaunchTemplateOverrides.add_member(:weighted_capacity, Shapes::ShapeRef.new(shape: Double, location_name: "weightedCapacity"))
+    LaunchTemplateOverrides.add_member(:priority, Shapes::ShapeRef.new(shape: Double, location_name: "priority"))
     LaunchTemplateOverrides.struct_class = Types::LaunchTemplateOverrides
 
     LaunchTemplateOverridesList.member = Shapes::ShapeRef.new(shape: LaunchTemplateOverrides, location_name: "item")
@@ -4647,6 +4667,12 @@ module Aws::EC2
 
     OccurrenceDaySet.member = Shapes::ShapeRef.new(shape: Integer, location_name: "item")
 
+    OnDemandOptions.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: FleetOnDemandAllocationStrategy, location_name: "allocationStrategy"))
+    OnDemandOptions.struct_class = Types::OnDemandOptions
+
+    OnDemandOptionsRequest.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: FleetOnDemandAllocationStrategy, location_name: "AllocationStrategy"))
+    OnDemandOptionsRequest.struct_class = Types::OnDemandOptionsRequest
+
     OwnerStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "Owner")
 
     PciId.add_member(:device_id, Shapes::ShapeRef.new(shape: String, location_name: "DeviceId"))
@@ -4731,7 +4757,7 @@ module Aws::EC2
     PrivateIpAddressConfigSet.member = Shapes::ShapeRef.new(shape: ScheduledInstancesPrivateIpAddressConfig, location_name: "PrivateIpAddressConfigSet")
 
     PrivateIpAddressSpecification.add_member(:primary, Shapes::ShapeRef.new(shape: Boolean, location_name: "primary"))
-    PrivateIpAddressSpecification.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, required: true, location_name: "privateIpAddress"))
+    PrivateIpAddressSpecification.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "privateIpAddress"))
     PrivateIpAddressSpecification.struct_class = Types::PrivateIpAddressSpecification
 
     PrivateIpAddressSpecificationList.member = Shapes::ShapeRef.new(shape: PrivateIpAddressSpecification, location_name: "item")
@@ -4958,6 +4984,7 @@ module Aws::EC2
     RequestLaunchTemplateData.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroupStringList, location_name: "SecurityGroup"))
     RequestLaunchTemplateData.add_member(:instance_market_options, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMarketOptionsRequest, location_name: "InstanceMarketOptions"))
     RequestLaunchTemplateData.add_member(:credit_specification, Shapes::ShapeRef.new(shape: CreditSpecificationRequest, location_name: "CreditSpecification"))
+    RequestLaunchTemplateData.add_member(:cpu_options, Shapes::ShapeRef.new(shape: LaunchTemplateCpuOptionsRequest, location_name: "CpuOptions"))
     RequestLaunchTemplateData.struct_class = Types::RequestLaunchTemplateData
 
     RequestSpotFleetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -5182,6 +5209,7 @@ module Aws::EC2
     ResponseLaunchTemplateData.add_member(:security_groups, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "securityGroupSet"))
     ResponseLaunchTemplateData.add_member(:instance_market_options, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMarketOptions, location_name: "instanceMarketOptions"))
     ResponseLaunchTemplateData.add_member(:credit_specification, Shapes::ShapeRef.new(shape: CreditSpecification, location_name: "creditSpecification"))
+    ResponseLaunchTemplateData.add_member(:cpu_options, Shapes::ShapeRef.new(shape: LaunchTemplateCpuOptions, location_name: "cpuOptions"))
     ResponseLaunchTemplateData.struct_class = Types::ResponseLaunchTemplateData
 
     RestorableByStringList.member = Shapes::ShapeRef.new(shape: String)
@@ -5580,6 +5608,7 @@ module Aws::EC2
     SpotFleetRequestConfig.struct_class = Types::SpotFleetRequestConfig
 
     SpotFleetRequestConfigData.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: AllocationStrategy, location_name: "allocationStrategy"))
+    SpotFleetRequestConfigData.add_member(:on_demand_allocation_strategy, Shapes::ShapeRef.new(shape: OnDemandAllocationStrategy, location_name: "onDemandAllocationStrategy"))
     SpotFleetRequestConfigData.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
     SpotFleetRequestConfigData.add_member(:excess_capacity_termination_policy, Shapes::ShapeRef.new(shape: ExcessCapacityTerminationPolicy, location_name: "excessCapacityTerminationPolicy"))
     SpotFleetRequestConfigData.add_member(:fulfilled_capacity, Shapes::ShapeRef.new(shape: Double, location_name: "fulfilledCapacity"))
@@ -5597,6 +5626,7 @@ module Aws::EC2
     SpotFleetRequestConfigData.add_member(:replace_unhealthy_instances, Shapes::ShapeRef.new(shape: Boolean, location_name: "replaceUnhealthyInstances"))
     SpotFleetRequestConfigData.add_member(:instance_interruption_behavior, Shapes::ShapeRef.new(shape: InstanceInterruptionBehavior, location_name: "instanceInterruptionBehavior"))
     SpotFleetRequestConfigData.add_member(:load_balancers_config, Shapes::ShapeRef.new(shape: LoadBalancersConfig, location_name: "loadBalancersConfig"))
+    SpotFleetRequestConfigData.add_member(:instance_pools_to_use_count, Shapes::ShapeRef.new(shape: Integer, location_name: "instancePoolsToUseCount"))
     SpotFleetRequestConfigData.struct_class = Types::SpotFleetRequestConfigData
 
     SpotFleetRequestConfigSet.member = Shapes::ShapeRef.new(shape: SpotFleetRequestConfig, location_name: "item")
@@ -5650,10 +5680,12 @@ module Aws::EC2
 
     SpotOptions.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: SpotAllocationStrategy, location_name: "allocationStrategy"))
     SpotOptions.add_member(:instance_interruption_behavior, Shapes::ShapeRef.new(shape: SpotInstanceInterruptionBehavior, location_name: "instanceInterruptionBehavior"))
+    SpotOptions.add_member(:instance_pools_to_use_count, Shapes::ShapeRef.new(shape: Integer, location_name: "instancePoolsToUseCount"))
     SpotOptions.struct_class = Types::SpotOptions
 
     SpotOptionsRequest.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: SpotAllocationStrategy, location_name: "AllocationStrategy"))
     SpotOptionsRequest.add_member(:instance_interruption_behavior, Shapes::ShapeRef.new(shape: SpotInstanceInterruptionBehavior, location_name: "InstanceInterruptionBehavior"))
+    SpotOptionsRequest.add_member(:instance_pools_to_use_count, Shapes::ShapeRef.new(shape: Integer, location_name: "InstancePoolsToUseCount"))
     SpotOptionsRequest.struct_class = Types::SpotOptionsRequest
 
     SpotPlacement.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))

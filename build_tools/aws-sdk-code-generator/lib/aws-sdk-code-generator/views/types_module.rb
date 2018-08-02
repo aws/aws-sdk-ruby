@@ -169,6 +169,7 @@ module AwsSdkCodeGenerator
         return if inputs.include?(shape_ref['shape']) # recursion
         inputs << shape_ref['shape']
         s = shape(shape_ref)
+        raise "cannot locate shape #{shape_ref['shape']}" if s.nil?
         case s['type']
         when 'structure'
           return if s['members'].nil?

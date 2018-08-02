@@ -7013,6 +7013,55 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass LabelParameterVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "PSParameterName", # required
+    #         parameter_version: 1,
+    #         labels: ["ParameterLabel"], # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The parameter name on which you want to attach one or more labels.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameter_version
+    #   The specific version of the parameter on which you want to attach
+    #   one or more labels. If no version is specified, the system attaches
+    #   the label to the latest version.)
+    #   @return [Integer]
+    #
+    # @!attribute [rw] labels
+    #   One or more labels to attach to the specified parameter version.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/LabelParameterVersionRequest AWS API Documentation
+    #
+    class LabelParameterVersionRequest < Struct.new(
+      :name,
+      :parameter_version,
+      :labels)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] invalid_labels
+    #   The label does not meet the requirements. For information about
+    #   parameter label requirements, see [Labeling Parameters][1] in the
+    #   *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/LabelParameterVersionResult AWS API Documentation
+    #
+    class LabelParameterVersionResult < Struct.new(
+      :invalid_labels)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListAssociationVersionsRequest
     #   data as a hash:
     #
@@ -8657,13 +8706,42 @@ module Aws::SSM
     #   The parameter version.
     #   @return [Integer]
     #
+    # @!attribute [rw] selector
+    #   Either the version number or the label used to retrieve the
+    #   parameter value. Specify selectors by using one of the following
+    #   formats:
+    #
+    #   parameter\_name:version
+    #
+    #   parameter\_name:label
+    #   @return [String]
+    #
+    # @!attribute [rw] source_result
+    #   Applies to parameters that reference information in other AWS
+    #   services. SourceResult is the raw result or response from the
+    #   source.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   Date the parameter was last changed or updated and the parameter
+    #   version was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the parameter.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Parameter AWS API Documentation
     #
     class Parameter < Struct.new(
       :name,
       :type,
       :value,
-      :version)
+      :version,
+      :selector,
+      :source_result,
+      :last_modified_date,
+      :arn)
       include Aws::Structure
     end
 
@@ -8708,6 +8786,10 @@ module Aws::SSM
     #   The parameter version.
     #   @return [Integer]
     #
+    # @!attribute [rw] labels
+    #   Labels assigned to the parameter version.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterHistory AWS API Documentation
     #
     class ParameterHistory < Struct.new(
@@ -8719,7 +8801,8 @@ module Aws::SSM
       :description,
       :value,
       :allowed_pattern,
-      :version)
+      :version,
+      :labels)
       include Aws::Structure
     end
 
@@ -10108,7 +10191,7 @@ module Aws::SSM
     #           },
     #         ],
     #         task_arn: "MaintenanceWindowTaskArn", # required
-    #         service_role_arn: "ServiceRole", # required
+    #         service_role_arn: "ServiceRole",
     #         task_type: "RUN_COMMAND", # required, accepts RUN_COMMAND, AUTOMATION, STEP_FUNCTIONS, LAMBDA
     #         task_parameters: {
     #           "MaintenanceWindowTaskParameterName" => {
@@ -10183,7 +10266,24 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
-    #   The role that should be assumed when executing the task.
+    #   The role to assume when running the Maintenance Window task.
+    #
+    #   If you do not specify a service role ARN, Systems Manager will use
+    #   your account's service-linked role for Systems Manager by default.
+    #   If no service-linked role for Systems Manager exists in your
+    #   account, it will be created when you run
+    #   `RegisterTaskWithMaintenanceWindow` without specifying a service
+    #   role ARN.
+    #
+    #   For more information, see [Service-Linked Role Permissions for
+    #   Systems Manager][1] and [Should I Use a Service-Linked Role or a
+    #   Custom Service Role to Run Maintenance Window Tasks? ][2] in the
+    #   *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions
+    #   [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role
     #   @return [String]
     #
     # @!attribute [rw] task_type
@@ -11073,6 +11173,28 @@ module Aws::SSM
     #   step.
     #   @return [Hash<String,Array<String>>]
     #
+    # @!attribute [rw] is_end
+    #   The flag which can be used to end automation no matter whether the
+    #   step succeeds or fails.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] next_step
+    #   The next step after the step succeeds.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_critical
+    #   The flag which can be used to help decide whether the failure of
+    #   current step leads to the Automation failure.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] valid_next_steps
+    #   Strategies used when step fails, we support Continue and Abort.
+    #   Abort will fail the automation when the step fails. Continue will
+    #   ignore the failure of current step and allow automation to execute
+    #   the next step. With conditional branching, we add step:stepName to
+    #   support the automation to go to another specific step.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StepExecution AWS API Documentation
     #
     class StepExecution < Struct.new(
@@ -11091,7 +11213,11 @@ module Aws::SSM
       :failure_message,
       :failure_details,
       :step_execution_id,
-      :overridden_parameters)
+      :overridden_parameters,
+      :is_end,
+      :next_step,
+      :is_critical,
+      :valid_next_steps)
       include Aws::Structure
     end
 
@@ -11772,6 +11898,23 @@ module Aws::SSM
     # @!attribute [rw] service_role_arn
     #   The IAM service role ARN to modify. The system assumes this role
     #   during task execution.
+    #
+    #   If you do not specify a service role ARN, Systems Manager will use
+    #   your account's service-linked role for Systems Manager by default.
+    #   If no service-linked role for Systems Manager exists in your
+    #   account, it will be created when you run
+    #   `RegisterTaskWithMaintenanceWindow` without specifying a service
+    #   role ARN.
+    #
+    #   For more information, see [Service-Linked Role Permissions for
+    #   Systems Manager][1] and [Should I Use a Service-Linked Role or a
+    #   Custom Service Role to Run Maintenance Window Tasks? ][2] in the
+    #   *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions
+    #   [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role
     #   @return [String]
     #
     # @!attribute [rw] task_parameters

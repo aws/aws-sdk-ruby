@@ -17,19 +17,19 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] author
     #   The name of the author publishing the app.
     #
-    #   Min Length=1. Max Length=127.
+    #   Minimum length=1. Maximum length=127.
     #
     #   Pattern "^\[a-z0-9\]((\[a-z0-9\]\|-(?!-))*\[a-z0-9\])?$";
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The date/time this resource was created.
+    #   The date and time this resource was created.
     #   @return [String]
     #
     # @!attribute [rw] description
     #   The description of the application.
     #
-    #   Min Length=1. Max Length=256
+    #   Minimum length=1. Maximum length=256
     #   @return [String]
     #
     # @!attribute [rw] home_page_url
@@ -40,31 +40,31 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] labels
     #   Labels to improve discovery of apps in search results.
     #
-    #   Min Length=1. Max Length=127. Maximum number of labels: 10
+    #   Minimum length=1. Maximum length=127. Maximum number of labels: 10
     #
     #   Pattern: "^\[a-zA-Z0-9+\\\\-\_:\\\\/@\]+$";
     #   @return [Array<String>]
     #
     # @!attribute [rw] license_url
     #   A link to a license file of the app that matches the spdxLicenseID
-    #   of your application.
+    #   value of your application.
     #
-    #   Max size 5 MB
+    #   Maximum size 5 MB
     #   @return [String]
     #
     # @!attribute [rw] name
     #   The name of the application.
     #
-    #   Min Length=1. Max Length=140
+    #   Minimum length=1. Maximum length=140
     #
     #   Pattern: "\[a-zA-Z0-9\\\\-\]+";
     #   @return [String]
     #
     # @!attribute [rw] readme_url
-    #   A link to the readme file that contains a more detailed description
-    #   of the application and how it works in Markdown language.
+    #   A link to the readme file in Markdown language that contains a more
+    #   detailed description of the application and how it works.
     #
-    #   Max size 5 MB
+    #   Maximum size 5 MB
     #   @return [String]
     #
     # @!attribute [rw] spdx_license_id
@@ -92,10 +92,10 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # List of application details.
+    # A list of application details.
     #
     # @!attribute [rw] applications
-    #   Array of application summaries.
+    #   An array of application summaries.
     #   @return [Array<Types::ApplicationSummary>]
     #
     # @!attribute [rw] next_token
@@ -113,7 +113,7 @@ module Aws::ServerlessApplicationRepository
     # Policy statements applied to the application.
     #
     # @!attribute [rw] statements
-    #   Array of policy statements applied to the application.
+    #   An array of policy statements applied to the application.
     #   @return [Array<Types::ApplicationPolicyStatement>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ApplicationPolicy AWS API Documentation
@@ -135,17 +135,11 @@ module Aws::ServerlessApplicationRepository
     #       }
     #
     # @!attribute [rw] actions
-    #   A list of supported actions:
+    #   See [Application Permissions][1] for the list of supported actions.
     #
-    #   GetApplication
     #
-    #   CreateCloudFormationChangeSet
     #
-    #   ListApplicationVersions
-    #
-    #   SearchApplications
-    #
-    #   Deploy (Note: This action enables all other actions above.)
+    #   [1]: https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions
     #   @return [Array<String>]
     #
     # @!attribute [rw] principals
@@ -168,25 +162,25 @@ module Aws::ServerlessApplicationRepository
     # Summary of details about the application.
     #
     # @!attribute [rw] application_id
-    #   The application ARN.
+    #   The application Amazon Resource Name (ARN).
     #   @return [String]
     #
     # @!attribute [rw] author
     #   The name of the author publishing the app.
     #
-    #   Min Length=1. Max Length=127.
+    #   Minimum length=1. Maximum length=127.
     #
     #   Pattern "^\[a-z0-9\]((\[a-z0-9\]\|-(?!-))*\[a-z0-9\])?$";
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The date/time this resource was created.
+    #   The date and time this resource was created.
     #   @return [String]
     #
     # @!attribute [rw] description
     #   The description of the application.
     #
-    #   Min Length=1. Max Length=256
+    #   Minimum length=1. Maximum length=256
     #   @return [String]
     #
     # @!attribute [rw] home_page_url
@@ -197,7 +191,7 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] labels
     #   Labels to improve discovery of apps in search results.
     #
-    #   Min Length=1. Max Length=127. Maximum number of labels: 10
+    #   Minimum length=1. Maximum length=127. Maximum number of labels: 10
     #
     #   Pattern: "^\[a-zA-Z0-9+\\\\-\_:\\\\/@\]+$";
     #   @return [Array<String>]
@@ -205,7 +199,7 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] name
     #   The name of the application.
     #
-    #   Min Length=1. Max Length=140
+    #   Minimum length=1. Maximum length=140
     #
     #   Pattern: "\[a-zA-Z0-9\\\\-\]+";
     #   @return [String]
@@ -232,14 +226,14 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # List of version summaries for the application.
+    # A list of version summaries for the application.
     #
     # @!attribute [rw] next_token
     #   The token to request the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] versions
-    #   Array of version summaries for the application.
+    #   An array of version summaries for the application.
     #   @return [Array<Types::VersionSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ApplicationVersionPage AWS API Documentation
@@ -257,11 +251,11 @@ module Aws::ServerlessApplicationRepository
     #   @return [String]
     #
     # @!attribute [rw] change_set_id
-    #   The ARN of the change set.
+    #   The Amazon Resource Name (ARN) of the change set.
     #
-    #   Length Constraints: Minimum length of 1.
+    #   Length constraints: Minimum length of 1.
     #
-    #   Pattern: Amazon Resource Name (ARN):\[-a-zA-Z0-9:/\]*
+    #   Pattern: ARN:\[-a-zA-Z0-9:/\]*
     #   @return [String]
     #
     # @!attribute [rw] semantic_version
@@ -288,12 +282,12 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # Create application request.
+    # Create an application request.
     #
     # @!attribute [rw] author
     #   The name of the author publishing the app.
     #
-    #   Min Length=1. Max Length=127.
+    #   Minimum length=1. Maximum length=127.
     #
     #   Pattern "^\[a-z0-9\]((\[a-z0-9\]\|-(?!-))*\[a-z0-9\])?$";
     #   @return [String]
@@ -301,7 +295,7 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] description
     #   The description of the application.
     #
-    #   Min Length=1. Max Length=256
+    #   Minimum length=1. Maximum length=256
     #   @return [String]
     #
     # @!attribute [rw] home_page_url
@@ -312,45 +306,59 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] labels
     #   Labels to improve discovery of apps in search results.
     #
-    #   Min Length=1. Max Length=127. Maximum number of labels: 10
+    #   Minimum length=1. Maximum length=127. Maximum number of labels: 10
     #
     #   Pattern: "^\[a-zA-Z0-9+\\\\-\_:\\\\/@\]+$";
     #   @return [Array<String>]
     #
     # @!attribute [rw] license_body
-    #   A raw text file that contains the license of the app that matches
-    #   the spdxLicenseID of your application.
+    #   A local text file that contains the license of the app that matches
+    #   the spdxLicenseID value of your application. The file is of the
+    #   format file://&lt;path>/&lt;filename>.
     #
-    #   Max size 5 MB
+    #   Maximum size 5 MB
+    #
+    #   Note: Only one of licenseBody and licenseUrl can be specified,
+    #   otherwise an error will result.
     #   @return [String]
     #
     # @!attribute [rw] license_url
-    #   A link to a license file of the app that matches the spdxLicenseID
-    #   of your application.
+    #   A link to the S3 object that contains the license of the app that
+    #   matches the spdxLicenseID value of your application.
     #
-    #   Max size 5 MB
+    #   Maximum size 5 MB
+    #
+    #   Note: Only one of licenseBody and licenseUrl can be specified,
+    #   otherwise an error will result.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the application you want to publish.
+    #   The name of the application that you want to publish.
     #
-    #   Min Length=1. Max Length=140
+    #   Minimum length=1. Maximum length=140
     #
     #   Pattern: "\[a-zA-Z0-9\\\\-\]+";
     #   @return [String]
     #
     # @!attribute [rw] readme_body
-    #   A raw text Readme file that contains a more detailed description of
-    #   the application and how it works in markdown language.
+    #   A local text readme file in Markdown language that contains a more
+    #   detailed description of the application and how it works. The file
+    #   is of the format file://&lt;path>/&lt;filename>.
     #
-    #   Max size 5 MB
+    #   Maximum size 5 MB
+    #
+    #   Note: Only one of readmeBody and readmeUrl can be specified,
+    #   otherwise an error will result.
     #   @return [String]
     #
     # @!attribute [rw] readme_url
-    #   A link to the Readme file that contains a more detailed description
-    #   of the application and how it works in markdown language.
+    #   A link to the S3 object in Markdown language that contains a more
+    #   detailed description of the application and how it works.
     #
-    #   Max size 5 MB
+    #   Maximum size 5 MB
+    #
+    #   Note: Only one of readmeBody and readmeUrl can be specified,
+    #   otherwise an error will result.
     #   @return [String]
     #
     # @!attribute [rw] semantic_version
@@ -377,11 +385,19 @@ module Aws::ServerlessApplicationRepository
     #   @return [String]
     #
     # @!attribute [rw] template_body
-    #   The raw packaged AWS SAM template of your application.
+    #   The local raw packaged AWS SAM template file of your application.
+    #   The file is of the format file://&lt;path>/&lt;filename>.
+    #
+    #   Note: Only one of templateBody and templateUrl can be specified,
+    #   otherwise an error will result.
     #   @return [String]
     #
     # @!attribute [rw] template_url
-    #   A link to the packaged AWS SAM template of your application.
+    #   A link to the S3 object cotaining the packaged AWS SAM template of
+    #   your application.
+    #
+    #   Note: Only one of templateBody and templateUrl can be specified,
+    #   otherwise an error will result.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateApplicationInput AWS API Documentation
@@ -408,13 +424,13 @@ module Aws::ServerlessApplicationRepository
     #   data as a hash:
     #
     #       {
-    #         author: "__string",
-    #         description: "__string",
+    #         author: "__string", # required
+    #         description: "__string", # required
     #         home_page_url: "__string",
     #         labels: ["__string"],
     #         license_body: "__string",
     #         license_url: "__string",
-    #         name: "__string",
+    #         name: "__string", # required
     #         readme_body: "__string",
     #         readme_url: "__string",
     #         semantic_version: "__string",
@@ -537,7 +553,7 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # Create version request.
+    # Create a version request.
     #
     # @!attribute [rw] source_code_url
     #   A link to a public repository for the source code of your
@@ -628,7 +644,7 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # Create application ChangeSet request.
+    # Create an application change set request.
     #
     # @!attribute [rw] parameter_overrides
     #   A list of parameter values for the parameters of the application.
@@ -677,7 +693,7 @@ module Aws::ServerlessApplicationRepository
     #           },
     #         ],
     #         semantic_version: "__string",
-    #         stack_name: "__string",
+    #         stack_name: "__string", # required
     #       }
     #
     # @!attribute [rw] application_id
@@ -926,7 +942,7 @@ module Aws::ServerlessApplicationRepository
     #   @return [String]
     #
     # @!attribute [rw] allowed_values
-    #   Array containing the list of values allowed for the parameter.
+    #   An array containing the list of values allowed for the parameter.
     #   @return [Array<String>]
     #
     # @!attribute [rw] constraint_description
@@ -939,7 +955,7 @@ module Aws::ServerlessApplicationRepository
     #   \[A-Za-z0-9\]+
     #
     #   By adding a constraint description, such as "must contain only
-    #   uppercase and lowercase letters, and numbers," you can display the
+    #   uppercase and lowercase letters and numbers," you can display the
     #   following customized error message:
     #
     #   Malformed input-Parameter MyParameter must contain only uppercase
@@ -959,22 +975,22 @@ module Aws::ServerlessApplicationRepository
     #
     # @!attribute [rw] max_length
     #   An integer value that determines the largest number of characters
-    #   you want to allow for String types.
+    #   that you want to allow for String types.
     #   @return [Integer]
     #
     # @!attribute [rw] max_value
-    #   A numeric value that determines the largest numeric value you want
-    #   to allow for Number types.
+    #   A numeric value that determines the largest numeric value that you
+    #   want to allow for Number types.
     #   @return [Integer]
     #
     # @!attribute [rw] min_length
     #   An integer value that determines the smallest number of characters
-    #   you want to allow for String types.
+    #   that you want to allow for String types.
     #   @return [Integer]
     #
     # @!attribute [rw] min_value
-    #   A numeric value that determines the smallest numeric value you want
-    #   to allow for Number types.
+    #   A numeric value that determines the smallest numeric value that you
+    #   want to allow for Number types.
     #   @return [Integer]
     #
     # @!attribute [rw] name
@@ -999,29 +1015,29 @@ module Aws::ServerlessApplicationRepository
     #
     #   String: A literal string.
     #
-    #   For example, users could specify "MyUserName".
+    #   For example, users can specify "MyUserName".
     #
     #   Number: An integer or float. AWS CloudFormation validates the
-    #   parameter value as a number; however, when you use the parameter
+    #   parameter value as a number. However, when you use the parameter
     #   elsewhere in your template (for example, by using the Ref intrinsic
     #   function), the parameter value becomes a string.
     #
-    #   For example, users could specify "8888".
+    #   For example, users might specify "8888".
     #
     #   List&lt;Number>: An array of integers or floats that are separated
     #   by commas. AWS CloudFormation validates the parameter value as
-    #   numbers; however, when you use the parameter elsewhere in your
+    #   numbers. However, when you use the parameter elsewhere in your
     #   template (for example, by using the Ref intrinsic function), the
     #   parameter value becomes a list of strings.
     #
-    #   For example, users could specify "80,20", and a Ref results in
+    #   For example, users might specify "80,20", and then Ref results in
     #   \["80","20"\].
     #
     #   CommaDelimitedList: An array of literal strings that are separated
     #   by commas. The total number of strings should be one more than the
     #   total number of commas. Also, each member string is space-trimmed.
     #
-    #   For example, users could specify "test,dev,prod", and a Ref
+    #   For example, users might specify "test,dev,prod", and then Ref
     #   results in \["test","dev","prod"\].
     #   @return [String]
     #
@@ -1077,7 +1093,7 @@ module Aws::ServerlessApplicationRepository
     #
     #       {
     #         application_id: "__string", # required
-    #         statements: [
+    #         statements: [ # required
     #           {
     #             actions: ["__string"], # required
     #             principals: ["__string"], # required
@@ -1110,12 +1126,12 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # Update application request.
+    # Update the application request.
     #
     # @!attribute [rw] author
     #   The name of the author publishing the app.
     #
-    #   Min Length=1. Max Length=127.
+    #   Minimum length=1. Maximum length=127.
     #
     #   Pattern "^\[a-z0-9\]((\[a-z0-9\]\|-(?!-))*\[a-z0-9\])?$";
     #   @return [String]
@@ -1123,7 +1139,7 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] description
     #   The description of the application.
     #
-    #   Min Length=1. Max Length=256
+    #   Minimum length=1. Maximum length=256
     #   @return [String]
     #
     # @!attribute [rw] home_page_url
@@ -1134,23 +1150,23 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] labels
     #   Labels to improve discovery of apps in search results.
     #
-    #   Min Length=1. Max Length=127. Maximum number of labels: 10
+    #   Minimum length=1. Maximum length=127. Maximum number of labels: 10
     #
     #   Pattern: "^\[a-zA-Z0-9+\\\\-\_:\\\\/@\]+$";
     #   @return [Array<String>]
     #
     # @!attribute [rw] readme_body
-    #   A raw text Readme file that contains a more detailed description of
-    #   the application and how it works in markdown language.
+    #   A text readme file in Markdown language that contains a more
+    #   detailed description of the application and how it works.
     #
-    #   Max size 5 MB
+    #   Maximum size 5 MB
     #   @return [String]
     #
     # @!attribute [rw] readme_url
-    #   A link to the Readme file that contains a more detailed description
-    #   of the application and how it works in markdown language.
+    #   A link to the readme file in Markdown language that contains a more
+    #   detailed description of the application and how it works.
     #
-    #   Max size 5 MB
+    #   Maximum size 5 MB
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/UpdateApplicationInput AWS API Documentation
@@ -1270,11 +1286,11 @@ module Aws::ServerlessApplicationRepository
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The date/time this resource was created.
+    #   The date and time this resource was created.
     #   @return [String]
     #
     # @!attribute [rw] parameter_definitions
-    #   Array of parameter types supported by the application.
+    #   An array of parameter types supported by the application.
     #   @return [Array<Types::ParameterDefinition>]
     #
     # @!attribute [rw] semantic_version
@@ -1308,14 +1324,14 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # Application version summary.
+    # An application version summary.
     #
     # @!attribute [rw] application_id
     #   The application Amazon Resource Name (ARN).
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The date/time this resource was created.
+    #   The date and time this resource was created.
     #   @return [String]
     #
     # @!attribute [rw] semantic_version

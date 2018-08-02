@@ -38,6 +38,15 @@ describe 'Client Interface:' do
       }.to raise_error("no operations found for the service")
     end
 
+    it 'detects invalid shape_ref' do
+      expect {
+        SpecHelper.generate_service(['WhiteLabelInvalid'], multiple_files: false, custom: true)
+        WhiteLabelEmpty::Client.new(
+          stub_responses: true
+        )
+      }.to raise_error("cannot locate shape ShapeFoo")
+    end
+
     it 'populates x-api-key header correctly' do
       resp = client.put_apikey({
         scalar_types: {

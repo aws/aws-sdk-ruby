@@ -146,6 +146,7 @@ module Aws::ECS
     RegisterContainerInstanceResponse = Shapes::StructureShape.new(name: 'RegisterContainerInstanceResponse')
     RegisterTaskDefinitionRequest = Shapes::StructureShape.new(name: 'RegisterTaskDefinitionRequest')
     RegisterTaskDefinitionResponse = Shapes::StructureShape.new(name: 'RegisterTaskDefinitionResponse')
+    RepositoryCredentials = Shapes::StructureShape.new(name: 'RepositoryCredentials')
     RequiresAttributes = Shapes::ListShape.new(name: 'RequiresAttributes')
     Resource = Shapes::StructureShape.new(name: 'Resource')
     Resources = Shapes::ListShape.new(name: 'Resources')
@@ -263,6 +264,7 @@ module Aws::ECS
 
     ContainerDefinition.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     ContainerDefinition.add_member(:image, Shapes::ShapeRef.new(shape: String, location_name: "image"))
+    ContainerDefinition.add_member(:repository_credentials, Shapes::ShapeRef.new(shape: RepositoryCredentials, location_name: "repositoryCredentials"))
     ContainerDefinition.add_member(:cpu, Shapes::ShapeRef.new(shape: Integer, location_name: "cpu"))
     ContainerDefinition.add_member(:memory, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "memory"))
     ContainerDefinition.add_member(:memory_reservation, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "memoryReservation"))
@@ -680,6 +682,9 @@ module Aws::ECS
 
     RegisterTaskDefinitionResponse.add_member(:task_definition, Shapes::ShapeRef.new(shape: TaskDefinition, location_name: "taskDefinition"))
     RegisterTaskDefinitionResponse.struct_class = Types::RegisterTaskDefinitionResponse
+
+    RepositoryCredentials.add_member(:credentials_parameter, Shapes::ShapeRef.new(shape: String, required: true, location_name: "credentialsParameter"))
+    RepositoryCredentials.struct_class = Types::RepositoryCredentials
 
     RequiresAttributes.member = Shapes::ShapeRef.new(shape: Attribute)
 

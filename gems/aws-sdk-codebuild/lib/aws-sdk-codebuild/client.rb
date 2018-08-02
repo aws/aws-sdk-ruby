@@ -494,10 +494,12 @@ module Aws::CodeBuild
     #   resp.builds[0].source.buildspec #=> String
     #   resp.builds[0].source.auth.type #=> String, one of "OAUTH"
     #   resp.builds[0].source.auth.resource #=> String
+    #   resp.builds[0].source.report_build_status #=> Boolean
     #   resp.builds[0].source.insecure_ssl #=> Boolean
     #   resp.builds[0].artifacts.location #=> String
     #   resp.builds[0].artifacts.sha256sum #=> String
     #   resp.builds[0].artifacts.md5sum #=> String
+    #   resp.builds[0].artifacts.encryption_disabled #=> Boolean
     #   resp.builds[0].cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.builds[0].cache.location #=> String
     #   resp.builds[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
@@ -523,6 +525,7 @@ module Aws::CodeBuild
     #   resp.builds[0].vpc_config.security_group_ids[0] #=> String
     #   resp.builds[0].network_interface.subnet_id #=> String
     #   resp.builds[0].network_interface.network_interface_id #=> String
+    #   resp.builds[0].encryption_key #=> String
     #   resp.builds_not_found #=> Array
     #   resp.builds_not_found[0] #=> String
     #
@@ -563,6 +566,7 @@ module Aws::CodeBuild
     #   resp.projects[0].source.buildspec #=> String
     #   resp.projects[0].source.auth.type #=> String, one of "OAUTH"
     #   resp.projects[0].source.auth.resource #=> String
+    #   resp.projects[0].source.report_build_status #=> Boolean
     #   resp.projects[0].source.insecure_ssl #=> Boolean
     #   resp.projects[0].artifacts.type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.projects[0].artifacts.location #=> String
@@ -570,6 +574,7 @@ module Aws::CodeBuild
     #   resp.projects[0].artifacts.namespace_type #=> String, one of "NONE", "BUILD_ID"
     #   resp.projects[0].artifacts.name #=> String
     #   resp.projects[0].artifacts.packaging #=> String, one of "NONE", "ZIP"
+    #   resp.projects[0].artifacts.encryption_disabled #=> Boolean
     #   resp.projects[0].cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.projects[0].cache.location #=> String
     #   resp.projects[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
@@ -634,7 +639,7 @@ module Aws::CodeBuild
     # @option params [required, Types::ProjectEnvironment] :environment
     #   Information about the build environment for the build project.
     #
-    # @option params [String] :service_role
+    # @option params [required, String] :service_role
     #   The ARN of the AWS Identity and Access Management (IAM) role that
     #   enables AWS CodeBuild to interact with dependent AWS services on
     #   behalf of the AWS account.
@@ -682,6 +687,7 @@ module Aws::CodeBuild
     #         type: "OAUTH", # required, accepts OAUTH
     #         resource: "String",
     #       },
+    #       report_build_status: false,
     #       insecure_ssl: false,
     #     },
     #     artifacts: { # required
@@ -691,6 +697,7 @@ module Aws::CodeBuild
     #       namespace_type: "NONE", # accepts NONE, BUILD_ID
     #       name: "String",
     #       packaging: "NONE", # accepts NONE, ZIP
+    #       encryption_disabled: false,
     #     },
     #     cache: {
     #       type: "NO_CACHE", # required, accepts NO_CACHE, S3
@@ -710,7 +717,7 @@ module Aws::CodeBuild
     #       privileged_mode: false,
     #       certificate: "String",
     #     },
-    #     service_role: "NonEmptyString",
+    #     service_role: "NonEmptyString", # required
     #     timeout_in_minutes: 1,
     #     encryption_key: "NonEmptyString",
     #     tags: [
@@ -738,6 +745,7 @@ module Aws::CodeBuild
     #   resp.project.source.buildspec #=> String
     #   resp.project.source.auth.type #=> String, one of "OAUTH"
     #   resp.project.source.auth.resource #=> String
+    #   resp.project.source.report_build_status #=> Boolean
     #   resp.project.source.insecure_ssl #=> Boolean
     #   resp.project.artifacts.type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.project.artifacts.location #=> String
@@ -745,6 +753,7 @@ module Aws::CodeBuild
     #   resp.project.artifacts.namespace_type #=> String, one of "NONE", "BUILD_ID"
     #   resp.project.artifacts.name #=> String
     #   resp.project.artifacts.packaging #=> String, one of "NONE", "ZIP"
+    #   resp.project.artifacts.encryption_disabled #=> Boolean
     #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.project.cache.location #=> String
     #   resp.project.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
@@ -1167,6 +1176,11 @@ module Aws::CodeBuild
     #   code. This override applies only if the build's source is GitHub
     #   Enterprise.
     #
+    # @option params [Boolean] :report_build_status_override
+    #   Set to true to report to your source provider the status of a build's
+    #   start and completion. If you use this option with a source provider
+    #   other than GitHub, an invalidInputException is thrown.
+    #
     # @option params [String] :environment_type_override
     #   A container type for this build that overrides the one specified in
     #   the build project.
@@ -1222,6 +1236,7 @@ module Aws::CodeBuild
     #       namespace_type: "NONE", # accepts NONE, BUILD_ID
     #       name: "String",
     #       packaging: "NONE", # accepts NONE, ZIP
+    #       encryption_disabled: false,
     #     },
     #     environment_variables_override: [
     #       {
@@ -1239,6 +1254,7 @@ module Aws::CodeBuild
     #     git_clone_depth_override: 1,
     #     buildspec_override: "String",
     #     insecure_ssl_override: false,
+    #     report_build_status_override: false,
     #     environment_type_override: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER
     #     image_override: "NonEmptyString",
     #     compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
@@ -1278,10 +1294,12 @@ module Aws::CodeBuild
     #   resp.build.source.buildspec #=> String
     #   resp.build.source.auth.type #=> String, one of "OAUTH"
     #   resp.build.source.auth.resource #=> String
+    #   resp.build.source.report_build_status #=> Boolean
     #   resp.build.source.insecure_ssl #=> Boolean
     #   resp.build.artifacts.location #=> String
     #   resp.build.artifacts.sha256sum #=> String
     #   resp.build.artifacts.md5sum #=> String
+    #   resp.build.artifacts.encryption_disabled #=> Boolean
     #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.build.cache.location #=> String
     #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
@@ -1307,6 +1325,7 @@ module Aws::CodeBuild
     #   resp.build.vpc_config.security_group_ids[0] #=> String
     #   resp.build.network_interface.subnet_id #=> String
     #   resp.build.network_interface.network_interface_id #=> String
+    #   resp.build.encryption_key #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuild AWS API Documentation
     #
@@ -1357,10 +1376,12 @@ module Aws::CodeBuild
     #   resp.build.source.buildspec #=> String
     #   resp.build.source.auth.type #=> String, one of "OAUTH"
     #   resp.build.source.auth.resource #=> String
+    #   resp.build.source.report_build_status #=> Boolean
     #   resp.build.source.insecure_ssl #=> Boolean
     #   resp.build.artifacts.location #=> String
     #   resp.build.artifacts.sha256sum #=> String
     #   resp.build.artifacts.md5sum #=> String
+    #   resp.build.artifacts.encryption_disabled #=> Boolean
     #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.build.cache.location #=> String
     #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
@@ -1386,6 +1407,7 @@ module Aws::CodeBuild
     #   resp.build.vpc_config.security_group_ids[0] #=> String
     #   resp.build.network_interface.subnet_id #=> String
     #   resp.build.network_interface.network_interface_id #=> String
+    #   resp.build.encryption_key #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StopBuild AWS API Documentation
     #
@@ -1472,6 +1494,7 @@ module Aws::CodeBuild
     #         type: "OAUTH", # required, accepts OAUTH
     #         resource: "String",
     #       },
+    #       report_build_status: false,
     #       insecure_ssl: false,
     #     },
     #     artifacts: {
@@ -1481,6 +1504,7 @@ module Aws::CodeBuild
     #       namespace_type: "NONE", # accepts NONE, BUILD_ID
     #       name: "String",
     #       packaging: "NONE", # accepts NONE, ZIP
+    #       encryption_disabled: false,
     #     },
     #     cache: {
     #       type: "NO_CACHE", # required, accepts NO_CACHE, S3
@@ -1528,6 +1552,7 @@ module Aws::CodeBuild
     #   resp.project.source.buildspec #=> String
     #   resp.project.source.auth.type #=> String, one of "OAUTH"
     #   resp.project.source.auth.resource #=> String
+    #   resp.project.source.report_build_status #=> Boolean
     #   resp.project.source.insecure_ssl #=> Boolean
     #   resp.project.artifacts.type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.project.artifacts.location #=> String
@@ -1535,6 +1560,7 @@ module Aws::CodeBuild
     #   resp.project.artifacts.namespace_type #=> String, one of "NONE", "BUILD_ID"
     #   resp.project.artifacts.name #=> String
     #   resp.project.artifacts.packaging #=> String, one of "NONE", "ZIP"
+    #   resp.project.artifacts.encryption_disabled #=> Boolean
     #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.project.cache.location #=> String
     #   resp.project.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
@@ -1633,7 +1659,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

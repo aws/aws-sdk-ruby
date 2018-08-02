@@ -16,6 +16,8 @@ module Aws::EFS
     #         performance_mode: "generalPurpose", # accepts generalPurpose, maxIO
     #         encrypted: false,
     #         kms_key_id: "KmsKeyId",
+    #         throughput_mode: "bursting", # accepts bursting, provisioned
+    #         provisioned_throughput_in_mibps: 1.0,
     #       }
     #
     # @!attribute [rw] creation_token
@@ -33,7 +35,7 @@ module Aws::EFS
     #   @return [String]
     #
     # @!attribute [rw] encrypted
-    #   A boolean value that, if true, creates an encrypted file system.
+    #   A Boolean value that, if true, creates an encrypted file system.
     #   When creating an encrypted file system, you have the option of
     #   specifying a CreateFileSystemRequest$KmsKeyId for an existing AWS
     #   Key Management Service (AWS KMS) customer master key (CMK). If you
@@ -43,27 +45,48 @@ module Aws::EFS
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The id of the AWS KMS CMK that will be used to protect the encrypted
-    #   file system. This parameter is only required if you want to use a
+    #   The ID of the AWS KMS CMK to be used to protect the encrypted file
+    #   system. This parameter is only required if you want to use a
     #   non-default CMK. If this parameter is not specified, the default CMK
-    #   for Amazon EFS is used. This id can be in one of the following
+    #   for Amazon EFS is used. This ID can be in one of the following
     #   formats:
     #
-    #   * Key ID - A unique identifier of the key. For example,
+    #   * Key ID - A unique identifier of the key, for example,
     #     `1234abcd-12ab-34cd-56ef-1234567890ab`.
     #
-    #   * ARN - An Amazon Resource Name for the key. For example,
+    #   * ARN - An Amazon Resource Name (ARN) for the key, for example,
     #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
     #
     #   * Key alias - A previously created display name for a key. For
     #     example, `alias/projectKey1`.
     #
-    #   * Key alias ARN - An Amazon Resource Name for a key alias. For
-    #     example, `arn:aws:kms:us-west-2:444455556666:alias/projectKey1`.
+    #   * Key alias ARN - An ARN for a key alias, for example,
+    #     `arn:aws:kms:us-west-2:444455556666:alias/projectKey1`.
     #
-    #   Note that if the KmsKeyId is specified, the
-    #   CreateFileSystemRequest$Encrypted parameter must be set to true.
+    #   If KmsKeyId is specified, the CreateFileSystemRequest$Encrypted
+    #   parameter must be set to true.
     #   @return [String]
+    #
+    # @!attribute [rw] throughput_mode
+    #   The throughput mode for the file system to be created. There are two
+    #   throughput modes to choose from for your file system: bursting and
+    #   provisioned. You can decrease your file system's throughput in
+    #   Provisioned Throughput mode or change between the throughput modes
+    #   as long as it’s been more than 24 hours since the last decrease or
+    #   throughput mode change.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_throughput_in_mibps
+    #   The throughput, measured in MiB/s, that you want to provision for a
+    #   file system that you're creating. The limit on throughput is 1024
+    #   MiB/s. You can get these limits increased by contacting AWS Support.
+    #   For more information, see [Amazon EFS Limits That You Can
+    #   Increase][1] in the *Amazon EFS User Guide.*
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits
+    #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateFileSystemRequest AWS API Documentation
     #
@@ -71,7 +94,9 @@ module Aws::EFS
       :creation_token,
       :performance_mode,
       :encrypted,
-      :kms_key_id)
+      :kms_key_id,
+      :throughput_mode,
+      :provisioned_throughput_in_mibps)
       include Aws::Structure
     end
 
@@ -466,15 +491,15 @@ module Aws::EFS
     #
     # @!attribute [rw] size_in_bytes
     #   Latest known metered size (in bytes) of data stored in the file
-    #   system, in bytes, in its `Value` field, and the time at which that
-    #   size was determined in its `Timestamp` field. The `Timestamp` value
-    #   is the integer number of seconds since 1970-01-01T00:00:00Z. Note
-    #   that the value does not represent the size of a consistent snapshot
-    #   of the file system, but it is eventually consistent when there are
-    #   no writes to the file system. That is, the value will represent
-    #   actual size only if the file system is not modified for a period
-    #   longer than a couple of hours. Otherwise, the value is not the exact
-    #   size the file system was at any instant in time.
+    #   system, in its `Value` field, and the time at which that size was
+    #   determined in its `Timestamp` field. The `Timestamp` value is the
+    #   integer number of seconds since 1970-01-01T00:00:00Z. The
+    #   `SizeInBytes` value doesn't represent the size of a consistent
+    #   snapshot of the file system, but it is eventually consistent when
+    #   there are no writes to the file system. That is, `SizeInBytes`
+    #   represents actual size only if the file system is not modified for a
+    #   period longer than a couple of hours. Otherwise, the value is not
+    #   the exact size that the file system was at any point in time.
     #   @return [Types::FileSystemSize]
     #
     # @!attribute [rw] performance_mode
@@ -482,14 +507,35 @@ module Aws::EFS
     #   @return [String]
     #
     # @!attribute [rw] encrypted
-    #   A boolean value that, if true, indicates that the file system is
+    #   A Boolean value that, if true, indicates that the file system is
     #   encrypted.
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The id of an AWS Key Management Service (AWS KMS) customer master
+    #   The ID of an AWS Key Management Service (AWS KMS) customer master
     #   key (CMK) that was used to protect the encrypted file system.
     #   @return [String]
+    #
+    # @!attribute [rw] throughput_mode
+    #   The throughput mode for a file system. There are two throughput
+    #   modes to choose from for your file system: bursting and provisioned.
+    #   You can decrease your file system's throughput in Provisioned
+    #   Throughput mode or change between the throughput modes as long as
+    #   it’s been more than 24 hours since the last decrease or throughput
+    #   mode change.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_throughput_in_mibps
+    #   The throughput, measured in MiB/s, that you want to provision for a
+    #   file system. The limit on throughput is 1024 MiB/s. You can get
+    #   these limits increased by contacting AWS Support. For more
+    #   information, see [Amazon EFS Limits That You Can Increase][1] in the
+    #   *Amazon EFS User Guide.*
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits
+    #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/FileSystemDescription AWS API Documentation
     #
@@ -504,7 +550,9 @@ module Aws::EFS
       :size_in_bytes,
       :performance_mode,
       :encrypted,
-      :kms_key_id)
+      :kms_key_id,
+      :throughput_mode,
+      :provisioned_throughput_in_mibps)
       include Aws::Structure
     end
 
@@ -631,6 +679,41 @@ module Aws::EFS
     class Tag < Struct.new(
       :key,
       :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateFileSystemRequest
+    #   data as a hash:
+    #
+    #       {
+    #         file_system_id: "FileSystemId", # required
+    #         throughput_mode: "bursting", # accepts bursting, provisioned
+    #         provisioned_throughput_in_mibps: 1.0,
+    #       }
+    #
+    # @!attribute [rw] file_system_id
+    #   The ID of the file system that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] throughput_mode
+    #   (Optional) The throughput mode that you want your file system to
+    #   use. If you're not updating your throughput mode, you don't need
+    #   to provide this value in your request.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_throughput_in_mibps
+    #   (Optional) The amount of throughput, in MiB/s, that you want to
+    #   provision for your file system. If you're not updating the amount
+    #   of provisioned throughput for your file system, you don't need to
+    #   provide this value in your request.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/UpdateFileSystemRequest AWS API Documentation
+    #
+    class UpdateFileSystemRequest < Struct.new(
+      :file_system_id,
+      :throughput_mode,
+      :provisioned_throughput_in_mibps)
       include Aws::Structure
     end
 

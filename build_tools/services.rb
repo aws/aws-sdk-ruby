@@ -128,6 +128,7 @@ module BuildTools
     end
 
     def eventstream?(api)
+      return false if api['metadata']['protocolSettings'] && api['metadata']['protocolSettings']['h2']
       api['shapes'].each do |_, ref|
         return true if ref['eventstream'] || ref['event']
       end

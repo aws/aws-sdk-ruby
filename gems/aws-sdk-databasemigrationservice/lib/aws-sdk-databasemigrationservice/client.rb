@@ -306,11 +306,33 @@ module Aws::DatabaseMigrationService
     #
     #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html
     #
+    # @option params [Types::DmsTransferSettings] :dms_transfer_settings
+    #   The settings in JSON format for the DMS Transfer type source endpoint.
+    #
+    #   Attributes include:
+    #
+    #   * serviceAccessRoleArn - The IAM role that has permission to access
+    #     the Amazon S3 bucket.
+    #
+    #   * bucketName - The name of the S3 bucket to use.
+    #
+    #   * compressionType - An optional parameter to use GZIP to compress the
+    #     target files. Set to NONE (the default) or do not use to leave the
+    #     files uncompressed.
+    #
+    #   Shorthand syntax: ServiceAccessRoleArn=string
+    #   ,BucketName=string,CompressionType=string
+    #
+    #   JSON syntax:
+    #
+    #   \\\{ "ServiceAccessRoleArn": "string", "BucketName": "string",
+    #   "CompressionType": "none"\|"gzip" \\}
+    #
     # @option params [Types::MongoDbSettings] :mongo_db_settings
     #   Settings in JSON format for the source MongoDB endpoint. For more
     #   information about the available settings, see the **Configuration
     #   Properties When Using MongoDB as a Source for AWS Database Migration
-    #   Service** section at [ Using Amazon S3 as a Target for AWS Database
+    #   Service** section at [ Using MongoDB as a Target for AWS Database
     #   Migration Service][1].
     #
     #
@@ -397,6 +419,10 @@ module Aws::DatabaseMigrationService
     #       bucket_name: "String",
     #       compression_type: "none", # accepts none, gzip
     #     },
+    #     dms_transfer_settings: {
+    #       service_access_role_arn: "String",
+    #       bucket_name: "String",
+    #     },
     #     mongo_db_settings: {
     #       username: "String",
     #       password: "SecretString",
@@ -440,6 +466,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.bucket_folder #=> String
     #   resp.endpoint.s3_settings.bucket_name #=> String
     #   resp.endpoint.s3_settings.compression_type #=> String, one of "none", "gzip"
+    #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
+    #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
     #   resp.endpoint.mongo_db_settings.password #=> String
     #   resp.endpoint.mongo_db_settings.server_name #=> String
@@ -950,6 +978,8 @@ module Aws::DatabaseMigrationService
     #   Use either CdcStartTime or CdcStartPosition to specify when you want a
     #   CDC operation to start. Specifying both values results in an error.
     #
+    #   Timestamp Example: --cdc-start-time “2018-03-08T12:12:12”
+    #
     # @option params [String] :cdc_start_position
     #   Indicates when you want a change data capture (CDC) operation to
     #   start. Use either CdcStartPosition or CdcStartTime to specify when you
@@ -1200,6 +1230,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.bucket_folder #=> String
     #   resp.endpoint.s3_settings.bucket_name #=> String
     #   resp.endpoint.s3_settings.compression_type #=> String, one of "none", "gzip"
+    #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
+    #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
     #   resp.endpoint.mongo_db_settings.password #=> String
     #   resp.endpoint.mongo_db_settings.server_name #=> String
@@ -1925,6 +1957,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].s3_settings.bucket_folder #=> String
     #   resp.endpoints[0].s3_settings.bucket_name #=> String
     #   resp.endpoints[0].s3_settings.compression_type #=> String, one of "none", "gzip"
+    #   resp.endpoints[0].dms_transfer_settings.service_access_role_arn #=> String
+    #   resp.endpoints[0].dms_transfer_settings.bucket_name #=> String
     #   resp.endpoints[0].mongo_db_settings.username #=> String
     #   resp.endpoints[0].mongo_db_settings.password #=> String
     #   resp.endpoints[0].mongo_db_settings.server_name #=> String
@@ -2858,6 +2892,7 @@ module Aws::DatabaseMigrationService
     #   resp.table_statistics[0].validation_failed_records #=> Integer
     #   resp.table_statistics[0].validation_suspended_records #=> Integer
     #   resp.table_statistics[0].validation_state #=> String
+    #   resp.table_statistics[0].validation_state_details #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeTableStatistics AWS API Documentation
@@ -3065,6 +3100,28 @@ module Aws::DatabaseMigrationService
     #
     #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html
     #
+    # @option params [Types::DmsTransferSettings] :dms_transfer_settings
+    #   The settings in JSON format for the DMS Transfer type source endpoint.
+    #
+    #   Attributes include:
+    #
+    #   * serviceAccessRoleArn - The IAM role that has permission to access
+    #     the Amazon S3 bucket.
+    #
+    #   * BucketName - The name of the S3 bucket to use.
+    #
+    #   * compressionType - An optional parameter to use GZIP to compress the
+    #     target files. Set to NONE (the default) or do not use to leave the
+    #     files uncompressed.
+    #
+    #   Shorthand syntax: ServiceAccessRoleArn=string
+    #   ,BucketName=string,CompressionType=string
+    #
+    #   JSON syntax:
+    #
+    #   \\\{ "ServiceAccessRoleArn": "string", "BucketName": "string",
+    #   "CompressionType": "none"\|"gzip" \\}
+    #
     # @option params [Types::MongoDbSettings] :mongo_db_settings
     #   Settings in JSON format for the source MongoDB endpoint. For more
     #   information about the available settings, see the **Configuration
@@ -3135,6 +3192,10 @@ module Aws::DatabaseMigrationService
     #       bucket_name: "String",
     #       compression_type: "none", # accepts none, gzip
     #     },
+    #     dms_transfer_settings: {
+    #       service_access_role_arn: "String",
+    #       bucket_name: "String",
+    #     },
     #     mongo_db_settings: {
     #       username: "String",
     #       password: "SecretString",
@@ -3178,6 +3239,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.bucket_folder #=> String
     #   resp.endpoint.s3_settings.bucket_name #=> String
     #   resp.endpoint.s3_settings.compression_type #=> String, one of "none", "gzip"
+    #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
+    #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
     #   resp.endpoint.mongo_db_settings.password #=> String
     #   resp.endpoint.mongo_db_settings.server_name #=> String
@@ -3590,6 +3653,8 @@ module Aws::DatabaseMigrationService
     #   Use either CdcStartTime or CdcStartPosition to specify when you want a
     #   CDC operation to start. Specifying both values results in an error.
     #
+    #   Timestamp Example: --cdc-start-time “2018-03-08T12:12:12”
+    #
     # @option params [String] :cdc_start_position
     #   Indicates when you want a change data capture (CDC) operation to
     #   start. Use either CdcStartPosition or CdcStartTime to specify when you
@@ -3796,10 +3861,20 @@ module Aws::DatabaseMigrationService
     # Reloads the target database table with the source data.
     #
     # @option params [required, String] :replication_task_arn
-    #   The Amazon Resource Name (ARN) of the replication instance.
+    #   The Amazon Resource Name (ARN) of the replication task.
     #
     # @option params [required, Array<Types::TableToReload>] :tables_to_reload
     #   The name and schema of the table to be reloaded.
+    #
+    # @option params [String] :reload_option
+    #   Options for reload. Specify `data-reload` to reload the data and
+    #   re-validate it if validation is enabled. Specify `validate-only` to
+    #   re-validate the table. This option applies only when validation is
+    #   enabled for the task.
+    #
+    #   Valid values: data-reload, validate-only
+    #
+    #   Default value is data-reload.
     #
     # @return [Types::ReloadTablesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3815,6 +3890,7 @@ module Aws::DatabaseMigrationService
     #         table_name: "String",
     #       },
     #     ],
+    #     reload_option: "data-reload", # accepts data-reload, validate-only
     #   })
     #
     # @example Response structure
@@ -3891,6 +3967,8 @@ module Aws::DatabaseMigrationService
     #   Indicates the start time for a change data capture (CDC) operation.
     #   Use either CdcStartTime or CdcStartPosition to specify when you want a
     #   CDC operation to start. Specifying both values results in an error.
+    #
+    #   Timestamp Example: --cdc-start-time “2018-03-08T12:12:12”
     #
     # @option params [String] :cdc_start_position
     #   Indicates when you want a change data capture (CDC) operation to
@@ -4184,7 +4262,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

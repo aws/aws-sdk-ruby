@@ -107,6 +107,10 @@ module Aws::ElasticLoadBalancingV2
     DuplicateLoadBalancerNameException = Shapes::StructureShape.new(name: 'DuplicateLoadBalancerNameException')
     DuplicateTagKeysException = Shapes::StructureShape.new(name: 'DuplicateTagKeysException')
     DuplicateTargetGroupNameException = Shapes::StructureShape.new(name: 'DuplicateTargetGroupNameException')
+    FixedResponseActionConfig = Shapes::StructureShape.new(name: 'FixedResponseActionConfig')
+    FixedResponseActionContentType = Shapes::StringShape.new(name: 'FixedResponseActionContentType')
+    FixedResponseActionMessage = Shapes::StringShape.new(name: 'FixedResponseActionMessage')
+    FixedResponseActionStatusCode = Shapes::StringShape.new(name: 'FixedResponseActionStatusCode')
     HealthCheckIntervalSeconds = Shapes::IntegerShape.new(name: 'HealthCheckIntervalSeconds')
     HealthCheckPort = Shapes::StringShape.new(name: 'HealthCheckPort')
     HealthCheckThresholdCount = Shapes::IntegerShape.new(name: 'HealthCheckThresholdCount')
@@ -168,6 +172,13 @@ module Aws::ElasticLoadBalancingV2
     Port = Shapes::IntegerShape.new(name: 'Port')
     PriorityInUseException = Shapes::StructureShape.new(name: 'PriorityInUseException')
     ProtocolEnum = Shapes::StringShape.new(name: 'ProtocolEnum')
+    RedirectActionConfig = Shapes::StructureShape.new(name: 'RedirectActionConfig')
+    RedirectActionHost = Shapes::StringShape.new(name: 'RedirectActionHost')
+    RedirectActionPath = Shapes::StringShape.new(name: 'RedirectActionPath')
+    RedirectActionPort = Shapes::StringShape.new(name: 'RedirectActionPort')
+    RedirectActionProtocol = Shapes::StringShape.new(name: 'RedirectActionProtocol')
+    RedirectActionQuery = Shapes::StringShape.new(name: 'RedirectActionQuery')
+    RedirectActionStatusCodeEnum = Shapes::StringShape.new(name: 'RedirectActionStatusCodeEnum')
     RegisterTargetsInput = Shapes::StructureShape.new(name: 'RegisterTargetsInput')
     RegisterTargetsOutput = Shapes::StructureShape.new(name: 'RegisterTargetsOutput')
     RemoveListenerCertificatesInput = Shapes::StructureShape.new(name: 'RemoveListenerCertificatesInput')
@@ -258,6 +269,8 @@ module Aws::ElasticLoadBalancingV2
     Action.add_member(:authenticate_oidc_config, Shapes::ShapeRef.new(shape: AuthenticateOidcActionConfig, location_name: "AuthenticateOidcConfig"))
     Action.add_member(:authenticate_cognito_config, Shapes::ShapeRef.new(shape: AuthenticateCognitoActionConfig, location_name: "AuthenticateCognitoConfig"))
     Action.add_member(:order, Shapes::ShapeRef.new(shape: ActionOrder, location_name: "Order"))
+    Action.add_member(:redirect_config, Shapes::ShapeRef.new(shape: RedirectActionConfig, location_name: "RedirectConfig"))
+    Action.add_member(:fixed_response_config, Shapes::ShapeRef.new(shape: FixedResponseActionConfig, location_name: "FixedResponseConfig"))
     Action.struct_class = Types::Action
 
     Actions.member = Shapes::ShapeRef.new(shape: Action)
@@ -492,6 +505,11 @@ module Aws::ElasticLoadBalancingV2
     DescribeTargetHealthOutput.add_member(:target_health_descriptions, Shapes::ShapeRef.new(shape: TargetHealthDescriptions, location_name: "TargetHealthDescriptions"))
     DescribeTargetHealthOutput.struct_class = Types::DescribeTargetHealthOutput
 
+    FixedResponseActionConfig.add_member(:message_body, Shapes::ShapeRef.new(shape: FixedResponseActionMessage, location_name: "MessageBody"))
+    FixedResponseActionConfig.add_member(:status_code, Shapes::ShapeRef.new(shape: FixedResponseActionStatusCode, required: true, location_name: "StatusCode"))
+    FixedResponseActionConfig.add_member(:content_type, Shapes::ShapeRef.new(shape: FixedResponseActionContentType, location_name: "ContentType"))
+    FixedResponseActionConfig.struct_class = Types::FixedResponseActionConfig
+
     Limit.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     Limit.add_member(:max, Shapes::ShapeRef.new(shape: Max, location_name: "Max"))
     Limit.struct_class = Types::Limit
@@ -598,6 +616,14 @@ module Aws::ElasticLoadBalancingV2
 
     ModifyTargetGroupOutput.add_member(:target_groups, Shapes::ShapeRef.new(shape: TargetGroups, location_name: "TargetGroups"))
     ModifyTargetGroupOutput.struct_class = Types::ModifyTargetGroupOutput
+
+    RedirectActionConfig.add_member(:protocol, Shapes::ShapeRef.new(shape: RedirectActionProtocol, location_name: "Protocol"))
+    RedirectActionConfig.add_member(:port, Shapes::ShapeRef.new(shape: RedirectActionPort, location_name: "Port"))
+    RedirectActionConfig.add_member(:host, Shapes::ShapeRef.new(shape: RedirectActionHost, location_name: "Host"))
+    RedirectActionConfig.add_member(:path, Shapes::ShapeRef.new(shape: RedirectActionPath, location_name: "Path"))
+    RedirectActionConfig.add_member(:query, Shapes::ShapeRef.new(shape: RedirectActionQuery, location_name: "Query"))
+    RedirectActionConfig.add_member(:status_code, Shapes::ShapeRef.new(shape: RedirectActionStatusCodeEnum, required: true, location_name: "StatusCode"))
+    RedirectActionConfig.struct_class = Types::RedirectActionConfig
 
     RegisterTargetsInput.add_member(:target_group_arn, Shapes::ShapeRef.new(shape: TargetGroupArn, required: true, location_name: "TargetGroupArn"))
     RegisterTargetsInput.add_member(:targets, Shapes::ShapeRef.new(shape: TargetDescriptions, required: true, location_name: "Targets"))
