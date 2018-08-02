@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Kinesis - Updated the API, documentation, and integration test for Amazon Kinesis.
+
+* Feature - Aws::Polly - Updated the API, and documentation for Amazon Polly.
+
+* Feature - Aws::ResourceGroups - Updated the API, and documentation for AWS Resource Groups.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
 2.11.99 (2018-08-01)
 ------------------
 
