@@ -33,6 +33,7 @@ module AwsSdkCodeGenerator
         'eventheader' => false,
         'eventpayload' => false,
         # ignore
+        'synthetic' => false,
         'box' => false,
         'fault' => false,
         'error' => false,
