@@ -1261,21 +1261,25 @@ module Aws::AlexaForBusiness
     #   @return [String]
     #
     # @!attribute [rw] event_type
-    #   The event type to filter device events.
+    #   The event type to filter device events. If EventType isn't
+    #   specified, this returns a list of all device events in reverse
+    #   chronological order. If EventType is specified, this returns a list
+    #   of device events for that EventType in reverse chronological order.
     #   @return [String]
     #
     # @!attribute [rw] next_token
     #   An optional token returned from a prior request. Use this token for
     #   pagination of results from this action. If this parameter is
     #   specified, the response only includes results beyond the token, up
-    #   to the value specified by MaxResults.
+    #   to the value specified by MaxResults. When the end of results is
+    #   reached, the response has a value of null.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to include in the response. If more
-    #   results exist than the specified MaxResults value, a token is
-    #   included in the response so that the remaining results can be
-    #   retrieved. Required.
+    #   The maximum number of results to include in the response. The
+    #   default value is 50. If more results exist than the specified
+    #   MaxResults value, a token is included in the response so that the
+    #   remaining results can be retrieved.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListDeviceEventsRequest AWS API Documentation
@@ -1289,9 +1293,11 @@ module Aws::AlexaForBusiness
     end
 
     # @!attribute [rw] device_events
+    #   The device events requested for the device ARN.
     #   @return [Array<Types::DeviceEvent>]
     #
     # @!attribute [rw] next_token
+    #   The token returned to indicate that there is more data available.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListDeviceEventsResponse AWS API Documentation
@@ -1365,7 +1371,7 @@ module Aws::AlexaForBusiness
     #       }
     #
     # @!attribute [rw] arn
-    #   The ARN of the specific resource for which to list tags. Required.
+    #   The ARN of the specified resource for which to list tags.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1392,7 +1398,7 @@ module Aws::AlexaForBusiness
     end
 
     # @!attribute [rw] tags
-    #   The list of tags requested for the specific resource.
+    #   The tags requested for the specified resource.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] next_token

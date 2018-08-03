@@ -1046,29 +1046,30 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
-    # Lists the Device Event history for up to 30 days. If EventType isn't
-    # specified in the request, this returns a list of all device events in
-    # reverse chronological order. If EventType is specified, this returns a
-    # list of device events for that EventType in reverse chronological
-    # order.
+    # Lists the device event history, including device connection status,
+    # for up to 30 days.
     #
     # @option params [required, String] :device_arn
     #   The ARN of a device.
     #
     # @option params [String] :event_type
-    #   The event type to filter device events.
+    #   The event type to filter device events. If EventType isn't specified,
+    #   this returns a list of all device events in reverse chronological
+    #   order. If EventType is specified, this returns a list of device events
+    #   for that EventType in reverse chronological order.
     #
     # @option params [String] :next_token
     #   An optional token returned from a prior request. Use this token for
     #   pagination of results from this action. If this parameter is
     #   specified, the response only includes results beyond the token, up to
-    #   the value specified by MaxResults.
+    #   the value specified by MaxResults. When the end of results is reached,
+    #   the response has a value of null.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to include in the response. If more
-    #   results exist than the specified MaxResults value, a token is included
-    #   in the response so that the remaining results can be retrieved.
-    #   Required.
+    #   The maximum number of results to include in the response. The default
+    #   value is 50. If more results exist than the specified MaxResults
+    #   value, a token is included in the response so that the remaining
+    #   results can be retrieved.
     #
     # @return [Types::ListDeviceEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1148,10 +1149,10 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
-    # Lists all tags for a specific resource.
+    # Lists all tags for the specified resource.
     #
     # @option params [required, String] :arn
-    #   The ARN of the specific resource for which to list tags. Required.
+    #   The ARN of the specified resource for which to list tags.
     #
     # @option params [String] :next_token
     #   An optional token returned from a prior request. Use this token for
@@ -2131,7 +2132,7 @@ module Aws::AlexaForBusiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-alexaforbusiness'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
