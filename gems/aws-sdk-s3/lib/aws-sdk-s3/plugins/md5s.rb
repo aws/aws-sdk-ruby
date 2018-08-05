@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'openssl'
 require 'base64'
 
@@ -45,7 +47,7 @@ module Aws
           end
 
           def update_in_chunks(digest, io)
-            while chunk = io.read(CHUNK_SIZE, buffer ||= "")
+            while chunk = io.read(CHUNK_SIZE, buffer ||= "".dup)
               digest.update(chunk)
             end
             io.rewind

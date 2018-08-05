@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 module Aws
-  module EventStream 
+  module EventStream
 
     # @api private
     class BytesBuffer
@@ -35,7 +37,7 @@ module Aws
       end
 
       def write(bytes)
-        @data <<= bytes
+        @data += bytes
         bytes.bytesize
       end
       alias_method :<<, :write

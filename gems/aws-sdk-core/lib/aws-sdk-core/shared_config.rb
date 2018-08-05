@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Aws
 
   # @api private
@@ -283,7 +285,7 @@ module Aws
       unless (@parsed_credentials && @parsed_credentials[profile]) ||
           (@parsed_config && @parsed_config[profile])
         msg = "Profile `#{profile}' not found in #{@credentials_path}"
-        msg << " or #{@config_path}" if @config_path
+        msg += "or #{@config_path}" if @config_path
         raise Errors::NoSuchProfileError.new(msg)
       end
     end

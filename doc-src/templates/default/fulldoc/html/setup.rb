@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 def javascripts_full_list
   super + ['js/nolink.js']
 end
 
 def class_list(root = Registry.root, tree = TreeContext.new)
-  out = ''
+  out = ''.dup
   # non-service classes
   out << "<li class='#{tree.classes.join(' ')} nolink'>"
   out << "<div class='item' style='padding-left:#{tree.indent}'>"

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'thread'
 
 module Aws
@@ -176,8 +178,8 @@ module Aws
       if config.stub_responses
         apply_stubs(operation_name, stubs.flatten)
       else
-        msg = 'stubbing is not enabled; enable stubbing in the constructor '
-        msg << 'with `:stub_responses => true`'
+        msg = 'stubbing is not enabled; enable stubbing in the constructor ' \
+              'with `:stub_responses => true`'
         raise msg
       end
     end
@@ -185,14 +187,14 @@ module Aws
     # Allows you to access all of the requests that the stubbed client has made
     #
     # @return [Array] Returns an array of the api requests made, each request object contains the
-    #                 :operation_name, :params, and :context of the request. 
+    #                 :operation_name, :params, and :context of the request.
     # @raise [NotImplementedError] Raises `NotImplementedError` when the client is not stubbed
     def api_requests
       if config.stub_responses
         @api_requests
       else
-        msg = 'This method is only implemented for stubbed clients, and is '
-        msg << 'available when you enable stubbing in the constructor with `stub_responses: true`'
+        msg = 'This method is only implemented for stubbed clients, and is ' \
+              'available when you enable stubbing in the constructor with `stub_responses: true`'
         raise NotImplementedError.new(msg)
       end
     end

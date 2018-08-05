@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'thread'
 
 module Aws
@@ -109,8 +111,8 @@ module Aws
     # Raised when a client is constructed and region is not specified.
     class MissingRegionError < ArgumentError
       def initialize(*args)
-        msg = "missing region; use :region option or "
-        msg << "export region name to ENV['AWS_REGION']"
+        msg = "missing region; use :region option or " \
+              "export region name to ENV['AWS_REGION']"
         super(msg)
       end
     end

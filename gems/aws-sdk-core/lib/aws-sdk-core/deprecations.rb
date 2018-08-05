@@ -1,5 +1,6 @@
-module Aws
+# frozen_string_literal: true
 
+module Aws
   # A utility module that provides a class method that wraps
   # a method such that it generates a deprecation warning when called.
   # Given the following class:
@@ -34,7 +35,6 @@ module Aws
   #
   # @api private
   module Deprecations
-
     # @param [Symbol] method_name The name of the deprecated method.
     #
     # @option options [String] :message The warning message to issue
@@ -44,9 +44,8 @@ module Aws
     #   method that should be used.
     #
     def deprecated(method_name, options = {})
-
       deprecation_msg = options[:message] || begin
-        msg = "DEPRECATION WARNING: called deprecated method `#{method_name}' "
+        msg = "DEPRECATION WARNING: called deprecated method `#{method_name}' ".dup
         msg << "of an #{self}"
         msg << ", use #{options[:use]} instead" if options[:use]
         msg
@@ -56,7 +55,7 @@ module Aws
 
       warned = false # we only want to issue this warning once
 
-      define_method(method_name) do |*args,&block|
+      define_method(method_name) do |*args, &block|
         unless warned
           warned = true
           warn(deprecation_msg + "\n" + caller.join("\n"))
@@ -64,6 +63,5 @@ module Aws
         send("deprecated_#{method_name}", *args, &block)
       end
     end
-
   end
 end

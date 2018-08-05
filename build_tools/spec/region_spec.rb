@@ -9,7 +9,7 @@ end
 def whitelist
   {
     "core" => {
-      "errors.rb" => 141,
+      "errors.rb" => 143,
       "signature_v4.rb" => 35,
       "stub_responses.rb" => 19
     },
@@ -28,7 +28,7 @@ describe "ensure no hard-coded region" do
     Dir.glob("#{dir}**/*").sort.each do |path|
       next if File.directory? path
 
-      file = File.open(path, 'r', encoding: 'UTF-8') { |f| f.read } 
+      file = File.open(path, 'r', encoding: 'UTF-8') { |f| f.read }
       lines = file.lines.to_a
 
       it "#{path} has no hard-coded region" do
@@ -37,7 +37,7 @@ describe "ensure no hard-coded region" do
           next if val.strip[0] == "#"
           # skip known whitelists
           next if whitelist[key] && whitelist[key][File.basename(path)] == idx
-          expect(val).not_to match(/(us|eu|ap|sa|ca)-\w+-\d+/)        
+          expect(val).not_to match(/(us|eu|ap|sa|ca)-\w+-\d+/)
         end
       end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'set'
 
 module AwsSdkCodeGenerator
@@ -14,7 +16,7 @@ module AwsSdkCodeGenerator
     end
 
     def build
-      code = ''
+      code = ''.dup
       loops = self.send(:loops)
       count = loops.size
       loops.each.with_index do |loop_expression, n|
@@ -95,7 +97,7 @@ module AwsSdkCodeGenerator
     end
 
     def find_prefix(paths)
-      prefix = ''
+      prefix = ''.dup
       loop.with_index do |_, n|
         return prefix if paths.empty?
         letter = paths[0][n]

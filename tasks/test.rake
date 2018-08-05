@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rspec/core/rake_task'
 
 ##
@@ -12,7 +14,7 @@ task 'test:spec:each' do
       failures << spec_file if !ok
     end
   end
-  msg = "One or more spec files had failures:\n\n"
+  msg = "One or more spec files had failures:\n\n".dup
   failures.each do |path|
     msg << "bundle exec rspec #{path}\n"
   end

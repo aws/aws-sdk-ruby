@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../spec_helper'
 require 'base64'
 require 'openssl'
@@ -255,7 +257,7 @@ module Aws
 
             it 'supports #get_object with a block' do
               stub_encrypted_get
-              data = ''
+              data = ''.dup
               client.get_object(bucket:'bucket', key:'key') do |chunk|
                 data << chunk
               end

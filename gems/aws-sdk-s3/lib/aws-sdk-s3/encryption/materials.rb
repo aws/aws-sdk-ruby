@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'base64'
 
 module Aws
@@ -32,12 +34,12 @@ module Aws
             if [32, 24, 16].include?(key.bytesize)
               key
             else
-              msg = "invalid key, symmetric key required to be 16, 24, or "
-              msg << "32 bytes in length, saw length " + key.bytesize.to_s
+              msg = "invalid key, symmetric key required to be 16, 24, or " \
+                    "32 bytes in length, saw length " + key.bytesize.to_s
               raise ArgumentError, msg
             end
           else
-            msg = "invalid encryption key, expected an OpenSSL::PKey::RSA key "
+            msg = "invalid encryption key, expected an OpenSSL::PKey::RSA key ".dup
             msg << "(for asymmetric encryption) or a String (for symmetric "
             msg << "encryption)."
             raise ArgumentError, msg

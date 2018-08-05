@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'aws-eventstream'
 
 module Aws
@@ -94,7 +96,7 @@ module Aws
               # Pending
               raise 'Stubbing :exception event is not supported'
             end
-            stream << Aws::EventStream::Encoder.new.encode(
+            stream += Aws::EventStream::Encoder.new.encode(
               Aws::EventStream::Message.new(opts))
             stream
           end

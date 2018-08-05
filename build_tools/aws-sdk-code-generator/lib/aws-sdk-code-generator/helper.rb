@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'set'
 # kramdown
 require 'kramdown'
@@ -141,7 +143,7 @@ module AwsSdkCodeGenerator
     end
 
     def apig_prefix(name)
-      "__" << name
+      "__#{name}"
     end
 
     def shape(ref)

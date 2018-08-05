@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'openssl'
 require 'base64'
 
@@ -571,8 +573,8 @@ module Aws
 
       def check_required_values!
         unless @key_set
-          msg = "key required; you must provide a key via :key, "
-          msg << ":key_starts_with, or :allow_any => ['key']"
+          msg = "key required; you must provide a key via :key, " \
+                ":key_starts_with, or :allow_any => ['key']"
           raise msg
         end
       end
