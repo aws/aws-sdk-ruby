@@ -1146,7 +1146,7 @@ module Aws::STS
     #
     # This can easily be converted to a token which can be used by the eks service:
     # https://ruby-doc.org/stdlib-2.3.1/libdoc/base64/rdoc/Base64.html#method-i-encode64
-    # "k8s-aws-v1." + Base64.urlsafe_encode64(presignedURLString.to_s).chomp("==")
+    # "k8s-aws-v1." + Base64.urlsafe_encode64(presignedURLString).chomp("==")
     #
     #
     # @param [Hash] params ({})
