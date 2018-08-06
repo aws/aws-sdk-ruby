@@ -1,5 +1,6 @@
 Unreleased Changes
 ------------------
+* Feature - Add sts method to enable generating eks token
 
 3.24.0 (2018-08-03)
 ------------------
