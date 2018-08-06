@@ -566,9 +566,23 @@ module Aws::DynamoDB
     #   DELETED.
     #   @return [String]
     #
+    # @!attribute [rw] backup_type
+    #   BackupType:
+    #
+    #   * `USER` - On demand backup created by you.
+    #
+    #   * `SYSTEM` - On demand backup automatically created by DynamoDB.
+    #   @return [String]
+    #
     # @!attribute [rw] backup_creation_date_time
     #   Time at which the backup was created. This is the request time of
     #   the backup.
+    #   @return [Time]
+    #
+    # @!attribute [rw] backup_expiry_date_time
+    #   Time at which the automatic on demand backup created by DynamoDB
+    #   will expire. This `SYSTEM` on demand backup expires automatically 35
+    #   days after its creation.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BackupDetails AWS API Documentation
@@ -578,7 +592,9 @@ module Aws::DynamoDB
       :backup_name,
       :backup_size_bytes,
       :backup_status,
-      :backup_creation_date_time)
+      :backup_type,
+      :backup_creation_date_time,
+      :backup_expiry_date_time)
       include Aws::Structure
     end
 
@@ -608,9 +624,23 @@ module Aws::DynamoDB
     #   Time at which the backup was created.
     #   @return [Time]
     #
+    # @!attribute [rw] backup_expiry_date_time
+    #   Time at which the automatic on demand backup created by DynamoDB
+    #   will expire. This `SYSTEM` on demand backup expires automatically 35
+    #   days after its creation.
+    #   @return [Time]
+    #
     # @!attribute [rw] backup_status
     #   Backup can be in one of the following states: CREATING, ACTIVE,
     #   DELETED.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_type
+    #   BackupType:
+    #
+    #   * `USER` - On demand backup created by you.
+    #
+    #   * `SYSTEM` - On demand backup automatically created by DynamoDB.
     #   @return [String]
     #
     # @!attribute [rw] backup_size_bytes
@@ -626,7 +656,9 @@ module Aws::DynamoDB
       :backup_arn,
       :backup_name,
       :backup_creation_date_time,
+      :backup_expiry_date_time,
       :backup_status,
+      :backup_type,
       :backup_size_bytes)
       include Aws::Structure
     end
@@ -3482,6 +3514,7 @@ module Aws::DynamoDB
     #         time_range_lower_bound: Time.now,
     #         time_range_upper_bound: Time.now,
     #         exclusive_start_backup_arn: "BackupArn",
+    #         backup_type: "USER", # accepts USER, SYSTEM, ALL
     #       }
     #
     # @!attribute [rw] table_name
@@ -3510,6 +3543,18 @@ module Aws::DynamoDB
     #   to fetch the next page of results.
     #   @return [String]
     #
+    # @!attribute [rw] backup_type
+    #   The backups from the table specified by BackupType are listed.
+    #
+    #   Where BackupType can be:
+    #
+    #   * `USER` - On demand backup created by you.
+    #
+    #   * `SYSTEM` - On demand backup automatically created by DynamoDB.
+    #
+    #   * `ALL` - All types of on demand backups (USER and SYSTEM).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListBackupsInput AWS API Documentation
     #
     class ListBackupsInput < Struct.new(
@@ -3517,7 +3562,8 @@ module Aws::DynamoDB
       :limit,
       :time_range_lower_bound,
       :time_range_upper_bound,
-      :exclusive_start_backup_arn)
+      :exclusive_start_backup_arn,
+      :backup_type)
       include Aws::Structure
     end
 

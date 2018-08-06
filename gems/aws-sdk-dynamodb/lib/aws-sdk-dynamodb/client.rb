@@ -802,7 +802,9 @@ module Aws::DynamoDB
     #   resp.backup_details.backup_name #=> String
     #   resp.backup_details.backup_size_bytes #=> Integer
     #   resp.backup_details.backup_status #=> String, one of "CREATING", "DELETED", "AVAILABLE"
+    #   resp.backup_details.backup_type #=> String, one of "USER", "SYSTEM"
     #   resp.backup_details.backup_creation_date_time #=> Time
+    #   resp.backup_details.backup_expiry_date_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateBackup AWS API Documentation
     #
@@ -1305,7 +1307,9 @@ module Aws::DynamoDB
     #   resp.backup_description.backup_details.backup_name #=> String
     #   resp.backup_description.backup_details.backup_size_bytes #=> Integer
     #   resp.backup_description.backup_details.backup_status #=> String, one of "CREATING", "DELETED", "AVAILABLE"
+    #   resp.backup_description.backup_details.backup_type #=> String, one of "USER", "SYSTEM"
     #   resp.backup_description.backup_details.backup_creation_date_time #=> Time
+    #   resp.backup_description.backup_details.backup_expiry_date_time #=> Time
     #   resp.backup_description.source_table_details.table_name #=> String
     #   resp.backup_description.source_table_details.table_id #=> String
     #   resp.backup_description.source_table_details.table_arn #=> String
@@ -1775,7 +1779,9 @@ module Aws::DynamoDB
     #   resp.backup_description.backup_details.backup_name #=> String
     #   resp.backup_description.backup_details.backup_size_bytes #=> Integer
     #   resp.backup_description.backup_details.backup_status #=> String, one of "CREATING", "DELETED", "AVAILABLE"
+    #   resp.backup_description.backup_details.backup_type #=> String, one of "USER", "SYSTEM"
     #   resp.backup_description.backup_details.backup_creation_date_time #=> Time
+    #   resp.backup_description.backup_details.backup_expiry_date_time #=> Time
     #   resp.backup_description.source_table_details.table_name #=> String
     #   resp.backup_description.source_table_details.table_id #=> String
     #   resp.backup_description.source_table_details.table_arn #=> String
@@ -2490,6 +2496,17 @@ module Aws::DynamoDB
     #   `ExclusiveStartBackupArn` of a new `ListBackups` operation in order to
     #   fetch the next page of results.
     #
+    # @option params [String] :backup_type
+    #   The backups from the table specified by BackupType are listed.
+    #
+    #   Where BackupType can be:
+    #
+    #   * `USER` - On demand backup created by you.
+    #
+    #   * `SYSTEM` - On demand backup automatically created by DynamoDB.
+    #
+    #   * `ALL` - All types of on demand backups (USER and SYSTEM).
+    #
     # @return [Types::ListBackupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListBackupsOutput#backup_summaries #backup_summaries} => Array&lt;Types::BackupSummary&gt;
@@ -2503,6 +2520,7 @@ module Aws::DynamoDB
     #     time_range_lower_bound: Time.now,
     #     time_range_upper_bound: Time.now,
     #     exclusive_start_backup_arn: "BackupArn",
+    #     backup_type: "USER", # accepts USER, SYSTEM, ALL
     #   })
     #
     # @example Response structure
@@ -2514,7 +2532,9 @@ module Aws::DynamoDB
     #   resp.backup_summaries[0].backup_arn #=> String
     #   resp.backup_summaries[0].backup_name #=> String
     #   resp.backup_summaries[0].backup_creation_date_time #=> Time
+    #   resp.backup_summaries[0].backup_expiry_date_time #=> Time
     #   resp.backup_summaries[0].backup_status #=> String, one of "CREATING", "DELETED", "AVAILABLE"
+    #   resp.backup_summaries[0].backup_type #=> String, one of "USER", "SYSTEM"
     #   resp.backup_summaries[0].backup_size_bytes #=> Integer
     #   resp.last_evaluated_backup_arn #=> String
     #
@@ -5318,7 +5338,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

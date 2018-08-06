@@ -42,6 +42,8 @@ module Aws::DynamoDB
     BackupStatus = Shapes::StringShape.new(name: 'BackupStatus')
     BackupSummaries = Shapes::ListShape.new(name: 'BackupSummaries')
     BackupSummary = Shapes::StructureShape.new(name: 'BackupSummary')
+    BackupType = Shapes::StringShape.new(name: 'BackupType')
+    BackupTypeFilter = Shapes::StringShape.new(name: 'BackupTypeFilter')
     BackupsInputLimit = Shapes::IntegerShape.new(name: 'BackupsInputLimit')
     BatchGetItemInput = Shapes::StructureShape.new(name: 'BatchGetItemInput')
     BatchGetItemOutput = Shapes::StructureShape.new(name: 'BatchGetItemOutput')
@@ -365,7 +367,9 @@ module Aws::DynamoDB
     BackupDetails.add_member(:backup_name, Shapes::ShapeRef.new(shape: BackupName, required: true, location_name: "BackupName"))
     BackupDetails.add_member(:backup_size_bytes, Shapes::ShapeRef.new(shape: BackupSizeBytes, location_name: "BackupSizeBytes"))
     BackupDetails.add_member(:backup_status, Shapes::ShapeRef.new(shape: BackupStatus, required: true, location_name: "BackupStatus"))
+    BackupDetails.add_member(:backup_type, Shapes::ShapeRef.new(shape: BackupType, required: true, location_name: "BackupType"))
     BackupDetails.add_member(:backup_creation_date_time, Shapes::ShapeRef.new(shape: BackupCreationDateTime, required: true, location_name: "BackupCreationDateTime"))
+    BackupDetails.add_member(:backup_expiry_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "BackupExpiryDateTime"))
     BackupDetails.struct_class = Types::BackupDetails
 
     BackupSummaries.member = Shapes::ShapeRef.new(shape: BackupSummary)
@@ -376,7 +380,9 @@ module Aws::DynamoDB
     BackupSummary.add_member(:backup_arn, Shapes::ShapeRef.new(shape: BackupArn, location_name: "BackupArn"))
     BackupSummary.add_member(:backup_name, Shapes::ShapeRef.new(shape: BackupName, location_name: "BackupName"))
     BackupSummary.add_member(:backup_creation_date_time, Shapes::ShapeRef.new(shape: BackupCreationDateTime, location_name: "BackupCreationDateTime"))
+    BackupSummary.add_member(:backup_expiry_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "BackupExpiryDateTime"))
     BackupSummary.add_member(:backup_status, Shapes::ShapeRef.new(shape: BackupStatus, location_name: "BackupStatus"))
+    BackupSummary.add_member(:backup_type, Shapes::ShapeRef.new(shape: BackupType, location_name: "BackupType"))
     BackupSummary.add_member(:backup_size_bytes, Shapes::ShapeRef.new(shape: BackupSizeBytes, location_name: "BackupSizeBytes"))
     BackupSummary.struct_class = Types::BackupSummary
 
@@ -680,6 +686,7 @@ module Aws::DynamoDB
     ListBackupsInput.add_member(:time_range_lower_bound, Shapes::ShapeRef.new(shape: TimeRangeLowerBound, location_name: "TimeRangeLowerBound"))
     ListBackupsInput.add_member(:time_range_upper_bound, Shapes::ShapeRef.new(shape: TimeRangeUpperBound, location_name: "TimeRangeUpperBound"))
     ListBackupsInput.add_member(:exclusive_start_backup_arn, Shapes::ShapeRef.new(shape: BackupArn, location_name: "ExclusiveStartBackupArn"))
+    ListBackupsInput.add_member(:backup_type, Shapes::ShapeRef.new(shape: BackupTypeFilter, location_name: "BackupType"))
     ListBackupsInput.struct_class = Types::ListBackupsInput
 
     ListBackupsOutput.add_member(:backup_summaries, Shapes::ShapeRef.new(shape: BackupSummaries, location_name: "BackupSummaries"))
