@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
+
+* Feature - Aws::Health - Updated the API, documentation, and integration test for AWS Health APIs and Notifications.
+
 2.11.101 (2018-08-03)
 ------------------
 
