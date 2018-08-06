@@ -28,15 +28,12 @@ module Aws
       end
 
       describe 'get_caller_identity_presigned_url' do
-        let(:client) do
-          Client.new(
-            region: 'us-west-2',
-            credentials: Credentials.new('akid', 'secret'),
-            stub_responses: true
-          )
-        end
-
         it 'gets a presigned_url' do
+          client = Aws::STS::Client.new(region: 'us-west-2', credentials: Credentials.new('akid', 'secret'))
+          client.handle(step: :send) do |context|
+            Seahorse::Client::Response.new(context: context)
+          end
+
           now = Time.mktime(2018, 8, 6)
           allow(Time).to receive(:now).and_return(now)
 
