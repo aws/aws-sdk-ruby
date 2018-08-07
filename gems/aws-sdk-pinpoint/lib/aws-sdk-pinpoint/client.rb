@@ -878,7 +878,7 @@ module Aws::Pinpoint
     #                 version: 1,
     #               },
     #             ],
-    #             source_type: "ALL", # accepts ALL, ANY
+    #             source_type: "ALL", # accepts ALL, ANY, NONE
     #             type: "ALL", # accepts ALL, ANY, NONE
     #           },
     #         ],
@@ -980,7 +980,7 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups[0].source_segments #=> Array
     #   resp.segment_response.segment_groups.groups[0].source_segments[0].id #=> String
     #   resp.segment_response.segment_groups.groups[0].source_segments[0].version #=> Integer
-    #   resp.segment_response.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY"
+    #   resp.segment_response.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
@@ -1734,7 +1734,7 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups[0].source_segments #=> Array
     #   resp.segment_response.segment_groups.groups[0].source_segments[0].id #=> String
     #   resp.segment_response.segment_groups.groups[0].source_segments[0].version #=> Integer
-    #   resp.segment_response.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY"
+    #   resp.segment_response.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
@@ -1789,7 +1789,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Deletes endpoints associated with an user id.
+    # Deletes endpoints that are associated with a User ID.
     #
     # @option params [required, String] :application_id
     #
@@ -2419,6 +2419,7 @@ module Aws::Pinpoint
     #   resp.activities_response.item[0].timezones_total_count #=> Integer
     #   resp.activities_response.item[0].total_endpoint_count #=> Integer
     #   resp.activities_response.item[0].treatment_id #=> String
+    #   resp.activities_response.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignActivities AWS API Documentation
     #
@@ -3579,7 +3580,7 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups[0].source_segments #=> Array
     #   resp.segment_response.segment_groups.groups[0].source_segments[0].id #=> String
     #   resp.segment_response.segment_groups.groups[0].source_segments[0].version #=> Integer
-    #   resp.segment_response.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY"
+    #   resp.segment_response.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
@@ -3819,7 +3820,7 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups[0].source_segments #=> Array
     #   resp.segment_response.segment_groups.groups[0].source_segments[0].id #=> String
     #   resp.segment_response.segment_groups.groups[0].source_segments[0].version #=> Integer
-    #   resp.segment_response.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY"
+    #   resp.segment_response.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
@@ -3951,7 +3952,7 @@ module Aws::Pinpoint
     #   resp.segments_response.item[0].segment_groups.groups[0].source_segments #=> Array
     #   resp.segments_response.item[0].segment_groups.groups[0].source_segments[0].id #=> String
     #   resp.segments_response.item[0].segment_groups.groups[0].source_segments[0].version #=> Integer
-    #   resp.segments_response.item[0].segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY"
+    #   resp.segments_response.item[0].segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segments_response.item[0].segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segments_response.item[0].segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segments_response.item[0].segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
@@ -4081,7 +4082,7 @@ module Aws::Pinpoint
     #   resp.segments_response.item[0].segment_groups.groups[0].source_segments #=> Array
     #   resp.segments_response.item[0].segment_groups.groups[0].source_segments[0].id #=> String
     #   resp.segments_response.item[0].segment_groups.groups[0].source_segments[0].version #=> Integer
-    #   resp.segments_response.item[0].segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY"
+    #   resp.segments_response.item[0].segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segments_response.item[0].segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segments_response.item[0].segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segments_response.item[0].segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
@@ -4137,7 +4138,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Returns information about the endpoints associated with an user id.
+    # Returns information about the endpoints that are associated with a
+    # User ID.
     #
     # @option params [required, String] :application_id
     #
@@ -4283,6 +4285,106 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
+    # Use to record events for endpoints. This method creates events and
+    # creates or updates the endpoints that those events are associated
+    # with.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, Types::EventsRequest] :events_request
+    #   Put Events request
+    #
+    # @return [Types::PutEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutEventsResponse#events_response #events_response} => Types::EventsResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_events({
+    #     application_id: "__string", # required
+    #     events_request: { # required
+    #       batch_item: {
+    #         "__string" => {
+    #           endpoint: {
+    #             address: "__string",
+    #             attributes: {
+    #               "__string" => ["__string"],
+    #             },
+    #             channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU, CUSTOM
+    #             demographic: {
+    #               app_version: "__string",
+    #               locale: "__string",
+    #               make: "__string",
+    #               model: "__string",
+    #               model_version: "__string",
+    #               platform: "__string",
+    #               platform_version: "__string",
+    #               timezone: "__string",
+    #             },
+    #             effective_date: "__string",
+    #             endpoint_status: "__string",
+    #             location: {
+    #               city: "__string",
+    #               country: "__string",
+    #               latitude: 1.0,
+    #               longitude: 1.0,
+    #               postal_code: "__string",
+    #               region: "__string",
+    #             },
+    #             metrics: {
+    #               "__string" => 1.0,
+    #             },
+    #             opt_out: "__string",
+    #             request_id: "__string",
+    #             user: {
+    #               user_attributes: {
+    #                 "__string" => ["__string"],
+    #               },
+    #               user_id: "__string",
+    #             },
+    #           },
+    #           events: {
+    #             "__string" => {
+    #               attributes: {
+    #                 "__string" => "__string",
+    #               },
+    #               client_sdk_version: "__string",
+    #               event_type: "__string",
+    #               metrics: {
+    #                 "__string" => 1.0,
+    #               },
+    #               session: {
+    #                 duration: 1,
+    #                 id: "__string",
+    #                 start_timestamp: "__string",
+    #                 stop_timestamp: "__string",
+    #               },
+    #               timestamp: "__string",
+    #             },
+    #           },
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.events_response.results #=> Hash
+    #   resp.events_response.results["__string"].endpoint_item_response.message #=> String
+    #   resp.events_response.results["__string"].endpoint_item_response.status_code #=> Integer
+    #   resp.events_response.results["__string"].events_item_response #=> Hash
+    #   resp.events_response.results["__string"].events_item_response["__string"].message #=> String
+    #   resp.events_response.results["__string"].events_item_response["__string"].status_code #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/PutEvents AWS API Documentation
+    #
+    # @overload put_events(params = {})
+    # @param [Hash] params ({})
+    def put_events(params = {}, options = {})
+      req = build_request(:put_events, params)
+      req.send_request(options)
+    end
+
     # Used to remove the attributes for an app
     #
     # @option params [required, String] :application_id
@@ -4322,15 +4424,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Use this resource to send a direct message, which is a one time
-    # message that you send to a limited audience without creating a
-    # campaign. You can send the message to up to 100 recipients. You cannot
-    # use the message to engage a segment. When you send the message, Amazon
-    # Pinpoint delivers it immediately, and you cannot schedule the
-    # delivery. To engage a user segment, and to schedule the message
-    # delivery, create a campaign instead of sending a direct message. You
-    # can send a direct message as a push notification to your mobile app or
-    # as an SMS message to SMS-enabled devices.
+    # Used to send a direct message.
     #
     # @option params [required, String] :application_id
     #
@@ -4495,6 +4589,7 @@ module Aws::Pinpoint
     #           },
     #         },
     #       },
+    #       trace_id: "__string",
     #     },
     #   })
     #
@@ -4525,25 +4620,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Use this resource to message a list of users. Amazon Pinpoint sends
-    # the message to all of the endpoints that are associated with each
-    # user. A user represents an individual who is assigned a unique user
-    # ID, and this ID is assigned to one or more endpoints. For example, if
-    # an individual uses your app on multiple devices, your app could assign
-    # that person's user ID to the endpoint for each device. With the
-    # users-messages resource, you specify the message recipients as user
-    # IDs. For each user ID, Amazon Pinpoint delivers the message to all of
-    # the user's endpoints. Within the body of your request, you can
-    # specify a default message, and you can tailor your message for
-    # different channels, including those for mobile push and SMS. With this
-    # resource, you send a direct message, which is a one time message that
-    # you send to a limited audience without creating a campaign. You can
-    # send the message to up to 100 users per request. You cannot use the
-    # message to engage a segment. When you send the message, Amazon
-    # Pinpoint delivers it immediately, and you cannot schedule the
-    # delivery. To engage a user segment, and to schedule the message
-    # delivery, create a campaign instead of using the users-messages
-    # resource.
+    # Used to send a message to a list of users.
     #
     # @option params [required, String] :application_id
     #
@@ -4681,6 +4758,7 @@ module Aws::Pinpoint
     #           },
     #         },
     #       },
+    #       trace_id: "__string",
     #       users: {
     #         "__string" => {
     #           body_override: "__string",
@@ -5733,7 +5811,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Use to update a segment.
+    # Used to update a segment.
     #
     # @option params [required, String] :application_id
     #
@@ -5894,7 +5972,7 @@ module Aws::Pinpoint
     #                 version: 1,
     #               },
     #             ],
-    #             source_type: "ALL", # accepts ALL, ANY
+    #             source_type: "ALL", # accepts ALL, ANY, NONE
     #             type: "ALL", # accepts ALL, ANY, NONE
     #           },
     #         ],
@@ -5996,7 +6074,7 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups[0].source_segments #=> Array
     #   resp.segment_response.segment_groups.groups[0].source_segments[0].id #=> String
     #   resp.segment_response.segment_groups.groups[0].source_segments[0].version #=> Integer
-    #   resp.segment_response.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY"
+    #   resp.segment_response.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
@@ -6072,7 +6150,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

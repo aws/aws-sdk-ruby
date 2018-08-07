@@ -4319,7 +4319,7 @@ module Aws::SSM
     #     next_token: "NextToken",
     #     filters: [
     #       {
-    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status
+    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status, ExecutionStage, DocumentName
     #         value: "CommandFilterValue", # required
     #       },
     #     ],
@@ -4407,7 +4407,7 @@ module Aws::SSM
     #     next_token: "NextToken",
     #     filters: [
     #       {
-    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status
+    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status, ExecutionStage, DocumentName
     #         value: "CommandFilterValue", # required
     #       },
     #     ],
@@ -5422,23 +5422,7 @@ module Aws::SSM
     #   The ARN of the task to execute
     #
     # @option params [String] :service_role_arn
-    #   The role to assume when running the Maintenance Window task.
-    #
-    #   If you do not specify a service role ARN, Systems Manager will use
-    #   your account's service-linked role for Systems Manager by default. If
-    #   no service-linked role for Systems Manager exists in your account, it
-    #   will be created when you run `RegisterTaskWithMaintenanceWindow`
-    #   without specifying a service role ARN.
-    #
-    #   For more information, see [Service-Linked Role Permissions for Systems
-    #   Manager][1] and [Should I Use a Service-Linked Role or a Custom
-    #   Service Role to Run Maintenance Window Tasks? ][2] in the *AWS Systems
-    #   Manager User Guide*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions
-    #   [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role
+    #   The role that should be assumed when executing the task.
     #
     # @option params [required, String] :task_type
     #   The type of task being registered.
@@ -6501,22 +6485,6 @@ module Aws::SSM
     #   The IAM service role ARN to modify. The system assumes this role
     #   during task execution.
     #
-    #   If you do not specify a service role ARN, Systems Manager will use
-    #   your account's service-linked role for Systems Manager by default. If
-    #   no service-linked role for Systems Manager exists in your account, it
-    #   will be created when you run `RegisterTaskWithMaintenanceWindow`
-    #   without specifying a service role ARN.
-    #
-    #   For more information, see [Service-Linked Role Permissions for Systems
-    #   Manager][1] and [Should I Use a Service-Linked Role or a Custom
-    #   Service Role to Run Maintenance Window Tasks? ][2] in the *AWS Systems
-    #   Manager User Guide*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions
-    #   [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role
-    #
     # @option params [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>] :task_parameters
     #   The parameters to modify.
     #
@@ -6921,7 +6889,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

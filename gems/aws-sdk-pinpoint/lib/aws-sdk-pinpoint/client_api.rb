@@ -100,6 +100,7 @@ module Aws::Pinpoint
     EndpointBatchItem = Shapes::StructureShape.new(name: 'EndpointBatchItem')
     EndpointBatchRequest = Shapes::StructureShape.new(name: 'EndpointBatchRequest')
     EndpointDemographic = Shapes::StructureShape.new(name: 'EndpointDemographic')
+    EndpointItemResponse = Shapes::StructureShape.new(name: 'EndpointItemResponse')
     EndpointLocation = Shapes::StructureShape.new(name: 'EndpointLocation')
     EndpointMessageResult = Shapes::StructureShape.new(name: 'EndpointMessageResult')
     EndpointRequest = Shapes::StructureShape.new(name: 'EndpointRequest')
@@ -107,7 +108,12 @@ module Aws::Pinpoint
     EndpointSendConfiguration = Shapes::StructureShape.new(name: 'EndpointSendConfiguration')
     EndpointUser = Shapes::StructureShape.new(name: 'EndpointUser')
     EndpointsResponse = Shapes::StructureShape.new(name: 'EndpointsResponse')
+    Event = Shapes::StructureShape.new(name: 'Event')
+    EventItemResponse = Shapes::StructureShape.new(name: 'EventItemResponse')
     EventStream = Shapes::StructureShape.new(name: 'EventStream')
+    EventsBatch = Shapes::StructureShape.new(name: 'EventsBatch')
+    EventsRequest = Shapes::StructureShape.new(name: 'EventsRequest')
+    EventsResponse = Shapes::StructureShape.new(name: 'EventsResponse')
     ExportJobRequest = Shapes::StructureShape.new(name: 'ExportJobRequest')
     ExportJobResource = Shapes::StructureShape.new(name: 'ExportJobResource')
     ExportJobResponse = Shapes::StructureShape.new(name: 'ExportJobResponse')
@@ -188,6 +194,7 @@ module Aws::Pinpoint
     ImportJobsResponse = Shapes::StructureShape.new(name: 'ImportJobsResponse')
     Include = Shapes::StringShape.new(name: 'Include')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
+    ItemResponse = Shapes::StructureShape.new(name: 'ItemResponse')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
     ListOfActivityResponse = Shapes::ListShape.new(name: 'ListOfActivityResponse')
     ListOfApplicationResponse = Shapes::ListShape.new(name: 'ListOfApplicationResponse')
@@ -208,6 +215,10 @@ module Aws::Pinpoint
     MapOfChannelResponse = Shapes::MapShape.new(name: 'MapOfChannelResponse')
     MapOfEndpointMessageResult = Shapes::MapShape.new(name: 'MapOfEndpointMessageResult')
     MapOfEndpointSendConfiguration = Shapes::MapShape.new(name: 'MapOfEndpointSendConfiguration')
+    MapOfEvent = Shapes::MapShape.new(name: 'MapOfEvent')
+    MapOfEventItemResponse = Shapes::MapShape.new(name: 'MapOfEventItemResponse')
+    MapOfEventsBatch = Shapes::MapShape.new(name: 'MapOfEventsBatch')
+    MapOfItemResponse = Shapes::MapShape.new(name: 'MapOfItemResponse')
     MapOfListOf__string = Shapes::MapShape.new(name: 'MapOfListOf__string')
     MapOfMapOfEndpointMessageResult = Shapes::MapShape.new(name: 'MapOfMapOfEndpointMessageResult')
     MapOfMessageResult = Shapes::MapShape.new(name: 'MapOfMessageResult')
@@ -230,8 +241,11 @@ module Aws::Pinpoint
     NumberValidateResponse = Shapes::StructureShape.new(name: 'NumberValidateResponse')
     PhoneNumberValidateRequest = Shapes::StructureShape.new(name: 'PhoneNumberValidateRequest')
     PhoneNumberValidateResponse = Shapes::StructureShape.new(name: 'PhoneNumberValidateResponse')
+    PublicEndpoint = Shapes::StructureShape.new(name: 'PublicEndpoint')
     PutEventStreamRequest = Shapes::StructureShape.new(name: 'PutEventStreamRequest')
     PutEventStreamResponse = Shapes::StructureShape.new(name: 'PutEventStreamResponse')
+    PutEventsRequest = Shapes::StructureShape.new(name: 'PutEventsRequest')
+    PutEventsResponse = Shapes::StructureShape.new(name: 'PutEventsResponse')
     QuietTime = Shapes::StructureShape.new(name: 'QuietTime')
     RecencyDimension = Shapes::StructureShape.new(name: 'RecencyDimension')
     RecencyType = Shapes::StringShape.new(name: 'RecencyType')
@@ -258,6 +272,7 @@ module Aws::Pinpoint
     SendUsersMessageResponse = Shapes::StructureShape.new(name: 'SendUsersMessageResponse')
     SendUsersMessagesRequest = Shapes::StructureShape.new(name: 'SendUsersMessagesRequest')
     SendUsersMessagesResponse = Shapes::StructureShape.new(name: 'SendUsersMessagesResponse')
+    Session = Shapes::StructureShape.new(name: 'Session')
     SetDimension = Shapes::StructureShape.new(name: 'SetDimension')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
@@ -456,6 +471,7 @@ module Aws::Pinpoint
     APNSVoipSandboxChannelResponse.struct_class = Types::APNSVoipSandboxChannelResponse
 
     ActivitiesResponse.add_member(:item, Shapes::ShapeRef.new(shape: ListOfActivityResponse, location_name: "Item"))
+    ActivitiesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
     ActivitiesResponse.struct_class = Types::ActivitiesResponse
 
     ActivityResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, location_name: "ApplicationId"))
@@ -856,6 +872,10 @@ module Aws::Pinpoint
     EndpointDemographic.add_member(:timezone, Shapes::ShapeRef.new(shape: __string, location_name: "Timezone"))
     EndpointDemographic.struct_class = Types::EndpointDemographic
 
+    EndpointItemResponse.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "Message"))
+    EndpointItemResponse.add_member(:status_code, Shapes::ShapeRef.new(shape: __integer, location_name: "StatusCode"))
+    EndpointItemResponse.struct_class = Types::EndpointItemResponse
+
     EndpointLocation.add_member(:city, Shapes::ShapeRef.new(shape: __string, location_name: "City"))
     EndpointLocation.add_member(:country, Shapes::ShapeRef.new(shape: __string, location_name: "Country"))
     EndpointLocation.add_member(:latitude, Shapes::ShapeRef.new(shape: __double, location_name: "Latitude"))
@@ -916,6 +936,18 @@ module Aws::Pinpoint
     EndpointsResponse.add_member(:item, Shapes::ShapeRef.new(shape: ListOfEndpointResponse, location_name: "Item"))
     EndpointsResponse.struct_class = Types::EndpointsResponse
 
+    Event.add_member(:attributes, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "Attributes"))
+    Event.add_member(:client_sdk_version, Shapes::ShapeRef.new(shape: __string, location_name: "ClientSdkVersion"))
+    Event.add_member(:event_type, Shapes::ShapeRef.new(shape: __string, location_name: "EventType"))
+    Event.add_member(:metrics, Shapes::ShapeRef.new(shape: MapOf__double, location_name: "Metrics"))
+    Event.add_member(:session, Shapes::ShapeRef.new(shape: Session, location_name: "Session"))
+    Event.add_member(:timestamp, Shapes::ShapeRef.new(shape: __string, location_name: "Timestamp"))
+    Event.struct_class = Types::Event
+
+    EventItemResponse.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "Message"))
+    EventItemResponse.add_member(:status_code, Shapes::ShapeRef.new(shape: __integer, location_name: "StatusCode"))
+    EventItemResponse.struct_class = Types::EventItemResponse
+
     EventStream.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, location_name: "ApplicationId"))
     EventStream.add_member(:destination_stream_arn, Shapes::ShapeRef.new(shape: __string, location_name: "DestinationStreamArn"))
     EventStream.add_member(:external_id, Shapes::ShapeRef.new(shape: __string, location_name: "ExternalId"))
@@ -923,6 +955,16 @@ module Aws::Pinpoint
     EventStream.add_member(:last_updated_by, Shapes::ShapeRef.new(shape: __string, location_name: "LastUpdatedBy"))
     EventStream.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "RoleArn"))
     EventStream.struct_class = Types::EventStream
+
+    EventsBatch.add_member(:endpoint, Shapes::ShapeRef.new(shape: PublicEndpoint, location_name: "Endpoint"))
+    EventsBatch.add_member(:events, Shapes::ShapeRef.new(shape: MapOfEvent, location_name: "Events"))
+    EventsBatch.struct_class = Types::EventsBatch
+
+    EventsRequest.add_member(:batch_item, Shapes::ShapeRef.new(shape: MapOfEventsBatch, location_name: "BatchItem"))
+    EventsRequest.struct_class = Types::EventsRequest
+
+    EventsResponse.add_member(:results, Shapes::ShapeRef.new(shape: MapOfItemResponse, location_name: "Results"))
+    EventsResponse.struct_class = Types::EventsResponse
 
     ExportJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "RoleArn"))
     ExportJobRequest.add_member(:s3_url_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "S3UrlPrefix"))
@@ -1320,6 +1362,10 @@ module Aws::Pinpoint
     ImportJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
     ImportJobsResponse.struct_class = Types::ImportJobsResponse
 
+    ItemResponse.add_member(:endpoint_item_response, Shapes::ShapeRef.new(shape: EndpointItemResponse, location_name: "EndpointItemResponse"))
+    ItemResponse.add_member(:events_item_response, Shapes::ShapeRef.new(shape: MapOfEventItemResponse, location_name: "EventsItemResponse"))
+    ItemResponse.struct_class = Types::ItemResponse
+
     ListOfActivityResponse.member = Shapes::ShapeRef.new(shape: ActivityResponse)
 
     ListOfApplicationResponse.member = Shapes::ShapeRef.new(shape: ApplicationResponse)
@@ -1362,6 +1408,18 @@ module Aws::Pinpoint
 
     MapOfEndpointSendConfiguration.key = Shapes::ShapeRef.new(shape: __string)
     MapOfEndpointSendConfiguration.value = Shapes::ShapeRef.new(shape: EndpointSendConfiguration)
+
+    MapOfEvent.key = Shapes::ShapeRef.new(shape: __string)
+    MapOfEvent.value = Shapes::ShapeRef.new(shape: Event)
+
+    MapOfEventItemResponse.key = Shapes::ShapeRef.new(shape: __string)
+    MapOfEventItemResponse.value = Shapes::ShapeRef.new(shape: EventItemResponse)
+
+    MapOfEventsBatch.key = Shapes::ShapeRef.new(shape: __string)
+    MapOfEventsBatch.value = Shapes::ShapeRef.new(shape: EventsBatch)
+
+    MapOfItemResponse.key = Shapes::ShapeRef.new(shape: __string)
+    MapOfItemResponse.value = Shapes::ShapeRef.new(shape: ItemResponse)
 
     MapOfListOf__string.key = Shapes::ShapeRef.new(shape: __string)
     MapOfListOf__string.value = Shapes::ShapeRef.new(shape: ListOf__string)
@@ -1415,6 +1473,7 @@ module Aws::Pinpoint
     MessageRequest.add_member(:context, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "Context"))
     MessageRequest.add_member(:endpoints, Shapes::ShapeRef.new(shape: MapOfEndpointSendConfiguration, location_name: "Endpoints"))
     MessageRequest.add_member(:message_configuration, Shapes::ShapeRef.new(shape: DirectMessageConfiguration, location_name: "MessageConfiguration"))
+    MessageRequest.add_member(:trace_id, Shapes::ShapeRef.new(shape: __string, location_name: "TraceId"))
     MessageRequest.struct_class = Types::MessageRequest
 
     MessageResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, location_name: "ApplicationId"))
@@ -1464,6 +1523,19 @@ module Aws::Pinpoint
     PhoneNumberValidateResponse[:payload] = :number_validate_response
     PhoneNumberValidateResponse[:payload_member] = PhoneNumberValidateResponse.member(:number_validate_response)
 
+    PublicEndpoint.add_member(:address, Shapes::ShapeRef.new(shape: __string, location_name: "Address"))
+    PublicEndpoint.add_member(:attributes, Shapes::ShapeRef.new(shape: MapOfListOf__string, location_name: "Attributes"))
+    PublicEndpoint.add_member(:channel_type, Shapes::ShapeRef.new(shape: ChannelType, location_name: "ChannelType"))
+    PublicEndpoint.add_member(:demographic, Shapes::ShapeRef.new(shape: EndpointDemographic, location_name: "Demographic"))
+    PublicEndpoint.add_member(:effective_date, Shapes::ShapeRef.new(shape: __string, location_name: "EffectiveDate"))
+    PublicEndpoint.add_member(:endpoint_status, Shapes::ShapeRef.new(shape: __string, location_name: "EndpointStatus"))
+    PublicEndpoint.add_member(:location, Shapes::ShapeRef.new(shape: EndpointLocation, location_name: "Location"))
+    PublicEndpoint.add_member(:metrics, Shapes::ShapeRef.new(shape: MapOf__double, location_name: "Metrics"))
+    PublicEndpoint.add_member(:opt_out, Shapes::ShapeRef.new(shape: __string, location_name: "OptOut"))
+    PublicEndpoint.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "RequestId"))
+    PublicEndpoint.add_member(:user, Shapes::ShapeRef.new(shape: EndpointUser, location_name: "User"))
+    PublicEndpoint.struct_class = Types::PublicEndpoint
+
     PutEventStreamRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     PutEventStreamRequest.add_member(:write_event_stream, Shapes::ShapeRef.new(shape: WriteEventStream, required: true, location_name: "WriteEventStream"))
     PutEventStreamRequest.struct_class = Types::PutEventStreamRequest
@@ -1474,6 +1546,17 @@ module Aws::Pinpoint
     PutEventStreamResponse.struct_class = Types::PutEventStreamResponse
     PutEventStreamResponse[:payload] = :event_stream
     PutEventStreamResponse[:payload_member] = PutEventStreamResponse.member(:event_stream)
+
+    PutEventsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    PutEventsRequest.add_member(:events_request, Shapes::ShapeRef.new(shape: EventsRequest, required: true, location_name: "EventsRequest"))
+    PutEventsRequest.struct_class = Types::PutEventsRequest
+    PutEventsRequest[:payload] = :events_request
+    PutEventsRequest[:payload_member] = PutEventsRequest.member(:events_request)
+
+    PutEventsResponse.add_member(:events_response, Shapes::ShapeRef.new(shape: EventsResponse, required: true, location_name: "EventsResponse"))
+    PutEventsResponse.struct_class = Types::PutEventsResponse
+    PutEventsResponse[:payload] = :events_response
+    PutEventsResponse[:payload_member] = PutEventsResponse.member(:events_response)
 
     QuietTime.add_member(:end, Shapes::ShapeRef.new(shape: __string, location_name: "End"))
     QuietTime.add_member(:start, Shapes::ShapeRef.new(shape: __string, location_name: "Start"))
@@ -1606,6 +1689,7 @@ module Aws::Pinpoint
 
     SendUsersMessageRequest.add_member(:context, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "Context"))
     SendUsersMessageRequest.add_member(:message_configuration, Shapes::ShapeRef.new(shape: DirectMessageConfiguration, location_name: "MessageConfiguration"))
+    SendUsersMessageRequest.add_member(:trace_id, Shapes::ShapeRef.new(shape: __string, location_name: "TraceId"))
     SendUsersMessageRequest.add_member(:users, Shapes::ShapeRef.new(shape: MapOfEndpointSendConfiguration, location_name: "Users"))
     SendUsersMessageRequest.struct_class = Types::SendUsersMessageRequest
 
@@ -1624,6 +1708,12 @@ module Aws::Pinpoint
     SendUsersMessagesResponse.struct_class = Types::SendUsersMessagesResponse
     SendUsersMessagesResponse[:payload] = :send_users_message_response
     SendUsersMessagesResponse[:payload_member] = SendUsersMessagesResponse.member(:send_users_message_response)
+
+    Session.add_member(:duration, Shapes::ShapeRef.new(shape: __integer, location_name: "Duration"))
+    Session.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
+    Session.add_member(:start_timestamp, Shapes::ShapeRef.new(shape: __string, location_name: "StartTimestamp"))
+    Session.add_member(:stop_timestamp, Shapes::ShapeRef.new(shape: __string, location_name: "StopTimestamp"))
+    Session.struct_class = Types::Session
 
     SetDimension.add_member(:dimension_type, Shapes::ShapeRef.new(shape: DimensionType, location_name: "DimensionType"))
     SetDimension.add_member(:values, Shapes::ShapeRef.new(shape: ListOf__string, location_name: "Values"))
@@ -2584,6 +2674,20 @@ module Aws::Pinpoint
         o.http_request_uri = "/v1/apps/{application-id}/eventstream"
         o.input = Shapes::ShapeRef.new(shape: PutEventStreamRequest)
         o.output = Shapes::ShapeRef.new(shape: PutEventStreamResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:put_events, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutEvents"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/apps/{application-id}/events"
+        o.input = Shapes::ShapeRef.new(shape: PutEventsRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutEventsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

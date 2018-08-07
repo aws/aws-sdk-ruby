@@ -37,9 +37,8 @@ module Aws::EC2
       data[:availability_zone]
     end
 
-    # The number of unused private IPv4 addresses in the subnet. Note that
-    # the IPv4 addresses for any stopped instances are considered
-    # unavailable.
+    # The number of unused private IPv4 addresses in the subnet. The IPv4
+    # addresses for any stopped instances are considered unavailable.
     # @return [Integer]
     def available_ip_address_count
       data[:available_ip_address_count]

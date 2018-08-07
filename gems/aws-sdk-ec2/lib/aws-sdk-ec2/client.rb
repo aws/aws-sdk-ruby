@@ -320,18 +320,22 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Allocates an Elastic IP address.
+    # Allocates an Elastic IP address to your AWS account. After you
+    # allocate the Elastic IP address you can associate it with an instance
+    # or network interface. After you release an Elastic IP address, it is
+    # released to the IP address pool and can be allocated to a different
+    # AWS account.
+    #
+    # \[EC2-VPC\] If you release an Elastic IP address, you might be able to
+    # recover it. You cannot recover an Elastic IP address that you released
+    # after it is allocated to another AWS account. You cannot recover an
+    # Elastic IP address for EC2-Classic. To attempt to recover an Elastic
+    # IP address that you released, specify it in this operation.
     #
     # An Elastic IP address is for use either in the EC2-Classic platform or
     # in a VPC. By default, you can allocate 5 Elastic IP addresses for
     # EC2-Classic per region and 5 Elastic IP addresses for EC2-VPC per
     # region.
-    #
-    # If you release an Elastic IP address for use in a VPC, you might be
-    # able to recover it. To recover an Elastic IP address that you
-    # released, specify it in the `Address` parameter. Note that you cannot
-    # recover an Elastic IP address that you released after it is allocated
-    # to another AWS account.
     #
     # For more information, see [Elastic IP Addresses][1] in the *Amazon
     # Elastic Compute Cloud User Guide*.
@@ -609,7 +613,8 @@ module Aws::EC2
     end
 
     # Associates an Elastic IP address with an instance or a network
-    # interface.
+    # interface. Before you can use an Elastic IP address, you must allocate
+    # it to your account.
     #
     # An Elastic IP address is for use in either the EC2-Classic platform or
     # in a VPC. For more information, see [Elastic IP Addresses][1] in the
@@ -888,8 +893,8 @@ module Aws::EC2
     # to disassociate the route table from the subnet later. A route table
     # can be associated with multiple subnets.
     #
-    # For more information about route tables, see [Route Tables][1] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [Route Tables][1] in the *Amazon Virtual
+    # Private Cloud User Guide*.
     #
     #
     #
@@ -1102,9 +1107,9 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Attaches an Internet gateway to a VPC, enabling connectivity between
-    # the Internet and the VPC. For more information about your VPC and
-    # Internet gateway, see the [Amazon Virtual Private Cloud User
+    # Attaches an internet gateway to a VPC, enabling connectivity between
+    # the internet and the VPC. For more information about your VPC and
+    # internet gateway, see the [Amazon Virtual Private Cloud User
     # Guide][1].
     #
     #
@@ -1118,7 +1123,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, String] :internet_gateway_id
-    #   The ID of the Internet gateway.
+    #   The ID of the internet gateway.
     #
     # @option params [required, String] :vpc_id
     #   The ID of the VPC.
@@ -2824,12 +2829,12 @@ module Aws::EC2
     # in the *Amazon Virtual Private Cloud User Guide*. You cannot specify
     # the components of the default VPC yourself.
     #
-    # You can create a default VPC if you deleted your previous default VPC.
-    # You cannot have more than one default VPC per region.
+    # iIf you deleted your previous default VPC, you can create a default
+    # VPC. You cannot have more than one default VPC per Region.
     #
     # If your account supports EC2-Classic, you cannot use this action to
-    # create a default VPC in a region that supports EC2-Classic. If you
-    # want a default VPC in a region that supports EC2-Classic, see "I
+    # create a default VPC in a Region that supports EC2-Classic. If you
+    # want a default VPC in a Region that supports EC2-Classic, see "I
     # really want a default VPC for my existing EC2 account. Is that
     # possible?" in the [Default VPCs FAQ][2].
     #
@@ -2895,9 +2900,9 @@ module Aws::EC2
     #   servers, or AmazonProvidedDNS. The default DHCP option set specifies
     #   AmazonProvidedDNS. If specifying more than one domain name server,
     #   specify the IP addresses in a single parameter, separated by commas.
-    #   If you want your instance to receive a custom DNS hostname as
-    #   specified in `domain-name`, you must set `domain-name-servers` to a
-    #   custom DNS server.
+    #   ITo have your instance to receive a custom DNS hostname as specified
+    #   in `domain-name`, you must set `domain-name-servers` to a custom DNS
+    #   server.
     #
     # * `domain-name` - If you're using AmazonProvidedDNS in `us-east-1`,
     #   specify `ec2.internal`. If you're using AmazonProvidedDNS in
@@ -2924,11 +2929,11 @@ module Aws::EC2
     #
     # Your VPC automatically starts out with a set of DHCP options that
     # includes only a DNS server that we provide (AmazonProvidedDNS). If you
-    # create a set of options, and if your VPC has an Internet gateway, make
+    # create a set of options, and if your VPC has an internet gateway, make
     # sure to set the `domain-name-servers` option either to
     # `AmazonProvidedDNS` or to a domain name server of your choice. For
-    # more information about DHCP options, see [DHCP Options Sets][2] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # more information, see [DHCP Options Sets][2] in the *Amazon Virtual
+    # Private Cloud User Guide*.
     #
     #
     #
@@ -3017,14 +3022,14 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # \[IPv6 only\] Creates an egress-only Internet gateway for your VPC. An
-    # egress-only Internet gateway is used to enable outbound communication
-    # over IPv6 from instances in your VPC to the Internet, and prevents
+    # \[IPv6 only\] Creates an egress-only internet gateway for your VPC. An
+    # egress-only internet gateway is used to enable outbound communication
+    # over IPv6 from instances in your VPC to the internet, and prevents
     # hosts outside of your VPC from initiating an IPv6 connection with your
     # instance.
     #
     # @option params [String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to Ensure
     #   Idempotency][1].
     #
@@ -3039,7 +3044,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, String] :vpc_id
-    #   The ID of the VPC for which to create the egress-only Internet
+    #   The ID of the VPC for which to create the egress-only internet
     #   gateway.
     #
     # @return [Types::CreateEgressOnlyInternetGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3233,27 +3238,36 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Creates one or more flow logs to capture IP traffic for a specific
-    # network interface, subnet, or VPC. Flow logs are delivered to a
-    # specified log group in Amazon CloudWatch Logs. If you specify a VPC or
-    # subnet in the request, a log stream is created in CloudWatch Logs for
-    # each network interface in the subnet or VPC. Log streams can include
-    # information about accepted and rejected traffic to a network
-    # interface. You can view the data in your log streams using Amazon
-    # CloudWatch Logs.
+    # Creates one or more flow logs to capture information about IP traffic
+    # for a specific network interface, subnet, or VPC.
     #
-    # In your request, you must also specify an IAM role that has permission
-    # to publish logs to CloudWatch Logs.
+    # Flow log data for a monitored network interface is recorded as flow
+    # log records, which are log events consisting of fields that describe
+    # the traffic flow. For more information, see [Flow Log Records][1] in
+    # the *Amazon Virtual Private Cloud User Guide*.
     #
-    # For more information, see [VPC Flow Logs][1] in the *Amazon Virtual
+    # When publishing to CloudWatch Logs, flow log records are published to
+    # a log group, and each network interface has a unique log stream in the
+    # log group. When publishing to Amazon S3, flow log records for all of
+    # the monitored network interfaces are published to a single log file
+    # object that is stored in the specified bucket.
+    #
+    # For more information, see [VPC Flow Logs][2] in the *Amazon Virtual
     # Private Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/flow-logs.html
+    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/flow-logs.html#flow-log-records
+    # [2]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/flow-logs.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to Ensure
     #   Idempotency][1].
     #
@@ -3261,12 +3275,12 @@ module Aws::EC2
     #
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     #
-    # @option params [required, String] :deliver_logs_permission_arn
-    #   The ARN for the IAM role that's used to post flow logs to a
-    #   CloudWatch Logs log group.
+    # @option params [String] :deliver_logs_permission_arn
+    #   The ARN for the IAM role that's used to post flow logs to a log
+    #   group.
     #
-    # @option params [required, String] :log_group_name
-    #   The name of the CloudWatch log group.
+    # @option params [String] :log_group_name
+    #   The name of the log group.
     #
     # @option params [required, Array<String>] :resource_ids
     #   One or more subnet, network interface, or VPC IDs.
@@ -3279,6 +3293,31 @@ module Aws::EC2
     # @option params [required, String] :traffic_type
     #   The type of traffic to log.
     #
+    # @option params [String] :log_destination_type
+    #   Specifies the type of destination to which the flow log data is to be
+    #   published. Flow log data can be published to CloudWatch Logs or Amazon
+    #   S3. To publish flow log data to CloudWatch Logs, specify
+    #   `cloud-watch-logs`. To publish flow log data to Amazon S3, specify
+    #   `s3`.
+    #
+    #   Default: `cloud-watch-logs`
+    #
+    # @option params [String] :log_destination
+    #   Specifies the destination to which the flow log data is to be
+    #   published. Flow log data can be published to an CloudWatch Logs log
+    #   group or an Amazon S3 bucket. The value specified for this parameter
+    #   depends on the value specified for LogDestinationType.
+    #
+    #   If LogDestinationType is not specified or `cloud-watch-logs`, specify
+    #   the Amazon Resource Name (ARN) of the CloudWatch Logs log group.
+    #
+    #   If LogDestinationType is `s3`, specify the ARN of the Amazon S3
+    #   bucket. You can also specify a subfolder in the bucket. To specify a
+    #   subfolder in the bucket, use the following ARN format:
+    #   `bucket_ARN/subfolder_name/`. For example, to specify a subfolder
+    #   named `my-logs` in a bucket named `my-bucket`, use the following ARN:
+    #   `arn:aws:s3:::my-bucket/my-logs/`.
+    #
     # @return [Types::CreateFlowLogsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFlowLogsResult#client_token #client_token} => String
@@ -3288,12 +3327,15 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_flow_logs({
+    #     dry_run: false,
     #     client_token: "String",
-    #     deliver_logs_permission_arn: "String", # required
-    #     log_group_name: "String", # required
+    #     deliver_logs_permission_arn: "String",
+    #     log_group_name: "String",
     #     resource_ids: ["String"], # required
     #     resource_type: "VPC", # required, accepts VPC, Subnet, NetworkInterface
     #     traffic_type: "ACCEPT", # required, accepts ACCEPT, REJECT, ALL
+    #     log_destination_type: "cloud-watch-logs", # accepts cloud-watch-logs, s3
+    #     log_destination: "String",
     #   })
     #
     # @example Response structure
@@ -3576,10 +3618,10 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Creates an Internet gateway for use with a VPC. After creating the
-    # Internet gateway, you attach it to a VPC using AttachInternetGateway.
+    # Creates an internet gateway for use with a VPC. After creating the
+    # internet gateway, you attach it to a VPC using AttachInternetGateway.
     #
-    # For more information about your VPC and Internet gateway, see the
+    # For more information about your VPC and internet gateway, see the
     # [Amazon Virtual Private Cloud User Guide][1].
     #
     #
@@ -4225,7 +4267,7 @@ module Aws::EC2
     #   resource, you must first disassociate it.
     #
     # @option params [String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to Ensure
     #   Idempotency][1].
     #
@@ -4316,8 +4358,8 @@ module Aws::EC2
     # of security (in addition to security groups) for the instances in your
     # VPC.
     #
-    # For more information about network ACLs, see [Network ACLs][1] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [Network ACLs][1] in the *Amazon Virtual
+    # Private Cloud User Guide*.
     #
     #
     #
@@ -4470,10 +4512,10 @@ module Aws::EC2
     #   The protocol. A value of `-1` or `all` means all protocols. If you
     #   specify `all`, `-1`, or a protocol number other than `6` (tcp), `17`
     #   (udp), or `1` (icmp), traffic on all ports is allowed, regardless of
-    #   any ports or ICMP types or codes you specify. If you specify protocol
-    #   `58` (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP
-    #   types and codes allowed, regardless of any that you specify. If you
-    #   specify protocol `58` (ICMPv6) and specify an IPv6 CIDR block, you
+    #   any ports or ICMP types or codes that you specify. If you specify
+    #   protocol `58` (ICMPv6) and specify an IPv4 CIDR block, traffic for all
+    #   ICMP types and codes allowed, regardless of any that you specify. If
+    #   you specify protocol `58` (ICMPv6) and specify an IPv6 CIDR block, you
     #   must specify an ICMP type and code.
     #
     # @option params [required, String] :rule_action
@@ -4956,9 +4998,9 @@ module Aws::EC2
 
     # Creates a route in a route table within a VPC.
     #
-    # You must specify one of the following targets: Internet gateway or
+    # You must specify one of the following targets: internet gateway or
     # virtual private gateway, NAT instance, NAT gateway, VPC peering
-    # connection, network interface, or egress-only Internet gateway.
+    # connection, network interface, or egress-only internet gateway.
     #
     # When determining how to route traffic, we use the route with the most
     # specific match. For example, traffic is destined for the IPv4 address
@@ -4996,10 +5038,10 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [String] :egress_only_internet_gateway_id
-    #   \[IPv6 traffic only\] The ID of an egress-only Internet gateway.
+    #   \[IPv6 traffic only\] The ID of an egress-only internet gateway.
     #
     # @option params [String] :gateway_id
-    #   The ID of an Internet gateway or virtual private gateway attached to
+    #   The ID of an internet gateway or virtual private gateway attached to
     #   your VPC.
     #
     # @option params [String] :instance_id
@@ -5066,8 +5108,8 @@ module Aws::EC2
     # Creates a route table for the specified VPC. After you create a route
     # table, you can add routes and associate the table with a subnet.
     #
-    # For more information about route tables, see [Route Tables][1] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [Route Tables][1] in the *Amazon Virtual
+    # Private Cloud User Guide*.
     #
     #
     #
@@ -5480,14 +5522,14 @@ module Aws::EC2
 
     # Creates a subnet in an existing VPC.
     #
-    # When you create each subnet, you provide the VPC ID and the IPv4 CIDR
-    # block you want for the subnet. After you create a subnet, you can't
-    # change its CIDR block. The size of the subnet's IPv4 CIDR block can
-    # be the same as a VPC's IPv4 CIDR block, or a subset of a VPC's IPv4
-    # CIDR block. If you create more than one subnet in a VPC, the subnets'
-    # CIDR blocks must not overlap. The smallest IPv4 subnet (and VPC) you
-    # can create uses a /28 netmask (16 IPv4 addresses), and the largest
-    # uses a /16 netmask (65,536 IPv4 addresses).
+    # When you create each subnet, you provide the VPC ID and IPv4 CIDR
+    # block for the subnet. After you create a subnet, you can't change its
+    # CIDR block. The size of the subnet's IPv4 CIDR block can be the same
+    # as a VPC's IPv4 CIDR block, or a subset of a VPC's IPv4 CIDR block.
+    # If you create more than one subnet in a VPC, the subnets' CIDR blocks
+    # must not overlap. The smallest IPv4 subnet (and VPC) you can create
+    # uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16
+    # netmask (65,536 IPv4 addresses).
     #
     # If you've associated an IPv6 CIDR block with your VPC, you can create
     # a subnet with an IPv6 CIDR block that uses a /64 prefix length.
@@ -5922,9 +5964,9 @@ module Aws::EC2
 
     # Creates a VPC with the specified IPv4 CIDR block. The smallest VPC you
     # can create uses a /28 netmask (16 IPv4 addresses), and the largest
-    # uses a /16 netmask (65,536 IPv4 addresses). To help you decide how big
-    # to make your VPC, see [Your VPC and Subnets][1] in the *Amazon Virtual
-    # Private Cloud User Guide*.
+    # uses a /16 netmask (65,536 IPv4 addresses). For more information about
+    # how large to make your VPC, see [Your VPC and Subnets][1] in the
+    # *Amazon Virtual Private Cloud User Guide*.
     #
     # You can optionally request an Amazon-provided IPv6 CIDR block for the
     # VPC. The IPv6 CIDR block uses a /56 prefix length, and is allocated
@@ -5932,10 +5974,9 @@ module Aws::EC2
     # range for your VPC.
     #
     # By default, each instance you launch in the VPC has the default DHCP
-    # options, which includes only a default DNS server that we provide
-    # (AmazonProvidedDNS). For more information about DHCP options, see
-    # [DHCP Options Sets][2] in the *Amazon Virtual Private Cloud User
-    # Guide*.
+    # options, which include only a default DNS server that we provide
+    # (AmazonProvidedDNS). For more information, see [DHCP Options Sets][2]
+    # in the *Amazon Virtual Private Cloud User Guide*.
     #
     # You can specify the instance tenancy value for the VPC when you create
     # it. You can't change this value for the VPC after you create it. For
@@ -6335,7 +6376,7 @@ module Aws::EC2
     # Requests a VPC peering connection between two VPCs: a requester VPC
     # that you own and an accepter VPC with which to create the connection.
     # The accepter VPC can belong to another AWS account and can be in a
-    # different region to the requester VPC. The requester VPC and accepter
+    # different Region to the requester VPC. The requester VPC and accepter
     # VPC cannot have overlapping CIDR blocks.
     #
     # <note markdown="1"> Limitations and rules apply to a VPC peering connection. For more
@@ -6718,7 +6759,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Deletes an egress-only Internet gateway.
+    # Deletes an egress-only internet gateway.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -6727,7 +6768,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, String] :egress_only_internet_gateway_id
-    #   The ID of the egress-only Internet gateway.
+    #   The ID of the egress-only internet gateway.
     #
     # @return [Types::DeleteEgressOnlyInternetGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6810,6 +6851,12 @@ module Aws::EC2
 
     # Deletes one or more flow logs.
     #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
     # @option params [required, Array<String>] :flow_log_ids
     #   One or more flow log IDs.
     #
@@ -6820,6 +6867,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_flow_logs({
+    #     dry_run: false,
     #     flow_log_ids: ["String"], # required
     #   })
     #
@@ -6874,7 +6922,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Deletes the specified Internet gateway. You must detach the Internet
+    # Deletes the specified internet gateway. You must detach the internet
     # gateway from the VPC before you can delete it.
     #
     # @option params [Boolean] :dry_run
@@ -6884,7 +6932,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, String] :internet_gateway_id
-    #   The ID of the Internet gateway.
+    #   The ID of the internet gateway.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -8710,7 +8758,7 @@ module Aws::EC2
 
     # Describes one or more of your linked EC2-Classic instances. This
     # request only returns information about EC2-Classic instances linked to
-    # a VPC through ClassicLink; you cannot use this request to return
+    # a VPC through ClassicLink. You cannot use this request to return
     # information about other instances.
     #
     # @option params [Array<Types::Filter>] :filters
@@ -8731,7 +8779,9 @@ module Aws::EC2
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
     #
-    #   * `vpc-id` - The ID of the VPC that the instance is linked to.
+    #   * `vpc-id` - The ID of the VPC to which the instance is linked.
+    #
+    #     `vpc-id` - The ID of the VPC that the instance is linked to.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -8747,7 +8797,7 @@ module Aws::EC2
     #   The maximum number of results to return for the request in a single
     #   page. The remaining results of the initial request can be seen by
     #   sending another request with the returned `NextToken` value. This
-    #   value can be between 5 and 1000; if `MaxResults` is given a value
+    #   value can be between 5 and 1000. If `MaxResults` is given a value
     #   larger than 1000, only 1000 results are returned. You cannot specify
     #   this parameter and the instance IDs parameter in the same request.
     #
@@ -8985,8 +9035,8 @@ module Aws::EC2
 
     # Describes one or more of your DHCP options sets.
     #
-    # For more information about DHCP options sets, see [DHCP Options
-    # Sets][1] in the *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [DHCP Options Sets][1] in the *Amazon
+    # Virtual Private Cloud User Guide*.
     #
     #
     #
@@ -9093,7 +9143,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your egress-only Internet gateways.
+    # Describes one or more of your egress-only internet gateways.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -9102,13 +9152,13 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<String>] :egress_only_internet_gateway_ids
-    #   One or more egress-only Internet gateway IDs.
+    #   One or more egress-only internet gateway IDs.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return for the request in a single
     #   page. The remaining results can be seen by sending another request
     #   with the returned `NextToken` value. This value can be between 5 and
-    #   1000; if `MaxResults` is given a value larger than 1000, only 1000
+    #   1000. If `MaxResults` is given a value larger than 1000, only 1000
     #   results are returned.
     #
     # @option params [String] :next_token
@@ -9515,11 +9565,21 @@ module Aws::EC2
     # logs (the log streams for the network interfaces), you must use the
     # CloudWatch Logs console or the CloudWatch Logs API.
     #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
     # @option params [Array<Types::Filter>] :filter
     #   One or more filters.
     #
     #   * `deliver-log-status` - The status of the logs delivery (`SUCCESS` \|
     #     `FAILED`).
+    #
+    #   * `log-destination-type` - The type of destination to which the flow
+    #     log publishes data. Possible destination types include
+    #     `cloud-watch-logs` and `S3`.
     #
     #   * `flow-log-id` - The ID of the flow log.
     #
@@ -9527,7 +9587,8 @@ module Aws::EC2
     #
     #   * `resource-id` - The ID of the VPC, subnet, or network interface.
     #
-    #   * `traffic-type` - The type of traffic (`ACCEPT` \| `REJECT` \| `ALL`)
+    #   * `traffic-type` - The type of traffic (`ACCEPT` \| `REJECT` \|
+    #     `ALL`).
     #
     # @option params [Array<String>] :flow_log_ids
     #   One or more flow log IDs.
@@ -9536,7 +9597,7 @@ module Aws::EC2
     #   The maximum number of results to return for the request in a single
     #   page. The remaining results can be seen by sending another request
     #   with the returned `NextToken` value. This value can be between 5 and
-    #   1000; if `MaxResults` is given a value larger than 1000, only 1000
+    #   1000. If `MaxResults` is given a value larger than 1000, only 1000
     #   results are returned. You cannot specify this parameter and the flow
     #   log IDs parameter in the same request.
     #
@@ -9551,6 +9612,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_flow_logs({
+    #     dry_run: false,
     #     filter: [
     #       {
     #         name: "String",
@@ -9574,6 +9636,8 @@ module Aws::EC2
     #   resp.flow_logs[0].log_group_name #=> String
     #   resp.flow_logs[0].resource_id #=> String
     #   resp.flow_logs[0].traffic_type #=> String, one of "ACCEPT", "REJECT", "ALL"
+    #   resp.flow_logs[0].log_destination_type #=> String, one of "cloud-watch-logs", "s3"
+    #   resp.flow_logs[0].log_destination #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFlowLogs AWS API Documentation
@@ -11645,7 +11709,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your Internet gateways.
+    # Describes one or more of your internet gateways.
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
@@ -11675,9 +11739,9 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<String>] :internet_gateway_ids
-    #   One or more Internet gateway IDs.
+    #   One or more internet gateway IDs.
     #
-    #   Default: Describes all your Internet gateways.
+    #   Default: Describes all your internet gateways.
     #
     # @return [Types::DescribeInternetGatewaysResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12253,7 +12317,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of the your NAT gateways.
+    # Describes one or more of your NAT gateways.
     #
     # @option params [Array<Types::Filter>] :filter
     #   One or more filters.
@@ -12384,8 +12448,8 @@ module Aws::EC2
 
     # Describes one or more of your network ACLs.
     #
-    # For more information about network ACLs, see [Network ACLs][1] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [Network ACLs][1] in the *Amazon Virtual
+    # Private Cloud User Guide*.
     #
     #
     #
@@ -13899,8 +13963,8 @@ module Aws::EC2
     # implicitly associated with the main route table. This command does not
     # return the subnet ID for implicit associations.
     #
-    # For more information about route tables, see [Route Tables][1] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [Route Tables][1] in the *Amazon Virtual
+    # Private Cloud User Guide*.
     #
     #
     #
@@ -15986,8 +16050,8 @@ module Aws::EC2
 
     # Describes one or more of your subnets.
     #
-    # For more information about subnets, see [Your VPC and Subnets][1] in
-    # the *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [Your VPC and Subnets][1] in the *Amazon
+    # Virtual Private Cloud User Guide*.
     #
     #
     #
@@ -18005,8 +18069,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Detaches an Internet gateway from a VPC, disabling connectivity
-    # between the Internet and the VPC. The VPC must not contain any running
+    # Detaches an internet gateway from a VPC, disabling connectivity
+    # between the internet and the VPC. The VPC must not contain any running
     # instances with Elastic IP addresses or public IPv4 addresses.
     #
     # @option params [Boolean] :dry_run
@@ -18016,7 +18080,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, String] :internet_gateway_id
-    #   The ID of the Internet gateway.
+    #   The ID of the internet gateway.
     #
     # @option params [required, String] :vpc_id
     #   The ID of the VPC.
@@ -18308,8 +18372,8 @@ module Aws::EC2
     # Disables ClassicLink DNS support for a VPC. If disabled, DNS hostnames
     # resolve to public IP addresses when addressed between a linked
     # EC2-Classic instance and instances in the VPC to which it's linked.
-    # For more information about ClassicLink, see [ClassicLink][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # For more information, see [ClassicLink][1] in the *Amazon Elastic
+    # Compute Cloud User Guide*.
     #
     #
     #
@@ -18669,7 +18733,7 @@ module Aws::EC2
     # Enables a VPC for ClassicLink. You can then link EC2-Classic instances
     # to your ClassicLink-enabled VPC to allow communication over private IP
     # addresses. You cannot enable your VPC for ClassicLink if any of your
-    # VPC's route tables have existing routes for address ranges within the
+    # VPC route tables have existing routes for address ranges within the
     # `10.0.0.0/8` IP address range, excluding local routes for VPCs in the
     # `10.0.0.0/16` and `10.1.0.0/16` IP address ranges. For more
     # information, see [ClassicLink][1] in the *Amazon Elastic Compute Cloud
@@ -18717,8 +18781,8 @@ module Aws::EC2
     # its private IP address when addressed from an instance in the VPC to
     # which it's linked. Similarly, the DNS hostname of an instance in a
     # VPC resolves to its private IP address when addressed from a linked
-    # EC2-Classic instance. For more information about ClassicLink, see
-    # [ClassicLink][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    # EC2-Classic instance. For more information, see [ClassicLink][1] in
+    # the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -18754,19 +18818,24 @@ module Aws::EC2
     # instances, the instance console output displays the exact console
     # output that would normally be displayed on a physical monitor attached
     # to a computer. For Windows instances, the instance console output
-    # includes output from the EC2Config service.
-    #
-    # GetConsoleOutput returns up to 64 KB of console output shortly after
-    # it's generated by the instance.
+    # includes the last three system event log errors.
     #
     # By default, the console output returns buffered information that was
     # posted shortly after an instance transition state (start, stop,
     # reboot, or terminate). This information is available for at least one
-    # hour after the most recent post.
+    # hour after the most recent post. Only the most recent 64 KB of console
+    # output is available.
     #
     # You can optionally retrieve the latest serial console output at any
-    # time during the instance lifecycle. This option is only supported on
-    # C5, M5, and `i3.metal` instances.
+    # time during the instance lifecycle. This option is supported on
+    # instance types that use the Nitro hypervisor.
+    #
+    # For more information, see [Instance Console Output][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-console.html#instance-console-console-output
     #
     # @option params [required, String] :instance_id
     #   The ID of the instance.
@@ -21262,9 +21331,9 @@ module Aws::EC2
     #   Indicates whether the DNS resolution is supported for the VPC. If
     #   enabled, queries to the Amazon provided DNS server at the
     #   169.254.169.253 IP address, or the reserved IP address at the base of
-    #   the VPC network range "plus two" will succeed. If disabled, the
-    #   Amazon provided DNS service in the VPC that resolves public DNS
-    #   hostnames to IP addresses is not enabled.
+    #   the VPC network range "plus two" succeed. If disabled, the Amazon
+    #   provided DNS service in the VPC that resolves public DNS hostnames to
+    #   IP addresses is not enabled.
     #
     #   You cannot modify the DNS resolution and DNS hostnames attributes in
     #   the same request. Use separate requests for each attribute.
@@ -21511,6 +21580,11 @@ module Aws::EC2
     # add or remove permissions for service consumers (IAM users, IAM roles,
     # and AWS accounts) to connect to your endpoint service.
     #
+    # If you grant permissions to all principals, the service is public. Any
+    # users who know the name of a public service can send a request to
+    # attach an endpoint. If the service does not require manual approval,
+    # attachments are automatically approved.
+    #
     #
     #
     # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/endpoint-service.html
@@ -21525,12 +21599,13 @@ module Aws::EC2
     #   The ID of the service.
     #
     # @option params [Array<String>] :add_allowed_principals
-    #   One or more Amazon Resource Names (ARNs) of principals for which to
-    #   allow permission. Specify `*` to allow all principals.
+    #   The Amazon Resource Names (ARN) of one or more principals. Permissions
+    #   are granted to the principals in this list. To grant permissions to
+    #   all principals, specify an asterisk (*).
     #
     # @option params [Array<String>] :remove_allowed_principals
-    #   One or more Amazon Resource Names (ARNs) of principals for which to
-    #   remove permission.
+    #   The Amazon Resource Names (ARN) of one or more principals. Permissions
+    #   are revoked for principals in this list.
     #
     # @return [Types::ModifyVpcEndpointServicePermissionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -21644,8 +21719,8 @@ module Aws::EC2
     # otherwise during launch. The tenancy of any existing instances in the
     # VPC is not affected.
     #
-    # For more information about Dedicated Instances, see [Dedicated
-    # Instances][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    # For more information, see [Dedicated Instances][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -22522,8 +22597,8 @@ module Aws::EC2
 
     # Changes which network ACL a subnet is associated with. By default when
     # you create a subnet, it's automatically associated with the default
-    # network ACL. For more information about network ACLs, see [Network
-    # ACLs][1] in the *Amazon Virtual Private Cloud User Guide*.
+    # network ACL. For more information, see [Network ACLs][1] in the
+    # *Amazon Virtual Private Cloud User Guide*.
     #
     # This is an idempotent operation.
     #
@@ -22584,9 +22659,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Replaces an entry (rule) in a network ACL. For more information about
-    # network ACLs, see [Network ACLs][1] in the *Amazon Virtual Private
-    # Cloud User Guide*.
+    # Replaces an entry (rule) in a network ACL. For more information, see
+    # [Network ACLs][1] in the *Amazon Virtual Private Cloud User Guide*.
     #
     #
     #
@@ -22627,11 +22701,11 @@ module Aws::EC2
     #   The IP protocol. You can specify `all` or `-1` to mean all protocols.
     #   If you specify `all`, `-1`, or a protocol number other than `tcp`,
     #   `udp`, or `icmp`, traffic on all ports is allowed, regardless of any
-    #   ports or ICMP types or codes you specify. If you specify protocol `58`
-    #   (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types
-    #   and codes allowed, regardless of any that you specify. If you specify
-    #   protocol `58` (ICMPv6) and specify an IPv6 CIDR block, you must
-    #   specify an ICMP type and code.
+    #   ports or ICMP types or codes you that specify. If you specify protocol
+    #   `58` (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP
+    #   types and codes allowed, regardless of any that you specify. If you
+    #   specify protocol `58` (ICMPv6) and specify an IPv6 CIDR block, you
+    #   must specify an ICMP type and code.
     #
     # @option params [required, String] :rule_action
     #   Indicates whether to allow or deny the traffic that matches the rule.
@@ -22691,12 +22765,12 @@ module Aws::EC2
     end
 
     # Replaces an existing route within a route table in a VPC. You must
-    # provide only one of the following: Internet gateway or virtual private
+    # provide only one of the following: internet gateway or virtual private
     # gateway, NAT instance, NAT gateway, VPC peering connection, network
-    # interface, or egress-only Internet gateway.
+    # interface, or egress-only internet gateway.
     #
-    # For more information about route tables, see [Route Tables][1] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [Route Tables][1] in the *Amazon Virtual
+    # Private Cloud User Guide*.
     #
     #
     #
@@ -22704,11 +22778,13 @@ module Aws::EC2
     #
     # @option params [String] :destination_cidr_block
     #   The IPv4 CIDR address block used for the destination match. The value
-    #   you provide must match the CIDR of an existing route in the table.
+    #   that you provide must match the CIDR of an existing route in the
+    #   table.
     #
     # @option params [String] :destination_ipv_6_cidr_block
     #   The IPv6 CIDR address block used for the destination match. The value
-    #   you provide must match the CIDR of an existing route in the table.
+    #   that you provide must match the CIDR of an existing route in the
+    #   table.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -22717,10 +22793,10 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [String] :egress_only_internet_gateway_id
-    #   \[IPv6 traffic only\] The ID of an egress-only Internet gateway.
+    #   \[IPv6 traffic only\] The ID of an egress-only internet gateway.
     #
     # @option params [String] :gateway_id
-    #   The ID of an Internet gateway or virtual private gateway.
+    #   The ID of an internet gateway or virtual private gateway.
     #
     # @option params [String] :instance_id
     #   The ID of a NAT instance in your VPC.
@@ -25621,7 +25697,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

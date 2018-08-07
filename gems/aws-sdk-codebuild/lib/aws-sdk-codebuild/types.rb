@@ -287,6 +287,14 @@ module Aws::CodeBuild
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] override_artifact_name
+    #   If this flag is set, a name specified in the buildspec file
+    #   overrides the artifact name. The name specified in a buildspec file
+    #   is calculated at build time and uses the Shell Command Language. For
+    #   example, you can append a date and time to your artifact name so
+    #   that it is always unique.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] encryption_disabled
     #   Information that tells you if encryption for build artifacts is
     #   disabled.
@@ -298,6 +306,7 @@ module Aws::CodeBuild
       :location,
       :sha256sum,
       :md5sum,
+      :override_artifact_name,
       :encryption_disabled)
       include Aws::Structure
     end
@@ -425,6 +434,7 @@ module Aws::CodeBuild
     #           namespace_type: "NONE", # accepts NONE, BUILD_ID
     #           name: "String",
     #           packaging: "NONE", # accepts NONE, ZIP
+    #           override_artifact_name: false,
     #           encryption_disabled: false,
     #         },
     #         cache: {
@@ -1151,6 +1161,7 @@ module Aws::CodeBuild
     #         namespace_type: "NONE", # accepts NONE, BUILD_ID
     #         name: "String",
     #         packaging: "NONE", # accepts NONE, ZIP
+    #         override_artifact_name: false,
     #         encryption_disabled: false,
     #       }
     #
@@ -1278,6 +1289,14 @@ module Aws::CodeBuild
     #       file containing the build output.
     #   @return [String]
     #
+    # @!attribute [rw] override_artifact_name
+    #   If this flag is set, a name specified in the buildspec file
+    #   overrides the artifact name. The name specified in a buildspec file
+    #   is calculated at build time and uses the Shell Command Language. For
+    #   example, you can append a date and time to your artifact name so
+    #   that it is always unique.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] encryption_disabled
     #   Set to true if you do not want your output artifacts encrypted. This
     #   option is only valid if your artifacts type is Amazon S3. If this is
@@ -1294,6 +1313,7 @@ module Aws::CodeBuild
       :namespace_type,
       :name,
       :packaging,
+      :override_artifact_name,
       :encryption_disabled)
       include Aws::Structure
     end
@@ -1616,6 +1636,7 @@ module Aws::CodeBuild
     #           namespace_type: "NONE", # accepts NONE, BUILD_ID
     #           name: "String",
     #           packaging: "NONE", # accepts NONE, ZIP
+    #           override_artifact_name: false,
     #           encryption_disabled: false,
     #         },
     #         environment_variables_override: [
@@ -1897,6 +1918,7 @@ module Aws::CodeBuild
     #           namespace_type: "NONE", # accepts NONE, BUILD_ID
     #           name: "String",
     #           packaging: "NONE", # accepts NONE, ZIP
+    #           override_artifact_name: false,
     #           encryption_disabled: false,
     #         },
     #         cache: {

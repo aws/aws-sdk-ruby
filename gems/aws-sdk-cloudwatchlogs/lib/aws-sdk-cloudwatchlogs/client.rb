@@ -749,7 +749,7 @@ module Aws::CloudWatchLogs
     # @option params [String] :log_stream_name_prefix
     #   The prefix to match.
     #
-    #   iIf `orderBy` is `LastEventTime`,you cannot specify this parameter.
+    #   If `orderBy` is `LastEventTime`,you cannot specify this parameter.
     #
     # @option params [String] :order_by
     #   If the value is `LogStreamName`, the results are ordered by log stream
@@ -836,12 +836,14 @@ module Aws::CloudWatchLogs
     #   the default is up to 50 items.
     #
     # @option params [String] :metric_name
-    #   The name of the CloudWatch metric to which the monitored log
-    #   information should be published. For example, you may publish to a
-    #   metric called ErrorCount.
+    #   Filters results to include only those with the specified metric name.
+    #   If you include this parameter in your request, you must also include
+    #   the `metricNamespace` parameter.
     #
     # @option params [String] :metric_namespace
-    #   The namespace of the CloudWatch metric.
+    #   Filters results to include only those in the specified namespace. If
+    #   you include this parameter in your request, you must also include the
+    #   `metricName` parameter.
     #
     # @return [Types::DescribeMetricFiltersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1107,13 +1109,14 @@ module Aws::CloudWatchLogs
     #
     # @option params [Integer] :start_time
     #   The start of the time range, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp earlier than
-    #   this time are not included.
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp equal to this
+    #   time or later than this time are included. Events with a time stamp
+    #   earlier than this time are not included.
     #
     # @option params [Integer] :end_time
     #   The end of the time range, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp later than
-    #   this time are not included.
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp equal to or
+    #   later than this time are not included.
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
@@ -1305,13 +1308,19 @@ module Aws::CloudWatchLogs
     #   retention period of the log group.
     #
     # * The log events in the batch must be in chronological ordered by
-    #   their time stamp (the time the event occurred, expressed as the
-    #   number of milliseconds after Jan 1, 1970 00:00:00 UTC).
+    #   their time stamp. The time stamp is the time the event occurred,
+    #   expressed as the number of milliseconds after Jan 1, 1970 00:00:00
+    #   UTC. (In AWS Tools for PowerShell and the AWS SDK for .NET, the
+    #   timestamp is specified in .NET format: yyyy-mm-ddThh:mm:ss. For
+    #   example, 2017-09-15T13:45:30.)
     #
     # * The maximum number of log events in a batch is 10,000.
     #
     # * A batch of log events in a single request cannot span more than 24
     #   hours. Otherwise, the operation fails.
+    #
+    # If a call to PutLogEvents returns "UnrecognizedClientException" the
+    # most likely cause is an invalid AWS access key ID or secret key.
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
@@ -1414,7 +1423,7 @@ module Aws::CloudWatchLogs
 
     # Creates or updates a resource policy allowing other AWS services to
     # put log events to this account, such as Amazon Route 53. An account
-    # can have up to 50 resource policies per region.
+    # can have up to 10 resource policies per region.
     #
     # @option params [String] :policy_name
     #   Name of the new policy. This parameter is required.
@@ -1429,10 +1438,10 @@ module Aws::CloudWatchLogs
     #   "logArn" with the ARN of your CloudWatch Logs resource, such as a
     #   log group or log stream.
     #
-    #   \\\{ "Version": "2012-10-17" "Statement": \[ \\\{ "Sid":
-    #   "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal":
-    #   \\\{ "Service": \[ "route53.amazonaws.com" \] \\},
-    #   "Action":"logs:PutLogEvents", "Resource": logArn \\} \] \\}
+    #   `\{ "Version": "2012-10-17", "Statement": [ \{ "Sid":
+    #   "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal": \{
+    #   "Service": [ "route53.amazonaws.com" ] \},
+    #   "Action":"logs:PutLogEvents", "Resource": "logArn" \} ] \} `
     #
     # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1697,7 +1706,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -160,6 +160,7 @@ module Aws::CodeBuild
     BuildArtifacts.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "location"))
     BuildArtifacts.add_member(:sha256sum, Shapes::ShapeRef.new(shape: String, location_name: "sha256sum"))
     BuildArtifacts.add_member(:md5sum, Shapes::ShapeRef.new(shape: String, location_name: "md5sum"))
+    BuildArtifacts.add_member(:override_artifact_name, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "overrideArtifactName"))
     BuildArtifacts.add_member(:encryption_disabled, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "encryptionDisabled"))
     BuildArtifacts.struct_class = Types::BuildArtifacts
 
@@ -320,6 +321,7 @@ module Aws::CodeBuild
     ProjectArtifacts.add_member(:namespace_type, Shapes::ShapeRef.new(shape: ArtifactNamespace, location_name: "namespaceType"))
     ProjectArtifacts.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     ProjectArtifacts.add_member(:packaging, Shapes::ShapeRef.new(shape: ArtifactPackaging, location_name: "packaging"))
+    ProjectArtifacts.add_member(:override_artifact_name, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "overrideArtifactName"))
     ProjectArtifacts.add_member(:encryption_disabled, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "encryptionDisabled"))
     ProjectArtifacts.struct_class = Types::ProjectArtifacts
 

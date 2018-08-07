@@ -1146,7 +1146,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status
+    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status, ExecutionStage, DocumentName
     #         value: "CommandFilterValue", # required
     #       }
     #
@@ -1155,7 +1155,46 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The filter value.
+    #   The filter value. Valid values for each filter key are as follows:
+    #
+    #   * **InvokedAfter**\: Specify a timestamp to limit your results. For
+    #     example, specify `2018-07-07T00:00:00Z` to see a list of command
+    #     executions occurring July 7, 2018, and later.
+    #
+    #   * **InvokedBefore**\: Specify a timestamp to limit your results. For
+    #     example, specify `2018-07-07T00:00:00Z` to see a list of command
+    #     executions from before July 7, 2018.
+    #
+    #   * **Status**\: Specify a valid command status to see a list of all
+    #     command executions with that status. Status values you can specify
+    #     include:
+    #
+    #     * `Pending`
+    #
+    #     * `InProgress`
+    #
+    #     * `Success`
+    #
+    #     * `Cancelled`
+    #
+    #     * `Failed`
+    #
+    #     * `TimedOut`
+    #
+    #     * `Cancelling`
+    #
+    #   * **DocumentName**\: Specify name of the SSM document for which you
+    #     want to see command execution results. For example, specify
+    #     `AWS-RunPatchBaseline` to see command executions that used this
+    #     SSM document to perform security patching operations on instances.
+    #
+    #   * **ExecutionStage**\: Specify one of the following values:
+    #
+    #     * `Executing`\: Returns a list of command executions that are
+    #       currently still running.
+    #
+    #     * `Complete`\: Returns a list of command exeuctions that have
+    #       already completed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CommandFilter AWS API Documentation
@@ -7179,7 +7218,7 @@ module Aws::SSM
     #         next_token: "NextToken",
     #         filters: [
     #           {
-    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status
+    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status, ExecutionStage, DocumentName
     #             value: "CommandFilterValue", # required
     #           },
     #         ],
@@ -7254,7 +7293,7 @@ module Aws::SSM
     #         next_token: "NextToken",
     #         filters: [
     #           {
-    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status
+    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status, ExecutionStage, DocumentName
     #             value: "CommandFilterValue", # required
     #           },
     #         ],
@@ -10266,24 +10305,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
-    #   The role to assume when running the Maintenance Window task.
-    #
-    #   If you do not specify a service role ARN, Systems Manager will use
-    #   your account's service-linked role for Systems Manager by default.
-    #   If no service-linked role for Systems Manager exists in your
-    #   account, it will be created when you run
-    #   `RegisterTaskWithMaintenanceWindow` without specifying a service
-    #   role ARN.
-    #
-    #   For more information, see [Service-Linked Role Permissions for
-    #   Systems Manager][1] and [Should I Use a Service-Linked Role or a
-    #   Custom Service Role to Run Maintenance Window Tasks? ][2] in the
-    #   *AWS Systems Manager User Guide*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions
-    #   [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role
+    #   The role that should be assumed when executing the task.
     #   @return [String]
     #
     # @!attribute [rw] task_type
@@ -11898,23 +11920,6 @@ module Aws::SSM
     # @!attribute [rw] service_role_arn
     #   The IAM service role ARN to modify. The system assumes this role
     #   during task execution.
-    #
-    #   If you do not specify a service role ARN, Systems Manager will use
-    #   your account's service-linked role for Systems Manager by default.
-    #   If no service-linked role for Systems Manager exists in your
-    #   account, it will be created when you run
-    #   `RegisterTaskWithMaintenanceWindow` without specifying a service
-    #   role ARN.
-    #
-    #   For more information, see [Service-Linked Role Permissions for
-    #   Systems Manager][1] and [Should I Use a Service-Linked Role or a
-    #   Custom Service Role to Run Maintenance Window Tasks? ][2] in the
-    #   *AWS Systems Manager User Guide*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions
-    #   [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role
     #   @return [String]
     #
     # @!attribute [rw] task_parameters

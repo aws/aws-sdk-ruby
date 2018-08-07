@@ -321,7 +321,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, String] :internet_gateway_id
-    #   The ID of the Internet gateway.
+    #   The ID of the internet gateway.
     # @return [EmptyStructure]
     def attach_internet_gateway(options = {})
       options = options.merge(vpc_id: @id)
@@ -561,7 +561,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, String] :internet_gateway_id
-    #   The ID of the Internet gateway.
+    #   The ID of the internet gateway.
     # @return [EmptyStructure]
     def detach_internet_gateway(options = {})
       options = options.merge(vpc_id: @id)
@@ -628,9 +628,9 @@ module Aws::EC2
     #   Indicates whether the DNS resolution is supported for the VPC. If
     #   enabled, queries to the Amazon provided DNS server at the
     #   169.254.169.253 IP address, or the reserved IP address at the base of
-    #   the VPC network range "plus two" will succeed. If disabled, the
-    #   Amazon provided DNS service in the VPC that resolves public DNS
-    #   hostnames to IP addresses is not enabled.
+    #   the VPC network range "plus two" succeed. If disabled, the Amazon
+    #   provided DNS service in the VPC that resolves public DNS hostnames to
+    #   IP addresses is not enabled.
     #
     #   You cannot modify the DNS resolution and DNS hostnames attributes in
     #   the same request. Use separate requests for each attribute.
@@ -1116,9 +1116,9 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<String>] :internet_gateway_ids
-    #   One or more Internet gateway IDs.
+    #   One or more internet gateway IDs.
     #
-    #   Default: Describes all your Internet gateways.
+    #   Default: Describes all your internet gateways.
     # @return [InternetGateway::Collection]
     def internet_gateways(options = {})
       batches = Enumerator.new do |y|

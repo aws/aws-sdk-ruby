@@ -20,15 +20,18 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] client_id
-    #   Client ID as gotten from Amazon
+    #   The Client ID that you obtained from the Amazon App Distribution
+    #   Portal.
     #   @return [String]
     #
     # @!attribute [rw] client_secret
-    #   Client secret as gotten from Amazon
+    #   The Client Secret that you obtained from the Amazon App Distribution
+    #   Portal.
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   If the channel is enabled for sending messages.
+    #   Indicates whether or not the channel is enabled for sending
+    #   messages.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ADMChannelRequest AWS API Documentation
@@ -47,11 +50,12 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] creation_date
-    #   When was this segment created
+    #   The date and time when this channel was created.
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   If the channel is enabled for sending messages.
+    #   Indicates whether or not the channel is enabled for sending
+    #   messages.
     #   @return [Boolean]
     #
     # @!attribute [rw] has_credential
@@ -59,27 +63,28 @@ module Aws::Pinpoint
     #   @return [Boolean]
     #
     # @!attribute [rw] id
-    #   Channel ID. Not used, only for backwards compatibility.
+    #   (Deprecated) An identifier for the channel. Retained for backwards
+    #   compatibility.
     #   @return [String]
     #
     # @!attribute [rw] is_archived
-    #   Is this channel archived
+    #   Indicates whether or not the channel is archived.
     #   @return [Boolean]
     #
     # @!attribute [rw] last_modified_by
-    #   Who last updated this entry
+    #   The user who last updated this channel.
     #   @return [String]
     #
     # @!attribute [rw] last_modified_date
-    #   Last date this was updated
+    #   The date and time when this channel was last modified.
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   Platform type. Will be "ADM"
+    #   The platform type. For this channel, the value is always "ADM."
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   Version of channel
+    #   The channel version.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ADMChannelResponse AWS API Documentation
@@ -138,8 +143,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] body
-    #   The message body of the notification, the email body or the text
-    #   message.
+    #   The message body of the notification.
     #   @return [String]
     #
     # @!attribute [rw] consolidation_key
@@ -301,11 +305,11 @@ module Aws::Pinpoint
     # Apple Distribution Push Notification Service channel definition.
     #
     # @!attribute [rw] application_id
-    #   The ID of the application to which the channel applies.
+    #   The ID of the application that the channel applies to.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
-    #   When was this segment created
+    #   The date and time when this channel was created.
     #   @return [String]
     #
     # @!attribute [rw] default_authentication_method
@@ -327,27 +331,28 @@ module Aws::Pinpoint
     #   @return [Boolean]
     #
     # @!attribute [rw] id
-    #   Channel ID. Not used. Present only for backwards compatibility.
+    #   (Deprecated) An identifier for the channel. Retained for backwards
+    #   compatibility.
     #   @return [String]
     #
     # @!attribute [rw] is_archived
-    #   Is this channel archived
+    #   Indicates whether or not the channel is archived.
     #   @return [Boolean]
     #
     # @!attribute [rw] last_modified_by
-    #   Who last updated this entry
+    #   The user who last updated this channel.
     #   @return [String]
     #
     # @!attribute [rw] last_modified_date
-    #   Last date this was updated
+    #   The date and time when this channel was last modified.
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The platform type. Will be APNS.
+    #   The platform type. For this channel, the value is always "ADM."
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   Version of channel
+    #   The channel version.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSChannelResponse AWS API Documentation
@@ -416,8 +421,7 @@ module Aws::Pinpoint
     #   @return [Integer]
     #
     # @!attribute [rw] body
-    #   The message body of the notification, the email body or the text
-    #   message.
+    #   The message body of the notification.
     #   @return [String]
     #
     # @!attribute [rw] category
@@ -932,10 +936,16 @@ module Aws::Pinpoint
     #   List of campaign activities
     #   @return [Array<Types::ActivityResponse>]
     #
+    # @!attribute [rw] next_token
+    #   The string that you use in a subsequent request to get the next page
+    #   of results in a paginated response.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ActivitiesResponse AWS API Documentation
     #
     class ActivitiesResponse < Struct.new(
-      :item)
+      :item,
+      :next_token)
       include Aws::Structure
     end
 
@@ -1339,8 +1349,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] body
-    #   The message body of the notification, the email body or the text
-    #   message.
+    #   The message body of the notification.
     #   @return [String]
     #
     # @!attribute [rw] data
@@ -2317,7 +2326,7 @@ module Aws::Pinpoint
     #                     version: 1,
     #                   },
     #                 ],
-    #                 source_type: "ALL", # accepts ALL, ANY
+    #                 source_type: "ALL", # accepts ALL, ANY, NONE
     #                 type: "ALL", # accepts ALL, ANY, NONE
     #               },
     #             ],
@@ -2352,7 +2361,7 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
-    # Default Message across push notification, email, and sms.
+    # The default message to use across all channels.
     #
     # @note When making an API call, you may pass DefaultMessage
     #   data as a hash:
@@ -2413,8 +2422,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] body
-    #   The message body of the notification, the email body or the text
-    #   message.
+    #   The message body of the notification.
     #   @return [String]
     #
     # @!attribute [rw] data
@@ -3235,7 +3243,7 @@ module Aws::Pinpoint
     #   address varies by channel. For mobile push channels, use the token
     #   provided by the push notification service, such as the APNs device
     #   token or the FCM registration token. For the SMS channel, use a
-    #   phone number in E.164 format, such as +1206XXX5550100. For the email
+    #   phone number in E.164 format, such as +12065550100. For the email
     #   channel, use an email address.
     #   @return [String]
     #
@@ -3373,7 +3381,7 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
-    # Endpoint demographic data
+    # Demographic information about the endpoint.
     #
     # @note When making an API call, you may pass EndpointDemographic
     #   data as a hash:
@@ -3400,23 +3408,23 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] make
-    #   The endpoint make, such as such as Apple or Samsung.
+    #   The manufacturer of the endpoint device, such as Apple or Samsung.
     #   @return [String]
     #
     # @!attribute [rw] model
-    #   The endpoint model, such as iPhone.
+    #   The model name or number of the endpoint device, such as iPhone.
     #   @return [String]
     #
     # @!attribute [rw] model_version
-    #   The endpoint model version.
+    #   The model version of the endpoint device.
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The endpoint platform, such as ios or android.
+    #   The platform of the endpoint device, such as iOS or Android.
     #   @return [String]
     #
     # @!attribute [rw] platform_version
-    #   The endpoint platform version.
+    #   The platform version of the endpoint device.
     #   @return [String]
     #
     # @!attribute [rw] timezone
@@ -3438,7 +3446,28 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
-    # Endpoint location data
+    # The responses that are returned after you create or update an endpoint
+    # and record an event.
+    #
+    # @!attribute [rw] message
+    #   A custom message associated with the registration of an endpoint
+    #   when issuing a response.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   The status code to respond with for a particular endpoint id after
+    #   endpoint registration
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointItemResponse AWS API Documentation
+    #
+    class EndpointItemResponse < Struct.new(
+      :message,
+      :status_code)
+      include Aws::Structure
+    end
+
+    # Location data for the endpoint.
     #
     # @note When making an API call, you may pass EndpointLocation
     #   data as a hash:
@@ -3457,17 +3486,18 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] country
-    #   Country according to ISO 3166-1 Alpha-2 codes. For example, US.
+    #   The two-letter code for the country or region of the endpoint.
+    #   Specified as an ISO 3166-1 Alpha-2 code, such as "US" for the
+    #   United States.
     #   @return [String]
     #
     # @!attribute [rw] latitude
-    #   The latitude of the endpoint location. Rounded to one decimal
-    #   (Roughly corresponding to a mile).
+    #   The latitude of the endpoint location, rounded to one decimal place.
     #   @return [Float]
     #
     # @!attribute [rw] longitude
-    #   The longitude of the endpoint location. Rounded to one decimal
-    #   (Roughly corresponding to a mile).
+    #   The longitude of the endpoint location, rounded to one decimal
+    #   place.
     #   @return [Float]
     #
     # @!attribute [rw] postal_code
@@ -3475,8 +3505,8 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The region of the endpoint location. For example, corresponds to a
-    #   state in US.
+    #   The region of the endpoint location. For example, in the United
+    #   States, this corresponds to a state.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointLocation AWS API Documentation
@@ -3498,7 +3528,22 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] delivery_status
-    #   Delivery status of message.
+    #   The delivery status of the message. Possible values: SUCCESS - The
+    #   message was successfully delivered to the endpoint.
+    #   TRANSIENT\_FAILURE - A temporary error occurred. Amazon Pinpoint
+    #   will attempt to deliver the message again later. FAILURE\_PERMANENT
+    #   - An error occurred when delivering the message to the endpoint.
+    #   Amazon Pinpoint won't attempt to send the message again. TIMEOUT -
+    #   The message couldn't be sent within the timeout period. QUIET\_TIME
+    #   - The local time for the endpoint was within the Quiet Hours for the
+    #   campaign. DAILY\_CAP - The endpoint has received the maximum number
+    #   of messages it can receive within a 24-hour period. HOLDOUT - The
+    #   endpoint was in a hold out treatment for the campaign. THROTTLED -
+    #   Amazon Pinpoint throttled sending to this endpoint. EXPIRED - The
+    #   endpoint address is expired. CAMPAIGN\_CAP - The endpoint received
+    #   the maximum number of messages allowed by the campaign.
+    #   SERVICE\_FAILURE - A service-level failure prevented Amazon Pinpoint
+    #   from delivering the message. UNKNOWN - An unknown error occurred.
     #   @return [String]
     #
     # @!attribute [rw] message_id
@@ -3578,7 +3623,7 @@ module Aws::Pinpoint
     #   address varies by channel. For mobile push channels, use the token
     #   provided by the push notification service, such as the APNs device
     #   token or the FCM registration token. For the SMS channel, use a
-    #   phone number in E.164 format, such as +1206XXX5550100. For the email
+    #   phone number in E.164 format, such as +12065550100. For the email
     #   channel, use an email address.
     #   @return [String]
     #
@@ -3600,11 +3645,12 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] demographic
-    #   The endpoint demographic attributes.
+    #   Demographic attributes for the endpoint.
     #   @return [Types::EndpointDemographic]
     #
     # @!attribute [rw] effective_date
-    #   The last time the endpoint was updated. Provided in ISO 8601 format.
+    #   The date and time when the endpoint was updated, shown in ISO 8601
+    #   format.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_status
@@ -3654,24 +3700,24 @@ module Aws::Pinpoint
     # Endpoint response
     #
     # @!attribute [rw] address
-    #   The address or token of the endpoint as provided by your push
-    #   provider (e.g. DeviceToken or RegistrationId).
+    #   The address of the endpoint as provided by your push provider. For
+    #   example, the DeviceToken or RegistrationId.
     #   @return [String]
     #
     # @!attribute [rw] application_id
-    #   The ID of the application associated with the endpoint.
+    #   The ID of the application that is associated with the endpoint.
     #   @return [String]
     #
     # @!attribute [rw] attributes
     #   Custom attributes that describe the endpoint by associating a name
     #   with an array of values. For example, an attribute named
-    #   "interests" might have the values \["science", "politics",
-    #   "travel"\]. You can use these attributes as selection criteria
-    #   when you create a segment of users to engage with a messaging
-    #   campaign. The following characters are not recommended in attribute
-    #   names: # : ? \\ /. The Amazon Pinpoint console does not display
-    #   attributes that include these characters in the name. This
-    #   limitation does not apply to attribute values.
+    #   "interests" might have the following values: \["science",
+    #   "politics", "travel"\]. You can use these attributes as
+    #   selection criteria when you create segments. The Amazon Pinpoint
+    #   console can't display attribute names that include the following
+    #   characters: hash/pound sign (#), colon (:), question mark (?),
+    #   backslash (\\), and forward slash (/). For this reason, you should
+    #   avoid using these characters in the names of custom attributes.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] channel_type
@@ -3680,7 +3726,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] cohort_id
-    #   A number from 0 - 99 that represents the cohort the endpoint is
+    #   A number from 0-99 that represents the cohort the endpoint is
     #   assigned to. Endpoints are grouped into cohorts randomly, and each
     #   cohort contains approximately 1 percent of the endpoints for an app.
     #   Amazon Pinpoint assigns cohorts to the holdout or treatment
@@ -3688,7 +3734,8 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] creation_date
-    #   The last time the endpoint was created. Provided in ISO 8601 format.
+    #   The date and time when the endpoint was created, shown in ISO 8601
+    #   format.
     #   @return [String]
     #
     # @!attribute [rw] demographic
@@ -3696,7 +3743,8 @@ module Aws::Pinpoint
     #   @return [Types::EndpointDemographic]
     #
     # @!attribute [rw] effective_date
-    #   The last time the endpoint was updated. Provided in ISO 8601 format.
+    #   The date and time when the endpoint was last updated, shown in ISO
+    #   8601 format.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_status
@@ -3705,8 +3753,8 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] id
     #   The unique ID that you assigned to the endpoint. The ID should be a
-    #   globally unique identifier (GUID) to ensure that it is unique
-    #   compared to all other endpoints for the application.
+    #   globally unique identifier (GUID) to ensure that it doesn't
+    #   conflict with other endpoint IDs associated with the application.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -3821,15 +3869,15 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] user_attributes
-    #   Custom attributes that describe an end user by associating a name
-    #   with an array of values. For example, an attribute named
-    #   "interests" might have the values \["science", "politics",
+    #   Custom attributes that describe the user by associating a name with
+    #   an array of values. For example, an attribute named "interests"
+    #   might have the following values: \["science", "politics",
     #   "travel"\]. You can use these attributes as selection criteria
-    #   when you create a segment of users to engage with a messaging
-    #   campaign. The following characters are not recommended in attribute
-    #   names: # : ? \\ /. The Amazon Pinpoint console does not display
-    #   attributes that include these characters in the name. This
-    #   limitation does not apply to attribute values.
+    #   when you create segments. The Amazon Pinpoint console can't display
+    #   attribute names that include the following characters: hash/pound
+    #   sign (#), colon (:), question mark (?), backslash (\\), and forward
+    #   slash (/). For this reason, you should avoid using these characters
+    #   in the names of custom attributes.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] user_id
@@ -3857,6 +3905,84 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Model for creating or updating events.
+    #
+    # @note When making an API call, you may pass Event
+    #   data as a hash:
+    #
+    #       {
+    #         attributes: {
+    #           "__string" => "__string",
+    #         },
+    #         client_sdk_version: "__string",
+    #         event_type: "__string",
+    #         metrics: {
+    #           "__string" => 1.0,
+    #         },
+    #         session: {
+    #           duration: 1,
+    #           id: "__string",
+    #           start_timestamp: "__string",
+    #           stop_timestamp: "__string",
+    #         },
+    #         timestamp: "__string",
+    #       }
+    #
+    # @!attribute [rw] attributes
+    #   Custom attributes that are associated with the event you're adding
+    #   or updating.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_sdk_version
+    #   The version of the SDK that's running on the client device.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type
+    #   The name of the custom event that you're recording.
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics
+    #   Event metrics
+    #   @return [Hash<String,Float>]
+    #
+    # @!attribute [rw] session
+    #   The session
+    #   @return [Types::Session]
+    #
+    # @!attribute [rw] timestamp
+    #   The date and time when the event occurred, in ISO 8601 format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/Event AWS API Documentation
+    #
+    class Event < Struct.new(
+      :attributes,
+      :client_sdk_version,
+      :event_type,
+      :metrics,
+      :session,
+      :timestamp)
+      include Aws::Structure
+    end
+
+    # The responses that are returned after you record an event.
+    #
+    # @!attribute [rw] message
+    #   A custom message that is associated with the processing of an event.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   The status code to respond with for a particular event id
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EventItemResponse AWS API Documentation
+    #
+    class EventItemResponse < Struct.new(
+      :message,
+      :status_code)
+      include Aws::Structure
+    end
+
     # Model for an event publishing subscription export.
     #
     # @!attribute [rw] application_id
@@ -3872,7 +3998,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] external_id
-    #   DEPRECATED. Your AWS account ID, which you assigned to the
+    #   (Deprecated) Your AWS account ID, which you assigned to the
     #   ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to
     #   assume an IAM role. This requirement is removed, and external IDs
     #   are not recommended for IAM roles assumed by Amazon Pinpoint.
@@ -3900,6 +4026,183 @@ module Aws::Pinpoint
       :last_modified_date,
       :last_updated_by,
       :role_arn)
+      include Aws::Structure
+    end
+
+    # Events batch definition
+    #
+    # @note When making an API call, you may pass EventsBatch
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint: {
+    #           address: "__string",
+    #           attributes: {
+    #             "__string" => ["__string"],
+    #           },
+    #           channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU, CUSTOM
+    #           demographic: {
+    #             app_version: "__string",
+    #             locale: "__string",
+    #             make: "__string",
+    #             model: "__string",
+    #             model_version: "__string",
+    #             platform: "__string",
+    #             platform_version: "__string",
+    #             timezone: "__string",
+    #           },
+    #           effective_date: "__string",
+    #           endpoint_status: "__string",
+    #           location: {
+    #             city: "__string",
+    #             country: "__string",
+    #             latitude: 1.0,
+    #             longitude: 1.0,
+    #             postal_code: "__string",
+    #             region: "__string",
+    #           },
+    #           metrics: {
+    #             "__string" => 1.0,
+    #           },
+    #           opt_out: "__string",
+    #           request_id: "__string",
+    #           user: {
+    #             user_attributes: {
+    #               "__string" => ["__string"],
+    #             },
+    #             user_id: "__string",
+    #           },
+    #         },
+    #         events: {
+    #           "__string" => {
+    #             attributes: {
+    #               "__string" => "__string",
+    #             },
+    #             client_sdk_version: "__string",
+    #             event_type: "__string",
+    #             metrics: {
+    #               "__string" => 1.0,
+    #             },
+    #             session: {
+    #               duration: 1,
+    #               id: "__string",
+    #               start_timestamp: "__string",
+    #               stop_timestamp: "__string",
+    #             },
+    #             timestamp: "__string",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] endpoint
+    #   Endpoint information
+    #   @return [Types::PublicEndpoint]
+    #
+    # @!attribute [rw] events
+    #   Events
+    #   @return [Hash<String,Types::Event>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EventsBatch AWS API Documentation
+    #
+    class EventsBatch < Struct.new(
+      :endpoint,
+      :events)
+      include Aws::Structure
+    end
+
+    # Put Events request
+    #
+    # @note When making an API call, you may pass EventsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         batch_item: {
+    #           "__string" => {
+    #             endpoint: {
+    #               address: "__string",
+    #               attributes: {
+    #                 "__string" => ["__string"],
+    #               },
+    #               channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU, CUSTOM
+    #               demographic: {
+    #                 app_version: "__string",
+    #                 locale: "__string",
+    #                 make: "__string",
+    #                 model: "__string",
+    #                 model_version: "__string",
+    #                 platform: "__string",
+    #                 platform_version: "__string",
+    #                 timezone: "__string",
+    #               },
+    #               effective_date: "__string",
+    #               endpoint_status: "__string",
+    #               location: {
+    #                 city: "__string",
+    #                 country: "__string",
+    #                 latitude: 1.0,
+    #                 longitude: 1.0,
+    #                 postal_code: "__string",
+    #                 region: "__string",
+    #               },
+    #               metrics: {
+    #                 "__string" => 1.0,
+    #               },
+    #               opt_out: "__string",
+    #               request_id: "__string",
+    #               user: {
+    #                 user_attributes: {
+    #                   "__string" => ["__string"],
+    #                 },
+    #                 user_id: "__string",
+    #               },
+    #             },
+    #             events: {
+    #               "__string" => {
+    #                 attributes: {
+    #                   "__string" => "__string",
+    #                 },
+    #                 client_sdk_version: "__string",
+    #                 event_type: "__string",
+    #                 metrics: {
+    #                   "__string" => 1.0,
+    #                 },
+    #                 session: {
+    #                   duration: 1,
+    #                   id: "__string",
+    #                   start_timestamp: "__string",
+    #                   stop_timestamp: "__string",
+    #                 },
+    #                 timestamp: "__string",
+    #               },
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] batch_item
+    #   Batch of events with endpoint id as the key and an object of
+    #   EventsBatch as value. The EventsBatch object has the PublicEndpoint
+    #   and a map of event Id's to events
+    #   @return [Hash<String,Types::EventsBatch>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EventsRequest AWS API Documentation
+    #
+    class EventsRequest < Struct.new(
+      :batch_item)
+      include Aws::Structure
+    end
+
+    # The results from processing a put events request
+    #
+    # @!attribute [rw] results
+    #   A map containing a multi part response for each endpoint, with the
+    #   endpoint id as the key and item response as the value
+    #   @return [Hash<String,Types::ItemResponse>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EventsResponse AWS API Documentation
+    #
+    class EventsResponse < Struct.new(
+      :results)
       include Aws::Structure
     end
 
@@ -3988,7 +4291,7 @@ module Aws::Pinpoint
     # Export job response.
     #
     # @!attribute [rw] application_id
-    #   The unique ID of the application to which the job applies.
+    #   The unique ID of the application associated with the export job.
     #   @return [String]
     #
     # @!attribute [rw] completed_pieces
@@ -4214,8 +4517,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] body
-    #   The message body of the notification, the email body or the text
-    #   message.
+    #   The message body of the notification.
     #   @return [String]
     #
     # @!attribute [rw] collapse_key
@@ -5443,7 +5745,7 @@ module Aws::Pinpoint
     #   @return [Boolean]
     #
     # @!attribute [rw] external_id
-    #   DEPRECATED. Your AWS account ID, which you assigned to the
+    #   (Deprecated) Your AWS account ID, which you assigned to the
     #   ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to
     #   assume an IAM role. This requirement is removed, and external IDs
     #   are not recommended for IAM roles assumed by Amazon Pinpoint.
@@ -5466,10 +5768,10 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] s3_url
-    #   A URL that points to the location within an Amazon S3 bucket that
-    #   contains the endpoints to import. The location can be a folder or a
-    #   single file. The URL should follow this format:
-    #   s3://bucket-name/folder-name/file-name Amazon Pinpoint will import
+    #   The URL of the S3 bucket that contains the segment information to
+    #   import. The location can be a folder or a single file. The URL
+    #   should use the following format:
+    #   s3://bucket-name/folder-name/file-name Amazon Pinpoint imports
     #   endpoints from this location and any subfolders it contains.
     #   @return [String]
     #
@@ -5504,7 +5806,7 @@ module Aws::Pinpoint
     #   @return [Boolean]
     #
     # @!attribute [rw] external_id
-    #   DEPRECATED. Your AWS account ID, which you assigned to the
+    #   (Deprecated) Your AWS account ID, which you assigned to the
     #   ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to
     #   assume an IAM role. This requirement is removed, and external IDs
     #   are not recommended for IAM roles assumed by Amazon Pinpoint.
@@ -5527,10 +5829,10 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] s3_url
-    #   A URL that points to the location within an Amazon S3 bucket that
-    #   contains the endpoints to import. The location can be a folder or a
-    #   single file. The URL should follow this format:
-    #   s3://bucket-name/folder-name/file-name Amazon Pinpoint will import
+    #   The URL of the S3 bucket that contains the segment information to
+    #   import. The location can be a folder or a single file. The URL
+    #   should use the following format:
+    #   s3://bucket-name/folder-name/file-name Amazon Pinpoint imports
     #   endpoints from this location and any subfolders it contains.
     #   @return [String]
     #
@@ -5655,6 +5957,25 @@ module Aws::Pinpoint
     class ImportJobsResponse < Struct.new(
       :item,
       :next_token)
+      include Aws::Structure
+    end
+
+    # The endpoint and events combined response definition
+    #
+    # @!attribute [rw] endpoint_item_response
+    #   Endpoint item response after endpoint registration
+    #   @return [Types::EndpointItemResponse]
+    #
+    # @!attribute [rw] events_item_response
+    #   Events item response is a multipart response object per event Id,
+    #   with eventId as the key and EventItemResponse object as the value
+    #   @return [Hash<String,Types::EventItemResponse>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ItemResponse AWS API Documentation
+    #
+    class ItemResponse < Struct.new(
+      :endpoint_item_response,
+      :events_item_response)
       include Aws::Structure
     end
 
@@ -6070,6 +6391,7 @@ module Aws::Pinpoint
     #             },
     #           },
     #         },
+    #         trace_id: "__string",
     #       }
     #
     # @!attribute [rw] addresses
@@ -6096,13 +6418,19 @@ module Aws::Pinpoint
     #   Message configuration.
     #   @return [Types::DirectMessageConfiguration]
     #
+    # @!attribute [rw] trace_id
+    #   A unique ID that you can use to trace a message. This ID is visible
+    #   to recipients.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/MessageRequest AWS API Documentation
     #
     class MessageRequest < Struct.new(
       :addresses,
       :context,
       :endpoints,
-      :message_configuration)
+      :message_configuration,
+      :trace_id)
       include Aws::Structure
     end
 
@@ -6140,7 +6468,22 @@ module Aws::Pinpoint
     # The result from sending a message to an address.
     #
     # @!attribute [rw] delivery_status
-    #   Delivery status of message.
+    #   The delivery status of the message. Possible values: SUCCESS - The
+    #   message was successfully delivered to the endpoint.
+    #   TRANSIENT\_FAILURE - A temporary error occurred. Amazon Pinpoint
+    #   will attempt to deliver the message again later. FAILURE\_PERMANENT
+    #   - An error occurred when delivering the message to the endpoint.
+    #   Amazon Pinpoint won't attempt to send the message again. TIMEOUT -
+    #   The message couldn't be sent within the timeout period. QUIET\_TIME
+    #   - The local time for the endpoint was within the Quiet Hours for the
+    #   campaign. DAILY\_CAP - The endpoint has received the maximum number
+    #   of messages it can receive within a 24-hour period. HOLDOUT - The
+    #   endpoint was in a hold out treatment for the campaign. THROTTLED -
+    #   Amazon Pinpoint throttled sending to this endpoint. EXPIRED - The
+    #   endpoint address is expired. CAMPAIGN\_CAP - The endpoint received
+    #   the maximum number of messages allowed by the campaign.
+    #   SERVICE\_FAILURE - A service-level failure prevented Amazon Pinpoint
+    #   from delivering the message. UNKNOWN - An unknown error occurred.
     #   @return [String]
     #
     # @!attribute [rw] message_id
@@ -6208,12 +6551,15 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] iso_country_code
-    #   (Optional) The two-character ISO country code for the country where
-    #   the phone number was originally registered.
+    #   (Optional) The two-character ISO country code for the country or
+    #   region where the phone number was originally registered.
     #   @return [String]
     #
     # @!attribute [rw] phone_number
-    #   The phone number to get information about.
+    #   The phone number to get information about. The phone number that you
+    #   provide should include a country code. If the number doesn't
+    #   include a valid country code, the operation might result in an
+    #   error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/NumberValidateRequest AWS API Documentation
@@ -6227,7 +6573,8 @@ module Aws::Pinpoint
     # Phone Number Information response.
     #
     # @!attribute [rw] carrier
-    #   The carrier that the phone number is registered with.
+    #   The carrier or servive provider that the phone number is currently
+    #   registered with.
     #   @return [String]
     #
     # @!attribute [rw] city
@@ -6235,25 +6582,26 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] cleansed_phone_number_e164
-    #   The cleansed (standardized) phone number in E.164 format.
+    #   The cleansed phone number, shown in E.164 format.
     #   @return [String]
     #
     # @!attribute [rw] cleansed_phone_number_national
-    #   The cleansed phone number in national format.
+    #   The cleansed phone number, shown in the local phone number format.
     #   @return [String]
     #
     # @!attribute [rw] country
-    #   The country where the phone number was originally registered.
+    #   The country or region where the phone number was originally
+    #   registered.
     #   @return [String]
     #
     # @!attribute [rw] country_code_iso_2
-    #   The two-character ISO country code for the country where the phone
+    #   The two-character ISO code for the country or region where the phone
     #   number was originally registered.
     #   @return [String]
     #
     # @!attribute [rw] country_code_numeric
-    #   The numeric country code for the country where the phone number was
-    #   originally registered.
+    #   The numeric code for the country or region where the phone number
+    #   was originally registered.
     #   @return [String]
     #
     # @!attribute [rw] county
@@ -6261,8 +6609,8 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] original_country_code_iso_2
-    #   The two-character ISO country code that was included in the request
-    #   body.
+    #   The two-character ISO code for the country or region that you
+    #   included in the request body.
     #   @return [String]
     #
     # @!attribute [rw] original_phone_number
@@ -6270,13 +6618,14 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] phone_type
-    #   A description of the phone type. Possible values include MOBILE,
-    #   LANDLINE, VOIP, INVALID, and OTHER.
+    #   A description of the phone type. Possible values are MOBILE,
+    #   LANDLINE, VOIP, INVALID, PREPAID, and OTHER.
     #   @return [String]
     #
     # @!attribute [rw] phone_type_code
-    #   The phone type as an integer. Possible values include 0 (MOBILE), 1
-    #   (LANDLINE), 2 (VOIP), 3 (INVALID), and 4 (OTHER).
+    #   The phone type, represented by an integer. Possible values include 0
+    #   (MOBILE), 1 (LANDLINE), 2 (VOIP), 3 (INVALID), 4 (OTHER), and 5
+    #   (PREPAID).
     #   @return [Integer]
     #
     # @!attribute [rw] timezone
@@ -6285,8 +6634,8 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] zip_code
-    #   The zip code for the location where the phone number was originally
-    #   registered.
+    #   The postal code for the location where the phone number was
+    #   originally registered.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/NumberValidateResponse AWS API Documentation
@@ -6341,6 +6690,120 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Public endpoint attributes.
+    #
+    # @note When making an API call, you may pass PublicEndpoint
+    #   data as a hash:
+    #
+    #       {
+    #         address: "__string",
+    #         attributes: {
+    #           "__string" => ["__string"],
+    #         },
+    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU, CUSTOM
+    #         demographic: {
+    #           app_version: "__string",
+    #           locale: "__string",
+    #           make: "__string",
+    #           model: "__string",
+    #           model_version: "__string",
+    #           platform: "__string",
+    #           platform_version: "__string",
+    #           timezone: "__string",
+    #         },
+    #         effective_date: "__string",
+    #         endpoint_status: "__string",
+    #         location: {
+    #           city: "__string",
+    #           country: "__string",
+    #           latitude: 1.0,
+    #           longitude: 1.0,
+    #           postal_code: "__string",
+    #           region: "__string",
+    #         },
+    #         metrics: {
+    #           "__string" => 1.0,
+    #         },
+    #         opt_out: "__string",
+    #         request_id: "__string",
+    #         user: {
+    #           user_attributes: {
+    #             "__string" => ["__string"],
+    #           },
+    #           user_id: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] address
+    #   The unique identifier for the recipient. For example, an address
+    #   could be a device token or an endpoint ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   Custom attributes that your app reports to Amazon Pinpoint. You can
+    #   use these attributes as selection criteria when you create a
+    #   segment.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] channel_type
+    #   The channel type. Valid values: APNS, GCM
+    #   @return [String]
+    #
+    # @!attribute [rw] demographic
+    #   The endpoint demographic attributes.
+    #   @return [Types::EndpointDemographic]
+    #
+    # @!attribute [rw] effective_date
+    #   The date and time when the endpoint was last updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_status
+    #   The status of the endpoint. If the update fails, the value is
+    #   INACTIVE. If the endpoint is updated successfully, the value is
+    #   ACTIVE.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   The endpoint location attributes.
+    #   @return [Types::EndpointLocation]
+    #
+    # @!attribute [rw] metrics
+    #   Custom metrics that your app reports to Amazon Pinpoint.
+    #   @return [Hash<String,Float>]
+    #
+    # @!attribute [rw] opt_out
+    #   Indicates whether a user has opted out of receiving messages with
+    #   one of the following values: ALL - User has opted out of all
+    #   messages. NONE - Users has not opted out and receives all messages.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   A unique identifier that is generated each time the endpoint is
+    #   updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] user
+    #   Custom user-specific attributes that your app reports to Amazon
+    #   Pinpoint.
+    #   @return [Types::EndpointUser]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/PublicEndpoint AWS API Documentation
+    #
+    class PublicEndpoint < Struct.new(
+      :address,
+      :attributes,
+      :channel_type,
+      :demographic,
+      :effective_date,
+      :endpoint_status,
+      :location,
+      :metrics,
+      :opt_out,
+      :request_id,
+      :user)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutEventStreamRequest
     #   data as a hash:
     #
@@ -6375,6 +6838,102 @@ module Aws::Pinpoint
     #
     class PutEventStreamResponse < Struct.new(
       :event_stream)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutEventsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         events_request: { # required
+    #           batch_item: {
+    #             "__string" => {
+    #               endpoint: {
+    #                 address: "__string",
+    #                 attributes: {
+    #                   "__string" => ["__string"],
+    #                 },
+    #                 channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU, CUSTOM
+    #                 demographic: {
+    #                   app_version: "__string",
+    #                   locale: "__string",
+    #                   make: "__string",
+    #                   model: "__string",
+    #                   model_version: "__string",
+    #                   platform: "__string",
+    #                   platform_version: "__string",
+    #                   timezone: "__string",
+    #                 },
+    #                 effective_date: "__string",
+    #                 endpoint_status: "__string",
+    #                 location: {
+    #                   city: "__string",
+    #                   country: "__string",
+    #                   latitude: 1.0,
+    #                   longitude: 1.0,
+    #                   postal_code: "__string",
+    #                   region: "__string",
+    #                 },
+    #                 metrics: {
+    #                   "__string" => 1.0,
+    #                 },
+    #                 opt_out: "__string",
+    #                 request_id: "__string",
+    #                 user: {
+    #                   user_attributes: {
+    #                     "__string" => ["__string"],
+    #                   },
+    #                   user_id: "__string",
+    #                 },
+    #               },
+    #               events: {
+    #                 "__string" => {
+    #                   attributes: {
+    #                     "__string" => "__string",
+    #                   },
+    #                   client_sdk_version: "__string",
+    #                   event_type: "__string",
+    #                   metrics: {
+    #                     "__string" => 1.0,
+    #                   },
+    #                   session: {
+    #                     duration: 1,
+    #                     id: "__string",
+    #                     start_timestamp: "__string",
+    #                     stop_timestamp: "__string",
+    #                   },
+    #                   timestamp: "__string",
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] events_request
+    #   Put Events request
+    #   @return [Types::EventsRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/PutEventsRequest AWS API Documentation
+    #
+    class PutEventsRequest < Struct.new(
+      :application_id,
+      :events_request)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] events_response
+    #   The results from processing a put events request
+    #   @return [Types::EventsResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/PutEventsResponse AWS API Documentation
+    #
+    class PutEventsResponse < Struct.new(
+      :events_response)
       include Aws::Structure
     end
 
@@ -6980,7 +7539,7 @@ module Aws::Pinpoint
     #             version: 1,
     #           },
     #         ],
-    #         source_type: "ALL", # accepts ALL, ANY
+    #         source_type: "ALL", # accepts ALL, ANY, NONE
     #         type: "ALL", # accepts ALL, ANY, NONE
     #       }
     #
@@ -6989,16 +7548,24 @@ module Aws::Pinpoint
     #   @return [Array<Types::SegmentDimensions>]
     #
     # @!attribute [rw] source_segments
-    #   Segments that define the source of this segment. Currently a maximum
-    #   of 1 import segment is supported.
+    #   The base segment that you build your segment on. The source segment
+    #   defines the starting "universe" of endpoints. When you add
+    #   dimensions to the segment, it filters the source segment based on
+    #   the dimensions that you specify. You can specify more than one
+    #   dimensional segment. You can only specify one imported segment.
     #   @return [Array<Types::SegmentReference>]
     #
     # @!attribute [rw] source_type
-    #   Include or exclude the source.
+    #   Specify how to handle multiple source segments. For example, if you
+    #   specify three source segments, should the resulting segment be based
+    #   on any or all of the segments? Acceptable values: ANY or ALL.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   How should the dimensions be applied for the result
+    #   Specify how to handle multiple segment dimensions. For example, if
+    #   you specify three dimensions, should the resulting segment include
+    #   endpoints that are matched by all, any, or none of the dimensions?
+    #   Acceptable values: ALL, ANY, or NONE.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SegmentGroup AWS API Documentation
@@ -7092,7 +7659,7 @@ module Aws::Pinpoint
     #                 version: 1,
     #               },
     #             ],
-    #             source_type: "ALL", # accepts ALL, ANY
+    #             source_type: "ALL", # accepts ALL, ANY, NONE
     #             type: "ALL", # accepts ALL, ANY, NONE
     #           },
     #         ],
@@ -7100,11 +7667,14 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] groups
-    #   List of dimension groups to evaluate.
+    #   A set of segment criteria to evaluate.
     #   @return [Array<Types::SegmentGroup>]
     #
     # @!attribute [rw] include
-    #   How should the groups be applied for the result
+    #   Specify how to handle multiple segment groups. For example, if the
+    #   segment includes three segment groups, should the resulting segment
+    #   include endpoints that are matched by all, any, or none of the
+    #   segment groups you created. Acceptable values: ALL, ANY, or NONE.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SegmentGroupList AWS API Documentation
@@ -7118,11 +7688,11 @@ module Aws::Pinpoint
     # Segment import definition.
     #
     # @!attribute [rw] channel_counts
-    #   Channel type counts
+    #   The number of channel types in the imported segment.
     #   @return [Hash<String,Integer>]
     #
     # @!attribute [rw] external_id
-    #   DEPRECATED. Your AWS account ID, which you assigned to the
+    #   (Deprecated) Your AWS account ID, which you assigned to the
     #   ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to
     #   assume an IAM role. This requirement is removed, and external IDs
     #   are not recommended for IAM roles assumed by Amazon Pinpoint.
@@ -7139,8 +7709,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] s3_url
-    #   A URL that points to the Amazon S3 location from which the endpoints
-    #   for this segment were imported.
+    #   The URL of the S3 bucket that the segment was imported from.
     #   @return [String]
     #
     # @!attribute [rw] size
@@ -7206,7 +7775,7 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] id
-    #   Segment Id.
+    #   A unique identifier for the segment.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -7224,11 +7793,11 @@ module Aws::Pinpoint
     # Segment definition.
     #
     # @!attribute [rw] application_id
-    #   The ID of the application to which the segment applies.
+    #   The ID of the application that the segment applies to.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
-    #   The date the segment was created in ISO 8601 format.
+    #   The date and time when the segment was created.
     #   @return [String]
     #
     # @!attribute [rw] dimensions
@@ -7244,16 +7813,16 @@ module Aws::Pinpoint
     #   @return [Types::SegmentImportResource]
     #
     # @!attribute [rw] last_modified_date
-    #   The date the segment was last updated in ISO 8601 format.
+    #   The date and time when the segment was last modified.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of segment
+    #   The name of the segment.
     #   @return [String]
     #
     # @!attribute [rw] segment_groups
-    #   Segment definition groups. We currently only support one. If
-    #   specified Dimensions must be empty.
+    #   A segment group, which consists of zero or more source segments,
+    #   plus dimensions that are applied to those source segments.
     #   @return [Types::SegmentGroupList]
     #
     # @!attribute [rw] segment_type
@@ -7461,6 +8030,7 @@ module Aws::Pinpoint
     #               },
     #             },
     #           },
+    #           trace_id: "__string",
     #         },
     #       }
     #
@@ -7618,6 +8188,7 @@ module Aws::Pinpoint
     #             },
     #           },
     #         },
+    #         trace_id: "__string",
     #         users: {
     #           "__string" => {
     #             body_override: "__string",
@@ -7645,6 +8216,11 @@ module Aws::Pinpoint
     #   are tailored for specific channels.
     #   @return [Types::DirectMessageConfiguration]
     #
+    # @!attribute [rw] trace_id
+    #   A unique ID that you can use to trace a message. This ID is visible
+    #   to recipients.
+    #   @return [String]
+    #
     # @!attribute [rw] users
     #   A map that associates user IDs with EndpointSendConfiguration
     #   objects. Within an EndpointSendConfiguration object, you can tailor
@@ -7657,6 +8233,7 @@ module Aws::Pinpoint
     class SendUsersMessageRequest < Struct.new(
       :context,
       :message_configuration,
+      :trace_id,
       :users)
       include Aws::Structure
     end
@@ -7816,6 +8393,7 @@ module Aws::Pinpoint
     #               },
     #             },
     #           },
+    #           trace_id: "__string",
     #           users: {
     #             "__string" => {
     #               body_override: "__string",
@@ -7855,6 +8433,44 @@ module Aws::Pinpoint
     #
     class SendUsersMessagesResponse < Struct.new(
       :send_users_message_response)
+      include Aws::Structure
+    end
+
+    # Information about a session.
+    #
+    # @note When making an API call, you may pass Session
+    #   data as a hash:
+    #
+    #       {
+    #         duration: 1,
+    #         id: "__string",
+    #         start_timestamp: "__string",
+    #         stop_timestamp: "__string",
+    #       }
+    #
+    # @!attribute [rw] duration
+    #   Session duration in millis
+    #   @return [Integer]
+    #
+    # @!attribute [rw] id
+    #   A unique identifier for the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_timestamp
+    #   The date and time when the session began.
+    #   @return [String]
+    #
+    # @!attribute [rw] stop_timestamp
+    #   The date and time when the session ended.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/Session AWS API Documentation
+    #
+    class Session < Struct.new(
+      :duration,
+      :id,
+      :start_timestamp,
+      :stop_timestamp)
       include Aws::Structure
     end
 
@@ -8881,7 +9497,7 @@ module Aws::Pinpoint
     #                     version: 1,
     #                   },
     #                 ],
-    #                 source_type: "ALL", # accepts ALL, ANY
+    #                 source_type: "ALL", # accepts ALL, ANY, NONE
     #                 type: "ALL", # accepts ALL, ANY, NONE
     #               },
     #             ],
@@ -9486,7 +10102,7 @@ module Aws::Pinpoint
     #                   version: 1,
     #                 },
     #               ],
-    #               source_type: "ALL", # accepts ALL, ANY
+    #               source_type: "ALL", # accepts ALL, ANY, NONE
     #               type: "ALL", # accepts ALL, ANY, NONE
     #             },
     #           ],
@@ -9503,8 +10119,10 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] segment_groups
-    #   Segment definition groups. We currently only support one. If
-    #   specified Dimensions must be empty.
+    #   A segment group, which consists of zero or more source segments,
+    #   plus dimensions that are applied to those source segments. Your
+    #   request can only include one segment group. Your request can include
+    #   either a SegmentGroups object or a Dimensions object, but not both.
     #   @return [Types::SegmentGroupList]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteSegmentRequest AWS API Documentation

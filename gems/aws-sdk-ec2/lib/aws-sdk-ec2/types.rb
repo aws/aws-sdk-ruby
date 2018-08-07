@@ -718,8 +718,8 @@ module Aws::EC2
     # Contains the output of AssociateRouteTable.
     #
     # @!attribute [rw] association_id
-    #   The route table association ID (needed to disassociate the route
-    #   table).
+    #   The route table association ID. This ID is required for
+    #   disassociating the route table.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateRouteTableResult AWS API Documentation
@@ -899,7 +899,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] internet_gateway_id
-    #   The ID of the Internet gateway.
+    #   The ID of the internet gateway.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -2847,7 +2847,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to Ensure
     #   Idempotency][1].
     #
@@ -2864,7 +2864,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] vpc_id
-    #   The ID of the VPC for which to create the egress-only Internet
+    #   The ID of the VPC for which to create the egress-only internet
     #   gateway.
     #   @return [String]
     #
@@ -2878,12 +2878,12 @@ module Aws::EC2
     end
 
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #   @return [String]
     #
     # @!attribute [rw] egress_only_internet_gateway
-    #   Information about the egress-only Internet gateway.
+    #   Information about the egress-only internet gateway.
     #   @return [Types::EgressOnlyInternetGateway]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateEgressOnlyInternetGatewayResult AWS API Documentation
@@ -3075,16 +3075,26 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         dry_run: false,
     #         client_token: "String",
-    #         deliver_logs_permission_arn: "String", # required
-    #         log_group_name: "String", # required
+    #         deliver_logs_permission_arn: "String",
+    #         log_group_name: "String",
     #         resource_ids: ["String"], # required
     #         resource_type: "VPC", # required, accepts VPC, Subnet, NetworkInterface
     #         traffic_type: "ACCEPT", # required, accepts ACCEPT, REJECT, ALL
+    #         log_destination_type: "cloud-watch-logs", # accepts cloud-watch-logs, s3
+    #         log_destination: "String",
     #       }
     #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to Ensure
     #   Idempotency][1].
     #
@@ -3094,12 +3104,12 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] deliver_logs_permission_arn
-    #   The ARN for the IAM role that's used to post flow logs to a
-    #   CloudWatch Logs log group.
+    #   The ARN for the IAM role that's used to post flow logs to a log
+    #   group.
     #   @return [String]
     #
     # @!attribute [rw] log_group_name
-    #   The name of the CloudWatch log group.
+    #   The name of the log group.
     #   @return [String]
     #
     # @!attribute [rw] resource_ids
@@ -3116,22 +3126,53 @@ module Aws::EC2
     #   The type of traffic to log.
     #   @return [String]
     #
+    # @!attribute [rw] log_destination_type
+    #   Specifies the type of destination to which the flow log data is to
+    #   be published. Flow log data can be published to CloudWatch Logs or
+    #   Amazon S3. To publish flow log data to CloudWatch Logs, specify
+    #   `cloud-watch-logs`. To publish flow log data to Amazon S3, specify
+    #   `s3`.
+    #
+    #   Default: `cloud-watch-logs`
+    #   @return [String]
+    #
+    # @!attribute [rw] log_destination
+    #   Specifies the destination to which the flow log data is to be
+    #   published. Flow log data can be published to an CloudWatch Logs log
+    #   group or an Amazon S3 bucket. The value specified for this parameter
+    #   depends on the value specified for LogDestinationType.
+    #
+    #   If LogDestinationType is not specified or `cloud-watch-logs`,
+    #   specify the Amazon Resource Name (ARN) of the CloudWatch Logs log
+    #   group.
+    #
+    #   If LogDestinationType is `s3`, specify the ARN of the Amazon S3
+    #   bucket. You can also specify a subfolder in the bucket. To specify a
+    #   subfolder in the bucket, use the following ARN format:
+    #   `bucket_ARN/subfolder_name/`. For example, to specify a subfolder
+    #   named `my-logs` in a bucket named `my-bucket`, use the following
+    #   ARN: `arn:aws:s3:::my-bucket/my-logs/`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFlowLogsRequest AWS API Documentation
     #
     class CreateFlowLogsRequest < Struct.new(
+      :dry_run,
       :client_token,
       :deliver_logs_permission_arn,
       :log_group_name,
       :resource_ids,
       :resource_type,
-      :traffic_type)
+      :traffic_type,
+      :log_destination_type,
+      :log_destination)
       include Aws::Structure
     end
 
     # Contains the output of CreateFlowLogs.
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #   @return [String]
     #
@@ -3405,7 +3446,7 @@ module Aws::EC2
     # Contains the output of CreateInternetGateway.
     #
     # @!attribute [rw] internet_gateway
-    #   Information about the Internet gateway.
+    #   Information about the internet gateway.
     #   @return [Types::InternetGateway]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateInternetGatewayResult AWS API Documentation
@@ -3807,7 +3848,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to Ensure
     #   Idempotency][1].
     #
@@ -3915,7 +3956,7 @@ module Aws::EC2
     #   The protocol. A value of `-1` or `all` means all protocols. If you
     #   specify `all`, `-1`, or a protocol number other than `6` (tcp), `17`
     #   (udp), or `1` (icmp), traffic on all ports is allowed, regardless of
-    #   any ports or ICMP types or codes you specify. If you specify
+    #   any ports or ICMP types or codes that you specify. If you specify
     #   protocol `58` (ICMPv6) and specify an IPv4 CIDR block, traffic for
     #   all ICMP types and codes allowed, regardless of any that you
     #   specify. If you specify protocol `58` (ICMPv6) and specify an IPv6
@@ -4311,11 +4352,11 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] egress_only_internet_gateway_id
-    #   \[IPv6 traffic only\] The ID of an egress-only Internet gateway.
+    #   \[IPv6 traffic only\] The ID of an egress-only internet gateway.
     #   @return [String]
     #
     # @!attribute [rw] gateway_id
-    #   The ID of an Internet gateway or virtual private gateway attached to
+    #   The ID of an internet gateway or virtual private gateway attached to
     #   your VPC.
     #   @return [String]
     #
@@ -5603,7 +5644,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] egress_only_internet_gateway_id
-    #   The ID of the egress-only Internet gateway.
+    #   The ID of the egress-only internet gateway.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteEgressOnlyInternetGatewayRequest AWS API Documentation
@@ -5741,8 +5782,16 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         dry_run: false,
     #         flow_log_ids: ["String"], # required
     #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
     #
     # @!attribute [rw] flow_log_ids
     #   One or more flow log IDs.
@@ -5751,6 +5800,7 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFlowLogsRequest AWS API Documentation
     #
     class DeleteFlowLogsRequest < Struct.new(
+      :dry_run,
       :flow_log_ids)
       include Aws::Structure
     end
@@ -5825,7 +5875,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] internet_gateway_id
-    #   The ID of the Internet gateway.
+    #   The ID of the internet gateway.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteInternetGatewayRequest AWS API Documentation
@@ -7158,7 +7208,9 @@ module Aws::EC2
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
     #
-    #   * `vpc-id` - The ID of the VPC that the instance is linked to.
+    #   * `vpc-id` - The ID of the VPC to which the instance is linked.
+    #
+    #     `vpc-id` - The ID of the VPC that the instance is linked to.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] dry_run
@@ -7177,7 +7229,7 @@ module Aws::EC2
     #   The maximum number of results to return for the request in a single
     #   page. The remaining results of the initial request can be seen by
     #   sending another request with the returned `NextToken` value. This
-    #   value can be between 5 and 1000; if `MaxResults` is given a value
+    #   value can be between 5 and 1000. If `MaxResults` is given a value
     #   larger than 1000, only 1000 results are returned. You cannot specify
     #   this parameter and the instance IDs parameter in the same request.
     #
@@ -7430,14 +7482,14 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] egress_only_internet_gateway_ids
-    #   One or more egress-only Internet gateway IDs.
+    #   One or more egress-only internet gateway IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to return for the request in a single
     #   page. The remaining results can be seen by sending another request
     #   with the returned `NextToken` value. This value can be between 5 and
-    #   1000; if `MaxResults` is given a value larger than 1000, only 1000
+    #   1000. If `MaxResults` is given a value larger than 1000, only 1000
     #   results are returned.
     #   @return [Integer]
     #
@@ -7456,7 +7508,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] egress_only_internet_gateways
-    #   Information about the egress-only Internet gateways.
+    #   Information about the egress-only internet gateways.
     #   @return [Array<Types::EgressOnlyInternetGateway>]
     #
     # @!attribute [rw] next_token
@@ -7858,6 +7910,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         dry_run: false,
     #         filter: [
     #           {
     #             name: "String",
@@ -7869,11 +7922,22 @@ module Aws::EC2
     #         next_token: "String",
     #       }
     #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] filter
     #   One or more filters.
     #
     #   * `deliver-log-status` - The status of the logs delivery (`SUCCESS`
     #     \| `FAILED`).
+    #
+    #   * `log-destination-type` - The type of destination to which the flow
+    #     log publishes data. Possible destination types include
+    #     `cloud-watch-logs` and `S3`.
     #
     #   * `flow-log-id` - The ID of the flow log.
     #
@@ -7882,7 +7946,7 @@ module Aws::EC2
     #   * `resource-id` - The ID of the VPC, subnet, or network interface.
     #
     #   * `traffic-type` - The type of traffic (`ACCEPT` \| `REJECT` \|
-    #     `ALL`)
+    #     `ALL`).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] flow_log_ids
@@ -7893,7 +7957,7 @@ module Aws::EC2
     #   The maximum number of results to return for the request in a single
     #   page. The remaining results can be seen by sending another request
     #   with the returned `NextToken` value. This value can be between 5 and
-    #   1000; if `MaxResults` is given a value larger than 1000, only 1000
+    #   1000. If `MaxResults` is given a value larger than 1000, only 1000
     #   results are returned. You cannot specify this parameter and the flow
     #   log IDs parameter in the same request.
     #   @return [Integer]
@@ -7905,6 +7969,7 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFlowLogsRequest AWS API Documentation
     #
     class DescribeFlowLogsRequest < Struct.new(
+      :dry_run,
       :filter,
       :flow_log_ids,
       :max_results,
@@ -9462,9 +9527,9 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] internet_gateway_ids
-    #   One or more Internet gateway IDs.
+    #   One or more internet gateway IDs.
     #
-    #   Default: Describes all your Internet gateways.
+    #   Default: Describes all your internet gateways.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInternetGatewaysRequest AWS API Documentation
@@ -9479,7 +9544,7 @@ module Aws::EC2
     # Contains the output of DescribeInternetGateways.
     #
     # @!attribute [rw] internet_gateways
-    #   Information about one or more Internet gateways.
+    #   Information about one or more internet gateways.
     #   @return [Array<Types::InternetGateway>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInternetGatewaysResult AWS API Documentation
@@ -14094,7 +14159,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] internet_gateway_id
-    #   The ID of the Internet gateway.
+    #   The ID of the internet gateway.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -14860,15 +14925,15 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes an egress-only Internet gateway.
+    # Describes an egress-only internet gateway.
     #
     # @!attribute [rw] attachments
-    #   Information about the attachment of the egress-only Internet
+    #   Information about the attachment of the egress-only internet
     #   gateway.
     #   @return [Array<Types::InternetGatewayAttachment>]
     #
     # @!attribute [rw] egress_only_internet_gateway_id
-    #   The ID of the egress-only Internet gateway.
+    #   The ID of the egress-only internet gateway.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EgressOnlyInternetGateway AWS API Documentation
@@ -15744,12 +15809,12 @@ module Aws::EC2
     #
     # @!attribute [rw] deliver_logs_error_message
     #   Information about the error that occurred. `Rate limited` indicates
-    #   that CloudWatch logs throttling has been applied for one or more
+    #   that CloudWatch Logs throttling has been applied for one or more
     #   network interfaces, or that you've reached the limit on the number
-    #   of CloudWatch Logs log groups that you can create. `Access error`
-    #   indicates that the IAM role associated with the flow log does not
-    #   have sufficient permissions to publish to CloudWatch Logs. `Unknown
-    #   error` indicates an internal error.
+    #   of log groups that you can create. `Access error` indicates that the
+    #   IAM role associated with the flow log does not have sufficient
+    #   permissions to publish to CloudWatch Logs. `Unknown error` indicates
+    #   an internal error.
     #   @return [String]
     #
     # @!attribute [rw] deliver_logs_permission_arn
@@ -15780,6 +15845,22 @@ module Aws::EC2
     #   The type of traffic captured for the flow log.
     #   @return [String]
     #
+    # @!attribute [rw] log_destination_type
+    #   Specifies the type of destination to which the flow log data is
+    #   published. Flow log data can be published to CloudWatch Logs or
+    #   Amazon S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_destination
+    #   Specifies the destination to which the flow log data is published.
+    #   Flow log data can be published to an CloudWatch Logs log group or an
+    #   Amazon S3 bucket. If the flow log publishes to CloudWatch Logs, this
+    #   element indicates the Amazon Resource Name (ARN) of the CloudWatch
+    #   Logs log group to which the data is published. If the flow log
+    #   publishes to Amazon S3, this element indicates the ARN of the Amazon
+    #   S3 bucket to which the data is published.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FlowLog AWS API Documentation
     #
     class FlowLog < Struct.new(
@@ -15791,7 +15872,9 @@ module Aws::EC2
       :flow_log_status,
       :log_group_name,
       :resource_id,
-      :traffic_type)
+      :traffic_type,
+      :log_destination_type,
+      :log_destination)
       include Aws::Structure
     end
 
@@ -18828,18 +18911,18 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes an Internet gateway.
+    # Describes an internet gateway.
     #
     # @!attribute [rw] attachments
-    #   Any VPCs attached to the Internet gateway.
+    #   Any VPCs attached to the internet gateway.
     #   @return [Array<Types::InternetGatewayAttachment>]
     #
     # @!attribute [rw] internet_gateway_id
-    #   The ID of the Internet gateway.
+    #   The ID of the internet gateway.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Any tags assigned to the Internet gateway.
+    #   Any tags assigned to the internet gateway.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InternetGateway AWS API Documentation
@@ -18851,11 +18934,11 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the attachment of a VPC to an Internet gateway or an
-    # egress-only Internet gateway.
+    # Describes the attachment of a VPC to an internet gateway or an
+    # egress-only internet gateway.
     #
     # @!attribute [rw] state
-    #   The current state of the attachment. For an Internet gateway, the
+    #   The current state of the attachment. For an internet gateway, the
     #   state is `available` when attached to a VPC; otherwise, this value
     #   is not returned.
     #   @return [String]
@@ -21599,7 +21682,7 @@ module Aws::EC2
     #   Indicates whether the DNS resolution is supported for the VPC. If
     #   enabled, queries to the Amazon provided DNS server at the
     #   169.254.169.253 IP address, or the reserved IP address at the base
-    #   of the VPC network range "plus two" will succeed. If disabled, the
+    #   of the VPC network range "plus two" succeed. If disabled, the
     #   Amazon provided DNS service in the VPC that resolves public DNS
     #   hostnames to IP addresses is not enabled.
     #
@@ -21859,13 +21942,14 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] add_allowed_principals
-    #   One or more Amazon Resource Names (ARNs) of principals for which to
-    #   allow permission. Specify `*` to allow all principals.
+    #   The Amazon Resource Names (ARN) of one or more principals.
+    #   Permissions are granted to the principals in this list. To grant
+    #   permissions to all principals, specify an asterisk (*).
     #   @return [Array<String>]
     #
     # @!attribute [rw] remove_allowed_principals
-    #   One or more Amazon Resource Names (ARNs) of principals for which to
-    #   remove permission.
+    #   The Amazon Resource Names (ARN) of one or more principals.
+    #   Permissions are revoked for principals in this list.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointServicePermissionsRequest AWS API Documentation
@@ -22879,8 +22963,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] group_name
-    #   The name of the placement group the instance is in (for cluster
-    #   compute instances).
+    #   The name of the placement group the instance is in.
     #   @return [String]
     #
     # @!attribute [rw] host_id
@@ -23173,7 +23256,7 @@ module Aws::EC2
     # Describes a virtual private gateway propagating route.
     #
     # @!attribute [rw] gateway_id
-    #   The ID of the virtual private gateway (VGW).
+    #   The ID of the virtual private gateway.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PropagatingVgw AWS API Documentation
@@ -24071,8 +24154,8 @@ module Aws::EC2
     #   The IP protocol. You can specify `all` or `-1` to mean all
     #   protocols. If you specify `all`, `-1`, or a protocol number other
     #   than `tcp`, `udp`, or `icmp`, traffic on all ports is allowed,
-    #   regardless of any ports or ICMP types or codes you specify. If you
-    #   specify protocol `58` (ICMPv6) and specify an IPv4 CIDR block,
+    #   regardless of any ports or ICMP types or codes you that specify. If
+    #   you specify protocol `58` (ICMPv6) and specify an IPv4 CIDR block,
     #   traffic for all ICMP types and codes allowed, regardless of any that
     #   you specify. If you specify protocol `58` (ICMPv6) and specify an
     #   IPv6 CIDR block, you must specify an ICMP type and code.
@@ -24123,14 +24206,14 @@ module Aws::EC2
     #
     # @!attribute [rw] destination_cidr_block
     #   The IPv4 CIDR address block used for the destination match. The
-    #   value you provide must match the CIDR of an existing route in the
-    #   table.
+    #   value that you provide must match the CIDR of an existing route in
+    #   the table.
     #   @return [String]
     #
     # @!attribute [rw] destination_ipv_6_cidr_block
     #   The IPv6 CIDR address block used for the destination match. The
-    #   value you provide must match the CIDR of an existing route in the
-    #   table.
+    #   value that you provide must match the CIDR of an existing route in
+    #   the table.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -24141,11 +24224,11 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] egress_only_internet_gateway_id
-    #   \[IPv6 traffic only\] The ID of an egress-only Internet gateway.
+    #   \[IPv6 traffic only\] The ID of an egress-only internet gateway.
     #   @return [String]
     #
     # @!attribute [rw] gateway_id
-    #   The ID of an Internet gateway or virtual private gateway.
+    #   The ID of an internet gateway or virtual private gateway.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -26329,7 +26412,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] egress_only_internet_gateway_id
-    #   The ID of the egress-only Internet gateway.
+    #   The ID of the egress-only internet gateway.
     #   @return [String]
     #
     # @!attribute [rw] gateway_id
@@ -29692,9 +29775,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] available_ip_address_count
-    #   The number of unused private IPv4 addresses in the subnet. Note that
-    #   the IPv4 addresses for any stopped instances are considered
-    #   unavailable.
+    #   The number of unused private IPv4 addresses in the subnet. The IPv4
+    #   addresses for any stopped instances are considered unavailable.
     #   @return [Integer]
     #
     # @!attribute [rw] cidr_block

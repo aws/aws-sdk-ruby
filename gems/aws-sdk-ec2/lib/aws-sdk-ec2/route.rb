@@ -50,7 +50,7 @@ module Aws::EC2
       data[:destination_prefix_list_id]
     end
 
-    # The ID of the egress-only Internet gateway.
+    # The ID of the egress-only internet gateway.
     # @return [String]
     def egress_only_internet_gateway_id
       data[:egress_only_internet_gateway_id]
@@ -282,16 +282,17 @@ module Aws::EC2
     # @param [Hash] options ({})
     # @option options [String] :destination_ipv_6_cidr_block
     #   The IPv6 CIDR address block used for the destination match. The value
-    #   you provide must match the CIDR of an existing route in the table.
+    #   that you provide must match the CIDR of an existing route in the
+    #   table.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [String] :egress_only_internet_gateway_id
-    #   \[IPv6 traffic only\] The ID of an egress-only Internet gateway.
+    #   \[IPv6 traffic only\] The ID of an egress-only internet gateway.
     # @option options [String] :gateway_id
-    #   The ID of an Internet gateway or virtual private gateway.
+    #   The ID of an internet gateway or virtual private gateway.
     # @option options [String] :instance_id
     #   The ID of a NAT instance in your VPC.
     # @option options [String] :nat_gateway_id

@@ -738,6 +738,7 @@ module Aws::EC2
     LoadPermissionListRequest = Shapes::ListShape.new(name: 'LoadPermissionListRequest')
     LoadPermissionModifications = Shapes::StructureShape.new(name: 'LoadPermissionModifications')
     LoadPermissionRequest = Shapes::StructureShape.new(name: 'LoadPermissionRequest')
+    LogDestinationType = Shapes::StringShape.new(name: 'LogDestinationType')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MarketType = Shapes::StringShape.new(name: 'MarketType')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -1709,12 +1710,15 @@ module Aws::EC2
     CreateFleetResult.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdentifier, location_name: "fleetId"))
     CreateFleetResult.struct_class = Types::CreateFleetResult
 
+    CreateFlowLogsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateFlowLogsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
-    CreateFlowLogsRequest.add_member(:deliver_logs_permission_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DeliverLogsPermissionArn"))
-    CreateFlowLogsRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "LogGroupName"))
+    CreateFlowLogsRequest.add_member(:deliver_logs_permission_arn, Shapes::ShapeRef.new(shape: String, location_name: "DeliverLogsPermissionArn"))
+    CreateFlowLogsRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: String, location_name: "LogGroupName"))
     CreateFlowLogsRequest.add_member(:resource_ids, Shapes::ShapeRef.new(shape: ValueStringList, required: true, location_name: "ResourceId"))
     CreateFlowLogsRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: FlowLogsResourceType, required: true, location_name: "ResourceType"))
     CreateFlowLogsRequest.add_member(:traffic_type, Shapes::ShapeRef.new(shape: TrafficType, required: true, location_name: "TrafficType"))
+    CreateFlowLogsRequest.add_member(:log_destination_type, Shapes::ShapeRef.new(shape: LogDestinationType, location_name: "LogDestinationType"))
+    CreateFlowLogsRequest.add_member(:log_destination, Shapes::ShapeRef.new(shape: String, location_name: "LogDestination"))
     CreateFlowLogsRequest.struct_class = Types::CreateFlowLogsRequest
 
     CreateFlowLogsResult.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
@@ -2072,6 +2076,7 @@ module Aws::EC2
     DeleteFleetsResult.add_member(:unsuccessful_fleet_deletions, Shapes::ShapeRef.new(shape: DeleteFleetErrorSet, location_name: "unsuccessfulFleetDeletionSet"))
     DeleteFleetsResult.struct_class = Types::DeleteFleetsResult
 
+    DeleteFlowLogsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DeleteFlowLogsRequest.add_member(:flow_log_ids, Shapes::ShapeRef.new(shape: ValueStringList, required: true, location_name: "FlowLogId"))
     DeleteFlowLogsRequest.struct_class = Types::DeleteFlowLogsRequest
 
@@ -2382,6 +2387,7 @@ module Aws::EC2
     DescribeFleetsResult.add_member(:fleets, Shapes::ShapeRef.new(shape: FleetSet, location_name: "fleetSet"))
     DescribeFleetsResult.struct_class = Types::DescribeFleetsResult
 
+    DescribeFlowLogsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DescribeFlowLogsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeFlowLogsRequest.add_member(:flow_log_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "FlowLogId"))
     DescribeFlowLogsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
@@ -3384,6 +3390,8 @@ module Aws::EC2
     FlowLog.add_member(:log_group_name, Shapes::ShapeRef.new(shape: String, location_name: "logGroupName"))
     FlowLog.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
     FlowLog.add_member(:traffic_type, Shapes::ShapeRef.new(shape: TrafficType, location_name: "trafficType"))
+    FlowLog.add_member(:log_destination_type, Shapes::ShapeRef.new(shape: LogDestinationType, location_name: "logDestinationType"))
+    FlowLog.add_member(:log_destination, Shapes::ShapeRef.new(shape: String, location_name: "logDestination"))
     FlowLog.struct_class = Types::FlowLog
 
     FlowLogSet.member = Shapes::ShapeRef.new(shape: FlowLog, location_name: "item")

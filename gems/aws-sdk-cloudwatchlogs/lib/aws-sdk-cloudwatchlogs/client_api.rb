@@ -145,6 +145,7 @@ module Aws::CloudWatchLogs
     TestMetricFilterResponse = Shapes::StructureShape.new(name: 'TestMetricFilterResponse')
     Timestamp = Shapes::IntegerShape.new(name: 'Timestamp')
     Token = Shapes::StringShape.new(name: 'Token')
+    UnrecognizedClientException = Shapes::StructureShape.new(name: 'UnrecognizedClientException')
     UntagLogGroupRequest = Shapes::StructureShape.new(name: 'UntagLogGroupRequest')
     Value = Shapes::StringShape.new(name: 'Value')
 
@@ -864,6 +865,7 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: DataAlreadyAcceptedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: UnrecognizedClientException)
       end)
 
       api.add_operation(:put_metric_filter, Seahorse::Model::Operation.new.tap do |o|

@@ -499,6 +499,7 @@ module Aws::CodeBuild
     #   resp.builds[0].artifacts.location #=> String
     #   resp.builds[0].artifacts.sha256sum #=> String
     #   resp.builds[0].artifacts.md5sum #=> String
+    #   resp.builds[0].artifacts.override_artifact_name #=> Boolean
     #   resp.builds[0].artifacts.encryption_disabled #=> Boolean
     #   resp.builds[0].cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.builds[0].cache.location #=> String
@@ -574,6 +575,7 @@ module Aws::CodeBuild
     #   resp.projects[0].artifacts.namespace_type #=> String, one of "NONE", "BUILD_ID"
     #   resp.projects[0].artifacts.name #=> String
     #   resp.projects[0].artifacts.packaging #=> String, one of "NONE", "ZIP"
+    #   resp.projects[0].artifacts.override_artifact_name #=> Boolean
     #   resp.projects[0].artifacts.encryption_disabled #=> Boolean
     #   resp.projects[0].cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.projects[0].cache.location #=> String
@@ -697,6 +699,7 @@ module Aws::CodeBuild
     #       namespace_type: "NONE", # accepts NONE, BUILD_ID
     #       name: "String",
     #       packaging: "NONE", # accepts NONE, ZIP
+    #       override_artifact_name: false,
     #       encryption_disabled: false,
     #     },
     #     cache: {
@@ -753,6 +756,7 @@ module Aws::CodeBuild
     #   resp.project.artifacts.namespace_type #=> String, one of "NONE", "BUILD_ID"
     #   resp.project.artifacts.name #=> String
     #   resp.project.artifacts.packaging #=> String, one of "NONE", "ZIP"
+    #   resp.project.artifacts.override_artifact_name #=> Boolean
     #   resp.project.artifacts.encryption_disabled #=> Boolean
     #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.project.cache.location #=> String
@@ -1236,6 +1240,7 @@ module Aws::CodeBuild
     #       namespace_type: "NONE", # accepts NONE, BUILD_ID
     #       name: "String",
     #       packaging: "NONE", # accepts NONE, ZIP
+    #       override_artifact_name: false,
     #       encryption_disabled: false,
     #     },
     #     environment_variables_override: [
@@ -1299,6 +1304,7 @@ module Aws::CodeBuild
     #   resp.build.artifacts.location #=> String
     #   resp.build.artifacts.sha256sum #=> String
     #   resp.build.artifacts.md5sum #=> String
+    #   resp.build.artifacts.override_artifact_name #=> Boolean
     #   resp.build.artifacts.encryption_disabled #=> Boolean
     #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.build.cache.location #=> String
@@ -1381,6 +1387,7 @@ module Aws::CodeBuild
     #   resp.build.artifacts.location #=> String
     #   resp.build.artifacts.sha256sum #=> String
     #   resp.build.artifacts.md5sum #=> String
+    #   resp.build.artifacts.override_artifact_name #=> Boolean
     #   resp.build.artifacts.encryption_disabled #=> Boolean
     #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.build.cache.location #=> String
@@ -1504,6 +1511,7 @@ module Aws::CodeBuild
     #       namespace_type: "NONE", # accepts NONE, BUILD_ID
     #       name: "String",
     #       packaging: "NONE", # accepts NONE, ZIP
+    #       override_artifact_name: false,
     #       encryption_disabled: false,
     #     },
     #     cache: {
@@ -1560,6 +1568,7 @@ module Aws::CodeBuild
     #   resp.project.artifacts.namespace_type #=> String, one of "NONE", "BUILD_ID"
     #   resp.project.artifacts.name #=> String
     #   resp.project.artifacts.packaging #=> String, one of "NONE", "ZIP"
+    #   resp.project.artifacts.override_artifact_name #=> Boolean
     #   resp.project.artifacts.encryption_disabled #=> Boolean
     #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.project.cache.location #=> String
@@ -1659,7 +1668,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
