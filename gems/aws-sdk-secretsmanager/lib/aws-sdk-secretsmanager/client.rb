@@ -690,6 +690,24 @@ module Aws::SecretsManager
     #
     #   This value can range from 7 to 30 days. The default value is 30.
     #
+    # @option params [Boolean] :force_delete_without_recovery
+    #   (Optional) Specifies that the secret is to be deleted immediately
+    #   without any recovery window. You cannot use both this parameter and
+    #   the `RecoveryWindowInDays` parameter in the same API call.
+    #
+    #   An asynchronous background process performs the actual deletion, so
+    #   there can be a short delay before the operation completes. If you
+    #   write code to delete and then immediately recreate a secret with the
+    #   same name, ensure that your code includes appropriate back off and
+    #   retry logic.
+    #
+    #   Use this parameter with caution. This parameter causes the operation
+    #   to skip the normal waiting period before the permanent deletion that
+    #   AWS would normally impose with the `RecoveryWindowInDays` parameter.
+    #   If you delete a secret with the `ForceDeleteWithouRecovery` parameter,
+    #   then you have no opportunity to recover the secret. It is permanently
+    #   lost.
+    #
     # @return [Types::DeleteSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteSecretResponse#arn #arn} => String
@@ -720,6 +738,7 @@ module Aws::SecretsManager
     #   resp = client.delete_secret({
     #     secret_id: "SecretIdType", # required
     #     recovery_window_in_days: 1,
+    #     force_delete_without_recovery: false,
     #   })
     #
     # @example Response structure
@@ -2125,9 +2144,9 @@ module Aws::SecretsManager
       req.send_request(options)
     end
 
-    # Modifies many of the details of a secret. If you include a
-    # `ClientRequestToken` and either `SecretString` or `SecretBinary` then
-    # it also creates a new version attached to the secret.
+    # Modifies many of the details of the specified secret. If you include a
+    # `ClientRequestToken` and *either* `SecretString` or `SecretBinary`
+    # then it also creates a new version attached to the secret.
     #
     # To modify the rotation configuration of a secret, use RotateSecret
     # instead.
@@ -2140,9 +2159,9 @@ module Aws::SecretsManager
     #  </note>
     #
     # * If a version with a `SecretVersionId` with the same value as the
-    #   `ClientRequestToken` parameter already exists, the operation
-    #   generates an error. You cannot modify an existing version, you can
-    #   only create new ones.
+    #   `ClientRequestToken` parameter already exists, the operation results
+    #   in an error. You cannot modify an existing version, you can only
+    #   create a new version.
     #
     # * If you include `SecretString` or `SecretBinary` to create a new
     #   secret version, Secrets Manager automatically attaches the staging
@@ -2200,7 +2219,7 @@ module Aws::SecretsManager
     #   ListSecretVersionIds.
     #
     # @option params [required, String] :secret_id
-    #   Specifies the secret that you want to update or to which you want to
+    #   Specifies the secret that you want to modify or to which you want to
     #   add a new version. You can specify either the Amazon Resource Name
     #   (ARN) or the friendly name of the secret.
     #
@@ -2249,28 +2268,24 @@ module Aws::SecretsManager
     #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
     # @option params [String] :description
-    #   (Optional) Specifies a user-provided description of the secret.
+    #   (Optional) Specifies an updated user-provided description of the
+    #   secret.
     #
     # @option params [String] :kms_key_id
-    #   (Optional) Specifies the ARN or alias of the AWS KMS customer master
-    #   key (CMK) to be used to encrypt the protected text in the versions of
-    #   this secret.
-    #
-    #   If you don't specify this value, then Secrets Manager defaults to
-    #   using the default CMK in the account (the one named
-    #   `aws/secretsmanager`). If a AWS KMS CMK with that name doesn't exist,
-    #   then Secrets Manager creates it for you automatically the first time
-    #   it needs to encrypt a version's `Plaintext` or `PlaintextString`
-    #   fields.
+    #   (Optional) Specifies an updated ARN or alias of the AWS KMS customer
+    #   master key (CMK) to be used to encrypt the protected text in new
+    #   versions of this secret.
     #
     #   You can only use the account's default CMK to encrypt and decrypt if
     #   you call this operation using credentials from the same account that
     #   owns the secret. If the secret is in a different account, then you
-    #   must create a custom CMK and provide the ARN in this field.
+    #   must create a custom CMK and provide the ARN of that CMK in this
+    #   field. The user making the call must have permissions to both the
+    #   secret and the CMK in their respective accounts.
     #
     # @option params [String, IO] :secret_binary
-    #   (Optional) Specifies binary data that you want to encrypt and store in
-    #   the new version of the secret. To use this parameter in the
+    #   (Optional) Specifies updated binary data that you want to encrypt and
+    #   store in the new version of the secret. To use this parameter in the
     #   command-line tools, we recommend that you store your binary data in a
     #   file and then use the appropriate technique for your tool to pass the
     #   contents of the file as a parameter. Either `SecretBinary` or
@@ -2280,8 +2295,8 @@ module Aws::SecretsManager
     #   This parameter is not accessible using the Secrets Manager console.
     #
     # @option params [String] :secret_string
-    #   (Optional) Specifies text data that you want to encrypt and store in
-    #   this new version of the secret. Either `SecretBinary` or
+    #   (Optional) Specifies updated text data that you want to encrypt and
+    #   store in this new version of the secret. Either `SecretBinary` or
     #   `SecretString` must have a value, but not both. They cannot both be
     #   empty.
     #
@@ -2301,7 +2316,12 @@ module Aws::SecretsManager
     #
     #   If your command-line tool or SDK requires quotation marks around the
     #   parameter, you should use single quotes to avoid confusion with the
-    #   double quotes required in the JSON text.
+    #   double quotes required in the JSON text. You can also 'escape' the
+    #   double quote character in the embedded JSON text by prefacing each
+    #   with a backslash. For example, the following string is surrounded by
+    #   double-quotes. All of the embedded double quotes are escaped:
+    #
+    #   `"[\{"username":"bob"\},\{"password":"abc123xyz456"\}]"`
     #
     #
     #
@@ -2461,8 +2481,8 @@ module Aws::SecretsManager
     #   labels to.
     #
     #   If any of the staging labels are already attached to a different
-    #   version of the secret, then they are removed from that version before
-    #   adding them to this version.
+    #   version of the secret, then they are automatically removed from that
+    #   version before adding them to this version.
     #
     # @return [Types::UpdateSecretVersionStageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2560,7 +2580,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

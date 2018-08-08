@@ -689,6 +689,11 @@ module Aws::SSM
     #   The specified targets.
     #   @return [Array<Types::Target>]
     #
+    # @!attribute [rw] target_maps
+    #   The specified key-value mapping of document parameters to target
+    #   resources.
+    #   @return [Array<Hash<String,Array<String>>>]
+    #
     # @!attribute [rw] resolved_targets
     #   A list of resolved targets in the rate control execution.
     #   @return [Types::ResolvedTargets]
@@ -728,6 +733,7 @@ module Aws::SSM
       :current_action,
       :target_parameter_name,
       :targets,
+      :target_maps,
       :resolved_targets,
       :max_concurrency,
       :max_errors,
@@ -833,6 +839,11 @@ module Aws::SSM
     #   The targets defined by the user when starting the Automation.
     #   @return [Array<Types::Target>]
     #
+    # @!attribute [rw] target_maps
+    #   The specified key-value mapping of document parameters to target
+    #   resources.
+    #   @return [Array<Hash<String,Array<String>>>]
+    #
     # @!attribute [rw] resolved_targets
     #   A list of targets that resolved during the execution.
     #   @return [Types::ResolvedTargets]
@@ -870,6 +881,7 @@ module Aws::SSM
       :failure_message,
       :target_parameter_name,
       :targets,
+      :target_maps,
       :resolved_targets,
       :max_concurrency,
       :max_errors,
@@ -1146,7 +1158,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status, ExecutionStage, DocumentName
+    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status
     #         value: "CommandFilterValue", # required
     #       }
     #
@@ -1155,46 +1167,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The filter value. Valid values for each filter key are as follows:
-    #
-    #   * **InvokedAfter**\: Specify a timestamp to limit your results. For
-    #     example, specify `2018-07-07T00:00:00Z` to see a list of command
-    #     executions occurring July 7, 2018, and later.
-    #
-    #   * **InvokedBefore**\: Specify a timestamp to limit your results. For
-    #     example, specify `2018-07-07T00:00:00Z` to see a list of command
-    #     executions from before July 7, 2018.
-    #
-    #   * **Status**\: Specify a valid command status to see a list of all
-    #     command executions with that status. Status values you can specify
-    #     include:
-    #
-    #     * `Pending`
-    #
-    #     * `InProgress`
-    #
-    #     * `Success`
-    #
-    #     * `Cancelled`
-    #
-    #     * `Failed`
-    #
-    #     * `TimedOut`
-    #
-    #     * `Cancelling`
-    #
-    #   * **DocumentName**\: Specify name of the SSM document for which you
-    #     want to see command execution results. For example, specify
-    #     `AWS-RunPatchBaseline` to see command executions that used this
-    #     SSM document to perform security patching operations on instances.
-    #
-    #   * **ExecutionStage**\: Specify one of the following values:
-    #
-    #     * `Executing`\: Returns a list of command executions that are
-    #       currently still running.
-    #
-    #     * `Complete`\: Returns a list of command exeuctions that have
-    #       already completed.
+    #   The filter value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CommandFilter AWS API Documentation
@@ -7218,7 +7191,7 @@ module Aws::SSM
     #         next_token: "NextToken",
     #         filters: [
     #           {
-    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status, ExecutionStage, DocumentName
+    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status
     #             value: "CommandFilterValue", # required
     #           },
     #         ],
@@ -7293,7 +7266,7 @@ module Aws::SSM
     #         next_token: "NextToken",
     #         filters: [
     #           {
-    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status, ExecutionStage, DocumentName
+    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status
     #             value: "CommandFilterValue", # required
     #           },
     #         ],
@@ -10305,7 +10278,24 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
-    #   The role that should be assumed when executing the task.
+    #   The role to assume when running the Maintenance Window task.
+    #
+    #   If you do not specify a service role ARN, Systems Manager will use
+    #   your account's service-linked role for Systems Manager by default.
+    #   If no service-linked role for Systems Manager exists in your
+    #   account, it will be created when you run
+    #   `RegisterTaskWithMaintenanceWindow` without specifying a service
+    #   role ARN.
+    #
+    #   For more information, see [Service-Linked Role Permissions for
+    #   Systems Manager][1] and [Should I Use a Service-Linked Role or a
+    #   Custom Service Role to Run Maintenance Window Tasks? ][2] in the
+    #   *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions
+    #   [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role
     #   @return [String]
     #
     # @!attribute [rw] task_type
@@ -11032,6 +11022,11 @@ module Aws::SSM
     #             values: ["TargetValue"],
     #           },
     #         ],
+    #         target_maps: [
+    #           {
+    #             "TargetMapKey" => ["TargetMapValue"],
+    #           },
+    #         ],
     #         max_concurrency: "MaxConcurrency",
     #         max_errors: "MaxErrors",
     #       }
@@ -11069,6 +11064,11 @@ module Aws::SSM
     #   TargetParameterName.
     #   @return [Array<Types::Target>]
     #
+    # @!attribute [rw] target_maps
+    #   A key-value mapping of document parameters to target resources. Both
+    #   Targets and TargetMaps cannot be specified together.
+    #   @return [Array<Hash<String,Array<String>>>]
+    #
     # @!attribute [rw] max_concurrency
     #   The maximum number of targets allowed to run this task in parallel.
     #   You can specify a number, such as 10, or a percentage, such as 10%.
@@ -11104,6 +11104,7 @@ module Aws::SSM
       :mode,
       :target_parameter_name,
       :targets,
+      :target_maps,
       :max_concurrency,
       :max_errors)
       include Aws::Structure
@@ -11920,6 +11921,23 @@ module Aws::SSM
     # @!attribute [rw] service_role_arn
     #   The IAM service role ARN to modify. The system assumes this role
     #   during task execution.
+    #
+    #   If you do not specify a service role ARN, Systems Manager will use
+    #   your account's service-linked role for Systems Manager by default.
+    #   If no service-linked role for Systems Manager exists in your
+    #   account, it will be created when you run
+    #   `RegisterTaskWithMaintenanceWindow` without specifying a service
+    #   role ARN.
+    #
+    #   For more information, see [Service-Linked Role Permissions for
+    #   Systems Manager][1] and [Should I Use a Service-Linked Role or a
+    #   Custom Service Role to Run Maintenance Window Tasks? ][2] in the
+    #   *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions
+    #   [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role
     #   @return [String]
     #
     # @!attribute [rw] task_parameters

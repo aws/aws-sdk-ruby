@@ -779,6 +779,11 @@ module Aws::SSM
     TargetCount = Shapes::IntegerShape.new(name: 'TargetCount')
     TargetInUseException = Shapes::StructureShape.new(name: 'TargetInUseException')
     TargetKey = Shapes::StringShape.new(name: 'TargetKey')
+    TargetMap = Shapes::MapShape.new(name: 'TargetMap')
+    TargetMapKey = Shapes::StringShape.new(name: 'TargetMapKey')
+    TargetMapValue = Shapes::StringShape.new(name: 'TargetMapValue')
+    TargetMapValueList = Shapes::ListShape.new(name: 'TargetMapValueList')
+    TargetMaps = Shapes::ListShape.new(name: 'TargetMaps')
     TargetParameterList = Shapes::ListShape.new(name: 'TargetParameterList')
     TargetType = Shapes::StringShape.new(name: 'TargetType')
     TargetValue = Shapes::StringShape.new(name: 'TargetValue')
@@ -965,6 +970,7 @@ module Aws::SSM
     AutomationExecution.add_member(:current_action, Shapes::ShapeRef.new(shape: String, location_name: "CurrentAction"))
     AutomationExecution.add_member(:target_parameter_name, Shapes::ShapeRef.new(shape: AutomationParameterKey, location_name: "TargetParameterName"))
     AutomationExecution.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
+    AutomationExecution.add_member(:target_maps, Shapes::ShapeRef.new(shape: TargetMaps, location_name: "TargetMaps"))
     AutomationExecution.add_member(:resolved_targets, Shapes::ShapeRef.new(shape: ResolvedTargets, location_name: "ResolvedTargets"))
     AutomationExecution.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
     AutomationExecution.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
@@ -995,6 +1001,7 @@ module Aws::SSM
     AutomationExecutionMetadata.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "FailureMessage"))
     AutomationExecutionMetadata.add_member(:target_parameter_name, Shapes::ShapeRef.new(shape: AutomationParameterKey, location_name: "TargetParameterName"))
     AutomationExecutionMetadata.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
+    AutomationExecutionMetadata.add_member(:target_maps, Shapes::ShapeRef.new(shape: TargetMaps, location_name: "TargetMaps"))
     AutomationExecutionMetadata.add_member(:resolved_targets, Shapes::ShapeRef.new(shape: ResolvedTargets, location_name: "ResolvedTargets"))
     AutomationExecutionMetadata.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
     AutomationExecutionMetadata.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
@@ -2702,6 +2709,7 @@ module Aws::SSM
     StartAutomationExecutionRequest.add_member(:mode, Shapes::ShapeRef.new(shape: ExecutionMode, location_name: "Mode"))
     StartAutomationExecutionRequest.add_member(:target_parameter_name, Shapes::ShapeRef.new(shape: AutomationParameterKey, location_name: "TargetParameterName"))
     StartAutomationExecutionRequest.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
+    StartAutomationExecutionRequest.add_member(:target_maps, Shapes::ShapeRef.new(shape: TargetMaps, location_name: "TargetMaps"))
     StartAutomationExecutionRequest.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
     StartAutomationExecutionRequest.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
     StartAutomationExecutionRequest.struct_class = Types::StartAutomationExecutionRequest
@@ -2758,6 +2766,13 @@ module Aws::SSM
     Target.add_member(:key, Shapes::ShapeRef.new(shape: TargetKey, location_name: "Key"))
     Target.add_member(:values, Shapes::ShapeRef.new(shape: TargetValues, location_name: "Values"))
     Target.struct_class = Types::Target
+
+    TargetMap.key = Shapes::ShapeRef.new(shape: TargetMapKey)
+    TargetMap.value = Shapes::ShapeRef.new(shape: TargetMapValueList)
+
+    TargetMapValueList.member = Shapes::ShapeRef.new(shape: TargetMapValue)
+
+    TargetMaps.member = Shapes::ShapeRef.new(shape: TargetMap)
 
     TargetParameterList.member = Shapes::ShapeRef.new(shape: ParameterValue)
 

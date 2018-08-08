@@ -135,6 +135,7 @@ module Aws::SecretsManager
 
     DeleteSecretRequest.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdType, required: true, location_name: "SecretId"))
     DeleteSecretRequest.add_member(:recovery_window_in_days, Shapes::ShapeRef.new(shape: RecoveryWindowInDaysType, location_name: "RecoveryWindowInDays", metadata: {"box"=>true}))
+    DeleteSecretRequest.add_member(:force_delete_without_recovery, Shapes::ShapeRef.new(shape: BooleanType, location_name: "ForceDeleteWithoutRecovery", metadata: {"box"=>true}))
     DeleteSecretRequest.struct_class = Types::DeleteSecretRequest
 
     DeleteSecretResponse.add_member(:arn, Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))

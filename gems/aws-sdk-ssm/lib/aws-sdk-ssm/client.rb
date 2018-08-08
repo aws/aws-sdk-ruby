@@ -1669,6 +1669,10 @@ module Aws::SSM
     #   resp.automation_execution_metadata_list[0].targets[0].key #=> String
     #   resp.automation_execution_metadata_list[0].targets[0].values #=> Array
     #   resp.automation_execution_metadata_list[0].targets[0].values[0] #=> String
+    #   resp.automation_execution_metadata_list[0].target_maps #=> Array
+    #   resp.automation_execution_metadata_list[0].target_maps[0] #=> Hash
+    #   resp.automation_execution_metadata_list[0].target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.automation_execution_metadata_list[0].target_maps[0]["TargetMapKey"][0] #=> String
     #   resp.automation_execution_metadata_list[0].resolved_targets.parameter_values #=> Array
     #   resp.automation_execution_metadata_list[0].resolved_targets.parameter_values[0] #=> String
     #   resp.automation_execution_metadata_list[0].resolved_targets.truncated #=> Boolean
@@ -3085,6 +3089,10 @@ module Aws::SSM
     #   resp.automation_execution.targets[0].key #=> String
     #   resp.automation_execution.targets[0].values #=> Array
     #   resp.automation_execution.targets[0].values[0] #=> String
+    #   resp.automation_execution.target_maps #=> Array
+    #   resp.automation_execution.target_maps[0] #=> Hash
+    #   resp.automation_execution.target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.automation_execution.target_maps[0]["TargetMapKey"][0] #=> String
     #   resp.automation_execution.resolved_targets.parameter_values #=> Array
     #   resp.automation_execution.resolved_targets.parameter_values[0] #=> String
     #   resp.automation_execution.resolved_targets.truncated #=> Boolean
@@ -4319,7 +4327,7 @@ module Aws::SSM
     #     next_token: "NextToken",
     #     filters: [
     #       {
-    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status, ExecutionStage, DocumentName
+    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status
     #         value: "CommandFilterValue", # required
     #       },
     #     ],
@@ -4407,7 +4415,7 @@ module Aws::SSM
     #     next_token: "NextToken",
     #     filters: [
     #       {
-    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status, ExecutionStage, DocumentName
+    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status
     #         value: "CommandFilterValue", # required
     #       },
     #     ],
@@ -5422,7 +5430,23 @@ module Aws::SSM
     #   The ARN of the task to execute
     #
     # @option params [String] :service_role_arn
-    #   The role that should be assumed when executing the task.
+    #   The role to assume when running the Maintenance Window task.
+    #
+    #   If you do not specify a service role ARN, Systems Manager will use
+    #   your account's service-linked role for Systems Manager by default. If
+    #   no service-linked role for Systems Manager exists in your account, it
+    #   will be created when you run `RegisterTaskWithMaintenanceWindow`
+    #   without specifying a service role ARN.
+    #
+    #   For more information, see [Service-Linked Role Permissions for Systems
+    #   Manager][1] and [Should I Use a Service-Linked Role or a Custom
+    #   Service Role to Run Maintenance Window Tasks? ][2] in the *AWS Systems
+    #   Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions
+    #   [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role
     #
     # @option params [required, String] :task_type
     #   The type of task being registered.
@@ -5904,6 +5928,10 @@ module Aws::SSM
     #   A key-value mapping to target resources. Required if you specify
     #   TargetParameterName.
     #
+    # @option params [Array<Hash>] :target_maps
+    #   A key-value mapping of document parameters to target resources. Both
+    #   Targets and TargetMaps cannot be specified together.
+    #
     # @option params [String] :max_concurrency
     #   The maximum number of targets allowed to run this task in parallel.
     #   You can specify a number, such as 10, or a percentage, such as 10%.
@@ -5946,6 +5974,11 @@ module Aws::SSM
     #       {
     #         key: "TargetKey",
     #         values: ["TargetValue"],
+    #       },
+    #     ],
+    #     target_maps: [
+    #       {
+    #         "TargetMapKey" => ["TargetMapValue"],
     #       },
     #     ],
     #     max_concurrency: "MaxConcurrency",
@@ -6485,6 +6518,22 @@ module Aws::SSM
     #   The IAM service role ARN to modify. The system assumes this role
     #   during task execution.
     #
+    #   If you do not specify a service role ARN, Systems Manager will use
+    #   your account's service-linked role for Systems Manager by default. If
+    #   no service-linked role for Systems Manager exists in your account, it
+    #   will be created when you run `RegisterTaskWithMaintenanceWindow`
+    #   without specifying a service role ARN.
+    #
+    #   For more information, see [Service-Linked Role Permissions for Systems
+    #   Manager][1] and [Should I Use a Service-Linked Role or a Custom
+    #   Service Role to Run Maintenance Window Tasks? ][2] in the *AWS Systems
+    #   Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions
+    #   [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role
+    #
     # @option params [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>] :task_parameters
     #   The parameters to modify.
     #
@@ -6889,7 +6938,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

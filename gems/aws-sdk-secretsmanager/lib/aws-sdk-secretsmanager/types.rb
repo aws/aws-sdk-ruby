@@ -335,6 +335,7 @@ module Aws::SecretsManager
     #       {
     #         secret_id: "SecretIdType", # required
     #         recovery_window_in_days: 1,
+    #         force_delete_without_recovery: false,
     #       }
     #
     # @!attribute [rw] secret_id
@@ -349,11 +350,31 @@ module Aws::SecretsManager
     #   This value can range from 7 to 30 days. The default value is 30.
     #   @return [Integer]
     #
+    # @!attribute [rw] force_delete_without_recovery
+    #   (Optional) Specifies that the secret is to be deleted immediately
+    #   without any recovery window. You cannot use both this parameter and
+    #   the `RecoveryWindowInDays` parameter in the same API call.
+    #
+    #   An asynchronous background process performs the actual deletion, so
+    #   there can be a short delay before the operation completes. If you
+    #   write code to delete and then immediately recreate a secret with the
+    #   same name, ensure that your code includes appropriate back off and
+    #   retry logic.
+    #
+    #   Use this parameter with caution. This parameter causes the operation
+    #   to skip the normal waiting period before the permanent deletion that
+    #   AWS would normally impose with the `RecoveryWindowInDays` parameter.
+    #   If you delete a secret with the `ForceDeleteWithouRecovery`
+    #   parameter, then you have no opportunity to recover the secret. It is
+    #   permanently lost.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/DeleteSecretRequest AWS API Documentation
     #
     class DeleteSecretRequest < Struct.new(
       :secret_id,
-      :recovery_window_in_days)
+      :recovery_window_in_days,
+      :force_delete_without_recovery)
       include Aws::Structure
     end
 
@@ -1555,7 +1576,7 @@ module Aws::SecretsManager
     #       }
     #
     # @!attribute [rw] secret_id
-    #   Specifies the secret that you want to update or to which you want to
+    #   Specifies the secret that you want to modify or to which you want to
     #   add a new version. You can specify either the Amazon Resource Name
     #   (ARN) or the friendly name of the secret.
     #   @return [String]
@@ -1606,42 +1627,38 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   (Optional) Specifies a user-provided description of the secret.
+    #   (Optional) Specifies an updated user-provided description of the
+    #   secret.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   (Optional) Specifies the ARN or alias of the AWS KMS customer master
-    #   key (CMK) to be used to encrypt the protected text in the versions
-    #   of this secret.
-    #
-    #   If you don't specify this value, then Secrets Manager defaults to
-    #   using the default CMK in the account (the one named
-    #   `aws/secretsmanager`). If a AWS KMS CMK with that name doesn't
-    #   exist, then Secrets Manager creates it for you automatically the
-    #   first time it needs to encrypt a version's `Plaintext` or
-    #   `PlaintextString` fields.
+    #   (Optional) Specifies an updated ARN or alias of the AWS KMS customer
+    #   master key (CMK) to be used to encrypt the protected text in new
+    #   versions of this secret.
     #
     #   You can only use the account's default CMK to encrypt and decrypt
     #   if you call this operation using credentials from the same account
     #   that owns the secret. If the secret is in a different account, then
-    #   you must create a custom CMK and provide the ARN in this field.
+    #   you must create a custom CMK and provide the ARN of that CMK in this
+    #   field. The user making the call must have permissions to both the
+    #   secret and the CMK in their respective accounts.
     #   @return [String]
     #
     # @!attribute [rw] secret_binary
-    #   (Optional) Specifies binary data that you want to encrypt and store
-    #   in the new version of the secret. To use this parameter in the
-    #   command-line tools, we recommend that you store your binary data in
-    #   a file and then use the appropriate technique for your tool to pass
-    #   the contents of the file as a parameter. Either `SecretBinary` or
-    #   `SecretString` must have a value, but not both. They cannot both be
-    #   empty.
+    #   (Optional) Specifies updated binary data that you want to encrypt
+    #   and store in the new version of the secret. To use this parameter in
+    #   the command-line tools, we recommend that you store your binary data
+    #   in a file and then use the appropriate technique for your tool to
+    #   pass the contents of the file as a parameter. Either `SecretBinary`
+    #   or `SecretString` must have a value, but not both. They cannot both
+    #   be empty.
     #
     #   This parameter is not accessible using the Secrets Manager console.
     #   @return [String]
     #
     # @!attribute [rw] secret_string
-    #   (Optional) Specifies text data that you want to encrypt and store in
-    #   this new version of the secret. Either `SecretBinary` or
+    #   (Optional) Specifies updated text data that you want to encrypt and
+    #   store in this new version of the secret. Either `SecretBinary` or
     #   `SecretString` must have a value, but not both. They cannot both be
     #   empty.
     #
@@ -1661,7 +1678,12 @@ module Aws::SecretsManager
     #
     #   If your command-line tool or SDK requires quotation marks around the
     #   parameter, you should use single quotes to avoid confusion with the
-    #   double quotes required in the JSON text.
+    #   double quotes required in the JSON text. You can also 'escape' the
+    #   double quote character in the embedded JSON text by prefacing each
+    #   with a backslash. For example, the following string is surrounded by
+    #   double-quotes. All of the embedded double quotes are escaped:
+    #
+    #   `"[\{"username":"bob"\},\{"password":"abc123xyz456"\}]"`
     #
     #
     #
@@ -1681,7 +1703,7 @@ module Aws::SecretsManager
     end
 
     # @!attribute [rw] arn
-    #   The ARN of this secret.
+    #   The ARN of the secret that was updated.
     #
     #   <note markdown="1"> Secrets Manager automatically adds several random characters to the
     #   name at the end of the ARN when you initially create a secret. This
@@ -1695,12 +1717,12 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The friendly name of this secret.
+    #   The friendly name of the secret that was updated.
     #   @return [String]
     #
     # @!attribute [rw] version_id
-    #   If a version of the secret was created or updated by this operation,
-    #   then its unique identifier is returned.
+    #   If a new version of the secret was created by this operation, then
+    #   `VersionId` contains the unique identifier of the new version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/UpdateSecretResponse AWS API Documentation
@@ -1751,8 +1773,8 @@ module Aws::SecretsManager
     #   labels to.
     #
     #   If any of the staging labels are already attached to a different
-    #   version of the secret, then they are removed from that version
-    #   before adding them to this version.
+    #   version of the secret, then they are automatically removed from that
+    #   version before adding them to this version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/UpdateSecretVersionStageRequest AWS API Documentation
