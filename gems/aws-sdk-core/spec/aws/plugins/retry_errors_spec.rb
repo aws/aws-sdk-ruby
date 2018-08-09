@@ -155,6 +155,15 @@ module Aws
 
         end
 
+        describe '#endpoint_discovery?' do
+
+          it 'returns true if the error is EndpointDiscoveryError' do
+            error = Aws::Errors::EndpointDiscoveryError.new
+            expect(inspector(error).endpoint_discovery?).to be(true)
+          end
+
+        end
+
         describe '#networking?' do
 
           it 'returns true if the error code is RequestTimeout' do
@@ -179,6 +188,7 @@ module Aws
           end
 
         end
+
       end
 
       describe 'Handler' do

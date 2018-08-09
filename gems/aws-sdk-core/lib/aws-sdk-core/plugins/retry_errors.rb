@@ -120,6 +120,10 @@ A delay randomiser function used by the default backoff function. Some predefine
           (500..599).include?(@http_status_code)
         end
 
+        def endpoint_discovery?
+          @error.is_a?(Aws::Errors::EndpointDiscoveryError)
+        end
+
         private
 
         def extract_name(error)
@@ -184,7 +188,8 @@ A delay randomiser function used by the default backoff function. Some predefine
           error.throttling_error? or
           error.checksum? or
           error.networking? or
-          error.server?
+          error.server? or
+          error.endpoint_discovery?
         end
 
         def refreshable_credentials?(context)

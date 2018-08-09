@@ -26,20 +26,30 @@ a default `:region` is search for in the following locations:
         resolve_region(cfg)
       end
 
-      option(:endpoint, doc_type: String, docstring: <<-DOCS) do |cfg|
+      option(:endpoint, doc_type: String, docstring: <<-DOCS
 The client endpoint is normally constructed from the `:region`
 option. You should only configure an `:endpoint` when connecting
 to test endpoints. This should be avalid HTTP(S) URI.
         DOCS
-        endpoint_prefix = cfg.api.metadata['endpointPrefix']
-        if cfg.region && endpoint_prefix
-          Aws::Partitions::EndpointProvider.resolve(cfg.region, endpoint_prefix)
+      )
+
+      # TODO, this potentially gives the risk for customer to access this
+      option(:regional_endpoint) do |cfg|
+        if cfg.endpoint
+          false
+        else
+          !! (cfg.region && cfg.api.metadata['endpointPrefix'])
         end
       end
 
       def after_initialize(client)
         if client.config.region.nil? or client.config.region == ''
           raise Errors::MissingRegionError
+        end
+        endpoint_prefix = client.config.api.metadata['endpointPrefix']
+        if client.config.regional_endpoint
+          client.config.endpoint = Aws::Partitions::EndpointProvider.resolve(
+            client.config.region, endpoint_prefix)
         end
       end
 

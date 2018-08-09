@@ -66,6 +66,9 @@ require_relative 'aws-sdk-core/json'
 require_relative 'aws-sdk-core/binary'
 require_relative 'aws-sdk-core/event_emitter'
 
+# endpoint discovery
+require_relative 'aws-sdk-core/endpoint_cache'
+
 # aws-sdk-sts is vendored to support Aws::AssumeRoleCredentials
 
 require 'aws-sdk-sts'
