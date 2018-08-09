@@ -253,7 +253,7 @@ module Aws::DAX
     #
     #    </note>
     #
-    # @option params [required, String] :iam_role_arn
+    # @option params [String] :iam_role_arn
     #   A valid Amazon Resource Name (ARN) that identifies an IAM role. At
     #   runtime, DAX will assume this role and use the role's permissions to
     #   access DynamoDB on your behalf.
@@ -263,6 +263,10 @@ module Aws::DAX
     #
     # @option params [Array<Types::Tag>] :tags
     #   A set of tags to associate with the DAX cluster.
+    #
+    # @option params [Types::SSESpecification] :sse_specification
+    #   Represents the settings used to enable server-side encryption on the
+    #   cluster.
     #
     # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -280,7 +284,7 @@ module Aws::DAX
     #     security_group_ids: ["String"],
     #     preferred_maintenance_window: "String",
     #     notification_topic_arn: "String",
-    #     iam_role_arn: "String", # required
+    #     iam_role_arn: "String",
     #     parameter_group_name: "String",
     #     tags: [
     #       {
@@ -288,6 +292,9 @@ module Aws::DAX
     #         value: "String",
     #       },
     #     ],
+    #     sse_specification: {
+    #       enabled: false, # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -323,6 +330,7 @@ module Aws::DAX
     #   resp.cluster.parameter_group.parameter_apply_status #=> String
     #   resp.cluster.parameter_group.node_ids_to_reboot #=> Array
     #   resp.cluster.parameter_group.node_ids_to_reboot[0] #=> String
+    #   resp.cluster.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/CreateCluster AWS API Documentation
     #
@@ -475,6 +483,7 @@ module Aws::DAX
     #   resp.cluster.parameter_group.parameter_apply_status #=> String
     #   resp.cluster.parameter_group.node_ids_to_reboot #=> Array
     #   resp.cluster.parameter_group.node_ids_to_reboot[0] #=> String
+    #   resp.cluster.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DecreaseReplicationFactor AWS API Documentation
     #
@@ -536,6 +545,7 @@ module Aws::DAX
     #   resp.cluster.parameter_group.parameter_apply_status #=> String
     #   resp.cluster.parameter_group.node_ids_to_reboot #=> Array
     #   resp.cluster.parameter_group.node_ids_to_reboot[0] #=> String
+    #   resp.cluster.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DeleteCluster AWS API Documentation
     #
@@ -692,6 +702,7 @@ module Aws::DAX
     #   resp.clusters[0].parameter_group.parameter_apply_status #=> String
     #   resp.clusters[0].parameter_group.node_ids_to_reboot #=> Array
     #   resp.clusters[0].parameter_group.node_ids_to_reboot[0] #=> String
+    #   resp.clusters[0].sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeClusters AWS API Documentation
     #
@@ -1058,6 +1069,7 @@ module Aws::DAX
     #   resp.cluster.parameter_group.parameter_apply_status #=> String
     #   resp.cluster.parameter_group.node_ids_to_reboot #=> Array
     #   resp.cluster.parameter_group.node_ids_to_reboot[0] #=> String
+    #   resp.cluster.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/IncreaseReplicationFactor AWS API Documentation
     #
@@ -1161,6 +1173,7 @@ module Aws::DAX
     #   resp.cluster.parameter_group.parameter_apply_status #=> String
     #   resp.cluster.parameter_group.node_ids_to_reboot #=> Array
     #   resp.cluster.parameter_group.node_ids_to_reboot[0] #=> String
+    #   resp.cluster.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/RebootNode AWS API Documentation
     #
@@ -1326,6 +1339,7 @@ module Aws::DAX
     #   resp.cluster.parameter_group.parameter_apply_status #=> String
     #   resp.cluster.parameter_group.node_ids_to_reboot #=> Array
     #   resp.cluster.parameter_group.node_ids_to_reboot[0] #=> String
+    #   resp.cluster.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UpdateCluster AWS API Documentation
     #
@@ -1431,7 +1445,7 @@ module Aws::DAX
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dax'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

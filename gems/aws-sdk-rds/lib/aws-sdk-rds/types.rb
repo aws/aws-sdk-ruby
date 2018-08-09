@@ -492,6 +492,16 @@ module Aws::RDS
     # The configuration setting for the log types to be enabled for export
     # to CloudWatch Logs for a specific DB instance or DB cluster.
     #
+    # The `EnableLogTypes` and `DisableLogTypes` arrays determine which logs
+    # will be exported (or not exported) to CloudWatch Logs. The values
+    # within these arrays depend on the DB engine being used. For more
+    # information, see [Publishing Database Logs to Amazon CloudWatch Logs
+    # ][1] in the *Amazon Relational Database Service User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #
     # @note When making an API call, you may pass CloudwatchLogsExportConfiguration
     #   data as a hash:
     #
@@ -1195,6 +1205,13 @@ module Aws::RDS
     #         enable_iam_database_authentication: false,
     #         backtrack_window: 1,
     #         enable_cloudwatch_logs_exports: ["String"],
+    #         engine_mode: "String",
+    #         scaling_configuration: {
+    #           min_capacity: 1,
+    #           max_capacity: 1,
+    #           auto_pause: false,
+    #           seconds_until_auto_pause: 1,
+    #         },
     #         source_region: "String",
     #       }
     #
@@ -1485,8 +1502,25 @@ module Aws::RDS
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine
+    #   being used. For more information, see [Publishing Database Logs to
+    #   Amazon CloudWatch Logs ][1] in the *Amazon Relational Database
+    #   Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] engine_mode
+    #   The DB engine mode of the DB cluster, either `provisioned` or
+    #   `serverless`.
+    #   @return [String]
+    #
+    # @!attribute [rw] scaling_configuration
+    #   For DB clusters in `serverless` DB engine mode, the scaling
+    #   properties of the DB cluster.
+    #   @return [Types::ScalingConfiguration]
     #
     # @!attribute [rw] destination_region
     #   @return [String]
@@ -1523,6 +1557,8 @@ module Aws::RDS
       :enable_iam_database_authentication,
       :backtrack_window,
       :enable_cloudwatch_logs_exports,
+      :engine_mode,
+      :scaling_configuration,
       :destination_region,
       :source_region)
       include Aws::Structure
@@ -2371,19 +2407,26 @@ module Aws::RDS
     #   of false specifies an internal instance with a DNS name that
     #   resolves to a private IP address.
     #
-    #   Default: The default behavior varies depending on whether a VPC has
-    #   been requested or not. The following list shows the default behavior
-    #   in each case.
+    #   Default: The default behavior varies depending on whether
+    #   `DBSubnetGroupName` is specified.
     #
-    #   * **Default VPC:** true
+    #   If `DBSubnetGroupName` is not specified, and `PubliclyAccessible` is
+    #   not specified, the following applies:
     #
-    #   * **VPC:** false
+    #   * If the default VPC in the target region doesn’t have an Internet
+    #     gateway attached to it, the DB instance is private.
     #
-    #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance is
-    #   publicly accessible. If a specific DB subnet group has been
-    #   specified as part of the request and the PubliclyAccessible value
-    #   has not been set, the DB instance is private.
+    #   * If the default VPC in the target region has an Internet gateway
+    #     attached to it, the DB instance is public.
+    #
+    #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` is not
+    #   specified, the following applies:
+    #
+    #   * If the subnets are part of a VPC that doesn’t have an Internet
+    #     gateway attached to it, the DB instance is private.
+    #
+    #   * If the subnets are part of a VPC that has an Internet gateway
+    #     attached to it, the DB instance is public.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
@@ -2568,7 +2611,14 @@ module Aws::RDS
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine
+    #   being used. For more information, see [Publishing Database Logs to
+    #   Amazon CloudWatch Logs ][1] in the *Amazon Relational Database
+    #   Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #   @return [Array<String>]
     #
     # @!attribute [rw] processor_features
@@ -2771,21 +2821,8 @@ module Aws::RDS
     #   true specifies an Internet-facing instance with a publicly
     #   resolvable DNS name, which resolves to a public IP address. A value
     #   of false specifies an internal instance with a DNS name that
-    #   resolves to a private IP address.
-    #
-    #   Default: The default behavior varies depending on whether a VPC has
-    #   been requested or not. The following list shows the default behavior
-    #   in each case.
-    #
-    #   * **Default VPC:**true
-    #
-    #   * **VPC:**false
-    #
-    #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance is
-    #   publicly accessible. If a specific DB subnet group has been
-    #   specified as part of the request and the PubliclyAccessible value
-    #   has not been set, the DB instance is private.
+    #   resolves to a private IP address. For more information, see
+    #   CreateDBInstance.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
@@ -2983,7 +3020,13 @@ module Aws::RDS
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
     #   The list of logs that the new DB instance is to export to CloudWatch
-    #   Logs.
+    #   Logs. The values in the list depend on the DB engine being used. For
+    #   more information, see [Publishing Database Logs to Amazon CloudWatch
+    #   Logs ][1] in the *Amazon Relational Database Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #   @return [Array<String>]
     #
     # @!attribute [rw] processor_features
@@ -3752,7 +3795,35 @@ module Aws::RDS
     # @!attribute [rw] enabled_cloudwatch_logs_exports
     #   A list of log types that this DB cluster is configured to export to
     #   CloudWatch Logs.
+    #
+    #   Log types vary by DB engine. For information about the log types for
+    #   each DB engine, see [Amazon RDS Database Log Files][1] in the
+    #   *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] capacity
+    #   @return [Integer]
+    #
+    # @!attribute [rw] engine_mode
+    #   The DB engine mode of the DB cluster, either `provisioned` or
+    #   `serverless`.
+    #   @return [String]
+    #
+    # @!attribute [rw] scaling_configuration_info
+    #   Shows the scaling configuration for an Aurora DB cluster in
+    #   `serverless` DB engine mode.
+    #
+    #   For more information, see [Using Amazon Aurora Serverless][1] in the
+    #   *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/aurora-serverless.html
+    #   @return [Types::ScalingConfigurationInfo]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
     #
@@ -3795,7 +3866,10 @@ module Aws::RDS
       :earliest_backtrack_time,
       :backtrack_window,
       :backtrack_consumed_change_records,
-      :enabled_cloudwatch_logs_exports)
+      :enabled_cloudwatch_logs_exports,
+      :capacity,
+      :engine_mode,
+      :scaling_configuration_info)
       include Aws::Structure
     end
 
@@ -3869,6 +3943,41 @@ module Aws::RDS
     class DBClusterBacktrackMessage < Struct.new(
       :marker,
       :db_cluster_backtracks)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_cluster_identifier
+    #   A user-supplied DB cluster identifier. This identifier is the unique
+    #   key that identifies a DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] pending_capacity
+    #   A value that specifies the capacity that the DB cluster scales to
+    #   next.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] current_capacity
+    #   The current capacity of the DB cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] seconds_before_timeout
+    #   The number of seconds before a call to
+    #   `ModifyCurrentDBClusterCapacity` times out.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timeout_action
+    #   The timeout action of a call to `ModifyCurrentDBClusterCapacity`,
+    #   either `ForceApplyCapacityChange` or `RollbackCapacityChange`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterCapacityInfo AWS API Documentation
+    #
+    class DBClusterCapacityInfo < Struct.new(
+      :db_cluster_identifier,
+      :pending_capacity,
+      :current_capacity,
+      :seconds_before_timeout,
+      :timeout_action)
       include Aws::Structure
     end
 
@@ -4067,11 +4176,15 @@ module Aws::RDS
     #     access other AWS services on your behalf.
     #   @return [String]
     #
+    # @!attribute [rw] feature_name
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterRole AWS API Documentation
     #
     class DBClusterRole < Struct.new(
       :role_arn,
-      :status)
+      :status,
+      :feature_name)
       include Aws::Structure
     end
 
@@ -4337,6 +4450,10 @@ module Aws::RDS
     #   replicas.
     #   @return [Boolean]
     #
+    # @!attribute [rw] supported_engine_modes
+    #   A list of the supported DB engine modes.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBEngineVersion AWS API Documentation
     #
     class DBEngineVersion < Struct.new(
@@ -4351,7 +4468,8 @@ module Aws::RDS
       :supported_timezones,
       :exportable_log_types,
       :supports_log_exports_to_cloudwatch_logs,
-      :supports_read_replica)
+      :supports_read_replica,
+      :supported_engine_modes)
       include Aws::Structure
     end
 
@@ -4547,20 +4665,6 @@ module Aws::RDS
     #   resolvable DNS name, which resolves to a public IP address. A value
     #   of false specifies an internal instance with a DNS name that
     #   resolves to a private IP address.
-    #
-    #   Default: The default behavior varies depending on whether a VPC has
-    #   been requested or not. The following list shows the default behavior
-    #   in each case.
-    #
-    #   * **Default VPC:**true
-    #
-    #   * **VPC:**false
-    #
-    #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance is
-    #   publicly accessible. If a specific DB subnet group has been
-    #   specified as part of the request and the PubliclyAccessible value
-    #   has not been set, the DB instance is private.
     #   @return [Boolean]
     #
     # @!attribute [rw] status_infos
@@ -4688,6 +4792,14 @@ module Aws::RDS
     # @!attribute [rw] enabled_cloudwatch_logs_exports
     #   A list of log types that this DB instance is configured to export to
     #   CloudWatch Logs.
+    #
+    #   Log types vary by DB engine. For information about the log types for
+    #   each DB engine, see [Amazon RDS Database Log Files][1] in the
+    #   *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] processor_features
@@ -4789,7 +4901,8 @@ module Aws::RDS
     #
     # @!attribute [rw] status
     #   Status of the DB instance. For a StatusType of read replica, the
-    #   values can be replicating, error, stopped, or terminated.
+    #   values can be replicating, replication stop point set, replication
+    #   stop point reached, error, stopped, or terminated.
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -8371,6 +8484,69 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ModifyCurrentDBClusterCapacityMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_identifier: "String", # required
+    #         capacity: 1,
+    #         seconds_before_timeout: 1,
+    #         timeout_action: "String",
+    #       }
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DB cluster identifier for the cluster being modified. This
+    #   parameter is not case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identifier of an existing DB cluster.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity
+    #   The DB cluster capacity.
+    #
+    #   Constraints:
+    #
+    #   * Value must be `2`, `4`, `8`, `16`, `32`, `64`, `128`, or `256`.
+    #
+    #   ^
+    #   @return [Integer]
+    #
+    # @!attribute [rw] seconds_before_timeout
+    #   The amount of time, in seconds, that Aurora Serverless tries to find
+    #   a scaling point to perform seamless scaling before enforcing the
+    #   timeout action. The default is 300.
+    #
+    #   * Value must be from 10 through 600.
+    #
+    #   ^
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timeout_action
+    #   The action to take when the timeout is reached, either
+    #   `ForceApplyCapacityChange` or `RollbackCapacityChange`.
+    #
+    #   `ForceApplyCapacityChange`, the default, drops connections to the DB
+    #   cluster and sets the capacity to the specified value as soon as
+    #   possible.
+    #
+    #   `RollbackCapacityChange` ignores the capacity change if a scaling
+    #   point is not found in the timeout period.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyCurrentDBClusterCapacityMessage AWS API Documentation
+    #
+    class ModifyCurrentDBClusterCapacityMessage < Struct.new(
+      :db_cluster_identifier,
+      :capacity,
+      :seconds_before_timeout,
+      :timeout_action)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ModifyDBClusterMessage
     #   data as a hash:
     #
@@ -8393,6 +8569,12 @@ module Aws::RDS
     #           disable_log_types: ["String"],
     #         },
     #         engine_version: "String",
+    #         scaling_configuration: {
+    #           min_capacity: 1,
+    #           max_capacity: 1,
+    #           auto_pause: false,
+    #           seconds_until_auto_pause: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -8573,6 +8755,11 @@ module Aws::RDS
     #   DescribeDBEngineVersions.
     #   @return [String]
     #
+    # @!attribute [rw] scaling_configuration
+    #   The scaling properties of the DB cluster. You can only modify
+    #   scaling properties for DB clusters in `serverless` DB engine mode.
+    #   @return [Types::ScalingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterMessage AWS API Documentation
     #
     class ModifyDBClusterMessage < Struct.new(
@@ -8590,7 +8777,8 @@ module Aws::RDS
       :enable_iam_database_authentication,
       :backtrack_window,
       :cloudwatch_logs_export_configuration,
-      :engine_version)
+      :engine_version,
+      :scaling_configuration)
       include Aws::Structure
     end
 
@@ -8611,6 +8799,7 @@ module Aws::RDS
     #             is_modifiable: false,
     #             minimum_engine_version: "String",
     #             apply_method: "immediate", # accepts immediate, pending-reboot
+    #             supported_engine_modes: ["String"],
     #           },
     #         ],
     #       }
@@ -9447,6 +9636,7 @@ module Aws::RDS
     #             is_modifiable: false,
     #             minimum_engine_version: "String",
     #             apply_method: "immediate", # accepts immediate, pending-reboot
+    #             supported_engine_modes: ["String"],
     #           },
     #         ],
     #       }
@@ -10384,6 +10574,10 @@ module Aws::RDS
     #   of a DB instance.
     #   @return [Array<Types::AvailableProcessorFeature>]
     #
+    # @!attribute [rw] supported_engine_modes
+    #   A list of the supported DB engine modes.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OrderableDBInstanceOption AWS API Documentation
     #
     class OrderableDBInstanceOption < Struct.new(
@@ -10407,7 +10601,8 @@ module Aws::RDS
       :max_iops_per_db_instance,
       :min_iops_per_gib,
       :max_iops_per_gib,
-      :available_processor_features)
+      :available_processor_features,
+      :supported_engine_modes)
       include Aws::Structure
     end
 
@@ -10454,6 +10649,7 @@ module Aws::RDS
     #         is_modifiable: false,
     #         minimum_engine_version: "String",
     #         apply_method: "immediate", # accepts immediate, pending-reboot
+    #         supported_engine_modes: ["String"],
     #       }
     #
     # @!attribute [rw] parameter_name
@@ -10498,6 +10694,10 @@ module Aws::RDS
     #   Indicates when to apply parameter updates.
     #   @return [String]
     #
+    # @!attribute [rw] supported_engine_modes
+    #   The valid DB engine modes.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Parameter AWS API Documentation
     #
     class Parameter < Struct.new(
@@ -10510,7 +10710,8 @@ module Aws::RDS
       :allowed_values,
       :is_modifiable,
       :minimum_engine_version,
-      :apply_method)
+      :apply_method,
+      :supported_engine_modes)
       include Aws::Structure
     end
 
@@ -11355,6 +11556,7 @@ module Aws::RDS
     #             is_modifiable: false,
     #             minimum_engine_version: "String",
     #             apply_method: "immediate", # accepts immediate, pending-reboot
+    #             supported_engine_modes: ["String"],
     #           },
     #         ],
     #       }
@@ -11403,6 +11605,7 @@ module Aws::RDS
     #             is_modifiable: false,
     #             minimum_engine_version: "String",
     #             apply_method: "immediate", # accepts immediate, pending-reboot
+    #             supported_engine_modes: ["String"],
     #           },
     #         ],
     #       }
@@ -11771,7 +11974,14 @@ module Aws::RDS
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB cluster is to export to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine
+    #   being used. For more information, see [Publishing Database Logs to
+    #   Amazon CloudWatch Logs ][1] in the *Amazon Relational Database
+    #   Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3Message AWS API Documentation
@@ -11845,6 +12055,13 @@ module Aws::RDS
     #         enable_iam_database_authentication: false,
     #         backtrack_window: 1,
     #         enable_cloudwatch_logs_exports: ["String"],
+    #         engine_mode: "String",
+    #         scaling_configuration: {
+    #           min_capacity: 1,
+    #           max_capacity: 1,
+    #           auto_pause: false,
+    #           seconds_until_auto_pause: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] availability_zones
@@ -11973,8 +12190,25 @@ module Aws::RDS
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB cluster is to export to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine
+    #   being used. For more information, see [Publishing Database Logs to
+    #   Amazon CloudWatch Logs ][1] in the *Amazon Relational Database
+    #   Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] engine_mode
+    #   The DB engine mode of the DB cluster, either `provisioned` or
+    #   `serverless`.
+    #   @return [String]
+    #
+    # @!attribute [rw] scaling_configuration
+    #   For DB clusters in `serverless` DB engine mode, the scaling
+    #   properties of the DB cluster.
+    #   @return [Types::ScalingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshotMessage AWS API Documentation
     #
@@ -11993,7 +12227,9 @@ module Aws::RDS
       :kms_key_id,
       :enable_iam_database_authentication,
       :backtrack_window,
-      :enable_cloudwatch_logs_exports)
+      :enable_cloudwatch_logs_exports,
+      :engine_mode,
+      :scaling_configuration)
       include Aws::Structure
     end
 
@@ -12191,7 +12427,14 @@ module Aws::RDS
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB cluster is to export to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine
+    #   being used. For more information, see [Publishing Database Logs to
+    #   Amazon CloudWatch Logs ][1] in the *Amazon Relational Database
+    #   Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTimeMessage AWS API Documentation
@@ -12349,21 +12592,8 @@ module Aws::RDS
     #   true specifies an Internet-facing instance with a publicly
     #   resolvable DNS name, which resolves to a public IP address. A value
     #   of false specifies an internal instance with a DNS name that
-    #   resolves to a private IP address.
-    #
-    #   Default: The default behavior varies depending on whether a VPC has
-    #   been requested or not. The following list shows the default behavior
-    #   in each case.
-    #
-    #   * **Default VPC:** true
-    #
-    #   * **VPC:** false
-    #
-    #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance is
-    #   publicly accessible. If a specific DB subnet group has been
-    #   specified as part of the request and the PubliclyAccessible value
-    #   has not been set, the DB instance is private.
+    #   resolves to a private IP address. For more information, see
+    #   CreateDBInstance.
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -12513,7 +12743,14 @@ module Aws::RDS
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB instance is to export to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine
+    #   being used. For more information, see [Publishing Database Logs to
+    #   Amazon CloudWatch Logs ][1] in the *Amazon Relational Database
+    #   Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #   @return [Array<String>]
     #
     # @!attribute [rw] processor_features
@@ -12841,8 +13078,12 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] publicly_accessible
-    #   Specifies whether the DB instance is publicly accessible or not. For
-    #   more information, see CreateDBInstance.
+    #   Specifies the accessibility options for the DB instance. A value of
+    #   true specifies an Internet-facing instance with a publicly
+    #   resolvable DNS name, which resolves to a public IP address. A value
+    #   of false specifies an internal instance with a DNS name that
+    #   resolves to a private IP address. For more information, see
+    #   CreateDBInstance.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
@@ -12979,7 +13220,14 @@ module Aws::RDS
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB instance is to export to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine
+    #   being used. For more information, see [Publishing Database Logs to
+    #   Amazon CloudWatch Logs ][1] in the *Amazon Relational Database
+    #   Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #   @return [Array<String>]
     #
     # @!attribute [rw] processor_features
@@ -13198,21 +13446,8 @@ module Aws::RDS
     #   true specifies an Internet-facing instance with a publicly
     #   resolvable DNS name, which resolves to a public IP address. A value
     #   of false specifies an internal instance with a DNS name that
-    #   resolves to a private IP address.
-    #
-    #   Default: The default behavior varies depending on whether a VPC has
-    #   been requested or not. The following list shows the default behavior
-    #   in each case.
-    #
-    #   * **Default VPC:**true
-    #
-    #   * **VPC:**false
-    #
-    #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance is
-    #   publicly accessible. If a specific DB subnet group has been
-    #   specified as part of the request and the PubliclyAccessible value
-    #   has not been set, the DB instance is private.
+    #   resolves to a private IP address. For more information, see
+    #   CreateDBInstance.
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -13352,7 +13587,14 @@ module Aws::RDS
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB instance is to export to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine
+    #   being used. For more information, see [Publishing Database Logs to
+    #   Amazon CloudWatch Logs ][1] in the *Amazon Relational Database
+    #   Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #   @return [Array<String>]
     #
     # @!attribute [rw] processor_features
@@ -13478,6 +13720,115 @@ module Aws::RDS
     #
     class RevokeDBSecurityGroupIngressResult < Struct.new(
       :db_security_group)
+      include Aws::Structure
+    end
+
+    # Contains the scaling configuration of an Aurora Serverless DB cluster.
+    #
+    # For more information, see [Using Amazon Aurora Serverless][1] in the
+    # *Amazon RDS User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/aurora-serverless.html
+    #
+    # @note When making an API call, you may pass ScalingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         min_capacity: 1,
+    #         max_capacity: 1,
+    #         auto_pause: false,
+    #         seconds_until_auto_pause: 1,
+    #       }
+    #
+    # @!attribute [rw] min_capacity
+    #   The minimum capacity for an Aurora DB cluster in `serverless` DB
+    #   engine mode.
+    #
+    #   Valid capacity values are `2`, `4`, `8`, `16`, `32`, `64`, `128`,
+    #   and `256`.
+    #
+    #   The minimum capacity must be less than or equal to the maximum
+    #   capacity.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_capacity
+    #   The maximum capacity for an Aurora DB cluster in `serverless` DB
+    #   engine mode.
+    #
+    #   Valid capacity values are `2`, `4`, `8`, `16`, `32`, `64`, `128`,
+    #   and `256`.
+    #
+    #   The maximum capacity must be greater than or equal to the minimum
+    #   capacity.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] auto_pause
+    #   A value that specifies whether to allow or disallow automatic pause
+    #   for an Aurora DB cluster in `serverless` DB engine mode. A DB
+    #   cluster can be paused only when it's idle (it has no connections).
+    #
+    #   <note markdown="1"> If a DB cluster is paused for more than seven days, the DB cluster
+    #   might be backed up with a snapshot. In this case, the DB cluster is
+    #   restored when there is a request to connect to it.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] seconds_until_auto_pause
+    #   The time, in seconds, before an Aurora DB cluster in `serverless`
+    #   mode is paused.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ScalingConfiguration AWS API Documentation
+    #
+    class ScalingConfiguration < Struct.new(
+      :min_capacity,
+      :max_capacity,
+      :auto_pause,
+      :seconds_until_auto_pause)
+      include Aws::Structure
+    end
+
+    # Shows the scaling configuration for an Aurora DB cluster in
+    # `serverless` DB engine mode.
+    #
+    # For more information, see [Using Amazon Aurora Serverless][1] in the
+    # *Amazon RDS User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/aurora-serverless.html
+    #
+    # @!attribute [rw] min_capacity
+    #   The maximum capacity for the Aurora DB cluster in `serverless` DB
+    #   engine mode.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_capacity
+    #   The maximum capacity for an Aurora DB cluster in `serverless` DB
+    #   engine mode.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] auto_pause
+    #   A value that indicates whether automatic pause is allowed for the
+    #   Aurora DB cluster in `serverless` DB engine mode.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] seconds_until_auto_pause
+    #   The remaining amount of time, in seconds, before the Aurora DB
+    #   cluster in `serverless` mode is paused. A DB cluster can be paused
+    #   only when it's idle (it has no connections).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ScalingConfigurationInfo AWS API Documentation
+    #
+    class ScalingConfigurationInfo < Struct.new(
+      :min_capacity,
+      :max_capacity,
+      :auto_pause,
+      :seconds_until_auto_pause)
       include Aws::Structure
     end
 

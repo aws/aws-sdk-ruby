@@ -297,9 +297,43 @@ module Aws::RDS
 
     # A list of log types that this DB cluster is configured to export to
     # CloudWatch Logs.
+    #
+    # Log types vary by DB engine. For information about the log types for
+    # each DB engine, see [Amazon RDS Database Log Files][1] in the *Amazon
+    # RDS User Guide.*
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html
     # @return [Array<String>]
     def enabled_cloudwatch_logs_exports
       data[:enabled_cloudwatch_logs_exports]
+    end
+
+    # @return [Integer]
+    def capacity
+      data[:capacity]
+    end
+
+    # The DB engine mode of the DB cluster, either `provisioned` or
+    # `serverless`.
+    # @return [String]
+    def engine_mode
+      data[:engine_mode]
+    end
+
+    # Shows the scaling configuration for an Aurora DB cluster in
+    # `serverless` DB engine mode.
+    #
+    # For more information, see [Using Amazon Aurora Serverless][1] in the
+    # *Amazon RDS User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/aurora-serverless.html
+    # @return [Types::ScalingConfigurationInfo]
+    def scaling_configuration_info
+      data[:scaling_configuration_info]
     end
 
     # @!endgroup
@@ -465,6 +499,13 @@ module Aws::RDS
     #     enable_iam_database_authentication: false,
     #     backtrack_window: 1,
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     engine_mode: "String",
+    #     scaling_configuration: {
+    #       min_capacity: 1,
+    #       max_capacity: 1,
+    #       auto_pause: false,
+    #       seconds_until_auto_pause: 1,
+    #     },
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -695,7 +736,20 @@ module Aws::RDS
     #   ^
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine being
+    #   used. For more information, see [Publishing Database Logs to Amazon
+    #   CloudWatch Logs ][1] in the *Amazon Relational Database Service User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    # @option options [String] :engine_mode
+    #   The DB engine mode of the DB cluster, either `provisioned` or
+    #   `serverless`.
+    # @option options [Types::ScalingConfiguration] :scaling_configuration
+    #   For DB clusters in `serverless` DB engine mode, the scaling properties
+    #   of the DB cluster.
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -838,6 +892,12 @@ module Aws::RDS
     #       disable_log_types: ["String"],
     #     },
     #     engine_version: "String",
+    #     scaling_configuration: {
+    #       min_capacity: 1,
+    #       max_capacity: 1,
+    #       auto_pause: false,
+    #       seconds_until_auto_pause: 1,
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [String] :new_db_cluster_identifier
@@ -977,6 +1037,9 @@ module Aws::RDS
     #
     #   For a list of valid engine versions, see CreateDBCluster, or call
     #   DescribeDBEngineVersions.
+    # @option options [Types::ScalingConfiguration] :scaling_configuration
+    #   The scaling properties of the DB cluster. You can only modify scaling
+    #   properties for DB clusters in `serverless` DB engine mode.
     # @return [DBCluster]
     def modify(options = {})
       options = options.merge(db_cluster_identifier: @id)
@@ -1132,7 +1195,14 @@ module Aws::RDS
     #   ^
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB cluster is to export to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine being
+    #   used. For more information, see [Publishing Database Logs to Amazon
+    #   CloudWatch Logs ][1] in the *Amazon Relational Database Service User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(source_db_cluster_identifier: @id)

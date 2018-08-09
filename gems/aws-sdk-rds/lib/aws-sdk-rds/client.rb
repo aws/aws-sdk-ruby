@@ -1709,7 +1709,22 @@ module Aws::RDS
     #
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine being
+    #   used. For more information, see [Publishing Database Logs to Amazon
+    #   CloudWatch Logs ][1] in the *Amazon Relational Database Service User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #
+    # @option params [String] :engine_mode
+    #   The DB engine mode of the DB cluster, either `provisioned` or
+    #   `serverless`.
+    #
+    # @option params [Types::ScalingConfiguration] :scaling_configuration
+    #   For DB clusters in `serverless` DB engine mode, the scaling properties
+    #   of the DB cluster.
     #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -1778,6 +1793,13 @@ module Aws::RDS
     #     enable_iam_database_authentication: false,
     #     backtrack_window: 1,
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     engine_mode: "String",
+    #     scaling_configuration: {
+    #       min_capacity: 1,
+    #       max_capacity: 1,
+    #       auto_pause: false,
+    #       seconds_until_auto_pause: 1,
+    #     },
     #     source_region: "String",
     #   })
     #
@@ -1827,6 +1849,7 @@ module Aws::RDS
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.associated_roles[0].feature_name #=> String
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
@@ -1835,6 +1858,12 @@ module Aws::RDS
     #   resp.db_cluster.backtrack_consumed_change_records #=> Integer
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.capacity #=> Integer
+    #   resp.db_cluster.engine_mode #=> String
+    #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
+    #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -2664,19 +2693,26 @@ module Aws::RDS
     #   specifies an internal instance with a DNS name that resolves to a
     #   private IP address.
     #
-    #   Default: The default behavior varies depending on whether a VPC has
-    #   been requested or not. The following list shows the default behavior
-    #   in each case.
+    #   Default: The default behavior varies depending on whether
+    #   `DBSubnetGroupName` is specified.
     #
-    #   * **Default VPC:** true
+    #   If `DBSubnetGroupName` is not specified, and `PubliclyAccessible` is
+    #   not specified, the following applies:
     #
-    #   * **VPC:** false
+    #   * If the default VPC in the target region doesn’t have an Internet
+    #     gateway attached to it, the DB instance is private.
     #
-    #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance is
-    #   publicly accessible. If a specific DB subnet group has been specified
-    #   as part of the request and the PubliclyAccessible value has not been
-    #   set, the DB instance is private.
+    #   * If the default VPC in the target region has an Internet gateway
+    #     attached to it, the DB instance is public.
+    #
+    #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` is not
+    #   specified, the following applies:
+    #
+    #   * If the subnets are part of a VPC that doesn’t have an Internet
+    #     gateway attached to it, the DB instance is private.
+    #
+    #   * If the subnets are part of a VPC that has an Internet gateway
+    #     attached to it, the DB instance is public.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
@@ -2841,7 +2877,14 @@ module Aws::RDS
     #
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine being
+    #   used. For more information, see [Publishing Database Logs to Amazon
+    #   CloudWatch Logs ][1] in the *Amazon Relational Database Service User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #
     # @option params [Array<Types::ProcessorFeature>] :processor_features
     #   The number of CPU cores and the number of threads per core for the DB
@@ -3157,21 +3200,7 @@ module Aws::RDS
     #   true specifies an Internet-facing instance with a publicly resolvable
     #   DNS name, which resolves to a public IP address. A value of false
     #   specifies an internal instance with a DNS name that resolves to a
-    #   private IP address.
-    #
-    #   Default: The default behavior varies depending on whether a VPC has
-    #   been requested or not. The following list shows the default behavior
-    #   in each case.
-    #
-    #   * **Default VPC:**true
-    #
-    #   * **VPC:**false
-    #
-    #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance is
-    #   publicly accessible. If a specific DB subnet group has been specified
-    #   as part of the request and the PubliclyAccessible value has not been
-    #   set, the DB instance is private.
+    #   private IP address. For more information, see CreateDBInstance.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
@@ -3355,7 +3384,13 @@ module Aws::RDS
     #
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the new DB instance is to export to CloudWatch
-    #   Logs.
+    #   Logs. The values in the list depend on the DB engine being used. For
+    #   more information, see [Publishing Database Logs to Amazon CloudWatch
+    #   Logs ][1] in the *Amazon Relational Database Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #
     # @option params [Array<Types::ProcessorFeature>] :processor_features
     #   The number of CPU cores and the number of threads per core for the DB
@@ -4362,6 +4397,7 @@ module Aws::RDS
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.associated_roles[0].feature_name #=> String
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
@@ -4370,6 +4406,12 @@ module Aws::RDS
     #   resp.db_cluster.backtrack_consumed_change_records #=> Integer
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.capacity #=> Integer
+    #   resp.db_cluster.engine_mode #=> String
+    #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
+    #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -5465,6 +5507,8 @@ module Aws::RDS
     #   resp.parameters[0].is_modifiable #=> Boolean
     #   resp.parameters[0].minimum_engine_version #=> String
     #   resp.parameters[0].apply_method #=> String, one of "immediate", "pending-reboot"
+    #   resp.parameters[0].supported_engine_modes #=> Array
+    #   resp.parameters[0].supported_engine_modes[0] #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterParameters AWS API Documentation
@@ -5834,6 +5878,7 @@ module Aws::RDS
     #   resp.db_clusters[0].associated_roles #=> Array
     #   resp.db_clusters[0].associated_roles[0].role_arn #=> String
     #   resp.db_clusters[0].associated_roles[0].status #=> String
+    #   resp.db_clusters[0].associated_roles[0].feature_name #=> String
     #   resp.db_clusters[0].iam_database_authentication_enabled #=> Boolean
     #   resp.db_clusters[0].clone_group_id #=> String
     #   resp.db_clusters[0].cluster_create_time #=> Time
@@ -5842,6 +5887,12 @@ module Aws::RDS
     #   resp.db_clusters[0].backtrack_consumed_change_records #=> Integer
     #   resp.db_clusters[0].enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_clusters[0].enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_clusters[0].capacity #=> Integer
+    #   resp.db_clusters[0].engine_mode #=> String
+    #   resp.db_clusters[0].scaling_configuration_info.min_capacity #=> Integer
+    #   resp.db_clusters[0].scaling_configuration_info.max_capacity #=> Integer
+    #   resp.db_clusters[0].scaling_configuration_info.auto_pause #=> Boolean
+    #   resp.db_clusters[0].scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusters AWS API Documentation
     #
@@ -5971,6 +6022,8 @@ module Aws::RDS
     #   resp.db_engine_versions[0].exportable_log_types[0] #=> String
     #   resp.db_engine_versions[0].supports_log_exports_to_cloudwatch_logs #=> Boolean
     #   resp.db_engine_versions[0].supports_read_replica #=> Boolean
+    #   resp.db_engine_versions[0].supported_engine_modes #=> Array
+    #   resp.db_engine_versions[0].supported_engine_modes[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersions AWS API Documentation
     #
@@ -6438,6 +6491,8 @@ module Aws::RDS
     #   resp.parameters[0].is_modifiable #=> Boolean
     #   resp.parameters[0].minimum_engine_version #=> String
     #   resp.parameters[0].apply_method #=> String, one of "immediate", "pending-reboot"
+    #   resp.parameters[0].supported_engine_modes #=> Array
+    #   resp.parameters[0].supported_engine_modes[0] #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBParameters AWS API Documentation
@@ -6933,6 +6988,8 @@ module Aws::RDS
     #   resp.engine_defaults.parameters[0].is_modifiable #=> Boolean
     #   resp.engine_defaults.parameters[0].minimum_engine_version #=> String
     #   resp.engine_defaults.parameters[0].apply_method #=> String, one of "immediate", "pending-reboot"
+    #   resp.engine_defaults.parameters[0].supported_engine_modes #=> Array
+    #   resp.engine_defaults.parameters[0].supported_engine_modes[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEngineDefaultClusterParameters AWS API Documentation
     #
@@ -7016,6 +7073,8 @@ module Aws::RDS
     #   resp.engine_defaults.parameters[0].is_modifiable #=> Boolean
     #   resp.engine_defaults.parameters[0].minimum_engine_version #=> String
     #   resp.engine_defaults.parameters[0].apply_method #=> String, one of "immediate", "pending-reboot"
+    #   resp.engine_defaults.parameters[0].supported_engine_modes #=> Array
+    #   resp.engine_defaults.parameters[0].supported_engine_modes[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEngineDefaultParameters AWS API Documentation
     #
@@ -7647,6 +7706,8 @@ module Aws::RDS
     #   resp.orderable_db_instance_options[0].available_processor_features[0].name #=> String
     #   resp.orderable_db_instance_options[0].available_processor_features[0].default_value #=> String
     #   resp.orderable_db_instance_options[0].available_processor_features[0].allowed_values #=> String
+    #   resp.orderable_db_instance_options[0].supported_engine_modes #=> Array
+    #   resp.orderable_db_instance_options[0].supported_engine_modes[0] #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOrderableDBInstanceOptions AWS API Documentation
@@ -8380,6 +8441,7 @@ module Aws::RDS
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.associated_roles[0].feature_name #=> String
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
@@ -8388,6 +8450,12 @@ module Aws::RDS
     #   resp.db_cluster.backtrack_consumed_change_records #=> Integer
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.capacity #=> Integer
+    #   resp.db_cluster.engine_mode #=> String
+    #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
+    #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -8460,6 +8528,103 @@ module Aws::RDS
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Set the capacity of an Aurora Serverless DB cluster to a specific
+    # value.
+    #
+    # Aurora Serverless scales seamlessly based on the workload on the DB
+    # cluster. In some cases, the capacity might not scale fast enough to
+    # meet a sudden change in workload, such as a large number of new
+    # transactions. Call `ModifyCurrentDBClusterCapacity` to set the
+    # capacity explicitly.
+    #
+    # After this call sets the DB cluster capacity, Aurora Serverless can
+    # automatically scale the DB cluster based on the cooldown period for
+    # scaling up and the cooldown period for scaling down.
+    #
+    # For more information about Aurora Serverless, see [Using Amazon Aurora
+    # Serverless][1] in the *Amazon RDS User Guide*.
+    #
+    # If you call `ModifyCurrentDBClusterCapacity` with the default
+    # `TimeoutAction`, connections to the DB cluster are dropped when the
+    # capacity is set.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/aurora-serverless.html
+    #
+    # @option params [required, String] :db_cluster_identifier
+    #   The DB cluster identifier for the cluster being modified. This
+    #   parameter is not case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identifier of an existing DB cluster.
+    #
+    #   ^
+    #
+    # @option params [Integer] :capacity
+    #   The DB cluster capacity.
+    #
+    #   Constraints:
+    #
+    #   * Value must be `2`, `4`, `8`, `16`, `32`, `64`, `128`, or `256`.
+    #
+    #   ^
+    #
+    # @option params [Integer] :seconds_before_timeout
+    #   The amount of time, in seconds, that Aurora Serverless tries to find a
+    #   scaling point to perform seamless scaling before enforcing the timeout
+    #   action. The default is 300.
+    #
+    #   * Value must be from 10 through 600.
+    #
+    #   ^
+    #
+    # @option params [String] :timeout_action
+    #   The action to take when the timeout is reached, either
+    #   `ForceApplyCapacityChange` or `RollbackCapacityChange`.
+    #
+    #   `ForceApplyCapacityChange`, the default, drops connections to the DB
+    #   cluster and sets the capacity to the specified value as soon as
+    #   possible.
+    #
+    #   `RollbackCapacityChange` ignores the capacity change if a scaling
+    #   point is not found in the timeout period.
+    #
+    # @return [Types::DBClusterCapacityInfo] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DBClusterCapacityInfo#db_cluster_identifier #db_cluster_identifier} => String
+    #   * {Types::DBClusterCapacityInfo#pending_capacity #pending_capacity} => Integer
+    #   * {Types::DBClusterCapacityInfo#current_capacity #current_capacity} => Integer
+    #   * {Types::DBClusterCapacityInfo#seconds_before_timeout #seconds_before_timeout} => Integer
+    #   * {Types::DBClusterCapacityInfo#timeout_action #timeout_action} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_current_db_cluster_capacity({
+    #     db_cluster_identifier: "String", # required
+    #     capacity: 1,
+    #     seconds_before_timeout: 1,
+    #     timeout_action: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_cluster_identifier #=> String
+    #   resp.pending_capacity #=> Integer
+    #   resp.current_capacity #=> Integer
+    #   resp.seconds_before_timeout #=> Integer
+    #   resp.timeout_action #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyCurrentDBClusterCapacity AWS API Documentation
+    #
+    # @overload modify_current_db_cluster_capacity(params = {})
+    # @param [Hash] params ({})
+    def modify_current_db_cluster_capacity(params = {}, options = {})
+      req = build_request(:modify_current_db_cluster_capacity, params)
       req.send_request(options)
     end
 
@@ -8634,6 +8799,10 @@ module Aws::RDS
     #   For a list of valid engine versions, see CreateDBCluster, or call
     #   DescribeDBEngineVersions.
     #
+    # @option params [Types::ScalingConfiguration] :scaling_configuration
+    #   The scaling properties of the DB cluster. You can only modify scaling
+    #   properties for DB clusters in `serverless` DB engine mode.
+    #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -8679,6 +8848,12 @@ module Aws::RDS
     #       disable_log_types: ["String"],
     #     },
     #     engine_version: "String",
+    #     scaling_configuration: {
+    #       min_capacity: 1,
+    #       max_capacity: 1,
+    #       auto_pause: false,
+    #       seconds_until_auto_pause: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -8727,6 +8902,7 @@ module Aws::RDS
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.associated_roles[0].feature_name #=> String
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
@@ -8735,6 +8911,12 @@ module Aws::RDS
     #   resp.db_cluster.backtrack_consumed_change_records #=> Integer
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.capacity #=> Integer
+    #   resp.db_cluster.engine_mode #=> String
+    #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
+    #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -8822,6 +9004,7 @@ module Aws::RDS
     #         is_modifiable: false,
     #         minimum_engine_version: "String",
     #         apply_method: "immediate", # accepts immediate, pending-reboot
+    #         supported_engine_modes: ["String"],
     #       },
     #     ],
     #   })
@@ -9789,6 +9972,7 @@ module Aws::RDS
     #         is_modifiable: false,
     #         minimum_engine_version: "String",
     #         apply_method: "immediate", # accepts immediate, pending-reboot
+    #         supported_engine_modes: ["String"],
     #       },
     #     ],
     #   })
@@ -10572,6 +10756,7 @@ module Aws::RDS
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.associated_roles[0].feature_name #=> String
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
@@ -10580,6 +10765,12 @@ module Aws::RDS
     #   resp.db_cluster.backtrack_consumed_change_records #=> Integer
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.capacity #=> Integer
+    #   resp.db_cluster.engine_mode #=> String
+    #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
+    #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -11069,6 +11260,7 @@ module Aws::RDS
     #         is_modifiable: false,
     #         minimum_engine_version: "String",
     #         apply_method: "immediate", # accepts immediate, pending-reboot
+    #         supported_engine_modes: ["String"],
     #       },
     #     ],
     #   })
@@ -11172,6 +11364,7 @@ module Aws::RDS
     #         is_modifiable: false,
     #         minimum_engine_version: "String",
     #         apply_method: "immediate", # accepts immediate, pending-reboot
+    #         supported_engine_modes: ["String"],
     #       },
     #     ],
     #   })
@@ -11426,7 +11619,14 @@ module Aws::RDS
     #
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB cluster is to export to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine being
+    #   used. For more information, see [Publishing Database Logs to Amazon
+    #   CloudWatch Logs ][1] in the *Amazon Relational Database Service User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #
     # @return [Types::RestoreDBClusterFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11515,6 +11715,7 @@ module Aws::RDS
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.associated_roles[0].feature_name #=> String
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
@@ -11523,6 +11724,12 @@ module Aws::RDS
     #   resp.db_cluster.backtrack_consumed_change_records #=> Integer
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.capacity #=> Integer
+    #   resp.db_cluster.engine_mode #=> String
+    #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
+    #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -11661,7 +11868,22 @@ module Aws::RDS
     #
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB cluster is to export to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine being
+    #   used. For more information, see [Publishing Database Logs to Amazon
+    #   CloudWatch Logs ][1] in the *Amazon Relational Database Service User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #
+    # @option params [String] :engine_mode
+    #   The DB engine mode of the DB cluster, either `provisioned` or
+    #   `serverless`.
+    #
+    # @option params [Types::ScalingConfiguration] :scaling_configuration
+    #   For DB clusters in `serverless` DB engine mode, the scaling properties
+    #   of the DB cluster.
     #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11707,6 +11929,13 @@ module Aws::RDS
     #     enable_iam_database_authentication: false,
     #     backtrack_window: 1,
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     engine_mode: "String",
+    #     scaling_configuration: {
+    #       min_capacity: 1,
+    #       max_capacity: 1,
+    #       auto_pause: false,
+    #       seconds_until_auto_pause: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -11755,6 +11984,7 @@ module Aws::RDS
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.associated_roles[0].feature_name #=> String
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
@@ -11763,6 +11993,12 @@ module Aws::RDS
     #   resp.db_cluster.backtrack_consumed_change_records #=> Integer
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.capacity #=> Integer
+    #   resp.db_cluster.engine_mode #=> String
+    #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
+    #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -11938,7 +12174,14 @@ module Aws::RDS
     #
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB cluster is to export to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine being
+    #   used. For more information, see [Publishing Database Logs to Amazon
+    #   CloudWatch Logs ][1] in the *Amazon Relational Database Service User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12031,6 +12274,7 @@ module Aws::RDS
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.associated_roles[0].feature_name #=> String
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
@@ -12039,6 +12283,12 @@ module Aws::RDS
     #   resp.db_cluster.backtrack_consumed_change_records #=> Integer
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.capacity #=> Integer
+    #   resp.db_cluster.engine_mode #=> String
+    #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
+    #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -12149,21 +12399,7 @@ module Aws::RDS
     #   true specifies an Internet-facing instance with a publicly resolvable
     #   DNS name, which resolves to a public IP address. A value of false
     #   specifies an internal instance with a DNS name that resolves to a
-    #   private IP address.
-    #
-    #   Default: The default behavior varies depending on whether a VPC has
-    #   been requested or not. The following list shows the default behavior
-    #   in each case.
-    #
-    #   * **Default VPC:** true
-    #
-    #   * **VPC:** false
-    #
-    #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance is
-    #   publicly accessible. If a specific DB subnet group has been specified
-    #   as part of the request and the PubliclyAccessible value has not been
-    #   set, the DB instance is private.
+    #   private IP address. For more information, see CreateDBInstance.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   Indicates that minor version upgrades are applied automatically to the
@@ -12297,7 +12533,14 @@ module Aws::RDS
     #
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB instance is to export to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine being
+    #   used. For more information, see [Publishing Database Logs to Amazon
+    #   CloudWatch Logs ][1] in the *Amazon Relational Database Service User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #
     # @option params [Array<Types::ProcessorFeature>] :processor_features
     #   The number of CPU cores and the number of threads per core for the DB
@@ -12759,8 +13002,11 @@ module Aws::RDS
     #   engine is used.
     #
     # @option params [Boolean] :publicly_accessible
-    #   Specifies whether the DB instance is publicly accessible or not. For
-    #   more information, see CreateDBInstance.
+    #   Specifies the accessibility options for the DB instance. A value of
+    #   true specifies an Internet-facing instance with a publicly resolvable
+    #   DNS name, which resolves to a public IP address. A value of false
+    #   specifies an internal instance with a DNS name that resolves to a
+    #   private IP address. For more information, see CreateDBInstance.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags to associate with this DB instance. For more
@@ -12880,7 +13126,14 @@ module Aws::RDS
     #
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB instance is to export to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine being
+    #   used. For more information, see [Publishing Database Logs to Amazon
+    #   CloudWatch Logs ][1] in the *Amazon Relational Database Service User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #
     # @option params [Array<Types::ProcessorFeature>] :processor_features
     #   The number of CPU cores and the number of threads per core for the DB
@@ -13177,21 +13430,7 @@ module Aws::RDS
     #   true specifies an Internet-facing instance with a publicly resolvable
     #   DNS name, which resolves to a public IP address. A value of false
     #   specifies an internal instance with a DNS name that resolves to a
-    #   private IP address.
-    #
-    #   Default: The default behavior varies depending on whether a VPC has
-    #   been requested or not. The following list shows the default behavior
-    #   in each case.
-    #
-    #   * **Default VPC:**true
-    #
-    #   * **VPC:**false
-    #
-    #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance is
-    #   publicly accessible. If a specific DB subnet group has been specified
-    #   as part of the request and the PubliclyAccessible value has not been
-    #   set, the DB instance is private.
+    #   private IP address. For more information, see CreateDBInstance.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   Indicates that minor version upgrades are applied automatically to the
@@ -13315,7 +13554,14 @@ module Aws::RDS
     #
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB instance is to export to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine being
+    #   used. For more information, see [Publishing Database Logs to Amazon
+    #   CloudWatch Logs ][1] in the *Amazon Relational Database Service User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #
     # @option params [Array<Types::ProcessorFeature>] :processor_features
     #   The number of CPU cores and the number of threads per core for the DB
@@ -13968,7 +14214,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

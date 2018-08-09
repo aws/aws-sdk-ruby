@@ -53,6 +53,13 @@ module Aws::RDS
     #     enable_iam_database_authentication: false,
     #     backtrack_window: 1,
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     engine_mode: "String",
+    #     scaling_configuration: {
+    #       min_capacity: 1,
+    #       max_capacity: 1,
+    #       auto_pause: false,
+    #       seconds_until_auto_pause: 1,
+    #     },
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -296,7 +303,20 @@ module Aws::RDS
     #   ^
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine being
+    #   used. For more information, see [Publishing Database Logs to Amazon
+    #   CloudWatch Logs ][1] in the *Amazon Relational Database Service User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    # @option options [String] :engine_mode
+    #   The DB engine mode of the DB cluster, either `provisioned` or
+    #   `serverless`.
+    # @option options [Types::ScalingConfiguration] :scaling_configuration
+    #   For DB clusters in `serverless` DB engine mode, the scaling properties
+    #   of the DB cluster.
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -995,19 +1015,26 @@ module Aws::RDS
     #   specifies an internal instance with a DNS name that resolves to a
     #   private IP address.
     #
-    #   Default: The default behavior varies depending on whether a VPC has
-    #   been requested or not. The following list shows the default behavior
-    #   in each case.
+    #   Default: The default behavior varies depending on whether
+    #   `DBSubnetGroupName` is specified.
     #
-    #   * **Default VPC:** true
+    #   If `DBSubnetGroupName` is not specified, and `PubliclyAccessible` is
+    #   not specified, the following applies:
     #
-    #   * **VPC:** false
+    #   * If the default VPC in the target region doesn’t have an Internet
+    #     gateway attached to it, the DB instance is private.
     #
-    #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance is
-    #   publicly accessible. If a specific DB subnet group has been specified
-    #   as part of the request and the PubliclyAccessible value has not been
-    #   set, the DB instance is private.
+    #   * If the default VPC in the target region has an Internet gateway
+    #     attached to it, the DB instance is public.
+    #
+    #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` is not
+    #   specified, the following applies:
+    #
+    #   * If the subnets are part of a VPC that doesn’t have an Internet
+    #     gateway attached to it, the DB instance is private.
+    #
+    #   * If the subnets are part of a VPC that has an Internet gateway
+    #     attached to it, the DB instance is public.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
     #   Resources][1].
@@ -1153,7 +1180,14 @@ module Aws::RDS
     #   Valid values are 7 or 731 (2 years).
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine being
+    #   used. For more information, see [Publishing Database Logs to Amazon
+    #   CloudWatch Logs ][1] in the *Amazon Relational Database Service User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     # @option options [Array<Types::ProcessorFeature>] :processor_features
     #   The number of CPU cores and the number of threads per core for the DB
     #   instance class of the DB instance.

@@ -85,6 +85,7 @@ module Aws::ECS
     DiscoverPollEndpointRequest = Shapes::StructureShape.new(name: 'DiscoverPollEndpointRequest')
     DiscoverPollEndpointResponse = Shapes::StructureShape.new(name: 'DiscoverPollEndpointResponse')
     DockerLabelsMap = Shapes::MapShape.new(name: 'DockerLabelsMap')
+    DockerVolumeConfiguration = Shapes::StructureShape.new(name: 'DockerVolumeConfiguration')
     Double = Shapes::FloatShape.new(name: 'Double')
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
     Failure = Shapes::StructureShape.new(name: 'Failure')
@@ -153,6 +154,7 @@ module Aws::ECS
     RunTaskRequest = Shapes::StructureShape.new(name: 'RunTaskRequest')
     RunTaskResponse = Shapes::StructureShape.new(name: 'RunTaskResponse')
     SchedulingStrategy = Shapes::StringShape.new(name: 'SchedulingStrategy')
+    Scope = Shapes::StringShape.new(name: 'Scope')
     ServerException = Shapes::StructureShape.new(name: 'ServerException')
     Service = Shapes::StructureShape.new(name: 'Service')
     ServiceEvent = Shapes::StructureShape.new(name: 'ServiceEvent')
@@ -170,6 +172,7 @@ module Aws::ECS
     StopTaskResponse = Shapes::StructureShape.new(name: 'StopTaskResponse')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
+    StringMap = Shapes::MapShape.new(name: 'StringMap')
     SubmitContainerStateChangeRequest = Shapes::StructureShape.new(name: 'SubmitContainerStateChangeRequest')
     SubmitContainerStateChangeResponse = Shapes::StructureShape.new(name: 'SubmitContainerStateChangeResponse')
     SubmitTaskStateChangeRequest = Shapes::StructureShape.new(name: 'SubmitTaskStateChangeRequest')
@@ -472,6 +475,13 @@ module Aws::ECS
 
     DockerLabelsMap.key = Shapes::ShapeRef.new(shape: String)
     DockerLabelsMap.value = Shapes::ShapeRef.new(shape: String)
+
+    DockerVolumeConfiguration.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "scope"))
+    DockerVolumeConfiguration.add_member(:autoprovision, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "autoprovision"))
+    DockerVolumeConfiguration.add_member(:driver, Shapes::ShapeRef.new(shape: String, location_name: "driver"))
+    DockerVolumeConfiguration.add_member(:driver_opts, Shapes::ShapeRef.new(shape: StringMap, location_name: "driverOpts"))
+    DockerVolumeConfiguration.add_member(:labels, Shapes::ShapeRef.new(shape: StringMap, location_name: "labels"))
+    DockerVolumeConfiguration.struct_class = Types::DockerVolumeConfiguration
 
     EnvironmentVariables.member = Shapes::ShapeRef.new(shape: KeyValuePair)
 
@@ -781,6 +791,9 @@ module Aws::ECS
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
+    StringMap.key = Shapes::ShapeRef.new(shape: String)
+    StringMap.value = Shapes::ShapeRef.new(shape: String)
+
     SubmitContainerStateChangeRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, location_name: "cluster"))
     SubmitContainerStateChangeRequest.add_member(:task, Shapes::ShapeRef.new(shape: String, location_name: "task"))
     SubmitContainerStateChangeRequest.add_member(:container_name, Shapes::ShapeRef.new(shape: String, location_name: "containerName"))
@@ -917,6 +930,7 @@ module Aws::ECS
 
     Volume.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     Volume.add_member(:host, Shapes::ShapeRef.new(shape: HostVolumeProperties, location_name: "host"))
+    Volume.add_member(:docker_volume_configuration, Shapes::ShapeRef.new(shape: DockerVolumeConfiguration, location_name: "dockerVolumeConfiguration"))
     Volume.struct_class = Types::Volume
 
     VolumeFrom.add_member(:source_container, Shapes::ShapeRef.new(shape: String, location_name: "sourceContainer"))

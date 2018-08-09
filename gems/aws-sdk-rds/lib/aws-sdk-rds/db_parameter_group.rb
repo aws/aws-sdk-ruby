@@ -304,6 +304,7 @@ module Aws::RDS
     #         is_modifiable: false,
     #         minimum_engine_version: "String",
     #         apply_method: "immediate", # accepts immediate, pending-reboot
+    #         supported_engine_modes: ["String"],
     #       },
     #     ],
     #   })
@@ -349,6 +350,7 @@ module Aws::RDS
     #         is_modifiable: false,
     #         minimum_engine_version: "String",
     #         apply_method: "immediate", # accepts immediate, pending-reboot
+    #         supported_engine_modes: ["String"],
     #       },
     #     ],
     #   })

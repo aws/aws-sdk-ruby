@@ -861,6 +861,10 @@ module Aws::ECS
     #
     #  </note>
     #
+    # If you attempt to create a new service with the same name as an
+    # existing service in either `ACTIVE` or `DRAINING` status, you will
+    # receive an error.
+    #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
     #   hosts the service to delete. If you do not specify a cluster, the
@@ -1218,6 +1222,13 @@ module Aws::ECS
     #   resp.task_definition.volumes #=> Array
     #   resp.task_definition.volumes[0].name #=> String
     #   resp.task_definition.volumes[0].host.source_path #=> String
+    #   resp.task_definition.volumes[0].docker_volume_configuration.scope #=> String, one of "task", "shared"
+    #   resp.task_definition.volumes[0].docker_volume_configuration.autoprovision #=> Boolean
+    #   resp.task_definition.volumes[0].docker_volume_configuration.driver #=> String
+    #   resp.task_definition.volumes[0].docker_volume_configuration.driver_opts #=> Hash
+    #   resp.task_definition.volumes[0].docker_volume_configuration.driver_opts["String"] #=> String
+    #   resp.task_definition.volumes[0].docker_volume_configuration.labels #=> Hash
+    #   resp.task_definition.volumes[0].docker_volume_configuration.labels["String"] #=> String
     #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
@@ -1825,6 +1836,13 @@ module Aws::ECS
     #   resp.task_definition.volumes #=> Array
     #   resp.task_definition.volumes[0].name #=> String
     #   resp.task_definition.volumes[0].host.source_path #=> String
+    #   resp.task_definition.volumes[0].docker_volume_configuration.scope #=> String, one of "task", "shared"
+    #   resp.task_definition.volumes[0].docker_volume_configuration.autoprovision #=> Boolean
+    #   resp.task_definition.volumes[0].docker_volume_configuration.driver #=> String
+    #   resp.task_definition.volumes[0].docker_volume_configuration.driver_opts #=> Hash
+    #   resp.task_definition.volumes[0].docker_volume_configuration.driver_opts["String"] #=> String
+    #   resp.task_definition.volumes[0].docker_volume_configuration.labels #=> Hash
+    #   resp.task_definition.volumes[0].docker_volume_configuration.labels["String"] #=> String
     #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
@@ -3286,6 +3304,17 @@ module Aws::ECS
     #         host: {
     #           source_path: "String",
     #         },
+    #         docker_volume_configuration: {
+    #           scope: "task", # accepts task, shared
+    #           autoprovision: false,
+    #           driver: "String",
+    #           driver_opts: {
+    #             "String" => "String",
+    #           },
+    #           labels: {
+    #             "String" => "String",
+    #           },
+    #         },
     #       },
     #     ],
     #     placement_constraints: [
@@ -3384,6 +3413,13 @@ module Aws::ECS
     #   resp.task_definition.volumes #=> Array
     #   resp.task_definition.volumes[0].name #=> String
     #   resp.task_definition.volumes[0].host.source_path #=> String
+    #   resp.task_definition.volumes[0].docker_volume_configuration.scope #=> String, one of "task", "shared"
+    #   resp.task_definition.volumes[0].docker_volume_configuration.autoprovision #=> Boolean
+    #   resp.task_definition.volumes[0].docker_volume_configuration.driver #=> String
+    #   resp.task_definition.volumes[0].docker_volume_configuration.driver_opts #=> Hash
+    #   resp.task_definition.volumes[0].docker_volume_configuration.driver_opts["String"] #=> String
+    #   resp.task_definition.volumes[0].docker_volume_configuration.labels #=> Hash
+    #   resp.task_definition.volumes[0].docker_volume_configuration.labels["String"] #=> String
     #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
@@ -4649,7 +4685,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
