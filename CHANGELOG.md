@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.106 (2018-08-10)
+------------------
+
 * Feature - Aws::MediaConvert - Updated the API, and documentation for AWS Elemental MediaConvert.
 
 * Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
