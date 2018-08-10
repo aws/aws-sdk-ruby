@@ -40,6 +40,7 @@ module BuildTools
           'Aws::Plugins::UserAgent',
           'Aws::Plugins::RegionalEndpoint',
           'Aws::Plugins::EndpointDiscovery',
+          'Aws::Plugins::EndpointDiscoveryErrors',
           'Aws::Plugins::CredentialsConfiguration'
         ]
       )

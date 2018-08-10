@@ -47,6 +47,7 @@ module AwsSdkCodeGenerator
         'Aws::Plugins::GlobalConfiguration' => "#{core_plugins}/global_configuration.rb",
         'Aws::Plugins::RegionalEndpoint' => "#{core_plugins}/regional_endpoint.rb",
         'Aws::Plugins::EndpointDiscovery' => "#{core_plugins}/endpoint_discovery.rb",
+        'Aws::Plugins::EndpointDiscoveryErrors' => "#{core_plugins}/endpoint_discovery_errors.rb",
         'Aws::Plugins::ResponsePaging' => "#{core_plugins}/response_paging.rb",
         'Aws::Plugins::StubResponses' => "#{core_plugins}/stub_responses.rb",
         'Aws::Plugins::IdempotencyToken' => "#{core_plugins}/idempotency_token.rb",

@@ -7,6 +7,7 @@ module Aws
         default: false,
         doc_type: 'Boolean',
         docstring: <<-DOCS) do |cfg|
+When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
         DOCS
         resolve_endpoint_discovery(cfg)
       end
@@ -15,6 +16,8 @@ module Aws
         default: 1000,
         doc_type: Integer,
         docstring: <<-DOCS
+Used for the maximum size limit of the LRU cache storing endpoints data
+for endpoint discovery enabled operations. Defaults to 1000.
         DOCS
       )
 
@@ -22,6 +25,9 @@ module Aws
         default: 60,
         doc_type: Integer,
         docstring: <<-DOCS
+When :endpoint_discovery and :active_endpoint_cache is enabled,
+Use this option to config the time interval in seconds for making
+requests fetching endpoints information. Defaults to 60 sec.
         DOCS
       )
 
@@ -35,6 +41,8 @@ module Aws
         default: false,
         doc_type: 'Boolean',
         docstring: <<-DOCS
+When set to `true`, a thread polling for endpoints will be running in
+backgrounds very 60 secs (default). Defaults to `false`.
         DOCS
       )
 
