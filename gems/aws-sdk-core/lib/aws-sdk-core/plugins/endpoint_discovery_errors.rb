@@ -16,7 +16,8 @@ module Aws
               status_code = response.context.http_response.status_code
               if endpoint_discovery_error?(error_name, status_code)
                 response.error = Errors::EndpointDiscoveryError.new 
-                context.config.endpoint_cache.delete(cache_key(context))
+                key = context.config.endpoint_cache.extract_key(context)
+                context.config.endpoint_cache.delete(key)
               end
             end
           end
@@ -33,18 +34,6 @@ module Aws
           error.is_a?(Errors::ServiceError) ?
           error.class.code :
           error.class.name.to_s
-        end
-
-        # TODO duplicate, can refactor
-        def cache_key(ctx)
-          parts = []
-          parts << ctx.config.credentials.access_key_id
-          ctx.operation.input.shape.members.inject(parts) do |p, (name, ref)|
-            p << ctx.params[name] if ref["endpointdiscoveryid"]
-            p
-          end
-          parts.insert(1, ctx.operation_name) if parts.size > 1
-          parts.join('_')
         end
 
       end

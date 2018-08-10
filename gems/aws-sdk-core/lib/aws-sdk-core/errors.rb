@@ -38,8 +38,8 @@ module Aws
     # that requires endpoints from endpoint discovery
     class EndpointDiscoveryError < RuntimeError
       def initialize(*args)
-        msg = 'Endpoint discovery failed for the operation, request'\
-          ' will keep failing until endpoint discovery succeed or :endpoint option is provided.'
+        msg = 'Endpoint discovery failed for the operation or discovered endpoint is not working, '\
+          'request will keep failing until endpoint discovery succeed or :endpoint option is provided.'
         super(msg)
       end
     end

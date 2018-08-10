@@ -47,8 +47,6 @@ backgrounds very 60 secs (default). Defaults to `false`.
       )
 
       def add_handlers(handlers, config)
-        # TODO consider which step what priority should this live? after param valid?
-        # # need to > 50
         handlers.add(Handler, priority: 90) if config.regional_endpoint
       end
 
@@ -80,7 +78,7 @@ backgrounds very 60 secs (default). Defaults to `false`.
 
         def _discover_endpoint(ctx, required)
           cache = ctx.config.endpoint_cache 
-          key = cache_key(ctx)
+          key = cache.extract_key(ctx)
 
           if required
             # required for the operation
@@ -121,16 +119,6 @@ backgrounds very 60 secs (default). Defaults to `false`.
           end
         end
 
-        def cache_key(ctx)
-          parts = []
-          parts << ctx.config.credentials.access_key_id
-          ctx.operation.input.shape.members.inject(parts) do |p, (name, ref)|
-            p << ctx.params[name] if ref["endpointdiscoveryid"]
-            p
-          end
-          parts.insert(1, ctx.operation_name) if parts.size > 1
-          parts.join('_')
-        end
       end
 
       private

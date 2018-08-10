@@ -42,6 +42,8 @@ module Aws
     end
 
     # checking whether an unexpired endpoint key exists in cache
+    # @param [String] key
+    # @return [Boolean]
     def key?(key)
       if @entries.key?(key) && (@entries[key].nil? || @entries[key].expired?)
         self.delete(key)
@@ -50,12 +52,13 @@ module Aws
     end
 
     # remove entry only
-    # # remove entry only
+    # @param [String] key
     def delete(key)
       @entries.delete(key)
     end
 
     # kill the old polling thread and remove it from pool
+    # @param [String] key
     def delete_polling_thread(key)
       Thread.kill(@pool[key]) if @pool.key?(key)
       @pool.delete(key)
@@ -63,6 +66,8 @@ module Aws
 
     # update cache with requests (using service endpoint operation)
     # to fetch endpoint list (with identifiers when available)
+    # @param [String] key
+    # @param [RequestContext] ctx
     def update(key, ctx)
       resp = _request_endpoint(ctx)
       if resp && resp.endpoints
@@ -70,7 +75,23 @@ module Aws
       end
     end
 
+    # extract the key to be used in the cache from request context
+    # @param [RequestContext] ctx
+    # @return [String]
+    def extract_key(ctx)
+      parts = []
+      parts << ctx.config.credentials.access_key_id
+      ctx.operation.input.shape.members.inject(parts) do |p, (name, ref)|
+        p << ctx.params[name] if ref["endpointdiscoveryid"]
+        p
+      end
+      parts.insert(1, ctx.operation_name) if parts.size > 1
+      parts.join('_')
+    end
+
     # update polling threads pool
+    # param [String] key
+    # param [Thread] thread
     def update_polling_pool(key, thread)
       @pool[key] = thread
     end
