@@ -8529,9 +8529,8 @@ module Aws::RDS
     #   The action to take when the timeout is reached, either
     #   `ForceApplyCapacityChange` or `RollbackCapacityChange`.
     #
-    #   `ForceApplyCapacityChange`, the default, drops connections to the DB
-    #   cluster and sets the capacity to the specified value as soon as
-    #   possible.
+    #   `ForceApplyCapacityChange`, the default, sets the capacity to the
+    #   specified value as soon as possible.
     #
     #   `RollbackCapacityChange` ignores the capacity change if a scaling
     #   point is not found in the timeout period.

@@ -350,6 +350,7 @@ module Aws::MediaConvert
     #               manifest_compression: "GZIP", # accepts GZIP, NONE
     #               manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #               min_buffer_time: 1,
+    #               min_final_segment_length: 1.0,
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1, # required
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -410,6 +411,7 @@ module Aws::MediaConvert
     #               },
     #               manifest_compression: "GZIP", # accepts GZIP, NONE
     #               manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
+    #               min_final_segment_length: 1.0,
     #               min_segment_length: 1, # required
     #               output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #               program_date_time: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -700,6 +702,7 @@ module Aws::MediaConvert
     #                     bitrate: 1,
     #                     codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                     codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
+    #                     dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                     entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #                     field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #                     flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -722,7 +725,11 @@ module Aws::MediaConvert
     #                     par_denominator: 1,
     #                     par_numerator: 1,
     #                     quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #                     rate_control_mode: "VBR", # accepts VBR, CBR
+    #                     qvbr_settings: {
+    #                       max_average_bitrate: 1,
+    #                       qvbr_quality_level: 1, # required
+    #                     },
+    #                     rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                     repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
     #                     scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                     slices: 1,
@@ -740,6 +747,7 @@ module Aws::MediaConvert
     #                     bitrate: 1,
     #                     codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_2, LEVEL_2_1, LEVEL_3, LEVEL_3_1, LEVEL_4, LEVEL_4_1, LEVEL_5, LEVEL_5_1, LEVEL_5_2, LEVEL_6, LEVEL_6_1, LEVEL_6_2
     #                     codec_profile: "MAIN_MAIN", # accepts MAIN_MAIN, MAIN_HIGH, MAIN10_MAIN, MAIN10_HIGH, MAIN_422_8BIT_MAIN, MAIN_422_8BIT_HIGH, MAIN_422_10BIT_MAIN, MAIN_422_10BIT_HIGH
+    #                     dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                     flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                     framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                     framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
@@ -760,7 +768,11 @@ module Aws::MediaConvert
     #                     par_denominator: 1,
     #                     par_numerator: 1,
     #                     quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #                     rate_control_mode: "VBR", # accepts VBR, CBR
+    #                     qvbr_settings: {
+    #                       max_average_bitrate: 1,
+    #                       qvbr_quality_level: 1, # required
+    #                     },
+    #                     rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                     sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
     #                     scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                     slices: 1,
@@ -778,6 +790,7 @@ module Aws::MediaConvert
     #                     bitrate: 1,
     #                     codec_level: "AUTO", # accepts AUTO, LOW, MAIN, HIGH1440, HIGH
     #                     codec_profile: "MAIN", # accepts MAIN, PROFILE_422
+    #                     dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                     framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                     framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
     #                     framerate_denominator: 1,
@@ -1025,6 +1038,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
@@ -1069,6 +1083,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.min_final_segment_length #=> Float
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.min_segment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "INCLUDE", "EXCLUDE"
@@ -1287,6 +1302,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -1309,7 +1325,9 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.slices #=> Integer
@@ -1325,6 +1343,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
@@ -1345,7 +1364,9 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.par_denominator #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.par_numerator #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.slices #=> Integer
@@ -1361,6 +1382,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.codec_level #=> String, one of "AUTO", "LOW", "MAIN", "HIGH1440", "HIGH"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.codec_profile #=> String, one of "MAIN", "PROFILE_422"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.framerate_denominator #=> Integer
@@ -1643,6 +1665,7 @@ module Aws::MediaConvert
     #               manifest_compression: "GZIP", # accepts GZIP, NONE
     #               manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #               min_buffer_time: 1,
+    #               min_final_segment_length: 1.0,
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1, # required
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -1703,6 +1726,7 @@ module Aws::MediaConvert
     #               },
     #               manifest_compression: "GZIP", # accepts GZIP, NONE
     #               manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
+    #               min_final_segment_length: 1.0,
     #               min_segment_length: 1, # required
     #               output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #               program_date_time: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -1993,6 +2017,7 @@ module Aws::MediaConvert
     #                     bitrate: 1,
     #                     codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                     codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
+    #                     dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                     entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #                     field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #                     flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -2015,7 +2040,11 @@ module Aws::MediaConvert
     #                     par_denominator: 1,
     #                     par_numerator: 1,
     #                     quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #                     rate_control_mode: "VBR", # accepts VBR, CBR
+    #                     qvbr_settings: {
+    #                       max_average_bitrate: 1,
+    #                       qvbr_quality_level: 1, # required
+    #                     },
+    #                     rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                     repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
     #                     scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                     slices: 1,
@@ -2033,6 +2062,7 @@ module Aws::MediaConvert
     #                     bitrate: 1,
     #                     codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_2, LEVEL_2_1, LEVEL_3, LEVEL_3_1, LEVEL_4, LEVEL_4_1, LEVEL_5, LEVEL_5_1, LEVEL_5_2, LEVEL_6, LEVEL_6_1, LEVEL_6_2
     #                     codec_profile: "MAIN_MAIN", # accepts MAIN_MAIN, MAIN_HIGH, MAIN10_MAIN, MAIN10_HIGH, MAIN_422_8BIT_MAIN, MAIN_422_8BIT_HIGH, MAIN_422_10BIT_MAIN, MAIN_422_10BIT_HIGH
+    #                     dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                     flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                     framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                     framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
@@ -2053,7 +2083,11 @@ module Aws::MediaConvert
     #                     par_denominator: 1,
     #                     par_numerator: 1,
     #                     quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #                     rate_control_mode: "VBR", # accepts VBR, CBR
+    #                     qvbr_settings: {
+    #                       max_average_bitrate: 1,
+    #                       qvbr_quality_level: 1, # required
+    #                     },
+    #                     rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                     sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
     #                     scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                     slices: 1,
@@ -2071,6 +2105,7 @@ module Aws::MediaConvert
     #                     bitrate: 1,
     #                     codec_level: "AUTO", # accepts AUTO, LOW, MAIN, HIGH1440, HIGH
     #                     codec_profile: "MAIN", # accepts MAIN, PROFILE_422
+    #                     dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                     framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                     framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
     #                     framerate_denominator: 1,
@@ -2311,6 +2346,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
@@ -2355,6 +2391,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.min_final_segment_length #=> Float
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.min_segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "INCLUDE", "EXCLUDE"
@@ -2573,6 +2610,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -2595,7 +2633,9 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.slices #=> Integer
@@ -2611,6 +2651,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
@@ -2631,7 +2672,9 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.par_denominator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.par_numerator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.slices #=> Integer
@@ -2647,6 +2690,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.codec_level #=> String, one of "AUTO", "LOW", "MAIN", "HIGH1440", "HIGH"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.codec_profile #=> String, one of "MAIN", "PROFILE_422"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.framerate_denominator #=> Integer
@@ -3038,6 +3082,7 @@ module Aws::MediaConvert
     #             bitrate: 1,
     #             codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #             codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
+    #             dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #             entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #             field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #             flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -3060,7 +3105,11 @@ module Aws::MediaConvert
     #             par_denominator: 1,
     #             par_numerator: 1,
     #             quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #             rate_control_mode: "VBR", # accepts VBR, CBR
+    #             qvbr_settings: {
+    #               max_average_bitrate: 1,
+    #               qvbr_quality_level: 1, # required
+    #             },
+    #             rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #             repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
     #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #             slices: 1,
@@ -3078,6 +3127,7 @@ module Aws::MediaConvert
     #             bitrate: 1,
     #             codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_2, LEVEL_2_1, LEVEL_3, LEVEL_3_1, LEVEL_4, LEVEL_4_1, LEVEL_5, LEVEL_5_1, LEVEL_5_2, LEVEL_6, LEVEL_6_1, LEVEL_6_2
     #             codec_profile: "MAIN_MAIN", # accepts MAIN_MAIN, MAIN_HIGH, MAIN10_MAIN, MAIN10_HIGH, MAIN_422_8BIT_MAIN, MAIN_422_8BIT_HIGH, MAIN_422_10BIT_MAIN, MAIN_422_10BIT_HIGH
+    #             dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #             flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
@@ -3098,7 +3148,11 @@ module Aws::MediaConvert
     #             par_denominator: 1,
     #             par_numerator: 1,
     #             quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #             rate_control_mode: "VBR", # accepts VBR, CBR
+    #             qvbr_settings: {
+    #               max_average_bitrate: 1,
+    #               qvbr_quality_level: 1, # required
+    #             },
+    #             rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #             sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
     #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #             slices: 1,
@@ -3116,6 +3170,7 @@ module Aws::MediaConvert
     #             bitrate: 1,
     #             codec_level: "AUTO", # accepts AUTO, LOW, MAIN, HIGH1440, HIGH
     #             codec_profile: "MAIN", # accepts MAIN, PROFILE_422
+    #             dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
     #             framerate_denominator: 1,
@@ -3442,6 +3497,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -3464,7 +3520,9 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
-    #   resp.preset.settings.video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.slices #=> Integer
@@ -3480,6 +3538,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
@@ -3500,7 +3559,9 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.par_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.par_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
-    #   resp.preset.settings.video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.slices #=> Integer
@@ -3516,6 +3577,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.codec_level #=> String, one of "AUTO", "LOW", "MAIN", "HIGH1440", "HIGH"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.codec_profile #=> String, one of "MAIN", "PROFILE_422"
+    #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.framerate_denominator #=> Integer
@@ -3888,6 +3950,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
@@ -3932,6 +3995,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.min_final_segment_length #=> Float
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.min_segment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "INCLUDE", "EXCLUDE"
@@ -4150,6 +4214,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -4172,7 +4237,9 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.slices #=> Integer
@@ -4188,6 +4255,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
@@ -4208,7 +4276,9 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.par_denominator #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.par_numerator #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.slices #=> Integer
@@ -4224,6 +4294,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.codec_level #=> String, one of "AUTO", "LOW", "MAIN", "HIGH1440", "HIGH"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.codec_profile #=> String, one of "MAIN", "PROFILE_422"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.framerate_denominator #=> Integer
@@ -4448,6 +4519,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
@@ -4492,6 +4564,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.min_final_segment_length #=> Float
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.min_segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "INCLUDE", "EXCLUDE"
@@ -4710,6 +4783,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -4732,7 +4806,9 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.slices #=> Integer
@@ -4748,6 +4824,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
@@ -4768,7 +4845,9 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.par_denominator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.par_numerator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.slices #=> Integer
@@ -4784,6 +4863,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.codec_level #=> String, one of "AUTO", "LOW", "MAIN", "HIGH1440", "HIGH"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.codec_profile #=> String, one of "MAIN", "PROFILE_422"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.framerate_denominator #=> Integer
@@ -5107,6 +5187,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -5129,7 +5210,9 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
-    #   resp.preset.settings.video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.slices #=> Integer
@@ -5145,6 +5228,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
@@ -5165,7 +5249,9 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.par_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.par_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
-    #   resp.preset.settings.video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.slices #=> Integer
@@ -5181,6 +5267,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.codec_level #=> String, one of "AUTO", "LOW", "MAIN", "HIGH1440", "HIGH"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.codec_profile #=> String, one of "MAIN", "PROFILE_422"
+    #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.framerate_denominator #=> Integer
@@ -5457,6 +5544,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
@@ -5501,6 +5589,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.min_final_segment_length #=> Float
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.min_segment_length #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "INCLUDE", "EXCLUDE"
@@ -5719,6 +5808,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -5741,7 +5831,9 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.slices #=> Integer
@@ -5757,6 +5849,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.bitrate #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
@@ -5777,7 +5870,9 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.par_denominator #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.par_numerator #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.slices #=> Integer
@@ -5793,6 +5888,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.bitrate #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.codec_level #=> String, one of "AUTO", "LOW", "MAIN", "HIGH1440", "HIGH"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.codec_profile #=> String, one of "MAIN", "PROFILE_422"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.framerate_denominator #=> Integer
@@ -6047,6 +6143,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
@@ -6091,6 +6188,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.min_final_segment_length #=> Float
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.min_segment_length #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "INCLUDE", "EXCLUDE"
@@ -6309,6 +6407,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -6331,7 +6430,9 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.slices #=> Integer
@@ -6347,6 +6448,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.bitrate #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
@@ -6367,7 +6469,9 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.par_denominator #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.par_numerator #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.slices #=> Integer
@@ -6383,6 +6487,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.bitrate #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.codec_level #=> String, one of "AUTO", "LOW", "MAIN", "HIGH1440", "HIGH"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.codec_profile #=> String, one of "MAIN", "PROFILE_422"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.framerate_denominator #=> Integer
@@ -6741,6 +6846,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
+    #   resp.presets[0].settings.video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -6763,7 +6869,9 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
-    #   resp.presets[0].settings.video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR"
+    #   resp.presets[0].settings.video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.slices #=> Integer
@@ -6779,6 +6887,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.bitrate #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
+    #   resp.presets[0].settings.video_description.codec_settings.h265_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
@@ -6799,7 +6908,9 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.par_denominator #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.par_numerator #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
-    #   resp.presets[0].settings.video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR"
+    #   resp.presets[0].settings.video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.slices #=> Integer
@@ -6815,6 +6926,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.mpeg_2_settings.bitrate #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.mpeg_2_settings.codec_level #=> String, one of "AUTO", "LOW", "MAIN", "HIGH1440", "HIGH"
     #   resp.presets[0].settings.video_description.codec_settings.mpeg_2_settings.codec_profile #=> String, one of "MAIN", "PROFILE_422"
+    #   resp.presets[0].settings.video_description.codec_settings.mpeg_2_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.presets[0].settings.video_description.codec_settings.mpeg_2_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.presets[0].settings.video_description.codec_settings.mpeg_2_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
     #   resp.presets[0].settings.video_description.codec_settings.mpeg_2_settings.framerate_denominator #=> Integer
@@ -7229,6 +7341,7 @@ module Aws::MediaConvert
     #               manifest_compression: "GZIP", # accepts GZIP, NONE
     #               manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #               min_buffer_time: 1,
+    #               min_final_segment_length: 1.0,
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1, # required
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -7289,6 +7402,7 @@ module Aws::MediaConvert
     #               },
     #               manifest_compression: "GZIP", # accepts GZIP, NONE
     #               manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
+    #               min_final_segment_length: 1.0,
     #               min_segment_length: 1, # required
     #               output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #               program_date_time: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -7579,6 +7693,7 @@ module Aws::MediaConvert
     #                     bitrate: 1,
     #                     codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                     codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
+    #                     dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                     entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #                     field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #                     flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -7601,7 +7716,11 @@ module Aws::MediaConvert
     #                     par_denominator: 1,
     #                     par_numerator: 1,
     #                     quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #                     rate_control_mode: "VBR", # accepts VBR, CBR
+    #                     qvbr_settings: {
+    #                       max_average_bitrate: 1,
+    #                       qvbr_quality_level: 1, # required
+    #                     },
+    #                     rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                     repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
     #                     scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                     slices: 1,
@@ -7619,6 +7738,7 @@ module Aws::MediaConvert
     #                     bitrate: 1,
     #                     codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_2, LEVEL_2_1, LEVEL_3, LEVEL_3_1, LEVEL_4, LEVEL_4_1, LEVEL_5, LEVEL_5_1, LEVEL_5_2, LEVEL_6, LEVEL_6_1, LEVEL_6_2
     #                     codec_profile: "MAIN_MAIN", # accepts MAIN_MAIN, MAIN_HIGH, MAIN10_MAIN, MAIN10_HIGH, MAIN_422_8BIT_MAIN, MAIN_422_8BIT_HIGH, MAIN_422_10BIT_MAIN, MAIN_422_10BIT_HIGH
+    #                     dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                     flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                     framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                     framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
@@ -7639,7 +7759,11 @@ module Aws::MediaConvert
     #                     par_denominator: 1,
     #                     par_numerator: 1,
     #                     quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #                     rate_control_mode: "VBR", # accepts VBR, CBR
+    #                     qvbr_settings: {
+    #                       max_average_bitrate: 1,
+    #                       qvbr_quality_level: 1, # required
+    #                     },
+    #                     rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                     sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
     #                     scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                     slices: 1,
@@ -7657,6 +7781,7 @@ module Aws::MediaConvert
     #                     bitrate: 1,
     #                     codec_level: "AUTO", # accepts AUTO, LOW, MAIN, HIGH1440, HIGH
     #                     codec_profile: "MAIN", # accepts MAIN, PROFILE_422
+    #                     dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                     framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                     framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
     #                     framerate_denominator: 1,
@@ -7894,6 +8019,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
@@ -7938,6 +8064,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.min_final_segment_length #=> Float
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.min_segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "INCLUDE", "EXCLUDE"
@@ -8156,6 +8283,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -8178,7 +8306,9 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.slices #=> Integer
@@ -8194,6 +8324,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
@@ -8214,7 +8345,9 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.par_denominator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.par_numerator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.slices #=> Integer
@@ -8230,6 +8363,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.codec_level #=> String, one of "AUTO", "LOW", "MAIN", "HIGH1440", "HIGH"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.codec_profile #=> String, one of "MAIN", "PROFILE_422"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.mpeg_2_settings.framerate_denominator #=> Integer
@@ -8615,6 +8749,7 @@ module Aws::MediaConvert
     #             bitrate: 1,
     #             codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #             codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
+    #             dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #             entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #             field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #             flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -8637,7 +8772,11 @@ module Aws::MediaConvert
     #             par_denominator: 1,
     #             par_numerator: 1,
     #             quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #             rate_control_mode: "VBR", # accepts VBR, CBR
+    #             qvbr_settings: {
+    #               max_average_bitrate: 1,
+    #               qvbr_quality_level: 1, # required
+    #             },
+    #             rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #             repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
     #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #             slices: 1,
@@ -8655,6 +8794,7 @@ module Aws::MediaConvert
     #             bitrate: 1,
     #             codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_2, LEVEL_2_1, LEVEL_3, LEVEL_3_1, LEVEL_4, LEVEL_4_1, LEVEL_5, LEVEL_5_1, LEVEL_5_2, LEVEL_6, LEVEL_6_1, LEVEL_6_2
     #             codec_profile: "MAIN_MAIN", # accepts MAIN_MAIN, MAIN_HIGH, MAIN10_MAIN, MAIN10_HIGH, MAIN_422_8BIT_MAIN, MAIN_422_8BIT_HIGH, MAIN_422_10BIT_MAIN, MAIN_422_10BIT_HIGH
+    #             dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #             flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
@@ -8675,7 +8815,11 @@ module Aws::MediaConvert
     #             par_denominator: 1,
     #             par_numerator: 1,
     #             quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #             rate_control_mode: "VBR", # accepts VBR, CBR
+    #             qvbr_settings: {
+    #               max_average_bitrate: 1,
+    #               qvbr_quality_level: 1, # required
+    #             },
+    #             rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #             sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
     #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #             slices: 1,
@@ -8693,6 +8837,7 @@ module Aws::MediaConvert
     #             bitrate: 1,
     #             codec_level: "AUTO", # accepts AUTO, LOW, MAIN, HIGH1440, HIGH
     #             codec_profile: "MAIN", # accepts MAIN, PROFILE_422
+    #             dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
     #             framerate_denominator: 1,
@@ -9016,6 +9161,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -9038,7 +9184,9 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
-    #   resp.preset.settings.video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.slices #=> Integer
@@ -9054,6 +9202,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
@@ -9074,7 +9223,9 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.par_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.par_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
-    #   resp.preset.settings.video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.slices #=> Integer
@@ -9090,6 +9241,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.codec_level #=> String, one of "AUTO", "LOW", "MAIN", "HIGH1440", "HIGH"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.codec_profile #=> String, one of "MAIN", "PROFILE_422"
+    #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.framerate_denominator #=> Integer
@@ -9254,7 +9406,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1484,6 +1484,7 @@ module Aws::MediaConvert
     #         manifest_compression: "GZIP", # accepts GZIP, NONE
     #         manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #         min_buffer_time: 1,
+    #         min_final_segment_length: 1.0,
     #         segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #         segment_length: 1, # required
     #         stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -1542,6 +1543,22 @@ module Aws::MediaConvert
     #   smooth playout.
     #   @return [Integer]
     #
+    # @!attribute [rw] min_final_segment_length
+    #   Keep this setting at the default value of 0, unless you are
+    #   troubleshooting a problem with how devices play back the end of your
+    #   video asset. If you know that player devices are hanging on the
+    #   final segment of your video because the length of your final segment
+    #   is too short, use this setting to specify a minimum final segment
+    #   length, in seconds. Choose a value that is greater than or equal to
+    #   1 and less than your segment length. When you specify a value for
+    #   this setting, the encoder will combine any final segment that is
+    #   shorter than the length that you specify with the previous segment.
+    #   For example, your segment length is 3 seconds and your final segment
+    #   is .5 seconds without a minimum final segment length; when you set
+    #   the minimum final segment length to 1, your final segment is 3.5
+    #   seconds.
+    #   @return [Float]
+    #
     # @!attribute [rw] segment_control
     #   When set to SINGLE\_FILE, a single output file is generated, which
     #   is internally segmented using the Fragment Length and Segment
@@ -1589,6 +1606,7 @@ module Aws::MediaConvert
       :manifest_compression,
       :manifest_duration_format,
       :min_buffer_time,
+      :min_final_segment_length,
       :segment_control,
       :segment_length,
       :stream_inf_resolution,
@@ -1941,6 +1959,7 @@ module Aws::MediaConvert
     #                   manifest_compression: "GZIP", # accepts GZIP, NONE
     #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                   min_buffer_time: 1,
+    #                   min_final_segment_length: 1.0,
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1, # required
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -2001,6 +2020,7 @@ module Aws::MediaConvert
     #                   },
     #                   manifest_compression: "GZIP", # accepts GZIP, NONE
     #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
+    #                   min_final_segment_length: 1.0,
     #                   min_segment_length: 1, # required
     #                   output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #                   program_date_time: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -2291,6 +2311,7 @@ module Aws::MediaConvert
     #                         bitrate: 1,
     #                         codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                         codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
+    #                         dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                         entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #                         field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #                         flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -2313,7 +2334,11 @@ module Aws::MediaConvert
     #                         par_denominator: 1,
     #                         par_numerator: 1,
     #                         quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #                         rate_control_mode: "VBR", # accepts VBR, CBR
+    #                         qvbr_settings: {
+    #                           max_average_bitrate: 1,
+    #                           qvbr_quality_level: 1, # required
+    #                         },
+    #                         rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                         repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
     #                         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                         slices: 1,
@@ -2331,6 +2356,7 @@ module Aws::MediaConvert
     #                         bitrate: 1,
     #                         codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_2, LEVEL_2_1, LEVEL_3, LEVEL_3_1, LEVEL_4, LEVEL_4_1, LEVEL_5, LEVEL_5_1, LEVEL_5_2, LEVEL_6, LEVEL_6_1, LEVEL_6_2
     #                         codec_profile: "MAIN_MAIN", # accepts MAIN_MAIN, MAIN_HIGH, MAIN10_MAIN, MAIN10_HIGH, MAIN_422_8BIT_MAIN, MAIN_422_8BIT_HIGH, MAIN_422_10BIT_MAIN, MAIN_422_10BIT_HIGH
+    #                         dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                         flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
@@ -2351,7 +2377,11 @@ module Aws::MediaConvert
     #                         par_denominator: 1,
     #                         par_numerator: 1,
     #                         quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #                         rate_control_mode: "VBR", # accepts VBR, CBR
+    #                         qvbr_settings: {
+    #                           max_average_bitrate: 1,
+    #                           qvbr_quality_level: 1, # required
+    #                         },
+    #                         rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                         sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
     #                         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                         slices: 1,
@@ -2369,6 +2399,7 @@ module Aws::MediaConvert
     #                         bitrate: 1,
     #                         codec_level: "AUTO", # accepts AUTO, LOW, MAIN, HIGH1440, HIGH
     #                         codec_profile: "MAIN", # accepts MAIN, PROFILE_422
+    #                         dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
     #                         framerate_denominator: 1,
@@ -2718,6 +2749,7 @@ module Aws::MediaConvert
     #                   manifest_compression: "GZIP", # accepts GZIP, NONE
     #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                   min_buffer_time: 1,
+    #                   min_final_segment_length: 1.0,
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1, # required
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -2778,6 +2810,7 @@ module Aws::MediaConvert
     #                   },
     #                   manifest_compression: "GZIP", # accepts GZIP, NONE
     #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
+    #                   min_final_segment_length: 1.0,
     #                   min_segment_length: 1, # required
     #                   output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #                   program_date_time: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -3068,6 +3101,7 @@ module Aws::MediaConvert
     #                         bitrate: 1,
     #                         codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                         codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
+    #                         dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                         entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #                         field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #                         flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -3090,7 +3124,11 @@ module Aws::MediaConvert
     #                         par_denominator: 1,
     #                         par_numerator: 1,
     #                         quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #                         rate_control_mode: "VBR", # accepts VBR, CBR
+    #                         qvbr_settings: {
+    #                           max_average_bitrate: 1,
+    #                           qvbr_quality_level: 1, # required
+    #                         },
+    #                         rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                         repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
     #                         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                         slices: 1,
@@ -3108,6 +3146,7 @@ module Aws::MediaConvert
     #                         bitrate: 1,
     #                         codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_2, LEVEL_2_1, LEVEL_3, LEVEL_3_1, LEVEL_4, LEVEL_4_1, LEVEL_5, LEVEL_5_1, LEVEL_5_2, LEVEL_6, LEVEL_6_1, LEVEL_6_2
     #                         codec_profile: "MAIN_MAIN", # accepts MAIN_MAIN, MAIN_HIGH, MAIN10_MAIN, MAIN10_HIGH, MAIN_422_8BIT_MAIN, MAIN_422_8BIT_HIGH, MAIN_422_10BIT_MAIN, MAIN_422_10BIT_HIGH
+    #                         dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                         flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
@@ -3128,7 +3167,11 @@ module Aws::MediaConvert
     #                         par_denominator: 1,
     #                         par_numerator: 1,
     #                         quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #                         rate_control_mode: "VBR", # accepts VBR, CBR
+    #                         qvbr_settings: {
+    #                           max_average_bitrate: 1,
+    #                           qvbr_quality_level: 1, # required
+    #                         },
+    #                         rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                         sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
     #                         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                         slices: 1,
@@ -3146,6 +3189,7 @@ module Aws::MediaConvert
     #                         bitrate: 1,
     #                         codec_level: "AUTO", # accepts AUTO, LOW, MAIN, HIGH1440, HIGH
     #                         codec_profile: "MAIN", # accepts MAIN, PROFILE_422
+    #                         dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
     #                         framerate_denominator: 1,
@@ -3607,6 +3651,7 @@ module Aws::MediaConvert
     #                 bitrate: 1,
     #                 codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                 codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
+    #                 dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                 entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #                 field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #                 flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -3629,7 +3674,11 @@ module Aws::MediaConvert
     #                 par_denominator: 1,
     #                 par_numerator: 1,
     #                 quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #                 rate_control_mode: "VBR", # accepts VBR, CBR
+    #                 qvbr_settings: {
+    #                   max_average_bitrate: 1,
+    #                   qvbr_quality_level: 1, # required
+    #                 },
+    #                 rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                 repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
     #                 scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                 slices: 1,
@@ -3647,6 +3696,7 @@ module Aws::MediaConvert
     #                 bitrate: 1,
     #                 codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_2, LEVEL_2_1, LEVEL_3, LEVEL_3_1, LEVEL_4, LEVEL_4_1, LEVEL_5, LEVEL_5_1, LEVEL_5_2, LEVEL_6, LEVEL_6_1, LEVEL_6_2
     #                 codec_profile: "MAIN_MAIN", # accepts MAIN_MAIN, MAIN_HIGH, MAIN10_MAIN, MAIN10_HIGH, MAIN_422_8BIT_MAIN, MAIN_422_8BIT_HIGH, MAIN_422_10BIT_MAIN, MAIN_422_10BIT_HIGH
+    #                 dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                 flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
@@ -3667,7 +3717,11 @@ module Aws::MediaConvert
     #                 par_denominator: 1,
     #                 par_numerator: 1,
     #                 quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #                 rate_control_mode: "VBR", # accepts VBR, CBR
+    #                 qvbr_settings: {
+    #                   max_average_bitrate: 1,
+    #                   qvbr_quality_level: 1, # required
+    #                 },
+    #                 rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                 sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
     #                 scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                 slices: 1,
@@ -3685,6 +3739,7 @@ module Aws::MediaConvert
     #                 bitrate: 1,
     #                 codec_level: "AUTO", # accepts AUTO, LOW, MAIN, HIGH1440, HIGH
     #                 codec_profile: "MAIN", # accepts MAIN, PROFILE_422
+    #                 dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
     #                 framerate_denominator: 1,
@@ -5000,6 +5055,46 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Settings for quality-defined variable bitrate encoding with the H.264
+    # codec. Required when you set Rate control mode to QVBR. Not valid when
+    # you set Rate control mode to a value other than QVBR, or when you
+    # don't define Rate control mode.
+    #
+    # @note When making an API call, you may pass H264QvbrSettings
+    #   data as a hash:
+    #
+    #       {
+    #         max_average_bitrate: 1,
+    #         qvbr_quality_level: 1, # required
+    #       }
+    #
+    # @!attribute [rw] max_average_bitrate
+    #   Use this setting only when Rate control mode is QVBR and Quality
+    #   tuning level is Multi-pass HQ. For Max average bitrate values suited
+    #   to the complexity of your input video, the service limits the
+    #   average bitrate of the video part of this output to the value you
+    #   choose. That is, the total size of the video element is less than or
+    #   equal to the value you set multiplied by the number of seconds of
+    #   encoded output.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] qvbr_quality_level
+    #   Required when you use QVBR rate control mode. That is, when you
+    #   specify qvbrSettings within h264Settings. Specify the target quality
+    #   level for this output, from 1 to 10. Use higher numbers for greater
+    #   quality. Level 10 results in nearly lossless compression. The
+    #   quality level for most broadcast-quality transcodes is between 6 and
+    #   9.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/H264QvbrSettings AWS API Documentation
+    #
+    class H264QvbrSettings < Struct.new(
+      :max_average_bitrate,
+      :qvbr_quality_level)
+      include Aws::Structure
+    end
+
     # Required when you set (Codec) under (VideoDescription)>(CodecSettings)
     # to the value H\_264.
     #
@@ -5011,6 +5106,7 @@ module Aws::MediaConvert
     #         bitrate: 1,
     #         codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #         codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
+    #         dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #         entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #         field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #         flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -5033,7 +5129,11 @@ module Aws::MediaConvert
     #         par_denominator: 1,
     #         par_numerator: 1,
     #         quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #         rate_control_mode: "VBR", # accepts VBR, CBR
+    #         qvbr_settings: {
+    #           max_average_bitrate: 1,
+    #           qvbr_quality_level: 1, # required
+    #         },
+    #         rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #         repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
     #         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #         slices: 1,
@@ -5064,6 +5164,16 @@ module Aws::MediaConvert
     # @!attribute [rw] codec_profile
     #   H.264 Profile. High 4:2:2 and 10-bit profiles are only available
     #   with the AVC-I License.
+    #   @return [String]
+    #
+    # @!attribute [rw] dynamic_sub_gop
+    #   Choose Adaptive to improve subjective video quality for high-motion
+    #   content. This will cause the service to use fewer B-frames (which
+    #   infer information based on other frames) for high-motion portions of
+    #   the video and more B-frames for low-motion portions. The maximum
+    #   number of B-frames is limited by the value you provide for the
+    #   setting B frames between reference frames
+    #   (numberBFramesBetweenReferenceFrames).
     #   @return [String]
     #
     # @!attribute [rw] entropy_encoding
@@ -5167,7 +5277,7 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] max_bitrate
     #   Maximum bitrate in bits/second. For example, enter five megabits per
-    #   second as 5000000.
+    #   second as 5000000. Required when Rate control mode is QVBR.
     #   @return [Integer]
     #
     # @!attribute [rw] min_i_interval
@@ -5210,9 +5320,17 @@ module Aws::MediaConvert
     #   high-quality multipass video encoding.
     #   @return [String]
     #
+    # @!attribute [rw] qvbr_settings
+    #   Settings for quality-defined variable bitrate encoding with the
+    #   H.264 codec. Required when you set Rate control mode to QVBR. Not
+    #   valid when you set Rate control mode to a value other than QVBR, or
+    #   when you don't define Rate control mode.
+    #   @return [Types::H264QvbrSettings]
+    #
     # @!attribute [rw] rate_control_mode
     #   Use this setting to specify whether this output has a variable
-    #   bitrate (VBR) or constant bitrate (CBR).
+    #   bitrate (VBR), constant bitrate (CBR) or quality-defined variable
+    #   bitrate (QVBR).
     #   @return [String]
     #
     # @!attribute [rw] repeat_pps
@@ -5276,6 +5394,7 @@ module Aws::MediaConvert
       :bitrate,
       :codec_level,
       :codec_profile,
+      :dynamic_sub_gop,
       :entropy_encoding,
       :field_encoding,
       :flicker_adaptive_quantization,
@@ -5298,6 +5417,7 @@ module Aws::MediaConvert
       :par_denominator,
       :par_numerator,
       :quality_tuning_level,
+      :qvbr_settings,
       :rate_control_mode,
       :repeat_pps,
       :scene_change_detect,
@@ -5312,6 +5432,46 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Settings for quality-defined variable bitrate encoding with the H.265
+    # codec. Required when you set Rate control mode to QVBR. Not valid when
+    # you set Rate control mode to a value other than QVBR, or when you
+    # don't define Rate control mode.
+    #
+    # @note When making an API call, you may pass H265QvbrSettings
+    #   data as a hash:
+    #
+    #       {
+    #         max_average_bitrate: 1,
+    #         qvbr_quality_level: 1, # required
+    #       }
+    #
+    # @!attribute [rw] max_average_bitrate
+    #   Use this setting only when Rate control mode is QVBR and Quality
+    #   tuning level is Multi-pass HQ. For Max average bitrate values suited
+    #   to the complexity of your input video, the service limits the
+    #   average bitrate of the video part of this output to the value you
+    #   choose. That is, the total size of the video element is less than or
+    #   equal to the value you set multiplied by the number of seconds of
+    #   encoded output.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] qvbr_quality_level
+    #   Required when you use QVBR rate control mode. That is, when you
+    #   specify qvbrSettings within h265Settings. Specify the target quality
+    #   level for this output, from 1 to 10. Use higher numbers for greater
+    #   quality. Level 10 results in nearly lossless compression. The
+    #   quality level for most broadcast-quality transcodes is between 6 and
+    #   9.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/H265QvbrSettings AWS API Documentation
+    #
+    class H265QvbrSettings < Struct.new(
+      :max_average_bitrate,
+      :qvbr_quality_level)
+      include Aws::Structure
+    end
+
     # Settings for H265 codec
     #
     # @note When making an API call, you may pass H265Settings
@@ -5323,6 +5483,7 @@ module Aws::MediaConvert
     #         bitrate: 1,
     #         codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_2, LEVEL_2_1, LEVEL_3, LEVEL_3_1, LEVEL_4, LEVEL_4_1, LEVEL_5, LEVEL_5_1, LEVEL_5_2, LEVEL_6, LEVEL_6_1, LEVEL_6_2
     #         codec_profile: "MAIN_MAIN", # accepts MAIN_MAIN, MAIN_HIGH, MAIN10_MAIN, MAIN10_HIGH, MAIN_422_8BIT_MAIN, MAIN_422_8BIT_HIGH, MAIN_422_10BIT_MAIN, MAIN_422_10BIT_HIGH
+    #         dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #         flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
@@ -5343,7 +5504,11 @@ module Aws::MediaConvert
     #         par_denominator: 1,
     #         par_numerator: 1,
     #         quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #         rate_control_mode: "VBR", # accepts VBR, CBR
+    #         qvbr_settings: {
+    #           max_average_bitrate: 1,
+    #           qvbr_quality_level: 1, # required
+    #         },
+    #         rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #         sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
     #         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #         slices: 1,
@@ -5382,6 +5547,16 @@ module Aws::MediaConvert
     #   Selections are grouped as \[Profile\] / \[Tier\], so "Main/High"
     #   represents Main Profile with High Tier. 4:2:2 profiles are only
     #   available with the HEVC 4:2:2 License.
+    #   @return [String]
+    #
+    # @!attribute [rw] dynamic_sub_gop
+    #   Choose Adaptive to improve subjective video quality for high-motion
+    #   content. This will cause the service to use fewer B-frames (which
+    #   infer information based on other frames) for high-motion portions of
+    #   the video and more B-frames for low-motion portions. The maximum
+    #   number of B-frames is limited by the value you provide for the
+    #   setting B frames between reference frames
+    #   (numberBFramesBetweenReferenceFrames).
     #   @return [String]
     #
     # @!attribute [rw] flicker_adaptive_quantization
@@ -5469,7 +5644,8 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] max_bitrate
-    #   Maximum bitrate in bits/second.
+    #   Maximum bitrate in bits/second. For example, enter five megabits per
+    #   second as 5000000. Required when Rate control mode is QVBR.
     #   @return [Integer]
     #
     # @!attribute [rw] min_i_interval
@@ -5512,9 +5688,17 @@ module Aws::MediaConvert
     #   high-quality multipass video encoding.
     #   @return [String]
     #
+    # @!attribute [rw] qvbr_settings
+    #   Settings for quality-defined variable bitrate encoding with the
+    #   H.265 codec. Required when you set Rate control mode to QVBR. Not
+    #   valid when you set Rate control mode to a value other than QVBR, or
+    #   when you don't define Rate control mode.
+    #   @return [Types::H265QvbrSettings]
+    #
     # @!attribute [rw] rate_control_mode
     #   Use this setting to specify whether this output has a variable
-    #   bitrate (VBR) or constant bitrate (CBR).
+    #   bitrate (VBR), constant bitrate (CBR) or quality-defined variable
+    #   bitrate (QVBR).
     #   @return [String]
     #
     # @!attribute [rw] sample_adaptive_offset_filter_mode
@@ -5597,6 +5781,7 @@ module Aws::MediaConvert
       :bitrate,
       :codec_level,
       :codec_profile,
+      :dynamic_sub_gop,
       :flicker_adaptive_quantization,
       :framerate_control,
       :framerate_conversion_algorithm,
@@ -5617,6 +5802,7 @@ module Aws::MediaConvert
       :par_denominator,
       :par_numerator,
       :quality_tuning_level,
+      :qvbr_settings,
       :rate_control_mode,
       :sample_adaptive_offset_filter_mode,
       :scene_change_detect,
@@ -5900,6 +6086,7 @@ module Aws::MediaConvert
     #         },
     #         manifest_compression: "GZIP", # accepts GZIP, NONE
     #         manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
+    #         min_final_segment_length: 1.0,
     #         min_segment_length: 1, # required
     #         output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #         program_date_time: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -5976,6 +6163,22 @@ module Aws::MediaConvert
     #   values for segment duration.
     #   @return [String]
     #
+    # @!attribute [rw] min_final_segment_length
+    #   Keep this setting at the default value of 0, unless you are
+    #   troubleshooting a problem with how devices play back the end of your
+    #   video asset. If you know that player devices are hanging on the
+    #   final segment of your video because the length of your final segment
+    #   is too short, use this setting to specify a minimum final segment
+    #   length, in seconds. Choose a value that is greater than or equal to
+    #   1 and less than your segment length. When you specify a value for
+    #   this setting, the encoder will combine any final segment that is
+    #   shorter than the length that you specify with the previous segment.
+    #   For example, your segment length is 3 seconds and your final segment
+    #   is .5 seconds without a minimum final segment length; when you set
+    #   the minimum final segment length to 1, your final segment is 3.5
+    #   seconds.
+    #   @return [Float]
+    #
     # @!attribute [rw] min_segment_length
     #   When set, Minimum Segment Size is enforced by looking ahead and back
     #   within the specified range for a nearby avail and extending the
@@ -6049,6 +6252,7 @@ module Aws::MediaConvert
       :encryption,
       :manifest_compression,
       :manifest_duration_format,
+      :min_final_segment_length,
       :min_segment_length,
       :output_selection,
       :program_date_time,
@@ -6974,6 +7178,7 @@ module Aws::MediaConvert
     #                 manifest_compression: "GZIP", # accepts GZIP, NONE
     #                 manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                 min_buffer_time: 1,
+    #                 min_final_segment_length: 1.0,
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                 segment_length: 1, # required
     #                 stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -7034,6 +7239,7 @@ module Aws::MediaConvert
     #                 },
     #                 manifest_compression: "GZIP", # accepts GZIP, NONE
     #                 manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
+    #                 min_final_segment_length: 1.0,
     #                 min_segment_length: 1, # required
     #                 output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #                 program_date_time: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -7324,6 +7530,7 @@ module Aws::MediaConvert
     #                       bitrate: 1,
     #                       codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                       codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
+    #                       dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                       entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #                       field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #                       flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -7346,7 +7553,11 @@ module Aws::MediaConvert
     #                       par_denominator: 1,
     #                       par_numerator: 1,
     #                       quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #                       rate_control_mode: "VBR", # accepts VBR, CBR
+    #                       qvbr_settings: {
+    #                         max_average_bitrate: 1,
+    #                         qvbr_quality_level: 1, # required
+    #                       },
+    #                       rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                       repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
     #                       scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                       slices: 1,
@@ -7364,6 +7575,7 @@ module Aws::MediaConvert
     #                       bitrate: 1,
     #                       codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_2, LEVEL_2_1, LEVEL_3, LEVEL_3_1, LEVEL_4, LEVEL_4_1, LEVEL_5, LEVEL_5_1, LEVEL_5_2, LEVEL_6, LEVEL_6_1, LEVEL_6_2
     #                       codec_profile: "MAIN_MAIN", # accepts MAIN_MAIN, MAIN_HIGH, MAIN10_MAIN, MAIN10_HIGH, MAIN_422_8BIT_MAIN, MAIN_422_8BIT_HIGH, MAIN_422_10BIT_MAIN, MAIN_422_10BIT_HIGH
+    #                       dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                       flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
@@ -7384,7 +7596,11 @@ module Aws::MediaConvert
     #                       par_denominator: 1,
     #                       par_numerator: 1,
     #                       quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #                       rate_control_mode: "VBR", # accepts VBR, CBR
+    #                       qvbr_settings: {
+    #                         max_average_bitrate: 1,
+    #                         qvbr_quality_level: 1, # required
+    #                       },
+    #                       rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                       sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
     #                       scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                       slices: 1,
@@ -7402,6 +7618,7 @@ module Aws::MediaConvert
     #                       bitrate: 1,
     #                       codec_level: "AUTO", # accepts AUTO, LOW, MAIN, HIGH1440, HIGH
     #                       codec_profile: "MAIN", # accepts MAIN, PROFILE_422
+    #                       dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
     #                       framerate_denominator: 1,
@@ -7801,6 +8018,7 @@ module Aws::MediaConvert
     #                 manifest_compression: "GZIP", # accepts GZIP, NONE
     #                 manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                 min_buffer_time: 1,
+    #                 min_final_segment_length: 1.0,
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                 segment_length: 1, # required
     #                 stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -7861,6 +8079,7 @@ module Aws::MediaConvert
     #                 },
     #                 manifest_compression: "GZIP", # accepts GZIP, NONE
     #                 manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
+    #                 min_final_segment_length: 1.0,
     #                 min_segment_length: 1, # required
     #                 output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #                 program_date_time: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -8151,6 +8370,7 @@ module Aws::MediaConvert
     #                       bitrate: 1,
     #                       codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                       codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
+    #                       dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                       entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #                       field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #                       flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -8173,7 +8393,11 @@ module Aws::MediaConvert
     #                       par_denominator: 1,
     #                       par_numerator: 1,
     #                       quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #                       rate_control_mode: "VBR", # accepts VBR, CBR
+    #                       qvbr_settings: {
+    #                         max_average_bitrate: 1,
+    #                         qvbr_quality_level: 1, # required
+    #                       },
+    #                       rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                       repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
     #                       scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                       slices: 1,
@@ -8191,6 +8415,7 @@ module Aws::MediaConvert
     #                       bitrate: 1,
     #                       codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_2, LEVEL_2_1, LEVEL_3, LEVEL_3_1, LEVEL_4, LEVEL_4_1, LEVEL_5, LEVEL_5_1, LEVEL_5_2, LEVEL_6, LEVEL_6_1, LEVEL_6_2
     #                       codec_profile: "MAIN_MAIN", # accepts MAIN_MAIN, MAIN_HIGH, MAIN10_MAIN, MAIN10_HIGH, MAIN_422_8BIT_MAIN, MAIN_422_8BIT_HIGH, MAIN_422_10BIT_MAIN, MAIN_422_10BIT_HIGH
+    #                       dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                       flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
@@ -8211,7 +8436,11 @@ module Aws::MediaConvert
     #                       par_denominator: 1,
     #                       par_numerator: 1,
     #                       quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #                       rate_control_mode: "VBR", # accepts VBR, CBR
+    #                       qvbr_settings: {
+    #                         max_average_bitrate: 1,
+    #                         qvbr_quality_level: 1, # required
+    #                       },
+    #                       rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                       sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
     #                       scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                       slices: 1,
@@ -8229,6 +8458,7 @@ module Aws::MediaConvert
     #                       bitrate: 1,
     #                       codec_level: "AUTO", # accepts AUTO, LOW, MAIN, HIGH1440, HIGH
     #                       codec_profile: "MAIN", # accepts MAIN, PROFILE_422
+    #                       dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
     #                       framerate_denominator: 1,
@@ -8720,9 +8950,9 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # List the tags for your MediaConvert resource by sending a request with
-    # the Amazon Resource Name (ARN) of the resource. To get the ARN, send a
-    # GET request with the resource name.
+    # List the tags for your AWS Elemental MediaConvert resource by sending
+    # a request with the Amazon Resource Name (ARN) of the resource. To get
+    # the ARN, send a GET request with the resource name.
     #
     # @note When making an API call, you may pass ListTagsForResourceRequest
     #   data as a hash:
@@ -8743,7 +8973,8 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Successful list tags for resource requests return a JSON map of tags.
+    # A successful request to list the tags for a resource returns a JSON
+    # map of tags.
     #
     # @!attribute [rw] resource_tags
     #   The Amazon Resource Name (ARN) and tags for an AWS Elemental
@@ -9332,6 +9563,7 @@ module Aws::MediaConvert
     #         bitrate: 1,
     #         codec_level: "AUTO", # accepts AUTO, LOW, MAIN, HIGH1440, HIGH
     #         codec_profile: "MAIN", # accepts MAIN, PROFILE_422
+    #         dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
     #         framerate_denominator: 1,
@@ -9379,6 +9611,16 @@ module Aws::MediaConvert
     # @!attribute [rw] codec_profile
     #   Use Profile (Mpeg2CodecProfile) to set the MPEG-2 profile for the
     #   video output.
+    #   @return [String]
+    #
+    # @!attribute [rw] dynamic_sub_gop
+    #   Choose Adaptive to improve subjective video quality for high-motion
+    #   content. This will cause the service to use fewer B-frames (which
+    #   infer information based on other frames) for high-motion portions of
+    #   the video and more B-frames for low-motion portions. The maximum
+    #   number of B-frames is limited by the value you provide for the
+    #   setting B frames between reference frames
+    #   (numberBFramesBetweenReferenceFrames).
     #   @return [String]
     #
     # @!attribute [rw] framerate_control
@@ -9548,6 +9790,7 @@ module Aws::MediaConvert
       :bitrate,
       :codec_level,
       :codec_profile,
+      :dynamic_sub_gop,
       :framerate_control,
       :framerate_conversion_algorithm,
       :framerate_denominator,
@@ -10065,6 +10308,7 @@ module Aws::MediaConvert
     #               bitrate: 1,
     #               codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #               codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
+    #               dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #               entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #               field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #               flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -10087,7 +10331,11 @@ module Aws::MediaConvert
     #               par_denominator: 1,
     #               par_numerator: 1,
     #               quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #               rate_control_mode: "VBR", # accepts VBR, CBR
+    #               qvbr_settings: {
+    #                 max_average_bitrate: 1,
+    #                 qvbr_quality_level: 1, # required
+    #               },
+    #               rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #               repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
     #               scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #               slices: 1,
@@ -10105,6 +10353,7 @@ module Aws::MediaConvert
     #               bitrate: 1,
     #               codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_2, LEVEL_2_1, LEVEL_3, LEVEL_3_1, LEVEL_4, LEVEL_4_1, LEVEL_5, LEVEL_5_1, LEVEL_5_2, LEVEL_6, LEVEL_6_1, LEVEL_6_2
     #               codec_profile: "MAIN_MAIN", # accepts MAIN_MAIN, MAIN_HIGH, MAIN10_MAIN, MAIN10_HIGH, MAIN_422_8BIT_MAIN, MAIN_422_8BIT_HIGH, MAIN_422_10BIT_MAIN, MAIN_422_10BIT_HIGH
+    #               dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #               flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
@@ -10125,7 +10374,11 @@ module Aws::MediaConvert
     #               par_denominator: 1,
     #               par_numerator: 1,
     #               quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #               rate_control_mode: "VBR", # accepts VBR, CBR
+    #               qvbr_settings: {
+    #                 max_average_bitrate: 1,
+    #                 qvbr_quality_level: 1, # required
+    #               },
+    #               rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #               sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
     #               scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #               slices: 1,
@@ -10143,6 +10396,7 @@ module Aws::MediaConvert
     #               bitrate: 1,
     #               codec_level: "AUTO", # accepts AUTO, LOW, MAIN, HIGH1440, HIGH
     #               codec_profile: "MAIN", # accepts MAIN, PROFILE_422
+    #               dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
     #               framerate_denominator: 1,
@@ -10407,6 +10661,7 @@ module Aws::MediaConvert
     #             manifest_compression: "GZIP", # accepts GZIP, NONE
     #             manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #             min_buffer_time: 1,
+    #             min_final_segment_length: 1.0,
     #             segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #             segment_length: 1, # required
     #             stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -10467,6 +10722,7 @@ module Aws::MediaConvert
     #             },
     #             manifest_compression: "GZIP", # accepts GZIP, NONE
     #             manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
+    #             min_final_segment_length: 1.0,
     #             min_segment_length: 1, # required
     #             output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #             program_date_time: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -10757,6 +11013,7 @@ module Aws::MediaConvert
     #                   bitrate: 1,
     #                   codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                   codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
+    #                   dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                   entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #                   field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #                   flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -10779,7 +11036,11 @@ module Aws::MediaConvert
     #                   par_denominator: 1,
     #                   par_numerator: 1,
     #                   quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #                   rate_control_mode: "VBR", # accepts VBR, CBR
+    #                   qvbr_settings: {
+    #                     max_average_bitrate: 1,
+    #                     qvbr_quality_level: 1, # required
+    #                   },
+    #                   rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                   repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
     #                   scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                   slices: 1,
@@ -10797,6 +11058,7 @@ module Aws::MediaConvert
     #                   bitrate: 1,
     #                   codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_2, LEVEL_2_1, LEVEL_3, LEVEL_3_1, LEVEL_4, LEVEL_4_1, LEVEL_5, LEVEL_5_1, LEVEL_5_2, LEVEL_6, LEVEL_6_1, LEVEL_6_2
     #                   codec_profile: "MAIN_MAIN", # accepts MAIN_MAIN, MAIN_HIGH, MAIN10_MAIN, MAIN10_HIGH, MAIN_422_8BIT_MAIN, MAIN_422_8BIT_HIGH, MAIN_422_10BIT_MAIN, MAIN_422_10BIT_HIGH
+    #                   dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                   flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                   framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                   framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
@@ -10817,7 +11079,11 @@ module Aws::MediaConvert
     #                   par_denominator: 1,
     #                   par_numerator: 1,
     #                   quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #                   rate_control_mode: "VBR", # accepts VBR, CBR
+    #                   qvbr_settings: {
+    #                     max_average_bitrate: 1,
+    #                     qvbr_quality_level: 1, # required
+    #                   },
+    #                   rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                   sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
     #                   scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                   slices: 1,
@@ -10835,6 +11101,7 @@ module Aws::MediaConvert
     #                   bitrate: 1,
     #                   codec_level: "AUTO", # accepts AUTO, LOW, MAIN, HIGH1440, HIGH
     #                   codec_profile: "MAIN", # accepts MAIN, PROFILE_422
+    #                   dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                   framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                   framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
     #                   framerate_denominator: 1,
@@ -11035,6 +11302,7 @@ module Aws::MediaConvert
     #           manifest_compression: "GZIP", # accepts GZIP, NONE
     #           manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #           min_buffer_time: 1,
+    #           min_final_segment_length: 1.0,
     #           segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #           segment_length: 1, # required
     #           stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -11095,6 +11363,7 @@ module Aws::MediaConvert
     #           },
     #           manifest_compression: "GZIP", # accepts GZIP, NONE
     #           manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
+    #           min_final_segment_length: 1.0,
     #           min_segment_length: 1, # required
     #           output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #           program_date_time: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -11499,6 +11768,7 @@ module Aws::MediaConvert
     #               bitrate: 1,
     #               codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #               codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
+    #               dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #               entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #               field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #               flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -11521,7 +11791,11 @@ module Aws::MediaConvert
     #               par_denominator: 1,
     #               par_numerator: 1,
     #               quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #               rate_control_mode: "VBR", # accepts VBR, CBR
+    #               qvbr_settings: {
+    #                 max_average_bitrate: 1,
+    #                 qvbr_quality_level: 1, # required
+    #               },
+    #               rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #               repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
     #               scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #               slices: 1,
@@ -11539,6 +11813,7 @@ module Aws::MediaConvert
     #               bitrate: 1,
     #               codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_2, LEVEL_2_1, LEVEL_3, LEVEL_3_1, LEVEL_4, LEVEL_4_1, LEVEL_5, LEVEL_5_1, LEVEL_5_2, LEVEL_6, LEVEL_6_1, LEVEL_6_2
     #               codec_profile: "MAIN_MAIN", # accepts MAIN_MAIN, MAIN_HIGH, MAIN10_MAIN, MAIN10_HIGH, MAIN_422_8BIT_MAIN, MAIN_422_8BIT_HIGH, MAIN_422_10BIT_MAIN, MAIN_422_10BIT_HIGH
+    #               dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #               flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
@@ -11559,7 +11834,11 @@ module Aws::MediaConvert
     #               par_denominator: 1,
     #               par_numerator: 1,
     #               quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #               rate_control_mode: "VBR", # accepts VBR, CBR
+    #               qvbr_settings: {
+    #                 max_average_bitrate: 1,
+    #                 qvbr_quality_level: 1, # required
+    #               },
+    #               rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #               sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
     #               scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #               slices: 1,
@@ -11577,6 +11856,7 @@ module Aws::MediaConvert
     #               bitrate: 1,
     #               codec_level: "AUTO", # accepts AUTO, LOW, MAIN, HIGH1440, HIGH
     #               codec_profile: "MAIN", # accepts MAIN, PROFILE_422
+    #               dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
     #               framerate_denominator: 1,
@@ -11929,21 +12209,21 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] height
-    #   Height of rectangle in pixels.
+    #   Height of rectangle in pixels. Specify only even numbers.
     #   @return [Integer]
     #
     # @!attribute [rw] width
-    #   Width of rectangle in pixels.
+    #   Width of rectangle in pixels. Specify only even numbers.
     #   @return [Integer]
     #
     # @!attribute [rw] x
     #   The distance, in pixels, between the rectangle and the left edge of
-    #   the video frame.
+    #   the video frame. Specify only even numbers.
     #   @return [Integer]
     #
     # @!attribute [rw] y
     #   The distance, in pixels, between the rectangle and the top edge of
-    #   the video frame.
+    #   the video frame. Specify only even numbers.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Rectangle AWS API Documentation
@@ -12431,7 +12711,8 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Successful untag resource requests return an OK message.
+    # A successful request to remove a tag from a resource returns an OK
+    # message.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UntagResourceResponse AWS API Documentation
     #
@@ -12578,6 +12859,7 @@ module Aws::MediaConvert
     #                   manifest_compression: "GZIP", # accepts GZIP, NONE
     #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                   min_buffer_time: 1,
+    #                   min_final_segment_length: 1.0,
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1, # required
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -12638,6 +12920,7 @@ module Aws::MediaConvert
     #                   },
     #                   manifest_compression: "GZIP", # accepts GZIP, NONE
     #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
+    #                   min_final_segment_length: 1.0,
     #                   min_segment_length: 1, # required
     #                   output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #                   program_date_time: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -12928,6 +13211,7 @@ module Aws::MediaConvert
     #                         bitrate: 1,
     #                         codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                         codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
+    #                         dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                         entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #                         field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #                         flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -12950,7 +13234,11 @@ module Aws::MediaConvert
     #                         par_denominator: 1,
     #                         par_numerator: 1,
     #                         quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #                         rate_control_mode: "VBR", # accepts VBR, CBR
+    #                         qvbr_settings: {
+    #                           max_average_bitrate: 1,
+    #                           qvbr_quality_level: 1, # required
+    #                         },
+    #                         rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                         repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
     #                         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                         slices: 1,
@@ -12968,6 +13256,7 @@ module Aws::MediaConvert
     #                         bitrate: 1,
     #                         codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_2, LEVEL_2_1, LEVEL_3, LEVEL_3_1, LEVEL_4, LEVEL_4_1, LEVEL_5, LEVEL_5_1, LEVEL_5_2, LEVEL_6, LEVEL_6_1, LEVEL_6_2
     #                         codec_profile: "MAIN_MAIN", # accepts MAIN_MAIN, MAIN_HIGH, MAIN10_MAIN, MAIN10_HIGH, MAIN_422_8BIT_MAIN, MAIN_422_8BIT_HIGH, MAIN_422_10BIT_MAIN, MAIN_422_10BIT_HIGH
+    #                         dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                         flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
@@ -12988,7 +13277,11 @@ module Aws::MediaConvert
     #                         par_denominator: 1,
     #                         par_numerator: 1,
     #                         quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #                         rate_control_mode: "VBR", # accepts VBR, CBR
+    #                         qvbr_settings: {
+    #                           max_average_bitrate: 1,
+    #                           qvbr_quality_level: 1, # required
+    #                         },
+    #                         rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                         sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
     #                         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                         slices: 1,
@@ -13006,6 +13299,7 @@ module Aws::MediaConvert
     #                         bitrate: 1,
     #                         codec_level: "AUTO", # accepts AUTO, LOW, MAIN, HIGH1440, HIGH
     #                         codec_profile: "MAIN", # accepts MAIN, PROFILE_422
+    #                         dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
     #                         framerate_denominator: 1,
@@ -13458,6 +13752,7 @@ module Aws::MediaConvert
     #                 bitrate: 1,
     #                 codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                 codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
+    #                 dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                 entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #                 field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #                 flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -13480,7 +13775,11 @@ module Aws::MediaConvert
     #                 par_denominator: 1,
     #                 par_numerator: 1,
     #                 quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #                 rate_control_mode: "VBR", # accepts VBR, CBR
+    #                 qvbr_settings: {
+    #                   max_average_bitrate: 1,
+    #                   qvbr_quality_level: 1, # required
+    #                 },
+    #                 rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                 repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
     #                 scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                 slices: 1,
@@ -13498,6 +13797,7 @@ module Aws::MediaConvert
     #                 bitrate: 1,
     #                 codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_2, LEVEL_2_1, LEVEL_3, LEVEL_3_1, LEVEL_4, LEVEL_4_1, LEVEL_5, LEVEL_5_1, LEVEL_5_2, LEVEL_6, LEVEL_6_1, LEVEL_6_2
     #                 codec_profile: "MAIN_MAIN", # accepts MAIN_MAIN, MAIN_HIGH, MAIN10_MAIN, MAIN10_HIGH, MAIN_422_8BIT_MAIN, MAIN_422_8BIT_HIGH, MAIN_422_10BIT_MAIN, MAIN_422_10BIT_HIGH
+    #                 dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                 flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
@@ -13518,7 +13818,11 @@ module Aws::MediaConvert
     #                 par_denominator: 1,
     #                 par_numerator: 1,
     #                 quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #                 rate_control_mode: "VBR", # accepts VBR, CBR
+    #                 qvbr_settings: {
+    #                   max_average_bitrate: 1,
+    #                   qvbr_quality_level: 1, # required
+    #                 },
+    #                 rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                 sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
     #                 scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                 slices: 1,
@@ -13536,6 +13840,7 @@ module Aws::MediaConvert
     #                 bitrate: 1,
     #                 codec_level: "AUTO", # accepts AUTO, LOW, MAIN, HIGH1440, HIGH
     #                 codec_profile: "MAIN", # accepts MAIN, PROFILE_422
+    #                 dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
     #                 framerate_denominator: 1,
@@ -13781,6 +14086,7 @@ module Aws::MediaConvert
     #           bitrate: 1,
     #           codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #           codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
+    #           dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #           entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #           field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #           flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -13803,7 +14109,11 @@ module Aws::MediaConvert
     #           par_denominator: 1,
     #           par_numerator: 1,
     #           quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #           rate_control_mode: "VBR", # accepts VBR, CBR
+    #           qvbr_settings: {
+    #             max_average_bitrate: 1,
+    #             qvbr_quality_level: 1, # required
+    #           },
+    #           rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #           repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
     #           scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #           slices: 1,
@@ -13821,6 +14131,7 @@ module Aws::MediaConvert
     #           bitrate: 1,
     #           codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_2, LEVEL_2_1, LEVEL_3, LEVEL_3_1, LEVEL_4, LEVEL_4_1, LEVEL_5, LEVEL_5_1, LEVEL_5_2, LEVEL_6, LEVEL_6_1, LEVEL_6_2
     #           codec_profile: "MAIN_MAIN", # accepts MAIN_MAIN, MAIN_HIGH, MAIN10_MAIN, MAIN10_HIGH, MAIN_422_8BIT_MAIN, MAIN_422_8BIT_HIGH, MAIN_422_10BIT_MAIN, MAIN_422_10BIT_HIGH
+    #           dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #           flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #           framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #           framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
@@ -13841,7 +14152,11 @@ module Aws::MediaConvert
     #           par_denominator: 1,
     #           par_numerator: 1,
     #           quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #           rate_control_mode: "VBR", # accepts VBR, CBR
+    #           qvbr_settings: {
+    #             max_average_bitrate: 1,
+    #             qvbr_quality_level: 1, # required
+    #           },
+    #           rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #           sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
     #           scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #           slices: 1,
@@ -13859,6 +14174,7 @@ module Aws::MediaConvert
     #           bitrate: 1,
     #           codec_level: "AUTO", # accepts AUTO, LOW, MAIN, HIGH1440, HIGH
     #           codec_profile: "MAIN", # accepts MAIN, PROFILE_422
+    #           dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #           framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #           framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
     #           framerate_denominator: 1,
@@ -13962,6 +14278,7 @@ module Aws::MediaConvert
     #             bitrate: 1,
     #             codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #             codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
+    #             dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #             entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #             field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #             flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -13984,7 +14301,11 @@ module Aws::MediaConvert
     #             par_denominator: 1,
     #             par_numerator: 1,
     #             quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #             rate_control_mode: "VBR", # accepts VBR, CBR
+    #             qvbr_settings: {
+    #               max_average_bitrate: 1,
+    #               qvbr_quality_level: 1, # required
+    #             },
+    #             rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #             repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
     #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #             slices: 1,
@@ -14002,6 +14323,7 @@ module Aws::MediaConvert
     #             bitrate: 1,
     #             codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_2, LEVEL_2_1, LEVEL_3, LEVEL_3_1, LEVEL_4, LEVEL_4_1, LEVEL_5, LEVEL_5_1, LEVEL_5_2, LEVEL_6, LEVEL_6_1, LEVEL_6_2
     #             codec_profile: "MAIN_MAIN", # accepts MAIN_MAIN, MAIN_HIGH, MAIN10_MAIN, MAIN10_HIGH, MAIN_422_8BIT_MAIN, MAIN_422_8BIT_HIGH, MAIN_422_10BIT_MAIN, MAIN_422_10BIT_HIGH
+    #             dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #             flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
@@ -14022,7 +14344,11 @@ module Aws::MediaConvert
     #             par_denominator: 1,
     #             par_numerator: 1,
     #             quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
-    #             rate_control_mode: "VBR", # accepts VBR, CBR
+    #             qvbr_settings: {
+    #               max_average_bitrate: 1,
+    #               qvbr_quality_level: 1, # required
+    #             },
+    #             rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #             sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
     #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #             slices: 1,
@@ -14040,6 +14366,7 @@ module Aws::MediaConvert
     #             bitrate: 1,
     #             codec_level: "AUTO", # accepts AUTO, LOW, MAIN, HIGH1440, HIGH
     #             codec_profile: "MAIN", # accepts MAIN, PROFILE_422
+    #             dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
     #             framerate_denominator: 1,
