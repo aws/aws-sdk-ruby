@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Update `ca-bundle.crt` file with newer root certificate authorities.
+
 3.24.0 (2018-08-03)
 ------------------
 
