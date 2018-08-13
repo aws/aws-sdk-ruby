@@ -1173,12 +1173,6 @@ module Aws::SageMaker
     #   `MultiRecord` means a mini-batch is set to contain as many records
     #   that can fit within the `MaxPayloadInMB` limit.
     #
-    #   Batch transform will automatically split your input data into whatever
-    #   payload size is specified if you set `SplitType` to `Line` and
-    #   `BatchStrategy` to `MultiRecord`. There's no need to split the
-    #   dataset into smaller files or to use larger payload sizes unless the
-    #   records in your dataset are very large.
-    #
     # @option params [Hash<String,String>] :environment
     #   The environment variables to set in the Docker container. We support
     #   up to 16 key and values entries in the map.
@@ -3005,7 +2999,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

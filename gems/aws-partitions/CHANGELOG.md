@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2018-08-13)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SageMaker`.
+
 1.97.0 (2018-08-02)
 ------------------
 

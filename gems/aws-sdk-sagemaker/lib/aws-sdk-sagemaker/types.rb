@@ -1150,12 +1150,6 @@ module Aws::SageMaker
     #   `SingleRecord` means only one record is used per mini-batch.
     #   `MultiRecord` means a mini-batch is set to contain as many records
     #   that can fit within the `MaxPayloadInMB` limit.
-    #
-    #   Batch transform will automatically split your input data into
-    #   whatever payload size is specified if you set `SplitType` to `Line`
-    #   and `BatchStrategy` to `MultiRecord`. There's no need to split the
-    #   dataset into smaller files or to use larger payload sizes unless the
-    #   records in your dataset are very large.
     #   @return [String]
     #
     # @!attribute [rw] environment
@@ -1919,8 +1913,8 @@ module Aws::SageMaker
     #
     #   * `Stopped` - the training job has stopped.
     #
-    #   * `MaxRuntimeExceeded` - the training job exceeded the specified max
-    #     run time and has been stopped.
+    #   * `MaxRuntimeExceeded` - the training exceed the specified the max
+    #     run time, which means the training job is stopping.
     #
     #   * `Completed` - the training job has completed.
     #
@@ -1928,7 +1922,7 @@ module Aws::SageMaker
     #     provided in the `StatusMessage`.
     #
     #   The valid values for `SecondaryStatus` are subject to change. They
-    #   primarily provide information on the progress of the training job.
+    #   primary provide information on the progress of the training job.
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
@@ -2002,9 +1996,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] secondary_status_transitions
-    #   To give an overview of the training job lifecycle,
-    #   `SecondaryStatusTransitions` is a log of time-ordered secondary
-    #   statuses that a training job has transitioned.
+    #   A log of time-ordered secondary statuses that a training job has
+    #   transitioned.
     #   @return [Array<Types::SecondaryStatusTransition>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJobResponse AWS API Documentation
@@ -4224,8 +4217,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] end_time
     #   A timestamp that shows when the secondary status has ended and the
-    #   job has transitioned into another secondary status. The `EndTime`
-    #   timestamp is also set after the training job has ended.
+    #   job has transitioned into another secondary status.
     #   @return [Time]
     #
     # @!attribute [rw] status_message

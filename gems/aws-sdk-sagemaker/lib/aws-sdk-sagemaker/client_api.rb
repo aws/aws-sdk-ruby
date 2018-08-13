@@ -1023,7 +1023,7 @@ module Aws::SageMaker
       api.version = "2017-07-24"
 
       api.metadata = {
-        "endpointPrefix" => "sagemaker",
+        "endpointPrefix" => "api.sagemaker",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon SageMaker Service",

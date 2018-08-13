@@ -344,7 +344,7 @@ module Aws
             'SSM' => 'ssm',
             'STS' => 'sts',
             'SWF' => 'swf',
-            'SageMaker' => 'sagemaker',
+            'SageMaker' => 'api.sagemaker',
             'SageMakerRuntime' => 'runtime.sagemaker',
             'SecretsManager' => 'secretsmanager',
             'ServerlessApplicationRepository' => 'serverlessrepo',
