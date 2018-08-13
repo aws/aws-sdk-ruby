@@ -183,6 +183,7 @@ module AwsSdkCodeGenerator
             o.deprecated = true if operation['deprecated']
             o.endpoint_operation = true if operation['endpointoperation']
             if operation.key?('endpointdiscovery')
+              o.endpoint_discovery_exist = true
               o.endpoint_discovery = operation['endpointdiscovery'].inject([]) do |a, (k, v)|
                 a << { key: k.inspect, value: v.inspect }
                 a
@@ -463,6 +464,9 @@ module AwsSdkCodeGenerator
 
         # @return [Boolean]
         attr_accessor :deprecated
+
+        # @return [Boolean]
+        attr_accessor :endpoint_discovery_exist
 
         # @return [Boolean]
         attr_accessor :endpoint_operation
