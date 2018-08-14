@@ -330,6 +330,7 @@ module Aws::ElasticsearchService
     #   resp.domain_status.endpoints #=> Hash
     #   resp.domain_status.endpoints["String"] #=> String
     #   resp.domain_status.processing #=> Boolean
+    #   resp.domain_status.upgrade_processing #=> Boolean
     #   resp.domain_status.elasticsearch_version #=> String
     #   resp.domain_status.elasticsearch_cluster_config.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
     #   resp.domain_status.elasticsearch_cluster_config.instance_count #=> Integer
@@ -397,6 +398,7 @@ module Aws::ElasticsearchService
     #   resp.domain_status.endpoints #=> Hash
     #   resp.domain_status.endpoints["String"] #=> String
     #   resp.domain_status.processing #=> Boolean
+    #   resp.domain_status.upgrade_processing #=> Boolean
     #   resp.domain_status.elasticsearch_version #=> String
     #   resp.domain_status.elasticsearch_cluster_config.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
     #   resp.domain_status.elasticsearch_cluster_config.instance_count #=> Integer
@@ -484,6 +486,7 @@ module Aws::ElasticsearchService
     #   resp.domain_status.endpoints #=> Hash
     #   resp.domain_status.endpoints["String"] #=> String
     #   resp.domain_status.processing #=> Boolean
+    #   resp.domain_status.upgrade_processing #=> Boolean
     #   resp.domain_status.elasticsearch_version #=> String
     #   resp.domain_status.elasticsearch_cluster_config.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
     #   resp.domain_status.elasticsearch_cluster_config.instance_count #=> Integer
@@ -660,6 +663,7 @@ module Aws::ElasticsearchService
     #   resp.domain_status_list[0].endpoints #=> Hash
     #   resp.domain_status_list[0].endpoints["String"] #=> String
     #   resp.domain_status_list[0].processing #=> Boolean
+    #   resp.domain_status_list[0].upgrade_processing #=> Boolean
     #   resp.domain_status_list[0].elasticsearch_version #=> String
     #   resp.domain_status_list[0].elasticsearch_cluster_config.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
     #   resp.domain_status_list[0].elasticsearch_cluster_config.instance_count #=> Integer
@@ -854,6 +858,125 @@ module Aws::ElasticsearchService
     # @param [Hash] params ({})
     def describe_reserved_elasticsearch_instances(params = {}, options = {})
       req = build_request(:describe_reserved_elasticsearch_instances, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of upgrade compatible Elastisearch versions. You can
+    # optionally pass a ` DomainName ` to get all upgrade compatible
+    # Elasticsearch versions for that specific domain.
+    #
+    # @option params [String] :domain_name
+    #   The name of an Elasticsearch domain. Domain names are unique across
+    #   the domains owned by an account within an AWS region. Domain names
+    #   start with a letter or number and can contain the following
+    #   characters: a-z (lowercase), 0-9, and - (hyphen).
+    #
+    # @return [Types::GetCompatibleElasticsearchVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCompatibleElasticsearchVersionsResponse#compatible_elasticsearch_versions #compatible_elasticsearch_versions} => Array&lt;Types::CompatibleVersionsMap&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_compatible_elasticsearch_versions({
+    #     domain_name: "DomainName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.compatible_elasticsearch_versions #=> Array
+    #   resp.compatible_elasticsearch_versions[0].source_version #=> String
+    #   resp.compatible_elasticsearch_versions[0].target_versions #=> Array
+    #   resp.compatible_elasticsearch_versions[0].target_versions[0] #=> String
+    #
+    # @overload get_compatible_elasticsearch_versions(params = {})
+    # @param [Hash] params ({})
+    def get_compatible_elasticsearch_versions(params = {}, options = {})
+      req = build_request(:get_compatible_elasticsearch_versions, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the complete history of the last 10 upgrades that were
+    # performed on the domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of an Elasticsearch domain. Domain names are unique across
+    #   the domains owned by an account within an AWS region. Domain names
+    #   start with a letter or number and can contain the following
+    #   characters: a-z (lowercase), 0-9, and - (hyphen).
+    #
+    # @option params [Integer] :max_results
+    #   Set this value to limit the number of results returned.
+    #
+    # @option params [String] :next_token
+    #   Paginated APIs accepts NextToken input to returns next page results
+    #   and provides a NextToken output in the response which can be used by
+    #   the client to retrieve more results.
+    #
+    # @return [Types::GetUpgradeHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetUpgradeHistoryResponse#upgrade_histories #upgrade_histories} => Array&lt;Types::UpgradeHistory&gt;
+    #   * {Types::GetUpgradeHistoryResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_upgrade_history({
+    #     domain_name: "DomainName", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.upgrade_histories #=> Array
+    #   resp.upgrade_histories[0].upgrade_name #=> String
+    #   resp.upgrade_histories[0].start_timestamp #=> Time
+    #   resp.upgrade_histories[0].upgrade_status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "SUCCEEDED_WITH_ISSUES", "FAILED"
+    #   resp.upgrade_histories[0].steps_list #=> Array
+    #   resp.upgrade_histories[0].steps_list[0].upgrade_step #=> String, one of "PRE_UPGRADE_CHECK", "SNAPSHOT", "UPGRADE"
+    #   resp.upgrade_histories[0].steps_list[0].upgrade_step_status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "SUCCEEDED_WITH_ISSUES", "FAILED"
+    #   resp.upgrade_histories[0].steps_list[0].issues #=> Array
+    #   resp.upgrade_histories[0].steps_list[0].issues[0] #=> String
+    #   resp.upgrade_histories[0].steps_list[0].progress_percent #=> Float
+    #   resp.next_token #=> String
+    #
+    # @overload get_upgrade_history(params = {})
+    # @param [Hash] params ({})
+    def get_upgrade_history(params = {}, options = {})
+      req = build_request(:get_upgrade_history, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the latest status of the last upgrade or upgrade eligibility
+    # check that was performed on the domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of an Elasticsearch domain. Domain names are unique across
+    #   the domains owned by an account within an AWS region. Domain names
+    #   start with a letter or number and can contain the following
+    #   characters: a-z (lowercase), 0-9, and - (hyphen).
+    #
+    # @return [Types::GetUpgradeStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetUpgradeStatusResponse#upgrade_step #upgrade_step} => String
+    #   * {Types::GetUpgradeStatusResponse#step_status #step_status} => String
+    #   * {Types::GetUpgradeStatusResponse#upgrade_name #upgrade_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_upgrade_status({
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.upgrade_step #=> String, one of "PRE_UPGRADE_CHECK", "SNAPSHOT", "UPGRADE"
+    #   resp.step_status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "SUCCEEDED_WITH_ISSUES", "FAILED"
+    #   resp.upgrade_name #=> String
+    #
+    # @overload get_upgrade_status(params = {})
+    # @param [Hash] params ({})
+    def get_upgrade_status(params = {}, options = {})
+      req = build_request(:get_upgrade_status, params)
       req.send_request(options)
     end
 
@@ -1242,6 +1365,50 @@ module Aws::ElasticsearchService
       req.send_request(options)
     end
 
+    # Allows you to either upgrade your domain or perform an Upgrade
+    # eligibility check to a compatible Elasticsearch version.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of an Elasticsearch domain. Domain names are unique across
+    #   the domains owned by an account within an AWS region. Domain names
+    #   start with a letter or number and can contain the following
+    #   characters: a-z (lowercase), 0-9, and - (hyphen).
+    #
+    # @option params [required, String] :target_version
+    #   The version of Elasticsearch that you intend to upgrade the domain to.
+    #
+    # @option params [Boolean] :perform_check_only
+    #   This flag, when set to True, indicates that an Upgrade Eligibility
+    #   Check needs to be performed. This will not actually perform the
+    #   Upgrade.
+    #
+    # @return [Types::UpgradeElasticsearchDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpgradeElasticsearchDomainResponse#domain_name #domain_name} => String
+    #   * {Types::UpgradeElasticsearchDomainResponse#target_version #target_version} => String
+    #   * {Types::UpgradeElasticsearchDomainResponse#perform_check_only #perform_check_only} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.upgrade_elasticsearch_domain({
+    #     domain_name: "DomainName", # required
+    #     target_version: "ElasticsearchVersionString", # required
+    #     perform_check_only: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_name #=> String
+    #   resp.target_version #=> String
+    #   resp.perform_check_only #=> Boolean
+    #
+    # @overload upgrade_elasticsearch_domain(params = {})
+    # @param [Hash] params ({})
+    def upgrade_elasticsearch_domain(params = {}, options = {})
+      req = build_request(:upgrade_elasticsearch_domain, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1255,7 +1422,7 @@ module Aws::ElasticsearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

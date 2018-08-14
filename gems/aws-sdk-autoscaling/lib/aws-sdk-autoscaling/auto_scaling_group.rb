@@ -100,9 +100,9 @@ module Aws::AutoScaling
       data[:health_check_type]
     end
 
-    # The amount of time, in seconds, that Auto Scaling waits before
-    # checking the health status of an EC2 instance that has come into
-    # service.
+    # The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
+    # before checking the health status of an EC2 instance that has come
+    # into service.
     # @return [Integer]
     def health_check_grace_period
       data[:health_check_grace_period]
@@ -554,12 +554,12 @@ module Aws::AutoScaling
     #   This parameter is supported if the policy type is `SimpleScaling` or
     #   `StepScaling`.
     #
-    #   For more information, see [Dynamic Scaling][1] in the *Auto Scaling
-    #   User Guide*.
+    #   For more information, see [Dynamic Scaling][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-scale-based-on-demand.html
+    #   [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scale-based-on-demand.html
     # @option options [Integer] :min_adjustment_step
     #   Available for backward compatibility. Use `MinAdjustmentMagnitude`
     #   instead.
@@ -585,12 +585,12 @@ module Aws::AutoScaling
     #
     #   This parameter is supported if the policy type is `SimpleScaling`.
     #
-    #   For more information, see [Auto Scaling Cooldowns][1] in the *Auto
-    #   Scaling User Guide*.
+    #   For more information, see [Scaling Cooldowns][1] in the *Amazon EC2
+    #   Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html
+    #   [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html
     # @option options [String] :metric_aggregation_type
     #   The aggregation type for the CloudWatch metrics. The valid values are
     #   `Minimum`, `Maximum`, and `Average`. If the aggregation type is null,
@@ -646,22 +646,22 @@ module Aws::AutoScaling
     #   The time for this action to start, in "YYYY-MM-DDThh:mm:ssZ" format
     #   in UTC/GMT only (for example, `2014-06-01T00:00:00Z`).
     #
-    #   If you specify `Recurrence` and `StartTime`, Auto Scaling performs the
-    #   action at this time, and then performs the action based on the
-    #   specified recurrence.
+    #   If you specify `Recurrence` and `StartTime`, Amazon EC2 Auto Scaling
+    #   performs the action at this time, and then performs the action based
+    #   on the specified recurrence.
     #
-    #   If you try to schedule your action in the past, Auto Scaling returns
-    #   an error message.
+    #   If you try to schedule your action in the past, Amazon EC2 Auto
+    #   Scaling returns an error message.
     # @option options [Time,DateTime,Date,Integer,String] :end_time
-    #   The time for the recurring schedule to end. Auto Scaling does not
-    #   perform the action after this time.
+    #   The time for the recurring schedule to end. Amazon EC2 Auto Scaling
+    #   does not perform the action after this time.
     # @option options [String] :recurrence
     #   The recurring schedule for this action, in Unix cron syntax format.
-    #   For more information, see [Cron][1] in Wikipedia.
+    #   For more information about this format, see [Crontab][1].
     #
     #
     #
-    #   [1]: http://en.wikipedia.org/wiki/Cron
+    #   [1]: http://crontab.org
     # @option options [Integer] :min_size
     #   The minimum size for the Auto Scaling group.
     # @option options [Integer] :max_size
@@ -721,10 +721,11 @@ module Aws::AutoScaling
     #   The number of EC2 instances that should be running in the Auto Scaling
     #   group.
     # @option options [Boolean] :honor_cooldown
-    #   Indicates whether Auto Scaling waits for the cooldown period to
-    #   complete before initiating a scaling activity to set your Auto Scaling
-    #   group to its new capacity. By default, Auto Scaling does not honor the
-    #   cooldown period during manual scaling activities.
+    #   Indicates whether Amazon EC2 Auto Scaling waits for the cooldown
+    #   period to complete before initiating a scaling activity to set your
+    #   Auto Scaling group to its new capacity. By default, Amazon EC2 Auto
+    #   Scaling does not honor the cooldown period during manual scaling
+    #   activities.
     # @return [EmptyStructure]
     def set_desired_capacity(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -805,28 +806,28 @@ module Aws::AutoScaling
     #   The amount of time, in seconds, after a scaling activity completes
     #   before another scaling activity can start. The default is 300.
     #
-    #   For more information, see [Auto Scaling Cooldowns][1] in the *Auto
-    #   Scaling User Guide*.
+    #   For more information, see [Scaling Cooldowns][1] in the *Amazon EC2
+    #   Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html
+    #   [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html
     # @option options [Array<String>] :availability_zones
     #   One or more Availability Zones for the group.
     # @option options [String] :health_check_type
     #   The service to use for the health checks. The valid values are `EC2`
     #   and `ELB`.
     # @option options [Integer] :health_check_grace_period
-    #   The amount of time, in seconds, that Auto Scaling waits before
-    #   checking the health status of an EC2 instance that has come into
-    #   service. The default is 0.
+    #   The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
+    #   before checking the health status of an EC2 instance that has come
+    #   into service. The default is 0.
     #
-    #   For more information, see [Health Checks][1] in the *Auto Scaling User
-    #   Guide*.
+    #   For more information, see [Health Checks][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/healthcheck.html
+    #   [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html
     # @option options [String] :placement_group
     #   The name of the placement group into which you'll launch your
     #   instances, if any. For more information, see [Placement Groups][1] in
@@ -844,11 +845,11 @@ module Aws::AutoScaling
     #   `AvailabilityZones`.
     #
     #   For more information, see [Launching Auto Scaling Instances in a
-    #   VPC][1] in the *Auto Scaling User Guide*.
+    #   VPC][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html
+    #   [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html
     # @option options [Array<String>] :termination_policies
     #   A standalone termination policy or a list of termination policies used
     #   to select the instance to terminate. The policies are executed in the
@@ -859,7 +860,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-termination.html
+    #   [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html
     # @option options [Boolean] :new_instances_protected_from_scale_in
     #   Indicates whether newly launched instances are protected from
     #   termination by Auto Scaling when scaling in.
@@ -885,11 +886,11 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :activity_ids
-    #   The activity IDs of the desired scaling activities. If you omit this
-    #   parameter, all activities for the past six weeks are described. If you
-    #   specify an Auto Scaling group, the results are limited to that group.
-    #   The list of requested activities cannot contain more than 50 items. If
-    #   unknown activities are requested, they are ignored with no error.
+    #   The activity IDs of the desired scaling activities. You can specify up
+    #   to 50 IDs. If you omit this parameter, all activities for the past six
+    #   weeks are described. If unknown activities are requested, they are
+    #   ignored with no error. If you specify an Auto Scaling group, the
+    #   results are limited to that group.
     # @return [Activity::Collection]
     def activities(options = {})
       batches = Enumerator.new do |y|
@@ -1086,13 +1087,10 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :scheduled_action_names
-    #   Describes one or more scheduled actions. If you omit this parameter,
-    #   all scheduled actions are described. If you specify an unknown
-    #   scheduled action, it is ignored with no error.
-    #
-    #   You can describe up to a maximum of 50 instances with a single call.
-    #   If there are more items to return, the call returns a token. To get
-    #   the next set of items, repeat the call with the returned token.
+    #   The names of one or more scheduled actions. You can specify up to 50
+    #   actions. If you omit this parameter, all scheduled actions are
+    #   described. If you specify an unknown scheduled action, it is ignored
+    #   with no error.
     # @option options [Time,DateTime,Date,Integer,String] :start_time
     #   The earliest scheduled start time to return. If scheduled action names
     #   are provided, this parameter is ignored.

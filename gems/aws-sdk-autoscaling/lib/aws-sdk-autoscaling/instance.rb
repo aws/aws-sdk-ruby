@@ -47,11 +47,11 @@ module Aws::AutoScaling
     end
 
     # The lifecycle state for the instance. For more information, see [Auto
-    # Scaling Lifecycle][1] in the *Auto Scaling User Guide*.
+    # Scaling Lifecycle][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html
+    # [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html
     # @return [String]
     def lifecycle_state
       data[:lifecycle_state]
@@ -59,8 +59,8 @@ module Aws::AutoScaling
 
     # The last reported health status of this instance. "Healthy" means
     # that the instance is healthy and should remain in service.
-    # "Unhealthy" means that the instance is unhealthy and Auto Scaling
-    # should terminate and replace it.
+    # "Unhealthy" means that the instance is unhealthy and Amazon EC2 Auto
+    # Scaling should terminate and replace it.
     # @return [String]
     def health_status
       data[:health_status]
@@ -79,8 +79,8 @@ module Aws::AutoScaling
       data[:launch_template]
     end
 
-    # Indicates whether the instance is protected from termination by Auto
-    # Scaling when scaling in.
+    # Indicates whether the instance is protected from termination by Amazon
+    # EC2 Auto Scaling when scaling in.
     # @return [Boolean]
     def protected_from_scale_in
       data[:protected_from_scale_in]
@@ -318,8 +318,8 @@ module Aws::AutoScaling
     # @option options [required, String] :health_status
     #   The health status of the instance. Set to `Healthy` if you want the
     #   instance to remain in service. Set to `Unhealthy` if you want the
-    #   instance to be out of service. Auto Scaling will terminate and replace
-    #   the unhealthy instance.
+    #   instance to be out of service. Amazon EC2 Auto Scaling will terminate
+    #   and replace the unhealthy instance.
     # @option options [Boolean] :should_respect_grace_period
     #   If the Auto Scaling group of the specified instance has a
     #   `HealthCheckGracePeriod` specified for the group, by default, this

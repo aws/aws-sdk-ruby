@@ -50,7 +50,7 @@ module Aws::CloudFront
     #   For more information, see ActiveTrustedSigners.
     #   @return [Array<Types::Signer>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ActiveTrustedSigners AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/ActiveTrustedSigners AWS API Documentation
     #
     class ActiveTrustedSigners < Struct.new(
       :enabled,
@@ -80,7 +80,7 @@ module Aws::CloudFront
     #   want to associate with this distribution.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/Aliases AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/Aliases AWS API Documentation
     #
     class Aliases < Struct.new(
       :quantity,
@@ -143,7 +143,7 @@ module Aws::CloudFront
     #   to be cached correctly.
     #   @return [Types::CachedMethods]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/AllowedMethods AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/AllowedMethods AWS API Documentation
     #
     class AllowedMethods < Struct.new(
       :quantity,
@@ -235,6 +235,7 @@ module Aws::CloudFront
     #             {
     #               lambda_function_arn: "LambdaFunctionARN", # required
     #               event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #               include_body: false,
     #             },
     #           ],
     #         },
@@ -269,7 +270,8 @@ module Aws::CloudFront
     # @!attribute [rw] target_origin_id
     #   The value of `ID` for the origin that you want CloudFront to route
     #   requests to when a request matches the path pattern either for a
-    #   cache behavior or for the default cache behavior.
+    #   cache behavior or for the default cache behavior in your
+    #   distribution.
     #   @return [String]
     #
     # @!attribute [rw] forwarded_values
@@ -432,9 +434,13 @@ module Aws::CloudFront
     #   @return [Types::LambdaFunctionAssociations]
     #
     # @!attribute [rw] field_level_encryption_id
+    #   The value of `ID` for the field-level encryption configuration that
+    #   you want CloudFront to use for encrypting specific fields of data
+    #   for a cache behavior or for the default cache behavior in your
+    #   distribution.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CacheBehavior AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CacheBehavior AWS API Documentation
     #
     class CacheBehavior < Struct.new(
       :path_pattern,
@@ -507,6 +513,7 @@ module Aws::CloudFront
     #                 {
     #                   lambda_function_arn: "LambdaFunctionARN", # required
     #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                   include_body: false,
     #                 },
     #               ],
     #             },
@@ -524,7 +531,7 @@ module Aws::CloudFront
     #   distribution. If `Quantity` is `0`, you can omit `Items`.
     #   @return [Array<Types::CacheBehavior>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CacheBehaviors AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CacheBehaviors AWS API Documentation
     #
     class CacheBehaviors < Struct.new(
       :quantity,
@@ -565,7 +572,7 @@ module Aws::CloudFront
     #   CloudFront to cache responses to.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CachedMethods AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CachedMethods AWS API Documentation
     #
     class CachedMethods < Struct.new(
       :quantity,
@@ -590,7 +597,7 @@ module Aws::CloudFront
     #   The current configuration information for the identity.
     #   @return [Types::CloudFrontOriginAccessIdentityConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CloudFrontOriginAccessIdentity AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CloudFrontOriginAccessIdentity AWS API Documentation
     #
     class CloudFrontOriginAccessIdentity < Struct.new(
       :id,
@@ -634,7 +641,7 @@ module Aws::CloudFront
     #   Any comments you want to include about the origin access identity.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CloudFrontOriginAccessIdentityConfig AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CloudFrontOriginAccessIdentityConfig AWS API Documentation
     #
     class CloudFrontOriginAccessIdentityConfig < Struct.new(
       :caller_reference,
@@ -688,7 +695,7 @@ module Aws::CloudFront
     #   access identity that was created by the current AWS account.
     #   @return [Array<Types::CloudFrontOriginAccessIdentitySummary>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CloudFrontOriginAccessIdentityList AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CloudFrontOriginAccessIdentityList AWS API Documentation
     #
     class CloudFrontOriginAccessIdentityList < Struct.new(
       :marker,
@@ -718,7 +725,7 @@ module Aws::CloudFront
     #   when created.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CloudFrontOriginAccessIdentitySummary AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CloudFrontOriginAccessIdentitySummary AWS API Documentation
     #
     class CloudFrontOriginAccessIdentitySummary < Struct.new(
       :id,
@@ -753,7 +760,7 @@ module Aws::CloudFront
     #   mapping.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ContentTypeProfile AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/ContentTypeProfile AWS API Documentation
     #
     class ContentTypeProfile < Struct.new(
       :format,
@@ -794,7 +801,7 @@ module Aws::CloudFront
     #   The configuration for a field-level encryption content type-profile.
     #   @return [Types::ContentTypeProfiles]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ContentTypeProfileConfig AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/ContentTypeProfileConfig AWS API Documentation
     #
     class ContentTypeProfileConfig < Struct.new(
       :forward_when_content_type_is_unknown,
@@ -826,7 +833,7 @@ module Aws::CloudFront
     #   Items in a field-level encryption content type-profile mapping.
     #   @return [Array<Types::ContentTypeProfile>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ContentTypeProfiles AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/ContentTypeProfiles AWS API Documentation
     #
     class ContentTypeProfiles < Struct.new(
       :quantity,
@@ -863,7 +870,7 @@ module Aws::CloudFront
     #   behavior.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CookieNames AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CookieNames AWS API Documentation
     #
     class CookieNames < Struct.new(
       :quantity,
@@ -923,7 +930,7 @@ module Aws::CloudFront
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_cloudfront
     #   @return [Types::CookieNames]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CookiePreference AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CookiePreference AWS API Documentation
     #
     class CookiePreference < Struct.new(
       :forward,
@@ -947,7 +954,7 @@ module Aws::CloudFront
     #   The current configuration information for the identity.
     #   @return [Types::CloudFrontOriginAccessIdentityConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateCloudFrontOriginAccessIdentityRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CreateCloudFrontOriginAccessIdentityRequest AWS API Documentation
     #
     class CreateCloudFrontOriginAccessIdentityRequest < Struct.new(
       :cloud_front_origin_access_identity_config)
@@ -970,7 +977,7 @@ module Aws::CloudFront
     #   The current version of the origin access identity created.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateCloudFrontOriginAccessIdentityResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CreateCloudFrontOriginAccessIdentityResult AWS API Documentation
     #
     class CreateCloudFrontOriginAccessIdentityResult < Struct.new(
       :cloud_front_origin_access_identity,
@@ -1070,6 +1077,7 @@ module Aws::CloudFront
     #                 {
     #                   lambda_function_arn: "LambdaFunctionARN", # required
     #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                   include_body: false,
     #                 },
     #               ],
     #             },
@@ -1124,6 +1132,7 @@ module Aws::CloudFront
     #                     {
     #                       lambda_function_arn: "LambdaFunctionARN", # required
     #                       event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                       include_body: false,
     #                     },
     #                   ],
     #                 },
@@ -1177,7 +1186,7 @@ module Aws::CloudFront
     #   The distribution's configuration information.
     #   @return [Types::DistributionConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateDistributionRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CreateDistributionRequest AWS API Documentation
     #
     class CreateDistributionRequest < Struct.new(
       :distribution_config)
@@ -1200,7 +1209,7 @@ module Aws::CloudFront
     #   The current version of the distribution created.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateDistributionResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CreateDistributionResult AWS API Documentation
     #
     class CreateDistributionResult < Struct.new(
       :distribution,
@@ -1301,6 +1310,7 @@ module Aws::CloudFront
     #                   {
     #                     lambda_function_arn: "LambdaFunctionARN", # required
     #                     event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                     include_body: false,
     #                   },
     #                 ],
     #               },
@@ -1355,6 +1365,7 @@ module Aws::CloudFront
     #                       {
     #                         lambda_function_arn: "LambdaFunctionARN", # required
     #                         event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                         include_body: false,
     #                       },
     #                     ],
     #                   },
@@ -1417,7 +1428,7 @@ module Aws::CloudFront
     #   The distribution's configuration information.
     #   @return [Types::DistributionConfigWithTags]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateDistributionWithTagsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CreateDistributionWithTagsRequest AWS API Documentation
     #
     class CreateDistributionWithTagsRequest < Struct.new(
       :distribution_config_with_tags)
@@ -1440,7 +1451,7 @@ module Aws::CloudFront
     #   The current version of the distribution created.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateDistributionWithTagsResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CreateDistributionWithTagsResult AWS API Documentation
     #
     class CreateDistributionWithTagsResult < Struct.new(
       :distribution,
@@ -1488,7 +1499,7 @@ module Aws::CloudFront
     #   The request to create a new field-level encryption configuration.
     #   @return [Types::FieldLevelEncryptionConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateFieldLevelEncryptionConfigRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CreateFieldLevelEncryptionConfigRequest AWS API Documentation
     #
     class CreateFieldLevelEncryptionConfigRequest < Struct.new(
       :field_level_encryption_config)
@@ -1510,7 +1521,7 @@ module Aws::CloudFront
     #   example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateFieldLevelEncryptionConfigResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CreateFieldLevelEncryptionConfigResult AWS API Documentation
     #
     class CreateFieldLevelEncryptionConfigResult < Struct.new(
       :field_level_encryption,
@@ -1547,7 +1558,7 @@ module Aws::CloudFront
     #   The request to create a field-level encryption profile.
     #   @return [Types::FieldLevelEncryptionProfileConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateFieldLevelEncryptionProfileRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CreateFieldLevelEncryptionProfileRequest AWS API Documentation
     #
     class CreateFieldLevelEncryptionProfileRequest < Struct.new(
       :field_level_encryption_profile_config)
@@ -1569,7 +1580,7 @@ module Aws::CloudFront
     #   example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateFieldLevelEncryptionProfileResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CreateFieldLevelEncryptionProfileResult AWS API Documentation
     #
     class CreateFieldLevelEncryptionProfileResult < Struct.new(
       :field_level_encryption_profile,
@@ -1602,7 +1613,7 @@ module Aws::CloudFront
     #   The batch information for the invalidation.
     #   @return [Types::InvalidationBatch]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateInvalidationRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CreateInvalidationRequest AWS API Documentation
     #
     class CreateInvalidationRequest < Struct.new(
       :distribution_id,
@@ -1621,7 +1632,7 @@ module Aws::CloudFront
     #   The invalidation's information.
     #   @return [Types::Invalidation]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateInvalidationResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CreateInvalidationResult AWS API Documentation
     #
     class CreateInvalidationResult < Struct.new(
       :location,
@@ -1645,7 +1656,7 @@ module Aws::CloudFront
     #   The request to add a public key to CloudFront.
     #   @return [Types::PublicKeyConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreatePublicKeyRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CreatePublicKeyRequest AWS API Documentation
     #
     class CreatePublicKeyRequest < Struct.new(
       :public_key_config)
@@ -1667,7 +1678,7 @@ module Aws::CloudFront
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreatePublicKeyResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CreatePublicKeyResult AWS API Documentation
     #
     class CreatePublicKeyResult < Struct.new(
       :public_key,
@@ -1712,7 +1723,7 @@ module Aws::CloudFront
     #   The streaming distribution's configuration information.
     #   @return [Types::StreamingDistributionConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateStreamingDistributionRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CreateStreamingDistributionRequest AWS API Documentation
     #
     class CreateStreamingDistributionRequest < Struct.new(
       :streaming_distribution_config)
@@ -1735,7 +1746,7 @@ module Aws::CloudFront
     #   The current version of the streaming distribution created.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateStreamingDistributionResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CreateStreamingDistributionResult AWS API Documentation
     #
     class CreateStreamingDistributionResult < Struct.new(
       :streaming_distribution,
@@ -1790,7 +1801,7 @@ module Aws::CloudFront
     #   The streaming distribution's configuration information.
     #   @return [Types::StreamingDistributionConfigWithTags]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateStreamingDistributionWithTagsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CreateStreamingDistributionWithTagsRequest AWS API Documentation
     #
     class CreateStreamingDistributionWithTagsRequest < Struct.new(
       :streaming_distribution_config_with_tags)
@@ -1812,7 +1823,7 @@ module Aws::CloudFront
     # @!attribute [rw] etag
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateStreamingDistributionWithTagsResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CreateStreamingDistributionWithTagsResult AWS API Documentation
     #
     class CreateStreamingDistributionWithTagsResult < Struct.new(
       :streaming_distribution,
@@ -1923,7 +1934,7 @@ module Aws::CloudFront
     #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CustomErrorResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CustomErrorResponse AWS API Documentation
     #
     class CustomErrorResponse < Struct.new(
       :error_code,
@@ -1976,7 +1987,7 @@ module Aws::CloudFront
     #   page and/or a caching duration.
     #   @return [Array<Types::CustomErrorResponse>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CustomErrorResponses AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CustomErrorResponses AWS API Documentation
     #
     class CustomErrorResponses < Struct.new(
       :quantity,
@@ -2010,7 +2021,7 @@ module Aws::CloudFront
     #   origin. If Quantity is `0`, omit `Items`.
     #   @return [Array<Types::OriginCustomHeader>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CustomHeaders AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CustomHeaders AWS API Documentation
     #
     class CustomHeaders < Struct.new(
       :quantity,
@@ -2018,7 +2029,8 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # A customer origin.
+    # A customer origin or an Amazon S3 bucket configured as a website
+    # endpoint.
     #
     # @note When making an API call, you may pass CustomOriginConfig
     #   data as a hash:
@@ -2080,7 +2092,7 @@ module Aws::CloudFront
     #   [1]: https://console.aws.amazon.com/support/home#/
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CustomOriginConfig AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/CustomOriginConfig AWS API Documentation
     #
     class CustomOriginConfig < Struct.new(
       :http_port,
@@ -2145,6 +2157,7 @@ module Aws::CloudFront
     #             {
     #               lambda_function_arn: "LambdaFunctionARN", # required
     #               event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #               include_body: false,
     #             },
     #           ],
     #         },
@@ -2154,7 +2167,8 @@ module Aws::CloudFront
     # @!attribute [rw] target_origin_id
     #   The value of `ID` for the origin that you want CloudFront to route
     #   requests to when a request matches the path pattern either for a
-    #   cache behavior or for the default cache behavior.
+    #   cache behavior or for the default cache behavior in your
+    #   distribution.
     #   @return [String]
     #
     # @!attribute [rw] forwarded_values
@@ -2305,9 +2319,13 @@ module Aws::CloudFront
     #   @return [Types::LambdaFunctionAssociations]
     #
     # @!attribute [rw] field_level_encryption_id
+    #   The value of `ID` for the field-level encryption configuration that
+    #   you want CloudFront to use for encrypting specific fields of data
+    #   for a cache behavior or for the default cache behavior in your
+    #   distribution.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DefaultCacheBehavior AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/DefaultCacheBehavior AWS API Documentation
     #
     class DefaultCacheBehavior < Struct.new(
       :target_origin_id,
@@ -2344,7 +2362,7 @@ module Aws::CloudFront
     #   `PUT` request. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteCloudFrontOriginAccessIdentityRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/DeleteCloudFrontOriginAccessIdentityRequest AWS API Documentation
     #
     class DeleteCloudFrontOriginAccessIdentityRequest < Struct.new(
       :id,
@@ -2413,7 +2431,7 @@ module Aws::CloudFront
     #   the distribution. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteDistributionRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/DeleteDistributionRequest AWS API Documentation
     #
     class DeleteDistributionRequest < Struct.new(
       :id,
@@ -2438,7 +2456,7 @@ module Aws::CloudFront
     #   configuration identity to delete. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteFieldLevelEncryptionConfigRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/DeleteFieldLevelEncryptionConfigRequest AWS API Documentation
     #
     class DeleteFieldLevelEncryptionConfigRequest < Struct.new(
       :id,
@@ -2463,7 +2481,7 @@ module Aws::CloudFront
     #   profile to delete. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteFieldLevelEncryptionProfileRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/DeleteFieldLevelEncryptionProfileRequest AWS API Documentation
     #
     class DeleteFieldLevelEncryptionProfileRequest < Struct.new(
       :id,
@@ -2488,7 +2506,7 @@ module Aws::CloudFront
     #   public key identity to delete. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeletePublicKeyRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/DeletePublicKeyRequest AWS API Documentation
     #
     class DeletePublicKeyRequest < Struct.new(
       :id,
@@ -2515,7 +2533,7 @@ module Aws::CloudFront
     #   the streaming distribution. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteStreamingDistributionRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/DeleteStreamingDistributionRequest AWS API Documentation
     #
     class DeleteStreamingDistributionRequest < Struct.new(
       :id,
@@ -2572,7 +2590,7 @@ module Aws::CloudFront
     #   ID/config` resource.
     #   @return [Types::DistributionConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/Distribution AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/Distribution AWS API Documentation
     #
     class Distribution < Struct.new(
       :id,
@@ -2676,6 +2694,7 @@ module Aws::CloudFront
     #               {
     #                 lambda_function_arn: "LambdaFunctionARN", # required
     #                 event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                 include_body: false,
     #               },
     #             ],
     #           },
@@ -2730,6 +2749,7 @@ module Aws::CloudFront
     #                   {
     #                     lambda_function_arn: "LambdaFunctionARN", # required
     #                     event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                     include_body: false,
     #                   },
     #                 ],
     #               },
@@ -2906,8 +2926,10 @@ module Aws::CloudFront
     #   For more information about price classes, see [Choosing the Price
     #   Class for a CloudFront Distribution][1] in the *Amazon CloudFront
     #   Developer Guide*. For information about CloudFront pricing,
-    #   including how price classes map to CloudFront regions, see [Amazon
-    #   CloudFront Pricing][2].
+    #   including how price classes (such as Price Class 100) map to
+    #   CloudFront regions, see [Amazon CloudFront Pricing][2]. For price
+    #   class information, scroll down to see the table at the bottom of the
+    #   page.
     #
     #
     #
@@ -2918,9 +2940,6 @@ module Aws::CloudFront
     # @!attribute [rw] enabled
     #   From this field, you can enable or disable the selected
     #   distribution.
-    #
-    #   If you specify `false` for `Enabled` but you specify values for
-    #   `Bucket` and `Prefix`, the values are automatically deleted.
     #   @return [Boolean]
     #
     # @!attribute [rw] viewer_certificate
@@ -3108,7 +3127,7 @@ module Aws::CloudFront
     #   [2]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloudfront-distribution.html
     #   @return [Boolean]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DistributionConfig AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/DistributionConfig AWS API Documentation
     #
     class DistributionConfig < Struct.new(
       :caller_reference,
@@ -3222,6 +3241,7 @@ module Aws::CloudFront
     #                 {
     #                   lambda_function_arn: "LambdaFunctionARN", # required
     #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                   include_body: false,
     #                 },
     #               ],
     #             },
@@ -3276,6 +3296,7 @@ module Aws::CloudFront
     #                     {
     #                       lambda_function_arn: "LambdaFunctionARN", # required
     #                       event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                       include_body: false,
     #                     },
     #                   ],
     #                 },
@@ -3341,7 +3362,7 @@ module Aws::CloudFront
     #   A complex type that contains zero or more `Tag` elements.
     #   @return [Types::Tags]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DistributionConfigWithTags AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/DistributionConfigWithTags AWS API Documentation
     #
     class DistributionConfigWithTags < Struct.new(
       :distribution_config,
@@ -3382,7 +3403,7 @@ module Aws::CloudFront
     #   each distribution that was created by the current AWS account.
     #   @return [Array<Types::DistributionSummary>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DistributionList AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/DistributionList AWS API Documentation
     #
     class DistributionList < Struct.new(
       :marker,
@@ -3583,7 +3604,7 @@ module Aws::CloudFront
     #   address for your distribution.
     #   @return [Boolean]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DistributionSummary AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/DistributionSummary AWS API Documentation
     #
     class DistributionSummary < Struct.new(
       :id,
@@ -3637,7 +3658,7 @@ module Aws::CloudFront
     #   type-profile mapping.
     #   @return [Array<Types::EncryptionEntity>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/EncryptionEntities AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/EncryptionEntities AWS API Documentation
     #
     class EncryptionEntities < Struct.new(
       :quantity,
@@ -3681,7 +3702,7 @@ module Aws::CloudFront
     #   case-sensitive.
     #   @return [Types::FieldPatterns]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/EncryptionEntity AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/EncryptionEntity AWS API Documentation
     #
     class EncryptionEntity < Struct.new(
       :public_key_id,
@@ -3708,7 +3729,7 @@ module Aws::CloudFront
     #   specified for field-level encryption.
     #   @return [Types::FieldLevelEncryptionConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/FieldLevelEncryption AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/FieldLevelEncryption AWS API Documentation
     #
     class FieldLevelEncryption < Struct.new(
       :id,
@@ -3773,7 +3794,7 @@ module Aws::CloudFront
     #   a request if a query argument doesn't specify a profile to use.
     #   @return [Types::ContentTypeProfileConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/FieldLevelEncryptionConfig AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/FieldLevelEncryptionConfig AWS API Documentation
     #
     class FieldLevelEncryptionConfig < Struct.new(
       :caller_reference,
@@ -3804,7 +3825,7 @@ module Aws::CloudFront
     #   An array of field-level encryption items.
     #   @return [Array<Types::FieldLevelEncryptionSummary>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/FieldLevelEncryptionList AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/FieldLevelEncryptionList AWS API Documentation
     #
     class FieldLevelEncryptionList < Struct.new(
       :next_marker,
@@ -3831,7 +3852,7 @@ module Aws::CloudFront
     #   encryption entities for the field-level encryption profile.
     #   @return [Types::FieldLevelEncryptionProfileConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/FieldLevelEncryptionProfile AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/FieldLevelEncryptionProfile AWS API Documentation
     #
     class FieldLevelEncryptionProfile < Struct.new(
       :id,
@@ -3882,7 +3903,7 @@ module Aws::CloudFront
     #   field patterns for specifying which fields to encrypt with this key.
     #   @return [Types::EncryptionEntities]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/FieldLevelEncryptionProfileConfig AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/FieldLevelEncryptionProfileConfig AWS API Documentation
     #
     class FieldLevelEncryptionProfileConfig < Struct.new(
       :name,
@@ -3913,7 +3934,7 @@ module Aws::CloudFront
     #   The field-level encryption profile items.
     #   @return [Array<Types::FieldLevelEncryptionProfileSummary>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/FieldLevelEncryptionProfileList AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/FieldLevelEncryptionProfileList AWS API Documentation
     #
     class FieldLevelEncryptionProfileList < Struct.new(
       :next_marker,
@@ -3948,7 +3969,7 @@ module Aws::CloudFront
     #   An optional comment for the field-level encryption profile summary.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/FieldLevelEncryptionProfileSummary AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/FieldLevelEncryptionProfileSummary AWS API Documentation
     #
     class FieldLevelEncryptionProfileSummary < Struct.new(
       :id,
@@ -3982,7 +4003,7 @@ module Aws::CloudFront
     #   A summary of a content type-profile mapping.
     #   @return [Types::ContentTypeProfileConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/FieldLevelEncryptionSummary AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/FieldLevelEncryptionSummary AWS API Documentation
     #
     class FieldLevelEncryptionSummary < Struct.new(
       :id,
@@ -4012,7 +4033,7 @@ module Aws::CloudFront
     #   An array of the field-level encryption field patterns.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/FieldPatterns AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/FieldPatterns AWS API Documentation
     #
     class FieldPatterns < Struct.new(
       :quantity,
@@ -4100,7 +4121,7 @@ module Aws::CloudFront
     #   cache behavior.
     #   @return [Types::QueryStringCacheKeys]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ForwardedValues AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/ForwardedValues AWS API Documentation
     #
     class ForwardedValues < Struct.new(
       :query_string,
@@ -4159,7 +4180,7 @@ module Aws::CloudFront
     #   the CloudFront console, which includes both country names and codes.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GeoRestriction AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GeoRestriction AWS API Documentation
     #
     class GeoRestriction < Struct.new(
       :restriction_type,
@@ -4182,7 +4203,7 @@ module Aws::CloudFront
     #   The identity's ID.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetCloudFrontOriginAccessIdentityConfigRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GetCloudFrontOriginAccessIdentityConfigRequest AWS API Documentation
     #
     class GetCloudFrontOriginAccessIdentityConfigRequest < Struct.new(
       :id)
@@ -4200,7 +4221,7 @@ module Aws::CloudFront
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetCloudFrontOriginAccessIdentityConfigResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GetCloudFrontOriginAccessIdentityConfigResult AWS API Documentation
     #
     class GetCloudFrontOriginAccessIdentityConfigResult < Struct.new(
       :cloud_front_origin_access_identity_config,
@@ -4221,7 +4242,7 @@ module Aws::CloudFront
     #   The identity's ID.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetCloudFrontOriginAccessIdentityRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GetCloudFrontOriginAccessIdentityRequest AWS API Documentation
     #
     class GetCloudFrontOriginAccessIdentityRequest < Struct.new(
       :id)
@@ -4239,7 +4260,7 @@ module Aws::CloudFront
     #   For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetCloudFrontOriginAccessIdentityResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GetCloudFrontOriginAccessIdentityResult AWS API Documentation
     #
     class GetCloudFrontOriginAccessIdentityResult < Struct.new(
       :cloud_front_origin_access_identity,
@@ -4260,7 +4281,7 @@ module Aws::CloudFront
     #   The distribution's ID.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetDistributionConfigRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GetDistributionConfigRequest AWS API Documentation
     #
     class GetDistributionConfigRequest < Struct.new(
       :id)
@@ -4278,7 +4299,7 @@ module Aws::CloudFront
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetDistributionConfigResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GetDistributionConfigResult AWS API Documentation
     #
     class GetDistributionConfigResult < Struct.new(
       :distribution_config,
@@ -4299,7 +4320,7 @@ module Aws::CloudFront
     #   The distribution's ID.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetDistributionRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GetDistributionRequest AWS API Documentation
     #
     class GetDistributionRequest < Struct.new(
       :id)
@@ -4317,7 +4338,7 @@ module Aws::CloudFront
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetDistributionResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GetDistributionResult AWS API Documentation
     #
     class GetDistributionResult < Struct.new(
       :distribution,
@@ -4337,7 +4358,7 @@ module Aws::CloudFront
     #   information.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryptionConfigRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GetFieldLevelEncryptionConfigRequest AWS API Documentation
     #
     class GetFieldLevelEncryptionConfigRequest < Struct.new(
       :id)
@@ -4353,7 +4374,7 @@ module Aws::CloudFront
     #   example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryptionConfigResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GetFieldLevelEncryptionConfigResult AWS API Documentation
     #
     class GetFieldLevelEncryptionConfigResult < Struct.new(
       :field_level_encryption_config,
@@ -4373,7 +4394,7 @@ module Aws::CloudFront
     #   information.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryptionProfileConfigRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GetFieldLevelEncryptionProfileConfigRequest AWS API Documentation
     #
     class GetFieldLevelEncryptionProfileConfigRequest < Struct.new(
       :id)
@@ -4389,7 +4410,7 @@ module Aws::CloudFront
     #   configuration result. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryptionProfileConfigResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GetFieldLevelEncryptionProfileConfigResult AWS API Documentation
     #
     class GetFieldLevelEncryptionProfileConfigResult < Struct.new(
       :field_level_encryption_profile_config,
@@ -4408,7 +4429,7 @@ module Aws::CloudFront
     #   Get the ID for the field-level encryption profile information.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryptionProfileRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GetFieldLevelEncryptionProfileRequest AWS API Documentation
     #
     class GetFieldLevelEncryptionProfileRequest < Struct.new(
       :id)
@@ -4424,7 +4445,7 @@ module Aws::CloudFront
     #   example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryptionProfileResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GetFieldLevelEncryptionProfileResult AWS API Documentation
     #
     class GetFieldLevelEncryptionProfileResult < Struct.new(
       :field_level_encryption_profile,
@@ -4444,7 +4465,7 @@ module Aws::CloudFront
     #   information.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryptionRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GetFieldLevelEncryptionRequest AWS API Documentation
     #
     class GetFieldLevelEncryptionRequest < Struct.new(
       :id)
@@ -4460,7 +4481,7 @@ module Aws::CloudFront
     #   example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryptionResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GetFieldLevelEncryptionResult AWS API Documentation
     #
     class GetFieldLevelEncryptionResult < Struct.new(
       :field_level_encryption,
@@ -4487,7 +4508,7 @@ module Aws::CloudFront
     #   `IDFDVBD632BHDS5`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetInvalidationRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GetInvalidationRequest AWS API Documentation
     #
     class GetInvalidationRequest < Struct.new(
       :distribution_id,
@@ -4506,7 +4527,7 @@ module Aws::CloudFront
     #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/InvalidationDatatype.html
     #   @return [Types::Invalidation]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetInvalidationResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GetInvalidationResult AWS API Documentation
     #
     class GetInvalidationResult < Struct.new(
       :invalidation)
@@ -4524,7 +4545,7 @@ module Aws::CloudFront
     #   Request the ID for the public key configuration.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetPublicKeyConfigRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GetPublicKeyConfigRequest AWS API Documentation
     #
     class GetPublicKeyConfigRequest < Struct.new(
       :id)
@@ -4540,7 +4561,7 @@ module Aws::CloudFront
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetPublicKeyConfigResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GetPublicKeyConfigResult AWS API Documentation
     #
     class GetPublicKeyConfigResult < Struct.new(
       :public_key_config,
@@ -4559,7 +4580,7 @@ module Aws::CloudFront
     #   Request the ID for the public key.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetPublicKeyRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GetPublicKeyRequest AWS API Documentation
     #
     class GetPublicKeyRequest < Struct.new(
       :id)
@@ -4575,7 +4596,7 @@ module Aws::CloudFront
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetPublicKeyResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GetPublicKeyResult AWS API Documentation
     #
     class GetPublicKeyResult < Struct.new(
       :public_key,
@@ -4596,7 +4617,7 @@ module Aws::CloudFront
     #   The streaming distribution's ID.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetStreamingDistributionConfigRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GetStreamingDistributionConfigRequest AWS API Documentation
     #
     class GetStreamingDistributionConfigRequest < Struct.new(
       :id)
@@ -4614,7 +4635,7 @@ module Aws::CloudFront
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetStreamingDistributionConfigResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GetStreamingDistributionConfigResult AWS API Documentation
     #
     class GetStreamingDistributionConfigResult < Struct.new(
       :streaming_distribution_config,
@@ -4635,7 +4656,7 @@ module Aws::CloudFront
     #   The streaming distribution's ID.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetStreamingDistributionRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GetStreamingDistributionRequest AWS API Documentation
     #
     class GetStreamingDistributionRequest < Struct.new(
       :id)
@@ -4653,7 +4674,7 @@ module Aws::CloudFront
     #   For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetStreamingDistributionResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/GetStreamingDistributionResult AWS API Documentation
     #
     class GetStreamingDistributionResult < Struct.new(
       :streaming_distribution,
@@ -4730,7 +4751,7 @@ module Aws::CloudFront
     #   `Quantity` is `0`, omit `Items`.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/Headers AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/Headers AWS API Documentation
     #
     class Headers < Struct.new(
       :quantity,
@@ -4758,7 +4779,7 @@ module Aws::CloudFront
     #   The current invalidation information for the batch request.
     #   @return [Types::InvalidationBatch]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/Invalidation AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/Invalidation AWS API Documentation
     #
     class Invalidation < Struct.new(
       :id,
@@ -4813,7 +4834,7 @@ module Aws::CloudFront
     #   `InvalidationBatchAlreadyExists` error.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/InvalidationBatch AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/InvalidationBatch AWS API Documentation
     #
     class InvalidationBatch < Struct.new(
       :paths,
@@ -4861,7 +4882,7 @@ module Aws::CloudFront
     #   each invalidation batch created by the current AWS account.
     #   @return [Array<Types::InvalidationSummary>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/InvalidationList AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/InvalidationList AWS API Documentation
     #
     class InvalidationList < Struct.new(
       :marker,
@@ -4886,7 +4907,7 @@ module Aws::CloudFront
     #   The status of an invalidation request.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/InvalidationSummary AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/InvalidationSummary AWS API Documentation
     #
     class InvalidationSummary < Struct.new(
       :id,
@@ -4913,7 +4934,7 @@ module Aws::CloudFront
     #   For more information, see ActiveTrustedSigners.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/KeyPairIds AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/KeyPairIds AWS API Documentation
     #
     class KeyPairIds < Struct.new(
       :quantity,
@@ -4929,6 +4950,7 @@ module Aws::CloudFront
     #       {
     #         lambda_function_arn: "LambdaFunctionARN", # required
     #         event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #         include_body: false,
     #       }
     #
     # @!attribute [rw] lambda_function_arn
@@ -4964,11 +4986,22 @@ module Aws::CloudFront
     #     (OK), the function doesn't execute.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/LambdaFunctionAssociation AWS API Documentation
+    # @!attribute [rw] include_body
+    #   A flag that allows a Lambda function to have read access to the body
+    #   content. For more information, see [Accessing Body Content][1] in
+    #   the Amazon CloudFront Developer Guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/LambdaFunctionAssociation AWS API Documentation
     #
     class LambdaFunctionAssociation < Struct.new(
       :lambda_function_arn,
-      :event_type)
+      :event_type,
+      :include_body)
       include Aws::Structure
     end
 
@@ -4994,6 +5027,7 @@ module Aws::CloudFront
     #           {
     #             lambda_function_arn: "LambdaFunctionARN", # required
     #             event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #             include_body: false,
     #           },
     #         ],
     #       }
@@ -5008,7 +5042,7 @@ module Aws::CloudFront
     #   `Quantity` is `0`, you can omit `Items`.
     #   @return [Array<Types::LambdaFunctionAssociation>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/LambdaFunctionAssociations AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/LambdaFunctionAssociations AWS API Documentation
     #
     class LambdaFunctionAssociations < Struct.new(
       :quantity,
@@ -5040,7 +5074,7 @@ module Aws::CloudFront
     #   response body.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListCloudFrontOriginAccessIdentitiesRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/ListCloudFrontOriginAccessIdentitiesRequest AWS API Documentation
     #
     class ListCloudFrontOriginAccessIdentitiesRequest < Struct.new(
       :marker,
@@ -5054,7 +5088,7 @@ module Aws::CloudFront
     #   The `CloudFrontOriginAccessIdentityList` type.
     #   @return [Types::CloudFrontOriginAccessIdentityList]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListCloudFrontOriginAccessIdentitiesResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/ListCloudFrontOriginAccessIdentitiesResult AWS API Documentation
     #
     class ListCloudFrontOriginAccessIdentitiesResult < Struct.new(
       :cloud_front_origin_access_identity_list)
@@ -5095,7 +5129,7 @@ module Aws::CloudFront
     #   web ACL.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListDistributionsByWebACLIdRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/ListDistributionsByWebACLIdRequest AWS API Documentation
     #
     class ListDistributionsByWebACLIdRequest < Struct.new(
       :marker,
@@ -5111,7 +5145,7 @@ module Aws::CloudFront
     #   The `DistributionList` type.
     #   @return [Types::DistributionList]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListDistributionsByWebACLIdResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/ListDistributionsByWebACLIdResult AWS API Documentation
     #
     class ListDistributionsByWebACLIdResult < Struct.new(
       :distribution_list)
@@ -5141,7 +5175,7 @@ module Aws::CloudFront
     #   The maximum number of distributions you want in the response body.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListDistributionsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/ListDistributionsRequest AWS API Documentation
     #
     class ListDistributionsRequest < Struct.new(
       :marker,
@@ -5155,7 +5189,7 @@ module Aws::CloudFront
     #   The `DistributionList` type.
     #   @return [Types::DistributionList]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListDistributionsResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/ListDistributionsResult AWS API Documentation
     #
     class ListDistributionsResult < Struct.new(
       :distribution_list)
@@ -5184,7 +5218,7 @@ module Aws::CloudFront
     #   in the response body.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListFieldLevelEncryptionConfigsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/ListFieldLevelEncryptionConfigsRequest AWS API Documentation
     #
     class ListFieldLevelEncryptionConfigsRequest < Struct.new(
       :marker,
@@ -5197,7 +5231,7 @@ module Aws::CloudFront
     #   have been created in CloudFront for this account.
     #   @return [Types::FieldLevelEncryptionList]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListFieldLevelEncryptionConfigsResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/ListFieldLevelEncryptionConfigsResult AWS API Documentation
     #
     class ListFieldLevelEncryptionConfigsResult < Struct.new(
       :field_level_encryption_list)
@@ -5225,7 +5259,7 @@ module Aws::CloudFront
     #   the response body.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListFieldLevelEncryptionProfilesRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/ListFieldLevelEncryptionProfilesRequest AWS API Documentation
     #
     class ListFieldLevelEncryptionProfilesRequest < Struct.new(
       :marker,
@@ -5238,7 +5272,7 @@ module Aws::CloudFront
     #   created in CloudFront for this account.
     #   @return [Types::FieldLevelEncryptionProfileList]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListFieldLevelEncryptionProfilesResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/ListFieldLevelEncryptionProfilesResult AWS API Documentation
     #
     class ListFieldLevelEncryptionProfilesResult < Struct.new(
       :field_level_encryption_profile_list)
@@ -5276,7 +5310,7 @@ module Aws::CloudFront
     #   response body.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListInvalidationsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/ListInvalidationsRequest AWS API Documentation
     #
     class ListInvalidationsRequest < Struct.new(
       :distribution_id,
@@ -5291,7 +5325,7 @@ module Aws::CloudFront
     #   Information about invalidation batches.
     #   @return [Types::InvalidationList]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListInvalidationsResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/ListInvalidationsResult AWS API Documentation
     #
     class ListInvalidationsResult < Struct.new(
       :invalidation_list)
@@ -5319,7 +5353,7 @@ module Aws::CloudFront
     #   The maximum number of public keys you want in the response body.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListPublicKeysRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/ListPublicKeysRequest AWS API Documentation
     #
     class ListPublicKeysRequest < Struct.new(
       :marker,
@@ -5332,7 +5366,7 @@ module Aws::CloudFront
     #   for this account.
     #   @return [Types::PublicKeyList]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListPublicKeysResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/ListPublicKeysResult AWS API Documentation
     #
     class ListPublicKeysResult < Struct.new(
       :public_key_list)
@@ -5357,7 +5391,7 @@ module Aws::CloudFront
     #   The value that you provided for the `MaxItems` request parameter.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListStreamingDistributionsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/ListStreamingDistributionsRequest AWS API Documentation
     #
     class ListStreamingDistributionsRequest < Struct.new(
       :marker,
@@ -5371,7 +5405,7 @@ module Aws::CloudFront
     #   The `StreamingDistributionList` type.
     #   @return [Types::StreamingDistributionList]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListStreamingDistributionsResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/ListStreamingDistributionsResult AWS API Documentation
     #
     class ListStreamingDistributionsResult < Struct.new(
       :streaming_distribution_list)
@@ -5391,7 +5425,7 @@ module Aws::CloudFront
     #   An ARN of a CloudFront resource.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListTagsForResourceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/ListTagsForResourceRequest AWS API Documentation
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource)
@@ -5404,7 +5438,7 @@ module Aws::CloudFront
     #   A complex type that contains zero or more `Tag` elements.
     #   @return [Types::Tags]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListTagsForResourceResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/ListTagsForResourceResult AWS API Documentation
     #
     class ListTagsForResourceResult < Struct.new(
       :tags)
@@ -5457,7 +5491,7 @@ module Aws::CloudFront
     #   element.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/LoggingConfig AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/LoggingConfig AWS API Documentation
     #
     class LoggingConfig < Struct.new(
       :enabled,
@@ -5532,7 +5566,9 @@ module Aws::CloudFront
     # @!attribute [rw] domain_name
     #   **Amazon S3 origins**\: The DNS name of the Amazon S3 bucket from
     #   which you want CloudFront to get objects for this origin, for
-    #   example, `myawsbucket.s3.amazonaws.com`.
+    #   example, `myawsbucket.s3.amazonaws.com`. If you set up your bucket
+    #   to be configured as a website endpoint, enter the Amazon S3 static
+    #   website hosting endpoint for the bucket.
     #
     #   Constraints for Amazon S3 origins:
     #
@@ -5602,7 +5638,7 @@ module Aws::CloudFront
     #   instead.
     #   @return [Types::CustomOriginConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/Origin AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/Origin AWS API Documentation
     #
     class Origin < Struct.new(
       :id,
@@ -5641,7 +5677,7 @@ module Aws::CloudFront
     #   field.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/OriginCustomHeader AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/OriginCustomHeader AWS API Documentation
     #
     class OriginCustomHeader < Struct.new(
       :header_name,
@@ -5671,7 +5707,7 @@ module Aws::CloudFront
     #   distribution.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/OriginSslProtocols AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/OriginSslProtocols AWS API Documentation
     #
     class OriginSslProtocols < Struct.new(
       :quantity,
@@ -5727,7 +5763,7 @@ module Aws::CloudFront
     #   A complex type that contains origins for this distribution.
     #   @return [Array<Types::Origin>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/Origins AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/Origins AWS API Documentation
     #
     class Origins < Struct.new(
       :quantity,
@@ -5760,7 +5796,7 @@ module Aws::CloudFront
     #   invalidate.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/Paths AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/Paths AWS API Documentation
     #
     class Paths < Struct.new(
       :quantity,
@@ -5784,7 +5820,7 @@ module Aws::CloudFront
     #   with features like field-level encryption.
     #   @return [Types::PublicKeyConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/PublicKey AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/PublicKey AWS API Documentation
     #
     class PublicKey < Struct.new(
       :id,
@@ -5824,7 +5860,7 @@ module Aws::CloudFront
     #   An optional comment about a public key.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/PublicKeyConfig AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/PublicKeyConfig AWS API Documentation
     #
     class PublicKeyConfig < Struct.new(
       :caller_reference,
@@ -5857,7 +5893,7 @@ module Aws::CloudFront
     #   use with features like field-level encryption.
     #   @return [Array<Types::PublicKeySummary>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/PublicKeyList AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/PublicKeyList AWS API Documentation
     #
     class PublicKeyList < Struct.new(
       :next_marker,
@@ -5889,7 +5925,7 @@ module Aws::CloudFront
     #   Comment for public key information summary.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/PublicKeySummary AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/PublicKeySummary AWS API Documentation
     #
     class PublicKeySummary < Struct.new(
       :id,
@@ -5920,7 +5956,7 @@ module Aws::CloudFront
     #   argument-profile mapping
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/QueryArgProfile AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/QueryArgProfile AWS API Documentation
     #
     class QueryArgProfile < Struct.new(
       :query_arg,
@@ -5958,7 +5994,7 @@ module Aws::CloudFront
     #   field-level encryption.
     #   @return [Types::QueryArgProfiles]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/QueryArgProfileConfig AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/QueryArgProfileConfig AWS API Documentation
     #
     class QueryArgProfileConfig < Struct.new(
       :forward_when_query_arg_profile_is_unknown,
@@ -5991,7 +6027,7 @@ module Aws::CloudFront
     #   encryption.
     #   @return [Array<Types::QueryArgProfile>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/QueryArgProfiles AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/QueryArgProfiles AWS API Documentation
     #
     class QueryArgProfiles < Struct.new(
       :quantity,
@@ -6018,7 +6054,7 @@ module Aws::CloudFront
     #   behavior. If `Quantity` is 0, you can omit `Items`.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/QueryStringCacheKeys AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/QueryStringCacheKeys AWS API Documentation
     #
     class QueryStringCacheKeys < Struct.new(
       :quantity,
@@ -6046,7 +6082,7 @@ module Aws::CloudFront
     #   `MaxMind` GeoIP databases.
     #   @return [Types::GeoRestriction]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/Restrictions AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/Restrictions AWS API Documentation
     #
     class Restrictions < Struct.new(
       :geo_restriction)
@@ -6095,7 +6131,7 @@ module Aws::CloudFront
     #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/S3Origin AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/S3Origin AWS API Documentation
     #
     class S3Origin < Struct.new(
       :domain_name,
@@ -6146,7 +6182,7 @@ module Aws::CloudFront
     #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/S3OriginConfig AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/S3OriginConfig AWS API Documentation
     #
     class S3OriginConfig < Struct.new(
       :origin_access_identity)
@@ -6171,7 +6207,7 @@ module Aws::CloudFront
     #   that are associated with `AwsAccountNumber`.
     #   @return [Types::KeyPairIds]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/Signer AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/Signer AWS API Documentation
     #
     class Signer < Struct.new(
       :aws_account_number,
@@ -6229,7 +6265,7 @@ module Aws::CloudFront
     #   The current configuration information for the RTMP distribution.
     #   @return [Types::StreamingDistributionConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/StreamingDistribution AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/StreamingDistribution AWS API Documentation
     #
     class StreamingDistribution < Struct.new(
       :id,
@@ -6330,7 +6366,7 @@ module Aws::CloudFront
     #   requests for content.
     #   @return [Boolean]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/StreamingDistributionConfig AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/StreamingDistributionConfig AWS API Documentation
     #
     class StreamingDistributionConfig < Struct.new(
       :caller_reference,
@@ -6393,7 +6429,7 @@ module Aws::CloudFront
     #   A complex type that contains zero or more `Tag` elements.
     #   @return [Types::Tags]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/StreamingDistributionConfigWithTags AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/StreamingDistributionConfigWithTags AWS API Documentation
     #
     class StreamingDistributionConfigWithTags < Struct.new(
       :streaming_distribution_config,
@@ -6435,7 +6471,7 @@ module Aws::CloudFront
     #   account.
     #   @return [Array<Types::StreamingDistributionSummary>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/StreamingDistributionList AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/StreamingDistributionList AWS API Documentation
     #
     class StreamingDistributionList < Struct.new(
       :marker,
@@ -6514,7 +6550,7 @@ module Aws::CloudFront
     #   content.
     #   @return [Boolean]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/StreamingDistributionSummary AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/StreamingDistributionSummary AWS API Documentation
     #
     class StreamingDistributionSummary < Struct.new(
       :id,
@@ -6566,7 +6602,7 @@ module Aws::CloudFront
     #   in the `Logging` element.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/StreamingLoggingConfig AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/StreamingLoggingConfig AWS API Documentation
     #
     class StreamingLoggingConfig < Struct.new(
       :enabled,
@@ -6601,7 +6637,7 @@ module Aws::CloudFront
     #   characters `_ - . : / = + @`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/Tag AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/Tag AWS API Documentation
     #
     class Tag < Struct.new(
       :key,
@@ -6622,7 +6658,7 @@ module Aws::CloudFront
     #   A complex type that contains `Tag` key elements.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/TagKeys AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/TagKeys AWS API Documentation
     #
     class TagKeys < Struct.new(
       :items)
@@ -6654,7 +6690,7 @@ module Aws::CloudFront
     #   A complex type that contains zero or more `Tag` elements.
     #   @return [Types::Tags]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/TagResourceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/TagResourceRequest AWS API Documentation
     #
     class TagResourceRequest < Struct.new(
       :resource,
@@ -6680,7 +6716,7 @@ module Aws::CloudFront
     #   A complex type that contains `Tag` elements.
     #   @return [Array<Types::Tag>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/Tags AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/Tags AWS API Documentation
     #
     class Tags < Struct.new(
       :items)
@@ -6736,7 +6772,7 @@ module Aws::CloudFront
     #   cache behavior. If `Quantity` is `0`, you can omit `Items`.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/TrustedSigners AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/TrustedSigners AWS API Documentation
     #
     class TrustedSigners < Struct.new(
       :enabled,
@@ -6765,7 +6801,7 @@ module Aws::CloudFront
     #   A complex type that contains zero or more `Tag` key elements.
     #   @return [Types::TagKeys]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UntagResourceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/UntagResourceRequest AWS API Documentation
     #
     class UntagResourceRequest < Struct.new(
       :resource,
@@ -6800,7 +6836,7 @@ module Aws::CloudFront
     #   identity's configuration. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateCloudFrontOriginAccessIdentityRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/UpdateCloudFrontOriginAccessIdentityRequest AWS API Documentation
     #
     class UpdateCloudFrontOriginAccessIdentityRequest < Struct.new(
       :cloud_front_origin_access_identity_config,
@@ -6820,7 +6856,7 @@ module Aws::CloudFront
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateCloudFrontOriginAccessIdentityResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/UpdateCloudFrontOriginAccessIdentityResult AWS API Documentation
     #
     class UpdateCloudFrontOriginAccessIdentityResult < Struct.new(
       :cloud_front_origin_access_identity,
@@ -6919,6 +6955,7 @@ module Aws::CloudFront
     #                 {
     #                   lambda_function_arn: "LambdaFunctionARN", # required
     #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                   include_body: false,
     #                 },
     #               ],
     #             },
@@ -6973,6 +7010,7 @@ module Aws::CloudFront
     #                     {
     #                       lambda_function_arn: "LambdaFunctionARN", # required
     #                       event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                       include_body: false,
     #                     },
     #                   ],
     #                 },
@@ -7037,7 +7075,7 @@ module Aws::CloudFront
     #   distribution's configuration. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateDistributionRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/UpdateDistributionRequest AWS API Documentation
     #
     class UpdateDistributionRequest < Struct.new(
       :distribution_config,
@@ -7057,7 +7095,7 @@ module Aws::CloudFront
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateDistributionResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/UpdateDistributionResult AWS API Documentation
     #
     class UpdateDistributionResult < Struct.new(
       :distribution,
@@ -7115,7 +7153,7 @@ module Aws::CloudFront
     #   configuration identity to update. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateFieldLevelEncryptionConfigRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/UpdateFieldLevelEncryptionConfigRequest AWS API Documentation
     #
     class UpdateFieldLevelEncryptionConfigRequest < Struct.new(
       :field_level_encryption_config,
@@ -7133,7 +7171,7 @@ module Aws::CloudFront
     #   configuration. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateFieldLevelEncryptionConfigResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/UpdateFieldLevelEncryptionConfigResult AWS API Documentation
     #
     class UpdateFieldLevelEncryptionConfigResult < Struct.new(
       :field_level_encryption,
@@ -7180,7 +7218,7 @@ module Aws::CloudFront
     #   profile identity to update. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateFieldLevelEncryptionProfileRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/UpdateFieldLevelEncryptionProfileRequest AWS API Documentation
     #
     class UpdateFieldLevelEncryptionProfileRequest < Struct.new(
       :field_level_encryption_profile_config,
@@ -7197,7 +7235,7 @@ module Aws::CloudFront
     #   The result of the field-level encryption profile request.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateFieldLevelEncryptionProfileResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/UpdateFieldLevelEncryptionProfileResult AWS API Documentation
     #
     class UpdateFieldLevelEncryptionProfileResult < Struct.new(
       :field_level_encryption_profile,
@@ -7232,7 +7270,7 @@ module Aws::CloudFront
     #   public key to update. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdatePublicKeyRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/UpdatePublicKeyRequest AWS API Documentation
     #
     class UpdatePublicKeyRequest < Struct.new(
       :public_key_config,
@@ -7250,7 +7288,7 @@ module Aws::CloudFront
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdatePublicKeyResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/UpdatePublicKeyResult AWS API Documentation
     #
     class UpdatePublicKeyResult < Struct.new(
       :public_key,
@@ -7306,7 +7344,7 @@ module Aws::CloudFront
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateStreamingDistributionRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/UpdateStreamingDistributionRequest AWS API Documentation
     #
     class UpdateStreamingDistributionRequest < Struct.new(
       :streaming_distribution_config,
@@ -7326,7 +7364,7 @@ module Aws::CloudFront
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateStreamingDistributionResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/UpdateStreamingDistributionResult AWS API Documentation
     #
     class UpdateStreamingDistributionResult < Struct.new(
       :streaming_distribution,
@@ -7564,7 +7602,7 @@ module Aws::CloudFront
     #   * ViewerCertificate$CloudFrontDefaultCertificate
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ViewerCertificate AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/ViewerCertificate AWS API Documentation
     #
     class ViewerCertificate < Struct.new(
       :cloud_front_default_certificate,
