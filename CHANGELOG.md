@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.108 (2018-08-14)
+------------------
+
 * Feature - Aws::AutoScaling - Updated the API, documentation, and integration test for Auto Scaling.
 
 * Feature - Aws::ElasticsearchService - Updated the API, and documentation for Amazon Elasticsearch Service.
