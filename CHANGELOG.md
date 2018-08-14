@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AutoScaling - Updated the API, documentation, and integration test for Auto Scaling.
+
+* Feature - Aws::ElasticsearchService - Updated the API, and documentation for Amazon Elasticsearch Service.
+
+* Feature - Aws::CloudFront - Added support for the new 2018-06-18 API version of Amazon CloudFront.
+
 2.11.107 (2018-08-13)
 ------------------
 
