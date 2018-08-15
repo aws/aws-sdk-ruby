@@ -648,7 +648,7 @@ module Aws::DeviceFarm
     #
     #   * IOS\_APP: An iOS upload.
     #
-    #   * WEB\_APP: A web appliction upload.
+    #   * WEB\_APP: A web application upload.
     #
     #   * EXTERNAL\_DATA: An external data upload.
     #
@@ -720,7 +720,7 @@ module Aws::DeviceFarm
     #   resp = client.create_upload({
     #     project_arn: "AmazonResourceName", # required
     #     name: "Name", # required
-    #     type: "ANDROID_APP", # required, accepts ANDROID_APP, IOS_APP, WEB_APP, EXTERNAL_DATA, APPIUM_JAVA_JUNIT_TEST_PACKAGE, APPIUM_JAVA_TESTNG_TEST_PACKAGE, APPIUM_PYTHON_TEST_PACKAGE, APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE, APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE, APPIUM_WEB_PYTHON_TEST_PACKAGE, CALABASH_TEST_PACKAGE, INSTRUMENTATION_TEST_PACKAGE, UIAUTOMATION_TEST_PACKAGE, UIAUTOMATOR_TEST_PACKAGE, XCTEST_TEST_PACKAGE, XCTEST_UI_TEST_PACKAGE
+    #     type: "ANDROID_APP", # required, accepts ANDROID_APP, IOS_APP, WEB_APP, EXTERNAL_DATA, APPIUM_JAVA_JUNIT_TEST_PACKAGE, APPIUM_JAVA_TESTNG_TEST_PACKAGE, APPIUM_PYTHON_TEST_PACKAGE, APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE, APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE, APPIUM_WEB_PYTHON_TEST_PACKAGE, CALABASH_TEST_PACKAGE, INSTRUMENTATION_TEST_PACKAGE, UIAUTOMATION_TEST_PACKAGE, UIAUTOMATOR_TEST_PACKAGE, XCTEST_TEST_PACKAGE, XCTEST_UI_TEST_PACKAGE, APPIUM_JAVA_JUNIT_TEST_SPEC, APPIUM_JAVA_TESTNG_TEST_SPEC, APPIUM_PYTHON_TEST_SPEC, APPIUM_WEB_JAVA_JUNIT_TEST_SPEC, APPIUM_WEB_JAVA_TESTNG_TEST_SPEC, APPIUM_WEB_PYTHON_TEST_SPEC, INSTRUMENTATION_TEST_SPEC, XCTEST_UI_TEST_SPEC
     #     content_type: "ContentType",
     #   })
     #
@@ -729,12 +729,13 @@ module Aws::DeviceFarm
     #   resp.upload.arn #=> String
     #   resp.upload.name #=> String
     #   resp.upload.created #=> Time
-    #   resp.upload.type #=> String, one of "ANDROID_APP", "IOS_APP", "WEB_APP", "EXTERNAL_DATA", "APPIUM_JAVA_JUNIT_TEST_PACKAGE", "APPIUM_JAVA_TESTNG_TEST_PACKAGE", "APPIUM_PYTHON_TEST_PACKAGE", "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE", "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE", "APPIUM_WEB_PYTHON_TEST_PACKAGE", "CALABASH_TEST_PACKAGE", "INSTRUMENTATION_TEST_PACKAGE", "UIAUTOMATION_TEST_PACKAGE", "UIAUTOMATOR_TEST_PACKAGE", "XCTEST_TEST_PACKAGE", "XCTEST_UI_TEST_PACKAGE"
+    #   resp.upload.type #=> String, one of "ANDROID_APP", "IOS_APP", "WEB_APP", "EXTERNAL_DATA", "APPIUM_JAVA_JUNIT_TEST_PACKAGE", "APPIUM_JAVA_TESTNG_TEST_PACKAGE", "APPIUM_PYTHON_TEST_PACKAGE", "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE", "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE", "APPIUM_WEB_PYTHON_TEST_PACKAGE", "CALABASH_TEST_PACKAGE", "INSTRUMENTATION_TEST_PACKAGE", "UIAUTOMATION_TEST_PACKAGE", "UIAUTOMATOR_TEST_PACKAGE", "XCTEST_TEST_PACKAGE", "XCTEST_UI_TEST_PACKAGE", "APPIUM_JAVA_JUNIT_TEST_SPEC", "APPIUM_JAVA_TESTNG_TEST_SPEC", "APPIUM_PYTHON_TEST_SPEC", "APPIUM_WEB_JAVA_JUNIT_TEST_SPEC", "APPIUM_WEB_JAVA_TESTNG_TEST_SPEC", "APPIUM_WEB_PYTHON_TEST_SPEC", "INSTRUMENTATION_TEST_SPEC", "XCTEST_UI_TEST_SPEC"
     #   resp.upload.status #=> String, one of "INITIALIZED", "PROCESSING", "SUCCEEDED", "FAILED"
     #   resp.upload.url #=> String
     #   resp.upload.metadata #=> String
     #   resp.upload.content_type #=> String
     #   resp.upload.message #=> String
+    #   resp.upload.category #=> String, one of "CURATED", "PRIVATE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateUpload AWS API Documentation
     #
@@ -1370,6 +1371,7 @@ module Aws::DeviceFarm
     #     test: {
     #       type: "BUILTIN_FUZZ", # required, accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, WEB_PERFORMANCE_PROFILE, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI, REMOTE_ACCESS_RECORD, REMOTE_ACCESS_REPLAY
     #       test_package_arn: "AmazonResourceName",
+    #       test_spec_arn: "AmazonResourceName",
     #       filter: "Filter",
     #       parameters: {
     #         "String" => "String",
@@ -1616,6 +1618,8 @@ module Aws::DeviceFarm
     #   resp.job.device_minutes.total #=> Float
     #   resp.job.device_minutes.metered #=> Float
     #   resp.job.device_minutes.unmetered #=> Float
+    #   resp.job.video_endpoint #=> String
+    #   resp.job.video_capture #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetJob AWS API Documentation
     #
@@ -2027,6 +2031,7 @@ module Aws::DeviceFarm
     #   resp.run.customer_artifact_paths.device_host_paths[0] #=> String
     #   resp.run.web_url #=> String
     #   resp.run.skip_app_resign #=> Boolean
+    #   resp.run.test_spec_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRun AWS API Documentation
     #
@@ -2194,12 +2199,13 @@ module Aws::DeviceFarm
     #   resp.upload.arn #=> String
     #   resp.upload.name #=> String
     #   resp.upload.created #=> Time
-    #   resp.upload.type #=> String, one of "ANDROID_APP", "IOS_APP", "WEB_APP", "EXTERNAL_DATA", "APPIUM_JAVA_JUNIT_TEST_PACKAGE", "APPIUM_JAVA_TESTNG_TEST_PACKAGE", "APPIUM_PYTHON_TEST_PACKAGE", "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE", "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE", "APPIUM_WEB_PYTHON_TEST_PACKAGE", "CALABASH_TEST_PACKAGE", "INSTRUMENTATION_TEST_PACKAGE", "UIAUTOMATION_TEST_PACKAGE", "UIAUTOMATOR_TEST_PACKAGE", "XCTEST_TEST_PACKAGE", "XCTEST_UI_TEST_PACKAGE"
+    #   resp.upload.type #=> String, one of "ANDROID_APP", "IOS_APP", "WEB_APP", "EXTERNAL_DATA", "APPIUM_JAVA_JUNIT_TEST_PACKAGE", "APPIUM_JAVA_TESTNG_TEST_PACKAGE", "APPIUM_PYTHON_TEST_PACKAGE", "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE", "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE", "APPIUM_WEB_PYTHON_TEST_PACKAGE", "CALABASH_TEST_PACKAGE", "INSTRUMENTATION_TEST_PACKAGE", "UIAUTOMATION_TEST_PACKAGE", "UIAUTOMATOR_TEST_PACKAGE", "XCTEST_TEST_PACKAGE", "XCTEST_UI_TEST_PACKAGE", "APPIUM_JAVA_JUNIT_TEST_SPEC", "APPIUM_JAVA_TESTNG_TEST_SPEC", "APPIUM_PYTHON_TEST_SPEC", "APPIUM_WEB_JAVA_JUNIT_TEST_SPEC", "APPIUM_WEB_JAVA_TESTNG_TEST_SPEC", "APPIUM_WEB_PYTHON_TEST_SPEC", "INSTRUMENTATION_TEST_SPEC", "XCTEST_UI_TEST_SPEC"
     #   resp.upload.status #=> String, one of "INITIALIZED", "PROCESSING", "SUCCEEDED", "FAILED"
     #   resp.upload.url #=> String
     #   resp.upload.metadata #=> String
     #   resp.upload.content_type #=> String
     #   resp.upload.message #=> String
+    #   resp.upload.category #=> String, one of "CURATED", "PRIVATE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetUpload AWS API Documentation
     #
@@ -2288,12 +2294,13 @@ module Aws::DeviceFarm
     #   resp.app_upload.arn #=> String
     #   resp.app_upload.name #=> String
     #   resp.app_upload.created #=> Time
-    #   resp.app_upload.type #=> String, one of "ANDROID_APP", "IOS_APP", "WEB_APP", "EXTERNAL_DATA", "APPIUM_JAVA_JUNIT_TEST_PACKAGE", "APPIUM_JAVA_TESTNG_TEST_PACKAGE", "APPIUM_PYTHON_TEST_PACKAGE", "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE", "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE", "APPIUM_WEB_PYTHON_TEST_PACKAGE", "CALABASH_TEST_PACKAGE", "INSTRUMENTATION_TEST_PACKAGE", "UIAUTOMATION_TEST_PACKAGE", "UIAUTOMATOR_TEST_PACKAGE", "XCTEST_TEST_PACKAGE", "XCTEST_UI_TEST_PACKAGE"
+    #   resp.app_upload.type #=> String, one of "ANDROID_APP", "IOS_APP", "WEB_APP", "EXTERNAL_DATA", "APPIUM_JAVA_JUNIT_TEST_PACKAGE", "APPIUM_JAVA_TESTNG_TEST_PACKAGE", "APPIUM_PYTHON_TEST_PACKAGE", "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE", "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE", "APPIUM_WEB_PYTHON_TEST_PACKAGE", "CALABASH_TEST_PACKAGE", "INSTRUMENTATION_TEST_PACKAGE", "UIAUTOMATION_TEST_PACKAGE", "UIAUTOMATOR_TEST_PACKAGE", "XCTEST_TEST_PACKAGE", "XCTEST_UI_TEST_PACKAGE", "APPIUM_JAVA_JUNIT_TEST_SPEC", "APPIUM_JAVA_TESTNG_TEST_SPEC", "APPIUM_PYTHON_TEST_SPEC", "APPIUM_WEB_JAVA_JUNIT_TEST_SPEC", "APPIUM_WEB_JAVA_TESTNG_TEST_SPEC", "APPIUM_WEB_PYTHON_TEST_SPEC", "INSTRUMENTATION_TEST_SPEC", "XCTEST_UI_TEST_SPEC"
     #   resp.app_upload.status #=> String, one of "INITIALIZED", "PROCESSING", "SUCCEEDED", "FAILED"
     #   resp.app_upload.url #=> String
     #   resp.app_upload.metadata #=> String
     #   resp.app_upload.content_type #=> String
     #   resp.app_upload.message #=> String
+    #   resp.app_upload.category #=> String, one of "CURATED", "PRIVATE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/InstallToRemoteAccessSession AWS API Documentation
     #
@@ -2353,7 +2360,7 @@ module Aws::DeviceFarm
     #   resp.artifacts #=> Array
     #   resp.artifacts[0].arn #=> String
     #   resp.artifacts[0].name #=> String
-    #   resp.artifacts[0].type #=> String, one of "UNKNOWN", "SCREENSHOT", "DEVICE_LOG", "MESSAGE_LOG", "VIDEO_LOG", "RESULT_LOG", "SERVICE_LOG", "WEBKIT_LOG", "INSTRUMENTATION_OUTPUT", "EXERCISER_MONKEY_OUTPUT", "CALABASH_JSON_OUTPUT", "CALABASH_PRETTY_OUTPUT", "CALABASH_STANDARD_OUTPUT", "CALABASH_JAVA_XML_OUTPUT", "AUTOMATION_OUTPUT", "APPIUM_SERVER_OUTPUT", "APPIUM_JAVA_OUTPUT", "APPIUM_JAVA_XML_OUTPUT", "APPIUM_PYTHON_OUTPUT", "APPIUM_PYTHON_XML_OUTPUT", "EXPLORER_EVENT_LOG", "EXPLORER_SUMMARY_LOG", "APPLICATION_CRASH_REPORT", "XCTEST_LOG", "VIDEO", "CUSTOMER_ARTIFACT", "CUSTOMER_ARTIFACT_LOG"
+    #   resp.artifacts[0].type #=> String, one of "UNKNOWN", "SCREENSHOT", "DEVICE_LOG", "MESSAGE_LOG", "VIDEO_LOG", "RESULT_LOG", "SERVICE_LOG", "WEBKIT_LOG", "INSTRUMENTATION_OUTPUT", "EXERCISER_MONKEY_OUTPUT", "CALABASH_JSON_OUTPUT", "CALABASH_PRETTY_OUTPUT", "CALABASH_STANDARD_OUTPUT", "CALABASH_JAVA_XML_OUTPUT", "AUTOMATION_OUTPUT", "APPIUM_SERVER_OUTPUT", "APPIUM_JAVA_OUTPUT", "APPIUM_JAVA_XML_OUTPUT", "APPIUM_PYTHON_OUTPUT", "APPIUM_PYTHON_XML_OUTPUT", "EXPLORER_EVENT_LOG", "EXPLORER_SUMMARY_LOG", "APPLICATION_CRASH_REPORT", "XCTEST_LOG", "VIDEO", "CUSTOMER_ARTIFACT", "CUSTOMER_ARTIFACT_LOG", "TESTSPEC_OUTPUT"
     #   resp.artifacts[0].extension #=> String
     #   resp.artifacts[0].url #=> String
     #   resp.next_token #=> String
@@ -2733,6 +2740,8 @@ module Aws::DeviceFarm
     #   resp.jobs[0].device_minutes.total #=> Float
     #   resp.jobs[0].device_minutes.metered #=> Float
     #   resp.jobs[0].device_minutes.unmetered #=> Float
+    #   resp.jobs[0].video_endpoint #=> String
+    #   resp.jobs[0].video_capture #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListJobs AWS API Documentation
@@ -3407,6 +3416,7 @@ module Aws::DeviceFarm
     #   resp.runs[0].customer_artifact_paths.device_host_paths[0] #=> String
     #   resp.runs[0].web_url #=> String
     #   resp.runs[0].skip_app_resign #=> Boolean
+    #   resp.runs[0].test_spec_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRuns AWS API Documentation
@@ -3723,6 +3733,68 @@ module Aws::DeviceFarm
     #   The Amazon Resource Name (ARN) of the project for which you want to
     #   list uploads.
     #
+    # @option params [String] :type
+    #   The type of upload.
+    #
+    #   Must be one of the following values:
+    #
+    #   * ANDROID\_APP: An Android upload.
+    #
+    #   * IOS\_APP: An iOS upload.
+    #
+    #   * WEB\_APP: A web appliction upload.
+    #
+    #   * EXTERNAL\_DATA: An external data upload.
+    #
+    #   * APPIUM\_JAVA\_JUNIT\_TEST\_PACKAGE: An Appium Java JUnit test
+    #     package upload.
+    #
+    #   * APPIUM\_JAVA\_TESTNG\_TEST\_PACKAGE: An Appium Java TestNG test
+    #     package upload.
+    #
+    #   * APPIUM\_PYTHON\_TEST\_PACKAGE: An Appium Python test package upload.
+    #
+    #   * APPIUM\_WEB\_JAVA\_JUNIT\_TEST\_PACKAGE: An Appium Java JUnit test
+    #     package upload.
+    #
+    #   * APPIUM\_WEB\_JAVA\_TESTNG\_TEST\_PACKAGE: An Appium Java TestNG test
+    #     package upload.
+    #
+    #   * APPIUM\_WEB\_PYTHON\_TEST\_PACKAGE: An Appium Python test package
+    #     upload.
+    #
+    #   * CALABASH\_TEST\_PACKAGE: A Calabash test package upload.
+    #
+    #   * INSTRUMENTATION\_TEST\_PACKAGE: An instrumentation upload.
+    #
+    #   * UIAUTOMATION\_TEST\_PACKAGE: A uiautomation test package upload.
+    #
+    #   * UIAUTOMATOR\_TEST\_PACKAGE: A uiautomator test package upload.
+    #
+    #   * XCTEST\_TEST\_PACKAGE: An XCode test package upload.
+    #
+    #   * XCTEST\_UI\_TEST\_PACKAGE: An XCode UI test package upload.
+    #
+    #   * APPIUM\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test spec
+    #     upload.
+    #
+    #   * APPIUM\_JAVA\_TESTNG\_TEST\_SPEC: An Appium Java TestNG test spec
+    #     upload.
+    #
+    #   * APPIUM\_PYTHON\_TEST\_SPEC: An Appium Python test spec upload.
+    #
+    #   * APPIUM\_WEB\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test spec
+    #     upload.
+    #
+    #   * APPIUM\_WEB\_JAVA\_TESTNG\_TEST\_SPEC: An Appium Java TestNG test
+    #     spec upload.
+    #
+    #   * APPIUM\_WEB\_PYTHON\_TEST\_SPEC: An Appium Python test spec upload.
+    #
+    #   * INSTRUMENTATION\_TEST\_SPEC: An instrumentation test spec upload.
+    #
+    #   * XCTEST\_UI\_TEST\_SPEC: An XCode UI test spec upload.
+    #
     # @option params [String] :next_token
     #   An identifier that was returned from the previous call to this
     #   operation, which can be used to return the next set of items in the
@@ -3753,6 +3825,7 @@ module Aws::DeviceFarm
     #
     #   resp = client.list_uploads({
     #     arn: "AmazonResourceName", # required
+    #     type: "ANDROID_APP", # accepts ANDROID_APP, IOS_APP, WEB_APP, EXTERNAL_DATA, APPIUM_JAVA_JUNIT_TEST_PACKAGE, APPIUM_JAVA_TESTNG_TEST_PACKAGE, APPIUM_PYTHON_TEST_PACKAGE, APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE, APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE, APPIUM_WEB_PYTHON_TEST_PACKAGE, CALABASH_TEST_PACKAGE, INSTRUMENTATION_TEST_PACKAGE, UIAUTOMATION_TEST_PACKAGE, UIAUTOMATOR_TEST_PACKAGE, XCTEST_TEST_PACKAGE, XCTEST_UI_TEST_PACKAGE, APPIUM_JAVA_JUNIT_TEST_SPEC, APPIUM_JAVA_TESTNG_TEST_SPEC, APPIUM_PYTHON_TEST_SPEC, APPIUM_WEB_JAVA_JUNIT_TEST_SPEC, APPIUM_WEB_JAVA_TESTNG_TEST_SPEC, APPIUM_WEB_PYTHON_TEST_SPEC, INSTRUMENTATION_TEST_SPEC, XCTEST_UI_TEST_SPEC
     #     next_token: "PaginationToken",
     #   })
     #
@@ -3762,12 +3835,13 @@ module Aws::DeviceFarm
     #   resp.uploads[0].arn #=> String
     #   resp.uploads[0].name #=> String
     #   resp.uploads[0].created #=> Time
-    #   resp.uploads[0].type #=> String, one of "ANDROID_APP", "IOS_APP", "WEB_APP", "EXTERNAL_DATA", "APPIUM_JAVA_JUNIT_TEST_PACKAGE", "APPIUM_JAVA_TESTNG_TEST_PACKAGE", "APPIUM_PYTHON_TEST_PACKAGE", "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE", "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE", "APPIUM_WEB_PYTHON_TEST_PACKAGE", "CALABASH_TEST_PACKAGE", "INSTRUMENTATION_TEST_PACKAGE", "UIAUTOMATION_TEST_PACKAGE", "UIAUTOMATOR_TEST_PACKAGE", "XCTEST_TEST_PACKAGE", "XCTEST_UI_TEST_PACKAGE"
+    #   resp.uploads[0].type #=> String, one of "ANDROID_APP", "IOS_APP", "WEB_APP", "EXTERNAL_DATA", "APPIUM_JAVA_JUNIT_TEST_PACKAGE", "APPIUM_JAVA_TESTNG_TEST_PACKAGE", "APPIUM_PYTHON_TEST_PACKAGE", "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE", "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE", "APPIUM_WEB_PYTHON_TEST_PACKAGE", "CALABASH_TEST_PACKAGE", "INSTRUMENTATION_TEST_PACKAGE", "UIAUTOMATION_TEST_PACKAGE", "UIAUTOMATOR_TEST_PACKAGE", "XCTEST_TEST_PACKAGE", "XCTEST_UI_TEST_PACKAGE", "APPIUM_JAVA_JUNIT_TEST_SPEC", "APPIUM_JAVA_TESTNG_TEST_SPEC", "APPIUM_PYTHON_TEST_SPEC", "APPIUM_WEB_JAVA_JUNIT_TEST_SPEC", "APPIUM_WEB_JAVA_TESTNG_TEST_SPEC", "APPIUM_WEB_PYTHON_TEST_SPEC", "INSTRUMENTATION_TEST_SPEC", "XCTEST_UI_TEST_SPEC"
     #   resp.uploads[0].status #=> String, one of "INITIALIZED", "PROCESSING", "SUCCEEDED", "FAILED"
     #   resp.uploads[0].url #=> String
     #   resp.uploads[0].metadata #=> String
     #   resp.uploads[0].content_type #=> String
     #   resp.uploads[0].message #=> String
+    #   resp.uploads[0].category #=> String, one of "CURATED", "PRIVATE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListUploads AWS API Documentation
@@ -4056,6 +4130,7 @@ module Aws::DeviceFarm
     #     test: { # required
     #       type: "BUILTIN_FUZZ", # required, accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, WEB_PERFORMANCE_PROFILE, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI, REMOTE_ACCESS_RECORD, REMOTE_ACCESS_REPLAY
     #       test_package_arn: "AmazonResourceName",
+    #       test_spec_arn: "AmazonResourceName",
     #       filter: "Filter",
     #       parameters: {
     #         "String" => "String",
@@ -4088,6 +4163,7 @@ module Aws::DeviceFarm
     #       job_timeout_minutes: 1,
     #       accounts_cleanup: false,
     #       app_packages_cleanup: false,
+    #       video_capture: false,
     #       skip_app_resign: false,
     #     },
     #   })
@@ -4151,6 +4227,7 @@ module Aws::DeviceFarm
     #   resp.run.customer_artifact_paths.device_host_paths[0] #=> String
     #   resp.run.web_url #=> String
     #   resp.run.skip_app_resign #=> Boolean
+    #   resp.run.test_spec_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRun AWS API Documentation
     #
@@ -4158,6 +4235,98 @@ module Aws::DeviceFarm
     # @param [Hash] params ({})
     def schedule_run(params = {}, options = {})
       req = build_request(:schedule_run, params)
+      req.send_request(options)
+    end
+
+    # Initiates a stop request for the current job. AWS Device Farm will
+    # immediately stop the job on the device where tests have not started
+    # executing, and you will not be billed for this device. On the device
+    # where tests have started executing, Setup Suite and Teardown Suite
+    # tests will run to completion before stopping execution on the device.
+    # You will be billed for Setup, Teardown, and any tests that were in
+    # progress or already completed.
+    #
+    # @option params [required, String] :arn
+    #   Represents the Amazon Resource Name (ARN) of the Device Farm job you
+    #   wish to stop.
+    #
+    # @return [Types::StopJobResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopJobResult#job #job} => Types::Job
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_job({
+    #     arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job.arn #=> String
+    #   resp.job.name #=> String
+    #   resp.job.type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "WEB_PERFORMANCE_PROFILE", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI", "REMOTE_ACCESS_RECORD", "REMOTE_ACCESS_REPLAY"
+    #   resp.job.created #=> Time
+    #   resp.job.status #=> String, one of "PENDING", "PENDING_CONCURRENCY", "PENDING_DEVICE", "PROCESSING", "SCHEDULING", "PREPARING", "RUNNING", "COMPLETED", "STOPPING"
+    #   resp.job.result #=> String, one of "PENDING", "PASSED", "WARNED", "FAILED", "SKIPPED", "ERRORED", "STOPPED"
+    #   resp.job.started #=> Time
+    #   resp.job.stopped #=> Time
+    #   resp.job.counters.total #=> Integer
+    #   resp.job.counters.passed #=> Integer
+    #   resp.job.counters.failed #=> Integer
+    #   resp.job.counters.warned #=> Integer
+    #   resp.job.counters.errored #=> Integer
+    #   resp.job.counters.stopped #=> Integer
+    #   resp.job.counters.skipped #=> Integer
+    #   resp.job.message #=> String
+    #   resp.job.device.arn #=> String
+    #   resp.job.device.name #=> String
+    #   resp.job.device.manufacturer #=> String
+    #   resp.job.device.model #=> String
+    #   resp.job.device.model_id #=> String
+    #   resp.job.device.form_factor #=> String, one of "PHONE", "TABLET"
+    #   resp.job.device.platform #=> String, one of "ANDROID", "IOS"
+    #   resp.job.device.os #=> String
+    #   resp.job.device.cpu.frequency #=> String
+    #   resp.job.device.cpu.architecture #=> String
+    #   resp.job.device.cpu.clock #=> Float
+    #   resp.job.device.resolution.width #=> Integer
+    #   resp.job.device.resolution.height #=> Integer
+    #   resp.job.device.heap_size #=> Integer
+    #   resp.job.device.memory #=> Integer
+    #   resp.job.device.image #=> String
+    #   resp.job.device.carrier #=> String
+    #   resp.job.device.radio #=> String
+    #   resp.job.device.remote_access_enabled #=> Boolean
+    #   resp.job.device.remote_debug_enabled #=> Boolean
+    #   resp.job.device.fleet_type #=> String
+    #   resp.job.device.fleet_name #=> String
+    #   resp.job.device.instances #=> Array
+    #   resp.job.device.instances[0].arn #=> String
+    #   resp.job.device.instances[0].device_arn #=> String
+    #   resp.job.device.instances[0].labels #=> Array
+    #   resp.job.device.instances[0].labels[0] #=> String
+    #   resp.job.device.instances[0].status #=> String, one of "IN_USE", "PREPARING", "AVAILABLE", "NOT_AVAILABLE"
+    #   resp.job.device.instances[0].udid #=> String
+    #   resp.job.device.instances[0].instance_profile.arn #=> String
+    #   resp.job.device.instances[0].instance_profile.package_cleanup #=> Boolean
+    #   resp.job.device.instances[0].instance_profile.exclude_app_packages_from_cleanup #=> Array
+    #   resp.job.device.instances[0].instance_profile.exclude_app_packages_from_cleanup[0] #=> String
+    #   resp.job.device.instances[0].instance_profile.reboot_after_use #=> Boolean
+    #   resp.job.device.instances[0].instance_profile.name #=> String
+    #   resp.job.device.instances[0].instance_profile.description #=> String
+    #   resp.job.instance_arn #=> String
+    #   resp.job.device_minutes.total #=> Float
+    #   resp.job.device_minutes.metered #=> Float
+    #   resp.job.device_minutes.unmetered #=> Float
+    #   resp.job.video_endpoint #=> String
+    #   resp.job.video_capture #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopJob AWS API Documentation
+    #
+    # @overload stop_job(params = {})
+    # @param [Hash] params ({})
+    def stop_job(params = {}, options = {})
+      req = build_request(:stop_job, params)
       req.send_request(options)
     end
 
@@ -4343,6 +4512,7 @@ module Aws::DeviceFarm
     #   resp.run.customer_artifact_paths.device_host_paths[0] #=> String
     #   resp.run.web_url #=> String
     #   resp.run.skip_app_resign #=> Boolean
+    #   resp.run.test_spec_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRun AWS API Documentation
     #
@@ -4703,6 +4873,58 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
+    # Update an uploaded test specification (test spec).
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the uploaded test spec.
+    #
+    # @option params [String] :name
+    #   The upload's test spec file name. The name should not contain the
+    #   '/' character. The test spec file name must end with the `.yaml` or
+    #   `.yml` file extension.
+    #
+    # @option params [String] :content_type
+    #   The upload's content type (for example, "application/x-yaml").
+    #
+    # @option params [Boolean] :edit_content
+    #   Set to true if the YAML file has changed and needs to be updated;
+    #   otherwise, set to false.
+    #
+    # @return [Types::UpdateUploadResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateUploadResult#upload #upload} => Types::Upload
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_upload({
+    #     arn: "AmazonResourceName", # required
+    #     name: "Name",
+    #     content_type: "ContentType",
+    #     edit_content: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.upload.arn #=> String
+    #   resp.upload.name #=> String
+    #   resp.upload.created #=> Time
+    #   resp.upload.type #=> String, one of "ANDROID_APP", "IOS_APP", "WEB_APP", "EXTERNAL_DATA", "APPIUM_JAVA_JUNIT_TEST_PACKAGE", "APPIUM_JAVA_TESTNG_TEST_PACKAGE", "APPIUM_PYTHON_TEST_PACKAGE", "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE", "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE", "APPIUM_WEB_PYTHON_TEST_PACKAGE", "CALABASH_TEST_PACKAGE", "INSTRUMENTATION_TEST_PACKAGE", "UIAUTOMATION_TEST_PACKAGE", "UIAUTOMATOR_TEST_PACKAGE", "XCTEST_TEST_PACKAGE", "XCTEST_UI_TEST_PACKAGE", "APPIUM_JAVA_JUNIT_TEST_SPEC", "APPIUM_JAVA_TESTNG_TEST_SPEC", "APPIUM_PYTHON_TEST_SPEC", "APPIUM_WEB_JAVA_JUNIT_TEST_SPEC", "APPIUM_WEB_JAVA_TESTNG_TEST_SPEC", "APPIUM_WEB_PYTHON_TEST_SPEC", "INSTRUMENTATION_TEST_SPEC", "XCTEST_UI_TEST_SPEC"
+    #   resp.upload.status #=> String, one of "INITIALIZED", "PROCESSING", "SUCCEEDED", "FAILED"
+    #   resp.upload.url #=> String
+    #   resp.upload.metadata #=> String
+    #   resp.upload.content_type #=> String
+    #   resp.upload.message #=> String
+    #   resp.upload.category #=> String, one of "CURATED", "PRIVATE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateUpload AWS API Documentation
+    #
+    # @overload update_upload(params = {})
+    # @param [Hash] params ({})
+    def update_upload(params = {}, options = {})
+      req = build_request(:update_upload, params)
+      req.send_request(options)
+    end
+
     # Updates information about an existing Amazon Virtual Private Cloud
     # (VPC) endpoint configuration.
     #
@@ -4770,7 +4992,7 @@ module Aws::DeviceFarm
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devicefarm'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
