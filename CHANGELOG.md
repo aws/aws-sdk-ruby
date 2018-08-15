@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DeviceFarm - Updated the API, and documentation for AWS Device Farm.
+
 2.11.108 (2018-08-14)
 ------------------
 
