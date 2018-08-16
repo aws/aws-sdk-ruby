@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.110 (2018-08-16)
+------------------
+
 * Feature - Aws::ApplicationDiscoveryService - Updated the API, documentation, and integration test for AWS Application Discovery Service.
 
 * Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
