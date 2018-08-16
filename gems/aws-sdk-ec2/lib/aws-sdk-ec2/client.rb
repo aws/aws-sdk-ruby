@@ -16312,7 +16312,7 @@ module Aws::EC2
     #
     # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumes.html
     #
-    # @option params [String] :attribute
+    # @option params [required, String] :attribute
     #   The attribute of the volume. This parameter is required.
     #
     # @option params [required, String] :volume_id
@@ -16351,7 +16351,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_volume_attribute({
-    #     attribute: "autoEnableIO", # accepts autoEnableIO, productCodes
+    #     attribute: "autoEnableIO", # required, accepts autoEnableIO, productCodes
     #     volume_id: "String", # required
     #     dry_run: false,
     #   })
@@ -25697,7 +25697,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

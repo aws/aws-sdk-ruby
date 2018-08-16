@@ -2905,7 +2905,7 @@ module Aws::EC2
     DescribeTagsResult.add_member(:tags, Shapes::ShapeRef.new(shape: TagDescriptionList, location_name: "tagSet"))
     DescribeTagsResult.struct_class = Types::DescribeTagsResult
 
-    DescribeVolumeAttributeRequest.add_member(:attribute, Shapes::ShapeRef.new(shape: VolumeAttributeName, location_name: "Attribute"))
+    DescribeVolumeAttributeRequest.add_member(:attribute, Shapes::ShapeRef.new(shape: VolumeAttributeName, required: true, location_name: "Attribute"))
     DescribeVolumeAttributeRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VolumeId"))
     DescribeVolumeAttributeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DescribeVolumeAttributeRequest.struct_class = Types::DescribeVolumeAttributeRequest

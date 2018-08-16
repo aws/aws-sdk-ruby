@@ -372,6 +372,7 @@ module Aws::MediaConvert
     #               min_buffer_time: 1,
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1, # required
+    #               write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #             },
     #             file_group_settings: {
     #               destination: "__stringPatternS3",
@@ -1055,6 +1056,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
@@ -1687,6 +1689,7 @@ module Aws::MediaConvert
     #               min_buffer_time: 1,
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1, # required
+    #               write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #             },
     #             file_group_settings: {
     #               destination: "__stringPatternS3",
@@ -2363,6 +2366,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
@@ -3967,6 +3971,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
@@ -4536,6 +4541,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
@@ -5561,6 +5567,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
@@ -6160,6 +6167,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
@@ -7363,6 +7371,7 @@ module Aws::MediaConvert
     #               min_buffer_time: 1,
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1, # required
+    #               write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #             },
     #             file_group_settings: {
     #               destination: "__stringPatternS3",
@@ -8036,6 +8045,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
@@ -9406,7 +9416,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

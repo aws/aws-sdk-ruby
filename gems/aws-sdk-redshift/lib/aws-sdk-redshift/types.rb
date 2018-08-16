@@ -406,6 +406,11 @@ module Aws::Redshift
     #   The name of the maintenance track for the cluster.
     #   @return [String]
     #
+    # @!attribute [rw] elastic_resize_number_of_node_options
+    #   Indicates the number of nodes the cluster can be resized to with the
+    #   elastic resize method.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -443,7 +448,8 @@ module Aws::Redshift
       :enhanced_vpc_routing,
       :iam_roles,
       :pending_actions,
-      :maintenance_track_name)
+      :maintenance_track_name,
+      :elastic_resize_number_of_node_options)
       include Aws::Structure
     end
 
@@ -5875,6 +5881,60 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ResizeClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_identifier: "String", # required
+    #         cluster_type: "String",
+    #         node_type: "String",
+    #         number_of_nodes: 1, # required
+    #         classic: false,
+    #       }
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The unique identifier for the cluster to resize.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_type
+    #   The new cluster type for the specified cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_type
+    #   The new node type for the nodes you are adding.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_nodes
+    #   The new number of nodes for the cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] classic
+    #   A boolean value indicating whether the resize operation is using the
+    #   classic resize process.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeClusterMessage AWS API Documentation
+    #
+    class ResizeClusterMessage < Struct.new(
+      :cluster_identifier,
+      :cluster_type,
+      :node_type,
+      :number_of_nodes,
+      :classic)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster
+    #   Describes a cluster.
+    #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeClusterResult AWS API Documentation
+    #
+    class ResizeClusterResult < Struct.new(
+      :cluster)
+      include Aws::Structure
+    end
+
     # Describes the result of a cluster resize operation.
     #
     # @!attribute [rw] target_node_type
@@ -5951,6 +6011,16 @@ module Aws::Redshift
     #   Once the resize operation is complete, this value will be 0.
     #   @return [Integer]
     #
+    # @!attribute [rw] resize_type
+    #   An enum with possible values of ClassicResize and ElasticResize.
+    #   These values describe the type of resize operation being performed.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   An optional string to provide additional details about the resize
+    #   action.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeProgressMessage AWS API Documentation
     #
     class ResizeProgressMessage < Struct.new(
@@ -5965,7 +6035,9 @@ module Aws::Redshift
       :total_resize_data_in_mega_bytes,
       :progress_in_mega_bytes,
       :elapsed_time_in_seconds,
-      :estimated_time_to_completion_in_seconds)
+      :estimated_time_to_completion_in_seconds,
+      :resize_type,
+      :message)
       include Aws::Structure
     end
 

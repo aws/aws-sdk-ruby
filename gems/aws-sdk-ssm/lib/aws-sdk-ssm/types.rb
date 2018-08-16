@@ -1158,7 +1158,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status
+    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status, ExecutionStage, DocumentName
     #         value: "CommandFilterValue", # required
     #       }
     #
@@ -5241,7 +5241,7 @@ module Aws::SSM
     #           {
     #             key: "InventoryFilterKey", # required
     #             values: ["InventoryFilterValue"], # required
-    #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan
+    #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
     #           },
     #         ],
     #         aggregators: [
@@ -5250,6 +5250,18 @@ module Aws::SSM
     #             aggregators: {
     #               # recursive InventoryAggregatorList
     #             },
+    #             groups: [
+    #               {
+    #                 name: "InventoryGroupName", # required
+    #                 filters: [ # required
+    #                   {
+    #                     key: "InventoryFilterKey", # required
+    #                     values: ["InventoryFilterValue"], # required
+    #                     type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #                   },
+    #                 ],
+    #               },
+    #             ],
     #           },
     #         ],
     #         result_attributes: [
@@ -6691,6 +6703,30 @@ module Aws::SSM
     #             aggregators: {
     #               # recursive InventoryAggregatorList
     #             },
+    #             groups: [
+    #               {
+    #                 name: "InventoryGroupName", # required
+    #                 filters: [ # required
+    #                   {
+    #                     key: "InventoryFilterKey", # required
+    #                     values: ["InventoryFilterValue"], # required
+    #                     type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         groups: [
+    #           {
+    #             name: "InventoryGroupName", # required
+    #             filters: [ # required
+    #               {
+    #                 key: "InventoryFilterKey", # required
+    #                 values: ["InventoryFilterValue"], # required
+    #                 type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #               },
+    #             ],
     #           },
     #         ],
     #       }
@@ -6704,11 +6740,18 @@ module Aws::SSM
     #   type.
     #   @return [Array<Types::InventoryAggregator>]
     #
+    # @!attribute [rw] groups
+    #   A user-defined set of one or more filters on which to aggregate
+    #   inventory data. Groups return a count of resources that match and
+    #   don't match the specified criteria.
+    #   @return [Array<Types::InventoryGroup>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryAggregator AWS API Documentation
     #
     class InventoryAggregator < Struct.new(
       :expression,
-      :aggregators)
+      :aggregators,
+      :groups)
       include Aws::Structure
     end
 
@@ -6819,7 +6862,7 @@ module Aws::SSM
     #       {
     #         key: "InventoryFilterKey", # required
     #         values: ["InventoryFilterValue"], # required
-    #         type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan
+    #         type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
     #       }
     #
     # @!attribute [rw] key
@@ -6844,6 +6887,43 @@ module Aws::SSM
       :key,
       :values,
       :type)
+      include Aws::Structure
+    end
+
+    # A user-defined set of one or more filters on which to aggregate
+    # inventory data. Groups return a count of resources that match and
+    # don't match the specified criteria.
+    #
+    # @note When making an API call, you may pass InventoryGroup
+    #   data as a hash:
+    #
+    #       {
+    #         name: "InventoryGroupName", # required
+    #         filters: [ # required
+    #           {
+    #             key: "InventoryFilterKey", # required
+    #             values: ["InventoryFilterValue"], # required
+    #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters define the criteria for the group. The `matchingCount` field
+    #   displays the number of resources that match the criteria. The
+    #   `notMatchingCount` field displays the number of resources that
+    #   don't match the criteria.
+    #   @return [Array<Types::InventoryFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryGroup AWS API Documentation
+    #
+    class InventoryGroup < Struct.new(
+      :name,
+      :filters)
       include Aws::Structure
     end
 
@@ -7191,7 +7271,7 @@ module Aws::SSM
     #         next_token: "NextToken",
     #         filters: [
     #           {
-    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status
+    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status, ExecutionStage, DocumentName
     #             value: "CommandFilterValue", # required
     #           },
     #         ],
@@ -7266,7 +7346,7 @@ module Aws::SSM
     #         next_token: "NextToken",
     #         filters: [
     #           {
-    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status
+    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status, ExecutionStage, DocumentName
     #             value: "CommandFilterValue", # required
     #           },
     #         ],
@@ -7583,7 +7663,7 @@ module Aws::SSM
     #           {
     #             key: "InventoryFilterKey", # required
     #             values: ["InventoryFilterValue"], # required
-    #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan
+    #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
     #           },
     #         ],
     #         next_token: "NextToken",

@@ -371,11 +371,11 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   volume.describe_attribute({
-    #     attribute: "autoEnableIO", # accepts autoEnableIO, productCodes
+    #     attribute: "autoEnableIO", # required, accepts autoEnableIO, productCodes
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [String] :attribute
+    # @option options [required, String] :attribute
     #   The attribute of the volume. This parameter is required.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,

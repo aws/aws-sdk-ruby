@@ -387,6 +387,7 @@ module Aws::SSM
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
     InvalidActivation = Shapes::StructureShape.new(name: 'InvalidActivation')
     InvalidActivationId = Shapes::StructureShape.new(name: 'InvalidActivationId')
+    InvalidAggregatorException = Shapes::StructureShape.new(name: 'InvalidAggregatorException')
     InvalidAllowedPatternException = Shapes::StructureShape.new(name: 'InvalidAllowedPatternException')
     InvalidAssociation = Shapes::StructureShape.new(name: 'InvalidAssociation')
     InvalidAssociationVersion = Shapes::StructureShape.new(name: 'InvalidAssociationVersion')
@@ -407,6 +408,7 @@ module Aws::SSM
     InvalidFilterValue = Shapes::StructureShape.new(name: 'InvalidFilterValue')
     InvalidInstanceId = Shapes::StructureShape.new(name: 'InvalidInstanceId')
     InvalidInstanceInformationFilterValue = Shapes::StructureShape.new(name: 'InvalidInstanceInformationFilterValue')
+    InvalidInventoryGroupException = Shapes::StructureShape.new(name: 'InvalidInventoryGroupException')
     InvalidInventoryItemContextException = Shapes::StructureShape.new(name: 'InvalidInventoryItemContextException')
     InvalidInventoryRequestException = Shapes::StructureShape.new(name: 'InvalidInventoryRequestException')
     InvalidItemContentException = Shapes::StructureShape.new(name: 'InvalidItemContentException')
@@ -446,6 +448,9 @@ module Aws::SSM
     InventoryFilterList = Shapes::ListShape.new(name: 'InventoryFilterList')
     InventoryFilterValue = Shapes::StringShape.new(name: 'InventoryFilterValue')
     InventoryFilterValueList = Shapes::ListShape.new(name: 'InventoryFilterValueList')
+    InventoryGroup = Shapes::StructureShape.new(name: 'InventoryGroup')
+    InventoryGroupList = Shapes::ListShape.new(name: 'InventoryGroupList')
+    InventoryGroupName = Shapes::StringShape.new(name: 'InventoryGroupName')
     InventoryItem = Shapes::StructureShape.new(name: 'InventoryItem')
     InventoryItemAttribute = Shapes::StructureShape.new(name: 'InventoryItemAttribute')
     InventoryItemAttributeList = Shapes::ListShape.new(name: 'InventoryItemAttributeList')
@@ -2006,6 +2011,7 @@ module Aws::SSM
 
     InventoryAggregator.add_member(:expression, Shapes::ShapeRef.new(shape: InventoryAggregatorExpression, location_name: "Expression"))
     InventoryAggregator.add_member(:aggregators, Shapes::ShapeRef.new(shape: InventoryAggregatorList, location_name: "Aggregators"))
+    InventoryAggregator.add_member(:groups, Shapes::ShapeRef.new(shape: InventoryGroupList, location_name: "Groups"))
     InventoryAggregator.struct_class = Types::InventoryAggregator
 
     InventoryAggregatorList.member = Shapes::ShapeRef.new(shape: InventoryAggregator)
@@ -2041,6 +2047,12 @@ module Aws::SSM
     InventoryFilterList.member = Shapes::ShapeRef.new(shape: InventoryFilter)
 
     InventoryFilterValueList.member = Shapes::ShapeRef.new(shape: InventoryFilterValue)
+
+    InventoryGroup.add_member(:name, Shapes::ShapeRef.new(shape: InventoryGroupName, required: true, location_name: "Name"))
+    InventoryGroup.add_member(:filters, Shapes::ShapeRef.new(shape: InventoryFilterList, required: true, location_name: "Filters"))
+    InventoryGroup.struct_class = Types::InventoryGroup
+
+    InventoryGroupList.member = Shapes::ShapeRef.new(shape: InventoryGroup)
 
     InventoryItem.add_member(:type_name, Shapes::ShapeRef.new(shape: InventoryItemTypeName, required: true, location_name: "TypeName"))
     InventoryItem.add_member(:schema_version, Shapes::ShapeRef.new(shape: InventoryItemSchemaVersion, required: true, location_name: "SchemaVersion"))
@@ -3570,8 +3582,10 @@ module Aws::SSM
         o.output = Shapes::ShapeRef.new(shape: GetInventoryResult)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidFilter)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInventoryGroupException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTypeNameException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAggregatorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResultAttributeException)
       end)
 

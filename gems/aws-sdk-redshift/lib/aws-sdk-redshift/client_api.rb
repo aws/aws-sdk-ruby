@@ -261,6 +261,8 @@ module Aws::Redshift
     ReservedNodeQuotaExceededFault = Shapes::StructureShape.new(name: 'ReservedNodeQuotaExceededFault')
     ReservedNodesMessage = Shapes::StructureShape.new(name: 'ReservedNodesMessage')
     ResetClusterParameterGroupMessage = Shapes::StructureShape.new(name: 'ResetClusterParameterGroupMessage')
+    ResizeClusterMessage = Shapes::StructureShape.new(name: 'ResizeClusterMessage')
+    ResizeClusterResult = Shapes::StructureShape.new(name: 'ResizeClusterResult')
     ResizeNotFoundFault = Shapes::StructureShape.new(name: 'ResizeNotFoundFault')
     ResizeProgressMessage = Shapes::StructureShape.new(name: 'ResizeProgressMessage')
     ResourceNotFoundFault = Shapes::StructureShape.new(name: 'ResourceNotFoundFault')
@@ -406,6 +408,7 @@ module Aws::Redshift
     Cluster.add_member(:iam_roles, Shapes::ShapeRef.new(shape: ClusterIamRoleList, location_name: "IamRoles"))
     Cluster.add_member(:pending_actions, Shapes::ShapeRef.new(shape: PendingActionsList, location_name: "PendingActions"))
     Cluster.add_member(:maintenance_track_name, Shapes::ShapeRef.new(shape: String, location_name: "MaintenanceTrackName"))
+    Cluster.add_member(:elastic_resize_number_of_node_options, Shapes::ShapeRef.new(shape: String, location_name: "ElasticResizeNumberOfNodeOptions"))
     Cluster.struct_class = Types::Cluster
 
     ClusterCredentials.add_member(:db_user, Shapes::ShapeRef.new(shape: String, location_name: "DbUser"))
@@ -1181,6 +1184,16 @@ module Aws::Redshift
     ResetClusterParameterGroupMessage.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersList, location_name: "Parameters"))
     ResetClusterParameterGroupMessage.struct_class = Types::ResetClusterParameterGroupMessage
 
+    ResizeClusterMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
+    ResizeClusterMessage.add_member(:cluster_type, Shapes::ShapeRef.new(shape: String, location_name: "ClusterType"))
+    ResizeClusterMessage.add_member(:node_type, Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
+    ResizeClusterMessage.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "NumberOfNodes"))
+    ResizeClusterMessage.add_member(:classic, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "Classic"))
+    ResizeClusterMessage.struct_class = Types::ResizeClusterMessage
+
+    ResizeClusterResult.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
+    ResizeClusterResult.struct_class = Types::ResizeClusterResult
+
     ResizeProgressMessage.add_member(:target_node_type, Shapes::ShapeRef.new(shape: String, location_name: "TargetNodeType"))
     ResizeProgressMessage.add_member(:target_number_of_nodes, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "TargetNumberOfNodes"))
     ResizeProgressMessage.add_member(:target_cluster_type, Shapes::ShapeRef.new(shape: String, location_name: "TargetClusterType"))
@@ -1193,6 +1206,8 @@ module Aws::Redshift
     ResizeProgressMessage.add_member(:progress_in_mega_bytes, Shapes::ShapeRef.new(shape: LongOptional, location_name: "ProgressInMegaBytes"))
     ResizeProgressMessage.add_member(:elapsed_time_in_seconds, Shapes::ShapeRef.new(shape: LongOptional, location_name: "ElapsedTimeInSeconds"))
     ResizeProgressMessage.add_member(:estimated_time_to_completion_in_seconds, Shapes::ShapeRef.new(shape: LongOptional, location_name: "EstimatedTimeToCompletionInSeconds"))
+    ResizeProgressMessage.add_member(:resize_type, Shapes::ShapeRef.new(shape: String, location_name: "ResizeType"))
+    ResizeProgressMessage.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResizeProgressMessage.struct_class = Types::ResizeProgressMessage
 
     RestorableNodeTypeList.member = Shapes::ShapeRef.new(shape: String, location_name: "NodeType")
@@ -2237,6 +2252,23 @@ module Aws::Redshift
         o.output = Shapes::ShapeRef.new(shape: ClusterParameterGroupNameMessage)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterParameterGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: ClusterParameterGroupNotFoundFault)
+      end)
+
+      api.add_operation(:resize_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResizeCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ResizeClusterMessage)
+        o.output = Shapes::ShapeRef.new(shape: ResizeClusterResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: NumberOfNodesQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: NumberOfNodesPerClusterLimitExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientClusterCapacityFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOptionFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededFault)
       end)
 
       api.add_operation(:restore_from_cluster_snapshot, Seahorse::Model::Operation.new.tap do |o|

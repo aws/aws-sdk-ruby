@@ -353,8 +353,8 @@ module Aws::SSM
     # instances or targets.
     #
     # When you associate a document with one or more instances using
-    # instance IDs or tags, the SSM Agent running on the instance processes
-    # the document and configures the instance as specified.
+    # instance IDs or tags, SSM Agent running on the instance processes the
+    # document and configures the instance as specified.
     #
     # If you associate a document with an instance that already has an
     # associated document, the system throws the AssociationAlreadyExists
@@ -462,8 +462,8 @@ module Aws::SSM
     # instances or targets.
     #
     # When you associate a document with one or more instances using
-    # instance IDs or tags, the SSM Agent running on the instance processes
-    # the document and configures the instance as specified.
+    # instance IDs or tags, SSM Agent running on the instance processes the
+    # document and configures the instance as specified.
     #
     # If you associate a document with an instance that already has an
     # associated document, the system throws the AssociationAlreadyExists
@@ -3340,7 +3340,7 @@ module Aws::SSM
     #       {
     #         key: "InventoryFilterKey", # required
     #         values: ["InventoryFilterValue"], # required
-    #         type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan
+    #         type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
     #       },
     #     ],
     #     aggregators: [
@@ -3349,6 +3349,18 @@ module Aws::SSM
     #         aggregators: {
     #           # recursive InventoryAggregatorList
     #         },
+    #         groups: [
+    #           {
+    #             name: "InventoryGroupName", # required
+    #             filters: [ # required
+    #               {
+    #                 key: "InventoryFilterKey", # required
+    #                 values: ["InventoryFilterValue"], # required
+    #                 type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       },
     #     ],
     #     result_attributes: [
@@ -4327,7 +4339,7 @@ module Aws::SSM
     #     next_token: "NextToken",
     #     filters: [
     #       {
-    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status
+    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status, ExecutionStage, DocumentName
     #         value: "CommandFilterValue", # required
     #       },
     #     ],
@@ -4415,7 +4427,7 @@ module Aws::SSM
     #     next_token: "NextToken",
     #     filters: [
     #       {
-    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status
+    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status, ExecutionStage, DocumentName
     #         value: "CommandFilterValue", # required
     #       },
     #     ],
@@ -4761,7 +4773,7 @@ module Aws::SSM
     #       {
     #         key: "InventoryFilterKey", # required
     #         values: ["InventoryFilterValue"], # required
-    #         type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan
+    #         type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
     #       },
     #     ],
     #     next_token: "NextToken",
@@ -6938,7 +6950,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

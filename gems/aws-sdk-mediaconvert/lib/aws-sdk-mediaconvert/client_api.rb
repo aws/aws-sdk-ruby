@@ -95,6 +95,7 @@ module Aws::MediaConvert
     DashIsoGroupSettings = Shapes::StructureShape.new(name: 'DashIsoGroupSettings')
     DashIsoHbbtvCompliance = Shapes::StringShape.new(name: 'DashIsoHbbtvCompliance')
     DashIsoSegmentControl = Shapes::StringShape.new(name: 'DashIsoSegmentControl')
+    DashIsoWriteSegmentTimelineInRepresentation = Shapes::StringShape.new(name: 'DashIsoWriteSegmentTimelineInRepresentation')
     DeinterlaceAlgorithm = Shapes::StringShape.new(name: 'DeinterlaceAlgorithm')
     Deinterlacer = Shapes::StructureShape.new(name: 'Deinterlacer')
     DeinterlacerControl = Shapes::StringShape.new(name: 'DeinterlacerControl')
@@ -735,6 +736,7 @@ module Aws::MediaConvert
     DashIsoGroupSettings.add_member(:min_buffer_time, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "minBufferTime"))
     DashIsoGroupSettings.add_member(:segment_control, Shapes::ShapeRef.new(shape: DashIsoSegmentControl, location_name: "segmentControl"))
     DashIsoGroupSettings.add_member(:segment_length, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, required: true, location_name: "segmentLength"))
+    DashIsoGroupSettings.add_member(:write_segment_timeline_in_representation, Shapes::ShapeRef.new(shape: DashIsoWriteSegmentTimelineInRepresentation, location_name: "writeSegmentTimelineInRepresentation"))
     DashIsoGroupSettings.struct_class = Types::DashIsoGroupSettings
 
     Deinterlacer.add_member(:algorithm, Shapes::ShapeRef.new(shape: DeinterlaceAlgorithm, location_name: "algorithm"))

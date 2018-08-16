@@ -930,6 +930,7 @@ module Aws::Redshift
     #   resp.cluster.pending_actions #=> Array
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateCluster AWS API Documentation
     #
@@ -1814,6 +1815,7 @@ module Aws::Redshift
     #   resp.cluster.pending_actions #=> Array
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCluster AWS API Documentation
     #
@@ -3048,6 +3050,7 @@ module Aws::Redshift
     #   resp.clusters[0].pending_actions #=> Array
     #   resp.clusters[0].pending_actions[0] #=> String
     #   resp.clusters[0].maintenance_track_name #=> String
+    #   resp.clusters[0].elastic_resize_number_of_node_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusters AWS API Documentation
     #
@@ -3889,6 +3892,8 @@ module Aws::Redshift
     #   * {Types::ResizeProgressMessage#progress_in_mega_bytes #progress_in_mega_bytes} => Integer
     #   * {Types::ResizeProgressMessage#elapsed_time_in_seconds #elapsed_time_in_seconds} => Integer
     #   * {Types::ResizeProgressMessage#estimated_time_to_completion_in_seconds #estimated_time_to_completion_in_seconds} => Integer
+    #   * {Types::ResizeProgressMessage#resize_type #resize_type} => String
+    #   * {Types::ResizeProgressMessage#message #message} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3913,6 +3918,8 @@ module Aws::Redshift
     #   resp.progress_in_mega_bytes #=> Integer
     #   resp.elapsed_time_in_seconds #=> Integer
     #   resp.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.resize_type #=> String
+    #   resp.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeResize AWS API Documentation
     #
@@ -4350,6 +4357,7 @@ module Aws::Redshift
     #   resp.cluster.pending_actions #=> Array
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopy AWS API Documentation
     #
@@ -4554,6 +4562,7 @@ module Aws::Redshift
     #   resp.cluster.pending_actions #=> Array
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopy AWS API Documentation
     #
@@ -5125,6 +5134,7 @@ module Aws::Redshift
     #   resp.cluster.pending_actions #=> Array
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyCluster AWS API Documentation
     #
@@ -5234,6 +5244,7 @@ module Aws::Redshift
     #   resp.cluster.pending_actions #=> Array
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterDbRevision AWS API Documentation
     #
@@ -5350,6 +5361,7 @@ module Aws::Redshift
     #   resp.cluster.pending_actions #=> Array
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRoles AWS API Documentation
     #
@@ -5671,6 +5683,7 @@ module Aws::Redshift
     #   resp.cluster.pending_actions #=> Array
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriod AWS API Documentation
     #
@@ -5842,6 +5855,7 @@ module Aws::Redshift
     #   resp.cluster.pending_actions #=> Array
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootCluster AWS API Documentation
     #
@@ -5910,6 +5924,124 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def reset_cluster_parameter_group(params = {}, options = {})
       req = build_request(:reset_cluster_parameter_group, params)
+      req.send_request(options)
+    end
+
+    # Changes the cluster's type, node type, or number of nodes.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The unique identifier for the cluster to resize.
+    #
+    # @option params [String] :cluster_type
+    #   The new cluster type for the specified cluster.
+    #
+    # @option params [String] :node_type
+    #   The new node type for the nodes you are adding.
+    #
+    # @option params [required, Integer] :number_of_nodes
+    #   The new number of nodes for the cluster.
+    #
+    # @option params [Boolean] :classic
+    #   A boolean value indicating whether the resize operation is using the
+    #   classic resize process.
+    #
+    # @return [Types::ResizeClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResizeClusterResult#cluster #cluster} => Types::Cluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.resize_cluster({
+    #     cluster_identifier: "String", # required
+    #     cluster_type: "String",
+    #     node_type: "String",
+    #     number_of_nodes: 1, # required
+    #     classic: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster.cluster_identifier #=> String
+    #   resp.cluster.node_type #=> String
+    #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.modify_status #=> String
+    #   resp.cluster.master_username #=> String
+    #   resp.cluster.db_name #=> String
+    #   resp.cluster.endpoint.address #=> String
+    #   resp.cluster.endpoint.port #=> Integer
+    #   resp.cluster.cluster_create_time #=> Time
+    #   resp.cluster.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.cluster_security_groups #=> Array
+    #   resp.cluster.cluster_security_groups[0].cluster_security_group_name #=> String
+    #   resp.cluster.cluster_security_groups[0].status #=> String
+    #   resp.cluster.vpc_security_groups #=> Array
+    #   resp.cluster.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.cluster.vpc_security_groups[0].status #=> String
+    #   resp.cluster.cluster_parameter_groups #=> Array
+    #   resp.cluster.cluster_parameter_groups[0].parameter_group_name #=> String
+    #   resp.cluster.cluster_parameter_groups[0].parameter_apply_status #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list #=> Array
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_name #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_apply_status #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_apply_error_description #=> String
+    #   resp.cluster.cluster_subnet_group_name #=> String
+    #   resp.cluster.vpc_id #=> String
+    #   resp.cluster.availability_zone #=> String
+    #   resp.cluster.preferred_maintenance_window #=> String
+    #   resp.cluster.pending_modified_values.master_user_password #=> String
+    #   resp.cluster.pending_modified_values.node_type #=> String
+    #   resp.cluster.pending_modified_values.number_of_nodes #=> Integer
+    #   resp.cluster.pending_modified_values.cluster_type #=> String
+    #   resp.cluster.pending_modified_values.cluster_version #=> String
+    #   resp.cluster.pending_modified_values.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.pending_modified_values.cluster_identifier #=> String
+    #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
+    #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.cluster_version #=> String
+    #   resp.cluster.allow_version_upgrade #=> Boolean
+    #   resp.cluster.number_of_nodes #=> Integer
+    #   resp.cluster.publicly_accessible #=> Boolean
+    #   resp.cluster.encrypted #=> Boolean
+    #   resp.cluster.restore_status.status #=> String
+    #   resp.cluster.restore_status.current_restore_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.restore_status.snapshot_size_in_mega_bytes #=> Integer
+    #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
+    #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
+    #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
+    #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
+    #   resp.cluster.hsm_status.status #=> String
+    #   resp.cluster.cluster_snapshot_copy_status.destination_region #=> String
+    #   resp.cluster.cluster_snapshot_copy_status.retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.snapshot_copy_grant_name #=> String
+    #   resp.cluster.cluster_public_key #=> String
+    #   resp.cluster.cluster_nodes #=> Array
+    #   resp.cluster.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.elastic_ip_status.elastic_ip #=> String
+    #   resp.cluster.elastic_ip_status.status #=> String
+    #   resp.cluster.cluster_revision_number #=> String
+    #   resp.cluster.tags #=> Array
+    #   resp.cluster.tags[0].key #=> String
+    #   resp.cluster.tags[0].value #=> String
+    #   resp.cluster.kms_key_id #=> String
+    #   resp.cluster.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.iam_roles #=> Array
+    #   resp.cluster.iam_roles[0].iam_role_arn #=> String
+    #   resp.cluster.iam_roles[0].apply_status #=> String
+    #   resp.cluster.pending_actions #=> Array
+    #   resp.cluster.pending_actions[0] #=> String
+    #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeCluster AWS API Documentation
+    #
+    # @overload resize_cluster(params = {})
+    # @param [Hash] params ({})
+    def resize_cluster(params = {}, options = {})
+      req = build_request(:resize_cluster, params)
       req.send_request(options)
     end
 
@@ -6242,6 +6374,7 @@ module Aws::Redshift
     #   resp.cluster.pending_actions #=> Array
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshot AWS API Documentation
     #
@@ -6594,6 +6727,7 @@ module Aws::Redshift
     #   resp.cluster.pending_actions #=> Array
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKey AWS API Documentation
     #
@@ -6617,7 +6751,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

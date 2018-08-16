@@ -1981,6 +1981,7 @@ module Aws::MediaConvert
     #                   min_buffer_time: 1,
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1, # required
+    #                   write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #                 },
     #                 file_group_settings: {
     #                   destination: "__stringPatternS3",
@@ -2771,6 +2772,7 @@ module Aws::MediaConvert
     #                   min_buffer_time: 1,
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1, # required
+    #                   write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #                 },
     #                 file_group_settings: {
     #                   destination: "__stringPatternS3",
@@ -4014,6 +4016,7 @@ module Aws::MediaConvert
     #         min_buffer_time: 1,
     #         segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #         segment_length: 1, # required
+    #         write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #       }
     #
     # @!attribute [rw] base_url
@@ -4068,6 +4071,12 @@ module Aws::MediaConvert
     #   types.
     #   @return [Integer]
     #
+    # @!attribute [rw] write_segment_timeline_in_representation
+    #   When ENABLED, segment durations are indicated in the manifest using
+    #   SegmentTimeline and SegmentTimeline will be promoted down into
+    #   Representation from AdaptationSet.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DashIsoGroupSettings AWS API Documentation
     #
     class DashIsoGroupSettings < Struct.new(
@@ -4078,7 +4087,8 @@ module Aws::MediaConvert
       :hbbtv_compliance,
       :min_buffer_time,
       :segment_control,
-      :segment_length)
+      :segment_length,
+      :write_segment_timeline_in_representation)
       include Aws::Structure
     end
 
@@ -7200,6 +7210,7 @@ module Aws::MediaConvert
     #                 min_buffer_time: 1,
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                 segment_length: 1, # required
+    #                 write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #               },
     #               file_group_settings: {
     #                 destination: "__stringPatternS3",
@@ -8040,6 +8051,7 @@ module Aws::MediaConvert
     #                 min_buffer_time: 1,
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                 segment_length: 1, # required
+    #                 write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #               },
     #               file_group_settings: {
     #                 destination: "__stringPatternS3",
@@ -10683,6 +10695,7 @@ module Aws::MediaConvert
     #             min_buffer_time: 1,
     #             segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #             segment_length: 1, # required
+    #             write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #           file_group_settings: {
     #             destination: "__stringPatternS3",
@@ -11324,6 +11337,7 @@ module Aws::MediaConvert
     #           min_buffer_time: 1,
     #           segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #           segment_length: 1, # required
+    #           write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #         file_group_settings: {
     #           destination: "__stringPatternS3",
@@ -12881,6 +12895,7 @@ module Aws::MediaConvert
     #                   min_buffer_time: 1,
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1, # required
+    #                   write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #                 },
     #                 file_group_settings: {
     #                   destination: "__stringPatternS3",

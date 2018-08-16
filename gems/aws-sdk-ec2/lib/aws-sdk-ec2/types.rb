@@ -12681,7 +12681,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         attribute: "autoEnableIO", # accepts autoEnableIO, productCodes
+    #         attribute: "autoEnableIO", # required, accepts autoEnableIO, productCodes
     #         volume_id: "String", # required
     #         dry_run: false,
     #       }

@@ -312,8 +312,9 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
-    # Lists agents or the Connector by ID or lists all agents/Connectors
-    # associated with your user account if you did not specify an ID.
+    # Lists agents or connectors as specified by ID or other filters. All
+    # agents/connectors associated with your user account can be listed if
+    # you call `DescribeAgents` as is without passing any parameters.
     #
     # @option params [Array<String>] :agent_ids
     #   The agent or the Connector IDs for which you want information. If you
@@ -381,15 +382,28 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
-    # Retrieves attributes for a list of configuration item IDs. All of the
-    # supplied IDs must be for the same asset type (server, application,
-    # process, or connection). Output fields are specific to the asset type
-    # selected. For example, the output for a *server* configuration item
-    # includes a list of attributes about the server, such as host name,
-    # operating system, and number of network cards.
+    # Retrieves attributes for a list of configuration item IDs.
     #
-    # For a complete list of outputs for each asset type, see [Using the
+    # <note markdown="1"> All of the supplied IDs must be for the same asset type from one of
+    # the follwoing:
+    #
+    #  * server
+    #
+    # * application
+    #
+    # * process
+    #
+    # * connection
+    #
+    #  Output fields are specific to the asset type specified. For example,
+    # the output for a *server* configuration item includes a list of
+    # attributes about the server, such as host name, operating system,
+    # number of network cards, etc.
+    #
+    #  For a complete list of outputs for each asset type, see [Using the
     # DescribeConfigurations Action][1].
+    #
+    #  </note>
     #
     #
     #
@@ -421,24 +435,71 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
-    # Deprecated. Use `DescribeExportTasks` instead.
-    #
-    # Retrieves the status of a given export process. You can retrieve
-    # status from a maximum of 100 processes.
+    # Lists exports as specified by ID. All continuous exports associated
+    # with your user account can be listed if you call
+    # `DescribeContinuousExports` as is without passing any parameters.
     #
     # @option params [Array<String>] :export_ids
-    #   A unique identifier that you can use to query the export status.
+    #   The unique IDs assigned to the exports.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that you want to display as a part of
-    #   the query.
+    #   A number between 1 and 100 specifying the maximum number of continuous
+    #   export descriptions returned.
     #
     # @option params [String] :next_token
-    #   A token to get the next set of results. For example, if you specify
-    #   100 IDs for `DescribeExportConfigurationsRequest$exportIds` but set
-    #   `DescribeExportConfigurationsRequest$maxResults` to 10, you get
-    #   results in a set of 10. Use the token in the query to get the next set
-    #   of 10.
+    #   The token from the previous call to `DescribeExportTasks`.
+    #
+    # @return [Types::DescribeContinuousExportsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeContinuousExportsResponse#descriptions #descriptions} => Array&lt;Types::ContinuousExportDescription&gt;
+    #   * {Types::DescribeContinuousExportsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_continuous_exports({
+    #     export_ids: ["ConfigurationsExportId"],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.descriptions #=> Array
+    #   resp.descriptions[0].export_id #=> String
+    #   resp.descriptions[0].status #=> String, one of "START_IN_PROGRESS", "START_FAILED", "ACTIVE", "ERROR", "STOP_IN_PROGRESS", "STOP_FAILED", "INACTIVE"
+    #   resp.descriptions[0].status_detail #=> String
+    #   resp.descriptions[0].s3_bucket #=> String
+    #   resp.descriptions[0].start_time #=> Time
+    #   resp.descriptions[0].stop_time #=> Time
+    #   resp.descriptions[0].data_source #=> String, one of "AGENT"
+    #   resp.descriptions[0].schema_storage_config #=> Hash
+    #   resp.descriptions[0].schema_storage_config["DatabaseName"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload describe_continuous_exports(params = {})
+    # @param [Hash] params ({})
+    def describe_continuous_exports(params = {}, options = {})
+      req = build_request(:describe_continuous_exports, params)
+      req.send_request(options)
+    end
+
+    # `DescribeExportConfigurations` is deprecated.
+    #
+    # Use instead [ `DescribeExportTasks` ][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/API_DescribeExportTasks.html
+    #
+    # @option params [Array<String>] :export_ids
+    #   A list of continuous export ids to search for.
+    #
+    # @option params [Integer] :max_results
+    #   A number between 1 and 100 specifying the maximum number of continuous
+    #   export descriptions returned.
+    #
+    # @option params [String] :next_token
+    #   The token from the previous call to describe-export-tasks.
     #
     # @return [Types::DescribeExportConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -540,9 +601,21 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
-    # Retrieves a list of configuration items that are tagged with a
-    # specific tag. Or retrieves a list of all tags assigned to a specific
-    # configuration item.
+    # Retrieves a list of configuration items that have tags as specified by
+    # the key-value pairs, name and value, passed to the optional parameter
+    # `filters`.
+    #
+    # There are three valid tag filter names:
+    #
+    # * tagKey
+    #
+    # * tagValue
+    #
+    # * configurationId
+    #
+    # Also, all configuration items associated with your user account that
+    # have tags can be listed if you call `DescribeTags` as is without
+    # passing any parameters.
     #
     # @option params [Array<Types::TagFilter>] :filters
     #   You can filter the list using a *key*-*value* format. You can separate
@@ -643,6 +716,9 @@ module Aws::ApplicationDiscoveryService
 
     # Retrieves a short summary of discovered assets.
     #
+    # This API operation takes no request parameters and is called as is at
+    # the command prompt as shown in the example.
+    #
     # @return [Types::GetDiscoverySummaryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDiscoverySummaryResponse#servers #servers} => Integer
@@ -680,9 +756,9 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
-    # Retrieves a list of configuration items according to criteria that you
-    # specify in a filter. The filter criteria identifies the relationship
-    # requirements.
+    # Retrieves a list of configuration items as specified by the value
+    # passed to the required paramater `configurationType`. Optional
+    # filtering may be applied to refine search results.
     #
     # @option params [required, String] :configuration_type
     #   A valid configuration identified by Application Discovery Service.
@@ -817,6 +893,33 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
+    # Start the continuous flow of agent's discovered data into Amazon
+    # Athena.
+    #
+    # @return [Types::StartContinuousExportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartContinuousExportResponse#export_id #export_id} => String
+    #   * {Types::StartContinuousExportResponse#s3_bucket #s3_bucket} => String
+    #   * {Types::StartContinuousExportResponse#start_time #start_time} => Time
+    #   * {Types::StartContinuousExportResponse#data_source #data_source} => String
+    #   * {Types::StartContinuousExportResponse#schema_storage_config #schema_storage_config} => Hash&lt;String,String&gt;
+    #
+    # @example Response structure
+    #
+    #   resp.export_id #=> String
+    #   resp.s3_bucket #=> String
+    #   resp.start_time #=> Time
+    #   resp.data_source #=> String, one of "AGENT"
+    #   resp.schema_storage_config #=> Hash
+    #   resp.schema_storage_config["DatabaseName"] #=> String
+    #
+    # @overload start_continuous_export(params = {})
+    # @param [Hash] params ({})
+    def start_continuous_export(params = {}, options = {})
+      req = build_request(:start_continuous_export, params)
+      req.send_request(options)
+    end
+
     # Instructs the specified agents or connectors to start collecting data.
     #
     # @option params [required, Array<String>] :agent_ids
@@ -919,6 +1022,35 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
+    # Stop the continuous flow of agent's discovered data into Amazon
+    # Athena.
+    #
+    # @option params [required, String] :export_id
+    #   The unique ID assigned to this export.
+    #
+    # @return [Types::StopContinuousExportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopContinuousExportResponse#start_time #start_time} => Time
+    #   * {Types::StopContinuousExportResponse#stop_time #stop_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_continuous_export({
+    #     export_id: "ConfigurationsExportId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.start_time #=> Time
+    #   resp.stop_time #=> Time
+    #
+    # @overload stop_continuous_export(params = {})
+    # @param [Hash] params ({})
+    def stop_continuous_export(params = {}, options = {})
+      req = build_request(:stop_continuous_export, params)
+      req.send_request(options)
+    end
+
     # Instructs the specified agents or connectors to stop collecting data.
     #
     # @option params [required, Array<String>] :agent_ids
@@ -990,7 +1122,7 @@ module Aws::ApplicationDiscoveryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationdiscoveryservice'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
