@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DAX - Updated the API for Amazon DynamoDB Accelerator (DAX).
+
+* Feature - Aws::SageMaker - Updated the API, and documentation for Amazon SageMaker Service.
+
+* Feature - Aws::SecretsManager - Updated the documentation for AWS Secrets Manager.
+
 2.11.110 (2018-08-16)
 ------------------
 
