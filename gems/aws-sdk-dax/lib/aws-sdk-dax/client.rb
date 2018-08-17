@@ -253,7 +253,7 @@ module Aws::DAX
     #
     #    </note>
     #
-    # @option params [String] :iam_role_arn
+    # @option params [required, String] :iam_role_arn
     #   A valid Amazon Resource Name (ARN) that identifies an IAM role. At
     #   runtime, DAX will assume this role and use the role's permissions to
     #   access DynamoDB on your behalf.
@@ -284,7 +284,7 @@ module Aws::DAX
     #     security_group_ids: ["String"],
     #     preferred_maintenance_window: "String",
     #     notification_topic_arn: "String",
-    #     iam_role_arn: "String",
+    #     iam_role_arn: "String", # required
     #     parameter_group_name: "String",
     #     tags: [
     #       {
@@ -1445,7 +1445,7 @@ module Aws::DAX
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dax'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

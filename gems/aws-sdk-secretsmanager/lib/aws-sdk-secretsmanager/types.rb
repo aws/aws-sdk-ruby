@@ -114,7 +114,7 @@ module Aws::SecretsManager
     #     existing version. Instead, use PutSecretValue to create a new
     #     version.
     #
-    #   This value becomes the `SecretVersionId` of the new version.
+    #   This value becomes the `VersionId` of the new version.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -345,15 +345,16 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] recovery_window_in_days
     #   (Optional) Specifies the number of days that Secrets Manager waits
-    #   before it can delete the secret.
+    #   before it can delete the secret. You can't use both this parameter
+    #   and the `ForceDeleteWithoutRecovery` parameter in the same API call.
     #
     #   This value can range from 7 to 30 days. The default value is 30.
     #   @return [Integer]
     #
     # @!attribute [rw] force_delete_without_recovery
-    #   (Optional) Specifies that the secret is to be deleted immediately
-    #   without any recovery window. You cannot use both this parameter and
-    #   the `RecoveryWindowInDays` parameter in the same API call.
+    #   (Optional) Specifies that the secret is to be deleted without any
+    #   recovery window. You can't use both this parameter and the
+    #   `RecoveryWindowInDays` parameter in the same API call.
     #
     #   An asynchronous background process performs the actual deletion, so
     #   there can be a short delay before the operation completes. If you
@@ -462,8 +463,9 @@ module Aws::SecretsManager
     #   @return [Types::RotationRulesType]
     #
     # @!attribute [rw] last_rotated_date
-    #   The last date and time that the Secrets Manager rotation process for
-    #   this secret was invoked.
+    #   The most recent date and time that the Secrets Manager rotation
+    #   process was successfully completed. This value is null if the secret
+    #   has never rotated.
     #   @return [Time]
     #
     # @!attribute [rw] last_changed_date
@@ -494,9 +496,9 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] version_ids_to_stages
     #   A list of all of the currently assigned `VersionStage` staging
-    #   labels and the `SecretVersionId` that each is attached to. Staging
-    #   labels are used to keep track of the different versions during the
-    #   rotation process.
+    #   labels and the `VersionId` that each is attached to. Staging labels
+    #   are used to keep track of the different versions during the rotation
+    #   process.
     #
     #   <note markdown="1"> A version that does not have any staging labels attached is
     #   considered deprecated and subject to deletion. Such versions are not
@@ -559,6 +561,13 @@ module Aws::SecretsManager
     #   Specifies that the generated password should not include punctuation
     #   characters. The default if you do not include this switch parameter
     #   is that punctuation characters can be included.
+    #
+    #   The following are the punctuation characters that *can* be included
+    #   in the generated password if you don't explicitly exclude them with
+    #   `ExcludeCharacters` or `ExcludePunctuation`\:
+    #
+    #   `` ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` \{ | \} ~
+    #   ``
     #   @return [Boolean]
     #
     # @!attribute [rw] exclude_uppercase
@@ -683,8 +692,8 @@ module Aws::SecretsManager
     #   Specifies the unique identifier of the version of the secret that
     #   you want to retrieve. If you specify this parameter then don't
     #   specify `VersionStage`. If you don't specify either a
-    #   `VersionStage` or `SecretVersionId` then the default is to perform
-    #   the operation on the version with the `VersionStage` value of
+    #   `VersionStage` or `VersionId` then the default is to perform the
+    #   operation on the version with the `VersionStage` value of
     #   `AWSCURRENT`.
     #
     #   This value is typically a [UUID-type][1] value with 32 hexadecimal
@@ -701,9 +710,9 @@ module Aws::SecretsManager
     #
     #   Staging labels are used to keep track of different versions during
     #   the rotation process. If you use this parameter then don't specify
-    #   `SecretVersionId`. If you don't specify either a `VersionStage` or
-    #   `SecretVersionId`, then the default is to perform the operation on
-    #   the version with the `VersionStage` value of `AWSCURRENT`.
+    #   `VersionId`. If you don't specify either a `VersionStage` or
+    #   `VersionId`, then the default is to perform the operation on the
+    #   version with the `VersionStage` value of `AWSCURRENT`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/GetSecretValueRequest AWS API Documentation
@@ -1045,7 +1054,7 @@ module Aws::SecretsManager
     #     existing secret version. You can only create new versions to store
     #     new secret values.
     #
-    #   This value becomes the `SecretVersionId` of the new version.
+    #   This value becomes the `VersionId` of the new version.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1230,22 +1239,8 @@ module Aws::SecretsManager
     #
     #   Secrets Manager uses this value to prevent the accidental creation
     #   of duplicate versions if there are failures and retries during the
-    #   function's processing.
-    #
-    #   * If the `ClientRequestToken` value isn't already associated with a
-    #     version of the secret then a new version of the secret is created.
-    #
-    #   * If a version with this value already exists and that version's
-    #     `SecretString` and `SecretBinary` values are the same as the
-    #     request, then the request is ignored (the operation is
-    #     idempotent).
-    #
-    #   * If a version with this value already exists and that version's
-    #     `SecretString` and `SecretBinary` values are different from the
-    #     request then an error occurs because you cannot modify an existing
-    #     secret value.
-    #
-    #   This value becomes the `SecretVersionId` of the new version.
+    #   function's processing. This value becomes the `VersionId` of the
+    #   new version.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1308,6 +1303,14 @@ module Aws::SecretsManager
     # @!attribute [rw] automatically_after_days
     #   Specifies the number of days between automatic scheduled rotations
     #   of the secret.
+    #
+    #   Secrets Manager schedules the next rotation when the previous one is
+    #   complete. Secrets Manager schedules the date by adding the rotation
+    #   interval (number of days) to the actual date of the last rotation.
+    #   The service chooses the hour within that 24-hour date window
+    #   randomly. The minute is also chosen somewhat randomly, but weighted
+    #   towards the top of the hour and influenced by a variety of factors
+    #   that help distribute load.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/RotationRulesType AWS API Documentation
@@ -1616,7 +1619,7 @@ module Aws::SecretsManager
     #     request then an error occurs because you cannot modify an existing
     #     secret value.
     #
-    #   This value becomes the `SecretVersionId` of the new version.
+    #   This value becomes the `VersionId` of the new version.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.

@@ -618,15 +618,15 @@ module Aws::SageMaker
     # @!attribute [rw] primary_container
     #   The location of the primary docker image containing inference code,
     #   associated artifacts, and custom environment map that the inference
-    #   code uses when the model is deployed into production.
+    #   code uses when the model is deployed for predictions.
     #   @return [Types::ContainerDefinition]
     #
     # @!attribute [rw] execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker
     #   can assume to access model artifacts and docker image for deployment
-    #   on ML compute instances. Deploying on ML compute instances is part
-    #   of model hosting. For more information, see [Amazon SageMaker
-    #   Roles][1].
+    #   on ML compute instances or for batch transform jobs. Deploying on ML
+    #   compute instances is part of model hosting. For more information,
+    #   see [Amazon SageMaker Roles][1].
     #
     #   <note markdown="1"> To be able to pass this role to Amazon SageMaker, the caller of this
     #   API must have the `iam:PassRole` permission.
@@ -651,7 +651,9 @@ module Aws::SageMaker
     # @!attribute [rw] vpc_config
     #   A VpcConfig object that specifies the VPC that you want your model
     #   to connect to. Control access to and from your model container by
-    #   configuring the VPC. For more information, see host-vpc.
+    #   configuring the VPC. `VpcConfig` is currently used in hosting
+    #   services but not in batch transform. For more information, see
+    #   host-vpc.
     #   @return [Types::VpcConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelInput AWS API Documentation
@@ -1150,6 +1152,12 @@ module Aws::SageMaker
     #   `SingleRecord` means only one record is used per mini-batch.
     #   `MultiRecord` means a mini-batch is set to contain as many records
     #   that can fit within the `MaxPayloadInMB` limit.
+    #
+    #   Batch transform will automatically split your input data into
+    #   whatever payload size is specified if you set `SplitType` to `Line`
+    #   and `BatchStrategy` to `MultiRecord`. There's no need to split the
+    #   dataset into smaller files or to use larger payload sizes unless the
+    #   records in your dataset are very large.
     #   @return [String]
     #
     # @!attribute [rw] environment
@@ -1894,16 +1902,7 @@ module Aws::SageMaker
     #
     #   * `Starting` - starting the training job.
     #
-    #   * `LaunchingMLInstances` - launching ML instances for the training
-    #     job.
-    #
-    #   * `PreparingTrainingStack` - preparing the ML instances for the
-    #     training job.
-    #
     #   * `Downloading` - downloading the input data.
-    #
-    #   * `DownloadingTrainingImage` - downloading the training algorithm
-    #     image.
     #
     #   * `Training` - model training is in progress.
     #
@@ -1913,16 +1912,17 @@ module Aws::SageMaker
     #
     #   * `Stopped` - the training job has stopped.
     #
-    #   * `MaxRuntimeExceeded` - the training exceed the specified the max
-    #     run time, which means the training job is stopping.
+    #   * `MaxRuntimeExceeded` - the training job exceeded the specified max
+    #     run time and has been stopped.
     #
     #   * `Completed` - the training job has completed.
     #
     #   * `Failed` - the training job has failed. The failure reason is
-    #     provided in the `StatusMessage`.
+    #     stored in the `FailureReason` field of
+    #     `DescribeTrainingJobResponse`.
     #
     #   The valid values for `SecondaryStatus` are subject to change. They
-    #   primary provide information on the progress of the training job.
+    #   primarily provide information on the progress of the training job.
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
@@ -1996,8 +1996,9 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] secondary_status_transitions
-    #   A log of time-ordered secondary statuses that a training job has
-    #   transitioned.
+    #   To give an overview of the training job lifecycle,
+    #   `SecondaryStatusTransitions` is a log of time-ordered secondary
+    #   statuses that a training job has transitioned.
     #   @return [Array<Types::SecondaryStatusTransition>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJobResponse AWS API Documentation
@@ -4217,7 +4218,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] end_time
     #   A timestamp that shows when the secondary status has ended and the
-    #   job has transitioned into another secondary status.
+    #   job has transitioned into another secondary status. The `EndTime`
+    #   timestamp is also set after the training job has ended.
     #   @return [Time]
     #
     # @!attribute [rw] status_message
@@ -4869,6 +4871,8 @@ module Aws::SageMaker
     #         notebook_instance_name: "NotebookInstanceName", # required
     #         instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge
     #         role_arn: "RoleArn",
+    #         lifecycle_config_name: "NotebookInstanceLifecycleConfigName",
+    #         disassociate_lifecycle_config: false,
     #       }
     #
     # @!attribute [rw] notebook_instance_name
@@ -4894,12 +4898,25 @@ module Aws::SageMaker
     #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
     #   @return [String]
     #
+    # @!attribute [rw] lifecycle_config_name
+    #   The name of a lifecycle configuration to associate with the notebook
+    #   instance. For information about lifestyle configurations, see
+    #   notebook-lifecycle-config.
+    #   @return [String]
+    #
+    # @!attribute [rw] disassociate_lifecycle_config
+    #   Set to `true` to remove the notebook instance lifecycle
+    #   configuration currently associated with the notebook instance.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstanceInput AWS API Documentation
     #
     class UpdateNotebookInstanceInput < Struct.new(
       :notebook_instance_name,
       :instance_type,
-      :role_arn)
+      :role_arn,
+      :lifecycle_config_name,
+      :disassociate_lifecycle_config)
       include Aws::Structure
     end
 

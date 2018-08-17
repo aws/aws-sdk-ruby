@@ -544,28 +544,33 @@ module Aws::SageMaker
     end
 
     # Creates a model in Amazon SageMaker. In the request, you name the
-    # model and describe one or more containers. For each container, you
+    # model and describe a primary container. For the primary container, you
     # specify the docker image containing inference code, artifacts (from
     # prior training), and custom environment map that the inference code
-    # uses when you deploy the model into production.
+    # uses when you deploy the model for predictions.
     #
-    # Use this API to create a model only if you want to use Amazon
-    # SageMaker hosting services. To host your model, you create an endpoint
-    # configuration with the `CreateEndpointConfig` API, and then create an
-    # endpoint with the `CreateEndpoint` API.
+    # Use this API to create a model if you want to use Amazon SageMaker
+    # hosting services or run a batch transform job.
     #
-    # Amazon SageMaker then deploys all of the containers that you defined
-    # for the model in the hosting environment.
+    # To host your model, you create an endpoint configuration with the
+    # `CreateEndpointConfig` API, and then create an endpoint with the
+    # `CreateEndpoint` API. Amazon SageMaker then deploys all of the
+    # containers that you defined for the model in the hosting environment.
+    #
+    # To run a batch transform using your model, you start a job with the
+    # `CreateTransformJob` API. Amazon SageMaker uses your model and your
+    # dataset to get inferences which are then saved to a specified S3
+    # location.
     #
     # In the `CreateModel` request, you must define a container with the
     # `PrimaryContainer` parameter.
     #
     # In the request, you also provide an IAM role that Amazon SageMaker can
     # assume to access model artifacts and docker image for deployment on ML
-    # compute hosting instances. In addition, you also use the IAM role to
-    # manage permissions the inference code needs. For example, if the
-    # inference code access any other AWS resources, you grant necessary
-    # permissions via this role.
+    # compute hosting instances or for batch transform jobs. In addition,
+    # you also use the IAM role to manage permissions the inference code
+    # needs. For example, if the inference code access any other AWS
+    # resources, you grant necessary permissions via this role.
     #
     # @option params [required, String] :model_name
     #   The name of the new model.
@@ -573,13 +578,14 @@ module Aws::SageMaker
     # @option params [required, Types::ContainerDefinition] :primary_container
     #   The location of the primary docker image containing inference code,
     #   associated artifacts, and custom environment map that the inference
-    #   code uses when the model is deployed into production.
+    #   code uses when the model is deployed for predictions.
     #
     # @option params [required, String] :execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker
     #   can assume to access model artifacts and docker image for deployment
-    #   on ML compute instances. Deploying on ML compute instances is part of
-    #   model hosting. For more information, see [Amazon SageMaker Roles][1].
+    #   on ML compute instances or for batch transform jobs. Deploying on ML
+    #   compute instances is part of model hosting. For more information, see
+    #   [Amazon SageMaker Roles][1].
     #
     #   <note markdown="1"> To be able to pass this role to Amazon SageMaker, the caller of this
     #   API must have the `iam:PassRole` permission.
@@ -602,7 +608,8 @@ module Aws::SageMaker
     # @option params [Types::VpcConfig] :vpc_config
     #   A VpcConfig object that specifies the VPC that you want your model to
     #   connect to. Control access to and from your model container by
-    #   configuring the VPC. For more information, see host-vpc.
+    #   configuring the VPC. `VpcConfig` is currently used in hosting services
+    #   but not in batch transform. For more information, see host-vpc.
     #
     # @return [Types::CreateModelOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1121,8 +1128,9 @@ module Aws::SageMaker
     #   unique within an AWS Region in an AWS account.
     #
     # * `ModelName` - Identifies the model to use. `ModelName` must be the
-    #   name of an existing Amazon SageMaker model within an AWS Region in
-    #   an AWS account.
+    #   name of an existing Amazon SageMaker model in the same AWS Region
+    #   and AWS account. For information on creating a model, see
+    #   CreateModel.
     #
     # * `TransformInput` - Describes the dataset to be transformed and the
     #   Amazon S3 location where it is stored.
@@ -1172,6 +1180,12 @@ module Aws::SageMaker
     #   `SingleRecord` means only one record is used per mini-batch.
     #   `MultiRecord` means a mini-batch is set to contain as many records
     #   that can fit within the `MaxPayloadInMB` limit.
+    #
+    #   Batch transform will automatically split your input data into whatever
+    #   payload size is specified if you set `SplitType` to `Line` and
+    #   `BatchStrategy` to `MultiRecord`. There's no need to split the
+    #   dataset into smaller files or to use larger payload sizes unless the
+    #   records in your dataset are very large.
     #
     # @option params [Hash<String,String>] :environment
     #   The environment variables to set in the Docker container. We support
@@ -2926,6 +2940,15 @@ module Aws::SageMaker
     #
     #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
     #
+    # @option params [String] :lifecycle_config_name
+    #   The name of a lifecycle configuration to associate with the notebook
+    #   instance. For information about lifestyle configurations, see
+    #   notebook-lifecycle-config.
+    #
+    # @option params [Boolean] :disassociate_lifecycle_config
+    #   Set to `true` to remove the notebook instance lifecycle configuration
+    #   currently associated with the notebook instance.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2934,6 +2957,8 @@ module Aws::SageMaker
     #     notebook_instance_name: "NotebookInstanceName", # required
     #     instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge
     #     role_arn: "RoleArn",
+    #     lifecycle_config_name: "NotebookInstanceLifecycleConfigName",
+    #     disassociate_lifecycle_config: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstance AWS API Documentation
@@ -2999,7 +3024,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
