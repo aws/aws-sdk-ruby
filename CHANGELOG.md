@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.112 (2018-08-20)
+------------------
+
 * Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
 
 * Feature - Aws::MediaConvert - Updated the API for AWS Elemental MediaConvert.
