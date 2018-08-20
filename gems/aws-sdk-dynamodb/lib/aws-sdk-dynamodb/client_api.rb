@@ -146,6 +146,7 @@ module Aws::DynamoDB
     ItemCount = Shapes::IntegerShape.new(name: 'ItemCount')
     ItemList = Shapes::ListShape.new(name: 'ItemList')
     KMSMasterKeyArn = Shapes::StringShape.new(name: 'KMSMasterKeyArn')
+    KMSMasterKeyId = Shapes::StringShape.new(name: 'KMSMasterKeyId')
     Key = Shapes::MapShape.new(name: 'Key')
     KeyConditions = Shapes::MapShape.new(name: 'KeyConditions')
     KeyExpression = Shapes::StringShape.new(name: 'KeyExpression')
@@ -900,7 +901,9 @@ module Aws::DynamoDB
     SSEDescription.add_member(:kms_master_key_arn, Shapes::ShapeRef.new(shape: KMSMasterKeyArn, location_name: "KMSMasterKeyArn"))
     SSEDescription.struct_class = Types::SSEDescription
 
-    SSESpecification.add_member(:enabled, Shapes::ShapeRef.new(shape: SSEEnabled, required: true, location_name: "Enabled"))
+    SSESpecification.add_member(:enabled, Shapes::ShapeRef.new(shape: SSEEnabled, location_name: "Enabled"))
+    SSESpecification.add_member(:sse_type, Shapes::ShapeRef.new(shape: SSEType, location_name: "SSEType"))
+    SSESpecification.add_member(:kms_master_key_id, Shapes::ShapeRef.new(shape: KMSMasterKeyId, location_name: "KMSMasterKeyId"))
     SSESpecification.struct_class = Types::SSESpecification
 
     ScanInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TableName"))
@@ -1052,6 +1055,7 @@ module Aws::DynamoDB
     UpdateTableInput.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughput, location_name: "ProvisionedThroughput"))
     UpdateTableInput.add_member(:global_secondary_index_updates, Shapes::ShapeRef.new(shape: GlobalSecondaryIndexUpdateList, location_name: "GlobalSecondaryIndexUpdates"))
     UpdateTableInput.add_member(:stream_specification, Shapes::ShapeRef.new(shape: StreamSpecification, location_name: "StreamSpecification"))
+    UpdateTableInput.add_member(:sse_specification, Shapes::ShapeRef.new(shape: SSESpecification, location_name: "SSESpecification"))
     UpdateTableInput.struct_class = Types::UpdateTableInput
 
     UpdateTableOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))

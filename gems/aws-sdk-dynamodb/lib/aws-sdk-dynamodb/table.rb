@@ -1715,6 +1715,11 @@ module Aws::DynamoDB
     #       stream_enabled: false,
     #       stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
     #     },
+    #     sse_specification: {
+    #       enabled: false,
+    #       sse_type: "AES256", # accepts AES256, KMS
+    #       kms_master_key_id: "KMSMasterKeyId",
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::AttributeDefinition>] :attribute_definitions
@@ -1750,6 +1755,8 @@ module Aws::DynamoDB
     #   disable a stream on a table which does not have a stream.
     #
     #    </note>
+    # @option options [Types::SSESpecification] :sse_specification
+    #   The new server-side encryption settings for the specified table.
     # @return [Table]
     def update(options = {})
       options = options.merge(table_name: @name)

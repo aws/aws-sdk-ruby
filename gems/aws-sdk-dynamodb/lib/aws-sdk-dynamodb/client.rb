@@ -1210,7 +1210,9 @@ module Aws::DynamoDB
     #       stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
     #     },
     #     sse_specification: {
-    #       enabled: false, # required
+    #       enabled: false,
+    #       sse_type: "AES256", # accepts AES256, KMS
+    #       kms_master_key_id: "KMSMasterKeyId",
     #     },
     #   })
     #
@@ -1271,7 +1273,7 @@ module Aws::DynamoDB
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
     #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
-    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.table_description.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.table_description.sse_description.kms_master_key_arn #=> String
     #
@@ -1343,7 +1345,7 @@ module Aws::DynamoDB
     #   resp.backup_description.source_table_feature_details.stream_description.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.backup_description.source_table_feature_details.time_to_live_description.time_to_live_status #=> String, one of "ENABLING", "DISABLING", "ENABLED", "DISABLED"
     #   resp.backup_description.source_table_feature_details.time_to_live_description.attribute_name #=> String
-    #   resp.backup_description.source_table_feature_details.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.backup_description.source_table_feature_details.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.backup_description.source_table_feature_details.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.backup_description.source_table_feature_details.sse_description.kms_master_key_arn #=> String
     #
@@ -1742,7 +1744,7 @@ module Aws::DynamoDB
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
     #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
-    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.table_description.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.table_description.sse_description.kms_master_key_arn #=> String
     #
@@ -1815,7 +1817,7 @@ module Aws::DynamoDB
     #   resp.backup_description.source_table_feature_details.stream_description.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.backup_description.source_table_feature_details.time_to_live_description.time_to_live_status #=> String, one of "ENABLING", "DISABLING", "ENABLED", "DISABLED"
     #   resp.backup_description.source_table_feature_details.time_to_live_description.attribute_name #=> String
-    #   resp.backup_description.source_table_feature_details.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.backup_description.source_table_feature_details.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.backup_description.source_table_feature_details.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.backup_description.source_table_feature_details.sse_description.kms_master_key_arn #=> String
     #
@@ -2223,7 +2225,7 @@ module Aws::DynamoDB
     #   resp.table.restore_summary.source_table_arn #=> String
     #   resp.table.restore_summary.restore_date_time #=> Time
     #   resp.table.restore_summary.restore_in_progress #=> Boolean
-    #   resp.table.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.table.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.table.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.table.sse_description.kms_master_key_arn #=> String
     #
@@ -2476,7 +2478,7 @@ module Aws::DynamoDB
     # You can call `ListBackups` a maximum of 5 times per second.
     #
     # @option params [String] :table_name
-    #   The backups from the table specified by TableName are listed.
+    #   The backups from the table specified by `TableName` are listed.
     #
     # @option params [Integer] :limit
     #   Maximum number of backups to return at once.
@@ -2497,15 +2499,15 @@ module Aws::DynamoDB
     #   fetch the next page of results.
     #
     # @option params [String] :backup_type
-    #   The backups from the table specified by BackupType are listed.
+    #   The backups from the table specified by `BackupType` are listed.
     #
-    #   Where BackupType can be:
+    #   Where `BackupType` can be:
     #
-    #   * `USER` - On demand backup created by you.
+    #   * `USER` - On-demand backup created by you.
     #
-    #   * `SYSTEM` - On demand backup automatically created by DynamoDB.
+    #   * `SYSTEM` - On-demand backup automatically created by DynamoDB.
     #
-    #   * `ALL` - All types of on demand backups (USER and SYSTEM).
+    #   * `ALL` - All types of on-demand backups (USER and SYSTEM).
     #
     # @return [Types::ListBackupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3651,7 +3653,7 @@ module Aws::DynamoDB
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
     #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
-    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.table_description.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.table_description.sse_description.kms_master_key_arn #=> String
     #
@@ -3788,7 +3790,7 @@ module Aws::DynamoDB
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
     #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
-    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.table_description.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.table_description.sse_description.kms_master_key_arn #=> String
     #
@@ -5078,6 +5080,9 @@ module Aws::DynamoDB
     #
     #    </note>
     #
+    # @option params [Types::SSESpecification] :sse_specification
+    #   The new server-side encryption settings for the specified table.
+    #
     # @return [Types::UpdateTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateTableOutput#table_description #table_description} => Types::TableDescription
@@ -5181,6 +5186,11 @@ module Aws::DynamoDB
     #       stream_enabled: false,
     #       stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
     #     },
+    #     sse_specification: {
+    #       enabled: false,
+    #       sse_type: "AES256", # accepts AES256, KMS
+    #       kms_master_key_id: "KMSMasterKeyId",
+    #     },
     #   })
     #
     # @example Response structure
@@ -5240,7 +5250,7 @@ module Aws::DynamoDB
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
     #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
-    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.table_description.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.table_description.sse_description.kms_master_key_arn #=> String
     #
@@ -5338,7 +5348,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

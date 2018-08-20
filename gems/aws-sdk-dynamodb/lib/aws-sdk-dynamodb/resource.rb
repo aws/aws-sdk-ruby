@@ -289,7 +289,9 @@ module Aws::DynamoDB
     #       stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
     #     },
     #     sse_specification: {
-    #       enabled: false, # required
+    #       enabled: false,
+    #       sse_type: "AES256", # accepts AES256, KMS
+    #       kms_master_key_id: "KMSMasterKeyId",
     #     },
     #   })
     # @param [Hash] options ({})
