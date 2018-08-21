@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DLM - Updated the documentation for Amazon Data Lifecycle Manager.
+
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ElasticBeanstalk - Updated the API, and documentation for AWS Elastic Beanstalk.
+
+* Feature - Aws::RDS - Updated the API for Amazon Relational Database Service.
+
 2.11.112 (2018-08-20)
 ------------------
 
