@@ -408,6 +408,7 @@ module Aws::ElasticBeanstalk
     CPUUtilization.add_member(:io_wait, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "IOWait"))
     CPUUtilization.add_member(:irq, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "IRQ"))
     CPUUtilization.add_member(:soft_irq, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "SoftIRQ"))
+    CPUUtilization.add_member(:privileged, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "Privileged"))
     CPUUtilization.struct_class = Types::CPUUtilization
 
     Causes.member = Shapes::ShapeRef.new(shape: Cause)

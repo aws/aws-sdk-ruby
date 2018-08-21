@@ -1663,8 +1663,6 @@ module Aws::RDS
     #         values: ["String"], # required
     #       },
     #     ],
-    #     max_records: 1,
-    #     marker: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_cluster_identifier
@@ -1687,32 +1685,21 @@ module Aws::RDS
     #     information about the DB clusters identified by these ARNs.
     #
     #   ^
-    # @option options [Integer] :max_records
-    #   The maximum number of records to include in the response. If more
-    #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that the
-    #   remaining results can be retrieved.
-    #
-    #   Default: 100
-    #
-    #   Constraints: Minimum 20, maximum 100.
-    # @option options [String] :marker
-    #   An optional pagination token provided by a previous DescribeDBClusters
-    #   request. If this parameter is specified, the response includes only
-    #   records beyond the marker, up to the value specified by `MaxRecords`.
     # @return [DBCluster::Collection]
     def db_clusters(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         resp = @client.describe_db_clusters(options)
-        resp.data.db_clusters.each do |d|
-          batch << DBCluster.new(
-            id: d.db_cluster_identifier,
-            data: d,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.db_clusters.each do |d|
+            batch << DBCluster.new(
+              id: d.db_cluster_identifier,
+              data: d,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       DBCluster::Collection.new(batches)
     end

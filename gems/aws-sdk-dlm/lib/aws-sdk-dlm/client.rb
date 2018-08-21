@@ -171,7 +171,7 @@ module Aws::DLM
     #   The desired activation state of the lifecycle policy after creation.
     #
     # @option params [required, Types::PolicyDetails] :policy_details
-    #   The configuration of the lifecycle policy.
+    #   The configuration details of the lifecycle policy.
     #
     #   Target tags cannot be re-used across lifecycle policies.
     #
@@ -266,16 +266,17 @@ module Aws::DLM
     #   The resource type.
     #
     # @option params [Array<String>] :target_tags
-    #   The target tags.
+    #   The target tag for a policy.
     #
-    #   Tags are strings in the format `key:value`.
+    #   Tags are strings in the format `key=value`.
     #
     # @option params [Array<String>] :tags_to_add
-    #   The tags to add to the resources.
+    #   The tags to add to objects created by the policy.
     #
-    #   Tags are strings in the format `key:value`.
+    #   Tags are strings in the format `key=value`.
     #
-    #   These tags are added in addition to the AWS-added lifecycle tags.
+    #   These user-defined tags are added in addition to the AWS-added
+    #   lifecycle tags.
     #
     # @return [Types::GetLifecyclePoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -436,7 +437,7 @@ module Aws::DLM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dlm'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

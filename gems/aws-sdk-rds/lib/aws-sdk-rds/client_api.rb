@@ -2707,6 +2707,12 @@ module Aws::RDS
         o.input = Shapes::ShapeRef.new(shape: DescribeDBClustersMessage)
         o.output = Shapes::ShapeRef.new(shape: DBClusterMessage)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_db_engine_versions, Seahorse::Model::Operation.new.tap do |o|

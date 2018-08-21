@@ -632,6 +632,9 @@ module Aws::ElasticBeanstalk
     # specific application and are used to deploy different versions of the
     # application with the same configuration settings.
     #
+    # Templates aren't associated with any environment. The
+    # `EnvironmentName` response element is always `null`.
+    #
     # Related Topics
     #
     # * DescribeConfigurationOptions
@@ -2521,6 +2524,7 @@ module Aws::ElasticBeanstalk
     #   resp.instance_health_list[0].system.cpu_utilization.io_wait #=> Float
     #   resp.instance_health_list[0].system.cpu_utilization.irq #=> Float
     #   resp.instance_health_list[0].system.cpu_utilization.soft_irq #=> Float
+    #   resp.instance_health_list[0].system.cpu_utilization.privileged #=> Float
     #   resp.instance_health_list[0].system.load_average #=> Array
     #   resp.instance_health_list[0].system.load_average[0] #=> Float
     #   resp.instance_health_list[0].deployment.version_label #=> String
@@ -4003,7 +4007,7 @@ module Aws::ElasticBeanstalk
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticbeanstalk'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
