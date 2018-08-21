@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.113 (2018-08-21)
+------------------
+
 * Feature - Aws::DLM - Updated the documentation for Amazon Data Lifecycle Manager.
 
 * Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
