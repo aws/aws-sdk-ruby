@@ -453,7 +453,7 @@ module Aws::Snowball
     #     shipping_option: "SECOND_DAY", # required, accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     notification: {
     #       sns_topic_arn: "SnsTopicARN",
-    #       job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+    #       job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #       notify_all: false,
     #     },
     #     forwarding_address_id: "AddressId",
@@ -640,7 +640,7 @@ module Aws::Snowball
     #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     notification: {
     #       sns_topic_arn: "SnsTopicARN",
-    #       job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+    #       job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #       notify_all: false,
     #     },
     #     cluster_id: "ClusterId",
@@ -886,7 +886,7 @@ module Aws::Snowball
     #   resp.cluster_metadata.shipping_option #=> String, one of "SECOND_DAY", "NEXT_DAY", "EXPRESS", "STANDARD"
     #   resp.cluster_metadata.notification.sns_topic_arn #=> String
     #   resp.cluster_metadata.notification.job_states_to_notify #=> Array
-    #   resp.cluster_metadata.notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
+    #   resp.cluster_metadata.notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.cluster_metadata.notification.notify_all #=> Boolean
     #   resp.cluster_metadata.forwarding_address_id #=> String
     #
@@ -962,7 +962,7 @@ module Aws::Snowball
     # @example Response structure
     #
     #   resp.job_metadata.job_id #=> String
-    #   resp.job_metadata.job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
+    #   resp.job_metadata.job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_metadata.job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
     #   resp.job_metadata.snowball_type #=> String, one of "STANDARD", "EDGE"
     #   resp.job_metadata.creation_date #=> Time
@@ -989,7 +989,7 @@ module Aws::Snowball
     #   resp.job_metadata.snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "NoPreference"
     #   resp.job_metadata.notification.sns_topic_arn #=> String
     #   resp.job_metadata.notification.job_states_to_notify #=> Array
-    #   resp.job_metadata.notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
+    #   resp.job_metadata.notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_metadata.notification.notify_all #=> Boolean
     #   resp.job_metadata.data_transfer_progress.bytes_transferred #=> Integer
     #   resp.job_metadata.data_transfer_progress.objects_transferred #=> Integer
@@ -1002,7 +1002,7 @@ module Aws::Snowball
     #   resp.job_metadata.forwarding_address_id #=> String
     #   resp.sub_job_metadata #=> Array
     #   resp.sub_job_metadata[0].job_id #=> String
-    #   resp.sub_job_metadata[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
+    #   resp.sub_job_metadata[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.sub_job_metadata[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
     #   resp.sub_job_metadata[0].snowball_type #=> String, one of "STANDARD", "EDGE"
     #   resp.sub_job_metadata[0].creation_date #=> Time
@@ -1029,7 +1029,7 @@ module Aws::Snowball
     #   resp.sub_job_metadata[0].snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "NoPreference"
     #   resp.sub_job_metadata[0].notification.sns_topic_arn #=> String
     #   resp.sub_job_metadata[0].notification.job_states_to_notify #=> Array
-    #   resp.sub_job_metadata[0].notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
+    #   resp.sub_job_metadata[0].notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.sub_job_metadata[0].notification.notify_all #=> Boolean
     #   resp.sub_job_metadata[0].data_transfer_progress.bytes_transferred #=> Integer
     #   resp.sub_job_metadata[0].data_transfer_progress.objects_transferred #=> Integer
@@ -1319,7 +1319,7 @@ module Aws::Snowball
     #
     #   resp.job_list_entries #=> Array
     #   resp.job_list_entries[0].job_id #=> String
-    #   resp.job_list_entries[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
+    #   resp.job_list_entries[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_list_entries[0].is_master #=> Boolean
     #   resp.job_list_entries[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
     #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE"
@@ -1499,7 +1499,7 @@ module Aws::Snowball
     #
     #   resp.job_list_entries #=> Array
     #   resp.job_list_entries[0].job_id #=> String
-    #   resp.job_list_entries[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
+    #   resp.job_list_entries[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_list_entries[0].is_master #=> Boolean
     #   resp.job_list_entries[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
     #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE"
@@ -1607,7 +1607,7 @@ module Aws::Snowball
     #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     notification: {
     #       sns_topic_arn: "SnsTopicARN",
-    #       job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+    #       job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #       notify_all: false,
     #     },
     #     forwarding_address_id: "AddressId",
@@ -1687,7 +1687,7 @@ module Aws::Snowball
     #     role_arn: "RoleARN",
     #     notification: {
     #       sns_topic_arn: "SnsTopicARN",
-    #       job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+    #       job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #       notify_all: false,
     #     },
     #     resources: {
@@ -1746,7 +1746,7 @@ module Aws::Snowball
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-snowball'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
