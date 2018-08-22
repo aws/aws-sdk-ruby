@@ -56,6 +56,13 @@ module Aws
       @entries.key?(key)
     end
 
+    # checking whether an polling thread exist for the key
+    # @param [String] key
+    # @return [Boolean]
+    def threads_key?(key)
+      @pool.key?(key)
+    end
+
     # remove entry only
     # @param [String] key
     def delete(key)
@@ -65,7 +72,7 @@ module Aws
     # kill the old polling thread and remove it from pool
     # @param [String] key
     def delete_polling_thread(key)
-      Thread.kill(@pool[key]) if @pool.key?(key)
+      Thread.kill(@pool[key]) if slef.threads_key?(key)
       @pool.delete(key)
     end
 

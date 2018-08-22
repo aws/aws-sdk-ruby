@@ -96,18 +96,24 @@ backgrounds very 60 secs (default). Defaults to `false`.
               cache[key]
             elsif ctx.config.active_endpoint_cache
               # enabled active cache pull
-              # start a thread for polling endpoints
               interval = ctx.config.endpoint_cache_poll_interval
-              # kill the previous polling thread by key
-              # because ctx might be changed
-              cache.delete_polling_thread(key)
-              thread = Thread.new do
-                while !cache.key?(key) do
-                  cache.update(key, ctx)
-                  sleep(interval)
-                end
+              if key.include?('_')
+                # identifier related, kill the previous polling thread by key
+                # because endpoint req params might be changed
+                cache.delete_polling_thread(key)
               end
-              cache.update_polling_pool(key, thread)
+
+              # start a thread for polling endpoints when non-exist
+              unless cache.threads_key?(key)
+                thread = Thread.new do
+                  while !cache.key?(key) do
+                    cache.update(key, ctx)
+                    sleep(interval)
+                  end
+                end
+                cache.update_polling_pool(key, thread)
+              end
+
               cache[key]
             else
               # disabled active cache pull
