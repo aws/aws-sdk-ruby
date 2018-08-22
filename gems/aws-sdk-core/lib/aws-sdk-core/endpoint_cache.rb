@@ -10,6 +10,7 @@ module Aws
       @max_entries = options[:max_entries] || MAX_ENTRIES
       @entries = {} # store endpoints
       @pool = {} # store polling threads
+      @mutex = Mutex.new
     end
 
     # @return [Integer] Max size limit of cache
@@ -21,24 +22,28 @@ module Aws
     # @param [String] key
     # @return [Endpoint]
     def [](key)
-      # fetching an exsiting endpoint delete it and then append it
+      # fetching an existing endpoint delete it and then append it
       endpoint = @entries[key]
-      @entries.delete(key)
-      @entries[key] = endpoint 
+      if endpoint
+        @entries.delete(key)
+        @entries[key] = endpoint
+      end
       endpoint
     end
 
     # @param [String] key
     # @param [Hash] value
     def []=(key, value)
-      # delete old value if exists
-      self.delete(key)
-      # delete the least recent used endpoint when cache is full
-      unless @entries.size < @max_entries
-        old_key, _ = @entries.shift
-        self.delete_polling_thread(old_key)
+      @mutex.synchronize do
+        # delete the least recent used endpoint when cache is full
+        unless @entries.size < @max_entries
+          old_key, _ = @entries.shift
+          self.delete_polling_thread(old_key)
+        end
+        # delete old value if exists
+        self.delete(key)
+        @entries[key] = Endpoint.new(value.to_h)
       end
-      @entries[key] = Endpoint.new(value.to_h)
     end
 
     # checking whether an unexpired endpoint key exists in cache

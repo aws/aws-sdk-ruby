@@ -33,7 +33,6 @@ to test endpoints. This should be avalid HTTP(S) URI.
         DOCS
       )
 
-      # TODO, this potentially gives the risk for customer to access this
       option(:regional_endpoint) do |cfg|
         if cfg.endpoint
           false

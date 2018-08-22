@@ -14,7 +14,8 @@ module Aws
       cache['B'] = {:address => 'b.foo.com/bar', :cache_period_in_minutes => 100}
       cache['C'] = {:address => 'c.foo.com/bar', :cache_period_in_minutes => 100}
       cache['B'] = {:address => 'd.foo.com/bar', :cache_period_in_minutes => 100}
-      expect(cache.key?('A')).to be_truthy
+      expect(cache.key?('A')).to be_falsey
+      expect(cache['B'].address).to eq('d.foo.com/bar')
       cache['D'] = {:address => 'e.foo.com/bar', :cache_period_in_minutes => 100}
       cache['E'] = {:address => 'f.foo.com/bar', :cache_period_in_minutes => 100}
       expect(cache.key?('B')).to be_truthy

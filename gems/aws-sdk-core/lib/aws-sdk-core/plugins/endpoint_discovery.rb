@@ -102,7 +102,6 @@ backgrounds very 60 secs (default). Defaults to `false`.
               # because ctx might be changed
               cache.delete_polling_thread(key)
               thread = Thread.new do
-                # TODO set a limit to those attempts?
                 while !cache.key?(key) do
                   cache.update(key, ctx)
                   sleep(interval)
