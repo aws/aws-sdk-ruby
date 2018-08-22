@@ -183,6 +183,9 @@ module AwsSdkCodeGenerator
             o.deprecated = true if operation['deprecated']
             o.endpoint_operation = true if operation['endpointoperation']
             if operation.key?('endpointdiscovery')
+              # "endpointdiscovery" trait per operation
+              # contains hash values of configuration,
+              # current acked field: "required"
               o.endpoint_discovery_exist = true
               o.endpoint_discovery = operation['endpointdiscovery'].inject([]) do |a, (k, v)|
                 a << { key: k.inspect, value: v.inspect }
