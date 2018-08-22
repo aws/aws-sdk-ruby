@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.114 (2018-08-22)
+------------------
+
 * Feature - Aws::Snowball - Updated the API for Amazon Import/Export Snowball.
 
 2.11.113 (2018-08-21)
