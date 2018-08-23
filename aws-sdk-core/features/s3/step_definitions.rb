@@ -27,6 +27,7 @@ def create_bucket(options = {})
     }
   end
   @client.create_bucket(options)
+  @client.wait_until(:bucket_exists, bucket: @bucket_name)
   @created_buckets << @bucket_name
 end
 
@@ -121,11 +122,12 @@ end
 
 When(/^I create a bucket with a DNS compatible name that contains a dot$/) do
   @bucket_name = "aws.#{Time.now.to_i}.sdk"
-  @client.create_bucket(bucket: @bucket_name)
+  create_bucket(bucket: @bucket_name)
 end
 
 Then(/^I should be able to delete the bucket$/) do
   @client.delete_bucket(bucket: @bucket_name)
+  @created_buckets.delete(@bucket_name)
 end
 
 Then(/^the bucket name should be in the request path$/) do
