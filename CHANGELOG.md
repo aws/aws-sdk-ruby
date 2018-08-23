@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
+* Feature - Aws::IoTAnalytics - Updated the API, and documentation for AWS IoT Analytics.
+
+* Feature - Aws::LexModelBuildingService - Updated the API for Amazon Lex Model Building Service.
+
+* Feature - Aws::MediaLive - Updated the API, and documentation for AWS Elemental MediaLive.
+
+* Feature - Aws::Rekognition - Updated the API, documentation, and integration test for Amazon Rekognition.
+
 2.11.114 (2018-08-22)
 ------------------
 
