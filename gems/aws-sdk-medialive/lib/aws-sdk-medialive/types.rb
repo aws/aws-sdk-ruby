@@ -924,6 +924,270 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # A list of schedule actions to create.
+    #
+    # @note When making an API call, you may pass BatchScheduleActionCreateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         schedule_actions: [ # required
+    #           {
+    #             action_name: "__string", # required
+    #             schedule_action_settings: { # required
+    #               scte_35_return_to_network_settings: {
+    #                 splice_event_id: 1, # required
+    #               },
+    #               scte_35_splice_insert_settings: {
+    #                 duration: 1,
+    #                 splice_event_id: 1, # required
+    #               },
+    #               scte_35_time_signal_settings: {
+    #                 scte_35_descriptors: [ # required
+    #                   {
+    #                     scte_35_descriptor_settings: { # required
+    #                       segmentation_descriptor_scte_35_descriptor_settings: { # required
+    #                         delivery_restrictions: {
+    #                           archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
+    #                           device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
+    #                           no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
+    #                           web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
+    #                         },
+    #                         segment_num: 1,
+    #                         segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
+    #                         segmentation_duration: 1,
+    #                         segmentation_event_id: 1, # required
+    #                         segmentation_type_id: 1,
+    #                         segmentation_upid: "__string",
+    #                         segmentation_upid_type: 1,
+    #                         segments_expected: 1,
+    #                         sub_segment_num: 1,
+    #                         sub_segments_expected: 1,
+    #                       },
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #               static_image_activate_settings: {
+    #                 duration: 1,
+    #                 fade_in: 1,
+    #                 fade_out: 1,
+    #                 height: 1,
+    #                 image: { # required
+    #                   password_param: "__string",
+    #                   uri: "__string", # required
+    #                   username: "__string",
+    #                 },
+    #                 image_x: 1,
+    #                 image_y: 1,
+    #                 layer: 1,
+    #                 opacity: 1,
+    #                 width: 1,
+    #               },
+    #               static_image_deactivate_settings: {
+    #                 fade_out: 1,
+    #                 layer: 1,
+    #               },
+    #             },
+    #             schedule_action_start_settings: { # required
+    #               fixed_mode_schedule_action_start_settings: {
+    #                 time: "__string",
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] schedule_actions
+    #   A list of schedule actions to create.
+    #   @return [Array<Types::ScheduleAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchScheduleActionCreateRequest AWS API Documentation
+    #
+    class BatchScheduleActionCreateRequest < Struct.new(
+      :schedule_actions)
+      include Aws::Structure
+    end
+
+    # Returned list of created schedule actions.
+    #
+    # @!attribute [rw] schedule_actions
+    #   Returned list of created schedule actions.
+    #   @return [Array<Types::ScheduleAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchScheduleActionCreateResult AWS API Documentation
+    #
+    class BatchScheduleActionCreateResult < Struct.new(
+      :schedule_actions)
+      include Aws::Structure
+    end
+
+    # A list of schedule actions to delete.
+    #
+    # @note When making an API call, you may pass BatchScheduleActionDeleteRequest
+    #   data as a hash:
+    #
+    #       {
+    #         action_names: ["__string"], # required
+    #       }
+    #
+    # @!attribute [rw] action_names
+    #   A list of schedule actions to delete, identified by unique name.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchScheduleActionDeleteRequest AWS API Documentation
+    #
+    class BatchScheduleActionDeleteRequest < Struct.new(
+      :action_names)
+      include Aws::Structure
+    end
+
+    # Returned list of deleted schedule actions.
+    #
+    # @!attribute [rw] schedule_actions
+    #   Returned list of deleted schedule actions.
+    #   @return [Array<Types::ScheduleAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchScheduleActionDeleteResult AWS API Documentation
+    #
+    class BatchScheduleActionDeleteResult < Struct.new(
+      :schedule_actions)
+      include Aws::Structure
+    end
+
+    # A schedule update, including actions to insert, and action names to
+    # delete.
+    #
+    # @note When making an API call, you may pass BatchUpdateScheduleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_id: "__string", # required
+    #         creates: {
+    #           schedule_actions: [ # required
+    #             {
+    #               action_name: "__string", # required
+    #               schedule_action_settings: { # required
+    #                 scte_35_return_to_network_settings: {
+    #                   splice_event_id: 1, # required
+    #                 },
+    #                 scte_35_splice_insert_settings: {
+    #                   duration: 1,
+    #                   splice_event_id: 1, # required
+    #                 },
+    #                 scte_35_time_signal_settings: {
+    #                   scte_35_descriptors: [ # required
+    #                     {
+    #                       scte_35_descriptor_settings: { # required
+    #                         segmentation_descriptor_scte_35_descriptor_settings: { # required
+    #                           delivery_restrictions: {
+    #                             archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
+    #                             device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
+    #                             no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
+    #                             web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
+    #                           },
+    #                           segment_num: 1,
+    #                           segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
+    #                           segmentation_duration: 1,
+    #                           segmentation_event_id: 1, # required
+    #                           segmentation_type_id: 1,
+    #                           segmentation_upid: "__string",
+    #                           segmentation_upid_type: 1,
+    #                           segments_expected: 1,
+    #                           sub_segment_num: 1,
+    #                           sub_segments_expected: 1,
+    #                         },
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #                 static_image_activate_settings: {
+    #                   duration: 1,
+    #                   fade_in: 1,
+    #                   fade_out: 1,
+    #                   height: 1,
+    #                   image: { # required
+    #                     password_param: "__string",
+    #                     uri: "__string", # required
+    #                     username: "__string",
+    #                   },
+    #                   image_x: 1,
+    #                   image_y: 1,
+    #                   layer: 1,
+    #                   opacity: 1,
+    #                   width: 1,
+    #                 },
+    #                 static_image_deactivate_settings: {
+    #                   fade_out: 1,
+    #                   layer: 1,
+    #                 },
+    #               },
+    #               schedule_action_start_settings: { # required
+    #                 fixed_mode_schedule_action_start_settings: {
+    #                   time: "__string",
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         deletes: {
+    #           action_names: ["__string"], # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] channel_id
+    #   @return [String]
+    #
+    # @!attribute [rw] creates
+    #   Schedule actions to create in the schedule.
+    #   @return [Types::BatchScheduleActionCreateRequest]
+    #
+    # @!attribute [rw] deletes
+    #   Schedule actions to delete from the schedule.
+    #   @return [Types::BatchScheduleActionDeleteRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchUpdateScheduleRequest AWS API Documentation
+    #
+    class BatchUpdateScheduleRequest < Struct.new(
+      :channel_id,
+      :creates,
+      :deletes)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] creates
+    #   Returned list of created schedule actions.
+    #   @return [Types::BatchScheduleActionCreateResult]
+    #
+    # @!attribute [rw] deletes
+    #   Returned list of deleted schedule actions.
+    #   @return [Types::BatchScheduleActionDeleteResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchUpdateScheduleResponse AWS API Documentation
+    #
+    class BatchUpdateScheduleResponse < Struct.new(
+      :creates,
+      :deletes)
+      include Aws::Structure
+    end
+
+    # Results of a batch schedule update.
+    #
+    # @!attribute [rw] creates
+    #   Schedule actions created in the schedule.
+    #   @return [Types::BatchScheduleActionCreateResult]
+    #
+    # @!attribute [rw] deletes
+    #   Schedule actions deleted from the schedule.
+    #   @return [Types::BatchScheduleActionDeleteResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchUpdateScheduleResult AWS API Documentation
+    #
+    class BatchUpdateScheduleResult < Struct.new(
+      :creates,
+      :deletes)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass BlackoutSlate
     #   data as a hash:
     #
@@ -1619,8 +1883,7 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] validation_errors
-    #   A collection of validation error responses from attempting to create
-    #   a channel with a bouquet of settings.
+    #   A collection of validation error responses.
     #   @return [Array<Types::ValidationError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ChannelConfigurationValidationError AWS API Documentation
@@ -3220,6 +3483,47 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeScheduleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_id: "__string", # required
+    #         max_results: 1,
+    #         next_token: "__string",
+    #       }
+    #
+    # @!attribute [rw] channel_id
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeScheduleRequest AWS API Documentation
+    #
+    class DescribeScheduleRequest < Struct.new(
+      :channel_id,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_actions
+    #   @return [Array<Types::ScheduleAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeScheduleResponse AWS API Documentation
+    #
+    class DescribeScheduleResponse < Struct.new(
+      :next_token,
+      :schedule_actions)
+      include Aws::Structure
+    end
+
     # DVB Network Information Table (NIT)
     #
     # @note When making an API call, you may pass DvbNitSettings
@@ -4410,6 +4714,26 @@ module Aws::MediaLive
       :column_depth,
       :include_fec,
       :row_length)
+      include Aws::Structure
+    end
+
+    # Fixed mode schedule action start settings
+    #
+    # @note When making an API call, you may pass FixedModeScheduleActionStartSettings
+    #   data as a hash:
+    #
+    #       {
+    #         time: "__string",
+    #       }
+    #
+    # @!attribute [rw] time
+    #   Fixed timestamp action start. Conforms to ISO-8601.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FixedModeScheduleActionStartSettings AWS API Documentation
+    #
+    class FixedModeScheduleActionStartSettings < Struct.new(
+      :time)
       include Aws::Structure
     end
 
@@ -8775,6 +9099,228 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # A single schedule action.
+    #
+    # @note When making an API call, you may pass ScheduleAction
+    #   data as a hash:
+    #
+    #       {
+    #         action_name: "__string", # required
+    #         schedule_action_settings: { # required
+    #           scte_35_return_to_network_settings: {
+    #             splice_event_id: 1, # required
+    #           },
+    #           scte_35_splice_insert_settings: {
+    #             duration: 1,
+    #             splice_event_id: 1, # required
+    #           },
+    #           scte_35_time_signal_settings: {
+    #             scte_35_descriptors: [ # required
+    #               {
+    #                 scte_35_descriptor_settings: { # required
+    #                   segmentation_descriptor_scte_35_descriptor_settings: { # required
+    #                     delivery_restrictions: {
+    #                       archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
+    #                       device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
+    #                       no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
+    #                       web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
+    #                     },
+    #                     segment_num: 1,
+    #                     segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
+    #                     segmentation_duration: 1,
+    #                     segmentation_event_id: 1, # required
+    #                     segmentation_type_id: 1,
+    #                     segmentation_upid: "__string",
+    #                     segmentation_upid_type: 1,
+    #                     segments_expected: 1,
+    #                     sub_segment_num: 1,
+    #                     sub_segments_expected: 1,
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #           static_image_activate_settings: {
+    #             duration: 1,
+    #             fade_in: 1,
+    #             fade_out: 1,
+    #             height: 1,
+    #             image: { # required
+    #               password_param: "__string",
+    #               uri: "__string", # required
+    #               username: "__string",
+    #             },
+    #             image_x: 1,
+    #             image_y: 1,
+    #             layer: 1,
+    #             opacity: 1,
+    #             width: 1,
+    #           },
+    #           static_image_deactivate_settings: {
+    #             fade_out: 1,
+    #             layer: 1,
+    #           },
+    #         },
+    #         schedule_action_start_settings: { # required
+    #           fixed_mode_schedule_action_start_settings: {
+    #             time: "__string",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] action_name
+    #   The name of the action, must be unique within the schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_action_settings
+    #   Settings for this schedule action.
+    #   @return [Types::ScheduleActionSettings]
+    #
+    # @!attribute [rw] schedule_action_start_settings
+    #   When the action takes effect.
+    #   @return [Types::ScheduleActionStartSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleAction AWS API Documentation
+    #
+    class ScheduleAction < Struct.new(
+      :action_name,
+      :schedule_action_settings,
+      :schedule_action_start_settings)
+      include Aws::Structure
+    end
+
+    # Settings for a single schedule action.
+    #
+    # @note When making an API call, you may pass ScheduleActionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         scte_35_return_to_network_settings: {
+    #           splice_event_id: 1, # required
+    #         },
+    #         scte_35_splice_insert_settings: {
+    #           duration: 1,
+    #           splice_event_id: 1, # required
+    #         },
+    #         scte_35_time_signal_settings: {
+    #           scte_35_descriptors: [ # required
+    #             {
+    #               scte_35_descriptor_settings: { # required
+    #                 segmentation_descriptor_scte_35_descriptor_settings: { # required
+    #                   delivery_restrictions: {
+    #                     archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
+    #                     device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
+    #                     no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
+    #                     web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
+    #                   },
+    #                   segment_num: 1,
+    #                   segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
+    #                   segmentation_duration: 1,
+    #                   segmentation_event_id: 1, # required
+    #                   segmentation_type_id: 1,
+    #                   segmentation_upid: "__string",
+    #                   segmentation_upid_type: 1,
+    #                   segments_expected: 1,
+    #                   sub_segment_num: 1,
+    #                   sub_segments_expected: 1,
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         static_image_activate_settings: {
+    #           duration: 1,
+    #           fade_in: 1,
+    #           fade_out: 1,
+    #           height: 1,
+    #           image: { # required
+    #             password_param: "__string",
+    #             uri: "__string", # required
+    #             username: "__string",
+    #           },
+    #           image_x: 1,
+    #           image_y: 1,
+    #           layer: 1,
+    #           opacity: 1,
+    #           width: 1,
+    #         },
+    #         static_image_deactivate_settings: {
+    #           fade_out: 1,
+    #           layer: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] scte_35_return_to_network_settings
+    #   SCTE-35 Return to Network Settings
+    #   @return [Types::Scte35ReturnToNetworkScheduleActionSettings]
+    #
+    # @!attribute [rw] scte_35_splice_insert_settings
+    #   SCTE-35 Splice Insert Settings
+    #   @return [Types::Scte35SpliceInsertScheduleActionSettings]
+    #
+    # @!attribute [rw] scte_35_time_signal_settings
+    #   SCTE-35 Time Signal Settings
+    #   @return [Types::Scte35TimeSignalScheduleActionSettings]
+    #
+    # @!attribute [rw] static_image_activate_settings
+    #   Static Image Activate
+    #   @return [Types::StaticImageActivateScheduleActionSettings]
+    #
+    # @!attribute [rw] static_image_deactivate_settings
+    #   Static Image Deactivate
+    #   @return [Types::StaticImageDeactivateScheduleActionSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleActionSettings AWS API Documentation
+    #
+    class ScheduleActionSettings < Struct.new(
+      :scte_35_return_to_network_settings,
+      :scte_35_splice_insert_settings,
+      :scte_35_time_signal_settings,
+      :static_image_activate_settings,
+      :static_image_deactivate_settings)
+      include Aws::Structure
+    end
+
+    # When the schedule action starts.
+    #
+    # @note When making an API call, you may pass ScheduleActionStartSettings
+    #   data as a hash:
+    #
+    #       {
+    #         fixed_mode_schedule_action_start_settings: {
+    #           time: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] fixed_mode_schedule_action_start_settings
+    #   Fixed timestamp action start. Conforms to ISO-8601.
+    #   @return [Types::FixedModeScheduleActionStartSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleActionStartSettings AWS API Documentation
+    #
+    class ScheduleActionStartSettings < Struct.new(
+      :fixed_mode_schedule_action_start_settings)
+      include Aws::Structure
+    end
+
+    # A complete schedule description.
+    #
+    # @!attribute [rw] next_token
+    #   The next token; for use in pagination.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_actions
+    #   The list of schedule actions.
+    #   @return [Array<Types::ScheduleAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleDescribeResultModel AWS API Documentation
+    #
+    class ScheduleDescribeResultModel < Struct.new(
+      :next_token,
+      :schedule_actions)
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte20PlusEmbeddedDestinationSettings AWS API Documentation
@@ -8840,6 +9386,228 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # SCTE-35 Delivery Restrictions.
+    #
+    # @note When making an API call, you may pass Scte35DeliveryRestrictions
+    #   data as a hash:
+    #
+    #       {
+    #         archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
+    #         device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
+    #         no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
+    #         web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
+    #       }
+    #
+    # @!attribute [rw] archive_allowed_flag
+    #   SCTE-35 segmentation\_descriptor archive\_allowed\_flag.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_restrictions
+    #   SCTE-35 segmentation\_descriptor web\_delivery\_allowed\_flag.
+    #   @return [String]
+    #
+    # @!attribute [rw] no_regional_blackout_flag
+    #   SCTE-35 segmentation\_descriptor no\_regional\_blackout\_flag.
+    #   @return [String]
+    #
+    # @!attribute [rw] web_delivery_allowed_flag
+    #   SCTE-35 segmentation\_descriptor web\_delivery\_allowed\_flag.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35DeliveryRestrictions AWS API Documentation
+    #
+    class Scte35DeliveryRestrictions < Struct.new(
+      :archive_allowed_flag,
+      :device_restrictions,
+      :no_regional_blackout_flag,
+      :web_delivery_allowed_flag)
+      include Aws::Structure
+    end
+
+    # SCTE-35 Descriptor.
+    #
+    # @note When making an API call, you may pass Scte35Descriptor
+    #   data as a hash:
+    #
+    #       {
+    #         scte_35_descriptor_settings: { # required
+    #           segmentation_descriptor_scte_35_descriptor_settings: { # required
+    #             delivery_restrictions: {
+    #               archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
+    #               device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
+    #               no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
+    #               web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
+    #             },
+    #             segment_num: 1,
+    #             segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
+    #             segmentation_duration: 1,
+    #             segmentation_event_id: 1, # required
+    #             segmentation_type_id: 1,
+    #             segmentation_upid: "__string",
+    #             segmentation_upid_type: 1,
+    #             segments_expected: 1,
+    #             sub_segment_num: 1,
+    #             sub_segments_expected: 1,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] scte_35_descriptor_settings
+    #   SCTE-35 Descriptor Settings.
+    #   @return [Types::Scte35DescriptorSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35Descriptor AWS API Documentation
+    #
+    class Scte35Descriptor < Struct.new(
+      :scte_35_descriptor_settings)
+      include Aws::Structure
+    end
+
+    # SCTE-35 Descriptor settings.
+    #
+    # @note When making an API call, you may pass Scte35DescriptorSettings
+    #   data as a hash:
+    #
+    #       {
+    #         segmentation_descriptor_scte_35_descriptor_settings: { # required
+    #           delivery_restrictions: {
+    #             archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
+    #             device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
+    #             no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
+    #             web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
+    #           },
+    #           segment_num: 1,
+    #           segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
+    #           segmentation_duration: 1,
+    #           segmentation_event_id: 1, # required
+    #           segmentation_type_id: 1,
+    #           segmentation_upid: "__string",
+    #           segmentation_upid_type: 1,
+    #           segments_expected: 1,
+    #           sub_segment_num: 1,
+    #           sub_segments_expected: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] segmentation_descriptor_scte_35_descriptor_settings
+    #   SCTE-35 Segmentation Descriptor.
+    #   @return [Types::Scte35SegmentationDescriptor]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35DescriptorSettings AWS API Documentation
+    #
+    class Scte35DescriptorSettings < Struct.new(
+      :segmentation_descriptor_scte_35_descriptor_settings)
+      include Aws::Structure
+    end
+
+    # SCTE-35 Return to Network Settings.
+    #
+    # @note When making an API call, you may pass Scte35ReturnToNetworkScheduleActionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         splice_event_id: 1, # required
+    #       }
+    #
+    # @!attribute [rw] splice_event_id
+    #   The splice\_event\_id for the SCTE-35 splice\_insert, as defined in
+    #   SCTE-35.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35ReturnToNetworkScheduleActionSettings AWS API Documentation
+    #
+    class Scte35ReturnToNetworkScheduleActionSettings < Struct.new(
+      :splice_event_id)
+      include Aws::Structure
+    end
+
+    # SCTE-35 Segmentation Descriptor.
+    #
+    # @note When making an API call, you may pass Scte35SegmentationDescriptor
+    #   data as a hash:
+    #
+    #       {
+    #         delivery_restrictions: {
+    #           archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
+    #           device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
+    #           no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
+    #           web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
+    #         },
+    #         segment_num: 1,
+    #         segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
+    #         segmentation_duration: 1,
+    #         segmentation_event_id: 1, # required
+    #         segmentation_type_id: 1,
+    #         segmentation_upid: "__string",
+    #         segmentation_upid_type: 1,
+    #         segments_expected: 1,
+    #         sub_segment_num: 1,
+    #         sub_segments_expected: 1,
+    #       }
+    #
+    # @!attribute [rw] delivery_restrictions
+    #   SCTE-35 delivery restrictions.
+    #   @return [Types::Scte35DeliveryRestrictions]
+    #
+    # @!attribute [rw] segment_num
+    #   SCTE-35 segmentation\_descriptor segment\_num.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] segmentation_cancel_indicator
+    #   SCTE-35 segmentation\_descriptor
+    #   segmentation\_event\_cancel\_indicator.
+    #   @return [String]
+    #
+    # @!attribute [rw] segmentation_duration
+    #   SCTE-35 segmentation\_descriptor segmentation\_duration specified in
+    #   90 KHz clock ticks.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] segmentation_event_id
+    #   SCTE-35 segmentation\_descriptor segmentation\_event\_id.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] segmentation_type_id
+    #   SCTE-35 segmentation\_descriptor segmentation\_type\_id.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] segmentation_upid
+    #   SCTE-35 segmentation\_descriptor segmentation\_upid as a hex string.
+    #   @return [String]
+    #
+    # @!attribute [rw] segmentation_upid_type
+    #   SCTE-35 segmentation\_descriptor segmentation\_upid\_type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] segments_expected
+    #   SCTE-35 segmentation\_descriptor segments\_expected.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sub_segment_num
+    #   SCTE-35 segmentation\_descriptor sub\_segment\_num.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sub_segments_expected
+    #   SCTE-35 segmentation\_descriptor sub\_segments\_expected.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35SegmentationDescriptor AWS API Documentation
+    #
+    class Scte35SegmentationDescriptor < Struct.new(
+      :delivery_restrictions,
+      :segment_num,
+      :segmentation_cancel_indicator,
+      :segmentation_duration,
+      :segmentation_event_id,
+      :segmentation_type_id,
+      :segmentation_upid,
+      :segmentation_upid_type,
+      :segments_expected,
+      :sub_segment_num,
+      :sub_segments_expected)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass Scte35SpliceInsert
     #   data as a hash:
     #
@@ -8874,6 +9642,35 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # SCTE-35 Splice Insert Settings.
+    #
+    # @note When making an API call, you may pass Scte35SpliceInsertScheduleActionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         duration: 1,
+    #         splice_event_id: 1, # required
+    #       }
+    #
+    # @!attribute [rw] duration
+    #   The duration for the SCTE-35 splice\_insert specified in 90KHz clock
+    #   ticks. When duration is not specified the expectation is that a
+    #   Scte35ReturnToNetwork action will be scheduled.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] splice_event_id
+    #   The splice\_event\_id for the SCTE-35 splice\_insert, as defined in
+    #   SCTE-35.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35SpliceInsertScheduleActionSettings AWS API Documentation
+    #
+    class Scte35SpliceInsertScheduleActionSettings < Struct.new(
+      :duration,
+      :splice_event_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass Scte35TimeSignalApos
     #   data as a hash:
     #
@@ -8905,6 +9702,50 @@ module Aws::MediaLive
       :ad_avail_offset,
       :no_regional_blackout_flag,
       :web_delivery_allowed_flag)
+      include Aws::Structure
+    end
+
+    # SCTE-35 Time Signal Settings.
+    #
+    # @note When making an API call, you may pass Scte35TimeSignalScheduleActionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         scte_35_descriptors: [ # required
+    #           {
+    #             scte_35_descriptor_settings: { # required
+    #               segmentation_descriptor_scte_35_descriptor_settings: { # required
+    #                 delivery_restrictions: {
+    #                   archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
+    #                   device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
+    #                   no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
+    #                   web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
+    #                 },
+    #                 segment_num: 1,
+    #                 segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
+    #                 segmentation_duration: 1,
+    #                 segmentation_event_id: 1, # required
+    #                 segmentation_type_id: 1,
+    #                 segmentation_upid: "__string",
+    #                 segmentation_upid_type: 1,
+    #                 segments_expected: 1,
+    #                 sub_segment_num: 1,
+    #                 sub_segments_expected: 1,
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] scte_35_descriptors
+    #   The list of SCTE-35 descriptors accompanying the SCTE-35
+    #   time\_signal.
+    #   @return [Array<Types::Scte35Descriptor>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35TimeSignalScheduleActionSettings AWS API Documentation
+    #
+    class Scte35TimeSignalScheduleActionSettings < Struct.new(
+      :scte_35_descriptors)
       include Aws::Structure
     end
 
@@ -9025,6 +9866,122 @@ module Aws::MediaLive
       :pipelines_running_count,
       :role_arn,
       :state)
+      include Aws::Structure
+    end
+
+    # Static image activate.
+    #
+    # @note When making an API call, you may pass StaticImageActivateScheduleActionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         duration: 1,
+    #         fade_in: 1,
+    #         fade_out: 1,
+    #         height: 1,
+    #         image: { # required
+    #           password_param: "__string",
+    #           uri: "__string", # required
+    #           username: "__string",
+    #         },
+    #         image_x: 1,
+    #         image_y: 1,
+    #         layer: 1,
+    #         opacity: 1,
+    #         width: 1,
+    #       }
+    #
+    # @!attribute [rw] duration
+    #   The duration in milliseconds for the image to remain in the video.
+    #   If omitted or set to 0, duration is infinite and image will remain
+    #   until explicitly deactivated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fade_in
+    #   The time in milliseconds for the image to fade in. Defaults to 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fade_out
+    #   The time in milliseconds for the image to fade out. Defaults to 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] height
+    #   The height of the image when inserted into the video. Defaults to
+    #   the native height of the image.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] image
+    #   The image to overlay on the video. Must be a 32 bit BMP, PNG, or TGA
+    #   file. Must not be larger than the input video.
+    #   @return [Types::InputLocation]
+    #
+    # @!attribute [rw] image_x
+    #   Placement of the left edge of the image on the horizontal axis in
+    #   pixels. 0 is the left edge of the frame. Defaults to 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] image_y
+    #   Placement of the top edge of the image on the vertical axis in
+    #   pixels. 0 is the top edge of the frame. Defaults to 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] layer
+    #   The Z order of the inserted image. Images with higher layer values
+    #   will be inserted on top of images with lower layer values. Permitted
+    #   values are 0-7 inclusive. Defaults to 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] opacity
+    #   Opacity of image where 0 is transparent and 100 is fully opaque.
+    #   Defaults to 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] width
+    #   The width of the image when inserted into the video. Defaults to the
+    #   native width of the image.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StaticImageActivateScheduleActionSettings AWS API Documentation
+    #
+    class StaticImageActivateScheduleActionSettings < Struct.new(
+      :duration,
+      :fade_in,
+      :fade_out,
+      :height,
+      :image,
+      :image_x,
+      :image_y,
+      :layer,
+      :opacity,
+      :width)
+      include Aws::Structure
+    end
+
+    # Static image deactivate.
+    #
+    # @note When making an API call, you may pass StaticImageDeactivateScheduleActionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         fade_out: 1,
+    #         layer: 1,
+    #       }
+    #
+    # @!attribute [rw] fade_out
+    #   The time in milliseconds for the image to fade out. Defaults to 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] layer
+    #   The Z order of the inserted image. Images with higher layer values
+    #   will be inserted on top of images with lower layer values. Permitted
+    #   values are 0-7 inclusive. Defaults to 0.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StaticImageDeactivateScheduleActionSettings AWS API Documentation
+    #
+    class StaticImageDeactivateScheduleActionSettings < Struct.new(
+      :fade_out,
+      :layer)
       include Aws::Structure
     end
 

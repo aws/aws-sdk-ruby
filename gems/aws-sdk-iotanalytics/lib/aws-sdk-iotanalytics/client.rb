@@ -270,24 +270,29 @@ module Aws::IoTAnalytics
     end
 
     # Creates a data set. A data set stores data retrieved from a data store
-    # by applying an SQL action.
-    #
-    # <note markdown="1"> This operation creates the skeleton of a data set. To populate the
-    # data set, call "CreateDatasetContent".
-    #
-    #  </note>
+    # by applying a "queryAction" (a SQL query) or a "containerAction"
+    # (executing a containerized application). This operation creates the
+    # skeleton of a data set. The data set can be populated manually by
+    # calling "CreateDatasetContent" or automatically according to a
+    # "trigger" you specify.
     #
     # @option params [required, String] :dataset_name
     #   The name of the data set.
     #
     # @option params [required, Array<Types::DatasetAction>] :actions
-    #   A list of actions that create the data set. Only one action is
-    #   supported at this time.
+    #   A list of actions that create the data set contents.
     #
     # @option params [Array<Types::DatasetTrigger>] :triggers
-    #   A list of triggers. A trigger causes data set content to be populated
-    #   at a specified time or time interval. The list of triggers can be
-    #   empty or contain up to five **DataSetTrigger** objects.
+    #   A list of triggers. A trigger causes data set contents to be populated
+    #   at a specified time interval or when another data set's contents are
+    #   created. The list of triggers can be empty or contain up to five
+    #   **DataSetTrigger** objects.
+    #
+    # @option params [Types::RetentionPeriod] :retention_period
+    #   \[Optional\] How long, in days, message data is kept for the data set.
+    #   If not given or set to null, the latest version of the dataset content
+    #   plus the latest succeeded version (if they are different) are retained
+    #   for at most 90 days.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Metadata which can be used to manage the data set.
@@ -296,6 +301,7 @@ module Aws::IoTAnalytics
     #
     #   * {Types::CreateDatasetResponse#dataset_name #dataset_name} => String
     #   * {Types::CreateDatasetResponse#dataset_arn #dataset_arn} => String
+    #   * {Types::CreateDatasetResponse#retention_period #retention_period} => Types::RetentionPeriod
     #
     # @example Request syntax with placeholder values
     #
@@ -306,6 +312,35 @@ module Aws::IoTAnalytics
     #         action_name: "DatasetActionName",
     #         query_action: {
     #           sql_query: "SqlQuery", # required
+    #           filters: [
+    #             {
+    #               delta_time: {
+    #                 offset_seconds: 1, # required
+    #                 time_expression: "TimeExpression", # required
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         container_action: {
+    #           image: "Image", # required
+    #           execution_role_arn: "RoleArn", # required
+    #           resource_configuration: { # required
+    #             compute_type: "ACU_1", # required, accepts ACU_1, ACU_2
+    #             volume_size_in_gb: 1, # required
+    #           },
+    #           variables: [
+    #             {
+    #               name: "VariableName", # required
+    #               string_value: "StringValue",
+    #               double_value: 1.0,
+    #               dataset_content_version_value: {
+    #                 dataset_name: "DatasetName", # required
+    #               },
+    #               output_file_uri_value: {
+    #                 file_name: "OutputFileName", # required
+    #               },
+    #             },
+    #           ],
     #         },
     #       },
     #     ],
@@ -314,8 +349,15 @@ module Aws::IoTAnalytics
     #         schedule: {
     #           expression: "ScheduleExpression",
     #         },
+    #         dataset: {
+    #           name: "DatasetName", # required
+    #         },
     #       },
     #     ],
+    #     retention_period: {
+    #       unlimited: false,
+    #       number_of_days: 1,
+    #     },
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -328,6 +370,8 @@ module Aws::IoTAnalytics
     #
     #   resp.dataset_name #=> String
     #   resp.dataset_arn #=> String
+    #   resp.retention_period.unlimited #=> Boolean
+    #   resp.retention_period.number_of_days #=> Integer
     #
     # @overload create_dataset(params = {})
     # @param [Hash] params ({})
@@ -336,18 +380,24 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Creates the content of a data set by applying an SQL action.
+    # Creates the content of a data set by applying a SQL action.
     #
     # @option params [required, String] :dataset_name
     #   The name of the data set.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @return [Types::CreateDatasetContentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDatasetContentResponse#version_id #version_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_dataset_content({
     #     dataset_name: "DatasetName", # required
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.version_id #=> String
     #
     # @overload create_dataset_content(params = {})
     # @param [Hash] params ({})
@@ -629,7 +679,8 @@ module Aws::IoTAnalytics
     #   The name of the channel whose information is retrieved.
     #
     # @option params [Boolean] :include_statistics
-    #   If true, include statistics about the channel in the response.
+    #   If true, additional statistical information about the channel is
+    #   included in the response.
     #
     # @return [Types::DescribeChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -684,11 +735,27 @@ module Aws::IoTAnalytics
     #   resp.dataset.actions #=> Array
     #   resp.dataset.actions[0].action_name #=> String
     #   resp.dataset.actions[0].query_action.sql_query #=> String
+    #   resp.dataset.actions[0].query_action.filters #=> Array
+    #   resp.dataset.actions[0].query_action.filters[0].delta_time.offset_seconds #=> Integer
+    #   resp.dataset.actions[0].query_action.filters[0].delta_time.time_expression #=> String
+    #   resp.dataset.actions[0].container_action.image #=> String
+    #   resp.dataset.actions[0].container_action.execution_role_arn #=> String
+    #   resp.dataset.actions[0].container_action.resource_configuration.compute_type #=> String, one of "ACU_1", "ACU_2"
+    #   resp.dataset.actions[0].container_action.resource_configuration.volume_size_in_gb #=> Integer
+    #   resp.dataset.actions[0].container_action.variables #=> Array
+    #   resp.dataset.actions[0].container_action.variables[0].name #=> String
+    #   resp.dataset.actions[0].container_action.variables[0].string_value #=> String
+    #   resp.dataset.actions[0].container_action.variables[0].double_value #=> Float
+    #   resp.dataset.actions[0].container_action.variables[0].dataset_content_version_value.dataset_name #=> String
+    #   resp.dataset.actions[0].container_action.variables[0].output_file_uri_value.file_name #=> String
     #   resp.dataset.triggers #=> Array
     #   resp.dataset.triggers[0].schedule.expression #=> String
+    #   resp.dataset.triggers[0].dataset.name #=> String
     #   resp.dataset.status #=> String, one of "CREATING", "ACTIVE", "DELETING"
     #   resp.dataset.creation_time #=> Time
     #   resp.dataset.last_update_time #=> Time
+    #   resp.dataset.retention_period.unlimited #=> Boolean
+    #   resp.dataset.retention_period.number_of_days #=> Integer
     #
     # @overload describe_dataset(params = {})
     # @param [Hash] params ({})
@@ -703,7 +770,8 @@ module Aws::IoTAnalytics
     #   The name of the data store
     #
     # @option params [Boolean] :include_statistics
-    #   If true, include statistics about the data store in the response.
+    #   If true, additional statistical information about the datastore is
+    #   included in the response.
     #
     # @return [Types::DescribeDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -935,6 +1003,12 @@ module Aws::IoTAnalytics
     #   resp.dataset_summaries[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING"
     #   resp.dataset_summaries[0].creation_time #=> Time
     #   resp.dataset_summaries[0].last_update_time #=> Time
+    #   resp.dataset_summaries[0].triggers #=> Array
+    #   resp.dataset_summaries[0].triggers[0].schedule.expression #=> String
+    #   resp.dataset_summaries[0].triggers[0].dataset.name #=> String
+    #   resp.dataset_summaries[0].actions #=> Array
+    #   resp.dataset_summaries[0].actions[0].action_name #=> String
+    #   resp.dataset_summaries[0].actions[0].action_type #=> String, one of "QUERY", "CONTAINER"
     #   resp.next_token #=> String
     #
     # @overload list_datasets(params = {})
@@ -1340,12 +1414,14 @@ module Aws::IoTAnalytics
     #   The name of the data set to update.
     #
     # @option params [required, Array<Types::DatasetAction>] :actions
-    #   A list of "DatasetAction" objects. Only one action is supported at
-    #   this time.
+    #   A list of "DatasetAction" objects.
     #
     # @option params [Array<Types::DatasetTrigger>] :triggers
     #   A list of "DatasetTrigger" objects. The list can be empty or can
     #   contain up to five **DataSetTrigger** objects.
+    #
+    # @option params [Types::RetentionPeriod] :retention_period
+    #   How long, in days, message data is kept for the data set.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1358,6 +1434,35 @@ module Aws::IoTAnalytics
     #         action_name: "DatasetActionName",
     #         query_action: {
     #           sql_query: "SqlQuery", # required
+    #           filters: [
+    #             {
+    #               delta_time: {
+    #                 offset_seconds: 1, # required
+    #                 time_expression: "TimeExpression", # required
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         container_action: {
+    #           image: "Image", # required
+    #           execution_role_arn: "RoleArn", # required
+    #           resource_configuration: { # required
+    #             compute_type: "ACU_1", # required, accepts ACU_1, ACU_2
+    #             volume_size_in_gb: 1, # required
+    #           },
+    #           variables: [
+    #             {
+    #               name: "VariableName", # required
+    #               string_value: "StringValue",
+    #               double_value: 1.0,
+    #               dataset_content_version_value: {
+    #                 dataset_name: "DatasetName", # required
+    #               },
+    #               output_file_uri_value: {
+    #                 file_name: "OutputFileName", # required
+    #               },
+    #             },
+    #           ],
     #         },
     #       },
     #     ],
@@ -1366,8 +1471,15 @@ module Aws::IoTAnalytics
     #         schedule: {
     #           expression: "ScheduleExpression",
     #         },
+    #         dataset: {
+    #           name: "DatasetName", # required
+    #         },
     #       },
     #     ],
+    #     retention_period: {
+    #       unlimited: false,
+    #       number_of_days: 1,
+    #     },
     #   })
     #
     # @overload update_dataset(params = {})
@@ -1507,7 +1619,7 @@ module Aws::IoTAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotanalytics'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

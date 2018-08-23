@@ -156,6 +156,179 @@ module Aws::MediaLive
 
     # @!group API Operations
 
+    # Update a channel schedule
+    #
+    # @option params [required, String] :channel_id
+    #
+    # @option params [Types::BatchScheduleActionCreateRequest] :creates
+    #   Schedule actions to create in the schedule.
+    #
+    # @option params [Types::BatchScheduleActionDeleteRequest] :deletes
+    #   Schedule actions to delete from the schedule.
+    #
+    # @return [Types::BatchUpdateScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchUpdateScheduleResponse#creates #creates} => Types::BatchScheduleActionCreateResult
+    #   * {Types::BatchUpdateScheduleResponse#deletes #deletes} => Types::BatchScheduleActionDeleteResult
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_update_schedule({
+    #     channel_id: "__string", # required
+    #     creates: {
+    #       schedule_actions: [ # required
+    #         {
+    #           action_name: "__string", # required
+    #           schedule_action_settings: { # required
+    #             scte_35_return_to_network_settings: {
+    #               splice_event_id: 1, # required
+    #             },
+    #             scte_35_splice_insert_settings: {
+    #               duration: 1,
+    #               splice_event_id: 1, # required
+    #             },
+    #             scte_35_time_signal_settings: {
+    #               scte_35_descriptors: [ # required
+    #                 {
+    #                   scte_35_descriptor_settings: { # required
+    #                     segmentation_descriptor_scte_35_descriptor_settings: { # required
+    #                       delivery_restrictions: {
+    #                         archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
+    #                         device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
+    #                         no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
+    #                         web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
+    #                       },
+    #                       segment_num: 1,
+    #                       segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
+    #                       segmentation_duration: 1,
+    #                       segmentation_event_id: 1, # required
+    #                       segmentation_type_id: 1,
+    #                       segmentation_upid: "__string",
+    #                       segmentation_upid_type: 1,
+    #                       segments_expected: 1,
+    #                       sub_segment_num: 1,
+    #                       sub_segments_expected: 1,
+    #                     },
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #             static_image_activate_settings: {
+    #               duration: 1,
+    #               fade_in: 1,
+    #               fade_out: 1,
+    #               height: 1,
+    #               image: { # required
+    #                 password_param: "__string",
+    #                 uri: "__string", # required
+    #                 username: "__string",
+    #               },
+    #               image_x: 1,
+    #               image_y: 1,
+    #               layer: 1,
+    #               opacity: 1,
+    #               width: 1,
+    #             },
+    #             static_image_deactivate_settings: {
+    #               fade_out: 1,
+    #               layer: 1,
+    #             },
+    #           },
+    #           schedule_action_start_settings: { # required
+    #             fixed_mode_schedule_action_start_settings: {
+    #               time: "__string",
+    #             },
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     deletes: {
+    #       action_names: ["__string"], # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.creates.schedule_actions #=> Array
+    #   resp.creates.schedule_actions[0].action_name #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.duration #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.splice_event_id #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors #=> Array
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.archive_allowed_flag #=> String, one of "ARCHIVE_NOT_ALLOWED", "ARCHIVE_ALLOWED"
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.device_restrictions #=> String, one of "NONE", "RESTRICT_GROUP0", "RESTRICT_GROUP1", "RESTRICT_GROUP2"
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.no_regional_blackout_flag #=> String, one of "REGIONAL_BLACKOUT", "NO_REGIONAL_BLACKOUT"
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.web_delivery_allowed_flag #=> String, one of "WEB_DELIVERY_NOT_ALLOWED", "WEB_DELIVERY_ALLOWED"
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segment_num #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_cancel_indicator #=> String, one of "SEGMENTATION_EVENT_NOT_CANCELED", "SEGMENTATION_EVENT_CANCELED"
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_duration #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_event_id #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_type_id #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_upid #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_upid_type #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segments_expected #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.sub_segment_num #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.sub_segments_expected #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.duration #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.fade_in #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.fade_out #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.height #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.password_param #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.uri #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.username #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image_x #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image_y #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.layer #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.opacity #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.width #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.fade_out #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.layer #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_start_settings.fixed_mode_schedule_action_start_settings.time #=> String
+    #   resp.deletes.schedule_actions #=> Array
+    #   resp.deletes.schedule_actions[0].action_name #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.duration #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.splice_event_id #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors #=> Array
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.archive_allowed_flag #=> String, one of "ARCHIVE_NOT_ALLOWED", "ARCHIVE_ALLOWED"
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.device_restrictions #=> String, one of "NONE", "RESTRICT_GROUP0", "RESTRICT_GROUP1", "RESTRICT_GROUP2"
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.no_regional_blackout_flag #=> String, one of "REGIONAL_BLACKOUT", "NO_REGIONAL_BLACKOUT"
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.web_delivery_allowed_flag #=> String, one of "WEB_DELIVERY_NOT_ALLOWED", "WEB_DELIVERY_ALLOWED"
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segment_num #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_cancel_indicator #=> String, one of "SEGMENTATION_EVENT_NOT_CANCELED", "SEGMENTATION_EVENT_CANCELED"
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_duration #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_event_id #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_type_id #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_upid #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_upid_type #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segments_expected #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.sub_segment_num #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.sub_segments_expected #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.duration #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.fade_in #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.fade_out #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.height #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.password_param #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.uri #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.username #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image_x #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image_y #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.layer #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.opacity #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.width #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.fade_out #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.layer #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_start_settings.fixed_mode_schedule_action_start_settings.time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchUpdateSchedule AWS API Documentation
+    #
+    # @overload batch_update_schedule(params = {})
+    # @param [Hash] params ({})
+    def batch_update_schedule(params = {}, options = {})
+      req = build_request(:batch_update_schedule, params)
+      req.send_request(options)
+    end
+
     # Creates a new channel
     #
     # @option params [Array<Types::OutputDestination>] :destinations
@@ -2778,6 +2951,75 @@ module Aws::MediaLive
     # @param [Hash] params ({})
     def describe_reservation(params = {}, options = {})
       req = build_request(:describe_reservation, params)
+      req.send_request(options)
+    end
+
+    # Get a channel schedule
+    #
+    # @option params [required, String] :channel_id
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::DescribeScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeScheduleResponse#next_token #next_token} => String
+    #   * {Types::DescribeScheduleResponse#schedule_actions #schedule_actions} => Array&lt;Types::ScheduleAction&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_schedule({
+    #     channel_id: "__string", # required
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.schedule_actions #=> Array
+    #   resp.schedule_actions[0].action_name #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.duration #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.splice_event_id #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors #=> Array
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.archive_allowed_flag #=> String, one of "ARCHIVE_NOT_ALLOWED", "ARCHIVE_ALLOWED"
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.device_restrictions #=> String, one of "NONE", "RESTRICT_GROUP0", "RESTRICT_GROUP1", "RESTRICT_GROUP2"
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.no_regional_blackout_flag #=> String, one of "REGIONAL_BLACKOUT", "NO_REGIONAL_BLACKOUT"
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.web_delivery_allowed_flag #=> String, one of "WEB_DELIVERY_NOT_ALLOWED", "WEB_DELIVERY_ALLOWED"
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segment_num #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_cancel_indicator #=> String, one of "SEGMENTATION_EVENT_NOT_CANCELED", "SEGMENTATION_EVENT_CANCELED"
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_duration #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_event_id #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_type_id #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_upid #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_upid_type #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segments_expected #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.sub_segment_num #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.sub_segments_expected #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.duration #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.fade_in #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.fade_out #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.height #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.password_param #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.uri #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.username #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image_x #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image_y #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.layer #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.opacity #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.width #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.fade_out #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.layer #=> Integer
+    #   resp.schedule_actions[0].schedule_action_start_settings.fixed_mode_schedule_action_start_settings.time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeSchedule AWS API Documentation
+    #
+    # @overload describe_schedule(params = {})
+    # @param [Hash] params ({})
+    def describe_schedule(params = {}, options = {})
+      req = build_request(:describe_schedule, params)
       req.send_request(options)
     end
 
@@ -5480,7 +5722,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

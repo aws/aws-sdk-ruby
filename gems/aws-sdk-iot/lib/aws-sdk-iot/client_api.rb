@@ -652,7 +652,11 @@ module Aws::IoT
     ThingDocumentList = Shapes::ListShape.new(name: 'ThingDocumentList')
     ThingGroupArn = Shapes::StringShape.new(name: 'ThingGroupArn')
     ThingGroupDescription = Shapes::StringShape.new(name: 'ThingGroupDescription')
+    ThingGroupDocument = Shapes::StructureShape.new(name: 'ThingGroupDocument')
+    ThingGroupDocumentList = Shapes::ListShape.new(name: 'ThingGroupDocumentList')
     ThingGroupId = Shapes::StringShape.new(name: 'ThingGroupId')
+    ThingGroupIndexingConfiguration = Shapes::StructureShape.new(name: 'ThingGroupIndexingConfiguration')
+    ThingGroupIndexingMode = Shapes::StringShape.new(name: 'ThingGroupIndexingMode')
     ThingGroupList = Shapes::ListShape.new(name: 'ThingGroupList')
     ThingGroupMetadata = Shapes::StructureShape.new(name: 'ThingGroupMetadata')
     ThingGroupName = Shapes::StringShape.new(name: 'ThingGroupName')
@@ -1541,6 +1545,7 @@ module Aws::IoT
     GetIndexingConfigurationRequest.struct_class = Types::GetIndexingConfigurationRequest
 
     GetIndexingConfigurationResponse.add_member(:thing_indexing_configuration, Shapes::ShapeRef.new(shape: ThingIndexingConfiguration, location_name: "thingIndexingConfiguration"))
+    GetIndexingConfigurationResponse.add_member(:thing_group_indexing_configuration, Shapes::ShapeRef.new(shape: ThingGroupIndexingConfiguration, location_name: "thingGroupIndexingConfiguration"))
     GetIndexingConfigurationResponse.struct_class = Types::GetIndexingConfigurationResponse
 
     GetJobDocumentRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
@@ -2293,6 +2298,7 @@ module Aws::IoT
 
     SearchIndexResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     SearchIndexResponse.add_member(:things, Shapes::ShapeRef.new(shape: ThingDocumentList, location_name: "things"))
+    SearchIndexResponse.add_member(:thing_groups, Shapes::ShapeRef.new(shape: ThingGroupDocumentList, location_name: "thingGroups"))
     SearchIndexResponse.struct_class = Types::SearchIndexResponse
 
     SearchableAttributes.member = Shapes::ShapeRef.new(shape: AttributeName)
@@ -2462,6 +2468,18 @@ module Aws::IoT
 
     ThingDocumentList.member = Shapes::ShapeRef.new(shape: ThingDocument)
 
+    ThingGroupDocument.add_member(:thing_group_name, Shapes::ShapeRef.new(shape: ThingGroupName, location_name: "thingGroupName"))
+    ThingGroupDocument.add_member(:thing_group_id, Shapes::ShapeRef.new(shape: ThingGroupId, location_name: "thingGroupId"))
+    ThingGroupDocument.add_member(:thing_group_description, Shapes::ShapeRef.new(shape: ThingGroupDescription, location_name: "thingGroupDescription"))
+    ThingGroupDocument.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "attributes"))
+    ThingGroupDocument.add_member(:parent_group_names, Shapes::ShapeRef.new(shape: ThingGroupNameList, location_name: "parentGroupNames"))
+    ThingGroupDocument.struct_class = Types::ThingGroupDocument
+
+    ThingGroupDocumentList.member = Shapes::ShapeRef.new(shape: ThingGroupDocument)
+
+    ThingGroupIndexingConfiguration.add_member(:thing_group_indexing_mode, Shapes::ShapeRef.new(shape: ThingGroupIndexingMode, required: true, location_name: "thingGroupIndexingMode"))
+    ThingGroupIndexingConfiguration.struct_class = Types::ThingGroupIndexingConfiguration
+
     ThingGroupList.member = Shapes::ShapeRef.new(shape: ThingGroupName)
 
     ThingGroupMetadata.add_member(:parent_group_name, Shapes::ShapeRef.new(shape: ThingGroupName, location_name: "parentGroupName"))
@@ -2477,7 +2495,7 @@ module Aws::IoT
     ThingGroupProperties.add_member(:attribute_payload, Shapes::ShapeRef.new(shape: AttributePayload, location_name: "attributePayload"))
     ThingGroupProperties.struct_class = Types::ThingGroupProperties
 
-    ThingIndexingConfiguration.add_member(:thing_indexing_mode, Shapes::ShapeRef.new(shape: ThingIndexingMode, location_name: "thingIndexingMode"))
+    ThingIndexingConfiguration.add_member(:thing_indexing_mode, Shapes::ShapeRef.new(shape: ThingIndexingMode, required: true, location_name: "thingIndexingMode"))
     ThingIndexingConfiguration.struct_class = Types::ThingIndexingConfiguration
 
     ThingNameList.member = Shapes::ShapeRef.new(shape: ThingName)
@@ -2576,6 +2594,7 @@ module Aws::IoT
     UpdateEventConfigurationsResponse.struct_class = Types::UpdateEventConfigurationsResponse
 
     UpdateIndexingConfigurationRequest.add_member(:thing_indexing_configuration, Shapes::ShapeRef.new(shape: ThingIndexingConfiguration, location_name: "thingIndexingConfiguration"))
+    UpdateIndexingConfigurationRequest.add_member(:thing_group_indexing_configuration, Shapes::ShapeRef.new(shape: ThingGroupIndexingConfiguration, location_name: "thingGroupIndexingConfiguration"))
     UpdateIndexingConfigurationRequest.struct_class = Types::UpdateIndexingConfigurationRequest
 
     UpdateIndexingConfigurationResponse.struct_class = Types::UpdateIndexingConfigurationResponse

@@ -569,6 +569,41 @@ module Aws::Rekognition
 
     class DeleteStreamProcessorResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DescribeCollectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         collection_id: "CollectionId", # required
+    #       }
+    #
+    # @!attribute [rw] collection_id
+    #   @return [String]
+    #
+    class DescribeCollectionRequest < Struct.new(
+      :collection_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] face_count
+    #   @return [Integer]
+    #
+    # @!attribute [rw] face_model_version
+    #   @return [String]
+    #
+    # @!attribute [rw] collection_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   @return [Time]
+    #
+    class DescribeCollectionResponse < Struct.new(
+      :face_count,
+      :face_model_version,
+      :collection_arn,
+      :creation_timestamp)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeStreamProcessorRequest
     #   data as a hash:
     #
@@ -938,12 +973,16 @@ module Aws::Rekognition
     #   different object such as a tree).
     #   @return [Float]
     #
+    # @!attribute [rw] association_score
+    #   @return [Float]
+    #
     class Face < Struct.new(
       :face_id,
       :bounding_box,
       :image_id,
       :external_image_id,
-      :confidence)
+      :confidence,
+      :association_score)
       include Aws::Structure
     end
 
@@ -1282,12 +1321,24 @@ module Aws::Rekognition
     #   Array of celebrities recognized in the video.
     #   @return [Array<Types::CelebrityRecognition>]
     #
+    # @!attribute [rw] billable_duration_seconds
+    #   @return [Integer]
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] warnings
+    #   @return [Array<Types::Warning>]
+    #
     class GetCelebrityRecognitionResponse < Struct.new(
       :job_status,
       :status_message,
       :video_metadata,
       :next_token,
-      :celebrities)
+      :celebrities,
+      :billable_duration_seconds,
+      :error_code,
+      :warnings)
       include Aws::Structure
     end
 
@@ -1361,12 +1412,24 @@ module Aws::Rekognition
     #   next set of moderation labels.
     #   @return [String]
     #
+    # @!attribute [rw] billable_duration_seconds
+    #   @return [Integer]
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] warnings
+    #   @return [Array<Types::Warning>]
+    #
     class GetContentModerationResponse < Struct.new(
       :job_status,
       :status_message,
       :video_metadata,
       :moderation_labels,
-      :next_token)
+      :next_token,
+      :billable_duration_seconds,
+      :error_code,
+      :warnings)
       include Aws::Structure
     end
 
@@ -1432,12 +1495,24 @@ module Aws::Rekognition
     #   start of the video, the face was detected.
     #   @return [Array<Types::FaceDetection>]
     #
+    # @!attribute [rw] billable_duration_seconds
+    #   @return [Integer]
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] warnings
+    #   @return [Array<Types::Warning>]
+    #
     class GetFaceDetectionResponse < Struct.new(
       :job_status,
       :status_message,
       :video_metadata,
       :next_token,
-      :faces)
+      :faces,
+      :billable_duration_seconds,
+      :error_code,
+      :warnings)
       include Aws::Structure
     end
 
@@ -1515,12 +1590,24 @@ module Aws::Rekognition
     #   person information (`Person`) for the matched person.
     #   @return [Array<Types::PersonMatch>]
     #
+    # @!attribute [rw] billable_duration_seconds
+    #   @return [Integer]
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] warnings
+    #   @return [Array<Types::Warning>]
+    #
     class GetFaceSearchResponse < Struct.new(
       :job_status,
       :status_message,
       :next_token,
       :video_metadata,
-      :persons)
+      :persons,
+      :billable_duration_seconds,
+      :error_code,
+      :warnings)
       include Aws::Structure
     end
 
@@ -1597,12 +1684,24 @@ module Aws::Rekognition
     #   video, that the label was detected.
     #   @return [Array<Types::LabelDetection>]
     #
+    # @!attribute [rw] billable_duration_seconds
+    #   @return [Integer]
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] warnings
+    #   @return [Array<Types::Warning>]
+    #
     class GetLabelDetectionResponse < Struct.new(
       :job_status,
       :status_message,
       :video_metadata,
       :next_token,
-      :labels)
+      :labels,
+      :billable_duration_seconds,
+      :error_code,
+      :warnings)
       include Aws::Structure
     end
 
@@ -1678,12 +1777,24 @@ module Aws::Rekognition
     #   time the person is tracked.
     #   @return [Array<Types::PersonDetection>]
     #
+    # @!attribute [rw] billable_duration_seconds
+    #   @return [Integer]
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] warnings
+    #   @return [Array<Types::Warning>]
+    #
     class GetPersonTrackingResponse < Struct.new(
       :job_status,
       :status_message,
       :video_metadata,
       :next_token,
-      :persons)
+      :persons,
+      :billable_duration_seconds,
+      :error_code,
+      :warnings)
       include Aws::Structure
     end
 
@@ -2236,7 +2347,7 @@ module Aws::Rekognition
 
     # Information about a person whose face matches a face(s) in a Amazon
     # Rekognition collection. Includes information about the faces in the
-    # Amazon Rekognition collection (, information about the person
+    # Amazon Rekognition collection (), information about the person
     # (PersonDetail) and the timestamp for when the person was detected in a
     # video. An array of `PersonMatch` objects is returned by .
     #
@@ -2536,6 +2647,18 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @!attribute [rw] start_timestamp
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_timestamp
+    #   @return [Integer]
+    #
+    class Section < Struct.new(
+      :start_timestamp,
+      :end_timestamp)
+      include Aws::Structure
+    end
+
     # Indicates whether or not the face is smiling, and the confidence level
     # in the determination.
     #
@@ -2569,6 +2692,7 @@ module Aws::Rekognition
     #           sns_topic_arn: "SNSTopicArn", # required
     #           role_arn: "RoleArn", # required
     #         },
+    #         enable_person_tracking: false,
     #         job_tag: "JobTag",
     #       }
     #
@@ -2590,6 +2714,9 @@ module Aws::Rekognition
     #   to.
     #   @return [Types::NotificationChannel]
     #
+    # @!attribute [rw] enable_person_tracking
+    #   @return [Boolean]
+    #
     # @!attribute [rw] job_tag
     #   Unique identifier you specify to identify the job in the completion
     #   status published to the Amazon Simple Notification Service topic.
@@ -2599,6 +2726,7 @@ module Aws::Rekognition
       :video,
       :client_request_token,
       :notification_channel,
+      :enable_person_tracking,
       :job_tag)
       include Aws::Structure
     end
@@ -2769,6 +2897,7 @@ module Aws::Rekognition
     #         client_request_token: "ClientRequestToken",
     #         face_match_threshold: 1.0,
     #         collection_id: "CollectionId", # required
+    #         enable_person_tracking: false,
     #         notification_channel: {
     #           sns_topic_arn: "SNSTopicArn", # required
     #           role_arn: "RoleArn", # required
@@ -2798,6 +2927,9 @@ module Aws::Rekognition
     #   ID of the collection that contains the faces you want to search for.
     #   @return [String]
     #
+    # @!attribute [rw] enable_person_tracking
+    #   @return [Boolean]
+    #
     # @!attribute [rw] notification_channel
     #   The ARN of the Amazon SNS topic to which you want Amazon Rekognition
     #   Video to publish the completion status of the search.
@@ -2813,6 +2945,7 @@ module Aws::Rekognition
       :client_request_token,
       :face_match_threshold,
       :collection_id,
+      :enable_person_tracking,
       :notification_channel,
       :job_tag)
       include Aws::Structure
@@ -3207,13 +3340,33 @@ module Aws::Rekognition
     #   Horizontal pixel dimension of the video.
     #   @return [Integer]
     #
+    # @!attribute [rw] rotation
+    #   @return [Integer]
+    #
     class VideoMetadata < Struct.new(
       :codec,
       :duration_millis,
       :format,
       :frame_rate,
       :frame_height,
-      :frame_width)
+      :frame_width,
+      :rotation)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] sections
+    #   @return [Array<Types::Section>]
+    #
+    class Warning < Struct.new(
+      :error_code,
+      :message,
+      :sections)
       include Aws::Structure
     end
 

@@ -618,6 +618,35 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # @option params [required, String] :collection_id
+    #
+    # @return [Types::DescribeCollectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCollectionResponse#face_count #face_count} => Integer
+    #   * {Types::DescribeCollectionResponse#face_model_version #face_model_version} => String
+    #   * {Types::DescribeCollectionResponse#collection_arn #collection_arn} => String
+    #   * {Types::DescribeCollectionResponse#creation_timestamp #creation_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_collection({
+    #     collection_id: "CollectionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.face_count #=> Integer
+    #   resp.face_model_version #=> String
+    #   resp.collection_arn #=> String
+    #   resp.creation_timestamp #=> Time
+    #
+    # @overload describe_collection(params = {})
+    # @param [Hash] params ({})
+    def describe_collection(params = {}, options = {})
+      req = build_request(:describe_collection, params)
+      req.send_request(options)
+    end
+
     # Provides information about a stream processor created by . You can get
     # information about the input and output streams, the input parameters
     # for the face recognition being performed, and the current status of
@@ -1248,6 +1277,9 @@ module Aws::Rekognition
     #   * {Types::GetCelebrityRecognitionResponse#video_metadata #video_metadata} => Types::VideoMetadata
     #   * {Types::GetCelebrityRecognitionResponse#next_token #next_token} => String
     #   * {Types::GetCelebrityRecognitionResponse#celebrities #celebrities} => Array&lt;Types::CelebrityRecognition&gt;
+    #   * {Types::GetCelebrityRecognitionResponse#billable_duration_seconds #billable_duration_seconds} => Integer
+    #   * {Types::GetCelebrityRecognitionResponse#error_code #error_code} => String
+    #   * {Types::GetCelebrityRecognitionResponse#warnings #warnings} => Array&lt;Types::Warning&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1268,6 +1300,7 @@ module Aws::Rekognition
     #   resp.video_metadata.frame_rate #=> Float
     #   resp.video_metadata.frame_height #=> Integer
     #   resp.video_metadata.frame_width #=> Integer
+    #   resp.video_metadata.rotation #=> Integer
     #   resp.next_token #=> String
     #   resp.celebrities #=> Array
     #   resp.celebrities[0].timestamp #=> Integer
@@ -1315,6 +1348,14 @@ module Aws::Rekognition
     #   resp.celebrities[0].celebrity.face.quality.brightness #=> Float
     #   resp.celebrities[0].celebrity.face.quality.sharpness #=> Float
     #   resp.celebrities[0].celebrity.face.confidence #=> Float
+    #   resp.billable_duration_seconds #=> Integer
+    #   resp.error_code #=> String
+    #   resp.warnings #=> Array
+    #   resp.warnings[0].error_code #=> String
+    #   resp.warnings[0].message #=> String
+    #   resp.warnings[0].sections #=> Array
+    #   resp.warnings[0].sections[0].start_timestamp #=> Integer
+    #   resp.warnings[0].sections[0].end_timestamp #=> Integer
     #
     # @overload get_celebrity_recognition(params = {})
     # @param [Hash] params ({})
@@ -1389,6 +1430,9 @@ module Aws::Rekognition
     #   * {Types::GetContentModerationResponse#video_metadata #video_metadata} => Types::VideoMetadata
     #   * {Types::GetContentModerationResponse#moderation_labels #moderation_labels} => Array&lt;Types::ContentModerationDetection&gt;
     #   * {Types::GetContentModerationResponse#next_token #next_token} => String
+    #   * {Types::GetContentModerationResponse#billable_duration_seconds #billable_duration_seconds} => Integer
+    #   * {Types::GetContentModerationResponse#error_code #error_code} => String
+    #   * {Types::GetContentModerationResponse#warnings #warnings} => Array&lt;Types::Warning&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1409,12 +1453,21 @@ module Aws::Rekognition
     #   resp.video_metadata.frame_rate #=> Float
     #   resp.video_metadata.frame_height #=> Integer
     #   resp.video_metadata.frame_width #=> Integer
+    #   resp.video_metadata.rotation #=> Integer
     #   resp.moderation_labels #=> Array
     #   resp.moderation_labels[0].timestamp #=> Integer
     #   resp.moderation_labels[0].moderation_label.confidence #=> Float
     #   resp.moderation_labels[0].moderation_label.name #=> String
     #   resp.moderation_labels[0].moderation_label.parent_name #=> String
     #   resp.next_token #=> String
+    #   resp.billable_duration_seconds #=> Integer
+    #   resp.error_code #=> String
+    #   resp.warnings #=> Array
+    #   resp.warnings[0].error_code #=> String
+    #   resp.warnings[0].message #=> String
+    #   resp.warnings[0].sections #=> Array
+    #   resp.warnings[0].sections[0].start_timestamp #=> Integer
+    #   resp.warnings[0].sections[0].end_timestamp #=> Integer
     #
     # @overload get_content_moderation(params = {})
     # @param [Hash] params ({})
@@ -1469,6 +1522,9 @@ module Aws::Rekognition
     #   * {Types::GetFaceDetectionResponse#video_metadata #video_metadata} => Types::VideoMetadata
     #   * {Types::GetFaceDetectionResponse#next_token #next_token} => String
     #   * {Types::GetFaceDetectionResponse#faces #faces} => Array&lt;Types::FaceDetection&gt;
+    #   * {Types::GetFaceDetectionResponse#billable_duration_seconds #billable_duration_seconds} => Integer
+    #   * {Types::GetFaceDetectionResponse#error_code #error_code} => String
+    #   * {Types::GetFaceDetectionResponse#warnings #warnings} => Array&lt;Types::Warning&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1488,6 +1544,7 @@ module Aws::Rekognition
     #   resp.video_metadata.frame_rate #=> Float
     #   resp.video_metadata.frame_height #=> Integer
     #   resp.video_metadata.frame_width #=> Integer
+    #   resp.video_metadata.rotation #=> Integer
     #   resp.next_token #=> String
     #   resp.faces #=> Array
     #   resp.faces[0].timestamp #=> Integer
@@ -1526,6 +1583,14 @@ module Aws::Rekognition
     #   resp.faces[0].face.quality.brightness #=> Float
     #   resp.faces[0].face.quality.sharpness #=> Float
     #   resp.faces[0].face.confidence #=> Float
+    #   resp.billable_duration_seconds #=> Integer
+    #   resp.error_code #=> String
+    #   resp.warnings #=> Array
+    #   resp.warnings[0].error_code #=> String
+    #   resp.warnings[0].message #=> String
+    #   resp.warnings[0].sections #=> Array
+    #   resp.warnings[0].sections[0].start_timestamp #=> Integer
+    #   resp.warnings[0].sections[0].end_timestamp #=> Integer
     #
     # @overload get_face_detection(params = {})
     # @param [Hash] params ({})
@@ -1597,6 +1662,9 @@ module Aws::Rekognition
     #   * {Types::GetFaceSearchResponse#next_token #next_token} => String
     #   * {Types::GetFaceSearchResponse#video_metadata #video_metadata} => Types::VideoMetadata
     #   * {Types::GetFaceSearchResponse#persons #persons} => Array&lt;Types::PersonMatch&gt;
+    #   * {Types::GetFaceSearchResponse#billable_duration_seconds #billable_duration_seconds} => Integer
+    #   * {Types::GetFaceSearchResponse#error_code #error_code} => String
+    #   * {Types::GetFaceSearchResponse#warnings #warnings} => Array&lt;Types::Warning&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1618,6 +1686,7 @@ module Aws::Rekognition
     #   resp.video_metadata.frame_rate #=> Float
     #   resp.video_metadata.frame_height #=> Integer
     #   resp.video_metadata.frame_width #=> Integer
+    #   resp.video_metadata.rotation #=> Integer
     #   resp.persons #=> Array
     #   resp.persons[0].timestamp #=> Integer
     #   resp.persons[0].person.index #=> Integer
@@ -1670,6 +1739,15 @@ module Aws::Rekognition
     #   resp.persons[0].face_matches[0].face.image_id #=> String
     #   resp.persons[0].face_matches[0].face.external_image_id #=> String
     #   resp.persons[0].face_matches[0].face.confidence #=> Float
+    #   resp.persons[0].face_matches[0].face.association_score #=> Float
+    #   resp.billable_duration_seconds #=> Integer
+    #   resp.error_code #=> String
+    #   resp.warnings #=> Array
+    #   resp.warnings[0].error_code #=> String
+    #   resp.warnings[0].message #=> String
+    #   resp.warnings[0].sections #=> Array
+    #   resp.warnings[0].sections[0].start_timestamp #=> Integer
+    #   resp.warnings[0].sections[0].end_timestamp #=> Integer
     #
     # @overload get_face_search(params = {})
     # @param [Hash] params ({})
@@ -1737,6 +1815,9 @@ module Aws::Rekognition
     #   * {Types::GetLabelDetectionResponse#video_metadata #video_metadata} => Types::VideoMetadata
     #   * {Types::GetLabelDetectionResponse#next_token #next_token} => String
     #   * {Types::GetLabelDetectionResponse#labels #labels} => Array&lt;Types::LabelDetection&gt;
+    #   * {Types::GetLabelDetectionResponse#billable_duration_seconds #billable_duration_seconds} => Integer
+    #   * {Types::GetLabelDetectionResponse#error_code #error_code} => String
+    #   * {Types::GetLabelDetectionResponse#warnings #warnings} => Array&lt;Types::Warning&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1757,11 +1838,20 @@ module Aws::Rekognition
     #   resp.video_metadata.frame_rate #=> Float
     #   resp.video_metadata.frame_height #=> Integer
     #   resp.video_metadata.frame_width #=> Integer
+    #   resp.video_metadata.rotation #=> Integer
     #   resp.next_token #=> String
     #   resp.labels #=> Array
     #   resp.labels[0].timestamp #=> Integer
     #   resp.labels[0].label.name #=> String
     #   resp.labels[0].label.confidence #=> Float
+    #   resp.billable_duration_seconds #=> Integer
+    #   resp.error_code #=> String
+    #   resp.warnings #=> Array
+    #   resp.warnings[0].error_code #=> String
+    #   resp.warnings[0].message #=> String
+    #   resp.warnings[0].sections #=> Array
+    #   resp.warnings[0].sections[0].start_timestamp #=> Integer
+    #   resp.warnings[0].sections[0].end_timestamp #=> Integer
     #
     # @overload get_label_detection(params = {})
     # @param [Hash] params ({})
@@ -1839,6 +1929,9 @@ module Aws::Rekognition
     #   * {Types::GetPersonTrackingResponse#video_metadata #video_metadata} => Types::VideoMetadata
     #   * {Types::GetPersonTrackingResponse#next_token #next_token} => String
     #   * {Types::GetPersonTrackingResponse#persons #persons} => Array&lt;Types::PersonDetection&gt;
+    #   * {Types::GetPersonTrackingResponse#billable_duration_seconds #billable_duration_seconds} => Integer
+    #   * {Types::GetPersonTrackingResponse#error_code #error_code} => String
+    #   * {Types::GetPersonTrackingResponse#warnings #warnings} => Array&lt;Types::Warning&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1859,6 +1952,7 @@ module Aws::Rekognition
     #   resp.video_metadata.frame_rate #=> Float
     #   resp.video_metadata.frame_height #=> Integer
     #   resp.video_metadata.frame_width #=> Integer
+    #   resp.video_metadata.rotation #=> Integer
     #   resp.next_token #=> String
     #   resp.persons #=> Array
     #   resp.persons[0].timestamp #=> Integer
@@ -1902,6 +1996,14 @@ module Aws::Rekognition
     #   resp.persons[0].person.face.quality.brightness #=> Float
     #   resp.persons[0].person.face.quality.sharpness #=> Float
     #   resp.persons[0].person.face.confidence #=> Float
+    #   resp.billable_duration_seconds #=> Integer
+    #   resp.error_code #=> String
+    #   resp.warnings #=> Array
+    #   resp.warnings[0].error_code #=> String
+    #   resp.warnings[0].message #=> String
+    #   resp.warnings[0].sections #=> Array
+    #   resp.warnings[0].sections[0].start_timestamp #=> Integer
+    #   resp.warnings[0].sections[0].end_timestamp #=> Integer
     #
     # @overload get_person_tracking(params = {})
     # @param [Hash] params ({})
@@ -1943,7 +2045,7 @@ module Aws::Rekognition
     # and an image ID assigned by the service for the input image. If you
     # request all facial attributes (using the `detectionAttributes`
     # parameter, Amazon Rekognition returns detailed facial attributes such
-    # as facial landmarks (for example, location of eye and mount) and other
+    # as facial landmarks (for example, location of eye and mouth) and other
     # facial attributes such gender. If you provide the same image, specify
     # the same collection, and use the same external ID in the `IndexFaces`
     # operation, Amazon Rekognition doesn't save duplicate face metadata.
@@ -2158,6 +2260,7 @@ module Aws::Rekognition
     #   resp.face_records[0].face.image_id #=> String
     #   resp.face_records[0].face.external_image_id #=> String
     #   resp.face_records[0].face.confidence #=> Float
+    #   resp.face_records[0].face.association_score #=> Float
     #   resp.face_records[0].face_detail.bounding_box.width #=> Float
     #   resp.face_records[0].face_detail.bounding_box.height #=> Float
     #   resp.face_records[0].face_detail.bounding_box.left #=> Float
@@ -2445,6 +2548,7 @@ module Aws::Rekognition
     #   resp.faces[0].image_id #=> String
     #   resp.faces[0].external_image_id #=> String
     #   resp.faces[0].confidence #=> Float
+    #   resp.faces[0].association_score #=> Float
     #   resp.next_token #=> String
     #   resp.face_model_version #=> String
     #
@@ -2725,6 +2829,7 @@ module Aws::Rekognition
     #   resp.face_matches[0].face.image_id #=> String
     #   resp.face_matches[0].face.external_image_id #=> String
     #   resp.face_matches[0].face.confidence #=> Float
+    #   resp.face_matches[0].face.association_score #=> Float
     #   resp.face_model_version #=> String
     #
     # @overload search_faces(params = {})
@@ -2870,6 +2975,7 @@ module Aws::Rekognition
     #   resp.face_matches[0].face.image_id #=> String
     #   resp.face_matches[0].face.external_image_id #=> String
     #   resp.face_matches[0].face.confidence #=> Float
+    #   resp.face_matches[0].face.association_score #=> Float
     #   resp.face_model_version #=> String
     #
     # @overload search_faces_by_image(params = {})
@@ -2911,6 +3017,8 @@ module Aws::Rekognition
     #   publish the completion status of the celebrity recognition analysis
     #   to.
     #
+    # @option params [Boolean] :enable_person_tracking
+    #
     # @option params [String] :job_tag
     #   Unique identifier you specify to identify the job in the completion
     #   status published to the Amazon Simple Notification Service topic.
@@ -2934,6 +3042,7 @@ module Aws::Rekognition
     #       sns_topic_arn: "SNSTopicArn", # required
     #       role_arn: "RoleArn", # required
     #     },
+    #     enable_person_tracking: false,
     #     job_tag: "JobTag",
     #   })
     #
@@ -3117,7 +3226,7 @@ module Aws::Rekognition
     # status value published to the Amazon SNS topic is `SUCCEEDED`. If so,
     # call and pass the job identifier (`JobId`) from the initial call to
     # `StartFaceSearch`. For more information, see
-    # collections-search-person.
+    # procedure-person-search-videos.
     #
     # @option params [required, Types::Video] :video
     #   The video you want to search. The video must be stored in an Amazon S3
@@ -3136,6 +3245,8 @@ module Aws::Rekognition
     #
     # @option params [required, String] :collection_id
     #   ID of the collection that contains the faces you want to search for.
+    #
+    # @option params [Boolean] :enable_person_tracking
     #
     # @option params [Types::NotificationChannel] :notification_channel
     #   The ARN of the Amazon SNS topic to which you want Amazon Rekognition
@@ -3162,6 +3273,7 @@ module Aws::Rekognition
     #     client_request_token: "ClientRequestToken",
     #     face_match_threshold: 1.0,
     #     collection_id: "CollectionId", # required
+    #     enable_person_tracking: false,
     #     notification_channel: {
     #       sns_topic_arn: "SNSTopicArn", # required
     #       role_arn: "RoleArn", # required
@@ -3385,7 +3497,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

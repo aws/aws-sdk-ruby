@@ -2271,7 +2271,8 @@ module Aws::IoT
     # Returns a unique endpoint specific to the AWS account making the call.
     #
     # @option params [String] :endpoint_type
-    #   The endpoint type.
+    #   The endpoint type (such as `iot:Data`, `iot:CredentialProvider` and
+    #   `iot:Jobs`).
     #
     # @return [Types::DescribeEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2956,10 +2957,12 @@ module Aws::IoT
     # @return [Types::GetIndexingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetIndexingConfigurationResponse#thing_indexing_configuration #thing_indexing_configuration} => Types::ThingIndexingConfiguration
+    #   * {Types::GetIndexingConfigurationResponse#thing_group_indexing_configuration #thing_group_indexing_configuration} => Types::ThingGroupIndexingConfiguration
     #
     # @example Response structure
     #
     #   resp.thing_indexing_configuration.thing_indexing_mode #=> String, one of "OFF", "REGISTRY", "REGISTRY_AND_SHADOW"
+    #   resp.thing_group_indexing_configuration.thing_group_indexing_mode #=> String, one of "OFF", "ON"
     #
     # @overload get_indexing_configuration(params = {})
     # @param [Hash] params ({})
@@ -5452,6 +5455,7 @@ module Aws::IoT
     #
     #   * {Types::SearchIndexResponse#next_token #next_token} => String
     #   * {Types::SearchIndexResponse#things #things} => Array&lt;Types::ThingDocument&gt;
+    #   * {Types::SearchIndexResponse#thing_groups #thing_groups} => Array&lt;Types::ThingGroupDocument&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -5475,6 +5479,14 @@ module Aws::IoT
     #   resp.things[0].attributes #=> Hash
     #   resp.things[0].attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.things[0].shadow #=> String
+    #   resp.thing_groups #=> Array
+    #   resp.thing_groups[0].thing_group_name #=> String
+    #   resp.thing_groups[0].thing_group_id #=> String
+    #   resp.thing_groups[0].thing_group_description #=> String
+    #   resp.thing_groups[0].attributes #=> Hash
+    #   resp.thing_groups[0].attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.thing_groups[0].parent_group_names #=> Array
+    #   resp.thing_groups[0].parent_group_names[0] #=> String
     #
     # @overload search_index(params = {})
     # @param [Hash] params ({})
@@ -6087,13 +6099,19 @@ module Aws::IoT
     # @option params [Types::ThingIndexingConfiguration] :thing_indexing_configuration
     #   Thing indexing configuration.
     #
+    # @option params [Types::ThingGroupIndexingConfiguration] :thing_group_indexing_configuration
+    #   Thing group indexing configuration.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_indexing_configuration({
     #     thing_indexing_configuration: {
-    #       thing_indexing_mode: "OFF", # accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
+    #       thing_indexing_mode: "OFF", # required, accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
+    #     },
+    #     thing_group_indexing_configuration: {
+    #       thing_group_indexing_mode: "OFF", # required, accepts OFF, ON
     #     },
     #   })
     #
@@ -6518,7 +6536,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -3279,7 +3279,8 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] endpoint_type
-    #   The endpoint type.
+    #   The endpoint type (such as `iot:Data`, `iot:CredentialProvider` and
+    #   `iot:Jobs`).
     #   @return [String]
     #
     class DescribeEndpointRequest < Struct.new(
@@ -4293,8 +4294,13 @@ module Aws::IoT
     #   Thing indexing configuration.
     #   @return [Types::ThingIndexingConfiguration]
     #
+    # @!attribute [rw] thing_group_indexing_configuration
+    #   The index configuration.
+    #   @return [Types::ThingGroupIndexingConfiguration]
+    #
     class GetIndexingConfigurationResponse < Struct.new(
-      :thing_indexing_configuration)
+      :thing_indexing_configuration,
+      :thing_group_indexing_configuration)
       include Aws::Structure
     end
 
@@ -8083,9 +8089,14 @@ module Aws::IoT
     #   The things that match the search query.
     #   @return [Array<Types::ThingDocument>]
     #
+    # @!attribute [rw] thing_groups
+    #   The thing groups that match the search query.
+    #   @return [Array<Types::ThingGroupDocument>]
+    #
     class SearchIndexResponse < Struct.new(
       :next_token,
-      :things)
+      :things,
+      :thing_groups)
       include Aws::Structure
     end
 
@@ -8819,6 +8830,55 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The thing group search index document.
+    #
+    # @!attribute [rw] thing_group_name
+    #   The thing group name.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_group_id
+    #   The thing group ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_group_description
+    #   The thing group description.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   The thing group attributes.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] parent_group_names
+    #   Parent group names.
+    #   @return [Array<String>]
+    #
+    class ThingGroupDocument < Struct.new(
+      :thing_group_name,
+      :thing_group_id,
+      :thing_group_description,
+      :attributes,
+      :parent_group_names)
+      include Aws::Structure
+    end
+
+    # Thing group indexing configuration.
+    #
+    # @note When making an API call, you may pass ThingGroupIndexingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         thing_group_indexing_mode: "OFF", # required, accepts OFF, ON
+    #       }
+    #
+    # @!attribute [rw] thing_group_indexing_mode
+    #   Thing group indexing mode.
+    #   @return [String]
+    #
+    class ThingGroupIndexingConfiguration < Struct.new(
+      :thing_group_indexing_mode)
+      include Aws::Structure
+    end
+
     # Thing group metadata.
     #
     # @!attribute [rw] parent_group_name
@@ -8875,7 +8935,7 @@ module Aws::IoT
     #   data as a hash:
     #
     #       {
-    #         thing_indexing_mode: "OFF", # accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
+    #         thing_indexing_mode: "OFF", # required, accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
     #       }
     #
     # @!attribute [rw] thing_indexing_mode
@@ -9574,7 +9634,10 @@ module Aws::IoT
     #
     #       {
     #         thing_indexing_configuration: {
-    #           thing_indexing_mode: "OFF", # accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
+    #           thing_indexing_mode: "OFF", # required, accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
+    #         },
+    #         thing_group_indexing_configuration: {
+    #           thing_group_indexing_mode: "OFF", # required, accepts OFF, ON
     #         },
     #       }
     #
@@ -9582,8 +9645,13 @@ module Aws::IoT
     #   Thing indexing configuration.
     #   @return [Types::ThingIndexingConfiguration]
     #
+    # @!attribute [rw] thing_group_indexing_configuration
+    #   Thing group indexing configuration.
+    #   @return [Types::ThingGroupIndexingConfiguration]
+    #
     class UpdateIndexingConfigurationRequest < Struct.new(
-      :thing_indexing_configuration)
+      :thing_indexing_configuration,
+      :thing_group_indexing_configuration)
       include Aws::Structure
     end
 

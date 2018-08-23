@@ -228,7 +228,7 @@ module Aws::LexModelBuildingService
     #   resp.abort_statement.messages[0].content #=> String
     #   resp.abort_statement.messages[0].group_number #=> Integer
     #   resp.abort_statement.response_card #=> String
-    #   resp.status #=> String, one of "BUILDING", "READY", "FAILED", "NOT_BUILT"
+    #   resp.status #=> String, one of "BUILDING", "READY", "READY_BASIC_TESTING", "FAILED", "NOT_BUILT"
     #   resp.failure_reason #=> String
     #   resp.last_updated_date #=> Time
     #   resp.created_date #=> Time
@@ -875,7 +875,7 @@ module Aws::LexModelBuildingService
     #   resp.abort_statement.messages[0].content #=> String
     #   resp.abort_statement.messages[0].group_number #=> Integer
     #   resp.abort_statement.response_card #=> String
-    #   resp.status #=> String, one of "BUILDING", "READY", "FAILED", "NOT_BUILT"
+    #   resp.status #=> String, one of "BUILDING", "READY", "READY_BASIC_TESTING", "FAILED", "NOT_BUILT"
     #   resp.failure_reason #=> String
     #   resp.last_updated_date #=> Time
     #   resp.created_date #=> Time
@@ -1173,7 +1173,7 @@ module Aws::LexModelBuildingService
     #   resp.bots #=> Array
     #   resp.bots[0].name #=> String
     #   resp.bots[0].description #=> String
-    #   resp.bots[0].status #=> String, one of "BUILDING", "READY", "FAILED", "NOT_BUILT"
+    #   resp.bots[0].status #=> String, one of "BUILDING", "READY", "READY_BASIC_TESTING", "FAILED", "NOT_BUILT"
     #   resp.bots[0].last_updated_date #=> Time
     #   resp.bots[0].created_date #=> Time
     #   resp.bots[0].version #=> String
@@ -1256,7 +1256,7 @@ module Aws::LexModelBuildingService
     #   resp.bots #=> Array
     #   resp.bots[0].name #=> String
     #   resp.bots[0].description #=> String
-    #   resp.bots[0].status #=> String, one of "BUILDING", "READY", "FAILED", "NOT_BUILT"
+    #   resp.bots[0].status #=> String, one of "BUILDING", "READY", "READY_BASIC_TESTING", "FAILED", "NOT_BUILT"
     #   resp.bots[0].last_updated_date #=> Time
     #   resp.bots[0].created_date #=> Time
     #   resp.bots[0].version #=> String
@@ -2540,7 +2540,7 @@ module Aws::LexModelBuildingService
     #   resp.abort_statement.messages[0].content #=> String
     #   resp.abort_statement.messages[0].group_number #=> Integer
     #   resp.abort_statement.response_card #=> String
-    #   resp.status #=> String, one of "BUILDING", "READY", "FAILED", "NOT_BUILT"
+    #   resp.status #=> String, one of "BUILDING", "READY", "READY_BASIC_TESTING", "FAILED", "NOT_BUILT"
     #   resp.failure_reason #=> String
     #   resp.last_updated_date #=> Time
     #   resp.created_date #=> Time
@@ -3515,7 +3515,7 @@ module Aws::LexModelBuildingService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelbuildingservice'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
