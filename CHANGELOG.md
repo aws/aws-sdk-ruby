@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CognitoIdentityProvider - Updated the API, documentation, and integration test for Amazon Cognito Identity Provider.
+
+* Feature - Aws::CloudWatchEvents - Updated the API, documentation, and integration test for Amazon CloudWatch Events.
+
 2.11.115 (2018-08-23)
 ------------------
 
