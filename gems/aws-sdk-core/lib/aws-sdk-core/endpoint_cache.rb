@@ -6,15 +6,22 @@ module Aws
     # default cache entries limit
     MAX_ENTRIES = 1000
 
+    # defauly max threads pool size
+    MAX_THREADS = 10
+
     def initialize(options = {})
       @max_entries = options[:max_entries] || MAX_ENTRIES
       @entries = {} # store endpoints
+      @max_threads = options[:max_threads] || MAX_THREADS
       @pool = {} # store polling threads
       @mutex = Mutex.new
     end
 
     # @return [Integer] Max size limit of cache
     attr_reader :max_entries
+
+    # @return [Integer] Max count of polling threads
+    attr_reader :max_threads
 
     # return [Hash] Polling threads pool
     attr_reader :pool
@@ -72,7 +79,7 @@ module Aws
     # kill the old polling thread and remove it from pool
     # @param [String] key
     def delete_polling_thread(key)
-      Thread.kill(@pool[key]) if slef.threads_key?(key)
+      Thread.kill(@pool[key]) if self.threads_key?(key)
       @pool.delete(key)
     end
 
@@ -105,6 +112,10 @@ module Aws
     # param [String] key
     # param [Thread] thread
     def update_polling_pool(key, thread)
+      unless @pool.size < @max_threads
+        _, thread = @pool.shift
+        Thread.kill(thread)
+      end
       @pool[key] = thread
     end
 

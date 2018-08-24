@@ -95,5 +95,26 @@ module Aws
       expect(cache.pool.size).to be_zero
     end
 
+    it 'kills old thread when reaches :max_threads' do
+      cache = Aws::EndpointCache.new(max_threads: 1)
+      ta = Thread.new do
+        2.times do
+          cache['A'] = {:address => 'a.foo.com/foo', :cache_period_in_minutes => 60}
+          sleep(5)
+        end
+      end
+      cache.update_polling_pool('A', ta)
+      tb = Thread.new do
+        2.times do
+          cache['A'] = {:address => 'b.foo.com/foo', :cache_period_in_minutes => 60}
+          sleep(5)
+        end
+      end
+      cache.update_polling_pool('B', tb)
+      sleep(2) # kill threads takes time
+      expect(ta.alive?).to be_falsey
+      expect(cache.threads_key?('A')).to be_falsey
+    end
+
   end
 end

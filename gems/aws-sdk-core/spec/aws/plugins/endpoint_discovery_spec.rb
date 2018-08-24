@@ -252,6 +252,11 @@ module Aws
         expect(c.config.endpoint_cache.max_entries).to eq(5)
       end
 
+      it 'can set endpoint cache max threads limit' do
+        c = EndpointDiscoveryClient.new(credentials: creds, region: 'us-east-1', endpoint_cache_max_threads: 5)
+        expect(c.config.endpoint_cache.max_threads).to eq(5)
+      end
+
     end
   end
 end

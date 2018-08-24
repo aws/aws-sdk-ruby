@@ -21,6 +21,14 @@ for endpoint discovery enabled operations. Defaults to 1000.
         DOCS
       )
 
+      option(:endpoint_cache_max_threads,
+        default: 10,
+        doc_type: Integer,
+        docstring: <<-DOCS
+Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
+        DOCS
+      )
+
       option(:endpoint_cache_poll_interval,
         default: 60,
         doc_type: Integer,
@@ -33,7 +41,8 @@ requests fetching endpoints information. Defaults to 60 sec.
 
       option(:endpoint_cache) do |cfg|
         Aws::EndpointCache.new(
-          max_entries: cfg.endpoint_cache_max_entries
+          max_entries: cfg.endpoint_cache_max_entries,
+          max_threads: cfg.endpoint_cache_max_threads
         )
       end
 
