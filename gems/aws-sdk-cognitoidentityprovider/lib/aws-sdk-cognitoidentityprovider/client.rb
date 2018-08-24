@@ -2273,6 +2273,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.sms_configuration_failure #=> String
     #   resp.user_pool.email_configuration_failure #=> String
     #   resp.user_pool.domain #=> String
+    #   resp.user_pool.custom_domain #=> String
     #   resp.user_pool.admin_create_user_config.allow_admin_create_user_only #=> Boolean
     #   resp.user_pool.admin_create_user_config.unused_account_validity_days #=> Integer
     #   resp.user_pool.admin_create_user_config.invite_message_template.sms_message #=> String
@@ -2329,11 +2330,14 @@ module Aws::CognitoIdentityProvider
     #
     #   * Be registered with the authorization server.
     #
-    #   * Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).
-    #
     #   * Not include a fragment component.
     #
     #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
+    #   for testing purposes only.
+    #
+    #   App callback URLs such as myapp://example are also supported.
     #
     #
     #
@@ -2351,11 +2355,14 @@ module Aws::CognitoIdentityProvider
     #
     #   * Be registered with the authorization server.
     #
-    #   * Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).
-    #
     #   * Not include a fragment component.
     #
     #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
+    #   for testing purposes only.
+    #
+    #   App callback URLs such as myapp://example are also supported.
     #
     #
     #
@@ -2459,14 +2466,38 @@ module Aws::CognitoIdentityProvider
     # @option params [required, String] :user_pool_id
     #   The user pool ID.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @option params [Types::CustomDomainConfigType] :custom_domain_config
+    #   The configuration for a custom domain that hosts the sign-up and
+    #   sign-in webpages for your application.
+    #
+    #   Provide this parameter only if you want to use own custom domain for
+    #   your user pool. Otherwise, you can exclude this parameter and use the
+    #   Amazon Cognito hosted domain instead.
+    #
+    #   For more information about the hosted domain and custom domains, see
+    #   [Configuring a User Pool Domain][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-assign-domain.html
+    #
+    # @return [Types::CreateUserPoolDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateUserPoolDomainResponse#cloud_front_domain #cloud_front_domain} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_user_pool_domain({
     #     domain: "DomainType", # required
     #     user_pool_id: "UserPoolIdType", # required
+    #     custom_domain_config: {
+    #       certificate_arn: "ArnType", # required
+    #     },
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cloud_front_domain #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolDomain AWS API Documentation
     #
@@ -2944,6 +2975,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.sms_configuration_failure #=> String
     #   resp.user_pool.email_configuration_failure #=> String
     #   resp.user_pool.domain #=> String
+    #   resp.user_pool.custom_domain #=> String
     #   resp.user_pool.admin_create_user_config.allow_admin_create_user_only #=> Boolean
     #   resp.user_pool.admin_create_user_config.unused_account_validity_days #=> Integer
     #   resp.user_pool.admin_create_user_config.invite_message_template.sms_message #=> String
@@ -2962,7 +2994,7 @@ module Aws::CognitoIdentityProvider
     end
 
     # Client method for returning the configuration information and metadata
-    # of the specified user pool client.
+    # of the specified user pool app client.
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool you want to describe.
@@ -3046,6 +3078,7 @@ module Aws::CognitoIdentityProvider
     #   resp.domain_description.cloud_front_distribution #=> String
     #   resp.domain_description.version #=> String
     #   resp.domain_description.status #=> String, one of "CREATING", "DELETING", "UPDATING", "ACTIVE", "FAILED"
+    #   resp.domain_description.custom_domain_config.certificate_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPoolDomain AWS API Documentation
     #
@@ -4004,10 +4037,10 @@ module Aws::CognitoIdentityProvider
     #
     #   * `preferred_username`
     #
-    #   * `cognito:user_status` (called **Enabled** in the Console)
-    #     (case-sensitive)
+    #   * `cognito:user_status` (called **Status** in the Console)
+    #     (case-insensitive)
     #
-    #   * `status` (case-insensitive)
+    #   * `status (called Enabled in the Console) (case-sensitive)`
     #
     #   * `sub`
     #
@@ -5029,7 +5062,9 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
-    # Updates the specified user pool with the specified attributes.
+    # Updates the specified user pool with the specified attributes. If you
+    # don't provide a value for an attribute, it will be set to the default
+    # value. You can get a list of the current user pool settings with .
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool you want to update.
@@ -5175,8 +5210,10 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
-    # Allows the developer to update the specified user pool client and
-    # password policy.
+    # Updates the specified user pool app client with the specified
+    # attributes. If you don't provide a value for an attribute, it will be
+    # set to the default value. You can get a list of the current user pool
+    # app client settings with .
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool where you want to update the user
@@ -5214,11 +5251,14 @@ module Aws::CognitoIdentityProvider
     #
     #   * Be registered with the authorization server.
     #
-    #   * Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).
-    #
     #   * Not include a fragment component.
     #
     #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
+    #   for testing purposes only.
+    #
+    #   App callback URLs such as myapp://example are also supported.
     #
     #
     #
@@ -5236,11 +5276,14 @@ module Aws::CognitoIdentityProvider
     #
     #   * Be registered with the authorization server.
     #
-    #   * Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).
-    #
     #   * Not include a fragment component.
     #
     #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
+    #   for testing purposes only.
+    #
+    #   App callback URLs such as myapp://example are also supported.
     #
     #
     #
@@ -5424,7 +5467,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

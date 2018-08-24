@@ -2641,11 +2641,14 @@ module Aws::CognitoIdentityProvider
     #
     #   * Be registered with the authorization server.
     #
-    #   * Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).
-    #
     #   * Not include a fragment component.
     #
     #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
+    #   for testing purposes only.
+    #
+    #   App callback URLs such as myapp://example are also supported.
     #
     #
     #
@@ -2665,11 +2668,14 @@ module Aws::CognitoIdentityProvider
     #
     #   * Be registered with the authorization server.
     #
-    #   * Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).
-    #
     #   * Not include a fragment component.
     #
     #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
+    #   for testing purposes only.
+    #
+    #   App callback URLs such as myapp://example are also supported.
     #
     #
     #
@@ -2740,6 +2746,9 @@ module Aws::CognitoIdentityProvider
     #       {
     #         domain: "DomainType", # required
     #         user_pool_id: "UserPoolIdType", # required
+    #         custom_domain_config: {
+    #           certificate_arn: "ArnType", # required
+    #         },
     #       }
     #
     # @!attribute [rw] domain
@@ -2750,17 +2759,42 @@ module Aws::CognitoIdentityProvider
     #   The user pool ID.
     #   @return [String]
     #
+    # @!attribute [rw] custom_domain_config
+    #   The configuration for a custom domain that hosts the sign-up and
+    #   sign-in webpages for your application.
+    #
+    #   Provide this parameter only if you want to use own custom domain for
+    #   your user pool. Otherwise, you can exclude this parameter and use
+    #   the Amazon Cognito hosted domain instead.
+    #
+    #   For more information about the hosted domain and custom domains, see
+    #   [Configuring a User Pool Domain][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-assign-domain.html
+    #   @return [Types::CustomDomainConfigType]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolDomainRequest AWS API Documentation
     #
     class CreateUserPoolDomainRequest < Struct.new(
       :domain,
-      :user_pool_id)
+      :user_pool_id,
+      :custom_domain_config)
       include Aws::Structure
     end
 
+    # @!attribute [rw] cloud_front_domain
+    #   The Amazon CloudFront endpoint that you use as the target of the
+    #   alias that you set up with your Domain Name Service (DNS) provider.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolDomainResponse AWS API Documentation
     #
-    class CreateUserPoolDomainResponse < Aws::EmptyStructure; end
+    class CreateUserPoolDomainResponse < Struct.new(
+      :cloud_front_domain)
+      include Aws::Structure
+    end
 
     # Represents the request to create a user pool.
     #
@@ -2994,6 +3028,29 @@ module Aws::CognitoIdentityProvider
     #
     class CreateUserPoolResponse < Struct.new(
       :user_pool)
+      include Aws::Structure
+    end
+
+    # The configuration for a custom domain that hosts the sign-up and
+    # sign-in webpages for your application.
+    #
+    # @note When making an API call, you may pass CustomDomainConfigType
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_arn: "ArnType", # required
+    #       }
+    #
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) of an AWS Certificate Manager SSL
+    #   certificate. You use this certificate for the subdomain of your
+    #   custom domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CustomDomainConfigType AWS API Documentation
+    #
+    class CustomDomainConfigType < Struct.new(
+      :certificate_arn)
       include Aws::Structure
     end
 
@@ -3566,6 +3623,11 @@ module Aws::CognitoIdentityProvider
     #   The domain status.
     #   @return [String]
     #
+    # @!attribute [rw] custom_domain_config
+    #   The configuration for a custom domain that hosts the sign-up and
+    #   sign-in webpages for your application.
+    #   @return [Types::CustomDomainConfigType]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DomainDescriptionType AWS API Documentation
     #
     class DomainDescriptionType < Struct.new(
@@ -3575,7 +3637,8 @@ module Aws::CognitoIdentityProvider
       :s3_bucket,
       :cloud_front_distribution,
       :version,
-      :status)
+      :status,
+      :custom_domain_config)
       include Aws::Structure
     end
 
@@ -5021,10 +5084,10 @@ module Aws::CognitoIdentityProvider
     #
     #   * `preferred_username`
     #
-    #   * `cognito:user_status` (called **Enabled** in the Console)
-    #     (case-sensitive)
+    #   * `cognito:user_status` (called **Status** in the Console)
+    #     (case-insensitive)
     #
-    #   * `status` (case-insensitive)
+    #   * `status (called Enabled in the Console) (case-sensitive)`
     #
     #   * `sub`
     #
@@ -6812,11 +6875,14 @@ module Aws::CognitoIdentityProvider
     #
     #   * Be registered with the authorization server.
     #
-    #   * Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).
-    #
     #   * Not include a fragment component.
     #
     #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
+    #   for testing purposes only.
+    #
+    #   App callback URLs such as myapp://example are also supported.
     #
     #
     #
@@ -6836,11 +6902,14 @@ module Aws::CognitoIdentityProvider
     #
     #   * Be registered with the authorization server.
     #
-    #   * Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).
-    #
     #   * Not include a fragment component.
     #
     #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
+    #   for testing purposes only.
+    #
+    #   App callback URLs such as myapp://example are also supported.
     #
     #
     #
@@ -7311,11 +7380,14 @@ module Aws::CognitoIdentityProvider
     #
     #   * Be registered with the authorization server.
     #
-    #   * Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).
-    #
     #   * Not include a fragment component.
     #
     #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
+    #   for testing purposes only.
+    #
+    #   App callback URLs such as myapp://example are also supported.
     #
     #
     #
@@ -7335,11 +7407,14 @@ module Aws::CognitoIdentityProvider
     #
     #   * Be registered with the authorization server.
     #
-    #   * Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).
-    #
     #   * Not include a fragment component.
     #
     #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
+    #   for testing purposes only.
+    #
+    #   App callback URLs such as myapp://example are also supported.
     #
     #
     #
@@ -7578,6 +7653,9 @@ module Aws::CognitoIdentityProvider
     #   with it.
     #   @return [String]
     #
+    # @!attribute [rw] custom_domain
+    #   @return [String]
+    #
     # @!attribute [rw] admin_create_user_config
     #   The configuration for `AdminCreateUser` requests.
     #   @return [Types::AdminCreateUserConfigType]
@@ -7618,6 +7696,7 @@ module Aws::CognitoIdentityProvider
       :sms_configuration_failure,
       :email_configuration_failure,
       :domain,
+      :custom_domain,
       :admin_create_user_config,
       :user_pool_add_ons,
       :arn)

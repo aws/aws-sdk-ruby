@@ -13,6 +13,8 @@ module Aws::CloudWatchEvents
 
     Action = Shapes::StringShape.new(name: 'Action')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    AssignPublicIp = Shapes::StringShape.new(name: 'AssignPublicIp')
+    AwsVpcConfiguration = Shapes::StructureShape.new(name: 'AwsVpcConfiguration')
     BatchArrayProperties = Shapes::StructureShape.new(name: 'BatchArrayProperties')
     BatchParameters = Shapes::StructureShape.new(name: 'BatchParameters')
     BatchRetryStrategy = Shapes::StructureShape.new(name: 'BatchRetryStrategy')
@@ -39,6 +41,7 @@ module Aws::CloudWatchEvents
     InternalException = Shapes::StructureShape.new(name: 'InternalException')
     InvalidEventPatternException = Shapes::StructureShape.new(name: 'InvalidEventPatternException')
     KinesisParameters = Shapes::StructureShape.new(name: 'KinesisParameters')
+    LaunchType = Shapes::StringShape.new(name: 'LaunchType')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     LimitMax100 = Shapes::IntegerShape.new(name: 'LimitMax100')
     LimitMin1 = Shapes::IntegerShape.new(name: 'LimitMin1')
@@ -49,6 +52,7 @@ module Aws::CloudWatchEvents
     ListTargetsByRuleRequest = Shapes::StructureShape.new(name: 'ListTargetsByRuleRequest')
     ListTargetsByRuleResponse = Shapes::StructureShape.new(name: 'ListTargetsByRuleResponse')
     MessageGroupId = Shapes::StringShape.new(name: 'MessageGroupId')
+    NetworkConfiguration = Shapes::StructureShape.new(name: 'NetworkConfiguration')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     PolicyLengthExceededException = Shapes::StructureShape.new(name: 'PolicyLengthExceededException')
     Principal = Shapes::StringShape.new(name: 'Principal')
@@ -89,6 +93,7 @@ module Aws::CloudWatchEvents
     SqsParameters = Shapes::StructureShape.new(name: 'SqsParameters')
     StatementId = Shapes::StringShape.new(name: 'StatementId')
     String = Shapes::StringShape.new(name: 'String')
+    StringList = Shapes::ListShape.new(name: 'StringList')
     Target = Shapes::StructureShape.new(name: 'Target')
     TargetArn = Shapes::StringShape.new(name: 'TargetArn')
     TargetId = Shapes::StringShape.new(name: 'TargetId')
@@ -101,6 +106,11 @@ module Aws::CloudWatchEvents
     TestEventPatternResponse = Shapes::StructureShape.new(name: 'TestEventPatternResponse')
     TransformerInput = Shapes::StringShape.new(name: 'TransformerInput')
     TransformerPaths = Shapes::MapShape.new(name: 'TransformerPaths')
+
+    AwsVpcConfiguration.add_member(:subnets, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "Subnets"))
+    AwsVpcConfiguration.add_member(:security_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "SecurityGroups"))
+    AwsVpcConfiguration.add_member(:assign_public_ip, Shapes::ShapeRef.new(shape: AssignPublicIp, location_name: "AssignPublicIp"))
+    AwsVpcConfiguration.struct_class = Types::AwsVpcConfiguration
 
     BatchArrayProperties.add_member(:size, Shapes::ShapeRef.new(shape: Integer, location_name: "Size"))
     BatchArrayProperties.struct_class = Types::BatchArrayProperties
@@ -141,6 +151,10 @@ module Aws::CloudWatchEvents
 
     EcsParameters.add_member(:task_definition_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "TaskDefinitionArn"))
     EcsParameters.add_member(:task_count, Shapes::ShapeRef.new(shape: LimitMin1, location_name: "TaskCount"))
+    EcsParameters.add_member(:launch_type, Shapes::ShapeRef.new(shape: LaunchType, location_name: "LaunchType"))
+    EcsParameters.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "NetworkConfiguration"))
+    EcsParameters.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "PlatformVersion"))
+    EcsParameters.add_member(:group, Shapes::ShapeRef.new(shape: String, location_name: "Group"))
     EcsParameters.struct_class = Types::EcsParameters
 
     EnableRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "Name"))
@@ -181,6 +195,9 @@ module Aws::CloudWatchEvents
     ListTargetsByRuleResponse.add_member(:targets, Shapes::ShapeRef.new(shape: TargetList, location_name: "Targets"))
     ListTargetsByRuleResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTargetsByRuleResponse.struct_class = Types::ListTargetsByRuleResponse
+
+    NetworkConfiguration.add_member(:awsvpc_configuration, Shapes::ShapeRef.new(shape: AwsVpcConfiguration, location_name: "awsvpcConfiguration"))
+    NetworkConfiguration.struct_class = Types::NetworkConfiguration
 
     PutEventsRequest.add_member(:entries, Shapes::ShapeRef.new(shape: PutEventsRequestEntryList, required: true, location_name: "Entries"))
     PutEventsRequest.struct_class = Types::PutEventsRequest
@@ -280,6 +297,8 @@ module Aws::CloudWatchEvents
 
     SqsParameters.add_member(:message_group_id, Shapes::ShapeRef.new(shape: MessageGroupId, location_name: "MessageGroupId"))
     SqsParameters.struct_class = Types::SqsParameters
+
+    StringList.member = Shapes::ShapeRef.new(shape: String)
 
     Target.add_member(:id, Shapes::ShapeRef.new(shape: TargetId, required: true, location_name: "Id"))
     Target.add_member(:arn, Shapes::ShapeRef.new(shape: TargetArn, required: true, location_name: "Arn"))
