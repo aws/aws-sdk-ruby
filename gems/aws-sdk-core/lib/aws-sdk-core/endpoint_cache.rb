@@ -6,7 +6,7 @@ module Aws
     # default cache entries limit
     MAX_ENTRIES = 1000
 
-    # defauly max threads pool size
+    # default max threads pool size
     MAX_THREADS = 10
 
     def initialize(options = {})
@@ -29,13 +29,15 @@ module Aws
     # @param [String] key
     # @return [Endpoint]
     def [](key)
-      # fetching an existing endpoint delete it and then append it
-      endpoint = @entries[key]
-      if endpoint
-        @entries.delete(key)
-        @entries[key] = endpoint
+      @mutex.synchronize do
+        # fetching an existing endpoint delete it and then append it
+        endpoint = @entries[key]
+        if endpoint
+          @entries.delete(key)
+          @entries[key] = endpoint
+        end
+        endpoint
       end
-      endpoint
     end
 
     # @param [String] key
@@ -48,7 +50,7 @@ module Aws
           self.delete_polling_thread(old_key)
         end
         # delete old value if exists
-        self.delete(key)
+        @entries.delete(key)
         @entries[key] = Endpoint.new(value.to_h)
       end
     end
@@ -73,7 +75,9 @@ module Aws
     # remove entry only
     # @param [String] key
     def delete(key)
-      @entries.delete(key)
+      @mutex.synchronize do
+        @entries.delete(key)
+      end
     end
 
     # kill the old polling thread and remove it from pool
