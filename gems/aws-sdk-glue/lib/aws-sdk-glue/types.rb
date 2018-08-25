@@ -22,6 +22,7 @@ module Aws::Glue
     #         notification_property: {
     #           notify_delay_after: 1,
     #         },
+    #         security_configuration: "NameString",
     #       }
     #
     # @!attribute [rw] job_name
@@ -29,7 +30,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] arguments
-    #   Arguments to be passed to the job.
+    #   Arguments to be passed to the job run.
     #
     #   You can specify arguments here that your own job-execution script
     #   consumes, as well as arguments that AWS Glue itself consumes.
@@ -49,13 +50,20 @@ module Aws::Glue
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] timeout
-    #   The job run timeout in minutes. It overrides the timeout value of
-    #   the job.
+    #   The JobRun timeout in minutes. This is the maximum time that a job
+    #   run can consume resources before it is terminated and enters
+    #   `TIMEOUT` status. The default is 2,880 minutes (48 hours). This
+    #   overrides the timeout value set in the parent job.
     #   @return [Integer]
     #
     # @!attribute [rw] notification_property
     #   Specifies configuration properties of a job run notification.
     #   @return [Types::NotificationProperty]
+    #
+    # @!attribute [rw] security_configuration
+    #   The name of the SecurityConfiguration structure to be used with this
+    #   action.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Action AWS API Documentation
     #
@@ -63,7 +71,8 @@ module Aws::Glue
       :job_name,
       :arguments,
       :timeout,
-      :notification_property)
+      :notification_property,
+      :security_configuration)
       include Aws::Structure
     end
 
@@ -582,6 +591,32 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies how CloudWatch data should be encrypted.
+    #
+    # @note When making an API call, you may pass CloudWatchEncryption
+    #   data as a hash:
+    #
+    #       {
+    #         cloud_watch_encryption_mode: "DISABLED", # accepts DISABLED, SSE-KMS
+    #         kms_key_arn: "KmsKeyArn",
+    #       }
+    #
+    # @!attribute [rw] cloud_watch_encryption_mode
+    #   The encryption mode to use for CloudWatch data.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The AWS ARN of the KMS key to be used to encrypt the data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CloudWatchEncryption AWS API Documentation
+    #
+    class CloudWatchEncryption < Struct.new(
+      :cloud_watch_encryption_mode,
+      :kms_key_arn)
+      include Aws::Structure
+    end
+
     # Represents a directional edge in a directed acyclic graph (DAG).
     #
     # @note When making an API call, you may pass CodeGenEdge
@@ -776,7 +811,37 @@ module Aws::Glue
     #   @return [Array<String>]
     #
     # @!attribute [rw] connection_properties
-    #   A list of key-value pairs used as parameters for this connection.
+    #   These key-value pairs define parameters for the connection:
+    #
+    #   * `HOST` - The host URI: either the fully qualified domain name
+    #     (FQDN) or the IPv4 address of the database host.
+    #
+    #   * `PORT` - The port number, between 1024 and 65535, of the port on
+    #     which the database host is listening for database connections.
+    #
+    #   * `USER_NAME` - The name under which to log in to the database.
+    #
+    #   * `PASSWORD` - A password, if one is used, for the user name.
+    #
+    #   * `JDBC_DRIVER_JAR_URI` - The S3 path of the a jar file that
+    #     contains the JDBC driver to use.
+    #
+    #   * `JDBC_DRIVER_CLASS_NAME` - The class name of the JDBC driver to
+    #     use.
+    #
+    #   * `JDBC_ENGINE` - The name of the JDBC engine to use.
+    #
+    #   * `JDBC_ENGINE_VERSION` - The version of the JDBC engine to use.
+    #
+    #   * `CONFIG_FILES` - (Reserved for future use).
+    #
+    #   * `INSTANCE_ID` - The instance ID to use.
+    #
+    #   * `JDBC_CONNECTION_URL` - The URL for the JDBC connection.
+    #
+    #   * `JDBC_ENFORCE_SSL` - A Boolean string (true, false) specifying
+    #     whether SSL with hostname matching will be enforced for the JDBC
+    #     connection on the client. The default is false.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] physical_connection_requirements
@@ -850,7 +915,7 @@ module Aws::Glue
     #   @return [Array<String>]
     #
     # @!attribute [rw] connection_properties
-    #   A list of key-value pairs used as parameters for this connection.
+    #   These key-value pairs define parameters for the connection.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] physical_connection_requirements
@@ -962,12 +1027,21 @@ module Aws::Glue
     #
     # @!attribute [rw] configuration
     #   Crawler configuration information. This versioned JSON string allows
-    #   users to specify aspects of a crawler's behavior. For more
-    #   information, see [Configuring a Crawler][1].
+    #   users to specify aspects of a Crawler's behavior.
     #
+    #   You can use this field to force partitions to inherit metadata such
+    #   as classification, input format, output format, serde information,
+    #   and schema from their parent table, rather than detect this
+    #   information separately for each partition. Use the following JSON
+    #   string to specify that behavior:
     #
+    #   Example: `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
+    #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
+    #   @return [String]
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
+    # @!attribute [rw] crawler_security_configuration
+    #   The name of the SecurityConfiguration structure to be used by this
+    #   Crawler.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Crawler AWS API Documentation
@@ -988,7 +1062,8 @@ module Aws::Glue
       :last_updated,
       :last_crawl,
       :version,
-      :configuration)
+      :configuration,
+      :crawler_security_configuration)
       include Aws::Structure
     end
 
@@ -1212,6 +1287,7 @@ module Aws::Glue
     #           delete_behavior: "LOG", # accepts LOG, DELETE_FROM_DATABASE, DEPRECATE_IN_DATABASE
     #         },
     #         configuration: "CrawlerConfiguration",
+    #         crawler_security_configuration: "CrawlerSecurityConfiguration",
     #       }
     #
     # @!attribute [rw] name
@@ -1263,12 +1339,21 @@ module Aws::Glue
     #
     # @!attribute [rw] configuration
     #   Crawler configuration information. This versioned JSON string allows
-    #   users to specify aspects of a crawler's behavior. For more
-    #   information, see [Configuring a Crawler][1].
+    #   users to specify aspects of a Crawler's behavior.
     #
+    #   You can use this field to force partitions to inherit metadata such
+    #   as classification, input format, output format, serde information,
+    #   and schema from their parent table, rather than detect this
+    #   information separately for each partition. Use the following JSON
+    #   string to specify that behavior:
     #
+    #   Example: `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
+    #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
+    #   @return [String]
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
+    # @!attribute [rw] crawler_security_configuration
+    #   The name of the SecurityConfiguration structure to be used by this
+    #   Crawler.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCrawlerRequest AWS API Documentation
@@ -1283,7 +1368,8 @@ module Aws::Glue
       :classifiers,
       :table_prefix,
       :schema_change_policy,
-      :configuration)
+      :configuration,
+      :crawler_security_configuration)
       include Aws::Structure
     end
 
@@ -1341,6 +1427,7 @@ module Aws::Glue
     #         number_of_nodes: 1,
     #         extra_python_libs_s3_path: "GenericString",
     #         extra_jars_s3_path: "GenericString",
+    #         security_configuration: "NameString",
     #       }
     #
     # @!attribute [rw] endpoint_name
@@ -1405,6 +1492,11 @@ module Aws::Glue
     #   in your DevEndpoint.
     #   @return [String]
     #
+    # @!attribute [rw] security_configuration
+    #   The name of the SecurityConfiguration structure to be used with this
+    #   DevEndpoint.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDevEndpointRequest AWS API Documentation
     #
     class CreateDevEndpointRequest < Struct.new(
@@ -1416,7 +1508,8 @@ module Aws::Glue
       :public_keys,
       :number_of_nodes,
       :extra_python_libs_s3_path,
-      :extra_jars_s3_path)
+      :extra_jars_s3_path,
+      :security_configuration)
       include Aws::Structure
     end
 
@@ -1475,6 +1568,11 @@ module Aws::Glue
     #   The reason for a current failure in this DevEndpoint.
     #   @return [String]
     #
+    # @!attribute [rw] security_configuration
+    #   The name of the SecurityConfiguration structure being used with this
+    #   DevEndpoint.
+    #   @return [String]
+    #
     # @!attribute [rw] created_timestamp
     #   The point in time at which this DevEndpoint was created.
     #   @return [Time]
@@ -1495,6 +1593,7 @@ module Aws::Glue
       :extra_python_libs_s3_path,
       :extra_jars_s3_path,
       :failure_reason,
+      :security_configuration,
       :created_timestamp)
       include Aws::Structure
     end
@@ -1565,6 +1664,7 @@ module Aws::Glue
     #         notification_property: {
     #           notify_delay_after: 1,
     #         },
+    #         security_configuration: "NameString",
     #       }
     #
     # @!attribute [rw] name
@@ -1634,12 +1734,19 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] timeout
-    #   The job timeout in minutes. The default is 2880 minutes (48 hours).
+    #   The job timeout in minutes. This is the maximum time that a job run
+    #   can consume resources before it is terminated and enters `TIMEOUT`
+    #   status. The default is 2,880 minutes (48 hours).
     #   @return [Integer]
     #
     # @!attribute [rw] notification_property
     #   Specifies configuration properties of a job notification.
     #   @return [Types::NotificationProperty]
+    #
+    # @!attribute [rw] security_configuration
+    #   The name of the SecurityConfiguration structure to be used with this
+    #   job.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateJobRequest AWS API Documentation
     #
@@ -1655,7 +1762,8 @@ module Aws::Glue
       :max_retries,
       :allocated_capacity,
       :timeout,
-      :notification_property)
+      :notification_property,
+      :security_configuration)
       include Aws::Structure
     end
 
@@ -1856,6 +1964,61 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateSecurityConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NameString", # required
+    #         encryption_configuration: { # required
+    #           s3_encryption: [
+    #             {
+    #               s3_encryption_mode: "DISABLED", # accepts DISABLED, SSE-KMS, SSE-S3
+    #               kms_key_arn: "KmsKeyArn",
+    #             },
+    #           ],
+    #           cloud_watch_encryption: {
+    #             cloud_watch_encryption_mode: "DISABLED", # accepts DISABLED, SSE-KMS
+    #             kms_key_arn: "KmsKeyArn",
+    #           },
+    #           job_bookmarks_encryption: {
+    #             job_bookmarks_encryption_mode: "DISABLED", # accepts DISABLED, CSE-KMS
+    #             kms_key_arn: "KmsKeyArn",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name for the new security configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration for the new security configuration.
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateSecurityConfigurationRequest AWS API Documentation
+    #
+    class CreateSecurityConfigurationRequest < Struct.new(
+      :name,
+      :encryption_configuration)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name assigned to the new security configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time at which the new security configuration was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateSecurityConfigurationResponse AWS API Documentation
+    #
+    class CreateSecurityConfigurationResponse < Struct.new(
+      :name,
+      :created_timestamp)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateTableRequest
     #   data as a hash:
     #
@@ -1979,6 +2142,7 @@ module Aws::Glue
     #             notification_property: {
     #               notify_delay_after: 1,
     #             },
+    #             security_configuration: "NameString",
     #           },
     #         ],
     #         description: "DescriptionString",
@@ -2132,6 +2296,30 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Contains configuration information for maintaining Data Catalog
+    # security.
+    #
+    # @note When making an API call, you may pass DataCatalogEncryptionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         encryption_at_rest: {
+    #           catalog_encryption_mode: "DISABLED", # required, accepts DISABLED, SSE-KMS
+    #           sse_aws_kms_key_id: "NameString",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] encryption_at_rest
+    #   Specifies encryption-at-rest configuration for the Data Catalog.
+    #   @return [Types::EncryptionAtRest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataCatalogEncryptionSettings AWS API Documentation
+    #
+    class DataCatalogEncryptionSettings < Struct.new(
+      :encryption_at_rest)
+      include Aws::Structure
+    end
+
     # The `Database` object represents a logical grouping of tables that may
     # reside in a Hive metastore or an RDBMS.
     #
@@ -2149,8 +2337,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   A list of key-value pairs that define parameters and properties of
-    #   the database.
+    #   These key-value pairs define parameters and properties of the
+    #   database.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] create_time
@@ -2196,8 +2384,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   A list of key-value pairs that define parameters and properties of
-    #   the database.
+    #   Thes key-value pairs define parameters and properties of the
+    #   database.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DatabaseInput AWS API Documentation
@@ -2405,6 +2593,28 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeletePartitionResponse AWS API Documentation
     #
     class DeletePartitionResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteSecurityConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NameString", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the security configuration to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteSecurityConfigurationRequest AWS API Documentation
+    #
+    class DeleteSecurityConfigurationRequest < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteSecurityConfigurationResponse AWS API Documentation
+    #
+    class DeleteSecurityConfigurationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteTableRequest
     #   data as a hash:
@@ -2662,6 +2872,11 @@ module Aws::Glue
     #    </note>
     #   @return [Array<String>]
     #
+    # @!attribute [rw] security_configuration
+    #   The name of the SecurityConfiguration structure to be used with this
+    #   DevEndpoint.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DevEndpoint AWS API Documentation
     #
     class DevEndpoint < Struct.new(
@@ -2684,7 +2899,8 @@ module Aws::Glue
       :created_timestamp,
       :last_modified_timestamp,
       :public_key,
-      :public_keys)
+      :public_keys,
+      :security_configuration)
       include Aws::Structure
     end
 
@@ -2745,6 +2961,75 @@ module Aws::Glue
     #
     class DynamoDBTarget < Struct.new(
       :path)
+      include Aws::Structure
+    end
+
+    # Specifies encryption-at-rest configuration for the Data Catalog.
+    #
+    # @note When making an API call, you may pass EncryptionAtRest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_encryption_mode: "DISABLED", # required, accepts DISABLED, SSE-KMS
+    #         sse_aws_kms_key_id: "NameString",
+    #       }
+    #
+    # @!attribute [rw] catalog_encryption_mode
+    #   The encryption-at-rest mode for encrypting Data Catalog data.
+    #   @return [String]
+    #
+    # @!attribute [rw] sse_aws_kms_key_id
+    #   The ID of the AWS KMS key to use for encryption at rest.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/EncryptionAtRest AWS API Documentation
+    #
+    class EncryptionAtRest < Struct.new(
+      :catalog_encryption_mode,
+      :sse_aws_kms_key_id)
+      include Aws::Structure
+    end
+
+    # Specifies an encryption configuration.
+    #
+    # @note When making an API call, you may pass EncryptionConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         s3_encryption: [
+    #           {
+    #             s3_encryption_mode: "DISABLED", # accepts DISABLED, SSE-KMS, SSE-S3
+    #             kms_key_arn: "KmsKeyArn",
+    #           },
+    #         ],
+    #         cloud_watch_encryption: {
+    #           cloud_watch_encryption_mode: "DISABLED", # accepts DISABLED, SSE-KMS
+    #           kms_key_arn: "KmsKeyArn",
+    #         },
+    #         job_bookmarks_encryption: {
+    #           job_bookmarks_encryption_mode: "DISABLED", # accepts DISABLED, CSE-KMS
+    #           kms_key_arn: "KmsKeyArn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_encryption
+    #   The encryption configuration for S3 data.
+    #   @return [Array<Types::S3Encryption>]
+    #
+    # @!attribute [rw] cloud_watch_encryption
+    #   The encryption configuration for CloudWatch.
+    #   @return [Types::CloudWatchEncryption]
+    #
+    # @!attribute [rw] job_bookmarks_encryption
+    #   The encryption configuration for Job Bookmarks.
+    #   @return [Types::JobBookmarksEncryption]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/EncryptionConfiguration AWS API Documentation
+    #
+    class EncryptionConfiguration < Struct.new(
+      :s3_encryption,
+      :cloud_watch_encryption,
+      :job_bookmarks_encryption)
       include Aws::Structure
     end
 
@@ -3765,6 +4050,76 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetSecurityConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NameString", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the security configuration to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSecurityConfigurationRequest AWS API Documentation
+    #
+    class GetSecurityConfigurationRequest < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_configuration
+    #   The requested security configuration
+    #   @return [Types::SecurityConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSecurityConfigurationResponse AWS API Documentation
+    #
+    class GetSecurityConfigurationResponse < Struct.new(
+      :security_configuration)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSecurityConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "GenericString",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSecurityConfigurationsRequest AWS API Documentation
+    #
+    class GetSecurityConfigurationsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_configurations
+    #   A list of security configurations.
+    #   @return [Array<Types::SecurityConfiguration>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if there are more security configurations to
+    #   return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSecurityConfigurationsResponse AWS API Documentation
+    #
+    class GetSecurityConfigurationsResponse < Struct.new(
+      :security_configurations,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetTableRequest
     #   data as a hash:
     #
@@ -4356,12 +4711,19 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] timeout
-    #   The job timeout in minutes.
+    #   The job timeout in minutes. This is the maximum time that a job run
+    #   can consume resources before it is terminated and enters `TIMEOUT`
+    #   status. The default is 2,880 minutes (48 hours).
     #   @return [Integer]
     #
     # @!attribute [rw] notification_property
     #   Specifies configuration properties of a job notification.
     #   @return [Types::NotificationProperty]
+    #
+    # @!attribute [rw] security_configuration
+    #   The name of the SecurityConfiguration structure to be used with this
+    #   job.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Job AWS API Documentation
     #
@@ -4379,7 +4741,8 @@ module Aws::Glue
       :max_retries,
       :allocated_capacity,
       :timeout,
-      :notification_property)
+      :notification_property,
+      :security_configuration)
       include Aws::Structure
     end
 
@@ -4413,6 +4776,32 @@ module Aws::Glue
       :run,
       :attempt,
       :job_bookmark)
+      include Aws::Structure
+    end
+
+    # Specifies how Job bookmark data should be encrypted.
+    #
+    # @note When making an API call, you may pass JobBookmarksEncryption
+    #   data as a hash:
+    #
+    #       {
+    #         job_bookmarks_encryption_mode: "DISABLED", # accepts DISABLED, CSE-KMS
+    #         kms_key_arn: "KmsKeyArn",
+    #       }
+    #
+    # @!attribute [rw] job_bookmarks_encryption_mode
+    #   The encryption mode to use for Job bookmarks data.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The AWS ARN of the KMS key to be used to encrypt the data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobBookmarksEncryption AWS API Documentation
+    #
+    class JobBookmarksEncryption < Struct.new(
+      :job_bookmarks_encryption_mode,
+      :kms_key_arn)
       include Aws::Structure
     end
 
@@ -4527,12 +4916,30 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] timeout
-    #   The job run timeout in minutes.
+    #   The JobRun timeout in minutes. This is the maximum time that a job
+    #   run can consume resources before it is terminated and enters
+    #   `TIMEOUT` status. The default is 2,880 minutes (48 hours). This
+    #   overrides the timeout value set in the parent job.
     #   @return [Integer]
     #
     # @!attribute [rw] notification_property
     #   Specifies configuration properties of a job run notification.
     #   @return [Types::NotificationProperty]
+    #
+    # @!attribute [rw] security_configuration
+    #   The name of the SecurityConfiguration structure to be used with this
+    #   job run.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_name
+    #   The name of the log group for secure logging, that can be
+    #   server-side encrypted in CloudWatch using KMS. This name can be
+    #   `/aws-glue/jobs/`, in which case the default encryption is `NONE`.
+    #   If you add a role name and SecurityConfiguration name (in other
+    #   words,
+    #   `/aws-glue/jobs-yourRoleName-yourSecurityConfigurationName/`), then
+    #   that security configuration will be used to encrypt the log group.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobRun AWS API Documentation
     #
@@ -4552,7 +4959,9 @@ module Aws::Glue
       :allocated_capacity,
       :execution_time,
       :timeout,
-      :notification_property)
+      :notification_property,
+      :security_configuration,
+      :log_group_name)
       include Aws::Structure
     end
 
@@ -4586,6 +4995,7 @@ module Aws::Glue
     #         notification_property: {
     #           notify_delay_after: 1,
     #         },
+    #         security_configuration: "NameString",
     #       }
     #
     # @!attribute [rw] description
@@ -4650,12 +5060,19 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] timeout
-    #   The job timeout in minutes. The default is 2880 minutes (48 hours).
+    #   The job timeout in minutes. This is the maximum time that a job run
+    #   can consume resources before it is terminated and enters `TIMEOUT`
+    #   status. The default is 2,880 minutes (48 hours).
     #   @return [Integer]
     #
     # @!attribute [rw] notification_property
     #   Specifies configuration properties of a job notification.
     #   @return [Types::NotificationProperty]
+    #
+    # @!attribute [rw] security_configuration
+    #   The name of the SecurityConfiguration structure to be used with this
+    #   job.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobUpdate AWS API Documentation
     #
@@ -4670,7 +5087,8 @@ module Aws::Glue
       :max_retries,
       :allocated_capacity,
       :timeout,
-      :notification_property)
+      :notification_property,
+      :security_configuration)
       include Aws::Structure
     end
 
@@ -4928,7 +5346,7 @@ module Aws::Glue
     #   @return [Types::StorageDescriptor]
     #
     # @!attribute [rw] parameters
-    #   Partition parameters, in the form of a list of key-value pairs.
+    #   These key-value pairs define partition parameters.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] last_analyzed_time
@@ -5035,7 +5453,7 @@ module Aws::Glue
     #   @return [Types::StorageDescriptor]
     #
     # @!attribute [rw] parameters
-    #   Partition parameters, in the form of a list of key-value pairs.
+    #   These key-value pairs define partition parameters.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] last_analyzed_time
@@ -5094,8 +5512,9 @@ module Aws::Glue
     #   @return [Array<String>]
     #
     # @!attribute [rw] availability_zone
-    #   The connection's availability zone. This field is deprecated and
-    #   has no effect.
+    #   The connection's availability zone. This field is redundant, since
+    #   the specified subnet implies the availability zone to be used. The
+    #   field must be populated now, but will be deprecated in the future.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PhysicalConnectionRequirements AWS API Documentation
@@ -5159,6 +5578,41 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutDataCatalogEncryptionSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         data_catalog_encryption_settings: { # required
+    #           encryption_at_rest: {
+    #             catalog_encryption_mode: "DISABLED", # required, accepts DISABLED, SSE-KMS
+    #             sse_aws_kms_key_id: "NameString",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog for which to set the security
+    #   configuration. If none is supplied, the AWS account ID is used by
+    #   default.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_catalog_encryption_settings
+    #   The security configuration to set.
+    #   @return [Types::DataCatalogEncryptionSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutDataCatalogEncryptionSettingsRequest AWS API Documentation
+    #
+    class PutDataCatalogEncryptionSettingsRequest < Struct.new(
+      :catalog_id,
+      :data_catalog_encryption_settings)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutDataCatalogEncryptionSettingsResponse AWS API Documentation
+    #
+    class PutDataCatalogEncryptionSettingsResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass ResetJobBookmarkRequest
     #   data as a hash:
     #
@@ -5211,6 +5665,32 @@ module Aws::Glue
     class ResourceUri < Struct.new(
       :resource_type,
       :uri)
+      include Aws::Structure
+    end
+
+    # Specifies how S3 data should be encrypted.
+    #
+    # @note When making an API call, you may pass S3Encryption
+    #   data as a hash:
+    #
+    #       {
+    #         s3_encryption_mode: "DISABLED", # accepts DISABLED, SSE-KMS, SSE-S3
+    #         kms_key_arn: "KmsKeyArn",
+    #       }
+    #
+    # @!attribute [rw] s3_encryption_mode
+    #   The encryption mode to use for S3 data.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The AWS ARN of the KMS key to be used to encrypt the data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3Encryption AWS API Documentation
+    #
+    class S3Encryption < Struct.new(
+      :s3_encryption_mode,
+      :kms_key_arn)
       include Aws::Structure
     end
 
@@ -5295,6 +5775,30 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies a security configuration.
+    #
+    # @!attribute [rw] name
+    #   The name of the security configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time_stamp
+    #   The time at which this security configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration associated with this security
+    #   configuration.
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SecurityConfiguration AWS API Documentation
+    #
+    class SecurityConfiguration < Struct.new(
+      :name,
+      :created_time_stamp,
+      :encryption_configuration)
+      include Aws::Structure
+    end
+
     # Defines a non-overlapping region of a table's partitions, allowing
     # multiple requests to be executed in parallel.
     #
@@ -5348,8 +5852,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   A list of initialization parameters for the SerDe, in key-value
-    #   form.
+    #   These key-value pairs define initialization parameters for the
+    #   SerDe.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SerDeInfo AWS API Documentation
@@ -5455,6 +5959,7 @@ module Aws::Glue
     #         notification_property: {
     #           notify_delay_after: 1,
     #         },
+    #         security_configuration: "NameString",
     #       }
     #
     # @!attribute [rw] job_name
@@ -5499,13 +6004,20 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] timeout
-    #   The job run timeout in minutes. It overrides the timeout value of
-    #   the job.
+    #   The JobRun timeout in minutes. This is the maximum time that a job
+    #   run can consume resources before it is terminated and enters
+    #   `TIMEOUT` status. The default is 2,880 minutes (48 hours). This
+    #   overrides the timeout value set in the parent job.
     #   @return [Integer]
     #
     # @!attribute [rw] notification_property
     #   Specifies configuration properties of a job run notification.
     #   @return [Types::NotificationProperty]
+    #
+    # @!attribute [rw] security_configuration
+    #   The name of the SecurityConfiguration structure to be used with this
+    #   job run.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartJobRunRequest AWS API Documentation
     #
@@ -5515,7 +6027,8 @@ module Aws::Glue
       :arguments,
       :allocated_capacity,
       :timeout,
-      :notification_property)
+      :notification_property,
+      :security_configuration)
       include Aws::Structure
     end
 
@@ -5815,7 +6328,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   Properties associated with this table, as a list of key-value pairs.
+    #   These key-value pairs define properties associated with the table.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] created_by
@@ -5979,7 +6492,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   Properties associated with this table, as a list of key-value pairs.
+    #   These key-value pairs define properties associated with the table.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TableInput AWS API Documentation
@@ -6116,6 +6629,7 @@ module Aws::Glue
     #             notification_property: {
     #               notify_delay_after: 1,
     #             },
+    #             security_configuration: "NameString",
     #           },
     #         ],
     #         predicate: {
@@ -6298,6 +6812,7 @@ module Aws::Glue
     #           delete_behavior: "LOG", # accepts LOG, DELETE_FROM_DATABASE, DEPRECATE_IN_DATABASE
     #         },
     #         configuration: "CrawlerConfiguration",
+    #         crawler_security_configuration: "CrawlerSecurityConfiguration",
     #       }
     #
     # @!attribute [rw] name
@@ -6349,12 +6864,21 @@ module Aws::Glue
     #
     # @!attribute [rw] configuration
     #   Crawler configuration information. This versioned JSON string allows
-    #   users to specify aspects of a crawler's behavior. For more
-    #   information, see [Configuring a Crawler][1].
+    #   users to specify aspects of a Crawler's behavior.
     #
+    #   You can use this field to force partitions to inherit metadata such
+    #   as classification, input format, output format, serde information,
+    #   and schema from their parent table, rather than detect this
+    #   information separately for each partition. Use the following JSON
+    #   string to specify that behavior:
     #
+    #   Example: `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
+    #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
+    #   @return [String]
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
+    # @!attribute [rw] crawler_security_configuration
+    #   The name of the SecurityConfiguration structure to be used by this
+    #   Crawler.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCrawlerRequest AWS API Documentation
@@ -6369,7 +6893,8 @@ module Aws::Glue
       :classifiers,
       :table_prefix,
       :schema_change_policy,
-      :configuration)
+      :configuration,
+      :crawler_security_configuration)
       include Aws::Structure
     end
 
@@ -6580,6 +7105,7 @@ module Aws::Glue
     #           notification_property: {
     #             notify_delay_after: 1,
     #           },
+    #           security_configuration: "NameString",
     #         },
     #       }
     #
@@ -6859,6 +7385,7 @@ module Aws::Glue
     #               notification_property: {
     #                 notify_delay_after: 1,
     #               },
+    #               security_configuration: "NameString",
     #             },
     #           ],
     #           predicate: {
