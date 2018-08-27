@@ -526,6 +526,10 @@
     "models": "shield/2016-06-02",
     "endpoint": "shield"
   },
+  "Signer": {
+    "models": "signer/2017-08-25",
+    "endpoint": "signer"
+  },
   "SimpleDB": {
     "models": "sdb/2009-04-15",
     "endpoint": "sdb"

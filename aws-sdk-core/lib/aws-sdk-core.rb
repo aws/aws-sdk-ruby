@@ -155,6 +155,7 @@ module Aws
     ServiceCatalog
     ServiceDiscovery
     Shield
+    Signer
     SimpleDB
     Snowball
     States

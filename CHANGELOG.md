@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
+* Feature - Aws::IoTAnalytics - Updated the API, and documentation for AWS IoT Analytics.
+
+* Feature - Aws::Redshift - Updated the documentation for Amazon Redshift.
+
+* Feature - Aws::Signer - Added support for a new service, AWS Signer.
+
 2.11.117 (2018-08-25)
 ------------------
 

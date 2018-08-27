@@ -317,6 +317,7 @@ to be backwards compatible.
 | AWS Server Migration Service                          | SMS                             | 2016-10-24  |
 | AWS Service Catalog                                   | ServiceCatalog                  | 2015-12-10  |
 | AWS Shield                                            | Shield                          | 2016-06-02  |
+| AWS Signer                                            | Signer                          | 2017-08-25  |
 | AWS Step Functions                                    | States                          | 2016-11-23  |
 | AWS Storage Gateway                                   | StorageGateway                  | 2013-06-30  |
 | AWS Support                                           | Support                         | 2013-04-15  |
