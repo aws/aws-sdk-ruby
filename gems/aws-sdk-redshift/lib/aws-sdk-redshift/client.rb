@@ -5927,7 +5927,25 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Changes the cluster's type, node type, or number of nodes.
+    # Changes the size of the cluster. You can change the cluster's type,
+    # or change the number or type of nodes. The default behavior is to use
+    # the elastic resize method. With an elastic resize your cluster is
+    # avaialble for read and write operations more quickly than with the
+    # classic resize method.
+    #
+    # Elastic resize operations have the following restrictions:
+    #
+    # * You can only resize clusters of the following types:
+    #
+    #   * dc2.large
+    #
+    #   * dc2.8xlarge
+    #
+    #   * ds2.xlarge
+    #
+    #   * ds2.8xlarge
+    #
+    # * The type of nodes you add must match the node type for the cluster.
     #
     # @option params [required, String] :cluster_identifier
     #   The unique identifier for the cluster to resize.
@@ -5943,7 +5961,8 @@ module Aws::Redshift
     #
     # @option params [Boolean] :classic
     #   A boolean value indicating whether the resize operation is using the
-    #   classic resize process.
+    #   classic resize process. If you don't provide this parameter or set
+    #   the value to `false` the resize type is elastic.
     #
     # @return [Types::ResizeClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6751,7 +6770,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

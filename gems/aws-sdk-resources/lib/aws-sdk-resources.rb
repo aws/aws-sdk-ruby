@@ -148,5 +148,6 @@ module Aws
   autoload :WorkMail, 'aws-sdk-workmail'
   autoload :WorkSpaces, 'aws-sdk-workspaces'
   autoload :XRay, 'aws-sdk-xray'
+  autoload :signer, 'aws-sdk-signer'
   # end service gems
 end

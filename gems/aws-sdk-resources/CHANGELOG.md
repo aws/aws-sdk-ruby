@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.23.0 (2018-08-27)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-signer` gem.
+
 3.22.0 (2018-07-12)
 ------------------
 

@@ -157,6 +157,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-workmail', '~> 1')
   spec.add_dependency('aws-sdk-workspaces', '~> 1')
   spec.add_dependency('aws-sdk-xray', '~> 1')
+  spec.add_dependency('aws-sdk-signer', '~> 1')
   # end service gems
 
   spec.metadata = {

@@ -8,16 +8,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-redshift/types'
-require_relative 'aws-sdk-redshift/client_api'
-require_relative 'aws-sdk-redshift/client'
-require_relative 'aws-sdk-redshift/errors'
-require_relative 'aws-sdk-redshift/waiters'
-require_relative 'aws-sdk-redshift/resource'
-require_relative 'aws-sdk-redshift/customizations'
+require_relative 'aws-sdk-signer/types'
+require_relative 'aws-sdk-signer/client_api'
+require_relative 'aws-sdk-signer/client'
+require_relative 'aws-sdk-signer/errors'
+require_relative 'aws-sdk-signer/waiters'
+require_relative 'aws-sdk-signer/resource'
+require_relative 'aws-sdk-signer/customizations'
 
-# This module provides support for Amazon Redshift. This module is available in the
-# `aws-sdk-redshift` gem.
+# This module provides support for AWS Signer. This module is available in the
+# `aws-sdk-signer` gem.
 #
 # # Client
 #
@@ -29,20 +29,20 @@ require_relative 'aws-sdk-redshift/customizations'
 #
 # # Errors
 #
-# Errors returned from Amazon Redshift all
+# Errors returned from AWS Signer all
 # extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
-#     rescue Aws::Redshift::Errors::ServiceError
+#     rescue Aws::signer::Errors::ServiceError
 #       # rescues all service API errors
 #     end
 #
 # See {Errors} for more information.
 #
 # @service
-module Aws::Redshift
+module Aws::signer
 
-  GEM_VERSION = '1.8.0'
+  GEM_VERSION = '1.0.0'
 
 end

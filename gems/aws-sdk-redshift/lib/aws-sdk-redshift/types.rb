@@ -5910,7 +5910,8 @@ module Aws::Redshift
     #
     # @!attribute [rw] classic
     #   A boolean value indicating whether the resize operation is using the
-    #   classic resize process.
+    #   classic resize process. If you don't provide this parameter or set
+    #   the value to `false` the resize type is elastic.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeClusterMessage AWS API Documentation

@@ -36,6 +36,7 @@ module Aws::IoT
     AttachSecurityProfileResponse = Shapes::StructureShape.new(name: 'AttachSecurityProfileResponse')
     AttachThingPrincipalRequest = Shapes::StructureShape.new(name: 'AttachThingPrincipalRequest')
     AttachThingPrincipalResponse = Shapes::StructureShape.new(name: 'AttachThingPrincipalResponse')
+    AttributeKey = Shapes::StringShape.new(name: 'AttributeKey')
     AttributeName = Shapes::StringShape.new(name: 'AttributeName')
     AttributePayload = Shapes::StructureShape.new(name: 'AttributePayload')
     AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
@@ -77,6 +78,7 @@ module Aws::IoT
     AwsIotJobArn = Shapes::StringShape.new(name: 'AwsIotJobArn')
     AwsIotJobId = Shapes::StringShape.new(name: 'AwsIotJobId')
     AwsIotSqlVersion = Shapes::StringShape.new(name: 'AwsIotSqlVersion')
+    AwsJobExecutionsRolloutConfig = Shapes::StructureShape.new(name: 'AwsJobExecutionsRolloutConfig')
     Behavior = Shapes::StructureShape.new(name: 'Behavior')
     BehaviorCriteria = Shapes::StructureShape.new(name: 'BehaviorCriteria')
     BehaviorMetric = Shapes::StringShape.new(name: 'BehaviorMetric')
@@ -103,6 +105,7 @@ module Aws::IoT
     CertificateDescription = Shapes::StructureShape.new(name: 'CertificateDescription')
     CertificateId = Shapes::StringShape.new(name: 'CertificateId')
     CertificateName = Shapes::StringShape.new(name: 'CertificateName')
+    CertificatePathOnDevice = Shapes::StringShape.new(name: 'CertificatePathOnDevice')
     CertificatePem = Shapes::StringShape.new(name: 'CertificatePem')
     CertificateSigningRequest = Shapes::StringShape.new(name: 'CertificateSigningRequest')
     CertificateStateException = Shapes::StructureShape.new(name: 'CertificateStateException')
@@ -190,6 +193,7 @@ module Aws::IoT
     DeleteScheduledAudits = Shapes::BooleanShape.new(name: 'DeleteScheduledAudits')
     DeleteSecurityProfileRequest = Shapes::StructureShape.new(name: 'DeleteSecurityProfileRequest')
     DeleteSecurityProfileResponse = Shapes::StructureShape.new(name: 'DeleteSecurityProfileResponse')
+    DeleteStream = Shapes::BooleanShape.new(name: 'DeleteStream')
     DeleteStreamRequest = Shapes::StructureShape.new(name: 'DeleteStreamRequest')
     DeleteStreamResponse = Shapes::StructureShape.new(name: 'DeleteStreamResponse')
     DeleteThingGroupRequest = Shapes::StructureShape.new(name: 'DeleteThingGroupRequest')
@@ -244,6 +248,7 @@ module Aws::IoT
     DescribeThingTypeRequest = Shapes::StructureShape.new(name: 'DescribeThingTypeRequest')
     DescribeThingTypeResponse = Shapes::StructureShape.new(name: 'DescribeThingTypeResponse')
     Description = Shapes::StringShape.new(name: 'Description')
+    Destination = Shapes::StructureShape.new(name: 'Destination')
     DetachPolicyRequest = Shapes::StructureShape.new(name: 'DetachPolicyRequest')
     DetachPrincipalPolicyRequest = Shapes::StructureShape.new(name: 'DetachPrincipalPolicyRequest')
     DetachSecurityProfileRequest = Shapes::StructureShape.new(name: 'DetachSecurityProfileRequest')
@@ -284,11 +289,13 @@ module Aws::IoT
     FailedChecksCount = Shapes::IntegerShape.new(name: 'FailedChecksCount')
     FailedThings = Shapes::IntegerShape.new(name: 'FailedThings')
     FileId = Shapes::IntegerShape.new(name: 'FileId')
+    FileLocation = Shapes::StructureShape.new(name: 'FileLocation')
     FileName = Shapes::StringShape.new(name: 'FileName')
     FirehoseAction = Shapes::StructureShape.new(name: 'FirehoseAction')
     FirehoseSeparator = Shapes::StringShape.new(name: 'FirehoseSeparator')
     Flag = Shapes::BooleanShape.new(name: 'Flag')
     ForceDelete = Shapes::BooleanShape.new(name: 'ForceDelete')
+    ForceDeleteAWSJob = Shapes::BooleanShape.new(name: 'ForceDeleteAWSJob')
     ForceFlag = Shapes::BooleanShape.new(name: 'ForceFlag')
     Forced = Shapes::BooleanShape.new(name: 'Forced')
     FunctionArn = Shapes::StringShape.new(name: 'FunctionArn')
@@ -452,6 +459,7 @@ module Aws::IoT
     Marker = Shapes::StringShape.new(name: 'Marker')
     MaxJobExecutionsPerMin = Shapes::IntegerShape.new(name: 'MaxJobExecutionsPerMin')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MaximumPerMinute = Shapes::IntegerShape.new(name: 'MaximumPerMinute')
     Message = Shapes::StringShape.new(name: 'Message')
     MessageFormat = Shapes::StringShape.new(name: 'MessageFormat')
     MetricValue = Shapes::StructureShape.new(name: 'MetricValue')
@@ -482,6 +490,7 @@ module Aws::IoT
     PartitionKey = Shapes::StringShape.new(name: 'PartitionKey')
     PayloadField = Shapes::StringShape.new(name: 'PayloadField')
     Percentage = Shapes::IntegerShape.new(name: 'Percentage')
+    Platform = Shapes::StringShape.new(name: 'Platform')
     Policies = Shapes::ListShape.new(name: 'Policies')
     Policy = Shapes::StructureShape.new(name: 'Policy')
     PolicyArn = Shapes::StringShape.new(name: 'PolicyArn')
@@ -497,6 +506,7 @@ module Aws::IoT
     PolicyVersions = Shapes::ListShape.new(name: 'PolicyVersions')
     Port = Shapes::IntegerShape.new(name: 'Port')
     Ports = Shapes::ListShape.new(name: 'Ports')
+    Prefix = Shapes::StringShape.new(name: 'Prefix')
     PresignedUrlConfig = Shapes::StructureShape.new(name: 'PresignedUrlConfig')
     Principal = Shapes::StringShape.new(name: 'Principal')
     PrincipalArn = Shapes::StringShape.new(name: 'PrincipalArn')
@@ -562,6 +572,7 @@ module Aws::IoT
     RuleName = Shapes::StringShape.new(name: 'RuleName')
     S3Action = Shapes::StructureShape.new(name: 'S3Action')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
+    S3Destination = Shapes::StructureShape.new(name: 'S3Destination')
     S3FileUrl = Shapes::StringShape.new(name: 'S3FileUrl')
     S3FileUrlList = Shapes::ListShape.new(name: 'S3FileUrlList')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
@@ -602,12 +613,15 @@ module Aws::IoT
     Signature = Shapes::BlobShape.new(name: 'Signature')
     SignatureAlgorithm = Shapes::StringShape.new(name: 'SignatureAlgorithm')
     SigningJobId = Shapes::StringShape.new(name: 'SigningJobId')
+    SigningProfileName = Shapes::StringShape.new(name: 'SigningProfileName')
+    SigningProfileParameter = Shapes::StructureShape.new(name: 'SigningProfileParameter')
     SkyfallMaxResults = Shapes::IntegerShape.new(name: 'SkyfallMaxResults')
     SnsAction = Shapes::StructureShape.new(name: 'SnsAction')
     SqlParseException = Shapes::StructureShape.new(name: 'SqlParseException')
     SqsAction = Shapes::StructureShape.new(name: 'SqsAction')
     StartOnDemandAuditTaskRequest = Shapes::StructureShape.new(name: 'StartOnDemandAuditTaskRequest')
     StartOnDemandAuditTaskResponse = Shapes::StructureShape.new(name: 'StartOnDemandAuditTaskResponse')
+    StartSigningJobParameter = Shapes::StructureShape.new(name: 'StartSigningJobParameter')
     StartThingRegistrationTaskRequest = Shapes::StructureShape.new(name: 'StartThingRegistrationTaskRequest')
     StartThingRegistrationTaskResponse = Shapes::StructureShape.new(name: 'StartThingRegistrationTaskResponse')
     StateMachineName = Shapes::StringShape.new(name: 'StateMachineName')
@@ -783,7 +797,7 @@ module Aws::IoT
 
     AddThingToThingGroupResponse.struct_class = Types::AddThingToThingGroupResponse
 
-    AdditionalParameterMap.key = Shapes::ShapeRef.new(shape: Key)
+    AdditionalParameterMap.key = Shapes::ShapeRef.new(shape: AttributeKey)
     AdditionalParameterMap.value = Shapes::ShapeRef.new(shape: Value)
 
     AlertTarget.add_member(:alert_target_arn, Shapes::ShapeRef.new(shape: AlertTargetArn, required: true, location_name: "alertTargetArn"))
@@ -833,7 +847,7 @@ module Aws::IoT
     Attributes.key = Shapes::ShapeRef.new(shape: AttributeName)
     Attributes.value = Shapes::ShapeRef.new(shape: AttributeValue)
 
-    AttributesMap.key = Shapes::ShapeRef.new(shape: Key)
+    AttributesMap.key = Shapes::ShapeRef.new(shape: AttributeKey)
     AttributesMap.value = Shapes::ShapeRef.new(shape: Value)
 
     AuditCheckConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "enabled"))
@@ -911,6 +925,9 @@ module Aws::IoT
     AuthorizerSummary.struct_class = Types::AuthorizerSummary
 
     Authorizers.member = Shapes::ShapeRef.new(shape: AuthorizerSummary)
+
+    AwsJobExecutionsRolloutConfig.add_member(:maximum_per_minute, Shapes::ShapeRef.new(shape: MaximumPerMinute, location_name: "maximumPerMinute"))
+    AwsJobExecutionsRolloutConfig.struct_class = Types::AwsJobExecutionsRolloutConfig
 
     Behavior.add_member(:name, Shapes::ShapeRef.new(shape: BehaviorName, required: true, location_name: "name"))
     Behavior.add_member(:metric, Shapes::ShapeRef.new(shape: BehaviorMetric, location_name: "metric"))
@@ -1018,15 +1035,14 @@ module Aws::IoT
     CloudwatchMetricAction.struct_class = Types::CloudwatchMetricAction
 
     CodeSigning.add_member(:aws_signer_job_id, Shapes::ShapeRef.new(shape: SigningJobId, location_name: "awsSignerJobId"))
+    CodeSigning.add_member(:start_signing_job_parameter, Shapes::ShapeRef.new(shape: StartSigningJobParameter, location_name: "startSigningJobParameter"))
     CodeSigning.add_member(:custom_code_signing, Shapes::ShapeRef.new(shape: CustomCodeSigning, location_name: "customCodeSigning"))
     CodeSigning.struct_class = Types::CodeSigning
 
-    CodeSigningCertificateChain.add_member(:stream, Shapes::ShapeRef.new(shape: Stream, location_name: "stream"))
     CodeSigningCertificateChain.add_member(:certificate_name, Shapes::ShapeRef.new(shape: CertificateName, location_name: "certificateName"))
     CodeSigningCertificateChain.add_member(:inline_document, Shapes::ShapeRef.new(shape: InlineDocument, location_name: "inlineDocument"))
     CodeSigningCertificateChain.struct_class = Types::CodeSigningCertificateChain
 
-    CodeSigningSignature.add_member(:stream, Shapes::ShapeRef.new(shape: Stream, location_name: "stream"))
     CodeSigningSignature.add_member(:inline_document, Shapes::ShapeRef.new(shape: Signature, location_name: "inlineDocument"))
     CodeSigningSignature.struct_class = Types::CodeSigningSignature
 
@@ -1081,6 +1097,7 @@ module Aws::IoT
     CreateOTAUpdateRequest.add_member(:description, Shapes::ShapeRef.new(shape: OTAUpdateDescription, location_name: "description"))
     CreateOTAUpdateRequest.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, required: true, location_name: "targets"))
     CreateOTAUpdateRequest.add_member(:target_selection, Shapes::ShapeRef.new(shape: TargetSelection, location_name: "targetSelection"))
+    CreateOTAUpdateRequest.add_member(:aws_job_executions_rollout_config, Shapes::ShapeRef.new(shape: AwsJobExecutionsRolloutConfig, location_name: "awsJobExecutionsRolloutConfig"))
     CreateOTAUpdateRequest.add_member(:files, Shapes::ShapeRef.new(shape: OTAUpdateFiles, required: true, location_name: "files"))
     CreateOTAUpdateRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     CreateOTAUpdateRequest.add_member(:additional_parameters, Shapes::ShapeRef.new(shape: AdditionalParameterMap, location_name: "additionalParameters"))
@@ -1226,6 +1243,8 @@ module Aws::IoT
     DeleteJobRequest.struct_class = Types::DeleteJobRequest
 
     DeleteOTAUpdateRequest.add_member(:ota_update_id, Shapes::ShapeRef.new(shape: OTAUpdateId, required: true, location: "uri", location_name: "otaUpdateId"))
+    DeleteOTAUpdateRequest.add_member(:delete_stream, Shapes::ShapeRef.new(shape: DeleteStream, location: "querystring", location_name: "deleteStream"))
+    DeleteOTAUpdateRequest.add_member(:force_delete_aws_job, Shapes::ShapeRef.new(shape: ForceDeleteAWSJob, location: "querystring", location_name: "forceDeleteAWSJob"))
     DeleteOTAUpdateRequest.struct_class = Types::DeleteOTAUpdateRequest
 
     DeleteOTAUpdateResponse.struct_class = Types::DeleteOTAUpdateResponse
@@ -1460,6 +1479,9 @@ module Aws::IoT
     DescribeThingTypeResponse.add_member(:thing_type_metadata, Shapes::ShapeRef.new(shape: ThingTypeMetadata, location_name: "thingTypeMetadata"))
     DescribeThingTypeResponse.struct_class = Types::DescribeThingTypeResponse
 
+    Destination.add_member(:s3_destination, Shapes::ShapeRef.new(shape: S3Destination, location_name: "s3Destination"))
+    Destination.struct_class = Types::Destination
+
     DetachPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location: "uri", location_name: "policyName"))
     DetachPolicyRequest.add_member(:target, Shapes::ShapeRef.new(shape: PolicyTarget, required: true, location_name: "target"))
     DetachPolicyRequest.struct_class = Types::DetachPolicyRequest
@@ -1528,6 +1550,10 @@ module Aws::IoT
 
     ExplicitDeny.add_member(:policies, Shapes::ShapeRef.new(shape: Policies, location_name: "policies"))
     ExplicitDeny.struct_class = Types::ExplicitDeny
+
+    FileLocation.add_member(:stream, Shapes::ShapeRef.new(shape: Stream, location_name: "stream"))
+    FileLocation.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "s3Location"))
+    FileLocation.struct_class = Types::FileLocation
 
     FirehoseAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
     FirehoseAction.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "deliveryStreamName"))
@@ -2096,7 +2122,7 @@ module Aws::IoT
 
     OTAUpdateFile.add_member(:file_name, Shapes::ShapeRef.new(shape: FileName, location_name: "fileName"))
     OTAUpdateFile.add_member(:file_version, Shapes::ShapeRef.new(shape: OTAUpdateFileVersion, location_name: "fileVersion"))
-    OTAUpdateFile.add_member(:file_source, Shapes::ShapeRef.new(shape: Stream, location_name: "fileSource"))
+    OTAUpdateFile.add_member(:file_location, Shapes::ShapeRef.new(shape: FileLocation, location_name: "fileLocation"))
     OTAUpdateFile.add_member(:code_signing, Shapes::ShapeRef.new(shape: CodeSigning, location_name: "codeSigning"))
     OTAUpdateFile.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributesMap, location_name: "attributes"))
     OTAUpdateFile.struct_class = Types::OTAUpdateFile
@@ -2109,6 +2135,7 @@ module Aws::IoT
     OTAUpdateInfo.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateType, location_name: "lastModifiedDate"))
     OTAUpdateInfo.add_member(:description, Shapes::ShapeRef.new(shape: OTAUpdateDescription, location_name: "description"))
     OTAUpdateInfo.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "targets"))
+    OTAUpdateInfo.add_member(:aws_job_executions_rollout_config, Shapes::ShapeRef.new(shape: AwsJobExecutionsRolloutConfig, location_name: "awsJobExecutionsRolloutConfig"))
     OTAUpdateInfo.add_member(:target_selection, Shapes::ShapeRef.new(shape: TargetSelection, location_name: "targetSelection"))
     OTAUpdateInfo.add_member(:ota_update_files, Shapes::ShapeRef.new(shape: OTAUpdateFiles, location_name: "otaUpdateFiles"))
     OTAUpdateInfo.add_member(:ota_update_status, Shapes::ShapeRef.new(shape: OTAUpdateStatus, location_name: "otaUpdateStatus"))
@@ -2269,10 +2296,14 @@ module Aws::IoT
     S3Action.add_member(:canned_acl, Shapes::ShapeRef.new(shape: CannedAccessControlList, location_name: "cannedAcl"))
     S3Action.struct_class = Types::S3Action
 
+    S3Destination.add_member(:bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "bucket"))
+    S3Destination.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "prefix"))
+    S3Destination.struct_class = Types::S3Destination
+
     S3FileUrlList.member = Shapes::ShapeRef.new(shape: S3FileUrl)
 
-    S3Location.add_member(:bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "bucket"))
-    S3Location.add_member(:key, Shapes::ShapeRef.new(shape: S3Key, required: true, location_name: "key"))
+    S3Location.add_member(:bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "bucket"))
+    S3Location.add_member(:key, Shapes::ShapeRef.new(shape: S3Key, location_name: "key"))
     S3Location.add_member(:version, Shapes::ShapeRef.new(shape: S3Version, location_name: "version"))
     S3Location.struct_class = Types::S3Location
 
@@ -2345,6 +2376,11 @@ module Aws::IoT
     SetV2LoggingOptionsRequest.add_member(:disable_all_logs, Shapes::ShapeRef.new(shape: DisableAllLogs, location_name: "disableAllLogs"))
     SetV2LoggingOptionsRequest.struct_class = Types::SetV2LoggingOptionsRequest
 
+    SigningProfileParameter.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, location_name: "certificateArn"))
+    SigningProfileParameter.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
+    SigningProfileParameter.add_member(:certificate_path_on_device, Shapes::ShapeRef.new(shape: CertificatePathOnDevice, location_name: "certificatePathOnDevice"))
+    SigningProfileParameter.struct_class = Types::SigningProfileParameter
+
     SnsAction.add_member(:target_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "targetArn"))
     SnsAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
     SnsAction.add_member(:message_format, Shapes::ShapeRef.new(shape: MessageFormat, location_name: "messageFormat"))
@@ -2360,6 +2396,11 @@ module Aws::IoT
 
     StartOnDemandAuditTaskResponse.add_member(:task_id, Shapes::ShapeRef.new(shape: AuditTaskId, location_name: "taskId"))
     StartOnDemandAuditTaskResponse.struct_class = Types::StartOnDemandAuditTaskResponse
+
+    StartSigningJobParameter.add_member(:signing_profile_parameter, Shapes::ShapeRef.new(shape: SigningProfileParameter, location_name: "signingProfileParameter"))
+    StartSigningJobParameter.add_member(:signing_profile_name, Shapes::ShapeRef.new(shape: SigningProfileName, location_name: "signingProfileName"))
+    StartSigningJobParameter.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, location_name: "destination"))
+    StartSigningJobParameter.struct_class = Types::StartSigningJobParameter
 
     StartThingRegistrationTaskRequest.add_member(:template_body, Shapes::ShapeRef.new(shape: TemplateBody, required: true, location_name: "templateBody"))
     StartThingRegistrationTaskRequest.add_member(:input_file_bucket, Shapes::ShapeRef.new(shape: RegistryS3BucketName, required: true, location_name: "inputFileBucket"))
@@ -2936,6 +2977,7 @@ module Aws::IoT
         o.input = Shapes::ShapeRef.new(shape: CreateOTAUpdateRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateOTAUpdateResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -3021,6 +3063,7 @@ module Aws::IoT
         o.input = Shapes::ShapeRef.new(shape: CreateStreamRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateStreamResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -3180,6 +3223,7 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: VersionConflictException)
       end)
 
       api.add_operation(:delete_policy, Seahorse::Model::Operation.new.tap do |o|

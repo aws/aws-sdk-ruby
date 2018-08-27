@@ -974,6 +974,47 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
+    # Lists information about data set contents that have been created.
+    #
+    # @option params [required, String] :dataset_name
+    #   The name of the data set whose contents information you want to list.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this request.
+    #
+    # @return [Types::ListDatasetContentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDatasetContentsResponse#dataset_content_summaries #dataset_content_summaries} => Array&lt;Types::DatasetContentSummary&gt;
+    #   * {Types::ListDatasetContentsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_dataset_contents({
+    #     dataset_name: "DatasetName", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset_content_summaries #=> Array
+    #   resp.dataset_content_summaries[0].version #=> String
+    #   resp.dataset_content_summaries[0].status.state #=> String, one of "CREATING", "SUCCEEDED", "FAILED"
+    #   resp.dataset_content_summaries[0].status.reason #=> String
+    #   resp.dataset_content_summaries[0].creation_time #=> Time
+    #   resp.dataset_content_summaries[0].schedule_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload list_dataset_contents(params = {})
+    # @param [Hash] params ({})
+    def list_dataset_contents(params = {}, options = {})
+      req = build_request(:list_dataset_contents, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about data sets.
     #
     # @option params [String] :next_token
@@ -1619,7 +1660,7 @@ module Aws::IoTAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotanalytics'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

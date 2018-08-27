@@ -815,6 +815,33 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # Summary information about data set contents.
+    #
+    # @!attribute [rw] version
+    #   The version of the data set contents.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the data set contents.
+    #   @return [Types::DatasetContentStatus]
+    #
+    # @!attribute [rw] creation_time
+    #   The actual time the creation of the data set contents was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] schedule_time
+    #   The time the creation of the data set contents was scheduled to
+    #   start.
+    #   @return [Time]
+    #
+    class DatasetContentSummary < Struct.new(
+      :version,
+      :status,
+      :creation_time,
+      :schedule_time)
+      include Aws::Structure
+    end
+
     # The data set whose latest contents will be used as input to the
     # notebook or application.
     #
@@ -1549,6 +1576,50 @@ module Aws::IoTAnalytics
     #
     class ListChannelsResponse < Struct.new(
       :channel_summaries,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListDatasetContentsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dataset_name: "DatasetName", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] dataset_name
+    #   The name of the data set whose contents information you want to
+    #   list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in this request.
+    #   @return [Integer]
+    #
+    class ListDatasetContentsRequest < Struct.new(
+      :dataset_name,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_content_summaries
+    #   Summary information about data set contents that have been created.
+    #   @return [Array<Types::DatasetContentSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results, or `null` if there
+    #   are no more results.
+    #   @return [String]
+    #
+    class ListDatasetContentsResponse < Struct.new(
+      :dataset_content_summaries,
       :next_token)
       include Aws::Structure
     end

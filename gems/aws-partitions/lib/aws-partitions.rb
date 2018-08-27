@@ -364,6 +364,7 @@ module Aws
             'WorkMail' => 'workmail',
             'WorkSpaces' => 'workspaces',
             'XRay' => 'xray',
+            'signer' => 'signer',
           }
           # end service ids
         end

@@ -789,6 +789,9 @@ module Aws::IoT
     #   even after the update was completed by all things originally in the
     #   group. Valid values: CONTINUOUS \| SNAPSHOT.
     #
+    # @option params [Types::AwsJobExecutionsRolloutConfig] :aws_job_executions_rollout_config
+    #   Configuration for the rollout of OTA updates.
+    #
     # @option params [required, Array<Types::OTAUpdateFile>] :files
     #   The files to be streamed by the OTA update.
     #
@@ -813,29 +816,45 @@ module Aws::IoT
     #     description: "OTAUpdateDescription",
     #     targets: ["Target"], # required
     #     target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
+    #     aws_job_executions_rollout_config: {
+    #       maximum_per_minute: 1,
+    #     },
     #     files: [ # required
     #       {
     #         file_name: "FileName",
     #         file_version: "OTAUpdateFileVersion",
-    #         file_source: {
-    #           stream_id: "StreamId",
-    #           file_id: 1,
+    #         file_location: {
+    #           stream: {
+    #             stream_id: "StreamId",
+    #             file_id: 1,
+    #           },
+    #           s3_location: {
+    #             bucket: "S3Bucket",
+    #             key: "S3Key",
+    #             version: "S3Version",
+    #           },
     #         },
     #         code_signing: {
     #           aws_signer_job_id: "SigningJobId",
+    #           start_signing_job_parameter: {
+    #             signing_profile_parameter: {
+    #               certificate_arn: "CertificateArn",
+    #               platform: "Platform",
+    #               certificate_path_on_device: "CertificatePathOnDevice",
+    #             },
+    #             signing_profile_name: "SigningProfileName",
+    #             destination: {
+    #               s3_destination: {
+    #                 bucket: "S3Bucket",
+    #                 prefix: "Prefix",
+    #               },
+    #             },
+    #           },
     #           custom_code_signing: {
     #             signature: {
-    #               stream: {
-    #                 stream_id: "StreamId",
-    #                 file_id: 1,
-    #               },
     #               inline_document: "data",
     #             },
     #             certificate_chain: {
-    #               stream: {
-    #                 stream_id: "StreamId",
-    #                 file_id: 1,
-    #               },
     #               certificate_name: "CertificateName",
     #               inline_document: "InlineDocument",
     #             },
@@ -844,13 +863,13 @@ module Aws::IoT
     #           },
     #         },
     #         attributes: {
-    #           "Key" => "Value",
+    #           "AttributeKey" => "Value",
     #         },
     #       },
     #     ],
     #     role_arn: "RoleArn", # required
     #     additional_parameters: {
-    #       "Key" => "Value",
+    #       "AttributeKey" => "Value",
     #     },
     #   })
     #
@@ -1155,8 +1174,8 @@ module Aws::IoT
     #       {
     #         file_id: 1,
     #         s3_location: {
-    #           bucket: "S3Bucket", # required
-    #           key: "S3Key", # required
+    #           bucket: "S3Bucket",
+    #           key: "S3Key",
     #           version: "S3Version",
     #         },
     #       },
@@ -1730,12 +1749,22 @@ module Aws::IoT
     # @option params [required, String] :ota_update_id
     #   The OTA update ID to delete.
     #
+    # @option params [Boolean] :delete_stream
+    #   Specifies if the stream associated with an OTA update should be
+    #   deleted when the OTA update is deleted.
+    #
+    # @option params [Boolean] :force_delete_aws_job
+    #   Specifies if the AWS Job associated with the OTA update should be
+    #   deleted with the OTA update is deleted.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_ota_update({
     #     ota_update_id: "OTAUpdateId", # required
+    #     delete_stream: false,
+    #     force_delete_aws_job: false,
     #   })
     #
     # @overload delete_ota_update(params = {})
@@ -3043,31 +3072,37 @@ module Aws::IoT
     #   resp.ota_update_info.description #=> String
     #   resp.ota_update_info.targets #=> Array
     #   resp.ota_update_info.targets[0] #=> String
+    #   resp.ota_update_info.aws_job_executions_rollout_config.maximum_per_minute #=> Integer
     #   resp.ota_update_info.target_selection #=> String, one of "CONTINUOUS", "SNAPSHOT"
     #   resp.ota_update_info.ota_update_files #=> Array
     #   resp.ota_update_info.ota_update_files[0].file_name #=> String
     #   resp.ota_update_info.ota_update_files[0].file_version #=> String
-    #   resp.ota_update_info.ota_update_files[0].file_source.stream_id #=> String
-    #   resp.ota_update_info.ota_update_files[0].file_source.file_id #=> Integer
+    #   resp.ota_update_info.ota_update_files[0].file_location.stream.stream_id #=> String
+    #   resp.ota_update_info.ota_update_files[0].file_location.stream.file_id #=> Integer
+    #   resp.ota_update_info.ota_update_files[0].file_location.s3_location.bucket #=> String
+    #   resp.ota_update_info.ota_update_files[0].file_location.s3_location.key #=> String
+    #   resp.ota_update_info.ota_update_files[0].file_location.s3_location.version #=> String
     #   resp.ota_update_info.ota_update_files[0].code_signing.aws_signer_job_id #=> String
-    #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.signature.stream.stream_id #=> String
-    #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.signature.stream.file_id #=> Integer
+    #   resp.ota_update_info.ota_update_files[0].code_signing.start_signing_job_parameter.signing_profile_parameter.certificate_arn #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.start_signing_job_parameter.signing_profile_parameter.platform #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.start_signing_job_parameter.signing_profile_parameter.certificate_path_on_device #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.start_signing_job_parameter.signing_profile_name #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.start_signing_job_parameter.destination.s3_destination.bucket #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.start_signing_job_parameter.destination.s3_destination.prefix #=> String
     #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.signature.inline_document #=> String
-    #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.certificate_chain.stream.stream_id #=> String
-    #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.certificate_chain.stream.file_id #=> Integer
     #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.certificate_chain.certificate_name #=> String
     #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.certificate_chain.inline_document #=> String
     #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.hash_algorithm #=> String
     #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.signature_algorithm #=> String
     #   resp.ota_update_info.ota_update_files[0].attributes #=> Hash
-    #   resp.ota_update_info.ota_update_files[0].attributes["Key"] #=> String
+    #   resp.ota_update_info.ota_update_files[0].attributes["AttributeKey"] #=> String
     #   resp.ota_update_info.ota_update_status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED"
     #   resp.ota_update_info.aws_iot_job_id #=> String
     #   resp.ota_update_info.aws_iot_job_arn #=> String
     #   resp.ota_update_info.error_info.code #=> String
     #   resp.ota_update_info.error_info.message #=> String
     #   resp.ota_update_info.additional_parameters #=> Hash
-    #   resp.ota_update_info.additional_parameters["Key"] #=> String
+    #   resp.ota_update_info.additional_parameters["AttributeKey"] #=> String
     #
     # @overload get_ota_update(params = {})
     # @param [Hash] params ({})
@@ -6335,8 +6370,8 @@ module Aws::IoT
     #       {
     #         file_id: 1,
     #         s3_location: {
-    #           bucket: "S3Bucket", # required
-    #           key: "S3Key", # required
+    #           bucket: "S3Bucket",
+    #           key: "S3Key",
     #           version: "S3Version",
     #         },
     #       },
@@ -6536,7 +6571,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

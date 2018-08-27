@@ -53,6 +53,8 @@ module Aws::IoTAnalytics
     DatasetArn = Shapes::StringShape.new(name: 'DatasetArn')
     DatasetContentState = Shapes::StringShape.new(name: 'DatasetContentState')
     DatasetContentStatus = Shapes::StructureShape.new(name: 'DatasetContentStatus')
+    DatasetContentSummaries = Shapes::ListShape.new(name: 'DatasetContentSummaries')
+    DatasetContentSummary = Shapes::StructureShape.new(name: 'DatasetContentSummary')
     DatasetContentVersion = Shapes::StringShape.new(name: 'DatasetContentVersion')
     DatasetContentVersionValue = Shapes::StructureShape.new(name: 'DatasetContentVersionValue')
     DatasetEntries = Shapes::ListShape.new(name: 'DatasetEntries')
@@ -108,6 +110,8 @@ module Aws::IoTAnalytics
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListChannelsRequest = Shapes::StructureShape.new(name: 'ListChannelsRequest')
     ListChannelsResponse = Shapes::StructureShape.new(name: 'ListChannelsResponse')
+    ListDatasetContentsRequest = Shapes::StructureShape.new(name: 'ListDatasetContentsRequest')
+    ListDatasetContentsResponse = Shapes::StructureShape.new(name: 'ListDatasetContentsResponse')
     ListDatasetsRequest = Shapes::StructureShape.new(name: 'ListDatasetsRequest')
     ListDatasetsResponse = Shapes::StructureShape.new(name: 'ListDatasetsResponse')
     ListDatastoresRequest = Shapes::StructureShape.new(name: 'ListDatastoresRequest')
@@ -332,6 +336,14 @@ module Aws::IoTAnalytics
     DatasetContentStatus.add_member(:reason, Shapes::ShapeRef.new(shape: Reason, location_name: "reason"))
     DatasetContentStatus.struct_class = Types::DatasetContentStatus
 
+    DatasetContentSummaries.member = Shapes::ShapeRef.new(shape: DatasetContentSummary)
+
+    DatasetContentSummary.add_member(:version, Shapes::ShapeRef.new(shape: DatasetContentVersion, location_name: "version"))
+    DatasetContentSummary.add_member(:status, Shapes::ShapeRef.new(shape: DatasetContentStatus, location_name: "status"))
+    DatasetContentSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
+    DatasetContentSummary.add_member(:schedule_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "scheduleTime"))
+    DatasetContentSummary.struct_class = Types::DatasetContentSummary
+
     DatasetContentVersionValue.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetName, required: true, location_name: "datasetName"))
     DatasetContentVersionValue.struct_class = Types::DatasetContentVersionValue
 
@@ -478,6 +490,15 @@ module Aws::IoTAnalytics
     ListChannelsResponse.add_member(:channel_summaries, Shapes::ShapeRef.new(shape: ChannelSummaries, location_name: "channelSummaries"))
     ListChannelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListChannelsResponse.struct_class = Types::ListChannelsResponse
+
+    ListDatasetContentsRequest.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetName, required: true, location: "uri", location_name: "datasetName"))
+    ListDatasetContentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListDatasetContentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListDatasetContentsRequest.struct_class = Types::ListDatasetContentsRequest
+
+    ListDatasetContentsResponse.add_member(:dataset_content_summaries, Shapes::ShapeRef.new(shape: DatasetContentSummaries, location_name: "datasetContentSummaries"))
+    ListDatasetContentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListDatasetContentsResponse.struct_class = Types::ListDatasetContentsResponse
 
     ListDatasetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListDatasetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -938,6 +959,25 @@ module Aws::IoTAnalytics
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_dataset_contents, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDatasetContents"
+        o.http_method = "GET"
+        o.http_request_uri = "/datasets/{datasetName}/contents"
+        o.input = Shapes::ShapeRef.new(shape: ListDatasetContentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDatasetContentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
