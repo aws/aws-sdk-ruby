@@ -1,5 +1,5 @@
 Before("@signer") do
-  @service = Aws::signer::Resource.new
+  @service = Aws::Signer::Resource.new
   @client = @service.client
 end
 
