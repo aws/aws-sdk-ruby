@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Stop counting #presigned_url as #api_requests (Github Issue#1866)
+
 1.17.0 (2018-07-11)
 ------------------
 

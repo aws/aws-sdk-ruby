@@ -98,6 +98,7 @@ module Aws
         req.handlers.remove(Seahorse::Client::Plugins::ContentLength::Handler)
 
         signer = build_signer(req.context.config)
+        req.context[:presigned_url] = true
 
         req.handle(step: :send) do |context|
 
