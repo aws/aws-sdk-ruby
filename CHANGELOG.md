@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.118 (2018-08-27)
+------------------
+
 * Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
 
 * Feature - Aws::IoTAnalytics - Updated the API, and documentation for AWS IoT Analytics.
