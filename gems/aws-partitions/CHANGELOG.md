@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.102.0 (2018-08-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Signer`.
+
 1.101.0 (2018-08-27)
 ------------------
 

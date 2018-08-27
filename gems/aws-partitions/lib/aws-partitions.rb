@@ -351,6 +351,7 @@ module Aws
             'ServiceCatalog' => 'servicecatalog',
             'ServiceDiscovery' => 'servicediscovery',
             'Shield' => 'shield',
+            'Signer' => 'signer',
             'SimpleDB' => 'sdb',
             'Snowball' => 'snowball',
             'States' => 'states',
@@ -364,7 +365,6 @@ module Aws
             'WorkMail' => 'workmail',
             'WorkSpaces' => 'workspaces',
             'XRay' => 'xray',
-            'signer' => 'signer',
           }
           # end service ids
         end
