@@ -24,7 +24,7 @@ require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:signer)
 
-module Aws::signer
+module Aws::Signer
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs

@@ -135,6 +135,7 @@ module Aws
   autoload :ServiceCatalog, 'aws-sdk-servicecatalog'
   autoload :ServiceDiscovery, 'aws-sdk-servicediscovery'
   autoload :Shield, 'aws-sdk-shield'
+  autoload :Signer, 'aws-sdk-signer'
   autoload :SimpleDB, 'aws-sdk-simpledb'
   autoload :Snowball, 'aws-sdk-snowball'
   autoload :States, 'aws-sdk-states'
@@ -148,6 +149,5 @@ module Aws
   autoload :WorkMail, 'aws-sdk-workmail'
   autoload :WorkSpaces, 'aws-sdk-workspaces'
   autoload :XRay, 'aws-sdk-xray'
-  autoload :signer, 'aws-sdk-signer'
   # end service gems
 end

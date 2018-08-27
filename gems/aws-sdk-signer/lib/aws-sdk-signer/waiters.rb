@@ -7,7 +7,7 @@
 
 require 'aws-sdk-core/waiters'
 
-module Aws::signer
+module Aws::Signer
   module Waiters
 
     class SuccessfulSigningJob

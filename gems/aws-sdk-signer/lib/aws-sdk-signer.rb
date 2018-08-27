@@ -34,14 +34,14 @@ require_relative 'aws-sdk-signer/customizations'
 #
 #     begin
 #       # do stuff
-#     rescue Aws::signer::Errors::ServiceError
+#     rescue Aws::Signer::Errors::ServiceError
 #       # rescues all service API errors
 #     end
 #
 # See {Errors} for more information.
 #
 # @service
-module Aws::signer
+module Aws::Signer
 
   GEM_VERSION = '1.0.0'
 

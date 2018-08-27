@@ -5,7 +5,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-module Aws::signer
+module Aws::Signer
   # @api private
   module ClientApi
 

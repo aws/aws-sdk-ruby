@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
 
   spec.name          = 'aws-sdk-signer'
   spec.version       = File.read(File.expand_path('../VERSION', __FILE__)).strip
-  spec.summary       = 'AWS SDK for Ruby - signer'
-  spec.description   = 'Official AWS Ruby gem for AWS Signer (signer). This gem is part of the AWS SDK for Ruby.'
+  spec.summary       = 'AWS SDK for Ruby - Signer'
+  spec.description   = 'Official AWS Ruby gem for AWS Signer (Signer). This gem is part of the AWS SDK for Ruby.'
   spec.author        = 'Amazon Web Services'
   spec.homepage      = 'http://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'

@@ -5,7 +5,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-module Aws::signer
+module Aws::Signer
   class Resource
 
     # @param options ({})

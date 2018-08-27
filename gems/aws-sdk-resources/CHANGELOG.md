@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix the load statement for the `aws-sdk-signer` gem.
+
 3.23.0 (2018-08-27)
 ------------------
 

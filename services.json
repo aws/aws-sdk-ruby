@@ -507,7 +507,7 @@
   "XRay": {
     "models": "xray/2016-04-12"
   },
-  "signer": {
+  "Signer": {
     "models": "signer/2017-08-25"
   }
 }

@@ -13,4 +13,4 @@ $:.unshift(File.expand_path('../../../aws-sigv4/lib', __FILE__))
 require 'features_helper'
 require 'aws-sdk-signer'
 
-Aws::signer::Client.add_plugin(ApiCallTracker)
+Aws::Signer::Client.add_plugin(ApiCallTracker)

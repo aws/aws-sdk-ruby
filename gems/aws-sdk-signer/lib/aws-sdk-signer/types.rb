@@ -5,7 +5,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-module Aws::signer
+module Aws::Signer
   module Types
 
     # @note When making an API call, you may pass CancelSigningProfileRequest
