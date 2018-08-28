@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Issue - Update example for bucket#url (Github Issue#1868)
+
+* Issue - Support opt-out counting #presigned_url as #api_requests (Github Issue#1866)
+
 1.17.0 (2018-07-11)
 ------------------
 
