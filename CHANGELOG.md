@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::XRay - Updated the API, and documentation for AWS X-Ray.
+
 2.11.118 (2018-08-27)
 ------------------
 
