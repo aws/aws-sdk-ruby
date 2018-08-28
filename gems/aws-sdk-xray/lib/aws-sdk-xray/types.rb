@@ -142,6 +142,88 @@ module Aws::XRay
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateSamplingRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         sampling_rule: { # required
+    #           rule_name: "RuleName",
+    #           rule_arn: "String",
+    #           resource_arn: "ResourceARN", # required
+    #           priority: 1, # required
+    #           fixed_rate: 1.0, # required
+    #           reservoir_size: 1, # required
+    #           service_name: "ServiceName", # required
+    #           service_type: "ServiceType", # required
+    #           host: "Host", # required
+    #           http_method: "HTTPMethod", # required
+    #           url_path: "URLPath", # required
+    #           version: 1, # required
+    #           attributes: {
+    #             "AttributeKey" => "AttributeValue",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] sampling_rule
+    #   The rule definition.
+    #   @return [Types::SamplingRule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CreateSamplingRuleRequest AWS API Documentation
+    #
+    class CreateSamplingRuleRequest < Struct.new(
+      :sampling_rule)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sampling_rule_record
+    #   The saved rule definition and metadata.
+    #   @return [Types::SamplingRuleRecord]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CreateSamplingRuleResult AWS API Documentation
+    #
+    class CreateSamplingRuleResult < Struct.new(
+      :sampling_rule_record)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteSamplingRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         rule_name: "String",
+    #         rule_arn: "String",
+    #       }
+    #
+    # @!attribute [rw] rule_name
+    #   The name of the sampling rule. Specify a rule by either name or ARN,
+    #   but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_arn
+    #   The ARN of the sampling rule. Specify a rule by either name or ARN,
+    #   but not both.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/DeleteSamplingRuleRequest AWS API Documentation
+    #
+    class DeleteSamplingRuleRequest < Struct.new(
+      :rule_name,
+      :rule_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sampling_rule_record
+    #   The deleted rule definition and metadata.
+    #   @return [Types::SamplingRuleRecord]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/DeleteSamplingRuleResult AWS API Documentation
+    #
+    class DeleteSamplingRuleResult < Struct.new(
+      :sampling_rule_record)
+      include Aws::Structure
+    end
+
     # Information about a connection between two services.
     #
     # @!attribute [rw] reference_id
@@ -226,9 +308,8 @@ module Aws::XRay
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The encryption status. After modifying encryption configuration with
-    #   PutEncryptionConfig, the status can be `UPDATING` for up to one hour
-    #   before X-Ray starts encrypting data with the new key.
+    #   The encryption status. While the status is `UPDATING`, X-Ray may
+    #   encrypt data with a combination of the new and old settings.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -307,6 +388,128 @@ module Aws::XRay
     #
     class GetEncryptionConfigResult < Struct.new(
       :encryption_config)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSamplingRulesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token. Not used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingRulesRequest AWS API Documentation
+    #
+    class GetSamplingRulesRequest < Struct.new(
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sampling_rule_records
+    #   Rule definitions and metadata.
+    #   @return [Array<Types::SamplingRuleRecord>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token. Not used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingRulesResult AWS API Documentation
+    #
+    class GetSamplingRulesResult < Struct.new(
+      :sampling_rule_records,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSamplingStatisticSummariesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token. Not used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingStatisticSummariesRequest AWS API Documentation
+    #
+    class GetSamplingStatisticSummariesRequest < Struct.new(
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sampling_statistic_summaries
+    #   Information about the number of requests instrumented for each
+    #   sampling rule.
+    #   @return [Array<Types::SamplingStatisticSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token. Not used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingStatisticSummariesResult AWS API Documentation
+    #
+    class GetSamplingStatisticSummariesResult < Struct.new(
+      :sampling_statistic_summaries,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSamplingTargetsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         sampling_statistics_documents: [ # required
+    #           {
+    #             rule_name: "RuleName", # required
+    #             client_id: "ClientID", # required
+    #             timestamp: Time.now, # required
+    #             request_count: 1, # required
+    #             sampled_count: 1, # required
+    #             borrow_count: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] sampling_statistics_documents
+    #   Information about rules that the service is using to sample
+    #   requests.
+    #   @return [Array<Types::SamplingStatisticsDocument>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingTargetsRequest AWS API Documentation
+    #
+    class GetSamplingTargetsRequest < Struct.new(
+      :sampling_statistics_documents)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sampling_target_documents
+    #   Updated rules that the service should use to sample requests.
+    #   @return [Array<Types::SamplingTargetDocument>]
+    #
+    # @!attribute [rw] last_rule_modification
+    #   The last time a user changed the sampling rule configuration. If the
+    #   sampling rule configuration changed since the service last retrieved
+    #   it, the service should call GetSamplingRules to get the latest
+    #   version.
+    #   @return [Time]
+    #
+    # @!attribute [rw] unprocessed_statistics
+    #   Information about SamplingStatisticsDocument that X-Ray could not
+    #   process.
+    #   @return [Array<Types::UnprocessedStatistics>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingTargetsResult AWS API Documentation
+    #
+    class GetSamplingTargetsResult < Struct.new(
+      :sampling_target_documents,
+      :last_rule_modification,
+      :unprocessed_statistics)
       include Aws::Structure
     end
 
@@ -667,6 +870,352 @@ module Aws::XRay
       include Aws::Structure
     end
 
+    # A sampling rule that services use to decide whether to instrument a
+    # request. Rule fields can match properties of the service, or
+    # properties of a request. The service can ignore rules that don't
+    # match its properties.
+    #
+    # @note When making an API call, you may pass SamplingRule
+    #   data as a hash:
+    #
+    #       {
+    #         rule_name: "RuleName",
+    #         rule_arn: "String",
+    #         resource_arn: "ResourceARN", # required
+    #         priority: 1, # required
+    #         fixed_rate: 1.0, # required
+    #         reservoir_size: 1, # required
+    #         service_name: "ServiceName", # required
+    #         service_type: "ServiceType", # required
+    #         host: "Host", # required
+    #         http_method: "HTTPMethod", # required
+    #         url_path: "URLPath", # required
+    #         version: 1, # required
+    #         attributes: {
+    #           "AttributeKey" => "AttributeValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] rule_name
+    #   The name of the sampling rule. Specify a rule by either name or ARN,
+    #   but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_arn
+    #   The ARN of the sampling rule. Specify a rule by either name or ARN,
+    #   but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   Matches the ARN of the AWS resource on which the service runs.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The priority of the sampling rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fixed_rate
+    #   The percentage of matching requests to instrument, after the
+    #   reservoir is exhausted.
+    #   @return [Float]
+    #
+    # @!attribute [rw] reservoir_size
+    #   A fixed number of matching requests to instrument per second, prior
+    #   to applying the fixed rate. The reservoir is not used directly by
+    #   services, but applies to all services using the rule collectively.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] service_name
+    #   Matches the `name` that the service uses to identify itself in
+    #   segments.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_type
+    #   Matches the `origin` that the service uses to identify its type in
+    #   segments.
+    #   @return [String]
+    #
+    # @!attribute [rw] host
+    #   Matches the hostname from a request URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_method
+    #   Matches the HTTP method of a request.
+    #   @return [String]
+    #
+    # @!attribute [rw] url_path
+    #   Matches the path from a request URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the sampling rule format (`1`).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] attributes
+    #   Matches attributes derived from the request.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingRule AWS API Documentation
+    #
+    class SamplingRule < Struct.new(
+      :rule_name,
+      :rule_arn,
+      :resource_arn,
+      :priority,
+      :fixed_rate,
+      :reservoir_size,
+      :service_name,
+      :service_type,
+      :host,
+      :http_method,
+      :url_path,
+      :version,
+      :attributes)
+      include Aws::Structure
+    end
+
+    # A SamplingRule and its metadata.
+    #
+    # @!attribute [rw] sampling_rule
+    #   The sampling rule.
+    #   @return [Types::SamplingRule]
+    #
+    # @!attribute [rw] created_at
+    #   When the rule was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   When the rule was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingRuleRecord AWS API Documentation
+    #
+    class SamplingRuleRecord < Struct.new(
+      :sampling_rule,
+      :created_at,
+      :modified_at)
+      include Aws::Structure
+    end
+
+    # A document specifying changes to a sampling rule's configuration.
+    #
+    # @note When making an API call, you may pass SamplingRuleUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         rule_name: "RuleName",
+    #         rule_arn: "String",
+    #         resource_arn: "ResourceARN",
+    #         priority: 1,
+    #         fixed_rate: 1.0,
+    #         reservoir_size: 1,
+    #         host: "Host",
+    #         service_name: "ServiceName",
+    #         service_type: "ServiceType",
+    #         http_method: "HTTPMethod",
+    #         url_path: "URLPath",
+    #         attributes: {
+    #           "AttributeKey" => "AttributeValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] rule_name
+    #   The name of the sampling rule. Specify a rule by either name or ARN,
+    #   but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_arn
+    #   The ARN of the sampling rule. Specify a rule by either name or ARN,
+    #   but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   Matches the ARN of the AWS resource on which the service runs.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The priority of the sampling rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fixed_rate
+    #   The percentage of matching requests to instrument, after the
+    #   reservoir is exhausted.
+    #   @return [Float]
+    #
+    # @!attribute [rw] reservoir_size
+    #   A fixed number of matching requests to instrument per second, prior
+    #   to applying the fixed rate. The reservoir is not used directly by
+    #   services, but applies to all services using the rule collectively.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] host
+    #   Matches the hostname from a request URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   Matches the `name` that the service uses to identify itself in
+    #   segments.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_type
+    #   Matches the `origin` that the service uses to identify its type in
+    #   segments.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_method
+    #   Matches the HTTP method of a request.
+    #   @return [String]
+    #
+    # @!attribute [rw] url_path
+    #   Matches the path from a request URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   Matches attributes derived from the request.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingRuleUpdate AWS API Documentation
+    #
+    class SamplingRuleUpdate < Struct.new(
+      :rule_name,
+      :rule_arn,
+      :resource_arn,
+      :priority,
+      :fixed_rate,
+      :reservoir_size,
+      :host,
+      :service_name,
+      :service_type,
+      :http_method,
+      :url_path,
+      :attributes)
+      include Aws::Structure
+    end
+
+    # Aggregated request sampling data for a sampling rule across all
+    # services for a 10 second window.
+    #
+    # @!attribute [rw] rule_name
+    #   The name of the sampling rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The start time of the reporting window.
+    #   @return [Time]
+    #
+    # @!attribute [rw] request_count
+    #   The number of requests that matched the rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] borrow_count
+    #   The number of requests recorded with borrowed reservoir quota.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sampled_count
+    #   The number of requests recorded.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingStatisticSummary AWS API Documentation
+    #
+    class SamplingStatisticSummary < Struct.new(
+      :rule_name,
+      :timestamp,
+      :request_count,
+      :borrow_count,
+      :sampled_count)
+      include Aws::Structure
+    end
+
+    # Request sampling results for a single rule from a service. Results are
+    # for the last 10 seconds unless the service has been assigned a longer
+    # reporting interval after a previous call to GetSamplingTargets.
+    #
+    # @note When making an API call, you may pass SamplingStatisticsDocument
+    #   data as a hash:
+    #
+    #       {
+    #         rule_name: "RuleName", # required
+    #         client_id: "ClientID", # required
+    #         timestamp: Time.now, # required
+    #         request_count: 1, # required
+    #         sampled_count: 1, # required
+    #         borrow_count: 1,
+    #       }
+    #
+    # @!attribute [rw] rule_name
+    #   The name of the sampling rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   A unique identifier for the service in hexadecimal.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The current time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] request_count
+    #   The number of requests that matched the rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sampled_count
+    #   The number of requests recorded.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] borrow_count
+    #   The number of requests recorded with borrowed reservoir quota.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingStatisticsDocument AWS API Documentation
+    #
+    class SamplingStatisticsDocument < Struct.new(
+      :rule_name,
+      :client_id,
+      :timestamp,
+      :request_count,
+      :sampled_count,
+      :borrow_count)
+      include Aws::Structure
+    end
+
+    # Temporary changes to a sampling rule configuration. To meet the global
+    # sampling target for a rule, X-Ray calculates a new reservoir for each
+    # service based on the recent sampling results of all services that
+    # called GetSamplingTargets.
+    #
+    # @!attribute [rw] rule_name
+    #   The name of the sampling rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] fixed_rate
+    #   The percentage of matching requests to instrument, after the
+    #   reservoir is exhausted.
+    #   @return [Float]
+    #
+    # @!attribute [rw] reservoir_quota
+    #   The number of requests per second that X-Ray allocated this service.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] reservoir_quota_ttl
+    #   When the reservoir quota expires.
+    #   @return [Time]
+    #
+    # @!attribute [rw] interval
+    #   The number of seconds for the service to wait before getting
+    #   sampling targets again.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingTargetDocument AWS API Documentation
+    #
+    class SamplingTargetDocument < Struct.new(
+      :rule_name,
+      :fixed_rate,
+      :reservoir_quota,
+      :reservoir_quota_ttl,
+      :interval)
+      include Aws::Structure
+    end
+
     # A segment from a trace that has been ingested by the X-Ray service.
     # The segment can be compiled from documents uploaded with
     # PutTraceSegments, or an `inferred` segment for a downstream service,
@@ -1005,6 +1554,30 @@ module Aws::XRay
       include Aws::Structure
     end
 
+    # Sampling statistics from a call to GetSamplingTargets that X-Ray could
+    # not process.
+    #
+    # @!attribute [rw] rule_name
+    #   The name of the sampling rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UnprocessedStatistics AWS API Documentation
+    #
+    class UnprocessedStatistics < Struct.new(
+      :rule_name,
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
     # Information about a segment that failed processing.
     #
     # @!attribute [rw] id
@@ -1025,6 +1598,50 @@ module Aws::XRay
       :id,
       :error_code,
       :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateSamplingRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         sampling_rule_update: { # required
+    #           rule_name: "RuleName",
+    #           rule_arn: "String",
+    #           resource_arn: "ResourceARN",
+    #           priority: 1,
+    #           fixed_rate: 1.0,
+    #           reservoir_size: 1,
+    #           host: "Host",
+    #           service_name: "ServiceName",
+    #           service_type: "ServiceType",
+    #           http_method: "HTTPMethod",
+    #           url_path: "URLPath",
+    #           attributes: {
+    #             "AttributeKey" => "AttributeValue",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] sampling_rule_update
+    #   The rule and fields to change.
+    #   @return [Types::SamplingRuleUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UpdateSamplingRuleRequest AWS API Documentation
+    #
+    class UpdateSamplingRuleRequest < Struct.new(
+      :sampling_rule_update)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sampling_rule_record
+    #   The updated rule definition and metadata.
+    #   @return [Types::SamplingRuleRecord]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UpdateSamplingRuleResult AWS API Documentation
+    #
+    class UpdateSamplingRuleResult < Struct.new(
+      :sampling_rule_record)
       include Aws::Structure
     end
 

@@ -420,7 +420,8 @@ module Aws::Glue
     #   lowercase.
     #
     # @option params [required, Array<String>] :version_ids
-    #   A list of the IDs of versions to be deleted.
+    #   A list of the IDs of versions to be deleted. A `VersionId` is a string
+    #   representation of an integer. Each version is incremented by 1.
     #
     # @return [Types::BatchDeleteTableVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -707,16 +708,12 @@ module Aws::Glue
     #
     # @option params [String] :configuration
     #   Crawler configuration information. This versioned JSON string allows
-    #   users to specify aspects of a Crawler's behavior.
+    #   users to specify aspects of a crawler's behavior. For more
+    #   information, see [Configuring a Crawler][1].
     #
-    #   You can use this field to force partitions to inherit metadata such as
-    #   classification, input format, output format, serde information, and
-    #   schema from their parent table, rather than detect this information
-    #   separately for each partition. Use the following JSON string to
-    #   specify that behavior:
     #
-    #   Example: `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
-    #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
     #
     # @option params [String] :crawler_security_configuration
     #   The name of the SecurityConfiguration structure to be used by this
@@ -1652,6 +1649,28 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Deletes a specified policy.
+    #
+    # @option params [String] :policy_hash_condition
+    #   The hash value returned when this policy was set.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy({
+    #     policy_hash_condition: "HashString",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteResourcePolicy AWS API Documentation
+    #
+    # @overload delete_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy(params = {}, options = {})
+      req = build_request(:delete_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Deletes a specified security configuration.
     #
     # @option params [required, String] :name
@@ -1734,7 +1753,8 @@ module Aws::Glue
     #   lowercase.
     #
     # @option params [required, String] :version_id
-    #   The ID of the table version to be deleted.
+    #   The ID of the table version to be deleted. A `VersionID` is a string
+    #   representation of an integer. Each version is incremented by 1.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2833,6 +2853,96 @@ module Aws::Glue
     # @option params [String] :expression
     #   An expression filtering the partitions to be returned.
     #
+    #   The expression uses SQL syntax similar to the SQL `WHERE` filter
+    #   clause. The SQL statement parser [JSQLParser][1] parses the
+    #   expression.
+    #
+    #   *Operators*\: The following are the operators that you can use in the
+    #   `Expression` API call:
+    #
+    #   =
+    #
+    #   : Checks if the values of the two operands are equal or not; if yes,
+    #     then the condition becomes true.
+    #
+    #     Example: Assume 'variable a' holds 10 and 'variable b' holds 20.
+    #
+    #     (a = b) is not true.
+    #
+    #   &lt; &gt;
+    #
+    #   : Checks if the values of two operands are equal or not; if the values
+    #     are not equal, then the condition becomes true.
+    #
+    #     Example: (a &lt; &gt; b) is true.
+    #
+    #   &gt;
+    #
+    #   : Checks if the value of the left operand is greater than the value of
+    #     the right operand; if yes, then the condition becomes true.
+    #
+    #     Example: (a &gt; b) is not true.
+    #
+    #   &lt;
+    #
+    #   : Checks if the value of the left operand is less than the value of
+    #     the right operand; if yes, then the condition becomes true.
+    #
+    #     Example: (a &lt; b) is true.
+    #
+    #   &gt;=
+    #
+    #   : Checks if the value of the left operand is greater than or equal to
+    #     the value of the right operand; if yes, then the condition becomes
+    #     true.
+    #
+    #     Example: (a &gt;= b) is not true.
+    #
+    #   &lt;=
+    #
+    #   : Checks if the value of the left operand is less than or equal to the
+    #     value of the right operand; if yes, then the condition becomes true.
+    #
+    #     Example: (a &lt;= b) is true.
+    #
+    #   AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL
+    #
+    #   : Logical operators.
+    #
+    #   *Supported Partition Key Types*\: The following are the the supported
+    #   partition keys.
+    #
+    #   * `string`
+    #
+    #   * `date`
+    #
+    #   * `timestamp`
+    #
+    #   * `int`
+    #
+    #   * `bigint`
+    #
+    #   * `long`
+    #
+    #   * `tinyint`
+    #
+    #   * `smallint`
+    #
+    #   * `decimal`
+    #
+    #   If an invalid type is encountered, a ` PredicateConstructionException
+    #   ` is thrown.
+    #
+    #   The following list shows the valid operators on each type. When you
+    #   define a crawler, the `partitionKey` type is created as a `STRING`, to
+    #   be compatible with the catalog partitions.
+    #
+    #   *Sample API Call*\:
+    #
+    #
+    #
+    #   [1]: http://jsqlparser.sourceforge.net/home.php
+    #
     # @option params [String] :next_token
     #   A continuation token, if this is not the first call to retrieve these
     #   partitions.
@@ -2995,6 +3105,31 @@ module Aws::Glue
     # @param [Hash] params ({})
     def get_plan(params = {}, options = {})
       req = build_request(:get_plan, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a specified resource policy.
+    #
+    # @return [Types::GetResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcePolicyResponse#policy_in_json #policy_in_json} => String
+    #   * {Types::GetResourcePolicyResponse#policy_hash #policy_hash} => String
+    #   * {Types::GetResourcePolicyResponse#create_time #create_time} => Time
+    #   * {Types::GetResourcePolicyResponse#update_time #update_time} => Time
+    #
+    # @example Response structure
+    #
+    #   resp.policy_in_json #=> String
+    #   resp.policy_hash #=> String
+    #   resp.create_time #=> Time
+    #   resp.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetResourcePolicy AWS API Documentation
+    #
+    # @overload get_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def get_resource_policy(params = {}, options = {})
+      req = build_request(:get_resource_policy, params)
       req.send_request(options)
     end
 
@@ -3177,7 +3312,8 @@ module Aws::Glue
     #   lowercase.
     #
     # @option params [String] :version_id
-    #   The ID value of the table version to be retrieved.
+    #   The ID value of the table version to be retrieved. A `VersionID` is a
+    #   string representation of an integer. Each version is incremented by 1.
     #
     # @return [Types::GetTableVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3705,6 +3841,49 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Sets the Data Catalog resource policy for access control.
+    #
+    # @option params [required, String] :policy_in_json
+    #   Contains the policy document to set, in JSON format.
+    #
+    # @option params [String] :policy_hash_condition
+    #   This is the hash value returned when the previous policy was set using
+    #   PutResourcePolicy. Its purpose is to prevent concurrent modifications
+    #   of a policy. Do not use this parameter if no previous policy has been
+    #   set.
+    #
+    # @option params [String] :policy_exists_condition
+    #   If a value of `MUST_EXIST` is used here, the call will fail unless a
+    #   policy has already been set. If a value of `NOT_Exist` is used, the
+    #   call will fail if a policy has already been set. If a value of `NONE`
+    #   or a null value is used, the call will not depend on the existence of
+    #   a policy.
+    #
+    # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutResourcePolicyResponse#policy_hash #policy_hash} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_resource_policy({
+    #     policy_in_json: "PolicyJsonString", # required
+    #     policy_hash_condition: "HashString",
+    #     policy_exists_condition: "MUST_EXIST", # accepts MUST_EXIST, NOT_EXIST, NONE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy_hash #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutResourcePolicy AWS API Documentation
+    #
+    # @overload put_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def put_resource_policy(params = {}, options = {})
+      req = build_request(:put_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Resets a bookmark entry.
     #
     # @option params [required, String] :job_name
@@ -4110,16 +4289,12 @@ module Aws::Glue
     #
     # @option params [String] :configuration
     #   Crawler configuration information. This versioned JSON string allows
-    #   users to specify aspects of a Crawler's behavior.
+    #   users to specify aspects of a crawler's behavior. For more
+    #   information, see [Configuring a Crawler][1].
     #
-    #   You can use this field to force partitions to inherit metadata such as
-    #   classification, input format, output format, serde information, and
-    #   schema from their parent table, rather than detect this information
-    #   separately for each partition. Use the following JSON string to
-    #   specify that behavior:
     #
-    #   Example: `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
-    #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
     #
     # @option params [String] :crawler_security_configuration
     #   The name of the SecurityConfiguration structure to be used by this
@@ -4670,7 +4845,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

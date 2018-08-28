@@ -468,6 +468,9 @@
   "Shield": {
     "models": "shield/2016-06-02"
   },
+  "Signer": {
+    "models": "signer/2017-08-25"
+  },
   "SimpleDB": {
     "models": "sdb/2009-04-15"
   },
@@ -506,8 +509,5 @@
   },
   "XRay": {
     "models": "xray/2016-04-12"
-  },
-  "Signer": {
-    "models": "signer/2017-08-25"
   }
 }
