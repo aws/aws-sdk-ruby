@@ -43,8 +43,15 @@ module Aws
 
       describe "#presigned_url" do
 
-        it 'is not tracking as an api request' do
+        it 'will be tracked as an api request' do
           stub_client = Aws::S3::Client.new(stub_responses: true)
+          presigner = Presigner.new(client: stub_client)
+          presigner.presigned_url(:get_object, bucket: 'bkt', key: 'k')
+          expect(stub_client.api_requests.size).to eq(1)
+        end
+
+        it 'can be excluded from being tracked as an api request' do
+          stub_client = Aws::S3::Client.new(stub_responses: true, exclude_presign: true)
           presigner = Presigner.new(client: stub_client)
           presigner.presigned_url(:get_object, bucket: 'bkt', key: 'k')
           expect(stub_client.api_requests.size).to be_zero

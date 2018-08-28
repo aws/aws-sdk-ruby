@@ -30,7 +30,7 @@ module Aws
           operation_name: context.operation_name,
           params: context.params,
           context: context
-        } unless context[:presigned_url]
+        } unless context[:presigned_url] && context.config.exclude_presign
         @handler.call(context)
       end
     end
