@@ -16,14 +16,6 @@ the response data to return or errors to raise by calling
 requests are made, and retries are disabled.
         DOCS
 
-      option(:exclude_presign,
-        default: false,
-        doc_type: 'Boolean',
-        docstring: <<-DOCS)
-Exclude tracking not sent request when generating presigned urls. By default
-every request is counted at #api_requests when stubbing enabled.
-        DOCS
-
       option(:region) do |config|
         'us-stubbed-1' if config.stub_responses
       end

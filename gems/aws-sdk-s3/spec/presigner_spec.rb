@@ -51,10 +51,10 @@ module Aws
         end
 
         it 'can be excluded from being tracked as an api request' do
-          stub_client = Aws::S3::Client.new(stub_responses: true, exclude_presign: true)
+          stub_client = Aws::S3::Client.new(stub_responses: true)
           presigner = Presigner.new(client: stub_client)
           presigner.presigned_url(:get_object, bucket: 'bkt', key: 'k')
-          expect(stub_client.api_requests.size).to be_zero
+          expect(stub_client.api_requests(exclude_presign: true).size).to be_zero
         end
 
         it 'raises an error if the key is blank' do

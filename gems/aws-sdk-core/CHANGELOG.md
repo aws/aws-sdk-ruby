@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Add `:exclude_presign` option for client stubbing to exclude non-sent request from presigned url at #api_requests (Github Issue #1866)
+* Issue - Add `:exclude_presign` option for #api_requests at client stubbing to allow excluding non-sent request from presigned url (Github Issue #1866)
 
 3.24.1 (2018-08-13)
 ------------------
