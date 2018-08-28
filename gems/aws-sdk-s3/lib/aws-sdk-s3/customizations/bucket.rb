@@ -61,8 +61,8 @@ module Aws
       # You can pass `virtual_host: true` to use the bucket name as the
       # host name.
       #
-      #     bucket = s3.bucket('my.bucket.com', virtual_host: true)
-      #     bucket.url
+      #     bucket = s3.bucket('my.bucket.com')
+      #     bucket.url(virtual_host: true)
       #     #=> "http://my.bucket.com"
       #
       # @option options [Boolean] :virtual_host (false) When `true`,
