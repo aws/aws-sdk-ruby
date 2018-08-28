@@ -55,6 +55,13 @@ module Aws
           presigner = Presigner.new(client: stub_client)
           presigner.presigned_url(:get_object, bucket: 'bkt', key: 'k')
           expect(stub_client.api_requests(exclude_presign: true).size).to be_zero
+
+          stub_client.list_buckets
+          stub_client.list_buckets
+          presigner.presigned_url(:get_object, bucket: 'bkt', key: 'k')
+          stub_client.list_buckets
+          presigner.presigned_url(:get_object, bucket: 'bkt', key: 'k')
+          expect(stub_client.api_requests(exclude_presign: true).size).to eq(3)
         end
 
         it 'raises an error if the key is blank' do
