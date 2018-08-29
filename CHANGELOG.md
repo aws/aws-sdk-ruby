@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::MediaPackage - Updated the API, and documentation for AWS Elemental MediaPackage.
+
+* Feature - Aws::SageMakerRuntime - Updated the API, and documentation for Amazon SageMaker Runtime.
+
 2.11.119 (2018-08-28)
 ------------------
 
