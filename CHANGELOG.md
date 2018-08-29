@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.120 (2018-08-29)
+------------------
+
 * Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
 
 * Feature - Aws::MediaPackage - Updated the API, and documentation for AWS Elemental MediaPackage.
