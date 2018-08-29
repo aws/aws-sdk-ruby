@@ -160,16 +160,28 @@ module Aws::SageMakerRuntime
     # hosting services, your client applications use this API to get
     # inferences from the model hosted at the specified endpoint.
     #
-    # For an overview of Amazon SageMaker, see [How It Works][1]
+    # For an overview of Amazon SageMaker, see [How It Works][1].
     #
     # Amazon SageMaker strips all POST headers except those supported by the
     # API. Amazon SageMaker might add additional headers. You should not
     # rely on the behavior of headers outside those enumerated in the
     # request syntax.
     #
+    # Cals to `InvokeEndpoint` are authenticated by using AWS Signature
+    # Version 4. For information, see [Authenticating Requests (AWS
+    # Signature Version 4)][2] in the *Amazon S3 API Reference*.
+    #
+    # <note markdown="1"> Endpoints are scoped to an individual account, and are not public. The
+    # URL does not contain the account ID, but Amazon SageMaker determines
+    # the account ID from the authentication token that is supplied by the
+    # caller.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html
+    # [2]: http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
     #
     # @option params [required, String] :endpoint_name
     #   The name of the endpoint that you specified when you created the
@@ -184,17 +196,27 @@ module Aws::SageMakerRuntime
     #   request header. Amazon SageMaker passes all of the data in the body to
     #   the model.
     #
+    #   For information about the format of the request body, see [Common Data
+    #   Formats—Inference][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html
+    #
     # @option params [String] :content_type
     #   The MIME type of the input data in the request body.
     #
     # @option params [String] :accept
     #   The desired MIME type of the inference in the response.
     #
+    # @option params [String] :custom_attributes
+    #
     # @return [Types::InvokeEndpointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::InvokeEndpointOutput#body #body} => String
     #   * {Types::InvokeEndpointOutput#content_type #content_type} => String
     #   * {Types::InvokeEndpointOutput#invoked_production_variant #invoked_production_variant} => String
+    #   * {Types::InvokeEndpointOutput#custom_attributes #custom_attributes} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -203,6 +225,7 @@ module Aws::SageMakerRuntime
     #     body: "data", # required
     #     content_type: "Header",
     #     accept: "Header",
+    #     custom_attributes: "CustomAttributesHeader",
     #   })
     #
     # @example Response structure
@@ -210,6 +233,7 @@ module Aws::SageMakerRuntime
     #   resp.body #=> String
     #   resp.content_type #=> String
     #   resp.invoked_production_variant #=> String
+    #   resp.custom_attributes #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpoint AWS API Documentation
     #
@@ -233,7 +257,7 @@ module Aws::SageMakerRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemakerruntime'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

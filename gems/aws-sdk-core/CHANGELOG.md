@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.25.0 (2018-08-29)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
 * Issue - Add `:exclude_presign` option for #api_requests at client stubbing to allow excluding non-sent request from presigned url (Github Issue #1866)
 
 3.24.1 (2018-08-13)

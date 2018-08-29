@@ -1092,6 +1092,10 @@ module Aws::MediaPackage
 
     # An endpoint for ingesting source content for a Channel.
     #
+    # @!attribute [rw] id
+    #   The system generated unique identifier for the IngestEndpoint
+    #   @return [String]
+    #
     # @!attribute [rw] password
     #   The system generated password for ingest authentication.
     #   @return [String]
@@ -1107,6 +1111,7 @@ module Aws::MediaPackage
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/IngestEndpoint AWS API Documentation
     #
     class IngestEndpoint < Struct.new(
+      :id,
       :password,
       :url,
       :username)
@@ -1528,6 +1533,51 @@ module Aws::MediaPackage
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/RotateChannelCredentialsResponse AWS API Documentation
     #
     class RotateChannelCredentialsResponse < Struct.new(
+      :arn,
+      :description,
+      :hls_ingest,
+      :id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RotateIngestEndpointCredentialsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "__string", # required
+    #         ingest_endpoint_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] ingest_endpoint_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/RotateIngestEndpointCredentialsRequest AWS API Documentation
+    #
+    class RotateIngestEndpointCredentialsRequest < Struct.new(
+      :id,
+      :ingest_endpoint_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] hls_ingest
+    #   An HTTP Live Streaming (HLS) ingest resource configuration.
+    #   @return [Types::HlsIngest]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/RotateIngestEndpointCredentialsResponse AWS API Documentation
+    #
+    class RotateIngestEndpointCredentialsResponse < Struct.new(
       :arn,
       :description,
       :hls_ingest,

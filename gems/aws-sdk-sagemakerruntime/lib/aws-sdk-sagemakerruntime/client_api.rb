@@ -12,6 +12,7 @@ module Aws::SageMakerRuntime
     include Seahorse::Model
 
     BodyBlob = Shapes::BlobShape.new(name: 'BodyBlob')
+    CustomAttributesHeader = Shapes::StringShape.new(name: 'CustomAttributesHeader')
     EndpointName = Shapes::StringShape.new(name: 'EndpointName')
     Header = Shapes::StringShape.new(name: 'Header')
     InternalFailure = Shapes::StructureShape.new(name: 'InternalFailure')
@@ -28,6 +29,7 @@ module Aws::SageMakerRuntime
     InvokeEndpointInput.add_member(:body, Shapes::ShapeRef.new(shape: BodyBlob, required: true, location_name: "Body"))
     InvokeEndpointInput.add_member(:content_type, Shapes::ShapeRef.new(shape: Header, location: "header", location_name: "Content-Type"))
     InvokeEndpointInput.add_member(:accept, Shapes::ShapeRef.new(shape: Header, location: "header", location_name: "Accept"))
+    InvokeEndpointInput.add_member(:custom_attributes, Shapes::ShapeRef.new(shape: CustomAttributesHeader, location: "header", location_name: "X-Amzn-SageMaker-Custom-Attributes"))
     InvokeEndpointInput.struct_class = Types::InvokeEndpointInput
     InvokeEndpointInput[:payload] = :body
     InvokeEndpointInput[:payload_member] = InvokeEndpointInput.member(:body)
@@ -35,6 +37,7 @@ module Aws::SageMakerRuntime
     InvokeEndpointOutput.add_member(:body, Shapes::ShapeRef.new(shape: BodyBlob, required: true, location_name: "Body"))
     InvokeEndpointOutput.add_member(:content_type, Shapes::ShapeRef.new(shape: Header, location: "header", location_name: "Content-Type"))
     InvokeEndpointOutput.add_member(:invoked_production_variant, Shapes::ShapeRef.new(shape: Header, location: "header", location_name: "x-Amzn-Invoked-Production-Variant"))
+    InvokeEndpointOutput.add_member(:custom_attributes, Shapes::ShapeRef.new(shape: CustomAttributesHeader, location: "header", location_name: "X-Amzn-SageMaker-Custom-Attributes"))
     InvokeEndpointOutput.struct_class = Types::InvokeEndpointOutput
     InvokeEndpointOutput[:payload] = :body
     InvokeEndpointOutput[:payload_member] = InvokeEndpointOutput.member(:body)

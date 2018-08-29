@@ -181,6 +181,7 @@ module Aws::MediaPackage
     #   resp.arn #=> String
     #   resp.description #=> String
     #   resp.hls_ingest.ingest_endpoints #=> Array
+    #   resp.hls_ingest.ingest_endpoints[0].id #=> String
     #   resp.hls_ingest.ingest_endpoints[0].password #=> String
     #   resp.hls_ingest.ingest_endpoints[0].url #=> String
     #   resp.hls_ingest.ingest_endpoints[0].username #=> String
@@ -498,6 +499,7 @@ module Aws::MediaPackage
     #   resp.arn #=> String
     #   resp.description #=> String
     #   resp.hls_ingest.ingest_endpoints #=> Array
+    #   resp.hls_ingest.ingest_endpoints[0].id #=> String
     #   resp.hls_ingest.ingest_endpoints[0].password #=> String
     #   resp.hls_ingest.ingest_endpoints[0].url #=> String
     #   resp.hls_ingest.ingest_endpoints[0].username #=> String
@@ -650,6 +652,7 @@ module Aws::MediaPackage
     #   resp.channels[0].arn #=> String
     #   resp.channels[0].description #=> String
     #   resp.channels[0].hls_ingest.ingest_endpoints #=> Array
+    #   resp.channels[0].hls_ingest.ingest_endpoints[0].id #=> String
     #   resp.channels[0].hls_ingest.ingest_endpoints[0].password #=> String
     #   resp.channels[0].hls_ingest.ingest_endpoints[0].url #=> String
     #   resp.channels[0].hls_ingest.ingest_endpoints[0].username #=> String
@@ -776,7 +779,9 @@ module Aws::MediaPackage
       req.send_request(options)
     end
 
-    # Changes the Channel ingest username and password.
+    # Changes the Channel's first IngestEndpoint's username and password.
+    # WARNING - This API is deprecated. Please use
+    # RotateIngestEndpointCredentials instead
     #
     # @option params [required, String] :id
     #
@@ -798,6 +803,7 @@ module Aws::MediaPackage
     #   resp.arn #=> String
     #   resp.description #=> String
     #   resp.hls_ingest.ingest_endpoints #=> Array
+    #   resp.hls_ingest.ingest_endpoints[0].id #=> String
     #   resp.hls_ingest.ingest_endpoints[0].password #=> String
     #   resp.hls_ingest.ingest_endpoints[0].url #=> String
     #   resp.hls_ingest.ingest_endpoints[0].username #=> String
@@ -809,6 +815,47 @@ module Aws::MediaPackage
     # @param [Hash] params ({})
     def rotate_channel_credentials(params = {}, options = {})
       req = build_request(:rotate_channel_credentials, params)
+      req.send_request(options)
+    end
+
+    # Rotate the IngestEndpoint's username and password, as specified by
+    # the IngestEndpoint's id.
+    #
+    # @option params [required, String] :id
+    #
+    # @option params [required, String] :ingest_endpoint_id
+    #
+    # @return [Types::RotateIngestEndpointCredentialsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RotateIngestEndpointCredentialsResponse#arn #arn} => String
+    #   * {Types::RotateIngestEndpointCredentialsResponse#description #description} => String
+    #   * {Types::RotateIngestEndpointCredentialsResponse#hls_ingest #hls_ingest} => Types::HlsIngest
+    #   * {Types::RotateIngestEndpointCredentialsResponse#id #id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.rotate_ingest_endpoint_credentials({
+    #     id: "__string", # required
+    #     ingest_endpoint_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.description #=> String
+    #   resp.hls_ingest.ingest_endpoints #=> Array
+    #   resp.hls_ingest.ingest_endpoints[0].id #=> String
+    #   resp.hls_ingest.ingest_endpoints[0].password #=> String
+    #   resp.hls_ingest.ingest_endpoints[0].url #=> String
+    #   resp.hls_ingest.ingest_endpoints[0].username #=> String
+    #   resp.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/RotateIngestEndpointCredentials AWS API Documentation
+    #
+    # @overload rotate_ingest_endpoint_credentials(params = {})
+    # @param [Hash] params ({})
+    def rotate_ingest_endpoint_credentials(params = {}, options = {})
+      req = build_request(:rotate_ingest_endpoint_credentials, params)
       req.send_request(options)
     end
 
@@ -837,6 +884,7 @@ module Aws::MediaPackage
     #   resp.arn #=> String
     #   resp.description #=> String
     #   resp.hls_ingest.ingest_endpoints #=> Array
+    #   resp.hls_ingest.ingest_endpoints[0].id #=> String
     #   resp.hls_ingest.ingest_endpoints[0].password #=> String
     #   resp.hls_ingest.ingest_endpoints[0].url #=> String
     #   resp.hls_ingest.ingest_endpoints[0].username #=> String
@@ -1100,7 +1148,7 @@ module Aws::MediaPackage
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackage'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
