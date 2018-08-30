@@ -488,7 +488,7 @@ module Aws::CodeBuild
     #   resp.builds[0].phases[0].contexts #=> Array
     #   resp.builds[0].phases[0].contexts[0].status_code #=> String
     #   resp.builds[0].phases[0].contexts[0].message #=> String
-    #   resp.builds[0].source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE"
+    #   resp.builds[0].source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.builds[0].source.location #=> String
     #   resp.builds[0].source.git_clone_depth #=> Integer
     #   resp.builds[0].source.buildspec #=> String
@@ -496,11 +496,33 @@ module Aws::CodeBuild
     #   resp.builds[0].source.auth.resource #=> String
     #   resp.builds[0].source.report_build_status #=> Boolean
     #   resp.builds[0].source.insecure_ssl #=> Boolean
+    #   resp.builds[0].source.source_identifier #=> String
+    #   resp.builds[0].secondary_sources #=> Array
+    #   resp.builds[0].secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.builds[0].secondary_sources[0].location #=> String
+    #   resp.builds[0].secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.builds[0].secondary_sources[0].buildspec #=> String
+    #   resp.builds[0].secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.builds[0].secondary_sources[0].auth.resource #=> String
+    #   resp.builds[0].secondary_sources[0].report_build_status #=> Boolean
+    #   resp.builds[0].secondary_sources[0].insecure_ssl #=> Boolean
+    #   resp.builds[0].secondary_sources[0].source_identifier #=> String
+    #   resp.builds[0].secondary_source_versions #=> Array
+    #   resp.builds[0].secondary_source_versions[0].source_identifier #=> String
+    #   resp.builds[0].secondary_source_versions[0].source_version #=> String
     #   resp.builds[0].artifacts.location #=> String
     #   resp.builds[0].artifacts.sha256sum #=> String
     #   resp.builds[0].artifacts.md5sum #=> String
     #   resp.builds[0].artifacts.override_artifact_name #=> Boolean
     #   resp.builds[0].artifacts.encryption_disabled #=> Boolean
+    #   resp.builds[0].artifacts.artifact_identifier #=> String
+    #   resp.builds[0].secondary_artifacts #=> Array
+    #   resp.builds[0].secondary_artifacts[0].location #=> String
+    #   resp.builds[0].secondary_artifacts[0].sha256sum #=> String
+    #   resp.builds[0].secondary_artifacts[0].md5sum #=> String
+    #   resp.builds[0].secondary_artifacts[0].override_artifact_name #=> Boolean
+    #   resp.builds[0].secondary_artifacts[0].encryption_disabled #=> Boolean
+    #   resp.builds[0].secondary_artifacts[0].artifact_identifier #=> String
     #   resp.builds[0].cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.builds[0].cache.location #=> String
     #   resp.builds[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
@@ -561,7 +583,7 @@ module Aws::CodeBuild
     #   resp.projects[0].name #=> String
     #   resp.projects[0].arn #=> String
     #   resp.projects[0].description #=> String
-    #   resp.projects[0].source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE"
+    #   resp.projects[0].source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.projects[0].source.location #=> String
     #   resp.projects[0].source.git_clone_depth #=> Integer
     #   resp.projects[0].source.buildspec #=> String
@@ -569,6 +591,17 @@ module Aws::CodeBuild
     #   resp.projects[0].source.auth.resource #=> String
     #   resp.projects[0].source.report_build_status #=> Boolean
     #   resp.projects[0].source.insecure_ssl #=> Boolean
+    #   resp.projects[0].source.source_identifier #=> String
+    #   resp.projects[0].secondary_sources #=> Array
+    #   resp.projects[0].secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.projects[0].secondary_sources[0].location #=> String
+    #   resp.projects[0].secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.projects[0].secondary_sources[0].buildspec #=> String
+    #   resp.projects[0].secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.projects[0].secondary_sources[0].auth.resource #=> String
+    #   resp.projects[0].secondary_sources[0].report_build_status #=> Boolean
+    #   resp.projects[0].secondary_sources[0].insecure_ssl #=> Boolean
+    #   resp.projects[0].secondary_sources[0].source_identifier #=> String
     #   resp.projects[0].artifacts.type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.projects[0].artifacts.location #=> String
     #   resp.projects[0].artifacts.path #=> String
@@ -577,6 +610,17 @@ module Aws::CodeBuild
     #   resp.projects[0].artifacts.packaging #=> String, one of "NONE", "ZIP"
     #   resp.projects[0].artifacts.override_artifact_name #=> Boolean
     #   resp.projects[0].artifacts.encryption_disabled #=> Boolean
+    #   resp.projects[0].artifacts.artifact_identifier #=> String
+    #   resp.projects[0].secondary_artifacts #=> Array
+    #   resp.projects[0].secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
+    #   resp.projects[0].secondary_artifacts[0].location #=> String
+    #   resp.projects[0].secondary_artifacts[0].path #=> String
+    #   resp.projects[0].secondary_artifacts[0].namespace_type #=> String, one of "NONE", "BUILD_ID"
+    #   resp.projects[0].secondary_artifacts[0].name #=> String
+    #   resp.projects[0].secondary_artifacts[0].packaging #=> String, one of "NONE", "ZIP"
+    #   resp.projects[0].secondary_artifacts[0].override_artifact_name #=> Boolean
+    #   resp.projects[0].secondary_artifacts[0].encryption_disabled #=> Boolean
+    #   resp.projects[0].secondary_artifacts[0].artifact_identifier #=> String
     #   resp.projects[0].cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.projects[0].cache.location #=> String
     #   resp.projects[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
@@ -631,8 +675,14 @@ module Aws::CodeBuild
     # @option params [required, Types::ProjectSource] :source
     #   Information about the build input source code for the build project.
     #
+    # @option params [Array<Types::ProjectSource>] :secondary_sources
+    #   An array of `ProjectSource` objects.
+    #
     # @option params [required, Types::ProjectArtifacts] :artifacts
     #   Information about the build output artifacts for the build project.
+    #
+    # @option params [Array<Types::ProjectArtifacts>] :secondary_artifacts
+    #   An array of `ProjectArtifacts` objects.
     #
     # @option params [Types::ProjectCache] :cache
     #   Stores recently used information so that it can be quickly accessed at
@@ -681,7 +731,7 @@ module Aws::CodeBuild
     #     name: "ProjectName", # required
     #     description: "ProjectDescription",
     #     source: { # required
-    #       type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE
+    #       type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #       location: "String",
     #       git_clone_depth: 1,
     #       buildspec: "String",
@@ -691,7 +741,23 @@ module Aws::CodeBuild
     #       },
     #       report_build_status: false,
     #       insecure_ssl: false,
+    #       source_identifier: "String",
     #     },
+    #     secondary_sources: [
+    #       {
+    #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
+    #         location: "String",
+    #         git_clone_depth: 1,
+    #         buildspec: "String",
+    #         auth: {
+    #           type: "OAUTH", # required, accepts OAUTH
+    #           resource: "String",
+    #         },
+    #         report_build_status: false,
+    #         insecure_ssl: false,
+    #         source_identifier: "String",
+    #       },
+    #     ],
     #     artifacts: { # required
     #       type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
     #       location: "String",
@@ -701,7 +767,21 @@ module Aws::CodeBuild
     #       packaging: "NONE", # accepts NONE, ZIP
     #       override_artifact_name: false,
     #       encryption_disabled: false,
+    #       artifact_identifier: "String",
     #     },
+    #     secondary_artifacts: [
+    #       {
+    #         type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
+    #         location: "String",
+    #         path: "String",
+    #         namespace_type: "NONE", # accepts NONE, BUILD_ID
+    #         name: "String",
+    #         packaging: "NONE", # accepts NONE, ZIP
+    #         override_artifact_name: false,
+    #         encryption_disabled: false,
+    #         artifact_identifier: "String",
+    #       },
+    #     ],
     #     cache: {
     #       type: "NO_CACHE", # required, accepts NO_CACHE, S3
     #       location: "String",
@@ -742,7 +822,7 @@ module Aws::CodeBuild
     #   resp.project.name #=> String
     #   resp.project.arn #=> String
     #   resp.project.description #=> String
-    #   resp.project.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE"
+    #   resp.project.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.project.source.location #=> String
     #   resp.project.source.git_clone_depth #=> Integer
     #   resp.project.source.buildspec #=> String
@@ -750,6 +830,17 @@ module Aws::CodeBuild
     #   resp.project.source.auth.resource #=> String
     #   resp.project.source.report_build_status #=> Boolean
     #   resp.project.source.insecure_ssl #=> Boolean
+    #   resp.project.source.source_identifier #=> String
+    #   resp.project.secondary_sources #=> Array
+    #   resp.project.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.project.secondary_sources[0].location #=> String
+    #   resp.project.secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.project.secondary_sources[0].buildspec #=> String
+    #   resp.project.secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.project.secondary_sources[0].auth.resource #=> String
+    #   resp.project.secondary_sources[0].report_build_status #=> Boolean
+    #   resp.project.secondary_sources[0].insecure_ssl #=> Boolean
+    #   resp.project.secondary_sources[0].source_identifier #=> String
     #   resp.project.artifacts.type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.project.artifacts.location #=> String
     #   resp.project.artifacts.path #=> String
@@ -758,6 +849,17 @@ module Aws::CodeBuild
     #   resp.project.artifacts.packaging #=> String, one of "NONE", "ZIP"
     #   resp.project.artifacts.override_artifact_name #=> Boolean
     #   resp.project.artifacts.encryption_disabled #=> Boolean
+    #   resp.project.artifacts.artifact_identifier #=> String
+    #   resp.project.secondary_artifacts #=> Array
+    #   resp.project.secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
+    #   resp.project.secondary_artifacts[0].location #=> String
+    #   resp.project.secondary_artifacts[0].path #=> String
+    #   resp.project.secondary_artifacts[0].namespace_type #=> String, one of "NONE", "BUILD_ID"
+    #   resp.project.secondary_artifacts[0].name #=> String
+    #   resp.project.secondary_artifacts[0].packaging #=> String, one of "NONE", "ZIP"
+    #   resp.project.secondary_artifacts[0].override_artifact_name #=> Boolean
+    #   resp.project.secondary_artifacts[0].encryption_disabled #=> Boolean
+    #   resp.project.secondary_artifacts[0].artifact_identifier #=> String
     #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.project.cache.location #=> String
     #   resp.project.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
@@ -1120,6 +1222,14 @@ module Aws::CodeBuild
     # @option params [required, String] :project_name
     #   The name of the AWS CodeBuild build project to start running a build.
     #
+    # @option params [Array<Types::ProjectSource>] :secondary_sources_override
+    #   An array of `ProjectSource` objects.
+    #
+    # @option params [Array<Types::ProjectSourceVersion>] :secondary_sources_version_override
+    #   An array of `ProjectSourceVersion` objects that specify one or more
+    #   versions of the project's secondary sources to be used for this build
+    #   only.
+    #
     # @option params [String] :source_version
     #   A version of the build input to be built, for this build only. If not
     #   specified, the latest version will be used. If specified, must be one
@@ -1146,6 +1256,9 @@ module Aws::CodeBuild
     # @option params [Types::ProjectArtifacts] :artifacts_override
     #   Build output artifact settings that override, for this build only, the
     #   latest ones already defined in the build project.
+    #
+    # @option params [Array<Types::ProjectArtifacts>] :secondary_artifacts_override
+    #   An array of `ProjectArtifacts` objects.
     #
     # @option params [Array<Types::EnvironmentVariable>] :environment_variables_override
     #   A set of environment variables that overrides, for this build only,
@@ -1232,6 +1345,27 @@ module Aws::CodeBuild
     #
     #   resp = client.start_build({
     #     project_name: "NonEmptyString", # required
+    #     secondary_sources_override: [
+    #       {
+    #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
+    #         location: "String",
+    #         git_clone_depth: 1,
+    #         buildspec: "String",
+    #         auth: {
+    #           type: "OAUTH", # required, accepts OAUTH
+    #           resource: "String",
+    #         },
+    #         report_build_status: false,
+    #         insecure_ssl: false,
+    #         source_identifier: "String",
+    #       },
+    #     ],
+    #     secondary_sources_version_override: [
+    #       {
+    #         source_identifier: "String", # required
+    #         source_version: "String", # required
+    #       },
+    #     ],
     #     source_version: "String",
     #     artifacts_override: {
     #       type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
@@ -1242,7 +1376,21 @@ module Aws::CodeBuild
     #       packaging: "NONE", # accepts NONE, ZIP
     #       override_artifact_name: false,
     #       encryption_disabled: false,
+    #       artifact_identifier: "String",
     #     },
+    #     secondary_artifacts_override: [
+    #       {
+    #         type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
+    #         location: "String",
+    #         path: "String",
+    #         namespace_type: "NONE", # accepts NONE, BUILD_ID
+    #         name: "String",
+    #         packaging: "NONE", # accepts NONE, ZIP
+    #         override_artifact_name: false,
+    #         encryption_disabled: false,
+    #         artifact_identifier: "String",
+    #       },
+    #     ],
     #     environment_variables_override: [
     #       {
     #         name: "NonEmptyString", # required
@@ -1250,7 +1398,7 @@ module Aws::CodeBuild
     #         type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE
     #       },
     #     ],
-    #     source_type_override: "CODECOMMIT", # accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE
+    #     source_type_override: "CODECOMMIT", # accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #     source_location_override: "String",
     #     source_auth_override: {
     #       type: "OAUTH", # required, accepts OAUTH
@@ -1293,7 +1441,7 @@ module Aws::CodeBuild
     #   resp.build.phases[0].contexts #=> Array
     #   resp.build.phases[0].contexts[0].status_code #=> String
     #   resp.build.phases[0].contexts[0].message #=> String
-    #   resp.build.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE"
+    #   resp.build.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.build.source.location #=> String
     #   resp.build.source.git_clone_depth #=> Integer
     #   resp.build.source.buildspec #=> String
@@ -1301,11 +1449,33 @@ module Aws::CodeBuild
     #   resp.build.source.auth.resource #=> String
     #   resp.build.source.report_build_status #=> Boolean
     #   resp.build.source.insecure_ssl #=> Boolean
+    #   resp.build.source.source_identifier #=> String
+    #   resp.build.secondary_sources #=> Array
+    #   resp.build.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build.secondary_sources[0].location #=> String
+    #   resp.build.secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.build.secondary_sources[0].buildspec #=> String
+    #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.build.secondary_sources[0].auth.resource #=> String
+    #   resp.build.secondary_sources[0].report_build_status #=> Boolean
+    #   resp.build.secondary_sources[0].insecure_ssl #=> Boolean
+    #   resp.build.secondary_sources[0].source_identifier #=> String
+    #   resp.build.secondary_source_versions #=> Array
+    #   resp.build.secondary_source_versions[0].source_identifier #=> String
+    #   resp.build.secondary_source_versions[0].source_version #=> String
     #   resp.build.artifacts.location #=> String
     #   resp.build.artifacts.sha256sum #=> String
     #   resp.build.artifacts.md5sum #=> String
     #   resp.build.artifacts.override_artifact_name #=> Boolean
     #   resp.build.artifacts.encryption_disabled #=> Boolean
+    #   resp.build.artifacts.artifact_identifier #=> String
+    #   resp.build.secondary_artifacts #=> Array
+    #   resp.build.secondary_artifacts[0].location #=> String
+    #   resp.build.secondary_artifacts[0].sha256sum #=> String
+    #   resp.build.secondary_artifacts[0].md5sum #=> String
+    #   resp.build.secondary_artifacts[0].override_artifact_name #=> Boolean
+    #   resp.build.secondary_artifacts[0].encryption_disabled #=> Boolean
+    #   resp.build.secondary_artifacts[0].artifact_identifier #=> String
     #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.build.cache.location #=> String
     #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
@@ -1376,7 +1546,7 @@ module Aws::CodeBuild
     #   resp.build.phases[0].contexts #=> Array
     #   resp.build.phases[0].contexts[0].status_code #=> String
     #   resp.build.phases[0].contexts[0].message #=> String
-    #   resp.build.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE"
+    #   resp.build.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.build.source.location #=> String
     #   resp.build.source.git_clone_depth #=> Integer
     #   resp.build.source.buildspec #=> String
@@ -1384,11 +1554,33 @@ module Aws::CodeBuild
     #   resp.build.source.auth.resource #=> String
     #   resp.build.source.report_build_status #=> Boolean
     #   resp.build.source.insecure_ssl #=> Boolean
+    #   resp.build.source.source_identifier #=> String
+    #   resp.build.secondary_sources #=> Array
+    #   resp.build.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build.secondary_sources[0].location #=> String
+    #   resp.build.secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.build.secondary_sources[0].buildspec #=> String
+    #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.build.secondary_sources[0].auth.resource #=> String
+    #   resp.build.secondary_sources[0].report_build_status #=> Boolean
+    #   resp.build.secondary_sources[0].insecure_ssl #=> Boolean
+    #   resp.build.secondary_sources[0].source_identifier #=> String
+    #   resp.build.secondary_source_versions #=> Array
+    #   resp.build.secondary_source_versions[0].source_identifier #=> String
+    #   resp.build.secondary_source_versions[0].source_version #=> String
     #   resp.build.artifacts.location #=> String
     #   resp.build.artifacts.sha256sum #=> String
     #   resp.build.artifacts.md5sum #=> String
     #   resp.build.artifacts.override_artifact_name #=> Boolean
     #   resp.build.artifacts.encryption_disabled #=> Boolean
+    #   resp.build.artifacts.artifact_identifier #=> String
+    #   resp.build.secondary_artifacts #=> Array
+    #   resp.build.secondary_artifacts[0].location #=> String
+    #   resp.build.secondary_artifacts[0].sha256sum #=> String
+    #   resp.build.secondary_artifacts[0].md5sum #=> String
+    #   resp.build.secondary_artifacts[0].override_artifact_name #=> Boolean
+    #   resp.build.secondary_artifacts[0].encryption_disabled #=> Boolean
+    #   resp.build.secondary_artifacts[0].artifact_identifier #=> String
     #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.build.cache.location #=> String
     #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
@@ -1441,9 +1633,15 @@ module Aws::CodeBuild
     #   Information to be changed about the build input source code for the
     #   build project.
     #
+    # @option params [Array<Types::ProjectSource>] :secondary_sources
+    #   An array of `ProjectSource` objects.
+    #
     # @option params [Types::ProjectArtifacts] :artifacts
     #   Information to be changed about the build output artifacts for the
     #   build project.
+    #
+    # @option params [Array<Types::ProjectArtifacts>] :secondary_artifacts
+    #   An array of `ProjectSource` objects.
     #
     # @option params [Types::ProjectCache] :cache
     #   Stores recently used information so that it can be quickly accessed at
@@ -1493,7 +1691,7 @@ module Aws::CodeBuild
     #     name: "NonEmptyString", # required
     #     description: "ProjectDescription",
     #     source: {
-    #       type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE
+    #       type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #       location: "String",
     #       git_clone_depth: 1,
     #       buildspec: "String",
@@ -1503,7 +1701,23 @@ module Aws::CodeBuild
     #       },
     #       report_build_status: false,
     #       insecure_ssl: false,
+    #       source_identifier: "String",
     #     },
+    #     secondary_sources: [
+    #       {
+    #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
+    #         location: "String",
+    #         git_clone_depth: 1,
+    #         buildspec: "String",
+    #         auth: {
+    #           type: "OAUTH", # required, accepts OAUTH
+    #           resource: "String",
+    #         },
+    #         report_build_status: false,
+    #         insecure_ssl: false,
+    #         source_identifier: "String",
+    #       },
+    #     ],
     #     artifacts: {
     #       type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
     #       location: "String",
@@ -1513,7 +1727,21 @@ module Aws::CodeBuild
     #       packaging: "NONE", # accepts NONE, ZIP
     #       override_artifact_name: false,
     #       encryption_disabled: false,
+    #       artifact_identifier: "String",
     #     },
+    #     secondary_artifacts: [
+    #       {
+    #         type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
+    #         location: "String",
+    #         path: "String",
+    #         namespace_type: "NONE", # accepts NONE, BUILD_ID
+    #         name: "String",
+    #         packaging: "NONE", # accepts NONE, ZIP
+    #         override_artifact_name: false,
+    #         encryption_disabled: false,
+    #         artifact_identifier: "String",
+    #       },
+    #     ],
     #     cache: {
     #       type: "NO_CACHE", # required, accepts NO_CACHE, S3
     #       location: "String",
@@ -1554,7 +1782,7 @@ module Aws::CodeBuild
     #   resp.project.name #=> String
     #   resp.project.arn #=> String
     #   resp.project.description #=> String
-    #   resp.project.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE"
+    #   resp.project.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.project.source.location #=> String
     #   resp.project.source.git_clone_depth #=> Integer
     #   resp.project.source.buildspec #=> String
@@ -1562,6 +1790,17 @@ module Aws::CodeBuild
     #   resp.project.source.auth.resource #=> String
     #   resp.project.source.report_build_status #=> Boolean
     #   resp.project.source.insecure_ssl #=> Boolean
+    #   resp.project.source.source_identifier #=> String
+    #   resp.project.secondary_sources #=> Array
+    #   resp.project.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.project.secondary_sources[0].location #=> String
+    #   resp.project.secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.project.secondary_sources[0].buildspec #=> String
+    #   resp.project.secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.project.secondary_sources[0].auth.resource #=> String
+    #   resp.project.secondary_sources[0].report_build_status #=> Boolean
+    #   resp.project.secondary_sources[0].insecure_ssl #=> Boolean
+    #   resp.project.secondary_sources[0].source_identifier #=> String
     #   resp.project.artifacts.type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.project.artifacts.location #=> String
     #   resp.project.artifacts.path #=> String
@@ -1570,6 +1809,17 @@ module Aws::CodeBuild
     #   resp.project.artifacts.packaging #=> String, one of "NONE", "ZIP"
     #   resp.project.artifacts.override_artifact_name #=> Boolean
     #   resp.project.artifacts.encryption_disabled #=> Boolean
+    #   resp.project.artifacts.artifact_identifier #=> String
+    #   resp.project.secondary_artifacts #=> Array
+    #   resp.project.secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
+    #   resp.project.secondary_artifacts[0].location #=> String
+    #   resp.project.secondary_artifacts[0].path #=> String
+    #   resp.project.secondary_artifacts[0].namespace_type #=> String, one of "NONE", "BUILD_ID"
+    #   resp.project.secondary_artifacts[0].name #=> String
+    #   resp.project.secondary_artifacts[0].packaging #=> String, one of "NONE", "ZIP"
+    #   resp.project.secondary_artifacts[0].override_artifact_name #=> Boolean
+    #   resp.project.secondary_artifacts[0].encryption_disabled #=> Boolean
+    #   resp.project.secondary_artifacts[0].artifact_identifier #=> String
     #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.project.cache.location #=> String
     #   resp.project.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
@@ -1668,7 +1918,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

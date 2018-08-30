@@ -862,6 +862,16 @@ module Aws::SageMaker
     # showing the Jupyter server home page from the notebook instance. The
     # console uses this API to get the URL and show the page.
     #
+    # You can restrict access to this API and to the URL that it returns to
+    # a list of IP addresses that you specify. To restrict access, attach an
+    # IAM policy that denies access to this API unless the call comes from
+    # an IP address in the specified list to every AWS Identity and Access
+    # Management user, group, or role used to access the notebook instance.
+    # Use the `NotIpAddress` condition operator and the `aws:SourceIP`
+    # condition context key to specify the list of IP addresses that you
+    # want to have access to the notebook instance. For more information,
+    # see nbi-ip-filter.
+    #
     # @option params [required, String] :notebook_instance_name
     #   The name of the notebook instance.
     #
@@ -1245,6 +1255,7 @@ module Aws::SageMaker
     #     transform_resources: { # required
     #       instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
     #       instance_count: 1, # required
+    #       volume_kms_key_id: "KmsKeyId",
     #     },
     #     tags: [
     #       {
@@ -1467,7 +1478,7 @@ module Aws::SageMaker
     #   resp.production_variants[0].desired_weight #=> Float
     #   resp.production_variants[0].current_instance_count #=> Integer
     #   resp.production_variants[0].desired_instance_count #=> Integer
-    #   resp.endpoint_status #=> String, one of "OutOfService", "Creating", "Updating", "RollingBack", "InService", "Deleting", "Failed"
+    #   resp.endpoint_status #=> String, one of "OutOfService", "Creating", "Updating", "SystemUpdating", "RollingBack", "InService", "Deleting", "Failed"
     #   resp.failure_reason #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
@@ -1916,6 +1927,7 @@ module Aws::SageMaker
     #   resp.transform_output.kms_key_id #=> String
     #   resp.transform_resources.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge"
     #   resp.transform_resources.instance_count #=> Integer
+    #   resp.transform_resources.volume_kms_key_id #=> String
     #   resp.creation_time #=> Time
     #   resp.transform_start_time #=> Time
     #   resp.transform_end_time #=> Time
@@ -2047,7 +2059,7 @@ module Aws::SageMaker
     #     creation_time_after: Time.now,
     #     last_modified_time_before: Time.now,
     #     last_modified_time_after: Time.now,
-    #     status_equals: "OutOfService", # accepts OutOfService, Creating, Updating, RollingBack, InService, Deleting, Failed
+    #     status_equals: "OutOfService", # accepts OutOfService, Creating, Updating, SystemUpdating, RollingBack, InService, Deleting, Failed
     #   })
     #
     # @example Response structure
@@ -2057,7 +2069,7 @@ module Aws::SageMaker
     #   resp.endpoints[0].endpoint_arn #=> String
     #   resp.endpoints[0].creation_time #=> Time
     #   resp.endpoints[0].last_modified_time #=> Time
-    #   resp.endpoints[0].endpoint_status #=> String, one of "OutOfService", "Creating", "Updating", "RollingBack", "InService", "Deleting", "Failed"
+    #   resp.endpoints[0].endpoint_status #=> String, one of "OutOfService", "Creating", "Updating", "SystemUpdating", "RollingBack", "InService", "Deleting", "Failed"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpoints AWS API Documentation
@@ -3024,7 +3036,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

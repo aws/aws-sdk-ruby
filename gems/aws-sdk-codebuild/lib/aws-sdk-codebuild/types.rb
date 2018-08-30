@@ -167,9 +167,40 @@ module Aws::CodeBuild
     #   Information about the source code to be built.
     #   @return [Types::ProjectSource]
     #
+    # @!attribute [rw] secondary_sources
+    #   An array of `ProjectSource` objects.
+    #   @return [Array<Types::ProjectSource>]
+    #
+    # @!attribute [rw] secondary_source_versions
+    #   An array of `ProjectSourceVersion` objects. Each
+    #   `ProjectSourceVersion` must be one of:
+    #
+    #   * For AWS CodeCommit: the commit ID to use.
+    #
+    #   * For GitHub: the commit ID, pull request ID, branch name, or tag
+    #     name that corresponds to the version of the source code you want
+    #     to build. If a pull request ID is specified, it must use the
+    #     format `pr/pull-request-ID` (for example `pr/25`). If a branch
+    #     name is specified, the branch's HEAD commit ID will be used. If
+    #     not specified, the default branch's HEAD commit ID will be used.
+    #
+    #   * For Bitbucket: the commit ID, branch name, or tag name that
+    #     corresponds to the version of the source code you want to build.
+    #     If a branch name is specified, the branch's HEAD commit ID will
+    #     be used. If not specified, the default branch's HEAD commit ID
+    #     will be used.
+    #
+    #   * For Amazon Simple Storage Service (Amazon S3): the version ID of
+    #     the object representing the build input ZIP file to use.
+    #   @return [Array<Types::ProjectSourceVersion>]
+    #
     # @!attribute [rw] artifacts
     #   Information about the output artifacts for the build.
     #   @return [Types::BuildArtifacts]
+    #
+    # @!attribute [rw] secondary_artifacts
+    #   An array of `ProjectArtifacts` objects.
+    #   @return [Array<Types::BuildArtifacts>]
     #
     # @!attribute [rw] cache
     #   Information about the cache for the build.
@@ -243,7 +274,10 @@ module Aws::CodeBuild
       :project_name,
       :phases,
       :source,
+      :secondary_sources,
+      :secondary_source_versions,
       :artifacts,
+      :secondary_artifacts,
       :cache,
       :environment,
       :service_role,
@@ -300,6 +334,10 @@ module Aws::CodeBuild
     #   disabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] artifact_identifier
+    #   An identifier for this artifact definition.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BuildArtifacts AWS API Documentation
     #
     class BuildArtifacts < Struct.new(
@@ -307,7 +345,8 @@ module Aws::CodeBuild
       :sha256sum,
       :md5sum,
       :override_artifact_name,
-      :encryption_disabled)
+      :encryption_disabled,
+      :artifact_identifier)
       include Aws::Structure
     end
 
@@ -416,7 +455,7 @@ module Aws::CodeBuild
     #         name: "ProjectName", # required
     #         description: "ProjectDescription",
     #         source: { # required
-    #           type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE
+    #           type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #           location: "String",
     #           git_clone_depth: 1,
     #           buildspec: "String",
@@ -426,7 +465,23 @@ module Aws::CodeBuild
     #           },
     #           report_build_status: false,
     #           insecure_ssl: false,
+    #           source_identifier: "String",
     #         },
+    #         secondary_sources: [
+    #           {
+    #             type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
+    #             location: "String",
+    #             git_clone_depth: 1,
+    #             buildspec: "String",
+    #             auth: {
+    #               type: "OAUTH", # required, accepts OAUTH
+    #               resource: "String",
+    #             },
+    #             report_build_status: false,
+    #             insecure_ssl: false,
+    #             source_identifier: "String",
+    #           },
+    #         ],
     #         artifacts: { # required
     #           type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
     #           location: "String",
@@ -436,7 +491,21 @@ module Aws::CodeBuild
     #           packaging: "NONE", # accepts NONE, ZIP
     #           override_artifact_name: false,
     #           encryption_disabled: false,
+    #           artifact_identifier: "String",
     #         },
+    #         secondary_artifacts: [
+    #           {
+    #             type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
+    #             location: "String",
+    #             path: "String",
+    #             namespace_type: "NONE", # accepts NONE, BUILD_ID
+    #             name: "String",
+    #             packaging: "NONE", # accepts NONE, ZIP
+    #             override_artifact_name: false,
+    #             encryption_disabled: false,
+    #             artifact_identifier: "String",
+    #           },
+    #         ],
     #         cache: {
     #           type: "NO_CACHE", # required, accepts NO_CACHE, S3
     #           location: "String",
@@ -484,9 +553,17 @@ module Aws::CodeBuild
     #   Information about the build input source code for the build project.
     #   @return [Types::ProjectSource]
     #
+    # @!attribute [rw] secondary_sources
+    #   An array of `ProjectSource` objects.
+    #   @return [Array<Types::ProjectSource>]
+    #
     # @!attribute [rw] artifacts
     #   Information about the build output artifacts for the build project.
     #   @return [Types::ProjectArtifacts]
+    #
+    # @!attribute [rw] secondary_artifacts
+    #   An array of `ProjectArtifacts` objects.
+    #   @return [Array<Types::ProjectArtifacts>]
     #
     # @!attribute [rw] cache
     #   Stores recently used information so that it can be quickly accessed
@@ -540,7 +617,9 @@ module Aws::CodeBuild
       :name,
       :description,
       :source,
+      :secondary_sources,
       :artifacts,
+      :secondary_artifacts,
       :cache,
       :environment,
       :service_role,
@@ -1064,9 +1143,17 @@ module Aws::CodeBuild
     #   project.
     #   @return [Types::ProjectSource]
     #
+    # @!attribute [rw] secondary_sources
+    #   An array of `ProjectSource` objects.
+    #   @return [Array<Types::ProjectSource>]
+    #
     # @!attribute [rw] artifacts
     #   Information about the build output artifacts for the build project.
     #   @return [Types::ProjectArtifacts]
+    #
+    # @!attribute [rw] secondary_artifacts
+    #   An array of `ProjectArtifacts` objects.
+    #   @return [Array<Types::ProjectArtifacts>]
     #
     # @!attribute [rw] cache
     #   Information about the cache for the build project.
@@ -1134,7 +1221,9 @@ module Aws::CodeBuild
       :arn,
       :description,
       :source,
+      :secondary_sources,
       :artifacts,
+      :secondary_artifacts,
       :cache,
       :environment,
       :service_role,
@@ -1163,6 +1252,7 @@ module Aws::CodeBuild
     #         packaging: "NONE", # accepts NONE, ZIP
     #         override_artifact_name: false,
     #         encryption_disabled: false,
+    #         artifact_identifier: "String",
     #       }
     #
     # @!attribute [rw] type
@@ -1304,6 +1394,10 @@ module Aws::CodeBuild
     #   thrown.
     #   @return [Boolean]
     #
+    # @!attribute [rw] artifact_identifier
+    #   An identifier for this artifact definition.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectArtifacts AWS API Documentation
     #
     class ProjectArtifacts < Struct.new(
@@ -1314,7 +1408,8 @@ module Aws::CodeBuild
       :name,
       :packaging,
       :override_artifact_name,
-      :encryption_disabled)
+      :encryption_disabled,
+      :artifact_identifier)
       include Aws::Structure
     end
 
@@ -1468,7 +1563,7 @@ module Aws::CodeBuild
     #   data as a hash:
     #
     #       {
-    #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE
+    #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #         location: "String",
     #         git_clone_depth: 1,
     #         buildspec: "String",
@@ -1478,6 +1573,7 @@ module Aws::CodeBuild
     #         },
     #         report_build_status: false,
     #         insecure_ssl: false,
+    #         source_identifier: "String",
     #       }
     #
     # @!attribute [rw] type
@@ -1578,6 +1674,10 @@ module Aws::CodeBuild
     #   project source code.
     #   @return [Boolean]
     #
+    # @!attribute [rw] source_identifier
+    #   An identifier for this project source.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectSource AWS API Documentation
     #
     class ProjectSource < Struct.new(
@@ -1587,7 +1687,53 @@ module Aws::CodeBuild
       :buildspec,
       :auth,
       :report_build_status,
-      :insecure_ssl)
+      :insecure_ssl,
+      :source_identifier)
+      include Aws::Structure
+    end
+
+    # A source identifier and its corresponding version.
+    #
+    # @note When making an API call, you may pass ProjectSourceVersion
+    #   data as a hash:
+    #
+    #       {
+    #         source_identifier: "String", # required
+    #         source_version: "String", # required
+    #       }
+    #
+    # @!attribute [rw] source_identifier
+    #   An identifier for a source in the build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_version
+    #   The source version for the corresponding source identifier. If
+    #   specified, must be one of:
+    #
+    #   * For AWS CodeCommit: the commit ID to use.
+    #
+    #   * For GitHub: the commit ID, pull request ID, branch name, or tag
+    #     name that corresponds to the version of the source code you want
+    #     to build. If a pull request ID is specified, it must use the
+    #     format `pr/pull-request-ID` (for example `pr/25`). If a branch
+    #     name is specified, the branch's HEAD commit ID will be used. If
+    #     not specified, the default branch's HEAD commit ID will be used.
+    #
+    #   * For Bitbucket: the commit ID, branch name, or tag name that
+    #     corresponds to the version of the source code you want to build.
+    #     If a branch name is specified, the branch's HEAD commit ID will
+    #     be used. If not specified, the default branch's HEAD commit ID
+    #     will be used.
+    #
+    #   * For Amazon Simple Storage Service (Amazon S3): the version ID of
+    #     the object representing the build input ZIP file to use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectSourceVersion AWS API Documentation
+    #
+    class ProjectSourceVersion < Struct.new(
+      :source_identifier,
+      :source_version)
       include Aws::Structure
     end
 
@@ -1628,6 +1774,27 @@ module Aws::CodeBuild
     #
     #       {
     #         project_name: "NonEmptyString", # required
+    #         secondary_sources_override: [
+    #           {
+    #             type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
+    #             location: "String",
+    #             git_clone_depth: 1,
+    #             buildspec: "String",
+    #             auth: {
+    #               type: "OAUTH", # required, accepts OAUTH
+    #               resource: "String",
+    #             },
+    #             report_build_status: false,
+    #             insecure_ssl: false,
+    #             source_identifier: "String",
+    #           },
+    #         ],
+    #         secondary_sources_version_override: [
+    #           {
+    #             source_identifier: "String", # required
+    #             source_version: "String", # required
+    #           },
+    #         ],
     #         source_version: "String",
     #         artifacts_override: {
     #           type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
@@ -1638,7 +1805,21 @@ module Aws::CodeBuild
     #           packaging: "NONE", # accepts NONE, ZIP
     #           override_artifact_name: false,
     #           encryption_disabled: false,
+    #           artifact_identifier: "String",
     #         },
+    #         secondary_artifacts_override: [
+    #           {
+    #             type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
+    #             location: "String",
+    #             path: "String",
+    #             namespace_type: "NONE", # accepts NONE, BUILD_ID
+    #             name: "String",
+    #             packaging: "NONE", # accepts NONE, ZIP
+    #             override_artifact_name: false,
+    #             encryption_disabled: false,
+    #             artifact_identifier: "String",
+    #           },
+    #         ],
     #         environment_variables_override: [
     #           {
     #             name: "NonEmptyString", # required
@@ -1646,7 +1827,7 @@ module Aws::CodeBuild
     #             type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE
     #           },
     #         ],
-    #         source_type_override: "CODECOMMIT", # accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE
+    #         source_type_override: "CODECOMMIT", # accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #         source_location_override: "String",
     #         source_auth_override: {
     #           type: "OAUTH", # required, accepts OAUTH
@@ -1674,6 +1855,16 @@ module Aws::CodeBuild
     #   The name of the AWS CodeBuild build project to start running a
     #   build.
     #   @return [String]
+    #
+    # @!attribute [rw] secondary_sources_override
+    #   An array of `ProjectSource` objects.
+    #   @return [Array<Types::ProjectSource>]
+    #
+    # @!attribute [rw] secondary_sources_version_override
+    #   An array of `ProjectSourceVersion` objects that specify one or more
+    #   versions of the project's secondary sources to be used for this
+    #   build only.
+    #   @return [Array<Types::ProjectSourceVersion>]
     #
     # @!attribute [rw] source_version
     #   A version of the build input to be built, for this build only. If
@@ -1703,6 +1894,10 @@ module Aws::CodeBuild
     #   Build output artifact settings that override, for this build only,
     #   the latest ones already defined in the build project.
     #   @return [Types::ProjectArtifacts]
+    #
+    # @!attribute [rw] secondary_artifacts_override
+    #   An array of `ProjectArtifacts` objects.
+    #   @return [Array<Types::ProjectArtifacts>]
     #
     # @!attribute [rw] environment_variables_override
     #   A set of environment variables that overrides, for this build only,
@@ -1802,8 +1997,11 @@ module Aws::CodeBuild
     #
     class StartBuildInput < Struct.new(
       :project_name,
+      :secondary_sources_override,
+      :secondary_sources_version_override,
       :source_version,
       :artifacts_override,
+      :secondary_artifacts_override,
       :environment_variables_override,
       :source_type_override,
       :source_location_override,
@@ -1900,7 +2098,7 @@ module Aws::CodeBuild
     #         name: "NonEmptyString", # required
     #         description: "ProjectDescription",
     #         source: {
-    #           type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE
+    #           type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #           location: "String",
     #           git_clone_depth: 1,
     #           buildspec: "String",
@@ -1910,7 +2108,23 @@ module Aws::CodeBuild
     #           },
     #           report_build_status: false,
     #           insecure_ssl: false,
+    #           source_identifier: "String",
     #         },
+    #         secondary_sources: [
+    #           {
+    #             type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
+    #             location: "String",
+    #             git_clone_depth: 1,
+    #             buildspec: "String",
+    #             auth: {
+    #               type: "OAUTH", # required, accepts OAUTH
+    #               resource: "String",
+    #             },
+    #             report_build_status: false,
+    #             insecure_ssl: false,
+    #             source_identifier: "String",
+    #           },
+    #         ],
     #         artifacts: {
     #           type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
     #           location: "String",
@@ -1920,7 +2134,21 @@ module Aws::CodeBuild
     #           packaging: "NONE", # accepts NONE, ZIP
     #           override_artifact_name: false,
     #           encryption_disabled: false,
+    #           artifact_identifier: "String",
     #         },
+    #         secondary_artifacts: [
+    #           {
+    #             type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
+    #             location: "String",
+    #             path: "String",
+    #             namespace_type: "NONE", # accepts NONE, BUILD_ID
+    #             name: "String",
+    #             packaging: "NONE", # accepts NONE, ZIP
+    #             override_artifact_name: false,
+    #             encryption_disabled: false,
+    #             artifact_identifier: "String",
+    #           },
+    #         ],
     #         cache: {
     #           type: "NO_CACHE", # required, accepts NO_CACHE, S3
     #           location: "String",
@@ -1973,10 +2201,18 @@ module Aws::CodeBuild
     #   build project.
     #   @return [Types::ProjectSource]
     #
+    # @!attribute [rw] secondary_sources
+    #   An array of `ProjectSource` objects.
+    #   @return [Array<Types::ProjectSource>]
+    #
     # @!attribute [rw] artifacts
     #   Information to be changed about the build output artifacts for the
     #   build project.
     #   @return [Types::ProjectArtifacts]
+    #
+    # @!attribute [rw] secondary_artifacts
+    #   An array of `ProjectSource` objects.
+    #   @return [Array<Types::ProjectArtifacts>]
     #
     # @!attribute [rw] cache
     #   Stores recently used information so that it can be quickly accessed
@@ -2031,7 +2267,9 @@ module Aws::CodeBuild
       :name,
       :description,
       :source,
+      :secondary_sources,
       :artifacts,
+      :secondary_artifacts,
       :cache,
       :environment,
       :service_role,

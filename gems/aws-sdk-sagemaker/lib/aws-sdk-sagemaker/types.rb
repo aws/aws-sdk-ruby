@@ -190,7 +190,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: https://mxnet.incubator.apache.org/how_to/recordio.html?highlight=im2rec
+    #   [1]: https://mxnet.incubator.apache.org/architecture/note_data_loading.html#data-format
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Channel AWS API Documentation
@@ -1107,6 +1107,7 @@ module Aws::SageMaker
     #         transform_resources: { # required
     #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
     #           instance_count: 1, # required
+    #           volume_kms_key_id: "KmsKeyId",
     #         },
     #         tags: [
     #           {
@@ -2804,7 +2805,7 @@ module Aws::SageMaker
     #         creation_time_after: Time.now,
     #         last_modified_time_before: Time.now,
     #         last_modified_time_after: Time.now,
-    #         status_equals: "OutOfService", # accepts OutOfService, Creating, Updating, RollingBack, InService, Deleting, Failed
+    #         status_equals: "OutOfService", # accepts OutOfService, Creating, Updating, SystemUpdating, RollingBack, InService, Deleting, Failed
     #       }
     #
     # @!attribute [rw] sort_by
@@ -4697,6 +4698,7 @@ module Aws::SageMaker
     #       {
     #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
     #         instance_count: 1, # required
+    #         volume_kms_key_id: "KmsKeyId",
     #       }
     #
     # @!attribute [rw] instance_type
@@ -4712,11 +4714,19 @@ module Aws::SageMaker
     #   value is `1`.
     #   @return [Integer]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   The Amazon Resource Name (ARN) of a AWS Key Management Service key
+    #   that Amazon SageMaker uses to encrypt data on the storage volume
+    #   attached to the ML compute instance(s) that run the batch transform
+    #   job.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformResources AWS API Documentation
     #
     class TransformResources < Struct.new(
       :instance_type,
-      :instance_count)
+      :instance_count,
+      :volume_kms_key_id)
       include Aws::Structure
     end
 
