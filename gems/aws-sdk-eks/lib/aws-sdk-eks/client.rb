@@ -196,7 +196,7 @@ module Aws::EKS
     #   The Amazon Resource Name (ARN) of the IAM role that provides
     #   permissions for Amazon EKS to make calls to other AWS API operations
     #   on your behalf. For more information, see [Amazon EKS Service IAM
-    #   Role][1] in the <i> <i>Amazon EKS User Guide</i> </i>
+    #   Role][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
     #
     #
     #
@@ -207,7 +207,9 @@ module Aws::EKS
     #   Amazon EKS VPC resources have specific requirements to work properly
     #   with Kubernetes. For more information, see [Cluster VPC
     #   Considerations][1] and [Cluster Security Group Considerations][2] in
-    #   the *Amazon EKS User Guide*.
+    #   the *Amazon EKS User Guide*. You must specify at least two subnets.
+    #   You may specify up to 5 security groups, but we recommend that you use
+    #   a dedicated security group for your cluster control plane.
     #
     #
     #
@@ -279,6 +281,7 @@ module Aws::EKS
     #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
     #   resp.cluster.certificate_authority.data #=> String
     #   resp.cluster.client_request_token #=> String
+    #   resp.cluster.platform_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateCluster AWS API Documentation
     #
@@ -346,6 +349,7 @@ module Aws::EKS
     #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
     #   resp.cluster.certificate_authority.data #=> String
     #   resp.cluster.client_request_token #=> String
+    #   resp.cluster.platform_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteCluster AWS API Documentation
     #
@@ -436,6 +440,7 @@ module Aws::EKS
     #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
     #   resp.cluster.certificate_authority.data #=> String
     #   resp.cluster.client_request_token #=> String
+    #   resp.cluster.platform_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeCluster AWS API Documentation
     #
@@ -447,7 +452,7 @@ module Aws::EKS
     end
 
     # Lists the Amazon EKS clusters in your AWS account in the specified
-    # region.
+    # Region.
     #
     # @option params [Integer] :max_results
     #   The maximum number of cluster results returned by `ListClusters` in
@@ -527,7 +532,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

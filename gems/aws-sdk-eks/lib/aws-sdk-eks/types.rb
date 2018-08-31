@@ -79,6 +79,13 @@ module Aws::EKS
     #   idempotency of the request.
     #   @return [String]
     #
+    # @!attribute [rw] platform_version
+    #   The platform version of your Amazon EKS cluster. For more
+    #   information, see [Platform
+    #   Versions](eks/latest/userguide/platform-versions.html) in the <i>
+    #   <i>Amazon EKS User Guide</i> </i>.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -91,7 +98,8 @@ module Aws::EKS
       :resources_vpc_config,
       :status,
       :certificate_authority,
-      :client_request_token)
+      :client_request_token,
+      :platform_version)
       include Aws::Structure
     end
 
@@ -123,7 +131,7 @@ module Aws::EKS
     #   The Amazon Resource Name (ARN) of the IAM role that provides
     #   permissions for Amazon EKS to make calls to other AWS API operations
     #   on your behalf. For more information, see [Amazon EKS Service IAM
-    #   Role][1] in the <i> <i>Amazon EKS User Guide</i> </i>
+    #   Role][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
     #
     #
     #
@@ -135,7 +143,9 @@ module Aws::EKS
     #   plane. Amazon EKS VPC resources have specific requirements to work
     #   properly with Kubernetes. For more information, see [Cluster VPC
     #   Considerations][1] and [Cluster Security Group Considerations][2] in
-    #   the *Amazon EKS User Guide*.
+    #   the *Amazon EKS User Guide*. You must specify at least two subnets.
+    #   You may specify up to 5 security groups, but we recommend that you
+    #   use a dedicated security group for your cluster control plane.
     #
     #
     #
@@ -273,7 +283,7 @@ module Aws::EKS
 
     # @!attribute [rw] clusters
     #   A list of all of the clusters for your account in the specified
-    #   region.
+    #   Region.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
