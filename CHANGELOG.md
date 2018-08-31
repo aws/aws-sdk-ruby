@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EKS - Updated the API, and documentation for Amazon Elastic Container Service for Kubernetes.
+
+* Feature - Aws::WAFRegional - Updated the API, documentation, and integration test for AWS WAF Regional.
+
+* Feature - Aws::WAF - Updated the API, documentation, and integration test for AWS WAF.
+
 2.11.121 (2018-08-30)
 ------------------
 
