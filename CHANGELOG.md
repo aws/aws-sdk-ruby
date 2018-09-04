@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
+
+* Feature - Aws::Rekognition - Updated the API, and documentation for Amazon Rekognition.
+
 2.11.122 (2018-08-31)
 ------------------
 
