@@ -237,7 +237,7 @@ module Aws::RDS
     #   The description of the option group.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -284,7 +284,7 @@ module Aws::RDS
     #   The description for the copied option group.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #

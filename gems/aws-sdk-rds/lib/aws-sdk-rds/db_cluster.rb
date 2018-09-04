@@ -300,11 +300,11 @@ module Aws::RDS
     #
     # Log types vary by DB engine. For information about the log types for
     # each DB engine, see [Amazon RDS Database Log Files][1] in the *Amazon
-    # RDS User Guide.*
+    # Aurora User Guide.*
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html
     # @return [Array<String>]
     def enabled_cloudwatch_logs_exports
       data[:enabled_cloudwatch_logs_exports]
@@ -326,11 +326,11 @@ module Aws::RDS
     # `serverless` DB engine mode.
     #
     # For more information, see [Using Amazon Aurora Serverless][1] in the
-    # *Amazon RDS User Guide*.
+    # *Amazon Aurora User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/aurora-serverless.html
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
     # @return [Types::ScalingConfigurationInfo]
     def scaling_configuration_info
       data[:scaling_configuration_info]
@@ -512,11 +512,12 @@ module Aws::RDS
     # @option options [Array<String>] :availability_zones
     #   A list of EC2 Availability Zones that instances in the DB cluster can
     #   be created in. For information on AWS Regions and Availability Zones,
-    #   see [Regions and Availability Zones][1].
+    #   see [Choosing the Regions and Availability Zones][1] in the *Amazon
+    #   Aurora User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html
     # @option options [Integer] :backup_retention_period
     #   The number of days for which automated backups are retained. You must
     #   specify a minimum value of 1.
@@ -605,8 +606,8 @@ module Aws::RDS
     #
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each AWS Region. To see the time blocks available,
-    #   see [ Adjusting the Preferred Maintenance Window][1] in the *Amazon
-    #   RDS User Guide.*
+    #   see [ Adjusting the Preferred DB Cluster Maintenance Window][1] in the
+    #   *Amazon Aurora User Guide.*
     #
     #   Constraints:
     #
@@ -620,7 +621,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora
     # @option options [String] :preferred_maintenance_window
     #   The weekly time range during which system maintenance can occur, in
     #   Universal Coordinated Time (UTC).
@@ -630,7 +631,7 @@ module Aws::RDS
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each AWS Region, occurring on a random day of the
     #   week. To see the time blocks available, see [ Adjusting the Preferred
-    #   Maintenance Window][1] in the *Amazon RDS User Guide.*
+    #   DB Cluster Maintenance Window][1] in the *Amazon Aurora User Guide.*
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
@@ -638,13 +639,13 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora
     # @option options [String] :replication_source_identifier
     #   The Amazon Resource Name (ARN) of the source DB instance or DB cluster
     #   if this DB cluster is created as a Read Replica.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -738,12 +739,11 @@ module Aws::RDS
     #   The list of log types that need to be enabled for exporting to
     #   CloudWatch Logs. The values in the list depend on the DB engine being
     #   used. For more information, see [Publishing Database Logs to Amazon
-    #   CloudWatch Logs ][1] in the *Amazon Relational Database Service User
-    #   Guide*.
+    #   CloudWatch Logs][1] in the *Amazon Aurora User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     # @option options [String] :engine_mode
     #   The DB engine mode of the DB cluster, either `provisioned` or
     #   `serverless`.
@@ -921,12 +921,13 @@ module Aws::RDS
     #   cluster are applied during the next maintenance window.
     #
     #   The `ApplyImmediately` parameter only affects the
-    #   `NewDBClusterIdentifier` and `MasterUserPassword` values. If you set
-    #   the `ApplyImmediately` parameter value to false, then changes to the
-    #   `NewDBClusterIdentifier` and `MasterUserPassword` values are applied
-    #   during the next maintenance window. All other changes are applied
-    #   immediately, regardless of the value of the `ApplyImmediately`
-    #   parameter.
+    #   `EnableIAMDatabaseAuthentication`, `MasterUserPassword`, and
+    #   `NewDBClusterIdentifier` values. If you set the `ApplyImmediately`
+    #   parameter value to false, then changes to the
+    #   `EnableIAMDatabaseAuthentication`, `MasterUserPassword`, and
+    #   `NewDBClusterIdentifier` values are applied during the next
+    #   maintenance window. All other changes are applied immediately,
+    #   regardless of the value of the `ApplyImmediately` parameter.
     #
     #   Default: `false`
     # @option options [Integer] :backup_retention_period
@@ -975,8 +976,8 @@ module Aws::RDS
     #
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each AWS Region. To see the time blocks available,
-    #   see [ Adjusting the Preferred Maintenance Window][1] in the *Amazon
-    #   RDS User Guide.*
+    #   see [ Adjusting the Preferred DB Cluster Maintenance Window][1] in the
+    #   *Amazon Aurora User Guide.*
     #
     #   Constraints:
     #
@@ -990,7 +991,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora
     # @option options [String] :preferred_maintenance_window
     #   The weekly time range during which system maintenance can occur, in
     #   Universal Coordinated Time (UTC).
@@ -1000,7 +1001,7 @@ module Aws::RDS
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each AWS Region, occurring on a random day of the
     #   week. To see the time blocks available, see [ Adjusting the Preferred
-    #   Maintenance Window][1] in the *Amazon RDS User Guide.*
+    #   DB Cluster Maintenance Window][1] in the *Amazon Aurora User Guide.*
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
@@ -1008,7 +1009,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora
     # @option options [Boolean] :enable_iam_database_authentication
     #   True to enable mapping of AWS Identity and Access Management (IAM)
     #   accounts to database accounts, and otherwise false.
@@ -1144,7 +1145,7 @@ module Aws::RDS
     #   A list of VPC security groups that the new DB cluster belongs to.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -1197,12 +1198,11 @@ module Aws::RDS
     #   The list of logs that the restored DB cluster is to export to
     #   CloudWatch Logs. The values in the list depend on the DB engine being
     #   used. For more information, see [Publishing Database Logs to Amazon
-    #   CloudWatch Logs ][1] in the *Amazon Relational Database Service User
-    #   Guide*.
+    #   CloudWatch Logs][1] in the *Amazon Aurora User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(source_db_cluster_identifier: @id)

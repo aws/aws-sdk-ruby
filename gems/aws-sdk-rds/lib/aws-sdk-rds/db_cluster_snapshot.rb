@@ -414,7 +414,7 @@ module Aws::RDS
     #   target DB cluster snapshot, and otherwise false. The default is false.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -567,12 +567,11 @@ module Aws::RDS
     #   The list of logs that the restored DB cluster is to export to
     #   CloudWatch Logs. The values in the list depend on the DB engine being
     #   used. For more information, see [Publishing Database Logs to Amazon
-    #   CloudWatch Logs ][1] in the *Amazon Relational Database Service User
-    #   Guide*.
+    #   CloudWatch Logs ][1] in the *Amazon Aurora User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     # @option options [String] :engine_mode
     #   The DB engine mode of the DB cluster, either `provisioned` or
     #   `serverless`.
