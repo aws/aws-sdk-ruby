@@ -140,6 +140,51 @@ module Aws
       @parsed_config[profile]['credential_process']
     end
 
+    def csm_enabled(opts = {})
+      p = opts[:profile] || @profile_name
+      if @config_enabled
+        if @parsed_credentials
+          value = @parsed_credentials.fetch(p, {})["csm_enabled"]
+        end
+        if @parsed_config
+          value ||= @parsed_config.fetch(p, {})["csm_enabled"]
+        end
+        value
+      else
+        nil
+      end
+    end
+
+    def csm_client_id(opts = {})
+      p = opts[:profile] || @profile_name
+      if @config_enabled
+        if @parsed_credentials
+          value = @parsed_credentials.fetch(p, {})["csm_client_id"]
+        end
+        if @parsed_config
+          value ||= @parsed_config.fetch(p, {})["csm_client_id"]
+        end
+        value
+      else
+        nil
+      end
+    end
+
+    def csm_port(opts = {})
+      p = opts[:profile] || @profile_name
+      if @config_enabled
+        if @parsed_credentials
+          value = @parsed_credentials.fetch(p, {})["csm_port"]
+        end
+        if @parsed_config
+          value ||= @parsed_config.fetch(p, {})["csm_port"]
+        end
+        value
+      else
+        nil
+      end
+    end
+
     private
     def credentials_present?
       (@parsed_credentials && !@parsed_credentials.empty?) ||
