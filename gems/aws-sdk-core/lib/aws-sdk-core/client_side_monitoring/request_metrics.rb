@@ -9,7 +9,7 @@ module Aws
         @api = opts[:operation]
         @client_id = opts[:client_id]
         @timestamp = opts[:timestamp] # In epoch milliseconds
-        @version = 1 # Currently hard-coded
+        @version = 1
         @api_call = ApiCall.new(@service, @api, @client_id, @version, @timestamp)
         @api_call_attempts = []
       end
