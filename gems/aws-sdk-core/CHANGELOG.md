@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Adds code paths and plugins for future SDK instrumentation and telemetry to aws-sdk-sts.
+
 3.26.0 (2018-09-05)
 ------------------
 
