@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.124 (2018-09-05)
+------------------
+
 * Feature - Aws::AppStream - Updated the API, and documentation for Amazon AppStream.
 
 * Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
