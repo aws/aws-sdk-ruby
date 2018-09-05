@@ -6197,10 +6197,14 @@ module Aws::EC2
       api.version = "2016-11-15"
 
       api.metadata = {
+        "apiVersion" => "2016-11-15",
         "endpointPrefix" => "ec2",
         "protocol" => "ec2",
+        "serviceAbbreviation" => "Amazon EC2",
         "serviceFullName" => "Amazon Elastic Compute Cloud",
+        "serviceId" => "EC2",
         "signatureVersion" => "v4",
+        "uid" => "ec2-2016-11-15",
         "xmlNamespace" => "http://ec2.amazonaws.com/doc/2016-11-15",
       }
 

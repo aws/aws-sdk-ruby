@@ -247,13 +247,17 @@ module Aws::CloudHSMV2
       api.version = "2017-04-28"
 
       api.metadata = {
+        "apiVersion" => "2017-04-28",
         "endpointPrefix" => "cloudhsmv2",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "CloudHSM V2",
         "serviceFullName" => "AWS CloudHSM V2",
+        "serviceId" => "CloudHSM V2",
         "signatureVersion" => "v4",
         "signingName" => "cloudhsm",
         "targetPrefix" => "BaldrApiService",
+        "uid" => "cloudhsmv2-2017-04-28",
       }
 
       api.add_operation(:copy_backup_to_region, Seahorse::Model::Operation.new.tap do |o|

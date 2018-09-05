@@ -676,12 +676,14 @@ module Aws::MachineLearning
       api.version = "2014-12-12"
 
       api.metadata = {
+        "apiVersion" => "2014-12-12",
         "endpointPrefix" => "machinelearning",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon Machine Learning",
         "signatureVersion" => "v4",
         "targetPrefix" => "AmazonML_20141212",
+        "uid" => "machinelearning-2014-12-12",
       }
 
       api.add_operation(:add_tags, Seahorse::Model::Operation.new.tap do |o|

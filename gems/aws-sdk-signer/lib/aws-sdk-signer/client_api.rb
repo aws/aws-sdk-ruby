@@ -277,12 +277,16 @@ module Aws::Signer
       api.version = "2017-08-25"
 
       api.metadata = {
+        "apiVersion" => "2017-08-25",
         "endpointPrefix" => "signer",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "serviceAbbreviation" => "signer",
         "serviceFullName" => "AWS Signer",
+        "serviceId" => "signer",
         "signatureVersion" => "v4",
         "signingName" => "signer",
+        "uid" => "signer-2017-08-25",
       }
 
       api.add_operation(:cancel_signing_profile, Seahorse::Model::Operation.new.tap do |o|

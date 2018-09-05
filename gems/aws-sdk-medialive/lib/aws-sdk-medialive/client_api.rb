@@ -1833,12 +1833,16 @@ module Aws::MediaLive
       api.version = "2017-10-14"
 
       api.metadata = {
+        "apiVersion" => "2017-10-14",
         "endpointPrefix" => "medialive",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "serviceAbbreviation" => "MediaLive",
         "serviceFullName" => "AWS Elemental MediaLive",
+        "serviceId" => "MediaLive",
         "signatureVersion" => "v4",
         "signingName" => "medialive",
+        "uid" => "medialive-2017-10-14",
       }
 
       api.add_operation(:batch_update_schedule, Seahorse::Model::Operation.new.tap do |o|

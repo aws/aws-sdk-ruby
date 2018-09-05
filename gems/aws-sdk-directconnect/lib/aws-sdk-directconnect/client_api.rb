@@ -635,12 +635,14 @@ module Aws::DirectConnect
       api.version = "2012-10-25"
 
       api.metadata = {
+        "apiVersion" => "2012-10-25",
         "endpointPrefix" => "directconnect",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Direct Connect",
         "signatureVersion" => "v4",
         "targetPrefix" => "OvertureService",
+        "uid" => "directconnect-2012-10-25",
       }
 
       api.add_operation(:allocate_connection_on_interconnect, Seahorse::Model::Operation.new.tap do |o|

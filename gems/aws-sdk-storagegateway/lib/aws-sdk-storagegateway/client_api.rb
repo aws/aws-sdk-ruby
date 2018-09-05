@@ -1135,12 +1135,15 @@ module Aws::StorageGateway
       api.version = "2013-06-30"
 
       api.metadata = {
+        "apiVersion" => "2013-06-30",
         "endpointPrefix" => "storagegateway",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Storage Gateway",
+        "serviceId" => "Storage Gateway",
         "signatureVersion" => "v4",
         "targetPrefix" => "StorageGateway_20130630",
+        "uid" => "storagegateway-2013-06-30",
       }
 
       api.add_operation(:activate_gateway, Seahorse::Model::Operation.new.tap do |o|

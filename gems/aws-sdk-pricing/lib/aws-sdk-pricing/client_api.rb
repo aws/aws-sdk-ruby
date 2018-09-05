@@ -98,13 +98,16 @@ module Aws::Pricing
       api.version = "2017-10-15"
 
       api.metadata = {
+        "apiVersion" => "2017-10-15",
         "endpointPrefix" => "api.pricing",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "AWS Pricing",
         "serviceFullName" => "AWS Price List Service",
         "signatureVersion" => "v4",
         "signingName" => "pricing",
         "targetPrefix" => "AWSPriceListService",
+        "uid" => "pricing-2017-10-15",
       }
 
       api.add_operation(:describe_services, Seahorse::Model::Operation.new.tap do |o|

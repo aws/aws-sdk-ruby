@@ -1408,10 +1408,13 @@ module Aws::APIGateway
       api.version = "2015-07-09"
 
       api.metadata = {
+        "apiVersion" => "2015-07-09",
         "endpointPrefix" => "apigateway",
         "protocol" => "rest-json",
         "serviceFullName" => "Amazon API Gateway",
+        "serviceId" => "API Gateway",
         "signatureVersion" => "v4",
+        "uid" => "apigateway-2015-07-09",
       }
 
       api.add_operation(:create_api_key, Seahorse::Model::Operation.new.tap do |o|

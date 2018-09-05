@@ -91,6 +91,8 @@ module Aws::DynamoDB
     DescribeBackupOutput = Shapes::StructureShape.new(name: 'DescribeBackupOutput')
     DescribeContinuousBackupsInput = Shapes::StructureShape.new(name: 'DescribeContinuousBackupsInput')
     DescribeContinuousBackupsOutput = Shapes::StructureShape.new(name: 'DescribeContinuousBackupsOutput')
+    DescribeEndpointsRequest = Shapes::StructureShape.new(name: 'DescribeEndpointsRequest')
+    DescribeEndpointsResponse = Shapes::StructureShape.new(name: 'DescribeEndpointsResponse')
     DescribeGlobalTableInput = Shapes::StructureShape.new(name: 'DescribeGlobalTableInput')
     DescribeGlobalTableOutput = Shapes::StructureShape.new(name: 'DescribeGlobalTableOutput')
     DescribeGlobalTableSettingsInput = Shapes::StructureShape.new(name: 'DescribeGlobalTableSettingsInput')
@@ -102,6 +104,8 @@ module Aws::DynamoDB
     DescribeTimeToLiveInput = Shapes::StructureShape.new(name: 'DescribeTimeToLiveInput')
     DescribeTimeToLiveOutput = Shapes::StructureShape.new(name: 'DescribeTimeToLiveOutput')
     Double = Shapes::FloatShape.new(name: 'Double')
+    Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
+    Endpoints = Shapes::ListShape.new(name: 'Endpoints')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExpectedAttributeMap = Shapes::MapShape.new(name: 'ExpectedAttributeMap')
     ExpectedAttributeValue = Shapes::StructureShape.new(name: 'ExpectedAttributeValue')
@@ -523,6 +527,11 @@ module Aws::DynamoDB
     DescribeContinuousBackupsOutput.add_member(:continuous_backups_description, Shapes::ShapeRef.new(shape: ContinuousBackupsDescription, location_name: "ContinuousBackupsDescription"))
     DescribeContinuousBackupsOutput.struct_class = Types::DescribeContinuousBackupsOutput
 
+    DescribeEndpointsRequest.struct_class = Types::DescribeEndpointsRequest
+
+    DescribeEndpointsResponse.add_member(:endpoints, Shapes::ShapeRef.new(shape: Endpoints, required: true, location_name: "Endpoints"))
+    DescribeEndpointsResponse.struct_class = Types::DescribeEndpointsResponse
+
     DescribeGlobalTableInput.add_member(:global_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "GlobalTableName"))
     DescribeGlobalTableInput.struct_class = Types::DescribeGlobalTableInput
 
@@ -555,6 +564,12 @@ module Aws::DynamoDB
 
     DescribeTimeToLiveOutput.add_member(:time_to_live_description, Shapes::ShapeRef.new(shape: TimeToLiveDescription, location_name: "TimeToLiveDescription"))
     DescribeTimeToLiveOutput.struct_class = Types::DescribeTimeToLiveOutput
+
+    Endpoint.add_member(:address, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Address"))
+    Endpoint.add_member(:cache_period_in_minutes, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "CachePeriodInMinutes"))
+    Endpoint.struct_class = Types::Endpoint
+
+    Endpoints.member = Shapes::ShapeRef.new(shape: Endpoint)
 
     ExpectedAttributeMap.key = Shapes::ShapeRef.new(shape: AttributeName)
     ExpectedAttributeMap.value = Shapes::ShapeRef.new(shape: ExpectedAttributeValue)
@@ -1081,12 +1096,16 @@ module Aws::DynamoDB
       api.version = "2012-08-10"
 
       api.metadata = {
+        "apiVersion" => "2012-08-10",
         "endpointPrefix" => "dynamodb",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "serviceAbbreviation" => "DynamoDB",
         "serviceFullName" => "Amazon DynamoDB",
+        "serviceId" => "DynamoDB",
         "signatureVersion" => "v4",
         "targetPrefix" => "DynamoDB_20120810",
+        "uid" => "dynamodb-2012-08-10",
       }
 
       api.add_operation(:batch_get_item, Seahorse::Model::Operation.new.tap do |o|
@@ -1209,6 +1228,14 @@ module Aws::DynamoDB
         o.output = Shapes::ShapeRef.new(shape: DescribeContinuousBackupsOutput)
         o.errors << Shapes::ShapeRef.new(shape: TableNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:describe_endpoints, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeEndpoints"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeEndpointsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeEndpointsResponse)
       end)
 
       api.add_operation(:describe_global_table, Seahorse::Model::Operation.new.tap do |o|

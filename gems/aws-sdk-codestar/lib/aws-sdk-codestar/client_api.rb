@@ -299,12 +299,15 @@ module Aws::CodeStar
       api.version = "2017-04-19"
 
       api.metadata = {
+        "apiVersion" => "2017-04-19",
         "endpointPrefix" => "codestar",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "CodeStar",
         "serviceFullName" => "AWS CodeStar",
         "signatureVersion" => "v4",
         "targetPrefix" => "CodeStar_20170419",
+        "uid" => "codestar-2017-04-19",
       }
 
       api.add_operation(:associate_team_member, Seahorse::Model::Operation.new.tap do |o|

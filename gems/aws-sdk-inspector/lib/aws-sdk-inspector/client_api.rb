@@ -775,12 +775,15 @@ module Aws::Inspector
       api.version = "2016-02-16"
 
       api.metadata = {
+        "apiVersion" => "2016-02-16",
         "endpointPrefix" => "inspector",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon Inspector",
+        "serviceId" => "Inspector",
         "signatureVersion" => "v4",
         "targetPrefix" => "InspectorService",
+        "uid" => "inspector-2016-02-16",
       }
 
       api.add_operation(:add_attributes_to_findings, Seahorse::Model::Operation.new.tap do |o|

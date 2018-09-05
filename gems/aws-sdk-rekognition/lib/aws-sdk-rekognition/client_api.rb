@@ -823,12 +823,15 @@ module Aws::Rekognition
       api.version = "2016-06-27"
 
       api.metadata = {
+        "apiVersion" => "2016-06-27",
         "endpointPrefix" => "rekognition",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon Rekognition",
+        "serviceId" => "Rekognition",
         "signatureVersion" => "v4",
         "targetPrefix" => "RekognitionService",
+        "uid" => "rekognition-2016-06-27",
       }
 
       api.add_operation(:compare_faces, Seahorse::Model::Operation.new.tap do |o|

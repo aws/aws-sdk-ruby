@@ -1046,11 +1046,15 @@ module Aws::SES
       api.version = "2010-12-01"
 
       api.metadata = {
+        "apiVersion" => "2010-12-01",
         "endpointPrefix" => "email",
         "protocol" => "query",
+        "serviceAbbreviation" => "Amazon SES",
         "serviceFullName" => "Amazon Simple Email Service",
+        "serviceId" => "SES",
         "signatureVersion" => "v4",
         "signingName" => "ses",
+        "uid" => "email-2010-12-01",
         "xmlNamespace" => "http://ses.amazonaws.com/doc/2010-12-01/",
       }
 

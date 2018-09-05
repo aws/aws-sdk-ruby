@@ -916,12 +916,15 @@ module Aws::DatabaseMigrationService
       api.version = "2016-01-01"
 
       api.metadata = {
+        "apiVersion" => "2016-01-01",
         "endpointPrefix" => "dms",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Database Migration Service",
+        "serviceId" => "Database Migration Service",
         "signatureVersion" => "v4",
         "targetPrefix" => "AmazonDMSv20160101",
+        "uid" => "dms-2016-01-01",
       }
 
       api.add_operation(:add_tags_to_resource, Seahorse::Model::Operation.new.tap do |o|

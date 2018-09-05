@@ -948,12 +948,16 @@ module Aws::ECS
       api.version = "2014-11-13"
 
       api.metadata = {
+        "apiVersion" => "2014-11-13",
         "endpointPrefix" => "ecs",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "Amazon ECS",
         "serviceFullName" => "Amazon EC2 Container Service",
+        "serviceId" => "ECS",
         "signatureVersion" => "v4",
         "targetPrefix" => "AmazonEC2ContainerServiceV20141113",
+        "uid" => "ecs-2014-11-13",
       }
 
       api.add_operation(:create_cluster, Seahorse::Model::Operation.new.tap do |o|

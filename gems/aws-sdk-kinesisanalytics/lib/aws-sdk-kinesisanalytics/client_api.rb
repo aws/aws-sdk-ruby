@@ -583,13 +583,17 @@ module Aws::KinesisAnalytics
       api.version = "2015-08-14"
 
       api.metadata = {
+        "apiVersion" => "2015-08-14",
         "endpointPrefix" => "kinesisanalytics",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "Kinesis Analytics",
         "serviceFullName" => "Amazon Kinesis Analytics",
+        "serviceId" => "Kinesis Analytics",
         "signatureVersion" => "v4",
         "targetPrefix" => "KinesisAnalytics_20150814",
         "timestampFormat" => "unixTimestamp",
+        "uid" => "kinesisanalytics-2015-08-14",
       }
 
       api.add_operation(:add_application_cloud_watch_logging_option, Seahorse::Model::Operation.new.tap do |o|

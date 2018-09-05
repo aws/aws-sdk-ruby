@@ -1414,11 +1414,13 @@ module Aws::CloudDirectory
       api.version = "2017-01-11"
 
       api.metadata = {
+        "apiVersion" => "2017-01-11",
         "endpointPrefix" => "clouddirectory",
         "protocol" => "rest-json",
         "serviceFullName" => "Amazon CloudDirectory",
         "signatureVersion" => "v4",
         "signingName" => "clouddirectory",
+        "uid" => "clouddirectory-2017-01-11",
       }
 
       api.add_operation(:add_facet_to_object, Seahorse::Model::Operation.new.tap do |o|

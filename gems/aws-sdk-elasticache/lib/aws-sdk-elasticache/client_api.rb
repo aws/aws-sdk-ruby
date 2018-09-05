@@ -953,10 +953,12 @@ module Aws::ElastiCache
       api.version = "2015-02-02"
 
       api.metadata = {
+        "apiVersion" => "2015-02-02",
         "endpointPrefix" => "elasticache",
         "protocol" => "query",
         "serviceFullName" => "Amazon ElastiCache",
         "signatureVersion" => "v4",
+        "uid" => "elasticache-2015-02-02",
         "xmlNamespace" => "http://elasticache.amazonaws.com/doc/2015-02-02/",
       }
 

@@ -336,6 +336,7 @@ module Aws::S3
     OutputSerialization = Shapes::StructureShape.new(name: 'OutputSerialization')
     Owner = Shapes::StructureShape.new(name: 'Owner')
     OwnerOverride = Shapes::StringShape.new(name: 'OwnerOverride')
+    ParquetInput = Shapes::StructureShape.new(name: 'ParquetInput')
     Part = Shapes::StructureShape.new(name: 'Part')
     PartNumber = Shapes::IntegerShape.new(name: 'PartNumber')
     PartNumberMarker = Shapes::IntegerShape.new(name: 'PartNumberMarker')
@@ -1137,6 +1138,7 @@ module Aws::S3
     InputSerialization.add_member(:csv, Shapes::ShapeRef.new(shape: CSVInput, location_name: "CSV"))
     InputSerialization.add_member(:compression_type, Shapes::ShapeRef.new(shape: CompressionType, location_name: "CompressionType"))
     InputSerialization.add_member(:json, Shapes::ShapeRef.new(shape: JSONInput, location_name: "JSON"))
+    InputSerialization.add_member(:parquet, Shapes::ShapeRef.new(shape: ParquetInput, location_name: "Parquet"))
     InputSerialization.struct_class = Types::InputSerialization
 
     InventoryConfiguration.add_member(:destination, Shapes::ShapeRef.new(shape: InventoryDestination, required: true, location_name: "Destination"))
@@ -1464,6 +1466,8 @@ module Aws::S3
     Owner.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
     Owner.add_member(:id, Shapes::ShapeRef.new(shape: ID, location_name: "ID"))
     Owner.struct_class = Types::Owner
+
+    ParquetInput.struct_class = Types::ParquetInput
 
     Part.add_member(:part_number, Shapes::ShapeRef.new(shape: PartNumber, location_name: "PartNumber"))
     Part.add_member(:last_modified, Shapes::ShapeRef.new(shape: LastModified, location_name: "LastModified"))
@@ -1959,10 +1963,16 @@ module Aws::S3
       api.version = "2006-03-01"
 
       api.metadata = {
+        "apiVersion" => "2006-03-01",
+        "checksumFormat" => "md5",
         "endpointPrefix" => "s3",
+        "globalEndpoint" => "s3.amazonaws.com",
         "protocol" => "rest-xml",
+        "serviceAbbreviation" => "Amazon S3",
         "serviceFullName" => "Amazon Simple Storage Service",
+        "serviceId" => "S3",
         "timestampFormat" => "rfc822",
+        "uid" => "s3-2006-03-01",
       }
 
       api.add_operation(:abort_multipart_upload, Seahorse::Model::Operation.new.tap do |o|

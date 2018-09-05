@@ -412,12 +412,16 @@ module Aws::MediaPackage
       api.version = "2017-10-12"
 
       api.metadata = {
+        "apiVersion" => "2017-10-12",
         "endpointPrefix" => "mediapackage",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "serviceAbbreviation" => "MediaPackage",
         "serviceFullName" => "AWS Elemental MediaPackage",
+        "serviceId" => "MediaPackage",
         "signatureVersion" => "v4",
         "signingName" => "mediapackage",
+        "uid" => "mediapackage-2017-10-12",
       }
 
       api.add_operation(:create_channel, Seahorse::Model::Operation.new.tap do |o|

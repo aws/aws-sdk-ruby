@@ -211,13 +211,16 @@ module Aws::AutoScalingPlans
       api.version = "2018-01-06"
 
       api.metadata = {
+        "apiVersion" => "2018-01-06",
         "endpointPrefix" => "autoscaling",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Auto Scaling Plans",
+        "serviceId" => "Auto Scaling Plans",
         "signatureVersion" => "v4",
         "signingName" => "autoscaling-plans",
         "targetPrefix" => "AnyScaleScalingPlannerFrontendService",
+        "uid" => "autoscaling-plans-2018-01-06",
       }
 
       api.add_operation(:create_scaling_plan, Seahorse::Model::Operation.new.tap do |o|

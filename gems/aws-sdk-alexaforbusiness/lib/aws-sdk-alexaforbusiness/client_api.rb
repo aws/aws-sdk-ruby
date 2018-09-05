@@ -767,12 +767,15 @@ module Aws::AlexaForBusiness
       api.version = "2017-11-09"
 
       api.metadata = {
+        "apiVersion" => "2017-11-09",
         "endpointPrefix" => "a4b",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Alexa For Business",
+        "serviceId" => "Alexa For Business",
         "signatureVersion" => "v4",
         "targetPrefix" => "AlexaForBusiness",
+        "uid" => "alexaforbusiness-2017-11-09",
       }
 
       api.add_operation(:associate_contact_with_address_book, Seahorse::Model::Operation.new.tap do |o|

@@ -522,12 +522,15 @@ module Aws::MQ
       api.version = "2017-11-27"
 
       api.metadata = {
+        "apiVersion" => "2017-11-27",
         "endpointPrefix" => "mq",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "serviceFullName" => "AmazonMQ",
+        "serviceId" => "mq",
         "signatureVersion" => "v4",
         "signingName" => "mq",
+        "uid" => "mq-2017-11-27",
       }
 
       api.add_operation(:create_broker, Seahorse::Model::Operation.new.tap do |o|

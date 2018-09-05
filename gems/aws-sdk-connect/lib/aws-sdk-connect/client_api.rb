@@ -319,12 +319,16 @@ module Aws::Connect
       api.version = "2017-08-08"
 
       api.metadata = {
+        "apiVersion" => "2017-08-08",
         "endpointPrefix" => "connect",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "serviceAbbreviation" => "Amazon Connect",
         "serviceFullName" => "Amazon Connect Service",
+        "serviceId" => "Connect",
         "signatureVersion" => "v4",
         "signingName" => "connect",
+        "uid" => "connect-2017-08-08",
       }
 
       api.add_operation(:create_user, Seahorse::Model::Operation.new.tap do |o|

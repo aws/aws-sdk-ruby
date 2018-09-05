@@ -1424,10 +1424,13 @@ module Aws::Redshift
       api.version = "2012-12-01"
 
       api.metadata = {
+        "apiVersion" => "2012-12-01",
         "endpointPrefix" => "redshift",
         "protocol" => "query",
         "serviceFullName" => "Amazon Redshift",
+        "serviceId" => "Redshift",
         "signatureVersion" => "v4",
+        "uid" => "redshift-2012-12-01",
         "xmlNamespace" => "http://redshift.amazonaws.com/doc/2012-12-01/",
       }
 

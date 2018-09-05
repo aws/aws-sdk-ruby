@@ -475,12 +475,15 @@ module Aws::CodeBuild
       api.version = "2016-10-06"
 
       api.metadata = {
+        "apiVersion" => "2016-10-06",
         "endpointPrefix" => "codebuild",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS CodeBuild",
+        "serviceId" => "CodeBuild",
         "signatureVersion" => "v4",
         "targetPrefix" => "CodeBuild_20161006",
+        "uid" => "codebuild-2016-10-06",
       }
 
       api.add_operation(:batch_delete_builds, Seahorse::Model::Operation.new.tap do |o|

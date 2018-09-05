@@ -1266,12 +1266,15 @@ module Aws::ServiceCatalog
       api.version = "2015-12-10"
 
       api.metadata = {
+        "apiVersion" => "2015-12-10",
         "endpointPrefix" => "servicecatalog",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Service Catalog",
+        "serviceId" => "Service Catalog",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWS242ServiceCatalogService",
+        "uid" => "servicecatalog-2015-12-10",
       }
 
       api.add_operation(:accept_portfolio_share, Seahorse::Model::Operation.new.tap do |o|

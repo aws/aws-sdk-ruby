@@ -334,12 +334,15 @@ module Aws::CloudWatchEvents
       api.version = "2015-10-07"
 
       api.metadata = {
+        "apiVersion" => "2015-10-07",
         "endpointPrefix" => "events",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon CloudWatch Events",
+        "serviceId" => "CloudWatch Events",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSEvents",
+        "uid" => "events-2015-10-07",
       }
 
       api.add_operation(:delete_rule, Seahorse::Model::Operation.new.tap do |o|

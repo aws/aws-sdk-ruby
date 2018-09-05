@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -47,6 +49,8 @@ module Aws::AppStream
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -91,6 +95,22 @@ module Aws::AppStream
     #   * `~/.aws/config`
     #
     # @option options [String] :access_key_id
+    #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (#<Aws::ClientSideMonitoring::Publisher:0x00007f20e3c7b9f0 @agent_port=nil, @mutex=#<Thread::Mutex:0x00007f20e3c7b9a0>>)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
     #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
@@ -618,6 +638,12 @@ module Aws::AppStream
     #   The actions that are enabled or disabled for users during their
     #   streaming sessions. By default, these actions are enabled.
     #
+    # @option params [Types::ApplicationSettings] :application_settings
+    #   The persistent application settings for users of a stack. When these
+    #   settings are enabled, changes that users make to applications and
+    #   Windows settings are automatically saved after each session and
+    #   applied to the next session.
+    #
     # @return [Types::CreateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStackResult#stack #stack} => Types::Stack
@@ -643,6 +669,10 @@ module Aws::AppStream
     #         permission: "ENABLED", # required, accepts ENABLED, DISABLED
     #       },
     #     ],
+    #     application_settings: {
+    #       enabled: false, # required
+    #       settings_group: "SettingsGroup",
+    #     },
     #   })
     #
     # @example Response structure
@@ -665,6 +695,9 @@ module Aws::AppStream
     #   resp.stack.user_settings #=> Array
     #   resp.stack.user_settings[0].action #=> String, one of "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", "CLIPBOARD_COPY_TO_LOCAL_DEVICE", "FILE_UPLOAD", "FILE_DOWNLOAD", "PRINTING_TO_LOCAL_DEVICE"
     #   resp.stack.user_settings[0].permission #=> String, one of "ENABLED", "DISABLED"
+    #   resp.stack.application_settings.enabled #=> Boolean
+    #   resp.stack.application_settings.settings_group #=> String
+    #   resp.stack.application_settings.s3_bucket_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStack AWS API Documentation
     #
@@ -1117,8 +1150,8 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Retrieves a list that describes the permissions for a private image
-    # that you own.
+    # Retrieves a list that describes the permissions for shared AWS account
+    # IDs on a private image that you own.
     #
     # @option params [required, String] :name
     #   The name of the private image for which to describe permissions. The
@@ -1169,11 +1202,11 @@ module Aws::AppStream
     end
 
     # Retrieves a list that describes one or more specified images, if the
-    # image names are provided. Otherwise, all images in the account are
-    # described.
+    # image names or image ARNs are provided. Otherwise, all images in the
+    # account are described.
     #
     # @option params [Array<String>] :names
-    #   The names of the images to describe.
+    #   The names of the public or private images to describe.
     #
     # @option params [Array<String>] :arns
     #   The ARNs of the public, private, and shared images to describe.
@@ -1352,6 +1385,9 @@ module Aws::AppStream
     #   resp.stacks[0].user_settings #=> Array
     #   resp.stacks[0].user_settings[0].action #=> String, one of "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", "CLIPBOARD_COPY_TO_LOCAL_DEVICE", "FILE_UPLOAD", "FILE_DOWNLOAD", "PRINTING_TO_LOCAL_DEVICE"
     #   resp.stacks[0].user_settings[0].permission #=> String, one of "ENABLED", "DISABLED"
+    #   resp.stacks[0].application_settings.enabled #=> Boolean
+    #   resp.stacks[0].application_settings.settings_group #=> String
+    #   resp.stacks[0].application_settings.s3_bucket_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeStacks AWS API Documentation
@@ -2033,6 +2069,12 @@ module Aws::AppStream
     #   The actions that are enabled or disabled for users during their
     #   streaming sessions. By default, these actions are enabled.
     #
+    # @option params [Types::ApplicationSettings] :application_settings
+    #   The persistent application settings for users of a stack. When these
+    #   settings are enabled, changes that users make to applications and
+    #   Windows settings are automatically saved after each session and
+    #   applied to the next session.
+    #
     # @return [Types::UpdateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateStackResult#stack #stack} => Types::Stack
@@ -2060,6 +2102,10 @@ module Aws::AppStream
     #         permission: "ENABLED", # required, accepts ENABLED, DISABLED
     #       },
     #     ],
+    #     application_settings: {
+    #       enabled: false, # required
+    #       settings_group: "SettingsGroup",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2082,6 +2128,9 @@ module Aws::AppStream
     #   resp.stack.user_settings #=> Array
     #   resp.stack.user_settings[0].action #=> String, one of "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", "CLIPBOARD_COPY_TO_LOCAL_DEVICE", "FILE_UPLOAD", "FILE_DOWNLOAD", "PRINTING_TO_LOCAL_DEVICE"
     #   resp.stack.user_settings[0].permission #=> String, one of "ENABLED", "DISABLED"
+    #   resp.stack.application_settings.enabled #=> Boolean
+    #   resp.stack.application_settings.settings_group #=> String
+    #   resp.stack.application_settings.s3_bucket_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStack AWS API Documentation
     #
@@ -2105,7 +2154,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

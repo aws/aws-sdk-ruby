@@ -454,12 +454,15 @@ module Aws::ApplicationDiscoveryService
       api.version = "2015-11-01"
 
       api.metadata = {
+        "apiVersion" => "2015-11-01",
         "endpointPrefix" => "discovery",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Application Discovery Service",
+        "serviceId" => "Application Discovery Service",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSPoseidonService_V2015_11_01",
+        "uid" => "discovery-2015-11-01",
       }
 
       api.add_operation(:associate_configuration_items_to_application, Seahorse::Model::Operation.new.tap do |o|

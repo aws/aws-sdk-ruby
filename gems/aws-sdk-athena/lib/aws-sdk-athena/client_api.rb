@@ -259,12 +259,14 @@ module Aws::Athena
       api.version = "2017-05-18"
 
       api.metadata = {
+        "apiVersion" => "2017-05-18",
         "endpointPrefix" => "athena",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon Athena",
         "signatureVersion" => "v4",
         "targetPrefix" => "AmazonAthena",
+        "uid" => "athena-2017-05-18",
       }
 
       api.add_operation(:batch_get_named_query, Seahorse::Model::Operation.new.tap do |o|

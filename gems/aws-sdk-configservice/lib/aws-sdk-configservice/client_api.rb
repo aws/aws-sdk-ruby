@@ -921,12 +921,16 @@ module Aws::ConfigService
       api.version = "2014-11-12"
 
       api.metadata = {
+        "apiVersion" => "2014-11-12",
         "endpointPrefix" => "config",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "Config Service",
         "serviceFullName" => "AWS Config",
+        "serviceId" => "Config Service",
         "signatureVersion" => "v4",
         "targetPrefix" => "StarlingDoveService",
+        "uid" => "config-2014-11-12",
       }
 
       api.add_operation(:batch_get_resource_config, Seahorse::Model::Operation.new.tap do |o|

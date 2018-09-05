@@ -519,12 +519,15 @@ module Aws::CloudWatchLogs
       api.version = "2014-03-28"
 
       api.metadata = {
+        "apiVersion" => "2014-03-28",
         "endpointPrefix" => "logs",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon CloudWatch Logs",
+        "serviceId" => "CloudWatch Logs",
         "signatureVersion" => "v4",
         "targetPrefix" => "Logs_20140328",
+        "uid" => "logs-2014-03-28",
       }
 
       api.add_operation(:associate_kms_key, Seahorse::Model::Operation.new.tap do |o|

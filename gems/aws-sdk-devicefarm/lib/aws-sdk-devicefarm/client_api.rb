@@ -1193,12 +1193,15 @@ module Aws::DeviceFarm
       api.version = "2015-06-23"
 
       api.metadata = {
+        "apiVersion" => "2015-06-23",
         "endpointPrefix" => "devicefarm",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Device Farm",
+        "serviceId" => "Device Farm",
         "signatureVersion" => "v4",
         "targetPrefix" => "DeviceFarm_20150623",
+        "uid" => "devicefarm-2015-06-23",
       }
 
       api.add_operation(:create_device_pool, Seahorse::Model::Operation.new.tap do |o|

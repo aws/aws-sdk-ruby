@@ -904,6 +904,8 @@ module Aws::S3
     #           json: {
     #             type: "DOCUMENT", # accepts DOCUMENT, LINES
     #           },
+    #           parquet: {
+    #           },
     #         },
     #         expression_type: "SQL", # required, accepts SQL
     #         expression: "Expression", # required

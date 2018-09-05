@@ -1598,12 +1598,16 @@ module Aws::MediaConvert
       api.version = "2017-08-29"
 
       api.metadata = {
+        "apiVersion" => "2017-08-29",
         "endpointPrefix" => "mediaconvert",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "serviceAbbreviation" => "MediaConvert",
         "serviceFullName" => "AWS Elemental MediaConvert",
+        "serviceId" => "MediaConvert",
         "signatureVersion" => "v4",
         "signingName" => "mediaconvert",
+        "uid" => "mediaconvert-2017-08-29",
       }
 
       api.add_operation(:cancel_job, Seahorse::Model::Operation.new.tap do |o|

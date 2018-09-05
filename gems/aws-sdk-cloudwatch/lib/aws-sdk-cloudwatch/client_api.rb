@@ -432,10 +432,13 @@ module Aws::CloudWatch
       api.version = "2010-08-01"
 
       api.metadata = {
+        "apiVersion" => "2010-08-01",
         "endpointPrefix" => "monitoring",
         "protocol" => "query",
+        "serviceAbbreviation" => "CloudWatch",
         "serviceFullName" => "Amazon CloudWatch",
         "signatureVersion" => "v4",
+        "uid" => "monitoring-2010-08-01",
         "xmlNamespace" => "http://monitoring.amazonaws.com/doc/2010-08-01/",
       }
 

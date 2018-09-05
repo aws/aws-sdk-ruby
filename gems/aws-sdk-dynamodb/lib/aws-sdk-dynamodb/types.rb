@@ -2250,6 +2250,22 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeEndpointsRequest AWS API Documentation
+    #
+    class DescribeEndpointsRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] endpoints
+    #   @return [Array<Types::Endpoint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeEndpointsResponse AWS API Documentation
+    #
+    class DescribeEndpointsResponse < Struct.new(
+      :endpoints)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeGlobalTableInput
     #   data as a hash:
     #
@@ -2415,6 +2431,20 @@ module Aws::DynamoDB
     #
     class DescribeTimeToLiveOutput < Struct.new(
       :time_to_live_description)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] address
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_period_in_minutes
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Endpoint AWS API Documentation
+    #
+    class Endpoint < Struct.new(
+      :address,
+      :cache_period_in_minutes)
       include Aws::Structure
     end
 

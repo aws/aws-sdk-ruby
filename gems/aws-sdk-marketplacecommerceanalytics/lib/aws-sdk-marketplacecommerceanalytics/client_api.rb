@@ -64,6 +64,7 @@ module Aws::MarketplaceCommerceAnalytics
       api.version = "2015-07-01"
 
       api.metadata = {
+        "apiVersion" => "2015-07-01",
         "endpointPrefix" => "marketplacecommerceanalytics",
         "jsonVersion" => "1.1",
         "protocol" => "json",
@@ -71,6 +72,7 @@ module Aws::MarketplaceCommerceAnalytics
         "signatureVersion" => "v4",
         "signingName" => "marketplacecommerceanalytics",
         "targetPrefix" => "MarketplaceCommerceAnalytics20150701",
+        "uid" => "marketplacecommerceanalytics-2015-07-01",
       }
 
       api.add_operation(:generate_data_set, Seahorse::Model::Operation.new.tap do |o|

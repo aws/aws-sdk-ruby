@@ -1094,10 +1094,14 @@ module Aws::ElasticBeanstalk
       api.version = "2010-12-01"
 
       api.metadata = {
+        "apiVersion" => "2010-12-01",
         "endpointPrefix" => "elasticbeanstalk",
         "protocol" => "query",
+        "serviceAbbreviation" => "Elastic Beanstalk",
         "serviceFullName" => "AWS Elastic Beanstalk",
+        "serviceId" => "Elastic Beanstalk",
         "signatureVersion" => "v4",
+        "uid" => "elasticbeanstalk-2010-12-01",
         "xmlNamespace" => "http://elasticbeanstalk.amazonaws.com/docs/2010-12-01/",
       }
 

@@ -435,12 +435,15 @@ module Aws::AppSync
       api.version = "2017-07-25"
 
       api.metadata = {
+        "apiVersion" => "2017-07-25",
         "endpointPrefix" => "appsync",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "serviceAbbreviation" => "AWSAppSync",
         "serviceFullName" => "AWS AppSync",
         "signatureVersion" => "v4",
         "signingName" => "appsync",
+        "uid" => "appsync-2017-07-25",
       }
 
       api.add_operation(:create_api_key, Seahorse::Model::Operation.new.tap do |o|

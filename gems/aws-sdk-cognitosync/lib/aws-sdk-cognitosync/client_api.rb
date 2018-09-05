@@ -316,11 +316,13 @@ module Aws::CognitoSync
       api.version = "2014-06-30"
 
       api.metadata = {
+        "apiVersion" => "2014-06-30",
         "endpointPrefix" => "cognito-sync",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "serviceFullName" => "Amazon Cognito Sync",
         "signatureVersion" => "v4",
+        "uid" => "cognito-sync-2014-06-30",
       }
 
       api.add_operation(:bulk_publish, Seahorse::Model::Operation.new.tap do |o|

@@ -567,10 +567,13 @@ module Aws::ElasticsearchService
       api.version = "2015-01-01"
 
       api.metadata = {
+        "apiVersion" => "2015-01-01",
         "endpointPrefix" => "es",
         "protocol" => "rest-json",
         "serviceFullName" => "Amazon Elasticsearch Service",
+        "serviceId" => "Elasticsearch Service",
         "signatureVersion" => "v4",
+        "uid" => "es-2015-01-01",
       }
 
       api.add_operation(:add_tags, Seahorse::Model::Operation.new.tap do |o|

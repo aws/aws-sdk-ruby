@@ -1179,12 +1179,16 @@ module Aws::WAF
       api.version = "2015-08-24"
 
       api.metadata = {
+        "apiVersion" => "2015-08-24",
         "endpointPrefix" => "waf",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "WAF",
         "serviceFullName" => "AWS WAF",
+        "serviceId" => "WAF",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSWAF_20150824",
+        "uid" => "waf-2015-08-24",
       }
 
       api.add_operation(:create_byte_match_set, Seahorse::Model::Operation.new.tap do |o|

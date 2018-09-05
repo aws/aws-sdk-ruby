@@ -604,13 +604,17 @@ module Aws::Organizations
       api.version = "2016-11-28"
 
       api.metadata = {
+        "apiVersion" => "2016-11-28",
         "endpointPrefix" => "organizations",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "Organizations",
         "serviceFullName" => "AWS Organizations",
+        "serviceId" => "Organizations",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSOrganizationsV20161128",
         "timestampFormat" => "unixTimestamp",
+        "uid" => "organizations-2016-11-28",
       }
 
       api.add_operation(:accept_handshake, Seahorse::Model::Operation.new.tap do |o|

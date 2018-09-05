@@ -122,11 +122,13 @@ module Aws::IoTJobsDataPlane
       api.version = "2017-09-29"
 
       api.metadata = {
+        "apiVersion" => "2017-09-29",
         "endpointPrefix" => "data.jobs.iot",
         "protocol" => "rest-json",
         "serviceFullName" => "AWS IoT Jobs Data Plane",
         "signatureVersion" => "v4",
         "signingName" => "iot-jobs-data",
+        "uid" => "iot-jobs-data-2017-09-29",
       }
 
       api.add_operation(:describe_job_execution, Seahorse::Model::Operation.new.tap do |o|

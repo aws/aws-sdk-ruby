@@ -179,12 +179,15 @@ module Aws::IoT1ClickDevicesService
       api.version = "2018-05-14"
 
       api.metadata = {
+        "apiVersion" => "2018-05-14",
         "endpointPrefix" => "devices.iot1click",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "serviceFullName" => "AWS IoT 1-Click Devices Service",
+        "serviceId" => "IoT 1Click Devices Service",
         "signatureVersion" => "v4",
         "signingName" => "iot1click",
+        "uid" => "devices-2018-05-14",
       }
 
       api.add_operation(:claim_devices_by_claim_code, Seahorse::Model::Operation.new.tap do |o|

@@ -749,12 +749,16 @@ module Aws::DirectoryService
       api.version = "2015-04-16"
 
       api.metadata = {
+        "apiVersion" => "2015-04-16",
         "endpointPrefix" => "ds",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "Directory Service",
         "serviceFullName" => "AWS Directory Service",
+        "serviceId" => "Directory Service",
         "signatureVersion" => "v4",
         "targetPrefix" => "DirectoryService_20150416",
+        "uid" => "ds-2015-04-16",
       }
 
       api.add_operation(:add_ip_routes, Seahorse::Model::Operation.new.tap do |o|

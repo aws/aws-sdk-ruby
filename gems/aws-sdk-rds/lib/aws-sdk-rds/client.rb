@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 require 'aws-sdk-rds/plugins/cross_region_copying.rb'
@@ -48,6 +50,8 @@ module Aws::RDS
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
     add_plugin(Aws::RDS::Plugins::CrossRegionCopying)
@@ -93,6 +97,22 @@ module Aws::RDS
     #   * `~/.aws/config`
     #
     # @option options [String] :access_key_id
+    #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (#<Aws::ClientSideMonitoring::Publisher:0x00007f20e3c7b9f0 @agent_port=nil, @mutex=#<Thread::Mutex:0x00007f20e3c7b9a0>>)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
     #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
@@ -774,8 +794,8 @@ module Aws::RDS
     # one AWS Region to another, see [ Copying a Snapshot][3] in the *Amazon
     # Aurora User Guide.*
     #
-    # For more information on Amazon Aurora, see the [ *Amazon Aurora User
-    # Guide.* ][4]
+    # For more information on Amazon Aurora, see [ What Is Amazon
+    # Aurora?][4] in the *Amazon Aurora User Guide.*
     #
     #
     #
@@ -1441,8 +1461,8 @@ module Aws::RDS
     # identified by `ReplicationSourceIdentifier` is encrypted, you must
     # also specify the `PreSignedUrl` parameter.
     #
-    # For more information on Amazon Aurora, see the [ *Amazon Aurora User
-    # Guide.* ][1]
+    # For more information on Amazon Aurora, see [ What Is Amazon
+    # Aurora?][1] in the *Amazon Aurora User Guide.*
     #
     #
     #
@@ -1904,8 +1924,8 @@ module Aws::RDS
     # RDS console][1] or the DescribeDBClusterParameters command to verify
     # that your DB cluster parameter group has been created or modified.
     #
-    # For more information on Amazon Aurora, see the [ *Amazon Aurora User
-    # Guide* ][2].
+    # For more information on Amazon Aurora, see [ What Is Amazon
+    # Aurora?][2] in the *Amazon Aurora User Guide.*
     #
     #
     #
@@ -2003,7 +2023,8 @@ module Aws::RDS
     end
 
     # Creates a snapshot of a DB cluster. For more information on Amazon
-    # Aurora, see the [ *Amazon Aurora User Guide* ][1].
+    # Aurora, see [ What Is Amazon Aurora?][1] in the *Amazon Aurora User
+    # Guide.*
     #
     #
     #
@@ -4282,8 +4303,8 @@ module Aws::RDS
     #
     #
     #
-    # For more information on Amazon Aurora, see the [ *Amazon Aurora User
-    # Guide* ][1].
+    # For more information on Amazon Aurora, see [ What Is Amazon
+    # Aurora?][1] in the *Amazon Aurora User Guide.*
     #
     #
     #
@@ -4432,8 +4453,8 @@ module Aws::RDS
     # parameter group to be deleted can't be associated with any DB
     # clusters.
     #
-    # For more information on Amazon Aurora, see the [ *Amazon Aurora User
-    # Guide* ][1].
+    # For more information on Amazon Aurora, see [ What Is Amazon
+    # Aurora?][1] in the *Amazon Aurora User Guide.*
     #
     #
     #
@@ -4484,8 +4505,8 @@ module Aws::RDS
     #
     #  </note>
     #
-    # For more information on Amazon Aurora, see the [ *Amazon Aurora User
-    # Guide* ][1].
+    # For more information on Amazon Aurora, see [ What Is Amazon
+    # Aurora?][1] in the *Amazon Aurora User Guide.*
     #
     #
     #
@@ -5212,8 +5233,8 @@ module Aws::RDS
 
     # Returns information about backtracks for a DB cluster.
     #
-    # For more information on Amazon Aurora, see the [ *Amazon Aurora User
-    # Guide* ][1].
+    # For more information on Amazon Aurora, see [ What Is Amazon
+    # Aurora?][1] in the *Amazon Aurora User Guide.*
     #
     #
     #
@@ -5335,8 +5356,8 @@ module Aws::RDS
     # contain only the description of the specified DB cluster parameter
     # group.
     #
-    # For more information on Amazon Aurora, see the [ *Amazon Aurora User
-    # Guide* ][1].
+    # For more information on Amazon Aurora, see [ What Is Amazon
+    # Aurora?][1] in the *Amazon Aurora User Guide.*
     #
     #
     #
@@ -5425,8 +5446,8 @@ module Aws::RDS
     # Returns the detailed parameter list for a particular DB cluster
     # parameter group.
     #
-    # For more information on Amazon Aurora, see the [ *Amazon Aurora User
-    # Guide* ][1].
+    # For more information on Amazon Aurora, see [ What Is Amazon
+    # Aurora?][1] in the *Amazon Aurora User Guide.*
     #
     #
     #
@@ -5589,8 +5610,8 @@ module Aws::RDS
     # Returns information about DB cluster snapshots. This API action
     # supports pagination.
     #
-    # For more information on Amazon Aurora, see the [ *Amazon Aurora User
-    # Guide* ][1].
+    # For more information on Amazon Aurora, see [ What Is Amazon
+    # Aurora?][1] in the *Amazon Aurora User Guide.*
     #
     #
     #
@@ -5760,8 +5781,8 @@ module Aws::RDS
     # Returns information about provisioned Aurora DB clusters. This API
     # supports pagination.
     #
-    # For more information on Amazon Aurora, see the [ *Amazon Aurora User
-    # Guide* ][1].
+    # For more information on Amazon Aurora, see [ What Is Amazon
+    # Aurora?][1] in the *Amazon Aurora User Guide.*
     #
     #
     #
@@ -6916,8 +6937,8 @@ module Aws::RDS
     # Returns the default engine and system parameter information for the
     # cluster database engine.
     #
-    # For more information on Amazon Aurora, see the [ *Amazon Aurora User
-    # Guide* ][1].
+    # For more information on Amazon Aurora, see [ What Is Amazon
+    # Aurora?][1] in the *Amazon Aurora User Guide.*
     #
     #
     #
@@ -8351,8 +8372,8 @@ module Aws::RDS
     # you will need to clean up and re-establish any existing connections
     # that use those endpoint addresses when the failover is complete.
     #
-    # For more information on Amazon Aurora, see the [ *Amazon Aurora User
-    # Guide* ][1].
+    # For more information on Amazon Aurora, see [ What Is Amazon
+    # Aurora?][1] in the *Amazon Aurora User Guide.*
     #
     #
     #
@@ -8640,7 +8661,8 @@ module Aws::RDS
     # Modify a setting for an Amazon Aurora DB cluster. You can change one
     # or more database configuration parameters by specifying these
     # parameters and the new values in the request. For more information on
-    # Amazon Aurora, see the [ *Amazon Aurora User Guide* ][1].
+    # Amazon Aurora, see [ What Is Amazon Aurora?][1] in the *Amazon Aurora
+    # User Guide.*
     #
     #
     #
@@ -8941,8 +8963,8 @@ module Aws::RDS
     # `ParameterName`, `ParameterValue`, and `ApplyMethod`. A maximum of 20
     # parameters can be modified in a single request.
     #
-    # For more information on Amazon Aurora, see the [ *Amazon Aurora User
-    # Guide* ][1].
+    # For more information on Amazon Aurora, see [ What Is Amazon
+    # Aurora?][1] in the *Amazon Aurora User Guide.*
     #
     # <note markdown="1"> Changes to dynamic parameters are applied immediately. Changes to
     # static parameters require a reboot without failover to the DB cluster
@@ -11215,8 +11237,8 @@ module Aws::RDS
     # You must call RebootDBInstance for every DB instance in your DB
     # cluster that you want the updated static parameter to apply to.
     #
-    # For more information on Amazon Aurora, see the [ *Amazon Aurora User
-    # Guide* ][1].
+    # For more information on Amazon Aurora, see [ What Is Amazon
+    # Aurora?][1] in the *Amazon Aurora User Guide.*
     #
     #
     #
@@ -11761,8 +11783,8 @@ module Aws::RDS
     # configuration as the original source DB cluster, except that the new
     # DB cluster is created with the default security group.
     #
-    # For more information on Amazon Aurora, see the [ *Amazon Aurora User
-    # Guide* ][1].
+    # For more information on Amazon Aurora, see [ What Is Amazon
+    # Aurora?][1] in the *Amazon Aurora User Guide.*
     #
     #
     #
@@ -12034,8 +12056,8 @@ module Aws::RDS
     #
     #  </note>
     #
-    # For more information on Amazon Aurora, see the [ *Amazon Aurora User
-    # Guide* ][1].
+    # For more information on Amazon Aurora, see [ What Is Amazon
+    # Aurora?][1] in the *Amazon Aurora User Guide.*
     #
     #
     #
@@ -14221,7 +14243,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

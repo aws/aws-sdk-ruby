@@ -2943,12 +2943,16 @@ module Aws::SSM
       api.version = "2014-11-06"
 
       api.metadata = {
+        "apiVersion" => "2014-11-06",
         "endpointPrefix" => "ssm",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "Amazon SSM",
         "serviceFullName" => "Amazon Simple Systems Manager (SSM)",
+        "serviceId" => "SSM",
         "signatureVersion" => "v4",
         "targetPrefix" => "AmazonSSM",
+        "uid" => "ssm-2014-11-06",
       }
 
       api.add_operation(:add_tags_to_resource, Seahorse::Model::Operation.new.tap do |o|

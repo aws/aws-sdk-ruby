@@ -2229,10 +2229,14 @@ module Aws::RDS
       api.version = "2014-10-31"
 
       api.metadata = {
+        "apiVersion" => "2014-10-31",
         "endpointPrefix" => "rds",
         "protocol" => "query",
+        "serviceAbbreviation" => "Amazon RDS",
         "serviceFullName" => "Amazon Relational Database Service",
+        "serviceId" => "RDS",
         "signatureVersion" => "v4",
+        "uid" => "rds-2014-10-31",
         "xmlNamespace" => "http://rds.amazonaws.com/doc/2014-10-31/",
       }
 

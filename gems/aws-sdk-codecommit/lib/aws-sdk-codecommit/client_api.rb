@@ -763,12 +763,16 @@ module Aws::CodeCommit
       api.version = "2015-04-13"
 
       api.metadata = {
+        "apiVersion" => "2015-04-13",
         "endpointPrefix" => "codecommit",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "CodeCommit",
         "serviceFullName" => "AWS CodeCommit",
+        "serviceId" => "CodeCommit",
         "signatureVersion" => "v4",
         "targetPrefix" => "CodeCommit_20150413",
+        "uid" => "codecommit-2015-04-13",
       }
 
       api.add_operation(:batch_get_repositories, Seahorse::Model::Operation.new.tap do |o|

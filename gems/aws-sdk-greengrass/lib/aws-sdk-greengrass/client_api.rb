@@ -1120,12 +1120,14 @@ module Aws::Greengrass
       api.version = "2017-06-07"
 
       api.metadata = {
+        "apiVersion" => "2017-06-07",
         "endpointPrefix" => "greengrass",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "serviceFullName" => "AWS Greengrass",
         "signatureVersion" => "v4",
         "signingName" => "greengrass",
+        "uid" => "greengrass-2017-06-07",
       }
 
       api.add_operation(:associate_role_to_group, Seahorse::Model::Operation.new.tap do |o|

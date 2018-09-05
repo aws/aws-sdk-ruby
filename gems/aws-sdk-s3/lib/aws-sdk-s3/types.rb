@@ -3646,6 +3646,8 @@ module Aws::S3
     #         json: {
     #           type: "DOCUMENT", # accepts DOCUMENT, LINES
     #         },
+    #         parquet: {
+    #         },
     #       }
     #
     # @!attribute [rw] csv
@@ -3661,12 +3663,17 @@ module Aws::S3
     #   Specifies JSON as object's input serialization format.
     #   @return [Types::JSONInput]
     #
+    # @!attribute [rw] parquet
+    #   Specifies Parquet as object's input serialization format.
+    #   @return [Types::ParquetInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InputSerialization AWS API Documentation
     #
     class InputSerialization < Struct.new(
       :csv,
       :compression_type,
-      :json)
+      :json,
+      :parquet)
       include Aws::Structure
     end
 
@@ -5782,6 +5789,12 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ParquetInput AWS API Documentation
+    #
+    class ParquetInput < Aws::EmptyStructure; end
+
     # @!attribute [rw] part_number
     #   Part number identifying the part. This is a positive integer between
     #   1 and 10,000.
@@ -7533,6 +7546,8 @@ module Aws::S3
     #               json: {
     #                 type: "DOCUMENT", # accepts DOCUMENT, LINES
     #               },
+    #               parquet: {
+    #               },
     #             },
     #             expression_type: "SQL", # required, accepts SQL
     #             expression: "Expression", # required
@@ -7651,6 +7666,8 @@ module Aws::S3
     #             compression_type: "NONE", # accepts NONE, GZIP, BZIP2
     #             json: {
     #               type: "DOCUMENT", # accepts DOCUMENT, LINES
+    #             },
+    #             parquet: {
     #             },
     #           },
     #           expression_type: "SQL", # required, accepts SQL
@@ -8078,6 +8095,8 @@ module Aws::S3
     #           json: {
     #             type: "DOCUMENT", # accepts DOCUMENT, LINES
     #           },
+    #           parquet: {
+    #           },
     #         },
     #         output_serialization: { # required
     #           csv: {
@@ -8187,6 +8206,8 @@ module Aws::S3
     #           compression_type: "NONE", # accepts NONE, GZIP, BZIP2
     #           json: {
     #             type: "DOCUMENT", # accepts DOCUMENT, LINES
+    #           },
+    #           parquet: {
     #           },
     #         },
     #         expression_type: "SQL", # required, accepts SQL

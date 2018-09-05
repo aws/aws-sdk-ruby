@@ -200,12 +200,16 @@ module Aws::FMS
       api.version = "2018-01-01"
 
       api.metadata = {
+        "apiVersion" => "2018-01-01",
         "endpointPrefix" => "fms",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "FMS",
         "serviceFullName" => "Firewall Management Service",
+        "serviceId" => "FMS",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSFMS_20180101",
+        "uid" => "fms-2018-01-01",
       }
 
       api.add_operation(:associate_admin_account, Seahorse::Model::Operation.new.tap do |o|
