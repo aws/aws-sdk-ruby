@@ -23,11 +23,13 @@ agent is running on, where client metrics will be published via UDP.
       end
 
       option(:client_side_monitoring_publisher,
-        default: ClientSideMonitoring::Publisher.new,
-        docstring: <<-DOCS)
+        default: ClientSideMonitoring::Publisher,
+        docstring: <<-DOCS) do |cfg|
 Allows you to provide a custom client-side monitoring publisher class. By default,
 will use the Client Side Monitoring Agent Publisher.
       DOCS
+        resolve_publisher(cfg)
+      end
 
       option(:client_side_monitoring_client_id,
         default: "",
@@ -47,6 +49,10 @@ all generated client side metrics. Defaults to an empty string.
       end
 
       private
+      def self.resolve_publisher(cfg)
+        ClientSideMonitoring::Publisher.new
+      end
+
       def self.resolve_client_side_monitoring_port(cfg)
         env_source = ENV["AWS_CSM_PORT"]
         env_source = nil if env_source == ""

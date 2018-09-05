@@ -108,7 +108,7 @@ module Aws::STS
     #   Required for publishing client metrics. The port that the client side monitoring
     #   agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [] :client_side_monitoring_publisher (#<Aws::ClientSideMonitoring::Publisher:0x007fbeb60645b0 @agent_port=nil, @mutex=#<Thread::Mutex:0x007fbeb6064560>>)
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
     #   Allows you to provide a custom client-side monitoring publisher class. By default,
     #   will use the Client Side Monitoring Agent Publisher.
     #
