@@ -114,7 +114,7 @@ module Aws::DynamoDB
     #   Required for publishing client metrics. The port that the client side monitoring
     #   agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [] :client_side_monitoring_publisher (#<Aws::ClientSideMonitoring::Publisher:0x00007f20e3c7b9f0 @agent_port=nil, @mutex=#<Thread::Mutex:0x00007f20e3c7b9a0>>)
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
     #   Allows you to provide a custom client-side monitoring publisher class. By default,
     #   will use the Client Side Monitoring Agent Publisher.
     #
@@ -155,14 +155,14 @@ module Aws::DynamoDB
     #
     #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
-    # @option options [Integer] :retry_limit (3)
+    # @option options [Integer] :retry_limit (10)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
     #
-    # @option options [Integer] :retry_limit (10)
+    # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
