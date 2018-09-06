@@ -42,6 +42,6 @@ require_relative 'aws-sdk-alexaforbusiness/customizations'
 # @service
 module Aws::AlexaForBusiness
 
-  GEM_VERSION = '1.8.0'
+  GEM_VERSION = '1.9.0'
 
 end

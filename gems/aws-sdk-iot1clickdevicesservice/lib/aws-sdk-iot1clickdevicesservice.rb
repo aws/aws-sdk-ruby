@@ -42,6 +42,6 @@ require_relative 'aws-sdk-iot1clickdevicesservice/customizations'
 # @service
 module Aws::IoT1ClickDevicesService
 
-  GEM_VERSION = '1.2.0'
+  GEM_VERSION = '1.3.0'
 
 end

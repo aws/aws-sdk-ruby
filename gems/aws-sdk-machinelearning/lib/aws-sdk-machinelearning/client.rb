@@ -2157,7 +2157,7 @@ module Aws::MachineLearning
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-machinelearning'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

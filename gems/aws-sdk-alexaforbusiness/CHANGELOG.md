@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2018-09-06)
+------------------
+
 * Feature - Adds code paths and plugins for future SDK instrumentation and telemetry.
 
 1.8.0 (2018-09-05)

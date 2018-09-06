@@ -42,6 +42,6 @@ require_relative 'aws-sdk-dlm/customizations'
 # @service
 module Aws::DLM
 
-  GEM_VERSION = '1.2.0'
+  GEM_VERSION = '1.3.0'
 
 end
