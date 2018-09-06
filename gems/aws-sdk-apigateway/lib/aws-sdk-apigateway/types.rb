@@ -805,6 +805,7 @@ module Aws::APIGateway
     #           },
     #           use_stage_cache: false,
     #         },
+    #         tracing_enabled: false,
     #       }
     #
     # @!attribute [rw] rest_api_id
@@ -847,6 +848,11 @@ module Aws::APIGateway
     #   deployment is a canary release deployment.
     #   @return [Types::DeploymentCanarySettings]
     #
+    # @!attribute [rw] tracing_enabled
+    #   Specifies whether active tracing with X-ray is enabled for the
+    #   Stage.
+    #   @return [Boolean]
+    #
     class CreateDeploymentRequest < Struct.new(
       :rest_api_id,
       :stage_name,
@@ -855,7 +861,8 @@ module Aws::APIGateway
       :cache_cluster_enabled,
       :cache_cluster_size,
       :variables,
-      :canary_settings)
+      :canary_settings,
+      :tracing_enabled)
       include Aws::Structure
     end
 
@@ -1241,6 +1248,7 @@ module Aws::APIGateway
     #           },
     #           use_stage_cache: false,
     #         },
+    #         tracing_enabled: false,
     #         tags: {
     #           "String" => "String",
     #         },
@@ -1285,6 +1293,11 @@ module Aws::APIGateway
     #   The canary deployment settings of this stage.
     #   @return [Types::CanarySettings]
     #
+    # @!attribute [rw] tracing_enabled
+    #   Specifies whether active tracing with X-ray is enabled for the
+    #   Stage.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   The key-value map of strings. The valid character set is
     #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
@@ -1301,6 +1314,7 @@ module Aws::APIGateway
       :variables,
       :documentation_version,
       :canary_settings,
+      :tracing_enabled,
       :tags)
       include Aws::Structure
     end
@@ -4919,7 +4933,7 @@ module Aws::APIGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] logging_level
-    #   Specifies the logging level for this method, which effects the log
+    #   Specifies the logging level for this method, which affects the log
     #   entries pushed to Amazon CloudWatch Logs. The PATCH path for this
     #   setting is `/\{method_setting_key\}/logging/loglevel`, and the
     #   available levels are `OFF`, `ERROR`, and `INFO`.
@@ -4927,7 +4941,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] data_trace_enabled
     #   Specifies whether data trace logging is enabled for this method,
-    #   which effects the log entries pushed to Amazon CloudWatch Logs. The
+    #   which affects the log entries pushed to Amazon CloudWatch Logs. The
     #   PATCH path for this setting is
     #   `/\{method_setting_key\}/logging/dataTrace`, and the value is a
     #   Boolean.
@@ -6227,6 +6241,11 @@ module Aws::APIGateway
     #   Settings for the canary deployment in this stage.
     #   @return [Types::CanarySettings]
     #
+    # @!attribute [rw] tracing_enabled
+    #   Specifies whether active tracing with X-ray is enabled for the
+    #   Stage.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   The collection of tags. Each tag element is associated with a given
     #   resource.
@@ -6253,6 +6272,7 @@ module Aws::APIGateway
       :documentation_version,
       :access_log_settings,
       :canary_settings,
+      :tracing_enabled,
       :tags,
       :created_date,
       :last_updated_date)

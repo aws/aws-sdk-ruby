@@ -203,6 +203,14 @@ module Aws::MediaConvert
     # settings, see the User Guide at
     # http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
     #
+    # @option params [String] :billing_tags_source
+    #   Optional. Choose a tag type that AWS Billing and Cost Management will
+    #   use to sort your AWS Elemental MediaConvert costs on any billing
+    #   report that you set up. Any transcoding outputs that don't have an
+    #   associated tag will appear in your billing report unsorted. If you
+    #   don't choose a valid value for this field, your job outputs will
+    #   appear on the billing report unsorted.
+    #
     # @option params [String] :client_request_token
     #   Idempotency token for CreateJob operation.**A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -236,6 +244,7 @@ module Aws::MediaConvert
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_job({
+    #     billing_tags_source: "QUEUE", # accepts QUEUE, PRESET, JOB_TEMPLATE
     #     client_request_token: "__string",
     #     job_template: "__string",
     #     queue: "__string",
@@ -963,6 +972,7 @@ module Aws::MediaConvert
     # @example Response structure
     #
     #   resp.job.arn #=> String
+    #   resp.job.billing_tags_source #=> String, one of "QUEUE", "PRESET", "JOB_TEMPLATE"
     #   resp.job.created_at #=> Time
     #   resp.job.error_code #=> Integer
     #   resp.job.error_message #=> String
@@ -3829,6 +3839,13 @@ module Aws::MediaConvert
     #   Optional. Max number of endpoints, up to twenty, that will be returned
     #   at one time.
     #
+    # @option params [String] :mode
+    #   Optional field, defaults to DEFAULT. Specify DEFAULT for this
+    #   operation to return your endpoints if any exist, or to create an
+    #   endpoint for you and return it if one doesn't already exist. Specify
+    #   GET\_ONLY to return your endpoints if any exist, or an empty list if
+    #   none exist.
+    #
     # @option params [String] :next_token
     #   Use this string, provided with the response to a previous request, to
     #   request the next batch of endpoints.
@@ -3842,6 +3859,7 @@ module Aws::MediaConvert
     #
     #   resp = client.describe_endpoints({
     #     max_results: 1,
+    #     mode: "DEFAULT", # accepts DEFAULT, GET_ONLY
     #     next_token: "__string",
     #   })
     #
@@ -3878,6 +3896,7 @@ module Aws::MediaConvert
     # @example Response structure
     #
     #   resp.job.arn #=> String
+    #   resp.job.billing_tags_source #=> String, one of "QUEUE", "PRESET", "JOB_TEMPLATE"
     #   resp.job.created_at #=> Time
     #   resp.job.error_code #=> Integer
     #   resp.job.error_message #=> String
@@ -6074,6 +6093,7 @@ module Aws::MediaConvert
     #
     #   resp.jobs #=> Array
     #   resp.jobs[0].arn #=> String
+    #   resp.jobs[0].billing_tags_source #=> String, one of "QUEUE", "PRESET", "JOB_TEMPLATE"
     #   resp.jobs[0].created_at #=> Time
     #   resp.jobs[0].error_code #=> Integer
     #   resp.jobs[0].error_message #=> String
@@ -7150,9 +7170,9 @@ module Aws::MediaConvert
       req.send_request(options)
     end
 
-    # Tag a MediaConvert queue, preset, or job template. For information
-    # about these resource types, see the User Guide at
-    # http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+    # Add tags to a MediaConvert queue, preset, or job template. For
+    # information about tagging, see the User Guide at
+    # https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
     #
     # @option params [required, String] :arn
     #   The Amazon Resource Name (ARN) of the resource that you want to tag.
@@ -7182,11 +7202,11 @@ module Aws::MediaConvert
       req.send_request(options)
     end
 
-    # Untag a MediaConvert queue, preset, or job template. For information
-    # about these resource types, see the User Guide at
-    # http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+    # Remove tags from a MediaConvert queue, preset, or job template. For
+    # information about tagging, see the User Guide at
+    # https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
     #
-    # @option params [String] :arn
+    # @option params [required, String] :arn
     #   The Amazon Resource Name (ARN) of the resource that you want to remove
     #   tags from. To get the ARN, send a GET request with the resource name.
     #
@@ -7198,7 +7218,7 @@ module Aws::MediaConvert
     # @example Request syntax with placeholder values
     #
     #   resp = client.untag_resource({
-    #     arn: "__string",
+    #     arn: "__string", # required
     #     tag_keys: ["__string"],
     #   })
     #
@@ -9387,7 +9407,7 @@ module Aws::MediaConvert
     #
     # @option params [String] :status
     #   Queues can be ACTIVE or PAUSED. If you pause a queue, jobs in that
-    #   queue will not begin. Jobs running when a queue is paused continue to
+    #   queue won't begin. Jobs running when a queue is paused continue to
     #   run until they finish or error out.
     #
     # @return [Types::UpdateQueueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -9436,7 +9456,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

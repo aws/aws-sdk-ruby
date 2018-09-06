@@ -336,6 +336,7 @@ module Aws::CodeCommit
     #   resp.pull_request.pull_request_targets[0].source_reference #=> String
     #   resp.pull_request.pull_request_targets[0].destination_reference #=> String
     #   resp.pull_request.pull_request_targets[0].destination_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_base #=> String
     #   resp.pull_request.pull_request_targets[0].source_commit #=> String
     #   resp.pull_request.pull_request_targets[0].merge_metadata.is_merged #=> Boolean
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merged_by #=> String
@@ -562,10 +563,15 @@ module Aws::CodeCommit
     #   resp.pull_request_events[0].event_date #=> Time
     #   resp.pull_request_events[0].pull_request_event_type #=> String, one of "PULL_REQUEST_CREATED", "PULL_REQUEST_STATUS_CHANGED", "PULL_REQUEST_SOURCE_REFERENCE_UPDATED", "PULL_REQUEST_MERGE_STATE_CHANGED"
     #   resp.pull_request_events[0].actor_arn #=> String
+    #   resp.pull_request_events[0].pull_request_created_event_metadata.repository_name #=> String
+    #   resp.pull_request_events[0].pull_request_created_event_metadata.source_commit_id #=> String
+    #   resp.pull_request_events[0].pull_request_created_event_metadata.destination_commit_id #=> String
+    #   resp.pull_request_events[0].pull_request_created_event_metadata.merge_base #=> String
     #   resp.pull_request_events[0].pull_request_status_changed_event_metadata.pull_request_status #=> String, one of "OPEN", "CLOSED"
     #   resp.pull_request_events[0].pull_request_source_reference_updated_event_metadata.repository_name #=> String
     #   resp.pull_request_events[0].pull_request_source_reference_updated_event_metadata.before_commit_id #=> String
     #   resp.pull_request_events[0].pull_request_source_reference_updated_event_metadata.after_commit_id #=> String
+    #   resp.pull_request_events[0].pull_request_source_reference_updated_event_metadata.merge_base #=> String
     #   resp.pull_request_events[0].pull_request_merged_state_changed_event_metadata.repository_name #=> String
     #   resp.pull_request_events[0].pull_request_merged_state_changed_event_metadata.destination_reference #=> String
     #   resp.pull_request_events[0].pull_request_merged_state_changed_event_metadata.merge_metadata.is_merged #=> Boolean
@@ -1025,6 +1031,7 @@ module Aws::CodeCommit
     #   resp.pull_request.pull_request_targets[0].source_reference #=> String
     #   resp.pull_request.pull_request_targets[0].destination_reference #=> String
     #   resp.pull_request.pull_request_targets[0].destination_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_base #=> String
     #   resp.pull_request.pull_request_targets[0].source_commit #=> String
     #   resp.pull_request.pull_request_targets[0].merge_metadata.is_merged #=> Boolean
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merged_by #=> String
@@ -1297,6 +1304,7 @@ module Aws::CodeCommit
     #   resp.pull_request.pull_request_targets[0].source_reference #=> String
     #   resp.pull_request.pull_request_targets[0].destination_reference #=> String
     #   resp.pull_request.pull_request_targets[0].destination_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_base #=> String
     #   resp.pull_request.pull_request_targets[0].source_commit #=> String
     #   resp.pull_request.pull_request_targets[0].merge_metadata.is_merged #=> Boolean
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merged_by #=> String
@@ -1541,13 +1549,15 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
-    # Adds or updates a file in an AWS CodeCommit repository.
+    # Adds or updates a file in a branch in an AWS CodeCommit repository,
+    # and generates a commit for the addition in the specified branch.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository where you want to add or update the file.
     #
     # @option params [required, String] :branch_name
-    #   The name of the branch where you want to add or update the file.
+    #   The name of the branch where you want to add or update the file. If
+    #   this is an empty repository, this branch will be created.
     #
     # @option params [required, String, IO] :file_content
     #   The content of the file, in binary object format.
@@ -1567,9 +1577,13 @@ module Aws::CodeCommit
     #
     # @option params [String] :parent_commit_id
     #   The full commit ID of the head commit in the branch where you want to
-    #   add or update the file. If the commit ID does not match the ID of the
-    #   head commit at the time of the operation, an error will occur, and the
-    #   file will not be added or updated.
+    #   add or update the file. If this is an empty repository, no commit ID
+    #   is required. If this is not an empty repository, a commit ID is
+    #   required.
+    #
+    #   The commit ID must match the ID of the head commit at the time of the
+    #   operation, or an error will occur, and the file will not be added or
+    #   updated.
     #
     # @option params [String] :commit_message
     #   A message about why this file was added or updated. While optional,
@@ -1817,6 +1831,7 @@ module Aws::CodeCommit
     #   resp.pull_request.pull_request_targets[0].source_reference #=> String
     #   resp.pull_request.pull_request_targets[0].destination_reference #=> String
     #   resp.pull_request.pull_request_targets[0].destination_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_base #=> String
     #   resp.pull_request.pull_request_targets[0].source_commit #=> String
     #   resp.pull_request.pull_request_targets[0].merge_metadata.is_merged #=> Boolean
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merged_by #=> String
@@ -1867,6 +1882,7 @@ module Aws::CodeCommit
     #   resp.pull_request.pull_request_targets[0].source_reference #=> String
     #   resp.pull_request.pull_request_targets[0].destination_reference #=> String
     #   resp.pull_request.pull_request_targets[0].destination_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_base #=> String
     #   resp.pull_request.pull_request_targets[0].source_commit #=> String
     #   resp.pull_request.pull_request_targets[0].merge_metadata.is_merged #=> Boolean
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merged_by #=> String
@@ -1916,6 +1932,7 @@ module Aws::CodeCommit
     #   resp.pull_request.pull_request_targets[0].source_reference #=> String
     #   resp.pull_request.pull_request_targets[0].destination_reference #=> String
     #   resp.pull_request.pull_request_targets[0].destination_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_base #=> String
     #   resp.pull_request.pull_request_targets[0].source_commit #=> String
     #   resp.pull_request.pull_request_targets[0].merge_metadata.is_merged #=> Boolean
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merged_by #=> String
@@ -2015,7 +2032,7 @@ module Aws::CodeCommit
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codecommit'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

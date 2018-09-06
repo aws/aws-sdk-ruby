@@ -1825,6 +1825,7 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
+    #         billing_tags_source: "QUEUE", # accepts QUEUE, PRESET, JOB_TEMPLATE
     #         client_request_token: "__string",
     #         job_template: "__string",
     #         queue: "__string",
@@ -2549,6 +2550,15 @@ module Aws::MediaConvert
     #         },
     #       }
     #
+    # @!attribute [rw] billing_tags_source
+    #   Optional. Choose a tag type that AWS Billing and Cost Management
+    #   will use to sort your AWS Elemental MediaConvert costs on any
+    #   billing report that you set up. Any transcoding outputs that don't
+    #   have an associated tag will appear in your billing report unsorted.
+    #   If you don't choose a valid value for this field, your job outputs
+    #   will appear on the billing report unsorted.
+    #   @return [String]
+    #
     # @!attribute [rw] client_request_token
     #   Idempotency token for CreateJob operation.**A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2584,6 +2594,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateJobRequest AWS API Documentation
     #
     class CreateJobRequest < Struct.new(
+      :billing_tags_source,
       :client_request_token,
       :job_template,
       :queue,
@@ -4231,6 +4242,7 @@ module Aws::MediaConvert
     #
     #       {
     #         max_results: 1,
+    #         mode: "DEFAULT", # accepts DEFAULT, GET_ONLY
     #         next_token: "__string",
     #       }
     #
@@ -4238,6 +4250,14 @@ module Aws::MediaConvert
     #   Optional. Max number of endpoints, up to twenty, that will be
     #   returned at one time.
     #   @return [Integer]
+    #
+    # @!attribute [rw] mode
+    #   Optional field, defaults to DEFAULT. Specify DEFAULT for this
+    #   operation to return your endpoints if any exist, or to create an
+    #   endpoint for you and return it if one doesn't already exist.
+    #   Specify GET\_ONLY to return your endpoints if any exist, or an empty
+    #   list if none exist.
+    #   @return [String]
     #
     # @!attribute [rw] next_token
     #   Use this string, provided with the response to a previous request,
@@ -4248,6 +4268,7 @@ module Aws::MediaConvert
     #
     class DescribeEndpointsRequest < Struct.new(
       :max_results,
+      :mode,
       :next_token)
       include Aws::Structure
     end
@@ -4763,7 +4784,7 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Describes account specific API endpoint
+    # Describes an account-specific API endpoint.
     #
     # @!attribute [rw] url
     #   URL of endpoint
@@ -6976,6 +6997,15 @@ module Aws::MediaConvert
     #   An identifier for this resource that is unique within all of AWS.
     #   @return [String]
     #
+    # @!attribute [rw] billing_tags_source
+    #   Optional. Choose a tag type that AWS Billing and Cost Management
+    #   will use to sort your AWS Elemental MediaConvert costs on any
+    #   billing report that you set up. Any transcoding outputs that don't
+    #   have an associated tag will appear in your billing report unsorted.
+    #   If you don't choose a valid value for this field, your job outputs
+    #   will appear on the billing report unsorted.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The time, in Unix epoch format in seconds, when the job got created.
     #   @return [Time]
@@ -7038,6 +7068,7 @@ module Aws::MediaConvert
     #
     class Job < Struct.new(
       :arn,
+      :billing_tags_source,
       :created_at,
       :error_code,
       :error_message,
@@ -8731,7 +8762,7 @@ module Aws::MediaConvert
     end
 
     # Successful list job templates requests return a JSON array of job
-    # templates. If you do not specify how they are ordered, you will
+    # templates. If you don't specify how they are ordered, you will
     # receive them in alphabetical order by name.
     #
     # @!attribute [rw] job_templates
@@ -8802,9 +8833,9 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Successful list jobs requests return a JSON array of jobs. If you do
-    # not specify how they are ordered, you will receive the most recently
-    # created first.
+    # Successful list jobs requests return a JSON array of jobs. If you
+    # don't specify how they are ordered, you will receive the most
+    # recently created first.
     #
     # @!attribute [rw] jobs
     #   List of jobs
@@ -8877,7 +8908,7 @@ module Aws::MediaConvert
     end
 
     # Successful list presets requests return a JSON array of presets. If
-    # you do not specify how they are ordered, you will receive them
+    # you don't specify how they are ordered, you will receive them
     # alphabetically by name.
     #
     # @!attribute [rw] next_token
@@ -8942,7 +8973,7 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Successful list queues return a JSON array of queues. If you do not
+    # Successful list queues return a JSON array of queues. If you don't
     # specify how they are ordered, you will receive them alphabetically by
     # name.
     #
@@ -12182,8 +12213,8 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] status
     #   Queues can be ACTIVE or PAUSED. If you pause a queue, jobs in that
-    #   queue will not begin. Jobs running when a queue is paused continue
-    #   to run until they finish or error out.
+    #   queue won't begin. Jobs running when a queue is paused continue to
+    #   run until they finish or error out.
     #   @return [String]
     #
     # @!attribute [rw] submitted_jobs_count
@@ -12423,9 +12454,9 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # To tag a queue, preset, or job template, send a request with the tags
-    # and the Amazon Resource Name (ARN) of the resource that you want to
-    # tag.
+    # To add tags to a queue, preset, or job template, send a request with
+    # the Amazon Resource Name (ARN) of the resource and the tags that you
+    # want to add.
     #
     # @note When making an API call, you may pass TagResourceRequest
     #   data as a hash:
@@ -12455,7 +12486,7 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Successful tag resource requests return an OK message.
+    # A successful request to add tags to a resource returns an OK message.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TagResourceResponse AWS API Documentation
     #
@@ -12703,7 +12734,7 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         arn: "__string",
+    #         arn: "__string", # required
     #         tag_keys: ["__string"],
     #       }
     #
@@ -12725,7 +12756,7 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # A successful request to remove a tag from a resource returns an OK
+    # A successful request to remove tags from a resource returns an OK
     # message.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UntagResourceResponse AWS API Documentation
@@ -14047,8 +14078,8 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] status
     #   Queues can be ACTIVE or PAUSED. If you pause a queue, jobs in that
-    #   queue will not begin. Jobs running when a queue is paused continue
-    #   to run until they finish or error out.
+    #   queue won't begin. Jobs running when a queue is paused continue to
+    #   run until they finish or error out.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UpdateQueueRequest AWS API Documentation

@@ -481,6 +481,9 @@ module Aws::APIGateway
     #   The input configuration for the canary deployment when the deployment
     #   is a canary release deployment.
     #
+    # @option params [Boolean] :tracing_enabled
+    #   Specifies whether active tracing with X-ray is enabled for the Stage.
+    #
     # @return [Types::Deployment] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Deployment#id #id} => String
@@ -507,6 +510,7 @@ module Aws::APIGateway
     #       },
     #       use_stage_cache: false,
     #     },
+    #     tracing_enabled: false,
     #   })
     #
     # @example Response structure
@@ -1028,6 +1032,9 @@ module Aws::APIGateway
     # @option params [Types::CanarySettings] :canary_settings
     #   The canary deployment settings of this stage.
     #
+    # @option params [Boolean] :tracing_enabled
+    #   Specifies whether active tracing with X-ray is enabled for the Stage.
+    #
     # @option params [Hash<String,String>] :tags
     #   The key-value map of strings. The valid character set is
     #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
@@ -1047,6 +1054,7 @@ module Aws::APIGateway
     #   * {Types::Stage#documentation_version #documentation_version} => String
     #   * {Types::Stage#access_log_settings #access_log_settings} => Types::AccessLogSettings
     #   * {Types::Stage#canary_settings #canary_settings} => Types::CanarySettings
+    #   * {Types::Stage#tracing_enabled #tracing_enabled} => Boolean
     #   * {Types::Stage#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::Stage#created_date #created_date} => Time
     #   * {Types::Stage#last_updated_date #last_updated_date} => Time
@@ -1072,6 +1080,7 @@ module Aws::APIGateway
     #       },
     #       use_stage_cache: false,
     #     },
+    #     tracing_enabled: false,
     #     tags: {
     #       "String" => "String",
     #     },
@@ -1107,6 +1116,7 @@ module Aws::APIGateway
     #   resp.canary_settings.stage_variable_overrides #=> Hash
     #   resp.canary_settings.stage_variable_overrides["String"] #=> String
     #   resp.canary_settings.use_stage_cache #=> Boolean
+    #   resp.tracing_enabled #=> Boolean
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
     #   resp.created_date #=> Time
@@ -3722,6 +3732,7 @@ module Aws::APIGateway
     #   * {Types::Stage#documentation_version #documentation_version} => String
     #   * {Types::Stage#access_log_settings #access_log_settings} => Types::AccessLogSettings
     #   * {Types::Stage#canary_settings #canary_settings} => Types::CanarySettings
+    #   * {Types::Stage#tracing_enabled #tracing_enabled} => Boolean
     #   * {Types::Stage#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::Stage#created_date #created_date} => Time
     #   * {Types::Stage#last_updated_date #last_updated_date} => Time
@@ -3763,6 +3774,7 @@ module Aws::APIGateway
     #   resp.canary_settings.stage_variable_overrides #=> Hash
     #   resp.canary_settings.stage_variable_overrides["String"] #=> String
     #   resp.canary_settings.use_stage_cache #=> Boolean
+    #   resp.tracing_enabled #=> Boolean
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
     #   resp.created_date #=> Time
@@ -3825,6 +3837,7 @@ module Aws::APIGateway
     #   resp.item[0].canary_settings.stage_variable_overrides #=> Hash
     #   resp.item[0].canary_settings.stage_variable_overrides["String"] #=> String
     #   resp.item[0].canary_settings.use_stage_cache #=> Boolean
+    #   resp.item[0].tracing_enabled #=> Boolean
     #   resp.item[0].tags #=> Hash
     #   resp.item[0].tags["String"] #=> String
     #   resp.item[0].created_date #=> Time
@@ -6389,6 +6402,7 @@ module Aws::APIGateway
     #   * {Types::Stage#documentation_version #documentation_version} => String
     #   * {Types::Stage#access_log_settings #access_log_settings} => Types::AccessLogSettings
     #   * {Types::Stage#canary_settings #canary_settings} => Types::CanarySettings
+    #   * {Types::Stage#tracing_enabled #tracing_enabled} => Boolean
     #   * {Types::Stage#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::Stage#created_date #created_date} => Time
     #   * {Types::Stage#last_updated_date #last_updated_date} => Time
@@ -6438,6 +6452,7 @@ module Aws::APIGateway
     #   resp.canary_settings.stage_variable_overrides #=> Hash
     #   resp.canary_settings.stage_variable_overrides["String"] #=> String
     #   resp.canary_settings.use_stage_cache #=> Boolean
+    #   resp.tracing_enabled #=> Boolean
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
     #   resp.created_date #=> Time
@@ -6626,7 +6641,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

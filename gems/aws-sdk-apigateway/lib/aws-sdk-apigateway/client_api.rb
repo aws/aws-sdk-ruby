@@ -382,6 +382,7 @@ module Aws::APIGateway
     CreateDeploymentRequest.add_member(:cache_cluster_size, Shapes::ShapeRef.new(shape: CacheClusterSize, location_name: "cacheClusterSize"))
     CreateDeploymentRequest.add_member(:variables, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "variables"))
     CreateDeploymentRequest.add_member(:canary_settings, Shapes::ShapeRef.new(shape: DeploymentCanarySettings, location_name: "canarySettings"))
+    CreateDeploymentRequest.add_member(:tracing_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "tracingEnabled"))
     CreateDeploymentRequest.struct_class = Types::CreateDeploymentRequest
 
     CreateDocumentationPartRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -444,6 +445,7 @@ module Aws::APIGateway
     CreateStageRequest.add_member(:variables, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "variables"))
     CreateStageRequest.add_member(:documentation_version, Shapes::ShapeRef.new(shape: String, location_name: "documentationVersion"))
     CreateStageRequest.add_member(:canary_settings, Shapes::ShapeRef.new(shape: CanarySettings, location_name: "canarySettings"))
+    CreateStageRequest.add_member(:tracing_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "tracingEnabled"))
     CreateStageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
     CreateStageRequest.struct_class = Types::CreateStageRequest
 
@@ -1186,6 +1188,7 @@ module Aws::APIGateway
     Stage.add_member(:documentation_version, Shapes::ShapeRef.new(shape: String, location_name: "documentationVersion"))
     Stage.add_member(:access_log_settings, Shapes::ShapeRef.new(shape: AccessLogSettings, location_name: "accessLogSettings"))
     Stage.add_member(:canary_settings, Shapes::ShapeRef.new(shape: CanarySettings, location_name: "canarySettings"))
+    Stage.add_member(:tracing_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "tracingEnabled"))
     Stage.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
     Stage.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
     Stage.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))
