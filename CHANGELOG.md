@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.125 (2018-09-06)
+------------------
+
 * Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
 
 * Feature - Aws::CodeCommit - Updated the API, documentation, and integration test for AWS CodeCommit.
