@@ -1040,10 +1040,24 @@ module Aws::CloudWatchLogs
     # specifying the token in a subsequent call.
     #
     # @option params [required, String] :log_group_name
-    #   The name of the log group.
+    #   The name of the log group to search.
     #
     # @option params [Array<String>] :log_stream_names
-    #   Optional list of log stream names.
+    #   Filters the results to only logs from the log streams in this list.
+    #
+    #   If you specify a value for both `logStreamNamePrefix` and
+    #   `logStreamNames`, but the value for `logStreamNamePrefix` does not
+    #   match any log stream names specified in `logStreamNames`, the action
+    #   returns an `InvalidParameterException` error.
+    #
+    # @option params [String] :log_stream_name_prefix
+    #   Filters the results to include only events from log streams that have
+    #   names starting with this prefix.
+    #
+    #   If you specify a value for both `logStreamNamePrefix` and
+    #   `logStreamNames`, but the value for `logStreamNamePrefix` does not
+    #   match any log stream names specified in `logStreamNames`, the action
+    #   returns an `InvalidParameterException` error.
     #
     # @option params [Integer] :start_time
     #   The start of the time range, expressed as the number of milliseconds
@@ -1056,8 +1070,14 @@ module Aws::CloudWatchLogs
     #   this time are not returned.
     #
     # @option params [String] :filter_pattern
-    #   The filter pattern to use. If not provided, all the events are
-    #   matched.
+    #   The filter pattern to use. For more information, see [Filter and
+    #   Pattern Syntax][1].
+    #
+    #   If not provided, all the events are matched.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
     #
     # @option params [String] :next_token
     #   The token for the next set of events to return. (You received this
@@ -1084,6 +1104,7 @@ module Aws::CloudWatchLogs
     #   resp = client.filter_log_events({
     #     log_group_name: "LogGroupName", # required
     #     log_stream_names: ["LogStreamName"],
+    #     log_stream_name_prefix: "LogStreamName",
     #     start_time: 1,
     #     end_time: 1,
     #     filter_pattern: "FilterPattern",
@@ -1726,7 +1747,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
