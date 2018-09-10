@@ -4831,6 +4831,8 @@ module Aws::Redshift
     #         elastic_ip: "String",
     #         enhanced_vpc_routing: false,
     #         maintenance_track_name: "String",
+    #         encrypted: false,
+    #         kms_key_id: "String",
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -5080,6 +5082,20 @@ module Aws::Redshift
     #   applied.
     #   @return [String]
     #
+    # @!attribute [rw] encrypted
+    #   Indicates whether the cluster is encrypted. If the cluster is
+    #   encrypted and you provide a value for the `KmsKeyId` parameter, we
+    #   will encrypt the cluster with the provided `KmsKeyId`. If you don't
+    #   provide a `KmsKeyId`, we will encrypt with the default key. In the
+    #   China region we will use legacy encryption if you specify that the
+    #   cluster is encrypted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The AWS Key Management Service (KMS) key ID of the encryption key
+    #   that you want to use to encrypt data in the cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMessage AWS API Documentation
     #
     class ModifyClusterMessage < Struct.new(
@@ -5101,7 +5117,9 @@ module Aws::Redshift
       :publicly_accessible,
       :elastic_ip,
       :enhanced_vpc_routing,
-      :maintenance_track_name)
+      :maintenance_track_name,
+      :encrypted,
+      :kms_key_id)
       include Aws::Structure
     end
 
@@ -5535,6 +5553,11 @@ module Aws::Redshift
     #   during the next maintenance window.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_type
+    #   The encryption type for a cluster. Possible values are: KMS and
+    #   None. For the China region the possible values are None, and Legacy.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PendingModifiedValues AWS API Documentation
     #
     class PendingModifiedValues < Struct.new(
@@ -5547,7 +5570,8 @@ module Aws::Redshift
       :cluster_identifier,
       :publicly_accessible,
       :enhanced_vpc_routing,
-      :maintenance_track_name)
+      :maintenance_track_name,
+      :encryption_type)
       include Aws::Structure
     end
 
@@ -6022,6 +6046,13 @@ module Aws::Redshift
     #   action.
     #   @return [String]
     #
+    # @!attribute [rw] target_encryption_type
+    #   The type of encryption for the cluster after the resize is complete.
+    #
+    #   Possible values are `KMS` and `None`. In the China region possible
+    #   values are: `Legacy` and `None`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeProgressMessage AWS API Documentation
     #
     class ResizeProgressMessage < Struct.new(
@@ -6038,7 +6069,8 @@ module Aws::Redshift
       :elapsed_time_in_seconds,
       :estimated_time_to_completion_in_seconds,
       :resize_type,
-      :message)
+      :message,
+      :target_encryption_type)
       include Aws::Structure
     end
 

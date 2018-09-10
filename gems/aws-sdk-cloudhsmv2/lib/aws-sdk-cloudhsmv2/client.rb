@@ -186,9 +186,13 @@ module Aws::CloudHSMV2
 
     # @!group API Operations
 
+    # Copy an AWS CloudHSM cluster backup to a different region.
+    #
     # @option params [required, String] :destination_region
+    #   The AWS region that will contain your copied CloudHSM cluster backup.
     #
     # @option params [required, String] :backup_id
+    #   The ID of the backup that will be copied to the destination region.
     #
     # @return [Types::CopyBackupToRegionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -336,6 +340,45 @@ module Aws::CloudHSMV2
       req.send_request(options)
     end
 
+    # Deletes a specified AWS CloudHSM backup. A backup can be restored up
+    # to 7 days after the DeleteBackup request. For more information on
+    # restoring a backup, see RestoreBackup
+    #
+    # @option params [required, String] :backup_id
+    #   The ID of the backup to be deleted. To find the ID of a backup, use
+    #   the DescribeBackups operation.
+    #
+    # @return [Types::DeleteBackupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteBackupResponse#backup #backup} => Types::Backup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_backup({
+    #     backup_id: "BackupId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.backup.backup_id #=> String
+    #   resp.backup.backup_state #=> String, one of "CREATE_IN_PROGRESS", "READY", "DELETED", "PENDING_DELETION"
+    #   resp.backup.cluster_id #=> String
+    #   resp.backup.create_timestamp #=> Time
+    #   resp.backup.copy_timestamp #=> Time
+    #   resp.backup.source_region #=> String
+    #   resp.backup.source_backup #=> String
+    #   resp.backup.source_cluster #=> String
+    #   resp.backup.delete_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DeleteBackup AWS API Documentation
+    #
+    # @overload delete_backup(params = {})
+    # @param [Hash] params ({})
+    def delete_backup(params = {}, options = {})
+      req = build_request(:delete_backup, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified AWS CloudHSM cluster. Before you can delete a
     # cluster, you must delete all HSMs in the cluster. To see if the
     # cluster contains any HSMs, use DescribeClusters. To delete an HSM, use
@@ -463,6 +506,10 @@ module Aws::CloudHSMV2
     #   Use the `backupIds` filter to return only the specified backups.
     #   Specify backups by their backup identifier (ID).
     #
+    #   Use the `sourceBackupIds` filter to return only the backups created
+    #   from a source backup. The `sourceBackupID` of a source backup is
+    #   returned by the CopyBackupToRegion operation.
+    #
     #   Use the `clusterIds` filter to return only the backups for the
     #   specified clusters. Specify clusters by their cluster identifier (ID).
     #
@@ -491,13 +538,14 @@ module Aws::CloudHSMV2
     #
     #   resp.backups #=> Array
     #   resp.backups[0].backup_id #=> String
-    #   resp.backups[0].backup_state #=> String, one of "CREATE_IN_PROGRESS", "READY", "DELETED"
+    #   resp.backups[0].backup_state #=> String, one of "CREATE_IN_PROGRESS", "READY", "DELETED", "PENDING_DELETION"
     #   resp.backups[0].cluster_id #=> String
     #   resp.backups[0].create_timestamp #=> Time
     #   resp.backups[0].copy_timestamp #=> Time
     #   resp.backups[0].source_region #=> String
     #   resp.backups[0].source_backup #=> String
     #   resp.backups[0].source_cluster #=> String
+    #   resp.backups[0].delete_timestamp #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DescribeBackups AWS API Documentation
@@ -696,6 +744,45 @@ module Aws::CloudHSMV2
       req.send_request(options)
     end
 
+    # Restores a specified AWS CloudHSM backup that is in the
+    # `PENDING_DELETION` state. For more information on deleting a backup,
+    # see DeleteBackup.
+    #
+    # @option params [required, String] :backup_id
+    #   The ID of the backup to be restored. To find the ID of a backup, use
+    #   the DescribeBackups operation.
+    #
+    # @return [Types::RestoreBackupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RestoreBackupResponse#backup #backup} => Types::Backup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.restore_backup({
+    #     backup_id: "BackupId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.backup.backup_id #=> String
+    #   resp.backup.backup_state #=> String, one of "CREATE_IN_PROGRESS", "READY", "DELETED", "PENDING_DELETION"
+    #   resp.backup.cluster_id #=> String
+    #   resp.backup.create_timestamp #=> Time
+    #   resp.backup.copy_timestamp #=> Time
+    #   resp.backup.source_region #=> String
+    #   resp.backup.source_backup #=> String
+    #   resp.backup.source_cluster #=> String
+    #   resp.backup.delete_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/RestoreBackup AWS API Documentation
+    #
+    # @overload restore_backup(params = {})
+    # @param [Hash] params ({})
+    def restore_backup(params = {}, options = {})
+      req = build_request(:restore_backup, params)
+      req.send_request(options)
+    end
+
     # Adds or overwrites one or more tags for the specified AWS CloudHSM
     # cluster.
     #
@@ -771,7 +858,7 @@ module Aws::CloudHSMV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudhsmv2'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

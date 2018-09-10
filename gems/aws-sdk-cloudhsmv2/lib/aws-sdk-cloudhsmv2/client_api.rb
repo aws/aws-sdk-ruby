@@ -34,6 +34,8 @@ module Aws::CloudHSMV2
     CreateClusterResponse = Shapes::StructureShape.new(name: 'CreateClusterResponse')
     CreateHsmRequest = Shapes::StructureShape.new(name: 'CreateHsmRequest')
     CreateHsmResponse = Shapes::StructureShape.new(name: 'CreateHsmResponse')
+    DeleteBackupRequest = Shapes::StructureShape.new(name: 'DeleteBackupRequest')
+    DeleteBackupResponse = Shapes::StructureShape.new(name: 'DeleteBackupResponse')
     DeleteClusterRequest = Shapes::StructureShape.new(name: 'DeleteClusterRequest')
     DeleteClusterResponse = Shapes::StructureShape.new(name: 'DeleteClusterResponse')
     DeleteHsmRequest = Shapes::StructureShape.new(name: 'DeleteHsmRequest')
@@ -62,6 +64,8 @@ module Aws::CloudHSMV2
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     PreCoPassword = Shapes::StringShape.new(name: 'PreCoPassword')
     Region = Shapes::StringShape.new(name: 'Region')
+    RestoreBackupRequest = Shapes::StructureShape.new(name: 'RestoreBackupRequest')
+    RestoreBackupResponse = Shapes::StructureShape.new(name: 'RestoreBackupResponse')
     SecurityGroup = Shapes::StringShape.new(name: 'SecurityGroup')
     StateMessage = Shapes::StringShape.new(name: 'StateMessage')
     String = Shapes::StringShape.new(name: 'String')
@@ -89,6 +93,7 @@ module Aws::CloudHSMV2
     Backup.add_member(:source_region, Shapes::ShapeRef.new(shape: Region, location_name: "SourceRegion"))
     Backup.add_member(:source_backup, Shapes::ShapeRef.new(shape: BackupId, location_name: "SourceBackup"))
     Backup.add_member(:source_cluster, Shapes::ShapeRef.new(shape: ClusterId, location_name: "SourceCluster"))
+    Backup.add_member(:delete_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DeleteTimestamp"))
     Backup.struct_class = Types::Backup
 
     Backups.member = Shapes::ShapeRef.new(shape: Backup)
@@ -139,6 +144,12 @@ module Aws::CloudHSMV2
 
     CreateHsmResponse.add_member(:hsm, Shapes::ShapeRef.new(shape: Hsm, location_name: "Hsm"))
     CreateHsmResponse.struct_class = Types::CreateHsmResponse
+
+    DeleteBackupRequest.add_member(:backup_id, Shapes::ShapeRef.new(shape: BackupId, required: true, location_name: "BackupId"))
+    DeleteBackupRequest.struct_class = Types::DeleteBackupRequest
+
+    DeleteBackupResponse.add_member(:backup, Shapes::ShapeRef.new(shape: Backup, location_name: "Backup"))
+    DeleteBackupResponse.struct_class = Types::DeleteBackupResponse
 
     DeleteClusterRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
     DeleteClusterRequest.struct_class = Types::DeleteClusterRequest
@@ -215,6 +226,12 @@ module Aws::CloudHSMV2
     ListTagsResponse.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "TagList"))
     ListTagsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTagsResponse.struct_class = Types::ListTagsResponse
+
+    RestoreBackupRequest.add_member(:backup_id, Shapes::ShapeRef.new(shape: BackupId, required: true, location_name: "BackupId"))
+    RestoreBackupRequest.struct_class = Types::RestoreBackupRequest
+
+    RestoreBackupResponse.add_member(:backup, Shapes::ShapeRef.new(shape: Backup, location_name: "Backup"))
+    RestoreBackupResponse.struct_class = Types::RestoreBackupResponse
 
     Strings.member = Shapes::ShapeRef.new(shape: String)
 
@@ -296,6 +313,19 @@ module Aws::CloudHSMV2
         o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
         o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: CloudHsmResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmAccessDeniedException)
+      end)
+
+      api.add_operation(:delete_backup, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteBackup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteBackupRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteBackupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: CloudHsmAccessDeniedException)
       end)
 
@@ -392,6 +422,19 @@ module Aws::CloudHSMV2
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:restore_backup, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RestoreBackup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RestoreBackupRequest)
+        o.output = Shapes::ShapeRef.new(shape: RestoreBackupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmAccessDeniedException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
