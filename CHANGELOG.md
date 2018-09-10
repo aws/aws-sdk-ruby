@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.127 (2018-09-10)
+------------------
+
 * Feature - Aws::CloudHSMV2 - Updated the API, and documentation for AWS CloudHSM V2.
 
 * Feature - Aws::Redshift - Updated the API, and documentation for Amazon Redshift.
