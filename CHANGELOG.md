@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::OpsWorksCM - Updated the documentation for AWS OpsWorks for Chef Automate.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
 2.11.127 (2018-09-10)
 ------------------
 
