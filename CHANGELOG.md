@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Connect - Updated the API, and documentation for Amazon Connect Service.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::SES - Updated the documentation, and integration test for Amazon Simple Email Service.
+
+* Feature - Aws::FMS - Updated the API, and documentation for Firewall Management Service.
+
 2.11.128 (2018-09-11)
 ------------------
 
