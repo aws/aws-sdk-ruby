@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.129 (2018-09-12)
+------------------
+
 * Feature - Aws::Connect - Updated the API, and documentation for Amazon Connect Service.
 
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
