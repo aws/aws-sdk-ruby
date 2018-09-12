@@ -187,14 +187,14 @@ module Aws::FMS
     # @!group API Operations
 
     # Sets the AWS Firewall Manager administrator account. AWS Firewall
-    # Manager must be associated with a master account in AWS Organizations
-    # or associated with a member account that has the appropriate
-    # permissions. If the account ID that you submit is not an AWS
-    # Organizations master account, AWS Firewall Manager will set the
+    # Manager must be associated with the master account your AWS
+    # organization or associated with a member account that has the
+    # appropriate permissions. If the account ID that you submit is not an
+    # AWS Organizations master account, AWS Firewall Manager will set the
     # appropriate permissions for the given member account.
     #
     # The account that you associate with AWS Firewall Manager is called the
-    # AWS Firewall manager administrator account.
+    # AWS Firewall Manager administrator account.
     #
     # @option params [required, String] :admin_account
     #   The AWS account ID to associate with AWS Firewall Manager as the AWS
@@ -284,10 +284,12 @@ module Aws::FMS
     # @return [Types::GetAdminAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetAdminAccountResponse#admin_account #admin_account} => String
+    #   * {Types::GetAdminAccountResponse#role_status #role_status} => String
     #
     # @example Response structure
     #
     #   resp.admin_account #=> String
+    #   resp.role_status #=> String, one of "READY", "CREATING", "PENDING_DELETION", "DELETING", "DELETED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetAdminAccount AWS API Documentation
     #
@@ -333,6 +335,8 @@ module Aws::FMS
     #   resp.policy_compliance_detail.violators[0].resource_type #=> String
     #   resp.policy_compliance_detail.evaluation_limit_exceeded #=> Boolean
     #   resp.policy_compliance_detail.expired_at #=> Time
+    #   resp.policy_compliance_detail.issue_info_map #=> Hash
+    #   resp.policy_compliance_detail.issue_info_map["DependentServiceName"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetComplianceDetail AWS API Documentation
     #
@@ -395,6 +399,12 @@ module Aws::FMS
     #   resp.policy.resource_tags[0].value #=> String
     #   resp.policy.exclude_resource_tags #=> Boolean
     #   resp.policy.remediation_enabled #=> Boolean
+    #   resp.policy.include_map #=> Hash
+    #   resp.policy.include_map["CustomerPolicyScopeIdType"] #=> Array
+    #   resp.policy.include_map["CustomerPolicyScopeIdType"][0] #=> String
+    #   resp.policy.exclude_map #=> Hash
+    #   resp.policy.exclude_map["CustomerPolicyScopeIdType"] #=> Array
+    #   resp.policy.exclude_map["CustomerPolicyScopeIdType"][0] #=> String
     #   resp.policy_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetPolicy AWS API Documentation
@@ -456,6 +466,8 @@ module Aws::FMS
     #   resp.policy_compliance_status_list[0].evaluation_results[0].violator_count #=> Integer
     #   resp.policy_compliance_status_list[0].evaluation_results[0].evaluation_limit_exceeded #=> Boolean
     #   resp.policy_compliance_status_list[0].last_updated #=> Time
+    #   resp.policy_compliance_status_list[0].issue_info_map #=> Hash
+    #   resp.policy_compliance_status_list[0].issue_info_map["DependentServiceName"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListComplianceStatus AWS API Documentation
@@ -464,6 +476,55 @@ module Aws::FMS
     # @param [Hash] params ({})
     def list_compliance_status(params = {}, options = {})
       req = build_request(:list_compliance_status, params)
+      req.send_request(options)
+    end
+
+    # Returns a `MemberAccounts` object that lists the member accounts in
+    # the administrator's AWS organization.
+    #
+    # The `ListMemberAccounts` must be submitted by the account that is set
+    # as the AWS Firewall Manager administrator.
+    #
+    # @option params [String] :next_token
+    #   If you specify a value for `MaxResults` and you have more account IDs
+    #   than the number that you specify for `MaxResults`, AWS Firewall
+    #   Manager returns a `NextToken` value in the response that allows you to
+    #   list another group of IDs. For the second and subsequent
+    #   `ListMemberAccountsRequest` requests, specify the value of `NextToken`
+    #   from the previous response to get information about another batch of
+    #   member account IDs.
+    #
+    # @option params [Integer] :max_results
+    #   Specifies the number of member account IDs that you want AWS Firewall
+    #   Manager to return for this request. If you have more IDs than the
+    #   number that you specify for `MaxResults`, the response includes a
+    #   `NextToken` value that you can use to get another batch of member
+    #   account IDs. The maximum value for `MaxResults` is 100.
+    #
+    # @return [Types::ListMemberAccountsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMemberAccountsResponse#member_accounts #member_accounts} => Array&lt;String&gt;
+    #   * {Types::ListMemberAccountsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_member_accounts({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.member_accounts #=> Array
+    #   resp.member_accounts[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListMemberAccounts AWS API Documentation
+    #
+    # @overload list_member_accounts(params = {})
+    # @param [Hash] params ({})
+    def list_member_accounts(params = {}, options = {})
+      req = build_request(:list_member_accounts, params)
       req.send_request(options)
     end
 
@@ -576,6 +637,12 @@ module Aws::FMS
     #       ],
     #       exclude_resource_tags: false, # required
     #       remediation_enabled: false, # required
+    #       include_map: {
+    #         "ACCOUNT" => ["CustomerPolicyScopeId"],
+    #       },
+    #       exclude_map: {
+    #         "ACCOUNT" => ["CustomerPolicyScopeId"],
+    #       },
     #     },
     #   })
     #
@@ -592,6 +659,12 @@ module Aws::FMS
     #   resp.policy.resource_tags[0].value #=> String
     #   resp.policy.exclude_resource_tags #=> Boolean
     #   resp.policy.remediation_enabled #=> Boolean
+    #   resp.policy.include_map #=> Hash
+    #   resp.policy.include_map["CustomerPolicyScopeIdType"] #=> Array
+    #   resp.policy.include_map["CustomerPolicyScopeIdType"][0] #=> String
+    #   resp.policy.exclude_map #=> Hash
+    #   resp.policy.exclude_map["CustomerPolicyScopeIdType"] #=> Array
+    #   resp.policy.exclude_map["CustomerPolicyScopeIdType"][0] #=> String
     #   resp.policy_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PutPolicy AWS API Documentation
@@ -616,7 +689,7 @@ module Aws::FMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fms'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
