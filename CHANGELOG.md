@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.130 (2018-09-13)
+------------------
+
 * Feature - Aws::Polly - Updated the API, and documentation for Amazon Polly.
 
 2.11.129 (2018-09-12)
