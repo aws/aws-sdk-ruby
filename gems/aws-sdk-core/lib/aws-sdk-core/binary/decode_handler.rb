@@ -23,11 +23,13 @@ module Aws
 
         context.http_response.on_headers(200) do
           protocol = context.config.api.metadata['protocol']
+          output_handler = context[:output_event_stream_handler] || context[:event_stream_handler]
           context.http_response.body = EventStreamDecoder.new(
             protocol,
             rules,
+            context.operation.output,
             context.http_response.body,
-            context[:event_stream_handler])
+            output_handler)
         end
 
         context.http_response.on_success(200) do
