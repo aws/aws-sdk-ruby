@@ -40,12 +40,26 @@ module Seahorse
           end
         end
 
-        # @return [String]
+        # @return [String|Array]
         def body_contents
-          body.rewind
-          contents = body.read
-          body.rewind
-          contents
+          if body.is_a?(Array)
+            # an array of parsed events
+            body
+          else
+            body.rewind
+            contents = body.read
+            body.rewind
+            contents
+          end
+        end
+
+        # TODO
+        def signal_h2_headers(status_code, headers)
+          @status_code = status_code
+          # after ruby 2.1
+          # array of pairs to hash
+          @headers = Headers.new(headers.to_h)
+          emit(:headers, @status_code, @headers)
         end
 
         # @param [Integer] status_code
