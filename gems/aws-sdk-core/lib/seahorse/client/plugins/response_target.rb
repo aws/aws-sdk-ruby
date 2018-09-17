@@ -41,7 +41,9 @@ module Seahorse
             context.http_response.on_error do
               body = context.http_response.body
               File.unlink(body) if ManagedFile === body
-              context.http_response.body = StringIO.new
+              unless context.http_response.body.respond_to?(:io)
+                context.http_response.body = StringIO.new
+              end
             end
           end
 

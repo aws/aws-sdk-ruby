@@ -234,6 +234,22 @@ module Aws
                 )
             end
 
+            def stub_encrypted_get_chunked
+              cipher = OpenSSL::Cipher::AES256.new(:CBC)
+              cipher.encrypt
+              cipher.key = Base64.decode64("uSwsRlIMhY1klVYrgqceqjmQMmARcNl7rEKWW+7HVvA=")
+              cipher.iv = Base64.decode64("TO5mQgtOzWkTfoX4RE5tsA==")
+              encrypted_body = cipher.update('0' * 50) + cipher.final
+              stub_request(:get, "https://bucket.s3.us-west-1.amazonaws.com/key").to_return(
+                body: encrypted_body,
+                headers: {
+                  'X-Amz-Meta-X-Amz-Key'=>'gX+a4JQYj7FP0y5TAAvxTz4e2l0DvOItbXByml/NPtKQcUlsoGHoYR/T0TuYHcNj',
+                  'X-Amz-Meta-X-Amz-Iv' => 'TO5mQgtOzWkTfoX4RE5tsA==',
+                  'X-Amz-Meta-X-Amz-Matdesc' => '{}',
+                }
+              )
+            end
+
             def stub_encrypted_get_with_instruction_file(suffix = '.instruction')
               stub_request(:get, "https://bucket.s3.us-west-1.amazonaws.com/key").
                 to_return(body: encrypted_body)
@@ -251,6 +267,25 @@ module Aws
               stub_encrypted_get
               resp = client.get_object(bucket:'bucket', key:'key')
               expect(resp.body.read).to eq('secret')
+            end
+
+            it 'decrypts the object with response target under retry' do
+              stub_encrypted_get_chunked
+              allow_any_instance_of(DecryptHandler).to receive(:attach_http_event_listeners).and_wrap_original do |m, *args|
+                m.call(*args)
+                context = args.first
+                context.http_response.on_data do |chunk|
+                  if context.retries.zero?
+                    context.retries = 1
+                    context.http_response.signal_error(
+                      Seahorse::Client::NetworkingError.new(Net::ReadTimeout.new)
+                    )
+                  end
+                end
+              end
+              data  = StringIO.new
+              client.get_object(bucket:'bucket', key:'key', response_target: data)
+              expect(data.size).to eq(50)
             end
 
             it 'supports #get_object with a block' do
