@@ -277,7 +277,9 @@ module Aws::CloudWatch
     # @option options [Array<String>] :extended_statistics
     #   The percentile statistics. Specify values between p0.0 and p100. When
     #   calling `GetMetricStatistics`, you must specify either `Statistics` or
-    #   `ExtendedStatistics`, but not both.
+    #   `ExtendedStatistics`, but not both. Percentile statistics are not
+    #   available for metrics when any of the metric values are negative
+    #   numbers.
     # @option options [String] :unit
     #   The unit for a given metric. Metrics may be reported in multiple
     #   units. Not supplying a unit results in all units being returned. If
@@ -333,55 +335,55 @@ module Aws::CloudWatch
     #   from any other state. Each action is specified as an Amazon Resource
     #   Name (ARN).
     #
-    #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
-    #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover \|
-    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
-    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
-    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
+    #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
+    #   `arn:aws:automate:region:ec2:terminate` \|
+    #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
     # @option options [Array<String>] :alarm_actions
     #   The actions to execute when this alarm transitions to the `ALARM`
     #   state from any other state. Each action is specified as an Amazon
     #   Resource Name (ARN).
     #
-    #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
-    #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover \|
-    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
-    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
-    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
+    #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
+    #   `arn:aws:automate:region:ec2:terminate` \|
+    #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
     # @option options [Array<String>] :insufficient_data_actions
     #   The actions to execute when this alarm transitions to the
     #   `INSUFFICIENT_DATA` state from any other state. Each action is
     #   specified as an Amazon Resource Name (ARN).
     #
-    #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
-    #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover \|
-    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
-    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
-    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
+    #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
+    #   `arn:aws:automate:region:ec2:terminate` \|
+    #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   `>arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
     # @option options [String] :statistic
     #   The statistic for the metric associated with the alarm, other than
     #   percentile. For percentile statistics, use `ExtendedStatistic`. When
@@ -510,6 +512,8 @@ module Aws::CloudWatch
     #           minimum: 1.0, # required
     #           maximum: 1.0, # required
     #         },
+    #         values: [1.0],
+    #         counts: [1.0],
     #         unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
     #         storage_resolution: 1,
     #       },
@@ -517,7 +521,8 @@ module Aws::CloudWatch
     #   })
     # @param [Hash] options ({})
     # @option options [required, Array<Types::MetricDatum>] :metric_data
-    #   The data for the metric.
+    #   The data for the metric. The array can include no more than 20 metrics
+    #   per call.
     # @return [EmptyStructure]
     def put_data(options = {})
       options = Aws::Util.deep_merge(options,

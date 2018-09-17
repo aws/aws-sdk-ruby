@@ -556,6 +556,30 @@ module Aws::CloudWatch
     # than calls to `GetMetricStatistics`. For more information about
     # pricing, see [Amazon CloudWatch Pricing][2].
     #
+    # Amazon CloudWatch retains metric data as follows:
+    #
+    # * Data points with a period of less than 60 seconds are available for
+    #   3 hours. These data points are high-resolution metrics and are
+    #   available only for custom metrics that have been defined with a
+    #   `StorageResolution` of 1.
+    #
+    # * Data points with a period of 60 seconds (1-minute) are available for
+    #   15 days.
+    #
+    # * Data points with a period of 300 seconds (5-minute) are available
+    #   for 63 days.
+    #
+    # * Data points with a period of 3600 seconds (1 hour) are available for
+    #   455 days (15 months).
+    #
+    # Data points that are initially published with a shorter period are
+    # aggregated together for long-term storage. For example, if you collect
+    # data using a period of 1 minute, the data remains available for 15
+    # days with 1-minute resolution. After 15 days, this data is still
+    # available, but is aggregated and retrievable only with a resolution of
+    # 5 minutes. After 63 days, the data is further aggregated and is
+    # available with a resolution of 1 hour.
+    #
     #
     #
     # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax
@@ -570,8 +594,21 @@ module Aws::CloudWatch
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The time stamp indicating the earliest data to be returned.
     #
+    #   For better performance, specify `StartTime` and `EndTime` values that
+    #   align with the value of the metric's `Period` and sync up with the
+    #   beginning and end of an hour. For example, if the `Period` of a metric
+    #   is 5 minutes, specifying 12:05 or 12:30 as `StartTime` can get a
+    #   faster response from CloudWatch then setting 12:07 or 12:29 as the
+    #   `StartTime`.
+    #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   The time stamp indicating the latest data to be returned.
+    #
+    #   For better performance, specify `StartTime` and `EndTime` values that
+    #   align with the value of the metric's `Period` and sync up with the
+    #   beginning and end of an hour. For example, if the `Period` of a metric
+    #   is 5 minutes, specifying 12:05 or 12:30 as `EndTime` can get a faster
+    #   response from CloudWatch then setting 12:07 or 12:29 as the `EndTime`.
     #
     # @option params [String] :next_token
     #   Include this value, if it was returned by the previous call, to get
@@ -674,6 +711,9 @@ module Aws::CloudWatch
     # * The SampleCount value of the statistic set is 1.
     #
     # * The Min and the Max values of the statistic set are equal.
+    #
+    # Percentile statistics are not available for metrics when any of the
+    # metric values are negative numbers.
     #
     # Amazon CloudWatch retains metric data as follows:
     #
@@ -801,7 +841,9 @@ module Aws::CloudWatch
     # @option params [Array<String>] :extended_statistics
     #   The percentile statistics. Specify values between p0.0 and p100. When
     #   calling `GetMetricStatistics`, you must specify either `Statistics` or
-    #   `ExtendedStatistics`, but not both.
+    #   `ExtendedStatistics`, but not both. Percentile statistics are not
+    #   available for metrics when any of the metric values are negative
+    #   numbers.
     #
     # @option params [String] :unit
     #   The unit for a given metric. Metrics may be reported in multiple
@@ -861,6 +903,11 @@ module Aws::CloudWatch
     # the prefix are listed. Otherwise, all dashboards in your account are
     # listed.
     #
+    # `ListDashboards` returns up to 1000 results on one page. If there are
+    # more than 1000 dashboards, you can call `ListDashboards` again and
+    # include the value you received for `NextToken` in the first call, to
+    # receive the next 1000 results.
+    #
     # @option params [String] :dashboard_name_prefix
     #   If you specify this parameter, only the dashboards with names starting
     #   with the specified string are listed. The maximum length is 255, and
@@ -901,14 +948,14 @@ module Aws::CloudWatch
     end
 
     # List the specified metrics. You can use the returned metrics with
-    # GetMetricStatistics to obtain statistical data.
+    # GetMetricData or GetMetricStatistics to obtain statistical data.
     #
     # Up to 500 results are returned for any one call. To retrieve
     # additional results, use the returned token with subsequent calls.
     #
     # After you create a metric, allow up to fifteen minutes before the
     # metric appears. Statistics about the metric, however, are available
-    # sooner using GetMetricStatistics.
+    # sooner using GetMetricData or GetMetricStatistics.
     #
     # @option params [String] :namespace
     #   The namespace to filter against.
@@ -965,8 +1012,8 @@ module Aws::CloudWatch
     # existing dashboard. If you update a dashboard, the entire contents are
     # replaced with what you specify here.
     #
-    # You can have up to 500 dashboards per account. All dashboards in your
-    # account are global, not region-specific.
+    # There is no limit to the number of dashboards in your account. All
+    # dashboards in your account are global, not region-specific.
     #
     # A simple way to create a dashboard using `PutDashboard` is to copy an
     # existing dashboard. To copy an existing dashboard using the console,
@@ -1066,11 +1113,15 @@ module Aws::CloudWatch
     # If you are using temporary security credentials granted using AWS STS,
     # you cannot stop or terminate an EC2 instance using alarm actions.
     #
-    # You must create at least one stop, terminate, or reboot alarm using
-    # either the Amazon EC2 or CloudWatch consoles to create the
-    # **EC2ActionsAccess** IAM role. After this IAM role is created, you can
-    # create stop, terminate, or reboot alarms using a command-line
-    # interface or API.
+    # The first time you create an alarm in the AWS Management Console, the
+    # CLI, or by using the PutMetricAlarm API, CloudWatch creates the
+    # necessary service-linked role for you. The service-linked role is
+    # called `AWSServiceRoleForCloudWatchEvents`. For more information about
+    # service-linked roles, see [AWS service-linked role][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role
     #
     # @option params [required, String] :alarm_name
     #   The name for the alarm. This name must be unique within the AWS
@@ -1088,57 +1139,57 @@ module Aws::CloudWatch
     #   from any other state. Each action is specified as an Amazon Resource
     #   Name (ARN).
     #
-    #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
-    #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover \|
-    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
-    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
-    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
+    #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
+    #   `arn:aws:automate:region:ec2:terminate` \|
+    #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
     #
     # @option params [Array<String>] :alarm_actions
     #   The actions to execute when this alarm transitions to the `ALARM`
     #   state from any other state. Each action is specified as an Amazon
     #   Resource Name (ARN).
     #
-    #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
-    #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover \|
-    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
-    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
-    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
+    #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
+    #   `arn:aws:automate:region:ec2:terminate` \|
+    #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
     #
     # @option params [Array<String>] :insufficient_data_actions
     #   The actions to execute when this alarm transitions to the
     #   `INSUFFICIENT_DATA` state from any other state. Each action is
     #   specified as an Amazon Resource Name (ARN).
     #
-    #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
-    #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover \|
-    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
-    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
-    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
+    #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
+    #   `arn:aws:automate:region:ec2:terminate` \|
+    #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   `>arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
     #
     # @option params [required, String] :metric_name
     #   The name for the metric associated with the alarm.
@@ -1292,14 +1343,23 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
-    # Publishes metric data points to Amazon CloudWatch. CloudWatch
-    # associates the data points with the specified metric. If the specified
-    # metric does not exist, CloudWatch creates the metric. When CloudWatch
-    # creates a metric, it can take up to fifteen minutes for the metric to
-    # appear in calls to ListMetrics.
+    # Publishes metric data to Amazon CloudWatch. CloudWatch associates the
+    # data with the specified metric. If the specified metric does not
+    # exist, CloudWatch creates the metric. When CloudWatch creates a
+    # metric, it can take up to fifteen minutes for the metric to appear in
+    # calls to ListMetrics.
+    #
+    # You can publish either individual data points in the `Value` field, or
+    # arrays of values and the number of times each value occurred during
+    # the period by using the `Values` and `Counts` fields in the
+    # `MetricDatum` structure. Using the `Values` and `Counts` method
+    # enables you to publish up to 150 values per metric with one
+    # `PutMetricData` request, and supports retrieving percentile statistics
+    # on this data.
     #
     # Each `PutMetricData` request is limited to 40 KB in size for HTTP POST
-    # requests.
+    # requests. You can send a payload compressed by gzip. Each request is
+    # also limited to no more than 20 different metrics.
     #
     # Although the `Value` parameter accepts numbers of type `Double`,
     # CloudWatch rejects values that are either too small or too large.
@@ -1313,17 +1373,21 @@ module Aws::CloudWatch
     # Guide*.
     #
     # Data points with time stamps from 24 hours ago or longer can take at
-    # least 48 hours to become available for GetMetricStatistics from the
-    # time they are submitted.
+    # least 48 hours to become available for GetMetricData or
+    # GetMetricStatistics from the time they are submitted.
     #
     # CloudWatch needs raw data points to calculate percentile statistics.
-    # If you publish data using a statistic set instead, you can only
-    # retrieve percentile statistics for this data if one of the following
-    # conditions is true:
+    # These raw data points could be published individually or as part of
+    # `Values` and `Counts` arrays. If you publish data using statistic sets
+    # in the `StatisticValues` field instead, you can only retrieve
+    # percentile statistics for this data if one of the following conditions
+    # is true:
     #
-    # * The SampleCount value of the statistic set is 1
+    # * The `SampleCount` value of the statistic set is 1 and `Min`, `Max`,
+    #   and `Sum` are all equal.
     #
-    # * The Min and the Max values of the statistic set are equal
+    # * The `Min` and `Max` are equal, and `Sum` is equal to `Min`
+    #   multiplied by `SampleCount`.
     #
     #
     #
@@ -1337,7 +1401,8 @@ module Aws::CloudWatch
     #   products.
     #
     # @option params [required, Array<Types::MetricDatum>] :metric_data
-    #   The data for the metric.
+    #   The data for the metric. The array can include no more than 20 metrics
+    #   per call.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1362,6 +1427,8 @@ module Aws::CloudWatch
     #           minimum: 1.0, # required
     #           maximum: 1.0, # required
     #         },
+    #         values: [1.0],
+    #         counts: [1.0],
     #         unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
     #         storage_resolution: 1,
     #       },
@@ -1435,7 +1502,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

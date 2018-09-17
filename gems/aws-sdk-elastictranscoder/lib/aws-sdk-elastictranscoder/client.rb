@@ -828,12 +828,12 @@ module Aws::ElasticTranscoder
     #   The AWS Key Management Service (AWS KMS) key that you want to use with
     #   this pipeline.
     #
-    #   If you use either `S3` or `S3-AWS-KMS` as your `Encryption:Mode`, you
+    #   If you use either `s3` or `s3-aws-kms` as your `Encryption:Mode`, you
     #   don't need to provide a key with your job because a default key,
     #   known as an AWS-KMS key, is created for you automatically. You need to
     #   provide an AWS-KMS key only if you want to use a non-default AWS-KMS
-    #   key, or if you are using an `Encryption:Mode` of `AES-PKCS7`,
-    #   `AES-CTR`, or `AES-GCM`.
+    #   key, or if you are using an `Encryption:Mode` of `aes-cbc-pkcs7`,
+    #   `aes-ctr`, or `aes-gcm`.
     #
     # @option params [Types::Notifications] :notifications
     #   The Amazon Simple Notification Service (Amazon SNS) topic that you
@@ -849,7 +849,7 @@ module Aws::ElasticTranscoder
     #     more information, see Create a Topic in the Amazon Simple
     #     Notification Service Developer Guide.
     #
-    #   * **Completed**\: The topic ARN for the Amazon SNS topic that you want
+    #   * **Complete**\: The topic ARN for the Amazon SNS topic that you want
     #     to notify when Elastic Transcoder has finished processing a job in
     #     this pipeline. This is the ARN that Amazon SNS returned when you
     #     created the topic.
@@ -2408,12 +2408,12 @@ module Aws::ElasticTranscoder
     #   The AWS Key Management Service (AWS KMS) key that you want to use with
     #   this pipeline.
     #
-    #   If you use either `S3` or `S3-AWS-KMS` as your `Encryption:Mode`, you
+    #   If you use either `s3` or `s3-aws-kms` as your `Encryption:Mode`, you
     #   don't need to provide a key with your job because a default key,
     #   known as an AWS-KMS key, is created for you automatically. You need to
     #   provide an AWS-KMS key only if you want to use a non-default AWS-KMS
-    #   key, or if you are using an `Encryption:Mode` of `AES-PKCS7`,
-    #   `AES-CTR`, or `AES-GCM`.
+    #   key, or if you are using an `Encryption:Mode` of `aes-cbc-pkcs7`,
+    #   `aes-ctr`, or `aes-gcm`.
     #
     # @option params [Types::Notifications] :notifications
     #   The topic ARN for the Amazon Simple Notification Service (Amazon SNS)
@@ -2428,7 +2428,7 @@ module Aws::ElasticTranscoder
     #     pipeline. This is the ARN that Amazon SNS returned when you created
     #     the topic.
     #
-    #   * **Completed**\: The topic ARN for the Amazon SNS topic that you want
+    #   * **Complete**\: The topic ARN for the Amazon SNS topic that you want
     #     to notify when Elastic Transcoder has finished processing a job.
     #     This is the ARN that Amazon SNS returned when you created the topic.
     #
@@ -2684,7 +2684,7 @@ module Aws::ElasticTranscoder
     #     pipeline. This is the ARN that Amazon SNS returned when you created
     #     the topic.
     #
-    #   * **Completed**\: The topic ARN for the Amazon SNS topic that you want
+    #   * **Complete**\: The topic ARN for the Amazon SNS topic that you want
     #     to notify when Elastic Transcoder has finished processing a job.
     #     This is the ARN that Amazon SNS returned when you created the topic.
     #
@@ -2827,7 +2827,7 @@ module Aws::ElasticTranscoder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elastictranscoder'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

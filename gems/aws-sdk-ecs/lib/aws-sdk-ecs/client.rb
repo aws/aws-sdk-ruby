@@ -1219,6 +1219,8 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].extra_hosts[0].ip_address #=> String
     #   resp.task_definition.container_definitions[0].docker_security_options #=> Array
     #   resp.task_definition.container_definitions[0].docker_security_options[0] #=> String
+    #   resp.task_definition.container_definitions[0].interactive #=> Boolean
+    #   resp.task_definition.container_definitions[0].pseudo_terminal #=> Boolean
     #   resp.task_definition.container_definitions[0].docker_labels #=> Hash
     #   resp.task_definition.container_definitions[0].docker_labels["String"] #=> String
     #   resp.task_definition.container_definitions[0].ulimits #=> Array
@@ -1234,6 +1236,9 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].health_check.timeout #=> Integer
     #   resp.task_definition.container_definitions[0].health_check.retries #=> Integer
     #   resp.task_definition.container_definitions[0].health_check.start_period #=> Integer
+    #   resp.task_definition.container_definitions[0].system_controls #=> Array
+    #   resp.task_definition.container_definitions[0].system_controls[0].namespace #=> String
+    #   resp.task_definition.container_definitions[0].system_controls[0].value #=> String
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -1833,6 +1838,8 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].extra_hosts[0].ip_address #=> String
     #   resp.task_definition.container_definitions[0].docker_security_options #=> Array
     #   resp.task_definition.container_definitions[0].docker_security_options[0] #=> String
+    #   resp.task_definition.container_definitions[0].interactive #=> Boolean
+    #   resp.task_definition.container_definitions[0].pseudo_terminal #=> Boolean
     #   resp.task_definition.container_definitions[0].docker_labels #=> Hash
     #   resp.task_definition.container_definitions[0].docker_labels["String"] #=> String
     #   resp.task_definition.container_definitions[0].ulimits #=> Array
@@ -1848,6 +1855,9 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].health_check.timeout #=> Integer
     #   resp.task_definition.container_definitions[0].health_check.retries #=> Integer
     #   resp.task_definition.container_definitions[0].health_check.start_period #=> Integer
+    #   resp.task_definition.container_definitions[0].system_controls #=> Array
+    #   resp.task_definition.container_definitions[0].system_controls[0].namespace #=> String
+    #   resp.task_definition.container_definitions[0].system_controls[0].value #=> String
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -3293,6 +3303,8 @@ module Aws::ECS
     #           },
     #         ],
     #         docker_security_options: ["String"],
+    #         interactive: false,
+    #         pseudo_terminal: false,
     #         docker_labels: {
     #           "String" => "String",
     #         },
@@ -3316,6 +3328,12 @@ module Aws::ECS
     #           retries: 1,
     #           start_period: 1,
     #         },
+    #         system_controls: [
+    #           {
+    #             namespace: "String",
+    #             value: "String",
+    #           },
+    #         ],
     #       },
     #     ],
     #     volumes: [
@@ -3410,6 +3428,8 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].extra_hosts[0].ip_address #=> String
     #   resp.task_definition.container_definitions[0].docker_security_options #=> Array
     #   resp.task_definition.container_definitions[0].docker_security_options[0] #=> String
+    #   resp.task_definition.container_definitions[0].interactive #=> Boolean
+    #   resp.task_definition.container_definitions[0].pseudo_terminal #=> Boolean
     #   resp.task_definition.container_definitions[0].docker_labels #=> Hash
     #   resp.task_definition.container_definitions[0].docker_labels["String"] #=> String
     #   resp.task_definition.container_definitions[0].ulimits #=> Array
@@ -3425,6 +3445,9 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].health_check.timeout #=> Integer
     #   resp.task_definition.container_definitions[0].health_check.retries #=> Integer
     #   resp.task_definition.container_definitions[0].health_check.start_period #=> Integer
+    #   resp.task_definition.container_definitions[0].system_controls #=> Array
+    #   resp.task_definition.container_definitions[0].system_controls[0].namespace #=> String
+    #   resp.task_definition.container_definitions[0].system_controls[0].value #=> String
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -4705,7 +4728,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1758,26 +1758,23 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] remove_from_version_id
-    #   (Optional) Specifies the secret version ID of the version that the
-    #   staging labels are to be removed from.
-    #
-    #   If you want to move a label to a new version, you do not have to
-    #   explicitly remove it with this parameter. Adding a label using the
-    #   `MoveToVersionId` parameter automatically removes it from the old
-    #   version. However, if you do include both the "MoveTo" and
-    #   "RemoveFrom" parameters, then the move is successful only if the
-    #   staging labels are actually present on the "RemoveFrom" version.
-    #   If a staging label was on a different version than "RemoveFrom",
-    #   then the request fails.
+    #   Specifies the secret version ID of the version that the staging
+    #   labels are to be removed from. If the staging label you are trying
+    #   to attach to one version is already attached to a different version,
+    #   then you must include this parameter and specify the version that
+    #   the label is to be removed from. If the label is attached and you
+    #   either do not specify this parameter, or the version ID does not
+    #   match, then the operation fails.
     #   @return [String]
     #
     # @!attribute [rw] move_to_version_id
     #   (Optional) The secret version ID that you want to add the staging
-    #   labels to.
+    #   labels to. If you want to remove a label from a version, then do not
+    #   specify this parameter.
     #
     #   If any of the staging labels are already attached to a different
-    #   version of the secret, then they are automatically removed from that
-    #   version before adding them to this version.
+    #   version of the secret, then you must also specify the
+    #   `RemoveFromVersionId` parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/UpdateSecretVersionStageRequest AWS API Documentation

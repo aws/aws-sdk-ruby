@@ -14,6 +14,7 @@ module Aws::ElastiCache
     APICallRateForCustomerExceededFault = Shapes::StructureShape.new(name: 'APICallRateForCustomerExceededFault')
     AZMode = Shapes::StringShape.new(name: 'AZMode')
     AddTagsToResourceMessage = Shapes::StructureShape.new(name: 'AddTagsToResourceMessage')
+    AllowedNodeGroupId = Shapes::StringShape.new(name: 'AllowedNodeGroupId')
     AllowedNodeTypeModificationsMessage = Shapes::StructureShape.new(name: 'AllowedNodeTypeModificationsMessage')
     AuthorizationAlreadyExistsFault = Shapes::StructureShape.new(name: 'AuthorizationAlreadyExistsFault')
     AuthorizationNotFoundFault = Shapes::StructureShape.new(name: 'AuthorizationNotFoundFault')
@@ -69,6 +70,7 @@ module Aws::ElastiCache
     ChangeType = Shapes::StringShape.new(name: 'ChangeType')
     ClusterIdList = Shapes::ListShape.new(name: 'ClusterIdList')
     ClusterQuotaForCustomerExceededFault = Shapes::StructureShape.new(name: 'ClusterQuotaForCustomerExceededFault')
+    ConfigureShard = Shapes::StructureShape.new(name: 'ConfigureShard')
     CopySnapshotMessage = Shapes::StructureShape.new(name: 'CopySnapshotMessage')
     CopySnapshotResult = Shapes::StructureShape.new(name: 'CopySnapshotResult')
     CreateCacheClusterMessage = Shapes::StructureShape.new(name: 'CreateCacheClusterMessage')
@@ -83,6 +85,8 @@ module Aws::ElastiCache
     CreateReplicationGroupResult = Shapes::StructureShape.new(name: 'CreateReplicationGroupResult')
     CreateSnapshotMessage = Shapes::StructureShape.new(name: 'CreateSnapshotMessage')
     CreateSnapshotResult = Shapes::StructureShape.new(name: 'CreateSnapshotResult')
+    DecreaseReplicaCountMessage = Shapes::StructureShape.new(name: 'DecreaseReplicaCountMessage')
+    DecreaseReplicaCountResult = Shapes::StructureShape.new(name: 'DecreaseReplicaCountResult')
     DeleteCacheClusterMessage = Shapes::StructureShape.new(name: 'DeleteCacheClusterMessage')
     DeleteCacheClusterResult = Shapes::StructureShape.new(name: 'DeleteCacheClusterResult')
     DeleteCacheParameterGroupMessage = Shapes::StructureShape.new(name: 'DeleteCacheParameterGroupMessage')
@@ -114,6 +118,8 @@ module Aws::ElastiCache
     Event = Shapes::StructureShape.new(name: 'Event')
     EventList = Shapes::ListShape.new(name: 'EventList')
     EventsMessage = Shapes::StructureShape.new(name: 'EventsMessage')
+    IncreaseReplicaCountMessage = Shapes::StructureShape.new(name: 'IncreaseReplicaCountMessage')
+    IncreaseReplicaCountResult = Shapes::StructureShape.new(name: 'IncreaseReplicaCountResult')
     InsufficientCacheClusterCapacityFault = Shapes::StructureShape.new(name: 'InsufficientCacheClusterCapacityFault')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegerOptional = Shapes::IntegerShape.new(name: 'IntegerOptional')
@@ -139,6 +145,7 @@ module Aws::ElastiCache
     ModifyReplicationGroupResult = Shapes::StructureShape.new(name: 'ModifyReplicationGroupResult')
     ModifyReplicationGroupShardConfigurationMessage = Shapes::StructureShape.new(name: 'ModifyReplicationGroupShardConfigurationMessage')
     ModifyReplicationGroupShardConfigurationResult = Shapes::StructureShape.new(name: 'ModifyReplicationGroupShardConfigurationResult')
+    NoOperationFault = Shapes::StructureShape.new(name: 'NoOperationFault')
     NodeGroup = Shapes::StructureShape.new(name: 'NodeGroup')
     NodeGroupConfiguration = Shapes::StructureShape.new(name: 'NodeGroupConfiguration')
     NodeGroupConfigurationList = Shapes::ListShape.new(name: 'NodeGroupConfigurationList')
@@ -148,6 +155,7 @@ module Aws::ElastiCache
     NodeGroupNotFoundFault = Shapes::StructureShape.new(name: 'NodeGroupNotFoundFault')
     NodeGroupsPerReplicationGroupQuotaExceededFault = Shapes::StructureShape.new(name: 'NodeGroupsPerReplicationGroupQuotaExceededFault')
     NodeGroupsToRemoveList = Shapes::ListShape.new(name: 'NodeGroupsToRemoveList')
+    NodeGroupsToRetainList = Shapes::ListShape.new(name: 'NodeGroupsToRetainList')
     NodeQuotaForClusterExceededFault = Shapes::StructureShape.new(name: 'NodeQuotaForClusterExceededFault')
     NodeQuotaForCustomerExceededFault = Shapes::StructureShape.new(name: 'NodeQuotaForCustomerExceededFault')
     NodeSnapshot = Shapes::StructureShape.new(name: 'NodeSnapshot')
@@ -167,7 +175,9 @@ module Aws::ElastiCache
     RebootCacheClusterResult = Shapes::StructureShape.new(name: 'RebootCacheClusterResult')
     RecurringCharge = Shapes::StructureShape.new(name: 'RecurringCharge')
     RecurringChargeList = Shapes::ListShape.new(name: 'RecurringChargeList')
+    RemoveReplicasList = Shapes::ListShape.new(name: 'RemoveReplicasList')
     RemoveTagsFromResourceMessage = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceMessage')
+    ReplicaConfigurationList = Shapes::ListShape.new(name: 'ReplicaConfigurationList')
     ReplicationGroup = Shapes::StructureShape.new(name: 'ReplicationGroup')
     ReplicationGroupAlreadyExistsFault = Shapes::StructureShape.new(name: 'ReplicationGroupAlreadyExistsFault')
     ReplicationGroupList = Shapes::ListShape.new(name: 'ReplicationGroupList')
@@ -193,6 +203,7 @@ module Aws::ElastiCache
     SecurityGroupIdsList = Shapes::ListShape.new(name: 'SecurityGroupIdsList')
     SecurityGroupMembership = Shapes::StructureShape.new(name: 'SecurityGroupMembership')
     SecurityGroupMembershipList = Shapes::ListShape.new(name: 'SecurityGroupMembershipList')
+    ServiceLinkedRoleNotFoundFault = Shapes::StructureShape.new(name: 'ServiceLinkedRoleNotFoundFault')
     SlotMigration = Shapes::StructureShape.new(name: 'SlotMigration')
     Snapshot = Shapes::StructureShape.new(name: 'Snapshot')
     SnapshotAlreadyExistsFault = Shapes::StructureShape.new(name: 'SnapshotAlreadyExistsFault')
@@ -373,6 +384,11 @@ module Aws::ElastiCache
 
     ClusterIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "ClusterId")
 
+    ConfigureShard.add_member(:node_group_id, Shapes::ShapeRef.new(shape: AllowedNodeGroupId, required: true, location_name: "NodeGroupId"))
+    ConfigureShard.add_member(:new_replica_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "NewReplicaCount"))
+    ConfigureShard.add_member(:preferred_availability_zones, Shapes::ShapeRef.new(shape: PreferredAvailabilityZoneList, location_name: "PreferredAvailabilityZones"))
+    ConfigureShard.struct_class = Types::ConfigureShard
+
     CopySnapshotMessage.add_member(:source_snapshot_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceSnapshotName"))
     CopySnapshotMessage.add_member(:target_snapshot_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TargetSnapshotName"))
     CopySnapshotMessage.add_member(:target_bucket, Shapes::ShapeRef.new(shape: String, location_name: "TargetBucket"))
@@ -472,6 +488,16 @@ module Aws::ElastiCache
 
     CreateSnapshotResult.add_member(:snapshot, Shapes::ShapeRef.new(shape: Snapshot, location_name: "Snapshot"))
     CreateSnapshotResult.struct_class = Types::CreateSnapshotResult
+
+    DecreaseReplicaCountMessage.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationGroupId"))
+    DecreaseReplicaCountMessage.add_member(:new_replica_count, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NewReplicaCount"))
+    DecreaseReplicaCountMessage.add_member(:replica_configuration, Shapes::ShapeRef.new(shape: ReplicaConfigurationList, location_name: "ReplicaConfiguration"))
+    DecreaseReplicaCountMessage.add_member(:replicas_to_remove, Shapes::ShapeRef.new(shape: RemoveReplicasList, location_name: "ReplicasToRemove"))
+    DecreaseReplicaCountMessage.add_member(:apply_immediately, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ApplyImmediately"))
+    DecreaseReplicaCountMessage.struct_class = Types::DecreaseReplicaCountMessage
+
+    DecreaseReplicaCountResult.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
+    DecreaseReplicaCountResult.struct_class = Types::DecreaseReplicaCountResult
 
     DeleteCacheClusterMessage.add_member(:cache_cluster_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CacheClusterId"))
     DeleteCacheClusterMessage.add_member(:final_snapshot_identifier, Shapes::ShapeRef.new(shape: String, location_name: "FinalSnapshotIdentifier"))
@@ -622,6 +648,15 @@ module Aws::ElastiCache
     EventsMessage.add_member(:events, Shapes::ShapeRef.new(shape: EventList, location_name: "Events"))
     EventsMessage.struct_class = Types::EventsMessage
 
+    IncreaseReplicaCountMessage.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationGroupId"))
+    IncreaseReplicaCountMessage.add_member(:new_replica_count, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NewReplicaCount"))
+    IncreaseReplicaCountMessage.add_member(:replica_configuration, Shapes::ShapeRef.new(shape: ReplicaConfigurationList, location_name: "ReplicaConfiguration"))
+    IncreaseReplicaCountMessage.add_member(:apply_immediately, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ApplyImmediately"))
+    IncreaseReplicaCountMessage.struct_class = Types::IncreaseReplicaCountMessage
+
+    IncreaseReplicaCountResult.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
+    IncreaseReplicaCountResult.struct_class = Types::IncreaseReplicaCountResult
+
     KeyList.member = Shapes::ShapeRef.new(shape: String)
 
     ListAllowedNodeTypeModificationsMessage.add_member(:cache_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "CacheClusterId"))
@@ -682,7 +717,7 @@ module Aws::ElastiCache
     ModifyReplicationGroupMessage.add_member(:snapshot_retention_limit, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SnapshotRetentionLimit"))
     ModifyReplicationGroupMessage.add_member(:snapshot_window, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotWindow"))
     ModifyReplicationGroupMessage.add_member(:cache_node_type, Shapes::ShapeRef.new(shape: String, location_name: "CacheNodeType"))
-    ModifyReplicationGroupMessage.add_member(:node_group_id, Shapes::ShapeRef.new(shape: String, location_name: "NodeGroupId"))
+    ModifyReplicationGroupMessage.add_member(:node_group_id, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "NodeGroupId"))
     ModifyReplicationGroupMessage.struct_class = Types::ModifyReplicationGroupMessage
 
     ModifyReplicationGroupResult.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
@@ -693,6 +728,7 @@ module Aws::ElastiCache
     ModifyReplicationGroupShardConfigurationMessage.add_member(:apply_immediately, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ApplyImmediately"))
     ModifyReplicationGroupShardConfigurationMessage.add_member(:resharding_configuration, Shapes::ShapeRef.new(shape: ReshardingConfigurationList, location_name: "ReshardingConfiguration"))
     ModifyReplicationGroupShardConfigurationMessage.add_member(:node_groups_to_remove, Shapes::ShapeRef.new(shape: NodeGroupsToRemoveList, location_name: "NodeGroupsToRemove"))
+    ModifyReplicationGroupShardConfigurationMessage.add_member(:node_groups_to_retain, Shapes::ShapeRef.new(shape: NodeGroupsToRetainList, location_name: "NodeGroupsToRetain"))
     ModifyReplicationGroupShardConfigurationMessage.struct_class = Types::ModifyReplicationGroupShardConfigurationMessage
 
     ModifyReplicationGroupShardConfigurationResult.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
@@ -705,6 +741,7 @@ module Aws::ElastiCache
     NodeGroup.add_member(:node_group_members, Shapes::ShapeRef.new(shape: NodeGroupMemberList, location_name: "NodeGroupMembers"))
     NodeGroup.struct_class = Types::NodeGroup
 
+    NodeGroupConfiguration.add_member(:node_group_id, Shapes::ShapeRef.new(shape: AllowedNodeGroupId, location_name: "NodeGroupId"))
     NodeGroupConfiguration.add_member(:slots, Shapes::ShapeRef.new(shape: String, location_name: "Slots"))
     NodeGroupConfiguration.add_member(:replica_count, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ReplicaCount"))
     NodeGroupConfiguration.add_member(:primary_availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "PrimaryAvailabilityZone"))
@@ -724,7 +761,9 @@ module Aws::ElastiCache
 
     NodeGroupMemberList.member = Shapes::ShapeRef.new(shape: NodeGroupMember, location_name: "NodeGroupMember")
 
-    NodeGroupsToRemoveList.member = Shapes::ShapeRef.new(shape: String, location_name: "NodeGroupToRemove")
+    NodeGroupsToRemoveList.member = Shapes::ShapeRef.new(shape: AllowedNodeGroupId, location_name: "NodeGroupToRemove")
+
+    NodeGroupsToRetainList.member = Shapes::ShapeRef.new(shape: AllowedNodeGroupId, location_name: "NodeGroupToRetain")
 
     NodeSnapshot.add_member(:cache_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "CacheClusterId"))
     NodeSnapshot.add_member(:node_group_id, Shapes::ShapeRef.new(shape: String, location_name: "NodeGroupId"))
@@ -791,9 +830,13 @@ module Aws::ElastiCache
 
     RecurringChargeList.member = Shapes::ShapeRef.new(shape: RecurringCharge, location_name: "RecurringCharge")
 
+    RemoveReplicasList.member = Shapes::ShapeRef.new(shape: String)
+
     RemoveTagsFromResourceMessage.add_member(:resource_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceName"))
     RemoveTagsFromResourceMessage.add_member(:tag_keys, Shapes::ShapeRef.new(shape: KeyList, required: true, location_name: "TagKeys"))
     RemoveTagsFromResourceMessage.struct_class = Types::RemoveTagsFromResourceMessage
+
+    ReplicaConfigurationList.member = Shapes::ShapeRef.new(shape: ConfigureShard, location_name: "ConfigureShard")
 
     ReplicationGroup.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationGroupId"))
     ReplicationGroup.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
@@ -836,6 +879,7 @@ module Aws::ElastiCache
     ReservedCacheNode.add_member(:offering_type, Shapes::ShapeRef.new(shape: String, location_name: "OfferingType"))
     ReservedCacheNode.add_member(:state, Shapes::ShapeRef.new(shape: String, location_name: "State"))
     ReservedCacheNode.add_member(:recurring_charges, Shapes::ShapeRef.new(shape: RecurringChargeList, location_name: "RecurringCharges"))
+    ReservedCacheNode.add_member(:reservation_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReservationARN"))
     ReservedCacheNode.struct_class = Types::ReservedCacheNode
 
     ReservedCacheNodeList.member = Shapes::ShapeRef.new(shape: ReservedCacheNode, location_name: "ReservedCacheNode")
@@ -865,6 +909,7 @@ module Aws::ElastiCache
     ResetCacheParameterGroupMessage.add_member(:parameter_name_values, Shapes::ShapeRef.new(shape: ParameterNameValueList, location_name: "ParameterNameValues"))
     ResetCacheParameterGroupMessage.struct_class = Types::ResetCacheParameterGroupMessage
 
+    ReshardingConfiguration.add_member(:node_group_id, Shapes::ShapeRef.new(shape: AllowedNodeGroupId, location_name: "NodeGroupId"))
     ReshardingConfiguration.add_member(:preferred_availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZonesList, location_name: "PreferredAvailabilityZones"))
     ReshardingConfiguration.struct_class = Types::ReshardingConfiguration
 
@@ -940,7 +985,7 @@ module Aws::ElastiCache
     TagListMessage.struct_class = Types::TagListMessage
 
     TestFailoverMessage.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationGroupId"))
-    TestFailoverMessage.add_member(:node_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "NodeGroupId"))
+    TestFailoverMessage.add_member(:node_group_id, Shapes::ShapeRef.new(shape: AllowedNodeGroupId, required: true, location_name: "NodeGroupId"))
     TestFailoverMessage.struct_class = Types::TestFailoverMessage
 
     TestFailoverResult.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
@@ -957,6 +1002,7 @@ module Aws::ElastiCache
         "endpointPrefix" => "elasticache",
         "protocol" => "query",
         "serviceFullName" => "Amazon ElastiCache",
+        "serviceId" => "ElastiCache",
         "signatureVersion" => "v4",
         "uid" => "elasticache-2015-02-02",
         "xmlNamespace" => "http://elasticache.amazonaws.com/doc/2015-02-02/",
@@ -1098,6 +1144,26 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: SnapshotFeatureNotSupportedFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+      end)
+
+      api.add_operation(:decrease_replica_count, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DecreaseReplicaCount"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DecreaseReplicaCountMessage)
+        o.output = Shapes::ShapeRef.new(shape: DecreaseReplicaCountResult)
+        o.errors << Shapes::ShapeRef.new(shape: ReplicationGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidReplicationGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCacheClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientCacheClusterCapacityFault)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterQuotaForCustomerExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: NodeGroupsPerReplicationGroupQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: NodeQuotaForCustomerExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: NoOperationFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
 
       api.add_operation(:delete_cache_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -1372,6 +1438,25 @@ module Aws::ElastiCache
             "marker" => "marker"
           }
         )
+      end)
+
+      api.add_operation(:increase_replica_count, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "IncreaseReplicaCount"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: IncreaseReplicaCountMessage)
+        o.output = Shapes::ShapeRef.new(shape: IncreaseReplicaCountResult)
+        o.errors << Shapes::ShapeRef.new(shape: ReplicationGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidReplicationGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCacheClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientCacheClusterCapacityFault)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterQuotaForCustomerExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: NodeGroupsPerReplicationGroupQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: NodeQuotaForCustomerExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: NoOperationFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
 
       api.add_operation(:list_allowed_node_type_modifications, Seahorse::Model::Operation.new.tap do |o|

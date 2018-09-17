@@ -131,7 +131,7 @@ module Aws::ECS
     #
     # @!attribute [rw] subnets
     #   The subnets associated with the task or service. There is a limit of
-    #   10 subnets able to be specified per `AwsVpcConfiguration`.
+    #   16 subnets able to be specified per `AwsVpcConfiguration`.
     #
     #   <note markdown="1"> All specified subnets must be from the same VPC.
     #
@@ -379,6 +379,8 @@ module Aws::ECS
     #           },
     #         ],
     #         docker_security_options: ["String"],
+    #         interactive: false,
+    #         pseudo_terminal: false,
     #         docker_labels: {
     #           "String" => "String",
     #         },
@@ -402,6 +404,12 @@ module Aws::ECS
     #           retries: 1,
     #           start_period: 1,
     #         },
+    #         system_controls: [
+    #           {
+    #             namespace: "String",
+    #             value: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -415,7 +423,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
@@ -454,7 +462,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
@@ -529,7 +537,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: http://aws.amazon.com/ec2/instance-types/
@@ -562,7 +570,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Integer]
@@ -599,7 +607,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Integer]
@@ -629,7 +637,7 @@ module Aws::ECS
     #
     #
     #   [1]: https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/
-    #   [2]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [2]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [3]: https://docs.docker.com/engine/api/v1.35/
     #   [4]: https://docs.docker.com/engine/reference/commandline/run/
     #   @return [Array<String>]
@@ -666,7 +674,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::PortMapping>]
@@ -705,7 +713,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: https://docs.docker.com/engine/reference/builder/#entrypoint
@@ -720,7 +728,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: https://docs.docker.com/engine/reference/builder/#cmd
@@ -736,7 +744,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::KeyValuePair>]
@@ -754,7 +762,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::MountPoint>]
@@ -766,7 +774,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::VolumeFrom>]
@@ -792,7 +800,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
@@ -808,7 +816,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
@@ -821,7 +829,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
@@ -837,7 +845,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   @return [Boolean]
     #
@@ -855,7 +863,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Boolean]
@@ -864,7 +872,7 @@ module Aws::ECS
     #   When this parameter is true, the container is given read-only access
     #   to its root file system. This parameter maps to `ReadonlyRootfs` in
     #   the [Create a container][1] section of the [Docker Remote API][2]
-    #   and the `--read-only` option to `docker run`.
+    #   and the `--read-only` option to [docker run][3].
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
@@ -872,8 +880,9 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
+    #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Boolean]
     #
     # @!attribute [rw] dns_servers
@@ -888,7 +897,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<String>]
@@ -905,7 +914,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<String>]
@@ -924,7 +933,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::HostEntry>]
@@ -951,11 +960,37 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] interactive
+    #   When this parameter is `true`, this allows you to deploy
+    #   containerized applications that require `stdin` or a `tty` to be
+    #   allocated. This parameter maps to `OpenStdin` in the [Create a
+    #   container][1] section of the [Docker Remote API][2] and the
+    #   `--interactive` option to [docker run][3].
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
+    #   [3]: https://docs.docker.com/engine/reference/run/
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] pseudo_terminal
+    #   When this parameter is `true`, a TTY is allocated. This parameter
+    #   maps to `Tty` in the [Create a container][1] section of the [Docker
+    #   Remote API][2] and the `--tty` option to [docker run][3].
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
+    #   [3]: https://docs.docker.com/engine/reference/run/
+    #   @return [Boolean]
     #
     # @!attribute [rw] docker_labels
     #   A key/value map of labels to add to the container. This parameter
@@ -969,7 +1004,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Hash<String,String>]
@@ -990,7 +1025,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::Ulimit>]
@@ -1038,7 +1073,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: https://docs.docker.com/engine/admin/logging/overview/
@@ -1053,10 +1088,31 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Types::HealthCheck]
+    #
+    # @!attribute [rw] system_controls
+    #   A list of namespaced kernel parameters to set in the container. This
+    #   parameter maps to `Sysctls` in the [Create a container][1] section
+    #   of the [Docker Remote API][2] and the `--sysctl` option to [docker
+    #   run][3].
+    #
+    #   <note markdown="1"> It is not recommended that you specify network-related
+    #   `systemControls` parameters for multiple containers in a single task
+    #   that also uses either the `awsvpc` or `host` network modes. When you
+    #   do, the container that is started last will determine which
+    #   `systemControls` parameters take effect.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
+    #   [3]: https://docs.docker.com/engine/reference/run/
+    #   @return [Array<Types::SystemControl>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerDefinition AWS API Documentation
     #
@@ -1086,10 +1142,13 @@ module Aws::ECS
       :dns_search_domains,
       :extra_hosts,
       :docker_security_options,
+      :interactive,
+      :pseudo_terminal,
       :docker_labels,
       :ulimits,
       :log_configuration,
-      :health_check)
+      :health_check,
+      :system_controls)
       include Aws::Structure
     end
 
@@ -2273,8 +2332,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # The configuration for the Docker volume. This parameter is specified
-    # when using Docker volumes.
+    # This parameter is specified when using Docker volumes. Docker volumes
+    # are only supported when using the EC2 launch type. Windows containers
+    # only support the use of the `local` driver. To use bind mounts,
+    # specify a `host` instead.
     #
     # @note When making an API call, you may pass DockerVolumeConfiguration
     #   data as a hash:
@@ -2387,6 +2448,24 @@ module Aws::ECS
     # Docker health checks that exist in the container image (such as those
     # specified in a parent image or from the image's Dockerfile).
     #
+    # The following are notes about container health check support:
+    #
+    # * Container health checks require version 1.17.0 or greater of the
+    #   Amazon ECS container agent. For more information, see [Updating the
+    #   Amazon ECS Container Agent][1].
+    #
+    # * Container health checks are supported for Fargate tasks if using
+    #   platform version version 1.1.0 or greater. For more information, see
+    #   [AWS Fargate Platform Versions][2].
+    #
+    # * Container health checks are not supported for tasks that are part of
+    #   a service that is configured to use a Classic Load Balancer.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
+    #
     # @note When making an API call, you may pass HealthCheck
     #   data as a hash:
     #
@@ -2412,7 +2491,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   @return [Array<String>]
     #
@@ -2560,7 +2639,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<String>]
@@ -2583,7 +2662,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<String>]
@@ -2676,7 +2755,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#create-a-container
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::Device>]
@@ -4018,6 +4097,8 @@ module Aws::ECS
     #               },
     #             ],
     #             docker_security_options: ["String"],
+    #             interactive: false,
+    #             pseudo_terminal: false,
     #             docker_labels: {
     #               "String" => "String",
     #             },
@@ -4041,6 +4122,12 @@ module Aws::ECS
     #               retries: 1,
     #               start_period: 1,
     #             },
+    #             system_controls: [
+    #               {
+    #                 namespace: "String",
+    #                 value: "String",
+    #               },
+    #             ],
     #           },
     #         ],
     #         volumes: [
@@ -4736,7 +4823,7 @@ module Aws::ECS
     #
     # @!attribute [rw] port
     #   The port value used if your service discovery service specified an
-    #   SRV record. This field is required if both the `awsvpc` network mode
+    #   SRV record. This field may be used if both the `awsvpc` network mode
     #   and SRV records are used.
     #   @return [Integer]
     #
@@ -5114,6 +5201,50 @@ module Aws::ECS
     #
     class SubmitTaskStateChangeResponse < Struct.new(
       :acknowledgment)
+      include Aws::Structure
+    end
+
+    # A list of namespaced kernel parameters to set in the container. This
+    # parameter maps to `Sysctls` in the [Create a container][1] section of
+    # the [Docker Remote API][2] and the `--sysctl` option to [docker
+    # run][3].
+    #
+    # <note markdown="1"> It is not recommended that you specify network-related
+    # `systemControls` parameters for multiple containers in a single task
+    # that also uses either the `awsvpc` or `host` network modes. When you
+    # do, the container that is started last will determine which
+    # `systemControls` parameters take effect.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    # [2]: https://docs.docker.com/engine/api/v1.35/
+    # [3]: https://docs.docker.com/engine/reference/run/
+    #
+    # @note When making an API call, you may pass SystemControl
+    #   data as a hash:
+    #
+    #       {
+    #         namespace: "String",
+    #         value: "String",
+    #       }
+    #
+    # @!attribute [rw] namespace
+    #   The namespaced kernel parameter to set a `value` for.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value for the namespaced kernel parameter specifed in
+    #   `namespace`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SystemControl AWS API Documentation
+    #
+    class SystemControl < Struct.new(
+      :namespace,
+      :value)
       include Aws::Structure
     end
 
@@ -6046,8 +6177,10 @@ module Aws::ECS
     #   @return [Types::HostVolumeProperties]
     #
     # @!attribute [rw] docker_volume_configuration
-    #   The configuration for the Docker volume. This parameter is specified
-    #   when using Docker volumes.
+    #   This parameter is specified when using Docker volumes. Docker
+    #   volumes are only supported when using the EC2 launch type. Windows
+    #   containers only support the use of the `local` driver. To use bind
+    #   mounts, specify a `host` instead.
     #   @return [Types::DockerVolumeConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Volume AWS API Documentation
