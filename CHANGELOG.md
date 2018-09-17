@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+* Feature - Aws::ElastiCache - Updated the API, documentation, and integration test for Amazon ElastiCache.
+
+* Feature - Aws::ElasticTranscoder - Updated the API, documentation, and integration test for Amazon Elastic Transcoder.
+
+* Feature - Aws::CloudWatch - Updated the API, and documentation for Amazon CloudWatch.
+
+* Feature - Aws::SecretsManager - Updated the documentation for AWS Secrets Manager.
+
 2.11.130 (2018-09-13)
 ------------------
 
