@@ -1997,17 +1997,52 @@ module Aws::Rekognition
     # client-side index to associate the faces with each image. You can then
     # use the index to find all faces in an image.
     #
+    # You can specify the maximum number of faces to index with the
+    # `MaxFaces` input parameter. This is useful when you want to index the
+    # largest faces in an image, and you don't want to index other faces
+    # detected in the image.
+    #
+    # The `QualityFilter` input parameter allows you to filter out detected
+    # faces that don’t meet the required quality bar chosen by Amazon
+    # Rekognition. The quality bar is based on a variety of common use
+    # cases.
+    #
     # In response, the operation returns an array of metadata for all
-    # detected faces. This includes, the bounding box of the detected face,
-    # confidence value (indicating the bounding box contains a face), a face
-    # ID assigned by the service for each face that is detected and stored,
-    # and an image ID assigned by the service for the input image. If you
-    # request all facial attributes (using the `detectionAttributes`
-    # parameter, Amazon Rekognition returns detailed facial attributes such
+    # detected faces, `FaceRecords`. This includes:
+    #
+    # * The bounding box, `BoundingBox`, of the detected face.
+    #
+    # * A confidence value, `Confidence`, indicating the confidence that the
+    #   bounding box contains a face.
+    #
+    # * A face ID, `faceId`, assigned by the service for each face that is
+    #   detected and stored.
+    #
+    # * An image ID, `ImageId`, assigned by the service for the input image.
+    #
+    # If you request all facial attributes (using the `detectionAttributes`
+    # parameter), Amazon Rekognition returns detailed facial attributes such
     # as facial landmarks (for example, location of eye and mouth) and other
     # facial attributes such gender. If you provide the same image, specify
     # the same collection, and use the same external ID in the `IndexFaces`
     # operation, Amazon Rekognition doesn't save duplicate face metadata.
+    #
+    # Information about faces detected in an image, but not indexed, is
+    # returned in an array of objects, `UnindexedFaces`. Faces are not
+    # indexed for reasons such as:
+    #
+    # * The face is too blurry.
+    #
+    # * The image is too dark.
+    #
+    # * The face has an extreme pose.
+    #
+    # * The face is too small.
+    #
+    # * The number of faces detected exceeds the value of the `MaxFaces`
+    #   request parameter.
+    #
+    #
     #
     # For more information, see Adding Faces to a Collection in the Amazon
     # Rekognition Developer Guide.
@@ -2045,11 +2080,39 @@ module Aws::Rekognition
     #   AND operator to determine which attributes to return (in this case,
     #   all attributes).
     #
+    # @option params [Integer] :max_faces
+    #   The maximum number of faces to index. The value of `MaxFaces` must be
+    #   greater than or equal to 1. `IndexFaces` returns no more that 100
+    #   detected faces in an image, even if you specify a larger value for
+    #   `MaxFaces`.
+    #
+    #   If `IndexFaces` detects more faces than the value of `MaxFaces`, the
+    #   faces with the lowest quality are filtered out first. If there are
+    #   still more faces than the value of `MaxFaces`, the faces with the
+    #   smallest bounding boxes are filtered out (up to the number needed to
+    #   satisfy the value of `MaxFaces`). Information about the unindexed
+    #   faces is available in the `UnindexedFaces` array.
+    #
+    #   The faces returned by `IndexFaces` are sorted, in descending order, by
+    #   the largest face bounding box size, to the smallest.
+    #
+    # @option params [String] :quality_filter
+    #   Specifies how much filtering is done to identify faces detected with
+    #   low quality. Filtered faces are not indexed. If you specify `AUTO`,
+    #   filtering prioritizes the identification of faces that don’t meet the
+    #   required quality bar chosen by Amazon Rekognition. The quality bar is
+    #   based on a variety of common use cases. Low quality detections can
+    #   arise for a number of reasons. For example, an object misidentified as
+    #   a face, a face that is too blurry, or a face with a pose that is too
+    #   extreme to use. If you specify `NONE`, no filtering is performed. The
+    #   default value is NONE.
+    #
     # @return [Types::IndexFacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::IndexFacesResponse#face_records #face_records} => Array&lt;Types::FaceRecord&gt;
     #   * {Types::IndexFacesResponse#orientation_correction #orientation_correction} => String
     #   * {Types::IndexFacesResponse#face_model_version #face_model_version} => String
+    #   * {Types::IndexFacesResponse#unindexed_faces #unindexed_faces} => Array&lt;Types::UnindexedFace&gt;
     #
     #
     # @example Example: To add a face to a collection
@@ -2206,6 +2269,8 @@ module Aws::Rekognition
     #     },
     #     external_image_id: "ExternalImageId",
     #     detection_attributes: ["DEFAULT"], # accepts DEFAULT, ALL
+    #     max_faces: 1,
+    #     quality_filter: "NONE", # accepts NONE, AUTO
     #   })
     #
     # @example Response structure
@@ -2256,6 +2321,44 @@ module Aws::Rekognition
     #   resp.face_records[0].face_detail.confidence #=> Float
     #   resp.orientation_correction #=> String, one of "ROTATE_0", "ROTATE_90", "ROTATE_180", "ROTATE_270"
     #   resp.face_model_version #=> String
+    #   resp.unindexed_faces #=> Array
+    #   resp.unindexed_faces[0].reasons #=> Array
+    #   resp.unindexed_faces[0].reasons[0] #=> String, one of "EXCEEDS_MAX_FACES", "EXTREME_POSE", "LOW_BRIGHTNESS", "LOW_SHARPNESS", "LOW_CONFIDENCE", "SMALL_BOUNDING_BOX"
+    #   resp.unindexed_faces[0].face_detail.bounding_box.width #=> Float
+    #   resp.unindexed_faces[0].face_detail.bounding_box.height #=> Float
+    #   resp.unindexed_faces[0].face_detail.bounding_box.left #=> Float
+    #   resp.unindexed_faces[0].face_detail.bounding_box.top #=> Float
+    #   resp.unindexed_faces[0].face_detail.age_range.low #=> Integer
+    #   resp.unindexed_faces[0].face_detail.age_range.high #=> Integer
+    #   resp.unindexed_faces[0].face_detail.smile.value #=> Boolean
+    #   resp.unindexed_faces[0].face_detail.smile.confidence #=> Float
+    #   resp.unindexed_faces[0].face_detail.eyeglasses.value #=> Boolean
+    #   resp.unindexed_faces[0].face_detail.eyeglasses.confidence #=> Float
+    #   resp.unindexed_faces[0].face_detail.sunglasses.value #=> Boolean
+    #   resp.unindexed_faces[0].face_detail.sunglasses.confidence #=> Float
+    #   resp.unindexed_faces[0].face_detail.gender.value #=> String, one of "Male", "Female"
+    #   resp.unindexed_faces[0].face_detail.gender.confidence #=> Float
+    #   resp.unindexed_faces[0].face_detail.beard.value #=> Boolean
+    #   resp.unindexed_faces[0].face_detail.beard.confidence #=> Float
+    #   resp.unindexed_faces[0].face_detail.mustache.value #=> Boolean
+    #   resp.unindexed_faces[0].face_detail.mustache.confidence #=> Float
+    #   resp.unindexed_faces[0].face_detail.eyes_open.value #=> Boolean
+    #   resp.unindexed_faces[0].face_detail.eyes_open.confidence #=> Float
+    #   resp.unindexed_faces[0].face_detail.mouth_open.value #=> Boolean
+    #   resp.unindexed_faces[0].face_detail.mouth_open.confidence #=> Float
+    #   resp.unindexed_faces[0].face_detail.emotions #=> Array
+    #   resp.unindexed_faces[0].face_detail.emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN"
+    #   resp.unindexed_faces[0].face_detail.emotions[0].confidence #=> Float
+    #   resp.unindexed_faces[0].face_detail.landmarks #=> Array
+    #   resp.unindexed_faces[0].face_detail.landmarks[0].type #=> String, one of "eyeLeft", "eyeRight", "nose", "mouthLeft", "mouthRight", "leftEyeBrowLeft", "leftEyeBrowRight", "leftEyeBrowUp", "rightEyeBrowLeft", "rightEyeBrowRight", "rightEyeBrowUp", "leftEyeLeft", "leftEyeRight", "leftEyeUp", "leftEyeDown", "rightEyeLeft", "rightEyeRight", "rightEyeUp", "rightEyeDown", "noseLeft", "noseRight", "mouthUp", "mouthDown", "leftPupil", "rightPupil"
+    #   resp.unindexed_faces[0].face_detail.landmarks[0].x #=> Float
+    #   resp.unindexed_faces[0].face_detail.landmarks[0].y #=> Float
+    #   resp.unindexed_faces[0].face_detail.pose.roll #=> Float
+    #   resp.unindexed_faces[0].face_detail.pose.yaw #=> Float
+    #   resp.unindexed_faces[0].face_detail.pose.pitch #=> Float
+    #   resp.unindexed_faces[0].face_detail.quality.brightness #=> Float
+    #   resp.unindexed_faces[0].face_detail.quality.sharpness #=> Float
+    #   resp.unindexed_faces[0].face_detail.confidence #=> Float
     #
     # @overload index_faces(params = {})
     # @param [Hash] params ({})
@@ -3446,7 +3549,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

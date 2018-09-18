@@ -233,6 +233,9 @@ module Aws::ElasticsearchService
     #           enabled: false,
     #           kms_key_id: "KmsKeyId",
     #         },
+    #         node_to_node_encryption_options: {
+    #           enabled: false,
+    #         },
     #         advanced_options: {
     #           "String" => "String",
     #         },
@@ -306,6 +309,10 @@ module Aws::ElasticsearchService
     #   Specifies the Encryption At Rest Options.
     #   @return [Types::EncryptionAtRestOptions]
     #
+    # @!attribute [rw] node_to_node_encryption_options
+    #   Specifies the NodeToNodeEncryptionOptions.
+    #   @return [Types::NodeToNodeEncryptionOptions]
+    #
     # @!attribute [rw] advanced_options
     #   Option to allow references to indices in an HTTP request body. Must
     #   be `false` when configuring access to individual sub-resources. By
@@ -332,6 +339,7 @@ module Aws::ElasticsearchService
       :vpc_options,
       :cognito_options,
       :encryption_at_rest_options,
+      :node_to_node_encryption_options,
       :advanced_options,
       :log_publishing_options)
       include Aws::Structure
@@ -825,6 +833,11 @@ module Aws::ElasticsearchService
     #   domain.
     #   @return [Types::EncryptionAtRestOptionsStatus]
     #
+    # @!attribute [rw] node_to_node_encryption_options
+    #   Specifies the `NodeToNodeEncryptionOptions` for the Elasticsearch
+    #   domain.
+    #   @return [Types::NodeToNodeEncryptionOptionsStatus]
+    #
     # @!attribute [rw] advanced_options
     #   Specifies the `AdvancedOptions` for the domain. See [Configuring
     #   Advanced Options][1] for more information.
@@ -847,6 +860,7 @@ module Aws::ElasticsearchService
       :vpc_options,
       :cognito_options,
       :encryption_at_rest_options,
+      :node_to_node_encryption_options,
       :advanced_options,
       :log_publishing_options)
       include Aws::Structure
@@ -957,6 +971,10 @@ module Aws::ElasticsearchService
     #   Specifies the status of the `EncryptionAtRestOptions`.
     #   @return [Types::EncryptionAtRestOptions]
     #
+    # @!attribute [rw] node_to_node_encryption_options
+    #   Specifies the status of the `NodeToNodeEncryptionOptions`.
+    #   @return [Types::NodeToNodeEncryptionOptions]
+    #
     # @!attribute [rw] advanced_options
     #   Specifies the status of the `AdvancedOptions`
     #   @return [Hash<String,String>]
@@ -983,6 +1001,7 @@ module Aws::ElasticsearchService
       :vpc_options,
       :cognito_options,
       :encryption_at_rest_options,
+      :node_to_node_encryption_options,
       :advanced_options,
       :log_publishing_options)
       include Aws::Structure
@@ -1451,6 +1470,43 @@ module Aws::ElasticsearchService
     #   @return [Types::OptionStatus]
     #
     class LogPublishingOptionsStatus < Struct.new(
+      :options,
+      :status)
+      include Aws::Structure
+    end
+
+    # Specifies the node-to-node encryption options.
+    #
+    # @note When making an API call, you may pass NodeToNodeEncryptionOptions
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Specify true to enable node-to-node encryption.
+    #   @return [Boolean]
+    #
+    class NodeToNodeEncryptionOptions < Struct.new(
+      :enabled)
+      include Aws::Structure
+    end
+
+    # Status of the node-to-node encryption options for the specified
+    # Elasticsearch domain.
+    #
+    # @!attribute [rw] options
+    #   Specifies the node-to-node encryption options for the specified
+    #   Elasticsearch domain.
+    #   @return [Types::NodeToNodeEncryptionOptions]
+    #
+    # @!attribute [rw] status
+    #   Specifies the status of the node-to-node encryption options for the
+    #   specified Elasticsearch domain.
+    #   @return [Types::OptionStatus]
+    #
+    class NodeToNodeEncryptionOptionsStatus < Struct.new(
       :options,
       :status)
       include Aws::Structure

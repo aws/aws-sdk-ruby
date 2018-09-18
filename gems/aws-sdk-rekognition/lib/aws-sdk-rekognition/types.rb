@@ -1823,6 +1823,8 @@ module Aws::Rekognition
     #         },
     #         external_image_id: "ExternalImageId",
     #         detection_attributes: ["DEFAULT"], # accepts DEFAULT, ALL
+    #         max_faces: 1,
+    #         quality_filter: "NONE", # accepts NONE, AUTO
     #       }
     #
     # @!attribute [rw] collection_id
@@ -1854,11 +1856,42 @@ module Aws::Rekognition
     #   this case, all attributes).
     #   @return [Array<String>]
     #
+    # @!attribute [rw] max_faces
+    #   The maximum number of faces to index. The value of `MaxFaces` must
+    #   be greater than or equal to 1. `IndexFaces` returns no more that 100
+    #   detected faces in an image, even if you specify a larger value for
+    #   `MaxFaces`.
+    #
+    #   If `IndexFaces` detects more faces than the value of `MaxFaces`, the
+    #   faces with the lowest quality are filtered out first. If there are
+    #   still more faces than the value of `MaxFaces`, the faces with the
+    #   smallest bounding boxes are filtered out (up to the number needed to
+    #   satisfy the value of `MaxFaces`). Information about the unindexed
+    #   faces is available in the `UnindexedFaces` array.
+    #
+    #   The faces returned by `IndexFaces` are sorted, in descending order,
+    #   by the largest face bounding box size, to the smallest.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] quality_filter
+    #   Specifies how much filtering is done to identify faces detected with
+    #   low quality. Filtered faces are not indexed. If you specify `AUTO`,
+    #   filtering prioritizes the identification of faces that don’t meet
+    #   the required quality bar chosen by Amazon Rekognition. The quality
+    #   bar is based on a variety of common use cases. Low quality
+    #   detections can arise for a number of reasons. For example, an object
+    #   misidentified as a face, a face that is too blurry, or a face with a
+    #   pose that is too extreme to use. If you specify `NONE`, no filtering
+    #   is performed. The default value is NONE.
+    #   @return [String]
+    #
     class IndexFacesRequest < Struct.new(
       :collection_id,
       :image,
       :external_image_id,
-      :detection_attributes)
+      :detection_attributes,
+      :max_faces,
+      :quality_filter)
       include Aws::Structure
     end
 
@@ -1890,10 +1923,18 @@ module Aws::Rekognition
     #   collection (`CollectionId`).
     #   @return [String]
     #
+    # @!attribute [rw] unindexed_faces
+    #   An array of faces that detected in the image but not indexed either
+    #   because the quality filter deemed them to be of low-quality or the
+    #   `MaxFaces` request parameter filtered them out. To use the quality
+    #   filter, you specify the `QualityFilter` request parameter.
+    #   @return [Array<Types::UnindexedFace>]
+    #
     class IndexFacesResponse < Struct.new(
       :face_records,
       :orientation_correction,
-      :face_model_version)
+      :face_model_version,
+      :unindexed_faces)
       include Aws::Structure
     end
 
@@ -3199,6 +3240,40 @@ module Aws::Rekognition
       :parent_id,
       :confidence,
       :geometry)
+      include Aws::Structure
+    end
+
+    # A face detected by but not indexed. Use the `Reasons` response
+    # attribute to determine why a face is not indexed.
+    #
+    # @!attribute [rw] reasons
+    #   An array of reasons specifying why a face was not indexed.
+    #
+    #   * EXTREME\_POSE - The face is at a pose that can't be detected. For
+    #     example, the head is turned too far away from the camera.
+    #
+    #   * EXCEEDS\_MAX\_FACES - The number of faces detected is already
+    #     higher than that specified by the `MaxFaces` input parameter for
+    #     `IndexFaces`.
+    #
+    #   * LOW\_BRIGHTNESS - The image is too dark.
+    #
+    #   * LOW\_SHARPNESS - The image is too blurry.
+    #
+    #   * LOW\_CONFIDENCE - The face was detected with a low confidence.
+    #
+    #   * SMALL\_BOUNDING\_BOX - The bounding box around the face is too
+    #     small.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] face_detail
+    #   Structure containing attributes of a face that was detected, but not
+    #   indexed, by `IndexFaces`.
+    #   @return [Types::FaceDetail]
+    #
+    class UnindexedFace < Struct.new(
+      :reasons,
+      :face_detail)
       include Aws::Structure
     end
 

@@ -273,6 +273,9 @@ module Aws::ElasticsearchService
     # @option params [Types::EncryptionAtRestOptions] :encryption_at_rest_options
     #   Specifies the Encryption At Rest Options.
     #
+    # @option params [Types::NodeToNodeEncryptionOptions] :node_to_node_encryption_options
+    #   Specifies the NodeToNodeEncryptionOptions.
+    #
     # @option params [Hash<String,String>] :advanced_options
     #   Option to allow references to indices in an HTTP request body. Must be
     #   `false` when configuring access to individual sub-resources. By
@@ -328,6 +331,9 @@ module Aws::ElasticsearchService
     #       enabled: false,
     #       kms_key_id: "KmsKeyId",
     #     },
+    #     node_to_node_encryption_options: {
+    #       enabled: false,
+    #     },
     #     advanced_options: {
     #       "String" => "String",
     #     },
@@ -377,6 +383,7 @@ module Aws::ElasticsearchService
     #   resp.domain_status.cognito_options.role_arn #=> String
     #   resp.domain_status.encryption_at_rest_options.enabled #=> Boolean
     #   resp.domain_status.encryption_at_rest_options.kms_key_id #=> String
+    #   resp.domain_status.node_to_node_encryption_options.enabled #=> Boolean
     #   resp.domain_status.advanced_options #=> Hash
     #   resp.domain_status.advanced_options["String"] #=> String
     #   resp.domain_status.log_publishing_options #=> Hash
@@ -445,6 +452,7 @@ module Aws::ElasticsearchService
     #   resp.domain_status.cognito_options.role_arn #=> String
     #   resp.domain_status.encryption_at_rest_options.enabled #=> Boolean
     #   resp.domain_status.encryption_at_rest_options.kms_key_id #=> String
+    #   resp.domain_status.node_to_node_encryption_options.enabled #=> Boolean
     #   resp.domain_status.advanced_options #=> Hash
     #   resp.domain_status.advanced_options["String"] #=> String
     #   resp.domain_status.log_publishing_options #=> Hash
@@ -533,6 +541,7 @@ module Aws::ElasticsearchService
     #   resp.domain_status.cognito_options.role_arn #=> String
     #   resp.domain_status.encryption_at_rest_options.enabled #=> Boolean
     #   resp.domain_status.encryption_at_rest_options.kms_key_id #=> String
+    #   resp.domain_status.node_to_node_encryption_options.enabled #=> Boolean
     #   resp.domain_status.advanced_options #=> Hash
     #   resp.domain_status.advanced_options["String"] #=> String
     #   resp.domain_status.log_publishing_options #=> Hash
@@ -631,6 +640,12 @@ module Aws::ElasticsearchService
     #   resp.domain_config.encryption_at_rest_options.status.update_version #=> Integer
     #   resp.domain_config.encryption_at_rest_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.encryption_at_rest_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.node_to_node_encryption_options.options.enabled #=> Boolean
+    #   resp.domain_config.node_to_node_encryption_options.status.creation_date #=> Time
+    #   resp.domain_config.node_to_node_encryption_options.status.update_date #=> Time
+    #   resp.domain_config.node_to_node_encryption_options.status.update_version #=> Integer
+    #   resp.domain_config.node_to_node_encryption_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.node_to_node_encryption_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.advanced_options.options #=> Hash
     #   resp.domain_config.advanced_options.options["String"] #=> String
     #   resp.domain_config.advanced_options.status.creation_date #=> Time
@@ -710,6 +725,7 @@ module Aws::ElasticsearchService
     #   resp.domain_status_list[0].cognito_options.role_arn #=> String
     #   resp.domain_status_list[0].encryption_at_rest_options.enabled #=> Boolean
     #   resp.domain_status_list[0].encryption_at_rest_options.kms_key_id #=> String
+    #   resp.domain_status_list[0].node_to_node_encryption_options.enabled #=> Boolean
     #   resp.domain_status_list[0].advanced_options #=> Hash
     #   resp.domain_status_list[0].advanced_options["String"] #=> String
     #   resp.domain_status_list[0].log_publishing_options #=> Hash
@@ -1362,6 +1378,12 @@ module Aws::ElasticsearchService
     #   resp.domain_config.encryption_at_rest_options.status.update_version #=> Integer
     #   resp.domain_config.encryption_at_rest_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.encryption_at_rest_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.node_to_node_encryption_options.options.enabled #=> Boolean
+    #   resp.domain_config.node_to_node_encryption_options.status.creation_date #=> Time
+    #   resp.domain_config.node_to_node_encryption_options.status.update_date #=> Time
+    #   resp.domain_config.node_to_node_encryption_options.status.update_version #=> Integer
+    #   resp.domain_config.node_to_node_encryption_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.node_to_node_encryption_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.advanced_options.options #=> Hash
     #   resp.domain_config.advanced_options.options["String"] #=> String
     #   resp.domain_config.advanced_options.status.creation_date #=> Time
@@ -1442,7 +1464,7 @@ module Aws::ElasticsearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
