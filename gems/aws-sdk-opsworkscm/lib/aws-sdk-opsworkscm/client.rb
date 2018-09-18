@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -47,6 +49,8 @@ module Aws::OpsWorksCM
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -91,6 +95,22 @@ module Aws::OpsWorksCM
     #   * `~/.aws/config`
     #
     # @option options [String] :access_key_id
+    #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
     #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
@@ -674,21 +694,10 @@ module Aws::OpsWorksCM
     #   Returns backups for the server with the specified ServerName.
     #
     # @option params [String] :next_token
-    #   NextToken is a string that is returned in some command responses. It
-    #   indicates that not all entries have been returned, and that you must
-    #   run at least one more request to get remaining items. To get remaining
-    #   results, call `DescribeBackups` again, and assign the token from the
-    #   previous results as the value of the `nextToken` parameter. If there
-    #   are no more results, the response object's `nextToken` parameter
-    #   value is `null`. Setting a `nextToken` value that was not returned in
-    #   your previous results causes an `InvalidNextTokenException` to occur.
+    #   This is not currently implemented for `DescribeBackups` requests.
     #
     # @option params [Integer] :max_results
-    #   To receive a paginated response, use this parameter to specify the
-    #   maximum number of results to be returned with a single call. If the
-    #   number of available results exceeds this maximum, the response
-    #   includes a `NextToken` value that you can assign to the `NextToken`
-    #   request parameter to get the next set of results.
+    #   This is not currently implemented for `DescribeBackups` requests.
     #
     # @return [Types::DescribeBackupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -861,21 +870,10 @@ module Aws::OpsWorksCM
     #   Describes the server with the specified ServerName.
     #
     # @option params [String] :next_token
-    #   NextToken is a string that is returned in some command responses. It
-    #   indicates that not all entries have been returned, and that you must
-    #   run at least one more request to get remaining items. To get remaining
-    #   results, call `DescribeServers` again, and assign the token from the
-    #   previous results as the value of the `nextToken` parameter. If there
-    #   are no more results, the response object's `nextToken` parameter
-    #   value is `null`. Setting a `nextToken` value that was not returned in
-    #   your previous results causes an `InvalidNextTokenException` to occur.
+    #   This is not currently implemented for `DescribeServers` requests.
     #
     # @option params [Integer] :max_results
-    #   To receive a paginated response, use this parameter to specify the
-    #   maximum number of results to be returned with a single call. If the
-    #   number of available results exceeds this maximum, the response
-    #   includes a `NextToken` value that you can assign to the `NextToken`
-    #   request parameter to get the next set of results.
+    #   This is not currently implemented for `DescribeServers` requests.
     #
     # @return [Types::DescribeServersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1284,7 +1282,7 @@ module Aws::OpsWorksCM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opsworkscm'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

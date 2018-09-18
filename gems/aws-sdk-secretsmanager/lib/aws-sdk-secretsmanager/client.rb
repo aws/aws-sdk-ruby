@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -47,6 +49,8 @@ module Aws::SecretsManager
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -91,6 +95,22 @@ module Aws::SecretsManager
     #   * `~/.aws/config`
     #
     # @option options [String] :access_key_id
+    #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
     #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
@@ -2467,25 +2487,22 @@ module Aws::SecretsManager
     #   The list of staging labels to add to this version.
     #
     # @option params [String] :remove_from_version_id
-    #   (Optional) Specifies the secret version ID of the version that the
-    #   staging labels are to be removed from.
-    #
-    #   If you want to move a label to a new version, you do not have to
-    #   explicitly remove it with this parameter. Adding a label using the
-    #   `MoveToVersionId` parameter automatically removes it from the old
-    #   version. However, if you do include both the "MoveTo" and
-    #   "RemoveFrom" parameters, then the move is successful only if the
-    #   staging labels are actually present on the "RemoveFrom" version. If
-    #   a staging label was on a different version than "RemoveFrom", then
-    #   the request fails.
+    #   Specifies the secret version ID of the version that the staging labels
+    #   are to be removed from. If the staging label you are trying to attach
+    #   to one version is already attached to a different version, then you
+    #   must include this parameter and specify the version that the label is
+    #   to be removed from. If the label is attached and you either do not
+    #   specify this parameter, or the version ID does not match, then the
+    #   operation fails.
     #
     # @option params [String] :move_to_version_id
     #   (Optional) The secret version ID that you want to add the staging
-    #   labels to.
+    #   labels to. If you want to remove a label from a version, then do not
+    #   specify this parameter.
     #
     #   If any of the staging labels are already attached to a different
-    #   version of the secret, then they are automatically removed from that
-    #   version before adding them to this version.
+    #   version of the secret, then you must also specify the
+    #   `RemoveFromVersionId` parameter.
     #
     # @return [Types::UpdateSecretVersionStageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2583,7 +2600,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

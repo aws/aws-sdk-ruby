@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -47,6 +49,8 @@ module Aws::Redshift
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
@@ -91,6 +95,22 @@ module Aws::Redshift
     #   * `~/.aws/config`
     #
     # @option options [String] :access_key_id
+    #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
     #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
@@ -894,6 +914,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
     #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -1779,6 +1800,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
     #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -3014,6 +3036,7 @@ module Aws::Redshift
     #   resp.clusters[0].pending_modified_values.publicly_accessible #=> Boolean
     #   resp.clusters[0].pending_modified_values.enhanced_vpc_routing #=> Boolean
     #   resp.clusters[0].pending_modified_values.maintenance_track_name #=> String
+    #   resp.clusters[0].pending_modified_values.encryption_type #=> String
     #   resp.clusters[0].cluster_version #=> String
     #   resp.clusters[0].allow_version_upgrade #=> Boolean
     #   resp.clusters[0].number_of_nodes #=> Integer
@@ -3894,6 +3917,7 @@ module Aws::Redshift
     #   * {Types::ResizeProgressMessage#estimated_time_to_completion_in_seconds #estimated_time_to_completion_in_seconds} => Integer
     #   * {Types::ResizeProgressMessage#resize_type #resize_type} => String
     #   * {Types::ResizeProgressMessage#message #message} => String
+    #   * {Types::ResizeProgressMessage#target_encryption_type #target_encryption_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3920,6 +3944,7 @@ module Aws::Redshift
     #   resp.estimated_time_to_completion_in_seconds #=> Integer
     #   resp.resize_type #=> String
     #   resp.message #=> String
+    #   resp.target_encryption_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeResize AWS API Documentation
     #
@@ -4321,6 +4346,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
     #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -4526,6 +4552,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
     #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -5031,6 +5058,18 @@ module Aws::Redshift
     #   the latest cluster release available for the maintenance track. At
     #   this point, the maintenance track name is applied.
     #
+    # @option params [Boolean] :encrypted
+    #   Indicates whether the cluster is encrypted. If the cluster is
+    #   encrypted and you provide a value for the `KmsKeyId` parameter, we
+    #   will encrypt the cluster with the provided `KmsKeyId`. If you don't
+    #   provide a `KmsKeyId`, we will encrypt with the default key. In the
+    #   China region we will use legacy encryption if you specify that the
+    #   cluster is encrypted.
+    #
+    # @option params [String] :kms_key_id
+    #   The AWS Key Management Service (KMS) key ID of the encryption key that
+    #   you want to use to encrypt data in the cluster.
+    #
     # @return [Types::ModifyClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyClusterResult#cluster #cluster} => Types::Cluster
@@ -5057,6 +5096,8 @@ module Aws::Redshift
     #     elastic_ip: "String",
     #     enhanced_vpc_routing: false,
     #     maintenance_track_name: "String",
+    #     encrypted: false,
+    #     kms_key_id: "String",
     #   })
     #
     # @example Response structure
@@ -5098,6 +5139,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
     #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -5208,6 +5250,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
     #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -5325,6 +5368,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
     #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -5647,6 +5691,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
     #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -5819,6 +5864,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
     #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -6017,6 +6063,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
     #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -6357,6 +6404,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
     #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -6710,6 +6758,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
     #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -6770,7 +6819,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

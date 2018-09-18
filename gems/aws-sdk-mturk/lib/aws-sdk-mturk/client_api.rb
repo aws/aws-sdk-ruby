@@ -691,12 +691,16 @@ module Aws::MTurk
       api.version = "2017-01-17"
 
       api.metadata = {
+        "apiVersion" => "2017-01-17",
         "endpointPrefix" => "mturk-requester",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "Amazon MTurk",
         "serviceFullName" => "Amazon Mechanical Turk",
+        "serviceId" => "MTurk",
         "signatureVersion" => "v4",
         "targetPrefix" => "MTurkRequesterServiceV20170117",
+        "uid" => "mturk-requester-2017-01-17",
       }
 
       api.add_operation(:accept_qualification_request, Seahorse::Model::Operation.new.tap do |o|

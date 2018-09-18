@@ -65,7 +65,6 @@ module Aws::Rekognition
     Emotion = Shapes::StructureShape.new(name: 'Emotion')
     EmotionName = Shapes::StringShape.new(name: 'EmotionName')
     Emotions = Shapes::ListShape.new(name: 'Emotions')
-    ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ExternalImageId = Shapes::StringShape.new(name: 'ExternalImageId')
     EyeOpen = Shapes::StructureShape.new(name: 'EyeOpen')
     Eyeglasses = Shapes::StructureShape.new(name: 'Eyeglasses')
@@ -144,7 +143,6 @@ module Aws::Rekognition
     MouthOpen = Shapes::StructureShape.new(name: 'MouthOpen')
     Mustache = Shapes::StructureShape.new(name: 'Mustache')
     NotificationChannel = Shapes::StructureShape.new(name: 'NotificationChannel')
-    NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     OrientationCorrection = Shapes::StringShape.new(name: 'OrientationCorrection')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
@@ -176,8 +174,6 @@ module Aws::Rekognition
     SearchFacesByImageResponse = Shapes::StructureShape.new(name: 'SearchFacesByImageResponse')
     SearchFacesRequest = Shapes::StructureShape.new(name: 'SearchFacesRequest')
     SearchFacesResponse = Shapes::StructureShape.new(name: 'SearchFacesResponse')
-    Section = Shapes::StructureShape.new(name: 'Section')
-    Sections = Shapes::ListShape.new(name: 'Sections')
     Smile = Shapes::StructureShape.new(name: 'Smile')
     StartCelebrityRecognitionRequest = Shapes::StructureShape.new(name: 'StartCelebrityRecognitionRequest')
     StartCelebrityRecognitionResponse = Shapes::StructureShape.new(name: 'StartCelebrityRecognitionResponse')
@@ -219,8 +215,6 @@ module Aws::Rekognition
     VideoJobStatus = Shapes::StringShape.new(name: 'VideoJobStatus')
     VideoMetadata = Shapes::StructureShape.new(name: 'VideoMetadata')
     VideoTooLargeException = Shapes::StructureShape.new(name: 'VideoTooLargeException')
-    Warning = Shapes::StructureShape.new(name: 'Warning')
-    Warnings = Shapes::ListShape.new(name: 'Warnings')
 
     AgeRange.add_member(:low, Shapes::ShapeRef.new(shape: UInteger, location_name: "Low"))
     AgeRange.add_member(:high, Shapes::ShapeRef.new(shape: UInteger, location_name: "High"))
@@ -411,7 +405,6 @@ module Aws::Rekognition
     Face.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, location_name: "ImageId"))
     Face.add_member(:external_image_id, Shapes::ShapeRef.new(shape: ExternalImageId, location_name: "ExternalImageId"))
     Face.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
-    Face.add_member(:association_score, Shapes::ShapeRef.new(shape: Percent, location_name: "AssociationScore"))
     Face.struct_class = Types::Face
 
     FaceDetail.add_member(:bounding_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "BoundingBox"))
@@ -487,9 +480,6 @@ module Aws::Rekognition
     GetCelebrityRecognitionResponse.add_member(:video_metadata, Shapes::ShapeRef.new(shape: VideoMetadata, location_name: "VideoMetadata"))
     GetCelebrityRecognitionResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     GetCelebrityRecognitionResponse.add_member(:celebrities, Shapes::ShapeRef.new(shape: CelebrityRecognitions, location_name: "Celebrities"))
-    GetCelebrityRecognitionResponse.add_member(:billable_duration_seconds, Shapes::ShapeRef.new(shape: UInteger, location_name: "BillableDurationSeconds"))
-    GetCelebrityRecognitionResponse.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
-    GetCelebrityRecognitionResponse.add_member(:warnings, Shapes::ShapeRef.new(shape: Warnings, location_name: "Warnings"))
     GetCelebrityRecognitionResponse.struct_class = Types::GetCelebrityRecognitionResponse
 
     GetContentModerationRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
@@ -503,9 +493,6 @@ module Aws::Rekognition
     GetContentModerationResponse.add_member(:video_metadata, Shapes::ShapeRef.new(shape: VideoMetadata, location_name: "VideoMetadata"))
     GetContentModerationResponse.add_member(:moderation_labels, Shapes::ShapeRef.new(shape: ContentModerationDetections, location_name: "ModerationLabels"))
     GetContentModerationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    GetContentModerationResponse.add_member(:billable_duration_seconds, Shapes::ShapeRef.new(shape: UInteger, location_name: "BillableDurationSeconds"))
-    GetContentModerationResponse.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
-    GetContentModerationResponse.add_member(:warnings, Shapes::ShapeRef.new(shape: Warnings, location_name: "Warnings"))
     GetContentModerationResponse.struct_class = Types::GetContentModerationResponse
 
     GetFaceDetectionRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
@@ -518,9 +505,6 @@ module Aws::Rekognition
     GetFaceDetectionResponse.add_member(:video_metadata, Shapes::ShapeRef.new(shape: VideoMetadata, location_name: "VideoMetadata"))
     GetFaceDetectionResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     GetFaceDetectionResponse.add_member(:faces, Shapes::ShapeRef.new(shape: FaceDetections, location_name: "Faces"))
-    GetFaceDetectionResponse.add_member(:billable_duration_seconds, Shapes::ShapeRef.new(shape: UInteger, location_name: "BillableDurationSeconds"))
-    GetFaceDetectionResponse.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
-    GetFaceDetectionResponse.add_member(:warnings, Shapes::ShapeRef.new(shape: Warnings, location_name: "Warnings"))
     GetFaceDetectionResponse.struct_class = Types::GetFaceDetectionResponse
 
     GetFaceSearchRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
@@ -534,9 +518,6 @@ module Aws::Rekognition
     GetFaceSearchResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     GetFaceSearchResponse.add_member(:video_metadata, Shapes::ShapeRef.new(shape: VideoMetadata, location_name: "VideoMetadata"))
     GetFaceSearchResponse.add_member(:persons, Shapes::ShapeRef.new(shape: PersonMatches, location_name: "Persons"))
-    GetFaceSearchResponse.add_member(:billable_duration_seconds, Shapes::ShapeRef.new(shape: UInteger, location_name: "BillableDurationSeconds"))
-    GetFaceSearchResponse.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
-    GetFaceSearchResponse.add_member(:warnings, Shapes::ShapeRef.new(shape: Warnings, location_name: "Warnings"))
     GetFaceSearchResponse.struct_class = Types::GetFaceSearchResponse
 
     GetLabelDetectionRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
@@ -550,9 +531,6 @@ module Aws::Rekognition
     GetLabelDetectionResponse.add_member(:video_metadata, Shapes::ShapeRef.new(shape: VideoMetadata, location_name: "VideoMetadata"))
     GetLabelDetectionResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     GetLabelDetectionResponse.add_member(:labels, Shapes::ShapeRef.new(shape: LabelDetections, location_name: "Labels"))
-    GetLabelDetectionResponse.add_member(:billable_duration_seconds, Shapes::ShapeRef.new(shape: UInteger, location_name: "BillableDurationSeconds"))
-    GetLabelDetectionResponse.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
-    GetLabelDetectionResponse.add_member(:warnings, Shapes::ShapeRef.new(shape: Warnings, location_name: "Warnings"))
     GetLabelDetectionResponse.struct_class = Types::GetLabelDetectionResponse
 
     GetPersonTrackingRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
@@ -566,9 +544,6 @@ module Aws::Rekognition
     GetPersonTrackingResponse.add_member(:video_metadata, Shapes::ShapeRef.new(shape: VideoMetadata, location_name: "VideoMetadata"))
     GetPersonTrackingResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     GetPersonTrackingResponse.add_member(:persons, Shapes::ShapeRef.new(shape: PersonDetections, location_name: "Persons"))
-    GetPersonTrackingResponse.add_member(:billable_duration_seconds, Shapes::ShapeRef.new(shape: UInteger, location_name: "BillableDurationSeconds"))
-    GetPersonTrackingResponse.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
-    GetPersonTrackingResponse.add_member(:warnings, Shapes::ShapeRef.new(shape: Warnings, location_name: "Warnings"))
     GetPersonTrackingResponse.struct_class = Types::GetPersonTrackingResponse
 
     Image.add_member(:bytes, Shapes::ShapeRef.new(shape: ImageBlob, location_name: "Bytes"))
@@ -726,12 +701,6 @@ module Aws::Rekognition
     SearchFacesResponse.add_member(:face_model_version, Shapes::ShapeRef.new(shape: String, location_name: "FaceModelVersion"))
     SearchFacesResponse.struct_class = Types::SearchFacesResponse
 
-    Section.add_member(:start_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTimestamp"))
-    Section.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTimestamp"))
-    Section.struct_class = Types::Section
-
-    Sections.member = Shapes::ShapeRef.new(shape: Section)
-
     Smile.add_member(:value, Shapes::ShapeRef.new(shape: Boolean, location_name: "Value"))
     Smile.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     Smile.struct_class = Types::Smile
@@ -739,7 +708,6 @@ module Aws::Rekognition
     StartCelebrityRecognitionRequest.add_member(:video, Shapes::ShapeRef.new(shape: Video, required: true, location_name: "Video"))
     StartCelebrityRecognitionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     StartCelebrityRecognitionRequest.add_member(:notification_channel, Shapes::ShapeRef.new(shape: NotificationChannel, location_name: "NotificationChannel"))
-    StartCelebrityRecognitionRequest.add_member(:enable_person_tracking, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "EnablePersonTracking"))
     StartCelebrityRecognitionRequest.add_member(:job_tag, Shapes::ShapeRef.new(shape: JobTag, location_name: "JobTag"))
     StartCelebrityRecognitionRequest.struct_class = Types::StartCelebrityRecognitionRequest
 
@@ -770,7 +738,6 @@ module Aws::Rekognition
     StartFaceSearchRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     StartFaceSearchRequest.add_member(:face_match_threshold, Shapes::ShapeRef.new(shape: Percent, location_name: "FaceMatchThreshold"))
     StartFaceSearchRequest.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "CollectionId"))
-    StartFaceSearchRequest.add_member(:enable_person_tracking, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "EnablePersonTracking"))
     StartFaceSearchRequest.add_member(:notification_channel, Shapes::ShapeRef.new(shape: NotificationChannel, location_name: "NotificationChannel"))
     StartFaceSearchRequest.add_member(:job_tag, Shapes::ShapeRef.new(shape: JobTag, location_name: "JobTag"))
     StartFaceSearchRequest.struct_class = Types::StartFaceSearchRequest
@@ -847,15 +814,7 @@ module Aws::Rekognition
     VideoMetadata.add_member(:frame_rate, Shapes::ShapeRef.new(shape: Float, location_name: "FrameRate"))
     VideoMetadata.add_member(:frame_height, Shapes::ShapeRef.new(shape: ULong, location_name: "FrameHeight"))
     VideoMetadata.add_member(:frame_width, Shapes::ShapeRef.new(shape: ULong, location_name: "FrameWidth"))
-    VideoMetadata.add_member(:rotation, Shapes::ShapeRef.new(shape: UInteger, location_name: "Rotation"))
     VideoMetadata.struct_class = Types::VideoMetadata
-
-    Warning.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
-    Warning.add_member(:message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "Message"))
-    Warning.add_member(:sections, Shapes::ShapeRef.new(shape: Sections, location_name: "Sections"))
-    Warning.struct_class = Types::Warning
-
-    Warnings.member = Shapes::ShapeRef.new(shape: Warning)
 
 
     # @api private
@@ -864,12 +823,15 @@ module Aws::Rekognition
       api.version = "2016-06-27"
 
       api.metadata = {
+        "apiVersion" => "2016-06-27",
         "endpointPrefix" => "rekognition",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon Rekognition",
+        "serviceId" => "Rekognition",
         "signatureVersion" => "v4",
         "targetPrefix" => "RekognitionService",
+        "uid" => "rekognition-2016-06-27",
       }
 
       api.add_operation(:compare_faces, Seahorse::Model::Operation.new.tap do |o|

@@ -236,13 +236,13 @@ module Aws::EC2
     #         device_name: "String",
     #         virtual_name: "String",
     #         ebs: {
-    #           encrypted: false,
     #           delete_on_termination: false,
     #           iops: 1,
-    #           kms_key_id: "String",
     #           snapshot_id: "String",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #           encrypted: false,
+    #           kms_key_id: "String",
     #         },
     #         no_device: "String",
     #       },
@@ -317,7 +317,7 @@ module Aws::EC2
     #     ],
     #     tag_specifications: [
     #       {
-    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -536,14 +536,15 @@ module Aws::EC2
     # @option options [Types::CreditSpecificationRequest] :credit_specification
     #   The credit option for CPU usage of the instance. Valid values are
     #   `standard` and `unlimited`. To change this attribute after launch, use
-    #   ModifyInstanceCreditSpecification. For more information, see [T2
-    #   Instances][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   ModifyInstanceCreditSpecification. For more information, see
+    #   [Burstable Performance Instances][1] in the *Amazon Elastic Compute
+    #   Cloud User Guide*.
     #
-    #   Default: `standard`
+    #   Default: `standard` (T2 instances) or `unlimited` (T3 instances)
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
     # @option options [Types::CpuOptionsRequest] :cpu_options
     #   The CPU options for the instance. For more information, see
     #   [Optimizing CPU Options][1] in the *Amazon Elastic Compute Cloud User
@@ -1138,20 +1139,22 @@ module Aws::EC2
     # @return [NetworkInterface::Collection]
     def network_interfaces(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = Aws::Util.deep_merge(options, filters: [{
           name: "subnet-id",
           values: [@id]
         }])
         resp = @client.describe_network_interfaces(options)
-        resp.data.network_interfaces.each do |n|
-          batch << NetworkInterface.new(
-            id: n.network_interface_id,
-            data: n,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.network_interfaces.each do |n|
+            batch << NetworkInterface.new(
+              id: n.network_interface_id,
+              data: n,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       NetworkInterface::Collection.new(batches)
     end

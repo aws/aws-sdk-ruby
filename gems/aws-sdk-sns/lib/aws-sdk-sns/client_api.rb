@@ -354,10 +354,14 @@ module Aws::SNS
       api.version = "2010-03-31"
 
       api.metadata = {
+        "apiVersion" => "2010-03-31",
         "endpointPrefix" => "sns",
         "protocol" => "query",
+        "serviceAbbreviation" => "Amazon SNS",
         "serviceFullName" => "Amazon Simple Notification Service",
+        "serviceId" => "SNS",
         "signatureVersion" => "v4",
+        "uid" => "sns-2010-03-31",
         "xmlNamespace" => "http://sns.amazonaws.com/doc/2010-03-31/",
       }
 

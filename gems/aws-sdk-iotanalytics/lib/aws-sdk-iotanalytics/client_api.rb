@@ -704,11 +704,14 @@ module Aws::IoTAnalytics
       api.version = "2017-11-27"
 
       api.metadata = {
+        "apiVersion" => "2017-11-27",
         "endpointPrefix" => "iotanalytics",
         "protocol" => "rest-json",
         "serviceFullName" => "AWS IoT Analytics",
+        "serviceId" => "IoTAnalytics",
         "signatureVersion" => "v4",
         "signingName" => "iotanalytics",
+        "uid" => "iotanalytics-2017-11-27",
       }
 
       api.add_operation(:batch_put_message, Seahorse::Model::Operation.new.tap do |o|

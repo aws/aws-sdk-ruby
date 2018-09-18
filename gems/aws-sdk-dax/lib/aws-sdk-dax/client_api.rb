@@ -447,12 +447,16 @@ module Aws::DAX
       api.version = "2017-04-19"
 
       api.metadata = {
+        "apiVersion" => "2017-04-19",
         "endpointPrefix" => "dax",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "Amazon DAX",
         "serviceFullName" => "Amazon DynamoDB Accelerator (DAX)",
+        "serviceId" => "DAX",
         "signatureVersion" => "v4",
         "targetPrefix" => "AmazonDAXV3",
+        "uid" => "dax-2017-04-19",
       }
 
       api.add_operation(:create_cluster, Seahorse::Model::Operation.new.tap do |o|

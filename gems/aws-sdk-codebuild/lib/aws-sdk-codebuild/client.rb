@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -47,6 +49,8 @@ module Aws::CodeBuild
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -91,6 +95,22 @@ module Aws::CodeBuild
     #   * `~/.aws/config`
     #
     # @option options [String] :access_key_id
+    #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
     #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
@@ -538,6 +558,12 @@ module Aws::CodeBuild
     #   resp.builds[0].logs.group_name #=> String
     #   resp.builds[0].logs.stream_name #=> String
     #   resp.builds[0].logs.deep_link #=> String
+    #   resp.builds[0].logs.s3_deep_link #=> String
+    #   resp.builds[0].logs.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.builds[0].logs.cloud_watch_logs.group_name #=> String
+    #   resp.builds[0].logs.cloud_watch_logs.stream_name #=> String
+    #   resp.builds[0].logs.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.builds[0].logs.s3_logs.location #=> String
     #   resp.builds[0].timeout_in_minutes #=> Integer
     #   resp.builds[0].build_complete #=> Boolean
     #   resp.builds[0].initiator #=> String
@@ -652,6 +678,11 @@ module Aws::CodeBuild
     #   resp.projects[0].vpc_config.security_group_ids[0] #=> String
     #   resp.projects[0].badge.badge_enabled #=> Boolean
     #   resp.projects[0].badge.badge_request_url #=> String
+    #   resp.projects[0].logs_config.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.projects[0].logs_config.cloud_watch_logs.group_name #=> String
+    #   resp.projects[0].logs_config.cloud_watch_logs.stream_name #=> String
+    #   resp.projects[0].logs_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.projects[0].logs_config.s3_logs.location #=> String
     #   resp.projects_not_found #=> Array
     #   resp.projects_not_found[0] #=> String
     #
@@ -720,6 +751,10 @@ module Aws::CodeBuild
     # @option params [Boolean] :badge_enabled
     #   Set this to true to generate a publicly-accessible URL for your
     #   project's build badge.
+    #
+    # @option params [Types::LogsConfig] :logs_config
+    #   Information about logs for the build project. Logs can be Amazon
+    #   CloudWatch Logs, uploaded to a specified S3 bucket, or both.
     #
     # @return [Types::CreateProjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -815,6 +850,17 @@ module Aws::CodeBuild
     #       security_group_ids: ["NonEmptyString"],
     #     },
     #     badge_enabled: false,
+    #     logs_config: {
+    #       cloud_watch_logs: {
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         group_name: "String",
+    #         stream_name: "String",
+    #       },
+    #       s3_logs: {
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         location: "String",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -891,6 +937,11 @@ module Aws::CodeBuild
     #   resp.project.vpc_config.security_group_ids[0] #=> String
     #   resp.project.badge.badge_enabled #=> Boolean
     #   resp.project.badge.badge_request_url #=> String
+    #   resp.project.logs_config.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.project.logs_config.cloud_watch_logs.group_name #=> String
+    #   resp.project.logs_config.cloud_watch_logs.stream_name #=> String
+    #   resp.project.logs_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.project.logs_config.s3_logs.location #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProject AWS API Documentation
     #
@@ -1266,7 +1317,7 @@ module Aws::CodeBuild
     #
     # @option params [String] :source_type_override
     #   A source input type for this build that overrides the source input
-    #   defined in the build project
+    #   defined in the build project.
     #
     # @option params [String] :source_location_override
     #   A location that overrides for this build the source location for the
@@ -1336,6 +1387,10 @@ module Aws::CodeBuild
     #   StartBuild request and is valid for 12 hours. If you repeat the
     #   StartBuild request with the same token, but change a parameter, AWS
     #   CodeBuild returns a parameter mismatch error.
+    #
+    # @option params [Types::LogsConfig] :logs_config_override
+    #   Log settings for this build that override the log settings defined in
+    #   the build project.
     #
     # @return [Types::StartBuildOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1420,6 +1475,17 @@ module Aws::CodeBuild
     #     privileged_mode_override: false,
     #     timeout_in_minutes_override: 1,
     #     idempotency_token: "String",
+    #     logs_config_override: {
+    #       cloud_watch_logs: {
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         group_name: "String",
+    #         stream_name: "String",
+    #       },
+    #       s3_logs: {
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         location: "String",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1491,6 +1557,12 @@ module Aws::CodeBuild
     #   resp.build.logs.group_name #=> String
     #   resp.build.logs.stream_name #=> String
     #   resp.build.logs.deep_link #=> String
+    #   resp.build.logs.s3_deep_link #=> String
+    #   resp.build.logs.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.build.logs.cloud_watch_logs.group_name #=> String
+    #   resp.build.logs.cloud_watch_logs.stream_name #=> String
+    #   resp.build.logs.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.build.logs.s3_logs.location #=> String
     #   resp.build.timeout_in_minutes #=> Integer
     #   resp.build.build_complete #=> Boolean
     #   resp.build.initiator #=> String
@@ -1596,6 +1668,12 @@ module Aws::CodeBuild
     #   resp.build.logs.group_name #=> String
     #   resp.build.logs.stream_name #=> String
     #   resp.build.logs.deep_link #=> String
+    #   resp.build.logs.s3_deep_link #=> String
+    #   resp.build.logs.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.build.logs.cloud_watch_logs.group_name #=> String
+    #   resp.build.logs.cloud_watch_logs.stream_name #=> String
+    #   resp.build.logs.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.build.logs.s3_logs.location #=> String
     #   resp.build.timeout_in_minutes #=> Integer
     #   resp.build.build_complete #=> Boolean
     #   resp.build.initiator #=> String
@@ -1680,6 +1758,10 @@ module Aws::CodeBuild
     # @option params [Boolean] :badge_enabled
     #   Set this to true to generate a publicly-accessible URL for your
     #   project's build badge.
+    #
+    # @option params [Types::LogsConfig] :logs_config
+    #   Information about logs for the build project. A project can create
+    #   Amazon CloudWatch Logs, logs in an S3 bucket, or both.
     #
     # @return [Types::UpdateProjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1775,6 +1857,17 @@ module Aws::CodeBuild
     #       security_group_ids: ["NonEmptyString"],
     #     },
     #     badge_enabled: false,
+    #     logs_config: {
+    #       cloud_watch_logs: {
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         group_name: "String",
+    #         stream_name: "String",
+    #       },
+    #       s3_logs: {
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         location: "String",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1851,6 +1944,11 @@ module Aws::CodeBuild
     #   resp.project.vpc_config.security_group_ids[0] #=> String
     #   resp.project.badge.badge_enabled #=> Boolean
     #   resp.project.badge.badge_request_url #=> String
+    #   resp.project.logs_config.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.project.logs_config.cloud_watch_logs.group_name #=> String
+    #   resp.project.logs_config.cloud_watch_logs.stream_name #=> String
+    #   resp.project.logs_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.project.logs_config.s3_logs.location #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProject AWS API Documentation
     #
@@ -1918,7 +2016,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -45,6 +45,7 @@ module Aws::MediaConvert
     AudioTypeControl = Shapes::StringShape.new(name: 'AudioTypeControl')
     AvailBlanking = Shapes::StructureShape.new(name: 'AvailBlanking')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    BillingTagsSource = Shapes::StringShape.new(name: 'BillingTagsSource')
     BurninDestinationSettings = Shapes::StructureShape.new(name: 'BurninDestinationSettings')
     BurninSubtitleAlignment = Shapes::StringShape.new(name: 'BurninSubtitleAlignment')
     BurninSubtitleBackgroundColor = Shapes::StringShape.new(name: 'BurninSubtitleBackgroundColor')
@@ -106,6 +107,7 @@ module Aws::MediaConvert
     DeletePresetResponse = Shapes::StructureShape.new(name: 'DeletePresetResponse')
     DeleteQueueRequest = Shapes::StructureShape.new(name: 'DeleteQueueRequest')
     DeleteQueueResponse = Shapes::StructureShape.new(name: 'DeleteQueueResponse')
+    DescribeEndpointsMode = Shapes::StringShape.new(name: 'DescribeEndpointsMode')
     DescribeEndpointsRequest = Shapes::StructureShape.new(name: 'DescribeEndpointsRequest')
     DescribeEndpointsResponse = Shapes::StructureShape.new(name: 'DescribeEndpointsResponse')
     DropFrameTimecode = Shapes::StringShape.new(name: 'DropFrameTimecode')
@@ -685,6 +687,7 @@ module Aws::MediaConvert
     ContainerSettings.add_member(:mp_4_settings, Shapes::ShapeRef.new(shape: Mp4Settings, location_name: "mp4Settings"))
     ContainerSettings.struct_class = Types::ContainerSettings
 
+    CreateJobRequest.add_member(:billing_tags_source, Shapes::ShapeRef.new(shape: BillingTagsSource, location_name: "billingTagsSource"))
     CreateJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: __string, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateJobRequest.add_member(:job_template, Shapes::ShapeRef.new(shape: __string, location_name: "jobTemplate"))
     CreateJobRequest.add_member(:queue, Shapes::ShapeRef.new(shape: __string, location_name: "queue"))
@@ -760,6 +763,7 @@ module Aws::MediaConvert
     DeleteQueueResponse.struct_class = Types::DeleteQueueResponse
 
     DescribeEndpointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __integer, location_name: "maxResults"))
+    DescribeEndpointsRequest.add_member(:mode, Shapes::ShapeRef.new(shape: DescribeEndpointsMode, location_name: "mode"))
     DescribeEndpointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     DescribeEndpointsRequest.struct_class = Types::DescribeEndpointsRequest
 
@@ -1081,6 +1085,7 @@ module Aws::MediaConvert
     InsertableImage.struct_class = Types::InsertableImage
 
     Job.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    Job.add_member(:billing_tags_source, Shapes::ShapeRef.new(shape: BillingTagsSource, location_name: "billingTagsSource"))
     Job.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "createdAt"))
     Job.add_member(:error_code, Shapes::ShapeRef.new(shape: __integer, location_name: "errorCode"))
     Job.add_member(:error_message, Shapes::ShapeRef.new(shape: __string, location_name: "errorMessage"))
@@ -1445,7 +1450,7 @@ module Aws::MediaConvert
     TtmlDestinationSettings.add_member(:style_passthrough, Shapes::ShapeRef.new(shape: TtmlStylePassthrough, location_name: "stylePassthrough"))
     TtmlDestinationSettings.struct_class = Types::TtmlDestinationSettings
 
-    UntagResourceRequest.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    UntagResourceRequest.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "arn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
@@ -1598,12 +1603,16 @@ module Aws::MediaConvert
       api.version = "2017-08-29"
 
       api.metadata = {
+        "apiVersion" => "2017-08-29",
         "endpointPrefix" => "mediaconvert",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "serviceAbbreviation" => "MediaConvert",
         "serviceFullName" => "AWS Elemental MediaConvert",
+        "serviceId" => "MediaConvert",
         "signatureVersion" => "v4",
         "signingName" => "mediaconvert",
+        "uid" => "mediaconvert-2017-08-29",
       }
 
       api.add_operation(:cancel_job, Seahorse::Model::Operation.new.tap do |o|
@@ -1874,8 +1883,8 @@ module Aws::MediaConvert
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UntagResource"
-        o.http_method = "DELETE"
-        o.http_request_uri = "/2017-08-29/tags"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2017-08-29/tags/{arn}"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)

@@ -1254,12 +1254,14 @@ module Aws::GameLift
       api.version = "2015-10-01"
 
       api.metadata = {
+        "apiVersion" => "2015-10-01",
         "endpointPrefix" => "gamelift",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon GameLift",
         "signatureVersion" => "v4",
         "targetPrefix" => "GameLift",
+        "uid" => "gamelift-2015-10-01",
       }
 
       api.add_operation(:accept_match, Seahorse::Model::Operation.new.tap do |o|

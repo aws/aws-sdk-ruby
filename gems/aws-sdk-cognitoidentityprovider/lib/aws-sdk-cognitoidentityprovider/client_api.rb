@@ -1719,12 +1719,15 @@ module Aws::CognitoIdentityProvider
       api.version = "2016-04-18"
 
       api.metadata = {
+        "apiVersion" => "2016-04-18",
         "endpointPrefix" => "cognito-idp",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon Cognito Identity Provider",
+        "serviceId" => "Cognito Identity Provider",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSCognitoIdentityProviderService",
+        "uid" => "cognito-idp-2016-04-18",
       }
 
       api.add_operation(:add_custom_attributes, Seahorse::Model::Operation.new.tap do |o|

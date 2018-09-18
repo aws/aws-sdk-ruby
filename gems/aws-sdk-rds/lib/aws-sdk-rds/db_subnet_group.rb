@@ -212,7 +212,7 @@ module Aws::RDS
     #   The EC2 Subnet IDs for the DB subnet group.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #

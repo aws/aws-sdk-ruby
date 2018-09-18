@@ -2742,11 +2742,14 @@ module Aws::IoT
       api.version = "2015-05-28"
 
       api.metadata = {
+        "apiVersion" => "2015-05-28",
         "endpointPrefix" => "iot",
         "protocol" => "rest-json",
         "serviceFullName" => "AWS IoT",
+        "serviceId" => "IoT",
         "signatureVersion" => "v4",
         "signingName" => "execute-api",
+        "uid" => "iot-2015-05-28",
       }
 
       api.add_operation(:accept_certificate_transfer, Seahorse::Model::Operation.new.tap do |o|

@@ -1141,12 +1141,15 @@ module Aws::Lightsail
       api.version = "2016-11-28"
 
       api.metadata = {
+        "apiVersion" => "2016-11-28",
         "endpointPrefix" => "lightsail",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon Lightsail",
+        "serviceId" => "Lightsail",
         "signatureVersion" => "v4",
         "targetPrefix" => "Lightsail_20161128",
+        "uid" => "lightsail-2016-11-28",
       }
 
       api.add_operation(:allocate_static_ip, Seahorse::Model::Operation.new.tap do |o|

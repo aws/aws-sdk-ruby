@@ -3,6 +3,18 @@ Unreleased Changes
 
 * Issue - Update `:response_target` plugin error handling
 
+3.27.0 (2018-09-06)
+------------------
+
+* Feature - Adds code paths and plugins for future SDK instrumentation and telemetry to aws-sdk-sts.
+
+3.26.0 (2018-09-05)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Adds code paths and plugins for future SDK instrumentation and telemetry.
+
 3.25.0 (2018-08-29)
 ------------------
 

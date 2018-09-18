@@ -87,6 +87,8 @@ module Aws::Connect
     StopContactRequest = Shapes::StructureShape.new(name: 'StopContactRequest')
     StopContactResponse = Shapes::StructureShape.new(name: 'StopContactResponse')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    UpdateContactAttributesRequest = Shapes::StructureShape.new(name: 'UpdateContactAttributesRequest')
+    UpdateContactAttributesResponse = Shapes::StructureShape.new(name: 'UpdateContactAttributesResponse')
     UpdateUserHierarchyRequest = Shapes::StructureShape.new(name: 'UpdateUserHierarchyRequest')
     UpdateUserIdentityInfoRequest = Shapes::StructureShape.new(name: 'UpdateUserIdentityInfoRequest')
     UpdateUserPhoneConfigRequest = Shapes::StructureShape.new(name: 'UpdateUserPhoneConfigRequest')
@@ -258,6 +260,13 @@ module Aws::Connect
 
     StopContactResponse.struct_class = Types::StopContactResponse
 
+    UpdateContactAttributesRequest.add_member(:initial_contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "InitialContactId"))
+    UpdateContactAttributesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    UpdateContactAttributesRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, required: true, location_name: "Attributes"))
+    UpdateContactAttributesRequest.struct_class = Types::UpdateContactAttributesRequest
+
+    UpdateContactAttributesResponse.struct_class = Types::UpdateContactAttributesResponse
+
     UpdateUserHierarchyRequest.add_member(:hierarchy_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: "HierarchyGroupId"))
     UpdateUserHierarchyRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "UserId"))
     UpdateUserHierarchyRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
@@ -319,12 +328,16 @@ module Aws::Connect
       api.version = "2017-08-08"
 
       api.metadata = {
+        "apiVersion" => "2017-08-08",
         "endpointPrefix" => "connect",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "serviceAbbreviation" => "Amazon Connect",
         "serviceFullName" => "Amazon Connect Service",
+        "serviceId" => "Connect",
         "signatureVersion" => "v4",
         "signingName" => "connect",
+        "uid" => "connect-2017-08-08",
       }
 
       api.add_operation(:create_user, Seahorse::Model::Operation.new.tap do |o|
@@ -483,6 +496,18 @@ module Aws::Connect
         o.output = Shapes::ShapeRef.new(shape: StopContactResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ContactNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:update_contact_attributes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateContactAttributes"
+        o.http_method = "POST"
+        o.http_request_uri = "/contact/attributes"
+        o.input = Shapes::ShapeRef.new(shape: UpdateContactAttributesRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateContactAttributesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)

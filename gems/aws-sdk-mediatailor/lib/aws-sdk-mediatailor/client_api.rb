@@ -93,12 +93,16 @@ module Aws::MediaTailor
       api.version = "2018-04-23"
 
       api.metadata = {
+        "apiVersion" => "2018-04-23",
         "endpointPrefix" => "api.mediatailor",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "serviceAbbreviation" => "MediaTailor",
         "serviceFullName" => "AWS MediaTailor",
+        "serviceId" => "MediaTailor",
         "signatureVersion" => "v4",
         "signingName" => "mediatailor",
+        "uid" => "mediatailor-2018-04-23",
       }
 
       api.add_operation(:delete_playback_configuration, Seahorse::Model::Operation.new.tap do |o|

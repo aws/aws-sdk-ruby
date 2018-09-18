@@ -82,6 +82,7 @@ module Aws::CostandUsageReportService
       api.version = "2017-01-06"
 
       api.metadata = {
+        "apiVersion" => "2017-01-06",
         "endpointPrefix" => "cur",
         "jsonVersion" => "1.1",
         "protocol" => "json",
@@ -89,6 +90,7 @@ module Aws::CostandUsageReportService
         "signatureVersion" => "v4",
         "signingName" => "cur",
         "targetPrefix" => "AWSOrigamiServiceGatewayService",
+        "uid" => "cur-2017-01-06",
       }
 
       api.add_operation(:delete_report_definition, Seahorse::Model::Operation.new.tap do |o|

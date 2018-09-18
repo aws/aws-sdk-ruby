@@ -108,8 +108,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for AcceptVpcPeeringConnection.
-    #
     # @note When making an API call, you may pass AcceptVpcPeeringConnectionRequest
     #   data as a hash:
     #
@@ -138,8 +136,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of AcceptVpcPeeringConnection.
-    #
     # @!attribute [rw] vpc_peering_connection
     #   Information about the VPC peering connection.
     #   @return [Types::VpcPeeringConnection]
@@ -332,8 +328,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for AllocateHosts.
-    #
     # @note When making an API call, you may pass AllocateHostsRequest
     #   data as a hash:
     #
@@ -343,6 +337,17 @@ module Aws::EC2
     #         client_token: "String",
     #         instance_type: "String", # required
     #         quantity: 1, # required
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] auto_placement
@@ -378,6 +383,10 @@ module Aws::EC2
     #   parameters.
     #   @return [Integer]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the Dedicated Host during creation.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateHostsRequest AWS API Documentation
     #
     class AllocateHostsRequest < Struct.new(
@@ -385,7 +394,8 @@ module Aws::EC2
       :availability_zone,
       :client_token,
       :instance_type,
-      :quantity)
+      :quantity,
+      :tag_specifications)
       include Aws::Structure
     end
 
@@ -606,8 +616,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for AssociateDhcpOptions.
-    #
     # @note When making an API call, you may pass AssociateDhcpOptionsRequest
     #   data as a hash:
     #
@@ -680,8 +688,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for AssociateRouteTable.
-    #
     # @note When making an API call, you may pass AssociateRouteTableRequest
     #   data as a hash:
     #
@@ -715,8 +721,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of AssociateRouteTable.
-    #
     # @!attribute [rw] association_id
     #   The route table association ID. This ID is required for
     #   disassociating the route table.
@@ -823,8 +827,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for AttachClassicLinkVpc.
-    #
     # @note When making an API call, you may pass AttachClassicLinkVpcRequest
     #   data as a hash:
     #
@@ -866,8 +868,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of AttachClassicLinkVpc.
-    #
     # @!attribute [rw] return
     #   Returns `true` if the request succeeds; otherwise, it returns an
     #   error.
@@ -880,8 +880,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for AttachInternetGateway.
-    #
     # @note When making an API call, you may pass AttachInternetGatewayRequest
     #   data as a hash:
     #
@@ -1099,8 +1097,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for AuthorizeSecurityGroupEgress.
-    #
     # @note When making an API call, you may pass AuthorizeSecurityGroupEgressRequest
     #   data as a hash:
     #
@@ -1210,8 +1206,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for AuthorizeSecurityGroupIngress.
-    #
     # @note When making an API call, you may pass AuthorizeSecurityGroupIngressRequest
     #   data as a hash:
     #
@@ -1444,13 +1438,13 @@ module Aws::EC2
     #         device_name: "String",
     #         virtual_name: "String",
     #         ebs: {
-    #           encrypted: false,
     #           delete_on_termination: false,
     #           iops: 1,
-    #           kms_key_id: "String",
     #           snapshot_id: "String",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #           encrypted: false,
+    #           kms_key_id: "String",
     #         },
     #         no_device: "String",
     #       }
@@ -2382,10 +2376,12 @@ module Aws::EC2
     #
     # @!attribute [rw] encrypted
     #   Specifies whether the destination snapshots of the copied image
-    #   should be encrypted. The default CMK for EBS is used unless a
-    #   non-default AWS Key Management Service (AWS KMS) CMK is specified
-    #   with `KmsKeyId`. For more information, see [Amazon EBS
-    #   Encryption][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   should be encrypted. You can encrypt a copy of an unencrypted
+    #   snapshot, but you cannot create an unencrypted copy of an encrypted
+    #   snapshot. The default CMK for EBS is used unless you specify a
+    #   non-default AWS Key Management Service (AWS KMS) CMK using
+    #   `KmsKeyId`. For more information, see [Amazon EBS Encryption][1] in
+    #   the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -2504,12 +2500,12 @@ module Aws::EC2
     #
     # @!attribute [rw] encrypted
     #   Specifies whether the destination snapshot should be encrypted. You
-    #   can encrypt a copy of an unencrypted snapshot using this flag, but
-    #   you cannot use it to create an unencrypted copy from an encrypted
-    #   snapshot. Your default CMK for EBS is used unless a non-default AWS
-    #   Key Management Service (AWS KMS) CMK is specified with `KmsKeyId`.
-    #   For more information, see [Amazon EBS Encryption][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   can encrypt a copy of an unencrypted snapshot, but you cannot use it
+    #   to create an unencrypted copy of an encrypted snapshot. Your default
+    #   CMK for EBS is used unless you specify a non-default AWS Key
+    #   Management Service (AWS KMS) CMK using `KmsKeyId`. For more
+    #   information, see [Amazon EBS Encryption][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
     #
     #
     #
@@ -2754,8 +2750,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateDefaultVpc.
-    #
     # @note When making an API call, you may pass CreateDefaultVpcRequest
     #   data as a hash:
     #
@@ -2777,8 +2771,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of CreateDefaultVpc.
-    #
     # @!attribute [rw] vpc
     #   Information about the VPC.
     #   @return [Types::Vpc]
@@ -2790,8 +2782,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateDhcpOptions.
-    #
     # @note When making an API call, you may pass CreateDhcpOptionsRequest
     #   data as a hash:
     #
@@ -2824,8 +2814,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of CreateDhcpOptions.
-    #
     # @!attribute [rw] dhcp_options
     #   A set of DHCP options.
     #   @return [Types::DhcpOptions]
@@ -2941,7 +2929,7 @@ module Aws::EC2
     #         replace_unhealthy_instances: false,
     #         tag_specifications: [
     #           {
-    #             resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -3069,8 +3057,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateFlowLogs.
-    #
     # @note When making an API call, you may pass CreateFlowLogsRequest
     #   data as a hash:
     #
@@ -3169,8 +3155,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of CreateFlowLogs.
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -3285,13 +3269,13 @@ module Aws::EC2
     #             device_name: "String",
     #             virtual_name: "String",
     #             ebs: {
-    #               encrypted: false,
     #               delete_on_termination: false,
     #               iops: 1,
-    #               kms_key_id: "String",
     #               snapshot_id: "String",
     #               volume_size: 1,
     #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #               encrypted: false,
+    #               kms_key_id: "String",
     #             },
     #             no_device: "String",
     #           },
@@ -3420,8 +3404,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateInternetGateway.
-    #
     # @note When making an API call, you may pass CreateInternetGatewayRequest
     #   data as a hash:
     #
@@ -3443,8 +3425,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of CreateInternetGateway.
-    #
     # @!attribute [rw] internet_gateway
     #   Information about the internet gateway.
     #   @return [Types::InternetGateway]
@@ -3456,8 +3436,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateKeyPair.
-    #
     # @note When making an API call, you may pass CreateKeyPairRequest
     #   data as a hash:
     #
@@ -3563,7 +3541,7 @@ module Aws::EC2
     #           user_data: "String",
     #           tag_specifications: [
     #             {
-    #               resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #               resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
     #               tags: [
     #                 {
     #                   key: "String",
@@ -3728,7 +3706,7 @@ module Aws::EC2
     #           user_data: "String",
     #           tag_specifications: [
     #             {
-    #               resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #               resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
     #               tags: [
     #                 {
     #                   key: "String",
@@ -3830,8 +3808,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateNatGateway.
-    #
     # @note When making an API call, you may pass CreateNatGatewayRequest
     #   data as a hash:
     #
@@ -3872,8 +3848,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of CreateNatGateway.
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier to ensure the idempotency of the
     #   request. Only returned if a client token was provided in the
@@ -3892,8 +3866,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateNetworkAclEntry.
-    #
     # @note When making an API call, you may pass CreateNetworkAclEntryRequest
     #   data as a hash:
     #
@@ -3992,8 +3964,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateNetworkAcl.
-    #
     # @note When making an API call, you may pass CreateNetworkAclRequest
     #   data as a hash:
     #
@@ -4021,8 +3991,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of CreateNetworkAcl.
-    #
     # @!attribute [rw] network_acl
     #   Information about the network ACL.
     #   @return [Types::NetworkAcl]
@@ -4316,8 +4284,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateRoute.
-    #
     # @note When making an API call, you may pass CreateRouteRequest
     #   data as a hash:
     #
@@ -4398,8 +4364,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of CreateRoute.
-    #
     # @!attribute [rw] return
     #   Returns `true` if the request succeeds; otherwise, it returns an
     #   error.
@@ -4412,8 +4376,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateRouteTable.
-    #
     # @note When making an API call, you may pass CreateRouteTableRequest
     #   data as a hash:
     #
@@ -4441,8 +4403,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of CreateRouteTable.
-    #
     # @!attribute [rw] route_table
     #   Information about the route table.
     #   @return [Types::RouteTable]
@@ -4454,8 +4414,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateSecurityGroup.
-    #
     # @note When making an API call, you may pass CreateSecurityGroupRequest
     #   data as a hash:
     #
@@ -4510,8 +4468,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of CreateSecurityGroup.
-    #
     # @!attribute [rw] group_id
     #   The ID of the security group.
     #   @return [String]
@@ -4533,7 +4489,7 @@ module Aws::EC2
     #         volume_id: "String", # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -4622,8 +4578,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateSubnet.
-    #
     # @note When making an API call, you may pass CreateSubnetRequest
     #   data as a hash:
     #
@@ -4675,8 +4629,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of CreateSubnet.
-    #
     # @!attribute [rw] subnet
     #   Information about the subnet.
     #   @return [Types::Subnet]
@@ -4688,8 +4640,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateTags.
-    #
     # @note When making an API call, you may pass CreateTagsRequest
     #   data as a hash:
     #
@@ -4813,7 +4763,7 @@ module Aws::EC2
     #         dry_run: false,
     #         tag_specifications: [
     #           {
-    #             resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -5102,7 +5052,7 @@ module Aws::EC2
     #   attributes to `true`\: `enableDnsHostnames` and `enableDnsSupport`.
     #   Use ModifyVpcAttribute to set the VPC attributes.
     #
-    #   Default: `true`
+    #   Default: `false`
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointRequest AWS API Documentation
@@ -5205,8 +5155,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateVpcPeeringConnection.
-    #
     # @note When making an API call, you may pass CreateVpcPeeringConnectionRequest
     #   data as a hash:
     #
@@ -5259,8 +5207,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of CreateVpcPeeringConnection.
-    #
     # @!attribute [rw] vpc_peering_connection
     #   Information about the VPC peering connection.
     #   @return [Types::VpcPeeringConnection]
@@ -5272,8 +5218,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateVpc.
-    #
     # @note When making an API call, you may pass CreateVpcRequest
     #   data as a hash:
     #
@@ -5326,8 +5270,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of CreateVpc.
-    #
     # @!attribute [rw] vpc
     #   Information about the VPC.
     #   @return [Types::Vpc]
@@ -5493,11 +5435,11 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the credit option for CPU usage of a T2 instance.
+    # Describes the credit option for CPU usage of a T2 or T3 instance.
     #
     # @!attribute [rw] cpu_credits
-    #   The credit option for CPU usage of a T2 instance. Valid values are
-    #   `standard` and `unlimited`.
+    #   The credit option for CPU usage of a T2 or T3 instance. Valid values
+    #   are `standard` and `unlimited`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreditSpecification AWS API Documentation
@@ -5507,7 +5449,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # The credit option for CPU usage of a T2 instance.
+    # The credit option for CPU usage of a T2 or T3 instance.
     #
     # @note When making an API call, you may pass CreditSpecificationRequest
     #   data as a hash:
@@ -5517,8 +5459,8 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] cpu_credits
-    #   The credit option for CPU usage of a T2 instance. Valid values are
-    #   `standard` and `unlimited`.
+    #   The credit option for CPU usage of a T2 or T3 instance. Valid values
+    #   are `standard` and `unlimited`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreditSpecificationRequest AWS API Documentation
@@ -5599,8 +5541,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DeleteDhcpOptions.
-    #
     # @note When making an API call, you may pass DeleteDhcpOptionsRequest
     #   data as a hash:
     #
@@ -5776,8 +5716,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DeleteFlowLogs.
-    #
     # @note When making an API call, you may pass DeleteFlowLogsRequest
     #   data as a hash:
     #
@@ -5805,8 +5743,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DeleteFlowLogs.
-    #
     # @!attribute [rw] unsuccessful
     #   Information about the flow logs that could not be deleted
     #   successfully.
@@ -5857,8 +5793,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DeleteInternetGateway.
-    #
     # @note When making an API call, you may pass DeleteInternetGatewayRequest
     #   data as a hash:
     #
@@ -5886,8 +5820,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DeleteKeyPair.
-    #
     # @note When making an API call, you may pass DeleteKeyPairRequest
     #   data as a hash:
     #
@@ -6072,8 +6004,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DeleteNatGateway.
-    #
     # @note When making an API call, you may pass DeleteNatGatewayRequest
     #   data as a hash:
     #
@@ -6092,8 +6022,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DeleteNatGateway.
-    #
     # @!attribute [rw] nat_gateway_id
     #   The ID of the NAT gateway.
     #   @return [String]
@@ -6105,8 +6033,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DeleteNetworkAclEntry.
-    #
     # @note When making an API call, you may pass DeleteNetworkAclEntryRequest
     #   data as a hash:
     #
@@ -6146,8 +6072,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DeleteNetworkAcl.
-    #
     # @note When making an API call, you may pass DeleteNetworkAclRequest
     #   data as a hash:
     #
@@ -6282,8 +6206,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DeleteRoute.
-    #
     # @note When making an API call, you may pass DeleteRouteRequest
     #   data as a hash:
     #
@@ -6325,8 +6247,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DeleteRouteTable.
-    #
     # @note When making an API call, you may pass DeleteRouteTableRequest
     #   data as a hash:
     #
@@ -6354,8 +6274,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DeleteSecurityGroup.
-    #
     # @note When making an API call, you may pass DeleteSecurityGroupRequest
     #   data as a hash:
     #
@@ -6442,8 +6360,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DeleteSubnet.
-    #
     # @note When making an API call, you may pass DeleteSubnetRequest
     #   data as a hash:
     #
@@ -6471,8 +6387,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DeleteTags.
-    #
     # @note When making an API call, you may pass DeleteTagsRequest
     #   data as a hash:
     #
@@ -6669,8 +6583,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DeleteVpcPeeringConnection.
-    #
     # @note When making an API call, you may pass DeleteVpcPeeringConnectionRequest
     #   data as a hash:
     #
@@ -6698,8 +6610,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DeleteVpcPeeringConnection.
-    #
     # @!attribute [rw] return
     #   Returns `true` if the request succeeds; otherwise, it returns an
     #   error.
@@ -6712,8 +6622,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DeleteVpc.
-    #
     # @note When making an API call, you may pass DeleteVpcRequest
     #   data as a hash:
     #
@@ -7172,8 +7080,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeClassicLinkInstances.
-    #
     # @note When making an API call, you may pass DescribeClassicLinkInstancesRequest
     #   data as a hash:
     #
@@ -7252,8 +7158,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeClassicLinkInstances.
-    #
     # @!attribute [rw] instances
     #   Information about one or more linked EC2-Classic instances.
     #   @return [Array<Types::ClassicLinkInstance>]
@@ -7392,8 +7296,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeDhcpOptions.
-    #
     # @note When making an API call, you may pass DescribeDhcpOptionsRequest
     #   data as a hash:
     #
@@ -7451,8 +7353,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeDhcpOptions.
-    #
     # @!attribute [rw] dhcp_options
     #   Information about one or more DHCP options sets.
     #   @return [Array<Types::DhcpOptions>]
@@ -7904,8 +7804,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeFlowLogs.
-    #
     # @note When making an API call, you may pass DescribeFlowLogsRequest
     #   data as a hash:
     #
@@ -7977,8 +7875,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeFlowLogs.
-    #
     # @!attribute [rw] flow_logs
     #   Information about the flow logs.
     #   @return [Array<Types::FlowLog>]
@@ -8270,8 +8166,8 @@ module Aws::EC2
     #   The maximum number of results to return for the request in a single
     #   page. The remaining results can be seen by sending another request
     #   with the returned `nextToken` value. This value can be between 5 and
-    #   500.If `maxResults` is given a larger value than 500, you receive an
-    #   error.
+    #   500. If `maxResults` is given a larger value than 500, you receive
+    #   an error.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -8305,8 +8201,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeHosts.
-    #
     # @note When making an API call, you may pass DescribeHostsRequest
     #   data as a hash:
     #
@@ -8376,8 +8270,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeHosts.
-    #
     # @!attribute [rw] hosts
     #   Information about the Dedicated Hosts.
     #   @return [Array<Types::Host>]
@@ -9481,8 +9373,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeInternetGateways.
-    #
     # @note When making an API call, you may pass DescribeInternetGatewaysRequest
     #   data as a hash:
     #
@@ -9541,8 +9431,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeInternetGateways.
-    #
     # @!attribute [rw] internet_gateways
     #   Information about one or more internet gateways.
     #   @return [Array<Types::InternetGateway>]
@@ -9554,8 +9442,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeKeyPairs.
-    #
     # @note When making an API call, you may pass DescribeKeyPairsRequest
     #   data as a hash:
     #
@@ -9600,8 +9486,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeKeyPairs.
-    #
     # @!attribute [rw] key_pairs
     #   Information about one or more key pairs.
     #   @return [Array<Types::KeyPairInfo>]
@@ -9897,8 +9781,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeNatGateways.
-    #
     # @note When making an API call, you may pass DescribeNatGatewaysRequest
     #   data as a hash:
     #
@@ -9965,8 +9847,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeNatGateways.
-    #
     # @!attribute [rw] nat_gateways
     #   Information about the NAT gateways.
     #   @return [Array<Types::NatGateway>]
@@ -9984,8 +9864,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeNetworkAcls.
-    #
     # @note When making an API call, you may pass DescribeNetworkAclsRequest
     #   data as a hash:
     #
@@ -10017,9 +9895,6 @@ module Aws::EC2
     #
     #   * `entry.cidr` - The IPv4 CIDR range specified in the entry.
     #
-    #   * `entry.egress` - Indicates whether the entry applies to egress
-    #     traffic.
-    #
     #   * `entry.icmp.code` - The ICMP code specified in the entry, if any.
     #
     #   * `entry.icmp.type` - The ICMP type specified in the entry, if any.
@@ -10039,7 +9914,7 @@ module Aws::EC2
     #     (`allow` \| `deny`).
     #
     #   * `entry.rule-number` - The number of an entry (in other words,
-    #     rule) in the ACL's set of entries.
+    #     rule) in the set of ACL entries.
     #
     #   * `network-acl-id` - The ID of the network ACL.
     #
@@ -10078,8 +9953,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeNetworkAcls.
-    #
     # @!attribute [rw] network_acls
     #   Information about one or more network ACLs.
     #   @return [Array<Types::NetworkAcl>]
@@ -10251,6 +10124,8 @@ module Aws::EC2
     #         ],
     #         dry_run: false,
     #         network_interface_ids: ["String"],
+    #         next_token: "String",
+    #         max_results: 1,
     #       }
     #
     # @!attribute [rw] filters
@@ -10381,12 +10256,24 @@ module Aws::EC2
     #   Default: Describes all your network interfaces.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. The request
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfacesRequest AWS API Documentation
     #
     class DescribeNetworkInterfacesRequest < Struct.new(
       :filters,
       :dry_run,
-      :network_interface_ids)
+      :network_interface_ids,
+      :next_token,
+      :max_results)
       include Aws::Structure
     end
 
@@ -10396,10 +10283,16 @@ module Aws::EC2
     #   Information about one or more network interfaces.
     #   @return [Array<Types::NetworkInterface>]
     #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfacesResult AWS API Documentation
     #
     class DescribeNetworkInterfacesResult < Struct.new(
-      :network_interfaces)
+      :network_interfaces,
+      :next_token)
       include Aws::Structure
     end
 
@@ -10467,8 +10360,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribePrefixLists.
-    #
     # @note When making an API call, you may pass DescribePrefixListsRequest
     #   data as a hash:
     #
@@ -10529,8 +10420,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribePrefixLists.
-    #
     # @!attribute [rw] next_token
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
@@ -11152,8 +11041,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeRouteTables.
-    #
     # @note When making an API call, you may pass DescribeRouteTablesRequest
     #   data as a hash:
     #
@@ -11257,8 +11144,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeRouteTables.
-    #
     # @!attribute [rw] route_tables
     #   Information about one or more route tables.
     #   @return [Array<Types::RouteTable>]
@@ -11487,10 +11372,10 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the operation,
+    #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
-    #   DryRunOperation. Otherwise, it is UnauthorizedOperation.
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
     # @!attribute [rw] group_id
@@ -11516,8 +11401,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeSecurityGroups.
-    #
     # @note When making an API call, you may pass DescribeSecurityGroupsRequest
     #   data as a hash:
     #
@@ -11665,8 +11548,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeSecurityGroups.
-    #
     # @!attribute [rw] security_groups
     #   Information about one or more security groups.
     #   @return [Array<Types::SecurityGroup>]
@@ -12450,10 +12331,10 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the operation,
+    #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
-    #   DryRunOperation. Otherwise, it is UnauthorizedOperation.
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
     # @!attribute [rw] max_results
@@ -12498,8 +12379,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeSubnets.
-    #
     # @note When making an API call, you may pass DescribeSubnetsRequest
     #   data as a hash:
     #
@@ -12580,8 +12459,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeSubnets.
-    #
     # @!attribute [rw] subnets
     #   Information about one or more subnets.
     #   @return [Array<Types::Subnet>]
@@ -12593,8 +12470,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeTags.
-    #
     # @note When making an API call, you may pass DescribeTagsRequest
     #   data as a hash:
     #
@@ -12622,16 +12497,21 @@ module Aws::EC2
     #
     #   * `key` - The tag key.
     #
-    #   * `resource-id` - The resource ID.
+    #   * `resource-id` - The ID of the resource.
     #
     #   * `resource-type` - The resource type (`customer-gateway` \|
-    #     `dhcp-options` \| `elastic-ip` \| `fleet` \| `fpga-image` \|
-    #     `image` \| `instance` \| `internet-gateway` \| `launch-template`
-    #     \| `natgateway` \| `network-acl` \| `network-interface` \|
-    #     `reserved-instances` \| `route-table` \| `security-group` \|
-    #     `snapshot` \| `spot-instances-request` \| `subnet` \| `volume` \|
-    #     `vpc` \| `vpc-peering-connection` \| `vpn-connection` \|
-    #     `vpn-gateway`).
+    #     `dedicated-host` \| `dhcp-options` \| `elastic-ip` \| `fleet` \|
+    #     `fpga-image` \| `image` \| `instance` \| `internet-gateway` \|
+    #     `launch-template` \| `natgateway` \| `network-acl` \|
+    #     `network-interface` \| `reserved-instances` \| `route-table` \|
+    #     `security-group` \| `snapshot` \| `spot-instances-request` \|
+    #     `subnet` \| `volume` \| `vpc` \| `vpc-peering-connection` \|
+    #     `vpn-connection` \| `vpn-gateway`).
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of the tag. For
+    #     example, specify "tag:Owner" for the filter name and "TeamA"
+    #     for the filter value to find resources with the tag
+    #     "Owner=TeamA".
     #
     #   * `value` - The tag value.
     #   @return [Array<Types::Filter>]
@@ -12656,15 +12536,13 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeTags.
-    #
     # @!attribute [rw] next_token
     #   The token to use to retrieve the next page of results. This value is
     #   `null` when there are no more results to return.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of tags.
+    #   The tags.
     #   @return [Array<Types::TagDescription>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTagsResult AWS API Documentation
@@ -13055,8 +12933,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeVpcAttribute.
-    #
     # @note When making an API call, you may pass DescribeVpcAttributeRequest
     #   data as a hash:
     #
@@ -13090,8 +12966,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeVpcAttribute.
-    #
     # @!attribute [rw] vpc_id
     #   The ID of the VPC.
     #   @return [String]
@@ -13118,8 +12992,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeVpcClassicLinkDnsSupport.
-    #
     # @note When making an API call, you may pass DescribeVpcClassicLinkDnsSupportRequest
     #   data as a hash:
     #
@@ -13153,8 +13025,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeVpcClassicLinkDnsSupport.
-    #
     # @!attribute [rw] next_token
     #   The token to use when requesting the next set of items.
     #   @return [String]
@@ -13171,8 +13041,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeVpcClassicLink.
-    #
     # @note When making an API call, you may pass DescribeVpcClassicLinkRequest
     #   data as a hash:
     #
@@ -13225,8 +13093,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeVpcClassicLink.
-    #
     # @!attribute [rw] vpcs
     #   The ClassicLink status of one or more VPCs.
     #   @return [Array<Types::VpcClassicLink>]
@@ -13724,8 +13590,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeVpcPeeringConnections.
-    #
     # @note When making an API call, you may pass DescribeVpcPeeringConnectionsRequest
     #   data as a hash:
     #
@@ -13805,8 +13669,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeVpcPeeringConnections.
-    #
     # @!attribute [rw] vpc_peering_connections
     #   Information about the VPC peering connections.
     #   @return [Array<Types::VpcPeeringConnection>]
@@ -13818,8 +13680,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeVpcs.
-    #
     # @note When making an API call, you may pass DescribeVpcsRequest
     #   data as a hash:
     #
@@ -13901,8 +13761,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeVpcs.
-    #
     # @!attribute [rw] vpcs
     #   Information about one or more VPCs.
     #   @return [Array<Types::Vpc>]
@@ -14091,8 +13949,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DetachClassicLinkVpc.
-    #
     # @note When making an API call, you may pass DetachClassicLinkVpcRequest
     #   data as a hash:
     #
@@ -14126,8 +13982,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DetachClassicLinkVpc.
-    #
     # @!attribute [rw] return
     #   Returns `true` if the request succeeds; otherwise, it returns an
     #   error.
@@ -14140,8 +13994,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DetachInternetGateway.
-    #
     # @note When making an API call, you may pass DetachInternetGatewayRequest
     #   data as a hash:
     #
@@ -14366,8 +14218,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DisableVpcClassicLinkDnsSupport.
-    #
     # @note When making an API call, you may pass DisableVpcClassicLinkDnsSupportRequest
     #   data as a hash:
     #
@@ -14386,8 +14236,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DisableVpcClassicLinkDnsSupport.
-    #
     # @!attribute [rw] return
     #   Returns `true` if the request succeeds; otherwise, it returns an
     #   error.
@@ -14400,8 +14248,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DisableVpcClassicLink.
-    #
     # @note When making an API call, you may pass DisableVpcClassicLinkRequest
     #   data as a hash:
     #
@@ -14429,8 +14275,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DisableVpcClassicLink.
-    #
     # @!attribute [rw] return
     #   Returns `true` if the request succeeds; otherwise, it returns an
     #   error.
@@ -14507,8 +14351,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DisassociateRouteTable.
-    #
     # @note When making an API call, you may pass DisassociateRouteTableRequest
     #   data as a hash:
     #
@@ -14775,22 +14617,14 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         encrypted: false,
     #         delete_on_termination: false,
     #         iops: 1,
-    #         kms_key_id: "String",
     #         snapshot_id: "String",
     #         volume_size: 1,
     #         volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #         encrypted: false,
+    #         kms_key_id: "String",
     #       }
-    #
-    # @!attribute [rw] encrypted
-    #   Indicates whether the EBS volume is encrypted. Encrypted volumes can
-    #   only be attached to instances that support Amazon EBS encryption. If
-    #   you are creating a volume from a snapshot, you can't specify an
-    #   encryption value. This is because only blank volumes can be
-    #   encrypted on creation.
-    #   @return [Boolean]
     #
     # @!attribute [rw] delete_on_termination
     #   Indicates whether the EBS volume is deleted on instance termination.
@@ -14818,21 +14652,6 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     #   @return [Integer]
     #
-    # @!attribute [rw] kms_key_id
-    #   Identifier (key ID, key alias, ID ARN, or alias ARN) for a
-    #   user-managed CMK under which the EBS volume is encrypted.
-    #
-    #   This parameter is only supported on `BlockDeviceMapping` objects
-    #   called by [RunInstances][1], [RequestSpotFleet][2], and
-    #   [RequestSpotInstances][3].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet.html
-    #   [3]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html
-    #   @return [String]
-    #
     # @!attribute [rw] snapshot_id
     #   The ID of the snapshot.
     #   @return [String]
@@ -14856,16 +14675,39 @@ module Aws::EC2
     #   Default: `standard`
     #   @return [String]
     #
+    # @!attribute [rw] encrypted
+    #   Indicates whether the EBS volume is encrypted. Encrypted volumes can
+    #   only be attached to instances that support Amazon EBS encryption. If
+    #   you are creating a volume from a snapshot, you can't specify an
+    #   encryption value. This is because only blank volumes can be
+    #   encrypted on creation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_id
+    #   Identifier (key ID, key alias, ID ARN, or alias ARN) for a
+    #   user-managed CMK under which the EBS volume is encrypted.
+    #
+    #   This parameter is only supported on `BlockDeviceMapping` objects
+    #   called by [RunInstances][1], [RequestSpotFleet][2], and
+    #   [RequestSpotInstances][3].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
+    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet.html
+    #   [3]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsBlockDevice AWS API Documentation
     #
     class EbsBlockDevice < Struct.new(
-      :encrypted,
       :delete_on_termination,
       :iops,
-      :kms_key_id,
       :snapshot_id,
       :volume_size,
-      :volume_type)
+      :volume_type,
+      :encrypted,
+      :kms_key_id)
       include Aws::Structure
     end
 
@@ -15112,8 +14954,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for EnableVpcClassicLinkDnsSupport.
-    #
     # @note When making an API call, you may pass EnableVpcClassicLinkDnsSupportRequest
     #   data as a hash:
     #
@@ -15132,8 +14972,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of EnableVpcClassicLinkDnsSupport.
-    #
     # @!attribute [rw] return
     #   Returns `true` if the request succeeds; otherwise, it returns an
     #   error.
@@ -15146,8 +14984,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for EnableVpcClassicLink.
-    #
     # @note When making an API call, you may pass EnableVpcClassicLinkRequest
     #   data as a hash:
     #
@@ -15175,8 +15011,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of EnableVpcClassicLink.
-    #
     # @!attribute [rw] return
     #   Returns `true` if the request succeeds; otherwise, it returns an
     #   error.
@@ -15755,8 +15589,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version number. By default, the default version of the launch
-    #   template is used.
+    #   The version number of the launch template. You must specify a
+    #   version number.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateSpecification AWS API Documentation
@@ -17584,8 +17418,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ImportKeyPair.
-    #
     # @note When making an API call, you may pass ImportKeyPairRequest
     #   data as a hash:
     #
@@ -17620,8 +17452,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of ImportKeyPair.
-    #
     # @!attribute [rw] key_fingerprint
     #   The MD5 public key fingerprint as specified in section 4 of RFC
     #   4716.
@@ -18288,7 +18118,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the credit option for CPU usage of a T2 instance.
+    # Describes the credit option for CPU usage of a T2 or T3 instance.
     #
     # @!attribute [rw] instance_id
     #   The ID of the instance.
@@ -18307,7 +18137,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the credit option for CPU usage of a T2 instance.
+    # Describes the credit option for CPU usage of a T2 or T3 instance.
     #
     # @note When making an API call, you may pass InstanceCreditSpecificationRequest
     #   data as a hash:
@@ -19028,12 +18858,10 @@ module Aws::EC2
     #   @return [Array<Types::Ipv6Range>]
     #
     # @!attribute [rw] prefix_list_ids
-    #   (EC2-VPC only; valid for AuthorizeSecurityGroupEgress,
-    #   RevokeSecurityGroupEgress and DescribeSecurityGroups only) One or
-    #   more prefix list IDs for an AWS service. In an
-    #   AuthorizeSecurityGroupEgress request, this is the AWS service that
-    #   you want to access through a VPC endpoint from instances associated
-    #   with the security group.
+    #   \[EC2-VPC only\] One or more prefix list IDs for an AWS service.
+    #   With AuthorizeSecurityGroupEgress, this is the AWS service that you
+    #   want to access through a VPC endpoint from instances associated with
+    #   the security group.
     #   @return [Array<Types::PrefixListId>]
     #
     # @!attribute [rw] to_port
@@ -20238,7 +20066,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -20628,8 +20456,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ModifyHosts.
-    #
     # @note When making an API call, you may pass ModifyHostsRequest
     #   data as a hash:
     #
@@ -20654,8 +20480,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of ModifyHosts.
-    #
     # @!attribute [rw] successful
     #   The IDs of the Dedicated Hosts that were successfully modified.
     #   @return [Array<String>]
@@ -21112,8 +20936,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ModifyInstancePlacement.
-    #
     # @note When making an API call, you may pass ModifyInstancePlacementRequest
     #   data as a hash:
     #
@@ -21162,8 +20984,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of ModifyInstancePlacement.
-    #
     # @!attribute [rw] return
     #   Is `true` if the request succeeds, and an error otherwise.
     #   @return [Boolean]
@@ -21491,8 +21311,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ModifySubnetAttribute.
-    #
     # @note When making an API call, you may pass ModifySubnetAttributeRequest
     #   data as a hash:
     #
@@ -21653,8 +21471,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ModifyVpcAttribute.
-    #
     # @note When making an API call, you may pass ModifyVpcAttributeRequest
     #   data as a hash:
     #
@@ -21997,7 +21813,7 @@ module Aws::EC2
     #   @return [Types::PeeringConnectionOptionsRequest]
     #
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the operation,
+    #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -22039,8 +21855,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ModifyVpcTenancy.
-    #
     # @note When making an API call, you may pass ModifyVpcTenancyRequest
     #   data as a hash:
     #
@@ -22059,7 +21873,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the operation,
+    #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -22074,8 +21888,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of ModifyVpcTenancy.
-    #
     # @!attribute [rw] return_value
     #   Returns `true` if the request succeeds; otherwise, returns an error.
     #   @return [Boolean]
@@ -22883,13 +22695,13 @@ module Aws::EC2
     #
     # @!attribute [rw] allow_egress_from_local_classic_link_to_remote_vpc
     #   If true, enables outbound communication from an EC2-Classic instance
-    #   that's linked to a local VPC via ClassicLink to instances in a peer
-    #   VPC.
+    #   that's linked to a local VPC using ClassicLink to instances in a
+    #   peer VPC.
     #   @return [Boolean]
     #
     # @!attribute [rw] allow_egress_from_local_vpc_to_remote_classic_link
     #   If true, enables outbound communication from instances in a local
-    #   VPC to an EC2-Classic instance that's linked to a peer VPC via
+    #   VPC to an EC2-Classic instance that's linked to a peer VPC using
     #   ClassicLink.
     #   @return [Boolean]
     #
@@ -22920,13 +22732,13 @@ module Aws::EC2
     #
     # @!attribute [rw] allow_egress_from_local_classic_link_to_remote_vpc
     #   If true, enables outbound communication from an EC2-Classic instance
-    #   that's linked to a local VPC via ClassicLink to instances in a peer
-    #   VPC.
+    #   that's linked to a local VPC using ClassicLink to instances in a
+    #   peer VPC.
     #   @return [Boolean]
     #
     # @!attribute [rw] allow_egress_from_local_vpc_to_remote_classic_link
     #   If true, enables outbound communication from instances in a local
-    #   VPC to an EC2-Classic instance that's linked to a peer VPC via
+    #   VPC to an EC2-Classic instance that's linked to a peer VPC using
     #   ClassicLink.
     #   @return [Boolean]
     #
@@ -23066,7 +22878,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # \[EC2-VPC only\] The ID of the prefix.
+    # Describes a prefix list ID.
     #
     # @note When making an API call, you may pass PrefixListId
     #   data as a hash:
@@ -23706,13 +23518,13 @@ module Aws::EC2
     #             device_name: "String",
     #             virtual_name: "String",
     #             ebs: {
-    #               encrypted: false,
     #               delete_on_termination: false,
     #               iops: 1,
-    #               kms_key_id: "String",
     #               snapshot_id: "String",
     #               volume_size: 1,
     #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #               encrypted: false,
+    #               kms_key_id: "String",
     #             },
     #             no_device: "String",
     #           },
@@ -23884,8 +23696,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for RejectVpcPeeringConnection.
-    #
     # @note When making an API call, you may pass RejectVpcPeeringConnectionRequest
     #   data as a hash:
     #
@@ -23913,8 +23723,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of RejectVpcPeeringConnection.
-    #
     # @!attribute [rw] return
     #   Returns `true` if the request succeeds; otherwise, it returns an
     #   error.
@@ -23962,8 +23770,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ReleaseHosts.
-    #
     # @note When making an API call, you may pass ReleaseHostsRequest
     #   data as a hash:
     #
@@ -23982,8 +23788,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of ReleaseHosts.
-    #
     # @!attribute [rw] successful
     #   The IDs of the Dedicated Hosts that were successfully released.
     #   @return [Array<String>]
@@ -24039,8 +23843,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ReplaceNetworkAclAssociation.
-    #
     # @note When making an API call, you may pass ReplaceNetworkAclAssociationRequest
     #   data as a hash:
     #
@@ -24075,8 +23877,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of ReplaceNetworkAclAssociation.
-    #
     # @!attribute [rw] new_association_id
     #   The ID of the new association.
     #   @return [String]
@@ -24088,8 +23888,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ReplaceNetworkAclEntry.
-    #
     # @note When making an API call, you may pass ReplaceNetworkAclEntryRequest
     #   data as a hash:
     #
@@ -24186,8 +23984,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ReplaceRoute.
-    #
     # @note When making an API call, you may pass ReplaceRouteRequest
     #   data as a hash:
     #
@@ -24267,8 +24063,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ReplaceRouteTableAssociation.
-    #
     # @note When making an API call, you may pass ReplaceRouteTableAssociationRequest
     #   data as a hash:
     #
@@ -24302,8 +24096,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of ReplaceRouteTableAssociation.
-    #
     # @!attribute [rw] new_association_id
     #   The ID of the new association.
     #   @return [String]
@@ -24473,7 +24265,7 @@ module Aws::EC2
     #         user_data: "String",
     #         tag_specifications: [
     #           {
-    #             resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -24644,7 +24436,7 @@ module Aws::EC2
     #   @return [Types::LaunchTemplateInstanceMarketOptionsRequest]
     #
     # @!attribute [rw] credit_specification
-    #   The credit option for CPU usage of the instance. Valid for T2
+    #   The credit option for CPU usage of the instance. Valid for T2 or T3
     #   instances only.
     #   @return [Types::CreditSpecificationRequest]
     #
@@ -24714,13 +24506,13 @@ module Aws::EC2
     #                   device_name: "String",
     #                   virtual_name: "String",
     #                   ebs: {
-    #                     encrypted: false,
     #                     delete_on_termination: false,
     #                     iops: 1,
-    #                     kms_key_id: "String",
     #                     snapshot_id: "String",
     #                     volume_size: 1,
     #                     volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #                     encrypted: false,
+    #                     kms_key_id: "String",
     #                   },
     #                   no_device: "String",
     #                 },
@@ -24774,7 +24566,7 @@ module Aws::EC2
     #               weighted_capacity: 1.0,
     #               tag_specifications: [
     #                 {
-    #                   resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #                   resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
     #                   tags: [
     #                     {
     #                       key: "String",
@@ -24886,13 +24678,13 @@ module Aws::EC2
     #               device_name: "String",
     #               virtual_name: "String",
     #               ebs: {
-    #                 encrypted: false,
     #                 delete_on_termination: false,
     #                 iops: 1,
-    #                 kms_key_id: "String",
     #                 snapshot_id: "String",
     #                 volume_size: 1,
     #                 volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #                 encrypted: false,
+    #                 kms_key_id: "String",
     #               },
     #               no_device: "String",
     #             },
@@ -25102,13 +24894,13 @@ module Aws::EC2
     #             device_name: "String",
     #             virtual_name: "String",
     #             ebs: {
-    #               encrypted: false,
     #               delete_on_termination: false,
     #               iops: 1,
-    #               kms_key_id: "String",
     #               snapshot_id: "String",
     #               volume_size: 1,
     #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #               encrypted: false,
+    #               kms_key_id: "String",
     #             },
     #             no_device: "String",
     #           },
@@ -26147,8 +25939,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for RevokeSecurityGroupEgress.
-    #
     # @note When making an API call, you may pass RevokeSecurityGroupEgressRequest
     #   data as a hash:
     #
@@ -26258,8 +26048,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for RevokeSecurityGroupIngress.
-    #
     # @note When making an API call, you may pass RevokeSecurityGroupIngressRequest
     #   data as a hash:
     #
@@ -26575,13 +26363,13 @@ module Aws::EC2
     #             device_name: "String",
     #             virtual_name: "String",
     #             ebs: {
-    #               encrypted: false,
     #               delete_on_termination: false,
     #               iops: 1,
-    #               kms_key_id: "String",
     #               snapshot_id: "String",
     #               volume_size: 1,
     #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #               encrypted: false,
+    #               kms_key_id: "String",
     #             },
     #             no_device: "String",
     #           },
@@ -26657,7 +26445,7 @@ module Aws::EC2
     #         ],
     #         tag_specifications: [
     #           {
-    #             resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -26938,14 +26726,15 @@ module Aws::EC2
     # @!attribute [rw] credit_specification
     #   The credit option for CPU usage of the instance. Valid values are
     #   `standard` and `unlimited`. To change this attribute after launch,
-    #   use ModifyInstanceCreditSpecification. For more information, see [T2
-    #   Instances][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   use ModifyInstanceCreditSpecification. For more information, see
+    #   [Burstable Performance Instances][1] in the *Amazon Elastic Compute
+    #   Cloud User Guide*.
     #
-    #   Default: `standard`
+    #   Default: `standard` (T2 instances) or `unlimited` (T3 instances)
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
     #   @return [Types::CreditSpecificationRequest]
     #
     # @!attribute [rw] cpu_options
@@ -28511,13 +28300,13 @@ module Aws::EC2
     #             device_name: "String",
     #             virtual_name: "String",
     #             ebs: {
-    #               encrypted: false,
     #               delete_on_termination: false,
     #               iops: 1,
-    #               kms_key_id: "String",
     #               snapshot_id: "String",
     #               volume_size: 1,
     #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #               encrypted: false,
+    #               kms_key_id: "String",
     #             },
     #             no_device: "String",
     #           },
@@ -28571,7 +28360,7 @@ module Aws::EC2
     #         weighted_capacity: 1.0,
     #         tag_specifications: [
     #           {
-    #             resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -28793,13 +28582,13 @@ module Aws::EC2
     #                 device_name: "String",
     #                 virtual_name: "String",
     #                 ebs: {
-    #                   encrypted: false,
     #                   delete_on_termination: false,
     #                   iops: 1,
-    #                   kms_key_id: "String",
     #                   snapshot_id: "String",
     #                   volume_size: 1,
     #                   volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #                   encrypted: false,
+    #                   kms_key_id: "String",
     #                 },
     #                 no_device: "String",
     #               },
@@ -28853,7 +28642,7 @@ module Aws::EC2
     #             weighted_capacity: 1.0,
     #             tag_specifications: [
     #               {
-    #                 resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #                 resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
     #                 tags: [
     #                   {
     #                     key: "String",
@@ -29078,7 +28867,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -29877,7 +29666,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the T2 instance whose credit option for CPU usage was
+    # Describes the T2 or T3 instance whose credit option for CPU usage was
     # successfully modified.
     #
     # @!attribute [rw] instance_id
@@ -29905,7 +29694,7 @@ module Aws::EC2
     #   The key of the tag.
     #
     #   Constraints: Tag keys are case-sensitive and accept a maximum of 127
-    #   Unicode characters. May not begin with `aws:`
+    #   Unicode characters. May not begin with `aws:`.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -29957,7 +29746,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -29968,9 +29757,9 @@ module Aws::EC2
     #
     # @!attribute [rw] resource_type
     #   The type of resource to tag. Currently, the resource types that
-    #   support tagging on creation are `fleet`, `instance`, `snapshot`, and
-    #   `volume`. To tag a resource after it has been created, see
-    #   CreateTags.
+    #   support tagging on creation are `fleet`, `dedicated-host`,
+    #   `instance`, `snapshot`, and `volume`. To tag a resource after it has
+    #   been created, see CreateTags.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -30333,16 +30122,16 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the T2 instance whose credit option for CPU usage was not
-    # modified.
+    # Describes the T2 or T3 instance whose credit option for CPU usage was
+    # not modified.
     #
     # @!attribute [rw] instance_id
     #   The ID of the instance.
     #   @return [String]
     #
     # @!attribute [rw] error
-    #   The applicable error for the T2 instance whose credit option for CPU
-    #   usage was not modified.
+    #   The applicable error for the T2 or T3 instance whose credit option
+    #   for CPU usage was not modified.
     #   @return [Types::UnsuccessfulInstanceCreditSpecificationItemError]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnsuccessfulInstanceCreditSpecificationItem AWS API Documentation
@@ -30353,8 +30142,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Information about the error for the T2 instance whose credit option
-    # for CPU usage was not modified.
+    # Information about the error for the T2 or T3 instance whose credit
+    # option for CPU usage was not modified.
     #
     # @!attribute [rw] code
     #   The error code.
@@ -30414,8 +30203,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for UpdateSecurityGroupRuleDescriptionsEgress.
-    #
     # @note When making an API call, you may pass UpdateSecurityGroupRuleDescriptionsEgressRequest
     #   data as a hash:
     #
@@ -30494,8 +30281,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of UpdateSecurityGroupRuleDescriptionsEgress.
-    #
     # @!attribute [rw] return
     #   Returns `true` if the request succeeds; otherwise, returns an error.
     #   @return [Boolean]
@@ -30507,9 +30292,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for
-    # UpdateSecurityGroupRuleDescriptionsIngress.
-    #
     # @note When making an API call, you may pass UpdateSecurityGroupRuleDescriptionsIngressRequest
     #   data as a hash:
     #
@@ -30588,8 +30370,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of UpdateSecurityGroupRuleDescriptionsIngress.
-    #
     # @!attribute [rw] return
     #   Returns `true` if the request succeeds; otherwise, returns an error.
     #   @return [Boolean]

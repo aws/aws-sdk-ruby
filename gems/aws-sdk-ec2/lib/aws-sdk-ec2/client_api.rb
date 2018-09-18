@@ -1269,6 +1269,7 @@ module Aws::EC2
     AllocateHostsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
     AllocateHostsRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "instanceType"))
     AllocateHostsRequest.add_member(:quantity, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "quantity"))
+    AllocateHostsRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     AllocateHostsRequest.struct_class = Types::AllocateHostsRequest
 
     AllocateHostsResult.add_member(:host_ids, Shapes::ShapeRef.new(shape: ResponseHostIdList, location_name: "hostIdSet"))
@@ -2646,9 +2647,12 @@ module Aws::EC2
     DescribeNetworkInterfacesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filter"))
     DescribeNetworkInterfacesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DescribeNetworkInterfacesRequest.add_member(:network_interface_ids, Shapes::ShapeRef.new(shape: NetworkInterfaceIdList, location_name: "NetworkInterfaceId"))
+    DescribeNetworkInterfacesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeNetworkInterfacesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
     DescribeNetworkInterfacesRequest.struct_class = Types::DescribeNetworkInterfacesRequest
 
     DescribeNetworkInterfacesResult.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: NetworkInterfaceList, location_name: "networkInterfaceSet"))
+    DescribeNetworkInterfacesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeNetworkInterfacesResult.struct_class = Types::DescribeNetworkInterfacesResult
 
     DescribePlacementGroupsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
@@ -3195,13 +3199,13 @@ module Aws::EC2
 
     DnsEntrySet.member = Shapes::ShapeRef.new(shape: DnsEntry, location_name: "item")
 
-    EbsBlockDevice.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
     EbsBlockDevice.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "deleteOnTermination"))
     EbsBlockDevice.add_member(:iops, Shapes::ShapeRef.new(shape: Integer, location_name: "iops"))
-    EbsBlockDevice.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     EbsBlockDevice.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
     EbsBlockDevice.add_member(:volume_size, Shapes::ShapeRef.new(shape: Integer, location_name: "volumeSize"))
     EbsBlockDevice.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "volumeType"))
+    EbsBlockDevice.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
+    EbsBlockDevice.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     EbsBlockDevice.struct_class = Types::EbsBlockDevice
 
     EbsInstanceBlockDevice.add_member(:attach_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "attachTime"))
@@ -6197,10 +6201,14 @@ module Aws::EC2
       api.version = "2016-11-15"
 
       api.metadata = {
+        "apiVersion" => "2016-11-15",
         "endpointPrefix" => "ec2",
         "protocol" => "ec2",
+        "serviceAbbreviation" => "Amazon EC2",
         "serviceFullName" => "Amazon Elastic Compute Cloud",
+        "serviceId" => "EC2",
         "signatureVersion" => "v4",
+        "uid" => "ec2-2016-11-15",
         "xmlNamespace" => "http://ec2.amazonaws.com/doc/2016-11-15",
       }
 
@@ -7372,6 +7380,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeNetworkInterfacesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeNetworkInterfacesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_placement_groups, Seahorse::Model::Operation.new.tap do |o|

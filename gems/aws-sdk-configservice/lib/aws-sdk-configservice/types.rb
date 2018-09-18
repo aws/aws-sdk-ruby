@@ -593,6 +593,7 @@ module Aws::ConfigService
     #         input_parameters: "StringWithCharLimit1024",
     #         maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
     #         config_rule_state: "ACTIVE", # accepts ACTIVE, DELETING, DELETING_RESULTS, EVALUATING
+    #         created_by: "StringWithCharLimit256",
     #       }
     #
     # @!attribute [rw] config_rule_name
@@ -670,6 +671,15 @@ module Aws::ConfigService
     #   erased and are no longer available.
     #   @return [String]
     #
+    # @!attribute [rw] created_by
+    #   Service principal name of the service that created the rule.
+    #
+    #   <note markdown="1"> The field is populated only if the service linked rule is created by
+    #   a service. The field is empty if you create your own rule.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigRule AWS API Documentation
     #
     class ConfigRule < Struct.new(
@@ -681,7 +691,8 @@ module Aws::ConfigService
       :source,
       :input_parameters,
       :maximum_execution_frequency,
-      :config_rule_state)
+      :config_rule_state,
+      :created_by)
       include Aws::Structure
     end
 
@@ -3007,6 +3018,7 @@ module Aws::ConfigService
     #           input_parameters: "StringWithCharLimit1024",
     #           maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
     #           config_rule_state: "ACTIVE", # accepts ACTIVE, DELETING, DELETING_RESULTS, EVALUATING
+    #           created_by: "StringWithCharLimit256",
     #         },
     #       }
     #

@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 require 'aws-sdk-apigateway/plugins/apply_content_type_header.rb'
@@ -48,6 +50,8 @@ module Aws::APIGateway
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
     add_plugin(Aws::APIGateway::Plugins::ApplyContentTypeHeader)
@@ -93,6 +97,22 @@ module Aws::APIGateway
     #   * `~/.aws/config`
     #
     # @option options [String] :access_key_id
+    #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
     #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
@@ -461,6 +481,9 @@ module Aws::APIGateway
     #   The input configuration for the canary deployment when the deployment
     #   is a canary release deployment.
     #
+    # @option params [Boolean] :tracing_enabled
+    #   Specifies whether active tracing with X-ray is enabled for the Stage.
+    #
     # @return [Types::Deployment] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Deployment#id #id} => String
@@ -487,6 +510,7 @@ module Aws::APIGateway
     #       },
     #       use_stage_cache: false,
     #     },
+    #     tracing_enabled: false,
     #   })
     #
     # @example Response structure
@@ -1008,6 +1032,9 @@ module Aws::APIGateway
     # @option params [Types::CanarySettings] :canary_settings
     #   The canary deployment settings of this stage.
     #
+    # @option params [Boolean] :tracing_enabled
+    #   Specifies whether active tracing with X-ray is enabled for the Stage.
+    #
     # @option params [Hash<String,String>] :tags
     #   The key-value map of strings. The valid character set is
     #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
@@ -1027,6 +1054,7 @@ module Aws::APIGateway
     #   * {Types::Stage#documentation_version #documentation_version} => String
     #   * {Types::Stage#access_log_settings #access_log_settings} => Types::AccessLogSettings
     #   * {Types::Stage#canary_settings #canary_settings} => Types::CanarySettings
+    #   * {Types::Stage#tracing_enabled #tracing_enabled} => Boolean
     #   * {Types::Stage#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::Stage#created_date #created_date} => Time
     #   * {Types::Stage#last_updated_date #last_updated_date} => Time
@@ -1052,6 +1080,7 @@ module Aws::APIGateway
     #       },
     #       use_stage_cache: false,
     #     },
+    #     tracing_enabled: false,
     #     tags: {
     #       "String" => "String",
     #     },
@@ -1087,6 +1116,7 @@ module Aws::APIGateway
     #   resp.canary_settings.stage_variable_overrides #=> Hash
     #   resp.canary_settings.stage_variable_overrides["String"] #=> String
     #   resp.canary_settings.use_stage_cache #=> Boolean
+    #   resp.tracing_enabled #=> Boolean
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
     #   resp.created_date #=> Time
@@ -3702,6 +3732,7 @@ module Aws::APIGateway
     #   * {Types::Stage#documentation_version #documentation_version} => String
     #   * {Types::Stage#access_log_settings #access_log_settings} => Types::AccessLogSettings
     #   * {Types::Stage#canary_settings #canary_settings} => Types::CanarySettings
+    #   * {Types::Stage#tracing_enabled #tracing_enabled} => Boolean
     #   * {Types::Stage#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::Stage#created_date #created_date} => Time
     #   * {Types::Stage#last_updated_date #last_updated_date} => Time
@@ -3743,6 +3774,7 @@ module Aws::APIGateway
     #   resp.canary_settings.stage_variable_overrides #=> Hash
     #   resp.canary_settings.stage_variable_overrides["String"] #=> String
     #   resp.canary_settings.use_stage_cache #=> Boolean
+    #   resp.tracing_enabled #=> Boolean
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
     #   resp.created_date #=> Time
@@ -3805,6 +3837,7 @@ module Aws::APIGateway
     #   resp.item[0].canary_settings.stage_variable_overrides #=> Hash
     #   resp.item[0].canary_settings.stage_variable_overrides["String"] #=> String
     #   resp.item[0].canary_settings.use_stage_cache #=> Boolean
+    #   resp.item[0].tracing_enabled #=> Boolean
     #   resp.item[0].tags #=> Hash
     #   resp.item[0].tags["String"] #=> String
     #   resp.item[0].created_date #=> Time
@@ -6369,6 +6402,7 @@ module Aws::APIGateway
     #   * {Types::Stage#documentation_version #documentation_version} => String
     #   * {Types::Stage#access_log_settings #access_log_settings} => Types::AccessLogSettings
     #   * {Types::Stage#canary_settings #canary_settings} => Types::CanarySettings
+    #   * {Types::Stage#tracing_enabled #tracing_enabled} => Boolean
     #   * {Types::Stage#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::Stage#created_date #created_date} => Time
     #   * {Types::Stage#last_updated_date #last_updated_date} => Time
@@ -6418,6 +6452,7 @@ module Aws::APIGateway
     #   resp.canary_settings.stage_variable_overrides #=> Hash
     #   resp.canary_settings.stage_variable_overrides["String"] #=> String
     #   resp.canary_settings.use_stage_cache #=> Boolean
+    #   resp.tracing_enabled #=> Boolean
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
     #   resp.created_date #=> Time
@@ -6606,7 +6641,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -450,12 +450,16 @@ module Aws::KMS
       api.version = "2014-11-01"
 
       api.metadata = {
+        "apiVersion" => "2014-11-01",
         "endpointPrefix" => "kms",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "KMS",
         "serviceFullName" => "AWS Key Management Service",
+        "serviceId" => "KMS",
         "signatureVersion" => "v4",
         "targetPrefix" => "TrentService",
+        "uid" => "kms-2014-11-01",
       }
 
       api.add_operation(:cancel_key_deletion, Seahorse::Model::Operation.new.tap do |o|

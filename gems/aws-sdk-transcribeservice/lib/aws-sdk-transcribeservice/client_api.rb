@@ -189,13 +189,16 @@ module Aws::TranscribeService
       api.version = "2017-10-26"
 
       api.metadata = {
+        "apiVersion" => "2017-10-26",
         "endpointPrefix" => "transcribe",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon Transcribe Service",
+        "serviceId" => "Transcribe",
         "signatureVersion" => "v4",
         "signingName" => "transcribe",
         "targetPrefix" => "Transcribe",
+        "uid" => "transcribe-2017-10-26",
       }
 
       api.add_operation(:create_vocabulary, Seahorse::Model::Operation.new.tap do |o|

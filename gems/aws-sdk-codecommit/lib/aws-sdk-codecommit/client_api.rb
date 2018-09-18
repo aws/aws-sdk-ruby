@@ -198,6 +198,7 @@ module Aws::CodeCommit
     PostCommentReplyOutput = Shapes::StructureShape.new(name: 'PostCommentReplyOutput')
     PullRequest = Shapes::StructureShape.new(name: 'PullRequest')
     PullRequestAlreadyClosedException = Shapes::StructureShape.new(name: 'PullRequestAlreadyClosedException')
+    PullRequestCreatedEventMetadata = Shapes::StructureShape.new(name: 'PullRequestCreatedEventMetadata')
     PullRequestDoesNotExistException = Shapes::StructureShape.new(name: 'PullRequestDoesNotExistException')
     PullRequestEvent = Shapes::StructureShape.new(name: 'PullRequestEvent')
     PullRequestEventList = Shapes::ListShape.new(name: 'PullRequestEventList')
@@ -594,10 +595,17 @@ module Aws::CodeCommit
     PullRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
     PullRequest.struct_class = Types::PullRequest
 
+    PullRequestCreatedEventMetadata.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
+    PullRequestCreatedEventMetadata.add_member(:source_commit_id, Shapes::ShapeRef.new(shape: CommitId, location_name: "sourceCommitId"))
+    PullRequestCreatedEventMetadata.add_member(:destination_commit_id, Shapes::ShapeRef.new(shape: CommitId, location_name: "destinationCommitId"))
+    PullRequestCreatedEventMetadata.add_member(:merge_base, Shapes::ShapeRef.new(shape: CommitId, location_name: "mergeBase"))
+    PullRequestCreatedEventMetadata.struct_class = Types::PullRequestCreatedEventMetadata
+
     PullRequestEvent.add_member(:pull_request_id, Shapes::ShapeRef.new(shape: PullRequestId, location_name: "pullRequestId"))
     PullRequestEvent.add_member(:event_date, Shapes::ShapeRef.new(shape: EventDate, location_name: "eventDate"))
     PullRequestEvent.add_member(:pull_request_event_type, Shapes::ShapeRef.new(shape: PullRequestEventType, location_name: "pullRequestEventType"))
     PullRequestEvent.add_member(:actor_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "actorArn"))
+    PullRequestEvent.add_member(:pull_request_created_event_metadata, Shapes::ShapeRef.new(shape: PullRequestCreatedEventMetadata, location_name: "pullRequestCreatedEventMetadata"))
     PullRequestEvent.add_member(:pull_request_status_changed_event_metadata, Shapes::ShapeRef.new(shape: PullRequestStatusChangedEventMetadata, location_name: "pullRequestStatusChangedEventMetadata"))
     PullRequestEvent.add_member(:pull_request_source_reference_updated_event_metadata, Shapes::ShapeRef.new(shape: PullRequestSourceReferenceUpdatedEventMetadata, location_name: "pullRequestSourceReferenceUpdatedEventMetadata"))
     PullRequestEvent.add_member(:pull_request_merged_state_changed_event_metadata, Shapes::ShapeRef.new(shape: PullRequestMergedStateChangedEventMetadata, location_name: "pullRequestMergedStateChangedEventMetadata"))
@@ -615,6 +623,7 @@ module Aws::CodeCommit
     PullRequestSourceReferenceUpdatedEventMetadata.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
     PullRequestSourceReferenceUpdatedEventMetadata.add_member(:before_commit_id, Shapes::ShapeRef.new(shape: CommitId, location_name: "beforeCommitId"))
     PullRequestSourceReferenceUpdatedEventMetadata.add_member(:after_commit_id, Shapes::ShapeRef.new(shape: CommitId, location_name: "afterCommitId"))
+    PullRequestSourceReferenceUpdatedEventMetadata.add_member(:merge_base, Shapes::ShapeRef.new(shape: CommitId, location_name: "mergeBase"))
     PullRequestSourceReferenceUpdatedEventMetadata.struct_class = Types::PullRequestSourceReferenceUpdatedEventMetadata
 
     PullRequestStatusChangedEventMetadata.add_member(:pull_request_status, Shapes::ShapeRef.new(shape: PullRequestStatusEnum, location_name: "pullRequestStatus"))
@@ -624,6 +633,7 @@ module Aws::CodeCommit
     PullRequestTarget.add_member(:source_reference, Shapes::ShapeRef.new(shape: ReferenceName, location_name: "sourceReference"))
     PullRequestTarget.add_member(:destination_reference, Shapes::ShapeRef.new(shape: ReferenceName, location_name: "destinationReference"))
     PullRequestTarget.add_member(:destination_commit, Shapes::ShapeRef.new(shape: CommitId, location_name: "destinationCommit"))
+    PullRequestTarget.add_member(:merge_base, Shapes::ShapeRef.new(shape: CommitId, location_name: "mergeBase"))
     PullRequestTarget.add_member(:source_commit, Shapes::ShapeRef.new(shape: CommitId, location_name: "sourceCommit"))
     PullRequestTarget.add_member(:merge_metadata, Shapes::ShapeRef.new(shape: MergeMetadata, location_name: "mergeMetadata"))
     PullRequestTarget.struct_class = Types::PullRequestTarget
@@ -763,12 +773,16 @@ module Aws::CodeCommit
       api.version = "2015-04-13"
 
       api.metadata = {
+        "apiVersion" => "2015-04-13",
         "endpointPrefix" => "codecommit",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "CodeCommit",
         "serviceFullName" => "AWS CodeCommit",
+        "serviceId" => "CodeCommit",
         "signatureVersion" => "v4",
         "targetPrefix" => "CodeCommit_20150413",
+        "uid" => "codecommit-2015-04-13",
       }
 
       api.add_operation(:batch_get_repositories, Seahorse::Model::Operation.new.tap do |o|

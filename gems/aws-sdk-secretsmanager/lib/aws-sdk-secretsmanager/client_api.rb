@@ -334,13 +334,16 @@ module Aws::SecretsManager
       api.version = "2017-10-17"
 
       api.metadata = {
+        "apiVersion" => "2017-10-17",
         "endpointPrefix" => "secretsmanager",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Secrets Manager",
+        "serviceId" => "Secrets Manager",
         "signatureVersion" => "v4",
         "signingName" => "secretsmanager",
         "targetPrefix" => "secretsmanager",
+        "uid" => "secretsmanager-2017-10-17",
       }
 
       api.add_operation(:cancel_rotate_secret, Seahorse::Model::Operation.new.tap do |o|

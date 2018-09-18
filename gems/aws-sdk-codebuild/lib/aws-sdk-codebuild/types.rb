@@ -448,6 +448,55 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # Information about Amazon CloudWatch Logs for a build project.
+    #
+    # @note When making an API call, you may pass CloudWatchLogsConfig
+    #   data as a hash:
+    #
+    #       {
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         group_name: "String",
+    #         stream_name: "String",
+    #       }
+    #
+    # @!attribute [rw] status
+    #   The current status of the Amazon CloudWatch Logs for a build
+    #   project. Valid values are:
+    #
+    #   * `ENABLED`\: Amazon CloudWatch Logs are enabled for this build
+    #     project.
+    #
+    #   * `DISABLED`\: Amazon CloudWatch Logs are not enabled for this build
+    #     project.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The group name of the Amazon CloudWatch Logs. For more information,
+    #   see [Working with Log Groups and Log Streams][1]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_name
+    #   The prefix of the stream name of the Amazon CloudWatch Logs. For
+    #   more information, see [Working with Log Groups and Log Streams][1]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CloudWatchLogsConfig AWS API Documentation
+    #
+    class CloudWatchLogsConfig < Struct.new(
+      :status,
+      :group_name,
+      :stream_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateProjectInput
     #   data as a hash:
     #
@@ -539,6 +588,17 @@ module Aws::CodeBuild
     #           security_group_ids: ["NonEmptyString"],
     #         },
     #         badge_enabled: false,
+    #         logs_config: {
+    #           cloud_watch_logs: {
+    #             status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #             group_name: "String",
+    #             stream_name: "String",
+    #           },
+    #           s3_logs: {
+    #             status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #             location: "String",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -611,6 +671,11 @@ module Aws::CodeBuild
     #   project's build badge.
     #   @return [Boolean]
     #
+    # @!attribute [rw] logs_config
+    #   Information about logs for the build project. Logs can be Amazon
+    #   CloudWatch Logs, uploaded to a specified S3 bucket, or both.
+    #   @return [Types::LogsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProjectInput AWS API Documentation
     #
     class CreateProjectInput < Struct.new(
@@ -627,7 +692,8 @@ module Aws::CodeBuild
       :encryption_key,
       :tags,
       :vpc_config,
-      :badge_enabled)
+      :badge_enabled,
+      :logs_config)
       include Aws::Structure
     end
 
@@ -1063,6 +1129,42 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # Information about logs for a build project. Logs can be Amazon
+    # CloudWatch Logs, built in a specified S3 bucket, or both.
+    #
+    # @note When making an API call, you may pass LogsConfig
+    #   data as a hash:
+    #
+    #       {
+    #         cloud_watch_logs: {
+    #           status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #           group_name: "String",
+    #           stream_name: "String",
+    #         },
+    #         s3_logs: {
+    #           status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #           location: "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cloud_watch_logs
+    #   Information about Amazon CloudWatch Logs for a build project. Amazon
+    #   CloudWatch Logs are enabled by default.
+    #   @return [Types::CloudWatchLogsConfig]
+    #
+    # @!attribute [rw] s3_logs
+    #   Information about logs built to an S3 bucket for a build project. S3
+    #   logs are not enabled by default.
+    #   @return [Types::S3LogsConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/LogsConfig AWS API Documentation
+    #
+    class LogsConfig < Struct.new(
+      :cloud_watch_logs,
+      :s3_logs)
+      include Aws::Structure
+    end
+
     # Information about build logs in Amazon CloudWatch Logs.
     #
     # @!attribute [rw] group_name
@@ -1077,12 +1179,27 @@ module Aws::CodeBuild
     #   The URL to an individual build log in Amazon CloudWatch Logs.
     #   @return [String]
     #
+    # @!attribute [rw] s3_deep_link
+    #   The URL to an individual build log in an S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_logs
+    #   Information about Amazon CloudWatch Logs for a build project.
+    #   @return [Types::CloudWatchLogsConfig]
+    #
+    # @!attribute [rw] s3_logs
+    #   Information about S3 logs for a build project.
+    #   @return [Types::S3LogsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/LogsLocation AWS API Documentation
     #
     class LogsLocation < Struct.new(
       :group_name,
       :stream_name,
-      :deep_link)
+      :deep_link,
+      :s3_deep_link,
+      :cloud_watch_logs,
+      :s3_logs)
       include Aws::Structure
     end
 
@@ -1214,6 +1331,11 @@ module Aws::CodeBuild
     #   Information about the build badge for the build project.
     #   @return [Types::ProjectBadge]
     #
+    # @!attribute [rw] logs_config
+    #   Information about logs for the build project. A project can create
+    #   Amazon CloudWatch Logs, logs in an S3 bucket, or both.
+    #   @return [Types::LogsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Project AWS API Documentation
     #
     class Project < Struct.new(
@@ -1234,7 +1356,8 @@ module Aws::CodeBuild
       :last_modified,
       :webhook,
       :vpc_config,
-      :badge)
+      :badge,
+      :logs_config)
       include Aws::Structure
     end
 
@@ -1589,6 +1712,8 @@ module Aws::CodeBuild
     #
     #   * `GITHUB`\: The source code is in a GitHub repository.
     #
+    #   * `NO_SOURCE`\: The project does not have input source code.
+    #
     #   * `S3`\: The source code is in an Amazon Simple Storage Service
     #     (Amazon S3) input bucket.
     #   @return [String]
@@ -1737,6 +1862,39 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # Information about S3 logs for a build project.
+    #
+    # @note When making an API call, you may pass S3LogsConfig
+    #   data as a hash:
+    #
+    #       {
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         location: "String",
+    #       }
+    #
+    # @!attribute [rw] status
+    #   The current status of the S3 build logs. Valid values are:
+    #
+    #   * `ENABLED`\: S3 build logs are enabled for this build project.
+    #
+    #   * `DISABLED`\: S3 build logs are not enabled for this build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   The ARN of an S3 bucket and the path prefix for S3 logs. If your
+    #   Amazon S3 bucket name is `my-bucket`, and your path prefix is
+    #   `build-log`, then acceptable formats are `my-bucket/build-log` or
+    #   `aws:s3:::my-bucket/build-log`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/S3LogsConfig AWS API Documentation
+    #
+    class S3LogsConfig < Struct.new(
+      :status,
+      :location)
+      include Aws::Structure
+    end
+
     # Information about the authorization settings for AWS CodeBuild to
     # access the source code to be built.
     #
@@ -1849,6 +2007,17 @@ module Aws::CodeBuild
     #         privileged_mode_override: false,
     #         timeout_in_minutes_override: 1,
     #         idempotency_token: "String",
+    #         logs_config_override: {
+    #           cloud_watch_logs: {
+    #             status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #             group_name: "String",
+    #             stream_name: "String",
+    #           },
+    #           s3_logs: {
+    #             status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #             location: "String",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] project_name
@@ -1906,7 +2075,7 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] source_type_override
     #   A source input type for this build that overrides the source input
-    #   defined in the build project
+    #   defined in the build project.
     #   @return [String]
     #
     # @!attribute [rw] source_location_override
@@ -1993,6 +2162,11 @@ module Aws::CodeBuild
     #   CodeBuild returns a parameter mismatch error.
     #   @return [String]
     #
+    # @!attribute [rw] logs_config_override
+    #   Log settings for this build that override the log settings defined
+    #   in the build project.
+    #   @return [Types::LogsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuildInput AWS API Documentation
     #
     class StartBuildInput < Struct.new(
@@ -2018,7 +2192,8 @@ module Aws::CodeBuild
       :service_role_override,
       :privileged_mode_override,
       :timeout_in_minutes_override,
-      :idempotency_token)
+      :idempotency_token,
+      :logs_config_override)
       include Aws::Structure
     end
 
@@ -2182,6 +2357,17 @@ module Aws::CodeBuild
     #           security_group_ids: ["NonEmptyString"],
     #         },
     #         badge_enabled: false,
+    #         logs_config: {
+    #           cloud_watch_logs: {
+    #             status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #             group_name: "String",
+    #             stream_name: "String",
+    #           },
+    #           s3_logs: {
+    #             status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #             location: "String",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -2261,6 +2447,11 @@ module Aws::CodeBuild
     #   project's build badge.
     #   @return [Boolean]
     #
+    # @!attribute [rw] logs_config
+    #   Information about logs for the build project. A project can create
+    #   Amazon CloudWatch Logs, logs in an S3 bucket, or both.
+    #   @return [Types::LogsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProjectInput AWS API Documentation
     #
     class UpdateProjectInput < Struct.new(
@@ -2277,7 +2468,8 @@ module Aws::CodeBuild
       :encryption_key,
       :tags,
       :vpc_config,
-      :badge_enabled)
+      :badge_enabled,
+      :logs_config)
       include Aws::Structure
     end
 

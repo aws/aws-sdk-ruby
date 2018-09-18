@@ -52,6 +52,64 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # The persistent application settings for users of a stack.
+    #
+    # @note When making an API call, you may pass ApplicationSettings
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #         settings_group: "SettingsGroup",
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Enables or disables persistent application settings for users during
+    #   their streaming sessions.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] settings_group
+    #   The path prefix for the S3 bucket where users’ persistent
+    #   application settings are stored. You can allow the same persistent
+    #   application settings to be used across multiple stacks by specifying
+    #   the same settings group for each stack.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ApplicationSettings AWS API Documentation
+    #
+    class ApplicationSettings < Struct.new(
+      :enabled,
+      :settings_group)
+      include Aws::Structure
+    end
+
+    # Describes the persistent application settings for users of a stack.
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether persistent application settings are enabled for
+    #   users during their streaming sessions.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] settings_group
+    #   The path prefix for the S3 bucket where users’ persistent
+    #   application settings are stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The S3 bucket where users’ persistent application settings are
+    #   stored. When persistent application settings are enabled for the
+    #   first time for an account in an AWS Region, an S3 bucket is created.
+    #   The bucket is unique to the AWS account and the Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ApplicationSettingsResponse AWS API Documentation
+    #
+    class ApplicationSettingsResponse < Struct.new(
+      :enabled,
+      :settings_group,
+      :s3_bucket_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateFleetRequest
     #   data as a hash:
     #
@@ -551,6 +609,10 @@ module Aws::AppStream
     #             permission: "ENABLED", # required, accepts ENABLED, DISABLED
     #           },
     #         ],
+    #         application_settings: {
+    #           enabled: false, # required
+    #           settings_group: "SettingsGroup",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -585,6 +647,13 @@ module Aws::AppStream
     #   streaming sessions. By default, these actions are enabled.
     #   @return [Array<Types::UserSetting>]
     #
+    # @!attribute [rw] application_settings
+    #   The persistent application settings for users of a stack. When these
+    #   settings are enabled, changes that users make to applications and
+    #   Windows settings are automatically saved after each session and
+    #   applied to the next session.
+    #   @return [Types::ApplicationSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStackRequest AWS API Documentation
     #
     class CreateStackRequest < Struct.new(
@@ -594,7 +663,8 @@ module Aws::AppStream
       :storage_connectors,
       :redirect_url,
       :feedback_url,
-      :user_settings)
+      :user_settings,
+      :application_settings)
       include Aws::Structure
     end
 
@@ -1047,7 +1117,7 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] names
-    #   The names of the images to describe.
+    #   The names of the public or private images to describe.
     #   @return [Array<String>]
     #
     # @!attribute [rw] arns
@@ -1976,6 +2046,10 @@ module Aws::AppStream
     #   streaming sessions. By default these actions are enabled.
     #   @return [Array<Types::UserSetting>]
     #
+    # @!attribute [rw] application_settings
+    #   The persistent application settings for users of the stack.
+    #   @return [Types::ApplicationSettingsResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Stack AWS API Documentation
     #
     class Stack < Struct.new(
@@ -1988,7 +2062,8 @@ module Aws::AppStream
       :redirect_url,
       :feedback_url,
       :stack_errors,
-      :user_settings)
+      :user_settings,
+      :application_settings)
       include Aws::Structure
     end
 
@@ -2482,6 +2557,10 @@ module Aws::AppStream
     #             permission: "ENABLED", # required, accepts ENABLED, DISABLED
     #           },
     #         ],
+    #         application_settings: {
+    #           enabled: false, # required
+    #           settings_group: "SettingsGroup",
+    #         },
     #       }
     #
     # @!attribute [rw] display_name
@@ -2524,6 +2603,13 @@ module Aws::AppStream
     #   streaming sessions. By default, these actions are enabled.
     #   @return [Array<Types::UserSetting>]
     #
+    # @!attribute [rw] application_settings
+    #   The persistent application settings for users of a stack. When these
+    #   settings are enabled, changes that users make to applications and
+    #   Windows settings are automatically saved after each session and
+    #   applied to the next session.
+    #   @return [Types::ApplicationSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStackRequest AWS API Documentation
     #
     class UpdateStackRequest < Struct.new(
@@ -2535,7 +2621,8 @@ module Aws::AppStream
       :redirect_url,
       :feedback_url,
       :attributes_to_delete,
-      :user_settings)
+      :user_settings,
+      :application_settings)
       include Aws::Structure
     end
 

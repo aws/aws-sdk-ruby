@@ -1089,13 +1089,16 @@ module Aws::SWF
       api.version = "2012-01-25"
 
       api.metadata = {
+        "apiVersion" => "2012-01-25",
         "endpointPrefix" => "swf",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "serviceAbbreviation" => "Amazon SWF",
         "serviceFullName" => "Amazon Simple Workflow Service",
         "signatureVersion" => "v4",
         "targetPrefix" => "SimpleWorkflowService",
         "timestampFormat" => "unixTimestamp",
+        "uid" => "swf-2012-01-25",
       }
 
       api.add_operation(:count_closed_workflow_executions, Seahorse::Model::Operation.new.tap do |o|

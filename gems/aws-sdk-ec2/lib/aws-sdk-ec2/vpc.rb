@@ -1170,9 +1170,6 @@ module Aws::EC2
     #
     #   * `entry.cidr` - The IPv4 CIDR range specified in the entry.
     #
-    #   * `entry.egress` - Indicates whether the entry applies to egress
-    #     traffic.
-    #
     #   * `entry.icmp.code` - The ICMP code specified in the entry, if any.
     #
     #   * `entry.icmp.type` - The ICMP type specified in the entry, if any.
@@ -1192,7 +1189,7 @@ module Aws::EC2
     #     \| `deny`).
     #
     #   * `entry.rule-number` - The number of an entry (in other words, rule)
-    #     in the ACL's set of entries.
+    #     in the set of ACL entries.
     #
     #   * `network-acl-id` - The ID of the network ACL.
     #
@@ -1374,20 +1371,22 @@ module Aws::EC2
     # @return [NetworkInterface::Collection]
     def network_interfaces(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = Aws::Util.deep_merge(options, filters: [{
           name: "vpc-id",
           values: [@id]
         }])
         resp = @client.describe_network_interfaces(options)
-        resp.data.network_interfaces.each do |n|
-          batch << NetworkInterface.new(
-            id: n.network_interface_id,
-            data: n,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.network_interfaces.each do |n|
+            batch << NetworkInterface.new(
+              id: n.network_interface_id,
+              data: n,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       NetworkInterface::Collection.new(batches)
     end

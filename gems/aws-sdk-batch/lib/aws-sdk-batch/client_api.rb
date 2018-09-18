@@ -467,11 +467,15 @@ module Aws::Batch
       api.version = "2016-08-10"
 
       api.metadata = {
+        "apiVersion" => "2016-08-10",
         "endpointPrefix" => "batch",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "serviceAbbreviation" => "AWS Batch",
         "serviceFullName" => "AWS Batch",
+        "serviceId" => "Batch",
         "signatureVersion" => "v4",
+        "uid" => "batch-2016-08-10",
       }
 
       api.add_operation(:cancel_job, Seahorse::Model::Operation.new.tap do |o|

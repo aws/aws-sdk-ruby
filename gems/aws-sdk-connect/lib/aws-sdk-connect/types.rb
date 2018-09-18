@@ -916,6 +916,50 @@ module Aws::Connect
     #
     class StopContactResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateContactAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         initial_contact_id: "ContactId", # required
+    #         instance_id: "InstanceId", # required
+    #         attributes: { # required
+    #           "AttributeName" => "AttributeValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] initial_contact_id
+    #   The unique identifier of the contact for which to update attributes.
+    #   This is the identifier for the contact associated with the first
+    #   interaction with the contact center.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier for your Amazon Connect instance. To find the ID of
+    #   your Amazon Connect instance, open the AWS console and select Amazon
+    #   Connect. Select the instance alias of the instance. The instance ID
+    #   is displayed in the Overview section of your instance settings. For
+    #   example, the instance ID is the set of characters at the end of the
+    #   instance ARN, after instance/, such as
+    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   The key-value pairs for the attribute to update.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactAttributesRequest AWS API Documentation
+    #
+    class UpdateContactAttributesRequest < Struct.new(
+      :initial_contact_id,
+      :instance_id,
+      :attributes)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactAttributesResponse AWS API Documentation
+    #
+    class UpdateContactAttributesResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateUserHierarchyRequest
     #   data as a hash:
     #

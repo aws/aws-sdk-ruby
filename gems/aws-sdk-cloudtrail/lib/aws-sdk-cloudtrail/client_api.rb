@@ -341,12 +341,15 @@ module Aws::CloudTrail
       api.version = "2013-11-01"
 
       api.metadata = {
+        "apiVersion" => "2013-11-01",
         "endpointPrefix" => "cloudtrail",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "CloudTrail",
         "serviceFullName" => "AWS CloudTrail",
         "signatureVersion" => "v4",
         "targetPrefix" => "com.amazonaws.cloudtrail.v20131101.CloudTrail_20131101",
+        "uid" => "cloudtrail-2013-11-01",
       }
 
       api.add_operation(:add_tags, Seahorse::Model::Operation.new.tap do |o|

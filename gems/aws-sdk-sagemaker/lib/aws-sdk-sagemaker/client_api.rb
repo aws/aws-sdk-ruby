@@ -1027,13 +1027,17 @@ module Aws::SageMaker
       api.version = "2017-07-24"
 
       api.metadata = {
+        "apiVersion" => "2017-07-24",
         "endpointPrefix" => "api.sagemaker",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "SageMaker",
         "serviceFullName" => "Amazon SageMaker Service",
+        "serviceId" => "SageMaker",
         "signatureVersion" => "v4",
         "signingName" => "sagemaker",
         "targetPrefix" => "SageMaker",
+        "uid" => "sagemaker-2017-07-24",
       }
 
       api.add_operation(:add_tags, Seahorse::Model::Operation.new.tap do |o|

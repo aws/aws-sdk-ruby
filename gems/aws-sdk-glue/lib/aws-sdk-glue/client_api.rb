@@ -1728,12 +1728,15 @@ module Aws::Glue
       api.version = "2017-03-31"
 
       api.metadata = {
+        "apiVersion" => "2017-03-31",
         "endpointPrefix" => "glue",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Glue",
+        "serviceId" => "Glue",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSGlue",
+        "uid" => "glue-2017-03-31",
       }
 
       api.add_operation(:batch_create_partition, Seahorse::Model::Operation.new.tap do |o|

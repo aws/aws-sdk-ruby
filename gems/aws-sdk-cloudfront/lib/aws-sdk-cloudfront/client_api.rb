@@ -1231,10 +1231,15 @@ module Aws::CloudFront
       api.version = "2018-06-18"
 
       api.metadata = {
+        "apiVersion" => "2018-06-18",
         "endpointPrefix" => "cloudfront",
+        "globalEndpoint" => "cloudfront.amazonaws.com",
         "protocol" => "rest-xml",
+        "serviceAbbreviation" => "CloudFront",
         "serviceFullName" => "Amazon CloudFront",
+        "serviceId" => "CloudFront",
         "signatureVersion" => "v4",
+        "uid" => "cloudfront-2018-06-18",
       }
 
       api.add_operation(:create_cloud_front_origin_access_identity, Seahorse::Model::Operation.new.tap do |o|

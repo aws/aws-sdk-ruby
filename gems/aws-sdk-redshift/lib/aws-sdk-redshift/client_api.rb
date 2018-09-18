@@ -1045,6 +1045,8 @@ module Aws::Redshift
     ModifyClusterMessage.add_member(:elastic_ip, Shapes::ShapeRef.new(shape: String, location_name: "ElasticIp"))
     ModifyClusterMessage.add_member(:enhanced_vpc_routing, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnhancedVpcRouting"))
     ModifyClusterMessage.add_member(:maintenance_track_name, Shapes::ShapeRef.new(shape: String, location_name: "MaintenanceTrackName"))
+    ModifyClusterMessage.add_member(:encrypted, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "Encrypted"))
+    ModifyClusterMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     ModifyClusterMessage.struct_class = Types::ModifyClusterMessage
 
     ModifyClusterParameterGroupMessage.add_member(:parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ParameterGroupName"))
@@ -1120,6 +1122,7 @@ module Aws::Redshift
     PendingModifiedValues.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "PubliclyAccessible"))
     PendingModifiedValues.add_member(:enhanced_vpc_routing, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnhancedVpcRouting"))
     PendingModifiedValues.add_member(:maintenance_track_name, Shapes::ShapeRef.new(shape: String, location_name: "MaintenanceTrackName"))
+    PendingModifiedValues.add_member(:encryption_type, Shapes::ShapeRef.new(shape: String, location_name: "EncryptionType"))
     PendingModifiedValues.struct_class = Types::PendingModifiedValues
 
     PurchaseReservedNodeOfferingMessage.add_member(:reserved_node_offering_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReservedNodeOfferingId"))
@@ -1208,6 +1211,7 @@ module Aws::Redshift
     ResizeProgressMessage.add_member(:estimated_time_to_completion_in_seconds, Shapes::ShapeRef.new(shape: LongOptional, location_name: "EstimatedTimeToCompletionInSeconds"))
     ResizeProgressMessage.add_member(:resize_type, Shapes::ShapeRef.new(shape: String, location_name: "ResizeType"))
     ResizeProgressMessage.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResizeProgressMessage.add_member(:target_encryption_type, Shapes::ShapeRef.new(shape: String, location_name: "TargetEncryptionType"))
     ResizeProgressMessage.struct_class = Types::ResizeProgressMessage
 
     RestorableNodeTypeList.member = Shapes::ShapeRef.new(shape: String, location_name: "NodeType")
@@ -1424,10 +1428,13 @@ module Aws::Redshift
       api.version = "2012-12-01"
 
       api.metadata = {
+        "apiVersion" => "2012-12-01",
         "endpointPrefix" => "redshift",
         "protocol" => "query",
         "serviceFullName" => "Amazon Redshift",
+        "serviceId" => "Redshift",
         "signatureVersion" => "v4",
+        "uid" => "redshift-2012-12-01",
         "xmlNamespace" => "http://redshift.amazonaws.com/doc/2012-12-01/",
       }
 

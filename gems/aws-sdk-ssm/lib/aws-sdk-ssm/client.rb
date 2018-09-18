@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -47,6 +49,8 @@ module Aws::SSM
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -91,6 +95,22 @@ module Aws::SSM
     #   * `~/.aws/config`
     #
     # @option options [String] :access_key_id
+    #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
     #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
@@ -617,7 +637,7 @@ module Aws::SSM
     #   resp = client.create_document({
     #     content: "DocumentContent", # required
     #     name: "DocumentName", # required
-    #     document_type: "Command", # accepts Command, Policy, Automation
+    #     document_type: "Command", # accepts Command, Policy, Automation, Session
     #     document_format: "YAML", # accepts YAML, JSON
     #     target_type: "TargetType",
     #   })
@@ -640,7 +660,7 @@ module Aws::SSM
     #   resp.document_description.parameters[0].default_value #=> String
     #   resp.document_description.platform_types #=> Array
     #   resp.document_description.platform_types[0] #=> String, one of "Windows", "Linux"
-    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation"
+    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session"
     #   resp.document_description.schema_version #=> String
     #   resp.document_description.latest_version #=> String
     #   resp.document_description.default_version #=> String
@@ -1873,7 +1893,7 @@ module Aws::SSM
     #   resp.document.parameters[0].default_value #=> String
     #   resp.document.platform_types #=> Array
     #   resp.document.platform_types[0] #=> String, one of "Windows", "Linux"
-    #   resp.document.document_type #=> String, one of "Command", "Policy", "Automation"
+    #   resp.document.document_type #=> String, one of "Command", "Policy", "Automation", "Session"
     #   resp.document.schema_version #=> String
     #   resp.document.latest_version #=> String
     #   resp.document.default_version #=> String
@@ -2099,8 +2119,14 @@ module Aws::SSM
     #  </note>
     #
     # @option params [Array<Types::InstanceInformationFilter>] :instance_information_filter_list
-    #   One or more filters. Use a filter to return a more specific list of
-    #   instances.
+    #   This is a legacy method. We recommend that you don't use this method.
+    #   Instead, use the InstanceInformationFilter action. The
+    #   `InstanceInformationFilter` action enables you to return instance
+    #   information by using tags that are specified as a key-value mapping.
+    #
+    #   If you do use this method, then you can't use the
+    #   `InstanceInformationFilter` action. Using this method and the
+    #   `InstanceInformationFilter` action causes an exception error.
     #
     # @option params [Array<Types::InstanceInformationStringFilter>] :filters
     #   One or more filters. Use a filter to return a more specific list of
@@ -3015,6 +3041,69 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Retrieves a list of all active sessions (both connected and
+    # disconnected) or terminated sessions from the past 30 days.
+    #
+    # @option params [required, String] :state
+    #   The session status to retrieve a list of sessions for. For example,
+    #   "active".
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #
+    # @option params [Array<Types::SessionFilter>] :filters
+    #   One or more filters to limit the type of sessions returned by the
+    #   request.
+    #
+    # @return [Types::DescribeSessionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSessionsResponse#sessions #sessions} => Array&lt;Types::Session&gt;
+    #   * {Types::DescribeSessionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_sessions({
+    #     state: "Active", # required, accepts Active, History
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     filters: [
+    #       {
+    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Target, Owner, Status
+    #         value: "SessionFilterValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sessions #=> Array
+    #   resp.sessions[0].session_id #=> String
+    #   resp.sessions[0].target #=> String
+    #   resp.sessions[0].status #=> String, one of "Connected", "Connecting", "Disconnected", "Terminated", "Terminating", "Failed"
+    #   resp.sessions[0].start_date #=> Time
+    #   resp.sessions[0].end_date #=> Time
+    #   resp.sessions[0].document_name #=> String
+    #   resp.sessions[0].owner #=> String
+    #   resp.sessions[0].details #=> String
+    #   resp.sessions[0].output_url.s3_output_url #=> String
+    #   resp.sessions[0].output_url.cloud_watch_output_url #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeSessions AWS API Documentation
+    #
+    # @overload describe_sessions(params = {})
+    # @param [Hash] params ({})
+    def describe_sessions(params = {}, options = {})
+      req = build_request(:describe_sessions, params)
+      req.send_request(options)
+    end
+
     # Get detailed information about a particular Automation execution.
     #
     # @option params [required, String] :automation_execution_id
@@ -3183,6 +3272,38 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Retrieves the Session Manager connection status for an instance to
+    # determine whether it is connected and ready to receive Session Manager
+    # connections.
+    #
+    # @option params [required, String] :target
+    #   The ID of the instance.
+    #
+    # @return [Types::GetConnectionStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConnectionStatusResponse#target #target} => String
+    #   * {Types::GetConnectionStatusResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_connection_status({
+    #     target: "SessionTarget", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.target #=> String
+    #   resp.status #=> String, one of "Connected", "NotConnected"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetConnectionStatus AWS API Documentation
+    #
+    # @overload get_connection_status(params = {})
+    # @param [Hash] params ({})
+    def get_connection_status(params = {}, options = {})
+      req = build_request(:get_connection_status, params)
+      req.send_request(options)
+    end
+
     # Retrieves the default patch baseline. Note that Systems Manager
     # supports creating multiple default patch baselines. For example, you
     # can create a default patch baseline for each operating system.
@@ -3292,7 +3413,7 @@ module Aws::SSM
     #   resp.name #=> String
     #   resp.document_version #=> String
     #   resp.content #=> String
-    #   resp.document_type #=> String, one of "Command", "Policy", "Automation"
+    #   resp.document_type #=> String, one of "Command", "Policy", "Automation", "Session"
     #   resp.document_format #=> String, one of "YAML", "JSON"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDocument AWS API Documentation
@@ -4716,7 +4837,7 @@ module Aws::SSM
     #   resp.document_identifiers[0].platform_types #=> Array
     #   resp.document_identifiers[0].platform_types[0] #=> String, one of "Windows", "Linux"
     #   resp.document_identifiers[0].document_version #=> String
-    #   resp.document_identifiers[0].document_type #=> String, one of "Command", "Policy", "Automation"
+    #   resp.document_identifiers[0].document_type #=> String, one of "Command", "Policy", "Automation", "Session"
     #   resp.document_identifiers[0].schema_version #=> String
     #   resp.document_identifiers[0].document_format #=> String, one of "YAML", "JSON"
     #   resp.document_identifiers[0].target_type #=> String
@@ -5652,6 +5773,46 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Reconnects a session to an instance after it has been disconnected.
+    # Connections can be resumed for disconnected sessions, but not
+    # terminated sessions.
+    #
+    # <note markdown="1"> This command is primarily for use by client machines to automatically
+    # reconnect during intermittent network issues. It is not intended for
+    # any other use.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :session_id
+    #   The ID of the disconnected session to resume.
+    #
+    # @return [Types::ResumeSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResumeSessionResponse#session_id #session_id} => String
+    #   * {Types::ResumeSessionResponse#token_value #token_value} => String
+    #   * {Types::ResumeSessionResponse#stream_url #stream_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.resume_session({
+    #     session_id: "SessionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session_id #=> String
+    #   resp.token_value #=> String
+    #   resp.stream_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResumeSession AWS API Documentation
+    #
+    # @overload resume_session(params = {})
+    # @param [Hash] params ({})
+    def resume_session(params = {}, options = {})
+      req = build_request(:resume_session, params)
+      req.send_request(options)
+    end
+
     # Sends a signal to an Automation execution to change the current
     # behavior or status of the execution.
     #
@@ -6010,6 +6171,64 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Initiates a connection to a target (for example, an instance) for a
+    # Session Manager session. Returns a URL and token that can be used to
+    # open a WebSocket connection for sending input and receiving outputs.
+    #
+    # <note markdown="1"> AWS CLI usage: `start-session` is an interactive command that requires
+    # the Session Manager plugin to be installed on the client machine
+    # making the call. For information, see [ Install the Session Manager
+    # Plugin for the AWS CLI][1] in the *AWS Systems Manager User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html
+    #
+    # @option params [required, String] :target
+    #   The instance to connect to for the session.
+    #
+    # @option params [String] :document_name
+    #   The name of the SSM document to define the parameters and plugin
+    #   settings for the session. For example, `SSM-SessionManagerRunShell`.
+    #   If no document name is provided, a shell to the instance is launched
+    #   by default.
+    #
+    # @option params [Hash<String,Array>] :parameters
+    #   Reserved for future use.
+    #
+    # @return [Types::StartSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartSessionResponse#session_id #session_id} => String
+    #   * {Types::StartSessionResponse#token_value #token_value} => String
+    #   * {Types::StartSessionResponse#stream_url #stream_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_session({
+    #     target: "SessionTarget", # required
+    #     document_name: "DocumentARN",
+    #     parameters: {
+    #       "SessionManagerParameterName" => ["SessionManagerParameterValue"],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session_id #=> String
+    #   resp.token_value #=> String
+    #   resp.stream_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartSession AWS API Documentation
+    #
+    # @overload start_session(params = {})
+    # @param [Hash] params ({})
+    def start_session(params = {}, options = {})
+      req = build_request(:start_session, params)
+      req.send_request(options)
+    end
+
     # Stop an Automation that is currently executing.
     #
     # @option params [required, String] :automation_execution_id
@@ -6034,6 +6253,36 @@ module Aws::SSM
     # @param [Hash] params ({})
     def stop_automation_execution(params = {}, options = {})
       req = build_request(:stop_automation_execution, params)
+      req.send_request(options)
+    end
+
+    # Permanently ends a session and closes the data connection between the
+    # Session Manager client and SSM Agent on the instance. A terminated
+    # session cannot be resumed.
+    #
+    # @option params [required, String] :session_id
+    #   The ID of the session to terminate.
+    #
+    # @return [Types::TerminateSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TerminateSessionResponse#session_id #session_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.terminate_session({
+    #     session_id: "SessionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/TerminateSession AWS API Documentation
+    #
+    # @overload terminate_session(params = {})
+    # @param [Hash] params ({})
+    def terminate_session(params = {}, options = {})
+      req = build_request(:terminate_session, params)
       req.send_request(options)
     end
 
@@ -6267,7 +6516,7 @@ module Aws::SSM
     #   resp.document_description.parameters[0].default_value #=> String
     #   resp.document_description.platform_types #=> Array
     #   resp.document_description.platform_types[0] #=> String, one of "Windows", "Linux"
-    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation"
+    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session"
     #   resp.document_description.schema_version #=> String
     #   resp.document_description.latest_version #=> String
     #   resp.document_description.default_version #=> String
@@ -6950,7 +7199,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -594,23 +594,11 @@ module Aws::OpsWorksCM
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   NextToken is a string that is returned in some command responses. It
-    #   indicates that not all entries have been returned, and that you must
-    #   run at least one more request to get remaining items. To get
-    #   remaining results, call `DescribeBackups` again, and assign the
-    #   token from the previous results as the value of the `nextToken`
-    #   parameter. If there are no more results, the response object's
-    #   `nextToken` parameter value is `null`. Setting a `nextToken` value
-    #   that was not returned in your previous results causes an
-    #   `InvalidNextTokenException` to occur.
+    #   This is not currently implemented for `DescribeBackups` requests.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   To receive a paginated response, use this parameter to specify the
-    #   maximum number of results to be returned with a single call. If the
-    #   number of available results exceeds this maximum, the response
-    #   includes a `NextToken` value that you can assign to the `NextToken`
-    #   request parameter to get the next set of results.
+    #   This is not currently implemented for `DescribeBackups` requests.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeBackupsRequest AWS API Documentation
@@ -628,15 +616,7 @@ module Aws::OpsWorksCM
     #   @return [Array<Types::Backup>]
     #
     # @!attribute [rw] next_token
-    #   NextToken is a string that is returned in some command responses. It
-    #   indicates that not all entries have been returned, and that you must
-    #   run at least one more request to get remaining items. To get
-    #   remaining results, call `DescribeBackups` again, and assign the
-    #   token from the previous results as the value of the `nextToken`
-    #   parameter. If there are no more results, the response object's
-    #   `nextToken` parameter value is `null`. Setting a `nextToken` value
-    #   that was not returned in your previous results causes an
-    #   `InvalidNextTokenException` to occur.
+    #   This is not currently implemented for `DescribeBackups` requests.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeBackupsResponse AWS API Documentation
@@ -779,23 +759,11 @@ module Aws::OpsWorksCM
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   NextToken is a string that is returned in some command responses. It
-    #   indicates that not all entries have been returned, and that you must
-    #   run at least one more request to get remaining items. To get
-    #   remaining results, call `DescribeServers` again, and assign the
-    #   token from the previous results as the value of the `nextToken`
-    #   parameter. If there are no more results, the response object's
-    #   `nextToken` parameter value is `null`. Setting a `nextToken` value
-    #   that was not returned in your previous results causes an
-    #   `InvalidNextTokenException` to occur.
+    #   This is not currently implemented for `DescribeServers` requests.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   To receive a paginated response, use this parameter to specify the
-    #   maximum number of results to be returned with a single call. If the
-    #   number of available results exceeds this maximum, the response
-    #   includes a `NextToken` value that you can assign to the `NextToken`
-    #   request parameter to get the next set of results.
+    #   This is not currently implemented for `DescribeServers` requests.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeServersRequest AWS API Documentation
@@ -818,15 +786,7 @@ module Aws::OpsWorksCM
     #   @return [Array<Types::Server>]
     #
     # @!attribute [rw] next_token
-    #   NextToken is a string that is returned in some command responses. It
-    #   indicates that not all entries have been returned, and that you must
-    #   run at least one more request to get remaining items. To get
-    #   remaining results, call `DescribeServers` again, and assign the
-    #   token from the previous results as the value of the `nextToken`
-    #   parameter. If there are no more results, the response object's
-    #   `nextToken` parameter value is `null`. Setting a `nextToken` value
-    #   that was not returned in your previous results causes an
-    #   `InvalidNextTokenException` to occur.
+    #   This is not currently implemented for `DescribeServers` requests.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeServersResponse AWS API Documentation

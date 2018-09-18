@@ -310,6 +310,7 @@ module Aws::CloudWatchLogs
 
     FilterLogEventsRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     FilterLogEventsRequest.add_member(:log_stream_names, Shapes::ShapeRef.new(shape: InputLogStreamNames, location_name: "logStreamNames"))
+    FilterLogEventsRequest.add_member(:log_stream_name_prefix, Shapes::ShapeRef.new(shape: LogStreamName, location_name: "logStreamNamePrefix"))
     FilterLogEventsRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
     FilterLogEventsRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
     FilterLogEventsRequest.add_member(:filter_pattern, Shapes::ShapeRef.new(shape: FilterPattern, location_name: "filterPattern"))
@@ -519,12 +520,15 @@ module Aws::CloudWatchLogs
       api.version = "2014-03-28"
 
       api.metadata = {
+        "apiVersion" => "2014-03-28",
         "endpointPrefix" => "logs",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon CloudWatch Logs",
+        "serviceId" => "CloudWatch Logs",
         "signatureVersion" => "v4",
         "targetPrefix" => "Logs_20140328",
+        "uid" => "logs-2014-03-28",
       }
 
       api.add_operation(:associate_kms_key, Seahorse::Model::Operation.new.tap do |o|

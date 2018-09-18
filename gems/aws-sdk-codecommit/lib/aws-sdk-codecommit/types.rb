@@ -1824,6 +1824,38 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # Metadata about the pull request that is used when comparing the pull
+    # request source with its destination.
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository where the pull request was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_commit_id
+    #   The commit ID on the source branch used when the pull request was
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_commit_id
+    #   The commit ID of the tip of the branch specified as the destination
+    #   branch when the pull request was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] merge_base
+    #   The commit ID of the most recent commit that the source branch and
+    #   the destination branch have in common.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PullRequestCreatedEventMetadata AWS API Documentation
+    #
+    class PullRequestCreatedEventMetadata < Struct.new(
+      :repository_name,
+      :source_commit_id,
+      :destination_commit_id,
+      :merge_base)
+      include Aws::Structure
+    end
+
     # Returns information about a pull request event.
     #
     # @!attribute [rw] pull_request_id
@@ -1846,6 +1878,11 @@ module Aws::CodeCommit
     #   additional commits or changing the status of a pull request.
     #   @return [String]
     #
+    # @!attribute [rw] pull_request_created_event_metadata
+    #   Information about the source and destination branches for the pull
+    #   request.
+    #   @return [Types::PullRequestCreatedEventMetadata]
+    #
     # @!attribute [rw] pull_request_status_changed_event_metadata
     #   Information about the change in status for the pull request event.
     #   @return [Types::PullRequestStatusChangedEventMetadata]
@@ -1867,6 +1904,7 @@ module Aws::CodeCommit
       :event_date,
       :pull_request_event_type,
       :actor_arn,
+      :pull_request_created_event_metadata,
       :pull_request_status_changed_event_metadata,
       :pull_request_source_reference_updated_event_metadata,
       :pull_request_merged_state_changed_event_metadata)
@@ -1913,12 +1951,18 @@ module Aws::CodeCommit
     #   tip of the branch at the time the pull request was updated.
     #   @return [String]
     #
+    # @!attribute [rw] merge_base
+    #   The commit ID of the most recent commit that the source branch and
+    #   the destination branch have in common.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PullRequestSourceReferenceUpdatedEventMetadata AWS API Documentation
     #
     class PullRequestSourceReferenceUpdatedEventMetadata < Struct.new(
       :repository_name,
       :before_commit_id,
-      :after_commit_id)
+      :after_commit_id,
+      :merge_base)
       include Aws::Structure
     end
 
@@ -1957,6 +2001,11 @@ module Aws::CodeCommit
     #   is the commit where the pull request was or will be merged.
     #   @return [String]
     #
+    # @!attribute [rw] merge_base
+    #   The commit ID of the most recent commit that the source branch and
+    #   the destination branch have in common.
+    #   @return [String]
+    #
     # @!attribute [rw] source_commit
     #   The full commit ID of the tip of the source branch used to create
     #   the pull request. If the pull request branch is updated by a push
@@ -1976,6 +2025,7 @@ module Aws::CodeCommit
       :source_reference,
       :destination_reference,
       :destination_commit,
+      :merge_base,
       :source_commit,
       :merge_metadata)
       include Aws::Structure
@@ -2001,7 +2051,8 @@ module Aws::CodeCommit
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   The name of the branch where you want to add or update the file.
+    #   The name of the branch where you want to add or update the file. If
+    #   this is an empty repository, this branch will be created.
     #   @return [String]
     #
     # @!attribute [rw] file_content
@@ -2025,9 +2076,13 @@ module Aws::CodeCommit
     #
     # @!attribute [rw] parent_commit_id
     #   The full commit ID of the head commit in the branch where you want
-    #   to add or update the file. If the commit ID does not match the ID of
-    #   the head commit at the time of the operation, an error will occur,
-    #   and the file will not be added or updated.
+    #   to add or update the file. If this is an empty repository, no commit
+    #   ID is required. If this is not an empty repository, a commit ID is
+    #   required.
+    #
+    #   The commit ID must match the ID of the head commit at the time of
+    #   the operation, or an error will occur, and the file will not be
+    #   added or updated.
     #   @return [String]
     #
     # @!attribute [rw] commit_message
@@ -2070,7 +2125,8 @@ module Aws::CodeCommit
     #   @return [String]
     #
     # @!attribute [rw] tree_id
-    #   Tree information for the commit that contains this file change.
+    #   The full SHA-1 pointer of the tree information for the commit that
+    #   contains this file change.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PutFileOutput AWS API Documentation

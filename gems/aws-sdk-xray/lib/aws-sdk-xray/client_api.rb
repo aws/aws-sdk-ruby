@@ -486,10 +486,13 @@ module Aws::XRay
       api.version = "2016-04-12"
 
       api.metadata = {
+        "apiVersion" => "2016-04-12",
         "endpointPrefix" => "xray",
         "protocol" => "rest-json",
         "serviceFullName" => "AWS X-Ray",
+        "serviceId" => "XRay",
         "signatureVersion" => "v4",
+        "uid" => "xray-2016-04-12",
       }
 
       api.add_operation(:batch_get_traces, Seahorse::Model::Operation.new.tap do |o|

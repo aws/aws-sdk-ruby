@@ -15,6 +15,8 @@ module Aws::AppStream
     AccountPassword = Shapes::StringShape.new(name: 'AccountPassword')
     Action = Shapes::StringShape.new(name: 'Action')
     Application = Shapes::StructureShape.new(name: 'Application')
+    ApplicationSettings = Shapes::StructureShape.new(name: 'ApplicationSettings')
+    ApplicationSettingsResponse = Shapes::StructureShape.new(name: 'ApplicationSettingsResponse')
     Applications = Shapes::ListShape.new(name: 'Applications')
     AppstreamAgentVersion = Shapes::StringShape.new(name: 'AppstreamAgentVersion')
     Arn = Shapes::StringShape.new(name: 'Arn')
@@ -141,6 +143,7 @@ module Aws::AppStream
     Session = Shapes::StructureShape.new(name: 'Session')
     SessionList = Shapes::ListShape.new(name: 'SessionList')
     SessionState = Shapes::StringShape.new(name: 'SessionState')
+    SettingsGroup = Shapes::StringShape.new(name: 'SettingsGroup')
     SharedImagePermissions = Shapes::StructureShape.new(name: 'SharedImagePermissions')
     SharedImagePermissionsList = Shapes::ListShape.new(name: 'SharedImagePermissionsList')
     Stack = Shapes::StructureShape.new(name: 'Stack')
@@ -196,6 +199,15 @@ module Aws::AppStream
     Application.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     Application.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
     Application.struct_class = Types::Application
+
+    ApplicationSettings.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
+    ApplicationSettings.add_member(:settings_group, Shapes::ShapeRef.new(shape: SettingsGroup, location_name: "SettingsGroup"))
+    ApplicationSettings.struct_class = Types::ApplicationSettings
+
+    ApplicationSettingsResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    ApplicationSettingsResponse.add_member(:settings_group, Shapes::ShapeRef.new(shape: SettingsGroup, location_name: "SettingsGroup"))
+    ApplicationSettingsResponse.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: String, location_name: "S3BucketName"))
+    ApplicationSettingsResponse.struct_class = Types::ApplicationSettingsResponse
 
     Applications.member = Shapes::ShapeRef.new(shape: Application)
 
@@ -283,6 +295,7 @@ module Aws::AppStream
     CreateStackRequest.add_member(:redirect_url, Shapes::ShapeRef.new(shape: RedirectURL, location_name: "RedirectURL"))
     CreateStackRequest.add_member(:feedback_url, Shapes::ShapeRef.new(shape: FeedbackURL, location_name: "FeedbackURL"))
     CreateStackRequest.add_member(:user_settings, Shapes::ShapeRef.new(shape: UserSettingList, location_name: "UserSettings"))
+    CreateStackRequest.add_member(:application_settings, Shapes::ShapeRef.new(shape: ApplicationSettings, location_name: "ApplicationSettings"))
     CreateStackRequest.struct_class = Types::CreateStackRequest
 
     CreateStackResult.add_member(:stack, Shapes::ShapeRef.new(shape: Stack, location_name: "Stack"))
@@ -578,6 +591,7 @@ module Aws::AppStream
     Stack.add_member(:feedback_url, Shapes::ShapeRef.new(shape: FeedbackURL, location_name: "FeedbackURL"))
     Stack.add_member(:stack_errors, Shapes::ShapeRef.new(shape: StackErrors, location_name: "StackErrors"))
     Stack.add_member(:user_settings, Shapes::ShapeRef.new(shape: UserSettingList, location_name: "UserSettings"))
+    Stack.add_member(:application_settings, Shapes::ShapeRef.new(shape: ApplicationSettingsResponse, location_name: "ApplicationSettings"))
     Stack.struct_class = Types::Stack
 
     StackAttributes.member = Shapes::ShapeRef.new(shape: StackAttribute)
@@ -684,6 +698,7 @@ module Aws::AppStream
     UpdateStackRequest.add_member(:feedback_url, Shapes::ShapeRef.new(shape: FeedbackURL, location_name: "FeedbackURL"))
     UpdateStackRequest.add_member(:attributes_to_delete, Shapes::ShapeRef.new(shape: StackAttributes, location_name: "AttributesToDelete"))
     UpdateStackRequest.add_member(:user_settings, Shapes::ShapeRef.new(shape: UserSettingList, location_name: "UserSettings"))
+    UpdateStackRequest.add_member(:application_settings, Shapes::ShapeRef.new(shape: ApplicationSettings, location_name: "ApplicationSettings"))
     UpdateStackRequest.struct_class = Types::UpdateStackRequest
 
     UpdateStackResult.add_member(:stack, Shapes::ShapeRef.new(shape: Stack, location_name: "Stack"))
@@ -706,13 +721,16 @@ module Aws::AppStream
       api.version = "2016-12-01"
 
       api.metadata = {
+        "apiVersion" => "2016-12-01",
         "endpointPrefix" => "appstream2",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon AppStream",
+        "serviceId" => "AppStream",
         "signatureVersion" => "v4",
         "signingName" => "appstream",
         "targetPrefix" => "PhotonAdminProxyService",
+        "uid" => "appstream-2016-12-01",
       }
 
       api.add_operation(:associate_fleet, Seahorse::Model::Operation.new.tap do |o|

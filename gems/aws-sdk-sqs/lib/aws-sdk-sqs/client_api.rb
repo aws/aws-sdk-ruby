@@ -326,11 +326,14 @@ module Aws::SQS
       api.version = "2012-11-05"
 
       api.metadata = {
+        "apiVersion" => "2012-11-05",
         "endpointPrefix" => "sqs",
         "errorPrefix" => "AWS.SimpleQueueService.",
         "protocol" => "query",
+        "serviceAbbreviation" => "Amazon SQS",
         "serviceFullName" => "Amazon Simple Queue Service",
         "signatureVersion" => "v4",
+        "uid" => "sqs-2012-11-05",
         "xmlNamespace" => "http://queue.amazonaws.com/doc/2012-11-05/",
       }
 

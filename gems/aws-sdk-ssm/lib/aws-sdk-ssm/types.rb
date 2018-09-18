@@ -1167,7 +1167,48 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The filter value.
+    #   The filter value. Valid values for each filter key are as follows:
+    #
+    #   * InvokedAfter: A timestamp to limit your results. For example,
+    #     specify `2018-07-07T00:00:00Z` to see results occurring July 7,
+    #     2018, and later.
+    #
+    #   * InvokedBefore: A timestamp to limit your results. For example,
+    #     specify `2018-07-07T00:00:00Z` to see results before July 7, 2018.
+    #
+    #   * Status: Specify a valid command status to see a list of all
+    #     command executions with that status. Status values you can specify
+    #     include:
+    #
+    #     * Pending
+    #
+    #     * InProgress
+    #
+    #     * Success
+    #
+    #     * Cancelled
+    #
+    #     * Failed
+    #
+    #     * TimedOut
+    #
+    #     * Cancelling
+    #
+    #   * DocumentName: The name of the SSM document for which you want to
+    #     see command results.
+    #
+    #     For example, specify `AWS-RunPatchBaseline` to see command
+    #     executions that used this SSM document to perform security
+    #     patching operations on instances.
+    #
+    #   * ExecutionStage: An enum whose value can be either `Executing` or
+    #     `Complete`.
+    #
+    #     * Specify `Executing` to see a list of command executions that are
+    #       currently still running.
+    #
+    #     * Specify `Complete` to see a list of command exeuctions that have
+    #       already completed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CommandFilter AWS API Documentation
@@ -2024,7 +2065,7 @@ module Aws::SSM
     #       {
     #         content: "DocumentContent", # required
     #         name: "DocumentName", # required
-    #         document_type: "Command", # accepts Command, Policy, Automation
+    #         document_type: "Command", # accepts Command, Policy, Automation, Session
     #         document_format: "YAML", # accepts YAML, JSON
     #         target_type: "TargetType",
     #       }
@@ -3500,8 +3541,14 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] instance_information_filter_list
-    #   One or more filters. Use a filter to return a more specific list of
-    #   instances.
+    #   This is a legacy method. We recommend that you don't use this
+    #   method. Instead, use the InstanceInformationFilter action. The
+    #   `InstanceInformationFilter` action enables you to return instance
+    #   information by using tags that are specified as a key-value mapping.
+    #
+    #   If you do use this method, then you can't use the
+    #   `InstanceInformationFilter` action. Using this method and the
+    #   `InstanceInformationFilter` action causes an exception error.
     #   @return [Array<Types::InstanceInformationFilter>]
     #
     # @!attribute [rw] filters
@@ -4424,6 +4471,69 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeSessionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         state: "Active", # required, accepts Active, History
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         filters: [
+    #           {
+    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Target, Owner, Status
+    #             value: "SessionFilterValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] state
+    #   The session status to retrieve a list of sessions for. For example,
+    #   "active".
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters to limit the type of sessions returned by the
+    #   request.
+    #   @return [Array<Types::SessionFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeSessionsRequest AWS API Documentation
+    #
+    class DescribeSessionsRequest < Struct.new(
+      :state,
+      :max_results,
+      :next_token,
+      :filters)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sessions
+    #   A list of sessions meeting the request parameters.
+    #   @return [Array<Types::Session>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeSessionsResponse AWS API Documentation
+    #
+    class DescribeSessionsResponse < Struct.new(
+      :sessions,
+      :next_token)
+      include Aws::Structure
+    end
+
     # A default version of a document.
     #
     # @!attribute [rw] name
@@ -5079,6 +5189,41 @@ module Aws::SSM
       :standard_error_content,
       :standard_error_url,
       :cloud_watch_output_config)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetConnectionStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         target: "SessionTarget", # required
+    #       }
+    #
+    # @!attribute [rw] target
+    #   The ID of the instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetConnectionStatusRequest AWS API Documentation
+    #
+    class GetConnectionStatusRequest < Struct.new(
+      :target)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] target
+    #   The ID of the instance to check connection status.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the connection to the instance. For example,
+    #   'Connected' or 'Not Connected'.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetConnectionStatusResponse AWS API Documentation
+    #
+    class GetConnectionStatusResponse < Struct.new(
+      :target,
+      :status)
       include Aws::Structure
     end
 
@@ -6507,7 +6652,14 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Describes a filter for a specific list of instances.
+    # Describes a filter for a specific list of instances. You can filter
+    # instances information by using tags. You specify tags by using a
+    # key-value mapping.
+    #
+    # Use this action instead of the
+    # DescribeInstanceInformationRequest$InstanceInformationFilterList
+    # method. The `InstanceInformationFilterList` method is a legacy method
+    # and does not support tags.
     #
     # @note When making an API call, you may pass InstanceInformationFilter
     #   data as a hash:
@@ -10719,6 +10871,62 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ResumeSessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         session_id: "SessionId", # required
+    #       }
+    #
+    # @!attribute [rw] session_id
+    #   The ID of the disconnected session to resume.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResumeSessionRequest AWS API Documentation
+    #
+    class ResumeSessionRequest < Struct.new(
+      :session_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_id
+    #   The ID of the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_value
+    #   An encrypted token value containing session and caller information.
+    #   Used to authenticate the connection to the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_url
+    #   A URL back to SSM Agent on the instance that the Session Manager
+    #   client uses to send commands and receive output from the instance.
+    #   Format:
+    #   `wss://ssm-messages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)`.
+    #
+    #   **region** represents the Region identifier for an AWS Region
+    #   supported by AWS Systems Manager, such as `us-east-2` for the US
+    #   East (Ohio) Region. For a list of supported **region** values, see
+    #   the **Region** column in the [AWS Systems Manager table of regions
+    #   and endpoints][1] in the *AWS General Reference*.
+    #
+    #   **session-id** represents the ID of a Session Manager session, such
+    #   as `1a2b3c4dEXAMPLE`.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html#ssm_region
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResumeSessionResponse AWS API Documentation
+    #
+    class ResumeSessionResponse < Struct.new(
+      :session_id,
+      :token_value,
+      :stream_url)
+      include Aws::Structure
+    end
+
     # An Amazon S3 bucket where you want to store the results of this
     # request.
     #
@@ -11010,6 +11218,137 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # Information about a Session Manager connection to an instance.
+    #
+    # @!attribute [rw] session_id
+    #   The ID of the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The instance that the Session Manager session connected to.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the session. For example, "Connected" or
+    #   "Terminated".
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date
+    #   The date and time, in ISO-8601 Extended format, when the session
+    #   began.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   The date and time, in ISO-8601 Extended format, when the session was
+    #   terminated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] document_name
+    #   The name of the Session Manager SSM document used to define the
+    #   parameters and plugin settings for the session. For example,
+    #   `SSM-SessionManagerRunShell`.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   The ID of the AWS user account that started the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] details
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_url
+    #   Reserved for future use.
+    #   @return [Types::SessionManagerOutputUrl]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Session AWS API Documentation
+    #
+    class Session < Struct.new(
+      :session_id,
+      :target,
+      :status,
+      :start_date,
+      :end_date,
+      :document_name,
+      :owner,
+      :details,
+      :output_url)
+      include Aws::Structure
+    end
+
+    # Describes a filter for Session Manager information.
+    #
+    # @note When making an API call, you may pass SessionFilter
+    #   data as a hash:
+    #
+    #       {
+    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Target, Owner, Status
+    #         value: "SessionFilterValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The name of the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The filter value. Valid values for each filter key are as follows:
+    #
+    #   * InvokedAfter: Specify a timestamp to limit your results. For
+    #     example, specify 2018-08-29T00:00:00Z to see sessions that started
+    #     August 29, 2018, and later.
+    #
+    #   * InvokedBefore: Specify a timestamp to limit your results. For
+    #     example, specify 2018-08-29T00:00:00Z to see sessions that started
+    #     before August 29, 2018.
+    #
+    #   * Target: Specify an instance to which session connections have been
+    #     made.
+    #
+    #   * Owner: Specify an AWS user account to see a list of sessions
+    #     started by that user.
+    #
+    #   * Status: Specify a valid session status to see a list of all
+    #     sessions with that status. Status values you can specify include:
+    #
+    #     * Connected
+    #
+    #     * Connecting
+    #
+    #     * Disconnected
+    #
+    #     * Terminated
+    #
+    #     * Terminating
+    #
+    #     * Failed
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SessionFilter AWS API Documentation
+    #
+    class SessionFilter < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # Reserved for future use.
+    #
+    # @!attribute [rw] s3_output_url
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_output_url
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SessionManagerOutputUrl AWS API Documentation
+    #
+    class SessionManagerOutputUrl < Struct.new(
+      :s3_output_url,
+      :cloud_watch_output_url)
+      include Aws::Structure
+    end
+
     # The number of managed instances found for each patch severity level
     # defined in the request filter.
     #
@@ -11198,6 +11537,79 @@ module Aws::SSM
     #
     class StartAutomationExecutionResult < Struct.new(
       :automation_execution_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartSessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         target: "SessionTarget", # required
+    #         document_name: "DocumentARN",
+    #         parameters: {
+    #           "SessionManagerParameterName" => ["SessionManagerParameterValue"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] target
+    #   The instance to connect to for the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_name
+    #   The name of the SSM document to define the parameters and plugin
+    #   settings for the session. For example, `SSM-SessionManagerRunShell`.
+    #   If no document name is provided, a shell to the instance is launched
+    #   by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   Reserved for future use.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartSessionRequest AWS API Documentation
+    #
+    class StartSessionRequest < Struct.new(
+      :target,
+      :document_name,
+      :parameters)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_id
+    #   The ID of the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_value
+    #   An encrypted token value containing session and caller information.
+    #   Used to authenticate the connection to the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_url
+    #   A URL back to SSM Agent on the instance that the Session Manager
+    #   client uses to send commands and receive output from the instance.
+    #   Format:
+    #   `wss://ssm-messages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)`
+    #
+    #   **region** represents the Region identifier for an AWS Region
+    #   supported by AWS Systems Manager, such as `us-east-2` for the US
+    #   East (Ohio) Region. For a list of supported **region** values, see
+    #   the **Region** column in the [AWS Systems Manager table of regions
+    #   and endpoints][1] in the *AWS General Reference*.
+    #
+    #   **session-id** represents the ID of a Session Manager session, such
+    #   as `1a2b3c4dEXAMPLE`.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html#ssm_region
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartSessionResponse AWS API Documentation
+    #
+    class StartSessionResponse < Struct.new(
+      :session_id,
+      :token_value,
+      :stream_url)
       include Aws::Structure
     end
 
@@ -11455,6 +11867,35 @@ module Aws::SSM
     class Target < Struct.new(
       :key,
       :values)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TerminateSessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         session_id: "SessionId", # required
+    #       }
+    #
+    # @!attribute [rw] session_id
+    #   The ID of the session to terminate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/TerminateSessionRequest AWS API Documentation
+    #
+    class TerminateSessionRequest < Struct.new(
+      :session_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_id
+    #   The ID of the session that has been terminated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/TerminateSessionResponse AWS API Documentation
+    #
+    class TerminateSessionResponse < Struct.new(
+      :session_id)
       include Aws::Structure
     end
 

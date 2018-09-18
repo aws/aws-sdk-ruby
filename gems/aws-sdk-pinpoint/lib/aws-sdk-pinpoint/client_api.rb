@@ -1932,12 +1932,15 @@ module Aws::Pinpoint
       api.version = "2016-12-01"
 
       api.metadata = {
+        "apiVersion" => "2016-12-01",
         "endpointPrefix" => "pinpoint",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "serviceFullName" => "Amazon Pinpoint",
+        "serviceId" => "Pinpoint",
         "signatureVersion" => "v4",
         "signingName" => "mobiletargeting",
+        "uid" => "pinpoint-2016-12-01",
       }
 
       api.add_operation(:create_app, Seahorse::Model::Operation.new.tap do |o|

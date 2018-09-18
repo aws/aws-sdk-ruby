@@ -22,6 +22,7 @@ module Aws::CloudWatch
     AlarmNames = Shapes::ListShape.new(name: 'AlarmNames')
     AwsQueryErrorMessage = Shapes::StringShape.new(name: 'AwsQueryErrorMessage')
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
+    Counts = Shapes::ListShape.new(name: 'Counts')
     DashboardArn = Shapes::StringShape.new(name: 'DashboardArn')
     DashboardBody = Shapes::StringShape.new(name: 'DashboardBody')
     DashboardEntries = Shapes::ListShape.new(name: 'DashboardEntries')
@@ -135,6 +136,7 @@ module Aws::CloudWatch
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Timestamps = Shapes::ListShape.new(name: 'Timestamps')
     TreatMissingData = Shapes::StringShape.new(name: 'TreatMissingData')
+    Values = Shapes::ListShape.new(name: 'Values')
 
     AlarmHistoryItem.add_member(:alarm_name, Shapes::ShapeRef.new(shape: AlarmName, location_name: "AlarmName"))
     AlarmHistoryItem.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
@@ -146,6 +148,8 @@ module Aws::CloudWatch
     AlarmHistoryItems.member = Shapes::ShapeRef.new(shape: AlarmHistoryItem)
 
     AlarmNames.member = Shapes::ShapeRef.new(shape: AlarmName)
+
+    Counts.member = Shapes::ShapeRef.new(shape: DatapointValue)
 
     DashboardEntries.member = Shapes::ShapeRef.new(shape: DashboardEntry)
 
@@ -363,6 +367,8 @@ module Aws::CloudWatch
     MetricDatum.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
     MetricDatum.add_member(:value, Shapes::ShapeRef.new(shape: DatapointValue, location_name: "Value"))
     MetricDatum.add_member(:statistic_values, Shapes::ShapeRef.new(shape: StatisticSet, location_name: "StatisticValues"))
+    MetricDatum.add_member(:values, Shapes::ShapeRef.new(shape: Values, location_name: "Values"))
+    MetricDatum.add_member(:counts, Shapes::ShapeRef.new(shape: Counts, location_name: "Counts"))
     MetricDatum.add_member(:unit, Shapes::ShapeRef.new(shape: StandardUnit, location_name: "Unit"))
     MetricDatum.add_member(:storage_resolution, Shapes::ShapeRef.new(shape: StorageResolution, location_name: "StorageResolution"))
     MetricDatum.struct_class = Types::MetricDatum
@@ -425,6 +431,8 @@ module Aws::CloudWatch
 
     Timestamps.member = Shapes::ShapeRef.new(shape: Timestamp)
 
+    Values.member = Shapes::ShapeRef.new(shape: DatapointValue)
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -432,10 +440,14 @@ module Aws::CloudWatch
       api.version = "2010-08-01"
 
       api.metadata = {
+        "apiVersion" => "2010-08-01",
         "endpointPrefix" => "monitoring",
         "protocol" => "query",
+        "serviceAbbreviation" => "CloudWatch",
         "serviceFullName" => "Amazon CloudWatch",
+        "serviceId" => "CloudWatch",
         "signatureVersion" => "v4",
+        "uid" => "monitoring-2010-08-01",
         "xmlNamespace" => "http://monitoring.amazonaws.com/doc/2010-08-01/",
       }
 

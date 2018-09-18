@@ -786,10 +786,14 @@ module Aws::ElasticLoadBalancingV2
       api.version = "2015-12-01"
 
       api.metadata = {
+        "apiVersion" => "2015-12-01",
         "endpointPrefix" => "elasticloadbalancing",
         "protocol" => "query",
+        "serviceAbbreviation" => "Elastic Load Balancing v2",
         "serviceFullName" => "Elastic Load Balancing",
+        "serviceId" => "Elastic Load Balancing v2",
         "signatureVersion" => "v4",
+        "uid" => "elasticloadbalancingv2-2015-12-01",
         "xmlNamespace" => "http://elasticloadbalancing.amazonaws.com/doc/2015-12-01/",
       }
 

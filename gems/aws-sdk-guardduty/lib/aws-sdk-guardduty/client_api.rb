@@ -792,12 +792,15 @@ module Aws::GuardDuty
       api.version = "2017-11-28"
 
       api.metadata = {
+        "apiVersion" => "2017-11-28",
         "endpointPrefix" => "guardduty",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "serviceFullName" => "Amazon GuardDuty",
+        "serviceId" => "GuardDuty",
         "signatureVersion" => "v4",
         "signingName" => "guardduty",
+        "uid" => "guardduty-2017-11-28",
       }
 
       api.add_operation(:accept_invitation, Seahorse::Model::Operation.new.tap do |o|

@@ -49,12 +49,15 @@ module Aws::SageMakerRuntime
       api.version = "2017-05-13"
 
       api.metadata = {
+        "apiVersion" => "2017-05-13",
         "endpointPrefix" => "runtime.sagemaker",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "serviceFullName" => "Amazon SageMaker Runtime",
+        "serviceId" => "SageMaker Runtime",
         "signatureVersion" => "v4",
         "signingName" => "sagemaker",
+        "uid" => "runtime.sagemaker-2017-05-13",
       }
 
       api.add_operation(:invoke_endpoint, Seahorse::Model::Operation.new.tap do |o|

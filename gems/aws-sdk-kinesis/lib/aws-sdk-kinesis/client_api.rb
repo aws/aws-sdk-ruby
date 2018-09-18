@@ -443,13 +443,17 @@ module Aws::Kinesis
       api.version = "2013-12-02"
 
       api.metadata = {
+        "apiVersion" => "2013-12-02",
         "endpointPrefix" => "kinesis",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "protocolSettings" => {"h2"=>"eventstream"},
+        "serviceAbbreviation" => "Kinesis",
         "serviceFullName" => "Amazon Kinesis",
+        "serviceId" => "Kinesis",
         "signatureVersion" => "v4",
         "targetPrefix" => "Kinesis_20131202",
+        "uid" => "kinesis-2013-12-02",
       }
 
       api.add_operation(:add_tags_to_stream, Seahorse::Model::Operation.new.tap do |o|

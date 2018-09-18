@@ -298,12 +298,16 @@ module Aws::CloudHSM
       api.version = "2014-05-30"
 
       api.metadata = {
+        "apiVersion" => "2014-05-30",
         "endpointPrefix" => "cloudhsm",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "CloudHSM",
         "serviceFullName" => "Amazon CloudHSM",
+        "serviceId" => "CloudHSM",
         "signatureVersion" => "v4",
         "targetPrefix" => "CloudHsmFrontendService",
+        "uid" => "cloudhsm-2014-05-30",
       }
 
       api.add_operation(:add_tags_to_resource, Seahorse::Model::Operation.new.tap do |o|

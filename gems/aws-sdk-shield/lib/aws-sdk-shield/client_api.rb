@@ -321,12 +321,15 @@ module Aws::Shield
       api.version = "2016-06-02"
 
       api.metadata = {
+        "apiVersion" => "2016-06-02",
         "endpointPrefix" => "shield",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "AWS Shield",
         "serviceFullName" => "AWS Shield",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSShield_20160616",
+        "uid" => "shield-2016-06-02",
       }
 
       api.add_operation(:associate_drt_log_bucket, Seahorse::Model::Operation.new.tap do |o|

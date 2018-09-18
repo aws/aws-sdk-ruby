@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/ec2.rb'
 require 'aws-sdk-ec2/plugins/copy_encrypted_snapshot.rb'
@@ -49,6 +51,8 @@ module Aws::EC2
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::EC2)
     add_plugin(Aws::EC2::Plugins::CopyEncryptedSnapshot)
@@ -95,6 +99,22 @@ module Aws::EC2
     #   * `~/.aws/config`
     #
     # @option options [String] :access_key_id
+    #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
     #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
@@ -448,6 +468,9 @@ module Aws::EC2
     #   The number of Dedicated Hosts to allocate to your account with these
     #   parameters.
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the Dedicated Host during creation.
+    #
     # @return [Types::AllocateHostsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AllocateHostsResult#host_ids #host_ids} => Array&lt;String&gt;
@@ -460,6 +483,17 @@ module Aws::EC2
     #     client_token: "String",
     #     instance_type: "String", # required
     #     quantity: 1, # required
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2345,6 +2379,11 @@ module Aws::EC2
     # current region. You specify the destination region by using its
     # endpoint when making the request.
     #
+    # Copies of encrypted backing snapshots for the AMI are encrypted.
+    # Copies of unencrypted backing snapshots remain unencrypted, unless you
+    # set `Encrypted` during the copy operation. You cannot create an
+    # unencrypted copy of an encrypted backing snapshot.
+    #
     # For more information about the prerequisites and limits when copying
     # an AMI, see [Copying an AMI][1] in the *Amazon Elastic Compute Cloud
     # User Guide*.
@@ -2367,10 +2406,12 @@ module Aws::EC2
     #
     # @option params [Boolean] :encrypted
     #   Specifies whether the destination snapshots of the copied image should
-    #   be encrypted. The default CMK for EBS is used unless a non-default AWS
-    #   Key Management Service (AWS KMS) CMK is specified with `KmsKeyId`. For
-    #   more information, see [Amazon EBS Encryption][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   be encrypted. You can encrypt a copy of an unencrypted snapshot, but
+    #   you cannot create an unencrypted copy of an encrypted snapshot. The
+    #   default CMK for EBS is used unless you specify a non-default AWS Key
+    #   Management Service (AWS KMS) CMK using `KmsKeyId`. For more
+    #   information, see [Amazon EBS Encryption][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
     #
     #
     #
@@ -2512,12 +2553,12 @@ module Aws::EC2
     #
     # @option params [Boolean] :encrypted
     #   Specifies whether the destination snapshot should be encrypted. You
-    #   can encrypt a copy of an unencrypted snapshot using this flag, but you
-    #   cannot use it to create an unencrypted copy from an encrypted
-    #   snapshot. Your default CMK for EBS is used unless a non-default AWS
-    #   Key Management Service (AWS KMS) CMK is specified with `KmsKeyId`. For
-    #   more information, see [Amazon EBS Encryption][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   can encrypt a copy of an unencrypted snapshot, but you cannot use it
+    #   to create an unencrypted copy of an encrypted snapshot. Your default
+    #   CMK for EBS is used unless you specify a non-default AWS Key
+    #   Management Service (AWS KMS) CMK using `KmsKeyId`. For more
+    #   information, see [Amazon EBS Encryption][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
     #
     #
     #
@@ -2829,7 +2870,7 @@ module Aws::EC2
     # in the *Amazon Virtual Private Cloud User Guide*. You cannot specify
     # the components of the default VPC yourself.
     #
-    # iIf you deleted your previous default VPC, you can create a default
+    # If you deleted your previous default VPC, you can create a default
     # VPC. You cannot have more than one default VPC per Region.
     #
     # If your account supports EC2-Classic, you cannot use this action to
@@ -3214,7 +3255,7 @@ module Aws::EC2
     #     replace_unhealthy_instances: false,
     #     tag_specifications: [
     #       {
-    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -3523,13 +3564,13 @@ module Aws::EC2
     #         device_name: "String",
     #         virtual_name: "String",
     #         ebs: {
-    #           encrypted: false,
     #           delete_on_termination: false,
     #           iops: 1,
-    #           kms_key_id: "String",
     #           snapshot_id: "String",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #           encrypted: false,
+    #           kms_key_id: "String",
     #         },
     #         no_device: "String",
     #       },
@@ -3903,7 +3944,7 @@ module Aws::EC2
     #       user_data: "String",
     #       tag_specifications: [
     #         {
-    #           resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #           resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
     #           tags: [
     #             {
     #               key: "String",
@@ -4128,7 +4169,7 @@ module Aws::EC2
     #       user_data: "String",
     #       tag_specifications: [
     #         {
-    #           resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #           resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
     #           tags: [
     #             {
     #               key: "String",
@@ -4220,7 +4261,7 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.instance_initiated_shutdown_behavior #=> String, one of "stop", "terminate"
     #   resp.launch_template_version.launch_template_data.user_data #=> String
     #   resp.launch_template_version.launch_template_data.tag_specifications #=> Array
-    #   resp.launch_template_version.launch_template_data.tag_specifications[0].resource_type #=> String, one of "customer-gateway", "dhcp-options", "image", "instance", "internet-gateway", "network-acl", "network-interface", "reserved-instances", "route-table", "snapshot", "spot-instances-request", "subnet", "security-group", "volume", "vpc", "vpn-connection", "vpn-gateway"
+    #   resp.launch_template_version.launch_template_data.tag_specifications[0].resource_type #=> String, one of "customer-gateway", "dedicated-host", "dhcp-options", "image", "instance", "internet-gateway", "network-acl", "network-interface", "reserved-instances", "route-table", "snapshot", "spot-instances-request", "subnet", "security-group", "volume", "vpc", "vpn-connection", "vpn-gateway"
     #   resp.launch_template_version.launch_template_data.tag_specifications[0].tags #=> Array
     #   resp.launch_template_version.launch_template_data.tag_specifications[0].tags[0].key #=> String
     #   resp.launch_template_version.launch_template_data.tag_specifications[0].tags[0].value #=> String
@@ -5409,7 +5450,7 @@ module Aws::EC2
     #     volume_id: "String", # required
     #     tag_specifications: [
     #       {
-    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -5919,7 +5960,7 @@ module Aws::EC2
     #     dry_run: false,
     #     tag_specifications: [
     #       {
-    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -6163,7 +6204,7 @@ module Aws::EC2
     #   attributes to `true`\: `enableDnsHostnames` and `enableDnsSupport`.
     #   Use ModifyVpcAttribute to set the VPC attributes.
     #
-    #   Default: `true`
+    #   Default: `false`
     #
     # @return [Types::CreateVpcEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9818,7 +9859,7 @@ module Aws::EC2
     # including offerings that may not match the instance family and region
     # of your Dedicated Hosts. When purchasing an offering, ensure that the
     # instance family and Region of the offering matches that of the
-    # Dedicated Hosts with which it is to be associated . For more
+    # Dedicated Hosts with which it is to be associated. For more
     # information about supported instance types, see [Dedicated Hosts
     # Overview][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
@@ -9925,7 +9966,7 @@ module Aws::EC2
     #   The maximum number of results to return for the request in a single
     #   page. The remaining results can be seen by sending another request
     #   with the returned `nextToken` value. This value can be between 5 and
-    #   500.If `maxResults` is given a larger value than 500, you receive an
+    #   500. If `maxResults` is given a larger value than 500, you receive an
     #   error.
     #
     # @option params [String] :next_token
@@ -10365,13 +10406,13 @@ module Aws::EC2
     #   resp.block_device_mappings #=> Array
     #   resp.block_device_mappings[0].device_name #=> String
     #   resp.block_device_mappings[0].virtual_name #=> String
-    #   resp.block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.block_device_mappings[0].ebs.delete_on_termination #=> Boolean
     #   resp.block_device_mappings[0].ebs.iops #=> Integer
-    #   resp.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.block_device_mappings[0].ebs.encrypted #=> Boolean
+    #   resp.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.block_device_mappings[0].no_device #=> String
     #   resp.image_id #=> String
     #   resp.launch_permissions #=> Array
@@ -10597,13 +10638,13 @@ module Aws::EC2
     #   resp.images[0].block_device_mappings #=> Array
     #   resp.images[0].block_device_mappings[0].device_name #=> String
     #   resp.images[0].block_device_mappings[0].virtual_name #=> String
-    #   resp.images[0].block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.images[0].block_device_mappings[0].ebs.delete_on_termination #=> Boolean
     #   resp.images[0].block_device_mappings[0].ebs.iops #=> Integer
-    #   resp.images[0].block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.images[0].block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.images[0].block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.images[0].block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.images[0].block_device_mappings[0].ebs.encrypted #=> Boolean
+    #   resp.images[0].block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.images[0].block_device_mappings[0].no_device #=> String
     #   resp.images[0].description #=> String
     #   resp.images[0].ena_support #=> Boolean
@@ -10929,15 +10970,20 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the credit option for CPU usage of one or more of your T2
-    # instances. The credit options are `standard` and `unlimited`.
+    # Describes the credit option for CPU usage of one or more of your T2 or
+    # T3 instances. The credit options are `standard` and `unlimited`.
     #
-    # If you do not specify an instance ID, Amazon EC2 returns only the T2
-    # instances with the `unlimited` credit option. If you specify one or
-    # more instance IDs, Amazon EC2 returns the credit option (`standard` or
-    # `unlimited`) of those instances. If you specify an instance ID that is
-    # not valid, such as an instance that is not a T2 instance, an error is
-    # returned.
+    # If you do not specify an instance ID, Amazon EC2 returns T2 and T3
+    # instances with the `unlimited` credit option, as well as instances
+    # that were previously configured as T2 or T3 with the `unlimited`
+    # credit option. For example, if you resize a T2 instance, while it is
+    # configured as `unlimited`, to an M4 instance, Amazon EC2 returns the
+    # M4 instance.
+    #
+    # If you specify one or more instance IDs, Amazon EC2 returns the credit
+    # option (`standard` or `unlimited`) of those instances. If you specify
+    # an instance ID that is not valid, such as an instance that is not a T2
+    # or T3 instance, an error is returned.
     #
     # Recently terminated instances might appear in the returned results.
     # This interval is usually less than one hour.
@@ -10947,12 +10993,12 @@ module Aws::EC2
     # instance IDs at all, the call fails. If you specify only instance IDs
     # in an unaffected zone, the call works normally.
     #
-    # For more information, see [T2 Instances][1] in the *Amazon Elastic
-    # Compute Cloud User Guide*.
+    # For more information, see [Burstable Performance Instances][1] in the
+    # *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html
+    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -12091,7 +12137,7 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.instance_initiated_shutdown_behavior #=> String, one of "stop", "terminate"
     #   resp.launch_template_versions[0].launch_template_data.user_data #=> String
     #   resp.launch_template_versions[0].launch_template_data.tag_specifications #=> Array
-    #   resp.launch_template_versions[0].launch_template_data.tag_specifications[0].resource_type #=> String, one of "customer-gateway", "dhcp-options", "image", "instance", "internet-gateway", "network-acl", "network-interface", "reserved-instances", "route-table", "snapshot", "spot-instances-request", "subnet", "security-group", "volume", "vpc", "vpn-connection", "vpn-gateway"
+    #   resp.launch_template_versions[0].launch_template_data.tag_specifications[0].resource_type #=> String, one of "customer-gateway", "dedicated-host", "dhcp-options", "image", "instance", "internet-gateway", "network-acl", "network-interface", "reserved-instances", "route-table", "snapshot", "spot-instances-request", "subnet", "security-group", "volume", "vpc", "vpn-connection", "vpn-gateway"
     #   resp.launch_template_versions[0].launch_template_data.tag_specifications[0].tags #=> Array
     #   resp.launch_template_versions[0].launch_template_data.tag_specifications[0].tags[0].key #=> String
     #   resp.launch_template_versions[0].launch_template_data.tag_specifications[0].tags[0].value #=> String
@@ -12472,9 +12518,6 @@ module Aws::EC2
     #
     #   * `entry.cidr` - The IPv4 CIDR range specified in the entry.
     #
-    #   * `entry.egress` - Indicates whether the entry applies to egress
-    #     traffic.
-    #
     #   * `entry.icmp.code` - The ICMP code specified in the entry, if any.
     #
     #   * `entry.icmp.type` - The ICMP type specified in the entry, if any.
@@ -12494,7 +12537,7 @@ module Aws::EC2
     #     \| `deny`).
     #
     #   * `entry.rule-number` - The number of an entry (in other words, rule)
-    #     in the ACL's set of entries.
+    #     in the set of ACL entries.
     #
     #   * `network-acl-id` - The ID of the network ACL.
     #
@@ -12949,9 +12992,18 @@ module Aws::EC2
     #
     #   Default: Describes all your network interfaces.
     #
+    # @option params [String] :next_token
+    #   The token to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. The request
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
     # @return [Types::DescribeNetworkInterfacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeNetworkInterfacesResult#network_interfaces #network_interfaces} => Array&lt;Types::NetworkInterface&gt;
+    #   * {Types::DescribeNetworkInterfacesResult#next_token #next_token} => String
     #
     #
     # @example Example: To describe a network interface
@@ -13029,6 +13081,8 @@ module Aws::EC2
     #     ],
     #     dry_run: false,
     #     network_interface_ids: ["String"],
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -13077,6 +13131,7 @@ module Aws::EC2
     #   resp.network_interfaces[0].tag_set[0].key #=> String
     #   resp.network_interfaces[0].tag_set[0].value #=> String
     #   resp.network_interfaces[0].vpc_id #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfaces AWS API Documentation
     #
@@ -14449,10 +14504,10 @@ module Aws::EC2
     # in this request.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the operation,
+    #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
-    #   DryRunOperation. Otherwise, it is UnauthorizedOperation.
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, Array<String>] :group_id
     #   One or more security group IDs in your account.
@@ -15434,13 +15489,13 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings #=> Array
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].device_name #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].virtual_name #=> String
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.delete_on_termination #=> Boolean
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.iops #=> Integer
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.encrypted #=> Boolean
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].no_device #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].ebs_optimized #=> Boolean
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].iam_instance_profile.arn #=> String
@@ -15476,7 +15531,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].user_data #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].weighted_capacity #=> Float
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].tag_specifications #=> Array
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].tag_specifications[0].resource_type #=> String, one of "customer-gateway", "dhcp-options", "image", "instance", "internet-gateway", "network-acl", "network-interface", "reserved-instances", "route-table", "snapshot", "spot-instances-request", "subnet", "security-group", "volume", "vpc", "vpn-connection", "vpn-gateway"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].tag_specifications[0].resource_type #=> String, one of "customer-gateway", "dedicated-host", "dhcp-options", "image", "instance", "internet-gateway", "network-acl", "network-interface", "reserved-instances", "route-table", "snapshot", "spot-instances-request", "subnet", "security-group", "volume", "vpc", "vpn-connection", "vpn-gateway"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].tag_specifications[0].tags #=> Array
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].tag_specifications[0].tags[0].key #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].tag_specifications[0].tags[0].value #=> String
@@ -15750,13 +15805,13 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings #=> Array
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].device_name #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].virtual_name #=> String
-    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.delete_on_termination #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.iops #=> Integer
-    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.encrypted #=> Boolean
+    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].no_device #=> String
     #   resp.spot_instance_requests[0].launch_specification.ebs_optimized #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.iam_instance_profile.arn #=> String
@@ -15967,10 +16022,10 @@ module Aws::EC2
     # VPC for which the VPC peering connection has been deleted.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the operation,
+    #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
-    #   DryRunOperation. Otherwise, it is UnauthorizedOperation.
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. The request
@@ -16210,16 +16265,20 @@ module Aws::EC2
     #
     #   * `key` - The tag key.
     #
-    #   * `resource-id` - The resource ID.
+    #   * `resource-id` - The ID of the resource.
     #
     #   * `resource-type` - The resource type (`customer-gateway` \|
-    #     `dhcp-options` \| `elastic-ip` \| `fleet` \| `fpga-image` \| `image`
-    #     \| `instance` \| `internet-gateway` \| `launch-template` \|
-    #     `natgateway` \| `network-acl` \| `network-interface` \|
-    #     `reserved-instances` \| `route-table` \| `security-group` \|
-    #     `snapshot` \| `spot-instances-request` \| `subnet` \| `volume` \|
-    #     `vpc` \| `vpc-peering-connection` \| `vpn-connection` \|
-    #     `vpn-gateway`).
+    #     `dedicated-host` \| `dhcp-options` \| `elastic-ip` \| `fleet` \|
+    #     `fpga-image` \| `image` \| `instance` \| `internet-gateway` \|
+    #     `launch-template` \| `natgateway` \| `network-acl` \|
+    #     `network-interface` \| `reserved-instances` \| `route-table` \|
+    #     `security-group` \| `snapshot` \| `spot-instances-request` \|
+    #     `subnet` \| `volume` \| `vpc` \| `vpc-peering-connection` \|
+    #     `vpn-connection` \| `vpn-gateway`).
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of the tag. For
+    #     example, specify "tag:Owner" for the filter name and "TeamA" for
+    #     the filter value to find resources with the tag "Owner=TeamA".
     #
     #   * `value` - The tag value.
     #
@@ -16290,7 +16349,7 @@ module Aws::EC2
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].resource_id #=> String
-    #   resp.tags[0].resource_type #=> String, one of "customer-gateway", "dhcp-options", "image", "instance", "internet-gateway", "network-acl", "network-interface", "reserved-instances", "route-table", "snapshot", "spot-instances-request", "subnet", "security-group", "volume", "vpc", "vpn-connection", "vpn-gateway"
+    #   resp.tags[0].resource_type #=> String, one of "customer-gateway", "dedicated-host", "dhcp-options", "image", "instance", "internet-gateway", "network-acl", "network-interface", "reserved-instances", "route-table", "snapshot", "spot-instances-request", "subnet", "security-group", "volume", "vpc", "vpn-connection", "vpn-gateway"
     #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTags AWS API Documentation
@@ -19128,7 +19187,7 @@ module Aws::EC2
     #   resp.launch_template_data.instance_initiated_shutdown_behavior #=> String, one of "stop", "terminate"
     #   resp.launch_template_data.user_data #=> String
     #   resp.launch_template_data.tag_specifications #=> Array
-    #   resp.launch_template_data.tag_specifications[0].resource_type #=> String, one of "customer-gateway", "dhcp-options", "image", "instance", "internet-gateway", "network-acl", "network-interface", "reserved-instances", "route-table", "snapshot", "spot-instances-request", "subnet", "security-group", "volume", "vpc", "vpn-connection", "vpn-gateway"
+    #   resp.launch_template_data.tag_specifications[0].resource_type #=> String, one of "customer-gateway", "dedicated-host", "dhcp-options", "image", "instance", "internet-gateway", "network-acl", "network-interface", "reserved-instances", "route-table", "snapshot", "spot-instances-request", "subnet", "security-group", "volume", "vpc", "vpn-connection", "vpn-gateway"
     #   resp.launch_template_data.tag_specifications[0].tags #=> Array
     #   resp.launch_template_data.tag_specifications[0].tags[0].key #=> String
     #   resp.launch_template_data.tag_specifications[0].tags[0].value #=> String
@@ -19935,7 +19994,7 @@ module Aws::EC2
     # tenancy of `host` but without a specific host ID are placed onto any
     # available Dedicated Host in your account that has auto-placement
     # enabled. When auto-placement is disabled, you need to provide a host
-    # ID ito have the instance launch onto a specific host. If no host ID is
+    # ID to have the instance launch onto a specific host. If no host ID is
     # provided, the instance is launched onto a suitable host with
     # auto-placement enabled.
     #
@@ -20463,15 +20522,15 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Modifies the credit option for CPU usage on a running or stopped T2
-    # instance. The credit options are `standard` and `unlimited`.
+    # Modifies the credit option for CPU usage on a running or stopped T2 or
+    # T3 instance. The credit options are `standard` and `unlimited`.
     #
-    # For more information, see [T2 Instances][1] in the *Amazon Elastic
-    # Compute Cloud User Guide*.
+    # For more information, see [Burstable Performance Instances][1] in the
+    # *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html
+    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -21659,7 +21718,7 @@ module Aws::EC2
     #   The VPC peering connection options for the accepter VPC.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the operation,
+    #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -21733,7 +21792,7 @@ module Aws::EC2
     #   The instance tenancy attribute for the VPC.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the operation,
+    #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -22315,13 +22374,13 @@ module Aws::EC2
     #         device_name: "String",
     #         virtual_name: "String",
     #         ebs: {
-    #           encrypted: false,
     #           delete_on_termination: false,
     #           iops: 1,
-    #           kms_key_id: "String",
     #           snapshot_id: "String",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #           encrypted: false,
+    #           kms_key_id: "String",
     #         },
     #         no_device: "String",
     #       },
@@ -22508,8 +22567,8 @@ module Aws::EC2
     # released. On-Demand billing is stopped and the host goes into
     # `released` state. The host ID of Dedicated Hosts that have been
     # released can no longer be specified in another request, for example,
-    # ModifyHosts. You must stop or terminate all instances on a host before
-    # it can be released.
+    # to modify the host. You must stop or terminate all instances on a host
+    # before it can be released.
     #
     # When Dedicated Hosts are released, it may take some time for them to
     # stop counting toward your limit and you may receive capacity errors
@@ -23224,13 +23283,13 @@ module Aws::EC2
     #               device_name: "String",
     #               virtual_name: "String",
     #               ebs: {
-    #                 encrypted: false,
     #                 delete_on_termination: false,
     #                 iops: 1,
-    #                 kms_key_id: "String",
     #                 snapshot_id: "String",
     #                 volume_size: 1,
     #                 volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #                 encrypted: false,
+    #                 kms_key_id: "String",
     #               },
     #               no_device: "String",
     #             },
@@ -23284,7 +23343,7 @@ module Aws::EC2
     #           weighted_capacity: 1.0,
     #           tag_specifications: [
     #             {
-    #               resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #               resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
     #               tags: [
     #                 {
     #                   key: "String",
@@ -23531,13 +23590,13 @@ module Aws::EC2
     #           device_name: "String",
     #           virtual_name: "String",
     #           ebs: {
-    #             encrypted: false,
     #             delete_on_termination: false,
     #             iops: 1,
-    #             kms_key_id: "String",
     #             snapshot_id: "String",
     #             volume_size: 1,
     #             volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #             encrypted: false,
+    #             kms_key_id: "String",
     #           },
     #           no_device: "String",
     #         },
@@ -23614,13 +23673,13 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings #=> Array
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].device_name #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].virtual_name #=> String
-    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.delete_on_termination #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.iops #=> Integer
-    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.encrypted #=> Boolean
+    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].no_device #=> String
     #   resp.spot_instance_requests[0].launch_specification.ebs_optimized #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.iam_instance_profile.arn #=> String
@@ -24515,14 +24574,15 @@ module Aws::EC2
     # @option params [Types::CreditSpecificationRequest] :credit_specification
     #   The credit option for CPU usage of the instance. Valid values are
     #   `standard` and `unlimited`. To change this attribute after launch, use
-    #   ModifyInstanceCreditSpecification. For more information, see [T2
-    #   Instances][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   ModifyInstanceCreditSpecification. For more information, see
+    #   [Burstable Performance Instances][1] in the *Amazon Elastic Compute
+    #   Cloud User Guide*.
     #
-    #   Default: `standard`
+    #   Default: `standard` (T2 instances) or `unlimited` (T3 instances)
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
     #
     # @option params [Types::CpuOptionsRequest] :cpu_options
     #   The CPU options for the instance. For more information, see
@@ -24590,13 +24650,13 @@ module Aws::EC2
     #         device_name: "String",
     #         virtual_name: "String",
     #         ebs: {
-    #           encrypted: false,
     #           delete_on_termination: false,
     #           iops: 1,
-    #           kms_key_id: "String",
     #           snapshot_id: "String",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #           encrypted: false,
+    #           kms_key_id: "String",
     #         },
     #         no_device: "String",
     #       },
@@ -24672,7 +24732,7 @@ module Aws::EC2
     #     ],
     #     tag_specifications: [
     #       {
-    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -25697,7 +25757,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

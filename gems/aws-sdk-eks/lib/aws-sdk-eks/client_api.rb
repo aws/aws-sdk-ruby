@@ -102,12 +102,16 @@ module Aws::EKS
       api.version = "2017-11-01"
 
       api.metadata = {
+        "apiVersion" => "2017-11-01",
         "endpointPrefix" => "eks",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "serviceAbbreviation" => "Amazon EKS",
         "serviceFullName" => "Amazon Elastic Container Service for Kubernetes",
+        "serviceId" => "EKS",
         "signatureVersion" => "v4",
         "signingName" => "eks",
+        "uid" => "eks-2017-11-01",
       }
 
       api.add_operation(:create_cluster, Seahorse::Model::Operation.new.tap do |o|

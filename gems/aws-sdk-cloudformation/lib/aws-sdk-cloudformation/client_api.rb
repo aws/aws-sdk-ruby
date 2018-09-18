@@ -979,10 +979,13 @@ module Aws::CloudFormation
       api.version = "2010-05-15"
 
       api.metadata = {
+        "apiVersion" => "2010-05-15",
         "endpointPrefix" => "cloudformation",
         "protocol" => "query",
         "serviceFullName" => "AWS CloudFormation",
+        "serviceId" => "CloudFormation",
         "signatureVersion" => "v4",
+        "uid" => "cloudformation-2010-05-15",
         "xmlNamespace" => "http://cloudformation.amazonaws.com/doc/2010-05-15/",
       }
 

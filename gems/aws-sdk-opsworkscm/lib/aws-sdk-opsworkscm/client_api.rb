@@ -297,13 +297,17 @@ module Aws::OpsWorksCM
       api.version = "2016-11-01"
 
       api.metadata = {
+        "apiVersion" => "2016-11-01",
         "endpointPrefix" => "opsworks-cm",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "OpsWorksCM",
         "serviceFullName" => "AWS OpsWorks for Chef Automate",
+        "serviceId" => "OpsWorksCM",
         "signatureVersion" => "v4",
         "signingName" => "opsworks-cm",
         "targetPrefix" => "OpsWorksCM_V2016_11_01",
+        "uid" => "opsworkscm-2016-11-01",
       }
 
       api.add_operation(:associate_node, Seahorse::Model::Operation.new.tap do |o|

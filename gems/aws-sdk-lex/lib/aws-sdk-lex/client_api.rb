@@ -125,12 +125,15 @@ module Aws::Lex
       api.version = "2016-11-28"
 
       api.metadata = {
+        "apiVersion" => "2016-11-28",
         "endpointPrefix" => "runtime.lex",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "serviceFullName" => "Amazon Lex Runtime Service",
+        "serviceId" => "Lex Runtime Service",
         "signatureVersion" => "v4",
         "signingName" => "lex",
+        "uid" => "runtime.lex-2016-11-28",
       }
 
       api.add_operation(:post_content, Seahorse::Model::Operation.new.tap do |o|

@@ -202,11 +202,15 @@ module Aws::ResourceGroups
       api.version = "2017-11-27"
 
       api.metadata = {
+        "apiVersion" => "2017-11-27",
         "endpointPrefix" => "resource-groups",
         "protocol" => "rest-json",
+        "serviceAbbreviation" => "Resource Groups",
         "serviceFullName" => "AWS Resource Groups",
+        "serviceId" => "Resource Groups",
         "signatureVersion" => "v4",
         "signingName" => "resource-groups",
+        "uid" => "resource-groups-2017-11-27",
       }
 
       api.add_operation(:create_group, Seahorse::Model::Operation.new.tap do |o|

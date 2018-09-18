@@ -1214,12 +1214,16 @@ module Aws::WAFRegional
       api.version = "2016-11-28"
 
       api.metadata = {
+        "apiVersion" => "2016-11-28",
         "endpointPrefix" => "waf-regional",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "WAF Regional",
         "serviceFullName" => "AWS WAF Regional",
+        "serviceId" => "WAF Regional",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSWAF_Regional_20161128",
+        "uid" => "waf-regional-2016-11-28",
       }
 
       api.add_operation(:associate_web_acl, Seahorse::Model::Operation.new.tap do |o|

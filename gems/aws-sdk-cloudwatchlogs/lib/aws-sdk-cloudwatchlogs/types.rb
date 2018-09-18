@@ -906,6 +906,7 @@ module Aws::CloudWatchLogs
     #       {
     #         log_group_name: "LogGroupName", # required
     #         log_stream_names: ["LogStreamName"],
+    #         log_stream_name_prefix: "LogStreamName",
     #         start_time: 1,
     #         end_time: 1,
     #         filter_pattern: "FilterPattern",
@@ -915,12 +916,27 @@ module Aws::CloudWatchLogs
     #       }
     #
     # @!attribute [rw] log_group_name
-    #   The name of the log group.
+    #   The name of the log group to search.
     #   @return [String]
     #
     # @!attribute [rw] log_stream_names
-    #   Optional list of log stream names.
+    #   Filters the results to only logs from the log streams in this list.
+    #
+    #   If you specify a value for both `logStreamNamePrefix` and
+    #   `logStreamNames`, but the value for `logStreamNamePrefix` does not
+    #   match any log stream names specified in `logStreamNames`, the action
+    #   returns an `InvalidParameterException` error.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] log_stream_name_prefix
+    #   Filters the results to include only events from log streams that
+    #   have names starting with this prefix.
+    #
+    #   If you specify a value for both `logStreamNamePrefix` and
+    #   `logStreamNames`, but the value for `logStreamNamePrefix` does not
+    #   match any log stream names specified in `logStreamNames`, the action
+    #   returns an `InvalidParameterException` error.
+    #   @return [String]
     #
     # @!attribute [rw] start_time
     #   The start of the time range, expressed as the number of milliseconds
@@ -935,8 +951,14 @@ module Aws::CloudWatchLogs
     #   @return [Integer]
     #
     # @!attribute [rw] filter_pattern
-    #   The filter pattern to use. If not provided, all the events are
-    #   matched.
+    #   The filter pattern to use. For more information, see [Filter and
+    #   Pattern Syntax][1].
+    #
+    #   If not provided, all the events are matched.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -963,6 +985,7 @@ module Aws::CloudWatchLogs
     class FilterLogEventsRequest < Struct.new(
       :log_group_name,
       :log_stream_names,
+      :log_stream_name_prefix,
       :start_time,
       :end_time,
       :filter_pattern,

@@ -355,12 +355,14 @@ module Aws::DataPipeline
       api.version = "2012-10-29"
 
       api.metadata = {
+        "apiVersion" => "2012-10-29",
         "endpointPrefix" => "datapipeline",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Data Pipeline",
         "signatureVersion" => "v4",
         "targetPrefix" => "DataPipeline",
+        "uid" => "datapipeline-2012-10-29",
       }
 
       api.add_operation(:activate_pipeline, Seahorse::Model::Operation.new.tap do |o|

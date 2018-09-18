@@ -504,12 +504,15 @@ module Aws::WorkSpaces
       api.version = "2015-04-08"
 
       api.metadata = {
+        "apiVersion" => "2015-04-08",
         "endpointPrefix" => "workspaces",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon WorkSpaces",
+        "serviceId" => "WorkSpaces",
         "signatureVersion" => "v4",
         "targetPrefix" => "WorkspacesService",
+        "uid" => "workspaces-2015-04-08",
       }
 
       api.add_operation(:associate_ip_groups, Seahorse::Model::Operation.new.tap do |o|

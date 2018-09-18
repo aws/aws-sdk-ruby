@@ -177,6 +177,8 @@ module Aws::ECS
     SubmitContainerStateChangeResponse = Shapes::StructureShape.new(name: 'SubmitContainerStateChangeResponse')
     SubmitTaskStateChangeRequest = Shapes::StructureShape.new(name: 'SubmitTaskStateChangeRequest')
     SubmitTaskStateChangeResponse = Shapes::StructureShape.new(name: 'SubmitTaskStateChangeResponse')
+    SystemControl = Shapes::StructureShape.new(name: 'SystemControl')
+    SystemControls = Shapes::ListShape.new(name: 'SystemControls')
     TargetNotFoundException = Shapes::StructureShape.new(name: 'TargetNotFoundException')
     TargetType = Shapes::StringShape.new(name: 'TargetType')
     Task = Shapes::StructureShape.new(name: 'Task')
@@ -290,10 +292,13 @@ module Aws::ECS
     ContainerDefinition.add_member(:dns_search_domains, Shapes::ShapeRef.new(shape: StringList, location_name: "dnsSearchDomains"))
     ContainerDefinition.add_member(:extra_hosts, Shapes::ShapeRef.new(shape: HostEntryList, location_name: "extraHosts"))
     ContainerDefinition.add_member(:docker_security_options, Shapes::ShapeRef.new(shape: StringList, location_name: "dockerSecurityOptions"))
+    ContainerDefinition.add_member(:interactive, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "interactive"))
+    ContainerDefinition.add_member(:pseudo_terminal, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "pseudoTerminal"))
     ContainerDefinition.add_member(:docker_labels, Shapes::ShapeRef.new(shape: DockerLabelsMap, location_name: "dockerLabels"))
     ContainerDefinition.add_member(:ulimits, Shapes::ShapeRef.new(shape: UlimitList, location_name: "ulimits"))
     ContainerDefinition.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LogConfiguration, location_name: "logConfiguration"))
     ContainerDefinition.add_member(:health_check, Shapes::ShapeRef.new(shape: HealthCheck, location_name: "healthCheck"))
+    ContainerDefinition.add_member(:system_controls, Shapes::ShapeRef.new(shape: SystemControls, location_name: "systemControls"))
     ContainerDefinition.struct_class = Types::ContainerDefinition
 
     ContainerDefinitions.member = Shapes::ShapeRef.new(shape: ContainerDefinition)
@@ -820,6 +825,12 @@ module Aws::ECS
     SubmitTaskStateChangeResponse.add_member(:acknowledgment, Shapes::ShapeRef.new(shape: String, location_name: "acknowledgment"))
     SubmitTaskStateChangeResponse.struct_class = Types::SubmitTaskStateChangeResponse
 
+    SystemControl.add_member(:namespace, Shapes::ShapeRef.new(shape: String, location_name: "namespace"))
+    SystemControl.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
+    SystemControl.struct_class = Types::SystemControl
+
+    SystemControls.member = Shapes::ShapeRef.new(shape: SystemControl)
+
     Task.add_member(:task_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskArn"))
     Task.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "clusterArn"))
     Task.add_member(:task_definition_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskDefinitionArn"))
@@ -948,12 +959,16 @@ module Aws::ECS
       api.version = "2014-11-13"
 
       api.metadata = {
+        "apiVersion" => "2014-11-13",
         "endpointPrefix" => "ecs",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "Amazon ECS",
         "serviceFullName" => "Amazon EC2 Container Service",
+        "serviceId" => "ECS",
         "signatureVersion" => "v4",
         "targetPrefix" => "AmazonEC2ContainerServiceV20141113",
+        "uid" => "ecs-2014-11-13",
       }
 
       api.add_operation(:create_cluster, Seahorse::Model::Operation.new.tap do |o|
