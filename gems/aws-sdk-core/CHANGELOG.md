@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Update `:response_target` plugin error handling
+
 3.25.0 (2018-08-29)
 ------------------
 
