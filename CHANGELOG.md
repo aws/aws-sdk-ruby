@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.132 (2018-09-18)
+------------------
+
 * Feature - Aws::ElasticsearchService - Updated the API, and documentation for Amazon Elasticsearch Service.
 
 * Feature - Aws::Rekognition - Updated the API, and documentation for Amazon Rekognition.
