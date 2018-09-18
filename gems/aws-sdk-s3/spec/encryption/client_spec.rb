@@ -271,14 +271,15 @@ module Aws
 
             it 'decrypts the object with response target under retry' do
               stub_encrypted_get_chunked
-              allow_any_instance_of(DecryptHandler).to receive(:attach_http_event_listeners).and_wrap_original do |m, *args|
-                m.call(*args)
-                context = args.first
+              allow_any_instance_of(DecryptHandler).to receive(:attach_http_event_listeners).and_wrap_original do |m, context|
+                m.call(context)
                 context.http_response.on_data do |chunk|
                   if context.retries.zero?
                     context.retries = 1
+                    # 1.9.3 doesn't have Net:ReadTimeout Error
+                    # mocking with RuntimeError instead
                     context.http_response.signal_error(
-                      Seahorse::Client::NetworkingError.new(Net::ReadTimeout.new)
+                      Seahorse::Client::NetworkingError.new(RuntimeError.new)
                     )
                   end
                 end
