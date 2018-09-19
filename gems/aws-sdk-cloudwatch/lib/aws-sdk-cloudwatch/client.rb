@@ -898,6 +898,95 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # You can use the `GetMetricWidgetImage` API to retrieve a snapshot
+    # graph of one or more Amazon CloudWatch metrics as a bitmap image. You
+    # can then embed this image into your services and products, such as
+    # wiki pages, reports, and documents. You could also retrieve images
+    # regularly, such as every minute, and create your own custom live
+    # dashboard.
+    #
+    # The graph you retrieve can include all CloudWatch metric graph
+    # features, including metric math and horizontal and vertical
+    # annotations.
+    #
+    # There is a limit of 20 transactions per second for this API. Each
+    # `GetMetricWidgetImage` action has the following limits:
+    #
+    # * As many as 100 metrics in the graph.
+    #
+    # * Up to 100 KB uncompressed payload.
+    #
+    # @option params [required, String] :metric_widget
+    #   A JSON string that defines the bitmap graph to be retrieved. The
+    #   string includes the metrics to include in the graph, statistics,
+    #   annotations, title, axis limits, and so on. You can include only one
+    #   `MetricWidget` parameter in each `GetMetricWidgetImage` call.
+    #
+    #   For more information about the syntax of `MetricWidget` see
+    #   CloudWatch-Metric-Widget-Structure.
+    #
+    #   If any metric on the graph could not load all the requested data
+    #   points, an orange triangle with an exclamation point appears next to
+    #   the graph legend.
+    #
+    # @option params [String] :output_format
+    #   The format of the resulting image. Only PNG images are supported.
+    #
+    #   The default is `png`. If you specify `png`, the API returns an HTTP
+    #   response with the content-type set to `text/xml`. The image data is in
+    #   a `MetricWidgetImage` field. For example:
+    #
+    #   ` <GetMetricWidgetImageResponse
+    #   xmlns="http://monitoring.amazonaws.com/doc/2010-08-01/">`
+    #
+    #   ` <GetMetricWidgetImageResult>`
+    #
+    #   ` <MetricWidgetImage>`
+    #
+    #   ` iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQEAYAAAAip...`
+    #
+    #   ` </MetricWidgetImage>`
+    #
+    #   ` </GetMetricWidgetImageResult>`
+    #
+    #   ` <ResponseMetadata>`
+    #
+    #   ` <RequestId>6f0d4192-4d42-11e8-82c1-f539a07e0e3b</RequestId>`
+    #
+    #   ` </ResponseMetadata>`
+    #
+    #   `</GetMetricWidgetImageResponse>`
+    #
+    #   The `image/png` setting is intended only for custom HTTP requests. For
+    #   most use cases, and all actions using an AWS SDK, you should use
+    #   `png`. If you specify `image/png`, the HTTP response has a
+    #   content-type set to `image/png`, and the body of the response is a PNG
+    #   image.
+    #
+    # @return [Types::GetMetricWidgetImageOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMetricWidgetImageOutput#metric_widget_image #metric_widget_image} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_metric_widget_image({
+    #     metric_widget: "MetricWidget", # required
+    #     output_format: "OutputFormat",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.metric_widget_image #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricWidgetImage AWS API Documentation
+    #
+    # @overload get_metric_widget_image(params = {})
+    # @param [Hash] params ({})
+    def get_metric_widget_image(params = {}, options = {})
+      req = build_request(:get_metric_widget_image, params)
+      req.send_request(options)
+    end
+
     # Returns a list of the dashboards for your account. If you include
     # `DashboardNamePrefix`, only those dashboards with names starting with
     # the prefix are listed. Otherwise, all dashboards in your account are
@@ -1502,7 +1591,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

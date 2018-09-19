@@ -1116,6 +1116,17 @@ module Aws::S3
     # Deletes the replication configuration from the bucket.
     #
     # @option params [required, String] :bucket
+    #   Deletes the replication subresource associated with the specified
+    #   bucket.
+    #
+    #   <note markdown="1"> There is usually some time lag before replication configuration
+    #   deletion is fully propagated to all the Amazon S3 systems.
+    #
+    #    </note>
+    #
+    #   For more information, see [Cross-Region Replication (CRR)](
+    #   https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html) in the
+    #   Amazon S3 Developer Guide.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2230,7 +2241,15 @@ module Aws::S3
     #   resp.replication_configuration.role #=> String
     #   resp.replication_configuration.rules #=> Array
     #   resp.replication_configuration.rules[0].id #=> String
+    #   resp.replication_configuration.rules[0].priority #=> Integer
     #   resp.replication_configuration.rules[0].prefix #=> String
+    #   resp.replication_configuration.rules[0].filter.prefix #=> String
+    #   resp.replication_configuration.rules[0].filter.tag.key #=> String
+    #   resp.replication_configuration.rules[0].filter.tag.value #=> String
+    #   resp.replication_configuration.rules[0].filter.and.prefix #=> String
+    #   resp.replication_configuration.rules[0].filter.and.tags #=> Array
+    #   resp.replication_configuration.rules[0].filter.and.tags[0].key #=> String
+    #   resp.replication_configuration.rules[0].filter.and.tags[0].value #=> String
     #   resp.replication_configuration.rules[0].status #=> String, one of "Enabled", "Disabled"
     #   resp.replication_configuration.rules[0].source_selection_criteria.sse_kms_encrypted_objects.status #=> String, one of "Enabled", "Disabled"
     #   resp.replication_configuration.rules[0].destination.bucket #=> String
@@ -2238,6 +2257,7 @@ module Aws::S3
     #   resp.replication_configuration.rules[0].destination.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA"
     #   resp.replication_configuration.rules[0].destination.access_control_translation.owner #=> String, one of "Destination"
     #   resp.replication_configuration.rules[0].destination.encryption_configuration.replica_kms_key_id #=> String
+    #   resp.replication_configuration.rules[0].delete_marker_replication.status #=> String, one of "Enabled", "Disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketReplication AWS API Documentation
     #
@@ -4897,7 +4917,9 @@ module Aws::S3
     end
 
     # Creates a new replication configuration (or replaces an existing one,
-    # if present).
+    # if present). For more information, see [Cross-Region Replication
+    # (CRR)]( https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html) in
+    # the Amazon S3 Developer Guide.
     #
     # @option params [required, String] :bucket
     #
@@ -4941,7 +4963,24 @@ module Aws::S3
     #       rules: [ # required
     #         {
     #           id: "ID",
-    #           prefix: "Prefix", # required
+    #           priority: 1,
+    #           prefix: "Prefix",
+    #           filter: {
+    #             prefix: "Prefix",
+    #             tag: {
+    #               key: "ObjectKey", # required
+    #               value: "Value", # required
+    #             },
+    #             and: {
+    #               prefix: "Prefix",
+    #               tags: [
+    #                 {
+    #                   key: "ObjectKey", # required
+    #                   value: "Value", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
     #           status: "Enabled", # required, accepts Enabled, Disabled
     #           source_selection_criteria: {
     #             sse_kms_encrypted_objects: {
@@ -4958,6 +4997,9 @@ module Aws::S3
     #             encryption_configuration: {
     #               replica_kms_key_id: "ReplicaKmsKeyID",
     #             },
+    #           },
+    #           delete_marker_replication: {
+    #             status: "Enabled", # accepts Enabled, Disabled
     #           },
     #         },
     #       ],
@@ -6408,7 +6450,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

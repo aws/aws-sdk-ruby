@@ -254,7 +254,7 @@ module Aws::Organizations
     #   The email address of the owner to assign to the new member account.
     #   This email address must not already be associated with another AWS
     #   account. You must use a valid email address to complete account
-    #   creation. You cannot access the root user of the account or remove
+    #   creation. You can't access the root user of the account or remove
     #   an account that was created with an invalid email address.
     #   @return [String]
     #
@@ -265,13 +265,13 @@ module Aws::Organizations
     # @!attribute [rw] role_name
     #   (Optional)
     #
-    #   The name of an IAM role that Organizations automatically
+    #   The name of an IAM role that AWS Organizations automatically
     #   preconfigures in the new member account. This role trusts the master
     #   account, allowing users in the master account to assume the role, as
     #   permitted by the master account administrator. The role has
     #   administrator permissions in the new member account.
     #
-    #   If you do not specify this parameter, the role name defaults to
+    #   If you don't specify this parameter, the role name defaults to
     #   `OrganizationAccountAccessRole`.
     #
     #   For more information about how to use this role to access the member
@@ -295,12 +295,12 @@ module Aws::Organizations
     # @!attribute [rw] iam_user_access_to_billing
     #   If set to `ALLOW`, the new account enables IAM users to access
     #   account billing information *if* they have the required permissions.
-    #   If set to `DENY`, then only the root user of the new account can
-    #   access account billing information. For more information, see
-    #   [Activating Access to the Billing and Cost Management Console][1] in
-    #   the *AWS Billing and Cost Management User Guide*.
+    #   If set to `DENY`, only the root user of the new account can access
+    #   account billing information. For more information, see [Activating
+    #   Access to the Billing and Cost Management Console][1] in the *AWS
+    #   Billing and Cost Management User Guide*.
     #
-    #   If you do not specify this parameter, the value defaults to ALLOW,
+    #   If you don't specify this parameter, the value defaults to `ALLOW`,
     #   and IAM users and roles with the required permissions can access
     #   billing information for the new account.
     #
@@ -323,9 +323,16 @@ module Aws::Organizations
     #   A structure that contains details about the request to create an
     #   account. This response structure might not be fully populated when
     #   you first receive it because account creation is an asynchronous
-    #   process. You can pass the returned CreateAccountStatus ID as a
-    #   parameter to ` DescribeCreateAccountStatus ` to get status about the
-    #   progress of the request at later times.
+    #   process. You can pass the returned `CreateAccountStatus` ID as a
+    #   parameter to DescribeCreateAccountStatus to get status about the
+    #   progress of the request at later times. You can also check the AWS
+    #   CloudTrail log for the `CreateAccountResult` event. For more
+    #   information, see [Monitoring the Activity in Your Organization][1]
+    #   in the *AWS Organizations User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html
     #   @return [Types::CreateAccountStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccountResponse AWS API Documentation
@@ -1368,7 +1375,7 @@ module Aws::Organizations
     #   then you must specify the email address that is associated with the
     #   account.
     #
-    #   `--target Id=bill@example.com,Type=EMAIL`
+    #   `--target Id=diego@example.com,Type=EMAIL`
     #   @return [Types::HandshakeParty]
     #
     # @!attribute [rw] notes
@@ -1413,9 +1420,9 @@ module Aws::Organizations
     #
     # @!attribute [rw] max_results
     #   (Optional) Use this to limit the number of results you want included
-    #   in the response. If you do not include this parameter, it defaults
-    #   to a value that is specific to the operation. If additional items
-    #   exist beyond the maximum you specify, the `NextToken` response
+    #   per page in the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the maximum you specify, the `NextToken` response
     #   element is present and has a value (is not null). Include that value
     #   as the `NextToken` request parameter in the next call to the
     #   operation to get the next part of the results. Note that
@@ -1478,9 +1485,9 @@ module Aws::Organizations
     #
     # @!attribute [rw] max_results
     #   (Optional) Use this to limit the number of results you want included
-    #   in the response. If you do not include this parameter, it defaults
-    #   to a value that is specific to the operation. If additional items
-    #   exist beyond the maximum you specify, the `NextToken` response
+    #   per page in the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the maximum you specify, the `NextToken` response
     #   element is present and has a value (is not null). Include that value
     #   as the `NextToken` request parameter in the next call to the
     #   operation to get the next part of the results. Note that
@@ -1535,9 +1542,9 @@ module Aws::Organizations
     #
     # @!attribute [rw] max_results
     #   (Optional) Use this to limit the number of results you want included
-    #   in the response. If you do not include this parameter, it defaults
-    #   to a value that is specific to the operation. If additional items
-    #   exist beyond the maximum you specify, the `NextToken` response
+    #   per page in the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the maximum you specify, the `NextToken` response
     #   element is present and has a value (is not null). Include that value
     #   as the `NextToken` request parameter in the next call to the
     #   operation to get the next part of the results. Note that
@@ -1617,9 +1624,9 @@ module Aws::Organizations
     #
     # @!attribute [rw] max_results
     #   (Optional) Use this to limit the number of results you want included
-    #   in the response. If you do not include this parameter, it defaults
-    #   to a value that is specific to the operation. If additional items
-    #   exist beyond the maximum you specify, the `NextToken` response
+    #   per page in the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the maximum you specify, the `NextToken` response
     #   element is present and has a value (is not null). Include that value
     #   as the `NextToken` request parameter in the next call to the
     #   operation to get the next part of the results. Note that
@@ -1682,9 +1689,9 @@ module Aws::Organizations
     #
     # @!attribute [rw] max_results
     #   (Optional) Use this to limit the number of results you want included
-    #   in the response. If you do not include this parameter, it defaults
-    #   to a value that is specific to the operation. If additional items
-    #   exist beyond the maximum you specify, the `NextToken` response
+    #   per page in the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the maximum you specify, the `NextToken` response
     #   element is present and has a value (is not null). Include that value
     #   as the `NextToken` request parameter in the next call to the
     #   operation to get the next part of the results. Note that
@@ -1756,9 +1763,9 @@ module Aws::Organizations
     #
     # @!attribute [rw] max_results
     #   (Optional) Use this to limit the number of results you want included
-    #   in the response. If you do not include this parameter, it defaults
-    #   to a value that is specific to the operation. If additional items
-    #   exist beyond the maximum you specify, the `NextToken` response
+    #   per page in the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the maximum you specify, the `NextToken` response
     #   element is present and has a value (is not null). Include that value
     #   as the `NextToken` request parameter in the next call to the
     #   operation to get the next part of the results. Note that
@@ -1829,9 +1836,9 @@ module Aws::Organizations
     #
     # @!attribute [rw] max_results
     #   (Optional) Use this to limit the number of results you want included
-    #   in the response. If you do not include this parameter, it defaults
-    #   to a value that is specific to the operation. If additional items
-    #   exist beyond the maximum you specify, the `NextToken` response
+    #   per page in the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the maximum you specify, the `NextToken` response
     #   element is present and has a value (is not null). Include that value
     #   as the `NextToken` request parameter in the next call to the
     #   operation to get the next part of the results. Note that
@@ -1908,9 +1915,9 @@ module Aws::Organizations
     #
     # @!attribute [rw] max_results
     #   (Optional) Use this to limit the number of results you want included
-    #   in the response. If you do not include this parameter, it defaults
-    #   to a value that is specific to the operation. If additional items
-    #   exist beyond the maximum you specify, the `NextToken` response
+    #   per page in the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the maximum you specify, the `NextToken` response
     #   element is present and has a value (is not null). Include that value
     #   as the `NextToken` request parameter in the next call to the
     #   operation to get the next part of the results. Note that
@@ -1985,9 +1992,9 @@ module Aws::Organizations
     #
     # @!attribute [rw] max_results
     #   (Optional) Use this to limit the number of results you want included
-    #   in the response. If you do not include this parameter, it defaults
-    #   to a value that is specific to the operation. If additional items
-    #   exist beyond the maximum you specify, the `NextToken` response
+    #   per page in the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the maximum you specify, the `NextToken` response
     #   element is present and has a value (is not null). Include that value
     #   as the `NextToken` request parameter in the next call to the
     #   operation to get the next part of the results. Note that
@@ -2070,9 +2077,9 @@ module Aws::Organizations
     #
     # @!attribute [rw] max_results
     #   (Optional) Use this to limit the number of results you want included
-    #   in the response. If you do not include this parameter, it defaults
-    #   to a value that is specific to the operation. If additional items
-    #   exist beyond the maximum you specify, the `NextToken` response
+    #   per page in the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the maximum you specify, the `NextToken` response
     #   element is present and has a value (is not null). Include that value
     #   as the `NextToken` request parameter in the next call to the
     #   operation to get the next part of the results. Note that
@@ -2134,9 +2141,9 @@ module Aws::Organizations
     #
     # @!attribute [rw] max_results
     #   (Optional) Use this to limit the number of results you want included
-    #   in the response. If you do not include this parameter, it defaults
-    #   to a value that is specific to the operation. If additional items
-    #   exist beyond the maximum you specify, the `NextToken` response
+    #   per page in the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the maximum you specify, the `NextToken` response
     #   element is present and has a value (is not null). Include that value
     #   as the `NextToken` request parameter in the next call to the
     #   operation to get the next part of the results. Note that
@@ -2193,9 +2200,9 @@ module Aws::Organizations
     #
     # @!attribute [rw] max_results
     #   (Optional) Use this to limit the number of results you want included
-    #   in the response. If you do not include this parameter, it defaults
-    #   to a value that is specific to the operation. If additional items
-    #   exist beyond the maximum you specify, the `NextToken` response
+    #   per page in the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the maximum you specify, the `NextToken` response
     #   element is present and has a value (is not null). Include that value
     #   as the `NextToken` request parameter in the next call to the
     #   operation to get the next part of the results. Note that
@@ -2262,9 +2269,9 @@ module Aws::Organizations
     #
     # @!attribute [rw] max_results
     #   (Optional) Use this to limit the number of results you want included
-    #   in the response. If you do not include this parameter, it defaults
-    #   to a value that is specific to the operation. If additional items
-    #   exist beyond the maximum you specify, the `NextToken` response
+    #   per page in the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the maximum you specify, the `NextToken` response
     #   element is present and has a value (is not null). Include that value
     #   as the `NextToken` request parameter in the next call to the
     #   operation to get the next part of the results. Note that

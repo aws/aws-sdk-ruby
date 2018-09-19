@@ -788,6 +788,82 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetMetricWidgetImageInput
+    #   data as a hash:
+    #
+    #       {
+    #         metric_widget: "MetricWidget", # required
+    #         output_format: "OutputFormat",
+    #       }
+    #
+    # @!attribute [rw] metric_widget
+    #   A JSON string that defines the bitmap graph to be retrieved. The
+    #   string includes the metrics to include in the graph, statistics,
+    #   annotations, title, axis limits, and so on. You can include only one
+    #   `MetricWidget` parameter in each `GetMetricWidgetImage` call.
+    #
+    #   For more information about the syntax of `MetricWidget` see
+    #   CloudWatch-Metric-Widget-Structure.
+    #
+    #   If any metric on the graph could not load all the requested data
+    #   points, an orange triangle with an exclamation point appears next to
+    #   the graph legend.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_format
+    #   The format of the resulting image. Only PNG images are supported.
+    #
+    #   The default is `png`. If you specify `png`, the API returns an HTTP
+    #   response with the content-type set to `text/xml`. The image data is
+    #   in a `MetricWidgetImage` field. For example:
+    #
+    #   ` <GetMetricWidgetImageResponse
+    #   xmlns="http://monitoring.amazonaws.com/doc/2010-08-01/">`
+    #
+    #   ` <GetMetricWidgetImageResult>`
+    #
+    #   ` <MetricWidgetImage>`
+    #
+    #   ` iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQEAYAAAAip...`
+    #
+    #   ` </MetricWidgetImage>`
+    #
+    #   ` </GetMetricWidgetImageResult>`
+    #
+    #   ` <ResponseMetadata>`
+    #
+    #   ` <RequestId>6f0d4192-4d42-11e8-82c1-f539a07e0e3b</RequestId>`
+    #
+    #   ` </ResponseMetadata>`
+    #
+    #   `</GetMetricWidgetImageResponse>`
+    #
+    #   The `image/png` setting is intended only for custom HTTP requests.
+    #   For most use cases, and all actions using an AWS SDK, you should use
+    #   `png`. If you specify `image/png`, the HTTP response has a
+    #   content-type set to `image/png`, and the body of the response is a
+    #   PNG image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricWidgetImageInput AWS API Documentation
+    #
+    class GetMetricWidgetImageInput < Struct.new(
+      :metric_widget,
+      :output_format)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_widget_image
+    #   The image of the graph, in the output format specified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricWidgetImageOutput AWS API Documentation
+    #
+    class GetMetricWidgetImageOutput < Struct.new(
+      :metric_widget_image)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListDashboardsInput
     #   data as a hash:
     #
