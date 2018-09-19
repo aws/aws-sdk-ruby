@@ -5,7 +5,6 @@ module Seahorse
       @plugins = PluginList.new([
         Plugins::Endpoint,
         Plugins::H2,
-        Plugins::RaiseResponseErrors,
         Plugins::ResponseTarget
       ])
 
@@ -20,6 +19,10 @@ module Seahorse
       # rename?
       def close_connection
         @connection.close!
+      end
+
+      def connection_errors
+        @connection.errors
       end
 
     end

@@ -29,6 +29,8 @@ module Seahorse
           @h2_client = HTTP2::Client.new(
             settings_max_concurrent_streams: max_concurrent_streams
           )
+          @chunk_size = options[:read_chunk_size] || CHUNKSIZE
+          @errors = []
           @status = :ready
         end
 
@@ -38,10 +40,14 @@ module Seahorse
 
         alias ssl_verify_peer? ssl_verify_peer
 
+        attr_reader :errors
+
         def new_stream
-          # TODO, force limit here?
-          # TODO rescue, new stream failed?
-          @h2_client.new_stream
+          begin
+            @h2_client.new_stream
+          rescue *STREAM_ERRORS => error
+            raise Http2StreamInitializeError.new(error)
+          end
         end
 
         def connect(endpoint)
@@ -49,7 +55,7 @@ module Seahorse
             @socket = _build_tcp_over_tls(endpoint) 
             @socket.connect
             unless @socket.alpn_protocol == 'h2'
-              # TODO Error
+              raise Http2NotSupportedError.new
             end
             _register_h2_callbacks
             @status = :active
@@ -60,17 +66,17 @@ module Seahorse
           return if @socket_thread
           @socket_thread = Thread.new do
             while !@socket.closed? && !@socket.eof? && @h2_client.active_stream_count > 0
-              data = @socket.read_nonblock(CHUNKSIZE)
               begin
+                data = @socket.read_nonblock(@chunk_size)
                 @h2_client << data
-                # TODO H2 errors
-              rescue => e
-                puts e.backtrace
-                puts "#{e.class} - closing socket"
+              rescue => error
+                self.track_error(error)
                 self.close!
               end
+              self.close! if @h2_client.active_stream_count.zero?
             end
           end
+          @socket_thread.abort_on_exception = true
         end
 
         def close!
@@ -80,6 +86,10 @@ module Seahorse
         end
 
         private
+
+        def track_error(error)
+          @errors << error
+        end
 
         def _register_h2_callbacks
           @h2_client.on(:frame) do |bytes|
@@ -93,8 +103,6 @@ module Seahorse
           socket = OpenSSL::SSL::SSLSocket.new(tcp, _ssl_context)
           socket.sync_close = true
           socket.hostname = endpoint.hostname
-          puts "socket ssl version #{socket.ssl_version}"
-          # TODO raise error if not tls
           socket
         end
 
@@ -106,17 +114,18 @@ module Seahorse
             ssl_ctx.ca_file = ssl_ca_bundle if ssl_ca_bundle
             ssl_ctx.ca_path = ssl_ca_directory if ssl_ca_directory
             ssl_ctx.cert_store = ssl_ca_store if ssl_ca_store
+            # TODO
+            # verify / raise error for tls version?
+            ssl_ctx.ssl_version = :TLSv1_2
           else
             ssl_ctx.verify_mode = OpenSSL::SSL::VERIFY_NONE
           end
           ssl_ctx.alpn_protocols = ['h2']
           ssl_ctx.alpn_select_cb = lambda do |protocols|
-            if protocols.include? 'h2'
-              'h2' 
-            else
-              # Server not supporting h2
-              # TODO, error handling / Warning?
+            unless protocols.include? 'h2'
+              raise Http2NotSupportedError.new
             end
+            'h2'
           end
           ssl_ctx
         end

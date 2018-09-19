@@ -1,21 +1,48 @@
+require 'http/2'
+
 module Seahorse
   module Client
     # @api private
     module H2
 
-      # TODO Doc
+      NETWORK_ERRORS = [
+        SocketError, EOFError, IOError, Timeout::Error,
+        Errno::ECONNABORTED, Errno::ECONNRESET, Errno::EPIPE,
+        Errno::EINVAL, Errno::ETIMEDOUT, OpenSSL::SSL::SSLError,
+        Errno::EHOSTUNREACH, Errno::ECONNREFUSED
+      ]
+
+      # does not exist in Ruby 1.9.3
+      if OpenSSL::SSL.const_defined?(:SSLErrorWaitReadable)
+        NETWORK_ERRORS << OpenSSL::SSL::SSLErrorWaitReadable
+      end
+
+      # @api private
+      DNS_ERROR_MESSAGES = [
+        'getaddrinfo: nodename nor servname provided, or not known', # MacOS
+        'getaddrinfo: Name or service not known' # GNU
+      ]
+
       class Handler < Client::Handler
 
-        #TODO errors handling
-        
         def call(context)
-          conn = context.client.connection
-          stream = conn.new_stream
+          stream = nil
+          begin
+            conn = context.client.connection
+            stream = conn.new_stream
 
-          conn.connect(context.http_request.endpoint)
-          register_callbacks(context.http_response, stream)
-          initialize_request(context.http_request, stream)
-          conn.start
+            conn.connect(context.http_request.endpoint)
+            register_callbacks(context.http_response, stream)
+            initialize_request(context.http_request, stream)
+            conn.start
+          rescue *NETWORK_ERRORS => error
+            # TODO reconsider H2 retry scenarios
+            error = NetworkingError.new(
+              error, error_message(context.http_request, error))
+            context.http_response.signal_error(error)
+          rescue => error
+            context.http_response.signal_error(error)
+          end
           AsyncResponse.new(context: context, stream: stream)
         end
 
@@ -36,8 +63,12 @@ module Seahorse
         end
 
         def initialize_request(req, stream)
-          stream.headers(h2_headers(req), end_stream: false)
-          stream.data(req.body.read, end_stream: true)
+          begin
+            stream.headers(h2_headers(req), end_stream: false)
+            stream.data(req.body.read, end_stream: true)
+          rescue => e
+            raise Http2InitialRequestError.new(e)
+          end
         end
 
         def h2_headers(req)
@@ -49,6 +80,15 @@ module Seahorse
             headers[key.downcase] = value
           end
           headers
+        end
+
+        def error_message(req, error)
+          if error.is_a?(SocketError) && DNS_ERROR_MESSAGES.include?(error.message)
+            host = req.endpoint.host
+            "unable to connect to `#{host}`; SocketError: #{error.message}"
+          else
+            error.message
+          end
         end
 
       end

@@ -53,15 +53,6 @@ module Seahorse
           end
         end
 
-        # TODO
-        def signal_h2_headers(status_code, headers)
-          @status_code = status_code
-          # after ruby 2.1
-          # array of pairs to hash
-          @headers = Headers.new(headers.to_h)
-          emit(:headers, @status_code, @headers)
-        end
-
         # @param [Integer] status_code
         # @param [Hash<String,String>] headers
         def signal_headers(status_code, headers)

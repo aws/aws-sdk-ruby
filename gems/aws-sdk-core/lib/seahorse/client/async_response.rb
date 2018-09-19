@@ -3,15 +3,17 @@ module Seahorse
     class AsyncResponse
 
       def initialize(options = {})
-        @error = options[:error]
-        @context = options[:context]
-        @response = Response.new(context: @context)
+        @response = Response.new(context: options[:context])
         @stream = options.delete(:stream)
       end
 
-      attr_reader :context
+      def context
+        @response.context
+      end
 
-      attr_accessor :error
+      def error
+        @response.error
+      end
 
       def on(range, &block)
         @response.on(range, &block)
@@ -24,13 +26,21 @@ module Seahorse
       end
 
       def wait
-        while !@stream.closed?; end
-        @response
+        if error
+          raise error
+        elsif @stream
+          while !@stream.closed?; end
+          @response
+        end
       end
 
       def join!
-        @stream.close
-        @response
+        if error
+          raise error
+        elsif @stream
+          @stream.close
+          @response
+        end
       end
 
     end

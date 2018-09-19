@@ -10,6 +10,8 @@ module Seahorse
 
         option(:connection_timeout, default: 60, doc_type: Integer, docstring: '')
 
+        option(:read_chunk_size, default: 1024, doc_type: Integer, docstring: '')
+
         # SSL Context
         option(:ssl_ca_bundle, default: nil, doc_type: String, docstring: '')
 

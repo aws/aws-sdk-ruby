@@ -51,7 +51,7 @@ module Aws::Test
       output_handler = params.delete(:output_event_stream_handler) || params.delete(:event_stream_handler)
       output_es_handler = _event_stream_handler(output_handler, EventStreams::BlobEventStream)
 
-      yield(output_es_handler) if block_given
+      yield(output_es_handler) if block_given?
 
       req = build_request(:get_blob_event_stream, params)
 
