@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.133 (2018-09-19)
+------------------
+
 * Feature - Aws::CloudWatch - Updated the API, and documentation for Amazon CloudWatch.
 
 * Feature - Aws::Organizations - Updated the API, and documentation for AWS Organizations.
