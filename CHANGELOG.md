@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.134 (2018-09-20)
+------------------
+
 * Feature - Aws::DirectoryService - Updated the API, documentation, and integration test for AWS Directory Service.
 
 * Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
