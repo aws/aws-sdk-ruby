@@ -389,8 +389,12 @@ module Aws::RDS
     SourceRegionList = Shapes::ListShape.new(name: 'SourceRegionList')
     SourceRegionMessage = Shapes::StructureShape.new(name: 'SourceRegionMessage')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
+    StartDBClusterMessage = Shapes::StructureShape.new(name: 'StartDBClusterMessage')
+    StartDBClusterResult = Shapes::StructureShape.new(name: 'StartDBClusterResult')
     StartDBInstanceMessage = Shapes::StructureShape.new(name: 'StartDBInstanceMessage')
     StartDBInstanceResult = Shapes::StructureShape.new(name: 'StartDBInstanceResult')
+    StopDBClusterMessage = Shapes::StructureShape.new(name: 'StopDBClusterMessage')
+    StopDBClusterResult = Shapes::StructureShape.new(name: 'StopDBClusterResult')
     StopDBInstanceMessage = Shapes::StructureShape.new(name: 'StopDBInstanceMessage')
     StopDBInstanceResult = Shapes::StructureShape.new(name: 'StopDBInstanceResult')
     StorageQuotaExceededFault = Shapes::StructureShape.new(name: 'StorageQuotaExceededFault')
@@ -2155,11 +2159,23 @@ module Aws::RDS
     SourceRegionMessage.add_member(:source_regions, Shapes::ShapeRef.new(shape: SourceRegionList, location_name: "SourceRegions"))
     SourceRegionMessage.struct_class = Types::SourceRegionMessage
 
+    StartDBClusterMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
+    StartDBClusterMessage.struct_class = Types::StartDBClusterMessage
+
+    StartDBClusterResult.add_member(:db_cluster, Shapes::ShapeRef.new(shape: DBCluster, location_name: "DBCluster"))
+    StartDBClusterResult.struct_class = Types::StartDBClusterResult
+
     StartDBInstanceMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
     StartDBInstanceMessage.struct_class = Types::StartDBInstanceMessage
 
     StartDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
     StartDBInstanceResult.struct_class = Types::StartDBInstanceResult
+
+    StopDBClusterMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
+    StopDBClusterMessage.struct_class = Types::StopDBClusterMessage
+
+    StopDBClusterResult.add_member(:db_cluster, Shapes::ShapeRef.new(shape: DBCluster, location_name: "DBCluster"))
+    StopDBClusterResult.struct_class = Types::StopDBClusterResult
 
     StopDBInstanceMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
     StopDBInstanceMessage.add_member(:db_snapshot_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBSnapshotIdentifier"))
@@ -2280,6 +2296,8 @@ module Aws::RDS
         o.input = Shapes::ShapeRef.new(shape: ApplyPendingMaintenanceActionMessage)
         o.output = Shapes::ShapeRef.new(shape: ApplyPendingMaintenanceActionResult)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
       end)
 
       api.add_operation(:authorize_db_security_group_ingress, Seahorse::Model::Operation.new.tap do |o|
@@ -3446,6 +3464,17 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBSecurityGroupStateFault)
       end)
 
+      api.add_operation(:start_db_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartDBCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartDBClusterMessage)
+        o.output = Shapes::ShapeRef.new(shape: StartDBClusterResult)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+      end)
+
       api.add_operation(:start_db_instance, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartDBInstance"
         o.http_method = "POST"
@@ -3463,6 +3492,17 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+      end)
+
+      api.add_operation(:stop_db_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopDBCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopDBClusterMessage)
+        o.output = Shapes::ShapeRef.new(shape: StopDBClusterResult)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
       end)
 
       api.add_operation(:stop_db_instance, Seahorse::Model::Operation.new.tap do |o|

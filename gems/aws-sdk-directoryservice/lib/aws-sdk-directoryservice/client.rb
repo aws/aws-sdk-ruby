@@ -621,6 +621,36 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
+    # Creates a subscription to forward real time Directory Service domain
+    # controller security logs to the specified CloudWatch log group in your
+    # AWS account.
+    #
+    # @option params [required, String] :directory_id
+    #   Identifier (ID) of the directory to which you want to subscribe and
+    #   receive real-time logs to your specified CloudWatch log group.
+    #
+    # @option params [required, String] :log_group_name
+    #   The name of the CloudWatch log group where the real-time domain
+    #   controller logs are forwarded.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_log_subscription({
+    #     directory_id: "DirectoryId", # required
+    #     log_group_name: "LogGroupName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateLogSubscription AWS API Documentation
+    #
+    # @overload create_log_subscription(params = {})
+    # @param [Hash] params ({})
+    def create_log_subscription(params = {}, options = {})
+      req = build_request(:create_log_subscription, params)
+      req.send_request(options)
+    end
+
     # Creates a Microsoft AD in the AWS cloud.
     #
     # Before you call *CreateMicrosoftAD*, ensure that all of the required
@@ -851,6 +881,29 @@ module Aws::DirectoryService
     # @param [Hash] params ({})
     def delete_directory(params = {}, options = {})
       req = build_request(:delete_directory, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified log subscription.
+    #
+    # @option params [required, String] :directory_id
+    #   Identifier (ID) of the directory whose log subscription you want to
+    #   delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_log_subscription({
+    #     directory_id: "DirectoryId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteLogSubscription AWS API Documentation
+    #
+    # @overload delete_log_subscription(params = {})
+    # @param [Hash] params ({})
+    def delete_log_subscription(params = {}, options = {})
+      req = build_request(:delete_log_subscription, params)
       req.send_request(options)
     end
 
@@ -1558,6 +1611,51 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
+    # Lists the active log subscriptions for the AWS account.
+    #
+    # @option params [String] :directory_id
+    #   If a *DirectoryID* is provided, lists only the log subscription
+    #   associated with that directory. If no *DirectoryId* is provided, lists
+    #   all log subscriptions associated with your AWS account. If there are
+    #   no log subscriptions for the AWS account or the directory, an empty
+    #   list will be returned.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of items returned.
+    #
+    # @return [Types::ListLogSubscriptionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLogSubscriptionsResult#log_subscriptions #log_subscriptions} => Array&lt;Types::LogSubscription&gt;
+    #   * {Types::ListLogSubscriptionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_log_subscriptions({
+    #     directory_id: "DirectoryId",
+    #     next_token: "NextToken",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.log_subscriptions #=> Array
+    #   resp.log_subscriptions[0].directory_id #=> String
+    #   resp.log_subscriptions[0].log_group_name #=> String
+    #   resp.log_subscriptions[0].subscription_created_date_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListLogSubscriptions AWS API Documentation
+    #
+    # @overload list_log_subscriptions(params = {})
+    # @param [Hash] params ({})
+    def list_log_subscriptions(params = {}, options = {})
+      req = build_request(:list_log_subscriptions, params)
+      req.send_request(options)
+    end
+
     # Lists all schema extensions applied to a Microsoft AD Directory.
     #
     # @option params [required, String] :directory_id
@@ -1988,7 +2086,7 @@ module Aws::DirectoryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directoryservice'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

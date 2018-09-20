@@ -48,6 +48,8 @@ module Aws::DirectoryService
     CreateConditionalForwarderResult = Shapes::StructureShape.new(name: 'CreateConditionalForwarderResult')
     CreateDirectoryRequest = Shapes::StructureShape.new(name: 'CreateDirectoryRequest')
     CreateDirectoryResult = Shapes::StructureShape.new(name: 'CreateDirectoryResult')
+    CreateLogSubscriptionRequest = Shapes::StructureShape.new(name: 'CreateLogSubscriptionRequest')
+    CreateLogSubscriptionResult = Shapes::StructureShape.new(name: 'CreateLogSubscriptionResult')
     CreateMicrosoftADRequest = Shapes::StructureShape.new(name: 'CreateMicrosoftADRequest')
     CreateMicrosoftADResult = Shapes::StructureShape.new(name: 'CreateMicrosoftADResult')
     CreateSnapshotBeforeSchemaExtension = Shapes::BooleanShape.new(name: 'CreateSnapshotBeforeSchemaExtension')
@@ -62,6 +64,8 @@ module Aws::DirectoryService
     DeleteConditionalForwarderResult = Shapes::StructureShape.new(name: 'DeleteConditionalForwarderResult')
     DeleteDirectoryRequest = Shapes::StructureShape.new(name: 'DeleteDirectoryRequest')
     DeleteDirectoryResult = Shapes::StructureShape.new(name: 'DeleteDirectoryResult')
+    DeleteLogSubscriptionRequest = Shapes::StructureShape.new(name: 'DeleteLogSubscriptionRequest')
+    DeleteLogSubscriptionResult = Shapes::StructureShape.new(name: 'DeleteLogSubscriptionResult')
     DeleteSnapshotRequest = Shapes::StructureShape.new(name: 'DeleteSnapshotRequest')
     DeleteSnapshotResult = Shapes::StructureShape.new(name: 'DeleteSnapshotResult')
     DeleteTrustRequest = Shapes::StructureShape.new(name: 'DeleteTrustRequest')
@@ -144,10 +148,15 @@ module Aws::DirectoryService
     Limit = Shapes::IntegerShape.new(name: 'Limit')
     ListIpRoutesRequest = Shapes::StructureShape.new(name: 'ListIpRoutesRequest')
     ListIpRoutesResult = Shapes::StructureShape.new(name: 'ListIpRoutesResult')
+    ListLogSubscriptionsRequest = Shapes::StructureShape.new(name: 'ListLogSubscriptionsRequest')
+    ListLogSubscriptionsResult = Shapes::StructureShape.new(name: 'ListLogSubscriptionsResult')
     ListSchemaExtensionsRequest = Shapes::StructureShape.new(name: 'ListSchemaExtensionsRequest')
     ListSchemaExtensionsResult = Shapes::StructureShape.new(name: 'ListSchemaExtensionsResult')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResult = Shapes::StructureShape.new(name: 'ListTagsForResourceResult')
+    LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
+    LogSubscription = Shapes::StructureShape.new(name: 'LogSubscription')
+    LogSubscriptions = Shapes::ListShape.new(name: 'LogSubscriptions')
     ManualSnapshotsLimitReached = Shapes::BooleanShape.new(name: 'ManualSnapshotsLimitReached')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OrganizationalUnitDN = Shapes::StringShape.new(name: 'OrganizationalUnitDN')
@@ -203,6 +212,7 @@ module Aws::DirectoryService
     StateLastUpdatedDateTime = Shapes::TimestampShape.new(name: 'StateLastUpdatedDateTime')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
+    SubscriptionCreatedDateTime = Shapes::TimestampShape.new(name: 'SubscriptionCreatedDateTime')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeys = Shapes::ListShape.new(name: 'TagKeys')
@@ -326,6 +336,12 @@ module Aws::DirectoryService
     CreateDirectoryResult.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
     CreateDirectoryResult.struct_class = Types::CreateDirectoryResult
 
+    CreateLogSubscriptionRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    CreateLogSubscriptionRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "LogGroupName"))
+    CreateLogSubscriptionRequest.struct_class = Types::CreateLogSubscriptionRequest
+
+    CreateLogSubscriptionResult.struct_class = Types::CreateLogSubscriptionResult
+
     CreateMicrosoftADRequest.add_member(:name, Shapes::ShapeRef.new(shape: DirectoryName, required: true, location_name: "Name"))
     CreateMicrosoftADRequest.add_member(:short_name, Shapes::ShapeRef.new(shape: DirectoryShortName, location_name: "ShortName"))
     CreateMicrosoftADRequest.add_member(:password, Shapes::ShapeRef.new(shape: Password, required: true, location_name: "Password"))
@@ -366,6 +382,11 @@ module Aws::DirectoryService
 
     DeleteDirectoryResult.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
     DeleteDirectoryResult.struct_class = Types::DeleteDirectoryResult
+
+    DeleteLogSubscriptionRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    DeleteLogSubscriptionRequest.struct_class = Types::DeleteLogSubscriptionRequest
+
+    DeleteLogSubscriptionResult.struct_class = Types::DeleteLogSubscriptionResult
 
     DeleteSnapshotRequest.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, required: true, location_name: "SnapshotId"))
     DeleteSnapshotRequest.struct_class = Types::DeleteSnapshotRequest
@@ -590,6 +611,15 @@ module Aws::DirectoryService
     ListIpRoutesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListIpRoutesResult.struct_class = Types::ListIpRoutesResult
 
+    ListLogSubscriptionsRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+    ListLogSubscriptionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListLogSubscriptionsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    ListLogSubscriptionsRequest.struct_class = Types::ListLogSubscriptionsRequest
+
+    ListLogSubscriptionsResult.add_member(:log_subscriptions, Shapes::ShapeRef.new(shape: LogSubscriptions, location_name: "LogSubscriptions"))
+    ListLogSubscriptionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListLogSubscriptionsResult.struct_class = Types::ListLogSubscriptionsResult
+
     ListSchemaExtensionsRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     ListSchemaExtensionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListSchemaExtensionsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
@@ -607,6 +637,13 @@ module Aws::DirectoryService
     ListTagsForResourceResult.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     ListTagsForResourceResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTagsForResourceResult.struct_class = Types::ListTagsForResourceResult
+
+    LogSubscription.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+    LogSubscription.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "LogGroupName"))
+    LogSubscription.add_member(:subscription_created_date_time, Shapes::ShapeRef.new(shape: SubscriptionCreatedDateTime, location_name: "SubscriptionCreatedDateTime"))
+    LogSubscription.struct_class = Types::LogSubscription
+
+    LogSubscriptions.member = Shapes::ShapeRef.new(shape: LogSubscription)
 
     RadiusSettings.add_member(:radius_servers, Shapes::ShapeRef.new(shape: Servers, location_name: "RadiusServers"))
     RadiusSettings.add_member(:radius_port, Shapes::ShapeRef.new(shape: PortNumber, location_name: "RadiusPort"))
@@ -868,6 +905,20 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
 
+      api.add_operation(:create_log_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLogSubscription"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateLogSubscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateLogSubscriptionResult)
+        o.errors << Shapes::ShapeRef.new(shape: EntityAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
       api.add_operation(:create_microsoft_ad, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateMicrosoftAD"
         o.http_method = "POST"
@@ -929,6 +980,18 @@ module Aws::DirectoryService
         o.input = Shapes::ShapeRef.new(shape: DeleteDirectoryRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteDirectoryResult)
         o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:delete_log_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteLogSubscription"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteLogSubscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteLogSubscriptionResult)
+        o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
@@ -1137,6 +1200,18 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:list_log_subscriptions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListLogSubscriptions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListLogSubscriptionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListLogSubscriptionsResult)
+        o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)

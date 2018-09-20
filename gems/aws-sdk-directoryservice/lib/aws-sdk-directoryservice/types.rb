@@ -552,6 +552,36 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateLogSubscriptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         log_group_name: "LogGroupName", # required
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   Identifier (ID) of the directory to which you want to subscribe and
+    #   receive real-time logs to your specified CloudWatch log group.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_name
+    #   The name of the CloudWatch log group where the real-time domain
+    #   controller logs are forwarded.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateLogSubscriptionRequest AWS API Documentation
+    #
+    class CreateLogSubscriptionRequest < Struct.new(
+      :directory_id,
+      :log_group_name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateLogSubscriptionResult AWS API Documentation
+    #
+    class CreateLogSubscriptionResult < Aws::EmptyStructure; end
+
     # Creates a Microsoft AD in the AWS cloud.
     #
     # @note When making an API call, you may pass CreateMicrosoftADRequest
@@ -808,6 +838,29 @@ module Aws::DirectoryService
       :directory_id)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteLogSubscriptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   Identifier (ID) of the directory whose log subscription you want to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteLogSubscriptionRequest AWS API Documentation
+    #
+    class DeleteLogSubscriptionRequest < Struct.new(
+      :directory_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteLogSubscriptionResult AWS API Documentation
+    #
+    class DeleteLogSubscriptionResult < Aws::EmptyStructure; end
 
     # Contains the inputs for the DeleteSnapshot operation.
     #
@@ -2028,6 +2081,57 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListLogSubscriptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId",
+    #         next_token: "NextToken",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   If a *DirectoryID* is provided, lists only the log subscription
+    #   associated with that directory. If no *DirectoryId* is provided,
+    #   lists all log subscriptions associated with your AWS account. If
+    #   there are no log subscriptions for the AWS account or the directory,
+    #   an empty list will be returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of items returned.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListLogSubscriptionsRequest AWS API Documentation
+    #
+    class ListLogSubscriptionsRequest < Struct.new(
+      :directory_id,
+      :next_token,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] log_subscriptions
+    #   A list of active LogSubscription objects for calling the AWS
+    #   account.
+    #   @return [Array<Types::LogSubscription>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListLogSubscriptionsResult AWS API Documentation
+    #
+    class ListLogSubscriptionsResult < Struct.new(
+      :log_subscriptions,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListSchemaExtensionsRequest
     #   data as a hash:
     #
@@ -2122,6 +2226,31 @@ module Aws::DirectoryService
     class ListTagsForResourceResult < Struct.new(
       :tags,
       :next_token)
+      include Aws::Structure
+    end
+
+    # Represents a log subscription, which tracks real-time data from a
+    # chosen log group to a specified destination.
+    #
+    # @!attribute [rw] directory_id
+    #   Identifier (ID) of the directory that you want to associate with the
+    #   log subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_name
+    #   The name of the log group.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_created_date_time
+    #   The date and time that the log subscription was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/LogSubscription AWS API Documentation
+    #
+    class LogSubscription < Struct.new(
+      :directory_id,
+      :log_group_name,
+      :subscription_created_date_time)
       include Aws::Structure
     end
 

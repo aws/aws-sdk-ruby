@@ -1741,8 +1741,8 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #
     # @option params [String] :engine_mode
-    #   The DB engine mode of the DB cluster, either `provisioned` or
-    #   `serverless`.
+    #   The DB engine mode of the DB cluster, either `provisioned`,
+    #   `serverless`, or `parallelquery`.
     #
     # @option params [Types::ScalingConfiguration] :scaling_configuration
     #   For DB clusters in `serverless` DB engine mode, the scaling properties
@@ -11909,8 +11909,8 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #
     # @option params [String] :engine_mode
-    #   The DB engine mode of the DB cluster, either `provisioned` or
-    #   `serverless`.
+    #   The DB engine mode of the DB cluster, either `provisioned`,
+    #   `serverless`, or `parallelquery`.
     #
     # @option params [Types::ScalingConfiguration] :scaling_configuration
     #   For DB clusters in `serverless` DB engine mode, the scaling properties
@@ -13947,14 +13947,110 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Starts a DB instance that was stopped using the AWS console, the
-    # stop-db-instance AWS CLI command, or the StopDBInstance action. For
-    # more information, see Stopping and Starting a DB instance in the AWS
-    # RDS user guide.
+    # Starts an Amazon Aurora DB cluster that was stopped using the AWS
+    # console, the stop-db-cluster AWS CLI command, or the StopDBCluster
+    # action.
     #
-    # <note markdown="1"> This command doesn't apply to Aurora MySQL and Aurora PostgreSQL.
+    # @option params [required, String] :db_cluster_identifier
+    #   The DB cluster identifier of the Amazon Aurora DB cluster to be
+    #   started. This parameter is stored as a lowercase string.
+    #
+    # @return [Types::StartDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_db_cluster({
+    #     db_cluster_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_cluster.allocated_storage #=> Integer
+    #   resp.db_cluster.availability_zones #=> Array
+    #   resp.db_cluster.availability_zones[0] #=> String
+    #   resp.db_cluster.backup_retention_period #=> Integer
+    #   resp.db_cluster.character_set_name #=> String
+    #   resp.db_cluster.database_name #=> String
+    #   resp.db_cluster.db_cluster_identifier #=> String
+    #   resp.db_cluster.db_cluster_parameter_group #=> String
+    #   resp.db_cluster.db_subnet_group #=> String
+    #   resp.db_cluster.status #=> String
+    #   resp.db_cluster.percent_progress #=> String
+    #   resp.db_cluster.earliest_restorable_time #=> Time
+    #   resp.db_cluster.endpoint #=> String
+    #   resp.db_cluster.reader_endpoint #=> String
+    #   resp.db_cluster.multi_az #=> Boolean
+    #   resp.db_cluster.engine #=> String
+    #   resp.db_cluster.engine_version #=> String
+    #   resp.db_cluster.latest_restorable_time #=> Time
+    #   resp.db_cluster.port #=> Integer
+    #   resp.db_cluster.master_username #=> String
+    #   resp.db_cluster.db_cluster_option_group_memberships #=> Array
+    #   resp.db_cluster.db_cluster_option_group_memberships[0].db_cluster_option_group_name #=> String
+    #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
+    #   resp.db_cluster.preferred_backup_window #=> String
+    #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.replication_source_identifier #=> String
+    #   resp.db_cluster.read_replica_identifiers #=> Array
+    #   resp.db_cluster.read_replica_identifiers[0] #=> String
+    #   resp.db_cluster.db_cluster_members #=> Array
+    #   resp.db_cluster.db_cluster_members[0].db_instance_identifier #=> String
+    #   resp.db_cluster.db_cluster_members[0].is_cluster_writer #=> Boolean
+    #   resp.db_cluster.db_cluster_members[0].db_cluster_parameter_group_status #=> String
+    #   resp.db_cluster.db_cluster_members[0].promotion_tier #=> Integer
+    #   resp.db_cluster.vpc_security_groups #=> Array
+    #   resp.db_cluster.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.db_cluster.vpc_security_groups[0].status #=> String
+    #   resp.db_cluster.hosted_zone_id #=> String
+    #   resp.db_cluster.storage_encrypted #=> Boolean
+    #   resp.db_cluster.kms_key_id #=> String
+    #   resp.db_cluster.db_cluster_resource_id #=> String
+    #   resp.db_cluster.db_cluster_arn #=> String
+    #   resp.db_cluster.associated_roles #=> Array
+    #   resp.db_cluster.associated_roles[0].role_arn #=> String
+    #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.associated_roles[0].feature_name #=> String
+    #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.clone_group_id #=> String
+    #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.earliest_backtrack_time #=> Time
+    #   resp.db_cluster.backtrack_window #=> Integer
+    #   resp.db_cluster.backtrack_consumed_change_records #=> Integer
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.capacity #=> Integer
+    #   resp.db_cluster.engine_mode #=> String
+    #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
+    #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBCluster AWS API Documentation
+    #
+    # @overload start_db_cluster(params = {})
+    # @param [Hash] params ({})
+    def start_db_cluster(params = {}, options = {})
+      req = build_request(:start_db_cluster, params)
+      req.send_request(options)
+    end
+
+    # Starts an Amazon RDS DB instance that was stopped using the AWS
+    # console, the stop-db-instance AWS CLI command, or the StopDBInstance
+    # action.
+    #
+    # For more information, see [ Starting an Amazon RDS DB Instance That
+    # Was Previously Stopped][1] in the *Amazon RDS User Guide.*
+    #
+    # <note markdown="1"> This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For
+    # Aurora DB clusters, use StartDBCluster instead.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StartInstance.html
     #
     # @option params [required, String] :db_instance_identifier
     #   The user-supplied instance identifier.
@@ -14085,16 +14181,113 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Stops a DB instance. When you stop a DB instance, Amazon RDS retains
-    # the DB instance's metadata, including its endpoint, DB parameter
-    # group, and option group membership. Amazon RDS also retains the
-    # transaction logs so you can do a point-in-time restore if necessary.
-    # For more information, see Stopping and Starting a DB instance in the
-    # AWS RDS user guide.
+    # Stops an Amazon Aurora DB cluster. When you stop a DB cluster, Aurora
+    # retains the DB cluster's metadata, including its endpoints and DB
+    # parameter groups. Aurora also retains the transaction logs so you can
+    # do a point-in-time restore if necessary.
     #
-    # <note markdown="1"> This command doesn't apply to Aurora MySQL and Aurora PostgreSQL.
+    # @option params [required, String] :db_cluster_identifier
+    #   The DB cluster identifier of the Amazon Aurora DB cluster to be
+    #   stopped. This parameter is stored as a lowercase string.
+    #
+    # @return [Types::StopDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_db_cluster({
+    #     db_cluster_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_cluster.allocated_storage #=> Integer
+    #   resp.db_cluster.availability_zones #=> Array
+    #   resp.db_cluster.availability_zones[0] #=> String
+    #   resp.db_cluster.backup_retention_period #=> Integer
+    #   resp.db_cluster.character_set_name #=> String
+    #   resp.db_cluster.database_name #=> String
+    #   resp.db_cluster.db_cluster_identifier #=> String
+    #   resp.db_cluster.db_cluster_parameter_group #=> String
+    #   resp.db_cluster.db_subnet_group #=> String
+    #   resp.db_cluster.status #=> String
+    #   resp.db_cluster.percent_progress #=> String
+    #   resp.db_cluster.earliest_restorable_time #=> Time
+    #   resp.db_cluster.endpoint #=> String
+    #   resp.db_cluster.reader_endpoint #=> String
+    #   resp.db_cluster.multi_az #=> Boolean
+    #   resp.db_cluster.engine #=> String
+    #   resp.db_cluster.engine_version #=> String
+    #   resp.db_cluster.latest_restorable_time #=> Time
+    #   resp.db_cluster.port #=> Integer
+    #   resp.db_cluster.master_username #=> String
+    #   resp.db_cluster.db_cluster_option_group_memberships #=> Array
+    #   resp.db_cluster.db_cluster_option_group_memberships[0].db_cluster_option_group_name #=> String
+    #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
+    #   resp.db_cluster.preferred_backup_window #=> String
+    #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.replication_source_identifier #=> String
+    #   resp.db_cluster.read_replica_identifiers #=> Array
+    #   resp.db_cluster.read_replica_identifiers[0] #=> String
+    #   resp.db_cluster.db_cluster_members #=> Array
+    #   resp.db_cluster.db_cluster_members[0].db_instance_identifier #=> String
+    #   resp.db_cluster.db_cluster_members[0].is_cluster_writer #=> Boolean
+    #   resp.db_cluster.db_cluster_members[0].db_cluster_parameter_group_status #=> String
+    #   resp.db_cluster.db_cluster_members[0].promotion_tier #=> Integer
+    #   resp.db_cluster.vpc_security_groups #=> Array
+    #   resp.db_cluster.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.db_cluster.vpc_security_groups[0].status #=> String
+    #   resp.db_cluster.hosted_zone_id #=> String
+    #   resp.db_cluster.storage_encrypted #=> Boolean
+    #   resp.db_cluster.kms_key_id #=> String
+    #   resp.db_cluster.db_cluster_resource_id #=> String
+    #   resp.db_cluster.db_cluster_arn #=> String
+    #   resp.db_cluster.associated_roles #=> Array
+    #   resp.db_cluster.associated_roles[0].role_arn #=> String
+    #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.associated_roles[0].feature_name #=> String
+    #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.clone_group_id #=> String
+    #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.earliest_backtrack_time #=> Time
+    #   resp.db_cluster.backtrack_window #=> Integer
+    #   resp.db_cluster.backtrack_consumed_change_records #=> Integer
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.capacity #=> Integer
+    #   resp.db_cluster.engine_mode #=> String
+    #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
+    #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster AWS API Documentation
+    #
+    # @overload stop_db_cluster(params = {})
+    # @param [Hash] params ({})
+    def stop_db_cluster(params = {}, options = {})
+      req = build_request(:stop_db_cluster, params)
+      req.send_request(options)
+    end
+
+    # Stops an Amazon RDS DB instance. When you stop a DB instance, Amazon
+    # RDS retains the DB instance's metadata, including its endpoint, DB
+    # parameter group, and option group membership. Amazon RDS also retains
+    # the transaction logs so you can do a point-in-time restore if
+    # necessary.
+    #
+    # For more information, see [ Stopping an Amazon RDS DB Instance
+    # Temporarily][1] in the *Amazon RDS User Guide.*
+    #
+    # <note markdown="1"> This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For
+    # Aurora clusters, use StopDBCluster instead.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StopInstance.html
     #
     # @option params [required, String] :db_instance_identifier
     #   The user-supplied instance identifier.
@@ -14243,7 +14436,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

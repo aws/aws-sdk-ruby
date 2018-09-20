@@ -1516,8 +1516,8 @@ module Aws::RDS
     #   @return [Array<String>]
     #
     # @!attribute [rw] engine_mode
-    #   The DB engine mode of the DB cluster, either `provisioned` or
-    #   `serverless`.
+    #   The DB engine mode of the DB cluster, either `provisioned`,
+    #   `serverless`, or `parallelquery`.
     #   @return [String]
     #
     # @!attribute [rw] scaling_configuration
@@ -1650,10 +1650,10 @@ module Aws::RDS
     end
 
     # @!attribute [rw] db_cluster
-    #   Contains the details of an Amazon RDS DB cluster.
+    #   Contains the details of an Amazon Aurora DB cluster.
     #
     #   This data type is used as a response element in the
-    #   DescribeDBClusters action.
+    #   DescribeDBClusters, StopDBCluster, and StartDBCluster actions.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterResult AWS API Documentation
@@ -3592,10 +3592,10 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # Contains the details of an Amazon RDS DB cluster.
+    # Contains the details of an Amazon Aurora DB cluster.
     #
-    # This data type is used as a response element in the DescribeDBClusters
-    # action.
+    # This data type is used as a response element in the
+    # DescribeDBClusters, StopDBCluster, and StartDBCluster actions.
     #
     # @!attribute [rw] allocated_storage
     #   For all database engines except Amazon Aurora, `AllocatedStorage`
@@ -3814,8 +3814,8 @@ module Aws::RDS
     #   @return [Integer]
     #
     # @!attribute [rw] engine_mode
-    #   The DB engine mode of the DB cluster, either `provisioned` or
-    #   `serverless`.
+    #   The DB engine mode of the DB cluster, either `provisioned`,
+    #   `serverless`, or `parallelquery`.
     #   @return [String]
     #
     # @!attribute [rw] scaling_configuration_info
@@ -5533,10 +5533,10 @@ module Aws::RDS
     end
 
     # @!attribute [rw] db_cluster
-    #   Contains the details of an Amazon RDS DB cluster.
+    #   Contains the details of an Amazon Aurora DB cluster.
     #
     #   This data type is used as a response element in the
-    #   DescribeDBClusters action.
+    #   DescribeDBClusters, StopDBCluster, and StartDBCluster actions.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterResult AWS API Documentation
@@ -8381,10 +8381,10 @@ module Aws::RDS
     end
 
     # @!attribute [rw] db_cluster
-    #   Contains the details of an Amazon RDS DB cluster.
+    #   Contains the details of an Amazon Aurora DB cluster.
     #
     #   This data type is used as a response element in the
-    #   DescribeDBClusters action.
+    #   DescribeDBClusters, StopDBCluster, and StartDBCluster actions.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBClusterResult AWS API Documentation
@@ -8832,10 +8832,10 @@ module Aws::RDS
     end
 
     # @!attribute [rw] db_cluster
-    #   Contains the details of an Amazon RDS DB cluster.
+    #   Contains the details of an Amazon Aurora DB cluster.
     #
     #   This data type is used as a response element in the
-    #   DescribeDBClusters action.
+    #   DescribeDBClusters, StopDBCluster, and StartDBCluster actions.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterResult AWS API Documentation
@@ -11012,10 +11012,10 @@ module Aws::RDS
     end
 
     # @!attribute [rw] db_cluster
-    #   Contains the details of an Amazon RDS DB cluster.
+    #   Contains the details of an Amazon Aurora DB cluster.
     #
     #   This data type is used as a response element in the
-    #   DescribeDBClusters action.
+    #   DescribeDBClusters, StopDBCluster, and StartDBCluster actions.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBClusterResult AWS API Documentation
@@ -12030,10 +12030,10 @@ module Aws::RDS
     end
 
     # @!attribute [rw] db_cluster
-    #   Contains the details of an Amazon RDS DB cluster.
+    #   Contains the details of an Amazon Aurora DB cluster.
     #
     #   This data type is used as a response element in the
-    #   DescribeDBClusters action.
+    #   DescribeDBClusters, StopDBCluster, and StartDBCluster actions.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3Result AWS API Documentation
@@ -12212,8 +12212,8 @@ module Aws::RDS
     #   @return [Array<String>]
     #
     # @!attribute [rw] engine_mode
-    #   The DB engine mode of the DB cluster, either `provisioned` or
-    #   `serverless`.
+    #   The DB engine mode of the DB cluster, either `provisioned`,
+    #   `serverless`, or `parallelquery`.
     #   @return [String]
     #
     # @!attribute [rw] scaling_configuration
@@ -12245,10 +12245,10 @@ module Aws::RDS
     end
 
     # @!attribute [rw] db_cluster
-    #   Contains the details of an Amazon RDS DB cluster.
+    #   Contains the details of an Amazon Aurora DB cluster.
     #
     #   This data type is used as a response element in the
-    #   DescribeDBClusters action.
+    #   DescribeDBClusters, StopDBCluster, and StartDBCluster actions.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshotResult AWS API Documentation
@@ -12468,10 +12468,10 @@ module Aws::RDS
     end
 
     # @!attribute [rw] db_cluster
-    #   Contains the details of an Amazon RDS DB cluster.
+    #   Contains the details of an Amazon Aurora DB cluster.
     #
     #   This data type is used as a response element in the
-    #   DescribeDBClusters action.
+    #   DescribeDBClusters, StopDBCluster, and StartDBCluster actions.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTimeResult AWS API Documentation
@@ -13888,6 +13888,39 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartDBClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DB cluster identifier of the Amazon Aurora DB cluster to be
+    #   started. This parameter is stored as a lowercase string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBClusterMessage AWS API Documentation
+    #
+    class StartDBClusterMessage < Struct.new(
+      :db_cluster_identifier)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_cluster
+    #   Contains the details of an Amazon Aurora DB cluster.
+    #
+    #   This data type is used as a response element in the
+    #   DescribeDBClusters, StopDBCluster, and StartDBCluster actions.
+    #   @return [Types::DBCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBClusterResult AWS API Documentation
+    #
+    class StartDBClusterResult < Struct.new(
+      :db_cluster)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartDBInstanceMessage
     #   data as a hash:
     #
@@ -13917,6 +13950,39 @@ module Aws::RDS
     #
     class StartDBInstanceResult < Struct.new(
       :db_instance)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopDBClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DB cluster identifier of the Amazon Aurora DB cluster to be
+    #   stopped. This parameter is stored as a lowercase string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBClusterMessage AWS API Documentation
+    #
+    class StopDBClusterMessage < Struct.new(
+      :db_cluster_identifier)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_cluster
+    #   Contains the details of an Amazon Aurora DB cluster.
+    #
+    #   This data type is used as a response element in the
+    #   DescribeDBClusters, StopDBCluster, and StartDBCluster actions.
+    #   @return [Types::DBCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBClusterResult AWS API Documentation
+    #
+    class StopDBClusterResult < Struct.new(
+      :db_cluster)
       include Aws::Structure
     end
 
