@@ -82,13 +82,25 @@ module Aws
         event = ref.shape.struct_class.new
 
         explicit_payload = false
-        ref.shape.members.each do |_, member_ref|
-          explicit_payload = true if member_ref.eventpayload
+        implicit_payload_members = {}
+        ref.shape.members.each do |member_name, member_ref|
+          unless member_ref.eventheader
+            if member_ref.eventpayload
+              explicit_payload = true
+            else
+              implicit_payload_members[member_name] = member_ref
+            end
+          end
         end
 
         # handle implicit payload
-        unless explicit_payload
-          event = parse_payload(raw_event.payload.read, ref)
+        if !explicit_payload && !implicit_payload_members.empty?
+          if implicit_payload_members.size > 1
+            event = parse_payload(raw_event.payload.read, ref)
+          else
+            m_name, m_ref = implicit_payload_members.first
+            parse_payload_member(event, raw_event.payload, m_name, m_ref)
+          end
         end
         event.event_type = name
 
@@ -100,12 +112,16 @@ module Aws
               event.send("#{member_name}=", raw_event.headers[member_ref.location_name].value)
             end
           elsif member_ref.eventpayload
-            explicit_payload = true
-            eventpayload_streaming?(member_ref) ?
-             event.send("#{member_name}=", raw_event.payload) :
-             event.send("#{member_name}=", parse_payload(raw_event.payload.read, member_ref))
+            parse_payload_member(event, raw_event.payload, member_name, member_ref)
           end
         end
+        event
+      end
+
+      def parse_payload_member(event, payload, name, ref)
+        eventpayload_streaming?(ref) ?
+         event.send("#{name}=", payload) :
+         event.send("#{name}=", parse_payload(payload.read, ref))
         event
       end
 
