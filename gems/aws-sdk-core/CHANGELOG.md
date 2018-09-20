@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Update `:response_target` plugin error handling
+* Issue - Fix the bug at `:response_target` plugin error callback that removes special body object before its error callback can be triggered. (Bug: s3 decrypt response body is not truncated/rewind properly causing malformed body write when error retry happened after initial success request)
 
 3.27.0 (2018-09-06)
 ------------------
