@@ -3722,10 +3722,22 @@ module Aws::MediaConvert
     # http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
     #
     # @option params [String] :description
-    #   Optional. A description of the queue you are creating.
+    #   Optional. A description of the queue that you are creating.
     #
     # @option params [required, String] :name
-    #   The name of the queue you are creating.
+    #   The name of the queue that you are creating.
+    #
+    # @option params [String] :pricing_plan
+    #   Optional; default is on-demand. Specifies whether the pricing plan for
+    #   the queue is on-demand or reserved. The pricing plan for the queue
+    #   determines whether you pay on-demand or reserved pricing for the
+    #   transcoding jobs you run through the queue. For reserved queue
+    #   pricing, you must set up a contract. You can create a reserved queue
+    #   contract through the AWS Elemental MediaConvert console.
+    #
+    # @option params [Types::ReservationPlanSettings] :reservation_plan_settings
+    #   Details about the pricing plan for your reserved queue. Required for
+    #   reserved queues and not applicable to on-demand queues.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags that you want to add to the resource. You can tag resources
@@ -3740,6 +3752,12 @@ module Aws::MediaConvert
     #   resp = client.create_queue({
     #     description: "__string",
     #     name: "__string", # required
+    #     pricing_plan: "ON_DEMAND", # accepts ON_DEMAND, RESERVED
+    #     reservation_plan_settings: {
+    #       commitment: "ONE_YEAR", # required, accepts ONE_YEAR
+    #       renewal_type: "AUTO_RENEW", # required, accepts AUTO_RENEW, EXPIRE
+    #       reserved_slots: 1, # required
+    #     },
     #     tags: {
     #       "__string" => "__string",
     #     },
@@ -3752,7 +3770,14 @@ module Aws::MediaConvert
     #   resp.queue.description #=> String
     #   resp.queue.last_updated #=> Time
     #   resp.queue.name #=> String
+    #   resp.queue.pricing_plan #=> String, one of "ON_DEMAND", "RESERVED"
     #   resp.queue.progressing_jobs_count #=> Integer
+    #   resp.queue.reservation_plan.commitment #=> String, one of "ONE_YEAR"
+    #   resp.queue.reservation_plan.expires_at #=> Time
+    #   resp.queue.reservation_plan.purchased_at #=> Time
+    #   resp.queue.reservation_plan.renewal_type #=> String, one of "AUTO_RENEW", "EXPIRE"
+    #   resp.queue.reservation_plan.reserved_slots #=> Integer
+    #   resp.queue.reservation_plan.status #=> String, one of "ACTIVE", "EXPIRED"
     #   resp.queue.status #=> String, one of "ACTIVE", "PAUSED"
     #   resp.queue.submitted_jobs_count #=> Integer
     #   resp.queue.type #=> String, one of "SYSTEM", "CUSTOM"
@@ -5421,7 +5446,7 @@ module Aws::MediaConvert
     # Retrieve the JSON for a specific queue.
     #
     # @option params [required, String] :name
-    #   The name of the queue.
+    #   The name of the queue that you want information about.
     #
     # @return [Types::GetQueueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5440,7 +5465,14 @@ module Aws::MediaConvert
     #   resp.queue.description #=> String
     #   resp.queue.last_updated #=> Time
     #   resp.queue.name #=> String
+    #   resp.queue.pricing_plan #=> String, one of "ON_DEMAND", "RESERVED"
     #   resp.queue.progressing_jobs_count #=> Integer
+    #   resp.queue.reservation_plan.commitment #=> String, one of "ONE_YEAR"
+    #   resp.queue.reservation_plan.expires_at #=> Time
+    #   resp.queue.reservation_plan.purchased_at #=> Time
+    #   resp.queue.reservation_plan.renewal_type #=> String, one of "AUTO_RENEW", "EXPIRE"
+    #   resp.queue.reservation_plan.reserved_slots #=> Integer
+    #   resp.queue.reservation_plan.status #=> String, one of "ACTIVE", "EXPIRED"
     #   resp.queue.status #=> String, one of "ACTIVE", "PAUSED"
     #   resp.queue.submitted_jobs_count #=> Integer
     #   resp.queue.type #=> String, one of "SYSTEM", "CUSTOM"
@@ -7125,7 +7157,14 @@ module Aws::MediaConvert
     #   resp.queues[0].description #=> String
     #   resp.queues[0].last_updated #=> Time
     #   resp.queues[0].name #=> String
+    #   resp.queues[0].pricing_plan #=> String, one of "ON_DEMAND", "RESERVED"
     #   resp.queues[0].progressing_jobs_count #=> Integer
+    #   resp.queues[0].reservation_plan.commitment #=> String, one of "ONE_YEAR"
+    #   resp.queues[0].reservation_plan.expires_at #=> Time
+    #   resp.queues[0].reservation_plan.purchased_at #=> Time
+    #   resp.queues[0].reservation_plan.renewal_type #=> String, one of "AUTO_RENEW", "EXPIRE"
+    #   resp.queues[0].reservation_plan.reserved_slots #=> Integer
+    #   resp.queues[0].reservation_plan.status #=> String, one of "ACTIVE", "EXPIRED"
     #   resp.queues[0].status #=> String, one of "ACTIVE", "PAUSED"
     #   resp.queues[0].submitted_jobs_count #=> Integer
     #   resp.queues[0].type #=> String, one of "SYSTEM", "CUSTOM"
@@ -9403,12 +9442,17 @@ module Aws::MediaConvert
     #   The new description for the queue, if you are changing it.
     #
     # @option params [required, String] :name
-    #   The name of the queue you are modifying.
+    #   The name of the queue that you are modifying.
+    #
+    # @option params [Types::ReservationPlanSettings] :reservation_plan_settings
+    #   Details about the pricing plan for your reserved queue. Required for
+    #   reserved queues and not applicable to on-demand queues.
     #
     # @option params [String] :status
-    #   Queues can be ACTIVE or PAUSED. If you pause a queue, jobs in that
-    #   queue won't begin. Jobs running when a queue is paused continue to
-    #   run until they finish or error out.
+    #   Pause or activate a queue by changing its status between ACTIVE and
+    #   PAUSED. If you pause a queue, jobs in that queue won't begin. Jobs
+    #   that are running when you pause the queue continue to run until they
+    #   finish or result in an error.
     #
     # @return [Types::UpdateQueueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9419,6 +9463,11 @@ module Aws::MediaConvert
     #   resp = client.update_queue({
     #     description: "__string",
     #     name: "__string", # required
+    #     reservation_plan_settings: {
+    #       commitment: "ONE_YEAR", # required, accepts ONE_YEAR
+    #       renewal_type: "AUTO_RENEW", # required, accepts AUTO_RENEW, EXPIRE
+    #       reserved_slots: 1, # required
+    #     },
     #     status: "ACTIVE", # accepts ACTIVE, PAUSED
     #   })
     #
@@ -9429,7 +9478,14 @@ module Aws::MediaConvert
     #   resp.queue.description #=> String
     #   resp.queue.last_updated #=> Time
     #   resp.queue.name #=> String
+    #   resp.queue.pricing_plan #=> String, one of "ON_DEMAND", "RESERVED"
     #   resp.queue.progressing_jobs_count #=> Integer
+    #   resp.queue.reservation_plan.commitment #=> String, one of "ONE_YEAR"
+    #   resp.queue.reservation_plan.expires_at #=> Time
+    #   resp.queue.reservation_plan.purchased_at #=> Time
+    #   resp.queue.reservation_plan.renewal_type #=> String, one of "AUTO_RENEW", "EXPIRE"
+    #   resp.queue.reservation_plan.reserved_slots #=> Integer
+    #   resp.queue.reservation_plan.status #=> String, one of "ACTIVE", "EXPIRED"
     #   resp.queue.status #=> String, one of "ACTIVE", "PAUSED"
     #   resp.queue.submitted_jobs_count #=> Integer
     #   resp.queue.type #=> String, one of "SYSTEM", "CUSTOM"
@@ -9456,7 +9512,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

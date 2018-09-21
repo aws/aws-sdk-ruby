@@ -1036,9 +1036,6 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] language_description
-    #   Human readable information to indicate captions available for
-    #   players (eg. English, or Spanish). Alphanumeric characters, spaces,
-    #   and underscore are legal.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CaptionDescription AWS API Documentation
@@ -3938,18 +3935,38 @@ module Aws::MediaConvert
     #       {
     #         description: "__string",
     #         name: "__string", # required
+    #         pricing_plan: "ON_DEMAND", # accepts ON_DEMAND, RESERVED
+    #         reservation_plan_settings: {
+    #           commitment: "ONE_YEAR", # required, accepts ONE_YEAR
+    #           renewal_type: "AUTO_RENEW", # required, accepts AUTO_RENEW, EXPIRE
+    #           reserved_slots: 1, # required
+    #         },
     #         tags: {
     #           "__string" => "__string",
     #         },
     #       }
     #
     # @!attribute [rw] description
-    #   Optional. A description of the queue you are creating.
+    #   Optional. A description of the queue that you are creating.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the queue you are creating.
+    #   The name of the queue that you are creating.
     #   @return [String]
+    #
+    # @!attribute [rw] pricing_plan
+    #   Optional; default is on-demand. Specifies whether the pricing plan
+    #   for the queue is on-demand or reserved. The pricing plan for the
+    #   queue determines whether you pay on-demand or reserved pricing for
+    #   the transcoding jobs you run through the queue. For reserved queue
+    #   pricing, you must set up a contract. You can create a reserved queue
+    #   contract through the AWS Elemental MediaConvert console.
+    #   @return [String]
+    #
+    # @!attribute [rw] reservation_plan_settings
+    #   Details about the pricing plan for your reserved queue. Required for
+    #   reserved queues and not applicable to on-demand queues.
+    #   @return [Types::ReservationPlanSettings]
     #
     # @!attribute [rw] tags
     #   The tags that you want to add to the resource. You can tag resources
@@ -3961,18 +3978,21 @@ module Aws::MediaConvert
     class CreateQueueRequest < Struct.new(
       :description,
       :name,
+      :pricing_plan,
+      :reservation_plan_settings,
       :tags)
       include Aws::Structure
     end
 
-    # Successful create queue requests will return the name of the queue you
+    # Successful create queue requests return the name of the queue that you
     # just created and information about it.
     #
     # @!attribute [rw] queue
-    #   MediaConvert jobs are submitted to a queue. Unless specified
-    #   otherwise jobs are submitted to a built-in default queue. User can
-    #   create additional queues to separate the jobs of different
-    #   categories or priority.
+    #   You can use queues to manage the resources that are available to
+    #   your AWS account for running multiple transcoding jobs at the same
+    #   time. If you don't specify a queue, the service sends all jobs
+    #   through the default queue. For more information, see
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/about-resource-allocation-and-job-prioritization.html.
     #   @return [Types::Queue]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateQueueResponse AWS API Documentation
@@ -4207,7 +4227,7 @@ module Aws::MediaConvert
     #
     class DeletePresetResponse < Aws::EmptyStructure; end
 
-    # Delete a queue by sending a request with the queue name
+    # Delete a queue by sending a request with the queue name.
     #
     # @note When making an API call, you may pass DeleteQueueRequest
     #   data as a hash:
@@ -4227,8 +4247,8 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Delete queue requests will return an OK message or error message with
-    # an empty body.
+    # Delete queue requests return an OK message or error message with an
+    # empty body.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DeleteQueueResponse AWS API Documentation
     #
@@ -5049,7 +5069,8 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Query a queue by sending a request with the queue name.
+    # Get information about a queue by sending a request with the queue
+    # name.
     #
     # @note When making an API call, you may pass GetQueueRequest
     #   data as a hash:
@@ -5059,7 +5080,7 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the queue.
+    #   The name of the queue that you want information about.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetQueueRequest AWS API Documentation
@@ -5069,14 +5090,15 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Successful get queue requests will return an OK message and the queue
-    # JSON.
+    # Successful get queue requests return an OK message and information
+    # about the queue in JSON.
     #
     # @!attribute [rw] queue
-    #   MediaConvert jobs are submitted to a queue. Unless specified
-    #   otherwise jobs are submitted to a built-in default queue. User can
-    #   create additional queues to separate the jobs of different
-    #   categories or priority.
+    #   You can use queues to manage the resources that are available to
+    #   your AWS account for running multiple transcoding jobs at the same
+    #   time. If you don't specify a queue, the service sends all jobs
+    #   through the default queue. For more information, see
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/about-resource-allocation-and-job-prioritization.html.
     #   @return [Types::Queue]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetQueueResponse AWS API Documentation
@@ -8982,7 +9004,7 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] queues
-    #   List of queues
+    #   List of queues.
     #   @return [Array<Types::Queue>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListQueuesResponse AWS API Documentation
@@ -12181,49 +12203,66 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # MediaConvert jobs are submitted to a queue. Unless specified otherwise
-    # jobs are submitted to a built-in default queue. User can create
-    # additional queues to separate the jobs of different categories or
-    # priority.
+    # You can use queues to manage the resources that are available to your
+    # AWS account for running multiple transcoding jobs at the same time. If
+    # you don't specify a queue, the service sends all jobs through the
+    # default queue. For more information, see
+    # https://docs.aws.amazon.com/mediaconvert/latest/ug/about-resource-allocation-and-job-prioritization.html.
     #
     # @!attribute [rw] arn
     #   An identifier for this resource that is unique within all of AWS.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The timestamp in epoch seconds for queue creation.
+    #   The time stamp in epoch seconds for queue creation.
     #   @return [Time]
     #
     # @!attribute [rw] description
-    #   An optional description you create for each queue.
+    #   An optional description that you create for each queue.
     #   @return [String]
     #
     # @!attribute [rw] last_updated
-    #   The timestamp in epoch seconds when the queue was last updated.
+    #   The time stamp in epoch seconds when the queue was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] name
-    #   A name you create for each queue. Each name must be unique within
-    #   your account.
+    #   A name that you create for each queue. Each name must be unique
+    #   within your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] pricing_plan
+    #   Specifies whether the pricing plan for the queue is On-demand or
+    #   Reserved. The pricing plan for the queue determines whether you pay
+    #   On-demand or Reserved pricing for the transcoding jobs that you run
+    #   through the queue. For Reserved queue pricing, you must set up a
+    #   contract. You can create a Reserved queue contract through the AWS
+    #   Elemental MediaConvert console.
     #   @return [String]
     #
     # @!attribute [rw] progressing_jobs_count
-    #   Estimated number of jobs in PROGRESSING status.
+    #   The estimated number of jobs with a PROGRESSING status.
     #   @return [Integer]
     #
+    # @!attribute [rw] reservation_plan
+    #   Details about the pricing plan for your reserved queue. Required for
+    #   reserved queues and not applicable to on-demand queues.
+    #   @return [Types::ReservationPlan]
+    #
     # @!attribute [rw] status
-    #   Queues can be ACTIVE or PAUSED. If you pause a queue, jobs in that
-    #   queue won't begin. Jobs running when a queue is paused continue to
-    #   run until they finish or error out.
+    #   Queues can be ACTIVE or PAUSED. If you pause a queue, the service
+    #   won't begin processing jobs in that queue. Jobs that are running
+    #   when you pause the queue continue to run until they finish or result
+    #   in an error.
     #   @return [String]
     #
     # @!attribute [rw] submitted_jobs_count
-    #   Estimated number of jobs in SUBMITTED status.
+    #   The estimated number of jobs with a SUBMITTED status.
     #   @return [Integer]
     #
     # @!attribute [rw] type
-    #   A queue can be of two types: system or custom. System or built-in
-    #   queues can't be modified or deleted by the user.
+    #   Specifies whether this queue is system or custom. System queues are
+    #   built in. You can't modify or delete system queues. You can create
+    #   and modify custom queues.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Queue AWS API Documentation
@@ -12234,7 +12273,9 @@ module Aws::MediaConvert
       :description,
       :last_updated,
       :name,
+      :pricing_plan,
       :progressing_jobs_count,
+      :reservation_plan,
       :status,
       :submitted_jobs_count,
       :type)
@@ -12327,6 +12368,95 @@ module Aws::MediaConvert
       :channel_mapping,
       :channels_in,
       :channels_out)
+      include Aws::Structure
+    end
+
+    # Details about the pricing plan for your reserved queue. Required for
+    # reserved queues and not applicable to on-demand queues.
+    #
+    # @!attribute [rw] commitment
+    #   The length of time that you commit to when you set up a pricing plan
+    #   contract for a reserved queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] expires_at
+    #   The time stamp, in epoch seconds, for when the pricing plan for this
+    #   reserved queue expires.
+    #   @return [Time]
+    #
+    # @!attribute [rw] purchased_at
+    #   The time stamp in epoch seconds when the reserved queue's
+    #   reservation plan was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] renewal_type
+    #   Specifies whether the pricing plan contract for your reserved queue
+    #   automatically renews (AUTO\_RENEW) or expires (EXPIRE) at the end of
+    #   the contract period.
+    #   @return [String]
+    #
+    # @!attribute [rw] reserved_slots
+    #   Specifies the number of reserved transcode slots (RTSs) for this
+    #   queue. The number of RTS determines how many jobs the queue can
+    #   process in parallel; each RTS can process one job at a time. To
+    #   increase this number, create a replacement contract through the AWS
+    #   Elemental MediaConvert console.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   Specifies whether the pricing plan for your reserved queue is ACTIVE
+    #   or EXPIRED.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ReservationPlan AWS API Documentation
+    #
+    class ReservationPlan < Struct.new(
+      :commitment,
+      :expires_at,
+      :purchased_at,
+      :renewal_type,
+      :reserved_slots,
+      :status)
+      include Aws::Structure
+    end
+
+    # Details about the pricing plan for your reserved queue. Required for
+    # reserved queues and not applicable to on-demand queues.
+    #
+    # @note When making an API call, you may pass ReservationPlanSettings
+    #   data as a hash:
+    #
+    #       {
+    #         commitment: "ONE_YEAR", # required, accepts ONE_YEAR
+    #         renewal_type: "AUTO_RENEW", # required, accepts AUTO_RENEW, EXPIRE
+    #         reserved_slots: 1, # required
+    #       }
+    #
+    # @!attribute [rw] commitment
+    #   The length of time that you commit to when you set up a pricing plan
+    #   contract for a reserved queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] renewal_type
+    #   Specifies whether the pricing plan contract for your reserved queue
+    #   automatically renews (AUTO\_RENEW) or expires (EXPIRE) at the end of
+    #   the contract period.
+    #   @return [String]
+    #
+    # @!attribute [rw] reserved_slots
+    #   Specifies the number of reserved transcode slots (RTSs) for this
+    #   queue. The number of RTS determines how many jobs the queue can
+    #   process in parallel; each RTS can process one job at a time. To
+    #   increase this number, create a replacement contract through the AWS
+    #   Elemental MediaConvert console.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ReservationPlanSettings AWS API Documentation
+    #
+    class ReservationPlanSettings < Struct.new(
+      :commitment,
+      :renewal_type,
+      :reserved_slots)
       include Aws::Structure
     end
 
@@ -14055,9 +14185,8 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Modify a queue by sending a request with the queue name and any of the
-    # following that you wish to change - description, status. You pause or
-    # activate a queue by changing its status between ACTIVE and PAUSED.
+    # Modify a queue by sending a request with the queue name and any
+    # changes to the queue.
     #
     # @note When making an API call, you may pass UpdateQueueRequest
     #   data as a hash:
@@ -14065,6 +14194,11 @@ module Aws::MediaConvert
     #       {
     #         description: "__string",
     #         name: "__string", # required
+    #         reservation_plan_settings: {
+    #           commitment: "ONE_YEAR", # required, accepts ONE_YEAR
+    #           renewal_type: "AUTO_RENEW", # required, accepts AUTO_RENEW, EXPIRE
+    #           reserved_slots: 1, # required
+    #         },
     #         status: "ACTIVE", # accepts ACTIVE, PAUSED
     #       }
     #
@@ -14073,13 +14207,19 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the queue you are modifying.
+    #   The name of the queue that you are modifying.
     #   @return [String]
     #
+    # @!attribute [rw] reservation_plan_settings
+    #   Details about the pricing plan for your reserved queue. Required for
+    #   reserved queues and not applicable to on-demand queues.
+    #   @return [Types::ReservationPlanSettings]
+    #
     # @!attribute [rw] status
-    #   Queues can be ACTIVE or PAUSED. If you pause a queue, jobs in that
-    #   queue won't begin. Jobs running when a queue is paused continue to
-    #   run until they finish or error out.
+    #   Pause or activate a queue by changing its status between ACTIVE and
+    #   PAUSED. If you pause a queue, jobs in that queue won't begin. Jobs
+    #   that are running when you pause the queue continue to run until they
+    #   finish or result in an error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UpdateQueueRequest AWS API Documentation
@@ -14087,17 +14227,20 @@ module Aws::MediaConvert
     class UpdateQueueRequest < Struct.new(
       :description,
       :name,
+      :reservation_plan_settings,
       :status)
       include Aws::Structure
     end
 
-    # Successful update queue requests will return the new queue JSON.
+    # Successful update queue requests return the new queue information in
+    # JSON.
     #
     # @!attribute [rw] queue
-    #   MediaConvert jobs are submitted to a queue. Unless specified
-    #   otherwise jobs are submitted to a built-in default queue. User can
-    #   create additional queues to separate the jobs of different
-    #   categories or priority.
+    #   You can use queues to manage the resources that are available to
+    #   your AWS account for running multiple transcoding jobs at the same
+    #   time. If you don't specify a queue, the service sends all jobs
+    #   through the default queue. For more information, see
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/about-resource-allocation-and-job-prioritization.html.
     #   @return [Types::Queue]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UpdateQueueResponse AWS API Documentation

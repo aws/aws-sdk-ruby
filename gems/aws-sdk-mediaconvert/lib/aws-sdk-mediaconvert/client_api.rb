@@ -81,6 +81,7 @@ module Aws::MediaConvert
     ColorSpace = Shapes::StringShape.new(name: 'ColorSpace')
     ColorSpaceConversion = Shapes::StringShape.new(name: 'ColorSpaceConversion')
     ColorSpaceUsage = Shapes::StringShape.new(name: 'ColorSpaceUsage')
+    Commitment = Shapes::StringShape.new(name: 'Commitment')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContainerSettings = Shapes::StructureShape.new(name: 'ContainerSettings')
     ContainerType = Shapes::StringShape.new(name: 'ContainerType')
@@ -327,6 +328,7 @@ module Aws::MediaConvert
     Preset = Shapes::StructureShape.new(name: 'Preset')
     PresetListBy = Shapes::StringShape.new(name: 'PresetListBy')
     PresetSettings = Shapes::StructureShape.new(name: 'PresetSettings')
+    PricingPlan = Shapes::StringShape.new(name: 'PricingPlan')
     ProresCodecProfile = Shapes::StringShape.new(name: 'ProresCodecProfile')
     ProresFramerateControl = Shapes::StringShape.new(name: 'ProresFramerateControl')
     ProresFramerateConversionAlgorithm = Shapes::StringShape.new(name: 'ProresFramerateConversionAlgorithm')
@@ -340,6 +342,10 @@ module Aws::MediaConvert
     QueueStatus = Shapes::StringShape.new(name: 'QueueStatus')
     Rectangle = Shapes::StructureShape.new(name: 'Rectangle')
     RemixSettings = Shapes::StructureShape.new(name: 'RemixSettings')
+    RenewalType = Shapes::StringShape.new(name: 'RenewalType')
+    ReservationPlan = Shapes::StructureShape.new(name: 'ReservationPlan')
+    ReservationPlanSettings = Shapes::StructureShape.new(name: 'ReservationPlanSettings')
+    ReservationPlanStatus = Shapes::StringShape.new(name: 'ReservationPlanStatus')
     ResourceTags = Shapes::StructureShape.new(name: 'ResourceTags')
     RespondToAfd = Shapes::StringShape.new(name: 'RespondToAfd')
     ScalingBehavior = Shapes::StringShape.new(name: 'ScalingBehavior')
@@ -722,6 +728,8 @@ module Aws::MediaConvert
 
     CreateQueueRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     CreateQueueRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
+    CreateQueueRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, location_name: "pricingPlan"))
+    CreateQueueRequest.add_member(:reservation_plan_settings, Shapes::ShapeRef.new(shape: ReservationPlanSettings, location_name: "reservationPlanSettings"))
     CreateQueueRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     CreateQueueRequest.struct_class = Types::CreateQueueRequest
 
@@ -1381,7 +1389,9 @@ module Aws::MediaConvert
     Queue.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     Queue.add_member(:last_updated, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "lastUpdated"))
     Queue.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
+    Queue.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, location_name: "pricingPlan"))
     Queue.add_member(:progressing_jobs_count, Shapes::ShapeRef.new(shape: __integer, location_name: "progressingJobsCount"))
+    Queue.add_member(:reservation_plan, Shapes::ShapeRef.new(shape: ReservationPlan, location_name: "reservationPlan"))
     Queue.add_member(:status, Shapes::ShapeRef.new(shape: QueueStatus, location_name: "status"))
     Queue.add_member(:submitted_jobs_count, Shapes::ShapeRef.new(shape: __integer, location_name: "submittedJobsCount"))
     Queue.add_member(:type, Shapes::ShapeRef.new(shape: Type, location_name: "type"))
@@ -1397,6 +1407,19 @@ module Aws::MediaConvert
     RemixSettings.add_member(:channels_in, Shapes::ShapeRef.new(shape: __integerMin1Max16, location_name: "channelsIn"))
     RemixSettings.add_member(:channels_out, Shapes::ShapeRef.new(shape: __integerMin1Max8, location_name: "channelsOut"))
     RemixSettings.struct_class = Types::RemixSettings
+
+    ReservationPlan.add_member(:commitment, Shapes::ShapeRef.new(shape: Commitment, location_name: "commitment"))
+    ReservationPlan.add_member(:expires_at, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "expiresAt"))
+    ReservationPlan.add_member(:purchased_at, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "purchasedAt"))
+    ReservationPlan.add_member(:renewal_type, Shapes::ShapeRef.new(shape: RenewalType, location_name: "renewalType"))
+    ReservationPlan.add_member(:reserved_slots, Shapes::ShapeRef.new(shape: __integer, location_name: "reservedSlots"))
+    ReservationPlan.add_member(:status, Shapes::ShapeRef.new(shape: ReservationPlanStatus, location_name: "status"))
+    ReservationPlan.struct_class = Types::ReservationPlan
+
+    ReservationPlanSettings.add_member(:commitment, Shapes::ShapeRef.new(shape: Commitment, required: true, location_name: "commitment"))
+    ReservationPlanSettings.add_member(:renewal_type, Shapes::ShapeRef.new(shape: RenewalType, required: true, location_name: "renewalType"))
+    ReservationPlanSettings.add_member(:reserved_slots, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "reservedSlots"))
+    ReservationPlanSettings.struct_class = Types::ReservationPlanSettings
 
     ResourceTags.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     ResourceTags.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
@@ -1477,6 +1500,7 @@ module Aws::MediaConvert
 
     UpdateQueueRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     UpdateQueueRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "name"))
+    UpdateQueueRequest.add_member(:reservation_plan_settings, Shapes::ShapeRef.new(shape: ReservationPlanSettings, location_name: "reservationPlanSettings"))
     UpdateQueueRequest.add_member(:status, Shapes::ShapeRef.new(shape: QueueStatus, location_name: "status"))
     UpdateQueueRequest.struct_class = Types::UpdateQueueRequest
 
