@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fixes a bug in the `:response_target` plugin error callback. Under certain circumstances a special body object can be removed before its error callback is triggered, breaking retry logic.
+
 3.27.0 (2018-09-06)
 ------------------
 
