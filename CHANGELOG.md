@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.136 (2018-09-24)
+------------------
+
 * Feature - Aws::Connect - Updated the API, and documentation for Amazon Connect Service.
 
 * Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
