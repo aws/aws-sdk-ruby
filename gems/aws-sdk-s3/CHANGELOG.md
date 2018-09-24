@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Support multipart upload empty stream (GitHub Issue #1880)
+
 1.20.0 (2018-09-19)
 ------------------
 

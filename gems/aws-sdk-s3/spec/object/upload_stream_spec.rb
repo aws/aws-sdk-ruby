@@ -16,6 +16,8 @@ module Aws
           )
         }
 
+        let(:zero_mb) { '' }
+
         let(:one_mb) { '.' * 1024 * 1024 }
 
         let(:ten_mb) {
@@ -25,6 +27,24 @@ module Aws
         let(:seventeen_mb) {
           one_mb * 17
         }
+
+        it 'can upload empty stream' do
+          client.stub_responses(:create_multipart_upload, upload_id:'id')
+          client.stub_responses(:upload_part, etag:'etag')
+          expect(client).to receive(:complete_multipart_upload).with(
+            bucket: 'bucket',
+            key: 'key',
+            upload_id: 'id',
+            multipart_upload: {
+              parts: [
+                { etag: 'etag', part_number: 1 }
+              ]
+            }
+          ).once
+          object.upload_stream(content_type: 'text/plain') do |write_stream|
+            write_stream << zero_mb
+          end
+        end
 
         it 'uses multipart APIs' do
           client.stub_responses(:create_multipart_upload, upload_id:'id')
