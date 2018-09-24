@@ -8494,6 +8494,25 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The minimum DB engine version required for each corresponding allowed
+    # value for an option setting.
+    #
+    # @!attribute [rw] allowed_value
+    #   The allowed value for an option setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] minimum_engine_version
+    #   The minimum DB engine version required for the allowed value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/MinimumEngineVersionPerAllowedValue AWS API Documentation
+    #
+    class MinimumEngineVersionPerAllowedValue < Struct.new(
+      :allowed_value,
+      :minimum_engine_version)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ModifyCurrentDBClusterCapacityMessage
     #   data as a hash:
     #
@@ -10350,6 +10369,16 @@ module Aws::RDS
     #   be changed from the default value.
     #   @return [Boolean]
     #
+    # @!attribute [rw] is_required
+    #   Boolean value where true indicates that a value must be specified
+    #   for this option setting of the option group option.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] minimum_engine_version_per_allowed_value
+    #   The minimum DB engine version required for the corresponding allowed
+    #   value for this option setting.
+    #   @return [Array<Types::MinimumEngineVersionPerAllowedValue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroupOptionSetting AWS API Documentation
     #
     class OptionGroupOptionSetting < Struct.new(
@@ -10358,7 +10387,9 @@ module Aws::RDS
       :default_value,
       :apply_type,
       :allowed_values,
-      :is_modifiable)
+      :is_modifiable,
+      :is_required,
+      :minimum_engine_version_per_allowed_value)
       include Aws::Structure
     end
 

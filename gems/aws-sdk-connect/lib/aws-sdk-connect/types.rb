@@ -33,7 +33,7 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] username
-    #   The user name in Amazon Connect for the user to create.
+    #   The user name in Amazon Connect for the account to create.
     #   @return [String]
     #
     # @!attribute [rw] password
@@ -154,6 +154,69 @@ module Aws::Connect
       :access_token_expiration,
       :refresh_token,
       :refresh_token_expiration)
+      include Aws::Structure
+    end
+
+    # A `CurrentMetric` object that contains the Name and Unit for the
+    # metric.
+    #
+    # @note When making an API call, you may pass CurrentMetric
+    #   data as a hash:
+    #
+    #       {
+    #         name: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED
+    #         unit: "SECONDS", # accepts SECONDS, COUNT, PERCENT
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] unit
+    #   The unit for the metric.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CurrentMetric AWS API Documentation
+    #
+    class CurrentMetric < Struct.new(
+      :name,
+      :unit)
+      include Aws::Structure
+    end
+
+    # A `CurrentMetricData` object.
+    #
+    # @!attribute [rw] metric
+    #   The metric in a `CurrentMetricData` object.
+    #   @return [Types::CurrentMetric]
+    #
+    # @!attribute [rw] value
+    #   The value of the metric in the CurrentMetricData object.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CurrentMetricData AWS API Documentation
+    #
+    class CurrentMetricData < Struct.new(
+      :metric,
+      :value)
+      include Aws::Structure
+    end
+
+    # A `CurrentMetricResult` object.
+    #
+    # @!attribute [rw] dimensions
+    #   The `Dimensions` for the `CurrentMetricResult` object.
+    #   @return [Types::Dimensions]
+    #
+    # @!attribute [rw] collections
+    #   The `Collections` for the `CurrentMetricResult` object.
+    #   @return [Array<Types::CurrentMetricData>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CurrentMetricResult AWS API Documentation
+    #
+    class CurrentMetricResult < Struct.new(
+      :dimensions,
+      :collections)
       include Aws::Structure
     end
 
@@ -305,6 +368,227 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # A `Dimensions` object that includes the Channel and Queue for the
+    # metric.
+    #
+    # @!attribute [rw] queue
+    #   A `QueueReference` object used as one part of dimension for the
+    #   metrics results.
+    #   @return [Types::QueueReference]
+    #
+    # @!attribute [rw] channel
+    #   The channel used for grouping and filters. Only VOICE is supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Dimensions AWS API Documentation
+    #
+    class Dimensions < Struct.new(
+      :queue,
+      :channel)
+      include Aws::Structure
+    end
+
+    # The filter, either channel or queues, to apply to the metric results
+    # retrieved.
+    #
+    # @note When making an API call, you may pass Filters
+    #   data as a hash:
+    #
+    #       {
+    #         queues: ["QueueId"],
+    #         channels: ["VOICE"], # accepts VOICE
+    #       }
+    #
+    # @!attribute [rw] queues
+    #   A list of up to 100 queue IDs or queue ARNs to use to filter the
+    #   metrics retrieved. You can include both IDs and ARNs in a request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] channels
+    #   The Channel to use as a filter for the metrics returned. Only VOICE
+    #   is supported.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Filters AWS API Documentation
+    #
+    class Filters < Struct.new(
+      :queues,
+      :channels)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetCurrentMetricDataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         filters: { # required
+    #           queues: ["QueueId"],
+    #           channels: ["VOICE"], # accepts VOICE
+    #         },
+    #         groupings: ["QUEUE"], # accepts QUEUE, CHANNEL
+    #         current_metrics: [ # required
+    #           {
+    #             name: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED
+    #             unit: "SECONDS", # accepts SECONDS, COUNT, PERCENT
+    #           },
+    #         ],
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier for your Amazon Connect instance. To find the ID of
+    #   your instance, open the AWS console and select Amazon Connect.
+    #   Select the alias of the instance in the Instance alias column. The
+    #   instance ID is displayed in the Overview section of your instance
+    #   settings. For example, the instance ID is the set of characters at
+    #   the end of the instance ARN, after instance/, such as
+    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A `Filters` object that contains a list of queue IDs or queue ARNs,
+    #   up to 100, or list of Channels to use to filter the metrics returned
+    #   in the response. Metric data is retrieved only for the resources
+    #   associated with the queue IDs, ARNs, or Channels included in the
+    #   filter. You can include both IDs and ARNs in the same request. To
+    #   retrieve metrics for all queues, add the queue ID or ARN for each
+    #   queue in your instance. Only VOICE is supported for Channels.
+    #
+    #   To find the ARN for a queue, open the queue you want to use in the
+    #   Amazon Connect Queue editor. The ARN for the queue is displayed in
+    #   the address bar as part of the URL. For example, the queue ARN is
+    #   the set of characters at the end of the URL, after 'id=' such as
+    #   `arn:aws:connect:us-east-1:270923740243:instance/78fb859d-1b7d-44b1-8aa3-12f0835c5855/queue/1d1a4575-9618-40ab-bbeb-81e45795fe61`.
+    #   The queue ID is also included in the URL, and is the string after
+    #   'queue/'.
+    #   @return [Types::Filters]
+    #
+    # @!attribute [rw] groupings
+    #   The grouping applied to the metrics returned. For example, when
+    #   grouped by QUEUE, the metrics returned apply to each queue rather
+    #   than aggregated for all queues. If you group by CHANNEL, you should
+    #   include a Channels filter. The only supported channel is VOICE.
+    #
+    #   If no `Grouping` is included in the request, a summary of
+    #   `CurrentMetrics` is returned.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] current_metrics
+    #   A list of `CurrentMetric` objects for the metrics to retrieve. Each
+    #   `CurrentMetric` includes a name of a metric to retrieve and the unit
+    #   to use for it.
+    #
+    #   The following metrics are available:
+    #
+    #   AGENTS\_AVAILABLE
+    #
+    #   : Unit: COUNT
+    #
+    #   AGENTS\_ONLINE
+    #
+    #   : Unit: COUNT
+    #
+    #   AGENTS\_ON\_CALL
+    #
+    #   : Unit: COUNT
+    #
+    #   AGENTS\_STAFFED
+    #
+    #   : Unit: COUNT
+    #
+    #   AGENTS\_AFTER\_CONTACT\_WORK
+    #
+    #   : Unit: COUNT
+    #
+    #   AGENTS\_NON\_PRODUCTIVE
+    #
+    #   : Unit: COUNT
+    #
+    #   AGENTS\_ERROR
+    #
+    #   : Unit: COUNT
+    #
+    #   CONTACTS\_IN\_QUEUE
+    #
+    #   : Unit: COUNT
+    #
+    #   OLDEST\_CONTACT\_AGE
+    #
+    #   : Unit: SECONDS
+    #
+    #   CONTACTS\_SCHEDULED
+    #
+    #   : Unit: COUNT
+    #   @return [Array<Types::CurrentMetric>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    #   The token expires after 5 minutes from the time it is created.
+    #   Subsequent requests that use the [NextToken]() must use the same
+    #   request parameters as the request that generated the token.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   `MaxResults` indicates the maximum number of results to return per
+    #   page in the response, between 1 and 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetCurrentMetricDataRequest AWS API Documentation
+    #
+    class GetCurrentMetricDataRequest < Struct.new(
+      :instance_id,
+      :filters,
+      :groupings,
+      :current_metrics,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A string returned in the response. Use the value returned in the
+    #   response as the value of the NextToken in a subsequent request to
+    #   retrieve the next set of results.
+    #
+    #   The token expires after 5 minutes from the time it is created.
+    #   Subsequent requests that use the NextToken must use the same request
+    #   parameters as the request that generated the token.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_results
+    #   A list of `CurrentMetricResult` objects organized by `Dimensions`
+    #   combining with `CurrentMetricDataCollections`.
+    #
+    #   `Dimensions` is the resourceId specified in the `Filters` of the
+    #   request.
+    #
+    #   `Collections` is a list of `CurrentMetricData` objects with
+    #   corresponding values to the `CurrentMetrics` specified in the
+    #   request.
+    #
+    #   If no `Grouping` is specified in the request, `Collections` is a
+    #   summary for the `CurrentMetric` returned.
+    #   @return [Array<Types::CurrentMetricResult>]
+    #
+    # @!attribute [rw] data_snapshot_time
+    #   The time at which `CurrentMetricData` was retrieved and cached for
+    #   pagination.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetCurrentMetricDataResponse AWS API Documentation
+    #
+    class GetCurrentMetricDataResponse < Struct.new(
+      :next_token,
+      :metric_results,
+      :data_snapshot_time)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetFederationTokenRequest
     #   data as a hash:
     #
@@ -337,6 +621,321 @@ module Aws::Connect
     #
     class GetFederationTokenResponse < Struct.new(
       :credentials)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetMetricDataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         start_time: Time.now, # required
+    #         end_time: Time.now, # required
+    #         filters: { # required
+    #           queues: ["QueueId"],
+    #           channels: ["VOICE"], # accepts VOICE
+    #         },
+    #         groupings: ["QUEUE"], # accepts QUEUE, CHANNEL
+    #         historical_metrics: [ # required
+    #           {
+    #             name: "CONTACTS_QUEUED", # accepts CONTACTS_QUEUED, CONTACTS_HANDLED, CONTACTS_ABANDONED, CONTACTS_CONSULTED, CONTACTS_AGENT_HUNG_UP_FIRST, CONTACTS_HANDLED_INCOMING, CONTACTS_HANDLED_OUTBOUND, CONTACTS_HOLD_ABANDONS, CONTACTS_TRANSFERRED_IN, CONTACTS_TRANSFERRED_OUT, CONTACTS_TRANSFERRED_IN_FROM_QUEUE, CONTACTS_TRANSFERRED_OUT_FROM_QUEUE, CONTACTS_MISSED, CALLBACK_CONTACTS_HANDLED, API_CONTACTS_HANDLED, OCCUPANCY, HANDLE_TIME, AFTER_CONTACT_WORK_TIME, QUEUED_TIME, ABANDON_TIME, QUEUE_ANSWER_TIME, HOLD_TIME, INTERACTION_TIME, INTERACTION_AND_HOLD_TIME, SERVICE_LEVEL
+    #             threshold: {
+    #               comparison: "LT", # accepts LT
+    #               threshold_value: 1.0,
+    #             },
+    #             statistic: "SUM", # accepts SUM, MAX, AVG
+    #             unit: "SECONDS", # accepts SECONDS, COUNT, PERCENT
+    #           },
+    #         ],
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier for your Amazon Connect instance. To find the ID of
+    #   your instance, open the AWS console and select Amazon Connect.
+    #   Select the alias of the instance in the Instance alias column. The
+    #   instance ID is displayed in the Overview section of your instance
+    #   settings. For example, the instance ID is the set of characters at
+    #   the end of the instance ARN, after instance/, such as
+    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp, in UNIX Epoch time format, at which to start the
+    #   reporting interval for the retrieval of historical metrics data. The
+    #   time must be specified using a multiple of 5 minutes, such as 10:05,
+    #   10:10, 10:15.
+    #
+    #   `StartTime` cannot be earlier than 24 hours before the time of the
+    #   request. Historical metrics are available in Amazon Connect only for
+    #   24 hours.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp, in UNIX Epoch time format, at which to end the
+    #   reporting interval for the retrieval of historical metrics data. The
+    #   time must be specified using an interval of 5 minutes, such as
+    #   11:00, 11:05, 11:10, and must be later than the `StartTime`
+    #   timestamp.
+    #
+    #   The time range between `StartTime` and `EndTime` must be less than
+    #   24 hours.
+    #   @return [Time]
+    #
+    # @!attribute [rw] filters
+    #   A `Filters` object that contains a list of queue IDs or queue ARNs,
+    #   up to 100, or a list of Channels to use to filter the metrics
+    #   returned in the response. Metric data is retrieved only for the
+    #   resources associated with the IDs, ARNs, or Channels included in the
+    #   filter. You can use both IDs and ARNs together in a request. Only
+    #   VOICE is supported for Channel.
+    #
+    #   To find the ARN for a queue, open the queue you want to use in the
+    #   Amazon Connect Queue editor. The ARN for the queue is displayed in
+    #   the address bar as part of the URL. For example, the queue ARN is
+    #   the set of characters at the end of the URL, after 'id=' such as
+    #   `arn:aws:connect:us-east-1:270923740243:instance/78fb859d-1b7d-44b1-8aa3-12f0835c5855/queue/1d1a4575-9618-40ab-bbeb-81e45795fe61`.
+    #   The queue ID is also included in the URL, and is the string after
+    #   'queue/'.
+    #   @return [Types::Filters]
+    #
+    # @!attribute [rw] groupings
+    #   The grouping applied to the metrics returned. For example, when
+    #   results are grouped by queueId, the metrics returned are grouped by
+    #   queue. The values returned apply to the metrics for each queue
+    #   rather than aggregated for all queues.
+    #
+    #   The current version supports grouping by Queue
+    #
+    #   If no `Grouping` is included in the request, a summary of
+    #   `HistoricalMetrics` for all queues is returned.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] historical_metrics
+    #   A list of `HistoricalMetric` objects that contain the metrics to
+    #   retrieve with the request.
+    #
+    #   A `HistoricalMetric` object contains: `HistoricalMetricName`,
+    #   `Statistic`, `Threshold`, and `Unit`.
+    #
+    #   For each historical metric you include in the request, you must
+    #   include a `Unit` and a `Statistic`.
+    #
+    #   The following historical metrics are available:
+    #
+    #   CONTACTS\_QUEUED
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistic: SUM
+    #
+    #   CONTACTS\_HANDLED
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistics: SUM
+    #
+    #   CONTACTS\_ABANDONED
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistics: SUM
+    #
+    #   CONTACTS\_CONSULTED
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistics: SUM
+    #
+    #   CONTACTS\_AGENT\_HUNG\_UP\_FIRST
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistics: SUM
+    #
+    #   CONTACTS\_HANDLED\_INCOMING
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistics: SUM
+    #
+    #   CONTACTS\_HANDLED\_OUTBOUND
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistics: SUM
+    #
+    #   CONTACTS\_HOLD\_ABANDONS
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistics: SUM
+    #
+    #   CONTACTS\_TRANSFERRED\_IN
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistics: SUM
+    #
+    #   CONTACTS\_TRANSFERRED\_OUT
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistics: SUM
+    #
+    #   CONTACTS\_TRANSFERRED\_IN\_FROM\_QUEUE
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistics: SUM
+    #
+    #   CONTACTS\_TRANSFERRED\_OUT\_FROM\_QUEUE
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistics: SUM
+    #
+    #   CALLBACK\_CONTACTS\_HANDLED
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistics: SUM
+    #
+    #   CALLBACK\_CONTACTS\_HANDLED
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistics: SUM
+    #
+    #   API\_CONTACTS\_HANDLED
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistics: SUM
+    #
+    #   CONTACTS\_MISSED
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistics: SUM
+    #
+    #   OCCUPANCY
+    #
+    #   : Unit: PERCENT
+    #
+    #     Statistics: AVG
+    #
+    #   HANDLE\_TIME
+    #
+    #   : Unit: SECONDS
+    #
+    #     Statistics: AVG
+    #
+    #   AFTER\_CONTACT\_WORK\_TIME
+    #
+    #   : Unit: SECONDS
+    #
+    #     Statistics: AVG
+    #
+    #   QUEUED\_TIME
+    #
+    #   : Unit: SECONDS
+    #
+    #     Statistics: MAX
+    #
+    #   ABANDON\_TIME
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistics: SUM
+    #
+    #   QUEUE\_ANSWER\_TIME
+    #
+    #   : Unit: SECONDS
+    #
+    #     Statistics: AVG
+    #
+    #   HOLD\_TIME
+    #
+    #   : Unit: SECONDS
+    #
+    #     Statistics: AVG
+    #
+    #   INTERACTION\_TIME
+    #
+    #   : Unit: SECONDS
+    #
+    #     Statistics: AVG
+    #
+    #   INTERACTION\_AND\_HOLD\_TIME
+    #
+    #   : Unit: SECONDS
+    #
+    #     Statistics: AVG
+    #
+    #   SERVICE\_LEVEL
+    #
+    #   : Unit: PERCENT
+    #
+    #     Statistics: AVG
+    #
+    #     Threshold: Only "Less than" comparisons are supported, with the
+    #     following service level thresholds: 15, 20, 25, 30, 45, 60, 90,
+    #     120, 180, 240, 300, 600
+    #   @return [Array<Types::HistoricalMetric>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Indicates the maximum number of results to return per page in the
+    #   response, between 1-100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetMetricDataRequest AWS API Documentation
+    #
+    class GetMetricDataRequest < Struct.new(
+      :instance_id,
+      :start_time,
+      :end_time,
+      :filters,
+      :groupings,
+      :historical_metrics,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A string returned in the response. Use the value returned in the
+    #   response as the value of the NextToken in a subsequent request to
+    #   retrieve the next set of results.
+    #
+    #   The token expires after 5 minutes from the time it is created.
+    #   Subsequent requests that use the NextToken must use the same request
+    #   parameters as the request that generated the token.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_results
+    #   A list of `HistoricalMetricResult` objects, organized by
+    #   `Dimensions`, which is the ID of the resource specified in the
+    #   `Filters` used for the request. The metrics are combined with the
+    #   metrics included in `Collections`, which is a list of
+    #   `HisotricalMetricData` objects.
+    #
+    #   If no `Grouping` is specified in the request, `Collections` includes
+    #   summary data for the `HistoricalMetrics`.
+    #   @return [Array<Types::HistoricalMetricResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetMetricDataResponse AWS API Documentation
+    #
+    class GetMetricDataResponse < Struct.new(
+      :next_token,
+      :metric_results)
       include Aws::Structure
     end
 
@@ -498,6 +1097,85 @@ module Aws::Connect
       :level_three,
       :level_four,
       :level_five)
+      include Aws::Structure
+    end
+
+    # A `HistoricalMetric` object that contains the Name, Unit, Statistic,
+    # and Threshold for the metric.
+    #
+    # @note When making an API call, you may pass HistoricalMetric
+    #   data as a hash:
+    #
+    #       {
+    #         name: "CONTACTS_QUEUED", # accepts CONTACTS_QUEUED, CONTACTS_HANDLED, CONTACTS_ABANDONED, CONTACTS_CONSULTED, CONTACTS_AGENT_HUNG_UP_FIRST, CONTACTS_HANDLED_INCOMING, CONTACTS_HANDLED_OUTBOUND, CONTACTS_HOLD_ABANDONS, CONTACTS_TRANSFERRED_IN, CONTACTS_TRANSFERRED_OUT, CONTACTS_TRANSFERRED_IN_FROM_QUEUE, CONTACTS_TRANSFERRED_OUT_FROM_QUEUE, CONTACTS_MISSED, CALLBACK_CONTACTS_HANDLED, API_CONTACTS_HANDLED, OCCUPANCY, HANDLE_TIME, AFTER_CONTACT_WORK_TIME, QUEUED_TIME, ABANDON_TIME, QUEUE_ANSWER_TIME, HOLD_TIME, INTERACTION_TIME, INTERACTION_AND_HOLD_TIME, SERVICE_LEVEL
+    #         threshold: {
+    #           comparison: "LT", # accepts LT
+    #           threshold_value: 1.0,
+    #         },
+    #         statistic: "SUM", # accepts SUM, MAX, AVG
+    #         unit: "SECONDS", # accepts SECONDS, COUNT, PERCENT
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the historical metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] threshold
+    #   The threshold for the metric, used with service level metrics.
+    #   @return [Types::Threshold]
+    #
+    # @!attribute [rw] statistic
+    #   The statistic for the metric: SUM, MAX, or SUM.
+    #   @return [String]
+    #
+    # @!attribute [rw] unit
+    #   The unit for the metric: COUNT, PERCENT, or SECONDS.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HistoricalMetric AWS API Documentation
+    #
+    class HistoricalMetric < Struct.new(
+      :name,
+      :threshold,
+      :statistic,
+      :unit)
+      include Aws::Structure
+    end
+
+    # A `HistoricalMetricData` object than contains a `Metric` and a
+    # `Value`.
+    #
+    # @!attribute [rw] metric
+    #   A `HistoricalMetric` object.
+    #   @return [Types::HistoricalMetric]
+    #
+    # @!attribute [rw] value
+    #   The `Value` of the metric.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HistoricalMetricData AWS API Documentation
+    #
+    class HistoricalMetricData < Struct.new(
+      :metric,
+      :value)
+      include Aws::Structure
+    end
+
+    # The metrics data returned from a `GetMetricData` operation.
+    #
+    # @!attribute [rw] dimensions
+    #   The `Dimensions` for the metrics.
+    #   @return [Types::Dimensions]
+    #
+    # @!attribute [rw] collections
+    #   A list of `HistoricalMetricData` objects.
+    #   @return [Array<Types::HistoricalMetricData>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HistoricalMetricResult AWS API Documentation
+    #
+    class HistoricalMetricResult < Struct.new(
+      :dimensions,
+      :collections)
       include Aws::Structure
     end
 
@@ -727,6 +1405,25 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # A QueueReference object that contains the the QueueId and ARN for the
+    # queue resource for which metrics are returned.
+    #
+    # @!attribute [rw] id
+    #   The ID of the queue associated with the metrics returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of queue.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QueueReference AWS API Documentation
+    #
+    class QueueReference < Struct.new(
+      :id,
+      :arn)
+      include Aws::Structure
+    end
+
     # A `RoutingProfileSummary` object that contains information about a
     # routing profile, including ARN, Id, and Name.
     #
@@ -916,6 +1613,35 @@ module Aws::Connect
     #
     class StopContactResponse < Aws::EmptyStructure; end
 
+    # A `Threshold` object that includes a comparison and `ThresholdValue`
+    # to compare to. Used with service level metrics.
+    #
+    # @note When making an API call, you may pass Threshold
+    #   data as a hash:
+    #
+    #       {
+    #         comparison: "LT", # accepts LT
+    #         threshold_value: 1.0,
+    #       }
+    #
+    # @!attribute [rw] comparison
+    #   The Threshold to use to compare service level metrics to. Only
+    #   "Less than" (LT) comparisons are supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] threshold_value
+    #   The value of the threshold to compare the metric to. Only "Less
+    #   than" (LT) comparisons are supported.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Threshold AWS API Documentation
+    #
+    class Threshold < Struct.new(
+      :comparison,
+      :threshold_value)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateContactAttributesRequest
     #   data as a hash:
     #
@@ -935,11 +1661,11 @@ module Aws::Connect
     #
     # @!attribute [rw] instance_id
     #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your Amazon Connect instance, open the AWS console and select Amazon
-    #   Connect. Select the instance alias of the instance. The instance ID
-    #   is displayed in the Overview section of your instance settings. For
-    #   example, the instance ID is the set of characters at the end of the
-    #   instance ARN, after instance/, such as
+    #   your instance, open the AWS console and select Amazon Connect.
+    #   Select the alias of the instance in the Instance alias column. The
+    #   instance ID is displayed in the Overview section of your instance
+    #   settings. For example, the instance ID is the set of characters at
+    #   the end of the instance ARN, after instance/, such as
     #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
     #   @return [String]
     #

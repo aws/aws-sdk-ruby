@@ -20,13 +20,23 @@ module Aws::Connect
     AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
     Attributes = Shapes::MapShape.new(name: 'Attributes')
     AutoAccept = Shapes::BooleanShape.new(name: 'AutoAccept')
+    Channel = Shapes::StringShape.new(name: 'Channel')
+    Channels = Shapes::ListShape.new(name: 'Channels')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    Comparison = Shapes::StringShape.new(name: 'Comparison')
     ContactFlowId = Shapes::StringShape.new(name: 'ContactFlowId')
     ContactId = Shapes::StringShape.new(name: 'ContactId')
     ContactNotFoundException = Shapes::StructureShape.new(name: 'ContactNotFoundException')
     CreateUserRequest = Shapes::StructureShape.new(name: 'CreateUserRequest')
     CreateUserResponse = Shapes::StructureShape.new(name: 'CreateUserResponse')
     Credentials = Shapes::StructureShape.new(name: 'Credentials')
+    CurrentMetric = Shapes::StructureShape.new(name: 'CurrentMetric')
+    CurrentMetricData = Shapes::StructureShape.new(name: 'CurrentMetricData')
+    CurrentMetricDataCollections = Shapes::ListShape.new(name: 'CurrentMetricDataCollections')
+    CurrentMetricName = Shapes::StringShape.new(name: 'CurrentMetricName')
+    CurrentMetricResult = Shapes::StructureShape.new(name: 'CurrentMetricResult')
+    CurrentMetricResults = Shapes::ListShape.new(name: 'CurrentMetricResults')
+    CurrentMetrics = Shapes::ListShape.new(name: 'CurrentMetrics')
     DeleteUserRequest = Shapes::StructureShape.new(name: 'DeleteUserRequest')
     DescribeUserHierarchyGroupRequest = Shapes::StructureShape.new(name: 'DescribeUserHierarchyGroupRequest')
     DescribeUserHierarchyGroupResponse = Shapes::StructureShape.new(name: 'DescribeUserHierarchyGroupResponse')
@@ -35,11 +45,19 @@ module Aws::Connect
     DescribeUserRequest = Shapes::StructureShape.new(name: 'DescribeUserRequest')
     DescribeUserResponse = Shapes::StructureShape.new(name: 'DescribeUserResponse')
     DestinationNotAllowedException = Shapes::StructureShape.new(name: 'DestinationNotAllowedException')
+    Dimensions = Shapes::StructureShape.new(name: 'Dimensions')
     DirectoryUserId = Shapes::StringShape.new(name: 'DirectoryUserId')
     DuplicateResourceException = Shapes::StructureShape.new(name: 'DuplicateResourceException')
     Email = Shapes::StringShape.new(name: 'Email')
+    Filters = Shapes::StructureShape.new(name: 'Filters')
+    GetCurrentMetricDataRequest = Shapes::StructureShape.new(name: 'GetCurrentMetricDataRequest')
+    GetCurrentMetricDataResponse = Shapes::StructureShape.new(name: 'GetCurrentMetricDataResponse')
     GetFederationTokenRequest = Shapes::StructureShape.new(name: 'GetFederationTokenRequest')
     GetFederationTokenResponse = Shapes::StructureShape.new(name: 'GetFederationTokenResponse')
+    GetMetricDataRequest = Shapes::StructureShape.new(name: 'GetMetricDataRequest')
+    GetMetricDataResponse = Shapes::StructureShape.new(name: 'GetMetricDataResponse')
+    Grouping = Shapes::StringShape.new(name: 'Grouping')
+    Groupings = Shapes::ListShape.new(name: 'Groupings')
     HierarchyGroup = Shapes::StructureShape.new(name: 'HierarchyGroup')
     HierarchyGroupId = Shapes::StringShape.new(name: 'HierarchyGroupId')
     HierarchyGroupName = Shapes::StringShape.new(name: 'HierarchyGroupName')
@@ -50,6 +68,13 @@ module Aws::Connect
     HierarchyLevelName = Shapes::StringShape.new(name: 'HierarchyLevelName')
     HierarchyPath = Shapes::StructureShape.new(name: 'HierarchyPath')
     HierarchyStructure = Shapes::StructureShape.new(name: 'HierarchyStructure')
+    HistoricalMetric = Shapes::StructureShape.new(name: 'HistoricalMetric')
+    HistoricalMetricData = Shapes::StructureShape.new(name: 'HistoricalMetricData')
+    HistoricalMetricDataCollections = Shapes::ListShape.new(name: 'HistoricalMetricDataCollections')
+    HistoricalMetricName = Shapes::StringShape.new(name: 'HistoricalMetricName')
+    HistoricalMetricResult = Shapes::StructureShape.new(name: 'HistoricalMetricResult')
+    HistoricalMetricResults = Shapes::ListShape.new(name: 'HistoricalMetricResults')
+    HistoricalMetrics = Shapes::ListShape.new(name: 'HistoricalMetrics')
     InstanceId = Shapes::StringShape.new(name: 'InstanceId')
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
@@ -63,6 +88,7 @@ module Aws::Connect
     ListUserHierarchyGroupsResponse = Shapes::StructureShape.new(name: 'ListUserHierarchyGroupsResponse')
     ListUsersRequest = Shapes::StructureShape.new(name: 'ListUsersRequest')
     ListUsersResponse = Shapes::StructureShape.new(name: 'ListUsersResponse')
+    MaxResult100 = Shapes::IntegerShape.new(name: 'MaxResult100')
     MaxResult1000 = Shapes::IntegerShape.new(name: 'MaxResult1000')
     Message = Shapes::StringShape.new(name: 'Message')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -71,6 +97,8 @@ module Aws::Connect
     PhoneNumber = Shapes::StringShape.new(name: 'PhoneNumber')
     PhoneType = Shapes::StringShape.new(name: 'PhoneType')
     QueueId = Shapes::StringShape.new(name: 'QueueId')
+    QueueReference = Shapes::StructureShape.new(name: 'QueueReference')
+    Queues = Shapes::ListShape.new(name: 'Queues')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoutingProfileId = Shapes::StringShape.new(name: 'RoutingProfileId')
     RoutingProfileName = Shapes::StringShape.new(name: 'RoutingProfileName')
@@ -84,9 +112,13 @@ module Aws::Connect
     SecurityToken = Shapes::StringShape.new(name: 'SecurityToken')
     StartOutboundVoiceContactRequest = Shapes::StructureShape.new(name: 'StartOutboundVoiceContactRequest')
     StartOutboundVoiceContactResponse = Shapes::StructureShape.new(name: 'StartOutboundVoiceContactResponse')
+    Statistic = Shapes::StringShape.new(name: 'Statistic')
     StopContactRequest = Shapes::StructureShape.new(name: 'StopContactRequest')
     StopContactResponse = Shapes::StructureShape.new(name: 'StopContactResponse')
+    Threshold = Shapes::StructureShape.new(name: 'Threshold')
+    ThresholdValue = Shapes::FloatShape.new(name: 'ThresholdValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    Unit = Shapes::StringShape.new(name: 'Unit')
     UpdateContactAttributesRequest = Shapes::StructureShape.new(name: 'UpdateContactAttributesRequest')
     UpdateContactAttributesResponse = Shapes::StructureShape.new(name: 'UpdateContactAttributesResponse')
     UpdateUserHierarchyRequest = Shapes::StructureShape.new(name: 'UpdateUserHierarchyRequest')
@@ -101,10 +133,13 @@ module Aws::Connect
     UserPhoneConfig = Shapes::StructureShape.new(name: 'UserPhoneConfig')
     UserSummary = Shapes::StructureShape.new(name: 'UserSummary')
     UserSummaryList = Shapes::ListShape.new(name: 'UserSummaryList')
+    Value = Shapes::FloatShape.new(name: 'Value')
     timestamp = Shapes::TimestampShape.new(name: 'timestamp')
 
     Attributes.key = Shapes::ShapeRef.new(shape: AttributeName)
     Attributes.value = Shapes::ShapeRef.new(shape: AttributeValue)
+
+    Channels.member = Shapes::ShapeRef.new(shape: Channel)
 
     CreateUserRequest.add_member(:username, Shapes::ShapeRef.new(shape: AgentUsername, required: true, location_name: "Username"))
     CreateUserRequest.add_member(:password, Shapes::ShapeRef.new(shape: Password, location_name: "Password"))
@@ -126,6 +161,24 @@ module Aws::Connect
     Credentials.add_member(:refresh_token, Shapes::ShapeRef.new(shape: SecurityToken, location_name: "RefreshToken"))
     Credentials.add_member(:refresh_token_expiration, Shapes::ShapeRef.new(shape: timestamp, location_name: "RefreshTokenExpiration"))
     Credentials.struct_class = Types::Credentials
+
+    CurrentMetric.add_member(:name, Shapes::ShapeRef.new(shape: CurrentMetricName, location_name: "Name"))
+    CurrentMetric.add_member(:unit, Shapes::ShapeRef.new(shape: Unit, location_name: "Unit"))
+    CurrentMetric.struct_class = Types::CurrentMetric
+
+    CurrentMetricData.add_member(:metric, Shapes::ShapeRef.new(shape: CurrentMetric, location_name: "Metric"))
+    CurrentMetricData.add_member(:value, Shapes::ShapeRef.new(shape: Value, location_name: "Value", metadata: {"box"=>true}))
+    CurrentMetricData.struct_class = Types::CurrentMetricData
+
+    CurrentMetricDataCollections.member = Shapes::ShapeRef.new(shape: CurrentMetricData)
+
+    CurrentMetricResult.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
+    CurrentMetricResult.add_member(:collections, Shapes::ShapeRef.new(shape: CurrentMetricDataCollections, location_name: "Collections"))
+    CurrentMetricResult.struct_class = Types::CurrentMetricResult
+
+    CurrentMetricResults.member = Shapes::ShapeRef.new(shape: CurrentMetricResult)
+
+    CurrentMetrics.member = Shapes::ShapeRef.new(shape: CurrentMetric)
 
     DeleteUserRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DeleteUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "UserId"))
@@ -151,11 +204,48 @@ module Aws::Connect
     DescribeUserResponse.add_member(:user, Shapes::ShapeRef.new(shape: User, location_name: "User"))
     DescribeUserResponse.struct_class = Types::DescribeUserResponse
 
+    Dimensions.add_member(:queue, Shapes::ShapeRef.new(shape: QueueReference, location_name: "Queue"))
+    Dimensions.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "Channel"))
+    Dimensions.struct_class = Types::Dimensions
+
+    Filters.add_member(:queues, Shapes::ShapeRef.new(shape: Queues, location_name: "Queues"))
+    Filters.add_member(:channels, Shapes::ShapeRef.new(shape: Channels, location_name: "Channels"))
+    Filters.struct_class = Types::Filters
+
+    GetCurrentMetricDataRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    GetCurrentMetricDataRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, required: true, location_name: "Filters"))
+    GetCurrentMetricDataRequest.add_member(:groupings, Shapes::ShapeRef.new(shape: Groupings, location_name: "Groupings"))
+    GetCurrentMetricDataRequest.add_member(:current_metrics, Shapes::ShapeRef.new(shape: CurrentMetrics, required: true, location_name: "CurrentMetrics"))
+    GetCurrentMetricDataRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetCurrentMetricDataRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetCurrentMetricDataRequest.struct_class = Types::GetCurrentMetricDataRequest
+
+    GetCurrentMetricDataResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetCurrentMetricDataResponse.add_member(:metric_results, Shapes::ShapeRef.new(shape: CurrentMetricResults, location_name: "MetricResults"))
+    GetCurrentMetricDataResponse.add_member(:data_snapshot_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "DataSnapshotTime"))
+    GetCurrentMetricDataResponse.struct_class = Types::GetCurrentMetricDataResponse
+
     GetFederationTokenRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     GetFederationTokenRequest.struct_class = Types::GetFederationTokenRequest
 
     GetFederationTokenResponse.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, location_name: "Credentials"))
     GetFederationTokenResponse.struct_class = Types::GetFederationTokenResponse
+
+    GetMetricDataRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    GetMetricDataRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "StartTime"))
+    GetMetricDataRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "EndTime"))
+    GetMetricDataRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, required: true, location_name: "Filters"))
+    GetMetricDataRequest.add_member(:groupings, Shapes::ShapeRef.new(shape: Groupings, location_name: "Groupings"))
+    GetMetricDataRequest.add_member(:historical_metrics, Shapes::ShapeRef.new(shape: HistoricalMetrics, required: true, location_name: "HistoricalMetrics"))
+    GetMetricDataRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetMetricDataRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetMetricDataRequest.struct_class = Types::GetMetricDataRequest
+
+    GetMetricDataResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetMetricDataResponse.add_member(:metric_results, Shapes::ShapeRef.new(shape: HistoricalMetricResults, location_name: "MetricResults"))
+    GetMetricDataResponse.struct_class = Types::GetMetricDataResponse
+
+    Groupings.member = Shapes::ShapeRef.new(shape: Grouping)
 
     HierarchyGroup.add_member(:id, Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: "Id"))
     HierarchyGroup.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
@@ -189,6 +279,26 @@ module Aws::Connect
     HierarchyStructure.add_member(:level_four, Shapes::ShapeRef.new(shape: HierarchyLevel, location_name: "LevelFour"))
     HierarchyStructure.add_member(:level_five, Shapes::ShapeRef.new(shape: HierarchyLevel, location_name: "LevelFive"))
     HierarchyStructure.struct_class = Types::HierarchyStructure
+
+    HistoricalMetric.add_member(:name, Shapes::ShapeRef.new(shape: HistoricalMetricName, location_name: "Name"))
+    HistoricalMetric.add_member(:threshold, Shapes::ShapeRef.new(shape: Threshold, location_name: "Threshold", metadata: {"box"=>true}))
+    HistoricalMetric.add_member(:statistic, Shapes::ShapeRef.new(shape: Statistic, location_name: "Statistic"))
+    HistoricalMetric.add_member(:unit, Shapes::ShapeRef.new(shape: Unit, location_name: "Unit"))
+    HistoricalMetric.struct_class = Types::HistoricalMetric
+
+    HistoricalMetricData.add_member(:metric, Shapes::ShapeRef.new(shape: HistoricalMetric, location_name: "Metric"))
+    HistoricalMetricData.add_member(:value, Shapes::ShapeRef.new(shape: Value, location_name: "Value", metadata: {"box"=>true}))
+    HistoricalMetricData.struct_class = Types::HistoricalMetricData
+
+    HistoricalMetricDataCollections.member = Shapes::ShapeRef.new(shape: HistoricalMetricData)
+
+    HistoricalMetricResult.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
+    HistoricalMetricResult.add_member(:collections, Shapes::ShapeRef.new(shape: HistoricalMetricDataCollections, location_name: "Collections"))
+    HistoricalMetricResult.struct_class = Types::HistoricalMetricResult
+
+    HistoricalMetricResults.member = Shapes::ShapeRef.new(shape: HistoricalMetricResult)
+
+    HistoricalMetrics.member = Shapes::ShapeRef.new(shape: HistoricalMetric)
 
     ListRoutingProfilesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     ListRoutingProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -226,6 +336,12 @@ module Aws::Connect
     ListUsersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListUsersResponse.struct_class = Types::ListUsersResponse
 
+    QueueReference.add_member(:id, Shapes::ShapeRef.new(shape: QueueId, location_name: "Id"))
+    QueueReference.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    QueueReference.struct_class = Types::QueueReference
+
+    Queues.member = Shapes::ShapeRef.new(shape: QueueId)
+
     RoutingProfileSummary.add_member(:id, Shapes::ShapeRef.new(shape: RoutingProfileId, location_name: "Id"))
     RoutingProfileSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     RoutingProfileSummary.add_member(:name, Shapes::ShapeRef.new(shape: RoutingProfileName, location_name: "Name"))
@@ -259,6 +375,10 @@ module Aws::Connect
     StopContactRequest.struct_class = Types::StopContactRequest
 
     StopContactResponse.struct_class = Types::StopContactResponse
+
+    Threshold.add_member(:comparison, Shapes::ShapeRef.new(shape: Comparison, location_name: "Comparison"))
+    Threshold.add_member(:threshold_value, Shapes::ShapeRef.new(shape: ThresholdValue, location_name: "ThresholdValue", metadata: {"box"=>true}))
+    Threshold.struct_class = Types::Threshold
 
     UpdateContactAttributesRequest.add_member(:initial_contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "InitialContactId"))
     UpdateContactAttributesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
@@ -407,6 +527,25 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:get_current_metric_data, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCurrentMetricData"
+        o.http_method = "POST"
+        o.http_request_uri = "/metrics/current/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: GetCurrentMetricDataRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCurrentMetricDataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:get_federation_token, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetFederationToken"
         o.http_method = "GET"
@@ -419,6 +558,25 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: UserNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
+      end)
+
+      api.add_operation(:get_metric_data, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMetricData"
+        o.http_method = "POST"
+        o.http_request_uri = "/metrics/historical/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: GetMetricDataRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMetricDataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_routing_profiles, Seahorse::Model::Operation.new.tap do |o|

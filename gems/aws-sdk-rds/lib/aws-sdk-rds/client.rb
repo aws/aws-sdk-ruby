@@ -7496,6 +7496,10 @@ module Aws::RDS
     #   resp.option_group_options[0].option_group_option_settings[0].apply_type #=> String
     #   resp.option_group_options[0].option_group_option_settings[0].allowed_values #=> String
     #   resp.option_group_options[0].option_group_option_settings[0].is_modifiable #=> Boolean
+    #   resp.option_group_options[0].option_group_option_settings[0].is_required #=> Boolean
+    #   resp.option_group_options[0].option_group_option_settings[0].minimum_engine_version_per_allowed_value #=> Array
+    #   resp.option_group_options[0].option_group_option_settings[0].minimum_engine_version_per_allowed_value[0].allowed_value #=> String
+    #   resp.option_group_options[0].option_group_option_settings[0].minimum_engine_version_per_allowed_value[0].minimum_engine_version #=> String
     #   resp.option_group_options[0].option_group_option_versions #=> Array
     #   resp.option_group_options[0].option_group_option_versions[0].version #=> String
     #   resp.option_group_options[0].option_group_option_versions[0].is_default #=> Boolean
@@ -14436,7 +14440,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
