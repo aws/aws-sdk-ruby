@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.137 (2018-09-25)
+------------------
+
 * Feature - Aws::CloudFront - Updated the documentation for Amazon CloudFront.
 
 * Feature - Aws::DirectoryService - Updated the API, and documentation for AWS Directory Service.
