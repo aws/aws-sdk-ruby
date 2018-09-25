@@ -4988,12 +4988,13 @@ module Aws::CloudFront
     #
     # @!attribute [rw] include_body
     #   A flag that allows a Lambda function to have read access to the body
-    #   content. For more information, see [Accessing Body Content][1] in
-    #   the Amazon CloudFront Developer Guide.
+    #   content. For more information, see [Accessing the Request Body by
+    #   Choosing the Include Body Option][1] in the Amazon CloudFront
+    #   Developer Guide.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-include-body-access.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-06-18/LambdaFunctionAssociation AWS API Documentation

@@ -223,8 +223,28 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Creates a new web distribution. Send a `POST` request to the
-    # `/CloudFront API version/distribution`/`distribution ID` resource.
+    # Creates a new web distribution. You create a CloudFront distribution
+    # to tell CloudFront where you want content to be delivered from, and
+    # the details about how to track and manage content delivery. Send a
+    # `POST` request to the `/CloudFront API
+    # version/distribution`/`distribution ID` resource.
+    #
+    # When you update a distribution, there are more required fields than
+    # when you create a distribution. When you update your distribution by
+    # using UpdateDistribution, follow the steps included in the
+    # documentation to get the current configuration and then make your
+    # updates. This helps to make sure that you include all of the required
+    # fields. To view a summary, see [Required Fields for Create
+    # Distribution and Update Distribution][1] in the *Amazon CloudFront
+    # Developer Guide*.
+    #
+    # If you are using Adobe Flash Media Server's RTMP protocol, you set up
+    # a different kind of CloudFront distribution. For more information, see
+    # CreateStreamingDistribution.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-overview-required-fields.html
     #
     # @option params [required, Types::DistributionConfig] :distribution_config
     #   The distribution's configuration information.
@@ -3102,36 +3122,57 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Updates the configuration for a web distribution. Perform the
-    # following steps.
+    # Updates the configuration for a web distribution.
+    #
+    # When you update a distribution, there are more required fields than
+    # when you create a distribution. When you update your distribution by
+    # using this API action, follow the steps here to get the current
+    # configuration and then make your updates, to make sure that you
+    # include all of the required fields. To view a summary, see [Required
+    # Fields for Create Distribution and Update Distribution][1] in the
+    # *Amazon CloudFront Developer Guide*.
+    #
+    # The update process includes getting the current distribution
+    # configuration, updating the XML document that is returned to make your
+    # changes, and then submitting an `UpdateDistribution` request to make
+    # the updates.
     #
     # For information about updating a distribution using the CloudFront
-    # console, see [Creating or Updating a Web Distribution Using the
-    # CloudFront Console ][1] in the *Amazon CloudFront Developer Guide*.
+    # console instead, see [Creating a Distribution][2] in the *Amazon
+    # CloudFront Developer Guide*.
     #
     # **To update a web distribution using the CloudFront API**
     #
     # 1.  Submit a GetDistributionConfig request to get the current
     #     configuration and an `Etag` header for the distribution.
     #
-    #     <note markdown="1"> If you update the distribution again, you need to get a new `Etag`
+    #     <note markdown="1"> If you update the distribution again, you must get a new `Etag`
     #     header.
     #
     #      </note>
     #
     # 2.  Update the XML document that was returned in the response to your
-    #     `GetDistributionConfig` request to include the desired changes.
-    #     You can't change the value of `CallerReference`. If you try to
-    #     change this value, CloudFront returns an `IllegalUpdate` error.
-    #     Note that you must strip out the ETag parameter that is returned.
+    #     `GetDistributionConfig` request to include your changes.
     #
-    #     The new configuration replaces the existing configuration; the
-    #     values that you specify in an `UpdateDistribution` request are not
-    #     merged into the existing configuration. When you add, delete, or
-    #     replace values in an element that allows multiple values (for
-    #     example, `CNAME`), you must specify all of the values that you
-    #     want to appear in the updated distribution. In addition, you must
-    #     update the corresponding `Quantity` element.
+    #     When you edit the XML file, be aware of the following:
+    #
+    #      * You must strip out the ETag parameter that is returned.
+    #
+    #     * Additional fields are required when you update a distribution.
+    #       There may be fields included in the XML file for features that
+    #       you haven't configured for your distribution. This is expected
+    #       and required to successfully update the distribution.
+    #
+    #     * You can't change the value of `CallerReference`. If you try to
+    #       change this value, CloudFront returns an `IllegalUpdate` error.
+    #
+    #     * The new configuration replaces the existing configuration; the
+    #       values that you specify in an `UpdateDistribution` request are
+    #       not merged into your existing configuration. When you add,
+    #       delete, or replace values in an element that allows multiple
+    #       values (for example, `CNAME`), you must specify all of the
+    #       values that you want to appear in the updated distribution. In
+    #       addition, you must update the corresponding `Quantity` element.
     #
     # 3.  Submit an `UpdateDistribution` request to update the configuration
     #     for your distribution:
@@ -3151,21 +3192,10 @@ module Aws::CloudFront
     #     changes have propagated. When propagation is complete, the value
     #     of `Status` is `Deployed`.
     #
-    #     Beginning with the 2012-05-05 version of the CloudFront API, we
-    #     made substantial changes to the format of the XML document that
-    #     you include in the request body when you create or update a
-    #     distribution. With previous versions of the API, we discovered
-    #     that it was too easy to accidentally delete one or more values for
-    #     an element that accepts multiple values, for example, CNAMEs and
-    #     trusted signers. Our changes for the 2012-05-05 release are
-    #     intended to prevent these accidental deletions and to notify you
-    #     when there's a mismatch between the number of values you say
-    #     you're specifying in the `Quantity` element and the number of
-    #     values you're actually specifying.
     #
     #
-    #
-    # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-creating-console.html
+    # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-overview-required-fields.html
+    # [2]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-creating-console.html
     #
     # @option params [required, Types::DistributionConfig] :distribution_config
     #   The distribution's configuration information.
@@ -3825,7 +3855,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

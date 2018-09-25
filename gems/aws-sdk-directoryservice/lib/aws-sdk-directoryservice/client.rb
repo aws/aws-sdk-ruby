@@ -186,6 +186,44 @@ module Aws::DirectoryService
 
     # @!group API Operations
 
+    # Accepts a directory sharing request that was sent from the directory
+    # owner account.
+    #
+    # @option params [required, String] :shared_directory_id
+    #   Identifier of the shared directory in the directory consumer account.
+    #   This identifier is different for each directory owner account.
+    #
+    # @return [Types::AcceptSharedDirectoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AcceptSharedDirectoryResult#shared_directory #shared_directory} => Types::SharedDirectory
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_shared_directory({
+    #     shared_directory_id: "DirectoryId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.shared_directory.owner_account_id #=> String
+    #   resp.shared_directory.owner_directory_id #=> String
+    #   resp.shared_directory.share_method #=> String, one of "ORGANIZATIONS", "HANDSHAKE"
+    #   resp.shared_directory.shared_account_id #=> String
+    #   resp.shared_directory.shared_directory_id #=> String
+    #   resp.shared_directory.share_status #=> String, one of "Shared", "PendingAcceptance", "Rejected", "Rejecting", "RejectFailed", "Sharing", "ShareFailed", "Deleted", "Deleting"
+    #   resp.shared_directory.share_notes #=> String
+    #   resp.shared_directory.created_date_time #=> Time
+    #   resp.shared_directory.last_updated_date_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AcceptSharedDirectory AWS API Documentation
+    #
+    # @overload accept_shared_directory(params = {})
+    # @param [Hash] params ({})
+    def accept_shared_directory(params = {}, options = {})
+      req = build_request(:accept_shared_directory, params)
+      req.send_request(options)
+    end
+
     # If the DNS server for your on-premises domain uses a publicly
     # addressable IP address, you must add a CIDR address block to correctly
     # route traffic to and from your Microsoft AD on Amazon Web Services.
@@ -355,9 +393,9 @@ module Aws::DirectoryService
 
     # Creates an AD Connector to connect to an on-premises directory.
     #
-    # Before you call *ConnectDirectory*, ensure that all of the required
+    # Before you call `ConnectDirectory`, ensure that all of the required
     # permissions have been explicitly granted through a policy. For details
-    # about what permissions are required to run the *ConnectDirectory*
+    # about what permissions are required to run the `ConnectDirectory`
     # operation, see [AWS Directory Service API Permissions: Actions,
     # Resources, and Conditions Reference][1].
     #
@@ -366,7 +404,7 @@ module Aws::DirectoryService
     # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html
     #
     # @option params [required, String] :name
-    #   The fully-qualified name of the on-premises directory, such as
+    #   The fully qualified name of the on-premises directory, such as
     #   `corp.example.com`.
     #
     # @option params [String] :short_name
@@ -558,9 +596,9 @@ module Aws::DirectoryService
 
     # Creates a Simple AD directory.
     #
-    # Before you call *CreateDirectory*, ensure that all of the required
+    # Before you call `CreateDirectory`, ensure that all of the required
     # permissions have been explicitly granted through a policy. For details
-    # about what permissions are required to run the *CreateDirectory*
+    # about what permissions are required to run the `CreateDirectory`
     # operation, see [AWS Directory Service API Permissions: Actions,
     # Resources, and Conditions Reference][1].
     #
@@ -577,7 +615,7 @@ module Aws::DirectoryService
     #
     # @option params [required, String] :password
     #   The password for the directory administrator. The directory creation
-    #   process creates a directory administrator account with the username
+    #   process creates a directory administrator account with the user name
     #   `Administrator` and this password.
     #
     # @option params [String] :description
@@ -848,9 +886,9 @@ module Aws::DirectoryService
 
     # Deletes an AWS Directory Service directory.
     #
-    # Before you call *DeleteDirectory*, ensure that all of the required
+    # Before you call `DeleteDirectory`, ensure that all of the required
     # permissions have been explicitly granted through a policy. For details
-    # about what permissions are required to run the *DeleteDirectory*
+    # about what permissions are required to run the `DeleteDirectory`
     # operation, see [AWS Directory Service API Permissions: Actions,
     # Resources, and Conditions Reference][1].
     #
@@ -1043,17 +1081,17 @@ module Aws::DirectoryService
     # Obtains information about the directories that belong to this account.
     #
     # You can retrieve information about specific directories by passing the
-    # directory identifiers in the *DirectoryIds* parameter. Otherwise, all
+    # directory identifiers in the `DirectoryIds` parameter. Otherwise, all
     # directories that belong to the current account are returned.
     #
-    # This operation supports pagination with the use of the *NextToken*
+    # This operation supports pagination with the use of the `NextToken`
     # request and response parameters. If more results are available, the
-    # *DescribeDirectoriesResult.NextToken* member contains a token that you
+    # `DescribeDirectoriesResult.NextToken` member contains a token that you
     # pass in the next call to DescribeDirectories to retrieve the next set
     # of items.
     #
     # You can also specify a maximum number of return results with the
-    # *Limit* parameter.
+    # `Limit` parameter.
     #
     # @option params [Array<String>] :directory_ids
     #   A list of identifiers of the directories for which to obtain the
@@ -1063,7 +1101,7 @@ module Aws::DirectoryService
     #   An empty list results in an `InvalidParameterException` being thrown.
     #
     # @option params [String] :next_token
-    #   The *DescribeDirectoriesResult.NextToken* value from a previous call
+    #   The `DescribeDirectoriesResult.NextToken` value from a previous call
     #   to DescribeDirectories. Pass null if this is the first call.
     #
     # @option params [Integer] :limit
@@ -1098,9 +1136,12 @@ module Aws::DirectoryService
     #   resp.directory_descriptions[0].dns_ip_addrs #=> Array
     #   resp.directory_descriptions[0].dns_ip_addrs[0] #=> String
     #   resp.directory_descriptions[0].stage #=> String, one of "Requested", "Creating", "Created", "Active", "Inoperable", "Impaired", "Restoring", "RestoreFailed", "Deleting", "Deleted", "Failed"
+    #   resp.directory_descriptions[0].share_status #=> String, one of "Shared", "PendingAcceptance", "Rejected", "Rejecting", "RejectFailed", "Sharing", "ShareFailed", "Deleted", "Deleting"
+    #   resp.directory_descriptions[0].share_method #=> String, one of "ORGANIZATIONS", "HANDSHAKE"
+    #   resp.directory_descriptions[0].share_notes #=> String
     #   resp.directory_descriptions[0].launch_time #=> Time
     #   resp.directory_descriptions[0].stage_last_updated_date_time #=> Time
-    #   resp.directory_descriptions[0].type #=> String, one of "SimpleAD", "ADConnector", "MicrosoftAD"
+    #   resp.directory_descriptions[0].type #=> String, one of "SimpleAD", "ADConnector", "MicrosoftAD", "SharedMicrosoftAD"
     #   resp.directory_descriptions[0].vpc_settings.vpc_id #=> String
     #   resp.directory_descriptions[0].vpc_settings.subnet_ids #=> Array
     #   resp.directory_descriptions[0].vpc_settings.subnet_ids[0] #=> String
@@ -1129,6 +1170,26 @@ module Aws::DirectoryService
     #   resp.directory_descriptions[0].stage_reason #=> String
     #   resp.directory_descriptions[0].sso_enabled #=> Boolean
     #   resp.directory_descriptions[0].desired_number_of_domain_controllers #=> Integer
+    #   resp.directory_descriptions[0].owner_directory_description.directory_id #=> String
+    #   resp.directory_descriptions[0].owner_directory_description.account_id #=> String
+    #   resp.directory_descriptions[0].owner_directory_description.dns_ip_addrs #=> Array
+    #   resp.directory_descriptions[0].owner_directory_description.dns_ip_addrs[0] #=> String
+    #   resp.directory_descriptions[0].owner_directory_description.vpc_settings.vpc_id #=> String
+    #   resp.directory_descriptions[0].owner_directory_description.vpc_settings.subnet_ids #=> Array
+    #   resp.directory_descriptions[0].owner_directory_description.vpc_settings.subnet_ids[0] #=> String
+    #   resp.directory_descriptions[0].owner_directory_description.vpc_settings.security_group_id #=> String
+    #   resp.directory_descriptions[0].owner_directory_description.vpc_settings.availability_zones #=> Array
+    #   resp.directory_descriptions[0].owner_directory_description.vpc_settings.availability_zones[0] #=> String
+    #   resp.directory_descriptions[0].owner_directory_description.radius_settings.radius_servers #=> Array
+    #   resp.directory_descriptions[0].owner_directory_description.radius_settings.radius_servers[0] #=> String
+    #   resp.directory_descriptions[0].owner_directory_description.radius_settings.radius_port #=> Integer
+    #   resp.directory_descriptions[0].owner_directory_description.radius_settings.radius_timeout #=> Integer
+    #   resp.directory_descriptions[0].owner_directory_description.radius_settings.radius_retries #=> Integer
+    #   resp.directory_descriptions[0].owner_directory_description.radius_settings.shared_secret #=> String
+    #   resp.directory_descriptions[0].owner_directory_description.radius_settings.authentication_protocol #=> String, one of "PAP", "CHAP", "MS-CHAPv1", "MS-CHAPv2"
+    #   resp.directory_descriptions[0].owner_directory_description.radius_settings.display_label #=> String
+    #   resp.directory_descriptions[0].owner_directory_description.radius_settings.use_same_username #=> Boolean
+    #   resp.directory_descriptions[0].owner_directory_description.radius_status #=> String, one of "Creating", "Completed", "Failed"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeDirectories AWS API Documentation
@@ -1239,6 +1300,60 @@ module Aws::DirectoryService
     # @param [Hash] params ({})
     def describe_event_topics(params = {}, options = {})
       req = build_request(:describe_event_topics, params)
+      req.send_request(options)
+    end
+
+    # Returns the shared directories in your account.
+    #
+    # @option params [required, String] :owner_directory_id
+    #   Returns the identifier of the directory in the directory owner
+    #   account.
+    #
+    # @option params [Array<String>] :shared_directory_ids
+    #   A list of identifiers of all shared directories in your account.
+    #
+    # @option params [String] :next_token
+    #   The `DescribeSharedDirectoriesResult.NextToken` value from a previous
+    #   call to DescribeSharedDirectories. Pass null if this is the first
+    #   call.
+    #
+    # @option params [Integer] :limit
+    #   The number of shared directories to return in the response object.
+    #
+    # @return [Types::DescribeSharedDirectoriesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSharedDirectoriesResult#shared_directories #shared_directories} => Array&lt;Types::SharedDirectory&gt;
+    #   * {Types::DescribeSharedDirectoriesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_shared_directories({
+    #     owner_directory_id: "DirectoryId", # required
+    #     shared_directory_ids: ["DirectoryId"],
+    #     next_token: "NextToken",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.shared_directories #=> Array
+    #   resp.shared_directories[0].owner_account_id #=> String
+    #   resp.shared_directories[0].owner_directory_id #=> String
+    #   resp.shared_directories[0].share_method #=> String, one of "ORGANIZATIONS", "HANDSHAKE"
+    #   resp.shared_directories[0].shared_account_id #=> String
+    #   resp.shared_directories[0].shared_directory_id #=> String
+    #   resp.shared_directories[0].share_status #=> String, one of "Shared", "PendingAcceptance", "Rejected", "Rejecting", "RejectFailed", "Sharing", "ShareFailed", "Deleted", "Deleting"
+    #   resp.shared_directories[0].share_notes #=> String
+    #   resp.shared_directories[0].created_date_time #=> Time
+    #   resp.shared_directories[0].last_updated_date_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeSharedDirectories AWS API Documentation
+    #
+    # @overload describe_shared_directories(params = {})
+    # @param [Hash] params ({})
+    def describe_shared_directories(params = {}, options = {})
+      req = build_request(:describe_shared_directories, params)
       req.send_request(options)
     end
 
@@ -1367,7 +1482,7 @@ module Aws::DirectoryService
 
     # Disables multi-factor authentication (MFA) with the Remote
     # Authentication Dial In User Service (RADIUS) server for an AD
-    # Connector directory.
+    # Connector or Microsoft AD directory.
     #
     # @option params [required, String] :directory_id
     #   The identifier of the directory for which to disable MFA.
@@ -1431,7 +1546,7 @@ module Aws::DirectoryService
 
     # Enables multi-factor authentication (MFA) with the Remote
     # Authentication Dial In User Service (RADIUS) server for an AD
-    # Connector directory.
+    # Connector or Microsoft AD directory.
     #
     # @option params [required, String] :directory_id
     #   The identifier of the directory for which to enable MFA.
@@ -1776,6 +1891,36 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
+    # Rejects a directory sharing request that was sent from the directory
+    # owner account.
+    #
+    # @option params [required, String] :shared_directory_id
+    #   Identifier of the shared directory in the directory consumer account.
+    #   This identifier is different for each directory owner account.
+    #
+    # @return [Types::RejectSharedDirectoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RejectSharedDirectoryResult#shared_directory_id #shared_directory_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reject_shared_directory({
+    #     shared_directory_id: "DirectoryId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.shared_directory_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RejectSharedDirectory AWS API Documentation
+    #
+    # @overload reject_shared_directory(params = {})
+    # @param [Hash] params ({})
+    def reject_shared_directory(params = {}, options = {})
+      req = build_request(:reject_shared_directory, params)
+      req.send_request(options)
+    end
+
     # Removes IP address blocks from a directory.
     #
     # @option params [required, String] :directory_id
@@ -1837,7 +1982,7 @@ module Aws::DirectoryService
     #   which the user resides.
     #
     # @option params [required, String] :user_name
-    #   The username of the user whose password will be reset.
+    #   The user name of the user whose password will be reset.
     #
     # @option params [required, String] :new_password
     #   The new password that will be reset.
@@ -1892,6 +2037,75 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
+    # Shares a specified directory (`DirectoryId`) in your AWS account
+    # (directory owner) with another AWS account (directory consumer). With
+    # this operation you can use your directory from any AWS account and
+    # from any Amazon VPC within an AWS Region.
+    #
+    # When you share your AWS Managed Microsoft AD directory, AWS Directory
+    # Service creates a shared directory in the directory consumer account.
+    # This shared directory contains the metadata to provide access to the
+    # directory within the directory owner account. The shared directory is
+    # visible in all VPCs in the directory consumer account.
+    #
+    # The `ShareMethod` parameter determines whether the specified directory
+    # can be shared between AWS accounts inside the same AWS organization
+    # (`ORGANIZATIONS`). It also determines whether you can share the
+    # directory with any other AWS account either inside or outside of the
+    # organization (`HANDSHAKE`).
+    #
+    # The `ShareNotes` parameter is only used when `HANDSHAKE` is called,
+    # which sends a directory sharing request to the directory consumer.
+    #
+    # @option params [required, String] :directory_id
+    #   Identifier of the AWS Managed Microsoft AD directory that you want to
+    #   share with other AWS accounts.
+    #
+    # @option params [String] :share_notes
+    #   A directory share request that is sent by the directory owner to the
+    #   directory consumer. The request includes a typed message to help the
+    #   directory consumer administrator determine whether to approve or
+    #   reject the share invitation.
+    #
+    # @option params [required, Types::ShareTarget] :share_target
+    #   Identifier for the directory consumer account with whom the directory
+    #   is to be shared.
+    #
+    # @option params [required, String] :share_method
+    #   The method used when sharing a directory to determine whether the
+    #   directory should be shared within your AWS organization
+    #   (`ORGANIZATIONS`) or with any AWS account by sending a directory
+    #   sharing request (`HANDSHAKE`).
+    #
+    # @return [Types::ShareDirectoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ShareDirectoryResult#shared_directory_id #shared_directory_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.share_directory({
+    #     directory_id: "DirectoryId", # required
+    #     share_notes: "Notes",
+    #     share_target: { # required
+    #       id: "TargetId", # required
+    #       type: "ACCOUNT", # required, accepts ACCOUNT
+    #     },
+    #     share_method: "ORGANIZATIONS", # required, accepts ORGANIZATIONS, HANDSHAKE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.shared_directory_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ShareDirectory AWS API Documentation
+    #
+    # @overload share_directory(params = {})
+    # @param [Hash] params ({})
+    def share_directory(params = {}, options = {})
+      req = build_request(:share_directory, params)
+      req.send_request(options)
+    end
+
     # Applies a schema extension to a Microsoft AD directory.
     #
     # @option params [required, String] :directory_id
@@ -1934,6 +2148,44 @@ module Aws::DirectoryService
     # @param [Hash] params ({})
     def start_schema_extension(params = {}, options = {})
       req = build_request(:start_schema_extension, params)
+      req.send_request(options)
+    end
+
+    # Stops the directory sharing between the directory owner and consumer
+    # accounts.
+    #
+    # @option params [required, String] :directory_id
+    #   The identifier of the AWS Managed Microsoft AD directory that you want
+    #   to stop sharing.
+    #
+    # @option params [required, Types::UnshareTarget] :unshare_target
+    #   Identifier for the directory consumer account with whom the directory
+    #   has to be unshared.
+    #
+    # @return [Types::UnshareDirectoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UnshareDirectoryResult#shared_directory_id #shared_directory_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.unshare_directory({
+    #     directory_id: "DirectoryId", # required
+    #     unshare_target: { # required
+    #       id: "TargetId", # required
+    #       type: "ACCOUNT", # required, accepts ACCOUNT
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.shared_directory_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UnshareDirectory AWS API Documentation
+    #
+    # @overload unshare_directory(params = {})
+    # @param [Hash] params ({})
+    def unshare_directory(params = {}, options = {})
+      req = build_request(:unshare_directory, params)
       req.send_request(options)
     end
 
@@ -2004,7 +2256,7 @@ module Aws::DirectoryService
     end
 
     # Updates the Remote Authentication Dial In User Service (RADIUS) server
-    # information for an AD Connector directory.
+    # information for an AD Connector or Microsoft AD directory.
     #
     # @option params [required, String] :directory_id
     #   The identifier of the directory for which to update the RADIUS server
@@ -2086,7 +2338,7 @@ module Aws::DirectoryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directoryservice'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

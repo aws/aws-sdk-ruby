@@ -3357,7 +3357,8 @@ module Aws::EC2
     #   subfolder in the bucket, use the following ARN format:
     #   `bucket_ARN/subfolder_name/`. For example, to specify a subfolder
     #   named `my-logs` in a bucket named `my-bucket`, use the following ARN:
-    #   `arn:aws:s3:::my-bucket/my-logs/`.
+    #   `arn:aws:s3:::my-bucket/my-logs/`. You cannot use `AWSLogs` as a
+    #   subfolder name. This is a reserved term.
     #
     # @return [Types::CreateFlowLogsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3494,7 +3495,10 @@ module Aws::EC2
     # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html
     #
     # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   Information about one or more block device mappings.
+    #   Information about one or more block device mappings. This parameter
+    #   cannot be used to modify the encryption status of existing volumes or
+    #   snapshots. To create an AMI with encrypted snapshots, use the
+    #   CopyImage action.
     #
     # @option params [String] :description
     #   A description for the new image.
@@ -14102,9 +14106,18 @@ module Aws::EC2
     #
     #   Default: Describes all your route tables.
     #
+    # @option params [String] :next_token
+    #   The token to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another call with the returned
+    #   **NextToken** value. This value can be between 5 and 100.
+    #
     # @return [Types::DescribeRouteTablesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeRouteTablesResult#route_tables #route_tables} => Array&lt;Types::RouteTable&gt;
+    #   * {Types::DescribeRouteTablesResult#next_token #next_token} => String
     #
     #
     # @example Example: To describe a route table
@@ -14156,6 +14169,8 @@ module Aws::EC2
     #     ],
     #     dry_run: false,
     #     route_table_ids: ["String"],
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -14186,6 +14201,7 @@ module Aws::EC2
     #   resp.route_tables[0].tags[0].key #=> String
     #   resp.route_tables[0].tags[0].value #=> String
     #   resp.route_tables[0].vpc_id #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRouteTables AWS API Documentation
     #
@@ -25757,7 +25773,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

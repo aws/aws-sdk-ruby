@@ -606,7 +606,10 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   Information about one or more block device mappings.
+    #   Information about one or more block device mappings. This parameter
+    #   cannot be used to modify the encryption status of existing volumes or
+    #   snapshots. To create an AMI with encrypted snapshots, use the
+    #   CopyImage action.
     # @option options [String] :description
     #   A description for the new image.
     # @option options [Boolean] :dry_run
