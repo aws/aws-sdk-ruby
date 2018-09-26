@@ -3411,6 +3411,37 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetDataCatalogEncryptionSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog for which to retrieve the security
+    #   configuration. If none is supplied, the AWS account ID is used by
+    #   default.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataCatalogEncryptionSettingsRequest AWS API Documentation
+    #
+    class GetDataCatalogEncryptionSettingsRequest < Struct.new(
+      :catalog_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_catalog_encryption_settings
+    #   The requested security configuration.
+    #   @return [Types::DataCatalogEncryptionSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataCatalogEncryptionSettingsResponse AWS API Documentation
+    #
+    class GetDataCatalogEncryptionSettingsResponse < Struct.new(
+      :data_catalog_encryption_settings)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetDatabaseRequest
     #   data as a hash:
     #

@@ -1214,6 +1214,7 @@ module Aws::RDS
     #           auto_pause: false,
     #           seconds_until_auto_pause: 1,
     #         },
+    #         deletion_protection: false,
     #         source_region: "String",
     #       }
     #
@@ -1525,6 +1526,12 @@ module Aws::RDS
     #   properties of the DB cluster.
     #   @return [Types::ScalingConfiguration]
     #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB cluster should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] destination_region
     #   @return [String]
     #
@@ -1562,6 +1569,7 @@ module Aws::RDS
       :enable_cloudwatch_logs_exports,
       :engine_mode,
       :scaling_configuration,
+      :deletion_protection,
       :destination_region,
       :source_region)
       include Aws::Structure
@@ -1790,6 +1798,7 @@ module Aws::RDS
     #             value: "String",
     #           },
     #         ],
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] db_name
@@ -2631,6 +2640,17 @@ module Aws::RDS
     #   DB instance class of the DB instance.
     #   @return [Array<Types::ProcessorFeature>]
     #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB instance should have deletion protection
+    #   enabled. The database can't be deleted when this value is set to
+    #   true. The default is false. For more information, see [ Deleting a
+    #   DB Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceMessage AWS API Documentation
     #
     class CreateDBInstanceMessage < Struct.new(
@@ -2677,7 +2697,8 @@ module Aws::RDS
       :performance_insights_kms_key_id,
       :performance_insights_retention_period,
       :enable_cloudwatch_logs_exports,
-      :processor_features)
+      :processor_features,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -2720,6 +2741,7 @@ module Aws::RDS
     #           },
     #         ],
     #         use_default_processor_features: false,
+    #         deletion_protection: false,
     #         source_region: "String",
     #       }
     #
@@ -3044,6 +3066,17 @@ module Aws::RDS
     #   uses its default processor features.
     #   @return [Boolean]
     #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB instance should have deletion protection
+    #   enabled. The database can't be deleted when this value is set to
+    #   true. The default is false. For more information, see [ Deleting a
+    #   DB Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    #   @return [Boolean]
+    #
     # @!attribute [rw] destination_region
     #   @return [String]
     #
@@ -3080,6 +3113,7 @@ module Aws::RDS
       :enable_cloudwatch_logs_exports,
       :processor_features,
       :use_default_processor_features,
+      :deletion_protection,
       :destination_region,
       :source_region)
       include Aws::Structure
@@ -3830,6 +3864,11 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
     #   @return [Types::ScalingConfigurationInfo]
     #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB cluster has deletion protection enabled. The
+    #   database can't be deleted when this value is set to true.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -3874,7 +3913,8 @@ module Aws::RDS
       :enabled_cloudwatch_logs_exports,
       :capacity,
       :engine_mode,
-      :scaling_configuration_info)
+      :scaling_configuration_info,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -4816,6 +4856,16 @@ module Aws::RDS
     #   DB instance class of the DB instance.
     #   @return [Array<Types::ProcessorFeature>]
     #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB instance has deletion protection enabled. The
+    #   database can't be deleted when this value is set to true. For more
+    #   information, see [ Deleting a DB Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -4872,7 +4922,8 @@ module Aws::RDS
       :performance_insights_kms_key_id,
       :performance_insights_retention_period,
       :enabled_cloudwatch_logs_exports,
-      :processor_features)
+      :processor_features,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -8603,6 +8654,7 @@ module Aws::RDS
     #           auto_pause: false,
     #           seconds_until_auto_pause: 1,
     #         },
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -8790,6 +8842,11 @@ module Aws::RDS
     #   scaling properties for DB clusters in `serverless` DB engine mode.
     #   @return [Types::ScalingConfiguration]
     #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB cluster has deletion protection enabled. The
+    #   database can't be deleted when this value is set to true.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterMessage AWS API Documentation
     #
     class ModifyDBClusterMessage < Struct.new(
@@ -8808,7 +8865,8 @@ module Aws::RDS
       :backtrack_window,
       :cloudwatch_logs_export_configuration,
       :engine_version,
-      :scaling_configuration)
+      :scaling_configuration,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -8989,6 +9047,7 @@ module Aws::RDS
     #           },
     #         ],
     #         use_default_processor_features: false,
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] db_instance_identifier
@@ -9591,6 +9650,16 @@ module Aws::RDS
     #   uses its default processor features.
     #   @return [Boolean]
     #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB instance has deletion protection enabled. The
+    #   database can't be deleted when this value is set to true. For more
+    #   information, see [ Deleting a DB Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstanceMessage AWS API Documentation
     #
     class ModifyDBInstanceMessage < Struct.new(
@@ -9632,7 +9701,8 @@ module Aws::RDS
       :performance_insights_retention_period,
       :cloudwatch_logs_export_configuration,
       :processor_features,
-      :use_default_processor_features)
+      :use_default_processor_features,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -11763,6 +11833,7 @@ module Aws::RDS
     #         s3_ingestion_role_arn: "String", # required
     #         backtrack_window: 1,
     #         enable_cloudwatch_logs_exports: ["String"],
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] availability_zones
@@ -12027,6 +12098,12 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #   @return [Array<String>]
     #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB cluster should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3Message AWS API Documentation
     #
     class RestoreDBClusterFromS3Message < Struct.new(
@@ -12056,7 +12133,8 @@ module Aws::RDS
       :s3_prefix,
       :s3_ingestion_role_arn,
       :backtrack_window,
-      :enable_cloudwatch_logs_exports)
+      :enable_cloudwatch_logs_exports,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -12105,6 +12183,7 @@ module Aws::RDS
     #           auto_pause: false,
     #           seconds_until_auto_pause: 1,
     #         },
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] availability_zones
@@ -12252,6 +12331,12 @@ module Aws::RDS
     #   properties of the DB cluster.
     #   @return [Types::ScalingConfiguration]
     #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB cluster should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshotMessage AWS API Documentation
     #
     class RestoreDBClusterFromSnapshotMessage < Struct.new(
@@ -12271,7 +12356,8 @@ module Aws::RDS
       :backtrack_window,
       :enable_cloudwatch_logs_exports,
       :engine_mode,
-      :scaling_configuration)
+      :scaling_configuration,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -12312,6 +12398,7 @@ module Aws::RDS
     #         enable_iam_database_authentication: false,
     #         backtrack_window: 1,
     #         enable_cloudwatch_logs_exports: ["String"],
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -12478,6 +12565,12 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #   @return [Array<String>]
     #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB cluster should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
@@ -12494,7 +12587,8 @@ module Aws::RDS
       :kms_key_id,
       :enable_iam_database_authentication,
       :backtrack_window,
-      :enable_cloudwatch_logs_exports)
+      :enable_cloudwatch_logs_exports,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -12551,6 +12645,7 @@ module Aws::RDS
     #           },
     #         ],
     #         use_default_processor_features: false,
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] db_instance_identifier
@@ -12804,6 +12899,17 @@ module Aws::RDS
     #   uses its default processor features.
     #   @return [Boolean]
     #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB instance should have deletion protection
+    #   enabled. The database can't be deleted when this value is set to
+    #   true. The default is false. For more information, see [ Deleting a
+    #   DB Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshotMessage AWS API Documentation
     #
     class RestoreDBInstanceFromDBSnapshotMessage < Struct.new(
@@ -12831,7 +12937,8 @@ module Aws::RDS
       :enable_iam_database_authentication,
       :enable_cloudwatch_logs_exports,
       :processor_features,
-      :use_default_processor_features)
+      :use_default_processor_features,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -12905,6 +13012,7 @@ module Aws::RDS
     #           },
     #         ],
     #         use_default_processor_features: false,
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] db_name
@@ -13281,6 +13389,17 @@ module Aws::RDS
     #   uses its default processor features.
     #   @return [Boolean]
     #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB instance should have deletion protection
+    #   enabled. The database can't be deleted when this value is set to
+    #   true. The default is false. For more information, see [ Deleting a
+    #   DB Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3Message AWS API Documentation
     #
     class RestoreDBInstanceFromS3Message < Struct.new(
@@ -13325,7 +13444,8 @@ module Aws::RDS
       :performance_insights_retention_period,
       :enable_cloudwatch_logs_exports,
       :processor_features,
-      :use_default_processor_features)
+      :use_default_processor_features,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -13384,6 +13504,7 @@ module Aws::RDS
     #           },
     #         ],
     #         use_default_processor_features: false,
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] source_db_instance_identifier
@@ -13647,6 +13768,17 @@ module Aws::RDS
     #   uses its default processor features.
     #   @return [Boolean]
     #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB instance should have deletion protection
+    #   enabled. The database can't be deleted when this value is set to
+    #   true. The default is false. For more information, see [ Deleting a
+    #   DB Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBInstanceToPointInTimeMessage < Struct.new(
@@ -13676,7 +13808,8 @@ module Aws::RDS
       :enable_iam_database_authentication,
       :enable_cloudwatch_logs_exports,
       :processor_features,
-      :use_default_processor_features)
+      :use_default_processor_features,
+      :deletion_protection)
       include Aws::Structure
     end
 

@@ -2247,6 +2247,37 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieves the security configuration for a specified catalog.
+    #
+    # @option params [String] :catalog_id
+    #   The ID of the Data Catalog for which to retrieve the security
+    #   configuration. If none is supplied, the AWS account ID is used by
+    #   default.
+    #
+    # @return [Types::GetDataCatalogEncryptionSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataCatalogEncryptionSettingsResponse#data_catalog_encryption_settings #data_catalog_encryption_settings} => Types::DataCatalogEncryptionSettings
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_catalog_encryption_settings({
+    #     catalog_id: "CatalogIdString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_catalog_encryption_settings.encryption_at_rest.catalog_encryption_mode #=> String, one of "DISABLED", "SSE-KMS"
+    #   resp.data_catalog_encryption_settings.encryption_at_rest.sse_aws_kms_key_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataCatalogEncryptionSettings AWS API Documentation
+    #
+    # @overload get_data_catalog_encryption_settings(params = {})
+    # @param [Hash] params ({})
+    def get_data_catalog_encryption_settings(params = {}, options = {})
+      req = build_request(:get_data_catalog_encryption_settings, params)
+      req.send_request(options)
+    end
+
     # Retrieves the definition of a specified database.
     #
     # @option params [String] :catalog_id
@@ -4690,7 +4721,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -880,6 +880,71 @@ module Aws::OpsWorksCM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ExportServerEngineAttributeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         export_attribute_name: "String", # required
+    #         server_name: "ServerName", # required
+    #         input_attributes: [
+    #           {
+    #             name: "EngineAttributeName",
+    #             value: "EngineAttributeValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] export_attribute_name
+    #   The name of the export attribute. Currently supported export
+    #   attribute is "Userdata" which exports a userdata script filled out
+    #   with parameters provided in the `InputAttributes` list.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_name
+    #   The name of the Server to which the attribute is being exported from
+    #   @return [String]
+    #
+    # @!attribute [rw] input_attributes
+    #   The list of engine attributes. The list type is `EngineAttribute`.
+    #   `EngineAttribute` is a pair of attribute name and value. For
+    #   `ExportAttributeName` "Userdata", currently supported input
+    #   attribute names are: - "RunList": For Chef, an ordered list of
+    #   roles and/or recipes that are run in the exact order. For Puppet,
+    #   this parameter is ignored. - "OrganizationName": For Chef, an
+    #   organization name. AWS OpsWorks for Chef Server always creates the
+    #   organization "default". For Puppet, this parameter is ignored. -
+    #   "NodeEnvironment": For Chef, a node environment (eg. development,
+    #   staging, onebox). For Puppet, this parameter is ignored. -
+    #   "NodeClientVersion": For Chef, version of Chef Engine (3 numbers
+    #   separated by dots, eg. "13.8.5"). If empty, it uses the latest
+    #   one. For Puppet, this parameter is ignored.
+    #   @return [Array<Types::EngineAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ExportServerEngineAttributeRequest AWS API Documentation
+    #
+    class ExportServerEngineAttributeRequest < Struct.new(
+      :export_attribute_name,
+      :server_name,
+      :input_attributes)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] engine_attribute
+    #   The requested engine attribute pair with attribute name and value.
+    #   @return [Types::EngineAttribute]
+    #
+    # @!attribute [rw] server_name
+    #   The requested ServerName.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ExportServerEngineAttributeResponse AWS API Documentation
+    #
+    class ExportServerEngineAttributeResponse < Struct.new(
+      :engine_attribute,
+      :server_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RestoreServerRequest
     #   data as a hash:
     #

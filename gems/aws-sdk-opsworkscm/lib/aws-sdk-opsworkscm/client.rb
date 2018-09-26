@@ -989,6 +989,74 @@ module Aws::OpsWorksCM
       req.send_request(options)
     end
 
+    # Exports a specified server engine attribute as a base64-encoded
+    # string. For example, you can export user data that you can use in EC2
+    # to associate nodes with a server.
+    #
+    # This operation is synchronous.
+    #
+    # A `ValidationException` is raised when parameters of the request are
+    # not valid. A `ResourceNotFoundException` is thrown when the server
+    # does not exist. An `InvalidStateException` is thrown when the server
+    # is in any of the following states: CREATING, TERMINATED, FAILED or
+    # DELETING.
+    #
+    # @option params [required, String] :export_attribute_name
+    #   The name of the export attribute. Currently supported export attribute
+    #   is "Userdata" which exports a userdata script filled out with
+    #   parameters provided in the `InputAttributes` list.
+    #
+    # @option params [required, String] :server_name
+    #   The name of the Server to which the attribute is being exported from
+    #
+    # @option params [Array<Types::EngineAttribute>] :input_attributes
+    #   The list of engine attributes. The list type is `EngineAttribute`.
+    #   `EngineAttribute` is a pair of attribute name and value. For
+    #   `ExportAttributeName` "Userdata", currently supported input
+    #   attribute names are: - "RunList": For Chef, an ordered list of roles
+    #   and/or recipes that are run in the exact order. For Puppet, this
+    #   parameter is ignored. - "OrganizationName": For Chef, an
+    #   organization name. AWS OpsWorks for Chef Server always creates the
+    #   organization "default". For Puppet, this parameter is ignored. -
+    #   "NodeEnvironment": For Chef, a node environment (eg. development,
+    #   staging, onebox). For Puppet, this parameter is ignored. -
+    #   "NodeClientVersion": For Chef, version of Chef Engine (3 numbers
+    #   separated by dots, eg. "13.8.5"). If empty, it uses the latest one.
+    #   For Puppet, this parameter is ignored.
+    #
+    # @return [Types::ExportServerEngineAttributeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportServerEngineAttributeResponse#engine_attribute #engine_attribute} => Types::EngineAttribute
+    #   * {Types::ExportServerEngineAttributeResponse#server_name #server_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_server_engine_attribute({
+    #     export_attribute_name: "String", # required
+    #     server_name: "ServerName", # required
+    #     input_attributes: [
+    #       {
+    #         name: "EngineAttributeName",
+    #         value: "EngineAttributeValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.engine_attribute.name #=> String
+    #   resp.engine_attribute.value #=> String
+    #   resp.server_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ExportServerEngineAttribute AWS API Documentation
+    #
+    # @overload export_server_engine_attribute(params = {})
+    # @param [Hash] params ({})
+    def export_server_engine_attribute(params = {}, options = {})
+      req = build_request(:export_server_engine_attribute, params)
+      req.send_request(options)
+    end
+
     # Restores a backup to a server that is in a `CONNECTION_LOST`,
     # `HEALTHY`, `RUNNING`, `UNHEALTHY`, or `TERMINATED` state. When you run
     # RestoreServer, the server's EC2 instance is deleted, and a new EC2
@@ -1282,7 +1350,7 @@ module Aws::OpsWorksCM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opsworkscm'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

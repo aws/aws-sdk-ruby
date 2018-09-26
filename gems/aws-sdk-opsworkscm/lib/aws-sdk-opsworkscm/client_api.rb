@@ -48,6 +48,8 @@ module Aws::OpsWorksCM
     EngineAttributeName = Shapes::StringShape.new(name: 'EngineAttributeName')
     EngineAttributeValue = Shapes::StringShape.new(name: 'EngineAttributeValue')
     EngineAttributes = Shapes::ListShape.new(name: 'EngineAttributes')
+    ExportServerEngineAttributeRequest = Shapes::StructureShape.new(name: 'ExportServerEngineAttributeRequest')
+    ExportServerEngineAttributeResponse = Shapes::StructureShape.new(name: 'ExportServerEngineAttributeResponse')
     InstanceProfileArn = Shapes::StringShape.new(name: 'InstanceProfileArn')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
@@ -219,6 +221,15 @@ module Aws::OpsWorksCM
     EngineAttribute.struct_class = Types::EngineAttribute
 
     EngineAttributes.member = Shapes::ShapeRef.new(shape: EngineAttribute)
+
+    ExportServerEngineAttributeRequest.add_member(:export_attribute_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ExportAttributeName"))
+    ExportServerEngineAttributeRequest.add_member(:server_name, Shapes::ShapeRef.new(shape: ServerName, required: true, location_name: "ServerName"))
+    ExportServerEngineAttributeRequest.add_member(:input_attributes, Shapes::ShapeRef.new(shape: EngineAttributes, location_name: "InputAttributes"))
+    ExportServerEngineAttributeRequest.struct_class = Types::ExportServerEngineAttributeRequest
+
+    ExportServerEngineAttributeResponse.add_member(:engine_attribute, Shapes::ShapeRef.new(shape: EngineAttribute, location_name: "EngineAttribute"))
+    ExportServerEngineAttributeResponse.add_member(:server_name, Shapes::ShapeRef.new(shape: ServerName, location_name: "ServerName"))
+    ExportServerEngineAttributeResponse.struct_class = Types::ExportServerEngineAttributeResponse
 
     RestoreServerRequest.add_member(:backup_id, Shapes::ShapeRef.new(shape: BackupId, required: true, location_name: "BackupId"))
     RestoreServerRequest.add_member(:server_name, Shapes::ShapeRef.new(shape: ServerName, required: true, location_name: "ServerName"))
@@ -427,6 +438,17 @@ module Aws::OpsWorksCM
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:export_server_engine_attribute, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExportServerEngineAttribute"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ExportServerEngineAttributeRequest)
+        o.output = Shapes::ShapeRef.new(shape: ExportServerEngineAttributeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
       end)
 
       api.add_operation(:restore_server, Seahorse::Model::Operation.new.tap do |o|
