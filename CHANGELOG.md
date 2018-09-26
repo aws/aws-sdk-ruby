@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::OpsWorksCM - Updated the API, and documentation for AWS OpsWorks for Chef Automate.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::SQS - Updated the API, documentation, and integration test for Amazon Simple Queue Service.
+
 2.11.137 (2018-09-25)
 ------------------
 
