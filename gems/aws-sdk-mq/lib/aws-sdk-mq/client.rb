@@ -422,6 +422,7 @@ module Aws::MQ
     #   * {Types::DescribeBrokerResponse#host_instance_type #host_instance_type} => String
     #   * {Types::DescribeBrokerResponse#logs #logs} => Types::LogsSummary
     #   * {Types::DescribeBrokerResponse#maintenance_window_start_time #maintenance_window_start_time} => Types::WeeklyStartTime
+    #   * {Types::DescribeBrokerResponse#pending_engine_version #pending_engine_version} => String
     #   * {Types::DescribeBrokerResponse#publicly_accessible #publicly_accessible} => Boolean
     #   * {Types::DescribeBrokerResponse#security_groups #security_groups} => Array&lt;String&gt;
     #   * {Types::DescribeBrokerResponse#subnet_ids #subnet_ids} => Array&lt;String&gt;
@@ -466,6 +467,7 @@ module Aws::MQ
     #   resp.maintenance_window_start_time.day_of_week #=> String, one of "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
     #   resp.maintenance_window_start_time.time_of_day #=> String
     #   resp.maintenance_window_start_time.time_zone #=> String
+    #   resp.pending_engine_version #=> String
     #   resp.publicly_accessible #=> Boolean
     #   resp.security_groups #=> Array
     #   resp.security_groups[0] #=> String
@@ -795,10 +797,14 @@ module Aws::MQ
 
     # Adds a pending configuration change to a broker.
     #
+    # @option params [Boolean] :auto_minor_version_upgrade
+    #
     # @option params [required, String] :broker_id
     #
     # @option params [Types::ConfigurationId] :configuration
     #   A list of information about the configuration.
+    #
+    # @option params [String] :engine_version
     #
     # @option params [Types::Logs] :logs
     #   The list of information about logs to be enabled for the specified
@@ -806,18 +812,22 @@ module Aws::MQ
     #
     # @return [Types::UpdateBrokerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::UpdateBrokerResponse#auto_minor_version_upgrade #auto_minor_version_upgrade} => Boolean
     #   * {Types::UpdateBrokerResponse#broker_id #broker_id} => String
     #   * {Types::UpdateBrokerResponse#configuration #configuration} => Types::ConfigurationId
+    #   * {Types::UpdateBrokerResponse#engine_version #engine_version} => String
     #   * {Types::UpdateBrokerResponse#logs #logs} => Types::Logs
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_broker({
+    #     auto_minor_version_upgrade: false,
     #     broker_id: "__string", # required
     #     configuration: {
     #       id: "__string",
     #       revision: 1,
     #     },
+    #     engine_version: "__string",
     #     logs: {
     #       audit: false,
     #       general: false,
@@ -826,9 +836,11 @@ module Aws::MQ
     #
     # @example Response structure
     #
+    #   resp.auto_minor_version_upgrade #=> Boolean
     #   resp.broker_id #=> String
     #   resp.configuration.id #=> String
     #   resp.configuration.revision #=> Integer
+    #   resp.engine_version #=> String
     #   resp.logs.audit #=> Boolean
     #   resp.logs.general #=> Boolean
     #
@@ -935,7 +947,7 @@ module Aws::MQ
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mq'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
