@@ -56,9 +56,11 @@ module Aws::CodeStar
     ProjectId = Shapes::StringShape.new(name: 'ProjectId')
     ProjectName = Shapes::StringShape.new(name: 'ProjectName')
     ProjectNotFoundException = Shapes::StructureShape.new(name: 'ProjectNotFoundException')
+    ProjectStatus = Shapes::StructureShape.new(name: 'ProjectStatus')
     ProjectSummary = Shapes::StructureShape.new(name: 'ProjectSummary')
     ProjectTemplateId = Shapes::StringShape.new(name: 'ProjectTemplateId')
     ProjectsList = Shapes::ListShape.new(name: 'ProjectsList')
+    Reason = Shapes::StringShape.new(name: 'Reason')
     RemoteAccessAllowed = Shapes::BooleanShape.new(name: 'RemoteAccessAllowed')
     Resource = Shapes::StructureShape.new(name: 'Resource')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
@@ -66,6 +68,7 @@ module Aws::CodeStar
     Role = Shapes::StringShape.new(name: 'Role')
     SshPublicKey = Shapes::StringShape.new(name: 'SshPublicKey')
     StackId = Shapes::StringShape.new(name: 'StackId')
+    State = Shapes::StringShape.new(name: 'State')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeys = Shapes::ListShape.new(name: 'TagKeys')
     TagProjectRequest = Shapes::StructureShape.new(name: 'TagProjectRequest')
@@ -106,6 +109,7 @@ module Aws::CodeStar
     CreateProjectRequest.add_member(:id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "id"))
     CreateProjectRequest.add_member(:description, Shapes::ShapeRef.new(shape: ProjectDescription, location_name: "description"))
     CreateProjectRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
+    CreateProjectRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateProjectRequest.struct_class = Types::CreateProjectRequest
 
     CreateProjectResult.add_member(:id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "id"))
@@ -154,6 +158,7 @@ module Aws::CodeStar
     DescribeProjectResult.add_member(:created_time_stamp, Shapes::ShapeRef.new(shape: CreatedTimestamp, location_name: "createdTimeStamp"))
     DescribeProjectResult.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "stackId"))
     DescribeProjectResult.add_member(:project_template_id, Shapes::ShapeRef.new(shape: ProjectTemplateId, location_name: "projectTemplateId"))
+    DescribeProjectResult.add_member(:status, Shapes::ShapeRef.new(shape: ProjectStatus, location_name: "status"))
     DescribeProjectResult.struct_class = Types::DescribeProjectResult
 
     DescribeUserProfileRequest.add_member(:user_arn, Shapes::ShapeRef.new(shape: UserArn, required: true, location_name: "userArn"))
@@ -215,6 +220,10 @@ module Aws::CodeStar
     ListUserProfilesResult.add_member(:user_profiles, Shapes::ShapeRef.new(shape: UserProfilesList, required: true, location_name: "userProfiles"))
     ListUserProfilesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListUserProfilesResult.struct_class = Types::ListUserProfilesResult
+
+    ProjectStatus.add_member(:state, Shapes::ShapeRef.new(shape: State, required: true, location_name: "state"))
+    ProjectStatus.add_member(:reason, Shapes::ShapeRef.new(shape: Reason, location_name: "reason"))
+    ProjectStatus.struct_class = Types::ProjectStatus
 
     ProjectSummary.add_member(:project_id, Shapes::ShapeRef.new(shape: ProjectId, location_name: "projectId"))
     ProjectSummary.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, location_name: "projectArn"))
@@ -305,6 +314,7 @@ module Aws::CodeStar
         "protocol" => "json",
         "serviceAbbreviation" => "CodeStar",
         "serviceFullName" => "AWS CodeStar",
+        "serviceId" => "CodeStar",
         "signatureVersion" => "v4",
         "targetPrefix" => "CodeStar_20170419",
         "uid" => "codestar-2017-04-19",

@@ -77,6 +77,9 @@ module Aws::CodeStar
     #         id: "ProjectId", # required
     #         description: "ProjectDescription",
     #         client_request_token: "ClientRequestToken",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -95,13 +98,18 @@ module Aws::CodeStar
     #   Reserved for future use.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags created for the project.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CreateProjectRequest AWS API Documentation
     #
     class CreateProjectRequest < Struct.new(
       :name,
       :id,
       :description,
-      :client_request_token)
+      :client_request_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -350,6 +358,10 @@ module Aws::CodeStar
     #   project.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   The project creation or deletion status.
+    #   @return [Types::ProjectStatus]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DescribeProjectResult AWS API Documentation
     #
     class DescribeProjectResult < Struct.new(
@@ -360,7 +372,8 @@ module Aws::CodeStar
       :client_request_token,
       :created_time_stamp,
       :stack_id,
-      :project_template_id)
+      :project_template_id,
+      :status)
       include Aws::Structure
     end
 
@@ -689,6 +702,26 @@ module Aws::CodeStar
     class ListUserProfilesResult < Struct.new(
       :user_profiles,
       :next_token)
+      include Aws::Structure
+    end
+
+    # An indication of whether a project creation or deletion is failed or
+    # successful.
+    #
+    # @!attribute [rw] state
+    #   The phase of completion for a project creation or deletion.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   In the case of a project creation or deletion failure, a reason for
+    #   the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ProjectStatus AWS API Documentation
+    #
+    class ProjectStatus < Struct.new(
+      :state,
+      :reason)
       include Aws::Structure
     end
 

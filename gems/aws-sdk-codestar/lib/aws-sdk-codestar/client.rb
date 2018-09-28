@@ -251,6 +251,9 @@ module Aws::CodeStar
     # @option params [String] :client_request_token
     #   Reserved for future use.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags created for the project.
+    #
     # @return [Types::CreateProjectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateProjectResult#id #id} => String
@@ -265,6 +268,9 @@ module Aws::CodeStar
     #     id: "ProjectId", # required
     #     description: "ProjectDescription",
     #     client_request_token: "ClientRequestToken",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -435,6 +441,7 @@ module Aws::CodeStar
     #   * {Types::DescribeProjectResult#created_time_stamp #created_time_stamp} => Time
     #   * {Types::DescribeProjectResult#stack_id #stack_id} => String
     #   * {Types::DescribeProjectResult#project_template_id #project_template_id} => String
+    #   * {Types::DescribeProjectResult#status #status} => Types::ProjectStatus
     #
     # @example Request syntax with placeholder values
     #
@@ -452,6 +459,8 @@ module Aws::CodeStar
     #   resp.created_time_stamp #=> Time
     #   resp.stack_id #=> String
     #   resp.project_template_id #=> String
+    #   resp.status.state #=> String
+    #   resp.status.reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DescribeProject AWS API Documentation
     #
@@ -952,7 +961,7 @@ module Aws::CodeStar
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codestar'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
