@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeStar - Updated the API, documentation, and integration test for AWS CodeStar.
+
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
 2.11.139 (2018-09-27)
 ------------------
 
