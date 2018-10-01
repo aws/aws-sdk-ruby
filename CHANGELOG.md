@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::GuardDuty - Updated the API, and documentation for Amazon GuardDuty.
+
+* Feature - Aws::Rekognition - Updated the documentation for Amazon Rekognition.
+
 2.11.140 (2018-09-28)
 ------------------
 
