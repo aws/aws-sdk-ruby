@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::SageMaker - Updated the waiters for Amazon SageMaker Service.
+
+* Feature - Aws::SecretsManager - Updated the documentation for AWS Secrets Manager.
+
 2.11.141 (2018-10-01)
 ------------------
 
