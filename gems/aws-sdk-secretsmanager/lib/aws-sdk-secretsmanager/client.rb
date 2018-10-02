@@ -241,6 +241,21 @@ module Aws::SecretsManager
     #   You can specify either the Amazon Resource Name (ARN) or the friendly
     #   name of the secret.
     #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
+    #
     # @return [Types::CancelRotateSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CancelRotateSecretResponse#arn #arn} => String
@@ -371,6 +386,14 @@ module Aws::SecretsManager
     #
     #   The secret name must be ASCII letters, digits, or the following
     #   characters : /\_+=.@-
+    #
+    #   <note markdown="1"> Don't end your secret name with a hyphen followed by six characters.
+    #   If you do so, you risk confusion and unexpected results when searching
+    #   for a secret by partial ARN. This is because Secrets Manager
+    #   automatically adds a hyphen and six random characters at the end of
+    #   the ARN.
+    #
+    #    </note>
     #
     # @option params [String] :client_request_token
     #   (Optional) If you include `SecretString` or `SecretBinary`, then an
@@ -616,6 +639,21 @@ module Aws::SecretsManager
     #   resource-based policy for. You can specify either the Amazon Resource
     #   Name (ARN) or the friendly name of the secret.
     #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
+    #
     # @return [Types::DeleteResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteResourcePolicyResponse#arn #arn} => String
@@ -703,6 +741,21 @@ module Aws::SecretsManager
     # @option params [required, String] :secret_id
     #   Specifies the secret that you want to delete. You can specify either
     #   the Amazon Resource Name (ARN) or the friendly name of the secret.
+    #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
     #
     # @option params [Integer] :recovery_window_in_days
     #   (Optional) Specifies the number of days that Secrets Manager waits
@@ -804,6 +857,21 @@ module Aws::SecretsManager
     #   The identifier of the secret whose details you want to retrieve. You
     #   can specify either the Amazon Resource Name (ARN) or the friendly name
     #   of the secret.
+    #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
     #
     # @return [Types::DescribeSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1035,6 +1103,21 @@ module Aws::SecretsManager
     #   resource-based policy for. You can specify either the Amazon Resource
     #   Name (ARN) or the friendly name of the secret.
     #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
+    #
     # @return [Types::GetResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetResourcePolicyResponse#arn #arn} => String
@@ -1104,6 +1187,21 @@ module Aws::SecretsManager
     #   Specifies the secret containing the version that you want to retrieve.
     #   You can specify either the Amazon Resource Name (ARN) or the friendly
     #   name of the secret.
+    #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
     #
     # @option params [String] :version_id
     #   Specifies the unique identifier of the version of the secret that you
@@ -1223,6 +1321,21 @@ module Aws::SecretsManager
     #   The identifier for the secret containing the versions you want to
     #   list. You can specify either the Amazon Resource Name (ARN) or the
     #   friendly name of the secret.
+    #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
     #
     # @option params [Integer] :max_results
     #   (Optional) Limits the number of results that you want to include in
@@ -1489,6 +1602,21 @@ module Aws::SecretsManager
     #   Specifies the secret that you want to attach the resource-based policy
     #   to. You can specify either the ARN or the friendly name of the secret.
     #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
+    #
     # @option params [required, String] :resource_policy
     #   A JSON-formatted string that's constructed according to the grammar
     #   and syntax for an AWS resource-based policy. The policy in the string
@@ -1627,6 +1755,21 @@ module Aws::SecretsManager
     #   Specifies the secret to which you want to add a new version. You can
     #   specify either the Amazon Resource Name (ARN) or the friendly name of
     #   the secret. The secret must already exist.
+    #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
     #
     # @option params [String] :client_request_token
     #   (Optional) Specifies a unique identifier for the new version of the
@@ -1806,6 +1949,21 @@ module Aws::SecretsManager
     #   scheduled deletion. You can specify either the Amazon Resource Name
     #   (ARN) or the friendly name of the secret.
     #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
+    #
     # @return [Types::RestoreSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreSecretResponse#arn #arn} => String
@@ -1914,6 +2072,21 @@ module Aws::SecretsManager
     # @option params [required, String] :secret_id
     #   Specifies the secret that you want to rotate. You can specify either
     #   the Amazon Resource Name (ARN) or the friendly name of the secret.
+    #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
     #
     # @option params [String] :client_request_token
     #   (Optional) Specifies a unique identifier for the new version of the
@@ -2035,6 +2208,21 @@ module Aws::SecretsManager
     #   specify either the Amazon Resource Name (ARN) or the friendly name of
     #   the secret.
     #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
+    #
     # @option params [required, Array<Types::Tag>] :tags
     #   The tags to attach to the secret. Each element in the list consists of
     #   a `Key` and a `Value`.
@@ -2121,6 +2309,21 @@ module Aws::SecretsManager
     #   The identifier for the secret that you want to remove tags from. You
     #   can specify either the Amazon Resource Name (ARN) or the friendly name
     #   of the secret.
+    #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
     #
     # @option params [required, Array<String>] :tag_keys
     #   A list of tag key names to remove from the secret. You don't specify
@@ -2245,6 +2448,21 @@ module Aws::SecretsManager
     #   Specifies the secret that you want to modify or to which you want to
     #   add a new version. You can specify either the Amazon Resource Name
     #   (ARN) or the friendly name of the secret.
+    #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
     #
     # @option params [String] :client_request_token
     #   (Optional) If you want to add a new version to the secret, this
@@ -2483,6 +2701,21 @@ module Aws::SecretsManager
     #   want to modify. You can specify either the Amazon Resource Name (ARN)
     #   or the friendly name of the secret.
     #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names that end with a hyphen followed by six characters.
+    #
+    #    </note>
+    #
     # @option params [required, String] :version_stage
     #   The list of staging labels to add to this version.
     #
@@ -2600,7 +2833,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

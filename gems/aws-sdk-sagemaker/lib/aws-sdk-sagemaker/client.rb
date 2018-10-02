@@ -3056,7 +3056,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -3122,14 +3122,15 @@ module Aws::SageMaker
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name                       | params                        | :delay   | :max_attempts |
-    # | --------------------------------- | ----------------------------- | -------- | ------------- |
-    # | endpoint_deleted                  | {#describe_endpoint}          | 30       | 60            |
-    # | endpoint_in_service               | {#describe_endpoint}          | 30       | 120           |
-    # | notebook_instance_deleted         | {#describe_notebook_instance} | 30       | 60            |
-    # | notebook_instance_in_service      | {#describe_notebook_instance} | 30       | 60            |
-    # | notebook_instance_stopped         | {#describe_notebook_instance} | 30       | 60            |
-    # | training_job_completed_or_stopped | {#describe_training_job}      | 120      | 180           |
+    # | waiter_name                        | params                        | :delay   | :max_attempts |
+    # | ---------------------------------- | ----------------------------- | -------- | ------------- |
+    # | endpoint_deleted                   | {#describe_endpoint}          | 30       | 60            |
+    # | endpoint_in_service                | {#describe_endpoint}          | 30       | 120           |
+    # | notebook_instance_deleted          | {#describe_notebook_instance} | 30       | 60            |
+    # | notebook_instance_in_service       | {#describe_notebook_instance} | 30       | 60            |
+    # | notebook_instance_stopped          | {#describe_notebook_instance} | 30       | 60            |
+    # | training_job_completed_or_stopped  | {#describe_training_job}      | 120      | 180           |
+    # | transform_job_completed_or_stopped | {#describe_transform_job}     | 60       | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -3185,7 +3186,8 @@ module Aws::SageMaker
         notebook_instance_deleted: Waiters::NotebookInstanceDeleted,
         notebook_instance_in_service: Waiters::NotebookInstanceInService,
         notebook_instance_stopped: Waiters::NotebookInstanceStopped,
-        training_job_completed_or_stopped: Waiters::TrainingJobCompletedOrStopped
+        training_job_completed_or_stopped: Waiters::TrainingJobCompletedOrStopped,
+        transform_job_completed_or_stopped: Waiters::TransformJobCompletedOrStopped
       }
     end
 
