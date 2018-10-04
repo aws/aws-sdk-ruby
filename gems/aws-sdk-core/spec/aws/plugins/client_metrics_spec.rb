@@ -162,6 +162,7 @@ module Aws
           expect(api_call.attempt_count).to eq(1)
           expect(api_call.latency).to be_a_kind_of(Fixnum)
           expect(api_call.client_id).to eq("")
+          expect(api_call.region).to eq("us-stubbed-1")
         end
       end
 
