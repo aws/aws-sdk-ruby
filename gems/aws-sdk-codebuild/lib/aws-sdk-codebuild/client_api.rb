@@ -150,6 +150,7 @@ module Aws::CodeBuild
     Build.add_member(:current_phase, Shapes::ShapeRef.new(shape: String, location_name: "currentPhase"))
     Build.add_member(:build_status, Shapes::ShapeRef.new(shape: StatusType, location_name: "buildStatus"))
     Build.add_member(:source_version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "sourceVersion"))
+    Build.add_member(:resolved_source_version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "resolvedSourceVersion"))
     Build.add_member(:project_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "projectName"))
     Build.add_member(:phases, Shapes::ShapeRef.new(shape: BuildPhases, location_name: "phases"))
     Build.add_member(:source, Shapes::ShapeRef.new(shape: ProjectSource, location_name: "source"))

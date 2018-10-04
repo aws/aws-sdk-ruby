@@ -2247,6 +2247,7 @@ module Aws::SSM
     #         approved_patches_compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #         approved_patches_enable_non_security: false,
     #         rejected_patches: ["PatchId"],
+    #         rejected_patches_action: "ALLOW_AS_DEPENDENCY", # accepts ALLOW_AS_DEPENDENCY, BLOCK
     #         description: "BaselineDescription",
     #         sources: [
     #           {
@@ -2311,6 +2312,23 @@ module Aws::SSM
     #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] rejected_patches_action
+    #   The action for Patch Manager to take on patches included in the
+    #   RejectedPackages list.
+    #
+    #   * **ALLOW\_AS\_DEPENDENCY**\: A package in the Rejected patches list
+    #     is installed only if it is a dependency of another package. It is
+    #     considered compliant with the patch baseline, and its status is
+    #     reported as *InstalledOther*. This is the default action if no
+    #     option is specified.
+    #
+    #   * **BLOCK**\: Packages in the RejectedPatches list, and packages
+    #     that include them as dependencies, are not installed under any
+    #     circumstances. If a package was installed before it was added to
+    #     the Rejected patches list, it is considered non-compliant with the
+    #     patch baseline, and its status is reported as *InstalledRejected*.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   A description of the patch baseline.
     #   @return [String]
@@ -2339,6 +2357,7 @@ module Aws::SSM
       :approved_patches_compliance_level,
       :approved_patches_enable_non_security,
       :rejected_patches,
+      :rejected_patches_action,
       :description,
       :sources,
       :client_token)
@@ -4386,6 +4405,19 @@ module Aws::SSM
     #   in the patch baseline.
     #   @return [Integer]
     #
+    # @!attribute [rw] instances_with_installed_rejected_patches
+    #   The number of instances with patches installed that are specified in
+    #   a RejectedPatches list. Patches with a status of *InstalledRejected*
+    #   were typically installed before they were added to a RejectedPatches
+    #   list.
+    #
+    #   <note markdown="1"> If ALLOW\_AS\_DEPENDENCY is the specified option for
+    #   RejectedPatchesAction, the value of
+    #   InstancesWithInstalledRejectedPatches will always be 0 (zero).
+    #
+    #    </note>
+    #   @return [Integer]
+    #
     # @!attribute [rw] instances_with_missing_patches
     #   The number of instances with missing patches from the patch
     #   baseline.
@@ -4406,6 +4438,7 @@ module Aws::SSM
       :instances,
       :instances_with_installed_patches,
       :instances_with_installed_other_patches,
+      :instances_with_installed_rejected_patches,
       :instances_with_missing_patches,
       :instances_with_failed_patches,
       :instances_with_not_applicable_patches)
@@ -4488,7 +4521,7 @@ module Aws::SSM
     #
     # @!attribute [rw] state
     #   The session status to retrieve a list of sessions for. For example,
-    #   "active".
+    #   "Active".
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -6342,6 +6375,13 @@ module Aws::SSM
     #   A list of explicitly rejected patches for the baseline.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] rejected_patches_action
+    #   The action specified to take on patches included in the
+    #   RejectedPatches list. A patch can be allowed only if it is a
+    #   dependency of another package, or blocked entirely along with
+    #   packages that include it as a dependency.
+    #   @return [String]
+    #
     # @!attribute [rw] patch_groups
     #   Patch groups included in the patch baseline.
     #   @return [Array<String>]
@@ -6376,6 +6416,7 @@ module Aws::SSM
       :approved_patches_compliance_level,
       :approved_patches_enable_non_security,
       :rejected_patches,
+      :rejected_patches_action,
       :patch_groups,
       :created_date,
       :modified_date,
@@ -6738,6 +6779,22 @@ module Aws::SSM
     #   operation when this compliance data was collected.
     #   @return [String]
     #
+    # @!attribute [rw] install_override_list
+    #   An https URL or an Amazon S3 path-style URL to a list of patches to
+    #   be installed. This patch installation list, which you maintain in an
+    #   Amazon S3 bucket in YAML format and specify in the SSM document
+    #   `AWS-RunPatchBaseline`, overrides the patches specified by the
+    #   default patch baseline.
+    #
+    #   For more information about the `InstallOverrideList` parameter, see
+    #   [About the SSM Document AWS-RunPatchBaseline][1] in the *AWS Systems
+    #   Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-about-aws-runpatchbaseline.html
+    #   @return [String]
+    #
     # @!attribute [rw] owner_information
     #   Placeholder information. This field will always be empty in the
     #   current release of the service.
@@ -6751,6 +6808,19 @@ module Aws::SSM
     # @!attribute [rw] installed_other_count
     #   The number of patches not specified in the patch baseline that are
     #   installed on the instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] installed_rejected_count
+    #   The number of instances with patches installed that are specified in
+    #   a RejectedPatches list. Patches with a status of *InstalledRejected*
+    #   were typically installed before they were added to a RejectedPatches
+    #   list.
+    #
+    #   <note markdown="1"> If ALLOW\_AS\_DEPENDENCY is the specified option for
+    #   RejectedPatchesAction, the value of InstalledRejectedCount will
+    #   always be 0 (zero).
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] missing_count
@@ -6792,9 +6862,11 @@ module Aws::SSM
       :patch_group,
       :baseline_id,
       :snapshot_id,
+      :install_override_list,
       :owner_information,
       :installed_count,
       :installed_other_count,
+      :installed_rejected_count,
       :missing_count,
       :failed_count,
       :not_applicable_count,
@@ -12702,6 +12774,7 @@ module Aws::SSM
     #         approved_patches_compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #         approved_patches_enable_non_security: false,
     #         rejected_patches: ["PatchId"],
+    #         rejected_patches_action: "ALLOW_AS_DEPENDENCY", # accepts ALLOW_AS_DEPENDENCY, BLOCK
     #         description: "BaselineDescription",
     #         sources: [
     #           {
@@ -12764,6 +12837,23 @@ module Aws::SSM
     #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] rejected_patches_action
+    #   The action for Patch Manager to take on patches included in the
+    #   RejectedPackages list.
+    #
+    #   * **ALLOW\_AS\_DEPENDENCY**\: A package in the Rejected patches list
+    #     is installed only if it is a dependency of another package. It is
+    #     considered compliant with the patch baseline, and its status is
+    #     reported as *InstalledOther*. This is the default action if no
+    #     option is specified.
+    #
+    #   * **BLOCK**\: Packages in the RejectedPatches list, and packages
+    #     that include them as dependencies, are not installed under any
+    #     circumstances. If a package was installed before it was added to
+    #     the Rejected patches list, it is considered non-compliant with the
+    #     patch baseline, and its status is reported as *InstalledRejected*.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   A description of the patch baseline.
     #   @return [String]
@@ -12791,6 +12881,7 @@ module Aws::SSM
       :approved_patches_compliance_level,
       :approved_patches_enable_non_security,
       :rejected_patches,
+      :rejected_patches_action,
       :description,
       :sources,
       :replace)
@@ -12836,6 +12927,13 @@ module Aws::SSM
     #   A list of explicitly rejected patches for the baseline.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] rejected_patches_action
+    #   The action specified to take on patches included in the
+    #   RejectedPatches list. A patch can be allowed only if it is a
+    #   dependency of another package, or blocked entirely along with
+    #   packages that include it as a dependency.
+    #   @return [String]
+    #
     # @!attribute [rw] created_date
     #   The date when the patch baseline was created.
     #   @return [Time]
@@ -12866,6 +12964,7 @@ module Aws::SSM
       :approved_patches_compliance_level,
       :approved_patches_enable_non_security,
       :rejected_patches,
+      :rejected_patches_action,
       :created_date,
       :modified_date,
       :description,

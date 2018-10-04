@@ -801,6 +801,22 @@ module Aws::SSM
     #
     #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #
+    # @option params [String] :rejected_patches_action
+    #   The action for Patch Manager to take on patches included in the
+    #   RejectedPackages list.
+    #
+    #   * **ALLOW\_AS\_DEPENDENCY**\: A package in the Rejected patches list
+    #     is installed only if it is a dependency of another package. It is
+    #     considered compliant with the patch baseline, and its status is
+    #     reported as *InstalledOther*. This is the default action if no
+    #     option is specified.
+    #
+    #   * **BLOCK**\: Packages in the RejectedPatches list, and packages that
+    #     include them as dependencies, are not installed under any
+    #     circumstances. If a package was installed before it was added to the
+    #     Rejected patches list, it is considered non-compliant with the patch
+    #     baseline, and its status is reported as *InstalledRejected*.
+    #
     # @option params [String] :description
     #   A description of the patch baseline.
     #
@@ -853,6 +869,7 @@ module Aws::SSM
     #     approved_patches_compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #     approved_patches_enable_non_security: false,
     #     rejected_patches: ["PatchId"],
+    #     rejected_patches_action: "ALLOW_AS_DEPENDENCY", # accepts ALLOW_AS_DEPENDENCY, BLOCK
     #     description: "BaselineDescription",
     #     sources: [
     #       {
@@ -2233,9 +2250,11 @@ module Aws::SSM
     #   resp.instance_patch_states[0].patch_group #=> String
     #   resp.instance_patch_states[0].baseline_id #=> String
     #   resp.instance_patch_states[0].snapshot_id #=> String
+    #   resp.instance_patch_states[0].install_override_list #=> String
     #   resp.instance_patch_states[0].owner_information #=> String
     #   resp.instance_patch_states[0].installed_count #=> Integer
     #   resp.instance_patch_states[0].installed_other_count #=> Integer
+    #   resp.instance_patch_states[0].installed_rejected_count #=> Integer
     #   resp.instance_patch_states[0].missing_count #=> Integer
     #   resp.instance_patch_states[0].failed_count #=> Integer
     #   resp.instance_patch_states[0].not_applicable_count #=> Integer
@@ -2303,9 +2322,11 @@ module Aws::SSM
     #   resp.instance_patch_states[0].patch_group #=> String
     #   resp.instance_patch_states[0].baseline_id #=> String
     #   resp.instance_patch_states[0].snapshot_id #=> String
+    #   resp.instance_patch_states[0].install_override_list #=> String
     #   resp.instance_patch_states[0].owner_information #=> String
     #   resp.instance_patch_states[0].installed_count #=> Integer
     #   resp.instance_patch_states[0].installed_other_count #=> Integer
+    #   resp.instance_patch_states[0].installed_rejected_count #=> Integer
     #   resp.instance_patch_states[0].missing_count #=> Integer
     #   resp.instance_patch_states[0].failed_count #=> Integer
     #   resp.instance_patch_states[0].not_applicable_count #=> Integer
@@ -2371,7 +2392,7 @@ module Aws::SSM
     #   resp.patches[0].kb_id #=> String
     #   resp.patches[0].classification #=> String
     #   resp.patches[0].severity #=> String
-    #   resp.patches[0].state #=> String, one of "INSTALLED", "INSTALLED_OTHER", "MISSING", "NOT_APPLICABLE", "FAILED"
+    #   resp.patches[0].state #=> String, one of "INSTALLED", "INSTALLED_OTHER", "INSTALLED_REJECTED", "MISSING", "NOT_APPLICABLE", "FAILED"
     #   resp.patches[0].installed_time #=> Time
     #   resp.next_token #=> String
     #
@@ -2962,6 +2983,7 @@ module Aws::SSM
     #   * {Types::DescribePatchGroupStateResult#instances #instances} => Integer
     #   * {Types::DescribePatchGroupStateResult#instances_with_installed_patches #instances_with_installed_patches} => Integer
     #   * {Types::DescribePatchGroupStateResult#instances_with_installed_other_patches #instances_with_installed_other_patches} => Integer
+    #   * {Types::DescribePatchGroupStateResult#instances_with_installed_rejected_patches #instances_with_installed_rejected_patches} => Integer
     #   * {Types::DescribePatchGroupStateResult#instances_with_missing_patches #instances_with_missing_patches} => Integer
     #   * {Types::DescribePatchGroupStateResult#instances_with_failed_patches #instances_with_failed_patches} => Integer
     #   * {Types::DescribePatchGroupStateResult#instances_with_not_applicable_patches #instances_with_not_applicable_patches} => Integer
@@ -2977,6 +2999,7 @@ module Aws::SSM
     #   resp.instances #=> Integer
     #   resp.instances_with_installed_patches #=> Integer
     #   resp.instances_with_installed_other_patches #=> Integer
+    #   resp.instances_with_installed_rejected_patches #=> Integer
     #   resp.instances_with_missing_patches #=> Integer
     #   resp.instances_with_failed_patches #=> Integer
     #   resp.instances_with_not_applicable_patches #=> Integer
@@ -3046,7 +3069,7 @@ module Aws::SSM
     #
     # @option params [required, String] :state
     #   The session status to retrieve a list of sessions for. For example,
-    #   "active".
+    #   "Active".
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this call. The call also
@@ -4130,6 +4153,7 @@ module Aws::SSM
     #   * {Types::GetPatchBaselineResult#approved_patches_compliance_level #approved_patches_compliance_level} => String
     #   * {Types::GetPatchBaselineResult#approved_patches_enable_non_security #approved_patches_enable_non_security} => Boolean
     #   * {Types::GetPatchBaselineResult#rejected_patches #rejected_patches} => Array&lt;String&gt;
+    #   * {Types::GetPatchBaselineResult#rejected_patches_action #rejected_patches_action} => String
     #   * {Types::GetPatchBaselineResult#patch_groups #patch_groups} => Array&lt;String&gt;
     #   * {Types::GetPatchBaselineResult#created_date #created_date} => Time
     #   * {Types::GetPatchBaselineResult#modified_date #modified_date} => Time
@@ -4165,6 +4189,7 @@ module Aws::SSM
     #   resp.approved_patches_enable_non_security #=> Boolean
     #   resp.rejected_patches #=> Array
     #   resp.rejected_patches[0] #=> String
+    #   resp.rejected_patches_action #=> String, one of "ALLOW_AS_DEPENDENCY", "BLOCK"
     #   resp.patch_groups #=> Array
     #   resp.patch_groups[0] #=> String
     #   resp.created_date #=> Time
@@ -7071,6 +7096,22 @@ module Aws::SSM
     #
     #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #
+    # @option params [String] :rejected_patches_action
+    #   The action for Patch Manager to take on patches included in the
+    #   RejectedPackages list.
+    #
+    #   * **ALLOW\_AS\_DEPENDENCY**\: A package in the Rejected patches list
+    #     is installed only if it is a dependency of another package. It is
+    #     considered compliant with the patch baseline, and its status is
+    #     reported as *InstalledOther*. This is the default action if no
+    #     option is specified.
+    #
+    #   * **BLOCK**\: Packages in the RejectedPatches list, and packages that
+    #     include them as dependencies, are not installed under any
+    #     circumstances. If a package was installed before it was added to the
+    #     Rejected patches list, it is considered non-compliant with the patch
+    #     baseline, and its status is reported as *InstalledRejected*.
+    #
     # @option params [String] :description
     #   A description of the patch baseline.
     #
@@ -7095,6 +7136,7 @@ module Aws::SSM
     #   * {Types::UpdatePatchBaselineResult#approved_patches_compliance_level #approved_patches_compliance_level} => String
     #   * {Types::UpdatePatchBaselineResult#approved_patches_enable_non_security #approved_patches_enable_non_security} => Boolean
     #   * {Types::UpdatePatchBaselineResult#rejected_patches #rejected_patches} => Array&lt;String&gt;
+    #   * {Types::UpdatePatchBaselineResult#rejected_patches_action #rejected_patches_action} => String
     #   * {Types::UpdatePatchBaselineResult#created_date #created_date} => Time
     #   * {Types::UpdatePatchBaselineResult#modified_date #modified_date} => Time
     #   * {Types::UpdatePatchBaselineResult#description #description} => String
@@ -7134,6 +7176,7 @@ module Aws::SSM
     #     approved_patches_compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #     approved_patches_enable_non_security: false,
     #     rejected_patches: ["PatchId"],
+    #     rejected_patches_action: "ALLOW_AS_DEPENDENCY", # accepts ALLOW_AS_DEPENDENCY, BLOCK
     #     description: "BaselineDescription",
     #     sources: [
     #       {
@@ -7168,6 +7211,7 @@ module Aws::SSM
     #   resp.approved_patches_enable_non_security #=> Boolean
     #   resp.rejected_patches #=> Array
     #   resp.rejected_patches[0] #=> String
+    #   resp.rejected_patches_action #=> String, one of "ALLOW_AS_DEPENDENCY", "BLOCK"
     #   resp.created_date #=> Time
     #   resp.modified_date #=> Time
     #   resp.description #=> String
@@ -7199,7 +7243,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

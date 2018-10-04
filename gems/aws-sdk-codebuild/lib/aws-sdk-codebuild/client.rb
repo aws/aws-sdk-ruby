@@ -498,6 +498,7 @@ module Aws::CodeBuild
     #   resp.builds[0].current_phase #=> String
     #   resp.builds[0].build_status #=> String, one of "SUCCEEDED", "FAILED", "FAULT", "TIMED_OUT", "IN_PROGRESS", "STOPPED"
     #   resp.builds[0].source_version #=> String
+    #   resp.builds[0].resolved_source_version #=> String
     #   resp.builds[0].project_name #=> String
     #   resp.builds[0].phases #=> Array
     #   resp.builds[0].phases[0].phase_type #=> String, one of "SUBMITTED", "PROVISIONING", "DOWNLOAD_SOURCE", "INSTALL", "PRE_BUILD", "BUILD", "POST_BUILD", "UPLOAD_ARTIFACTS", "FINALIZING", "COMPLETED"
@@ -1497,6 +1498,7 @@ module Aws::CodeBuild
     #   resp.build.current_phase #=> String
     #   resp.build.build_status #=> String, one of "SUCCEEDED", "FAILED", "FAULT", "TIMED_OUT", "IN_PROGRESS", "STOPPED"
     #   resp.build.source_version #=> String
+    #   resp.build.resolved_source_version #=> String
     #   resp.build.project_name #=> String
     #   resp.build.phases #=> Array
     #   resp.build.phases[0].phase_type #=> String, one of "SUBMITTED", "PROVISIONING", "DOWNLOAD_SOURCE", "INSTALL", "PRE_BUILD", "BUILD", "POST_BUILD", "UPLOAD_ARTIFACTS", "FINALIZING", "COMPLETED"
@@ -1608,6 +1610,7 @@ module Aws::CodeBuild
     #   resp.build.current_phase #=> String
     #   resp.build.build_status #=> String, one of "SUCCEEDED", "FAILED", "FAULT", "TIMED_OUT", "IN_PROGRESS", "STOPPED"
     #   resp.build.source_version #=> String
+    #   resp.build.resolved_source_version #=> String
     #   resp.build.project_name #=> String
     #   resp.build.phases #=> Array
     #   resp.build.phases[0].phase_type #=> String, one of "SUBMITTED", "PROVISIONING", "DOWNLOAD_SOURCE", "INSTALL", "PRE_BUILD", "BUILD", "POST_BUILD", "UPLOAD_ARTIFACTS", "FINALIZING", "COMPLETED"
@@ -2016,7 +2019,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

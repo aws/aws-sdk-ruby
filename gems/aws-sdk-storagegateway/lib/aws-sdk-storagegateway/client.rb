@@ -242,7 +242,7 @@ module Aws::StorageGateway
     # @option params [String] :gateway_type
     #   A value that defines the type of gateway to activate. The type
     #   specified is critical to all later functions of the gateway and cannot
-    #   be changed after activation. The default value is `STORED`.
+    #   be changed after activation. The default value is `CACHED`.
     #
     #   Valid Values: "STORED", "CACHED", "VTL", "FILE\_S3"
     #
@@ -3856,23 +3856,51 @@ module Aws::StorageGateway
     # objects in the Amazon S3 bucket that were added, removed or replaced
     # since the gateway last listed the bucket's contents and cached the
     # results. This operation is only supported in the file gateway type.
+    # You can subscribe to be notified through an Amazon CloudWatch event
+    # when your RefreshCache operation completes. For more information, see
+    # [Getting Notified About File Operations][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification
     #
     # @option params [required, String] :file_share_arn
     #   The Amazon Resource Name (ARN) of the file share.
     #
+    # @option params [Array<String>] :folder_list
+    #   A comma-separated list of the paths of folders to refresh in the
+    #   cache. The default is \[`"/"`\]. The default refreshes objects and
+    #   folders at the root of the Amazon S3 bucket. If `Recursive` is set to
+    #   "true", the entire S3 bucket that the file share has access to is
+    #   refreshed.
+    #
+    # @option params [Boolean] :recursive
+    #   A value that specifies whether to recursively refresh folders in the
+    #   cache. The refresh includes folders that were in the cache the last
+    #   time the gateway listed the folder's contents. If this value set to
+    #   "true", each folder that is listed in `FolderList` is recursively
+    #   updated. Otherwise, subfolders listed in `FolderList` are not
+    #   refreshed. Only objects that are in folders listed directly under
+    #   `FolderList` are found and used for the update. The default is
+    #   "true".
+    #
     # @return [Types::RefreshCacheOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RefreshCacheOutput#file_share_arn #file_share_arn} => String
+    #   * {Types::RefreshCacheOutput#notification_id #notification_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.refresh_cache({
     #     file_share_arn: "FileShareARN", # required
+    #     folder_list: ["Folder"],
+    #     recursive: false,
     #   })
     #
     # @example Response structure
     #
     #   resp.file_share_arn #=> String
+    #   resp.notification_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RefreshCache AWS API Documentation
     #
@@ -5029,7 +5057,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

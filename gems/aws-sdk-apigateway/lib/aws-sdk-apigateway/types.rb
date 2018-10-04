@@ -13,12 +13,9 @@ module Aws::APIGateway
     #
     # @!attribute [rw] format
     #   A single line format of the access logs of data, as specified by
-    #   selected [$context variables][1]. The format must include at least
-    #   `$context.requestId`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#context-variable-reference
+    #   selected [$context
+    #   variables]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#context-variable-reference).
+    #   The format must include at least `$context.requestId`.
     #   @return [String]
     #
     # @!attribute [rw] destination_arn
@@ -45,7 +42,8 @@ module Aws::APIGateway
     # * TooManyRequestsException
     #
     # For detailed error code information, including the corresponding HTTP
-    # Status Codes, see [API Gateway Error Codes][1]
+    # Status Codes, see [API Gateway Error
+    # Codes]([[AwsDocsUrlPrefix]]/apigateway/api-reference/handling-errors/#api-error-codes)
     #
     # #### Example: Get the information about an account.
     #
@@ -58,7 +56,7 @@ module Aws::APIGateway
     # The successful response returns a `200 OK` status code and a payload
     # similar to the following:
     #
-    #     \{ "_links": \{ "curies": \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/account-apigateway-\{rel\}.html", "name": "account", "templated": true \}, "self": \{ "href": "/account" \}, "account:update": \{ "href": "/account" \} \}, "cloudwatchRoleArn": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "throttleSettings": \{ "rateLimit": 500, "burstLimit": 1000 \} \}
+    #     \{ "_links": \{ "curies": \{ "href": "[[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/account-apigateway-\{rel\}.html", "name": "account", "templated": true \}, "self": \{ "href": "/account" \}, "account:update": \{ "href": "/account" \} \}, "cloudwatchRoleArn": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "throttleSettings": \{ "rateLimit": 500, "burstLimit": 1000 \} \}
     #
     # In addition to making the REST API call directly, you can use the AWS
     # CLI and an AWS SDK to access this resource.
@@ -66,15 +64,13 @@ module Aws::APIGateway
     # </div>
     #
     # <div class="seeAlso">
-    # [API Gateway Limits][2] [Developer Guide][3], [AWS CLI][4]
+    # [API Gateway
+    # Limits]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/api-gateway-limits.html)
+    # [Developer
+    # Guide]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/welcome.html),
+    # [AWS
+    # CLI]([[AwsDocsUrlPrefix]]/cli/latest/reference/apigateway/get-account.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/api-reference/handling-errors/#api-error-codes
-    # [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-limits.html
-    # [3]: https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html
-    # [4]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-account.html
     #
     # @!attribute [rw] cloudwatch_role_arn
     #   The ARN of an Amazon CloudWatch role for the current Account.
@@ -107,12 +103,9 @@ module Aws::APIGateway
     # make requests to that stage.
     #
     # <div class="seeAlso">
-    # [Use API Keys][1]
+    # [Use API
+    # Keys]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/how-to-api-keys.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html
     #
     # @!attribute [rw] id
     #   The identifier of the API Key.
@@ -185,12 +178,9 @@ module Aws::APIGateway
     # resource.
     #
     # <div class="seeAlso">
-    # [Use API Keys][1]
+    # [Use API
+    # Keys]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/how-to-api-keys.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html
     #
     # @!attribute [rw] warnings
     #   A list of warning messages logged during the import of API keys when
@@ -252,12 +242,9 @@ module Aws::APIGateway
     # method.
     #
     # <div class="seeAlso">
-    # [Enable custom authorization][1]
+    # [Enable custom
+    # authorization]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/use-custom-authorizer.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html
     #
     # @!attribute [rw] id
     #   The identifier for the authorizer resource.
@@ -282,7 +269,7 @@ module Aws::APIGateway
     #   @return [Array<String>]
     #
     # @!attribute [rw] auth_type
-    #   Optional customer-defined field, used in OpenAPI imports and exports
+    #   Optional customer-defined field, used in Swagger imports and exports
     #   without functional impact.
     #   @return [String]
     #
@@ -365,12 +352,9 @@ module Aws::APIGateway
     # Represents a collection of Authorizer resources.
     #
     # <div class="seeAlso">
-    # [Enable custom authorization][1]
+    # [Enable custom
+    # authorization]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/use-custom-authorizer.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -394,12 +378,9 @@ module Aws::APIGateway
     # </div>
     #
     # <div class="seeAlso">
-    # [Use Custom Domain Names][1]
+    # [Use Custom Domain
+    # Names]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/how-to-custom-domains.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html
     #
     # @!attribute [rw] base_path
     #   The base path name that callers of the API must provide as part of
@@ -424,12 +405,9 @@ module Aws::APIGateway
     # Represents a collection of BasePathMapping resources.
     #
     # <div class="seeAlso">
-    # [Use Custom Domain Names][1]
+    # [Use Custom Domain
+    # Names]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/how-to-custom-domains.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -496,12 +474,9 @@ module Aws::APIGateway
     # </div>
     #
     # <div class="seeAlso">
-    # [Use Client-Side Certificate][1]
+    # [Use Client-Side
+    # Certificate]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html
     #
     # @!attribute [rw] client_certificate_id
     #   The identifier of the client certificate.
@@ -537,12 +512,9 @@ module Aws::APIGateway
     # Represents a collection of ClientCertificate resources.
     #
     # <div class="seeAlso">
-    # [Use Client-Side Certificate][1]
+    # [Use Client-Side
+    # Certificate]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -661,7 +633,7 @@ module Aws::APIGateway
     #   @return [Array<String>]
     #
     # @!attribute [rw] auth_type
-    #   Optional customer-defined field, used in OpenAPI imports and exports
+    #   Optional customer-defined field, used in Swagger imports and exports
     #   without functional impact.
     #   @return [String]
     #
@@ -895,7 +867,7 @@ module Aws::APIGateway
     # @!attribute [rw] properties
     #   \[Required\] The new documentation content map of the targeted API
     #   entity. Enclosed key-value pairs are API-specific, but only
-    #   OpenAPI-compliant key-value pairs can be exported and, hence,
+    #   Swagger-compliant key-value pairs can be exported and, hence,
     #   published.
     #   @return [String]
     #
@@ -1055,11 +1027,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] schema
     #   The schema for the model. For `application/json` models, this should
-    #   be [JSON schema draft 4][1] model.
-    #
-    #
-    #
-    #   [1]: https://tools.ietf.org/html/draft-zyp-json-schema-04
+    #   be [JSON schema draft 4]([[JsonSchemaUrl]]) model.
     #   @return [String]
     #
     # @!attribute [rw] content_type
@@ -2003,13 +1971,10 @@ module Aws::APIGateway
     # </div>
     #
     # <div class="seeAlso">
-    # RestApi, Deployments, Stage, [AWS CLI][1], [AWS SDKs][2]
+    # RestApi, Deployments, Stage, [AWS
+    # CLI]([[AwsDocsUrlPrefix]]/cli/latest/reference/apigateway/get-deployment.html),
+    # [AWS SDKs]([[AwsAmazonUrlPrefix]]/tools/)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html
-    # [2]: https://aws.amazon.com/tools/
     #
     # @!attribute [rw] id
     #   The identifier for the deployment resource.
@@ -2087,14 +2052,12 @@ module Aws::APIGateway
     # </div>
     #
     # <div class="seeAlso">
-    # [Deploying an API][1], [AWS CLI][2], [AWS SDKs][3]
+    # [Deploying an
+    # API]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/how-to-deploy-api.html),
+    # [AWS
+    # CLI]([[AwsDocsUrlPrefix]]/cli/latest/reference/apigateway/get-deployment.html),
+    # [AWS SDKs]([[AwsAmazonUrlPrefix]]/tools/)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html
-    # [2]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html
-    # [3]: https://aws.amazon.com/tools/
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -2122,19 +2085,17 @@ module Aws::APIGateway
     #
     # The content map is a JSON string of API-specific key-value pairs.
     # Although an API can use any shape for the content map, only the
-    # OpenAPI-compliant documentation fields will be injected into the
-    # associated API entity definition in the exported OpenAPI definition
+    # Swagger-compliant documentation fields will be injected into the
+    # associated API entity definition in the exported Swagger definition
     # file.
     #
     # </div>
     #
     # <div class="seeAlso">
-    # [Documenting an API][1], DocumentationParts
+    # [Documenting an
+    # API]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/api-gateway-documenting-api.html),
+    # DocumentationParts
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html
     #
     # @!attribute [rw] id
     #   The DocumentationPart identifier, generated by API Gateway when the
@@ -2154,12 +2115,12 @@ module Aws::APIGateway
     #   A content map of API-specific key-value pairs describing the
     #   targeted API entity. The map must be encoded as a JSON string, e.g.,
     #   `"\{ "description": "The API does ..." \}"`. Only
-    #   OpenAPI-compliant documentation-related fields from the
+    #   Swagger-compliant documentation-related fields from the
     #   <literal>properties</literal>
     #
     #    map are exported and, hence, published as part of the API entity
     #   definitions, while the original documentation parts are exported in
-    #   a OpenAPI extension of `x-amazon-apigateway-documentation`.
+    #   a Swagger extension of `x-amazon-apigateway-documentation`.
     #   @return [String]
     #
     class DocumentationPart < Struct.new(
@@ -2173,18 +2134,15 @@ module Aws::APIGateway
     #
     # <div class="remarks">
     # This is used to return the result when documentation parts in an
-    # external (e.g., OpenAPI) file are imported into API Gateway
+    # external (e.g., Swagger) file are imported into API Gateway
     # </div>
     #
     # <div class="seeAlso">
-    # [Documenting an API][1], [documentationpart:import][2],
+    # [Documenting an
+    # API]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/api-gateway-documenting-api.html),
+    # [documentationpart:import]([[AwsDocsUrlPrefix]]/apigateway/api-reference/link-relation/documentationpart-import/),
     # DocumentationPart
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html
-    # [2]: https://docs.aws.amazon.com/apigateway/api-reference/link-relation/documentationpart-import/
     #
     # @!attribute [rw] ids
     #   A list of the returned documentation part identifiers.
@@ -2278,12 +2236,10 @@ module Aws::APIGateway
     # <div class="remarks"></div>
     #
     # <div class="seeAlso">
-    # [Documenting an API][1], DocumentationPart
+    # [Documenting an
+    # API]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/api-gateway-documenting-api.html),
+    # DocumentationPart
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -2303,17 +2259,15 @@ module Aws::APIGateway
     # <div class="remarks" markdown="1">
     # Publishing API documentation involves creating a documentation version
     # associated with an API stage and exporting the versioned documentation
-    # to an external (e.g., OpenAPI) file.
+    # to an external (e.g., Swagger) file.
     #
     # </div>
     #
     # <div class="seeAlso">
-    # [Documenting an API][1], DocumentationPart, DocumentationVersions
+    # [Documenting an
+    # API]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/api-gateway-documenting-api.html),
+    # DocumentationPart, DocumentationVersions
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html
     #
     # @!attribute [rw] version
     #   The version identifier of the API documentation snapshot.
@@ -2343,12 +2297,10 @@ module Aws::APIGateway
     # </div>
     #
     # <div class="seeAlso">
-    # [Documenting an API][1], DocumentationPart, DocumentationVersion
+    # [Documenting an
+    # API]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/api-gateway-documenting-api.html),
+    # DocumentationPart, DocumentationVersion
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -2381,12 +2333,9 @@ module Aws::APIGateway
     # </div>
     #
     # <div class="seeAlso">
-    # [Set a Custom Host Name for an API][1]
+    # [Set a Custom Host Name for an
+    # API]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/how-to-custom-domains.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html
     #
     # @!attribute [rw] domain_name
     #   The custom domain name as an API host name, for example,
@@ -2420,12 +2369,9 @@ module Aws::APIGateway
     # @!attribute [rw] regional_hosted_zone_id
     #   The region-specific Amazon Route 53 Hosted Zone ID of the regional
     #   endpoint. For more information, see [Set up a Regional Custom Domain
-    #   Name][1] and [AWS Regions and Endpoints for API Gateway][2].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html
-    #   [2]: https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region
+    #   Name]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html)
+    #   and [AWS Regions and Endpoints for API
+    #   Gateway]([[AwsDocsUrlPrefix]]/general/latest/gr/rande.html#apigateway_region).
     #   @return [String]
     #
     # @!attribute [rw] regional_certificate_name
@@ -2445,23 +2391,17 @@ module Aws::APIGateway
     #   up this association when adding a DNS record pointing the custom
     #   domain name to this distribution name. For more information about
     #   CloudFront distributions, see the [Amazon CloudFront
-    #   documentation][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/documentation/cloudfront/
+    #   documentation]([[AwsAmazonUrlPrefix]]/documentation/cloudfront/).
     #   @return [String]
     #
     # @!attribute [rw] distribution_hosted_zone_id
     #   The region-agnostic Amazon Route 53 Hosted Zone ID of the
     #   edge-optimized endpoint. The valid value is `Z2FDTNDATAQYW2` for all
     #   the regions. For more information, see [Set up a Regional Custom
-    #   Domain Name][1] and [AWS Regions and Endpoints for API Gateway][2].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html
-    #   [2]: https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region
+    #   Domain
+    #   Name]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html)
+    #   and [AWS Regions and Endpoints for API
+    #   Gateway]([[AwsDocsUrlPrefix]]/general/latest/gr/rande.html#apigateway_region).
     #   @return [String]
     #
     # @!attribute [rw] endpoint_configuration
@@ -2487,12 +2427,9 @@ module Aws::APIGateway
     # Represents a collection of DomainName resources.
     #
     # <div class="seeAlso">
-    # [Use Client-Side Certificate][1]
+    # [Use Client-Side
+    # Certificate]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/how-to-custom-domains.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -2606,7 +2543,8 @@ module Aws::APIGateway
     #
     # <div class="remarks">
     # For more information about valid gateway response types, see [Gateway
-    # Response Types Supported by API Gateway][1]
+    # Response Types Supported by API
+    # Gateway]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/supported-gateway-response-types.html)
     # <div class="example" markdown="1">
     # #### Example: Get a Gateway Response of a given response type
     #
@@ -2632,13 +2570,9 @@ module Aws::APIGateway
     # </div>
     #
     # <div class="seeAlso">
-    # [Customize Gateway Responses][2]
+    # [Customize Gateway
+    # Responses]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/customize-gateway-responses.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/supported-gateway-response-types.html
-    # [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/customize-gateway-responses.html
     #
     # @!attribute [rw] response_type
     #   The response type of the associated GatewayResponse. Valid values
@@ -2700,7 +2634,8 @@ module Aws::APIGateway
     #
     # <div class="remarks">
     # For more information about valid gateway response types, see [Gateway
-    # Response Types Supported by API Gateway][1]
+    # Response Types Supported by API
+    # Gateway]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/supported-gateway-response-types.html)
     # <div class="example" markdown="1">
     # #### Example: Get the collection of gateway responses of an API
     #
@@ -2726,13 +2661,9 @@ module Aws::APIGateway
     # </div>
     #
     # <div class="seeAlso">
-    # [Customize Gateway Responses][2]
+    # [Customize Gateway
+    # Responses]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/customize-gateway-responses.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/supported-gateway-response-types.html
-    # [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/customize-gateway-responses.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -3283,15 +3214,15 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] export_type
-    #   \[Required\] The type of export. Acceptable values are 'oas30' for
-    #   OpenAPI 3.0.x and 'swagger' for Swagger/OpenAPI 2.0.
+    #   \[Required\] The type of export. Currently only 'swagger' is
+    #   supported.
     #   @return [String]
     #
     # @!attribute [rw] parameters
     #   A key-value map of query string parameters that specify properties
     #   of the export, depending on the requested `exportType`. For
-    #   `exportType` `oas30` and `swagger`, any combination of the following
-    #   parameters are supported: `extensions='integrations'` or
+    #   `exportType` `swagger`, any combination of the following parameters
+    #   are supported: `extensions='integrations'` or
     #   `extensions='apigateway'` will export the API with
     #   x-amazon-apigateway-integration extensions.
     #   `extensions='authorizers'` will export the API with
@@ -3302,8 +3233,8 @@ module Aws::APIGateway
     # @!attribute [rw] accepts
     #   The content-type of the export, for example `application/json`.
     #   Currently `application/json` and `application/yaml` are supported
-    #   for `exportType` of`oas30` and `swagger`. This should be specified
-    #   in the `Accept` header for direct API requests.
+    #   for `exportType` of `swagger`. This should be specified in the
+    #   `Accept` header for direct API requests.
     #   @return [String]
     #
     class GetExportRequest < Struct.new(
@@ -4203,11 +4134,8 @@ module Aws::APIGateway
     #
     # @!attribute [rw] body
     #   The payload of the POST request to import API keys. For the payload
-    #   format, see [API Key File Format][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-key-file-format.html
+    #   format, see [API Key File
+    #   Format]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/api-key-file-format.html).
     #   @return [String]
     #
     # @!attribute [rw] format
@@ -4227,7 +4155,7 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Import documentation parts from an external (e.g., OpenAPI) definition
+    # Import documentation parts from an external (e.g., Swagger) definition
     # file.
     #
     # @note When making an API call, you may pass ImportDocumentationPartsRequest
@@ -4258,7 +4186,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] body
     #   \[Required\] Raw byte array representing the to-be-imported
-    #   documentation parts. To import from an OpenAPI file, this is a JSON
+    #   documentation parts. To import from a Swagger file, this is a JSON
     #   object.
     #   @return [String]
     #
@@ -4321,7 +4249,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] body
     #   \[Required\] The POST request body containing external API
-    #   definitions. Currently, only OpenAPI definition JSON/YAML files are
+    #   definitions. Currently, only Swagger definition JSON files are
     #   supported. The maximum size of the API definition file is 2MB.
     #   @return [String]
     #
@@ -4340,12 +4268,9 @@ module Aws::APIGateway
     # </div>
     #
     # <div class="seeAlso">
-    # [Creating an API][1]
+    # [Creating an
+    # API]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/how-to-create-api.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
     #
     # @!attribute [rw] type
     #   Specifies an API method integration type. The valid value is one of
@@ -4388,10 +4313,10 @@ module Aws::APIGateway
     #
     #   * For `HTTP` or `HTTP_PROXY` integrations, the URI must be a fully
     #     formed, encoded HTTP(S) URL according to the [RFC-3986
-    #     specification][1], for either standard integration, where
-    #     `connectionType` is not `VPC_LINK`, or private integration, where
-    #     `connectionType` is `VPC_LINK`. For a private HTTP integration,
-    #     the URI is not used for routing.
+    #     specification]([[UriEntryWikipediaUrl]]), for either standard
+    #     integration, where `connectionType` is not `VPC_LINK`, or private
+    #     integration, where `connectionType` is `VPC_LINK`. For a private
+    #     HTTP integration, the URI is not used for routing.
     #
     #   * For `AWS` or `AWS_PROXY` integrations, the URI is of the form
     #     `arn:aws:apigateway:\{region\}:\{subdomain.service|service\}:path|action/\{service_api\}`.
@@ -4410,10 +4335,6 @@ module Aws::APIGateway
     #     either
     #     `arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket=\{bucket\}&Key=\{key\}`
     #     or `arn:aws:apigateway:us-west-2:s3:path/\{bucket\}/\{key\}`
-    #
-    #
-    #
-    #   [1]: https://en.wikipedia.org/wiki/Uniform_Resource_Identifier
     #   @return [String]
     #
     # @!attribute [rw] connection_type
@@ -4425,12 +4346,10 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] connection_id
-    #   The ([`id`][1]) of the VpcLink used for the integration when
+    #   The
+    #   ([`id`]([[AwsDocsUrlPrefix]]/apigateway/api-reference/resource/vpc-link/#id))
+    #   of the VpcLink used for the integration when
     #   `connectionType=VPC_LINK` and undefined, otherwise.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/apigateway/api-reference/resource/vpc-link/#id
     #   @return [String]
     #
     # @!attribute [rw] credentials
@@ -4539,19 +4458,16 @@ module Aws::APIGateway
     #   The successful response returns `200 OK` status and a payload as
     #   follows:
     #
-    #       \{ "_links": \{ "curies": \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \}, "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.Content-Type": "'application/xml'" \}, "responseTemplates": \{ "application/json": "$util.urlDecode("%3CkinesisStreams%3E#foreach($stream in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E")\n" \}, "statusCode": "200" \}
+    #       \{ "_links": \{ "curies": \{ "href": "[[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \}, "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.Content-Type": "'application/xml'" \}, "responseTemplates": \{ "application/json": "$util.urlDecode("%3CkinesisStreams%3E#foreach($stream in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E")\n" \}, "statusCode": "200" \}
     #
     #
     #
     #   </div>
     #
     #   <div class="seeAlso">
-    #   [Creating an API][1]
+    #   [Creating an
+    #   API]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/how-to-create-api.html)
     #   </div>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
     #   @return [Hash<String,Types::IntegrationResponse>]
     #
     class Integration < Struct.new(
@@ -4577,12 +4493,9 @@ module Aws::APIGateway
     # transform the back-end response.
     #
     # <div class="seeAlso">
-    # [Creating an API][1]
+    # [Creating an
+    # API]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/how-to-create-api.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
     #
     # @!attribute [rw] status_code
     #   Specifies the status code that is used to map the integration
@@ -4676,26 +4589,23 @@ module Aws::APIGateway
     # The successful response returns a `200 OK` status code and a payload
     # similar to the following:
     #
-    #     \{ "_links": \{ "curies": [ \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-\{rel\}.html", "name": "integration", "templated": true \}, \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \}, \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-\{rel\}.html", "name": "method", "templated": true \}, \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-\{rel\}.html", "name": "methodresponse", "templated": true \} ], "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET", "name": "GET", "title": "GET" \}, "integration:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "method:integration": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "method:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "methodresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/\{status_code\}", "templated": true \} \}, "apiKeyRequired": true, "authorizationType": "NONE", "httpMethod": "GET", "_embedded": \{ "method:integration": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integration:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integrationresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/\{status_code\}", "templated": true \} \}, "cacheKeyParameters": [], "cacheNamespace": "3kzxbg5sa2", "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod": "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestParameters": \{ "integration.request.header.Content-Type": "'application/x-amz-json-1.1'" \}, "requestTemplates": \{ "application/json": "\{\n\}" \}, "type": "AWS", "uri": "arn:aws:apigateway:us-east-1:kinesis:action/ListStreams", "_embedded": \{ "integration:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.Content-Type": "'application/xml'" \}, "responseTemplates": \{ "application/json": "$util.urlDecode("%3CkinesisStreams%3E%23foreach(%24stream%20in%20%24input.path(%27%24.StreamNames%27))%3Cstream%3E%3Cname%3E%24stream%3C%2Fname%3E%3C%2Fstream%3E%23end%3C%2FkinesisStreams%3E")" \}, "statusCode": "200" \} \} \}, "method:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "methodresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \}, "methodresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \} \}, "responseModels": \{ "application/json": "Empty" \}, "responseParameters": \{ "method.response.header.Content-Type": false \}, "statusCode": "200" \} \} \}
+    #     \{ "_links": \{ "curies": [ \{ "href": "[[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/restapi-integration-\{rel\}.html", "name": "integration", "templated": true \}, \{ "href": "[[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \}, \{ "href": "[[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/restapi-method-\{rel\}.html", "name": "method", "templated": true \}, \{ "href": "[[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/restapi-method-response-\{rel\}.html", "name": "methodresponse", "templated": true \} ], "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET", "name": "GET", "title": "GET" \}, "integration:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "method:integration": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "method:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "methodresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/\{status_code\}", "templated": true \} \}, "apiKeyRequired": true, "authorizationType": "NONE", "httpMethod": "GET", "_embedded": \{ "method:integration": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integration:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integrationresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/\{status_code\}", "templated": true \} \}, "cacheKeyParameters": [], "cacheNamespace": "3kzxbg5sa2", "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod": "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestParameters": \{ "integration.request.header.Content-Type": "'application/x-amz-json-1.1'" \}, "requestTemplates": \{ "application/json": "\{\n\}" \}, "type": "AWS", "uri": "arn:aws:apigateway:us-east-1:kinesis:action/ListStreams", "_embedded": \{ "integration:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.Content-Type": "'application/xml'" \}, "responseTemplates": \{ "application/json": "$util.urlDecode("%3CkinesisStreams%3E%23foreach(%24stream%20in%20%24input.path(%27%24.StreamNames%27))%3Cstream%3E%3Cname%3E%24stream%3C%2Fname%3E%3C%2Fstream%3E%23end%3C%2FkinesisStreams%3E")" \}, "statusCode": "200" \} \} \}, "method:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "methodresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \}, "methodresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \} \}, "responseModels": \{ "application/json": "Empty" \}, "responseParameters": \{ "method.response.header.Content-Type": false \}, "statusCode": "200" \} \} \}
     #
     # In the example above, the response template for the `200 OK` response
     # maps the JSON output from the `ListStreams` action in the back end to
     # an XML output. The mapping template is URL-encoded as
     # `%3CkinesisStreams%3E%23foreach(%24stream%20in%20%24input.path(%27%24.StreamNames%27))%3Cstream%3E%3Cname%3E%24stream%3C%2Fname%3E%3C%2Fstream%3E%23end%3C%2FkinesisStreams%3E`
-    # and the output is decoded using the [$util.urlDecode()][1] helper
-    # function.
+    # and the output is decoded using the
+    # [$util.urlDecode()]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#util-templat-reference)
+    # helper function.
     #
     # </div>
     #
     # <div class="seeAlso">
     # MethodResponse, Integration, IntegrationResponse, Resource, [Set up an
-    # API's method][2]
+    # API's
+    # method]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/how-to-method-settings.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#util-templat-reference
-    # [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-method-settings.html
     #
     # @!attribute [rw] http_method
     #   The method's HTTP verb.
@@ -4725,11 +4635,7 @@ module Aws::APIGateway
     # @!attribute [rw] operation_name
     #   A human-friendly operation identifier for the method. For example,
     #   you can assign the `operationName` of `ListPets` for the `GET /pets`
-    #   method in [PetStore][1] example.
-    #
-    #
-    #
-    #   [1]: https://petstore-demo-endpoint.execute-api.com/petstore/pets
+    #   method in [PetStore]([[PetstoreDemoUrl]]) example.
     #   @return [String]
     #
     # @!attribute [rw] request_parameters
@@ -4773,19 +4679,16 @@ module Aws::APIGateway
     #   The successful response returns a `200 OK` status code and a payload
     #   similar to the following:
     #
-    #       \{ "_links": \{ "curies": \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-\{rel\}.html", "name": "methodresponse", "templated": true \}, "self": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200", "title": "200" \}, "methodresponse:delete": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200" \}, "methodresponse:update": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200" \} \}, "responseModels": \{ "application/json": "Empty" \}, "responseParameters": \{ "method.response.header.operator": false, "method.response.header.operand_2": false, "method.response.header.operand_1": false \}, "statusCode": "200" \}
+    #       \{ "_links": \{ "curies": \{ "href": "[[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/restapi-method-response-\{rel\}.html", "name": "methodresponse", "templated": true \}, "self": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200", "title": "200" \}, "methodresponse:delete": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200" \}, "methodresponse:update": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200" \} \}, "responseModels": \{ "application/json": "Empty" \}, "responseParameters": \{ "method.response.header.operator": false, "method.response.header.operand_2": false, "method.response.header.operand_1": false \}, "statusCode": "200" \}
     #
     #
     #
     #   </div>
     #
     #   <div class="seeAlso">
-    #   [AWS CLI][1]
+    #   [AWS
+    #   CLI]([[AwsDocsUrlPrefix]]/cli/latest/reference/apigateway/get-method-response.html)
     #   </div>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-method-response.html
     #   @return [Hash<String,Types::MethodResponse>]
     #
     # @!attribute [rw] method_integration
@@ -4809,19 +4712,16 @@ module Aws::APIGateway
     #   The successful response returns a `200 OK` status code and a payload
     #   similar to the following:
     #
-    #       \{ "_links": \{ "curies": [ \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-\{rel\}.html", "name": "integration", "templated": true \}, \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \} ], "self": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration" \}, "integration:delete": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration" \}, "integration:responses": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integration:update": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration" \}, "integrationresponse:put": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/\{status_code\}", "templated": true \} \}, "cacheKeyParameters": [], "cacheNamespace": "0cjtch", "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod": "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestTemplates": \{ "application/json": "\{\n "a": "$input.params('operand1')",\n "b": "$input.params('operand2')", \n "op": "$input.params('operator')" \n\}" \}, "type": "AWS", "uri": "arn:aws:apigateway:us-west-2:lambda:path//2015-03-31/functions/arn:aws:lambda:us-west-2:123456789012:function:Calc/invocations", "_embedded": \{ "integration:responses": \{ "_links": \{ "self": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.operator": "integration.response.body.op", "method.response.header.operand_2": "integration.response.body.b", "method.response.header.operand_1": "integration.response.body.a" \}, "responseTemplates": \{ "application/json": "#set($res = $input.path('$'))\n\{\n "result": "$res.a, $res.b, $res.op => $res.c",\n "a" : "$res.a",\n "b" : "$res.b",\n "op" : "$res.op",\n "c" : "$res.c"\n\}" \}, "selectionPattern": "", "statusCode": "200" \} \} \}
+    #       \{ "_links": \{ "curies": [ \{ "href": "[[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/restapi-integration-\{rel\}.html", "name": "integration", "templated": true \}, \{ "href": "[[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \} ], "self": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration" \}, "integration:delete": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration" \}, "integration:responses": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integration:update": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration" \}, "integrationresponse:put": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/\{status_code\}", "templated": true \} \}, "cacheKeyParameters": [], "cacheNamespace": "0cjtch", "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod": "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestTemplates": \{ "application/json": "\{\n "a": "$input.params('operand1')",\n "b": "$input.params('operand2')", \n "op": "$input.params('operator')" \n\}" \}, "type": "AWS", "uri": "arn:aws:apigateway:us-west-2:lambda:path//2015-03-31/functions/arn:aws:lambda:us-west-2:123456789012:function:Calc/invocations", "_embedded": \{ "integration:responses": \{ "_links": \{ "self": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.operator": "integration.response.body.op", "method.response.header.operand_2": "integration.response.body.b", "method.response.header.operand_1": "integration.response.body.a" \}, "responseTemplates": \{ "application/json": "#set($res = $input.path('$'))\n\{\n "result": "$res.a, $res.b, $res.op => $res.c",\n "a" : "$res.a",\n "b" : "$res.b",\n "op" : "$res.op",\n "c" : "$res.c"\n\}" \}, "selectionPattern": "", "statusCode": "200" \} \} \}
     #
     #
     #
     #   </div>
     #
     #   <div class="seeAlso">
-    #   [AWS CLI][1]
+    #   [AWS
+    #   CLI]([[AwsDocsUrlPrefix]]/cli/latest/reference/apigateway/get-integration.html)
     #   </div>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-integration.html
     #   @return [Types::Integration]
     #
     # @!attribute [rw] authorization_scopes
@@ -4873,19 +4773,16 @@ module Aws::APIGateway
     # The successful response returns `200 OK` status and a payload as
     # follows:
     #
-    #     \{ "_links": \{ "curies": \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-\{rel\}.html", "name": "methodresponse", "templated": true \}, "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "title": "200" \}, "methodresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \}, "methodresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \} \}, "responseModels": \{ "application/json": "Empty" \}, "responseParameters": \{ "method.response.header.Content-Type": false \}, "statusCode": "200" \}
+    #     \{ "_links": \{ "curies": \{ "href": "[[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/restapi-method-response-\{rel\}.html", "name": "methodresponse", "templated": true \}, "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "title": "200" \}, "methodresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \}, "methodresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \} \}, "responseModels": \{ "application/json": "Empty" \}, "responseParameters": \{ "method.response.header.Content-Type": false \}, "statusCode": "200" \}
     #
     #
     #
     # </div>
     #
     # <div class="seeAlso">
-    # Method, IntegrationResponse, Integration [Creating an API][1]
+    # Method, IntegrationResponse, Integration [Creating an
+    # API]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/how-to-create-api.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
     #
     # @!attribute [rw] status_code
     #   The method response's status code.
@@ -5046,12 +4943,9 @@ module Aws::APIGateway
     # </div>
     #
     # <div class="seeAlso">
-    # Method, MethodResponse, [Models and Mappings][1]
+    # Method, MethodResponse, [Models and
+    # Mappings]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/models-mappings.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html
     #
     # @!attribute [rw] id
     #   The identifier for the model resource.
@@ -5067,15 +4961,12 @@ module Aws::APIGateway
     #
     # @!attribute [rw] schema
     #   The schema for the model. For `application/json` models, this should
-    #   be [JSON schema draft 4][1] model. Do not include "\\*/"
-    #   characters in the description of any properties because such
-    #   "\\*/" characters may be interpreted as the closing marker for
-    #   comments in some languages, such as Java or JavaScript, causing the
-    #   installation of your API's SDK generated by API Gateway to fail.
-    #
-    #
-    #
-    #   [1]: https://tools.ietf.org/html/draft-zyp-json-schema-04
+    #   be [JSON schema draft 4]([[JsonSchemaUrl]]) model. Do not include
+    #   "\\*/" characters in the description of any properties because
+    #   such "\\*/" characters may be interpreted as the closing marker
+    #   for comments in some languages, such as Java or JavaScript, causing
+    #   the installation of your API's SDK generated by API Gateway to
+    #   fail.
     #   @return [String]
     #
     # @!attribute [rw] content_type
@@ -5094,12 +4985,9 @@ module Aws::APIGateway
     # Represents a collection of Model resources.
     #
     # <div class="seeAlso">
-    # Method, MethodResponse, [Models and Mappings][1]
+    # Method, MethodResponse, [Models and
+    # Mappings]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/models-mappings.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -5138,20 +5026,16 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] path
-    #   The `op` operation's target, as identified by a [JSON Pointer][1]
-    #   value that references a location within the targeted resource. For
-    #   example, if the target resource has an updateable property of
-    #   `\{"name":"value"\}`, the path for this property is `/name`. If the
-    #   `name` property value is a JSON object (e.g., `\{"name":
-    #   \{"child/name": "child-value"\}\}`), the path for the `child/name`
-    #   property will be `/name/child~1name`. Any slash ("/") character
-    #   appearing in path names must be escaped with "~1", as shown in the
-    #   example above. Each `op` operation can have only one `path`
-    #   associated with it.
-    #
-    #
-    #
-    #   [1]: https://tools.ietf.org/html/draft-ietf-appsawg-json-pointer-08
+    #   The `op` operation's target, as identified by a [JSON
+    #   Pointer]([[JsonPointerRefUrl]]) value that references a location
+    #   within the targeted resource. For example, if the target resource
+    #   has an updateable property of `\{"name":"value"\}`, the path for
+    #   this property is `/name`. If the `name` property value is a JSON
+    #   object (e.g., `\{"name": \{"child/name": "child-value"\}\}`), the
+    #   path for the `child/name` property will be `/name/child~1name`. Any
+    #   slash ("/") character appearing in path names must be escaped with
+    #   "~1", as shown in the example above. Each `op` operation can have
+    #   only one `path` associated with it.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -5159,11 +5043,8 @@ module Aws::APIGateway
     #   the `add` or `replace` operation. When using AWS CLI to update a
     #   property of a JSON value, enclose the JSON object with a pair of
     #   single quotes in a Linux shell, e.g., '\\\{"a": ...\\}'. In a
-    #   Windows shell, see [Using JSON for Parameters][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   Windows shell, see [Using JSON for
+    #   Parameters]([[AwsDocsUrlPrefix]]/cli/latest/userguide/cli-using-param.html#cli-using-param-json).
     #   @return [String]
     #
     # @!attribute [rw] from
@@ -5309,10 +5190,10 @@ module Aws::APIGateway
     #
     #   * For `HTTP` or `HTTP_PROXY` integrations, the URI must be a fully
     #     formed, encoded HTTP(S) URL according to the [RFC-3986
-    #     specification][1], for either standard integration, where
-    #     `connectionType` is not `VPC_LINK`, or private integration, where
-    #     `connectionType` is `VPC_LINK`. For a private HTTP integration,
-    #     the URI is not used for routing.
+    #     specification]([[UriEntryWikipediaUrl]]), for either standard
+    #     integration, where `connectionType` is not `VPC_LINK`, or private
+    #     integration, where `connectionType` is `VPC_LINK`. For a private
+    #     HTTP integration, the URI is not used for routing.
     #
     #   * For `AWS` or `AWS_PROXY` integrations, the URI is of the form
     #     `arn:aws:apigateway:\{region\}:\{subdomain.service|service\}:path|action/\{service_api\}`.
@@ -5331,10 +5212,6 @@ module Aws::APIGateway
     #     either
     #     `arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket=\{bucket\}&Key=\{key\}`
     #     or `arn:aws:apigateway:us-west-2:s3:path/\{bucket\}/\{key\}`
-    #
-    #
-    #
-    #   [1]: https://en.wikipedia.org/wiki/Uniform_Resource_Identifier
     #   @return [String]
     #
     # @!attribute [rw] connection_type
@@ -5346,12 +5223,10 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] connection_id
-    #   The ([`id`][1]) of the VpcLink used for the integration when
+    #   The
+    #   ([`id`]([[AwsDocsUrlPrefix]]/apigateway/api-reference/resource/vpc-link/#id))
+    #   of the VpcLink used for the integration when
     #   `connectionType=VPC_LINK` and undefined, otherwise.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/apigateway/api-reference/resource/vpc-link/#id
     #   @return [String]
     #
     # @!attribute [rw] credentials
@@ -5592,11 +5467,7 @@ module Aws::APIGateway
     # @!attribute [rw] operation_name
     #   A human-friendly operation identifier for the method. For example,
     #   you can assign the `operationName` of `ListPets` for the `GET /pets`
-    #   method in [PetStore][1] example.
-    #
-    #
-    #
-    #   [1]: https://petstore-demo-endpoint.execute-api.com/petstore/pets
+    #   method in [PetStore]([[PetstoreDemoUrl]]) example.
     #   @return [String]
     #
     # @!attribute [rw] request_parameters
@@ -5761,7 +5632,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] body
     #   \[Required\] The PUT request body containing external API
-    #   definitions. Currently, only OpenAPI definition JSON/YAML files are
+    #   definitions. Currently, only Swagger definition JSON files are
     #   supported. The maximum size of the API definition file is 2MB.
     #   @return [String]
     #
@@ -5810,22 +5681,18 @@ module Aws::APIGateway
     # A set of validation rules for incoming Method requests.
     #
     # <div class="remarks" markdown="1">
-    # In OpenAPI, a RequestValidator of an API is defined by the
-    # [x-amazon-apigateway-request-validators.requestValidator][1] object.
-    # It the referenced using the [x-amazon-apigateway-request-validator][2]
+    # In Swagger, a RequestValidator of an API is defined by the
+    # [x-amazon-apigateway-request-validators.requestValidator]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validators.requestValidator.html)
+    # object. It the referenced using the
+    # [x-amazon-apigateway-request-validator]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validator)
     # property.
     #
     # </div>
     #
     # <div class="seeAlso">
-    # [Enable Basic Request Validation in API Gateway][3]
+    # [Enable Basic Request Validation in API
+    # Gateway]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/api-gateway-method-request-validation.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validators.requestValidator.html
-    # [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validator
-    # [3]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-method-request-validation.html
     #
     # @!attribute [rw] id
     #   The identifier of this RequestValidator.
@@ -5856,19 +5723,16 @@ module Aws::APIGateway
     # A collection of RequestValidator resources of a given RestApi.
     #
     # <div class="remarks" markdown="1">
-    # In OpenAPI, the RequestValidators of an API is defined by the
-    # [x-amazon-apigateway-request-validators][1] extension.
+    # In Swagger, the RequestValidators of an API is defined by the
+    # [x-amazon-apigateway-request-validators]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validators.html)
+    # extension.
     #
     # </div>
     #
     # <div class="seeAlso">
-    # [Enable Basic Request Validation in API Gateway][2]
+    # [Enable Basic Request Validation in API
+    # Gateway]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/api-gateway-method-request-validation.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validators.html
-    # [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-method-request-validation.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -5886,12 +5750,9 @@ module Aws::APIGateway
     # Represents an API resource.
     #
     # <div class="seeAlso">
-    # [Create an API][1]
+    # [Create an
+    # API]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/how-to-create-api.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
     #
     # @!attribute [rw] id
     #   The resource's identifier.
@@ -5928,7 +5789,7 @@ module Aws::APIGateway
     #
     #   ##### Response
     #
-    #       \{ "_links": \{ "curies": [ \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-\{rel\}.html", "name": "integration", "templated": true \}, \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \}, \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-\{rel\}.html", "name": "method", "templated": true \}, \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-\{rel\}.html", "name": "methodresponse", "templated": true \} ], "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET", "name": "GET", "title": "GET" \}, "integration:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "method:integration": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "method:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "methodresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/\{status_code\}", "templated": true \} \}, "apiKeyRequired": false, "authorizationType": "NONE", "httpMethod": "GET", "_embedded": \{ "method:integration": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integration:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integrationresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/\{status_code\}", "templated": true \} \}, "cacheKeyParameters": [], "cacheNamespace": "3kzxbg5sa2", "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod": "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestParameters": \{ "integration.request.header.Content-Type": "'application/x-amz-json-1.1'" \}, "requestTemplates": \{ "application/json": "\{\n\}" \}, "type": "AWS", "uri": "arn:aws:apigateway:us-east-1:kinesis:action/ListStreams", "_embedded": \{ "integration:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.Content-Type": "'application/xml'" \}, "responseTemplates": \{ "application/json": "$util.urlDecode("%3CkinesisStreams%3E#foreach($stream in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E")\n" \}, "statusCode": "200" \} \} \}, "method:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "methodresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \}, "methodresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \} \}, "responseModels": \{ "application/json": "Empty" \}, "responseParameters": \{ "method.response.header.Content-Type": false \}, "statusCode": "200" \} \} \}
+    #       \{ "_links": \{ "curies": [ \{ "href": "[[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/restapi-integration-\{rel\}.html", "name": "integration", "templated": true \}, \{ "href": "[[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \}, \{ "href": "[[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/restapi-method-\{rel\}.html", "name": "method", "templated": true \}, \{ "href": "[[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/restapi-method-response-\{rel\}.html", "name": "methodresponse", "templated": true \} ], "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET", "name": "GET", "title": "GET" \}, "integration:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "method:integration": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "method:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "methodresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/\{status_code\}", "templated": true \} \}, "apiKeyRequired": false, "authorizationType": "NONE", "httpMethod": "GET", "_embedded": \{ "method:integration": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integration:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integrationresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/\{status_code\}", "templated": true \} \}, "cacheKeyParameters": [], "cacheNamespace": "3kzxbg5sa2", "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod": "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestParameters": \{ "integration.request.header.Content-Type": "'application/x-amz-json-1.1'" \}, "requestTemplates": \{ "application/json": "\{\n\}" \}, "type": "AWS", "uri": "arn:aws:apigateway:us-east-1:kinesis:action/ListStreams", "_embedded": \{ "integration:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.Content-Type": "'application/xml'" \}, "responseTemplates": \{ "application/json": "$util.urlDecode("%3CkinesisStreams%3E#foreach($stream in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E")\n" \}, "statusCode": "200" \} \} \}, "method:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "methodresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \}, "methodresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \} \}, "responseModels": \{ "application/json": "Empty" \}, "responseParameters": \{ "method.response.header.Content-Type": false \}, "statusCode": "200" \} \} \}
     #
     #   If the `OPTIONS` is enabled on the resource, you can follow the
     #   example here to get that method. Just replace the `GET` of the last
@@ -5951,12 +5812,9 @@ module Aws::APIGateway
     # Represents a collection of Resource resources.
     #
     # <div class="seeAlso">
-    # [Create an API][1]
+    # [Create an
+    # API]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/how-to-create-api.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -5974,12 +5832,9 @@ module Aws::APIGateway
     # Represents a REST API.
     #
     # <div class="seeAlso">
-    # [Create an API][1]
+    # [Create an
+    # API]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/how-to-create-api.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
     #
     # @!attribute [rw] id
     #   The API's identifier. This identifier is unique across all of your
@@ -6059,12 +5914,9 @@ module Aws::APIGateway
     # your APIs.
     #
     # <div class="seeAlso">
-    # [Create an API][1]
+    # [Create an
+    # API]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/how-to-create-api.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -6179,12 +6031,9 @@ module Aws::APIGateway
     # that is callable by users.
     #
     # <div class="seeAlso">
-    # [Deploy an API][1]
+    # [Deploy an
+    # API]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/how-to-deploy-api.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html
     #
     # @!attribute [rw] deployment_id
     #   The identifier of the Deployment that the stage points to.
@@ -6308,12 +6157,9 @@ module Aws::APIGateway
     # resource.
     #
     # <div class="seeAlso">
-    # [Deploying API in Stages][1]
+    # [Deploying API in
+    # Stages]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/stages.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/stages.html
     #
     # @!attribute [rw] item
     #   The current page of elements from this collection.
@@ -6371,20 +6217,13 @@ module Aws::APIGateway
     # Represents a mapping template used to transform a payload.
     #
     # <div class="seeAlso">
-    # [Mapping Templates][1]
+    # [Mapping
+    # Templates]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/models-mappings.html#models-mappings-mappings)
     # </div>
     #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html#models-mappings-mappings
-    #
     # @!attribute [rw] value
-    #   The Apache [Velocity Template Language (VTL)][1] template content
-    #   used for the template resource.
-    #
-    #
-    #
-    #   [1]: https://velocity.apache.org/engine/devel/vtl-reference-guide.html
+    #   The Apache [Velocity Template Language (VTL)]([[ApacheVtlUrl]])
+    #   template content used for the template resource.
     #   @return [String]
     #
     class Template < Struct.new(
@@ -6402,6 +6241,9 @@ module Aws::APIGateway
     #         authorizer_id: "String", # required
     #         headers: {
     #           "String" => "String",
+    #         },
+    #         multi_value_headers: {
+    #           "String" => ["String"],
     #         },
     #         path_with_query_string: "String",
     #         body: "String",
@@ -6428,6 +6270,12 @@ module Aws::APIGateway
     #   or identity source, should be specified.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] multi_value_headers
+    #   \[Optional\] The headers as a map from string to list of values to
+    #   simulate an incoming invocation request. This is where the incoming
+    #   authorization token, or identity source, may be specified.
+    #   @return [Hash<String,Array<String>>]
+    #
     # @!attribute [rw] path_with_query_string
     #   \[Optional\] The URI path, including query string, of the simulated
     #   invocation request. Use this to specify path parameters and query
@@ -6452,6 +6300,7 @@ module Aws::APIGateway
       :rest_api_id,
       :authorizer_id,
       :headers,
+      :multi_value_headers,
       :path_with_query_string,
       :body,
       :stage_variables,
@@ -6487,12 +6336,9 @@ module Aws::APIGateway
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] claims
-    #   The [open identity claims][1], with any supported custom attributes,
-    #   returned from the Cognito Your User Pool configured for the API.
-    #
-    #
-    #
-    #   [1]: https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims
+    #   The [open identity claims]([[OpenIdClaimsUrl]]), with any supported
+    #   custom attributes, returned from the Cognito Your User Pool
+    #   configured for the API.
     #   @return [Hash<String,String>]
     #
     class TestInvokeAuthorizerResponse < Struct.new(
@@ -6519,6 +6365,9 @@ module Aws::APIGateway
     #         body: "String",
     #         headers: {
     #           "String" => "String",
+    #         },
+    #         multi_value_headers: {
+    #           "String" => ["String"],
     #         },
     #         client_certificate_id: "String",
     #         stage_variables: {
@@ -6553,6 +6402,11 @@ module Aws::APIGateway
     #   request.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] multi_value_headers
+    #   The headers as a map from string to list of values to simulate an
+    #   incoming invocation request.
+    #   @return [Hash<String,Array<String>>]
+    #
     # @!attribute [rw] client_certificate_id
     #   A ClientCertificate identifier to use in the test invocation. API
     #   Gateway will use the certificate when making the HTTPS request to
@@ -6571,6 +6425,7 @@ module Aws::APIGateway
       :path_with_query_string,
       :body,
       :headers,
+      :multi_value_headers,
       :client_certificate_id,
       :stage_variables)
       include Aws::Structure
@@ -6579,12 +6434,9 @@ module Aws::APIGateway
     # Represents the response of the test invoke request in the HTTP method.
     #
     # <div class="seeAlso">
-    # [Test API using the API Gateway console][1]
+    # [Test API using the API Gateway
+    # console]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/how-to-test-method.html#how-to-test-method-console)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-test-method.html#how-to-test-method-console
     #
     # @!attribute [rw] status
     #   The HTTP status code.
@@ -6598,6 +6450,11 @@ module Aws::APIGateway
     #   The headers of the HTTP response.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] multi_value_headers
+    #   The headers of the HTTP response as a map from string to list of
+    #   values.
+    #   @return [Hash<String,Array<String>>]
+    #
     # @!attribute [rw] log
     #   The API Gateway execution log for the test invoke request.
     #   @return [String]
@@ -6610,6 +6467,7 @@ module Aws::APIGateway
       :status,
       :body,
       :headers,
+      :multi_value_headers,
       :log,
       :latency)
       include Aws::Structure
@@ -7537,13 +7395,11 @@ module Aws::APIGateway
     # <div class="remarks"></div>
     #
     # <div class="seeAlso">
-    # [Create and Use Usage Plans][1], [Manage Usage in a Usage Plan][2]
+    # [Create and Use Usage
+    # Plans]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/api-gateway-api-usage-plans.html),
+    # [Manage Usage in a Usage
+    # Plan]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/api-gateway-create-usage-plans-with-console.html#api-gateway-usage-plan-manage-usage)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
-    # [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-create-usage-plans-with-console.html#api-gateway-usage-plan-manage-usage
     #
     # @!attribute [rw] usage_plan_id
     #   The plan Id associated with this usage data.
@@ -7589,12 +7445,9 @@ module Aws::APIGateway
     # </div>
     #
     # <div class="seeAlso">
-    # [Create and Use Usage Plans][1]
+    # [Create and Use Usage
+    # Plans]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
     #
     # @!attribute [rw] id
     #   The identifier of a UsagePlan resource.
@@ -7646,12 +7499,9 @@ module Aws::APIGateway
     # </div>
     #
     # " <div class="seeAlso">
-    # [Create and Use Usage Plans][1]
+    # [Create and Use Usage
+    # Plans]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
     #
     # @!attribute [rw] id
     #   The Id of a usage plan key.
@@ -7682,12 +7532,9 @@ module Aws::APIGateway
     # the associated API keys and, possibly, other types of keys.
     #
     # <div class="seeAlso">
-    # [Create and Use Usage Plans][1]
+    # [Create and Use Usage
+    # Plans]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -7705,12 +7552,9 @@ module Aws::APIGateway
     # Represents a collection of usage plans for an AWS account.
     #
     # <div class="seeAlso">
-    # [Create and Use Usage Plans][1]
+    # [Create and Use Usage
+    # Plans]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -7782,14 +7626,11 @@ module Aws::APIGateway
     # The collection of VPC links under the caller's account in a region.
     #
     # <div class="seeAlso">
-    # [Getting Started with Private Integrations][1], [Set up Private
-    # Integrations][2]
+    # [Getting Started with Private
+    # Integrations]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/getting-started-with-private-integration.html),
+    # [Set up Private
+    # Integrations]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/set-up-private-integration.html)
     # </div>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-with-private-integration.html
-    # [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-private-integration.html
     #
     # @!attribute [rw] position
     #   @return [String]

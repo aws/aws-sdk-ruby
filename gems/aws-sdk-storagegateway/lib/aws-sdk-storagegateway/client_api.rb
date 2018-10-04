@@ -130,6 +130,8 @@ module Aws::StorageGateway
     FileShareType = Shapes::StringShape.new(name: 'FileShareType')
     FileShareUser = Shapes::StringShape.new(name: 'FileShareUser')
     FileShareUserList = Shapes::ListShape.new(name: 'FileShareUserList')
+    Folder = Shapes::StringShape.new(name: 'Folder')
+    FolderList = Shapes::ListShape.new(name: 'FolderList')
     GatewayARN = Shapes::StringShape.new(name: 'GatewayARN')
     GatewayId = Shapes::StringShape.new(name: 'GatewayId')
     GatewayInfo = Shapes::StructureShape.new(name: 'GatewayInfo')
@@ -716,6 +718,8 @@ module Aws::StorageGateway
 
     FileShareUserList.member = Shapes::ShapeRef.new(shape: FileShareUser)
 
+    FolderList.member = Shapes::ShapeRef.new(shape: Folder)
+
     GatewayInfo.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, location_name: "GatewayId"))
     GatewayInfo.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
     GatewayInfo.add_member(:gateway_type, Shapes::ShapeRef.new(shape: GatewayType, location_name: "GatewayType"))
@@ -845,9 +849,12 @@ module Aws::StorageGateway
     NotifyWhenUploadedOutput.struct_class = Types::NotifyWhenUploadedOutput
 
     RefreshCacheInput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, required: true, location_name: "FileShareARN"))
+    RefreshCacheInput.add_member(:folder_list, Shapes::ShapeRef.new(shape: FolderList, location_name: "FolderList"))
+    RefreshCacheInput.add_member(:recursive, Shapes::ShapeRef.new(shape: Boolean, location_name: "Recursive"))
     RefreshCacheInput.struct_class = Types::RefreshCacheInput
 
     RefreshCacheOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
+    RefreshCacheOutput.add_member(:notification_id, Shapes::ShapeRef.new(shape: NotificationId, location_name: "NotificationId"))
     RefreshCacheOutput.struct_class = Types::RefreshCacheOutput
 
     RemoveTagsFromResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN"))

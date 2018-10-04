@@ -178,7 +178,6 @@ module Aws::APIGateway
     LocationStatusType = Shapes::StringShape.new(name: 'LocationStatusType')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MapOfApiStageThrottleSettings = Shapes::MapShape.new(name: 'MapOfApiStageThrottleSettings')
-    MapOfHeaderValues = Shapes::MapShape.new(name: 'MapOfHeaderValues')
     MapOfIntegrationResponse = Shapes::MapShape.new(name: 'MapOfIntegrationResponse')
     MapOfKeyUsages = Shapes::MapShape.new(name: 'MapOfKeyUsages')
     MapOfMethod = Shapes::MapShape.new(name: 'MapOfMethod')
@@ -960,9 +959,6 @@ module Aws::APIGateway
     MapOfApiStageThrottleSettings.key = Shapes::ShapeRef.new(shape: String)
     MapOfApiStageThrottleSettings.value = Shapes::ShapeRef.new(shape: ThrottleSettings)
 
-    MapOfHeaderValues.key = Shapes::ShapeRef.new(shape: String)
-    MapOfHeaderValues.value = Shapes::ShapeRef.new(shape: String)
-
     MapOfIntegrationResponse.key = Shapes::ShapeRef.new(shape: String)
     MapOfIntegrationResponse.value = Shapes::ShapeRef.new(shape: IntegrationResponse)
 
@@ -1213,7 +1209,8 @@ module Aws::APIGateway
 
     TestInvokeAuthorizerRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
     TestInvokeAuthorizerRequest.add_member(:authorizer_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "authorizer_id"))
-    TestInvokeAuthorizerRequest.add_member(:headers, Shapes::ShapeRef.new(shape: MapOfHeaderValues, location_name: "headers"))
+    TestInvokeAuthorizerRequest.add_member(:headers, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "headers"))
+    TestInvokeAuthorizerRequest.add_member(:multi_value_headers, Shapes::ShapeRef.new(shape: MapOfStringToList, location_name: "multiValueHeaders"))
     TestInvokeAuthorizerRequest.add_member(:path_with_query_string, Shapes::ShapeRef.new(shape: String, location_name: "pathWithQueryString"))
     TestInvokeAuthorizerRequest.add_member(:body, Shapes::ShapeRef.new(shape: String, location_name: "body"))
     TestInvokeAuthorizerRequest.add_member(:stage_variables, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "stageVariables"))
@@ -1234,14 +1231,16 @@ module Aws::APIGateway
     TestInvokeMethodRequest.add_member(:http_method, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "http_method"))
     TestInvokeMethodRequest.add_member(:path_with_query_string, Shapes::ShapeRef.new(shape: String, location_name: "pathWithQueryString"))
     TestInvokeMethodRequest.add_member(:body, Shapes::ShapeRef.new(shape: String, location_name: "body"))
-    TestInvokeMethodRequest.add_member(:headers, Shapes::ShapeRef.new(shape: MapOfHeaderValues, location_name: "headers"))
+    TestInvokeMethodRequest.add_member(:headers, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "headers"))
+    TestInvokeMethodRequest.add_member(:multi_value_headers, Shapes::ShapeRef.new(shape: MapOfStringToList, location_name: "multiValueHeaders"))
     TestInvokeMethodRequest.add_member(:client_certificate_id, Shapes::ShapeRef.new(shape: String, location_name: "clientCertificateId"))
     TestInvokeMethodRequest.add_member(:stage_variables, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "stageVariables"))
     TestInvokeMethodRequest.struct_class = Types::TestInvokeMethodRequest
 
     TestInvokeMethodResponse.add_member(:status, Shapes::ShapeRef.new(shape: Integer, location_name: "status"))
     TestInvokeMethodResponse.add_member(:body, Shapes::ShapeRef.new(shape: String, location_name: "body"))
-    TestInvokeMethodResponse.add_member(:headers, Shapes::ShapeRef.new(shape: MapOfHeaderValues, location_name: "headers"))
+    TestInvokeMethodResponse.add_member(:headers, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "headers"))
+    TestInvokeMethodResponse.add_member(:multi_value_headers, Shapes::ShapeRef.new(shape: MapOfStringToList, location_name: "multiValueHeaders"))
     TestInvokeMethodResponse.add_member(:log, Shapes::ShapeRef.new(shape: String, location_name: "log"))
     TestInvokeMethodResponse.add_member(:latency, Shapes::ShapeRef.new(shape: Long, location_name: "latency"))
     TestInvokeMethodResponse.struct_class = Types::TestInvokeMethodResponse
