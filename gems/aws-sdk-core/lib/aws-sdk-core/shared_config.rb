@@ -44,6 +44,7 @@ module Aws
     #   file and enables new config values outside of the old shared credential
     #   spec.
     def initialize(options = {})
+      @parsed_config = nil
       @profile_name = determine_profile(options)
       @config_enabled = options[:config_enabled]
       @credentials_path = options[:credentials_path] ||
