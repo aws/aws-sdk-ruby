@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -47,6 +49,8 @@ module Aws::CognitoIdentityProvider
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -92,6 +96,22 @@ module Aws::CognitoIdentityProvider
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::CognitoIdentityProvider
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -1883,7 +1914,7 @@ module Aws::CognitoIdentityProvider
     #   resp = client.create_identity_provider({
     #     user_pool_id: "UserPoolIdType", # required
     #     provider_name: "ProviderNameTypeV1", # required
-    #     provider_type: "SAML", # required, accepts SAML, Facebook, Google, LoginWithAmazon
+    #     provider_type: "SAML", # required, accepts SAML, Facebook, Google, LoginWithAmazon, OIDC
     #     provider_details: { # required
     #       "StringType" => "StringType",
     #     },
@@ -1897,7 +1928,7 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.identity_provider.user_pool_id #=> String
     #   resp.identity_provider.provider_name #=> String
-    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon"
+    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "OIDC"
     #   resp.identity_provider.provider_details #=> Hash
     #   resp.identity_provider.provider_details["StringType"] #=> String
     #   resp.identity_provider.attribute_mapping #=> Hash
@@ -2262,12 +2293,14 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.sms_configuration_failure #=> String
     #   resp.user_pool.email_configuration_failure #=> String
     #   resp.user_pool.domain #=> String
+    #   resp.user_pool.custom_domain #=> String
     #   resp.user_pool.admin_create_user_config.allow_admin_create_user_only #=> Boolean
     #   resp.user_pool.admin_create_user_config.unused_account_validity_days #=> Integer
     #   resp.user_pool.admin_create_user_config.invite_message_template.sms_message #=> String
     #   resp.user_pool.admin_create_user_config.invite_message_template.email_message #=> String
     #   resp.user_pool.admin_create_user_config.invite_message_template.email_subject #=> String
     #   resp.user_pool.user_pool_add_ons.advanced_security_mode #=> String, one of "OFF", "AUDIT", "ENFORCED"
+    #   resp.user_pool.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPool AWS API Documentation
     #
@@ -2309,13 +2342,51 @@ module Aws::CognitoIdentityProvider
     #   on this client.
     #
     # @option params [Array<String>] :callback_urls
-    #   A list of allowed callback URLs for the identity providers.
+    #   A list of allowed redirect (callback) URLs for the identity providers.
+    #
+    #   A redirect URI must:
+    #
+    #   * Be an absolute URI.
+    #
+    #   * Be registered with the authorization server.
+    #
+    #   * Not include a fragment component.
+    #
+    #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
+    #   for testing purposes only.
+    #
+    #   App callback URLs such as myapp://example are also supported.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6749#section-3.1.2
     #
     # @option params [Array<String>] :logout_urls
     #   A list of allowed logout URLs for the identity providers.
     #
     # @option params [String] :default_redirect_uri
     #   The default redirect URI. Must be in the `CallbackURLs` list.
+    #
+    #   A redirect URI must:
+    #
+    #   * Be an absolute URI.
+    #
+    #   * Be registered with the authorization server.
+    #
+    #   * Not include a fragment component.
+    #
+    #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
+    #   for testing purposes only.
+    #
+    #   App callback URLs such as myapp://example are also supported.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6749#section-3.1.2
     #
     # @option params [Array<String>] :allowed_o_auth_flows
     #   Set to `code` to initiate a code grant flow, which provides an
@@ -2415,14 +2486,38 @@ module Aws::CognitoIdentityProvider
     # @option params [required, String] :user_pool_id
     #   The user pool ID.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @option params [Types::CustomDomainConfigType] :custom_domain_config
+    #   The configuration for a custom domain that hosts the sign-up and
+    #   sign-in webpages for your application.
+    #
+    #   Provide this parameter only if you want to use own custom domain for
+    #   your user pool. Otherwise, you can exclude this parameter and use the
+    #   Amazon Cognito hosted domain instead.
+    #
+    #   For more information about the hosted domain and custom domains, see
+    #   [Configuring a User Pool Domain][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-assign-domain.html
+    #
+    # @return [Types::CreateUserPoolDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateUserPoolDomainResponse#cloud_front_domain #cloud_front_domain} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_user_pool_domain({
     #     domain: "DomainType", # required
     #     user_pool_id: "UserPoolIdType", # required
+    #     custom_domain_config: {
+    #       certificate_arn: "ArnType", # required
+    #     },
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cloud_front_domain #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolDomain AWS API Documentation
     #
@@ -2663,7 +2758,7 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.identity_provider.user_pool_id #=> String
     #   resp.identity_provider.provider_name #=> String
-    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon"
+    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "OIDC"
     #   resp.identity_provider.provider_details #=> Hash
     #   resp.identity_provider.provider_details["StringType"] #=> String
     #   resp.identity_provider.attribute_mapping #=> Hash
@@ -2900,12 +2995,14 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.sms_configuration_failure #=> String
     #   resp.user_pool.email_configuration_failure #=> String
     #   resp.user_pool.domain #=> String
+    #   resp.user_pool.custom_domain #=> String
     #   resp.user_pool.admin_create_user_config.allow_admin_create_user_only #=> Boolean
     #   resp.user_pool.admin_create_user_config.unused_account_validity_days #=> Integer
     #   resp.user_pool.admin_create_user_config.invite_message_template.sms_message #=> String
     #   resp.user_pool.admin_create_user_config.invite_message_template.email_message #=> String
     #   resp.user_pool.admin_create_user_config.invite_message_template.email_subject #=> String
     #   resp.user_pool.user_pool_add_ons.advanced_security_mode #=> String, one of "OFF", "AUDIT", "ENFORCED"
+    #   resp.user_pool.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPool AWS API Documentation
     #
@@ -2917,7 +3014,7 @@ module Aws::CognitoIdentityProvider
     end
 
     # Client method for returning the configuration information and metadata
-    # of the specified user pool client.
+    # of the specified user pool app client.
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool you want to describe.
@@ -3001,6 +3098,7 @@ module Aws::CognitoIdentityProvider
     #   resp.domain_description.cloud_front_distribution #=> String
     #   resp.domain_description.version #=> String
     #   resp.domain_description.status #=> String, one of "CREATING", "DELETING", "UPDATING", "ACTIVE", "FAILED"
+    #   resp.domain_description.custom_domain_config.certificate_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPoolDomain AWS API Documentation
     #
@@ -3235,7 +3333,7 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.identity_provider.user_pool_id #=> String
     #   resp.identity_provider.provider_name #=> String
-    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon"
+    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "OIDC"
     #   resp.identity_provider.provider_details #=> Hash
     #   resp.identity_provider.provider_details["StringType"] #=> String
     #   resp.identity_provider.attribute_mapping #=> Hash
@@ -3696,7 +3794,7 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.providers #=> Array
     #   resp.providers[0].provider_name #=> String
-    #   resp.providers[0].provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon"
+    #   resp.providers[0].provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "OIDC"
     #   resp.providers[0].last_modified_date #=> Time
     #   resp.providers[0].creation_date #=> Time
     #   resp.next_token #=> String
@@ -3959,10 +4057,10 @@ module Aws::CognitoIdentityProvider
     #
     #   * `preferred_username`
     #
-    #   * `cognito:user_status` (called **Enabled** in the Console)
-    #     (case-sensitive)
+    #   * `cognito:user_status` (called **Status** in the Console)
+    #     (case-insensitive)
     #
-    #   * `status` (case-insensitive)
+    #   * `status (called Enabled in the Console) (case-sensitive)`
     #
     #   * `sub`
     #
@@ -4871,7 +4969,7 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.identity_provider.user_pool_id #=> String
     #   resp.identity_provider.provider_name #=> String
-    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon"
+    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "OIDC"
     #   resp.identity_provider.provider_details #=> Hash
     #   resp.identity_provider.provider_details["StringType"] #=> String
     #   resp.identity_provider.attribute_mapping #=> Hash
@@ -4984,7 +5082,9 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
-    # Updates the specified user pool with the specified attributes.
+    # Updates the specified user pool with the specified attributes. If you
+    # don't provide a value for an attribute, it will be set to the default
+    # value. You can get a list of the current user pool settings with .
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool you want to update.
@@ -5130,8 +5230,10 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
-    # Allows the developer to update the specified user pool client and
-    # password policy.
+    # Updates the specified user pool app client with the specified
+    # attributes. If you don't provide a value for an attribute, it will be
+    # set to the default value. You can get a list of the current user pool
+    # app client settings with .
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool where you want to update the user
@@ -5161,13 +5263,51 @@ module Aws::CognitoIdentityProvider
     #   on this client.
     #
     # @option params [Array<String>] :callback_urls
-    #   A list of allowed callback URLs for the identity providers.
+    #   A list of allowed redirect (callback) URLs for the identity providers.
+    #
+    #   A redirect URI must:
+    #
+    #   * Be an absolute URI.
+    #
+    #   * Be registered with the authorization server.
+    #
+    #   * Not include a fragment component.
+    #
+    #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
+    #   for testing purposes only.
+    #
+    #   App callback URLs such as myapp://example are also supported.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6749#section-3.1.2
     #
     # @option params [Array<String>] :logout_urls
     #   A list of allowed logout URLs for the identity providers.
     #
     # @option params [String] :default_redirect_uri
     #   The default redirect URI. Must be in the `CallbackURLs` list.
+    #
+    #   A redirect URI must:
+    #
+    #   * Be an absolute URI.
+    #
+    #   * Be registered with the authorization server.
+    #
+    #   * Not include a fragment component.
+    #
+    #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
+    #   for testing purposes only.
+    #
+    #   App callback URLs such as myapp://example are also supported.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6749#section-3.1.2
     #
     # @option params [Array<String>] :allowed_o_auth_flows
     #   Set to `code` to initiate a code grant flow, which provides an
@@ -5260,7 +5400,8 @@ module Aws::CognitoIdentityProvider
     end
 
     # Use this API to register a user's entered TOTP code and mark the
-    # user's software token MFA status as "verified" if successful,
+    # user's software token MFA status as "verified" if successful. The
+    # request takes an access token or a session string, but not both.
     #
     # @option params [String] :access_token
     #   The access token.
@@ -5346,7 +5487,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

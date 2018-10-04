@@ -45,7 +45,7 @@ module Aws
         when ListShape      then list(ref, value, prefix)
         when MapShape       then raise NotImplementedError
         when BlobShape      then set(prefix, blob(value))
-        when TimestampShape then set(prefix, timestamp(value))
+        when TimestampShape then set(prefix, timestamp(ref, value))
         else
           set(prefix, value.to_s)
         end
@@ -68,8 +68,14 @@ module Aws
         Base64.strict_encode64(value)
       end
 
-      def timestamp(value)
-        value.utc.iso8601
+      def timestamp(ref, value)
+        case ref['timestampFormat'] || ref.shape['timestampFormat']
+        when 'unixTimestamp' then value.to_i
+        when 'rfc822' then value.utc.httpdate
+        else
+          # ec2 defaults to iso8601
+          value.utc.iso8601
+        end
       end
 
     end

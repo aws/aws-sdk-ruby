@@ -171,12 +171,14 @@ module Aws::Cloud9
       api.version = "2017-09-23"
 
       api.metadata = {
+        "apiVersion" => "2017-09-23",
         "endpointPrefix" => "cloud9",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Cloud9",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSCloud9WorkspaceManagementService",
+        "uid" => "cloud9-2017-09-23",
       }
 
       api.add_operation(:create_environment_ec2, Seahorse::Model::Operation.new.tap do |o|

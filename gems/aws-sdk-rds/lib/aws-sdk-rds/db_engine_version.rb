@@ -107,6 +107,12 @@ module Aws::RDS
       data[:supports_read_replica]
     end
 
+    # A list of the supported DB engine modes.
+    # @return [Array<String>]
+    def supported_engine_modes
+      data[:supported_engine_modes]
+    end
+
     # @!endgroup
 
     # @return [Client]

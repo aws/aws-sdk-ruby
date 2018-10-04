@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -47,6 +49,8 @@ module Aws::ElasticBeanstalk
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
@@ -92,6 +96,22 @@ module Aws::ElasticBeanstalk
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::ElasticBeanstalk
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -335,7 +366,7 @@ module Aws::ElasticBeanstalk
     #   resp.environments[0].status #=> String, one of "Launching", "Updating", "Ready", "Terminating", "Terminated"
     #   resp.environments[0].abortable_operation_in_progress #=> Boolean
     #   resp.environments[0].health #=> String, one of "Green", "Yellow", "Red", "Grey"
-    #   resp.environments[0].health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe"
+    #   resp.environments[0].health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe", "Suspended"
     #   resp.environments[0].resources.load_balancer.load_balancer_name #=> String
     #   resp.environments[0].resources.load_balancer.domain #=> String
     #   resp.environments[0].resources.load_balancer.listeners #=> Array
@@ -515,10 +546,14 @@ module Aws::ElasticBeanstalk
     #   doesn't already exist.
     #
     # @option params [Boolean] :process
-    #   Preprocesses and validates the environment manifest (`env.yaml`) and
+    #   Pre-processes and validates the environment manifest (`env.yaml`) and
     #   configuration files (`*.config` files in the `.ebextensions` folder)
     #   in the source bundle. Validating configuration files can identify
     #   issues prior to deploying the application version to an environment.
+    #
+    #   You must turn processing on for application versions that you create
+    #   using AWS CodeBuild or AWS CodeCommit. For application versions built
+    #   from a source bundle in Amazon S3, processing is optional.
     #
     #   <note markdown="1"> The `Process` option validates Elastic Beanstalk configuration files.
     #   It doesn't validate your application's configuration files, like
@@ -616,6 +651,9 @@ module Aws::ElasticBeanstalk
     # Creates a configuration template. Templates are associated with a
     # specific application and are used to deploy different versions of the
     # application with the same configuration settings.
+    #
+    # Templates aren't associated with any environment. The
+    # `EnvironmentName` response element is always `null`.
     #
     # Related Topics
     #
@@ -835,6 +873,13 @@ module Aws::ElasticBeanstalk
     #   AWS Elastic Beanstalk sets the configuration values to the default
     #   values associated with the specified solution stack.
     #
+    #   For a list of current solution stacks, see [Elastic Beanstalk
+    #   Supported Platforms][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html
+    #
     # @option params [String] :platform_arn
     #   The ARN of the platform.
     #
@@ -960,7 +1005,7 @@ module Aws::ElasticBeanstalk
     #   resp.status #=> String, one of "Launching", "Updating", "Ready", "Terminating", "Terminated"
     #   resp.abortable_operation_in_progress #=> Boolean
     #   resp.health #=> String, one of "Green", "Yellow", "Red", "Grey"
-    #   resp.health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe"
+    #   resp.health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe", "Suspended"
     #   resp.resources.load_balancer.load_balancer_name #=> String
     #   resp.resources.load_balancer.domain #=> String
     #   resp.resources.load_balancer.listeners #=> Array
@@ -2197,7 +2242,7 @@ module Aws::ElasticBeanstalk
     #   resp.environments[0].status #=> String, one of "Launching", "Updating", "Ready", "Terminating", "Terminated"
     #   resp.environments[0].abortable_operation_in_progress #=> Boolean
     #   resp.environments[0].health #=> String, one of "Green", "Yellow", "Red", "Grey"
-    #   resp.environments[0].health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe"
+    #   resp.environments[0].health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe", "Suspended"
     #   resp.environments[0].resources.load_balancer.load_balancer_name #=> String
     #   resp.environments[0].resources.load_balancer.domain #=> String
     #   resp.environments[0].resources.load_balancer.listeners #=> Array
@@ -2369,7 +2414,7 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
-    # Retrives detailed information about the health of instances in your
+    # Retrieves detailed information about the health of instances in your
     # AWS Elastic Beanstalk. This operation requires [enhanced health
     # reporting][1].
     #
@@ -2499,6 +2544,7 @@ module Aws::ElasticBeanstalk
     #   resp.instance_health_list[0].system.cpu_utilization.io_wait #=> Float
     #   resp.instance_health_list[0].system.cpu_utilization.irq #=> Float
     #   resp.instance_health_list[0].system.cpu_utilization.soft_irq #=> Float
+    #   resp.instance_health_list[0].system.cpu_utilization.privileged #=> Float
     #   resp.instance_health_list[0].system.load_average #=> Array
     #   resp.instance_health_list[0].system.load_average[0] #=> Float
     #   resp.instance_health_list[0].deployment.version_label #=> String
@@ -3174,7 +3220,7 @@ module Aws::ElasticBeanstalk
     #   resp.status #=> String, one of "Launching", "Updating", "Ready", "Terminating", "Terminated"
     #   resp.abortable_operation_in_progress #=> Boolean
     #   resp.health #=> String, one of "Green", "Yellow", "Red", "Grey"
-    #   resp.health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe"
+    #   resp.health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe", "Suspended"
     #   resp.resources.load_balancer.load_balancer_name #=> String
     #   resp.resources.load_balancer.domain #=> String
     #   resp.resources.load_balancer.listeners #=> Array
@@ -3790,7 +3836,7 @@ module Aws::ElasticBeanstalk
     #   resp.status #=> String, one of "Launching", "Updating", "Ready", "Terminating", "Terminated"
     #   resp.abortable_operation_in_progress #=> Boolean
     #   resp.health #=> String, one of "Green", "Yellow", "Red", "Grey"
-    #   resp.health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe"
+    #   resp.health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe", "Suspended"
     #   resp.resources.load_balancer.load_balancer_name #=> String
     #   resp.resources.load_balancer.domain #=> String
     #   resp.resources.load_balancer.listeners #=> Array
@@ -3981,7 +4027,7 @@ module Aws::ElasticBeanstalk
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticbeanstalk'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

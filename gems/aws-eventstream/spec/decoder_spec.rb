@@ -69,6 +69,34 @@ module Aws
           expect(eof).to be true
         end
 
+        it '#decode_chunk buffers partial prelude message' do
+          file = Dir.glob(File.expand_path('../fixtures/encoded/positive/*', __FILE__)).first
+          data = File.read(file)
+          first_part = data[0..3]
+          second_part = data[4..-1]
+          decoder = Decoder.new(format: false)
+
+          msg, eof = decoder.decode_chunk(first_part)
+          expect(msg).to be_nil
+          expect(eof).to be true
+
+          decoder.message_buffer.rewind
+          expect(decoder.message_buffer.read).to eq(first_part)
+          decoder.message_buffer.rewind
+
+          msg, eof = decoder.decode_chunk(second_part)
+          expect_msg = SpecHelper.expected_decoded_message(file)
+          expect(msg.payload.read).to eq(expect_msg.payload.read)
+          expect(msg.headers.size).to eq(expect_msg.headers.size)
+          expect(msg.headers.keys).to eq(expect_msg.headers.keys)
+          msg.headers.each do |k, v|
+            expect(v.value).to eq(expect_msg.headers[k].value)
+            expect(v.type).to eq(expect_msg.headers[k].type)
+          end
+          expect(eof).to be true
+
+        end
+
         it '#decode_chunk buffers partial message' do
           file = Dir.glob(File.expand_path('../fixtures/encoded/positive/*', __FILE__)).first
           data = File.read(file)

@@ -249,12 +249,16 @@ module Aws::Budgets
       api.version = "2016-10-20"
 
       api.metadata = {
+        "apiVersion" => "2016-10-20",
         "endpointPrefix" => "budgets",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "AWSBudgets",
         "serviceFullName" => "AWS Budgets",
+        "serviceId" => "Budgets",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSBudgetServiceGateway",
+        "uid" => "budgets-2016-10-20",
       }
 
       api.add_operation(:create_budget, Seahorse::Model::Operation.new.tap do |o|

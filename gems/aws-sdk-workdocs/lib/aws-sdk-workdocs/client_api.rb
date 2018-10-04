@@ -761,11 +761,13 @@ module Aws::WorkDocs
       api.version = "2016-05-01"
 
       api.metadata = {
+        "apiVersion" => "2016-05-01",
         "endpointPrefix" => "workdocs",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "serviceFullName" => "Amazon WorkDocs",
         "signatureVersion" => "v4",
+        "uid" => "workdocs-2016-05-01",
       }
 
       api.add_operation(:abort_document_version_upload, Seahorse::Model::Operation.new.tap do |o|

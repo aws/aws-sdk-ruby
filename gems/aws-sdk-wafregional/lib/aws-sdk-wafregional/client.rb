@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -47,6 +49,8 @@ module Aws::WAFRegional
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -92,6 +96,22 @@ module Aws::WAFRegional
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::WAFRegional
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -233,7 +264,7 @@ module Aws::WAFRegional
     #   resp.byte_match_set.byte_match_set_id #=> String
     #   resp.byte_match_set.name #=> String
     #   resp.byte_match_set.byte_match_tuples #=> Array
-    #   resp.byte_match_set.byte_match_tuples[0].field_to_match.type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY"
+    #   resp.byte_match_set.byte_match_tuples[0].field_to_match.type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY", "SINGLE_QUERY_ARG", "ALL_QUERY_ARGS"
     #   resp.byte_match_set.byte_match_tuples[0].field_to_match.data #=> String
     #   resp.byte_match_set.byte_match_tuples[0].target_string #=> String
     #   resp.byte_match_set.byte_match_tuples[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
@@ -595,7 +626,7 @@ module Aws::WAFRegional
     #   resp.regex_match_set.regex_match_set_id #=> String
     #   resp.regex_match_set.name #=> String
     #   resp.regex_match_set.regex_match_tuples #=> Array
-    #   resp.regex_match_set.regex_match_tuples[0].field_to_match.type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY"
+    #   resp.regex_match_set.regex_match_tuples[0].field_to_match.type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY", "SINGLE_QUERY_ARG", "ALL_QUERY_ARGS"
     #   resp.regex_match_set.regex_match_tuples[0].field_to_match.data #=> String
     #   resp.regex_match_set.regex_match_tuples[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.regex_match_set.regex_match_tuples[0].regex_pattern_set_id #=> String
@@ -934,7 +965,7 @@ module Aws::WAFRegional
     #   resp.size_constraint_set.size_constraint_set_id #=> String
     #   resp.size_constraint_set.name #=> String
     #   resp.size_constraint_set.size_constraints #=> Array
-    #   resp.size_constraint_set.size_constraints[0].field_to_match.type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY"
+    #   resp.size_constraint_set.size_constraints[0].field_to_match.type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY", "SINGLE_QUERY_ARG", "ALL_QUERY_ARGS"
     #   resp.size_constraint_set.size_constraints[0].field_to_match.data #=> String
     #   resp.size_constraint_set.size_constraints[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.size_constraint_set.size_constraints[0].comparison_operator #=> String, one of "EQ", "NE", "LE", "LT", "GE", "GT"
@@ -1030,7 +1061,7 @@ module Aws::WAFRegional
     #   resp.sql_injection_match_set.sql_injection_match_set_id #=> String
     #   resp.sql_injection_match_set.name #=> String
     #   resp.sql_injection_match_set.sql_injection_match_tuples #=> Array
-    #   resp.sql_injection_match_set.sql_injection_match_tuples[0].field_to_match.type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY"
+    #   resp.sql_injection_match_set.sql_injection_match_tuples[0].field_to_match.type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY", "SINGLE_QUERY_ARG", "ALL_QUERY_ARGS"
     #   resp.sql_injection_match_set.sql_injection_match_tuples[0].field_to_match.data #=> String
     #   resp.sql_injection_match_set.sql_injection_match_tuples[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.change_token #=> String
@@ -1252,7 +1283,7 @@ module Aws::WAFRegional
     #   resp.xss_match_set.xss_match_set_id #=> String
     #   resp.xss_match_set.name #=> String
     #   resp.xss_match_set.xss_match_tuples #=> Array
-    #   resp.xss_match_set.xss_match_tuples[0].field_to_match.type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY"
+    #   resp.xss_match_set.xss_match_tuples[0].field_to_match.type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY", "SINGLE_QUERY_ARG", "ALL_QUERY_ARGS"
     #   resp.xss_match_set.xss_match_tuples[0].field_to_match.data #=> String
     #   resp.xss_match_set.xss_match_tuples[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.change_token #=> String
@@ -1439,6 +1470,30 @@ module Aws::WAFRegional
     # @param [Hash] params ({})
     def delete_ip_set(params = {}, options = {})
       req = build_request(:delete_ip_set, params)
+      req.send_request(options)
+    end
+
+    # Permanently deletes the LoggingConfiguration from the specified web
+    # ACL.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the web ACL from which you want to
+    #   delete the LoggingConfiguration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_logging_configuration({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteLoggingConfiguration AWS API Documentation
+    #
+    # @overload delete_logging_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_logging_configuration(params = {}, options = {})
+      req = build_request(:delete_logging_configuration, params)
       req.send_request(options)
     end
 
@@ -2041,7 +2096,7 @@ module Aws::WAFRegional
     #   resp.byte_match_set.byte_match_set_id #=> String
     #   resp.byte_match_set.name #=> String
     #   resp.byte_match_set.byte_match_tuples #=> Array
-    #   resp.byte_match_set.byte_match_tuples[0].field_to_match.type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY"
+    #   resp.byte_match_set.byte_match_tuples[0].field_to_match.type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY", "SINGLE_QUERY_ARG", "ALL_QUERY_ARGS"
     #   resp.byte_match_set.byte_match_tuples[0].field_to_match.data #=> String
     #   resp.byte_match_set.byte_match_tuples[0].target_string #=> String
     #   resp.byte_match_set.byte_match_tuples[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
@@ -2245,6 +2300,40 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # Returns the LoggingConfiguration for the specified web ACL.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the web ACL for which you want to
+    #   get the LoggingConfiguration.
+    #
+    # @return [Types::GetLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLoggingConfigurationResponse#logging_configuration #logging_configuration} => Types::LoggingConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_logging_configuration({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.logging_configuration.resource_arn #=> String
+    #   resp.logging_configuration.log_destination_configs #=> Array
+    #   resp.logging_configuration.log_destination_configs[0] #=> String
+    #   resp.logging_configuration.redacted_fields #=> Array
+    #   resp.logging_configuration.redacted_fields[0].type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY", "SINGLE_QUERY_ARG", "ALL_QUERY_ARGS"
+    #   resp.logging_configuration.redacted_fields[0].data #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetLoggingConfiguration AWS API Documentation
+    #
+    # @overload get_logging_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_logging_configuration(params = {}, options = {})
+      req = build_request(:get_logging_configuration, params)
+      req.send_request(options)
+    end
+
     # Returns the IAM policy attached to the RuleGroup.
     #
     # @option params [required, String] :resource_arn
@@ -2376,7 +2465,7 @@ module Aws::WAFRegional
     #   resp.regex_match_set.regex_match_set_id #=> String
     #   resp.regex_match_set.name #=> String
     #   resp.regex_match_set.regex_match_tuples #=> Array
-    #   resp.regex_match_set.regex_match_tuples[0].field_to_match.type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY"
+    #   resp.regex_match_set.regex_match_tuples[0].field_to_match.type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY", "SINGLE_QUERY_ARG", "ALL_QUERY_ARGS"
     #   resp.regex_match_set.regex_match_tuples[0].field_to_match.data #=> String
     #   resp.regex_match_set.regex_match_tuples[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.regex_match_set.regex_match_tuples[0].regex_pattern_set_id #=> String
@@ -2701,7 +2790,7 @@ module Aws::WAFRegional
     #   resp.size_constraint_set.size_constraint_set_id #=> String
     #   resp.size_constraint_set.name #=> String
     #   resp.size_constraint_set.size_constraints #=> Array
-    #   resp.size_constraint_set.size_constraints[0].field_to_match.type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY"
+    #   resp.size_constraint_set.size_constraints[0].field_to_match.type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY", "SINGLE_QUERY_ARG", "ALL_QUERY_ARGS"
     #   resp.size_constraint_set.size_constraints[0].field_to_match.data #=> String
     #   resp.size_constraint_set.size_constraints[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.size_constraint_set.size_constraints[0].comparison_operator #=> String, one of "EQ", "NE", "LE", "LT", "GE", "GT"
@@ -2765,7 +2854,7 @@ module Aws::WAFRegional
     #   resp.sql_injection_match_set.sql_injection_match_set_id #=> String
     #   resp.sql_injection_match_set.name #=> String
     #   resp.sql_injection_match_set.sql_injection_match_tuples #=> Array
-    #   resp.sql_injection_match_set.sql_injection_match_tuples[0].field_to_match.type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY"
+    #   resp.sql_injection_match_set.sql_injection_match_tuples[0].field_to_match.type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY", "SINGLE_QUERY_ARG", "ALL_QUERY_ARGS"
     #   resp.sql_injection_match_set.sql_injection_match_tuples[0].field_to_match.data #=> String
     #   resp.sql_injection_match_set.sql_injection_match_tuples[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #
@@ -2923,7 +3012,7 @@ module Aws::WAFRegional
     #   resp.xss_match_set.xss_match_set_id #=> String
     #   resp.xss_match_set.name #=> String
     #   resp.xss_match_set.xss_match_tuples #=> Array
-    #   resp.xss_match_set.xss_match_tuples[0].field_to_match.type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY"
+    #   resp.xss_match_set.xss_match_tuples[0].field_to_match.type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY", "SINGLE_QUERY_ARG", "ALL_QUERY_ARGS"
     #   resp.xss_match_set.xss_match_tuples[0].field_to_match.data #=> String
     #   resp.xss_match_set.xss_match_tuples[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #
@@ -3139,6 +3228,56 @@ module Aws::WAFRegional
     # @param [Hash] params ({})
     def list_ip_sets(params = {}, options = {})
       req = build_request(:list_ip_sets, params)
+      req.send_request(options)
+    end
+
+    # Returns an array of LoggingConfiguration objects.
+    #
+    # @option params [String] :next_marker
+    #   If you specify a value for `Limit` and you have more
+    #   `LoggingConfigurations` than the value of `Limit`, AWS WAF returns a
+    #   `NextMarker` value in the response that allows you to list another
+    #   group of `LoggingConfigurations`. For the second and subsequent
+    #   `ListLoggingConfigurations` requests, specify the value of
+    #   `NextMarker` from the previous response to get information about
+    #   another batch of `ListLoggingConfigurations`.
+    #
+    # @option params [Integer] :limit
+    #   Specifies the number of `LoggingConfigurations` that you want AWS WAF
+    #   to return for this request. If you have more `LoggingConfigurations`
+    #   than the number that you specify for `Limit`, the response includes a
+    #   `NextMarker` value that you can use to get another batch of
+    #   `LoggingConfigurations`.
+    #
+    # @return [Types::ListLoggingConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLoggingConfigurationsResponse#logging_configurations #logging_configurations} => Array&lt;Types::LoggingConfiguration&gt;
+    #   * {Types::ListLoggingConfigurationsResponse#next_marker #next_marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_logging_configurations({
+    #     next_marker: "NextMarker",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.logging_configurations #=> Array
+    #   resp.logging_configurations[0].resource_arn #=> String
+    #   resp.logging_configurations[0].log_destination_configs #=> Array
+    #   resp.logging_configurations[0].log_destination_configs[0] #=> String
+    #   resp.logging_configurations[0].redacted_fields #=> Array
+    #   resp.logging_configurations[0].redacted_fields[0].type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY", "SINGLE_QUERY_ARG", "ALL_QUERY_ARGS"
+    #   resp.logging_configurations[0].redacted_fields[0].data #=> String
+    #   resp.next_marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListLoggingConfigurations AWS API Documentation
+    #
+    # @overload list_logging_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_logging_configurations(params = {}, options = {})
+      req = build_request(:list_logging_configurations, params)
       req.send_request(options)
     end
 
@@ -3717,6 +3856,71 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # Associates a LoggingConfiguration with a specified web ACL.
+    #
+    # You can access information about all traffic that AWS WAF inspects
+    # using the following steps:
+    #
+    # 1.  Create an Amazon Kinesis Data Firehose delivery stream. For more
+    #     information, see [Creating an Amazon Kinesis Data Firehose
+    #     Delivery Stream][1].
+    #
+    # 2.  Associate that delivery stream to your web ACL using a
+    #     `PutLoggingConfiguration` request.
+    #
+    # When you successfully enable logging using a `PutLoggingConfiguration`
+    # request, AWS WAF will create a service linked role with the necessary
+    # permissions to write logs to the Amazon Kinesis Data Firehose delivery
+    # stream. For more information, see [Logging Web ACL Traffic
+    # Information][2] in the *AWS WAF Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/firehose/latest/dev/what-is-this-service.html
+    # [2]: http://docs.aws.amazon.com/waf/latest/developerguide/logging.html
+    #
+    # @option params [required, Types::LoggingConfiguration] :logging_configuration
+    #   The Amazon Kinesis Data Firehose delivery streams that contains the
+    #   inspected traffic information, the redacted fields details, and the
+    #   Amazon Resource Name (ARN) of the web ACL to monitor.
+    #
+    # @return [Types::PutLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutLoggingConfigurationResponse#logging_configuration #logging_configuration} => Types::LoggingConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_logging_configuration({
+    #     logging_configuration: { # required
+    #       resource_arn: "ResourceArn", # required
+    #       log_destination_configs: ["ResourceArn"], # required
+    #       redacted_fields: [
+    #         {
+    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
+    #           data: "MatchFieldData",
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.logging_configuration.resource_arn #=> String
+    #   resp.logging_configuration.log_destination_configs #=> Array
+    #   resp.logging_configuration.log_destination_configs[0] #=> String
+    #   resp.logging_configuration.redacted_fields #=> Array
+    #   resp.logging_configuration.redacted_fields[0].type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY", "SINGLE_QUERY_ARG", "ALL_QUERY_ARGS"
+    #   resp.logging_configuration.redacted_fields[0].data #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/PutLoggingConfiguration AWS API Documentation
+    #
+    # @overload put_logging_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_logging_configuration(params = {}, options = {})
+      req = build_request(:put_logging_configuration, params)
+      req.send_request(options)
+    end
+
     # Attaches a IAM policy to the specified resource. The only supported
     # use for this action is to share a RuleGroup across accounts.
     #
@@ -3729,8 +3933,9 @@ module Aws::WAFRegional
     #
     # * `Effect` must specify `Allow`.
     #
-    # * The `Action` in the policy must be `waf:UpdateWebACL` and
-    #   `waf-regional:UpdateWebACL`. Any extra or wildcard actions in the
+    # * The `Action` in the policy must be `waf:UpdateWebACL`,
+    #   `waf-regional:UpdateWebACL`, `waf:GetRuleGroup` and
+    #   `waf-regional:GetRuleGroup` . Any extra or wildcard actions in the
     #   policy will be rejected.
     #
     # * The policy cannot include a `Resource` parameter.
@@ -3885,7 +4090,7 @@ module Aws::WAFRegional
     #         action: "INSERT", # required, accepts INSERT, DELETE
     #         byte_match_tuple: { # required
     #           field_to_match: { # required
-    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #             data: "MatchFieldData",
     #           },
     #           target_string: "data", # required
@@ -4010,10 +4215,10 @@ module Aws::WAFRegional
     #   the range of IP addresses from `192.0.2.0` to `192.0.2.255`) or
     #   `192.0.2.44/32` (for the individual IP address `192.0.2.44`).
     #
-    # AWS WAF supports /8, /16, /24, and /32 IP address ranges for IPv4, and
-    # /24, /32, /48, /56, /64 and /128 for IPv6. For more information about
-    # CIDR notation, see the Wikipedia entry [Classless Inter-Domain
-    # Routing][1].
+    # AWS WAF supports IPv4 address ranges: /8 and any range between /16
+    # through /32. AWS WAF supports IPv6 address ranges: /16, /24, /32, /48,
+    # /56, /64, and /128. For more information about CIDR notation, see the
+    # Wikipedia entry [Classless Inter-Domain Routing][1].
     #
     # IPv6 addresses can be represented using any of the following formats:
     #
@@ -4047,6 +4252,8 @@ module Aws::WAFRegional
     # change an IP address, you delete the existing IP address and add the
     # new one.
     #
+    # You can insert a maximum of 1000 addresses in a single request.
+    #
     # For more information about how to use the AWS WAF API to allow or
     # block HTTP requests, see the [AWS WAF Developer Guide][2].
     #
@@ -4070,6 +4277,8 @@ module Aws::WAFRegional
     #   * IPSetUpdate: Contains `Action` and `IPSetDescriptor`
     #
     #   * IPSetDescriptor: Contains `Type` and `Value`
+    #
+    #   You can insert a maximum of 1000 addresses in a single request.
     #
     # @return [Types::UpdateIPSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4295,7 +4504,7 @@ module Aws::WAFRegional
     #         action: "INSERT", # required, accepts INSERT, DELETE
     #         regex_match_tuple: { # required
     #           field_to_match: { # required
-    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #             data: "MatchFieldData",
     #           },
     #           text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -4626,6 +4835,8 @@ module Aws::WAFRegional
     #   AWS resource forwards only the first `8192` bytes of your request to
     #   AWS WAF.
     #
+    #   You can only specify a single type of TextTransformation.
+    #
     # * A `ComparisonOperator` used for evaluating the selected part of the
     #   request against the specified `Size`, such as equals, greater than,
     #   less than, and so on.
@@ -4723,7 +4934,7 @@ module Aws::WAFRegional
     #         action: "INSERT", # required, accepts INSERT, DELETE
     #         size_constraint: { # required
     #           field_to_match: { # required
-    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #             data: "MatchFieldData",
     #           },
     #           text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -4756,12 +4967,14 @@ module Aws::WAFRegional
     #   existing object and add a new one.
     #
     # * `FieldToMatch`\: The part of web requests that you want AWS WAF to
-    #   inspect and, if you want AWS WAF to inspect a header, the name of
-    #   the header.
+    #   inspect and, if you want AWS WAF to inspect a header or custom query
+    #   parameter, the name of the header or parameter.
     #
     # * `TextTransformation`\: Which text transformation, if any, to perform
     #   on the web request before inspecting the request for snippets of
     #   malicious SQL code.
+    #
+    #   You can only specify a single type of TextTransformation.
     #
     # You use `SqlInjectionMatchSet` objects to specify which CloudFront
     # requests you want to allow, block, or count. For example, if you're
@@ -4851,7 +5064,7 @@ module Aws::WAFRegional
     #         action: "INSERT", # required, accepts INSERT, DELETE
     #         sql_injection_match_tuple: { # required
     #           field_to_match: { # required
-    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #             data: "MatchFieldData",
     #           },
     #           text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -5041,12 +5254,14 @@ module Aws::WAFRegional
     #   object and add a new one.
     #
     # * `FieldToMatch`\: The part of web requests that you want AWS WAF to
-    #   inspect and, if you want AWS WAF to inspect a header, the name of
-    #   the header.
+    #   inspect and, if you want AWS WAF to inspect a header or custom query
+    #   parameter, the name of the header or parameter.
     #
     # * `TextTransformation`\: Which text transformation, if any, to perform
     #   on the web request before inspecting the request for cross-site
     #   scripting attacks.
+    #
+    #   You can only specify a single type of TextTransformation.
     #
     # You use `XssMatchSet` objects to specify which CloudFront requests you
     # want to allow, block, or count. For example, if you're receiving
@@ -5133,7 +5348,7 @@ module Aws::WAFRegional
     #         action: "INSERT", # required, accepts INSERT, DELETE
     #         xss_match_tuple: { # required
     #           field_to_match: { # required
-    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #             data: "MatchFieldData",
     #           },
     #           text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -5168,7 +5383,7 @@ module Aws::WAFRegional
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafregional'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -188,12 +188,14 @@ module Aws::CloudSearchDomain
       api.version = "2013-01-01"
 
       api.metadata = {
+        "apiVersion" => "2013-01-01",
         "endpointPrefix" => "cloudsearchdomain",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "serviceFullName" => "Amazon CloudSearch Domain",
         "signatureVersion" => "v4",
         "signingName" => "cloudsearch",
+        "uid" => "cloudsearchdomain-2013-01-01",
       }
 
       api.add_operation(:search, Seahorse::Model::Operation.new.tap do |o|

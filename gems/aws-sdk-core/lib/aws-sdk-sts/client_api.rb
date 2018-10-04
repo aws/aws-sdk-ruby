@@ -173,10 +173,15 @@ module Aws::STS
       api.version = "2011-06-15"
 
       api.metadata = {
+        "apiVersion" => "2011-06-15",
         "endpointPrefix" => "sts",
+        "globalEndpoint" => "sts.amazonaws.com",
         "protocol" => "query",
+        "serviceAbbreviation" => "AWS STS",
         "serviceFullName" => "AWS Security Token Service",
+        "serviceId" => "STS",
         "signatureVersion" => "v4",
+        "uid" => "sts-2011-06-15",
         "xmlNamespace" => "https://sts.amazonaws.com/doc/2011-06-15/",
       }
 

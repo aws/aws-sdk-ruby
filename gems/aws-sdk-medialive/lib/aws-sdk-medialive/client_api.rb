@@ -55,6 +55,13 @@ module Aws::MediaLive
     AvailSettings = Shapes::StructureShape.new(name: 'AvailSettings')
     BadGatewayException = Shapes::StructureShape.new(name: 'BadGatewayException')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    BatchScheduleActionCreateRequest = Shapes::StructureShape.new(name: 'BatchScheduleActionCreateRequest')
+    BatchScheduleActionCreateResult = Shapes::StructureShape.new(name: 'BatchScheduleActionCreateResult')
+    BatchScheduleActionDeleteRequest = Shapes::StructureShape.new(name: 'BatchScheduleActionDeleteRequest')
+    BatchScheduleActionDeleteResult = Shapes::StructureShape.new(name: 'BatchScheduleActionDeleteResult')
+    BatchUpdateScheduleRequest = Shapes::StructureShape.new(name: 'BatchUpdateScheduleRequest')
+    BatchUpdateScheduleResponse = Shapes::StructureShape.new(name: 'BatchUpdateScheduleResponse')
+    BatchUpdateScheduleResult = Shapes::StructureShape.new(name: 'BatchUpdateScheduleResult')
     BlackoutSlate = Shapes::StructureShape.new(name: 'BlackoutSlate')
     BlackoutSlateNetworkEndBlackout = Shapes::StringShape.new(name: 'BlackoutSlateNetworkEndBlackout')
     BlackoutSlateState = Shapes::StringShape.new(name: 'BlackoutSlateState')
@@ -93,12 +100,20 @@ module Aws::MediaLive
     DeleteInputResponse = Shapes::StructureShape.new(name: 'DeleteInputResponse')
     DeleteInputSecurityGroupRequest = Shapes::StructureShape.new(name: 'DeleteInputSecurityGroupRequest')
     DeleteInputSecurityGroupResponse = Shapes::StructureShape.new(name: 'DeleteInputSecurityGroupResponse')
+    DeleteReservationRequest = Shapes::StructureShape.new(name: 'DeleteReservationRequest')
+    DeleteReservationResponse = Shapes::StructureShape.new(name: 'DeleteReservationResponse')
     DescribeChannelRequest = Shapes::StructureShape.new(name: 'DescribeChannelRequest')
     DescribeChannelResponse = Shapes::StructureShape.new(name: 'DescribeChannelResponse')
     DescribeInputRequest = Shapes::StructureShape.new(name: 'DescribeInputRequest')
     DescribeInputResponse = Shapes::StructureShape.new(name: 'DescribeInputResponse')
     DescribeInputSecurityGroupRequest = Shapes::StructureShape.new(name: 'DescribeInputSecurityGroupRequest')
     DescribeInputSecurityGroupResponse = Shapes::StructureShape.new(name: 'DescribeInputSecurityGroupResponse')
+    DescribeOfferingRequest = Shapes::StructureShape.new(name: 'DescribeOfferingRequest')
+    DescribeOfferingResponse = Shapes::StructureShape.new(name: 'DescribeOfferingResponse')
+    DescribeReservationRequest = Shapes::StructureShape.new(name: 'DescribeReservationRequest')
+    DescribeReservationResponse = Shapes::StructureShape.new(name: 'DescribeReservationResponse')
+    DescribeScheduleRequest = Shapes::StructureShape.new(name: 'DescribeScheduleRequest')
+    DescribeScheduleResponse = Shapes::StructureShape.new(name: 'DescribeScheduleResponse')
     DvbNitSettings = Shapes::StructureShape.new(name: 'DvbNitSettings')
     DvbSdtOutputSdt = Shapes::StringShape.new(name: 'DvbSdtOutputSdt')
     DvbSdtSettings = Shapes::StructureShape.new(name: 'DvbSdtSettings')
@@ -136,6 +151,7 @@ module Aws::MediaLive
     FecOutputIncludeFec = Shapes::StringShape.new(name: 'FecOutputIncludeFec')
     FecOutputSettings = Shapes::StructureShape.new(name: 'FecOutputSettings')
     FixedAfd = Shapes::StringShape.new(name: 'FixedAfd')
+    FixedModeScheduleActionStartSettings = Shapes::StructureShape.new(name: 'FixedModeScheduleActionStartSettings')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     GatewayTimeoutException = Shapes::StructureShape.new(name: 'GatewayTimeoutException')
     GlobalConfiguration = Shapes::StructureShape.new(name: 'GlobalConfiguration')
@@ -233,6 +249,13 @@ module Aws::MediaLive
     ListInputsRequest = Shapes::StructureShape.new(name: 'ListInputsRequest')
     ListInputsResponse = Shapes::StructureShape.new(name: 'ListInputsResponse')
     ListInputsResultModel = Shapes::StructureShape.new(name: 'ListInputsResultModel')
+    ListOfferingsRequest = Shapes::StructureShape.new(name: 'ListOfferingsRequest')
+    ListOfferingsResponse = Shapes::StructureShape.new(name: 'ListOfferingsResponse')
+    ListOfferingsResultModel = Shapes::StructureShape.new(name: 'ListOfferingsResultModel')
+    ListReservationsRequest = Shapes::StructureShape.new(name: 'ListReservationsRequest')
+    ListReservationsResponse = Shapes::StructureShape.new(name: 'ListReservationsResponse')
+    ListReservationsResultModel = Shapes::StructureShape.new(name: 'ListReservationsResultModel')
+    LogLevel = Shapes::StringShape.new(name: 'LogLevel')
     M2tsAbsentInputAudioBehavior = Shapes::StringShape.new(name: 'M2tsAbsentInputAudioBehavior')
     M2tsArib = Shapes::StringShape.new(name: 'M2tsArib')
     M2tsAribCaptionsPidControl = Shapes::StringShape.new(name: 'M2tsAribCaptionsPidControl')
@@ -264,6 +287,9 @@ module Aws::MediaLive
     NetworkInputServerValidation = Shapes::StringShape.new(name: 'NetworkInputServerValidation')
     NetworkInputSettings = Shapes::StructureShape.new(name: 'NetworkInputSettings')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    Offering = Shapes::StructureShape.new(name: 'Offering')
+    OfferingDurationUnits = Shapes::StringShape.new(name: 'OfferingDurationUnits')
+    OfferingType = Shapes::StringShape.new(name: 'OfferingType')
     Output = Shapes::StructureShape.new(name: 'Output')
     OutputDestination = Shapes::StructureShape.new(name: 'OutputDestination')
     OutputDestinationSettings = Shapes::StructureShape.new(name: 'OutputDestinationSettings')
@@ -272,7 +298,21 @@ module Aws::MediaLive
     OutputLocationRef = Shapes::StructureShape.new(name: 'OutputLocationRef')
     OutputSettings = Shapes::StructureShape.new(name: 'OutputSettings')
     PassThroughSettings = Shapes::StructureShape.new(name: 'PassThroughSettings')
+    PurchaseOffering = Shapes::StructureShape.new(name: 'PurchaseOffering')
+    PurchaseOfferingRequest = Shapes::StructureShape.new(name: 'PurchaseOfferingRequest')
+    PurchaseOfferingResponse = Shapes::StructureShape.new(name: 'PurchaseOfferingResponse')
+    PurchaseOfferingResultModel = Shapes::StructureShape.new(name: 'PurchaseOfferingResultModel')
     RemixSettings = Shapes::StructureShape.new(name: 'RemixSettings')
+    Reservation = Shapes::StructureShape.new(name: 'Reservation')
+    ReservationCodec = Shapes::StringShape.new(name: 'ReservationCodec')
+    ReservationMaximumBitrate = Shapes::StringShape.new(name: 'ReservationMaximumBitrate')
+    ReservationMaximumFramerate = Shapes::StringShape.new(name: 'ReservationMaximumFramerate')
+    ReservationResolution = Shapes::StringShape.new(name: 'ReservationResolution')
+    ReservationResourceSpecification = Shapes::StructureShape.new(name: 'ReservationResourceSpecification')
+    ReservationResourceType = Shapes::StringShape.new(name: 'ReservationResourceType')
+    ReservationSpecialFeature = Shapes::StringShape.new(name: 'ReservationSpecialFeature')
+    ReservationState = Shapes::StringShape.new(name: 'ReservationState')
+    ReservationVideoQuality = Shapes::StringShape.new(name: 'ReservationVideoQuality')
     ResourceConflict = Shapes::StructureShape.new(name: 'ResourceConflict')
     ResourceNotFound = Shapes::StructureShape.new(name: 'ResourceNotFound')
     RtmpCacheFullBehavior = Shapes::StringShape.new(name: 'RtmpCacheFullBehavior')
@@ -281,6 +321,10 @@ module Aws::MediaLive
     RtmpGroupSettings = Shapes::StructureShape.new(name: 'RtmpGroupSettings')
     RtmpOutputCertificateMode = Shapes::StringShape.new(name: 'RtmpOutputCertificateMode')
     RtmpOutputSettings = Shapes::StructureShape.new(name: 'RtmpOutputSettings')
+    ScheduleAction = Shapes::StructureShape.new(name: 'ScheduleAction')
+    ScheduleActionSettings = Shapes::StructureShape.new(name: 'ScheduleActionSettings')
+    ScheduleActionStartSettings = Shapes::StructureShape.new(name: 'ScheduleActionStartSettings')
+    ScheduleDescribeResultModel = Shapes::StructureShape.new(name: 'ScheduleDescribeResultModel')
     Scte20Convert608To708 = Shapes::StringShape.new(name: 'Scte20Convert608To708')
     Scte20PlusEmbeddedDestinationSettings = Shapes::StructureShape.new(name: 'Scte20PlusEmbeddedDestinationSettings')
     Scte20SourceSettings = Shapes::StructureShape.new(name: 'Scte20SourceSettings')
@@ -288,10 +332,22 @@ module Aws::MediaLive
     Scte27SourceSettings = Shapes::StructureShape.new(name: 'Scte27SourceSettings')
     Scte35AposNoRegionalBlackoutBehavior = Shapes::StringShape.new(name: 'Scte35AposNoRegionalBlackoutBehavior')
     Scte35AposWebDeliveryAllowedBehavior = Shapes::StringShape.new(name: 'Scte35AposWebDeliveryAllowedBehavior')
+    Scte35ArchiveAllowedFlag = Shapes::StringShape.new(name: 'Scte35ArchiveAllowedFlag')
+    Scte35DeliveryRestrictions = Shapes::StructureShape.new(name: 'Scte35DeliveryRestrictions')
+    Scte35Descriptor = Shapes::StructureShape.new(name: 'Scte35Descriptor')
+    Scte35DescriptorSettings = Shapes::StructureShape.new(name: 'Scte35DescriptorSettings')
+    Scte35DeviceRestrictions = Shapes::StringShape.new(name: 'Scte35DeviceRestrictions')
+    Scte35NoRegionalBlackoutFlag = Shapes::StringShape.new(name: 'Scte35NoRegionalBlackoutFlag')
+    Scte35ReturnToNetworkScheduleActionSettings = Shapes::StructureShape.new(name: 'Scte35ReturnToNetworkScheduleActionSettings')
+    Scte35SegmentationCancelIndicator = Shapes::StringShape.new(name: 'Scte35SegmentationCancelIndicator')
+    Scte35SegmentationDescriptor = Shapes::StructureShape.new(name: 'Scte35SegmentationDescriptor')
     Scte35SpliceInsert = Shapes::StructureShape.new(name: 'Scte35SpliceInsert')
     Scte35SpliceInsertNoRegionalBlackoutBehavior = Shapes::StringShape.new(name: 'Scte35SpliceInsertNoRegionalBlackoutBehavior')
+    Scte35SpliceInsertScheduleActionSettings = Shapes::StructureShape.new(name: 'Scte35SpliceInsertScheduleActionSettings')
     Scte35SpliceInsertWebDeliveryAllowedBehavior = Shapes::StringShape.new(name: 'Scte35SpliceInsertWebDeliveryAllowedBehavior')
     Scte35TimeSignalApos = Shapes::StructureShape.new(name: 'Scte35TimeSignalApos')
+    Scte35TimeSignalScheduleActionSettings = Shapes::StructureShape.new(name: 'Scte35TimeSignalScheduleActionSettings')
+    Scte35WebDeliveryAllowedFlag = Shapes::StringShape.new(name: 'Scte35WebDeliveryAllowedFlag')
     SmoothGroupAudioOnlyTimecodeControl = Shapes::StringShape.new(name: 'SmoothGroupAudioOnlyTimecodeControl')
     SmoothGroupCertificateMode = Shapes::StringShape.new(name: 'SmoothGroupCertificateMode')
     SmoothGroupEventIdMode = Shapes::StringShape.new(name: 'SmoothGroupEventIdMode')
@@ -304,6 +360,8 @@ module Aws::MediaLive
     StandardHlsSettings = Shapes::StructureShape.new(name: 'StandardHlsSettings')
     StartChannelRequest = Shapes::StructureShape.new(name: 'StartChannelRequest')
     StartChannelResponse = Shapes::StructureShape.new(name: 'StartChannelResponse')
+    StaticImageActivateScheduleActionSettings = Shapes::StructureShape.new(name: 'StaticImageActivateScheduleActionSettings')
+    StaticImageDeactivateScheduleActionSettings = Shapes::StructureShape.new(name: 'StaticImageDeactivateScheduleActionSettings')
     StaticKeySettings = Shapes::StructureShape.new(name: 'StaticKeySettings')
     StopChannelRequest = Shapes::StructureShape.new(name: 'StopChannelRequest')
     StopChannelResponse = Shapes::StructureShape.new(name: 'StopChannelResponse')
@@ -354,17 +412,20 @@ module Aws::MediaLive
     __integerMin0Max1000 = Shapes::IntegerShape.new(name: '__integerMin0Max1000')
     __integerMin0Max10000 = Shapes::IntegerShape.new(name: '__integerMin0Max10000')
     __integerMin0Max1000000 = Shapes::IntegerShape.new(name: '__integerMin0Max1000000')
+    __integerMin0Max1099511627775 = Shapes::IntegerShape.new(name: '__integerMin0Max1099511627775')
     __integerMin0Max128 = Shapes::IntegerShape.new(name: '__integerMin0Max128')
     __integerMin0Max15 = Shapes::IntegerShape.new(name: '__integerMin0Max15')
     __integerMin0Max255 = Shapes::IntegerShape.new(name: '__integerMin0Max255')
     __integerMin0Max30 = Shapes::IntegerShape.new(name: '__integerMin0Max30')
     __integerMin0Max3600 = Shapes::IntegerShape.new(name: '__integerMin0Max3600')
+    __integerMin0Max4294967295 = Shapes::IntegerShape.new(name: '__integerMin0Max4294967295')
     __integerMin0Max500 = Shapes::IntegerShape.new(name: '__integerMin0Max500')
     __integerMin0Max600 = Shapes::IntegerShape.new(name: '__integerMin0Max600')
     __integerMin0Max65535 = Shapes::IntegerShape.new(name: '__integerMin0Max65535')
     __integerMin0Max65536 = Shapes::IntegerShape.new(name: '__integerMin0Max65536')
     __integerMin0Max7 = Shapes::IntegerShape.new(name: '__integerMin0Max7')
     __integerMin0Max8191 = Shapes::IntegerShape.new(name: '__integerMin0Max8191')
+    __integerMin0Max8589934591 = Shapes::IntegerShape.new(name: '__integerMin0Max8589934591')
     __integerMin1 = Shapes::IntegerShape.new(name: '__integerMin1')
     __integerMin1000 = Shapes::IntegerShape.new(name: '__integerMin1000')
     __integerMin1000Max30000 = Shapes::IntegerShape.new(name: '__integerMin1000Max30000')
@@ -405,10 +466,14 @@ module Aws::MediaLive
     __listOfInputSourceRequest = Shapes::ListShape.new(name: '__listOfInputSourceRequest')
     __listOfInputWhitelistRule = Shapes::ListShape.new(name: '__listOfInputWhitelistRule')
     __listOfInputWhitelistRuleCidr = Shapes::ListShape.new(name: '__listOfInputWhitelistRuleCidr')
+    __listOfOffering = Shapes::ListShape.new(name: '__listOfOffering')
     __listOfOutput = Shapes::ListShape.new(name: '__listOfOutput')
     __listOfOutputDestination = Shapes::ListShape.new(name: '__listOfOutputDestination')
     __listOfOutputDestinationSettings = Shapes::ListShape.new(name: '__listOfOutputDestinationSettings')
     __listOfOutputGroup = Shapes::ListShape.new(name: '__listOfOutputGroup')
+    __listOfReservation = Shapes::ListShape.new(name: '__listOfReservation')
+    __listOfScheduleAction = Shapes::ListShape.new(name: '__listOfScheduleAction')
+    __listOfScte35Descriptor = Shapes::ListShape.new(name: '__listOfScte35Descriptor')
     __listOfValidationError = Shapes::ListShape.new(name: '__listOfValidationError')
     __listOfVideoDescription = Shapes::ListShape.new(name: '__listOfVideoDescription')
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
@@ -521,6 +586,31 @@ module Aws::MediaLive
     AvailSettings.add_member(:scte_35_time_signal_apos, Shapes::ShapeRef.new(shape: Scte35TimeSignalApos, location_name: "scte35TimeSignalApos"))
     AvailSettings.struct_class = Types::AvailSettings
 
+    BatchScheduleActionCreateRequest.add_member(:schedule_actions, Shapes::ShapeRef.new(shape: __listOfScheduleAction, required: true, location_name: "scheduleActions"))
+    BatchScheduleActionCreateRequest.struct_class = Types::BatchScheduleActionCreateRequest
+
+    BatchScheduleActionCreateResult.add_member(:schedule_actions, Shapes::ShapeRef.new(shape: __listOfScheduleAction, required: true, location_name: "scheduleActions"))
+    BatchScheduleActionCreateResult.struct_class = Types::BatchScheduleActionCreateResult
+
+    BatchScheduleActionDeleteRequest.add_member(:action_names, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "actionNames"))
+    BatchScheduleActionDeleteRequest.struct_class = Types::BatchScheduleActionDeleteRequest
+
+    BatchScheduleActionDeleteResult.add_member(:schedule_actions, Shapes::ShapeRef.new(shape: __listOfScheduleAction, required: true, location_name: "scheduleActions"))
+    BatchScheduleActionDeleteResult.struct_class = Types::BatchScheduleActionDeleteResult
+
+    BatchUpdateScheduleRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelId"))
+    BatchUpdateScheduleRequest.add_member(:creates, Shapes::ShapeRef.new(shape: BatchScheduleActionCreateRequest, location_name: "creates"))
+    BatchUpdateScheduleRequest.add_member(:deletes, Shapes::ShapeRef.new(shape: BatchScheduleActionDeleteRequest, location_name: "deletes"))
+    BatchUpdateScheduleRequest.struct_class = Types::BatchUpdateScheduleRequest
+
+    BatchUpdateScheduleResponse.add_member(:creates, Shapes::ShapeRef.new(shape: BatchScheduleActionCreateResult, location_name: "creates"))
+    BatchUpdateScheduleResponse.add_member(:deletes, Shapes::ShapeRef.new(shape: BatchScheduleActionDeleteResult, location_name: "deletes"))
+    BatchUpdateScheduleResponse.struct_class = Types::BatchUpdateScheduleResponse
+
+    BatchUpdateScheduleResult.add_member(:creates, Shapes::ShapeRef.new(shape: BatchScheduleActionCreateResult, location_name: "creates"))
+    BatchUpdateScheduleResult.add_member(:deletes, Shapes::ShapeRef.new(shape: BatchScheduleActionDeleteResult, location_name: "deletes"))
+    BatchUpdateScheduleResult.struct_class = Types::BatchUpdateScheduleResult
+
     BlackoutSlate.add_member(:blackout_slate_image, Shapes::ShapeRef.new(shape: InputLocation, location_name: "blackoutSlateImage"))
     BlackoutSlate.add_member(:network_end_blackout, Shapes::ShapeRef.new(shape: BlackoutSlateNetworkEndBlackout, location_name: "networkEndBlackout"))
     BlackoutSlate.add_member(:network_end_blackout_image, Shapes::ShapeRef.new(shape: InputLocation, location_name: "networkEndBlackoutImage"))
@@ -593,6 +683,7 @@ module Aws::MediaLive
     Channel.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     Channel.add_member(:input_attachments, Shapes::ShapeRef.new(shape: __listOfInputAttachment, location_name: "inputAttachments"))
     Channel.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
+    Channel.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
     Channel.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     Channel.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
     Channel.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
@@ -612,6 +703,7 @@ module Aws::MediaLive
     ChannelSummary.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     ChannelSummary.add_member(:input_attachments, Shapes::ShapeRef.new(shape: __listOfInputAttachment, location_name: "inputAttachments"))
     ChannelSummary.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
+    ChannelSummary.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
     ChannelSummary.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     ChannelSummary.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
     ChannelSummary.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
@@ -622,6 +714,7 @@ module Aws::MediaLive
     CreateChannel.add_member(:encoder_settings, Shapes::ShapeRef.new(shape: EncoderSettings, location_name: "encoderSettings"))
     CreateChannel.add_member(:input_attachments, Shapes::ShapeRef.new(shape: __listOfInputAttachment, location_name: "inputAttachments"))
     CreateChannel.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
+    CreateChannel.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
     CreateChannel.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     CreateChannel.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     CreateChannel.add_member(:reserved, Shapes::ShapeRef.new(shape: __string, deprecated: true, location_name: "reserved"))
@@ -632,6 +725,7 @@ module Aws::MediaLive
     CreateChannelRequest.add_member(:encoder_settings, Shapes::ShapeRef.new(shape: EncoderSettings, location_name: "encoderSettings"))
     CreateChannelRequest.add_member(:input_attachments, Shapes::ShapeRef.new(shape: __listOfInputAttachment, location_name: "inputAttachments"))
     CreateChannelRequest.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
+    CreateChannelRequest.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
     CreateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     CreateChannelRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     CreateChannelRequest.add_member(:reserved, Shapes::ShapeRef.new(shape: __string, deprecated: true, location_name: "reserved"))
@@ -685,6 +779,7 @@ module Aws::MediaLive
     DeleteChannelResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     DeleteChannelResponse.add_member(:input_attachments, Shapes::ShapeRef.new(shape: __listOfInputAttachment, location_name: "inputAttachments"))
     DeleteChannelResponse.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
+    DeleteChannelResponse.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
     DeleteChannelResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     DeleteChannelResponse.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
     DeleteChannelResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
@@ -701,6 +796,28 @@ module Aws::MediaLive
 
     DeleteInputSecurityGroupResponse.struct_class = Types::DeleteInputSecurityGroupResponse
 
+    DeleteReservationRequest.add_member(:reservation_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "reservationId"))
+    DeleteReservationRequest.struct_class = Types::DeleteReservationRequest
+
+    DeleteReservationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DeleteReservationResponse.add_member(:count, Shapes::ShapeRef.new(shape: __integer, location_name: "count"))
+    DeleteReservationResponse.add_member(:currency_code, Shapes::ShapeRef.new(shape: __string, location_name: "currencyCode"))
+    DeleteReservationResponse.add_member(:duration, Shapes::ShapeRef.new(shape: __integer, location_name: "duration"))
+    DeleteReservationResponse.add_member(:duration_units, Shapes::ShapeRef.new(shape: OfferingDurationUnits, location_name: "durationUnits"))
+    DeleteReservationResponse.add_member(:end, Shapes::ShapeRef.new(shape: __string, location_name: "end"))
+    DeleteReservationResponse.add_member(:fixed_price, Shapes::ShapeRef.new(shape: __double, location_name: "fixedPrice"))
+    DeleteReservationResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DeleteReservationResponse.add_member(:offering_description, Shapes::ShapeRef.new(shape: __string, location_name: "offeringDescription"))
+    DeleteReservationResponse.add_member(:offering_id, Shapes::ShapeRef.new(shape: __string, location_name: "offeringId"))
+    DeleteReservationResponse.add_member(:offering_type, Shapes::ShapeRef.new(shape: OfferingType, location_name: "offeringType"))
+    DeleteReservationResponse.add_member(:region, Shapes::ShapeRef.new(shape: __string, location_name: "region"))
+    DeleteReservationResponse.add_member(:reservation_id, Shapes::ShapeRef.new(shape: __string, location_name: "reservationId"))
+    DeleteReservationResponse.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ReservationResourceSpecification, location_name: "resourceSpecification"))
+    DeleteReservationResponse.add_member(:start, Shapes::ShapeRef.new(shape: __string, location_name: "start"))
+    DeleteReservationResponse.add_member(:state, Shapes::ShapeRef.new(shape: ReservationState, location_name: "state"))
+    DeleteReservationResponse.add_member(:usage_price, Shapes::ShapeRef.new(shape: __double, location_name: "usagePrice"))
+    DeleteReservationResponse.struct_class = Types::DeleteReservationResponse
+
     DescribeChannelRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelId"))
     DescribeChannelRequest.struct_class = Types::DescribeChannelRequest
 
@@ -711,6 +828,7 @@ module Aws::MediaLive
     DescribeChannelResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     DescribeChannelResponse.add_member(:input_attachments, Shapes::ShapeRef.new(shape: __listOfInputAttachment, location_name: "inputAttachments"))
     DescribeChannelResponse.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
+    DescribeChannelResponse.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
     DescribeChannelResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     DescribeChannelResponse.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
     DescribeChannelResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
@@ -740,6 +858,53 @@ module Aws::MediaLive
     DescribeInputSecurityGroupResponse.add_member(:state, Shapes::ShapeRef.new(shape: InputSecurityGroupState, location_name: "state"))
     DescribeInputSecurityGroupResponse.add_member(:whitelist_rules, Shapes::ShapeRef.new(shape: __listOfInputWhitelistRule, location_name: "whitelistRules"))
     DescribeInputSecurityGroupResponse.struct_class = Types::DescribeInputSecurityGroupResponse
+
+    DescribeOfferingRequest.add_member(:offering_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "offeringId"))
+    DescribeOfferingRequest.struct_class = Types::DescribeOfferingRequest
+
+    DescribeOfferingResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribeOfferingResponse.add_member(:currency_code, Shapes::ShapeRef.new(shape: __string, location_name: "currencyCode"))
+    DescribeOfferingResponse.add_member(:duration, Shapes::ShapeRef.new(shape: __integer, location_name: "duration"))
+    DescribeOfferingResponse.add_member(:duration_units, Shapes::ShapeRef.new(shape: OfferingDurationUnits, location_name: "durationUnits"))
+    DescribeOfferingResponse.add_member(:fixed_price, Shapes::ShapeRef.new(shape: __double, location_name: "fixedPrice"))
+    DescribeOfferingResponse.add_member(:offering_description, Shapes::ShapeRef.new(shape: __string, location_name: "offeringDescription"))
+    DescribeOfferingResponse.add_member(:offering_id, Shapes::ShapeRef.new(shape: __string, location_name: "offeringId"))
+    DescribeOfferingResponse.add_member(:offering_type, Shapes::ShapeRef.new(shape: OfferingType, location_name: "offeringType"))
+    DescribeOfferingResponse.add_member(:region, Shapes::ShapeRef.new(shape: __string, location_name: "region"))
+    DescribeOfferingResponse.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ReservationResourceSpecification, location_name: "resourceSpecification"))
+    DescribeOfferingResponse.add_member(:usage_price, Shapes::ShapeRef.new(shape: __double, location_name: "usagePrice"))
+    DescribeOfferingResponse.struct_class = Types::DescribeOfferingResponse
+
+    DescribeReservationRequest.add_member(:reservation_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "reservationId"))
+    DescribeReservationRequest.struct_class = Types::DescribeReservationRequest
+
+    DescribeReservationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribeReservationResponse.add_member(:count, Shapes::ShapeRef.new(shape: __integer, location_name: "count"))
+    DescribeReservationResponse.add_member(:currency_code, Shapes::ShapeRef.new(shape: __string, location_name: "currencyCode"))
+    DescribeReservationResponse.add_member(:duration, Shapes::ShapeRef.new(shape: __integer, location_name: "duration"))
+    DescribeReservationResponse.add_member(:duration_units, Shapes::ShapeRef.new(shape: OfferingDurationUnits, location_name: "durationUnits"))
+    DescribeReservationResponse.add_member(:end, Shapes::ShapeRef.new(shape: __string, location_name: "end"))
+    DescribeReservationResponse.add_member(:fixed_price, Shapes::ShapeRef.new(shape: __double, location_name: "fixedPrice"))
+    DescribeReservationResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DescribeReservationResponse.add_member(:offering_description, Shapes::ShapeRef.new(shape: __string, location_name: "offeringDescription"))
+    DescribeReservationResponse.add_member(:offering_id, Shapes::ShapeRef.new(shape: __string, location_name: "offeringId"))
+    DescribeReservationResponse.add_member(:offering_type, Shapes::ShapeRef.new(shape: OfferingType, location_name: "offeringType"))
+    DescribeReservationResponse.add_member(:region, Shapes::ShapeRef.new(shape: __string, location_name: "region"))
+    DescribeReservationResponse.add_member(:reservation_id, Shapes::ShapeRef.new(shape: __string, location_name: "reservationId"))
+    DescribeReservationResponse.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ReservationResourceSpecification, location_name: "resourceSpecification"))
+    DescribeReservationResponse.add_member(:start, Shapes::ShapeRef.new(shape: __string, location_name: "start"))
+    DescribeReservationResponse.add_member(:state, Shapes::ShapeRef.new(shape: ReservationState, location_name: "state"))
+    DescribeReservationResponse.add_member(:usage_price, Shapes::ShapeRef.new(shape: __double, location_name: "usagePrice"))
+    DescribeReservationResponse.struct_class = Types::DescribeReservationResponse
+
+    DescribeScheduleRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelId"))
+    DescribeScheduleRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    DescribeScheduleRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    DescribeScheduleRequest.struct_class = Types::DescribeScheduleRequest
+
+    DescribeScheduleResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    DescribeScheduleResponse.add_member(:schedule_actions, Shapes::ShapeRef.new(shape: __listOfScheduleAction, location_name: "scheduleActions"))
+    DescribeScheduleResponse.struct_class = Types::DescribeScheduleResponse
 
     DvbNitSettings.add_member(:network_id, Shapes::ShapeRef.new(shape: __integerMin0Max65536, required: true, location_name: "networkId"))
     DvbNitSettings.add_member(:network_name, Shapes::ShapeRef.new(shape: __stringMin1Max256, required: true, location_name: "networkName"))
@@ -826,6 +991,9 @@ module Aws::MediaLive
     FecOutputSettings.add_member(:include_fec, Shapes::ShapeRef.new(shape: FecOutputIncludeFec, location_name: "includeFec"))
     FecOutputSettings.add_member(:row_length, Shapes::ShapeRef.new(shape: __integerMin1Max20, location_name: "rowLength"))
     FecOutputSettings.struct_class = Types::FecOutputSettings
+
+    FixedModeScheduleActionStartSettings.add_member(:time, Shapes::ShapeRef.new(shape: __string, location_name: "time"))
+    FixedModeScheduleActionStartSettings.struct_class = Types::FixedModeScheduleActionStartSettings
 
     GlobalConfiguration.add_member(:initial_audio_gain, Shapes::ShapeRef.new(shape: __integerMinNegative60Max60, location_name: "initialAudioGain"))
     GlobalConfiguration.add_member(:input_end_action, Shapes::ShapeRef.new(shape: GlobalConfigurationInputEndAction, location_name: "inputEndAction"))
@@ -1087,6 +1255,45 @@ module Aws::MediaLive
     ListInputsResultModel.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ListInputsResultModel.struct_class = Types::ListInputsResultModel
 
+    ListOfferingsRequest.add_member(:channel_configuration, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "channelConfiguration"))
+    ListOfferingsRequest.add_member(:codec, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "codec"))
+    ListOfferingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListOfferingsRequest.add_member(:maximum_bitrate, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "maximumBitrate"))
+    ListOfferingsRequest.add_member(:maximum_framerate, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "maximumFramerate"))
+    ListOfferingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListOfferingsRequest.add_member(:resolution, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "resolution"))
+    ListOfferingsRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "resourceType"))
+    ListOfferingsRequest.add_member(:special_feature, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "specialFeature"))
+    ListOfferingsRequest.add_member(:video_quality, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "videoQuality"))
+    ListOfferingsRequest.struct_class = Types::ListOfferingsRequest
+
+    ListOfferingsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListOfferingsResponse.add_member(:offerings, Shapes::ShapeRef.new(shape: __listOfOffering, location_name: "offerings"))
+    ListOfferingsResponse.struct_class = Types::ListOfferingsResponse
+
+    ListOfferingsResultModel.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListOfferingsResultModel.add_member(:offerings, Shapes::ShapeRef.new(shape: __listOfOffering, location_name: "offerings"))
+    ListOfferingsResultModel.struct_class = Types::ListOfferingsResultModel
+
+    ListReservationsRequest.add_member(:codec, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "codec"))
+    ListReservationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListReservationsRequest.add_member(:maximum_bitrate, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "maximumBitrate"))
+    ListReservationsRequest.add_member(:maximum_framerate, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "maximumFramerate"))
+    ListReservationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListReservationsRequest.add_member(:resolution, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "resolution"))
+    ListReservationsRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "resourceType"))
+    ListReservationsRequest.add_member(:special_feature, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "specialFeature"))
+    ListReservationsRequest.add_member(:video_quality, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "videoQuality"))
+    ListReservationsRequest.struct_class = Types::ListReservationsRequest
+
+    ListReservationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListReservationsResponse.add_member(:reservations, Shapes::ShapeRef.new(shape: __listOfReservation, location_name: "reservations"))
+    ListReservationsResponse.struct_class = Types::ListReservationsResponse
+
+    ListReservationsResultModel.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListReservationsResultModel.add_member(:reservations, Shapes::ShapeRef.new(shape: __listOfReservation, location_name: "reservations"))
+    ListReservationsResultModel.struct_class = Types::ListReservationsResultModel
+
     M2tsSettings.add_member(:absent_input_audio_behavior, Shapes::ShapeRef.new(shape: M2tsAbsentInputAudioBehavior, location_name: "absentInputAudioBehavior"))
     M2tsSettings.add_member(:arib, Shapes::ShapeRef.new(shape: M2tsArib, location_name: "arib"))
     M2tsSettings.add_member(:arib_captions_pid, Shapes::ShapeRef.new(shape: __string, location_name: "aribCaptionsPid"))
@@ -1186,6 +1393,19 @@ module Aws::MediaLive
     NetworkInputSettings.add_member(:server_validation, Shapes::ShapeRef.new(shape: NetworkInputServerValidation, location_name: "serverValidation"))
     NetworkInputSettings.struct_class = Types::NetworkInputSettings
 
+    Offering.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    Offering.add_member(:currency_code, Shapes::ShapeRef.new(shape: __string, location_name: "currencyCode"))
+    Offering.add_member(:duration, Shapes::ShapeRef.new(shape: __integer, location_name: "duration"))
+    Offering.add_member(:duration_units, Shapes::ShapeRef.new(shape: OfferingDurationUnits, location_name: "durationUnits"))
+    Offering.add_member(:fixed_price, Shapes::ShapeRef.new(shape: __double, location_name: "fixedPrice"))
+    Offering.add_member(:offering_description, Shapes::ShapeRef.new(shape: __string, location_name: "offeringDescription"))
+    Offering.add_member(:offering_id, Shapes::ShapeRef.new(shape: __string, location_name: "offeringId"))
+    Offering.add_member(:offering_type, Shapes::ShapeRef.new(shape: OfferingType, location_name: "offeringType"))
+    Offering.add_member(:region, Shapes::ShapeRef.new(shape: __string, location_name: "region"))
+    Offering.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ReservationResourceSpecification, location_name: "resourceSpecification"))
+    Offering.add_member(:usage_price, Shapes::ShapeRef.new(shape: __double, location_name: "usagePrice"))
+    Offering.struct_class = Types::Offering
+
     Output.add_member(:audio_description_names, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "audioDescriptionNames"))
     Output.add_member(:caption_description_names, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "captionDescriptionNames"))
     Output.add_member(:output_name, Shapes::ShapeRef.new(shape: __stringMin1Max255, location_name: "outputName"))
@@ -1227,10 +1447,55 @@ module Aws::MediaLive
 
     PassThroughSettings.struct_class = Types::PassThroughSettings
 
+    PurchaseOffering.add_member(:count, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "count"))
+    PurchaseOffering.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    PurchaseOffering.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    PurchaseOffering.struct_class = Types::PurchaseOffering
+
+    PurchaseOfferingRequest.add_member(:count, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "count"))
+    PurchaseOfferingRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    PurchaseOfferingRequest.add_member(:offering_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "offeringId"))
+    PurchaseOfferingRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    PurchaseOfferingRequest.struct_class = Types::PurchaseOfferingRequest
+
+    PurchaseOfferingResponse.add_member(:reservation, Shapes::ShapeRef.new(shape: Reservation, location_name: "reservation"))
+    PurchaseOfferingResponse.struct_class = Types::PurchaseOfferingResponse
+
+    PurchaseOfferingResultModel.add_member(:reservation, Shapes::ShapeRef.new(shape: Reservation, location_name: "reservation"))
+    PurchaseOfferingResultModel.struct_class = Types::PurchaseOfferingResultModel
+
     RemixSettings.add_member(:channel_mappings, Shapes::ShapeRef.new(shape: __listOfAudioChannelMapping, required: true, location_name: "channelMappings"))
     RemixSettings.add_member(:channels_in, Shapes::ShapeRef.new(shape: __integerMin1Max16, location_name: "channelsIn"))
     RemixSettings.add_member(:channels_out, Shapes::ShapeRef.new(shape: __integerMin1Max8, location_name: "channelsOut"))
     RemixSettings.struct_class = Types::RemixSettings
+
+    Reservation.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    Reservation.add_member(:count, Shapes::ShapeRef.new(shape: __integer, location_name: "count"))
+    Reservation.add_member(:currency_code, Shapes::ShapeRef.new(shape: __string, location_name: "currencyCode"))
+    Reservation.add_member(:duration, Shapes::ShapeRef.new(shape: __integer, location_name: "duration"))
+    Reservation.add_member(:duration_units, Shapes::ShapeRef.new(shape: OfferingDurationUnits, location_name: "durationUnits"))
+    Reservation.add_member(:end, Shapes::ShapeRef.new(shape: __string, location_name: "end"))
+    Reservation.add_member(:fixed_price, Shapes::ShapeRef.new(shape: __double, location_name: "fixedPrice"))
+    Reservation.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    Reservation.add_member(:offering_description, Shapes::ShapeRef.new(shape: __string, location_name: "offeringDescription"))
+    Reservation.add_member(:offering_id, Shapes::ShapeRef.new(shape: __string, location_name: "offeringId"))
+    Reservation.add_member(:offering_type, Shapes::ShapeRef.new(shape: OfferingType, location_name: "offeringType"))
+    Reservation.add_member(:region, Shapes::ShapeRef.new(shape: __string, location_name: "region"))
+    Reservation.add_member(:reservation_id, Shapes::ShapeRef.new(shape: __string, location_name: "reservationId"))
+    Reservation.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ReservationResourceSpecification, location_name: "resourceSpecification"))
+    Reservation.add_member(:start, Shapes::ShapeRef.new(shape: __string, location_name: "start"))
+    Reservation.add_member(:state, Shapes::ShapeRef.new(shape: ReservationState, location_name: "state"))
+    Reservation.add_member(:usage_price, Shapes::ShapeRef.new(shape: __double, location_name: "usagePrice"))
+    Reservation.struct_class = Types::Reservation
+
+    ReservationResourceSpecification.add_member(:codec, Shapes::ShapeRef.new(shape: ReservationCodec, location_name: "codec"))
+    ReservationResourceSpecification.add_member(:maximum_bitrate, Shapes::ShapeRef.new(shape: ReservationMaximumBitrate, location_name: "maximumBitrate"))
+    ReservationResourceSpecification.add_member(:maximum_framerate, Shapes::ShapeRef.new(shape: ReservationMaximumFramerate, location_name: "maximumFramerate"))
+    ReservationResourceSpecification.add_member(:resolution, Shapes::ShapeRef.new(shape: ReservationResolution, location_name: "resolution"))
+    ReservationResourceSpecification.add_member(:resource_type, Shapes::ShapeRef.new(shape: ReservationResourceType, location_name: "resourceType"))
+    ReservationResourceSpecification.add_member(:special_feature, Shapes::ShapeRef.new(shape: ReservationSpecialFeature, location_name: "specialFeature"))
+    ReservationResourceSpecification.add_member(:video_quality, Shapes::ShapeRef.new(shape: ReservationVideoQuality, location_name: "videoQuality"))
+    ReservationResourceSpecification.struct_class = Types::ReservationResourceSpecification
 
     ResourceConflict.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ResourceConflict.struct_class = Types::ResourceConflict
@@ -1253,6 +1518,25 @@ module Aws::MediaLive
     RtmpOutputSettings.add_member(:num_retries, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "numRetries"))
     RtmpOutputSettings.struct_class = Types::RtmpOutputSettings
 
+    ScheduleAction.add_member(:action_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "actionName"))
+    ScheduleAction.add_member(:schedule_action_settings, Shapes::ShapeRef.new(shape: ScheduleActionSettings, required: true, location_name: "scheduleActionSettings"))
+    ScheduleAction.add_member(:schedule_action_start_settings, Shapes::ShapeRef.new(shape: ScheduleActionStartSettings, required: true, location_name: "scheduleActionStartSettings"))
+    ScheduleAction.struct_class = Types::ScheduleAction
+
+    ScheduleActionSettings.add_member(:scte_35_return_to_network_settings, Shapes::ShapeRef.new(shape: Scte35ReturnToNetworkScheduleActionSettings, location_name: "scte35ReturnToNetworkSettings"))
+    ScheduleActionSettings.add_member(:scte_35_splice_insert_settings, Shapes::ShapeRef.new(shape: Scte35SpliceInsertScheduleActionSettings, location_name: "scte35SpliceInsertSettings"))
+    ScheduleActionSettings.add_member(:scte_35_time_signal_settings, Shapes::ShapeRef.new(shape: Scte35TimeSignalScheduleActionSettings, location_name: "scte35TimeSignalSettings"))
+    ScheduleActionSettings.add_member(:static_image_activate_settings, Shapes::ShapeRef.new(shape: StaticImageActivateScheduleActionSettings, location_name: "staticImageActivateSettings"))
+    ScheduleActionSettings.add_member(:static_image_deactivate_settings, Shapes::ShapeRef.new(shape: StaticImageDeactivateScheduleActionSettings, location_name: "staticImageDeactivateSettings"))
+    ScheduleActionSettings.struct_class = Types::ScheduleActionSettings
+
+    ScheduleActionStartSettings.add_member(:fixed_mode_schedule_action_start_settings, Shapes::ShapeRef.new(shape: FixedModeScheduleActionStartSettings, location_name: "fixedModeScheduleActionStartSettings"))
+    ScheduleActionStartSettings.struct_class = Types::ScheduleActionStartSettings
+
+    ScheduleDescribeResultModel.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ScheduleDescribeResultModel.add_member(:schedule_actions, Shapes::ShapeRef.new(shape: __listOfScheduleAction, required: true, location_name: "scheduleActions"))
+    ScheduleDescribeResultModel.struct_class = Types::ScheduleDescribeResultModel
+
     Scte20PlusEmbeddedDestinationSettings.struct_class = Types::Scte20PlusEmbeddedDestinationSettings
 
     Scte20SourceSettings.add_member(:convert_608_to_708, Shapes::ShapeRef.new(shape: Scte20Convert608To708, location_name: "convert608To708"))
@@ -1264,15 +1548,50 @@ module Aws::MediaLive
     Scte27SourceSettings.add_member(:pid, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "pid"))
     Scte27SourceSettings.struct_class = Types::Scte27SourceSettings
 
+    Scte35DeliveryRestrictions.add_member(:archive_allowed_flag, Shapes::ShapeRef.new(shape: Scte35ArchiveAllowedFlag, required: true, location_name: "archiveAllowedFlag"))
+    Scte35DeliveryRestrictions.add_member(:device_restrictions, Shapes::ShapeRef.new(shape: Scte35DeviceRestrictions, required: true, location_name: "deviceRestrictions"))
+    Scte35DeliveryRestrictions.add_member(:no_regional_blackout_flag, Shapes::ShapeRef.new(shape: Scte35NoRegionalBlackoutFlag, required: true, location_name: "noRegionalBlackoutFlag"))
+    Scte35DeliveryRestrictions.add_member(:web_delivery_allowed_flag, Shapes::ShapeRef.new(shape: Scte35WebDeliveryAllowedFlag, required: true, location_name: "webDeliveryAllowedFlag"))
+    Scte35DeliveryRestrictions.struct_class = Types::Scte35DeliveryRestrictions
+
+    Scte35Descriptor.add_member(:scte_35_descriptor_settings, Shapes::ShapeRef.new(shape: Scte35DescriptorSettings, required: true, location_name: "scte35DescriptorSettings"))
+    Scte35Descriptor.struct_class = Types::Scte35Descriptor
+
+    Scte35DescriptorSettings.add_member(:segmentation_descriptor_scte_35_descriptor_settings, Shapes::ShapeRef.new(shape: Scte35SegmentationDescriptor, required: true, location_name: "segmentationDescriptorScte35DescriptorSettings"))
+    Scte35DescriptorSettings.struct_class = Types::Scte35DescriptorSettings
+
+    Scte35ReturnToNetworkScheduleActionSettings.add_member(:splice_event_id, Shapes::ShapeRef.new(shape: __integerMin0Max4294967295, required: true, location_name: "spliceEventId"))
+    Scte35ReturnToNetworkScheduleActionSettings.struct_class = Types::Scte35ReturnToNetworkScheduleActionSettings
+
+    Scte35SegmentationDescriptor.add_member(:delivery_restrictions, Shapes::ShapeRef.new(shape: Scte35DeliveryRestrictions, location_name: "deliveryRestrictions"))
+    Scte35SegmentationDescriptor.add_member(:segment_num, Shapes::ShapeRef.new(shape: __integerMin0Max255, location_name: "segmentNum"))
+    Scte35SegmentationDescriptor.add_member(:segmentation_cancel_indicator, Shapes::ShapeRef.new(shape: Scte35SegmentationCancelIndicator, required: true, location_name: "segmentationCancelIndicator"))
+    Scte35SegmentationDescriptor.add_member(:segmentation_duration, Shapes::ShapeRef.new(shape: __integerMin0Max1099511627775, location_name: "segmentationDuration"))
+    Scte35SegmentationDescriptor.add_member(:segmentation_event_id, Shapes::ShapeRef.new(shape: __integerMin0Max4294967295, required: true, location_name: "segmentationEventId"))
+    Scte35SegmentationDescriptor.add_member(:segmentation_type_id, Shapes::ShapeRef.new(shape: __integerMin0Max255, location_name: "segmentationTypeId"))
+    Scte35SegmentationDescriptor.add_member(:segmentation_upid, Shapes::ShapeRef.new(shape: __string, location_name: "segmentationUpid"))
+    Scte35SegmentationDescriptor.add_member(:segmentation_upid_type, Shapes::ShapeRef.new(shape: __integerMin0Max255, location_name: "segmentationUpidType"))
+    Scte35SegmentationDescriptor.add_member(:segments_expected, Shapes::ShapeRef.new(shape: __integerMin0Max255, location_name: "segmentsExpected"))
+    Scte35SegmentationDescriptor.add_member(:sub_segment_num, Shapes::ShapeRef.new(shape: __integerMin0Max255, location_name: "subSegmentNum"))
+    Scte35SegmentationDescriptor.add_member(:sub_segments_expected, Shapes::ShapeRef.new(shape: __integerMin0Max255, location_name: "subSegmentsExpected"))
+    Scte35SegmentationDescriptor.struct_class = Types::Scte35SegmentationDescriptor
+
     Scte35SpliceInsert.add_member(:ad_avail_offset, Shapes::ShapeRef.new(shape: __integerMinNegative1000Max1000, location_name: "adAvailOffset"))
     Scte35SpliceInsert.add_member(:no_regional_blackout_flag, Shapes::ShapeRef.new(shape: Scte35SpliceInsertNoRegionalBlackoutBehavior, location_name: "noRegionalBlackoutFlag"))
     Scte35SpliceInsert.add_member(:web_delivery_allowed_flag, Shapes::ShapeRef.new(shape: Scte35SpliceInsertWebDeliveryAllowedBehavior, location_name: "webDeliveryAllowedFlag"))
     Scte35SpliceInsert.struct_class = Types::Scte35SpliceInsert
 
+    Scte35SpliceInsertScheduleActionSettings.add_member(:duration, Shapes::ShapeRef.new(shape: __integerMin0Max8589934591, location_name: "duration"))
+    Scte35SpliceInsertScheduleActionSettings.add_member(:splice_event_id, Shapes::ShapeRef.new(shape: __integerMin0Max4294967295, required: true, location_name: "spliceEventId"))
+    Scte35SpliceInsertScheduleActionSettings.struct_class = Types::Scte35SpliceInsertScheduleActionSettings
+
     Scte35TimeSignalApos.add_member(:ad_avail_offset, Shapes::ShapeRef.new(shape: __integerMinNegative1000Max1000, location_name: "adAvailOffset"))
     Scte35TimeSignalApos.add_member(:no_regional_blackout_flag, Shapes::ShapeRef.new(shape: Scte35AposNoRegionalBlackoutBehavior, location_name: "noRegionalBlackoutFlag"))
     Scte35TimeSignalApos.add_member(:web_delivery_allowed_flag, Shapes::ShapeRef.new(shape: Scte35AposWebDeliveryAllowedBehavior, location_name: "webDeliveryAllowedFlag"))
     Scte35TimeSignalApos.struct_class = Types::Scte35TimeSignalApos
+
+    Scte35TimeSignalScheduleActionSettings.add_member(:scte_35_descriptors, Shapes::ShapeRef.new(shape: __listOfScte35Descriptor, required: true, location_name: "scte35Descriptors"))
+    Scte35TimeSignalScheduleActionSettings.struct_class = Types::Scte35TimeSignalScheduleActionSettings
 
     SmpteTtDestinationSettings.struct_class = Types::SmpteTtDestinationSettings
 
@@ -1290,13 +1609,30 @@ module Aws::MediaLive
     StartChannelResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     StartChannelResponse.add_member(:input_attachments, Shapes::ShapeRef.new(shape: __listOfInputAttachment, location_name: "inputAttachments"))
     StartChannelResponse.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
+    StartChannelResponse.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
     StartChannelResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     StartChannelResponse.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
     StartChannelResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     StartChannelResponse.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
     StartChannelResponse.struct_class = Types::StartChannelResponse
 
-    StaticKeySettings.add_member(:key_provider_server, Shapes::ShapeRef.new(shape: InputLocation, location_name: "keyProviderServer"))
+    StaticImageActivateScheduleActionSettings.add_member(:duration, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "duration"))
+    StaticImageActivateScheduleActionSettings.add_member(:fade_in, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "fadeIn"))
+    StaticImageActivateScheduleActionSettings.add_member(:fade_out, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "fadeOut"))
+    StaticImageActivateScheduleActionSettings.add_member(:height, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "height"))
+    StaticImageActivateScheduleActionSettings.add_member(:image, Shapes::ShapeRef.new(shape: InputLocation, required: true, location_name: "image"))
+    StaticImageActivateScheduleActionSettings.add_member(:image_x, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "imageX"))
+    StaticImageActivateScheduleActionSettings.add_member(:image_y, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "imageY"))
+    StaticImageActivateScheduleActionSettings.add_member(:layer, Shapes::ShapeRef.new(shape: __integerMin0Max7, location_name: "layer"))
+    StaticImageActivateScheduleActionSettings.add_member(:opacity, Shapes::ShapeRef.new(shape: __integerMin0Max100, location_name: "opacity"))
+    StaticImageActivateScheduleActionSettings.add_member(:width, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "width"))
+    StaticImageActivateScheduleActionSettings.struct_class = Types::StaticImageActivateScheduleActionSettings
+
+    StaticImageDeactivateScheduleActionSettings.add_member(:fade_out, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "fadeOut"))
+    StaticImageDeactivateScheduleActionSettings.add_member(:layer, Shapes::ShapeRef.new(shape: __integerMin0Max7, location_name: "layer"))
+    StaticImageDeactivateScheduleActionSettings.struct_class = Types::StaticImageDeactivateScheduleActionSettings
+
+    StaticKeySettings.add_member(:key_provider_server, Shapes::ShapeRef.new(shape: InputLocation, required: true, location_name: "keyProviderServer"))
     StaticKeySettings.add_member(:static_key_value, Shapes::ShapeRef.new(shape: __stringMin32Max32, required: true, location_name: "staticKeyValue"))
     StaticKeySettings.struct_class = Types::StaticKeySettings
 
@@ -1310,6 +1646,7 @@ module Aws::MediaLive
     StopChannelResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     StopChannelResponse.add_member(:input_attachments, Shapes::ShapeRef.new(shape: __listOfInputAttachment, location_name: "inputAttachments"))
     StopChannelResponse.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
+    StopChannelResponse.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
     StopChannelResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     StopChannelResponse.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
     StopChannelResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
@@ -1346,6 +1683,7 @@ module Aws::MediaLive
     UpdateChannel.add_member(:encoder_settings, Shapes::ShapeRef.new(shape: EncoderSettings, location_name: "encoderSettings"))
     UpdateChannel.add_member(:input_attachments, Shapes::ShapeRef.new(shape: __listOfInputAttachment, location_name: "inputAttachments"))
     UpdateChannel.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
+    UpdateChannel.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
     UpdateChannel.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     UpdateChannel.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     UpdateChannel.struct_class = Types::UpdateChannel
@@ -1355,6 +1693,7 @@ module Aws::MediaLive
     UpdateChannelRequest.add_member(:encoder_settings, Shapes::ShapeRef.new(shape: EncoderSettings, location_name: "encoderSettings"))
     UpdateChannelRequest.add_member(:input_attachments, Shapes::ShapeRef.new(shape: __listOfInputAttachment, location_name: "inputAttachments"))
     UpdateChannelRequest.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
+    UpdateChannelRequest.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
     UpdateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     UpdateChannelRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     UpdateChannelRequest.struct_class = Types::UpdateChannelRequest
@@ -1465,6 +1804,8 @@ module Aws::MediaLive
 
     __listOfInputWhitelistRuleCidr.member = Shapes::ShapeRef.new(shape: InputWhitelistRuleCidr)
 
+    __listOfOffering.member = Shapes::ShapeRef.new(shape: Offering)
+
     __listOfOutput.member = Shapes::ShapeRef.new(shape: Output)
 
     __listOfOutputDestination.member = Shapes::ShapeRef.new(shape: OutputDestination)
@@ -1472,6 +1813,12 @@ module Aws::MediaLive
     __listOfOutputDestinationSettings.member = Shapes::ShapeRef.new(shape: OutputDestinationSettings)
 
     __listOfOutputGroup.member = Shapes::ShapeRef.new(shape: OutputGroup)
+
+    __listOfReservation.member = Shapes::ShapeRef.new(shape: Reservation)
+
+    __listOfScheduleAction.member = Shapes::ShapeRef.new(shape: ScheduleAction)
+
+    __listOfScte35Descriptor.member = Shapes::ShapeRef.new(shape: Scte35Descriptor)
 
     __listOfValidationError.member = Shapes::ShapeRef.new(shape: ValidationError)
 
@@ -1486,13 +1833,33 @@ module Aws::MediaLive
       api.version = "2017-10-14"
 
       api.metadata = {
+        "apiVersion" => "2017-10-14",
         "endpointPrefix" => "medialive",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "serviceAbbreviation" => "MediaLive",
         "serviceFullName" => "AWS Elemental MediaLive",
+        "serviceId" => "MediaLive",
         "signatureVersion" => "v4",
         "signingName" => "medialive",
+        "uid" => "medialive-2017-10-14",
       }
+
+      api.add_operation(:batch_update_schedule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchUpdateSchedule"
+        o.http_method = "PUT"
+        o.http_request_uri = "/prod/channels/{channelId}/schedule"
+        o.input = Shapes::ShapeRef.new(shape: BatchUpdateScheduleRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchUpdateScheduleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
 
       api.add_operation(:create_channel, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateChannel"
@@ -1500,8 +1867,8 @@ module Aws::MediaLive
         o.http_request_uri = "/prod/channels"
         o.input = Shapes::ShapeRef.new(shape: CreateChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateChannelResponse)
-        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
@@ -1585,6 +1952,22 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:delete_reservation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteReservation"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/prod/reservations/{reservationId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteReservationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteReservationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:describe_channel, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeChannel"
         o.http_method = "GET"
@@ -1628,6 +2011,57 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:describe_offering, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeOffering"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/offerings/{offeringId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeOfferingRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeOfferingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:describe_reservation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeReservation"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/reservations/{reservationId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeReservationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeReservationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:describe_schedule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeSchedule"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/channels/{channelId}/schedule"
+        o.input = Shapes::ShapeRef.new(shape: DescribeScheduleRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeScheduleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_channels, Seahorse::Model::Operation.new.tap do |o|
@@ -1690,6 +2124,62 @@ module Aws::MediaLive
         )
       end)
 
+      api.add_operation(:list_offerings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListOfferings"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/offerings"
+        o.input = Shapes::ShapeRef.new(shape: ListOfferingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListOfferingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_reservations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListReservations"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/reservations"
+        o.input = Shapes::ShapeRef.new(shape: ListReservationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListReservationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:purchase_offering, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PurchaseOffering"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/offerings/{offeringId}/purchase"
+        o.input = Shapes::ShapeRef.new(shape: PurchaseOfferingRequest)
+        o.output = Shapes::ShapeRef.new(shape: PurchaseOfferingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:start_channel, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartChannel"
         o.http_method = "POST"
@@ -1728,8 +2218,8 @@ module Aws::MediaLive
         o.http_request_uri = "/prod/channels/{channelId}"
         o.input = Shapes::ShapeRef.new(shape: UpdateChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateChannelResponse)
-        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)

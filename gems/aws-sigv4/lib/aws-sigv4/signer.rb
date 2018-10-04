@@ -166,11 +166,11 @@ module Aws
       #     )
       #
       #     # Apply the following hash of headers to your HTTP request
-      #     signature.headers['Host']
-      #     signature.headers['X-Amz-Date']
-      #     signature.headers['X-Amz-Security-Token']
-      #     signature.headers['X-Amz-Content-Sha256']
-      #     signature.headers['Authorization']
+      #     signature.headers['host']
+      #     signature.headers['x-amz-date']
+      #     signature.headers['x-amz-security-token']
+      #     signature.headers['x-amz-content-sha256']
+      #     signature.headers['authorization']
       #
       # In addition to computing the signature headers, the canonicalized
       # request, string to sign and content sha256 checksum are also available.
@@ -473,7 +473,7 @@ module Aws
           OpenSSL::Digest::SHA256.file(value).hexdigest
         elsif value.respond_to?(:read)
           sha256 = OpenSSL::Digest::SHA256.new
-          while chunk = value.read(1024 * 1024) # 1MB
+          while chunk = value.read(1024 * 1024, buffer ||= "") # 1MB
             sha256.update(chunk)
           end
           value.rewind

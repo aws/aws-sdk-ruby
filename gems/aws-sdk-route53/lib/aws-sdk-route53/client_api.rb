@@ -1047,10 +1047,15 @@ module Aws::Route53
       api.version = "2013-04-01"
 
       api.metadata = {
+        "apiVersion" => "2013-04-01",
         "endpointPrefix" => "route53",
+        "globalEndpoint" => "route53.amazonaws.com",
         "protocol" => "rest-xml",
+        "serviceAbbreviation" => "Route 53",
         "serviceFullName" => "Amazon Route 53",
+        "serviceId" => "Route 53",
         "signatureVersion" => "v4",
+        "uid" => "route53-2013-04-01",
       }
 
       api.add_operation(:associate_vpc_with_hosted_zone, Seahorse::Model::Operation.new.tap do |o|

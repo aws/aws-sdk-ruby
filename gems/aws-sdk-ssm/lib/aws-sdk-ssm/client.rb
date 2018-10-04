@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -47,6 +49,8 @@ module Aws::SSM
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -92,6 +96,22 @@ module Aws::SSM
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::SSM
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -342,8 +373,8 @@ module Aws::SSM
     # instances or targets.
     #
     # When you associate a document with one or more instances using
-    # instance IDs or tags, the SSM Agent running on the instance processes
-    # the document and configures the instance as specified.
+    # instance IDs or tags, SSM Agent running on the instance processes the
+    # document and configures the instance as specified.
     #
     # If you associate a document with an instance that already has an
     # associated document, the system throws the AssociationAlreadyExists
@@ -451,8 +482,8 @@ module Aws::SSM
     # instances or targets.
     #
     # When you associate a document with one or more instances using
-    # instance IDs or tags, the SSM Agent running on the instance processes
-    # the document and configures the instance as specified.
+    # instance IDs or tags, SSM Agent running on the instance processes the
+    # document and configures the instance as specified.
     #
     # If you associate a document with an instance that already has an
     # associated document, the system throws the AssociationAlreadyExists
@@ -606,7 +637,7 @@ module Aws::SSM
     #   resp = client.create_document({
     #     content: "DocumentContent", # required
     #     name: "DocumentName", # required
-    #     document_type: "Command", # accepts Command, Policy, Automation
+    #     document_type: "Command", # accepts Command, Policy, Automation, Session
     #     document_format: "YAML", # accepts YAML, JSON
     #     target_type: "TargetType",
     #   })
@@ -629,7 +660,7 @@ module Aws::SSM
     #   resp.document_description.parameters[0].default_value #=> String
     #   resp.document_description.platform_types #=> Array
     #   resp.document_description.platform_types[0] #=> String, one of "Windows", "Linux"
-    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation"
+    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session"
     #   resp.document_description.schema_version #=> String
     #   resp.document_description.latest_version #=> String
     #   resp.document_description.default_version #=> String
@@ -791,7 +822,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_patch_baseline({
-    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
+    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
     #     name: "BaselineName", # required
     #     global_filters: {
     #       patch_filters: [ # required
@@ -857,11 +888,12 @@ module Aws::SSM
     # We also recommend that you secure access to the Amazon S3 bucket by
     # creating a restrictive bucket policy. To view an example of a
     # restrictive Amazon S3 bucket policy for Resource Data Sync, see
-    # [Configuring Resource Data Sync for Inventory][1].
+    # [Create a Resource Data Sync for Inventory][1] in the *AWS Systems
+    # Manager User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-configuring.html#sysman-inventory-datasync
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-datasync-create.html
     #
     # @option params [required, String] :sync_name
     #   A name for the configuration.
@@ -1192,7 +1224,7 @@ module Aws::SSM
     # Removes the server or virtual machine from the list of registered
     # servers. You can reregister the instance again at any time. If you
     # don't plan to use Run Command on the server, we suggest uninstalling
-    # the SSM Agent first.
+    # SSM Agent first.
     #
     # @option params [required, String] :instance_id
     #   The ID assigned to the managed instance when you registered it using
@@ -1459,6 +1491,147 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Use this API action to view information about a specific execution of
+    # a specific association.
+    #
+    # @option params [required, String] :association_id
+    #   The association ID that includes the execution for which you want to
+    #   view details.
+    #
+    # @option params [required, String] :execution_id
+    #   The execution ID for which you want to view details.
+    #
+    # @option params [Array<Types::AssociationExecutionTargetsFilter>] :filters
+    #   Filters for the request. You can specify the following filters and
+    #   values.
+    #
+    #   Status (EQUAL)
+    #
+    #   ResourceId (EQUAL)
+    #
+    #   ResourceType (EQUAL)
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @option params [String] :next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #
+    # @return [Types::DescribeAssociationExecutionTargetsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAssociationExecutionTargetsResult#association_execution_targets #association_execution_targets} => Array&lt;Types::AssociationExecutionTarget&gt;
+    #   * {Types::DescribeAssociationExecutionTargetsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_association_execution_targets({
+    #     association_id: "AssociationId", # required
+    #     execution_id: "AssociationExecutionId", # required
+    #     filters: [
+    #       {
+    #         key: "Status", # required, accepts Status, ResourceId, ResourceType
+    #         value: "AssociationExecutionTargetsFilterValue", # required
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.association_execution_targets #=> Array
+    #   resp.association_execution_targets[0].association_id #=> String
+    #   resp.association_execution_targets[0].association_version #=> String
+    #   resp.association_execution_targets[0].execution_id #=> String
+    #   resp.association_execution_targets[0].resource_id #=> String
+    #   resp.association_execution_targets[0].resource_type #=> String
+    #   resp.association_execution_targets[0].status #=> String
+    #   resp.association_execution_targets[0].detailed_status #=> String
+    #   resp.association_execution_targets[0].last_execution_date #=> Time
+    #   resp.association_execution_targets[0].output_source.output_source_id #=> String
+    #   resp.association_execution_targets[0].output_source.output_source_type #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociationExecutionTargets AWS API Documentation
+    #
+    # @overload describe_association_execution_targets(params = {})
+    # @param [Hash] params ({})
+    def describe_association_execution_targets(params = {}, options = {})
+      req = build_request(:describe_association_execution_targets, params)
+      req.send_request(options)
+    end
+
+    # Use this API action to view all executions for a specific association
+    # ID.
+    #
+    # @option params [required, String] :association_id
+    #   The association ID for which you want to view execution history
+    #   details.
+    #
+    # @option params [Array<Types::AssociationExecutionFilter>] :filters
+    #   Filters for the request. You can specify the following filters and
+    #   values.
+    #
+    #   ExecutionId (EQUAL)
+    #
+    #   Status (EQUAL)
+    #
+    #   CreatedTime (EQUAL, GREATER\_THAN, LESS\_THAN)
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @option params [String] :next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #
+    # @return [Types::DescribeAssociationExecutionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAssociationExecutionsResult#association_executions #association_executions} => Array&lt;Types::AssociationExecution&gt;
+    #   * {Types::DescribeAssociationExecutionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_association_executions({
+    #     association_id: "AssociationId", # required
+    #     filters: [
+    #       {
+    #         key: "ExecutionId", # required, accepts ExecutionId, Status, CreatedTime
+    #         value: "AssociationExecutionFilterValue", # required
+    #         type: "EQUAL", # required, accepts EQUAL, LESS_THAN, GREATER_THAN
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.association_executions #=> Array
+    #   resp.association_executions[0].association_id #=> String
+    #   resp.association_executions[0].association_version #=> String
+    #   resp.association_executions[0].execution_id #=> String
+    #   resp.association_executions[0].status #=> String
+    #   resp.association_executions[0].detailed_status #=> String
+    #   resp.association_executions[0].created_time #=> Time
+    #   resp.association_executions[0].last_execution_date #=> Time
+    #   resp.association_executions[0].resource_count_by_status #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociationExecutions AWS API Documentation
+    #
+    # @overload describe_association_executions(params = {})
+    # @param [Hash] params ({})
+    def describe_association_executions(params = {}, options = {})
+      req = build_request(:describe_association_executions, params)
+      req.send_request(options)
+    end
+
     # Provides details about all active and terminated Automation
     # executions.
     #
@@ -1516,6 +1689,10 @@ module Aws::SSM
     #   resp.automation_execution_metadata_list[0].targets[0].key #=> String
     #   resp.automation_execution_metadata_list[0].targets[0].values #=> Array
     #   resp.automation_execution_metadata_list[0].targets[0].values[0] #=> String
+    #   resp.automation_execution_metadata_list[0].target_maps #=> Array
+    #   resp.automation_execution_metadata_list[0].target_maps[0] #=> Hash
+    #   resp.automation_execution_metadata_list[0].target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.automation_execution_metadata_list[0].target_maps[0]["TargetMapKey"][0] #=> String
     #   resp.automation_execution_metadata_list[0].resolved_targets.parameter_values #=> Array
     #   resp.automation_execution_metadata_list[0].resolved_targets.parameter_values[0] #=> String
     #   resp.automation_execution_metadata_list[0].resolved_targets.truncated #=> Boolean
@@ -1605,6 +1782,11 @@ module Aws::SSM
     #   resp.step_executions[0].overridden_parameters #=> Hash
     #   resp.step_executions[0].overridden_parameters["AutomationParameterKey"] #=> Array
     #   resp.step_executions[0].overridden_parameters["AutomationParameterKey"][0] #=> String
+    #   resp.step_executions[0].is_end #=> Boolean
+    #   resp.step_executions[0].next_step #=> String
+    #   resp.step_executions[0].is_critical #=> Boolean
+    #   resp.step_executions[0].valid_next_steps #=> Array
+    #   resp.step_executions[0].valid_next_steps[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAutomationStepExecutions AWS API Documentation
@@ -1711,7 +1893,7 @@ module Aws::SSM
     #   resp.document.parameters[0].default_value #=> String
     #   resp.document.platform_types #=> Array
     #   resp.document.platform_types[0] #=> String, one of "Windows", "Linux"
-    #   resp.document.document_type #=> String, one of "Command", "Policy", "Automation"
+    #   resp.document.document_type #=> String, one of "Command", "Policy", "Automation", "Session"
     #   resp.document.schema_version #=> String
     #   resp.document.latest_version #=> String
     #   resp.document.default_version #=> String
@@ -1930,9 +2112,21 @@ module Aws::SSM
     # instances. If you specify an instance ID that is not valid or an
     # instance that you do not own, you receive an error.
     #
+    # <note markdown="1"> The IamRole field for this API action is the Amazon Identity and
+    # Access Management (IAM) role assigned to on-premises instances. This
+    # call does not return the IAM role for Amazon EC2 instances.
+    #
+    #  </note>
+    #
     # @option params [Array<Types::InstanceInformationFilter>] :instance_information_filter_list
-    #   One or more filters. Use a filter to return a more specific list of
-    #   instances.
+    #   This is a legacy method. We recommend that you don't use this method.
+    #   Instead, use the InstanceInformationFilter action. The
+    #   `InstanceInformationFilter` action enables you to return instance
+    #   information by using tags that are specified as a key-value mapping.
+    #
+    #   If you do use this method, then you can't use the
+    #   `InstanceInformationFilter` action. Using this method and the
+    #   `InstanceInformationFilter` action causes an exception error.
     #
     # @option params [Array<Types::InstanceInformationStringFilter>] :filters
     #   One or more filters. Use a filter to return a more specific list of
@@ -2743,7 +2937,7 @@ module Aws::SSM
     #   resp.baseline_identities #=> Array
     #   resp.baseline_identities[0].baseline_id #=> String
     #   resp.baseline_identities[0].baseline_name #=> String
-    #   resp.baseline_identities[0].operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
+    #   resp.baseline_identities[0].operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
     #   resp.baseline_identities[0].baseline_description #=> String
     #   resp.baseline_identities[0].default_baseline #=> Boolean
     #   resp.next_token #=> String
@@ -2833,7 +3027,7 @@ module Aws::SSM
     #   resp.mappings[0].patch_group #=> String
     #   resp.mappings[0].baseline_identity.baseline_id #=> String
     #   resp.mappings[0].baseline_identity.baseline_name #=> String
-    #   resp.mappings[0].baseline_identity.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
+    #   resp.mappings[0].baseline_identity.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
     #   resp.mappings[0].baseline_identity.baseline_description #=> String
     #   resp.mappings[0].baseline_identity.default_baseline #=> Boolean
     #   resp.next_token #=> String
@@ -2844,6 +3038,69 @@ module Aws::SSM
     # @param [Hash] params ({})
     def describe_patch_groups(params = {}, options = {})
       req = build_request(:describe_patch_groups, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of all active sessions (both connected and
+    # disconnected) or terminated sessions from the past 30 days.
+    #
+    # @option params [required, String] :state
+    #   The session status to retrieve a list of sessions for. For example,
+    #   "active".
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #
+    # @option params [Array<Types::SessionFilter>] :filters
+    #   One or more filters to limit the type of sessions returned by the
+    #   request.
+    #
+    # @return [Types::DescribeSessionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSessionsResponse#sessions #sessions} => Array&lt;Types::Session&gt;
+    #   * {Types::DescribeSessionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_sessions({
+    #     state: "Active", # required, accepts Active, History
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     filters: [
+    #       {
+    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Target, Owner, Status
+    #         value: "SessionFilterValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sessions #=> Array
+    #   resp.sessions[0].session_id #=> String
+    #   resp.sessions[0].target #=> String
+    #   resp.sessions[0].status #=> String, one of "Connected", "Connecting", "Disconnected", "Terminated", "Terminating", "Failed"
+    #   resp.sessions[0].start_date #=> Time
+    #   resp.sessions[0].end_date #=> Time
+    #   resp.sessions[0].document_name #=> String
+    #   resp.sessions[0].owner #=> String
+    #   resp.sessions[0].details #=> String
+    #   resp.sessions[0].output_url.s3_output_url #=> String
+    #   resp.sessions[0].output_url.cloud_watch_output_url #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeSessions AWS API Documentation
+    #
+    # @overload describe_sessions(params = {})
+    # @param [Hash] params ({})
+    def describe_sessions(params = {}, options = {})
+      req = build_request(:describe_sessions, params)
       req.send_request(options)
     end
 
@@ -2898,6 +3155,11 @@ module Aws::SSM
     #   resp.automation_execution.step_executions[0].overridden_parameters #=> Hash
     #   resp.automation_execution.step_executions[0].overridden_parameters["AutomationParameterKey"] #=> Array
     #   resp.automation_execution.step_executions[0].overridden_parameters["AutomationParameterKey"][0] #=> String
+    #   resp.automation_execution.step_executions[0].is_end #=> Boolean
+    #   resp.automation_execution.step_executions[0].next_step #=> String
+    #   resp.automation_execution.step_executions[0].is_critical #=> Boolean
+    #   resp.automation_execution.step_executions[0].valid_next_steps #=> Array
+    #   resp.automation_execution.step_executions[0].valid_next_steps[0] #=> String
     #   resp.automation_execution.step_executions_truncated #=> Boolean
     #   resp.automation_execution.parameters #=> Hash
     #   resp.automation_execution.parameters["AutomationParameterKey"] #=> Array
@@ -2916,6 +3178,10 @@ module Aws::SSM
     #   resp.automation_execution.targets[0].key #=> String
     #   resp.automation_execution.targets[0].values #=> Array
     #   resp.automation_execution.targets[0].values[0] #=> String
+    #   resp.automation_execution.target_maps #=> Array
+    #   resp.automation_execution.target_maps[0] #=> Hash
+    #   resp.automation_execution.target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.automation_execution.target_maps[0]["TargetMapKey"][0] #=> String
     #   resp.automation_execution.resolved_targets.parameter_values #=> Array
     #   resp.automation_execution.resolved_targets.parameter_values[0] #=> String
     #   resp.automation_execution.resolved_targets.truncated #=> Boolean
@@ -2966,6 +3232,7 @@ module Aws::SSM
     #   * {Types::GetCommandInvocationResult#standard_output_url #standard_output_url} => String
     #   * {Types::GetCommandInvocationResult#standard_error_content #standard_error_content} => String
     #   * {Types::GetCommandInvocationResult#standard_error_url #standard_error_url} => String
+    #   * {Types::GetCommandInvocationResult#cloud_watch_output_config #cloud_watch_output_config} => Types::CloudWatchOutputConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -2993,6 +3260,8 @@ module Aws::SSM
     #   resp.standard_output_url #=> String
     #   resp.standard_error_content #=> String
     #   resp.standard_error_url #=> String
+    #   resp.cloud_watch_output_config.cloud_watch_log_group_name #=> String
+    #   resp.cloud_watch_output_config.cloud_watch_output_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetCommandInvocation AWS API Documentation
     #
@@ -3000,6 +3269,38 @@ module Aws::SSM
     # @param [Hash] params ({})
     def get_command_invocation(params = {}, options = {})
       req = build_request(:get_command_invocation, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the Session Manager connection status for an instance to
+    # determine whether it is connected and ready to receive Session Manager
+    # connections.
+    #
+    # @option params [required, String] :target
+    #   The ID of the instance.
+    #
+    # @return [Types::GetConnectionStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConnectionStatusResponse#target #target} => String
+    #   * {Types::GetConnectionStatusResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_connection_status({
+    #     target: "SessionTarget", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.target #=> String
+    #   resp.status #=> String, one of "Connected", "NotConnected"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetConnectionStatus AWS API Documentation
+    #
+    # @overload get_connection_status(params = {})
+    # @param [Hash] params ({})
+    def get_connection_status(params = {}, options = {})
+      req = build_request(:get_connection_status, params)
       req.send_request(options)
     end
 
@@ -3021,13 +3322,13 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_default_patch_baseline({
-    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
+    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
     #   })
     #
     # @example Response structure
     #
     #   resp.baseline_id #=> String
-    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDefaultPatchBaseline AWS API Documentation
     #
@@ -3112,7 +3413,7 @@ module Aws::SSM
     #   resp.name #=> String
     #   resp.document_version #=> String
     #   resp.content #=> String
-    #   resp.document_type #=> String, one of "Command", "Policy", "Automation"
+    #   resp.document_type #=> String, one of "Command", "Policy", "Automation", "Session"
     #   resp.document_format #=> String, one of "YAML", "JSON"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDocument AWS API Documentation
@@ -3160,7 +3461,7 @@ module Aws::SSM
     #       {
     #         key: "InventoryFilterKey", # required
     #         values: ["InventoryFilterValue"], # required
-    #         type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan
+    #         type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
     #       },
     #     ],
     #     aggregators: [
@@ -3169,6 +3470,18 @@ module Aws::SSM
     #         aggregators: {
     #           # recursive InventoryAggregatorList
     #         },
+    #         groups: [
+    #           {
+    #             name: "InventoryGroupName", # required
+    #             filters: [ # required
+    #               {
+    #                 key: "InventoryFilterKey", # required
+    #                 values: ["InventoryFilterValue"], # required
+    #                 type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       },
     #     ],
     #     result_attributes: [
@@ -3558,7 +3871,8 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Get information about a parameter by using the parameter name.
+    # Get information about a parameter by using the parameter name. Don't
+    # confuse this API action with the GetParameters API action.
     #
     # @option params [required, String] :name
     #   The name of the parameter you want to query.
@@ -3584,6 +3898,10 @@ module Aws::SSM
     #   resp.parameter.type #=> String, one of "String", "StringList", "SecureString"
     #   resp.parameter.value #=> String
     #   resp.parameter.version #=> Integer
+    #   resp.parameter.selector #=> String
+    #   resp.parameter.source_result #=> String
+    #   resp.parameter.last_modified_date #=> Time
+    #   resp.parameter.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameter AWS API Documentation
     #
@@ -3638,6 +3956,8 @@ module Aws::SSM
     #   resp.parameters[0].value #=> String
     #   resp.parameters[0].allowed_pattern #=> String
     #   resp.parameters[0].version #=> Integer
+    #   resp.parameters[0].labels #=> Array
+    #   resp.parameters[0].labels[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameterHistory AWS API Documentation
@@ -3649,7 +3969,8 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Get details of a parameter.
+    # Get details of a parameter. Don't confuse this API action with the
+    # GetParameter API action.
     #
     # @option params [required, Array<String>] :names
     #   Names of the parameters for which you want to query information.
@@ -3678,6 +3999,10 @@ module Aws::SSM
     #   resp.parameters[0].type #=> String, one of "String", "StringList", "SecureString"
     #   resp.parameters[0].value #=> String
     #   resp.parameters[0].version #=> Integer
+    #   resp.parameters[0].selector #=> String
+    #   resp.parameters[0].source_result #=> String
+    #   resp.parameters[0].last_modified_date #=> Time
+    #   resp.parameters[0].arn #=> String
     #   resp.invalid_parameters #=> Array
     #   resp.invalid_parameters[0] #=> String
     #
@@ -3691,7 +4016,8 @@ module Aws::SSM
     end
 
     # Retrieve parameters in a specific hierarchy. For more information, see
-    # [Working with Systems Manager Parameters][1].
+    # [Working with Systems Manager Parameters][1] in the *AWS Systems
+    # Manager User Guide*.
     #
     # Request results are returned on a best-effort basis. If you specify
     # `MaxResults` in the request, the response includes information up to
@@ -3712,8 +4038,8 @@ module Aws::SSM
     #
     # @option params [required, String] :path
     #   The hierarchy for the parameter. Hierarchies start with a forward
-    #   slash (/) and end with the parameter name. A hierarchy can have a
-    #   maximum of 15 levels. Here is an example of a hierarchy:
+    #   slash (/) and end with the parameter name. A parameter name hierarchy
+    #   can have a maximum of 15 levels. Here is an example of a hierarchy:
     #   `/Finance/Prod/IAD/WinServ2016/license33`
     #
     # @option params [Boolean] :recursive
@@ -3773,6 +4099,10 @@ module Aws::SSM
     #   resp.parameters[0].type #=> String, one of "String", "StringList", "SecureString"
     #   resp.parameters[0].value #=> String
     #   resp.parameters[0].version #=> Integer
+    #   resp.parameters[0].selector #=> String
+    #   resp.parameters[0].source_result #=> String
+    #   resp.parameters[0].last_modified_date #=> Time
+    #   resp.parameters[0].arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParametersByPath AWS API Documentation
@@ -3816,7 +4146,7 @@ module Aws::SSM
     #
     #   resp.baseline_id #=> String
     #   resp.name #=> String
-    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
     #   resp.global_filters.patch_filters #=> Array
     #   resp.global_filters.patch_filters[0].key #=> String, one of "PRODUCT", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID", "SECTION", "PRIORITY", "SEVERITY"
     #   resp.global_filters.patch_filters[0].values #=> Array
@@ -3875,14 +4205,14 @@ module Aws::SSM
     #
     #   resp = client.get_patch_baseline_for_patch_group({
     #     patch_group: "PatchGroup", # required
-    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
+    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
     #   })
     #
     # @example Response structure
     #
     #   resp.baseline_id #=> String
     #   resp.patch_group #=> String
-    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaselineForPatchGroup AWS API Documentation
     #
@@ -3890,6 +4220,76 @@ module Aws::SSM
     # @param [Hash] params ({})
     def get_patch_baseline_for_patch_group(params = {}, options = {})
       req = build_request(:get_patch_baseline_for_patch_group, params)
+      req.send_request(options)
+    end
+
+    # A parameter label is a user-defined alias to help you manage different
+    # versions of a parameter. When you modify a parameter, Systems Manager
+    # automatically saves a new version and increments the version number by
+    # one. A label can help you remember the purpose of a parameter when
+    # there are multiple versions.
+    #
+    # Parameter labels have the following requirements and restrictions.
+    #
+    # * A version of a parameter can have a maximum of 10 labels.
+    #
+    # * You can't attach the same label to different versions of the same
+    #   parameter. For example, if version 1 has the label Production, then
+    #   you can't attach Production to version 2.
+    #
+    # * You can move a label from one version of a parameter to another.
+    #
+    # * You can't create a label when you create a new parameter. You must
+    #   attach a label to a specific version of a parameter.
+    #
+    # * You can't delete a parameter label. If you no longer want to use a
+    #   parameter label, then you must move it to a different version of a
+    #   parameter.
+    #
+    # * A label can have a maximum of 100 characters.
+    #
+    # * Labels can contain letters (case sensitive), numbers, periods (.),
+    #   hyphens (-), or underscores (\_).
+    #
+    # * Labels can't begin with a number, "aws," or "ssm" (not case
+    #   sensitive). If a label fails to meet these requirements, then the
+    #   label is not associated with a parameter and the system displays it
+    #   in the list of InvalidLabels.
+    #
+    # @option params [required, String] :name
+    #   The parameter name on which you want to attach one or more labels.
+    #
+    # @option params [Integer] :parameter_version
+    #   The specific version of the parameter on which you want to attach one
+    #   or more labels. If no version is specified, the system attaches the
+    #   label to the latest version.)
+    #
+    # @option params [required, Array<String>] :labels
+    #   One or more labels to attach to the specified parameter version.
+    #
+    # @return [Types::LabelParameterVersionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::LabelParameterVersionResult#invalid_labels #invalid_labels} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.label_parameter_version({
+    #     name: "PSParameterName", # required
+    #     parameter_version: 1,
+    #     labels: ["ParameterLabel"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.invalid_labels #=> Array
+    #   resp.invalid_labels[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/LabelParameterVersion AWS API Documentation
+    #
+    # @overload label_parameter_version(params = {})
+    # @param [Hash] params ({})
+    def label_parameter_version(params = {}, options = {})
+      req = build_request(:label_parameter_version, params)
       req.send_request(options)
     end
 
@@ -4060,7 +4460,7 @@ module Aws::SSM
     #     next_token: "NextToken",
     #     filters: [
     #       {
-    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status
+    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status, ExecutionStage, DocumentName
     #         value: "CommandFilterValue", # required
     #       },
     #     ],
@@ -4100,6 +4500,8 @@ module Aws::SSM
     #   resp.command_invocations[0].notification_config.notification_events #=> Array
     #   resp.command_invocations[0].notification_config.notification_events[0] #=> String, one of "All", "InProgress", "Success", "TimedOut", "Cancelled", "Failed"
     #   resp.command_invocations[0].notification_config.notification_type #=> String, one of "Command", "Invocation"
+    #   resp.command_invocations[0].cloud_watch_output_config.cloud_watch_log_group_name #=> String
+    #   resp.command_invocations[0].cloud_watch_output_config.cloud_watch_output_enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListCommandInvocations AWS API Documentation
@@ -4146,7 +4548,7 @@ module Aws::SSM
     #     next_token: "NextToken",
     #     filters: [
     #       {
-    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status
+    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status, ExecutionStage, DocumentName
     #         value: "CommandFilterValue", # required
     #       },
     #     ],
@@ -4180,11 +4582,14 @@ module Aws::SSM
     #   resp.commands[0].target_count #=> Integer
     #   resp.commands[0].completed_count #=> Integer
     #   resp.commands[0].error_count #=> Integer
+    #   resp.commands[0].delivery_timed_out_count #=> Integer
     #   resp.commands[0].service_role #=> String
     #   resp.commands[0].notification_config.notification_arn #=> String
     #   resp.commands[0].notification_config.notification_events #=> Array
     #   resp.commands[0].notification_config.notification_events[0] #=> String, one of "All", "InProgress", "Success", "TimedOut", "Cancelled", "Failed"
     #   resp.commands[0].notification_config.notification_type #=> String, one of "Command", "Invocation"
+    #   resp.commands[0].cloud_watch_output_config.cloud_watch_log_group_name #=> String
+    #   resp.commands[0].cloud_watch_output_config.cloud_watch_output_enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListCommands AWS API Documentation
@@ -4432,7 +4837,7 @@ module Aws::SSM
     #   resp.document_identifiers[0].platform_types #=> Array
     #   resp.document_identifiers[0].platform_types[0] #=> String, one of "Windows", "Linux"
     #   resp.document_identifiers[0].document_version #=> String
-    #   resp.document_identifiers[0].document_type #=> String, one of "Command", "Policy", "Automation"
+    #   resp.document_identifiers[0].document_type #=> String, one of "Command", "Policy", "Automation", "Session"
     #   resp.document_identifiers[0].schema_version #=> String
     #   resp.document_identifiers[0].document_format #=> String, one of "YAML", "JSON"
     #   resp.document_identifiers[0].target_type #=> String
@@ -4489,7 +4894,7 @@ module Aws::SSM
     #       {
     #         key: "InventoryFilterKey", # required
     #         values: ["InventoryFilterValue"], # required
-    #         type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan
+    #         type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
     #       },
     #     ],
     #     next_token: "NextToken",
@@ -4893,9 +5298,26 @@ module Aws::SSM
     #   the parameter path and name. For example:
     #   `/Dev/DBServer/MySQL/db-string13`
     #
-    #   For information about parameter name requirements and restrictions,
-    #   see [About Creating Systems Manager Parameters][1] in the *AWS Systems
-    #   Manager User Guide*.
+    #   Naming Constraints:
+    #
+    #   * Parameter names are case sensitive.
+    #
+    #   * A parameter name must be unique within an AWS Region
+    #
+    #   * A parameter name can't be prefixed with "aws" or "ssm"
+    #     (case-insensitive).
+    #
+    #   * Parameter names can include only the following symbols and letters:
+    #     `a-zA-Z0-9_.-/`
+    #
+    #   * A parameter name can't include spaces.
+    #
+    #   * Parameter hierarchies are limited to a maximum depth of fifteen
+    #     levels.
+    #
+    #   For additional information about valid values for parameter names, see
+    #   [Requirements and Constraints for Parameter Names][1] in the *AWS
+    #   Systems Manager User Guide*.
     #
     #   <note markdown="1"> The maximum length constraint listed below includes capacity for
     #   additional system attributes that are not part of the name. The
@@ -4906,10 +5328,11 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html#sysman-paramstore-su-create-about
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html
     #
     # @option params [String] :description
     #   Information about the parameter that you want to add to the system.
+    #   Optional but recommended.
     #
     #   Do not enter personally identifiable information in this field.
     #
@@ -4919,10 +5342,32 @@ module Aws::SSM
     # @option params [required, String] :type
     #   The type of parameter that you want to add to the system.
     #
+    #   Items in a `StringList` must be separated by a comma (,). You can't
+    #   use other punctuation or special character to escape items in the
+    #   list. If you have a parameter value that requires a comma, then use
+    #   the `String` data type.
+    #
+    #   <note markdown="1"> `SecureString` is not currently supported for AWS CloudFormation
+    #   templates or in the China Regions.
+    #
+    #    </note>
+    #
     # @option params [String] :key_id
-    #   The KMS Key ID that you want to use to encrypt a parameter when you
-    #   choose the SecureString data type. If you don't specify a key ID, the
-    #   system uses the default key associated with your AWS account.
+    #   The KMS Key ID that you want to use to encrypt a parameter. Either the
+    #   default AWS Key Management Service (AWS KMS) key automatically
+    #   assigned to your AWS account or a custom key. Required for parameters
+    #   that use the `SecureString` data type.
+    #
+    #   If you don't specify a key ID, the system uses the default key
+    #   associated with your AWS account.
+    #
+    #   * To use your default AWS KMS key, choose the `SecureString` data
+    #     type, and do *not* specify the `Key ID` when you create the
+    #     parameter. The system automatically populates `Key ID` with your
+    #     default KMS key.
+    #
+    #   * To use a custom KMS key, choose the `SecureString` data type with
+    #     the `Key ID` parameter.
     #
     # @option params [Boolean] :overwrite
     #   Overwrite an existing parameter. If not specified, will default to
@@ -5117,8 +5562,24 @@ module Aws::SSM
     # @option params [required, String] :task_arn
     #   The ARN of the task to execute
     #
-    # @option params [required, String] :service_role_arn
-    #   The role that should be assumed when executing the task.
+    # @option params [String] :service_role_arn
+    #   The role to assume when running the Maintenance Window task.
+    #
+    #   If you do not specify a service role ARN, Systems Manager will use
+    #   your account's service-linked role for Systems Manager by default. If
+    #   no service-linked role for Systems Manager exists in your account, it
+    #   will be created when you run `RegisterTaskWithMaintenanceWindow`
+    #   without specifying a service role ARN.
+    #
+    #   For more information, see [Service-Linked Role Permissions for Systems
+    #   Manager][1] and [Should I Use a Service-Linked Role or a Custom
+    #   Service Role to Run Maintenance Window Tasks? ][2] in the *AWS Systems
+    #   Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions
+    #   [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role
     #
     # @option params [required, String] :task_type
     #   The type of task being registered.
@@ -5192,7 +5653,7 @@ module Aws::SSM
     #       },
     #     ],
     #     task_arn: "MaintenanceWindowTaskArn", # required
-    #     service_role_arn: "ServiceRole", # required
+    #     service_role_arn: "ServiceRole",
     #     task_type: "RUN_COMMAND", # required, accepts RUN_COMMAND, AUTOMATION, STEP_FUNCTIONS, LAMBDA
     #     task_parameters: {
     #       "MaintenanceWindowTaskParameterName" => {
@@ -5312,6 +5773,46 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Reconnects a session to an instance after it has been disconnected.
+    # Connections can be resumed for disconnected sessions, but not
+    # terminated sessions.
+    #
+    # <note markdown="1"> This command is primarily for use by client machines to automatically
+    # reconnect during intermittent network issues. It is not intended for
+    # any other use.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :session_id
+    #   The ID of the disconnected session to resume.
+    #
+    # @return [Types::ResumeSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResumeSessionResponse#session_id #session_id} => String
+    #   * {Types::ResumeSessionResponse#token_value #token_value} => String
+    #   * {Types::ResumeSessionResponse#stream_url #stream_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.resume_session({
+    #     session_id: "SessionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session_id #=> String
+    #   resp.token_value #=> String
+    #   resp.stream_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResumeSession AWS API Documentation
+    #
+    # @overload resume_session(params = {})
+    # @param [Hash] params ({})
+    def resume_session(params = {}, options = {})
+      req = build_request(:resume_session, params)
+      req.send_request(options)
+    end
+
     # Sends a signal to an Automation execution to change the current
     # behavior or status of the execution.
     #
@@ -5355,7 +5856,8 @@ module Aws::SSM
     #   maximum of 50 IDs. If you prefer not to list individual instance IDs,
     #   you can instead send commands to a fleet of instances using the
     #   Targets parameter, which accepts EC2 tags. For more information about
-    #   how to use Targets, see [Sending Commands to a Fleet][1].
+    #   how to use Targets, see [Sending Commands to a Fleet][1] in the *AWS
+    #   Systems Manager User Guide*.
     #
     #
     #
@@ -5366,7 +5868,7 @@ module Aws::SSM
     #   Key,Value combination that you specify. Targets is required if you
     #   don't provide one or more instance IDs in the call. For more
     #   information about how to use Targets, see [Sending Commands to a
-    #   Fleet][1].
+    #   Fleet][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
@@ -5378,7 +5880,16 @@ module Aws::SSM
     #
     # @option params [String] :document_version
     #   The SSM document version to use in the request. You can specify
-    #   Default, Latest, or a specific version number.
+    #   $DEFAULT, $LATEST, or a specific version number. If you execute
+    #   commands by using the AWS CLI, then you must escape the first two
+    #   options by using a backslash. If you specify a version number, then
+    #   you don't need to use the backslash. For example:
+    #
+    #   --document-version "\\$DEFAULT"
+    #
+    #   --document-version "\\$LATEST"
+    #
+    #   --document-version "3"
     #
     # @option params [String] :document_hash
     #   The Sha256 or Sha1 hash created by the system when the document was
@@ -5424,11 +5935,12 @@ module Aws::SSM
     #   (Optional) The maximum number of instances that are allowed to execute
     #   the command at the same time. You can specify a number such as 10 or a
     #   percentage such as 10%. The default value is 50. For more information
-    #   about how to use MaxConcurrency, see [Using Concurrency Controls][1].
+    #   about how to use MaxConcurrency, see [Using Concurrency Controls][1]
+    #   in the *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-velocity.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-velocity
     #
     # @option params [String] :max_errors
     #   The maximum number of errors allowed without the command failing. When
@@ -5436,17 +5948,21 @@ module Aws::SSM
     #   systems stops sending the command to additional targets. You can
     #   specify a number like 10 or a percentage like 10%. The default value
     #   is 0. For more information about how to use MaxErrors, see [Using
-    #   Error Controls][1].
+    #   Error Controls][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-maxerrors.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-maxerrors
     #
     # @option params [String] :service_role_arn
     #   The IAM role that Systems Manager uses to send notifications.
     #
     # @option params [Types::NotificationConfig] :notification_config
     #   Configurations for sending notifications.
+    #
+    # @option params [Types::CloudWatchOutputConfig] :cloud_watch_output_config
+    #   Enables Systems Manager to send Run Command output to Amazon
+    #   CloudWatch Logs.
     #
     # @return [Types::SendCommandResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5482,6 +5998,10 @@ module Aws::SSM
     #       notification_events: ["All"], # accepts All, InProgress, Success, TimedOut, Cancelled, Failed
     #       notification_type: "Command", # accepts Command, Invocation
     #     },
+    #     cloud_watch_output_config: {
+    #       cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #       cloud_watch_output_enabled: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -5511,11 +6031,14 @@ module Aws::SSM
     #   resp.command.target_count #=> Integer
     #   resp.command.completed_count #=> Integer
     #   resp.command.error_count #=> Integer
+    #   resp.command.delivery_timed_out_count #=> Integer
     #   resp.command.service_role #=> String
     #   resp.command.notification_config.notification_arn #=> String
     #   resp.command.notification_config.notification_events #=> Array
     #   resp.command.notification_config.notification_events[0] #=> String, one of "All", "InProgress", "Success", "TimedOut", "Cancelled", "Failed"
     #   resp.command.notification_config.notification_type #=> String, one of "Command", "Invocation"
+    #   resp.command.cloud_watch_output_config.cloud_watch_log_group_name #=> String
+    #   resp.command.cloud_watch_output_config.cloud_watch_output_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendCommand AWS API Documentation
     #
@@ -5523,6 +6046,30 @@ module Aws::SSM
     # @param [Hash] params ({})
     def send_command(params = {}, options = {})
       req = build_request(:send_command, params)
+      req.send_request(options)
+    end
+
+    # Use this API action to execute an association immediately and only one
+    # time. This action can be helpful when troubleshooting associations.
+    #
+    # @option params [required, Array<String>] :association_ids
+    #   The association IDs that you want to execute immediately and only one
+    #   time.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_associations_once({
+    #     association_ids: ["AssociationId"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartAssociationsOnce AWS API Documentation
+    #
+    # @overload start_associations_once(params = {})
+    # @param [Hash] params ({})
+    def start_associations_once(params = {}, options = {})
+      req = build_request(:start_associations_once, params)
       req.send_request(options)
     end
 
@@ -5553,6 +6100,10 @@ module Aws::SSM
     # @option params [Array<Types::Target>] :targets
     #   A key-value mapping to target resources. Required if you specify
     #   TargetParameterName.
+    #
+    # @option params [Array<Hash>] :target_maps
+    #   A key-value mapping of document parameters to target resources. Both
+    #   Targets and TargetMaps cannot be specified together.
     #
     # @option params [String] :max_concurrency
     #   The maximum number of targets allowed to run this task in parallel.
@@ -5598,6 +6149,11 @@ module Aws::SSM
     #         values: ["TargetValue"],
     #       },
     #     ],
+    #     target_maps: [
+    #       {
+    #         "TargetMapKey" => ["TargetMapValue"],
+    #       },
+    #     ],
     #     max_concurrency: "MaxConcurrency",
     #     max_errors: "MaxErrors",
     #   })
@@ -5612,6 +6168,64 @@ module Aws::SSM
     # @param [Hash] params ({})
     def start_automation_execution(params = {}, options = {})
       req = build_request(:start_automation_execution, params)
+      req.send_request(options)
+    end
+
+    # Initiates a connection to a target (for example, an instance) for a
+    # Session Manager session. Returns a URL and token that can be used to
+    # open a WebSocket connection for sending input and receiving outputs.
+    #
+    # <note markdown="1"> AWS CLI usage: `start-session` is an interactive command that requires
+    # the Session Manager plugin to be installed on the client machine
+    # making the call. For information, see [ Install the Session Manager
+    # Plugin for the AWS CLI][1] in the *AWS Systems Manager User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html
+    #
+    # @option params [required, String] :target
+    #   The instance to connect to for the session.
+    #
+    # @option params [String] :document_name
+    #   The name of the SSM document to define the parameters and plugin
+    #   settings for the session. For example, `SSM-SessionManagerRunShell`.
+    #   If no document name is provided, a shell to the instance is launched
+    #   by default.
+    #
+    # @option params [Hash<String,Array>] :parameters
+    #   Reserved for future use.
+    #
+    # @return [Types::StartSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartSessionResponse#session_id #session_id} => String
+    #   * {Types::StartSessionResponse#token_value #token_value} => String
+    #   * {Types::StartSessionResponse#stream_url #stream_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_session({
+    #     target: "SessionTarget", # required
+    #     document_name: "DocumentARN",
+    #     parameters: {
+    #       "SessionManagerParameterName" => ["SessionManagerParameterValue"],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session_id #=> String
+    #   resp.token_value #=> String
+    #   resp.stream_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartSession AWS API Documentation
+    #
+    # @overload start_session(params = {})
+    # @param [Hash] params ({})
+    def start_session(params = {}, options = {})
+      req = build_request(:start_session, params)
       req.send_request(options)
     end
 
@@ -5639,6 +6253,36 @@ module Aws::SSM
     # @param [Hash] params ({})
     def stop_automation_execution(params = {}, options = {})
       req = build_request(:stop_automation_execution, params)
+      req.send_request(options)
+    end
+
+    # Permanently ends a session and closes the data connection between the
+    # Session Manager client and SSM Agent on the instance. A terminated
+    # session cannot be resumed.
+    #
+    # @option params [required, String] :session_id
+    #   The ID of the session to terminate.
+    #
+    # @return [Types::TerminateSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TerminateSessionResponse#session_id #session_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.terminate_session({
+    #     session_id: "SessionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/TerminateSession AWS API Documentation
+    #
+    # @overload terminate_session(params = {})
+    # @param [Hash] params ({})
+    def terminate_session(params = {}, options = {})
+      req = build_request(:terminate_session, params)
       req.send_request(options)
     end
 
@@ -5872,7 +6516,7 @@ module Aws::SSM
     #   resp.document_description.parameters[0].default_value #=> String
     #   resp.document_description.platform_types #=> Array
     #   resp.document_description.platform_types[0] #=> String, one of "Windows", "Linux"
-    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation"
+    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session"
     #   resp.document_description.schema_version #=> String
     #   resp.document_description.latest_version #=> String
     #   resp.document_description.default_version #=> String
@@ -6134,6 +6778,22 @@ module Aws::SSM
     # @option params [String] :service_role_arn
     #   The IAM service role ARN to modify. The system assumes this role
     #   during task execution.
+    #
+    #   If you do not specify a service role ARN, Systems Manager will use
+    #   your account's service-linked role for Systems Manager by default. If
+    #   no service-linked role for Systems Manager exists in your account, it
+    #   will be created when you run `RegisterTaskWithMaintenanceWindow`
+    #   without specifying a service role ARN.
+    #
+    #   For more information, see [Service-Linked Role Permissions for Systems
+    #   Manager][1] and [Should I Use a Service-Linked Role or a Custom
+    #   Service Role to Run Maintenance Window Tasks? ][2] in the *AWS Systems
+    #   Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions
+    #   [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role
     #
     # @option params [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>] :task_parameters
     #   The parameters to modify.
@@ -6489,7 +7149,7 @@ module Aws::SSM
     #
     #   resp.baseline_id #=> String
     #   resp.name #=> String
-    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
     #   resp.global_filters.patch_filters #=> Array
     #   resp.global_filters.patch_filters[0].key #=> String, one of "PRODUCT", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID", "SECTION", "PRIORITY", "SEVERITY"
     #   resp.global_filters.patch_filters[0].values #=> Array
@@ -6539,7 +7199,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

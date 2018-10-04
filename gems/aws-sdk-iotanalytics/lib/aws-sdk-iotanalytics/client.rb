@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -47,6 +49,8 @@ module Aws::IoTAnalytics
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -92,6 +96,22 @@ module Aws::IoTAnalytics
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::IoTAnalytics
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -219,6 +250,9 @@ module Aws::IoTAnalytics
     # @option params [Types::RetentionPeriod] :retention_period
     #   How long, in days, message data is kept for the channel.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the channel.
+    #
     # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateChannelResponse#channel_name #channel_name} => String
@@ -233,6 +267,12 @@ module Aws::IoTAnalytics
     #       unlimited: false,
     #       number_of_days: 1,
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -250,29 +290,38 @@ module Aws::IoTAnalytics
     end
 
     # Creates a data set. A data set stores data retrieved from a data store
-    # by applying an SQL action.
-    #
-    # <note markdown="1"> This operation creates the skeleton of a data set. To populate the
-    # data set, call "CreateDatasetContent".
-    #
-    #  </note>
+    # by applying a "queryAction" (a SQL query) or a "containerAction"
+    # (executing a containerized application). This operation creates the
+    # skeleton of a data set. The data set can be populated manually by
+    # calling "CreateDatasetContent" or automatically according to a
+    # "trigger" you specify.
     #
     # @option params [required, String] :dataset_name
     #   The name of the data set.
     #
     # @option params [required, Array<Types::DatasetAction>] :actions
-    #   A list of actions that create the data set. Only one action is
-    #   supported at this time.
+    #   A list of actions that create the data set contents.
     #
     # @option params [Array<Types::DatasetTrigger>] :triggers
-    #   A list of triggers. A trigger causes data set content to be populated
-    #   at a specified time or time interval. The list of triggers can be
-    #   empty or contain up to five **DataSetTrigger** objects.
+    #   A list of triggers. A trigger causes data set contents to be populated
+    #   at a specified time interval or when another data set's contents are
+    #   created. The list of triggers can be empty or contain up to five
+    #   **DataSetTrigger** objects.
+    #
+    # @option params [Types::RetentionPeriod] :retention_period
+    #   \[Optional\] How long, in days, message data is kept for the data set.
+    #   If not given or set to null, the latest version of the dataset content
+    #   plus the latest succeeded version (if they are different) are retained
+    #   for at most 90 days.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the data set.
     #
     # @return [Types::CreateDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDatasetResponse#dataset_name #dataset_name} => String
     #   * {Types::CreateDatasetResponse#dataset_arn #dataset_arn} => String
+    #   * {Types::CreateDatasetResponse#retention_period #retention_period} => Types::RetentionPeriod
     #
     # @example Request syntax with placeholder values
     #
@@ -283,6 +332,35 @@ module Aws::IoTAnalytics
     #         action_name: "DatasetActionName",
     #         query_action: {
     #           sql_query: "SqlQuery", # required
+    #           filters: [
+    #             {
+    #               delta_time: {
+    #                 offset_seconds: 1, # required
+    #                 time_expression: "TimeExpression", # required
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         container_action: {
+    #           image: "Image", # required
+    #           execution_role_arn: "RoleArn", # required
+    #           resource_configuration: { # required
+    #             compute_type: "ACU_1", # required, accepts ACU_1, ACU_2
+    #             volume_size_in_gb: 1, # required
+    #           },
+    #           variables: [
+    #             {
+    #               name: "VariableName", # required
+    #               string_value: "StringValue",
+    #               double_value: 1.0,
+    #               dataset_content_version_value: {
+    #                 dataset_name: "DatasetName", # required
+    #               },
+    #               output_file_uri_value: {
+    #                 file_name: "OutputFileName", # required
+    #               },
+    #             },
+    #           ],
     #         },
     #       },
     #     ],
@@ -291,6 +369,19 @@ module Aws::IoTAnalytics
     #         schedule: {
     #           expression: "ScheduleExpression",
     #         },
+    #         dataset: {
+    #           name: "DatasetName", # required
+    #         },
+    #       },
+    #     ],
+    #     retention_period: {
+    #       unlimited: false,
+    #       number_of_days: 1,
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -299,6 +390,8 @@ module Aws::IoTAnalytics
     #
     #   resp.dataset_name #=> String
     #   resp.dataset_arn #=> String
+    #   resp.retention_period.unlimited #=> Boolean
+    #   resp.retention_period.number_of_days #=> Integer
     #
     # @overload create_dataset(params = {})
     # @param [Hash] params ({})
@@ -307,18 +400,24 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Creates the content of a data set by applying an SQL action.
+    # Creates the content of a data set by applying a SQL action.
     #
     # @option params [required, String] :dataset_name
     #   The name of the data set.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @return [Types::CreateDatasetContentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDatasetContentResponse#version_id #version_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_dataset_content({
     #     dataset_name: "DatasetName", # required
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.version_id #=> String
     #
     # @overload create_dataset_content(params = {})
     # @param [Hash] params ({})
@@ -335,6 +434,9 @@ module Aws::IoTAnalytics
     # @option params [Types::RetentionPeriod] :retention_period
     #   How long, in days, message data is kept for the data store.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the data store.
+    #
     # @return [Types::CreateDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDatastoreResponse#datastore_name #datastore_name} => String
@@ -349,6 +451,12 @@ module Aws::IoTAnalytics
     #       unlimited: false,
     #       number_of_days: 1,
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -381,6 +489,9 @@ module Aws::IoTAnalytics
     #   values; invoking your Lambda functions on messages for advanced
     #   processing; or performing mathematical transformations to normalize
     #   device data.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the pipeline.
     #
     # @return [Types::CreatePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -450,6 +561,12 @@ module Aws::IoTAnalytics
     #           role_arn: "RoleArn", # required
     #           next: "ActivityName",
     #         },
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -581,14 +698,20 @@ module Aws::IoTAnalytics
     # @option params [required, String] :channel_name
     #   The name of the channel whose information is retrieved.
     #
+    # @option params [Boolean] :include_statistics
+    #   If true, additional statistical information about the channel is
+    #   included in the response.
+    #
     # @return [Types::DescribeChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeChannelResponse#channel #channel} => Types::Channel
+    #   * {Types::DescribeChannelResponse#statistics #statistics} => Types::ChannelStatistics
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_channel({
     #     channel_name: "ChannelName", # required
+    #     include_statistics: false,
     #   })
     #
     # @example Response structure
@@ -600,6 +723,8 @@ module Aws::IoTAnalytics
     #   resp.channel.retention_period.number_of_days #=> Integer
     #   resp.channel.creation_time #=> Time
     #   resp.channel.last_update_time #=> Time
+    #   resp.statistics.size.estimated_size_in_bytes #=> Float
+    #   resp.statistics.size.estimated_on #=> Time
     #
     # @overload describe_channel(params = {})
     # @param [Hash] params ({})
@@ -630,11 +755,27 @@ module Aws::IoTAnalytics
     #   resp.dataset.actions #=> Array
     #   resp.dataset.actions[0].action_name #=> String
     #   resp.dataset.actions[0].query_action.sql_query #=> String
+    #   resp.dataset.actions[0].query_action.filters #=> Array
+    #   resp.dataset.actions[0].query_action.filters[0].delta_time.offset_seconds #=> Integer
+    #   resp.dataset.actions[0].query_action.filters[0].delta_time.time_expression #=> String
+    #   resp.dataset.actions[0].container_action.image #=> String
+    #   resp.dataset.actions[0].container_action.execution_role_arn #=> String
+    #   resp.dataset.actions[0].container_action.resource_configuration.compute_type #=> String, one of "ACU_1", "ACU_2"
+    #   resp.dataset.actions[0].container_action.resource_configuration.volume_size_in_gb #=> Integer
+    #   resp.dataset.actions[0].container_action.variables #=> Array
+    #   resp.dataset.actions[0].container_action.variables[0].name #=> String
+    #   resp.dataset.actions[0].container_action.variables[0].string_value #=> String
+    #   resp.dataset.actions[0].container_action.variables[0].double_value #=> Float
+    #   resp.dataset.actions[0].container_action.variables[0].dataset_content_version_value.dataset_name #=> String
+    #   resp.dataset.actions[0].container_action.variables[0].output_file_uri_value.file_name #=> String
     #   resp.dataset.triggers #=> Array
     #   resp.dataset.triggers[0].schedule.expression #=> String
+    #   resp.dataset.triggers[0].dataset.name #=> String
     #   resp.dataset.status #=> String, one of "CREATING", "ACTIVE", "DELETING"
     #   resp.dataset.creation_time #=> Time
     #   resp.dataset.last_update_time #=> Time
+    #   resp.dataset.retention_period.unlimited #=> Boolean
+    #   resp.dataset.retention_period.number_of_days #=> Integer
     #
     # @overload describe_dataset(params = {})
     # @param [Hash] params ({})
@@ -648,14 +789,20 @@ module Aws::IoTAnalytics
     # @option params [required, String] :datastore_name
     #   The name of the data store
     #
+    # @option params [Boolean] :include_statistics
+    #   If true, additional statistical information about the datastore is
+    #   included in the response.
+    #
     # @return [Types::DescribeDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeDatastoreResponse#datastore #datastore} => Types::Datastore
+    #   * {Types::DescribeDatastoreResponse#statistics #statistics} => Types::DatastoreStatistics
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_datastore({
     #     datastore_name: "DatastoreName", # required
+    #     include_statistics: false,
     #   })
     #
     # @example Response structure
@@ -667,6 +814,8 @@ module Aws::IoTAnalytics
     #   resp.datastore.retention_period.number_of_days #=> Integer
     #   resp.datastore.creation_time #=> Time
     #   resp.datastore.last_update_time #=> Time
+    #   resp.statistics.size.estimated_size_in_bytes #=> Float
+    #   resp.statistics.size.estimated_on #=> Time
     #
     # @overload describe_datastore(params = {})
     # @param [Hash] params ({})
@@ -845,6 +994,47 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
+    # Lists information about data set contents that have been created.
+    #
+    # @option params [required, String] :dataset_name
+    #   The name of the data set whose contents information you want to list.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this request.
+    #
+    # @return [Types::ListDatasetContentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDatasetContentsResponse#dataset_content_summaries #dataset_content_summaries} => Array&lt;Types::DatasetContentSummary&gt;
+    #   * {Types::ListDatasetContentsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_dataset_contents({
+    #     dataset_name: "DatasetName", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset_content_summaries #=> Array
+    #   resp.dataset_content_summaries[0].version #=> String
+    #   resp.dataset_content_summaries[0].status.state #=> String, one of "CREATING", "SUCCEEDED", "FAILED"
+    #   resp.dataset_content_summaries[0].status.reason #=> String
+    #   resp.dataset_content_summaries[0].creation_time #=> Time
+    #   resp.dataset_content_summaries[0].schedule_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload list_dataset_contents(params = {})
+    # @param [Hash] params ({})
+    def list_dataset_contents(params = {}, options = {})
+      req = build_request(:list_dataset_contents, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about data sets.
     #
     # @option params [String] :next_token
@@ -874,6 +1064,12 @@ module Aws::IoTAnalytics
     #   resp.dataset_summaries[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING"
     #   resp.dataset_summaries[0].creation_time #=> Time
     #   resp.dataset_summaries[0].last_update_time #=> Time
+    #   resp.dataset_summaries[0].triggers #=> Array
+    #   resp.dataset_summaries[0].triggers[0].schedule.expression #=> String
+    #   resp.dataset_summaries[0].triggers[0].dataset.name #=> String
+    #   resp.dataset_summaries[0].actions #=> Array
+    #   resp.dataset_summaries[0].actions[0].action_name #=> String
+    #   resp.dataset_summaries[0].actions[0].action_type #=> String, one of "QUERY", "CONTAINER"
     #   resp.next_token #=> String
     #
     # @overload list_datasets(params = {})
@@ -962,7 +1158,41 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
+    # Lists the tags (metadata) which you have assigned to the resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource whose tags you want to list.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Sets or updates the AWS IoT Analytics logging options.
+    #
+    # Note that if you update the value of any `loggingOptions` field, it
+    # takes up to one minute for the change to take effect. Also, if you
+    # change the policy attached to the role you specified in the roleArn
+    # field (for example, to correct an invalid policy) it takes up to 5
+    # minutes for that change to take effect.
     #
     # @option params [required, Types::LoggingOptions] :logging_options
     #   The new values of the AWS IoT Analytics logging options.
@@ -1158,6 +1388,60 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
+    # Adds to or modifies the tags of the given resource. Tags are metadata
+    # which can be used to manage a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource whose tags will be modified.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The new or modified tags for the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes the given tags (metadata) from the resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource whose tags will be removed.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The keys of those tags which will be removed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Updates the settings of a channel.
     #
     # @option params [required, String] :channel_name
@@ -1191,12 +1475,14 @@ module Aws::IoTAnalytics
     #   The name of the data set to update.
     #
     # @option params [required, Array<Types::DatasetAction>] :actions
-    #   A list of "DatasetAction" objects. Only one action is supported at
-    #   this time.
+    #   A list of "DatasetAction" objects.
     #
     # @option params [Array<Types::DatasetTrigger>] :triggers
     #   A list of "DatasetTrigger" objects. The list can be empty or can
     #   contain up to five **DataSetTrigger** objects.
+    #
+    # @option params [Types::RetentionPeriod] :retention_period
+    #   How long, in days, message data is kept for the data set.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1209,6 +1495,35 @@ module Aws::IoTAnalytics
     #         action_name: "DatasetActionName",
     #         query_action: {
     #           sql_query: "SqlQuery", # required
+    #           filters: [
+    #             {
+    #               delta_time: {
+    #                 offset_seconds: 1, # required
+    #                 time_expression: "TimeExpression", # required
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         container_action: {
+    #           image: "Image", # required
+    #           execution_role_arn: "RoleArn", # required
+    #           resource_configuration: { # required
+    #             compute_type: "ACU_1", # required, accepts ACU_1, ACU_2
+    #             volume_size_in_gb: 1, # required
+    #           },
+    #           variables: [
+    #             {
+    #               name: "VariableName", # required
+    #               string_value: "StringValue",
+    #               double_value: 1.0,
+    #               dataset_content_version_value: {
+    #                 dataset_name: "DatasetName", # required
+    #               },
+    #               output_file_uri_value: {
+    #                 file_name: "OutputFileName", # required
+    #               },
+    #             },
+    #           ],
     #         },
     #       },
     #     ],
@@ -1217,8 +1532,15 @@ module Aws::IoTAnalytics
     #         schedule: {
     #           expression: "ScheduleExpression",
     #         },
+    #         dataset: {
+    #           name: "DatasetName", # required
+    #         },
     #       },
     #     ],
+    #     retention_period: {
+    #       unlimited: false,
+    #       number_of_days: 1,
+    #     },
     #   })
     #
     # @overload update_dataset(params = {})
@@ -1358,7 +1680,7 @@ module Aws::IoTAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotanalytics'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

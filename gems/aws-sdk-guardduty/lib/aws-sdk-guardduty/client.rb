@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -47,6 +49,8 @@ module Aws::GuardDuty
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -92,6 +96,22 @@ module Aws::GuardDuty
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::GuardDuty
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -149,11 +180,11 @@ module Aws::GuardDuty
     #
     # @option params [required, String] :detector_id
     #
-    # @option params [String] :invitation_id
+    # @option params [required, String] :invitation_id
     #   This value is used to validate the master account to the member
     #   account.
     #
-    # @option params [String] :master_id
+    # @option params [required, String] :master_id
     #   The account ID of the master GuardDuty account whose invitation
     #   you're accepting.
     #
@@ -163,8 +194,8 @@ module Aws::GuardDuty
     #
     #   resp = client.accept_invitation({
     #     detector_id: "__string", # required
-    #     invitation_id: "InvitationId",
-    #     master_id: "MasterId",
+    #     invitation_id: "InvitationId", # required
+    #     master_id: "MasterId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AcceptInvitation AWS API Documentation
@@ -181,7 +212,7 @@ module Aws::GuardDuty
     #
     # @option params [required, String] :detector_id
     #
-    # @option params [Array<String>] :finding_ids
+    # @option params [required, Array<String>] :finding_ids
     #   IDs of the findings that you want to archive.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -190,7 +221,7 @@ module Aws::GuardDuty
     #
     #   resp = client.archive_findings({
     #     detector_id: "__string", # required
-    #     finding_ids: ["FindingId"],
+    #     finding_ids: ["FindingId"], # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ArchiveFindings AWS API Documentation
@@ -206,8 +237,16 @@ module Aws::GuardDuty
     # that represents the GuardDuty service. A detector must be created in
     # order for GuardDuty to become operational.
     #
-    # @option params [Boolean] :enable
+    # @option params [String] :client_token
+    #   The idempotency token for the create request.**A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Boolean] :enable
     #   A boolean value that specifies whether the detector is to be enabled.
+    #
+    # @option params [String] :finding_publishing_frequency
+    #   A enum value that specifies how frequently customer got Finding
+    #   updates published.
     #
     # @return [Types::CreateDetectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -216,7 +255,9 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_detector({
-    #     enable: false,
+    #     client_token: "__stringMin0Max64",
+    #     enable: false, # required
+    #     finding_publishing_frequency: "FIFTEEN_MINUTES", # accepts FIFTEEN_MINUTES, ONE_HOUR, SIX_HOURS
     #   })
     #
     # @example Response structure
@@ -247,11 +288,11 @@ module Aws::GuardDuty
     #
     # @option params [required, String] :detector_id
     #
-    # @option params [Types::FindingCriteria] :finding_criteria
+    # @option params [required, Types::FindingCriteria] :finding_criteria
     #   Represents the criteria to be used in the filter for querying
     #   findings.
     #
-    # @option params [String] :name
+    # @option params [required, String] :name
     #   The name of the filter.
     #
     # @option params [Integer] :rank
@@ -270,7 +311,7 @@ module Aws::GuardDuty
     #     client_token: "__stringMin0Max64",
     #     description: "FilterDescription",
     #     detector_id: "__string", # required
-    #     finding_criteria: {
+    #     finding_criteria: { # required
     #       criterion: {
     #         "__string" => {
     #           eq: ["__string"],
@@ -282,7 +323,7 @@ module Aws::GuardDuty
     #         },
     #       },
     #     },
-    #     name: "FilterName",
+    #     name: "FilterName", # required
     #     rank: 1,
     #   })
     #
@@ -303,20 +344,24 @@ module Aws::GuardDuty
     # whitelisted for secure communication with AWS infrastructure and
     # applications.
     #
-    # @option params [Boolean] :activate
+    # @option params [required, Boolean] :activate
     #   A boolean value that indicates whether GuardDuty is to start using the
     #   uploaded IPSet.
     #
+    # @option params [String] :client_token
+    #   The idempotency token for the create request.**A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @option params [required, String] :detector_id
     #
-    # @option params [String] :format
+    # @option params [required, String] :format
     #   The format of the file that contains the IPSet.
     #
-    # @option params [String] :location
+    # @option params [required, String] :location
     #   The URI of the file that contains the IPSet. For example
     #   (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)
     #
-    # @option params [String] :name
+    # @option params [required, String] :name
     #   The user friendly name to identify the IPSet. This name is displayed
     #   in all findings that are triggered by activity that involves IP
     #   addresses included in this IPSet.
@@ -328,11 +373,12 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_ip_set({
-    #     activate: false,
+    #     activate: false, # required
+    #     client_token: "__stringMin0Max64",
     #     detector_id: "__string", # required
-    #     format: "TXT", # accepts TXT, STIX, OTX_CSV, ALIEN_VAULT, PROOF_POINT, FIRE_EYE
-    #     location: "Location",
-    #     name: "Name",
+    #     format: "TXT", # required, accepts TXT, STIX, OTX_CSV, ALIEN_VAULT, PROOF_POINT, FIRE_EYE
+    #     location: "Location", # required
+    #     name: "Name", # required
     #   })
     #
     # @example Response structure
@@ -352,7 +398,7 @@ module Aws::GuardDuty
     # list of AWS account IDs. The current AWS account can then invite these
     # members to manage GuardDuty in their accounts.
     #
-    # @option params [Array<Types::AccountDetail>] :account_details
+    # @option params [required, Array<Types::AccountDetail>] :account_details
     #   A list of account ID and email address pairs of the accounts that you
     #   want to associate with the master GuardDuty account.
     #
@@ -365,7 +411,7 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_members({
-    #     account_details: [
+    #     account_details: [ # required
     #       {
     #         account_id: "AccountId", # required
     #         email: "Email", # required
@@ -420,20 +466,24 @@ module Aws::GuardDuty
     # malicious IP addresses. GuardDuty generates findings based on
     # ThreatIntelSets.
     #
-    # @option params [Boolean] :activate
+    # @option params [required, Boolean] :activate
     #   A boolean value that indicates whether GuardDuty is to start using the
     #   uploaded ThreatIntelSet.
     #
+    # @option params [String] :client_token
+    #   The idempotency token for the create request.**A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @option params [required, String] :detector_id
     #
-    # @option params [String] :format
+    # @option params [required, String] :format
     #   The format of the file that contains the ThreatIntelSet.
     #
-    # @option params [String] :location
+    # @option params [required, String] :location
     #   The URI of the file that contains the ThreatIntelSet. For example
     #   (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).
     #
-    # @option params [String] :name
+    # @option params [required, String] :name
     #   A user-friendly ThreatIntelSet name that is displayed in all finding
     #   generated by activity that involves IP addresses included in this
     #   ThreatIntelSet.
@@ -445,11 +495,12 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_threat_intel_set({
-    #     activate: false,
+    #     activate: false, # required
+    #     client_token: "__stringMin0Max64",
     #     detector_id: "__string", # required
-    #     format: "TXT", # accepts TXT, STIX, OTX_CSV, ALIEN_VAULT, PROOF_POINT, FIRE_EYE
-    #     location: "Location",
-    #     name: "Name",
+    #     format: "TXT", # required, accepts TXT, STIX, OTX_CSV, ALIEN_VAULT, PROOF_POINT, FIRE_EYE
+    #     location: "Location", # required
+    #     name: "Name", # required
     #   })
     #
     # @example Response structure
@@ -468,7 +519,7 @@ module Aws::GuardDuty
     # Declines invitations sent to the current member account by AWS account
     # specified by their account IDs.
     #
-    # @option params [Array<String>] :account_ids
+    # @option params [required, Array<String>] :account_ids
     #   A list of account IDs of the AWS accounts that sent invitations to the
     #   current member account that you want to decline invitations from.
     #
@@ -479,7 +530,7 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.decline_invitations({
-    #     account_ids: ["__string"],
+    #     account_ids: ["__string"], # required
     #   })
     #
     # @example Response structure
@@ -569,7 +620,7 @@ module Aws::GuardDuty
     # Deletes invitations sent to the current member account by AWS accounts
     # specified by their account IDs.
     #
-    # @option params [Array<String>] :account_ids
+    # @option params [required, Array<String>] :account_ids
     #   A list of account IDs of the AWS accounts that sent invitations to the
     #   current member account that you want to delete invitations from.
     #
@@ -580,7 +631,7 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_invitations({
-    #     account_ids: ["__string"],
+    #     account_ids: ["__string"], # required
     #   })
     #
     # @example Response structure
@@ -601,7 +652,7 @@ module Aws::GuardDuty
     # Deletes GuardDuty member accounts (to the current GuardDuty master
     # account) specified by the account IDs.
     #
-    # @option params [Array<String>] :account_ids
+    # @option params [required, Array<String>] :account_ids
     #   A list of account IDs of the GuardDuty member accounts that you want
     #   to delete.
     #
@@ -614,7 +665,7 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_members({
-    #     account_ids: ["__string"],
+    #     account_ids: ["__string"], # required
     #     detector_id: "__string", # required
     #   })
     #
@@ -682,7 +733,7 @@ module Aws::GuardDuty
     # Disassociates GuardDuty member accounts (to the current GuardDuty
     # master account) specified by the account IDs.
     #
-    # @option params [Array<String>] :account_ids
+    # @option params [required, Array<String>] :account_ids
     #   A list of account IDs of the GuardDuty member accounts that you want
     #   to disassociate from master.
     #
@@ -695,7 +746,7 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_members({
-    #     account_ids: ["__string"],
+    #     account_ids: ["__string"], # required
     #     detector_id: "__string", # required
     #   })
     #
@@ -721,6 +772,7 @@ module Aws::GuardDuty
     # @return [Types::GetDetectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDetectorResponse#created_at #created_at} => String
+    #   * {Types::GetDetectorResponse#finding_publishing_frequency #finding_publishing_frequency} => String
     #   * {Types::GetDetectorResponse#service_role #service_role} => String
     #   * {Types::GetDetectorResponse#status #status} => String
     #   * {Types::GetDetectorResponse#updated_at #updated_at} => String
@@ -734,6 +786,7 @@ module Aws::GuardDuty
     # @example Response structure
     #
     #   resp.created_at #=> String
+    #   resp.finding_publishing_frequency #=> String, one of "FIFTEEN_MINUTES", "ONE_HOUR", "SIX_HOURS"
     #   resp.service_role #=> String
     #   resp.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.updated_at #=> String
@@ -797,7 +850,7 @@ module Aws::GuardDuty
     #
     # @option params [required, String] :detector_id
     #
-    # @option params [Array<String>] :finding_ids
+    # @option params [required, Array<String>] :finding_ids
     #   IDs of the findings that you want to retrieve.
     #
     # @option params [Types::SortCriteria] :sort_criteria
@@ -811,7 +864,7 @@ module Aws::GuardDuty
     #
     #   resp = client.get_findings({
     #     detector_id: "__string", # required
-    #     finding_ids: ["FindingId"],
+    #     finding_ids: ["FindingId"], # required
     #     sort_criteria: {
     #       attribute_name: "__string",
     #       order_by: "ASC", # accepts ASC, DESC
@@ -943,7 +996,7 @@ module Aws::GuardDuty
     # @option params [Types::FindingCriteria] :finding_criteria
     #   Represents the criteria used for querying findings.
     #
-    # @option params [Array<String>] :finding_statistic_types
+    # @option params [required, Array<String>] :finding_statistic_types
     #   Types of finding statistics to retrieve.
     #
     # @return [Types::GetFindingsStatisticsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -966,7 +1019,7 @@ module Aws::GuardDuty
     #         },
     #       },
     #     },
-    #     finding_statistic_types: ["COUNT_BY_SEVERITY"], # accepts COUNT_BY_SEVERITY
+    #     finding_statistic_types: ["COUNT_BY_SEVERITY"], # required, accepts COUNT_BY_SEVERITY
     #   })
     #
     # @example Response structure
@@ -1074,7 +1127,7 @@ module Aws::GuardDuty
     # Retrieves GuardDuty member accounts (to the current GuardDuty master
     # account) specified by the account IDs.
     #
-    # @option params [Array<String>] :account_ids
+    # @option params [required, Array<String>] :account_ids
     #   A list of account IDs of the GuardDuty member accounts that you want
     #   to describe.
     #
@@ -1088,7 +1141,7 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_members({
-    #     account_ids: ["__string"],
+    #     account_ids: ["__string"], # required
     #     detector_id: "__string", # required
     #   })
     #
@@ -1157,7 +1210,7 @@ module Aws::GuardDuty
     # AWS account to view and manage these accounts' GuardDuty findings on
     # their behalf as the master account.
     #
-    # @option params [Array<String>] :account_ids
+    # @option params [required, Array<String>] :account_ids
     #   A list of account IDs of the accounts that you want to invite to
     #   GuardDuty as members.
     #
@@ -1179,7 +1232,7 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.invite_members({
-    #     account_ids: ["__string"],
+    #     account_ids: ["__string"], # required
     #     detector_id: "__string", # required
     #     disable_email_notification: false,
     #     message: "Message",
@@ -1510,7 +1563,7 @@ module Aws::GuardDuty
     # command after disabling GuardDuty from monitoring these members'
     # findings by running StopMonitoringMembers.
     #
-    # @option params [Array<String>] :account_ids
+    # @option params [required, Array<String>] :account_ids
     #   A list of account IDs of the GuardDuty member accounts whose findings
     #   you want the master account to monitor.
     #
@@ -1523,7 +1576,7 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_monitoring_members({
-    #     account_ids: ["__string"],
+    #     account_ids: ["__string"], # required
     #     detector_id: "__string", # required
     #   })
     #
@@ -1547,7 +1600,7 @@ module Aws::GuardDuty
     # GuardDuty account can run StartMonitoringMembers to re-enable
     # GuardDuty to monitor these members’ findings.
     #
-    # @option params [Array<String>] :account_ids
+    # @option params [required, Array<String>] :account_ids
     #   A list of account IDs of the GuardDuty member accounts whose findings
     #   you want the master account to stop monitoring.
     #
@@ -1560,7 +1613,7 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.stop_monitoring_members({
-    #     account_ids: ["__string"],
+    #     account_ids: ["__string"], # required
     #     detector_id: "__string", # required
     #   })
     #
@@ -1584,7 +1637,7 @@ module Aws::GuardDuty
     #
     # @option params [required, String] :detector_id
     #
-    # @option params [Array<String>] :finding_ids
+    # @option params [required, Array<String>] :finding_ids
     #   IDs of the findings that you want to unarchive.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1593,7 +1646,7 @@ module Aws::GuardDuty
     #
     #   resp = client.unarchive_findings({
     #     detector_id: "__string", # required
-    #     finding_ids: ["FindingId"],
+    #     finding_ids: ["FindingId"], # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UnarchiveFindings AWS API Documentation
@@ -1613,6 +1666,10 @@ module Aws::GuardDuty
     #   Updated boolean value for the detector that specifies whether the
     #   detector is enabled.
     #
+    # @option params [String] :finding_publishing_frequency
+    #   A enum value that specifies how frequently customer got Finding
+    #   updates published.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1620,6 +1677,7 @@ module Aws::GuardDuty
     #   resp = client.update_detector({
     #     detector_id: "__string", # required
     #     enable: false,
+    #     finding_publishing_frequency: "FIFTEEN_MINUTES", # accepts FIFTEEN_MINUTES, ONE_HOUR, SIX_HOURS
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetector AWS API Documentation
@@ -1699,10 +1757,10 @@ module Aws::GuardDuty
     #
     # @option params [required, String] :detector_id
     #
-    # @option params [String] :feedback
+    # @option params [required, String] :feedback
     #   Valid values: USEFUL \| NOT\_USEFUL
     #
-    # @option params [Array<String>] :finding_ids
+    # @option params [required, Array<String>] :finding_ids
     #   IDs of the findings that you want to mark as useful or not useful.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1712,8 +1770,8 @@ module Aws::GuardDuty
     #   resp = client.update_findings_feedback({
     #     comments: "Comments",
     #     detector_id: "__string", # required
-    #     feedback: "USEFUL", # accepts USEFUL, NOT_USEFUL
-    #     finding_ids: ["FindingId"],
+    #     feedback: "USEFUL", # required, accepts USEFUL, NOT_USEFUL
+    #     finding_ids: ["FindingId"], # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFindingsFeedback AWS API Documentation
@@ -1815,7 +1873,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

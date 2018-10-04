@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -47,6 +49,8 @@ module Aws::DAX
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -92,6 +96,22 @@ module Aws::DAX
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::DAX
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -253,6 +284,10 @@ module Aws::DAX
     # @option params [Array<Types::Tag>] :tags
     #   A set of tags to associate with the DAX cluster.
     #
+    # @option params [Types::SSESpecification] :sse_specification
+    #   Represents the settings used to enable server-side encryption on the
+    #   cluster.
+    #
     # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResponse#cluster #cluster} => Types::Cluster
@@ -277,6 +312,9 @@ module Aws::DAX
     #         value: "String",
     #       },
     #     ],
+    #     sse_specification: {
+    #       enabled: false, # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -312,6 +350,7 @@ module Aws::DAX
     #   resp.cluster.parameter_group.parameter_apply_status #=> String
     #   resp.cluster.parameter_group.node_ids_to_reboot #=> Array
     #   resp.cluster.parameter_group.node_ids_to_reboot[0] #=> String
+    #   resp.cluster.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/CreateCluster AWS API Documentation
     #
@@ -464,6 +503,7 @@ module Aws::DAX
     #   resp.cluster.parameter_group.parameter_apply_status #=> String
     #   resp.cluster.parameter_group.node_ids_to_reboot #=> Array
     #   resp.cluster.parameter_group.node_ids_to_reboot[0] #=> String
+    #   resp.cluster.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DecreaseReplicationFactor AWS API Documentation
     #
@@ -525,6 +565,7 @@ module Aws::DAX
     #   resp.cluster.parameter_group.parameter_apply_status #=> String
     #   resp.cluster.parameter_group.node_ids_to_reboot #=> Array
     #   resp.cluster.parameter_group.node_ids_to_reboot[0] #=> String
+    #   resp.cluster.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DeleteCluster AWS API Documentation
     #
@@ -681,6 +722,7 @@ module Aws::DAX
     #   resp.clusters[0].parameter_group.parameter_apply_status #=> String
     #   resp.clusters[0].parameter_group.node_ids_to_reboot #=> Array
     #   resp.clusters[0].parameter_group.node_ids_to_reboot[0] #=> String
+    #   resp.clusters[0].sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeClusters AWS API Documentation
     #
@@ -1047,6 +1089,7 @@ module Aws::DAX
     #   resp.cluster.parameter_group.parameter_apply_status #=> String
     #   resp.cluster.parameter_group.node_ids_to_reboot #=> Array
     #   resp.cluster.parameter_group.node_ids_to_reboot[0] #=> String
+    #   resp.cluster.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/IncreaseReplicationFactor AWS API Documentation
     #
@@ -1150,6 +1193,7 @@ module Aws::DAX
     #   resp.cluster.parameter_group.parameter_apply_status #=> String
     #   resp.cluster.parameter_group.node_ids_to_reboot #=> Array
     #   resp.cluster.parameter_group.node_ids_to_reboot[0] #=> String
+    #   resp.cluster.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/RebootNode AWS API Documentation
     #
@@ -1315,6 +1359,7 @@ module Aws::DAX
     #   resp.cluster.parameter_group.parameter_apply_status #=> String
     #   resp.cluster.parameter_group.node_ids_to_reboot #=> Array
     #   resp.cluster.parameter_group.node_ids_to_reboot[0] #=> String
+    #   resp.cluster.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UpdateCluster AWS API Documentation
     #
@@ -1420,7 +1465,7 @@ module Aws::DAX
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dax'
-      context[:gem_version] = '1.0.1'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

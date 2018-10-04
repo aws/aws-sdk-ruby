@@ -173,6 +173,80 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
+    # A list of continuous export descriptions.
+    #
+    # @!attribute [rw] export_id
+    #   The unique ID assigned to this export.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Describes the status of the export. Can be one of the following
+    #   values:
+    #
+    #   * START\_IN\_PROGRESS - setting up resources to start continuous
+    #     export.
+    #
+    #   * START\_FAILED - an error occurred setting up continuous export. To
+    #     recover, call start-continuous-export again.
+    #
+    #   * ACTIVE - data is being exported to the customer bucket.
+    #
+    #   * ERROR - an error occurred during export. To fix the issue, call
+    #     stop-continuous-export and start-continuous-export.
+    #
+    #   * STOP\_IN\_PROGRESS - stopping the export.
+    #
+    #   * STOP\_FAILED - an error occurred stopping the export. To recover,
+    #     call stop-continuous-export again.
+    #
+    #   * INACTIVE - the continuous export has been stopped. Data is no
+    #     longer being exported to the customer bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_detail
+    #   Contains information about any errors that may have occurred.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket
+    #   The name of the s3 bucket where the export data parquet files are
+    #   stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp representing when the continuous export was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] stop_time
+    #   The timestamp that represents when this continuous export was
+    #   stopped.
+    #   @return [Time]
+    #
+    # @!attribute [rw] data_source
+    #   The type of data collector used to gather this data (currently only
+    #   offered for AGENT).
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_storage_config
+    #   An object which describes how the data is stored.
+    #
+    #   * `databaseName` - the name of the Glue database used to store the
+    #     schema.
+    #
+    #   ^
+    #   @return [Hash<String,String>]
+    #
+    class ContinuousExportDescription < Struct.new(
+      :export_id,
+      :status,
+      :status_detail,
+      :s3_bucket,
+      :start_time,
+      :stop_time,
+      :data_source,
+      :schema_storage_config)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateApplicationRequest
     #   data as a hash:
     #
@@ -468,6 +542,49 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeContinuousExportsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         export_ids: ["ConfigurationsExportId"],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] export_ids
+    #   The unique IDs assigned to the exports.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   A number between 1 and 100 specifying the maximum number of
+    #   continuous export descriptions returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token from the previous call to `DescribeExportTasks`.
+    #   @return [String]
+    #
+    class DescribeContinuousExportsRequest < Struct.new(
+      :export_ids,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] descriptions
+    #   A list of continuous export descriptions.
+    #   @return [Array<Types::ContinuousExportDescription>]
+    #
+    # @!attribute [rw] next_token
+    #   The token from the previous call to `DescribeExportTasks`.
+    #   @return [String]
+    #
+    class DescribeContinuousExportsResponse < Struct.new(
+      :descriptions,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeExportConfigurationsRequest
     #   data as a hash:
     #
@@ -478,20 +595,16 @@ module Aws::ApplicationDiscoveryService
     #       }
     #
     # @!attribute [rw] export_ids
-    #   A unique identifier that you can use to query the export status.
+    #   A list of continuous export ids to search for.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results that you want to display as a part of
-    #   the query.
+    #   A number between 1 and 100 specifying the maximum number of
+    #   continuous export descriptions returned.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to get the next set of results. For example, if you specify
-    #   100 IDs for `DescribeExportConfigurationsRequest$exportIds` but set
-    #   `DescribeExportConfigurationsRequest$maxResults` to 10, you get
-    #   results in a set of 10. Use the token in the query to get the next
-    #   set of 10.
+    #   The token from the previous call to describe-export-tasks.
     #   @return [String]
     #
     class DescribeExportConfigurationsRequest < Struct.new(
@@ -502,17 +615,10 @@ module Aws::ApplicationDiscoveryService
     end
 
     # @!attribute [rw] exports_info
-    #   Returns export details. When the status is complete, the response
-    #   includes a URL for an Amazon S3 bucket where you can view the data
-    #   in a CSV file.
     #   @return [Array<Types::ExportInfo>]
     #
     # @!attribute [rw] next_token
-    #   A token to get the next set of results. For example, if you specify
-    #   100 IDs for `DescribeExportConfigurationsRequest$exportIds` but set
-    #   `DescribeExportConfigurationsRequest$maxResults` to 10, you get
-    #   results in a set of 10. Use the token in the query to get the next
-    #   set of 10.
+    #   The token from the previous call to describe-export-tasks.
     #   @return [String]
     #
     class DescribeExportConfigurationsResponse < Struct.new(
@@ -1078,6 +1184,46 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
+    # @api private
+    #
+    class StartContinuousExportRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] export_id
+    #   The unique ID assigned to this export.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket
+    #   The name of the s3 bucket where the export data parquet files are
+    #   stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp representing when the continuous export was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] data_source
+    #   The type of data collector used to gather this data (currently only
+    #   offered for AGENT).
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_storage_config
+    #   A dictionary which describes how the data is stored.
+    #
+    #   * `databaseName` - the name of the Glue database used to store the
+    #     schema.
+    #
+    #   ^
+    #   @return [Hash<String,String>]
+    #
+    class StartContinuousExportResponse < Struct.new(
+      :export_id,
+      :s3_bucket,
+      :start_time,
+      :data_source,
+      :schema_storage_config)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartDataCollectionByAgentIdsRequest
     #   data as a hash:
     #
@@ -1170,6 +1316,37 @@ module Aws::ApplicationDiscoveryService
     #
     class StartExportTaskResponse < Struct.new(
       :export_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopContinuousExportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         export_id: "ConfigurationsExportId", # required
+    #       }
+    #
+    # @!attribute [rw] export_id
+    #   The unique ID assigned to this export.
+    #   @return [String]
+    #
+    class StopContinuousExportRequest < Struct.new(
+      :export_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] start_time
+    #   Timestamp that represents when this continuous export started
+    #   collecting data.
+    #   @return [Time]
+    #
+    # @!attribute [rw] stop_time
+    #   Timestamp that represents when this continuous export was stopped.
+    #   @return [Time]
+    #
+    class StopContinuousExportResponse < Struct.new(
+      :start_time,
+      :stop_time)
       include Aws::Structure
     end
 

@@ -27,10 +27,13 @@ module AwsSdkCodeGenerator
         'flattened' => true,
         'timestampFormat' => true, # glacier api customization
         'xmlNamespace' => true,
-        # ignore event stream traits
+        # event stream modeling
         'event' => false,
         'eventstream' => false,
+        'eventheader' => false,
+        'eventpayload' => false,
         # ignore
+        'synthetic' => false,
         'box' => false,
         'fault' => false,
         'error' => false,
@@ -56,7 +59,7 @@ module AwsSdkCodeGenerator
       }
 
       METADATA_KEYS = {
-        # keep
+        # keep all
         'endpointPrefix' => true,
         'signatureVersion' => true,
         'signingName' => true,
@@ -67,14 +70,14 @@ module AwsSdkCodeGenerator
         'errorPrefix' => true,
         'timestampFormat' => true, # glacier api customization
         'xmlNamespace' => true,
+        'protocolSettings' => {}, # current unused unless for h2 exclude
 
-        # ignore
-        'apiVersion' => false,
-        'checksumFormat' => false,
-        'globalEndpoint' => false,
-        'serviceAbbreviation' => false,
-        'uid' => false,
-        'serviceId' => false,
+        'serviceId' => true,
+        'apiVersion' => true,
+        'checksumFormat' => true,
+        'globalEndpoint' => true,
+        'serviceAbbreviation' => true,
+        'uid' => true,
       }
 
       # @option options [required, Service] :service
@@ -105,14 +108,12 @@ module AwsSdkCodeGenerator
           if @service.protocol == 'api-gateway'
             shape_name = lstrip_prefix(upcase_first(shape_name))
           end
-          # exclude event stream/event shapes
-          next if shape['eventstream'] || shape['event']
           Shape.new.tap do |s|
             s.name = shape_name
             s.class_name, shape = shape_class_name(shape)
             s.constructor_args = shape_constructor_args(shape_name, shape)
           end
-        end.compact
+        end
       end
 
       def shape_definitions
@@ -122,10 +123,7 @@ module AwsSdkCodeGenerator
             shape_name = lstrip_prefix(upcase_first(shape_name))
           end
           lines = []
-          # exclude event stream/event shapes
-          if shape['eventstream'] || shape['event']
-            groups
-          elsif non_error_struct?(shape)
+          if non_error_struct?(shape)
             required = Set.new(shape['required'] || [])
             unless shape['members'].nil?
               shape['members'].each do |member_name, member_ref|
@@ -267,6 +265,10 @@ module AwsSdkCodeGenerator
         line = "Shapes::ShapeRef.new(shape: #{ref_name}"
         line += shape_ref_required(required, member_name)
         line += shape_ref_deprecated(ref)
+        line += shape_ref_event(ref)
+        line += shape_ref_eventstream(ref)
+        line += shape_ref_eventpayload(ref)
+        line += shape_ref_eventheader(ref)
         line += shape_ref_location(ref)
         line += shape_ref_location_name(member_name, ref)
         line += shape_ref_metadata(ref)
@@ -287,6 +289,40 @@ module AwsSdkCodeGenerator
           ", deprecated: true"
         else
           ""
+        end
+      end
+
+      def shape_ref_eventstream(ref)
+        if @service.api['shapes'][ref['shape']]['eventstream']
+          ", eventstream: true"
+        else
+          ''
+        end
+      end
+
+      def shape_ref_event(ref)
+        if @service.api['shapes'][ref['shape']]['event']
+          ", event: true"
+        else
+          ''
+        end
+      end
+
+      def shape_ref_eventpayload(ref)
+        if ref['eventpayload']
+          type = @service.api['shapes'][ref['shape']]['type']
+          ", eventpayload: true, eventpayload_type: '#{type}'"
+        else
+          ''
+        end
+      end
+
+      def shape_ref_eventheader(ref)
+        if ref['eventheader']
+          type = @service.api['shapes'][ref['shape']]['type']
+          ", eventheader: true, eventheader_type: '#{type}'"
+        else
+          ''
         end
       end
 

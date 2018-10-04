@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -47,6 +49,8 @@ module Aws::Kinesis
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -92,6 +96,22 @@ module Aws::Kinesis
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::Kinesis
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -155,8 +186,10 @@ module Aws::Kinesis
 
     # @!group API Operations
 
-    # Adds or updates tags for the specified Kinesis data stream. Each
-    # stream can have up to 10 tags.
+    # Adds or updates tags for the specified Kinesis data stream. Each time
+    # you invoke this operation, you can specify up to 10 tags. If you want
+    # to add more than 10 tags to your stream, you can invoke this operation
+    # multiple times. In total, each stream can have up to 50 tags.
     #
     # If tags have already been assigned to the stream, `AddTagsToStream`
     # overwrites any existing tags that correspond to the specified tag
@@ -169,7 +202,7 @@ module Aws::Kinesis
     #   The name of the stream.
     #
     # @option params [required, Hash<String,String>] :tags
-    #   The set of key-value pairs to use to create the tags.
+    #   A set of up to 10 key-value pairs to use to create the tags.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -327,12 +360,18 @@ module Aws::Kinesis
     # @option params [required, String] :stream_name
     #   The name of the stream to delete.
     #
+    # @option params [Boolean] :enforce_consumer_deletion
+    #   If this parameter is unset (`null`) or if you set it to `false`, and
+    #   the stream has registered consumers, the call to `DeleteStream` fails
+    #   with a `ResourceInUseException`.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_stream({
     #     stream_name: "StreamName", # required
+    #     enforce_consumer_deletion: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DeleteStream AWS API Documentation
@@ -341,6 +380,57 @@ module Aws::Kinesis
     # @param [Hash] params ({})
     def delete_stream(params = {}, options = {})
       req = build_request(:delete_stream, params)
+      req.send_request(options)
+    end
+
+    # To deregister a consumer, provide its ARN. Alternatively, you can
+    # provide the ARN of the data stream and the name you gave the consumer
+    # when you registered it. You may also provide all three parameters, as
+    # long as they don't conflict with each other. If you don't know the
+    # name or ARN of the consumer that you want to deregister, you can use
+    # the ListStreamConsumers operation to get a list of the descriptions of
+    # all the consumers that are currently registered with a given data
+    # stream. The description of a consumer contains its name and ARN.
+    #
+    # This operation has a limit of five transactions per second per
+    # account.
+    #
+    # @option params [String] :stream_arn
+    #   The ARN of the Kinesis data stream that the consumer is registered
+    #   with. For more information, see [Amazon Resource Names (ARNs) and AWS
+    #   Service Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams
+    #
+    # @option params [String] :consumer_name
+    #   The name that you gave to the consumer.
+    #
+    # @option params [String] :consumer_arn
+    #   The ARN returned by Kinesis Data Streams when you registered the
+    #   consumer. If you don't know the ARN of the consumer that you want to
+    #   deregister, you can use the ListStreamConsumers operation to get a
+    #   list of the descriptions of all the consumers that are currently
+    #   registered with a given data stream. The description of a consumer
+    #   contains its ARN.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deregister_stream_consumer({
+    #     stream_arn: "StreamARN",
+    #     consumer_name: "ConsumerName",
+    #     consumer_arn: "ConsumerARN",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DeregisterStreamConsumer AWS API Documentation
+    #
+    # @overload deregister_stream_consumer(params = {})
+    # @param [Hash] params ({})
+    def deregister_stream_consumer(params = {}, options = {})
+      req = build_request(:deregister_stream_consumer, params)
       req.send_request(options)
     end
 
@@ -449,6 +539,62 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
+    # To get the description of a registered consumer, provide the ARN of
+    # the consumer. Alternatively, you can provide the ARN of the data
+    # stream and the name you gave the consumer when you registered it. You
+    # may also provide all three parameters, as long as they don't conflict
+    # with each other. If you don't know the name or ARN of the consumer
+    # that you want to describe, you can use the ListStreamConsumers
+    # operation to get a list of the descriptions of all the consumers that
+    # are currently registered with a given data stream.
+    #
+    # This operation has a limit of 20 transactions per second per account.
+    #
+    # @option params [String] :stream_arn
+    #   The ARN of the Kinesis data stream that the consumer is registered
+    #   with. For more information, see [Amazon Resource Names (ARNs) and AWS
+    #   Service Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams
+    #
+    # @option params [String] :consumer_name
+    #   The name that you gave to the consumer.
+    #
+    # @option params [String] :consumer_arn
+    #   The ARN returned by Kinesis Data Streams when you registered the
+    #   consumer.
+    #
+    # @return [Types::DescribeStreamConsumerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeStreamConsumerOutput#consumer_description #consumer_description} => Types::ConsumerDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_stream_consumer({
+    #     stream_arn: "StreamARN",
+    #     consumer_name: "ConsumerName",
+    #     consumer_arn: "ConsumerARN",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.consumer_description.consumer_name #=> String
+    #   resp.consumer_description.consumer_arn #=> String
+    #   resp.consumer_description.consumer_status #=> String, one of "CREATING", "DELETING", "ACTIVE"
+    #   resp.consumer_description.consumer_creation_timestamp #=> Time
+    #   resp.consumer_description.stream_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamConsumer AWS API Documentation
+    #
+    # @overload describe_stream_consumer(params = {})
+    # @param [Hash] params ({})
+    def describe_stream_consumer(params = {}, options = {})
+      req = build_request(:describe_stream_consumer, params)
+      req.send_request(options)
+    end
+
     # Provides a summarized description of the specified Kinesis data stream
     # without the shard list.
     #
@@ -482,6 +628,7 @@ module Aws::Kinesis
     #   resp.stream_description_summary.encryption_type #=> String, one of "NONE", "KMS"
     #   resp.stream_description_summary.key_id #=> String
     #   resp.stream_description_summary.open_shard_count #=> Integer
+    #   resp.stream_description_summary.consumer_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamSummary AWS API Documentation
     #
@@ -648,22 +795,23 @@ module Aws::Kinesis
     # iterator reaches the record with the sequence number or other
     # attribute that marks it as the last record to process.
     #
-    # Each data record can be up to 1 MB in size, and each shard can read up
-    # to 2 MB per second. You can ensure that your calls don't exceed the
-    # maximum supported size or throughput by using the `Limit` parameter to
-    # specify the maximum number of records that GetRecords can return.
-    # Consider your average record size when determining this limit.
+    # Each data record can be up to 1 MiB in size, and each shard can read
+    # up to 2 MiB per second. You can ensure that your calls don't exceed
+    # the maximum supported size or throughput by using the `Limit`
+    # parameter to specify the maximum number of records that GetRecords can
+    # return. Consider your average record size when determining this limit.
+    # The maximum number of records that can be returned per call is 10,000.
     #
     # The size of the data returned by GetRecords varies depending on the
     # utilization of the shard. The maximum size of data that GetRecords can
-    # return is 10 MB. If a call returns this amount of data, subsequent
-    # calls made within the next five seconds throw
+    # return is 10 MiB. If a call returns this amount of data, subsequent
+    # calls made within the next 5 seconds throw
     # `ProvisionedThroughputExceededException`. If there is insufficient
     # provisioned throughput on the stream, subsequent calls made within the
-    # next one second throw `ProvisionedThroughputExceededException`.
-    # GetRecords won't return any data when it throws an exception. For
-    # this reason, we recommend that you wait one second between calls to
-    # GetRecords; however, it's possible that the application will get
+    # next 1 second throw `ProvisionedThroughputExceededException`.
+    # GetRecords doesn't return any data when it throws an exception. For
+    # this reason, we recommend that you wait 1 second between calls to
+    # GetRecords. However, it's possible that the application will get
     # exceptions for longer than 1 second.
     #
     # To detect whether the application is falling behind in processing, you
@@ -681,6 +829,9 @@ module Aws::Kinesis
     # no guarantees about the time stamp accuracy, or that the time stamp is
     # always increasing. For example, records in a shard or across a stream
     # might have time stamps that are out of order.
+    #
+    # This operation has a limit of five transactions per second per
+    # account.
     #
     #
     #
@@ -730,7 +881,7 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
-    # Gets an Amazon Kinesis shard iterator. A shard iterator expires five
+    # Gets an Amazon Kinesis shard iterator. A shard iterator expires 5
     # minutes after it is returned to the requester.
     #
     # A shard iterator specifies the shard position from which to start
@@ -889,7 +1040,8 @@ module Aws::Kinesis
     end
 
     # Lists the shards in a stream and provides information about each
-    # shard.
+    # shard. This operation has a limit of 100 transactions per second per
+    # data stream.
     #
     # This API is a new operation that is used by the Amazon Kinesis Client
     # Library (KCL). If you have a fine-grained IAM policy that only allows
@@ -932,7 +1084,9 @@ module Aws::Kinesis
     #   to `ListShards`, you get `ExpiredNextTokenException`.
     #
     # @option params [String] :exclusive_start_shard_id
-    #   The ID of the shard to start the list with.
+    #   Specify this parameter to indicate that you want to list the shards
+    #   starting with the shard whose ID immediately follows
+    #   `ExclusiveStartShardId`.
     #
     #   If you don't specify this parameter, the default behavior is for
     #   `ListShards` to list the shards starting with the first one in the
@@ -993,6 +1147,92 @@ module Aws::Kinesis
     # @param [Hash] params ({})
     def list_shards(params = {}, options = {})
       req = build_request(:list_shards, params)
+      req.send_request(options)
+    end
+
+    # Lists the consumers registered to receive data from a stream using
+    # enhanced fan-out, and provides information about each consumer.
+    #
+    # This operation has a limit of 10 transactions per second per account.
+    #
+    # @option params [required, String] :stream_arn
+    #   The ARN of the Kinesis data stream for which you want to list the
+    #   registered consumers. For more information, see [Amazon Resource Names
+    #   (ARNs) and AWS Service Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams
+    #
+    # @option params [String] :next_token
+    #   When the number of consumers that are registered with the data stream
+    #   is greater than the default value for the `MaxResults` parameter, or
+    #   if you explicitly specify a value for `MaxResults` that is less than
+    #   the number of consumers that are registered with the data stream, the
+    #   response includes a pagination token named `NextToken`. You can
+    #   specify this `NextToken` value in a subsequent call to
+    #   `ListStreamConsumers` to list the next set of registered consumers.
+    #
+    #   Don't specify `StreamName` or `StreamCreationTimestamp` if you
+    #   specify `NextToken` because the latter unambiguously identifies the
+    #   stream.
+    #
+    #   You can optionally specify a value for the `MaxResults` parameter when
+    #   you specify `NextToken`. If you specify a `MaxResults` value that is
+    #   less than the number of consumers that the operation returns if you
+    #   don't specify `MaxResults`, the response will contain a new
+    #   `NextToken` value. You can use the new `NextToken` value in a
+    #   subsequent call to the `ListStreamConsumers` operation to list the
+    #   next set of consumers.
+    #
+    #   Tokens expire after 300 seconds. When you obtain a value for
+    #   `NextToken` in the response to a call to `ListStreamConsumers`, you
+    #   have 300 seconds to use that value. If you specify an expired token in
+    #   a call to `ListStreamConsumers`, you get `ExpiredNextTokenException`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of consumers that you want a single call of
+    #   `ListStreamConsumers` to return.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :stream_creation_timestamp
+    #   Specify this input parameter to distinguish data streams that have the
+    #   same name. For example, if you create a data stream and then delete
+    #   it, and you later create another data stream with the same name, you
+    #   can use this input parameter to specify which of the two streams you
+    #   want to list the consumers for.
+    #
+    #   You can't specify this parameter if you specify the NextToken
+    #   parameter.
+    #
+    # @return [Types::ListStreamConsumersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListStreamConsumersOutput#consumers #consumers} => Array&lt;Types::Consumer&gt;
+    #   * {Types::ListStreamConsumersOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_stream_consumers({
+    #     stream_arn: "StreamARN", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     stream_creation_timestamp: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.consumers #=> Array
+    #   resp.consumers[0].consumer_name #=> String
+    #   resp.consumers[0].consumer_arn #=> String
+    #   resp.consumers[0].consumer_status #=> String, one of "CREATING", "DELETING", "ACTIVE"
+    #   resp.consumers[0].consumer_creation_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListStreamConsumers AWS API Documentation
+    #
+    # @overload list_stream_consumers(params = {})
+    # @param [Hash] params ({})
+    def list_stream_consumers(params = {}, options = {})
+      req = build_request(:list_stream_consumers, params)
       req.send_request(options)
     end
 
@@ -1402,6 +1642,58 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
+    # Registers a consumer with a Kinesis data stream. When you use this
+    # operation, the consumer you register can read data from the stream at
+    # a rate of up to 2 MiB per second. This rate is unaffected by the total
+    # number of consumers that read from the same stream.
+    #
+    # You can register up to 5 consumers per stream. A given consumer can
+    # only be registered with one stream.
+    #
+    # This operation has a limit of five transactions per second per
+    # account.
+    #
+    # @option params [required, String] :stream_arn
+    #   The ARN of the Kinesis data stream that you want to register the
+    #   consumer with. For more info, see [Amazon Resource Names (ARNs) and
+    #   AWS Service Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams
+    #
+    # @option params [required, String] :consumer_name
+    #   For a given Kinesis data stream, each consumer must have a unique
+    #   name. However, consumer names don't have to be unique across data
+    #   streams.
+    #
+    # @return [Types::RegisterStreamConsumerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterStreamConsumerOutput#consumer #consumer} => Types::Consumer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_stream_consumer({
+    #     stream_arn: "StreamARN", # required
+    #     consumer_name: "ConsumerName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.consumer.consumer_name #=> String
+    #   resp.consumer.consumer_arn #=> String
+    #   resp.consumer.consumer_status #=> String, one of "CREATING", "DELETING", "ACTIVE"
+    #   resp.consumer.consumer_creation_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/RegisterStreamConsumer AWS API Documentation
+    #
+    # @overload register_stream_consumer(params = {})
+    # @param [Hash] params ({})
+    def register_stream_consumer(params = {}, options = {})
+      req = build_request(:register_stream_consumer, params)
+      req.send_request(options)
+    end
+
     # Removes tags from the specified Kinesis data stream. Removed tags are
     # deleted and cannot be recovered after this operation successfully
     # completes.
@@ -1476,9 +1768,9 @@ module Aws::Kinesis
     # `ResourceNotFoundException`. If you try to create more shards than are
     # authorized for your account, you receive a `LimitExceededException`.
     #
-    # For the default shard limit for an AWS account, see [Streams
-    # Limits][2] in the *Amazon Kinesis Data Streams Developer Guide*. To
-    # increase this limit, [contact AWS Support][3].
+    # For the default shard limit for an AWS account, see [Kinesis Data
+    # Streams Limits][2] in the *Amazon Kinesis Data Streams Developer
+    # Guide*. To increase this limit, [contact AWS Support][3].
     #
     # If you try to operate on too many streams simultaneously using
     # CreateStream, DeleteStream, MergeShards, and/or SplitShard, you
@@ -1542,11 +1834,10 @@ module Aws::Kinesis
     # API Limits: You can successfully apply a new AWS KMS key for
     # server-side encryption 25 times in a rolling 24-hour period.
     #
-    # Note: It can take up to five seconds after the stream is in an
-    # `ACTIVE` status before all records written to the stream are
-    # encrypted. After you enable encryption, you can verify that encryption
-    # is applied by inspecting the API response from `PutRecord` or
-    # `PutRecords`.
+    # Note: It can take up to 5 seconds after the stream is in an `ACTIVE`
+    # status before all records written to the stream are encrypted. After
+    # you enable encryption, you can verify that encryption is applied by
+    # inspecting the API response from `PutRecord` or `PutRecords`.
     #
     # @option params [required, String] :stream_name
     #   The name of the stream for which to start encrypting records.
@@ -1608,10 +1899,10 @@ module Aws::Kinesis
     # API Limits: You can successfully disable server-side encryption 25
     # times in a rolling 24-hour period.
     #
-    # Note: It can take up to five seconds after the stream is in an
-    # `ACTIVE` status before all records written to the stream are no longer
-    # subject to encryption. After you disabled encryption, you can verify
-    # that encryption is not applied by inspecting the API response from
+    # Note: It can take up to 5 seconds after the stream is in an `ACTIVE`
+    # status before all records written to the stream are no longer subject
+    # to encryption. After you disabled encryption, you can verify that
+    # encryption is not applied by inspecting the API response from
     # `PutRecord` or `PutRecords`.
     #
     # @option params [required, String] :stream_name
@@ -1676,7 +1967,8 @@ module Aws::Kinesis
     # or halve the shard count, as this results in the fewest number of
     # splits or merges.
     #
-    # This operation has the following limits. You cannot do the following:
+    # This operation has the following default limits. By default, you
+    # cannot do the following:
     #
     # * Scale more than twice per rolling 24-hour period per stream
     #
@@ -1752,7 +2044,7 @@ module Aws::Kinesis
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesis'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

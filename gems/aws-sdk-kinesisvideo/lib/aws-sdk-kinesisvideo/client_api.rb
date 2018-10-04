@@ -177,10 +177,14 @@ module Aws::KinesisVideo
       api.version = "2017-09-30"
 
       api.metadata = {
+        "apiVersion" => "2017-09-30",
         "endpointPrefix" => "kinesisvideo",
         "protocol" => "rest-json",
+        "serviceAbbreviation" => "Kinesis Video",
         "serviceFullName" => "Amazon Kinesis Video Streams",
+        "serviceId" => "Kinesis Video",
         "signatureVersion" => "v4",
+        "uid" => "kinesisvideo-2017-09-30",
       }
 
       api.add_operation(:create_stream, Seahorse::Model::Operation.new.tap do |o|

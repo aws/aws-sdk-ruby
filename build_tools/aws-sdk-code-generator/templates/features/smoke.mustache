@@ -1,0 +1,17 @@
+{{#generated_src_warning}}
+{{generated_src_warning}}
+{{/generated_src_warning}}
+Feature: Smoke tests for {{service}}
+
+Background:
+  Given I create a client in region '{{client_region}}'
+{{#smoke_tests}}
+
+  {{smoke_test_tags}}
+  Scenario: {{scenario_string}}
+  When I call the operation '{{operation}}' with params:
+    """
+{{&param_hash}}
+    """
+  Then {{error_expectation}}
+{{/smoke_tests}}

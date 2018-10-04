@@ -1,6 +1,53 @@
 Unreleased Changes
 ------------------
 
+3.25.0 (2018-08-28)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-signer` gem.
+
+3.24.0 (2018-08-27)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-signer` gem.
+
+* Issue - Fix the load statement for the `aws-sdk-signer` gem.
+
+3.23.0 (2018-08-27)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-signer` gem.
+
+3.22.0 (2018-07-12)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-dlm` gem.
+
+3.21.0 (2018-06-21)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-macie` gem.
+
+3.20.0 (2018-06-04)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-eks` gem.
+
+3.19.0 (2018-06-01)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-mediatailor` gem.
+
+3.18.0 (2018-05-30)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-neptune` gem.
+
+3.17.0 (2018-05-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-pi` gem.
+
 3.16.0 (2018-05-14)
 ------------------
 

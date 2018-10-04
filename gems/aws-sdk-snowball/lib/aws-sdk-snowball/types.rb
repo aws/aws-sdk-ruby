@@ -235,9 +235,8 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of AWS Snowball appliance to use for this cluster.
-    #   Currently, the only supported appliance type for cluster jobs is
-    #   `EDGE`.
+    #   The type of AWS Snowball device to use for this cluster. Currently,
+    #   the only supported device type for cluster jobs is `EDGE`.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -255,13 +254,13 @@ module Aws::Snowball
     #
     # @!attribute [rw] shipping_option
     #   The shipping speed for each node in this cluster. This speed
-    #   doesn't dictate how soon you'll get each Snowball Edge appliance,
-    #   rather it represents how quickly each appliance moves to its
+    #   doesn't dictate how soon you'll get each Snowball Edge device,
+    #   rather it represents how quickly each device moves to its
     #   destination while in transit. Regional shipping speeds are as
     #   follows:
     #
     #   * In Australia, you have access to express shipping. Typically,
-    #     appliances shipped express are delivered in about a day.
+    #     devices shipped express are delivered in about a day.
     #
     #   * In the European Union (EU), you have access to express shipping.
     #     Typically, Snowball Edges shipped express are delivered in about a
@@ -301,6 +300,27 @@ module Aws::Snowball
       :shipping_option,
       :notification,
       :forwarding_address_id)
+      include Aws::Structure
+    end
+
+    # A JSON-formatted object that describes a compatible Amazon Machine
+    # Image (AMI), including the ID and name for a Snowball Edge AMI. This
+    # AMI is compatible with the device's physical hardware requirements,
+    # and it should be able to be run in an SBE1 instance on the device.
+    #
+    # @!attribute [rw] ami_id
+    #   The unique identifier for an individual Snowball Edge AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The optional name of a compatible image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CompatibleImage AWS API Documentation
+    #
+    class CompatibleImage < Struct.new(
+      :ami_id,
+      :name)
       include Aws::Structure
     end
 
@@ -375,6 +395,12 @@ module Aws::Snowball
     #               ],
     #             },
     #           ],
+    #           ec2_ami_resources: [
+    #             {
+    #               ami_id: "AmiId", # required
+    #               snowball_ami_id: "String",
+    #             },
+    #           ],
     #         },
     #         description: "String",
     #         address_id: "AddressId", # required
@@ -384,7 +410,7 @@ module Aws::Snowball
     #         shipping_option: "SECOND_DAY", # required, accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #         notification: {
     #           sns_topic_arn: "SnsTopicARN",
-    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #           notify_all: false,
     #         },
     #         forwarding_address_id: "AddressId",
@@ -431,20 +457,19 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of AWS Snowball appliance to use for this cluster.
-    #   Currently, the only supported appliance type for cluster jobs is
-    #   `EDGE`.
+    #   The type of AWS Snowball device to use for this cluster. Currently,
+    #   the only supported device type for cluster jobs is `EDGE`.
     #   @return [String]
     #
     # @!attribute [rw] shipping_option
     #   The shipping speed for each node in this cluster. This speed
-    #   doesn't dictate how soon you'll get each Snowball Edge appliance,
-    #   rather it represents how quickly each appliance moves to its
+    #   doesn't dictate how soon you'll get each Snowball Edge device,
+    #   rather it represents how quickly each device moves to its
     #   destination while in transit. Regional shipping speeds are as
     #   follows:
     #
     #   * In Australia, you have access to express shipping. Typically,
-    #     appliances shipped express are delivered in about a day.
+    #     devices shipped express are delivered in about a day.
     #
     #   * In the European Union (EU), you have access to express shipping.
     #     Typically, Snowball Edges shipped express are delivered in about a
@@ -519,6 +544,12 @@ module Aws::Snowball
     #               ],
     #             },
     #           ],
+    #           ec2_ami_resources: [
+    #             {
+    #               ami_id: "AmiId", # required
+    #               snowball_ami_id: "String",
+    #             },
+    #           ],
     #         },
     #         description: "String",
     #         address_id: "AddressId",
@@ -528,7 +559,7 @@ module Aws::Snowball
     #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #         notification: {
     #           sns_topic_arn: "SnsTopicARN",
-    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #           notify_all: false,
     #         },
     #         cluster_id: "ClusterId",
@@ -621,8 +652,8 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of AWS Snowball appliance to use for this job. Currently,
-    #   the only supported appliance type for cluster jobs is `EDGE`.
+    #   The type of AWS Snowball device to use for this job. Currently, the
+    #   only supported device type for cluster jobs is `EDGE`.
     #   @return [String]
     #
     # @!attribute [rw] forwarding_address_id
@@ -661,7 +692,7 @@ module Aws::Snowball
     end
 
     # Defines the real-time status of a Snowball's data transfer while the
-    # appliance is at AWS. This data is only available while a job has a
+    # device is at AWS. This data is only available while a job has a
     # `JobState` value of `InProgress`, for both import and export jobs.
     #
     # @!attribute [rw] bytes_transferred
@@ -837,6 +868,35 @@ module Aws::Snowball
       include Aws::Structure
     end
 
+    # A JSON-formatted object that contains the IDs for an Amazon Machine
+    # Image (AMI), including the Amazon EC2 AMI ID and the Snowball Edge AMI
+    # ID. Each AMI has these two IDs to simplify identifying the AMI in both
+    # the AWS Cloud and on the device.
+    #
+    # @note When making an API call, you may pass Ec2AmiResource
+    #   data as a hash:
+    #
+    #       {
+    #         ami_id: "AmiId", # required
+    #         snowball_ami_id: "String",
+    #       }
+    #
+    # @!attribute [rw] ami_id
+    #   The ID of the AMI in Amazon EC2.
+    #   @return [String]
+    #
+    # @!attribute [rw] snowball_ami_id
+    #   The ID of the AMI on the Snowball Edge device.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/Ec2AmiResource AWS API Documentation
+    #
+    class Ec2AmiResource < Struct.new(
+      :ami_id,
+      :snowball_ami_id)
+      include Aws::Structure
+    end
+
     # The container for the EventTriggerDefinition$EventResourceARN.
     #
     # @note When making an API call, you may pass EventTriggerDefinition
@@ -971,7 +1031,7 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of appliance used with this job.
+    #   The type of device used with this job.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -1062,7 +1122,7 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of appliance used with this job.
+    #   The type of device used with this job.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -1123,7 +1183,7 @@ module Aws::Snowball
     #
     # @!attribute [rw] data_transfer_progress
     #   A value that defines the real-time status of a Snowball's data
-    #   transfer while the appliance is at AWS. This data is only available
+    #   transfer while the device is at AWS. This data is only available
     #   while a job has a `JobState` value of `InProgress`, for both import
     #   and export jobs.
     #   @return [Types::DataTransfer]
@@ -1170,9 +1230,9 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # Contains an array of `S3Resource` objects. Each `S3Resource` object
-    # represents an Amazon S3 bucket that your transferred data will be
-    # exported from or imported into.
+    # Contains an array of AWS resource objects. Each object represents an
+    # Amazon S3 bucket, an AWS Lambda function, or an Amazon Machine Image
+    # (AMI) based on Amazon EC2 that is associated with a particular job.
     #
     # @note When making an API call, you may pass JobResource
     #   data as a hash:
@@ -1197,6 +1257,12 @@ module Aws::Snowball
     #             ],
     #           },
     #         ],
+    #         ec2_ami_resources: [
+    #           {
+    #             ami_id: "AmiId", # required
+    #             snowball_ami_id: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] s3_resources
@@ -1207,11 +1273,16 @@ module Aws::Snowball
     #   The Python-language Lambda functions for this job.
     #   @return [Array<Types::LambdaResource>]
     #
+    # @!attribute [rw] ec2_ami_resources
+    #   The Amazon Machine Images (AMIs) associated with this job.
+    #   @return [Array<Types::Ec2AmiResource>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/JobResource AWS API Documentation
     #
     class JobResource < Struct.new(
       :s3_resources,
-      :lambda_resources)
+      :lambda_resources,
+      :ec2_ami_resources)
       include Aws::Structure
     end
 
@@ -1377,6 +1448,51 @@ module Aws::Snowball
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListCompatibleImagesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results for the list of compatible images.
+    #   Currently, a Snowball Edge device can store 10 AMIs.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   HTTP requests are stateless. To identify what object comes "next"
+    #   in the list of compatible images, you can specify a value for
+    #   `NextToken` as the starting point for your list of returned images.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListCompatibleImagesRequest AWS API Documentation
+    #
+    class ListCompatibleImagesRequest < Struct.new(
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] compatible_images
+    #   A JSON-formatted object that describes a compatible AMI, including
+    #   the ID and name for a Snowball Edge AMI.
+    #   @return [Array<Types::CompatibleImage>]
+    #
+    # @!attribute [rw] next_token
+    #   Because HTTP requests are stateless, this is the starting point for
+    #   your next list of returned images.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListCompatibleImagesResult AWS API Documentation
+    #
+    class ListCompatibleImagesResult < Struct.new(
+      :compatible_images,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListJobsRequest
     #   data as a hash:
     #
@@ -1439,7 +1555,7 @@ module Aws::Snowball
     #
     #       {
     #         sns_topic_arn: "SnsTopicARN",
-    #         job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+    #         job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #         notify_all: false,
     #       }
     #
@@ -1606,12 +1722,18 @@ module Aws::Snowball
     #               ],
     #             },
     #           ],
+    #           ec2_ami_resources: [
+    #             {
+    #               ami_id: "AmiId", # required
+    #               snowball_ami_id: "String",
+    #             },
+    #           ],
     #         },
     #         address_id: "AddressId",
     #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #         notification: {
     #           sns_topic_arn: "SnsTopicARN",
-    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #           notify_all: false,
     #         },
     #         forwarding_address_id: "AddressId",
@@ -1685,7 +1807,7 @@ module Aws::Snowball
     #         role_arn: "RoleARN",
     #         notification: {
     #           sns_topic_arn: "SnsTopicARN",
-    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #           notify_all: false,
     #         },
     #         resources: {
@@ -1706,6 +1828,12 @@ module Aws::Snowball
     #                   event_resource_arn: "ResourceARN",
     #                 },
     #               ],
+    #             },
+    #           ],
+    #           ec2_ami_resources: [
+    #             {
+    #               ami_id: "AmiId", # required
+    #               snowball_ami_id: "String",
     #             },
     #           ],
     #         },
@@ -1736,9 +1864,7 @@ module Aws::Snowball
     #   @return [Types::Notification]
     #
     # @!attribute [rw] resources
-    #   The updated S3Resource object (for a single Amazon S3 bucket or key
-    #   range), or the updated JobResource object (for multiple buckets or
-    #   key ranges).
+    #   The updated `JobResource` object, or the updated JobResource object.
     #   @return [Types::JobResource]
     #
     # @!attribute [rw] address_id

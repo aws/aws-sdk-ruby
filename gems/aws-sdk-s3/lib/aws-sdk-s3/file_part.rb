@@ -56,14 +56,12 @@ module Aws
       end
 
       def read_from_file(bytes, output_buffer)
-        if bytes
-          data = @file.read([remaining_bytes, bytes].min)
-          data = nil if data == ''
-        else
-          data = @file.read(remaining_bytes)
-        end
+        length = [remaining_bytes, *bytes].min
+        data   = @file.read(length, output_buffer)
+
         @position += data ? data.bytesize : 0
-        output_buffer ? output_buffer.replace(data || '') : data
+
+        data.to_s unless bytes && (data.nil? || data.empty?)
       end
 
       def remaining_bytes

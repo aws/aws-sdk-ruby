@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -47,6 +49,8 @@ module Aws::CloudWatchLogs
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -92,6 +96,22 @@ module Aws::CloudWatchLogs
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::CloudWatchLogs
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -738,7 +769,7 @@ module Aws::CloudWatchLogs
     # @option params [String] :log_stream_name_prefix
     #   The prefix to match.
     #
-    #   iIf `orderBy` is `LastEventTime`,you cannot specify this parameter.
+    #   If `orderBy` is `LastEventTime`,you cannot specify this parameter.
     #
     # @option params [String] :order_by
     #   If the value is `LogStreamName`, the results are ordered by log stream
@@ -825,12 +856,14 @@ module Aws::CloudWatchLogs
     #   the default is up to 50 items.
     #
     # @option params [String] :metric_name
-    #   The name of the CloudWatch metric to which the monitored log
-    #   information should be published. For example, you may publish to a
-    #   metric called ErrorCount.
+    #   Filters results to include only those with the specified metric name.
+    #   If you include this parameter in your request, you must also include
+    #   the `metricNamespace` parameter.
     #
     # @option params [String] :metric_namespace
-    #   The namespace of the CloudWatch metric.
+    #   Filters results to include only those in the specified namespace. If
+    #   you include this parameter in your request, you must also include the
+    #   `metricName` parameter.
     #
     # @return [Types::DescribeMetricFiltersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1007,10 +1040,24 @@ module Aws::CloudWatchLogs
     # specifying the token in a subsequent call.
     #
     # @option params [required, String] :log_group_name
-    #   The name of the log group.
+    #   The name of the log group to search.
     #
     # @option params [Array<String>] :log_stream_names
-    #   Optional list of log stream names.
+    #   Filters the results to only logs from the log streams in this list.
+    #
+    #   If you specify a value for both `logStreamNamePrefix` and
+    #   `logStreamNames`, but the value for `logStreamNamePrefix` does not
+    #   match any log stream names specified in `logStreamNames`, the action
+    #   returns an `InvalidParameterException` error.
+    #
+    # @option params [String] :log_stream_name_prefix
+    #   Filters the results to include only events from log streams that have
+    #   names starting with this prefix.
+    #
+    #   If you specify a value for both `logStreamNamePrefix` and
+    #   `logStreamNames`, but the value for `logStreamNamePrefix` does not
+    #   match any log stream names specified in `logStreamNames`, the action
+    #   returns an `InvalidParameterException` error.
     #
     # @option params [Integer] :start_time
     #   The start of the time range, expressed as the number of milliseconds
@@ -1023,8 +1070,14 @@ module Aws::CloudWatchLogs
     #   this time are not returned.
     #
     # @option params [String] :filter_pattern
-    #   The filter pattern to use. If not provided, all the events are
-    #   matched.
+    #   The filter pattern to use. For more information, see [Filter and
+    #   Pattern Syntax][1].
+    #
+    #   If not provided, all the events are matched.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
     #
     # @option params [String] :next_token
     #   The token for the next set of events to return. (You received this
@@ -1051,6 +1104,7 @@ module Aws::CloudWatchLogs
     #   resp = client.filter_log_events({
     #     log_group_name: "LogGroupName", # required
     #     log_stream_names: ["LogStreamName"],
+    #     log_stream_name_prefix: "LogStreamName",
     #     start_time: 1,
     #     end_time: 1,
     #     filter_pattern: "FilterPattern",
@@ -1096,13 +1150,14 @@ module Aws::CloudWatchLogs
     #
     # @option params [Integer] :start_time
     #   The start of the time range, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp earlier than
-    #   this time are not included.
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp equal to this
+    #   time or later than this time are included. Events with a time stamp
+    #   earlier than this time are not included.
     #
     # @option params [Integer] :end_time
     #   The end of the time range, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp later than
-    #   this time are not included.
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp equal to or
+    #   later than this time are not included.
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
@@ -1294,13 +1349,19 @@ module Aws::CloudWatchLogs
     #   retention period of the log group.
     #
     # * The log events in the batch must be in chronological ordered by
-    #   their time stamp (the time the event occurred, expressed as the
-    #   number of milliseconds after Jan 1, 1970 00:00:00 UTC).
+    #   their time stamp. The time stamp is the time the event occurred,
+    #   expressed as the number of milliseconds after Jan 1, 1970 00:00:00
+    #   UTC. (In AWS Tools for PowerShell and the AWS SDK for .NET, the
+    #   timestamp is specified in .NET format: yyyy-mm-ddThh:mm:ss. For
+    #   example, 2017-09-15T13:45:30.)
     #
     # * The maximum number of log events in a batch is 10,000.
     #
     # * A batch of log events in a single request cannot span more than 24
     #   hours. Otherwise, the operation fails.
+    #
+    # If a call to PutLogEvents returns "UnrecognizedClientException" the
+    # most likely cause is an invalid AWS access key ID or secret key.
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
@@ -1403,7 +1464,7 @@ module Aws::CloudWatchLogs
 
     # Creates or updates a resource policy allowing other AWS services to
     # put log events to this account, such as Amazon Route 53. An account
-    # can have up to 50 resource policies per region.
+    # can have up to 10 resource policies per region.
     #
     # @option params [String] :policy_name
     #   Name of the new policy. This parameter is required.
@@ -1418,10 +1479,10 @@ module Aws::CloudWatchLogs
     #   "logArn" with the ARN of your CloudWatch Logs resource, such as a
     #   log group or log stream.
     #
-    #   \\\{ "Version": "2012-10-17" "Statement": \[ \\\{ "Sid":
-    #   "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal":
-    #   \\\{ "Service": \[ "route53.amazonaws.com" \] \\},
-    #   "Action":"logs:PutLogEvents", "Resource": logArn \\} \] \\}
+    #   `\{ "Version": "2012-10-17", "Statement": [ \{ "Sid":
+    #   "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal": \{
+    #   "Service": [ "route53.amazonaws.com" ] \},
+    #   "Action":"logs:PutLogEvents", "Resource": "logArn" \} ] \} `
     #
     # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1686,7 +1747,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

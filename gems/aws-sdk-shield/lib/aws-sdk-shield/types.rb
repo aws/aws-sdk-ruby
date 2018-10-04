@@ -8,6 +8,60 @@
 module Aws::Shield
   module Types
 
+    # @note When making an API call, you may pass AssociateDRTLogBucketRequest
+    #   data as a hash:
+    #
+    #       {
+    #         log_bucket: "LogBucket", # required
+    #       }
+    #
+    # @!attribute [rw] log_bucket
+    #   The Amazon S3 bucket that contains your flow logs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateDRTLogBucketRequest AWS API Documentation
+    #
+    class AssociateDRTLogBucketRequest < Struct.new(
+      :log_bucket)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateDRTLogBucketResponse AWS API Documentation
+    #
+    class AssociateDRTLogBucketResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass AssociateDRTRoleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         role_arn: "RoleArn", # required
+    #       }
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the role the DRT will use to
+    #   access your AWS account.
+    #
+    #   Prior to making the `AssociateDRTRole` request, you must attach the
+    #   [AWSShieldDRTAccessPolicy][1] managed policy to this role. For more
+    #   information see [Attaching and Detaching IAM Policies](
+    #   https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html).
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateDRTRoleRequest AWS API Documentation
+    #
+    class AssociateDRTRoleRequest < Struct.new(
+      :role_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateDRTRoleResponse AWS API Documentation
+    #
+    class AssociateDRTRoleResponse < Aws::EmptyStructure; end
+
     # The details of a DDoS attack.
     #
     # @!attribute [rw] attack_id
@@ -338,6 +392,47 @@ module Aws::Shield
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeDRTAccessRequest AWS API Documentation
+    #
+    class DescribeDRTAccessRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the role the DRT used to access
+    #   your AWS account.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_bucket_list
+    #   The list of Amazon S3 buckets accessed by the DRT.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeDRTAccessResponse AWS API Documentation
+    #
+    class DescribeDRTAccessResponse < Struct.new(
+      :role_arn,
+      :log_bucket_list)
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeEmergencyContactSettingsRequest AWS API Documentation
+    #
+    class DescribeEmergencyContactSettingsRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] emergency_contact_list
+    #   A list of email addresses that the DRT can use to contact you during
+    #   a suspected attack.
+    #   @return [Array<Types::EmergencyContact>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeEmergencyContactSettingsResponse AWS API Documentation
+    #
+    class DescribeEmergencyContactSettingsResponse < Struct.new(
+      :emergency_contact_list)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeProtectionRequest
     #   data as a hash:
     #
@@ -385,6 +480,60 @@ module Aws::Shield
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisassociateDRTLogBucketRequest
+    #   data as a hash:
+    #
+    #       {
+    #         log_bucket: "LogBucket", # required
+    #       }
+    #
+    # @!attribute [rw] log_bucket
+    #   The Amazon S3 bucket that contains your flow logs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateDRTLogBucketRequest AWS API Documentation
+    #
+    class DisassociateDRTLogBucketRequest < Struct.new(
+      :log_bucket)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateDRTLogBucketResponse AWS API Documentation
+    #
+    class DisassociateDRTLogBucketResponse < Aws::EmptyStructure; end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateDRTRoleRequest AWS API Documentation
+    #
+    class DisassociateDRTRoleRequest < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateDRTRoleResponse AWS API Documentation
+    #
+    class DisassociateDRTRoleResponse < Aws::EmptyStructure; end
+
+    # Contact information that the DRT can use to contact you during a
+    # suspected attack.
+    #
+    # @note When making an API call, you may pass EmergencyContact
+    #   data as a hash:
+    #
+    #       {
+    #         email_address: "EmailAddress", # required
+    #       }
+    #
+    # @!attribute [rw] email_address
+    #   An email address that the DRT can use to contact you during a
+    #   suspected attack.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/EmergencyContact AWS API Documentation
+    #
+    class EmergencyContact < Struct.new(
+      :email_address)
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/GetSubscriptionStateRequest AWS API Documentation
@@ -399,6 +548,25 @@ module Aws::Shield
     #
     class GetSubscriptionStateResponse < Struct.new(
       :subscription_state)
+      include Aws::Structure
+    end
+
+    # Specifies how many protections of a given type you can create.
+    #
+    # @!attribute [rw] type
+    #   The type of protection.
+    #   @return [String]
+    #
+    # @!attribute [rw] max
+    #   The maximum number of protections that can be created for the
+    #   specified `Type`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/Limit AWS API Documentation
+    #
+    class Limit < Struct.new(
+      :type,
+      :max)
       include Aws::Structure
     end
 
@@ -612,16 +780,38 @@ module Aws::Shield
     #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types
     #   @return [Time]
     #
+    # @!attribute [rw] end_time
+    #   The date and time your subscription will end.
+    #   @return [Time]
+    #
     # @!attribute [rw] time_commitment_in_seconds
     #   The length, in seconds, of the AWS Shield Advanced subscription for
     #   the account.
     #   @return [Integer]
     #
+    # @!attribute [rw] auto_renew
+    #   If `ENABLED`, the subscription will be automatically renewed at the
+    #   end of the existing subscription period.
+    #
+    #   When you initally create a subscription, `AutoRenew` is set to
+    #   `ENABLED`. You can change this by submitting an `UpdateSubscription`
+    #   request. If the `UpdateSubscription` request does not included a
+    #   value for `AutoRenew`, the existing value for `AutoRenew` remains
+    #   unchanged.
+    #   @return [String]
+    #
+    # @!attribute [rw] limits
+    #   Specifies how many protections of a given type you can create.
+    #   @return [Array<Types::Limit>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/Subscription AWS API Documentation
     #
     class Subscription < Struct.new(
       :start_time,
-      :time_commitment_in_seconds)
+      :end_time,
+      :time_commitment_in_seconds,
+      :auto_renew,
+      :limits)
       include Aws::Structure
     end
 
@@ -716,6 +906,60 @@ module Aws::Shield
       :to_exclusive)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UpdateEmergencyContactSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         emergency_contact_list: [
+    #           {
+    #             email_address: "EmailAddress", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] emergency_contact_list
+    #   A list of email addresses that the DRT can use to contact you during
+    #   a suspected attack.
+    #   @return [Array<Types::EmergencyContact>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateEmergencyContactSettingsRequest AWS API Documentation
+    #
+    class UpdateEmergencyContactSettingsRequest < Struct.new(
+      :emergency_contact_list)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateEmergencyContactSettingsResponse AWS API Documentation
+    #
+    class UpdateEmergencyContactSettingsResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateSubscriptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         auto_renew: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] auto_renew
+    #   When you initally create a subscription, `AutoRenew` is set to
+    #   `ENABLED`. If `ENABLED`, the subscription will be automatically
+    #   renewed at the end of the existing subscription period. You can
+    #   change this by submitting an `UpdateSubscription` request. If the
+    #   `UpdateSubscription` request does not included a value for
+    #   `AutoRenew`, the existing value for `AutoRenew` remains unchanged.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateSubscriptionRequest AWS API Documentation
+    #
+    class UpdateSubscriptionRequest < Struct.new(
+      :auto_renew)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateSubscriptionResponse AWS API Documentation
+    #
+    class UpdateSubscriptionResponse < Aws::EmptyStructure; end
 
   end
 end

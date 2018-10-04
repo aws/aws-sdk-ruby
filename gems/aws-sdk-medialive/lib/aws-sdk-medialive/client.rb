@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -47,6 +49,8 @@ module Aws::MediaLive
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -92,6 +96,22 @@ module Aws::MediaLive
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::MediaLive
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -145,6 +176,179 @@ module Aws::MediaLive
 
     # @!group API Operations
 
+    # Update a channel schedule
+    #
+    # @option params [required, String] :channel_id
+    #
+    # @option params [Types::BatchScheduleActionCreateRequest] :creates
+    #   Schedule actions to create in the schedule.
+    #
+    # @option params [Types::BatchScheduleActionDeleteRequest] :deletes
+    #   Schedule actions to delete from the schedule.
+    #
+    # @return [Types::BatchUpdateScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchUpdateScheduleResponse#creates #creates} => Types::BatchScheduleActionCreateResult
+    #   * {Types::BatchUpdateScheduleResponse#deletes #deletes} => Types::BatchScheduleActionDeleteResult
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_update_schedule({
+    #     channel_id: "__string", # required
+    #     creates: {
+    #       schedule_actions: [ # required
+    #         {
+    #           action_name: "__string", # required
+    #           schedule_action_settings: { # required
+    #             scte_35_return_to_network_settings: {
+    #               splice_event_id: 1, # required
+    #             },
+    #             scte_35_splice_insert_settings: {
+    #               duration: 1,
+    #               splice_event_id: 1, # required
+    #             },
+    #             scte_35_time_signal_settings: {
+    #               scte_35_descriptors: [ # required
+    #                 {
+    #                   scte_35_descriptor_settings: { # required
+    #                     segmentation_descriptor_scte_35_descriptor_settings: { # required
+    #                       delivery_restrictions: {
+    #                         archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
+    #                         device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
+    #                         no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
+    #                         web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
+    #                       },
+    #                       segment_num: 1,
+    #                       segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
+    #                       segmentation_duration: 1,
+    #                       segmentation_event_id: 1, # required
+    #                       segmentation_type_id: 1,
+    #                       segmentation_upid: "__string",
+    #                       segmentation_upid_type: 1,
+    #                       segments_expected: 1,
+    #                       sub_segment_num: 1,
+    #                       sub_segments_expected: 1,
+    #                     },
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #             static_image_activate_settings: {
+    #               duration: 1,
+    #               fade_in: 1,
+    #               fade_out: 1,
+    #               height: 1,
+    #               image: { # required
+    #                 password_param: "__string",
+    #                 uri: "__string", # required
+    #                 username: "__string",
+    #               },
+    #               image_x: 1,
+    #               image_y: 1,
+    #               layer: 1,
+    #               opacity: 1,
+    #               width: 1,
+    #             },
+    #             static_image_deactivate_settings: {
+    #               fade_out: 1,
+    #               layer: 1,
+    #             },
+    #           },
+    #           schedule_action_start_settings: { # required
+    #             fixed_mode_schedule_action_start_settings: {
+    #               time: "__string",
+    #             },
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     deletes: {
+    #       action_names: ["__string"], # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.creates.schedule_actions #=> Array
+    #   resp.creates.schedule_actions[0].action_name #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.duration #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.splice_event_id #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors #=> Array
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.archive_allowed_flag #=> String, one of "ARCHIVE_NOT_ALLOWED", "ARCHIVE_ALLOWED"
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.device_restrictions #=> String, one of "NONE", "RESTRICT_GROUP0", "RESTRICT_GROUP1", "RESTRICT_GROUP2"
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.no_regional_blackout_flag #=> String, one of "REGIONAL_BLACKOUT", "NO_REGIONAL_BLACKOUT"
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.web_delivery_allowed_flag #=> String, one of "WEB_DELIVERY_NOT_ALLOWED", "WEB_DELIVERY_ALLOWED"
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segment_num #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_cancel_indicator #=> String, one of "SEGMENTATION_EVENT_NOT_CANCELED", "SEGMENTATION_EVENT_CANCELED"
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_duration #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_event_id #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_type_id #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_upid #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_upid_type #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segments_expected #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.sub_segment_num #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.sub_segments_expected #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.duration #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.fade_in #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.fade_out #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.height #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.password_param #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.uri #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.username #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image_x #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image_y #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.layer #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.opacity #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.width #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.fade_out #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.layer #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_start_settings.fixed_mode_schedule_action_start_settings.time #=> String
+    #   resp.deletes.schedule_actions #=> Array
+    #   resp.deletes.schedule_actions[0].action_name #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.duration #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.splice_event_id #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors #=> Array
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.archive_allowed_flag #=> String, one of "ARCHIVE_NOT_ALLOWED", "ARCHIVE_ALLOWED"
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.device_restrictions #=> String, one of "NONE", "RESTRICT_GROUP0", "RESTRICT_GROUP1", "RESTRICT_GROUP2"
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.no_regional_blackout_flag #=> String, one of "REGIONAL_BLACKOUT", "NO_REGIONAL_BLACKOUT"
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.web_delivery_allowed_flag #=> String, one of "WEB_DELIVERY_NOT_ALLOWED", "WEB_DELIVERY_ALLOWED"
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segment_num #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_cancel_indicator #=> String, one of "SEGMENTATION_EVENT_NOT_CANCELED", "SEGMENTATION_EVENT_CANCELED"
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_duration #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_event_id #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_type_id #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_upid #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_upid_type #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segments_expected #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.sub_segment_num #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.sub_segments_expected #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.duration #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.fade_in #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.fade_out #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.height #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.password_param #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.uri #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.username #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image_x #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image_y #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.layer #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.opacity #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.width #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.fade_out #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.layer #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_start_settings.fixed_mode_schedule_action_start_settings.time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchUpdateSchedule AWS API Documentation
+    #
+    # @overload batch_update_schedule(params = {})
+    # @param [Hash] params ({})
+    def batch_update_schedule(params = {}, options = {})
+      req = build_request(:batch_update_schedule, params)
+      req.send_request(options)
+    end
+
     # Creates a new channel
     #
     # @option params [Array<Types::OutputDestination>] :destinations
@@ -154,6 +358,8 @@ module Aws::MediaLive
     # @option params [Array<Types::InputAttachment>] :input_attachments
     #
     # @option params [Types::InputSpecification] :input_specification
+    #
+    # @option params [String] :log_level
     #
     # @option params [String] :name
     #
@@ -469,7 +675,7 @@ module Aws::MediaLive
     #               key_format_versions: "__string",
     #               key_provider_settings: {
     #                 static_key_settings: {
-    #                   key_provider_server: {
+    #                   key_provider_server: { # required
     #                     password_param: "__string",
     #                     uri: "__string", # required
     #                     username: "__string",
@@ -860,6 +1066,7 @@ module Aws::MediaLive
     #       maximum_bitrate: "MAX_10_MBPS", # accepts MAX_10_MBPS, MAX_20_MBPS, MAX_50_MBPS
     #       resolution: "SD", # accepts SD, HD, UHD
     #     },
+    #     log_level: "ERROR", # accepts ERROR, WARNING, INFO, DEBUG, DISABLED
     #     name: "__string",
     #     request_id: "__string",
     #     reserved: "__string",
@@ -1328,6 +1535,7 @@ module Aws::MediaLive
     #   resp.channel.input_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC"
     #   resp.channel.input_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.channel.input_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.channel.log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
     #   resp.channel.name #=> String
     #   resp.channel.pipelines_running_count #=> Integer
     #   resp.channel.role_arn #=> String
@@ -1462,6 +1670,7 @@ module Aws::MediaLive
     #   * {Types::DeleteChannelResponse#id #id} => String
     #   * {Types::DeleteChannelResponse#input_attachments #input_attachments} => Array&lt;Types::InputAttachment&gt;
     #   * {Types::DeleteChannelResponse#input_specification #input_specification} => Types::InputSpecification
+    #   * {Types::DeleteChannelResponse#log_level #log_level} => String
     #   * {Types::DeleteChannelResponse#name #name} => String
     #   * {Types::DeleteChannelResponse#pipelines_running_count #pipelines_running_count} => Integer
     #   * {Types::DeleteChannelResponse#role_arn #role_arn} => String
@@ -1935,6 +2144,7 @@ module Aws::MediaLive
     #   resp.input_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC"
     #   resp.input_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.input_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
     #   resp.name #=> String
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
@@ -1991,6 +2201,71 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # Delete an expired reservation.
+    #
+    # @option params [required, String] :reservation_id
+    #
+    # @return [Types::DeleteReservationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteReservationResponse#arn #arn} => String
+    #   * {Types::DeleteReservationResponse#count #count} => Integer
+    #   * {Types::DeleteReservationResponse#currency_code #currency_code} => String
+    #   * {Types::DeleteReservationResponse#duration #duration} => Integer
+    #   * {Types::DeleteReservationResponse#duration_units #duration_units} => String
+    #   * {Types::DeleteReservationResponse#end #end} => String
+    #   * {Types::DeleteReservationResponse#fixed_price #fixed_price} => Float
+    #   * {Types::DeleteReservationResponse#name #name} => String
+    #   * {Types::DeleteReservationResponse#offering_description #offering_description} => String
+    #   * {Types::DeleteReservationResponse#offering_id #offering_id} => String
+    #   * {Types::DeleteReservationResponse#offering_type #offering_type} => String
+    #   * {Types::DeleteReservationResponse#region #region} => String
+    #   * {Types::DeleteReservationResponse#reservation_id #reservation_id} => String
+    #   * {Types::DeleteReservationResponse#resource_specification #resource_specification} => Types::ReservationResourceSpecification
+    #   * {Types::DeleteReservationResponse#start #start} => String
+    #   * {Types::DeleteReservationResponse#state #state} => String
+    #   * {Types::DeleteReservationResponse#usage_price #usage_price} => Float
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_reservation({
+    #     reservation_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.count #=> Integer
+    #   resp.currency_code #=> String
+    #   resp.duration #=> Integer
+    #   resp.duration_units #=> String, one of "MONTHS"
+    #   resp.end #=> String
+    #   resp.fixed_price #=> Float
+    #   resp.name #=> String
+    #   resp.offering_description #=> String
+    #   resp.offering_id #=> String
+    #   resp.offering_type #=> String, one of "NO_UPFRONT"
+    #   resp.region #=> String
+    #   resp.reservation_id #=> String
+    #   resp.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
+    #   resp.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
+    #   resp.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
+    #   resp.resource_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "CHANNEL"
+    #   resp.resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
+    #   resp.resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
+    #   resp.start #=> String
+    #   resp.state #=> String, one of "ACTIVE", "EXPIRED", "CANCELED", "DELETED"
+    #   resp.usage_price #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteReservation AWS API Documentation
+    #
+    # @overload delete_reservation(params = {})
+    # @param [Hash] params ({})
+    def delete_reservation(params = {}, options = {})
+      req = build_request(:delete_reservation, params)
+      req.send_request(options)
+    end
+
     # Gets details about a channel
     #
     # @option params [required, String] :channel_id
@@ -2004,6 +2279,7 @@ module Aws::MediaLive
     #   * {Types::DescribeChannelResponse#id #id} => String
     #   * {Types::DescribeChannelResponse#input_attachments #input_attachments} => Array&lt;Types::InputAttachment&gt;
     #   * {Types::DescribeChannelResponse#input_specification #input_specification} => Types::InputSpecification
+    #   * {Types::DescribeChannelResponse#log_level #log_level} => String
     #   * {Types::DescribeChannelResponse#name #name} => String
     #   * {Types::DescribeChannelResponse#pipelines_running_count #pipelines_running_count} => Integer
     #   * {Types::DescribeChannelResponse#role_arn #role_arn} => String
@@ -2477,6 +2753,7 @@ module Aws::MediaLive
     #   resp.input_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC"
     #   resp.input_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.input_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
     #   resp.name #=> String
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
@@ -2579,6 +2856,193 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # Get details for an offering.
+    #
+    # @option params [required, String] :offering_id
+    #
+    # @return [Types::DescribeOfferingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeOfferingResponse#arn #arn} => String
+    #   * {Types::DescribeOfferingResponse#currency_code #currency_code} => String
+    #   * {Types::DescribeOfferingResponse#duration #duration} => Integer
+    #   * {Types::DescribeOfferingResponse#duration_units #duration_units} => String
+    #   * {Types::DescribeOfferingResponse#fixed_price #fixed_price} => Float
+    #   * {Types::DescribeOfferingResponse#offering_description #offering_description} => String
+    #   * {Types::DescribeOfferingResponse#offering_id #offering_id} => String
+    #   * {Types::DescribeOfferingResponse#offering_type #offering_type} => String
+    #   * {Types::DescribeOfferingResponse#region #region} => String
+    #   * {Types::DescribeOfferingResponse#resource_specification #resource_specification} => Types::ReservationResourceSpecification
+    #   * {Types::DescribeOfferingResponse#usage_price #usage_price} => Float
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_offering({
+    #     offering_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.currency_code #=> String
+    #   resp.duration #=> Integer
+    #   resp.duration_units #=> String, one of "MONTHS"
+    #   resp.fixed_price #=> Float
+    #   resp.offering_description #=> String
+    #   resp.offering_id #=> String
+    #   resp.offering_type #=> String, one of "NO_UPFRONT"
+    #   resp.region #=> String
+    #   resp.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
+    #   resp.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
+    #   resp.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
+    #   resp.resource_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "CHANNEL"
+    #   resp.resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
+    #   resp.resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
+    #   resp.usage_price #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeOffering AWS API Documentation
+    #
+    # @overload describe_offering(params = {})
+    # @param [Hash] params ({})
+    def describe_offering(params = {}, options = {})
+      req = build_request(:describe_offering, params)
+      req.send_request(options)
+    end
+
+    # Get details for a reservation.
+    #
+    # @option params [required, String] :reservation_id
+    #
+    # @return [Types::DescribeReservationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReservationResponse#arn #arn} => String
+    #   * {Types::DescribeReservationResponse#count #count} => Integer
+    #   * {Types::DescribeReservationResponse#currency_code #currency_code} => String
+    #   * {Types::DescribeReservationResponse#duration #duration} => Integer
+    #   * {Types::DescribeReservationResponse#duration_units #duration_units} => String
+    #   * {Types::DescribeReservationResponse#end #end} => String
+    #   * {Types::DescribeReservationResponse#fixed_price #fixed_price} => Float
+    #   * {Types::DescribeReservationResponse#name #name} => String
+    #   * {Types::DescribeReservationResponse#offering_description #offering_description} => String
+    #   * {Types::DescribeReservationResponse#offering_id #offering_id} => String
+    #   * {Types::DescribeReservationResponse#offering_type #offering_type} => String
+    #   * {Types::DescribeReservationResponse#region #region} => String
+    #   * {Types::DescribeReservationResponse#reservation_id #reservation_id} => String
+    #   * {Types::DescribeReservationResponse#resource_specification #resource_specification} => Types::ReservationResourceSpecification
+    #   * {Types::DescribeReservationResponse#start #start} => String
+    #   * {Types::DescribeReservationResponse#state #state} => String
+    #   * {Types::DescribeReservationResponse#usage_price #usage_price} => Float
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_reservation({
+    #     reservation_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.count #=> Integer
+    #   resp.currency_code #=> String
+    #   resp.duration #=> Integer
+    #   resp.duration_units #=> String, one of "MONTHS"
+    #   resp.end #=> String
+    #   resp.fixed_price #=> Float
+    #   resp.name #=> String
+    #   resp.offering_description #=> String
+    #   resp.offering_id #=> String
+    #   resp.offering_type #=> String, one of "NO_UPFRONT"
+    #   resp.region #=> String
+    #   resp.reservation_id #=> String
+    #   resp.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
+    #   resp.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
+    #   resp.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
+    #   resp.resource_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "CHANNEL"
+    #   resp.resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
+    #   resp.resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
+    #   resp.start #=> String
+    #   resp.state #=> String, one of "ACTIVE", "EXPIRED", "CANCELED", "DELETED"
+    #   resp.usage_price #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeReservation AWS API Documentation
+    #
+    # @overload describe_reservation(params = {})
+    # @param [Hash] params ({})
+    def describe_reservation(params = {}, options = {})
+      req = build_request(:describe_reservation, params)
+      req.send_request(options)
+    end
+
+    # Get a channel schedule
+    #
+    # @option params [required, String] :channel_id
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::DescribeScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeScheduleResponse#next_token #next_token} => String
+    #   * {Types::DescribeScheduleResponse#schedule_actions #schedule_actions} => Array&lt;Types::ScheduleAction&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_schedule({
+    #     channel_id: "__string", # required
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.schedule_actions #=> Array
+    #   resp.schedule_actions[0].action_name #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.duration #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.splice_event_id #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors #=> Array
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.archive_allowed_flag #=> String, one of "ARCHIVE_NOT_ALLOWED", "ARCHIVE_ALLOWED"
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.device_restrictions #=> String, one of "NONE", "RESTRICT_GROUP0", "RESTRICT_GROUP1", "RESTRICT_GROUP2"
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.no_regional_blackout_flag #=> String, one of "REGIONAL_BLACKOUT", "NO_REGIONAL_BLACKOUT"
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.web_delivery_allowed_flag #=> String, one of "WEB_DELIVERY_NOT_ALLOWED", "WEB_DELIVERY_ALLOWED"
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segment_num #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_cancel_indicator #=> String, one of "SEGMENTATION_EVENT_NOT_CANCELED", "SEGMENTATION_EVENT_CANCELED"
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_duration #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_event_id #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_type_id #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_upid #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_upid_type #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segments_expected #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.sub_segment_num #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.sub_segments_expected #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.duration #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.fade_in #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.fade_out #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.height #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.password_param #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.uri #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.username #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image_x #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image_y #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.layer #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.opacity #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.width #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.fade_out #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.layer #=> Integer
+    #   resp.schedule_actions[0].schedule_action_start_settings.fixed_mode_schedule_action_start_settings.time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeSchedule AWS API Documentation
+    #
+    # @overload describe_schedule(params = {})
+    # @param [Hash] params ({})
+    def describe_schedule(params = {}, options = {})
+      req = build_request(:describe_schedule, params)
+      req.send_request(options)
+    end
+
     # Produces list of channels that have been created
     #
     # @option params [Integer] :max_results
@@ -2647,6 +3111,7 @@ module Aws::MediaLive
     #   resp.channels[0].input_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC"
     #   resp.channels[0].input_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.channels[0].input_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.channels[0].log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
     #   resp.channels[0].name #=> String
     #   resp.channels[0].pipelines_running_count #=> Integer
     #   resp.channels[0].role_arn #=> String
@@ -2750,6 +3215,215 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # List offerings available for purchase.
+    #
+    # @option params [String] :channel_configuration
+    #
+    # @option params [String] :codec
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :maximum_bitrate
+    #
+    # @option params [String] :maximum_framerate
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :resolution
+    #
+    # @option params [String] :resource_type
+    #
+    # @option params [String] :special_feature
+    #
+    # @option params [String] :video_quality
+    #
+    # @return [Types::ListOfferingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOfferingsResponse#next_token #next_token} => String
+    #   * {Types::ListOfferingsResponse#offerings #offerings} => Array&lt;Types::Offering&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_offerings({
+    #     channel_configuration: "__string",
+    #     codec: "__string",
+    #     max_results: 1,
+    #     maximum_bitrate: "__string",
+    #     maximum_framerate: "__string",
+    #     next_token: "__string",
+    #     resolution: "__string",
+    #     resource_type: "__string",
+    #     special_feature: "__string",
+    #     video_quality: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.offerings #=> Array
+    #   resp.offerings[0].arn #=> String
+    #   resp.offerings[0].currency_code #=> String
+    #   resp.offerings[0].duration #=> Integer
+    #   resp.offerings[0].duration_units #=> String, one of "MONTHS"
+    #   resp.offerings[0].fixed_price #=> Float
+    #   resp.offerings[0].offering_description #=> String
+    #   resp.offerings[0].offering_id #=> String
+    #   resp.offerings[0].offering_type #=> String, one of "NO_UPFRONT"
+    #   resp.offerings[0].region #=> String
+    #   resp.offerings[0].resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
+    #   resp.offerings[0].resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
+    #   resp.offerings[0].resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
+    #   resp.offerings[0].resource_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.offerings[0].resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "CHANNEL"
+    #   resp.offerings[0].resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
+    #   resp.offerings[0].resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
+    #   resp.offerings[0].usage_price #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListOfferings AWS API Documentation
+    #
+    # @overload list_offerings(params = {})
+    # @param [Hash] params ({})
+    def list_offerings(params = {}, options = {})
+      req = build_request(:list_offerings, params)
+      req.send_request(options)
+    end
+
+    # List purchased reservations.
+    #
+    # @option params [String] :codec
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :maximum_bitrate
+    #
+    # @option params [String] :maximum_framerate
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :resolution
+    #
+    # @option params [String] :resource_type
+    #
+    # @option params [String] :special_feature
+    #
+    # @option params [String] :video_quality
+    #
+    # @return [Types::ListReservationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListReservationsResponse#next_token #next_token} => String
+    #   * {Types::ListReservationsResponse#reservations #reservations} => Array&lt;Types::Reservation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_reservations({
+    #     codec: "__string",
+    #     max_results: 1,
+    #     maximum_bitrate: "__string",
+    #     maximum_framerate: "__string",
+    #     next_token: "__string",
+    #     resolution: "__string",
+    #     resource_type: "__string",
+    #     special_feature: "__string",
+    #     video_quality: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.reservations #=> Array
+    #   resp.reservations[0].arn #=> String
+    #   resp.reservations[0].count #=> Integer
+    #   resp.reservations[0].currency_code #=> String
+    #   resp.reservations[0].duration #=> Integer
+    #   resp.reservations[0].duration_units #=> String, one of "MONTHS"
+    #   resp.reservations[0].end #=> String
+    #   resp.reservations[0].fixed_price #=> Float
+    #   resp.reservations[0].name #=> String
+    #   resp.reservations[0].offering_description #=> String
+    #   resp.reservations[0].offering_id #=> String
+    #   resp.reservations[0].offering_type #=> String, one of "NO_UPFRONT"
+    #   resp.reservations[0].region #=> String
+    #   resp.reservations[0].reservation_id #=> String
+    #   resp.reservations[0].resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
+    #   resp.reservations[0].resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
+    #   resp.reservations[0].resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
+    #   resp.reservations[0].resource_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.reservations[0].resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "CHANNEL"
+    #   resp.reservations[0].resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
+    #   resp.reservations[0].resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
+    #   resp.reservations[0].start #=> String
+    #   resp.reservations[0].state #=> String, one of "ACTIVE", "EXPIRED", "CANCELED", "DELETED"
+    #   resp.reservations[0].usage_price #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListReservations AWS API Documentation
+    #
+    # @overload list_reservations(params = {})
+    # @param [Hash] params ({})
+    def list_reservations(params = {}, options = {})
+      req = build_request(:list_reservations, params)
+      req.send_request(options)
+    end
+
+    # Purchase an offering and create a reservation.
+    #
+    # @option params [Integer] :count
+    #
+    # @option params [String] :name
+    #
+    # @option params [required, String] :offering_id
+    #
+    # @option params [String] :request_id
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::PurchaseOfferingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PurchaseOfferingResponse#reservation #reservation} => Types::Reservation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.purchase_offering({
+    #     count: 1,
+    #     name: "__string",
+    #     offering_id: "__string", # required
+    #     request_id: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.reservation.arn #=> String
+    #   resp.reservation.count #=> Integer
+    #   resp.reservation.currency_code #=> String
+    #   resp.reservation.duration #=> Integer
+    #   resp.reservation.duration_units #=> String, one of "MONTHS"
+    #   resp.reservation.end #=> String
+    #   resp.reservation.fixed_price #=> Float
+    #   resp.reservation.name #=> String
+    #   resp.reservation.offering_description #=> String
+    #   resp.reservation.offering_id #=> String
+    #   resp.reservation.offering_type #=> String, one of "NO_UPFRONT"
+    #   resp.reservation.region #=> String
+    #   resp.reservation.reservation_id #=> String
+    #   resp.reservation.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
+    #   resp.reservation.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
+    #   resp.reservation.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
+    #   resp.reservation.resource_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.reservation.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "CHANNEL"
+    #   resp.reservation.resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
+    #   resp.reservation.resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
+    #   resp.reservation.start #=> String
+    #   resp.reservation.state #=> String, one of "ACTIVE", "EXPIRED", "CANCELED", "DELETED"
+    #   resp.reservation.usage_price #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PurchaseOffering AWS API Documentation
+    #
+    # @overload purchase_offering(params = {})
+    # @param [Hash] params ({})
+    def purchase_offering(params = {}, options = {})
+      req = build_request(:purchase_offering, params)
+      req.send_request(options)
+    end
+
     # Starts an existing channel
     #
     # @option params [required, String] :channel_id
@@ -2763,6 +3437,7 @@ module Aws::MediaLive
     #   * {Types::StartChannelResponse#id #id} => String
     #   * {Types::StartChannelResponse#input_attachments #input_attachments} => Array&lt;Types::InputAttachment&gt;
     #   * {Types::StartChannelResponse#input_specification #input_specification} => Types::InputSpecification
+    #   * {Types::StartChannelResponse#log_level #log_level} => String
     #   * {Types::StartChannelResponse#name #name} => String
     #   * {Types::StartChannelResponse#pipelines_running_count #pipelines_running_count} => Integer
     #   * {Types::StartChannelResponse#role_arn #role_arn} => String
@@ -3236,6 +3911,7 @@ module Aws::MediaLive
     #   resp.input_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC"
     #   resp.input_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.input_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
     #   resp.name #=> String
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
@@ -3263,6 +3939,7 @@ module Aws::MediaLive
     #   * {Types::StopChannelResponse#id #id} => String
     #   * {Types::StopChannelResponse#input_attachments #input_attachments} => Array&lt;Types::InputAttachment&gt;
     #   * {Types::StopChannelResponse#input_specification #input_specification} => Types::InputSpecification
+    #   * {Types::StopChannelResponse#log_level #log_level} => String
     #   * {Types::StopChannelResponse#name #name} => String
     #   * {Types::StopChannelResponse#pipelines_running_count #pipelines_running_count} => Integer
     #   * {Types::StopChannelResponse#role_arn #role_arn} => String
@@ -3736,6 +4413,7 @@ module Aws::MediaLive
     #   resp.input_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC"
     #   resp.input_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.input_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
     #   resp.name #=> String
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
@@ -3761,6 +4439,8 @@ module Aws::MediaLive
     # @option params [Array<Types::InputAttachment>] :input_attachments
     #
     # @option params [Types::InputSpecification] :input_specification
+    #
+    # @option params [String] :log_level
     #
     # @option params [String] :name
     #
@@ -4071,7 +4751,7 @@ module Aws::MediaLive
     #               key_format_versions: "__string",
     #               key_provider_settings: {
     #                 static_key_settings: {
-    #                   key_provider_server: {
+    #                   key_provider_server: { # required
     #                     password_param: "__string",
     #                     uri: "__string", # required
     #                     username: "__string",
@@ -4462,6 +5142,7 @@ module Aws::MediaLive
     #       maximum_bitrate: "MAX_10_MBPS", # accepts MAX_10_MBPS, MAX_20_MBPS, MAX_50_MBPS
     #       resolution: "SD", # accepts SD, HD, UHD
     #     },
+    #     log_level: "ERROR", # accepts ERROR, WARNING, INFO, DEBUG, DISABLED
     #     name: "__string",
     #     role_arn: "__string",
     #   })
@@ -4928,6 +5609,7 @@ module Aws::MediaLive
     #   resp.channel.input_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC"
     #   resp.channel.input_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.channel.input_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.channel.log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
     #   resp.channel.name #=> String
     #   resp.channel.pipelines_running_count #=> Integer
     #   resp.channel.role_arn #=> String
@@ -5060,7 +5742,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

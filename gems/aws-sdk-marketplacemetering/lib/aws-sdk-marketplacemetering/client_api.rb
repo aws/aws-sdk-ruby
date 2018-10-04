@@ -89,6 +89,7 @@ module Aws::MarketplaceMetering
       api.version = "2016-01-14"
 
       api.metadata = {
+        "apiVersion" => "2016-01-14",
         "endpointPrefix" => "metering.marketplace",
         "jsonVersion" => "1.1",
         "protocol" => "json",
@@ -96,6 +97,7 @@ module Aws::MarketplaceMetering
         "signatureVersion" => "v4",
         "signingName" => "aws-marketplace",
         "targetPrefix" => "AWSMPMeteringService",
+        "uid" => "meteringmarketplace-2016-01-14",
       }
 
       api.add_operation(:batch_meter_usage, Seahorse::Model::Operation.new.tap do |o|

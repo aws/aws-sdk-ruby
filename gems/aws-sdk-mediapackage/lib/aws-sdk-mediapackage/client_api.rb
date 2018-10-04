@@ -58,6 +58,8 @@ module Aws::MediaPackage
     Profile = Shapes::StringShape.new(name: 'Profile')
     RotateChannelCredentialsRequest = Shapes::StructureShape.new(name: 'RotateChannelCredentialsRequest')
     RotateChannelCredentialsResponse = Shapes::StructureShape.new(name: 'RotateChannelCredentialsResponse')
+    RotateIngestEndpointCredentialsRequest = Shapes::StructureShape.new(name: 'RotateIngestEndpointCredentialsRequest')
+    RotateIngestEndpointCredentialsResponse = Shapes::StructureShape.new(name: 'RotateIngestEndpointCredentialsResponse')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SpekeKeyProvider = Shapes::StructureShape.new(name: 'SpekeKeyProvider')
     StreamOrder = Shapes::StringShape.new(name: 'StreamOrder')
@@ -68,6 +70,7 @@ module Aws::MediaPackage
     UpdateChannelResponse = Shapes::StructureShape.new(name: 'UpdateChannelResponse')
     UpdateOriginEndpointRequest = Shapes::StructureShape.new(name: 'UpdateOriginEndpointRequest')
     UpdateOriginEndpointResponse = Shapes::StructureShape.new(name: 'UpdateOriginEndpointResponse')
+    __PeriodTriggersElement = Shapes::StringShape.new(name: '__PeriodTriggersElement')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
     __integer = Shapes::IntegerShape.new(name: '__integer')
@@ -76,6 +79,7 @@ module Aws::MediaPackage
     __listOfHlsManifestCreateOrUpdateParameters = Shapes::ListShape.new(name: '__listOfHlsManifestCreateOrUpdateParameters')
     __listOfIngestEndpoint = Shapes::ListShape.new(name: '__listOfIngestEndpoint')
     __listOfOriginEndpoint = Shapes::ListShape.new(name: '__listOfOriginEndpoint')
+    __listOf__PeriodTriggersElement = Shapes::ListShape.new(name: '__listOf__PeriodTriggersElement')
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __long = Shapes::IntegerShape.new(name: '__long')
     __string = Shapes::StringShape.new(name: '__string')
@@ -161,6 +165,7 @@ module Aws::MediaPackage
     DashPackage.add_member(:manifest_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "manifestWindowSeconds"))
     DashPackage.add_member(:min_buffer_time_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "minBufferTimeSeconds"))
     DashPackage.add_member(:min_update_period_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "minUpdatePeriodSeconds"))
+    DashPackage.add_member(:period_triggers, Shapes::ShapeRef.new(shape: __listOf__PeriodTriggersElement, location_name: "periodTriggers"))
     DashPackage.add_member(:profile, Shapes::ShapeRef.new(shape: Profile, location_name: "profile"))
     DashPackage.add_member(:segment_duration_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "segmentDurationSeconds"))
     DashPackage.add_member(:stream_selection, Shapes::ShapeRef.new(shape: StreamSelection, location_name: "streamSelection"))
@@ -244,6 +249,7 @@ module Aws::MediaPackage
     HlsPackage.add_member(:use_audio_rendition_group, Shapes::ShapeRef.new(shape: __boolean, location_name: "useAudioRenditionGroup"))
     HlsPackage.struct_class = Types::HlsPackage
 
+    IngestEndpoint.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     IngestEndpoint.add_member(:password, Shapes::ShapeRef.new(shape: __string, location_name: "password"))
     IngestEndpoint.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
     IngestEndpoint.add_member(:username, Shapes::ShapeRef.new(shape: __string, location_name: "username"))
@@ -327,6 +333,16 @@ module Aws::MediaPackage
     RotateChannelCredentialsResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     RotateChannelCredentialsResponse.struct_class = Types::RotateChannelCredentialsResponse
 
+    RotateIngestEndpointCredentialsRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "id"))
+    RotateIngestEndpointCredentialsRequest.add_member(:ingest_endpoint_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ingest_endpoint_id"))
+    RotateIngestEndpointCredentialsRequest.struct_class = Types::RotateIngestEndpointCredentialsRequest
+
+    RotateIngestEndpointCredentialsResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    RotateIngestEndpointCredentialsResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
+    RotateIngestEndpointCredentialsResponse.add_member(:hls_ingest, Shapes::ShapeRef.new(shape: HlsIngest, location_name: "hlsIngest"))
+    RotateIngestEndpointCredentialsResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    RotateIngestEndpointCredentialsResponse.struct_class = Types::RotateIngestEndpointCredentialsResponse
+
     SpekeKeyProvider.add_member(:resource_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "resourceId"))
     SpekeKeyProvider.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "roleArn"))
     SpekeKeyProvider.add_member(:system_ids, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "systemIds"))
@@ -385,6 +401,8 @@ module Aws::MediaPackage
 
     __listOfOriginEndpoint.member = Shapes::ShapeRef.new(shape: OriginEndpoint)
 
+    __listOf__PeriodTriggersElement.member = Shapes::ShapeRef.new(shape: __PeriodTriggersElement)
+
     __listOf__string.member = Shapes::ShapeRef.new(shape: __string)
 
 
@@ -394,12 +412,16 @@ module Aws::MediaPackage
       api.version = "2017-10-12"
 
       api.metadata = {
+        "apiVersion" => "2017-10-12",
         "endpointPrefix" => "mediapackage",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "serviceAbbreviation" => "MediaPackage",
         "serviceFullName" => "AWS Elemental MediaPackage",
+        "serviceId" => "MediaPackage",
         "signatureVersion" => "v4",
         "signingName" => "mediapackage",
+        "uid" => "mediapackage-2017-10-12",
       }
 
       api.add_operation(:create_channel, Seahorse::Model::Operation.new.tap do |o|
@@ -530,8 +552,23 @@ module Aws::MediaPackage
         o.name = "RotateChannelCredentials"
         o.http_method = "PUT"
         o.http_request_uri = "/channels/{id}/credentials"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: RotateChannelCredentialsRequest)
         o.output = Shapes::ShapeRef.new(shape: RotateChannelCredentialsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:rotate_ingest_endpoint_credentials, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RotateIngestEndpointCredentials"
+        o.http_method = "PUT"
+        o.http_request_uri = "/channels/{id}/ingest_endpoints/{ingest_endpoint_id}/credentials"
+        o.input = Shapes::ShapeRef.new(shape: RotateIngestEndpointCredentialsRequest)
+        o.output = Shapes::ShapeRef.new(shape: RotateIngestEndpointCredentialsResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

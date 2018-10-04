@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -47,6 +49,8 @@ module Aws::ElasticTranscoder
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -92,6 +96,22 @@ module Aws::ElasticTranscoder
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::ElasticTranscoder
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -797,12 +828,12 @@ module Aws::ElasticTranscoder
     #   The AWS Key Management Service (AWS KMS) key that you want to use with
     #   this pipeline.
     #
-    #   If you use either `S3` or `S3-AWS-KMS` as your `Encryption:Mode`, you
+    #   If you use either `s3` or `s3-aws-kms` as your `Encryption:Mode`, you
     #   don't need to provide a key with your job because a default key,
     #   known as an AWS-KMS key, is created for you automatically. You need to
     #   provide an AWS-KMS key only if you want to use a non-default AWS-KMS
-    #   key, or if you are using an `Encryption:Mode` of `AES-PKCS7`,
-    #   `AES-CTR`, or `AES-GCM`.
+    #   key, or if you are using an `Encryption:Mode` of `aes-cbc-pkcs7`,
+    #   `aes-ctr`, or `aes-gcm`.
     #
     # @option params [Types::Notifications] :notifications
     #   The Amazon Simple Notification Service (Amazon SNS) topic that you
@@ -818,7 +849,7 @@ module Aws::ElasticTranscoder
     #     more information, see Create a Topic in the Amazon Simple
     #     Notification Service Developer Guide.
     #
-    #   * **Completed**\: The topic ARN for the Amazon SNS topic that you want
+    #   * **Complete**\: The topic ARN for the Amazon SNS topic that you want
     #     to notify when Elastic Transcoder has finished processing a job in
     #     this pipeline. This is the ARN that Amazon SNS returned when you
     #     created the topic.
@@ -2377,12 +2408,12 @@ module Aws::ElasticTranscoder
     #   The AWS Key Management Service (AWS KMS) key that you want to use with
     #   this pipeline.
     #
-    #   If you use either `S3` or `S3-AWS-KMS` as your `Encryption:Mode`, you
+    #   If you use either `s3` or `s3-aws-kms` as your `Encryption:Mode`, you
     #   don't need to provide a key with your job because a default key,
     #   known as an AWS-KMS key, is created for you automatically. You need to
     #   provide an AWS-KMS key only if you want to use a non-default AWS-KMS
-    #   key, or if you are using an `Encryption:Mode` of `AES-PKCS7`,
-    #   `AES-CTR`, or `AES-GCM`.
+    #   key, or if you are using an `Encryption:Mode` of `aes-cbc-pkcs7`,
+    #   `aes-ctr`, or `aes-gcm`.
     #
     # @option params [Types::Notifications] :notifications
     #   The topic ARN for the Amazon Simple Notification Service (Amazon SNS)
@@ -2397,7 +2428,7 @@ module Aws::ElasticTranscoder
     #     pipeline. This is the ARN that Amazon SNS returned when you created
     #     the topic.
     #
-    #   * **Completed**\: The topic ARN for the Amazon SNS topic that you want
+    #   * **Complete**\: The topic ARN for the Amazon SNS topic that you want
     #     to notify when Elastic Transcoder has finished processing a job.
     #     This is the ARN that Amazon SNS returned when you created the topic.
     #
@@ -2653,7 +2684,7 @@ module Aws::ElasticTranscoder
     #     pipeline. This is the ARN that Amazon SNS returned when you created
     #     the topic.
     #
-    #   * **Completed**\: The topic ARN for the Amazon SNS topic that you want
+    #   * **Complete**\: The topic ARN for the Amazon SNS topic that you want
     #     to notify when Elastic Transcoder has finished processing a job.
     #     This is the ARN that Amazon SNS returned when you created the topic.
     #
@@ -2796,7 +2827,7 @@ module Aws::ElasticTranscoder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elastictranscoder'
-      context[:gem_version] = '1.0.1'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

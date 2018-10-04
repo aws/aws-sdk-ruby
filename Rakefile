@@ -6,6 +6,7 @@ $:.unshift("#{$REPO_ROOT}/build_tools")
 $:.unshift("#{$REPO_ROOT}/build_tools/aws-sdk-code-generator/lib")
 $:.unshift("#{$GEMS_DIR}/aws-sdk-core/lib")
 $:.unshift("#{$GEMS_DIR}/aws-partitions/lib")
+$:.unshift("#{$GEMS_DIR}/aws-eventstream/lib")
 $:.unshift("#{$GEMS_DIR}/aws-sigv4/lib")
 
 require 'build_tools'

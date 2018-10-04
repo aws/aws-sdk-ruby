@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -47,6 +49,8 @@ module Aws::AppStream
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -92,6 +96,22 @@ module Aws::AppStream
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::AppStream
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -227,7 +258,9 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Creates a directory configuration.
+    # Creates a Directory Config object in AppStream 2.0. This object
+    # includes the information required to join streaming instances to an
+    # Active Directory domain.
     #
     # @option params [required, String] :directory_name
     #   The fully qualified name of the directory (for example,
@@ -274,13 +307,17 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Creates a fleet.
+    # Creates a fleet. A fleet consists of streaming instances that run a
+    # specified image.
     #
     # @option params [required, String] :name
     #   A unique name for the fleet.
     #
-    # @option params [required, String] :image_name
+    # @option params [String] :image_name
     #   The name of the image used to create the fleet.
+    #
+    # @option params [String] :image_arn
+    #   The ARN of the public, private, or shared image to use.
     #
     # @option params [required, String] :instance_type
     #   The instance type to use when launching fleet instances. The following
@@ -378,7 +415,8 @@ module Aws::AppStream
     #
     #   resp = client.create_fleet({
     #     name: "Name", # required
-    #     image_name: "String", # required
+    #     image_name: "String",
+    #     image_arn: "Arn",
     #     instance_type: "String", # required
     #     fleet_type: "ALWAYS_ON", # accepts ALWAYS_ON, ON_DEMAND
     #     compute_capacity: { # required
@@ -406,6 +444,7 @@ module Aws::AppStream
     #   resp.fleet.display_name #=> String
     #   resp.fleet.description #=> String
     #   resp.fleet.image_name #=> String
+    #   resp.fleet.image_arn #=> String
     #   resp.fleet.instance_type #=> String
     #   resp.fleet.fleet_type #=> String, one of "ALWAYS_ON", "ON_DEMAND"
     #   resp.fleet.compute_capacity_status.desired #=> Integer
@@ -436,7 +475,8 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Creates an image builder.
+    # Creates an image builder. An image builder is a virtual machine that
+    # is used to create an image.
     #
     # The initial state of the builder is `PENDING`. When it is ready, the
     # state is `RUNNING`.
@@ -444,8 +484,11 @@ module Aws::AppStream
     # @option params [required, String] :name
     #   A unique name for the image builder.
     #
-    # @option params [required, String] :image_name
+    # @option params [String] :image_name
     #   The name of the image used to create the builder.
+    #
+    # @option params [String] :image_arn
+    #   The ARN of the public, private, or shared image to use.
     #
     # @option params [required, String] :instance_type
     #   The instance type to use when launching the image builder.
@@ -479,7 +522,8 @@ module Aws::AppStream
     #
     #   resp = client.create_image_builder({
     #     name: "Name", # required
-    #     image_name: "String", # required
+    #     image_name: "String",
+    #     image_arn: "Arn",
     #     instance_type: "String", # required
     #     description: "Description",
     #     display_name: "DisplayName",
@@ -565,7 +609,9 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Creates a stack.
+    # Creates a stack to start streaming applications to users. A stack
+    # consists of an associated fleet, user access policies, and storage
+    # configurations.
     #
     # @option params [required, String] :name
     #   The name of the stack.
@@ -588,6 +634,16 @@ module Aws::AppStream
     #   Feedback link. If no URL is specified, no Send Feedback link is
     #   displayed.
     #
+    # @option params [Array<Types::UserSetting>] :user_settings
+    #   The actions that are enabled or disabled for users during their
+    #   streaming sessions. By default, these actions are enabled.
+    #
+    # @option params [Types::ApplicationSettings] :application_settings
+    #   The persistent application settings for users of a stack. When these
+    #   settings are enabled, changes that users make to applications and
+    #   Windows settings are automatically saved after each session and
+    #   applied to the next session.
+    #
     # @return [Types::CreateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStackResult#stack #stack} => Types::Stack
@@ -595,17 +651,28 @@ module Aws::AppStream
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_stack({
-    #     name: "String", # required
+    #     name: "Name", # required
     #     description: "Description",
     #     display_name: "DisplayName",
     #     storage_connectors: [
     #       {
-    #         connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS
+    #         connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE, ONE_DRIVE
     #         resource_identifier: "ResourceIdentifier",
+    #         domains: ["Domain"],
     #       },
     #     ],
     #     redirect_url: "RedirectURL",
     #     feedback_url: "FeedbackURL",
+    #     user_settings: [
+    #       {
+    #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
+    #         permission: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       },
+    #     ],
+    #     application_settings: {
+    #       enabled: false, # required
+    #       settings_group: "SettingsGroup",
+    #     },
     #   })
     #
     # @example Response structure
@@ -616,13 +683,21 @@ module Aws::AppStream
     #   resp.stack.display_name #=> String
     #   resp.stack.created_time #=> Time
     #   resp.stack.storage_connectors #=> Array
-    #   resp.stack.storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS"
+    #   resp.stack.storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS", "GOOGLE_DRIVE", "ONE_DRIVE"
     #   resp.stack.storage_connectors[0].resource_identifier #=> String
+    #   resp.stack.storage_connectors[0].domains #=> Array
+    #   resp.stack.storage_connectors[0].domains[0] #=> String
     #   resp.stack.redirect_url #=> String
     #   resp.stack.feedback_url #=> String
     #   resp.stack.stack_errors #=> Array
     #   resp.stack.stack_errors[0].error_code #=> String, one of "STORAGE_CONNECTOR_ERROR", "INTERNAL_SERVICE_ERROR"
     #   resp.stack.stack_errors[0].error_message #=> String
+    #   resp.stack.user_settings #=> Array
+    #   resp.stack.user_settings[0].action #=> String, one of "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", "CLIPBOARD_COPY_TO_LOCAL_DEVICE", "FILE_UPLOAD", "FILE_DOWNLOAD", "PRINTING_TO_LOCAL_DEVICE"
+    #   resp.stack.user_settings[0].permission #=> String, one of "ENABLED", "DISABLED"
+    #   resp.stack.application_settings.enabled #=> Boolean
+    #   resp.stack.application_settings.settings_group #=> String
+    #   resp.stack.application_settings.s3_bucket_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStack AWS API Documentation
     #
@@ -633,7 +708,9 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Creates a URL to start a streaming session for the specified user.
+    # Creates a temporary URL to start an AppStream 2.0 streaming session
+    # for the specified user. A streaming URL enables application streaming
+    # to be tested without user setup.
     #
     # @option params [required, String] :stack_name
     #   The name of the stack.
@@ -690,7 +767,9 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Deletes the specified directory configuration.
+    # Deletes the specified Directory Config object from AppStream 2.0. This
+    # object includes the information required to join streaming instances
+    # to an Active Directory domain.
     #
     # @option params [required, String] :directory_name
     #   The name of the directory configuration.
@@ -734,9 +813,9 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Deletes the specified image. You cannot delete an image that is
-    # currently in use. After you delete an image, you cannot provision new
-    # capacity using the image.
+    # Deletes the specified image. You cannot delete an image when it is in
+    # use. After you delete an image, you cannot provision new capacity
+    # using the image.
     #
     # @option params [required, String] :name
     #   The name of the image.
@@ -758,7 +837,7 @@ module Aws::AppStream
     #   resp.image.base_image_arn #=> String
     #   resp.image.display_name #=> String
     #   resp.image.state #=> String, one of "PENDING", "AVAILABLE", "FAILED", "COPYING", "DELETING"
-    #   resp.image.visibility #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.image.visibility #=> String, one of "PUBLIC", "PRIVATE", "SHARED"
     #   resp.image.image_builder_supported #=> Boolean
     #   resp.image.platform #=> String, one of "WINDOWS"
     #   resp.image.description #=> String
@@ -776,6 +855,8 @@ module Aws::AppStream
     #   resp.image.created_time #=> Time
     #   resp.image.public_base_image_released_date #=> Time
     #   resp.image.appstream_agent_version #=> String
+    #   resp.image.image_permissions.allow_fleet #=> Boolean
+    #   resp.image.image_permissions.allow_image_builder #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImage AWS API Documentation
     #
@@ -836,9 +917,39 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Deletes the specified stack. After this operation completes, the
-    # environment can no longer be activated and any reservations made for
-    # the stack are released.
+    # Deletes permissions for the specified private image. After you delete
+    # permissions for an image, AWS accounts to which you previously granted
+    # these permissions can no longer use the image.
+    #
+    # @option params [required, String] :name
+    #   The name of the private image.
+    #
+    # @option params [required, String] :shared_account_id
+    #   The 12-digit ID of the AWS account for which to delete image
+    #   permissions.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_image_permissions({
+    #     name: "Name", # required
+    #     shared_account_id: "AwsAccountId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImagePermissions AWS API Documentation
+    #
+    # @overload delete_image_permissions(params = {})
+    # @param [Hash] params ({})
+    def delete_image_permissions(params = {}, options = {})
+      req = build_request(:delete_image_permissions, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified stack. After the stack is deleted, the
+    # application streaming environment provided by the stack is no longer
+    # available to users. Also, any reservations made for application
+    # streaming sessions for the stack are released.
     #
     # @option params [required, String] :name
     #   The name of the stack.
@@ -860,9 +971,14 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Describes the specified directory configurations. Note that although
-    # the response syntax in this topic includes the account password, this
-    # password is not returned in the actual response.
+    # Retrieves a list that describes one or more specified Directory Config
+    # objects for AppStream 2.0, if the names for these objects are
+    # provided. Otherwise, all Directory Config objects in the account are
+    # described. These objects include the information required to join
+    # streaming instances to an Active Directory domain.
+    #
+    # Although the response syntax in this topic includes the account
+    # password, this password is not returned in the actual response.
     #
     # @option params [Array<String>] :directory_names
     #   The directory names.
@@ -907,7 +1023,9 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Describes the specified fleets or all fleets in the account.
+    # Retrieves a list that describes one or more specified fleets, if the
+    # fleet names are provided. Otherwise, all fleets in the account are
+    # described.
     #
     # @option params [Array<String>] :names
     #   The names of the fleets to describe.
@@ -936,6 +1054,7 @@ module Aws::AppStream
     #   resp.fleets[0].display_name #=> String
     #   resp.fleets[0].description #=> String
     #   resp.fleets[0].image_name #=> String
+    #   resp.fleets[0].image_arn #=> String
     #   resp.fleets[0].instance_type #=> String
     #   resp.fleets[0].fleet_type #=> String, one of "ALWAYS_ON", "ON_DEMAND"
     #   resp.fleets[0].compute_capacity_status.desired #=> Integer
@@ -967,8 +1086,9 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Describes the specified image builders or all image builders in the
-    # account.
+    # Retrieves a list that describes one or more specified image builders,
+    # if the image builder names are provided. Otherwise, all image builders
+    # in the account are described.
     #
     # @option params [Array<String>] :names
     #   The names of the image builders to describe.
@@ -1030,19 +1150,90 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Describes the specified images or all images in the account.
+    # Retrieves a list that describes the permissions for shared AWS account
+    # IDs on a private image that you own.
+    #
+    # @option params [required, String] :name
+    #   The name of the private image for which to describe permissions. The
+    #   image must be one that you own.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of each results page.
+    #
+    # @option params [Array<String>] :shared_aws_account_ids
+    #   The 12-digit ID of one or more AWS accounts with which the image is
+    #   shared.
+    #
+    # @option params [String] :next_token
+    #   The pagination token to use to retrieve the next page of results. If
+    #   this value is empty, only the first page is retrieved.
+    #
+    # @return [Types::DescribeImagePermissionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeImagePermissionsResult#name #name} => String
+    #   * {Types::DescribeImagePermissionsResult#shared_image_permissions_list #shared_image_permissions_list} => Array&lt;Types::SharedImagePermissions&gt;
+    #   * {Types::DescribeImagePermissionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_image_permissions({
+    #     name: "Name", # required
+    #     max_results: 1,
+    #     shared_aws_account_ids: ["AwsAccountId"],
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.shared_image_permissions_list #=> Array
+    #   resp.shared_image_permissions_list[0].shared_account_id #=> String
+    #   resp.shared_image_permissions_list[0].image_permissions.allow_fleet #=> Boolean
+    #   resp.shared_image_permissions_list[0].image_permissions.allow_image_builder #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImagePermissions AWS API Documentation
+    #
+    # @overload describe_image_permissions(params = {})
+    # @param [Hash] params ({})
+    def describe_image_permissions(params = {}, options = {})
+      req = build_request(:describe_image_permissions, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list that describes one or more specified images, if the
+    # image names or image ARNs are provided. Otherwise, all images in the
+    # account are described.
     #
     # @option params [Array<String>] :names
-    #   The names of the images to describe.
+    #   The names of the public or private images to describe.
+    #
+    # @option params [Array<String>] :arns
+    #   The ARNs of the public, private, and shared images to describe.
+    #
+    # @option params [String] :type
+    #   The type of image (public, private, or shared) to describe.
+    #
+    # @option params [String] :next_token
+    #   The pagination token to use to retrieve the next page of results. If
+    #   this value is empty, only the first page is retrieved.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of each page of results.
     #
     # @return [Types::DescribeImagesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeImagesResult#images #images} => Array&lt;Types::Image&gt;
+    #   * {Types::DescribeImagesResult#next_token #next_token} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_images({
     #     names: ["String"],
+    #     arns: ["Arn"],
+    #     type: "PUBLIC", # accepts PUBLIC, PRIVATE, SHARED
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -1053,7 +1244,7 @@ module Aws::AppStream
     #   resp.images[0].base_image_arn #=> String
     #   resp.images[0].display_name #=> String
     #   resp.images[0].state #=> String, one of "PENDING", "AVAILABLE", "FAILED", "COPYING", "DELETING"
-    #   resp.images[0].visibility #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.images[0].visibility #=> String, one of "PUBLIC", "PRIVATE", "SHARED"
     #   resp.images[0].image_builder_supported #=> Boolean
     #   resp.images[0].platform #=> String, one of "WINDOWS"
     #   resp.images[0].description #=> String
@@ -1071,6 +1262,9 @@ module Aws::AppStream
     #   resp.images[0].created_time #=> Time
     #   resp.images[0].public_base_image_released_date #=> Time
     #   resp.images[0].appstream_agent_version #=> String
+    #   resp.images[0].image_permissions.allow_fleet #=> Boolean
+    #   resp.images[0].image_permissions.allow_image_builder #=> Boolean
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImages AWS API Documentation
     #
@@ -1081,10 +1275,11 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Describes the streaming sessions for the specified stack and fleet. If
-    # a user ID is provided, only the streaming sessions for only that user
-    # are returned. If an authentication type is not provided, the default
-    # is to authenticate users using a streaming URL.
+    # Retrieves a list that describes the streaming sessions for a specified
+    # stack and fleet. If a user ID is provided for the stack and fleet,
+    # only streaming sessions for that user are described. If an
+    # authentication type is not provided, the default is to authenticate
+    # users using a streaming URL.
     #
     # @option params [required, String] :stack_name
     #   The name of the stack. This value is case-sensitive.
@@ -1133,6 +1328,8 @@ module Aws::AppStream
     #   resp.sessions[0].fleet_name #=> String
     #   resp.sessions[0].state #=> String, one of "ACTIVE", "PENDING", "EXPIRED"
     #   resp.sessions[0].authentication_type #=> String, one of "API", "SAML", "USERPOOL"
+    #   resp.sessions[0].network_access_configuration.eni_private_ip_address #=> String
+    #   resp.sessions[0].network_access_configuration.eni_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeSessions AWS API Documentation
@@ -1144,7 +1341,9 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Describes the specified stacks or all stacks in the account.
+    # Retrieves a list that describes one or more specified stacks, if the
+    # stack names are provided. Otherwise, all stacks in the account are
+    # described.
     #
     # @option params [Array<String>] :names
     #   The names of the stacks to describe.
@@ -1174,13 +1373,21 @@ module Aws::AppStream
     #   resp.stacks[0].display_name #=> String
     #   resp.stacks[0].created_time #=> Time
     #   resp.stacks[0].storage_connectors #=> Array
-    #   resp.stacks[0].storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS"
+    #   resp.stacks[0].storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS", "GOOGLE_DRIVE", "ONE_DRIVE"
     #   resp.stacks[0].storage_connectors[0].resource_identifier #=> String
+    #   resp.stacks[0].storage_connectors[0].domains #=> Array
+    #   resp.stacks[0].storage_connectors[0].domains[0] #=> String
     #   resp.stacks[0].redirect_url #=> String
     #   resp.stacks[0].feedback_url #=> String
     #   resp.stacks[0].stack_errors #=> Array
     #   resp.stacks[0].stack_errors[0].error_code #=> String, one of "STORAGE_CONNECTOR_ERROR", "INTERNAL_SERVICE_ERROR"
     #   resp.stacks[0].stack_errors[0].error_message #=> String
+    #   resp.stacks[0].user_settings #=> Array
+    #   resp.stacks[0].user_settings[0].action #=> String, one of "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", "CLIPBOARD_COPY_TO_LOCAL_DEVICE", "FILE_UPLOAD", "FILE_DOWNLOAD", "PRINTING_TO_LOCAL_DEVICE"
+    #   resp.stacks[0].user_settings[0].permission #=> String, one of "ENABLED", "DISABLED"
+    #   resp.stacks[0].application_settings.enabled #=> Boolean
+    #   resp.stacks[0].application_settings.settings_group #=> String
+    #   resp.stacks[0].application_settings.s3_bucket_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeStacks AWS API Documentation
@@ -1218,7 +1425,7 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Stops the specified streaming session.
+    # Immediately stops the specified streaming session.
     #
     # @option params [required, String] :session_id
     #   The ID of the streaming session.
@@ -1240,7 +1447,8 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Lists the fleets associated with the specified stack.
+    # Retrieves the name of the fleet that is associated with the specified
+    # stack.
     #
     # @option params [required, String] :stack_name
     #   The name of the stack.
@@ -1276,7 +1484,8 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Lists the stacks associated with the specified fleet.
+    # Retrieves the name of the stack with which the specified fleet is
+    # associated.
     #
     # @option params [required, String] :fleet_name
     #   The name of the fleet.
@@ -1312,8 +1521,8 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Lists the tags for the specified AppStream 2.0 resource. You can tag
-    # AppStream 2.0 image builders, images, fleets, and stacks.
+    # Retrieves a list of all tags for the specified AppStream 2.0 resource.
+    # You can tag AppStream 2.0 image builders, images, fleets, and stacks.
     #
     # For more information about tags, see [Tagging Your Resources][1] in
     # the *Amazon AppStream 2.0 Developer Guide*.
@@ -1546,8 +1755,8 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Disassociates the specified tags from the specified AppStream 2.0
-    # resource.
+    # Disassociates one or more specified tags from the specified AppStream
+    # 2.0 resource.
     #
     # To list the current tags for your resources, use ListTagsForResource.
     #
@@ -1582,10 +1791,12 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Updates the specified directory configuration.
+    # Updates the specified Directory Config object in AppStream 2.0. This
+    # object includes the information required to join streaming instances
+    # to an Active Directory domain.
     #
     # @option params [required, String] :directory_name
-    #   The name of the directory configuration.
+    #   The name of the Directory Config object.
     #
     # @option params [Array<String>] :organizational_unit_distinguished_names
     #   The distinguished names of the organizational units for computer
@@ -1638,7 +1849,10 @@ module Aws::AppStream
     # @option params [String] :image_name
     #   The name of the image used to create the fleet.
     #
-    # @option params [required, String] :name
+    # @option params [String] :image_arn
+    #   The ARN of the public, private, or shared image to use.
+    #
+    # @option params [String] :name
     #   A unique name for the fleet.
     #
     # @option params [String] :instance_type
@@ -1727,7 +1941,8 @@ module Aws::AppStream
     #
     #   resp = client.update_fleet({
     #     image_name: "String",
-    #     name: "String", # required
+    #     image_arn: "Arn",
+    #     name: "String",
     #     instance_type: "String",
     #     compute_capacity: {
     #       desired_instances: 1, # required
@@ -1756,6 +1971,7 @@ module Aws::AppStream
     #   resp.fleet.display_name #=> String
     #   resp.fleet.description #=> String
     #   resp.fleet.image_name #=> String
+    #   resp.fleet.image_arn #=> String
     #   resp.fleet.instance_type #=> String
     #   resp.fleet.fleet_type #=> String, one of "ALWAYS_ON", "ON_DEMAND"
     #   resp.fleet.compute_capacity_status.desired #=> Integer
@@ -1786,7 +2002,41 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Updates the specified stack.
+    # Adds or updates permissions for the specified private image.
+    #
+    # @option params [required, String] :name
+    #   The name of the private image.
+    #
+    # @option params [required, String] :shared_account_id
+    #   The 12-digit ID of the AWS account for which you want add or update
+    #   image permissions.
+    #
+    # @option params [required, Types::ImagePermissions] :image_permissions
+    #   The permissions for the image.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_image_permissions({
+    #     name: "Name", # required
+    #     shared_account_id: "AwsAccountId", # required
+    #     image_permissions: { # required
+    #       allow_fleet: false,
+    #       allow_image_builder: false,
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateImagePermissions AWS API Documentation
+    #
+    # @overload update_image_permissions(params = {})
+    # @param [Hash] params ({})
+    def update_image_permissions(params = {}, options = {})
+      req = build_request(:update_image_permissions, params)
+      req.send_request(options)
+    end
+
+    # Updates the specified fields for the specified stack.
     #
     # @option params [String] :display_name
     #   The stack name for display.
@@ -1815,6 +2065,16 @@ module Aws::AppStream
     # @option params [Array<String>] :attributes_to_delete
     #   The stack attributes to delete.
     #
+    # @option params [Array<Types::UserSetting>] :user_settings
+    #   The actions that are enabled or disabled for users during their
+    #   streaming sessions. By default, these actions are enabled.
+    #
+    # @option params [Types::ApplicationSettings] :application_settings
+    #   The persistent application settings for users of a stack. When these
+    #   settings are enabled, changes that users make to applications and
+    #   Windows settings are automatically saved after each session and
+    #   applied to the next session.
+    #
     # @return [Types::UpdateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateStackResult#stack #stack} => Types::Stack
@@ -1827,14 +2087,25 @@ module Aws::AppStream
     #     name: "String", # required
     #     storage_connectors: [
     #       {
-    #         connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS
+    #         connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE, ONE_DRIVE
     #         resource_identifier: "ResourceIdentifier",
+    #         domains: ["Domain"],
     #       },
     #     ],
     #     delete_storage_connectors: false,
     #     redirect_url: "RedirectURL",
     #     feedback_url: "FeedbackURL",
-    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, REDIRECT_URL, FEEDBACK_URL, THEME_NAME
+    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS
+    #     user_settings: [
+    #       {
+    #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
+    #         permission: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       },
+    #     ],
+    #     application_settings: {
+    #       enabled: false, # required
+    #       settings_group: "SettingsGroup",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1845,13 +2116,21 @@ module Aws::AppStream
     #   resp.stack.display_name #=> String
     #   resp.stack.created_time #=> Time
     #   resp.stack.storage_connectors #=> Array
-    #   resp.stack.storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS"
+    #   resp.stack.storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS", "GOOGLE_DRIVE", "ONE_DRIVE"
     #   resp.stack.storage_connectors[0].resource_identifier #=> String
+    #   resp.stack.storage_connectors[0].domains #=> Array
+    #   resp.stack.storage_connectors[0].domains[0] #=> String
     #   resp.stack.redirect_url #=> String
     #   resp.stack.feedback_url #=> String
     #   resp.stack.stack_errors #=> Array
     #   resp.stack.stack_errors[0].error_code #=> String, one of "STORAGE_CONNECTOR_ERROR", "INTERNAL_SERVICE_ERROR"
     #   resp.stack.stack_errors[0].error_message #=> String
+    #   resp.stack.user_settings #=> Array
+    #   resp.stack.user_settings[0].action #=> String, one of "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", "CLIPBOARD_COPY_TO_LOCAL_DEVICE", "FILE_UPLOAD", "FILE_DOWNLOAD", "PRINTING_TO_LOCAL_DEVICE"
+    #   resp.stack.user_settings[0].permission #=> String, one of "ENABLED", "DISABLED"
+    #   resp.stack.application_settings.enabled #=> Boolean
+    #   resp.stack.application_settings.settings_group #=> String
+    #   resp.stack.application_settings.s3_bucket_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStack AWS API Documentation
     #
@@ -1875,7 +2154,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

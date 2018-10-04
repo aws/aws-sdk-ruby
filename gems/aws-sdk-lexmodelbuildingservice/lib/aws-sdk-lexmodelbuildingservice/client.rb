@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -47,6 +49,8 @@ module Aws::LexModelBuildingService
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -92,6 +96,22 @@ module Aws::LexModelBuildingService
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::LexModelBuildingService
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -217,7 +248,7 @@ module Aws::LexModelBuildingService
     #   resp.abort_statement.messages[0].content #=> String
     #   resp.abort_statement.messages[0].group_number #=> Integer
     #   resp.abort_statement.response_card #=> String
-    #   resp.status #=> String, one of "BUILDING", "READY", "FAILED", "NOT_BUILT"
+    #   resp.status #=> String, one of "BUILDING", "READY", "READY_BASIC_TESTING", "FAILED", "NOT_BUILT"
     #   resp.failure_reason #=> String
     #   resp.last_updated_date #=> Time
     #   resp.created_date #=> Time
@@ -864,7 +895,7 @@ module Aws::LexModelBuildingService
     #   resp.abort_statement.messages[0].content #=> String
     #   resp.abort_statement.messages[0].group_number #=> Integer
     #   resp.abort_statement.response_card #=> String
-    #   resp.status #=> String, one of "BUILDING", "READY", "FAILED", "NOT_BUILT"
+    #   resp.status #=> String, one of "BUILDING", "READY", "READY_BASIC_TESTING", "FAILED", "NOT_BUILT"
     #   resp.failure_reason #=> String
     #   resp.last_updated_date #=> Time
     #   resp.created_date #=> Time
@@ -1162,7 +1193,7 @@ module Aws::LexModelBuildingService
     #   resp.bots #=> Array
     #   resp.bots[0].name #=> String
     #   resp.bots[0].description #=> String
-    #   resp.bots[0].status #=> String, one of "BUILDING", "READY", "FAILED", "NOT_BUILT"
+    #   resp.bots[0].status #=> String, one of "BUILDING", "READY", "READY_BASIC_TESTING", "FAILED", "NOT_BUILT"
     #   resp.bots[0].last_updated_date #=> Time
     #   resp.bots[0].created_date #=> Time
     #   resp.bots[0].version #=> String
@@ -1245,7 +1276,7 @@ module Aws::LexModelBuildingService
     #   resp.bots #=> Array
     #   resp.bots[0].name #=> String
     #   resp.bots[0].description #=> String
-    #   resp.bots[0].status #=> String, one of "BUILDING", "READY", "FAILED", "NOT_BUILT"
+    #   resp.bots[0].status #=> String, one of "BUILDING", "READY", "READY_BASIC_TESTING", "FAILED", "NOT_BUILT"
     #   resp.bots[0].last_updated_date #=> Time
     #   resp.bots[0].created_date #=> Time
     #   resp.bots[0].version #=> String
@@ -2529,7 +2560,7 @@ module Aws::LexModelBuildingService
     #   resp.abort_statement.messages[0].content #=> String
     #   resp.abort_statement.messages[0].group_number #=> Integer
     #   resp.abort_statement.response_card #=> String
-    #   resp.status #=> String, one of "BUILDING", "READY", "FAILED", "NOT_BUILT"
+    #   resp.status #=> String, one of "BUILDING", "READY", "READY_BASIC_TESTING", "FAILED", "NOT_BUILT"
     #   resp.failure_reason #=> String
     #   resp.last_updated_date #=> Time
     #   resp.created_date #=> Time
@@ -3504,7 +3535,7 @@ module Aws::LexModelBuildingService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelbuildingservice'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

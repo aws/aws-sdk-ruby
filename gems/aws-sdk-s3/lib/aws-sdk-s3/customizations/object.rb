@@ -214,6 +214,62 @@ module Aws
         url.to_s
       end
 
+      # Uploads a stream in a streaming fashion to the current object in S3.
+      #
+      #     # Passed chunks automatically split into multipart upload parts
+      #     # and the parts are uploaded in parallel. This allows for streaming uploads
+      #     # that never touch the disk.
+      #
+      #  Note that this is known to have issues in JRuby until jruby-9.1.15.0, so avoid using this with older versions of JRuby.
+      #
+      # @example Streaming chunks of data
+      #     obj.upload_stream do |write_stream|
+      #       10.times { write_stream << 'foo' }
+      #     end
+      # @example Streaming chunks of data
+      #     obj.upload_stream do |write_stream|
+      #       IO.copy_stream(IO.popen('ls'), write_stream)
+      #     end
+      # @example Streaming chunks of data
+      #     obj.upload_stream do |write_stream|
+      #       IO.copy_stream(STDIN, write_stream)
+      #     end
+      #
+      # @option options [Integer] :thread_count
+      #   The number of parallel multipart uploads
+      #   Default `:thread_count` is `10`.
+      #
+      # @option options [Boolean] :tempfile
+      #   Normally read data is stored in memory when building the parts in order to complete
+      #   the underlying multipart upload. By passing `:tempfile => true` data read will be
+      #   temporarily stored on disk reducing the memory footprint vastly.
+      #   Default `:tempfile` is `false`.
+      #
+      # @option options [Integer] :part_size
+      #   Define how big each part size but the last should be.
+      #   Default `:part_size` is `5 * 1024 * 1024`.
+      #
+      # @raise [MultipartUploadError] If an object is being uploaded in
+      #   parts, and the upload can not be completed, then the upload is
+      #   aborted and this error is raised.  The raised error has a `#errors`
+      #   method that returns the failures that caused the upload to be
+      #   aborted.
+      #
+      # @return [Boolean] Returns `true` when the object is uploaded
+      #   without any errors.
+      #
+      def upload_stream(options = {}, &block)
+        uploading_options = options.dup
+        uploader = MultipartStreamUploader.new(
+          client: client,
+          thread_count: uploading_options.delete(:thread_count),
+          tempfile: uploading_options.delete(:tempfile),
+          part_size: uploading_options.delete(:part_size),
+        )
+        uploader.upload(uploading_options.merge(bucket: bucket_name, key: key), &block)
+        true
+      end
+
       # Uploads a file from disk to the current object in S3.
       #
       #     # small files are uploaded in a single API call
@@ -276,6 +332,10 @@ module Aws
       #
       # @option options [String] thread_count Customize threads used in multipart
       #   download, if not provided, 10 is default value
+      #
+      # @option options [String] version_id The object version id used to retrieve
+      #   the object, to know more about object versioning, see:
+      #   https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectVersioning.html
       #
       # @return [Boolean] Returns `true` when the file is downloaded
       #   without any errors.

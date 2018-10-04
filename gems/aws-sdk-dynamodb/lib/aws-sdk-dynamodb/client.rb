@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 require 'aws-sdk-dynamodb/plugins/extended_retries.rb'
@@ -50,6 +52,8 @@ module Aws::DynamoDB
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
     add_plugin(Aws::DynamoDB::Plugins::ExtendedRetries)
@@ -98,6 +102,22 @@ module Aws::DynamoDB
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :compute_checksums (true)
     #   When `true`, a CRC32 checksum is computed of every HTTP
     #   response body and compared against the `X-Amz-Crc32` header.
@@ -127,6 +147,14 @@ module Aws::DynamoDB
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
@@ -140,6 +168,9 @@ module Aws::DynamoDB
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -791,7 +822,9 @@ module Aws::DynamoDB
     #   resp.backup_details.backup_name #=> String
     #   resp.backup_details.backup_size_bytes #=> Integer
     #   resp.backup_details.backup_status #=> String, one of "CREATING", "DELETED", "AVAILABLE"
+    #   resp.backup_details.backup_type #=> String, one of "USER", "SYSTEM"
     #   resp.backup_details.backup_creation_date_time #=> Time
+    #   resp.backup_details.backup_expiry_date_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateBackup AWS API Documentation
     #
@@ -806,20 +839,18 @@ module Aws::DynamoDB
     # a replication relationship between two or more DynamoDB tables with
     # the same table name in the provided regions.
     #
-    # Tables can only be added as the replicas of a global table group under
-    # the following conditions:
+    # If you want to add a new replica table to a global table, each of the
+    # following conditions must be true:
     #
-    # * The tables must have the same name.
+    # * The table must have the same primary key as all of the other
+    #   replicas.
     #
-    # * The tables must contain no items.
+    # * The table must have the same name as all of the other replicas.
     #
-    # * The tables must have the same hash key and sort key (if present).
+    # * The table must have DynamoDB Streams enabled, with the stream
+    #   containing both the new and the old images of the item.
     #
-    # * The tables must have DynamoDB Streams enabled
-    #   (NEW\_AND\_OLD\_IMAGES).
-    #
-    # * The tables must have same provisioned and maximum write capacity
-    #   units.
+    # * None of the replica tables in the global table can contain any data.
     #
     # If global secondary indexes are specified, then the following
     # conditions must also be met:
@@ -829,8 +860,15 @@ module Aws::DynamoDB
     # * The global secondary indexes must have the same hash key and sort
     #   key (if present).
     #
-    # * The global secondary indexes must have the same provisioned and
-    #   maximum write capacity units.
+    # Write capacity settings should be set consistently across your replica
+    # tables and secondary indexes. DynamoDB strongly recommends enabling
+    # auto scaling to manage the write capacity settings for all of your
+    # global tables replicas and indexes.
+    #
+    #  If you prefer to manage write capacity settings manually, you should
+    # provision equal replicated write capacity units to your replica
+    # tables. You should also provision equal replicated write capacity
+    # units to matching secondary indexes across your global table.
     #
     # @option params [required, String] :global_table_name
     #   The global table name.
@@ -1192,7 +1230,9 @@ module Aws::DynamoDB
     #       stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
     #     },
     #     sse_specification: {
-    #       enabled: false, # required
+    #       enabled: false,
+    #       sse_type: "AES256", # accepts AES256, KMS
+    #       kms_master_key_id: "KMSMasterKeyId",
     #     },
     #   })
     #
@@ -1253,7 +1293,9 @@ module Aws::DynamoDB
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
     #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
-    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
+    #   resp.table_description.sse_description.sse_type #=> String, one of "AES256", "KMS"
+    #   resp.table_description.sse_description.kms_master_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateTable AWS API Documentation
     #
@@ -1287,7 +1329,9 @@ module Aws::DynamoDB
     #   resp.backup_description.backup_details.backup_name #=> String
     #   resp.backup_description.backup_details.backup_size_bytes #=> Integer
     #   resp.backup_description.backup_details.backup_status #=> String, one of "CREATING", "DELETED", "AVAILABLE"
+    #   resp.backup_description.backup_details.backup_type #=> String, one of "USER", "SYSTEM"
     #   resp.backup_description.backup_details.backup_creation_date_time #=> Time
+    #   resp.backup_description.backup_details.backup_expiry_date_time #=> Time
     #   resp.backup_description.source_table_details.table_name #=> String
     #   resp.backup_description.source_table_details.table_id #=> String
     #   resp.backup_description.source_table_details.table_arn #=> String
@@ -1321,7 +1365,9 @@ module Aws::DynamoDB
     #   resp.backup_description.source_table_feature_details.stream_description.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.backup_description.source_table_feature_details.time_to_live_description.time_to_live_status #=> String, one of "ENABLING", "DISABLING", "ENABLED", "DISABLED"
     #   resp.backup_description.source_table_feature_details.time_to_live_description.attribute_name #=> String
-    #   resp.backup_description.source_table_feature_details.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.backup_description.source_table_feature_details.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
+    #   resp.backup_description.source_table_feature_details.sse_description.sse_type #=> String, one of "AES256", "KMS"
+    #   resp.backup_description.source_table_feature_details.sse_description.kms_master_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteBackup AWS API Documentation
     #
@@ -1718,7 +1764,9 @@ module Aws::DynamoDB
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
     #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
-    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
+    #   resp.table_description.sse_description.sse_type #=> String, one of "AES256", "KMS"
+    #   resp.table_description.sse_description.kms_master_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteTable AWS API Documentation
     #
@@ -1753,7 +1801,9 @@ module Aws::DynamoDB
     #   resp.backup_description.backup_details.backup_name #=> String
     #   resp.backup_description.backup_details.backup_size_bytes #=> Integer
     #   resp.backup_description.backup_details.backup_status #=> String, one of "CREATING", "DELETED", "AVAILABLE"
+    #   resp.backup_description.backup_details.backup_type #=> String, one of "USER", "SYSTEM"
     #   resp.backup_description.backup_details.backup_creation_date_time #=> Time
+    #   resp.backup_description.backup_details.backup_expiry_date_time #=> Time
     #   resp.backup_description.source_table_details.table_name #=> String
     #   resp.backup_description.source_table_details.table_id #=> String
     #   resp.backup_description.source_table_details.table_arn #=> String
@@ -1787,7 +1837,9 @@ module Aws::DynamoDB
     #   resp.backup_description.source_table_feature_details.stream_description.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.backup_description.source_table_feature_details.time_to_live_description.time_to_live_status #=> String, one of "ENABLING", "DISABLING", "ENABLED", "DISABLED"
     #   resp.backup_description.source_table_feature_details.time_to_live_description.attribute_name #=> String
-    #   resp.backup_description.source_table_feature_details.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.backup_description.source_table_feature_details.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
+    #   resp.backup_description.source_table_feature_details.sse_description.sse_type #=> String, one of "AES256", "KMS"
+    #   resp.backup_description.source_table_feature_details.sse_description.kms_master_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeBackup AWS API Documentation
     #
@@ -1841,6 +1893,25 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def describe_continuous_backups(params = {}, options = {})
       req = build_request(:describe_continuous_backups, params)
+      req.send_request(options)
+    end
+
+    # @return [Types::DescribeEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEndpointsResponse#endpoints #endpoints} => Array&lt;Types::Endpoint&gt;
+    #
+    # @example Response structure
+    #
+    #   resp.endpoints #=> Array
+    #   resp.endpoints[0].address #=> String
+    #   resp.endpoints[0].cache_period_in_minutes #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeEndpoints AWS API Documentation
+    #
+    # @overload describe_endpoints(params = {})
+    # @param [Hash] params ({})
+    def describe_endpoints(params = {}, options = {})
+      req = build_request(:describe_endpoints, params)
       req.send_request(options)
     end
 
@@ -1900,12 +1971,52 @@ module Aws::DynamoDB
     #   resp.replica_settings[0].region_name #=> String
     #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
     #   resp.replica_settings[0].replica_provisioned_read_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.minimum_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.maximum_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.auto_scaling_disabled #=> Boolean
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.auto_scaling_role_arn #=> String
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies #=> Array
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].policy_name #=> String
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
     #   resp.replica_settings[0].replica_provisioned_write_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.minimum_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.maximum_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.auto_scaling_disabled #=> Boolean
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.auto_scaling_role_arn #=> String
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies #=> Array
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].policy_name #=> String
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
     #   resp.replica_settings[0].replica_global_secondary_index_settings #=> Array
     #   resp.replica_settings[0].replica_global_secondary_index_settings[0].index_name #=> String
     #   resp.replica_settings[0].replica_global_secondary_index_settings[0].index_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
     #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.minimum_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.maximum_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.auto_scaling_disabled #=> Boolean
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.auto_scaling_role_arn #=> String
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies #=> Array
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].policy_name #=> String
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
     #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.minimum_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.maximum_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.auto_scaling_disabled #=> Boolean
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.auto_scaling_role_arn #=> String
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies #=> Array
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].policy_name #=> String
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeGlobalTableSettings AWS API Documentation
     #
@@ -2153,7 +2264,9 @@ module Aws::DynamoDB
     #   resp.table.restore_summary.source_table_arn #=> String
     #   resp.table.restore_summary.restore_date_time #=> Time
     #   resp.table.restore_summary.restore_in_progress #=> Boolean
-    #   resp.table.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.table.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
+    #   resp.table.sse_description.sse_type #=> String, one of "AES256", "KMS"
+    #   resp.table.sse_description.kms_master_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTable AWS API Documentation
     #
@@ -2404,7 +2517,7 @@ module Aws::DynamoDB
     # You can call `ListBackups` a maximum of 5 times per second.
     #
     # @option params [String] :table_name
-    #   The backups from the table specified by TableName are listed.
+    #   The backups from the table specified by `TableName` are listed.
     #
     # @option params [Integer] :limit
     #   Maximum number of backups to return at once.
@@ -2418,7 +2531,22 @@ module Aws::DynamoDB
     #   `TimeRangeUpperBound` is exclusive.
     #
     # @option params [String] :exclusive_start_backup_arn
-    #   `LastEvaluatedBackupARN` returned by the previous ListBackups call.
+    #   `LastEvaluatedBackupArn` is the ARN of the backup last evaluated when
+    #   the current page of results was returned, inclusive of the current
+    #   page of results. This value may be specified as the
+    #   `ExclusiveStartBackupArn` of a new `ListBackups` operation in order to
+    #   fetch the next page of results.
+    #
+    # @option params [String] :backup_type
+    #   The backups from the table specified by `BackupType` are listed.
+    #
+    #   Where `BackupType` can be:
+    #
+    #   * `USER` - On-demand backup created by you.
+    #
+    #   * `SYSTEM` - On-demand backup automatically created by DynamoDB.
+    #
+    #   * `ALL` - All types of on-demand backups (USER and SYSTEM).
     #
     # @return [Types::ListBackupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2433,6 +2561,7 @@ module Aws::DynamoDB
     #     time_range_lower_bound: Time.now,
     #     time_range_upper_bound: Time.now,
     #     exclusive_start_backup_arn: "BackupArn",
+    #     backup_type: "USER", # accepts USER, SYSTEM, ALL
     #   })
     #
     # @example Response structure
@@ -2444,7 +2573,9 @@ module Aws::DynamoDB
     #   resp.backup_summaries[0].backup_arn #=> String
     #   resp.backup_summaries[0].backup_name #=> String
     #   resp.backup_summaries[0].backup_creation_date_time #=> Time
+    #   resp.backup_summaries[0].backup_expiry_date_time #=> Time
     #   resp.backup_summaries[0].backup_status #=> String, one of "CREATING", "DELETED", "AVAILABLE"
+    #   resp.backup_summaries[0].backup_type #=> String, one of "USER", "SYSTEM"
     #   resp.backup_summaries[0].backup_size_bytes #=> Integer
     #   resp.last_evaluated_backup_arn #=> String
     #
@@ -3561,7 +3692,9 @@ module Aws::DynamoDB
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
     #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
-    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
+    #   resp.table_description.sse_description.sse_type #=> String, one of "AES256", "KMS"
+    #   resp.table_description.sse_description.kms_master_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableFromBackup AWS API Documentation
     #
@@ -3696,7 +3829,9 @@ module Aws::DynamoDB
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
     #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
-    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
+    #   resp.table_description.sse_description.sse_type #=> String, one of "AES256", "KMS"
+    #   resp.table_description.sse_description.kms_master_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableToPointInTime AWS API Documentation
     #
@@ -4356,6 +4491,10 @@ module Aws::DynamoDB
     #   The maximum number of writes consumed per second before DynamoDB
     #   returns a `ThrottlingException.`
     #
+    # @option params [Types::AutoScalingSettingsUpdate] :global_table_provisioned_write_capacity_auto_scaling_settings_update
+    #   AutoScaling settings for managing provisioned write capacity for the
+    #   global table.
+    #
     # @option params [Array<Types::GlobalTableGlobalSecondaryIndexSettingsUpdate>] :global_table_global_secondary_index_settings_update
     #   Represents the settings of a global secondary index for a global table
     #   that will be modified.
@@ -4374,20 +4513,80 @@ module Aws::DynamoDB
     #   resp = client.update_global_table_settings({
     #     global_table_name: "TableName", # required
     #     global_table_provisioned_write_capacity_units: 1,
+    #     global_table_provisioned_write_capacity_auto_scaling_settings_update: {
+    #       minimum_units: 1,
+    #       maximum_units: 1,
+    #       auto_scaling_disabled: false,
+    #       auto_scaling_role_arn: "AutoScalingRoleArn",
+    #       scaling_policy_update: {
+    #         policy_name: "AutoScalingPolicyName",
+    #         target_tracking_scaling_policy_configuration: { # required
+    #           disable_scale_in: false,
+    #           scale_in_cooldown: 1,
+    #           scale_out_cooldown: 1,
+    #           target_value: 1.0, # required
+    #         },
+    #       },
+    #     },
     #     global_table_global_secondary_index_settings_update: [
     #       {
     #         index_name: "IndexName", # required
     #         provisioned_write_capacity_units: 1,
+    #         provisioned_write_capacity_auto_scaling_settings_update: {
+    #           minimum_units: 1,
+    #           maximum_units: 1,
+    #           auto_scaling_disabled: false,
+    #           auto_scaling_role_arn: "AutoScalingRoleArn",
+    #           scaling_policy_update: {
+    #             policy_name: "AutoScalingPolicyName",
+    #             target_tracking_scaling_policy_configuration: { # required
+    #               disable_scale_in: false,
+    #               scale_in_cooldown: 1,
+    #               scale_out_cooldown: 1,
+    #               target_value: 1.0, # required
+    #             },
+    #           },
+    #         },
     #       },
     #     ],
     #     replica_settings_update: [
     #       {
     #         region_name: "RegionName", # required
     #         replica_provisioned_read_capacity_units: 1,
+    #         replica_provisioned_read_capacity_auto_scaling_settings_update: {
+    #           minimum_units: 1,
+    #           maximum_units: 1,
+    #           auto_scaling_disabled: false,
+    #           auto_scaling_role_arn: "AutoScalingRoleArn",
+    #           scaling_policy_update: {
+    #             policy_name: "AutoScalingPolicyName",
+    #             target_tracking_scaling_policy_configuration: { # required
+    #               disable_scale_in: false,
+    #               scale_in_cooldown: 1,
+    #               scale_out_cooldown: 1,
+    #               target_value: 1.0, # required
+    #             },
+    #           },
+    #         },
     #         replica_global_secondary_index_settings_update: [
     #           {
     #             index_name: "IndexName", # required
     #             provisioned_read_capacity_units: 1,
+    #             provisioned_read_capacity_auto_scaling_settings_update: {
+    #               minimum_units: 1,
+    #               maximum_units: 1,
+    #               auto_scaling_disabled: false,
+    #               auto_scaling_role_arn: "AutoScalingRoleArn",
+    #               scaling_policy_update: {
+    #                 policy_name: "AutoScalingPolicyName",
+    #                 target_tracking_scaling_policy_configuration: { # required
+    #                   disable_scale_in: false,
+    #                   scale_in_cooldown: 1,
+    #                   scale_out_cooldown: 1,
+    #                   target_value: 1.0, # required
+    #                 },
+    #               },
+    #             },
     #           },
     #         ],
     #       },
@@ -4401,12 +4600,52 @@ module Aws::DynamoDB
     #   resp.replica_settings[0].region_name #=> String
     #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
     #   resp.replica_settings[0].replica_provisioned_read_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.minimum_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.maximum_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.auto_scaling_disabled #=> Boolean
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.auto_scaling_role_arn #=> String
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies #=> Array
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].policy_name #=> String
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
     #   resp.replica_settings[0].replica_provisioned_write_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.minimum_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.maximum_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.auto_scaling_disabled #=> Boolean
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.auto_scaling_role_arn #=> String
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies #=> Array
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].policy_name #=> String
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
     #   resp.replica_settings[0].replica_global_secondary_index_settings #=> Array
     #   resp.replica_settings[0].replica_global_secondary_index_settings[0].index_name #=> String
     #   resp.replica_settings[0].replica_global_secondary_index_settings[0].index_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
     #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.minimum_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.maximum_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.auto_scaling_disabled #=> Boolean
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.auto_scaling_role_arn #=> String
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies #=> Array
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].policy_name #=> String
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
     #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.minimum_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.maximum_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.auto_scaling_disabled #=> Boolean
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.auto_scaling_role_arn #=> String
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies #=> Array
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].policy_name #=> String
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateGlobalTableSettings AWS API Documentation
     #
@@ -4880,6 +5119,9 @@ module Aws::DynamoDB
     #
     #    </note>
     #
+    # @option params [Types::SSESpecification] :sse_specification
+    #   The new server-side encryption settings for the specified table.
+    #
     # @return [Types::UpdateTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateTableOutput#table_description #table_description} => Types::TableDescription
@@ -4983,6 +5225,11 @@ module Aws::DynamoDB
     #       stream_enabled: false,
     #       stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
     #     },
+    #     sse_specification: {
+    #       enabled: false,
+    #       sse_type: "AES256", # accepts AES256, KMS
+    #       kms_master_key_id: "KMSMasterKeyId",
+    #     },
     #   })
     #
     # @example Response structure
@@ -5042,7 +5289,9 @@ module Aws::DynamoDB
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
     #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
-    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
+    #   resp.table_description.sse_description.sse_type #=> String, one of "AES256", "KMS"
+    #   resp.table_description.sse_description.kms_master_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTable AWS API Documentation
     #
@@ -5138,7 +5387,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

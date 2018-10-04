@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -47,6 +49,8 @@ module Aws::SNS
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
@@ -92,6 +96,22 @@ module Aws::SNS
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::SNS
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -722,6 +753,8 @@ module Aws::SNS
     # return, NextToken will be null. For more information, see [Using
     # Amazon SNS Mobile Push Notifications][1].
     #
+    # This action is throttled at 30 transactions per second (TPS).
+    #
     #
     #
     # [1]: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
@@ -816,6 +849,8 @@ module Aws::SNS
     # more records to return, NextToken will be null. For more information,
     # see [Using Amazon SNS Mobile Push Notifications][1].
     #
+    # This action is throttled at 15 transactions per second (TPS).
+    #
     #
     #
     # [1]: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
@@ -858,6 +893,8 @@ module Aws::SNS
     # subscriptions, a `NextToken` is also returned. Use the `NextToken`
     # parameter in a new `ListSubscriptions` call to get further results.
     #
+    # This action is throttled at 30 transactions per second (TPS).
+    #
     # @option params [String] :next_token
     #   Token returned by the previous `ListSubscriptions` request.
     #
@@ -896,6 +933,8 @@ module Aws::SNS
     # subscriptions, a `NextToken` is also returned. Use the `NextToken`
     # parameter in a new `ListSubscriptionsByTopic` call to get further
     # results.
+    #
+    # This action is throttled at 30 transactions per second (TPS).
     #
     # @option params [required, String] :topic_arn
     #   The ARN of the topic for which you wish to find subscriptions.
@@ -938,6 +977,8 @@ module Aws::SNS
     # list of topics, up to 100. If there are more topics, a `NextToken` is
     # also returned. Use the `NextToken` parameter in a new `ListTopics`
     # call to get further results.
+    #
+    # This action is throttled at 30 transactions per second (TPS).
     #
     # @option params [String] :next_token
     #   Token returned by the previous `ListTopics` request.
@@ -993,11 +1034,16 @@ module Aws::SNS
       req.send_request(options)
     end
 
-    # Sends a message to all of a topic's subscribed endpoints. When a
-    # `messageId` is returned, the message has been saved and Amazon SNS
-    # will attempt to deliver it to the topic's subscribers shortly. The
-    # format of the outgoing message to each subscribed endpoint depends on
-    # the notification protocol.
+    # Sends a message to an Amazon SNS topic or sends a text message (SMS
+    # message) directly to a phone number.
+    #
+    # If you send a message to a topic, Amazon SNS delivers the message to
+    # each endpoint that is subscribed to the topic. The format of the
+    # message depends on the notification protocol for each subscribed
+    # endpoint.
+    #
+    # When a `messageId` is returned, the message has been saved and Amazon
+    # SNS will attempt to deliver it shortly.
     #
     # To use the `Publish` action for sending a message to a mobile
     # endpoint, such as an app on a Kindle device or mobile phone, you must
@@ -1032,17 +1078,29 @@ module Aws::SNS
     #   must specify a value for the `TargetArn` or `TopicArn` parameters.
     #
     # @option params [required, String] :message
-    #   The message you want to send to the topic.
+    #   The message you want to send.
     #
-    #   If you want to send the same message to all transport protocols,
-    #   include the text of the message as a String value.
+    #   If you are publishing to a topic and you want to send the same message
+    #   to all transport protocols, include the text of the message as a
+    #   String value. If you want to send different messages for each
+    #   transport protocol, set the value of the `MessageStructure` parameter
+    #   to `json` and use a JSON object for the `Message` parameter.
     #
-    #   If you want to send different messages for each transport protocol,
-    #   set the value of the `MessageStructure` parameter to `json` and use a
-    #   JSON object for the `Message` parameter.
     #
-    #   Constraints: Messages must be UTF-8 encoded strings at most 256 KB in
-    #   size (262144 bytes, not 262144 characters).
+    #
+    #   Constraints:
+    #
+    #   * With the exception of SMS, messages must be UTF-8 encoded strings
+    #     and at most 256 KB in size (262144 bytes, not 262144 characters).
+    #
+    #   * For SMS, each message can contain up to 140 bytes, and the character
+    #     limit depends on the encoding scheme. For example, an SMS message
+    #     can contain 160 GSM characters, 140 ASCII characters, or 70 UCS-2
+    #     characters. If you publish a message that exceeds the size limit,
+    #     Amazon SNS sends it as multiple messages, each fitting within the
+    #     size limit. Messages are not cut off in the middle of a word but on
+    #     whole-word boundaries. The total size limit for a single SMS publish
+    #     action is 1600 bytes.
     #
     #   JSON-specific constraints:
     #
@@ -1316,8 +1374,10 @@ module Aws::SNS
     #   messages, you will incur costs that exceed your limit.
     #
     #   By default, the spend limit is set to the maximum allowed by Amazon
-    #   SNS. If you want to exceed the maximum, contact [AWS Support][1] or
-    #   your AWS sales representative for a service limit increase.
+    #   SNS. If you want to raise the limit, submit an [SNS Limit Increase
+    #   case][1]. For **New limit value**, enter your desired monthly spend
+    #   limit. In the **Use Case Description** field, explain that you are
+    #   requesting an SMS monthly spend limit increase.
     #
     #   `DeliveryStatusIAMRole` – The ARN of the IAM role that allows Amazon
     #   SNS to write logs about SMS deliveries in CloudWatch Logs. For each
@@ -1381,7 +1441,7 @@ module Aws::SNS
     #
     #
     #
-    #   [1]: https://aws.amazon.com/premiumsupport/
+    #   [1]: https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&amp;limitType=service-code-sns
     #   [2]: http://docs.aws.amazon.com/sns/latest/dg/sms_stats.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1403,8 +1463,8 @@ module Aws::SNS
       req.send_request(options)
     end
 
-    # Allows a subscription owner to set an attribute of the topic to a new
-    # value.
+    # Allows a subscription owner to set an attribute of the subscription to
+    # a new value.
     #
     # @option params [required, String] :subscription_arn
     #   The ARN of the subscription to modify.
@@ -1413,7 +1473,8 @@ module Aws::SNS
     #   The name of the attribute you want to set. Only a subset of the
     #   subscriptions attributes are mutable.
     #
-    #   Valid values: `DeliveryPolicy` \| `RawMessageDelivery`
+    #   Valid values: `DeliveryPolicy` \| `FilterPolicy` \|
+    #   `RawMessageDelivery`
     #
     # @option params [String] :attribute_value
     #   The new value for the attribute in JSON format.
@@ -1476,6 +1537,8 @@ module Aws::SNS
     # the confirmation message. Confirmation tokens are valid for three
     # days.
     #
+    # This action is throttled at 100 transactions per second (TPS).
+    #
     # @option params [required, String] :topic_arn
     #   The ARN of the topic you want to subscribe to.
     #
@@ -1526,6 +1589,26 @@ module Aws::SNS
     #   * For the `lambda` protocol, the endpoint is the ARN of an AWS Lambda
     #     function.
     #
+    # @option params [Hash<String,String>] :attributes
+    #   Assigns attributes to the subscription as a map of key-value pairs.
+    #   You can assign any attribute that is supported by the
+    #   `SetSubscriptionAttributes` action.
+    #
+    # @option params [Boolean] :return_subscription_arn
+    #   Sets whether the response from the `Subscribe` request includes the
+    #   subscription ARN, even if the subscription is not yet confirmed.
+    #
+    #   If you set this parameter to `false`, the response includes the ARN
+    #   for confirmed subscriptions, but it includes an ARN value of "pending
+    #   subscription" for subscriptions that are not yet confirmed. A
+    #   subscription becomes confirmed when the subscriber calls the
+    #   `ConfirmSubscription` action with a confirmation token.
+    #
+    #   If you set this parameter to `true`, the response includes the ARN in
+    #   all cases, even if the subscription is not yet confirmed.
+    #
+    #   The default value is `false`.
+    #
     # @return [Types::SubscribeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SubscribeResponse#subscription_arn #subscription_arn} => String
@@ -1536,6 +1619,10 @@ module Aws::SNS
     #     topic_arn: "topicARN", # required
     #     protocol: "protocol", # required
     #     endpoint: "endpoint",
+    #     attributes: {
+    #       "attributeName" => "attributeValue",
+    #     },
+    #     return_subscription_arn: false,
     #   })
     #
     # @example Response structure
@@ -1558,6 +1645,8 @@ module Aws::SNS
     # is not the subscription owner, a final cancellation message is
     # delivered to the endpoint, so that the endpoint owner can easily
     # resubscribe to the topic if the `Unsubscribe` request was unintended.
+    #
+    # This action is throttled at 100 transactions per second (TPS).
     #
     # @option params [required, String] :subscription_arn
     #   The ARN of the subscription to be deleted.
@@ -1592,7 +1681,7 @@ module Aws::SNS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sns'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

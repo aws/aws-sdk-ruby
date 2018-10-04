@@ -83,9 +83,10 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] alias_name
-    #   String that contains the display name. The name must start with the
-    #   word "alias" followed by a forward slash (alias/). Aliases that
-    #   begin with "alias/AWS" are reserved.
+    #   Specifies the alias name. This value must begin with `alias/`
+    #   followed by the alias name, such as `alias/ExampleAlias`. The alias
+    #   name cannot begin with `aws/`. The `alias/aws/` prefix is reserved
+    #   for AWS managed CMKs.
     #   @return [String]
     #
     # @!attribute [rw] target_key_id
@@ -213,7 +214,8 @@ module Aws::KMS
     #
     # @!attribute [rw] name
     #   A friendly name for identifying the grant. Use this value to prevent
-    #   unintended creation of duplicate grants when retrying this request.
+    #   the unintended creation of duplicate grants when retrying this
+    #   request.
     #
     #   When this value is absent, all `CreateGrant` requests result in a
     #   new grant with a unique `GrantId` even if all the supplied
@@ -300,11 +302,11 @@ module Aws::KMS
     #     principals. The principals in the key policy must exist and be
     #     visible to AWS KMS. When you create a new AWS principal (for
     #     example, an IAM user or role), you might need to enforce a delay
-    #     before including the new principal in a key policy because the new
-    #     principal might not be immediately visible to AWS KMS. For more
-    #     information, see [Changes that I make are not always immediately
-    #     visible][2] in the *AWS Identity and Access Management User
-    #     Guide*.
+    #     before including the new principal in a key policy. The reason for
+    #     this is that the new principal might not be immediately visible to
+    #     AWS KMS. For more information, see [Changes that I make are not
+    #     always immediately visible][2] in the *AWS Identity and Access
+    #     Management User Guide*.
     #
     #   If you do not provide a key policy, AWS KMS attaches a default key
     #   policy to the CMK. For more information, see [Default Key Policy][3]
@@ -528,11 +530,15 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   A unique identifier for the customer master key (CMK).
+    #   Describes the specified customer master key (CMK).
+    #
+    #   If you specify a predefined AWS alias (an AWS alias with no key ID),
+    #   KMS associates the alias with an [AWS managed CMK][1] and returns
+    #   its `KeyId` and `Arn` in the response.
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
-    #   "alias/". To specify a CMK in a different AWS account, you must
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must
     #   use the key ARN or alias ARN.
     #
     #   For example:
@@ -548,6 +554,10 @@ module Aws::KMS
     #
     #   To get the key ID and key ARN for a CMK, use ListKeys or
     #   DescribeKey. To get the alias name and alias ARN, use ListAliases.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys
     #   @return [String]
     #
     # @!attribute [rw] grant_tokens
@@ -717,7 +727,7 @@ module Aws::KMS
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
-    #   "alias/". To specify a CMK in a different AWS account, you must
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must
     #   use the key ARN or alias ARN.
     #
     #   For example:
@@ -807,7 +817,7 @@ module Aws::KMS
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
-    #   "alias/". To specify a CMK in a different AWS account, you must
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must
     #   use the key ARN or alias ARN.
     #
     #   For example:
@@ -917,7 +927,7 @@ module Aws::KMS
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
-    #   "alias/". To specify a CMK in a different AWS account, you must
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must
     #   use the key ARN or alias ARN.
     #
     #   For example:
@@ -1147,10 +1157,10 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] wrapping_algorithm
-    #   The algorithm you will use to encrypt the key material before
-    #   importing it with ImportKeyMaterial. For more information, see
-    #   [Encrypt the Key Material][1] in the *AWS Key Management Service
-    #   Developer Guide*.
+    #   The algorithm you use to encrypt the key material before importing
+    #   it with ImportKeyMaterial. For more information, see [Encrypt the
+    #   Key Material][1] in the *AWS Key Management Service Developer
+    #   Guide*.
     #
     #
     #
@@ -1204,7 +1214,7 @@ module Aws::KMS
     end
 
     # A structure that you can use to allow certain operations in the grant
-    # only when the desired encryption context is present. For more
+    # only when the preferred encryption context is present. For more
     # information about encryption context, see [Encryption Context][1] in
     # the *AWS Key Management Service Developer Guide*.
     #
@@ -1212,7 +1222,7 @@ module Aws::KMS
     # context as input. For example, the ` DescribeKey ` operation does not
     # accept encryption context as input. A grant that allows the
     # `DescribeKey` operation does so regardless of the grant constraints.
-    # In constrast, the ` Encrypt ` operation accepts encryption context as
+    # In contrast, the ` Encrypt ` operation accepts encryption context as
     # input. A grant that allows the `Encrypt` operation does so only when
     # the encryption context of the `Encrypt` operation satisfies the grant
     # constraints.
@@ -1488,7 +1498,7 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] key_manager
-    #   The CMK's manager. CMKs are either customer-managed or AWS-managed.
+    #   The CMK's manager. CMKs are either customer managed or AWS managed.
     #   For more information about the difference, see [Customer Master
     #   Keys][1] in the *AWS Key Management Service Developer Guide*.
     #
@@ -1520,9 +1530,20 @@ module Aws::KMS
     #   data as a hash:
     #
     #       {
+    #         key_id: "KeyIdType",
     #         limit: 1,
     #         marker: "MarkerType",
     #       }
+    #
+    # @!attribute [rw] key_id
+    #   Lists only aliases that refer to the specified CMK. The value of
+    #   this parameter can be the ID or Amazon Resource Name (ARN) of a CMK
+    #   in the caller's account and region. You cannot use an alias name or
+    #   alias ARN in this value.
+    #
+    #   This parameter is optional. If you omit it, `ListAliases` returns
+    #   all aliases in the account and region.
+    #   @return [String]
     #
     # @!attribute [rw] limit
     #   Use this parameter to specify the maximum number of items to return.
@@ -1543,6 +1564,7 @@ module Aws::KMS
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListAliasesRequest AWS API Documentation
     #
     class ListAliasesRequest < Struct.new(
+      :key_id,
       :limit,
       :marker)
       include Aws::Structure
@@ -1960,11 +1982,11 @@ module Aws::KMS
     #     principals. The principals in the key policy must exist and be
     #     visible to AWS KMS. When you create a new AWS principal (for
     #     example, an IAM user or role), you might need to enforce a delay
-    #     before including the new principal in a key policy because the new
-    #     principal might not be immediately visible to AWS KMS. For more
-    #     information, see [Changes that I make are not always immediately
-    #     visible][2] in the *AWS Identity and Access Management User
-    #     Guide*.
+    #     before including the new principal in a key policy. The reason for
+    #     this is that the new principal might not be immediately visible to
+    #     AWS KMS. For more information, see [Changes that I make are not
+    #     always immediately visible][2] in the *AWS Identity and Access
+    #     Management User Guide*.
     #
     #   The key policy size limit is 32 kilobytes (32768 bytes).
     #
@@ -2035,7 +2057,7 @@ module Aws::KMS
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
-    #   "alias/". To specify a CMK in a different AWS account, you must
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must
     #   use the key ARN or alias ARN.
     #
     #   For example:

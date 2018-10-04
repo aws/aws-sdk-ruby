@@ -402,12 +402,16 @@ module Aws::States
       api.version = "2016-11-23"
 
       api.metadata = {
+        "apiVersion" => "2016-11-23",
         "endpointPrefix" => "states",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "serviceAbbreviation" => "AWS SFN",
         "serviceFullName" => "AWS Step Functions",
+        "serviceId" => "SFN",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSStepFunctions",
+        "uid" => "states-2016-11-23",
       }
 
       api.add_operation(:create_activity, Seahorse::Model::Operation.new.tap do |o|

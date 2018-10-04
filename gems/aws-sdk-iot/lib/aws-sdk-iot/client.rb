@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -47,6 +49,8 @@ module Aws::IoT
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -92,6 +96,22 @@ module Aws::IoT
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::IoT
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -306,6 +337,33 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Associates a Device Defender security profile with a thing group or
+    # with this account. Each thing group or account can have up to five
+    # security profiles associated with it.
+    #
+    # @option params [required, String] :security_profile_name
+    #   The security profile that is attached.
+    #
+    # @option params [required, String] :security_profile_target_arn
+    #   The ARN of the target (thing group) to which the security profile is
+    #   attached.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.attach_security_profile({
+    #     security_profile_name: "SecurityProfileName", # required
+    #     security_profile_target_arn: "SecurityProfileTargetArn", # required
+    #   })
+    #
+    # @overload attach_security_profile(params = {})
+    # @param [Hash] params ({})
+    def attach_security_profile(params = {}, options = {})
+      req = build_request(:attach_security_profile, params)
+      req.send_request(options)
+    end
+
     # Attaches the specified principal to the specified thing.
     #
     # @option params [required, String] :thing_name
@@ -327,6 +385,29 @@ module Aws::IoT
     # @param [Hash] params ({})
     def attach_thing_principal(params = {}, options = {})
       req = build_request(:attach_thing_principal, params)
+      req.send_request(options)
+    end
+
+    # Cancels an audit that is in progress. The audit can be either
+    # scheduled or on-demand. If the audit is not in progress, an
+    # "InvalidRequestException" occurs.
+    #
+    # @option params [required, String] :task_id
+    #   The ID of the audit you want to cancel. You can only cancel an audit
+    #   that is "IN\_PROGRESS".
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_audit_task({
+    #     task_id: "AuditTaskId", # required
+    #   })
+    #
+    # @overload cancel_audit_task(params = {})
+    # @param [Hash] params ({})
+    def cancel_audit_task(params = {}, options = {})
+      req = build_request(:cancel_audit_task, params)
       req.send_request(options)
     end
 
@@ -369,6 +450,16 @@ module Aws::IoT
     # @option params [String] :comment
     #   An optional comment string describing why the job was canceled.
     #
+    # @option params [Boolean] :force
+    #   (Optional) If `true` job executions with status "IN\_PROGRESS" and
+    #   "QUEUED" are canceled, otherwise only job executions with status
+    #   "QUEUED" are canceled. The default is `false`.
+    #
+    #   Canceling a job which is "IN\_PROGRESS", will cause a device which
+    #   is executing the job to be unable to update the job execution status.
+    #   Use caution and ensure that each device executing a job which is
+    #   canceled is able to recover to a valid state.
+    #
     # @return [Types::CancelJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CancelJobResponse#job_arn #job_arn} => String
@@ -380,6 +471,7 @@ module Aws::IoT
     #   resp = client.cancel_job({
     #     job_id: "JobId", # required
     #     comment: "Comment",
+    #     force: false,
     #   })
     #
     # @example Response structure
@@ -392,6 +484,61 @@ module Aws::IoT
     # @param [Hash] params ({})
     def cancel_job(params = {}, options = {})
       req = build_request(:cancel_job, params)
+      req.send_request(options)
+    end
+
+    # Cancels the execution of a job for a given thing.
+    #
+    # @option params [required, String] :job_id
+    #   The ID of the job to be canceled.
+    #
+    # @option params [required, String] :thing_name
+    #   The name of the thing whose execution of the job will be canceled.
+    #
+    # @option params [Boolean] :force
+    #   (Optional) If `true` the job execution will be canceled if it has
+    #   status IN\_PROGRESS or QUEUED, otherwise the job execution will be
+    #   canceled only if it has status QUEUED. If you attempt to cancel a job
+    #   execution that is IN\_PROGRESS, and you do not set `force` to `true`,
+    #   then an `InvalidStateTransitionException` will be thrown. The default
+    #   is `false`.
+    #
+    #   Canceling a job execution which is "IN\_PROGRESS", will cause the
+    #   device to be unable to update the job execution status. Use caution
+    #   and ensure that the device is able to recover to a valid state.
+    #
+    # @option params [Integer] :expected_version
+    #   (Optional) The expected current version of the job execution. Each
+    #   time you update the job execution, its version is incremented. If the
+    #   version of the job execution stored in Jobs does not match, the update
+    #   is rejected with a VersionMismatch error, and an ErrorResponse that
+    #   contains the current job execution status data is returned. (This
+    #   makes it unnecessary to perform a separate DescribeJobExecution
+    #   request in order to obtain the job execution status data.)
+    #
+    # @option params [Hash<String,String>] :status_details
+    #   A collection of name/value pairs that describe the status of the job
+    #   execution. If not specified, the statusDetails are unchanged. You can
+    #   specify at most 10 name/value pairs.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_job_execution({
+    #     job_id: "JobId", # required
+    #     thing_name: "ThingName", # required
+    #     force: false,
+    #     expected_version: 1,
+    #     status_details: {
+    #       "DetailsKey" => "DetailsValue",
+    #     },
+    #   })
+    #
+    # @overload cancel_job_execution(params = {})
+    # @param [Hash] params ({})
+    def cancel_job_execution(params = {}, options = {})
+      req = build_request(:cancel_job_execution, params)
       req.send_request(options)
     end
 
@@ -568,9 +715,6 @@ module Aws::IoT
     # @option params [Types::JobExecutionsRolloutConfig] :job_executions_rollout_config
     #   Allows you to create a staged rollout of the job.
     #
-    # @option params [Hash<String,String>] :document_parameters
-    #   Parameters for the job document.
-    #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateJobResponse#job_arn #job_arn} => String
@@ -592,9 +736,6 @@ module Aws::IoT
     #     target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
     #     job_executions_rollout_config: {
     #       maximum_per_minute: 1,
-    #     },
-    #     document_parameters: {
-    #       "ParameterKey" => "ParameterValue",
     #     },
     #   })
     #
@@ -668,6 +809,9 @@ module Aws::IoT
     #   even after the update was completed by all things originally in the
     #   group. Valid values: CONTINUOUS \| SNAPSHOT.
     #
+    # @option params [Types::AwsJobExecutionsRolloutConfig] :aws_job_executions_rollout_config
+    #   Configuration for the rollout of OTA updates.
+    #
     # @option params [required, Array<Types::OTAUpdateFile>] :files
     #   The files to be streamed by the OTA update.
     #
@@ -692,29 +836,45 @@ module Aws::IoT
     #     description: "OTAUpdateDescription",
     #     targets: ["Target"], # required
     #     target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
+    #     aws_job_executions_rollout_config: {
+    #       maximum_per_minute: 1,
+    #     },
     #     files: [ # required
     #       {
     #         file_name: "FileName",
     #         file_version: "OTAUpdateFileVersion",
-    #         file_source: {
-    #           stream_id: "StreamId",
-    #           file_id: 1,
+    #         file_location: {
+    #           stream: {
+    #             stream_id: "StreamId",
+    #             file_id: 1,
+    #           },
+    #           s3_location: {
+    #             bucket: "S3Bucket",
+    #             key: "S3Key",
+    #             version: "S3Version",
+    #           },
     #         },
     #         code_signing: {
     #           aws_signer_job_id: "SigningJobId",
+    #           start_signing_job_parameter: {
+    #             signing_profile_parameter: {
+    #               certificate_arn: "CertificateArn",
+    #               platform: "Platform",
+    #               certificate_path_on_device: "CertificatePathOnDevice",
+    #             },
+    #             signing_profile_name: "SigningProfileName",
+    #             destination: {
+    #               s3_destination: {
+    #                 bucket: "S3Bucket",
+    #                 prefix: "Prefix",
+    #               },
+    #             },
+    #           },
     #           custom_code_signing: {
     #             signature: {
-    #               stream: {
-    #                 stream_id: "StreamId",
-    #                 file_id: 1,
-    #               },
     #               inline_document: "data",
     #             },
     #             certificate_chain: {
-    #               stream: {
-    #                 stream_id: "StreamId",
-    #                 file_id: 1,
-    #               },
     #               certificate_name: "CertificateName",
     #               inline_document: "InlineDocument",
     #             },
@@ -723,13 +883,13 @@ module Aws::IoT
     #           },
     #         },
     #         attributes: {
-    #           "Key" => "Value",
+    #           "AttributeKey" => "Value",
     #         },
     #       },
     #     ],
     #     role_arn: "RoleArn", # required
     #     additional_parameters: {
-    #       "Key" => "Value",
+    #       "AttributeKey" => "Value",
     #     },
     #   })
     #
@@ -880,6 +1040,122 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Creates a scheduled audit that is run at a specified time interval.
+    #
+    # @option params [required, String] :frequency
+    #   How often the scheduled audit takes place. Can be one of "DAILY",
+    #   "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of each
+    #   audit is determined by the system.
+    #
+    # @option params [String] :day_of_month
+    #   The day of the month on which the scheduled audit takes place. Can be
+    #   "1" through "31" or "LAST". This field is required if the
+    #   "frequency" parameter is set to "MONTHLY". If days 29-31 are
+    #   specified, and the month does not have that many days, the audit takes
+    #   place on the "LAST" day of the month.
+    #
+    # @option params [String] :day_of_week
+    #   The day of the week on which the scheduled audit takes place. Can be
+    #   one of "SUN", "MON", "TUE", "WED", "THU", "FRI" or
+    #   "SAT". This field is required if the "frequency" parameter is set
+    #   to "WEEKLY" or "BIWEEKLY".
+    #
+    # @option params [required, Array<String>] :target_check_names
+    #   Which checks are performed during the scheduled audit. Checks must be
+    #   enabled for your account. (Use `DescribeAccountAuditConfiguration` to
+    #   see the list of all checks including those that are enabled or
+    #   `UpdateAccountAuditConfiguration` to select which checks are enabled.)
+    #
+    # @option params [required, String] :scheduled_audit_name
+    #   The name you want to give to the scheduled audit. (Max. 128 chars)
+    #
+    # @return [Types::CreateScheduledAuditResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateScheduledAuditResponse#scheduled_audit_arn #scheduled_audit_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_scheduled_audit({
+    #     frequency: "DAILY", # required, accepts DAILY, WEEKLY, BIWEEKLY, MONTHLY
+    #     day_of_month: "DayOfMonth",
+    #     day_of_week: "SUN", # accepts SUN, MON, TUE, WED, THU, FRI, SAT
+    #     target_check_names: ["AuditCheckName"], # required
+    #     scheduled_audit_name: "ScheduledAuditName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scheduled_audit_arn #=> String
+    #
+    # @overload create_scheduled_audit(params = {})
+    # @param [Hash] params ({})
+    def create_scheduled_audit(params = {}, options = {})
+      req = build_request(:create_scheduled_audit, params)
+      req.send_request(options)
+    end
+
+    # Creates a Device Defender security profile.
+    #
+    # @option params [required, String] :security_profile_name
+    #   The name you are giving to the security profile.
+    #
+    # @option params [String] :security_profile_description
+    #   A description of the security profile.
+    #
+    # @option params [required, Array<Types::Behavior>] :behaviors
+    #   Specifies the behaviors that, when violated by a device (thing), cause
+    #   an alert.
+    #
+    # @option params [Hash<String,Types::AlertTarget>] :alert_targets
+    #   Specifies the destinations to which alerts are sent. (Alerts are
+    #   always sent to the console.) Alerts are generated when a device
+    #   (thing) violates a behavior.
+    #
+    # @return [Types::CreateSecurityProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSecurityProfileResponse#security_profile_name #security_profile_name} => String
+    #   * {Types::CreateSecurityProfileResponse#security_profile_arn #security_profile_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_security_profile({
+    #     security_profile_name: "SecurityProfileName", # required
+    #     security_profile_description: "SecurityProfileDescription",
+    #     behaviors: [ # required
+    #       {
+    #         name: "BehaviorName", # required
+    #         metric: "BehaviorMetric",
+    #         criteria: {
+    #           comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set
+    #           value: {
+    #             count: 1,
+    #             cidrs: ["Cidr"],
+    #             ports: [1],
+    #           },
+    #           duration_seconds: 1,
+    #         },
+    #       },
+    #     ],
+    #     alert_targets: {
+    #       "SNS" => {
+    #         alert_target_arn: "AlertTargetArn", # required
+    #         role_arn: "RoleArn", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_profile_name #=> String
+    #   resp.security_profile_arn #=> String
+    #
+    # @overload create_security_profile(params = {})
+    # @param [Hash] params ({})
+    def create_security_profile(params = {}, options = {})
+      req = build_request(:create_security_profile, params)
+      req.send_request(options)
+    end
+
     # Creates a stream for delivering one or more large files in chunks over
     # MQTT. A stream transports data bytes in chunks or blocks packaged as
     # MQTT messages from a source like S3. You can have one or more files
@@ -918,8 +1194,8 @@ module Aws::IoT
     #       {
     #         file_id: 1,
     #         s3_location: {
-    #           bucket: "S3Bucket", # required
-    #           key: "S3Key", # required
+    #           bucket: "S3Bucket",
+    #           key: "S3Key",
     #           version: "S3Version",
     #         },
     #       },
@@ -942,6 +1218,15 @@ module Aws::IoT
     end
 
     # Creates a thing record in the registry.
+    #
+    # <note markdown="1"> This is a control plane operation. See [Authorization][1] for
+    # information about authorizing control plane actions.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/iot/latest/developerguide/authorization.html
     #
     # @option params [required, String] :thing_name
     #   The name of the thing to create.
@@ -988,6 +1273,15 @@ module Aws::IoT
     end
 
     # Create a thing group.
+    #
+    # <note markdown="1"> This is a control plane operation. See [Authorization][1] for
+    # information about authorizing control plane actions.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/iot/latest/developerguide/authorization.html
     #
     # @option params [required, String] :thing_group_name
     #   The thing group name to create.
@@ -1146,11 +1440,11 @@ module Aws::IoT
     #           },
     #           cloudwatch_metric: {
     #             role_arn: "AwsArn", # required
-    #             metric_namespace: "MetricNamespace", # required
-    #             metric_name: "MetricName", # required
-    #             metric_value: "MetricValue", # required
-    #             metric_unit: "MetricUnit", # required
-    #             metric_timestamp: "MetricTimestamp",
+    #             metric_namespace: "String", # required
+    #             metric_name: "String", # required
+    #             metric_value: "String", # required
+    #             metric_unit: "String", # required
+    #             metric_timestamp: "String",
     #           },
     #           cloudwatch_alarm: {
     #             role_arn: "AwsArn", # required
@@ -1173,6 +1467,11 @@ module Aws::IoT
     #             channel_arn: "AwsArn",
     #             channel_name: "ChannelName",
     #             role_arn: "AwsArn",
+    #           },
+    #           step_functions: {
+    #             execution_name_prefix: "ExecutionNamePrefix",
+    #             state_machine_name: "StateMachineName", # required
+    #             role_arn: "AwsArn", # required
     #           },
     #         },
     #       ],
@@ -1232,11 +1531,11 @@ module Aws::IoT
     #         },
     #         cloudwatch_metric: {
     #           role_arn: "AwsArn", # required
-    #           metric_namespace: "MetricNamespace", # required
-    #           metric_name: "MetricName", # required
-    #           metric_value: "MetricValue", # required
-    #           metric_unit: "MetricUnit", # required
-    #           metric_timestamp: "MetricTimestamp",
+    #           metric_namespace: "String", # required
+    #           metric_name: "String", # required
+    #           metric_value: "String", # required
+    #           metric_unit: "String", # required
+    #           metric_timestamp: "String",
     #         },
     #         cloudwatch_alarm: {
     #           role_arn: "AwsArn", # required
@@ -1260,6 +1559,11 @@ module Aws::IoT
     #           channel_name: "ChannelName",
     #           role_arn: "AwsArn",
     #         },
+    #         step_functions: {
+    #           execution_name_prefix: "ExecutionNamePrefix",
+    #           state_machine_name: "StateMachineName", # required
+    #           role_arn: "AwsArn", # required
+    #         },
     #       },
     #     },
     #   })
@@ -1268,6 +1572,28 @@ module Aws::IoT
     # @param [Hash] params ({})
     def create_topic_rule(params = {}, options = {})
       req = build_request(:create_topic_rule, params)
+      req.send_request(options)
+    end
+
+    # Restores the default settings for Device Defender audits for this
+    # account. Any configuration data you entered is deleted and all audit
+    # checks are reset to disabled.
+    #
+    # @option params [Boolean] :delete_scheduled_audits
+    #   If true, all scheduled audits are deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_account_audit_configuration({
+    #     delete_scheduled_audits: false,
+    #   })
+    #
+    # @overload delete_account_audit_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_account_audit_configuration(params = {}, options = {})
+      req = build_request(:delete_account_audit_configuration, params)
       req.send_request(options)
     end
 
@@ -1342,10 +1668,114 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Deletes a job and its related job executions.
+    #
+    # Deleting a job may take time, depending on the number of job
+    # executions created for the job and various other factors. While the
+    # job is being deleted, the status of the job will be shown as
+    # "DELETION\_IN\_PROGRESS". Attempting to delete or cancel a job whose
+    # status is already "DELETION\_IN\_PROGRESS" will result in an error.
+    #
+    # Only 10 jobs may have status "DELETION\_IN\_PROGRESS" at the same
+    # time, or a LimitExceededException will occur.
+    #
+    # @option params [required, String] :job_id
+    #   The ID of the job to be deleted.
+    #
+    #   After a job deletion is completed, you may reuse this jobId when you
+    #   create a new job. However, this is not recommended, and you must
+    #   ensure that your devices are not using the jobId to refer to the
+    #   deleted job.
+    #
+    # @option params [Boolean] :force
+    #   (Optional) When true, you can delete a job which is "IN\_PROGRESS".
+    #   Otherwise, you can only delete a job which is in a terminal state
+    #   ("COMPLETED" or "CANCELED") or an exception will occur. The
+    #   default is false.
+    #
+    #   <note markdown="1"> Deleting a job which is "IN\_PROGRESS", will cause a device which is
+    #   executing the job to be unable to access job information or update the
+    #   job execution status. Use caution and ensure that each device
+    #   executing a job which is deleted is able to recover to a valid state.
+    #
+    #    </note>
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_job({
+    #     job_id: "JobId", # required
+    #     force: false,
+    #   })
+    #
+    # @overload delete_job(params = {})
+    # @param [Hash] params ({})
+    def delete_job(params = {}, options = {})
+      req = build_request(:delete_job, params)
+      req.send_request(options)
+    end
+
+    # Deletes a job execution.
+    #
+    # @option params [required, String] :job_id
+    #   The ID of the job whose execution on a particular device will be
+    #   deleted.
+    #
+    # @option params [required, String] :thing_name
+    #   The name of the thing whose job execution will be deleted.
+    #
+    # @option params [required, Integer] :execution_number
+    #   The ID of the job execution to be deleted. The `executionNumber`
+    #   refers to the execution of a particular job on a particular device.
+    #
+    #   Note that once a job execution is deleted, the `executionNumber` may
+    #   be reused by IoT, so be sure you get and use the correct value here.
+    #
+    # @option params [Boolean] :force
+    #   (Optional) When true, you can delete a job execution which is
+    #   "IN\_PROGRESS". Otherwise, you can only delete a job execution which
+    #   is in a terminal state ("SUCCEEDED", "FAILED", "REJECTED",
+    #   "REMOVED" or "CANCELED") or an exception will occur. The default
+    #   is false.
+    #
+    #   <note markdown="1"> Deleting a job execution which is "IN\_PROGRESS", will cause the
+    #   device to be unable to access job information or update the job
+    #   execution status. Use caution and ensure that the device is able to
+    #   recover to a valid state.
+    #
+    #    </note>
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_job_execution({
+    #     job_id: "JobId", # required
+    #     thing_name: "ThingName", # required
+    #     execution_number: 1, # required
+    #     force: false,
+    #   })
+    #
+    # @overload delete_job_execution(params = {})
+    # @param [Hash] params ({})
+    def delete_job_execution(params = {}, options = {})
+      req = build_request(:delete_job_execution, params)
+      req.send_request(options)
+    end
+
     # Delete an OTA update.
     #
     # @option params [required, String] :ota_update_id
     #   The OTA update ID to delete.
+    #
+    # @option params [Boolean] :delete_stream
+    #   Specifies if the stream associated with an OTA update should be
+    #   deleted when the OTA update is deleted.
+    #
+    # @option params [Boolean] :force_delete_aws_job
+    #   Specifies if the AWS Job associated with the OTA update should be
+    #   deleted with the OTA update is deleted.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1353,6 +1783,8 @@ module Aws::IoT
     #
     #   resp = client.delete_ota_update({
     #     ota_update_id: "OTAUpdateId", # required
+    #     delete_stream: false,
+    #     force_delete_aws_job: false,
     #   })
     #
     # @overload delete_ota_update(params = {})
@@ -1449,6 +1881,53 @@ module Aws::IoT
     # @param [Hash] params ({})
     def delete_role_alias(params = {}, options = {})
       req = build_request(:delete_role_alias, params)
+      req.send_request(options)
+    end
+
+    # Deletes a scheduled audit.
+    #
+    # @option params [required, String] :scheduled_audit_name
+    #   The name of the scheduled audit you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_scheduled_audit({
+    #     scheduled_audit_name: "ScheduledAuditName", # required
+    #   })
+    #
+    # @overload delete_scheduled_audit(params = {})
+    # @param [Hash] params ({})
+    def delete_scheduled_audit(params = {}, options = {})
+      req = build_request(:delete_scheduled_audit, params)
+      req.send_request(options)
+    end
+
+    # Deletes a Device Defender security profile.
+    #
+    # @option params [required, String] :security_profile_name
+    #   The name of the security profile to be deleted.
+    #
+    # @option params [Integer] :expected_version
+    #   The expected version of the security profile. A new version is
+    #   generated whenever the security profile is updated. If you specify a
+    #   value that is different than the actual version, a
+    #   `VersionConflictException` is thrown.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_security_profile({
+    #     security_profile_name: "SecurityProfileName", # required
+    #     expected_version: 1,
+    #   })
+    #
+    # @overload delete_security_profile(params = {})
+    # @param [Hash] params ({})
+    def delete_security_profile(params = {}, options = {})
+      req = build_request(:delete_security_profile, params)
       req.send_request(options)
     end
 
@@ -1620,6 +2099,81 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Gets information about the Device Defender audit settings for this
+    # account. Settings include how audit notifications are sent and which
+    # audit checks are enabled or disabled.
+    #
+    # @return [Types::DescribeAccountAuditConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAccountAuditConfigurationResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeAccountAuditConfigurationResponse#audit_notification_target_configurations #audit_notification_target_configurations} => Hash&lt;String,Types::AuditNotificationTarget&gt;
+    #   * {Types::DescribeAccountAuditConfigurationResponse#audit_check_configurations #audit_check_configurations} => Hash&lt;String,Types::AuditCheckConfiguration&gt;
+    #
+    # @example Response structure
+    #
+    #   resp.role_arn #=> String
+    #   resp.audit_notification_target_configurations #=> Hash
+    #   resp.audit_notification_target_configurations["AuditNotificationType"].target_arn #=> String
+    #   resp.audit_notification_target_configurations["AuditNotificationType"].role_arn #=> String
+    #   resp.audit_notification_target_configurations["AuditNotificationType"].enabled #=> Boolean
+    #   resp.audit_check_configurations #=> Hash
+    #   resp.audit_check_configurations["AuditCheckName"].enabled #=> Boolean
+    #
+    # @overload describe_account_audit_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_account_audit_configuration(params = {}, options = {})
+      req = build_request(:describe_account_audit_configuration, params)
+      req.send_request(options)
+    end
+
+    # Gets information about a Device Defender audit.
+    #
+    # @option params [required, String] :task_id
+    #   The ID of the audit whose information you want to get.
+    #
+    # @return [Types::DescribeAuditTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAuditTaskResponse#task_status #task_status} => String
+    #   * {Types::DescribeAuditTaskResponse#task_type #task_type} => String
+    #   * {Types::DescribeAuditTaskResponse#task_start_time #task_start_time} => Time
+    #   * {Types::DescribeAuditTaskResponse#task_statistics #task_statistics} => Types::TaskStatistics
+    #   * {Types::DescribeAuditTaskResponse#scheduled_audit_name #scheduled_audit_name} => String
+    #   * {Types::DescribeAuditTaskResponse#audit_details #audit_details} => Hash&lt;String,Types::AuditCheckDetails&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_audit_task({
+    #     task_id: "AuditTaskId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED", "CANCELED"
+    #   resp.task_type #=> String, one of "ON_DEMAND_AUDIT_TASK", "SCHEDULED_AUDIT_TASK"
+    #   resp.task_start_time #=> Time
+    #   resp.task_statistics.total_checks #=> Integer
+    #   resp.task_statistics.in_progress_checks #=> Integer
+    #   resp.task_statistics.waiting_for_data_collection_checks #=> Integer
+    #   resp.task_statistics.compliant_checks #=> Integer
+    #   resp.task_statistics.non_compliant_checks #=> Integer
+    #   resp.task_statistics.failed_checks #=> Integer
+    #   resp.task_statistics.canceled_checks #=> Integer
+    #   resp.scheduled_audit_name #=> String
+    #   resp.audit_details #=> Hash
+    #   resp.audit_details["AuditCheckName"].check_run_status #=> String, one of "IN_PROGRESS", "WAITING_FOR_DATA_COLLECTION", "CANCELED", "COMPLETED_COMPLIANT", "COMPLETED_NON_COMPLIANT", "FAILED"
+    #   resp.audit_details["AuditCheckName"].check_compliant #=> Boolean
+    #   resp.audit_details["AuditCheckName"].total_resources_count #=> Integer
+    #   resp.audit_details["AuditCheckName"].non_compliant_resources_count #=> Integer
+    #   resp.audit_details["AuditCheckName"].error_code #=> String
+    #   resp.audit_details["AuditCheckName"].message #=> String
+    #
+    # @overload describe_audit_task(params = {})
+    # @param [Hash] params ({})
+    def describe_audit_task(params = {}, options = {})
+      req = build_request(:describe_audit_task, params)
+      req.send_request(options)
+    end
+
     # Describes an authorizer.
     #
     # @option params [required, String] :authorizer_name
@@ -1682,6 +2236,8 @@ module Aws::IoT
     #   resp.certificate_description.last_modified_date #=> Time
     #   resp.certificate_description.customer_version #=> Integer
     #   resp.certificate_description.generation_id #=> String
+    #   resp.certificate_description.validity.not_before #=> Time
+    #   resp.certificate_description.validity.not_after #=> Time
     #   resp.registration_config.template_body #=> String
     #   resp.registration_config.role_arn #=> String
     #
@@ -1726,6 +2282,8 @@ module Aws::IoT
     #   resp.certificate_description.transfer_data.accept_date #=> Time
     #   resp.certificate_description.transfer_data.reject_date #=> Time
     #   resp.certificate_description.generation_id #=> String
+    #   resp.certificate_description.validity.not_before #=> Time
+    #   resp.certificate_description.validity.not_after #=> Time
     #
     # @overload describe_certificate(params = {})
     # @param [Hash] params ({})
@@ -1762,7 +2320,8 @@ module Aws::IoT
     # Returns a unique endpoint specific to the AWS account making the call.
     #
     # @option params [String] :endpoint_type
-    #   The endpoint type.
+    #   The endpoint type (such as `iot:Data`, `iot:CredentialProvider` and
+    #   `iot:Jobs`).
     #
     # @return [Types::DescribeEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1859,7 +2418,8 @@ module Aws::IoT
     #   resp.job.job_arn #=> String
     #   resp.job.job_id #=> String
     #   resp.job.target_selection #=> String, one of "CONTINUOUS", "SNAPSHOT"
-    #   resp.job.status #=> String, one of "IN_PROGRESS", "CANCELED", "COMPLETED"
+    #   resp.job.status #=> String, one of "IN_PROGRESS", "CANCELED", "COMPLETED", "DELETION_IN_PROGRESS"
+    #   resp.job.force_canceled #=> Boolean
     #   resp.job.comment #=> String
     #   resp.job.targets #=> Array
     #   resp.job.targets[0] #=> String
@@ -1879,8 +2439,6 @@ module Aws::IoT
     #   resp.job.job_process_details.number_of_queued_things #=> Integer
     #   resp.job.job_process_details.number_of_in_progress_things #=> Integer
     #   resp.job.job_process_details.number_of_removed_things #=> Integer
-    #   resp.job.document_parameters #=> Hash
-    #   resp.job.document_parameters["ParameterKey"] #=> String
     #
     # @overload describe_job(params = {})
     # @param [Hash] params ({})
@@ -1917,6 +2475,7 @@ module Aws::IoT
     #
     #   resp.execution.job_id #=> String
     #   resp.execution.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "REJECTED", "REMOVED", "CANCELED"
+    #   resp.execution.force_canceled #=> Boolean
     #   resp.execution.status_details.details_map #=> Hash
     #   resp.execution.status_details.details_map["DetailsKey"] #=> String
     #   resp.execution.thing_arn #=> String
@@ -1924,6 +2483,7 @@ module Aws::IoT
     #   resp.execution.started_at #=> Time
     #   resp.execution.last_updated_at #=> Time
     #   resp.execution.execution_number #=> Integer
+    #   resp.execution.version_number #=> Integer
     #
     # @overload describe_job_execution(params = {})
     # @param [Hash] params ({})
@@ -1961,6 +2521,94 @@ module Aws::IoT
     # @param [Hash] params ({})
     def describe_role_alias(params = {}, options = {})
       req = build_request(:describe_role_alias, params)
+      req.send_request(options)
+    end
+
+    # Gets information about a scheduled audit.
+    #
+    # @option params [required, String] :scheduled_audit_name
+    #   The name of the scheduled audit whose information you want to get.
+    #
+    # @return [Types::DescribeScheduledAuditResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeScheduledAuditResponse#frequency #frequency} => String
+    #   * {Types::DescribeScheduledAuditResponse#day_of_month #day_of_month} => String
+    #   * {Types::DescribeScheduledAuditResponse#day_of_week #day_of_week} => String
+    #   * {Types::DescribeScheduledAuditResponse#target_check_names #target_check_names} => Array&lt;String&gt;
+    #   * {Types::DescribeScheduledAuditResponse#scheduled_audit_name #scheduled_audit_name} => String
+    #   * {Types::DescribeScheduledAuditResponse#scheduled_audit_arn #scheduled_audit_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_scheduled_audit({
+    #     scheduled_audit_name: "ScheduledAuditName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.frequency #=> String, one of "DAILY", "WEEKLY", "BIWEEKLY", "MONTHLY"
+    #   resp.day_of_month #=> String
+    #   resp.day_of_week #=> String, one of "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"
+    #   resp.target_check_names #=> Array
+    #   resp.target_check_names[0] #=> String
+    #   resp.scheduled_audit_name #=> String
+    #   resp.scheduled_audit_arn #=> String
+    #
+    # @overload describe_scheduled_audit(params = {})
+    # @param [Hash] params ({})
+    def describe_scheduled_audit(params = {}, options = {})
+      req = build_request(:describe_scheduled_audit, params)
+      req.send_request(options)
+    end
+
+    # Gets information about a Device Defender security profile.
+    #
+    # @option params [required, String] :security_profile_name
+    #   The name of the security profile whose information you want to get.
+    #
+    # @return [Types::DescribeSecurityProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSecurityProfileResponse#security_profile_name #security_profile_name} => String
+    #   * {Types::DescribeSecurityProfileResponse#security_profile_arn #security_profile_arn} => String
+    #   * {Types::DescribeSecurityProfileResponse#security_profile_description #security_profile_description} => String
+    #   * {Types::DescribeSecurityProfileResponse#behaviors #behaviors} => Array&lt;Types::Behavior&gt;
+    #   * {Types::DescribeSecurityProfileResponse#alert_targets #alert_targets} => Hash&lt;String,Types::AlertTarget&gt;
+    #   * {Types::DescribeSecurityProfileResponse#version #version} => Integer
+    #   * {Types::DescribeSecurityProfileResponse#creation_date #creation_date} => Time
+    #   * {Types::DescribeSecurityProfileResponse#last_modified_date #last_modified_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_security_profile({
+    #     security_profile_name: "SecurityProfileName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_profile_name #=> String
+    #   resp.security_profile_arn #=> String
+    #   resp.security_profile_description #=> String
+    #   resp.behaviors #=> Array
+    #   resp.behaviors[0].name #=> String
+    #   resp.behaviors[0].metric #=> String
+    #   resp.behaviors[0].criteria.comparison_operator #=> String, one of "less-than", "less-than-equals", "greater-than", "greater-than-equals", "in-cidr-set", "not-in-cidr-set", "in-port-set", "not-in-port-set"
+    #   resp.behaviors[0].criteria.value.count #=> Integer
+    #   resp.behaviors[0].criteria.value.cidrs #=> Array
+    #   resp.behaviors[0].criteria.value.cidrs[0] #=> String
+    #   resp.behaviors[0].criteria.value.ports #=> Array
+    #   resp.behaviors[0].criteria.value.ports[0] #=> Integer
+    #   resp.behaviors[0].criteria.duration_seconds #=> Integer
+    #   resp.alert_targets #=> Hash
+    #   resp.alert_targets["AlertTargetType"].alert_target_arn #=> String
+    #   resp.alert_targets["AlertTargetType"].role_arn #=> String
+    #   resp.version #=> Integer
+    #   resp.creation_date #=> Time
+    #   resp.last_modified_date #=> Time
+    #
+    # @overload describe_security_profile(params = {})
+    # @param [Hash] params ({})
+    def describe_security_profile(params = {}, options = {})
+      req = build_request(:describe_security_profile, params)
       req.send_request(options)
     end
 
@@ -2222,6 +2870,32 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Disassociates a Device Defender security profile from a thing group or
+    # from this account.
+    #
+    # @option params [required, String] :security_profile_name
+    #   The security profile that is detached.
+    #
+    # @option params [required, String] :security_profile_target_arn
+    #   The ARN of the thing group from which the security profile is
+    #   detached.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.detach_security_profile({
+    #     security_profile_name: "SecurityProfileName", # required
+    #     security_profile_target_arn: "SecurityProfileTargetArn", # required
+    #   })
+    #
+    # @overload detach_security_profile(params = {})
+    # @param [Hash] params ({})
+    def detach_security_profile(params = {}, options = {})
+      req = build_request(:detach_security_profile, params)
+      req.send_request(options)
+    end
+
     # Detaches the specified principal from the specified thing.
     #
     # @option params [required, String] :thing_name
@@ -2288,7 +2962,9 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Gets effective policies.
+    # Gets a list of the policies that have an effect on the authorization
+    # behavior of the specified device when it connects to the AWS IoT
+    # device gateway.
     #
     # @option params [String] :principal
     #   The principal.
@@ -2330,10 +3006,12 @@ module Aws::IoT
     # @return [Types::GetIndexingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetIndexingConfigurationResponse#thing_indexing_configuration #thing_indexing_configuration} => Types::ThingIndexingConfiguration
+    #   * {Types::GetIndexingConfigurationResponse#thing_group_indexing_configuration #thing_group_indexing_configuration} => Types::ThingGroupIndexingConfiguration
     #
     # @example Response structure
     #
     #   resp.thing_indexing_configuration.thing_indexing_mode #=> String, one of "OFF", "REGISTRY", "REGISTRY_AND_SHADOW"
+    #   resp.thing_group_indexing_configuration.thing_group_indexing_mode #=> String, one of "OFF", "ON"
     #
     # @overload get_indexing_configuration(params = {})
     # @param [Hash] params ({})
@@ -2369,6 +3047,9 @@ module Aws::IoT
     end
 
     # Gets the logging options.
+    #
+    # NOTE: use of this command is not recommended. Use
+    # `GetV2LoggingOptions` instead.
     #
     # @return [Types::GetLoggingOptionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2411,31 +3092,37 @@ module Aws::IoT
     #   resp.ota_update_info.description #=> String
     #   resp.ota_update_info.targets #=> Array
     #   resp.ota_update_info.targets[0] #=> String
+    #   resp.ota_update_info.aws_job_executions_rollout_config.maximum_per_minute #=> Integer
     #   resp.ota_update_info.target_selection #=> String, one of "CONTINUOUS", "SNAPSHOT"
     #   resp.ota_update_info.ota_update_files #=> Array
     #   resp.ota_update_info.ota_update_files[0].file_name #=> String
     #   resp.ota_update_info.ota_update_files[0].file_version #=> String
-    #   resp.ota_update_info.ota_update_files[0].file_source.stream_id #=> String
-    #   resp.ota_update_info.ota_update_files[0].file_source.file_id #=> Integer
+    #   resp.ota_update_info.ota_update_files[0].file_location.stream.stream_id #=> String
+    #   resp.ota_update_info.ota_update_files[0].file_location.stream.file_id #=> Integer
+    #   resp.ota_update_info.ota_update_files[0].file_location.s3_location.bucket #=> String
+    #   resp.ota_update_info.ota_update_files[0].file_location.s3_location.key #=> String
+    #   resp.ota_update_info.ota_update_files[0].file_location.s3_location.version #=> String
     #   resp.ota_update_info.ota_update_files[0].code_signing.aws_signer_job_id #=> String
-    #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.signature.stream.stream_id #=> String
-    #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.signature.stream.file_id #=> Integer
+    #   resp.ota_update_info.ota_update_files[0].code_signing.start_signing_job_parameter.signing_profile_parameter.certificate_arn #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.start_signing_job_parameter.signing_profile_parameter.platform #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.start_signing_job_parameter.signing_profile_parameter.certificate_path_on_device #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.start_signing_job_parameter.signing_profile_name #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.start_signing_job_parameter.destination.s3_destination.bucket #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.start_signing_job_parameter.destination.s3_destination.prefix #=> String
     #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.signature.inline_document #=> String
-    #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.certificate_chain.stream.stream_id #=> String
-    #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.certificate_chain.stream.file_id #=> Integer
     #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.certificate_chain.certificate_name #=> String
     #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.certificate_chain.inline_document #=> String
     #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.hash_algorithm #=> String
     #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.signature_algorithm #=> String
     #   resp.ota_update_info.ota_update_files[0].attributes #=> Hash
-    #   resp.ota_update_info.ota_update_files[0].attributes["Key"] #=> String
+    #   resp.ota_update_info.ota_update_files[0].attributes["AttributeKey"] #=> String
     #   resp.ota_update_info.ota_update_status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED"
     #   resp.ota_update_info.aws_iot_job_id #=> String
     #   resp.ota_update_info.aws_iot_job_arn #=> String
     #   resp.ota_update_info.error_info.code #=> String
     #   resp.ota_update_info.error_info.message #=> String
     #   resp.ota_update_info.additional_parameters #=> Hash
-    #   resp.ota_update_info.additional_parameters["Key"] #=> String
+    #   resp.ota_update_info.additional_parameters["AttributeKey"] #=> String
     #
     # @overload get_ota_update(params = {})
     # @param [Hash] params ({})
@@ -2620,6 +3307,9 @@ module Aws::IoT
     #   resp.rule.actions[0].iot_analytics.channel_arn #=> String
     #   resp.rule.actions[0].iot_analytics.channel_name #=> String
     #   resp.rule.actions[0].iot_analytics.role_arn #=> String
+    #   resp.rule.actions[0].step_functions.execution_name_prefix #=> String
+    #   resp.rule.actions[0].step_functions.state_machine_name #=> String
+    #   resp.rule.actions[0].step_functions.role_arn #=> String
     #   resp.rule.rule_disabled #=> Boolean
     #   resp.rule.aws_iot_sql_version #=> String
     #   resp.rule.error_action.dynamo_db.table_name #=> String
@@ -2673,6 +3363,9 @@ module Aws::IoT
     #   resp.rule.error_action.iot_analytics.channel_arn #=> String
     #   resp.rule.error_action.iot_analytics.channel_name #=> String
     #   resp.rule.error_action.iot_analytics.role_arn #=> String
+    #   resp.rule.error_action.step_functions.execution_name_prefix #=> String
+    #   resp.rule.error_action.step_functions.state_machine_name #=> String
+    #   resp.rule.error_action.step_functions.role_arn #=> String
     #
     # @overload get_topic_rule(params = {})
     # @param [Hash] params ({})
@@ -2699,6 +3392,67 @@ module Aws::IoT
     # @param [Hash] params ({})
     def get_v2_logging_options(params = {}, options = {})
       req = build_request(:get_v2_logging_options, params)
+      req.send_request(options)
+    end
+
+    # Lists the active violations for a given Device Defender security
+    # profile.
+    #
+    # @option params [String] :thing_name
+    #   The name of the thing whose active violations are listed.
+    #
+    # @option params [String] :security_profile_name
+    #   The name of the Device Defender security profile for which violations
+    #   are listed.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time.
+    #
+    # @return [Types::ListActiveViolationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListActiveViolationsResponse#active_violations #active_violations} => Array&lt;Types::ActiveViolation&gt;
+    #   * {Types::ListActiveViolationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_active_violations({
+    #     thing_name: "ThingName",
+    #     security_profile_name: "SecurityProfileName",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.active_violations #=> Array
+    #   resp.active_violations[0].violation_id #=> String
+    #   resp.active_violations[0].thing_name #=> String
+    #   resp.active_violations[0].security_profile_name #=> String
+    #   resp.active_violations[0].behavior.name #=> String
+    #   resp.active_violations[0].behavior.metric #=> String
+    #   resp.active_violations[0].behavior.criteria.comparison_operator #=> String, one of "less-than", "less-than-equals", "greater-than", "greater-than-equals", "in-cidr-set", "not-in-cidr-set", "in-port-set", "not-in-port-set"
+    #   resp.active_violations[0].behavior.criteria.value.count #=> Integer
+    #   resp.active_violations[0].behavior.criteria.value.cidrs #=> Array
+    #   resp.active_violations[0].behavior.criteria.value.cidrs[0] #=> String
+    #   resp.active_violations[0].behavior.criteria.value.ports #=> Array
+    #   resp.active_violations[0].behavior.criteria.value.ports[0] #=> Integer
+    #   resp.active_violations[0].behavior.criteria.duration_seconds #=> Integer
+    #   resp.active_violations[0].last_violation_value.count #=> Integer
+    #   resp.active_violations[0].last_violation_value.cidrs #=> Array
+    #   resp.active_violations[0].last_violation_value.cidrs[0] #=> String
+    #   resp.active_violations[0].last_violation_value.ports #=> Array
+    #   resp.active_violations[0].last_violation_value.ports[0] #=> Integer
+    #   resp.active_violations[0].last_violation_time #=> Time
+    #   resp.active_violations[0].violation_start_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload list_active_violations(params = {})
+    # @param [Hash] params ({})
+    def list_active_violations(params = {}, options = {})
+      req = build_request(:list_active_violations, params)
       req.send_request(options)
     end
 
@@ -2741,6 +3495,163 @@ module Aws::IoT
     # @param [Hash] params ({})
     def list_attached_policies(params = {}, options = {})
       req = build_request(:list_attached_policies, params)
+      req.send_request(options)
+    end
+
+    # Lists the findings (results) of a Device Defender audit or of the
+    # audits performed during a specified time period. (Findings are
+    # retained for 180 days.)
+    #
+    # @option params [String] :task_id
+    #   A filter to limit results to the audit with the specified ID. You must
+    #   specify either the taskId or the startTime and endTime, but not both.
+    #
+    # @option params [String] :check_name
+    #   A filter to limit results to the findings for the specified audit
+    #   check.
+    #
+    # @option params [Types::ResourceIdentifier] :resource_identifier
+    #   Information identifying the non-compliant resource.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time. The default is
+    #   25.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   A filter to limit results to those found after the specified time. You
+    #   must specify either the startTime and endTime or the taskId, but not
+    #   both.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   A filter to limit results to those found before the specified time.
+    #   You must specify either the startTime and endTime or the taskId, but
+    #   not both.
+    #
+    # @return [Types::ListAuditFindingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAuditFindingsResponse#findings #findings} => Array&lt;Types::AuditFinding&gt;
+    #   * {Types::ListAuditFindingsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_audit_findings({
+    #     task_id: "AuditTaskId",
+    #     check_name: "AuditCheckName",
+    #     resource_identifier: {
+    #       device_certificate_id: "CertificateId",
+    #       ca_certificate_id: "CertificateId",
+    #       cognito_identity_pool_id: "CognitoIdentityPoolId",
+    #       client_id: "ClientId",
+    #       policy_version_identifier: {
+    #         policy_name: "PolicyName",
+    #         policy_version_id: "PolicyVersionId",
+    #       },
+    #       account: "AwsAccountId",
+    #     },
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.findings #=> Array
+    #   resp.findings[0].task_id #=> String
+    #   resp.findings[0].check_name #=> String
+    #   resp.findings[0].task_start_time #=> Time
+    #   resp.findings[0].finding_time #=> Time
+    #   resp.findings[0].severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW"
+    #   resp.findings[0].non_compliant_resource.resource_type #=> String, one of "DEVICE_CERTIFICATE", "CA_CERTIFICATE", "IOT_POLICY", "COGNITO_IDENTITY_POOL", "CLIENT_ID", "ACCOUNT_SETTINGS"
+    #   resp.findings[0].non_compliant_resource.resource_identifier.device_certificate_id #=> String
+    #   resp.findings[0].non_compliant_resource.resource_identifier.ca_certificate_id #=> String
+    #   resp.findings[0].non_compliant_resource.resource_identifier.cognito_identity_pool_id #=> String
+    #   resp.findings[0].non_compliant_resource.resource_identifier.client_id #=> String
+    #   resp.findings[0].non_compliant_resource.resource_identifier.policy_version_identifier.policy_name #=> String
+    #   resp.findings[0].non_compliant_resource.resource_identifier.policy_version_identifier.policy_version_id #=> String
+    #   resp.findings[0].non_compliant_resource.resource_identifier.account #=> String
+    #   resp.findings[0].non_compliant_resource.additional_info #=> Hash
+    #   resp.findings[0].non_compliant_resource.additional_info["String"] #=> String
+    #   resp.findings[0].related_resources #=> Array
+    #   resp.findings[0].related_resources[0].resource_type #=> String, one of "DEVICE_CERTIFICATE", "CA_CERTIFICATE", "IOT_POLICY", "COGNITO_IDENTITY_POOL", "CLIENT_ID", "ACCOUNT_SETTINGS"
+    #   resp.findings[0].related_resources[0].resource_identifier.device_certificate_id #=> String
+    #   resp.findings[0].related_resources[0].resource_identifier.ca_certificate_id #=> String
+    #   resp.findings[0].related_resources[0].resource_identifier.cognito_identity_pool_id #=> String
+    #   resp.findings[0].related_resources[0].resource_identifier.client_id #=> String
+    #   resp.findings[0].related_resources[0].resource_identifier.policy_version_identifier.policy_name #=> String
+    #   resp.findings[0].related_resources[0].resource_identifier.policy_version_identifier.policy_version_id #=> String
+    #   resp.findings[0].related_resources[0].resource_identifier.account #=> String
+    #   resp.findings[0].related_resources[0].additional_info #=> Hash
+    #   resp.findings[0].related_resources[0].additional_info["String"] #=> String
+    #   resp.findings[0].reason_for_non_compliance #=> String
+    #   resp.findings[0].reason_for_non_compliance_code #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_audit_findings(params = {})
+    # @param [Hash] params ({})
+    def list_audit_findings(params = {}, options = {})
+      req = build_request(:list_audit_findings, params)
+      req.send_request(options)
+    end
+
+    # Lists the Device Defender audits that have been performed during a
+    # given time period.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   The beginning of the time period. Note that audit information is
+    #   retained for a limited time (180 days). Requesting a start time prior
+    #   to what is retained results in an "InvalidRequestException".
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_time
+    #   The end of the time period.
+    #
+    # @option params [String] :task_type
+    #   A filter to limit the output to the specified type of audit: can be
+    #   one of "ON\_DEMAND\_AUDIT\_TASK" or "SCHEDULED\_\_AUDIT\_TASK".
+    #
+    # @option params [String] :task_status
+    #   A filter to limit the output to audits with the specified completion
+    #   status: can be one of "IN\_PROGRESS", "COMPLETED", "FAILED" or
+    #   "CANCELED".
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time. The default is
+    #   25.
+    #
+    # @return [Types::ListAuditTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAuditTasksResponse#tasks #tasks} => Array&lt;Types::AuditTaskMetadata&gt;
+    #   * {Types::ListAuditTasksResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_audit_tasks({
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #     task_type: "ON_DEMAND_AUDIT_TASK", # accepts ON_DEMAND_AUDIT_TASK, SCHEDULED_AUDIT_TASK
+    #     task_status: "IN_PROGRESS", # accepts IN_PROGRESS, COMPLETED, FAILED, CANCELED
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tasks #=> Array
+    #   resp.tasks[0].task_id #=> String
+    #   resp.tasks[0].task_status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED", "CANCELED"
+    #   resp.tasks[0].task_type #=> String, one of "ON_DEMAND_AUDIT_TASK", "SCHEDULED_AUDIT_TASK"
+    #   resp.next_token #=> String
+    #
+    # @overload list_audit_tasks(params = {})
+    # @param [Hash] params ({})
+    def list_audit_tasks(params = {}, options = {})
+      req = build_request(:list_audit_tasks, params)
       req.send_request(options)
     end
 
@@ -3082,7 +3993,7 @@ module Aws::IoT
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_jobs({
-    #     status: "IN_PROGRESS", # accepts IN_PROGRESS, CANCELED, COMPLETED
+    #     status: "IN_PROGRESS", # accepts IN_PROGRESS, CANCELED, COMPLETED, DELETION_IN_PROGRESS
     #     target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
     #     max_results: 1,
     #     next_token: "NextToken",
@@ -3097,7 +4008,7 @@ module Aws::IoT
     #   resp.jobs[0].job_id #=> String
     #   resp.jobs[0].thing_group_id #=> String
     #   resp.jobs[0].target_selection #=> String, one of "CONTINUOUS", "SNAPSHOT"
-    #   resp.jobs[0].status #=> String, one of "IN_PROGRESS", "CANCELED", "COMPLETED"
+    #   resp.jobs[0].status #=> String, one of "IN_PROGRESS", "CANCELED", "COMPLETED", "DELETION_IN_PROGRESS"
     #   resp.jobs[0].created_at #=> Time
     #   resp.jobs[0].last_updated_at #=> Time
     #   resp.jobs[0].completed_at #=> Time
@@ -3361,8 +4272,7 @@ module Aws::IoT
     # Lists the things associated with the specified principal.
     #
     # @option params [String] :next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to retrieve the next set of results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in this operation.
@@ -3430,6 +4340,125 @@ module Aws::IoT
     # @param [Hash] params ({})
     def list_role_aliases(params = {}, options = {})
       req = build_request(:list_role_aliases, params)
+      req.send_request(options)
+    end
+
+    # Lists all of your scheduled audits.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time. The default is
+    #   25.
+    #
+    # @return [Types::ListScheduledAuditsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListScheduledAuditsResponse#scheduled_audits #scheduled_audits} => Array&lt;Types::ScheduledAuditMetadata&gt;
+    #   * {Types::ListScheduledAuditsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_scheduled_audits({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scheduled_audits #=> Array
+    #   resp.scheduled_audits[0].scheduled_audit_name #=> String
+    #   resp.scheduled_audits[0].scheduled_audit_arn #=> String
+    #   resp.scheduled_audits[0].frequency #=> String, one of "DAILY", "WEEKLY", "BIWEEKLY", "MONTHLY"
+    #   resp.scheduled_audits[0].day_of_month #=> String
+    #   resp.scheduled_audits[0].day_of_week #=> String, one of "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"
+    #   resp.next_token #=> String
+    #
+    # @overload list_scheduled_audits(params = {})
+    # @param [Hash] params ({})
+    def list_scheduled_audits(params = {}, options = {})
+      req = build_request(:list_scheduled_audits, params)
+      req.send_request(options)
+    end
+
+    # Lists the Device Defender security profiles you have created. You can
+    # use filters to list only those security profiles associated with a
+    # thing group or only those associated with your account.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time.
+    #
+    # @return [Types::ListSecurityProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSecurityProfilesResponse#security_profile_identifiers #security_profile_identifiers} => Array&lt;Types::SecurityProfileIdentifier&gt;
+    #   * {Types::ListSecurityProfilesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_security_profiles({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_profile_identifiers #=> Array
+    #   resp.security_profile_identifiers[0].name #=> String
+    #   resp.security_profile_identifiers[0].arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_security_profiles(params = {})
+    # @param [Hash] params ({})
+    def list_security_profiles(params = {}, options = {})
+      req = build_request(:list_security_profiles, params)
+      req.send_request(options)
+    end
+
+    # Lists the Device Defender security profiles attached to a target
+    # (thing group).
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time.
+    #
+    # @option params [Boolean] :recursive
+    #   If true, return child groups as well.
+    #
+    # @option params [required, String] :security_profile_target_arn
+    #   The ARN of the target (thing group) whose attached security profiles
+    #   you want to get.
+    #
+    # @return [Types::ListSecurityProfilesForTargetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSecurityProfilesForTargetResponse#security_profile_target_mappings #security_profile_target_mappings} => Array&lt;Types::SecurityProfileTargetMapping&gt;
+    #   * {Types::ListSecurityProfilesForTargetResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_security_profiles_for_target({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     recursive: false,
+    #     security_profile_target_arn: "SecurityProfileTargetArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_profile_target_mappings #=> Array
+    #   resp.security_profile_target_mappings[0].security_profile_identifier.name #=> String
+    #   resp.security_profile_target_mappings[0].security_profile_identifier.arn #=> String
+    #   resp.security_profile_target_mappings[0].target.arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_security_profiles_for_target(params = {})
+    # @param [Hash] params ({})
+    def list_security_profiles_for_target(params = {}, options = {})
+      req = build_request(:list_security_profiles_for_target, params)
       req.send_request(options)
     end
 
@@ -3510,11 +4539,48 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Lists the targets (thing groups) associated with a given Device
+    # Defender security profile.
+    #
+    # @option params [required, String] :security_profile_name
+    #   The security profile.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time.
+    #
+    # @return [Types::ListTargetsForSecurityProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTargetsForSecurityProfileResponse#security_profile_targets #security_profile_targets} => Array&lt;Types::SecurityProfileTarget&gt;
+    #   * {Types::ListTargetsForSecurityProfileResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_targets_for_security_profile({
+    #     security_profile_name: "SecurityProfileName", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_profile_targets #=> Array
+    #   resp.security_profile_targets[0].arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_targets_for_security_profile(params = {})
+    # @param [Hash] params ({})
+    def list_targets_for_security_profile(params = {}, options = {})
+      req = build_request(:list_targets_for_security_profile, params)
+      req.send_request(options)
+    end
+
     # List the thing groups in your account.
     #
     # @option params [String] :next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to retrieve the next set of results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return at one time.
@@ -3565,8 +4631,7 @@ module Aws::IoT
     #   The thing name.
     #
     # @option params [String] :next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to retrieve the next set of results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return at one time.
@@ -3671,8 +4736,7 @@ module Aws::IoT
     # List bulk thing provisioning tasks.
     #
     # @option params [String] :next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to retrieve the next set of results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return at one time.
@@ -3709,8 +4773,7 @@ module Aws::IoT
     # Lists the existing thing types.
     #
     # @option params [String] :next_token
-    #   The token for the next set of results, or **null** if there are no
-    #   additional results.
+    #   The token to retrieve the next set of results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in this operation.
@@ -3758,8 +4821,7 @@ module Aws::IoT
     # **Red**.
     #
     # @option params [String] :next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to retrieve the next set of results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in this operation.
@@ -3816,8 +4878,7 @@ module Aws::IoT
     #   well.
     #
     # @option params [String] :next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to retrieve the next set of results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return at one time.
@@ -3932,6 +4993,78 @@ module Aws::IoT
     # @param [Hash] params ({})
     def list_v2_logging_levels(params = {}, options = {})
       req = build_request(:list_v2_logging_levels, params)
+      req.send_request(options)
+    end
+
+    # Lists the Device Defender security profile violations discovered
+    # during the given time period. You can use filters to limit the results
+    # to those alerts issued for a particular security profile, behavior or
+    # thing (device).
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   The start time for the alerts to be listed.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_time
+    #   The end time for the alerts to be listed.
+    #
+    # @option params [String] :thing_name
+    #   A filter to limit results to those alerts caused by the specified
+    #   thing.
+    #
+    # @option params [String] :security_profile_name
+    #   A filter to limit results to those alerts generated by the specified
+    #   security profile.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time.
+    #
+    # @return [Types::ListViolationEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListViolationEventsResponse#violation_events #violation_events} => Array&lt;Types::ViolationEvent&gt;
+    #   * {Types::ListViolationEventsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_violation_events({
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #     thing_name: "ThingName",
+    #     security_profile_name: "SecurityProfileName",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.violation_events #=> Array
+    #   resp.violation_events[0].violation_id #=> String
+    #   resp.violation_events[0].thing_name #=> String
+    #   resp.violation_events[0].security_profile_name #=> String
+    #   resp.violation_events[0].behavior.name #=> String
+    #   resp.violation_events[0].behavior.metric #=> String
+    #   resp.violation_events[0].behavior.criteria.comparison_operator #=> String, one of "less-than", "less-than-equals", "greater-than", "greater-than-equals", "in-cidr-set", "not-in-cidr-set", "in-port-set", "not-in-port-set"
+    #   resp.violation_events[0].behavior.criteria.value.count #=> Integer
+    #   resp.violation_events[0].behavior.criteria.value.cidrs #=> Array
+    #   resp.violation_events[0].behavior.criteria.value.cidrs[0] #=> String
+    #   resp.violation_events[0].behavior.criteria.value.ports #=> Array
+    #   resp.violation_events[0].behavior.criteria.value.ports[0] #=> Integer
+    #   resp.violation_events[0].behavior.criteria.duration_seconds #=> Integer
+    #   resp.violation_events[0].metric_value.count #=> Integer
+    #   resp.violation_events[0].metric_value.cidrs #=> Array
+    #   resp.violation_events[0].metric_value.cidrs[0] #=> String
+    #   resp.violation_events[0].metric_value.ports #=> Array
+    #   resp.violation_events[0].metric_value.ports[0] #=> Integer
+    #   resp.violation_events[0].violation_event_type #=> String, one of "in-alarm", "alarm-cleared", "alarm-invalidated"
+    #   resp.violation_events[0].violation_event_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload list_violation_events(params = {})
+    # @param [Hash] params ({})
+    def list_violation_events(params = {}, options = {})
+      req = build_request(:list_violation_events, params)
       req.send_request(options)
     end
 
@@ -4220,11 +5353,11 @@ module Aws::IoT
     #           },
     #           cloudwatch_metric: {
     #             role_arn: "AwsArn", # required
-    #             metric_namespace: "MetricNamespace", # required
-    #             metric_name: "MetricName", # required
-    #             metric_value: "MetricValue", # required
-    #             metric_unit: "MetricUnit", # required
-    #             metric_timestamp: "MetricTimestamp",
+    #             metric_namespace: "String", # required
+    #             metric_name: "String", # required
+    #             metric_value: "String", # required
+    #             metric_unit: "String", # required
+    #             metric_timestamp: "String",
     #           },
     #           cloudwatch_alarm: {
     #             role_arn: "AwsArn", # required
@@ -4247,6 +5380,11 @@ module Aws::IoT
     #             channel_arn: "AwsArn",
     #             channel_name: "ChannelName",
     #             role_arn: "AwsArn",
+    #           },
+    #           step_functions: {
+    #             execution_name_prefix: "ExecutionNamePrefix",
+    #             state_machine_name: "StateMachineName", # required
+    #             role_arn: "AwsArn", # required
     #           },
     #         },
     #       ],
@@ -4306,11 +5444,11 @@ module Aws::IoT
     #         },
     #         cloudwatch_metric: {
     #           role_arn: "AwsArn", # required
-    #           metric_namespace: "MetricNamespace", # required
-    #           metric_name: "MetricName", # required
-    #           metric_value: "MetricValue", # required
-    #           metric_unit: "MetricUnit", # required
-    #           metric_timestamp: "MetricTimestamp",
+    #           metric_namespace: "String", # required
+    #           metric_name: "String", # required
+    #           metric_value: "String", # required
+    #           metric_unit: "String", # required
+    #           metric_timestamp: "String",
     #         },
     #         cloudwatch_alarm: {
     #           role_arn: "AwsArn", # required
@@ -4333,6 +5471,11 @@ module Aws::IoT
     #           channel_arn: "AwsArn",
     #           channel_name: "ChannelName",
     #           role_arn: "AwsArn",
+    #         },
+    #         step_functions: {
+    #           execution_name_prefix: "ExecutionNamePrefix",
+    #           state_machine_name: "StateMachineName", # required
+    #           role_arn: "AwsArn", # required
     #         },
     #       },
     #     },
@@ -4367,6 +5510,7 @@ module Aws::IoT
     #
     #   * {Types::SearchIndexResponse#next_token #next_token} => String
     #   * {Types::SearchIndexResponse#things #things} => Array&lt;Types::ThingDocument&gt;
+    #   * {Types::SearchIndexResponse#thing_groups #thing_groups} => Array&lt;Types::ThingGroupDocument&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -4390,6 +5534,14 @@ module Aws::IoT
     #   resp.things[0].attributes #=> Hash
     #   resp.things[0].attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.things[0].shadow #=> String
+    #   resp.thing_groups #=> Array
+    #   resp.thing_groups[0].thing_group_name #=> String
+    #   resp.thing_groups[0].thing_group_id #=> String
+    #   resp.thing_groups[0].thing_group_description #=> String
+    #   resp.thing_groups[0].attributes #=> Hash
+    #   resp.thing_groups[0].attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.thing_groups[0].parent_group_names #=> Array
+    #   resp.thing_groups[0].parent_group_names[0] #=> String
     #
     # @overload search_index(params = {})
     # @param [Hash] params ({})
@@ -4456,6 +5608,9 @@ module Aws::IoT
 
     # Sets the logging options.
     #
+    # NOTE: use of this command is not recommended. Use
+    # `SetV2LoggingOptions` instead.
+    #
     # @option params [required, Types::LoggingOptionsPayload] :logging_options_payload
     #   The logging options payload.
     #
@@ -4507,13 +5662,13 @@ module Aws::IoT
     # Sets the logging options for the V2 logging service.
     #
     # @option params [String] :role_arn
-    #   The role ARN that allows IoT to write to Cloudwatch logs.
+    #   The ARN of the role that allows IoT to write to Cloudwatch logs.
     #
     # @option params [String] :default_log_level
     #   The default logging level.
     #
     # @option params [Boolean] :disable_all_logs
-    #   Set to true to disable all logs, otherwise set to false.
+    #   If true all logs are disabled. The default is false.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4529,6 +5684,36 @@ module Aws::IoT
     # @param [Hash] params ({})
     def set_v2_logging_options(params = {}, options = {})
       req = build_request(:set_v2_logging_options, params)
+      req.send_request(options)
+    end
+
+    # Starts an on-demand Device Defender audit.
+    #
+    # @option params [required, Array<String>] :target_check_names
+    #   Which checks are performed during the audit. The checks you specify
+    #   must be enabled for your account or an exception occurs. Use
+    #   `DescribeAccountAuditConfiguration` to see the list of all checks
+    #   including those that are enabled or `UpdateAccountAuditConfiguration`
+    #   to select which checks are enabled.
+    #
+    # @return [Types::StartOnDemandAuditTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartOnDemandAuditTaskResponse#task_id #task_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_on_demand_audit_task({
+    #     target_check_names: ["AuditCheckName"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_id #=> String
+    #
+    # @overload start_on_demand_audit_task(params = {})
+    # @param [Hash] params ({})
+    def start_on_demand_audit_task(params = {}, options = {})
+      req = build_request(:start_on_demand_audit_task, params)
       req.send_request(options)
     end
 
@@ -4592,7 +5777,10 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Test custom authorization.
+    # Tests if a specified principal is authorized to perform an AWS IoT
+    # action on a specified resource. Use this to test and debug the
+    # authorization behavior of devices that connect to the AWS IoT device
+    # gateway.
     #
     # @option params [String] :principal
     #   The principal.
@@ -4661,7 +5849,9 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Invoke the specified custom authorizer for testing purposes.
+    # Tests a custom authorization behavior by invoking a specified custom
+    # authorizer. Use this to test and debug the custom authorization
+    # behavior of devices that connect to the AWS IoT device gateway.
     #
     # @option params [required, String] :authorizer_name
     #   The custom authorizer name.
@@ -4748,6 +5938,61 @@ module Aws::IoT
     # @param [Hash] params ({})
     def transfer_certificate(params = {}, options = {})
       req = build_request(:transfer_certificate, params)
+      req.send_request(options)
+    end
+
+    # Configures or reconfigures the Device Defender audit settings for this
+    # account. Settings include how audit notifications are sent and which
+    # audit checks are enabled or disabled.
+    #
+    # @option params [String] :role_arn
+    #   The ARN of the role that grants permission to AWS IoT to access
+    #   information about your devices, policies, certificates and other items
+    #   as necessary when performing an audit.
+    #
+    # @option params [Hash<String,Types::AuditNotificationTarget>] :audit_notification_target_configurations
+    #   Information about the targets to which audit notifications are sent.
+    #
+    # @option params [Hash<String,Types::AuditCheckConfiguration>] :audit_check_configurations
+    #   Specifies which audit checks are enabled and disabled for this
+    #   account. Use `DescribeAccountAuditConfiguration` to see the list of
+    #   all checks including those that are currently enabled.
+    #
+    #   Note that some data collection may begin immediately when certain
+    #   checks are enabled. When a check is disabled, any data collected so
+    #   far in relation to the check is deleted.
+    #
+    #   You cannot disable a check if it is used by any scheduled audit. You
+    #   must first delete the check from the scheduled audit or delete the
+    #   scheduled audit itself.
+    #
+    #   On the first call to `UpdateAccountAuditConfiguration` this parameter
+    #   is required and must specify at least one enabled check.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_account_audit_configuration({
+    #     role_arn: "RoleArn",
+    #     audit_notification_target_configurations: {
+    #       "SNS" => {
+    #         target_arn: "TargetArn",
+    #         role_arn: "RoleArn",
+    #         enabled: false,
+    #       },
+    #     },
+    #     audit_check_configurations: {
+    #       "AuditCheckName" => {
+    #         enabled: false,
+    #       },
+    #     },
+    #   })
+    #
+    # @overload update_account_audit_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_account_audit_configuration(params = {}, options = {})
+      req = build_request(:update_account_audit_configuration, params)
       req.send_request(options)
     end
 
@@ -4909,13 +6154,19 @@ module Aws::IoT
     # @option params [Types::ThingIndexingConfiguration] :thing_indexing_configuration
     #   Thing indexing configuration.
     #
+    # @option params [Types::ThingGroupIndexingConfiguration] :thing_group_indexing_configuration
+    #   Thing group indexing configuration.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_indexing_configuration({
     #     thing_indexing_configuration: {
-    #       thing_indexing_mode: "OFF", # accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
+    #       thing_indexing_mode: "OFF", # required, accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
+    #     },
+    #     thing_group_indexing_configuration: {
+    #       thing_group_indexing_mode: "OFF", # required, accepts OFF, ON
     #     },
     #   })
     #
@@ -4962,6 +6213,151 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Updates a scheduled audit, including what checks are performed and how
+    # often the audit takes place.
+    #
+    # @option params [String] :frequency
+    #   How often the scheduled audit takes place. Can be one of "DAILY",
+    #   "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of each
+    #   audit is determined by the system.
+    #
+    # @option params [String] :day_of_month
+    #   The day of the month on which the scheduled audit takes place. Can be
+    #   "1" through "31" or "LAST". This field is required if the
+    #   "frequency" parameter is set to "MONTHLY". If days 29-31 are
+    #   specified, and the month does not have that many days, the audit takes
+    #   place on the "LAST" day of the month.
+    #
+    # @option params [String] :day_of_week
+    #   The day of the week on which the scheduled audit takes place. Can be
+    #   one of "SUN", "MON", "TUE", "WED", "THU", "FRI" or
+    #   "SAT". This field is required if the "frequency" parameter is set
+    #   to "WEEKLY" or "BIWEEKLY".
+    #
+    # @option params [Array<String>] :target_check_names
+    #   Which checks are performed during the scheduled audit. Checks must be
+    #   enabled for your account. (Use `DescribeAccountAuditConfiguration` to
+    #   see the list of all checks including those that are enabled or
+    #   `UpdateAccountAuditConfiguration` to select which checks are enabled.)
+    #
+    # @option params [required, String] :scheduled_audit_name
+    #   The name of the scheduled audit. (Max. 128 chars)
+    #
+    # @return [Types::UpdateScheduledAuditResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateScheduledAuditResponse#scheduled_audit_arn #scheduled_audit_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_scheduled_audit({
+    #     frequency: "DAILY", # accepts DAILY, WEEKLY, BIWEEKLY, MONTHLY
+    #     day_of_month: "DayOfMonth",
+    #     day_of_week: "SUN", # accepts SUN, MON, TUE, WED, THU, FRI, SAT
+    #     target_check_names: ["AuditCheckName"],
+    #     scheduled_audit_name: "ScheduledAuditName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scheduled_audit_arn #=> String
+    #
+    # @overload update_scheduled_audit(params = {})
+    # @param [Hash] params ({})
+    def update_scheduled_audit(params = {}, options = {})
+      req = build_request(:update_scheduled_audit, params)
+      req.send_request(options)
+    end
+
+    # Updates a Device Defender security profile.
+    #
+    # @option params [required, String] :security_profile_name
+    #   The name of the security profile you want to update.
+    #
+    # @option params [String] :security_profile_description
+    #   A description of the security profile.
+    #
+    # @option params [Array<Types::Behavior>] :behaviors
+    #   Specifies the behaviors that, when violated by a device (thing), cause
+    #   an alert.
+    #
+    # @option params [Hash<String,Types::AlertTarget>] :alert_targets
+    #   Where the alerts are sent. (Alerts are always sent to the console.)
+    #
+    # @option params [Integer] :expected_version
+    #   The expected version of the security profile. A new version is
+    #   generated whenever the security profile is updated. If you specify a
+    #   value that is different than the actual version, a
+    #   `VersionConflictException` is thrown.
+    #
+    # @return [Types::UpdateSecurityProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSecurityProfileResponse#security_profile_name #security_profile_name} => String
+    #   * {Types::UpdateSecurityProfileResponse#security_profile_arn #security_profile_arn} => String
+    #   * {Types::UpdateSecurityProfileResponse#security_profile_description #security_profile_description} => String
+    #   * {Types::UpdateSecurityProfileResponse#behaviors #behaviors} => Array&lt;Types::Behavior&gt;
+    #   * {Types::UpdateSecurityProfileResponse#alert_targets #alert_targets} => Hash&lt;String,Types::AlertTarget&gt;
+    #   * {Types::UpdateSecurityProfileResponse#version #version} => Integer
+    #   * {Types::UpdateSecurityProfileResponse#creation_date #creation_date} => Time
+    #   * {Types::UpdateSecurityProfileResponse#last_modified_date #last_modified_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_security_profile({
+    #     security_profile_name: "SecurityProfileName", # required
+    #     security_profile_description: "SecurityProfileDescription",
+    #     behaviors: [
+    #       {
+    #         name: "BehaviorName", # required
+    #         metric: "BehaviorMetric",
+    #         criteria: {
+    #           comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set
+    #           value: {
+    #             count: 1,
+    #             cidrs: ["Cidr"],
+    #             ports: [1],
+    #           },
+    #           duration_seconds: 1,
+    #         },
+    #       },
+    #     ],
+    #     alert_targets: {
+    #       "SNS" => {
+    #         alert_target_arn: "AlertTargetArn", # required
+    #         role_arn: "RoleArn", # required
+    #       },
+    #     },
+    #     expected_version: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_profile_name #=> String
+    #   resp.security_profile_arn #=> String
+    #   resp.security_profile_description #=> String
+    #   resp.behaviors #=> Array
+    #   resp.behaviors[0].name #=> String
+    #   resp.behaviors[0].metric #=> String
+    #   resp.behaviors[0].criteria.comparison_operator #=> String, one of "less-than", "less-than-equals", "greater-than", "greater-than-equals", "in-cidr-set", "not-in-cidr-set", "in-port-set", "not-in-port-set"
+    #   resp.behaviors[0].criteria.value.count #=> Integer
+    #   resp.behaviors[0].criteria.value.cidrs #=> Array
+    #   resp.behaviors[0].criteria.value.cidrs[0] #=> String
+    #   resp.behaviors[0].criteria.value.ports #=> Array
+    #   resp.behaviors[0].criteria.value.ports[0] #=> Integer
+    #   resp.behaviors[0].criteria.duration_seconds #=> Integer
+    #   resp.alert_targets #=> Hash
+    #   resp.alert_targets["AlertTargetType"].alert_target_arn #=> String
+    #   resp.alert_targets["AlertTargetType"].role_arn #=> String
+    #   resp.version #=> Integer
+    #   resp.creation_date #=> Time
+    #   resp.last_modified_date #=> Time
+    #
+    # @overload update_security_profile(params = {})
+    # @param [Hash] params ({})
+    def update_security_profile(params = {}, options = {})
+      req = build_request(:update_security_profile, params)
+      req.send_request(options)
+    end
+
     # Updates an existing stream. The stream version will be incremented by
     # one.
     #
@@ -4994,8 +6390,8 @@ module Aws::IoT
     #       {
     #         file_id: 1,
     #         s3_location: {
-    #           bucket: "S3Bucket", # required
-    #           key: "S3Key", # required
+    #           bucket: "S3Bucket",
+    #           key: "S3Key",
     #           version: "S3Version",
     #         },
     #       },
@@ -5138,6 +6534,50 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Validates a Device Defender security profile behaviors specification.
+    #
+    # @option params [required, Array<Types::Behavior>] :behaviors
+    #   Specifies the behaviors that, when violated by a device (thing), cause
+    #   an alert.
+    #
+    # @return [Types::ValidateSecurityProfileBehaviorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ValidateSecurityProfileBehaviorsResponse#valid #valid} => Boolean
+    #   * {Types::ValidateSecurityProfileBehaviorsResponse#validation_errors #validation_errors} => Array&lt;Types::ValidationError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.validate_security_profile_behaviors({
+    #     behaviors: [ # required
+    #       {
+    #         name: "BehaviorName", # required
+    #         metric: "BehaviorMetric",
+    #         criteria: {
+    #           comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set
+    #           value: {
+    #             count: 1,
+    #             cidrs: ["Cidr"],
+    #             ports: [1],
+    #           },
+    #           duration_seconds: 1,
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.valid #=> Boolean
+    #   resp.validation_errors #=> Array
+    #   resp.validation_errors[0].error_message #=> String
+    #
+    # @overload validate_security_profile_behaviors(params = {})
+    # @param [Hash] params ({})
+    def validate_security_profile_behaviors(params = {}, options = {})
+      req = build_request(:validate_security_profile_behaviors, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -5151,7 +6591,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

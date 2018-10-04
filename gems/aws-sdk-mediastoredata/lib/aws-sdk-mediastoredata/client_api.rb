@@ -117,11 +117,15 @@ module Aws::MediaStoreData
       api.version = "2017-09-01"
 
       api.metadata = {
+        "apiVersion" => "2017-09-01",
         "endpointPrefix" => "data.mediastore",
         "protocol" => "rest-json",
+        "serviceAbbreviation" => "MediaStore Data",
         "serviceFullName" => "AWS Elemental MediaStore Data Plane",
+        "serviceId" => "MediaStore Data",
         "signatureVersion" => "v4",
         "signingName" => "mediastore",
+        "uid" => "mediastore-data-2017-09-01",
       }
 
       api.add_operation(:delete_object, Seahorse::Model::Operation.new.tap do |o|

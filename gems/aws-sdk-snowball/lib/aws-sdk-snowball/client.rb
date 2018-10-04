@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -47,6 +49,8 @@ module Aws::Snowball
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -92,6 +96,22 @@ module Aws::Snowball
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::Snowball
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -191,8 +222,8 @@ module Aws::Snowball
 
     # Cancels the specified job. You can only cancel a job before its
     # `JobState` value changes to `PreparingAppliance`. Requesting the
-    # `ListJobs` or `DescribeJob` action will return a job's `JobState` as
-    # part of the response element data returned.
+    # `ListJobs` or `DescribeJob` action returns a job's `JobState` as part
+    # of the response element data returned.
     #
     # @option params [required, String] :job_id
     #   The 39-character job ID for the job that you want to cancel, for
@@ -335,17 +366,17 @@ module Aws::Snowball
     #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
     #
     # @option params [String] :snowball_type
-    #   The type of AWS Snowball appliance to use for this cluster. Currently,
-    #   the only supported appliance type for cluster jobs is `EDGE`.
+    #   The type of AWS Snowball device to use for this cluster. Currently,
+    #   the only supported device type for cluster jobs is `EDGE`.
     #
     # @option params [required, String] :shipping_option
     #   The shipping speed for each node in this cluster. This speed doesn't
-    #   dictate how soon you'll get each Snowball Edge appliance, rather it
-    #   represents how quickly each appliance moves to its destination while
-    #   in transit. Regional shipping speeds are as follows:
+    #   dictate how soon you'll get each Snowball Edge device, rather it
+    #   represents how quickly each device moves to its destination while in
+    #   transit. Regional shipping speeds are as follows:
     #
     #   * In Australia, you have access to express shipping. Typically,
-    #     appliances shipped express are delivered in about a day.
+    #     devices shipped express are delivered in about a day.
     #
     #   * In the European Union (EU), you have access to express shipping.
     #     Typically, Snowball Edges shipped express are delivered in about a
@@ -427,6 +458,12 @@ module Aws::Snowball
     #           ],
     #         },
     #       ],
+    #       ec2_ami_resources: [
+    #         {
+    #           ami_id: "AmiId", # required
+    #           snowball_ami_id: "String",
+    #         },
+    #       ],
     #     },
     #     description: "String",
     #     address_id: "AddressId", # required
@@ -436,7 +473,7 @@ module Aws::Snowball
     #     shipping_option: "SECOND_DAY", # required, accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     notification: {
     #       sns_topic_arn: "SnsTopicARN",
-    #       job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+    #       job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #       notify_all: false,
     #     },
     #     forwarding_address_id: "AddressId",
@@ -536,8 +573,8 @@ module Aws::Snowball
     #   job attributes are inherited from the cluster.
     #
     # @option params [String] :snowball_type
-    #   The type of AWS Snowball appliance to use for this job. Currently, the
-    #   only supported appliance type for cluster jobs is `EDGE`.
+    #   The type of AWS Snowball device to use for this job. Currently, the
+    #   only supported device type for cluster jobs is `EDGE`.
     #
     # @option params [String] :forwarding_address_id
     #   The forwarding address ID for a job. This field is not supported in
@@ -608,6 +645,12 @@ module Aws::Snowball
     #           ],
     #         },
     #       ],
+    #       ec2_ami_resources: [
+    #         {
+    #           ami_id: "AmiId", # required
+    #           snowball_ami_id: "String",
+    #         },
+    #       ],
     #     },
     #     description: "String",
     #     address_id: "AddressId",
@@ -617,7 +660,7 @@ module Aws::Snowball
     #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     notification: {
     #       sns_topic_arn: "SnsTopicARN",
-    #       job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+    #       job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #       notify_all: false,
     #     },
     #     cluster_id: "ClusterId",
@@ -856,11 +899,14 @@ module Aws::Snowball
     #   resp.cluster_metadata.resources.lambda_resources[0].lambda_arn #=> String
     #   resp.cluster_metadata.resources.lambda_resources[0].event_triggers #=> Array
     #   resp.cluster_metadata.resources.lambda_resources[0].event_triggers[0].event_resource_arn #=> String
+    #   resp.cluster_metadata.resources.ec2_ami_resources #=> Array
+    #   resp.cluster_metadata.resources.ec2_ami_resources[0].ami_id #=> String
+    #   resp.cluster_metadata.resources.ec2_ami_resources[0].snowball_ami_id #=> String
     #   resp.cluster_metadata.address_id #=> String
     #   resp.cluster_metadata.shipping_option #=> String, one of "SECOND_DAY", "NEXT_DAY", "EXPRESS", "STANDARD"
     #   resp.cluster_metadata.notification.sns_topic_arn #=> String
     #   resp.cluster_metadata.notification.job_states_to_notify #=> Array
-    #   resp.cluster_metadata.notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
+    #   resp.cluster_metadata.notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.cluster_metadata.notification.notify_all #=> Boolean
     #   resp.cluster_metadata.forwarding_address_id #=> String
     #
@@ -936,7 +982,7 @@ module Aws::Snowball
     # @example Response structure
     #
     #   resp.job_metadata.job_id #=> String
-    #   resp.job_metadata.job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
+    #   resp.job_metadata.job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_metadata.job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
     #   resp.job_metadata.snowball_type #=> String, one of "STANDARD", "EDGE"
     #   resp.job_metadata.creation_date #=> Time
@@ -948,6 +994,9 @@ module Aws::Snowball
     #   resp.job_metadata.resources.lambda_resources[0].lambda_arn #=> String
     #   resp.job_metadata.resources.lambda_resources[0].event_triggers #=> Array
     #   resp.job_metadata.resources.lambda_resources[0].event_triggers[0].event_resource_arn #=> String
+    #   resp.job_metadata.resources.ec2_ami_resources #=> Array
+    #   resp.job_metadata.resources.ec2_ami_resources[0].ami_id #=> String
+    #   resp.job_metadata.resources.ec2_ami_resources[0].snowball_ami_id #=> String
     #   resp.job_metadata.description #=> String
     #   resp.job_metadata.kms_key_arn #=> String
     #   resp.job_metadata.role_arn #=> String
@@ -960,7 +1009,7 @@ module Aws::Snowball
     #   resp.job_metadata.snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "NoPreference"
     #   resp.job_metadata.notification.sns_topic_arn #=> String
     #   resp.job_metadata.notification.job_states_to_notify #=> Array
-    #   resp.job_metadata.notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
+    #   resp.job_metadata.notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_metadata.notification.notify_all #=> Boolean
     #   resp.job_metadata.data_transfer_progress.bytes_transferred #=> Integer
     #   resp.job_metadata.data_transfer_progress.objects_transferred #=> Integer
@@ -973,7 +1022,7 @@ module Aws::Snowball
     #   resp.job_metadata.forwarding_address_id #=> String
     #   resp.sub_job_metadata #=> Array
     #   resp.sub_job_metadata[0].job_id #=> String
-    #   resp.sub_job_metadata[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
+    #   resp.sub_job_metadata[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.sub_job_metadata[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
     #   resp.sub_job_metadata[0].snowball_type #=> String, one of "STANDARD", "EDGE"
     #   resp.sub_job_metadata[0].creation_date #=> Time
@@ -985,6 +1034,9 @@ module Aws::Snowball
     #   resp.sub_job_metadata[0].resources.lambda_resources[0].lambda_arn #=> String
     #   resp.sub_job_metadata[0].resources.lambda_resources[0].event_triggers #=> Array
     #   resp.sub_job_metadata[0].resources.lambda_resources[0].event_triggers[0].event_resource_arn #=> String
+    #   resp.sub_job_metadata[0].resources.ec2_ami_resources #=> Array
+    #   resp.sub_job_metadata[0].resources.ec2_ami_resources[0].ami_id #=> String
+    #   resp.sub_job_metadata[0].resources.ec2_ami_resources[0].snowball_ami_id #=> String
     #   resp.sub_job_metadata[0].description #=> String
     #   resp.sub_job_metadata[0].kms_key_arn #=> String
     #   resp.sub_job_metadata[0].role_arn #=> String
@@ -997,7 +1049,7 @@ module Aws::Snowball
     #   resp.sub_job_metadata[0].snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "NoPreference"
     #   resp.sub_job_metadata[0].notification.sns_topic_arn #=> String
     #   resp.sub_job_metadata[0].notification.job_states_to_notify #=> Array
-    #   resp.sub_job_metadata[0].notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
+    #   resp.sub_job_metadata[0].notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.sub_job_metadata[0].notification.notify_all #=> Boolean
     #   resp.sub_job_metadata[0].data_transfer_progress.bytes_transferred #=> Integer
     #   resp.sub_job_metadata[0].data_transfer_progress.objects_transferred #=> Integer
@@ -1287,7 +1339,7 @@ module Aws::Snowball
     #
     #   resp.job_list_entries #=> Array
     #   resp.job_list_entries[0].job_id #=> String
-    #   resp.job_list_entries[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
+    #   resp.job_list_entries[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_list_entries[0].is_master #=> Boolean
     #   resp.job_list_entries[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
     #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE"
@@ -1367,6 +1419,50 @@ module Aws::Snowball
       req.send_request(options)
     end
 
+    # This action returns a list of the different Amazon EC2 Amazon Machine
+    # Images (AMIs) that are owned by your AWS account that would be
+    # supported for use on a Snowball Edge device. Currently, supported AMIs
+    # are based on the CentOS 7 (x86\_64) - with Updates HVM, Ubuntu Server
+    # 14.04 LTS (HVM), and Ubuntu 16.04 LTS - Xenial (HVM) images, available
+    # on the AWS Marketplace.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results for the list of compatible images.
+    #   Currently, a Snowball Edge device can store 10 AMIs.
+    #
+    # @option params [String] :next_token
+    #   HTTP requests are stateless. To identify what object comes "next" in
+    #   the list of compatible images, you can specify a value for `NextToken`
+    #   as the starting point for your list of returned images.
+    #
+    # @return [Types::ListCompatibleImagesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCompatibleImagesResult#compatible_images #compatible_images} => Array&lt;Types::CompatibleImage&gt;
+    #   * {Types::ListCompatibleImagesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_compatible_images({
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.compatible_images #=> Array
+    #   resp.compatible_images[0].ami_id #=> String
+    #   resp.compatible_images[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListCompatibleImages AWS API Documentation
+    #
+    # @overload list_compatible_images(params = {})
+    # @param [Hash] params ({})
+    def list_compatible_images(params = {}, options = {})
+      req = build_request(:list_compatible_images, params)
+      req.send_request(options)
+    end
+
     # Returns an array of `JobListEntry` objects of the specified length.
     # Each `JobListEntry` object contains a job's state, a job's ID, and a
     # value that indicates whether the job is a job part, in the case of
@@ -1423,7 +1519,7 @@ module Aws::Snowball
     #
     #   resp.job_list_entries #=> Array
     #   resp.job_list_entries[0].job_id #=> String
-    #   resp.job_list_entries[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
+    #   resp.job_list_entries[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_list_entries[0].is_master #=> Boolean
     #   resp.job_list_entries[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
     #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE"
@@ -1520,12 +1616,18 @@ module Aws::Snowball
     #           ],
     #         },
     #       ],
+    #       ec2_ami_resources: [
+    #         {
+    #           ami_id: "AmiId", # required
+    #           snowball_ami_id: "String",
+    #         },
+    #       ],
     #     },
     #     address_id: "AddressId",
     #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     notification: {
     #       sns_topic_arn: "SnsTopicARN",
-    #       job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+    #       job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #       notify_all: false,
     #     },
     #     forwarding_address_id: "AddressId",
@@ -1562,9 +1664,7 @@ module Aws::Snowball
     #   The new or updated Notification object.
     #
     # @option params [Types::JobResource] :resources
-    #   The updated S3Resource object (for a single Amazon S3 bucket or key
-    #   range), or the updated JobResource object (for multiple buckets or key
-    #   ranges).
+    #   The updated `JobResource` object, or the updated JobResource object.
     #
     # @option params [String] :address_id
     #   The ID of the updated Address object.
@@ -1607,7 +1707,7 @@ module Aws::Snowball
     #     role_arn: "RoleARN",
     #     notification: {
     #       sns_topic_arn: "SnsTopicARN",
-    #       job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+    #       job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #       notify_all: false,
     #     },
     #     resources: {
@@ -1628,6 +1728,12 @@ module Aws::Snowball
     #               event_resource_arn: "ResourceARN",
     #             },
     #           ],
+    #         },
+    #       ],
+    #       ec2_ami_resources: [
+    #         {
+    #           ami_id: "AmiId", # required
+    #           snowball_ami_id: "String",
     #         },
     #       ],
     #     },
@@ -1660,7 +1766,7 @@ module Aws::Snowball
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-snowball'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

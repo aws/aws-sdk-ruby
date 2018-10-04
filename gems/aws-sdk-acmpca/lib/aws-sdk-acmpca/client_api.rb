@@ -70,11 +70,13 @@ module Aws::ACMPCA
     MalformedCertificateException = Shapes::StructureShape.new(name: 'MalformedCertificateException')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    PermanentDeletionTimeInDays = Shapes::IntegerShape.new(name: 'PermanentDeletionTimeInDays')
     PositiveLong = Shapes::IntegerShape.new(name: 'PositiveLong')
     RequestAlreadyProcessedException = Shapes::StructureShape.new(name: 'RequestAlreadyProcessedException')
     RequestFailedException = Shapes::StructureShape.new(name: 'RequestFailedException')
     RequestInProgressException = Shapes::StructureShape.new(name: 'RequestInProgressException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RestoreCertificateAuthorityRequest = Shapes::StructureShape.new(name: 'RestoreCertificateAuthorityRequest')
     RevocationConfiguration = Shapes::StructureShape.new(name: 'RevocationConfiguration')
     RevocationReason = Shapes::StringShape.new(name: 'RevocationReason')
     RevokeCertificateRequest = Shapes::StructureShape.new(name: 'RevokeCertificateRequest')
@@ -129,6 +131,7 @@ module Aws::ACMPCA
     CertificateAuthority.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     CertificateAuthority.add_member(:certificate_authority_configuration, Shapes::ShapeRef.new(shape: CertificateAuthorityConfiguration, location_name: "CertificateAuthorityConfiguration"))
     CertificateAuthority.add_member(:revocation_configuration, Shapes::ShapeRef.new(shape: RevocationConfiguration, location_name: "RevocationConfiguration"))
+    CertificateAuthority.add_member(:restorable_until, Shapes::ShapeRef.new(shape: TStamp, location_name: "RestorableUntil"))
     CertificateAuthority.struct_class = Types::CertificateAuthority
 
     CertificateAuthorityConfiguration.add_member(:key_algorithm, Shapes::ShapeRef.new(shape: KeyAlgorithm, required: true, location_name: "KeyAlgorithm"))
@@ -161,6 +164,7 @@ module Aws::ACMPCA
     CrlConfiguration.struct_class = Types::CrlConfiguration
 
     DeleteCertificateAuthorityRequest.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateAuthorityArn"))
+    DeleteCertificateAuthorityRequest.add_member(:permanent_deletion_time_in_days, Shapes::ShapeRef.new(shape: PermanentDeletionTimeInDays, location_name: "PermanentDeletionTimeInDays"))
     DeleteCertificateAuthorityRequest.struct_class = Types::DeleteCertificateAuthorityRequest
 
     DescribeCertificateAuthorityAuditReportRequest.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateAuthorityArn"))
@@ -232,6 +236,9 @@ module Aws::ACMPCA
     ListTagsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTagsResponse.struct_class = Types::ListTagsResponse
 
+    RestoreCertificateAuthorityRequest.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateAuthorityArn"))
+    RestoreCertificateAuthorityRequest.struct_class = Types::RestoreCertificateAuthorityRequest
+
     RevocationConfiguration.add_member(:crl_configuration, Shapes::ShapeRef.new(shape: CrlConfiguration, location_name: "CrlConfiguration"))
     RevocationConfiguration.struct_class = Types::RevocationConfiguration
 
@@ -270,12 +277,16 @@ module Aws::ACMPCA
       api.version = "2017-08-22"
 
       api.metadata = {
+        "apiVersion" => "2017-08-22",
         "endpointPrefix" => "acm-pca",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "ACM-PCA",
         "serviceFullName" => "AWS Certificate Manager Private Certificate Authority",
+        "serviceId" => "ACM PCA",
         "signatureVersion" => "v4",
         "targetPrefix" => "ACMPrivateCA",
+        "uid" => "acm-pca-2017-08-22",
       }
 
       api.add_operation(:create_certificate_authority, Seahorse::Model::Operation.new.tap do |o|
@@ -332,6 +343,7 @@ module Aws::ACMPCA
         o.input = Shapes::ShapeRef.new(shape: DescribeCertificateAuthorityAuditReportRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeCertificateAuthorityAuditReportResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgsException)
       end)
 
@@ -369,6 +381,7 @@ module Aws::ACMPCA
         o.errors << Shapes::ShapeRef.new(shape: RequestFailedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
       end)
 
       api.add_operation(:import_certificate_authority_certificate, Seahorse::Model::Operation.new.tap do |o|
@@ -382,6 +395,7 @@ module Aws::ACMPCA
         o.errors << Shapes::ShapeRef.new(shape: RequestFailedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: MalformedCertificateException)
         o.errors << Shapes::ShapeRef.new(shape: CertificateMismatchException)
       end)
@@ -419,6 +433,17 @@ module Aws::ACMPCA
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
       end)
 
+      api.add_operation(:restore_certificate_authority, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RestoreCertificateAuthority"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RestoreCertificateAuthorityRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+      end)
+
       api.add_operation(:revoke_certificate, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RevokeCertificate"
         o.http_method = "POST"
@@ -442,6 +467,7 @@ module Aws::ACMPCA
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
@@ -454,6 +480,7 @@ module Aws::ACMPCA
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagException)
       end)
 

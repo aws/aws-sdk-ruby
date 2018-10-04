@@ -38,28 +38,48 @@ module Aws
       # ensure the value is hash like
       return unless correct_type?(ref, values, errors, context)
 
-      shape = ref.shape
-
-      # ensure required members are present
-      if @validate_required
-        shape.required.each do |member_name|
-          if values[member_name].nil?
-            param = "#{context}[#{member_name.inspect}]"
-            errors << "missing required parameter #{param}"
+      if ref.eventstream
+        values.each do |value|
+          # each event is structure type
+          case value[:message_type]
+          when 'event'
+            val = value.dup
+            val.delete(:message_type)
+            structure(ref.shape.member(val[:event_type]), val, errors, context)
+          when 'error' # Error is unmodeled
+          when 'exception' # Pending
+            raise Aws::Errors::EventStreamParserError.new(
+              ':exception event validation is not supported')
           end
         end
-      end
+      else
+        shape = ref.shape
 
-      # validate non-nil members
-      values.each_pair do |name, value|
-        unless value.nil?
-          if shape.member?(name)
-            member_ref = shape.member(name)
-            shape(member_ref, value, errors, context + "[#{name.inspect}]")
-          else
-            errors << "unexpected value at #{context}[#{name.inspect}]"
+        # ensure required members are present
+        if @validate_required
+          shape.required.each do |member_name|
+            if values[member_name].nil?
+              param = "#{context}[#{member_name.inspect}]"
+              errors << "missing required parameter #{param}"
+            end
           end
         end
+
+        # validate non-nil members
+        values.each_pair do |name, value|
+          unless value.nil?
+            # :event_type is not modeled
+            # and also needed when construct body
+            next if name == :event_type
+            if shape.member?(name)
+              member_ref = shape.member(name)
+              shape(member_ref, value, errors, context + "[#{name.inspect}]")
+            else
+              errors << "unexpected value at #{context}[#{name.inspect}]"
+            end
+          end
+        end
+
       end
     end
 
@@ -130,6 +150,7 @@ module Aws
       case value
       when Hash then true
       when ref.shape.struct_class then true
+      when Enumerator then ref.eventstream && value.respond_to?(:event_types)
       else
         errors << expected_got(context, "a hash", value)
         false

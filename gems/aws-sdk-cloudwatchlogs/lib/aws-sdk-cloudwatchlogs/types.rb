@@ -509,7 +509,7 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] log_stream_name_prefix
     #   The prefix to match.
     #
-    #   iIf `orderBy` is `LastEventTime`,you cannot specify this parameter.
+    #   If `orderBy` is `LastEventTime`,you cannot specify this parameter.
     #   @return [String]
     #
     # @!attribute [rw] order_by
@@ -604,13 +604,15 @@ module Aws::CloudWatchLogs
     #   @return [Integer]
     #
     # @!attribute [rw] metric_name
-    #   The name of the CloudWatch metric to which the monitored log
-    #   information should be published. For example, you may publish to a
-    #   metric called ErrorCount.
+    #   Filters results to include only those with the specified metric
+    #   name. If you include this parameter in your request, you must also
+    #   include the `metricNamespace` parameter.
     #   @return [String]
     #
     # @!attribute [rw] metric_namespace
-    #   The namespace of the CloudWatch metric.
+    #   Filters results to include only those in the specified namespace. If
+    #   you include this parameter in your request, you must also include
+    #   the `metricName` parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeMetricFiltersRequest AWS API Documentation
@@ -904,6 +906,7 @@ module Aws::CloudWatchLogs
     #       {
     #         log_group_name: "LogGroupName", # required
     #         log_stream_names: ["LogStreamName"],
+    #         log_stream_name_prefix: "LogStreamName",
     #         start_time: 1,
     #         end_time: 1,
     #         filter_pattern: "FilterPattern",
@@ -913,12 +916,27 @@ module Aws::CloudWatchLogs
     #       }
     #
     # @!attribute [rw] log_group_name
-    #   The name of the log group.
+    #   The name of the log group to search.
     #   @return [String]
     #
     # @!attribute [rw] log_stream_names
-    #   Optional list of log stream names.
+    #   Filters the results to only logs from the log streams in this list.
+    #
+    #   If you specify a value for both `logStreamNamePrefix` and
+    #   `logStreamNames`, but the value for `logStreamNamePrefix` does not
+    #   match any log stream names specified in `logStreamNames`, the action
+    #   returns an `InvalidParameterException` error.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] log_stream_name_prefix
+    #   Filters the results to include only events from log streams that
+    #   have names starting with this prefix.
+    #
+    #   If you specify a value for both `logStreamNamePrefix` and
+    #   `logStreamNames`, but the value for `logStreamNamePrefix` does not
+    #   match any log stream names specified in `logStreamNames`, the action
+    #   returns an `InvalidParameterException` error.
+    #   @return [String]
     #
     # @!attribute [rw] start_time
     #   The start of the time range, expressed as the number of milliseconds
@@ -933,8 +951,14 @@ module Aws::CloudWatchLogs
     #   @return [Integer]
     #
     # @!attribute [rw] filter_pattern
-    #   The filter pattern to use. If not provided, all the events are
-    #   matched.
+    #   The filter pattern to use. For more information, see [Filter and
+    #   Pattern Syntax][1].
+    #
+    #   If not provided, all the events are matched.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -961,6 +985,7 @@ module Aws::CloudWatchLogs
     class FilterLogEventsRequest < Struct.new(
       :log_group_name,
       :log_stream_names,
+      :log_stream_name_prefix,
       :start_time,
       :end_time,
       :filter_pattern,
@@ -1051,14 +1076,15 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] start_time
     #   The start of the time range, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp earlier
-    #   than this time are not included.
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp equal to
+    #   this time or later than this time are included. Events with a time
+    #   stamp earlier than this time are not included.
     #   @return [Integer]
     #
     # @!attribute [rw] end_time
     #   The end of the time range, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp later than
-    #   this time are not included.
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp equal to or
+    #   later than this time are not included.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1097,12 +1123,15 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] next_forward_token
     #   The token for the next set of items in the forward direction. The
-    #   token expires after 24 hours.
+    #   token expires after 24 hours. If you have reached the end of the
+    #   stream, it will return the same token you passed in.
     #   @return [String]
     #
     # @!attribute [rw] next_backward_token
     #   The token for the next set of items in the backward direction. The
-    #   token expires after 24 hours.
+    #   token expires after 24 hours. This token will never be null. If you
+    #   have reached the end of the stream, it will return the same token
+    #   you passed in.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogEventsResponse AWS API Documentation
@@ -1127,7 +1156,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] timestamp
     #   The time the event occurred, expressed as the number of milliseconds
-    #   fter Jan 1, 1970 00:00:00 UTC.
+    #   after Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] message
@@ -1600,11 +1629,10 @@ module Aws::CloudWatchLogs
     #   Replace "logArn" with the ARN of your CloudWatch Logs resource,
     #   such as a log group or log stream.
     #
-    #   \\\{ "Version": "2012-10-17" "Statement": \[ \\\{ "Sid":
-    #   "Route53LogsToCloudWatchLogs", "Effect": "Allow",
-    #   "Principal": \\\{ "Service": \[ "route53.amazonaws.com" \]
-    #   \\}, "Action":"logs:PutLogEvents", "Resource": logArn \\} \]
-    #   \\}
+    #   `\{ "Version": "2012-10-17", "Statement": [ \{ "Sid":
+    #   "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal": \{
+    #   "Service": [ "route53.amazonaws.com" ] \},
+    #   "Action":"logs:PutLogEvents", "Resource": "logArn" \} ] \} `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutResourcePolicyRequest AWS API Documentation

@@ -52,6 +52,64 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # The persistent application settings for users of a stack.
+    #
+    # @note When making an API call, you may pass ApplicationSettings
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #         settings_group: "SettingsGroup",
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Enables or disables persistent application settings for users during
+    #   their streaming sessions.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] settings_group
+    #   The path prefix for the S3 bucket where users’ persistent
+    #   application settings are stored. You can allow the same persistent
+    #   application settings to be used across multiple stacks by specifying
+    #   the same settings group for each stack.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ApplicationSettings AWS API Documentation
+    #
+    class ApplicationSettings < Struct.new(
+      :enabled,
+      :settings_group)
+      include Aws::Structure
+    end
+
+    # Describes the persistent application settings for users of a stack.
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether persistent application settings are enabled for
+    #   users during their streaming sessions.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] settings_group
+    #   The path prefix for the S3 bucket where users’ persistent
+    #   application settings are stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The S3 bucket where users’ persistent application settings are
+    #   stored. When persistent application settings are enabled for the
+    #   first time for an account in an AWS Region, an S3 bucket is created.
+    #   The bucket is unique to the AWS account and the Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ApplicationSettingsResponse AWS API Documentation
+    #
+    class ApplicationSettingsResponse < Struct.new(
+      :enabled,
+      :settings_group,
+      :s3_bucket_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateFleetRequest
     #   data as a hash:
     #
@@ -233,7 +291,8 @@ module Aws::AppStream
     #
     #       {
     #         name: "Name", # required
-    #         image_name: "String", # required
+    #         image_name: "String",
+    #         image_arn: "Arn",
     #         instance_type: "String", # required
     #         fleet_type: "ALWAYS_ON", # accepts ALWAYS_ON, ON_DEMAND
     #         compute_capacity: { # required
@@ -260,6 +319,10 @@ module Aws::AppStream
     #
     # @!attribute [rw] image_name
     #   The name of the image used to create the fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_arn
+    #   The ARN of the public, private, or shared image to use.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -365,6 +428,7 @@ module Aws::AppStream
     class CreateFleetRequest < Struct.new(
       :name,
       :image_name,
+      :image_arn,
       :instance_type,
       :fleet_type,
       :compute_capacity,
@@ -394,7 +458,8 @@ module Aws::AppStream
     #
     #       {
     #         name: "Name", # required
-    #         image_name: "String", # required
+    #         image_name: "String",
+    #         image_arn: "Arn",
     #         instance_type: "String", # required
     #         description: "Description",
     #         display_name: "DisplayName",
@@ -416,6 +481,10 @@ module Aws::AppStream
     #
     # @!attribute [rw] image_name
     #   The name of the image used to create the builder.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_arn
+    #   The ARN of the public, private, or shared image to use.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -454,6 +523,7 @@ module Aws::AppStream
     class CreateImageBuilderRequest < Struct.new(
       :name,
       :image_name,
+      :image_arn,
       :instance_type,
       :description,
       :display_name,
@@ -521,17 +591,28 @@ module Aws::AppStream
     #   data as a hash:
     #
     #       {
-    #         name: "String", # required
+    #         name: "Name", # required
     #         description: "Description",
     #         display_name: "DisplayName",
     #         storage_connectors: [
     #           {
-    #             connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS
+    #             connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE, ONE_DRIVE
     #             resource_identifier: "ResourceIdentifier",
+    #             domains: ["Domain"],
     #           },
     #         ],
     #         redirect_url: "RedirectURL",
     #         feedback_url: "FeedbackURL",
+    #         user_settings: [
+    #           {
+    #             action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
+    #             permission: "ENABLED", # required, accepts ENABLED, DISABLED
+    #           },
+    #         ],
+    #         application_settings: {
+    #           enabled: false, # required
+    #           settings_group: "SettingsGroup",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -561,6 +642,18 @@ module Aws::AppStream
     #   displayed.
     #   @return [String]
     #
+    # @!attribute [rw] user_settings
+    #   The actions that are enabled or disabled for users during their
+    #   streaming sessions. By default, these actions are enabled.
+    #   @return [Array<Types::UserSetting>]
+    #
+    # @!attribute [rw] application_settings
+    #   The persistent application settings for users of a stack. When these
+    #   settings are enabled, changes that users make to applications and
+    #   Windows settings are automatically saved after each session and
+    #   applied to the next session.
+    #   @return [Types::ApplicationSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStackRequest AWS API Documentation
     #
     class CreateStackRequest < Struct.new(
@@ -569,7 +662,9 @@ module Aws::AppStream
       :display_name,
       :storage_connectors,
       :redirect_url,
-      :feedback_url)
+      :feedback_url,
+      :user_settings,
+      :application_settings)
       include Aws::Structure
     end
 
@@ -728,6 +823,35 @@ module Aws::AppStream
       :image_builder)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteImagePermissionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Name", # required
+    #         shared_account_id: "AwsAccountId", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the private image.
+    #   @return [String]
+    #
+    # @!attribute [rw] shared_account_id
+    #   The 12-digit ID of the AWS account for which to delete image
+    #   permissions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImagePermissionsRequest AWS API Documentation
+    #
+    class DeleteImagePermissionsRequest < Struct.new(
+      :name,
+      :shared_account_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImagePermissionsResult AWS API Documentation
+    #
+    class DeleteImagePermissionsResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteImageRequest
     #   data as a hash:
@@ -920,21 +1044,107 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeImagePermissionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Name", # required
+    #         max_results: 1,
+    #         shared_aws_account_ids: ["AwsAccountId"],
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the private image for which to describe permissions. The
+    #   image must be one that you own.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of each results page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] shared_aws_account_ids
+    #   The 12-digit ID of one or more AWS accounts with which the image is
+    #   shared.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results. If
+    #   this value is empty, only the first page is retrieved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImagePermissionsRequest AWS API Documentation
+    #
+    class DescribeImagePermissionsRequest < Struct.new(
+      :name,
+      :max_results,
+      :shared_aws_account_ids,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the private image.
+    #   @return [String]
+    #
+    # @!attribute [rw] shared_image_permissions_list
+    #   The permissions for a private image that you own.
+    #   @return [Array<Types::SharedImagePermissions>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results. If
+    #   this value is empty, only the first page is retrieved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImagePermissionsResult AWS API Documentation
+    #
+    class DescribeImagePermissionsResult < Struct.new(
+      :name,
+      :shared_image_permissions_list,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeImagesRequest
     #   data as a hash:
     #
     #       {
     #         names: ["String"],
+    #         arns: ["Arn"],
+    #         type: "PUBLIC", # accepts PUBLIC, PRIVATE, SHARED
+    #         next_token: "String",
+    #         max_results: 1,
     #       }
     #
     # @!attribute [rw] names
-    #   The names of the images to describe.
+    #   The names of the public or private images to describe.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] arns
+    #   The ARNs of the public, private, and shared images to describe.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] type
+    #   The type of image (public, private, or shared) to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results. If
+    #   this value is empty, only the first page is retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of each page of results.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImagesRequest AWS API Documentation
     #
     class DescribeImagesRequest < Struct.new(
-      :names)
+      :names,
+      :arns,
+      :type,
+      :next_token,
+      :max_results)
       include Aws::Structure
     end
 
@@ -942,10 +1152,16 @@ module Aws::AppStream
     #   Information about the images.
     #   @return [Array<Types::Image>]
     #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results. If
+    #   there are no more pages, this value is null.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImagesResult AWS API Documentation
     #
     class DescribeImagesResult < Struct.new(
-      :images)
+      :images,
+      :next_token)
       include Aws::Structure
     end
 
@@ -1192,6 +1408,10 @@ module Aws::AppStream
     #   The name of the image used to create the fleet.
     #   @return [String]
     #
+    # @!attribute [rw] image_arn
+    #   The ARN for the public, private, or shared image.
+    #   @return [String]
+    #
     # @!attribute [rw] instance_type
     #   The instance type to use when launching fleet instances.
     #   @return [String]
@@ -1261,6 +1481,7 @@ module Aws::AppStream
       :display_name,
       :description,
       :image_name,
+      :image_arn,
       :instance_type,
       :fleet_type,
       :compute_capacity_status,
@@ -1356,6 +1577,11 @@ module Aws::AppStream
     #   launched from this image.
     #   @return [String]
     #
+    # @!attribute [rw] image_permissions
+    #   The permissions to provide to the destination AWS account for the
+    #   specified image.
+    #   @return [Types::ImagePermissions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Image AWS API Documentation
     #
     class Image < Struct.new(
@@ -1372,7 +1598,8 @@ module Aws::AppStream
       :applications,
       :created_time,
       :public_base_image_released_date,
-      :appstream_agent_version)
+      :appstream_agent_version,
+      :image_permissions)
       include Aws::Structure
     end
 
@@ -1479,6 +1706,32 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # Describes the permissions for an image.
+    #
+    # @note When making an API call, you may pass ImagePermissions
+    #   data as a hash:
+    #
+    #       {
+    #         allow_fleet: false,
+    #         allow_image_builder: false,
+    #       }
+    #
+    # @!attribute [rw] allow_fleet
+    #   Indicates whether the image can be used for a fleet.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] allow_image_builder
+    #   Indicates whether the image can be used for an image builder.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImagePermissions AWS API Documentation
+    #
+    class ImagePermissions < Struct.new(
+      :allow_fleet,
+      :allow_image_builder)
+      include Aws::Structure
+    end
+
     # Describes the reason why the last image state change occurred.
     #
     # @!attribute [rw] code
@@ -1523,7 +1776,7 @@ module Aws::AppStream
     end
 
     # @!attribute [rw] names
-    #   The names of the fleets.
+    #   The name of the fleet.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -1565,7 +1818,7 @@ module Aws::AppStream
     end
 
     # @!attribute [rw] names
-    #   The names of the stacks.
+    #   The name of the stack.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -1607,6 +1860,27 @@ module Aws::AppStream
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      include Aws::Structure
+    end
+
+    # The network details of the fleet instance for the streaming session.
+    #
+    # @!attribute [rw] eni_private_ip_address
+    #   The private IP address of the elastic network interface that is
+    #   attached to instances in your VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] eni_id
+    #   The resource identifier of the elastic network interface that is
+    #   attached to instances in your VPC. All network interfaces have the
+    #   eni-xxxxxxxx resource identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/NetworkAccessConfiguration AWS API Documentation
+    #
+    class NetworkAccessConfiguration < Struct.new(
+      :eni_private_ip_address,
+      :eni_id)
       include Aws::Structure
     end
 
@@ -1690,6 +1964,10 @@ module Aws::AppStream
     #   streaming URL (`API`) or SAML federation (`SAML`).
     #   @return [String]
     #
+    # @!attribute [rw] network_access_configuration
+    #   The network details for the streaming session.
+    #   @return [Types::NetworkAccessConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Session AWS API Documentation
     #
     class Session < Struct.new(
@@ -1698,7 +1976,27 @@ module Aws::AppStream
       :stack_name,
       :fleet_name,
       :state,
-      :authentication_type)
+      :authentication_type,
+      :network_access_configuration)
+      include Aws::Structure
+    end
+
+    # Describes the permissions that are available to the specified AWS
+    # account for a shared image.
+    #
+    # @!attribute [rw] shared_account_id
+    #   The 12-digit ID of the AWS account with which the image is shared.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_permissions
+    #   Describes the permissions for a shared image.
+    #   @return [Types::ImagePermissions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/SharedImagePermissions AWS API Documentation
+    #
+    class SharedImagePermissions < Struct.new(
+      :shared_account_id,
+      :image_permissions)
       include Aws::Structure
     end
 
@@ -1743,6 +2041,15 @@ module Aws::AppStream
     #   The errors for the stack.
     #   @return [Array<Types::StackError>]
     #
+    # @!attribute [rw] user_settings
+    #   The actions that are enabled or disabled for users during their
+    #   streaming sessions. By default these actions are enabled.
+    #   @return [Array<Types::UserSetting>]
+    #
+    # @!attribute [rw] application_settings
+    #   The persistent application settings for users of the stack.
+    #   @return [Types::ApplicationSettingsResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Stack AWS API Documentation
     #
     class Stack < Struct.new(
@@ -1754,7 +2061,9 @@ module Aws::AppStream
       :storage_connectors,
       :redirect_url,
       :feedback_url,
-      :stack_errors)
+      :stack_errors,
+      :user_settings,
+      :application_settings)
       include Aws::Structure
     end
 
@@ -1886,14 +2195,15 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # Describes a storage connector.
+    # Describes a connector to enable persistent storage for users.
     #
     # @note When making an API call, you may pass StorageConnector
     #   data as a hash:
     #
     #       {
-    #         connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS
+    #         connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE, ONE_DRIVE
     #         resource_identifier: "ResourceIdentifier",
+    #         domains: ["Domain"],
     #       }
     #
     # @!attribute [rw] connector_type
@@ -1904,11 +2214,16 @@ module Aws::AppStream
     #   The ARN of the storage connector.
     #   @return [String]
     #
+    # @!attribute [rw] domains
+    #   The names of the domains for the G Suite account.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StorageConnector AWS API Documentation
     #
     class StorageConnector < Struct.new(
       :connector_type,
-      :resource_identifier)
+      :resource_identifier,
+      :domains)
       include Aws::Structure
     end
 
@@ -1987,7 +2302,7 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] directory_name
-    #   The name of the directory configuration.
+    #   The name of the Directory Config object.
     #   @return [String]
     #
     # @!attribute [rw] organizational_unit_distinguished_names
@@ -2010,7 +2325,7 @@ module Aws::AppStream
     end
 
     # @!attribute [rw] directory_config
-    #   Information about the directory configuration.
+    #   Information about the Directory Config object.
     #   @return [Types::DirectoryConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateDirectoryConfigResult AWS API Documentation
@@ -2025,7 +2340,8 @@ module Aws::AppStream
     #
     #       {
     #         image_name: "String",
-    #         name: "String", # required
+    #         image_arn: "Arn",
+    #         name: "String",
     #         instance_type: "String",
     #         compute_capacity: {
     #           desired_instances: 1, # required
@@ -2049,6 +2365,10 @@ module Aws::AppStream
     #
     # @!attribute [rw] image_name
     #   The name of the image used to create the fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_arn
+    #   The ARN of the public, private, or shared image to use.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2148,6 +2468,7 @@ module Aws::AppStream
     #
     class UpdateFleetRequest < Struct.new(
       :image_name,
+      :image_arn,
       :name,
       :instance_type,
       :compute_capacity,
@@ -2174,6 +2495,44 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateImagePermissionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Name", # required
+    #         shared_account_id: "AwsAccountId", # required
+    #         image_permissions: { # required
+    #           allow_fleet: false,
+    #           allow_image_builder: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the private image.
+    #   @return [String]
+    #
+    # @!attribute [rw] shared_account_id
+    #   The 12-digit ID of the AWS account for which you want add or update
+    #   image permissions.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_permissions
+    #   The permissions for the image.
+    #   @return [Types::ImagePermissions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateImagePermissionsRequest AWS API Documentation
+    #
+    class UpdateImagePermissionsRequest < Struct.new(
+      :name,
+      :shared_account_id,
+      :image_permissions)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateImagePermissionsResult AWS API Documentation
+    #
+    class UpdateImagePermissionsResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateStackRequest
     #   data as a hash:
     #
@@ -2183,14 +2542,25 @@ module Aws::AppStream
     #         name: "String", # required
     #         storage_connectors: [
     #           {
-    #             connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS
+    #             connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE, ONE_DRIVE
     #             resource_identifier: "ResourceIdentifier",
+    #             domains: ["Domain"],
     #           },
     #         ],
     #         delete_storage_connectors: false,
     #         redirect_url: "RedirectURL",
     #         feedback_url: "FeedbackURL",
-    #         attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, REDIRECT_URL, FEEDBACK_URL, THEME_NAME
+    #         attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS
+    #         user_settings: [
+    #           {
+    #             action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
+    #             permission: "ENABLED", # required, accepts ENABLED, DISABLED
+    #           },
+    #         ],
+    #         application_settings: {
+    #           enabled: false, # required
+    #           settings_group: "SettingsGroup",
+    #         },
     #       }
     #
     # @!attribute [rw] display_name
@@ -2228,6 +2598,18 @@ module Aws::AppStream
     #   The stack attributes to delete.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] user_settings
+    #   The actions that are enabled or disabled for users during their
+    #   streaming sessions. By default, these actions are enabled.
+    #   @return [Array<Types::UserSetting>]
+    #
+    # @!attribute [rw] application_settings
+    #   The persistent application settings for users of a stack. When these
+    #   settings are enabled, changes that users make to applications and
+    #   Windows settings are automatically saved after each session and
+    #   applied to the next session.
+    #   @return [Types::ApplicationSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStackRequest AWS API Documentation
     #
     class UpdateStackRequest < Struct.new(
@@ -2238,7 +2620,9 @@ module Aws::AppStream
       :delete_storage_connectors,
       :redirect_url,
       :feedback_url,
-      :attributes_to_delete)
+      :attributes_to_delete,
+      :user_settings,
+      :application_settings)
       include Aws::Structure
     end
 
@@ -2250,6 +2634,33 @@ module Aws::AppStream
     #
     class UpdateStackResult < Struct.new(
       :stack)
+      include Aws::Structure
+    end
+
+    # Describes an action and whether the action is enabled or disabled for
+    # users during their streaming sessions.
+    #
+    # @note When making an API call, you may pass UserSetting
+    #   data as a hash:
+    #
+    #       {
+    #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
+    #         permission: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] action
+    #   The action that is enabled or disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission
+    #   Indicates whether the action is enabled or disabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UserSetting AWS API Documentation
+    #
+    class UserSetting < Struct.new(
+      :action,
+      :permission)
       include Aws::Structure
     end
 

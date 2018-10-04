@@ -23,6 +23,8 @@ module Aws::ElasticsearchService
     CloudWatchLogsLogGroupArn = Shapes::StringShape.new(name: 'CloudWatchLogsLogGroupArn')
     CognitoOptions = Shapes::StructureShape.new(name: 'CognitoOptions')
     CognitoOptionsStatus = Shapes::StructureShape.new(name: 'CognitoOptionsStatus')
+    CompatibleElasticsearchVersionsList = Shapes::ListShape.new(name: 'CompatibleElasticsearchVersionsList')
+    CompatibleVersionsMap = Shapes::StructureShape.new(name: 'CompatibleVersionsMap')
     CreateElasticsearchDomainRequest = Shapes::StructureShape.new(name: 'CreateElasticsearchDomainRequest')
     CreateElasticsearchDomainResponse = Shapes::StructureShape.new(name: 'CreateElasticsearchDomainResponse')
     DeleteElasticsearchDomainRequest = Shapes::StructureShape.new(name: 'DeleteElasticsearchDomainRequest')
@@ -63,6 +65,12 @@ module Aws::ElasticsearchService
     EndpointsMap = Shapes::MapShape.new(name: 'EndpointsMap')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     GUID = Shapes::StringShape.new(name: 'GUID')
+    GetCompatibleElasticsearchVersionsRequest = Shapes::StructureShape.new(name: 'GetCompatibleElasticsearchVersionsRequest')
+    GetCompatibleElasticsearchVersionsResponse = Shapes::StructureShape.new(name: 'GetCompatibleElasticsearchVersionsResponse')
+    GetUpgradeHistoryRequest = Shapes::StructureShape.new(name: 'GetUpgradeHistoryRequest')
+    GetUpgradeHistoryResponse = Shapes::StructureShape.new(name: 'GetUpgradeHistoryResponse')
+    GetUpgradeStatusRequest = Shapes::StructureShape.new(name: 'GetUpgradeStatusRequest')
+    GetUpgradeStatusResponse = Shapes::StructureShape.new(name: 'GetUpgradeStatusResponse')
     IdentityPoolId = Shapes::StringShape.new(name: 'IdentityPoolId')
     InstanceCount = Shapes::IntegerShape.new(name: 'InstanceCount')
     InstanceCountLimits = Shapes::StructureShape.new(name: 'InstanceCountLimits')
@@ -72,6 +80,8 @@ module Aws::ElasticsearchService
     IntegerClass = Shapes::IntegerShape.new(name: 'IntegerClass')
     InternalException = Shapes::StructureShape.new(name: 'InternalException')
     InvalidTypeException = Shapes::StructureShape.new(name: 'InvalidTypeException')
+    Issue = Shapes::StringShape.new(name: 'Issue')
+    Issues = Shapes::ListShape.new(name: 'Issues')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     LimitName = Shapes::StringShape.new(name: 'LimitName')
@@ -94,6 +104,8 @@ module Aws::ElasticsearchService
     MaximumInstanceCount = Shapes::IntegerShape.new(name: 'MaximumInstanceCount')
     MinimumInstanceCount = Shapes::IntegerShape.new(name: 'MinimumInstanceCount')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NodeToNodeEncryptionOptions = Shapes::StructureShape.new(name: 'NodeToNodeEncryptionOptions')
+    NodeToNodeEncryptionOptionsStatus = Shapes::StructureShape.new(name: 'NodeToNodeEncryptionOptionsStatus')
     OptionState = Shapes::StringShape.new(name: 'OptionState')
     OptionStatus = Shapes::StructureShape.new(name: 'OptionStatus')
     PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
@@ -114,6 +126,7 @@ module Aws::ElasticsearchService
     ServiceUrl = Shapes::StringShape.new(name: 'ServiceUrl')
     SnapshotOptions = Shapes::StructureShape.new(name: 'SnapshotOptions')
     SnapshotOptionsStatus = Shapes::StructureShape.new(name: 'SnapshotOptionsStatus')
+    StartTimestamp = Shapes::TimestampShape.new(name: 'StartTimestamp')
     StorageSubTypeName = Shapes::StringShape.new(name: 'StorageSubTypeName')
     StorageType = Shapes::StructureShape.new(name: 'StorageType')
     StorageTypeLimit = Shapes::StructureShape.new(name: 'StorageTypeLimit')
@@ -130,6 +143,15 @@ module Aws::ElasticsearchService
     UpdateElasticsearchDomainConfigRequest = Shapes::StructureShape.new(name: 'UpdateElasticsearchDomainConfigRequest')
     UpdateElasticsearchDomainConfigResponse = Shapes::StructureShape.new(name: 'UpdateElasticsearchDomainConfigResponse')
     UpdateTimestamp = Shapes::TimestampShape.new(name: 'UpdateTimestamp')
+    UpgradeElasticsearchDomainRequest = Shapes::StructureShape.new(name: 'UpgradeElasticsearchDomainRequest')
+    UpgradeElasticsearchDomainResponse = Shapes::StructureShape.new(name: 'UpgradeElasticsearchDomainResponse')
+    UpgradeHistory = Shapes::StructureShape.new(name: 'UpgradeHistory')
+    UpgradeHistoryList = Shapes::ListShape.new(name: 'UpgradeHistoryList')
+    UpgradeName = Shapes::StringShape.new(name: 'UpgradeName')
+    UpgradeStatus = Shapes::StringShape.new(name: 'UpgradeStatus')
+    UpgradeStep = Shapes::StringShape.new(name: 'UpgradeStep')
+    UpgradeStepItem = Shapes::StructureShape.new(name: 'UpgradeStepItem')
+    UpgradeStepsList = Shapes::ListShape.new(name: 'UpgradeStepsList')
     UserPoolId = Shapes::StringShape.new(name: 'UserPoolId')
     VPCDerivedInfo = Shapes::StructureShape.new(name: 'VPCDerivedInfo')
     VPCDerivedInfoStatus = Shapes::StructureShape.new(name: 'VPCDerivedInfoStatus')
@@ -168,6 +190,12 @@ module Aws::ElasticsearchService
     CognitoOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
     CognitoOptionsStatus.struct_class = Types::CognitoOptionsStatus
 
+    CompatibleElasticsearchVersionsList.member = Shapes::ShapeRef.new(shape: CompatibleVersionsMap)
+
+    CompatibleVersionsMap.add_member(:source_version, Shapes::ShapeRef.new(shape: ElasticsearchVersionString, location_name: "SourceVersion"))
+    CompatibleVersionsMap.add_member(:target_versions, Shapes::ShapeRef.new(shape: ElasticsearchVersionList, location_name: "TargetVersions"))
+    CompatibleVersionsMap.struct_class = Types::CompatibleVersionsMap
+
     CreateElasticsearchDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     CreateElasticsearchDomainRequest.add_member(:elasticsearch_version, Shapes::ShapeRef.new(shape: ElasticsearchVersionString, location_name: "ElasticsearchVersion"))
     CreateElasticsearchDomainRequest.add_member(:elasticsearch_cluster_config, Shapes::ShapeRef.new(shape: ElasticsearchClusterConfig, location_name: "ElasticsearchClusterConfig"))
@@ -177,6 +205,7 @@ module Aws::ElasticsearchService
     CreateElasticsearchDomainRequest.add_member(:vpc_options, Shapes::ShapeRef.new(shape: VPCOptions, location_name: "VPCOptions"))
     CreateElasticsearchDomainRequest.add_member(:cognito_options, Shapes::ShapeRef.new(shape: CognitoOptions, location_name: "CognitoOptions"))
     CreateElasticsearchDomainRequest.add_member(:encryption_at_rest_options, Shapes::ShapeRef.new(shape: EncryptionAtRestOptions, location_name: "EncryptionAtRestOptions"))
+    CreateElasticsearchDomainRequest.add_member(:node_to_node_encryption_options, Shapes::ShapeRef.new(shape: NodeToNodeEncryptionOptions, location_name: "NodeToNodeEncryptionOptions"))
     CreateElasticsearchDomainRequest.add_member(:advanced_options, Shapes::ShapeRef.new(shape: AdvancedOptions, location_name: "AdvancedOptions"))
     CreateElasticsearchDomainRequest.add_member(:log_publishing_options, Shapes::ShapeRef.new(shape: LogPublishingOptions, location_name: "LogPublishingOptions"))
     CreateElasticsearchDomainRequest.struct_class = Types::CreateElasticsearchDomainRequest
@@ -271,6 +300,7 @@ module Aws::ElasticsearchService
     ElasticsearchDomainConfig.add_member(:vpc_options, Shapes::ShapeRef.new(shape: VPCDerivedInfoStatus, location_name: "VPCOptions"))
     ElasticsearchDomainConfig.add_member(:cognito_options, Shapes::ShapeRef.new(shape: CognitoOptionsStatus, location_name: "CognitoOptions"))
     ElasticsearchDomainConfig.add_member(:encryption_at_rest_options, Shapes::ShapeRef.new(shape: EncryptionAtRestOptionsStatus, location_name: "EncryptionAtRestOptions"))
+    ElasticsearchDomainConfig.add_member(:node_to_node_encryption_options, Shapes::ShapeRef.new(shape: NodeToNodeEncryptionOptionsStatus, location_name: "NodeToNodeEncryptionOptions"))
     ElasticsearchDomainConfig.add_member(:advanced_options, Shapes::ShapeRef.new(shape: AdvancedOptionsStatus, location_name: "AdvancedOptions"))
     ElasticsearchDomainConfig.add_member(:log_publishing_options, Shapes::ShapeRef.new(shape: LogPublishingOptionsStatus, location_name: "LogPublishingOptions"))
     ElasticsearchDomainConfig.struct_class = Types::ElasticsearchDomainConfig
@@ -283,6 +313,7 @@ module Aws::ElasticsearchService
     ElasticsearchDomainStatus.add_member(:endpoint, Shapes::ShapeRef.new(shape: ServiceUrl, location_name: "Endpoint"))
     ElasticsearchDomainStatus.add_member(:endpoints, Shapes::ShapeRef.new(shape: EndpointsMap, location_name: "Endpoints"))
     ElasticsearchDomainStatus.add_member(:processing, Shapes::ShapeRef.new(shape: Boolean, location_name: "Processing"))
+    ElasticsearchDomainStatus.add_member(:upgrade_processing, Shapes::ShapeRef.new(shape: Boolean, location_name: "UpgradeProcessing"))
     ElasticsearchDomainStatus.add_member(:elasticsearch_version, Shapes::ShapeRef.new(shape: ElasticsearchVersionString, location_name: "ElasticsearchVersion"))
     ElasticsearchDomainStatus.add_member(:elasticsearch_cluster_config, Shapes::ShapeRef.new(shape: ElasticsearchClusterConfig, required: true, location_name: "ElasticsearchClusterConfig"))
     ElasticsearchDomainStatus.add_member(:ebs_options, Shapes::ShapeRef.new(shape: EBSOptions, location_name: "EBSOptions"))
@@ -291,6 +322,7 @@ module Aws::ElasticsearchService
     ElasticsearchDomainStatus.add_member(:vpc_options, Shapes::ShapeRef.new(shape: VPCDerivedInfo, location_name: "VPCOptions"))
     ElasticsearchDomainStatus.add_member(:cognito_options, Shapes::ShapeRef.new(shape: CognitoOptions, location_name: "CognitoOptions"))
     ElasticsearchDomainStatus.add_member(:encryption_at_rest_options, Shapes::ShapeRef.new(shape: EncryptionAtRestOptions, location_name: "EncryptionAtRestOptions"))
+    ElasticsearchDomainStatus.add_member(:node_to_node_encryption_options, Shapes::ShapeRef.new(shape: NodeToNodeEncryptionOptions, location_name: "NodeToNodeEncryptionOptions"))
     ElasticsearchDomainStatus.add_member(:advanced_options, Shapes::ShapeRef.new(shape: AdvancedOptions, location_name: "AdvancedOptions"))
     ElasticsearchDomainStatus.add_member(:log_publishing_options, Shapes::ShapeRef.new(shape: LogPublishingOptions, location_name: "LogPublishingOptions"))
     ElasticsearchDomainStatus.struct_class = Types::ElasticsearchDomainStatus
@@ -316,12 +348,37 @@ module Aws::ElasticsearchService
     EndpointsMap.key = Shapes::ShapeRef.new(shape: String)
     EndpointsMap.value = Shapes::ShapeRef.new(shape: ServiceUrl)
 
+    GetCompatibleElasticsearchVersionsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location: "querystring", location_name: "domainName"))
+    GetCompatibleElasticsearchVersionsRequest.struct_class = Types::GetCompatibleElasticsearchVersionsRequest
+
+    GetCompatibleElasticsearchVersionsResponse.add_member(:compatible_elasticsearch_versions, Shapes::ShapeRef.new(shape: CompatibleElasticsearchVersionsList, location_name: "CompatibleElasticsearchVersions"))
+    GetCompatibleElasticsearchVersionsResponse.struct_class = Types::GetCompatibleElasticsearchVersionsResponse
+
+    GetUpgradeHistoryRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    GetUpgradeHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    GetUpgradeHistoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    GetUpgradeHistoryRequest.struct_class = Types::GetUpgradeHistoryRequest
+
+    GetUpgradeHistoryResponse.add_member(:upgrade_histories, Shapes::ShapeRef.new(shape: UpgradeHistoryList, location_name: "UpgradeHistories"))
+    GetUpgradeHistoryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetUpgradeHistoryResponse.struct_class = Types::GetUpgradeHistoryResponse
+
+    GetUpgradeStatusRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    GetUpgradeStatusRequest.struct_class = Types::GetUpgradeStatusRequest
+
+    GetUpgradeStatusResponse.add_member(:upgrade_step, Shapes::ShapeRef.new(shape: UpgradeStep, location_name: "UpgradeStep"))
+    GetUpgradeStatusResponse.add_member(:step_status, Shapes::ShapeRef.new(shape: UpgradeStatus, location_name: "StepStatus"))
+    GetUpgradeStatusResponse.add_member(:upgrade_name, Shapes::ShapeRef.new(shape: UpgradeName, location_name: "UpgradeName"))
+    GetUpgradeStatusResponse.struct_class = Types::GetUpgradeStatusResponse
+
     InstanceCountLimits.add_member(:minimum_instance_count, Shapes::ShapeRef.new(shape: MinimumInstanceCount, location_name: "MinimumInstanceCount"))
     InstanceCountLimits.add_member(:maximum_instance_count, Shapes::ShapeRef.new(shape: MaximumInstanceCount, location_name: "MaximumInstanceCount"))
     InstanceCountLimits.struct_class = Types::InstanceCountLimits
 
     InstanceLimits.add_member(:instance_count_limits, Shapes::ShapeRef.new(shape: InstanceCountLimits, location_name: "InstanceCountLimits"))
     InstanceLimits.struct_class = Types::InstanceLimits
+
+    Issues.member = Shapes::ShapeRef.new(shape: Issue)
 
     LimitValueList.member = Shapes::ShapeRef.new(shape: LimitValue)
 
@@ -370,6 +427,13 @@ module Aws::ElasticsearchService
     LogPublishingOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: LogPublishingOptions, location_name: "Options"))
     LogPublishingOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, location_name: "Status"))
     LogPublishingOptionsStatus.struct_class = Types::LogPublishingOptionsStatus
+
+    NodeToNodeEncryptionOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    NodeToNodeEncryptionOptions.struct_class = Types::NodeToNodeEncryptionOptions
+
+    NodeToNodeEncryptionOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: NodeToNodeEncryptionOptions, required: true, location_name: "Options"))
+    NodeToNodeEncryptionOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
+    NodeToNodeEncryptionOptionsStatus.struct_class = Types::NodeToNodeEncryptionOptionsStatus
 
     OptionStatus.add_member(:creation_date, Shapes::ShapeRef.new(shape: UpdateTimestamp, required: true, location_name: "CreationDate"))
     OptionStatus.add_member(:update_date, Shapes::ShapeRef.new(shape: UpdateTimestamp, required: true, location_name: "UpdateDate"))
@@ -468,6 +532,32 @@ module Aws::ElasticsearchService
     UpdateElasticsearchDomainConfigResponse.add_member(:domain_config, Shapes::ShapeRef.new(shape: ElasticsearchDomainConfig, required: true, location_name: "DomainConfig"))
     UpdateElasticsearchDomainConfigResponse.struct_class = Types::UpdateElasticsearchDomainConfigResponse
 
+    UpgradeElasticsearchDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    UpgradeElasticsearchDomainRequest.add_member(:target_version, Shapes::ShapeRef.new(shape: ElasticsearchVersionString, required: true, location_name: "TargetVersion"))
+    UpgradeElasticsearchDomainRequest.add_member(:perform_check_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "PerformCheckOnly"))
+    UpgradeElasticsearchDomainRequest.struct_class = Types::UpgradeElasticsearchDomainRequest
+
+    UpgradeElasticsearchDomainResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
+    UpgradeElasticsearchDomainResponse.add_member(:target_version, Shapes::ShapeRef.new(shape: ElasticsearchVersionString, location_name: "TargetVersion"))
+    UpgradeElasticsearchDomainResponse.add_member(:perform_check_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "PerformCheckOnly"))
+    UpgradeElasticsearchDomainResponse.struct_class = Types::UpgradeElasticsearchDomainResponse
+
+    UpgradeHistory.add_member(:upgrade_name, Shapes::ShapeRef.new(shape: UpgradeName, location_name: "UpgradeName"))
+    UpgradeHistory.add_member(:start_timestamp, Shapes::ShapeRef.new(shape: StartTimestamp, location_name: "StartTimestamp"))
+    UpgradeHistory.add_member(:upgrade_status, Shapes::ShapeRef.new(shape: UpgradeStatus, location_name: "UpgradeStatus"))
+    UpgradeHistory.add_member(:steps_list, Shapes::ShapeRef.new(shape: UpgradeStepsList, location_name: "StepsList"))
+    UpgradeHistory.struct_class = Types::UpgradeHistory
+
+    UpgradeHistoryList.member = Shapes::ShapeRef.new(shape: UpgradeHistory)
+
+    UpgradeStepItem.add_member(:upgrade_step, Shapes::ShapeRef.new(shape: UpgradeStep, location_name: "UpgradeStep"))
+    UpgradeStepItem.add_member(:upgrade_step_status, Shapes::ShapeRef.new(shape: UpgradeStatus, location_name: "UpgradeStepStatus"))
+    UpgradeStepItem.add_member(:issues, Shapes::ShapeRef.new(shape: Issues, location_name: "Issues"))
+    UpgradeStepItem.add_member(:progress_percent, Shapes::ShapeRef.new(shape: Double, location_name: "ProgressPercent"))
+    UpgradeStepItem.struct_class = Types::UpgradeStepItem
+
+    UpgradeStepsList.member = Shapes::ShapeRef.new(shape: UpgradeStepItem)
+
     VPCDerivedInfo.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "VPCId"))
     VPCDerivedInfo.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "SubnetIds"))
     VPCDerivedInfo.add_member(:availability_zones, Shapes::ShapeRef.new(shape: StringList, location_name: "AvailabilityZones"))
@@ -489,10 +579,13 @@ module Aws::ElasticsearchService
       api.version = "2015-01-01"
 
       api.metadata = {
+        "apiVersion" => "2015-01-01",
         "endpointPrefix" => "es",
         "protocol" => "rest-json",
         "serviceFullName" => "Amazon Elasticsearch Service",
+        "serviceId" => "Elasticsearch Service",
         "signatureVersion" => "v4",
+        "uid" => "es-2015-01-01",
       }
 
       api.add_operation(:add_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -630,6 +723,51 @@ module Aws::ElasticsearchService
         )
       end)
 
+      api.add_operation(:get_compatible_elasticsearch_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCompatibleElasticsearchVersions"
+        o.http_method = "GET"
+        o.http_request_uri = "/2015-01-01/es/compatibleVersions"
+        o.input = Shapes::ShapeRef.new(shape: GetCompatibleElasticsearchVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCompatibleElasticsearchVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:get_upgrade_history, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetUpgradeHistory"
+        o.http_method = "GET"
+        o.http_request_uri = "/2015-01-01/es/upgradeDomain/{DomainName}/history"
+        o.input = Shapes::ShapeRef.new(shape: GetUpgradeHistoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetUpgradeHistoryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_upgrade_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetUpgradeStatus"
+        o.http_method = "GET"
+        o.http_request_uri = "/2015-01-01/es/upgradeDomain/{DomainName}/status"
+        o.input = Shapes::ShapeRef.new(shape: GetUpgradeStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetUpgradeStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
       api.add_operation(:list_domain_names, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDomainNames"
         o.http_method = "GET"
@@ -725,6 +863,20 @@ module Aws::ElasticsearchService
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:upgrade_elasticsearch_domain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpgradeElasticsearchDomain"
+        o.http_method = "POST"
+        o.http_request_uri = "/2015-01-01/es/upgradeDomain"
+        o.input = Shapes::ShapeRef.new(shape: UpgradeElasticsearchDomainRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpgradeElasticsearchDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
     end
 

@@ -268,12 +268,14 @@ module Aws::MigrationHub
       api.version = "2017-05-31"
 
       api.metadata = {
+        "apiVersion" => "2017-05-31",
         "endpointPrefix" => "mgh",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Migration Hub",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSMigrationHub",
+        "uid" => "AWSMigrationHub-2017-05-31",
       }
 
       api.add_operation(:associate_created_artifact, Seahorse::Model::Operation.new.tap do |o|

@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -47,6 +49,8 @@ module Aws::Glue
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -92,6 +96,22 @@ module Aws::Glue
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::Glue
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -341,6 +372,19 @@ module Aws::Glue
     end
 
     # Deletes multiple tables at once.
+    #
+    # <note markdown="1"> After completing this operation, you will no longer have access to the
+    # table versions and partitions that belong to the deleted table. AWS
+    # Glue deletes these "orphaned" resources asynchronously in a timely
+    # manner, at the discretion of the service.
+    #
+    #  To ensure immediate deletion of all related resources, before calling
+    # `BatchDeleteTable`, use `DeleteTableVersion` or
+    # `BatchDeleteTableVersion`, and `DeletePartition` or
+    # `BatchDeletePartition`, to delete any resources that belong to the
+    # table.
+    #
+    #  </note>
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the table resides. If none is
@@ -639,8 +683,9 @@ module Aws::Glue
     end
 
     # Creates a new crawler with specified targets, role, configuration, and
-    # optional schedule. At least one crawl target must be specified, in
-    # either the *s3Targets* or the *jdbcTargets* field.
+    # optional schedule. At least one crawl target must be specified, in the
+    # *s3Targets* field, the *jdbcTargets* field, or the *DynamoDBTargets*
+    # field.
     #
     # @option params [required, String] :name
     #   Name of the new crawler.
@@ -670,7 +715,7 @@ module Aws::Glue
     #
     # @option params [Array<String>] :classifiers
     #   A list of custom classifiers that the user has registered. By default,
-    #   all AWS classifiers are included in a crawl, but these custom
+    #   all built-in classifiers are included in a crawl, but these custom
     #   classifiers always override the default classifiers for a given
     #   classification.
     #
@@ -692,6 +737,10 @@ module Aws::Glue
     #
     #   Example: `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
     #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
+    #
+    # @option params [String] :crawler_security_configuration
+    #   The name of the SecurityConfiguration structure to be used by this
+    #   Crawler.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -716,6 +765,11 @@ module Aws::Glue
     #           exclusions: ["Path"],
     #         },
     #       ],
+    #       dynamo_db_targets: [
+    #         {
+    #           path: "Path",
+    #         },
+    #       ],
     #     },
     #     schedule: "CronExpression",
     #     classifiers: ["NameString"],
@@ -725,6 +779,7 @@ module Aws::Glue
     #       delete_behavior: "LOG", # accepts LOG, DELETE_FROM_DATABASE, DEPRECATE_IN_DATABASE
     #     },
     #     configuration: "CrawlerConfiguration",
+    #     crawler_security_configuration: "CrawlerSecurityConfiguration",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCrawler AWS API Documentation
@@ -787,7 +842,23 @@ module Aws::Glue
     #   The subnet ID for the new DevEndpoint to use.
     #
     # @option params [String] :public_key
-    #   The public key to use for authentication.
+    #   The public key to be used by this DevEndpoint for authentication. This
+    #   attribute is provided for backward compatibility, as the recommended
+    #   attribute to use is public keys.
+    #
+    # @option params [Array<String>] :public_keys
+    #   A list of public keys to be used by the DevEndpoints for
+    #   authentication. The use of this attribute is preferred over a single
+    #   public key because the public keys allow you to have a different
+    #   private key per client.
+    #
+    #   <note markdown="1"> If you previously created an endpoint with a public key, you must
+    #   remove that key to be able to set a list of public keys: call the
+    #   `UpdateDevEndpoint` API with the public key content in the
+    #   `deletePublicKeys` attribute, and the list of new keys in the
+    #   `addPublicKeys` attribute.
+    #
+    #    </note>
     #
     # @option params [Integer] :number_of_nodes
     #   The number of AWS Glue Data Processing Units (DPUs) to allocate to
@@ -810,6 +881,10 @@ module Aws::Glue
     #   Path to one or more Java Jars in an S3 bucket that should be loaded in
     #   your DevEndpoint.
     #
+    # @option params [String] :security_configuration
+    #   The name of the SecurityConfiguration structure to be used with this
+    #   DevEndpoint.
+    #
     # @return [Types::CreateDevEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDevEndpointResponse#endpoint_name #endpoint_name} => String
@@ -825,6 +900,7 @@ module Aws::Glue
     #   * {Types::CreateDevEndpointResponse#extra_python_libs_s3_path #extra_python_libs_s3_path} => String
     #   * {Types::CreateDevEndpointResponse#extra_jars_s3_path #extra_jars_s3_path} => String
     #   * {Types::CreateDevEndpointResponse#failure_reason #failure_reason} => String
+    #   * {Types::CreateDevEndpointResponse#security_configuration #security_configuration} => String
     #   * {Types::CreateDevEndpointResponse#created_timestamp #created_timestamp} => Time
     #
     # @example Request syntax with placeholder values
@@ -835,9 +911,11 @@ module Aws::Glue
     #     security_group_ids: ["GenericString"],
     #     subnet_id: "GenericString",
     #     public_key: "GenericString",
+    #     public_keys: ["GenericString"],
     #     number_of_nodes: 1,
     #     extra_python_libs_s3_path: "GenericString",
     #     extra_jars_s3_path: "GenericString",
+    #     security_configuration: "NameString",
     #   })
     #
     # @example Response structure
@@ -856,6 +934,7 @@ module Aws::Glue
     #   resp.extra_python_libs_s3_path #=> String
     #   resp.extra_jars_s3_path #=> String
     #   resp.failure_reason #=> String
+    #   resp.security_configuration #=> String
     #   resp.created_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDevEndpoint AWS API Documentation
@@ -926,7 +1005,16 @@ module Aws::Glue
     #   [1]: https://aws.amazon.com/glue/pricing/
     #
     # @option params [Integer] :timeout
-    #   The job timeout in minutes. The default is 2880 minutes (48 hours).
+    #   The job timeout in minutes. This is the maximum time that a job run
+    #   can consume resources before it is terminated and enters `TIMEOUT`
+    #   status. The default is 2,880 minutes (48 hours).
+    #
+    # @option params [Types::NotificationProperty] :notification_property
+    #   Specifies configuration properties of a job notification.
+    #
+    # @option params [String] :security_configuration
+    #   The name of the SecurityConfiguration structure to be used with this
+    #   job.
     #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -955,6 +1043,10 @@ module Aws::Glue
     #     max_retries: 1,
     #     allocated_capacity: 1,
     #     timeout: 1,
+    #     notification_property: {
+    #       notify_delay_after: 1,
+    #     },
+    #     security_configuration: "NameString",
     #   })
     #
     # @example Response structure
@@ -1107,6 +1199,55 @@ module Aws::Glue
     # @param [Hash] params ({})
     def create_script(params = {}, options = {})
       req = build_request(:create_script, params)
+      req.send_request(options)
+    end
+
+    # Creates a new security configuration.
+    #
+    # @option params [required, String] :name
+    #   The name for the new security configuration.
+    #
+    # @option params [required, Types::EncryptionConfiguration] :encryption_configuration
+    #   The encryption configuration for the new security configuration.
+    #
+    # @return [Types::CreateSecurityConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSecurityConfigurationResponse#name #name} => String
+    #   * {Types::CreateSecurityConfigurationResponse#created_timestamp #created_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_security_configuration({
+    #     name: "NameString", # required
+    #     encryption_configuration: { # required
+    #       s3_encryption: [
+    #         {
+    #           s3_encryption_mode: "DISABLED", # accepts DISABLED, SSE-KMS, SSE-S3
+    #           kms_key_arn: "KmsKeyArn",
+    #         },
+    #       ],
+    #       cloud_watch_encryption: {
+    #         cloud_watch_encryption_mode: "DISABLED", # accepts DISABLED, SSE-KMS
+    #         kms_key_arn: "KmsKeyArn",
+    #       },
+    #       job_bookmarks_encryption: {
+    #         job_bookmarks_encryption_mode: "DISABLED", # accepts DISABLED, CSE-KMS
+    #         kms_key_arn: "KmsKeyArn",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.created_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateSecurityConfiguration AWS API Documentation
+    #
+    # @overload create_security_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_security_configuration(params = {}, options = {})
+      req = build_request(:create_security_configuration, params)
       req.send_request(options)
     end
 
@@ -1263,6 +1404,10 @@ module Aws::Glue
     #           "GenericString" => "GenericString",
     #         },
     #         timeout: 1,
+    #         notification_property: {
+    #           notify_delay_after: 1,
+    #         },
+    #         security_configuration: "NameString",
     #       },
     #     ],
     #     description: "DescriptionString",
@@ -1399,6 +1544,21 @@ module Aws::Glue
 
     # Removes a specified Database from a Data Catalog.
     #
+    # <note markdown="1"> After completing this operation, you will no longer have access to the
+    # tables (and all table versions and partitions that might belong to the
+    # tables) and the user-defined functions in the deleted database. AWS
+    # Glue deletes these "orphaned" resources asynchronously in a timely
+    # manner, at the discretion of the service.
+    #
+    #  To ensure immediate deletion of all related resources, before calling
+    # `DeleteDatabase`, use `DeleteTableVersion` or
+    # `BatchDeleteTableVersion`, `DeletePartition` or
+    # `BatchDeletePartition`, `DeleteUserDefinedFunction`, and `DeleteTable`
+    # or `BatchDeleteTable`, to delete any resources that belong to the
+    # database.
+    #
+    #  </note>
+    #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which the database resides. If none is
     #   supplied, the AWS account ID is used by default.
@@ -1512,7 +1672,41 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Deletes a specified security configuration.
+    #
+    # @option params [required, String] :name
+    #   The name of the security configuration to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_security_configuration({
+    #     name: "NameString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteSecurityConfiguration AWS API Documentation
+    #
+    # @overload delete_security_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_security_configuration(params = {}, options = {})
+      req = build_request(:delete_security_configuration, params)
+      req.send_request(options)
+    end
+
     # Removes a table definition from the Data Catalog.
+    #
+    # <note markdown="1"> After completing this operation, you will no longer have access to the
+    # table versions and partitions that belong to the deleted table. AWS
+    # Glue deletes these "orphaned" resources asynchronously in a timely
+    # manner, at the discretion of the service.
+    #
+    #  To ensure immediate deletion of all related resources, before calling
+    # `DeleteTable`, use `DeleteTableVersion` or `BatchDeleteTableVersion`,
+    # and `DeletePartition` or `BatchDeletePartition`, to delete any
+    # resources that belong to the table.
+    #
+    #  </note>
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the table resides. If none is
@@ -1904,6 +2098,8 @@ module Aws::Glue
     #   resp.crawler.targets.jdbc_targets[0].path #=> String
     #   resp.crawler.targets.jdbc_targets[0].exclusions #=> Array
     #   resp.crawler.targets.jdbc_targets[0].exclusions[0] #=> String
+    #   resp.crawler.targets.dynamo_db_targets #=> Array
+    #   resp.crawler.targets.dynamo_db_targets[0].path #=> String
     #   resp.crawler.database_name #=> String
     #   resp.crawler.description #=> String
     #   resp.crawler.classifiers #=> Array
@@ -1925,6 +2121,7 @@ module Aws::Glue
     #   resp.crawler.last_crawl.start_time #=> Time
     #   resp.crawler.version #=> Integer
     #   resp.crawler.configuration #=> String
+    #   resp.crawler.crawler_security_configuration #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCrawler AWS API Documentation
     #
@@ -2015,6 +2212,8 @@ module Aws::Glue
     #   resp.crawlers[0].targets.jdbc_targets[0].path #=> String
     #   resp.crawlers[0].targets.jdbc_targets[0].exclusions #=> Array
     #   resp.crawlers[0].targets.jdbc_targets[0].exclusions[0] #=> String
+    #   resp.crawlers[0].targets.dynamo_db_targets #=> Array
+    #   resp.crawlers[0].targets.dynamo_db_targets[0].path #=> String
     #   resp.crawlers[0].database_name #=> String
     #   resp.crawlers[0].description #=> String
     #   resp.crawlers[0].classifiers #=> Array
@@ -2036,6 +2235,7 @@ module Aws::Glue
     #   resp.crawlers[0].last_crawl.start_time #=> Time
     #   resp.crawlers[0].version #=> Integer
     #   resp.crawlers[0].configuration #=> String
+    #   resp.crawlers[0].crawler_security_configuration #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCrawlers AWS API Documentation
@@ -2044,6 +2244,37 @@ module Aws::Glue
     # @param [Hash] params ({})
     def get_crawlers(params = {}, options = {})
       req = build_request(:get_crawlers, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the security configuration for a specified catalog.
+    #
+    # @option params [String] :catalog_id
+    #   The ID of the Data Catalog for which to retrieve the security
+    #   configuration. If none is supplied, the AWS account ID is used by
+    #   default.
+    #
+    # @return [Types::GetDataCatalogEncryptionSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataCatalogEncryptionSettingsResponse#data_catalog_encryption_settings #data_catalog_encryption_settings} => Types::DataCatalogEncryptionSettings
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_catalog_encryption_settings({
+    #     catalog_id: "CatalogIdString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_catalog_encryption_settings.encryption_at_rest.catalog_encryption_mode #=> String, one of "DISABLED", "SSE-KMS"
+    #   resp.data_catalog_encryption_settings.encryption_at_rest.sse_aws_kms_key_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataCatalogEncryptionSettings AWS API Documentation
+    #
+    # @overload get_data_catalog_encryption_settings(params = {})
+    # @param [Hash] params ({})
+    def get_data_catalog_encryption_settings(params = {}, options = {})
+      req = build_request(:get_data_catalog_encryption_settings, params)
       req.send_request(options)
     end
 
@@ -2208,6 +2439,9 @@ module Aws::Glue
     #   resp.dev_endpoint.created_timestamp #=> Time
     #   resp.dev_endpoint.last_modified_timestamp #=> Time
     #   resp.dev_endpoint.public_key #=> String
+    #   resp.dev_endpoint.public_keys #=> Array
+    #   resp.dev_endpoint.public_keys[0] #=> String
+    #   resp.dev_endpoint.security_configuration #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDevEndpoint AWS API Documentation
     #
@@ -2261,6 +2495,9 @@ module Aws::Glue
     #   resp.dev_endpoints[0].created_timestamp #=> Time
     #   resp.dev_endpoints[0].last_modified_timestamp #=> Time
     #   resp.dev_endpoints[0].public_key #=> String
+    #   resp.dev_endpoints[0].public_keys #=> Array
+    #   resp.dev_endpoints[0].public_keys[0] #=> String
+    #   resp.dev_endpoints[0].security_configuration #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDevEndpoints AWS API Documentation
@@ -2305,6 +2542,8 @@ module Aws::Glue
     #   resp.job.max_retries #=> Integer
     #   resp.job.allocated_capacity #=> Integer
     #   resp.job.timeout #=> Integer
+    #   resp.job.notification_property.notify_delay_after #=> Integer
+    #   resp.job.security_configuration #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJob AWS API Documentation
     #
@@ -2358,6 +2597,9 @@ module Aws::Glue
     #   resp.job_run.allocated_capacity #=> Integer
     #   resp.job_run.execution_time #=> Integer
     #   resp.job_run.timeout #=> Integer
+    #   resp.job_run.notification_property.notify_delay_after #=> Integer
+    #   resp.job_run.security_configuration #=> String
+    #   resp.job_run.log_group_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRun AWS API Documentation
     #
@@ -2413,6 +2655,9 @@ module Aws::Glue
     #   resp.job_runs[0].allocated_capacity #=> Integer
     #   resp.job_runs[0].execution_time #=> Integer
     #   resp.job_runs[0].timeout #=> Integer
+    #   resp.job_runs[0].notification_property.notify_delay_after #=> Integer
+    #   resp.job_runs[0].security_configuration #=> String
+    #   resp.job_runs[0].log_group_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRuns AWS API Documentation
@@ -2463,6 +2708,8 @@ module Aws::Glue
     #   resp.jobs[0].max_retries #=> Integer
     #   resp.jobs[0].allocated_capacity #=> Integer
     #   resp.jobs[0].timeout #=> Integer
+    #   resp.jobs[0].notification_property.notify_delay_after #=> Integer
+    #   resp.jobs[0].security_configuration #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobs AWS API Documentation
@@ -2511,6 +2758,13 @@ module Aws::Glue
     #         },
     #       ],
     #       s3: [
+    #         {
+    #           name: "CodeGenArgName", # required
+    #           value: "CodeGenArgValue", # required
+    #           param: false,
+    #         },
+    #       ],
+    #       dynamo_db: [
     #         {
     #           name: "CodeGenArgName", # required
     #           value: "CodeGenArgValue", # required
@@ -2770,6 +3024,13 @@ module Aws::Glue
     #           param: false,
     #         },
     #       ],
+    #       dynamo_db: [
+    #         {
+    #           name: "CodeGenArgName", # required
+    #           value: "CodeGenArgValue", # required
+    #           param: false,
+    #         },
+    #       ],
     #     },
     #     language: "PYTHON", # accepts PYTHON, SCALA
     #   })
@@ -2785,6 +3046,85 @@ module Aws::Glue
     # @param [Hash] params ({})
     def get_plan(params = {}, options = {})
       req = build_request(:get_plan, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a specified security configuration.
+    #
+    # @option params [required, String] :name
+    #   The name of the security configuration to retrieve.
+    #
+    # @return [Types::GetSecurityConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSecurityConfigurationResponse#security_configuration #security_configuration} => Types::SecurityConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_security_configuration({
+    #     name: "NameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_configuration.name #=> String
+    #   resp.security_configuration.created_time_stamp #=> Time
+    #   resp.security_configuration.encryption_configuration.s3_encryption #=> Array
+    #   resp.security_configuration.encryption_configuration.s3_encryption[0].s3_encryption_mode #=> String, one of "DISABLED", "SSE-KMS", "SSE-S3"
+    #   resp.security_configuration.encryption_configuration.s3_encryption[0].kms_key_arn #=> String
+    #   resp.security_configuration.encryption_configuration.cloud_watch_encryption.cloud_watch_encryption_mode #=> String, one of "DISABLED", "SSE-KMS"
+    #   resp.security_configuration.encryption_configuration.cloud_watch_encryption.kms_key_arn #=> String
+    #   resp.security_configuration.encryption_configuration.job_bookmarks_encryption.job_bookmarks_encryption_mode #=> String, one of "DISABLED", "CSE-KMS"
+    #   resp.security_configuration.encryption_configuration.job_bookmarks_encryption.kms_key_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSecurityConfiguration AWS API Documentation
+    #
+    # @overload get_security_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_security_configuration(params = {}, options = {})
+      req = build_request(:get_security_configuration, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of all security configurations.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation call.
+    #
+    # @return [Types::GetSecurityConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSecurityConfigurationsResponse#security_configurations #security_configurations} => Array&lt;Types::SecurityConfiguration&gt;
+    #   * {Types::GetSecurityConfigurationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_security_configurations({
+    #     max_results: 1,
+    #     next_token: "GenericString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_configurations #=> Array
+    #   resp.security_configurations[0].name #=> String
+    #   resp.security_configurations[0].created_time_stamp #=> Time
+    #   resp.security_configurations[0].encryption_configuration.s3_encryption #=> Array
+    #   resp.security_configurations[0].encryption_configuration.s3_encryption[0].s3_encryption_mode #=> String, one of "DISABLED", "SSE-KMS", "SSE-S3"
+    #   resp.security_configurations[0].encryption_configuration.s3_encryption[0].kms_key_arn #=> String
+    #   resp.security_configurations[0].encryption_configuration.cloud_watch_encryption.cloud_watch_encryption_mode #=> String, one of "DISABLED", "SSE-KMS"
+    #   resp.security_configurations[0].encryption_configuration.cloud_watch_encryption.kms_key_arn #=> String
+    #   resp.security_configurations[0].encryption_configuration.job_bookmarks_encryption.job_bookmarks_encryption_mode #=> String, one of "DISABLED", "CSE-KMS"
+    #   resp.security_configurations[0].encryption_configuration.job_bookmarks_encryption.kms_key_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSecurityConfigurations AWS API Documentation
+    #
+    # @overload get_security_configurations(params = {})
+    # @param [Hash] params ({})
+    def get_security_configurations(params = {}, options = {})
+      req = build_request(:get_security_configurations, params)
       req.send_request(options)
     end
 
@@ -3183,6 +3523,8 @@ module Aws::Glue
     #   resp.trigger.actions[0].arguments #=> Hash
     #   resp.trigger.actions[0].arguments["GenericString"] #=> String
     #   resp.trigger.actions[0].timeout #=> Integer
+    #   resp.trigger.actions[0].notification_property.notify_delay_after #=> Integer
+    #   resp.trigger.actions[0].security_configuration #=> String
     #   resp.trigger.predicate.logical #=> String, one of "AND", "ANY"
     #   resp.trigger.predicate.conditions #=> Array
     #   resp.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
@@ -3238,6 +3580,8 @@ module Aws::Glue
     #   resp.triggers[0].actions[0].arguments #=> Hash
     #   resp.triggers[0].actions[0].arguments["GenericString"] #=> String
     #   resp.triggers[0].actions[0].timeout #=> Integer
+    #   resp.triggers[0].actions[0].notification_property.notify_delay_after #=> Integer
+    #   resp.triggers[0].actions[0].security_configuration #=> String
     #   resp.triggers[0].predicate.logical #=> String, one of "AND", "ANY"
     #   resp.triggers[0].predicate.conditions #=> Array
     #   resp.triggers[0].predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
@@ -3377,6 +3721,41 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Sets the security configuration for a specified catalog. Once the
+    # configuration has been set, the specified encryption is applied to
+    # every catalog write thereafter.
+    #
+    # @option params [String] :catalog_id
+    #   The ID of the Data Catalog for which to set the security
+    #   configuration. If none is supplied, the AWS account ID is used by
+    #   default.
+    #
+    # @option params [required, Types::DataCatalogEncryptionSettings] :data_catalog_encryption_settings
+    #   The security configuration to set.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_data_catalog_encryption_settings({
+    #     catalog_id: "CatalogIdString",
+    #     data_catalog_encryption_settings: { # required
+    #       encryption_at_rest: {
+    #         catalog_encryption_mode: "DISABLED", # required, accepts DISABLED, SSE-KMS
+    #         sse_aws_kms_key_id: "NameString",
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutDataCatalogEncryptionSettings AWS API Documentation
+    #
+    # @overload put_data_catalog_encryption_settings(params = {})
+    # @param [Hash] params ({})
+    def put_data_catalog_encryption_settings(params = {}, options = {})
+      req = build_request(:put_data_catalog_encryption_settings, params)
+      req.send_request(options)
+    end
+
     # Resets a bookmark entry.
     #
     # @option params [required, String] :job_name
@@ -3410,7 +3789,12 @@ module Aws::Glue
     end
 
     # Starts a crawl using the specified crawler, regardless of what is
-    # scheduled. If the crawler is already running, does nothing.
+    # scheduled. If the crawler is already running, returns a
+    # [CrawlerRunningException][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-exceptions.html#aws-glue-api-exceptions-CrawlerRunningException
     #
     # @option params [required, String] :name
     #   Name of the crawler to start.
@@ -3496,8 +3880,17 @@ module Aws::Glue
     #   [1]: https://aws.amazon.com/glue/pricing/
     #
     # @option params [Integer] :timeout
-    #   The job run timeout in minutes. It overrides the timeout value of the
-    #   job.
+    #   The JobRun timeout in minutes. This is the maximum time that a job run
+    #   can consume resources before it is terminated and enters `TIMEOUT`
+    #   status. The default is 2,880 minutes (48 hours). This overrides the
+    #   timeout value set in the parent job.
+    #
+    # @option params [Types::NotificationProperty] :notification_property
+    #   Specifies configuration properties of a job run notification.
+    #
+    # @option params [String] :security_configuration
+    #   The name of the SecurityConfiguration structure to be used with this
+    #   job run.
     #
     # @return [Types::StartJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3513,6 +3906,10 @@ module Aws::Glue
     #     },
     #     allocated_capacity: 1,
     #     timeout: 1,
+    #     notification_property: {
+    #       notify_delay_after: 1,
+    #     },
+    #     security_configuration: "NameString",
     #   })
     #
     # @example Response structure
@@ -3752,8 +4149,9 @@ module Aws::Glue
     #
     # @option params [Array<String>] :classifiers
     #   A list of custom classifiers that the user has registered. By default,
-    #   all classifiers are included in a crawl, but these custom classifiers
-    #   always override the default classifiers for a given classification.
+    #   all built-in classifiers are included in a crawl, but these custom
+    #   classifiers always override the default classifiers for a given
+    #   classification.
     #
     # @option params [String] :table_prefix
     #   The table prefix used for catalog tables that are created.
@@ -3773,6 +4171,10 @@ module Aws::Glue
     #
     #   Example: `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
     #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
+    #
+    # @option params [String] :crawler_security_configuration
+    #   The name of the SecurityConfiguration structure to be used by this
+    #   Crawler.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3797,6 +4199,11 @@ module Aws::Glue
     #           exclusions: ["Path"],
     #         },
     #       ],
+    #       dynamo_db_targets: [
+    #         {
+    #           path: "Path",
+    #         },
+    #       ],
     #     },
     #     schedule: "CronExpression",
     #     classifiers: ["NameString"],
@@ -3806,6 +4213,7 @@ module Aws::Glue
     #       delete_behavior: "LOG", # accepts LOG, DELETE_FROM_DATABASE, DEPRECATE_IN_DATABASE
     #     },
     #     configuration: "CrawlerConfiguration",
+    #     crawler_security_configuration: "CrawlerSecurityConfiguration",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCrawler AWS API Documentation
@@ -3898,6 +4306,12 @@ module Aws::Glue
     # @option params [String] :public_key
     #   The public key for the DevEndpoint to use.
     #
+    # @option params [Array<String>] :add_public_keys
+    #   The list of public keys for the DevEndpoint to use.
+    #
+    # @option params [Array<String>] :delete_public_keys
+    #   The list of public keys to be deleted from the DevEndpoint.
+    #
     # @option params [Types::DevEndpointCustomLibraries] :custom_libraries
     #   Custom Python or Java libraries to be loaded in the DevEndpoint.
     #
@@ -3912,6 +4326,8 @@ module Aws::Glue
     #   resp = client.update_dev_endpoint({
     #     endpoint_name: "GenericString", # required
     #     public_key: "GenericString",
+    #     add_public_keys: ["GenericString"],
+    #     delete_public_keys: ["GenericString"],
     #     custom_libraries: {
     #       extra_python_libs_s3_path: "GenericString",
     #       extra_jars_s3_path: "GenericString",
@@ -3964,6 +4380,10 @@ module Aws::Glue
     #       max_retries: 1,
     #       allocated_capacity: 1,
     #       timeout: 1,
+    #       notification_property: {
+    #         notify_delay_after: 1,
+    #       },
+    #       security_configuration: "NameString",
     #     },
     #   })
     #
@@ -4191,6 +4611,10 @@ module Aws::Glue
     #             "GenericString" => "GenericString",
     #           },
     #           timeout: 1,
+    #           notification_property: {
+    #             notify_delay_after: 1,
+    #           },
+    #           security_configuration: "NameString",
     #         },
     #       ],
     #       predicate: {
@@ -4219,6 +4643,8 @@ module Aws::Glue
     #   resp.trigger.actions[0].arguments #=> Hash
     #   resp.trigger.actions[0].arguments["GenericString"] #=> String
     #   resp.trigger.actions[0].timeout #=> Integer
+    #   resp.trigger.actions[0].notification_property.notify_delay_after #=> Integer
+    #   resp.trigger.actions[0].security_configuration #=> String
     #   resp.trigger.predicate.logical #=> String, one of "AND", "ANY"
     #   resp.trigger.predicate.conditions #=> Array
     #   resp.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
@@ -4295,7 +4721,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

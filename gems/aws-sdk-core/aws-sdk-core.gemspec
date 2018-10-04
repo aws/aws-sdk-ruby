@@ -14,6 +14,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('jmespath', '~> 1.0')
   spec.add_dependency('aws-partitions', '~> 1.0')
   spec.add_dependency('aws-sigv4', '~> 1.0') # necessary for making Aws::STS API calls
+  spec.add_dependency('aws-eventstream', '~> 1.0') # necessary for binary eventstream
 
   spec.metadata = {
     'source_code_uri' => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-core',

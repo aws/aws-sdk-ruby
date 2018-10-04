@@ -41,13 +41,16 @@ module Aws::Translate
       api.version = "2017-07-01"
 
       api.metadata = {
+        "apiVersion" => "2017-07-01",
         "endpointPrefix" => "translate",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon Translate",
+        "serviceId" => "Translate",
         "signatureVersion" => "v4",
         "signingName" => "translate",
         "targetPrefix" => "AWSShineFrontendService_20170701",
+        "uid" => "translate-2017-07-01",
       }
 
       api.add_operation(:translate_text, Seahorse::Model::Operation.new.tap do |o|

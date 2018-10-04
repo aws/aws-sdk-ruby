@@ -41,7 +41,14 @@ module Seahorse
             context.http_response.on_error do
               body = context.http_response.body
               File.unlink(body) if ManagedFile === body
-              context.http_response.body = StringIO.new
+              # Aws::S3::Encryption::DecryptHandler (with lower priority)
+              # has callbacks registered after ResponseTarget::Handler,
+              # where http_response.body is an IODecrypter
+              # and has error callbacks handling for it.
+              # Thus avoid early remove of IODecrypter at ResponseTarget::Handler
+              unless context.http_response.body.respond_to?(:io)
+                context.http_response.body = StringIO.new
+              end
             end
           end
 

@@ -75,6 +75,12 @@ module Aws::KinesisVideo
     #
     #   The default value is 0, indicating that the stream does not persist
     #   data.
+    #
+    #   When the `DataRetentionInHours` value is 0, consumers can still
+    #   consume the fragments that remain in the service host buffer, which
+    #   has a retention time limit of 5 minutes and a retention memory limit
+    #   of 200 MB. Fragments are removed from the buffer when either limit
+    #   is reached.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/CreateStreamInput AWS API Documentation
@@ -176,7 +182,7 @@ module Aws::KinesisVideo
     #       {
     #         stream_name: "StreamName",
     #         stream_arn: "ResourceARN",
-    #         api_name: "PUT_MEDIA", # required, accepts PUT_MEDIA, GET_MEDIA, LIST_FRAGMENTS, GET_MEDIA_FOR_FRAGMENT_LIST
+    #         api_name: "PUT_MEDIA", # required, accepts PUT_MEDIA, GET_MEDIA, LIST_FRAGMENTS, GET_MEDIA_FOR_FRAGMENT_LIST, GET_HLS_STREAMING_SESSION_URL
     #       }
     #
     # @!attribute [rw] stream_name
@@ -582,7 +588,7 @@ module Aws::KinesisVideo
     #
     #
     #   [1]: http://www.iana.org/assignments/media-types/media-types.xhtml
-    #   [2]: https://tools.sietf.org/html/rfc6838#section-4.2
+    #   [2]: https://tools.ietf.org/html/rfc6838#section-4.2
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateStreamInput AWS API Documentation

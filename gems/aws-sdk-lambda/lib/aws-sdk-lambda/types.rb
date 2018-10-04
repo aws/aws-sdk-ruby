@@ -354,16 +354,15 @@ module Aws::Lambda
     #         function_name: "FunctionName", # required
     #         enabled: false,
     #         batch_size: 1,
-    #         starting_position: "TRIM_HORIZON", # required, accepts TRIM_HORIZON, LATEST, AT_TIMESTAMP
+    #         starting_position: "TRIM_HORIZON", # accepts TRIM_HORIZON, LATEST, AT_TIMESTAMP
     #         starting_position_timestamp: Time.now,
     #       }
     #
     # @!attribute [rw] event_source_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Kinesis or the Amazon
-    #   DynamoDB stream that is the event source. Any record added to this
-    #   stream could cause AWS Lambda to invoke your Lambda function, it
-    #   depends on the `BatchSize`. AWS Lambda POSTs the Amazon Kinesis
-    #   event, containing records, to your Lambda function as JSON.
+    #   The Amazon Resource Name (ARN) of the event source. Any record added
+    #   to this source could cause AWS Lambda to invoke your Lambda
+    #   function, it depends on the `BatchSize`. AWS Lambda POSTs the
+    #   event's records to your Lambda function as JSON.
     #   @return [String]
     #
     # @!attribute [rw] function_name
@@ -400,7 +399,8 @@ module Aws::Lambda
     #   The largest number of records that AWS Lambda will retrieve from
     #   your event source at the time of invoking your function. Your
     #   function receives an event with all the retrieved records. The
-    #   default is 100 records.
+    #   default for Amazon Kinesis and Amazon DynamoDB is 100 records. For
+    #   SQS, the default is 1.
     #   @return [Integer]
     #
     # @!attribute [rw] starting_position
@@ -448,7 +448,7 @@ module Aws::Lambda
     #
     #       {
     #         function_name: "FunctionName", # required
-    #         runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, dotnetcore1.0, dotnetcore2.0, nodejs4.3-edge, go1.x
+    #         runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x
     #         role: "RoleArn", # required
     #         handler: "Handler", # required
     #         code: { # required
@@ -826,8 +826,8 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # Describes mapping between an Amazon Kinesis stream and a Lambda
-    # function.
+    # Describes mapping between an Amazon Kinesis or DynamoDB stream or an
+    # Amazon SQS queue and a Lambda function.
     #
     # @!attribute [rw] uuid
     #   The AWS Lambda assigned opaque identifier for the mapping.
@@ -840,13 +840,13 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] event_source_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Kinesis stream that is
-    #   the source of events.
+    #   The Amazon Resource Name (ARN) of the Amazon Kinesis or DynamoDB
+    #   stream or the SQS queue that is the source of events.
     #   @return [String]
     #
     # @!attribute [rw] function_arn
     #   The Lambda function to invoke when AWS Lambda detects an event on
-    #   the stream.
+    #   the poll-based source.
     #   @return [String]
     #
     # @!attribute [rw] last_modified
@@ -1578,8 +1578,8 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] event_source_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Kinesis stream. (This
-    #   parameter is optional.)
+    #   The Amazon Resource Name (ARN) of the Amazon Kinesis or DynamoDB
+    #   stream, or an SQS queue. (This parameter is optional.)
     #   @return [String]
     #
     # @!attribute [rw] function_name
@@ -2283,7 +2283,7 @@ module Aws::Lambda
     #             "EnvironmentVariableName" => "EnvironmentVariableValue",
     #           },
     #         },
-    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, dotnetcore1.0, dotnetcore2.0, nodejs4.3-edge, go1.x
+    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x
     #         dead_letter_config: {
     #           target_arn: "ResourceArn",
     #         },

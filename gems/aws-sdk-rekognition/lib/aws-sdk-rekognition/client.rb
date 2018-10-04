@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -47,6 +49,8 @@ module Aws::Rekognition
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -92,6 +96,22 @@ module Aws::Rekognition
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::Rekognition
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -165,10 +196,9 @@ module Aws::Rekognition
     #  </note>
     #
     # You pass the input and target images either as base64-encoded image
-    # bytes or as a references to images in an Amazon S3 bucket. If you use
-    # the Amazon CLI to call Amazon Rekognition operations, passing image
-    # bytes is not supported. The image must be either a PNG or JPEG
-    # formatted file.
+    # bytes or as references to images in an Amazon S3 bucket. If you use
+    # the AWS CLI to call Amazon Rekognition operations, passing image bytes
+    # isn't supported. The image must be formatted as a PNG or JPEG file.
     #
     # In response, the operation returns an array of face matches ordered by
     # similarity score in descending order. For each face match, the
@@ -202,7 +232,8 @@ module Aws::Rekognition
     #
     #  </note>
     #
-    # For an example, see faces-compare-images.
+    # For an example, see Comparing Faces in Images in the Amazon
+    # Rekognition Developer Guide.
     #
     # This operation requires permissions to perform the
     # `rekognition:CompareFaces` action.
@@ -408,9 +439,9 @@ module Aws::Rekognition
     # Creates an Amazon Rekognition stream processor that you can use to
     # detect and recognize faces in a streaming video.
     #
-    # Rekognition Video is a consumer of live video from Amazon Kinesis
-    # Video Streams. Rekognition Video sends analysis results to Amazon
-    # Kinesis Data Streams.
+    # Amazon Rekognition Video is a consumer of live video from Amazon
+    # Kinesis Video Streams. Amazon Rekognition Video sends analysis results
+    # to Amazon Kinesis Data Streams.
     #
     # You provide as input a Kinesis video stream (`Input`) and a Kinesis
     # data stream (`Output`) stream. You also specify the face recognition
@@ -429,7 +460,7 @@ module Aws::Rekognition
     #   `StreamProcessorInput`.
     #
     # @option params [required, Types::StreamProcessorOutput] :output
-    #   Kinesis data stream stream to which Rekognition Video puts the
+    #   Kinesis data stream stream to which Amazon Rekognition Video puts the
     #   analysis results. If you are using the AWS CLI, the parameter name is
     #   `StreamProcessorOutput`.
     #
@@ -606,6 +637,44 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Describes the specified collection. You can use `DescribeCollection`
+    # to get information, such as the number of faces indexed into a
+    # collection and the version of the model used by the collection for
+    # face detection.
+    #
+    # For more information, see Describing a Collection in the Amazon
+    # Rekognition Developer Guide.
+    #
+    # @option params [required, String] :collection_id
+    #   The ID of the collection to describe.
+    #
+    # @return [Types::DescribeCollectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCollectionResponse#face_count #face_count} => Integer
+    #   * {Types::DescribeCollectionResponse#face_model_version #face_model_version} => String
+    #   * {Types::DescribeCollectionResponse#collection_arn #collection_arn} => String
+    #   * {Types::DescribeCollectionResponse#creation_timestamp #creation_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_collection({
+    #     collection_id: "CollectionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.face_count #=> Integer
+    #   resp.face_model_version #=> String
+    #   resp.collection_arn #=> String
+    #   resp.creation_timestamp #=> Time
+    #
+    # @overload describe_collection(params = {})
+    # @param [Hash] params ({})
+    def describe_collection(params = {}, options = {})
+      req = build_request(:describe_collection, params)
+      req.send_request(options)
+    end
+
     # Provides information about a stream processor created by . You can get
     # information about the input and output streams, the input parameters
     # for the face recognition being performed, and the current status of
@@ -657,27 +726,25 @@ module Aws::Rekognition
     # Detects faces within an image that is provided as input.
     #
     # `DetectFaces` detects the 100 largest faces in the image. For each
-    # face detected, the operation returns face details including a bounding
-    # box of the face, a confidence value (that the bounding box contains a
-    # face), and a fixed set of attributes such as facial landmarks (for
-    # example, coordinates of eye and mouth), gender, presence of beard,
-    # sunglasses, etc.
+    # face detected, the operation returns face details. These details
+    # include a bounding box of the face, a confidence value (that the
+    # bounding box contains a face), and a fixed set of attributes such as
+    # facial landmarks (for example, coordinates of eye and mouth), gender,
+    # presence of beard, sunglasses, and so on.
     #
     # The face-detection algorithm is most effective on frontal faces. For
-    # non-frontal or obscured faces, the algorithm may not detect the faces
-    # or might detect faces with lower confidence.
+    # non-frontal or obscured faces, the algorithm might not detect the
+    # faces or might detect faces with lower confidence.
     #
     # You pass the input image either as base64-encoded image bytes or as a
-    # reference to an image in an Amazon S3 bucket. If you use the Amazon
-    # CLI to call Amazon Rekognition operations, passing image bytes is not
+    # reference to an image in an Amazon S3 bucket. If you use the AWS CLI
+    # to call Amazon Rekognition operations, passing image bytes is not
     # supported. The image must be either a PNG or JPEG formatted file.
     #
     # <note markdown="1"> This is a stateless API operation. That is, the operation does not
     # persist any data.
     #
     #  </note>
-    #
-    # For an example, see procedure-detecting-faces-in-images.
     #
     # This operation requires permissions to perform the
     # `rekognition:DetectFaces` action.
@@ -692,9 +759,9 @@ module Aws::Rekognition
     #   default list of attributes or all attributes. If you don't specify a
     #   value for `Attributes` or if you specify `["DEFAULT"]`, the API
     #   returns the following subset of facial attributes: `BoundingBox`,
-    #   `Confidence`, `Pose`, `Quality` and `Landmarks`. If you provide
-    #   `["ALL"]`, all facial attributes are returned but the operation will
-    #   take longer to complete.
+    #   `Confidence`, `Pose`, `Quality`, and `Landmarks`. If you provide
+    #   `["ALL"]`, all facial attributes are returned, but the operation takes
+    #   longer to complete.
     #
     #   If you provide both, `["ALL", "DEFAULT"]`, the service uses a logical
     #   AND operator to determine which attributes to return (in this case,
@@ -835,24 +902,28 @@ module Aws::Rekognition
     # Detects instances of real-world entities within an image (JPEG or PNG)
     # provided as input. This includes objects like flower, tree, and table;
     # events like wedding, graduation, and birthday party; and concepts like
-    # landscape, evening, and nature. For an example, see images-s3.
+    # landscape, evening, and nature.
+    #
+    # For an example, see Analyzing Images Stored in an Amazon S3 Bucket in
+    # the Amazon Rekognition Developer Guide.
     #
     # <note markdown="1"> `DetectLabels` does not support the detection of activities. However,
     # activity detection is supported for label detection in videos. For
-    # more information, see .
+    # more information, see StartLabelDetection in the Amazon Rekognition
+    # Developer Guide.
     #
     #  </note>
     #
     # You pass the input image as base64-encoded image bytes or as a
-    # reference to an image in an Amazon S3 bucket. If you use the Amazon
-    # CLI to call Amazon Rekognition operations, passing image bytes is not
+    # reference to an image in an Amazon S3 bucket. If you use the AWS CLI
+    # to call Amazon Rekognition operations, passing image bytes is not
     # supported. The image must be either a PNG or JPEG formatted file.
     #
     # For each object, scene, and concept the API returns one or more
     # labels. Each label provides the object name, and the level of
     # confidence that the image contains the object. For example, suppose
     # the input image has a lighthouse, the sea, and a rock. The response
-    # will include all three labels, one for each object.
+    # includes all three labels, one for each object.
     #
     # `\{Name: lighthouse, Confidence: 98.4629\}`
     #
@@ -981,12 +1052,14 @@ module Aws::Rekognition
     # content.
     #
     # To filter images, use the labels returned by `DetectModerationLabels`
-    # to determine which types of content are appropriate. For information
-    # about moderation labels, see moderation.
+    # to determine which types of content are appropriate.
+    #
+    # For information about moderation labels, see Detecting Unsafe Content
+    # in the Amazon Rekognition Developer Guide.
     #
     # You pass the input image either as base64-encoded image bytes or as a
-    # reference to an image in an Amazon S3 bucket. If you use the Amazon
-    # CLI to call Amazon Rekognition operations, passing image bytes is not
+    # reference to an image in an Amazon S3 bucket. If you use the AWS CLI
+    # to call Amazon Rekognition operations, passing image bytes is not
     # supported. The image must be either a PNG or JPEG formatted file.
     #
     # @option params [required, Types::Image] :image
@@ -1065,10 +1138,11 @@ module Aws::Rekognition
     # To determine whether a `TextDetection` element is a line of text or a
     # word, use the `TextDetection` object `Type` field.
     #
-    # To be detected, text must be within +/- 30 degrees orientation of the
+    # To be detected, text must be within +/- 90 degrees orientation of the
     # horizontal axis.
     #
-    # For more information, see text-detection.
+    # For more information, see DetectText in the Amazon Rekognition
+    # Developer Guide.
     #
     # @option params [required, Types::Image] :image
     #   The input image as base64-encoded bytes or an Amazon S3 object. If you
@@ -1116,10 +1190,12 @@ module Aws::Rekognition
     end
 
     # Gets the name and additional information about a celebrity based on
-    # his or her Rekognition ID. The additional information is returned as
-    # an array of URLs. If there is no additional information about the
-    # celebrity, this list is empty. For more information, see
-    # get-celebrity-info-procedure.
+    # his or her Amazon Rekognition ID. The additional information is
+    # returned as an array of URLs. If there is no additional information
+    # about the celebrity, this list is empty.
+    #
+    # For more information, see Recognizing Celebrities in an Image in the
+    # Amazon Rekognition Developer Guide.
     #
     # This operation requires permissions to perform the
     # `rekognition:GetCelebrityInfo` action.
@@ -1152,20 +1228,22 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Gets the celebrity recognition results for a Rekognition Video
+    # Gets the celebrity recognition results for a Amazon Rekognition Video
     # analysis started by .
     #
     # Celebrity recognition in a video is an asynchronous operation.
     # Analysis is started by a call to which returns a job identifier
-    # (`JobId`). When the celebrity recognition operation finishes,
+    # (`JobId`). When the celebrity recognition operation finishes, Amazon
     # Rekognition Video publishes a completion status to the Amazon Simple
     # Notification Service topic registered in the initial call to
     # `StartCelebrityRecognition`. To get the results of the celebrity
     # recognition analysis, first check that the status value published to
     # the Amazon SNS topic is `SUCCEEDED`. If so, call
     # `GetCelebrityDetection` and pass the job identifier (`JobId`) from the
-    # initial call to `StartCelebrityDetection`. For more information, see
-    # video.
+    # initial call to `StartCelebrityDetection`.
+    #
+    # For more information, see Working With Stored Videos in the Amazon
+    # Rekognition Developer Guide.
     #
     # `GetCelebrityRecognition` returns detected celebrities and the time(s)
     # they are detected in an array (`Celebrities`) of objects. Each
@@ -1175,7 +1253,8 @@ module Aws::Rekognition
     # <note markdown="1"> `GetCelebrityRecognition` only returns the default facial attributes
     # (`BoundingBox`, `Confidence`, `Landmarks`, `Pose`, and `Quality`). The
     # other facial attributes listed in the `Face` object of the following
-    # response syntax are not returned. For more information, see .
+    # response syntax are not returned. For more information, see FaceDetail
+    # in the Amazon Rekognition Developer Guide.
     #
     #  </note>
     #
@@ -1210,9 +1289,9 @@ module Aws::Rekognition
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there is more
-    #   recognized celebrities to retrieve), Rekognition Video returns a
-    #   pagination token in the response. You can use this pagination token to
-    #   retrieve the next set of celebrities.
+    #   recognized celebrities to retrieve), Amazon Rekognition Video returns
+    #   a pagination token in the response. You can use this pagination token
+    #   to retrieve the next set of celebrities.
     #
     # @option params [String] :sort_by
     #   Sort to use for celebrities returned in `Celebrities` field. Specify
@@ -1301,19 +1380,21 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Gets the content moderation analysis results for a Rekognition Video
-    # analysis started by .
+    # Gets the content moderation analysis results for a Amazon Rekognition
+    # Video analysis started by .
     #
     # Content moderation analysis of a video is an asynchronous operation.
     # You start analysis by calling . which returns a job identifier
-    # (`JobId`). When analysis finishes, Rekognition Video publishes a
-    # completion status to the Amazon Simple Notification Service topic
+    # (`JobId`). When analysis finishes, Amazon Rekognition Video publishes
+    # a completion status to the Amazon Simple Notification Service topic
     # registered in the initial call to `StartContentModeration`. To get the
     # results of the content moderation analysis, first check that the
     # status value published to the Amazon SNS topic is `SUCCEEDED`. If so,
     # call `GetCelebrityDetection` and pass the job identifier (`JobId`)
-    # from the initial call to `StartCelebrityDetection`. For more
-    # information, see video.
+    # from the initial call to `StartCelebrityDetection`.
+    #
+    # For more information, see Working with Stored Videos in the Amazon
+    # Rekognition Devlopers Guide.
     #
     # `GetContentModeration` returns detected content moderation labels, and
     # the time they are detected, in an array, `ModerationLabels`, of
@@ -1332,7 +1413,8 @@ module Aws::Rekognition
     # and populate the `NextToken` request parameter with the value of
     # `NextToken` returned from the previous call to `GetContentModeration`.
     #
-    # For more information, see moderation.
+    # For more information, see Detecting Unsafe Content in the Amazon
+    # Rekognition Developer Guide.
     #
     # @option params [required, String] :job_id
     #   The identifier for the content moderation job. Use `JobId` to identify
@@ -1398,18 +1480,18 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Gets face detection results for a Rekognition Video analysis started
-    # by .
+    # Gets face detection results for a Amazon Rekognition Video analysis
+    # started by .
     #
-    # Face detection with Rekognition Video is an asynchronous operation.
-    # You start face detection by calling which returns a job identifier
-    # (`JobId`). When the face detection operation finishes, Rekognition
-    # Video publishes a completion status to the Amazon Simple Notification
-    # Service topic registered in the initial call to `StartFaceDetection`.
-    # To get the results of the face detection operation, first check that
-    # the status value published to the Amazon SNS topic is `SUCCEEDED`. If
-    # so, call and pass the job identifier (`JobId`) from the initial call
-    # to `StartFaceDetection`.
+    # Face detection with Amazon Rekognition Video is an asynchronous
+    # operation. You start face detection by calling which returns a job
+    # identifier (`JobId`). When the face detection operation finishes,
+    # Amazon Rekognition Video publishes a completion status to the Amazon
+    # Simple Notification Service topic registered in the initial call to
+    # `StartFaceDetection`. To get the results of the face detection
+    # operation, first check that the status value published to the Amazon
+    # SNS topic is `SUCCEEDED`. If so, call and pass the job identifier
+    # (`JobId`) from the initial call to `StartFaceDetection`.
     #
     # `GetFaceDetection` returns an array of detected faces (`Faces`) sorted
     # by the time the faces were detected.
@@ -1433,9 +1515,9 @@ module Aws::Rekognition
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there are more faces
-    #   to retrieve), Rekognition Video returns a pagination token in the
-    #   response. You can use this pagination token to retrieve the next set
-    #   of faces.
+    #   to retrieve), Amazon Rekognition Video returns a pagination token in
+    #   the response. You can use this pagination token to retrieve the next
+    #   set of faces.
     #
     # @return [Types::GetFaceDetectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1509,20 +1591,22 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Gets the face search results for Rekognition Video face search started
-    # by . The search returns faces in a collection that match the faces of
-    # persons detected in a video. It also includes the time(s) that faces
-    # are matched in the video.
+    # Gets the face search results for Amazon Rekognition Video face search
+    # started by . The search returns faces in a collection that match the
+    # faces of persons detected in a video. It also includes the time(s)
+    # that faces are matched in the video.
     #
     # Face search in a video is an asynchronous operation. You start face
     # search by calling to which returns a job identifier (`JobId`). When
-    # the search operation finishes, Rekognition Video publishes a
+    # the search operation finishes, Amazon Rekognition Video publishes a
     # completion status to the Amazon Simple Notification Service topic
     # registered in the initial call to `StartFaceSearch`. To get the search
     # results, first check that the status value published to the Amazon SNS
     # topic is `SUCCEEDED`. If so, call `GetFaceSearch` and pass the job
-    # identifier (`JobId`) from the initial call to `StartFaceSearch`. For
-    # more information, see collections.
+    # identifier (`JobId`) from the initial call to `StartFaceSearch`.
+    #
+    # For more information, see Searching Faces in a Collection in the
+    # Amazon Rekognition Developer Guide.
     #
     # The search results are retured in an array, `Persons`, of objects.
     # Each`PersonMatch` element contains details about the matching faces in
@@ -1533,7 +1617,8 @@ module Aws::Rekognition
     # <note markdown="1"> `GetFaceSearch` only returns the default facial attributes
     # (`BoundingBox`, `Confidence`, `Landmarks`, `Pose`, and `Quality`). The
     # other facial attributes listed in the `Face` object of the following
-    # response syntax are not returned. For more information, see .
+    # response syntax are not returned. For more information, see FaceDetail
+    # in the Amazon Rekognition Developer Guide.
     #
     #  </note>
     #
@@ -1553,9 +1638,9 @@ module Aws::Rekognition
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there is more search
-    #   results to retrieve), Rekognition Video returns a pagination token in
-    #   the response. You can use this pagination token to retrieve the next
-    #   set of search results.
+    #   results to retrieve), Amazon Rekognition Video returns a pagination
+    #   token in the response. You can use this pagination token to retrieve
+    #   the next set of search results.
     #
     # @option params [String] :sort_by
     #   Sort to use for grouping faces in the response. Use `TIMESTAMP` to
@@ -1650,8 +1735,8 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Gets the label detection results of a Rekognition Video analysis
-    # started by .
+    # Gets the label detection results of a Amazon Rekognition Video
+    # analysis started by .
     #
     # The label detection operation is started by a call to which returns a
     # job identifier (`JobId`). When the label detection operation finishes,
@@ -1691,9 +1776,9 @@ module Aws::Rekognition
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there are more labels
-    #   to retrieve), Rekognition Video returns a pagination token in the
-    #   response. You can use this pagination token to retrieve the next set
-    #   of labels.
+    #   to retrieve), Amazon Rekognition Video returns a pagination token in
+    #   the response. You can use this pagination token to retrieve the next
+    #   set of labels.
     #
     # @option params [String] :sort_by
     #   Sort to use for elements in the `Labels` array. Use `TIMESTAMP` to
@@ -1742,14 +1827,14 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Gets the person tracking results of a Rekognition Video analysis
-    # started by .
+    # Gets the person tracking results of a Amazon Rekognition Video
+    # analysis started by .
     #
     # The person detection operation is started by a call to
     # `StartPersonTracking` which returns a job identifier (`JobId`). When
-    # the person detection operation finishes, Rekognition Video publishes a
-    # completion status to the Amazon Simple Notification Service topic
-    # registered in the initial call to `StartPersonTracking`.
+    # the person detection operation finishes, Amazon Rekognition Video
+    # publishes a completion status to the Amazon Simple Notification
+    # Service topic registered in the initial call to `StartPersonTracking`.
     #
     # To get the results of the person tracking operation, first check that
     # the status value published to the Amazon SNS topic is `SUCCEEDED`. If
@@ -1762,7 +1847,10 @@ module Aws::Rekognition
     # <note markdown="1"> `GetPersonTracking` only returns the default facial attributes
     # (`BoundingBox`, `Confidence`, `Landmarks`, `Pose`, and `Quality`). The
     # other facial attributes listed in the `Face` object of the following
-    # response syntax are not returned. For more information, see .
+    # response syntax are not returned.
+    #
+    #  For more information, see FaceDetail in the Amazon Rekognition
+    # Developer Guide.
     #
     #  </note>
     #
@@ -1790,9 +1878,9 @@ module Aws::Rekognition
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there are more
-    #   persons to retrieve), Rekognition Video returns a pagination token in
-    #   the response. You can use this pagination token to retrieve the next
-    #   set of persons.
+    #   persons to retrieve), Amazon Rekognition Video returns a pagination
+    #   token in the response. You can use this pagination token to retrieve
+    #   the next set of persons.
     #
     # @option params [String] :sort_by
     #   Sort to use for elements in the `Persons` array. Use `TIMESTAMP` to
@@ -1882,19 +1970,27 @@ module Aws::Rekognition
     # Detects faces in the input image and adds them to the specified
     # collection.
     #
-    # Amazon Rekognition does not save the actual faces detected. Instead,
-    # the underlying detection algorithm first detects the faces in the
-    # input image, and for each face extracts facial features into a feature
-    # vector, and stores it in the back-end database. Amazon Rekognition
-    # uses feature vectors when performing face match and search operations
-    # using the and operations.
+    # Amazon Rekognition doesn't save the actual faces that are detected.
+    # Instead, the underlying detection algorithm first detects the faces in
+    # the input image. For each face, the algorithm extracts facial features
+    # into a feature vector, and stores it in the backend database. Amazon
+    # Rekognition uses feature vectors when it performs face match and
+    # search operations using the and operations.
     #
-    # If you are using version 1.0 of the face detection model, `IndexFaces`
+    # For more information, see Adding Faces to a Collection in the Amazon
+    # Rekognition Developer Guide.
+    #
+    # To get the number of faces in a collection, call .
+    #
+    # If you're using version 1.0 of the face detection model, `IndexFaces`
     # indexes the 15 largest faces in the input image. Later versions of the
     # face detection model index the 100 largest faces in the input image.
-    # To determine which version of the model you are using, check the the
-    # value of `FaceModelVersion` in the response from `IndexFaces`. For
-    # more information, see face-detection-model.
+    # To determine which version of the model you're using, call and supply
+    # the collection ID. You can also get the model version from the value
+    # of `FaceModelVersion` in the response from `IndexFaces`.
+    #
+    # For more information, see Model Versioning in the Amazon Rekognition
+    # Developer Guide.
     #
     # If you provide the optional `ExternalImageID` for the input image you
     # provided, Amazon Rekognition associates this ID with all faces that it
@@ -1903,22 +1999,67 @@ module Aws::Rekognition
     # client-side index to associate the faces with each image. You can then
     # use the index to find all faces in an image.
     #
-    # In response, the operation returns an array of metadata for all
-    # detected faces. This includes, the bounding box of the detected face,
-    # confidence value (indicating the bounding box contains a face), a face
-    # ID assigned by the service for each face that is detected and stored,
-    # and an image ID assigned by the service for the input image. If you
-    # request all facial attributes (using the `detectionAttributes`
-    # parameter, Amazon Rekognition returns detailed facial attributes such
-    # as facial landmarks (for example, location of eye and mount) and other
-    # facial attributes such gender. If you provide the same image, specify
-    # the same collection, and use the same external ID in the `IndexFaces`
-    # operation, Amazon Rekognition doesn't save duplicate face metadata.
+    # You can specify the maximum number of faces to index with the
+    # `MaxFaces` input parameter. This is useful when you want to index the
+    # largest faces in an image and don't want to index smaller faces, such
+    # as those belonging to people standing in the background.
     #
-    # The input image is passed either as base64-encoded image bytes or as a
-    # reference to an image in an Amazon S3 bucket. If you use the Amazon
-    # CLI to call Amazon Rekognition operations, passing image bytes is not
-    # supported. The image must be either a PNG or JPEG formatted file.
+    # The `QualityFilter` input parameter allows you to filter out detected
+    # faces that don’t meet the required quality bar chosen by Amazon
+    # Rekognition. The quality bar is based on a variety of common use
+    # cases. By default, `IndexFaces` filters detected faces. You can also
+    # explicitly filter detected faces by specifying `AUTO` for the value of
+    # `QualityFilter`. If you do not want to filter detected faces, specify
+    # `NONE`.
+    #
+    # <note markdown="1"> To use quality filtering, you need a collection associated with
+    # version 3 of the face model. To get the version of the face model
+    # associated with a collection, call .
+    #
+    #  </note>
+    #
+    # Information about faces detected in an image, but not indexed, is
+    # returned in an array of objects, `UnindexedFaces`. Faces aren't
+    # indexed for reasons such as:
+    #
+    # * The number of faces detected exceeds the value of the `MaxFaces`
+    #   request parameter.
+    #
+    # * The face is too small compared to the image dimensions.
+    #
+    # * The face is too blurry.
+    #
+    # * The image is too dark.
+    #
+    # * The face has an extreme pose.
+    #
+    # In response, the `IndexFaces` operation returns an array of metadata
+    # for all detected faces, `FaceRecords`. This includes:
+    #
+    # * The bounding box, `BoundingBox`, of the detected face.
+    #
+    # * A confidence value, `Confidence`, which indicates the confidence
+    #   that the bounding box contains a face.
+    #
+    # * A face ID, `faceId`, assigned by the service for each face that's
+    #   detected and stored.
+    #
+    # * An image ID, `ImageId`, assigned by the service for the input image.
+    #
+    # If you request all facial attributes (by using the
+    # `detectionAttributes` parameter), Amazon Rekognition returns detailed
+    # facial attributes, such as facial landmarks (for example, location of
+    # eye and mouth) and other facial attributes like gender. If you provide
+    # the same image, specify the same collection, and use the same external
+    # ID in the `IndexFaces` operation, Amazon Rekognition doesn't save
+    # duplicate face metadata.
+    #
+    #
+    #
+    # The input image is passed either as base64-encoded image bytes, or as
+    # a reference to an image in an Amazon S3 bucket. If you use the AWS CLI
+    # to call Amazon Rekognition operations, passing image bytes isn't
+    # supported. The image must be formatted as a PNG or JPEG file.
     #
     # This operation requires permissions to perform the
     # `rekognition:IndexFaces` action.
@@ -1930,29 +2071,63 @@ module Aws::Rekognition
     # @option params [required, Types::Image] :image
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
-    #   base64-encoded image bytes is not supported.
+    #   base64-encoded image bytes isn't supported.
     #
     # @option params [String] :external_image_id
-    #   ID you want to assign to all the faces detected in the image.
+    #   The ID you want to assign to all the faces detected in the image.
     #
     # @option params [Array<String>] :detection_attributes
     #   An array of facial attributes that you want to be returned. This can
     #   be the default list of attributes or all attributes. If you don't
     #   specify a value for `Attributes` or if you specify `["DEFAULT"]`, the
     #   API returns the following subset of facial attributes: `BoundingBox`,
-    #   `Confidence`, `Pose`, `Quality` and `Landmarks`. If you provide
-    #   `["ALL"]`, all facial attributes are returned but the operation will
-    #   take longer to complete.
+    #   `Confidence`, `Pose`, `Quality`, and `Landmarks`. If you provide
+    #   `["ALL"]`, all facial attributes are returned, but the operation takes
+    #   longer to complete.
     #
     #   If you provide both, `["ALL", "DEFAULT"]`, the service uses a logical
     #   AND operator to determine which attributes to return (in this case,
     #   all attributes).
+    #
+    # @option params [Integer] :max_faces
+    #   The maximum number of faces to index. The value of `MaxFaces` must be
+    #   greater than or equal to 1. `IndexFaces` returns no more than 100
+    #   detected faces in an image, even if you specify a larger value for
+    #   `MaxFaces`.
+    #
+    #   If `IndexFaces` detects more faces than the value of `MaxFaces`, the
+    #   faces with the lowest quality are filtered out first. If there are
+    #   still more faces than the value of `MaxFaces`, the faces with the
+    #   smallest bounding boxes are filtered out (up to the number that's
+    #   needed to satisfy the value of `MaxFaces`). Information about the
+    #   unindexed faces is available in the `UnindexedFaces` array.
+    #
+    #   The faces that are returned by `IndexFaces` are sorted by the largest
+    #   face bounding box size to the smallest size, in descending order.
+    #
+    #   `MaxFaces` can be used with a collection associated with any version
+    #   of the face model.
+    #
+    # @option params [String] :quality_filter
+    #   A filter that specifies how much filtering is done to identify faces
+    #   that are detected with low quality. Filtered faces aren't indexed. If
+    #   you specify `AUTO`, filtering prioritizes the identification of faces
+    #   that don’t meet the required quality bar chosen by Amazon Rekognition.
+    #   The quality bar is based on a variety of common use cases. Low-quality
+    #   detections can occur for a number of reasons. Some examples are an
+    #   object that's misidentified as a face, a face that's too blurry, or
+    #   a face with a pose that's too extreme to use. If you specify `NONE`,
+    #   no filtering is performed. The default value is AUTO.
+    #
+    #   To use quality filtering, the collection you are using must be
+    #   associated with version 3 of the face model.
     #
     # @return [Types::IndexFacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::IndexFacesResponse#face_records #face_records} => Array&lt;Types::FaceRecord&gt;
     #   * {Types::IndexFacesResponse#orientation_correction #orientation_correction} => String
     #   * {Types::IndexFacesResponse#face_model_version #face_model_version} => String
+    #   * {Types::IndexFacesResponse#unindexed_faces #unindexed_faces} => Array&lt;Types::UnindexedFace&gt;
     #
     #
     # @example Example: To add a face to a collection
@@ -2109,6 +2284,8 @@ module Aws::Rekognition
     #     },
     #     external_image_id: "ExternalImageId",
     #     detection_attributes: ["DEFAULT"], # accepts DEFAULT, ALL
+    #     max_faces: 1,
+    #     quality_filter: "NONE", # accepts NONE, AUTO
     #   })
     #
     # @example Response structure
@@ -2159,6 +2336,44 @@ module Aws::Rekognition
     #   resp.face_records[0].face_detail.confidence #=> Float
     #   resp.orientation_correction #=> String, one of "ROTATE_0", "ROTATE_90", "ROTATE_180", "ROTATE_270"
     #   resp.face_model_version #=> String
+    #   resp.unindexed_faces #=> Array
+    #   resp.unindexed_faces[0].reasons #=> Array
+    #   resp.unindexed_faces[0].reasons[0] #=> String, one of "EXCEEDS_MAX_FACES", "EXTREME_POSE", "LOW_BRIGHTNESS", "LOW_SHARPNESS", "LOW_CONFIDENCE", "SMALL_BOUNDING_BOX"
+    #   resp.unindexed_faces[0].face_detail.bounding_box.width #=> Float
+    #   resp.unindexed_faces[0].face_detail.bounding_box.height #=> Float
+    #   resp.unindexed_faces[0].face_detail.bounding_box.left #=> Float
+    #   resp.unindexed_faces[0].face_detail.bounding_box.top #=> Float
+    #   resp.unindexed_faces[0].face_detail.age_range.low #=> Integer
+    #   resp.unindexed_faces[0].face_detail.age_range.high #=> Integer
+    #   resp.unindexed_faces[0].face_detail.smile.value #=> Boolean
+    #   resp.unindexed_faces[0].face_detail.smile.confidence #=> Float
+    #   resp.unindexed_faces[0].face_detail.eyeglasses.value #=> Boolean
+    #   resp.unindexed_faces[0].face_detail.eyeglasses.confidence #=> Float
+    #   resp.unindexed_faces[0].face_detail.sunglasses.value #=> Boolean
+    #   resp.unindexed_faces[0].face_detail.sunglasses.confidence #=> Float
+    #   resp.unindexed_faces[0].face_detail.gender.value #=> String, one of "Male", "Female"
+    #   resp.unindexed_faces[0].face_detail.gender.confidence #=> Float
+    #   resp.unindexed_faces[0].face_detail.beard.value #=> Boolean
+    #   resp.unindexed_faces[0].face_detail.beard.confidence #=> Float
+    #   resp.unindexed_faces[0].face_detail.mustache.value #=> Boolean
+    #   resp.unindexed_faces[0].face_detail.mustache.confidence #=> Float
+    #   resp.unindexed_faces[0].face_detail.eyes_open.value #=> Boolean
+    #   resp.unindexed_faces[0].face_detail.eyes_open.confidence #=> Float
+    #   resp.unindexed_faces[0].face_detail.mouth_open.value #=> Boolean
+    #   resp.unindexed_faces[0].face_detail.mouth_open.confidence #=> Float
+    #   resp.unindexed_faces[0].face_detail.emotions #=> Array
+    #   resp.unindexed_faces[0].face_detail.emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN"
+    #   resp.unindexed_faces[0].face_detail.emotions[0].confidence #=> Float
+    #   resp.unindexed_faces[0].face_detail.landmarks #=> Array
+    #   resp.unindexed_faces[0].face_detail.landmarks[0].type #=> String, one of "eyeLeft", "eyeRight", "nose", "mouthLeft", "mouthRight", "leftEyeBrowLeft", "leftEyeBrowRight", "leftEyeBrowUp", "rightEyeBrowLeft", "rightEyeBrowRight", "rightEyeBrowUp", "leftEyeLeft", "leftEyeRight", "leftEyeUp", "leftEyeDown", "rightEyeLeft", "rightEyeRight", "rightEyeUp", "rightEyeDown", "noseLeft", "noseRight", "mouthUp", "mouthDown", "leftPupil", "rightPupil"
+    #   resp.unindexed_faces[0].face_detail.landmarks[0].x #=> Float
+    #   resp.unindexed_faces[0].face_detail.landmarks[0].y #=> Float
+    #   resp.unindexed_faces[0].face_detail.pose.roll #=> Float
+    #   resp.unindexed_faces[0].face_detail.pose.yaw #=> Float
+    #   resp.unindexed_faces[0].face_detail.pose.pitch #=> Float
+    #   resp.unindexed_faces[0].face_detail.quality.brightness #=> Float
+    #   resp.unindexed_faces[0].face_detail.quality.sharpness #=> Float
+    #   resp.unindexed_faces[0].face_detail.confidence #=> Float
     #
     # @overload index_faces(params = {})
     # @param [Hash] params ({})
@@ -2171,7 +2386,8 @@ module Aws::Rekognition
     # truncated, the response also provides a `NextToken` that you can use
     # in the subsequent request to fetch the next set of collection IDs.
     #
-    # For an example, see list-collection-procedure.
+    # For an example, see Listing Collections in the Amazon Rekognition
+    # Developer Guide.
     #
     # This operation requires permissions to perform the
     # `rekognition:ListCollections` action.
@@ -2228,7 +2444,8 @@ module Aws::Rekognition
     # Returns metadata for faces in the specified collection. This metadata
     # includes information such as the bounding box coordinates, the
     # confidence (that the bounding box contains a face), and face ID. For
-    # an example, see list-faces-in-collection-procedure.
+    # an example, see Listing Faces in a Collection in the Amazon
+    # Rekognition Developer Guide.
     #
     # This operation requires permissions to perform the
     # `rekognition:ListFaces` action.
@@ -2421,13 +2638,13 @@ module Aws::Rekognition
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there are more stream
-    #   processors to retrieve), Rekognition Video returns a pagination token
-    #   in the response. You can use this pagination token to retrieve the
-    #   next set of stream processors.
+    #   processors to retrieve), Amazon Rekognition Video returns a pagination
+    #   token in the response. You can use this pagination token to retrieve
+    #   the next set of stream processors.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of stream processors you want Rekognition Video to
-    #   return in the response. The default is 1000.
+    #   Maximum number of stream processors you want Amazon Rekognition Video
+    #   to return in the response. The default is 1000.
     #
     # @return [Types::ListStreamProcessorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2456,33 +2673,35 @@ module Aws::Rekognition
     end
 
     # Returns an array of celebrities recognized in the input image. For
-    # more information, see celebrities.
+    # more information, see Recognizing Celebrities in the Amazon
+    # Rekognition Developer Guide.
     #
     # `RecognizeCelebrities` returns the 100 largest faces in the image. It
     # lists recognized celebrities in the `CelebrityFaces` array and
     # unrecognized faces in the `UnrecognizedFaces` array.
-    # `RecognizeCelebrities` doesn't return celebrities whose faces are not
-    # amongst the largest 100 faces in the image.
+    # `RecognizeCelebrities` doesn't return celebrities whose faces aren't
+    # among the largest 100 faces in the image.
     #
-    # For each celebrity recognized, the `RecognizeCelebrities` returns a
+    # For each celebrity recognized, `RecognizeCelebrities` returns a
     # `Celebrity` object. The `Celebrity` object contains the celebrity
     # name, ID, URL links to additional information, match confidence, and a
     # `ComparedFace` object that you can use to locate the celebrity's face
     # on the image.
     #
-    # Rekognition does not retain information about which images a celebrity
-    # has been recognized in. Your application must store this information
-    # and use the `Celebrity` ID property as a unique identifier for the
-    # celebrity. If you don't store the celebrity name or additional
-    # information URLs returned by `RecognizeCelebrities`, you will need the
-    # ID to identify the celebrity in a call to the operation.
+    # Amazon Rekognition doesn't retain information about which images a
+    # celebrity has been recognized in. Your application must store this
+    # information and use the `Celebrity` ID property as a unique identifier
+    # for the celebrity. If you don't store the celebrity name or
+    # additional information URLs returned by `RecognizeCelebrities`, you
+    # will need the ID to identify the celebrity in a call to the operation.
     #
-    # You pass the imput image either as base64-encoded image bytes or as a
-    # reference to an image in an Amazon S3 bucket. If you use the Amazon
-    # CLI to call Amazon Rekognition operations, passing image bytes is not
+    # You pass the input image either as base64-encoded image bytes or as a
+    # reference to an image in an Amazon S3 bucket. If you use the AWS CLI
+    # to call Amazon Rekognition operations, passing image bytes is not
     # supported. The image must be either a PNG or JPEG formatted file.
     #
-    # For an example, see celebrities-procedure-image.
+    # For an example, see Recognizing Celebrities in an Image in the Amazon
+    # Rekognition Developer Guide.
     #
     # This operation requires permissions to perform the
     # `rekognition:RecognizeCelebrities` operation.
@@ -2575,7 +2794,8 @@ module Aws::Rekognition
     # `confidence` value for each face match, indicating the confidence that
     # the specific face matches the input face.
     #
-    # For an example, see search-face-with-id-procedure.
+    # For an example, see Searching for a Face Using Its Face ID in the
+    # Amazon Rekognition Developer Guide.
     #
     # This operation requires permissions to perform the
     # `rekognition:SearchFaces` action.
@@ -2709,8 +2929,8 @@ module Aws::Rekognition
     #  </note>
     #
     # You pass the input image either as base64-encoded image bytes or as a
-    # reference to an image in an Amazon S3 bucket. If you use the Amazon
-    # CLI to call Amazon Rekognition operations, passing image bytes is not
+    # reference to an image in an Amazon S3 bucket. If you use the AWS CLI
+    # to call Amazon Rekognition operations, passing image bytes is not
     # supported. The image must be either a PNG or JPEG formatted file.
     #
     # The response returns an array of faces that match, ordered by
@@ -2722,7 +2942,8 @@ module Aws::Rekognition
     # bounding box contains a face) of the face that Amazon Rekognition used
     # for the input image.
     #
-    # For an example, see search-face-with-image-procedure.
+    # For an example, Searching for a Face Using an Image in the Amazon
+    # Rekognition Developer Guide.
     #
     # This operation requires permissions to perform the
     # `rekognition:SearchFacesByImage` action.
@@ -2839,17 +3060,20 @@ module Aws::Rekognition
 
     # Starts asynchronous recognition of celebrities in a stored video.
     #
-    # Rekognition Video can detect celebrities in a video must be stored in
-    # an Amazon S3 bucket. Use Video to specify the bucket name and the
-    # filename of the video. `StartCelebrityRecognition` returns a job
-    # identifier (`JobId`) which you use to get the results of the analysis.
-    # When celebrity recognition analysis is finished, Rekognition Video
-    # publishes a completion status to the Amazon Simple Notification
-    # Service topic that you specify in `NotificationChannel`. To get the
-    # results of the celebrity recognition analysis, first check that the
-    # status value published to the Amazon SNS topic is `SUCCEEDED`. If so,
-    # call and pass the job identifier (`JobId`) from the initial call to
-    # `StartCelebrityRecognition`. For more information, see celebrities.
+    # Amazon Rekognition Video can detect celebrities in a video must be
+    # stored in an Amazon S3 bucket. Use Video to specify the bucket name
+    # and the filename of the video. `StartCelebrityRecognition` returns a
+    # job identifier (`JobId`) which you use to get the results of the
+    # analysis. When celebrity recognition analysis is finished, Amazon
+    # Rekognition Video publishes a completion status to the Amazon Simple
+    # Notification Service topic that you specify in `NotificationChannel`.
+    # To get the results of the celebrity recognition analysis, first check
+    # that the status value published to the Amazon SNS topic is
+    # `SUCCEEDED`. If so, call and pass the job identifier (`JobId`) from
+    # the initial call to `StartCelebrityRecognition`.
+    #
+    # For more information, see Recognizing Celebrities in the Amazon
+    # Rekognition Developer Guide.
     #
     # @option params [required, Types::Video] :video
     #   The video in which you want to recognize celebrities. The video must
@@ -2862,8 +3086,9 @@ module Aws::Rekognition
     #   job from being accidently started more than once.
     #
     # @option params [Types::NotificationChannel] :notification_channel
-    #   The Amazon SNS topic ARN that you want Rekognition Video to publish
-    #   the completion status of the celebrity recognition analysis to.
+    #   The Amazon SNS topic ARN that you want Amazon Rekognition Video to
+    #   publish the completion status of the celebrity recognition analysis
+    #   to.
     #
     # @option params [String] :job_tag
     #   Unique identifier you specify to identify the job in the completion
@@ -2905,19 +3130,21 @@ module Aws::Rekognition
     # Starts asynchronous detection of explicit or suggestive adult content
     # in a stored video.
     #
-    # Rekognition Video can moderate content in a video stored in an Amazon
-    # S3 bucket. Use Video to specify the bucket name and the filename of
-    # the video. `StartContentModeration` returns a job identifier (`JobId`)
-    # which you use to get the results of the analysis. When content
-    # moderation analysis is finished, Rekognition Video publishes a
-    # completion status to the Amazon Simple Notification Service topic that
-    # you specify in `NotificationChannel`.
+    # Amazon Rekognition Video can moderate content in a video stored in an
+    # Amazon S3 bucket. Use Video to specify the bucket name and the
+    # filename of the video. `StartContentModeration` returns a job
+    # identifier (`JobId`) which you use to get the results of the analysis.
+    # When content moderation analysis is finished, Amazon Rekognition Video
+    # publishes a completion status to the Amazon Simple Notification
+    # Service topic that you specify in `NotificationChannel`.
     #
     # To get the results of the content moderation analysis, first check
     # that the status value published to the Amazon SNS topic is
     # `SUCCEEDED`. If so, call and pass the job identifier (`JobId`) from
-    # the initial call to `StartContentModeration`. For more information,
-    # see moderation.
+    # the initial call to `StartContentModeration`.
+    #
+    # For more information, see Detecting Unsafe Content in the Amazon
+    # Rekognition Developer Guide.
     #
     # @option params [required, Types::Video] :video
     #   The video in which you want to moderate content. The video must be
@@ -2938,8 +3165,8 @@ module Aws::Rekognition
     #   from being accidently started more than once.
     #
     # @option params [Types::NotificationChannel] :notification_channel
-    #   The Amazon SNS topic ARN that you want Rekognition Video to publish
-    #   the completion status of the content moderation analysis to.
+    #   The Amazon SNS topic ARN that you want Amazon Rekognition Video to
+    #   publish the completion status of the content moderation analysis to.
     #
     # @option params [String] :job_tag
     #   Unique identifier you specify to identify the job in the completion
@@ -2981,17 +3208,19 @@ module Aws::Rekognition
 
     # Starts asynchronous detection of faces in a stored video.
     #
-    # Rekognition Video can detect faces in a video stored in an Amazon S3
-    # bucket. Use Video to specify the bucket name and the filename of the
-    # video. `StartFaceDetection` returns a job identifier (`JobId`) that
-    # you use to get the results of the operation. When face detection is
-    # finished, Rekognition Video publishes a completion status to the
-    # Amazon Simple Notification Service topic that you specify in
-    # `NotificationChannel`. To get the results of the label detection
-    # operation, first check that the status value published to the Amazon
-    # SNS topic is `SUCCEEDED`. If so, call and pass the job identifier
-    # (`JobId`) from the initial call to `StartFaceDetection`. For more
-    # information, see faces-video.
+    # Amazon Rekognition Video can detect faces in a video stored in an
+    # Amazon S3 bucket. Use Video to specify the bucket name and the
+    # filename of the video. `StartFaceDetection` returns a job identifier
+    # (`JobId`) that you use to get the results of the operation. When face
+    # detection is finished, Amazon Rekognition Video publishes a completion
+    # status to the Amazon Simple Notification Service topic that you
+    # specify in `NotificationChannel`. To get the results of the label
+    # detection operation, first check that the status value published to
+    # the Amazon SNS topic is `SUCCEEDED`. If so, call and pass the job
+    # identifier (`JobId`) from the initial call to `StartFaceDetection`.
+    #
+    # For more information, see Detecting Faces in a Stored Video in the
+    # Amazon Rekognition Developer Guide.
     #
     # @option params [required, Types::Video] :video
     #   The video in which you want to detect faces. The video must be stored
@@ -3004,8 +3233,9 @@ module Aws::Rekognition
     #   from being accidently started more than once.
     #
     # @option params [Types::NotificationChannel] :notification_channel
-    #   The ARN of the Amazon SNS topic to which you want Rekognition Video to
-    #   publish the completion status of the face detection operation.
+    #   The ARN of the Amazon SNS topic to which you want Amazon Rekognition
+    #   Video to publish the completion status of the face detection
+    #   operation.
     #
     # @option params [String] :face_attributes
     #   The face attributes you want returned.
@@ -3060,12 +3290,13 @@ module Aws::Rekognition
     # the bucket name and the filename of the video. `StartFaceSearch`
     # returns a job identifier (`JobId`) which you use to get the search
     # results once the search has completed. When searching is finished,
-    # Rekognition Video publishes a completion status to the Amazon Simple
-    # Notification Service topic that you specify in `NotificationChannel`.
-    # To get the search results, first check that the status value published
-    # to the Amazon SNS topic is `SUCCEEDED`. If so, call and pass the job
-    # identifier (`JobId`) from the initial call to `StartFaceSearch`. For
-    # more information, see collections-search-person.
+    # Amazon Rekognition Video publishes a completion status to the Amazon
+    # Simple Notification Service topic that you specify in
+    # `NotificationChannel`. To get the search results, first check that the
+    # status value published to the Amazon SNS topic is `SUCCEEDED`. If so,
+    # call and pass the job identifier (`JobId`) from the initial call to
+    # `StartFaceSearch`. For more information, see
+    # procedure-person-search-videos.
     #
     # @option params [required, Types::Video] :video
     #   The video you want to search. The video must be stored in an Amazon S3
@@ -3086,8 +3317,8 @@ module Aws::Rekognition
     #   ID of the collection that contains the faces you want to search for.
     #
     # @option params [Types::NotificationChannel] :notification_channel
-    #   The ARN of the Amazon SNS topic to which you want Rekognition Video to
-    #   publish the completion status of the search.
+    #   The ARN of the Amazon SNS topic to which you want Amazon Rekognition
+    #   Video to publish the completion status of the search.
     #
     # @option params [String] :job_tag
     #   Unique identifier you specify to identify the job in the completion
@@ -3130,17 +3361,17 @@ module Aws::Rekognition
 
     # Starts asynchronous detection of labels in a stored video.
     #
-    # Rekognition Video can detect labels in a video. Labels are instances
-    # of real-world entities. This includes objects like flower, tree, and
-    # table; events like wedding, graduation, and birthday party; concepts
-    # like landscape, evening, and nature; and activities like a person
-    # getting out of a car or a person skiing.
+    # Amazon Rekognition Video can detect labels in a video. Labels are
+    # instances of real-world entities. This includes objects like flower,
+    # tree, and table; events like wedding, graduation, and birthday party;
+    # concepts like landscape, evening, and nature; and activities like a
+    # person getting out of a car or a person skiing.
     #
     # The video must be stored in an Amazon S3 bucket. Use Video to specify
     # the bucket name and the filename of the video. `StartLabelDetection`
     # returns a job identifier (`JobId`) which you use to get the results of
-    # the operation. When label detection is finished, Rekognition Video
-    # publishes a completion status to the Amazon Simple Notification
+    # the operation. When label detection is finished, Amazon Rekognition
+    # Video publishes a completion status to the Amazon Simple Notification
     # Service topic that you specify in `NotificationChannel`.
     #
     # To get the results of the label detection operation, first check that
@@ -3159,19 +3390,19 @@ module Aws::Rekognition
     #   from being accidently started more than once.
     #
     # @option params [Float] :min_confidence
-    #   Specifies the minimum confidence that Rekognition Video must have in
-    #   order to return a detected label. Confidence represents how certain
-    #   Amazon Rekognition is that a label is correctly identified.0 is the
-    #   lowest confidence. 100 is the highest confidence. Rekognition Video
-    #   doesn't return any labels with a confidence level lower than this
-    #   specified value.
+    #   Specifies the minimum confidence that Amazon Rekognition Video must
+    #   have in order to return a detected label. Confidence represents how
+    #   certain Amazon Rekognition is that a label is correctly identified.0
+    #   is the lowest confidence. 100 is the highest confidence. Amazon
+    #   Rekognition Video doesn't return any labels with a confidence level
+    #   lower than this specified value.
     #
     #   If you don't specify `MinConfidence`, the operation returns labels
     #   with confidence values greater than or equal to 50 percent.
     #
     # @option params [Types::NotificationChannel] :notification_channel
-    #   The Amazon SNS topic ARN you want Rekognition Video to publish the
-    #   completion status of the label detection operation to.
+    #   The Amazon SNS topic ARN you want Amazon Rekognition Video to publish
+    #   the completion status of the label detection operation to.
     #
     # @option params [String] :job_tag
     #   Unique identifier you specify to identify the job in the completion
@@ -3213,13 +3444,13 @@ module Aws::Rekognition
 
     # Starts the asynchronous tracking of persons in a stored video.
     #
-    # Rekognition Video can track persons in a video stored in an Amazon S3
-    # bucket. Use Video to specify the bucket name and the filename of the
-    # video. `StartPersonTracking` returns a job identifier (`JobId`) which
-    # you use to get the results of the operation. When label detection is
-    # finished, Amazon Rekognition publishes a completion status to the
-    # Amazon Simple Notification Service topic that you specify in
-    # `NotificationChannel`.
+    # Amazon Rekognition Video can track persons in a video stored in an
+    # Amazon S3 bucket. Use Video to specify the bucket name and the
+    # filename of the video. `StartPersonTracking` returns a job identifier
+    # (`JobId`) which you use to get the results of the operation. When
+    # label detection is finished, Amazon Rekognition publishes a completion
+    # status to the Amazon Simple Notification Service topic that you
+    # specify in `NotificationChannel`.
     #
     # To get the results of the person detection operation, first check that
     # the status value published to the Amazon SNS topic is `SUCCEEDED`. If
@@ -3237,8 +3468,8 @@ module Aws::Rekognition
     #   from being accidently started more than once.
     #
     # @option params [Types::NotificationChannel] :notification_channel
-    #   The Amazon SNS topic ARN you want Rekognition Video to publish the
-    #   completion status of the people detection operation to.
+    #   The Amazon SNS topic ARN you want Amazon Rekognition Video to publish
+    #   the completion status of the people detection operation to.
     #
     # @option params [String] :job_tag
     #   Unique identifier you specify to identify the job in the completion
@@ -3333,7 +3564,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -47,6 +49,8 @@ module Aws::AlexaForBusiness
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -92,6 +96,22 @@ module Aws::AlexaForBusiness
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::AlexaForBusiness
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -1035,29 +1066,30 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
-    # Lists the Device Event history for up to 30 days. If EventType isn't
-    # specified in the request, this returns a list of all device events in
-    # reverse chronological order. If EventType is specified, this returns a
-    # list of device events for that EventType in reverse chronological
-    # order.
+    # Lists the device event history, including device connection status,
+    # for up to 30 days.
     #
     # @option params [required, String] :device_arn
     #   The ARN of a device.
     #
     # @option params [String] :event_type
-    #   The event type to filter device events.
+    #   The event type to filter device events. If EventType isn't specified,
+    #   this returns a list of all device events in reverse chronological
+    #   order. If EventType is specified, this returns a list of device events
+    #   for that EventType in reverse chronological order.
     #
     # @option params [String] :next_token
     #   An optional token returned from a prior request. Use this token for
     #   pagination of results from this action. If this parameter is
     #   specified, the response only includes results beyond the token, up to
-    #   the value specified by MaxResults.
+    #   the value specified by MaxResults. When the end of results is reached,
+    #   the response has a value of null.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to include in the response. If more
-    #   results exist than the specified MaxResults value, a token is included
-    #   in the response so that the remaining results can be retrieved.
-    #   Required.
+    #   The maximum number of results to include in the response. The default
+    #   value is 50. If more results exist than the specified MaxResults
+    #   value, a token is included in the response so that the remaining
+    #   results can be retrieved.
     #
     # @return [Types::ListDeviceEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1137,10 +1169,10 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
-    # Lists all tags for a specific resource.
+    # Lists all tags for the specified resource.
     #
     # @option params [required, String] :arn
-    #   The ARN of the specific resource for which to list tags. Required.
+    #   The ARN of the specified resource for which to list tags.
     #
     # @option params [String] :next_token
     #   An optional token returned from a prior request. Use this token for
@@ -2120,7 +2152,7 @@ module Aws::AlexaForBusiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-alexaforbusiness'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

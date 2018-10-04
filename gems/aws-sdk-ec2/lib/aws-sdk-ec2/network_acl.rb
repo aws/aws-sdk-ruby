@@ -237,10 +237,10 @@ module Aws::EC2
     #   The protocol. A value of `-1` or `all` means all protocols. If you
     #   specify `all`, `-1`, or a protocol number other than `6` (tcp), `17`
     #   (udp), or `1` (icmp), traffic on all ports is allowed, regardless of
-    #   any ports or ICMP types or codes you specify. If you specify protocol
-    #   `58` (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP
-    #   types and codes allowed, regardless of any that you specify. If you
-    #   specify protocol `58` (ICMPv6) and specify an IPv6 CIDR block, you
+    #   any ports or ICMP types or codes that you specify. If you specify
+    #   protocol `58` (ICMPv6) and specify an IPv4 CIDR block, traffic for all
+    #   ICMP types and codes allowed, regardless of any that you specify. If
+    #   you specify protocol `58` (ICMPv6) and specify an IPv6 CIDR block, you
     #   must specify an ICMP type and code.
     # @option options [required, String] :rule_action
     #   Indicates whether to allow or deny the traffic that matches the rule.
@@ -404,11 +404,11 @@ module Aws::EC2
     #   The IP protocol. You can specify `all` or `-1` to mean all protocols.
     #   If you specify `all`, `-1`, or a protocol number other than `tcp`,
     #   `udp`, or `icmp`, traffic on all ports is allowed, regardless of any
-    #   ports or ICMP types or codes you specify. If you specify protocol `58`
-    #   (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types
-    #   and codes allowed, regardless of any that you specify. If you specify
-    #   protocol `58` (ICMPv6) and specify an IPv6 CIDR block, you must
-    #   specify an ICMP type and code.
+    #   ports or ICMP types or codes you that specify. If you specify protocol
+    #   `58` (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP
+    #   types and codes allowed, regardless of any that you specify. If you
+    #   specify protocol `58` (ICMPv6) and specify an IPv6 CIDR block, you
+    #   must specify an ICMP type and code.
     # @option options [required, String] :rule_action
     #   Indicates whether to allow or deny the traffic that matches the rule.
     # @option options [required, Integer] :rule_number

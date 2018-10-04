@@ -12,6 +12,7 @@ module Aws::ElasticLoadBalancingV2
     include Seahorse::Model
 
     Action = Shapes::StructureShape.new(name: 'Action')
+    ActionOrder = Shapes::IntegerShape.new(name: 'ActionOrder')
     ActionTypeEnum = Shapes::StringShape.new(name: 'ActionTypeEnum')
     Actions = Shapes::ListShape.new(name: 'Actions')
     AddListenerCertificatesInput = Shapes::StructureShape.new(name: 'AddListenerCertificatesInput')
@@ -20,6 +21,31 @@ module Aws::ElasticLoadBalancingV2
     AddTagsOutput = Shapes::StructureShape.new(name: 'AddTagsOutput')
     AllocationId = Shapes::StringShape.new(name: 'AllocationId')
     AllocationIdNotFoundException = Shapes::StructureShape.new(name: 'AllocationIdNotFoundException')
+    AuthenticateCognitoActionAuthenticationRequestExtraParams = Shapes::MapShape.new(name: 'AuthenticateCognitoActionAuthenticationRequestExtraParams')
+    AuthenticateCognitoActionAuthenticationRequestParamName = Shapes::StringShape.new(name: 'AuthenticateCognitoActionAuthenticationRequestParamName')
+    AuthenticateCognitoActionAuthenticationRequestParamValue = Shapes::StringShape.new(name: 'AuthenticateCognitoActionAuthenticationRequestParamValue')
+    AuthenticateCognitoActionConditionalBehaviorEnum = Shapes::StringShape.new(name: 'AuthenticateCognitoActionConditionalBehaviorEnum')
+    AuthenticateCognitoActionConfig = Shapes::StructureShape.new(name: 'AuthenticateCognitoActionConfig')
+    AuthenticateCognitoActionScope = Shapes::StringShape.new(name: 'AuthenticateCognitoActionScope')
+    AuthenticateCognitoActionSessionCookieName = Shapes::StringShape.new(name: 'AuthenticateCognitoActionSessionCookieName')
+    AuthenticateCognitoActionSessionTimeout = Shapes::IntegerShape.new(name: 'AuthenticateCognitoActionSessionTimeout')
+    AuthenticateCognitoActionUserPoolArn = Shapes::StringShape.new(name: 'AuthenticateCognitoActionUserPoolArn')
+    AuthenticateCognitoActionUserPoolClientId = Shapes::StringShape.new(name: 'AuthenticateCognitoActionUserPoolClientId')
+    AuthenticateCognitoActionUserPoolDomain = Shapes::StringShape.new(name: 'AuthenticateCognitoActionUserPoolDomain')
+    AuthenticateOidcActionAuthenticationRequestExtraParams = Shapes::MapShape.new(name: 'AuthenticateOidcActionAuthenticationRequestExtraParams')
+    AuthenticateOidcActionAuthenticationRequestParamName = Shapes::StringShape.new(name: 'AuthenticateOidcActionAuthenticationRequestParamName')
+    AuthenticateOidcActionAuthenticationRequestParamValue = Shapes::StringShape.new(name: 'AuthenticateOidcActionAuthenticationRequestParamValue')
+    AuthenticateOidcActionAuthorizationEndpoint = Shapes::StringShape.new(name: 'AuthenticateOidcActionAuthorizationEndpoint')
+    AuthenticateOidcActionClientId = Shapes::StringShape.new(name: 'AuthenticateOidcActionClientId')
+    AuthenticateOidcActionClientSecret = Shapes::StringShape.new(name: 'AuthenticateOidcActionClientSecret')
+    AuthenticateOidcActionConditionalBehaviorEnum = Shapes::StringShape.new(name: 'AuthenticateOidcActionConditionalBehaviorEnum')
+    AuthenticateOidcActionConfig = Shapes::StructureShape.new(name: 'AuthenticateOidcActionConfig')
+    AuthenticateOidcActionIssuer = Shapes::StringShape.new(name: 'AuthenticateOidcActionIssuer')
+    AuthenticateOidcActionScope = Shapes::StringShape.new(name: 'AuthenticateOidcActionScope')
+    AuthenticateOidcActionSessionCookieName = Shapes::StringShape.new(name: 'AuthenticateOidcActionSessionCookieName')
+    AuthenticateOidcActionSessionTimeout = Shapes::IntegerShape.new(name: 'AuthenticateOidcActionSessionTimeout')
+    AuthenticateOidcActionTokenEndpoint = Shapes::StringShape.new(name: 'AuthenticateOidcActionTokenEndpoint')
+    AuthenticateOidcActionUserInfoEndpoint = Shapes::StringShape.new(name: 'AuthenticateOidcActionUserInfoEndpoint')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
     AvailabilityZoneNotSupportedException = Shapes::StructureShape.new(name: 'AvailabilityZoneNotSupportedException')
     AvailabilityZones = Shapes::ListShape.new(name: 'AvailabilityZones')
@@ -81,6 +107,10 @@ module Aws::ElasticLoadBalancingV2
     DuplicateLoadBalancerNameException = Shapes::StructureShape.new(name: 'DuplicateLoadBalancerNameException')
     DuplicateTagKeysException = Shapes::StructureShape.new(name: 'DuplicateTagKeysException')
     DuplicateTargetGroupNameException = Shapes::StructureShape.new(name: 'DuplicateTargetGroupNameException')
+    FixedResponseActionConfig = Shapes::StructureShape.new(name: 'FixedResponseActionConfig')
+    FixedResponseActionContentType = Shapes::StringShape.new(name: 'FixedResponseActionContentType')
+    FixedResponseActionMessage = Shapes::StringShape.new(name: 'FixedResponseActionMessage')
+    FixedResponseActionStatusCode = Shapes::StringShape.new(name: 'FixedResponseActionStatusCode')
     HealthCheckIntervalSeconds = Shapes::IntegerShape.new(name: 'HealthCheckIntervalSeconds')
     HealthCheckPort = Shapes::StringShape.new(name: 'HealthCheckPort')
     HealthCheckThresholdCount = Shapes::IntegerShape.new(name: 'HealthCheckThresholdCount')
@@ -89,6 +119,7 @@ module Aws::ElasticLoadBalancingV2
     HttpCode = Shapes::StringShape.new(name: 'HttpCode')
     IncompatibleProtocolsException = Shapes::StructureShape.new(name: 'IncompatibleProtocolsException')
     InvalidConfigurationRequestException = Shapes::StructureShape.new(name: 'InvalidConfigurationRequestException')
+    InvalidLoadBalancerActionException = Shapes::StructureShape.new(name: 'InvalidLoadBalancerActionException')
     InvalidSchemeException = Shapes::StructureShape.new(name: 'InvalidSchemeException')
     InvalidSecurityGroupException = Shapes::StructureShape.new(name: 'InvalidSecurityGroupException')
     InvalidSubnetException = Shapes::StructureShape.new(name: 'InvalidSubnetException')
@@ -141,6 +172,13 @@ module Aws::ElasticLoadBalancingV2
     Port = Shapes::IntegerShape.new(name: 'Port')
     PriorityInUseException = Shapes::StructureShape.new(name: 'PriorityInUseException')
     ProtocolEnum = Shapes::StringShape.new(name: 'ProtocolEnum')
+    RedirectActionConfig = Shapes::StructureShape.new(name: 'RedirectActionConfig')
+    RedirectActionHost = Shapes::StringShape.new(name: 'RedirectActionHost')
+    RedirectActionPath = Shapes::StringShape.new(name: 'RedirectActionPath')
+    RedirectActionPort = Shapes::StringShape.new(name: 'RedirectActionPort')
+    RedirectActionProtocol = Shapes::StringShape.new(name: 'RedirectActionProtocol')
+    RedirectActionQuery = Shapes::StringShape.new(name: 'RedirectActionQuery')
+    RedirectActionStatusCodeEnum = Shapes::StringShape.new(name: 'RedirectActionStatusCodeEnum')
     RegisterTargetsInput = Shapes::StructureShape.new(name: 'RegisterTargetsInput')
     RegisterTargetsOutput = Shapes::StructureShape.new(name: 'RegisterTargetsOutput')
     RemoveListenerCertificatesInput = Shapes::StructureShape.new(name: 'RemoveListenerCertificatesInput')
@@ -213,6 +251,7 @@ module Aws::ElasticLoadBalancingV2
     TargetHealthStateEnum = Shapes::StringShape.new(name: 'TargetHealthStateEnum')
     TargetId = Shapes::StringShape.new(name: 'TargetId')
     TargetTypeEnum = Shapes::StringShape.new(name: 'TargetTypeEnum')
+    TooManyActionsException = Shapes::StructureShape.new(name: 'TooManyActionsException')
     TooManyCertificatesException = Shapes::StructureShape.new(name: 'TooManyCertificatesException')
     TooManyListenersException = Shapes::StructureShape.new(name: 'TooManyListenersException')
     TooManyLoadBalancersException = Shapes::StructureShape.new(name: 'TooManyLoadBalancersException')
@@ -226,7 +265,12 @@ module Aws::ElasticLoadBalancingV2
     ZoneName = Shapes::StringShape.new(name: 'ZoneName')
 
     Action.add_member(:type, Shapes::ShapeRef.new(shape: ActionTypeEnum, required: true, location_name: "Type"))
-    Action.add_member(:target_group_arn, Shapes::ShapeRef.new(shape: TargetGroupArn, required: true, location_name: "TargetGroupArn"))
+    Action.add_member(:target_group_arn, Shapes::ShapeRef.new(shape: TargetGroupArn, location_name: "TargetGroupArn"))
+    Action.add_member(:authenticate_oidc_config, Shapes::ShapeRef.new(shape: AuthenticateOidcActionConfig, location_name: "AuthenticateOidcConfig"))
+    Action.add_member(:authenticate_cognito_config, Shapes::ShapeRef.new(shape: AuthenticateCognitoActionConfig, location_name: "AuthenticateCognitoConfig"))
+    Action.add_member(:order, Shapes::ShapeRef.new(shape: ActionOrder, location_name: "Order"))
+    Action.add_member(:redirect_config, Shapes::ShapeRef.new(shape: RedirectActionConfig, location_name: "RedirectConfig"))
+    Action.add_member(:fixed_response_config, Shapes::ShapeRef.new(shape: FixedResponseActionConfig, location_name: "FixedResponseConfig"))
     Action.struct_class = Types::Action
 
     Actions.member = Shapes::ShapeRef.new(shape: Action)
@@ -243,6 +287,35 @@ module Aws::ElasticLoadBalancingV2
     AddTagsInput.struct_class = Types::AddTagsInput
 
     AddTagsOutput.struct_class = Types::AddTagsOutput
+
+    AuthenticateCognitoActionAuthenticationRequestExtraParams.key = Shapes::ShapeRef.new(shape: AuthenticateCognitoActionAuthenticationRequestParamName)
+    AuthenticateCognitoActionAuthenticationRequestExtraParams.value = Shapes::ShapeRef.new(shape: AuthenticateCognitoActionAuthenticationRequestParamValue)
+
+    AuthenticateCognitoActionConfig.add_member(:user_pool_arn, Shapes::ShapeRef.new(shape: AuthenticateCognitoActionUserPoolArn, required: true, location_name: "UserPoolArn"))
+    AuthenticateCognitoActionConfig.add_member(:user_pool_client_id, Shapes::ShapeRef.new(shape: AuthenticateCognitoActionUserPoolClientId, required: true, location_name: "UserPoolClientId"))
+    AuthenticateCognitoActionConfig.add_member(:user_pool_domain, Shapes::ShapeRef.new(shape: AuthenticateCognitoActionUserPoolDomain, required: true, location_name: "UserPoolDomain"))
+    AuthenticateCognitoActionConfig.add_member(:session_cookie_name, Shapes::ShapeRef.new(shape: AuthenticateCognitoActionSessionCookieName, location_name: "SessionCookieName"))
+    AuthenticateCognitoActionConfig.add_member(:scope, Shapes::ShapeRef.new(shape: AuthenticateCognitoActionScope, location_name: "Scope"))
+    AuthenticateCognitoActionConfig.add_member(:session_timeout, Shapes::ShapeRef.new(shape: AuthenticateCognitoActionSessionTimeout, location_name: "SessionTimeout"))
+    AuthenticateCognitoActionConfig.add_member(:authentication_request_extra_params, Shapes::ShapeRef.new(shape: AuthenticateCognitoActionAuthenticationRequestExtraParams, location_name: "AuthenticationRequestExtraParams"))
+    AuthenticateCognitoActionConfig.add_member(:on_unauthenticated_request, Shapes::ShapeRef.new(shape: AuthenticateCognitoActionConditionalBehaviorEnum, location_name: "OnUnauthenticatedRequest"))
+    AuthenticateCognitoActionConfig.struct_class = Types::AuthenticateCognitoActionConfig
+
+    AuthenticateOidcActionAuthenticationRequestExtraParams.key = Shapes::ShapeRef.new(shape: AuthenticateOidcActionAuthenticationRequestParamName)
+    AuthenticateOidcActionAuthenticationRequestExtraParams.value = Shapes::ShapeRef.new(shape: AuthenticateOidcActionAuthenticationRequestParamValue)
+
+    AuthenticateOidcActionConfig.add_member(:issuer, Shapes::ShapeRef.new(shape: AuthenticateOidcActionIssuer, required: true, location_name: "Issuer"))
+    AuthenticateOidcActionConfig.add_member(:authorization_endpoint, Shapes::ShapeRef.new(shape: AuthenticateOidcActionAuthorizationEndpoint, required: true, location_name: "AuthorizationEndpoint"))
+    AuthenticateOidcActionConfig.add_member(:token_endpoint, Shapes::ShapeRef.new(shape: AuthenticateOidcActionTokenEndpoint, required: true, location_name: "TokenEndpoint"))
+    AuthenticateOidcActionConfig.add_member(:user_info_endpoint, Shapes::ShapeRef.new(shape: AuthenticateOidcActionUserInfoEndpoint, required: true, location_name: "UserInfoEndpoint"))
+    AuthenticateOidcActionConfig.add_member(:client_id, Shapes::ShapeRef.new(shape: AuthenticateOidcActionClientId, required: true, location_name: "ClientId"))
+    AuthenticateOidcActionConfig.add_member(:client_secret, Shapes::ShapeRef.new(shape: AuthenticateOidcActionClientSecret, required: true, location_name: "ClientSecret"))
+    AuthenticateOidcActionConfig.add_member(:session_cookie_name, Shapes::ShapeRef.new(shape: AuthenticateOidcActionSessionCookieName, location_name: "SessionCookieName"))
+    AuthenticateOidcActionConfig.add_member(:scope, Shapes::ShapeRef.new(shape: AuthenticateOidcActionScope, location_name: "Scope"))
+    AuthenticateOidcActionConfig.add_member(:session_timeout, Shapes::ShapeRef.new(shape: AuthenticateOidcActionSessionTimeout, location_name: "SessionTimeout"))
+    AuthenticateOidcActionConfig.add_member(:authentication_request_extra_params, Shapes::ShapeRef.new(shape: AuthenticateOidcActionAuthenticationRequestExtraParams, location_name: "AuthenticationRequestExtraParams"))
+    AuthenticateOidcActionConfig.add_member(:on_unauthenticated_request, Shapes::ShapeRef.new(shape: AuthenticateOidcActionConditionalBehaviorEnum, location_name: "OnUnauthenticatedRequest"))
+    AuthenticateOidcActionConfig.struct_class = Types::AuthenticateOidcActionConfig
 
     AvailabilityZone.add_member(:zone_name, Shapes::ShapeRef.new(shape: ZoneName, location_name: "ZoneName"))
     AvailabilityZone.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId"))
@@ -432,6 +505,11 @@ module Aws::ElasticLoadBalancingV2
     DescribeTargetHealthOutput.add_member(:target_health_descriptions, Shapes::ShapeRef.new(shape: TargetHealthDescriptions, location_name: "TargetHealthDescriptions"))
     DescribeTargetHealthOutput.struct_class = Types::DescribeTargetHealthOutput
 
+    FixedResponseActionConfig.add_member(:message_body, Shapes::ShapeRef.new(shape: FixedResponseActionMessage, location_name: "MessageBody"))
+    FixedResponseActionConfig.add_member(:status_code, Shapes::ShapeRef.new(shape: FixedResponseActionStatusCode, required: true, location_name: "StatusCode"))
+    FixedResponseActionConfig.add_member(:content_type, Shapes::ShapeRef.new(shape: FixedResponseActionContentType, location_name: "ContentType"))
+    FixedResponseActionConfig.struct_class = Types::FixedResponseActionConfig
+
     Limit.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     Limit.add_member(:max, Shapes::ShapeRef.new(shape: Max, location_name: "Max"))
     Limit.struct_class = Types::Limit
@@ -539,6 +617,14 @@ module Aws::ElasticLoadBalancingV2
     ModifyTargetGroupOutput.add_member(:target_groups, Shapes::ShapeRef.new(shape: TargetGroups, location_name: "TargetGroups"))
     ModifyTargetGroupOutput.struct_class = Types::ModifyTargetGroupOutput
 
+    RedirectActionConfig.add_member(:protocol, Shapes::ShapeRef.new(shape: RedirectActionProtocol, location_name: "Protocol"))
+    RedirectActionConfig.add_member(:port, Shapes::ShapeRef.new(shape: RedirectActionPort, location_name: "Port"))
+    RedirectActionConfig.add_member(:host, Shapes::ShapeRef.new(shape: RedirectActionHost, location_name: "Host"))
+    RedirectActionConfig.add_member(:path, Shapes::ShapeRef.new(shape: RedirectActionPath, location_name: "Path"))
+    RedirectActionConfig.add_member(:query, Shapes::ShapeRef.new(shape: RedirectActionQuery, location_name: "Query"))
+    RedirectActionConfig.add_member(:status_code, Shapes::ShapeRef.new(shape: RedirectActionStatusCodeEnum, required: true, location_name: "StatusCode"))
+    RedirectActionConfig.struct_class = Types::RedirectActionConfig
+
     RegisterTargetsInput.add_member(:target_group_arn, Shapes::ShapeRef.new(shape: TargetGroupArn, required: true, location_name: "TargetGroupArn"))
     RegisterTargetsInput.add_member(:targets, Shapes::ShapeRef.new(shape: TargetDescriptions, required: true, location_name: "Targets"))
     RegisterTargetsInput.struct_class = Types::RegisterTargetsInput
@@ -605,7 +691,7 @@ module Aws::ElasticLoadBalancingV2
     SetSecurityGroupsOutput.struct_class = Types::SetSecurityGroupsOutput
 
     SetSubnetsInput.add_member(:load_balancer_arn, Shapes::ShapeRef.new(shape: LoadBalancerArn, required: true, location_name: "LoadBalancerArn"))
-    SetSubnetsInput.add_member(:subnets, Shapes::ShapeRef.new(shape: Subnets, required: true, location_name: "Subnets"))
+    SetSubnetsInput.add_member(:subnets, Shapes::ShapeRef.new(shape: Subnets, location_name: "Subnets"))
     SetSubnetsInput.add_member(:subnet_mappings, Shapes::ShapeRef.new(shape: SubnetMappings, location_name: "SubnetMappings"))
     SetSubnetsInput.struct_class = Types::SetSubnetsInput
 
@@ -700,10 +786,14 @@ module Aws::ElasticLoadBalancingV2
       api.version = "2015-12-01"
 
       api.metadata = {
+        "apiVersion" => "2015-12-01",
         "endpointPrefix" => "elasticloadbalancing",
         "protocol" => "query",
+        "serviceAbbreviation" => "Elastic Load Balancing v2",
         "serviceFullName" => "Elastic Load Balancing",
+        "serviceId" => "Elastic Load Balancing v2",
         "signatureVersion" => "v4",
+        "uid" => "elasticloadbalancingv2-2015-12-01",
         "xmlNamespace" => "http://elasticloadbalancing.amazonaws.com/doc/2015-12-01/",
       }
 
@@ -749,6 +839,8 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedProtocolException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRegistrationsForTargetIdException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTargetsException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyActionsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLoadBalancerActionException)
       end)
 
       api.add_operation(:create_load_balancer, Seahorse::Model::Operation.new.tap do |o|
@@ -788,6 +880,9 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRegistrationsForTargetIdException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTargetsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedProtocolException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyActionsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLoadBalancerActionException)
       end)
 
       api.add_operation(:create_target_group, Seahorse::Model::Operation.new.tap do |o|
@@ -875,6 +970,7 @@ module Aws::ElasticLoadBalancingV2
         o.output = Shapes::ShapeRef.new(shape: DescribeListenersOutput)
         o.errors << Shapes::ShapeRef.new(shape: ListenerNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LoadBalancerNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedProtocolException)
         o[:pager] = Aws::Pager.new(
           tokens: {
             "next_marker" => "marker"
@@ -913,6 +1009,7 @@ module Aws::ElasticLoadBalancingV2
         o.output = Shapes::ShapeRef.new(shape: DescribeRulesOutput)
         o.errors << Shapes::ShapeRef.new(shape: ListenerNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: RuleNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedProtocolException)
       end)
 
       api.add_operation(:describe_ssl_policies, Seahorse::Model::Operation.new.tap do |o|
@@ -990,6 +1087,8 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedProtocolException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRegistrationsForTargetIdException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTargetsException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyActionsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLoadBalancerActionException)
       end)
 
       api.add_operation(:modify_load_balancer_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -1015,6 +1114,9 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: TooManyRegistrationsForTargetIdException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTargetsException)
         o.errors << Shapes::ShapeRef.new(shape: TargetGroupNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedProtocolException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyActionsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLoadBalancerActionException)
       end)
 
       api.add_operation(:modify_target_group, Seahorse::Model::Operation.new.tap do |o|

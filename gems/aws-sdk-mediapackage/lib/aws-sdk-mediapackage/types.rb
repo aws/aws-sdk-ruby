@@ -315,6 +315,7 @@ module Aws::MediaPackage
     #           manifest_window_seconds: 1,
     #           min_buffer_time_seconds: 1,
     #           min_update_period_seconds: 1,
+    #           period_triggers: ["ADS"], # accepts ADS
     #           profile: "NONE", # accepts NONE, HBBTV_1_5
     #           segment_duration_seconds: 1,
     #           stream_selection: {
@@ -545,6 +546,7 @@ module Aws::MediaPackage
     #         manifest_window_seconds: 1,
     #         min_buffer_time_seconds: 1,
     #         min_update_period_seconds: 1,
+    #         period_triggers: ["ADS"], # accepts ADS
     #         profile: "NONE", # accepts NONE, HBBTV_1_5
     #         segment_duration_seconds: 1,
     #         stream_selection: {
@@ -575,6 +577,15 @@ module Aws::MediaPackage
     #   Description (MPD).
     #   @return [Integer]
     #
+    # @!attribute [rw] period_triggers
+    #   A list of triggers that controls when the outgoing Dynamic Adaptive
+    #   Streaming over HTTP (DASH) Media Presentation Description (MPD) will
+    #   be partitioned into multiple periods. If empty, the content will not
+    #   be partitioned into more than one period. If the list contains
+    #   "ADS", new periods will be created where the Channel source
+    #   contains SCTE-35 ad markers.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] profile
     #   The Dynamic Adaptive Streaming over HTTP (DASH) profile type. When
     #   set to "HBBTV\_1\_5", HbbTV 1.5 compliant output is enabled.
@@ -600,6 +611,7 @@ module Aws::MediaPackage
       :manifest_window_seconds,
       :min_buffer_time_seconds,
       :min_update_period_seconds,
+      :period_triggers,
       :profile,
       :segment_duration_seconds,
       :stream_selection,
@@ -1080,6 +1092,10 @@ module Aws::MediaPackage
 
     # An endpoint for ingesting source content for a Channel.
     #
+    # @!attribute [rw] id
+    #   The system generated unique identifier for the IngestEndpoint
+    #   @return [String]
+    #
     # @!attribute [rw] password
     #   The system generated password for ingest authentication.
     #   @return [String]
@@ -1095,6 +1111,7 @@ module Aws::MediaPackage
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/IngestEndpoint AWS API Documentation
     #
     class IngestEndpoint < Struct.new(
+      :id,
       :password,
       :url,
       :username)
@@ -1523,6 +1540,51 @@ module Aws::MediaPackage
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RotateIngestEndpointCredentialsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "__string", # required
+    #         ingest_endpoint_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] ingest_endpoint_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/RotateIngestEndpointCredentialsRequest AWS API Documentation
+    #
+    class RotateIngestEndpointCredentialsRequest < Struct.new(
+      :id,
+      :ingest_endpoint_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] hls_ingest
+    #   An HTTP Live Streaming (HLS) ingest resource configuration.
+    #   @return [Types::HlsIngest]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/RotateIngestEndpointCredentialsResponse AWS API Documentation
+    #
+    class RotateIngestEndpointCredentialsResponse < Struct.new(
+      :arn,
+      :description,
+      :hls_ingest,
+      :id)
+      include Aws::Structure
+    end
+
     # A configuration for accessing an external Secure Packager and Encoder
     # Key Exchange (SPEKE) service that will provide encryption keys.
     #
@@ -1686,6 +1748,7 @@ module Aws::MediaPackage
     #           manifest_window_seconds: 1,
     #           min_buffer_time_seconds: 1,
     #           min_update_period_seconds: 1,
+    #           period_triggers: ["ADS"], # accepts ADS
     #           profile: "NONE", # accepts NONE, HBBTV_1_5
     #           segment_duration_seconds: 1,
     #           stream_selection: {

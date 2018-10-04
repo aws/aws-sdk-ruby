@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -47,6 +49,8 @@ module Aws::CodeBuild
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -92,6 +96,22 @@ module Aws::CodeBuild
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::CodeBuild
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -477,19 +508,44 @@ module Aws::CodeBuild
     #   resp.builds[0].phases[0].contexts #=> Array
     #   resp.builds[0].phases[0].contexts[0].status_code #=> String
     #   resp.builds[0].phases[0].contexts[0].message #=> String
-    #   resp.builds[0].source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE"
+    #   resp.builds[0].source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.builds[0].source.location #=> String
     #   resp.builds[0].source.git_clone_depth #=> Integer
     #   resp.builds[0].source.buildspec #=> String
     #   resp.builds[0].source.auth.type #=> String, one of "OAUTH"
     #   resp.builds[0].source.auth.resource #=> String
+    #   resp.builds[0].source.report_build_status #=> Boolean
     #   resp.builds[0].source.insecure_ssl #=> Boolean
+    #   resp.builds[0].source.source_identifier #=> String
+    #   resp.builds[0].secondary_sources #=> Array
+    #   resp.builds[0].secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.builds[0].secondary_sources[0].location #=> String
+    #   resp.builds[0].secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.builds[0].secondary_sources[0].buildspec #=> String
+    #   resp.builds[0].secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.builds[0].secondary_sources[0].auth.resource #=> String
+    #   resp.builds[0].secondary_sources[0].report_build_status #=> Boolean
+    #   resp.builds[0].secondary_sources[0].insecure_ssl #=> Boolean
+    #   resp.builds[0].secondary_sources[0].source_identifier #=> String
+    #   resp.builds[0].secondary_source_versions #=> Array
+    #   resp.builds[0].secondary_source_versions[0].source_identifier #=> String
+    #   resp.builds[0].secondary_source_versions[0].source_version #=> String
     #   resp.builds[0].artifacts.location #=> String
     #   resp.builds[0].artifacts.sha256sum #=> String
     #   resp.builds[0].artifacts.md5sum #=> String
+    #   resp.builds[0].artifacts.override_artifact_name #=> Boolean
+    #   resp.builds[0].artifacts.encryption_disabled #=> Boolean
+    #   resp.builds[0].artifacts.artifact_identifier #=> String
+    #   resp.builds[0].secondary_artifacts #=> Array
+    #   resp.builds[0].secondary_artifacts[0].location #=> String
+    #   resp.builds[0].secondary_artifacts[0].sha256sum #=> String
+    #   resp.builds[0].secondary_artifacts[0].md5sum #=> String
+    #   resp.builds[0].secondary_artifacts[0].override_artifact_name #=> Boolean
+    #   resp.builds[0].secondary_artifacts[0].encryption_disabled #=> Boolean
+    #   resp.builds[0].secondary_artifacts[0].artifact_identifier #=> String
     #   resp.builds[0].cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.builds[0].cache.location #=> String
-    #   resp.builds[0].environment.type #=> String, one of "LINUX_CONTAINER"
+    #   resp.builds[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.builds[0].environment.image #=> String
     #   resp.builds[0].environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
     #   resp.builds[0].environment.environment_variables #=> Array
@@ -502,6 +558,12 @@ module Aws::CodeBuild
     #   resp.builds[0].logs.group_name #=> String
     #   resp.builds[0].logs.stream_name #=> String
     #   resp.builds[0].logs.deep_link #=> String
+    #   resp.builds[0].logs.s3_deep_link #=> String
+    #   resp.builds[0].logs.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.builds[0].logs.cloud_watch_logs.group_name #=> String
+    #   resp.builds[0].logs.cloud_watch_logs.stream_name #=> String
+    #   resp.builds[0].logs.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.builds[0].logs.s3_logs.location #=> String
     #   resp.builds[0].timeout_in_minutes #=> Integer
     #   resp.builds[0].build_complete #=> Boolean
     #   resp.builds[0].initiator #=> String
@@ -512,6 +574,7 @@ module Aws::CodeBuild
     #   resp.builds[0].vpc_config.security_group_ids[0] #=> String
     #   resp.builds[0].network_interface.subnet_id #=> String
     #   resp.builds[0].network_interface.network_interface_id #=> String
+    #   resp.builds[0].encryption_key #=> String
     #   resp.builds_not_found #=> Array
     #   resp.builds_not_found[0] #=> String
     #
@@ -546,22 +609,47 @@ module Aws::CodeBuild
     #   resp.projects[0].name #=> String
     #   resp.projects[0].arn #=> String
     #   resp.projects[0].description #=> String
-    #   resp.projects[0].source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE"
+    #   resp.projects[0].source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.projects[0].source.location #=> String
     #   resp.projects[0].source.git_clone_depth #=> Integer
     #   resp.projects[0].source.buildspec #=> String
     #   resp.projects[0].source.auth.type #=> String, one of "OAUTH"
     #   resp.projects[0].source.auth.resource #=> String
+    #   resp.projects[0].source.report_build_status #=> Boolean
     #   resp.projects[0].source.insecure_ssl #=> Boolean
+    #   resp.projects[0].source.source_identifier #=> String
+    #   resp.projects[0].secondary_sources #=> Array
+    #   resp.projects[0].secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.projects[0].secondary_sources[0].location #=> String
+    #   resp.projects[0].secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.projects[0].secondary_sources[0].buildspec #=> String
+    #   resp.projects[0].secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.projects[0].secondary_sources[0].auth.resource #=> String
+    #   resp.projects[0].secondary_sources[0].report_build_status #=> Boolean
+    #   resp.projects[0].secondary_sources[0].insecure_ssl #=> Boolean
+    #   resp.projects[0].secondary_sources[0].source_identifier #=> String
     #   resp.projects[0].artifacts.type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.projects[0].artifacts.location #=> String
     #   resp.projects[0].artifacts.path #=> String
     #   resp.projects[0].artifacts.namespace_type #=> String, one of "NONE", "BUILD_ID"
     #   resp.projects[0].artifacts.name #=> String
     #   resp.projects[0].artifacts.packaging #=> String, one of "NONE", "ZIP"
+    #   resp.projects[0].artifacts.override_artifact_name #=> Boolean
+    #   resp.projects[0].artifacts.encryption_disabled #=> Boolean
+    #   resp.projects[0].artifacts.artifact_identifier #=> String
+    #   resp.projects[0].secondary_artifacts #=> Array
+    #   resp.projects[0].secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
+    #   resp.projects[0].secondary_artifacts[0].location #=> String
+    #   resp.projects[0].secondary_artifacts[0].path #=> String
+    #   resp.projects[0].secondary_artifacts[0].namespace_type #=> String, one of "NONE", "BUILD_ID"
+    #   resp.projects[0].secondary_artifacts[0].name #=> String
+    #   resp.projects[0].secondary_artifacts[0].packaging #=> String, one of "NONE", "ZIP"
+    #   resp.projects[0].secondary_artifacts[0].override_artifact_name #=> Boolean
+    #   resp.projects[0].secondary_artifacts[0].encryption_disabled #=> Boolean
+    #   resp.projects[0].secondary_artifacts[0].artifact_identifier #=> String
     #   resp.projects[0].cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.projects[0].cache.location #=> String
-    #   resp.projects[0].environment.type #=> String, one of "LINUX_CONTAINER"
+    #   resp.projects[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.projects[0].environment.image #=> String
     #   resp.projects[0].environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
     #   resp.projects[0].environment.environment_variables #=> Array
@@ -590,6 +678,11 @@ module Aws::CodeBuild
     #   resp.projects[0].vpc_config.security_group_ids[0] #=> String
     #   resp.projects[0].badge.badge_enabled #=> Boolean
     #   resp.projects[0].badge.badge_request_url #=> String
+    #   resp.projects[0].logs_config.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.projects[0].logs_config.cloud_watch_logs.group_name #=> String
+    #   resp.projects[0].logs_config.cloud_watch_logs.stream_name #=> String
+    #   resp.projects[0].logs_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.projects[0].logs_config.s3_logs.location #=> String
     #   resp.projects_not_found #=> Array
     #   resp.projects_not_found[0] #=> String
     #
@@ -613,8 +706,14 @@ module Aws::CodeBuild
     # @option params [required, Types::ProjectSource] :source
     #   Information about the build input source code for the build project.
     #
+    # @option params [Array<Types::ProjectSource>] :secondary_sources
+    #   An array of `ProjectSource` objects.
+    #
     # @option params [required, Types::ProjectArtifacts] :artifacts
     #   Information about the build output artifacts for the build project.
+    #
+    # @option params [Array<Types::ProjectArtifacts>] :secondary_artifacts
+    #   An array of `ProjectArtifacts` objects.
     #
     # @option params [Types::ProjectCache] :cache
     #   Stores recently used information so that it can be quickly accessed at
@@ -623,7 +722,7 @@ module Aws::CodeBuild
     # @option params [required, Types::ProjectEnvironment] :environment
     #   Information about the build environment for the build project.
     #
-    # @option params [String] :service_role
+    # @option params [required, String] :service_role
     #   The ARN of the AWS Identity and Access Management (IAM) role that
     #   enables AWS CodeBuild to interact with dependent AWS services on
     #   behalf of the AWS account.
@@ -653,6 +752,10 @@ module Aws::CodeBuild
     #   Set this to true to generate a publicly-accessible URL for your
     #   project's build badge.
     #
+    # @option params [Types::LogsConfig] :logs_config
+    #   Information about logs for the build project. Logs can be Amazon
+    #   CloudWatch Logs, uploaded to a specified S3 bucket, or both.
+    #
     # @return [Types::CreateProjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateProjectOutput#project #project} => Types::Project
@@ -663,7 +766,7 @@ module Aws::CodeBuild
     #     name: "ProjectName", # required
     #     description: "ProjectDescription",
     #     source: { # required
-    #       type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE
+    #       type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #       location: "String",
     #       git_clone_depth: 1,
     #       buildspec: "String",
@@ -671,8 +774,25 @@ module Aws::CodeBuild
     #         type: "OAUTH", # required, accepts OAUTH
     #         resource: "String",
     #       },
+    #       report_build_status: false,
     #       insecure_ssl: false,
+    #       source_identifier: "String",
     #     },
+    #     secondary_sources: [
+    #       {
+    #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
+    #         location: "String",
+    #         git_clone_depth: 1,
+    #         buildspec: "String",
+    #         auth: {
+    #           type: "OAUTH", # required, accepts OAUTH
+    #           resource: "String",
+    #         },
+    #         report_build_status: false,
+    #         insecure_ssl: false,
+    #         source_identifier: "String",
+    #       },
+    #     ],
     #     artifacts: { # required
     #       type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
     #       location: "String",
@@ -680,13 +800,29 @@ module Aws::CodeBuild
     #       namespace_type: "NONE", # accepts NONE, BUILD_ID
     #       name: "String",
     #       packaging: "NONE", # accepts NONE, ZIP
+    #       override_artifact_name: false,
+    #       encryption_disabled: false,
+    #       artifact_identifier: "String",
     #     },
+    #     secondary_artifacts: [
+    #       {
+    #         type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
+    #         location: "String",
+    #         path: "String",
+    #         namespace_type: "NONE", # accepts NONE, BUILD_ID
+    #         name: "String",
+    #         packaging: "NONE", # accepts NONE, ZIP
+    #         override_artifact_name: false,
+    #         encryption_disabled: false,
+    #         artifact_identifier: "String",
+    #       },
+    #     ],
     #     cache: {
     #       type: "NO_CACHE", # required, accepts NO_CACHE, S3
     #       location: "String",
     #     },
     #     environment: { # required
-    #       type: "LINUX_CONTAINER", # required, accepts LINUX_CONTAINER
+    #       type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER
     #       image: "NonEmptyString", # required
     #       compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
     #       environment_variables: [
@@ -699,7 +835,7 @@ module Aws::CodeBuild
     #       privileged_mode: false,
     #       certificate: "String",
     #     },
-    #     service_role: "NonEmptyString",
+    #     service_role: "NonEmptyString", # required
     #     timeout_in_minutes: 1,
     #     encryption_key: "NonEmptyString",
     #     tags: [
@@ -714,6 +850,17 @@ module Aws::CodeBuild
     #       security_group_ids: ["NonEmptyString"],
     #     },
     #     badge_enabled: false,
+    #     logs_config: {
+    #       cloud_watch_logs: {
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         group_name: "String",
+    #         stream_name: "String",
+    #       },
+    #       s3_logs: {
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         location: "String",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -721,22 +868,47 @@ module Aws::CodeBuild
     #   resp.project.name #=> String
     #   resp.project.arn #=> String
     #   resp.project.description #=> String
-    #   resp.project.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE"
+    #   resp.project.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.project.source.location #=> String
     #   resp.project.source.git_clone_depth #=> Integer
     #   resp.project.source.buildspec #=> String
     #   resp.project.source.auth.type #=> String, one of "OAUTH"
     #   resp.project.source.auth.resource #=> String
+    #   resp.project.source.report_build_status #=> Boolean
     #   resp.project.source.insecure_ssl #=> Boolean
+    #   resp.project.source.source_identifier #=> String
+    #   resp.project.secondary_sources #=> Array
+    #   resp.project.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.project.secondary_sources[0].location #=> String
+    #   resp.project.secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.project.secondary_sources[0].buildspec #=> String
+    #   resp.project.secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.project.secondary_sources[0].auth.resource #=> String
+    #   resp.project.secondary_sources[0].report_build_status #=> Boolean
+    #   resp.project.secondary_sources[0].insecure_ssl #=> Boolean
+    #   resp.project.secondary_sources[0].source_identifier #=> String
     #   resp.project.artifacts.type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.project.artifacts.location #=> String
     #   resp.project.artifacts.path #=> String
     #   resp.project.artifacts.namespace_type #=> String, one of "NONE", "BUILD_ID"
     #   resp.project.artifacts.name #=> String
     #   resp.project.artifacts.packaging #=> String, one of "NONE", "ZIP"
+    #   resp.project.artifacts.override_artifact_name #=> Boolean
+    #   resp.project.artifacts.encryption_disabled #=> Boolean
+    #   resp.project.artifacts.artifact_identifier #=> String
+    #   resp.project.secondary_artifacts #=> Array
+    #   resp.project.secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
+    #   resp.project.secondary_artifacts[0].location #=> String
+    #   resp.project.secondary_artifacts[0].path #=> String
+    #   resp.project.secondary_artifacts[0].namespace_type #=> String, one of "NONE", "BUILD_ID"
+    #   resp.project.secondary_artifacts[0].name #=> String
+    #   resp.project.secondary_artifacts[0].packaging #=> String, one of "NONE", "ZIP"
+    #   resp.project.secondary_artifacts[0].override_artifact_name #=> Boolean
+    #   resp.project.secondary_artifacts[0].encryption_disabled #=> Boolean
+    #   resp.project.secondary_artifacts[0].artifact_identifier #=> String
     #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.project.cache.location #=> String
-    #   resp.project.environment.type #=> String, one of "LINUX_CONTAINER"
+    #   resp.project.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.project.environment.image #=> String
     #   resp.project.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
     #   resp.project.environment.environment_variables #=> Array
@@ -765,6 +937,11 @@ module Aws::CodeBuild
     #   resp.project.vpc_config.security_group_ids[0] #=> String
     #   resp.project.badge.badge_enabled #=> Boolean
     #   resp.project.badge.badge_request_url #=> String
+    #   resp.project.logs_config.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.project.logs_config.cloud_watch_logs.group_name #=> String
+    #   resp.project.logs_config.cloud_watch_logs.stream_name #=> String
+    #   resp.project.logs_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.project.logs_config.s3_logs.location #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProject AWS API Documentation
     #
@@ -1007,7 +1184,7 @@ module Aws::CodeBuild
     # @example Response structure
     #
     #   resp.platforms #=> Array
-    #   resp.platforms[0].platform #=> String, one of "DEBIAN", "AMAZON_LINUX", "UBUNTU"
+    #   resp.platforms[0].platform #=> String, one of "DEBIAN", "AMAZON_LINUX", "UBUNTU", "WINDOWS_SERVER"
     #   resp.platforms[0].languages #=> Array
     #   resp.platforms[0].languages[0].language #=> String, one of "JAVA", "PYTHON", "NODE_JS", "RUBY", "GOLANG", "DOCKER", "ANDROID", "DOTNET", "BASE"
     #   resp.platforms[0].languages[0].images #=> Array
@@ -1096,6 +1273,14 @@ module Aws::CodeBuild
     # @option params [required, String] :project_name
     #   The name of the AWS CodeBuild build project to start running a build.
     #
+    # @option params [Array<Types::ProjectSource>] :secondary_sources_override
+    #   An array of `ProjectSource` objects.
+    #
+    # @option params [Array<Types::ProjectSourceVersion>] :secondary_sources_version_override
+    #   An array of `ProjectSourceVersion` objects that specify one or more
+    #   versions of the project's secondary sources to be used for this build
+    #   only.
+    #
     # @option params [String] :source_version
     #   A version of the build input to be built, for this build only. If not
     #   specified, the latest version will be used. If specified, must be one
@@ -1123,13 +1308,16 @@ module Aws::CodeBuild
     #   Build output artifact settings that override, for this build only, the
     #   latest ones already defined in the build project.
     #
+    # @option params [Array<Types::ProjectArtifacts>] :secondary_artifacts_override
+    #   An array of `ProjectArtifacts` objects.
+    #
     # @option params [Array<Types::EnvironmentVariable>] :environment_variables_override
     #   A set of environment variables that overrides, for this build only,
     #   the latest ones already defined in the build project.
     #
     # @option params [String] :source_type_override
     #   A source input type for this build that overrides the source input
-    #   defined in the build project
+    #   defined in the build project.
     #
     # @option params [String] :source_location_override
     #   A location that overrides for this build the source location for the
@@ -1155,6 +1343,11 @@ module Aws::CodeBuild
     #   whether to ignore SSL warnings while connecting to the project source
     #   code. This override applies only if the build's source is GitHub
     #   Enterprise.
+    #
+    # @option params [Boolean] :report_build_status_override
+    #   Set to true to report to your source provider the status of a build's
+    #   start and completion. If you use this option with a source provider
+    #   other than GitHub, an invalidInputException is thrown.
     #
     # @option params [String] :environment_type_override
     #   A container type for this build that overrides the one specified in
@@ -1195,6 +1388,10 @@ module Aws::CodeBuild
     #   StartBuild request with the same token, but change a parameter, AWS
     #   CodeBuild returns a parameter mismatch error.
     #
+    # @option params [Types::LogsConfig] :logs_config_override
+    #   Log settings for this build that override the log settings defined in
+    #   the build project.
+    #
     # @return [Types::StartBuildOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartBuildOutput#build #build} => Types::Build
@@ -1203,6 +1400,27 @@ module Aws::CodeBuild
     #
     #   resp = client.start_build({
     #     project_name: "NonEmptyString", # required
+    #     secondary_sources_override: [
+    #       {
+    #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
+    #         location: "String",
+    #         git_clone_depth: 1,
+    #         buildspec: "String",
+    #         auth: {
+    #           type: "OAUTH", # required, accepts OAUTH
+    #           resource: "String",
+    #         },
+    #         report_build_status: false,
+    #         insecure_ssl: false,
+    #         source_identifier: "String",
+    #       },
+    #     ],
+    #     secondary_sources_version_override: [
+    #       {
+    #         source_identifier: "String", # required
+    #         source_version: "String", # required
+    #       },
+    #     ],
     #     source_version: "String",
     #     artifacts_override: {
     #       type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
@@ -1211,7 +1429,23 @@ module Aws::CodeBuild
     #       namespace_type: "NONE", # accepts NONE, BUILD_ID
     #       name: "String",
     #       packaging: "NONE", # accepts NONE, ZIP
+    #       override_artifact_name: false,
+    #       encryption_disabled: false,
+    #       artifact_identifier: "String",
     #     },
+    #     secondary_artifacts_override: [
+    #       {
+    #         type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
+    #         location: "String",
+    #         path: "String",
+    #         namespace_type: "NONE", # accepts NONE, BUILD_ID
+    #         name: "String",
+    #         packaging: "NONE", # accepts NONE, ZIP
+    #         override_artifact_name: false,
+    #         encryption_disabled: false,
+    #         artifact_identifier: "String",
+    #       },
+    #     ],
     #     environment_variables_override: [
     #       {
     #         name: "NonEmptyString", # required
@@ -1219,7 +1453,7 @@ module Aws::CodeBuild
     #         type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE
     #       },
     #     ],
-    #     source_type_override: "CODECOMMIT", # accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE
+    #     source_type_override: "CODECOMMIT", # accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #     source_location_override: "String",
     #     source_auth_override: {
     #       type: "OAUTH", # required, accepts OAUTH
@@ -1228,7 +1462,8 @@ module Aws::CodeBuild
     #     git_clone_depth_override: 1,
     #     buildspec_override: "String",
     #     insecure_ssl_override: false,
-    #     environment_type_override: "LINUX_CONTAINER", # accepts LINUX_CONTAINER
+    #     report_build_status_override: false,
+    #     environment_type_override: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER
     #     image_override: "NonEmptyString",
     #     compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
     #     certificate_override: "String",
@@ -1240,6 +1475,17 @@ module Aws::CodeBuild
     #     privileged_mode_override: false,
     #     timeout_in_minutes_override: 1,
     #     idempotency_token: "String",
+    #     logs_config_override: {
+    #       cloud_watch_logs: {
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         group_name: "String",
+    #         stream_name: "String",
+    #       },
+    #       s3_logs: {
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         location: "String",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1261,19 +1507,44 @@ module Aws::CodeBuild
     #   resp.build.phases[0].contexts #=> Array
     #   resp.build.phases[0].contexts[0].status_code #=> String
     #   resp.build.phases[0].contexts[0].message #=> String
-    #   resp.build.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE"
+    #   resp.build.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.build.source.location #=> String
     #   resp.build.source.git_clone_depth #=> Integer
     #   resp.build.source.buildspec #=> String
     #   resp.build.source.auth.type #=> String, one of "OAUTH"
     #   resp.build.source.auth.resource #=> String
+    #   resp.build.source.report_build_status #=> Boolean
     #   resp.build.source.insecure_ssl #=> Boolean
+    #   resp.build.source.source_identifier #=> String
+    #   resp.build.secondary_sources #=> Array
+    #   resp.build.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build.secondary_sources[0].location #=> String
+    #   resp.build.secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.build.secondary_sources[0].buildspec #=> String
+    #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.build.secondary_sources[0].auth.resource #=> String
+    #   resp.build.secondary_sources[0].report_build_status #=> Boolean
+    #   resp.build.secondary_sources[0].insecure_ssl #=> Boolean
+    #   resp.build.secondary_sources[0].source_identifier #=> String
+    #   resp.build.secondary_source_versions #=> Array
+    #   resp.build.secondary_source_versions[0].source_identifier #=> String
+    #   resp.build.secondary_source_versions[0].source_version #=> String
     #   resp.build.artifacts.location #=> String
     #   resp.build.artifacts.sha256sum #=> String
     #   resp.build.artifacts.md5sum #=> String
+    #   resp.build.artifacts.override_artifact_name #=> Boolean
+    #   resp.build.artifacts.encryption_disabled #=> Boolean
+    #   resp.build.artifacts.artifact_identifier #=> String
+    #   resp.build.secondary_artifacts #=> Array
+    #   resp.build.secondary_artifacts[0].location #=> String
+    #   resp.build.secondary_artifacts[0].sha256sum #=> String
+    #   resp.build.secondary_artifacts[0].md5sum #=> String
+    #   resp.build.secondary_artifacts[0].override_artifact_name #=> Boolean
+    #   resp.build.secondary_artifacts[0].encryption_disabled #=> Boolean
+    #   resp.build.secondary_artifacts[0].artifact_identifier #=> String
     #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.build.cache.location #=> String
-    #   resp.build.environment.type #=> String, one of "LINUX_CONTAINER"
+    #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.build.environment.image #=> String
     #   resp.build.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
     #   resp.build.environment.environment_variables #=> Array
@@ -1286,6 +1557,12 @@ module Aws::CodeBuild
     #   resp.build.logs.group_name #=> String
     #   resp.build.logs.stream_name #=> String
     #   resp.build.logs.deep_link #=> String
+    #   resp.build.logs.s3_deep_link #=> String
+    #   resp.build.logs.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.build.logs.cloud_watch_logs.group_name #=> String
+    #   resp.build.logs.cloud_watch_logs.stream_name #=> String
+    #   resp.build.logs.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.build.logs.s3_logs.location #=> String
     #   resp.build.timeout_in_minutes #=> Integer
     #   resp.build.build_complete #=> Boolean
     #   resp.build.initiator #=> String
@@ -1296,6 +1573,7 @@ module Aws::CodeBuild
     #   resp.build.vpc_config.security_group_ids[0] #=> String
     #   resp.build.network_interface.subnet_id #=> String
     #   resp.build.network_interface.network_interface_id #=> String
+    #   resp.build.encryption_key #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuild AWS API Documentation
     #
@@ -1340,19 +1618,44 @@ module Aws::CodeBuild
     #   resp.build.phases[0].contexts #=> Array
     #   resp.build.phases[0].contexts[0].status_code #=> String
     #   resp.build.phases[0].contexts[0].message #=> String
-    #   resp.build.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE"
+    #   resp.build.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.build.source.location #=> String
     #   resp.build.source.git_clone_depth #=> Integer
     #   resp.build.source.buildspec #=> String
     #   resp.build.source.auth.type #=> String, one of "OAUTH"
     #   resp.build.source.auth.resource #=> String
+    #   resp.build.source.report_build_status #=> Boolean
     #   resp.build.source.insecure_ssl #=> Boolean
+    #   resp.build.source.source_identifier #=> String
+    #   resp.build.secondary_sources #=> Array
+    #   resp.build.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build.secondary_sources[0].location #=> String
+    #   resp.build.secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.build.secondary_sources[0].buildspec #=> String
+    #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.build.secondary_sources[0].auth.resource #=> String
+    #   resp.build.secondary_sources[0].report_build_status #=> Boolean
+    #   resp.build.secondary_sources[0].insecure_ssl #=> Boolean
+    #   resp.build.secondary_sources[0].source_identifier #=> String
+    #   resp.build.secondary_source_versions #=> Array
+    #   resp.build.secondary_source_versions[0].source_identifier #=> String
+    #   resp.build.secondary_source_versions[0].source_version #=> String
     #   resp.build.artifacts.location #=> String
     #   resp.build.artifacts.sha256sum #=> String
     #   resp.build.artifacts.md5sum #=> String
+    #   resp.build.artifacts.override_artifact_name #=> Boolean
+    #   resp.build.artifacts.encryption_disabled #=> Boolean
+    #   resp.build.artifacts.artifact_identifier #=> String
+    #   resp.build.secondary_artifacts #=> Array
+    #   resp.build.secondary_artifacts[0].location #=> String
+    #   resp.build.secondary_artifacts[0].sha256sum #=> String
+    #   resp.build.secondary_artifacts[0].md5sum #=> String
+    #   resp.build.secondary_artifacts[0].override_artifact_name #=> Boolean
+    #   resp.build.secondary_artifacts[0].encryption_disabled #=> Boolean
+    #   resp.build.secondary_artifacts[0].artifact_identifier #=> String
     #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.build.cache.location #=> String
-    #   resp.build.environment.type #=> String, one of "LINUX_CONTAINER"
+    #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.build.environment.image #=> String
     #   resp.build.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
     #   resp.build.environment.environment_variables #=> Array
@@ -1365,6 +1668,12 @@ module Aws::CodeBuild
     #   resp.build.logs.group_name #=> String
     #   resp.build.logs.stream_name #=> String
     #   resp.build.logs.deep_link #=> String
+    #   resp.build.logs.s3_deep_link #=> String
+    #   resp.build.logs.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.build.logs.cloud_watch_logs.group_name #=> String
+    #   resp.build.logs.cloud_watch_logs.stream_name #=> String
+    #   resp.build.logs.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.build.logs.s3_logs.location #=> String
     #   resp.build.timeout_in_minutes #=> Integer
     #   resp.build.build_complete #=> Boolean
     #   resp.build.initiator #=> String
@@ -1375,6 +1684,7 @@ module Aws::CodeBuild
     #   resp.build.vpc_config.security_group_ids[0] #=> String
     #   resp.build.network_interface.subnet_id #=> String
     #   resp.build.network_interface.network_interface_id #=> String
+    #   resp.build.encryption_key #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StopBuild AWS API Documentation
     #
@@ -1401,9 +1711,15 @@ module Aws::CodeBuild
     #   Information to be changed about the build input source code for the
     #   build project.
     #
+    # @option params [Array<Types::ProjectSource>] :secondary_sources
+    #   An array of `ProjectSource` objects.
+    #
     # @option params [Types::ProjectArtifacts] :artifacts
     #   Information to be changed about the build output artifacts for the
     #   build project.
+    #
+    # @option params [Array<Types::ProjectArtifacts>] :secondary_artifacts
+    #   An array of `ProjectSource` objects.
     #
     # @option params [Types::ProjectCache] :cache
     #   Stores recently used information so that it can be quickly accessed at
@@ -1443,6 +1759,10 @@ module Aws::CodeBuild
     #   Set this to true to generate a publicly-accessible URL for your
     #   project's build badge.
     #
+    # @option params [Types::LogsConfig] :logs_config
+    #   Information about logs for the build project. A project can create
+    #   Amazon CloudWatch Logs, logs in an S3 bucket, or both.
+    #
     # @return [Types::UpdateProjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateProjectOutput#project #project} => Types::Project
@@ -1453,7 +1773,7 @@ module Aws::CodeBuild
     #     name: "NonEmptyString", # required
     #     description: "ProjectDescription",
     #     source: {
-    #       type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE
+    #       type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #       location: "String",
     #       git_clone_depth: 1,
     #       buildspec: "String",
@@ -1461,8 +1781,25 @@ module Aws::CodeBuild
     #         type: "OAUTH", # required, accepts OAUTH
     #         resource: "String",
     #       },
+    #       report_build_status: false,
     #       insecure_ssl: false,
+    #       source_identifier: "String",
     #     },
+    #     secondary_sources: [
+    #       {
+    #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
+    #         location: "String",
+    #         git_clone_depth: 1,
+    #         buildspec: "String",
+    #         auth: {
+    #           type: "OAUTH", # required, accepts OAUTH
+    #           resource: "String",
+    #         },
+    #         report_build_status: false,
+    #         insecure_ssl: false,
+    #         source_identifier: "String",
+    #       },
+    #     ],
     #     artifacts: {
     #       type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
     #       location: "String",
@@ -1470,13 +1807,29 @@ module Aws::CodeBuild
     #       namespace_type: "NONE", # accepts NONE, BUILD_ID
     #       name: "String",
     #       packaging: "NONE", # accepts NONE, ZIP
+    #       override_artifact_name: false,
+    #       encryption_disabled: false,
+    #       artifact_identifier: "String",
     #     },
+    #     secondary_artifacts: [
+    #       {
+    #         type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
+    #         location: "String",
+    #         path: "String",
+    #         namespace_type: "NONE", # accepts NONE, BUILD_ID
+    #         name: "String",
+    #         packaging: "NONE", # accepts NONE, ZIP
+    #         override_artifact_name: false,
+    #         encryption_disabled: false,
+    #         artifact_identifier: "String",
+    #       },
+    #     ],
     #     cache: {
     #       type: "NO_CACHE", # required, accepts NO_CACHE, S3
     #       location: "String",
     #     },
     #     environment: {
-    #       type: "LINUX_CONTAINER", # required, accepts LINUX_CONTAINER
+    #       type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER
     #       image: "NonEmptyString", # required
     #       compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
     #       environment_variables: [
@@ -1504,6 +1857,17 @@ module Aws::CodeBuild
     #       security_group_ids: ["NonEmptyString"],
     #     },
     #     badge_enabled: false,
+    #     logs_config: {
+    #       cloud_watch_logs: {
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         group_name: "String",
+    #         stream_name: "String",
+    #       },
+    #       s3_logs: {
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         location: "String",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1511,22 +1875,47 @@ module Aws::CodeBuild
     #   resp.project.name #=> String
     #   resp.project.arn #=> String
     #   resp.project.description #=> String
-    #   resp.project.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE"
+    #   resp.project.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.project.source.location #=> String
     #   resp.project.source.git_clone_depth #=> Integer
     #   resp.project.source.buildspec #=> String
     #   resp.project.source.auth.type #=> String, one of "OAUTH"
     #   resp.project.source.auth.resource #=> String
+    #   resp.project.source.report_build_status #=> Boolean
     #   resp.project.source.insecure_ssl #=> Boolean
+    #   resp.project.source.source_identifier #=> String
+    #   resp.project.secondary_sources #=> Array
+    #   resp.project.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.project.secondary_sources[0].location #=> String
+    #   resp.project.secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.project.secondary_sources[0].buildspec #=> String
+    #   resp.project.secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.project.secondary_sources[0].auth.resource #=> String
+    #   resp.project.secondary_sources[0].report_build_status #=> Boolean
+    #   resp.project.secondary_sources[0].insecure_ssl #=> Boolean
+    #   resp.project.secondary_sources[0].source_identifier #=> String
     #   resp.project.artifacts.type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.project.artifacts.location #=> String
     #   resp.project.artifacts.path #=> String
     #   resp.project.artifacts.namespace_type #=> String, one of "NONE", "BUILD_ID"
     #   resp.project.artifacts.name #=> String
     #   resp.project.artifacts.packaging #=> String, one of "NONE", "ZIP"
+    #   resp.project.artifacts.override_artifact_name #=> Boolean
+    #   resp.project.artifacts.encryption_disabled #=> Boolean
+    #   resp.project.artifacts.artifact_identifier #=> String
+    #   resp.project.secondary_artifacts #=> Array
+    #   resp.project.secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
+    #   resp.project.secondary_artifacts[0].location #=> String
+    #   resp.project.secondary_artifacts[0].path #=> String
+    #   resp.project.secondary_artifacts[0].namespace_type #=> String, one of "NONE", "BUILD_ID"
+    #   resp.project.secondary_artifacts[0].name #=> String
+    #   resp.project.secondary_artifacts[0].packaging #=> String, one of "NONE", "ZIP"
+    #   resp.project.secondary_artifacts[0].override_artifact_name #=> Boolean
+    #   resp.project.secondary_artifacts[0].encryption_disabled #=> Boolean
+    #   resp.project.secondary_artifacts[0].artifact_identifier #=> String
     #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.project.cache.location #=> String
-    #   resp.project.environment.type #=> String, one of "LINUX_CONTAINER"
+    #   resp.project.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.project.environment.image #=> String
     #   resp.project.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
     #   resp.project.environment.environment_variables #=> Array
@@ -1555,6 +1944,11 @@ module Aws::CodeBuild
     #   resp.project.vpc_config.security_group_ids[0] #=> String
     #   resp.project.badge.badge_enabled #=> Boolean
     #   resp.project.badge.badge_request_url #=> String
+    #   resp.project.logs_config.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.project.logs_config.cloud_watch_logs.group_name #=> String
+    #   resp.project.logs_config.cloud_watch_logs.stream_name #=> String
+    #   resp.project.logs_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.project.logs_config.s3_logs.location #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProject AWS API Documentation
     #
@@ -1622,7 +2016,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

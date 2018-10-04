@@ -549,6 +549,7 @@ module Aws::S3
     #         record_delimiter: "RecordDelimiter",
     #         field_delimiter: "FieldDelimiter",
     #         quote_character: "QuoteCharacter",
+    #         allow_quoted_record_delimiter: false,
     #       }
     #
     # @!attribute [rw] file_header_info
@@ -578,6 +579,12 @@ module Aws::S3
     #   value.
     #   @return [String]
     #
+    # @!attribute [rw] allow_quoted_record_delimiter
+    #   Specifies that CSV field values may contain quoted record delimiters
+    #   and such records should be allowed. Default value is FALSE. Setting
+    #   this value to TRUE may lower performance.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CSVInput AWS API Documentation
     #
     class CSVInput < Struct.new(
@@ -586,7 +593,8 @@ module Aws::S3
       :quote_escape_character,
       :record_delimiter,
       :field_delimiter,
-      :quote_character)
+      :quote_character,
+      :allow_quoted_record_delimiter)
       include Aws::Structure
     end
 
@@ -868,6 +876,13 @@ module Aws::S3
     class Condition < Struct.new(
       :http_error_code_returned_equals,
       :key_prefix_equals)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ContinuationEvent AWS API Documentation
+    #
+    class ContinuationEvent < Struct.new(
+      :event_type)
       include Aws::Structure
     end
 
@@ -1716,6 +1731,17 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
+    #   Deletes the replication subresource associated with the specified
+    #   bucket.
+    #
+    #   <note markdown="1"> There is usually some time lag before replication configuration
+    #   deletion is fully propagated to all the Amazon S3 systems.
+    #
+    #    </note>
+    #
+    #   For more information, see [Cross-Region Replication (CRR)](
+    #   https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html) in the
+    #   Amazon S3 Developer Guide.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketReplicationRequest AWS API Documentation
@@ -1804,6 +1830,31 @@ module Aws::S3
       :version_id,
       :is_latest,
       :last_modified)
+      include Aws::Structure
+    end
+
+    # Specifies whether Amazon S3 should replicate delete makers.
+    #
+    # @note When making an API call, you may pass DeleteMarkerReplication
+    #   data as a hash:
+    #
+    #       {
+    #         status: "Enabled", # accepts Enabled, Disabled
+    #       }
+    #
+    # @!attribute [rw] status
+    #   The status of the delete marker replication.
+    #
+    #   <note markdown="1"> In the current implementation, Amazon S3 does not replicate the
+    #   delete markers. Therefore, the status must be `Disabled`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteMarkerReplication AWS API Documentation
+    #
+    class DeleteMarkerReplication < Struct.new(
+      :status)
       include Aws::Structure
     end
 
@@ -2026,11 +2077,20 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   Amazon resource name (ARN) of the bucket where you want Amazon S3 to
     #   store replicas of the object identified by the rule.
+    #
+    #   If you have multiple rules in your replication configuration, all
+    #   rules must specify the same bucket as the destination. A replication
+    #   configuration can replicate objects only to one destination bucket.
     #   @return [String]
     #
     # @!attribute [rw] account
-    #   Account ID of the destination bucket. Currently this is only being
-    #   verified if Access Control Translation is enabled
+    #   Account ID of the destination bucket. Currently Amazon S3 verifies
+    #   this value only if Access Control Translation is enabled.
+    #
+    #   In a cross-account scenario, if you tell Amazon S3 to change replica
+    #   ownership to the AWS account that owns the destination bucket by
+    #   adding the `AccessControlTranslation` element, this is the account
+    #   ID of the destination bucket owner.
     #   @return [String]
     #
     # @!attribute [rw] storage_class
@@ -2039,11 +2099,17 @@ module Aws::S3
     #
     # @!attribute [rw] access_control_translation
     #   Container for information regarding the access control for replicas.
+    #
+    #   Use only in a cross-account scenario, where source and destination
+    #   bucket owners are not the same, when you want to change replica
+    #   ownership to the AWS account that owns the destination bucket. If
+    #   you don't add this element to the replication configuration, the
+    #   replicas are owned by same AWS account that owns the source object.
     #   @return [Types::AccessControlTranslation]
     #
     # @!attribute [rw] encryption_configuration
-    #   Container for information regarding encryption based configuration
-    #   for replicas.
+    #   Container that provides encryption-related information. You must
+    #   specify this element if the `SourceSelectionCriteria` is specified.
     #   @return [Types::EncryptionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Destination AWS API Documentation
@@ -2104,13 +2170,22 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] replica_kms_key_id
-    #   The id of the KMS key used to encrypt the replica object.
+    #   The ID of the AWS KMS key for the region where the destination
+    #   bucket resides. Amazon S3 uses this key to encrypt the replica
+    #   object.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/EncryptionConfiguration AWS API Documentation
     #
     class EncryptionConfiguration < Struct.new(
       :replica_kms_key_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/EndEvent AWS API Documentation
+    #
+    class EndEvent < Struct.new(
+      :event_type)
       include Aws::Structure
     end
 
@@ -3618,10 +3693,13 @@ module Aws::S3
     #           record_delimiter: "RecordDelimiter",
     #           field_delimiter: "FieldDelimiter",
     #           quote_character: "QuoteCharacter",
+    #           allow_quoted_record_delimiter: false,
     #         },
-    #         compression_type: "NONE", # accepts NONE, GZIP
+    #         compression_type: "NONE", # accepts NONE, GZIP, BZIP2
     #         json: {
     #           type: "DOCUMENT", # accepts DOCUMENT, LINES
+    #         },
+    #         parquet: {
     #         },
     #       }
     #
@@ -3630,20 +3708,25 @@ module Aws::S3
     #   @return [Types::CSVInput]
     #
     # @!attribute [rw] compression_type
-    #   Specifies object's compression format. Valid values: NONE, GZIP.
-    #   Default Value: NONE.
+    #   Specifies object's compression format. Valid values: NONE, GZIP,
+    #   BZIP2. Default Value: NONE.
     #   @return [String]
     #
     # @!attribute [rw] json
     #   Specifies JSON as object's input serialization format.
     #   @return [Types::JSONInput]
     #
+    # @!attribute [rw] parquet
+    #   Specifies Parquet as object's input serialization format.
+    #   @return [Types::ParquetInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InputSerialization AWS API Documentation
     #
     class InputSerialization < Struct.new(
       :csv,
       :compression_type,
-      :json)
+      :json,
+      :parquet)
       include Aws::Structure
     end
 
@@ -5759,6 +5842,12 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ParquetInput AWS API Documentation
+    #
+    class ParquetInput < Aws::EmptyStructure; end
+
     # @!attribute [rw] part_number
     #   Part number identifying the part. This is a positive integer between
     #   1 and 10,000.
@@ -5804,6 +5893,18 @@ module Aws::S3
       :bytes_scanned,
       :bytes_processed,
       :bytes_returned)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] details
+    #   The Progress event details.
+    #   @return [Types::Progress]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ProgressEvent AWS API Documentation
+    #
+    class ProgressEvent < Struct.new(
+      :details,
+      :event_type)
       include Aws::Structure
     end
 
@@ -6501,7 +6602,24 @@ module Aws::S3
     #           rules: [ # required
     #             {
     #               id: "ID",
-    #               prefix: "Prefix", # required
+    #               priority: 1,
+    #               prefix: "Prefix",
+    #               filter: {
+    #                 prefix: "Prefix",
+    #                 tag: {
+    #                   key: "ObjectKey", # required
+    #                   value: "Value", # required
+    #                 },
+    #                 and: {
+    #                   prefix: "Prefix",
+    #                   tags: [
+    #                     {
+    #                       key: "ObjectKey", # required
+    #                       value: "Value", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
     #               status: "Enabled", # required, accepts Enabled, Disabled
     #               source_selection_criteria: {
     #                 sse_kms_encrypted_objects: {
@@ -6518,6 +6636,9 @@ module Aws::S3
     #                 encryption_configuration: {
     #                   replica_kms_key_id: "ReplicaKmsKeyID",
     #                 },
+    #               },
+    #               delete_marker_replication: {
+    #                 status: "Enabled", # accepts Enabled, Disabled
     #               },
     #             },
     #           ],
@@ -7209,6 +7330,18 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @!attribute [rw] payload
+    #   The byte array of partial, one or more result records.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RecordsEvent AWS API Documentation
+    #
+    class RecordsEvent < Struct.new(
+      :payload,
+      :event_type)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass Redirect
     #   data as a hash:
     #
@@ -7298,7 +7431,24 @@ module Aws::S3
     #         rules: [ # required
     #           {
     #             id: "ID",
-    #             prefix: "Prefix", # required
+    #             priority: 1,
+    #             prefix: "Prefix",
+    #             filter: {
+    #               prefix: "Prefix",
+    #               tag: {
+    #                 key: "ObjectKey", # required
+    #                 value: "Value", # required
+    #               },
+    #               and: {
+    #                 prefix: "Prefix",
+    #                 tags: [
+    #                   {
+    #                     key: "ObjectKey", # required
+    #                     value: "Value", # required
+    #                   },
+    #                 ],
+    #               },
+    #             },
     #             status: "Enabled", # required, accepts Enabled, Disabled
     #             source_selection_criteria: {
     #               sse_kms_encrypted_objects: {
@@ -7316,6 +7466,9 @@ module Aws::S3
     #                 replica_kms_key_id: "ReplicaKmsKeyID",
     #               },
     #             },
+    #             delete_marker_replication: {
+    #               status: "Enabled", # accepts Enabled, Disabled
+    #             },
     #           },
     #         ],
     #       }
@@ -7326,9 +7479,9 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] rules
-    #   Container for information about a particular replication rule.
-    #   Replication configuration must have at least one rule and can
-    #   contain up to 1,000 rules.
+    #   Container for one or more replication rules. Replication
+    #   configuration must have at least one rule and can contain up to
+    #   1,000 rules.
     #   @return [Array<Types::ReplicationRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationConfiguration AWS API Documentation
@@ -7346,7 +7499,24 @@ module Aws::S3
     #
     #       {
     #         id: "ID",
-    #         prefix: "Prefix", # required
+    #         priority: 1,
+    #         prefix: "Prefix",
+    #         filter: {
+    #           prefix: "Prefix",
+    #           tag: {
+    #             key: "ObjectKey", # required
+    #             value: "Value", # required
+    #           },
+    #           and: {
+    #             prefix: "Prefix",
+    #             tags: [
+    #               {
+    #                 key: "ObjectKey", # required
+    #                 value: "Value", # required
+    #               },
+    #             ],
+    #           },
+    #         },
     #         status: "Enabled", # required, accepts Enabled, Disabled
     #         source_selection_criteria: {
     #           sse_kms_encrypted_objects: {
@@ -7364,6 +7534,9 @@ module Aws::S3
     #             replica_kms_key_id: "ReplicaKmsKeyID",
     #           },
     #         },
+    #         delete_marker_replication: {
+    #           status: "Enabled", # accepts Enabled, Disabled
+    #         },
     #       }
     #
     # @!attribute [rw] id
@@ -7371,33 +7544,152 @@ module Aws::S3
     #   characters.
     #   @return [String]
     #
+    # @!attribute [rw] priority
+    #   The priority associated with the rule. If you specify multiple rules
+    #   in a replication configuration, then Amazon S3 applies rule priority
+    #   in the event there are conflicts (two or more rules identify the
+    #   same object based on filter specified). The rule with higher
+    #   priority takes precedence. For example,
+    #
+    #   * Same object quality prefix based filter criteria If prefixes you
+    #     specified in multiple rules overlap.
+    #
+    #   * Same object qualify tag based filter criteria specified in
+    #     multiple rules
+    #
+    #   For more information, see [Cross-Region Replication (CRR)](
+    #   https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html) in the
+    #   Amazon S3 Developer Guide.
+    #   @return [Integer]
+    #
     # @!attribute [rw] prefix
     #   Object keyname prefix identifying one or more objects to which the
     #   rule applies. Maximum prefix length can be up to 1,024 characters.
-    #   Overlapping prefixes are not supported.
     #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   Filter that identifies subset of objects to which the replication
+    #   rule applies. A `Filter` must specify exactly one `Prefix`, `Tag`,
+    #   or an `And` child element.
+    #   @return [Types::ReplicationRuleFilter]
     #
     # @!attribute [rw] status
     #   The rule is ignored if status is not Enabled.
     #   @return [String]
     #
     # @!attribute [rw] source_selection_criteria
-    #   Container for filters that define which source objects should be
-    #   replicated.
+    #   Container that describes additional filters in identifying source
+    #   objects that you want to replicate. Currently, Amazon S3 supports
+    #   only the filter that you can specify for objects created with
+    #   server-side encryption using an AWS KMS-managed key. You can choose
+    #   to enable or disable replication of these objects.
+    #
+    #   if you want Amazon S3 to replicate objects created with server-side
+    #   encryption using AWS KMS-managed keys.
     #   @return [Types::SourceSelectionCriteria]
     #
     # @!attribute [rw] destination
     #   Container for replication destination information.
     #   @return [Types::Destination]
     #
+    # @!attribute [rw] delete_marker_replication
+    #   Specifies whether Amazon S3 should replicate delete makers.
+    #   @return [Types::DeleteMarkerReplication]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationRule AWS API Documentation
     #
     class ReplicationRule < Struct.new(
       :id,
+      :priority,
       :prefix,
+      :filter,
       :status,
       :source_selection_criteria,
-      :destination)
+      :destination,
+      :delete_marker_replication)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ReplicationRuleAndOperator
+    #   data as a hash:
+    #
+    #       {
+    #         prefix: "Prefix",
+    #         tags: [
+    #           {
+    #             key: "ObjectKey", # required
+    #             value: "Value", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] prefix
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationRuleAndOperator AWS API Documentation
+    #
+    class ReplicationRuleAndOperator < Struct.new(
+      :prefix,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Filter that identifies subset of objects to which the replication rule
+    # applies. A `Filter` must specify exactly one `Prefix`, `Tag`, or an
+    # `And` child element.
+    #
+    # @note When making an API call, you may pass ReplicationRuleFilter
+    #   data as a hash:
+    #
+    #       {
+    #         prefix: "Prefix",
+    #         tag: {
+    #           key: "ObjectKey", # required
+    #           value: "Value", # required
+    #         },
+    #         and: {
+    #           prefix: "Prefix",
+    #           tags: [
+    #             {
+    #               key: "ObjectKey", # required
+    #               value: "Value", # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] prefix
+    #   Object keyname prefix that identifies subset of objects to which the
+    #   rule applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag
+    #   Container for specifying a tag key and value.
+    #
+    #   The rule applies only to objects having the tag in its tagset.
+    #   @return [Types::Tag]
+    #
+    # @!attribute [rw] and
+    #   Container for specifying rule filters. These filters determine the
+    #   subset of objects to which the rule applies. The element is required
+    #   only if you specify more than one filter. For example:
+    #
+    #   * You specify both a `Prefix` and a `Tag` filters. Then you wrap
+    #     these in an `And` tag.
+    #
+    #   * You specify filter based on multiple tags. Then you wrap the `Tag`
+    #     elements in an `And` tag.
+    #   @return [Types::ReplicationRuleAndOperator]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationRuleFilter AWS API Documentation
+    #
+    class ReplicationRuleFilter < Struct.new(
+      :prefix,
+      :tag,
+      :and)
       include Aws::Structure
     end
 
@@ -7419,6 +7711,13 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RequestProgress
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #       }
+    #
     # @!attribute [rw] enabled
     #   Specifies whether periodic QueryProgress frames should be sent.
     #   Valid values: TRUE, FALSE. Default value: FALSE.
@@ -7473,10 +7772,13 @@ module Aws::S3
     #                 record_delimiter: "RecordDelimiter",
     #                 field_delimiter: "FieldDelimiter",
     #                 quote_character: "QuoteCharacter",
+    #                 allow_quoted_record_delimiter: false,
     #               },
-    #               compression_type: "NONE", # accepts NONE, GZIP
+    #               compression_type: "NONE", # accepts NONE, GZIP, BZIP2
     #               json: {
     #                 type: "DOCUMENT", # accepts DOCUMENT, LINES
+    #               },
+    #               parquet: {
     #               },
     #             },
     #             expression_type: "SQL", # required, accepts SQL
@@ -7591,10 +7893,13 @@ module Aws::S3
     #               record_delimiter: "RecordDelimiter",
     #               field_delimiter: "FieldDelimiter",
     #               quote_character: "QuoteCharacter",
+    #               allow_quoted_record_delimiter: false,
     #             },
-    #             compression_type: "NONE", # accepts NONE, GZIP
+    #             compression_type: "NONE", # accepts NONE, GZIP, BZIP2
     #             json: {
     #               type: "DOCUMENT", # accepts DOCUMENT, LINES
+    #             },
+    #             parquet: {
     #             },
     #           },
     #           expression_type: "SQL", # required, accepts SQL
@@ -7971,6 +8276,149 @@ module Aws::S3
     #
     class SSES3 < Aws::EmptyStructure; end
 
+    # @!attribute [rw] payload
+    #   @return [Types::SelectObjectContentEventStream]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SelectObjectContentOutput AWS API Documentation
+    #
+    class SelectObjectContentOutput < Struct.new(
+      :payload)
+      include Aws::Structure
+    end
+
+    # Request to filter the contents of an Amazon S3 object based on a
+    # simple Structured Query Language (SQL) statement. In the request,
+    # along with the SQL expression, you must also specify a data
+    # serialization format (JSON or CSV) of the object. Amazon S3 uses this
+    # to parse object data into records, and returns only records that match
+    # the specified SQL expression. You must also specify the data
+    # serialization format for the response. For more information, go to
+    # [S3Select API Documentation][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html
+    #
+    # @note When making an API call, you may pass SelectObjectContentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "BucketName", # required
+    #         key: "ObjectKey", # required
+    #         sse_customer_algorithm: "SSECustomerAlgorithm",
+    #         sse_customer_key: "SSECustomerKey",
+    #         sse_customer_key_md5: "SSECustomerKeyMD5",
+    #         expression: "Expression", # required
+    #         expression_type: "SQL", # required, accepts SQL
+    #         request_progress: {
+    #           enabled: false,
+    #         },
+    #         input_serialization: { # required
+    #           csv: {
+    #             file_header_info: "USE", # accepts USE, IGNORE, NONE
+    #             comments: "Comments",
+    #             quote_escape_character: "QuoteEscapeCharacter",
+    #             record_delimiter: "RecordDelimiter",
+    #             field_delimiter: "FieldDelimiter",
+    #             quote_character: "QuoteCharacter",
+    #             allow_quoted_record_delimiter: false,
+    #           },
+    #           compression_type: "NONE", # accepts NONE, GZIP, BZIP2
+    #           json: {
+    #             type: "DOCUMENT", # accepts DOCUMENT, LINES
+    #           },
+    #           parquet: {
+    #           },
+    #         },
+    #         output_serialization: { # required
+    #           csv: {
+    #             quote_fields: "ALWAYS", # accepts ALWAYS, ASNEEDED
+    #             quote_escape_character: "QuoteEscapeCharacter",
+    #             record_delimiter: "RecordDelimiter",
+    #             field_delimiter: "FieldDelimiter",
+    #             quote_character: "QuoteCharacter",
+    #           },
+    #           json: {
+    #             record_delimiter: "RecordDelimiter",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The S3 Bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The Object Key.
+    #   @return [String]
+    #
+    # @!attribute [rw] sse_customer_algorithm
+    #   The SSE Algorithm used to encrypt the object. For more information,
+    #   go to [ Server-Side Encryption (Using Customer-Provided Encryption
+    #   Keys][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    #   @return [String]
+    #
+    # @!attribute [rw] sse_customer_key
+    #   The SSE Customer Key. For more information, go to [ Server-Side
+    #   Encryption (Using Customer-Provided Encryption Keys][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    #   @return [String]
+    #
+    # @!attribute [rw] sse_customer_key_md5
+    #   The SSE Customer Key MD5. For more information, go to [ Server-Side
+    #   Encryption (Using Customer-Provided Encryption Keys][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    #   @return [String]
+    #
+    # @!attribute [rw] expression
+    #   The expression that is used to query the object.
+    #   @return [String]
+    #
+    # @!attribute [rw] expression_type
+    #   The type of the provided expression (e.g., SQL).
+    #   @return [String]
+    #
+    # @!attribute [rw] request_progress
+    #   Specifies if periodic request progress information should be
+    #   enabled.
+    #   @return [Types::RequestProgress]
+    #
+    # @!attribute [rw] input_serialization
+    #   Describes the format of the data in the object that is being
+    #   queried.
+    #   @return [Types::InputSerialization]
+    #
+    # @!attribute [rw] output_serialization
+    #   Describes the format of the data that you want Amazon S3 to return
+    #   in response.
+    #   @return [Types::OutputSerialization]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SelectObjectContentRequest AWS API Documentation
+    #
+    class SelectObjectContentRequest < Struct.new(
+      :bucket,
+      :key,
+      :sse_customer_algorithm,
+      :sse_customer_key,
+      :sse_customer_key_md5,
+      :expression,
+      :expression_type,
+      :request_progress,
+      :input_serialization,
+      :output_serialization)
+      include Aws::Structure
+    end
+
     # Describes the parameters for Select job types.
     #
     # @note When making an API call, you may pass SelectParameters
@@ -7985,10 +8433,13 @@ module Aws::S3
     #             record_delimiter: "RecordDelimiter",
     #             field_delimiter: "FieldDelimiter",
     #             quote_character: "QuoteCharacter",
+    #             allow_quoted_record_delimiter: false,
     #           },
-    #           compression_type: "NONE", # accepts NONE, GZIP
+    #           compression_type: "NONE", # accepts NONE, GZIP, BZIP2
     #           json: {
     #             type: "DOCUMENT", # accepts DOCUMENT, LINES
+    #           },
+    #           parquet: {
     #           },
     #         },
     #         expression_type: "SQL", # required, accepts SQL
@@ -8131,7 +8582,8 @@ module Aws::S3
     #
     # @!attribute [rw] sse_kms_encrypted_objects
     #   Container for filter information of selection of KMS Encrypted S3
-    #   objects.
+    #   objects. The element is required if you include
+    #   `SourceSelectionCriteria` in the replication configuration.
     #   @return [Types::SseKmsEncryptedObjects]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SourceSelectionCriteria AWS API Documentation
@@ -8181,6 +8633,18 @@ module Aws::S3
       :bytes_scanned,
       :bytes_processed,
       :bytes_returned)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] details
+    #   The Stats event details.
+    #   @return [Types::Stats]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/StatsEvent AWS API Documentation
+    #
+    class StatsEvent < Struct.new(
+      :details,
+      :event_type)
       include Aws::Structure
     end
 
@@ -8852,6 +9316,25 @@ module Aws::S3
       :redirect_all_requests_to,
       :routing_rules)
       include Aws::Structure
+    end
+
+    # EventStream is an Enumerator of Events.
+    #  #event_types #=> Array, returns all modeled event types in the stream
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SelectObjectContentEventStream AWS API Documentation
+    #
+    class SelectObjectContentEventStream < Enumerator
+
+      def event_types
+        [
+          :records,
+          :stats,
+          :progress,
+          :cont,
+          :end
+        ]
+      end
+
     end
 
   end

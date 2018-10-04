@@ -192,12 +192,14 @@ module Aws::Mobile
       api.version = "2017-07-01"
 
       api.metadata = {
+        "apiVersion" => "2017-07-01",
         "endpointPrefix" => "mobile",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "serviceFullName" => "AWS Mobile",
         "signatureVersion" => "v4",
         "signingName" => "AWSMobileHubService",
+        "uid" => "mobile-2017-07-01",
       }
 
       api.add_operation(:create_project, Seahorse::Model::Operation.new.tap do |o|

@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -47,6 +49,8 @@ module Aws::MediaPackage
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -92,6 +96,22 @@ module Aws::MediaPackage
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::MediaPackage
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -170,6 +201,7 @@ module Aws::MediaPackage
     #   resp.arn #=> String
     #   resp.description #=> String
     #   resp.hls_ingest.ingest_endpoints #=> Array
+    #   resp.hls_ingest.ingest_endpoints[0].id #=> String
     #   resp.hls_ingest.ingest_endpoints[0].password #=> String
     #   resp.hls_ingest.ingest_endpoints[0].url #=> String
     #   resp.hls_ingest.ingest_endpoints[0].username #=> String
@@ -274,6 +306,7 @@ module Aws::MediaPackage
     #       manifest_window_seconds: 1,
     #       min_buffer_time_seconds: 1,
     #       min_update_period_seconds: 1,
+    #       period_triggers: ["ADS"], # accepts ADS
     #       profile: "NONE", # accepts NONE, HBBTV_1_5
     #       segment_duration_seconds: 1,
     #       stream_selection: {
@@ -367,6 +400,8 @@ module Aws::MediaPackage
     #   resp.dash_package.manifest_window_seconds #=> Integer
     #   resp.dash_package.min_buffer_time_seconds #=> Integer
     #   resp.dash_package.min_update_period_seconds #=> Integer
+    #   resp.dash_package.period_triggers #=> Array
+    #   resp.dash_package.period_triggers[0] #=> String, one of "ADS"
     #   resp.dash_package.profile #=> String, one of "NONE", "HBBTV_1_5"
     #   resp.dash_package.segment_duration_seconds #=> Integer
     #   resp.dash_package.stream_selection.max_video_bits_per_second #=> Integer
@@ -484,6 +519,7 @@ module Aws::MediaPackage
     #   resp.arn #=> String
     #   resp.description #=> String
     #   resp.hls_ingest.ingest_endpoints #=> Array
+    #   resp.hls_ingest.ingest_endpoints[0].id #=> String
     #   resp.hls_ingest.ingest_endpoints[0].password #=> String
     #   resp.hls_ingest.ingest_endpoints[0].url #=> String
     #   resp.hls_ingest.ingest_endpoints[0].username #=> String
@@ -557,6 +593,8 @@ module Aws::MediaPackage
     #   resp.dash_package.manifest_window_seconds #=> Integer
     #   resp.dash_package.min_buffer_time_seconds #=> Integer
     #   resp.dash_package.min_update_period_seconds #=> Integer
+    #   resp.dash_package.period_triggers #=> Array
+    #   resp.dash_package.period_triggers[0] #=> String, one of "ADS"
     #   resp.dash_package.profile #=> String, one of "NONE", "HBBTV_1_5"
     #   resp.dash_package.segment_duration_seconds #=> Integer
     #   resp.dash_package.stream_selection.max_video_bits_per_second #=> Integer
@@ -634,6 +672,7 @@ module Aws::MediaPackage
     #   resp.channels[0].arn #=> String
     #   resp.channels[0].description #=> String
     #   resp.channels[0].hls_ingest.ingest_endpoints #=> Array
+    #   resp.channels[0].hls_ingest.ingest_endpoints[0].id #=> String
     #   resp.channels[0].hls_ingest.ingest_endpoints[0].password #=> String
     #   resp.channels[0].hls_ingest.ingest_endpoints[0].url #=> String
     #   resp.channels[0].hls_ingest.ingest_endpoints[0].username #=> String
@@ -705,6 +744,8 @@ module Aws::MediaPackage
     #   resp.origin_endpoints[0].dash_package.manifest_window_seconds #=> Integer
     #   resp.origin_endpoints[0].dash_package.min_buffer_time_seconds #=> Integer
     #   resp.origin_endpoints[0].dash_package.min_update_period_seconds #=> Integer
+    #   resp.origin_endpoints[0].dash_package.period_triggers #=> Array
+    #   resp.origin_endpoints[0].dash_package.period_triggers[0] #=> String, one of "ADS"
     #   resp.origin_endpoints[0].dash_package.profile #=> String, one of "NONE", "HBBTV_1_5"
     #   resp.origin_endpoints[0].dash_package.segment_duration_seconds #=> Integer
     #   resp.origin_endpoints[0].dash_package.stream_selection.max_video_bits_per_second #=> Integer
@@ -758,7 +799,9 @@ module Aws::MediaPackage
       req.send_request(options)
     end
 
-    # Changes the Channel ingest username and password.
+    # Changes the Channel's first IngestEndpoint's username and password.
+    # WARNING - This API is deprecated. Please use
+    # RotateIngestEndpointCredentials instead
     #
     # @option params [required, String] :id
     #
@@ -780,6 +823,7 @@ module Aws::MediaPackage
     #   resp.arn #=> String
     #   resp.description #=> String
     #   resp.hls_ingest.ingest_endpoints #=> Array
+    #   resp.hls_ingest.ingest_endpoints[0].id #=> String
     #   resp.hls_ingest.ingest_endpoints[0].password #=> String
     #   resp.hls_ingest.ingest_endpoints[0].url #=> String
     #   resp.hls_ingest.ingest_endpoints[0].username #=> String
@@ -791,6 +835,47 @@ module Aws::MediaPackage
     # @param [Hash] params ({})
     def rotate_channel_credentials(params = {}, options = {})
       req = build_request(:rotate_channel_credentials, params)
+      req.send_request(options)
+    end
+
+    # Rotate the IngestEndpoint's username and password, as specified by
+    # the IngestEndpoint's id.
+    #
+    # @option params [required, String] :id
+    #
+    # @option params [required, String] :ingest_endpoint_id
+    #
+    # @return [Types::RotateIngestEndpointCredentialsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RotateIngestEndpointCredentialsResponse#arn #arn} => String
+    #   * {Types::RotateIngestEndpointCredentialsResponse#description #description} => String
+    #   * {Types::RotateIngestEndpointCredentialsResponse#hls_ingest #hls_ingest} => Types::HlsIngest
+    #   * {Types::RotateIngestEndpointCredentialsResponse#id #id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.rotate_ingest_endpoint_credentials({
+    #     id: "__string", # required
+    #     ingest_endpoint_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.description #=> String
+    #   resp.hls_ingest.ingest_endpoints #=> Array
+    #   resp.hls_ingest.ingest_endpoints[0].id #=> String
+    #   resp.hls_ingest.ingest_endpoints[0].password #=> String
+    #   resp.hls_ingest.ingest_endpoints[0].url #=> String
+    #   resp.hls_ingest.ingest_endpoints[0].username #=> String
+    #   resp.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/RotateIngestEndpointCredentials AWS API Documentation
+    #
+    # @overload rotate_ingest_endpoint_credentials(params = {})
+    # @param [Hash] params ({})
+    def rotate_ingest_endpoint_credentials(params = {}, options = {})
+      req = build_request(:rotate_ingest_endpoint_credentials, params)
       req.send_request(options)
     end
 
@@ -819,6 +904,7 @@ module Aws::MediaPackage
     #   resp.arn #=> String
     #   resp.description #=> String
     #   resp.hls_ingest.ingest_endpoints #=> Array
+    #   resp.hls_ingest.ingest_endpoints[0].id #=> String
     #   resp.hls_ingest.ingest_endpoints[0].password #=> String
     #   resp.hls_ingest.ingest_endpoints[0].url #=> String
     #   resp.hls_ingest.ingest_endpoints[0].username #=> String
@@ -920,6 +1006,7 @@ module Aws::MediaPackage
     #       manifest_window_seconds: 1,
     #       min_buffer_time_seconds: 1,
     #       min_update_period_seconds: 1,
+    #       period_triggers: ["ADS"], # accepts ADS
     #       profile: "NONE", # accepts NONE, HBBTV_1_5
     #       segment_duration_seconds: 1,
     #       stream_selection: {
@@ -1013,6 +1100,8 @@ module Aws::MediaPackage
     #   resp.dash_package.manifest_window_seconds #=> Integer
     #   resp.dash_package.min_buffer_time_seconds #=> Integer
     #   resp.dash_package.min_update_period_seconds #=> Integer
+    #   resp.dash_package.period_triggers #=> Array
+    #   resp.dash_package.period_triggers[0] #=> String, one of "ADS"
     #   resp.dash_package.profile #=> String, one of "NONE", "HBBTV_1_5"
     #   resp.dash_package.segment_duration_seconds #=> Integer
     #   resp.dash_package.stream_selection.max_video_bits_per_second #=> Integer
@@ -1079,7 +1168,7 @@ module Aws::MediaPackage
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackage'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

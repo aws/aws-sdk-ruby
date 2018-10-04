@@ -7,6 +7,10 @@ module BuildTools
 
     MANIFEST_PATH = File.expand_path('../../services.json', __FILE__)
 
+    # Minimum `aws-sdk-core` version for new gem builds
+    MINIMUM_CORE_VERSION = "3.26.0"
+    EVENTSTREAM_PLUGIN = "Aws::Plugins::EventStreamConfiguration"
+
     # @option options [String] :manifest_path (MANIFEST_PATH)
     def initialize(options = {})
       @manifest_path = options.fetch(:manifest_path, MANIFEST_PATH)
@@ -56,8 +60,9 @@ module BuildTools
         waiters: model_path('waiters-2.json', config['models']),
         resources: model_path('resources-1.json', config['models']),
         examples: model_path('examples-1.json', config['models']),
+        smoke_tests: model_path('smoke.json', config['models']),
         gem_dependencies: gem_dependencies(api, config['dependencies'] || {}),
-        add_plugins: add_plugins(config['addPlugins'] || []),
+        add_plugins: add_plugins(api, config['addPlugins'] || []),
         remove_plugins: config['removePlugins'] || []
       )
     end
@@ -74,7 +79,8 @@ module BuildTools
       docs
     end
 
-    def add_plugins(plugins)
+    def add_plugins(api, plugins)
+      plugins << EVENTSTREAM_PLUGIN if eventstream?(api)
       plugins.inject({}) do |hash, plugin|
         hash[plugin] = plugin_path(plugin)
         hash
@@ -106,10 +112,8 @@ module BuildTools
 
     def gem_dependencies(api, dependencies)
       version_file = File.read("#{$GEMS_DIR}/aws-sdk-core/VERSION").rstrip
-      core_version = version_file.match(/^\d+\.\d+\.\d+$/) ?
-        "#{version_file.split('.')[0]}" :
-        version_file
-      dependencies['aws-sdk-core'] = "~> #{core_version}"
+      csm_version_string = "', '>= #{MINIMUM_CORE_VERSION}"
+      dependencies['aws-sdk-core'] = "~> #{version_file.split('.')[0]}#{csm_version_string}"
 
       case api['metadata']['signatureVersion']
       when 'v4' then dependencies['aws-sigv4'] = '~> 1.0'
@@ -121,6 +125,14 @@ module BuildTools
     def model_path(model_name, models_dir)
       path = File.expand_path("../../apis/#{models_dir}/#{model_name}", __FILE__)
       File.exists?(path) ? path : nil
+    end
+
+    def eventstream?(api)
+      return false if api['metadata']['protocolSettings'] && api['metadata']['protocolSettings']['h2']
+      api['shapes'].each do |_, ref|
+        return true if ref['eventstream'] || ref['event']
+      end
+      false
     end
 
   end

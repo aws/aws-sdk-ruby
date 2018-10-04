@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -47,6 +49,8 @@ module Aws::StorageGateway
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -92,6 +96,22 @@ module Aws::StorageGateway
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::StorageGateway
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -678,10 +709,25 @@ module Aws::StorageGateway
     #   operation to return a list of gateways for your account and region.
     #
     # @option params [required, Integer] :volume_size_in_bytes
+    #   The size of the volume in bytes.
     #
     # @option params [String] :snapshot_id
+    #   The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore as
+    #   the new cached volume. Specify this field if you want to create the
+    #   iSCSI storage volume from a snapshot otherwise do not include this
+    #   field. To list snapshots for your account use [DescribeSnapshots][1]
+    #   in the *Amazon Elastic Compute Cloud API Reference*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html
     #
     # @option params [required, String] :target_name
+    #   The name of the iSCSI target used by initiators to connect to the
+    #   target and as a suffix for the target ARN. For example, specifying
+    #   `TargetName` as *myvolume* results in the target ARN of
+    #   arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume.
+    #   The target name must be unique across all volumes of a gateway.
     #
     # @option params [String] :source_volume_arn
     #   The ARN for an existing volume. Specifying this ARN makes the new
@@ -690,8 +736,26 @@ module Aws::StorageGateway
     #   be equal to or larger than the size of the existing volume, in bytes.
     #
     # @option params [required, String] :network_interface_id
+    #   The network interface of the gateway on which to expose the iSCSI
+    #   target. Only IPv4 addresses are accepted. Use
+    #   DescribeGatewayInformation to get a list of the network interfaces
+    #   available on a gateway.
+    #
+    #   Valid Values: A valid IP address.
     #
     # @option params [required, String] :client_token
+    #   A unique identifier that you use to retry a request. If you retry a
+    #   request, use the same `ClientToken` you specified in the initial
+    #   request.
+    #
+    # @option params [Boolean] :kms_encrypted
+    #   True to use Amazon S3 server side encryption with your own AWS KMS
+    #   key, or false to use a key managed by Amazon S3. Optional.
+    #
+    # @option params [String] :kms_key
+    #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
+    #   server side encryption. This value can only be set when KMSEncrypted
+    #   is true. Optional.
     #
     # @return [Types::CreateCachediSCSIVolumeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -728,6 +792,8 @@ module Aws::StorageGateway
     #     source_volume_arn: "VolumeARN",
     #     network_interface_id: "NetworkInterfaceId", # required
     #     client_token: "ClientToken", # required
+    #     kms_encrypted: false,
+    #     kms_key: "KMSKey",
     #   })
     #
     # @example Response structure
@@ -744,11 +810,11 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Creates a file share on an existing file gateway. In Storage Gateway,
-    # a file share is a file system mount point backed by Amazon S3 cloud
-    # storage. Storage Gateway exposes file shares using a Network File
-    # System (NFS) interface. This operation is only supported in the file
-    # gateway type.
+    # Creates a Network File System (NFS) file share on an existing file
+    # gateway. In Storage Gateway, a file share is a file system mount point
+    # backed by Amazon S3 cloud storage. Storage Gateway exposes file shares
+    # using a NFS interface. This operation is only supported for file
+    # gateways.
     #
     # File gateway requires AWS Security Token Service (AWS STS) to be
     # activated to enable you create a file share. Make sure AWS STS is
@@ -776,8 +842,9 @@ module Aws::StorageGateway
     #   key, or false to use a key managed by Amazon S3. Optional.
     #
     # @option params [String] :kms_key
-    #   The KMS key used for Amazon S3 server side encryption. This value can
-    #   only be set when KmsEncrypted is true. Optional.
+    #   The Amazon Resource Name (ARN) AWS KMS key used for Amazon S3 server
+    #   side encryption. This value can only be set when KMSEncrypted is true.
+    #   Optional.
     #
     # @option params [required, String] :role
     #   The ARN of the AWS Identity and Access Management (IAM) role that a
@@ -788,14 +855,14 @@ module Aws::StorageGateway
     #
     # @option params [String] :default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket by
-    #   file gateway. Possible values are S3\_STANDARD or S3\_STANDARD\_IA. If
-    #   this field is not populated, the default value S3\_STANDARD is used.
-    #   Optional.
+    #   the file gateway. Possible values are `S3_STANDARD`, `S3_STANDARD_IA`,
+    #   or `S3_ONEZONE_IA`. If this field is not populated, the default value
+    #   `S3_STANDARD` is used. Optional.
     #
     # @option params [String] :object_acl
-    #   Sets the access control list permission for objects in the Amazon S3
-    #   bucket that a file gateway puts objects into. The default value is
-    #   "private".
+    #   A value that sets the access control list permission for objects in
+    #   the S3 bucket that a file gateway puts objects into. The default value
+    #   is "private".
     #
     # @option params [Array<String>] :client_list
     #   The list of clients that are allowed to access the file gateway. The
@@ -804,25 +871,25 @@ module Aws::StorageGateway
     # @option params [String] :squash
     #   Maps a user to anonymous user. Valid options are the following:
     #
-    #   * "RootSquash" - Only root is mapped to anonymous user.
+    #   * `RootSquash` - Only root is mapped to anonymous user.
     #
-    #   * "NoSquash" - No one is mapped to anonymous user.
+    #   * `NoSquash` - No one is mapped to anonymous user
     #
-    #   * "AllSquash" - Everyone is mapped to anonymous user.
+    #   * `AllSquash` - Everyone is mapped to anonymous user.
     #
     # @option params [Boolean] :read_only
-    #   Sets the write status of a file share. This value is true if the write
-    #   status is read-only, and otherwise false.
+    #   A value that sets the write status of a file share. This value is true
+    #   if the write status is read-only, and otherwise false.
     #
     # @option params [Boolean] :guess_mime_type_enabled
-    #   Enables guessing of the MIME type for uploaded objects based on file
-    #   extensions. Set this value to true to enable MIME type guessing, and
-    #   otherwise to false. The default value is true.
+    #   A value that enables guessing of the MIME type for uploaded objects
+    #   based on file extensions. Set this value to true to enable MIME type
+    #   guessing, and otherwise to false. The default value is true.
     #
     # @option params [Boolean] :requester_pays
-    #   Sets who pays the cost of the request and the data download from the
-    #   Amazon S3 bucket. Set this value to true if you want the requester to
-    #   pay instead of the bucket owner, and otherwise to false.
+    #   A value that sets the access control list permission for objects in
+    #   the Amazon S3 bucket that a file gateway puts objects into. The
+    #   default value is `private`.
     #
     # @return [Types::CreateNFSFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -862,6 +929,131 @@ module Aws::StorageGateway
     # @param [Hash] params ({})
     def create_nfs_file_share(params = {}, options = {})
       req = build_request(:create_nfs_file_share, params)
+      req.send_request(options)
+    end
+
+    # Creates a Server Message Block (SMB) file share on an existing file
+    # gateway. In Storage Gateway, a file share is a file system mount point
+    # backed by Amazon S3 cloud storage. Storage Gateway expose file shares
+    # using a SMB interface. This operation is only supported for file
+    # gateways.
+    #
+    # File gateways require AWS Security Token Service (AWS STS) to be
+    # activated to enable you to create a file share. Make sure that AWS STS
+    # is activated in the AWS Region you are creating your file gateway in.
+    # If AWS STS is not activated in this AWS Region, activate it. For
+    # information about how to activate AWS STS, see [Activating and
+    # Deactivating AWS STS in an AWS Region][1] in the *AWS Identity and
+    # Access Management User Guide.*
+    #
+    #  File gateways don't support creating hard or symbolic links on a
+    # file
+    # share.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
+    #
+    # @option params [required, String] :client_token
+    #   A unique string value that you supply that is used by file gateway to
+    #   ensure idempotent file share creation.
+    #
+    # @option params [required, String] :gateway_arn
+    #   The Amazon Resource Name (ARN) of the file gateway on which you want
+    #   to create a file share.
+    #
+    # @option params [Boolean] :kms_encrypted
+    #   True to use Amazon S3 server side encryption with your own AWS KMS
+    #   key, or false to use a key managed by Amazon S3. Optional.
+    #
+    # @option params [String] :kms_key
+    #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
+    #   server side encryption. This value can only be set when KMSEncrypted
+    #   is true. Optional.
+    #
+    # @option params [required, String] :role
+    #   The ARN of the AWS Identity and Access Management (IAM) role that a
+    #   file gateway assumes when it accesses the underlying storage.
+    #
+    # @option params [required, String] :location_arn
+    #   The ARN of the backed storage used for storing file data.
+    #
+    # @option params [String] :default_storage_class
+    #   The default storage class for objects put into an Amazon S3 bucket by
+    #   the file gateway. Possible values are `S3_STANDARD`, `S3_STANDARD_IA`,
+    #   or `S3_ONEZONE_IA`. If this field is not populated, the default value
+    #   `S3_STANDARD` is used. Optional.
+    #
+    # @option params [String] :object_acl
+    #   A value that sets the access control list permission for objects in
+    #   the S3 bucket that a file gateway puts objects into. The default value
+    #   is "private".
+    #
+    # @option params [Boolean] :read_only
+    #   A value that sets the write status of a file share. This value is true
+    #   if the write status is read-only, and otherwise false.
+    #
+    # @option params [Boolean] :guess_mime_type_enabled
+    #   A value that enables guessing of the MIME type for uploaded objects
+    #   based on file extensions. Set this value to true to enable MIME type
+    #   guessing, and otherwise to false. The default value is true.
+    #
+    # @option params [Boolean] :requester_pays
+    #   A value that sets the access control list permission for objects in
+    #   the Amazon S3 bucket that a file gateway puts objects into. The
+    #   default value is `private`.
+    #
+    # @option params [Array<String>] :valid_user_list
+    #   A list of users or groups in the Active Directory that are allowed to
+    #   access the file share. A group must be prefixed with the @ character.
+    #   For example `@group1`. Can only be set if Authentication is set to
+    #   `ActiveDirectory`.
+    #
+    # @option params [Array<String>] :invalid_user_list
+    #   A list of users or groups in the Active Directory that are not allowed
+    #   to access the file share. A group must be prefixed with the @
+    #   character. For example `@group1`. Can only be set if Authentication is
+    #   set to `ActiveDirectory`.
+    #
+    # @option params [String] :authentication
+    #   The authentication method that users use to access the file share.
+    #
+    #   Valid values are `ActiveDirectory` or `GuestAccess`. The default is
+    #   `ActiveDirectory`.
+    #
+    # @return [Types::CreateSMBFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSMBFileShareOutput#file_share_arn #file_share_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_smb_file_share({
+    #     client_token: "ClientToken", # required
+    #     gateway_arn: "GatewayARN", # required
+    #     kms_encrypted: false,
+    #     kms_key: "KMSKey",
+    #     role: "Role", # required
+    #     location_arn: "LocationARN", # required
+    #     default_storage_class: "StorageClass",
+    #     object_acl: "private", # accepts private, public-read, public-read-write, authenticated-read, bucket-owner-read, bucket-owner-full-control, aws-exec-read
+    #     read_only: false,
+    #     guess_mime_type_enabled: false,
+    #     requester_pays: false,
+    #     valid_user_list: ["FileShareUser"],
+    #     invalid_user_list: ["FileShareUser"],
+    #     authentication: "Authentication",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.file_share_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSMBFileShare AWS API Documentation
+    #
+    # @overload create_smb_file_share(params = {})
+    # @param [Hash] params ({})
+    def create_smb_file_share(params = {}, options = {})
+      req = build_request(:create_smb_file_share, params)
       req.send_request(options)
     end
 
@@ -1084,6 +1276,15 @@ module Aws::StorageGateway
     #
     #   Valid Values: A valid IP address.
     #
+    # @option params [Boolean] :kms_encrypted
+    #   True to use Amazon S3 server side encryption with your own AWS KMS
+    #   key, or false to use a key managed by Amazon S3. Optional.
+    #
+    # @option params [String] :kms_key
+    #   The Amazon Resource Name (ARN) of the KMS key used for Amazon S3
+    #   server side encryption. This value can only be set when KMSEncrypted
+    #   is true. Optional.
+    #
     # @return [Types::CreateStorediSCSIVolumeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStorediSCSIVolumeOutput#volume_arn #volume_arn} => String
@@ -1120,6 +1321,8 @@ module Aws::StorageGateway
     #     preserve_existing_data: false, # required
     #     target_name: "TargetName", # required
     #     network_interface_id: "NetworkInterfaceId", # required
+    #     kms_encrypted: false,
+    #     kms_key: "KMSKey",
     #   })
     #
     # @example Response structure
@@ -1169,6 +1372,15 @@ module Aws::StorageGateway
     #
     #    </note>
     #
+    # @option params [Boolean] :kms_encrypted
+    #   True to use Amazon S3 server side encryption with your own AWS KMS
+    #   key, or false to use a key managed by Amazon S3. Optional.
+    #
+    # @option params [String] :kms_key
+    #   The Amazon Resource Name (ARN) of the AWS KMS Key used for Amazon S3
+    #   server side encryption. This value can only be set when KMSEncrypted
+    #   is true. Optional.
+    #
     # @return [Types::CreateTapeWithBarcodeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTapeWithBarcodeOutput#tape_arn #tape_arn} => String
@@ -1195,6 +1407,8 @@ module Aws::StorageGateway
     #     gateway_arn: "GatewayARN", # required
     #     tape_size_in_bytes: 1, # required
     #     tape_barcode: "TapeBarcode", # required
+    #     kms_encrypted: false,
+    #     kms_key: "KMSKey",
     #   })
     #
     # @example Response structure
@@ -1254,6 +1468,15 @@ module Aws::StorageGateway
     #
     #    </note>
     #
+    # @option params [Boolean] :kms_encrypted
+    #   True to use Amazon S3 server side encryption with your own AWS KMS
+    #   key, or false to use a key managed by Amazon S3. Optional.
+    #
+    # @option params [String] :kms_key
+    #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
+    #   server side encryption. This value can only be set when KMSEncrypted
+    #   is true. Optional.
+    #
     # @return [Types::CreateTapesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTapesOutput#tape_arns #tape_arns} => Array&lt;String&gt;
@@ -1288,6 +1511,8 @@ module Aws::StorageGateway
     #     client_token: "ClientToken", # required
     #     num_tapes_to_create: 1, # required
     #     tape_barcode_prefix: "TapeBarcodePrefix", # required
+    #     kms_encrypted: false,
+    #     kms_key: "KMSKey",
     #   })
     #
     # @example Response structure
@@ -1413,7 +1638,7 @@ module Aws::StorageGateway
     end
 
     # Deletes a file share from a file gateway. This operation is only
-    # supported in the file gateway type.
+    # supported for file gateways.
     #
     # @option params [required, String] :file_share_arn
     #   The Amazon Resource Name (ARN) of the file share to be deleted.
@@ -1922,6 +2147,7 @@ module Aws::StorageGateway
     #   resp.cached_iscsi_volumes[0].volume_iscsi_attributes.chap_enabled #=> Boolean
     #   resp.cached_iscsi_volumes[0].created_date #=> Time
     #   resp.cached_iscsi_volumes[0].volume_used_in_bytes #=> Integer
+    #   resp.cached_iscsi_volumes[0].kms_key #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeCachediSCSIVolumes AWS API Documentation
     #
@@ -2125,8 +2351,9 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Gets a description for one or more file shares from a file gateway.
-    # This operation is only supported in the file gateway type.
+    # Gets a description for one or more Network File System (NFS) file
+    # shares from a file gateway. This operation is only supported for file
+    # gateways.
     #
     # @option params [required, Array<String>] :file_share_arn_list
     #   An array containing the Amazon Resource Name (ARN) of each file share
@@ -2173,6 +2400,91 @@ module Aws::StorageGateway
     # @param [Hash] params ({})
     def describe_nfs_file_shares(params = {}, options = {})
       req = build_request(:describe_nfs_file_shares, params)
+      req.send_request(options)
+    end
+
+    # Gets a description for one or more Server Message Block (SMB) file
+    # shares from a file gateway. This operation is only supported for file
+    # gateways.
+    #
+    # @option params [required, Array<String>] :file_share_arn_list
+    #   An array containing the Amazon Resource Name (ARN) of each file share
+    #   to be described.
+    #
+    # @return [Types::DescribeSMBFileSharesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSMBFileSharesOutput#smb_file_share_info_list #smb_file_share_info_list} => Array&lt;Types::SMBFileShareInfo&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_smb_file_shares({
+    #     file_share_arn_list: ["FileShareARN"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.smb_file_share_info_list #=> Array
+    #   resp.smb_file_share_info_list[0].file_share_arn #=> String
+    #   resp.smb_file_share_info_list[0].file_share_id #=> String
+    #   resp.smb_file_share_info_list[0].file_share_status #=> String
+    #   resp.smb_file_share_info_list[0].gateway_arn #=> String
+    #   resp.smb_file_share_info_list[0].kms_encrypted #=> Boolean
+    #   resp.smb_file_share_info_list[0].kms_key #=> String
+    #   resp.smb_file_share_info_list[0].path #=> String
+    #   resp.smb_file_share_info_list[0].role #=> String
+    #   resp.smb_file_share_info_list[0].location_arn #=> String
+    #   resp.smb_file_share_info_list[0].default_storage_class #=> String
+    #   resp.smb_file_share_info_list[0].object_acl #=> String, one of "private", "public-read", "public-read-write", "authenticated-read", "bucket-owner-read", "bucket-owner-full-control", "aws-exec-read"
+    #   resp.smb_file_share_info_list[0].read_only #=> Boolean
+    #   resp.smb_file_share_info_list[0].guess_mime_type_enabled #=> Boolean
+    #   resp.smb_file_share_info_list[0].requester_pays #=> Boolean
+    #   resp.smb_file_share_info_list[0].valid_user_list #=> Array
+    #   resp.smb_file_share_info_list[0].valid_user_list[0] #=> String
+    #   resp.smb_file_share_info_list[0].invalid_user_list #=> Array
+    #   resp.smb_file_share_info_list[0].invalid_user_list[0] #=> String
+    #   resp.smb_file_share_info_list[0].authentication #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBFileShares AWS API Documentation
+    #
+    # @overload describe_smb_file_shares(params = {})
+    # @param [Hash] params ({})
+    def describe_smb_file_shares(params = {}, options = {})
+      req = build_request(:describe_smb_file_shares, params)
+      req.send_request(options)
+    end
+
+    # Gets a description of a Server Message Block (SMB) file share settings
+    # from a file gateway. This operation is only supported for file
+    # gateways.
+    #
+    # @option params [required, String] :gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and region.
+    #
+    # @return [Types::DescribeSMBSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSMBSettingsOutput#gateway_arn #gateway_arn} => String
+    #   * {Types::DescribeSMBSettingsOutput#domain_name #domain_name} => String
+    #   * {Types::DescribeSMBSettingsOutput#smb_guest_password_set #smb_guest_password_set} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_smb_settings({
+    #     gateway_arn: "GatewayARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_arn #=> String
+    #   resp.domain_name #=> String
+    #   resp.smb_guest_password_set #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBSettings AWS API Documentation
+    #
+    # @overload describe_smb_settings(params = {})
+    # @param [Hash] params ({})
+    def describe_smb_settings(params = {}, options = {})
+      req = build_request(:describe_smb_settings, params)
       req.send_request(options)
     end
 
@@ -2308,6 +2620,7 @@ module Aws::StorageGateway
     #   resp.stored_iscsi_volumes[0].volume_iscsi_attributes.chap_enabled #=> Boolean
     #   resp.stored_iscsi_volumes[0].created_date #=> Time
     #   resp.stored_iscsi_volumes[0].volume_used_in_bytes #=> Integer
+    #   resp.stored_iscsi_volumes[0].kms_key #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeStorediSCSIVolumes AWS API Documentation
     #
@@ -2397,6 +2710,7 @@ module Aws::StorageGateway
     #   resp.tape_archives[0].retrieved_to #=> String
     #   resp.tape_archives[0].tape_status #=> String
     #   resp.tape_archives[0].tape_used_in_bytes #=> Integer
+    #   resp.tape_archives[0].kms_key #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapeArchives AWS API Documentation
@@ -2577,6 +2891,7 @@ module Aws::StorageGateway
     #   resp.tapes[0].vtl_device #=> String
     #   resp.tapes[0].progress #=> Float
     #   resp.tapes[0].tape_used_in_bytes #=> Integer
+    #   resp.tapes[0].kms_key #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapes AWS API Documentation
@@ -2915,9 +3230,53 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
+    # Adds a file gateway to an Active Directory domain. This operation is
+    # only supported for file gateways that support the SMB file protocol.
+    #
+    # @option params [required, String] :gateway_arn
+    #   The unique Amazon Resource Name (ARN) of the file gateway you want to
+    #   add to the Active Directory domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain that you want the gateway to join.
+    #
+    # @option params [required, String] :user_name
+    #   Sets the user name of user who has permission to add the gateway to
+    #   the Active Directory domain.
+    #
+    # @option params [required, String] :password
+    #   Sets the password of the user who has permission to add the gateway to
+    #   the Active Directory domain.
+    #
+    # @return [Types::JoinDomainOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::JoinDomainOutput#gateway_arn #gateway_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.join_domain({
+    #     gateway_arn: "GatewayARN", # required
+    #     domain_name: "DomainName", # required
+    #     user_name: "DomainUserName", # required
+    #     password: "DomainUserPassword", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/JoinDomain AWS API Documentation
+    #
+    # @overload join_domain(params = {})
+    # @param [Hash] params ({})
+    def join_domain(params = {}, options = {})
+      req = build_request(:join_domain, params)
+      req.send_request(options)
+    end
+
     # Gets a list of the file shares for a specific file gateway, or the
     # list of file shares that belong to the calling user account. This
-    # operation is only supported in the file gateway type.
+    # operation is only supported for file gateways.
     #
     # @option params [String] :gateway_arn
     #   The Amazon resource Name (ARN) of the gateway whose file shares you
@@ -2952,6 +3311,7 @@ module Aws::StorageGateway
     #   resp.marker #=> String
     #   resp.next_marker #=> String
     #   resp.file_share_info_list #=> Array
+    #   resp.file_share_info_list[0].file_share_type #=> String, one of "NFS", "SMB"
     #   resp.file_share_info_list[0].file_share_arn #=> String
     #   resp.file_share_info_list[0].file_share_id #=> String
     #   resp.file_share_info_list[0].file_share_status #=> String
@@ -3458,7 +3818,7 @@ module Aws::StorageGateway
     # notification through an Amazon CloudWatch Event. You can configure
     # CloudWatch Events to send the notification through event targets such
     # as Amazon SNS or AWS Lambda function. This operation is only supported
-    # in the file gateway type.
+    # for file gateways.
     #
     # For more information, see Getting File Upload Notification in the
     # Storage Gateway User Guide
@@ -3806,6 +4166,41 @@ module Aws::StorageGateway
     # @param [Hash] params ({})
     def set_local_console_password(params = {}, options = {})
       req = build_request(:set_local_console_password, params)
+      req.send_request(options)
+    end
+
+    # Sets the password for the guest user `smbguest`. The `smbguest` user
+    # is the user when the authentication method for the file share is set
+    # to `GuestAccess`.
+    #
+    # @option params [required, String] :gateway_arn
+    #   The Amazon Resource Name (ARN) of the file gateway the SMB file share
+    #   is associated with.
+    #
+    # @option params [required, String] :password
+    #   The password that you want to set for your SMB Server.
+    #
+    # @return [Types::SetSMBGuestPasswordOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SetSMBGuestPasswordOutput#gateway_arn #gateway_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_smb_guest_password({
+    #     gateway_arn: "GatewayARN", # required
+    #     password: "SMBGuestPassword", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SetSMBGuestPassword AWS API Documentation
+    #
+    # @overload set_smb_guest_password(params = {})
+    # @param [Hash] params ({})
+    def set_smb_guest_password(params = {}, options = {})
+      req = build_request(:set_smb_guest_password, params)
       req.send_request(options)
     end
 
@@ -4274,8 +4669,8 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Updates a file share. This operation is only supported in the file
-    # gateway type.
+    # Updates a Network File System (NFS) file share. This operation is only
+    # supported in the file gateway type.
     #
     # <note markdown="1"> To leave a file share field unchanged, set the corresponding input
     # field to null.
@@ -4307,22 +4702,23 @@ module Aws::StorageGateway
     #   key, or false to use a key managed by Amazon S3. Optional.
     #
     # @option params [String] :kms_key
-    #   The KMS key used for Amazon S3 server side encryption. This value can
-    #   only be set when KmsEncrypted is true. Optional.
+    #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
+    #   server side encryption. This value can only be set when KMSEncrypted
+    #   is true. Optional.
     #
     # @option params [Types::NFSFileShareDefaults] :nfs_file_share_defaults
     #   The default values for the file share. Optional.
     #
     # @option params [String] :default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket by
-    #   a file gateway. Possible values are S3\_STANDARD or S3\_STANDARD\_IA.
-    #   If this field is not populated, the default value S3\_STANDARD is
-    #   used. Optional.
+    #   the file gateway. Possible values are `S3_STANDARD`, `S3_STANDARD_IA`,
+    #   or `S3_ONEZONE_IA`. If this field is not populated, the default value
+    #   `S3_STANDARD` is used. Optional.
     #
     # @option params [String] :object_acl
-    #   Sets the access control list permission for objects in the S3 bucket
-    #   that a file gateway puts objects into. The default value is
-    #   "private".
+    #   A value that sets the access control list permission for objects in
+    #   the S3 bucket that a file gateway puts objects into. The default value
+    #   is "private".
     #
     # @option params [Array<String>] :client_list
     #   The list of clients that are allowed to access the file gateway. The
@@ -4331,25 +4727,25 @@ module Aws::StorageGateway
     # @option params [String] :squash
     #   The user mapped to anonymous user. Valid options are the following:
     #
-    #   * "RootSquash" - Only root is mapped to anonymous user.
+    #   * `RootSquash` - Only root is mapped to anonymous user.
     #
-    #   * "NoSquash" - No one is mapped to anonymous user
+    #   * `NoSquash` - No one is mapped to anonymous user
     #
-    #   * "AllSquash" - Everyone is mapped to anonymous user.
+    #   * `AllSquash` - Everyone is mapped to anonymous user.
     #
     # @option params [Boolean] :read_only
-    #   Sets the write status of a file share. This value is true if the write
-    #   status is read-only, and otherwise false.
+    #   A value that sets the write status of a file share. This value is true
+    #   if the write status is read-only, and otherwise false.
     #
     # @option params [Boolean] :guess_mime_type_enabled
-    #   Enables guessing of the MIME type for uploaded objects based on file
-    #   extensions. Set this value to true to enable MIME type guessing, and
-    #   otherwise to false. The default value is true.
+    #   A value that enables guessing of the MIME type for uploaded objects
+    #   based on file extensions. Set this value to true to enable MIME type
+    #   guessing, and otherwise to false. The default value is true.
     #
     # @option params [Boolean] :requester_pays
-    #   Sets who pays the cost of the request and the data download from the
-    #   Amazon S3 bucket. Set this value to true if you want the requester to
-    #   pay instead of the bucket owner, and otherwise to false.
+    #   A value that sets the access control list permission for objects in
+    #   the Amazon S3 bucket that a file gateway puts objects into. The
+    #   default value is `private`.
     #
     # @return [Types::UpdateNFSFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4386,6 +4782,111 @@ module Aws::StorageGateway
     # @param [Hash] params ({})
     def update_nfs_file_share(params = {}, options = {})
       req = build_request(:update_nfs_file_share, params)
+      req.send_request(options)
+    end
+
+    # Updates a Server Message Block (SMB) file share.
+    #
+    # <note markdown="1"> To leave a file share field unchanged, set the corresponding input
+    # field to null. This operation is only supported for file gateways.
+    #
+    #  </note>
+    #
+    # File gateways require AWS Security Token Service (AWS STS) to be
+    # activated to enable you to create a file share. Make sure that AWS STS
+    # is activated in the AWS Region you are creating your file gateway in.
+    # If AWS STS is not activated in this AWS Region, activate it. For
+    # information about how to activate AWS STS, see [Activating and
+    # Deactivating AWS STS in an AWS Region][1] in the *AWS Identity and
+    # Access Management User Guide.*
+    #
+    #  File gateways don't support creating hard or symbolic links on a
+    # file
+    # share.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
+    #
+    # @option params [required, String] :file_share_arn
+    #   The Amazon Resource Name (ARN) of the SMB file share that you want to
+    #   update.
+    #
+    # @option params [Boolean] :kms_encrypted
+    #   True to use Amazon S3 server side encryption with your own AWS KMS
+    #   key, or false to use a key managed by Amazon S3. Optional.
+    #
+    # @option params [String] :kms_key
+    #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
+    #   server side encryption. This value can only be set when KMSEncrypted
+    #   is true. Optional.
+    #
+    # @option params [String] :default_storage_class
+    #   The default storage class for objects put into an Amazon S3 bucket by
+    #   the file gateway. Possible values are `S3_STANDARD`, `S3_STANDARD_IA`,
+    #   or `S3_ONEZONE_IA`. If this field is not populated, the default value
+    #   `S3_STANDARD` is used. Optional.
+    #
+    # @option params [String] :object_acl
+    #   A value that sets the access control list permission for objects in
+    #   the S3 bucket that a file gateway puts objects into. The default value
+    #   is "private".
+    #
+    # @option params [Boolean] :read_only
+    #   A value that sets the write status of a file share. This value is true
+    #   if the write status is read-only, and otherwise false.
+    #
+    # @option params [Boolean] :guess_mime_type_enabled
+    #   A value that enables guessing of the MIME type for uploaded objects
+    #   based on file extensions. Set this value to true to enable MIME type
+    #   guessing, and otherwise to false. The default value is true.
+    #
+    # @option params [Boolean] :requester_pays
+    #   A value that sets the access control list permission for objects in
+    #   the Amazon S3 bucket that a file gateway puts objects into. The
+    #   default value is `private`.
+    #
+    # @option params [Array<String>] :valid_user_list
+    #   A list of users or groups in the Active Directory that are allowed to
+    #   access the file share. A group must be prefixed with the @ character.
+    #   For example `@group1`. Can only be set if Authentication is set to
+    #   `ActiveDirectory`.
+    #
+    # @option params [Array<String>] :invalid_user_list
+    #   A list of users or groups in the Active Directory that are not allowed
+    #   to access the file share. A group must be prefixed with the @
+    #   character. For example `@group1`. Can only be set if Authentication is
+    #   set to `ActiveDirectory`.
+    #
+    # @return [Types::UpdateSMBFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSMBFileShareOutput#file_share_arn #file_share_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_smb_file_share({
+    #     file_share_arn: "FileShareARN", # required
+    #     kms_encrypted: false,
+    #     kms_key: "KMSKey",
+    #     default_storage_class: "StorageClass",
+    #     object_acl: "private", # accepts private, public-read, public-read-write, authenticated-read, bucket-owner-read, bucket-owner-full-control, aws-exec-read
+    #     read_only: false,
+    #     guess_mime_type_enabled: false,
+    #     requester_pays: false,
+    #     valid_user_list: ["FileShareUser"],
+    #     invalid_user_list: ["FileShareUser"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.file_share_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBFileShare AWS API Documentation
+    #
+    # @overload update_smb_file_share(params = {})
+    # @param [Hash] params ({})
+    def update_smb_file_share(params = {}, options = {})
+      req = build_request(:update_smb_file_share, params)
       req.send_request(options)
     end
 
@@ -4528,7 +5029,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

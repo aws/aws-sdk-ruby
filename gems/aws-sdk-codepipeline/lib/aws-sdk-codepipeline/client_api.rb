@@ -784,12 +784,15 @@ module Aws::CodePipeline
       api.version = "2015-07-09"
 
       api.metadata = {
+        "apiVersion" => "2015-07-09",
         "endpointPrefix" => "codepipeline",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "CodePipeline",
         "serviceFullName" => "AWS CodePipeline",
         "signatureVersion" => "v4",
         "targetPrefix" => "CodePipeline_20150709",
+        "uid" => "codepipeline-2015-07-09",
       }
 
       api.add_operation(:acknowledge_job, Seahorse::Model::Operation.new.tap do |o|
@@ -1143,6 +1146,7 @@ module Aws::CodePipeline
         o.errors << Shapes::ShapeRef.new(shape: InvalidActionDeclarationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidBlockerDeclarationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidStructureException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
     end
 

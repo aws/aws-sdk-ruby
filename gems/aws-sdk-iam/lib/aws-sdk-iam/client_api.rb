@@ -23,6 +23,7 @@ module Aws::IAM
     AttachGroupPolicyRequest = Shapes::StructureShape.new(name: 'AttachGroupPolicyRequest')
     AttachRolePolicyRequest = Shapes::StructureShape.new(name: 'AttachRolePolicyRequest')
     AttachUserPolicyRequest = Shapes::StructureShape.new(name: 'AttachUserPolicyRequest')
+    AttachedPermissionsBoundary = Shapes::StructureShape.new(name: 'AttachedPermissionsBoundary')
     AttachedPolicy = Shapes::StructureShape.new(name: 'AttachedPolicy')
     BootstrapDatum = Shapes::BlobShape.new(name: 'BootstrapDatum')
     ChangePasswordRequest = Shapes::StructureShape.new(name: 'ChangePasswordRequest')
@@ -75,6 +76,7 @@ module Aws::IAM
     DeleteOpenIDConnectProviderRequest = Shapes::StructureShape.new(name: 'DeleteOpenIDConnectProviderRequest')
     DeletePolicyRequest = Shapes::StructureShape.new(name: 'DeletePolicyRequest')
     DeletePolicyVersionRequest = Shapes::StructureShape.new(name: 'DeletePolicyVersionRequest')
+    DeleteRolePermissionsBoundaryRequest = Shapes::StructureShape.new(name: 'DeleteRolePermissionsBoundaryRequest')
     DeleteRolePolicyRequest = Shapes::StructureShape.new(name: 'DeleteRolePolicyRequest')
     DeleteRoleRequest = Shapes::StructureShape.new(name: 'DeleteRoleRequest')
     DeleteSAMLProviderRequest = Shapes::StructureShape.new(name: 'DeleteSAMLProviderRequest')
@@ -84,6 +86,7 @@ module Aws::IAM
     DeleteServiceLinkedRoleResponse = Shapes::StructureShape.new(name: 'DeleteServiceLinkedRoleResponse')
     DeleteServiceSpecificCredentialRequest = Shapes::StructureShape.new(name: 'DeleteServiceSpecificCredentialRequest')
     DeleteSigningCertificateRequest = Shapes::StructureShape.new(name: 'DeleteSigningCertificateRequest')
+    DeleteUserPermissionsBoundaryRequest = Shapes::StructureShape.new(name: 'DeleteUserPermissionsBoundaryRequest')
     DeleteUserPolicyRequest = Shapes::StructureShape.new(name: 'DeleteUserPolicyRequest')
     DeleteUserRequest = Shapes::StructureShape.new(name: 'DeleteUserRequest')
     DeleteVirtualMFADeviceRequest = Shapes::StructureShape.new(name: 'DeleteVirtualMFADeviceRequest')
@@ -218,6 +221,7 @@ module Aws::IAM
     OrganizationsDecisionDetail = Shapes::StructureShape.new(name: 'OrganizationsDecisionDetail')
     PasswordPolicy = Shapes::StructureShape.new(name: 'PasswordPolicy')
     PasswordPolicyViolationException = Shapes::StructureShape.new(name: 'PasswordPolicyViolationException')
+    PermissionsBoundaryAttachmentType = Shapes::StringShape.new(name: 'PermissionsBoundaryAttachmentType')
     Policy = Shapes::StructureShape.new(name: 'Policy')
     PolicyDetail = Shapes::StructureShape.new(name: 'PolicyDetail')
     PolicyEvaluationDecisionType = Shapes::StringShape.new(name: 'PolicyEvaluationDecisionType')
@@ -229,12 +233,15 @@ module Aws::IAM
     PolicyRole = Shapes::StructureShape.new(name: 'PolicyRole')
     PolicyRoleListType = Shapes::ListShape.new(name: 'PolicyRoleListType')
     PolicySourceType = Shapes::StringShape.new(name: 'PolicySourceType')
+    PolicyUsageType = Shapes::StringShape.new(name: 'PolicyUsageType')
     PolicyUser = Shapes::StructureShape.new(name: 'PolicyUser')
     PolicyUserListType = Shapes::ListShape.new(name: 'PolicyUserListType')
     PolicyVersion = Shapes::StructureShape.new(name: 'PolicyVersion')
     Position = Shapes::StructureShape.new(name: 'Position')
     PutGroupPolicyRequest = Shapes::StructureShape.new(name: 'PutGroupPolicyRequest')
+    PutRolePermissionsBoundaryRequest = Shapes::StructureShape.new(name: 'PutRolePermissionsBoundaryRequest')
     PutRolePolicyRequest = Shapes::StructureShape.new(name: 'PutRolePolicyRequest')
+    PutUserPermissionsBoundaryRequest = Shapes::StructureShape.new(name: 'PutUserPermissionsBoundaryRequest')
     PutUserPolicyRequest = Shapes::StructureShape.new(name: 'PutUserPolicyRequest')
     ReasonType = Shapes::StringShape.new(name: 'ReasonType')
     RegionNameType = Shapes::StringShape.new(name: 'RegionNameType')
@@ -456,6 +463,10 @@ module Aws::IAM
     AttachUserPolicyRequest.add_member(:policy_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "PolicyArn"))
     AttachUserPolicyRequest.struct_class = Types::AttachUserPolicyRequest
 
+    AttachedPermissionsBoundary.add_member(:permissions_boundary_type, Shapes::ShapeRef.new(shape: PermissionsBoundaryAttachmentType, location_name: "PermissionsBoundaryType"))
+    AttachedPermissionsBoundary.add_member(:permissions_boundary_arn, Shapes::ShapeRef.new(shape: arnType, location_name: "PermissionsBoundaryArn"))
+    AttachedPermissionsBoundary.struct_class = Types::AttachedPermissionsBoundary
+
     AttachedPolicy.add_member(:policy_name, Shapes::ShapeRef.new(shape: policyNameType, location_name: "PolicyName"))
     AttachedPolicy.add_member(:policy_arn, Shapes::ShapeRef.new(shape: arnType, location_name: "PolicyArn"))
     AttachedPolicy.struct_class = Types::AttachedPolicy
@@ -536,6 +547,7 @@ module Aws::IAM
     CreateRoleRequest.add_member(:assume_role_policy_document, Shapes::ShapeRef.new(shape: policyDocumentType, required: true, location_name: "AssumeRolePolicyDocument"))
     CreateRoleRequest.add_member(:description, Shapes::ShapeRef.new(shape: roleDescriptionType, location_name: "Description"))
     CreateRoleRequest.add_member(:max_session_duration, Shapes::ShapeRef.new(shape: roleMaxSessionDurationType, location_name: "MaxSessionDuration"))
+    CreateRoleRequest.add_member(:permissions_boundary, Shapes::ShapeRef.new(shape: arnType, location_name: "PermissionsBoundary"))
     CreateRoleRequest.struct_class = Types::CreateRoleRequest
 
     CreateRoleResponse.add_member(:role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "Role"))
@@ -565,6 +577,7 @@ module Aws::IAM
 
     CreateUserRequest.add_member(:path, Shapes::ShapeRef.new(shape: pathType, location_name: "Path"))
     CreateUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, required: true, location_name: "UserName"))
+    CreateUserRequest.add_member(:permissions_boundary, Shapes::ShapeRef.new(shape: arnType, location_name: "PermissionsBoundary"))
     CreateUserRequest.struct_class = Types::CreateUserRequest
 
     CreateUserResponse.add_member(:user, Shapes::ShapeRef.new(shape: User, location_name: "User"))
@@ -611,6 +624,9 @@ module Aws::IAM
     DeletePolicyVersionRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: policyVersionIdType, required: true, location_name: "VersionId"))
     DeletePolicyVersionRequest.struct_class = Types::DeletePolicyVersionRequest
 
+    DeleteRolePermissionsBoundaryRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: roleNameType, required: true, location_name: "RoleName"))
+    DeleteRolePermissionsBoundaryRequest.struct_class = Types::DeleteRolePermissionsBoundaryRequest
+
     DeleteRolePolicyRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: roleNameType, required: true, location_name: "RoleName"))
     DeleteRolePolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: policyNameType, required: true, location_name: "PolicyName"))
     DeleteRolePolicyRequest.struct_class = Types::DeleteRolePolicyRequest
@@ -641,6 +657,9 @@ module Aws::IAM
     DeleteSigningCertificateRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: existingUserNameType, location_name: "UserName"))
     DeleteSigningCertificateRequest.add_member(:certificate_id, Shapes::ShapeRef.new(shape: certificateIdType, required: true, location_name: "CertificateId"))
     DeleteSigningCertificateRequest.struct_class = Types::DeleteSigningCertificateRequest
+
+    DeleteUserPermissionsBoundaryRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, required: true, location_name: "UserName"))
+    DeleteUserPermissionsBoundaryRequest.struct_class = Types::DeleteUserPermissionsBoundaryRequest
 
     DeleteUserPolicyRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: existingUserNameType, required: true, location_name: "UserName"))
     DeleteUserPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: policyNameType, required: true, location_name: "PolicyName"))
@@ -926,6 +945,7 @@ module Aws::IAM
     ListEntitiesForPolicyRequest.add_member(:policy_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "PolicyArn"))
     ListEntitiesForPolicyRequest.add_member(:entity_filter, Shapes::ShapeRef.new(shape: EntityType, location_name: "EntityFilter"))
     ListEntitiesForPolicyRequest.add_member(:path_prefix, Shapes::ShapeRef.new(shape: pathType, location_name: "PathPrefix"))
+    ListEntitiesForPolicyRequest.add_member(:policy_usage_filter, Shapes::ShapeRef.new(shape: PolicyUsageType, location_name: "PolicyUsageFilter"))
     ListEntitiesForPolicyRequest.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
     ListEntitiesForPolicyRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: maxItemsType, location_name: "MaxItems"))
     ListEntitiesForPolicyRequest.struct_class = Types::ListEntitiesForPolicyRequest
@@ -1005,6 +1025,7 @@ module Aws::IAM
     ListPoliciesRequest.add_member(:scope, Shapes::ShapeRef.new(shape: policyScopeType, location_name: "Scope"))
     ListPoliciesRequest.add_member(:only_attached, Shapes::ShapeRef.new(shape: booleanType, location_name: "OnlyAttached"))
     ListPoliciesRequest.add_member(:path_prefix, Shapes::ShapeRef.new(shape: policyPathType, location_name: "PathPrefix"))
+    ListPoliciesRequest.add_member(:policy_usage_filter, Shapes::ShapeRef.new(shape: PolicyUsageType, location_name: "PolicyUsageFilter"))
     ListPoliciesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
     ListPoliciesRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: maxItemsType, location_name: "MaxItems"))
     ListPoliciesRequest.struct_class = Types::ListPoliciesRequest
@@ -1132,6 +1153,7 @@ module Aws::IAM
     ManagedPolicyDetail.add_member(:path, Shapes::ShapeRef.new(shape: policyPathType, location_name: "Path"))
     ManagedPolicyDetail.add_member(:default_version_id, Shapes::ShapeRef.new(shape: policyVersionIdType, location_name: "DefaultVersionId"))
     ManagedPolicyDetail.add_member(:attachment_count, Shapes::ShapeRef.new(shape: attachmentCountType, location_name: "AttachmentCount"))
+    ManagedPolicyDetail.add_member(:permissions_boundary_usage_count, Shapes::ShapeRef.new(shape: attachmentCountType, location_name: "PermissionsBoundaryUsageCount"))
     ManagedPolicyDetail.add_member(:is_attachable, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsAttachable"))
     ManagedPolicyDetail.add_member(:description, Shapes::ShapeRef.new(shape: policyDescriptionType, location_name: "Description"))
     ManagedPolicyDetail.add_member(:create_date, Shapes::ShapeRef.new(shape: dateType, location_name: "CreateDate"))
@@ -1167,6 +1189,7 @@ module Aws::IAM
     Policy.add_member(:path, Shapes::ShapeRef.new(shape: policyPathType, location_name: "Path"))
     Policy.add_member(:default_version_id, Shapes::ShapeRef.new(shape: policyVersionIdType, location_name: "DefaultVersionId"))
     Policy.add_member(:attachment_count, Shapes::ShapeRef.new(shape: attachmentCountType, location_name: "AttachmentCount"))
+    Policy.add_member(:permissions_boundary_usage_count, Shapes::ShapeRef.new(shape: attachmentCountType, location_name: "PermissionsBoundaryUsageCount"))
     Policy.add_member(:is_attachable, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsAttachable"))
     Policy.add_member(:description, Shapes::ShapeRef.new(shape: policyDescriptionType, location_name: "Description"))
     Policy.add_member(:create_date, Shapes::ShapeRef.new(shape: dateType, location_name: "CreateDate"))
@@ -1210,10 +1233,18 @@ module Aws::IAM
     PutGroupPolicyRequest.add_member(:policy_document, Shapes::ShapeRef.new(shape: policyDocumentType, required: true, location_name: "PolicyDocument"))
     PutGroupPolicyRequest.struct_class = Types::PutGroupPolicyRequest
 
+    PutRolePermissionsBoundaryRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: roleNameType, required: true, location_name: "RoleName"))
+    PutRolePermissionsBoundaryRequest.add_member(:permissions_boundary, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "PermissionsBoundary"))
+    PutRolePermissionsBoundaryRequest.struct_class = Types::PutRolePermissionsBoundaryRequest
+
     PutRolePolicyRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: roleNameType, required: true, location_name: "RoleName"))
     PutRolePolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: policyNameType, required: true, location_name: "PolicyName"))
     PutRolePolicyRequest.add_member(:policy_document, Shapes::ShapeRef.new(shape: policyDocumentType, required: true, location_name: "PolicyDocument"))
     PutRolePolicyRequest.struct_class = Types::PutRolePolicyRequest
+
+    PutUserPermissionsBoundaryRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, required: true, location_name: "UserName"))
+    PutUserPermissionsBoundaryRequest.add_member(:permissions_boundary, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "PermissionsBoundary"))
+    PutUserPermissionsBoundaryRequest.struct_class = Types::PutUserPermissionsBoundaryRequest
 
     PutUserPolicyRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: existingUserNameType, required: true, location_name: "UserName"))
     PutUserPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: policyNameType, required: true, location_name: "PolicyName"))
@@ -1264,6 +1295,7 @@ module Aws::IAM
     Role.add_member(:assume_role_policy_document, Shapes::ShapeRef.new(shape: policyDocumentType, location_name: "AssumeRolePolicyDocument"))
     Role.add_member(:description, Shapes::ShapeRef.new(shape: roleDescriptionType, location_name: "Description"))
     Role.add_member(:max_session_duration, Shapes::ShapeRef.new(shape: roleMaxSessionDurationType, location_name: "MaxSessionDuration"))
+    Role.add_member(:permissions_boundary, Shapes::ShapeRef.new(shape: AttachedPermissionsBoundary, location_name: "PermissionsBoundary"))
     Role.struct_class = Types::Role
 
     RoleDetail.add_member(:path, Shapes::ShapeRef.new(shape: pathType, location_name: "Path"))
@@ -1275,6 +1307,7 @@ module Aws::IAM
     RoleDetail.add_member(:instance_profile_list, Shapes::ShapeRef.new(shape: instanceProfileListType, location_name: "InstanceProfileList"))
     RoleDetail.add_member(:role_policy_list, Shapes::ShapeRef.new(shape: policyDetailListType, location_name: "RolePolicyList"))
     RoleDetail.add_member(:attached_managed_policies, Shapes::ShapeRef.new(shape: attachedPoliciesListType, location_name: "AttachedManagedPolicies"))
+    RoleDetail.add_member(:permissions_boundary, Shapes::ShapeRef.new(shape: AttachedPermissionsBoundary, location_name: "PermissionsBoundary"))
     RoleDetail.struct_class = Types::RoleDetail
 
     RoleUsageListType.member = Shapes::ShapeRef.new(shape: RoleUsageType)
@@ -1499,6 +1532,7 @@ module Aws::IAM
     User.add_member(:arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "Arn"))
     User.add_member(:create_date, Shapes::ShapeRef.new(shape: dateType, required: true, location_name: "CreateDate"))
     User.add_member(:password_last_used, Shapes::ShapeRef.new(shape: dateType, location_name: "PasswordLastUsed"))
+    User.add_member(:permissions_boundary, Shapes::ShapeRef.new(shape: AttachedPermissionsBoundary, location_name: "PermissionsBoundary"))
     User.struct_class = Types::User
 
     UserDetail.add_member(:path, Shapes::ShapeRef.new(shape: pathType, location_name: "Path"))
@@ -1509,6 +1543,7 @@ module Aws::IAM
     UserDetail.add_member(:user_policy_list, Shapes::ShapeRef.new(shape: policyDetailListType, location_name: "UserPolicyList"))
     UserDetail.add_member(:group_list, Shapes::ShapeRef.new(shape: groupNameListType, location_name: "GroupList"))
     UserDetail.add_member(:attached_managed_policies, Shapes::ShapeRef.new(shape: attachedPoliciesListType, location_name: "AttachedManagedPolicies"))
+    UserDetail.add_member(:permissions_boundary, Shapes::ShapeRef.new(shape: AttachedPermissionsBoundary, location_name: "PermissionsBoundary"))
     UserDetail.struct_class = Types::UserDetail
 
     VirtualMFADevice.add_member(:serial_number, Shapes::ShapeRef.new(shape: serialNumberType, required: true, location_name: "SerialNumber"))
@@ -1572,10 +1607,15 @@ module Aws::IAM
       api.version = "2010-05-08"
 
       api.metadata = {
+        "apiVersion" => "2010-05-08",
         "endpointPrefix" => "iam",
+        "globalEndpoint" => "iam.amazonaws.com",
         "protocol" => "query",
+        "serviceAbbreviation" => "IAM",
         "serviceFullName" => "AWS Identity and Access Management",
+        "serviceId" => "IAM",
         "signatureVersion" => "v4",
+        "uid" => "iam-2010-05-08",
         "xmlNamespace" => "https://iam.amazonaws.com/doc/2010-05-08/",
       }
 
@@ -1978,6 +2018,17 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:delete_role_permissions_boundary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRolePermissionsBoundary"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRolePermissionsBoundaryRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: UnmodifiableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:delete_role_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteRolePolicy"
         o.http_method = "POST"
@@ -2063,6 +2114,16 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: DeleteConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:delete_user_permissions_boundary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteUserPermissionsBoundary"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteUserPermissionsBoundaryRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
@@ -2796,6 +2857,19 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:put_role_permissions_boundary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutRolePermissionsBoundary"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutRolePermissionsBoundaryRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: UnmodifiableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: PolicyNotAttachableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:put_role_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutRolePolicy"
         o.http_method = "POST"
@@ -2806,6 +2880,18 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: MalformedPolicyDocumentException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: UnmodifiableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:put_user_permissions_boundary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutUserPermissionsBoundary"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutUserPermissionsBoundaryRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: PolicyNotAttachableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 

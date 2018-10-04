@@ -98,6 +98,20 @@ module Aws::IAM
       data[:max_session_duration]
     end
 
+    # The ARN of the policy used to set the permissions boundary for the
+    # role.
+    #
+    # For more information about permissions boundaries, see [Permissions
+    # Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    # @return [Types::AttachedPermissionsBoundary]
+    def permissions_boundary
+      data[:permissions_boundary]
+    end
+
     # @!endgroup
 
     # @return [Client]

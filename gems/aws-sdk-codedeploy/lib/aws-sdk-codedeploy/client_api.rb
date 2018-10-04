@@ -949,13 +949,17 @@ module Aws::CodeDeploy
       api.version = "2014-10-06"
 
       api.metadata = {
+        "apiVersion" => "2014-10-06",
         "endpointPrefix" => "codedeploy",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "CodeDeploy",
         "serviceFullName" => "AWS CodeDeploy",
+        "serviceId" => "CodeDeploy",
         "signatureVersion" => "v4",
         "targetPrefix" => "CodeDeploy_20141006",
         "timestampFormat" => "unixTimestamp",
+        "uid" => "codedeploy-2014-10-06",
       }
 
       api.add_operation(:add_tags_to_on_premises_instances, Seahorse::Model::Operation.new.tap do |o|

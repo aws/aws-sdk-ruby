@@ -287,6 +287,171 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # Includes information about the specified association.
+    #
+    # @!attribute [rw] association_id
+    #   The association ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_version
+    #   The association version.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_id
+    #   The execution ID for the association. If the association does not
+    #   run at intervals or according to a schedule, then the ExecutionID is
+    #   the same as the AssociationID.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the association execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] detailed_status
+    #   Detailed status information about the execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time the execution started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_execution_date
+    #   The date of the last execution.
+    #   @return [Time]
+    #
+    # @!attribute [rw] resource_count_by_status
+    #   An aggregate status of the resources in the execution based on the
+    #   status type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationExecution AWS API Documentation
+    #
+    class AssociationExecution < Struct.new(
+      :association_id,
+      :association_version,
+      :execution_id,
+      :status,
+      :detailed_status,
+      :created_time,
+      :last_execution_date,
+      :resource_count_by_status)
+      include Aws::Structure
+    end
+
+    # Filters used in the request.
+    #
+    # @note When making an API call, you may pass AssociationExecutionFilter
+    #   data as a hash:
+    #
+    #       {
+    #         key: "ExecutionId", # required, accepts ExecutionId, Status, CreatedTime
+    #         value: "AssociationExecutionFilterValue", # required
+    #         type: "EQUAL", # required, accepts EQUAL, LESS_THAN, GREATER_THAN
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key value used in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value specified for the key.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The filter type specified in the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationExecutionFilter AWS API Documentation
+    #
+    class AssociationExecutionFilter < Struct.new(
+      :key,
+      :value,
+      :type)
+      include Aws::Structure
+    end
+
+    # Includes information about the specified association execution.
+    #
+    # @!attribute [rw] association_id
+    #   The association ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_version
+    #   The association version.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_id
+    #   The execution ID. If the association does not run at intervals or
+    #   according to a schedule, then the ExecutionID is the same as the
+    #   AssociationID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The resource ID, for example, the instance ID where the association
+    #   ran.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type, for example, instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The association execution status.
+    #   @return [String]
+    #
+    # @!attribute [rw] detailed_status
+    #   Detailed information about the execution status.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_execution_date
+    #   The date of the last execution.
+    #   @return [Time]
+    #
+    # @!attribute [rw] output_source
+    #   The location where the association details are saved.
+    #   @return [Types::OutputSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationExecutionTarget AWS API Documentation
+    #
+    class AssociationExecutionTarget < Struct.new(
+      :association_id,
+      :association_version,
+      :execution_id,
+      :resource_id,
+      :resource_type,
+      :status,
+      :detailed_status,
+      :last_execution_date,
+      :output_source)
+      include Aws::Structure
+    end
+
+    # Filters for the association execution.
+    #
+    # @note When making an API call, you may pass AssociationExecutionTargetsFilter
+    #   data as a hash:
+    #
+    #       {
+    #         key: "Status", # required, accepts Status, ResourceId, ResourceType
+    #         value: "AssociationExecutionTargetsFilterValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key value used in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value specified for the key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationExecutionTargetsFilter AWS API Documentation
+    #
+    class AssociationExecutionTargetsFilter < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
     # Describes a filter.
     #
     # @note When making an API call, you may pass AssociationFilter
@@ -524,6 +689,11 @@ module Aws::SSM
     #   The specified targets.
     #   @return [Array<Types::Target>]
     #
+    # @!attribute [rw] target_maps
+    #   The specified key-value mapping of document parameters to target
+    #   resources.
+    #   @return [Array<Hash<String,Array<String>>>]
+    #
     # @!attribute [rw] resolved_targets
     #   A list of resolved targets in the rate control execution.
     #   @return [Types::ResolvedTargets]
@@ -563,6 +733,7 @@ module Aws::SSM
       :current_action,
       :target_parameter_name,
       :targets,
+      :target_maps,
       :resolved_targets,
       :max_concurrency,
       :max_errors,
@@ -668,6 +839,11 @@ module Aws::SSM
     #   The targets defined by the user when starting the Automation.
     #   @return [Array<Types::Target>]
     #
+    # @!attribute [rw] target_maps
+    #   The specified key-value mapping of document parameters to target
+    #   resources.
+    #   @return [Array<Hash<String,Array<String>>>]
+    #
     # @!attribute [rw] resolved_targets
     #   A list of targets that resolved during the execution.
     #   @return [Types::ResolvedTargets]
@@ -705,6 +881,7 @@ module Aws::SSM
       :failure_message,
       :target_parameter_name,
       :targets,
+      :target_maps,
       :resolved_targets,
       :max_concurrency,
       :max_errors,
@@ -744,6 +921,35 @@ module Aws::SSM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CancelCommandResult AWS API Documentation
     #
     class CancelCommandResult < Aws::EmptyStructure; end
+
+    # Configuration options for sending command output to CloudWatch Logs.
+    #
+    # @note When making an API call, you may pass CloudWatchOutputConfig
+    #   data as a hash:
+    #
+    #       {
+    #         cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #         cloud_watch_output_enabled: false,
+    #       }
+    #
+    # @!attribute [rw] cloud_watch_log_group_name
+    #   The name of the CloudWatch log group where you want to send command
+    #   output. If you don't specify a group name, Systems Manager
+    #   automatically creates a log group for you. The log group uses the
+    #   following naming format: aws/ssm/*SystemsManagerDocumentName*.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_output_enabled
+    #   Enables Systems Manager to send command output to CloudWatch Logs.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CloudWatchOutputConfig AWS API Documentation
+    #
+    class CloudWatchOutputConfig < Struct.new(
+      :cloud_watch_log_group_name,
+      :cloud_watch_output_enabled)
+      include Aws::Structure
+    end
 
     # Describes a command request.
     #
@@ -798,8 +1004,9 @@ module Aws::SSM
     #   more information than Status because it includes states resulting
     #   from error and concurrency control parameters. StatusDetails can
     #   show different results than Status. For more information about these
-    #   statuses, see [Run Command Status][1]. StatusDetails can be one of
-    #   the following values:
+    #   statuses, see [Understanding Command Statuses][1] in the *AWS
+    #   Systems Manager User Guide*. StatusDetails can be one of the
+    #   following values:
     #
     #   * Pending: The command has not been sent to any instances.
     #
@@ -835,7 +1042,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-about-status.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html
     #   @return [String]
     #
     # @!attribute [rw] output_s3_region
@@ -860,7 +1067,8 @@ module Aws::SSM
     #   command at the same time. You can specify a number of instances,
     #   such as 10, or a percentage of instances, such as 10%. The default
     #   value is 50. For more information about how to use MaxConcurrency,
-    #   see [Executing a Command Using Systems Manager Run Command][1].
+    #   see [Executing Commands Using Systems Manager Run Command][1] in the
+    #   *AWS Systems Manager User Guide*.
     #
     #
     #
@@ -872,7 +1080,8 @@ module Aws::SSM
     #   the command to additional targets. You can specify a number of
     #   errors, such as 10, or a percentage or errors, such as 10%. The
     #   default value is 0. For more information about how to use MaxErrors,
-    #   see [Executing a Command Using Systems Manager Run Command][1].
+    #   see [Executing Commands Using Systems Manager Run Command][1] in the
+    #   *AWS Systems Manager User Guide*.
     #
     #
     #
@@ -895,6 +1104,10 @@ module Aws::SSM
     #   Timed Out.
     #   @return [Integer]
     #
+    # @!attribute [rw] delivery_timed_out_count
+    #   The number of targets for which the status is Delivery Timed Out.
+    #   @return [Integer]
+    #
     # @!attribute [rw] service_role
     #   The IAM service role that Run Command uses to act on your behalf
     #   when sending notifications about command status changes.
@@ -904,6 +1117,11 @@ module Aws::SSM
     #   Configurations for sending notifications about command status
     #   changes.
     #   @return [Types::NotificationConfig]
+    #
+    # @!attribute [rw] cloud_watch_output_config
+    #   CloudWatch Logs information where you want Systems Manager to send
+    #   the command output.
+    #   @return [Types::CloudWatchOutputConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Command AWS API Documentation
     #
@@ -927,8 +1145,10 @@ module Aws::SSM
       :target_count,
       :completed_count,
       :error_count,
+      :delivery_timed_out_count,
       :service_role,
-      :notification_config)
+      :notification_config,
+      :cloud_watch_output_config)
       include Aws::Structure
     end
 
@@ -938,7 +1158,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status
+    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status, ExecutionStage, DocumentName
     #         value: "CommandFilterValue", # required
     #       }
     #
@@ -947,7 +1167,48 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The filter value.
+    #   The filter value. Valid values for each filter key are as follows:
+    #
+    #   * InvokedAfter: A timestamp to limit your results. For example,
+    #     specify `2018-07-07T00:00:00Z` to see results occurring July 7,
+    #     2018, and later.
+    #
+    #   * InvokedBefore: A timestamp to limit your results. For example,
+    #     specify `2018-07-07T00:00:00Z` to see results before July 7, 2018.
+    #
+    #   * Status: Specify a valid command status to see a list of all
+    #     command executions with that status. Status values you can specify
+    #     include:
+    #
+    #     * Pending
+    #
+    #     * InProgress
+    #
+    #     * Success
+    #
+    #     * Cancelled
+    #
+    #     * Failed
+    #
+    #     * TimedOut
+    #
+    #     * Cancelling
+    #
+    #   * DocumentName: The name of the SSM document for which you want to
+    #     see command results.
+    #
+    #     For example, specify `AWS-RunPatchBaseline` to see command
+    #     executions that used this SSM document to perform security
+    #     patching operations on instances.
+    #
+    #   * ExecutionStage: An enum whose value can be either `Executing` or
+    #     `Complete`.
+    #
+    #     * Specify `Executing` to see a list of command executions that are
+    #       currently still running.
+    #
+    #     * Specify `Complete` to see a list of command exeuctions that have
+    #       already completed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CommandFilter AWS API Documentation
@@ -1006,8 +1267,9 @@ module Aws::SSM
     #   information than Status because it includes states resulting from
     #   error and concurrency control parameters. StatusDetails can show
     #   different results than Status. For more information about these
-    #   statuses, see [Run Command Status][1]. StatusDetails can be one of
-    #   the following values:
+    #   statuses, see [Understanding Command Statuses][1] in the *AWS
+    #   Systems Manager User Guide*. StatusDetails can be one of the
+    #   following values:
     #
     #   * Pending: The command has not been sent to the instance.
     #
@@ -1050,7 +1312,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-about-status.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html
     #   @return [String]
     #
     # @!attribute [rw] trace_output
@@ -1087,6 +1349,11 @@ module Aws::SSM
     #   changes on a per instance basis.
     #   @return [Types::NotificationConfig]
     #
+    # @!attribute [rw] cloud_watch_output_config
+    #   CloudWatch Logs information where you want Systems Manager to send
+    #   the command output.
+    #   @return [Types::CloudWatchOutputConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CommandInvocation AWS API Documentation
     #
     class CommandInvocation < Struct.new(
@@ -1104,7 +1371,8 @@ module Aws::SSM
       :standard_error_url,
       :command_plugins,
       :service_role,
-      :notification_config)
+      :notification_config,
+      :cloud_watch_output_config)
       include Aws::Structure
     end
 
@@ -1127,8 +1395,9 @@ module Aws::SSM
     #   more information than Status because it includes states resulting
     #   from error and concurrency control parameters. StatusDetails can
     #   show different results than Status. For more information about these
-    #   statuses, see [Run Command Status][1]. StatusDetails can be one of
-    #   the following values:
+    #   statuses, see [Understanding Command Statuses][1] in the *AWS
+    #   Systems Manager User Guide*. StatusDetails can be one of the
+    #   following values:
     #
     #   * Pending: The command has not been sent to the instance.
     #
@@ -1171,7 +1440,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-about-status.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html
     #   @return [String]
     #
     # @!attribute [rw] response_code
@@ -1796,7 +2065,7 @@ module Aws::SSM
     #       {
     #         content: "DocumentContent", # required
     #         name: "DocumentName", # required
-    #         document_type: "Command", # accepts Command, Policy, Automation
+    #         document_type: "Command", # accepts Command, Policy, Automation, Session
     #         document_format: "YAML", # accepts YAML, JSON
     #         target_type: "TargetType",
     #       }
@@ -1947,7 +2216,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
     #         name: "BaselineName", # required
     #         global_filters: {
     #           patch_filters: [ # required
@@ -2267,7 +2536,8 @@ module Aws::SSM
     #
     # @!attribute [rw] deletion_summary
     #   A summary of the delete operation. For more information about this
-    #   summary, see [Understanding the Delete Inventory Summary][1].
+    #   summary, see [Understanding the Delete Inventory Summary][1] in the
+    #   *AWS Systems Manager User Guide*.
     #
     #
     #
@@ -2649,6 +2919,151 @@ module Aws::SSM
     #
     class DescribeActivationsResult < Struct.new(
       :activation_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAssociationExecutionTargetsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         association_id: "AssociationId", # required
+    #         execution_id: "AssociationExecutionId", # required
+    #         filters: [
+    #           {
+    #             key: "Status", # required, accepts Status, ResourceId, ResourceType
+    #             value: "AssociationExecutionTargetsFilterValue", # required
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] association_id
+    #   The association ID that includes the execution for which you want to
+    #   view details.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_id
+    #   The execution ID for which you want to view details.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters for the request. You can specify the following filters and
+    #   values.
+    #
+    #   Status (EQUAL)
+    #
+    #   ResourceId (EQUAL)
+    #
+    #   ResourceType (EQUAL)
+    #   @return [Array<Types::AssociationExecutionTargetsFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociationExecutionTargetsRequest AWS API Documentation
+    #
+    class DescribeAssociationExecutionTargetsRequest < Struct.new(
+      :association_id,
+      :execution_id,
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] association_execution_targets
+    #   Information about the execution.
+    #   @return [Array<Types::AssociationExecutionTarget>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. Use this token to get
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociationExecutionTargetsResult AWS API Documentation
+    #
+    class DescribeAssociationExecutionTargetsResult < Struct.new(
+      :association_execution_targets,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAssociationExecutionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         association_id: "AssociationId", # required
+    #         filters: [
+    #           {
+    #             key: "ExecutionId", # required, accepts ExecutionId, Status, CreatedTime
+    #             value: "AssociationExecutionFilterValue", # required
+    #             type: "EQUAL", # required, accepts EQUAL, LESS_THAN, GREATER_THAN
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] association_id
+    #   The association ID for which you want to view execution history
+    #   details.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters for the request. You can specify the following filters and
+    #   values.
+    #
+    #   ExecutionId (EQUAL)
+    #
+    #   Status (EQUAL)
+    #
+    #   CreatedTime (EQUAL, GREATER\_THAN, LESS\_THAN)
+    #   @return [Array<Types::AssociationExecutionFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociationExecutionsRequest AWS API Documentation
+    #
+    class DescribeAssociationExecutionsRequest < Struct.new(
+      :association_id,
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] association_executions
+    #   A list of the executions for the specified association ID.
+    #   @return [Array<Types::AssociationExecution>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. Use this token to get
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociationExecutionsResult AWS API Documentation
+    #
+    class DescribeAssociationExecutionsResult < Struct.new(
+      :association_executions,
       :next_token)
       include Aws::Structure
     end
@@ -3126,8 +3541,14 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] instance_information_filter_list
-    #   One or more filters. Use a filter to return a more specific list of
-    #   instances.
+    #   This is a legacy method. We recommend that you don't use this
+    #   method. Instead, use the InstanceInformationFilter action. The
+    #   `InstanceInformationFilter` action enables you to return instance
+    #   information by using tags that are specified as a key-value mapping.
+    #
+    #   If you do use this method, then you can't use the
+    #   `InstanceInformationFilter` action. Using this method and the
+    #   `InstanceInformationFilter` action causes an exception error.
     #   @return [Array<Types::InstanceInformationFilter>]
     #
     # @!attribute [rw] filters
@@ -4050,6 +4471,69 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeSessionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         state: "Active", # required, accepts Active, History
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         filters: [
+    #           {
+    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Target, Owner, Status
+    #             value: "SessionFilterValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] state
+    #   The session status to retrieve a list of sessions for. For example,
+    #   "active".
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters to limit the type of sessions returned by the
+    #   request.
+    #   @return [Array<Types::SessionFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeSessionsRequest AWS API Documentation
+    #
+    class DescribeSessionsRequest < Struct.new(
+      :state,
+      :max_results,
+      :next_token,
+      :filters)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sessions
+    #   A list of sessions meeting the request parameters.
+    #   @return [Array<Types::Session>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeSessionsResponse AWS API Documentation
+    #
+    class DescribeSessionsResponse < Struct.new(
+      :sessions,
+      :next_token)
+      include Aws::Structure
+    end
+
     # A default version of a document.
     #
     # @!attribute [rw] name
@@ -4604,8 +5088,9 @@ module Aws::SSM
     #   StatusDetails includes more information than Status because it
     #   includes states resulting from error and concurrency control
     #   parameters. StatusDetails can show different results than Status.
-    #   For more information about these statuses, see [Run Command
-    #   Status][1]. StatusDetails can be one of the following values:
+    #   For more information about these statuses, see [Understanding
+    #   Command Statuses][1] in the *AWS Systems Manager User Guide*.
+    #   StatusDetails can be one of the following values:
     #
     #   * Pending: The command has not been sent to the instance.
     #
@@ -4654,7 +5139,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-about-status.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html
     #   @return [String]
     #
     # @!attribute [rw] standard_output_content
@@ -4679,6 +5164,11 @@ module Aws::SSM
     #   the command has not finished executing, then this string is empty.
     #   @return [String]
     #
+    # @!attribute [rw] cloud_watch_output_config
+    #   CloudWatch Logs information where Systems Manager sent the command
+    #   output.
+    #   @return [Types::CloudWatchOutputConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetCommandInvocationResult AWS API Documentation
     #
     class GetCommandInvocationResult < Struct.new(
@@ -4697,7 +5187,43 @@ module Aws::SSM
       :standard_output_content,
       :standard_output_url,
       :standard_error_content,
-      :standard_error_url)
+      :standard_error_url,
+      :cloud_watch_output_config)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetConnectionStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         target: "SessionTarget", # required
+    #       }
+    #
+    # @!attribute [rw] target
+    #   The ID of the instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetConnectionStatusRequest AWS API Documentation
+    #
+    class GetConnectionStatusRequest < Struct.new(
+      :target)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] target
+    #   The ID of the instance to check connection status.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the connection to the instance. For example,
+    #   'Connected' or 'Not Connected'.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetConnectionStatusResponse AWS API Documentation
+    #
+    class GetConnectionStatusResponse < Struct.new(
+      :target,
+      :status)
       include Aws::Structure
     end
 
@@ -4705,7 +5231,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
     #       }
     #
     # @!attribute [rw] operating_system
@@ -4860,7 +5386,7 @@ module Aws::SSM
     #           {
     #             key: "InventoryFilterKey", # required
     #             values: ["InventoryFilterValue"], # required
-    #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan
+    #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
     #           },
     #         ],
     #         aggregators: [
@@ -4869,6 +5395,18 @@ module Aws::SSM
     #             aggregators: {
     #               # recursive InventoryAggregatorList
     #             },
+    #             groups: [
+    #               {
+    #                 name: "InventoryGroupName", # required
+    #                 filters: [ # required
+    #                   {
+    #                     key: "InventoryFilterKey", # required
+    #                     values: ["InventoryFilterValue"], # required
+    #                     type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #                   },
+    #                 ],
+    #               },
+    #             ],
     #           },
     #         ],
     #         result_attributes: [
@@ -5587,9 +6125,9 @@ module Aws::SSM
     #
     # @!attribute [rw] path
     #   The hierarchy for the parameter. Hierarchies start with a forward
-    #   slash (/) and end with the parameter name. A hierarchy can have a
-    #   maximum of 15 levels. Here is an example of a hierarchy:
-    #   `/Finance/Prod/IAD/WinServ2016/license33`
+    #   slash (/) and end with the parameter name. A parameter name
+    #   hierarchy can have a maximum of 15 levels. Here is an example of a
+    #   hierarchy: `/Finance/Prod/IAD/WinServ2016/license33`
     #   @return [String]
     #
     # @!attribute [rw] recursive
@@ -5703,7 +6241,7 @@ module Aws::SSM
     #
     #       {
     #         patch_group: "PatchGroup", # required
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
     #       }
     #
     # @!attribute [rw] patch_group
@@ -6009,7 +6547,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] ping_status
-    #   Connection status of the SSM Agent.
+    #   Connection status of SSM Agent.
     #   @return [String]
     #
     # @!attribute [rw] last_ping_date_time
@@ -6017,11 +6555,11 @@ module Aws::SSM
     #   @return [Time]
     #
     # @!attribute [rw] agent_version
-    #   The version of the SSM Agent running on your Linux instance.
+    #   The version of SSM Agent running on your Linux instance.
     #   @return [String]
     #
     # @!attribute [rw] is_latest_version
-    #   Indicates whether latest version of the SSM Agent is running on your
+    #   Indicates whether latest version of SSM Agent is running on your
     #   instance. Some older versions of Windows Server use the EC2Config
     #   service to process SSM requests. For this reason, this field does
     #   not indicate whether or not the latest version is installed on
@@ -6046,8 +6584,9 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] iam_role
-    #   The Amazon Identity and Access Management (IAM) role assigned to EC2
-    #   instances or managed instances.
+    #   The Amazon Identity and Access Management (IAM) role assigned to the
+    #   on-premises Systems Manager managed instances. This call does not
+    #   return the IAM role for Amazon EC2 instances.
     #   @return [String]
     #
     # @!attribute [rw] registration_date
@@ -6113,7 +6652,14 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Describes a filter for a specific list of instances.
+    # Describes a filter for a specific list of instances. You can filter
+    # instances information by using tags. You specify tags by using a
+    # key-value mapping.
+    #
+    # Use this action instead of the
+    # DescribeInstanceInformationRequest$InstanceInformationFilterList
+    # method. The `InstanceInformationFilterList` method is a legacy method
+    # and does not support tags.
     #
     # @note When making an API call, you may pass InstanceInformationFilter
     #   data as a hash:
@@ -6309,6 +6855,30 @@ module Aws::SSM
     #             aggregators: {
     #               # recursive InventoryAggregatorList
     #             },
+    #             groups: [
+    #               {
+    #                 name: "InventoryGroupName", # required
+    #                 filters: [ # required
+    #                   {
+    #                     key: "InventoryFilterKey", # required
+    #                     values: ["InventoryFilterValue"], # required
+    #                     type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         groups: [
+    #           {
+    #             name: "InventoryGroupName", # required
+    #             filters: [ # required
+    #               {
+    #                 key: "InventoryFilterKey", # required
+    #                 values: ["InventoryFilterValue"], # required
+    #                 type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #               },
+    #             ],
     #           },
     #         ],
     #       }
@@ -6322,11 +6892,18 @@ module Aws::SSM
     #   type.
     #   @return [Array<Types::InventoryAggregator>]
     #
+    # @!attribute [rw] groups
+    #   A user-defined set of one or more filters on which to aggregate
+    #   inventory data. Groups return a count of resources that match and
+    #   don't match the specified criteria.
+    #   @return [Array<Types::InventoryGroup>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryAggregator AWS API Documentation
     #
     class InventoryAggregator < Struct.new(
       :expression,
-      :aggregators)
+      :aggregators,
+      :groups)
       include Aws::Structure
     end
 
@@ -6355,7 +6932,8 @@ module Aws::SSM
     #
     # @!attribute [rw] deletion_summary
     #   Information about the delete operation. For more information about
-    #   this summary, see [Understanding the Delete Inventory Summary][1].
+    #   this summary, see [Understanding the Delete Inventory Summary][1] in
+    #   the *AWS Systems Manager User Guide*.
     #
     #
     #
@@ -6436,7 +7014,7 @@ module Aws::SSM
     #       {
     #         key: "InventoryFilterKey", # required
     #         values: ["InventoryFilterValue"], # required
-    #         type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan
+    #         type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
     #       }
     #
     # @!attribute [rw] key
@@ -6461,6 +7039,43 @@ module Aws::SSM
       :key,
       :values,
       :type)
+      include Aws::Structure
+    end
+
+    # A user-defined set of one or more filters on which to aggregate
+    # inventory data. Groups return a count of resources that match and
+    # don't match the specified criteria.
+    #
+    # @note When making an API call, you may pass InventoryGroup
+    #   data as a hash:
+    #
+    #       {
+    #         name: "InventoryGroupName", # required
+    #         filters: [ # required
+    #           {
+    #             key: "InventoryFilterKey", # required
+    #             values: ["InventoryFilterValue"], # required
+    #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters define the criteria for the group. The `matchingCount` field
+    #   displays the number of resources that match the criteria. The
+    #   `notMatchingCount` field displays the number of resources that
+    #   don't match the criteria.
+    #   @return [Array<Types::InventoryFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryGroup AWS API Documentation
+    #
+    class InventoryGroup < Struct.new(
+      :name,
+      :filters)
       include Aws::Structure
     end
 
@@ -6642,6 +7257,55 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass LabelParameterVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "PSParameterName", # required
+    #         parameter_version: 1,
+    #         labels: ["ParameterLabel"], # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The parameter name on which you want to attach one or more labels.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameter_version
+    #   The specific version of the parameter on which you want to attach
+    #   one or more labels. If no version is specified, the system attaches
+    #   the label to the latest version.)
+    #   @return [Integer]
+    #
+    # @!attribute [rw] labels
+    #   One or more labels to attach to the specified parameter version.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/LabelParameterVersionRequest AWS API Documentation
+    #
+    class LabelParameterVersionRequest < Struct.new(
+      :name,
+      :parameter_version,
+      :labels)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] invalid_labels
+    #   The label does not meet the requirements. For information about
+    #   parameter label requirements, see [Labeling Parameters][1] in the
+    #   *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/LabelParameterVersionResult AWS API Documentation
+    #
+    class LabelParameterVersionResult < Struct.new(
+      :invalid_labels)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListAssociationVersionsRequest
     #   data as a hash:
     #
@@ -6759,7 +7423,7 @@ module Aws::SSM
     #         next_token: "NextToken",
     #         filters: [
     #           {
-    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status
+    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status, ExecutionStage, DocumentName
     #             value: "CommandFilterValue", # required
     #           },
     #         ],
@@ -6834,7 +7498,7 @@ module Aws::SSM
     #         next_token: "NextToken",
     #         filters: [
     #           {
-    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status
+    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status, ExecutionStage, DocumentName
     #             value: "CommandFilterValue", # required
     #           },
     #         ],
@@ -7151,7 +7815,7 @@ module Aws::SSM
     #           {
     #             key: "InventoryFilterKey", # required
     #             values: ["InventoryFilterValue"], # required
-    #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan
+    #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
     #           },
     #         ],
     #         next_token: "NextToken",
@@ -8222,12 +8886,12 @@ module Aws::SSM
     #   The different events for which you can receive notifications. These
     #   events include the following: All (events), InProgress, Success,
     #   TimedOut, Cancelled, Failed. To learn more about these events, see
-    #   [Setting Up Events and Notifications][1] in the *AWS Systems Manager
-    #   User Guide*.
+    #   [Configuring Amazon SNS Notifications for Run Command][1] in the
+    #   *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/rc-sns-notifications.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] notification_type
@@ -8243,6 +8907,27 @@ module Aws::SSM
       :notification_arn,
       :notification_events,
       :notification_type)
+      include Aws::Structure
+    end
+
+    # Information about the source where the association execution details
+    # are stored.
+    #
+    # @!attribute [rw] output_source_id
+    #   The ID of the output source, for example the URL of an Amazon S3
+    #   bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_source_type
+    #   The type of source where the association execution details are
+    #   stored, for example, Amazon S3.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OutputSource AWS API Documentation
+    #
+    class OutputSource < Struct.new(
+      :output_source_id,
+      :output_source_type)
       include Aws::Structure
     end
 
@@ -8265,13 +8950,42 @@ module Aws::SSM
     #   The parameter version.
     #   @return [Integer]
     #
+    # @!attribute [rw] selector
+    #   Either the version number or the label used to retrieve the
+    #   parameter value. Specify selectors by using one of the following
+    #   formats:
+    #
+    #   parameter\_name:version
+    #
+    #   parameter\_name:label
+    #   @return [String]
+    #
+    # @!attribute [rw] source_result
+    #   Applies to parameters that reference information in other AWS
+    #   services. SourceResult is the raw result or response from the
+    #   source.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   Date the parameter was last changed or updated and the parameter
+    #   version was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the parameter.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Parameter AWS API Documentation
     #
     class Parameter < Struct.new(
       :name,
       :type,
       :value,
-      :version)
+      :version,
+      :selector,
+      :source_result,
+      :last_modified_date,
+      :arn)
       include Aws::Structure
     end
 
@@ -8316,6 +9030,10 @@ module Aws::SSM
     #   The parameter version.
     #   @return [Integer]
     #
+    # @!attribute [rw] labels
+    #   Labels assigned to the parameter version.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterHistory AWS API Documentation
     #
     class ParameterHistory < Struct.new(
@@ -8327,7 +9045,8 @@ module Aws::SSM
       :description,
       :value,
       :allowed_pattern,
-      :version)
+      :version,
+      :labels)
       include Aws::Structure
     end
 
@@ -8386,6 +9105,11 @@ module Aws::SSM
 
     # One or more filters. Use a filter to return a more specific list of
     # results.
+    #
+    # <note markdown="1"> The `Name` field can't be used with the GetParametersByPath API
+    # action.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass ParameterStringFilter
     #   data as a hash:
@@ -8645,6 +9369,11 @@ module Aws::SSM
     #
     # * `WindowsServer2016`
     #
+    # * `*`
+    #
+    #   *Use a wildcard character (*) to target all supported operating
+    #   system versions.*
+    #
     # *Supported key:* `CLASSIFICATION`
     #
     # *Supported values:*
@@ -8696,6 +9425,11 @@ module Aws::SSM
     # * `Ubuntu14.04`
     #
     # * `Ubuntu16.04`
+    #
+    # * `*`
+    #
+    #   *Use a wildcard character (*) to target all supported operating
+    #   system versions.*
     #
     # *Supported key:* `PRIORITY`
     #
@@ -8749,6 +9483,56 @@ module Aws::SSM
     # * `AmazonLinux2017.03`
     #
     # * `AmazonLinux2017.09`
+    #
+    # * `*`
+    #
+    #   *Use a wildcard character (*) to target all supported operating
+    #   system versions.*
+    #
+    # *Supported key:* `CLASSIFICATION`
+    #
+    # *Supported values:*
+    #
+    # * `Security`
+    #
+    # * `Bugfix`
+    #
+    # * `Enhancement`
+    #
+    # * `Recommended`
+    #
+    # * `Newpackage`
+    #
+    # *Supported key:* `SEVERITY`
+    #
+    # *Supported values:*
+    #
+    # * `Critical`
+    #
+    # * `Important`
+    #
+    # * `Medium`
+    #
+    # * `Low`
+    #
+    # **Amazon Linux 2 Operating Systems**
+    #
+    # The supported keys for Amazon Linux 2 operating systems are `PRODUCT`,
+    # `CLASSIFICATION`, and `SEVERITY`. See the following lists for valid
+    # values for each of these keys.
+    #
+    # *Supported key:* `PRODUCT`
+    #
+    # *Supported values:*
+    #
+    # * `AmazonLinux2`
+    #
+    # * `AmazonLinux2.0`
+    #
+    # * `*`
+    #
+    #   *Use a wildcard character (*) to target all supported operating
+    #   system versions.*
     #
     # *Supported key:* `CLASSIFICATION`
     #
@@ -8806,6 +9590,11 @@ module Aws::SSM
     #
     # * `RedhatEnterpriseLinux7.4`
     #
+    # * `*`
+    #
+    #   *Use a wildcard character (*) to target all supported operating
+    #   system versions.*
+    #
     # *Supported key:* `CLASSIFICATION`
     #
     # *Supported values:*
@@ -8861,6 +9650,11 @@ module Aws::SSM
     # * `Suse12.8`
     #
     # * `Suse12.9`
+    #
+    # * `*`
+    #
+    #   *Use a wildcard character (*) to target all supported operating
+    #   system versions.*
     #
     # *Supported key:* `CLASSIFICATION`
     #
@@ -8919,6 +9713,11 @@ module Aws::SSM
     # * `CentOS7.3`
     #
     # * `CentOS7.4`
+    #
+    # * `*`
+    #
+    #   *Use a wildcard character (*) to target all supported operating
+    #   system versions.*
     #
     # *Supported key:* `CLASSIFICATION`
     #
@@ -9077,7 +9876,9 @@ module Aws::SSM
     #
     # @!attribute [rw] approve_after_days
     #   The number of days after the release date of each patch matched by
-    #   the rule the patch is marked as approved in the patch baseline.
+    #   the rule that the patch is marked as approved in the patch baseline.
+    #   For example, a value of `7` means that patches are approved seven
+    #   days after they are released.
     #   @return [Integer]
     #
     # @!attribute [rw] enable_non_security
@@ -9164,7 +9965,7 @@ module Aws::SSM
     #
     #   `keepcache=0`
     #
-    #   `debualevel=2`
+    #   `debuglevel=2`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchSource AWS API Documentation
@@ -9348,9 +10149,26 @@ module Aws::SSM
     #   of the parameter path and name. For example:
     #   `/Dev/DBServer/MySQL/db-string13`
     #
-    #   For information about parameter name requirements and restrictions,
-    #   see [About Creating Systems Manager Parameters][1] in the *AWS
-    #   Systems Manager User Guide*.
+    #   Naming Constraints:
+    #
+    #   * Parameter names are case sensitive.
+    #
+    #   * A parameter name must be unique within an AWS Region
+    #
+    #   * A parameter name can't be prefixed with "aws" or "ssm"
+    #     (case-insensitive).
+    #
+    #   * Parameter names can include only the following symbols and
+    #     letters: `a-zA-Z0-9_.-/`
+    #
+    #   * A parameter name can't include spaces.
+    #
+    #   * Parameter hierarchies are limited to a maximum depth of fifteen
+    #     levels.
+    #
+    #   For additional information about valid values for parameter names,
+    #   see [Requirements and Constraints for Parameter Names][1] in the
+    #   *AWS Systems Manager User Guide*.
     #
     #   <note markdown="1"> The maximum length constraint listed below includes capacity for
     #   additional system attributes that are not part of the name. The
@@ -9361,11 +10179,12 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html#sysman-paramstore-su-create-about
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html
     #   @return [String]
     #
     # @!attribute [rw] description
     #   Information about the parameter that you want to add to the system.
+    #   Optional but recommended.
     #
     #   Do not enter personally identifiable information in this field.
     #   @return [String]
@@ -9376,12 +10195,34 @@ module Aws::SSM
     #
     # @!attribute [rw] type
     #   The type of parameter that you want to add to the system.
+    #
+    #   Items in a `StringList` must be separated by a comma (,). You can't
+    #   use other punctuation or special character to escape items in the
+    #   list. If you have a parameter value that requires a comma, then use
+    #   the `String` data type.
+    #
+    #   <note markdown="1"> `SecureString` is not currently supported for AWS CloudFormation
+    #   templates or in the China Regions.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] key_id
-    #   The KMS Key ID that you want to use to encrypt a parameter when you
-    #   choose the SecureString data type. If you don't specify a key ID,
-    #   the system uses the default key associated with your AWS account.
+    #   The KMS Key ID that you want to use to encrypt a parameter. Either
+    #   the default AWS Key Management Service (AWS KMS) key automatically
+    #   assigned to your AWS account or a custom key. Required for
+    #   parameters that use the `SecureString` data type.
+    #
+    #   If you don't specify a key ID, the system uses the default key
+    #   associated with your AWS account.
+    #
+    #   * To use your default AWS KMS key, choose the `SecureString` data
+    #     type, and do *not* specify the `Key ID` when you create the
+    #     parameter. The system automatically populates `Key ID` with your
+    #     default KMS key.
+    #
+    #   * To use a custom KMS key, choose the `SecureString` data type with
+    #     the `Key ID` parameter.
     #   @return [String]
     #
     # @!attribute [rw] overwrite
@@ -9594,7 +10435,7 @@ module Aws::SSM
     #           },
     #         ],
     #         task_arn: "MaintenanceWindowTaskArn", # required
-    #         service_role_arn: "ServiceRole", # required
+    #         service_role_arn: "ServiceRole",
     #         task_type: "RUN_COMMAND", # required, accepts RUN_COMMAND, AUTOMATION, STEP_FUNCTIONS, LAMBDA
     #         task_parameters: {
     #           "MaintenanceWindowTaskParameterName" => {
@@ -9669,7 +10510,24 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
-    #   The role that should be assumed when executing the task.
+    #   The role to assume when running the Maintenance Window task.
+    #
+    #   If you do not specify a service role ARN, Systems Manager will use
+    #   your account's service-linked role for Systems Manager by default.
+    #   If no service-linked role for Systems Manager exists in your
+    #   account, it will be created when you run
+    #   `RegisterTaskWithMaintenanceWindow` without specifying a service
+    #   role ARN.
+    #
+    #   For more information, see [Service-Linked Role Permissions for
+    #   Systems Manager][1] and [Should I Use a Service-Linked Role or a
+    #   Custom Service Role to Run Maintenance Window Tasks? ][2] in the
+    #   *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions
+    #   [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role
     #   @return [String]
     #
     # @!attribute [rw] task_type
@@ -10013,6 +10871,62 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ResumeSessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         session_id: "SessionId", # required
+    #       }
+    #
+    # @!attribute [rw] session_id
+    #   The ID of the disconnected session to resume.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResumeSessionRequest AWS API Documentation
+    #
+    class ResumeSessionRequest < Struct.new(
+      :session_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_id
+    #   The ID of the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_value
+    #   An encrypted token value containing session and caller information.
+    #   Used to authenticate the connection to the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_url
+    #   A URL back to SSM Agent on the instance that the Session Manager
+    #   client uses to send commands and receive output from the instance.
+    #   Format:
+    #   `wss://ssm-messages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)`.
+    #
+    #   **region** represents the Region identifier for an AWS Region
+    #   supported by AWS Systems Manager, such as `us-east-2` for the US
+    #   East (Ohio) Region. For a list of supported **region** values, see
+    #   the **Region** column in the [AWS Systems Manager table of regions
+    #   and endpoints][1] in the *AWS General Reference*.
+    #
+    #   **session-id** represents the ID of a Session Manager session, such
+    #   as `1a2b3c4dEXAMPLE`.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html#ssm_region
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResumeSessionResponse AWS API Documentation
+    #
+    class ResumeSessionResponse < Struct.new(
+      :session_id,
+      :token_value,
+      :stream_url)
+      include Aws::Structure
+    end
+
     # An Amazon S3 bucket where you want to store the results of this
     # request.
     #
@@ -10133,6 +11047,10 @@ module Aws::SSM
     #           notification_events: ["All"], # accepts All, InProgress, Success, TimedOut, Cancelled, Failed
     #           notification_type: "Command", # accepts Command, Invocation
     #         },
+    #         cloud_watch_output_config: {
+    #           cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #           cloud_watch_output_enabled: false,
+    #         },
     #       }
     #
     # @!attribute [rw] instance_ids
@@ -10140,7 +11058,8 @@ module Aws::SSM
     #   maximum of 50 IDs. If you prefer not to list individual instance
     #   IDs, you can instead send commands to a fleet of instances using the
     #   Targets parameter, which accepts EC2 tags. For more information
-    #   about how to use Targets, see [Sending Commands to a Fleet][1].
+    #   about how to use Targets, see [Sending Commands to a Fleet][1] in
+    #   the *AWS Systems Manager User Guide*.
     #
     #
     #
@@ -10152,7 +11071,7 @@ module Aws::SSM
     #   a Key,Value combination that you specify. Targets is required if you
     #   don't provide one or more instance IDs in the call. For more
     #   information about how to use Targets, see [Sending Commands to a
-    #   Fleet][1].
+    #   Fleet][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
@@ -10166,7 +11085,16 @@ module Aws::SSM
     #
     # @!attribute [rw] document_version
     #   The SSM document version to use in the request. You can specify
-    #   Default, Latest, or a specific version number.
+    #   $DEFAULT, $LATEST, or a specific version number. If you execute
+    #   commands by using the AWS CLI, then you must escape the first two
+    #   options by using a backslash. If you specify a version number, then
+    #   you don't need to use the backslash. For example:
+    #
+    #   --document-version "\\$DEFAULT"
+    #
+    #   --document-version "\\$LATEST"
+    #
+    #   --document-version "3"
     #   @return [String]
     #
     # @!attribute [rw] document_hash
@@ -10222,11 +11150,11 @@ module Aws::SSM
     #   execute the command at the same time. You can specify a number such
     #   as 10 or a percentage such as 10%. The default value is 50. For more
     #   information about how to use MaxConcurrency, see [Using Concurrency
-    #   Controls][1].
+    #   Controls][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-velocity.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-velocity
     #   @return [String]
     #
     # @!attribute [rw] max_errors
@@ -10235,11 +11163,11 @@ module Aws::SSM
     #   the systems stops sending the command to additional targets. You can
     #   specify a number like 10 or a percentage like 10%. The default value
     #   is 0. For more information about how to use MaxErrors, see [Using
-    #   Error Controls][1].
+    #   Error Controls][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-maxerrors.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-maxerrors
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
@@ -10249,6 +11177,11 @@ module Aws::SSM
     # @!attribute [rw] notification_config
     #   Configurations for sending notifications.
     #   @return [Types::NotificationConfig]
+    #
+    # @!attribute [rw] cloud_watch_output_config
+    #   Enables Systems Manager to send Run Command output to Amazon
+    #   CloudWatch Logs.
+    #   @return [Types::CloudWatchOutputConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendCommandRequest AWS API Documentation
     #
@@ -10268,7 +11201,8 @@ module Aws::SSM
       :max_concurrency,
       :max_errors,
       :service_role_arn,
-      :notification_config)
+      :notification_config,
+      :cloud_watch_output_config)
       include Aws::Structure
     end
 
@@ -10281,6 +11215,137 @@ module Aws::SSM
     #
     class SendCommandResult < Struct.new(
       :command)
+      include Aws::Structure
+    end
+
+    # Information about a Session Manager connection to an instance.
+    #
+    # @!attribute [rw] session_id
+    #   The ID of the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The instance that the Session Manager session connected to.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the session. For example, "Connected" or
+    #   "Terminated".
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date
+    #   The date and time, in ISO-8601 Extended format, when the session
+    #   began.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   The date and time, in ISO-8601 Extended format, when the session was
+    #   terminated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] document_name
+    #   The name of the Session Manager SSM document used to define the
+    #   parameters and plugin settings for the session. For example,
+    #   `SSM-SessionManagerRunShell`.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   The ID of the AWS user account that started the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] details
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_url
+    #   Reserved for future use.
+    #   @return [Types::SessionManagerOutputUrl]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Session AWS API Documentation
+    #
+    class Session < Struct.new(
+      :session_id,
+      :target,
+      :status,
+      :start_date,
+      :end_date,
+      :document_name,
+      :owner,
+      :details,
+      :output_url)
+      include Aws::Structure
+    end
+
+    # Describes a filter for Session Manager information.
+    #
+    # @note When making an API call, you may pass SessionFilter
+    #   data as a hash:
+    #
+    #       {
+    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Target, Owner, Status
+    #         value: "SessionFilterValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The name of the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The filter value. Valid values for each filter key are as follows:
+    #
+    #   * InvokedAfter: Specify a timestamp to limit your results. For
+    #     example, specify 2018-08-29T00:00:00Z to see sessions that started
+    #     August 29, 2018, and later.
+    #
+    #   * InvokedBefore: Specify a timestamp to limit your results. For
+    #     example, specify 2018-08-29T00:00:00Z to see sessions that started
+    #     before August 29, 2018.
+    #
+    #   * Target: Specify an instance to which session connections have been
+    #     made.
+    #
+    #   * Owner: Specify an AWS user account to see a list of sessions
+    #     started by that user.
+    #
+    #   * Status: Specify a valid session status to see a list of all
+    #     sessions with that status. Status values you can specify include:
+    #
+    #     * Connected
+    #
+    #     * Connecting
+    #
+    #     * Disconnected
+    #
+    #     * Terminated
+    #
+    #     * Terminating
+    #
+    #     * Failed
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SessionFilter AWS API Documentation
+    #
+    class SessionFilter < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # Reserved for future use.
+    #
+    # @!attribute [rw] s3_output_url
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_output_url
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SessionManagerOutputUrl AWS API Documentation
+    #
+    class SessionManagerOutputUrl < Struct.new(
+      :s3_output_url,
+      :cloud_watch_output_url)
       include Aws::Structure
     end
 
@@ -10335,6 +11400,29 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartAssociationsOnceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         association_ids: ["AssociationId"], # required
+    #       }
+    #
+    # @!attribute [rw] association_ids
+    #   The association IDs that you want to execute immediately and only
+    #   one time.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartAssociationsOnceRequest AWS API Documentation
+    #
+    class StartAssociationsOnceRequest < Struct.new(
+      :association_ids)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartAssociationsOnceResult AWS API Documentation
+    #
+    class StartAssociationsOnceResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass StartAutomationExecutionRequest
     #   data as a hash:
     #
@@ -10351,6 +11439,11 @@ module Aws::SSM
     #           {
     #             key: "TargetKey",
     #             values: ["TargetValue"],
+    #           },
+    #         ],
+    #         target_maps: [
+    #           {
+    #             "TargetMapKey" => ["TargetMapValue"],
     #           },
     #         ],
     #         max_concurrency: "MaxConcurrency",
@@ -10390,6 +11483,11 @@ module Aws::SSM
     #   TargetParameterName.
     #   @return [Array<Types::Target>]
     #
+    # @!attribute [rw] target_maps
+    #   A key-value mapping of document parameters to target resources. Both
+    #   Targets and TargetMaps cannot be specified together.
+    #   @return [Array<Hash<String,Array<String>>>]
+    #
     # @!attribute [rw] max_concurrency
     #   The maximum number of targets allowed to run this task in parallel.
     #   You can specify a number, such as 10, or a percentage, such as 10%.
@@ -10425,6 +11523,7 @@ module Aws::SSM
       :mode,
       :target_parameter_name,
       :targets,
+      :target_maps,
       :max_concurrency,
       :max_errors)
       include Aws::Structure
@@ -10438,6 +11537,79 @@ module Aws::SSM
     #
     class StartAutomationExecutionResult < Struct.new(
       :automation_execution_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartSessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         target: "SessionTarget", # required
+    #         document_name: "DocumentARN",
+    #         parameters: {
+    #           "SessionManagerParameterName" => ["SessionManagerParameterValue"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] target
+    #   The instance to connect to for the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_name
+    #   The name of the SSM document to define the parameters and plugin
+    #   settings for the session. For example, `SSM-SessionManagerRunShell`.
+    #   If no document name is provided, a shell to the instance is launched
+    #   by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   Reserved for future use.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartSessionRequest AWS API Documentation
+    #
+    class StartSessionRequest < Struct.new(
+      :target,
+      :document_name,
+      :parameters)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_id
+    #   The ID of the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_value
+    #   An encrypted token value containing session and caller information.
+    #   Used to authenticate the connection to the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_url
+    #   A URL back to SSM Agent on the instance that the Session Manager
+    #   client uses to send commands and receive output from the instance.
+    #   Format:
+    #   `wss://ssm-messages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)`
+    #
+    #   **region** represents the Region identifier for an AWS Region
+    #   supported by AWS Systems Manager, such as `us-east-2` for the US
+    #   East (Ohio) Region. For a list of supported **region** values, see
+    #   the **Region** column in the [AWS Systems Manager table of regions
+    #   and endpoints][1] in the *AWS General Reference*.
+    #
+    #   **session-id** represents the ID of a Session Manager session, such
+    #   as `1a2b3c4dEXAMPLE`.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html#ssm_region
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartSessionResponse AWS API Documentation
+    #
+    class StartSessionResponse < Struct.new(
+      :session_id,
+      :token_value,
+      :stream_url)
       include Aws::Structure
     end
 
@@ -10516,6 +11688,28 @@ module Aws::SSM
     #   step.
     #   @return [Hash<String,Array<String>>]
     #
+    # @!attribute [rw] is_end
+    #   The flag which can be used to end automation no matter whether the
+    #   step succeeds or fails.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] next_step
+    #   The next step after the step succeeds.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_critical
+    #   The flag which can be used to help decide whether the failure of
+    #   current step leads to the Automation failure.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] valid_next_steps
+    #   Strategies used when step fails, we support Continue and Abort.
+    #   Abort will fail the automation when the step fails. Continue will
+    #   ignore the failure of current step and allow automation to execute
+    #   the next step. With conditional branching, we add step:stepName to
+    #   support the automation to go to another specific step.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StepExecution AWS API Documentation
     #
     class StepExecution < Struct.new(
@@ -10534,7 +11728,11 @@ module Aws::SSM
       :failure_message,
       :failure_details,
       :step_execution_id,
-      :overridden_parameters)
+      :overridden_parameters,
+      :is_end,
+      :next_step,
+      :is_critical,
+      :valid_next_steps)
       include Aws::Structure
     end
 
@@ -10642,12 +11840,12 @@ module Aws::SSM
     #   User-defined criteria for sending commands that target instances
     #   that meet the criteria. Key can be tag:&lt;Amazon EC2 tag&gt; or
     #   InstanceIds. For more information about how to send commands that
-    #   target instances using Key,Value parameters, see [Executing a
-    #   Command Using Systems Manager Run Command][1].
+    #   target instances using Key,Value parameters, see [Targeting Multiple
+    #   Instances][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -10656,7 +11854,8 @@ module Aws::SSM
     #   execute a command on instances that include Amazon EC2 tags of
     #   ServerRole,WebServer. For more information about how to send
     #   commands that target instances using Key,Value parameters, see
-    #   [Executing a Command Using Systems Manager Run Command][1].
+    #   [Sending Commands to a Fleet][1] in the *AWS Systems Manager User
+    #   Guide*.
     #
     #
     #
@@ -10668,6 +11867,35 @@ module Aws::SSM
     class Target < Struct.new(
       :key,
       :values)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TerminateSessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         session_id: "SessionId", # required
+    #       }
+    #
+    # @!attribute [rw] session_id
+    #   The ID of the session to terminate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/TerminateSessionRequest AWS API Documentation
+    #
+    class TerminateSessionRequest < Struct.new(
+      :session_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_id
+    #   The ID of the session that has been terminated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/TerminateSessionResponse AWS API Documentation
+    #
+    class TerminateSessionResponse < Struct.new(
+      :session_id)
       include Aws::Structure
     end
 
@@ -11214,6 +12442,23 @@ module Aws::SSM
     # @!attribute [rw] service_role_arn
     #   The IAM service role ARN to modify. The system assumes this role
     #   during task execution.
+    #
+    #   If you do not specify a service role ARN, Systems Manager will use
+    #   your account's service-linked role for Systems Manager by default.
+    #   If no service-linked role for Systems Manager exists in your
+    #   account, it will be created when you run
+    #   `RegisterTaskWithMaintenanceWindow` without specifying a service
+    #   role ARN.
+    #
+    #   For more information, see [Service-Linked Role Permissions for
+    #   Systems Manager][1] and [Should I Use a Service-Linked Role or a
+    #   Custom Service Role to Run Maintenance Window Tasks? ][2] in the
+    #   *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions
+    #   [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role
     #   @return [String]
     #
     # @!attribute [rw] task_parameters

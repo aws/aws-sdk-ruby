@@ -171,6 +171,16 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] service_role
     #   The ARN of an IAM service role that Elastic Beanstalk has permission
     #   to assume.
+    #
+    #   The `ServiceRole` property is required the first time that you
+    #   provide a `VersionLifecycleConfig` for the application in one of the
+    #   supporting calls (`CreateApplication` or
+    #   `UpdateApplicationResourceLifecycle`). After you provide it once, in
+    #   either one of the calls, Elastic Beanstalk persists the Service Role
+    #   with the application, and you don't need to specify it again in
+    #   subsequent `UpdateApplicationResourceLifecycle` calls. You can,
+    #   however, specify it in subsequent calls to change the Service Role
+    #   to another value.
     #   @return [String]
     #
     # @!attribute [rw] version_lifecycle_config
@@ -243,7 +253,28 @@ module Aws::ElasticBeanstalk
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   The processing status of the application version.
+    #   The processing status of the application version. Reflects the state
+    #   of the application version during its creation. Many of the values
+    #   are only applicable if you specified `True` for the `Process`
+    #   parameter of the `CreateApplicationVersion` action. The following
+    #   list describes the possible values.
+    #
+    #   * `Unprocessed` – Application version wasn't pre-processed or
+    #     validated. Elastic Beanstalk will validate configuration files
+    #     during deployment of the application version to an environment.
+    #
+    #   * `Processing` – Elastic Beanstalk is currently processing the
+    #     application version.
+    #
+    #   * `Building` – Application version is currently undergoing an AWS
+    #     CodeBuild build.
+    #
+    #   * `Processed` – Elastic Beanstalk was successfully pre-processed and
+    #     validated.
+    #
+    #   * `Failed` – Either the AWS CodeBuild build failed or configuration
+    #     files didn't pass validation. This application version isn't
+    #     usable.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationVersionDescription AWS API Documentation
@@ -496,11 +527,15 @@ module Aws::ElasticBeanstalk
     #   @return [Float]
     #
     # @!attribute [rw] nice
+    #   Available on Linux environments only.
+    #
     #   Percentage of time that the CPU has spent in the `Nice` state over
     #   the last 10 seconds.
     #   @return [Float]
     #
     # @!attribute [rw] system
+    #   Available on Linux environments only.
+    #
     #   Percentage of time that the CPU has spent in the `System` state over
     #   the last 10 seconds.
     #   @return [Float]
@@ -511,17 +546,30 @@ module Aws::ElasticBeanstalk
     #   @return [Float]
     #
     # @!attribute [rw] io_wait
+    #   Available on Linux environments only.
+    #
     #   Percentage of time that the CPU has spent in the `I/O Wait` state
     #   over the last 10 seconds.
     #   @return [Float]
     #
     # @!attribute [rw] irq
+    #   Available on Linux environments only.
+    #
     #   Percentage of time that the CPU has spent in the `IRQ` state over
     #   the last 10 seconds.
     #   @return [Float]
     #
     # @!attribute [rw] soft_irq
+    #   Available on Linux environments only.
+    #
     #   Percentage of time that the CPU has spent in the `SoftIRQ` state
+    #   over the last 10 seconds.
+    #   @return [Float]
+    #
+    # @!attribute [rw] privileged
+    #   Available on Windows environments only.
+    #
+    #   Percentage of time that the CPU has spent in the `Privileged` state
     #   over the last 10 seconds.
     #   @return [Float]
     #
@@ -534,7 +582,8 @@ module Aws::ElasticBeanstalk
       :idle,
       :io_wait,
       :irq,
-      :soft_irq)
+      :soft_irq,
+      :privileged)
       include Aws::Structure
     end
 
@@ -1030,10 +1079,15 @@ module Aws::ElasticBeanstalk
     #   @return [Boolean]
     #
     # @!attribute [rw] process
-    #   Preprocesses and validates the environment manifest (`env.yaml`) and
-    #   configuration files (`*.config` files in the `.ebextensions` folder)
-    #   in the source bundle. Validating configuration files can identify
-    #   issues prior to deploying the application version to an environment.
+    #   Pre-processes and validates the environment manifest (`env.yaml`)
+    #   and configuration files (`*.config` files in the `.ebextensions`
+    #   folder) in the source bundle. Validating configuration files can
+    #   identify issues prior to deploying the application version to an
+    #   environment.
+    #
+    #   You must turn processing on for application versions that you create
+    #   using AWS CodeBuild or AWS CodeCommit. For application versions
+    #   built from a source bundle in Amazon S3, processing is optional.
     #
     #   <note markdown="1"> The `Process` option validates Elastic Beanstalk configuration
     #   files. It doesn't validate your application's configuration files,
@@ -1282,6 +1336,13 @@ module Aws::ElasticBeanstalk
     #   This is an alternative to specifying a template name. If specified,
     #   AWS Elastic Beanstalk sets the configuration values to the default
     #   values associated with the specified solution stack.
+    #
+    #   For a list of current solution stacks, see [Elastic Beanstalk
+    #   Supported Platforms][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html
     #   @return [String]
     #
     # @!attribute [rw] platform_arn
@@ -2250,6 +2311,10 @@ module Aws::ElasticBeanstalk
     #
     # @!attribute [rw] instance_health_list
     #   Detailed health information about each instance.
+    #
+    #   The output differs slightly between Linux and Windows environments.
+    #   There is a difference in the members that are supported under the
+    #   `<CPUUtilization>` type.
     #   @return [Array<Types::SingleInstanceHealth>]
     #
     # @!attribute [rw] refreshed_at
@@ -2613,7 +2678,14 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version of this environment tier.
+    #   The version of this environment tier. When you don't set a value to
+    #   it, Elastic Beanstalk uses the latest compatible worker tier
+    #   version.
+    #
+    #   <note markdown="1"> This member is deprecated. Any specific version that you set may
+    #   become out of date. We recommend leaving it unspecified.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentTier AWS API Documentation

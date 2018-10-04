@@ -277,12 +277,16 @@ module Aws::Health
       api.version = "2016-08-04"
 
       api.metadata = {
+        "apiVersion" => "2016-08-04",
         "endpointPrefix" => "health",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "AWSHealth",
         "serviceFullName" => "AWS Health APIs and Notifications",
+        "serviceId" => "Health",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSHealth_20160804",
+        "uid" => "health-2016-08-04",
       }
 
       api.add_operation(:describe_affected_entities, Seahorse::Model::Operation.new.tap do |o|

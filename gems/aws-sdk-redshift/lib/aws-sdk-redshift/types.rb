@@ -8,6 +8,46 @@
 module Aws::Redshift
   module Types
 
+    # @note When making an API call, you may pass AcceptReservedNodeExchangeInputMessage
+    #   data as a hash:
+    #
+    #       {
+    #         reserved_node_id: "String", # required
+    #         target_reserved_node_offering_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] reserved_node_id
+    #   A string representing the node identifier of the DC1 Reserved Node
+    #   to be exchanged.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_reserved_node_offering_id
+    #   The unique identifier of the DC2 Reserved Node offering to be used
+    #   for the exchange. You can obtain the value for the parameter by
+    #   calling GetReservedNodeExchangeOfferings
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AcceptReservedNodeExchangeInputMessage AWS API Documentation
+    #
+    class AcceptReservedNodeExchangeInputMessage < Struct.new(
+      :reserved_node_id,
+      :target_reserved_node_offering_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] exchanged_reserved_node
+    #   Describes a reserved node. You can call the
+    #   DescribeReservedNodeOfferings API to obtain the available reserved
+    #   node offerings.
+    #   @return [Types::ReservedNode]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AcceptReservedNodeExchangeOutputMessage AWS API Documentation
+    #
+    class AcceptReservedNodeExchangeOutputMessage < Struct.new(
+      :exchanged_reserved_node)
+      include Aws::Structure
+    end
+
     # Describes an AWS customer account authorized to restore a snapshot.
     #
     # @!attribute [rw] account_id
@@ -358,6 +398,19 @@ module Aws::Redshift
     #   used by the cluster to access other AWS services.
     #   @return [Array<Types::ClusterIamRole>]
     #
+    # @!attribute [rw] pending_actions
+    #   Cluster operations that are waiting to be started.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] maintenance_track_name
+    #   The name of the maintenance track for the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] elastic_resize_number_of_node_options
+    #   Indicates the number of nodes the cluster can be resized to with the
+    #   elastic resize method.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -393,7 +446,10 @@ module Aws::Redshift
       :tags,
       :kms_key_id,
       :enhanced_vpc_routing,
-      :iam_roles)
+      :iam_roles,
+      :pending_actions,
+      :maintenance_track_name,
+      :elastic_resize_number_of_node_options)
       include Aws::Structure
     end
 
@@ -425,6 +481,55 @@ module Aws::Redshift
       :db_user,
       :db_password,
       :expiration)
+      include Aws::Structure
+    end
+
+    # Describes a `ClusterDbRevision`.
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The unique identifier of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_database_revision
+    #   A string representing the current cluster version.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_revision_release_date
+    #   The date on which the database revision was released.
+    #   @return [Time]
+    #
+    # @!attribute [rw] revision_targets
+    #   A list of `RevisionTarget` objects, where each object describes the
+    #   database revision that a cluster can be updated to.
+    #   @return [Array<Types::RevisionTarget>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterDbRevision AWS API Documentation
+    #
+    class ClusterDbRevision < Struct.new(
+      :cluster_identifier,
+      :current_database_revision,
+      :database_revision_release_date,
+      :revision_targets)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   A string representing the starting point for the next set of
+    #   revisions. If a value is returned in a response, you can retrieve
+    #   the next set of revisions by providing the value in the `marker`
+    #   parameter and retrying the command. If the `marker` field is empty,
+    #   all revisions have already been returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_db_revisions
+    #   A list of revisions.
+    #   @return [Array<Types::ClusterDbRevision>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterDbRevisionsMessage AWS API Documentation
+    #
+    class ClusterDbRevisionsMessage < Struct.new(
+      :marker,
+      :cluster_db_revisions)
       include Aws::Structure
     end
 
@@ -994,6 +1099,7 @@ module Aws::Redshift
     #         enhanced_vpc_routing: false,
     #         additional_info: "String",
     #         iam_roles: ["String"],
+    #         maintenance_track_name: "String",
     #       }
     #
     # @!attribute [rw] db_name
@@ -1329,6 +1435,12 @@ module Aws::Redshift
     #   time.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] maintenance_track_name
+    #   An optional parameter for the name of the maintenance track for the
+    #   cluster. If you don't provide a maintenance track name, the cluster
+    #   is assigned to the `current` track.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterMessage AWS API Documentation
     #
     class CreateClusterMessage < Struct.new(
@@ -1358,7 +1470,8 @@ module Aws::Redshift
       :kms_key_id,
       :enhanced_vpc_routing,
       :additional_info,
-      :iam_roles)
+      :iam_roles,
+      :maintenance_track_name)
       include Aws::Structure
     end
 
@@ -2283,6 +2396,56 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeClusterDbRevisionsMessage
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_identifier: "String",
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] cluster_identifier
+    #   A unique identifier for a cluster whose `ClusterDbRevisions` you are
+    #   requesting. This parameter is case sensitive. All clusters defined
+    #   for an account are returned by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of response records to return in each call. If
+    #   the number of remaining response records exceeds the specified
+    #   MaxRecords value, a value is returned in the `marker` field of the
+    #   response. You can retrieve the next set of response records by
+    #   providing the returned `marker` value in the `marker` parameter and
+    #   retrying the request.
+    #
+    #   Default: 100
+    #
+    #   Constraints: minimum 20, maximum 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional parameter that specifies the starting point for
+    #   returning a set of response records. When the results of a
+    #   `DescribeClusterDbRevisions` request exceed the value specified in
+    #   `MaxRecords`, Amazon Redshift returns a value in the `marker` field
+    #   of the response. You can retrieve the next set of response records
+    #   by providing the returned `marker` value in the `marker` parameter
+    #   and retrying the request.
+    #
+    #   Constraints: You can specify either the `ClusterIdentifier`
+    #   parameter, or the `marker` parameter, but not both.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterDbRevisionsMessage AWS API Documentation
+    #
+    class DescribeClusterDbRevisionsMessage < Struct.new(
+      :cluster_identifier,
+      :max_records,
+      :marker)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeClusterParameterGroupsMessage
     #   data as a hash:
     #
@@ -2685,6 +2848,43 @@ module Aws::Redshift
       :marker,
       :tag_keys,
       :tag_values)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeClusterTracksMessage
+    #   data as a hash:
+    #
+    #       {
+    #         maintenance_track_name: "String",
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] maintenance_track_name
+    #   The name of the maintenance track.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   An integer value for the maximum number of maintenance tracks to
+    #   return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional parameter that specifies the starting point to return a
+    #   set of response records. When the results of a
+    #   `DescribeClusterTracks` request exceed the value specified in
+    #   `MaxRecords`, Amazon Redshift returns a value in the `Marker` field
+    #   of the response. You can retrieve the next set of response records
+    #   by providing the returned marker value in the `Marker` parameter and
+    #   retrying the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterTracksMessage AWS API Documentation
+    #
+    class DescribeClusterTracksMessage < Struct.new(
+      :maintenance_track_name,
+      :max_records,
+      :marker)
       include Aws::Structure
     end
 
@@ -4240,6 +4440,61 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetReservedNodeExchangeOfferingsInputMessage
+    #   data as a hash:
+    #
+    #       {
+    #         reserved_node_id: "String", # required
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] reserved_node_id
+    #   A string representing the node identifier for the DC1 Reserved Node
+    #   to be exchanged.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   An integer setting the maximum number of ReservedNodeOfferings to
+    #   retrieve.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   A value that indicates the starting point for the next set of
+    #   ReservedNodeOfferings.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetReservedNodeExchangeOfferingsInputMessage AWS API Documentation
+    #
+    class GetReservedNodeExchangeOfferingsInputMessage < Struct.new(
+      :reserved_node_id,
+      :max_records,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   An optional parameter that specifies the starting point for
+    #   returning a set of response records. When the results of a
+    #   `GetReservedNodeExchangeOfferings` request exceed the value
+    #   specified in MaxRecords, Amazon Redshift returns a value in the
+    #   marker field of the response. You can retrieve the next set of
+    #   response records by providing the returned marker value in the
+    #   marker parameter and retrying the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] reserved_node_offerings
+    #   Returns an array of ReservedNodeOffering objects.
+    #   @return [Array<Types::ReservedNodeOffering>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetReservedNodeExchangeOfferingsOutputMessage AWS API Documentation
+    #
+    class GetReservedNodeExchangeOfferingsOutputMessage < Struct.new(
+      :marker,
+      :reserved_node_offerings)
+      include Aws::Structure
+    end
+
     # Returns information about an HSM client certificate. The certificate
     # is stored in a secure Hardware Storage Module (HSM), and used by the
     # Amazon Redshift cluster to encrypt data files.
@@ -4438,6 +4693,75 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # Defines a maintenance track that determines which Amazon Redshift
+    # version to apply during a maintenance window. If the value for
+    # `MaintenanceTrack` is `current`, the cluster is updated to the most
+    # recently certified maintenance release. If the value is `trailing`,
+    # the cluster is updated to the previously certified maintenance
+    # release.
+    #
+    # @!attribute [rw] maintenance_track_name
+    #   The name of the maintenance track. Possible values are `current` and
+    #   `trailing`.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_version
+    #   The version number for the cluster release.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_targets
+    #   An array of UpdateTarget objects to update with the maintenance
+    #   track.
+    #   @return [Array<Types::UpdateTarget>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/MaintenanceTrack AWS API Documentation
+    #
+    class MaintenanceTrack < Struct.new(
+      :maintenance_track_name,
+      :database_version,
+      :update_targets)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyClusterDbRevisionMessage
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_identifier: "String", # required
+    #         revision_target: "String", # required
+    #       }
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The unique identifier of a cluster whose database revision you want
+    #   to modify.
+    #
+    #   Example: `examplecluster`
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_target
+    #   The identifier of the database revision. You can retrieve this value
+    #   from the response to the DescribeClusterDbRevisions request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterDbRevisionMessage AWS API Documentation
+    #
+    class ModifyClusterDbRevisionMessage < Struct.new(
+      :cluster_identifier,
+      :revision_target)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster
+    #   Describes a cluster.
+    #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterDbRevisionResult AWS API Documentation
+    #
+    class ModifyClusterDbRevisionResult < Struct.new(
+      :cluster)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ModifyClusterIamRolesMessage
     #   data as a hash:
     #
@@ -4506,6 +4830,9 @@ module Aws::Redshift
     #         publicly_accessible: false,
     #         elastic_ip: "String",
     #         enhanced_vpc_routing: false,
+    #         maintenance_track_name: "String",
+    #         encrypted: false,
+    #         kms_key_id: "String",
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -4578,7 +4905,8 @@ module Aws::Redshift
     #
     # @!attribute [rw] vpc_security_group_ids
     #   A list of virtual private cloud (VPC) security groups to be
-    #   associated with the cluster.
+    #   associated with the cluster. This change is asynchronously applied
+    #   as soon as possible.
     #   @return [Array<String>]
     #
     # @!attribute [rw] master_user_password
@@ -4744,6 +5072,30 @@ module Aws::Redshift
     #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] maintenance_track_name
+    #   The name for the maintenance track that you want to assign for the
+    #   cluster. This name change is asynchronous. The new track name stays
+    #   in the `PendingModifiedValues` for the cluster until the next
+    #   maintenance window. When the maintenance track changes, the cluster
+    #   is switched to the latest cluster release available for the
+    #   maintenance track. At this point, the maintenance track name is
+    #   applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] encrypted
+    #   Indicates whether the cluster is encrypted. If the cluster is
+    #   encrypted and you provide a value for the `KmsKeyId` parameter, we
+    #   will encrypt the cluster with the provided `KmsKeyId`. If you don't
+    #   provide a `KmsKeyId`, we will encrypt with the default key. In the
+    #   China region we will use legacy encryption if you specify that the
+    #   cluster is encrypted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The AWS Key Management Service (KMS) key ID of the encryption key
+    #   that you want to use to encrypt data in the cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMessage AWS API Documentation
     #
     class ModifyClusterMessage < Struct.new(
@@ -4764,7 +5116,10 @@ module Aws::Redshift
       :new_cluster_identifier,
       :publicly_accessible,
       :elastic_ip,
-      :enhanced_vpc_routing)
+      :enhanced_vpc_routing,
+      :maintenance_track_name,
+      :encrypted,
+      :kms_key_id)
       include Aws::Structure
     end
 
@@ -5193,6 +5548,16 @@ module Aws::Redshift
     #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] maintenance_track_name
+    #   The name of the maintenance track that the cluster will change to
+    #   during the next maintenance window.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_type
+    #   The encryption type for a cluster. Possible values are: KMS and
+    #   None. For the China region the possible values are None, and Legacy.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PendingModifiedValues AWS API Documentation
     #
     class PendingModifiedValues < Struct.new(
@@ -5204,7 +5569,9 @@ module Aws::Redshift
       :automated_snapshot_retention_period,
       :cluster_identifier,
       :publicly_accessible,
-      :enhanced_vpc_routing)
+      :enhanced_vpc_routing,
+      :maintenance_track_name,
+      :encryption_type)
       include Aws::Structure
     end
 
@@ -5350,6 +5717,11 @@ module Aws::Redshift
     #     for use.
     #
     #   * payment-failed-Payment failed for the purchase attempt.
+    #
+    #   * retired-The reserved node is no longer available.
+    #
+    #   * exchanging-The owner is exchanging the reserved node for another
+    #     reserved node.
     #   @return [String]
     #
     # @!attribute [rw] offering_type
@@ -5533,6 +5905,61 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ResizeClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_identifier: "String", # required
+    #         cluster_type: "String",
+    #         node_type: "String",
+    #         number_of_nodes: 1, # required
+    #         classic: false,
+    #       }
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The unique identifier for the cluster to resize.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_type
+    #   The new cluster type for the specified cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_type
+    #   The new node type for the nodes you are adding.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_nodes
+    #   The new number of nodes for the cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] classic
+    #   A boolean value indicating whether the resize operation is using the
+    #   classic resize process. If you don't provide this parameter or set
+    #   the value to `false` the resize type is elastic.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeClusterMessage AWS API Documentation
+    #
+    class ResizeClusterMessage < Struct.new(
+      :cluster_identifier,
+      :cluster_type,
+      :node_type,
+      :number_of_nodes,
+      :classic)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster
+    #   Describes a cluster.
+    #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeClusterResult AWS API Documentation
+    #
+    class ResizeClusterResult < Struct.new(
+      :cluster)
+      include Aws::Structure
+    end
+
     # Describes the result of a cluster resize operation.
     #
     # @!attribute [rw] target_node_type
@@ -5609,6 +6036,23 @@ module Aws::Redshift
     #   Once the resize operation is complete, this value will be 0.
     #   @return [Integer]
     #
+    # @!attribute [rw] resize_type
+    #   An enum with possible values of ClassicResize and ElasticResize.
+    #   These values describe the type of resize operation being performed.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   An optional string to provide additional details about the resize
+    #   action.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_encryption_type
+    #   The type of encryption for the cluster after the resize is complete.
+    #
+    #   Possible values are `KMS` and `None`. In the China region possible
+    #   values are: `Legacy` and `None`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeProgressMessage AWS API Documentation
     #
     class ResizeProgressMessage < Struct.new(
@@ -5623,7 +6067,10 @@ module Aws::Redshift
       :total_resize_data_in_mega_bytes,
       :progress_in_mega_bytes,
       :elapsed_time_in_seconds,
-      :estimated_time_to_completion_in_seconds)
+      :estimated_time_to_completion_in_seconds,
+      :resize_type,
+      :message,
+      :target_encryption_type)
       include Aws::Structure
     end
 
@@ -5653,6 +6100,7 @@ module Aws::Redshift
     #         enhanced_vpc_routing: false,
     #         additional_info: "String",
     #         iam_roles: ["String"],
+    #         maintenance_track_name: "String",
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -5869,6 +6317,17 @@ module Aws::Redshift
     #   A cluster can have up to 10 IAM roles associated at any time.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] maintenance_track_name
+    #   The name of the maintenance track for the restored cluster. When you
+    #   take a snapshot, the snapshot inherits the `MaintenanceTrack` value
+    #   from the cluster. The snapshot might be on a different track than
+    #   the cluster that was the source for the snapshot. For example,
+    #   suppose that you take a snapshot of a cluster that is on the current
+    #   track and then change the cluster to be on the trailing track. In
+    #   this case, the snapshot and the source cluster are on different
+    #   tracks.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshotMessage AWS API Documentation
     #
     class RestoreFromClusterSnapshotMessage < Struct.new(
@@ -5893,7 +6352,8 @@ module Aws::Redshift
       :node_type,
       :enhanced_vpc_routing,
       :additional_info,
-      :iam_roles)
+      :iam_roles,
+      :maintenance_track_name)
       include Aws::Structure
     end
 
@@ -6026,6 +6486,32 @@ module Aws::Redshift
     #
     class RestoreTableFromClusterSnapshotResult < Struct.new(
       :table_restore_status)
+      include Aws::Structure
+    end
+
+    # Describes a `RevisionTarget`.
+    #
+    # @!attribute [rw] database_revision
+    #   A unique string that identifies the version to update the cluster
+    #   to. You can use this value in ModifyClusterDbRevision.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A string that describes the changes and features that will be
+    #   applied to the cluster when it is updated to the corresponding
+    #   ClusterDbRevision.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_revision_release_date
+    #   The date on which the database revision was released.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevisionTarget AWS API Documentation
+    #
+    class RevisionTarget < Struct.new(
+      :database_revision,
+      :description,
+      :database_revision_release_date)
       include Aws::Structure
     end
 
@@ -6326,6 +6812,10 @@ module Aws::Redshift
     #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] maintenance_track_name
+    #   The name of the maintenance track for the snapshot.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Snapshot AWS API Documentation
     #
     class Snapshot < Struct.new(
@@ -6357,7 +6847,8 @@ module Aws::Redshift
       :source_region,
       :tags,
       :restorable_node_types,
-      :enhanced_vpc_routing)
+      :enhanced_vpc_routing,
+      :maintenance_track_name)
       include Aws::Structure
     end
 
@@ -6683,6 +7174,44 @@ module Aws::Redshift
     class TaggedResourceListMessage < Struct.new(
       :tagged_resources,
       :marker)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] maintenance_tracks
+    #   A list of maintenance tracks output by the `DescribeClusterTracks`
+    #   operation.
+    #   @return [Array<Types::MaintenanceTrack>]
+    #
+    # @!attribute [rw] marker
+    #   The starting point to return a set of response tracklist records.
+    #   You can retrieve the next set of response records by providing the
+    #   returned marker value in the `Marker` parameter and retrying the
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/TrackListMessage AWS API Documentation
+    #
+    class TrackListMessage < Struct.new(
+      :maintenance_tracks,
+      :marker)
+      include Aws::Structure
+    end
+
+    # A maintenance track that you can switch the current track to.
+    #
+    # @!attribute [rw] maintenance_track_name
+    #   The name of the new maintenance track.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_version
+    #   The cluster version for the new maintenance track.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/UpdateTarget AWS API Documentation
+    #
+    class UpdateTarget < Struct.new(
+      :maintenance_track_name,
+      :database_version)
       include Aws::Structure
     end
 

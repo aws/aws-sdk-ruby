@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -47,6 +49,8 @@ module Aws::SageMakerRuntime
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -92,6 +96,22 @@ module Aws::SageMakerRuntime
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::SageMakerRuntime
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -149,16 +180,28 @@ module Aws::SageMakerRuntime
     # hosting services, your client applications use this API to get
     # inferences from the model hosted at the specified endpoint.
     #
-    # For an overview of Amazon SageMaker, see [How It Works][1]
+    # For an overview of Amazon SageMaker, see [How It Works][1].
     #
     # Amazon SageMaker strips all POST headers except those supported by the
     # API. Amazon SageMaker might add additional headers. You should not
     # rely on the behavior of headers outside those enumerated in the
     # request syntax.
     #
+    # Cals to `InvokeEndpoint` are authenticated by using AWS Signature
+    # Version 4. For information, see [Authenticating Requests (AWS
+    # Signature Version 4)][2] in the *Amazon S3 API Reference*.
+    #
+    # <note markdown="1"> Endpoints are scoped to an individual account, and are not public. The
+    # URL does not contain the account ID, but Amazon SageMaker determines
+    # the account ID from the authentication token that is supplied by the
+    # caller.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html
+    # [2]: http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
     #
     # @option params [required, String] :endpoint_name
     #   The name of the endpoint that you specified when you created the
@@ -173,17 +216,27 @@ module Aws::SageMakerRuntime
     #   request header. Amazon SageMaker passes all of the data in the body to
     #   the model.
     #
+    #   For information about the format of the request body, see [Common Data
+    #   Formats—Inference][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html
+    #
     # @option params [String] :content_type
     #   The MIME type of the input data in the request body.
     #
     # @option params [String] :accept
     #   The desired MIME type of the inference in the response.
     #
+    # @option params [String] :custom_attributes
+    #
     # @return [Types::InvokeEndpointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::InvokeEndpointOutput#body #body} => String
     #   * {Types::InvokeEndpointOutput#content_type #content_type} => String
     #   * {Types::InvokeEndpointOutput#invoked_production_variant #invoked_production_variant} => String
+    #   * {Types::InvokeEndpointOutput#custom_attributes #custom_attributes} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -192,6 +245,7 @@ module Aws::SageMakerRuntime
     #     body: "data", # required
     #     content_type: "Header",
     #     accept: "Header",
+    #     custom_attributes: "CustomAttributesHeader",
     #   })
     #
     # @example Response structure
@@ -199,6 +253,7 @@ module Aws::SageMakerRuntime
     #   resp.body #=> String
     #   resp.content_type #=> String
     #   resp.invoked_production_variant #=> String
+    #   resp.custom_attributes #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpoint AWS API Documentation
     #
@@ -222,7 +277,7 @@ module Aws::SageMakerRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemakerruntime'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

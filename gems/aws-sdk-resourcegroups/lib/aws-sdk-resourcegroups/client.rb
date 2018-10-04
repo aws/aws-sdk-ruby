@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -47,6 +49,8 @@ module Aws::ResourceGroups
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -92,6 +96,22 @@ module Aws::ResourceGroups
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::ResourceGroups
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -151,7 +182,7 @@ module Aws::ResourceGroups
     # @option params [required, String] :name
     #   The name of the group, which is the identifier of the group in other
     #   operations. A resource group name cannot be updated after it is
-    #   created. A resource group name can have a maximum of 127 characters,
+    #   created. A resource group name can have a maximum of 128 characters,
     #   including letters, numbers, hyphens, dots, and underscores. The name
     #   cannot start with `AWS` or `aws`; these are reserved. A resource group
     #   name must be unique within your account.
@@ -167,8 +198,8 @@ module Aws::ResourceGroups
     #
     # @option params [Hash<String,String>] :tags
     #   The tags to add to the group. A tag is a string-to-string map of
-    #   key-value pairs. Tag keys can have a maximum character length of 127
-    #   characters, and tag values can have a maximum length of 255
+    #   key-value pairs. Tag keys can have a maximum character length of 128
+    #   characters, and tag values can have a maximum length of 256
     #   characters.
     #
     # @return [Types::CreateGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -342,6 +373,16 @@ module Aws::ResourceGroups
     # @option params [required, String] :group_name
     #   The name of the resource group.
     #
+    # @option params [Array<Types::ResourceFilter>] :filters
+    #   Filters, formatted as ResourceFilter objects, that you want to apply
+    #   to a ListGroupResources operation.
+    #
+    #   * `resource-type` - Filter resources by their type. Specify up to five
+    #     resource types in the format AWS::ServiceCode::ResourceType. For
+    #     example, AWS::EC2::Instance, or AWS::S3::Bucket.
+    #
+    #   ^
+    #
     # @option params [Integer] :max_results
     #   The maximum number of group member ARNs that are returned in a single
     #   call by ListGroupResources, in paginated output. By default, this
@@ -361,6 +402,12 @@ module Aws::ResourceGroups
     #
     #   resp = client.list_group_resources({
     #     group_name: "GroupName", # required
+    #     filters: [
+    #       {
+    #         name: "resource-type", # required, accepts resource-type
+    #         values: ["ResourceFilterValue"], # required
+    #       },
+    #     ],
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -480,7 +527,7 @@ module Aws::ResourceGroups
     # @option params [required, Hash<String,String>] :tags
     #   The tags to add to the specified resource. A tag is a string-to-string
     #   map of key-value pairs. Tag keys can have a maximum character length
-    #   of 127 characters, and tag values can have a maximum length of 255
+    #   of 128 characters, and tag values can have a maximum length of 256
     #   characters.
     #
     # @return [Types::TagOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -636,7 +683,7 @@ module Aws::ResourceGroups
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resourcegroups'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

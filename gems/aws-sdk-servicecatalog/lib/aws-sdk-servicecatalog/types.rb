@@ -2053,6 +2053,7 @@ module Aws::ServiceCatalog
     #         accept_language: "AcceptLanguage",
     #         page_token: "PageToken",
     #         page_size: 1,
+    #         portfolio_share_type: "IMPORTED", # accepts IMPORTED, AWS_SERVICECATALOG
     #       }
     #
     # @!attribute [rw] accept_language
@@ -2074,12 +2075,22 @@ module Aws::ServiceCatalog
     #   The maximum number of items to return with this call.
     #   @return [Integer]
     #
+    # @!attribute [rw] portfolio_share_type
+    #   The type of shared portfolios to list. The default is to list
+    #   imported portfolios.
+    #
+    #   * `AWS_SERVICECATALOG` - List default portfolios
+    #
+    #   * `IMPORTED` - List imported portfolios
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListAcceptedPortfolioSharesInput AWS API Documentation
     #
     class ListAcceptedPortfolioSharesInput < Struct.new(
       :accept_language,
       :page_token,
-      :page_size)
+      :page_size,
+      :portfolio_share_type)
       include Aws::Structure
     end
 

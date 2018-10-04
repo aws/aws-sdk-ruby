@@ -86,8 +86,7 @@ module Aws
           it 'accepts paths to files to upload' do
             file = double('file')
             expect(File).to receive(:open).with(ten_meg_file.path, 'rb').
-              and_return(file)
-            expect(file).to receive(:close)
+              and_yield(file)
             expect(client).to receive(:put_object).with(
               bucket: 'bucket',
               key: 'key',

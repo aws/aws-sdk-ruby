@@ -328,6 +328,7 @@ module Aws::KMS
     KeyMetadata.add_member(:key_manager, Shapes::ShapeRef.new(shape: KeyManagerType, location_name: "KeyManager"))
     KeyMetadata.struct_class = Types::KeyMetadata
 
+    ListAliasesRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
     ListAliasesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: LimitType, location_name: "Limit"))
     ListAliasesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: MarkerType, location_name: "Marker"))
     ListAliasesRequest.struct_class = Types::ListAliasesRequest
@@ -449,12 +450,16 @@ module Aws::KMS
       api.version = "2014-11-01"
 
       api.metadata = {
+        "apiVersion" => "2014-11-01",
         "endpointPrefix" => "kms",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "KMS",
         "serviceFullName" => "AWS Key Management Service",
+        "serviceId" => "KMS",
         "signatureVersion" => "v4",
         "targetPrefix" => "TrentService",
+        "uid" => "kms-2014-11-01",
       }
 
       api.add_operation(:cancel_key_deletion, Seahorse::Model::Operation.new.tap do |o|

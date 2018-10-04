@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -47,6 +49,8 @@ module Aws::TranscribeService
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -92,6 +96,22 @@ module Aws::TranscribeService
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::TranscribeService
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -256,6 +287,7 @@ module Aws::TranscribeService
     #   resp.transcription_job.settings.vocabulary_name #=> String
     #   resp.transcription_job.settings.show_speaker_labels #=> Boolean
     #   resp.transcription_job.settings.max_speaker_labels #=> Integer
+    #   resp.transcription_job.settings.channel_identification #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetTranscriptionJob AWS API Documentation
     #
@@ -350,6 +382,7 @@ module Aws::TranscribeService
     #   resp.transcription_job_summaries[0].language_code #=> String, one of "en-US", "es-US"
     #   resp.transcription_job_summaries[0].transcription_job_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.transcription_job_summaries[0].failure_reason #=> String
+    #   resp.transcription_job_summaries[0].output_location_type #=> String, one of "CUSTOMER_BUCKET", "SERVICE_BUCKET"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListTranscriptionJobs AWS API Documentation
     #
@@ -419,7 +452,8 @@ module Aws::TranscribeService
     # Starts an asynchronous job to transcribe speech to text.
     #
     # @option params [required, String] :transcription_job_name
-    #   The name of the job. The name must be unique within an AWS account.
+    #   The name of the job. You can't use the strings "." or ".." in the
+    #   job name. The name must be unique within an AWS account.
     #
     # @option params [required, String] :language_code
     #   The language code for the language used in the input media file.
@@ -432,6 +466,25 @@ module Aws::TranscribeService
     #
     # @option params [required, Types::Media] :media
     #   An object that describes the input media for a transcription job.
+    #
+    # @option params [String] :output_bucket_name
+    #   The location where the transcription is stored.
+    #
+    #   If you set the `OutputBucketName`, Amazon Transcribe puts the
+    #   transcription in the specified S3 bucket. When you call the
+    #   GetTranscriptionJob operation, the operation returns this location in
+    #   the `TranscriptFileUri` field. The S3 bucket must have permissions
+    #   that allow Amazon Transcribe to put files in the bucket. For more
+    #   information, see [Permissions Required for IAM User Roles][1].
+    #
+    #   If you don't set the `OutputBucketName`, Amazon Transcribe generates
+    #   a pre-signed URL, a shareable URL that provides secure access to your
+    #   transcription, and returns it in the `TranscriptFileUri` field. Use
+    #   this URL to download the transcription.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/access-control-managing-permissions.html#auth-role-iam-user
     #
     # @option params [Types::Settings] :settings
     #   A `Settings` object that provides optional settings for a
@@ -451,10 +504,12 @@ module Aws::TranscribeService
     #     media: { # required
     #       media_file_uri: "Uri",
     #     },
+    #     output_bucket_name: "OutputBucketName",
     #     settings: {
     #       vocabulary_name: "VocabularyName",
     #       show_speaker_labels: false,
     #       max_speaker_labels: 1,
+    #       channel_identification: false,
     #     },
     #   })
     #
@@ -473,6 +528,7 @@ module Aws::TranscribeService
     #   resp.transcription_job.settings.vocabulary_name #=> String
     #   resp.transcription_job.settings.show_speaker_labels #=> Boolean
     #   resp.transcription_job.settings.max_speaker_labels #=> Integer
+    #   resp.transcription_job.settings.channel_identification #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartTranscriptionJob AWS API Documentation
     #
@@ -483,7 +539,9 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Updates an existing vocabulary with new values.
+    # Updates an existing vocabulary with new values. The `UpdateVocabulary`
+    # operation overwrites all of the existing information with the values
+    # that you provide in the request.
     #
     # @option params [required, String] :vocabulary_name
     #   The name of the vocabulary to update. The name is case-sensitive.
@@ -538,7 +596,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

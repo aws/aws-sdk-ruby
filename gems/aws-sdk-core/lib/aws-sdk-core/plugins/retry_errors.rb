@@ -5,6 +5,29 @@ module Aws
     # @api private
     class RetryErrors < Seahorse::Client::Plugin
 
+      EQUAL_JITTER = lambda { |delay| (delay / 2) + Kernel.rand(0..(delay/2))}
+      FULL_JITTER= lambda { |delay| Kernel.rand(0..delay) }
+      NO_JITTER = lambda { |delay| delay }
+
+      JITTERS = {
+        none: NO_JITTER,
+        equal: EQUAL_JITTER,
+        full: FULL_JITTER
+      }
+
+      JITTERS.default_proc = lambda { |h,k|
+        raise KeyError, "#{k} is not a named jitter function. Must be one of #{h.keys}"
+      }
+
+      DEFAULT_BACKOFF = lambda do |c|
+        delay = 2 ** c.retries * c.config.retry_base_delay
+        delay = [delay, c.config.retry_max_delay].min if (c.config.retry_max_delay || 0) > 0
+        jitter = c.config.retry_jitter
+        jitter = JITTERS[jitter] if Symbol === jitter
+        delay = jitter.call(delay) if jitter
+        Kernel.sleep(delay)
+      end
+
       option(:retry_limit,
         default: 3,
         doc_type: Integer,
@@ -16,7 +39,30 @@ checksum errors, networking errors, timeout errors and auth
 errors from expired credentials.
         DOCS
 
-      option(:retry_backoff, lambda { |c| Kernel.sleep(2 ** c.retries * 0.3) })
+      option(:retry_max_delay,
+        default: 0,
+        doc_type: Integer,
+        docstring: <<-DOCS)
+The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+        DOCS
+
+      option(:retry_base_delay,
+        default: 0.3,
+        doc_type: Float,
+        docstring: <<-DOCS)
+The base delay in seconds used by the default backoff function.
+        DOCS
+
+      option(:retry_jitter,
+        default: :none,
+        doc_type: Symbol,
+        docstring: <<-DOCS)
+A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+
+@see https://www.awsarchitectureblog.com/2015/03/backoff.html
+        DOCS
+
+      option(:retry_backoff, DEFAULT_BACKOFF)
 
       # @api private
       class ErrorInspector

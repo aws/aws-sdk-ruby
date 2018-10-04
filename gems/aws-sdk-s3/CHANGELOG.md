@@ -1,6 +1,74 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2018-09-19)
+------------------
+
+* Feature - API update.
+
+1.19.0 (2018-09-06)
+------------------
+
+* Feature - Adds code paths and plugins for future SDK instrumentation and telemetry.
+
+1.18.0 (2018-09-05)
+------------------
+
+* Feature - API update.
+
+1.17.1 (2018-08-29)
+------------------
+
+* Issue - Update example for bucket#url (Github Issue#1868)
+
+* Issue - Support opt-out counting #presigned_url as #api_requests (Github Issue#1866)
+
+1.17.0 (2018-07-11)
+------------------
+
+* Feature - API update.
+
+1.16.1 (2018-07-10)
+------------------
+
+* Issue - Avoids region redirects for FIPS endpoints
+
+1.16.0 (2018-06-28)
+------------------
+
+* Feature - Supports `:version_id` for resource `#download_file` helper.
+
+* Issue - Reduce memory allocation in checksum and signature generation.
+
+* Issue - Ensure file handlers are closed when an exception is raised in `Aws::S3::FileUploader`.
+
+1.15.0 (2018-06-26)
+------------------
+
+* Feature - API update.
+
+1.14.0 (2018-06-13)
+------------------
+
+* Feature - Adds support for `Aws::S3::Object#upload_stream`, allowing streaming uploads outside of a File-based interface.
+
+1.13.0 (2018-05-22)
+------------------
+
+* Feature - API update.
+
+* Issue - Update EventEmitter to Aws::EventEmitter
+
+1.12.0 (2018-05-18)
+------------------
+
+* Feature - API update.
+
+1.11.0 (2018-05-17)
+------------------
+
+* Feature - Support S3 `SelectObjectContent` API
+
 1.10.0 (2018-05-07)
 ------------------
 

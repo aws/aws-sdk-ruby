@@ -1,6 +1,7 @@
 $LOAD_PATH.unshift(File.expand_path('../../lib',  __FILE__))
 $LOAD_PATH.unshift(File.expand_path('../../../aws-sigv2/lib',  __FILE__))
 $LOAD_PATH.unshift(File.expand_path('../../../aws-sigv4/lib',  __FILE__))
+$LOAD_PATH.unshift(File.expand_path('../../../aws-eventstream/lib',  __FILE__))
 $LOAD_PATH.unshift(File.expand_path('../../../aws-partitions/lib',  __FILE__))
 
 require 'webmock/rspec'

@@ -92,11 +92,11 @@ module Aws::IoT
     #         },
     #         cloudwatch_metric: {
     #           role_arn: "AwsArn", # required
-    #           metric_namespace: "MetricNamespace", # required
-    #           metric_name: "MetricName", # required
-    #           metric_value: "MetricValue", # required
-    #           metric_unit: "MetricUnit", # required
-    #           metric_timestamp: "MetricTimestamp",
+    #           metric_namespace: "String", # required
+    #           metric_name: "String", # required
+    #           metric_value: "String", # required
+    #           metric_unit: "String", # required
+    #           metric_timestamp: "String",
     #         },
     #         cloudwatch_alarm: {
     #           role_arn: "AwsArn", # required
@@ -119,6 +119,11 @@ module Aws::IoT
     #           channel_arn: "AwsArn",
     #           channel_name: "ChannelName",
     #           role_arn: "AwsArn",
+    #         },
+    #         step_functions: {
+    #           execution_name_prefix: "ExecutionNamePrefix",
+    #           state_machine_name: "StateMachineName", # required
+    #           role_arn: "AwsArn", # required
     #         },
     #       }
     #
@@ -180,6 +185,10 @@ module Aws::IoT
     #   Sends message data to an AWS IoT Analytics channel.
     #   @return [Types::IotAnalyticsAction]
     #
+    # @!attribute [rw] step_functions
+    #   Starts execution of a Step Functions state machine.
+    #   @return [Types::StepFunctionsAction]
+    #
     class Action < Struct.new(
       :dynamo_db,
       :dynamo_d_bv_2,
@@ -194,7 +203,51 @@ module Aws::IoT
       :cloudwatch_alarm,
       :elasticsearch,
       :salesforce,
-      :iot_analytics)
+      :iot_analytics,
+      :step_functions)
+      include Aws::Structure
+    end
+
+    # Information about an active Device Defender security profile behavior
+    # violation.
+    #
+    # @!attribute [rw] violation_id
+    #   The ID of the active violation.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the thing responsible for the active violation.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_profile_name
+    #   The security profile whose behavior is in violation.
+    #   @return [String]
+    #
+    # @!attribute [rw] behavior
+    #   The behavior which is being violated.
+    #   @return [Types::Behavior]
+    #
+    # @!attribute [rw] last_violation_value
+    #   The value of the metric (the measurement) which caused the most
+    #   recent violation.
+    #   @return [Types::MetricValue]
+    #
+    # @!attribute [rw] last_violation_time
+    #   The time the most recent violation occurred.
+    #   @return [Time]
+    #
+    # @!attribute [rw] violation_start_time
+    #   The time the violation started.
+    #   @return [Time]
+    #
+    class ActiveViolation < Struct.new(
+      :violation_id,
+      :thing_name,
+      :security_profile_name,
+      :behavior,
+      :last_violation_value,
+      :last_violation_time,
+      :violation_start_time)
       include Aws::Structure
     end
 
@@ -233,6 +286,31 @@ module Aws::IoT
     end
 
     class AddThingToThingGroupResponse < Aws::EmptyStructure; end
+
+    # A structure containing the alert target ARN and the role ARN.
+    #
+    # @note When making an API call, you may pass AlertTarget
+    #   data as a hash:
+    #
+    #       {
+    #         alert_target_arn: "AlertTargetArn", # required
+    #         role_arn: "RoleArn", # required
+    #       }
+    #
+    # @!attribute [rw] alert_target_arn
+    #   The ARN of the notification target to which alerts are sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role that grants permission to send alerts to the
+    #   notification target.
+    #   @return [String]
+    #
+    class AlertTarget < Struct.new(
+      :alert_target_arn,
+      :role_arn)
+      include Aws::Structure
+    end
 
     # Contains information that allowed the authorization.
     #
@@ -340,6 +418,31 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AttachSecurityProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         security_profile_name: "SecurityProfileName", # required
+    #         security_profile_target_arn: "SecurityProfileTargetArn", # required
+    #       }
+    #
+    # @!attribute [rw] security_profile_name
+    #   The security profile that is attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_profile_target_arn
+    #   The ARN of the target (thing group) to which the security profile is
+    #   attached.
+    #   @return [String]
+    #
+    class AttachSecurityProfileRequest < Struct.new(
+      :security_profile_name,
+      :security_profile_target_arn)
+      include Aws::Structure
+    end
+
+    class AttachSecurityProfileResponse < Aws::EmptyStructure; end
+
     # The input for the AttachThingPrincipal operation.
     #
     # @note When making an API call, you may pass AttachThingPrincipalRequest
@@ -403,6 +506,174 @@ module Aws::IoT
     class AttributePayload < Struct.new(
       :attributes,
       :merge)
+      include Aws::Structure
+    end
+
+    # Which audit checks are enabled and disabled for this account.
+    #
+    # @note When making an API call, you may pass AuditCheckConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   True if this audit check is enabled for this account.
+    #   @return [Boolean]
+    #
+    class AuditCheckConfiguration < Struct.new(
+      :enabled)
+      include Aws::Structure
+    end
+
+    # Information about the audit check.
+    #
+    # @!attribute [rw] check_run_status
+    #   The completion status of this check, one of "IN\_PROGRESS",
+    #   "WAITING\_FOR\_DATA\_COLLECTION", "CANCELED",
+    #   "COMPLETED\_COMPLIANT", "COMPLETED\_NON\_COMPLIANT", or
+    #   "FAILED".
+    #   @return [String]
+    #
+    # @!attribute [rw] check_compliant
+    #   True if the check completed and found all resources compliant.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] total_resources_count
+    #   The number of resources on which the check was performed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] non_compliant_resources_count
+    #   The number of resources that the check found non-compliant.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] error_code
+    #   The code of any error encountered when performing this check during
+    #   this audit. One of "INSUFFICIENT\_PERMISSIONS", or
+    #   "AUDIT\_CHECK\_DISABLED".
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message associated with any error encountered when performing
+    #   this check during this audit.
+    #   @return [String]
+    #
+    class AuditCheckDetails < Struct.new(
+      :check_run_status,
+      :check_compliant,
+      :total_resources_count,
+      :non_compliant_resources_count,
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
+    # The findings (results) of the audit.
+    #
+    # @!attribute [rw] task_id
+    #   The ID of the audit that generated this result (finding)
+    #   @return [String]
+    #
+    # @!attribute [rw] check_name
+    #   The audit check that generated this result.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_start_time
+    #   The time the audit started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] finding_time
+    #   The time the result (finding) was discovered.
+    #   @return [Time]
+    #
+    # @!attribute [rw] severity
+    #   The severity of the result (finding).
+    #   @return [String]
+    #
+    # @!attribute [rw] non_compliant_resource
+    #   The resource that was found to be non-compliant with the audit
+    #   check.
+    #   @return [Types::NonCompliantResource]
+    #
+    # @!attribute [rw] related_resources
+    #   The list of related resources.
+    #   @return [Array<Types::RelatedResource>]
+    #
+    # @!attribute [rw] reason_for_non_compliance
+    #   The reason the resource was non-compliant.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason_for_non_compliance_code
+    #   A code which indicates the reason that the resource was
+    #   non-compliant.
+    #   @return [String]
+    #
+    class AuditFinding < Struct.new(
+      :task_id,
+      :check_name,
+      :task_start_time,
+      :finding_time,
+      :severity,
+      :non_compliant_resource,
+      :related_resources,
+      :reason_for_non_compliance,
+      :reason_for_non_compliance_code)
+      include Aws::Structure
+    end
+
+    # Information about the targets to which audit notifications are sent.
+    #
+    # @note When making an API call, you may pass AuditNotificationTarget
+    #   data as a hash:
+    #
+    #       {
+    #         target_arn: "TargetArn",
+    #         role_arn: "RoleArn",
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] target_arn
+    #   The ARN of the target (SNS topic) to which audit notifications are
+    #   sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role that grants permission to send notifications to
+    #   the target.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   True if notifications to the target are enabled.
+    #   @return [Boolean]
+    #
+    class AuditNotificationTarget < Struct.new(
+      :target_arn,
+      :role_arn,
+      :enabled)
+      include Aws::Structure
+    end
+
+    # The audits that were performed.
+    #
+    # @!attribute [rw] task_id
+    #   The ID of this audit.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_status
+    #   The status of this audit: one of "IN\_PROGRESS", "COMPLETED",
+    #   "FAILED" or "CANCELED".
+    #   @return [String]
+    #
+    # @!attribute [rw] task_type
+    #   The type of this audit: one of "ON\_DEMAND\_AUDIT\_TASK" or
+    #   "SCHEDULED\_AUDIT\_TASK".
+    #   @return [String]
+    #
+    class AuditTaskMetadata < Struct.new(
+      :task_id,
+      :task_status,
+      :task_type)
       include Aws::Structure
     end
 
@@ -528,6 +799,100 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Configuration for the rollout of OTA updates.
+    #
+    # @note When making an API call, you may pass AwsJobExecutionsRolloutConfig
+    #   data as a hash:
+    #
+    #       {
+    #         maximum_per_minute: 1,
+    #       }
+    #
+    # @!attribute [rw] maximum_per_minute
+    #   The maximum number of OTA update job executions started per minute.
+    #   @return [Integer]
+    #
+    class AwsJobExecutionsRolloutConfig < Struct.new(
+      :maximum_per_minute)
+      include Aws::Structure
+    end
+
+    # A Device Defender security profile behavior.
+    #
+    # @note When making an API call, you may pass Behavior
+    #   data as a hash:
+    #
+    #       {
+    #         name: "BehaviorName", # required
+    #         metric: "BehaviorMetric",
+    #         criteria: {
+    #           comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set
+    #           value: {
+    #             count: 1,
+    #             cidrs: ["Cidr"],
+    #             ports: [1],
+    #           },
+    #           duration_seconds: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name you have given to the behavior.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric
+    #   What is measured by the behavior.
+    #   @return [String]
+    #
+    # @!attribute [rw] criteria
+    #   The criteria that determine if a device is behaving normally in
+    #   regard to the `metric`.
+    #   @return [Types::BehaviorCriteria]
+    #
+    class Behavior < Struct.new(
+      :name,
+      :metric,
+      :criteria)
+      include Aws::Structure
+    end
+
+    # The criteria by which the behavior is determined to be normal.
+    #
+    # @note When making an API call, you may pass BehaviorCriteria
+    #   data as a hash:
+    #
+    #       {
+    #         comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set
+    #         value: {
+    #           count: 1,
+    #           cidrs: ["Cidr"],
+    #           ports: [1],
+    #         },
+    #         duration_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] comparison_operator
+    #   The operator that relates the thing measured (`metric`) to the
+    #   criteria (`value`).
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value to be compared with the `metric`.
+    #   @return [Types::MetricValue]
+    #
+    # @!attribute [rw] duration_seconds
+    #   Use this to specify the period of time over which the behavior is
+    #   evaluated, for those criteria which have a time dimension (for
+    #   example, `NUM_MESSAGES_SENT`).
+    #   @return [Integer]
+    #
+    class BehaviorCriteria < Struct.new(
+      :comparison_operator,
+      :value,
+      :duration_seconds)
+      include Aws::Structure
+    end
+
     # A CA certificate.
     #
     # @!attribute [rw] certificate_arn
@@ -600,6 +965,10 @@ module Aws::IoT
     #   The generation ID of the CA certificate.
     #   @return [String]
     #
+    # @!attribute [rw] validity
+    #   When the CA certificate is valid.
+    #   @return [Types::CertificateValidity]
+    #
     class CACertificateDescription < Struct.new(
       :certificate_arn,
       :certificate_id,
@@ -610,9 +979,29 @@ module Aws::IoT
       :auto_registration_status,
       :last_modified_date,
       :customer_version,
-      :generation_id)
+      :generation_id,
+      :validity)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass CancelAuditTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         task_id: "AuditTaskId", # required
+    #       }
+    #
+    # @!attribute [rw] task_id
+    #   The ID of the audit you want to cancel. You can only cancel an audit
+    #   that is "IN\_PROGRESS".
+    #   @return [String]
+    #
+    class CancelAuditTaskRequest < Struct.new(
+      :task_id)
+      include Aws::Structure
+    end
+
+    class CancelAuditTaskResponse < Aws::EmptyStructure; end
 
     # The input for the CancelCertificateTransfer operation.
     #
@@ -633,12 +1022,73 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CancelJobExecutionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #         thing_name: "ThingName", # required
+    #         force: false,
+    #         expected_version: 1,
+    #         status_details: {
+    #           "DetailsKey" => "DetailsValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID of the job to be canceled.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the thing whose execution of the job will be canceled.
+    #   @return [String]
+    #
+    # @!attribute [rw] force
+    #   (Optional) If `true` the job execution will be canceled if it has
+    #   status IN\_PROGRESS or QUEUED, otherwise the job execution will be
+    #   canceled only if it has status QUEUED. If you attempt to cancel a
+    #   job execution that is IN\_PROGRESS, and you do not set `force` to
+    #   `true`, then an `InvalidStateTransitionException` will be thrown.
+    #   The default is `false`.
+    #
+    #   Canceling a job execution which is "IN\_PROGRESS", will cause the
+    #   device to be unable to update the job execution status. Use caution
+    #   and ensure that the device is able to recover to a valid state.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] expected_version
+    #   (Optional) The expected current version of the job execution. Each
+    #   time you update the job execution, its version is incremented. If
+    #   the version of the job execution stored in Jobs does not match, the
+    #   update is rejected with a VersionMismatch error, and an
+    #   ErrorResponse that contains the current job execution status data is
+    #   returned. (This makes it unnecessary to perform a separate
+    #   DescribeJobExecution request in order to obtain the job execution
+    #   status data.)
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status_details
+    #   A collection of name/value pairs that describe the status of the job
+    #   execution. If not specified, the statusDetails are unchanged. You
+    #   can specify at most 10 name/value pairs.
+    #   @return [Hash<String,String>]
+    #
+    class CancelJobExecutionRequest < Struct.new(
+      :job_id,
+      :thing_name,
+      :force,
+      :expected_version,
+      :status_details)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CancelJobRequest
     #   data as a hash:
     #
     #       {
     #         job_id: "JobId", # required
     #         comment: "Comment",
+    #         force: false,
     #       }
     #
     # @!attribute [rw] job_id
@@ -649,9 +1099,21 @@ module Aws::IoT
     #   An optional comment string describing why the job was canceled.
     #   @return [String]
     #
+    # @!attribute [rw] force
+    #   (Optional) If `true` job executions with status "IN\_PROGRESS" and
+    #   "QUEUED" are canceled, otherwise only job executions with status
+    #   "QUEUED" are canceled. The default is `false`.
+    #
+    #   Canceling a job which is "IN\_PROGRESS", will cause a device which
+    #   is executing the job to be unable to update the job execution
+    #   status. Use caution and ensure that each device executing a job
+    #   which is canceled is able to recover to a valid state.
+    #   @return [Boolean]
+    #
     class CancelJobRequest < Struct.new(
       :job_id,
-      :comment)
+      :comment,
+      :force)
       include Aws::Structure
     end
 
@@ -755,6 +1217,10 @@ module Aws::IoT
     #   The generation ID of the certificate.
     #   @return [String]
     #
+    # @!attribute [rw] validity
+    #   When the certificate is valid.
+    #   @return [Types::CertificateValidity]
+    #
     class CertificateDescription < Struct.new(
       :certificate_arn,
       :certificate_id,
@@ -767,7 +1233,24 @@ module Aws::IoT
       :last_modified_date,
       :customer_version,
       :transfer_data,
-      :generation_id)
+      :generation_id,
+      :validity)
+      include Aws::Structure
+    end
+
+    # When the certificate is valid.
+    #
+    # @!attribute [rw] not_before
+    #   The certificate is not valid before this date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] not_after
+    #   The certificate is not valid after this date.
+    #   @return [Time]
+    #
+    class CertificateValidity < Struct.new(
+      :not_before,
+      :not_after)
       include Aws::Structure
     end
 
@@ -821,11 +1304,11 @@ module Aws::IoT
     #
     #       {
     #         role_arn: "AwsArn", # required
-    #         metric_namespace: "MetricNamespace", # required
-    #         metric_name: "MetricName", # required
-    #         metric_value: "MetricValue", # required
-    #         metric_unit: "MetricUnit", # required
-    #         metric_timestamp: "MetricTimestamp",
+    #         metric_namespace: "String", # required
+    #         metric_name: "String", # required
+    #         metric_value: "String", # required
+    #         metric_unit: "String", # required
+    #         metric_timestamp: "String",
     #       }
     #
     # @!attribute [rw] role_arn
@@ -877,19 +1360,25 @@ module Aws::IoT
     #
     #       {
     #         aws_signer_job_id: "SigningJobId",
+    #         start_signing_job_parameter: {
+    #           signing_profile_parameter: {
+    #             certificate_arn: "CertificateArn",
+    #             platform: "Platform",
+    #             certificate_path_on_device: "CertificatePathOnDevice",
+    #           },
+    #           signing_profile_name: "SigningProfileName",
+    #           destination: {
+    #             s3_destination: {
+    #               bucket: "S3Bucket",
+    #               prefix: "Prefix",
+    #             },
+    #           },
+    #         },
     #         custom_code_signing: {
     #           signature: {
-    #             stream: {
-    #               stream_id: "StreamId",
-    #               file_id: 1,
-    #             },
     #             inline_document: "data",
     #           },
     #           certificate_chain: {
-    #             stream: {
-    #               stream_id: "StreamId",
-    #               file_id: 1,
-    #             },
     #             certificate_name: "CertificateName",
     #             inline_document: "InlineDocument",
     #           },
@@ -902,12 +1391,17 @@ module Aws::IoT
     #   The ID of the AWSSignerJob which was created to sign the file.
     #   @return [String]
     #
+    # @!attribute [rw] start_signing_job_parameter
+    #   Describes the code-signing job.
+    #   @return [Types::StartSigningJobParameter]
+    #
     # @!attribute [rw] custom_code_signing
     #   A custom method for code signing a file.
     #   @return [Types::CustomCodeSigning]
     #
     class CodeSigning < Struct.new(
       :aws_signer_job_id,
+      :start_signing_job_parameter,
       :custom_code_signing)
       include Aws::Structure
     end
@@ -918,17 +1412,9 @@ module Aws::IoT
     #   data as a hash:
     #
     #       {
-    #         stream: {
-    #           stream_id: "StreamId",
-    #           file_id: 1,
-    #         },
     #         certificate_name: "CertificateName",
     #         inline_document: "InlineDocument",
     #       }
-    #
-    # @!attribute [rw] stream
-    #   A stream of the certificate chain files.
-    #   @return [Types::Stream]
     #
     # @!attribute [rw] certificate_name
     #   The name of the certificate.
@@ -940,7 +1426,6 @@ module Aws::IoT
     #   @return [String]
     #
     class CodeSigningCertificateChain < Struct.new(
-      :stream,
       :certificate_name,
       :inline_document)
       include Aws::Structure
@@ -952,16 +1437,8 @@ module Aws::IoT
     #   data as a hash:
     #
     #       {
-    #         stream: {
-    #           stream_id: "StreamId",
-    #           file_id: 1,
-    #         },
     #         inline_document: "data",
     #       }
-    #
-    # @!attribute [rw] stream
-    #   A stream of the code signing signature.
-    #   @return [Types::Stream]
     #
     # @!attribute [rw] inline_document
     #   A base64 encoded binary representation of the code signing
@@ -969,7 +1446,6 @@ module Aws::IoT
     #   @return [String]
     #
     class CodeSigningSignature < Struct.new(
-      :stream,
       :inline_document)
       include Aws::Structure
     end
@@ -1114,9 +1590,6 @@ module Aws::IoT
     #         job_executions_rollout_config: {
     #           maximum_per_minute: 1,
     #         },
-    #         document_parameters: {
-    #           "ParameterKey" => "ParameterValue",
-    #         },
     #       }
     #
     # @!attribute [rw] job_id
@@ -1158,10 +1631,6 @@ module Aws::IoT
     #   Allows you to create a staged rollout of the job.
     #   @return [Types::JobExecutionsRolloutConfig]
     #
-    # @!attribute [rw] document_parameters
-    #   Parameters for the job document.
-    #   @return [Hash<String,String>]
-    #
     class CreateJobRequest < Struct.new(
       :job_id,
       :targets,
@@ -1170,8 +1639,7 @@ module Aws::IoT
       :description,
       :presigned_url_config,
       :target_selection,
-      :job_executions_rollout_config,
-      :document_parameters)
+      :job_executions_rollout_config)
       include Aws::Structure
     end
 
@@ -1247,29 +1715,45 @@ module Aws::IoT
     #         description: "OTAUpdateDescription",
     #         targets: ["Target"], # required
     #         target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
+    #         aws_job_executions_rollout_config: {
+    #           maximum_per_minute: 1,
+    #         },
     #         files: [ # required
     #           {
     #             file_name: "FileName",
     #             file_version: "OTAUpdateFileVersion",
-    #             file_source: {
-    #               stream_id: "StreamId",
-    #               file_id: 1,
+    #             file_location: {
+    #               stream: {
+    #                 stream_id: "StreamId",
+    #                 file_id: 1,
+    #               },
+    #               s3_location: {
+    #                 bucket: "S3Bucket",
+    #                 key: "S3Key",
+    #                 version: "S3Version",
+    #               },
     #             },
     #             code_signing: {
     #               aws_signer_job_id: "SigningJobId",
+    #               start_signing_job_parameter: {
+    #                 signing_profile_parameter: {
+    #                   certificate_arn: "CertificateArn",
+    #                   platform: "Platform",
+    #                   certificate_path_on_device: "CertificatePathOnDevice",
+    #                 },
+    #                 signing_profile_name: "SigningProfileName",
+    #                 destination: {
+    #                   s3_destination: {
+    #                     bucket: "S3Bucket",
+    #                     prefix: "Prefix",
+    #                   },
+    #                 },
+    #               },
     #               custom_code_signing: {
     #                 signature: {
-    #                   stream: {
-    #                     stream_id: "StreamId",
-    #                     file_id: 1,
-    #                   },
     #                   inline_document: "data",
     #                 },
     #                 certificate_chain: {
-    #                   stream: {
-    #                     stream_id: "StreamId",
-    #                     file_id: 1,
-    #                   },
     #                   certificate_name: "CertificateName",
     #                   inline_document: "InlineDocument",
     #                 },
@@ -1278,13 +1762,13 @@ module Aws::IoT
     #               },
     #             },
     #             attributes: {
-    #               "Key" => "Value",
+    #               "AttributeKey" => "Value",
     #             },
     #           },
     #         ],
     #         role_arn: "RoleArn", # required
     #         additional_parameters: {
-    #           "Key" => "Value",
+    #           "AttributeKey" => "Value",
     #         },
     #       }
     #
@@ -1310,6 +1794,10 @@ module Aws::IoT
     #   originally in the group. Valid values: CONTINUOUS \| SNAPSHOT.
     #   @return [String]
     #
+    # @!attribute [rw] aws_job_executions_rollout_config
+    #   Configuration for the rollout of OTA updates.
+    #   @return [Types::AwsJobExecutionsRolloutConfig]
+    #
     # @!attribute [rw] files
     #   The files to be streamed by the OTA update.
     #   @return [Array<Types::OTAUpdateFile>]
@@ -1328,6 +1816,7 @@ module Aws::IoT
       :description,
       :targets,
       :target_selection,
+      :aws_job_executions_rollout_config,
       :files,
       :role_arn,
       :additional_parameters)
@@ -1518,6 +2007,139 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateScheduledAuditRequest
+    #   data as a hash:
+    #
+    #       {
+    #         frequency: "DAILY", # required, accepts DAILY, WEEKLY, BIWEEKLY, MONTHLY
+    #         day_of_month: "DayOfMonth",
+    #         day_of_week: "SUN", # accepts SUN, MON, TUE, WED, THU, FRI, SAT
+    #         target_check_names: ["AuditCheckName"], # required
+    #         scheduled_audit_name: "ScheduledAuditName", # required
+    #       }
+    #
+    # @!attribute [rw] frequency
+    #   How often the scheduled audit takes place. Can be one of "DAILY",
+    #   "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of
+    #   each audit is determined by the system.
+    #   @return [String]
+    #
+    # @!attribute [rw] day_of_month
+    #   The day of the month on which the scheduled audit takes place. Can
+    #   be "1" through "31" or "LAST". This field is required if the
+    #   "frequency" parameter is set to "MONTHLY". If days 29-31 are
+    #   specified, and the month does not have that many days, the audit
+    #   takes place on the "LAST" day of the month.
+    #   @return [String]
+    #
+    # @!attribute [rw] day_of_week
+    #   The day of the week on which the scheduled audit takes place. Can be
+    #   one of "SUN", "MON", "TUE", "WED", "THU", "FRI" or
+    #   "SAT". This field is required if the "frequency" parameter is
+    #   set to "WEEKLY" or "BIWEEKLY".
+    #   @return [String]
+    #
+    # @!attribute [rw] target_check_names
+    #   Which checks are performed during the scheduled audit. Checks must
+    #   be enabled for your account. (Use
+    #   `DescribeAccountAuditConfiguration` to see the list of all checks
+    #   including those that are enabled or
+    #   `UpdateAccountAuditConfiguration` to select which checks are
+    #   enabled.)
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] scheduled_audit_name
+    #   The name you want to give to the scheduled audit. (Max. 128 chars)
+    #   @return [String]
+    #
+    class CreateScheduledAuditRequest < Struct.new(
+      :frequency,
+      :day_of_month,
+      :day_of_week,
+      :target_check_names,
+      :scheduled_audit_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scheduled_audit_arn
+    #   The ARN of the scheduled audit.
+    #   @return [String]
+    #
+    class CreateScheduledAuditResponse < Struct.new(
+      :scheduled_audit_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateSecurityProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         security_profile_name: "SecurityProfileName", # required
+    #         security_profile_description: "SecurityProfileDescription",
+    #         behaviors: [ # required
+    #           {
+    #             name: "BehaviorName", # required
+    #             metric: "BehaviorMetric",
+    #             criteria: {
+    #               comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set
+    #               value: {
+    #                 count: 1,
+    #                 cidrs: ["Cidr"],
+    #                 ports: [1],
+    #               },
+    #               duration_seconds: 1,
+    #             },
+    #           },
+    #         ],
+    #         alert_targets: {
+    #           "SNS" => {
+    #             alert_target_arn: "AlertTargetArn", # required
+    #             role_arn: "RoleArn", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] security_profile_name
+    #   The name you are giving to the security profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_profile_description
+    #   A description of the security profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] behaviors
+    #   Specifies the behaviors that, when violated by a device (thing),
+    #   cause an alert.
+    #   @return [Array<Types::Behavior>]
+    #
+    # @!attribute [rw] alert_targets
+    #   Specifies the destinations to which alerts are sent. (Alerts are
+    #   always sent to the console.) Alerts are generated when a device
+    #   (thing) violates a behavior.
+    #   @return [Hash<String,Types::AlertTarget>]
+    #
+    class CreateSecurityProfileRequest < Struct.new(
+      :security_profile_name,
+      :security_profile_description,
+      :behaviors,
+      :alert_targets)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_profile_name
+    #   The name you gave to the security profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_profile_arn
+    #   The ARN of the security profile.
+    #   @return [String]
+    #
+    class CreateSecurityProfileResponse < Struct.new(
+      :security_profile_name,
+      :security_profile_arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateStreamRequest
     #   data as a hash:
     #
@@ -1528,8 +2150,8 @@ module Aws::IoT
     #           {
     #             file_id: 1,
     #             s3_location: {
-    #               bucket: "S3Bucket", # required
-    #               key: "S3Key", # required
+    #               bucket: "S3Bucket",
+    #               key: "S3Key",
     #               version: "S3Version",
     #             },
     #           },
@@ -1815,11 +2437,11 @@ module Aws::IoT
     #               },
     #               cloudwatch_metric: {
     #                 role_arn: "AwsArn", # required
-    #                 metric_namespace: "MetricNamespace", # required
-    #                 metric_name: "MetricName", # required
-    #                 metric_value: "MetricValue", # required
-    #                 metric_unit: "MetricUnit", # required
-    #                 metric_timestamp: "MetricTimestamp",
+    #                 metric_namespace: "String", # required
+    #                 metric_name: "String", # required
+    #                 metric_value: "String", # required
+    #                 metric_unit: "String", # required
+    #                 metric_timestamp: "String",
     #               },
     #               cloudwatch_alarm: {
     #                 role_arn: "AwsArn", # required
@@ -1842,6 +2464,11 @@ module Aws::IoT
     #                 channel_arn: "AwsArn",
     #                 channel_name: "ChannelName",
     #                 role_arn: "AwsArn",
+    #               },
+    #               step_functions: {
+    #                 execution_name_prefix: "ExecutionNamePrefix",
+    #                 state_machine_name: "StateMachineName", # required
+    #                 role_arn: "AwsArn", # required
     #               },
     #             },
     #           ],
@@ -1901,11 +2528,11 @@ module Aws::IoT
     #             },
     #             cloudwatch_metric: {
     #               role_arn: "AwsArn", # required
-    #               metric_namespace: "MetricNamespace", # required
-    #               metric_name: "MetricName", # required
-    #               metric_value: "MetricValue", # required
-    #               metric_unit: "MetricUnit", # required
-    #               metric_timestamp: "MetricTimestamp",
+    #               metric_namespace: "String", # required
+    #               metric_name: "String", # required
+    #               metric_value: "String", # required
+    #               metric_unit: "String", # required
+    #               metric_timestamp: "String",
     #             },
     #             cloudwatch_alarm: {
     #               role_arn: "AwsArn", # required
@@ -1928,6 +2555,11 @@ module Aws::IoT
     #               channel_arn: "AwsArn",
     #               channel_name: "ChannelName",
     #               role_arn: "AwsArn",
+    #             },
+    #             step_functions: {
+    #               execution_name_prefix: "ExecutionNamePrefix",
+    #               state_machine_name: "StateMachineName", # required
+    #               role_arn: "AwsArn", # required
     #             },
     #           },
     #         },
@@ -1954,17 +2586,9 @@ module Aws::IoT
     #
     #       {
     #         signature: {
-    #           stream: {
-    #             stream_id: "StreamId",
-    #             file_id: 1,
-    #           },
     #           inline_document: "data",
     #         },
     #         certificate_chain: {
-    #           stream: {
-    #             stream_id: "StreamId",
-    #             file_id: 1,
-    #           },
     #           certificate_name: "CertificateName",
     #           inline_document: "InlineDocument",
     #         },
@@ -1995,6 +2619,24 @@ module Aws::IoT
       :signature_algorithm)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteAccountAuditConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         delete_scheduled_audits: false,
+    #       }
+    #
+    # @!attribute [rw] delete_scheduled_audits
+    #   If true, all scheduled audits are deleted.
+    #   @return [Boolean]
+    #
+    class DeleteAccountAuditConfigurationRequest < Struct.new(
+      :delete_scheduled_audits)
+      include Aws::Structure
+    end
+
+    class DeleteAccountAuditConfigurationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteAuthorizerRequest
     #   data as a hash:
@@ -2062,19 +2704,121 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteJobExecutionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #         thing_name: "ThingName", # required
+    #         execution_number: 1, # required
+    #         force: false,
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID of the job whose execution on a particular device will be
+    #   deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the thing whose job execution will be deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_number
+    #   The ID of the job execution to be deleted. The `executionNumber`
+    #   refers to the execution of a particular job on a particular device.
+    #
+    #   Note that once a job execution is deleted, the `executionNumber` may
+    #   be reused by IoT, so be sure you get and use the correct value here.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] force
+    #   (Optional) When true, you can delete a job execution which is
+    #   "IN\_PROGRESS". Otherwise, you can only delete a job execution
+    #   which is in a terminal state ("SUCCEEDED", "FAILED",
+    #   "REJECTED", "REMOVED" or "CANCELED") or an exception will
+    #   occur. The default is false.
+    #
+    #   <note markdown="1"> Deleting a job execution which is "IN\_PROGRESS", will cause the
+    #   device to be unable to access job information or update the job
+    #   execution status. Use caution and ensure that the device is able to
+    #   recover to a valid state.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
+    class DeleteJobExecutionRequest < Struct.new(
+      :job_id,
+      :thing_name,
+      :execution_number,
+      :force)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #         force: false,
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID of the job to be deleted.
+    #
+    #   After a job deletion is completed, you may reuse this jobId when you
+    #   create a new job. However, this is not recommended, and you must
+    #   ensure that your devices are not using the jobId to refer to the
+    #   deleted job.
+    #   @return [String]
+    #
+    # @!attribute [rw] force
+    #   (Optional) When true, you can delete a job which is
+    #   "IN\_PROGRESS". Otherwise, you can only delete a job which is in a
+    #   terminal state ("COMPLETED" or "CANCELED") or an exception will
+    #   occur. The default is false.
+    #
+    #   <note markdown="1"> Deleting a job which is "IN\_PROGRESS", will cause a device which
+    #   is executing the job to be unable to access job information or
+    #   update the job execution status. Use caution and ensure that each
+    #   device executing a job which is deleted is able to recover to a
+    #   valid state.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
+    class DeleteJobRequest < Struct.new(
+      :job_id,
+      :force)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteOTAUpdateRequest
     #   data as a hash:
     #
     #       {
     #         ota_update_id: "OTAUpdateId", # required
+    #         delete_stream: false,
+    #         force_delete_aws_job: false,
     #       }
     #
     # @!attribute [rw] ota_update_id
     #   The OTA update ID to delete.
     #   @return [String]
     #
+    # @!attribute [rw] delete_stream
+    #   Specifies if the stream associated with an OTA update should be
+    #   deleted when the OTA update is deleted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] force_delete_aws_job
+    #   Specifies if the AWS Job associated with the OTA update should be
+    #   deleted with the OTA update is deleted.
+    #   @return [Boolean]
+    #
     class DeleteOTAUpdateRequest < Struct.new(
-      :ota_update_id)
+      :ota_update_id,
+      :delete_stream,
+      :force_delete_aws_job)
       include Aws::Structure
     end
 
@@ -2149,6 +2893,51 @@ module Aws::IoT
     end
 
     class DeleteRoleAliasResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteScheduledAuditRequest
+    #   data as a hash:
+    #
+    #       {
+    #         scheduled_audit_name: "ScheduledAuditName", # required
+    #       }
+    #
+    # @!attribute [rw] scheduled_audit_name
+    #   The name of the scheduled audit you want to delete.
+    #   @return [String]
+    #
+    class DeleteScheduledAuditRequest < Struct.new(
+      :scheduled_audit_name)
+      include Aws::Structure
+    end
+
+    class DeleteScheduledAuditResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteSecurityProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         security_profile_name: "SecurityProfileName", # required
+    #         expected_version: 1,
+    #       }
+    #
+    # @!attribute [rw] security_profile_name
+    #   The name of the security profile to be deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_version
+    #   The expected version of the security profile. A new version is
+    #   generated whenever the security profile is updated. If you specify a
+    #   value that is different than the actual version, a
+    #   `VersionConflictException` is thrown.
+    #   @return [Integer]
+    #
+    class DeleteSecurityProfileRequest < Struct.new(
+      :security_profile_name,
+      :expected_version)
+      include Aws::Structure
+    end
+
+    class DeleteSecurityProfileResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteStreamRequest
     #   data as a hash:
@@ -2334,6 +3123,88 @@ module Aws::IoT
     #
     class DeprecateThingTypeResponse < Aws::EmptyStructure; end
 
+    # @api private
+    #
+    class DescribeAccountAuditConfigurationRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] role_arn
+    #   The ARN of the role that grants permission to AWS IoT to access
+    #   information about your devices, policies, certificates and other
+    #   items as necessary when performing an audit.
+    #
+    #   On the first call to `UpdateAccountAuditConfiguration` this
+    #   parameter is required.
+    #   @return [String]
+    #
+    # @!attribute [rw] audit_notification_target_configurations
+    #   Information about the targets to which audit notifications are sent
+    #   for this account.
+    #   @return [Hash<String,Types::AuditNotificationTarget>]
+    #
+    # @!attribute [rw] audit_check_configurations
+    #   Which audit checks are enabled and disabled for this account.
+    #   @return [Hash<String,Types::AuditCheckConfiguration>]
+    #
+    class DescribeAccountAuditConfigurationResponse < Struct.new(
+      :role_arn,
+      :audit_notification_target_configurations,
+      :audit_check_configurations)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAuditTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         task_id: "AuditTaskId", # required
+    #       }
+    #
+    # @!attribute [rw] task_id
+    #   The ID of the audit whose information you want to get.
+    #   @return [String]
+    #
+    class DescribeAuditTaskRequest < Struct.new(
+      :task_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] task_status
+    #   The status of the audit: one of "IN\_PROGRESS", "COMPLETED",
+    #   "FAILED", or "CANCELED".
+    #   @return [String]
+    #
+    # @!attribute [rw] task_type
+    #   The type of audit: "ON\_DEMAND\_AUDIT\_TASK" or
+    #   "SCHEDULED\_AUDIT\_TASK".
+    #   @return [String]
+    #
+    # @!attribute [rw] task_start_time
+    #   The time the audit started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] task_statistics
+    #   Statistical information about the audit.
+    #   @return [Types::TaskStatistics]
+    #
+    # @!attribute [rw] scheduled_audit_name
+    #   The name of the scheduled audit (only if the audit was a scheduled
+    #   audit).
+    #   @return [String]
+    #
+    # @!attribute [rw] audit_details
+    #   Detailed information about each check performed during this audit.
+    #   @return [Hash<String,Types::AuditCheckDetails>]
+    #
+    class DescribeAuditTaskResponse < Struct.new(
+      :task_status,
+      :task_type,
+      :task_start_time,
+      :task_statistics,
+      :scheduled_audit_name,
+      :audit_details)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeAuthorizerRequest
     #   data as a hash:
     #
@@ -2446,7 +3317,8 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] endpoint_type
-    #   The endpoint type.
+    #   The endpoint type (such as `iot:Data`, `iot:CredentialProvider` and
+    #   `iot:Jobs`).
     #   @return [String]
     #
     class DescribeEndpointRequest < Struct.new(
@@ -2620,6 +3492,130 @@ module Aws::IoT
     #
     class DescribeRoleAliasResponse < Struct.new(
       :role_alias_description)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeScheduledAuditRequest
+    #   data as a hash:
+    #
+    #       {
+    #         scheduled_audit_name: "ScheduledAuditName", # required
+    #       }
+    #
+    # @!attribute [rw] scheduled_audit_name
+    #   The name of the scheduled audit whose information you want to get.
+    #   @return [String]
+    #
+    class DescribeScheduledAuditRequest < Struct.new(
+      :scheduled_audit_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] frequency
+    #   How often the scheduled audit takes place. One of "DAILY",
+    #   "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of
+    #   each audit is determined by the system.
+    #   @return [String]
+    #
+    # @!attribute [rw] day_of_month
+    #   The day of the month on which the scheduled audit takes place. Will
+    #   be "1" through "31" or "LAST". If days 29-31 are specified,
+    #   and the month does not have that many days, the audit takes place on
+    #   the "LAST" day of the month.
+    #   @return [String]
+    #
+    # @!attribute [rw] day_of_week
+    #   The day of the week on which the scheduled audit takes place. One of
+    #   "SUN", "MON", "TUE", "WED", "THU", "FRI" or "SAT".
+    #   @return [String]
+    #
+    # @!attribute [rw] target_check_names
+    #   Which checks are performed during the scheduled audit. (Note that
+    #   checks must be enabled for your account. (Use
+    #   `DescribeAccountAuditConfiguration` to see the list of all checks
+    #   including those that are enabled or
+    #   `UpdateAccountAuditConfiguration` to select which checks are
+    #   enabled.)
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] scheduled_audit_name
+    #   The name of the scheduled audit.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_audit_arn
+    #   The ARN of the scheduled audit.
+    #   @return [String]
+    #
+    class DescribeScheduledAuditResponse < Struct.new(
+      :frequency,
+      :day_of_month,
+      :day_of_week,
+      :target_check_names,
+      :scheduled_audit_name,
+      :scheduled_audit_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeSecurityProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         security_profile_name: "SecurityProfileName", # required
+    #       }
+    #
+    # @!attribute [rw] security_profile_name
+    #   The name of the security profile whose information you want to get.
+    #   @return [String]
+    #
+    class DescribeSecurityProfileRequest < Struct.new(
+      :security_profile_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_profile_name
+    #   The name of the security profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_profile_arn
+    #   The ARN of the security profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_profile_description
+    #   A description of the security profile (associated with the security
+    #   profile when it was created or updated).
+    #   @return [String]
+    #
+    # @!attribute [rw] behaviors
+    #   Specifies the behaviors that, when violated by a device (thing),
+    #   cause an alert.
+    #   @return [Array<Types::Behavior>]
+    #
+    # @!attribute [rw] alert_targets
+    #   Where the alerts are sent. (Alerts are always sent to the console.)
+    #   @return [Hash<String,Types::AlertTarget>]
+    #
+    # @!attribute [rw] version
+    #   The version of the security profile. A new version is generated
+    #   whenever the security profile is updated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_date
+    #   The time the security profile was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The time the security profile was last modified.
+    #   @return [Time]
+    #
+    class DescribeSecurityProfileResponse < Struct.new(
+      :security_profile_name,
+      :security_profile_arn,
+      :security_profile_description,
+      :behaviors,
+      :alert_targets,
+      :version,
+      :creation_date,
+      :last_modified_date)
       include Aws::Structure
     end
 
@@ -2898,6 +3894,27 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Describes the location of the updated firmware.
+    #
+    # @note When making an API call, you may pass Destination
+    #   data as a hash:
+    #
+    #       {
+    #         s3_destination: {
+    #           bucket: "S3Bucket",
+    #           prefix: "Prefix",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_destination
+    #   Describes the location in S3 of the updated firmware.
+    #   @return [Types::S3Destination]
+    #
+    class Destination < Struct.new(
+      :s3_destination)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DetachPolicyRequest
     #   data as a hash:
     #
@@ -2947,6 +3964,31 @@ module Aws::IoT
       :principal)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DetachSecurityProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         security_profile_name: "SecurityProfileName", # required
+    #         security_profile_target_arn: "SecurityProfileTargetArn", # required
+    #       }
+    #
+    # @!attribute [rw] security_profile_name
+    #   The security profile that is detached.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_profile_target_arn
+    #   The ARN of the thing group from which the security profile is
+    #   detached.
+    #   @return [String]
+    #
+    class DetachSecurityProfileRequest < Struct.new(
+      :security_profile_name,
+      :security_profile_target_arn)
+      include Aws::Structure
+    end
+
+    class DetachSecurityProfileResponse < Aws::EmptyStructure; end
 
     # The input for the DetachThingPrincipal operation.
     #
@@ -3232,6 +4274,37 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The location of the OTA update.
+    #
+    # @note When making an API call, you may pass FileLocation
+    #   data as a hash:
+    #
+    #       {
+    #         stream: {
+    #           stream_id: "StreamId",
+    #           file_id: 1,
+    #         },
+    #         s3_location: {
+    #           bucket: "S3Bucket",
+    #           key: "S3Key",
+    #           version: "S3Version",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] stream
+    #   The stream that contains the OTA update.
+    #   @return [Types::Stream]
+    #
+    # @!attribute [rw] s3_location
+    #   The location of the updated firmware in S3.
+    #   @return [Types::S3Location]
+    #
+    class FileLocation < Struct.new(
+      :stream,
+      :s3_location)
+      include Aws::Structure
+    end
+
     # Describes an action that writes data to an Amazon Kinesis Firehose
     # stream.
     #
@@ -3311,8 +4384,13 @@ module Aws::IoT
     #   Thing indexing configuration.
     #   @return [Types::ThingIndexingConfiguration]
     #
+    # @!attribute [rw] thing_group_indexing_configuration
+    #   The index configuration.
+    #   @return [Types::ThingGroupIndexingConfiguration]
+    #
     class GetIndexingConfigurationResponse < Struct.new(
-      :thing_indexing_configuration)
+      :thing_indexing_configuration,
+      :thing_group_indexing_configuration)
       include Aws::Structure
     end
 
@@ -3621,7 +4699,7 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # Sends message data to an AWS IoT Analytics channel.
+    # Sends messge data to an AWS IoT Analytics channel.
     #
     # @note When making an API call, you may pass IotAnalyticsAction
     #   data as a hash:
@@ -3643,8 +4721,9 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the role which has a policy that grants IoT permission to
-    #   send message data via IoT Analytics (iotanalytics:BatchPutMessage).
+    #   The ARN of the role which has a policy that grants IoT Analytics
+    #   permission to send message data via IoT Analytics
+    #   (iotanalytics:BatchPutMessage).
     #   @return [String]
     #
     class IotAnalyticsAction < Struct.new(
@@ -3679,6 +4758,11 @@ module Aws::IoT
     #   The status of the job, one of `IN_PROGRESS`, `CANCELED`, or
     #   `COMPLETED`.
     #   @return [String]
+    #
+    # @!attribute [rw] force_canceled
+    #   Will be `true` if the job was canceled with the optional `force`
+    #   parameter set to `true`.
+    #   @return [Boolean]
     #
     # @!attribute [rw] comment
     #   If the job was updated, describes the reason for the update.
@@ -3719,15 +4803,12 @@ module Aws::IoT
     #   Details about the job process.
     #   @return [Types::JobProcessDetails]
     #
-    # @!attribute [rw] document_parameters
-    #   The parameters specified for the job document.
-    #   @return [Hash<String,String>]
-    #
     class Job < Struct.new(
       :job_arn,
       :job_id,
       :target_selection,
       :status,
+      :force_canceled,
       :comment,
       :targets,
       :description,
@@ -3736,8 +4817,7 @@ module Aws::IoT
       :created_at,
       :last_updated_at,
       :completed_at,
-      :job_process_details,
-      :document_parameters)
+      :job_process_details)
       include Aws::Structure
     end
 
@@ -3752,6 +4832,11 @@ module Aws::IoT
     #   The status of the job execution (IN\_PROGRESS, QUEUED, FAILED,
     #   SUCCESS, CANCELED, or REJECTED).
     #   @return [String]
+    #
+    # @!attribute [rw] force_canceled
+    #   Will be `true` if the job execution was canceled with the optional
+    #   `force` parameter set to `true`.
+    #   @return [Boolean]
     #
     # @!attribute [rw] status_details
     #   A collection of name/value pairs that describe the status of the job
@@ -3784,15 +4869,22 @@ module Aws::IoT
     #   information.
     #   @return [Integer]
     #
+    # @!attribute [rw] version_number
+    #   The version of the job execution. Job execution versions are
+    #   incremented each time they are updated by a device.
+    #   @return [Integer]
+    #
     class JobExecution < Struct.new(
       :job_id,
       :status,
+      :force_canceled,
       :status_details,
       :thing_arn,
       :queued_at,
       :started_at,
       :last_updated_at,
-      :execution_number)
+      :execution_number,
+      :version_number)
       include Aws::Structure
     end
 
@@ -3899,7 +4991,9 @@ module Aws::IoT
     # The job process details.
     #
     # @!attribute [rw] processing_targets
-    #   The devices on which the job is executing.
+    #   The target devices to which the job execution is being rolled out.
+    #   This value will be null after the job execution has finished rolling
+    #   out to all the target devices.
     #   @return [Array<String>]
     #
     # @!attribute [rw] number_of_canceled_things
@@ -4061,6 +5155,56 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListActiveViolationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         thing_name: "ThingName",
+    #         security_profile_name: "SecurityProfileName",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the thing whose active violations are listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_profile_name
+    #   The name of the Device Defender security profile for which
+    #   violations are listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time.
+    #   @return [Integer]
+    #
+    class ListActiveViolationsRequest < Struct.new(
+      :thing_name,
+      :security_profile_name,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] active_violations
+    #   The list of active violations.
+    #   @return [Array<Types::ActiveViolation>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that can be used to retrieve the next set of results, or
+    #   `null` if there are no additional results.
+    #   @return [String]
+    #
+    class ListActiveViolationsResponse < Struct.new(
+      :active_violations,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListAttachedPoliciesRequest
     #   data as a hash:
     #
@@ -4107,6 +5251,158 @@ module Aws::IoT
     class ListAttachedPoliciesResponse < Struct.new(
       :policies,
       :next_marker)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAuditFindingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         task_id: "AuditTaskId",
+    #         check_name: "AuditCheckName",
+    #         resource_identifier: {
+    #           device_certificate_id: "CertificateId",
+    #           ca_certificate_id: "CertificateId",
+    #           cognito_identity_pool_id: "CognitoIdentityPoolId",
+    #           client_id: "ClientId",
+    #           policy_version_identifier: {
+    #             policy_name: "PolicyName",
+    #             policy_version_id: "PolicyVersionId",
+    #           },
+    #           account: "AwsAccountId",
+    #         },
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         start_time: Time.now,
+    #         end_time: Time.now,
+    #       }
+    #
+    # @!attribute [rw] task_id
+    #   A filter to limit results to the audit with the specified ID. You
+    #   must specify either the taskId or the startTime and endTime, but not
+    #   both.
+    #   @return [String]
+    #
+    # @!attribute [rw] check_name
+    #   A filter to limit results to the findings for the specified audit
+    #   check.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   Information identifying the non-compliant resource.
+    #   @return [Types::ResourceIdentifier]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time. The default is
+    #   25.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   A filter to limit results to those found after the specified time.
+    #   You must specify either the startTime and endTime or the taskId, but
+    #   not both.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   A filter to limit results to those found before the specified time.
+    #   You must specify either the startTime and endTime or the taskId, but
+    #   not both.
+    #   @return [Time]
+    #
+    class ListAuditFindingsRequest < Struct.new(
+      :task_id,
+      :check_name,
+      :resource_identifier,
+      :max_results,
+      :next_token,
+      :start_time,
+      :end_time)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] findings
+    #   The findings (results) of the audit.
+    #   @return [Array<Types::AuditFinding>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that can be used to retrieve the next set of results, or
+    #   `null` if there are no additional results.
+    #   @return [String]
+    #
+    class ListAuditFindingsResponse < Struct.new(
+      :findings,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAuditTasksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         start_time: Time.now, # required
+    #         end_time: Time.now, # required
+    #         task_type: "ON_DEMAND_AUDIT_TASK", # accepts ON_DEMAND_AUDIT_TASK, SCHEDULED_AUDIT_TASK
+    #         task_status: "IN_PROGRESS", # accepts IN_PROGRESS, COMPLETED, FAILED, CANCELED
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] start_time
+    #   The beginning of the time period. Note that audit information is
+    #   retained for a limited time (180 days). Requesting a start time
+    #   prior to what is retained results in an "InvalidRequestException".
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end of the time period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] task_type
+    #   A filter to limit the output to the specified type of audit: can be
+    #   one of "ON\_DEMAND\_AUDIT\_TASK" or "SCHEDULED\_\_AUDIT\_TASK".
+    #   @return [String]
+    #
+    # @!attribute [rw] task_status
+    #   A filter to limit the output to audits with the specified completion
+    #   status: can be one of "IN\_PROGRESS", "COMPLETED", "FAILED" or
+    #   "CANCELED".
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time. The default is
+    #   25.
+    #   @return [Integer]
+    #
+    class ListAuditTasksRequest < Struct.new(
+      :start_time,
+      :end_time,
+      :task_type,
+      :task_status,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tasks
+    #   The audits that were performed during the specified time period.
+    #   @return [Array<Types::AuditTaskMetadata>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that can be used to retrieve the next set of results, or
+    #   `null` if there are no additional results.
+    #   @return [String]
+    #
+    class ListAuditTasksResponse < Struct.new(
+      :tasks,
+      :next_token)
       include Aws::Structure
     end
 
@@ -4449,7 +5745,7 @@ module Aws::IoT
     #   data as a hash:
     #
     #       {
-    #         status: "IN_PROGRESS", # accepts IN_PROGRESS, CANCELED, COMPLETED
+    #         status: "IN_PROGRESS", # accepts IN_PROGRESS, CANCELED, COMPLETED, DELETION_IN_PROGRESS
     #         target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
     #         max_results: 1,
     #         next_token: "NextToken",
@@ -4800,8 +6096,7 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to retrieve the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -4875,6 +6170,131 @@ module Aws::IoT
     class ListRoleAliasesResponse < Struct.new(
       :role_aliases,
       :next_marker)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListScheduledAuditsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time. The default is
+    #   25.
+    #   @return [Integer]
+    #
+    class ListScheduledAuditsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scheduled_audits
+    #   The list of scheduled audits.
+    #   @return [Array<Types::ScheduledAuditMetadata>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that can be used to retrieve the next set of results, or
+    #   `null` if there are no additional results.
+    #   @return [String]
+    #
+    class ListScheduledAuditsResponse < Struct.new(
+      :scheduled_audits,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListSecurityProfilesForTargetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         recursive: false,
+    #         security_profile_target_arn: "SecurityProfileTargetArn", # required
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] recursive
+    #   If true, return child groups as well.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] security_profile_target_arn
+    #   The ARN of the target (thing group) whose attached security profiles
+    #   you want to get.
+    #   @return [String]
+    #
+    class ListSecurityProfilesForTargetRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :recursive,
+      :security_profile_target_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_profile_target_mappings
+    #   A list of security profiles and their associated targets.
+    #   @return [Array<Types::SecurityProfileTargetMapping>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that can be used to retrieve the next set of results, or
+    #   `null` if there are no additional results.
+    #   @return [String]
+    #
+    class ListSecurityProfilesForTargetResponse < Struct.new(
+      :security_profile_target_mappings,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListSecurityProfilesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time.
+    #   @return [Integer]
+    #
+    class ListSecurityProfilesRequest < Struct.new(
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_profile_identifiers
+    #   A list of security profile identifiers (names and ARNs).
+    #   @return [Array<Types::SecurityProfileIdentifier>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that can be used to retrieve the next set of results, or
+    #   `null` if there are no additional results.
+    #   @return [String]
+    #
+    class ListSecurityProfilesResponse < Struct.new(
+      :security_profile_identifiers,
+      :next_token)
       include Aws::Structure
     end
 
@@ -4962,6 +6382,49 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTargetsForSecurityProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         security_profile_name: "SecurityProfileName", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] security_profile_name
+    #   The security profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time.
+    #   @return [Integer]
+    #
+    class ListTargetsForSecurityProfileRequest < Struct.new(
+      :security_profile_name,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_profile_targets
+    #   The thing groups to which the security profile is attached.
+    #   @return [Array<Types::SecurityProfileTarget>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that can be used to retrieve the next set of results, or
+    #   `null` if there are no additional results.
+    #   @return [String]
+    #
+    class ListTargetsForSecurityProfileResponse < Struct.new(
+      :security_profile_targets,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListThingGroupsForThingRequest
     #   data as a hash:
     #
@@ -4976,8 +6439,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to retrieve the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5018,8 +6480,7 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to retrieve the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5136,7 +6597,8 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   The token used to get the next set of results, or **null** if there
+    #   are no additional results.
     #   @return [String]
     #
     class ListThingRegistrationTaskReportsResponse < Struct.new(
@@ -5156,8 +6618,7 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to retrieve the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5202,8 +6663,7 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results, or **null** if there are no
-    #   additional results.
+    #   The token to retrieve the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5258,8 +6718,7 @@ module Aws::IoT
     #   @return [Boolean]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to retrieve the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5303,8 +6762,7 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to retrieve the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5446,6 +6904,71 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListViolationEventsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         start_time: Time.now, # required
+    #         end_time: Time.now, # required
+    #         thing_name: "ThingName",
+    #         security_profile_name: "SecurityProfileName",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] start_time
+    #   The start time for the alerts to be listed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time for the alerts to be listed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] thing_name
+    #   A filter to limit results to those alerts caused by the specified
+    #   thing.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_profile_name
+    #   A filter to limit results to those alerts generated by the specified
+    #   security profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time.
+    #   @return [Integer]
+    #
+    class ListViolationEventsRequest < Struct.new(
+      :start_time,
+      :end_time,
+      :thing_name,
+      :security_profile_name,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] violation_events
+    #   The security profile violation alerts issued for this account during
+    #   the given time frame, potentially filtered by security profile,
+    #   behavior violated, or thing (device) violating.
+    #   @return [Array<Types::ViolationEvent>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that can be used to retrieve the next set of results, or
+    #   `null` if there are no additional results.
+    #   @return [String]
+    #
+    class ListViolationEventsResponse < Struct.new(
+      :violation_events,
+      :next_token)
+      include Aws::Structure
+    end
+
     # A log target.
     #
     # @note When making an API call, you may pass LogTarget
@@ -5510,6 +7033,61 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The value to be compared with the `metric`.
+    #
+    # @note When making an API call, you may pass MetricValue
+    #   data as a hash:
+    #
+    #       {
+    #         count: 1,
+    #         cidrs: ["Cidr"],
+    #         ports: [1],
+    #       }
+    #
+    # @!attribute [rw] count
+    #   If the `comparisonOperator` calls for a numeric value, use this to
+    #   specify that numeric value to be compared with the `metric`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cidrs
+    #   If the `comparisonOperator` calls for a set of CIDRs, use this to
+    #   specify that set to be compared with the `metric`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ports
+    #   If the `comparisonOperator` calls for a set of ports, use this to
+    #   specify that set to be compared with the `metric`.
+    #   @return [Array<Integer>]
+    #
+    class MetricValue < Struct.new(
+      :count,
+      :cidrs,
+      :ports)
+      include Aws::Structure
+    end
+
+    # Information about the resource that was non-compliant with the audit
+    # check.
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the non-compliant resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   Information identifying the non-compliant resource.
+    #   @return [Types::ResourceIdentifier]
+    #
+    # @!attribute [rw] additional_info
+    #   Additional information about the non-compliant resource.
+    #   @return [Hash<String,String>]
+    #
+    class NonCompliantResource < Struct.new(
+      :resource_type,
+      :resource_identifier,
+      :additional_info)
+      include Aws::Structure
+    end
+
     # Describes a file to be associated with an OTA update.
     #
     # @note When making an API call, you may pass OTAUpdateFile
@@ -5518,25 +7096,38 @@ module Aws::IoT
     #       {
     #         file_name: "FileName",
     #         file_version: "OTAUpdateFileVersion",
-    #         file_source: {
-    #           stream_id: "StreamId",
-    #           file_id: 1,
+    #         file_location: {
+    #           stream: {
+    #             stream_id: "StreamId",
+    #             file_id: 1,
+    #           },
+    #           s3_location: {
+    #             bucket: "S3Bucket",
+    #             key: "S3Key",
+    #             version: "S3Version",
+    #           },
     #         },
     #         code_signing: {
     #           aws_signer_job_id: "SigningJobId",
+    #           start_signing_job_parameter: {
+    #             signing_profile_parameter: {
+    #               certificate_arn: "CertificateArn",
+    #               platform: "Platform",
+    #               certificate_path_on_device: "CertificatePathOnDevice",
+    #             },
+    #             signing_profile_name: "SigningProfileName",
+    #             destination: {
+    #               s3_destination: {
+    #                 bucket: "S3Bucket",
+    #                 prefix: "Prefix",
+    #               },
+    #             },
+    #           },
     #           custom_code_signing: {
     #             signature: {
-    #               stream: {
-    #                 stream_id: "StreamId",
-    #                 file_id: 1,
-    #               },
     #               inline_document: "data",
     #             },
     #             certificate_chain: {
-    #               stream: {
-    #                 stream_id: "StreamId",
-    #                 file_id: 1,
-    #               },
     #               certificate_name: "CertificateName",
     #               inline_document: "InlineDocument",
     #             },
@@ -5545,7 +7136,7 @@ module Aws::IoT
     #           },
     #         },
     #         attributes: {
-    #           "Key" => "Value",
+    #           "AttributeKey" => "Value",
     #         },
     #       }
     #
@@ -5557,9 +7148,9 @@ module Aws::IoT
     #   The file version.
     #   @return [String]
     #
-    # @!attribute [rw] file_source
-    #   The source of the file.
-    #   @return [Types::Stream]
+    # @!attribute [rw] file_location
+    #   The location of the updated firmware.
+    #   @return [Types::FileLocation]
     #
     # @!attribute [rw] code_signing
     #   The code signing method of the file.
@@ -5572,7 +7163,7 @@ module Aws::IoT
     class OTAUpdateFile < Struct.new(
       :file_name,
       :file_version,
-      :file_source,
+      :file_location,
       :code_signing,
       :attributes)
       include Aws::Structure
@@ -5603,6 +7194,10 @@ module Aws::IoT
     # @!attribute [rw] targets
     #   The targets of the OTA update.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] aws_job_executions_rollout_config
+    #   Configuration for the rollout of OTA updates.
+    #   @return [Types::AwsJobExecutionsRolloutConfig]
     #
     # @!attribute [rw] target_selection
     #   Specifies whether the OTA update will continue to run (CONTINUOUS),
@@ -5645,6 +7240,7 @@ module Aws::IoT
       :last_modified_date,
       :description,
       :targets,
+      :aws_job_executions_rollout_config,
       :target_selection,
       :ota_update_files,
       :ota_update_status,
@@ -5746,6 +7342,31 @@ module Aws::IoT
       :version_id,
       :is_default_version,
       :create_date)
+      include Aws::Structure
+    end
+
+    # Information about the version of the policy associated with the
+    # resource.
+    #
+    # @note When making an API call, you may pass PolicyVersionIdentifier
+    #   data as a hash:
+    #
+    #       {
+    #         policy_name: "PolicyName",
+    #         policy_version_id: "PolicyVersionId",
+    #       }
+    #
+    # @!attribute [rw] policy_name
+    #   The name of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_version_id
+    #   The ID of the version of the policy associated with the resource.
+    #   @return [String]
+    #
+    class PolicyVersionIdentifier < Struct.new(
+      :policy_name,
+      :policy_version_id)
       include Aws::Structure
     end
 
@@ -5948,7 +7569,7 @@ module Aws::IoT
     end
 
     # @!attribute [rw] certificate_pem
-    #   The PEM of a certificate.
+    #   .
     #   @return [String]
     #
     # @!attribute [rw] resource_arns
@@ -6007,6 +7628,27 @@ module Aws::IoT
     class RejectCertificateTransferRequest < Struct.new(
       :certificate_id,
       :reject_reason)
+      include Aws::Structure
+    end
+
+    # Information about a related resource.
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   Information identifying the resource.
+    #   @return [Types::ResourceIdentifier]
+    #
+    # @!attribute [rw] additional_info
+    #   Additional information about the resource.
+    #   @return [Hash<String,String>]
+    #
+    class RelatedResource < Struct.new(
+      :resource_type,
+      :resource_identifier,
+      :additional_info)
       include Aws::Structure
     end
 
@@ -6111,11 +7753,11 @@ module Aws::IoT
     #               },
     #               cloudwatch_metric: {
     #                 role_arn: "AwsArn", # required
-    #                 metric_namespace: "MetricNamespace", # required
-    #                 metric_name: "MetricName", # required
-    #                 metric_value: "MetricValue", # required
-    #                 metric_unit: "MetricUnit", # required
-    #                 metric_timestamp: "MetricTimestamp",
+    #                 metric_namespace: "String", # required
+    #                 metric_name: "String", # required
+    #                 metric_value: "String", # required
+    #                 metric_unit: "String", # required
+    #                 metric_timestamp: "String",
     #               },
     #               cloudwatch_alarm: {
     #                 role_arn: "AwsArn", # required
@@ -6138,6 +7780,11 @@ module Aws::IoT
     #                 channel_arn: "AwsArn",
     #                 channel_name: "ChannelName",
     #                 role_arn: "AwsArn",
+    #               },
+    #               step_functions: {
+    #                 execution_name_prefix: "ExecutionNamePrefix",
+    #                 state_machine_name: "StateMachineName", # required
+    #                 role_arn: "AwsArn", # required
     #               },
     #             },
     #           ],
@@ -6197,11 +7844,11 @@ module Aws::IoT
     #             },
     #             cloudwatch_metric: {
     #               role_arn: "AwsArn", # required
-    #               metric_namespace: "MetricNamespace", # required
-    #               metric_name: "MetricName", # required
-    #               metric_value: "MetricValue", # required
-    #               metric_unit: "MetricUnit", # required
-    #               metric_timestamp: "MetricTimestamp",
+    #               metric_namespace: "String", # required
+    #               metric_name: "String", # required
+    #               metric_value: "String", # required
+    #               metric_unit: "String", # required
+    #               metric_timestamp: "String",
     #             },
     #             cloudwatch_alarm: {
     #               role_arn: "AwsArn", # required
@@ -6224,6 +7871,11 @@ module Aws::IoT
     #               channel_arn: "AwsArn",
     #               channel_name: "ChannelName",
     #               role_arn: "AwsArn",
+    #             },
+    #             step_functions: {
+    #               execution_name_prefix: "ExecutionNamePrefix",
+    #               state_machine_name: "StateMachineName", # required
+    #               role_arn: "AwsArn", # required
     #             },
     #           },
     #         },
@@ -6264,6 +7916,57 @@ module Aws::IoT
     class RepublishAction < Struct.new(
       :role_arn,
       :topic)
+      include Aws::Structure
+    end
+
+    # Information identifying the non-compliant resource.
+    #
+    # @note When making an API call, you may pass ResourceIdentifier
+    #   data as a hash:
+    #
+    #       {
+    #         device_certificate_id: "CertificateId",
+    #         ca_certificate_id: "CertificateId",
+    #         cognito_identity_pool_id: "CognitoIdentityPoolId",
+    #         client_id: "ClientId",
+    #         policy_version_identifier: {
+    #           policy_name: "PolicyName",
+    #           policy_version_id: "PolicyVersionId",
+    #         },
+    #         account: "AwsAccountId",
+    #       }
+    #
+    # @!attribute [rw] device_certificate_id
+    #   The ID of the certificate attached to the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] ca_certificate_id
+    #   The ID of the CA certificate used to authorize the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] cognito_identity_pool_id
+    #   The ID of the Cognito Identity Pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The client ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_version_identifier
+    #   The version of the policy associated with the resource.
+    #   @return [Types::PolicyVersionIdentifier]
+    #
+    # @!attribute [rw] account
+    #   The account with which the resource is associated.
+    #   @return [String]
+    #
+    class ResourceIdentifier < Struct.new(
+      :device_certificate_id,
+      :ca_certificate_id,
+      :cognito_identity_pool_id,
+      :client_id,
+      :policy_version_identifier,
+      :account)
       include Aws::Structure
     end
 
@@ -6350,27 +8053,51 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # The location in S3 the contains the files to stream.
+    # Describes the location of updated firmware in S3.
+    #
+    # @note When making an API call, you may pass S3Destination
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "S3Bucket",
+    #         prefix: "Prefix",
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The S3 bucket that contains the updated firmware.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The S3 prefix.
+    #   @return [String]
+    #
+    class S3Destination < Struct.new(
+      :bucket,
+      :prefix)
+      include Aws::Structure
+    end
+
+    # The S3 location.
     #
     # @note When making an API call, you may pass S3Location
     #   data as a hash:
     #
     #       {
-    #         bucket: "S3Bucket", # required
-    #         key: "S3Key", # required
+    #         bucket: "S3Bucket",
+    #         key: "S3Key",
     #         version: "S3Version",
     #       }
     #
     # @!attribute [rw] bucket
-    #   The S3 bucket that contains the file to stream.
+    #   The S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] key
-    #   The name of the file within the S3 bucket to stream.
+    #   The S3 key.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The file version.
+    #   The S3 bucket version.
     #   @return [String]
     #
     class S3Location < Struct.new(
@@ -6406,6 +8133,41 @@ module Aws::IoT
     class SalesforceAction < Struct.new(
       :token,
       :url)
+      include Aws::Structure
+    end
+
+    # Information about the scheduled audit.
+    #
+    # @!attribute [rw] scheduled_audit_name
+    #   The name of the scheduled audit.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_audit_arn
+    #   The ARN of the scheduled audit.
+    #   @return [String]
+    #
+    # @!attribute [rw] frequency
+    #   How often the scheduled audit takes place.
+    #   @return [String]
+    #
+    # @!attribute [rw] day_of_month
+    #   The day of the month on which the scheduled audit is run (if the
+    #   `frequency` is "MONTHLY"). If days 29-31 are specified, and the
+    #   month does not have that many days, the audit takes place on the
+    #   "LAST" day of the month.
+    #   @return [String]
+    #
+    # @!attribute [rw] day_of_week
+    #   The day of the week on which the scheduled audit is run (if the
+    #   `frequency` is "WEEKLY" or "BIWEEKLY").
+    #   @return [String]
+    #
+    class ScheduledAuditMetadata < Struct.new(
+      :scheduled_audit_name,
+      :scheduled_audit_arn,
+      :frequency,
+      :day_of_month,
+      :day_of_week)
       include Aws::Structure
     end
 
@@ -6459,9 +8221,60 @@ module Aws::IoT
     #   The things that match the search query.
     #   @return [Array<Types::ThingDocument>]
     #
+    # @!attribute [rw] thing_groups
+    #   The thing groups that match the search query.
+    #   @return [Array<Types::ThingGroupDocument>]
+    #
     class SearchIndexResponse < Struct.new(
       :next_token,
-      :things)
+      :things,
+      :thing_groups)
+      include Aws::Structure
+    end
+
+    # Identifying information for a Device Defender security profile.
+    #
+    # @!attribute [rw] name
+    #   The name you have given to the security profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the security profile.
+    #   @return [String]
+    #
+    class SecurityProfileIdentifier < Struct.new(
+      :name,
+      :arn)
+      include Aws::Structure
+    end
+
+    # A target to which an alert is sent when a security profile behavior is
+    # violated.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the security profile.
+    #   @return [String]
+    #
+    class SecurityProfileTarget < Struct.new(
+      :arn)
+      include Aws::Structure
+    end
+
+    # Information about a security profile and the target associated with
+    # it.
+    #
+    # @!attribute [rw] security_profile_identifier
+    #   Information that identifies the security profile.
+    #   @return [Types::SecurityProfileIdentifier]
+    #
+    # @!attribute [rw] target
+    #   Information about the target (thing group) associated with the
+    #   security profile.
+    #   @return [Types::SecurityProfileTarget]
+    #
+    class SecurityProfileTargetMapping < Struct.new(
+      :security_profile_identifier,
+      :target)
       include Aws::Structure
     end
 
@@ -6575,7 +8388,7 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The role ARN that allows IoT to write to Cloudwatch logs.
+    #   The ARN of the role that allows IoT to write to Cloudwatch logs.
     #   @return [String]
     #
     # @!attribute [rw] default_log_level
@@ -6583,13 +8396,43 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] disable_all_logs
-    #   Set to true to disable all logs, otherwise set to false.
+    #   If true all logs are disabled. The default is false.
     #   @return [Boolean]
     #
     class SetV2LoggingOptionsRequest < Struct.new(
       :role_arn,
       :default_log_level,
       :disable_all_logs)
+      include Aws::Structure
+    end
+
+    # Describes the code-signing profile.
+    #
+    # @note When making an API call, you may pass SigningProfileParameter
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_arn: "CertificateArn",
+    #         platform: "Platform",
+    #         certificate_path_on_device: "CertificatePathOnDevice",
+    #       }
+    #
+    # @!attribute [rw] certificate_arn
+    #   Certificate ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   The hardware platform of your device.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_path_on_device
+    #   The location of the code-signing certificate on your device.
+    #   @return [String]
+    #
+    class SigningProfileParameter < Struct.new(
+      :certificate_arn,
+      :platform,
+      :certificate_path_on_device)
       include Aws::Structure
     end
 
@@ -6613,7 +8456,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] message_format
-    #   The message format of the message to publish. Optional. Accepted
+    #   (Optional) The message format of the message to publish. Accepted
     #   values are "JSON" and "RAW". The default value of the attribute
     #   is "RAW". SNS uses this setting to determine if the payload should
     #   be parsed and relevant platform-specific bits of the payload should
@@ -6663,6 +8506,75 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartOnDemandAuditTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         target_check_names: ["AuditCheckName"], # required
+    #       }
+    #
+    # @!attribute [rw] target_check_names
+    #   Which checks are performed during the audit. The checks you specify
+    #   must be enabled for your account or an exception occurs. Use
+    #   `DescribeAccountAuditConfiguration` to see the list of all checks
+    #   including those that are enabled or
+    #   `UpdateAccountAuditConfiguration` to select which checks are
+    #   enabled.
+    #   @return [Array<String>]
+    #
+    class StartOnDemandAuditTaskRequest < Struct.new(
+      :target_check_names)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] task_id
+    #   The ID of the on-demand audit you started.
+    #   @return [String]
+    #
+    class StartOnDemandAuditTaskResponse < Struct.new(
+      :task_id)
+      include Aws::Structure
+    end
+
+    # Information required to start a signing job.
+    #
+    # @note When making an API call, you may pass StartSigningJobParameter
+    #   data as a hash:
+    #
+    #       {
+    #         signing_profile_parameter: {
+    #           certificate_arn: "CertificateArn",
+    #           platform: "Platform",
+    #           certificate_path_on_device: "CertificatePathOnDevice",
+    #         },
+    #         signing_profile_name: "SigningProfileName",
+    #         destination: {
+    #           s3_destination: {
+    #             bucket: "S3Bucket",
+    #             prefix: "Prefix",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] signing_profile_parameter
+    #   Describes the code-signing profile.
+    #   @return [Types::SigningProfileParameter]
+    #
+    # @!attribute [rw] signing_profile_name
+    #   The code-signing profile name.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The location to write the code-signed file.
+    #   @return [Types::Destination]
+    #
+    class StartSigningJobParameter < Struct.new(
+      :signing_profile_parameter,
+      :signing_profile_name,
+      :destination)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartThingRegistrationTaskRequest
     #   data as a hash:
     #
@@ -6705,6 +8617,41 @@ module Aws::IoT
     #
     class StartThingRegistrationTaskResponse < Struct.new(
       :task_id)
+      include Aws::Structure
+    end
+
+    # Starts execution of a Step Functions state machine.
+    #
+    # @note When making an API call, you may pass StepFunctionsAction
+    #   data as a hash:
+    #
+    #       {
+    #         execution_name_prefix: "ExecutionNamePrefix",
+    #         state_machine_name: "StateMachineName", # required
+    #         role_arn: "AwsArn", # required
+    #       }
+    #
+    # @!attribute [rw] execution_name_prefix
+    #   (Optional) A name will be given to the state machine execution
+    #   consisting of this prefix followed by a UUID. Step Functions
+    #   automatically creates a unique name for each state machine execution
+    #   if one is not provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_machine_name
+    #   The name of the Step Functions state machine whose execution will be
+    #   started.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role that grants IoT permission to start execution of
+    #   a state machine ("Action":"states:StartExecution").
+    #   @return [String]
+    #
+    class StepFunctionsAction < Struct.new(
+      :execution_name_prefix,
+      :state_machine_name,
+      :role_arn)
       include Aws::Structure
     end
 
@@ -6758,8 +8705,8 @@ module Aws::IoT
     #       {
     #         file_id: 1,
     #         s3_location: {
-    #           bucket: "S3Bucket", # required
-    #           key: "S3Key", # required
+    #           bucket: "S3Bucket",
+    #           key: "S3Key",
     #           version: "S3Version",
     #         },
     #       }
@@ -6847,6 +8794,48 @@ module Aws::IoT
       :stream_arn,
       :stream_version,
       :description)
+      include Aws::Structure
+    end
+
+    # Statistics for the checks performed during the audit.
+    #
+    # @!attribute [rw] total_checks
+    #   The number of checks in this audit.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] in_progress_checks
+    #   The number of checks in progress.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] waiting_for_data_collection_checks
+    #   The number of checks waiting for data collection.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compliant_checks
+    #   The number of checks that found compliant resources.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] non_compliant_checks
+    #   The number of checks that found non-compliant resources.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_checks
+    #   The number of checks
+    #   @return [Integer]
+    #
+    # @!attribute [rw] canceled_checks
+    #   The number of checks that did not run because the audit was
+    #   canceled.
+    #   @return [Integer]
+    #
+    class TaskStatistics < Struct.new(
+      :total_checks,
+      :in_progress_checks,
+      :waiting_for_data_collection_checks,
+      :compliant_checks,
+      :non_compliant_checks,
+      :failed_checks,
+      :canceled_checks)
       include Aws::Structure
     end
 
@@ -7042,6 +9031,55 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The thing group search index document.
+    #
+    # @!attribute [rw] thing_group_name
+    #   The thing group name.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_group_id
+    #   The thing group ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_group_description
+    #   The thing group description.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   The thing group attributes.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] parent_group_names
+    #   Parent group names.
+    #   @return [Array<String>]
+    #
+    class ThingGroupDocument < Struct.new(
+      :thing_group_name,
+      :thing_group_id,
+      :thing_group_description,
+      :attributes,
+      :parent_group_names)
+      include Aws::Structure
+    end
+
+    # Thing group indexing configuration.
+    #
+    # @note When making an API call, you may pass ThingGroupIndexingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         thing_group_indexing_mode: "OFF", # required, accepts OFF, ON
+    #       }
+    #
+    # @!attribute [rw] thing_group_indexing_mode
+    #   Thing group indexing mode.
+    #   @return [String]
+    #
+    class ThingGroupIndexingConfiguration < Struct.new(
+      :thing_group_indexing_mode)
+      include Aws::Structure
+    end
+
     # Thing group metadata.
     #
     # @!attribute [rw] parent_group_name
@@ -7098,7 +9136,7 @@ module Aws::IoT
     #   data as a hash:
     #
     #       {
-    #         thing_indexing_mode: "OFF", # accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
+    #         thing_indexing_mode: "OFF", # required, accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
     #       }
     #
     # @!attribute [rw] thing_indexing_mode
@@ -7339,11 +9377,11 @@ module Aws::IoT
     #             },
     #             cloudwatch_metric: {
     #               role_arn: "AwsArn", # required
-    #               metric_namespace: "MetricNamespace", # required
-    #               metric_name: "MetricName", # required
-    #               metric_value: "MetricValue", # required
-    #               metric_unit: "MetricUnit", # required
-    #               metric_timestamp: "MetricTimestamp",
+    #               metric_namespace: "String", # required
+    #               metric_name: "String", # required
+    #               metric_value: "String", # required
+    #               metric_unit: "String", # required
+    #               metric_timestamp: "String",
     #             },
     #             cloudwatch_alarm: {
     #               role_arn: "AwsArn", # required
@@ -7366,6 +9404,11 @@ module Aws::IoT
     #               channel_arn: "AwsArn",
     #               channel_name: "ChannelName",
     #               role_arn: "AwsArn",
+    #             },
+    #             step_functions: {
+    #               execution_name_prefix: "ExecutionNamePrefix",
+    #               state_machine_name: "StateMachineName", # required
+    #               role_arn: "AwsArn", # required
     #             },
     #           },
     #         ],
@@ -7425,11 +9468,11 @@ module Aws::IoT
     #           },
     #           cloudwatch_metric: {
     #             role_arn: "AwsArn", # required
-    #             metric_namespace: "MetricNamespace", # required
-    #             metric_name: "MetricName", # required
-    #             metric_value: "MetricValue", # required
-    #             metric_unit: "MetricUnit", # required
-    #             metric_timestamp: "MetricTimestamp",
+    #             metric_namespace: "String", # required
+    #             metric_name: "String", # required
+    #             metric_value: "String", # required
+    #             metric_unit: "String", # required
+    #             metric_timestamp: "String",
     #           },
     #           cloudwatch_alarm: {
     #             role_arn: "AwsArn", # required
@@ -7452,6 +9495,11 @@ module Aws::IoT
     #             channel_arn: "AwsArn",
     #             channel_name: "ChannelName",
     #             role_arn: "AwsArn",
+    #           },
+    #           step_functions: {
+    #             execution_name_prefix: "ExecutionNamePrefix",
+    #             state_machine_name: "StateMachineName", # required
+    #             role_arn: "AwsArn", # required
     #           },
     #         },
     #       }
@@ -7567,6 +9615,61 @@ module Aws::IoT
       :reject_date)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UpdateAccountAuditConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         role_arn: "RoleArn",
+    #         audit_notification_target_configurations: {
+    #           "SNS" => {
+    #             target_arn: "TargetArn",
+    #             role_arn: "RoleArn",
+    #             enabled: false,
+    #           },
+    #         },
+    #         audit_check_configurations: {
+    #           "AuditCheckName" => {
+    #             enabled: false,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role that grants permission to AWS IoT to access
+    #   information about your devices, policies, certificates and other
+    #   items as necessary when performing an audit.
+    #   @return [String]
+    #
+    # @!attribute [rw] audit_notification_target_configurations
+    #   Information about the targets to which audit notifications are sent.
+    #   @return [Hash<String,Types::AuditNotificationTarget>]
+    #
+    # @!attribute [rw] audit_check_configurations
+    #   Specifies which audit checks are enabled and disabled for this
+    #   account. Use `DescribeAccountAuditConfiguration` to see the list of
+    #   all checks including those that are currently enabled.
+    #
+    #   Note that some data collection may begin immediately when certain
+    #   checks are enabled. When a check is disabled, any data collected so
+    #   far in relation to the check is deleted.
+    #
+    #   You cannot disable a check if it is used by any scheduled audit. You
+    #   must first delete the check from the scheduled audit or delete the
+    #   scheduled audit itself.
+    #
+    #   On the first call to `UpdateAccountAuditConfiguration` this
+    #   parameter is required and must specify at least one enabled check.
+    #   @return [Hash<String,Types::AuditCheckConfiguration>]
+    #
+    class UpdateAccountAuditConfigurationRequest < Struct.new(
+      :role_arn,
+      :audit_notification_target_configurations,
+      :audit_check_configurations)
+      include Aws::Structure
+    end
+
+    class UpdateAccountAuditConfigurationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateAuthorizerRequest
     #   data as a hash:
@@ -7732,7 +9835,10 @@ module Aws::IoT
     #
     #       {
     #         thing_indexing_configuration: {
-    #           thing_indexing_mode: "OFF", # accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
+    #           thing_indexing_mode: "OFF", # required, accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
+    #         },
+    #         thing_group_indexing_configuration: {
+    #           thing_group_indexing_mode: "OFF", # required, accepts OFF, ON
     #         },
     #       }
     #
@@ -7740,8 +9846,13 @@ module Aws::IoT
     #   Thing indexing configuration.
     #   @return [Types::ThingIndexingConfiguration]
     #
+    # @!attribute [rw] thing_group_indexing_configuration
+    #   Thing group indexing configuration.
+    #   @return [Types::ThingGroupIndexingConfiguration]
+    #
     class UpdateIndexingConfigurationRequest < Struct.new(
-      :thing_indexing_configuration)
+      :thing_indexing_configuration,
+      :thing_group_indexing_configuration)
       include Aws::Structure
     end
 
@@ -7789,6 +9900,177 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateScheduledAuditRequest
+    #   data as a hash:
+    #
+    #       {
+    #         frequency: "DAILY", # accepts DAILY, WEEKLY, BIWEEKLY, MONTHLY
+    #         day_of_month: "DayOfMonth",
+    #         day_of_week: "SUN", # accepts SUN, MON, TUE, WED, THU, FRI, SAT
+    #         target_check_names: ["AuditCheckName"],
+    #         scheduled_audit_name: "ScheduledAuditName", # required
+    #       }
+    #
+    # @!attribute [rw] frequency
+    #   How often the scheduled audit takes place. Can be one of "DAILY",
+    #   "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of
+    #   each audit is determined by the system.
+    #   @return [String]
+    #
+    # @!attribute [rw] day_of_month
+    #   The day of the month on which the scheduled audit takes place. Can
+    #   be "1" through "31" or "LAST". This field is required if the
+    #   "frequency" parameter is set to "MONTHLY". If days 29-31 are
+    #   specified, and the month does not have that many days, the audit
+    #   takes place on the "LAST" day of the month.
+    #   @return [String]
+    #
+    # @!attribute [rw] day_of_week
+    #   The day of the week on which the scheduled audit takes place. Can be
+    #   one of "SUN", "MON", "TUE", "WED", "THU", "FRI" or
+    #   "SAT". This field is required if the "frequency" parameter is
+    #   set to "WEEKLY" or "BIWEEKLY".
+    #   @return [String]
+    #
+    # @!attribute [rw] target_check_names
+    #   Which checks are performed during the scheduled audit. Checks must
+    #   be enabled for your account. (Use
+    #   `DescribeAccountAuditConfiguration` to see the list of all checks
+    #   including those that are enabled or
+    #   `UpdateAccountAuditConfiguration` to select which checks are
+    #   enabled.)
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] scheduled_audit_name
+    #   The name of the scheduled audit. (Max. 128 chars)
+    #   @return [String]
+    #
+    class UpdateScheduledAuditRequest < Struct.new(
+      :frequency,
+      :day_of_month,
+      :day_of_week,
+      :target_check_names,
+      :scheduled_audit_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scheduled_audit_arn
+    #   The ARN of the scheduled audit.
+    #   @return [String]
+    #
+    class UpdateScheduledAuditResponse < Struct.new(
+      :scheduled_audit_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateSecurityProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         security_profile_name: "SecurityProfileName", # required
+    #         security_profile_description: "SecurityProfileDescription",
+    #         behaviors: [
+    #           {
+    #             name: "BehaviorName", # required
+    #             metric: "BehaviorMetric",
+    #             criteria: {
+    #               comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set
+    #               value: {
+    #                 count: 1,
+    #                 cidrs: ["Cidr"],
+    #                 ports: [1],
+    #               },
+    #               duration_seconds: 1,
+    #             },
+    #           },
+    #         ],
+    #         alert_targets: {
+    #           "SNS" => {
+    #             alert_target_arn: "AlertTargetArn", # required
+    #             role_arn: "RoleArn", # required
+    #           },
+    #         },
+    #         expected_version: 1,
+    #       }
+    #
+    # @!attribute [rw] security_profile_name
+    #   The name of the security profile you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_profile_description
+    #   A description of the security profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] behaviors
+    #   Specifies the behaviors that, when violated by a device (thing),
+    #   cause an alert.
+    #   @return [Array<Types::Behavior>]
+    #
+    # @!attribute [rw] alert_targets
+    #   Where the alerts are sent. (Alerts are always sent to the console.)
+    #   @return [Hash<String,Types::AlertTarget>]
+    #
+    # @!attribute [rw] expected_version
+    #   The expected version of the security profile. A new version is
+    #   generated whenever the security profile is updated. If you specify a
+    #   value that is different than the actual version, a
+    #   `VersionConflictException` is thrown.
+    #   @return [Integer]
+    #
+    class UpdateSecurityProfileRequest < Struct.new(
+      :security_profile_name,
+      :security_profile_description,
+      :behaviors,
+      :alert_targets,
+      :expected_version)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_profile_name
+    #   The name of the security profile that was updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_profile_arn
+    #   The ARN of the security profile that was updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_profile_description
+    #   The description of the security profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] behaviors
+    #   Specifies the behaviors that, when violated by a device (thing),
+    #   cause an alert.
+    #   @return [Array<Types::Behavior>]
+    #
+    # @!attribute [rw] alert_targets
+    #   Where the alerts are sent. (Alerts are always sent to the console.)
+    #   @return [Hash<String,Types::AlertTarget>]
+    #
+    # @!attribute [rw] version
+    #   The updated version of the security profile.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_date
+    #   The time the security profile was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The time the security profile was last modified.
+    #   @return [Time]
+    #
+    class UpdateSecurityProfileResponse < Struct.new(
+      :security_profile_name,
+      :security_profile_arn,
+      :security_profile_description,
+      :behaviors,
+      :alert_targets,
+      :version,
+      :creation_date,
+      :last_modified_date)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateStreamRequest
     #   data as a hash:
     #
@@ -7799,8 +10081,8 @@ module Aws::IoT
     #           {
     #             file_id: 1,
     #             s3_location: {
-    #               bucket: "S3Bucket", # required
-    #               key: "S3Key", # required
+    #               bucket: "S3Bucket",
+    #               key: "S3Key",
     #               version: "S3Version",
     #             },
     #           },
@@ -7993,6 +10275,104 @@ module Aws::IoT
     # The output from the UpdateThing operation.
     #
     class UpdateThingResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass ValidateSecurityProfileBehaviorsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         behaviors: [ # required
+    #           {
+    #             name: "BehaviorName", # required
+    #             metric: "BehaviorMetric",
+    #             criteria: {
+    #               comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set
+    #               value: {
+    #                 count: 1,
+    #                 cidrs: ["Cidr"],
+    #                 ports: [1],
+    #               },
+    #               duration_seconds: 1,
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] behaviors
+    #   Specifies the behaviors that, when violated by a device (thing),
+    #   cause an alert.
+    #   @return [Array<Types::Behavior>]
+    #
+    class ValidateSecurityProfileBehaviorsRequest < Struct.new(
+      :behaviors)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] valid
+    #   True if the behaviors were valid.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] validation_errors
+    #   The list of any errors found in the behaviors.
+    #   @return [Array<Types::ValidationError>]
+    #
+    class ValidateSecurityProfileBehaviorsResponse < Struct.new(
+      :valid,
+      :validation_errors)
+      include Aws::Structure
+    end
+
+    # Information about an error found in a behavior specification.
+    #
+    # @!attribute [rw] error_message
+    #   The description of an error found in the behaviors.
+    #   @return [String]
+    #
+    class ValidationError < Struct.new(
+      :error_message)
+      include Aws::Structure
+    end
+
+    # Information about a Device Defender security profile behavior
+    # violation.
+    #
+    # @!attribute [rw] violation_id
+    #   The ID of the violation event.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the thing responsible for the violation event.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_profile_name
+    #   The name of the security profile whose behavior was violated.
+    #   @return [String]
+    #
+    # @!attribute [rw] behavior
+    #   The behavior which was violated.
+    #   @return [Types::Behavior]
+    #
+    # @!attribute [rw] metric_value
+    #   The value of the metric (the measurement).
+    #   @return [Types::MetricValue]
+    #
+    # @!attribute [rw] violation_event_type
+    #   The type of violation event.
+    #   @return [String]
+    #
+    # @!attribute [rw] violation_event_time
+    #   The time the violation event occurred.
+    #   @return [Time]
+    #
+    class ViolationEvent < Struct.new(
+      :violation_id,
+      :thing_name,
+      :security_profile_name,
+      :behavior,
+      :metric_value,
+      :violation_event_type,
+      :violation_event_time)
+      include Aws::Structure
+    end
 
   end
 end

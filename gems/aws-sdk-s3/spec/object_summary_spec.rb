@@ -53,6 +53,12 @@ module Aws
         object_summary.upload_file('source', opt_name: 'opt-value')
       end
 
+      it 'delegates #upload_stream to #object' do
+        block = proc { :foo }
+        expect(object).to receive(:upload_stream).with(opt_name: 'opt-value', &block)
+        object_summary.upload_stream(opt_name: 'opt-value', &block)
+      end
+
       it 'delegates #download_file to #object' do
         expect(object).to receive(:download_file).with('destination', opt_name: 'opt-value')
         object_summary.download_file('destination', opt_name: 'opt-value')

@@ -598,12 +598,16 @@ module Aws::Firehose
       api.version = "2015-08-04"
 
       api.metadata = {
+        "apiVersion" => "2015-08-04",
         "endpointPrefix" => "firehose",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "Firehose",
         "serviceFullName" => "Amazon Kinesis Firehose",
+        "serviceId" => "Firehose",
         "signatureVersion" => "v4",
         "targetPrefix" => "Firehose_20150804",
+        "uid" => "firehose-2015-08-04",
       }
 
       api.add_operation(:create_delivery_stream, Seahorse::Model::Operation.new.tap do |o|

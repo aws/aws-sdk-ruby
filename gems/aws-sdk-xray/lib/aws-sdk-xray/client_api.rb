@@ -17,9 +17,18 @@ module Aws::XRay
     AnnotationKey = Shapes::StringShape.new(name: 'AnnotationKey')
     AnnotationValue = Shapes::StructureShape.new(name: 'AnnotationValue')
     Annotations = Shapes::MapShape.new(name: 'Annotations')
+    AttributeKey = Shapes::StringShape.new(name: 'AttributeKey')
+    AttributeMap = Shapes::MapShape.new(name: 'AttributeMap')
+    AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
     BackendConnectionErrors = Shapes::StructureShape.new(name: 'BackendConnectionErrors')
     BatchGetTracesRequest = Shapes::StructureShape.new(name: 'BatchGetTracesRequest')
     BatchGetTracesResult = Shapes::StructureShape.new(name: 'BatchGetTracesResult')
+    BorrowCount = Shapes::IntegerShape.new(name: 'BorrowCount')
+    ClientID = Shapes::StringShape.new(name: 'ClientID')
+    CreateSamplingRuleRequest = Shapes::StructureShape.new(name: 'CreateSamplingRuleRequest')
+    CreateSamplingRuleResult = Shapes::StructureShape.new(name: 'CreateSamplingRuleResult')
+    DeleteSamplingRuleRequest = Shapes::StructureShape.new(name: 'DeleteSamplingRuleRequest')
+    DeleteSamplingRuleResult = Shapes::StructureShape.new(name: 'DeleteSamplingRuleResult')
     Double = Shapes::FloatShape.new(name: 'Double')
     EC2InstanceId = Shapes::StringShape.new(name: 'EC2InstanceId')
     Edge = Shapes::StructureShape.new(name: 'Edge')
@@ -33,16 +42,25 @@ module Aws::XRay
     ErrorStatistics = Shapes::StructureShape.new(name: 'ErrorStatistics')
     FaultStatistics = Shapes::StructureShape.new(name: 'FaultStatistics')
     FilterExpression = Shapes::StringShape.new(name: 'FilterExpression')
+    FixedRate = Shapes::FloatShape.new(name: 'FixedRate')
     GetEncryptionConfigRequest = Shapes::StructureShape.new(name: 'GetEncryptionConfigRequest')
     GetEncryptionConfigResult = Shapes::StructureShape.new(name: 'GetEncryptionConfigResult')
+    GetSamplingRulesRequest = Shapes::StructureShape.new(name: 'GetSamplingRulesRequest')
+    GetSamplingRulesResult = Shapes::StructureShape.new(name: 'GetSamplingRulesResult')
+    GetSamplingStatisticSummariesRequest = Shapes::StructureShape.new(name: 'GetSamplingStatisticSummariesRequest')
+    GetSamplingStatisticSummariesResult = Shapes::StructureShape.new(name: 'GetSamplingStatisticSummariesResult')
+    GetSamplingTargetsRequest = Shapes::StructureShape.new(name: 'GetSamplingTargetsRequest')
+    GetSamplingTargetsResult = Shapes::StructureShape.new(name: 'GetSamplingTargetsResult')
     GetServiceGraphRequest = Shapes::StructureShape.new(name: 'GetServiceGraphRequest')
     GetServiceGraphResult = Shapes::StructureShape.new(name: 'GetServiceGraphResult')
     GetTraceGraphRequest = Shapes::StructureShape.new(name: 'GetTraceGraphRequest')
     GetTraceGraphResult = Shapes::StructureShape.new(name: 'GetTraceGraphResult')
     GetTraceSummariesRequest = Shapes::StructureShape.new(name: 'GetTraceSummariesRequest')
     GetTraceSummariesResult = Shapes::StructureShape.new(name: 'GetTraceSummariesResult')
+    HTTPMethod = Shapes::StringShape.new(name: 'HTTPMethod')
     Histogram = Shapes::ListShape.new(name: 'Histogram')
     HistogramEntry = Shapes::StructureShape.new(name: 'HistogramEntry')
+    Host = Shapes::StringShape.new(name: 'Host')
     Hostname = Shapes::StringShape.new(name: 'Hostname')
     Http = Shapes::StructureShape.new(name: 'Http')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -51,13 +69,29 @@ module Aws::XRay
     NullableDouble = Shapes::FloatShape.new(name: 'NullableDouble')
     NullableInteger = Shapes::IntegerShape.new(name: 'NullableInteger')
     NullableLong = Shapes::IntegerShape.new(name: 'NullableLong')
+    Priority = Shapes::IntegerShape.new(name: 'Priority')
     PutEncryptionConfigRequest = Shapes::StructureShape.new(name: 'PutEncryptionConfigRequest')
     PutEncryptionConfigResult = Shapes::StructureShape.new(name: 'PutEncryptionConfigResult')
     PutTelemetryRecordsRequest = Shapes::StructureShape.new(name: 'PutTelemetryRecordsRequest')
     PutTelemetryRecordsResult = Shapes::StructureShape.new(name: 'PutTelemetryRecordsResult')
     PutTraceSegmentsRequest = Shapes::StructureShape.new(name: 'PutTraceSegmentsRequest')
     PutTraceSegmentsResult = Shapes::StructureShape.new(name: 'PutTraceSegmentsResult')
+    RequestCount = Shapes::IntegerShape.new(name: 'RequestCount')
+    ReservoirSize = Shapes::IntegerShape.new(name: 'ReservoirSize')
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
+    RuleLimitExceededException = Shapes::StructureShape.new(name: 'RuleLimitExceededException')
+    RuleName = Shapes::StringShape.new(name: 'RuleName')
+    SampledCount = Shapes::IntegerShape.new(name: 'SampledCount')
+    SamplingRule = Shapes::StructureShape.new(name: 'SamplingRule')
+    SamplingRuleRecord = Shapes::StructureShape.new(name: 'SamplingRuleRecord')
+    SamplingRuleRecordList = Shapes::ListShape.new(name: 'SamplingRuleRecordList')
+    SamplingRuleUpdate = Shapes::StructureShape.new(name: 'SamplingRuleUpdate')
+    SamplingStatisticSummary = Shapes::StructureShape.new(name: 'SamplingStatisticSummary')
+    SamplingStatisticSummaryList = Shapes::ListShape.new(name: 'SamplingStatisticSummaryList')
+    SamplingStatisticsDocument = Shapes::StructureShape.new(name: 'SamplingStatisticsDocument')
+    SamplingStatisticsDocumentList = Shapes::ListShape.new(name: 'SamplingStatisticsDocumentList')
+    SamplingTargetDocument = Shapes::StructureShape.new(name: 'SamplingTargetDocument')
+    SamplingTargetDocumentList = Shapes::ListShape.new(name: 'SamplingTargetDocumentList')
     Segment = Shapes::StructureShape.new(name: 'Segment')
     SegmentDocument = Shapes::StringShape.new(name: 'SegmentDocument')
     SegmentId = Shapes::StringShape.new(name: 'SegmentId')
@@ -66,8 +100,10 @@ module Aws::XRay
     ServiceId = Shapes::StructureShape.new(name: 'ServiceId')
     ServiceIds = Shapes::ListShape.new(name: 'ServiceIds')
     ServiceList = Shapes::ListShape.new(name: 'ServiceList')
+    ServiceName = Shapes::StringShape.new(name: 'ServiceName')
     ServiceNames = Shapes::ListShape.new(name: 'ServiceNames')
     ServiceStatistics = Shapes::StructureShape.new(name: 'ServiceStatistics')
+    ServiceType = Shapes::StringShape.new(name: 'ServiceType')
     String = Shapes::StringShape.new(name: 'String')
     TelemetryRecord = Shapes::StructureShape.new(name: 'TelemetryRecord')
     TelemetryRecordList = Shapes::ListShape.new(name: 'TelemetryRecordList')
@@ -83,11 +119,17 @@ module Aws::XRay
     TraceSummaryList = Shapes::ListShape.new(name: 'TraceSummaryList')
     TraceUser = Shapes::StructureShape.new(name: 'TraceUser')
     TraceUsers = Shapes::ListShape.new(name: 'TraceUsers')
+    URLPath = Shapes::StringShape.new(name: 'URLPath')
+    UnprocessedStatistics = Shapes::StructureShape.new(name: 'UnprocessedStatistics')
+    UnprocessedStatisticsList = Shapes::ListShape.new(name: 'UnprocessedStatisticsList')
     UnprocessedTraceIdList = Shapes::ListShape.new(name: 'UnprocessedTraceIdList')
     UnprocessedTraceSegment = Shapes::StructureShape.new(name: 'UnprocessedTraceSegment')
     UnprocessedTraceSegmentList = Shapes::ListShape.new(name: 'UnprocessedTraceSegmentList')
+    UpdateSamplingRuleRequest = Shapes::StructureShape.new(name: 'UpdateSamplingRuleRequest')
+    UpdateSamplingRuleResult = Shapes::StructureShape.new(name: 'UpdateSamplingRuleResult')
     ValueWithServiceIds = Shapes::StructureShape.new(name: 'ValueWithServiceIds')
     ValuesWithServiceIds = Shapes::ListShape.new(name: 'ValuesWithServiceIds')
+    Version = Shapes::IntegerShape.new(name: 'Version')
 
     Alias.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     Alias.add_member(:names, Shapes::ShapeRef.new(shape: AliasNames, location_name: "Names"))
@@ -106,6 +148,9 @@ module Aws::XRay
     Annotations.key = Shapes::ShapeRef.new(shape: AnnotationKey)
     Annotations.value = Shapes::ShapeRef.new(shape: ValuesWithServiceIds)
 
+    AttributeMap.key = Shapes::ShapeRef.new(shape: AttributeKey)
+    AttributeMap.value = Shapes::ShapeRef.new(shape: AttributeValue)
+
     BackendConnectionErrors.add_member(:timeout_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "TimeoutCount"))
     BackendConnectionErrors.add_member(:connection_refused_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "ConnectionRefusedCount"))
     BackendConnectionErrors.add_member(:http_code_4_xx_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "HTTPCode4XXCount"))
@@ -122,6 +167,19 @@ module Aws::XRay
     BatchGetTracesResult.add_member(:unprocessed_trace_ids, Shapes::ShapeRef.new(shape: UnprocessedTraceIdList, location_name: "UnprocessedTraceIds"))
     BatchGetTracesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     BatchGetTracesResult.struct_class = Types::BatchGetTracesResult
+
+    CreateSamplingRuleRequest.add_member(:sampling_rule, Shapes::ShapeRef.new(shape: SamplingRule, required: true, location_name: "SamplingRule"))
+    CreateSamplingRuleRequest.struct_class = Types::CreateSamplingRuleRequest
+
+    CreateSamplingRuleResult.add_member(:sampling_rule_record, Shapes::ShapeRef.new(shape: SamplingRuleRecord, location_name: "SamplingRuleRecord"))
+    CreateSamplingRuleResult.struct_class = Types::CreateSamplingRuleResult
+
+    DeleteSamplingRuleRequest.add_member(:rule_name, Shapes::ShapeRef.new(shape: String, location_name: "RuleName"))
+    DeleteSamplingRuleRequest.add_member(:rule_arn, Shapes::ShapeRef.new(shape: String, location_name: "RuleARN"))
+    DeleteSamplingRuleRequest.struct_class = Types::DeleteSamplingRuleRequest
+
+    DeleteSamplingRuleResult.add_member(:sampling_rule_record, Shapes::ShapeRef.new(shape: SamplingRuleRecord, location_name: "SamplingRuleRecord"))
+    DeleteSamplingRuleResult.struct_class = Types::DeleteSamplingRuleResult
 
     Edge.add_member(:reference_id, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "ReferenceId"))
     Edge.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
@@ -158,6 +216,28 @@ module Aws::XRay
 
     GetEncryptionConfigResult.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfig, location_name: "EncryptionConfig"))
     GetEncryptionConfigResult.struct_class = Types::GetEncryptionConfigResult
+
+    GetSamplingRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetSamplingRulesRequest.struct_class = Types::GetSamplingRulesRequest
+
+    GetSamplingRulesResult.add_member(:sampling_rule_records, Shapes::ShapeRef.new(shape: SamplingRuleRecordList, location_name: "SamplingRuleRecords"))
+    GetSamplingRulesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetSamplingRulesResult.struct_class = Types::GetSamplingRulesResult
+
+    GetSamplingStatisticSummariesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetSamplingStatisticSummariesRequest.struct_class = Types::GetSamplingStatisticSummariesRequest
+
+    GetSamplingStatisticSummariesResult.add_member(:sampling_statistic_summaries, Shapes::ShapeRef.new(shape: SamplingStatisticSummaryList, location_name: "SamplingStatisticSummaries"))
+    GetSamplingStatisticSummariesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetSamplingStatisticSummariesResult.struct_class = Types::GetSamplingStatisticSummariesResult
+
+    GetSamplingTargetsRequest.add_member(:sampling_statistics_documents, Shapes::ShapeRef.new(shape: SamplingStatisticsDocumentList, required: true, location_name: "SamplingStatisticsDocuments"))
+    GetSamplingTargetsRequest.struct_class = Types::GetSamplingTargetsRequest
+
+    GetSamplingTargetsResult.add_member(:sampling_target_documents, Shapes::ShapeRef.new(shape: SamplingTargetDocumentList, location_name: "SamplingTargetDocuments"))
+    GetSamplingTargetsResult.add_member(:last_rule_modification, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastRuleModification"))
+    GetSamplingTargetsResult.add_member(:unprocessed_statistics, Shapes::ShapeRef.new(shape: UnprocessedStatisticsList, location_name: "UnprocessedStatistics"))
+    GetSamplingTargetsResult.struct_class = Types::GetSamplingTargetsResult
 
     GetServiceGraphRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
     GetServiceGraphRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
@@ -224,6 +304,70 @@ module Aws::XRay
 
     PutTraceSegmentsResult.add_member(:unprocessed_trace_segments, Shapes::ShapeRef.new(shape: UnprocessedTraceSegmentList, location_name: "UnprocessedTraceSegments"))
     PutTraceSegmentsResult.struct_class = Types::PutTraceSegmentsResult
+
+    SamplingRule.add_member(:rule_name, Shapes::ShapeRef.new(shape: RuleName, location_name: "RuleName"))
+    SamplingRule.add_member(:rule_arn, Shapes::ShapeRef.new(shape: String, location_name: "RuleARN"))
+    SamplingRule.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN"))
+    SamplingRule.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, required: true, location_name: "Priority"))
+    SamplingRule.add_member(:fixed_rate, Shapes::ShapeRef.new(shape: FixedRate, required: true, location_name: "FixedRate"))
+    SamplingRule.add_member(:reservoir_size, Shapes::ShapeRef.new(shape: ReservoirSize, required: true, location_name: "ReservoirSize"))
+    SamplingRule.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "ServiceName"))
+    SamplingRule.add_member(:service_type, Shapes::ShapeRef.new(shape: ServiceType, required: true, location_name: "ServiceType"))
+    SamplingRule.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
+    SamplingRule.add_member(:http_method, Shapes::ShapeRef.new(shape: HTTPMethod, required: true, location_name: "HTTPMethod"))
+    SamplingRule.add_member(:url_path, Shapes::ShapeRef.new(shape: URLPath, required: true, location_name: "URLPath"))
+    SamplingRule.add_member(:version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "Version"))
+    SamplingRule.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeMap, location_name: "Attributes"))
+    SamplingRule.struct_class = Types::SamplingRule
+
+    SamplingRuleRecord.add_member(:sampling_rule, Shapes::ShapeRef.new(shape: SamplingRule, location_name: "SamplingRule"))
+    SamplingRuleRecord.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    SamplingRuleRecord.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ModifiedAt"))
+    SamplingRuleRecord.struct_class = Types::SamplingRuleRecord
+
+    SamplingRuleRecordList.member = Shapes::ShapeRef.new(shape: SamplingRuleRecord)
+
+    SamplingRuleUpdate.add_member(:rule_name, Shapes::ShapeRef.new(shape: RuleName, location_name: "RuleName"))
+    SamplingRuleUpdate.add_member(:rule_arn, Shapes::ShapeRef.new(shape: String, location_name: "RuleARN"))
+    SamplingRuleUpdate.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
+    SamplingRuleUpdate.add_member(:priority, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "Priority"))
+    SamplingRuleUpdate.add_member(:fixed_rate, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "FixedRate"))
+    SamplingRuleUpdate.add_member(:reservoir_size, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "ReservoirSize"))
+    SamplingRuleUpdate.add_member(:host, Shapes::ShapeRef.new(shape: Host, location_name: "Host"))
+    SamplingRuleUpdate.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, location_name: "ServiceName"))
+    SamplingRuleUpdate.add_member(:service_type, Shapes::ShapeRef.new(shape: ServiceType, location_name: "ServiceType"))
+    SamplingRuleUpdate.add_member(:http_method, Shapes::ShapeRef.new(shape: HTTPMethod, location_name: "HTTPMethod"))
+    SamplingRuleUpdate.add_member(:url_path, Shapes::ShapeRef.new(shape: URLPath, location_name: "URLPath"))
+    SamplingRuleUpdate.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeMap, location_name: "Attributes"))
+    SamplingRuleUpdate.struct_class = Types::SamplingRuleUpdate
+
+    SamplingStatisticSummary.add_member(:rule_name, Shapes::ShapeRef.new(shape: String, location_name: "RuleName"))
+    SamplingStatisticSummary.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
+    SamplingStatisticSummary.add_member(:request_count, Shapes::ShapeRef.new(shape: Integer, location_name: "RequestCount"))
+    SamplingStatisticSummary.add_member(:borrow_count, Shapes::ShapeRef.new(shape: Integer, location_name: "BorrowCount"))
+    SamplingStatisticSummary.add_member(:sampled_count, Shapes::ShapeRef.new(shape: Integer, location_name: "SampledCount"))
+    SamplingStatisticSummary.struct_class = Types::SamplingStatisticSummary
+
+    SamplingStatisticSummaryList.member = Shapes::ShapeRef.new(shape: SamplingStatisticSummary)
+
+    SamplingStatisticsDocument.add_member(:rule_name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "RuleName"))
+    SamplingStatisticsDocument.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientID, required: true, location_name: "ClientID"))
+    SamplingStatisticsDocument.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
+    SamplingStatisticsDocument.add_member(:request_count, Shapes::ShapeRef.new(shape: RequestCount, required: true, location_name: "RequestCount"))
+    SamplingStatisticsDocument.add_member(:sampled_count, Shapes::ShapeRef.new(shape: SampledCount, required: true, location_name: "SampledCount"))
+    SamplingStatisticsDocument.add_member(:borrow_count, Shapes::ShapeRef.new(shape: BorrowCount, location_name: "BorrowCount"))
+    SamplingStatisticsDocument.struct_class = Types::SamplingStatisticsDocument
+
+    SamplingStatisticsDocumentList.member = Shapes::ShapeRef.new(shape: SamplingStatisticsDocument)
+
+    SamplingTargetDocument.add_member(:rule_name, Shapes::ShapeRef.new(shape: String, location_name: "RuleName"))
+    SamplingTargetDocument.add_member(:fixed_rate, Shapes::ShapeRef.new(shape: Double, location_name: "FixedRate"))
+    SamplingTargetDocument.add_member(:reservoir_quota, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "ReservoirQuota"))
+    SamplingTargetDocument.add_member(:reservoir_quota_ttl, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ReservoirQuotaTTL"))
+    SamplingTargetDocument.add_member(:interval, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "Interval"))
+    SamplingTargetDocument.struct_class = Types::SamplingTargetDocument
+
+    SamplingTargetDocumentList.member = Shapes::ShapeRef.new(shape: SamplingTargetDocument)
 
     Segment.add_member(:id, Shapes::ShapeRef.new(shape: SegmentId, location_name: "Id"))
     Segment.add_member(:document, Shapes::ShapeRef.new(shape: SegmentDocument, location_name: "Document"))
@@ -307,6 +451,13 @@ module Aws::XRay
 
     TraceUsers.member = Shapes::ShapeRef.new(shape: TraceUser)
 
+    UnprocessedStatistics.add_member(:rule_name, Shapes::ShapeRef.new(shape: String, location_name: "RuleName"))
+    UnprocessedStatistics.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
+    UnprocessedStatistics.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    UnprocessedStatistics.struct_class = Types::UnprocessedStatistics
+
+    UnprocessedStatisticsList.member = Shapes::ShapeRef.new(shape: UnprocessedStatistics)
+
     UnprocessedTraceIdList.member = Shapes::ShapeRef.new(shape: TraceId)
 
     UnprocessedTraceSegment.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
@@ -315,6 +466,12 @@ module Aws::XRay
     UnprocessedTraceSegment.struct_class = Types::UnprocessedTraceSegment
 
     UnprocessedTraceSegmentList.member = Shapes::ShapeRef.new(shape: UnprocessedTraceSegment)
+
+    UpdateSamplingRuleRequest.add_member(:sampling_rule_update, Shapes::ShapeRef.new(shape: SamplingRuleUpdate, required: true, location_name: "SamplingRuleUpdate"))
+    UpdateSamplingRuleRequest.struct_class = Types::UpdateSamplingRuleRequest
+
+    UpdateSamplingRuleResult.add_member(:sampling_rule_record, Shapes::ShapeRef.new(shape: SamplingRuleRecord, location_name: "SamplingRuleRecord"))
+    UpdateSamplingRuleResult.struct_class = Types::UpdateSamplingRuleResult
 
     ValueWithServiceIds.add_member(:annotation_value, Shapes::ShapeRef.new(shape: AnnotationValue, location_name: "AnnotationValue"))
     ValueWithServiceIds.add_member(:service_ids, Shapes::ShapeRef.new(shape: ServiceIds, location_name: "ServiceIds"))
@@ -329,10 +486,13 @@ module Aws::XRay
       api.version = "2016-04-12"
 
       api.metadata = {
+        "apiVersion" => "2016-04-12",
         "endpointPrefix" => "xray",
         "protocol" => "rest-json",
         "serviceFullName" => "AWS X-Ray",
+        "serviceId" => "XRay",
         "signatureVersion" => "v4",
+        "uid" => "xray-2016-04-12",
       }
 
       api.add_operation(:batch_get_traces, Seahorse::Model::Operation.new.tap do |o|
@@ -350,12 +510,63 @@ module Aws::XRay
         )
       end)
 
+      api.add_operation(:create_sampling_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSamplingRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/CreateSamplingRule"
+        o.input = Shapes::ShapeRef.new(shape: CreateSamplingRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSamplingRuleResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+        o.errors << Shapes::ShapeRef.new(shape: RuleLimitExceededException)
+      end)
+
+      api.add_operation(:delete_sampling_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSamplingRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/DeleteSamplingRule"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSamplingRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSamplingRuleResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+      end)
+
       api.add_operation(:get_encryption_config, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetEncryptionConfig"
         o.http_method = "POST"
         o.http_request_uri = "/EncryptionConfig"
         o.input = Shapes::ShapeRef.new(shape: GetEncryptionConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: GetEncryptionConfigResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+      end)
+
+      api.add_operation(:get_sampling_rules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSamplingRules"
+        o.http_method = "POST"
+        o.http_request_uri = "/GetSamplingRules"
+        o.input = Shapes::ShapeRef.new(shape: GetSamplingRulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSamplingRulesResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+      end)
+
+      api.add_operation(:get_sampling_statistic_summaries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSamplingStatisticSummaries"
+        o.http_method = "POST"
+        o.http_request_uri = "/SamplingStatisticSummaries"
+        o.input = Shapes::ShapeRef.new(shape: GetSamplingStatisticSummariesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSamplingStatisticSummariesResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+      end)
+
+      api.add_operation(:get_sampling_targets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSamplingTargets"
+        o.http_method = "POST"
+        o.http_request_uri = "/SamplingTargets"
+        o.input = Shapes::ShapeRef.new(shape: GetSamplingTargetsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSamplingTargetsResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
       end)
@@ -431,6 +642,16 @@ module Aws::XRay
         o.http_request_uri = "/TraceSegments"
         o.input = Shapes::ShapeRef.new(shape: PutTraceSegmentsRequest)
         o.output = Shapes::ShapeRef.new(shape: PutTraceSegmentsResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+      end)
+
+      api.add_operation(:update_sampling_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSamplingRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/UpdateSamplingRule"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSamplingRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSamplingRuleResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
       end)

@@ -229,6 +229,78 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # Details about the ES instances that AWS recommends that you purchase.
+    #
+    # @!attribute [rw] instance_class
+    #   The class of instance that AWS recommends.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_size
+    #   The size of instance that AWS recommends.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The AWS Region of the recommended reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_generation
+    #   Whether the recommendation is for a current generation instance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] size_flex_eligible
+    #   Whether the recommended reservation is size flexible.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ESInstanceDetails AWS API Documentation
+    #
+    class ESInstanceDetails < Struct.new(
+      :instance_class,
+      :instance_size,
+      :region,
+      :current_generation,
+      :size_flex_eligible)
+      include Aws::Structure
+    end
+
+    # Details about the ElastiCache instances that AWS recommends that you
+    # purchase.
+    #
+    # @!attribute [rw] family
+    #   The instance family of the recommended reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_type
+    #   The type of node that AWS recommends.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The AWS Region of the recommended reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_description
+    #   The description of the recommended reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_generation
+    #   Whether the recommendation is for a current generation instance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] size_flex_eligible
+    #   Whether the recommended reservation is size flexible.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ElastiCacheInstanceDetails AWS API Documentation
+    #
+    class ElastiCacheInstanceDetails < Struct.new(
+      :family,
+      :node_type,
+      :region,
+      :product_description,
+      :current_generation,
+      :size_flex_eligible)
+      include Aws::Structure
+    end
+
     # Use `Expression` to filter by cost or by usage. There are two
     # patterns:
     #
@@ -254,8 +326,8 @@ module Aws::CostExplorer
     #   `Expression` for that looks like this:
     #
     #   `\{ "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "INSTANCE_TYPE",
-    #   "Values": [ "m4.x.large", "c4.large" ] \}\}, \{"Tag": \{ "Key":
-    #   "TagName", "Values": ["Value1"] \} \} ]\}, \{"Not": \{"dimensions":
+    #   "Values": [ "m4.x.large", "c4.large" ] \}\}, \{"Tags": \{ "Key":
+    #   "TagName", "Values": ["Value1"] \} \} ]\}, \{"Not": \{"Dimensions":
     #   \{ "Key": "USAGE_TYPE", "Values": ["DataTransfer"] \}\}\} ] \} `
     #
     #   <note markdown="1"> Because each `Expression` can have only one operator, the service
@@ -450,8 +522,8 @@ module Aws::CostExplorer
     #   blended and unblended rates, see [Why does the "blended"
     #   annotation appear on some line items in my bill?][1].
     #
-    #   Valid values are `BlendedCost`, `UnblendedCost`, and
-    #   `UsageQuantity`.
+    #   Valid values are `AmortizedCost`, `BlendedCost`, `UnblendedCost`,
+    #   and `UsageQuantity`.
     #
     #   <note markdown="1"> If you return the `UsageQuantity` metric, the service aggregates all
     #   usage numbers without taking into account the units. For example, if
@@ -884,6 +956,9 @@ module Aws::CostExplorer
     #   other operations, but only `AND` is supported among each dimension.
     #   You can nest only one level deep. If there are multiple values for a
     #   dimension, they are OR'd together.
+    #
+    #   If you don't provide a `SERVICE` filter, Cost Explorer defaults to
+    #   EC2.
     #   @return [Types::Expression]
     #
     # @!attribute [rw] next_page_token
@@ -932,10 +1007,10 @@ module Aws::CostExplorer
     #       {
     #         account_id: "GenericString",
     #         service: "GenericString", # required
-    #         account_scope: "PAYER", # accepts PAYER
+    #         account_scope: "PAYER", # accepts PAYER, LINKED
     #         lookback_period_in_days: "SEVEN_DAYS", # accepts SEVEN_DAYS, THIRTY_DAYS, SIXTY_DAYS
     #         term_in_years: "ONE_YEAR", # accepts ONE_YEAR, THREE_YEARS
-    #         payment_option: "NO_UPFRONT", # accepts NO_UPFRONT, PARTIAL_UPFRONT, ALL_UPFRONT
+    #         payment_option: "NO_UPFRONT", # accepts NO_UPFRONT, PARTIAL_UPFRONT, ALL_UPFRONT, LIGHT_UTILIZATION, MEDIUM_UTILIZATION, HEAVY_UTILIZATION
     #         service_specification: {
     #           ec2_specification: {
     #             offering_class: "STANDARD", # accepts STANDARD, CONVERTIBLE
@@ -954,9 +1029,12 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] account_scope
-    #   The account scope that you want recommendations for. The only valid
-    #   value is `Payer`. This means that AWS includes the master account
-    #   and any member accounts when it calculates its recommendations.
+    #   The account scope that you want recommendations for. `PAYER` means
+    #   that AWS includes the master account and any member accounts when it
+    #   calculates its recommendations. `LINKED` means that AWS includes
+    #   only member accounts when it calculates its recommendations.
+    #
+    #   Valid values are `PAYER` and `LINKED`.
     #   @return [String]
     #
     # @!attribute [rw] lookback_period_in_days
@@ -1287,11 +1365,26 @@ module Aws::CostExplorer
     #   The RDS instances that AWS recommends that you purchase.
     #   @return [Types::RDSInstanceDetails]
     #
+    # @!attribute [rw] redshift_instance_details
+    #   The Amazon Redshift instances that AWS recommends that you purchase.
+    #   @return [Types::RedshiftInstanceDetails]
+    #
+    # @!attribute [rw] elasticache_instance_details
+    #   The ElastiCache instances that AWS recommends that you purchase.
+    #   @return [Types::ElastiCacheInstanceDetails]
+    #
+    # @!attribute [rw] es_instance_details
+    #   The Amazon ES instances that AWS recommends that you purchase.
+    #   @return [Types::ESInstanceDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/InstanceDetails AWS API Documentation
     #
     class InstanceDetails < Struct.new(
       :ec2_instance_details,
-      :rds_instance_details)
+      :rds_instance_details,
+      :redshift_instance_details,
+      :elasticache_instance_details,
+      :es_instance_details)
       include Aws::Structure
     end
 
@@ -1331,10 +1424,14 @@ module Aws::CostExplorer
     #   The database engine that the recommended reservation supports.
     #   @return [String]
     #
+    # @!attribute [rw] database_edition
+    #   The database edition that the recommended reservation supports.
+    #   @return [String]
+    #
     # @!attribute [rw] deployment_option
     #   Whether the recommendation is for a reservation in a single
-    #   availability zone or a reservation with a backup in a second
-    #   availability zone.
+    #   Availability Zone or a reservation with a backup in a second
+    #   Availability Zone.
     #   @return [String]
     #
     # @!attribute [rw] license_model
@@ -1356,6 +1453,7 @@ module Aws::CostExplorer
       :instance_type,
       :region,
       :database_engine,
+      :database_edition,
       :deployment_option,
       :license_model,
       :current_generation,
@@ -1363,7 +1461,41 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # The aggregated numbers for your RI usage.
+    # Details about the Amazon Redshift instances that AWS recommends that
+    # you purchase.
+    #
+    # @!attribute [rw] family
+    #   The instance family of the recommended reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_type
+    #   The type of node that AWS recommends.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The AWS Region of the recommended reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_generation
+    #   Whether the recommendation is for a current generation instance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] size_flex_eligible
+    #   Whether the recommended reservation is size flexible.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RedshiftInstanceDetails AWS API Documentation
+    #
+    class RedshiftInstanceDetails < Struct.new(
+      :family,
+      :node_type,
+      :region,
+      :current_generation,
+      :size_flex_eligible)
+      include Aws::Structure
+    end
+
+    # The aggregated numbers for your Reserved Instance (RI) usage.
     #
     # @!attribute [rw] utilization_percentage
     #   The percentage of RI time that you used.
@@ -1381,13 +1513,45 @@ module Aws::CostExplorer
     #   The number of RI hours that you didn't use.
     #   @return [String]
     #
+    # @!attribute [rw] on_demand_cost_of_ri_hours_used
+    #   How much your RIs would cost if charged On-Demand rates.
+    #   @return [String]
+    #
+    # @!attribute [rw] net_ri_savings
+    #   How much you saved due to purchasing and utilizing RIs. AWS
+    #   calculates this by subtracting `TotalAmortizedFee` from
+    #   `OnDemandCostOfRIHoursUsed`.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_potential_ri_savings
+    #   How much you could save if you use your entire reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] amortized_upfront_fee
+    #   The upfront cost of your RI, amortized over the RI period.
+    #   @return [String]
+    #
+    # @!attribute [rw] amortized_recurring_fee
+    #   The monthly cost of your RI, amortized over the RI period.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_amortized_fee
+    #   The total cost of your RI, amortized over the RI period.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ReservationAggregates AWS API Documentation
     #
     class ReservationAggregates < Struct.new(
       :utilization_percentage,
       :purchased_hours,
       :total_actual_hours,
-      :unused_hours)
+      :unused_hours,
+      :on_demand_cost_of_ri_hours_used,
+      :net_ri_savings,
+      :total_potential_ri_savings,
+      :amortized_upfront_fee,
+      :amortized_recurring_fee,
+      :total_amortized_fee)
       include Aws::Structure
     end
 
@@ -1418,8 +1582,8 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] lookback_period_in_days
-    #   How many days of previous usage that AWS takes into consideration
-    #   when making this recommendation.
+    #   How many days of previous usage that AWS considers when making this
+    #   recommendation.
     #   @return [String]
     #
     # @!attribute [rw] term_in_years
@@ -1596,7 +1760,7 @@ module Aws::CostExplorer
     end
 
     # A summary about this recommendation, such as the currency code, the
-    # amount that AWS estimates you could save, and the total amount of
+    # amount that AWS estimates that you could save, and the total amount of
     # reservation to purchase.
     #
     # @!attribute [rw] total_estimated_monthly_savings_amount
@@ -1622,7 +1786,7 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # A group of RIs that share a set of attributes.
+    # A group of Reserved Instances (RIs) that share a set of attributes.
     #
     # @!attribute [rw] key
     #   The key for a specific RI attribute.

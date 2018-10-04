@@ -194,10 +194,13 @@ module Aws::ImportExport
       api.version = "2010-06-01"
 
       api.metadata = {
+        "apiVersion" => "2010-06-01",
         "endpointPrefix" => "importexport",
+        "globalEndpoint" => "importexport.amazonaws.com",
         "protocol" => "query",
         "serviceFullName" => "AWS Import/Export",
         "signatureVersion" => "v2",
+        "uid" => "importexport-2010-06-01",
         "xmlNamespace" => "http://importexport.amazonaws.com/doc/2010-06-01/",
       }
 

@@ -60,6 +60,13 @@ module Aws
         object.upload_file(source, options)
       end
 
+      # @options (see Object#upload_stream)
+      # @return (see Object#upload_stream)
+      # @see Object#upload_stream
+      def upload_stream(options = {}, &block)
+        object.upload_stream(options, &block)
+      end
+
       # @param (see Object#download_file)
       # @options (see Object#download_file)
       # @return (see Object#download_file)

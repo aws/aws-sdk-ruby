@@ -87,6 +87,12 @@ module Aws::RDS
       data[:apply_method]
     end
 
+    # The valid DB engine modes.
+    # @return [Array<String>]
+    def supported_engine_modes
+      data[:supported_engine_modes]
+    end
+
     # @!endgroup
 
     # @return [Client]

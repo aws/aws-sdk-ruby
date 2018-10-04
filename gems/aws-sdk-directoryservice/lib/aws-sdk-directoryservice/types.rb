@@ -8,6 +8,37 @@
 module Aws::DirectoryService
   module Types
 
+    # @note When making an API call, you may pass AcceptSharedDirectoryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         shared_directory_id: "DirectoryId", # required
+    #       }
+    #
+    # @!attribute [rw] shared_directory_id
+    #   Identifier of the shared directory in the directory consumer
+    #   account. This identifier is different for each directory owner
+    #   account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AcceptSharedDirectoryRequest AWS API Documentation
+    #
+    class AcceptSharedDirectoryRequest < Struct.new(
+      :shared_directory_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] shared_directory
+    #   The shared directory in the directory consumer account.
+    #   @return [Types::SharedDirectory]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AcceptSharedDirectoryResult AWS API Documentation
+    #
+    class AcceptSharedDirectoryResult < Struct.new(
+      :shared_directory)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AddIpRoutesRequest
     #   data as a hash:
     #
@@ -273,7 +304,7 @@ module Aws::DirectoryService
     #       }
     #
     # @!attribute [rw] name
-    #   The fully-qualified name of the on-premises directory, such as
+    #   The fully qualified name of the on-premises directory, such as
     #   `corp.example.com`.
     #   @return [String]
     #
@@ -510,7 +541,7 @@ module Aws::DirectoryService
     #
     # @!attribute [rw] password
     #   The password for the directory administrator. The directory creation
-    #   process creates a directory administrator account with the username
+    #   process creates a directory administrator account with the user name
     #   `Administrator` and this password.
     #   @return [String]
     #
@@ -551,6 +582,36 @@ module Aws::DirectoryService
       :directory_id)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass CreateLogSubscriptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         log_group_name: "LogGroupName", # required
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   Identifier (ID) of the directory to which you want to subscribe and
+    #   receive real-time logs to your specified CloudWatch log group.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_name
+    #   The name of the CloudWatch log group where the real-time domain
+    #   controller logs are forwarded.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateLogSubscriptionRequest AWS API Documentation
+    #
+    class CreateLogSubscriptionRequest < Struct.new(
+      :directory_id,
+      :log_group_name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateLogSubscriptionResult AWS API Documentation
+    #
+    class CreateLogSubscriptionResult < Aws::EmptyStructure; end
 
     # Creates a Microsoft AD in the AWS cloud.
     #
@@ -809,6 +870,29 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteLogSubscriptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   Identifier (ID) of the directory whose log subscription you want to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteLogSubscriptionRequest AWS API Documentation
+    #
+    class DeleteLogSubscriptionRequest < Struct.new(
+      :directory_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteLogSubscriptionResult AWS API Documentation
+    #
+    class DeleteLogSubscriptionResult < Aws::EmptyStructure; end
+
     # Contains the inputs for the DeleteSnapshot operation.
     #
     # @note When making an API call, you may pass DeleteSnapshotRequest
@@ -980,7 +1064,7 @@ module Aws::DirectoryService
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The *DescribeDirectoriesResult.NextToken* value from a previous call
+    #   The `DescribeDirectoriesResult.NextToken` value from a previous call
     #   to DescribeDirectories. Pass null if this is the first call.
     #   @return [String]
     #
@@ -1005,14 +1089,14 @@ module Aws::DirectoryService
     #   The list of DirectoryDescription objects that were retrieved.
     #
     #   It is possible that this list contains less than the number of items
-    #   specified in the *Limit* member of the request. This occurs if there
+    #   specified in the `Limit` member of the request. This occurs if there
     #   are less than the requested number of items left to retrieve, or if
     #   the limitations of the operation have been exceeded.
     #   @return [Array<Types::DirectoryDescription>]
     #
     # @!attribute [rw] next_token
     #   If not null, more results are available. Pass this value for the
-    #   *NextToken* parameter in a subsequent call to DescribeDirectories to
+    #   `NextToken` parameter in a subsequent call to DescribeDirectories to
     #   retrieve the next set of items.
     #   @return [String]
     #
@@ -1125,6 +1209,63 @@ module Aws::DirectoryService
     #
     class DescribeEventTopicsResult < Struct.new(
       :event_topics)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeSharedDirectoriesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         owner_directory_id: "DirectoryId", # required
+    #         shared_directory_ids: ["DirectoryId"],
+    #         next_token: "NextToken",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] owner_directory_id
+    #   Returns the identifier of the directory in the directory owner
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] shared_directory_ids
+    #   A list of identifiers of all shared directories in your account.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The `DescribeSharedDirectoriesResult.NextToken` value from a
+    #   previous call to DescribeSharedDirectories. Pass null if this is the
+    #   first call.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The number of shared directories to return in the response object.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeSharedDirectoriesRequest AWS API Documentation
+    #
+    class DescribeSharedDirectoriesRequest < Struct.new(
+      :owner_directory_id,
+      :shared_directory_ids,
+      :next_token,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] shared_directories
+    #   A list of all shared directories in your account.
+    #   @return [Array<Types::SharedDirectory>]
+    #
+    # @!attribute [rw] next_token
+    #   If not null, token that indicates that more results are available.
+    #   Pass this value for the `NextToken` parameter in a subsequent call
+    #   to DescribeSharedDirectories to retrieve the next set of items.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeSharedDirectoriesResult AWS API Documentation
+    #
+    class DescribeSharedDirectoriesResult < Struct.new(
+      :shared_directories,
+      :next_token)
       include Aws::Structure
     end
 
@@ -1294,9 +1435,9 @@ module Aws::DirectoryService
     #   @return [Array<String>]
     #
     # @!attribute [rw] customer_user_name
-    #   The username of an account in the on-premises directory that is used
-    #   to connect to the directory. This account must have the following
-    #   privileges:
+    #   The user name of an account in the on-premises directory that is
+    #   used to connect to the directory. This account must have the
+    #   following permissions:
     #
     #   * Read users and groups
     #
@@ -1326,7 +1467,7 @@ module Aws::DirectoryService
     #   @return [Array<String>]
     #
     # @!attribute [rw] customer_user_name
-    #   The username of the service account in the on-premises directory.
+    #   The user name of the service account in the on-premises directory.
     #   @return [String]
     #
     # @!attribute [rw] security_group_id
@@ -1360,7 +1501,7 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The fully-qualified name of the directory.
+    #   The fully qualified name of the directory.
     #   @return [String]
     #
     # @!attribute [rw] short_name
@@ -1405,6 +1546,25 @@ module Aws::DirectoryService
     #   The current stage of the directory.
     #   @return [String]
     #
+    # @!attribute [rw] share_status
+    #   Current directory status of the shared AWS Managed Microsoft AD
+    #   directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_method
+    #   The method used when sharing a directory to determine whether the
+    #   directory should be shared within your AWS organization
+    #   (`ORGANIZATIONS`) or with any AWS account by sending a shared
+    #   directory request (`HANDSHAKE`).
+    #   @return [String]
+    #
+    # @!attribute [rw] share_notes
+    #   A directory share request that is sent by the directory owner to the
+    #   directory consumer. The request includes a typed message to help the
+    #   directory consumer administrator determine whether to approve or
+    #   reject the share invitation.
+    #   @return [String]
+    #
     # @!attribute [rw] launch_time
     #   Specifies when the directory was created.
     #   @return [Time]
@@ -1443,7 +1603,7 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] sso_enabled
-    #   Indicates if single-sign on is enabled for the directory. For more
+    #   Indicates if single sign-on is enabled for the directory. For more
     #   information, see EnableSso and DisableSso.
     #   @return [Boolean]
     #
@@ -1451,6 +1611,11 @@ module Aws::DirectoryService
     #   The desired number of domain controllers in the directory if the
     #   directory is Microsoft AD.
     #   @return [Integer]
+    #
+    # @!attribute [rw] owner_directory_description
+    #   Describes the AWS Managed Microsoft AD directory in the directory
+    #   owner account.
+    #   @return [Types::OwnerDirectoryDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryDescription AWS API Documentation
     #
@@ -1465,6 +1630,9 @@ module Aws::DirectoryService
       :description,
       :dns_ip_addrs,
       :stage,
+      :share_status,
+      :share_method,
+      :share_notes,
       :launch_time,
       :stage_last_updated_date_time,
       :type,
@@ -1474,7 +1642,8 @@ module Aws::DirectoryService
       :radius_status,
       :stage_reason,
       :sso_enabled,
-      :desired_number_of_domain_controllers)
+      :desired_number_of_domain_controllers,
+      :owner_directory_description)
       include Aws::Structure
     end
 
@@ -2028,6 +2197,57 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListLogSubscriptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId",
+    #         next_token: "NextToken",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   If a *DirectoryID* is provided, lists only the log subscription
+    #   associated with that directory. If no *DirectoryId* is provided,
+    #   lists all log subscriptions associated with your AWS account. If
+    #   there are no log subscriptions for the AWS account or the directory,
+    #   an empty list will be returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of items returned.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListLogSubscriptionsRequest AWS API Documentation
+    #
+    class ListLogSubscriptionsRequest < Struct.new(
+      :directory_id,
+      :next_token,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] log_subscriptions
+    #   A list of active LogSubscription objects for calling the AWS
+    #   account.
+    #   @return [Array<Types::LogSubscription>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListLogSubscriptionsResult AWS API Documentation
+    #
+    class ListLogSubscriptionsResult < Struct.new(
+      :log_subscriptions,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListSchemaExtensionsRequest
     #   data as a hash:
     #
@@ -2125,6 +2345,72 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # Represents a log subscription, which tracks real-time data from a
+    # chosen log group to a specified destination.
+    #
+    # @!attribute [rw] directory_id
+    #   Identifier (ID) of the directory that you want to associate with the
+    #   log subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_name
+    #   The name of the log group.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_created_date_time
+    #   The date and time that the log subscription was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/LogSubscription AWS API Documentation
+    #
+    class LogSubscription < Struct.new(
+      :directory_id,
+      :log_group_name,
+      :subscription_created_date_time)
+      include Aws::Structure
+    end
+
+    # Describes the directory owner account details that have been shared to
+    # the directory consumer account.
+    #
+    # @!attribute [rw] directory_id
+    #   Identifier of the AWS Managed Microsoft AD directory in the
+    #   directory owner account.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   Identifier of the directory owner account.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_ip_addrs
+    #   IP address of the directory’s domain controllers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_settings
+    #   Information about the VPC settings for the directory.
+    #   @return [Types::DirectoryVpcSettingsDescription]
+    #
+    # @!attribute [rw] radius_settings
+    #   A RadiusSettings object that contains information about the RADIUS
+    #   server.
+    #   @return [Types::RadiusSettings]
+    #
+    # @!attribute [rw] radius_status
+    #   Information about the status of the RADIUS server.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/OwnerDirectoryDescription AWS API Documentation
+    #
+    class OwnerDirectoryDescription < Struct.new(
+      :directory_id,
+      :account_id,
+      :dns_ip_addrs,
+      :vpc_settings,
+      :radius_settings,
+      :radius_status)
+      include Aws::Structure
+    end
+
     # Contains information about a Remote Authentication Dial In User
     # Service (RADIUS) server.
     #
@@ -2165,7 +2451,7 @@ module Aws::DirectoryService
     #   @return [Integer]
     #
     # @!attribute [rw] shared_secret
-    #   Not currently used.
+    #   Required for enabling RADIUS on the directory.
     #   @return [String]
     #
     # @!attribute [rw] authentication_protocol
@@ -2228,6 +2514,38 @@ module Aws::DirectoryService
     #
     class RegisterEventTopicResult < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass RejectSharedDirectoryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         shared_directory_id: "DirectoryId", # required
+    #       }
+    #
+    # @!attribute [rw] shared_directory_id
+    #   Identifier of the shared directory in the directory consumer
+    #   account. This identifier is different for each directory owner
+    #   account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RejectSharedDirectoryRequest AWS API Documentation
+    #
+    class RejectSharedDirectoryRequest < Struct.new(
+      :shared_directory_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] shared_directory_id
+    #   Identifier of the shared directory in the directory consumer
+    #   account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RejectSharedDirectoryResult AWS API Documentation
+    #
+    class RejectSharedDirectoryResult < Struct.new(
+      :shared_directory_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RemoveIpRoutesRequest
     #   data as a hash:
     #
@@ -2284,6 +2602,41 @@ module Aws::DirectoryService
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveTagsFromResourceResult AWS API Documentation
     #
     class RemoveTagsFromResourceResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass ResetUserPasswordRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         user_name: "CustomerUserName", # required
+    #         new_password: "UserPassword", # required
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   Identifier of the AWS Managed Microsoft AD or Simple AD directory in
+    #   which the user resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name
+    #   The user name of the user whose password will be reset.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_password
+    #   The new password that will be reset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ResetUserPasswordRequest AWS API Documentation
+    #
+    class ResetUserPasswordRequest < Struct.new(
+      :directory_id,
+      :user_name,
+      :new_password)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ResetUserPasswordResult AWS API Documentation
+    #
+    class ResetUserPasswordResult < Aws::EmptyStructure; end
 
     # An object representing the inputs for the RestoreFromSnapshot
     # operation.
@@ -2354,6 +2707,158 @@ module Aws::DirectoryService
       :schema_extension_status_reason,
       :start_date_time,
       :end_date_time)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ShareDirectoryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         share_notes: "Notes",
+    #         share_target: { # required
+    #           id: "TargetId", # required
+    #           type: "ACCOUNT", # required, accepts ACCOUNT
+    #         },
+    #         share_method: "ORGANIZATIONS", # required, accepts ORGANIZATIONS, HANDSHAKE
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   Identifier of the AWS Managed Microsoft AD directory that you want
+    #   to share with other AWS accounts.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_notes
+    #   A directory share request that is sent by the directory owner to the
+    #   directory consumer. The request includes a typed message to help the
+    #   directory consumer administrator determine whether to approve or
+    #   reject the share invitation.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_target
+    #   Identifier for the directory consumer account with whom the
+    #   directory is to be shared.
+    #   @return [Types::ShareTarget]
+    #
+    # @!attribute [rw] share_method
+    #   The method used when sharing a directory to determine whether the
+    #   directory should be shared within your AWS organization
+    #   (`ORGANIZATIONS`) or with any AWS account by sending a directory
+    #   sharing request (`HANDSHAKE`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ShareDirectoryRequest AWS API Documentation
+    #
+    class ShareDirectoryRequest < Struct.new(
+      :directory_id,
+      :share_notes,
+      :share_target,
+      :share_method)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] shared_directory_id
+    #   Identifier of the directory that is stored in the directory consumer
+    #   account that is shared from the specified directory (`DirectoryId`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ShareDirectoryResult AWS API Documentation
+    #
+    class ShareDirectoryResult < Struct.new(
+      :shared_directory_id)
+      include Aws::Structure
+    end
+
+    # Identifier that contains details about the directory consumer account.
+    #
+    # @note When making an API call, you may pass ShareTarget
+    #   data as a hash:
+    #
+    #       {
+    #         id: "TargetId", # required
+    #         type: "ACCOUNT", # required, accepts ACCOUNT
+    #       }
+    #
+    # @!attribute [rw] id
+    #   Identifier of the directory consumer account.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Type of identifier to be used in the `Id` field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ShareTarget AWS API Documentation
+    #
+    class ShareTarget < Struct.new(
+      :id,
+      :type)
+      include Aws::Structure
+    end
+
+    # Details about the shared directory in the directory owner account for
+    # which the share request in the directory consumer account has been
+    # accepted.
+    #
+    # @!attribute [rw] owner_account_id
+    #   Identifier of the directory owner account, which contains the
+    #   directory that has been shared to the consumer account.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_directory_id
+    #   Identifier of the directory in the directory owner account.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_method
+    #   The method used when sharing a directory to determine whether the
+    #   directory should be shared within your AWS organization
+    #   (`ORGANIZATIONS`) or with any AWS account by sending a shared
+    #   directory request (`HANDSHAKE`).
+    #   @return [String]
+    #
+    # @!attribute [rw] shared_account_id
+    #   Identifier of the directory consumer account that has access to the
+    #   shared directory (`OwnerDirectoryId`) in the directory owner
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] shared_directory_id
+    #   Identifier of the shared directory in the directory consumer
+    #   account. This identifier is different for each directory owner
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_status
+    #   Current directory status of the shared AWS Managed Microsoft AD
+    #   directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_notes
+    #   A directory share request that is sent by the directory owner to the
+    #   directory consumer. The request includes a typed message to help the
+    #   directory consumer administrator determine whether to approve or
+    #   reject the share invitation.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_date_time
+    #   The date and time that the shared directory was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time that the shared directory was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/SharedDirectory AWS API Documentation
+    #
+    class SharedDirectory < Struct.new(
+      :owner_account_id,
+      :owner_directory_id,
+      :share_method,
+      :shared_account_id,
+      :shared_directory_id,
+      :share_status,
+      :share_notes,
+      :created_date_time,
+      :last_updated_date_time)
       include Aws::Structure
     end
 
@@ -2562,6 +3067,74 @@ module Aws::DirectoryService
       :last_updated_date_time,
       :state_last_updated_date_time,
       :trust_state_reason)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UnshareDirectoryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         unshare_target: { # required
+    #           id: "TargetId", # required
+    #           type: "ACCOUNT", # required, accepts ACCOUNT
+    #         },
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the AWS Managed Microsoft AD directory that you
+    #   want to stop sharing.
+    #   @return [String]
+    #
+    # @!attribute [rw] unshare_target
+    #   Identifier for the directory consumer account with whom the
+    #   directory has to be unshared.
+    #   @return [Types::UnshareTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UnshareDirectoryRequest AWS API Documentation
+    #
+    class UnshareDirectoryRequest < Struct.new(
+      :directory_id,
+      :unshare_target)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] shared_directory_id
+    #   Identifier of the directory stored in the directory consumer account
+    #   that is to be unshared from the specified directory (`DirectoryId`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UnshareDirectoryResult AWS API Documentation
+    #
+    class UnshareDirectoryResult < Struct.new(
+      :shared_directory_id)
+      include Aws::Structure
+    end
+
+    # Identifier that contains details about the directory consumer account
+    # with whom the directory is being unshared.
+    #
+    # @note When making an API call, you may pass UnshareTarget
+    #   data as a hash:
+    #
+    #       {
+    #         id: "TargetId", # required
+    #         type: "ACCOUNT", # required, accepts ACCOUNT
+    #       }
+    #
+    # @!attribute [rw] id
+    #   Identifier of the directory consumer account.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Type of identifier to be used in the *Id* field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UnshareTarget AWS API Documentation
+    #
+    class UnshareTarget < Struct.new(
+      :id,
+      :type)
       include Aws::Structure
     end
 

@@ -3772,7 +3772,7 @@ module Aws::Greengrass
     # @!attribute [rw] source_path
     #   The local absolute path of the volume resource on the host. The
     #   source path for a volume resource type cannot start with
-    #   ''/proc'' or ''/sys''.
+    #   ''/sys''.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/LocalVolumeResourceData AWS API Documentation

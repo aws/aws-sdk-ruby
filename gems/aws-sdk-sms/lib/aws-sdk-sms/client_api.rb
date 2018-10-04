@@ -243,12 +243,15 @@ module Aws::SMS
       api.version = "2016-10-24"
 
       api.metadata = {
+        "apiVersion" => "2016-10-24",
         "endpointPrefix" => "sms",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "SMS",
         "serviceFullName" => "AWS Server Migration Service",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSServerMigrationService_V2016_10_24",
+        "uid" => "sms-2016-10-24",
       }
 
       api.add_operation(:create_replication_job, Seahorse::Model::Operation.new.tap do |o|

@@ -1804,9 +1804,9 @@ module Aws::Glacier
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of jobs to be returned. The default limit is
-    #   1000. The number of jobs returned might be fewer than the specified
-    #   limit, but the number of returned jobs never exceeds the limit.
+    #   The maximum number of jobs to be returned. The default limit is 50.
+    #   The number of jobs returned might be fewer than the specified limit,
+    #   but the number of returned jobs never exceeds the limit.
     #   @return [Integer]
     #
     # @!attribute [rw] marker
@@ -1894,7 +1894,7 @@ module Aws::Glacier
     # @!attribute [rw] limit
     #   Specifies the maximum number of uploads returned in the response
     #   body. If this value is not specified, the List Uploads operation
-    #   returns up to 1,000 uploads.
+    #   returns up to 50 uploads.
     #   @return [Integer]
     #
     class ListMultipartUploadsInput < Struct.new(
@@ -1964,8 +1964,8 @@ module Aws::Glacier
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of parts to be returned. The default limit is
-    #   1000. The number of parts returned might be fewer than the specified
+    #   The maximum number of parts to be returned. The default limit is 50.
+    #   The number of parts returned might be fewer than the specified
     #   limit, but the number of returned parts never exceeds the limit.
     #   @return [Integer]
     #
@@ -2127,9 +2127,8 @@ module Aws::Glacier
     #
     # @!attribute [rw] limit
     #   The maximum number of vaults to be returned. The default limit is
-    #   1000. The number of vaults returned might be fewer than the
-    #   specified limit, but the number of returned vaults never exceeds the
-    #   limit.
+    #   10. The number of vaults returned might be fewer than the specified
+    #   limit, but the number of returned vaults never exceeds the limit.
     #   @return [Integer]
     #
     class ListVaultsInput < Struct.new(

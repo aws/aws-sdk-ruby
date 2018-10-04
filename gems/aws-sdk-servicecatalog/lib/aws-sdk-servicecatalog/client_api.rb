@@ -173,6 +173,7 @@ module Aws::ServiceCatalog
     PortfolioDetails = Shapes::ListShape.new(name: 'PortfolioDetails')
     PortfolioDisplayName = Shapes::StringShape.new(name: 'PortfolioDisplayName')
     PortfolioName = Shapes::StringShape.new(name: 'PortfolioName')
+    PortfolioShareType = Shapes::StringShape.new(name: 'PortfolioShareType')
     Principal = Shapes::StructureShape.new(name: 'Principal')
     PrincipalARN = Shapes::StringShape.new(name: 'PrincipalARN')
     PrincipalType = Shapes::StringShape.new(name: 'PrincipalType')
@@ -694,6 +695,7 @@ module Aws::ServiceCatalog
     ListAcceptedPortfolioSharesInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     ListAcceptedPortfolioSharesInput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
     ListAcceptedPortfolioSharesInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
+    ListAcceptedPortfolioSharesInput.add_member(:portfolio_share_type, Shapes::ShapeRef.new(shape: PortfolioShareType, location_name: "PortfolioShareType"))
     ListAcceptedPortfolioSharesInput.struct_class = Types::ListAcceptedPortfolioSharesInput
 
     ListAcceptedPortfolioSharesOutput.add_member(:portfolio_details, Shapes::ShapeRef.new(shape: PortfolioDetails, location_name: "PortfolioDetails"))
@@ -1264,12 +1266,15 @@ module Aws::ServiceCatalog
       api.version = "2015-12-10"
 
       api.metadata = {
+        "apiVersion" => "2015-12-10",
         "endpointPrefix" => "servicecatalog",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Service Catalog",
+        "serviceId" => "Service Catalog",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWS242ServiceCatalogService",
+        "uid" => "servicecatalog-2015-12-10",
       }
 
       api.add_operation(:accept_portfolio_share, Seahorse::Model::Operation.new.tap do |o|

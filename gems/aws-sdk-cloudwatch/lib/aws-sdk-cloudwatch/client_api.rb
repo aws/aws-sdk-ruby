@@ -22,6 +22,7 @@ module Aws::CloudWatch
     AlarmNames = Shapes::ListShape.new(name: 'AlarmNames')
     AwsQueryErrorMessage = Shapes::StringShape.new(name: 'AwsQueryErrorMessage')
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
+    Counts = Shapes::ListShape.new(name: 'Counts')
     DashboardArn = Shapes::StringShape.new(name: 'DashboardArn')
     DashboardBody = Shapes::StringShape.new(name: 'DashboardBody')
     DashboardEntries = Shapes::ListShape.new(name: 'DashboardEntries')
@@ -71,6 +72,8 @@ module Aws::CloudWatch
     GetMetricDataOutput = Shapes::StructureShape.new(name: 'GetMetricDataOutput')
     GetMetricStatisticsInput = Shapes::StructureShape.new(name: 'GetMetricStatisticsInput')
     GetMetricStatisticsOutput = Shapes::StructureShape.new(name: 'GetMetricStatisticsOutput')
+    GetMetricWidgetImageInput = Shapes::StructureShape.new(name: 'GetMetricWidgetImageInput')
+    GetMetricWidgetImageOutput = Shapes::StructureShape.new(name: 'GetMetricWidgetImageOutput')
     HistoryData = Shapes::StringShape.new(name: 'HistoryData')
     HistoryItemType = Shapes::StringShape.new(name: 'HistoryItemType')
     HistorySummary = Shapes::StringShape.new(name: 'HistorySummary')
@@ -105,10 +108,13 @@ module Aws::CloudWatch
     MetricLabel = Shapes::StringShape.new(name: 'MetricLabel')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
     MetricStat = Shapes::StructureShape.new(name: 'MetricStat')
+    MetricWidget = Shapes::StringShape.new(name: 'MetricWidget')
+    MetricWidgetImage = Shapes::BlobShape.new(name: 'MetricWidgetImage')
     Metrics = Shapes::ListShape.new(name: 'Metrics')
     MissingRequiredParameterException = Shapes::StructureShape.new(name: 'MissingRequiredParameterException')
     Namespace = Shapes::StringShape.new(name: 'Namespace')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    OutputFormat = Shapes::StringShape.new(name: 'OutputFormat')
     Period = Shapes::IntegerShape.new(name: 'Period')
     PutDashboardInput = Shapes::StructureShape.new(name: 'PutDashboardInput')
     PutDashboardOutput = Shapes::StructureShape.new(name: 'PutDashboardOutput')
@@ -135,6 +141,7 @@ module Aws::CloudWatch
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Timestamps = Shapes::ListShape.new(name: 'Timestamps')
     TreatMissingData = Shapes::StringShape.new(name: 'TreatMissingData')
+    Values = Shapes::ListShape.new(name: 'Values')
 
     AlarmHistoryItem.add_member(:alarm_name, Shapes::ShapeRef.new(shape: AlarmName, location_name: "AlarmName"))
     AlarmHistoryItem.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
@@ -146,6 +153,8 @@ module Aws::CloudWatch
     AlarmHistoryItems.member = Shapes::ShapeRef.new(shape: AlarmHistoryItem)
 
     AlarmNames.member = Shapes::ShapeRef.new(shape: AlarmName)
+
+    Counts.member = Shapes::ShapeRef.new(shape: DatapointValue)
 
     DashboardEntries.member = Shapes::ShapeRef.new(shape: DashboardEntry)
 
@@ -279,6 +288,13 @@ module Aws::CloudWatch
     GetMetricStatisticsOutput.add_member(:datapoints, Shapes::ShapeRef.new(shape: Datapoints, location_name: "Datapoints"))
     GetMetricStatisticsOutput.struct_class = Types::GetMetricStatisticsOutput
 
+    GetMetricWidgetImageInput.add_member(:metric_widget, Shapes::ShapeRef.new(shape: MetricWidget, required: true, location_name: "MetricWidget"))
+    GetMetricWidgetImageInput.add_member(:output_format, Shapes::ShapeRef.new(shape: OutputFormat, location_name: "OutputFormat"))
+    GetMetricWidgetImageInput.struct_class = Types::GetMetricWidgetImageInput
+
+    GetMetricWidgetImageOutput.add_member(:metric_widget_image, Shapes::ShapeRef.new(shape: MetricWidgetImage, location_name: "MetricWidgetImage"))
+    GetMetricWidgetImageOutput.struct_class = Types::GetMetricWidgetImageOutput
+
     ListDashboardsInput.add_member(:dashboard_name_prefix, Shapes::ShapeRef.new(shape: DashboardNamePrefix, location_name: "DashboardNamePrefix"))
     ListDashboardsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListDashboardsInput.struct_class = Types::ListDashboardsInput
@@ -363,6 +379,8 @@ module Aws::CloudWatch
     MetricDatum.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
     MetricDatum.add_member(:value, Shapes::ShapeRef.new(shape: DatapointValue, location_name: "Value"))
     MetricDatum.add_member(:statistic_values, Shapes::ShapeRef.new(shape: StatisticSet, location_name: "StatisticValues"))
+    MetricDatum.add_member(:values, Shapes::ShapeRef.new(shape: Values, location_name: "Values"))
+    MetricDatum.add_member(:counts, Shapes::ShapeRef.new(shape: Counts, location_name: "Counts"))
     MetricDatum.add_member(:unit, Shapes::ShapeRef.new(shape: StandardUnit, location_name: "Unit"))
     MetricDatum.add_member(:storage_resolution, Shapes::ShapeRef.new(shape: StorageResolution, location_name: "StorageResolution"))
     MetricDatum.struct_class = Types::MetricDatum
@@ -425,6 +443,8 @@ module Aws::CloudWatch
 
     Timestamps.member = Shapes::ShapeRef.new(shape: Timestamp)
 
+    Values.member = Shapes::ShapeRef.new(shape: DatapointValue)
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -432,10 +452,14 @@ module Aws::CloudWatch
       api.version = "2010-08-01"
 
       api.metadata = {
+        "apiVersion" => "2010-08-01",
         "endpointPrefix" => "monitoring",
         "protocol" => "query",
+        "serviceAbbreviation" => "CloudWatch",
         "serviceFullName" => "Amazon CloudWatch",
+        "serviceId" => "CloudWatch",
         "signatureVersion" => "v4",
+        "uid" => "monitoring-2010-08-01",
         "xmlNamespace" => "http://monitoring.amazonaws.com/doc/2010-08-01/",
       }
 
@@ -543,6 +567,14 @@ module Aws::CloudWatch
         o.errors << Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
+      end)
+
+      api.add_operation(:get_metric_widget_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMetricWidgetImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetMetricWidgetImageInput)
+        o.output = Shapes::ShapeRef.new(shape: GetMetricWidgetImageOutput)
       end)
 
       api.add_operation(:list_dashboards, Seahorse::Model::Operation.new.tap do |o|

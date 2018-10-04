@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -47,6 +49,8 @@ module Aws::OpsWorksCM
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -92,6 +96,22 @@ module Aws::OpsWorksCM
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::OpsWorksCM
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -663,21 +694,10 @@ module Aws::OpsWorksCM
     #   Returns backups for the server with the specified ServerName.
     #
     # @option params [String] :next_token
-    #   NextToken is a string that is returned in some command responses. It
-    #   indicates that not all entries have been returned, and that you must
-    #   run at least one more request to get remaining items. To get remaining
-    #   results, call `DescribeBackups` again, and assign the token from the
-    #   previous results as the value of the `nextToken` parameter. If there
-    #   are no more results, the response object's `nextToken` parameter
-    #   value is `null`. Setting a `nextToken` value that was not returned in
-    #   your previous results causes an `InvalidNextTokenException` to occur.
+    #   This is not currently implemented for `DescribeBackups` requests.
     #
     # @option params [Integer] :max_results
-    #   To receive a paginated response, use this parameter to specify the
-    #   maximum number of results to be returned with a single call. If the
-    #   number of available results exceeds this maximum, the response
-    #   includes a `NextToken` value that you can assign to the `NextToken`
-    #   request parameter to get the next set of results.
+    #   This is not currently implemented for `DescribeBackups` requests.
     #
     # @return [Types::DescribeBackupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -850,21 +870,10 @@ module Aws::OpsWorksCM
     #   Describes the server with the specified ServerName.
     #
     # @option params [String] :next_token
-    #   NextToken is a string that is returned in some command responses. It
-    #   indicates that not all entries have been returned, and that you must
-    #   run at least one more request to get remaining items. To get remaining
-    #   results, call `DescribeServers` again, and assign the token from the
-    #   previous results as the value of the `nextToken` parameter. If there
-    #   are no more results, the response object's `nextToken` parameter
-    #   value is `null`. Setting a `nextToken` value that was not returned in
-    #   your previous results causes an `InvalidNextTokenException` to occur.
+    #   This is not currently implemented for `DescribeServers` requests.
     #
     # @option params [Integer] :max_results
-    #   To receive a paginated response, use this parameter to specify the
-    #   maximum number of results to be returned with a single call. If the
-    #   number of available results exceeds this maximum, the response
-    #   includes a `NextToken` value that you can assign to the `NextToken`
-    #   request parameter to get the next set of results.
+    #   This is not currently implemented for `DescribeServers` requests.
     #
     # @return [Types::DescribeServersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -977,6 +986,74 @@ module Aws::OpsWorksCM
     # @param [Hash] params ({})
     def disassociate_node(params = {}, options = {})
       req = build_request(:disassociate_node, params)
+      req.send_request(options)
+    end
+
+    # Exports a specified server engine attribute as a base64-encoded
+    # string. For example, you can export user data that you can use in EC2
+    # to associate nodes with a server.
+    #
+    # This operation is synchronous.
+    #
+    # A `ValidationException` is raised when parameters of the request are
+    # not valid. A `ResourceNotFoundException` is thrown when the server
+    # does not exist. An `InvalidStateException` is thrown when the server
+    # is in any of the following states: CREATING, TERMINATED, FAILED or
+    # DELETING.
+    #
+    # @option params [required, String] :export_attribute_name
+    #   The name of the export attribute. Currently supported export attribute
+    #   is "Userdata" which exports a userdata script filled out with
+    #   parameters provided in the `InputAttributes` list.
+    #
+    # @option params [required, String] :server_name
+    #   The name of the Server to which the attribute is being exported from
+    #
+    # @option params [Array<Types::EngineAttribute>] :input_attributes
+    #   The list of engine attributes. The list type is `EngineAttribute`.
+    #   `EngineAttribute` is a pair of attribute name and value. For
+    #   `ExportAttributeName` "Userdata", currently supported input
+    #   attribute names are: - "RunList": For Chef, an ordered list of roles
+    #   and/or recipes that are run in the exact order. For Puppet, this
+    #   parameter is ignored. - "OrganizationName": For Chef, an
+    #   organization name. AWS OpsWorks for Chef Server always creates the
+    #   organization "default". For Puppet, this parameter is ignored. -
+    #   "NodeEnvironment": For Chef, a node environment (eg. development,
+    #   staging, onebox). For Puppet, this parameter is ignored. -
+    #   "NodeClientVersion": For Chef, version of Chef Engine (3 numbers
+    #   separated by dots, eg. "13.8.5"). If empty, it uses the latest one.
+    #   For Puppet, this parameter is ignored.
+    #
+    # @return [Types::ExportServerEngineAttributeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportServerEngineAttributeResponse#engine_attribute #engine_attribute} => Types::EngineAttribute
+    #   * {Types::ExportServerEngineAttributeResponse#server_name #server_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_server_engine_attribute({
+    #     export_attribute_name: "String", # required
+    #     server_name: "ServerName", # required
+    #     input_attributes: [
+    #       {
+    #         name: "EngineAttributeName",
+    #         value: "EngineAttributeValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.engine_attribute.name #=> String
+    #   resp.engine_attribute.value #=> String
+    #   resp.server_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ExportServerEngineAttribute AWS API Documentation
+    #
+    # @overload export_server_engine_attribute(params = {})
+    # @param [Hash] params ({})
+    def export_server_engine_attribute(params = {}, options = {})
+      req = build_request(:export_server_engine_attribute, params)
       req.send_request(options)
     end
 
@@ -1273,7 +1350,7 @@ module Aws::OpsWorksCM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opsworkscm'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -47,6 +49,8 @@ module Aws::ServerlessApplicationRepository
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -92,6 +96,22 @@ module Aws::ServerlessApplicationRepository
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::ServerlessApplicationRepository
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -148,9 +179,9 @@ module Aws::ServerlessApplicationRepository
     # Creates an application, optionally including an AWS SAM file to create
     # the first application version in the same call.
     #
-    # @option params [String] :author
+    # @option params [required, String] :author
     #
-    # @option params [String] :description
+    # @option params [required, String] :description
     #
     # @option params [String] :home_page_url
     #
@@ -160,7 +191,7 @@ module Aws::ServerlessApplicationRepository
     #
     # @option params [String] :license_url
     #
-    # @option params [String] :name
+    # @option params [required, String] :name
     #
     # @option params [String] :readme_body
     #
@@ -193,13 +224,13 @@ module Aws::ServerlessApplicationRepository
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_application({
-    #     author: "__string",
-    #     description: "__string",
+    #     author: "__string", # required
+    #     description: "__string", # required
     #     home_page_url: "__string",
     #     labels: ["__string"],
     #     license_body: "__string",
     #     license_url: "__string",
-    #     name: "__string",
+    #     name: "__string", # required
     #     readme_body: "__string",
     #     readme_url: "__string",
     #     semantic_version: "__string",
@@ -317,7 +348,7 @@ module Aws::ServerlessApplicationRepository
       req.send_request(options)
     end
 
-    # Creates an AWS CloudFormation ChangeSet for the given application.
+    # Creates an AWS CloudFormation change set for the given application.
     #
     # @option params [required, String] :application_id
     #
@@ -325,7 +356,7 @@ module Aws::ServerlessApplicationRepository
     #
     # @option params [String] :semantic_version
     #
-    # @option params [String] :stack_name
+    # @option params [required, String] :stack_name
     #
     # @return [Types::CreateCloudFormationChangeSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -345,7 +376,7 @@ module Aws::ServerlessApplicationRepository
     #       },
     #     ],
     #     semantic_version: "__string",
-    #     stack_name: "__string",
+    #     stack_name: "__string", # required
     #   })
     #
     # @example Response structure
@@ -456,7 +487,7 @@ module Aws::ServerlessApplicationRepository
       req.send_request(options)
     end
 
-    # Gets the policy for the specified application.
+    # Retrieves the policy for the application.
     #
     # @option params [required, String] :application_id
     #
@@ -568,11 +599,17 @@ module Aws::ServerlessApplicationRepository
       req.send_request(options)
     end
 
-    # Puts the policy for the specified application.
+    # Sets the permission policy for an application. See [Application
+    # Permissions][1] for the list of supported actions that can be used
+    # with this operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions
     #
     # @option params [required, String] :application_id
     #
-    # @option params [Array<Types::ApplicationPolicyStatement>] :statements
+    # @option params [required, Array<Types::ApplicationPolicyStatement>] :statements
     #
     # @return [Types::PutApplicationPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -582,7 +619,7 @@ module Aws::ServerlessApplicationRepository
     #
     #   resp = client.put_application_policy({
     #     application_id: "__string", # required
-    #     statements: [
+    #     statements: [ # required
     #       {
     #         actions: ["__string"], # required
     #         principals: ["__string"], # required
@@ -708,7 +745,7 @@ module Aws::ServerlessApplicationRepository
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-serverlessapplicationrepository'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -83,3 +83,15 @@ Feature: Managed file download
     Then 12 get_object requests should have been made
     And those downloaded files should match the uploaded file
     And these test file has been cleaned up
+
+  @auto @version-id @large-file
+  Scenario: Download an object with its version id
+    Given I enabled bucket versioning
+    And I have a 16M file
+    And I upload the file
+    And I have a 1M file
+    And I upload the file with same key
+    When I download the file with previous version id
+    Then 4 get_object requests should have been made
+    And the download file should match the previous version object
+    And this test file has been cleaned up

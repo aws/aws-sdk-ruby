@@ -11,6 +11,9 @@ module Aws::DirectoryService
 
     include Seahorse::Model
 
+    AcceptSharedDirectoryRequest = Shapes::StructureShape.new(name: 'AcceptSharedDirectoryRequest')
+    AcceptSharedDirectoryResult = Shapes::StructureShape.new(name: 'AcceptSharedDirectoryResult')
+    AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccessUrl = Shapes::StringShape.new(name: 'AccessUrl')
     AddIpRoutesRequest = Shapes::StructureShape.new(name: 'AddIpRoutesRequest')
     AddIpRoutesResult = Shapes::StructureShape.new(name: 'AddIpRoutesResult')
@@ -48,6 +51,8 @@ module Aws::DirectoryService
     CreateConditionalForwarderResult = Shapes::StructureShape.new(name: 'CreateConditionalForwarderResult')
     CreateDirectoryRequest = Shapes::StructureShape.new(name: 'CreateDirectoryRequest')
     CreateDirectoryResult = Shapes::StructureShape.new(name: 'CreateDirectoryResult')
+    CreateLogSubscriptionRequest = Shapes::StructureShape.new(name: 'CreateLogSubscriptionRequest')
+    CreateLogSubscriptionResult = Shapes::StructureShape.new(name: 'CreateLogSubscriptionResult')
     CreateMicrosoftADRequest = Shapes::StructureShape.new(name: 'CreateMicrosoftADRequest')
     CreateMicrosoftADResult = Shapes::StructureShape.new(name: 'CreateMicrosoftADResult')
     CreateSnapshotBeforeSchemaExtension = Shapes::BooleanShape.new(name: 'CreateSnapshotBeforeSchemaExtension')
@@ -56,11 +61,15 @@ module Aws::DirectoryService
     CreateTrustRequest = Shapes::StructureShape.new(name: 'CreateTrustRequest')
     CreateTrustResult = Shapes::StructureShape.new(name: 'CreateTrustResult')
     CreatedDateTime = Shapes::TimestampShape.new(name: 'CreatedDateTime')
+    CustomerId = Shapes::StringShape.new(name: 'CustomerId')
+    CustomerUserName = Shapes::StringShape.new(name: 'CustomerUserName')
     DeleteAssociatedConditionalForwarder = Shapes::BooleanShape.new(name: 'DeleteAssociatedConditionalForwarder')
     DeleteConditionalForwarderRequest = Shapes::StructureShape.new(name: 'DeleteConditionalForwarderRequest')
     DeleteConditionalForwarderResult = Shapes::StructureShape.new(name: 'DeleteConditionalForwarderResult')
     DeleteDirectoryRequest = Shapes::StructureShape.new(name: 'DeleteDirectoryRequest')
     DeleteDirectoryResult = Shapes::StructureShape.new(name: 'DeleteDirectoryResult')
+    DeleteLogSubscriptionRequest = Shapes::StructureShape.new(name: 'DeleteLogSubscriptionRequest')
+    DeleteLogSubscriptionResult = Shapes::StructureShape.new(name: 'DeleteLogSubscriptionResult')
     DeleteSnapshotRequest = Shapes::StructureShape.new(name: 'DeleteSnapshotRequest')
     DeleteSnapshotResult = Shapes::StructureShape.new(name: 'DeleteSnapshotResult')
     DeleteTrustRequest = Shapes::StructureShape.new(name: 'DeleteTrustRequest')
@@ -75,12 +84,15 @@ module Aws::DirectoryService
     DescribeDomainControllersResult = Shapes::StructureShape.new(name: 'DescribeDomainControllersResult')
     DescribeEventTopicsRequest = Shapes::StructureShape.new(name: 'DescribeEventTopicsRequest')
     DescribeEventTopicsResult = Shapes::StructureShape.new(name: 'DescribeEventTopicsResult')
+    DescribeSharedDirectoriesRequest = Shapes::StructureShape.new(name: 'DescribeSharedDirectoriesRequest')
+    DescribeSharedDirectoriesResult = Shapes::StructureShape.new(name: 'DescribeSharedDirectoriesResult')
     DescribeSnapshotsRequest = Shapes::StructureShape.new(name: 'DescribeSnapshotsRequest')
     DescribeSnapshotsResult = Shapes::StructureShape.new(name: 'DescribeSnapshotsResult')
     DescribeTrustsRequest = Shapes::StructureShape.new(name: 'DescribeTrustsRequest')
     DescribeTrustsResult = Shapes::StructureShape.new(name: 'DescribeTrustsResult')
     Description = Shapes::StringShape.new(name: 'Description')
     DesiredNumberOfDomainControllers = Shapes::IntegerShape.new(name: 'DesiredNumberOfDomainControllers')
+    DirectoryAlreadySharedException = Shapes::StructureShape.new(name: 'DirectoryAlreadySharedException')
     DirectoryConnectSettings = Shapes::StructureShape.new(name: 'DirectoryConnectSettings')
     DirectoryConnectSettingsDescription = Shapes::StructureShape.new(name: 'DirectoryConnectSettingsDescription')
     DirectoryDescription = Shapes::StructureShape.new(name: 'DirectoryDescription')
@@ -91,6 +103,7 @@ module Aws::DirectoryService
     DirectoryLimitExceededException = Shapes::StructureShape.new(name: 'DirectoryLimitExceededException')
     DirectoryLimits = Shapes::StructureShape.new(name: 'DirectoryLimits')
     DirectoryName = Shapes::StringShape.new(name: 'DirectoryName')
+    DirectoryNotSharedException = Shapes::StructureShape.new(name: 'DirectoryNotSharedException')
     DirectoryShortName = Shapes::StringShape.new(name: 'DirectoryShortName')
     DirectorySize = Shapes::StringShape.new(name: 'DirectorySize')
     DirectoryStage = Shapes::StringShape.new(name: 'DirectoryStage')
@@ -127,6 +140,8 @@ module Aws::DirectoryService
     InsufficientPermissionsException = Shapes::StructureShape.new(name: 'InsufficientPermissionsException')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
+    InvalidPasswordException = Shapes::StructureShape.new(name: 'InvalidPasswordException')
+    InvalidTargetException = Shapes::StructureShape.new(name: 'InvalidTargetException')
     IpAddr = Shapes::StringShape.new(name: 'IpAddr')
     IpAddrs = Shapes::ListShape.new(name: 'IpAddrs')
     IpRoute = Shapes::StructureShape.new(name: 'IpRoute')
@@ -142,13 +157,21 @@ module Aws::DirectoryService
     Limit = Shapes::IntegerShape.new(name: 'Limit')
     ListIpRoutesRequest = Shapes::StructureShape.new(name: 'ListIpRoutesRequest')
     ListIpRoutesResult = Shapes::StructureShape.new(name: 'ListIpRoutesResult')
+    ListLogSubscriptionsRequest = Shapes::StructureShape.new(name: 'ListLogSubscriptionsRequest')
+    ListLogSubscriptionsResult = Shapes::StructureShape.new(name: 'ListLogSubscriptionsResult')
     ListSchemaExtensionsRequest = Shapes::StructureShape.new(name: 'ListSchemaExtensionsRequest')
     ListSchemaExtensionsResult = Shapes::StructureShape.new(name: 'ListSchemaExtensionsResult')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResult = Shapes::StructureShape.new(name: 'ListTagsForResourceResult')
+    LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
+    LogSubscription = Shapes::StructureShape.new(name: 'LogSubscription')
+    LogSubscriptions = Shapes::ListShape.new(name: 'LogSubscriptions')
     ManualSnapshotsLimitReached = Shapes::BooleanShape.new(name: 'ManualSnapshotsLimitReached')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    Notes = Shapes::StringShape.new(name: 'Notes')
     OrganizationalUnitDN = Shapes::StringShape.new(name: 'OrganizationalUnitDN')
+    OrganizationsException = Shapes::StructureShape.new(name: 'OrganizationsException')
+    OwnerDirectoryDescription = Shapes::StructureShape.new(name: 'OwnerDirectoryDescription')
     Password = Shapes::StringShape.new(name: 'Password')
     PortNumber = Shapes::IntegerShape.new(name: 'PortNumber')
     RadiusAuthenticationProtocol = Shapes::StringShape.new(name: 'RadiusAuthenticationProtocol')
@@ -160,6 +183,8 @@ module Aws::DirectoryService
     RadiusTimeout = Shapes::IntegerShape.new(name: 'RadiusTimeout')
     RegisterEventTopicRequest = Shapes::StructureShape.new(name: 'RegisterEventTopicRequest')
     RegisterEventTopicResult = Shapes::StructureShape.new(name: 'RegisterEventTopicResult')
+    RejectSharedDirectoryRequest = Shapes::StructureShape.new(name: 'RejectSharedDirectoryRequest')
+    RejectSharedDirectoryResult = Shapes::StructureShape.new(name: 'RejectSharedDirectoryResult')
     RemoteDomainName = Shapes::StringShape.new(name: 'RemoteDomainName')
     RemoteDomainNames = Shapes::ListShape.new(name: 'RemoteDomainNames')
     RemoveIpRoutesRequest = Shapes::StructureShape.new(name: 'RemoveIpRoutesRequest')
@@ -168,6 +193,8 @@ module Aws::DirectoryService
     RemoveTagsFromResourceResult = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceResult')
     ReplicationScope = Shapes::StringShape.new(name: 'ReplicationScope')
     RequestId = Shapes::StringShape.new(name: 'RequestId')
+    ResetUserPasswordRequest = Shapes::StructureShape.new(name: 'ResetUserPasswordRequest')
+    ResetUserPasswordResult = Shapes::StructureShape.new(name: 'ResetUserPasswordResult')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     RestoreFromSnapshotRequest = Shapes::StructureShape.new(name: 'RestoreFromSnapshotRequest')
     RestoreFromSnapshotResult = Shapes::StructureShape.new(name: 'RestoreFromSnapshotResult')
@@ -181,6 +208,14 @@ module Aws::DirectoryService
     Server = Shapes::StringShape.new(name: 'Server')
     Servers = Shapes::ListShape.new(name: 'Servers')
     ServiceException = Shapes::StructureShape.new(name: 'ServiceException')
+    ShareDirectoryRequest = Shapes::StructureShape.new(name: 'ShareDirectoryRequest')
+    ShareDirectoryResult = Shapes::StructureShape.new(name: 'ShareDirectoryResult')
+    ShareLimitExceededException = Shapes::StructureShape.new(name: 'ShareLimitExceededException')
+    ShareMethod = Shapes::StringShape.new(name: 'ShareMethod')
+    ShareStatus = Shapes::StringShape.new(name: 'ShareStatus')
+    ShareTarget = Shapes::StructureShape.new(name: 'ShareTarget')
+    SharedDirectories = Shapes::ListShape.new(name: 'SharedDirectories')
+    SharedDirectory = Shapes::StructureShape.new(name: 'SharedDirectory')
     Snapshot = Shapes::StructureShape.new(name: 'Snapshot')
     SnapshotId = Shapes::StringShape.new(name: 'SnapshotId')
     SnapshotIds = Shapes::ListShape.new(name: 'SnapshotIds')
@@ -199,12 +234,15 @@ module Aws::DirectoryService
     StateLastUpdatedDateTime = Shapes::TimestampShape.new(name: 'StateLastUpdatedDateTime')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
+    SubscriptionCreatedDateTime = Shapes::TimestampShape.new(name: 'SubscriptionCreatedDateTime')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeys = Shapes::ListShape.new(name: 'TagKeys')
     TagLimitExceededException = Shapes::StructureShape.new(name: 'TagLimitExceededException')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::ListShape.new(name: 'Tags')
+    TargetId = Shapes::StringShape.new(name: 'TargetId')
+    TargetType = Shapes::StringShape.new(name: 'TargetType')
     TopicArn = Shapes::StringShape.new(name: 'TopicArn')
     TopicName = Shapes::StringShape.new(name: 'TopicName')
     TopicNames = Shapes::ListShape.new(name: 'TopicNames')
@@ -218,6 +256,9 @@ module Aws::DirectoryService
     TrustStateReason = Shapes::StringShape.new(name: 'TrustStateReason')
     TrustType = Shapes::StringShape.new(name: 'TrustType')
     Trusts = Shapes::ListShape.new(name: 'Trusts')
+    UnshareDirectoryRequest = Shapes::StructureShape.new(name: 'UnshareDirectoryRequest')
+    UnshareDirectoryResult = Shapes::StructureShape.new(name: 'UnshareDirectoryResult')
+    UnshareTarget = Shapes::StructureShape.new(name: 'UnshareTarget')
     UnsupportedOperationException = Shapes::StructureShape.new(name: 'UnsupportedOperationException')
     UpdateConditionalForwarderRequest = Shapes::StructureShape.new(name: 'UpdateConditionalForwarderRequest')
     UpdateConditionalForwarderResult = Shapes::StructureShape.new(name: 'UpdateConditionalForwarderResult')
@@ -227,10 +268,18 @@ module Aws::DirectoryService
     UpdateRadiusResult = Shapes::StructureShape.new(name: 'UpdateRadiusResult')
     UpdateSecurityGroupForDirectoryControllers = Shapes::BooleanShape.new(name: 'UpdateSecurityGroupForDirectoryControllers')
     UseSameUsername = Shapes::BooleanShape.new(name: 'UseSameUsername')
+    UserDoesNotExistException = Shapes::StructureShape.new(name: 'UserDoesNotExistException')
     UserName = Shapes::StringShape.new(name: 'UserName')
+    UserPassword = Shapes::StringShape.new(name: 'UserPassword')
     VerifyTrustRequest = Shapes::StructureShape.new(name: 'VerifyTrustRequest')
     VerifyTrustResult = Shapes::StructureShape.new(name: 'VerifyTrustResult')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
+
+    AcceptSharedDirectoryRequest.add_member(:shared_directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "SharedDirectoryId"))
+    AcceptSharedDirectoryRequest.struct_class = Types::AcceptSharedDirectoryRequest
+
+    AcceptSharedDirectoryResult.add_member(:shared_directory, Shapes::ShapeRef.new(shape: SharedDirectory, location_name: "SharedDirectory"))
+    AcceptSharedDirectoryResult.struct_class = Types::AcceptSharedDirectoryResult
 
     AddIpRoutesRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     AddIpRoutesRequest.add_member(:ip_routes, Shapes::ShapeRef.new(shape: IpRoutes, required: true, location_name: "IpRoutes"))
@@ -320,6 +369,12 @@ module Aws::DirectoryService
     CreateDirectoryResult.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
     CreateDirectoryResult.struct_class = Types::CreateDirectoryResult
 
+    CreateLogSubscriptionRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    CreateLogSubscriptionRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "LogGroupName"))
+    CreateLogSubscriptionRequest.struct_class = Types::CreateLogSubscriptionRequest
+
+    CreateLogSubscriptionResult.struct_class = Types::CreateLogSubscriptionResult
+
     CreateMicrosoftADRequest.add_member(:name, Shapes::ShapeRef.new(shape: DirectoryName, required: true, location_name: "Name"))
     CreateMicrosoftADRequest.add_member(:short_name, Shapes::ShapeRef.new(shape: DirectoryShortName, location_name: "ShortName"))
     CreateMicrosoftADRequest.add_member(:password, Shapes::ShapeRef.new(shape: Password, required: true, location_name: "Password"))
@@ -360,6 +415,11 @@ module Aws::DirectoryService
 
     DeleteDirectoryResult.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
     DeleteDirectoryResult.struct_class = Types::DeleteDirectoryResult
+
+    DeleteLogSubscriptionRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    DeleteLogSubscriptionRequest.struct_class = Types::DeleteLogSubscriptionRequest
+
+    DeleteLogSubscriptionResult.struct_class = Types::DeleteLogSubscriptionResult
 
     DeleteSnapshotRequest.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, required: true, location_name: "SnapshotId"))
     DeleteSnapshotRequest.struct_class = Types::DeleteSnapshotRequest
@@ -413,6 +473,16 @@ module Aws::DirectoryService
     DescribeEventTopicsResult.add_member(:event_topics, Shapes::ShapeRef.new(shape: EventTopics, location_name: "EventTopics"))
     DescribeEventTopicsResult.struct_class = Types::DescribeEventTopicsResult
 
+    DescribeSharedDirectoriesRequest.add_member(:owner_directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "OwnerDirectoryId"))
+    DescribeSharedDirectoriesRequest.add_member(:shared_directory_ids, Shapes::ShapeRef.new(shape: DirectoryIds, location_name: "SharedDirectoryIds"))
+    DescribeSharedDirectoriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeSharedDirectoriesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    DescribeSharedDirectoriesRequest.struct_class = Types::DescribeSharedDirectoriesRequest
+
+    DescribeSharedDirectoriesResult.add_member(:shared_directories, Shapes::ShapeRef.new(shape: SharedDirectories, location_name: "SharedDirectories"))
+    DescribeSharedDirectoriesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeSharedDirectoriesResult.struct_class = Types::DescribeSharedDirectoriesResult
+
     DescribeSnapshotsRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
     DescribeSnapshotsRequest.add_member(:snapshot_ids, Shapes::ShapeRef.new(shape: SnapshotIds, location_name: "SnapshotIds"))
     DescribeSnapshotsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -457,6 +527,9 @@ module Aws::DirectoryService
     DirectoryDescription.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     DirectoryDescription.add_member(:dns_ip_addrs, Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: "DnsIpAddrs"))
     DirectoryDescription.add_member(:stage, Shapes::ShapeRef.new(shape: DirectoryStage, location_name: "Stage"))
+    DirectoryDescription.add_member(:share_status, Shapes::ShapeRef.new(shape: ShareStatus, location_name: "ShareStatus"))
+    DirectoryDescription.add_member(:share_method, Shapes::ShapeRef.new(shape: ShareMethod, location_name: "ShareMethod"))
+    DirectoryDescription.add_member(:share_notes, Shapes::ShapeRef.new(shape: Notes, location_name: "ShareNotes"))
     DirectoryDescription.add_member(:launch_time, Shapes::ShapeRef.new(shape: LaunchTime, location_name: "LaunchTime"))
     DirectoryDescription.add_member(:stage_last_updated_date_time, Shapes::ShapeRef.new(shape: LastUpdatedDateTime, location_name: "StageLastUpdatedDateTime"))
     DirectoryDescription.add_member(:type, Shapes::ShapeRef.new(shape: DirectoryType, location_name: "Type"))
@@ -467,6 +540,7 @@ module Aws::DirectoryService
     DirectoryDescription.add_member(:stage_reason, Shapes::ShapeRef.new(shape: StageReason, location_name: "StageReason"))
     DirectoryDescription.add_member(:sso_enabled, Shapes::ShapeRef.new(shape: SsoEnabled, location_name: "SsoEnabled"))
     DirectoryDescription.add_member(:desired_number_of_domain_controllers, Shapes::ShapeRef.new(shape: DesiredNumberOfDomainControllers, location_name: "DesiredNumberOfDomainControllers"))
+    DirectoryDescription.add_member(:owner_directory_description, Shapes::ShapeRef.new(shape: OwnerDirectoryDescription, location_name: "OwnerDirectoryDescription"))
     DirectoryDescription.struct_class = Types::DirectoryDescription
 
     DirectoryDescriptions.member = Shapes::ShapeRef.new(shape: DirectoryDescription)
@@ -584,6 +658,15 @@ module Aws::DirectoryService
     ListIpRoutesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListIpRoutesResult.struct_class = Types::ListIpRoutesResult
 
+    ListLogSubscriptionsRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+    ListLogSubscriptionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListLogSubscriptionsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    ListLogSubscriptionsRequest.struct_class = Types::ListLogSubscriptionsRequest
+
+    ListLogSubscriptionsResult.add_member(:log_subscriptions, Shapes::ShapeRef.new(shape: LogSubscriptions, location_name: "LogSubscriptions"))
+    ListLogSubscriptionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListLogSubscriptionsResult.struct_class = Types::ListLogSubscriptionsResult
+
     ListSchemaExtensionsRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     ListSchemaExtensionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListSchemaExtensionsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
@@ -602,6 +685,21 @@ module Aws::DirectoryService
     ListTagsForResourceResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTagsForResourceResult.struct_class = Types::ListTagsForResourceResult
 
+    LogSubscription.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+    LogSubscription.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "LogGroupName"))
+    LogSubscription.add_member(:subscription_created_date_time, Shapes::ShapeRef.new(shape: SubscriptionCreatedDateTime, location_name: "SubscriptionCreatedDateTime"))
+    LogSubscription.struct_class = Types::LogSubscription
+
+    LogSubscriptions.member = Shapes::ShapeRef.new(shape: LogSubscription)
+
+    OwnerDirectoryDescription.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+    OwnerDirectoryDescription.add_member(:account_id, Shapes::ShapeRef.new(shape: CustomerId, location_name: "AccountId"))
+    OwnerDirectoryDescription.add_member(:dns_ip_addrs, Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: "DnsIpAddrs"))
+    OwnerDirectoryDescription.add_member(:vpc_settings, Shapes::ShapeRef.new(shape: DirectoryVpcSettingsDescription, location_name: "VpcSettings"))
+    OwnerDirectoryDescription.add_member(:radius_settings, Shapes::ShapeRef.new(shape: RadiusSettings, location_name: "RadiusSettings"))
+    OwnerDirectoryDescription.add_member(:radius_status, Shapes::ShapeRef.new(shape: RadiusStatus, location_name: "RadiusStatus"))
+    OwnerDirectoryDescription.struct_class = Types::OwnerDirectoryDescription
+
     RadiusSettings.add_member(:radius_servers, Shapes::ShapeRef.new(shape: Servers, location_name: "RadiusServers"))
     RadiusSettings.add_member(:radius_port, Shapes::ShapeRef.new(shape: PortNumber, location_name: "RadiusPort"))
     RadiusSettings.add_member(:radius_timeout, Shapes::ShapeRef.new(shape: RadiusTimeout, location_name: "RadiusTimeout"))
@@ -618,6 +716,12 @@ module Aws::DirectoryService
 
     RegisterEventTopicResult.struct_class = Types::RegisterEventTopicResult
 
+    RejectSharedDirectoryRequest.add_member(:shared_directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "SharedDirectoryId"))
+    RejectSharedDirectoryRequest.struct_class = Types::RejectSharedDirectoryRequest
+
+    RejectSharedDirectoryResult.add_member(:shared_directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "SharedDirectoryId"))
+    RejectSharedDirectoryResult.struct_class = Types::RejectSharedDirectoryResult
+
     RemoteDomainNames.member = Shapes::ShapeRef.new(shape: RemoteDomainName)
 
     RemoveIpRoutesRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
@@ -631,6 +735,13 @@ module Aws::DirectoryService
     RemoveTagsFromResourceRequest.struct_class = Types::RemoveTagsFromResourceRequest
 
     RemoveTagsFromResourceResult.struct_class = Types::RemoveTagsFromResourceResult
+
+    ResetUserPasswordRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    ResetUserPasswordRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: CustomerUserName, required: true, location_name: "UserName"))
+    ResetUserPasswordRequest.add_member(:new_password, Shapes::ShapeRef.new(shape: UserPassword, required: true, location_name: "NewPassword"))
+    ResetUserPasswordRequest.struct_class = Types::ResetUserPasswordRequest
+
+    ResetUserPasswordResult.struct_class = Types::ResetUserPasswordResult
 
     RestoreFromSnapshotRequest.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, required: true, location_name: "SnapshotId"))
     RestoreFromSnapshotRequest.struct_class = Types::RestoreFromSnapshotRequest
@@ -649,6 +760,32 @@ module Aws::DirectoryService
     SchemaExtensionsInfo.member = Shapes::ShapeRef.new(shape: SchemaExtensionInfo)
 
     Servers.member = Shapes::ShapeRef.new(shape: Server)
+
+    ShareDirectoryRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    ShareDirectoryRequest.add_member(:share_notes, Shapes::ShapeRef.new(shape: Notes, location_name: "ShareNotes"))
+    ShareDirectoryRequest.add_member(:share_target, Shapes::ShapeRef.new(shape: ShareTarget, required: true, location_name: "ShareTarget"))
+    ShareDirectoryRequest.add_member(:share_method, Shapes::ShapeRef.new(shape: ShareMethod, required: true, location_name: "ShareMethod"))
+    ShareDirectoryRequest.struct_class = Types::ShareDirectoryRequest
+
+    ShareDirectoryResult.add_member(:shared_directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "SharedDirectoryId"))
+    ShareDirectoryResult.struct_class = Types::ShareDirectoryResult
+
+    ShareTarget.add_member(:id, Shapes::ShapeRef.new(shape: TargetId, required: true, location_name: "Id"))
+    ShareTarget.add_member(:type, Shapes::ShapeRef.new(shape: TargetType, required: true, location_name: "Type"))
+    ShareTarget.struct_class = Types::ShareTarget
+
+    SharedDirectories.member = Shapes::ShapeRef.new(shape: SharedDirectory)
+
+    SharedDirectory.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: CustomerId, location_name: "OwnerAccountId"))
+    SharedDirectory.add_member(:owner_directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "OwnerDirectoryId"))
+    SharedDirectory.add_member(:share_method, Shapes::ShapeRef.new(shape: ShareMethod, location_name: "ShareMethod"))
+    SharedDirectory.add_member(:shared_account_id, Shapes::ShapeRef.new(shape: CustomerId, location_name: "SharedAccountId"))
+    SharedDirectory.add_member(:shared_directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "SharedDirectoryId"))
+    SharedDirectory.add_member(:share_status, Shapes::ShapeRef.new(shape: ShareStatus, location_name: "ShareStatus"))
+    SharedDirectory.add_member(:share_notes, Shapes::ShapeRef.new(shape: Notes, location_name: "ShareNotes"))
+    SharedDirectory.add_member(:created_date_time, Shapes::ShapeRef.new(shape: CreatedDateTime, location_name: "CreatedDateTime"))
+    SharedDirectory.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: LastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
+    SharedDirectory.struct_class = Types::SharedDirectory
 
     Snapshot.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
     Snapshot.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
@@ -704,6 +841,17 @@ module Aws::DirectoryService
 
     Trusts.member = Shapes::ShapeRef.new(shape: Trust)
 
+    UnshareDirectoryRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    UnshareDirectoryRequest.add_member(:unshare_target, Shapes::ShapeRef.new(shape: UnshareTarget, required: true, location_name: "UnshareTarget"))
+    UnshareDirectoryRequest.struct_class = Types::UnshareDirectoryRequest
+
+    UnshareDirectoryResult.add_member(:shared_directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "SharedDirectoryId"))
+    UnshareDirectoryResult.struct_class = Types::UnshareDirectoryResult
+
+    UnshareTarget.add_member(:id, Shapes::ShapeRef.new(shape: TargetId, required: true, location_name: "Id"))
+    UnshareTarget.add_member(:type, Shapes::ShapeRef.new(shape: TargetType, required: true, location_name: "Type"))
+    UnshareTarget.struct_class = Types::UnshareTarget
+
     UpdateConditionalForwarderRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     UpdateConditionalForwarderRequest.add_member(:remote_domain_name, Shapes::ShapeRef.new(shape: RemoteDomainName, required: true, location_name: "RemoteDomainName"))
     UpdateConditionalForwarderRequest.add_member(:dns_ip_addrs, Shapes::ShapeRef.new(shape: DnsIpAddrs, required: true, location_name: "DnsIpAddrs"))
@@ -736,13 +884,30 @@ module Aws::DirectoryService
       api.version = "2015-04-16"
 
       api.metadata = {
+        "apiVersion" => "2015-04-16",
         "endpointPrefix" => "ds",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "Directory Service",
         "serviceFullName" => "AWS Directory Service",
+        "serviceId" => "Directory Service",
         "signatureVersion" => "v4",
         "targetPrefix" => "DirectoryService_20150416",
+        "uid" => "ds-2015-04-16",
       }
+
+      api.add_operation(:accept_shared_directory, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AcceptSharedDirectory"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AcceptSharedDirectoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: AcceptSharedDirectoryResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryAlreadySharedException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
 
       api.add_operation(:add_ip_routes, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AddIpRoutes"
@@ -851,6 +1016,20 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
 
+      api.add_operation(:create_log_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLogSubscription"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateLogSubscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateLogSubscriptionResult)
+        o.errors << Shapes::ShapeRef.new(shape: EntityAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
       api.add_operation(:create_microsoft_ad, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateMicrosoftAD"
         o.http_method = "POST"
@@ -912,6 +1091,18 @@ module Aws::DirectoryService
         o.input = Shapes::ShapeRef.new(shape: DeleteDirectoryRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteDirectoryResult)
         o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:delete_log_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteLogSubscription"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteLogSubscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteLogSubscriptionResult)
+        o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
@@ -1008,6 +1199,20 @@ module Aws::DirectoryService
         o.output = Shapes::ShapeRef.new(shape: DescribeEventTopicsResult)
         o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:describe_shared_directories, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeSharedDirectories"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeSharedDirectoriesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeSharedDirectoriesResult)
+        o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
@@ -1124,6 +1329,18 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
 
+      api.add_operation(:list_log_subscriptions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListLogSubscriptions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListLogSubscriptionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListLogSubscriptionsResult)
+        o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
       api.add_operation(:list_schema_extensions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListSchemaExtensions"
         o.http_method = "POST"
@@ -1161,6 +1378,19 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
 
+      api.add_operation(:reject_shared_directory, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RejectSharedDirectory"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RejectSharedDirectoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: RejectSharedDirectoryResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryAlreadySharedException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
       api.add_operation(:remove_ip_routes, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RemoveIpRoutes"
         o.http_method = "POST"
@@ -1186,6 +1416,21 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
 
+      api.add_operation(:reset_user_password, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResetUserPassword"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ResetUserPasswordRequest)
+        o.output = Shapes::ShapeRef.new(shape: ResetUserPasswordResult)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: UserDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPasswordException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
       api.add_operation(:restore_from_snapshot, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RestoreFromSnapshot"
         o.http_method = "POST"
@@ -1195,6 +1440,24 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:share_directory, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ShareDirectory"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ShareDirectoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: ShareDirectoryResult)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryAlreadySharedException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTargetException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ShareLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationsException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
 
@@ -1208,6 +1471,19 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: SnapshotLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:unshare_directory, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UnshareDirectory"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UnshareDirectoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: UnshareDirectoryResult)
+        o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTargetException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryNotSharedException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)

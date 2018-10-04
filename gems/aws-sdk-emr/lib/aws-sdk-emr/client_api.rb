@@ -1014,13 +1014,17 @@ module Aws::EMR
       api.version = "2009-03-31"
 
       api.metadata = {
+        "apiVersion" => "2009-03-31",
         "endpointPrefix" => "elasticmapreduce",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "Amazon EMR",
         "serviceFullName" => "Amazon Elastic MapReduce",
+        "serviceId" => "EMR",
         "signatureVersion" => "v4",
         "targetPrefix" => "ElasticMapReduce",
         "timestampFormat" => "unixTimestamp",
+        "uid" => "elasticmapreduce-2009-03-31",
       }
 
       api.add_operation(:add_instance_fleet, Seahorse::Model::Operation.new.tap do |o|

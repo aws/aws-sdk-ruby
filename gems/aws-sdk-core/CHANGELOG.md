@@ -1,6 +1,89 @@
 Unreleased Changes
 ------------------
 
+3.29.0 (2018-09-28)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.28.0 (2018-09-25)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.27.1 (2018-09-21)
+------------------
+
+* Issue - Fixes a bug in the `:response_target` plugin error callback. Under certain circumstances a special body object can be removed before its error callback is triggered, breaking retry logic.
+
+3.27.0 (2018-09-06)
+------------------
+
+* Feature - Adds code paths and plugins for future SDK instrumentation and telemetry to aws-sdk-sts.
+
+3.26.0 (2018-09-05)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Adds code paths and plugins for future SDK instrumentation and telemetry.
+
+3.25.0 (2018-08-29)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+* Issue - Add `:exclude_presign` option for #api_requests at client stubbing to allow excluding non-sent request from presigned url (Github Issue #1866)
+
+3.24.1 (2018-08-13)
+------------------
+
+* Issue - Update `ca-bundle.crt` file with newer root certificate authorities.
+
+3.24.0 (2018-08-03)
+------------------
+
+* Feature - Extensible Credential Providers, allows you to declare an executable to be run that outputs the credentials as a JSON payload allowing you to develop custom credential providers and easily add them to the credential resolution chain, [Docs](https://docs.aws.amazon.com/cli/latest/topic/config-vars.html#sourcing-credentials-from-external-processes)
+
+3.23.0 (2018-07-31)
+------------------
+
+* Feature - Add Logged API Requests interface to stubbed clients
+
+3.22.1 (2018-06-28)
+------------------
+
+* Issue - Performance enhancement to instance credential providers, to use a more precisely scoped Time parsing method for improved performance.
+
+3.22.0 (2018-06-26)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Allows you to set custom paths to shared config and shared credential files via the `AWS_CONFIG_FILE` and `AWS_SHARED_CREDENTIALS_FILE` environment variables.
+
+* Feature - Flexible retry strategies. Provides the `:retry_max_delay`, `:retry_base_delay`, and `:retry_jitter` options, which modify the default backoff strategy without the need to define a full retry lambda from scratch.
+
+3.21.3 (2018-06-20)
+------------------
+
+* Issue - Fix to support URI encoded characters in http_proxy
+
+3.21.2 (2018-05-22)
+------------------
+
+* Issue - Update `EventEmitter` to `Aws::EventEmitter` [Github Issue](https://github.com/aws/aws-sdk-ruby/issues/1791)
+
+3.21.1 (2018-05-18)
+------------------
+
+* Issue - Remove `raw_stream` tracking, [Github Issue](https://github.com/aws/aws-sdk-ruby/issues/1786)
+
+3.21.0 (2018-05-17)
+------------------
+
+* Feature - Support `vnd.amazon.event-stream` binary stream protocol over HTTP1.1
+
 3.20.2 (2018-04-26)
 ------------------
 

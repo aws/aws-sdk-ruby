@@ -66,6 +66,7 @@ module Aws::AlexaForBusiness
     DeviceEventType = Shapes::StringShape.new(name: 'DeviceEventType')
     DeviceEventValue = Shapes::StringShape.new(name: 'DeviceEventValue')
     DeviceName = Shapes::StringShape.new(name: 'DeviceName')
+    DeviceNotRegisteredException = Shapes::StructureShape.new(name: 'DeviceNotRegisteredException')
     DeviceSerialNumber = Shapes::StringShape.new(name: 'DeviceSerialNumber')
     DeviceStatus = Shapes::StringShape.new(name: 'DeviceStatus')
     DeviceStatusDetail = Shapes::StructureShape.new(name: 'DeviceStatusDetail')
@@ -766,12 +767,15 @@ module Aws::AlexaForBusiness
       api.version = "2017-11-09"
 
       api.metadata = {
+        "apiVersion" => "2017-11-09",
         "endpointPrefix" => "a4b",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Alexa For Business",
+        "serviceId" => "Alexa For Business",
         "signatureVersion" => "v4",
         "targetPrefix" => "AlexaForBusiness",
+        "uid" => "alexaforbusiness-2017-11-09",
       }
 
       api.add_operation(:associate_contact_with_address_book, Seahorse::Model::Operation.new.tap do |o|
@@ -790,6 +794,7 @@ module Aws::AlexaForBusiness
         o.input = Shapes::ShapeRef.new(shape: AssociateDeviceWithRoomRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateDeviceWithRoomResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: DeviceNotRegisteredException)
       end)
 
       api.add_operation(:associate_skill_group_with_room, Seahorse::Model::Operation.new.tap do |o|
@@ -936,6 +941,7 @@ module Aws::AlexaForBusiness
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DisassociateDeviceFromRoomRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateDeviceFromRoomResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DeviceNotRegisteredException)
       end)
 
       api.add_operation(:disassociate_skill_group_from_room, Seahorse::Model::Operation.new.tap do |o|
@@ -1193,6 +1199,7 @@ module Aws::AlexaForBusiness
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StartDeviceSyncRequest)
         o.output = Shapes::ShapeRef.new(shape: StartDeviceSyncResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DeviceNotRegisteredException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1239,6 +1246,7 @@ module Aws::AlexaForBusiness
         o.input = Shapes::ShapeRef.new(shape: UpdateDeviceRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDeviceResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: DeviceNotRegisteredException)
       end)
 
       api.add_operation(:update_profile, Seahorse::Model::Operation.new.tap do |o|

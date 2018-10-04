@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
 require 'aws-sdk-s3/plugins/accelerate.rb'
 require 'aws-sdk-s3/plugins/dualstack.rb'
@@ -34,6 +36,7 @@ require 'aws-sdk-s3/plugins/sse_cpk.rb'
 require 'aws-sdk-s3/plugins/url_encoded_keys.rb'
 require 'aws-sdk-s3/plugins/s3_signer.rb'
 require 'aws-sdk-s3/plugins/bucket_name_restrictions.rb'
+require 'aws-sdk-core/plugins/event_stream_configuration.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:s3)
 
@@ -60,6 +63,8 @@ module Aws::S3
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::Protocols::RestXml)
     add_plugin(Aws::S3::Plugins::Accelerate)
     add_plugin(Aws::S3::Plugins::Dualstack)
@@ -75,6 +80,7 @@ module Aws::S3
     add_plugin(Aws::S3::Plugins::UrlEncodedKeys)
     add_plugin(Aws::S3::Plugins::S3Signer)
     add_plugin(Aws::S3::Plugins::BucketNameRestrictions)
+    add_plugin(Aws::Plugins::EventStreamConfiguration)
 
     # @option options [required, Aws::CredentialProvider] :credentials
     #   Your AWS credentials. This can be an instance of any one of the
@@ -118,6 +124,22 @@ module Aws::S3
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :compute_checksums (true)
     #   When `true` a MD5 checksum will be computed for every request that
     #   sends a body.  When `false`, MD5 checksums will only be computed
@@ -132,6 +154,9 @@ module Aws::S3
     #   The client endpoint is normally constructed from the `:region`
     #   option. You should only configure an `:endpoint` when connecting
     #   to test endpoints. This should be avalid HTTP(S) URI.
+    #
+    # @option options [Proc] :event_stream_handler
+    #   When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
     #
     # @option options [Boolean] :follow_redirects (true)
     #   When `true`, this client will follow 307 redirects returned
@@ -160,12 +185,23 @@ module Aws::S3
     #   where server-side-encryption is used with customer-provided keys.
     #   This should only be disabled for local testing.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -1080,6 +1116,17 @@ module Aws::S3
     # Deletes the replication configuration from the bucket.
     #
     # @option params [required, String] :bucket
+    #   Deletes the replication subresource associated with the specified
+    #   bucket.
+    #
+    #   <note markdown="1"> There is usually some time lag before replication configuration
+    #   deletion is fully propagated to all the Amazon S3 systems.
+    #
+    #    </note>
+    #
+    #   For more information, see [Cross-Region Replication (CRR)](
+    #   https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html) in the
+    #   Amazon S3 Developer Guide.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1196,15 +1243,6 @@ module Aws::S3
     #   * {Types::DeleteObjectOutput#request_charged #request_charged} => String
     #
     #
-    # @example Example: To delete an object (from a non-versioned bucket)
-    #
-    #   # The following example deletes an object from a non-versioned bucket.
-    #
-    #   resp = client.delete_object({
-    #     bucket: "ExampleBucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
     # @example Example: To delete an object
     #
     #   # The following example deletes an object from an S3 bucket.
@@ -1217,6 +1255,15 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #   }
+    #
+    # @example Example: To delete an object (from a non-versioned bucket)
+    #
+    #   # The following example deletes an object from a non-versioned bucket.
+    #
+    #   resp = client.delete_object({
+    #     bucket: "ExampleBucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2194,7 +2241,15 @@ module Aws::S3
     #   resp.replication_configuration.role #=> String
     #   resp.replication_configuration.rules #=> Array
     #   resp.replication_configuration.rules[0].id #=> String
+    #   resp.replication_configuration.rules[0].priority #=> Integer
     #   resp.replication_configuration.rules[0].prefix #=> String
+    #   resp.replication_configuration.rules[0].filter.prefix #=> String
+    #   resp.replication_configuration.rules[0].filter.tag.key #=> String
+    #   resp.replication_configuration.rules[0].filter.tag.value #=> String
+    #   resp.replication_configuration.rules[0].filter.and.prefix #=> String
+    #   resp.replication_configuration.rules[0].filter.and.tags #=> Array
+    #   resp.replication_configuration.rules[0].filter.and.tags[0].key #=> String
+    #   resp.replication_configuration.rules[0].filter.and.tags[0].value #=> String
     #   resp.replication_configuration.rules[0].status #=> String, one of "Enabled", "Disabled"
     #   resp.replication_configuration.rules[0].source_selection_criteria.sse_kms_encrypted_objects.status #=> String, one of "Enabled", "Disabled"
     #   resp.replication_configuration.rules[0].destination.bucket #=> String
@@ -2202,6 +2257,7 @@ module Aws::S3
     #   resp.replication_configuration.rules[0].destination.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA"
     #   resp.replication_configuration.rules[0].destination.access_control_translation.owner #=> String, one of "Destination"
     #   resp.replication_configuration.rules[0].destination.encryption_configuration.replica_kms_key_id #=> String
+    #   resp.replication_configuration.rules[0].delete_marker_replication.status #=> String, one of "Enabled", "Disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketReplication AWS API Documentation
     #
@@ -4861,7 +4917,9 @@ module Aws::S3
     end
 
     # Creates a new replication configuration (or replaces an existing one,
-    # if present).
+    # if present). For more information, see [Cross-Region Replication
+    # (CRR)]( https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html) in
+    # the Amazon S3 Developer Guide.
     #
     # @option params [required, String] :bucket
     #
@@ -4905,7 +4963,24 @@ module Aws::S3
     #       rules: [ # required
     #         {
     #           id: "ID",
-    #           prefix: "Prefix", # required
+    #           priority: 1,
+    #           prefix: "Prefix",
+    #           filter: {
+    #             prefix: "Prefix",
+    #             tag: {
+    #               key: "ObjectKey", # required
+    #               value: "Value", # required
+    #             },
+    #             and: {
+    #               prefix: "Prefix",
+    #               tags: [
+    #                 {
+    #                   key: "ObjectKey", # required
+    #                   value: "Value", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
     #           status: "Enabled", # required, accepts Enabled, Disabled
     #           source_selection_criteria: {
     #             sse_kms_encrypted_objects: {
@@ -4922,6 +4997,9 @@ module Aws::S3
     #             encryption_configuration: {
     #               replica_kms_key_id: "ReplicaKmsKeyID",
     #             },
+    #           },
+    #           delete_marker_replication: {
+    #             status: "Enabled", # accepts Enabled, Disabled
     #           },
     #         },
     #       ],
@@ -5273,24 +5351,40 @@ module Aws::S3
     #   * {Types::PutObjectOutput#request_charged #request_charged} => String
     #
     #
-    # @example Example: To upload an object and specify server-side encryption and object tags
+    # @example Example: To create an object.
     #
-    #   # The following example uploads and object. The request specifies the optional server-side encryption option. The request
-    #   # also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.
+    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
     #
     #   resp = client.put_object({
     #     body: "filetoupload", 
     #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
+    #     key: "objectkey", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
+    #   }
+    #
+    # @example Example: To upload an object (specify optional headers)
+    #
+    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
+    #   # storage class and use server-side encryption.
+    #
+    #   resp = client.put_object({
+    #     body: "HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
     #     server_side_encryption: "AES256", 
-    #     tagging: "key1=value1&key2=value2", 
+    #     storage_class: "STANDARD_IA", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
     #     server_side_encryption: "AES256", 
-    #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
+    #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
     #   }
     #
     # @example Example: To upload an object and specify canned ACL.
@@ -5328,40 +5422,6 @@ module Aws::S3
     #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
     #   }
     #
-    # @example Example: To create an object.
-    #
-    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "objectkey", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
-    #   }
-    #
-    # @example Example: To upload an object and specify optional tags
-    #
-    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
-    #   # S3 returns version ID of the newly created object.
-    #
-    #   resp = client.put_object({
-    #     body: "c:\\HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #     tagging: "key1=value1&key2=value2", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
-    #   }
-    #
     # @example Example: To upload object and specify user-defined metadata
     #
     #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
@@ -5383,24 +5443,42 @@ module Aws::S3
     #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
     #   }
     #
-    # @example Example: To upload an object (specify optional headers)
+    # @example Example: To upload an object and specify optional tags
     #
-    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
-    #   # storage class and use server-side encryption.
+    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
+    #   # S3 returns version ID of the newly created object.
     #
     #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
+    #     body: "c:\\HappyFace.jpg", 
     #     bucket: "examplebucket", 
     #     key: "HappyFace.jpg", 
+    #     tagging: "key1=value1&key2=value2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
+    #   }
+    #
+    # @example Example: To upload an object and specify server-side encryption and object tags
+    #
+    #   # The following example uploads and object. The request specifies the optional server-side encryption option. The request
+    #   # also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
     #     server_side_encryption: "AES256", 
-    #     storage_class: "STANDARD_IA", 
+    #     tagging: "key1=value1&key2=value2", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
     #     server_side_encryption: "AES256", 
-    #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
+    #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
     #   }
     #
     # @example Streaming a file from disk
@@ -5712,10 +5790,13 @@ module Aws::S3
     #             record_delimiter: "RecordDelimiter",
     #             field_delimiter: "FieldDelimiter",
     #             quote_character: "QuoteCharacter",
+    #             allow_quoted_record_delimiter: false,
     #           },
-    #           compression_type: "NONE", # accepts NONE, GZIP
+    #           compression_type: "NONE", # accepts NONE, GZIP, BZIP2
     #           json: {
     #             type: "DOCUMENT", # accepts DOCUMENT, LINES
+    #           },
+    #           parquet: {
     #           },
     #         },
     #         expression_type: "SQL", # required, accepts SQL
@@ -5788,6 +5869,281 @@ module Aws::S3
     def restore_object(params = {}, options = {})
       req = build_request(:restore_object, params)
       req.send_request(options)
+    end
+
+    # This operation filters the contents of an Amazon S3 object based on a
+    # simple Structured Query Language (SQL) statement. In the request,
+    # along with the SQL expression, you must also specify a data
+    # serialization format (JSON or CSV) of the object. Amazon S3 uses this
+    # to parse object data into records, and returns only records that match
+    # the specified SQL expression. You must also specify the data
+    # serialization format for the response.
+    #
+    # @option params [required, String] :bucket
+    #   The S3 Bucket.
+    #
+    # @option params [required, String] :key
+    #   The Object Key.
+    #
+    # @option params [String] :sse_customer_algorithm
+    #   The SSE Algorithm used to encrypt the object. For more information, go
+    #   to [ Server-Side Encryption (Using Customer-Provided Encryption
+    #   Keys][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    #
+    # @option params [String] :sse_customer_key
+    #   The SSE Customer Key. For more information, go to [ Server-Side
+    #   Encryption (Using Customer-Provided Encryption Keys][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    #
+    # @option params [String] :sse_customer_key_md5
+    #   The SSE Customer Key MD5. For more information, go to [ Server-Side
+    #   Encryption (Using Customer-Provided Encryption Keys][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    #
+    # @option params [required, String] :expression
+    #   The expression that is used to query the object.
+    #
+    # @option params [required, String] :expression_type
+    #   The type of the provided expression (e.g., SQL).
+    #
+    # @option params [Types::RequestProgress] :request_progress
+    #   Specifies if periodic request progress information should be enabled.
+    #
+    # @option params [required, Types::InputSerialization] :input_serialization
+    #   Describes the format of the data in the object that is being queried.
+    #
+    # @option params [required, Types::OutputSerialization] :output_serialization
+    #   Describes the format of the data that you want Amazon S3 to return in
+    #   response.
+    #
+    # @return [Types::SelectObjectContentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SelectObjectContentOutput#payload #payload} => Types::SelectObjectContentEventStream
+    #
+    # @example EventStream Operation Example
+    #
+    #   You can process event once it arrives immediately, or wait until
+    #   full response complete and iterate through eventstream enumerator.
+    #
+    #   To interact with event immediately, you need to register #select_object_content
+    #   with callbacks, callbacks can be register for specifc events or for all events,
+    #   callback for errors in the event stream is also available for register.
+    #
+    #   Callbacks can be passed in by `:event_stream_handler` option or within block
+    #   statement attached to #select_object_content call directly. Hybrid pattern of both
+    #   is also supported.
+    #
+    #   `:event_stream_handler` option takes in either Proc object or
+    #   EventStreams::SelectObjectContentEventStream object.
+    #
+    #   Usage pattern a): callbacks with a block attached to #select_object_content
+    #     Example for registering callbacks for all event types and error event
+    #
+    #     client.select_object_content( # params input# ) do |stream|
+    #
+    #       stream.on_error_event do |event|
+    #         # catch unmodeled error event in the stream
+    #         raise event
+    #         # => Aws::Errors::EventError
+    #         # event.event_type => :error
+    #         # event.error_code => String
+    #         # event.error_message => String
+    #       end
+    #
+    #       stream.on_event do |event|
+    #         # process all events arrive
+    #         puts event.event_type
+    #         ...
+    #       end
+    #
+    #     end
+    #
+    #   Usage pattern b): pass in `:event_stream_handler` for #select_object_content
+    #
+    #     1) create a EventStreams::SelectObjectContentEventStream object
+    #     Example for registering callbacks with specific events
+    #
+    #       handler = Aws::S3::EventStreams::SelectObjectContentEventStream.new
+    #       handler.on_records_event do |event|
+    #         event # => Aws::S3::Types::Records
+    #       end
+    #       handler.on_stats_event do |event|
+    #         event # => Aws::S3::Types::Stats
+    #       end
+    #       handler.on_progress_event do |event|
+    #         event # => Aws::S3::Types::Progress
+    #       end
+    #       handler.on_cont_event do |event|
+    #         event # => Aws::S3::Types::Cont
+    #       end
+    #       handler.on_end_event do |event|
+    #         event # => Aws::S3::Types::End
+    #       end
+    #
+    #     client.select_object_content( # params input #, event_stream_handler: handler)
+    #
+    #     2) use a Ruby Proc object
+    #     Example for registering callbacks with specific events
+    #
+    #     handler = Proc.new do |stream|
+    #       stream.on_records_event do |event|
+    #         event # => Aws::S3::Types::Records
+    #       end
+    #       stream.on_stats_event do |event|
+    #         event # => Aws::S3::Types::Stats
+    #       end
+    #       stream.on_progress_event do |event|
+    #         event # => Aws::S3::Types::Progress
+    #       end
+    #       stream.on_cont_event do |event|
+    #         event # => Aws::S3::Types::Cont
+    #       end
+    #       stream.on_end_event do |event|
+    #         event # => Aws::S3::Types::End
+    #       end
+    #     end
+    #
+    #     client.select_object_content( # params input #, event_stream_handler: handler)
+    #
+    #   Usage pattern c): hybird pattern of a) and b)
+    #
+    #       handler = Aws::S3::EventStreams::SelectObjectContentEventStream.new
+    #       handler.on_records_event do |event|
+    #         event # => Aws::S3::Types::Records
+    #       end
+    #       handler.on_stats_event do |event|
+    #         event # => Aws::S3::Types::Stats
+    #       end
+    #       handler.on_progress_event do |event|
+    #         event # => Aws::S3::Types::Progress
+    #       end
+    #       handler.on_cont_event do |event|
+    #         event # => Aws::S3::Types::Cont
+    #       end
+    #       handler.on_end_event do |event|
+    #         event # => Aws::S3::Types::End
+    #       end
+    #
+    #     client.select_object_content( # params input #, event_stream_handler: handler) do |stream|
+    #       stream.on_error_event do |event|
+    #         # catch unmodeled error event in the stream
+    #         raise event
+    #         # => Aws::Errors::EventError
+    #         # event.event_type => :error
+    #         # event.error_code => String
+    #         # event.error_message => String
+    #       end
+    #     end
+    #
+    #   Besides above usage patterns for process events when they arrive immediately, you can also
+    #   iterate through events after response complete.
+    #
+    #   Events are available at resp.payload # => Enumerator
+    #   For parameter input example, please refer to following request syntax
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.select_object_content({
+    #     bucket: "BucketName", # required
+    #     key: "ObjectKey", # required
+    #     sse_customer_algorithm: "SSECustomerAlgorithm",
+    #     sse_customer_key: "SSECustomerKey",
+    #     sse_customer_key_md5: "SSECustomerKeyMD5",
+    #     expression: "Expression", # required
+    #     expression_type: "SQL", # required, accepts SQL
+    #     request_progress: {
+    #       enabled: false,
+    #     },
+    #     input_serialization: { # required
+    #       csv: {
+    #         file_header_info: "USE", # accepts USE, IGNORE, NONE
+    #         comments: "Comments",
+    #         quote_escape_character: "QuoteEscapeCharacter",
+    #         record_delimiter: "RecordDelimiter",
+    #         field_delimiter: "FieldDelimiter",
+    #         quote_character: "QuoteCharacter",
+    #         allow_quoted_record_delimiter: false,
+    #       },
+    #       compression_type: "NONE", # accepts NONE, GZIP, BZIP2
+    #       json: {
+    #         type: "DOCUMENT", # accepts DOCUMENT, LINES
+    #       },
+    #       parquet: {
+    #       },
+    #     },
+    #     output_serialization: { # required
+    #       csv: {
+    #         quote_fields: "ALWAYS", # accepts ALWAYS, ASNEEDED
+    #         quote_escape_character: "QuoteEscapeCharacter",
+    #         record_delimiter: "RecordDelimiter",
+    #         field_delimiter: "FieldDelimiter",
+    #         quote_character: "QuoteCharacter",
+    #       },
+    #       json: {
+    #         record_delimiter: "RecordDelimiter",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   All events are available at resp.payload:
+    #   resp.payload #=> Enumerator
+    #   resp.payload.event_types #=> [:records, :stats, :progress, :cont, :end]
+    #
+    #   For :records event available at #on_records_event callback and response eventstream enumerator:
+    #   event.payload #=> IO
+    #
+    #   For :stats event available at #on_stats_event callback and response eventstream enumerator:
+    #   event.details.bytes_scanned #=> Integer
+    #   event.details.bytes_processed #=> Integer
+    #   event.details.bytes_returned #=> Integer
+    #
+    #   For :progress event available at #on_progress_event callback and response eventstream enumerator:
+    #   event.details.bytes_scanned #=> Integer
+    #   event.details.bytes_processed #=> Integer
+    #   event.details.bytes_returned #=> Integer
+    #
+    #   For :cont event available at #on_cont_event callback and response eventstream enumerator:
+    #    #=> EmptyStruct
+    #   For :end event available at #on_end_event callback and response eventstream enumerator:
+    #    #=> EmptyStruct
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SelectObjectContent AWS API Documentation
+    #
+    # @overload select_object_content(params = {})
+    # @param [Hash] params ({})
+    def select_object_content(params = {}, options = {}, &block)
+      params = params.dup
+      event_stream_handler = case handler = params.delete(:event_stream_handler)
+        when EventStreams::SelectObjectContentEventStream then handler
+        when Proc then EventStreams::SelectObjectContentEventStream.new.tap(&handler)
+        when nil then EventStreams::SelectObjectContentEventStream.new
+        else
+          msg = "expected :event_stream_handler to be a block or "\
+            "instance of Aws::S3::EventStreams::SelectObjectContentEventStream"\
+            ", got `#{handler.inspect}` instead"
+          raise ArgumentError, msg
+        end
+
+      yield(event_stream_handler) if block_given?
+
+      req = build_request(:select_object_content, params)
+
+      req.context[:event_stream_handler] = event_stream_handler
+      req.handlers.add(Aws::Binary::DecodeHandler, priority: 95)
+
+      req.send_request(options, &block)
     end
 
     # Uploads a part in a multipart upload.
@@ -5997,6 +6353,26 @@ module Aws::S3
     #   * {Types::UploadPartCopyOutput#request_charged #request_charged} => String
     #
     #
+    # @example Example: To upload a part by copying data from an existing object as data source
+    #
+    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
+    #
+    #   resp = client.upload_part_copy({
+    #     bucket: "examplebucket", 
+    #     copy_source: "/bucketname/sourceobjectkey", 
+    #     key: "examplelargeobject", 
+    #     part_number: 1, 
+    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     copy_part_result: {
+    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
+    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
+    #     }, 
+    #   }
+    #
     # @example Example: To upload a part by copying byte range from an existing object as data source
     #
     #   # The following example uploads a part of a multipart upload by copying a specified byte range from an existing object as
@@ -6016,26 +6392,6 @@ module Aws::S3
     #     copy_part_result: {
     #       etag: "\"65d16d19e65a7508a51f043180edcc36\"", 
     #       last_modified: Time.parse("2016-12-29T21:44:28.000Z"), 
-    #     }, 
-    #   }
-    #
-    # @example Example: To upload a part by copying data from an existing object as data source
-    #
-    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
-    #
-    #   resp = client.upload_part_copy({
-    #     bucket: "examplebucket", 
-    #     copy_source: "/bucketname/sourceobjectkey", 
-    #     key: "examplelargeobject", 
-    #     part_number: 1, 
-    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     copy_part_result: {
-    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
-    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
     #     }, 
     #   }
     #
@@ -6094,7 +6450,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

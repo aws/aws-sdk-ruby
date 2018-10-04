@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -47,6 +49,8 @@ module Aws::ACMPCA
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -92,6 +96,22 @@ module Aws::ACMPCA
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::ACMPCA
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -164,7 +195,7 @@ module Aws::ACMPCA
     # list) configuration specifies the CRL expiration period in days (the
     # validity period of the CRL), the Amazon S3 bucket that will contain
     # the CRL, and a CNAME alias for the S3 bucket that is included in
-    # certificates issued by the CA. If successful, this function returns
+    # certificates issued by the CA. If successful, this operation returns
     # the Amazon Resource Name (ARN) of the CA.
     #
     # @option params [required, Types::CertificateAuthorityConfiguration] :certificate_authority_configuration
@@ -189,9 +220,9 @@ module Aws::ACMPCA
     #   minutes. Therefore, if you call **CreateCertificateAuthority**
     #   multiple times with the same idempotency token within a five minute
     #   period, ACM PCA recognizes that you are requesting only one
-    #   certificate and will issue only one. If you change the idempotency
-    #   token for each call, however, ACM PCA recognizes that you are
-    #   requesting multiple certificates.
+    #   certificate. As a result, ACM PCA issues only one. If you change the
+    #   idempotency token for each call, however, ACM PCA recognizes that you
+    #   are requesting multiple certificates.
     #
     # @return [Types::CreateCertificateAuthorityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -247,14 +278,15 @@ module Aws::ACMPCA
 
     # Creates an audit report that lists every time that the your CA private
     # key is used. The report is saved in the Amazon S3 bucket that you
-    # specify on input. The IssueCertificate and RevokeCertificate functions
-    # use the private key. You can generate a new report every 30 minutes.
+    # specify on input. The IssueCertificate and RevokeCertificate
+    # operations use the private key. You can generate a new report every 30
+    # minutes.
     #
     # @option params [required, String] :certificate_authority_arn
     #   Amazon Resource Name (ARN) of the CA to be audited. This is of the
     #   form:
     #
-    #   `arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `.
     #
     # @option params [required, String] :s3_bucket_name
@@ -291,26 +323,40 @@ module Aws::ACMPCA
       req.send_request(options)
     end
 
-    # Deletes the private certificate authority (CA) that you created or
-    # started to create by calling the CreateCertificateAuthority function.
-    # This action requires that you enter an ARN (Amazon Resource Name) for
-    # the private CA that you want to delete. You can find the ARN by
-    # calling the ListCertificateAuthorities function. You can delete the CA
-    # if you are waiting for it to be created (the **Status** field of the
-    # CertificateAuthority is `CREATING`) or if the CA has been created but
-    # you haven't yet imported the signed certificate (the **Status** is
-    # `PENDING_CERTIFICATE`) into ACM PCA. If you've already imported the
-    # certificate, you cannot delete the CA unless it has been disabled for
-    # more than 30 days. To disable a CA, call the
-    # UpdateCertificateAuthority function and set the
-    # **CertificateAuthorityStatus** argument to `DISABLED`.
+    # Deletes a private certificate authority (CA). You must provide the ARN
+    # (Amazon Resource Name) of the private CA that you want to delete. You
+    # can find the ARN by calling the ListCertificateAuthorities operation.
+    # Before you can delete a CA, you must disable it. Call the
+    # UpdateCertificateAuthority operation and set the
+    # **CertificateAuthorityStatus** parameter to `DISABLED`.
+    #
+    # Additionally, you can delete a CA if you are waiting for it to be
+    # created (the **Status** field of the CertificateAuthority is
+    # `CREATING`). You can also delete it if the CA has been created but you
+    # haven't yet imported the signed certificate (the **Status** is
+    # `PENDING_CERTIFICATE`) into ACM PCA.
+    #
+    # If the CA is in one of the aforementioned states and you call
+    # DeleteCertificateAuthority, the CA's status changes to `DELETED`.
+    # However, the CA won't be permentantly deleted until the restoration
+    # period has passed. By default, if you do not set the
+    # `PermanentDeletionTimeInDays` parameter, the CA remains restorable for
+    # 30 days. You can set the parameter from 7 to 30 days. The
+    # DescribeCertificateAuthority operation returns the time remaining in
+    # the restoration window of a Private CA in the `DELETED` state. To
+    # restore an eligable CA, call the RestoreCertificateAuthority
+    # operation.
     #
     # @option params [required, String] :certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called
-    #   CreateCertificateAuthority. This must be of the form:
+    #   CreateCertificateAuthority. This must have the following form:
     #
-    #   `arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `.
+    #
+    # @option params [Integer] :permanent_deletion_time_in_days
+    #   The number of days to make a CA restorable after it has been deleted.
+    #   This can be anywhere from 7 to 30 days, with 30 being the default.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -318,6 +364,7 @@ module Aws::ACMPCA
     #
     #   resp = client.delete_certificate_authority({
     #     certificate_authority_arn: "Arn", # required
+    #     permanent_deletion_time_in_days: 1,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/DeleteCertificateAuthority AWS API Documentation
@@ -334,29 +381,33 @@ module Aws::ACMPCA
     # output contains the status of your CA. This can be any of the
     # following:
     #
-    # * **CREATING:** ACM PCA is creating your private certificate
-    #   authority.
+    # * `CREATING` - ACM PCA is creating your private certificate authority.
     #
-    # * **PENDING\_CERTIFICATE:** The certificate is pending. You must use
+    # * `PENDING_CERTIFICATE` - The certificate is pending. You must use
     #   your on-premises root or subordinate CA to sign your private CA CSR
     #   and then import it into PCA.
     #
-    # * **ACTIVE:** Your private CA is active.
+    # * `ACTIVE` - Your private CA is active.
     #
-    # * **DISABLED:** Your private CA has been disabled.
+    # * `DISABLED` - Your private CA has been disabled.
     #
-    # * **EXPIRED:** Your private CA certificate has expired.
+    # * `EXPIRED` - Your private CA certificate has expired.
     #
-    # * **FAILED:** Your private CA has failed. Your CA can fail for
+    # * `FAILED` - Your private CA has failed. Your CA can fail because of
     #   problems such a network outage or backend AWS failure or other
     #   errors. A failed CA can never return to the pending state. You must
     #   create a new CA.
+    #
+    # * `DELETED` - Your private CA is within the restoration period, after
+    #   which it will be permanently deleted. The length of time remaining
+    #   in the CA's restoration period will also be included in this
+    #   operation's output.
     #
     # @option params [required, String] :certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called
     #   CreateCertificateAuthority. This must be of the form:
     #
-    #   `arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `.
     #
     # @return [Types::DescribeCertificateAuthorityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -376,7 +427,7 @@ module Aws::ACMPCA
     #   resp.certificate_authority.last_state_change_at #=> Time
     #   resp.certificate_authority.type #=> String, one of "SUBORDINATE"
     #   resp.certificate_authority.serial #=> String
-    #   resp.certificate_authority.status #=> String, one of "CREATING", "PENDING_CERTIFICATE", "ACTIVE", "DISABLED", "EXPIRED", "FAILED"
+    #   resp.certificate_authority.status #=> String, one of "CREATING", "PENDING_CERTIFICATE", "ACTIVE", "DELETED", "DISABLED", "EXPIRED", "FAILED"
     #   resp.certificate_authority.not_before #=> Time
     #   resp.certificate_authority.not_after #=> Time
     #   resp.certificate_authority.failure_reason #=> String, one of "REQUEST_TIMED_OUT", "UNSUPPORTED_ALGORITHM", "OTHER"
@@ -400,6 +451,7 @@ module Aws::ACMPCA
     #   resp.certificate_authority.revocation_configuration.crl_configuration.expiration_in_days #=> Integer
     #   resp.certificate_authority.revocation_configuration.crl_configuration.custom_cname #=> String
     #   resp.certificate_authority.revocation_configuration.crl_configuration.s3_bucket_name #=> String
+    #   resp.certificate_authority.restorable_until #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/DescribeCertificateAuthority AWS API Documentation
     #
@@ -411,21 +463,21 @@ module Aws::ACMPCA
     end
 
     # Lists information about a specific audit report created by calling the
-    # CreateCertificateAuthorityAuditReport function. Audit information is
+    # CreateCertificateAuthorityAuditReport operation. Audit information is
     # created every time the certificate authority (CA) private key is used.
-    # The private key is used when you call the IssueCertificate function or
-    # the RevokeCertificate function.
+    # The private key is used when you call the IssueCertificate operation
+    # or the RevokeCertificate operation.
     #
     # @option params [required, String] :certificate_authority_arn
     #   The Amazon Resource Name (ARN) of the private CA. This must be of the
     #   form:
     #
-    #   `arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `.
     #
     # @option params [required, String] :audit_report_id
     #   The report ID returned by calling the
-    #   CreateCertificateAuthorityAuditReport function.
+    #   CreateCertificateAuthorityAuditReport operation.
     #
     # @return [Types::DescribeCertificateAuthorityAuditReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -458,11 +510,11 @@ module Aws::ACMPCA
     end
 
     # Retrieves a certificate from your private CA. The ARN of the
-    # certificate is returned when you call the IssueCertificate function.
+    # certificate is returned when you call the IssueCertificate operation.
     # You must specify both the ARN of your private CA and the ARN of the
-    # issued certificate when calling the **GetCertificate** function. You
+    # issued certificate when calling the **GetCertificate** operation. You
     # can retrieve the certificate if it is in the **ISSUED** state. You can
-    # call the CreateCertificateAuthorityAuditReport function to create a
+    # call the CreateCertificateAuthorityAuditReport operation to create a
     # report that contains information about all of the certificates issued
     # and revoked by your private CA.
     #
@@ -470,14 +522,14 @@ module Aws::ACMPCA
     #   The Amazon Resource Name (ARN) that was returned when you called
     #   CreateCertificateAuthority. This must be of the form:
     #
-    #   `arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `.
     #
     # @option params [required, String] :certificate_arn
     #   The ARN of the issued certificate. The ARN contains the certificate
     #   serial number and must be in the following form:
     #
-    #   `arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012/certificate/286535153982981100925020015808220737245
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012/certificate/286535153982981100925020015808220737245
     #   `
     #
     # @return [Types::GetCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -515,7 +567,7 @@ module Aws::ACMPCA
     #   The Amazon Resource Name (ARN) of your private CA. This is of the
     #   form:
     #
-    #   `arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `.
     #
     # @return [Types::GetCertificateAuthorityCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -545,17 +597,17 @@ module Aws::ACMPCA
 
     # Retrieves the certificate signing request (CSR) for your private
     # certificate authority (CA). The CSR is created when you call the
-    # CreateCertificateAuthority function. Take the CSR to your on-premises
+    # CreateCertificateAuthority operation. Take the CSR to your on-premises
     # X.509 infrastructure and sign it by using your root or a subordinate
     # CA. Then import the signed certificate back into ACM PCA by calling
-    # the ImportCertificateAuthorityCertificate function. The CSR is
+    # the ImportCertificateAuthorityCertificate operation. The CSR is
     # returned as a base64 PEM-encoded string.
     #
     # @option params [required, String] :certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called the
-    #   CreateCertificateAuthority function. This must be of the form:
+    #   CreateCertificateAuthority operation. This must be of the form:
     #
-    #   `arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `
     #
     # @return [Types::GetCertificateAuthorityCsrResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -582,10 +634,10 @@ module Aws::ACMPCA
     end
 
     # Imports your signed private CA certificate into ACM PCA. Before you
-    # can call this function, you must create the private certificate
-    # authority by calling the CreateCertificateAuthority function. You must
-    # then generate a certificate signing request (CSR) by calling the
-    # GetCertificateAuthorityCsr function. Take the CSR to your on-premises
+    # can call this operation, you must create the private certificate
+    # authority by calling the CreateCertificateAuthority operation. You
+    # must then generate a certificate signing request (CSR) by calling the
+    # GetCertificateAuthorityCsr operation. Take the CSR to your on-premises
     # CA and use the root certificate or a subordinate certificate to sign
     # it. Create a certificate chain and copy the signed certificate and the
     # certificate chain to your working directory.
@@ -611,7 +663,7 @@ module Aws::ACMPCA
     #   The Amazon Resource Name (ARN) that was returned when you called
     #   CreateCertificateAuthority. This must be of the form:
     #
-    #   `arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `
     #
     # @option params [required, String, IO] :certificate
@@ -644,11 +696,11 @@ module Aws::ACMPCA
     end
 
     # Uses your private certificate authority (CA) to issue a client
-    # certificate. This function returns the Amazon Resource Name (ARN) of
+    # certificate. This operation returns the Amazon Resource Name (ARN) of
     # the certificate. You can retrieve the certificate by calling the
-    # GetCertificate function and specifying the ARN.
+    # GetCertificate operation and specifying the ARN.
     #
-    # <note markdown="1"> You cannot use the ACM **ListCertificateAuthorities** function to
+    # <note markdown="1"> You cannot use the ACM **ListCertificateAuthorities** operation to
     # retrieve the ARNs of the certificates that you issue by using ACM PCA.
     #
     #  </note>
@@ -657,7 +709,7 @@ module Aws::ACMPCA
     #   The Amazon Resource Name (ARN) that was returned when you called
     #   CreateCertificateAuthority. This must be of the form:
     #
-    #   `arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `
     #
     # @option params [required, String, IO] :csr
@@ -685,7 +737,7 @@ module Aws::ACMPCA
     #
     # @option params [String] :idempotency_token
     #   Custom string that can be used to distinguish between calls to the
-    #   **IssueCertificate** function. Idempotency tokens time out after one
+    #   **IssueCertificate** operation. Idempotency tokens time out after one
     #   hour. Therefore, if you call **IssueCertificate** multiple times with
     #   the same idempotency token within 5 minutes, ACM PCA recognizes that
     #   you are requesting only one certificate and will issue only one. If
@@ -723,7 +775,7 @@ module Aws::ACMPCA
     end
 
     # Lists the private certificate authorities that you created by using
-    # the CreateCertificateAuthority function.
+    # the CreateCertificateAuthority operation.
     #
     # @option params [String] :next_token
     #   Use this parameter when paginating results in a subsequent request
@@ -758,7 +810,7 @@ module Aws::ACMPCA
     #   resp.certificate_authorities[0].last_state_change_at #=> Time
     #   resp.certificate_authorities[0].type #=> String, one of "SUBORDINATE"
     #   resp.certificate_authorities[0].serial #=> String
-    #   resp.certificate_authorities[0].status #=> String, one of "CREATING", "PENDING_CERTIFICATE", "ACTIVE", "DISABLED", "EXPIRED", "FAILED"
+    #   resp.certificate_authorities[0].status #=> String, one of "CREATING", "PENDING_CERTIFICATE", "ACTIVE", "DELETED", "DISABLED", "EXPIRED", "FAILED"
     #   resp.certificate_authorities[0].not_before #=> Time
     #   resp.certificate_authorities[0].not_after #=> Time
     #   resp.certificate_authorities[0].failure_reason #=> String, one of "REQUEST_TIMED_OUT", "UNSUPPORTED_ALGORITHM", "OTHER"
@@ -782,6 +834,7 @@ module Aws::ACMPCA
     #   resp.certificate_authorities[0].revocation_configuration.crl_configuration.expiration_in_days #=> Integer
     #   resp.certificate_authorities[0].revocation_configuration.crl_configuration.custom_cname #=> String
     #   resp.certificate_authorities[0].revocation_configuration.crl_configuration.s3_bucket_name #=> String
+    #   resp.certificate_authorities[0].restorable_until #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/ListCertificateAuthorities AWS API Documentation
@@ -796,14 +849,14 @@ module Aws::ACMPCA
     # Lists the tags, if any, that are associated with your private CA. Tags
     # are labels that you can use to identify and organize your CAs. Each
     # tag consists of a key and an optional value. Call the
-    # TagCertificateAuthority function to add one or more tags to your CA.
-    # Call the UntagCertificateAuthority function to remove tags.
+    # TagCertificateAuthority operation to add one or more tags to your CA.
+    # Call the UntagCertificateAuthority operation to remove tags.
     #
     # @option params [required, String] :certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called the
-    #   CreateCertificateAuthority function. This must be of the form:
+    #   CreateCertificateAuthority operation. This must be of the form:
     #
-    #   `arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `
     #
     # @option params [String] :next_token
@@ -847,8 +900,50 @@ module Aws::ACMPCA
       req.send_request(options)
     end
 
+    # Restores a certificate authority (CA) that is in the `DELETED` state.
+    # You can restore a CA during the period that you defined in the
+    # **PermanentDeletionTimeInDays** parameter of the
+    # DeleteCertificateAuthority operation. Currently, you can specify 7 to
+    # 30 days. If you did not specify a **PermanentDeletionTimeInDays**
+    # value, by default you can restore the CA at any time in a 30 day
+    # period. You can check the time remaining in the restoration period of
+    # a private CA in the `DELETED` state by calling the
+    # DescribeCertificateAuthority or ListCertificateAuthorities operations.
+    # The status of a restored CA is set to its pre-deletion status when the
+    # **RestoreCertificateAuthority** operation returns. To change its
+    # status to `ACTIVE`, call the UpdateCertificateAuthority operation. If
+    # the private CA was in the `PENDING_CERTIFICATE` state at deletion, you
+    # must use the ImportCertificateAuthorityCertificate operation to import
+    # a certificate authority into the private CA before it can be
+    # activated. You cannot restore a CA after the restoration period has
+    # ended.
+    #
+    # @option params [required, String] :certificate_authority_arn
+    #   The Amazon Resource Name (ARN) that was returned when you called the
+    #   CreateCertificateAuthority operation. This must be of the form:
+    #
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+    #   `
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.restore_certificate_authority({
+    #     certificate_authority_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/RestoreCertificateAuthority AWS API Documentation
+    #
+    # @overload restore_certificate_authority(params = {})
+    # @param [Hash] params ({})
+    def restore_certificate_authority(params = {}, options = {})
+      req = build_request(:restore_certificate_authority, params)
+      req.send_request(options)
+    end
+
     # Revokes a certificate that you issued by calling the IssueCertificate
-    # function. If you enable a certificate revocation list (CRL) when you
+    # operation. If you enable a certificate revocation list (CRL) when you
     # create or update your private CA, information about the revoked
     # certificates will be included in the CRL. ACM PCA writes the CRL to an
     # S3 bucket that you specify. For more information about revocation, see
@@ -860,7 +955,7 @@ module Aws::ACMPCA
     #   Amazon Resource Name (ARN) of the private CA that issued the
     #   certificate to be revoked. This must be of the form:
     #
-    #   `arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `
     #
     # @option params [required, String] :certificate_serial
@@ -868,19 +963,19 @@ module Aws::ACMPCA
     #   hexadecimal format. You can retrieve the serial number by calling
     #   GetCertificate with the Amazon Resource Name (ARN) of the certificate
     #   you want and the ARN of your private CA. The **GetCertificate**
-    #   function retrieves the certificate in the PEM format. You can use the
+    #   operation retrieves the certificate in the PEM format. You can use the
     #   following OpenSSL command to list the certificate in text format and
     #   copy the hexadecimal serial number.
     #
     #   `openssl x509 -in file_path -text -noout`
     #
     #   You can also copy the serial number from the console or use the
-    #   [DescribeCertificate][1] function in the *AWS Certificate Manager API
+    #   [DescribeCertificate][1] operation in the *AWS Certificate Manager API
     #   Reference*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.comacm/latest/APIReferenceAPI_DescribeCertificate.html
+    #   [1]: https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html
     #
     # @option params [required, String] :revocation_reason
     #   Specifies why you revoked the certificate.
@@ -912,14 +1007,14 @@ module Aws::ACMPCA
     # to identify a specific characteristic of that CA, or you can apply the
     # same tag to multiple private CAs if you want to filter for a common
     # relationship among those CAs. To remove one or more tags, use the
-    # UntagCertificateAuthority function. Call the ListTags function to see
-    # what tags are associated with your CA.
+    # UntagCertificateAuthority operation. Call the ListTags operation to
+    # see what tags are associated with your CA.
     #
     # @option params [required, String] :certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called
     #   CreateCertificateAuthority. This must be of the form:
     #
-    #   `arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `
     #
     # @option params [required, Array<Types::Tag>] :tags
@@ -950,17 +1045,17 @@ module Aws::ACMPCA
 
     # Remove one or more tags from your private CA. A tag consists of a
     # key-value pair. If you do not specify the value portion of the tag
-    # when calling this function, the tag will be removed regardless of
+    # when calling this operation, the tag will be removed regardless of
     # value. If you specify a value, the tag is removed only if it is
     # associated with the specified value. To add tags to a private CA, use
-    # the TagCertificateAuthority. Call the ListTags function to see what
+    # the TagCertificateAuthority. Call the ListTags operation to see what
     # tags are associated with your CA.
     #
     # @option params [required, String] :certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called
     #   CreateCertificateAuthority. This must be of the form:
     #
-    #   `arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `
     #
     # @option params [required, Array<Types::Tag>] :tags
@@ -990,17 +1085,16 @@ module Aws::ACMPCA
     end
 
     # Updates the status or configuration of a private certificate authority
-    # (CA). Your private CA must be in the <b> <code>ACTIVE</code> </b> or
-    # <b> <code>DISABLED</code> </b> state before you can update it. You can
-    # disable a private CA that is in the <b> <code>ACTIVE</code> </b> state
-    # or make a CA that is in the <b> <code>DISABLED</code> </b> state
-    # active again.
+    # (CA). Your private CA must be in the `ACTIVE` or `DISABLED` state
+    # before you can update it. You can disable a private CA that is in the
+    # `ACTIVE` state or make a CA that is in the `DISABLED` state active
+    # again.
     #
     # @option params [required, String] :certificate_authority_arn
     #   Amazon Resource Name (ARN) of the private CA that issued the
     #   certificate to be revoked. This must be of the form:
     #
-    #   `arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `
     #
     # @option params [Types::RevocationConfiguration] :revocation_configuration
@@ -1023,7 +1117,7 @@ module Aws::ACMPCA
     #         s3_bucket_name: "String3To255",
     #       },
     #     },
-    #     status: "CREATING", # accepts CREATING, PENDING_CERTIFICATE, ACTIVE, DISABLED, EXPIRED, FAILED
+    #     status: "CREATING", # accepts CREATING, PENDING_CERTIFICATE, ACTIVE, DELETED, DISABLED, EXPIRED, FAILED
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/UpdateCertificateAuthority AWS API Documentation
@@ -1048,7 +1142,7 @@ module Aws::ACMPCA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acmpca'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

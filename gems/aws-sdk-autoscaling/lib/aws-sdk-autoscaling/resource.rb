@@ -84,17 +84,17 @@ module Aws::AutoScaling
     #   group. You must specify one of the following: an EC2 instance, a
     #   launch configuration, or a launch template.
     #
-    #   When you specify an ID of an instance, Auto Scaling creates a new
-    #   launch configuration and associates it with the group. This launch
-    #   configuration derives its attributes from the specified instance, with
-    #   the exception of the block device mapping.
+    #   When you specify an ID of an instance, Amazon EC2 Auto Scaling creates
+    #   a new launch configuration and associates it with the group. This
+    #   launch configuration derives its attributes from the specified
+    #   instance, with the exception of the block device mapping.
     #
     #   For more information, see [Create an Auto Scaling Group Using an EC2
-    #   Instance][1] in the *Auto Scaling User Guide*.
+    #   Instance][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/create-asg-from-instance.html
+    #   [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-from-instance.html
     # @option options [required, Integer] :min_size
     #   The minimum size of the group.
     # @option options [required, Integer] :max_size
@@ -109,12 +109,12 @@ module Aws::AutoScaling
     #   The amount of time, in seconds, after a scaling activity completes
     #   before another scaling activity can start. The default is 300.
     #
-    #   For more information, see [Auto Scaling Cooldowns][1] in the *Auto
-    #   Scaling User Guide*.
+    #   For more information, see [Scaling Cooldowns][1] in the *Amazon EC2
+    #   Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html
+    #   [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html
     # @option options [Array<String>] :availability_zones
     #   One or more Availability Zones for the group. This parameter is
     #   optional if you specify one or more subnets.
@@ -123,11 +123,11 @@ module Aws::AutoScaling
     #   Balancer, use `TargetGroupARNs` instead.
     #
     #   For more information, see [Using a Load Balancer With an Auto Scaling
-    #   Group][1] in the *Auto Scaling User Guide*.
+    #   Group][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/create-asg-from-instance.html
+    #   [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-from-instance.html
     # @option options [Array<String>] :target_group_arns
     #   The Amazon Resource Names (ARN) of the target groups.
     # @option options [String] :health_check_type
@@ -136,25 +136,25 @@ module Aws::AutoScaling
     #
     #   By default, health checks use Amazon EC2 instance status checks to
     #   determine the health of an instance. For more information, see [Health
-    #   Checks][1] in the *Auto Scaling User Guide*.
+    #   Checks][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/healthcheck.html
+    #   [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html
     # @option options [Integer] :health_check_grace_period
-    #   The amount of time, in seconds, that Auto Scaling waits before
-    #   checking the health status of an EC2 instance that has come into
-    #   service. During this time, any health check failures for the instance
-    #   are ignored. The default is 0.
+    #   The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
+    #   before checking the health status of an EC2 instance that has come
+    #   into service. During this time, any health check failures for the
+    #   instance are ignored. The default is 0.
     #
     #   This parameter is required if you are adding an `ELB` health check.
     #
-    #   For more information, see [Health Checks][1] in the *Auto Scaling User
-    #   Guide*.
+    #   For more information, see [Health Checks][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/healthcheck.html
+    #   [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html
     # @option options [String] :placement_group
     #   The name of the placement group into which you'll launch your
     #   instances, if any. For more information, see [Placement Groups][1] in
@@ -172,11 +172,11 @@ module Aws::AutoScaling
     #   specified.
     #
     #   For more information, see [Launching Auto Scaling Instances in a
-    #   VPC][1] in the *Auto Scaling User Guide*.
+    #   VPC][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html
+    #   [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html
     # @option options [Array<String>] :termination_policies
     #   One or more termination policies used to select the instance to
     #   terminate. These policies are executed in the order that they are
@@ -187,7 +187,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-termination.html
+    #   [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html
     # @option options [Boolean] :new_instances_protected_from_scale_in
     #   Indicates whether newly launched instances are protected from
     #   termination by Auto Scaling when scaling in.
@@ -197,15 +197,15 @@ module Aws::AutoScaling
     #   One or more tags.
     #
     #   For more information, see [Tagging Auto Scaling Groups and
-    #   Instances][1] in the *Auto Scaling User Guide*.
+    #   Instances][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/autoscaling-tagging.html
+    #   [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-tagging.html
     # @option options [String] :service_linked_role_arn
     #   The Amazon Resource Name (ARN) of the service-linked role that the
     #   Auto Scaling group uses to call other AWS services on your behalf. By
-    #   default, Auto Scaling uses a service-linked role named
+    #   default, Amazon EC2 Auto Scaling uses a service-linked role named
     #   AWSServiceRoleForAutoScaling, which it creates if it does not exist.
     # @return [AutoScalingGroup]
     def create_group(options = {})
@@ -333,11 +333,11 @@ module Aws::AutoScaling
     #   same request.
     #
     #   For more information, see [Create a Launch Configuration Using an EC2
-    #   Instance][1] in the *Auto Scaling User Guide*.
+    #   Instance][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/create-lc-with-instanceID.html
+    #   [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/create-lc-with-instanceID.html
     # @option options [String] :instance_type
     #   The instance type of the EC2 instance.
     #
@@ -369,25 +369,25 @@ module Aws::AutoScaling
     #   fulfill the request. Spot Instances are launched when the price you
     #   specify exceeds the current Spot market price. For more information,
     #   see [Launching Spot Instances in Your Auto Scaling Group][1] in the
-    #   *Auto Scaling User Guide*.
+    #   *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/US-SpotInstances.html
+    #   [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-launch-spot-instances.html
     # @option options [String] :iam_instance_profile
     #   The name or the Amazon Resource Name (ARN) of the instance profile
     #   associated with the IAM role for the instance.
     #
     #   EC2 instances launched with an IAM role will automatically have AWS
-    #   security credentials available. You can use IAM roles with Auto
-    #   Scaling to automatically enable applications running on your EC2
+    #   security credentials available. You can use IAM roles with Amazon EC2
+    #   Auto Scaling to automatically enable applications running on your EC2
     #   instances to securely access other AWS resources. For more
     #   information, see [Launch Auto Scaling Instances with an IAM Role][1]
-    #   in the *Auto Scaling User Guide*.
+    #   in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/us-iam-role.html
+    #   [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/us-iam-role.html
     # @option options [Boolean] :ebs_optimized
     #   Indicates whether the instance is optimized for Amazon EBS I/O. By
     #   default, the instance is not optimized for EBS I/O. The optimization
@@ -404,7 +404,7 @@ module Aws::AutoScaling
     #   Used for groups that launch instances into a virtual private cloud
     #   (VPC). Specifies whether to assign a public IP address to each
     #   instance. For more information, see [Launching Auto Scaling Instances
-    #   in a VPC][1] in the *Auto Scaling User Guide*.
+    #   in a VPC][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #   If you specify this parameter, be sure to specify at least one subnet
     #   when you create your group.
@@ -416,7 +416,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html
+    #   [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html
     # @option options [String] :placement_tenancy
     #   The tenancy of the instance. An instance with a tenancy of `dedicated`
     #   runs on single-tenant hardware and can only be launched into a VPC.
@@ -429,13 +429,13 @@ module Aws::AutoScaling
     #   when you create your group.
     #
     #   For more information, see [Launching Auto Scaling Instances in a
-    #   VPC][1] in the *Auto Scaling User Guide*.
+    #   VPC][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #   Valid values: `default` \| `dedicated`
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html
+    #   [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html
     # @return [LaunchConfiguration]
     def create_launch_configuration(options = {})
       resp = @client.create_launch_configuration(options)
@@ -455,11 +455,11 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :activity_ids
-    #   The activity IDs of the desired scaling activities. If you omit this
-    #   parameter, all activities for the past six weeks are described. If you
-    #   specify an Auto Scaling group, the results are limited to that group.
-    #   The list of requested activities cannot contain more than 50 items. If
-    #   unknown activities are requested, they are ignored with no error.
+    #   The activity IDs of the desired scaling activities. You can specify up
+    #   to 50 IDs. If you omit this parameter, all activities for the past six
+    #   weeks are described. If unknown activities are requested, they are
+    #   ignored with no error. If you specify an Auto Scaling group, the
+    #   results are limited to that group.
     # @option options [String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
     # @return [Activity::Collection]
@@ -506,8 +506,9 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :auto_scaling_group_names
-    #   The names of the Auto Scaling groups. If you omit this parameter, all
-    #   Auto Scaling groups are described.
+    #   The names of the Auto Scaling groups. You can specify up to
+    #   `MaxRecords` names. If you omit this parameter, all Auto Scaling
+    #   groups are described.
     # @return [AutoScalingGroup::Collection]
     def groups(options = {})
       batches = Enumerator.new do |y|
@@ -534,9 +535,9 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :instance_ids
-    #   The instances to describe; up to 50 instance IDs. If you omit this
-    #   parameter, all Auto Scaling instances are described. If you specify an
-    #   ID that does not exist, it is ignored with no error.
+    #   The IDs of the instances. You can specify up to `MaxRecords` IDs. If
+    #   you omit this parameter, all Auto Scaling instances are described. If
+    #   you specify an ID that does not exist, it is ignored with no error.
     # @return [Instance::Collection]
     def instances(options = {})
       batches = Enumerator.new do |y|
@@ -661,13 +662,10 @@ module Aws::AutoScaling
     # @option options [String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
     # @option options [Array<String>] :scheduled_action_names
-    #   Describes one or more scheduled actions. If you omit this parameter,
-    #   all scheduled actions are described. If you specify an unknown
-    #   scheduled action, it is ignored with no error.
-    #
-    #   You can describe up to a maximum of 50 instances with a single call.
-    #   If there are more items to return, the call returns a token. To get
-    #   the next set of items, repeat the call with the returned token.
+    #   The names of one or more scheduled actions. You can specify up to 50
+    #   actions. If you omit this parameter, all scheduled actions are
+    #   described. If you specify an unknown scheduled action, it is ignored
+    #   with no error.
     # @option options [Time,DateTime,Date,Integer,String] :start_time
     #   The earliest scheduled start time to return. If scheduled action names
     #   are provided, this parameter is ignored.

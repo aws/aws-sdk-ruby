@@ -1021,6 +1021,7 @@ module Aws::CloudFormation
     #           },
     #         ],
     #         administration_role_arn: "RoleARN",
+    #         execution_role_name: "ExecutionRoleName",
     #         client_request_token: "ClientRequestToken",
     #       }
     #
@@ -1135,12 +1136,23 @@ module Aws::CloudFormation
     #   Specify an IAM role only if you are using customized administrator
     #   roles to control which users or groups can manage specific stack
     #   sets within the same administrator account. For more information,
-    #   see [Define Permissions for Multiple Administrators][1] in the *AWS
-    #   CloudFormation User Guide*.
+    #   see [Prerequisites: Granting Permissions for Stack Set
+    #   Operations][1] in the *AWS CloudFormation User Guide*.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role_name
+    #   The name of the IAM execution role to use to create the stack set.
+    #   If you do not specify an execution role, AWS CloudFormation uses the
+    #   `AWSCloudFormationStackSetExecutionRole` role for the stack set
+    #   operation.
+    #
+    #   Specify an IAM role only if you are using customized execution roles
+    #   to control which stack resources users and groups can include in
+    #   their stack sets.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -1168,6 +1180,7 @@ module Aws::CloudFormation
       :capabilities,
       :tags,
       :administration_role_arn,
+      :execution_role_name,
       :client_request_token)
       include Aws::Structure
     end
@@ -3952,12 +3965,21 @@ module Aws::CloudFormation
     #
     #   Use customized administrator roles to control which users or groups
     #   can manage specific stack sets within the same administrator
-    #   account. For more information, see [Define Permissions for Multiple
-    #   Administrators][1] in the *AWS CloudFormation User Guide*.
+    #   account. For more information, see [Prerequisites: Granting
+    #   Permissions for Stack Set Operations][1] in the *AWS CloudFormation
+    #   User Guide*.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role_name
+    #   The name of the IAM execution role used to create or update the
+    #   stack set.
+    #
+    #   Use customized execution roles to control which stack resources
+    #   users and groups can include in their stack sets.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSet AWS API Documentation
@@ -3972,7 +3994,8 @@ module Aws::CloudFormation
       :capabilities,
       :tags,
       :stack_set_arn,
-      :administration_role_arn)
+      :administration_role_arn,
+      :execution_role_name)
       include Aws::Structure
     end
 
@@ -4044,6 +4067,14 @@ module Aws::CloudFormation
     #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
     #   @return [String]
     #
+    # @!attribute [rw] execution_role_name
+    #   The name of the IAM execution role used to create or update the
+    #   stack set.
+    #
+    #   Use customized execution roles to control which stack resources
+    #   users and groups can include in their stack sets.
+    #   @return [String]
+    #
     # @!attribute [rw] creation_timestamp
     #   The time at which the operation was initiated. Note that the
     #   creation times for the stack set operation might differ from the
@@ -4070,6 +4101,7 @@ module Aws::CloudFormation
       :operation_preferences,
       :retain_stacks,
       :administration_role_arn,
+      :execution_role_name,
       :creation_timestamp,
       :end_timestamp)
       include Aws::Structure
@@ -4774,7 +4806,7 @@ module Aws::CloudFormation
     #   data as a hash:
     #
     #       {
-    #         stack_set_name: "StackSetName", # required
+    #         stack_set_name: "StackSetNameOrId", # required
     #         accounts: ["Account"], # required
     #         regions: ["Region"], # required
     #         parameter_overrides: [
@@ -4949,7 +4981,10 @@ module Aws::CloudFormation
     #           max_concurrent_percentage: 1,
     #         },
     #         administration_role_arn: "RoleARN",
+    #         execution_role_name: "ExecutionRoleName",
     #         operation_id: "ClientRequestToken",
+    #         accounts: ["Account"],
+    #         regions: ["Region"],
     #       }
     #
     # @!attribute [rw] stack_set_name
@@ -5107,6 +5142,23 @@ module Aws::CloudFormation
     #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
     #   @return [String]
     #
+    # @!attribute [rw] execution_role_name
+    #   The name of the IAM execution role to use to update the stack set.
+    #   If you do not specify an execution role, AWS CloudFormation uses the
+    #   `AWSCloudFormationStackSetExecutionRole` role for the stack set
+    #   operation.
+    #
+    #   Specify an IAM role only if you are using customized execution roles
+    #   to control which stack resources users and groups can include in
+    #   their stack sets.
+    #
+    #   If you specify a customized execution role, AWS CloudFormation uses
+    #   that role to update the stack. If you do not specify a customized
+    #   execution role, AWS CloudFormation performs the update using the
+    #   role previously associated with the stack set, so long as you have
+    #   permissions to perform operations on the stack set.
+    #   @return [String]
+    #
     # @!attribute [rw] operation_id
     #   The unique ID for this stack set operation.
     #
@@ -5126,6 +5178,44 @@ module Aws::CloudFormation
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] accounts
+    #   The accounts in which to update associated stack instances. If you
+    #   specify accounts, you must also specify the regions in which to
+    #   update stack set instances.
+    #
+    #   To update *all* the stack instances associated with this stack set,
+    #   do not specify the `Accounts` or `Regions` properties.
+    #
+    #   If the stack set update includes changes to the template (that is,
+    #   if the `TemplateBody` or `TemplateURL` properties are specified), or
+    #   the `Parameters` property, AWS CloudFormation marks all stack
+    #   instances with a status of `OUTDATED` prior to updating the stack
+    #   instances in the specified accounts and regions. If the stack set
+    #   update does not include changes to the template or parameters, AWS
+    #   CloudFormation updates the stack instances in the specified accounts
+    #   and regions, while leaving all other stack instances with their
+    #   existing stack instance status.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] regions
+    #   The regions in which to update associated stack instances. If you
+    #   specify regions, you must also specify accounts in which to update
+    #   stack set instances.
+    #
+    #   To update *all* the stack instances associated with this stack set,
+    #   do not specify the `Accounts` or `Regions` properties.
+    #
+    #   If the stack set update includes changes to the template (that is,
+    #   if the `TemplateBody` or `TemplateURL` properties are specified), or
+    #   the `Parameters` property, AWS CloudFormation marks all stack
+    #   instances with a status of `OUTDATED` prior to updating the stack
+    #   instances in the specified accounts and regions. If the stack set
+    #   update does not include changes to the template or parameters, AWS
+    #   CloudFormation updates the stack instances in the specified accounts
+    #   and regions, while leaving all other stack instances with their
+    #   existing stack instance status.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackSetInput AWS API Documentation
     #
     class UpdateStackSetInput < Struct.new(
@@ -5139,7 +5229,10 @@ module Aws::CloudFormation
       :tags,
       :operation_preferences,
       :administration_role_arn,
-      :operation_id)
+      :execution_role_name,
+      :operation_id,
+      :accounts,
+      :regions)
       include Aws::Structure
     end
 

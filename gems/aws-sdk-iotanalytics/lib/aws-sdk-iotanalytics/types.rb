@@ -200,6 +200,17 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # Statistics information about the channel.
+    #
+    # @!attribute [rw] size
+    #   The estimated size of the channel.
+    #   @return [Types::EstimatedResourceSize]
+    #
+    class ChannelStatistics < Struct.new(
+      :size)
+      include Aws::Structure
+    end
+
     # A summary of information about a channel.
     #
     # @!attribute [rw] channel_name
@@ -226,6 +237,68 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # Information needed to run the "containerAction" to produce data set
+    # contents.
+    #
+    # @note When making an API call, you may pass ContainerDatasetAction
+    #   data as a hash:
+    #
+    #       {
+    #         image: "Image", # required
+    #         execution_role_arn: "RoleArn", # required
+    #         resource_configuration: { # required
+    #           compute_type: "ACU_1", # required, accepts ACU_1, ACU_2
+    #           volume_size_in_gb: 1, # required
+    #         },
+    #         variables: [
+    #           {
+    #             name: "VariableName", # required
+    #             string_value: "StringValue",
+    #             double_value: 1.0,
+    #             dataset_content_version_value: {
+    #               dataset_name: "DatasetName", # required
+    #             },
+    #             output_file_uri_value: {
+    #               file_name: "OutputFileName", # required
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] image
+    #   The ARN of the Docker container stored in your account. The Docker
+    #   container contains an application and needed support libraries and
+    #   is used to generate data set contents.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The ARN of the role which gives permission to the system to access
+    #   needed resources in order to run the "containerAction". This
+    #   includes, at minimum, permission to retrieve the data set contents
+    #   which are the input to the containerized application.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_configuration
+    #   Configuration of the resource which executes the
+    #   "containerAction".
+    #   @return [Types::ResourceConfiguration]
+    #
+    # @!attribute [rw] variables
+    #   The values of variables used within the context of the execution of
+    #   the containerized application (basically, parameters passed to the
+    #   application). Each variable must have a name and a value given by
+    #   one of "stringValue", "datasetContentVersionValue", or
+    #   "outputFileUriValue".
+    #   @return [Array<Types::Variable>]
+    #
+    class ContainerDatasetAction < Struct.new(
+      :image,
+      :execution_role_arn,
+      :resource_configuration,
+      :variables)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateChannelRequest
     #   data as a hash:
     #
@@ -235,6 +308,12 @@ module Aws::IoTAnalytics
     #           unlimited: false,
     #           number_of_days: 1,
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] channel_name
@@ -245,9 +324,14 @@ module Aws::IoTAnalytics
     #   How long, in days, message data is kept for the channel.
     #   @return [Types::RetentionPeriod]
     #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the channel.
+    #   @return [Array<Types::Tag>]
+    #
     class CreateChannelRequest < Struct.new(
       :channel_name,
-      :retention_period)
+      :retention_period,
+      :tags)
       include Aws::Structure
     end
 
@@ -286,6 +370,15 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # @!attribute [rw] version_id
+    #   The version ID of the data set contents which are being created.
+    #   @return [String]
+    #
+    class CreateDatasetContentResponse < Struct.new(
+      :version_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDatasetRequest
     #   data as a hash:
     #
@@ -296,6 +389,35 @@ module Aws::IoTAnalytics
     #             action_name: "DatasetActionName",
     #             query_action: {
     #               sql_query: "SqlQuery", # required
+    #               filters: [
+    #                 {
+    #                   delta_time: {
+    #                     offset_seconds: 1, # required
+    #                     time_expression: "TimeExpression", # required
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #             container_action: {
+    #               image: "Image", # required
+    #               execution_role_arn: "RoleArn", # required
+    #               resource_configuration: { # required
+    #                 compute_type: "ACU_1", # required, accepts ACU_1, ACU_2
+    #                 volume_size_in_gb: 1, # required
+    #               },
+    #               variables: [
+    #                 {
+    #                   name: "VariableName", # required
+    #                   string_value: "StringValue",
+    #                   double_value: 1.0,
+    #                   dataset_content_version_value: {
+    #                     dataset_name: "DatasetName", # required
+    #                   },
+    #                   output_file_uri_value: {
+    #                     file_name: "OutputFileName", # required
+    #                   },
+    #                 },
+    #               ],
     #             },
     #           },
     #         ],
@@ -304,6 +426,19 @@ module Aws::IoTAnalytics
     #             schedule: {
     #               expression: "ScheduleExpression",
     #             },
+    #             dataset: {
+    #               name: "DatasetName", # required
+    #             },
+    #           },
+    #         ],
+    #         retention_period: {
+    #           unlimited: false,
+    #           number_of_days: 1,
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
     #           },
     #         ],
     #       }
@@ -313,20 +448,33 @@ module Aws::IoTAnalytics
     #   @return [String]
     #
     # @!attribute [rw] actions
-    #   A list of actions that create the data set. Only one action is
-    #   supported at this time.
+    #   A list of actions that create the data set contents.
     #   @return [Array<Types::DatasetAction>]
     #
     # @!attribute [rw] triggers
-    #   A list of triggers. A trigger causes data set content to be
-    #   populated at a specified time or time interval. The list of triggers
-    #   can be empty or contain up to five **DataSetTrigger** objects.
+    #   A list of triggers. A trigger causes data set contents to be
+    #   populated at a specified time interval or when another data set's
+    #   contents are created. The list of triggers can be empty or contain
+    #   up to five **DataSetTrigger** objects.
     #   @return [Array<Types::DatasetTrigger>]
+    #
+    # @!attribute [rw] retention_period
+    #   \[Optional\] How long, in days, message data is kept for the data
+    #   set. If not given or set to null, the latest version of the dataset
+    #   content plus the latest succeeded version (if they are different)
+    #   are retained for at most 90 days.
+    #   @return [Types::RetentionPeriod]
+    #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the data set.
+    #   @return [Array<Types::Tag>]
     #
     class CreateDatasetRequest < Struct.new(
       :dataset_name,
       :actions,
-      :triggers)
+      :triggers,
+      :retention_period,
+      :tags)
       include Aws::Structure
     end
 
@@ -338,9 +486,14 @@ module Aws::IoTAnalytics
     #   The ARN of the data set.
     #   @return [String]
     #
+    # @!attribute [rw] retention_period
+    #   How long, in days, message data is kept for the data set.
+    #   @return [Types::RetentionPeriod]
+    #
     class CreateDatasetResponse < Struct.new(
       :dataset_name,
-      :dataset_arn)
+      :dataset_arn,
+      :retention_period)
       include Aws::Structure
     end
 
@@ -353,6 +506,12 @@ module Aws::IoTAnalytics
     #           unlimited: false,
     #           number_of_days: 1,
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] datastore_name
@@ -363,9 +522,14 @@ module Aws::IoTAnalytics
     #   How long, in days, message data is kept for the data store.
     #   @return [Types::RetentionPeriod]
     #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the data store.
+    #   @return [Array<Types::Tag>]
+    #
     class CreateDatastoreRequest < Struct.new(
       :datastore_name,
-      :retention_period)
+      :retention_period,
+      :tags)
       include Aws::Structure
     end
 
@@ -454,6 +618,12 @@ module Aws::IoTAnalytics
     #             },
     #           },
     #         ],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] pipeline_name
@@ -471,9 +641,14 @@ module Aws::IoTAnalytics
     #   normalize device data.
     #   @return [Array<Types::PipelineActivity>]
     #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the pipeline.
+    #   @return [Array<Types::Tag>]
+    #
     class CreatePipelineRequest < Struct.new(
       :pipeline_name,
-      :pipeline_activities)
+      :pipeline_activities,
+      :tags)
       include Aws::Structure
     end
 
@@ -502,7 +677,8 @@ module Aws::IoTAnalytics
     #   @return [String]
     #
     # @!attribute [rw] actions
-    #   The "DatasetAction" objects that create the data set.
+    #   The "DatasetAction" objects that automatically create the data set
+    #   contents.
     #   @return [Array<Types::DatasetAction>]
     #
     # @!attribute [rw] triggers
@@ -522,6 +698,11 @@ module Aws::IoTAnalytics
     #   The last time the data set was updated.
     #   @return [Time]
     #
+    # @!attribute [rw] retention_period
+    #   \[Optional\] How long, in days, message data is kept for the data
+    #   set.
+    #   @return [Types::RetentionPeriod]
+    #
     class Dataset < Struct.new(
       :name,
       :arn,
@@ -529,7 +710,8 @@ module Aws::IoTAnalytics
       :triggers,
       :status,
       :creation_time,
-      :last_update_time)
+      :last_update_time,
+      :retention_period)
       include Aws::Structure
     end
 
@@ -543,11 +725,41 @@ module Aws::IoTAnalytics
     #         action_name: "DatasetActionName",
     #         query_action: {
     #           sql_query: "SqlQuery", # required
+    #           filters: [
+    #             {
+    #               delta_time: {
+    #                 offset_seconds: 1, # required
+    #                 time_expression: "TimeExpression", # required
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         container_action: {
+    #           image: "Image", # required
+    #           execution_role_arn: "RoleArn", # required
+    #           resource_configuration: { # required
+    #             compute_type: "ACU_1", # required, accepts ACU_1, ACU_2
+    #             volume_size_in_gb: 1, # required
+    #           },
+    #           variables: [
+    #             {
+    #               name: "VariableName", # required
+    #               string_value: "StringValue",
+    #               double_value: 1.0,
+    #               dataset_content_version_value: {
+    #                 dataset_name: "DatasetName", # required
+    #               },
+    #               output_file_uri_value: {
+    #                 file_name: "OutputFileName", # required
+    #               },
+    #             },
+    #           ],
     #         },
     #       }
     #
     # @!attribute [rw] action_name
-    #   The name of the data set action.
+    #   The name of the data set action by which data set contents are
+    #   automatically created.
     #   @return [String]
     #
     # @!attribute [rw] query_action
@@ -555,26 +767,98 @@ module Aws::IoTAnalytics
     #   modify the message.
     #   @return [Types::SqlQueryDatasetAction]
     #
+    # @!attribute [rw] container_action
+    #   Information which allows the system to run a containerized
+    #   application in order to create the data set contents. The
+    #   application must be in a Docker container along with any needed
+    #   support libraries.
+    #   @return [Types::ContainerDatasetAction]
+    #
     class DatasetAction < Struct.new(
       :action_name,
-      :query_action)
+      :query_action,
+      :container_action)
       include Aws::Structure
     end
 
-    # The state of the data set and the reason it is in this state.
+    # @!attribute [rw] action_name
+    #   The name of the action which automatically creates the data set's
+    #   contents.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_type
+    #   The type of action by which the data set's contents are
+    #   automatically created.
+    #   @return [String]
+    #
+    class DatasetActionSummary < Struct.new(
+      :action_name,
+      :action_type)
+      include Aws::Structure
+    end
+
+    # The state of the data set contents and the reason they are in this
+    # state.
     #
     # @!attribute [rw] state
-    #   The state of the data set. Can be one of "CREATING", "SUCCEEDED"
-    #   or "FAILED".
+    #   The state of the data set contents. Can be one of "READY",
+    #   "CREATING", "SUCCEEDED" or "FAILED".
     #   @return [String]
     #
     # @!attribute [rw] reason
-    #   The reason the data set is in this state.
+    #   The reason the data set contents are in this state.
     #   @return [String]
     #
     class DatasetContentStatus < Struct.new(
       :state,
       :reason)
+      include Aws::Structure
+    end
+
+    # Summary information about data set contents.
+    #
+    # @!attribute [rw] version
+    #   The version of the data set contents.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the data set contents.
+    #   @return [Types::DatasetContentStatus]
+    #
+    # @!attribute [rw] creation_time
+    #   The actual time the creation of the data set contents was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] schedule_time
+    #   The time the creation of the data set contents was scheduled to
+    #   start.
+    #   @return [Time]
+    #
+    class DatasetContentSummary < Struct.new(
+      :version,
+      :status,
+      :creation_time,
+      :schedule_time)
+      include Aws::Structure
+    end
+
+    # The data set whose latest contents will be used as input to the
+    # notebook or application.
+    #
+    # @note When making an API call, you may pass DatasetContentVersionValue
+    #   data as a hash:
+    #
+    #       {
+    #         dataset_name: "DatasetName", # required
+    #       }
+    #
+    # @!attribute [rw] dataset_name
+    #   The name of the data set whose latest contents will be used as input
+    #   to the notebook or application.
+    #   @return [String]
+    #
+    class DatasetContentVersionValue < Struct.new(
+      :dataset_name)
       include Aws::Structure
     end
 
@@ -612,11 +896,24 @@ module Aws::IoTAnalytics
     #   The last time the data set was updated.
     #   @return [Time]
     #
+    # @!attribute [rw] triggers
+    #   A list of triggers. A trigger causes data set content to be
+    #   populated at a specified time interval or when another data set is
+    #   populated. The list of triggers can be empty or contain up to five
+    #   DataSetTrigger objects
+    #   @return [Array<Types::DatasetTrigger>]
+    #
+    # @!attribute [rw] actions
+    #   A list of "DataActionSummary" objects.
+    #   @return [Array<Types::DatasetActionSummary>]
+    #
     class DatasetSummary < Struct.new(
       :dataset_name,
       :status,
       :creation_time,
-      :last_update_time)
+      :last_update_time,
+      :triggers,
+      :actions)
       include Aws::Structure
     end
 
@@ -630,14 +927,23 @@ module Aws::IoTAnalytics
     #         schedule: {
     #           expression: "ScheduleExpression",
     #         },
+    #         dataset: {
+    #           name: "DatasetName", # required
+    #         },
     #       }
     #
     # @!attribute [rw] schedule
     #   The "Schedule" when the trigger is initiated.
     #   @return [Types::Schedule]
     #
+    # @!attribute [rw] dataset
+    #   The data set whose content creation will trigger the creation of
+    #   this data set's contents.
+    #   @return [Types::TriggeringDataset]
+    #
     class DatasetTrigger < Struct.new(
-      :schedule)
+      :schedule,
+      :dataset)
       include Aws::Structure
     end
 
@@ -711,6 +1017,17 @@ module Aws::IoTAnalytics
     class DatastoreActivity < Struct.new(
       :name,
       :datastore_name)
+      include Aws::Structure
+    end
+
+    # Statistical information about the data store.
+    #
+    # @!attribute [rw] size
+    #   The estimated size of the data store.
+    #   @return [Types::EstimatedResourceSize]
+    #
+    class DatastoreStatistics < Struct.new(
+      :size)
       include Aws::Structure
     end
 
@@ -829,19 +1146,62 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # When you create data set contents using message data from a specified
+    # time frame, some message data may still be "in flight" when
+    # processing begins, and so will not arrive in time to be processed. Use
+    # this field to make allowances for the "in flight" time of your
+    # message data, so that data not processed from the previous time frame
+    # will be included with the next time frame. Without this, missed
+    # message data would be excluded from processing during the next time
+    # frame as well, because its timestamp places it within the previous
+    # time frame.
+    #
+    # @note When making an API call, you may pass DeltaTime
+    #   data as a hash:
+    #
+    #       {
+    #         offset_seconds: 1, # required
+    #         time_expression: "TimeExpression", # required
+    #       }
+    #
+    # @!attribute [rw] offset_seconds
+    #   The number of seconds of estimated "in flight" lag time of message
+    #   data.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] time_expression
+    #   An expression by which the time of the message data may be
+    #   determined. This may be the name of a timestamp field, or a SQL
+    #   expression which is used to derive the time the message data was
+    #   generated.
+    #   @return [String]
+    #
+    class DeltaTime < Struct.new(
+      :offset_seconds,
+      :time_expression)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeChannelRequest
     #   data as a hash:
     #
     #       {
     #         channel_name: "ChannelName", # required
+    #         include_statistics: false,
     #       }
     #
     # @!attribute [rw] channel_name
     #   The name of the channel whose information is retrieved.
     #   @return [String]
     #
+    # @!attribute [rw] include_statistics
+    #   If true, additional statistical information about the channel is
+    #   included in the response.
+    #   @return [Boolean]
+    #
     class DescribeChannelRequest < Struct.new(
-      :channel_name)
+      :channel_name,
+      :include_statistics)
       include Aws::Structure
     end
 
@@ -849,8 +1209,14 @@ module Aws::IoTAnalytics
     #   An object that contains information about the channel.
     #   @return [Types::Channel]
     #
+    # @!attribute [rw] statistics
+    #   Statistics about the channel. Included if the 'includeStatistics'
+    #   parameter is set to true in the request.
+    #   @return [Types::ChannelStatistics]
+    #
     class DescribeChannelResponse < Struct.new(
-      :channel)
+      :channel,
+      :statistics)
       include Aws::Structure
     end
 
@@ -884,14 +1250,21 @@ module Aws::IoTAnalytics
     #
     #       {
     #         datastore_name: "DatastoreName", # required
+    #         include_statistics: false,
     #       }
     #
     # @!attribute [rw] datastore_name
     #   The name of the data store
     #   @return [String]
     #
+    # @!attribute [rw] include_statistics
+    #   If true, additional statistical information about the datastore is
+    #   included in the response.
+    #   @return [Boolean]
+    #
     class DescribeDatastoreRequest < Struct.new(
-      :datastore_name)
+      :datastore_name,
+      :include_statistics)
       include Aws::Structure
     end
 
@@ -899,8 +1272,14 @@ module Aws::IoTAnalytics
     #   Information about the data store.
     #   @return [Types::Datastore]
     #
+    # @!attribute [rw] statistics
+    #   Additional statistical information about the data store. Included if
+    #   the 'includeStatistics' parameter is set to true in the request.
+    #   @return [Types::DatastoreStatistics]
+    #
     class DescribeDatastoreResponse < Struct.new(
-      :datastore)
+      :datastore,
+      :statistics)
       include Aws::Structure
     end
 
@@ -1031,6 +1410,22 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # The estimated size of the resource.
+    #
+    # @!attribute [rw] estimated_size_in_bytes
+    #   The estimated size of the resource in bytes.
+    #   @return [Float]
+    #
+    # @!attribute [rw] estimated_on
+    #   The time when the estimate of the size of the resource was made.
+    #   @return [Time]
+    #
+    class EstimatedResourceSize < Struct.new(
+      :estimated_size_in_bytes,
+      :estimated_on)
+      include Aws::Structure
+    end
+
     # An activity that filters a message based on its attributes.
     #
     # @note When making an API call, you may pass FilterActivity
@@ -1047,7 +1442,7 @@ module Aws::IoTAnalytics
     #   @return [String]
     #
     # @!attribute [rw] filter
-    #   An expression that looks like an SQL WHERE clause that must return a
+    #   An expression that looks like a SQL WHERE clause that must return a
     #   Boolean value.
     #   @return [String]
     #
@@ -1185,6 +1580,50 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListDatasetContentsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dataset_name: "DatasetName", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] dataset_name
+    #   The name of the data set whose contents information you want to
+    #   list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in this request.
+    #   @return [Integer]
+    #
+    class ListDatasetContentsRequest < Struct.new(
+      :dataset_name,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_content_summaries
+    #   Summary information about data set contents that have been created.
+    #   @return [Array<Types::DatasetContentSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results, or `null` if there
+    #   are no more results.
+    #   @return [String]
+    #
+    class ListDatasetContentsResponse < Struct.new(
+      :dataset_content_summaries,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListDatasetsRequest
     #   data as a hash:
     #
@@ -1302,6 +1741,31 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource whose tags you want to list.
+    #   @return [String]
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags (metadata) which you have assigned to the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # Information about logging options.
     #
     # @note When making an API call, you may pass LoggingOptions
@@ -1383,16 +1847,39 @@ module Aws::IoTAnalytics
     #       }
     #
     # @!attribute [rw] message_id
-    #   The ID you wish to assign to the message.
+    #   The ID you wish to assign to the message. Each "messageId" must be
+    #   unique within each batch sent.
     #   @return [String]
     #
     # @!attribute [rw] payload
-    #   The payload of the message.
+    #   The payload of the message. This may be a JSON string or a
+    #   Base64-encoded string representing binary data (in which case you
+    #   must decode it by means of a pipeline activity).
     #   @return [String]
     #
     class Message < Struct.new(
       :message_id,
       :payload)
+      include Aws::Structure
+    end
+
+    # The URI of the location where data set contents are stored, usually
+    # the URI of a file in an S3 bucket.
+    #
+    # @note When making an API call, you may pass OutputFileUriValue
+    #   data as a hash:
+    #
+    #       {
+    #         file_name: "OutputFileName", # required
+    #       }
+    #
+    # @!attribute [rw] file_name
+    #   The URI of the location where data set contents are stored, usually
+    #   the URI of a file in an S3 bucket.
+    #   @return [String]
+    #
+    class OutputFileUriValue < Struct.new(
+      :file_name)
       include Aws::Structure
     end
 
@@ -1600,6 +2087,37 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # Information which is used to filter message data, to segregate it
+    # according to the time frame in which it arrives.
+    #
+    # @note When making an API call, you may pass QueryFilter
+    #   data as a hash:
+    #
+    #       {
+    #         delta_time: {
+    #           offset_seconds: 1, # required
+    #           time_expression: "TimeExpression", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] delta_time
+    #   Used to limit data to that which has arrived since the last
+    #   execution of the action. When you create data set contents using
+    #   message data from a specified time frame, some message data may
+    #   still be "in flight" when processing begins, and so will not
+    #   arrive in time to be processed. Use this field to make allowances
+    #   for the "in flight" time of you message data, so that data not
+    #   processed from a previous time frame will be included with the next
+    #   time frame. Without this, missed message data would be excluded from
+    #   processing during the next time frame as well, because its timestamp
+    #   places it within the previous time frame.
+    #   @return [Types::DeltaTime]
+    #
+    class QueryFilter < Struct.new(
+      :delta_time)
+      include Aws::Structure
+    end
+
     # An activity that removes attributes from a message.
     #
     # @note When making an API call, you may pass RemoveAttributesActivity
@@ -1648,6 +2166,34 @@ module Aws::IoTAnalytics
       :id,
       :status,
       :creation_time)
+      include Aws::Structure
+    end
+
+    # The configuration of the resource used to execute the
+    # "containerAction".
+    #
+    # @note When making an API call, you may pass ResourceConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         compute_type: "ACU_1", # required, accepts ACU_1, ACU_2
+    #         volume_size_in_gb: 1, # required
+    #       }
+    #
+    # @!attribute [rw] compute_type
+    #   The type of the compute resource used to execute the
+    #   "containerAction". Possible values are: ACU\_1 (vCPU=4,
+    #   memory=16GiB) or ACU\_2 (vCPU=8, memory=32GiB).
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_size_in_gb
+    #   The size (in GB) of the persistent storage available to the resource
+    #   instance used to execute the "containerAction" (min: 1, max: 50).
+    #   @return [Integer]
+    #
+    class ResourceConfiguration < Struct.new(
+      :compute_type,
+      :volume_size_in_gb)
       include Aws::Structure
     end
 
@@ -1886,14 +2432,27 @@ module Aws::IoTAnalytics
     #
     #       {
     #         sql_query: "SqlQuery", # required
+    #         filters: [
+    #           {
+    #             delta_time: {
+    #               offset_seconds: 1, # required
+    #               time_expression: "TimeExpression", # required
+    #             },
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] sql_query
-    #   An SQL query string.
+    #   A SQL query string.
     #   @return [String]
     #
+    # @!attribute [rw] filters
+    #   Pre-filters applied to message data.
+    #   @return [Array<Types::QueryFilter>]
+    #
     class SqlQueryDatasetAction < Struct.new(
-      :sql_query)
+      :sql_query,
+      :filters)
       include Aws::Structure
     end
 
@@ -1934,6 +2493,103 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # A set of key/value pairs which are used to manage the resource.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The tag's key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The tag's value.
+    #   @return [String]
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource whose tags will be modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The new or modified tags for the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # Information about the data set whose content generation will trigger
+    # the new data set content generation.
+    #
+    # @note When making an API call, you may pass TriggeringDataset
+    #   data as a hash:
+    #
+    #       {
+    #         name: "DatasetName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data set whose content generation will trigger the
+    #   new data set content generation.
+    #   @return [String]
+    #
+    class TriggeringDataset < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource whose tags will be removed.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The keys of those tags which will be removed.
+    #   @return [Array<String>]
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateChannelRequest
     #   data as a hash:
     #
@@ -1969,6 +2625,35 @@ module Aws::IoTAnalytics
     #             action_name: "DatasetActionName",
     #             query_action: {
     #               sql_query: "SqlQuery", # required
+    #               filters: [
+    #                 {
+    #                   delta_time: {
+    #                     offset_seconds: 1, # required
+    #                     time_expression: "TimeExpression", # required
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #             container_action: {
+    #               image: "Image", # required
+    #               execution_role_arn: "RoleArn", # required
+    #               resource_configuration: { # required
+    #                 compute_type: "ACU_1", # required, accepts ACU_1, ACU_2
+    #                 volume_size_in_gb: 1, # required
+    #               },
+    #               variables: [
+    #                 {
+    #                   name: "VariableName", # required
+    #                   string_value: "StringValue",
+    #                   double_value: 1.0,
+    #                   dataset_content_version_value: {
+    #                     dataset_name: "DatasetName", # required
+    #                   },
+    #                   output_file_uri_value: {
+    #                     file_name: "OutputFileName", # required
+    #                   },
+    #                 },
+    #               ],
     #             },
     #           },
     #         ],
@@ -1977,8 +2662,15 @@ module Aws::IoTAnalytics
     #             schedule: {
     #               expression: "ScheduleExpression",
     #             },
+    #             dataset: {
+    #               name: "DatasetName", # required
+    #             },
     #           },
     #         ],
+    #         retention_period: {
+    #           unlimited: false,
+    #           number_of_days: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] dataset_name
@@ -1986,8 +2678,7 @@ module Aws::IoTAnalytics
     #   @return [String]
     #
     # @!attribute [rw] actions
-    #   A list of "DatasetAction" objects. Only one action is supported at
-    #   this time.
+    #   A list of "DatasetAction" objects.
     #   @return [Array<Types::DatasetAction>]
     #
     # @!attribute [rw] triggers
@@ -1995,10 +2686,15 @@ module Aws::IoTAnalytics
     #   contain up to five **DataSetTrigger** objects.
     #   @return [Array<Types::DatasetTrigger>]
     #
+    # @!attribute [rw] retention_period
+    #   How long, in days, message data is kept for the data set.
+    #   @return [Types::RetentionPeriod]
+    #
     class UpdateDatasetRequest < Struct.new(
       :dataset_name,
       :actions,
-      :triggers)
+      :triggers,
+      :retention_period)
       include Aws::Structure
     end
 
@@ -2113,6 +2809,57 @@ module Aws::IoTAnalytics
     class UpdatePipelineRequest < Struct.new(
       :pipeline_name,
       :pipeline_activities)
+      include Aws::Structure
+    end
+
+    # An instance of a variable to be passed to the "containerAction"
+    # execution. Each variable must have a name and a value given by one of
+    # "stringValue", "datasetContentVersionValue", or
+    # "outputFileUriValue".
+    #
+    # @note When making an API call, you may pass Variable
+    #   data as a hash:
+    #
+    #       {
+    #         name: "VariableName", # required
+    #         string_value: "StringValue",
+    #         double_value: 1.0,
+    #         dataset_content_version_value: {
+    #           dataset_name: "DatasetName", # required
+    #         },
+    #         output_file_uri_value: {
+    #           file_name: "OutputFileName", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the variable.
+    #   @return [String]
+    #
+    # @!attribute [rw] string_value
+    #   The value of the variable as a string.
+    #   @return [String]
+    #
+    # @!attribute [rw] double_value
+    #   The value of the variable as a double (numeric).
+    #   @return [Float]
+    #
+    # @!attribute [rw] dataset_content_version_value
+    #   The value of the variable as a structure that specifies a data set
+    #   content version.
+    #   @return [Types::DatasetContentVersionValue]
+    #
+    # @!attribute [rw] output_file_uri_value
+    #   The value of the variable as a structure that specifies an output
+    #   file URI.
+    #   @return [Types::OutputFileUriValue]
+    #
+    class Variable < Struct.new(
+      :name,
+      :string_value,
+      :double_value,
+      :dataset_content_version_value,
+      :output_file_uri_value)
       include Aws::Structure
     end
 

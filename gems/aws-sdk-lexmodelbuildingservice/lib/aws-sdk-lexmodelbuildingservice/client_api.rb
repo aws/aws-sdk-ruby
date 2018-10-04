@@ -762,12 +762,15 @@ module Aws::LexModelBuildingService
       api.version = "2017-04-19"
 
       api.metadata = {
+        "apiVersion" => "2017-04-19",
         "endpointPrefix" => "models.lex",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "serviceFullName" => "Amazon Lex Model Building Service",
+        "serviceId" => "Lex Model Building Service",
         "signatureVersion" => "v4",
         "signingName" => "lex",
+        "uid" => "lex-models-2017-04-19",
       }
 
       api.add_operation(:create_bot_version, Seahorse::Model::Operation.new.tap do |o|

@@ -21,6 +21,15 @@ module Aws::DynamoDB
     AttributeValue = Shapes::StructureShape.new(name: 'AttributeValue')
     AttributeValueList = Shapes::ListShape.new(name: 'AttributeValueList')
     AttributeValueUpdate = Shapes::StructureShape.new(name: 'AttributeValueUpdate')
+    AutoScalingPolicyDescription = Shapes::StructureShape.new(name: 'AutoScalingPolicyDescription')
+    AutoScalingPolicyDescriptionList = Shapes::ListShape.new(name: 'AutoScalingPolicyDescriptionList')
+    AutoScalingPolicyName = Shapes::StringShape.new(name: 'AutoScalingPolicyName')
+    AutoScalingPolicyUpdate = Shapes::StructureShape.new(name: 'AutoScalingPolicyUpdate')
+    AutoScalingRoleArn = Shapes::StringShape.new(name: 'AutoScalingRoleArn')
+    AutoScalingSettingsDescription = Shapes::StructureShape.new(name: 'AutoScalingSettingsDescription')
+    AutoScalingSettingsUpdate = Shapes::StructureShape.new(name: 'AutoScalingSettingsUpdate')
+    AutoScalingTargetTrackingScalingPolicyConfigurationDescription = Shapes::StructureShape.new(name: 'AutoScalingTargetTrackingScalingPolicyConfigurationDescription')
+    AutoScalingTargetTrackingScalingPolicyConfigurationUpdate = Shapes::StructureShape.new(name: 'AutoScalingTargetTrackingScalingPolicyConfigurationUpdate')
     Backfilling = Shapes::BooleanShape.new(name: 'Backfilling')
     BackupArn = Shapes::StringShape.new(name: 'BackupArn')
     BackupCreationDateTime = Shapes::TimestampShape.new(name: 'BackupCreationDateTime')
@@ -33,6 +42,8 @@ module Aws::DynamoDB
     BackupStatus = Shapes::StringShape.new(name: 'BackupStatus')
     BackupSummaries = Shapes::ListShape.new(name: 'BackupSummaries')
     BackupSummary = Shapes::StructureShape.new(name: 'BackupSummary')
+    BackupType = Shapes::StringShape.new(name: 'BackupType')
+    BackupTypeFilter = Shapes::StringShape.new(name: 'BackupTypeFilter')
     BackupsInputLimit = Shapes::IntegerShape.new(name: 'BackupsInputLimit')
     BatchGetItemInput = Shapes::StructureShape.new(name: 'BatchGetItemInput')
     BatchGetItemOutput = Shapes::StructureShape.new(name: 'BatchGetItemOutput')
@@ -80,6 +91,8 @@ module Aws::DynamoDB
     DescribeBackupOutput = Shapes::StructureShape.new(name: 'DescribeBackupOutput')
     DescribeContinuousBackupsInput = Shapes::StructureShape.new(name: 'DescribeContinuousBackupsInput')
     DescribeContinuousBackupsOutput = Shapes::StructureShape.new(name: 'DescribeContinuousBackupsOutput')
+    DescribeEndpointsRequest = Shapes::StructureShape.new(name: 'DescribeEndpointsRequest')
+    DescribeEndpointsResponse = Shapes::StructureShape.new(name: 'DescribeEndpointsResponse')
     DescribeGlobalTableInput = Shapes::StructureShape.new(name: 'DescribeGlobalTableInput')
     DescribeGlobalTableOutput = Shapes::StructureShape.new(name: 'DescribeGlobalTableOutput')
     DescribeGlobalTableSettingsInput = Shapes::StructureShape.new(name: 'DescribeGlobalTableSettingsInput')
@@ -90,6 +103,9 @@ module Aws::DynamoDB
     DescribeTableOutput = Shapes::StructureShape.new(name: 'DescribeTableOutput')
     DescribeTimeToLiveInput = Shapes::StructureShape.new(name: 'DescribeTimeToLiveInput')
     DescribeTimeToLiveOutput = Shapes::StructureShape.new(name: 'DescribeTimeToLiveOutput')
+    Double = Shapes::FloatShape.new(name: 'Double')
+    Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
+    Endpoints = Shapes::ListShape.new(name: 'Endpoints')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExpectedAttributeMap = Shapes::MapShape.new(name: 'ExpectedAttributeMap')
     ExpectedAttributeValue = Shapes::StructureShape.new(name: 'ExpectedAttributeValue')
@@ -121,6 +137,7 @@ module Aws::DynamoDB
     IndexNotFoundException = Shapes::StructureShape.new(name: 'IndexNotFoundException')
     IndexStatus = Shapes::StringShape.new(name: 'IndexStatus')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    IntegerObject = Shapes::IntegerShape.new(name: 'IntegerObject')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
     InvalidRestoreTimeException = Shapes::StructureShape.new(name: 'InvalidRestoreTimeException')
     ItemCollectionKeyAttributeMap = Shapes::MapShape.new(name: 'ItemCollectionKeyAttributeMap')
@@ -132,6 +149,8 @@ module Aws::DynamoDB
     ItemCollectionSizeLimitExceededException = Shapes::StructureShape.new(name: 'ItemCollectionSizeLimitExceededException')
     ItemCount = Shapes::IntegerShape.new(name: 'ItemCount')
     ItemList = Shapes::ListShape.new(name: 'ItemList')
+    KMSMasterKeyArn = Shapes::StringShape.new(name: 'KMSMasterKeyArn')
+    KMSMasterKeyId = Shapes::StringShape.new(name: 'KMSMasterKeyId')
     Key = Shapes::MapShape.new(name: 'Key')
     KeyConditions = Shapes::MapShape.new(name: 'KeyConditions')
     KeyExpression = Shapes::StringShape.new(name: 'KeyExpression')
@@ -218,6 +237,7 @@ module Aws::DynamoDB
     SSEEnabled = Shapes::BooleanShape.new(name: 'SSEEnabled')
     SSESpecification = Shapes::StructureShape.new(name: 'SSESpecification')
     SSEStatus = Shapes::StringShape.new(name: 'SSEStatus')
+    SSEType = Shapes::StringShape.new(name: 'SSEType')
     ScalarAttributeType = Shapes::StringShape.new(name: 'ScalarAttributeType')
     ScanInput = Shapes::StructureShape.new(name: 'ScanInput')
     ScanOutput = Shapes::StructureShape.new(name: 'ScanOutput')
@@ -307,6 +327,42 @@ module Aws::DynamoDB
     AttributeValueUpdate.add_member(:action, Shapes::ShapeRef.new(shape: AttributeAction, location_name: "Action"))
     AttributeValueUpdate.struct_class = Types::AttributeValueUpdate
 
+    AutoScalingPolicyDescription.add_member(:policy_name, Shapes::ShapeRef.new(shape: AutoScalingPolicyName, location_name: "PolicyName"))
+    AutoScalingPolicyDescription.add_member(:target_tracking_scaling_policy_configuration, Shapes::ShapeRef.new(shape: AutoScalingTargetTrackingScalingPolicyConfigurationDescription, location_name: "TargetTrackingScalingPolicyConfiguration"))
+    AutoScalingPolicyDescription.struct_class = Types::AutoScalingPolicyDescription
+
+    AutoScalingPolicyDescriptionList.member = Shapes::ShapeRef.new(shape: AutoScalingPolicyDescription)
+
+    AutoScalingPolicyUpdate.add_member(:policy_name, Shapes::ShapeRef.new(shape: AutoScalingPolicyName, location_name: "PolicyName"))
+    AutoScalingPolicyUpdate.add_member(:target_tracking_scaling_policy_configuration, Shapes::ShapeRef.new(shape: AutoScalingTargetTrackingScalingPolicyConfigurationUpdate, required: true, location_name: "TargetTrackingScalingPolicyConfiguration"))
+    AutoScalingPolicyUpdate.struct_class = Types::AutoScalingPolicyUpdate
+
+    AutoScalingSettingsDescription.add_member(:minimum_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "MinimumUnits"))
+    AutoScalingSettingsDescription.add_member(:maximum_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "MaximumUnits"))
+    AutoScalingSettingsDescription.add_member(:auto_scaling_disabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "AutoScalingDisabled"))
+    AutoScalingSettingsDescription.add_member(:auto_scaling_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "AutoScalingRoleArn"))
+    AutoScalingSettingsDescription.add_member(:scaling_policies, Shapes::ShapeRef.new(shape: AutoScalingPolicyDescriptionList, location_name: "ScalingPolicies"))
+    AutoScalingSettingsDescription.struct_class = Types::AutoScalingSettingsDescription
+
+    AutoScalingSettingsUpdate.add_member(:minimum_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "MinimumUnits"))
+    AutoScalingSettingsUpdate.add_member(:maximum_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "MaximumUnits"))
+    AutoScalingSettingsUpdate.add_member(:auto_scaling_disabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "AutoScalingDisabled"))
+    AutoScalingSettingsUpdate.add_member(:auto_scaling_role_arn, Shapes::ShapeRef.new(shape: AutoScalingRoleArn, location_name: "AutoScalingRoleArn"))
+    AutoScalingSettingsUpdate.add_member(:scaling_policy_update, Shapes::ShapeRef.new(shape: AutoScalingPolicyUpdate, location_name: "ScalingPolicyUpdate"))
+    AutoScalingSettingsUpdate.struct_class = Types::AutoScalingSettingsUpdate
+
+    AutoScalingTargetTrackingScalingPolicyConfigurationDescription.add_member(:disable_scale_in, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DisableScaleIn"))
+    AutoScalingTargetTrackingScalingPolicyConfigurationDescription.add_member(:scale_in_cooldown, Shapes::ShapeRef.new(shape: IntegerObject, location_name: "ScaleInCooldown"))
+    AutoScalingTargetTrackingScalingPolicyConfigurationDescription.add_member(:scale_out_cooldown, Shapes::ShapeRef.new(shape: IntegerObject, location_name: "ScaleOutCooldown"))
+    AutoScalingTargetTrackingScalingPolicyConfigurationDescription.add_member(:target_value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "TargetValue"))
+    AutoScalingTargetTrackingScalingPolicyConfigurationDescription.struct_class = Types::AutoScalingTargetTrackingScalingPolicyConfigurationDescription
+
+    AutoScalingTargetTrackingScalingPolicyConfigurationUpdate.add_member(:disable_scale_in, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DisableScaleIn"))
+    AutoScalingTargetTrackingScalingPolicyConfigurationUpdate.add_member(:scale_in_cooldown, Shapes::ShapeRef.new(shape: IntegerObject, location_name: "ScaleInCooldown"))
+    AutoScalingTargetTrackingScalingPolicyConfigurationUpdate.add_member(:scale_out_cooldown, Shapes::ShapeRef.new(shape: IntegerObject, location_name: "ScaleOutCooldown"))
+    AutoScalingTargetTrackingScalingPolicyConfigurationUpdate.add_member(:target_value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "TargetValue"))
+    AutoScalingTargetTrackingScalingPolicyConfigurationUpdate.struct_class = Types::AutoScalingTargetTrackingScalingPolicyConfigurationUpdate
+
     BackupDescription.add_member(:backup_details, Shapes::ShapeRef.new(shape: BackupDetails, location_name: "BackupDetails"))
     BackupDescription.add_member(:source_table_details, Shapes::ShapeRef.new(shape: SourceTableDetails, location_name: "SourceTableDetails"))
     BackupDescription.add_member(:source_table_feature_details, Shapes::ShapeRef.new(shape: SourceTableFeatureDetails, location_name: "SourceTableFeatureDetails"))
@@ -316,7 +372,9 @@ module Aws::DynamoDB
     BackupDetails.add_member(:backup_name, Shapes::ShapeRef.new(shape: BackupName, required: true, location_name: "BackupName"))
     BackupDetails.add_member(:backup_size_bytes, Shapes::ShapeRef.new(shape: BackupSizeBytes, location_name: "BackupSizeBytes"))
     BackupDetails.add_member(:backup_status, Shapes::ShapeRef.new(shape: BackupStatus, required: true, location_name: "BackupStatus"))
+    BackupDetails.add_member(:backup_type, Shapes::ShapeRef.new(shape: BackupType, required: true, location_name: "BackupType"))
     BackupDetails.add_member(:backup_creation_date_time, Shapes::ShapeRef.new(shape: BackupCreationDateTime, required: true, location_name: "BackupCreationDateTime"))
+    BackupDetails.add_member(:backup_expiry_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "BackupExpiryDateTime"))
     BackupDetails.struct_class = Types::BackupDetails
 
     BackupSummaries.member = Shapes::ShapeRef.new(shape: BackupSummary)
@@ -327,7 +385,9 @@ module Aws::DynamoDB
     BackupSummary.add_member(:backup_arn, Shapes::ShapeRef.new(shape: BackupArn, location_name: "BackupArn"))
     BackupSummary.add_member(:backup_name, Shapes::ShapeRef.new(shape: BackupName, location_name: "BackupName"))
     BackupSummary.add_member(:backup_creation_date_time, Shapes::ShapeRef.new(shape: BackupCreationDateTime, location_name: "BackupCreationDateTime"))
+    BackupSummary.add_member(:backup_expiry_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "BackupExpiryDateTime"))
     BackupSummary.add_member(:backup_status, Shapes::ShapeRef.new(shape: BackupStatus, location_name: "BackupStatus"))
+    BackupSummary.add_member(:backup_type, Shapes::ShapeRef.new(shape: BackupType, location_name: "BackupType"))
     BackupSummary.add_member(:backup_size_bytes, Shapes::ShapeRef.new(shape: BackupSizeBytes, location_name: "BackupSizeBytes"))
     BackupSummary.struct_class = Types::BackupSummary
 
@@ -467,6 +527,11 @@ module Aws::DynamoDB
     DescribeContinuousBackupsOutput.add_member(:continuous_backups_description, Shapes::ShapeRef.new(shape: ContinuousBackupsDescription, location_name: "ContinuousBackupsDescription"))
     DescribeContinuousBackupsOutput.struct_class = Types::DescribeContinuousBackupsOutput
 
+    DescribeEndpointsRequest.struct_class = Types::DescribeEndpointsRequest
+
+    DescribeEndpointsResponse.add_member(:endpoints, Shapes::ShapeRef.new(shape: Endpoints, required: true, location_name: "Endpoints"))
+    DescribeEndpointsResponse.struct_class = Types::DescribeEndpointsResponse
+
     DescribeGlobalTableInput.add_member(:global_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "GlobalTableName"))
     DescribeGlobalTableInput.struct_class = Types::DescribeGlobalTableInput
 
@@ -499,6 +564,12 @@ module Aws::DynamoDB
 
     DescribeTimeToLiveOutput.add_member(:time_to_live_description, Shapes::ShapeRef.new(shape: TimeToLiveDescription, location_name: "TimeToLiveDescription"))
     DescribeTimeToLiveOutput.struct_class = Types::DescribeTimeToLiveOutput
+
+    Endpoint.add_member(:address, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Address"))
+    Endpoint.add_member(:cache_period_in_minutes, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "CachePeriodInMinutes"))
+    Endpoint.struct_class = Types::Endpoint
+
+    Endpoints.member = Shapes::ShapeRef.new(shape: Endpoint)
 
     ExpectedAttributeMap.key = Shapes::ShapeRef.new(shape: AttributeName)
     ExpectedAttributeMap.value = Shapes::ShapeRef.new(shape: ExpectedAttributeValue)
@@ -580,6 +651,7 @@ module Aws::DynamoDB
 
     GlobalTableGlobalSecondaryIndexSettingsUpdate.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, required: true, location_name: "IndexName"))
     GlobalTableGlobalSecondaryIndexSettingsUpdate.add_member(:provisioned_write_capacity_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "ProvisionedWriteCapacityUnits"))
+    GlobalTableGlobalSecondaryIndexSettingsUpdate.add_member(:provisioned_write_capacity_auto_scaling_settings_update, Shapes::ShapeRef.new(shape: AutoScalingSettingsUpdate, location_name: "ProvisionedWriteCapacityAutoScalingSettingsUpdate"))
     GlobalTableGlobalSecondaryIndexSettingsUpdate.struct_class = Types::GlobalTableGlobalSecondaryIndexSettingsUpdate
 
     GlobalTableGlobalSecondaryIndexSettingsUpdateList.member = Shapes::ShapeRef.new(shape: GlobalTableGlobalSecondaryIndexSettingsUpdate)
@@ -630,6 +702,7 @@ module Aws::DynamoDB
     ListBackupsInput.add_member(:time_range_lower_bound, Shapes::ShapeRef.new(shape: TimeRangeLowerBound, location_name: "TimeRangeLowerBound"))
     ListBackupsInput.add_member(:time_range_upper_bound, Shapes::ShapeRef.new(shape: TimeRangeUpperBound, location_name: "TimeRangeUpperBound"))
     ListBackupsInput.add_member(:exclusive_start_backup_arn, Shapes::ShapeRef.new(shape: BackupArn, location_name: "ExclusiveStartBackupArn"))
+    ListBackupsInput.add_member(:backup_type, Shapes::ShapeRef.new(shape: BackupTypeFilter, location_name: "BackupType"))
     ListBackupsInput.struct_class = Types::ListBackupsInput
 
     ListBackupsOutput.add_member(:backup_summaries, Shapes::ShapeRef.new(shape: BackupSummaries, location_name: "BackupSummaries"))
@@ -775,13 +848,16 @@ module Aws::DynamoDB
     ReplicaGlobalSecondaryIndexSettingsDescription.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, required: true, location_name: "IndexName"))
     ReplicaGlobalSecondaryIndexSettingsDescription.add_member(:index_status, Shapes::ShapeRef.new(shape: IndexStatus, location_name: "IndexStatus"))
     ReplicaGlobalSecondaryIndexSettingsDescription.add_member(:provisioned_read_capacity_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "ProvisionedReadCapacityUnits"))
+    ReplicaGlobalSecondaryIndexSettingsDescription.add_member(:provisioned_read_capacity_auto_scaling_settings, Shapes::ShapeRef.new(shape: AutoScalingSettingsDescription, location_name: "ProvisionedReadCapacityAutoScalingSettings"))
     ReplicaGlobalSecondaryIndexSettingsDescription.add_member(:provisioned_write_capacity_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "ProvisionedWriteCapacityUnits"))
+    ReplicaGlobalSecondaryIndexSettingsDescription.add_member(:provisioned_write_capacity_auto_scaling_settings, Shapes::ShapeRef.new(shape: AutoScalingSettingsDescription, location_name: "ProvisionedWriteCapacityAutoScalingSettings"))
     ReplicaGlobalSecondaryIndexSettingsDescription.struct_class = Types::ReplicaGlobalSecondaryIndexSettingsDescription
 
     ReplicaGlobalSecondaryIndexSettingsDescriptionList.member = Shapes::ShapeRef.new(shape: ReplicaGlobalSecondaryIndexSettingsDescription)
 
     ReplicaGlobalSecondaryIndexSettingsUpdate.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, required: true, location_name: "IndexName"))
     ReplicaGlobalSecondaryIndexSettingsUpdate.add_member(:provisioned_read_capacity_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "ProvisionedReadCapacityUnits"))
+    ReplicaGlobalSecondaryIndexSettingsUpdate.add_member(:provisioned_read_capacity_auto_scaling_settings_update, Shapes::ShapeRef.new(shape: AutoScalingSettingsUpdate, location_name: "ProvisionedReadCapacityAutoScalingSettingsUpdate"))
     ReplicaGlobalSecondaryIndexSettingsUpdate.struct_class = Types::ReplicaGlobalSecondaryIndexSettingsUpdate
 
     ReplicaGlobalSecondaryIndexSettingsUpdateList.member = Shapes::ShapeRef.new(shape: ReplicaGlobalSecondaryIndexSettingsUpdate)
@@ -791,7 +867,9 @@ module Aws::DynamoDB
     ReplicaSettingsDescription.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, required: true, location_name: "RegionName"))
     ReplicaSettingsDescription.add_member(:replica_status, Shapes::ShapeRef.new(shape: ReplicaStatus, location_name: "ReplicaStatus"))
     ReplicaSettingsDescription.add_member(:replica_provisioned_read_capacity_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "ReplicaProvisionedReadCapacityUnits"))
+    ReplicaSettingsDescription.add_member(:replica_provisioned_read_capacity_auto_scaling_settings, Shapes::ShapeRef.new(shape: AutoScalingSettingsDescription, location_name: "ReplicaProvisionedReadCapacityAutoScalingSettings"))
     ReplicaSettingsDescription.add_member(:replica_provisioned_write_capacity_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "ReplicaProvisionedWriteCapacityUnits"))
+    ReplicaSettingsDescription.add_member(:replica_provisioned_write_capacity_auto_scaling_settings, Shapes::ShapeRef.new(shape: AutoScalingSettingsDescription, location_name: "ReplicaProvisionedWriteCapacityAutoScalingSettings"))
     ReplicaSettingsDescription.add_member(:replica_global_secondary_index_settings, Shapes::ShapeRef.new(shape: ReplicaGlobalSecondaryIndexSettingsDescriptionList, location_name: "ReplicaGlobalSecondaryIndexSettings"))
     ReplicaSettingsDescription.struct_class = Types::ReplicaSettingsDescription
 
@@ -799,6 +877,7 @@ module Aws::DynamoDB
 
     ReplicaSettingsUpdate.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, required: true, location_name: "RegionName"))
     ReplicaSettingsUpdate.add_member(:replica_provisioned_read_capacity_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "ReplicaProvisionedReadCapacityUnits"))
+    ReplicaSettingsUpdate.add_member(:replica_provisioned_read_capacity_auto_scaling_settings_update, Shapes::ShapeRef.new(shape: AutoScalingSettingsUpdate, location_name: "ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate"))
     ReplicaSettingsUpdate.add_member(:replica_global_secondary_index_settings_update, Shapes::ShapeRef.new(shape: ReplicaGlobalSecondaryIndexSettingsUpdateList, location_name: "ReplicaGlobalSecondaryIndexSettingsUpdate"))
     ReplicaSettingsUpdate.struct_class = Types::ReplicaSettingsUpdate
 
@@ -833,9 +912,13 @@ module Aws::DynamoDB
     RestoreTableToPointInTimeOutput.struct_class = Types::RestoreTableToPointInTimeOutput
 
     SSEDescription.add_member(:status, Shapes::ShapeRef.new(shape: SSEStatus, location_name: "Status"))
+    SSEDescription.add_member(:sse_type, Shapes::ShapeRef.new(shape: SSEType, location_name: "SSEType"))
+    SSEDescription.add_member(:kms_master_key_arn, Shapes::ShapeRef.new(shape: KMSMasterKeyArn, location_name: "KMSMasterKeyArn"))
     SSEDescription.struct_class = Types::SSEDescription
 
-    SSESpecification.add_member(:enabled, Shapes::ShapeRef.new(shape: SSEEnabled, required: true, location_name: "Enabled"))
+    SSESpecification.add_member(:enabled, Shapes::ShapeRef.new(shape: SSEEnabled, location_name: "Enabled"))
+    SSESpecification.add_member(:sse_type, Shapes::ShapeRef.new(shape: SSEType, location_name: "SSEType"))
+    SSESpecification.add_member(:kms_master_key_id, Shapes::ShapeRef.new(shape: KMSMasterKeyId, location_name: "KMSMasterKeyId"))
     SSESpecification.struct_class = Types::SSESpecification
 
     ScanInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TableName"))
@@ -954,6 +1037,7 @@ module Aws::DynamoDB
 
     UpdateGlobalTableSettingsInput.add_member(:global_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "GlobalTableName"))
     UpdateGlobalTableSettingsInput.add_member(:global_table_provisioned_write_capacity_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "GlobalTableProvisionedWriteCapacityUnits"))
+    UpdateGlobalTableSettingsInput.add_member(:global_table_provisioned_write_capacity_auto_scaling_settings_update, Shapes::ShapeRef.new(shape: AutoScalingSettingsUpdate, location_name: "GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate"))
     UpdateGlobalTableSettingsInput.add_member(:global_table_global_secondary_index_settings_update, Shapes::ShapeRef.new(shape: GlobalTableGlobalSecondaryIndexSettingsUpdateList, location_name: "GlobalTableGlobalSecondaryIndexSettingsUpdate"))
     UpdateGlobalTableSettingsInput.add_member(:replica_settings_update, Shapes::ShapeRef.new(shape: ReplicaSettingsUpdateList, location_name: "ReplicaSettingsUpdate"))
     UpdateGlobalTableSettingsInput.struct_class = Types::UpdateGlobalTableSettingsInput
@@ -986,6 +1070,7 @@ module Aws::DynamoDB
     UpdateTableInput.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughput, location_name: "ProvisionedThroughput"))
     UpdateTableInput.add_member(:global_secondary_index_updates, Shapes::ShapeRef.new(shape: GlobalSecondaryIndexUpdateList, location_name: "GlobalSecondaryIndexUpdates"))
     UpdateTableInput.add_member(:stream_specification, Shapes::ShapeRef.new(shape: StreamSpecification, location_name: "StreamSpecification"))
+    UpdateTableInput.add_member(:sse_specification, Shapes::ShapeRef.new(shape: SSESpecification, location_name: "SSESpecification"))
     UpdateTableInput.struct_class = Types::UpdateTableInput
 
     UpdateTableOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))
@@ -1011,12 +1096,16 @@ module Aws::DynamoDB
       api.version = "2012-08-10"
 
       api.metadata = {
+        "apiVersion" => "2012-08-10",
         "endpointPrefix" => "dynamodb",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "serviceAbbreviation" => "DynamoDB",
         "serviceFullName" => "Amazon DynamoDB",
+        "serviceId" => "DynamoDB",
         "signatureVersion" => "v4",
         "targetPrefix" => "DynamoDB_20120810",
+        "uid" => "dynamodb-2012-08-10",
       }
 
       api.add_operation(:batch_get_item, Seahorse::Model::Operation.new.tap do |o|
@@ -1139,6 +1228,14 @@ module Aws::DynamoDB
         o.output = Shapes::ShapeRef.new(shape: DescribeContinuousBackupsOutput)
         o.errors << Shapes::ShapeRef.new(shape: TableNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:describe_endpoints, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeEndpoints"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeEndpointsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeEndpointsResponse)
       end)
 
       api.add_operation(:describe_global_table, Seahorse::Model::Operation.new.tap do |o|

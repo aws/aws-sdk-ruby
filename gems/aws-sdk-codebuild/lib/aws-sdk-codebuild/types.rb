@@ -167,9 +167,40 @@ module Aws::CodeBuild
     #   Information about the source code to be built.
     #   @return [Types::ProjectSource]
     #
+    # @!attribute [rw] secondary_sources
+    #   An array of `ProjectSource` objects.
+    #   @return [Array<Types::ProjectSource>]
+    #
+    # @!attribute [rw] secondary_source_versions
+    #   An array of `ProjectSourceVersion` objects. Each
+    #   `ProjectSourceVersion` must be one of:
+    #
+    #   * For AWS CodeCommit: the commit ID to use.
+    #
+    #   * For GitHub: the commit ID, pull request ID, branch name, or tag
+    #     name that corresponds to the version of the source code you want
+    #     to build. If a pull request ID is specified, it must use the
+    #     format `pr/pull-request-ID` (for example `pr/25`). If a branch
+    #     name is specified, the branch's HEAD commit ID will be used. If
+    #     not specified, the default branch's HEAD commit ID will be used.
+    #
+    #   * For Bitbucket: the commit ID, branch name, or tag name that
+    #     corresponds to the version of the source code you want to build.
+    #     If a branch name is specified, the branch's HEAD commit ID will
+    #     be used. If not specified, the default branch's HEAD commit ID
+    #     will be used.
+    #
+    #   * For Amazon Simple Storage Service (Amazon S3): the version ID of
+    #     the object representing the build input ZIP file to use.
+    #   @return [Array<Types::ProjectSourceVersion>]
+    #
     # @!attribute [rw] artifacts
     #   Information about the output artifacts for the build.
     #   @return [Types::BuildArtifacts]
+    #
+    # @!attribute [rw] secondary_artifacts
+    #   An array of `ProjectArtifacts` objects.
+    #   @return [Array<Types::BuildArtifacts>]
     #
     # @!attribute [rw] cache
     #   Information about the cache for the build.
@@ -221,6 +252,15 @@ module Aws::CodeBuild
     #   Describes a network interface.
     #   @return [Types::NetworkInterface]
     #
+    # @!attribute [rw] encryption_key
+    #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
+    #   to be used for encrypting the build output artifacts.
+    #
+    #   This is expressed either as the CMK's Amazon Resource Name (ARN)
+    #   or, if specified, the CMK's alias (using the format
+    #   `alias/alias-name `).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Build AWS API Documentation
     #
     class Build < Struct.new(
@@ -234,7 +274,10 @@ module Aws::CodeBuild
       :project_name,
       :phases,
       :source,
+      :secondary_sources,
+      :secondary_source_versions,
       :artifacts,
+      :secondary_artifacts,
       :cache,
       :environment,
       :service_role,
@@ -243,7 +286,8 @@ module Aws::CodeBuild
       :build_complete,
       :initiator,
       :vpc_config,
-      :network_interface)
+      :network_interface,
+      :encryption_key)
       include Aws::Structure
     end
 
@@ -277,12 +321,32 @@ module Aws::CodeBuild
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] override_artifact_name
+    #   If this flag is set, a name specified in the buildspec file
+    #   overrides the artifact name. The name specified in a buildspec file
+    #   is calculated at build time and uses the Shell Command Language. For
+    #   example, you can append a date and time to your artifact name so
+    #   that it is always unique.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] encryption_disabled
+    #   Information that tells you if encryption for build artifacts is
+    #   disabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] artifact_identifier
+    #   An identifier for this artifact definition.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BuildArtifacts AWS API Documentation
     #
     class BuildArtifacts < Struct.new(
       :location,
       :sha256sum,
-      :md5sum)
+      :md5sum,
+      :override_artifact_name,
+      :encryption_disabled,
+      :artifact_identifier)
       include Aws::Structure
     end
 
@@ -384,6 +448,55 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # Information about Amazon CloudWatch Logs for a build project.
+    #
+    # @note When making an API call, you may pass CloudWatchLogsConfig
+    #   data as a hash:
+    #
+    #       {
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         group_name: "String",
+    #         stream_name: "String",
+    #       }
+    #
+    # @!attribute [rw] status
+    #   The current status of the Amazon CloudWatch Logs for a build
+    #   project. Valid values are:
+    #
+    #   * `ENABLED`\: Amazon CloudWatch Logs are enabled for this build
+    #     project.
+    #
+    #   * `DISABLED`\: Amazon CloudWatch Logs are not enabled for this build
+    #     project.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The group name of the Amazon CloudWatch Logs. For more information,
+    #   see [Working with Log Groups and Log Streams][1]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_name
+    #   The prefix of the stream name of the Amazon CloudWatch Logs. For
+    #   more information, see [Working with Log Groups and Log Streams][1]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CloudWatchLogsConfig AWS API Documentation
+    #
+    class CloudWatchLogsConfig < Struct.new(
+      :status,
+      :group_name,
+      :stream_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateProjectInput
     #   data as a hash:
     #
@@ -391,7 +504,7 @@ module Aws::CodeBuild
     #         name: "ProjectName", # required
     #         description: "ProjectDescription",
     #         source: { # required
-    #           type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE
+    #           type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #           location: "String",
     #           git_clone_depth: 1,
     #           buildspec: "String",
@@ -399,8 +512,25 @@ module Aws::CodeBuild
     #             type: "OAUTH", # required, accepts OAUTH
     #             resource: "String",
     #           },
+    #           report_build_status: false,
     #           insecure_ssl: false,
+    #           source_identifier: "String",
     #         },
+    #         secondary_sources: [
+    #           {
+    #             type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
+    #             location: "String",
+    #             git_clone_depth: 1,
+    #             buildspec: "String",
+    #             auth: {
+    #               type: "OAUTH", # required, accepts OAUTH
+    #               resource: "String",
+    #             },
+    #             report_build_status: false,
+    #             insecure_ssl: false,
+    #             source_identifier: "String",
+    #           },
+    #         ],
     #         artifacts: { # required
     #           type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
     #           location: "String",
@@ -408,13 +538,29 @@ module Aws::CodeBuild
     #           namespace_type: "NONE", # accepts NONE, BUILD_ID
     #           name: "String",
     #           packaging: "NONE", # accepts NONE, ZIP
+    #           override_artifact_name: false,
+    #           encryption_disabled: false,
+    #           artifact_identifier: "String",
     #         },
+    #         secondary_artifacts: [
+    #           {
+    #             type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
+    #             location: "String",
+    #             path: "String",
+    #             namespace_type: "NONE", # accepts NONE, BUILD_ID
+    #             name: "String",
+    #             packaging: "NONE", # accepts NONE, ZIP
+    #             override_artifact_name: false,
+    #             encryption_disabled: false,
+    #             artifact_identifier: "String",
+    #           },
+    #         ],
     #         cache: {
     #           type: "NO_CACHE", # required, accepts NO_CACHE, S3
     #           location: "String",
     #         },
     #         environment: { # required
-    #           type: "LINUX_CONTAINER", # required, accepts LINUX_CONTAINER
+    #           type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER
     #           image: "NonEmptyString", # required
     #           compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
     #           environment_variables: [
@@ -427,7 +573,7 @@ module Aws::CodeBuild
     #           privileged_mode: false,
     #           certificate: "String",
     #         },
-    #         service_role: "NonEmptyString",
+    #         service_role: "NonEmptyString", # required
     #         timeout_in_minutes: 1,
     #         encryption_key: "NonEmptyString",
     #         tags: [
@@ -442,6 +588,17 @@ module Aws::CodeBuild
     #           security_group_ids: ["NonEmptyString"],
     #         },
     #         badge_enabled: false,
+    #         logs_config: {
+    #           cloud_watch_logs: {
+    #             status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #             group_name: "String",
+    #             stream_name: "String",
+    #           },
+    #           s3_logs: {
+    #             status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #             location: "String",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -456,9 +613,17 @@ module Aws::CodeBuild
     #   Information about the build input source code for the build project.
     #   @return [Types::ProjectSource]
     #
+    # @!attribute [rw] secondary_sources
+    #   An array of `ProjectSource` objects.
+    #   @return [Array<Types::ProjectSource>]
+    #
     # @!attribute [rw] artifacts
     #   Information about the build output artifacts for the build project.
     #   @return [Types::ProjectArtifacts]
+    #
+    # @!attribute [rw] secondary_artifacts
+    #   An array of `ProjectArtifacts` objects.
+    #   @return [Array<Types::ProjectArtifacts>]
     #
     # @!attribute [rw] cache
     #   Stores recently used information so that it can be quickly accessed
@@ -506,13 +671,20 @@ module Aws::CodeBuild
     #   project's build badge.
     #   @return [Boolean]
     #
+    # @!attribute [rw] logs_config
+    #   Information about logs for the build project. Logs can be Amazon
+    #   CloudWatch Logs, uploaded to a specified S3 bucket, or both.
+    #   @return [Types::LogsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProjectInput AWS API Documentation
     #
     class CreateProjectInput < Struct.new(
       :name,
       :description,
       :source,
+      :secondary_sources,
       :artifacts,
+      :secondary_artifacts,
       :cache,
       :environment,
       :service_role,
@@ -520,7 +692,8 @@ module Aws::CodeBuild
       :encryption_key,
       :tags,
       :vpc_config,
-      :badge_enabled)
+      :badge_enabled,
+      :logs_config)
       include Aws::Structure
     end
 
@@ -956,6 +1129,42 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # Information about logs for a build project. Logs can be Amazon
+    # CloudWatch Logs, built in a specified S3 bucket, or both.
+    #
+    # @note When making an API call, you may pass LogsConfig
+    #   data as a hash:
+    #
+    #       {
+    #         cloud_watch_logs: {
+    #           status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #           group_name: "String",
+    #           stream_name: "String",
+    #         },
+    #         s3_logs: {
+    #           status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #           location: "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cloud_watch_logs
+    #   Information about Amazon CloudWatch Logs for a build project. Amazon
+    #   CloudWatch Logs are enabled by default.
+    #   @return [Types::CloudWatchLogsConfig]
+    #
+    # @!attribute [rw] s3_logs
+    #   Information about logs built to an S3 bucket for a build project. S3
+    #   logs are not enabled by default.
+    #   @return [Types::S3LogsConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/LogsConfig AWS API Documentation
+    #
+    class LogsConfig < Struct.new(
+      :cloud_watch_logs,
+      :s3_logs)
+      include Aws::Structure
+    end
+
     # Information about build logs in Amazon CloudWatch Logs.
     #
     # @!attribute [rw] group_name
@@ -970,12 +1179,27 @@ module Aws::CodeBuild
     #   The URL to an individual build log in Amazon CloudWatch Logs.
     #   @return [String]
     #
+    # @!attribute [rw] s3_deep_link
+    #   The URL to an individual build log in an S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_logs
+    #   Information about Amazon CloudWatch Logs for a build project.
+    #   @return [Types::CloudWatchLogsConfig]
+    #
+    # @!attribute [rw] s3_logs
+    #   Information about S3 logs for a build project.
+    #   @return [Types::S3LogsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/LogsLocation AWS API Documentation
     #
     class LogsLocation < Struct.new(
       :group_name,
       :stream_name,
-      :deep_link)
+      :deep_link,
+      :s3_deep_link,
+      :cloud_watch_logs,
+      :s3_logs)
       include Aws::Structure
     end
 
@@ -1036,9 +1260,17 @@ module Aws::CodeBuild
     #   project.
     #   @return [Types::ProjectSource]
     #
+    # @!attribute [rw] secondary_sources
+    #   An array of `ProjectSource` objects.
+    #   @return [Array<Types::ProjectSource>]
+    #
     # @!attribute [rw] artifacts
     #   Information about the build output artifacts for the build project.
     #   @return [Types::ProjectArtifacts]
+    #
+    # @!attribute [rw] secondary_artifacts
+    #   An array of `ProjectArtifacts` objects.
+    #   @return [Array<Types::ProjectArtifacts>]
     #
     # @!attribute [rw] cache
     #   Information about the cache for the build project.
@@ -1099,6 +1331,11 @@ module Aws::CodeBuild
     #   Information about the build badge for the build project.
     #   @return [Types::ProjectBadge]
     #
+    # @!attribute [rw] logs_config
+    #   Information about logs for the build project. A project can create
+    #   Amazon CloudWatch Logs, logs in an S3 bucket, or both.
+    #   @return [Types::LogsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Project AWS API Documentation
     #
     class Project < Struct.new(
@@ -1106,7 +1343,9 @@ module Aws::CodeBuild
       :arn,
       :description,
       :source,
+      :secondary_sources,
       :artifacts,
+      :secondary_artifacts,
       :cache,
       :environment,
       :service_role,
@@ -1117,7 +1356,8 @@ module Aws::CodeBuild
       :last_modified,
       :webhook,
       :vpc_config,
-      :badge)
+      :badge,
+      :logs_config)
       include Aws::Structure
     end
 
@@ -1133,6 +1373,9 @@ module Aws::CodeBuild
     #         namespace_type: "NONE", # accepts NONE, BUILD_ID
     #         name: "String",
     #         packaging: "NONE", # accepts NONE, ZIP
+    #         override_artifact_name: false,
+    #         encryption_disabled: false,
+    #         artifact_identifier: "String",
     #       }
     #
     # @!attribute [rw] type
@@ -1259,6 +1502,25 @@ module Aws::CodeBuild
     #       file containing the build output.
     #   @return [String]
     #
+    # @!attribute [rw] override_artifact_name
+    #   If this flag is set, a name specified in the buildspec file
+    #   overrides the artifact name. The name specified in a buildspec file
+    #   is calculated at build time and uses the Shell Command Language. For
+    #   example, you can append a date and time to your artifact name so
+    #   that it is always unique.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] encryption_disabled
+    #   Set to true if you do not want your output artifacts encrypted. This
+    #   option is only valid if your artifacts type is Amazon S3. If this is
+    #   set with another artifacts type, an invalidInputException will be
+    #   thrown.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] artifact_identifier
+    #   An identifier for this artifact definition.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectArtifacts AWS API Documentation
     #
     class ProjectArtifacts < Struct.new(
@@ -1267,7 +1529,10 @@ module Aws::CodeBuild
       :path,
       :namespace_type,
       :name,
-      :packaging)
+      :packaging,
+      :override_artifact_name,
+      :encryption_disabled,
+      :artifact_identifier)
       include Aws::Structure
     end
 
@@ -1331,7 +1596,7 @@ module Aws::CodeBuild
     #   data as a hash:
     #
     #       {
-    #         type: "LINUX_CONTAINER", # required, accepts LINUX_CONTAINER
+    #         type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER
     #         image: "NonEmptyString", # required
     #         compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
     #         environment_variables: [
@@ -1385,8 +1650,17 @@ module Aws::CodeBuild
     #   build environment image is provided by AWS CodeBuild with Docker
     #   support.)
     #
+    #   If the operating system's base image is Ubuntu Linux:
+    #
     #   `- nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock
-    #   --host=tcp://0.0.0.0:2375 --storage-driver=overlay& - timeout -t 15
+    #   --host=tcp://0.0.0.0:2375 --storage-driver=overlay& - timeout 15 sh
+    #   -c "until docker info; do echo .; sleep 1; done"`
+    #
+    #   If the operating system's base image is Alpine Linux, add the `-t`
+    #   argument to `timeout`\:
+    #
+    #   `- nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock
+    #   --host=tcp://0.0.0.0:2375 --storage-driver=overlay& - timeout 15 -t
     #   sh -c "until docker info; do echo .; sleep 1; done"`
     #   @return [Boolean]
     #
@@ -1412,7 +1686,7 @@ module Aws::CodeBuild
     #   data as a hash:
     #
     #       {
-    #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE
+    #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #         location: "String",
     #         git_clone_depth: 1,
     #         buildspec: "String",
@@ -1420,7 +1694,9 @@ module Aws::CodeBuild
     #           type: "OAUTH", # required, accepts OAUTH
     #           resource: "String",
     #         },
+    #         report_build_status: false,
     #         insecure_ssl: false,
+    #         source_identifier: "String",
     #       }
     #
     # @!attribute [rw] type
@@ -1435,6 +1711,8 @@ module Aws::CodeBuild
     #     source action of a pipeline in AWS CodePipeline.
     #
     #   * `GITHUB`\: The source code is in a GitHub repository.
+    #
+    #   * `NO_SOURCE`\: The project does not have input source code.
     #
     #   * `S3`\: The source code is in an Amazon Simple Storage Service
     #     (Amazon S3) input bucket.
@@ -1509,10 +1787,21 @@ module Aws::CodeBuild
     #   build project's source `type` value is `BITBUCKET` or `GITHUB`).
     #   @return [Types::SourceAuth]
     #
+    # @!attribute [rw] report_build_status
+    #   Set to true to report the status of a build's start and finish to
+    #   your source provider. This option is only valid when your source
+    #   provider is GitHub. If this is set and you use a different source
+    #   provider, an invalidInputException is thrown.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] insecure_ssl
     #   Enable this flag to ignore SSL warnings while connecting to the
     #   project source code.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] source_identifier
+    #   An identifier for this project source.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectSource AWS API Documentation
     #
@@ -1522,7 +1811,87 @@ module Aws::CodeBuild
       :git_clone_depth,
       :buildspec,
       :auth,
-      :insecure_ssl)
+      :report_build_status,
+      :insecure_ssl,
+      :source_identifier)
+      include Aws::Structure
+    end
+
+    # A source identifier and its corresponding version.
+    #
+    # @note When making an API call, you may pass ProjectSourceVersion
+    #   data as a hash:
+    #
+    #       {
+    #         source_identifier: "String", # required
+    #         source_version: "String", # required
+    #       }
+    #
+    # @!attribute [rw] source_identifier
+    #   An identifier for a source in the build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_version
+    #   The source version for the corresponding source identifier. If
+    #   specified, must be one of:
+    #
+    #   * For AWS CodeCommit: the commit ID to use.
+    #
+    #   * For GitHub: the commit ID, pull request ID, branch name, or tag
+    #     name that corresponds to the version of the source code you want
+    #     to build. If a pull request ID is specified, it must use the
+    #     format `pr/pull-request-ID` (for example `pr/25`). If a branch
+    #     name is specified, the branch's HEAD commit ID will be used. If
+    #     not specified, the default branch's HEAD commit ID will be used.
+    #
+    #   * For Bitbucket: the commit ID, branch name, or tag name that
+    #     corresponds to the version of the source code you want to build.
+    #     If a branch name is specified, the branch's HEAD commit ID will
+    #     be used. If not specified, the default branch's HEAD commit ID
+    #     will be used.
+    #
+    #   * For Amazon Simple Storage Service (Amazon S3): the version ID of
+    #     the object representing the build input ZIP file to use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectSourceVersion AWS API Documentation
+    #
+    class ProjectSourceVersion < Struct.new(
+      :source_identifier,
+      :source_version)
+      include Aws::Structure
+    end
+
+    # Information about S3 logs for a build project.
+    #
+    # @note When making an API call, you may pass S3LogsConfig
+    #   data as a hash:
+    #
+    #       {
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         location: "String",
+    #       }
+    #
+    # @!attribute [rw] status
+    #   The current status of the S3 build logs. Valid values are:
+    #
+    #   * `ENABLED`\: S3 build logs are enabled for this build project.
+    #
+    #   * `DISABLED`\: S3 build logs are not enabled for this build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   The ARN of an S3 bucket and the path prefix for S3 logs. If your
+    #   Amazon S3 bucket name is `my-bucket`, and your path prefix is
+    #   `build-log`, then acceptable formats are `my-bucket/build-log` or
+    #   `aws:s3:::my-bucket/build-log`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/S3LogsConfig AWS API Documentation
+    #
+    class S3LogsConfig < Struct.new(
+      :status,
+      :location)
       include Aws::Structure
     end
 
@@ -1563,6 +1932,27 @@ module Aws::CodeBuild
     #
     #       {
     #         project_name: "NonEmptyString", # required
+    #         secondary_sources_override: [
+    #           {
+    #             type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
+    #             location: "String",
+    #             git_clone_depth: 1,
+    #             buildspec: "String",
+    #             auth: {
+    #               type: "OAUTH", # required, accepts OAUTH
+    #               resource: "String",
+    #             },
+    #             report_build_status: false,
+    #             insecure_ssl: false,
+    #             source_identifier: "String",
+    #           },
+    #         ],
+    #         secondary_sources_version_override: [
+    #           {
+    #             source_identifier: "String", # required
+    #             source_version: "String", # required
+    #           },
+    #         ],
     #         source_version: "String",
     #         artifacts_override: {
     #           type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
@@ -1571,7 +1961,23 @@ module Aws::CodeBuild
     #           namespace_type: "NONE", # accepts NONE, BUILD_ID
     #           name: "String",
     #           packaging: "NONE", # accepts NONE, ZIP
+    #           override_artifact_name: false,
+    #           encryption_disabled: false,
+    #           artifact_identifier: "String",
     #         },
+    #         secondary_artifacts_override: [
+    #           {
+    #             type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
+    #             location: "String",
+    #             path: "String",
+    #             namespace_type: "NONE", # accepts NONE, BUILD_ID
+    #             name: "String",
+    #             packaging: "NONE", # accepts NONE, ZIP
+    #             override_artifact_name: false,
+    #             encryption_disabled: false,
+    #             artifact_identifier: "String",
+    #           },
+    #         ],
     #         environment_variables_override: [
     #           {
     #             name: "NonEmptyString", # required
@@ -1579,7 +1985,7 @@ module Aws::CodeBuild
     #             type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE
     #           },
     #         ],
-    #         source_type_override: "CODECOMMIT", # accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE
+    #         source_type_override: "CODECOMMIT", # accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #         source_location_override: "String",
     #         source_auth_override: {
     #           type: "OAUTH", # required, accepts OAUTH
@@ -1588,7 +1994,8 @@ module Aws::CodeBuild
     #         git_clone_depth_override: 1,
     #         buildspec_override: "String",
     #         insecure_ssl_override: false,
-    #         environment_type_override: "LINUX_CONTAINER", # accepts LINUX_CONTAINER
+    #         report_build_status_override: false,
+    #         environment_type_override: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER
     #         image_override: "NonEmptyString",
     #         compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
     #         certificate_override: "String",
@@ -1600,12 +2007,33 @@ module Aws::CodeBuild
     #         privileged_mode_override: false,
     #         timeout_in_minutes_override: 1,
     #         idempotency_token: "String",
+    #         logs_config_override: {
+    #           cloud_watch_logs: {
+    #             status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #             group_name: "String",
+    #             stream_name: "String",
+    #           },
+    #           s3_logs: {
+    #             status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #             location: "String",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] project_name
     #   The name of the AWS CodeBuild build project to start running a
     #   build.
     #   @return [String]
+    #
+    # @!attribute [rw] secondary_sources_override
+    #   An array of `ProjectSource` objects.
+    #   @return [Array<Types::ProjectSource>]
+    #
+    # @!attribute [rw] secondary_sources_version_override
+    #   An array of `ProjectSourceVersion` objects that specify one or more
+    #   versions of the project's secondary sources to be used for this
+    #   build only.
+    #   @return [Array<Types::ProjectSourceVersion>]
     #
     # @!attribute [rw] source_version
     #   A version of the build input to be built, for this build only. If
@@ -1636,6 +2064,10 @@ module Aws::CodeBuild
     #   the latest ones already defined in the build project.
     #   @return [Types::ProjectArtifacts]
     #
+    # @!attribute [rw] secondary_artifacts_override
+    #   An array of `ProjectArtifacts` objects.
+    #   @return [Array<Types::ProjectArtifacts>]
+    #
     # @!attribute [rw] environment_variables_override
     #   A set of environment variables that overrides, for this build only,
     #   the latest ones already defined in the build project.
@@ -1643,7 +2075,7 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] source_type_override
     #   A source input type for this build that overrides the source input
-    #   defined in the build project
+    #   defined in the build project.
     #   @return [String]
     #
     # @!attribute [rw] source_location_override
@@ -1674,6 +2106,12 @@ module Aws::CodeBuild
     #   whether to ignore SSL warnings while connecting to the project
     #   source code. This override applies only if the build's source is
     #   GitHub Enterprise.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] report_build_status_override
+    #   Set to true to report to your source provider the status of a
+    #   build's start and completion. If you use this option with a source
+    #   provider other than GitHub, an invalidInputException is thrown.
     #   @return [Boolean]
     #
     # @!attribute [rw] environment_type_override
@@ -1724,12 +2162,20 @@ module Aws::CodeBuild
     #   CodeBuild returns a parameter mismatch error.
     #   @return [String]
     #
+    # @!attribute [rw] logs_config_override
+    #   Log settings for this build that override the log settings defined
+    #   in the build project.
+    #   @return [Types::LogsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuildInput AWS API Documentation
     #
     class StartBuildInput < Struct.new(
       :project_name,
+      :secondary_sources_override,
+      :secondary_sources_version_override,
       :source_version,
       :artifacts_override,
+      :secondary_artifacts_override,
       :environment_variables_override,
       :source_type_override,
       :source_location_override,
@@ -1737,6 +2183,7 @@ module Aws::CodeBuild
       :git_clone_depth_override,
       :buildspec_override,
       :insecure_ssl_override,
+      :report_build_status_override,
       :environment_type_override,
       :image_override,
       :compute_type_override,
@@ -1745,7 +2192,8 @@ module Aws::CodeBuild
       :service_role_override,
       :privileged_mode_override,
       :timeout_in_minutes_override,
-      :idempotency_token)
+      :idempotency_token,
+      :logs_config_override)
       include Aws::Structure
     end
 
@@ -1825,7 +2273,7 @@ module Aws::CodeBuild
     #         name: "NonEmptyString", # required
     #         description: "ProjectDescription",
     #         source: {
-    #           type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE
+    #           type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #           location: "String",
     #           git_clone_depth: 1,
     #           buildspec: "String",
@@ -1833,8 +2281,25 @@ module Aws::CodeBuild
     #             type: "OAUTH", # required, accepts OAUTH
     #             resource: "String",
     #           },
+    #           report_build_status: false,
     #           insecure_ssl: false,
+    #           source_identifier: "String",
     #         },
+    #         secondary_sources: [
+    #           {
+    #             type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
+    #             location: "String",
+    #             git_clone_depth: 1,
+    #             buildspec: "String",
+    #             auth: {
+    #               type: "OAUTH", # required, accepts OAUTH
+    #               resource: "String",
+    #             },
+    #             report_build_status: false,
+    #             insecure_ssl: false,
+    #             source_identifier: "String",
+    #           },
+    #         ],
     #         artifacts: {
     #           type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
     #           location: "String",
@@ -1842,13 +2307,29 @@ module Aws::CodeBuild
     #           namespace_type: "NONE", # accepts NONE, BUILD_ID
     #           name: "String",
     #           packaging: "NONE", # accepts NONE, ZIP
+    #           override_artifact_name: false,
+    #           encryption_disabled: false,
+    #           artifact_identifier: "String",
     #         },
+    #         secondary_artifacts: [
+    #           {
+    #             type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
+    #             location: "String",
+    #             path: "String",
+    #             namespace_type: "NONE", # accepts NONE, BUILD_ID
+    #             name: "String",
+    #             packaging: "NONE", # accepts NONE, ZIP
+    #             override_artifact_name: false,
+    #             encryption_disabled: false,
+    #             artifact_identifier: "String",
+    #           },
+    #         ],
     #         cache: {
     #           type: "NO_CACHE", # required, accepts NO_CACHE, S3
     #           location: "String",
     #         },
     #         environment: {
-    #           type: "LINUX_CONTAINER", # required, accepts LINUX_CONTAINER
+    #           type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER
     #           image: "NonEmptyString", # required
     #           compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
     #           environment_variables: [
@@ -1876,6 +2357,17 @@ module Aws::CodeBuild
     #           security_group_ids: ["NonEmptyString"],
     #         },
     #         badge_enabled: false,
+    #         logs_config: {
+    #           cloud_watch_logs: {
+    #             status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #             group_name: "String",
+    #             stream_name: "String",
+    #           },
+    #           s3_logs: {
+    #             status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #             location: "String",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1895,10 +2387,18 @@ module Aws::CodeBuild
     #   build project.
     #   @return [Types::ProjectSource]
     #
+    # @!attribute [rw] secondary_sources
+    #   An array of `ProjectSource` objects.
+    #   @return [Array<Types::ProjectSource>]
+    #
     # @!attribute [rw] artifacts
     #   Information to be changed about the build output artifacts for the
     #   build project.
     #   @return [Types::ProjectArtifacts]
+    #
+    # @!attribute [rw] secondary_artifacts
+    #   An array of `ProjectSource` objects.
+    #   @return [Array<Types::ProjectArtifacts>]
     #
     # @!attribute [rw] cache
     #   Stores recently used information so that it can be quickly accessed
@@ -1947,13 +2447,20 @@ module Aws::CodeBuild
     #   project's build badge.
     #   @return [Boolean]
     #
+    # @!attribute [rw] logs_config
+    #   Information about logs for the build project. A project can create
+    #   Amazon CloudWatch Logs, logs in an S3 bucket, or both.
+    #   @return [Types::LogsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProjectInput AWS API Documentation
     #
     class UpdateProjectInput < Struct.new(
       :name,
       :description,
       :source,
+      :secondary_sources,
       :artifacts,
+      :secondary_artifacts,
       :cache,
       :environment,
       :service_role,
@@ -1961,7 +2468,8 @@ module Aws::CodeBuild
       :encryption_key,
       :tags,
       :vpc_config,
-      :badge_enabled)
+      :badge_enabled,
+      :logs_config)
       include Aws::Structure
     end
 

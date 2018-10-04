@@ -76,7 +76,7 @@ module Aws
           c['SecretAccessKey'],
           c['Token']
         )
-        @expiration = c['Expiration'] ? Time.parse(c['Expiration']) : nil
+        @expiration = c['Expiration'] ? Time.iso8601(c['Expiration']) : nil
       end
     end
 

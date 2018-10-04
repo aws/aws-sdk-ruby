@@ -1,6 +1,101 @@
 Unreleased Changes
 ------------------
 
+1.105.0 (2018-09-26)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.104.0 (2018-09-10)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.103.0 (2018-09-06)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.102.0 (2018-08-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Signer`.
+
+1.101.0 (2018-08-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::signer`.
+
+1.100.0 (2018-08-15)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.99.0 (2018-08-14)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.98.0 (2018-08-13)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SageMaker`.
+
+1.97.0 (2018-08-02)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.96.0 (2018-07-12)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::DLM`.
+
+1.95.0 (2018-07-03)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.94.0 (2018-06-22)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.93.0 (2018-06-21)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Macie`.
+
+1.92.0 (2018-06-19)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.91.0 (2018-06-04)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::EKS`.
+
+1.90.0 (2018-06-01)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::MediaTailor`.
+
+1.89.1 (2018-05-31)
+------------------
+
+* Issue - Revert a few improperly configured endpoints.
+
+1.89.0 (2018-05-30)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Neptune`.
+
+1.88.0 (2018-05-29)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::PI`.
+
 1.87.0 (2018-05-14)
 ------------------
 

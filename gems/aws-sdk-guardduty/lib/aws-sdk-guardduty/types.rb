@@ -15,8 +15,8 @@ module Aws::GuardDuty
     #
     #       {
     #         detector_id: "__string", # required
-    #         invitation_id: "InvitationId",
-    #         master_id: "MasterId",
+    #         invitation_id: "InvitationId", # required
+    #         master_id: "MasterId", # required
     #       }
     #
     # @!attribute [rw] detector_id
@@ -142,7 +142,7 @@ module Aws::GuardDuty
     #
     #       {
     #         detector_id: "__string", # required
-    #         finding_ids: ["FindingId"],
+    #         finding_ids: ["FindingId"], # required
     #       }
     #
     # @!attribute [rw] detector_id
@@ -291,18 +291,32 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         enable: false,
+    #         client_token: "__stringMin0Max64",
+    #         enable: false, # required
+    #         finding_publishing_frequency: "FIFTEEN_MINUTES", # accepts FIFTEEN_MINUTES, ONE_HOUR, SIX_HOURS
     #       }
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency token for the create request.**A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
     #
     # @!attribute [rw] enable
     #   A boolean value that specifies whether the detector is to be
     #   enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] finding_publishing_frequency
+    #   A enum value that specifies how frequently customer got Finding
+    #   updates published.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateDetectorRequest AWS API Documentation
     #
     class CreateDetectorRequest < Struct.new(
-      :enable)
+      :client_token,
+      :enable,
+      :finding_publishing_frequency)
       include Aws::Structure
     end
 
@@ -329,7 +343,7 @@ module Aws::GuardDuty
     #         client_token: "__stringMin0Max64",
     #         description: "FilterDescription",
     #         detector_id: "__string", # required
-    #         finding_criteria: {
+    #         finding_criteria: { # required
     #           criterion: {
     #             "__string" => {
     #               eq: ["__string"],
@@ -341,7 +355,7 @@ module Aws::GuardDuty
     #             },
     #           },
     #         },
-    #         name: "FilterName",
+    #         name: "FilterName", # required
     #         rank: 1,
     #       }
     #
@@ -409,17 +423,23 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         activate: false,
+    #         activate: false, # required
+    #         client_token: "__stringMin0Max64",
     #         detector_id: "__string", # required
-    #         format: "TXT", # accepts TXT, STIX, OTX_CSV, ALIEN_VAULT, PROOF_POINT, FIRE_EYE
-    #         location: "Location",
-    #         name: "Name",
+    #         format: "TXT", # required, accepts TXT, STIX, OTX_CSV, ALIEN_VAULT, PROOF_POINT, FIRE_EYE
+    #         location: "Location", # required
+    #         name: "Name", # required
     #       }
     #
     # @!attribute [rw] activate
     #   A boolean value that indicates whether GuardDuty is to start using
     #   the uploaded IPSet.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency token for the create request.**A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
     #
     # @!attribute [rw] detector_id
     #   @return [String]
@@ -443,6 +463,7 @@ module Aws::GuardDuty
     #
     class CreateIPSetRequest < Struct.new(
       :activate,
+      :client_token,
       :detector_id,
       :format,
       :location,
@@ -469,7 +490,7 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         account_details: [
+    #         account_details: [ # required
     #           {
     #             account_id: "AccountId", # required
     #             email: "Email", # required
@@ -543,17 +564,23 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         activate: false,
+    #         activate: false, # required
+    #         client_token: "__stringMin0Max64",
     #         detector_id: "__string", # required
-    #         format: "TXT", # accepts TXT, STIX, OTX_CSV, ALIEN_VAULT, PROOF_POINT, FIRE_EYE
-    #         location: "Location",
-    #         name: "Name",
+    #         format: "TXT", # required, accepts TXT, STIX, OTX_CSV, ALIEN_VAULT, PROOF_POINT, FIRE_EYE
+    #         location: "Location", # required
+    #         name: "Name", # required
     #       }
     #
     # @!attribute [rw] activate
     #   A boolean value that indicates whether GuardDuty is to start using
     #   the uploaded ThreatIntelSet.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency token for the create request.**A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
     #
     # @!attribute [rw] detector_id
     #   @return [String]
@@ -577,6 +604,7 @@ module Aws::GuardDuty
     #
     class CreateThreatIntelSetRequest < Struct.new(
       :activate,
+      :client_token,
       :detector_id,
       :format,
       :location,
@@ -603,7 +631,7 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["__string"],
+    #         account_ids: ["__string"], # required
     #       }
     #
     # @!attribute [rw] account_ids
@@ -712,7 +740,7 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["__string"],
+    #         account_ids: ["__string"], # required
     #       }
     #
     # @!attribute [rw] account_ids
@@ -747,7 +775,7 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["__string"],
+    #         account_ids: ["__string"], # required
     #         detector_id: "__string", # required
     #       }
     #
@@ -834,7 +862,7 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["__string"],
+    #         account_ids: ["__string"], # required
     #         detector_id: "__string", # required
     #       }
     #
@@ -1078,6 +1106,11 @@ module Aws::GuardDuty
     #   The first time a resource was created. The format will be ISO-8601.
     #   @return [String]
     #
+    # @!attribute [rw] finding_publishing_frequency
+    #   A enum value that specifies how frequently customer got Finding
+    #   updates published.
+    #   @return [String]
+    #
     # @!attribute [rw] service_role
     #   Customer serviceRole name or ARN for accessing customer resources
     #   @return [String]
@@ -1094,6 +1127,7 @@ module Aws::GuardDuty
     #
     class GetDetectorResponse < Struct.new(
       :created_at,
+      :finding_publishing_frequency,
       :service_role,
       :status,
       :updated_at)
@@ -1166,7 +1200,7 @@ module Aws::GuardDuty
     #
     #       {
     #         detector_id: "__string", # required
-    #         finding_ids: ["FindingId"],
+    #         finding_ids: ["FindingId"], # required
     #         sort_criteria: {
     #           attribute_name: "__string",
     #           order_by: "ASC", # accepts ASC, DESC
@@ -1225,7 +1259,7 @@ module Aws::GuardDuty
     #             },
     #           },
     #         },
-    #         finding_statistic_types: ["COUNT_BY_SEVERITY"], # accepts COUNT_BY_SEVERITY
+    #         finding_statistic_types: ["COUNT_BY_SEVERITY"], # required, accepts COUNT_BY_SEVERITY
     #       }
     #
     # @!attribute [rw] detector_id
@@ -1369,7 +1403,7 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["__string"],
+    #         account_ids: ["__string"], # required
     #         detector_id: "__string", # required
     #       }
     #
@@ -1585,7 +1619,7 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["__string"],
+    #         account_ids: ["__string"], # required
     #         detector_id: "__string", # required
     #         disable_email_notification: false,
     #         message: "Message",
@@ -2493,7 +2527,7 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["__string"],
+    #         account_ids: ["__string"], # required
     #         detector_id: "__string", # required
     #       }
     #
@@ -2533,7 +2567,7 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["__string"],
+    #         account_ids: ["__string"], # required
     #         detector_id: "__string", # required
     #       }
     #
@@ -2592,7 +2626,7 @@ module Aws::GuardDuty
     #
     #       {
     #         detector_id: "__string", # required
-    #         finding_ids: ["FindingId"],
+    #         finding_ids: ["FindingId"], # required
     #       }
     #
     # @!attribute [rw] detector_id
@@ -2641,6 +2675,7 @@ module Aws::GuardDuty
     #       {
     #         detector_id: "__string", # required
     #         enable: false,
+    #         finding_publishing_frequency: "FIFTEEN_MINUTES", # accepts FIFTEEN_MINUTES, ONE_HOUR, SIX_HOURS
     #       }
     #
     # @!attribute [rw] detector_id
@@ -2651,11 +2686,17 @@ module Aws::GuardDuty
     #   detector is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] finding_publishing_frequency
+    #   A enum value that specifies how frequently customer got Finding
+    #   updates published.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetectorRequest AWS API Documentation
     #
     class UpdateDetectorRequest < Struct.new(
       :detector_id,
-      :enable)
+      :enable,
+      :finding_publishing_frequency)
       include Aws::Structure
     end
 
@@ -2747,8 +2788,8 @@ module Aws::GuardDuty
     #       {
     #         comments: "Comments",
     #         detector_id: "__string", # required
-    #         feedback: "USEFUL", # accepts USEFUL, NOT_USEFUL
-    #         finding_ids: ["FindingId"],
+    #         feedback: "USEFUL", # required, accepts USEFUL, NOT_USEFUL
+    #         finding_ids: ["FindingId"], # required
     #       }
     #
     # @!attribute [rw] comments

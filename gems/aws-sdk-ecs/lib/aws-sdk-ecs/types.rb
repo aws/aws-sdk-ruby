@@ -25,7 +25,7 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] details
-    #   Details of the attachment. For Elastic Network Interfaces, this
+    #   Details of the attachment. For elastic network interfaces, this
     #   includes the network interface ID, the MAC address, the subnet ID,
     #   and the private IPv4 address.
     #   @return [Array<Types::KeyValuePair>]
@@ -131,19 +131,27 @@ module Aws::ECS
     #
     # @!attribute [rw] subnets
     #   The subnets associated with the task or service. There is a limit of
-    #   10 subnets able to be specified per AwsVpcConfiguration.
+    #   16 subnets able to be specified per `AwsVpcConfiguration`.
+    #
+    #   <note markdown="1"> All specified subnets must be from the same VPC.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_groups
     #   The security groups associated with the task or service. If you do
     #   not specify a security group, the default security group for the VPC
     #   is used. There is a limit of 5 security groups able to be specified
-    #   per AwsVpcConfiguration.
+    #   per `AwsVpcConfiguration`.
+    #
+    #   <note markdown="1"> All specified security groups must be from the same VPC.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] assign_public_ip
     #   Whether the task's elastic network interface receives a public IP
-    #   address.
+    #   address. The default value is `DISABLED`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/AwsVpcConfiguration AWS API Documentation
@@ -163,7 +171,7 @@ module Aws::ECS
     #
     # @!attribute [rw] cluster_arn
     #   The Amazon Resource Name (ARN) that identifies the cluster. The ARN
-    #   contains the `arn:aws:ecs` namespace, followed by the region of the
+    #   contains the `arn:aws:ecs` namespace, followed by the Region of the
     #   cluster, the AWS account ID of the cluster owner, the `cluster`
     #   namespace, and then the cluster name. For example,
     #   `arn:aws:ecs:region:012345678910:cluster/test `..
@@ -181,7 +189,8 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] registered_container_instances_count
-    #   The number of container instances registered into the cluster.
+    #   The number of container instances registered into the cluster. This
+    #   includes container instances in both `ACTIVE` and `DRAINING` status.
     #   @return [Integer]
     #
     # @!attribute [rw] running_tasks_count
@@ -297,6 +306,9 @@ module Aws::ECS
     #       {
     #         name: "String",
     #         image: "String",
+    #         repository_credentials: {
+    #           credentials_parameter: "String", # required
+    #         },
     #         cpu: 1,
     #         memory: 1,
     #         memory_reservation: 1,
@@ -367,6 +379,8 @@ module Aws::ECS
     #           },
     #         ],
     #         docker_security_options: ["String"],
+    #         interactive: false,
+    #         pseudo_terminal: false,
     #         docker_labels: {
     #           "String" => "String",
     #         },
@@ -390,6 +404,12 @@ module Aws::ECS
     #           retries: 1,
     #           start_period: 1,
     #         },
+    #         system_controls: [
+    #           {
+    #             namespace: "String",
+    #             value: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -403,8 +423,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
     #
@@ -442,10 +462,14 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
+    #
+    # @!attribute [rw] repository_credentials
+    #   The private repository authentication credentials to use.
+    #   @return [Types::RepositoryCredentials]
     #
     # @!attribute [rw] cpu
     #   The number of `cpu` units reserved for the container. This parameter
@@ -513,8 +537,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: http://aws.amazon.com/ec2/instance-types/
     #   [5]: https://docs.docker.com/engine/reference/run/#cpu-share-constraint
@@ -546,8 +570,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Integer]
     #
@@ -583,8 +607,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Integer]
     #
@@ -613,8 +637,8 @@ module Aws::ECS
     #
     #
     #   [1]: https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [3]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [2]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [3]: https://docs.docker.com/engine/api/v1.35/
     #   [4]: https://docs.docker.com/engine/reference/commandline/run/
     #   @return [Array<String>]
     #
@@ -643,15 +667,15 @@ module Aws::ECS
     #   <note markdown="1"> After a task reaches the `RUNNING` status, manual and automatic host
     #   and container port assignments are visible in the **Network
     #   Bindings** section of a container description for a selected task in
-    #   the Amazon ECS console, or the `networkBindings` section
-    #   DescribeTasks responses.
+    #   the Amazon ECS console. The assignments are also visible in the
+    #   `networkBindings` section DescribeTasks responses.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::PortMapping>]
     #
@@ -689,8 +713,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: https://docs.docker.com/engine/reference/builder/#entrypoint
     #   @return [Array<String>]
@@ -704,8 +728,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: https://docs.docker.com/engine/reference/builder/#cmd
     #   @return [Array<String>]
@@ -720,8 +744,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::KeyValuePair>]
     #
@@ -738,8 +762,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::MountPoint>]
     #
@@ -750,8 +774,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::VolumeFrom>]
     #
@@ -769,10 +793,15 @@ module Aws::ECS
     #   `Hostname` in the [Create a container][1] section of the [Docker
     #   Remote API][2] and the `--hostname` option to [docker run][3].
     #
+    #   <note markdown="1"> The `hostname` parameter is not supported if using the `awsvpc`
+    #   networkMode.
+    #
+    #    </note>
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
     #
@@ -787,8 +816,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
     #
@@ -800,8 +829,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
     #
@@ -816,8 +845,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   @return [Boolean]
     #
     # @!attribute [rw] privileged
@@ -834,8 +863,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Boolean]
     #
@@ -843,7 +872,7 @@ module Aws::ECS
     #   When this parameter is true, the container is given read-only access
     #   to its root file system. This parameter maps to `ReadonlyRootfs` in
     #   the [Create a container][1] section of the [Docker Remote API][2]
-    #   and the `--read-only` option to `docker run`.
+    #   and the `--read-only` option to [docker run][3].
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
@@ -851,8 +880,9 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
+    #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Boolean]
     #
     # @!attribute [rw] dns_servers
@@ -867,8 +897,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<String>]
     #
@@ -884,16 +914,16 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<String>]
     #
     # @!attribute [rw] extra_hosts
     #   A list of hostnames and IP address mappings to append to the
     #   `/etc/hosts` file on the container. If using the Fargate launch
-    #   type, this may be used to list non-Fargate hosts you want the
-    #   container to talk to. This parameter maps to `ExtraHosts` in the
+    #   type, this may be used to list non-Fargate hosts to which the
+    #   container can talk. This parameter maps to `ExtraHosts` in the
     #   [Create a container][1] section of the [Docker Remote API][2] and
     #   the `--add-host` option to [docker run][3].
     #
@@ -903,8 +933,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::HostEntry>]
     #
@@ -930,11 +960,37 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] interactive
+    #   When this parameter is `true`, this allows you to deploy
+    #   containerized applications that require `stdin` or a `tty` to be
+    #   allocated. This parameter maps to `OpenStdin` in the [Create a
+    #   container][1] section of the [Docker Remote API][2] and the
+    #   `--interactive` option to [docker run][3].
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
+    #   [3]: https://docs.docker.com/engine/reference/run/
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] pseudo_terminal
+    #   When this parameter is `true`, a TTY is allocated. This parameter
+    #   maps to `Tty` in the [Create a container][1] section of the [Docker
+    #   Remote API][2] and the `--tty` option to [docker run][3].
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
+    #   [3]: https://docs.docker.com/engine/reference/run/
+    #   @return [Boolean]
     #
     # @!attribute [rw] docker_labels
     #   A key/value map of labels to add to the container. This parameter
@@ -948,8 +1004,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Hash<String,String>]
     #
@@ -969,8 +1025,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::Ulimit>]
     #
@@ -1017,8 +1073,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: https://docs.docker.com/engine/admin/logging/overview/
     #   [5]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
@@ -1032,16 +1088,38 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Types::HealthCheck]
+    #
+    # @!attribute [rw] system_controls
+    #   A list of namespaced kernel parameters to set in the container. This
+    #   parameter maps to `Sysctls` in the [Create a container][1] section
+    #   of the [Docker Remote API][2] and the `--sysctl` option to [docker
+    #   run][3].
+    #
+    #   <note markdown="1"> It is not recommended that you specify network-related
+    #   `systemControls` parameters for multiple containers in a single task
+    #   that also uses either the `awsvpc` or `host` network modes. When you
+    #   do, the container that is started last will determine which
+    #   `systemControls` parameters take effect.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
+    #   [3]: https://docs.docker.com/engine/reference/run/
+    #   @return [Array<Types::SystemControl>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerDefinition AWS API Documentation
     #
     class ContainerDefinition < Struct.new(
       :name,
       :image,
+      :repository_credentials,
       :cpu,
       :memory,
       :memory_reservation,
@@ -1064,10 +1142,13 @@ module Aws::ECS
       :dns_search_domains,
       :extra_hosts,
       :docker_security_options,
+      :interactive,
+      :pseudo_terminal,
       :docker_labels,
       :ulimits,
       :log_configuration,
-      :health_check)
+      :health_check,
+      :system_controls)
       include Aws::Structure
     end
 
@@ -1076,7 +1157,7 @@ module Aws::ECS
     #
     # @!attribute [rw] container_instance_arn
     #   The Amazon Resource Name (ARN) of the container instance. The ARN
-    #   contains the `arn:aws:ecs` namespace, followed by the region of the
+    #   contains the `arn:aws:ecs` namespace, followed by the Region of the
     #   container instance, the AWS account ID of the container instance
     #   owner, the `container-instance` namespace, and then the container
     #   instance ID. For example,
@@ -1106,13 +1187,13 @@ module Aws::ECS
     #
     # @!attribute [rw] remaining_resources
     #   For CPU and memory resource types, this parameter describes the
-    #   remaining CPU and memory on the that has not already been allocated
-    #   to tasks (and is therefore available for new tasks). For port
-    #   resource types, this parameter describes the ports that were
-    #   reserved by the Amazon ECS container agent (at instance registration
-    #   time) and any task containers that have reserved port mappings on
-    #   the host (with the `host` or `bridge` network mode). Any port that
-    #   is not specified here is available for new tasks.
+    #   remaining CPU and memory that has not already been allocated to
+    #   tasks and is therefore available for new tasks. For port resource
+    #   types, this parameter describes the ports that were reserved by the
+    #   Amazon ECS container agent (at instance registration time) and any
+    #   task containers that have reserved port mappings on the host (with
+    #   the `host` or `bridge` network mode). Any port that is not specified
+    #   here is available for new tasks.
     #   @return [Array<Types::Resource>]
     #
     # @!attribute [rw] registered_resources
@@ -1143,7 +1224,7 @@ module Aws::ECS
     # @!attribute [rw] agent_connected
     #   This parameter returns `true` if the agent is connected to Amazon
     #   ECS. Registered instances with an agent that may be unhealthy or
-    #   stopped return `false`. Instances without a connected agent can't
+    #   stopped return `false`. Only instances connected to an agent can
     #   accept placement requests.
     #   @return [Boolean]
     #
@@ -1173,7 +1254,7 @@ module Aws::ECS
     #   @return [Time]
     #
     # @!attribute [rw] attachments
-    #   The Elastic Network Interfaces associated with the container
+    #   The elastic network interfaces associated with the container
     #   instance.
     #   @return [Array<Types::Attachment>]
     #
@@ -1369,9 +1450,11 @@ module Aws::ECS
     #           {
     #             registry_arn: "String",
     #             port: 1,
+    #             container_name: "String",
+    #             container_port: 1,
     #           },
     #         ],
-    #         desired_count: 1, # required
+    #         desired_count: 1,
     #         client_token: "String",
     #         launch_type: "EC2", # accepts EC2, FARGATE
     #         platform_version: "String",
@@ -1400,6 +1483,7 @@ module Aws::ECS
     #           },
     #         },
     #         health_check_grace_period_seconds: 1,
+    #         scheduling_strategy: "REPLICA", # accepts REPLICA, DAEMON
     #       }
     #
     # @!attribute [rw] cluster
@@ -1412,8 +1496,8 @@ module Aws::ECS
     #   The name of your service. Up to 255 letters (uppercase and
     #   lowercase), numbers, hyphens, and underscores are allowed. Service
     #   names must be unique within a cluster, but you can have similarly
-    #   named services in multiple clusters within a region or across
-    #   multiple regions.
+    #   named services in multiple clusters within a Region or across
+    #   multiple Regions.
     #   @return [String]
     #
     # @!attribute [rw] task_definition
@@ -1443,15 +1527,30 @@ module Aws::ECS
     #   this service is placed on a container instance, the container
     #   instance and port combination is registered as a target in the
     #   target group specified here.
+    #
+    #   Services with tasks that use the `awsvpc` network mode (for example,
+    #   those with the Fargate launch type) only support Application Load
+    #   Balancers and Network Load Balancers; Classic Load Balancers are not
+    #   supported. Also, when you create any target groups for these
+    #   services, you must choose `ip` as the target type, not `instance`,
+    #   because tasks that use the `awsvpc` network mode are associated with
+    #   an elastic network interface, not an Amazon EC2 instance.
     #   @return [Array<Types::LoadBalancer>]
     #
     # @!attribute [rw] service_registries
-    #   The details of the service discovery registries you want to assign
-    #   to this service. For more information, see [Service Discovery][1].
+    #   The details of the service discovery registries to assign to this
+    #   service. For more information, see [Service Discovery][1].
+    #
+    #   <note markdown="1"> Service discovery is supported for Fargate tasks if using platform
+    #   version v1.1.0 or later. For more information, see [AWS Fargate
+    #   Platform Versions][2].
+    #
+    #    </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguideservice-discovery.html
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
+    #   [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #   @return [Array<Types::ServiceRegistry>]
     #
     # @!attribute [rw] desired_count
@@ -1460,7 +1559,7 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Up to 32 ASCII characters are allowed.
     #   @return [String]
     #
@@ -1541,11 +1640,39 @@ module Aws::ECS
     #   your service is configured to use a load balancer. If your
     #   service's tasks take a while to start and respond to Elastic Load
     #   Balancing health checks, you can specify a health check grace period
-    #   of up to 1,800 seconds during which the ECS service scheduler
+    #   of up to 7,200 seconds during which the ECS service scheduler
     #   ignores health check status. This grace period can prevent the ECS
     #   service scheduler from marking tasks as unhealthy and stopping them
     #   before they have time to come up.
     #   @return [Integer]
+    #
+    # @!attribute [rw] scheduling_strategy
+    #   The scheduling strategy to use for the service. For more
+    #   information, see [Services][1].
+    #
+    #   There are two service scheduler strategies available:
+    #
+    #   * `REPLICA`-The replica scheduling strategy places and maintains the
+    #     desired number of tasks across your cluster. By default, the
+    #     service scheduler spreads tasks across Availability Zones. You can
+    #     use task placement strategies and constraints to customize task
+    #     placement decisions.
+    #
+    #   * `DAEMON`-The daemon scheduling strategy deploys exactly one task
+    #     on each active container instance that meets all of the task
+    #     placement constraints that you specify in your cluster. When using
+    #     this strategy, there is no need to specify a desired number of
+    #     tasks, a task placement strategy, or use Service Auto Scaling
+    #     policies.
+    #
+    #     <note markdown="1"> Fargate tasks do not support the `DAEMON` scheduling strategy.
+    #
+    #      </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguideecs_services.html
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateServiceRequest AWS API Documentation
     #
@@ -1564,7 +1691,8 @@ module Aws::ECS
       :placement_constraints,
       :placement_strategy,
       :network_configuration,
-      :health_check_grace_period_seconds)
+      :health_check_grace_period_seconds,
+      :scheduling_strategy)
       include Aws::Structure
     end
 
@@ -1664,6 +1792,7 @@ module Aws::ECS
     #       {
     #         cluster: "String",
     #         service: "String", # required
+    #         force: false,
     #       }
     #
     # @!attribute [rw] cluster
@@ -1676,11 +1805,18 @@ module Aws::ECS
     #   The name of the service to delete.
     #   @return [String]
     #
+    # @!attribute [rw] force
+    #   If `true`, allows you to delete a service even if it has not been
+    #   scaled down to zero tasks. It is only necessary to use this if the
+    #   service is using the `REPLICA` scheduling strategy.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteServiceRequest AWS API Documentation
     #
     class DeleteServiceRequest < Struct.new(
       :cluster,
-      :service)
+      :service,
+      :force)
       include Aws::Structure
     end
 
@@ -1747,7 +1883,7 @@ module Aws::ECS
     #
     # @!attribute [rw] network_configuration
     #   The VPC subnet and security group configuration for tasks that
-    #   receive their own Elastic Network Interface by using the `awsvpc`
+    #   receive their own elastic network interface by using the `awsvpc`
     #   networking mode.
     #   @return [Types::NetworkConfiguration]
     #
@@ -1822,7 +1958,7 @@ module Aws::ECS
     # @!attribute [rw] container_instance
     #   The container instance ID or full ARN of the container instance to
     #   deregister. The ARN contains the `arn:aws:ecs` namespace, followed
-    #   by the region of the container instance, the AWS account ID of the
+    #   by the Region of the container instance, the AWS account ID of the
     #   container instance owner, the `container-instance` namespace, and
     #   then the container instance ID. For example,
     #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID
@@ -1970,7 +2106,8 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] container_instances
-    #   A list of container instance IDs or full ARN entries.
+    #   A list of up to 100 container instance IDs or full Amazon Resource
+    #   Name (ARN) entries.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeContainerInstancesRequest AWS API Documentation
@@ -2158,7 +2295,7 @@ module Aws::ECS
     #
     # @!attribute [rw] container_instance
     #   The container instance ID or full ARN of the container instance. The
-    #   ARN contains the `arn:aws:ecs` namespace, followed by the region of
+    #   ARN contains the `arn:aws:ecs` namespace, followed by the Region of
     #   the container instance, the AWS account ID of the container instance
     #   owner, the `container-instance` namespace, and then the container
     #   instance ID. For example,
@@ -2195,6 +2332,99 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # This parameter is specified when using Docker volumes. Docker volumes
+    # are only supported when using the EC2 launch type. Windows containers
+    # only support the use of the `local` driver. To use bind mounts,
+    # specify a `host` instead.
+    #
+    # @note When making an API call, you may pass DockerVolumeConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         scope: "task", # accepts task, shared
+    #         autoprovision: false,
+    #         driver: "String",
+    #         driver_opts: {
+    #           "String" => "String",
+    #         },
+    #         labels: {
+    #           "String" => "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] scope
+    #   The scope for the Docker volume which determines it's lifecycle.
+    #   Docker volumes that are scoped to a `task` are automatically
+    #   provisioned when the task starts and destroyed when the task stops.
+    #   Docker volumes that are scoped as `shared` persist after the task
+    #   stops.
+    #   @return [String]
+    #
+    # @!attribute [rw] autoprovision
+    #   If this value is `true`, the Docker volume is created if it does not
+    #   already exist.
+    #
+    #   <note markdown="1"> This field is only used if the `scope` is `shared`.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] driver
+    #   The Docker volume driver to use. The driver value must match the
+    #   driver name provided by Docker because it is used for task
+    #   placement. If the driver was installed using the Docker plugin CLI,
+    #   use `docker plugin ls` to retrieve the driver name from your
+    #   container instance. If the driver was installed using another
+    #   method, use Docker plugin discovery to retrieve the driver name. For
+    #   more information, see [Docker plugin discovery][1]. This parameter
+    #   maps to `Driver` in the [Create a volume][2] section of the [Docker
+    #   Remote API][3] and the `xxdriver` option to [ `docker volume create`
+    #   ][4].
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/extend/plugin_api/#plugin-discovery
+    #   [2]: https://docs.docker.com/engine/api/v1.35/#operation/VolumeCreate
+    #   [3]: https://docs.docker.com/engine/api/v1.35/
+    #   [4]: https://docs.docker.com/engine/reference/commandline/volume_create/
+    #   @return [String]
+    #
+    # @!attribute [rw] driver_opts
+    #   A map of Docker driver specific options passed through. This
+    #   parameter maps to `DriverOpts` in the [Create a volume][1] section
+    #   of the [Docker Remote API][2] and the `xxopt` option to [ `docker
+    #   volume create` ][3].
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/VolumeCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
+    #   [3]: https://docs.docker.com/engine/reference/commandline/volume_create/
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] labels
+    #   Custom metadata to add to your Docker volume. This parameter maps to
+    #   `Labels` in the [Create a volume][1] section of the [Docker Remote
+    #   API][2] and the `xxlabel` option to [ `docker volume create` ][3].
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/VolumeCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
+    #   [3]: https://docs.docker.com/engine/reference/commandline/volume_create/
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DockerVolumeConfiguration AWS API Documentation
+    #
+    class DockerVolumeConfiguration < Struct.new(
+      :scope,
+      :autoprovision,
+      :driver,
+      :driver_opts,
+      :labels)
+      include Aws::Structure
+    end
+
     # A failed resource.
     #
     # @!attribute [rw] arn
@@ -2217,6 +2447,24 @@ module Aws::ECS
     # parameters that are specified in a container definition override any
     # Docker health checks that exist in the container image (such as those
     # specified in a parent image or from the image's Dockerfile).
+    #
+    # The following are notes about container health check support:
+    #
+    # * Container health checks require version 1.17.0 or greater of the
+    #   Amazon ECS container agent. For more information, see [Updating the
+    #   Amazon ECS Container Agent][1].
+    #
+    # * Container health checks are supported for Fargate tasks if using
+    #   platform version version 1.1.0 or greater. For more information, see
+    #   [AWS Fargate Platform Versions][2].
+    #
+    # * Container health checks are not supported for tasks that are part of
+    #   a service that is configured to use a Classic Load Balancer.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #
     # @note When making an API call, you may pass HealthCheck
     #   data as a hash:
@@ -2243,8 +2491,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   @return [Array<String>]
     #
     # @!attribute [rw] interval
@@ -2256,13 +2504,13 @@ module Aws::ECS
     # @!attribute [rw] timeout
     #   The time period in seconds to wait for a health check to succeed
     #   before it is considered a failure. You may specify between 2 and 60
-    #   seconds. The default value is 5 seconds.
+    #   seconds. The default value is 5.
     #   @return [Integer]
     #
     # @!attribute [rw] retries
     #   The number of times to retry a failed health check before the
     #   container is considered unhealthy. You may specify between 1 and 10
-    #   retries. The default value is 3 retries.
+    #   retries. The default value is 3.
     #   @return [Integer]
     #
     # @!attribute [rw] start_period
@@ -2317,7 +2565,7 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # Details on a container instance host volume.
+    # Details on a container instance bind mount host volume.
     #
     # @note When making an API call, you may pass HostVolumeProperties
     #   data as a hash:
@@ -2327,7 +2575,8 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] source_path
-    #   The path on the host container instance that is presented to the
+    #   When the `host` parameter is used, specify a `sourcePath` to declare
+    #   the path on the host container instance that is presented to the
     #   container. If this parameter is empty, then the Docker daemon has
     #   assigned a host path for you. If the `host` parameter contains a
     #   `sourcePath` file location, then the data volume persists at the
@@ -2390,8 +2639,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<String>]
     #
@@ -2413,8 +2662,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<String>]
     #
@@ -2506,8 +2755,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::Device>]
     #
@@ -2526,8 +2775,13 @@ module Aws::ECS
     #   @return [Boolean]
     #
     # @!attribute [rw] shared_memory_size
-    #   The value for the size of the `/dev/shm` volume. This parameter maps
-    #   to the `--shm-size` option to [docker run][1].
+    #   The value for the size (in MiB) of the `/dev/shm` volume. This
+    #   parameter maps to the `--shm-size` option to [docker run][1].
+    #
+    #   <note markdown="1"> If you are using tasks that use the Fargate launch type, the
+    #   `sharedMemorySize` parameter is not supported.
+    #
+    #    </note>
     #
     #
     #
@@ -2535,8 +2789,14 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] tmpfs
-    #   The container path, mount options, and size of the tmpfs mount. This
-    #   parameter maps to the `--tmpfs` option to [docker run][1].
+    #   The container path, mount options, and size (in MiB) of the tmpfs
+    #   mount. This parameter maps to the `--tmpfs` option to [docker
+    #   run][1].
+    #
+    #   <note markdown="1"> If you are using tasks that use the Fargate launch type, the `tmpfs`
+    #   parameter is not supported.
+    #
+    #    </note>
     #
     #
     #
@@ -2804,6 +3064,7 @@ module Aws::ECS
     #         next_token: "String",
     #         max_results: 1,
     #         launch_type: "EC2", # accepts EC2, FARGATE
+    #         scheduling_strategy: "REPLICA", # accepts REPLICA, DAEMON
     #       }
     #
     # @!attribute [rw] cluster
@@ -2837,7 +3098,11 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] launch_type
-    #   The launch type for services you want to list.
+    #   The launch type for the services to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduling_strategy
+    #   The scheduling strategy for services to list.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServicesRequest AWS API Documentation
@@ -2846,7 +3111,8 @@ module Aws::ECS
       :cluster,
       :next_token,
       :max_results,
-      :launch_type)
+      :launch_type,
+      :scheduling_strategy)
       include Aws::Structure
     end
 
@@ -3139,7 +3405,7 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] launch_type
-    #   The launch type for services you want to list.
+    #   The launch type for services to list.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTasksRequest AWS API Documentation
@@ -3178,6 +3444,14 @@ module Aws::ECS
 
     # Details on a load balancer that is used with a service.
     #
+    # Services with tasks that use the `awsvpc` network mode (for example,
+    # those with the Fargate launch type) only support Application Load
+    # Balancers and Network Load Balancers; Classic Load Balancers are not
+    # supported. Also, when you create any target groups for these services,
+    # you must choose `ip` as the target type, not `instance`, because tasks
+    # that use the `awsvpc` network mode are associated with an elastic
+    # network interface, not an Amazon EC2 instance.
+    #
     # @note When making an API call, you may pass LoadBalancer
     #   data as a hash:
     #
@@ -3191,6 +3465,12 @@ module Aws::ECS
     # @!attribute [rw] target_group_arn
     #   The full Amazon Resource Name (ARN) of the Elastic Load Balancing
     #   target group associated with a service.
+    #
+    #   If your service's task definition uses the `awsvpc` network mode
+    #   (which is required for the Fargate launch type), you must choose
+    #   `ip` as the target type, not `instance`, because tasks that use the
+    #   `awsvpc` network mode are associated with an elastic network
+    #   interface, not an Amazon EC2 instance.
     #   @return [String]
     #
     # @!attribute [rw] load_balancer_name
@@ -3291,7 +3571,8 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] source_volume
-    #   The name of the volume to mount.
+    #   The name of the volume to mount. Must be a volume name referenced in
+    #   the `name` parameter of task definition `volume`.
     #   @return [String]
     #
     # @!attribute [rw] container_path
@@ -3372,6 +3653,10 @@ module Aws::ECS
     #
     # @!attribute [rw] awsvpc_configuration
     #   The VPC subnets and security groups associated with a task.
+    #
+    #   <note markdown="1"> All specified subnets and security groups must be from the same VPC.
+    #
+    #    </note>
     #   @return [Types::AwsVpcConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/NetworkConfiguration AWS API Documentation
@@ -3381,7 +3666,7 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # An object representing the Elastic Network Interface for tasks that
+    # An object representing the elastic network interface for tasks that
     # use the `awsvpc` network mode.
     #
     # @!attribute [rw] attachment_id
@@ -3430,8 +3715,8 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] expression
-    #   A cluster query language expression to apply to the constraint. Note
-    #   you cannot specify an expression if the constraint type is
+    #   A cluster query language expression to apply to the constraint. You
+    #   cannot specify an expression if the constraint type is
     #   `distinctInstance`. For more information, see [Cluster Query
     #   Language][1] in the *Amazon Elastic Container Service Developer
     #   Guide*.
@@ -3739,6 +4024,9 @@ module Aws::ECS
     #           {
     #             name: "String",
     #             image: "String",
+    #             repository_credentials: {
+    #               credentials_parameter: "String", # required
+    #             },
     #             cpu: 1,
     #             memory: 1,
     #             memory_reservation: 1,
@@ -3809,6 +4097,8 @@ module Aws::ECS
     #               },
     #             ],
     #             docker_security_options: ["String"],
+    #             interactive: false,
+    #             pseudo_terminal: false,
     #             docker_labels: {
     #               "String" => "String",
     #             },
@@ -3832,6 +4122,12 @@ module Aws::ECS
     #               retries: 1,
     #               start_period: 1,
     #             },
+    #             system_controls: [
+    #               {
+    #                 namespace: "String",
+    #                 value: "String",
+    #               },
+    #             ],
     #           },
     #         ],
     #         volumes: [
@@ -3839,6 +4135,17 @@ module Aws::ECS
     #             name: "String",
     #             host: {
     #               source_path: "String",
+    #             },
+    #             docker_volume_configuration: {
+    #               scope: "task", # accepts task, shared
+    #               autoprovision: false,
+    #               driver: "String",
+    #               driver_opts: {
+    #                 "String" => "String",
+    #               },
+    #               labels: {
+    #                 "String" => "String",
+    #               },
     #             },
     #           },
     #         ],
@@ -3945,9 +4252,9 @@ module Aws::ECS
     # @!attribute [rw] cpu
     #   The number of CPU units used by the task. It can be expressed as an
     #   integer using CPU units, for example `1024`, or as a string using
-    #   vCPUs, for example `1 vCPU` or `1 vcpu`, in a task definition but
-    #   will be converted to an integer indicating the CPU units when the
-    #   task definition is registered.
+    #   vCPUs, for example `1 vCPU` or `1 vcpu`, in a task definition.
+    #   String values are converted to an integer indicating the CPU units
+    #   when the task definition is registered.
     #
     #   <note markdown="1"> Task-level CPU and memory parameters are ignored for Windows
     #   containers. We recommend specifying container-level resources for
@@ -3983,9 +4290,9 @@ module Aws::ECS
     # @!attribute [rw] memory
     #   The amount of memory (in MiB) used by the task. It can be expressed
     #   as an integer using MiB, for example `1024`, or as a string using
-    #   GB, for example `1GB` or `1 GB`, in a task definition but will be
-    #   converted to an integer indicating the MiB when the task definition
-    #   is registered.
+    #   GB, for example `1GB` or `1 GB`, in a task definition. String values
+    #   are converted to an integer indicating the MiB when the task
+    #   definition is registered.
     #
     #   <note markdown="1"> Task-level CPU and memory parameters are ignored for Windows
     #   containers. We recommend specifying container-level resources for
@@ -4042,6 +4349,27 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The repository credentials for private registry authentication.
+    #
+    # @note When making an API call, you may pass RepositoryCredentials
+    #   data as a hash:
+    #
+    #       {
+    #         credentials_parameter: "String", # required
+    #       }
+    #
+    # @!attribute [rw] credentials_parameter
+    #   The Amazon Resource Name (ARN) or name of the secret containing the
+    #   private repository credentials.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RepositoryCredentials AWS API Documentation
+    #
+    class RepositoryCredentials < Struct.new(
+      :credentials_parameter)
+      include Aws::Structure
+    end
+
     # Describes the resources available for a container instance.
     #
     # @note When making an API call, you may pass Resource
@@ -4057,8 +4385,8 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the resource, such as `cpu`, `memory`, `ports`, or a
-    #   user-defined resource.
+    #   The name of the resource, such as `CPU`, `MEMORY`, `PORTS`,
+    #   `PORTS_UDP`, or a user-defined resource.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -4271,7 +4599,7 @@ module Aws::ECS
     #
     # @!attribute [rw] service_arn
     #   The ARN that identifies the service. The ARN contains the
-    #   `arn:aws:ecs` namespace, followed by the region of the service, the
+    #   `arn:aws:ecs` namespace, followed by the Region of the service, the
     #   AWS account ID of the service owner, the `service` namespace, and
     #   then the service name. For example,
     #   `arn:aws:ecs:region:012345678910:service/my-service `.
@@ -4281,8 +4609,8 @@ module Aws::ECS
     #   The name of your service. Up to 255 letters (uppercase and
     #   lowercase), numbers, hyphens, and underscores are allowed. Service
     #   names must be unique within a cluster, but you can have similarly
-    #   named services in multiple clusters within a region or across
-    #   multiple regions.
+    #   named services in multiple clusters within a Region or across
+    #   multiple Regions.
     #   @return [String]
     #
     # @!attribute [rw] cluster_arn
@@ -4295,6 +4623,14 @@ module Aws::ECS
     #   the load balancer name, the container name (as it appears in a
     #   container definition), and the container port to access from the
     #   load balancer.
+    #
+    #   Services with tasks that use the `awsvpc` network mode (for example,
+    #   those with the Fargate launch type) only support Application Load
+    #   Balancers and Network Load Balancers; Classic Load Balancers are not
+    #   supported. Also, when you create any target groups for these
+    #   services, you must choose `ip` as the target type, not `instance`,
+    #   because tasks that use the `awsvpc` network mode are associated with
+    #   an elastic network interface, not an Amazon EC2 instance.
     #   @return [Array<Types::LoadBalancer>]
     #
     # @!attribute [rw] service_registries
@@ -4376,7 +4712,7 @@ module Aws::ECS
     #
     # @!attribute [rw] network_configuration
     #   The VPC subnet and security group configuration for tasks that
-    #   receive their own Elastic Network Interface by using the `awsvpc`
+    #   receive their own elastic network interface by using the `awsvpc`
     #   networking mode.
     #   @return [Types::NetworkConfiguration]
     #
@@ -4385,6 +4721,32 @@ module Aws::ECS
     #   scheduler ignores unhealthy Elastic Load Balancing target health
     #   checks after a task has first started.
     #   @return [Integer]
+    #
+    # @!attribute [rw] scheduling_strategy
+    #   The scheduling strategy to use for the service. For more
+    #   information, see [Services][1].
+    #
+    #   There are two service scheduler strategies available:
+    #
+    #   * `REPLICA`-The replica scheduling strategy places and maintains the
+    #     desired number of tasks across your cluster. By default, the
+    #     service scheduler spreads tasks across Availability Zones. You can
+    #     use task placement strategies and constraints to customize task
+    #     placement decisions.
+    #
+    #   * `DAEMON`-The daemon scheduling strategy deploys exactly one task
+    #     on each container instance in your cluster. When using this
+    #     strategy, do not specify a desired number of tasks or any task
+    #     placement strategies.
+    #
+    #     <note markdown="1"> Fargate tasks do not support the `DAEMON` scheduling strategy.
+    #
+    #      </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguideecs_services.html
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Service AWS API Documentation
     #
@@ -4409,7 +4771,8 @@ module Aws::ECS
       :placement_constraints,
       :placement_strategy,
       :network_configuration,
-      :health_check_grace_period_seconds)
+      :health_check_grace_period_seconds,
+      :scheduling_strategy)
       include Aws::Structure
     end
 
@@ -4444,12 +4807,14 @@ module Aws::ECS
     #       {
     #         registry_arn: "String",
     #         port: 1,
+    #         container_name: "String",
+    #         container_port: 1,
     #       }
     #
     # @!attribute [rw] registry_arn
-    #   The Amazon Resource Name (ARN) of the Service Registry. The
-    #   currently supported service registry is Amazon Route 53 Auto Naming
-    #   Service. For more information, see [Service][1].
+    #   The Amazon Resource Name (ARN) of the service registry. The
+    #   currently supported service registry is Amazon Route 53 Auto Naming.
+    #   For more information, see [Service][1].
     #
     #
     #
@@ -4457,15 +4822,41 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   The port value used if your Service Discovery service specified an
-    #   SRV record.
+    #   The port value used if your service discovery service specified an
+    #   SRV record. This field may be used if both the `awsvpc` network mode
+    #   and SRV records are used.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] container_name
+    #   The container name value, already specified in the task definition,
+    #   to be used for your service discovery service. If the task
+    #   definition that your service task specifies uses the `bridge` or
+    #   `host` network mode, you must specify a `containerName` and
+    #   `containerPort` combination from the task definition. If the task
+    #   definition that your service task specifies uses the `awsvpc`
+    #   network mode and a type SRV DNS record is used, you must specify
+    #   either a `containerName` and `containerPort` combination or a `port`
+    #   value, but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_port
+    #   The port value, already specified in the task definition, to be used
+    #   for your service discovery service. If the task definition your
+    #   service task specifies uses the `bridge` or `host` network mode, you
+    #   must specify a `containerName` and `containerPort` combination from
+    #   the task definition. If the task definition your service task
+    #   specifies uses the `awsvpc` network mode and a type SRV DNS record
+    #   is used, you must specify either a `containerName` and
+    #   `containerPort` combination or a `port` value, but not both.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceRegistry AWS API Documentation
     #
     class ServiceRegistry < Struct.new(
       :registry_arn,
-      :port)
+      :port,
+      :container_name,
+      :container_port)
       include Aws::Structure
     end
 
@@ -4561,7 +4952,7 @@ module Aws::ECS
     #
     # @!attribute [rw] network_configuration
     #   The VPC subnet and security group configuration for tasks that
-    #   receive their own Elastic Network Interface by using the `awsvpc`
+    #   receive their own elastic network interface by using the `awsvpc`
     #   networking mode.
     #   @return [Types::NetworkConfiguration]
     #
@@ -4813,6 +5204,50 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # A list of namespaced kernel parameters to set in the container. This
+    # parameter maps to `Sysctls` in the [Create a container][1] section of
+    # the [Docker Remote API][2] and the `--sysctl` option to [docker
+    # run][3].
+    #
+    # <note markdown="1"> It is not recommended that you specify network-related
+    # `systemControls` parameters for multiple containers in a single task
+    # that also uses either the `awsvpc` or `host` network modes. When you
+    # do, the container that is started last will determine which
+    # `systemControls` parameters take effect.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    # [2]: https://docs.docker.com/engine/api/v1.35/
+    # [3]: https://docs.docker.com/engine/reference/run/
+    #
+    # @note When making an API call, you may pass SystemControl
+    #   data as a hash:
+    #
+    #       {
+    #         namespace: "String",
+    #         value: "String",
+    #       }
+    #
+    # @!attribute [rw] namespace
+    #   The namespaced kernel parameter to set a `value` for.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value for the namespaced kernel parameter specifed in
+    #   `namespace`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SystemControl AWS API Documentation
+    #
+    class SystemControl < Struct.new(
+      :namespace,
+      :value)
+      include Aws::Structure
+    end
+
     # Details on a task in a cluster.
     #
     # @!attribute [rw] task_arn
@@ -4836,19 +5271,29 @@ module Aws::ECS
     #   @return [Types::TaskOverride]
     #
     # @!attribute [rw] last_status
-    #   The last known status of the task.
+    #   The last known status of the task. For more information, see [Task
+    #   Lifecycle][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_life_cycle.html
     #   @return [String]
     #
     # @!attribute [rw] desired_status
-    #   The desired status of the task.
+    #   The desired status of the task. For more information, see [Task
+    #   Lifecycle][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_life_cycle.html
     #   @return [String]
     #
     # @!attribute [rw] cpu
     #   The number of CPU units used by the task. It can be expressed as an
     #   integer using CPU units, for example `1024`, or as a string using
-    #   vCPUs, for example `1 vCPU` or `1 vcpu`, in a task definition but is
-    #   converted to an integer indicating the CPU units when the task
-    #   definition is registered.
+    #   vCPUs, for example `1 vCPU` or `1 vcpu`, in a task definition.
+    #   String values are converted to an integer indicating the CPU units
+    #   when the task definition is registered.
     #
     #   If using the EC2 launch type, this field is optional. Supported
     #   values are between `128` CPU units (`0.125` vCPUs) and `10240` CPU
@@ -4878,9 +5323,9 @@ module Aws::ECS
     # @!attribute [rw] memory
     #   The amount of memory (in MiB) used by the task. It can be expressed
     #   as an integer using MiB, for example `1024`, or as a string using
-    #   GB, for example `1GB` or `1 GB`, in a task definition but is
-    #   converted to an integer indicating the MiB when the task definition
-    #   is registered.
+    #   GB, for example `1GB` or `1 GB`, in a task definition. String values
+    #   are converted to an integer indicating the MiB when the task
+    #   definition is registered.
     #
     #   If using the EC2 launch type, this field is optional.
     #
@@ -4960,8 +5405,8 @@ module Aws::ECS
     #   @return [Time]
     #
     # @!attribute [rw] stopping_at
-    #   The Unix time stamp for when the task will stop (transitions from
-    #   the `RUNNING` state to `STOPPED`).
+    #   The Unix time stamp for when the task stops (transitions from the
+    #   `RUNNING` state to `STOPPED`).
     #   @return [Time]
     #
     # @!attribute [rw] stopped_at
@@ -4988,7 +5433,7 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] attachments
-    #   The Elastic Network Adapter associated with the task if the task
+    #   The elastic network adapter associated with the task if the task
     #   uses the `awsvpc` network mode.
     #   @return [Array<Types::Attachment>]
     #
@@ -5364,11 +5809,11 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] container_path
-    #   The absolute file path where the tmpfs volume will be mounted.
+    #   The absolute file path where the tmpfs volume is to be mounted.
     #   @return [String]
     #
     # @!attribute [rw] size
-    #   The size of the tmpfs volume.
+    #   The size (in MiB) of the tmpfs volume.
     #   @return [Integer]
     #
     # @!attribute [rw] mount_options
@@ -5379,7 +5824,8 @@ module Aws::ECS
     #   "remount" | "mand" | "nomand" | "atime" | "noatime" | "diratime" |
     #   "nodiratime" | "bind" | "rbind" | "unbindable" | "runbindable" |
     #   "private" | "rprivate" | "shared" | "rshared" | "slave" | "rslave" |
-    #   "relatime" | "norelatime" | "strictatime" | "nostrictatime"`
+    #   "relatime" | "norelatime" | "strictatime" | "nostrictatime" | "mode"
+    #   | "uid" | "gid" | "nr_inodes" | "nr_blocks" | "mpol"`
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Tmpfs AWS API Documentation
@@ -5587,7 +6033,7 @@ module Aws::ECS
     #   @return [Types::NetworkConfiguration]
     #
     # @!attribute [rw] platform_version
-    #   The platform version you want to update your service to run.
+    #   The platform version that your service should run.
     #   @return [String]
     #
     # @!attribute [rw] force_new_deployment
@@ -5676,7 +6122,14 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # A data volume used in a task definition.
+    # A data volume used in a task definition. For tasks that use a Docker
+    # volume, specify a `DockerVolumeConfiguration`. For tasks that use a
+    # bind mount host volume, specify a `host` and optional `sourcePath`.
+    # For more information, see [Using Data Volumes in Tasks][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguideusing_data_volumes.html
     #
     # @note When making an API call, you may pass Volume
     #   data as a hash:
@@ -5685,6 +6138,17 @@ module Aws::ECS
     #         name: "String",
     #         host: {
     #           source_path: "String",
+    #         },
+    #         docker_volume_configuration: {
+    #           scope: "task", # accepts task, shared
+    #           autoprovision: false,
+    #           driver: "String",
+    #           driver_opts: {
+    #             "String" => "String",
+    #           },
+    #           labels: {
+    #             "String" => "String",
+    #           },
     #         },
     #       }
     #
@@ -5696,12 +6160,14 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] host
-    #   The contents of the `host` parameter determine whether your data
-    #   volume persists on the host container instance and where it is
-    #   stored. If the host parameter is empty, then the Docker daemon
-    #   assigns a host path for your data volume, but the data is not
-    #   guaranteed to persist after the containers associated with it stop
-    #   running.
+    #   This parameter is specified when using bind mount host volumes. Bind
+    #   mount host volumes are supported when using either the EC2 or
+    #   Fargate launch types. The contents of the `host` parameter determine
+    #   whether your bind mount host volume persists on the host container
+    #   instance and where it is stored. If the `host` parameter is empty,
+    #   then the Docker daemon assigns a host path for your data volume, but
+    #   the data is not guaranteed to persist after the containers
+    #   associated with it stop running.
     #
     #   Windows containers can mount whole directories on the same drive as
     #   `$env:ProgramData`. Windows containers cannot mount directories on a
@@ -5710,11 +6176,19 @@ module Aws::ECS
     #   not `D:\my\path:C:\my\path` or `D:\:C:\my\path`.
     #   @return [Types::HostVolumeProperties]
     #
+    # @!attribute [rw] docker_volume_configuration
+    #   This parameter is specified when using Docker volumes. Docker
+    #   volumes are only supported when using the EC2 launch type. Windows
+    #   containers only support the use of the `local` driver. To use bind
+    #   mounts, specify a `host` instead.
+    #   @return [Types::DockerVolumeConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Volume AWS API Documentation
     #
     class Volume < Struct.new(
       :name,
-      :host)
+      :host,
+      :docker_volume_configuration)
       include Aws::Structure
     end
 

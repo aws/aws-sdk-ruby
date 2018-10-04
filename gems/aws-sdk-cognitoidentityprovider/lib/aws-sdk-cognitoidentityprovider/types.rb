@@ -937,6 +937,15 @@ module Aws::CognitoIdentityProvider
     #   call. This is returned to you in the `AdminInitiateAuth` response if
     #   you need to pass another challenge.
     #
+    #   * `MFA_SETUP`\: If MFA is required, users who do not have at least
+    #     one of the MFA methods set up are presented with an `MFA_SETUP`
+    #     challenge. The user must set up at least one MFA type to continue
+    #     to authenticate.
+    #
+    #   * `SELECT_MFA_TYPE`\: Selects the MFA type. Valid MFA options are
+    #     `SMS_MFA` for text SMS MFA, and `SOFTWARE_TOKEN_MFA` for TOTP
+    #     software token MFA.
+    #
     #   * `SMS_MFA`\: Next challenge is to supply an `SMS_MFA_CODE`,
     #     delivered via SMS.
     #
@@ -1902,7 +1911,7 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] expires_in
-    #   The expiration period of the authentication result.
+    #   The expiration period of the authentication result in seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] token_type
@@ -2396,7 +2405,7 @@ module Aws::CognitoIdentityProvider
     #       {
     #         user_pool_id: "UserPoolIdType", # required
     #         provider_name: "ProviderNameTypeV1", # required
-    #         provider_type: "SAML", # required, accepts SAML, Facebook, Google, LoginWithAmazon
+    #         provider_type: "SAML", # required, accepts SAML, Facebook, Google, LoginWithAmazon, OIDC
     #         provider_details: { # required
     #           "StringType" => "StringType",
     #         },
@@ -2623,7 +2632,27 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<String>]
     #
     # @!attribute [rw] callback_urls
-    #   A list of allowed callback URLs for the identity providers.
+    #   A list of allowed redirect (callback) URLs for the identity
+    #   providers.
+    #
+    #   A redirect URI must:
+    #
+    #   * Be an absolute URI.
+    #
+    #   * Be registered with the authorization server.
+    #
+    #   * Not include a fragment component.
+    #
+    #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
+    #   for testing purposes only.
+    #
+    #   App callback URLs such as myapp://example are also supported.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6749#section-3.1.2
     #   @return [Array<String>]
     #
     # @!attribute [rw] logout_urls
@@ -2632,6 +2661,25 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] default_redirect_uri
     #   The default redirect URI. Must be in the `CallbackURLs` list.
+    #
+    #   A redirect URI must:
+    #
+    #   * Be an absolute URI.
+    #
+    #   * Be registered with the authorization server.
+    #
+    #   * Not include a fragment component.
+    #
+    #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
+    #   for testing purposes only.
+    #
+    #   App callback URLs such as myapp://example are also supported.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6749#section-3.1.2
     #   @return [String]
     #
     # @!attribute [rw] allowed_o_auth_flows
@@ -2698,6 +2746,9 @@ module Aws::CognitoIdentityProvider
     #       {
     #         domain: "DomainType", # required
     #         user_pool_id: "UserPoolIdType", # required
+    #         custom_domain_config: {
+    #           certificate_arn: "ArnType", # required
+    #         },
     #       }
     #
     # @!attribute [rw] domain
@@ -2708,17 +2759,42 @@ module Aws::CognitoIdentityProvider
     #   The user pool ID.
     #   @return [String]
     #
+    # @!attribute [rw] custom_domain_config
+    #   The configuration for a custom domain that hosts the sign-up and
+    #   sign-in webpages for your application.
+    #
+    #   Provide this parameter only if you want to use own custom domain for
+    #   your user pool. Otherwise, you can exclude this parameter and use
+    #   the Amazon Cognito hosted domain instead.
+    #
+    #   For more information about the hosted domain and custom domains, see
+    #   [Configuring a User Pool Domain][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-assign-domain.html
+    #   @return [Types::CustomDomainConfigType]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolDomainRequest AWS API Documentation
     #
     class CreateUserPoolDomainRequest < Struct.new(
       :domain,
-      :user_pool_id)
+      :user_pool_id,
+      :custom_domain_config)
       include Aws::Structure
     end
 
+    # @!attribute [rw] cloud_front_domain
+    #   The Amazon CloudFront endpoint that you use as the target of the
+    #   alias that you set up with your Domain Name Service (DNS) provider.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolDomainResponse AWS API Documentation
     #
-    class CreateUserPoolDomainResponse < Aws::EmptyStructure; end
+    class CreateUserPoolDomainResponse < Struct.new(
+      :cloud_front_domain)
+      include Aws::Structure
+    end
 
     # Represents the request to create a user pool.
     #
@@ -2952,6 +3028,29 @@ module Aws::CognitoIdentityProvider
     #
     class CreateUserPoolResponse < Struct.new(
       :user_pool)
+      include Aws::Structure
+    end
+
+    # The configuration for a custom domain that hosts the sign-up and
+    # sign-in webpages for your application.
+    #
+    # @note When making an API call, you may pass CustomDomainConfigType
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_arn: "ArnType", # required
+    #       }
+    #
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) of an AWS Certificate Manager SSL
+    #   certificate. You use this certificate for the subdomain of your
+    #   custom domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CustomDomainConfigType AWS API Documentation
+    #
+    class CustomDomainConfigType < Struct.new(
+      :certificate_arn)
       include Aws::Structure
     end
 
@@ -3524,6 +3623,11 @@ module Aws::CognitoIdentityProvider
     #   The domain status.
     #   @return [String]
     #
+    # @!attribute [rw] custom_domain_config
+    #   The configuration for a custom domain that hosts the sign-up and
+    #   sign-in webpages for your application.
+    #   @return [Types::CustomDomainConfigType]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DomainDescriptionType AWS API Documentation
     #
     class DomainDescriptionType < Struct.new(
@@ -3533,7 +3637,8 @@ module Aws::CognitoIdentityProvider
       :s3_bucket,
       :cloud_front_distribution,
       :version,
-      :status)
+      :status,
+      :custom_domain_config)
       include Aws::Structure
     end
 
@@ -4979,10 +5084,10 @@ module Aws::CognitoIdentityProvider
     #
     #   * `preferred_username`
     #
-    #   * `cognito:user_status` (called **Enabled** in the Console)
-    #     (case-sensitive)
+    #   * `cognito:user_status` (called **Status** in the Console)
+    #     (case-insensitive)
     #
-    #   * `status` (case-insensitive)
+    #   * `status (called Enabled in the Console) (case-sensitive)`
     #
     #   * `sub`
     #
@@ -5712,8 +5817,7 @@ module Aws::CognitoIdentityProvider
     #   @return [Boolean]
     #
     # @!attribute [rw] mutable
-    #   Specifies whether the attribute can be changed once it has been
-    #   created.
+    #   Specifies whether the value of the attribute can be changed.
     #   @return [Boolean]
     #
     # @!attribute [rw] required
@@ -6762,7 +6866,27 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<String>]
     #
     # @!attribute [rw] callback_urls
-    #   A list of allowed callback URLs for the identity providers.
+    #   A list of allowed redirect (callback) URLs for the identity
+    #   providers.
+    #
+    #   A redirect URI must:
+    #
+    #   * Be an absolute URI.
+    #
+    #   * Be registered with the authorization server.
+    #
+    #   * Not include a fragment component.
+    #
+    #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
+    #   for testing purposes only.
+    #
+    #   App callback URLs such as myapp://example are also supported.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6749#section-3.1.2
     #   @return [Array<String>]
     #
     # @!attribute [rw] logout_urls
@@ -6771,6 +6895,25 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] default_redirect_uri
     #   The default redirect URI. Must be in the `CallbackURLs` list.
+    #
+    #   A redirect URI must:
+    #
+    #   * Be an absolute URI.
+    #
+    #   * Be registered with the authorization server.
+    #
+    #   * Not include a fragment component.
+    #
+    #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
+    #   for testing purposes only.
+    #
+    #   App callback URLs such as myapp://example are also supported.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6749#section-3.1.2
     #   @return [String]
     #
     # @!attribute [rw] allowed_o_auth_flows
@@ -7228,7 +7371,27 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<String>]
     #
     # @!attribute [rw] callback_urls
-    #   A list of allowed callback URLs for the identity providers.
+    #   A list of allowed redirect (callback) URLs for the identity
+    #   providers.
+    #
+    #   A redirect URI must:
+    #
+    #   * Be an absolute URI.
+    #
+    #   * Be registered with the authorization server.
+    #
+    #   * Not include a fragment component.
+    #
+    #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
+    #   for testing purposes only.
+    #
+    #   App callback URLs such as myapp://example are also supported.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6749#section-3.1.2
     #   @return [Array<String>]
     #
     # @!attribute [rw] logout_urls
@@ -7237,6 +7400,25 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] default_redirect_uri
     #   The default redirect URI. Must be in the `CallbackURLs` list.
+    #
+    #   A redirect URI must:
+    #
+    #   * Be an absolute URI.
+    #
+    #   * Be registered with the authorization server.
+    #
+    #   * Not include a fragment component.
+    #
+    #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
+    #   for testing purposes only.
+    #
+    #   App callback URLs such as myapp://example are also supported.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6749#section-3.1.2
     #   @return [String]
     #
     # @!attribute [rw] allowed_o_auth_flows
@@ -7366,7 +7548,7 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::UserPoolPolicyType]
     #
     # @!attribute [rw] lambda_config
-    #   The AWS Lambda triggers associated with tue user pool.
+    #   The AWS Lambda triggers associated with the user pool.
     #   @return [Types::LambdaConfigType]
     #
     # @!attribute [rw] status
@@ -7471,6 +7653,9 @@ module Aws::CognitoIdentityProvider
     #   with it.
     #   @return [String]
     #
+    # @!attribute [rw] custom_domain
+    #   @return [String]
+    #
     # @!attribute [rw] admin_create_user_config
     #   The configuration for `AdminCreateUser` requests.
     #   @return [Types::AdminCreateUserConfigType]
@@ -7478,6 +7663,10 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] user_pool_add_ons
     #   The user pool add-ons.
     #   @return [Types::UserPoolAddOnsType]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the user pool.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolType AWS API Documentation
     #
@@ -7507,8 +7696,10 @@ module Aws::CognitoIdentityProvider
       :sms_configuration_failure,
       :email_configuration_failure,
       :domain,
+      :custom_domain,
       :admin_create_user_config,
-      :user_pool_add_ons)
+      :user_pool_add_ons,
+      :arn)
       include Aws::Structure
     end
 

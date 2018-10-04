@@ -202,8 +202,11 @@ module Aws::RDS
       data[:read_replica_db_instance_identifiers]
     end
 
-    # Contains one or more identifiers of Aurora DB clusters that are Read
-    # Replicas of this DB instance.
+    # Contains one or more identifiers of Aurora DB clusters to which the
+    # RDS DB instance is replicated as a Read Replica. For example, when you
+    # create an Aurora Read Replica of an RDS MySQL DB instance, the Aurora
+    # MySQL DB cluster for the Aurora Read Replica is shown. This output
+    # does not contain information about cross region Aurora Read Replicas.
     # @return [Array<String>]
     def read_replica_db_cluster_identifiers
       data[:read_replica_db_cluster_identifiers]
@@ -246,20 +249,6 @@ module Aws::RDS
     # DNS name, which resolves to a public IP address. A value of false
     # specifies an internal instance with a DNS name that resolves to a
     # private IP address.
-    #
-    # Default: The default behavior varies depending on whether a VPC has
-    # been requested or not. The following list shows the default behavior
-    # in each case.
-    #
-    # * **Default VPC:**true
-    #
-    # * **VPC:**false
-    #
-    # If no DB subnet group has been specified as part of the request and
-    # the PubliclyAccessible value has not been set, the DB instance is
-    # publicly accessible. If a specific DB subnet group has been specified
-    # as part of the request and the PubliclyAccessible value has not been
-    # set, the DB instance is private.
     # @return [Boolean]
     def publicly_accessible
       data[:publicly_accessible]
@@ -366,11 +355,11 @@ module Aws::RDS
     # A value that specifies the order in which an Aurora Replica is
     # promoted to the primary instance after a failure of the existing
     # primary instance. For more information, see [ Fault Tolerance for an
-    # Aurora DB Cluster][1].
+    # Aurora DB Cluster][1] in the *Amazon Aurora User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.FaultTolerance
     # @return [Integer]
     def promotion_tier
       data[:promotion_tier]
@@ -422,11 +411,45 @@ module Aws::RDS
       data[:performance_insights_kms_key_id]
     end
 
+    # The amount of time, in days, to retain Performance Insights data.
+    # Valid values are 7 or 731 (2 years).
+    # @return [Integer]
+    def performance_insights_retention_period
+      data[:performance_insights_retention_period]
+    end
+
     # A list of log types that this DB instance is configured to export to
     # CloudWatch Logs.
+    #
+    # Log types vary by DB engine. For information about the log types for
+    # each DB engine, see [Amazon RDS Database Log Files][1] in the *Amazon
+    # RDS User Guide.*
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html
     # @return [Array<String>]
     def enabled_cloudwatch_logs_exports
       data[:enabled_cloudwatch_logs_exports]
+    end
+
+    # The number of CPU cores and the number of threads per core for the DB
+    # instance class of the DB instance.
+    # @return [Array<Types::ProcessorFeature>]
+    def processor_features
+      data[:processor_features]
+    end
+
+    # Indicates if the DB instance has deletion protection enabled. The
+    # database can't be deleted when this value is set to true. For more
+    # information, see [ Deleting a DB Instance][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    # @return [Boolean]
+    def deletion_protection
+      data[:deletion_protection]
     end
 
     # @!endgroup
@@ -609,7 +632,15 @@ module Aws::RDS
     #     enable_iam_database_authentication: false,
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
+    #     performance_insights_retention_period: 1,
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     deletion_protection: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -779,7 +810,7 @@ module Aws::RDS
     #   `db.m4.large`. Not all DB instance classes are available in all AWS
     #   Regions, or for all database engines. For the full list of DB instance
     #   classes, and availability for your engine, see [DB Instance Class][1]
-    #   in the Amazon RDS User Guide.
+    #   in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -996,7 +1027,8 @@ module Aws::RDS
     # @option options [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
     #   automated backups are enabled, using the `BackupRetentionPeriod`
-    #   parameter. For more information, see [The Backup Window][1].
+    #   parameter. For more information, see [The Backup Window][1] in the
+    #   *Amazon RDS User Guide*.
     #
     #   **Amazon Aurora**
     #
@@ -1005,7 +1037,8 @@ module Aws::RDS
     #
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each AWS Region. To see the time blocks available,
-    #   see [ Adjusting the Preferred DB Instance Maintenance Window][2].
+    #   see [ Adjusting the Preferred DB Instance Maintenance Window][2] in
+    #   the *Amazon RDS User Guide*.
     #
     #   Constraints:
     #
@@ -1075,9 +1108,11 @@ module Aws::RDS
     # @option options [String] :engine_version
     #   The version number of the database engine to use.
     #
-    #   The following are the database engines and major and minor versions
-    #   that are available with Amazon RDS. Not every database engine is
-    #   available for every AWS Region.
+    #   For a list of valid engine versions, call DescribeDBEngineVersions.
+    #
+    #   The following are the database engines and links to information about
+    #   the major and minor versions that are available with Amazon RDS. Not
+    #   every database engine is available for every AWS Region.
     #
     #   **Amazon Aurora**
     #
@@ -1087,187 +1122,35 @@ module Aws::RDS
     #
     #   **MariaDB**
     #
-    #   * `10.2.12` (supported in all AWS Regions)
+    #   See [MariaDB on Amazon RDS Versions][1] in the *Amazon RDS User
+    #   Guide.*
     #
-    #   * `10.2.11` (supported in all AWS Regions)
+    #   **Microsoft SQL Server**
     #
-    #
-    #
-    #   * `10.1.31` (supported in all AWS Regions)
-    #
-    #   * `10.1.26` (supported in all AWS Regions)
-    #
-    #   * `10.1.23` (supported in all AWS Regions)
-    #
-    #   * `10.1.19` (supported in all AWS Regions)
-    #
-    #   * `10.1.14` (supported in all AWS Regions except us-east-2)
-    #
-    #
-    #
-    #   * `10.0.34` (supported in all AWS Regions)
-    #
-    #   * `10.0.32` (supported in all AWS Regions)
-    #
-    #   * `10.0.31` (supported in all AWS Regions)
-    #
-    #   * `10.0.28` (supported in all AWS Regions)
-    #
-    #   * `10.0.24` (supported in all AWS Regions)
-    #
-    #   * `10.0.17` (supported in all AWS Regions except us-east-2,
-    #     ca-central-1, eu-west-2)
-    #
-    #   **Microsoft SQL Server 2017**
-    #
-    #   * `14.00.1000.169.v1` (supported for all editions, and all AWS
-    #     Regions)
-    #
-    #   ^
-    #
-    #   **Microsoft SQL Server 2016**
-    #
-    #   * `13.00.4451.0.v1` (supported for all editions, and all AWS Regions)
-    #
-    #   * `13.00.4422.0.v1` (supported for all editions, and all AWS Regions)
-    #
-    #   * `13.00.2164.0.v1` (supported for all editions, and all AWS Regions)
-    #
-    #   **Microsoft SQL Server 2014**
-    #
-    #   * `12.00.5546.0.v1` (supported for all editions, and all AWS Regions)
-    #
-    #   * `12.00.5000.0.v1` (supported for all editions, and all AWS Regions)
-    #
-    #   * `12.00.4422.0.v1` (supported for all editions except Enterprise
-    #     Edition, and all AWS Regions except ca-central-1 and eu-west-2)
-    #
-    #   **Microsoft SQL Server 2012**
-    #
-    #   * `11.00.6594.0.v1` (supported for all editions, and all AWS Regions)
-    #
-    #   * `11.00.6020.0.v1` (supported for all editions, and all AWS Regions)
-    #
-    #   * `11.00.5058.0.v1` (supported for all editions, and all AWS Regions
-    #     except us-east-2, ca-central-1, and eu-west-2)
-    #
-    #   * `11.00.2100.60.v1` (supported for all editions, and all AWS Regions
-    #     except us-east-2, ca-central-1, and eu-west-2)
-    #
-    #   **Microsoft SQL Server 2008 R2**
-    #
-    #   * `10.50.6529.0.v1` (supported for all editions, and all AWS Regions
-    #     except us-east-2, ca-central-1, and eu-west-2)
-    #
-    #   * `10.50.6000.34.v1` (supported for all editions, and all AWS Regions
-    #     except us-east-2, ca-central-1, and eu-west-2)
-    #
-    #   * `10.50.2789.0.v1` (supported for all editions, and all AWS Regions
-    #     except us-east-2, ca-central-1, and eu-west-2)
+    #   See [Version and Feature Support on Amazon RDS][2] in the *Amazon RDS
+    #   User Guide.*
     #
     #   **MySQL**
     #
-    #   * `5.7.21` (supported in all AWS regions)
+    #   See [MySQL on Amazon RDS Versions][3] in the *Amazon RDS User Guide.*
     #
-    #   * `5.7.19` (supported in all AWS regions)
+    #   **Oracle**
     #
-    #   * `5.7.17` (supported in all AWS regions)
-    #
-    #   * `5.7.16` (supported in all AWS regions)
-    #
-    #
-    #
-    #   * `5.6.39` (supported in all AWS Regions)
-    #
-    #   * `5.6.37` (supported in all AWS Regions)
-    #
-    #   * `5.6.35` (supported in all AWS Regions)
-    #
-    #   * `5.6.34` (supported in all AWS Regions)
-    #
-    #   * `5.6.29` (supported in all AWS Regions)
-    #
-    #   * `5.6.27` (supported in all AWS Regions except us-east-2,
-    #     ca-central-1, eu-west-2)
-    #
-    #
-    #
-    #   * `5.5.59` (supported in all AWS Regions)
-    #
-    #   * `5.5.57` (supported in all AWS Regions)
-    #
-    #   * `5.5.54` (supported in all AWS Regions)
-    #
-    #   * `5.5.53` (supported in all AWS Regions)
-    #
-    #   * `5.5.46` (supported in all AWS Regions)
-    #
-    #   **Oracle 12c**
-    #
-    #   * `12.1.0.2.v9` (supported for EE in all AWS regions, and SE2 in all
-    #     AWS regions except us-gov-west-1)
-    #
-    #   * `12.1.0.2.v8` (supported for EE in all AWS regions, and SE2 in all
-    #     AWS regions except us-gov-west-1)
-    #
-    #   * `12.1.0.2.v7` (supported for EE in all AWS regions, and SE2 in all
-    #     AWS regions except us-gov-west-1)
-    #
-    #   * `12.1.0.2.v6` (supported for EE in all AWS regions, and SE2 in all
-    #     AWS regions except us-gov-west-1)
-    #
-    #   * `12.1.0.2.v5` (supported for EE in all AWS regions, and SE2 in all
-    #     AWS regions except us-gov-west-1)
-    #
-    #   * `12.1.0.2.v4` (supported for EE in all AWS regions, and SE2 in all
-    #     AWS regions except us-gov-west-1)
-    #
-    #   * `12.1.0.2.v3` (supported for EE in all AWS regions, and SE2 in all
-    #     AWS regions except us-gov-west-1)
-    #
-    #   * `12.1.0.2.v2` (supported for EE in all AWS regions, and SE2 in all
-    #     AWS regions except us-gov-west-1)
-    #
-    #   * `12.1.0.2.v1` (supported for EE in all AWS regions, and SE2 in all
-    #     AWS regions except us-gov-west-1)
-    #
-    #   **Oracle 11g**
-    #
-    #   * `11.2.0.4.v13` (supported for EE, SE1, and SE, in all AWS regions)
-    #
-    #   * `11.2.0.4.v12` (supported for EE, SE1, and SE, in all AWS regions)
-    #
-    #   * `11.2.0.4.v11` (supported for EE, SE1, and SE, in all AWS regions)
-    #
-    #   * `11.2.0.4.v10` (supported for EE, SE1, and SE, in all AWS regions)
-    #
-    #   * `11.2.0.4.v9` (supported for EE, SE1, and SE, in all AWS regions)
-    #
-    #   * `11.2.0.4.v8` (supported for EE, SE1, and SE, in all AWS regions)
-    #
-    #   * `11.2.0.4.v7` (supported for EE, SE1, and SE, in all AWS regions)
-    #
-    #   * `11.2.0.4.v6` (supported for EE, SE1, and SE, in all AWS regions)
-    #
-    #   * `11.2.0.4.v5` (supported for EE, SE1, and SE, in all AWS regions)
-    #
-    #   * `11.2.0.4.v4` (supported for EE, SE1, and SE, in all AWS regions)
-    #
-    #   * `11.2.0.4.v3` (supported for EE, SE1, and SE, in all AWS regions)
-    #
-    #   * `11.2.0.4.v1` (supported for EE, SE1, and SE, in all AWS regions)
+    #   See [Oracle Database Engine Release Notes][4] in the *Amazon RDS User
+    #   Guide.*
     #
     #   **PostgreSQL**
     #
-    #   * **Version 10.1**
+    #   See [Supported PostgreSQL Database Versions][5] in the *Amazon RDS
+    #   User Guide.*
     #
-    #   * **Version 9.6.x:** ` 9.6.6 | 9.6.5 | 9.6.3 | 9.6.2 | 9.6.1`
     #
-    #   * **Version 9.5.x:** ` 9.5.9 | 9.5.7 | 9.5.6 | 9.5.4 | 9.5.2`
     #
-    #   * **Version 9.4.x:** ` 9.4.14 | 9.4.12 | 9.4.11 | 9.4.9 | 9.4.7`
-    #
-    #   * **Version 9.3.x:** ` 9.3.19 | 9.3.17 | 9.3.16 | 9.3.14 | 9.3.12`
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt
+    #   [2]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport
+    #   [3]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
+    #   [4]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html
+    #   [5]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.DBVersions
     # @option options [Boolean] :auto_minor_version_upgrade
     #   Indicates that minor engine upgrades are applied automatically to the
     #   DB instance during the maintenance window.
@@ -1282,7 +1165,7 @@ module Aws::RDS
     #   The amount of Provisioned IOPS (input/output operations per second) to
     #   be initially allocated for the DB instance. For information about
     #   valid Iops values, see see [Amazon RDS Provisioned IOPS Storage to
-    #   Improve Performance][1].
+    #   Improve Performance][1] in the *Amazon RDS User Guide*.
     #
     #   Constraints: Must be a multiple between 1 and 50 of the storage amount
     #   for the DB instance. Must also be an integer multiple of 1000. For
@@ -1315,22 +1198,29 @@ module Aws::RDS
     #   specifies an internal instance with a DNS name that resolves to a
     #   private IP address.
     #
-    #   Default: The default behavior varies depending on whether a VPC has
-    #   been requested or not. The following list shows the default behavior
-    #   in each case.
+    #   Default: The default behavior varies depending on whether
+    #   `DBSubnetGroupName` is specified.
     #
-    #   * **Default VPC:** true
+    #   If `DBSubnetGroupName` is not specified, and `PubliclyAccessible` is
+    #   not specified, the following applies:
     #
-    #   * **VPC:** false
+    #   * If the default VPC in the target region doesn’t have an Internet
+    #     gateway attached to it, the DB instance is private.
     #
-    #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance is
-    #   publicly accessible. If a specific DB subnet group has been specified
-    #   as part of the request and the PubliclyAccessible value has not been
-    #   set, the DB instance is private.
+    #   * If the default VPC in the target region has an Internet gateway
+    #     attached to it, the DB instance is public.
+    #
+    #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` is not
+    #   specified, the following applies:
+    #
+    #   * If the subnets are part of a VPC that doesn’t have an Internet
+    #     gateway attached to it, the DB instance is private.
+    #
+    #   * If the subnets are part of a VPC that has an Internet gateway
+    #     attached to it, the DB instance is public.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -1404,7 +1294,7 @@ module Aws::RDS
     #   metrics to Amazon CloudWatch Logs. For example,
     #   `arn:aws:iam:123456789012:role/emaccess`. For information on creating
     #   a monitoring role, go to [Setting Up and Enabling Enhanced
-    #   Monitoring][1].
+    #   Monitoring][1] in the *Amazon RDS User Guide*.
     #
     #   If `MonitoringInterval` is set to a value other than 0, then you must
     #   supply a `MonitoringRoleArn` value.
@@ -1419,7 +1309,7 @@ module Aws::RDS
     #   A value that specifies the order in which an Aurora Replica is
     #   promoted to the primary instance after a failure of the existing
     #   primary instance. For more information, see [ Fault Tolerance for an
-    #   Aurora DB Cluster][1].
+    #   Aurora DB Cluster][1] in the *Amazon Aurora User Guide*.
     #
     #   Default: 1
     #
@@ -1427,7 +1317,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.FaultTolerance
     # @option options [String] :timezone
     #   The time zone of the DB instance. The time zone parameter is currently
     #   supported only by [Microsoft SQL Server][1].
@@ -1457,13 +1347,42 @@ module Aws::RDS
     # @option options [Boolean] :enable_performance_insights
     #   True to enable Performance Insights for the DB instance, and otherwise
     #   false.
+    #
+    #   For more information, see [Using Amazon Performance Insights][1] in
+    #   the *Amazon Relational Database Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
     # @option options [String] :performance_insights_kms_key_id
     #   The AWS KMS key identifier for encryption of Performance Insights
     #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
     #   identifier, or the KMS key alias for the KMS encryption key.
+    # @option options [Integer] :performance_insights_retention_period
+    #   The amount of time, in days, to retain Performance Insights data.
+    #   Valid values are 7 or 731 (2 years).
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine being
+    #   used. For more information, see [Publishing Database Logs to Amazon
+    #   CloudWatch Logs ][1] in the *Amazon Relational Database Service User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    # @option options [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
+    # @option options [Boolean] :deletion_protection
+    #   Indicates if the DB instance should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false. For more information, see [ Deleting a DB
+    #   Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     # @return [DBInstance]
     def create(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -1503,7 +1422,16 @@ module Aws::RDS
     #     enable_iam_database_authentication: false,
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
+    #     performance_insights_retention_period: 1,
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     use_default_processor_features: false,
+    #     deletion_protection: false,
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -1516,7 +1444,7 @@ module Aws::RDS
     #   `db.m4.large`. Not all DB instance classes are available in all AWS
     #   Regions, or for all database engines. For the full list of DB instance
     #   classes, and availability for your engine, see [DB Instance Class][1]
-    #   in the Amazon RDS User Guide.
+    #   in the *Amazon RDS User Guide.*
     #
     #   Default: Inherits from the source DB instance.
     #
@@ -1560,24 +1488,10 @@ module Aws::RDS
     #   true specifies an Internet-facing instance with a publicly resolvable
     #   DNS name, which resolves to a public IP address. A value of false
     #   specifies an internal instance with a DNS name that resolves to a
-    #   private IP address.
-    #
-    #   Default: The default behavior varies depending on whether a VPC has
-    #   been requested or not. The following list shows the default behavior
-    #   in each case.
-    #
-    #   * **Default VPC:**true
-    #
-    #   * **VPC:**false
-    #
-    #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance is
-    #   publicly accessible. If a specific DB subnet group has been specified
-    #   as part of the request and the PubliclyAccessible value has not been
-    #   set, the DB instance is private.
+    #   private IP address. For more information, see CreateDBInstance.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -1635,7 +1549,7 @@ module Aws::RDS
     #   metrics to Amazon CloudWatch Logs. For example,
     #   `arn:aws:iam:123456789012:role/emaccess`. For information on creating
     #   a monitoring role, go to [To create an IAM role for Amazon RDS
-    #   Enhanced Monitoring][1].
+    #   Enhanced Monitoring][1] in the *Amazon RDS User Guide*.
     #
     #   If `MonitoringInterval` is set to a value other than 0, then you must
     #   supply a `MonitoringRoleArn` value.
@@ -1729,13 +1643,44 @@ module Aws::RDS
     # @option options [Boolean] :enable_performance_insights
     #   True to enable Performance Insights for the read replica, and
     #   otherwise false.
+    #
+    #   For more information, see [Using Amazon Performance Insights][1] in
+    #   the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
     # @option options [String] :performance_insights_kms_key_id
     #   The AWS KMS key identifier for encryption of Performance Insights
     #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
     #   identifier, or the KMS key alias for the KMS encryption key.
+    # @option options [Integer] :performance_insights_retention_period
+    #   The amount of time, in days, to retain Performance Insights data.
+    #   Valid values are 7 or 731 (2 years).
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the new DB instance is to export to CloudWatch
-    #   Logs.
+    #   Logs. The values in the list depend on the DB engine being used. For
+    #   more information, see [Publishing Database Logs to Amazon CloudWatch
+    #   Logs ][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    # @option options [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
+    # @option options [Boolean] :use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
+    # @option options [Boolean] :deletion_protection
+    #   Indicates if the DB instance should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false. For more information, see [ Deleting a DB
+    #   Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -1779,7 +1724,7 @@ module Aws::RDS
     #   Example: `my-snapshot-id`
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -1888,10 +1833,19 @@ module Aws::RDS
     #     enable_iam_database_authentication: false,
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
+    #     performance_insights_retention_period: 1,
     #     cloudwatch_logs_export_configuration: {
     #       enable_log_types: ["String"],
     #       disable_log_types: ["String"],
     #     },
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     use_default_processor_features: false,
+    #     deletion_protection: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Integer] :allocated_storage
@@ -1910,7 +1864,7 @@ module Aws::RDS
     #   `db.m4.large`. Not all DB instance classes are available in all AWS
     #   Regions, or for all database engines. For the full list of DB instance
     #   classes, and availability for your engine, see [DB Instance Class][1]
-    #   in the Amazon RDS User Guide.
+    #   in the *Amazon RDS User Guide.*
     #
     #   If you modify the DB instance class, an outage occurs during the
     #   change. The change is applied during the next maintenance window,
@@ -1926,7 +1880,7 @@ module Aws::RDS
     #   parameter to move your DB instance to a different VPC. If your DB
     #   instance is not in a VPC, you can also use this parameter to move your
     #   DB instance into a VPC. For more information, see [Updating the VPC
-    #   for a DB Instance][1].
+    #   for a DB Instance][1] in the *Amazon RDS User Guide.*
     #
     #   Changing the subnet group causes an outage during the change. The
     #   change is applied during the next maintenance window, unless you
@@ -1975,9 +1929,9 @@ module Aws::RDS
     #   cause an outage and are applied on the next call to RebootDBInstance,
     #   or the next failure reboot. Review the table of parameters in
     #   [Modifying a DB Instance and Using the Apply Immediately Parameter][1]
-    #   to see the impact that setting `ApplyImmediately` to `true` or `false`
-    #   has for each modified parameter and to determine when the changes are
-    #   applied.
+    #   in the *Amazon RDS User Guide.* to see the impact that setting
+    #   `ApplyImmediately` to `true` or `false` has for each modified
+    #   parameter and to determine when the changes are applied.
     #
     #   Default: `false`
     #
@@ -2125,7 +2079,8 @@ module Aws::RDS
     #   family for the new engine version must be specified. The new DB
     #   parameter group can be the default for that DB parameter group family.
     #
-    #   For a list of valid engine versions, see CreateDBInstance.
+    #   For information about valid engine versions, see CreateDBInstance, or
+    #   call DescribeDBEngineVersions.
     # @option options [Boolean] :allow_major_version_upgrade
     #   Indicates that major version upgrades are allowed. Changing this
     #   parameter doesn't result in an outage and the change is
@@ -2328,7 +2283,7 @@ module Aws::RDS
     #   metrics to Amazon CloudWatch Logs. For example,
     #   `arn:aws:iam:123456789012:role/emaccess`. For information on creating
     #   a monitoring role, go to [To create an IAM role for Amazon RDS
-    #   Enhanced Monitoring][1].
+    #   Enhanced Monitoring][1] in the *Amazon RDS User Guide.*
     #
     #   If `MonitoringInterval` is set to a value other than 0, then you must
     #   supply a `MonitoringRoleArn` value.
@@ -2343,7 +2298,7 @@ module Aws::RDS
     #   A value that specifies the order in which an Aurora Replica is
     #   promoted to the primary instance after a failure of the existing
     #   primary instance. For more information, see [ Fault Tolerance for an
-    #   Aurora DB Cluster][1].
+    #   Aurora DB Cluster][1] in the *Amazon Aurora User Guide*.
     #
     #   Default: 1
     #
@@ -2351,7 +2306,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.FaultTolerance
     # @option options [Boolean] :enable_iam_database_authentication
     #   True to enable mapping of AWS Identity and Access Management (IAM)
     #   accounts to database accounts, and otherwise false.
@@ -2374,13 +2329,37 @@ module Aws::RDS
     # @option options [Boolean] :enable_performance_insights
     #   True to enable Performance Insights for the DB instance, and otherwise
     #   false.
+    #
+    #   For more information, see [Using Amazon Performance Insights][1] in
+    #   the *Amazon Relational Database Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
     # @option options [String] :performance_insights_kms_key_id
     #   The AWS KMS key identifier for encryption of Performance Insights
     #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
     #   identifier, or the KMS key alias for the KMS encryption key.
+    # @option options [Integer] :performance_insights_retention_period
+    #   The amount of time, in days, to retain Performance Insights data.
+    #   Valid values are 7 or 731 (2 years).
     # @option options [Types::CloudwatchLogsExportConfiguration] :cloudwatch_logs_export_configuration
     #   The configuration setting for the log types to be enabled for export
-    #   to CloudWatch Logs for a specific DB instance or DB cluster.
+    #   to CloudWatch Logs for a specific DB instance.
+    # @option options [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
+    # @option options [Boolean] :use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
+    # @option options [Boolean] :deletion_protection
+    #   Indicates if the DB instance has deletion protection enabled. The
+    #   database can't be deleted when this value is set to true. For more
+    #   information, see [ Deleting a DB Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     # @return [DBInstance]
     def modify(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -2499,6 +2478,14 @@ module Aws::RDS
     #     domain_iam_role_name: "String",
     #     enable_iam_database_authentication: false,
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     use_default_processor_features: false,
+    #     deletion_protection: false,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :target_db_instance_identifier
@@ -2536,7 +2523,7 @@ module Aws::RDS
     #   example, `db.m4.large`. Not all DB instance classes are available in
     #   all AWS Regions, or for all database engines. For the full list of DB
     #   instance classes, and availability for your engine, see [DB Instance
-    #   Class][1] in the Amazon RDS User Guide.
+    #   Class][1] in the *Amazon RDS User Guide.*
     #
     #   Default: The same DBInstanceClass as the original DB instance.
     #
@@ -2575,21 +2562,7 @@ module Aws::RDS
     #   true specifies an Internet-facing instance with a publicly resolvable
     #   DNS name, which resolves to a public IP address. A value of false
     #   specifies an internal instance with a DNS name that resolves to a
-    #   private IP address.
-    #
-    #   Default: The default behavior varies depending on whether a VPC has
-    #   been requested or not. The following list shows the default behavior
-    #   in each case.
-    #
-    #   * **Default VPC:**true
-    #
-    #   * **VPC:**false
-    #
-    #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance is
-    #   publicly accessible. If a specific DB subnet group has been specified
-    #   as part of the request and the PubliclyAccessible value has not been
-    #   set, the DB instance is private.
+    #   private IP address. For more information, see CreateDBInstance.
     # @option options [Boolean] :auto_minor_version_upgrade
     #   Indicates that minor version upgrades are applied automatically to the
     #   DB instance during the maintenance window.
@@ -2658,7 +2631,7 @@ module Aws::RDS
     #   the DB instance, and otherwise false. The default is false.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -2698,7 +2671,28 @@ module Aws::RDS
     #   Default: `false`
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB instance is to export to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine being
+    #   used. For more information, see [Publishing Database Logs to Amazon
+    #   CloudWatch Logs][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    # @option options [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
+    # @option options [Boolean] :use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
+    # @option options [Boolean] :deletion_protection
+    #   Indicates if the DB instance should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false. For more information, see [ Deleting a DB
+    #   Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(source_db_instance_identifier: @id)

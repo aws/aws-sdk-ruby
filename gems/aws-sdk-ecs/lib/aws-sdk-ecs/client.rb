@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -47,6 +49,8 @@ module Aws::ECS
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -92,6 +96,22 @@ module Aws::ECS
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::ECS
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -264,19 +295,24 @@ module Aws::ECS
     # state. Tasks for services that *do* use a load balancer are considered
     # healthy if they are in the `RUNNING` state and the container instance
     # they are hosted on is reported as healthy by the load balancer. The
-    # default value for `minimumHealthyPercent` is 50% in the console and
-    # 100% for the AWS CLI, the AWS SDKs, and the APIs.
+    # default value for a replica service for `minimumHealthyPercent` is 50%
+    # in the console and 100% for the AWS CLI, the AWS SDKs, and the APIs.
+    # The default value for a daemon service for `minimumHealthyPercent` is
+    # 0% for the AWS CLI, the AWS SDKs, and the APIs and 50% for the
+    # console.
     #
     # The `maximumPercent` parameter represents an upper limit on the number
     # of your service's tasks that are allowed in the `RUNNING` or
     # `PENDING` state during a deployment, as a percentage of the
     # `desiredCount` (rounded down to the nearest integer). This parameter
     # enables you to define the deployment batch size. For example, if your
-    # service has a `desiredCount` of four tasks and a `maximumPercent`
-    # value of 200%, the scheduler can start four new tasks before stopping
-    # the four older tasks (provided that the cluster resources required to
-    # do this are available). The default value for `maximumPercent` is
-    # 200%.
+    # replica service has a `desiredCount` of four tasks and a
+    # `maximumPercent` value of 200%, the scheduler can start four new tasks
+    # before stopping the four older tasks (provided that the cluster
+    # resources required to do this are available). The default value for a
+    # replica service for `maximumPercent` is 200%. If you are using a
+    # daemon service type, the `maximumPercent` should remain at 100%, which
+    # is the default value.
     #
     # When the service scheduler launches new tasks, it determines task
     # placement in your cluster using the following logic:
@@ -290,11 +326,12 @@ module Aws::ECS
     #   different placement strategy) with the `placementStrategy`
     #   parameter):
     #
-    #   * Sort the valid container instances by the fewest number of running
-    #     tasks for this service in the same Availability Zone as the
-    #     instance. For example, if zone A has one running service task and
-    #     zones B and C each have zero, valid container instances in either
-    #     zone B or C are considered optimal for placement.
+    #   * Sort the valid container instances, giving priority to instances
+    #     that have the fewest number of running tasks for this service in
+    #     their respective Availability Zone. For example, if zone A has one
+    #     running service task and zones B and C each have zero, valid
+    #     container instances in either zone B or C are considered optimal
+    #     for placement.
     #
     #   * Place the new service task on a valid container instance in an
     #     optimal Availability Zone (based on the previous steps), favoring
@@ -314,7 +351,7 @@ module Aws::ECS
     #   The name of your service. Up to 255 letters (uppercase and lowercase),
     #   numbers, hyphens, and underscores are allowed. Service names must be
     #   unique within a cluster, but you can have similarly named services in
-    #   multiple clusters within a region or across multiple regions.
+    #   multiple clusters within a Region or across multiple Regions.
     #
     # @option params [required, String] :task_definition
     #   The `family` and `revision` (`family:revision`) or full ARN of the
@@ -341,20 +378,35 @@ module Aws::ECS
     #   on a container instance, the container instance and port combination
     #   is registered as a target in the target group specified here.
     #
+    #   Services with tasks that use the `awsvpc` network mode (for example,
+    #   those with the Fargate launch type) only support Application Load
+    #   Balancers and Network Load Balancers; Classic Load Balancers are not
+    #   supported. Also, when you create any target groups for these services,
+    #   you must choose `ip` as the target type, not `instance`, because tasks
+    #   that use the `awsvpc` network mode are associated with an elastic
+    #   network interface, not an Amazon EC2 instance.
+    #
     # @option params [Array<Types::ServiceRegistry>] :service_registries
-    #   The details of the service discovery registries you want to assign to
-    #   this service. For more information, see [Service Discovery][1].
+    #   The details of the service discovery registries to assign to this
+    #   service. For more information, see [Service Discovery][1].
+    #
+    #   <note markdown="1"> Service discovery is supported for Fargate tasks if using platform
+    #   version v1.1.0 or later. For more information, see [AWS Fargate
+    #   Platform Versions][2].
+    #
+    #    </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguideservice-discovery.html
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
+    #   [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #
-    # @option params [required, Integer] :desired_count
+    # @option params [Integer] :desired_count
     #   The number of instantiations of the specified task definition to place
     #   and keep running on your cluster.
     #
     # @option params [String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Up to 32 ASCII characters are allowed.
     #
     # @option params [String] :launch_type
@@ -423,10 +475,36 @@ module Aws::ECS
     #   after a task has first started. This is only valid if your service is
     #   configured to use a load balancer. If your service's tasks take a
     #   while to start and respond to Elastic Load Balancing health checks,
-    #   you can specify a health check grace period of up to 1,800 seconds
+    #   you can specify a health check grace period of up to 7,200 seconds
     #   during which the ECS service scheduler ignores health check status.
     #   This grace period can prevent the ECS service scheduler from marking
     #   tasks as unhealthy and stopping them before they have time to come up.
+    #
+    # @option params [String] :scheduling_strategy
+    #   The scheduling strategy to use for the service. For more information,
+    #   see [Services][1].
+    #
+    #   There are two service scheduler strategies available:
+    #
+    #   * `REPLICA`-The replica scheduling strategy places and maintains the
+    #     desired number of tasks across your cluster. By default, the service
+    #     scheduler spreads tasks across Availability Zones. You can use task
+    #     placement strategies and constraints to customize task placement
+    #     decisions.
+    #
+    #   * `DAEMON`-The daemon scheduling strategy deploys exactly one task on
+    #     each active container instance that meets all of the task placement
+    #     constraints that you specify in your cluster. When using this
+    #     strategy, there is no need to specify a desired number of tasks, a
+    #     task placement strategy, or use Service Auto Scaling policies.
+    #
+    #     <note markdown="1"> Fargate tasks do not support the `DAEMON` scheduling strategy.
+    #
+    #      </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguideecs_services.html
     #
     # @return [Types::CreateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -568,9 +646,11 @@ module Aws::ECS
     #       {
     #         registry_arn: "String",
     #         port: 1,
+    #         container_name: "String",
+    #         container_port: 1,
     #       },
     #     ],
-    #     desired_count: 1, # required
+    #     desired_count: 1,
     #     client_token: "String",
     #     launch_type: "EC2", # accepts EC2, FARGATE
     #     platform_version: "String",
@@ -599,6 +679,7 @@ module Aws::ECS
     #       },
     #     },
     #     health_check_grace_period_seconds: 1,
+    #     scheduling_strategy: "REPLICA", # accepts REPLICA, DAEMON
     #   })
     #
     # @example Response structure
@@ -614,6 +695,8 @@ module Aws::ECS
     #   resp.service.service_registries #=> Array
     #   resp.service.service_registries[0].registry_arn #=> String
     #   resp.service.service_registries[0].port #=> Integer
+    #   resp.service.service_registries[0].container_name #=> String
+    #   resp.service.service_registries[0].container_port #=> Integer
     #   resp.service.status #=> String
     #   resp.service.desired_count #=> Integer
     #   resp.service.running_count #=> Integer
@@ -657,6 +740,7 @@ module Aws::ECS
     #   resp.service.network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.service.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.service.health_check_grace_period_seconds #=> Integer
+    #   resp.service.scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateService AWS API Documentation
     #
@@ -797,6 +881,10 @@ module Aws::ECS
     #
     #  </note>
     #
+    # If you attempt to create a new service with the same name as an
+    # existing service in either `ACTIVE` or `DRAINING` status, you will
+    # receive an error.
+    #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
     #   hosts the service to delete. If you do not specify a cluster, the
@@ -804,6 +892,11 @@ module Aws::ECS
     #
     # @option params [required, String] :service
     #   The name of the service to delete.
+    #
+    # @option params [Boolean] :force
+    #   If `true`, allows you to delete a service even if it has not been
+    #   scaled down to zero tasks. It is only necessary to use this if the
+    #   service is using the `REPLICA` scheduling strategy.
     #
     # @return [Types::DeleteServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -828,6 +921,7 @@ module Aws::ECS
     #   resp = client.delete_service({
     #     cluster: "String",
     #     service: "String", # required
+    #     force: false,
     #   })
     #
     # @example Response structure
@@ -843,6 +937,8 @@ module Aws::ECS
     #   resp.service.service_registries #=> Array
     #   resp.service.service_registries[0].registry_arn #=> String
     #   resp.service.service_registries[0].port #=> Integer
+    #   resp.service.service_registries[0].container_name #=> String
+    #   resp.service.service_registries[0].container_port #=> Integer
     #   resp.service.status #=> String
     #   resp.service.desired_count #=> Integer
     #   resp.service.running_count #=> Integer
@@ -886,6 +982,7 @@ module Aws::ECS
     #   resp.service.network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.service.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.service.health_check_grace_period_seconds #=> Integer
+    #   resp.service.scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteService AWS API Documentation
     #
@@ -924,7 +1021,7 @@ module Aws::ECS
     # @option params [required, String] :container_instance
     #   The container instance ID or full ARN of the container instance to
     #   deregister. The ARN contains the `arn:aws:ecs` namespace, followed by
-    #   the region of the container instance, the AWS account ID of the
+    #   the Region of the container instance, the AWS account ID of the
     #   container instance owner, the `container-instance` namespace, and then
     #   the container instance ID. For example,
     #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID
@@ -1066,6 +1163,7 @@ module Aws::ECS
     #   resp.task_definition.container_definitions #=> Array
     #   resp.task_definition.container_definitions[0].name #=> String
     #   resp.task_definition.container_definitions[0].image #=> String
+    #   resp.task_definition.container_definitions[0].repository_credentials.credentials_parameter #=> String
     #   resp.task_definition.container_definitions[0].cpu #=> Integer
     #   resp.task_definition.container_definitions[0].memory #=> Integer
     #   resp.task_definition.container_definitions[0].memory_reservation #=> Integer
@@ -1121,6 +1219,8 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].extra_hosts[0].ip_address #=> String
     #   resp.task_definition.container_definitions[0].docker_security_options #=> Array
     #   resp.task_definition.container_definitions[0].docker_security_options[0] #=> String
+    #   resp.task_definition.container_definitions[0].interactive #=> Boolean
+    #   resp.task_definition.container_definitions[0].pseudo_terminal #=> Boolean
     #   resp.task_definition.container_definitions[0].docker_labels #=> Hash
     #   resp.task_definition.container_definitions[0].docker_labels["String"] #=> String
     #   resp.task_definition.container_definitions[0].ulimits #=> Array
@@ -1136,6 +1236,9 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].health_check.timeout #=> Integer
     #   resp.task_definition.container_definitions[0].health_check.retries #=> Integer
     #   resp.task_definition.container_definitions[0].health_check.start_period #=> Integer
+    #   resp.task_definition.container_definitions[0].system_controls #=> Array
+    #   resp.task_definition.container_definitions[0].system_controls[0].namespace #=> String
+    #   resp.task_definition.container_definitions[0].system_controls[0].value #=> String
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -1144,6 +1247,13 @@ module Aws::ECS
     #   resp.task_definition.volumes #=> Array
     #   resp.task_definition.volumes[0].name #=> String
     #   resp.task_definition.volumes[0].host.source_path #=> String
+    #   resp.task_definition.volumes[0].docker_volume_configuration.scope #=> String, one of "task", "shared"
+    #   resp.task_definition.volumes[0].docker_volume_configuration.autoprovision #=> Boolean
+    #   resp.task_definition.volumes[0].docker_volume_configuration.driver #=> String
+    #   resp.task_definition.volumes[0].docker_volume_configuration.driver_opts #=> Hash
+    #   resp.task_definition.volumes[0].docker_volume_configuration.driver_opts["String"] #=> String
+    #   resp.task_definition.volumes[0].docker_volume_configuration.labels #=> Hash
+    #   resp.task_definition.volumes[0].docker_volume_configuration.labels["String"] #=> String
     #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
@@ -1268,7 +1378,8 @@ module Aws::ECS
     #   cluster, the default cluster is assumed.
     #
     # @option params [required, Array<String>] :container_instances
-    #   A list of container instance IDs or full ARN entries.
+    #   A list of up to 100 container instance IDs or full Amazon Resource
+    #   Name (ARN) entries.
     #
     # @return [Types::DescribeContainerInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1518,6 +1629,8 @@ module Aws::ECS
     #   resp.services[0].service_registries #=> Array
     #   resp.services[0].service_registries[0].registry_arn #=> String
     #   resp.services[0].service_registries[0].port #=> Integer
+    #   resp.services[0].service_registries[0].container_name #=> String
+    #   resp.services[0].service_registries[0].container_port #=> Integer
     #   resp.services[0].status #=> String
     #   resp.services[0].desired_count #=> Integer
     #   resp.services[0].running_count #=> Integer
@@ -1561,6 +1674,7 @@ module Aws::ECS
     #   resp.services[0].network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.services[0].network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.services[0].health_check_grace_period_seconds #=> Integer
+    #   resp.services[0].scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -1668,6 +1782,7 @@ module Aws::ECS
     #   resp.task_definition.container_definitions #=> Array
     #   resp.task_definition.container_definitions[0].name #=> String
     #   resp.task_definition.container_definitions[0].image #=> String
+    #   resp.task_definition.container_definitions[0].repository_credentials.credentials_parameter #=> String
     #   resp.task_definition.container_definitions[0].cpu #=> Integer
     #   resp.task_definition.container_definitions[0].memory #=> Integer
     #   resp.task_definition.container_definitions[0].memory_reservation #=> Integer
@@ -1723,6 +1838,8 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].extra_hosts[0].ip_address #=> String
     #   resp.task_definition.container_definitions[0].docker_security_options #=> Array
     #   resp.task_definition.container_definitions[0].docker_security_options[0] #=> String
+    #   resp.task_definition.container_definitions[0].interactive #=> Boolean
+    #   resp.task_definition.container_definitions[0].pseudo_terminal #=> Boolean
     #   resp.task_definition.container_definitions[0].docker_labels #=> Hash
     #   resp.task_definition.container_definitions[0].docker_labels["String"] #=> String
     #   resp.task_definition.container_definitions[0].ulimits #=> Array
@@ -1738,6 +1855,9 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].health_check.timeout #=> Integer
     #   resp.task_definition.container_definitions[0].health_check.retries #=> Integer
     #   resp.task_definition.container_definitions[0].health_check.start_period #=> Integer
+    #   resp.task_definition.container_definitions[0].system_controls #=> Array
+    #   resp.task_definition.container_definitions[0].system_controls[0].namespace #=> String
+    #   resp.task_definition.container_definitions[0].system_controls[0].value #=> String
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -1746,6 +1866,13 @@ module Aws::ECS
     #   resp.task_definition.volumes #=> Array
     #   resp.task_definition.volumes[0].name #=> String
     #   resp.task_definition.volumes[0].host.source_path #=> String
+    #   resp.task_definition.volumes[0].docker_volume_configuration.scope #=> String, one of "task", "shared"
+    #   resp.task_definition.volumes[0].docker_volume_configuration.autoprovision #=> Boolean
+    #   resp.task_definition.volumes[0].docker_volume_configuration.driver #=> String
+    #   resp.task_definition.volumes[0].docker_volume_configuration.driver_opts #=> Hash
+    #   resp.task_definition.volumes[0].docker_volume_configuration.driver_opts["String"] #=> String
+    #   resp.task_definition.volumes[0].docker_volume_configuration.labels #=> Hash
+    #   resp.task_definition.volumes[0].docker_volume_configuration.labels["String"] #=> String
     #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
@@ -1928,7 +2055,7 @@ module Aws::ECS
     #
     # @option params [String] :container_instance
     #   The container instance ID or full ARN of the container instance. The
-    #   ARN contains the `arn:aws:ecs` namespace, followed by the region of
+    #   ARN contains the `arn:aws:ecs` namespace, followed by the Region of
     #   the container instance, the AWS account ID of the container instance
     #   owner, the `container-instance` namespace, and then the container
     #   instance ID. For example,
@@ -2245,7 +2372,10 @@ module Aws::ECS
     #   and a `nextToken` value if applicable.
     #
     # @option params [String] :launch_type
-    #   The launch type for services you want to list.
+    #   The launch type for the services to list.
+    #
+    # @option params [String] :scheduling_strategy
+    #   The scheduling strategy for services to list.
     #
     # @return [Types::ListServicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2274,6 +2404,7 @@ module Aws::ECS
     #     next_token: "String",
     #     max_results: 1,
     #     launch_type: "EC2", # accepts EC2, FARGATE
+    #     scheduling_strategy: "REPLICA", # accepts REPLICA, DAEMON
     #   })
     #
     # @example Response structure
@@ -2596,7 +2727,7 @@ module Aws::ECS
     #    </note>
     #
     # @option params [String] :launch_type
-    #   The launch type for services you want to list.
+    #   The launch type for services to list.
     #
     # @return [Types::ListTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2866,7 +2997,7 @@ module Aws::ECS
     # task definition with the `networkMode` parameter. The available
     # network modes correspond to those described in [Network settings][3]
     # in the Docker run reference. If you specify the `awsvpc` network mode,
-    # the task is allocated an Elastic Network Interface, and you must
+    # the task is allocated an elastic network interface, and you must
     # specify a NetworkConfiguration when you create a service or run a task
     # with the task definition. For more information, see [Task
     # Networking][4] in the *Amazon Elastic Container Service Developer
@@ -2960,9 +3091,9 @@ module Aws::ECS
     # @option params [String] :cpu
     #   The number of CPU units used by the task. It can be expressed as an
     #   integer using CPU units, for example `1024`, or as a string using
-    #   vCPUs, for example `1 vCPU` or `1 vcpu`, in a task definition but will
-    #   be converted to an integer indicating the CPU units when the task
-    #   definition is registered.
+    #   vCPUs, for example `1 vCPU` or `1 vcpu`, in a task definition. String
+    #   values are converted to an integer indicating the CPU units when the
+    #   task definition is registered.
     #
     #   <note markdown="1"> Task-level CPU and memory parameters are ignored for Windows
     #   containers. We recommend specifying container-level resources for
@@ -2996,8 +3127,9 @@ module Aws::ECS
     # @option params [String] :memory
     #   The amount of memory (in MiB) used by the task. It can be expressed as
     #   an integer using MiB, for example `1024`, or as a string using GB, for
-    #   example `1GB` or `1 GB`, in a task definition but will be converted to
-    #   an integer indicating the MiB when the task definition is registered.
+    #   example `1GB` or `1 GB`, in a task definition. String values are
+    #   converted to an integer indicating the MiB when the task definition is
+    #   registered.
     #
     #   <note markdown="1"> Task-level CPU and memory parameters are ignored for Windows
     #   containers. We recommend specifying container-level resources for
@@ -3098,6 +3230,9 @@ module Aws::ECS
     #       {
     #         name: "String",
     #         image: "String",
+    #         repository_credentials: {
+    #           credentials_parameter: "String", # required
+    #         },
     #         cpu: 1,
     #         memory: 1,
     #         memory_reservation: 1,
@@ -3168,6 +3303,8 @@ module Aws::ECS
     #           },
     #         ],
     #         docker_security_options: ["String"],
+    #         interactive: false,
+    #         pseudo_terminal: false,
     #         docker_labels: {
     #           "String" => "String",
     #         },
@@ -3191,6 +3328,12 @@ module Aws::ECS
     #           retries: 1,
     #           start_period: 1,
     #         },
+    #         system_controls: [
+    #           {
+    #             namespace: "String",
+    #             value: "String",
+    #           },
+    #         ],
     #       },
     #     ],
     #     volumes: [
@@ -3198,6 +3341,17 @@ module Aws::ECS
     #         name: "String",
     #         host: {
     #           source_path: "String",
+    #         },
+    #         docker_volume_configuration: {
+    #           scope: "task", # accepts task, shared
+    #           autoprovision: false,
+    #           driver: "String",
+    #           driver_opts: {
+    #             "String" => "String",
+    #           },
+    #           labels: {
+    #             "String" => "String",
+    #           },
     #         },
     #       },
     #     ],
@@ -3218,6 +3372,7 @@ module Aws::ECS
     #   resp.task_definition.container_definitions #=> Array
     #   resp.task_definition.container_definitions[0].name #=> String
     #   resp.task_definition.container_definitions[0].image #=> String
+    #   resp.task_definition.container_definitions[0].repository_credentials.credentials_parameter #=> String
     #   resp.task_definition.container_definitions[0].cpu #=> Integer
     #   resp.task_definition.container_definitions[0].memory #=> Integer
     #   resp.task_definition.container_definitions[0].memory_reservation #=> Integer
@@ -3273,6 +3428,8 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].extra_hosts[0].ip_address #=> String
     #   resp.task_definition.container_definitions[0].docker_security_options #=> Array
     #   resp.task_definition.container_definitions[0].docker_security_options[0] #=> String
+    #   resp.task_definition.container_definitions[0].interactive #=> Boolean
+    #   resp.task_definition.container_definitions[0].pseudo_terminal #=> Boolean
     #   resp.task_definition.container_definitions[0].docker_labels #=> Hash
     #   resp.task_definition.container_definitions[0].docker_labels["String"] #=> String
     #   resp.task_definition.container_definitions[0].ulimits #=> Array
@@ -3288,6 +3445,9 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].health_check.timeout #=> Integer
     #   resp.task_definition.container_definitions[0].health_check.retries #=> Integer
     #   resp.task_definition.container_definitions[0].health_check.start_period #=> Integer
+    #   resp.task_definition.container_definitions[0].system_controls #=> Array
+    #   resp.task_definition.container_definitions[0].system_controls[0].namespace #=> String
+    #   resp.task_definition.container_definitions[0].system_controls[0].value #=> String
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -3296,6 +3456,13 @@ module Aws::ECS
     #   resp.task_definition.volumes #=> Array
     #   resp.task_definition.volumes[0].name #=> String
     #   resp.task_definition.volumes[0].host.source_path #=> String
+    #   resp.task_definition.volumes[0].docker_volume_configuration.scope #=> String, one of "task", "shared"
+    #   resp.task_definition.volumes[0].docker_volume_configuration.autoprovision #=> Boolean
+    #   resp.task_definition.volumes[0].docker_volume_configuration.driver #=> String
+    #   resp.task_definition.volumes[0].docker_volume_configuration.driver_opts #=> Hash
+    #   resp.task_definition.volumes[0].docker_volume_configuration.driver_opts["String"] #=> String
+    #   resp.task_definition.volumes[0].docker_volume_configuration.labels #=> Hash
+    #   resp.task_definition.volumes[0].docker_volume_configuration.labels["String"] #=> String
     #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
@@ -3345,7 +3512,7 @@ module Aws::ECS
     #   algorithm to ensure that you allow enough time for the previous
     #   command to propagate through the system. To do this, run the
     #   DescribeTasks command repeatedly, starting with a couple of seconds
-    #   of wait time, and increasing gradually up to five minutes of wait
+    #   of wait time and increasing gradually up to five minutes of wait
     #   time.
     #
     # * Add wait time between subsequent commands, even if the DescribeTasks
@@ -3659,7 +3826,7 @@ module Aws::ECS
     #
     # @option params [Types::NetworkConfiguration] :network_configuration
     #   The VPC subnet and security group configuration for tasks that receive
-    #   their own Elastic Network Interface by using the `awsvpc` networking
+    #   their own elastic network interface by using the `awsvpc` networking
     #   mode.
     #
     # @return [Types::StartTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -4403,7 +4570,7 @@ module Aws::ECS
     #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #
     # @option params [String] :platform_version
-    #   The platform version you want to update your service to run.
+    #   The platform version that your service should run.
     #
     # @option params [Boolean] :force_new_deployment
     #   Whether to force a new deployment of the service. Deployments are not
@@ -4492,6 +4659,8 @@ module Aws::ECS
     #   resp.service.service_registries #=> Array
     #   resp.service.service_registries[0].registry_arn #=> String
     #   resp.service.service_registries[0].port #=> Integer
+    #   resp.service.service_registries[0].container_name #=> String
+    #   resp.service.service_registries[0].container_port #=> Integer
     #   resp.service.status #=> String
     #   resp.service.desired_count #=> Integer
     #   resp.service.running_count #=> Integer
@@ -4535,6 +4704,7 @@ module Aws::ECS
     #   resp.service.network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.service.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.service.health_check_grace_period_seconds #=> Integer
+    #   resp.service.scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateService AWS API Documentation
     #
@@ -4558,7 +4728,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

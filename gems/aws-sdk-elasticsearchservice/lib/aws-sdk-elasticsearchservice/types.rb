@@ -178,6 +178,23 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # A map from an ` ElasticsearchVersion ` to a list of compatible `
+    # ElasticsearchVersion ` s to which the domain can be upgraded.
+    #
+    # @!attribute [rw] source_version
+    #   The current version of Elasticsearch on which a domain is.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_versions
+    #   List of supported elastic search versions.
+    #   @return [Array<String>]
+    #
+    class CompatibleVersionsMap < Struct.new(
+      :source_version,
+      :target_versions)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateElasticsearchDomainRequest
     #   data as a hash:
     #
@@ -215,6 +232,9 @@ module Aws::ElasticsearchService
     #         encryption_at_rest_options: {
     #           enabled: false,
     #           kms_key_id: "KmsKeyId",
+    #         },
+    #         node_to_node_encryption_options: {
+    #           enabled: false,
     #         },
     #         advanced_options: {
     #           "String" => "String",
@@ -289,6 +309,10 @@ module Aws::ElasticsearchService
     #   Specifies the Encryption At Rest Options.
     #   @return [Types::EncryptionAtRestOptions]
     #
+    # @!attribute [rw] node_to_node_encryption_options
+    #   Specifies the NodeToNodeEncryptionOptions.
+    #   @return [Types::NodeToNodeEncryptionOptions]
+    #
     # @!attribute [rw] advanced_options
     #   Option to allow references to indices in an HTTP request body. Must
     #   be `false` when configuring access to individual sub-resources. By
@@ -315,6 +339,7 @@ module Aws::ElasticsearchService
       :vpc_options,
       :cognito_options,
       :encryption_at_rest_options,
+      :node_to_node_encryption_options,
       :advanced_options,
       :log_publishing_options)
       include Aws::Structure
@@ -808,6 +833,11 @@ module Aws::ElasticsearchService
     #   domain.
     #   @return [Types::EncryptionAtRestOptionsStatus]
     #
+    # @!attribute [rw] node_to_node_encryption_options
+    #   Specifies the `NodeToNodeEncryptionOptions` for the Elasticsearch
+    #   domain.
+    #   @return [Types::NodeToNodeEncryptionOptionsStatus]
+    #
     # @!attribute [rw] advanced_options
     #   Specifies the `AdvancedOptions` for the domain. See [Configuring
     #   Advanced Options][1] for more information.
@@ -830,6 +860,7 @@ module Aws::ElasticsearchService
       :vpc_options,
       :cognito_options,
       :encryption_at_rest_options,
+      :node_to_node_encryption_options,
       :advanced_options,
       :log_publishing_options)
       include Aws::Structure
@@ -888,6 +919,12 @@ module Aws::ElasticsearchService
     #   `False` if the configuration is active.
     #   @return [Boolean]
     #
+    # @!attribute [rw] upgrade_processing
+    #   The status of an Elasticsearch domain version upgrade. `True` if
+    #   Amazon Elasticsearch Service is undergoing a version upgrade.
+    #   `False` if the configuration is active.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] elasticsearch_version
     #   @return [String]
     #
@@ -934,6 +971,10 @@ module Aws::ElasticsearchService
     #   Specifies the status of the `EncryptionAtRestOptions`.
     #   @return [Types::EncryptionAtRestOptions]
     #
+    # @!attribute [rw] node_to_node_encryption_options
+    #   Specifies the status of the `NodeToNodeEncryptionOptions`.
+    #   @return [Types::NodeToNodeEncryptionOptions]
+    #
     # @!attribute [rw] advanced_options
     #   Specifies the status of the `AdvancedOptions`
     #   @return [Hash<String,String>]
@@ -951,6 +992,7 @@ module Aws::ElasticsearchService
       :endpoint,
       :endpoints,
       :processing,
+      :upgrade_processing,
       :elasticsearch_version,
       :elasticsearch_cluster_config,
       :ebs_options,
@@ -959,6 +1001,7 @@ module Aws::ElasticsearchService
       :vpc_options,
       :cognito_options,
       :encryption_at_rest_options,
+      :node_to_node_encryption_options,
       :advanced_options,
       :log_publishing_options)
       include Aws::Structure
@@ -1023,6 +1066,145 @@ module Aws::ElasticsearchService
     class EncryptionAtRestOptionsStatus < Struct.new(
       :options,
       :status)
+      include Aws::Structure
+    end
+
+    # Container for request parameters to `
+    # GetCompatibleElasticsearchVersions ` operation.
+    #
+    # @note When making an API call, you may pass GetCompatibleElasticsearchVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName",
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The name of an Elasticsearch domain. Domain names are unique across
+    #   the domains owned by an account within an AWS region. Domain names
+    #   start with a letter or number and can contain the following
+    #   characters: a-z (lowercase), 0-9, and - (hyphen).
+    #   @return [String]
+    #
+    class GetCompatibleElasticsearchVersionsRequest < Struct.new(
+      :domain_name)
+      include Aws::Structure
+    end
+
+    # Container for response returned by `
+    # GetCompatibleElasticsearchVersions ` operation.
+    #
+    # @!attribute [rw] compatible_elasticsearch_versions
+    #   A map of compatible Elasticsearch versions returned as part of the `
+    #   GetCompatibleElasticsearchVersions ` operation.
+    #   @return [Array<Types::CompatibleVersionsMap>]
+    #
+    class GetCompatibleElasticsearchVersionsResponse < Struct.new(
+      :compatible_elasticsearch_versions)
+      include Aws::Structure
+    end
+
+    # Container for request parameters to ` GetUpgradeHistory ` operation.
+    #
+    # @note When making an API call, you may pass GetUpgradeHistoryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The name of an Elasticsearch domain. Domain names are unique across
+    #   the domains owned by an account within an AWS region. Domain names
+    #   start with a letter or number and can contain the following
+    #   characters: a-z (lowercase), 0-9, and - (hyphen).
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Set this value to limit the number of results returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Paginated APIs accepts NextToken input to returns next page results
+    #   and provides a NextToken output in the response which can be used by
+    #   the client to retrieve more results.
+    #   @return [String]
+    #
+    class GetUpgradeHistoryRequest < Struct.new(
+      :domain_name,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Container for response returned by ` GetUpgradeHistory ` operation.
+    #
+    # @!attribute [rw] upgrade_histories
+    #   A list of ` UpgradeHistory ` objects corresponding to each Upgrade
+    #   or Upgrade Eligibility Check performed on a domain returned as part
+    #   of ` GetUpgradeHistoryResponse ` object.
+    #   @return [Array<Types::UpgradeHistory>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token that needs to be supplied to the next call to get
+    #   the next page of results
+    #   @return [String]
+    #
+    class GetUpgradeHistoryResponse < Struct.new(
+      :upgrade_histories,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Container for request parameters to ` GetUpgradeStatus ` operation.
+    #
+    # @note When making an API call, you may pass GetUpgradeStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName", # required
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The name of an Elasticsearch domain. Domain names are unique across
+    #   the domains owned by an account within an AWS region. Domain names
+    #   start with a letter or number and can contain the following
+    #   characters: a-z (lowercase), 0-9, and - (hyphen).
+    #   @return [String]
+    #
+    class GetUpgradeStatusRequest < Struct.new(
+      :domain_name)
+      include Aws::Structure
+    end
+
+    # Container for response returned by ` GetUpgradeStatus ` operation.
+    #
+    # @!attribute [rw] upgrade_step
+    #   Represents one of 3 steps that an Upgrade or Upgrade Eligibility
+    #   Check does through: * PreUpgradeCheck
+    #   * Snapshot
+    #   * Upgrade
+    #   @return [String]
+    #
+    # @!attribute [rw] step_status
+    #   One of 4 statuses that a step can go through returned as part of the
+    #   ` GetUpgradeStatusResponse ` object. The status can take one of the
+    #   following values: * In Progress
+    #   * Succeeded
+    #   * Succeeded with Issues
+    #   * Failed
+    #   @return [String]
+    #
+    # @!attribute [rw] upgrade_name
+    #   A string that describes the update briefly
+    #   @return [String]
+    #
+    class GetUpgradeStatusResponse < Struct.new(
+      :upgrade_step,
+      :step_status,
+      :upgrade_name)
       include Aws::Structure
     end
 
@@ -1288,6 +1470,43 @@ module Aws::ElasticsearchService
     #   @return [Types::OptionStatus]
     #
     class LogPublishingOptionsStatus < Struct.new(
+      :options,
+      :status)
+      include Aws::Structure
+    end
+
+    # Specifies the node-to-node encryption options.
+    #
+    # @note When making an API call, you may pass NodeToNodeEncryptionOptions
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Specify true to enable node-to-node encryption.
+    #   @return [Boolean]
+    #
+    class NodeToNodeEncryptionOptions < Struct.new(
+      :enabled)
+      include Aws::Structure
+    end
+
+    # Status of the node-to-node encryption options for the specified
+    # Elasticsearch domain.
+    #
+    # @!attribute [rw] options
+    #   Specifies the node-to-node encryption options for the specified
+    #   Elasticsearch domain.
+    #   @return [Types::NodeToNodeEncryptionOptions]
+    #
+    # @!attribute [rw] status
+    #   Specifies the status of the node-to-node encryption options for the
+    #   specified Elasticsearch domain.
+    #   @return [Types::OptionStatus]
+    #
+    class NodeToNodeEncryptionOptionsStatus < Struct.new(
       :options,
       :status)
       include Aws::Structure
@@ -1793,6 +2012,140 @@ module Aws::ElasticsearchService
     #
     class UpdateElasticsearchDomainConfigResponse < Struct.new(
       :domain_config)
+      include Aws::Structure
+    end
+
+    # Container for request parameters to ` UpgradeElasticsearchDomain `
+    # operation.
+    #
+    # @note When making an API call, you may pass UpgradeElasticsearchDomainRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName", # required
+    #         target_version: "ElasticsearchVersionString", # required
+    #         perform_check_only: false,
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The name of an Elasticsearch domain. Domain names are unique across
+    #   the domains owned by an account within an AWS region. Domain names
+    #   start with a letter or number and can contain the following
+    #   characters: a-z (lowercase), 0-9, and - (hyphen).
+    #   @return [String]
+    #
+    # @!attribute [rw] target_version
+    #   The version of Elasticsearch that you intend to upgrade the domain
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] perform_check_only
+    #   This flag, when set to True, indicates that an Upgrade Eligibility
+    #   Check needs to be performed. This will not actually perform the
+    #   Upgrade.
+    #   @return [Boolean]
+    #
+    class UpgradeElasticsearchDomainRequest < Struct.new(
+      :domain_name,
+      :target_version,
+      :perform_check_only)
+      include Aws::Structure
+    end
+
+    # Container for response returned by ` UpgradeElasticsearchDomain `
+    # operation.
+    #
+    # @!attribute [rw] domain_name
+    #   The name of an Elasticsearch domain. Domain names are unique across
+    #   the domains owned by an account within an AWS region. Domain names
+    #   start with a letter or number and can contain the following
+    #   characters: a-z (lowercase), 0-9, and - (hyphen).
+    #   @return [String]
+    #
+    # @!attribute [rw] target_version
+    #   The version of Elasticsearch that you intend to upgrade the domain
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] perform_check_only
+    #   This flag, when set to True, indicates that an Upgrade Eligibility
+    #   Check needs to be performed. This will not actually perform the
+    #   Upgrade.
+    #   @return [Boolean]
+    #
+    class UpgradeElasticsearchDomainResponse < Struct.new(
+      :domain_name,
+      :target_version,
+      :perform_check_only)
+      include Aws::Structure
+    end
+
+    # History of the last 10 Upgrades and Upgrade Eligibility Checks.
+    #
+    # @!attribute [rw] upgrade_name
+    #   A string that describes the update briefly
+    #   @return [String]
+    #
+    # @!attribute [rw] start_timestamp
+    #   UTC Timestamp at which the Upgrade API call was made in
+    #   "yyyy-MM-ddTHH:mm:ssZ" format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] upgrade_status
+    #   The overall status of the update. The status can take one of the
+    #   following values: * In Progress
+    #   * Succeeded
+    #   * Succeeded with Issues
+    #   * Failed
+    #   @return [String]
+    #
+    # @!attribute [rw] steps_list
+    #   A list of ` UpgradeStepItem ` s representing information about each
+    #   step performed as pard of a specific Upgrade or Upgrade Eligibility
+    #   Check.
+    #   @return [Array<Types::UpgradeStepItem>]
+    #
+    class UpgradeHistory < Struct.new(
+      :upgrade_name,
+      :start_timestamp,
+      :upgrade_status,
+      :steps_list)
+      include Aws::Structure
+    end
+
+    # Represents a single step of the Upgrade or Upgrade Eligibility Check
+    # workflow.
+    #
+    # @!attribute [rw] upgrade_step
+    #   Represents one of 3 steps that an Upgrade or Upgrade Eligibility
+    #   Check does through: * PreUpgradeCheck
+    #   * Snapshot
+    #   * Upgrade
+    #   @return [String]
+    #
+    # @!attribute [rw] upgrade_step_status
+    #   The status of a particular step during an upgrade. The status can
+    #   take one of the following values: * In Progress
+    #   * Succeeded
+    #   * Succeeded with Issues
+    #   * Failed
+    #   @return [String]
+    #
+    # @!attribute [rw] issues
+    #   A list of strings containing detailed information about the errors
+    #   encountered in a particular step.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] progress_percent
+    #   The Floating point value representing progress percentage of a
+    #   particular step.
+    #   @return [Float]
+    #
+    class UpgradeStepItem < Struct.new(
+      :upgrade_step,
+      :upgrade_step_status,
+      :issues,
+      :progress_percent)
       include Aws::Structure
     end
 

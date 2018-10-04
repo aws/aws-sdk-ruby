@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 require 'aws-sdk-glacier/plugins/account_id.rb'
@@ -50,6 +52,8 @@ module Aws::Glacier
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
     add_plugin(Aws::Glacier::Plugins::AccountId)
@@ -103,6 +107,22 @@ module Aws::Glacier
     #   operations. The default value of `-` uses the account
     #   your `:credentials` belong to.
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -126,12 +146,23 @@ module Aws::Glacier
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -1955,7 +1986,7 @@ module Aws::Glacier
     #
     # You can set a maximum limit for the number of jobs returned in the
     # response by specifying the `limit` parameter in the request. The
-    # default limit is 1000. The number of jobs returned might be fewer than
+    # default limit is 50. The number of jobs returned might be fewer than
     # the limit, but the number of returned jobs never exceeds the limit.
     #
     # Additionally, you can filter the jobs list returned by specifying the
@@ -1985,7 +2016,7 @@ module Aws::Glacier
     #   The name of the vault.
     #
     # @option params [Integer] :limit
-    #   The maximum number of jobs to be returned. The default limit is 1000.
+    #   The maximum number of jobs to be returned. The default limit is 50.
     #   The number of jobs returned might be fewer than the specified limit,
     #   but the number of returned jobs never exceeds the limit.
     #
@@ -2134,14 +2165,14 @@ module Aws::Glacier
     # Upload response has no guaranteed order.
     #
     # The List Multipart Uploads operation supports pagination. By default,
-    # this operation returns up to 1,000 multipart uploads in the response.
-    # You should always check the response for a `marker` at which to
-    # continue the list; if there are no more items the `marker` is `null`.
-    # To return a list of multipart uploads that begins at a specific
-    # upload, set the `marker` request parameter to the value you obtained
-    # from a previous List Multipart Upload request. You can also limit the
-    # number of uploads returned in the response by specifying the `limit`
-    # parameter in the request.
+    # this operation returns up to 50 multipart uploads in the response. You
+    # should always check the response for a `marker` at which to continue
+    # the list; if there are no more items the `marker` is `null`. To return
+    # a list of multipart uploads that begins at a specific upload, set the
+    # `marker` request parameter to the value you obtained from a previous
+    # List Multipart Upload request. You can also limit the number of
+    # uploads returned in the response by specifying the `limit` parameter
+    # in the request.
     #
     # Note the difference between this operation and listing parts
     # (ListParts). The List Multipart Uploads operation lists all multipart
@@ -2186,7 +2217,7 @@ module Aws::Glacier
     # @option params [Integer] :limit
     #   Specifies the maximum number of uploads returned in the response body.
     #   If this value is not specified, the List Uploads operation returns up
-    #   to 1,000 uploads.
+    #   to 50 uploads.
     #
     # @return [Types::ListMultipartUploadsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2265,11 +2296,11 @@ module Aws::Glacier
     # sorted by part range.
     #
     # The List Parts operation supports pagination. By default, this
-    # operation returns up to 1,000 uploaded parts in the response. You
-    # should always check the response for a `marker` at which to continue
-    # the list; if there are no more items the `marker` is `null`. To return
-    # a list of parts that begins at a specific part, set the `marker`
-    # request parameter to the value you obtained from a previous List Parts
+    # operation returns up to 50 uploaded parts in the response. You should
+    # always check the response for a `marker` at which to continue the
+    # list; if there are no more items the `marker` is `null`. To return a
+    # list of parts that begins at a specific part, set the `marker` request
+    # parameter to the value you obtained from a previous List Parts
     # request. You can also limit the number of parts returned in the
     # response by specifying the `limit` parameter in the request.
     #
@@ -2311,7 +2342,7 @@ module Aws::Glacier
     #   previous List Parts request.
     #
     # @option params [Integer] :limit
-    #   The maximum number of parts to be returned. The default limit is 1000.
+    #   The maximum number of parts to be returned. The default limit is 50.
     #   The number of parts returned might be fewer than the specified limit,
     #   but the number of returned parts never exceeds the limit.
     #
@@ -2507,15 +2538,14 @@ module Aws::Glacier
     # This operation lists all vaults owned by the calling user's account.
     # The list returned in the response is ASCII-sorted by vault name.
     #
-    # By default, this operation returns up to 1,000 items. If there are
-    # more vaults to list, the response `marker` field contains the vault
-    # Amazon Resource Name (ARN) at which to continue the list with a new
-    # List Vaults request; otherwise, the `marker` field is `null`. To
-    # return a list of vaults that begins at a specific vault, set the
-    # `marker` request parameter to the vault ARN you obtained from a
-    # previous List Vaults request. You can also limit the number of vaults
-    # returned in the response by specifying the `limit` parameter in the
-    # request.
+    # By default, this operation returns up to 10 items. If there are more
+    # vaults to list, the response `marker` field contains the vault Amazon
+    # Resource Name (ARN) at which to continue the list with a new List
+    # Vaults request; otherwise, the `marker` field is `null`. To return a
+    # list of vaults that begins at a specific vault, set the `marker`
+    # request parameter to the vault ARN you obtained from a previous List
+    # Vaults request. You can also limit the number of vaults returned in
+    # the response by specifying the `limit` parameter in the request.
     #
     # An AWS account has full permission to perform all operations
     # (actions). However, AWS Identity and Access Management (IAM) users
@@ -2547,9 +2577,9 @@ module Aws::Glacier
     #   which the listing of vaults should begin.
     #
     # @option params [Integer] :limit
-    #   The maximum number of vaults to be returned. The default limit is
-    #   1000. The number of vaults returned might be fewer than the specified
-    #   limit, but the number of returned vaults never exceeds the limit.
+    #   The maximum number of vaults to be returned. The default limit is 10.
+    #   The number of vaults returned might be fewer than the specified limit,
+    #   but the number of returned vaults never exceeds the limit.
     #
     # @return [Types::ListVaultsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3180,7 +3210,7 @@ module Aws::Glacier
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glacier'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

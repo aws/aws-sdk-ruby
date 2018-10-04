@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -47,6 +49,8 @@ module Aws::CostExplorer
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -92,6 +96,22 @@ module Aws::CostExplorer
     #
     # @option options [String] :access_key_id
     #
+    # @option options [] :client_side_monitoring (false)
+    #   When `true`, client-side metrics will be collected for all API requests from
+    #   this client.
+    #
+    # @option options [] :client_side_monitoring_client_id ("")
+    #   Allows you to provide an identifier for this client which will be attached to
+    #   all generated client side metrics. Defaults to an empty string.
+    #
+    # @option options [] :client_side_monitoring_port (31000)
+    #   Required for publishing client metrics. The port that the client side monitoring
+    #   agent is running on, where client metrics will be published via UDP.
+    #
+    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #   Allows you to provide a custom client-side monitoring publisher class. By default,
+    #   will use the Client Side Monitoring Agent Publisher.
+    #
     # @option options [Boolean] :convert_params (true)
     #   When `true`, an attempt is made to coerce request parameters into
     #   the required types.
@@ -115,12 +135,23 @@ module Aws::CostExplorer
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -192,7 +223,8 @@ module Aws::CostExplorer
     #   blended and unblended rates, see [Why does the "blended" annotation
     #   appear on some line items in my bill?][1].
     #
-    #   Valid values are `BlendedCost`, `UnblendedCost`, and `UsageQuantity`.
+    #   Valid values are `AmortizedCost`, `BlendedCost`, `UnblendedCost`, and
+    #   `UsageQuantity`.
     #
     #   <note markdown="1"> If you return the `UsageQuantity` metric, the service aggregates all
     #   usage numbers without taking into account the units. For example, if
@@ -556,6 +588,9 @@ module Aws::CostExplorer
     #   You can nest only one level deep. If there are multiple values for a
     #   dimension, they are OR'd together.
     #
+    #   If you don't provide a `SERVICE` filter, Cost Explorer defaults to
+    #   EC2.
+    #
     # @option params [String] :next_page_token
     #   The token to retrieve the next set of results. AWS provides the token
     #   when the response from a previous call has more results than the
@@ -666,9 +701,12 @@ module Aws::CostExplorer
     #   The specific service that you want recommendations for.
     #
     # @option params [String] :account_scope
-    #   The account scope that you want recommendations for. The only valid
-    #   value is `Payer`. This means that AWS includes the master account and
-    #   any member accounts when it calculates its recommendations.
+    #   The account scope that you want recommendations for. `PAYER` means
+    #   that AWS includes the master account and any member accounts when it
+    #   calculates its recommendations. `LINKED` means that AWS includes only
+    #   member accounts when it calculates its recommendations.
+    #
+    #   Valid values are `PAYER` and `LINKED`.
     #
     # @option params [String] :lookback_period_in_days
     #   The number of previous days that you want AWS to consider when it
@@ -703,10 +741,10 @@ module Aws::CostExplorer
     #   resp = client.get_reservation_purchase_recommendation({
     #     account_id: "GenericString",
     #     service: "GenericString", # required
-    #     account_scope: "PAYER", # accepts PAYER
+    #     account_scope: "PAYER", # accepts PAYER, LINKED
     #     lookback_period_in_days: "SEVEN_DAYS", # accepts SEVEN_DAYS, THIRTY_DAYS, SIXTY_DAYS
     #     term_in_years: "ONE_YEAR", # accepts ONE_YEAR, THREE_YEARS
-    #     payment_option: "NO_UPFRONT", # accepts NO_UPFRONT, PARTIAL_UPFRONT, ALL_UPFRONT
+    #     payment_option: "NO_UPFRONT", # accepts NO_UPFRONT, PARTIAL_UPFRONT, ALL_UPFRONT, LIGHT_UTILIZATION, MEDIUM_UTILIZATION, HEAVY_UTILIZATION
     #     service_specification: {
     #       ec2_specification: {
     #         offering_class: "STANDARD", # accepts STANDARD, CONVERTIBLE
@@ -721,10 +759,10 @@ module Aws::CostExplorer
     #   resp.metadata.recommendation_id #=> String
     #   resp.metadata.generation_timestamp #=> String
     #   resp.recommendations #=> Array
-    #   resp.recommendations[0].account_scope #=> String, one of "PAYER"
+    #   resp.recommendations[0].account_scope #=> String, one of "PAYER", "LINKED"
     #   resp.recommendations[0].lookback_period_in_days #=> String, one of "SEVEN_DAYS", "THIRTY_DAYS", "SIXTY_DAYS"
     #   resp.recommendations[0].term_in_years #=> String, one of "ONE_YEAR", "THREE_YEARS"
-    #   resp.recommendations[0].payment_option #=> String, one of "NO_UPFRONT", "PARTIAL_UPFRONT", "ALL_UPFRONT"
+    #   resp.recommendations[0].payment_option #=> String, one of "NO_UPFRONT", "PARTIAL_UPFRONT", "ALL_UPFRONT", "LIGHT_UTILIZATION", "MEDIUM_UTILIZATION", "HEAVY_UTILIZATION"
     #   resp.recommendations[0].service_specification.ec2_specification.offering_class #=> String, one of "STANDARD", "CONVERTIBLE"
     #   resp.recommendations[0].recommendation_details #=> Array
     #   resp.recommendations[0].recommendation_details[0].instance_details.ec2_instance_details.family #=> String
@@ -739,10 +777,27 @@ module Aws::CostExplorer
     #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.instance_type #=> String
     #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.region #=> String
     #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.database_engine #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.database_edition #=> String
     #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.deployment_option #=> String
     #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.license_model #=> String
     #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.current_generation #=> Boolean
     #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.size_flex_eligible #=> Boolean
+    #   resp.recommendations[0].recommendation_details[0].instance_details.redshift_instance_details.family #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.redshift_instance_details.node_type #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.redshift_instance_details.region #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.redshift_instance_details.current_generation #=> Boolean
+    #   resp.recommendations[0].recommendation_details[0].instance_details.redshift_instance_details.size_flex_eligible #=> Boolean
+    #   resp.recommendations[0].recommendation_details[0].instance_details.elasticache_instance_details.family #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.elasticache_instance_details.node_type #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.elasticache_instance_details.region #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.elasticache_instance_details.product_description #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.elasticache_instance_details.current_generation #=> Boolean
+    #   resp.recommendations[0].recommendation_details[0].instance_details.elasticache_instance_details.size_flex_eligible #=> Boolean
+    #   resp.recommendations[0].recommendation_details[0].instance_details.es_instance_details.instance_class #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.es_instance_details.instance_size #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.es_instance_details.region #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.es_instance_details.current_generation #=> Boolean
+    #   resp.recommendations[0].recommendation_details[0].instance_details.es_instance_details.size_flex_eligible #=> Boolean
     #   resp.recommendations[0].recommendation_details[0].recommended_number_of_instances_to_purchase #=> String
     #   resp.recommendations[0].recommendation_details[0].recommended_normalized_units_to_purchase #=> String
     #   resp.recommendations[0].recommendation_details[0].minimum_number_of_instances_used_per_hour #=> String
@@ -895,14 +950,32 @@ module Aws::CostExplorer
     #   resp.utilizations_by_time[0].groups[0].utilization.purchased_hours #=> String
     #   resp.utilizations_by_time[0].groups[0].utilization.total_actual_hours #=> String
     #   resp.utilizations_by_time[0].groups[0].utilization.unused_hours #=> String
+    #   resp.utilizations_by_time[0].groups[0].utilization.on_demand_cost_of_ri_hours_used #=> String
+    #   resp.utilizations_by_time[0].groups[0].utilization.net_ri_savings #=> String
+    #   resp.utilizations_by_time[0].groups[0].utilization.total_potential_ri_savings #=> String
+    #   resp.utilizations_by_time[0].groups[0].utilization.amortized_upfront_fee #=> String
+    #   resp.utilizations_by_time[0].groups[0].utilization.amortized_recurring_fee #=> String
+    #   resp.utilizations_by_time[0].groups[0].utilization.total_amortized_fee #=> String
     #   resp.utilizations_by_time[0].total.utilization_percentage #=> String
     #   resp.utilizations_by_time[0].total.purchased_hours #=> String
     #   resp.utilizations_by_time[0].total.total_actual_hours #=> String
     #   resp.utilizations_by_time[0].total.unused_hours #=> String
+    #   resp.utilizations_by_time[0].total.on_demand_cost_of_ri_hours_used #=> String
+    #   resp.utilizations_by_time[0].total.net_ri_savings #=> String
+    #   resp.utilizations_by_time[0].total.total_potential_ri_savings #=> String
+    #   resp.utilizations_by_time[0].total.amortized_upfront_fee #=> String
+    #   resp.utilizations_by_time[0].total.amortized_recurring_fee #=> String
+    #   resp.utilizations_by_time[0].total.total_amortized_fee #=> String
     #   resp.total.utilization_percentage #=> String
     #   resp.total.purchased_hours #=> String
     #   resp.total.total_actual_hours #=> String
     #   resp.total.unused_hours #=> String
+    #   resp.total.on_demand_cost_of_ri_hours_used #=> String
+    #   resp.total.net_ri_savings #=> String
+    #   resp.total.total_potential_ri_savings #=> String
+    #   resp.total.amortized_upfront_fee #=> String
+    #   resp.total.amortized_recurring_fee #=> String
+    #   resp.total.total_amortized_fee #=> String
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetReservationUtilization AWS API Documentation
@@ -984,7 +1057,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
