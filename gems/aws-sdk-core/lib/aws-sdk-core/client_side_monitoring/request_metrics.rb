@@ -9,8 +9,9 @@ module Aws
         @api = opts[:operation]
         @client_id = opts[:client_id]
         @timestamp = opts[:timestamp] # In epoch milliseconds
+        @region = opts[:region]
         @version = 1
-        @api_call = ApiCall.new(@service, @api, @client_id, @version, @timestamp)
+        @api_call = ApiCall.new(@service, @api, @client_id, @version, @timestamp, @region)
         @api_call_attempts = []
       end
 
@@ -41,14 +42,15 @@ module Aws
 
       class ApiCall
         attr_reader :service, :api, :client_id, :timestamp, :version,
-          :attempt_count, :latency
+          :attempt_count, :latency, :region
 
-        def initialize(service, api, client_id, version, timestamp)
+        def initialize(service, api, client_id, version, timestamp, region)
           @service = service
           @api = api
           @client_id = client_id
           @version = version
           @timestamp = timestamp
+          @region = region
         end
 
         def complete(opts = {})
@@ -65,7 +67,8 @@ module Aws
             "Timestamp" => @timestamp,
             "Version" => @version,
             "AttemptCount" => @attempt_count,
-            "Latency" => @latency
+            "Latency" => @latency,
+            "Region" => @region
           }.to_json
         end
       end

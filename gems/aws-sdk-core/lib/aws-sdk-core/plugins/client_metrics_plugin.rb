@@ -99,6 +99,7 @@ all generated client side metrics. Defaults to an empty string.
             service: service_id,
             operation: context.operation.name,
             client_id: context.config.client_side_monitoring_client_id,
+            region: context.config.region,
             timestamp: DateTime.now.strftime('%Q').to_i,
           )
           context.metadata[:client_metrics] = request_metrics
