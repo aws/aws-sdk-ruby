@@ -613,7 +613,7 @@ module Aws::DirectoryService
     #
     class CreateLogSubscriptionResult < Aws::EmptyStructure; end
 
-    # Creates a Microsoft AD in the AWS cloud.
+    # Creates an AWS Managed Microsoft AD directory.
     #
     # @note When making an API call, you may pass CreateMicrosoftADRequest
     #   data as a hash:
@@ -659,7 +659,7 @@ module Aws::DirectoryService
     #   @return [Types::DirectoryVpcSettings]
     #
     # @!attribute [rw] edition
-    #   AWS Microsoft AD is available in two editions: Standard and
+    #   AWS Managed Microsoft AD is available in two editions: Standard and
     #   Enterprise. Enterprise is the default.
     #   @return [String]
     #
@@ -729,14 +729,14 @@ module Aws::DirectoryService
 
     # AWS Directory Service for Microsoft Active Directory allows you to
     # configure trust relationships. For example, you can establish a trust
-    # between your Microsoft AD in the AWS cloud, and your existing
+    # between your AWS Managed Microsoft AD directory, and your existing
     # on-premises Microsoft Active Directory. This would allow you to
     # provide users and groups access to resources in either domain, with a
     # single set of credentials.
     #
     # This action initiates the creation of the AWS side of a trust
-    # relationship between a Microsoft AD in the AWS cloud and an external
-    # domain.
+    # relationship between an AWS Managed Microsoft AD directory and an
+    # external domain.
     #
     # @note When making an API call, you may pass CreateTrustRequest
     #   data as a hash:
@@ -746,13 +746,14 @@ module Aws::DirectoryService
     #         remote_domain_name: "RemoteDomainName", # required
     #         trust_password: "TrustPassword", # required
     #         trust_direction: "One-Way: Outgoing", # required, accepts One-Way: Outgoing, One-Way: Incoming, Two-Way
-    #         trust_type: "Forest", # accepts Forest
+    #         trust_type: "Forest", # accepts Forest, External
     #         conditional_forwarder_ip_addrs: ["IpAddr"],
+    #         selective_auth: "Enabled", # accepts Enabled, Disabled
     #       }
     #
     # @!attribute [rw] directory_id
-    #   The Directory ID of the Microsoft AD in the AWS cloud for which to
-    #   establish the trust relationship.
+    #   The Directory ID of the AWS Managed Microsoft AD directory for which
+    #   to establish the trust relationship.
     #   @return [String]
     #
     # @!attribute [rw] remote_domain_name
@@ -770,13 +771,17 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] trust_type
-    #   The trust relationship type.
+    #   The trust relationship type. `Forest` is the default.
     #   @return [String]
     #
     # @!attribute [rw] conditional_forwarder_ip_addrs
     #   The IP addresses of the remote DNS server associated with
     #   RemoteDomainName.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] selective_auth
+    #   Optional parameter to enable selective authentication for the trust.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateTrustRequest AWS API Documentation
     #
@@ -786,7 +791,8 @@ module Aws::DirectoryService
       :trust_password,
       :trust_direction,
       :trust_type,
-      :conditional_forwarder_ip_addrs)
+      :conditional_forwarder_ip_addrs,
+      :selective_auth)
       include Aws::Structure
     end
 
@@ -927,7 +933,7 @@ module Aws::DirectoryService
     end
 
     # Deletes the local side of an existing trust relationship between the
-    # Microsoft AD in the AWS cloud and the external domain.
+    # AWS Managed Microsoft AD directory and the external domain.
     #
     # @note When making an API call, you may pass DeleteTrustRequest
     #   data as a hash:
@@ -1335,9 +1341,10 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # Describes the trust relationships for a particular Microsoft AD in the
-    # AWS cloud. If no input parameters are are provided, such as directory
-    # ID or trust ID, this request describes all the trust relationships.
+    # Describes the trust relationships for a particular AWS Managed
+    # Microsoft AD directory. If no input parameters are are provided, such
+    # as directory ID or trust ID, this request describes all the trust
+    # relationships.
     #
     # @note When making an API call, you may pass DescribeTrustsRequest
     #   data as a hash:
@@ -1662,16 +1669,18 @@ module Aws::DirectoryService
     #   @return [Boolean]
     #
     # @!attribute [rw] cloud_only_microsoft_ad_limit
-    #   The maximum number of Microsoft AD directories allowed in the
-    #   region.
+    #   The maximum number of AWS Managed Microsoft AD directories allowed
+    #   in the region.
     #   @return [Integer]
     #
     # @!attribute [rw] cloud_only_microsoft_ad_current_count
-    #   The current number of Microsoft AD directories in the region.
+    #   The current number of AWS Managed Microsoft AD directories in the
+    #   region.
     #   @return [Integer]
     #
     # @!attribute [rw] cloud_only_microsoft_ad_limit_reached
-    #   Indicates if the Microsoft AD directory limit has been reached.
+    #   Indicates if the AWS Managed Microsoft AD directory limit has been
+    #   reached.
     #   @return [Boolean]
     #
     # @!attribute [rw] connected_directories_limit
@@ -3009,8 +3018,8 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # Describes a trust relationship between an Microsoft AD in the AWS
-    # cloud and an external domain.
+    # Describes a trust relationship between an AWS Managed Microsoft AD
+    # directory and an external domain.
     #
     # @!attribute [rw] directory_id
     #   The Directory ID of the AWS directory involved in the trust
@@ -3027,7 +3036,7 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] trust_type
-    #   The trust relationship type.
+    #   The trust relationship type. `Forest` is the default.
     #   @return [String]
     #
     # @!attribute [rw] trust_direction
@@ -3054,6 +3063,10 @@ module Aws::DirectoryService
     #   The reason for the TrustState.
     #   @return [String]
     #
+    # @!attribute [rw] selective_auth
+    #   Current state of selective authentication for the trust.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/Trust AWS API Documentation
     #
     class Trust < Struct.new(
@@ -3066,7 +3079,8 @@ module Aws::DirectoryService
       :created_date_time,
       :last_updated_date_time,
       :state_last_updated_date_time,
-      :trust_state_reason)
+      :trust_state_reason,
+      :selective_auth)
       include Aws::Structure
     end
 
@@ -3251,8 +3265,48 @@ module Aws::DirectoryService
     #
     class UpdateRadiusResult < Aws::EmptyStructure; end
 
-    # Initiates the verification of an existing trust relationship between a
-    # Microsoft AD in the AWS cloud and an external domain.
+    # @note When making an API call, you may pass UpdateTrustRequest
+    #   data as a hash:
+    #
+    #       {
+    #         trust_id: "TrustId", # required
+    #         selective_auth: "Enabled", # accepts Enabled, Disabled
+    #       }
+    #
+    # @!attribute [rw] trust_id
+    #   Identifier of the trust relationship.
+    #   @return [String]
+    #
+    # @!attribute [rw] selective_auth
+    #   Updates selective authentication for the trust.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateTrustRequest AWS API Documentation
+    #
+    class UpdateTrustRequest < Struct.new(
+      :trust_id,
+      :selective_auth)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] trust_id
+    #   Identifier of the trust relationship.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateTrustResult AWS API Documentation
+    #
+    class UpdateTrustResult < Struct.new(
+      :request_id,
+      :trust_id)
+      include Aws::Structure
+    end
+
+    # Initiates the verification of an existing trust relationship between
+    # an AWS Managed Microsoft AD directory and an external domain.
     #
     # @note When making an API call, you may pass VerifyTrustRequest
     #   data as a hash:

@@ -689,7 +689,7 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
-    # Creates a Microsoft AD in the AWS cloud.
+    # Creates an AWS Managed Microsoft AD directory.
     #
     # Before you call *CreateMicrosoftAD*, ensure that all of the required
     # permissions have been explicitly granted through a policy. For details
@@ -724,7 +724,7 @@ module Aws::DirectoryService
     #   operation.
     #
     # @option params [String] :edition
-    #   AWS Microsoft AD is available in two editions: Standard and
+    #   AWS Managed Microsoft AD is available in two editions: Standard and
     #   Enterprise. Enterprise is the default.
     #
     # @return [Types::CreateMicrosoftADResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -797,18 +797,19 @@ module Aws::DirectoryService
 
     # AWS Directory Service for Microsoft Active Directory allows you to
     # configure trust relationships. For example, you can establish a trust
-    # between your Microsoft AD in the AWS cloud, and your existing
+    # between your AWS Managed Microsoft AD directory, and your existing
     # on-premises Microsoft Active Directory. This would allow you to
     # provide users and groups access to resources in either domain, with a
     # single set of credentials.
     #
     # This action initiates the creation of the AWS side of a trust
-    # relationship between a Microsoft AD in the AWS cloud and an external
-    # domain.
+    # relationship between an AWS Managed Microsoft AD directory and an
+    # external domain. You can create either a forest trust or an external
+    # trust.
     #
     # @option params [required, String] :directory_id
-    #   The Directory ID of the Microsoft AD in the AWS cloud for which to
-    #   establish the trust relationship.
+    #   The Directory ID of the AWS Managed Microsoft AD directory for which
+    #   to establish the trust relationship.
     #
     # @option params [required, String] :remote_domain_name
     #   The Fully Qualified Domain Name (FQDN) of the external domain for
@@ -822,11 +823,14 @@ module Aws::DirectoryService
     #   The direction of the trust relationship.
     #
     # @option params [String] :trust_type
-    #   The trust relationship type.
+    #   The trust relationship type. `Forest` is the default.
     #
     # @option params [Array<String>] :conditional_forwarder_ip_addrs
     #   The IP addresses of the remote DNS server associated with
     #   RemoteDomainName.
+    #
+    # @option params [String] :selective_auth
+    #   Optional parameter to enable selective authentication for the trust.
     #
     # @return [Types::CreateTrustResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -839,8 +843,9 @@ module Aws::DirectoryService
     #     remote_domain_name: "RemoteDomainName", # required
     #     trust_password: "TrustPassword", # required
     #     trust_direction: "One-Way: Outgoing", # required, accepts One-Way: Outgoing, One-Way: Incoming, Two-Way
-    #     trust_type: "Forest", # accepts Forest
+    #     trust_type: "Forest", # accepts Forest, External
     #     conditional_forwarder_ip_addrs: ["IpAddr"],
+    #     selective_auth: "Enabled", # accepts Enabled, Disabled
     #   })
     #
     # @example Response structure
@@ -973,8 +978,8 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
-    # Deletes an existing trust relationship between your Microsoft AD in
-    # the AWS cloud and an external domain.
+    # Deletes an existing trust relationship between your AWS Managed
+    # Microsoft AD directory and an external domain.
     #
     # @option params [required, String] :trust_id
     #   The Trust ID of the trust relationship to be deleted.
@@ -1462,13 +1467,14 @@ module Aws::DirectoryService
     #   resp.trusts[0].directory_id #=> String
     #   resp.trusts[0].trust_id #=> String
     #   resp.trusts[0].remote_domain_name #=> String
-    #   resp.trusts[0].trust_type #=> String, one of "Forest"
+    #   resp.trusts[0].trust_type #=> String, one of "Forest", "External"
     #   resp.trusts[0].trust_direction #=> String, one of "One-Way: Outgoing", "One-Way: Incoming", "Two-Way"
-    #   resp.trusts[0].trust_state #=> String, one of "Creating", "Created", "Verifying", "VerifyFailed", "Verified", "Deleting", "Deleted", "Failed"
+    #   resp.trusts[0].trust_state #=> String, one of "Creating", "Created", "Verifying", "VerifyFailed", "Verified", "Updating", "UpdateFailed", "Updated", "Deleting", "Deleted", "Failed"
     #   resp.trusts[0].created_date_time #=> Time
     #   resp.trusts[0].last_updated_date_time #=> Time
     #   resp.trusts[0].state_last_updated_date_time #=> Time
     #   resp.trusts[0].trust_state_reason #=> String
+    #   resp.trusts[0].selective_auth #=> String, one of "Enabled", "Disabled"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeTrusts AWS API Documentation
@@ -2293,11 +2299,46 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
+    # Updates the trust that has been set up between your AWS Managed
+    # Microsoft AD directory and an on-premises Active Directory.
+    #
+    # @option params [required, String] :trust_id
+    #   Identifier of the trust relationship.
+    #
+    # @option params [String] :selective_auth
+    #   Updates selective authentication for the trust.
+    #
+    # @return [Types::UpdateTrustResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateTrustResult#request_id #request_id} => String
+    #   * {Types::UpdateTrustResult#trust_id #trust_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_trust({
+    #     trust_id: "TrustId", # required
+    #     selective_auth: "Enabled", # accepts Enabled, Disabled
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.trust_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateTrust AWS API Documentation
+    #
+    # @overload update_trust(params = {})
+    # @param [Hash] params ({})
+    def update_trust(params = {}, options = {})
+      req = build_request(:update_trust, params)
+      req.send_request(options)
+    end
+
     # AWS Directory Service for Microsoft Active Directory allows you to
     # configure and verify trust relationships.
     #
-    # This action verifies a trust relationship between your Microsoft AD in
-    # the AWS cloud and an external domain.
+    # This action verifies a trust relationship between your AWS Managed
+    # Microsoft AD directory and an external domain.
     #
     # @option params [required, String] :trust_id
     #   The unique Trust ID of the trust relationship to verify.
@@ -2338,7 +2379,7 @@ module Aws::DirectoryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directoryservice'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -205,6 +205,7 @@ module Aws::DirectoryService
     SchemaExtensionStatusReason = Shapes::StringShape.new(name: 'SchemaExtensionStatusReason')
     SchemaExtensionsInfo = Shapes::ListShape.new(name: 'SchemaExtensionsInfo')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
+    SelectiveAuth = Shapes::StringShape.new(name: 'SelectiveAuth')
     Server = Shapes::StringShape.new(name: 'Server')
     Servers = Shapes::ListShape.new(name: 'Servers')
     ServiceException = Shapes::StructureShape.new(name: 'ServiceException')
@@ -267,6 +268,8 @@ module Aws::DirectoryService
     UpdateRadiusRequest = Shapes::StructureShape.new(name: 'UpdateRadiusRequest')
     UpdateRadiusResult = Shapes::StructureShape.new(name: 'UpdateRadiusResult')
     UpdateSecurityGroupForDirectoryControllers = Shapes::BooleanShape.new(name: 'UpdateSecurityGroupForDirectoryControllers')
+    UpdateTrustRequest = Shapes::StructureShape.new(name: 'UpdateTrustRequest')
+    UpdateTrustResult = Shapes::StructureShape.new(name: 'UpdateTrustResult')
     UseSameUsername = Shapes::BooleanShape.new(name: 'UseSameUsername')
     UserDoesNotExistException = Shapes::StructureShape.new(name: 'UserDoesNotExistException')
     UserName = Shapes::StringShape.new(name: 'UserName')
@@ -399,6 +402,7 @@ module Aws::DirectoryService
     CreateTrustRequest.add_member(:trust_direction, Shapes::ShapeRef.new(shape: TrustDirection, required: true, location_name: "TrustDirection"))
     CreateTrustRequest.add_member(:trust_type, Shapes::ShapeRef.new(shape: TrustType, location_name: "TrustType"))
     CreateTrustRequest.add_member(:conditional_forwarder_ip_addrs, Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: "ConditionalForwarderIpAddrs"))
+    CreateTrustRequest.add_member(:selective_auth, Shapes::ShapeRef.new(shape: SelectiveAuth, location_name: "SelectiveAuth"))
     CreateTrustRequest.struct_class = Types::CreateTrustRequest
 
     CreateTrustResult.add_member(:trust_id, Shapes::ShapeRef.new(shape: TrustId, location_name: "TrustId"))
@@ -835,6 +839,7 @@ module Aws::DirectoryService
     Trust.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: LastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
     Trust.add_member(:state_last_updated_date_time, Shapes::ShapeRef.new(shape: StateLastUpdatedDateTime, location_name: "StateLastUpdatedDateTime"))
     Trust.add_member(:trust_state_reason, Shapes::ShapeRef.new(shape: TrustStateReason, location_name: "TrustStateReason"))
+    Trust.add_member(:selective_auth, Shapes::ShapeRef.new(shape: SelectiveAuth, location_name: "SelectiveAuth"))
     Trust.struct_class = Types::Trust
 
     TrustIds.member = Shapes::ShapeRef.new(shape: TrustId)
@@ -870,6 +875,14 @@ module Aws::DirectoryService
     UpdateRadiusRequest.struct_class = Types::UpdateRadiusRequest
 
     UpdateRadiusResult.struct_class = Types::UpdateRadiusResult
+
+    UpdateTrustRequest.add_member(:trust_id, Shapes::ShapeRef.new(shape: TrustId, required: true, location_name: "TrustId"))
+    UpdateTrustRequest.add_member(:selective_auth, Shapes::ShapeRef.new(shape: SelectiveAuth, location_name: "SelectiveAuth"))
+    UpdateTrustRequest.struct_class = Types::UpdateTrustRequest
+
+    UpdateTrustResult.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    UpdateTrustResult.add_member(:trust_id, Shapes::ShapeRef.new(shape: TrustId, location_name: "TrustId"))
+    UpdateTrustResult.struct_class = Types::UpdateTrustResult
 
     VerifyTrustRequest.add_member(:trust_id, Shapes::ShapeRef.new(shape: TrustId, required: true, location_name: "TrustId"))
     VerifyTrustRequest.struct_class = Types::VerifyTrustRequest
@@ -1525,6 +1538,18 @@ module Aws::DirectoryService
         o.output = Shapes::ShapeRef.new(shape: UpdateRadiusResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:update_trust, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateTrust"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateTrustRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateTrustResult)
+        o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
