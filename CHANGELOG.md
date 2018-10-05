@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.144 (2018-10-05)
+------------------
+
 * Feature - Aws::DirectoryService - Updated the API, and documentation for AWS Directory Service.
 
 2.11.143 (2018-10-04)
