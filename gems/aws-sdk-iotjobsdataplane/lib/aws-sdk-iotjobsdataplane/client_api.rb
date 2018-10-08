@@ -11,6 +11,8 @@ module Aws::IoTJobsDataPlane
 
     include Seahorse::Model
 
+    ApproximateSecondsBeforeTimedOut = Shapes::IntegerShape.new(name: 'ApproximateSecondsBeforeTimedOut')
+    BinaryBlob = Shapes::BlobShape.new(name: 'BinaryBlob')
     CertificateValidationException = Shapes::StructureShape.new(name: 'CertificateValidationException')
     DescribeJobExecutionJobId = Shapes::StringShape.new(name: 'DescribeJobExecutionJobId')
     DescribeJobExecutionRequest = Shapes::StructureShape.new(name: 'DescribeJobExecutionRequest')
@@ -40,6 +42,7 @@ module Aws::IoTJobsDataPlane
     StartNextPendingJobExecutionRequest = Shapes::StructureShape.new(name: 'StartNextPendingJobExecutionRequest')
     StartNextPendingJobExecutionResponse = Shapes::StructureShape.new(name: 'StartNextPendingJobExecutionResponse')
     StartedAt = Shapes::IntegerShape.new(name: 'StartedAt')
+    StepTimeoutInMinutes = Shapes::IntegerShape.new(name: 'StepTimeoutInMinutes')
     TerminalStateException = Shapes::StructureShape.new(name: 'TerminalStateException')
     ThingName = Shapes::StringShape.new(name: 'ThingName')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
@@ -74,6 +77,7 @@ module Aws::IoTJobsDataPlane
     JobExecution.add_member(:queued_at, Shapes::ShapeRef.new(shape: QueuedAt, location_name: "queuedAt"))
     JobExecution.add_member(:started_at, Shapes::ShapeRef.new(shape: StartedAt, location_name: "startedAt"))
     JobExecution.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: LastUpdatedAt, location_name: "lastUpdatedAt"))
+    JobExecution.add_member(:approximate_seconds_before_timed_out, Shapes::ShapeRef.new(shape: ApproximateSecondsBeforeTimedOut, location_name: "approximateSecondsBeforeTimedOut"))
     JobExecution.add_member(:version_number, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "versionNumber"))
     JobExecution.add_member(:execution_number, Shapes::ShapeRef.new(shape: ExecutionNumber, location_name: "executionNumber"))
     JobExecution.add_member(:job_document, Shapes::ShapeRef.new(shape: JobDocument, location_name: "jobDocument"))
@@ -96,6 +100,7 @@ module Aws::IoTJobsDataPlane
 
     StartNextPendingJobExecutionRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, required: true, location: "uri", location_name: "thingName"))
     StartNextPendingJobExecutionRequest.add_member(:status_details, Shapes::ShapeRef.new(shape: DetailsMap, location_name: "statusDetails"))
+    StartNextPendingJobExecutionRequest.add_member(:step_timeout_in_minutes, Shapes::ShapeRef.new(shape: StepTimeoutInMinutes, location_name: "stepTimeoutInMinutes"))
     StartNextPendingJobExecutionRequest.struct_class = Types::StartNextPendingJobExecutionRequest
 
     StartNextPendingJobExecutionResponse.add_member(:execution, Shapes::ShapeRef.new(shape: JobExecution, location_name: "execution"))
@@ -105,6 +110,7 @@ module Aws::IoTJobsDataPlane
     UpdateJobExecutionRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, required: true, location: "uri", location_name: "thingName"))
     UpdateJobExecutionRequest.add_member(:status, Shapes::ShapeRef.new(shape: JobExecutionStatus, required: true, location_name: "status"))
     UpdateJobExecutionRequest.add_member(:status_details, Shapes::ShapeRef.new(shape: DetailsMap, location_name: "statusDetails"))
+    UpdateJobExecutionRequest.add_member(:step_timeout_in_minutes, Shapes::ShapeRef.new(shape: StepTimeoutInMinutes, location_name: "stepTimeoutInMinutes"))
     UpdateJobExecutionRequest.add_member(:expected_version, Shapes::ShapeRef.new(shape: ExpectedVersion, location_name: "expectedVersion"))
     UpdateJobExecutionRequest.add_member(:include_job_execution_state, Shapes::ShapeRef.new(shape: IncludeExecutionState, location_name: "includeJobExecutionState"))
     UpdateJobExecutionRequest.add_member(:include_job_document, Shapes::ShapeRef.new(shape: IncludeJobDocument, location_name: "includeJobDocument"))
@@ -126,6 +132,7 @@ module Aws::IoTJobsDataPlane
         "endpointPrefix" => "data.jobs.iot",
         "protocol" => "rest-json",
         "serviceFullName" => "AWS IoT Jobs Data Plane",
+        "serviceId" => "IoT Jobs Data Plane",
         "signatureVersion" => "v4",
         "signingName" => "iot-jobs-data",
         "uid" => "iot-jobs-data-2017-09-29",

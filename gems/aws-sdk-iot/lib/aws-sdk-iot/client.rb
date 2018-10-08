@@ -715,6 +715,13 @@ module Aws::IoT
     # @option params [Types::JobExecutionsRolloutConfig] :job_executions_rollout_config
     #   Allows you to create a staged rollout of the job.
     #
+    # @option params [Types::TimeoutConfig] :timeout_config
+    #   Specifies the amount of time each device has to finish its execution
+    #   of the job. The timer is started when the job execution status is set
+    #   to `IN_PROGRESS`. If the job execution status is not set to another
+    #   terminal state before the time expires, it will be automatically set
+    #   to `TIMED_OUT`.
+    #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateJobResponse#job_arn #job_arn} => String
@@ -736,6 +743,9 @@ module Aws::IoT
     #     target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
     #     job_executions_rollout_config: {
     #       maximum_per_minute: 1,
+    #     },
+    #     timeout_config: {
+    #       in_progress_timeout_in_minutes: 1,
     #     },
     #   })
     #
@@ -2320,8 +2330,27 @@ module Aws::IoT
     # Returns a unique endpoint specific to the AWS account making the call.
     #
     # @option params [String] :endpoint_type
-    #   The endpoint type (such as `iot:Data`, `iot:CredentialProvider` and
-    #   `iot:Jobs`).
+    #   The endpoint type. Valid endpoint types include:
+    #
+    #   * `iot:Data` - Returns a VeriSign signed data endpoint.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `iot:Data-ATS` - Returns an ATS signed data endpoint.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `iot:CredentialProvider` - Returns an AWS IoT credentials provider
+    #     API endpoint.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `iot:Jobs` - Returns an AWS IoT device management Jobs API endpoint.
+    #
+    #   ^
     #
     # @return [Types::DescribeEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2439,6 +2468,8 @@ module Aws::IoT
     #   resp.job.job_process_details.number_of_queued_things #=> Integer
     #   resp.job.job_process_details.number_of_in_progress_things #=> Integer
     #   resp.job.job_process_details.number_of_removed_things #=> Integer
+    #   resp.job.job_process_details.number_of_timed_out_things #=> Integer
+    #   resp.job.timeout_config.in_progress_timeout_in_minutes #=> Integer
     #
     # @overload describe_job(params = {})
     # @param [Hash] params ({})
@@ -2474,7 +2505,7 @@ module Aws::IoT
     # @example Response structure
     #
     #   resp.execution.job_id #=> String
-    #   resp.execution.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "REJECTED", "REMOVED", "CANCELED"
+    #   resp.execution.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "TIMED_OUT", "REJECTED", "REMOVED", "CANCELED"
     #   resp.execution.force_canceled #=> Boolean
     #   resp.execution.status_details.details_map #=> Hash
     #   resp.execution.status_details.details_map["DetailsKey"] #=> String
@@ -2484,6 +2515,7 @@ module Aws::IoT
     #   resp.execution.last_updated_at #=> Time
     #   resp.execution.execution_number #=> Integer
     #   resp.execution.version_number #=> Integer
+    #   resp.execution.approximate_seconds_before_timed_out #=> Integer
     #
     # @overload describe_job_execution(params = {})
     # @param [Hash] params ({})
@@ -3887,7 +3919,7 @@ module Aws::IoT
     #
     #   resp = client.list_job_executions_for_job({
     #     job_id: "JobId", # required
-    #     status: "QUEUED", # accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, REJECTED, REMOVED, CANCELED
+    #     status: "QUEUED", # accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, TIMED_OUT, REJECTED, REMOVED, CANCELED
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -3896,7 +3928,7 @@ module Aws::IoT
     #
     #   resp.execution_summaries #=> Array
     #   resp.execution_summaries[0].thing_arn #=> String
-    #   resp.execution_summaries[0].job_execution_summary.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "REJECTED", "REMOVED", "CANCELED"
+    #   resp.execution_summaries[0].job_execution_summary.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "TIMED_OUT", "REJECTED", "REMOVED", "CANCELED"
     #   resp.execution_summaries[0].job_execution_summary.queued_at #=> Time
     #   resp.execution_summaries[0].job_execution_summary.started_at #=> Time
     #   resp.execution_summaries[0].job_execution_summary.last_updated_at #=> Time
@@ -3934,7 +3966,7 @@ module Aws::IoT
     #
     #   resp = client.list_job_executions_for_thing({
     #     thing_name: "ThingName", # required
-    #     status: "QUEUED", # accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, REJECTED, REMOVED, CANCELED
+    #     status: "QUEUED", # accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, TIMED_OUT, REJECTED, REMOVED, CANCELED
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -3943,7 +3975,7 @@ module Aws::IoT
     #
     #   resp.execution_summaries #=> Array
     #   resp.execution_summaries[0].job_id #=> String
-    #   resp.execution_summaries[0].job_execution_summary.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "REJECTED", "REMOVED", "CANCELED"
+    #   resp.execution_summaries[0].job_execution_summary.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "TIMED_OUT", "REJECTED", "REMOVED", "CANCELED"
     #   resp.execution_summaries[0].job_execution_summary.queued_at #=> Time
     #   resp.execution_summaries[0].job_execution_summary.started_at #=> Time
     #   resp.execution_summaries[0].job_execution_summary.last_updated_at #=> Time
@@ -6591,7 +6623,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

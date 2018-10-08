@@ -211,12 +211,13 @@ module Aws::IoTJobsDataPlane
     #
     #   resp.execution.job_id #=> String
     #   resp.execution.thing_name #=> String
-    #   resp.execution.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "REJECTED", "REMOVED", "CANCELED"
+    #   resp.execution.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "TIMED_OUT", "REJECTED", "REMOVED", "CANCELED"
     #   resp.execution.status_details #=> Hash
     #   resp.execution.status_details["DetailsKey"] #=> String
     #   resp.execution.queued_at #=> Integer
     #   resp.execution.started_at #=> Integer
     #   resp.execution.last_updated_at #=> Integer
+    #   resp.execution.approximate_seconds_before_timed_out #=> Integer
     #   resp.execution.version_number #=> Integer
     #   resp.execution.execution_number #=> Integer
     #   resp.execution.job_document #=> String
@@ -279,6 +280,17 @@ module Aws::IoTJobsDataPlane
     #   A collection of name/value pairs that describe the status of the job
     #   execution. If not specified, the statusDetails are unchanged.
     #
+    # @option params [Integer] :step_timeout_in_minutes
+    #   Specifies the amount of time this device has to finish execution of
+    #   this job. If the job execution status is not set to a terminal state
+    #   before this timer expires, or before the timer is reset (by calling
+    #   `UpdateJobExecution`, setting the status to `IN_PROGRESS` and
+    #   specifying a new timeout value in field `stepTimeoutInMinutes`) the
+    #   job execution status will be automatically set to `TIMED_OUT`. Note
+    #   that setting this timeout has no effect on that job execution timeout
+    #   which may have been specified when the job was created (`CreateJob`
+    #   using field `timeoutConfig`).
+    #
     # @return [Types::StartNextPendingJobExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartNextPendingJobExecutionResponse#execution #execution} => Types::JobExecution
@@ -290,18 +302,20 @@ module Aws::IoTJobsDataPlane
     #     status_details: {
     #       "DetailsKey" => "DetailsValue",
     #     },
+    #     step_timeout_in_minutes: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.execution.job_id #=> String
     #   resp.execution.thing_name #=> String
-    #   resp.execution.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "REJECTED", "REMOVED", "CANCELED"
+    #   resp.execution.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "TIMED_OUT", "REJECTED", "REMOVED", "CANCELED"
     #   resp.execution.status_details #=> Hash
     #   resp.execution.status_details["DetailsKey"] #=> String
     #   resp.execution.queued_at #=> Integer
     #   resp.execution.started_at #=> Integer
     #   resp.execution.last_updated_at #=> Integer
+    #   resp.execution.approximate_seconds_before_timed_out #=> Integer
     #   resp.execution.version_number #=> Integer
     #   resp.execution.execution_number #=> Integer
     #   resp.execution.job_document #=> String
@@ -328,6 +342,17 @@ module Aws::IoTJobsDataPlane
     # @option params [Hash<String,String>] :status_details
     #   Optional. A collection of name/value pairs that describe the status of
     #   the job execution. If not specified, the statusDetails are unchanged.
+    #
+    # @option params [Integer] :step_timeout_in_minutes
+    #   Specifies the amount of time this device has to finish execution of
+    #   this job. If the job execution status is not set to a terminal state
+    #   before this timer expires, or before the timer is reset (by again
+    #   calling `UpdateJobExecution`, setting the status to `IN_PROGRESS` and
+    #   specifying a new timeout value in this field) the job execution status
+    #   will be automatically set to `TIMED_OUT`. Note that setting or
+    #   resetting this timeout has no effect on that job execution timeout
+    #   which may have been specified when the job was created (`CreateJob`
+    #   using field `timeoutConfig`).
     #
     # @option params [Integer] :expected_version
     #   Optional. The expected current version of the job execution. Each time
@@ -360,10 +385,11 @@ module Aws::IoTJobsDataPlane
     #   resp = client.update_job_execution({
     #     job_id: "JobId", # required
     #     thing_name: "ThingName", # required
-    #     status: "QUEUED", # required, accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, REJECTED, REMOVED, CANCELED
+    #     status: "QUEUED", # required, accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, TIMED_OUT, REJECTED, REMOVED, CANCELED
     #     status_details: {
     #       "DetailsKey" => "DetailsValue",
     #     },
+    #     step_timeout_in_minutes: 1,
     #     expected_version: 1,
     #     include_job_execution_state: false,
     #     include_job_document: false,
@@ -372,7 +398,7 @@ module Aws::IoTJobsDataPlane
     #
     # @example Response structure
     #
-    #   resp.execution_state.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "REJECTED", "REMOVED", "CANCELED"
+    #   resp.execution_state.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "TIMED_OUT", "REJECTED", "REMOVED", "CANCELED"
     #   resp.execution_state.status_details #=> Hash
     #   resp.execution_state.status_details["DetailsKey"] #=> String
     #   resp.execution_state.version_number #=> Integer
@@ -398,7 +424,7 @@ module Aws::IoTJobsDataPlane
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotjobsdataplane'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
