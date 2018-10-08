@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.145 (2018-10-08)
+------------------
+
 * Feature - Aws::IoTJobsDataPlane - Updated the API, and documentation for AWS IoT Jobs Data Plane.
 
 * Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
