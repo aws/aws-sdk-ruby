@@ -80,6 +80,11 @@ module Aws
             expect(inspector(error).throttling_error?).to be(true)
           end
 
+          it 'returns true for response status code 429' do
+            error = RetryErrorsSvc::Errors::SomeRandomError.new(nil,nil)
+            expect(inspector(error, 429).throttling_error?).to be(true)
+          end
+
           it 'returns true for ThrottlingException' do
             error = RetryErrorsSvc::Errors::ThrottlingException.new(nil,nil)
             expect(inspector(error).throttling_error?).to be(true)

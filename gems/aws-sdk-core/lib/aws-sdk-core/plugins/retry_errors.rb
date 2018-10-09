@@ -104,7 +104,7 @@ A delay randomiser function used by the default backoff function. Some predefine
         end
 
         def throttling_error?
-          !!(THROTTLING_ERRORS.include?(@name) || @name.match(/throttl/i))
+          !!(THROTTLING_ERRORS.include?(@name) || @name.match(/throttl/i) || @http_status_code == 429)
         end
 
         def checksum?
