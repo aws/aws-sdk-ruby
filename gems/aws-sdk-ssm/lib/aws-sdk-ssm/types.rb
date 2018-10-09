@@ -922,6 +922,35 @@ module Aws::SSM
     #
     class CancelCommandResult < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass CancelMaintenanceWindowExecutionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         window_execution_id: "MaintenanceWindowExecutionId", # required
+    #       }
+    #
+    # @!attribute [rw] window_execution_id
+    #   The ID of the Maintenance Window execution to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CancelMaintenanceWindowExecutionRequest AWS API Documentation
+    #
+    class CancelMaintenanceWindowExecutionRequest < Struct.new(
+      :window_execution_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] window_execution_id
+    #   The ID of the Maintenance Window execution that has been stopped.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CancelMaintenanceWindowExecutionResult AWS API Documentation
+    #
+    class CancelMaintenanceWindowExecutionResult < Struct.new(
+      :window_execution_id)
+      include Aws::Structure
+    end
+
     # Configuration options for sending command output to CloudWatch Logs.
     #
     # @note When making an API call, you may pass CloudWatchOutputConfig
@@ -2139,7 +2168,10 @@ module Aws::SSM
     #       {
     #         name: "MaintenanceWindowName", # required
     #         description: "MaintenanceWindowDescription",
+    #         start_date: "MaintenanceWindowStringDateTime",
+    #         end_date: "MaintenanceWindowStringDateTime",
     #         schedule: "MaintenanceWindowSchedule", # required
+    #         schedule_timezone: "MaintenanceWindowTimezone",
     #         duration: 1, # required
     #         cutoff: 1, # required
     #         allow_unassociated_targets: false, # required
@@ -2156,9 +2188,35 @@ module Aws::SSM
     #   Windows.
     #   @return [String]
     #
+    # @!attribute [rw] start_date
+    #   The date and time, in ISO-8601 Extended format, for when you want
+    #   the Maintenance Window to become active. StartDate allows you to
+    #   delay activation of the Maintenance Window until the specified
+    #   future date.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_date
+    #   The date and time, in ISO-8601 Extended format, for when you want
+    #   the Maintenance Window to become inactive. EndDate allows you to set
+    #   a date and time in the future when the Maintenance Window will no
+    #   longer run.
+    #   @return [String]
+    #
     # @!attribute [rw] schedule
     #   The schedule of the Maintenance Window in the form of a cron or rate
     #   expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_timezone
+    #   The time zone that the scheduled Maintenance Window executions are
+    #   based on, in Internet Assigned Numbers Authority (IANA) format. For
+    #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul".
+    #   For more information, see the [Time Zone Database][1] on the IANA
+    #   website.
+    #
+    #
+    #
+    #   [1]: https://www.iana.org/time-zones
     #   @return [String]
     #
     # @!attribute [rw] duration
@@ -2193,7 +2251,10 @@ module Aws::SSM
     class CreateMaintenanceWindowRequest < Struct.new(
       :name,
       :description,
+      :start_date,
+      :end_date,
       :schedule,
+      :schedule_timezone,
       :duration,
       :cutoff,
       :allow_unassociated_targets,
@@ -4065,6 +4126,88 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeMaintenanceWindowScheduleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         window_id: "MaintenanceWindowId",
+    #         targets: [
+    #           {
+    #             key: "TargetKey",
+    #             values: ["TargetValue"],
+    #           },
+    #         ],
+    #         resource_type: "INSTANCE", # accepts INSTANCE
+    #         filters: [
+    #           {
+    #             key: "PatchOrchestratorFilterKey",
+    #             values: ["PatchOrchestratorFilterValue"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] window_id
+    #   The ID of the Maintenance Window to retrieve information about.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   The instance ID or key/value pair to retrieve information about.
+    #   @return [Array<Types::Target>]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource you want to retrieve information about. For
+    #   example, "INSTANCE".
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters used to limit the range of results. For example, you can
+    #   limit Maintenance Window executions to only those scheduled before
+    #   or after a certain date and time.
+    #   @return [Array<Types::PatchOrchestratorFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowScheduleRequest AWS API Documentation
+    #
+    class DescribeMaintenanceWindowScheduleRequest < Struct.new(
+      :window_id,
+      :targets,
+      :resource_type,
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scheduled_window_executions
+    #   Information about Maintenance Window executions scheduled for the
+    #   specified time range.
+    #   @return [Array<Types::ScheduledWindowExecution>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You use this token
+    #   in the next call.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowScheduleResult AWS API Documentation
+    #
+    class DescribeMaintenanceWindowScheduleResult < Struct.new(
+      :scheduled_window_executions,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeMaintenanceWindowTargetsRequest
     #   data as a hash:
     #
@@ -4187,6 +4330,69 @@ module Aws::SSM
     #
     class DescribeMaintenanceWindowTasksResult < Struct.new(
       :tasks,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeMaintenanceWindowsForTargetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         targets: [ # required
+    #           {
+    #             key: "TargetKey",
+    #             values: ["TargetValue"],
+    #           },
+    #         ],
+    #         resource_type: "INSTANCE", # required, accepts INSTANCE
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] targets
+    #   The instance ID or key/value pair to retrieve information about.
+    #   @return [Array<Types::Target>]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource you want to retrieve information about. For
+    #   example, "INSTANCE".
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowsForTargetRequest AWS API Documentation
+    #
+    class DescribeMaintenanceWindowsForTargetRequest < Struct.new(
+      :targets,
+      :resource_type,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] window_identities
+    #   Information about the Maintenance Window targets and tasks an
+    #   instance is associated with.
+    #   @return [Array<Types::MaintenanceWindowIdentityForTarget>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You use this token
+    #   in the next call.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowsForTargetResult AWS API Documentation
+    #
+    class DescribeMaintenanceWindowsForTargetResult < Struct.new(
+      :window_identities,
       :next_token)
       include Aws::Structure
     end
@@ -5874,9 +6080,39 @@ module Aws::SSM
     #   The description of the Maintenance Window.
     #   @return [String]
     #
+    # @!attribute [rw] start_date
+    #   The date and time, in ISO-8601 Extended format, for when the
+    #   Maintenance Window is scheduled to become active. The Maintenance
+    #   Window will not run before this specified time.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_date
+    #   The date and time, in ISO-8601 Extended format, for when the
+    #   Maintenance Window is scheduled to become inactive. The Maintenance
+    #   Window will not run after this specified time.
+    #   @return [String]
+    #
     # @!attribute [rw] schedule
     #   The schedule of the Maintenance Window in the form of a cron or rate
     #   expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_timezone
+    #   The time zone that the scheduled Maintenance Window executions are
+    #   based on, in Internet Assigned Numbers Authority (IANA) format. For
+    #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul".
+    #   For more information, see the [Time Zone Database][1] on the IANA
+    #   website.
+    #
+    #
+    #
+    #   [1]: https://www.iana.org/time-zones
+    #   @return [String]
+    #
+    # @!attribute [rw] next_execution_time
+    #   The next time the Maintenance Window will actually run, taking into
+    #   account any specified times for the Maintenance Window to become
+    #   active or inactive.
     #   @return [String]
     #
     # @!attribute [rw] duration
@@ -5911,7 +6147,11 @@ module Aws::SSM
       :window_id,
       :name,
       :description,
+      :start_date,
+      :end_date,
       :schedule,
+      :schedule_timezone,
+      :next_execution_time,
       :duration,
       :cutoff,
       :allow_unassociated_targets,
@@ -8366,7 +8606,8 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Filter used in the request.
+    # Filter used in the request. Supported filter keys are Name and
+    # Enabled.
     #
     # @note When making an API call, you may pass MaintenanceWindowFilter
     #   data as a hash:
@@ -8419,6 +8660,32 @@ module Aws::SSM
     #   Systems Manager stops scheduling new tasks for execution.
     #   @return [Integer]
     #
+    # @!attribute [rw] schedule
+    #   The schedule of the Maintenance Window in the form of a cron or rate
+    #   expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_timezone
+    #   The time zone that the scheduled Maintenance Window executions are
+    #   based on, in Internet Assigned Numbers Authority (IANA) format.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_date
+    #   The date and time, in ISO-8601 Extended format, for when the
+    #   Maintenance Window is scheduled to become inactive.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date
+    #   The date and time, in ISO-8601 Extended format, for when the
+    #   Maintenance Window is scheduled to become active.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_execution_time
+    #   The next time the Maintenance Window will actually run, taking into
+    #   account any specified times for the Maintenance Window to become
+    #   active or inactive.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowIdentity AWS API Documentation
     #
     class MaintenanceWindowIdentity < Struct.new(
@@ -8427,7 +8694,30 @@ module Aws::SSM
       :description,
       :enabled,
       :duration,
-      :cutoff)
+      :cutoff,
+      :schedule,
+      :schedule_timezone,
+      :end_date,
+      :start_date,
+      :next_execution_time)
+      include Aws::Structure
+    end
+
+    # The Maintenance Window to which the specified target belongs.
+    #
+    # @!attribute [rw] window_id
+    #   The ID of the Maintenance Window.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Maintenance Window.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowIdentityForTarget AWS API Documentation
+    #
+    class MaintenanceWindowIdentityForTarget < Struct.new(
+      :window_id,
+      :name)
       include Aws::Structure
     end
 
@@ -11049,6 +11339,30 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # Information about a scheduled execution for a Maintenance Window.
+    #
+    # @!attribute [rw] window_id
+    #   The ID of the Maintenance Window to be run.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Maintenance Window to be run.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_time
+    #   The time, in ISO-8601 Extended format, that the Maintenance Window
+    #   is scheduled to be run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ScheduledWindowExecution AWS API Documentation
+    #
+    class ScheduledWindowExecution < Struct.new(
+      :window_id,
+      :name,
+      :execution_time)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass SendAutomationSignalRequest
     #   data as a hash:
     #
@@ -11130,7 +11444,7 @@ module Aws::SSM
     #   maximum of 50 IDs. If you prefer not to list individual instance
     #   IDs, you can instead send commands to a fleet of instances using the
     #   Targets parameter, which accepts EC2 tags. For more information
-    #   about how to use Targets, see [Sending Commands to a Fleet][1] in
+    #   about how to use targets, see [Sending Commands to a Fleet][1] in
     #   the *AWS Systems Manager User Guide*.
     #
     #
@@ -11142,7 +11456,7 @@ module Aws::SSM
     #   (Optional) An array of search criteria that targets instances using
     #   a Key,Value combination that you specify. Targets is required if you
     #   don't provide one or more instance IDs in the call. For more
-    #   information about how to use Targets, see [Sending Commands to a
+    #   information about how to use targets, see [Sending Commands to a
     #   Fleet][1] in the *AWS Systems Manager User Guide*.
     #
     #
@@ -11547,7 +11861,7 @@ module Aws::SSM
     #
     # @!attribute [rw] target_parameter_name
     #   The name of the parameter used as the target resource for the
-    #   rate-controlled execution. Required if you specify Targets.
+    #   rate-controlled execution. Required if you specify targets.
     #   @return [String]
     #
     # @!attribute [rw] targets
@@ -12214,7 +12528,10 @@ module Aws::SSM
     #         window_id: "MaintenanceWindowId", # required
     #         name: "MaintenanceWindowName",
     #         description: "MaintenanceWindowDescription",
+    #         start_date: "MaintenanceWindowStringDateTime",
+    #         end_date: "MaintenanceWindowStringDateTime",
     #         schedule: "MaintenanceWindowSchedule",
+    #         schedule_timezone: "MaintenanceWindowTimezone",
     #         duration: 1,
     #         cutoff: 1,
     #         allow_unassociated_targets: false,
@@ -12234,9 +12551,40 @@ module Aws::SSM
     #   An optional description for the update request.
     #   @return [String]
     #
+    # @!attribute [rw] start_date
+    #   The time zone that the scheduled Maintenance Window executions are
+    #   based on, in Internet Assigned Numbers Authority (IANA) format. For
+    #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul".
+    #   For more information, see the [Time Zone Database][1] on the IANA
+    #   website.
+    #
+    #
+    #
+    #   [1]: https://www.iana.org/time-zones
+    #   @return [String]
+    #
+    # @!attribute [rw] end_date
+    #   The date and time, in ISO-8601 Extended format, for when you want
+    #   the Maintenance Window to become inactive. EndDate allows you to set
+    #   a date and time in the future when the Maintenance Window will no
+    #   longer run.
+    #   @return [String]
+    #
     # @!attribute [rw] schedule
     #   The schedule of the Maintenance Window in the form of a cron or rate
     #   expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_timezone
+    #   The time zone that the scheduled Maintenance Window executions are
+    #   based on, in Internet Assigned Numbers Authority (IANA) format. For
+    #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul".
+    #   For more information, see the [Time Zone Database][1] on the IANA
+    #   website.
+    #
+    #
+    #
+    #   [1]: https://www.iana.org/time-zones
     #   @return [String]
     #
     # @!attribute [rw] duration
@@ -12269,7 +12617,10 @@ module Aws::SSM
       :window_id,
       :name,
       :description,
+      :start_date,
+      :end_date,
       :schedule,
+      :schedule_timezone,
       :duration,
       :cutoff,
       :allow_unassociated_targets,
@@ -12290,9 +12641,33 @@ module Aws::SSM
     #   An optional description of the update.
     #   @return [String]
     #
+    # @!attribute [rw] start_date
+    #   The date and time, in ISO-8601 Extended format, for when the
+    #   Maintenance Window is scheduled to become active. The Maintenance
+    #   Window will not run before this specified time.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_date
+    #   The date and time, in ISO-8601 Extended format, for when the
+    #   Maintenance Window is scheduled to become inactive. The Maintenance
+    #   Window will not run after this specified time.
+    #   @return [String]
+    #
     # @!attribute [rw] schedule
     #   The schedule of the Maintenance Window in the form of a cron or rate
     #   expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_timezone
+    #   The time zone that the scheduled Maintenance Window executions are
+    #   based on, in Internet Assigned Numbers Authority (IANA) format. For
+    #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul".
+    #   For more information, see the [Time Zone Database][1] on the IANA
+    #   website.
+    #
+    #
+    #
+    #   [1]: https://www.iana.org/time-zones
     #   @return [String]
     #
     # @!attribute [rw] duration
@@ -12319,7 +12694,10 @@ module Aws::SSM
       :window_id,
       :name,
       :description,
+      :start_date,
+      :end_date,
       :schedule,
+      :schedule_timezone,
       :duration,
       :cutoff,
       :allow_unassociated_targets,

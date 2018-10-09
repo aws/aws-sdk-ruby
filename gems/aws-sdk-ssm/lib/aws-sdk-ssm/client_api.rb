@@ -94,6 +94,8 @@ module Aws::SSM
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelCommandRequest = Shapes::StructureShape.new(name: 'CancelCommandRequest')
     CancelCommandResult = Shapes::StructureShape.new(name: 'CancelCommandResult')
+    CancelMaintenanceWindowExecutionRequest = Shapes::StructureShape.new(name: 'CancelMaintenanceWindowExecutionRequest')
+    CancelMaintenanceWindowExecutionResult = Shapes::StructureShape.new(name: 'CancelMaintenanceWindowExecutionResult')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CloudWatchLogGroupName = Shapes::StringShape.new(name: 'CloudWatchLogGroupName')
     CloudWatchOutputConfig = Shapes::StructureShape.new(name: 'CloudWatchOutputConfig')
@@ -239,10 +241,14 @@ module Aws::SSM
     DescribeMaintenanceWindowExecutionTasksResult = Shapes::StructureShape.new(name: 'DescribeMaintenanceWindowExecutionTasksResult')
     DescribeMaintenanceWindowExecutionsRequest = Shapes::StructureShape.new(name: 'DescribeMaintenanceWindowExecutionsRequest')
     DescribeMaintenanceWindowExecutionsResult = Shapes::StructureShape.new(name: 'DescribeMaintenanceWindowExecutionsResult')
+    DescribeMaintenanceWindowScheduleRequest = Shapes::StructureShape.new(name: 'DescribeMaintenanceWindowScheduleRequest')
+    DescribeMaintenanceWindowScheduleResult = Shapes::StructureShape.new(name: 'DescribeMaintenanceWindowScheduleResult')
     DescribeMaintenanceWindowTargetsRequest = Shapes::StructureShape.new(name: 'DescribeMaintenanceWindowTargetsRequest')
     DescribeMaintenanceWindowTargetsResult = Shapes::StructureShape.new(name: 'DescribeMaintenanceWindowTargetsResult')
     DescribeMaintenanceWindowTasksRequest = Shapes::StructureShape.new(name: 'DescribeMaintenanceWindowTasksRequest')
     DescribeMaintenanceWindowTasksResult = Shapes::StructureShape.new(name: 'DescribeMaintenanceWindowTasksResult')
+    DescribeMaintenanceWindowsForTargetRequest = Shapes::StructureShape.new(name: 'DescribeMaintenanceWindowsForTargetRequest')
+    DescribeMaintenanceWindowsForTargetResult = Shapes::StructureShape.new(name: 'DescribeMaintenanceWindowsForTargetResult')
     DescribeMaintenanceWindowsRequest = Shapes::StructureShape.new(name: 'DescribeMaintenanceWindowsRequest')
     DescribeMaintenanceWindowsResult = Shapes::StructureShape.new(name: 'DescribeMaintenanceWindowsResult')
     DescribeParametersRequest = Shapes::StructureShape.new(name: 'DescribeParametersRequest')
@@ -547,6 +553,7 @@ module Aws::SSM
     MaintenanceWindowFilterValues = Shapes::ListShape.new(name: 'MaintenanceWindowFilterValues')
     MaintenanceWindowId = Shapes::StringShape.new(name: 'MaintenanceWindowId')
     MaintenanceWindowIdentity = Shapes::StructureShape.new(name: 'MaintenanceWindowIdentity')
+    MaintenanceWindowIdentityForTarget = Shapes::StructureShape.new(name: 'MaintenanceWindowIdentityForTarget')
     MaintenanceWindowIdentityList = Shapes::ListShape.new(name: 'MaintenanceWindowIdentityList')
     MaintenanceWindowLambdaClientContext = Shapes::StringShape.new(name: 'MaintenanceWindowLambdaClientContext')
     MaintenanceWindowLambdaParameters = Shapes::StructureShape.new(name: 'MaintenanceWindowLambdaParameters')
@@ -557,9 +564,11 @@ module Aws::SSM
     MaintenanceWindowResourceType = Shapes::StringShape.new(name: 'MaintenanceWindowResourceType')
     MaintenanceWindowRunCommandParameters = Shapes::StructureShape.new(name: 'MaintenanceWindowRunCommandParameters')
     MaintenanceWindowSchedule = Shapes::StringShape.new(name: 'MaintenanceWindowSchedule')
+    MaintenanceWindowSearchMaxResults = Shapes::IntegerShape.new(name: 'MaintenanceWindowSearchMaxResults')
     MaintenanceWindowStepFunctionsInput = Shapes::StringShape.new(name: 'MaintenanceWindowStepFunctionsInput')
     MaintenanceWindowStepFunctionsName = Shapes::StringShape.new(name: 'MaintenanceWindowStepFunctionsName')
     MaintenanceWindowStepFunctionsParameters = Shapes::StructureShape.new(name: 'MaintenanceWindowStepFunctionsParameters')
+    MaintenanceWindowStringDateTime = Shapes::StringShape.new(name: 'MaintenanceWindowStringDateTime')
     MaintenanceWindowTarget = Shapes::StructureShape.new(name: 'MaintenanceWindowTarget')
     MaintenanceWindowTargetId = Shapes::StringShape.new(name: 'MaintenanceWindowTargetId')
     MaintenanceWindowTargetList = Shapes::ListShape.new(name: 'MaintenanceWindowTargetList')
@@ -577,6 +586,8 @@ module Aws::SSM
     MaintenanceWindowTaskPriority = Shapes::IntegerShape.new(name: 'MaintenanceWindowTaskPriority')
     MaintenanceWindowTaskTargetId = Shapes::StringShape.new(name: 'MaintenanceWindowTaskTargetId')
     MaintenanceWindowTaskType = Shapes::StringShape.new(name: 'MaintenanceWindowTaskType')
+    MaintenanceWindowTimezone = Shapes::StringShape.new(name: 'MaintenanceWindowTimezone')
+    MaintenanceWindowsForTargetList = Shapes::ListShape.new(name: 'MaintenanceWindowsForTargetList')
     ManagedInstanceId = Shapes::StringShape.new(name: 'ManagedInstanceId')
     MaxConcurrency = Shapes::StringShape.new(name: 'MaxConcurrency')
     MaxDocumentSizeExceeded = Shapes::StructureShape.new(name: 'MaxDocumentSizeExceeded')
@@ -753,6 +764,8 @@ module Aws::SSM
     S3OutputUrl = Shapes::StructureShape.new(name: 'S3OutputUrl')
     S3Region = Shapes::StringShape.new(name: 'S3Region')
     ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
+    ScheduledWindowExecution = Shapes::StructureShape.new(name: 'ScheduledWindowExecution')
+    ScheduledWindowExecutionList = Shapes::ListShape.new(name: 'ScheduledWindowExecutionList')
     SendAutomationSignalRequest = Shapes::StructureShape.new(name: 'SendAutomationSignalRequest')
     SendAutomationSignalResult = Shapes::StructureShape.new(name: 'SendAutomationSignalResult')
     SendCommandRequest = Shapes::StructureShape.new(name: 'SendCommandRequest')
@@ -1064,6 +1077,12 @@ module Aws::SSM
 
     CancelCommandResult.struct_class = Types::CancelCommandResult
 
+    CancelMaintenanceWindowExecutionRequest.add_member(:window_execution_id, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionId, required: true, location_name: "WindowExecutionId"))
+    CancelMaintenanceWindowExecutionRequest.struct_class = Types::CancelMaintenanceWindowExecutionRequest
+
+    CancelMaintenanceWindowExecutionResult.add_member(:window_execution_id, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionId, location_name: "WindowExecutionId"))
+    CancelMaintenanceWindowExecutionResult.struct_class = Types::CancelMaintenanceWindowExecutionResult
+
     CloudWatchOutputConfig.add_member(:cloud_watch_log_group_name, Shapes::ShapeRef.new(shape: CloudWatchLogGroupName, location_name: "CloudWatchLogGroupName"))
     CloudWatchOutputConfig.add_member(:cloud_watch_output_enabled, Shapes::ShapeRef.new(shape: CloudWatchOutputEnabled, location_name: "CloudWatchOutputEnabled"))
     CloudWatchOutputConfig.struct_class = Types::CloudWatchOutputConfig
@@ -1246,7 +1265,10 @@ module Aws::SSM
 
     CreateMaintenanceWindowRequest.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, required: true, location_name: "Name"))
     CreateMaintenanceWindowRequest.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
+    CreateMaintenanceWindowRequest.add_member(:start_date, Shapes::ShapeRef.new(shape: MaintenanceWindowStringDateTime, location_name: "StartDate"))
+    CreateMaintenanceWindowRequest.add_member(:end_date, Shapes::ShapeRef.new(shape: MaintenanceWindowStringDateTime, location_name: "EndDate"))
     CreateMaintenanceWindowRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: MaintenanceWindowSchedule, required: true, location_name: "Schedule"))
+    CreateMaintenanceWindowRequest.add_member(:schedule_timezone, Shapes::ShapeRef.new(shape: MaintenanceWindowTimezone, location_name: "ScheduleTimezone"))
     CreateMaintenanceWindowRequest.add_member(:duration, Shapes::ShapeRef.new(shape: MaintenanceWindowDurationHours, required: true, location_name: "Duration"))
     CreateMaintenanceWindowRequest.add_member(:cutoff, Shapes::ShapeRef.new(shape: MaintenanceWindowCutoff, required: true, location_name: "Cutoff"))
     CreateMaintenanceWindowRequest.add_member(:allow_unassociated_targets, Shapes::ShapeRef.new(shape: MaintenanceWindowAllowUnassociatedTargets, required: true, location_name: "AllowUnassociatedTargets"))
@@ -1560,6 +1582,18 @@ module Aws::SSM
     DescribeMaintenanceWindowExecutionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeMaintenanceWindowExecutionsResult.struct_class = Types::DescribeMaintenanceWindowExecutionsResult
 
+    DescribeMaintenanceWindowScheduleRequest.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, location_name: "WindowId"))
+    DescribeMaintenanceWindowScheduleRequest.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
+    DescribeMaintenanceWindowScheduleRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: MaintenanceWindowResourceType, location_name: "ResourceType"))
+    DescribeMaintenanceWindowScheduleRequest.add_member(:filters, Shapes::ShapeRef.new(shape: PatchOrchestratorFilterList, location_name: "Filters"))
+    DescribeMaintenanceWindowScheduleRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaintenanceWindowSearchMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    DescribeMaintenanceWindowScheduleRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeMaintenanceWindowScheduleRequest.struct_class = Types::DescribeMaintenanceWindowScheduleRequest
+
+    DescribeMaintenanceWindowScheduleResult.add_member(:scheduled_window_executions, Shapes::ShapeRef.new(shape: ScheduledWindowExecutionList, location_name: "ScheduledWindowExecutions"))
+    DescribeMaintenanceWindowScheduleResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeMaintenanceWindowScheduleResult.struct_class = Types::DescribeMaintenanceWindowScheduleResult
+
     DescribeMaintenanceWindowTargetsRequest.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, required: true, location_name: "WindowId"))
     DescribeMaintenanceWindowTargetsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: MaintenanceWindowFilterList, location_name: "Filters"))
     DescribeMaintenanceWindowTargetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaintenanceWindowMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
@@ -1579,6 +1613,16 @@ module Aws::SSM
     DescribeMaintenanceWindowTasksResult.add_member(:tasks, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskList, location_name: "Tasks"))
     DescribeMaintenanceWindowTasksResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeMaintenanceWindowTasksResult.struct_class = Types::DescribeMaintenanceWindowTasksResult
+
+    DescribeMaintenanceWindowsForTargetRequest.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, required: true, location_name: "Targets"))
+    DescribeMaintenanceWindowsForTargetRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: MaintenanceWindowResourceType, required: true, location_name: "ResourceType"))
+    DescribeMaintenanceWindowsForTargetRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaintenanceWindowSearchMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    DescribeMaintenanceWindowsForTargetRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeMaintenanceWindowsForTargetRequest.struct_class = Types::DescribeMaintenanceWindowsForTargetRequest
+
+    DescribeMaintenanceWindowsForTargetResult.add_member(:window_identities, Shapes::ShapeRef.new(shape: MaintenanceWindowsForTargetList, location_name: "WindowIdentities"))
+    DescribeMaintenanceWindowsForTargetResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeMaintenanceWindowsForTargetResult.struct_class = Types::DescribeMaintenanceWindowsForTargetResult
 
     DescribeMaintenanceWindowsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: MaintenanceWindowFilterList, location_name: "Filters"))
     DescribeMaintenanceWindowsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaintenanceWindowMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
@@ -1868,7 +1912,11 @@ module Aws::SSM
     GetMaintenanceWindowResult.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, location_name: "WindowId"))
     GetMaintenanceWindowResult.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
     GetMaintenanceWindowResult.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
+    GetMaintenanceWindowResult.add_member(:start_date, Shapes::ShapeRef.new(shape: MaintenanceWindowStringDateTime, location_name: "StartDate"))
+    GetMaintenanceWindowResult.add_member(:end_date, Shapes::ShapeRef.new(shape: MaintenanceWindowStringDateTime, location_name: "EndDate"))
     GetMaintenanceWindowResult.add_member(:schedule, Shapes::ShapeRef.new(shape: MaintenanceWindowSchedule, location_name: "Schedule"))
+    GetMaintenanceWindowResult.add_member(:schedule_timezone, Shapes::ShapeRef.new(shape: MaintenanceWindowTimezone, location_name: "ScheduleTimezone"))
+    GetMaintenanceWindowResult.add_member(:next_execution_time, Shapes::ShapeRef.new(shape: MaintenanceWindowStringDateTime, location_name: "NextExecutionTime"))
     GetMaintenanceWindowResult.add_member(:duration, Shapes::ShapeRef.new(shape: MaintenanceWindowDurationHours, location_name: "Duration"))
     GetMaintenanceWindowResult.add_member(:cutoff, Shapes::ShapeRef.new(shape: MaintenanceWindowCutoff, location_name: "Cutoff"))
     GetMaintenanceWindowResult.add_member(:allow_unassociated_targets, Shapes::ShapeRef.new(shape: MaintenanceWindowAllowUnassociatedTargets, location_name: "AllowUnassociatedTargets"))
@@ -2354,7 +2402,16 @@ module Aws::SSM
     MaintenanceWindowIdentity.add_member(:enabled, Shapes::ShapeRef.new(shape: MaintenanceWindowEnabled, location_name: "Enabled"))
     MaintenanceWindowIdentity.add_member(:duration, Shapes::ShapeRef.new(shape: MaintenanceWindowDurationHours, location_name: "Duration"))
     MaintenanceWindowIdentity.add_member(:cutoff, Shapes::ShapeRef.new(shape: MaintenanceWindowCutoff, location_name: "Cutoff"))
+    MaintenanceWindowIdentity.add_member(:schedule, Shapes::ShapeRef.new(shape: MaintenanceWindowSchedule, location_name: "Schedule"))
+    MaintenanceWindowIdentity.add_member(:schedule_timezone, Shapes::ShapeRef.new(shape: MaintenanceWindowTimezone, location_name: "ScheduleTimezone"))
+    MaintenanceWindowIdentity.add_member(:end_date, Shapes::ShapeRef.new(shape: MaintenanceWindowStringDateTime, location_name: "EndDate"))
+    MaintenanceWindowIdentity.add_member(:start_date, Shapes::ShapeRef.new(shape: MaintenanceWindowStringDateTime, location_name: "StartDate"))
+    MaintenanceWindowIdentity.add_member(:next_execution_time, Shapes::ShapeRef.new(shape: MaintenanceWindowStringDateTime, location_name: "NextExecutionTime"))
     MaintenanceWindowIdentity.struct_class = Types::MaintenanceWindowIdentity
+
+    MaintenanceWindowIdentityForTarget.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, location_name: "WindowId"))
+    MaintenanceWindowIdentityForTarget.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
+    MaintenanceWindowIdentityForTarget.struct_class = Types::MaintenanceWindowIdentityForTarget
 
     MaintenanceWindowIdentityList.member = Shapes::ShapeRef.new(shape: MaintenanceWindowIdentity)
 
@@ -2421,6 +2478,8 @@ module Aws::SSM
     MaintenanceWindowTaskParameters.value = Shapes::ShapeRef.new(shape: MaintenanceWindowTaskParameterValueExpression)
 
     MaintenanceWindowTaskParametersList.member = Shapes::ShapeRef.new(shape: MaintenanceWindowTaskParameters)
+
+    MaintenanceWindowsForTargetList.member = Shapes::ShapeRef.new(shape: MaintenanceWindowIdentityForTarget)
 
     ModifyDocumentPermissionRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, required: true, location_name: "Name"))
     ModifyDocumentPermissionRequest.add_member(:permission_type, Shapes::ShapeRef.new(shape: DocumentPermissionType, required: true, location_name: "PermissionType"))
@@ -2740,6 +2799,13 @@ module Aws::SSM
     S3OutputUrl.add_member(:output_url, Shapes::ShapeRef.new(shape: Url, location_name: "OutputUrl"))
     S3OutputUrl.struct_class = Types::S3OutputUrl
 
+    ScheduledWindowExecution.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, location_name: "WindowId"))
+    ScheduledWindowExecution.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
+    ScheduledWindowExecution.add_member(:execution_time, Shapes::ShapeRef.new(shape: MaintenanceWindowStringDateTime, location_name: "ExecutionTime"))
+    ScheduledWindowExecution.struct_class = Types::ScheduledWindowExecution
+
+    ScheduledWindowExecutionList.member = Shapes::ShapeRef.new(shape: ScheduledWindowExecution)
+
     SendAutomationSignalRequest.add_member(:automation_execution_id, Shapes::ShapeRef.new(shape: AutomationExecutionId, required: true, location_name: "AutomationExecutionId"))
     SendAutomationSignalRequest.add_member(:signal_type, Shapes::ShapeRef.new(shape: SignalType, required: true, location_name: "SignalType"))
     SendAutomationSignalRequest.add_member(:payload, Shapes::ShapeRef.new(shape: AutomationParameterMap, location_name: "Payload"))
@@ -2946,7 +3012,10 @@ module Aws::SSM
     UpdateMaintenanceWindowRequest.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, required: true, location_name: "WindowId"))
     UpdateMaintenanceWindowRequest.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
     UpdateMaintenanceWindowRequest.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
+    UpdateMaintenanceWindowRequest.add_member(:start_date, Shapes::ShapeRef.new(shape: MaintenanceWindowStringDateTime, location_name: "StartDate"))
+    UpdateMaintenanceWindowRequest.add_member(:end_date, Shapes::ShapeRef.new(shape: MaintenanceWindowStringDateTime, location_name: "EndDate"))
     UpdateMaintenanceWindowRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: MaintenanceWindowSchedule, location_name: "Schedule"))
+    UpdateMaintenanceWindowRequest.add_member(:schedule_timezone, Shapes::ShapeRef.new(shape: MaintenanceWindowTimezone, location_name: "ScheduleTimezone"))
     UpdateMaintenanceWindowRequest.add_member(:duration, Shapes::ShapeRef.new(shape: MaintenanceWindowDurationHours, location_name: "Duration", metadata: {"box"=>true}))
     UpdateMaintenanceWindowRequest.add_member(:cutoff, Shapes::ShapeRef.new(shape: MaintenanceWindowCutoff, location_name: "Cutoff", metadata: {"box"=>true}))
     UpdateMaintenanceWindowRequest.add_member(:allow_unassociated_targets, Shapes::ShapeRef.new(shape: MaintenanceWindowAllowUnassociatedTargets, location_name: "AllowUnassociatedTargets", metadata: {"box"=>true}))
@@ -2957,7 +3026,10 @@ module Aws::SSM
     UpdateMaintenanceWindowResult.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, location_name: "WindowId"))
     UpdateMaintenanceWindowResult.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
     UpdateMaintenanceWindowResult.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
+    UpdateMaintenanceWindowResult.add_member(:start_date, Shapes::ShapeRef.new(shape: MaintenanceWindowStringDateTime, location_name: "StartDate"))
+    UpdateMaintenanceWindowResult.add_member(:end_date, Shapes::ShapeRef.new(shape: MaintenanceWindowStringDateTime, location_name: "EndDate"))
     UpdateMaintenanceWindowResult.add_member(:schedule, Shapes::ShapeRef.new(shape: MaintenanceWindowSchedule, location_name: "Schedule"))
+    UpdateMaintenanceWindowResult.add_member(:schedule_timezone, Shapes::ShapeRef.new(shape: MaintenanceWindowTimezone, location_name: "ScheduleTimezone"))
     UpdateMaintenanceWindowResult.add_member(:duration, Shapes::ShapeRef.new(shape: MaintenanceWindowDurationHours, location_name: "Duration"))
     UpdateMaintenanceWindowResult.add_member(:cutoff, Shapes::ShapeRef.new(shape: MaintenanceWindowCutoff, location_name: "Cutoff"))
     UpdateMaintenanceWindowResult.add_member(:allow_unassociated_targets, Shapes::ShapeRef.new(shape: MaintenanceWindowAllowUnassociatedTargets, location_name: "AllowUnassociatedTargets"))
@@ -3092,6 +3164,16 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InvalidCommandId)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceId)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateInstanceId)
+      end)
+
+      api.add_operation(:cancel_maintenance_window_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelMaintenanceWindowExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelMaintenanceWindowExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelMaintenanceWindowExecutionResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
       end)
 
       api.add_operation(:create_activation, Seahorse::Model::Operation.new.tap do |o|
@@ -3563,6 +3645,16 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:describe_maintenance_window_schedule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeMaintenanceWindowSchedule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeMaintenanceWindowScheduleRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeMaintenanceWindowScheduleResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
+      end)
+
       api.add_operation(:describe_maintenance_window_targets, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeMaintenanceWindowTargets"
         o.http_method = "POST"
@@ -3589,6 +3681,15 @@ module Aws::SSM
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeMaintenanceWindowsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeMaintenanceWindowsResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:describe_maintenance_windows_for_target, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeMaintenanceWindowsForTarget"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeMaintenanceWindowsForTargetRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeMaintenanceWindowsForTargetResult)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
