@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.146 (2018-10-09)
+------------------
+
 * Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
 
 2.11.145 (2018-10-08)
