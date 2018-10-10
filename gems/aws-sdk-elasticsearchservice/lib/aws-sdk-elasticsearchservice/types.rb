@@ -117,6 +117,40 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Container for the parameters to the
+    # `CancelElasticsearchServiceSoftwareUpdate` operation. Specifies the
+    # name of the Elasticsearch domain that you wish to cancel a service
+    # software update on.
+    #
+    # @note When making an API call, you may pass CancelElasticsearchServiceSoftwareUpdateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName", # required
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain that you want to stop the latest service
+    #   software update on.
+    #   @return [String]
+    #
+    class CancelElasticsearchServiceSoftwareUpdateRequest < Struct.new(
+      :domain_name)
+      include Aws::Structure
+    end
+
+    # The result of a `CancelElasticsearchServiceSoftwareUpdate` operation.
+    # Contains the status of the update.
+    #
+    # @!attribute [rw] service_software_options
+    #   The current status of the Elasticsearch service software update.
+    #   @return [Types::ServiceSoftwareOptions]
+    #
+    class CancelElasticsearchServiceSoftwareUpdateResponse < Struct.new(
+      :service_software_options)
+      include Aws::Structure
+    end
+
     # Options to specify the Cognito user and identity pools for Kibana
     # authentication. For more information, see [Amazon Cognito
     # Authentication for Kibana][1].
@@ -983,6 +1017,10 @@ module Aws::ElasticsearchService
     #   Log publishing options for the given domain.
     #   @return [Hash<String,Types::LogPublishingOption>]
     #
+    # @!attribute [rw] service_software_options
+    #   The current status of the Elasticsearch domain's service software.
+    #   @return [Types::ServiceSoftwareOptions]
+    #
     class ElasticsearchDomainStatus < Struct.new(
       :domain_id,
       :domain_name,
@@ -1003,7 +1041,8 @@ module Aws::ElasticsearchService
       :encryption_at_rest_options,
       :node_to_node_encryption_options,
       :advanced_options,
-      :log_publishing_options)
+      :log_publishing_options,
+      :service_software_options)
       include Aws::Structure
     end
 
@@ -1765,6 +1804,55 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # The current options of an Elasticsearch domain service software
+    # options.
+    #
+    # @!attribute [rw] current_version
+    #   The current service software version that is present on the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_version
+    #   The new service software version if one is available.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_available
+    #   `True` if you are able to update you service software version.
+    #   `False` if you are not able to update your service software version.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cancellable
+    #   `True` if you are able to cancel your service software version
+    #   update. `False` if you are not able to cancel your service software
+    #   version.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] update_status
+    #   The status of your service software update. This field can take the
+    #   following values: `ELIGIBLE`, `PENDING_UPDATE`, `IN_PROGRESS`,
+    #   `COMPLETED`, and `NOT_ELIGIBLE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the `UpdateStatus`.
+    #   @return [String]
+    #
+    # @!attribute [rw] automated_update_date
+    #   Timestamp, in Epoch time, until which you can manually request a
+    #   service software update. After this date, we automatically update
+    #   your service software.
+    #   @return [Time]
+    #
+    class ServiceSoftwareOptions < Struct.new(
+      :current_version,
+      :new_version,
+      :update_available,
+      :cancellable,
+      :update_status,
+      :description,
+      :automated_update_date)
+      include Aws::Structure
+    end
+
     # Specifies the time, in UTC format, when the service takes a daily
     # automated snapshot of the specified Elasticsearch domain. Default
     # value is `0` hours.
@@ -1801,6 +1889,40 @@ module Aws::ElasticsearchService
     class SnapshotOptionsStatus < Struct.new(
       :options,
       :status)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the
+    # `StartElasticsearchServiceSoftwareUpdate` operation. Specifies the
+    # name of the Elasticsearch domain that you wish to schedule a service
+    # software update on.
+    #
+    # @note When making an API call, you may pass StartElasticsearchServiceSoftwareUpdateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName", # required
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain that you want to update to the latest service
+    #   software.
+    #   @return [String]
+    #
+    class StartElasticsearchServiceSoftwareUpdateRequest < Struct.new(
+      :domain_name)
+      include Aws::Structure
+    end
+
+    # The result of a `StartElasticsearchServiceSoftwareUpdate` operation.
+    # Contains the status of the update.
+    #
+    # @!attribute [rw] service_software_options
+    #   The current status of the Elasticsearch service software update.
+    #   @return [Types::ServiceSoftwareOptions]
+    #
+    class StartElasticsearchServiceSoftwareUpdateResponse < Struct.new(
+      :service_software_options)
       include Aws::Structure
     end
 

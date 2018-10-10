@@ -232,6 +232,29 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
+    # Deletes a previously submitted transcription job as wella s any other
+    # generated results such as the transcription, models, and so on.
+    #
+    # @option params [required, String] :transcription_job_name
+    #   The name of the transcription job to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_transcription_job({
+    #     transcription_job_name: "TranscriptionJobName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteTranscriptionJob AWS API Documentation
+    #
+    # @overload delete_transcription_job(params = {})
+    # @param [Hash] params ({})
+    def delete_transcription_job(params = {}, options = {})
+      req = build_request(:delete_transcription_job, params)
+      req.send_request(options)
+    end
+
     # Deletes a vocabulary from Amazon Transcribe.
     #
     # @option params [required, String] :vocabulary_name
@@ -596,7 +619,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

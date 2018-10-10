@@ -73,6 +73,24 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteTranscriptionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transcription_job_name: "TranscriptionJobName", # required
+    #       }
+    #
+    # @!attribute [rw] transcription_job_name
+    #   The name of the transcription job to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteTranscriptionJobRequest AWS API Documentation
+    #
+    class DeleteTranscriptionJobRequest < Struct.new(
+      :transcription_job_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteVocabularyRequest
     #   data as a hash:
     #

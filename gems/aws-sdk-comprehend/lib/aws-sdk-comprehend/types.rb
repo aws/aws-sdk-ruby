@@ -96,7 +96,7 @@ module Aws::Comprehend
     #
     #       {
     #         text_list: ["String"], # required
-    #         language_code: "en", # required, accepts en, es
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
     #       }
     #
     # @!attribute [rw] text_list
@@ -166,7 +166,7 @@ module Aws::Comprehend
     #
     #       {
     #         text_list: ["String"], # required
-    #         language_code: "en", # required, accepts en, es
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
     #       }
     #
     # @!attribute [rw] text_list
@@ -241,7 +241,7 @@ module Aws::Comprehend
     #
     #       {
     #         text_list: ["String"], # required
-    #         language_code: "en", # required, accepts en, es
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
     #       }
     #
     # @!attribute [rw] text_list
@@ -311,7 +311,7 @@ module Aws::Comprehend
     #
     #       {
     #         text_list: ["String"], # required
-    #         language_code: "en", # required, accepts en
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
     #       }
     #
     # @!attribute [rw] text_list
@@ -578,7 +578,7 @@ module Aws::Comprehend
     #
     #       {
     #         text: "String", # required
-    #         language_code: "en", # required, accepts en, es
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
     #       }
     #
     # @!attribute [rw] text
@@ -620,7 +620,7 @@ module Aws::Comprehend
     #
     #       {
     #         text: "String", # required
-    #         language_code: "en", # required, accepts en, es
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
     #       }
     #
     # @!attribute [rw] text
@@ -662,7 +662,7 @@ module Aws::Comprehend
     #
     #       {
     #         text: "String", # required
-    #         language_code: "en", # required, accepts en, es
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
     #       }
     #
     # @!attribute [rw] text
@@ -707,7 +707,7 @@ module Aws::Comprehend
     #
     #       {
     #         text: "String", # required
-    #         language_code: "en", # required, accepts en
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
     #       }
     #
     # @!attribute [rw] text
@@ -1779,7 +1779,7 @@ module Aws::Comprehend
     #         },
     #         data_access_role_arn: "IamRoleArn", # required
     #         job_name: "JobName",
-    #         language_code: "en", # required, accepts en, es
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
     #         client_request_token: "ClientRequestTokenString",
     #       }
     #
@@ -1873,7 +1873,7 @@ module Aws::Comprehend
     #         },
     #         data_access_role_arn: "IamRoleArn", # required
     #         job_name: "JobName",
-    #         language_code: "en", # required, accepts en, es
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
     #         client_request_token: "ClientRequestTokenString",
     #       }
     #
@@ -1967,7 +1967,7 @@ module Aws::Comprehend
     #         },
     #         data_access_role_arn: "IamRoleArn", # required
     #         job_name: "JobName",
-    #         language_code: "en", # required, accepts en, es
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
     #         client_request_token: "ClientRequestTokenString",
     #       }
     #
