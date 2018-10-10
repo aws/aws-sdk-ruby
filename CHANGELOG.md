@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.147 (2018-10-10)
+------------------
+
 * Feature - Aws::Comprehend - Updated the API for Amazon Comprehend.
 
 * Feature - Aws::ElasticsearchService - Updated the API, and documentation for Amazon Elasticsearch Service.
