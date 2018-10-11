@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.148 (2018-10-11)
+------------------
+
 * Feature - Aws::Athena - Updated the API, documentation, and integration test for Amazon Athena.
 
 * Feature - Aws::DirectConnect - Updated the API, documentation, and integration test for AWS Direct Connect.
