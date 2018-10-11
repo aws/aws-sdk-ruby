@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Athena - Updated the API, documentation, and integration test for Amazon Athena.
+
+* Feature - Aws::DirectConnect - Updated the API, documentation, and integration test for AWS Direct Connect.
+
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::TranscribeService - Updated the API, and documentation for Amazon Transcribe Service.
+
+* Feature - Aws::MediaConvert - Updated the API for AWS Elemental MediaConvert.
+
 2.11.147 (2018-10-10)
 ------------------
 
