@@ -257,6 +257,7 @@ module Aws::Athena
     #   resp.query_executions #=> Array
     #   resp.query_executions[0].query_execution_id #=> String
     #   resp.query_executions[0].query #=> String
+    #   resp.query_executions[0].statement_type #=> String, one of "DDL", "DML", "UTILITY"
     #   resp.query_executions[0].result_configuration.output_location #=> String
     #   resp.query_executions[0].result_configuration.encryption_configuration.encryption_option #=> String, one of "SSE_S3", "SSE_KMS", "CSE_KMS"
     #   resp.query_executions[0].result_configuration.encryption_configuration.kms_key #=> String
@@ -429,6 +430,7 @@ module Aws::Athena
     #
     #   resp.query_execution.query_execution_id #=> String
     #   resp.query_execution.query #=> String
+    #   resp.query_execution.statement_type #=> String, one of "DDL", "DML", "UTILITY"
     #   resp.query_execution.result_configuration.output_location #=> String
     #   resp.query_execution.result_configuration.encryption_configuration.encryption_option #=> String, one of "SSE_S3", "SSE_KMS", "CSE_KMS"
     #   resp.query_execution.result_configuration.encryption_configuration.kms_key #=> String
@@ -465,6 +467,7 @@ module Aws::Athena
     #
     # @return [Types::GetQueryResultsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetQueryResultsOutput#update_count #update_count} => Integer
     #   * {Types::GetQueryResultsOutput#result_set #result_set} => Types::ResultSet
     #   * {Types::GetQueryResultsOutput#next_token #next_token} => String
     #
@@ -478,6 +481,7 @@ module Aws::Athena
     #
     # @example Response structure
     #
+    #   resp.update_count #=> Integer
     #   resp.result_set.rows #=> Array
     #   resp.result_set.rows[0].data #=> Array
     #   resp.result_set.rows[0].data[0].var_char_value #=> String
@@ -703,7 +707,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

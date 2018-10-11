@@ -13,7 +13,7 @@ module Aws::TranscribeService
     #
     #       {
     #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "en-US", # required, accepts en-US, es-US
+    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-UK
     #         phrases: ["Phrase"], # required
     #       }
     #
@@ -440,7 +440,7 @@ module Aws::TranscribeService
     #
     #       {
     #         transcription_job_name: "TranscriptionJobName", # required
-    #         language_code: "en-US", # required, accepts en-US, es-US
+    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-UK
     #         media_sample_rate_hertz: 1,
     #         media_format: "mp3", # required, accepts mp3, mp4, wav, flac
     #         media: { # required
@@ -548,7 +548,9 @@ module Aws::TranscribeService
     end
 
     # Describes an asynchronous transcription job that was created with the
-    # `StartTranscriptionJob` operation.
+    # `StartTranscriptionJob` operation. Note that en-AU, en-UK, and fr-CA
+    # languages are in preview and are only available to whitelisted
+    # customers.
     #
     # @!attribute [rw] transcription_job_name
     #   The name of the transcription job.
@@ -616,7 +618,9 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # Provides a summary of information about a transcription job.
+    # Provides a summary of information about a transcription job. Note that
+    # en-AU, en-UK, and fr-CA languages are in preview and are only
+    # available to whitelisted customers.
     #
     # @!attribute [rw] transcription_job_name
     #   The name of the transcription job.
@@ -675,7 +679,7 @@ module Aws::TranscribeService
     #
     #       {
     #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "en-US", # required, accepts en-US, es-US
+    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-UK
     #         phrases: ["Phrase"], # required
     #       }
     #
@@ -728,7 +732,10 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # Provides information about a custom vocabulary.
+    # Provides information about a custom vocabulary. Note that vocabularies
+    # for en-AU, en-UK, and fr-CA languages that are in preview are not
+    # available. In the console, the vocabulary section will be greyed-out
+    # and SDK will return error message.
     #
     # @!attribute [rw] vocabulary_name
     #   The name of the vocabulary.
