@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudTrail - Updated the API, documentation, and integration test for AWS CloudTrail.
+
 2.11.148 (2018-10-11)
 ------------------
 
