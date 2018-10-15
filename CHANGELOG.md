@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.150 (2018-10-15)
+------------------
+
 * Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
 
 * Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
