@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::ServiceCatalog - Updated the API, documentation, and integration test for AWS Service Catalog.
+
 2.11.149 (2018-10-12)
 ------------------
 
