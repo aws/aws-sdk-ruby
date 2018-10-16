@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.151 (2018-10-16)
+------------------
+
 * Feature - Aws::Glue - Updated the API, documentation, and integration test for AWS Glue.
 
 * Feature - Aws::Lightsail - Updated the API, documentation, and integration test for Amazon Lightsail.
