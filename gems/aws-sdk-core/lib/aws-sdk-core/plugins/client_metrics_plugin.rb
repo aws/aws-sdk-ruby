@@ -103,7 +103,7 @@ all generated client side metrics. Defaults to an empty string.
             timestamp: DateTime.now.strftime('%Q').to_i,
           )
           context.metadata[:client_metrics] = request_metrics
-          start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC, :millisecond)
+          start_time = Aws::Util.monotonic_milliseconds
           begin
             @handler.call(context)
           rescue StandardError => e
@@ -127,7 +127,7 @@ all generated client side metrics. Defaults to an empty string.
             end # Else we don't have an SDK exception and are done.
             raise e
           ensure
-            end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC, :millisecond)
+            end_time = Aws::Util.monotonic_milliseconds
             request_metrics.api_call.complete(
               latency: end_time - start_time,
               attempt_count: context.retries + 1

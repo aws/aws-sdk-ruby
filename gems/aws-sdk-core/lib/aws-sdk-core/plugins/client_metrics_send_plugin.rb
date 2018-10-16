@@ -15,9 +15,9 @@ module Aws
 
       class LatencyHandler < Seahorse::Client::Handler
         def call(context)
-          start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC, :millisecond)
+          start_time = Aws::Util.monotonic_milliseconds
           resp = @handler.call(context)
-          end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC, :millisecond)
+          end_time = Aws::Util.monotonic_milliseconds
           latency = end_time - start_time
           context.metadata[:current_call_attempt].request_latency = latency
           resp

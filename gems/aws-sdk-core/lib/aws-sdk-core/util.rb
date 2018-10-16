@@ -43,6 +43,15 @@ module Aws
           end
         end
       end
+
+      def monotonic_milliseconds
+        if defined?(Process::CLOCK_MONOTONIC)
+          Process.clock_gettime(Process::CLOCK_MONOTONIC, :millisecond)
+        else
+          Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond)
+        end
+      end
+
     end
   end
 end
