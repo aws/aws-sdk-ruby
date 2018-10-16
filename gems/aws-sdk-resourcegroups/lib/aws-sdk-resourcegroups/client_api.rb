@@ -27,6 +27,13 @@ module Aws::ResourceGroups
     Group = Shapes::StructureShape.new(name: 'Group')
     GroupArn = Shapes::StringShape.new(name: 'GroupArn')
     GroupDescription = Shapes::StringShape.new(name: 'GroupDescription')
+    GroupFilter = Shapes::StructureShape.new(name: 'GroupFilter')
+    GroupFilterList = Shapes::ListShape.new(name: 'GroupFilterList')
+    GroupFilterName = Shapes::StringShape.new(name: 'GroupFilterName')
+    GroupFilterValue = Shapes::StringShape.new(name: 'GroupFilterValue')
+    GroupFilterValues = Shapes::ListShape.new(name: 'GroupFilterValues')
+    GroupIdentifier = Shapes::StructureShape.new(name: 'GroupIdentifier')
+    GroupIdentifierList = Shapes::ListShape.new(name: 'GroupIdentifierList')
     GroupList = Shapes::ListShape.new(name: 'GroupList')
     GroupName = Shapes::StringShape.new(name: 'GroupName')
     GroupQuery = Shapes::StructureShape.new(name: 'GroupQuery')
@@ -109,6 +116,20 @@ module Aws::ResourceGroups
     Group.add_member(:description, Shapes::ShapeRef.new(shape: GroupDescription, location_name: "Description"))
     Group.struct_class = Types::Group
 
+    GroupFilter.add_member(:name, Shapes::ShapeRef.new(shape: GroupFilterName, required: true, location_name: "Name"))
+    GroupFilter.add_member(:values, Shapes::ShapeRef.new(shape: GroupFilterValues, required: true, location_name: "Values"))
+    GroupFilter.struct_class = Types::GroupFilter
+
+    GroupFilterList.member = Shapes::ShapeRef.new(shape: GroupFilter)
+
+    GroupFilterValues.member = Shapes::ShapeRef.new(shape: GroupFilterValue)
+
+    GroupIdentifier.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, location_name: "GroupName"))
+    GroupIdentifier.add_member(:group_arn, Shapes::ShapeRef.new(shape: GroupArn, location_name: "GroupArn"))
+    GroupIdentifier.struct_class = Types::GroupIdentifier
+
+    GroupIdentifierList.member = Shapes::ShapeRef.new(shape: GroupIdentifier)
+
     GroupList.member = Shapes::ShapeRef.new(shape: Group)
 
     GroupQuery.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, required: true, location_name: "GroupName"))
@@ -125,11 +146,13 @@ module Aws::ResourceGroups
     ListGroupResourcesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListGroupResourcesOutput.struct_class = Types::ListGroupResourcesOutput
 
+    ListGroupsInput.add_member(:filters, Shapes::ShapeRef.new(shape: GroupFilterList, location_name: "Filters"))
     ListGroupsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListGroupsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListGroupsInput.struct_class = Types::ListGroupsInput
 
-    ListGroupsOutput.add_member(:groups, Shapes::ShapeRef.new(shape: GroupList, location_name: "Groups"))
+    ListGroupsOutput.add_member(:group_identifiers, Shapes::ShapeRef.new(shape: GroupIdentifierList, location_name: "GroupIdentifiers"))
+    ListGroupsOutput.add_member(:groups, Shapes::ShapeRef.new(shape: GroupList, deprecated: true, location_name: "Groups", metadata: {"deprecatedMessage"=>"This field is deprecated, use GroupIdentifiers instead."}))
     ListGroupsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListGroupsOutput.struct_class = Types::ListGroupsOutput
 
