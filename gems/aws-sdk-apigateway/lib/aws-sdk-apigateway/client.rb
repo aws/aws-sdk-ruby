@@ -181,9 +181,12 @@ module Aws::APIGateway
     # Create an ApiKey resource.
     #
     # <div class="seeAlso">
-    # [AWS
-    # CLI]([[AwsDocsUrlPrefix]]/cli/latest/reference/apigateway/create-api-key.html)
+    # [AWS CLI][1]
     # </div>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/create-api-key.html
     #
     # @option params [String] :name
     #   The name of the ApiKey.
@@ -261,9 +264,12 @@ module Aws::APIGateway
     # Adds a new Authorizer resource to an existing RestApi resource.
     #
     # <div class="seeAlso">
-    # [AWS
-    # CLI]([[AwsDocsUrlPrefix]]/cli/latest/reference/apigateway/create-authorizer.html)
+    # [AWS CLI][1]
     # </div>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/create-authorizer.html
     #
     # @option params [required, String] :rest_api_id
     #   \[Required\] The string identifier of the associated RestApi.
@@ -285,7 +291,7 @@ module Aws::APIGateway
     #   For a `TOKEN` or `REQUEST` authorizer, this is not defined.
     #
     # @option params [String] :auth_type
-    #   Optional customer-defined field, used in Swagger imports and exports
+    #   Optional customer-defined field, used in OpenAPI imports and exports
     #   without functional impact.
     #
     # @option params [String] :authorizer_uri
@@ -534,7 +540,7 @@ module Aws::APIGateway
     # @option params [required, String] :properties
     #   \[Required\] The new documentation content map of the targeted API
     #   entity. Enclosed key-value pairs are API-specific, but only
-    #   Swagger-compliant key-value pairs can be exported and, hence,
+    #   OpenAPI-compliant key-value pairs can be exported and, hence,
     #   published.
     #
     # @return [Types::DocumentationPart] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -725,7 +731,11 @@ module Aws::APIGateway
     #
     # @option params [String] :schema
     #   The schema for the model. For `application/json` models, this should
-    #   be [JSON schema draft 4]([[JsonSchemaUrl]]) model.
+    #   be [JSON schema draft 4][1] model.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/draft-zyp-json-schema-04
     #
     # @option params [required, String] :content_type
     #   \[Required\] The content-type for the model.
@@ -1317,9 +1327,12 @@ module Aws::APIGateway
     # Deletes an existing Authorizer resource.
     #
     # <div class="seeAlso">
-    # [AWS
-    # CLI]([[AwsDocsUrlPrefix]]/cli/latest/reference/apigateway/delete-authorizer.html)
+    # [AWS CLI][1]
     # </div>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/delete-authorizer.html
     #
     # @option params [required, String] :rest_api_id
     #   \[Required\] The string identifier of the associated RestApi.
@@ -2053,9 +2066,12 @@ module Aws::APIGateway
     # Describe an existing Authorizer resource.
     #
     # <div class="seeAlso">
-    # [AWS
-    # CLI]([[AwsDocsUrlPrefix]]/cli/latest/reference/apigateway/get-authorizer.html)
+    # [AWS CLI][1]
     # </div>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-authorizer.html
     #
     # @option params [required, String] :rest_api_id
     #   \[Required\] The string identifier of the associated RestApi.
@@ -2107,9 +2123,12 @@ module Aws::APIGateway
     # Describe an existing Authorizers resource.
     #
     # <div class="seeAlso">
-    # [AWS
-    # CLI]([[AwsDocsUrlPrefix]]/cli/latest/reference/apigateway/get-authorizers.html)
+    # [AWS CLI][1]
     # </div>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-authorizers.html
     #
     # @option params [required, String] :rest_api_id
     #   \[Required\] The string identifier of the associated RestApi.
@@ -2677,15 +2696,15 @@ module Aws::APIGateway
     #   \[Required\] The name of the Stage that will be exported.
     #
     # @option params [required, String] :export_type
-    #   \[Required\] The type of export. Currently only 'swagger' is
-    #   supported.
+    #   \[Required\] The type of export. Acceptable values are 'oas30' for
+    #   OpenAPI 3.0.x and 'swagger' for Swagger/OpenAPI 2.0.
     #
     # @option params [Hash<String,String>] :parameters
     #   A key-value map of query string parameters that specify properties of
     #   the export, depending on the requested `exportType`. For `exportType`
-    #   `swagger`, any combination of the following parameters are supported:
-    #   `extensions='integrations'` or `extensions='apigateway'` will export
-    #   the API with x-amazon-apigateway-integration extensions.
+    #   `oas30` and `swagger`, any combination of the following parameters are
+    #   supported: `extensions='integrations'` or `extensions='apigateway'`
+    #   will export the API with x-amazon-apigateway-integration extensions.
     #   `extensions='authorizers'` will export the API with
     #   x-amazon-apigateway-authorizer extensions. `postman` will export the
     #   API with Postman extensions, allowing for import to the Postman tool
@@ -2693,8 +2712,8 @@ module Aws::APIGateway
     # @option params [String] :accepts
     #   The content-type of the export, for example `application/json`.
     #   Currently `application/json` and `application/yaml` are supported for
-    #   `exportType` of `swagger`. This should be specified in the `Accept`
-    #   header for direct API requests.
+    #   `exportType` of`oas30` and `swagger`. This should be specified in the
+    #   `Accept` header for direct API requests.
     #
     # @return [Types::ExportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4197,8 +4216,11 @@ module Aws::APIGateway
     #
     # @option params [required, String, IO] :body
     #   The payload of the POST request to import API keys. For the payload
-    #   format, see [API Key File
-    #   Format]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/api-key-file-format.html).
+    #   format, see [API Key File Format][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-key-file-format.html
     #
     # @option params [required, String] :format
     #   A query parameter to specify the input format to imported API keys.
@@ -4250,7 +4272,7 @@ module Aws::APIGateway
     #
     # @option params [required, String, IO] :body
     #   \[Required\] Raw byte array representing the to-be-imported
-    #   documentation parts. To import from a Swagger file, this is a JSON
+    #   documentation parts. To import from an OpenAPI file, this is a JSON
     #   object.
     #
     # @return [Types::DocumentationPartIds] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -4318,7 +4340,7 @@ module Aws::APIGateway
     #
     # @option params [required, String, IO] :body
     #   \[Required\] The POST request body containing external API
-    #   definitions. Currently, only Swagger definition JSON files are
+    #   definitions. Currently, only OpenAPI definition JSON/YAML files are
     #   supported. The maximum size of the API definition file is 2MB.
     #
     # @return [Types::RestApi] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -4473,10 +4495,10 @@ module Aws::APIGateway
     #
     #   * For `HTTP` or `HTTP_PROXY` integrations, the URI must be a fully
     #     formed, encoded HTTP(S) URL according to the [RFC-3986
-    #     specification]([[UriEntryWikipediaUrl]]), for either standard
-    #     integration, where `connectionType` is not `VPC_LINK`, or private
-    #     integration, where `connectionType` is `VPC_LINK`. For a private
-    #     HTTP integration, the URI is not used for routing.
+    #     specification][1], for either standard integration, where
+    #     `connectionType` is not `VPC_LINK`, or private integration, where
+    #     `connectionType` is `VPC_LINK`. For a private HTTP integration, the
+    #     URI is not used for routing.
     #
     #   * For `AWS` or `AWS_PROXY` integrations, the URI is of the form
     #     `arn:aws:apigateway:\{region\}:\{subdomain.service|service\}:path|action/\{service_api\}`.
@@ -4495,6 +4517,10 @@ module Aws::APIGateway
     #     `arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket=\{bucket\}&Key=\{key\}`
     #     or `arn:aws:apigateway:us-west-2:s3:path/\{bucket\}/\{key\}`
     #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Uniform_Resource_Identifier
+    #
     # @option params [String] :connection_type
     #   The type of the network connection to the integration endpoint. The
     #   valid value is `INTERNET` for connections through the public routable
@@ -4502,10 +4528,12 @@ module Aws::APIGateway
     #   a network load balancer in a VPC. The default value is `INTERNET`.
     #
     # @option params [String] :connection_id
-    #   The
-    #   ([`id`]([[AwsDocsUrlPrefix]]/apigateway/api-reference/resource/vpc-link/#id))
-    #   of the VpcLink used for the integration when `connectionType=VPC_LINK`
-    #   and undefined, otherwise.
+    #   The ([`id`][1]) of the VpcLink used for the integration when
+    #   `connectionType=VPC_LINK` and undefined, otherwise.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/api-reference/resource/vpc-link/#id
     #
     # @option params [String] :credentials
     #   Specifies whether credentials are required for a put integration.
@@ -4768,7 +4796,11 @@ module Aws::APIGateway
     # @option params [String] :operation_name
     #   A human-friendly operation identifier for the method. For example, you
     #   can assign the `operationName` of `ListPets` for the `GET /pets`
-    #   method in [PetStore]([[PetstoreDemoUrl]]) example.
+    #   method in [PetStore][1] example.
+    #
+    #
+    #
+    #   [1]: https://petstore-demo-endpoint.execute-api.com/petstore/pets
     #
     # @option params [Hash<String,Boolean>] :request_parameters
     #   A key-value map defining required or optional method request
@@ -4986,7 +5018,7 @@ module Aws::APIGateway
     #
     # @option params [required, String, IO] :body
     #   \[Required\] The PUT request body containing external API definitions.
-    #   Currently, only Swagger definition JSON files are supported. The
+    #   Currently, only OpenAPI definition JSON/YAML files are supported. The
     #   maximum size of the API definition file is 2MB.
     #
     # @return [Types::RestApi] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -5073,9 +5105,12 @@ module Aws::APIGateway
     # parameters, and an incoming request body.
     #
     # <div class="seeAlso">
-    # [Enable custom
-    # authorizers]([[AwsDocsUrlPrefix]]/apigateway/latest/developerguide/use-custom-authorizer.html)
+    # [Enable custom authorizers][1]
     # </div>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html
     #
     # @option params [required, String] :rest_api_id
     #   \[Required\] The string identifier of the associated RestApi.
@@ -5371,9 +5406,12 @@ module Aws::APIGateway
     # Updates an existing Authorizer resource.
     #
     # <div class="seeAlso">
-    # [AWS
-    # CLI]([[AwsDocsUrlPrefix]]/cli/latest/reference/apigateway/update-authorizer.html)
+    # [AWS CLI][1]
     # </div>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/update-authorizer.html
     #
     # @option params [required, String] :rest_api_id
     #   \[Required\] The string identifier of the associated RestApi.
@@ -6622,7 +6660,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
