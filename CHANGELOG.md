@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.152 (2018-10-17)
+------------------
+
 * Feature - Aws::APIGateway - Updated the documentation for Amazon API Gateway.
 
 * Feature - Aws::CloudWatchEvents - Updated the API, and documentation for Amazon CloudWatch Events.
