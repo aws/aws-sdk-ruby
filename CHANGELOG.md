@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.153 (2018-10-18)
+------------------
+
 * Feature - Aws::AppStream - Updated the API, and documentation for Amazon AppStream.
 
 * Feature - Aws::MediaLive - Updated the API, and documentation for AWS Elemental MediaLive.
