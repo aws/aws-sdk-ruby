@@ -186,21 +186,9 @@ A delay randomiser function used by the default backoff function. Some predefine
         end
 
         def should_retry?(context, error)
-          retryable?(context, error) and
+          error.retryable?(context) and
           context.retries < retry_limit(context) and
           response_truncatable?(context)
-        end
-
-        def retryable?(context, error)
-          (error.expired_credentials? and refreshable_credentials?(context)) or
-          error.throttling_error? or
-          error.checksum? or
-          error.networking? or
-          error.server?
-        end
-
-        def refreshable_credentials?(context)
-          context.config.credentials.respond_to?(:refresh!)
         end
 
         def retry_limit(context)
