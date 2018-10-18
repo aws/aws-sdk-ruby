@@ -120,7 +120,19 @@ A delay randomiser function used by the default backoff function. Some predefine
           (500..599).include?(@http_status_code)
         end
 
+        def retryable?(context)
+          (expired_credentials? and refreshable_credentials?(context)) or
+            throttling_error? or
+            checksum? or
+            networking? or
+            server?
+        end
+
         private
+
+        def refreshable_credentials?(context)
+          context.config.credentials.respond_to?(:refresh!)
+        end
 
         def extract_name(error)
           if error.is_a?(Errors::ServiceError)
