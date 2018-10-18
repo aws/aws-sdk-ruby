@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AppStream - Updated the API, and documentation for Amazon AppStream.
+
+* Feature - Aws::MediaLive - Updated the API, and documentation for AWS Elemental MediaLive.
+
+* Feature - Aws::Route53 - Updated the API, documentation, and integration test for Amazon Route 53.
+
 2.11.152 (2018-10-17)
 ------------------
 
