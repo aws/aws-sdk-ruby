@@ -437,6 +437,35 @@ module Aws::SSM
     # @option params [String] :association_name
     #   Specify a descriptive name for the association.
     #
+    # @option params [String] :max_errors
+    #   The number of errors that are allowed before the system stops sending
+    #   requests to run the association on additional targets. You can specify
+    #   either an absolute number of errors, for example 10, or a percentage
+    #   of the target set, for example 10%. If you specify 3, for example, the
+    #   system stops sending requests when the fourth error is received. If
+    #   you specify 0, then the system stops sending requests after the first
+    #   error is returned. If you run an association on 50 instances and set
+    #   MaxError to 10%, then the system stops sending the request when the
+    #   sixth error is received.
+    #
+    #   Executions that are already running an association when MaxErrors is
+    #   reached are allowed to complete, but some of these executions may fail
+    #   as well. If you need to ensure that there won't be more than
+    #   max-errors failed executions, set MaxConcurrency to 1 so that
+    #   executions proceed one at a time.
+    #
+    # @option params [String] :max_concurrency
+    #   The maximum number of targets allowed to run the association at the
+    #   same time. You can specify a number, for example 10, or a percentage
+    #   of the target set, for example 10%. The default value is 100%, which
+    #   means all targets run the association at the same time.
+    #
+    #   If a new instance starts and attempts to execute an association while
+    #   Systems Manager is executing MaxConcurrency associations, the
+    #   association is allowed to run. During the next association interval,
+    #   the new instance will process its association within the limit
+    #   specified for MaxConcurrency.
+    #
     # @return [Types::CreateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -465,6 +494,8 @@ module Aws::SSM
     #       },
     #     },
     #     association_name: "AssociationName",
+    #     max_errors: "MaxErrors",
+    #     max_concurrency: "MaxConcurrency",
     #   })
     #
     # @example Response structure
@@ -498,6 +529,8 @@ module Aws::SSM
     #   resp.association_description.last_execution_date #=> Time
     #   resp.association_description.last_successful_execution_date #=> Time
     #   resp.association_description.association_name #=> String
+    #   resp.association_description.max_errors #=> String
+    #   resp.association_description.max_concurrency #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociation AWS API Documentation
     #
@@ -553,6 +586,8 @@ module Aws::SSM
     #           },
     #         },
     #         association_name: "AssociationName",
+    #         max_errors: "MaxErrors",
+    #         max_concurrency: "MaxConcurrency",
     #       },
     #     ],
     #   })
@@ -589,6 +624,8 @@ module Aws::SSM
     #   resp.successful[0].last_execution_date #=> Time
     #   resp.successful[0].last_successful_execution_date #=> Time
     #   resp.successful[0].association_name #=> String
+    #   resp.successful[0].max_errors #=> String
+    #   resp.successful[0].max_concurrency #=> String
     #   resp.failed #=> Array
     #   resp.failed[0].entry.name #=> String
     #   resp.failed[0].entry.instance_id #=> String
@@ -605,6 +642,8 @@ module Aws::SSM
     #   resp.failed[0].entry.output_location.s3_location.output_s3_bucket_name #=> String
     #   resp.failed[0].entry.output_location.s3_location.output_s3_key_prefix #=> String
     #   resp.failed[0].entry.association_name #=> String
+    #   resp.failed[0].entry.max_errors #=> String
+    #   resp.failed[0].entry.max_concurrency #=> String
     #   resp.failed[0].message #=> String
     #   resp.failed[0].fault #=> String, one of "Client", "Server", "Unknown"
     #
@@ -1552,6 +1591,8 @@ module Aws::SSM
     #   resp.association_description.last_execution_date #=> Time
     #   resp.association_description.last_successful_execution_date #=> Time
     #   resp.association_description.association_name #=> String
+    #   resp.association_description.max_errors #=> String
+    #   resp.association_description.max_concurrency #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociation AWS API Documentation
     #
@@ -2201,7 +2242,8 @@ module Aws::SSM
     #
     # @option params [Array<Types::InstanceInformationStringFilter>] :filters
     #   One or more filters. Use a filter to return a more specific list of
-    #   instances.
+    #   instances. You can filter on Amazon EC2 tag. Specify tags by using a
+    #   key-value mapping.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this call. The call also
@@ -4557,6 +4599,8 @@ module Aws::SSM
     #   resp.association_versions[0].output_location.s3_location.output_s3_bucket_name #=> String
     #   resp.association_versions[0].output_location.s3_location.output_s3_key_prefix #=> String
     #   resp.association_versions[0].association_name #=> String
+    #   resp.association_versions[0].max_errors #=> String
+    #   resp.association_versions[0].max_concurrency #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociationVersions AWS API Documentation
@@ -6540,6 +6584,35 @@ module Aws::SSM
     #   ensure that this request succeeds, either specify `$LATEST`, or omit
     #   this parameter.
     #
+    # @option params [String] :max_errors
+    #   The number of errors that are allowed before the system stops sending
+    #   requests to run the association on additional targets. You can specify
+    #   either an absolute number of errors, for example 10, or a percentage
+    #   of the target set, for example 10%. If you specify 3, for example, the
+    #   system stops sending requests when the fourth error is received. If
+    #   you specify 0, then the system stops sending requests after the first
+    #   error is returned. If you run an association on 50 instances and set
+    #   MaxError to 10%, then the system stops sending the request when the
+    #   sixth error is received.
+    #
+    #   Executions that are already running an association when MaxErrors is
+    #   reached are allowed to complete, but some of these executions may fail
+    #   as well. If you need to ensure that there won't be more than
+    #   max-errors failed executions, set MaxConcurrency to 1 so that
+    #   executions proceed one at a time.
+    #
+    # @option params [String] :max_concurrency
+    #   The maximum number of targets allowed to run the association at the
+    #   same time. You can specify a number, for example 10, or a percentage
+    #   of the target set, for example 10%. The default value is 100%, which
+    #   means all targets run the association at the same time.
+    #
+    #   If a new instance starts and attempts to execute an association while
+    #   Systems Manager is executing MaxConcurrency associations, the
+    #   association is allowed to run. During the next association interval,
+    #   the new instance will process its association within the limit
+    #   specified for MaxConcurrency.
+    #
     # @return [Types::UpdateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -6569,6 +6642,8 @@ module Aws::SSM
     #     ],
     #     association_name: "AssociationName",
     #     association_version: "AssociationVersion",
+    #     max_errors: "MaxErrors",
+    #     max_concurrency: "MaxConcurrency",
     #   })
     #
     # @example Response structure
@@ -6602,6 +6677,8 @@ module Aws::SSM
     #   resp.association_description.last_execution_date #=> Time
     #   resp.association_description.last_successful_execution_date #=> Time
     #   resp.association_description.association_name #=> String
+    #   resp.association_description.max_errors #=> String
+    #   resp.association_description.max_concurrency #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociation AWS API Documentation
     #
@@ -6672,6 +6749,8 @@ module Aws::SSM
     #   resp.association_description.last_execution_date #=> Time
     #   resp.association_description.last_successful_execution_date #=> Time
     #   resp.association_description.association_name #=> String
+    #   resp.association_description.max_errors #=> String
+    #   resp.association_description.max_concurrency #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationStatus AWS API Documentation
     #
@@ -7469,7 +7548,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
