@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
+* Feature - Aws::WorkSpaces - Updated the API, and integration test for Amazon WorkSpaces.
+
 2.11.153 (2018-10-18)
 ------------------
 
