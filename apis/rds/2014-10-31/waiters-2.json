@@ -170,6 +170,91 @@
           "argument": "DBSnapshots[].Status"
         }
       ]
+    },
+    "DBClusterSnapshotAvailable": {
+      "delay": 30,
+      "operation": "DescribeDBClusterSnapshots",
+      "maxAttempts": 60,
+      "acceptors": [
+        {
+          "expected": "available",
+          "matcher": "pathAll",
+          "state": "success",
+          "argument": "DBClusterSnapshots[].Status"
+        },
+        {
+          "expected": "deleted",
+          "matcher": "pathAny",
+          "state": "failure",
+          "argument": "DBClusterSnapshots[].Status"
+        },
+        {
+          "expected": "deleting",
+          "matcher": "pathAny",
+          "state": "failure",
+          "argument": "DBClusterSnapshots[].Status"
+        },
+        {
+          "expected": "failed",
+          "matcher": "pathAny",
+          "state": "failure",
+          "argument": "DBClusterSnapshots[].Status"
+        },
+        {
+          "expected": "incompatible-restore",
+          "matcher": "pathAny",
+          "state": "failure",
+          "argument": "DBClusterSnapshots[].Status"
+        },
+        {
+          "expected": "incompatible-parameters",
+          "matcher": "pathAny",
+          "state": "failure",
+          "argument": "DBClusterSnapshots[].Status"
+        }
+      ]
+    },
+    "DBClusterSnapshotDeleted": {
+      "delay": 30,
+      "operation": "DescribeDBClusterSnapshots",
+      "maxAttempts": 60,
+      "acceptors": [
+        {
+          "expected": "deleted",
+          "matcher": "pathAll",
+          "state": "success",
+          "argument": "DBClusterSnapshots[].Status"
+        },
+        {
+          "expected": "DBClusterSnapshotNotFoundFault",
+          "matcher": "error",
+          "state": "success"
+        },
+        {
+          "expected": "creating",
+          "matcher": "pathAny",
+          "state": "failure",
+          "argument": "DBClusterSnapshots[].Status"
+        },
+        {
+          "expected": "modifying",
+          "matcher": "pathAny",
+          "state": "failure",
+          "argument": "DBClusterSnapshots[].Status"
+        },
+        {
+          "expected": "rebooting",
+          "matcher": "pathAny",
+          "state": "failure",
+          "argument": "DBClusterSnapshots[].Status"
+        },
+        {
+          "expected": "resetting-master-credentials",
+          "matcher": "pathAny",
+          "state": "failure",
+          "argument": "DBClusterSnapshots[].Status"
+        }
+      ]
     }
   }
 }
