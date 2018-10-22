@@ -173,6 +173,7 @@ module Aws
           request_metrics = stub_publisher.metrics[0]
           api_call_attempts = request_metrics.api_call_attempts
           expect(api_call_attempts.size).to eq(1)
+          expect(request_metrics.api_call.max_retries_exceeded).to eq(0)
           attempt = api_call_attempts[0]
           expect(attempt.service).to eq("S3")
           expect(attempt.api).to eq("ListBuckets")
@@ -209,6 +210,7 @@ module Aws
           expect(stub_publisher.metrics.size).to eq(1)
           request_metrics = stub_publisher.metrics[0]
           api_call_attempts = request_metrics.api_call_attempts
+          expect(request_metrics.api_call.max_retries_exceeded).to eq(0)
           expect(api_call_attempts.size).to eq(1)
           attempt = api_call_attempts[0]
           expect(attempt.aws_exception).to eq("NoSuchKey")
@@ -242,6 +244,7 @@ module Aws
           request_metrics = stub_publisher.metrics[0]
           api_call_attempts = request_metrics.api_call_attempts
           expect(api_call_attempts.size).to eq(1)
+          expect(request_metrics.api_call.max_retries_exceeded).to eq(0)
           attempt = api_call_attempts[0]
           expect(attempt.x_amz_id_2).to eq("fWhd+V0u5IWKNLhbIZi2ZR/DoWpAt2Km8T9ZZ75UnvkZFl0MU3jlf2B2zRJYHmxqkEc6iAtctOc=")
           expect(attempt.x_amz_request_id).to eq("226FC0DC6464C2AE")
@@ -283,6 +286,7 @@ module Aws
             request_metrics = stub_publisher.metrics[0]
             api_call_attempts = request_metrics.api_call_attempts
             expect(request_metrics.api_call.attempt_count).to eq(1)
+            expect(request_metrics.api_call.max_retries_exceeded).to eq(0)
             expect(api_call_attempts.size).to eq(1)
             attempt = api_call_attempts[0]
             expect(attempt.sdk_exception).to eq("ArgumentError")
@@ -326,6 +330,7 @@ module Aws
             request_metrics = stub_publisher.metrics[0]
             api_call_attempts = request_metrics.api_call_attempts
             expect(request_metrics.api_call.attempt_count).to eq(1)
+            expect(request_metrics.api_call.max_retries_exceeded).to eq(0)
             expect(api_call_attempts.size).to eq(1)
             attempt = api_call_attempts[0]
             expect(attempt.sdk_exception).to eq("ArgumentError")
@@ -354,6 +359,7 @@ module Aws
             request_metrics = stub_publisher.metrics[0]
             api_call_attempts = request_metrics.api_call_attempts
             expect(request_metrics.api_call.attempt_count).to eq(1)
+            expect(request_metrics.api_call.max_retries_exceeded).to eq(0)
             expect(api_call_attempts.size).to eq(1)
             attempt = api_call_attempts[0]
             expect(attempt.aws_exception).to eq("NoSuchKey")
@@ -362,6 +368,31 @@ module Aws
             )
             expect(attempt.sdk_exception).to eq("ArgumentError")
             expect(attempt.sdk_exception_msg).to eq("Bad response.")
+          end
+
+          it 'recognizes retryable exceptions' do
+            client.stub_responses(:get_object,
+              {
+                status_code: 500,
+                body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"\
+                  "<Error>\n"\
+                  "<Code>InternalServiceError</Code>\n"\
+                  "<Message>Fake internal service error.</Message>\n"\
+                  "<Resource>/mybucket/myfoto.jpg</Resource>\n"\
+                  "<RequestId>4442587FB7D0A2F9</RequestId>\n"\
+                  "</Error>",
+                headers: {}
+              },
+              {}
+            )
+            expect {
+              client.get_object(bucket: "mybucket", key: "myfoto.jpg")
+            }.to raise_error("Fake internal service error.")
+            expect(stub_publisher.metrics.size).to eq(1)
+            request_metrics = stub_publisher.metrics[0]
+            api_call_attempts = request_metrics.api_call_attempts
+            expect(api_call_attempts.size).to eq(1)
+            expect(request_metrics.api_call.max_retries_exceeded).to eq(1)
           end
         end
 
