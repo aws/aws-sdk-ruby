@@ -254,7 +254,7 @@ module Aws::Comprehend
     #
     #   resp = client.batch_detect_entities({
     #     text_list: ["String"], # required
-    #     language_code: "en", # required, accepts en, es
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt
     #   })
     #
     # @example Response structure
@@ -301,7 +301,7 @@ module Aws::Comprehend
     #
     #   resp = client.batch_detect_key_phrases({
     #     text_list: ["String"], # required
-    #     language_code: "en", # required, accepts en, es
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt
     #   })
     #
     # @example Response structure
@@ -349,7 +349,7 @@ module Aws::Comprehend
     #
     #   resp = client.batch_detect_sentiment({
     #     text_list: ["String"], # required
-    #     language_code: "en", # required, accepts en, es
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt
     #   })
     #
     # @example Response structure
@@ -397,7 +397,7 @@ module Aws::Comprehend
     #
     #   resp = client.batch_detect_syntax({
     #     text_list: ["String"], # required
-    #     language_code: "en", # required, accepts en
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt
     #   })
     #
     # @example Response structure
@@ -492,7 +492,7 @@ module Aws::Comprehend
     #   resp.entities_detection_job_properties.input_data_config.s3_uri #=> String
     #   resp.entities_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.entities_detection_job_properties.output_data_config.s3_uri #=> String
-    #   resp.entities_detection_job_properties.language_code #=> String, one of "en", "es"
+    #   resp.entities_detection_job_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
     #   resp.entities_detection_job_properties.data_access_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEntitiesDetectionJob AWS API Documentation
@@ -532,7 +532,7 @@ module Aws::Comprehend
     #   resp.key_phrases_detection_job_properties.input_data_config.s3_uri #=> String
     #   resp.key_phrases_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.key_phrases_detection_job_properties.output_data_config.s3_uri #=> String
-    #   resp.key_phrases_detection_job_properties.language_code #=> String, one of "en", "es"
+    #   resp.key_phrases_detection_job_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
     #   resp.key_phrases_detection_job_properties.data_access_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeKeyPhrasesDetectionJob AWS API Documentation
@@ -572,7 +572,7 @@ module Aws::Comprehend
     #   resp.sentiment_detection_job_properties.input_data_config.s3_uri #=> String
     #   resp.sentiment_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.sentiment_detection_job_properties.output_data_config.s3_uri #=> String
-    #   resp.sentiment_detection_job_properties.language_code #=> String, one of "en", "es"
+    #   resp.sentiment_detection_job_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
     #   resp.sentiment_detection_job_properties.data_access_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeSentimentDetectionJob AWS API Documentation
@@ -678,7 +678,7 @@ module Aws::Comprehend
     #
     #   resp = client.detect_entities({
     #     text: "String", # required
-    #     language_code: "en", # required, accepts en, es
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt
     #   })
     #
     # @example Response structure
@@ -717,7 +717,7 @@ module Aws::Comprehend
     #
     #   resp = client.detect_key_phrases({
     #     text: "String", # required
-    #     language_code: "en", # required, accepts en, es
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt
     #   })
     #
     # @example Response structure
@@ -757,7 +757,7 @@ module Aws::Comprehend
     #
     #   resp = client.detect_sentiment({
     #     text: "String", # required
-    #     language_code: "en", # required, accepts en, es
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt
     #   })
     #
     # @example Response structure
@@ -796,7 +796,7 @@ module Aws::Comprehend
     #
     #   resp = client.detect_syntax({
     #     text: "String", # required
-    #     language_code: "en", # required, accepts en
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt
     #   })
     #
     # @example Response structure
@@ -919,7 +919,7 @@ module Aws::Comprehend
     #   resp.entities_detection_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.entities_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.entities_detection_job_properties_list[0].output_data_config.s3_uri #=> String
-    #   resp.entities_detection_job_properties_list[0].language_code #=> String, one of "en", "es"
+    #   resp.entities_detection_job_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
     #   resp.entities_detection_job_properties_list[0].data_access_role_arn #=> String
     #   resp.next_token #=> String
     #
@@ -976,7 +976,7 @@ module Aws::Comprehend
     #   resp.key_phrases_detection_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.key_phrases_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.key_phrases_detection_job_properties_list[0].output_data_config.s3_uri #=> String
-    #   resp.key_phrases_detection_job_properties_list[0].language_code #=> String, one of "en", "es"
+    #   resp.key_phrases_detection_job_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
     #   resp.key_phrases_detection_job_properties_list[0].data_access_role_arn #=> String
     #   resp.next_token #=> String
     #
@@ -1033,7 +1033,7 @@ module Aws::Comprehend
     #   resp.sentiment_detection_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.sentiment_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.sentiment_detection_job_properties_list[0].output_data_config.s3_uri #=> String
-    #   resp.sentiment_detection_job_properties_list[0].language_code #=> String, one of "en", "es"
+    #   resp.sentiment_detection_job_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
     #   resp.sentiment_detection_job_properties_list[0].data_access_role_arn #=> String
     #   resp.next_token #=> String
     #
@@ -1216,7 +1216,7 @@ module Aws::Comprehend
     #     },
     #     data_access_role_arn: "IamRoleArn", # required
     #     job_name: "JobName",
-    #     language_code: "en", # required, accepts en, es
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt
     #     client_request_token: "ClientRequestTokenString",
     #   })
     #
@@ -1284,7 +1284,7 @@ module Aws::Comprehend
     #     },
     #     data_access_role_arn: "IamRoleArn", # required
     #     job_name: "JobName",
-    #     language_code: "en", # required, accepts en, es
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt
     #     client_request_token: "ClientRequestTokenString",
     #   })
     #
@@ -1352,7 +1352,7 @@ module Aws::Comprehend
     #     },
     #     data_access_role_arn: "IamRoleArn", # required
     #     job_name: "JobName",
-    #     language_code: "en", # required, accepts en, es
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt
     #     client_request_token: "ClientRequestTokenString",
     #   })
     #
@@ -1621,7 +1621,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

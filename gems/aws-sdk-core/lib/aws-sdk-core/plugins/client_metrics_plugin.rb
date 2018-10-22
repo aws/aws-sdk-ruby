@@ -103,11 +103,19 @@ all generated client side metrics. Defaults to an empty string.
             timestamp: DateTime.now.strftime('%Q').to_i,
           )
           context.metadata[:client_metrics] = request_metrics
-          start_time = Time.now
+          start_time = Aws::Util.monotonic_milliseconds
+          final_error_retryable = false
           begin
             @handler.call(context)
           rescue StandardError => e
             # Handle SDK Exceptions
+            inspector = Aws::Plugins::RetryErrors::ErrorInspector.new(
+              e,
+              context.http_response.status_code
+            )
+            if inspector.retryable?(context)
+              final_error_retryable = true
+            end
             if request_metrics.api_call_attempts.empty?
               attempt = request_metrics.build_call_attempt
               attempt.sdk_exception = e.class.to_s
@@ -127,10 +135,11 @@ all generated client side metrics. Defaults to an empty string.
             end # Else we don't have an SDK exception and are done.
             raise e
           ensure
-            end_time = Time.now
+            end_time = Aws::Util.monotonic_milliseconds
             request_metrics.api_call.complete(
-              latency: ((end_time - start_time) * 1000).to_i,
-              attempt_count: context.retries + 1
+              latency: end_time - start_time,
+              attempt_count: context.retries + 1,
+              final_error_retryable: final_error_retryable
             )
             # Report the metrics by passing the complete RequestMetrics object
             if publisher

@@ -57,6 +57,12 @@ module Aws::Lightsail
     CreateLoadBalancerResult = Shapes::StructureShape.new(name: 'CreateLoadBalancerResult')
     CreateLoadBalancerTlsCertificateRequest = Shapes::StructureShape.new(name: 'CreateLoadBalancerTlsCertificateRequest')
     CreateLoadBalancerTlsCertificateResult = Shapes::StructureShape.new(name: 'CreateLoadBalancerTlsCertificateResult')
+    CreateRelationalDatabaseFromSnapshotRequest = Shapes::StructureShape.new(name: 'CreateRelationalDatabaseFromSnapshotRequest')
+    CreateRelationalDatabaseFromSnapshotResult = Shapes::StructureShape.new(name: 'CreateRelationalDatabaseFromSnapshotResult')
+    CreateRelationalDatabaseRequest = Shapes::StructureShape.new(name: 'CreateRelationalDatabaseRequest')
+    CreateRelationalDatabaseResult = Shapes::StructureShape.new(name: 'CreateRelationalDatabaseResult')
+    CreateRelationalDatabaseSnapshotRequest = Shapes::StructureShape.new(name: 'CreateRelationalDatabaseSnapshotRequest')
+    CreateRelationalDatabaseSnapshotResult = Shapes::StructureShape.new(name: 'CreateRelationalDatabaseSnapshotResult')
     DeleteDiskRequest = Shapes::StructureShape.new(name: 'DeleteDiskRequest')
     DeleteDiskResult = Shapes::StructureShape.new(name: 'DeleteDiskResult')
     DeleteDiskSnapshotRequest = Shapes::StructureShape.new(name: 'DeleteDiskSnapshotRequest')
@@ -75,6 +81,10 @@ module Aws::Lightsail
     DeleteLoadBalancerResult = Shapes::StructureShape.new(name: 'DeleteLoadBalancerResult')
     DeleteLoadBalancerTlsCertificateRequest = Shapes::StructureShape.new(name: 'DeleteLoadBalancerTlsCertificateRequest')
     DeleteLoadBalancerTlsCertificateResult = Shapes::StructureShape.new(name: 'DeleteLoadBalancerTlsCertificateResult')
+    DeleteRelationalDatabaseRequest = Shapes::StructureShape.new(name: 'DeleteRelationalDatabaseRequest')
+    DeleteRelationalDatabaseResult = Shapes::StructureShape.new(name: 'DeleteRelationalDatabaseResult')
+    DeleteRelationalDatabaseSnapshotRequest = Shapes::StructureShape.new(name: 'DeleteRelationalDatabaseSnapshotRequest')
+    DeleteRelationalDatabaseSnapshotResult = Shapes::StructureShape.new(name: 'DeleteRelationalDatabaseSnapshotResult')
     DetachDiskRequest = Shapes::StructureShape.new(name: 'DetachDiskRequest')
     DetachDiskResult = Shapes::StructureShape.new(name: 'DetachDiskResult')
     DetachInstancesFromLoadBalancerRequest = Shapes::StructureShape.new(name: 'DetachInstancesFromLoadBalancerRequest')
@@ -154,6 +164,30 @@ module Aws::Lightsail
     GetOperationsResult = Shapes::StructureShape.new(name: 'GetOperationsResult')
     GetRegionsRequest = Shapes::StructureShape.new(name: 'GetRegionsRequest')
     GetRegionsResult = Shapes::StructureShape.new(name: 'GetRegionsResult')
+    GetRelationalDatabaseBlueprintsRequest = Shapes::StructureShape.new(name: 'GetRelationalDatabaseBlueprintsRequest')
+    GetRelationalDatabaseBlueprintsResult = Shapes::StructureShape.new(name: 'GetRelationalDatabaseBlueprintsResult')
+    GetRelationalDatabaseBundlesRequest = Shapes::StructureShape.new(name: 'GetRelationalDatabaseBundlesRequest')
+    GetRelationalDatabaseBundlesResult = Shapes::StructureShape.new(name: 'GetRelationalDatabaseBundlesResult')
+    GetRelationalDatabaseEventsRequest = Shapes::StructureShape.new(name: 'GetRelationalDatabaseEventsRequest')
+    GetRelationalDatabaseEventsResult = Shapes::StructureShape.new(name: 'GetRelationalDatabaseEventsResult')
+    GetRelationalDatabaseLogEventsRequest = Shapes::StructureShape.new(name: 'GetRelationalDatabaseLogEventsRequest')
+    GetRelationalDatabaseLogEventsResult = Shapes::StructureShape.new(name: 'GetRelationalDatabaseLogEventsResult')
+    GetRelationalDatabaseLogStreamsRequest = Shapes::StructureShape.new(name: 'GetRelationalDatabaseLogStreamsRequest')
+    GetRelationalDatabaseLogStreamsResult = Shapes::StructureShape.new(name: 'GetRelationalDatabaseLogStreamsResult')
+    GetRelationalDatabaseMasterUserPasswordRequest = Shapes::StructureShape.new(name: 'GetRelationalDatabaseMasterUserPasswordRequest')
+    GetRelationalDatabaseMasterUserPasswordResult = Shapes::StructureShape.new(name: 'GetRelationalDatabaseMasterUserPasswordResult')
+    GetRelationalDatabaseMetricDataRequest = Shapes::StructureShape.new(name: 'GetRelationalDatabaseMetricDataRequest')
+    GetRelationalDatabaseMetricDataResult = Shapes::StructureShape.new(name: 'GetRelationalDatabaseMetricDataResult')
+    GetRelationalDatabaseParametersRequest = Shapes::StructureShape.new(name: 'GetRelationalDatabaseParametersRequest')
+    GetRelationalDatabaseParametersResult = Shapes::StructureShape.new(name: 'GetRelationalDatabaseParametersResult')
+    GetRelationalDatabaseRequest = Shapes::StructureShape.new(name: 'GetRelationalDatabaseRequest')
+    GetRelationalDatabaseResult = Shapes::StructureShape.new(name: 'GetRelationalDatabaseResult')
+    GetRelationalDatabaseSnapshotRequest = Shapes::StructureShape.new(name: 'GetRelationalDatabaseSnapshotRequest')
+    GetRelationalDatabaseSnapshotResult = Shapes::StructureShape.new(name: 'GetRelationalDatabaseSnapshotResult')
+    GetRelationalDatabaseSnapshotsRequest = Shapes::StructureShape.new(name: 'GetRelationalDatabaseSnapshotsRequest')
+    GetRelationalDatabaseSnapshotsResult = Shapes::StructureShape.new(name: 'GetRelationalDatabaseSnapshotsResult')
+    GetRelationalDatabasesRequest = Shapes::StructureShape.new(name: 'GetRelationalDatabasesRequest')
+    GetRelationalDatabasesResult = Shapes::StructureShape.new(name: 'GetRelationalDatabasesResult')
     GetStaticIpRequest = Shapes::StructureShape.new(name: 'GetStaticIpRequest')
     GetStaticIpResult = Shapes::StructureShape.new(name: 'GetStaticIpResult')
     GetStaticIpsRequest = Shapes::StructureShape.new(name: 'GetStaticIpsRequest')
@@ -210,6 +244,8 @@ module Aws::Lightsail
     LoadBalancerTlsCertificateStatus = Shapes::StringShape.new(name: 'LoadBalancerTlsCertificateStatus')
     LoadBalancerTlsCertificateSummary = Shapes::StructureShape.new(name: 'LoadBalancerTlsCertificateSummary')
     LoadBalancerTlsCertificateSummaryList = Shapes::ListShape.new(name: 'LoadBalancerTlsCertificateSummaryList')
+    LogEvent = Shapes::StructureShape.new(name: 'LogEvent')
+    LogEventList = Shapes::ListShape.new(name: 'LogEventList')
     MetricDatapoint = Shapes::StructureShape.new(name: 'MetricDatapoint')
     MetricDatapointList = Shapes::ListShape.new(name: 'MetricDatapointList')
     MetricPeriod = Shapes::IntegerShape.new(name: 'MetricPeriod')
@@ -230,6 +266,9 @@ module Aws::Lightsail
     PasswordData = Shapes::StructureShape.new(name: 'PasswordData')
     PeerVpcRequest = Shapes::StructureShape.new(name: 'PeerVpcRequest')
     PeerVpcResult = Shapes::StructureShape.new(name: 'PeerVpcResult')
+    PendingMaintenanceAction = Shapes::StructureShape.new(name: 'PendingMaintenanceAction')
+    PendingMaintenanceActionList = Shapes::ListShape.new(name: 'PendingMaintenanceActionList')
+    PendingModifiedRelationalDatabaseValues = Shapes::StructureShape.new(name: 'PendingModifiedRelationalDatabaseValues')
     Port = Shapes::IntegerShape.new(name: 'Port')
     PortAccessType = Shapes::StringShape.new(name: 'PortAccessType')
     PortInfo = Shapes::StructureShape.new(name: 'PortInfo')
@@ -240,22 +279,46 @@ module Aws::Lightsail
     PutInstancePublicPortsResult = Shapes::StructureShape.new(name: 'PutInstancePublicPortsResult')
     RebootInstanceRequest = Shapes::StructureShape.new(name: 'RebootInstanceRequest')
     RebootInstanceResult = Shapes::StructureShape.new(name: 'RebootInstanceResult')
+    RebootRelationalDatabaseRequest = Shapes::StructureShape.new(name: 'RebootRelationalDatabaseRequest')
+    RebootRelationalDatabaseResult = Shapes::StructureShape.new(name: 'RebootRelationalDatabaseResult')
     Region = Shapes::StructureShape.new(name: 'Region')
     RegionList = Shapes::ListShape.new(name: 'RegionList')
     RegionName = Shapes::StringShape.new(name: 'RegionName')
+    RelationalDatabase = Shapes::StructureShape.new(name: 'RelationalDatabase')
+    RelationalDatabaseBlueprint = Shapes::StructureShape.new(name: 'RelationalDatabaseBlueprint')
+    RelationalDatabaseBlueprintList = Shapes::ListShape.new(name: 'RelationalDatabaseBlueprintList')
+    RelationalDatabaseBundle = Shapes::StructureShape.new(name: 'RelationalDatabaseBundle')
+    RelationalDatabaseBundleList = Shapes::ListShape.new(name: 'RelationalDatabaseBundleList')
+    RelationalDatabaseEndpoint = Shapes::StructureShape.new(name: 'RelationalDatabaseEndpoint')
+    RelationalDatabaseEngine = Shapes::StringShape.new(name: 'RelationalDatabaseEngine')
+    RelationalDatabaseEvent = Shapes::StructureShape.new(name: 'RelationalDatabaseEvent')
+    RelationalDatabaseEventList = Shapes::ListShape.new(name: 'RelationalDatabaseEventList')
+    RelationalDatabaseHardware = Shapes::StructureShape.new(name: 'RelationalDatabaseHardware')
+    RelationalDatabaseList = Shapes::ListShape.new(name: 'RelationalDatabaseList')
+    RelationalDatabaseMetricName = Shapes::StringShape.new(name: 'RelationalDatabaseMetricName')
+    RelationalDatabaseParameter = Shapes::StructureShape.new(name: 'RelationalDatabaseParameter')
+    RelationalDatabaseParameterList = Shapes::ListShape.new(name: 'RelationalDatabaseParameterList')
+    RelationalDatabasePasswordVersion = Shapes::StringShape.new(name: 'RelationalDatabasePasswordVersion')
+    RelationalDatabaseSnapshot = Shapes::StructureShape.new(name: 'RelationalDatabaseSnapshot')
+    RelationalDatabaseSnapshotList = Shapes::ListShape.new(name: 'RelationalDatabaseSnapshotList')
     ReleaseStaticIpRequest = Shapes::StructureShape.new(name: 'ReleaseStaticIpRequest')
     ReleaseStaticIpResult = Shapes::StructureShape.new(name: 'ReleaseStaticIpResult')
     ResourceLocation = Shapes::StructureShape.new(name: 'ResourceLocation')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNameList = Shapes::ListShape.new(name: 'ResourceNameList')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     ServiceException = Shapes::StructureShape.new(name: 'ServiceException')
     StartInstanceRequest = Shapes::StructureShape.new(name: 'StartInstanceRequest')
     StartInstanceResult = Shapes::StructureShape.new(name: 'StartInstanceResult')
+    StartRelationalDatabaseRequest = Shapes::StructureShape.new(name: 'StartRelationalDatabaseRequest')
+    StartRelationalDatabaseResult = Shapes::StructureShape.new(name: 'StartRelationalDatabaseResult')
     StaticIp = Shapes::StructureShape.new(name: 'StaticIp')
     StaticIpList = Shapes::ListShape.new(name: 'StaticIpList')
     StopInstanceRequest = Shapes::StructureShape.new(name: 'StopInstanceRequest')
     StopInstanceResult = Shapes::StructureShape.new(name: 'StopInstanceResult')
+    StopRelationalDatabaseRequest = Shapes::StructureShape.new(name: 'StopRelationalDatabaseRequest')
+    StopRelationalDatabaseResult = Shapes::StructureShape.new(name: 'StopRelationalDatabaseResult')
     StringList = Shapes::ListShape.new(name: 'StringList')
     StringMax256 = Shapes::StringShape.new(name: 'StringMax256')
     UnauthenticatedException = Shapes::StructureShape.new(name: 'UnauthenticatedException')
@@ -265,6 +328,10 @@ module Aws::Lightsail
     UpdateDomainEntryResult = Shapes::StructureShape.new(name: 'UpdateDomainEntryResult')
     UpdateLoadBalancerAttributeRequest = Shapes::StructureShape.new(name: 'UpdateLoadBalancerAttributeRequest')
     UpdateLoadBalancerAttributeResult = Shapes::StructureShape.new(name: 'UpdateLoadBalancerAttributeResult')
+    UpdateRelationalDatabaseParametersRequest = Shapes::StructureShape.new(name: 'UpdateRelationalDatabaseParametersRequest')
+    UpdateRelationalDatabaseParametersResult = Shapes::StructureShape.new(name: 'UpdateRelationalDatabaseParametersResult')
+    UpdateRelationalDatabaseRequest = Shapes::StructureShape.new(name: 'UpdateRelationalDatabaseRequest')
+    UpdateRelationalDatabaseResult = Shapes::StructureShape.new(name: 'UpdateRelationalDatabaseResult')
     boolean = Shapes::BooleanShape.new(name: 'boolean')
     double = Shapes::FloatShape.new(name: 'double')
     float = Shapes::FloatShape.new(name: 'float')
@@ -451,6 +518,41 @@ module Aws::Lightsail
     CreateLoadBalancerTlsCertificateResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     CreateLoadBalancerTlsCertificateResult.struct_class = Types::CreateLoadBalancerTlsCertificateResult
 
+    CreateRelationalDatabaseFromSnapshotRequest.add_member(:relational_database_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "relationalDatabaseName"))
+    CreateRelationalDatabaseFromSnapshotRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: string, location_name: "availabilityZone"))
+    CreateRelationalDatabaseFromSnapshotRequest.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: boolean, location_name: "publiclyAccessible"))
+    CreateRelationalDatabaseFromSnapshotRequest.add_member(:relational_database_snapshot_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "relationalDatabaseSnapshotName"))
+    CreateRelationalDatabaseFromSnapshotRequest.add_member(:relational_database_bundle_id, Shapes::ShapeRef.new(shape: string, location_name: "relationalDatabaseBundleId"))
+    CreateRelationalDatabaseFromSnapshotRequest.add_member(:source_relational_database_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "sourceRelationalDatabaseName"))
+    CreateRelationalDatabaseFromSnapshotRequest.add_member(:restore_time, Shapes::ShapeRef.new(shape: IsoDate, location_name: "restoreTime"))
+    CreateRelationalDatabaseFromSnapshotRequest.add_member(:use_latest_restorable_time, Shapes::ShapeRef.new(shape: boolean, location_name: "useLatestRestorableTime"))
+    CreateRelationalDatabaseFromSnapshotRequest.struct_class = Types::CreateRelationalDatabaseFromSnapshotRequest
+
+    CreateRelationalDatabaseFromSnapshotResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    CreateRelationalDatabaseFromSnapshotResult.struct_class = Types::CreateRelationalDatabaseFromSnapshotResult
+
+    CreateRelationalDatabaseRequest.add_member(:relational_database_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "relationalDatabaseName"))
+    CreateRelationalDatabaseRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: string, location_name: "availabilityZone"))
+    CreateRelationalDatabaseRequest.add_member(:relational_database_blueprint_id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "relationalDatabaseBlueprintId"))
+    CreateRelationalDatabaseRequest.add_member(:relational_database_bundle_id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "relationalDatabaseBundleId"))
+    CreateRelationalDatabaseRequest.add_member(:master_database_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "masterDatabaseName"))
+    CreateRelationalDatabaseRequest.add_member(:master_username, Shapes::ShapeRef.new(shape: string, required: true, location_name: "masterUsername"))
+    CreateRelationalDatabaseRequest.add_member(:master_user_password, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "masterUserPassword"))
+    CreateRelationalDatabaseRequest.add_member(:preferred_backup_window, Shapes::ShapeRef.new(shape: string, location_name: "preferredBackupWindow"))
+    CreateRelationalDatabaseRequest.add_member(:preferred_maintenance_window, Shapes::ShapeRef.new(shape: string, location_name: "preferredMaintenanceWindow"))
+    CreateRelationalDatabaseRequest.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: boolean, location_name: "publiclyAccessible"))
+    CreateRelationalDatabaseRequest.struct_class = Types::CreateRelationalDatabaseRequest
+
+    CreateRelationalDatabaseResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    CreateRelationalDatabaseResult.struct_class = Types::CreateRelationalDatabaseResult
+
+    CreateRelationalDatabaseSnapshotRequest.add_member(:relational_database_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "relationalDatabaseName"))
+    CreateRelationalDatabaseSnapshotRequest.add_member(:relational_database_snapshot_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "relationalDatabaseSnapshotName"))
+    CreateRelationalDatabaseSnapshotRequest.struct_class = Types::CreateRelationalDatabaseSnapshotRequest
+
+    CreateRelationalDatabaseSnapshotResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    CreateRelationalDatabaseSnapshotResult.struct_class = Types::CreateRelationalDatabaseSnapshotResult
+
     DeleteDiskRequest.add_member(:disk_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "diskName"))
     DeleteDiskRequest.struct_class = Types::DeleteDiskRequest
 
@@ -507,6 +609,20 @@ module Aws::Lightsail
 
     DeleteLoadBalancerTlsCertificateResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     DeleteLoadBalancerTlsCertificateResult.struct_class = Types::DeleteLoadBalancerTlsCertificateResult
+
+    DeleteRelationalDatabaseRequest.add_member(:relational_database_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "relationalDatabaseName"))
+    DeleteRelationalDatabaseRequest.add_member(:skip_final_snapshot, Shapes::ShapeRef.new(shape: boolean, location_name: "skipFinalSnapshot"))
+    DeleteRelationalDatabaseRequest.add_member(:final_relational_database_snapshot_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "finalRelationalDatabaseSnapshotName"))
+    DeleteRelationalDatabaseRequest.struct_class = Types::DeleteRelationalDatabaseRequest
+
+    DeleteRelationalDatabaseResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    DeleteRelationalDatabaseResult.struct_class = Types::DeleteRelationalDatabaseResult
+
+    DeleteRelationalDatabaseSnapshotRequest.add_member(:relational_database_snapshot_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "relationalDatabaseSnapshotName"))
+    DeleteRelationalDatabaseSnapshotRequest.struct_class = Types::DeleteRelationalDatabaseSnapshotRequest
+
+    DeleteRelationalDatabaseSnapshotResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    DeleteRelationalDatabaseSnapshotResult.struct_class = Types::DeleteRelationalDatabaseSnapshotResult
 
     DetachDiskRequest.add_member(:disk_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "diskName"))
     DetachDiskRequest.struct_class = Types::DetachDiskRequest
@@ -787,10 +903,108 @@ module Aws::Lightsail
     GetOperationsResult.struct_class = Types::GetOperationsResult
 
     GetRegionsRequest.add_member(:include_availability_zones, Shapes::ShapeRef.new(shape: boolean, location_name: "includeAvailabilityZones"))
+    GetRegionsRequest.add_member(:include_relational_database_availability_zones, Shapes::ShapeRef.new(shape: boolean, location_name: "includeRelationalDatabaseAvailabilityZones"))
     GetRegionsRequest.struct_class = Types::GetRegionsRequest
 
     GetRegionsResult.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "regions"))
     GetRegionsResult.struct_class = Types::GetRegionsResult
+
+    GetRelationalDatabaseBlueprintsRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
+    GetRelationalDatabaseBlueprintsRequest.struct_class = Types::GetRelationalDatabaseBlueprintsRequest
+
+    GetRelationalDatabaseBlueprintsResult.add_member(:blueprints, Shapes::ShapeRef.new(shape: RelationalDatabaseBlueprintList, location_name: "blueprints"))
+    GetRelationalDatabaseBlueprintsResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
+    GetRelationalDatabaseBlueprintsResult.struct_class = Types::GetRelationalDatabaseBlueprintsResult
+
+    GetRelationalDatabaseBundlesRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
+    GetRelationalDatabaseBundlesRequest.struct_class = Types::GetRelationalDatabaseBundlesRequest
+
+    GetRelationalDatabaseBundlesResult.add_member(:bundles, Shapes::ShapeRef.new(shape: RelationalDatabaseBundleList, location_name: "bundles"))
+    GetRelationalDatabaseBundlesResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
+    GetRelationalDatabaseBundlesResult.struct_class = Types::GetRelationalDatabaseBundlesResult
+
+    GetRelationalDatabaseEventsRequest.add_member(:relational_database_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "relationalDatabaseName"))
+    GetRelationalDatabaseEventsRequest.add_member(:duration_in_minutes, Shapes::ShapeRef.new(shape: integer, location_name: "durationInMinutes"))
+    GetRelationalDatabaseEventsRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
+    GetRelationalDatabaseEventsRequest.struct_class = Types::GetRelationalDatabaseEventsRequest
+
+    GetRelationalDatabaseEventsResult.add_member(:relational_database_events, Shapes::ShapeRef.new(shape: RelationalDatabaseEventList, location_name: "relationalDatabaseEvents"))
+    GetRelationalDatabaseEventsResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
+    GetRelationalDatabaseEventsResult.struct_class = Types::GetRelationalDatabaseEventsResult
+
+    GetRelationalDatabaseLogEventsRequest.add_member(:relational_database_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "relationalDatabaseName"))
+    GetRelationalDatabaseLogEventsRequest.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "logStreamName"))
+    GetRelationalDatabaseLogEventsRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: IsoDate, location_name: "startTime"))
+    GetRelationalDatabaseLogEventsRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: IsoDate, location_name: "endTime"))
+    GetRelationalDatabaseLogEventsRequest.add_member(:start_from_head, Shapes::ShapeRef.new(shape: boolean, location_name: "startFromHead"))
+    GetRelationalDatabaseLogEventsRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
+    GetRelationalDatabaseLogEventsRequest.struct_class = Types::GetRelationalDatabaseLogEventsRequest
+
+    GetRelationalDatabaseLogEventsResult.add_member(:resource_log_events, Shapes::ShapeRef.new(shape: LogEventList, location_name: "resourceLogEvents"))
+    GetRelationalDatabaseLogEventsResult.add_member(:next_backward_token, Shapes::ShapeRef.new(shape: string, location_name: "nextBackwardToken"))
+    GetRelationalDatabaseLogEventsResult.add_member(:next_forward_token, Shapes::ShapeRef.new(shape: string, location_name: "nextForwardToken"))
+    GetRelationalDatabaseLogEventsResult.struct_class = Types::GetRelationalDatabaseLogEventsResult
+
+    GetRelationalDatabaseLogStreamsRequest.add_member(:relational_database_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "relationalDatabaseName"))
+    GetRelationalDatabaseLogStreamsRequest.struct_class = Types::GetRelationalDatabaseLogStreamsRequest
+
+    GetRelationalDatabaseLogStreamsResult.add_member(:log_streams, Shapes::ShapeRef.new(shape: StringList, location_name: "logStreams"))
+    GetRelationalDatabaseLogStreamsResult.struct_class = Types::GetRelationalDatabaseLogStreamsResult
+
+    GetRelationalDatabaseMasterUserPasswordRequest.add_member(:relational_database_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "relationalDatabaseName"))
+    GetRelationalDatabaseMasterUserPasswordRequest.add_member(:password_version, Shapes::ShapeRef.new(shape: RelationalDatabasePasswordVersion, location_name: "passwordVersion"))
+    GetRelationalDatabaseMasterUserPasswordRequest.struct_class = Types::GetRelationalDatabaseMasterUserPasswordRequest
+
+    GetRelationalDatabaseMasterUserPasswordResult.add_member(:master_user_password, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "masterUserPassword"))
+    GetRelationalDatabaseMasterUserPasswordResult.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
+    GetRelationalDatabaseMasterUserPasswordResult.struct_class = Types::GetRelationalDatabaseMasterUserPasswordResult
+
+    GetRelationalDatabaseMetricDataRequest.add_member(:relational_database_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "relationalDatabaseName"))
+    GetRelationalDatabaseMetricDataRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: RelationalDatabaseMetricName, required: true, location_name: "metricName"))
+    GetRelationalDatabaseMetricDataRequest.add_member(:period, Shapes::ShapeRef.new(shape: MetricPeriod, required: true, location_name: "period"))
+    GetRelationalDatabaseMetricDataRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: IsoDate, required: true, location_name: "startTime"))
+    GetRelationalDatabaseMetricDataRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: IsoDate, required: true, location_name: "endTime"))
+    GetRelationalDatabaseMetricDataRequest.add_member(:unit, Shapes::ShapeRef.new(shape: MetricUnit, required: true, location_name: "unit"))
+    GetRelationalDatabaseMetricDataRequest.add_member(:statistics, Shapes::ShapeRef.new(shape: MetricStatisticList, required: true, location_name: "statistics"))
+    GetRelationalDatabaseMetricDataRequest.struct_class = Types::GetRelationalDatabaseMetricDataRequest
+
+    GetRelationalDatabaseMetricDataResult.add_member(:metric_name, Shapes::ShapeRef.new(shape: RelationalDatabaseMetricName, location_name: "metricName"))
+    GetRelationalDatabaseMetricDataResult.add_member(:metric_data, Shapes::ShapeRef.new(shape: MetricDatapointList, location_name: "metricData"))
+    GetRelationalDatabaseMetricDataResult.struct_class = Types::GetRelationalDatabaseMetricDataResult
+
+    GetRelationalDatabaseParametersRequest.add_member(:relational_database_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "relationalDatabaseName"))
+    GetRelationalDatabaseParametersRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
+    GetRelationalDatabaseParametersRequest.struct_class = Types::GetRelationalDatabaseParametersRequest
+
+    GetRelationalDatabaseParametersResult.add_member(:parameters, Shapes::ShapeRef.new(shape: RelationalDatabaseParameterList, location_name: "parameters"))
+    GetRelationalDatabaseParametersResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
+    GetRelationalDatabaseParametersResult.struct_class = Types::GetRelationalDatabaseParametersResult
+
+    GetRelationalDatabaseRequest.add_member(:relational_database_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "relationalDatabaseName"))
+    GetRelationalDatabaseRequest.struct_class = Types::GetRelationalDatabaseRequest
+
+    GetRelationalDatabaseResult.add_member(:relational_database, Shapes::ShapeRef.new(shape: RelationalDatabase, location_name: "relationalDatabase"))
+    GetRelationalDatabaseResult.struct_class = Types::GetRelationalDatabaseResult
+
+    GetRelationalDatabaseSnapshotRequest.add_member(:relational_database_snapshot_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "relationalDatabaseSnapshotName"))
+    GetRelationalDatabaseSnapshotRequest.struct_class = Types::GetRelationalDatabaseSnapshotRequest
+
+    GetRelationalDatabaseSnapshotResult.add_member(:relational_database_snapshot, Shapes::ShapeRef.new(shape: RelationalDatabaseSnapshot, location_name: "relationalDatabaseSnapshot"))
+    GetRelationalDatabaseSnapshotResult.struct_class = Types::GetRelationalDatabaseSnapshotResult
+
+    GetRelationalDatabaseSnapshotsRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
+    GetRelationalDatabaseSnapshotsRequest.struct_class = Types::GetRelationalDatabaseSnapshotsRequest
+
+    GetRelationalDatabaseSnapshotsResult.add_member(:relational_database_snapshots, Shapes::ShapeRef.new(shape: RelationalDatabaseSnapshotList, location_name: "relationalDatabaseSnapshots"))
+    GetRelationalDatabaseSnapshotsResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
+    GetRelationalDatabaseSnapshotsResult.struct_class = Types::GetRelationalDatabaseSnapshotsResult
+
+    GetRelationalDatabasesRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
+    GetRelationalDatabasesRequest.struct_class = Types::GetRelationalDatabasesRequest
+
+    GetRelationalDatabasesResult.add_member(:relational_databases, Shapes::ShapeRef.new(shape: RelationalDatabaseList, location_name: "relationalDatabases"))
+    GetRelationalDatabasesResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
+    GetRelationalDatabasesResult.struct_class = Types::GetRelationalDatabasesResult
 
     GetStaticIpRequest.add_member(:static_ip_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "staticIpName"))
     GetStaticIpRequest.struct_class = Types::GetStaticIpRequest
@@ -995,6 +1209,12 @@ module Aws::Lightsail
 
     LoadBalancerTlsCertificateSummaryList.member = Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateSummary)
 
+    LogEvent.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
+    LogEvent.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    LogEvent.struct_class = Types::LogEvent
+
+    LogEventList.member = Shapes::ShapeRef.new(shape: LogEvent)
+
     MetricDatapoint.add_member(:average, Shapes::ShapeRef.new(shape: double, location_name: "average"))
     MetricDatapoint.add_member(:maximum, Shapes::ShapeRef.new(shape: double, location_name: "maximum"))
     MetricDatapoint.add_member(:minimum, Shapes::ShapeRef.new(shape: double, location_name: "minimum"))
@@ -1043,6 +1263,18 @@ module Aws::Lightsail
     PeerVpcResult.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "operation"))
     PeerVpcResult.struct_class = Types::PeerVpcResult
 
+    PendingMaintenanceAction.add_member(:action, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "action"))
+    PendingMaintenanceAction.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
+    PendingMaintenanceAction.add_member(:current_apply_date, Shapes::ShapeRef.new(shape: IsoDate, location_name: "currentApplyDate"))
+    PendingMaintenanceAction.struct_class = Types::PendingMaintenanceAction
+
+    PendingMaintenanceActionList.member = Shapes::ShapeRef.new(shape: PendingMaintenanceAction)
+
+    PendingModifiedRelationalDatabaseValues.add_member(:master_user_password, Shapes::ShapeRef.new(shape: string, location_name: "masterUserPassword"))
+    PendingModifiedRelationalDatabaseValues.add_member(:engine_version, Shapes::ShapeRef.new(shape: string, location_name: "engineVersion"))
+    PendingModifiedRelationalDatabaseValues.add_member(:backup_retention_enabled, Shapes::ShapeRef.new(shape: boolean, location_name: "backupRetentionEnabled"))
+    PendingModifiedRelationalDatabaseValues.struct_class = Types::PendingModifiedRelationalDatabaseValues
+
     PortInfo.add_member(:from_port, Shapes::ShapeRef.new(shape: Port, location_name: "fromPort"))
     PortInfo.add_member(:to_port, Shapes::ShapeRef.new(shape: Port, location_name: "toPort"))
     PortInfo.add_member(:protocol, Shapes::ShapeRef.new(shape: NetworkProtocol, location_name: "protocol"))
@@ -1065,14 +1297,119 @@ module Aws::Lightsail
     RebootInstanceResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     RebootInstanceResult.struct_class = Types::RebootInstanceResult
 
+    RebootRelationalDatabaseRequest.add_member(:relational_database_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "relationalDatabaseName"))
+    RebootRelationalDatabaseRequest.struct_class = Types::RebootRelationalDatabaseRequest
+
+    RebootRelationalDatabaseResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    RebootRelationalDatabaseResult.struct_class = Types::RebootRelationalDatabaseResult
+
     Region.add_member(:continent_code, Shapes::ShapeRef.new(shape: string, location_name: "continentCode"))
     Region.add_member(:description, Shapes::ShapeRef.new(shape: string, location_name: "description"))
     Region.add_member(:display_name, Shapes::ShapeRef.new(shape: string, location_name: "displayName"))
     Region.add_member(:name, Shapes::ShapeRef.new(shape: RegionName, location_name: "name"))
     Region.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZoneList, location_name: "availabilityZones"))
+    Region.add_member(:relational_database_availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZoneList, location_name: "relationalDatabaseAvailabilityZones"))
     Region.struct_class = Types::Region
 
     RegionList.member = Shapes::ShapeRef.new(shape: Region)
+
+    RelationalDatabase.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    RelationalDatabase.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
+    RelationalDatabase.add_member(:support_code, Shapes::ShapeRef.new(shape: string, location_name: "supportCode"))
+    RelationalDatabase.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
+    RelationalDatabase.add_member(:location, Shapes::ShapeRef.new(shape: ResourceLocation, location_name: "location"))
+    RelationalDatabase.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    RelationalDatabase.add_member(:relational_database_blueprint_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "relationalDatabaseBlueprintId"))
+    RelationalDatabase.add_member(:relational_database_bundle_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "relationalDatabaseBundleId"))
+    RelationalDatabase.add_member(:master_database_name, Shapes::ShapeRef.new(shape: string, location_name: "masterDatabaseName"))
+    RelationalDatabase.add_member(:hardware, Shapes::ShapeRef.new(shape: RelationalDatabaseHardware, location_name: "hardware"))
+    RelationalDatabase.add_member(:state, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "state"))
+    RelationalDatabase.add_member(:secondary_availability_zone, Shapes::ShapeRef.new(shape: string, location_name: "secondaryAvailabilityZone"))
+    RelationalDatabase.add_member(:backup_retention_enabled, Shapes::ShapeRef.new(shape: boolean, location_name: "backupRetentionEnabled"))
+    RelationalDatabase.add_member(:pending_modified_values, Shapes::ShapeRef.new(shape: PendingModifiedRelationalDatabaseValues, location_name: "pendingModifiedValues"))
+    RelationalDatabase.add_member(:engine, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "engine"))
+    RelationalDatabase.add_member(:engine_version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "engineVersion"))
+    RelationalDatabase.add_member(:latest_restorable_time, Shapes::ShapeRef.new(shape: IsoDate, location_name: "latestRestorableTime"))
+    RelationalDatabase.add_member(:master_username, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "masterUsername"))
+    RelationalDatabase.add_member(:parameter_apply_status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "parameterApplyStatus"))
+    RelationalDatabase.add_member(:preferred_backup_window, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "preferredBackupWindow"))
+    RelationalDatabase.add_member(:preferred_maintenance_window, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "preferredMaintenanceWindow"))
+    RelationalDatabase.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: boolean, location_name: "publiclyAccessible"))
+    RelationalDatabase.add_member(:master_endpoint, Shapes::ShapeRef.new(shape: RelationalDatabaseEndpoint, location_name: "masterEndpoint"))
+    RelationalDatabase.add_member(:pending_maintenance_actions, Shapes::ShapeRef.new(shape: PendingMaintenanceActionList, location_name: "pendingMaintenanceActions"))
+    RelationalDatabase.struct_class = Types::RelationalDatabase
+
+    RelationalDatabaseBlueprint.add_member(:blueprint_id, Shapes::ShapeRef.new(shape: string, location_name: "blueprintId"))
+    RelationalDatabaseBlueprint.add_member(:engine, Shapes::ShapeRef.new(shape: RelationalDatabaseEngine, location_name: "engine"))
+    RelationalDatabaseBlueprint.add_member(:engine_version, Shapes::ShapeRef.new(shape: string, location_name: "engineVersion"))
+    RelationalDatabaseBlueprint.add_member(:engine_description, Shapes::ShapeRef.new(shape: string, location_name: "engineDescription"))
+    RelationalDatabaseBlueprint.add_member(:engine_version_description, Shapes::ShapeRef.new(shape: string, location_name: "engineVersionDescription"))
+    RelationalDatabaseBlueprint.add_member(:is_engine_default, Shapes::ShapeRef.new(shape: boolean, location_name: "isEngineDefault"))
+    RelationalDatabaseBlueprint.struct_class = Types::RelationalDatabaseBlueprint
+
+    RelationalDatabaseBlueprintList.member = Shapes::ShapeRef.new(shape: RelationalDatabaseBlueprint)
+
+    RelationalDatabaseBundle.add_member(:bundle_id, Shapes::ShapeRef.new(shape: string, location_name: "bundleId"))
+    RelationalDatabaseBundle.add_member(:name, Shapes::ShapeRef.new(shape: string, location_name: "name"))
+    RelationalDatabaseBundle.add_member(:price, Shapes::ShapeRef.new(shape: float, location_name: "price"))
+    RelationalDatabaseBundle.add_member(:ram_size_in_gb, Shapes::ShapeRef.new(shape: float, location_name: "ramSizeInGb"))
+    RelationalDatabaseBundle.add_member(:disk_size_in_gb, Shapes::ShapeRef.new(shape: integer, location_name: "diskSizeInGb"))
+    RelationalDatabaseBundle.add_member(:transfer_per_month_in_gb, Shapes::ShapeRef.new(shape: integer, location_name: "transferPerMonthInGb"))
+    RelationalDatabaseBundle.add_member(:cpu_count, Shapes::ShapeRef.new(shape: integer, location_name: "cpuCount"))
+    RelationalDatabaseBundle.add_member(:is_encrypted, Shapes::ShapeRef.new(shape: boolean, location_name: "isEncrypted"))
+    RelationalDatabaseBundle.add_member(:is_active, Shapes::ShapeRef.new(shape: boolean, location_name: "isActive"))
+    RelationalDatabaseBundle.struct_class = Types::RelationalDatabaseBundle
+
+    RelationalDatabaseBundleList.member = Shapes::ShapeRef.new(shape: RelationalDatabaseBundle)
+
+    RelationalDatabaseEndpoint.add_member(:port, Shapes::ShapeRef.new(shape: integer, location_name: "port"))
+    RelationalDatabaseEndpoint.add_member(:address, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "address"))
+    RelationalDatabaseEndpoint.struct_class = Types::RelationalDatabaseEndpoint
+
+    RelationalDatabaseEvent.add_member(:resource, Shapes::ShapeRef.new(shape: ResourceName, location_name: "resource"))
+    RelationalDatabaseEvent.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
+    RelationalDatabaseEvent.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    RelationalDatabaseEvent.add_member(:event_categories, Shapes::ShapeRef.new(shape: StringList, location_name: "eventCategories"))
+    RelationalDatabaseEvent.struct_class = Types::RelationalDatabaseEvent
+
+    RelationalDatabaseEventList.member = Shapes::ShapeRef.new(shape: RelationalDatabaseEvent)
+
+    RelationalDatabaseHardware.add_member(:cpu_count, Shapes::ShapeRef.new(shape: integer, location_name: "cpuCount"))
+    RelationalDatabaseHardware.add_member(:disk_size_in_gb, Shapes::ShapeRef.new(shape: integer, location_name: "diskSizeInGb"))
+    RelationalDatabaseHardware.add_member(:ram_size_in_gb, Shapes::ShapeRef.new(shape: float, location_name: "ramSizeInGb"))
+    RelationalDatabaseHardware.struct_class = Types::RelationalDatabaseHardware
+
+    RelationalDatabaseList.member = Shapes::ShapeRef.new(shape: RelationalDatabase)
+
+    RelationalDatabaseParameter.add_member(:allowed_values, Shapes::ShapeRef.new(shape: string, location_name: "allowedValues"))
+    RelationalDatabaseParameter.add_member(:apply_method, Shapes::ShapeRef.new(shape: string, location_name: "applyMethod"))
+    RelationalDatabaseParameter.add_member(:apply_type, Shapes::ShapeRef.new(shape: string, location_name: "applyType"))
+    RelationalDatabaseParameter.add_member(:data_type, Shapes::ShapeRef.new(shape: string, location_name: "dataType"))
+    RelationalDatabaseParameter.add_member(:description, Shapes::ShapeRef.new(shape: string, location_name: "description"))
+    RelationalDatabaseParameter.add_member(:is_modifiable, Shapes::ShapeRef.new(shape: boolean, location_name: "isModifiable"))
+    RelationalDatabaseParameter.add_member(:parameter_name, Shapes::ShapeRef.new(shape: string, location_name: "parameterName"))
+    RelationalDatabaseParameter.add_member(:parameter_value, Shapes::ShapeRef.new(shape: string, location_name: "parameterValue"))
+    RelationalDatabaseParameter.struct_class = Types::RelationalDatabaseParameter
+
+    RelationalDatabaseParameterList.member = Shapes::ShapeRef.new(shape: RelationalDatabaseParameter)
+
+    RelationalDatabaseSnapshot.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    RelationalDatabaseSnapshot.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
+    RelationalDatabaseSnapshot.add_member(:support_code, Shapes::ShapeRef.new(shape: string, location_name: "supportCode"))
+    RelationalDatabaseSnapshot.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
+    RelationalDatabaseSnapshot.add_member(:location, Shapes::ShapeRef.new(shape: ResourceLocation, location_name: "location"))
+    RelationalDatabaseSnapshot.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    RelationalDatabaseSnapshot.add_member(:engine, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "engine"))
+    RelationalDatabaseSnapshot.add_member(:engine_version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "engineVersion"))
+    RelationalDatabaseSnapshot.add_member(:size_in_gb, Shapes::ShapeRef.new(shape: integer, location_name: "sizeInGb"))
+    RelationalDatabaseSnapshot.add_member(:state, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "state"))
+    RelationalDatabaseSnapshot.add_member(:from_relational_database_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "fromRelationalDatabaseName"))
+    RelationalDatabaseSnapshot.add_member(:from_relational_database_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "fromRelationalDatabaseArn"))
+    RelationalDatabaseSnapshot.add_member(:from_relational_database_bundle_id, Shapes::ShapeRef.new(shape: string, location_name: "fromRelationalDatabaseBundleId"))
+    RelationalDatabaseSnapshot.add_member(:from_relational_database_blueprint_id, Shapes::ShapeRef.new(shape: string, location_name: "fromRelationalDatabaseBlueprintId"))
+    RelationalDatabaseSnapshot.struct_class = Types::RelationalDatabaseSnapshot
+
+    RelationalDatabaseSnapshotList.member = Shapes::ShapeRef.new(shape: RelationalDatabaseSnapshot)
 
     ReleaseStaticIpRequest.add_member(:static_ip_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "staticIpName"))
     ReleaseStaticIpRequest.struct_class = Types::ReleaseStaticIpRequest
@@ -1091,6 +1428,12 @@ module Aws::Lightsail
 
     StartInstanceResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     StartInstanceResult.struct_class = Types::StartInstanceResult
+
+    StartRelationalDatabaseRequest.add_member(:relational_database_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "relationalDatabaseName"))
+    StartRelationalDatabaseRequest.struct_class = Types::StartRelationalDatabaseRequest
+
+    StartRelationalDatabaseResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    StartRelationalDatabaseResult.struct_class = Types::StartRelationalDatabaseResult
 
     StaticIp.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     StaticIp.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
@@ -1111,6 +1454,13 @@ module Aws::Lightsail
 
     StopInstanceResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     StopInstanceResult.struct_class = Types::StopInstanceResult
+
+    StopRelationalDatabaseRequest.add_member(:relational_database_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "relationalDatabaseName"))
+    StopRelationalDatabaseRequest.add_member(:relational_database_snapshot_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "relationalDatabaseSnapshotName"))
+    StopRelationalDatabaseRequest.struct_class = Types::StopRelationalDatabaseRequest
+
+    StopRelationalDatabaseResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    StopRelationalDatabaseResult.struct_class = Types::StopRelationalDatabaseResult
 
     StringList.member = Shapes::ShapeRef.new(shape: string)
 
@@ -1133,6 +1483,27 @@ module Aws::Lightsail
 
     UpdateLoadBalancerAttributeResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     UpdateLoadBalancerAttributeResult.struct_class = Types::UpdateLoadBalancerAttributeResult
+
+    UpdateRelationalDatabaseParametersRequest.add_member(:relational_database_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "relationalDatabaseName"))
+    UpdateRelationalDatabaseParametersRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: RelationalDatabaseParameterList, required: true, location_name: "parameters"))
+    UpdateRelationalDatabaseParametersRequest.struct_class = Types::UpdateRelationalDatabaseParametersRequest
+
+    UpdateRelationalDatabaseParametersResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    UpdateRelationalDatabaseParametersResult.struct_class = Types::UpdateRelationalDatabaseParametersResult
+
+    UpdateRelationalDatabaseRequest.add_member(:relational_database_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "relationalDatabaseName"))
+    UpdateRelationalDatabaseRequest.add_member(:master_user_password, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "masterUserPassword"))
+    UpdateRelationalDatabaseRequest.add_member(:rotate_master_user_password, Shapes::ShapeRef.new(shape: boolean, location_name: "rotateMasterUserPassword"))
+    UpdateRelationalDatabaseRequest.add_member(:preferred_backup_window, Shapes::ShapeRef.new(shape: string, location_name: "preferredBackupWindow"))
+    UpdateRelationalDatabaseRequest.add_member(:preferred_maintenance_window, Shapes::ShapeRef.new(shape: string, location_name: "preferredMaintenanceWindow"))
+    UpdateRelationalDatabaseRequest.add_member(:enable_backup_retention, Shapes::ShapeRef.new(shape: boolean, location_name: "enableBackupRetention"))
+    UpdateRelationalDatabaseRequest.add_member(:disable_backup_retention, Shapes::ShapeRef.new(shape: boolean, location_name: "disableBackupRetention"))
+    UpdateRelationalDatabaseRequest.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: boolean, location_name: "publiclyAccessible"))
+    UpdateRelationalDatabaseRequest.add_member(:apply_immediately, Shapes::ShapeRef.new(shape: boolean, location_name: "applyImmediately"))
+    UpdateRelationalDatabaseRequest.struct_class = Types::UpdateRelationalDatabaseRequest
+
+    UpdateRelationalDatabaseResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    UpdateRelationalDatabaseResult.struct_class = Types::UpdateRelationalDatabaseResult
 
 
     # @api private
@@ -1407,6 +1778,51 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
+      api.add_operation(:create_relational_database, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRelationalDatabase"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateRelationalDatabaseRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRelationalDatabaseResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:create_relational_database_from_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRelationalDatabaseFromSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateRelationalDatabaseFromSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRelationalDatabaseFromSnapshotResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:create_relational_database_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRelationalDatabaseSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateRelationalDatabaseSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRelationalDatabaseSnapshotResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
       api.add_operation(:delete_disk, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDisk"
         o.http_method = "POST"
@@ -1533,6 +1949,36 @@ module Aws::Lightsail
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteLoadBalancerTlsCertificateRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteLoadBalancerTlsCertificateResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:delete_relational_database, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRelationalDatabase"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRelationalDatabaseRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRelationalDatabaseResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:delete_relational_database_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRelationalDatabaseSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRelationalDatabaseSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRelationalDatabaseSnapshotResult)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2007,6 +2453,186 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
+      api.add_operation(:get_relational_database, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRelationalDatabase"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRelationalDatabaseRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRelationalDatabaseResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_relational_database_blueprints, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRelationalDatabaseBlueprints"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRelationalDatabaseBlueprintsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRelationalDatabaseBlueprintsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_relational_database_bundles, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRelationalDatabaseBundles"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRelationalDatabaseBundlesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRelationalDatabaseBundlesResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_relational_database_events, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRelationalDatabaseEvents"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRelationalDatabaseEventsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRelationalDatabaseEventsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_relational_database_log_events, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRelationalDatabaseLogEvents"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRelationalDatabaseLogEventsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRelationalDatabaseLogEventsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_relational_database_log_streams, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRelationalDatabaseLogStreams"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRelationalDatabaseLogStreamsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRelationalDatabaseLogStreamsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_relational_database_master_user_password, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRelationalDatabaseMasterUserPassword"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRelationalDatabaseMasterUserPasswordRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRelationalDatabaseMasterUserPasswordResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_relational_database_metric_data, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRelationalDatabaseMetricData"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRelationalDatabaseMetricDataRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRelationalDatabaseMetricDataResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_relational_database_parameters, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRelationalDatabaseParameters"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRelationalDatabaseParametersRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRelationalDatabaseParametersResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_relational_database_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRelationalDatabaseSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRelationalDatabaseSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRelationalDatabaseSnapshotResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_relational_database_snapshots, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRelationalDatabaseSnapshots"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRelationalDatabaseSnapshotsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRelationalDatabaseSnapshotsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_relational_databases, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRelationalDatabases"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRelationalDatabasesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRelationalDatabasesResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
       api.add_operation(:get_static_ip, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetStaticIp"
         o.http_method = "POST"
@@ -2127,6 +2753,21 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
+      api.add_operation(:reboot_relational_database, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RebootRelationalDatabase"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RebootRelationalDatabaseRequest)
+        o.output = Shapes::ShapeRef.new(shape: RebootRelationalDatabaseResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
       api.add_operation(:release_static_ip, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ReleaseStaticIp"
         o.http_method = "POST"
@@ -2157,12 +2798,42 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
+      api.add_operation(:start_relational_database, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartRelationalDatabase"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartRelationalDatabaseRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartRelationalDatabaseResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
       api.add_operation(:stop_instance, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StopInstance"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StopInstanceRequest)
         o.output = Shapes::ShapeRef.new(shape: StopInstanceResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:stop_relational_database, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopRelationalDatabase"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopRelationalDatabaseRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopRelationalDatabaseResult)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2208,6 +2879,36 @@ module Aws::Lightsail
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateLoadBalancerAttributeRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateLoadBalancerAttributeResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:update_relational_database, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRelationalDatabase"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRelationalDatabaseRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRelationalDatabaseResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:update_relational_database_parameters, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRelationalDatabaseParameters"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRelationalDatabaseParametersRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRelationalDatabaseParametersResult)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)

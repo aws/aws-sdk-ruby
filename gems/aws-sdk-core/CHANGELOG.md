@@ -3,6 +3,21 @@ Unreleased Changes
 
 * Feature - Allow 429 response code to trigger throttle detection
 
+3.33.0 (2018-10-22)
+------------------
+
+* Feature - Update to code paths and plugins for future SDK instrumentation and telemetry.
+
+3.32.0 (2018-10-18)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.31.0 (2018-10-16)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
 3.30.0 (2018-10-04)
 ------------------
 

@@ -197,7 +197,7 @@ module Aws::CloudTrail
     #   Specifies the ARN of the trail to which one or more tags will be
     #   added. The format of a trail ARN is:
     #
-    #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
     # @option params [Array<Types::Tag>] :tags_list
     #   Contains a list of CloudTrail tags, up to a limit of 50
@@ -311,9 +311,9 @@ module Aws::CloudTrail
     #
     #   * alias/MyAliasName
     #
-    #   * arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+    #   * arn:aws:kms:us-east-2:123456789012:alias/MyAliasName
     #
-    #   * arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+    #   * arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
     #
     #   * 12345678-1234-1234-1234-123456789012
     #
@@ -379,7 +379,7 @@ module Aws::CloudTrail
     # @option params [required, String] :name
     #   Specifies the name or the CloudTrail ARN of the trail to be deleted.
     #   The format of a trail ARN is:
-    #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -405,7 +405,7 @@ module Aws::CloudTrail
     #   Specifies a list of trail names, trail ARNs, or both, of the trails to
     #   describe. The format of a trail ARN is:
     #
-    #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
     #   If an empty list is specified, information for the trail in the
     #   current region is returned.
@@ -471,12 +471,14 @@ module Aws::CloudTrail
     # your trail. The information returned for your event selectors includes
     # the following:
     #
-    # * The S3 objects that you are logging for data events.
+    # * If your event selector includes read-only events, write-only events,
+    #   or all events. This applies to both management events and data
+    #   events.
     #
     # * If your event selector includes management events.
     #
-    # * If your event selector includes read-only events, write-only events,
-    #   or all.
+    # * If your event selector includes data events, the Amazon S3 objects
+    #   or AWS Lambda functions that you are logging for data events.
     #
     # For more information, see [Logging Data and Management Events for
     # Trails ][1] in the *AWS CloudTrail User Guide*.
@@ -497,13 +499,13 @@ module Aws::CloudTrail
     #   * Be between 3 and 128 characters
     #
     #   * Have no adjacent periods, underscores or dashes. Names like
-    #     `my-_namespace` and `my--namespace` are invalid.
+    #     `my-_namespace` and `my--namespace` are not valid.
     #
     #   * Not be in IP address format (for example, 192.168.5.4)
     #
     #   If you specify a trail ARN, it must be in the format:
     #
-    #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
     # @return [Types::GetEventSelectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -549,7 +551,7 @@ module Aws::CloudTrail
     #   replication of the trail in another region), you must specify its ARN.
     #   The format of a trail ARN is:
     #
-    #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
     # @return [Types::GetTrailStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -668,7 +670,7 @@ module Aws::CloudTrail
     #   Specifies a list of trail ARNs whose tags will be listed. The list has
     #   a limit of 20 ARNs. The format of a trail ARN is:
     #
-    #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
     # @option params [String] :next_token
     #   Reserved for future use.
@@ -703,17 +705,19 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Looks up API activity events captured by CloudTrail that create,
-    # update, or delete resources in your account. Events for a region can
-    # be looked up for the times in which you had CloudTrail turned on in
-    # that region during the last seven days. Lookup supports the following
-    # attributes:
+    # Looks up [management events][1] captured by CloudTrail. Events for a
+    # region can be looked up in that region during the last 90 days. Lookup
+    # supports the following attributes:
+    #
+    # * AWS access key
     #
     # * Event ID
     #
     # * Event name
     #
     # * Event source
+    #
+    # * Read only
     #
     # * Resource name
     #
@@ -722,7 +726,7 @@ module Aws::CloudTrail
     # * User name
     #
     # All attributes are optional. The default number of results returned is
-    # 10, with a maximum of 50 possible. The response includes a token that
+    # 50, with a maximum of 50 possible. The response includes a token that
     # you can use to get the next page of results.
     #
     # The rate of lookup requests is limited to one per second per account.
@@ -731,6 +735,10 @@ module Aws::CloudTrail
     # Events that occurred during the selected time range will not be
     # available for lookup if CloudTrail logging was not enabled when the
     # events occurred.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-management-events
     #
     # @option params [Array<Types::LookupAttribute>] :lookup_attributes
     #   Contains a list of lookup attributes. Currently the list can contain
@@ -748,7 +756,7 @@ module Aws::CloudTrail
     #
     # @option params [Integer] :max_results
     #   The number of events to return. Possible values are 1 through 50. The
-    #   default is 10.
+    #   default is 50.
     #
     # @option params [String] :next_token
     #   The token to use to get the next page of results after a previous API
@@ -767,7 +775,7 @@ module Aws::CloudTrail
     #   resp = client.lookup_events({
     #     lookup_attributes: [
     #       {
-    #         attribute_key: "EventId", # required, accepts EventId, EventName, Username, ResourceType, ResourceName, EventSource
+    #         attribute_key: "EventId", # required, accepts EventId, EventName, ReadOnly, Username, ResourceType, ResourceName, EventSource, AccessKeyId
     #         attribute_value: "String", # required
     #       },
     #     ],
@@ -782,6 +790,8 @@ module Aws::CloudTrail
     #   resp.events #=> Array
     #   resp.events[0].event_id #=> String
     #   resp.events[0].event_name #=> String
+    #   resp.events[0].read_only #=> String
+    #   resp.events[0].access_key_id #=> String
     #   resp.events[0].event_time #=> Time
     #   resp.events[0].event_source #=> String
     #   resp.events[0].username #=> String
@@ -801,12 +811,15 @@ module Aws::CloudTrail
     end
 
     # Configures an event selector for your trail. Use event selectors to
-    # specify whether you want your trail to log management and/or data
-    # events. When an event occurs in your account, CloudTrail evaluates the
-    # event selectors in all trails. For each trail, if the event matches
-    # any event selector, the trail processes and logs the event. If the
-    # event doesn't match any event selector, the trail doesn't log the
-    # event.
+    # further specify the management and data event settings for your trail.
+    # By default, trails created without specific event selectors will be
+    # configured to log all read and write management events, and no data
+    # events.
+    #
+    # When an event occurs in your account, CloudTrail evaluates the event
+    # selectors in all trails. For each trail, if the event matches any
+    # event selector, the trail processes and logs the event. If the event
+    # doesn't match any event selector, the trail doesn't log the event.
     #
     # Example
     #
@@ -831,11 +844,12 @@ module Aws::CloudTrail
     #
     # You can configure up to five event selectors for each trail. For more
     # information, see [Logging Data and Management Events for Trails ][1]
-    # in the *AWS CloudTrail User Guide*.
+    # and [Limits in AWS CloudTrail][2] in the *AWS CloudTrail User Guide*.
     #
     #
     #
     # [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html
+    # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html
     #
     # @option params [required, String] :trail_name
     #   Specifies the name of the trail or trail ARN. If you specify a trail
@@ -855,7 +869,7 @@ module Aws::CloudTrail
     #
     #   If you specify a trail ARN, it must be in the format:
     #
-    #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
     # @option params [required, Array<Types::EventSelector>] :event_selectors
     #   Specifies the settings for your event selectors. You can configure up
@@ -910,7 +924,7 @@ module Aws::CloudTrail
     #   Specifies the ARN of the trail from which tags should be removed. The
     #   format of a trail ARN is:
     #
-    #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
     # @option params [Array<Types::Tag>] :tags_list
     #   Specifies a list of tags to be removed.
@@ -948,7 +962,7 @@ module Aws::CloudTrail
     #   Specifies the name or the CloudTrail ARN of the trail for which
     #   CloudTrail logs AWS API calls. The format of a trail ARN is:
     #
-    #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -981,7 +995,7 @@ module Aws::CloudTrail
     #   CloudTrail will stop logging AWS API calls. The format of a trail ARN
     #   is:
     #
-    #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1026,7 +1040,7 @@ module Aws::CloudTrail
     #
     #   If `Name` is a trail ARN, it must be in the format:
     #
-    #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
     # @option params [String] :s3_bucket_name
     #   Specifies the name of the Amazon S3 bucket designated for publishing
@@ -1099,9 +1113,9 @@ module Aws::CloudTrail
     #
     #   * alias/MyAliasName
     #
-    #   * arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+    #   * arn:aws:kms:us-east-2:123456789012:alias/MyAliasName
     #
-    #   * arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+    #   * arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
     #
     #   * 12345678-1234-1234-1234-123456789012
     #
@@ -1172,7 +1186,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -304,6 +304,36 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Stops a Maintenance Window execution that is already in progress and
+    # cancels any tasks in the window that have not already starting
+    # running. (Tasks already in progress will continue to completion.)
+    #
+    # @option params [required, String] :window_execution_id
+    #   The ID of the Maintenance Window execution to stop.
+    #
+    # @return [Types::CancelMaintenanceWindowExecutionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelMaintenanceWindowExecutionResult#window_execution_id #window_execution_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_maintenance_window_execution({
+    #     window_execution_id: "MaintenanceWindowExecutionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.window_execution_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CancelMaintenanceWindowExecution AWS API Documentation
+    #
+    # @overload cancel_maintenance_window_execution(params = {})
+    # @param [Hash] params ({})
+    def cancel_maintenance_window_execution(params = {}, options = {})
+      req = build_request(:cancel_maintenance_window_execution, params)
+      req.send_request(options)
+    end
+
     # Registers your on-premises server or virtual machine with Amazon EC2
     # so that you can manage these resources using Run Command. An
     # on-premises server or virtual machine that has been registered with
@@ -407,6 +437,35 @@ module Aws::SSM
     # @option params [String] :association_name
     #   Specify a descriptive name for the association.
     #
+    # @option params [String] :max_errors
+    #   The number of errors that are allowed before the system stops sending
+    #   requests to run the association on additional targets. You can specify
+    #   either an absolute number of errors, for example 10, or a percentage
+    #   of the target set, for example 10%. If you specify 3, for example, the
+    #   system stops sending requests when the fourth error is received. If
+    #   you specify 0, then the system stops sending requests after the first
+    #   error is returned. If you run an association on 50 instances and set
+    #   MaxError to 10%, then the system stops sending the request when the
+    #   sixth error is received.
+    #
+    #   Executions that are already running an association when MaxErrors is
+    #   reached are allowed to complete, but some of these executions may fail
+    #   as well. If you need to ensure that there won't be more than
+    #   max-errors failed executions, set MaxConcurrency to 1 so that
+    #   executions proceed one at a time.
+    #
+    # @option params [String] :max_concurrency
+    #   The maximum number of targets allowed to run the association at the
+    #   same time. You can specify a number, for example 10, or a percentage
+    #   of the target set, for example 10%. The default value is 100%, which
+    #   means all targets run the association at the same time.
+    #
+    #   If a new instance starts and attempts to execute an association while
+    #   Systems Manager is executing MaxConcurrency associations, the
+    #   association is allowed to run. During the next association interval,
+    #   the new instance will process its association within the limit
+    #   specified for MaxConcurrency.
+    #
     # @return [Types::CreateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -435,6 +494,8 @@ module Aws::SSM
     #       },
     #     },
     #     association_name: "AssociationName",
+    #     max_errors: "MaxErrors",
+    #     max_concurrency: "MaxConcurrency",
     #   })
     #
     # @example Response structure
@@ -468,6 +529,8 @@ module Aws::SSM
     #   resp.association_description.last_execution_date #=> Time
     #   resp.association_description.last_successful_execution_date #=> Time
     #   resp.association_description.association_name #=> String
+    #   resp.association_description.max_errors #=> String
+    #   resp.association_description.max_concurrency #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociation AWS API Documentation
     #
@@ -523,6 +586,8 @@ module Aws::SSM
     #           },
     #         },
     #         association_name: "AssociationName",
+    #         max_errors: "MaxErrors",
+    #         max_concurrency: "MaxConcurrency",
     #       },
     #     ],
     #   })
@@ -559,6 +624,8 @@ module Aws::SSM
     #   resp.successful[0].last_execution_date #=> Time
     #   resp.successful[0].last_successful_execution_date #=> Time
     #   resp.successful[0].association_name #=> String
+    #   resp.successful[0].max_errors #=> String
+    #   resp.successful[0].max_concurrency #=> String
     #   resp.failed #=> Array
     #   resp.failed[0].entry.name #=> String
     #   resp.failed[0].entry.instance_id #=> String
@@ -575,6 +642,8 @@ module Aws::SSM
     #   resp.failed[0].entry.output_location.s3_location.output_s3_bucket_name #=> String
     #   resp.failed[0].entry.output_location.s3_location.output_s3_key_prefix #=> String
     #   resp.failed[0].entry.association_name #=> String
+    #   resp.failed[0].entry.max_errors #=> String
+    #   resp.failed[0].entry.max_concurrency #=> String
     #   resp.failed[0].message #=> String
     #   resp.failed[0].fault #=> String, one of "Client", "Server", "Unknown"
     #
@@ -689,9 +758,30 @@ module Aws::SSM
     #   specifying a description to help you organize your Maintenance
     #   Windows.
     #
+    # @option params [String] :start_date
+    #   The date and time, in ISO-8601 Extended format, for when you want the
+    #   Maintenance Window to become active. StartDate allows you to delay
+    #   activation of the Maintenance Window until the specified future date.
+    #
+    # @option params [String] :end_date
+    #   The date and time, in ISO-8601 Extended format, for when you want the
+    #   Maintenance Window to become inactive. EndDate allows you to set a
+    #   date and time in the future when the Maintenance Window will no longer
+    #   run.
+    #
     # @option params [required, String] :schedule
     #   The schedule of the Maintenance Window in the form of a cron or rate
     #   expression.
+    #
+    # @option params [String] :schedule_timezone
+    #   The time zone that the scheduled Maintenance Window executions are
+    #   based on, in Internet Assigned Numbers Authority (IANA) format. For
+    #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul". For
+    #   more information, see the [Time Zone Database][1] on the IANA website.
+    #
+    #
+    #
+    #   [1]: https://www.iana.org/time-zones
     #
     # @option params [required, Integer] :duration
     #   The duration of the Maintenance Window in hours.
@@ -725,7 +815,10 @@ module Aws::SSM
     #   resp = client.create_maintenance_window({
     #     name: "MaintenanceWindowName", # required
     #     description: "MaintenanceWindowDescription",
+    #     start_date: "MaintenanceWindowStringDateTime",
+    #     end_date: "MaintenanceWindowStringDateTime",
     #     schedule: "MaintenanceWindowSchedule", # required
+    #     schedule_timezone: "MaintenanceWindowTimezone",
     #     duration: 1, # required
     #     cutoff: 1, # required
     #     allow_unassociated_targets: false, # required
@@ -1498,6 +1591,8 @@ module Aws::SSM
     #   resp.association_description.last_execution_date #=> Time
     #   resp.association_description.last_successful_execution_date #=> Time
     #   resp.association_description.association_name #=> String
+    #   resp.association_description.max_errors #=> String
+    #   resp.association_description.max_concurrency #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociation AWS API Documentation
     #
@@ -2147,7 +2242,8 @@ module Aws::SSM
     #
     # @option params [Array<Types::InstanceInformationStringFilter>] :filters
     #   One or more filters. Use a filter to return a more specific list of
-    #   instances.
+    #   instances. You can filter on Amazon EC2 tag. Specify tags by using a
+    #   key-value mapping.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this call. The call also
@@ -2657,6 +2753,76 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Retrieves information about upcoming executions of a Maintenance
+    # Window.
+    #
+    # @option params [String] :window_id
+    #   The ID of the Maintenance Window to retrieve information about.
+    #
+    # @option params [Array<Types::Target>] :targets
+    #   The instance ID or key/value pair to retrieve information about.
+    #
+    # @option params [String] :resource_type
+    #   The type of resource you want to retrieve information about. For
+    #   example, "INSTANCE".
+    #
+    # @option params [Array<Types::PatchOrchestratorFilter>] :filters
+    #   Filters used to limit the range of results. For example, you can limit
+    #   Maintenance Window executions to only those scheduled before or after
+    #   a certain date and time.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #
+    # @return [Types::DescribeMaintenanceWindowScheduleResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMaintenanceWindowScheduleResult#scheduled_window_executions #scheduled_window_executions} => Array&lt;Types::ScheduledWindowExecution&gt;
+    #   * {Types::DescribeMaintenanceWindowScheduleResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_maintenance_window_schedule({
+    #     window_id: "MaintenanceWindowId",
+    #     targets: [
+    #       {
+    #         key: "TargetKey",
+    #         values: ["TargetValue"],
+    #       },
+    #     ],
+    #     resource_type: "INSTANCE", # accepts INSTANCE
+    #     filters: [
+    #       {
+    #         key: "PatchOrchestratorFilterKey",
+    #         values: ["PatchOrchestratorFilterValue"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scheduled_window_executions #=> Array
+    #   resp.scheduled_window_executions[0].window_id #=> String
+    #   resp.scheduled_window_executions[0].name #=> String
+    #   resp.scheduled_window_executions[0].execution_time #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowSchedule AWS API Documentation
+    #
+    # @overload describe_maintenance_window_schedule(params = {})
+    # @param [Hash] params ({})
+    def describe_maintenance_window_schedule(params = {}, options = {})
+      req = build_request(:describe_maintenance_window_schedule, params)
+      req.send_request(options)
+    end
+
     # Lists the targets registered with the Maintenance Window.
     #
     # @option params [required, String] :window_id
@@ -2833,6 +2999,11 @@ module Aws::SSM
     #   resp.window_identities[0].enabled #=> Boolean
     #   resp.window_identities[0].duration #=> Integer
     #   resp.window_identities[0].cutoff #=> Integer
+    #   resp.window_identities[0].schedule #=> String
+    #   resp.window_identities[0].schedule_timezone #=> String
+    #   resp.window_identities[0].end_date #=> String
+    #   resp.window_identities[0].start_date #=> String
+    #   resp.window_identities[0].next_execution_time #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindows AWS API Documentation
@@ -2841,6 +3012,60 @@ module Aws::SSM
     # @param [Hash] params ({})
     def describe_maintenance_windows(params = {}, options = {})
       req = build_request(:describe_maintenance_windows, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about the Maintenance Windows targets or tasks
+    # that an instance is associated with.
+    #
+    # @option params [required, Array<Types::Target>] :targets
+    #   The instance ID or key/value pair to retrieve information about.
+    #
+    # @option params [required, String] :resource_type
+    #   The type of resource you want to retrieve information about. For
+    #   example, "INSTANCE".
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #
+    # @return [Types::DescribeMaintenanceWindowsForTargetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMaintenanceWindowsForTargetResult#window_identities #window_identities} => Array&lt;Types::MaintenanceWindowIdentityForTarget&gt;
+    #   * {Types::DescribeMaintenanceWindowsForTargetResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_maintenance_windows_for_target({
+    #     targets: [ # required
+    #       {
+    #         key: "TargetKey",
+    #         values: ["TargetValue"],
+    #       },
+    #     ],
+    #     resource_type: "INSTANCE", # required, accepts INSTANCE
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.window_identities #=> Array
+    #   resp.window_identities[0].window_id #=> String
+    #   resp.window_identities[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowsForTarget AWS API Documentation
+    #
+    # @overload describe_maintenance_windows_for_target(params = {})
+    # @param [Hash] params ({})
+    def describe_maintenance_windows_for_target(params = {}, options = {})
+      req = build_request(:describe_maintenance_windows_for_target, params)
       req.send_request(options)
     end
 
@@ -3608,7 +3833,11 @@ module Aws::SSM
     #   * {Types::GetMaintenanceWindowResult#window_id #window_id} => String
     #   * {Types::GetMaintenanceWindowResult#name #name} => String
     #   * {Types::GetMaintenanceWindowResult#description #description} => String
+    #   * {Types::GetMaintenanceWindowResult#start_date #start_date} => String
+    #   * {Types::GetMaintenanceWindowResult#end_date #end_date} => String
     #   * {Types::GetMaintenanceWindowResult#schedule #schedule} => String
+    #   * {Types::GetMaintenanceWindowResult#schedule_timezone #schedule_timezone} => String
+    #   * {Types::GetMaintenanceWindowResult#next_execution_time #next_execution_time} => String
     #   * {Types::GetMaintenanceWindowResult#duration #duration} => Integer
     #   * {Types::GetMaintenanceWindowResult#cutoff #cutoff} => Integer
     #   * {Types::GetMaintenanceWindowResult#allow_unassociated_targets #allow_unassociated_targets} => Boolean
@@ -3627,7 +3856,11 @@ module Aws::SSM
     #   resp.window_id #=> String
     #   resp.name #=> String
     #   resp.description #=> String
+    #   resp.start_date #=> String
+    #   resp.end_date #=> String
     #   resp.schedule #=> String
+    #   resp.schedule_timezone #=> String
+    #   resp.next_execution_time #=> String
     #   resp.duration #=> Integer
     #   resp.cutoff #=> Integer
     #   resp.allow_unassociated_targets #=> Boolean
@@ -4366,6 +4599,8 @@ module Aws::SSM
     #   resp.association_versions[0].output_location.s3_location.output_s3_bucket_name #=> String
     #   resp.association_versions[0].output_location.s3_location.output_s3_key_prefix #=> String
     #   resp.association_versions[0].association_name #=> String
+    #   resp.association_versions[0].max_errors #=> String
+    #   resp.association_versions[0].max_concurrency #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociationVersions AWS API Documentation
@@ -5881,7 +6116,7 @@ module Aws::SSM
     #   maximum of 50 IDs. If you prefer not to list individual instance IDs,
     #   you can instead send commands to a fleet of instances using the
     #   Targets parameter, which accepts EC2 tags. For more information about
-    #   how to use Targets, see [Sending Commands to a Fleet][1] in the *AWS
+    #   how to use targets, see [Sending Commands to a Fleet][1] in the *AWS
     #   Systems Manager User Guide*.
     #
     #
@@ -5892,7 +6127,7 @@ module Aws::SSM
     #   (Optional) An array of search criteria that targets instances using a
     #   Key,Value combination that you specify. Targets is required if you
     #   don't provide one or more instance IDs in the call. For more
-    #   information about how to use Targets, see [Sending Commands to a
+    #   information about how to use targets, see [Sending Commands to a
     #   Fleet][1] in the *AWS Systems Manager User Guide*.
     #
     #
@@ -6120,7 +6355,7 @@ module Aws::SSM
     #
     # @option params [String] :target_parameter_name
     #   The name of the parameter used as the target resource for the
-    #   rate-controlled execution. Required if you specify Targets.
+    #   rate-controlled execution. Required if you specify targets.
     #
     # @option params [Array<Types::Target>] :targets
     #   A key-value mapping to target resources. Required if you specify
@@ -6349,6 +6584,35 @@ module Aws::SSM
     #   ensure that this request succeeds, either specify `$LATEST`, or omit
     #   this parameter.
     #
+    # @option params [String] :max_errors
+    #   The number of errors that are allowed before the system stops sending
+    #   requests to run the association on additional targets. You can specify
+    #   either an absolute number of errors, for example 10, or a percentage
+    #   of the target set, for example 10%. If you specify 3, for example, the
+    #   system stops sending requests when the fourth error is received. If
+    #   you specify 0, then the system stops sending requests after the first
+    #   error is returned. If you run an association on 50 instances and set
+    #   MaxError to 10%, then the system stops sending the request when the
+    #   sixth error is received.
+    #
+    #   Executions that are already running an association when MaxErrors is
+    #   reached are allowed to complete, but some of these executions may fail
+    #   as well. If you need to ensure that there won't be more than
+    #   max-errors failed executions, set MaxConcurrency to 1 so that
+    #   executions proceed one at a time.
+    #
+    # @option params [String] :max_concurrency
+    #   The maximum number of targets allowed to run the association at the
+    #   same time. You can specify a number, for example 10, or a percentage
+    #   of the target set, for example 10%. The default value is 100%, which
+    #   means all targets run the association at the same time.
+    #
+    #   If a new instance starts and attempts to execute an association while
+    #   Systems Manager is executing MaxConcurrency associations, the
+    #   association is allowed to run. During the next association interval,
+    #   the new instance will process its association within the limit
+    #   specified for MaxConcurrency.
+    #
     # @return [Types::UpdateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -6378,6 +6642,8 @@ module Aws::SSM
     #     ],
     #     association_name: "AssociationName",
     #     association_version: "AssociationVersion",
+    #     max_errors: "MaxErrors",
+    #     max_concurrency: "MaxConcurrency",
     #   })
     #
     # @example Response structure
@@ -6411,6 +6677,8 @@ module Aws::SSM
     #   resp.association_description.last_execution_date #=> Time
     #   resp.association_description.last_successful_execution_date #=> Time
     #   resp.association_description.association_name #=> String
+    #   resp.association_description.max_errors #=> String
+    #   resp.association_description.max_concurrency #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociation AWS API Documentation
     #
@@ -6481,6 +6749,8 @@ module Aws::SSM
     #   resp.association_description.last_execution_date #=> Time
     #   resp.association_description.last_successful_execution_date #=> Time
     #   resp.association_description.association_name #=> String
+    #   resp.association_description.max_errors #=> String
+    #   resp.association_description.max_concurrency #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationStatus AWS API Documentation
     #
@@ -6607,9 +6877,35 @@ module Aws::SSM
     # @option params [String] :description
     #   An optional description for the update request.
     #
+    # @option params [String] :start_date
+    #   The time zone that the scheduled Maintenance Window executions are
+    #   based on, in Internet Assigned Numbers Authority (IANA) format. For
+    #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul". For
+    #   more information, see the [Time Zone Database][1] on the IANA website.
+    #
+    #
+    #
+    #   [1]: https://www.iana.org/time-zones
+    #
+    # @option params [String] :end_date
+    #   The date and time, in ISO-8601 Extended format, for when you want the
+    #   Maintenance Window to become inactive. EndDate allows you to set a
+    #   date and time in the future when the Maintenance Window will no longer
+    #   run.
+    #
     # @option params [String] :schedule
     #   The schedule of the Maintenance Window in the form of a cron or rate
     #   expression.
+    #
+    # @option params [String] :schedule_timezone
+    #   The time zone that the scheduled Maintenance Window executions are
+    #   based on, in Internet Assigned Numbers Authority (IANA) format. For
+    #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul". For
+    #   more information, see the [Time Zone Database][1] on the IANA website.
+    #
+    #
+    #
+    #   [1]: https://www.iana.org/time-zones
     #
     # @option params [Integer] :duration
     #   The duration of the Maintenance Window in hours.
@@ -6635,7 +6931,10 @@ module Aws::SSM
     #   * {Types::UpdateMaintenanceWindowResult#window_id #window_id} => String
     #   * {Types::UpdateMaintenanceWindowResult#name #name} => String
     #   * {Types::UpdateMaintenanceWindowResult#description #description} => String
+    #   * {Types::UpdateMaintenanceWindowResult#start_date #start_date} => String
+    #   * {Types::UpdateMaintenanceWindowResult#end_date #end_date} => String
     #   * {Types::UpdateMaintenanceWindowResult#schedule #schedule} => String
+    #   * {Types::UpdateMaintenanceWindowResult#schedule_timezone #schedule_timezone} => String
     #   * {Types::UpdateMaintenanceWindowResult#duration #duration} => Integer
     #   * {Types::UpdateMaintenanceWindowResult#cutoff #cutoff} => Integer
     #   * {Types::UpdateMaintenanceWindowResult#allow_unassociated_targets #allow_unassociated_targets} => Boolean
@@ -6647,7 +6946,10 @@ module Aws::SSM
     #     window_id: "MaintenanceWindowId", # required
     #     name: "MaintenanceWindowName",
     #     description: "MaintenanceWindowDescription",
+    #     start_date: "MaintenanceWindowStringDateTime",
+    #     end_date: "MaintenanceWindowStringDateTime",
     #     schedule: "MaintenanceWindowSchedule",
+    #     schedule_timezone: "MaintenanceWindowTimezone",
     #     duration: 1,
     #     cutoff: 1,
     #     allow_unassociated_targets: false,
@@ -6660,7 +6962,10 @@ module Aws::SSM
     #   resp.window_id #=> String
     #   resp.name #=> String
     #   resp.description #=> String
+    #   resp.start_date #=> String
+    #   resp.end_date #=> String
     #   resp.schedule #=> String
+    #   resp.schedule_timezone #=> String
     #   resp.duration #=> Integer
     #   resp.cutoff #=> Integer
     #   resp.allow_unassociated_targets #=> Boolean
@@ -7243,7 +7548,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

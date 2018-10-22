@@ -20,6 +20,7 @@ module Aws::CloudWatchEvents
     BatchRetryStrategy = Shapes::StructureShape.new(name: 'BatchRetryStrategy')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
+    Condition = Shapes::StructureShape.new(name: 'Condition')
     DeleteRuleRequest = Shapes::StructureShape.new(name: 'DeleteRuleRequest')
     DescribeEventBusRequest = Shapes::StructureShape.new(name: 'DescribeEventBusRequest')
     DescribeEventBusResponse = Shapes::StructureShape.new(name: 'DescribeEventBusResponse')
@@ -124,6 +125,11 @@ module Aws::CloudWatchEvents
     BatchRetryStrategy.add_member(:attempts, Shapes::ShapeRef.new(shape: Integer, location_name: "Attempts"))
     BatchRetryStrategy.struct_class = Types::BatchRetryStrategy
 
+    Condition.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Type"))
+    Condition.add_member(:key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Key"))
+    Condition.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
+    Condition.struct_class = Types::Condition
+
     DeleteRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "Name"))
     DeleteRuleRequest.struct_class = Types::DeleteRuleRequest
 
@@ -225,6 +231,7 @@ module Aws::CloudWatchEvents
     PutPermissionRequest.add_member(:action, Shapes::ShapeRef.new(shape: Action, required: true, location_name: "Action"))
     PutPermissionRequest.add_member(:principal, Shapes::ShapeRef.new(shape: Principal, required: true, location_name: "Principal"))
     PutPermissionRequest.add_member(:statement_id, Shapes::ShapeRef.new(shape: StatementId, required: true, location_name: "StatementId"))
+    PutPermissionRequest.add_member(:condition, Shapes::ShapeRef.new(shape: Condition, location_name: "Condition"))
     PutPermissionRequest.struct_class = Types::PutPermissionRequest
 
     PutRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "Name"))

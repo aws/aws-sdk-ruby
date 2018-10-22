@@ -42,7 +42,7 @@ module Aws
 
       class ApiCall
         attr_reader :service, :api, :client_id, :timestamp, :version,
-          :attempt_count, :latency, :region
+          :attempt_count, :latency, :region, :max_retries_exceeded
 
         def initialize(service, api, client_id, version, timestamp, region)
           @service = service
@@ -56,6 +56,11 @@ module Aws
         def complete(opts = {})
           @latency = opts[:latency]
           @attempt_count = opts[:attempt_count]
+          if opts[:final_error_retryable]
+            @max_retries_exceeded = 1
+          else
+            @max_retries_exceeded = 0
+          end
         end
 
         def to_json(*a)
@@ -68,7 +73,8 @@ module Aws
             "Version" => @version,
             "AttemptCount" => @attempt_count,
             "Latency" => @latency,
-            "Region" => @region
+            "Region" => @region,
+            "MaxRetriesExceeded" => @max_retries_exceeded
           }.to_json
         end
       end

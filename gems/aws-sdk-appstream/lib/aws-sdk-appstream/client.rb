@@ -212,6 +212,90 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Associates the specified users with the specified stacks. Users in a
+    # user pool cannot be assigned to stacks with fleets that are joined to
+    # an Active Directory domain.
+    #
+    # @option params [required, Array<Types::UserStackAssociation>] :user_stack_associations
+    #   The list of UserStackAssociation objects.
+    #
+    # @return [Types::BatchAssociateUserStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchAssociateUserStackResult#errors #errors} => Array&lt;Types::UserStackAssociationError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_associate_user_stack({
+    #     user_stack_associations: [ # required
+    #       {
+    #         stack_name: "String", # required
+    #         user_name: "Username", # required
+    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #         send_email_notification: false,
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].user_stack_association.stack_name #=> String
+    #   resp.errors[0].user_stack_association.user_name #=> String
+    #   resp.errors[0].user_stack_association.authentication_type #=> String, one of "API", "SAML", "USERPOOL"
+    #   resp.errors[0].user_stack_association.send_email_notification #=> Boolean
+    #   resp.errors[0].error_code #=> String, one of "STACK_NOT_FOUND", "USER_NAME_NOT_FOUND", "INTERNAL_ERROR"
+    #   resp.errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/BatchAssociateUserStack AWS API Documentation
+    #
+    # @overload batch_associate_user_stack(params = {})
+    # @param [Hash] params ({})
+    def batch_associate_user_stack(params = {}, options = {})
+      req = build_request(:batch_associate_user_stack, params)
+      req.send_request(options)
+    end
+
+    # Disassociates the specified users from the specified stacks.
+    #
+    # @option params [required, Array<Types::UserStackAssociation>] :user_stack_associations
+    #   The list of UserStackAssociation objects.
+    #
+    # @return [Types::BatchDisassociateUserStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDisassociateUserStackResult#errors #errors} => Array&lt;Types::UserStackAssociationError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_disassociate_user_stack({
+    #     user_stack_associations: [ # required
+    #       {
+    #         stack_name: "String", # required
+    #         user_name: "Username", # required
+    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #         send_email_notification: false,
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].user_stack_association.stack_name #=> String
+    #   resp.errors[0].user_stack_association.user_name #=> String
+    #   resp.errors[0].user_stack_association.authentication_type #=> String, one of "API", "SAML", "USERPOOL"
+    #   resp.errors[0].user_stack_association.send_email_notification #=> Boolean
+    #   resp.errors[0].error_code #=> String, one of "STACK_NOT_FOUND", "USER_NAME_NOT_FOUND", "INTERNAL_ERROR"
+    #   resp.errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/BatchDisassociateUserStack AWS API Documentation
+    #
+    # @overload batch_disassociate_user_stack(params = {})
+    # @param [Hash] params ({})
+    def batch_disassociate_user_stack(params = {}, options = {})
+      req = build_request(:batch_disassociate_user_stack, params)
+      req.send_request(options)
+    end
+
     # Copies the image within the same region or to a new region within the
     # same AWS account. Note that any tags you added to the image will not
     # be copied.
@@ -767,6 +851,53 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Creates a new user in the user pool.
+    #
+    # @option params [required, String] :user_name
+    #   The email address of the user.
+    #
+    # @option params [String] :message_action
+    #   The action to take for the welcome email that is sent to a user after
+    #   the user is created in the user pool. If you specify SUPPRESS, no
+    #   email is sent. If you specify RESEND, do not specify the first name or
+    #   last name of the user. If the value is null, the email is sent.
+    #
+    #   <note markdown="1"> The temporary password in the welcome email is valid for only 7 days.
+    #   If users don’t set their passwords within 7 days, you must send them a
+    #   new welcome email.
+    #
+    #    </note>
+    #
+    # @option params [String] :first_name
+    #   The first name, or given name, of the user.
+    #
+    # @option params [String] :last_name
+    #   The last name, or surname, of the user.
+    #
+    # @option params [required, String] :authentication_type
+    #   The authentication type for the user. You must specify USERPOOL.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_user({
+    #     user_name: "Username", # required
+    #     message_action: "SUPPRESS", # accepts SUPPRESS, RESEND
+    #     first_name: "UserAttributeValue",
+    #     last_name: "UserAttributeValue",
+    #     authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUser AWS API Documentation
+    #
+    # @overload create_user(params = {})
+    # @param [Hash] params ({})
+    def create_user(params = {}, options = {})
+      req = build_request(:create_user, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified Directory Config object from AppStream 2.0. This
     # object includes the information required to join streaming instances
     # to an Active Directory domain.
@@ -971,6 +1102,32 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Deletes a user from the user pool.
+    #
+    # @option params [required, String] :user_name
+    #   The email address of the user.
+    #
+    # @option params [required, String] :authentication_type
+    #   The authentication type for the user. You must specify USERPOOL.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_user({
+    #     user_name: "Username", # required
+    #     authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteUser AWS API Documentation
+    #
+    # @overload delete_user(params = {})
+    # @param [Hash] params ({})
+    def delete_user(params = {}, options = {})
+      req = build_request(:delete_user, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list that describes one or more specified Directory Config
     # objects for AppStream 2.0, if the names for these objects are
     # provided. Otherwise, all Directory Config objects in the account are
@@ -1158,15 +1315,15 @@ module Aws::AppStream
     #   image must be one that you own.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of each results page.
+    #   The maximum size of each page of results.
     #
     # @option params [Array<String>] :shared_aws_account_ids
     #   The 12-digit ID of one or more AWS accounts with which the image is
     #   shared.
     #
     # @option params [String] :next_token
-    #   The pagination token to use to retrieve the next page of results. If
-    #   this value is empty, only the first page is retrieved.
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
     #
     # @return [Types::DescribeImagePermissionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1215,8 +1372,8 @@ module Aws::AppStream
     #   The type of image (public, private, or shared) to describe.
     #
     # @option params [String] :next_token
-    #   The pagination token to use to retrieve the next page of results. If
-    #   this value is empty, only the first page is retrieved.
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
     #
     # @option params [Integer] :max_results
     #   The maximum size of each page of results.
@@ -1399,6 +1556,142 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Retrieves a list that describes the UserStackAssociation objects. You
+    # must specify either or both of the following:
+    #
+    # * The stack name
+    #
+    # * The user name (email address of the user associated with the stack)
+    #   and the authentication type for the user
+    #
+    # @option params [String] :stack_name
+    #   The name of the stack that is associated with the user.
+    #
+    # @option params [String] :user_name
+    #   The email address of the user who is associated with the stack.
+    #
+    # @option params [String] :authentication_type
+    #   The authentication type for the user who is associated with the stack.
+    #   You must specify USERPOOL.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of each page of results.
+    #
+    # @option params [String] :next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
+    #
+    # @return [Types::DescribeUserStackAssociationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeUserStackAssociationsResult#user_stack_associations #user_stack_associations} => Array&lt;Types::UserStackAssociation&gt;
+    #   * {Types::DescribeUserStackAssociationsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_user_stack_associations({
+    #     stack_name: "String",
+    #     user_name: "Username",
+    #     authentication_type: "API", # accepts API, SAML, USERPOOL
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_stack_associations #=> Array
+    #   resp.user_stack_associations[0].stack_name #=> String
+    #   resp.user_stack_associations[0].user_name #=> String
+    #   resp.user_stack_associations[0].authentication_type #=> String, one of "API", "SAML", "USERPOOL"
+    #   resp.user_stack_associations[0].send_email_notification #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeUserStackAssociations AWS API Documentation
+    #
+    # @overload describe_user_stack_associations(params = {})
+    # @param [Hash] params ({})
+    def describe_user_stack_associations(params = {}, options = {})
+      req = build_request(:describe_user_stack_associations, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list that describes one or more specified users in the
+    # user pool, if user names are provided. Otherwise, all users in the
+    # user pool are described.
+    #
+    # @option params [required, String] :authentication_type
+    #   The authentication type for the users in the user pool to describe.
+    #   You must specify USERPOOL.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of each page of results.
+    #
+    # @option params [String] :next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
+    #
+    # @return [Types::DescribeUsersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeUsersResult#users #users} => Array&lt;Types::User&gt;
+    #   * {Types::DescribeUsersResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_users({
+    #     authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.users #=> Array
+    #   resp.users[0].arn #=> String
+    #   resp.users[0].user_name #=> String
+    #   resp.users[0].enabled #=> Boolean
+    #   resp.users[0].status #=> String
+    #   resp.users[0].first_name #=> String
+    #   resp.users[0].last_name #=> String
+    #   resp.users[0].created_time #=> Time
+    #   resp.users[0].authentication_type #=> String, one of "API", "SAML", "USERPOOL"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeUsers AWS API Documentation
+    #
+    # @overload describe_users(params = {})
+    # @param [Hash] params ({})
+    def describe_users(params = {}, options = {})
+      req = build_request(:describe_users, params)
+      req.send_request(options)
+    end
+
+    # Disables the specified user in the user pool. Users can't sign in to
+    # AppStream 2.0 until they are re-enabled. This action does not delete
+    # the user.
+    #
+    # @option params [required, String] :user_name
+    #   The email address of the user.
+    #
+    # @option params [required, String] :authentication_type
+    #   The authentication type for the user. You must specify USERPOOL.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_user({
+    #     user_name: "Username", # required
+    #     authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisableUser AWS API Documentation
+    #
+    # @overload disable_user(params = {})
+    # @param [Hash] params ({})
+    def disable_user(params = {}, options = {})
+      req = build_request(:disable_user, params)
+      req.send_request(options)
+    end
+
     # Disassociates the specified fleet from the specified stack.
     #
     # @option params [required, String] :fleet_name
@@ -1422,6 +1715,34 @@ module Aws::AppStream
     # @param [Hash] params ({})
     def disassociate_fleet(params = {}, options = {})
       req = build_request(:disassociate_fleet, params)
+      req.send_request(options)
+    end
+
+    # Enables a user in the user pool. After being enabled, users can sign
+    # in to AppStream 2.0 and open applications from the stacks to which
+    # they are assigned.
+    #
+    # @option params [required, String] :user_name
+    #   The email address of the user.
+    #
+    # @option params [required, String] :authentication_type
+    #   The authentication type for the user. You must specify USERPOOL.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_user({
+    #     user_name: "Username", # required
+    #     authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/EnableUser AWS API Documentation
+    #
+    # @overload enable_user(params = {})
+    # @param [Hash] params ({})
+    def enable_user(params = {}, options = {})
+      req = build_request(:enable_user, params)
       req.send_request(options)
     end
 
@@ -2154,7 +2475,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

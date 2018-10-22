@@ -212,6 +212,41 @@ module Aws::ElasticsearchService
       req.send_request(options)
     end
 
+    # Cancels a scheduled service software update for an Amazon ES domain.
+    # You can only perform this operation before the `AutomatedUpdateDate`
+    # and when the `UpdateStatus` is in the `PENDING_UPDATE` state.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain that you want to stop the latest service
+    #   software update on.
+    #
+    # @return [Types::CancelElasticsearchServiceSoftwareUpdateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelElasticsearchServiceSoftwareUpdateResponse#service_software_options #service_software_options} => Types::ServiceSoftwareOptions
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_elasticsearch_service_software_update({
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_software_options.current_version #=> String
+    #   resp.service_software_options.new_version #=> String
+    #   resp.service_software_options.update_available #=> Boolean
+    #   resp.service_software_options.cancellable #=> Boolean
+    #   resp.service_software_options.update_status #=> String, one of "PENDING_UPDATE", "IN_PROGRESS", "COMPLETED", "NOT_ELIGIBLE", "ELIGIBLE"
+    #   resp.service_software_options.description #=> String
+    #   resp.service_software_options.automated_update_date #=> Time
+    #
+    # @overload cancel_elasticsearch_service_software_update(params = {})
+    # @param [Hash] params ({})
+    def cancel_elasticsearch_service_software_update(params = {}, options = {})
+      req = build_request(:cancel_elasticsearch_service_software_update, params)
+      req.send_request(options)
+    end
+
     # Creates a new Elasticsearch domain. For more information, see
     # [Creating Elasticsearch Domains][1] in the *Amazon Elasticsearch
     # Service Developer Guide*.
@@ -389,6 +424,13 @@ module Aws::ElasticsearchService
     #   resp.domain_status.log_publishing_options #=> Hash
     #   resp.domain_status.log_publishing_options["LogType"].cloud_watch_logs_log_group_arn #=> String
     #   resp.domain_status.log_publishing_options["LogType"].enabled #=> Boolean
+    #   resp.domain_status.service_software_options.current_version #=> String
+    #   resp.domain_status.service_software_options.new_version #=> String
+    #   resp.domain_status.service_software_options.update_available #=> Boolean
+    #   resp.domain_status.service_software_options.cancellable #=> Boolean
+    #   resp.domain_status.service_software_options.update_status #=> String, one of "PENDING_UPDATE", "IN_PROGRESS", "COMPLETED", "NOT_ELIGIBLE", "ELIGIBLE"
+    #   resp.domain_status.service_software_options.description #=> String
+    #   resp.domain_status.service_software_options.automated_update_date #=> Time
     #
     # @overload create_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -458,6 +500,13 @@ module Aws::ElasticsearchService
     #   resp.domain_status.log_publishing_options #=> Hash
     #   resp.domain_status.log_publishing_options["LogType"].cloud_watch_logs_log_group_arn #=> String
     #   resp.domain_status.log_publishing_options["LogType"].enabled #=> Boolean
+    #   resp.domain_status.service_software_options.current_version #=> String
+    #   resp.domain_status.service_software_options.new_version #=> String
+    #   resp.domain_status.service_software_options.update_available #=> Boolean
+    #   resp.domain_status.service_software_options.cancellable #=> Boolean
+    #   resp.domain_status.service_software_options.update_status #=> String, one of "PENDING_UPDATE", "IN_PROGRESS", "COMPLETED", "NOT_ELIGIBLE", "ELIGIBLE"
+    #   resp.domain_status.service_software_options.description #=> String
+    #   resp.domain_status.service_software_options.automated_update_date #=> Time
     #
     # @overload delete_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -547,6 +596,13 @@ module Aws::ElasticsearchService
     #   resp.domain_status.log_publishing_options #=> Hash
     #   resp.domain_status.log_publishing_options["LogType"].cloud_watch_logs_log_group_arn #=> String
     #   resp.domain_status.log_publishing_options["LogType"].enabled #=> Boolean
+    #   resp.domain_status.service_software_options.current_version #=> String
+    #   resp.domain_status.service_software_options.new_version #=> String
+    #   resp.domain_status.service_software_options.update_available #=> Boolean
+    #   resp.domain_status.service_software_options.cancellable #=> Boolean
+    #   resp.domain_status.service_software_options.update_status #=> String, one of "PENDING_UPDATE", "IN_PROGRESS", "COMPLETED", "NOT_ELIGIBLE", "ELIGIBLE"
+    #   resp.domain_status.service_software_options.description #=> String
+    #   resp.domain_status.service_software_options.automated_update_date #=> Time
     #
     # @overload describe_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -731,6 +787,13 @@ module Aws::ElasticsearchService
     #   resp.domain_status_list[0].log_publishing_options #=> Hash
     #   resp.domain_status_list[0].log_publishing_options["LogType"].cloud_watch_logs_log_group_arn #=> String
     #   resp.domain_status_list[0].log_publishing_options["LogType"].enabled #=> Boolean
+    #   resp.domain_status_list[0].service_software_options.current_version #=> String
+    #   resp.domain_status_list[0].service_software_options.new_version #=> String
+    #   resp.domain_status_list[0].service_software_options.update_available #=> Boolean
+    #   resp.domain_status_list[0].service_software_options.cancellable #=> Boolean
+    #   resp.domain_status_list[0].service_software_options.update_status #=> String, one of "PENDING_UPDATE", "IN_PROGRESS", "COMPLETED", "NOT_ELIGIBLE", "ELIGIBLE"
+    #   resp.domain_status_list[0].service_software_options.description #=> String
+    #   resp.domain_status_list[0].service_software_options.automated_update_date #=> Time
     #
     # @overload describe_elasticsearch_domains(params = {})
     # @param [Hash] params ({})
@@ -1210,6 +1273,39 @@ module Aws::ElasticsearchService
       req.send_request(options)
     end
 
+    # Schedules a service software update for an Amazon ES domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain that you want to update to the latest service
+    #   software.
+    #
+    # @return [Types::StartElasticsearchServiceSoftwareUpdateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartElasticsearchServiceSoftwareUpdateResponse#service_software_options #service_software_options} => Types::ServiceSoftwareOptions
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_elasticsearch_service_software_update({
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_software_options.current_version #=> String
+    #   resp.service_software_options.new_version #=> String
+    #   resp.service_software_options.update_available #=> Boolean
+    #   resp.service_software_options.cancellable #=> Boolean
+    #   resp.service_software_options.update_status #=> String, one of "PENDING_UPDATE", "IN_PROGRESS", "COMPLETED", "NOT_ELIGIBLE", "ELIGIBLE"
+    #   resp.service_software_options.description #=> String
+    #   resp.service_software_options.automated_update_date #=> Time
+    #
+    # @overload start_elasticsearch_service_software_update(params = {})
+    # @param [Hash] params ({})
+    def start_elasticsearch_service_software_update(params = {}, options = {})
+      req = build_request(:start_elasticsearch_service_software_update, params)
+      req.send_request(options)
+    end
+
     # Modifies the cluster configuration of the specified Elasticsearch
     # domain, setting as setting the instance type and the number of
     # instances.
@@ -1464,7 +1560,7 @@ module Aws::ElasticsearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

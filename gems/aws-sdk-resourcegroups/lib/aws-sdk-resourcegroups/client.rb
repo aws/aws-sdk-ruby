@@ -430,6 +430,16 @@ module Aws::ResourceGroups
 
     # Returns a list of existing resource groups in your account.
     #
+    # @option params [Array<Types::GroupFilter>] :filters
+    #   Filters, formatted as GroupFilter objects, that you want to apply to a
+    #   ListGroups operation.
+    #
+    #   * `group-type` - Filter groups by resource type. Specify up to five
+    #     group types in the format AWS::ServiceCode::ResourceType. For
+    #     example, AWS::EC2::Instance, or AWS::S3::Bucket.
+    #
+    #   ^
+    #
     # @option params [Integer] :max_results
     #   The maximum number of resource group results that are returned by
     #   ListGroups in paginated output. By default, this number is 50.
@@ -441,18 +451,28 @@ module Aws::ResourceGroups
     #
     # @return [Types::ListGroupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::ListGroupsOutput#group_identifiers #group_identifiers} => Array&lt;Types::GroupIdentifier&gt;
     #   * {Types::ListGroupsOutput#groups #groups} => Array&lt;Types::Group&gt;
     #   * {Types::ListGroupsOutput#next_token #next_token} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_groups({
+    #     filters: [
+    #       {
+    #         name: "resource-type", # required, accepts resource-type
+    #         values: ["GroupFilterValue"], # required
+    #       },
+    #     ],
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
     #
+    #   resp.group_identifiers #=> Array
+    #   resp.group_identifiers[0].group_name #=> String
+    #   resp.group_identifiers[0].group_arn #=> String
     #   resp.groups #=> Array
     #   resp.groups[0].group_arn #=> String
     #   resp.groups[0].name #=> String
@@ -683,7 +703,7 @@ module Aws::ResourceGroups
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resourcegroups'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
