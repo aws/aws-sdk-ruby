@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Feature - Update to code paths and plugins for future SDK instrumentation and telemetry.
 
+3.32.0 (2018-10-18)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
 3.31.0 (2018-10-16)
 ------------------
 

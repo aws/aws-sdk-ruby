@@ -26,6 +26,10 @@ module Aws::AppStream
     AuthenticationType = Shapes::StringShape.new(name: 'AuthenticationType')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
     AwsAccountIdList = Shapes::ListShape.new(name: 'AwsAccountIdList')
+    BatchAssociateUserStackRequest = Shapes::StructureShape.new(name: 'BatchAssociateUserStackRequest')
+    BatchAssociateUserStackResult = Shapes::StructureShape.new(name: 'BatchAssociateUserStackResult')
+    BatchDisassociateUserStackRequest = Shapes::StructureShape.new(name: 'BatchDisassociateUserStackRequest')
+    BatchDisassociateUserStackResult = Shapes::StructureShape.new(name: 'BatchDisassociateUserStackResult')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
     ComputeCapacity = Shapes::StructureShape.new(name: 'ComputeCapacity')
@@ -45,6 +49,8 @@ module Aws::AppStream
     CreateStackResult = Shapes::StructureShape.new(name: 'CreateStackResult')
     CreateStreamingURLRequest = Shapes::StructureShape.new(name: 'CreateStreamingURLRequest')
     CreateStreamingURLResult = Shapes::StructureShape.new(name: 'CreateStreamingURLResult')
+    CreateUserRequest = Shapes::StructureShape.new(name: 'CreateUserRequest')
+    CreateUserResult = Shapes::StructureShape.new(name: 'CreateUserResult')
     DeleteDirectoryConfigRequest = Shapes::StructureShape.new(name: 'DeleteDirectoryConfigRequest')
     DeleteDirectoryConfigResult = Shapes::StructureShape.new(name: 'DeleteDirectoryConfigResult')
     DeleteFleetRequest = Shapes::StructureShape.new(name: 'DeleteFleetRequest')
@@ -57,6 +63,8 @@ module Aws::AppStream
     DeleteImageResult = Shapes::StructureShape.new(name: 'DeleteImageResult')
     DeleteStackRequest = Shapes::StructureShape.new(name: 'DeleteStackRequest')
     DeleteStackResult = Shapes::StructureShape.new(name: 'DeleteStackResult')
+    DeleteUserRequest = Shapes::StructureShape.new(name: 'DeleteUserRequest')
+    DeleteUserResult = Shapes::StructureShape.new(name: 'DeleteUserResult')
     DescribeDirectoryConfigsRequest = Shapes::StructureShape.new(name: 'DescribeDirectoryConfigsRequest')
     DescribeDirectoryConfigsResult = Shapes::StructureShape.new(name: 'DescribeDirectoryConfigsResult')
     DescribeFleetsRequest = Shapes::StructureShape.new(name: 'DescribeFleetsRequest')
@@ -72,17 +80,25 @@ module Aws::AppStream
     DescribeSessionsResult = Shapes::StructureShape.new(name: 'DescribeSessionsResult')
     DescribeStacksRequest = Shapes::StructureShape.new(name: 'DescribeStacksRequest')
     DescribeStacksResult = Shapes::StructureShape.new(name: 'DescribeStacksResult')
+    DescribeUserStackAssociationsRequest = Shapes::StructureShape.new(name: 'DescribeUserStackAssociationsRequest')
+    DescribeUserStackAssociationsResult = Shapes::StructureShape.new(name: 'DescribeUserStackAssociationsResult')
+    DescribeUsersRequest = Shapes::StructureShape.new(name: 'DescribeUsersRequest')
+    DescribeUsersResult = Shapes::StructureShape.new(name: 'DescribeUsersResult')
     Description = Shapes::StringShape.new(name: 'Description')
     DirectoryConfig = Shapes::StructureShape.new(name: 'DirectoryConfig')
     DirectoryConfigList = Shapes::ListShape.new(name: 'DirectoryConfigList')
     DirectoryName = Shapes::StringShape.new(name: 'DirectoryName')
     DirectoryNameList = Shapes::ListShape.new(name: 'DirectoryNameList')
+    DisableUserRequest = Shapes::StructureShape.new(name: 'DisableUserRequest')
+    DisableUserResult = Shapes::StructureShape.new(name: 'DisableUserResult')
     DisassociateFleetRequest = Shapes::StructureShape.new(name: 'DisassociateFleetRequest')
     DisassociateFleetResult = Shapes::StructureShape.new(name: 'DisassociateFleetResult')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
     Domain = Shapes::StringShape.new(name: 'Domain')
     DomainJoinInfo = Shapes::StructureShape.new(name: 'DomainJoinInfo')
     DomainList = Shapes::ListShape.new(name: 'DomainList')
+    EnableUserRequest = Shapes::StructureShape.new(name: 'EnableUserRequest')
+    EnableUserResult = Shapes::StructureShape.new(name: 'EnableUserResult')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExpireSessionRequest = Shapes::StructureShape.new(name: 'ExpireSessionRequest')
     ExpireSessionResult = Shapes::StructureShape.new(name: 'ExpireSessionResult')
@@ -121,6 +137,7 @@ module Aws::AppStream
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MessageAction = Shapes::StringShape.new(name: 'MessageAction')
     Metadata = Shapes::MapShape.new(name: 'Metadata')
     Name = Shapes::StringShape.new(name: 'Name')
     NetworkAccessConfiguration = Shapes::StructureShape.new(name: 'NetworkAccessConfiguration')
@@ -185,9 +202,18 @@ module Aws::AppStream
     UpdateImagePermissionsResult = Shapes::StructureShape.new(name: 'UpdateImagePermissionsResult')
     UpdateStackRequest = Shapes::StructureShape.new(name: 'UpdateStackRequest')
     UpdateStackResult = Shapes::StructureShape.new(name: 'UpdateStackResult')
+    User = Shapes::StructureShape.new(name: 'User')
+    UserAttributeValue = Shapes::StringShape.new(name: 'UserAttributeValue')
     UserId = Shapes::StringShape.new(name: 'UserId')
+    UserList = Shapes::ListShape.new(name: 'UserList')
     UserSetting = Shapes::StructureShape.new(name: 'UserSetting')
     UserSettingList = Shapes::ListShape.new(name: 'UserSettingList')
+    UserStackAssociation = Shapes::StructureShape.new(name: 'UserStackAssociation')
+    UserStackAssociationError = Shapes::StructureShape.new(name: 'UserStackAssociationError')
+    UserStackAssociationErrorCode = Shapes::StringShape.new(name: 'UserStackAssociationErrorCode')
+    UserStackAssociationErrorList = Shapes::ListShape.new(name: 'UserStackAssociationErrorList')
+    UserStackAssociationList = Shapes::ListShape.new(name: 'UserStackAssociationList')
+    Username = Shapes::StringShape.new(name: 'Username')
     VisibilityType = Shapes::StringShape.new(name: 'VisibilityType')
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
 
@@ -220,6 +246,18 @@ module Aws::AppStream
     AssociateFleetResult.struct_class = Types::AssociateFleetResult
 
     AwsAccountIdList.member = Shapes::ShapeRef.new(shape: AwsAccountId)
+
+    BatchAssociateUserStackRequest.add_member(:user_stack_associations, Shapes::ShapeRef.new(shape: UserStackAssociationList, required: true, location_name: "UserStackAssociations"))
+    BatchAssociateUserStackRequest.struct_class = Types::BatchAssociateUserStackRequest
+
+    BatchAssociateUserStackResult.add_member(:errors, Shapes::ShapeRef.new(shape: UserStackAssociationErrorList, location_name: "errors"))
+    BatchAssociateUserStackResult.struct_class = Types::BatchAssociateUserStackResult
+
+    BatchDisassociateUserStackRequest.add_member(:user_stack_associations, Shapes::ShapeRef.new(shape: UserStackAssociationList, required: true, location_name: "UserStackAssociations"))
+    BatchDisassociateUserStackRequest.struct_class = Types::BatchDisassociateUserStackRequest
+
+    BatchDisassociateUserStackResult.add_member(:errors, Shapes::ShapeRef.new(shape: UserStackAssociationErrorList, location_name: "errors"))
+    BatchDisassociateUserStackResult.struct_class = Types::BatchDisassociateUserStackResult
 
     ComputeCapacity.add_member(:desired_instances, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "DesiredInstances"))
     ComputeCapacity.struct_class = Types::ComputeCapacity
@@ -313,6 +351,15 @@ module Aws::AppStream
     CreateStreamingURLResult.add_member(:expires, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Expires"))
     CreateStreamingURLResult.struct_class = Types::CreateStreamingURLResult
 
+    CreateUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: Username, required: true, location_name: "UserName"))
+    CreateUserRequest.add_member(:message_action, Shapes::ShapeRef.new(shape: MessageAction, location_name: "MessageAction"))
+    CreateUserRequest.add_member(:first_name, Shapes::ShapeRef.new(shape: UserAttributeValue, location_name: "FirstName"))
+    CreateUserRequest.add_member(:last_name, Shapes::ShapeRef.new(shape: UserAttributeValue, location_name: "LastName"))
+    CreateUserRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, required: true, location_name: "AuthenticationType"))
+    CreateUserRequest.struct_class = Types::CreateUserRequest
+
+    CreateUserResult.struct_class = Types::CreateUserResult
+
     DeleteDirectoryConfigRequest.add_member(:directory_name, Shapes::ShapeRef.new(shape: DirectoryName, required: true, location_name: "DirectoryName"))
     DeleteDirectoryConfigRequest.struct_class = Types::DeleteDirectoryConfigRequest
 
@@ -345,6 +392,12 @@ module Aws::AppStream
     DeleteStackRequest.struct_class = Types::DeleteStackRequest
 
     DeleteStackResult.struct_class = Types::DeleteStackResult
+
+    DeleteUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: Username, required: true, location_name: "UserName"))
+    DeleteUserRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, required: true, location_name: "AuthenticationType"))
+    DeleteUserRequest.struct_class = Types::DeleteUserRequest
+
+    DeleteUserResult.struct_class = Types::DeleteUserResult
 
     DescribeDirectoryConfigsRequest.add_member(:directory_names, Shapes::ShapeRef.new(shape: DirectoryNameList, location_name: "DirectoryNames"))
     DescribeDirectoryConfigsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
@@ -414,6 +467,26 @@ module Aws::AppStream
     DescribeStacksResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeStacksResult.struct_class = Types::DescribeStacksResult
 
+    DescribeUserStackAssociationsRequest.add_member(:stack_name, Shapes::ShapeRef.new(shape: String, location_name: "StackName"))
+    DescribeUserStackAssociationsRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: Username, location_name: "UserName"))
+    DescribeUserStackAssociationsRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "AuthenticationType"))
+    DescribeUserStackAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeUserStackAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeUserStackAssociationsRequest.struct_class = Types::DescribeUserStackAssociationsRequest
+
+    DescribeUserStackAssociationsResult.add_member(:user_stack_associations, Shapes::ShapeRef.new(shape: UserStackAssociationList, location_name: "UserStackAssociations"))
+    DescribeUserStackAssociationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeUserStackAssociationsResult.struct_class = Types::DescribeUserStackAssociationsResult
+
+    DescribeUsersRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, required: true, location_name: "AuthenticationType"))
+    DescribeUsersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    DescribeUsersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeUsersRequest.struct_class = Types::DescribeUsersRequest
+
+    DescribeUsersResult.add_member(:users, Shapes::ShapeRef.new(shape: UserList, location_name: "Users"))
+    DescribeUsersResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeUsersResult.struct_class = Types::DescribeUsersResult
+
     DirectoryConfig.add_member(:directory_name, Shapes::ShapeRef.new(shape: DirectoryName, required: true, location_name: "DirectoryName"))
     DirectoryConfig.add_member(:organizational_unit_distinguished_names, Shapes::ShapeRef.new(shape: OrganizationalUnitDistinguishedNamesList, location_name: "OrganizationalUnitDistinguishedNames"))
     DirectoryConfig.add_member(:service_account_credentials, Shapes::ShapeRef.new(shape: ServiceAccountCredentials, location_name: "ServiceAccountCredentials"))
@@ -423,6 +496,12 @@ module Aws::AppStream
     DirectoryConfigList.member = Shapes::ShapeRef.new(shape: DirectoryConfig)
 
     DirectoryNameList.member = Shapes::ShapeRef.new(shape: DirectoryName)
+
+    DisableUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: Username, required: true, location_name: "UserName"))
+    DisableUserRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, required: true, location_name: "AuthenticationType"))
+    DisableUserRequest.struct_class = Types::DisableUserRequest
+
+    DisableUserResult.struct_class = Types::DisableUserResult
 
     DisassociateFleetRequest.add_member(:fleet_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "FleetName"))
     DisassociateFleetRequest.add_member(:stack_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "StackName"))
@@ -435,6 +514,12 @@ module Aws::AppStream
     DomainJoinInfo.struct_class = Types::DomainJoinInfo
 
     DomainList.member = Shapes::ShapeRef.new(shape: Domain)
+
+    EnableUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: Username, required: true, location_name: "UserName"))
+    EnableUserRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, required: true, location_name: "AuthenticationType"))
+    EnableUserRequest.struct_class = Types::EnableUserRequest
+
+    EnableUserResult.struct_class = Types::EnableUserResult
 
     ExpireSessionRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SessionId"))
     ExpireSessionRequest.struct_class = Types::ExpireSessionRequest
@@ -704,11 +789,38 @@ module Aws::AppStream
     UpdateStackResult.add_member(:stack, Shapes::ShapeRef.new(shape: Stack, location_name: "Stack"))
     UpdateStackResult.struct_class = Types::UpdateStackResult
 
+    User.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    User.add_member(:user_name, Shapes::ShapeRef.new(shape: Username, location_name: "UserName"))
+    User.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    User.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    User.add_member(:first_name, Shapes::ShapeRef.new(shape: UserAttributeValue, location_name: "FirstName"))
+    User.add_member(:last_name, Shapes::ShapeRef.new(shape: UserAttributeValue, location_name: "LastName"))
+    User.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    User.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, required: true, location_name: "AuthenticationType"))
+    User.struct_class = Types::User
+
+    UserList.member = Shapes::ShapeRef.new(shape: User)
+
     UserSetting.add_member(:action, Shapes::ShapeRef.new(shape: Action, required: true, location_name: "Action"))
     UserSetting.add_member(:permission, Shapes::ShapeRef.new(shape: Permission, required: true, location_name: "Permission"))
     UserSetting.struct_class = Types::UserSetting
 
     UserSettingList.member = Shapes::ShapeRef.new(shape: UserSetting)
+
+    UserStackAssociation.add_member(:stack_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "StackName"))
+    UserStackAssociation.add_member(:user_name, Shapes::ShapeRef.new(shape: Username, required: true, location_name: "UserName"))
+    UserStackAssociation.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, required: true, location_name: "AuthenticationType"))
+    UserStackAssociation.add_member(:send_email_notification, Shapes::ShapeRef.new(shape: Boolean, location_name: "SendEmailNotification"))
+    UserStackAssociation.struct_class = Types::UserStackAssociation
+
+    UserStackAssociationError.add_member(:user_stack_association, Shapes::ShapeRef.new(shape: UserStackAssociation, location_name: "UserStackAssociation"))
+    UserStackAssociationError.add_member(:error_code, Shapes::ShapeRef.new(shape: UserStackAssociationErrorCode, location_name: "ErrorCode"))
+    UserStackAssociationError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    UserStackAssociationError.struct_class = Types::UserStackAssociationError
+
+    UserStackAssociationErrorList.member = Shapes::ShapeRef.new(shape: UserStackAssociationError)
+
+    UserStackAssociationList.member = Shapes::ShapeRef.new(shape: UserStackAssociation)
 
     VpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "SubnetIds"))
     VpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "SecurityGroupIds"))
@@ -745,6 +857,23 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+      end)
+
+      api.add_operation(:batch_associate_user_stack, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchAssociateUserStack"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchAssociateUserStackRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchAssociateUserStackResult)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+      end)
+
+      api.add_operation(:batch_disassociate_user_stack, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchDisassociateUserStack"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchDisassociateUserStackRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchDisassociateUserStackResult)
       end)
 
       api.add_operation(:copy_image, Seahorse::Model::Operation.new.tap do |o|
@@ -845,6 +974,19 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
 
+      api.add_operation(:create_user, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateUser"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateUserRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateUserResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+      end)
+
       api.add_operation(:delete_directory_config, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDirectoryConfig"
         o.http_method = "POST"
@@ -908,6 +1050,15 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:delete_user, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteUser"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteUserRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteUserResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:describe_directory_configs, Seahorse::Model::Operation.new.tap do |o|
@@ -986,6 +1137,34 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:describe_user_stack_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeUserStackAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeUserStackAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeUserStackAssociationsResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+      end)
+
+      api.add_operation(:describe_users, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeUsers"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeUsersRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeUsersResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+      end)
+
+      api.add_operation(:disable_user, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableUser"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisableUserRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisableUserResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:disassociate_fleet, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateFleet"
         o.http_method = "POST"
@@ -995,6 +1174,16 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:enable_user, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableUser"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: EnableUserRequest)
+        o.output = Shapes::ShapeRef.new(shape: EnableUserResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
       end)
 
       api.add_operation(:expire_session, Seahorse::Model::Operation.new.tap do |o|

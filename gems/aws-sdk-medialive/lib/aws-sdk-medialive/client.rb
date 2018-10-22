@@ -256,7 +256,7 @@ module Aws::MediaLive
     #           },
     #           schedule_action_start_settings: { # required
     #             fixed_mode_schedule_action_start_settings: {
-    #               time: "__string",
+    #               time: "__string", # required
     #             },
     #           },
     #         },
@@ -360,6 +360,7 @@ module Aws::MediaLive
     # @option params [Types::InputSpecification] :input_specification
     #
     # @option params [String] :log_level
+    #   The log level the user wants for their channel.
     #
     # @option params [String] :name
     #
@@ -675,7 +676,7 @@ module Aws::MediaLive
     #               key_format_versions: "__string",
     #               key_provider_settings: {
     #                 static_key_settings: {
-    #                   key_provider_server: { # required
+    #                   key_provider_server: {
     #                     password_param: "__string",
     #                     uri: "__string", # required
     #                     username: "__string",
@@ -965,7 +966,8 @@ module Aws::MediaLive
     #               par_denominator: 1,
     #               par_numerator: 1,
     #               profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
-    #               rate_control_mode: "CBR", # accepts CBR, VBR
+    #               qvbr_quality_level: 1,
+    #               rate_control_mode: "CBR", # accepts CBR, QVBR, VBR
     #               scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #               scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #               slices: 1,
@@ -991,7 +993,7 @@ module Aws::MediaLive
     #         input_settings: {
     #           audio_selectors: [
     #             {
-    #               name: "__string", # required
+    #               name: "__stringMin1", # required
     #               selector_settings: {
     #                 audio_language_selection: {
     #                   language_code: "__string", # required
@@ -1006,7 +1008,7 @@ module Aws::MediaLive
     #           caption_selectors: [
     #             {
     #               language_code: "__string",
-    #               name: "__string", # required
+    #               name: "__stringMin1", # required
     #               selector_settings: {
     #                 arib_source_settings: {
     #                 },
@@ -1483,7 +1485,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
-    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.qvbr_quality_level #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "QVBR", "VBR"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.slices #=> Integer
@@ -2092,7 +2095,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.qvbr_quality_level #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "QVBR", "VBR"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.slices #=> Integer
@@ -2701,7 +2705,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.qvbr_quality_level #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "QVBR", "VBR"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.slices #=> Integer
@@ -3366,7 +3371,7 @@ module Aws::MediaLive
 
     # Purchase an offering and create a reservation.
     #
-    # @option params [Integer] :count
+    # @option params [required, Integer] :count
     #
     # @option params [String] :name
     #
@@ -3376,6 +3381,8 @@ module Aws::MediaLive
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :start
+    #
     # @return [Types::PurchaseOfferingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PurchaseOfferingResponse#reservation #reservation} => Types::Reservation
@@ -3383,10 +3390,11 @@ module Aws::MediaLive
     # @example Request syntax with placeholder values
     #
     #   resp = client.purchase_offering({
-    #     count: 1,
+    #     count: 1, # required
     #     name: "__string",
     #     offering_id: "__string", # required
     #     request_id: "__string",
+    #     start: "__string",
     #   })
     #
     # @example Response structure
@@ -3859,7 +3867,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.qvbr_quality_level #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "QVBR", "VBR"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.slices #=> Integer
@@ -4361,7 +4370,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.qvbr_quality_level #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "QVBR", "VBR"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.slices #=> Integer
@@ -4441,6 +4451,7 @@ module Aws::MediaLive
     # @option params [Types::InputSpecification] :input_specification
     #
     # @option params [String] :log_level
+    #   The log level the user wants for their channel.
     #
     # @option params [String] :name
     #
@@ -4751,7 +4762,7 @@ module Aws::MediaLive
     #               key_format_versions: "__string",
     #               key_provider_settings: {
     #                 static_key_settings: {
-    #                   key_provider_server: { # required
+    #                   key_provider_server: {
     #                     password_param: "__string",
     #                     uri: "__string", # required
     #                     username: "__string",
@@ -5041,7 +5052,8 @@ module Aws::MediaLive
     #               par_denominator: 1,
     #               par_numerator: 1,
     #               profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
-    #               rate_control_mode: "CBR", # accepts CBR, VBR
+    #               qvbr_quality_level: 1,
+    #               rate_control_mode: "CBR", # accepts CBR, QVBR, VBR
     #               scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #               scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #               slices: 1,
@@ -5067,7 +5079,7 @@ module Aws::MediaLive
     #         input_settings: {
     #           audio_selectors: [
     #             {
-    #               name: "__string", # required
+    #               name: "__stringMin1", # required
     #               selector_settings: {
     #                 audio_language_selection: {
     #                   language_code: "__string", # required
@@ -5082,7 +5094,7 @@ module Aws::MediaLive
     #           caption_selectors: [
     #             {
     #               language_code: "__string",
-    #               name: "__string", # required
+    #               name: "__stringMin1", # required
     #               selector_settings: {
     #                 arib_source_settings: {
     #                 },
@@ -5557,7 +5569,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
-    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.qvbr_quality_level #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "QVBR", "VBR"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.slices #=> Integer
@@ -5742,7 +5755,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -265,6 +265,37 @@ module Aws::SSM
     #   The association name.
     #   @return [String]
     #
+    # @!attribute [rw] max_errors
+    #   The number of errors that are allowed before the system stops
+    #   sending requests to run the association on additional targets. You
+    #   can specify either an absolute number of errors, for example 10, or
+    #   a percentage of the target set, for example 10%. If you specify 3,
+    #   for example, the system stops sending requests when the fourth error
+    #   is received. If you specify 0, then the system stops sending
+    #   requests after the first error is returned. If you run an
+    #   association on 50 instances and set MaxError to 10%, then the system
+    #   stops sending the request when the sixth error is received.
+    #
+    #   Executions that are already running an association when MaxErrors is
+    #   reached are allowed to complete, but some of these executions may
+    #   fail as well. If you need to ensure that there won't be more than
+    #   max-errors failed executions, set MaxConcurrency to 1 so that
+    #   executions proceed one at a time.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_concurrency
+    #   The maximum number of targets allowed to run the association at the
+    #   same time. You can specify a number, for example 10, or a percentage
+    #   of the target set, for example 10%. The default value is 100%, which
+    #   means all targets run the association at the same time.
+    #
+    #   If a new instance starts and attempts to execute an association
+    #   while Systems Manager is executing MaxConcurrency associations, the
+    #   association is allowed to run. During the next association interval,
+    #   the new instance will process its association within the limit
+    #   specified for MaxConcurrency.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationDescription AWS API Documentation
     #
     class AssociationDescription < Struct.new(
@@ -283,7 +314,9 @@ module Aws::SSM
       :output_location,
       :last_execution_date,
       :last_successful_execution_date,
-      :association_name)
+      :association_name,
+      :max_errors,
+      :max_concurrency)
       include Aws::Structure
     end
 
@@ -590,6 +623,37 @@ module Aws::SSM
     #   version was created.
     #   @return [String]
     #
+    # @!attribute [rw] max_errors
+    #   The number of errors that are allowed before the system stops
+    #   sending requests to run the association on additional targets. You
+    #   can specify either an absolute number of errors, for example 10, or
+    #   a percentage of the target set, for example 10%. If you specify 3,
+    #   for example, the system stops sending requests when the fourth error
+    #   is received. If you specify 0, then the system stops sending
+    #   requests after the first error is returned. If you run an
+    #   association on 50 instances and set MaxError to 10%, then the system
+    #   stops sending the request when the sixth error is received.
+    #
+    #   Executions that are already running an association when MaxErrors is
+    #   reached are allowed to complete, but some of these executions may
+    #   fail as well. If you need to ensure that there won't be more than
+    #   max-errors failed executions, set MaxConcurrency to 1 so that
+    #   executions proceed one at a time.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_concurrency
+    #   The maximum number of targets allowed to run the association at the
+    #   same time. You can specify a number, for example 10, or a percentage
+    #   of the target set, for example 10%. The default value is 100%, which
+    #   means all targets run the association at the same time.
+    #
+    #   If a new instance starts and attempts to execute an association
+    #   while Systems Manager is executing MaxConcurrency associations, the
+    #   association is allowed to run. During the next association interval,
+    #   the new instance will process its association within the limit
+    #   specified for MaxConcurrency.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationVersionInfo AWS API Documentation
     #
     class AssociationVersionInfo < Struct.new(
@@ -602,7 +666,9 @@ module Aws::SSM
       :targets,
       :schedule_expression,
       :output_location,
-      :association_name)
+      :association_name,
+      :max_errors,
+      :max_concurrency)
       include Aws::Structure
     end
 
@@ -1892,6 +1958,8 @@ module Aws::SSM
     #               },
     #             },
     #             association_name: "AssociationName",
+    #             max_errors: "MaxErrors",
+    #             max_concurrency: "MaxConcurrency",
     #           },
     #         ],
     #       }
@@ -1935,6 +2003,8 @@ module Aws::SSM
     #           },
     #         },
     #         association_name: "AssociationName",
+    #         max_errors: "MaxErrors",
+    #         max_concurrency: "MaxConcurrency",
     #       }
     #
     # @!attribute [rw] name
@@ -1971,6 +2041,37 @@ module Aws::SSM
     #   Specify a descriptive name for the association.
     #   @return [String]
     #
+    # @!attribute [rw] max_errors
+    #   The number of errors that are allowed before the system stops
+    #   sending requests to run the association on additional targets. You
+    #   can specify either an absolute number of errors, for example 10, or
+    #   a percentage of the target set, for example 10%. If you specify 3,
+    #   for example, the system stops sending requests when the fourth error
+    #   is received. If you specify 0, then the system stops sending
+    #   requests after the first error is returned. If you run an
+    #   association on 50 instances and set MaxError to 10%, then the system
+    #   stops sending the request when the sixth error is received.
+    #
+    #   Executions that are already running an association when MaxErrors is
+    #   reached are allowed to complete, but some of these executions may
+    #   fail as well. If you need to ensure that there won't be more than
+    #   max-errors failed executions, set MaxConcurrency to 1 so that
+    #   executions proceed one at a time.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_concurrency
+    #   The maximum number of targets allowed to run the association at the
+    #   same time. You can specify a number, for example 10, or a percentage
+    #   of the target set, for example 10%. The default value is 100%, which
+    #   means all targets run the association at the same time.
+    #
+    #   If a new instance starts and attempts to execute an association
+    #   while Systems Manager is executing MaxConcurrency associations, the
+    #   association is allowed to run. During the next association interval,
+    #   the new instance will process its association within the limit
+    #   specified for MaxConcurrency.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationBatchRequestEntry AWS API Documentation
     #
     class CreateAssociationBatchRequestEntry < Struct.new(
@@ -1981,7 +2082,9 @@ module Aws::SSM
       :targets,
       :schedule_expression,
       :output_location,
-      :association_name)
+      :association_name,
+      :max_errors,
+      :max_concurrency)
       include Aws::Structure
     end
 
@@ -2026,6 +2129,8 @@ module Aws::SSM
     #           },
     #         },
     #         association_name: "AssociationName",
+    #         max_errors: "MaxErrors",
+    #         max_concurrency: "MaxConcurrency",
     #       }
     #
     # @!attribute [rw] name
@@ -2063,6 +2168,37 @@ module Aws::SSM
     #   Specify a descriptive name for the association.
     #   @return [String]
     #
+    # @!attribute [rw] max_errors
+    #   The number of errors that are allowed before the system stops
+    #   sending requests to run the association on additional targets. You
+    #   can specify either an absolute number of errors, for example 10, or
+    #   a percentage of the target set, for example 10%. If you specify 3,
+    #   for example, the system stops sending requests when the fourth error
+    #   is received. If you specify 0, then the system stops sending
+    #   requests after the first error is returned. If you run an
+    #   association on 50 instances and set MaxError to 10%, then the system
+    #   stops sending the request when the sixth error is received.
+    #
+    #   Executions that are already running an association when MaxErrors is
+    #   reached are allowed to complete, but some of these executions may
+    #   fail as well. If you need to ensure that there won't be more than
+    #   max-errors failed executions, set MaxConcurrency to 1 so that
+    #   executions proceed one at a time.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_concurrency
+    #   The maximum number of targets allowed to run the association at the
+    #   same time. You can specify a number, for example 10, or a percentage
+    #   of the target set, for example 10%. The default value is 100%, which
+    #   means all targets run the association at the same time.
+    #
+    #   If a new instance starts and attempts to execute an association
+    #   while Systems Manager is executing MaxConcurrency associations, the
+    #   association is allowed to run. During the next association interval,
+    #   the new instance will process its association within the limit
+    #   specified for MaxConcurrency.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationRequest AWS API Documentation
     #
     class CreateAssociationRequest < Struct.new(
@@ -2073,7 +2209,9 @@ module Aws::SSM
       :targets,
       :schedule_expression,
       :output_location,
-      :association_name)
+      :association_name,
+      :max_errors,
+      :max_concurrency)
       include Aws::Structure
     end
 
@@ -3633,7 +3771,8 @@ module Aws::SSM
     #
     # @!attribute [rw] filters
     #   One or more filters. Use a filter to return a more specific list of
-    #   instances.
+    #   instances. You can filter on Amazon EC2 tag. Specify tags by using a
+    #   key-value mapping.
     #   @return [Array<Types::InstanceInformationStringFilter>]
     #
     # @!attribute [rw] max_results
@@ -3848,8 +3987,7 @@ module Aws::SSM
     #
     #   Severity (string)
     #
-    #   State (string: "INSTALLED", "INSTALLED OTHER", "MISSING",
-    #   "NOT APPLICABLE", "FAILED")
+    #   State (string, such as "INSTALLED" or "FAILED")
     #
     #   InstalledTime (DateTime)
     #
@@ -4613,9 +4751,9 @@ module Aws::SSM
     #
     # @!attribute [rw] instances_with_installed_rejected_patches
     #   The number of instances with patches installed that are specified in
-    #   a RejectedPatches list. Patches with a status of *InstalledRejected*
-    #   were typically installed before they were added to a RejectedPatches
-    #   list.
+    #   a RejectedPatches list. Patches with a status of
+    #   *INSTALLED\_REJECTED* were typically installed before they were
+    #   added to a RejectedPatches list.
     #
     #   <note markdown="1"> If ALLOW\_AS\_DEPENDENCY is the specified option for
     #   RejectedPatchesAction, the value of
@@ -9666,8 +9804,14 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The state of the patch on the instance (INSTALLED, INSTALLED\_OTHER,
-    #   MISSING, NOT\_APPLICABLE or FAILED).
+    #   The state of the patch on the instance, such as INSTALLED or FAILED.
+    #
+    #   For descriptions of each patch state, see [About Patch
+    #   Compliance][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-compliance-about.html#sysman-compliance-monitor-patch
     #   @return [String]
     #
     # @!attribute [rw] installed_time
@@ -10981,7 +11125,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_task_id
-    #   The id of the task in the Maintenance Window.
+    #   The ID of the task in the Maintenance Window.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterTaskWithMaintenanceWindowResult AWS API Documentation
@@ -12311,6 +12455,8 @@ module Aws::SSM
     #         ],
     #         association_name: "AssociationName",
     #         association_version: "AssociationVersion",
+    #         max_errors: "MaxErrors",
+    #         max_concurrency: "MaxConcurrency",
     #       }
     #
     # @!attribute [rw] association_id
@@ -12356,6 +12502,37 @@ module Aws::SSM
     #   or omit this parameter.
     #   @return [String]
     #
+    # @!attribute [rw] max_errors
+    #   The number of errors that are allowed before the system stops
+    #   sending requests to run the association on additional targets. You
+    #   can specify either an absolute number of errors, for example 10, or
+    #   a percentage of the target set, for example 10%. If you specify 3,
+    #   for example, the system stops sending requests when the fourth error
+    #   is received. If you specify 0, then the system stops sending
+    #   requests after the first error is returned. If you run an
+    #   association on 50 instances and set MaxError to 10%, then the system
+    #   stops sending the request when the sixth error is received.
+    #
+    #   Executions that are already running an association when MaxErrors is
+    #   reached are allowed to complete, but some of these executions may
+    #   fail as well. If you need to ensure that there won't be more than
+    #   max-errors failed executions, set MaxConcurrency to 1 so that
+    #   executions proceed one at a time.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_concurrency
+    #   The maximum number of targets allowed to run the association at the
+    #   same time. You can specify a number, for example 10, or a percentage
+    #   of the target set, for example 10%. The default value is 100%, which
+    #   means all targets run the association at the same time.
+    #
+    #   If a new instance starts and attempts to execute an association
+    #   while Systems Manager is executing MaxConcurrency associations, the
+    #   association is allowed to run. During the next association interval,
+    #   the new instance will process its association within the limit
+    #   specified for MaxConcurrency.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationRequest AWS API Documentation
     #
     class UpdateAssociationRequest < Struct.new(
@@ -12367,7 +12544,9 @@ module Aws::SSM
       :name,
       :targets,
       :association_name,
-      :association_version)
+      :association_version,
+      :max_errors,
+      :max_concurrency)
       include Aws::Structure
     end
 

@@ -429,6 +429,7 @@ module Aws::MediaLive
     __integerMin1 = Shapes::IntegerShape.new(name: '__integerMin1')
     __integerMin1000 = Shapes::IntegerShape.new(name: '__integerMin1000')
     __integerMin1000Max30000 = Shapes::IntegerShape.new(name: '__integerMin1000Max30000')
+    __integerMin1Max10 = Shapes::IntegerShape.new(name: '__integerMin1Max10')
     __integerMin1Max1000000 = Shapes::IntegerShape.new(name: '__integerMin1Max1000000')
     __integerMin1Max16 = Shapes::IntegerShape.new(name: '__integerMin1Max16')
     __integerMin1Max20 = Shapes::IntegerShape.new(name: '__integerMin1Max20')
@@ -487,6 +488,8 @@ module Aws::MediaLive
     __stringMin34Max34 = Shapes::StringShape.new(name: '__stringMin34Max34')
     __stringMin3Max3 = Shapes::StringShape.new(name: '__stringMin3Max3')
     __stringMin6Max6 = Shapes::StringShape.new(name: '__stringMin6Max6')
+    __timestampIso8601 = Shapes::TimestampShape.new(name: '__timestampIso8601', timestampFormat: "iso8601")
+    __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
 
     AacSettings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __double, location_name: "bitrate"))
     AacSettings.add_member(:coding_mode, Shapes::ShapeRef.new(shape: AacCodingMode, location_name: "codingMode"))
@@ -567,7 +570,7 @@ module Aws::MediaLive
     AudioPidSelection.add_member(:pid, Shapes::ShapeRef.new(shape: __integerMin0Max8191, required: true, location_name: "pid"))
     AudioPidSelection.struct_class = Types::AudioPidSelection
 
-    AudioSelector.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
+    AudioSelector.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1, required: true, location_name: "name"))
     AudioSelector.add_member(:selector_settings, Shapes::ShapeRef.new(shape: AudioSelectorSettings, location_name: "selectorSettings"))
     AudioSelector.struct_class = Types::AudioSelector
 
@@ -664,7 +667,7 @@ module Aws::MediaLive
     CaptionLanguageMapping.struct_class = Types::CaptionLanguageMapping
 
     CaptionSelector.add_member(:language_code, Shapes::ShapeRef.new(shape: __string, location_name: "languageCode"))
-    CaptionSelector.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
+    CaptionSelector.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1, required: true, location_name: "name"))
     CaptionSelector.add_member(:selector_settings, Shapes::ShapeRef.new(shape: CaptionSelectorSettings, location_name: "selectorSettings"))
     CaptionSelector.struct_class = Types::CaptionSelector
 
@@ -992,7 +995,7 @@ module Aws::MediaLive
     FecOutputSettings.add_member(:row_length, Shapes::ShapeRef.new(shape: __integerMin1Max20, location_name: "rowLength"))
     FecOutputSettings.struct_class = Types::FecOutputSettings
 
-    FixedModeScheduleActionStartSettings.add_member(:time, Shapes::ShapeRef.new(shape: __string, location_name: "time"))
+    FixedModeScheduleActionStartSettings.add_member(:time, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "time"))
     FixedModeScheduleActionStartSettings.struct_class = Types::FixedModeScheduleActionStartSettings
 
     GlobalConfiguration.add_member(:initial_audio_gain, Shapes::ShapeRef.new(shape: __integerMinNegative60Max60, location_name: "initialAudioGain"))
@@ -1028,6 +1031,7 @@ module Aws::MediaLive
     H264Settings.add_member(:par_denominator, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "parDenominator"))
     H264Settings.add_member(:par_numerator, Shapes::ShapeRef.new(shape: __integer, location_name: "parNumerator"))
     H264Settings.add_member(:profile, Shapes::ShapeRef.new(shape: H264Profile, location_name: "profile"))
+    H264Settings.add_member(:qvbr_quality_level, Shapes::ShapeRef.new(shape: __integerMin1Max10, location_name: "qvbrQualityLevel"))
     H264Settings.add_member(:rate_control_mode, Shapes::ShapeRef.new(shape: H264RateControlMode, location_name: "rateControlMode"))
     H264Settings.add_member(:scan_type, Shapes::ShapeRef.new(shape: H264ScanType, location_name: "scanType"))
     H264Settings.add_member(:scene_change_detect, Shapes::ShapeRef.new(shape: H264SceneChangeDetect, location_name: "sceneChangeDetect"))
@@ -1447,15 +1451,17 @@ module Aws::MediaLive
 
     PassThroughSettings.struct_class = Types::PassThroughSettings
 
-    PurchaseOffering.add_member(:count, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "count"))
+    PurchaseOffering.add_member(:count, Shapes::ShapeRef.new(shape: __integerMin1, required: true, location_name: "count"))
     PurchaseOffering.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     PurchaseOffering.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    PurchaseOffering.add_member(:start, Shapes::ShapeRef.new(shape: __string, location_name: "start"))
     PurchaseOffering.struct_class = Types::PurchaseOffering
 
-    PurchaseOfferingRequest.add_member(:count, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "count"))
+    PurchaseOfferingRequest.add_member(:count, Shapes::ShapeRef.new(shape: __integerMin1, required: true, location_name: "count"))
     PurchaseOfferingRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     PurchaseOfferingRequest.add_member(:offering_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "offeringId"))
     PurchaseOfferingRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    PurchaseOfferingRequest.add_member(:start, Shapes::ShapeRef.new(shape: __string, location_name: "start"))
     PurchaseOfferingRequest.struct_class = Types::PurchaseOfferingRequest
 
     PurchaseOfferingResponse.add_member(:reservation, Shapes::ShapeRef.new(shape: Reservation, location_name: "reservation"))
@@ -1632,7 +1638,7 @@ module Aws::MediaLive
     StaticImageDeactivateScheduleActionSettings.add_member(:layer, Shapes::ShapeRef.new(shape: __integerMin0Max7, location_name: "layer"))
     StaticImageDeactivateScheduleActionSettings.struct_class = Types::StaticImageDeactivateScheduleActionSettings
 
-    StaticKeySettings.add_member(:key_provider_server, Shapes::ShapeRef.new(shape: InputLocation, required: true, location_name: "keyProviderServer"))
+    StaticKeySettings.add_member(:key_provider_server, Shapes::ShapeRef.new(shape: InputLocation, location_name: "keyProviderServer"))
     StaticKeySettings.add_member(:static_key_value, Shapes::ShapeRef.new(shape: __stringMin32Max32, required: true, location_name: "staticKeyValue"))
     StaticKeySettings.struct_class = Types::StaticKeySettings
 
