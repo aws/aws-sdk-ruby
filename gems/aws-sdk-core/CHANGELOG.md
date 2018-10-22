@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Allow 429 response code to trigger throttle detection
+
 3.30.0 (2018-10-04)
 ------------------
 
