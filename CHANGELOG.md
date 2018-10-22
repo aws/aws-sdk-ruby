@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.155 (2018-10-22)
+------------------
+
 * Feature - Aws::Inspector - Updated the API, and documentation for Amazon Inspector.
 
 * Feature - Aws::Shield - Updated the API, documentation, and integration test for AWS Shield.
