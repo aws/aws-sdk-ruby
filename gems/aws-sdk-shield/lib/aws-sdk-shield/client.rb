@@ -325,8 +325,7 @@ module Aws::Shield
     #   * For AWS CloudFront distribution:
     #     `arn:aws:cloudfront::account-id:distribution/distribution-id `
     #
-    #   * For Amazon Route 53:
-    #     `arn:aws:route53::account-id:hostedzone/hosted-zone-id `
+    #   * For Amazon Route 53: `arn:aws:route53:::hostedzone/hosted-zone-id `
     #
     #   * For an Elastic IP address:
     #     `arn:aws:ec2:region:account-id:eip-allocation/allocation-id `
@@ -703,6 +702,13 @@ module Aws::Shield
     #   The maximum number of AttackSummary objects to be returned. If this is
     #   left blank, the first 20 results will be returned.
     #
+    #   This is a maximum value; it is possible that AWS WAF will return the
+    #   results in smaller batches. That is, the number of AttackSummary
+    #   objects returned could be less than `MaxResults`, even if there are
+    #   still more AttackSummary objects yet to return. If there are more
+    #   AttackSummary objects to return, AWS WAF will always also return a
+    #   `NextToken`.
+    #
     # @return [Types::ListAttacksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListAttacksResponse#attack_summaries #attack_summaries} => Array&lt;Types::AttackSummary&gt;
@@ -753,6 +759,12 @@ module Aws::Shield
     # @option params [Integer] :max_results
     #   The maximum number of Protection objects to be returned. If this is
     #   left blank the first 20 results will be returned.
+    #
+    #   This is a maximum value; it is possible that AWS WAF will return the
+    #   results in smaller batches. That is, the number of Protection objects
+    #   returned could be less than `MaxResults`, even if there are still more
+    #   Protection objects yet to return. If there are more Protection objects
+    #   to return, AWS WAF will always also return a `NextToken`.
     #
     # @return [Types::ListProtectionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -852,7 +864,7 @@ module Aws::Shield
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-shield'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

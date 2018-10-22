@@ -1050,6 +1050,25 @@ module Aws::Inspector
     #   resp.findings[0].asset_attributes.hostname #=> String
     #   resp.findings[0].asset_attributes.ipv4_addresses #=> Array
     #   resp.findings[0].asset_attributes.ipv4_addresses[0] #=> String
+    #   resp.findings[0].asset_attributes.tags #=> Array
+    #   resp.findings[0].asset_attributes.tags[0].key #=> String
+    #   resp.findings[0].asset_attributes.tags[0].value #=> String
+    #   resp.findings[0].asset_attributes.network_interfaces #=> Array
+    #   resp.findings[0].asset_attributes.network_interfaces[0].network_interface_id #=> String
+    #   resp.findings[0].asset_attributes.network_interfaces[0].subnet_id #=> String
+    #   resp.findings[0].asset_attributes.network_interfaces[0].vpc_id #=> String
+    #   resp.findings[0].asset_attributes.network_interfaces[0].private_dns_name #=> String
+    #   resp.findings[0].asset_attributes.network_interfaces[0].private_ip_address #=> String
+    #   resp.findings[0].asset_attributes.network_interfaces[0].private_ip_addresses #=> Array
+    #   resp.findings[0].asset_attributes.network_interfaces[0].private_ip_addresses[0].private_dns_name #=> String
+    #   resp.findings[0].asset_attributes.network_interfaces[0].private_ip_addresses[0].private_ip_address #=> String
+    #   resp.findings[0].asset_attributes.network_interfaces[0].public_dns_name #=> String
+    #   resp.findings[0].asset_attributes.network_interfaces[0].public_ip #=> String
+    #   resp.findings[0].asset_attributes.network_interfaces[0].ipv6_addresses #=> Array
+    #   resp.findings[0].asset_attributes.network_interfaces[0].ipv6_addresses[0] #=> String
+    #   resp.findings[0].asset_attributes.network_interfaces[0].security_groups #=> Array
+    #   resp.findings[0].asset_attributes.network_interfaces[0].security_groups[0].group_name #=> String
+    #   resp.findings[0].asset_attributes.network_interfaces[0].security_groups[0].group_id #=> String
     #   resp.findings[0].id #=> String
     #   resp.findings[0].title #=> String
     #   resp.findings[0].description #=> String
@@ -2807,7 +2826,7 @@ module Aws::Inspector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-inspector'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
