@@ -15,6 +15,7 @@ module Aws
       @max_threads = options[:max_threads] || MAX_THREADS
       @pool = {} # store polling threads
       @mutex = Mutex.new
+      @require_identifier = nil # whether endpoint operation support identifier
     end
 
     # @return [Integer] Max size limit of cache
@@ -103,12 +104,15 @@ module Aws
     # @return [String]
     def extract_key(ctx)
       parts = []
-      parts << ctx.config.credentials.access_key_id
-      ctx.operation.input.shape.members.inject(parts) do |p, (name, ref)|
-        p << ctx.params[name] if ref["endpointdiscoveryid"]
-        p
+      # fetching from cred provider directly gives warnings
+      parts << ctx.config.credentials.credentials.access_key_id
+      if _endpoint_operation_identifier(ctx)
+        parts << ctx.operation_name
+        ctx.operation.input.shape.members.inject(parts) do |p, (name, ref)|
+          p << ctx.params[name] if ref["endpointdiscoveryid"]
+          p
+        end
       end
-      parts.insert(1, ctx.operation_name) if parts.size > 1
       parts.join('_')
     end
 
@@ -132,15 +136,18 @@ module Aws
     private
 
     def _request_endpoint(ctx)
-      # build identifier params when available
-      params = ctx.operation.input.shape.members.inject({}) do |p, (name, ref)|
-        if ref["endpointdiscoveryid"]
-          p[:identifiers] ||= {}
-          p[:identifiers][name] = ctx.params[name]
+      params = {}
+      if _endpoint_operation_identifier(ctx)
+        # build identifier params when available
+        params[:operation] = ctx.operation.name
+        ctx.operation.input.shape.members.inject(params) do |p, (name, ref)|
+          if ref["endpointdiscoveryid"]
+            p[:identifiers] ||= {}
+            p[:identifiers][ref.location_name] = ctx.params[name]
+          end
+          p
         end
-        p
       end
-      params[:operation] = ctx.operation_name unless params.empty?
 
       begin
         endpoint_operation_name = ctx.config.api.endpoint_operation
@@ -148,6 +155,13 @@ module Aws
       rescue Aws::Errors::ServiceError
         nil 
       end
+    end
+
+    def _endpoint_operation_identifier(ctx)
+      return @require_identifier unless @require_identifier.nil?
+      operation_name = ctx.config.api.endpoint_operation
+      operation = ctx.config.api.operation(operation_name)
+      @require_identifier = operation.input.shape.members.any?
     end
 
     class Endpoint

@@ -129,7 +129,7 @@ module Aws
 
       it 'fetches endpoint from cache when available' do
         c = EndpointDiscoveryClient.new(credentials: creds, region: 'us-east-1', endpoint_discovery: true, stub_responses: true)
-        c.config.endpoint_cache['akid'] = {:address => "https://bar.com/foo", :cache_period_in_minutes => 20}
+        c.config.endpoint_cache['akid_operation_not_required'] = {:address => "https://bar.com/foo", :cache_period_in_minutes => 20}
         c.config.endpoint_cache['akid_operation_required_123_foo'] = {:address => "https://bar.com/foo", :cache_period_in_minutes => 20}
 
         resp = c.operation_not_required(foo: 'foo')
@@ -171,7 +171,7 @@ module Aws
           :describe_endpoints,
           {
             endpoints: [
-              { address: "https://foo.com/bar", cache_period_in_minutes: 60 }
+              { address: "foo.com/bar", cache_period_in_minutes: 60 }
             ]
           }
         )

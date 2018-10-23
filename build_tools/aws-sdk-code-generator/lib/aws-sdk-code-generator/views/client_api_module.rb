@@ -216,10 +216,10 @@ module AwsSdkCodeGenerator
       end
 
       def endpoint_operation
-       @service.api['operations'].each do |name, ref|
+        @service.api['operations'].each do |name, ref|
           return underscore(name) if ref['endpointoperation']
-       end
-       nil
+        end
+        nil
       end
 
       private

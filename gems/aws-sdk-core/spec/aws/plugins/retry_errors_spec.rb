@@ -155,15 +155,6 @@ module Aws
 
         end
 
-        describe '#endpoint_discovery?' do
-
-          it 'returns true if the error is EndpointDiscoveryError' do
-            error = Aws::Errors::EndpointDiscoveryError.new
-            expect(inspector(error).endpoint_discovery?).to be(true)
-          end
-
-        end
-
         describe '#networking?' do
 
           it 'returns true if the error code is RequestTimeout' do
@@ -195,12 +186,20 @@ module Aws
 
         let(:credentials) { Credentials.new('akid', 'secret') }
 
+        let(:cache) { EndpointCache.new }
+
+        let(:api) { Seahorse::Model::Api.new }
+
         let(:config) {
           cfg = Seahorse::Client::Configuration.new
           cfg.add_option(:credentials, credentials)
+          cfg.add_option(:endpoint_cache, cache)
+          cfg.add_option(:api, api)
           RetryErrors.new.add_options(cfg)
           cfg.build!
         }
+
+        let(:operation) { Seahorse::Model::Operation.new }
 
         let(:resp) { Seahorse::Client::Response.new }
 
@@ -208,6 +207,8 @@ module Aws
 
         before(:each) do
           resp.context.config = config
+          operation.endpoint_discovery = {}
+          resp.context.operation = operation
           resp.context.http_response.status_code = 400
         end
 
@@ -363,6 +364,20 @@ module Aws
         it 'retries if creds expire and are refreshable' do
           expect(credentials).to receive(:refresh!).exactly(3).times
           resp.error = RetryErrorsSvc::Errors::AuthFailure.new(nil,nil)
+          handle { |context| resp }
+          expect(resp.context.retries).to eq(3)
+        end
+
+        it 'retries if endpoint discovery error is detected' do
+          config.api.endpoint_operation = :describe_endpoints
+          DescribeEndpointsRequest = Seahorse::Model::Shapes::StructureShape.new(
+            name:'DescribeEndpointsRequest')
+          config.api.add_operation(:describe_endpoints, Seahorse::Model::Operation.new.tap do |o|
+            o.endpoint_operation = true
+            o.input = Seahorse::Model::Shapes::ShapeRef.new(shape: DescribeEndpointsRequest)
+          end)
+          resp.error = Errors::EndpointDiscoveryError.new
+
           handle { |context| resp }
           expect(resp.context.retries).to eq(3)
         end

@@ -67,7 +67,7 @@ backgrounds very 60 secs (default). Defaults to `false`.
             _apply_endpoint_discovery_user_agent(context)
           elsif discovery_cfg = context.operation.endpoint_discovery
             endpoint = _discover_endpoint(context, discovery_cfg["required"])
-            context.http_request.endpoint = URI.parse("https://" + endpoint.address) if endpoint
+            context.http_request.endpoint = _valid_uri(endpoint.address) if endpoint
             if endpoint || context.config.endpoint_discovery
               _apply_endpoint_discovery_user_agent(context)
             end
@@ -76,6 +76,15 @@ backgrounds very 60 secs (default). Defaults to `false`.
         end
 
         private
+
+        def _valid_uri(address)
+          # returned address can be missing scheme
+          if address.start_with?('http')
+            URI.parse(address)
+          else
+            URI.parse("https://" + address)
+          end
+        end
 
         def _apply_endpoint_discovery_user_agent(ctx)
           if ctx.config.user_agent_suffix.nil?
