@@ -6,6 +6,7 @@ module Aws
 
       option(:client_side_monitoring,
         default: false,
+        doc_type: 'Boolean',
         docstring: <<-DOCS) do |cfg|
 When `true`, client-side metrics will be collected for all API requests from
 this client.
@@ -15,6 +16,7 @@ this client.
 
       option(:client_side_monitoring_port,
         default: 31000,
+        doc_type: Integer,
         docstring: <<-DOCS) do |cfg|
 Required for publishing client metrics. The port that the client side monitoring
 agent is running on, where client metrics will be published via UDP.
@@ -24,6 +26,7 @@ agent is running on, where client metrics will be published via UDP.
 
       option(:client_side_monitoring_publisher,
         default: ClientSideMonitoring::Publisher,
+        doc_type: Aws::ClientSideMonitoring::Publisher,
         docstring: <<-DOCS) do |cfg|
 Allows you to provide a custom client-side monitoring publisher class. By default,
 will use the Client Side Monitoring Agent Publisher.
@@ -33,6 +36,7 @@ will use the Client Side Monitoring Agent Publisher.
 
       option(:client_side_monitoring_client_id,
         default: "",
+        doc_type: String,
         docstring: <<-DOCS) do |cfg|
 Allows you to provide an identifier for this client which will be attached to
 all generated client side metrics. Defaults to an empty string.
