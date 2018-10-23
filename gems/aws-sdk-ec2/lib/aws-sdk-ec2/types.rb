@@ -250,6 +250,10 @@ module Aws::EC2
     #   Any tags assigned to the Elastic IP address.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] public_ipv_4_pool
+    #   The ID of an address pool.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Address AWS API Documentation
     #
     class Address < Struct.new(
@@ -261,18 +265,56 @@ module Aws::EC2
       :network_interface_id,
       :network_interface_owner_id,
       :private_ip_address,
-      :tags)
+      :tags,
+      :public_ipv_4_pool)
       include Aws::Structure
     end
 
-    # Contains the parameters for AllocateAddress.
+    # @note When making an API call, you may pass AdvertiseByoipCidrRequest
+    #   data as a hash:
     #
+    #       {
+    #         cidr: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] cidr
+    #   The IPv4 address range, in CIDR notation.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AdvertiseByoipCidrRequest AWS API Documentation
+    #
+    class AdvertiseByoipCidrRequest < Struct.new(
+      :cidr,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] byoip_cidr
+    #   Information about the address range.
+    #   @return [Types::ByoipCidr]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AdvertiseByoipCidrResult AWS API Documentation
+    #
+    class AdvertiseByoipCidrResult < Struct.new(
+      :byoip_cidr)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AllocateAddressRequest
     #   data as a hash:
     #
     #       {
     #         domain: "vpc", # accepts vpc, standard
     #         address: "String",
+    #         public_ipv_4_pool: "String",
     #         dry_run: false,
     #       }
     #
@@ -284,7 +326,15 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] address
-    #   \[EC2-VPC\] The Elastic IP address to recover.
+    #   \[EC2-VPC\] The Elastic IP address to recover or an IPv4 address
+    #   from an address pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_ipv_4_pool
+    #   The ID of an address pool that you own. Use this parameter to let
+    #   Amazon EC2 select an address from the address pool. To specify a
+    #   specific address from the address pool, use the `Address` parameter
+    #   instead.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -299,12 +349,11 @@ module Aws::EC2
     class AllocateAddressRequest < Struct.new(
       :domain,
       :address,
+      :public_ipv_4_pool,
       :dry_run)
       include Aws::Structure
     end
 
-    # Contains the output of AllocateAddress.
-    #
     # @!attribute [rw] public_ip
     #   The Elastic IP address.
     #   @return [String]
@@ -312,6 +361,10 @@ module Aws::EC2
     # @!attribute [rw] allocation_id
     #   \[EC2-VPC\] The ID that AWS assigns to represent the allocation of
     #   the Elastic IP address for use with instances in a VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_ipv_4_pool
+    #   The ID of an address pool.
     #   @return [String]
     #
     # @!attribute [rw] domain
@@ -324,6 +377,7 @@ module Aws::EC2
     class AllocateAddressResult < Struct.new(
       :public_ip,
       :allocation_id,
+      :public_ipv_4_pool,
       :domain)
       include Aws::Structure
     end
@@ -529,8 +583,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for AssociateAddress.
-    #
     # @note When making an API call, you may pass AssociateAddressRequest
     #   data as a hash:
     #
@@ -602,8 +654,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of AssociateAddress.
-    #
     # @!attribute [rw] association_id
     #   \[EC2-VPC\] The ID that represents the association of the Elastic IP
     #   address with an instance.
@@ -1622,6 +1672,36 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Information about an address range that is provisioned for use with
+    # your AWS resources through bring your own IP addresses (BYOIP).
+    #
+    # @!attribute [rw] cidr
+    #   The public IPv4 address range, in CIDR notation.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the address range.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Upon success, contains the ID of the address pool. Otherwise,
+    #   contains an error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the address pool.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ByoipCidr AWS API Documentation
+    #
+    class ByoipCidr < Struct.new(
+      :cidr,
+      :description,
+      :status_message,
+      :state)
+      include Aws::Structure
+    end
+
     # Contains the parameters for CancelBundleTask.
     #
     # @note When making an API call, you may pass CancelBundleTaskRequest
@@ -1983,6 +2063,33 @@ module Aws::EC2
     class CancelledSpotInstanceRequest < Struct.new(
       :spot_instance_request_id,
       :state)
+      include Aws::Structure
+    end
+
+    # Provides authorization for Amazon to bring a specific IP address range
+    # to a specific AWS account using bring your own IP addresses (BYOIP).
+    #
+    # @note When making an API call, you may pass CidrAuthorizationContext
+    #   data as a hash:
+    #
+    #       {
+    #         message: "String", # required
+    #         signature: "String", # required
+    #       }
+    #
+    # @!attribute [rw] message
+    #   The plain-text authorization message for the prefix and account.
+    #   @return [String]
+    #
+    # @!attribute [rw] signature
+    #   The signed authorization message for the prefix and account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CidrAuthorizationContext AWS API Documentation
+    #
+    class CidrAuthorizationContext < Struct.new(
+      :message,
+      :signature)
       include Aws::Structure
     end
 
@@ -3911,7 +4018,7 @@ module Aws::EC2
     #
     # @!attribute [rw] icmp_type_code
     #   ICMP protocol: The ICMP or ICMPv6 type and code. Required if
-    #   specifying the ICMP protocol, or protocol 58 (ICMPv6) with an IPv6
+    #   specifying protocol 1 (ICMP) or protocol 58 (ICMPv6) with an IPv6
     #   CIDR block.
     #   @return [Types::IcmpTypeCode]
     #
@@ -3926,16 +4033,17 @@ module Aws::EC2
     #
     # @!attribute [rw] port_range
     #   TCP or UDP protocols: The range of ports the rule applies to.
+    #   Required if specifying protocol 6 (TCP) or 17 (UDP).
     #   @return [Types::PortRange]
     #
     # @!attribute [rw] protocol
-    #   The protocol. A value of `-1` or `all` means all protocols. If you
-    #   specify `all`, `-1`, or a protocol number other than `6` (tcp), `17`
-    #   (udp), or `1` (icmp), traffic on all ports is allowed, regardless of
-    #   any ports or ICMP types or codes that you specify. If you specify
-    #   protocol `58` (ICMPv6) and specify an IPv4 CIDR block, traffic for
+    #   The protocol number. A value of "-1" means all protocols. If you
+    #   specify "-1" or a protocol number other than "6" (TCP), "17"
+    #   (UDP), or "1" (ICMP), traffic on all ports is allowed, regardless
+    #   of any ports or ICMP types or codes that you specify. If you specify
+    #   protocol "58" (ICMPv6) and specify an IPv4 CIDR block, traffic for
     #   all ICMP types and codes allowed, regardless of any that you
-    #   specify. If you specify protocol `58` (ICMPv6) and specify an IPv6
+    #   specify. If you specify protocol "58" (ICMPv6) and specify an IPv6
     #   CIDR block, you must specify an ICMP type and code.
     #   @return [String]
     #
@@ -4666,7 +4774,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] resources
-    #   The IDs of one or more resources to tag. For example, ami-1a2b3c4d.
+    #   The IDs of one or more resources, separated by spaces.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -6413,7 +6521,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] resources
-    #   The IDs of one or more resources.
+    #   The IDs of one or more resources, separated by spaces.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -6738,6 +6846,46 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeprovisionByoipCidrRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cidr: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] cidr
+    #   The public IPv4 address range, in CIDR notation. The prefix must be
+    #   the same prefix that you specified when you provisioned the address
+    #   range.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeprovisionByoipCidrRequest AWS API Documentation
+    #
+    class DeprovisionByoipCidrRequest < Struct.new(
+      :cidr,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] byoip_cidr
+    #   Information about the address range.
+    #   @return [Types::ByoipCidr]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeprovisionByoipCidrResult AWS API Documentation
+    #
+    class DeprovisionByoipCidrResult < Struct.new(
+      :byoip_cidr)
+      include Aws::Structure
+    end
+
     # Contains the parameters for DeregisterImage.
     #
     # @note When making an API call, you may pass DeregisterImageRequest
@@ -6809,8 +6957,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeAddresses.
-    #
     # @note When making an API call, you may pass DescribeAddressesRequest
     #   data as a hash:
     #
@@ -6889,8 +7035,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeAddresses.
-    #
     # @!attribute [rw] addresses
     #   Information about one or more Elastic IP addresses.
     #   @return [Array<Types::Address>]
@@ -7081,6 +7225,58 @@ module Aws::EC2
     #
     class DescribeBundleTasksResult < Struct.new(
       :bundle_tasks)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeByoipCidrsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         max_results: 1, # required
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeByoipCidrsRequest AWS API Documentation
+    #
+    class DescribeByoipCidrsRequest < Struct.new(
+      :dry_run,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] byoip_cidrs
+    #   Information about your address ranges.
+    #   @return [Array<Types::ByoipCidr>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeByoipCidrsResult AWS API Documentation
+    #
+    class DescribeByoipCidrsResult < Struct.new(
+      :byoip_cidrs,
+      :next_token)
       include Aws::Structure
     end
 
@@ -9703,8 +9899,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeMovingAddresses.
-    #
     # @note When making an API call, you may pass DescribeMovingAddressesRequest
     #   data as a hash:
     #
@@ -9748,7 +9942,7 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results.
+    #   The token for the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] public_ips
@@ -9766,8 +9960,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeMovingAddresses.
-    #
     # @!attribute [rw] moving_address_statuses
     #   The status for each Elastic IP address.
     #   @return [Array<Types::MovingAddressStatus>]
@@ -10504,6 +10696,55 @@ module Aws::EC2
     #
     class DescribePrincipalIdFormatResult < Struct.new(
       :principals,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribePublicIpv4PoolsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         pool_ids: ["String"],
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] pool_ids
+    #   The IDs of the address pools.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePublicIpv4PoolsRequest AWS API Documentation
+    #
+    class DescribePublicIpv4PoolsRequest < Struct.new(
+      :pool_ids,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] public_ipv_4_pools
+    #   Information about the address pools.
+    #   @return [Array<Types::PublicIpv4Pool>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePublicIpv4PoolsResult AWS API Documentation
+    #
+    class DescribePublicIpv4PoolsResult < Struct.new(
+      :public_ipv_4_pools,
       :next_token)
       include Aws::Structure
     end
@@ -14313,8 +14554,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DisassociateAddress.
-    #
     # @note When making an API call, you may pass DisassociateAddressRequest
     #   data as a hash:
     #
@@ -21986,8 +22225,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for MoveAddressToVpc.
-    #
     # @note When making an API call, you may pass MoveAddressToVpcRequest
     #   data as a hash:
     #
@@ -22015,8 +22252,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of MoveAddressToVpc.
-    #
     # @!attribute [rw] allocation_id
     #   The allocation ID for the Elastic IP address.
     #   @return [String]
@@ -22277,7 +22512,7 @@ module Aws::EC2
     #   @return [Types::PortRange]
     #
     # @!attribute [rw] protocol
-    #   The protocol. A value of `-1` means all protocols.
+    #   The protocol number. A value of "-1" means all protocols.
     #   @return [String]
     #
     # @!attribute [rw] rule_action
@@ -23109,6 +23344,63 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ProvisionByoipCidrRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cidr: "String", # required
+    #         cidr_authorization_context: {
+    #           message: "String", # required
+    #           signature: "String", # required
+    #         },
+    #         description: "String",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] cidr
+    #   The public IPv4 address range, in CIDR notation. The most specific
+    #   prefix that you can specify is /24. The address range cannot overlap
+    #   with another address range that you've brought to this or another
+    #   region.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr_authorization_context
+    #   A signed document that proves that you are authorized to bring the
+    #   specified IP address range to Amazon using BYOIP.
+    #   @return [Types::CidrAuthorizationContext]
+    #
+    # @!attribute [rw] description
+    #   A description for the address range and the address pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionByoipCidrRequest AWS API Documentation
+    #
+    class ProvisionByoipCidrRequest < Struct.new(
+      :cidr,
+      :cidr_authorization_context,
+      :description,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] byoip_cidr
+    #   Information about the address pool.
+    #   @return [Types::ByoipCidr]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionByoipCidrResult AWS API Documentation
+    #
+    class ProvisionByoipCidrResult < Struct.new(
+      :byoip_cidr)
+      include Aws::Structure
+    end
+
     # Reserved. If you need to sustain traffic greater than the [documented
     # limits][1], contact us through the [Support Center][2].
     #
@@ -23175,6 +23467,67 @@ module Aws::EC2
       :request_time,
       :requested,
       :status)
+      include Aws::Structure
+    end
+
+    # Describes an address pool.
+    #
+    # @!attribute [rw] pool_id
+    #   The ID of the IPv4 address pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the address pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] pool_address_ranges
+    #   The address ranges.
+    #   @return [Array<Types::PublicIpv4PoolRange>]
+    #
+    # @!attribute [rw] total_address_count
+    #   The total number of addresses.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_available_address_count
+    #   The total number of available addresses.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PublicIpv4Pool AWS API Documentation
+    #
+    class PublicIpv4Pool < Struct.new(
+      :pool_id,
+      :description,
+      :pool_address_ranges,
+      :total_address_count,
+      :total_available_address_count)
+      include Aws::Structure
+    end
+
+    # Describes an address range of an IPv4 address pool.
+    #
+    # @!attribute [rw] first_address
+    #   The first IP address in the range.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_address
+    #   The last IP address in the range.
+    #   @return [String]
+    #
+    # @!attribute [rw] address_count
+    #   The number of addresses in the range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] available_address_count
+    #   The number of available addresses in the range.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PublicIpv4PoolRange AWS API Documentation
+    #
+    class PublicIpv4PoolRange < Struct.new(
+      :first_address,
+      :last_address,
+      :address_count,
+      :available_address_count)
       include Aws::Structure
     end
 
@@ -23766,8 +24119,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ReleaseAddress.
-    #
     # @note When making an API call, you may pass ReleaseAddressRequest
     #   data as a hash:
     #
@@ -23961,8 +24312,8 @@ module Aws::EC2
     #
     # @!attribute [rw] icmp_type_code
     #   ICMP protocol: The ICMP or ICMPv6 type and code. Required if
-    #   specifying the ICMP (1) protocol, or protocol 58 (ICMPv6) with an
-    #   IPv6 CIDR block.
+    #   specifying protocol 1 (ICMP) or protocol 58 (ICMPv6) with an IPv6
+    #   CIDR block.
     #   @return [Types::IcmpTypeCode]
     #
     # @!attribute [rw] ipv_6_cidr_block
@@ -23976,18 +24327,18 @@ module Aws::EC2
     #
     # @!attribute [rw] port_range
     #   TCP or UDP protocols: The range of ports the rule applies to.
-    #   Required if specifying TCP (6) or UDP (17) for the protocol.
+    #   Required if specifying protocol 6 (TCP) or 17 (UDP).
     #   @return [Types::PortRange]
     #
     # @!attribute [rw] protocol
-    #   The IP protocol. You can specify `all` or `-1` to mean all
-    #   protocols. If you specify `all`, `-1`, or a protocol number other
-    #   than `tcp`, `udp`, or `icmp`, traffic on all ports is allowed,
-    #   regardless of any ports or ICMP types or codes you that specify. If
-    #   you specify protocol `58` (ICMPv6) and specify an IPv4 CIDR block,
-    #   traffic for all ICMP types and codes allowed, regardless of any that
-    #   you specify. If you specify protocol `58` (ICMPv6) and specify an
-    #   IPv6 CIDR block, you must specify an ICMP type and code.
+    #   The protocol number. A value of "-1" means all protocols. If you
+    #   specify "-1" or a protocol number other than "6" (TCP), "17"
+    #   (UDP), or "1" (ICMP), traffic on all ports is allowed, regardless
+    #   of any ports or ICMP types or codes that you specify. If you specify
+    #   protocol "58" (ICMPv6) and specify an IPv4 CIDR block, traffic for
+    #   all ICMP types and codes allowed, regardless of any that you
+    #   specify. If you specify protocol "58" (ICMPv6) and specify an IPv6
+    #   CIDR block, you must specify an ICMP type and code.
     #   @return [String]
     #
     # @!attribute [rw] rule_action
@@ -25923,8 +26274,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for RestoreAddressToClassic.
-    #
     # @note When making an API call, you may pass RestoreAddressToClassicRequest
     #   data as a hash:
     #
@@ -25952,8 +26301,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of RestoreAddressToClassic.
-    #
     # @!attribute [rw] public_ip
     #   The Elastic IP address.
     #   @return [String]
@@ -28764,7 +29111,7 @@ module Aws::EC2
     #
     # @!attribute [rw] fulfilled_capacity
     #   The number of units fulfilled by this request compared to the set
-    #   target capacity.
+    #   target capacity. You cannot set this value.
     #   @return [Float]
     #
     # @!attribute [rw] on_demand_fulfilled_capacity
@@ -29750,7 +30097,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The ID of the resource. For example, `ami-1a2b3c4d`.
+    #   The ID of the resource.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -31574,6 +31921,44 @@ module Aws::EC2
     class VpnTunnelOptionsSpecification < Struct.new(
       :tunnel_inside_cidr,
       :pre_shared_key)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass WithdrawByoipCidrRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cidr: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] cidr
+    #   The public IPv4 address range, in CIDR notation.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/WithdrawByoipCidrRequest AWS API Documentation
+    #
+    class WithdrawByoipCidrRequest < Struct.new(
+      :cidr,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] byoip_cidr
+    #   Information about the address pool.
+    #   @return [Types::ByoipCidr]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/WithdrawByoipCidrResult AWS API Documentation
+    #
+    class WithdrawByoipCidrResult < Struct.new(
+      :byoip_cidr)
       include Aws::Structure
     end
 

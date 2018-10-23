@@ -100,19 +100,19 @@ module Aws::EC2
     #
     # @option options [String] :access_key_id
     #
-    # @option options [] :client_side_monitoring (false)
+    # @option options [Boolean] :client_side_monitoring (false)
     #   When `true`, client-side metrics will be collected for all API requests from
     #   this client.
     #
-    # @option options [] :client_side_monitoring_client_id ("")
+    # @option options [String] :client_side_monitoring_client_id ("")
     #   Allows you to provide an identifier for this client which will be attached to
     #   all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [] :client_side_monitoring_port (31000)
+    # @option options [Integer] :client_side_monitoring_port (31000)
     #   Required for publishing client metrics. The port that the client side monitoring
     #   agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    # @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
     #   Allows you to provide a custom client-side monitoring publisher class. By default,
     #   will use the Client Side Monitoring Agent Publisher.
     #
@@ -340,11 +340,71 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Advertises an IPv4 address range that is provisioned for use with your
+    # AWS resources through bring your own IP addresses (BYOIP).
+    #
+    # You can perform this operation at most once every 10 seconds, even if
+    # you specify different address ranges each time.
+    #
+    # We recommend that you stop advertising the BYOIP CIDR from other
+    # locations when you advertise it from AWS. To minimize down time, you
+    # can configure your AWS resources to use an address from a BYOIP CIDR
+    # before it is advertised, and then simultaneously stop advertising it
+    # from the current location and start advertising it through AWS.
+    #
+    # It can take a few minutes before traffic to the specified addresses
+    # starts routing to AWS because of BGP propagation delays.
+    #
+    # To stop advertising the BYOIP CIDR, use WithdrawByoipCidr.
+    #
+    # @option params [required, String] :cidr
+    #   The IPv4 address range, in CIDR notation.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::AdvertiseByoipCidrResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AdvertiseByoipCidrResult#byoip_cidr #byoip_cidr} => Types::ByoipCidr
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.advertise_byoip_cidr({
+    #     cidr: "String", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.byoip_cidr.cidr #=> String
+    #   resp.byoip_cidr.description #=> String
+    #   resp.byoip_cidr.status_message #=> String
+    #   resp.byoip_cidr.state #=> String, one of "advertised", "deprovisioned", "failed-deprovision", "failed-provision", "pending-deprovision", "pending-provision", "provisioned"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AdvertiseByoipCidr AWS API Documentation
+    #
+    # @overload advertise_byoip_cidr(params = {})
+    # @param [Hash] params ({})
+    def advertise_byoip_cidr(params = {}, options = {})
+      req = build_request(:advertise_byoip_cidr, params)
+      req.send_request(options)
+    end
+
     # Allocates an Elastic IP address to your AWS account. After you
     # allocate the Elastic IP address you can associate it with an instance
     # or network interface. After you release an Elastic IP address, it is
     # released to the IP address pool and can be allocated to a different
     # AWS account.
+    #
+    # You can allocate an Elastic IP address from an address pool owned by
+    # AWS or from an address pool created from a public IPv4 address range
+    # that you have brought to AWS for use with your AWS resources using
+    # bring your own IP addresses (BYOIP). For more information, see [Bring
+    # Your Own IP Addresses (BYOIP)][1] in the *Amazon Elastic Compute Cloud
+    # User Guide*.
     #
     # \[EC2-VPC\] If you release an Elastic IP address, you might be able to
     # recover it. You cannot recover an Elastic IP address that you released
@@ -357,12 +417,13 @@ module Aws::EC2
     # EC2-Classic per region and 5 Elastic IP addresses for EC2-VPC per
     # region.
     #
-    # For more information, see [Elastic IP Addresses][1] in the *Amazon
+    # For more information, see [Elastic IP Addresses][2] in the *Amazon
     # Elastic Compute Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
+    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html
+    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
     #
     # @option params [String] :domain
     #   Set to `vpc` to allocate the address for use with instances in a VPC.
@@ -370,7 +431,14 @@ module Aws::EC2
     #   Default: The address is for use with instances in EC2-Classic.
     #
     # @option params [String] :address
-    #   \[EC2-VPC\] The Elastic IP address to recover.
+    #   \[EC2-VPC\] The Elastic IP address to recover or an IPv4 address from
+    #   an address pool.
+    #
+    # @option params [String] :public_ipv_4_pool
+    #   The ID of an address pool that you own. Use this parameter to let
+    #   Amazon EC2 select an address from the address pool. To specify a
+    #   specific address from the address pool, use the `Address` parameter
+    #   instead.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -382,6 +450,7 @@ module Aws::EC2
     #
     #   * {Types::AllocateAddressResult#public_ip #public_ip} => String
     #   * {Types::AllocateAddressResult#allocation_id #allocation_id} => String
+    #   * {Types::AllocateAddressResult#public_ipv_4_pool #public_ipv_4_pool} => String
     #   * {Types::AllocateAddressResult#domain #domain} => String
     #
     #
@@ -418,6 +487,7 @@ module Aws::EC2
     #   resp = client.allocate_address({
     #     domain: "vpc", # accepts vpc, standard
     #     address: "String",
+    #     public_ipv_4_pool: "String",
     #     dry_run: false,
     #   })
     #
@@ -425,6 +495,7 @@ module Aws::EC2
     #
     #   resp.public_ip #=> String
     #   resp.allocation_id #=> String
+    #   resp.public_ipv_4_pool #=> String
     #   resp.domain #=> String, one of "vpc", "standard"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateAddress AWS API Documentation
@@ -566,16 +637,25 @@ module Aws::EC2
     end
 
     # Assigns one or more secondary private IP addresses to the specified
-    # network interface. You can specify one or more specific secondary IP
-    # addresses, or you can specify the number of secondary IP addresses to
-    # be automatically assigned within the subnet's CIDR block range. The
-    # number of secondary IP addresses that you can assign to an instance
-    # varies by instance type. For information about instance types, see
-    # [Instance Types][1] in the *Amazon Elastic Compute Cloud User Guide*.
-    # For more information about Elastic IP addresses, see [Elastic IP
-    # Addresses][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    # network interface.
     #
-    # AssignPrivateIpAddresses is available only in EC2-VPC.
+    # You can specify one or more specific secondary IP addresses, or you
+    # can specify the number of secondary IP addresses to be automatically
+    # assigned within the subnet's CIDR block range. The number of
+    # secondary IP addresses that you can assign to an instance varies by
+    # instance type. For information about instance types, see [Instance
+    # Types][1] in the *Amazon Elastic Compute Cloud User Guide*. For more
+    # information about Elastic IP addresses, see [Elastic IP Addresses][2]
+    # in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    # When you move a secondary private IP address to another network
+    # interface, any Elastic IP address that is associated with the IP
+    # address is also moved.
+    #
+    # Remapping an IP address is an asynchronous operation. When you move an
+    # IP address from one network interface to another, check
+    # `network/interfaces/macs/mac/local-ipv4s` in the instance metadata to
+    # confirm that the remapping is complete.
     #
     #
     #
@@ -4540,8 +4620,8 @@ module Aws::EC2
     #
     # @option params [Types::IcmpTypeCode] :icmp_type_code
     #   ICMP protocol: The ICMP or ICMPv6 type and code. Required if
-    #   specifying the ICMP protocol, or protocol 58 (ICMPv6) with an IPv6
-    #   CIDR block.
+    #   specifying protocol 1 (ICMP) or protocol 58 (ICMPv6) with an IPv6 CIDR
+    #   block.
     #
     # @option params [String] :ipv_6_cidr_block
     #   The IPv6 network range to allow or deny, in CIDR notation (for example
@@ -4551,17 +4631,18 @@ module Aws::EC2
     #   The ID of the network ACL.
     #
     # @option params [Types::PortRange] :port_range
-    #   TCP or UDP protocols: The range of ports the rule applies to.
+    #   TCP or UDP protocols: The range of ports the rule applies to. Required
+    #   if specifying protocol 6 (TCP) or 17 (UDP).
     #
     # @option params [required, String] :protocol
-    #   The protocol. A value of `-1` or `all` means all protocols. If you
-    #   specify `all`, `-1`, or a protocol number other than `6` (tcp), `17`
-    #   (udp), or `1` (icmp), traffic on all ports is allowed, regardless of
+    #   The protocol number. A value of "-1" means all protocols. If you
+    #   specify "-1" or a protocol number other than "6" (TCP), "17"
+    #   (UDP), or "1" (ICMP), traffic on all ports is allowed, regardless of
     #   any ports or ICMP types or codes that you specify. If you specify
-    #   protocol `58` (ICMPv6) and specify an IPv4 CIDR block, traffic for all
-    #   ICMP types and codes allowed, regardless of any that you specify. If
-    #   you specify protocol `58` (ICMPv6) and specify an IPv6 CIDR block, you
-    #   must specify an ICMP type and code.
+    #   protocol "58" (ICMPv6) and specify an IPv4 CIDR block, traffic for
+    #   all ICMP types and codes allowed, regardless of any that you specify.
+    #   If you specify protocol "58" (ICMPv6) and specify an IPv6 CIDR
+    #   block, you must specify an ICMP type and code.
     #
     # @option params [required, String] :rule_action
     #   Indicates whether to allow or deny the traffic that matches the rule.
@@ -4589,7 +4670,7 @@ module Aws::EC2
     #       from: 53, 
     #       to: 53, 
     #     }, 
-    #     protocol: "udp", 
+    #     protocol: "17", 
     #     rule_action: "allow", 
     #     rule_number: 100, 
     #   })
@@ -5712,7 +5793,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, Array<String>] :resources
-    #   The IDs of one or more resources to tag. For example, ami-1a2b3c4d.
+    #   The IDs of one or more resources, separated by spaces.
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   One or more tags. The `value` parameter is required, but if you don't
@@ -7757,7 +7838,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, Array<String>] :resources
-    #   The IDs of one or more resources.
+    #   The IDs of one or more resources, separated by spaces.
     #
     # @option params [Array<Types::Tag>] :tags
     #   One or more tags to delete. Specify a tag key and an optional tag
@@ -8169,6 +8250,52 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Releases the specified address range that you provisioned for use with
+    # your AWS resources through bring your own IP addresses (BYOIP) and
+    # deletes the corresponding address pool.
+    #
+    # Before you can release an address range, you must stop advertising it
+    # using WithdrawByoipCidr and you must not have any IP addresses
+    # allocated from its address range.
+    #
+    # @option params [required, String] :cidr
+    #   The public IPv4 address range, in CIDR notation. The prefix must be
+    #   the same prefix that you specified when you provisioned the address
+    #   range.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DeprovisionByoipCidrResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeprovisionByoipCidrResult#byoip_cidr #byoip_cidr} => Types::ByoipCidr
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deprovision_byoip_cidr({
+    #     cidr: "String", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.byoip_cidr.cidr #=> String
+    #   resp.byoip_cidr.description #=> String
+    #   resp.byoip_cidr.status_message #=> String
+    #   resp.byoip_cidr.state #=> String, one of "advertised", "deprovisioned", "failed-deprovision", "failed-provision", "pending-deprovision", "pending-provision", "provisioned"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeprovisionByoipCidr AWS API Documentation
+    #
+    # @overload deprovision_byoip_cidr(params = {})
+    # @param [Hash] params ({})
+    def deprovision_byoip_cidr(params = {}, options = {})
+      req = build_request(:deprovision_byoip_cidr, params)
+      req.send_request(options)
+    end
+
     # Deregisters the specified AMI. After you deregister an AMI, it can't
     # be used to launch new instances; however, it doesn't affect any
     # instances that you've already launched from the AMI. You'll continue
@@ -8533,6 +8660,7 @@ module Aws::EC2
     #   resp.addresses[0].tags #=> Array
     #   resp.addresses[0].tags[0].key #=> String
     #   resp.addresses[0].tags[0].value #=> String
+    #   resp.addresses[0].public_ipv_4_pool #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAddresses AWS API Documentation
     #
@@ -8798,6 +8926,57 @@ module Aws::EC2
     # @param [Hash] params ({})
     def describe_bundle_tasks(params = {}, options = {})
       req = build_request(:describe_bundle_tasks, params)
+      req.send_request(options)
+    end
+
+    # Describes the IP address ranges that were specified in calls to
+    # ProvisionByoipCidr.
+    #
+    # To describe the address pools that were created when you provisioned
+    # the address ranges, use DescribePublicIpv4Pools.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::DescribeByoipCidrsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeByoipCidrsResult#byoip_cidrs #byoip_cidrs} => Array&lt;Types::ByoipCidr&gt;
+    #   * {Types::DescribeByoipCidrsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_byoip_cidrs({
+    #     dry_run: false,
+    #     max_results: 1, # required
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.byoip_cidrs #=> Array
+    #   resp.byoip_cidrs[0].cidr #=> String
+    #   resp.byoip_cidrs[0].description #=> String
+    #   resp.byoip_cidrs[0].status_message #=> String
+    #   resp.byoip_cidrs[0].state #=> String, one of "advertised", "deprovisioned", "failed-deprovision", "failed-provision", "pending-deprovision", "pending-provision", "provisioned"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeByoipCidrs AWS API Documentation
+    #
+    # @overload describe_byoip_cidrs(params = {})
+    # @param [Hash] params ({})
+    def describe_byoip_cidrs(params = {}, options = {})
+      req = build_request(:describe_byoip_cidrs, params)
       req.send_request(options)
     end
 
@@ -12308,7 +12487,7 @@ module Aws::EC2
     #   Default: If no value is provided, the default is 1000.
     #
     # @option params [String] :next_token
-    #   The token to use to retrieve the next page of results.
+    #   The token for the next page of results.
     #
     # @option params [Array<String>] :public_ips
     #   One or more Elastic IP addresses.
@@ -13361,6 +13540,55 @@ module Aws::EC2
     # @param [Hash] params ({})
     def describe_principal_id_format(params = {}, options = {})
       req = build_request(:describe_principal_id_format, params)
+      req.send_request(options)
+    end
+
+    # Describes the specified IPv4 address pools.
+    #
+    # @option params [Array<String>] :pool_ids
+    #   The IDs of the address pools.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @return [Types::DescribePublicIpv4PoolsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePublicIpv4PoolsResult#public_ipv_4_pools #public_ipv_4_pools} => Array&lt;Types::PublicIpv4Pool&gt;
+    #   * {Types::DescribePublicIpv4PoolsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_public_ipv_4_pools({
+    #     pool_ids: ["String"],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.public_ipv_4_pools #=> Array
+    #   resp.public_ipv_4_pools[0].pool_id #=> String
+    #   resp.public_ipv_4_pools[0].description #=> String
+    #   resp.public_ipv_4_pools[0].pool_address_ranges #=> Array
+    #   resp.public_ipv_4_pools[0].pool_address_ranges[0].first_address #=> String
+    #   resp.public_ipv_4_pools[0].pool_address_ranges[0].last_address #=> String
+    #   resp.public_ipv_4_pools[0].pool_address_ranges[0].address_count #=> Integer
+    #   resp.public_ipv_4_pools[0].pool_address_ranges[0].available_address_count #=> Integer
+    #   resp.public_ipv_4_pools[0].total_address_count #=> Integer
+    #   resp.public_ipv_4_pools[0].total_available_address_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePublicIpv4Pools AWS API Documentation
+    #
+    # @overload describe_public_ipv_4_pools(params = {})
+    # @param [Hash] params ({})
+    def describe_public_ipv_4_pools(params = {}, options = {})
+      req = build_request(:describe_public_ipv_4_pools, params)
       req.send_request(options)
     end
 
@@ -15274,7 +15502,8 @@ module Aws::EC2
     #
     # Spot Fleet events are delayed by up to 30 seconds before they can be
     # described. This ensures that you can query by the last evaluated time
-    # and not miss a recorded event.
+    # and not miss a recorded event. Spot Fleet events are available for 48
+    # hours.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -21942,6 +22171,81 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Provisions an address range for use with your AWS resources through
+    # bring your own IP addresses (BYOIP) and creates a corresponding
+    # address pool. After the address range is provisioned, it is ready to
+    # be advertised using AdvertiseByoipCidr.
+    #
+    # AWS verifies that you own the address range and are authorized to
+    # advertise it. You must ensure that the address range is registered to
+    # you and that you created an RPKI ROA to authorize Amazon ASNs 16509
+    # and 14618 to advertise the address range. For more information, see
+    # [Bring Your Own IP Addresses (BYOIP)][1] in the *Amazon Elastic
+    # Compute Cloud User Guide*.
+    #
+    # Provisioning an address range is an asynchronous operation, so the
+    # call returns immediately, but the address range is not ready to use
+    # until its status changes from `pending-provision` to `provisioned`. To
+    # monitor the status of an address range, use DescribeByoipCidrs. To
+    # allocate an Elastic IP address from your address pool, use
+    # AllocateAddress with either the specific address from the address pool
+    # or the ID of the address pool.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html
+    #
+    # @option params [required, String] :cidr
+    #   The public IPv4 address range, in CIDR notation. The most specific
+    #   prefix that you can specify is /24. The address range cannot overlap
+    #   with another address range that you've brought to this or another
+    #   region.
+    #
+    # @option params [Types::CidrAuthorizationContext] :cidr_authorization_context
+    #   A signed document that proves that you are authorized to bring the
+    #   specified IP address range to Amazon using BYOIP.
+    #
+    # @option params [String] :description
+    #   A description for the address range and the address pool.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ProvisionByoipCidrResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ProvisionByoipCidrResult#byoip_cidr #byoip_cidr} => Types::ByoipCidr
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.provision_byoip_cidr({
+    #     cidr: "String", # required
+    #     cidr_authorization_context: {
+    #       message: "String", # required
+    #       signature: "String", # required
+    #     },
+    #     description: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.byoip_cidr.cidr #=> String
+    #   resp.byoip_cidr.description #=> String
+    #   resp.byoip_cidr.status_message #=> String
+    #   resp.byoip_cidr.state #=> String, one of "advertised", "deprovisioned", "failed-deprovision", "failed-provision", "pending-deprovision", "pending-provision", "provisioned"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionByoipCidr AWS API Documentation
+    #
+    # @overload provision_byoip_cidr(params = {})
+    # @param [Hash] params ({})
+    def provision_byoip_cidr(params = {}, options = {})
+      req = build_request(:provision_byoip_cidr, params)
+      req.send_request(options)
+    end
+
     # Purchase a reservation with configurations that match those of your
     # Dedicated Host. You must have active Dedicated Hosts in your account
     # before you purchase a reservation. This action results in the
@@ -22758,8 +23062,8 @@ module Aws::EC2
     #
     # @option params [Types::IcmpTypeCode] :icmp_type_code
     #   ICMP protocol: The ICMP or ICMPv6 type and code. Required if
-    #   specifying the ICMP (1) protocol, or protocol 58 (ICMPv6) with an IPv6
-    #   CIDR block.
+    #   specifying protocol 1 (ICMP) or protocol 58 (ICMPv6) with an IPv6 CIDR
+    #   block.
     #
     # @option params [String] :ipv_6_cidr_block
     #   The IPv6 network range to allow or deny, in CIDR notation (for example
@@ -22770,17 +23074,17 @@ module Aws::EC2
     #
     # @option params [Types::PortRange] :port_range
     #   TCP or UDP protocols: The range of ports the rule applies to. Required
-    #   if specifying TCP (6) or UDP (17) for the protocol.
+    #   if specifying protocol 6 (TCP) or 17 (UDP).
     #
     # @option params [required, String] :protocol
-    #   The IP protocol. You can specify `all` or `-1` to mean all protocols.
-    #   If you specify `all`, `-1`, or a protocol number other than `tcp`,
-    #   `udp`, or `icmp`, traffic on all ports is allowed, regardless of any
-    #   ports or ICMP types or codes you that specify. If you specify protocol
-    #   `58` (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP
-    #   types and codes allowed, regardless of any that you specify. If you
-    #   specify protocol `58` (ICMPv6) and specify an IPv6 CIDR block, you
-    #   must specify an ICMP type and code.
+    #   The protocol number. A value of "-1" means all protocols. If you
+    #   specify "-1" or a protocol number other than "6" (TCP), "17"
+    #   (UDP), or "1" (ICMP), traffic on all ports is allowed, regardless of
+    #   any ports or ICMP types or codes that you specify. If you specify
+    #   protocol "58" (ICMPv6) and specify an IPv4 CIDR block, traffic for
+    #   all ICMP types and codes allowed, regardless of any that you specify.
+    #   If you specify protocol "58" (ICMPv6) and specify an IPv6 CIDR
+    #   block, you must specify an ICMP type and code.
     #
     # @option params [required, String] :rule_action
     #   Indicates whether to allow or deny the traffic that matches the rule.
@@ -22804,7 +23108,7 @@ module Aws::EC2
     #       from: 53, 
     #       to: 53, 
     #     }, 
-    #     protocol: "udp", 
+    #     protocol: "17", 
     #     rule_action: "allow", 
     #     rule_number: 100, 
     #   })
@@ -25760,6 +26064,51 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Stops advertising an IPv4 address range that is provisioned as an
+    # address pool.
+    #
+    # You can perform this operation at most once every 10 seconds, even if
+    # you specify different address ranges each time.
+    #
+    # It can take a few minutes before traffic to the specified addresses
+    # stops routing to AWS because of BGP propagation delays.
+    #
+    # @option params [required, String] :cidr
+    #   The public IPv4 address range, in CIDR notation.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::WithdrawByoipCidrResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::WithdrawByoipCidrResult#byoip_cidr #byoip_cidr} => Types::ByoipCidr
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.withdraw_byoip_cidr({
+    #     cidr: "String", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.byoip_cidr.cidr #=> String
+    #   resp.byoip_cidr.description #=> String
+    #   resp.byoip_cidr.status_message #=> String
+    #   resp.byoip_cidr.state #=> String, one of "advertised", "deprovisioned", "failed-deprovision", "failed-provision", "pending-deprovision", "pending-provision", "provisioned"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/WithdrawByoipCidr AWS API Documentation
+    #
+    # @overload withdraw_byoip_cidr(params = {})
+    # @param [Hash] params ({})
+    def withdraw_byoip_cidr(params = {}, options = {})
+      req = build_request(:withdraw_byoip_cidr, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -25773,7 +26122,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

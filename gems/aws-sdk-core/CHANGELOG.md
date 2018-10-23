@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.34.0 (2018-10-23)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
 * Feature - Allow 429 response code to trigger throttle detection
 
 3.33.0 (2018-10-22)

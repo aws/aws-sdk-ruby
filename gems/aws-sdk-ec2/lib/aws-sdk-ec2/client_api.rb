@@ -28,6 +28,8 @@ module Aws::EC2
     ActivityStatus = Shapes::StringShape.new(name: 'ActivityStatus')
     Address = Shapes::StructureShape.new(name: 'Address')
     AddressList = Shapes::ListShape.new(name: 'AddressList')
+    AdvertiseByoipCidrRequest = Shapes::StructureShape.new(name: 'AdvertiseByoipCidrRequest')
+    AdvertiseByoipCidrResult = Shapes::StructureShape.new(name: 'AdvertiseByoipCidrResult')
     Affinity = Shapes::StringShape.new(name: 'Affinity')
     AllocateAddressRequest = Shapes::StructureShape.new(name: 'AllocateAddressRequest')
     AllocateAddressResult = Shapes::StructureShape.new(name: 'AllocateAddressResult')
@@ -90,6 +92,9 @@ module Aws::EC2
     BundleTaskError = Shapes::StructureShape.new(name: 'BundleTaskError')
     BundleTaskList = Shapes::ListShape.new(name: 'BundleTaskList')
     BundleTaskState = Shapes::StringShape.new(name: 'BundleTaskState')
+    ByoipCidr = Shapes::StructureShape.new(name: 'ByoipCidr')
+    ByoipCidrSet = Shapes::ListShape.new(name: 'ByoipCidrSet')
+    ByoipCidrState = Shapes::StringShape.new(name: 'ByoipCidrState')
     CancelBatchErrorCode = Shapes::StringShape.new(name: 'CancelBatchErrorCode')
     CancelBundleTaskRequest = Shapes::StructureShape.new(name: 'CancelBundleTaskRequest')
     CancelBundleTaskResult = Shapes::StructureShape.new(name: 'CancelBundleTaskResult')
@@ -111,6 +116,7 @@ module Aws::EC2
     CancelSpotInstanceRequestsResult = Shapes::StructureShape.new(name: 'CancelSpotInstanceRequestsResult')
     CancelledSpotInstanceRequest = Shapes::StructureShape.new(name: 'CancelledSpotInstanceRequest')
     CancelledSpotInstanceRequestList = Shapes::ListShape.new(name: 'CancelledSpotInstanceRequestList')
+    CidrAuthorizationContext = Shapes::StructureShape.new(name: 'CidrAuthorizationContext')
     CidrBlock = Shapes::StructureShape.new(name: 'CidrBlock')
     CidrBlockSet = Shapes::ListShape.new(name: 'CidrBlockSet')
     ClassicLinkDnsSupport = Shapes::StructureShape.new(name: 'ClassicLinkDnsSupport')
@@ -272,6 +278,8 @@ module Aws::EC2
     DeleteVpnConnectionRequest = Shapes::StructureShape.new(name: 'DeleteVpnConnectionRequest')
     DeleteVpnConnectionRouteRequest = Shapes::StructureShape.new(name: 'DeleteVpnConnectionRouteRequest')
     DeleteVpnGatewayRequest = Shapes::StructureShape.new(name: 'DeleteVpnGatewayRequest')
+    DeprovisionByoipCidrRequest = Shapes::StructureShape.new(name: 'DeprovisionByoipCidrRequest')
+    DeprovisionByoipCidrResult = Shapes::StructureShape.new(name: 'DeprovisionByoipCidrResult')
     DeregisterImageRequest = Shapes::StructureShape.new(name: 'DeregisterImageRequest')
     DescribeAccountAttributesRequest = Shapes::StructureShape.new(name: 'DescribeAccountAttributesRequest')
     DescribeAccountAttributesResult = Shapes::StructureShape.new(name: 'DescribeAccountAttributesResult')
@@ -283,6 +291,8 @@ module Aws::EC2
     DescribeAvailabilityZonesResult = Shapes::StructureShape.new(name: 'DescribeAvailabilityZonesResult')
     DescribeBundleTasksRequest = Shapes::StructureShape.new(name: 'DescribeBundleTasksRequest')
     DescribeBundleTasksResult = Shapes::StructureShape.new(name: 'DescribeBundleTasksResult')
+    DescribeByoipCidrsRequest = Shapes::StructureShape.new(name: 'DescribeByoipCidrsRequest')
+    DescribeByoipCidrsResult = Shapes::StructureShape.new(name: 'DescribeByoipCidrsResult')
     DescribeClassicLinkInstancesRequest = Shapes::StructureShape.new(name: 'DescribeClassicLinkInstancesRequest')
     DescribeClassicLinkInstancesResult = Shapes::StructureShape.new(name: 'DescribeClassicLinkInstancesResult')
     DescribeConversionTaskList = Shapes::ListShape.new(name: 'DescribeConversionTaskList')
@@ -362,6 +372,8 @@ module Aws::EC2
     DescribePrefixListsResult = Shapes::StructureShape.new(name: 'DescribePrefixListsResult')
     DescribePrincipalIdFormatRequest = Shapes::StructureShape.new(name: 'DescribePrincipalIdFormatRequest')
     DescribePrincipalIdFormatResult = Shapes::StructureShape.new(name: 'DescribePrincipalIdFormatResult')
+    DescribePublicIpv4PoolsRequest = Shapes::StructureShape.new(name: 'DescribePublicIpv4PoolsRequest')
+    DescribePublicIpv4PoolsResult = Shapes::StructureShape.new(name: 'DescribePublicIpv4PoolsResult')
     DescribeRegionsRequest = Shapes::StructureShape.new(name: 'DescribeRegionsRequest')
     DescribeRegionsResult = Shapes::StructureShape.new(name: 'DescribeRegionsResult')
     DescribeReservedInstancesListingsRequest = Shapes::StructureShape.new(name: 'DescribeReservedInstancesListingsRequest')
@@ -843,6 +855,7 @@ module Aws::EC2
     PlacementGroupStringList = Shapes::ListShape.new(name: 'PlacementGroupStringList')
     PlacementStrategy = Shapes::StringShape.new(name: 'PlacementStrategy')
     PlatformValues = Shapes::StringShape.new(name: 'PlatformValues')
+    PoolMaxResults = Shapes::IntegerShape.new(name: 'PoolMaxResults')
     PortRange = Shapes::StructureShape.new(name: 'PortRange')
     PrefixList = Shapes::StructureShape.new(name: 'PrefixList')
     PrefixListId = Shapes::StructureShape.new(name: 'PrefixListId')
@@ -869,8 +882,14 @@ module Aws::EC2
     ProductDescriptionList = Shapes::ListShape.new(name: 'ProductDescriptionList')
     PropagatingVgw = Shapes::StructureShape.new(name: 'PropagatingVgw')
     PropagatingVgwList = Shapes::ListShape.new(name: 'PropagatingVgwList')
+    ProvisionByoipCidrRequest = Shapes::StructureShape.new(name: 'ProvisionByoipCidrRequest')
+    ProvisionByoipCidrResult = Shapes::StructureShape.new(name: 'ProvisionByoipCidrResult')
     ProvisionedBandwidth = Shapes::StructureShape.new(name: 'ProvisionedBandwidth')
     PublicIpStringList = Shapes::ListShape.new(name: 'PublicIpStringList')
+    PublicIpv4Pool = Shapes::StructureShape.new(name: 'PublicIpv4Pool')
+    PublicIpv4PoolRange = Shapes::StructureShape.new(name: 'PublicIpv4PoolRange')
+    PublicIpv4PoolRangeSet = Shapes::ListShape.new(name: 'PublicIpv4PoolRangeSet')
+    PublicIpv4PoolSet = Shapes::ListShape.new(name: 'PublicIpv4PoolSet')
     Purchase = Shapes::StructureShape.new(name: 'Purchase')
     PurchaseHostReservationRequest = Shapes::StructureShape.new(name: 'PurchaseHostReservationRequest')
     PurchaseHostReservationResult = Shapes::StructureShape.new(name: 'PurchaseHostReservationResult')
@@ -1194,6 +1213,8 @@ module Aws::EC2
     VpnStaticRouteList = Shapes::ListShape.new(name: 'VpnStaticRouteList')
     VpnStaticRouteSource = Shapes::StringShape.new(name: 'VpnStaticRouteSource')
     VpnTunnelOptionsSpecification = Shapes::StructureShape.new(name: 'VpnTunnelOptionsSpecification')
+    WithdrawByoipCidrRequest = Shapes::StructureShape.new(name: 'WithdrawByoipCidrRequest')
+    WithdrawByoipCidrResult = Shapes::StructureShape.new(name: 'WithdrawByoipCidrResult')
     ZoneNameStringList = Shapes::ListShape.new(name: 'ZoneNameStringList')
     scope = Shapes::StringShape.new(name: 'scope')
 
@@ -1250,17 +1271,27 @@ module Aws::EC2
     Address.add_member(:network_interface_owner_id, Shapes::ShapeRef.new(shape: String, location_name: "networkInterfaceOwnerId"))
     Address.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "privateIpAddress"))
     Address.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    Address.add_member(:public_ipv_4_pool, Shapes::ShapeRef.new(shape: String, location_name: "publicIpv4Pool"))
     Address.struct_class = Types::Address
 
     AddressList.member = Shapes::ShapeRef.new(shape: Address, location_name: "item")
 
+    AdvertiseByoipCidrRequest.add_member(:cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Cidr"))
+    AdvertiseByoipCidrRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    AdvertiseByoipCidrRequest.struct_class = Types::AdvertiseByoipCidrRequest
+
+    AdvertiseByoipCidrResult.add_member(:byoip_cidr, Shapes::ShapeRef.new(shape: ByoipCidr, location_name: "byoipCidr"))
+    AdvertiseByoipCidrResult.struct_class = Types::AdvertiseByoipCidrResult
+
     AllocateAddressRequest.add_member(:domain, Shapes::ShapeRef.new(shape: DomainType, location_name: "Domain"))
     AllocateAddressRequest.add_member(:address, Shapes::ShapeRef.new(shape: String, location_name: "Address"))
+    AllocateAddressRequest.add_member(:public_ipv_4_pool, Shapes::ShapeRef.new(shape: String, location_name: "PublicIpv4Pool"))
     AllocateAddressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     AllocateAddressRequest.struct_class = Types::AllocateAddressRequest
 
     AllocateAddressResult.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, location_name: "publicIp"))
     AllocateAddressResult.add_member(:allocation_id, Shapes::ShapeRef.new(shape: String, location_name: "allocationId"))
+    AllocateAddressResult.add_member(:public_ipv_4_pool, Shapes::ShapeRef.new(shape: String, location_name: "publicIpv4Pool"))
     AllocateAddressResult.add_member(:domain, Shapes::ShapeRef.new(shape: DomainType, location_name: "domain"))
     AllocateAddressResult.struct_class = Types::AllocateAddressResult
 
@@ -1476,6 +1507,14 @@ module Aws::EC2
 
     BundleTaskList.member = Shapes::ShapeRef.new(shape: BundleTask, location_name: "item")
 
+    ByoipCidr.add_member(:cidr, Shapes::ShapeRef.new(shape: String, location_name: "cidr"))
+    ByoipCidr.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    ByoipCidr.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    ByoipCidr.add_member(:state, Shapes::ShapeRef.new(shape: ByoipCidrState, location_name: "state"))
+    ByoipCidr.struct_class = Types::ByoipCidr
+
+    ByoipCidrSet.member = Shapes::ShapeRef.new(shape: ByoipCidr, location_name: "item")
+
     CancelBundleTaskRequest.add_member(:bundle_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "BundleId"))
     CancelBundleTaskRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CancelBundleTaskRequest.struct_class = Types::CancelBundleTaskRequest
@@ -1545,6 +1584,10 @@ module Aws::EC2
     CancelledSpotInstanceRequest.struct_class = Types::CancelledSpotInstanceRequest
 
     CancelledSpotInstanceRequestList.member = Shapes::ShapeRef.new(shape: CancelledSpotInstanceRequest, location_name: "item")
+
+    CidrAuthorizationContext.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
+    CidrAuthorizationContext.add_member(:signature, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Signature"))
+    CidrAuthorizationContext.struct_class = Types::CidrAuthorizationContext
 
     CidrBlock.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "cidrBlock"))
     CidrBlock.struct_class = Types::CidrBlock
@@ -2243,6 +2286,13 @@ module Aws::EC2
     DeleteVpnGatewayRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DeleteVpnGatewayRequest.struct_class = Types::DeleteVpnGatewayRequest
 
+    DeprovisionByoipCidrRequest.add_member(:cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Cidr"))
+    DeprovisionByoipCidrRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeprovisionByoipCidrRequest.struct_class = Types::DeprovisionByoipCidrRequest
+
+    DeprovisionByoipCidrResult.add_member(:byoip_cidr, Shapes::ShapeRef.new(shape: ByoipCidr, location_name: "byoipCidr"))
+    DeprovisionByoipCidrResult.struct_class = Types::DeprovisionByoipCidrResult
+
     DeregisterImageRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ImageId"))
     DeregisterImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DeregisterImageRequest.struct_class = Types::DeregisterImageRequest
@@ -2285,6 +2335,15 @@ module Aws::EC2
 
     DescribeBundleTasksResult.add_member(:bundle_tasks, Shapes::ShapeRef.new(shape: BundleTaskList, location_name: "bundleInstanceTasksSet"))
     DescribeBundleTasksResult.struct_class = Types::DescribeBundleTasksResult
+
+    DescribeByoipCidrsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeByoipCidrsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, required: true, location_name: "MaxResults"))
+    DescribeByoipCidrsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeByoipCidrsRequest.struct_class = Types::DescribeByoipCidrsRequest
+
+    DescribeByoipCidrsResult.add_member(:byoip_cidrs, Shapes::ShapeRef.new(shape: ByoipCidrSet, location_name: "byoipCidrSet"))
+    DescribeByoipCidrsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeByoipCidrsResult.struct_class = Types::DescribeByoipCidrsResult
 
     DescribeClassicLinkInstancesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeClassicLinkInstancesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -2683,6 +2742,15 @@ module Aws::EC2
     DescribePrincipalIdFormatResult.add_member(:principals, Shapes::ShapeRef.new(shape: PrincipalIdFormatList, location_name: "principalSet"))
     DescribePrincipalIdFormatResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribePrincipalIdFormatResult.struct_class = Types::DescribePrincipalIdFormatResult
+
+    DescribePublicIpv4PoolsRequest.add_member(:pool_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "PoolId"))
+    DescribePublicIpv4PoolsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribePublicIpv4PoolsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PoolMaxResults, location_name: "MaxResults"))
+    DescribePublicIpv4PoolsRequest.struct_class = Types::DescribePublicIpv4PoolsRequest
+
+    DescribePublicIpv4PoolsResult.add_member(:public_ipv_4_pools, Shapes::ShapeRef.new(shape: PublicIpv4PoolSet, location_name: "publicIpv4PoolSet"))
+    DescribePublicIpv4PoolsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribePublicIpv4PoolsResult.struct_class = Types::DescribePublicIpv4PoolsResult
 
     DescribeRegionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeRegionsRequest.add_member(:region_names, Shapes::ShapeRef.new(shape: RegionNameStringList, location_name: "RegionName"))
@@ -4794,6 +4862,15 @@ module Aws::EC2
 
     PropagatingVgwList.member = Shapes::ShapeRef.new(shape: PropagatingVgw, location_name: "item")
 
+    ProvisionByoipCidrRequest.add_member(:cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Cidr"))
+    ProvisionByoipCidrRequest.add_member(:cidr_authorization_context, Shapes::ShapeRef.new(shape: CidrAuthorizationContext, location_name: "CidrAuthorizationContext"))
+    ProvisionByoipCidrRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    ProvisionByoipCidrRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ProvisionByoipCidrRequest.struct_class = Types::ProvisionByoipCidrRequest
+
+    ProvisionByoipCidrResult.add_member(:byoip_cidr, Shapes::ShapeRef.new(shape: ByoipCidr, location_name: "byoipCidr"))
+    ProvisionByoipCidrResult.struct_class = Types::ProvisionByoipCidrResult
+
     ProvisionedBandwidth.add_member(:provision_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "provisionTime"))
     ProvisionedBandwidth.add_member(:provisioned, Shapes::ShapeRef.new(shape: String, location_name: "provisioned"))
     ProvisionedBandwidth.add_member(:request_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "requestTime"))
@@ -4802,6 +4879,23 @@ module Aws::EC2
     ProvisionedBandwidth.struct_class = Types::ProvisionedBandwidth
 
     PublicIpStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "PublicIp")
+
+    PublicIpv4Pool.add_member(:pool_id, Shapes::ShapeRef.new(shape: String, location_name: "poolId"))
+    PublicIpv4Pool.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    PublicIpv4Pool.add_member(:pool_address_ranges, Shapes::ShapeRef.new(shape: PublicIpv4PoolRangeSet, location_name: "poolAddressRangeSet"))
+    PublicIpv4Pool.add_member(:total_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "totalAddressCount"))
+    PublicIpv4Pool.add_member(:total_available_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "totalAvailableAddressCount"))
+    PublicIpv4Pool.struct_class = Types::PublicIpv4Pool
+
+    PublicIpv4PoolRange.add_member(:first_address, Shapes::ShapeRef.new(shape: String, location_name: "firstAddress"))
+    PublicIpv4PoolRange.add_member(:last_address, Shapes::ShapeRef.new(shape: String, location_name: "lastAddress"))
+    PublicIpv4PoolRange.add_member(:address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "addressCount"))
+    PublicIpv4PoolRange.add_member(:available_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "availableAddressCount"))
+    PublicIpv4PoolRange.struct_class = Types::PublicIpv4PoolRange
+
+    PublicIpv4PoolRangeSet.member = Shapes::ShapeRef.new(shape: PublicIpv4PoolRange, location_name: "item")
+
+    PublicIpv4PoolSet.member = Shapes::ShapeRef.new(shape: PublicIpv4Pool, location_name: "item")
 
     Purchase.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCodeValues, location_name: "currencyCode"))
     Purchase.add_member(:duration, Shapes::ShapeRef.new(shape: Integer, location_name: "duration"))
@@ -6195,6 +6289,13 @@ module Aws::EC2
     VpnTunnelOptionsSpecification.add_member(:pre_shared_key, Shapes::ShapeRef.new(shape: String, location_name: "PreSharedKey"))
     VpnTunnelOptionsSpecification.struct_class = Types::VpnTunnelOptionsSpecification
 
+    WithdrawByoipCidrRequest.add_member(:cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Cidr"))
+    WithdrawByoipCidrRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    WithdrawByoipCidrRequest.struct_class = Types::WithdrawByoipCidrRequest
+
+    WithdrawByoipCidrResult.add_member(:byoip_cidr, Shapes::ShapeRef.new(shape: ByoipCidr, location_name: "byoipCidr"))
+    WithdrawByoipCidrResult.struct_class = Types::WithdrawByoipCidrResult
+
     ZoneNameStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "ZoneName")
 
 
@@ -6237,6 +6338,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AcceptVpcPeeringConnectionRequest)
         o.output = Shapes::ShapeRef.new(shape: AcceptVpcPeeringConnectionResult)
+      end)
+
+      api.add_operation(:advertise_byoip_cidr, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AdvertiseByoipCidr"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AdvertiseByoipCidrRequest)
+        o.output = Shapes::ShapeRef.new(shape: AdvertiseByoipCidrResult)
       end)
 
       api.add_operation(:allocate_address, Seahorse::Model::Operation.new.tap do |o|
@@ -7023,6 +7132,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
+      api.add_operation(:deprovision_byoip_cidr, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeprovisionByoipCidr"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeprovisionByoipCidrRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeprovisionByoipCidrResult)
+      end)
+
       api.add_operation(:deregister_image, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeregisterImage"
         o.http_method = "POST"
@@ -7069,6 +7186,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeBundleTasksRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeBundleTasksResult)
+      end)
+
+      api.add_operation(:describe_byoip_cidrs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeByoipCidrs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeByoipCidrsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeByoipCidrsResult)
       end)
 
       api.add_operation(:describe_classic_link_instances, Seahorse::Model::Operation.new.tap do |o|
@@ -7413,6 +7538,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribePrincipalIdFormatRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribePrincipalIdFormatResult)
+      end)
+
+      api.add_operation(:describe_public_ipv_4_pools, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribePublicIpv4Pools"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribePublicIpv4PoolsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribePublicIpv4PoolsResult)
       end)
 
       api.add_operation(:describe_regions, Seahorse::Model::Operation.new.tap do |o|
@@ -8198,6 +8331,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: MoveAddressToVpcResult)
       end)
 
+      api.add_operation(:provision_byoip_cidr, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ProvisionByoipCidr"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ProvisionByoipCidrRequest)
+        o.output = Shapes::ShapeRef.new(shape: ProvisionByoipCidrResult)
+      end)
+
       api.add_operation(:purchase_host_reservation, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PurchaseHostReservation"
         o.http_method = "POST"
@@ -8476,6 +8617,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateSecurityGroupRuleDescriptionsIngressRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateSecurityGroupRuleDescriptionsIngressResult)
+      end)
+
+      api.add_operation(:withdraw_byoip_cidr, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "WithdrawByoipCidr"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: WithdrawByoipCidrRequest)
+        o.output = Shapes::ShapeRef.new(shape: WithdrawByoipCidrResult)
       end)
     end
 

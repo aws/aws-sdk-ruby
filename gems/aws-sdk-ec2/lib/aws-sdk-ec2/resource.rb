@@ -734,7 +734,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, Array<String>] :resources
-    #   The IDs of one or more resources to tag. For example, ami-1a2b3c4d.
+    #   The IDs of one or more resources, separated by spaces.
     # @option options [required, Array<Types::Tag>] :tags
     #   One or more tags. The `value` parameter is required, but if you don't
     #   want the tag to have a value, specify the parameter with no value, and

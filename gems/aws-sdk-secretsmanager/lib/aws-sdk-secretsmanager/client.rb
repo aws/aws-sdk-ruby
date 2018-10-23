@@ -96,19 +96,19 @@ module Aws::SecretsManager
     #
     # @option options [String] :access_key_id
     #
-    # @option options [] :client_side_monitoring (false)
+    # @option options [Boolean] :client_side_monitoring (false)
     #   When `true`, client-side metrics will be collected for all API requests from
     #   this client.
     #
-    # @option options [] :client_side_monitoring_client_id ("")
+    # @option options [String] :client_side_monitoring_client_id ("")
     #   Allows you to provide an identifier for this client which will be attached to
     #   all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [] :client_side_monitoring_port (31000)
+    # @option options [Integer] :client_side_monitoring_port (31000)
     #   Required for publishing client metrics. The port that the client side monitoring
     #   agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    # @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
     #   Allows you to provide a custom client-side monitoring publisher class. By default,
     #   will use the Client Side Monitoring Agent Publisher.
     #
@@ -2833,7 +2833,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
