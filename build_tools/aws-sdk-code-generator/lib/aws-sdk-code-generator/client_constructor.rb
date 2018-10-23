@@ -12,6 +12,7 @@ module AwsSdkCodeGenerator
           ruby_type: option.doc_type,
           default_value: option.doc_default,
           docstring: option.docstring,
+          indent: "  "
         ).to_s
       end
       @documentation = Docstring.join_docstrings(@documentation, block_comment: false)
