@@ -18,6 +18,12 @@ module Aws::AlexaForBusiness
     AddressBookDescription = Shapes::StringShape.new(name: 'AddressBookDescription')
     AddressBookName = Shapes::StringShape.new(name: 'AddressBookName')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
+    AmazonId = Shapes::StringShape.new(name: 'AmazonId')
+    ApplianceDescription = Shapes::StringShape.new(name: 'ApplianceDescription')
+    ApplianceFriendlyName = Shapes::StringShape.new(name: 'ApplianceFriendlyName')
+    ApplianceManufacturerName = Shapes::StringShape.new(name: 'ApplianceManufacturerName')
+    ApproveSkillRequest = Shapes::StructureShape.new(name: 'ApproveSkillRequest')
+    ApproveSkillResponse = Shapes::StructureShape.new(name: 'ApproveSkillResponse')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssociateContactWithAddressBookRequest = Shapes::StructureShape.new(name: 'AssociateContactWithAddressBookRequest')
     AssociateContactWithAddressBookResponse = Shapes::StructureShape.new(name: 'AssociateContactWithAddressBookResponse')
@@ -25,15 +31,35 @@ module Aws::AlexaForBusiness
     AssociateDeviceWithRoomResponse = Shapes::StructureShape.new(name: 'AssociateDeviceWithRoomResponse')
     AssociateSkillGroupWithRoomRequest = Shapes::StructureShape.new(name: 'AssociateSkillGroupWithRoomRequest')
     AssociateSkillGroupWithRoomResponse = Shapes::StructureShape.new(name: 'AssociateSkillGroupWithRoomResponse')
+    AssociateSkillWithSkillGroupRequest = Shapes::StructureShape.new(name: 'AssociateSkillWithSkillGroupRequest')
+    AssociateSkillWithSkillGroupResponse = Shapes::StructureShape.new(name: 'AssociateSkillWithSkillGroupResponse')
+    AuthorizationResult = Shapes::MapShape.new(name: 'AuthorizationResult')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BulletPoint = Shapes::StringShape.new(name: 'BulletPoint')
+    BulletPoints = Shapes::ListShape.new(name: 'BulletPoints')
+    Category = Shapes::StructureShape.new(name: 'Category')
+    CategoryId = Shapes::IntegerShape.new(name: 'CategoryId')
+    CategoryList = Shapes::ListShape.new(name: 'CategoryList')
+    CategoryName = Shapes::StringShape.new(name: 'CategoryName')
+    ClientId = Shapes::StringShape.new(name: 'ClientId')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
+    CommsProtocol = Shapes::StringShape.new(name: 'CommsProtocol')
+    ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
+    ConferencePreference = Shapes::StructureShape.new(name: 'ConferencePreference')
+    ConferenceProvider = Shapes::StructureShape.new(name: 'ConferenceProvider')
+    ConferenceProviderName = Shapes::StringShape.new(name: 'ConferenceProviderName')
+    ConferenceProviderType = Shapes::StringShape.new(name: 'ConferenceProviderType')
+    ConferenceProvidersList = Shapes::ListShape.new(name: 'ConferenceProvidersList')
     ConnectionStatus = Shapes::StringShape.new(name: 'ConnectionStatus')
     Contact = Shapes::StructureShape.new(name: 'Contact')
     ContactData = Shapes::StructureShape.new(name: 'ContactData')
     ContactDataList = Shapes::ListShape.new(name: 'ContactDataList')
     ContactName = Shapes::StringShape.new(name: 'ContactName')
+    CountryCode = Shapes::StringShape.new(name: 'CountryCode')
     CreateAddressBookRequest = Shapes::StructureShape.new(name: 'CreateAddressBookRequest')
     CreateAddressBookResponse = Shapes::StructureShape.new(name: 'CreateAddressBookResponse')
+    CreateConferenceProviderRequest = Shapes::StructureShape.new(name: 'CreateConferenceProviderRequest')
+    CreateConferenceProviderResponse = Shapes::StructureShape.new(name: 'CreateConferenceProviderResponse')
     CreateContactRequest = Shapes::StructureShape.new(name: 'CreateContactRequest')
     CreateContactResponse = Shapes::StructureShape.new(name: 'CreateContactResponse')
     CreateProfileRequest = Shapes::StructureShape.new(name: 'CreateProfileRequest')
@@ -46,18 +72,26 @@ module Aws::AlexaForBusiness
     CreateUserResponse = Shapes::StructureShape.new(name: 'CreateUserResponse')
     DeleteAddressBookRequest = Shapes::StructureShape.new(name: 'DeleteAddressBookRequest')
     DeleteAddressBookResponse = Shapes::StructureShape.new(name: 'DeleteAddressBookResponse')
+    DeleteConferenceProviderRequest = Shapes::StructureShape.new(name: 'DeleteConferenceProviderRequest')
+    DeleteConferenceProviderResponse = Shapes::StructureShape.new(name: 'DeleteConferenceProviderResponse')
     DeleteContactRequest = Shapes::StructureShape.new(name: 'DeleteContactRequest')
     DeleteContactResponse = Shapes::StructureShape.new(name: 'DeleteContactResponse')
+    DeleteDeviceRequest = Shapes::StructureShape.new(name: 'DeleteDeviceRequest')
+    DeleteDeviceResponse = Shapes::StructureShape.new(name: 'DeleteDeviceResponse')
     DeleteProfileRequest = Shapes::StructureShape.new(name: 'DeleteProfileRequest')
     DeleteProfileResponse = Shapes::StructureShape.new(name: 'DeleteProfileResponse')
     DeleteRoomRequest = Shapes::StructureShape.new(name: 'DeleteRoomRequest')
     DeleteRoomResponse = Shapes::StructureShape.new(name: 'DeleteRoomResponse')
     DeleteRoomSkillParameterRequest = Shapes::StructureShape.new(name: 'DeleteRoomSkillParameterRequest')
     DeleteRoomSkillParameterResponse = Shapes::StructureShape.new(name: 'DeleteRoomSkillParameterResponse')
+    DeleteSkillAuthorizationRequest = Shapes::StructureShape.new(name: 'DeleteSkillAuthorizationRequest')
+    DeleteSkillAuthorizationResponse = Shapes::StructureShape.new(name: 'DeleteSkillAuthorizationResponse')
     DeleteSkillGroupRequest = Shapes::StructureShape.new(name: 'DeleteSkillGroupRequest')
     DeleteSkillGroupResponse = Shapes::StructureShape.new(name: 'DeleteSkillGroupResponse')
     DeleteUserRequest = Shapes::StructureShape.new(name: 'DeleteUserRequest')
     DeleteUserResponse = Shapes::StructureShape.new(name: 'DeleteUserResponse')
+    DeveloperInfo = Shapes::StructureShape.new(name: 'DeveloperInfo')
+    DeveloperName = Shapes::StringShape.new(name: 'DeveloperName')
     Device = Shapes::StructureShape.new(name: 'Device')
     DeviceData = Shapes::StructureShape.new(name: 'DeviceData')
     DeviceDataList = Shapes::ListShape.new(name: 'DeviceDataList')
@@ -68,6 +102,7 @@ module Aws::AlexaForBusiness
     DeviceName = Shapes::StringShape.new(name: 'DeviceName')
     DeviceNotRegisteredException = Shapes::StructureShape.new(name: 'DeviceNotRegisteredException')
     DeviceSerialNumber = Shapes::StringShape.new(name: 'DeviceSerialNumber')
+    DeviceSerialNumberForAVS = Shapes::StringShape.new(name: 'DeviceSerialNumberForAVS')
     DeviceStatus = Shapes::StringShape.new(name: 'DeviceStatus')
     DeviceStatusDetail = Shapes::StructureShape.new(name: 'DeviceStatusDetail')
     DeviceStatusDetailCode = Shapes::StringShape.new(name: 'DeviceStatusDetailCode')
@@ -78,11 +113,17 @@ module Aws::AlexaForBusiness
     DisassociateContactFromAddressBookResponse = Shapes::StructureShape.new(name: 'DisassociateContactFromAddressBookResponse')
     DisassociateDeviceFromRoomRequest = Shapes::StructureShape.new(name: 'DisassociateDeviceFromRoomRequest')
     DisassociateDeviceFromRoomResponse = Shapes::StructureShape.new(name: 'DisassociateDeviceFromRoomResponse')
+    DisassociateSkillFromSkillGroupRequest = Shapes::StructureShape.new(name: 'DisassociateSkillFromSkillGroupRequest')
+    DisassociateSkillFromSkillGroupResponse = Shapes::StructureShape.new(name: 'DisassociateSkillFromSkillGroupResponse')
     DisassociateSkillGroupFromRoomRequest = Shapes::StructureShape.new(name: 'DisassociateSkillGroupFromRoomRequest')
     DisassociateSkillGroupFromRoomResponse = Shapes::StructureShape.new(name: 'DisassociateSkillGroupFromRoomResponse')
     DistanceUnit = Shapes::StringShape.new(name: 'DistanceUnit')
     E164PhoneNumber = Shapes::StringShape.new(name: 'E164PhoneNumber')
     Email = Shapes::StringShape.new(name: 'Email')
+    EnablementType = Shapes::StringShape.new(name: 'EnablementType')
+    EnablementTypeFilter = Shapes::StringShape.new(name: 'EnablementTypeFilter')
+    EndUserLicenseAgreement = Shapes::StringShape.new(name: 'EndUserLicenseAgreement')
+    Endpoint = Shapes::StringShape.new(name: 'Endpoint')
     EnrollmentId = Shapes::StringShape.new(name: 'EnrollmentId')
     EnrollmentStatus = Shapes::StringShape.new(name: 'EnrollmentStatus')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
@@ -93,8 +134,16 @@ module Aws::AlexaForBusiness
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterValue = Shapes::StringShape.new(name: 'FilterValue')
     FilterValueList = Shapes::ListShape.new(name: 'FilterValueList')
+    ForgetSmartHomeAppliancesRequest = Shapes::StructureShape.new(name: 'ForgetSmartHomeAppliancesRequest')
+    ForgetSmartHomeAppliancesResponse = Shapes::StructureShape.new(name: 'ForgetSmartHomeAppliancesResponse')
+    GenericKeyword = Shapes::StringShape.new(name: 'GenericKeyword')
+    GenericKeywords = Shapes::ListShape.new(name: 'GenericKeywords')
     GetAddressBookRequest = Shapes::StructureShape.new(name: 'GetAddressBookRequest')
     GetAddressBookResponse = Shapes::StructureShape.new(name: 'GetAddressBookResponse')
+    GetConferencePreferenceRequest = Shapes::StructureShape.new(name: 'GetConferencePreferenceRequest')
+    GetConferencePreferenceResponse = Shapes::StructureShape.new(name: 'GetConferencePreferenceResponse')
+    GetConferenceProviderRequest = Shapes::StructureShape.new(name: 'GetConferenceProviderRequest')
+    GetConferenceProviderResponse = Shapes::StructureShape.new(name: 'GetConferenceProviderResponse')
     GetContactRequest = Shapes::StructureShape.new(name: 'GetContactRequest')
     GetContactResponse = Shapes::StructureShape.new(name: 'GetContactResponse')
     GetDeviceRequest = Shapes::StructureShape.new(name: 'GetDeviceRequest')
@@ -107,30 +156,66 @@ module Aws::AlexaForBusiness
     GetRoomSkillParameterResponse = Shapes::StructureShape.new(name: 'GetRoomSkillParameterResponse')
     GetSkillGroupRequest = Shapes::StructureShape.new(name: 'GetSkillGroupRequest')
     GetSkillGroupResponse = Shapes::StructureShape.new(name: 'GetSkillGroupResponse')
+    IPDialIn = Shapes::StructureShape.new(name: 'IPDialIn')
+    IconUrl = Shapes::StringShape.new(name: 'IconUrl')
+    InvalidCertificateAuthorityException = Shapes::StructureShape.new(name: 'InvalidCertificateAuthorityException')
+    InvalidDeviceException = Shapes::StructureShape.new(name: 'InvalidDeviceException')
     InvalidUserStatusException = Shapes::StructureShape.new(name: 'InvalidUserStatusException')
+    InvocationPhrase = Shapes::StringShape.new(name: 'InvocationPhrase')
+    Key = Shapes::StringShape.new(name: 'Key')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListConferenceProvidersRequest = Shapes::StructureShape.new(name: 'ListConferenceProvidersRequest')
+    ListConferenceProvidersResponse = Shapes::StructureShape.new(name: 'ListConferenceProvidersResponse')
     ListDeviceEventsRequest = Shapes::StructureShape.new(name: 'ListDeviceEventsRequest')
     ListDeviceEventsResponse = Shapes::StructureShape.new(name: 'ListDeviceEventsResponse')
     ListSkillsRequest = Shapes::StructureShape.new(name: 'ListSkillsRequest')
     ListSkillsResponse = Shapes::StructureShape.new(name: 'ListSkillsResponse')
+    ListSkillsStoreCategoriesRequest = Shapes::StructureShape.new(name: 'ListSkillsStoreCategoriesRequest')
+    ListSkillsStoreCategoriesResponse = Shapes::StructureShape.new(name: 'ListSkillsStoreCategoriesResponse')
+    ListSkillsStoreSkillsByCategoryRequest = Shapes::StructureShape.new(name: 'ListSkillsStoreSkillsByCategoryRequest')
+    ListSkillsStoreSkillsByCategoryResponse = Shapes::StructureShape.new(name: 'ListSkillsStoreSkillsByCategoryResponse')
+    ListSmartHomeAppliancesRequest = Shapes::StructureShape.new(name: 'ListSmartHomeAppliancesRequest')
+    ListSmartHomeAppliancesResponse = Shapes::StructureShape.new(name: 'ListSmartHomeAppliancesResponse')
     ListTagsRequest = Shapes::StructureShape.new(name: 'ListTagsRequest')
     ListTagsResponse = Shapes::StructureShape.new(name: 'ListTagsResponse')
     MacAddress = Shapes::StringShape.new(name: 'MacAddress')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxVolumeLimit = Shapes::IntegerShape.new(name: 'MaxVolumeLimit')
+    MeetingSetting = Shapes::StructureShape.new(name: 'MeetingSetting')
     NameInUseException = Shapes::StructureShape.new(name: 'NameInUseException')
+    NewInThisVersionBulletPoints = Shapes::ListShape.new(name: 'NewInThisVersionBulletPoints')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    OneClickIdDelay = Shapes::StringShape.new(name: 'OneClickIdDelay')
+    OneClickPinDelay = Shapes::StringShape.new(name: 'OneClickPinDelay')
+    PSTNDialIn = Shapes::StructureShape.new(name: 'PSTNDialIn')
+    PhoneNumber = Shapes::StringShape.new(name: 'PhoneNumber')
+    PrivacyPolicy = Shapes::StringShape.new(name: 'PrivacyPolicy')
+    ProductDescription = Shapes::StringShape.new(name: 'ProductDescription')
+    ProductId = Shapes::StringShape.new(name: 'ProductId')
     Profile = Shapes::StructureShape.new(name: 'Profile')
     ProfileData = Shapes::StructureShape.new(name: 'ProfileData')
     ProfileDataList = Shapes::ListShape.new(name: 'ProfileDataList')
     ProfileName = Shapes::StringShape.new(name: 'ProfileName')
     ProviderCalendarId = Shapes::StringShape.new(name: 'ProviderCalendarId')
+    PutConferencePreferenceRequest = Shapes::StructureShape.new(name: 'PutConferencePreferenceRequest')
+    PutConferencePreferenceResponse = Shapes::StructureShape.new(name: 'PutConferencePreferenceResponse')
     PutRoomSkillParameterRequest = Shapes::StructureShape.new(name: 'PutRoomSkillParameterRequest')
     PutRoomSkillParameterResponse = Shapes::StructureShape.new(name: 'PutRoomSkillParameterResponse')
+    PutSkillAuthorizationRequest = Shapes::StructureShape.new(name: 'PutSkillAuthorizationRequest')
+    PutSkillAuthorizationResponse = Shapes::StructureShape.new(name: 'PutSkillAuthorizationResponse')
+    RegisterAVSDeviceRequest = Shapes::StructureShape.new(name: 'RegisterAVSDeviceRequest')
+    RegisterAVSDeviceResponse = Shapes::StructureShape.new(name: 'RegisterAVSDeviceResponse')
+    RejectSkillRequest = Shapes::StructureShape.new(name: 'RejectSkillRequest')
+    RejectSkillResponse = Shapes::StructureShape.new(name: 'RejectSkillResponse')
+    ReleaseDate = Shapes::StringShape.new(name: 'ReleaseDate')
+    RequirePin = Shapes::StringShape.new(name: 'RequirePin')
     ResolveRoomRequest = Shapes::StructureShape.new(name: 'ResolveRoomRequest')
     ResolveRoomResponse = Shapes::StructureShape.new(name: 'ResolveRoomResponse')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
+    ReviewKey = Shapes::StringShape.new(name: 'ReviewKey')
+    ReviewValue = Shapes::StringShape.new(name: 'ReviewValue')
+    Reviews = Shapes::MapShape.new(name: 'Reviews')
     RevokeInvitationRequest = Shapes::StructureShape.new(name: 'RevokeInvitationRequest')
     RevokeInvitationResponse = Shapes::StructureShape.new(name: 'RevokeInvitationResponse')
     Room = Shapes::StructureShape.new(name: 'Room')
@@ -142,6 +227,7 @@ module Aws::AlexaForBusiness
     RoomSkillParameterKey = Shapes::StringShape.new(name: 'RoomSkillParameterKey')
     RoomSkillParameterValue = Shapes::StringShape.new(name: 'RoomSkillParameterValue')
     RoomSkillParameters = Shapes::ListShape.new(name: 'RoomSkillParameters')
+    SampleUtterances = Shapes::ListShape.new(name: 'SampleUtterances')
     SearchAddressBooksRequest = Shapes::StructureShape.new(name: 'SearchAddressBooksRequest')
     SearchAddressBooksResponse = Shapes::StructureShape.new(name: 'SearchAddressBooksResponse')
     SearchContactsRequest = Shapes::StructureShape.new(name: 'SearchContactsRequest')
@@ -158,6 +244,8 @@ module Aws::AlexaForBusiness
     SearchUsersResponse = Shapes::StructureShape.new(name: 'SearchUsersResponse')
     SendInvitationRequest = Shapes::StructureShape.new(name: 'SendInvitationRequest')
     SendInvitationResponse = Shapes::StructureShape.new(name: 'SendInvitationResponse')
+    ShortDescription = Shapes::StringShape.new(name: 'ShortDescription')
+    SkillDetails = Shapes::StructureShape.new(name: 'SkillDetails')
     SkillGroup = Shapes::StructureShape.new(name: 'SkillGroup')
     SkillGroupData = Shapes::StructureShape.new(name: 'SkillGroupData')
     SkillGroupDataList = Shapes::ListShape.new(name: 'SkillGroupDataList')
@@ -166,8 +254,16 @@ module Aws::AlexaForBusiness
     SkillId = Shapes::StringShape.new(name: 'SkillId')
     SkillListMaxResults = Shapes::IntegerShape.new(name: 'SkillListMaxResults')
     SkillName = Shapes::StringShape.new(name: 'SkillName')
+    SkillStoreType = Shapes::StringShape.new(name: 'SkillStoreType')
     SkillSummary = Shapes::StructureShape.new(name: 'SkillSummary')
     SkillSummaryList = Shapes::ListShape.new(name: 'SkillSummaryList')
+    SkillType = Shapes::StringShape.new(name: 'SkillType')
+    SkillTypeFilter = Shapes::StringShape.new(name: 'SkillTypeFilter')
+    SkillTypes = Shapes::ListShape.new(name: 'SkillTypes')
+    SkillsStoreSkill = Shapes::StructureShape.new(name: 'SkillsStoreSkill')
+    SkillsStoreSkillList = Shapes::ListShape.new(name: 'SkillsStoreSkillList')
+    SmartHomeAppliance = Shapes::StructureShape.new(name: 'SmartHomeAppliance')
+    SmartHomeApplianceList = Shapes::ListShape.new(name: 'SmartHomeApplianceList')
     SoftwareVersion = Shapes::StringShape.new(name: 'SoftwareVersion')
     Sort = Shapes::StructureShape.new(name: 'Sort')
     SortKey = Shapes::StringShape.new(name: 'SortKey')
@@ -175,6 +271,8 @@ module Aws::AlexaForBusiness
     SortValue = Shapes::StringShape.new(name: 'SortValue')
     StartDeviceSyncRequest = Shapes::StructureShape.new(name: 'StartDeviceSyncRequest')
     StartDeviceSyncResponse = Shapes::StructureShape.new(name: 'StartDeviceSyncResponse')
+    StartSmartHomeApplianceDiscoveryRequest = Shapes::StructureShape.new(name: 'StartSmartHomeApplianceDiscoveryRequest')
+    StartSmartHomeApplianceDiscoveryResponse = Shapes::StructureShape.new(name: 'StartSmartHomeApplianceDiscoveryResponse')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -186,10 +284,13 @@ module Aws::AlexaForBusiness
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Timezone = Shapes::StringShape.new(name: 'Timezone')
     TotalCount = Shapes::IntegerShape.new(name: 'TotalCount')
+    UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAddressBookRequest = Shapes::StructureShape.new(name: 'UpdateAddressBookRequest')
     UpdateAddressBookResponse = Shapes::StructureShape.new(name: 'UpdateAddressBookResponse')
+    UpdateConferenceProviderRequest = Shapes::StructureShape.new(name: 'UpdateConferenceProviderRequest')
+    UpdateConferenceProviderResponse = Shapes::StructureShape.new(name: 'UpdateConferenceProviderResponse')
     UpdateContactRequest = Shapes::StructureShape.new(name: 'UpdateContactRequest')
     UpdateContactResponse = Shapes::StructureShape.new(name: 'UpdateContactResponse')
     UpdateDeviceRequest = Shapes::StructureShape.new(name: 'UpdateDeviceRequest')
@@ -200,9 +301,13 @@ module Aws::AlexaForBusiness
     UpdateRoomResponse = Shapes::StructureShape.new(name: 'UpdateRoomResponse')
     UpdateSkillGroupRequest = Shapes::StructureShape.new(name: 'UpdateSkillGroupRequest')
     UpdateSkillGroupResponse = Shapes::StructureShape.new(name: 'UpdateSkillGroupResponse')
+    Url = Shapes::StringShape.new(name: 'Url')
+    UserCode = Shapes::StringShape.new(name: 'UserCode')
     UserData = Shapes::StructureShape.new(name: 'UserData')
     UserDataList = Shapes::ListShape.new(name: 'UserDataList')
     UserId = Shapes::StringShape.new(name: 'UserId')
+    Utterance = Shapes::StringShape.new(name: 'Utterance')
+    Value = Shapes::StringShape.new(name: 'Value')
     WakeWord = Shapes::StringShape.new(name: 'WakeWord')
     boolean = Shapes::BooleanShape.new(name: 'boolean')
     user_FirstName = Shapes::StringShape.new(name: 'user_FirstName')
@@ -221,6 +326,11 @@ module Aws::AlexaForBusiness
 
     AddressBookDataList.member = Shapes::ShapeRef.new(shape: AddressBookData)
 
+    ApproveSkillRequest.add_member(:skill_id, Shapes::ShapeRef.new(shape: SkillId, required: true, location_name: "SkillId"))
+    ApproveSkillRequest.struct_class = Types::ApproveSkillRequest
+
+    ApproveSkillResponse.struct_class = Types::ApproveSkillResponse
+
     AssociateContactWithAddressBookRequest.add_member(:contact_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ContactArn"))
     AssociateContactWithAddressBookRequest.add_member(:address_book_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AddressBookArn"))
     AssociateContactWithAddressBookRequest.struct_class = Types::AssociateContactWithAddressBookRequest
@@ -238,6 +348,36 @@ module Aws::AlexaForBusiness
     AssociateSkillGroupWithRoomRequest.struct_class = Types::AssociateSkillGroupWithRoomRequest
 
     AssociateSkillGroupWithRoomResponse.struct_class = Types::AssociateSkillGroupWithRoomResponse
+
+    AssociateSkillWithSkillGroupRequest.add_member(:skill_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SkillGroupArn"))
+    AssociateSkillWithSkillGroupRequest.add_member(:skill_id, Shapes::ShapeRef.new(shape: SkillId, required: true, location_name: "SkillId"))
+    AssociateSkillWithSkillGroupRequest.struct_class = Types::AssociateSkillWithSkillGroupRequest
+
+    AssociateSkillWithSkillGroupResponse.struct_class = Types::AssociateSkillWithSkillGroupResponse
+
+    AuthorizationResult.key = Shapes::ShapeRef.new(shape: Key)
+    AuthorizationResult.value = Shapes::ShapeRef.new(shape: Value)
+
+    BulletPoints.member = Shapes::ShapeRef.new(shape: BulletPoint)
+
+    Category.add_member(:category_id, Shapes::ShapeRef.new(shape: CategoryId, location_name: "CategoryId"))
+    Category.add_member(:category_name, Shapes::ShapeRef.new(shape: CategoryName, location_name: "CategoryName"))
+    Category.struct_class = Types::Category
+
+    CategoryList.member = Shapes::ShapeRef.new(shape: Category)
+
+    ConferencePreference.add_member(:default_conference_provider_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DefaultConferenceProviderArn"))
+    ConferencePreference.struct_class = Types::ConferencePreference
+
+    ConferenceProvider.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    ConferenceProvider.add_member(:name, Shapes::ShapeRef.new(shape: ConferenceProviderName, location_name: "Name"))
+    ConferenceProvider.add_member(:type, Shapes::ShapeRef.new(shape: ConferenceProviderType, location_name: "Type"))
+    ConferenceProvider.add_member(:ip_dial_in, Shapes::ShapeRef.new(shape: IPDialIn, location_name: "IPDialIn"))
+    ConferenceProvider.add_member(:pstn_dial_in, Shapes::ShapeRef.new(shape: PSTNDialIn, location_name: "PSTNDialIn"))
+    ConferenceProvider.add_member(:meeting_setting, Shapes::ShapeRef.new(shape: MeetingSetting, location_name: "MeetingSetting"))
+    ConferenceProvider.struct_class = Types::ConferenceProvider
+
+    ConferenceProvidersList.member = Shapes::ShapeRef.new(shape: ConferenceProvider)
 
     Contact.add_member(:contact_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ContactArn"))
     Contact.add_member(:display_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "DisplayName"))
@@ -262,6 +402,17 @@ module Aws::AlexaForBusiness
 
     CreateAddressBookResponse.add_member(:address_book_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AddressBookArn"))
     CreateAddressBookResponse.struct_class = Types::CreateAddressBookResponse
+
+    CreateConferenceProviderRequest.add_member(:conference_provider_name, Shapes::ShapeRef.new(shape: ConferenceProviderName, required: true, location_name: "ConferenceProviderName"))
+    CreateConferenceProviderRequest.add_member(:conference_provider_type, Shapes::ShapeRef.new(shape: ConferenceProviderType, required: true, location_name: "ConferenceProviderType"))
+    CreateConferenceProviderRequest.add_member(:ip_dial_in, Shapes::ShapeRef.new(shape: IPDialIn, location_name: "IPDialIn"))
+    CreateConferenceProviderRequest.add_member(:pstn_dial_in, Shapes::ShapeRef.new(shape: PSTNDialIn, location_name: "PSTNDialIn"))
+    CreateConferenceProviderRequest.add_member(:meeting_setting, Shapes::ShapeRef.new(shape: MeetingSetting, required: true, location_name: "MeetingSetting"))
+    CreateConferenceProviderRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateConferenceProviderRequest.struct_class = Types::CreateConferenceProviderRequest
+
+    CreateConferenceProviderResponse.add_member(:conference_provider_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ConferenceProviderArn"))
+    CreateConferenceProviderResponse.struct_class = Types::CreateConferenceProviderResponse
 
     CreateContactRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "DisplayName"))
     CreateContactRequest.add_member(:first_name, Shapes::ShapeRef.new(shape: ContactName, required: true, location_name: "FirstName"))
@@ -323,10 +474,20 @@ module Aws::AlexaForBusiness
 
     DeleteAddressBookResponse.struct_class = Types::DeleteAddressBookResponse
 
+    DeleteConferenceProviderRequest.add_member(:conference_provider_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ConferenceProviderArn"))
+    DeleteConferenceProviderRequest.struct_class = Types::DeleteConferenceProviderRequest
+
+    DeleteConferenceProviderResponse.struct_class = Types::DeleteConferenceProviderResponse
+
     DeleteContactRequest.add_member(:contact_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ContactArn"))
     DeleteContactRequest.struct_class = Types::DeleteContactRequest
 
     DeleteContactResponse.struct_class = Types::DeleteContactResponse
+
+    DeleteDeviceRequest.add_member(:device_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "DeviceArn"))
+    DeleteDeviceRequest.struct_class = Types::DeleteDeviceRequest
+
+    DeleteDeviceResponse.struct_class = Types::DeleteDeviceResponse
 
     DeleteProfileRequest.add_member(:profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ProfileArn"))
     DeleteProfileRequest.struct_class = Types::DeleteProfileRequest
@@ -345,6 +506,12 @@ module Aws::AlexaForBusiness
 
     DeleteRoomSkillParameterResponse.struct_class = Types::DeleteRoomSkillParameterResponse
 
+    DeleteSkillAuthorizationRequest.add_member(:skill_id, Shapes::ShapeRef.new(shape: SkillId, required: true, location_name: "SkillId"))
+    DeleteSkillAuthorizationRequest.add_member(:room_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoomArn"))
+    DeleteSkillAuthorizationRequest.struct_class = Types::DeleteSkillAuthorizationRequest
+
+    DeleteSkillAuthorizationResponse.struct_class = Types::DeleteSkillAuthorizationResponse
+
     DeleteSkillGroupRequest.add_member(:skill_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SkillGroupArn"))
     DeleteSkillGroupRequest.struct_class = Types::DeleteSkillGroupRequest
 
@@ -355,6 +522,12 @@ module Aws::AlexaForBusiness
     DeleteUserRequest.struct_class = Types::DeleteUserRequest
 
     DeleteUserResponse.struct_class = Types::DeleteUserResponse
+
+    DeveloperInfo.add_member(:developer_name, Shapes::ShapeRef.new(shape: DeveloperName, location_name: "DeveloperName"))
+    DeveloperInfo.add_member(:privacy_policy, Shapes::ShapeRef.new(shape: PrivacyPolicy, location_name: "PrivacyPolicy"))
+    DeveloperInfo.add_member(:email, Shapes::ShapeRef.new(shape: Email, location_name: "Email"))
+    DeveloperInfo.add_member(:url, Shapes::ShapeRef.new(shape: Url, location_name: "Url"))
+    DeveloperInfo.struct_class = Types::DeveloperInfo
 
     Device.add_member(:device_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DeviceArn"))
     Device.add_member(:device_serial_number, Shapes::ShapeRef.new(shape: DeviceSerialNumber, location_name: "DeviceSerialNumber"))
@@ -408,6 +581,12 @@ module Aws::AlexaForBusiness
 
     DisassociateDeviceFromRoomResponse.struct_class = Types::DisassociateDeviceFromRoomResponse
 
+    DisassociateSkillFromSkillGroupRequest.add_member(:skill_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SkillGroupArn"))
+    DisassociateSkillFromSkillGroupRequest.add_member(:skill_id, Shapes::ShapeRef.new(shape: SkillId, required: true, location_name: "SkillId"))
+    DisassociateSkillFromSkillGroupRequest.struct_class = Types::DisassociateSkillFromSkillGroupRequest
+
+    DisassociateSkillFromSkillGroupResponse.struct_class = Types::DisassociateSkillFromSkillGroupResponse
+
     DisassociateSkillGroupFromRoomRequest.add_member(:skill_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SkillGroupArn"))
     DisassociateSkillGroupFromRoomRequest.add_member(:room_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoomArn"))
     DisassociateSkillGroupFromRoomRequest.struct_class = Types::DisassociateSkillGroupFromRoomRequest
@@ -424,11 +603,29 @@ module Aws::AlexaForBusiness
 
     FilterValueList.member = Shapes::ShapeRef.new(shape: FilterValue)
 
+    ForgetSmartHomeAppliancesRequest.add_member(:room_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RoomArn"))
+    ForgetSmartHomeAppliancesRequest.struct_class = Types::ForgetSmartHomeAppliancesRequest
+
+    ForgetSmartHomeAppliancesResponse.struct_class = Types::ForgetSmartHomeAppliancesResponse
+
+    GenericKeywords.member = Shapes::ShapeRef.new(shape: GenericKeyword)
+
     GetAddressBookRequest.add_member(:address_book_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AddressBookArn"))
     GetAddressBookRequest.struct_class = Types::GetAddressBookRequest
 
     GetAddressBookResponse.add_member(:address_book, Shapes::ShapeRef.new(shape: AddressBook, location_name: "AddressBook"))
     GetAddressBookResponse.struct_class = Types::GetAddressBookResponse
+
+    GetConferencePreferenceRequest.struct_class = Types::GetConferencePreferenceRequest
+
+    GetConferencePreferenceResponse.add_member(:preference, Shapes::ShapeRef.new(shape: ConferencePreference, location_name: "Preference"))
+    GetConferencePreferenceResponse.struct_class = Types::GetConferencePreferenceResponse
+
+    GetConferenceProviderRequest.add_member(:conference_provider_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ConferenceProviderArn"))
+    GetConferenceProviderRequest.struct_class = Types::GetConferenceProviderRequest
+
+    GetConferenceProviderResponse.add_member(:conference_provider, Shapes::ShapeRef.new(shape: ConferenceProvider, location_name: "ConferenceProvider"))
+    GetConferenceProviderResponse.struct_class = Types::GetConferenceProviderResponse
 
     GetContactRequest.add_member(:contact_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ContactArn"))
     GetContactRequest.struct_class = Types::GetContactRequest
@@ -468,6 +665,18 @@ module Aws::AlexaForBusiness
     GetSkillGroupResponse.add_member(:skill_group, Shapes::ShapeRef.new(shape: SkillGroup, location_name: "SkillGroup"))
     GetSkillGroupResponse.struct_class = Types::GetSkillGroupResponse
 
+    IPDialIn.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, required: true, location_name: "Endpoint"))
+    IPDialIn.add_member(:comms_protocol, Shapes::ShapeRef.new(shape: CommsProtocol, required: true, location_name: "CommsProtocol"))
+    IPDialIn.struct_class = Types::IPDialIn
+
+    ListConferenceProvidersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListConferenceProvidersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListConferenceProvidersRequest.struct_class = Types::ListConferenceProvidersRequest
+
+    ListConferenceProvidersResponse.add_member(:conference_providers, Shapes::ShapeRef.new(shape: ConferenceProvidersList, location_name: "ConferenceProviders"))
+    ListConferenceProvidersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListConferenceProvidersResponse.struct_class = Types::ListConferenceProvidersResponse
+
     ListDeviceEventsRequest.add_member(:device_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "DeviceArn"))
     ListDeviceEventsRequest.add_member(:event_type, Shapes::ShapeRef.new(shape: DeviceEventType, location_name: "EventType"))
     ListDeviceEventsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -479,6 +688,8 @@ module Aws::AlexaForBusiness
     ListDeviceEventsResponse.struct_class = Types::ListDeviceEventsResponse
 
     ListSkillsRequest.add_member(:skill_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SkillGroupArn"))
+    ListSkillsRequest.add_member(:enablement_type, Shapes::ShapeRef.new(shape: EnablementTypeFilter, location_name: "EnablementType"))
+    ListSkillsRequest.add_member(:skill_type, Shapes::ShapeRef.new(shape: SkillTypeFilter, location_name: "SkillType"))
     ListSkillsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListSkillsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: SkillListMaxResults, location_name: "MaxResults"))
     ListSkillsRequest.struct_class = Types::ListSkillsRequest
@@ -486,6 +697,32 @@ module Aws::AlexaForBusiness
     ListSkillsResponse.add_member(:skill_summaries, Shapes::ShapeRef.new(shape: SkillSummaryList, location_name: "SkillSummaries"))
     ListSkillsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListSkillsResponse.struct_class = Types::ListSkillsResponse
+
+    ListSkillsStoreCategoriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSkillsStoreCategoriesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListSkillsStoreCategoriesRequest.struct_class = Types::ListSkillsStoreCategoriesRequest
+
+    ListSkillsStoreCategoriesResponse.add_member(:category_list, Shapes::ShapeRef.new(shape: CategoryList, location_name: "CategoryList"))
+    ListSkillsStoreCategoriesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSkillsStoreCategoriesResponse.struct_class = Types::ListSkillsStoreCategoriesResponse
+
+    ListSkillsStoreSkillsByCategoryRequest.add_member(:category_id, Shapes::ShapeRef.new(shape: CategoryId, required: true, location_name: "CategoryId"))
+    ListSkillsStoreSkillsByCategoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSkillsStoreSkillsByCategoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: SkillListMaxResults, location_name: "MaxResults"))
+    ListSkillsStoreSkillsByCategoryRequest.struct_class = Types::ListSkillsStoreSkillsByCategoryRequest
+
+    ListSkillsStoreSkillsByCategoryResponse.add_member(:skills_store_skills, Shapes::ShapeRef.new(shape: SkillsStoreSkillList, location_name: "SkillsStoreSkills"))
+    ListSkillsStoreSkillsByCategoryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSkillsStoreSkillsByCategoryResponse.struct_class = Types::ListSkillsStoreSkillsByCategoryResponse
+
+    ListSmartHomeAppliancesRequest.add_member(:room_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RoomArn"))
+    ListSmartHomeAppliancesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListSmartHomeAppliancesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSmartHomeAppliancesRequest.struct_class = Types::ListSmartHomeAppliancesRequest
+
+    ListSmartHomeAppliancesResponse.add_member(:smart_home_appliances, Shapes::ShapeRef.new(shape: SmartHomeApplianceList, location_name: "SmartHomeAppliances"))
+    ListSmartHomeAppliancesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSmartHomeAppliancesResponse.struct_class = Types::ListSmartHomeAppliancesResponse
 
     ListTagsRequest.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
     ListTagsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -496,8 +733,20 @@ module Aws::AlexaForBusiness
     ListTagsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTagsResponse.struct_class = Types::ListTagsResponse
 
+    MeetingSetting.add_member(:require_pin, Shapes::ShapeRef.new(shape: RequirePin, required: true, location_name: "RequirePin"))
+    MeetingSetting.struct_class = Types::MeetingSetting
+
+    NewInThisVersionBulletPoints.member = Shapes::ShapeRef.new(shape: BulletPoint)
+
+    PSTNDialIn.add_member(:country_code, Shapes::ShapeRef.new(shape: CountryCode, required: true, location_name: "CountryCode"))
+    PSTNDialIn.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "PhoneNumber"))
+    PSTNDialIn.add_member(:one_click_id_delay, Shapes::ShapeRef.new(shape: OneClickIdDelay, required: true, location_name: "OneClickIdDelay"))
+    PSTNDialIn.add_member(:one_click_pin_delay, Shapes::ShapeRef.new(shape: OneClickPinDelay, required: true, location_name: "OneClickPinDelay"))
+    PSTNDialIn.struct_class = Types::PSTNDialIn
+
     Profile.add_member(:profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ProfileArn"))
     Profile.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, location_name: "ProfileName"))
+    Profile.add_member(:is_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsDefault"))
     Profile.add_member(:address, Shapes::ShapeRef.new(shape: Address, location_name: "Address"))
     Profile.add_member(:timezone, Shapes::ShapeRef.new(shape: Timezone, location_name: "Timezone"))
     Profile.add_member(:distance_unit, Shapes::ShapeRef.new(shape: DistanceUnit, location_name: "DistanceUnit"))
@@ -506,10 +755,12 @@ module Aws::AlexaForBusiness
     Profile.add_member(:setup_mode_disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "SetupModeDisabled"))
     Profile.add_member(:max_volume_limit, Shapes::ShapeRef.new(shape: MaxVolumeLimit, location_name: "MaxVolumeLimit"))
     Profile.add_member(:pstn_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PSTNEnabled"))
+    Profile.add_member(:address_book_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AddressBookArn"))
     Profile.struct_class = Types::Profile
 
     ProfileData.add_member(:profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ProfileArn"))
     ProfileData.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, location_name: "ProfileName"))
+    ProfileData.add_member(:is_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsDefault"))
     ProfileData.add_member(:address, Shapes::ShapeRef.new(shape: Address, location_name: "Address"))
     ProfileData.add_member(:timezone, Shapes::ShapeRef.new(shape: Timezone, location_name: "Timezone"))
     ProfileData.add_member(:distance_unit, Shapes::ShapeRef.new(shape: DistanceUnit, location_name: "DistanceUnit"))
@@ -519,12 +770,39 @@ module Aws::AlexaForBusiness
 
     ProfileDataList.member = Shapes::ShapeRef.new(shape: ProfileData)
 
+    PutConferencePreferenceRequest.add_member(:conference_preference, Shapes::ShapeRef.new(shape: ConferencePreference, required: true, location_name: "ConferencePreference"))
+    PutConferencePreferenceRequest.struct_class = Types::PutConferencePreferenceRequest
+
+    PutConferencePreferenceResponse.struct_class = Types::PutConferencePreferenceResponse
+
     PutRoomSkillParameterRequest.add_member(:room_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoomArn"))
     PutRoomSkillParameterRequest.add_member(:skill_id, Shapes::ShapeRef.new(shape: SkillId, required: true, location_name: "SkillId"))
     PutRoomSkillParameterRequest.add_member(:room_skill_parameter, Shapes::ShapeRef.new(shape: RoomSkillParameter, required: true, location_name: "RoomSkillParameter"))
     PutRoomSkillParameterRequest.struct_class = Types::PutRoomSkillParameterRequest
 
     PutRoomSkillParameterResponse.struct_class = Types::PutRoomSkillParameterResponse
+
+    PutSkillAuthorizationRequest.add_member(:authorization_result, Shapes::ShapeRef.new(shape: AuthorizationResult, required: true, location_name: "AuthorizationResult"))
+    PutSkillAuthorizationRequest.add_member(:skill_id, Shapes::ShapeRef.new(shape: SkillId, required: true, location_name: "SkillId"))
+    PutSkillAuthorizationRequest.add_member(:room_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoomArn"))
+    PutSkillAuthorizationRequest.struct_class = Types::PutSkillAuthorizationRequest
+
+    PutSkillAuthorizationResponse.struct_class = Types::PutSkillAuthorizationResponse
+
+    RegisterAVSDeviceRequest.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, required: true, location_name: "ClientId"))
+    RegisterAVSDeviceRequest.add_member(:user_code, Shapes::ShapeRef.new(shape: UserCode, required: true, location_name: "UserCode"))
+    RegisterAVSDeviceRequest.add_member(:product_id, Shapes::ShapeRef.new(shape: ProductId, required: true, location_name: "ProductId"))
+    RegisterAVSDeviceRequest.add_member(:device_serial_number, Shapes::ShapeRef.new(shape: DeviceSerialNumberForAVS, required: true, location_name: "DeviceSerialNumber"))
+    RegisterAVSDeviceRequest.add_member(:amazon_id, Shapes::ShapeRef.new(shape: AmazonId, required: true, location_name: "AmazonId"))
+    RegisterAVSDeviceRequest.struct_class = Types::RegisterAVSDeviceRequest
+
+    RegisterAVSDeviceResponse.add_member(:device_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DeviceArn"))
+    RegisterAVSDeviceResponse.struct_class = Types::RegisterAVSDeviceResponse
+
+    RejectSkillRequest.add_member(:skill_id, Shapes::ShapeRef.new(shape: SkillId, required: true, location_name: "SkillId"))
+    RejectSkillRequest.struct_class = Types::RejectSkillRequest
+
+    RejectSkillResponse.struct_class = Types::RejectSkillResponse
 
     ResolveRoomRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location_name: "UserId"))
     ResolveRoomRequest.add_member(:skill_id, Shapes::ShapeRef.new(shape: SkillId, required: true, location_name: "SkillId"))
@@ -534,6 +812,9 @@ module Aws::AlexaForBusiness
     ResolveRoomResponse.add_member(:room_name, Shapes::ShapeRef.new(shape: RoomName, location_name: "RoomName"))
     ResolveRoomResponse.add_member(:room_skill_parameters, Shapes::ShapeRef.new(shape: RoomSkillParameters, location_name: "RoomSkillParameters"))
     ResolveRoomResponse.struct_class = Types::ResolveRoomResponse
+
+    Reviews.key = Shapes::ShapeRef.new(shape: ReviewKey)
+    Reviews.value = Shapes::ShapeRef.new(shape: ReviewValue)
 
     RevokeInvitationRequest.add_member(:user_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "UserArn"))
     RevokeInvitationRequest.add_member(:enrollment_id, Shapes::ShapeRef.new(shape: EnrollmentId, location_name: "EnrollmentId"))
@@ -563,6 +844,8 @@ module Aws::AlexaForBusiness
     RoomSkillParameter.struct_class = Types::RoomSkillParameter
 
     RoomSkillParameters.member = Shapes::ShapeRef.new(shape: RoomSkillParameter)
+
+    SampleUtterances.member = Shapes::ShapeRef.new(shape: Utterance)
 
     SearchAddressBooksRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     SearchAddressBooksRequest.add_member(:sort_criteria, Shapes::ShapeRef.new(shape: SortList, location_name: "SortCriteria"))
@@ -646,6 +929,18 @@ module Aws::AlexaForBusiness
 
     SendInvitationResponse.struct_class = Types::SendInvitationResponse
 
+    SkillDetails.add_member(:product_description, Shapes::ShapeRef.new(shape: ProductDescription, location_name: "ProductDescription"))
+    SkillDetails.add_member(:invocation_phrase, Shapes::ShapeRef.new(shape: InvocationPhrase, location_name: "InvocationPhrase"))
+    SkillDetails.add_member(:release_date, Shapes::ShapeRef.new(shape: ReleaseDate, location_name: "ReleaseDate"))
+    SkillDetails.add_member(:end_user_license_agreement, Shapes::ShapeRef.new(shape: EndUserLicenseAgreement, location_name: "EndUserLicenseAgreement"))
+    SkillDetails.add_member(:generic_keywords, Shapes::ShapeRef.new(shape: GenericKeywords, location_name: "GenericKeywords"))
+    SkillDetails.add_member(:bullet_points, Shapes::ShapeRef.new(shape: BulletPoints, location_name: "BulletPoints"))
+    SkillDetails.add_member(:new_in_this_version_bullet_points, Shapes::ShapeRef.new(shape: NewInThisVersionBulletPoints, location_name: "NewInThisVersionBulletPoints"))
+    SkillDetails.add_member(:skill_types, Shapes::ShapeRef.new(shape: SkillTypes, location_name: "SkillTypes"))
+    SkillDetails.add_member(:reviews, Shapes::ShapeRef.new(shape: Reviews, location_name: "Reviews"))
+    SkillDetails.add_member(:developer_info, Shapes::ShapeRef.new(shape: DeveloperInfo, location_name: "DeveloperInfo"))
+    SkillDetails.struct_class = Types::SkillDetails
+
     SkillGroup.add_member(:skill_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SkillGroupArn"))
     SkillGroup.add_member(:skill_group_name, Shapes::ShapeRef.new(shape: SkillGroupName, location_name: "SkillGroupName"))
     SkillGroup.add_member(:description, Shapes::ShapeRef.new(shape: SkillGroupDescription, location_name: "Description"))
@@ -661,9 +956,31 @@ module Aws::AlexaForBusiness
     SkillSummary.add_member(:skill_id, Shapes::ShapeRef.new(shape: SkillId, location_name: "SkillId"))
     SkillSummary.add_member(:skill_name, Shapes::ShapeRef.new(shape: SkillName, location_name: "SkillName"))
     SkillSummary.add_member(:supports_linking, Shapes::ShapeRef.new(shape: boolean, location_name: "SupportsLinking"))
+    SkillSummary.add_member(:enablement_type, Shapes::ShapeRef.new(shape: EnablementType, location_name: "EnablementType"))
+    SkillSummary.add_member(:skill_type, Shapes::ShapeRef.new(shape: SkillType, location_name: "SkillType"))
     SkillSummary.struct_class = Types::SkillSummary
 
     SkillSummaryList.member = Shapes::ShapeRef.new(shape: SkillSummary)
+
+    SkillTypes.member = Shapes::ShapeRef.new(shape: SkillStoreType)
+
+    SkillsStoreSkill.add_member(:skill_id, Shapes::ShapeRef.new(shape: SkillId, location_name: "SkillId"))
+    SkillsStoreSkill.add_member(:skill_name, Shapes::ShapeRef.new(shape: SkillName, location_name: "SkillName"))
+    SkillsStoreSkill.add_member(:short_description, Shapes::ShapeRef.new(shape: ShortDescription, location_name: "ShortDescription"))
+    SkillsStoreSkill.add_member(:icon_url, Shapes::ShapeRef.new(shape: IconUrl, location_name: "IconUrl"))
+    SkillsStoreSkill.add_member(:sample_utterances, Shapes::ShapeRef.new(shape: SampleUtterances, location_name: "SampleUtterances"))
+    SkillsStoreSkill.add_member(:skill_details, Shapes::ShapeRef.new(shape: SkillDetails, location_name: "SkillDetails"))
+    SkillsStoreSkill.add_member(:supports_linking, Shapes::ShapeRef.new(shape: boolean, location_name: "SupportsLinking"))
+    SkillsStoreSkill.struct_class = Types::SkillsStoreSkill
+
+    SkillsStoreSkillList.member = Shapes::ShapeRef.new(shape: SkillsStoreSkill)
+
+    SmartHomeAppliance.add_member(:friendly_name, Shapes::ShapeRef.new(shape: ApplianceFriendlyName, location_name: "FriendlyName"))
+    SmartHomeAppliance.add_member(:description, Shapes::ShapeRef.new(shape: ApplianceDescription, location_name: "Description"))
+    SmartHomeAppliance.add_member(:manufacturer_name, Shapes::ShapeRef.new(shape: ApplianceManufacturerName, location_name: "ManufacturerName"))
+    SmartHomeAppliance.struct_class = Types::SmartHomeAppliance
+
+    SmartHomeApplianceList.member = Shapes::ShapeRef.new(shape: SmartHomeAppliance)
 
     Sort.add_member(:key, Shapes::ShapeRef.new(shape: SortKey, required: true, location_name: "Key"))
     Sort.add_member(:value, Shapes::ShapeRef.new(shape: SortValue, required: true, location_name: "Value"))
@@ -678,8 +995,13 @@ module Aws::AlexaForBusiness
 
     StartDeviceSyncResponse.struct_class = Types::StartDeviceSyncResponse
 
-    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
-    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
+    StartSmartHomeApplianceDiscoveryRequest.add_member(:room_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RoomArn"))
+    StartSmartHomeApplianceDiscoveryRequest.struct_class = Types::StartSmartHomeApplianceDiscoveryRequest
+
+    StartSmartHomeApplianceDiscoveryResponse.struct_class = Types::StartSmartHomeApplianceDiscoveryResponse
+
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
     Tag.struct_class = Types::Tag
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
@@ -705,6 +1027,15 @@ module Aws::AlexaForBusiness
 
     UpdateAddressBookResponse.struct_class = Types::UpdateAddressBookResponse
 
+    UpdateConferenceProviderRequest.add_member(:conference_provider_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ConferenceProviderArn"))
+    UpdateConferenceProviderRequest.add_member(:conference_provider_type, Shapes::ShapeRef.new(shape: ConferenceProviderType, required: true, location_name: "ConferenceProviderType"))
+    UpdateConferenceProviderRequest.add_member(:ip_dial_in, Shapes::ShapeRef.new(shape: IPDialIn, location_name: "IPDialIn"))
+    UpdateConferenceProviderRequest.add_member(:pstn_dial_in, Shapes::ShapeRef.new(shape: PSTNDialIn, location_name: "PSTNDialIn"))
+    UpdateConferenceProviderRequest.add_member(:meeting_setting, Shapes::ShapeRef.new(shape: MeetingSetting, required: true, location_name: "MeetingSetting"))
+    UpdateConferenceProviderRequest.struct_class = Types::UpdateConferenceProviderRequest
+
+    UpdateConferenceProviderResponse.struct_class = Types::UpdateConferenceProviderResponse
+
     UpdateContactRequest.add_member(:contact_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ContactArn"))
     UpdateContactRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "DisplayName"))
     UpdateContactRequest.add_member(:first_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "FirstName"))
@@ -722,6 +1053,7 @@ module Aws::AlexaForBusiness
 
     UpdateProfileRequest.add_member(:profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ProfileArn"))
     UpdateProfileRequest.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, location_name: "ProfileName"))
+    UpdateProfileRequest.add_member(:is_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsDefault"))
     UpdateProfileRequest.add_member(:timezone, Shapes::ShapeRef.new(shape: Timezone, location_name: "Timezone"))
     UpdateProfileRequest.add_member(:address, Shapes::ShapeRef.new(shape: Address, location_name: "Address"))
     UpdateProfileRequest.add_member(:distance_unit, Shapes::ShapeRef.new(shape: DistanceUnit, location_name: "DistanceUnit"))
@@ -778,6 +1110,17 @@ module Aws::AlexaForBusiness
         "uid" => "alexaforbusiness-2017-11-09",
       }
 
+      api.add_operation(:approve_skill, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ApproveSkill"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ApproveSkillRequest)
+        o.output = Shapes::ShapeRef.new(shape: ApproveSkillResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
       api.add_operation(:associate_contact_with_address_book, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AssociateContactWithAddressBook"
         o.http_method = "POST"
@@ -794,6 +1137,7 @@ module Aws::AlexaForBusiness
         o.input = Shapes::ShapeRef.new(shape: AssociateDeviceWithRoomRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateDeviceWithRoomResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: DeviceNotRegisteredException)
       end)
 
@@ -803,6 +1147,17 @@ module Aws::AlexaForBusiness
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AssociateSkillGroupWithRoomRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateSkillGroupWithRoomResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:associate_skill_with_skill_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateSkillWithSkillGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateSkillWithSkillGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateSkillWithSkillGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:create_address_book, Seahorse::Model::Operation.new.tap do |o|
@@ -813,6 +1168,15 @@ module Aws::AlexaForBusiness
         o.output = Shapes::ShapeRef.new(shape: CreateAddressBookResponse)
         o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:create_conference_provider, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateConferenceProvider"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateConferenceProviderRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateConferenceProviderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
       end)
 
       api.add_operation(:create_contact, Seahorse::Model::Operation.new.tap do |o|
@@ -833,6 +1197,7 @@ module Aws::AlexaForBusiness
         o.output = Shapes::ShapeRef.new(shape: CreateProfileResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:create_room, Seahorse::Model::Operation.new.tap do |o|
@@ -853,6 +1218,7 @@ module Aws::AlexaForBusiness
         o.output = Shapes::ShapeRef.new(shape: CreateSkillGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:create_user, Seahorse::Model::Operation.new.tap do |o|
@@ -863,6 +1229,7 @@ module Aws::AlexaForBusiness
         o.output = Shapes::ShapeRef.new(shape: CreateUserResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:delete_address_book, Seahorse::Model::Operation.new.tap do |o|
@@ -871,6 +1238,16 @@ module Aws::AlexaForBusiness
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteAddressBookRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteAddressBookResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:delete_conference_provider, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteConferenceProvider"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteConferenceProviderRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteConferenceProviderResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
@@ -881,6 +1258,18 @@ module Aws::AlexaForBusiness
         o.input = Shapes::ShapeRef.new(shape: DeleteContactRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteContactResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:delete_device, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDevice"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDeviceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDeviceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCertificateAuthorityException)
       end)
 
       api.add_operation(:delete_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -890,6 +1279,7 @@ module Aws::AlexaForBusiness
         o.input = Shapes::ShapeRef.new(shape: DeleteProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteProfileResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:delete_room, Seahorse::Model::Operation.new.tap do |o|
@@ -899,6 +1289,7 @@ module Aws::AlexaForBusiness
         o.input = Shapes::ShapeRef.new(shape: DeleteRoomRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteRoomResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:delete_room_skill_parameter, Seahorse::Model::Operation.new.tap do |o|
@@ -907,6 +1298,17 @@ module Aws::AlexaForBusiness
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteRoomSkillParameterRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteRoomSkillParameterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:delete_skill_authorization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSkillAuthorization"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSkillAuthorizationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSkillAuthorizationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:delete_skill_group, Seahorse::Model::Operation.new.tap do |o|
@@ -916,6 +1318,7 @@ module Aws::AlexaForBusiness
         o.input = Shapes::ShapeRef.new(shape: DeleteSkillGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteSkillGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:delete_user, Seahorse::Model::Operation.new.tap do |o|
@@ -925,6 +1328,7 @@ module Aws::AlexaForBusiness
         o.input = Shapes::ShapeRef.new(shape: DeleteUserRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteUserResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:disassociate_contact_from_address_book, Seahorse::Model::Operation.new.tap do |o|
@@ -941,7 +1345,18 @@ module Aws::AlexaForBusiness
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DisassociateDeviceFromRoomRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateDeviceFromRoomResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: DeviceNotRegisteredException)
+      end)
+
+      api.add_operation(:disassociate_skill_from_skill_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateSkillFromSkillGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateSkillFromSkillGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateSkillFromSkillGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:disassociate_skill_group_from_room, Seahorse::Model::Operation.new.tap do |o|
@@ -950,6 +1365,16 @@ module Aws::AlexaForBusiness
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DisassociateSkillGroupFromRoomRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateSkillGroupFromRoomResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:forget_smart_home_appliances, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ForgetSmartHomeAppliances"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ForgetSmartHomeAppliancesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ForgetSmartHomeAppliancesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:get_address_book, Seahorse::Model::Operation.new.tap do |o|
@@ -958,6 +1383,24 @@ module Aws::AlexaForBusiness
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetAddressBookRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAddressBookResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:get_conference_preference, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetConferencePreference"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetConferencePreferenceRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetConferencePreferenceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:get_conference_provider, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetConferenceProvider"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetConferenceProviderRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetConferenceProviderResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
@@ -1015,6 +1458,20 @@ module Aws::AlexaForBusiness
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
+      api.add_operation(:list_conference_providers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListConferenceProviders"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListConferenceProvidersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListConferenceProvidersResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_device_events, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDeviceEvents"
         o.http_method = "POST"
@@ -1044,6 +1501,49 @@ module Aws::AlexaForBusiness
         )
       end)
 
+      api.add_operation(:list_skills_store_categories, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSkillsStoreCategories"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListSkillsStoreCategoriesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSkillsStoreCategoriesResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_skills_store_skills_by_category, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSkillsStoreSkillsByCategory"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListSkillsStoreSkillsByCategoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSkillsStoreSkillsByCategoryResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_smart_home_appliances, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSmartHomeAppliances"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListSmartHomeAppliancesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSmartHomeAppliancesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTags"
         o.http_method = "POST"
@@ -1059,12 +1559,53 @@ module Aws::AlexaForBusiness
         )
       end)
 
+      api.add_operation(:put_conference_preference, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutConferencePreference"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutConferencePreferenceRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutConferencePreferenceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
       api.add_operation(:put_room_skill_parameter, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutRoomSkillParameter"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: PutRoomSkillParameterRequest)
         o.output = Shapes::ShapeRef.new(shape: PutRoomSkillParameterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:put_skill_authorization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutSkillAuthorization"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutSkillAuthorizationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutSkillAuthorizationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:register_avs_device, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegisterAVSDevice"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RegisterAVSDeviceRequest)
+        o.output = Shapes::ShapeRef.new(shape: RegisterAVSDeviceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDeviceException)
+      end)
+
+      api.add_operation(:reject_skill, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RejectSkill"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RejectSkillRequest)
+        o.output = Shapes::ShapeRef.new(shape: RejectSkillResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:resolve_room, Seahorse::Model::Operation.new.tap do |o|
@@ -1083,6 +1624,7 @@ module Aws::AlexaForBusiness
         o.input = Shapes::ShapeRef.new(shape: RevokeInvitationRequest)
         o.output = Shapes::ShapeRef.new(shape: RevokeInvitationResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:search_address_books, Seahorse::Model::Operation.new.tap do |o|
@@ -1191,6 +1733,7 @@ module Aws::AlexaForBusiness
         o.output = Shapes::ShapeRef.new(shape: SendInvitationResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidUserStatusException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:start_device_sync, Seahorse::Model::Operation.new.tap do |o|
@@ -1200,6 +1743,15 @@ module Aws::AlexaForBusiness
         o.input = Shapes::ShapeRef.new(shape: StartDeviceSyncRequest)
         o.output = Shapes::ShapeRef.new(shape: StartDeviceSyncResponse)
         o.errors << Shapes::ShapeRef.new(shape: DeviceNotRegisteredException)
+      end)
+
+      api.add_operation(:start_smart_home_appliance_discovery, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartSmartHomeApplianceDiscovery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartSmartHomeApplianceDiscoveryRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartSmartHomeApplianceDiscoveryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1228,6 +1780,16 @@ module Aws::AlexaForBusiness
         o.output = Shapes::ShapeRef.new(shape: UpdateAddressBookResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: NameInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:update_conference_provider, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateConferenceProvider"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateConferenceProviderRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateConferenceProviderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:update_contact, Seahorse::Model::Operation.new.tap do |o|
@@ -1237,6 +1799,7 @@ module Aws::AlexaForBusiness
         o.input = Shapes::ShapeRef.new(shape: UpdateContactRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateContactResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:update_device, Seahorse::Model::Operation.new.tap do |o|
@@ -1246,6 +1809,7 @@ module Aws::AlexaForBusiness
         o.input = Shapes::ShapeRef.new(shape: UpdateDeviceRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDeviceResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: DeviceNotRegisteredException)
       end)
 
@@ -1257,6 +1821,7 @@ module Aws::AlexaForBusiness
         o.output = Shapes::ShapeRef.new(shape: UpdateProfileResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: NameInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:update_room, Seahorse::Model::Operation.new.tap do |o|
@@ -1277,6 +1842,7 @@ module Aws::AlexaForBusiness
         o.output = Shapes::ShapeRef.new(shape: UpdateSkillGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: NameInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
     end
 

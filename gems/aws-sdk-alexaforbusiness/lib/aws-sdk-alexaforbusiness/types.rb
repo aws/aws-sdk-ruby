@@ -54,6 +54,28 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ApproveSkillRequest
+    #   data as a hash:
+    #
+    #       {
+    #         skill_id: "SkillId", # required
+    #       }
+    #
+    # @!attribute [rw] skill_id
+    #   The unique identifier of the skill.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ApproveSkillRequest AWS API Documentation
+    #
+    class ApproveSkillRequest < Struct.new(
+      :skill_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ApproveSkillResponse AWS API Documentation
+    #
+    class ApproveSkillResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass AssociateContactWithAddressBookRequest
     #   data as a hash:
     #
@@ -138,6 +160,116 @@ module Aws::AlexaForBusiness
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateSkillGroupWithRoomResponse AWS API Documentation
     #
     class AssociateSkillGroupWithRoomResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass AssociateSkillWithSkillGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         skill_group_arn: "Arn",
+    #         skill_id: "SkillId", # required
+    #       }
+    #
+    # @!attribute [rw] skill_group_arn
+    #   The ARN of the skill group to associate the skill to.
+    #   @return [String]
+    #
+    # @!attribute [rw] skill_id
+    #   The unique identifier of the skill.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateSkillWithSkillGroupRequest AWS API Documentation
+    #
+    class AssociateSkillWithSkillGroupRequest < Struct.new(
+      :skill_group_arn,
+      :skill_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateSkillWithSkillGroupResponse AWS API Documentation
+    #
+    class AssociateSkillWithSkillGroupResponse < Aws::EmptyStructure; end
+
+    # The skill store category that is shown. Alexa skills are assigned a
+    # specific skill category during creation, such as News, Social, and
+    # Sports.
+    #
+    # @!attribute [rw] category_id
+    #   The ID of the skill store category.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] category_name
+    #   The name of the skill store category.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Category AWS API Documentation
+    #
+    class Category < Struct.new(
+      :category_id,
+      :category_name)
+      include Aws::Structure
+    end
+
+    # The default conference provider that is used if no other scheduled
+    # meetings are detected.
+    #
+    # @note When making an API call, you may pass ConferencePreference
+    #   data as a hash:
+    #
+    #       {
+    #         default_conference_provider_arn: "Arn",
+    #       }
+    #
+    # @!attribute [rw] default_conference_provider_arn
+    #   The ARN of the default conference provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ConferencePreference AWS API Documentation
+    #
+    class ConferencePreference < Struct.new(
+      :default_conference_provider_arn)
+      include Aws::Structure
+    end
+
+    # An entity that provides a conferencing solution. Alexa for Business
+    # acts as the voice interface and mediator that connects users to their
+    # preferred conference provider. Examples of conference providers
+    # include Amazon Chime, Zoom, Cisco, and Polycom.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the newly created conference provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the conference provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of conference providers.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_dial_in
+    #   The IP endpoint and protocol for calling.
+    #   @return [Types::IPDialIn]
+    #
+    # @!attribute [rw] pstn_dial_in
+    #   The information for PSTN conferencing.
+    #   @return [Types::PSTNDialIn]
+    #
+    # @!attribute [rw] meeting_setting
+    #   The meeting settings for the conference provider.
+    #   @return [Types::MeetingSetting]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ConferenceProvider AWS API Documentation
+    #
+    class ConferenceProvider < Struct.new(
+      :arn,
+      :name,
+      :type,
+      :ip_dial_in,
+      :pstn_dial_in,
+      :meeting_setting)
+      include Aws::Structure
+    end
 
     # A contact with attributes.
     #
@@ -251,6 +383,78 @@ module Aws::AlexaForBusiness
     #
     class CreateAddressBookResponse < Struct.new(
       :address_book_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateConferenceProviderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         conference_provider_name: "ConferenceProviderName", # required
+    #         conference_provider_type: "CHIME", # required, accepts CHIME, BLUEJEANS, FUZE, GOOGLE_HANGOUTS, POLYCOM, RINGCENTRAL, SKYPE_FOR_BUSINESS, WEBEX, ZOOM, CUSTOM
+    #         ip_dial_in: {
+    #           endpoint: "Endpoint", # required
+    #           comms_protocol: "SIP", # required, accepts SIP, SIPS, H323
+    #         },
+    #         pstn_dial_in: {
+    #           country_code: "CountryCode", # required
+    #           phone_number: "PhoneNumber", # required
+    #           one_click_id_delay: "OneClickIdDelay", # required
+    #           one_click_pin_delay: "OneClickPinDelay", # required
+    #         },
+    #         meeting_setting: { # required
+    #           require_pin: "YES", # required, accepts YES, NO, OPTIONAL
+    #         },
+    #         client_request_token: "ClientRequestToken",
+    #       }
+    #
+    # @!attribute [rw] conference_provider_name
+    #   The name of the conference provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] conference_provider_type
+    #   A string that represents a type within a list of predefined types.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_dial_in
+    #   The IP endpoint and protocol for calling.
+    #   @return [Types::IPDialIn]
+    #
+    # @!attribute [rw] pstn_dial_in
+    #   The information for PSTN conferencing.
+    #   @return [Types::PSTNDialIn]
+    #
+    # @!attribute [rw] meeting_setting
+    #   The meeting settings for the conference provider.
+    #   @return [Types::MeetingSetting]
+    #
+    # @!attribute [rw] client_request_token
+    #   The request token of the client.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateConferenceProviderRequest AWS API Documentation
+    #
+    class CreateConferenceProviderRequest < Struct.new(
+      :conference_provider_name,
+      :conference_provider_type,
+      :ip_dial_in,
+      :pstn_dial_in,
+      :meeting_setting,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] conference_provider_arn
+    #   The ARN of the newly created conference provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateConferenceProviderResponse AWS API Documentation
+    #
+    class CreateConferenceProviderResponse < Struct.new(
+      :conference_provider_arn)
       include Aws::Structure
     end
 
@@ -411,8 +615,8 @@ module Aws::AlexaForBusiness
     #         client_request_token: "ClientRequestToken",
     #         tags: [
     #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
     #           },
     #         ],
     #       }
@@ -524,8 +728,8 @@ module Aws::AlexaForBusiness
     #         client_request_token: "ClientRequestToken",
     #         tags: [
     #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
     #           },
     #         ],
     #       }
@@ -603,6 +807,28 @@ module Aws::AlexaForBusiness
     #
     class DeleteAddressBookResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteConferenceProviderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         conference_provider_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] conference_provider_arn
+    #   The ARN of the conference provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteConferenceProviderRequest AWS API Documentation
+    #
+    class DeleteConferenceProviderRequest < Struct.new(
+      :conference_provider_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteConferenceProviderResponse AWS API Documentation
+    #
+    class DeleteConferenceProviderResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteContactRequest
     #   data as a hash:
     #
@@ -624,6 +850,28 @@ module Aws::AlexaForBusiness
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteContactResponse AWS API Documentation
     #
     class DeleteContactResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteDeviceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         device_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] device_arn
+    #   The ARN of the device for which to request details.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteDeviceRequest AWS API Documentation
+    #
+    class DeleteDeviceRequest < Struct.new(
+      :device_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteDeviceResponse AWS API Documentation
+    #
+    class DeleteDeviceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteProfileRequest
     #   data as a hash:
@@ -705,6 +953,34 @@ module Aws::AlexaForBusiness
     #
     class DeleteRoomSkillParameterResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteSkillAuthorizationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         skill_id: "SkillId", # required
+    #         room_arn: "Arn",
+    #       }
+    #
+    # @!attribute [rw] skill_id
+    #   The unique identifier of a skill.
+    #   @return [String]
+    #
+    # @!attribute [rw] room_arn
+    #   The room that the skill is authorized for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteSkillAuthorizationRequest AWS API Documentation
+    #
+    class DeleteSkillAuthorizationRequest < Struct.new(
+      :skill_id,
+      :room_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteSkillAuthorizationResponse AWS API Documentation
+    #
+    class DeleteSkillAuthorizationResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteSkillGroupRequest
     #   data as a hash:
     #
@@ -754,6 +1030,34 @@ module Aws::AlexaForBusiness
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteUserResponse AWS API Documentation
     #
     class DeleteUserResponse < Aws::EmptyStructure; end
+
+    # The details about the developer that published the skill.
+    #
+    # @!attribute [rw] developer_name
+    #   The name of the developer.
+    #   @return [String]
+    #
+    # @!attribute [rw] privacy_policy
+    #   The URL of the privacy policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] email
+    #   The email of the developer.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The website of the developer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeveloperInfo AWS API Documentation
+    #
+    class DeveloperInfo < Struct.new(
+      :developer_name,
+      :privacy_policy,
+      :email,
+      :url)
+      include Aws::Structure
+    end
 
     # A device with attributes.
     #
@@ -972,6 +1276,34 @@ module Aws::AlexaForBusiness
     #
     class DisassociateDeviceFromRoomResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DisassociateSkillFromSkillGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         skill_group_arn: "Arn",
+    #         skill_id: "SkillId", # required
+    #       }
+    #
+    # @!attribute [rw] skill_group_arn
+    #   The unique identifier of a skill.
+    #   @return [String]
+    #
+    # @!attribute [rw] skill_id
+    #   The ARN of a skill group to associate to a skill.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateSkillFromSkillGroupRequest AWS API Documentation
+    #
+    class DisassociateSkillFromSkillGroupRequest < Struct.new(
+      :skill_group_arn,
+      :skill_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateSkillFromSkillGroupResponse AWS API Documentation
+    #
+    class DisassociateSkillFromSkillGroupResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DisassociateSkillGroupFromRoomRequest
     #   data as a hash:
     #
@@ -1029,6 +1361,28 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ForgetSmartHomeAppliancesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         room_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] room_arn
+    #   The room that the appliances are associated with.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ForgetSmartHomeAppliancesRequest AWS API Documentation
+    #
+    class ForgetSmartHomeAppliancesRequest < Struct.new(
+      :room_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ForgetSmartHomeAppliancesResponse AWS API Documentation
+    #
+    class ForgetSmartHomeAppliancesResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass GetAddressBookRequest
     #   data as a hash:
     #
@@ -1055,6 +1409,52 @@ module Aws::AlexaForBusiness
     #
     class GetAddressBookResponse < Struct.new(
       :address_book)
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetConferencePreferenceRequest AWS API Documentation
+    #
+    class GetConferencePreferenceRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] preference
+    #   The conference preference.
+    #   @return [Types::ConferencePreference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetConferencePreferenceResponse AWS API Documentation
+    #
+    class GetConferencePreferenceResponse < Struct.new(
+      :preference)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetConferenceProviderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         conference_provider_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] conference_provider_arn
+    #   The ARN of the newly created conference provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetConferenceProviderRequest AWS API Documentation
+    #
+    class GetConferenceProviderRequest < Struct.new(
+      :conference_provider_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] conference_provider
+    #   The conference provider.
+    #   @return [Types::ConferenceProvider]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetConferenceProviderResponse AWS API Documentation
+    #
+    class GetConferenceProviderResponse < Struct.new(
+      :conference_provider)
       include Aws::Structure
     end
 
@@ -1246,6 +1646,73 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
+    # The IP endpoint and protocol for calling.
+    #
+    # @note When making an API call, you may pass IPDialIn
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint: "Endpoint", # required
+    #         comms_protocol: "SIP", # required, accepts SIP, SIPS, H323
+    #       }
+    #
+    # @!attribute [rw] endpoint
+    #   The IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] comms_protocol
+    #   The protocol, including SIP, SIPS, and H323.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/IPDialIn AWS API Documentation
+    #
+    class IPDialIn < Struct.new(
+      :endpoint,
+      :comms_protocol)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListConferenceProvidersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The tokens used for pagination.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of conference providers to be return per
+    #   paginated calls.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListConferenceProvidersRequest AWS API Documentation
+    #
+    class ListConferenceProvidersRequest < Struct.new(
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] conference_providers
+    #   The conference providers.
+    #   @return [Array<Types::ConferenceProvider>]
+    #
+    # @!attribute [rw] next_token
+    #   The tokens used for pagination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListConferenceProvidersResponse AWS API Documentation
+    #
+    class ListConferenceProvidersResponse < Struct.new(
+      :conference_providers,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListDeviceEventsRequest
     #   data as a hash:
     #
@@ -1313,6 +1780,8 @@ module Aws::AlexaForBusiness
     #
     #       {
     #         skill_group_arn: "Arn",
+    #         enablement_type: "ENABLED", # accepts ENABLED, PENDING
+    #         skill_type: "PUBLIC", # accepts PUBLIC, PRIVATE, ALL
     #         next_token: "NextToken",
     #         max_results: 1,
     #       }
@@ -1320,6 +1789,15 @@ module Aws::AlexaForBusiness
     # @!attribute [rw] skill_group_arn
     #   The ARN of the skill group for which to list enabled skills.
     #   Required.
+    #   @return [String]
+    #
+    # @!attribute [rw] enablement_type
+    #   Whether the skill is enabled under the user's account, or if it
+    #   requires linking to be used.
+    #   @return [String]
+    #
+    # @!attribute [rw] skill_type
+    #   Whether the skill is publicly available or is a private skill.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1340,6 +1818,8 @@ module Aws::AlexaForBusiness
     #
     class ListSkillsRequest < Struct.new(
       :skill_group_arn,
+      :enablement_type,
+      :skill_type,
       :next_token,
       :max_results)
       include Aws::Structure
@@ -1357,6 +1837,139 @@ module Aws::AlexaForBusiness
     #
     class ListSkillsResponse < Struct.new(
       :skill_summaries,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListSkillsStoreCategoriesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The tokens used for pagination.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of categories returned per paginated calls.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkillsStoreCategoriesRequest AWS API Documentation
+    #
+    class ListSkillsStoreCategoriesRequest < Struct.new(
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] category_list
+    #   The list of categories.
+    #   @return [Array<Types::Category>]
+    #
+    # @!attribute [rw] next_token
+    #   The tokens used for pagination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkillsStoreCategoriesResponse AWS API Documentation
+    #
+    class ListSkillsStoreCategoriesResponse < Struct.new(
+      :category_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListSkillsStoreSkillsByCategoryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         category_id: 1, # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] category_id
+    #   The category ID for which the skills are being retrieved from the
+    #   skill store.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The tokens used for pagination.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of skills returned per paginated calls.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkillsStoreSkillsByCategoryRequest AWS API Documentation
+    #
+    class ListSkillsStoreSkillsByCategoryRequest < Struct.new(
+      :category_id,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] skills_store_skills
+    #   The skill store skills.
+    #   @return [Array<Types::SkillsStoreSkill>]
+    #
+    # @!attribute [rw] next_token
+    #   The tokens used for pagination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkillsStoreSkillsByCategoryResponse AWS API Documentation
+    #
+    class ListSkillsStoreSkillsByCategoryResponse < Struct.new(
+      :skills_store_skills,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListSmartHomeAppliancesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         room_arn: "Arn", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] room_arn
+    #   The room that the appliances are associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of appliances to be return per paginated calls.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The tokens used for pagination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSmartHomeAppliancesRequest AWS API Documentation
+    #
+    class ListSmartHomeAppliancesRequest < Struct.new(
+      :room_arn,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] smart_home_appliances
+    #   The smart home appliances.
+    #   @return [Array<Types::SmartHomeAppliance>]
+    #
+    # @!attribute [rw] next_token
+    #   The tokens used for pagination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSmartHomeAppliancesResponse AWS API Documentation
+    #
+    class ListSmartHomeAppliancesResponse < Struct.new(
+      :smart_home_appliances,
       :next_token)
       include Aws::Structure
     end
@@ -1413,6 +2026,79 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
+    # The values that indicate whether a pin is always required (YES), never
+    # required (NO), or OPTIONAL.
+    #
+    # * If YES, Alexa will always ask for a meeting pin.
+    #
+    # * If NO, Alexa will never ask for a meeting pin.
+    #
+    # * If OPTIONAL, Alexa will ask if you have a meeting pin and if the
+    #   customer responds with yes, it will ask for the meeting pin.
+    #
+    # @note When making an API call, you may pass MeetingSetting
+    #   data as a hash:
+    #
+    #       {
+    #         require_pin: "YES", # required, accepts YES, NO, OPTIONAL
+    #       }
+    #
+    # @!attribute [rw] require_pin
+    #   The values that indicate whether the pin is always required.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/MeetingSetting AWS API Documentation
+    #
+    class MeetingSetting < Struct.new(
+      :require_pin)
+      include Aws::Structure
+    end
+
+    # The information for public switched telephone network (PSTN)
+    # conferencing.
+    #
+    # @note When making an API call, you may pass PSTNDialIn
+    #   data as a hash:
+    #
+    #       {
+    #         country_code: "CountryCode", # required
+    #         phone_number: "PhoneNumber", # required
+    #         one_click_id_delay: "OneClickIdDelay", # required
+    #         one_click_pin_delay: "OneClickPinDelay", # required
+    #       }
+    #
+    # @!attribute [rw] country_code
+    #   The zip code.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number
+    #   The phone number to call to join the conference.
+    #   @return [String]
+    #
+    # @!attribute [rw] one_click_id_delay
+    #   The delay duration before Alexa enters the conference ID with
+    #   dual-tone multi-frequency (DTMF). Each number on the dial pad
+    #   corresponds to a DTMF tone, which is how we send data over the
+    #   telephone network.
+    #   @return [String]
+    #
+    # @!attribute [rw] one_click_pin_delay
+    #   The delay duration before Alexa enters the conference pin with
+    #   dual-tone multi-frequency (DTMF). Each number on the dial pad
+    #   corresponds to a DTMF tone, which is how we send data over the
+    #   telephone network.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PSTNDialIn AWS API Documentation
+    #
+    class PSTNDialIn < Struct.new(
+      :country_code,
+      :phone_number,
+      :one_click_id_delay,
+      :one_click_pin_delay)
+      include Aws::Structure
+    end
+
     # A room profile with attributes.
     #
     # @!attribute [rw] profile_arn
@@ -1422,6 +2108,10 @@ module Aws::AlexaForBusiness
     # @!attribute [rw] profile_name
     #   The name of a room profile.
     #   @return [String]
+    #
+    # @!attribute [rw] is_default
+    #   Retrieves if the profile is default or not.
+    #   @return [Boolean]
     #
     # @!attribute [rw] address
     #   The address of a room profile.
@@ -1455,11 +2145,16 @@ module Aws::AlexaForBusiness
     #   The PSTN setting of a room profile.
     #   @return [Boolean]
     #
+    # @!attribute [rw] address_book_arn
+    #   The ARN of the address book.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Profile AWS API Documentation
     #
     class Profile < Struct.new(
       :profile_arn,
       :profile_name,
+      :is_default,
       :address,
       :timezone,
       :distance_unit,
@@ -1467,7 +2162,8 @@ module Aws::AlexaForBusiness
       :wake_word,
       :setup_mode_disabled,
       :max_volume_limit,
-      :pstn_enabled)
+      :pstn_enabled,
+      :address_book_arn)
       include Aws::Structure
     end
 
@@ -1480,6 +2176,10 @@ module Aws::AlexaForBusiness
     # @!attribute [rw] profile_name
     #   The name of a room profile.
     #   @return [String]
+    #
+    # @!attribute [rw] is_default
+    #   Retrieves if the profile data is default or not.
+    #   @return [Boolean]
     #
     # @!attribute [rw] address
     #   The address of a room profile.
@@ -1506,6 +2206,7 @@ module Aws::AlexaForBusiness
     class ProfileData < Struct.new(
       :profile_arn,
       :profile_name,
+      :is_default,
       :address,
       :timezone,
       :distance_unit,
@@ -1513,6 +2214,30 @@ module Aws::AlexaForBusiness
       :wake_word)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass PutConferencePreferenceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         conference_preference: { # required
+    #           default_conference_provider_arn: "Arn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] conference_preference
+    #   The conference preference of a specific conference provider.
+    #   @return [Types::ConferencePreference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutConferencePreferenceRequest AWS API Documentation
+    #
+    class PutConferencePreferenceRequest < Struct.new(
+      :conference_preference)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutConferencePreferenceResponse AWS API Documentation
+    #
+    class PutConferencePreferenceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass PutRoomSkillParameterRequest
     #   data as a hash:
@@ -1552,6 +2277,125 @@ module Aws::AlexaForBusiness
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutRoomSkillParameterResponse AWS API Documentation
     #
     class PutRoomSkillParameterResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass PutSkillAuthorizationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         authorization_result: { # required
+    #           "Key" => "Value",
+    #         },
+    #         skill_id: "SkillId", # required
+    #         room_arn: "Arn",
+    #       }
+    #
+    # @!attribute [rw] authorization_result
+    #   The authorization result specific to OAUTH code grant output.
+    #   "Code” must be populated in the AuthorizationResult map to
+    #   establish the authorization.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] skill_id
+    #   The unique identifier of a skill.
+    #   @return [String]
+    #
+    # @!attribute [rw] room_arn
+    #   The room that the skill is authorized for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutSkillAuthorizationRequest AWS API Documentation
+    #
+    class PutSkillAuthorizationRequest < Struct.new(
+      :authorization_result,
+      :skill_id,
+      :room_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutSkillAuthorizationResponse AWS API Documentation
+    #
+    class PutSkillAuthorizationResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass RegisterAVSDeviceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_id: "ClientId", # required
+    #         user_code: "UserCode", # required
+    #         product_id: "ProductId", # required
+    #         device_serial_number: "DeviceSerialNumberForAVS", # required
+    #         amazon_id: "AmazonId", # required
+    #       }
+    #
+    # @!attribute [rw] client_id
+    #   The client ID of the OEM used for code-based linking authorization
+    #   on an AVS device.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_code
+    #   The code that is obtained after your AVS device has made a POST
+    #   request to LWA as a part of the Device Authorization Request
+    #   component of the OAuth code-based linking specification.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_id
+    #   The product ID used to identify your AVS device during
+    #   authorization.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_serial_number
+    #   The key generated by the OEM that uniquely identifies a specified
+    #   instance of your AVS device.
+    #   @return [String]
+    #
+    # @!attribute [rw] amazon_id
+    #   The device type ID for your AVS device generated by Amazon when the
+    #   OEM creates a new product on Amazon's Developer Console.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RegisterAVSDeviceRequest AWS API Documentation
+    #
+    class RegisterAVSDeviceRequest < Struct.new(
+      :client_id,
+      :user_code,
+      :product_id,
+      :device_serial_number,
+      :amazon_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] device_arn
+    #   The ARN of the device.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RegisterAVSDeviceResponse AWS API Documentation
+    #
+    class RegisterAVSDeviceResponse < Struct.new(
+      :device_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RejectSkillRequest
+    #   data as a hash:
+    #
+    #       {
+    #         skill_id: "SkillId", # required
+    #       }
+    #
+    # @!attribute [rw] skill_id
+    #   The unique identifier of the skill.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RejectSkillRequest AWS API Documentation
+    #
+    class RejectSkillRequest < Struct.new(
+      :skill_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RejectSkillResponse AWS API Documentation
+    #
+    class RejectSkillResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ResolveRoomRequest
     #   data as a hash:
@@ -2285,6 +3129,66 @@ module Aws::AlexaForBusiness
     #
     class SendInvitationResponse < Aws::EmptyStructure; end
 
+    # Granular information about the skill.
+    #
+    # @!attribute [rw] product_description
+    #   The description of the product.
+    #   @return [String]
+    #
+    # @!attribute [rw] invocation_phrase
+    #   The phrase used to trigger the skill.
+    #   @return [String]
+    #
+    # @!attribute [rw] release_date
+    #   The date when the skill was released.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_user_license_agreement
+    #   The URL of the end user license agreement.
+    #   @return [String]
+    #
+    # @!attribute [rw] generic_keywords
+    #   The generic keywords associated with the skill that can be used to
+    #   find a skill.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] bullet_points
+    #   The details about what the skill supports organized as bullet
+    #   points.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] new_in_this_version_bullet_points
+    #   The updates added in bullet points.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] skill_types
+    #   The types of skills.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] reviews
+    #   The list of reviews for the skill, including Key and Value pair.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] developer_info
+    #   The details about the developer that published the skill.
+    #   @return [Types::DeveloperInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SkillDetails AWS API Documentation
+    #
+    class SkillDetails < Struct.new(
+      :product_description,
+      :invocation_phrase,
+      :release_date,
+      :end_user_license_agreement,
+      :generic_keywords,
+      :bullet_points,
+      :new_in_this_version_bullet_points,
+      :skill_types,
+      :reviews,
+      :developer_info)
+      include Aws::Structure
+    end
+
     # A skill group with attributes.
     #
     # @!attribute [rw] skill_group_arn
@@ -2345,12 +3249,90 @@ module Aws::AlexaForBusiness
     #   Linking support for a skill.
     #   @return [Boolean]
     #
+    # @!attribute [rw] enablement_type
+    #   Whether the skill is enabled under the user's account, or if it
+    #   requires linking to be used.
+    #   @return [String]
+    #
+    # @!attribute [rw] skill_type
+    #   Whether the skill is publicly available or is a private skill.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SkillSummary AWS API Documentation
     #
     class SkillSummary < Struct.new(
       :skill_id,
       :skill_name,
+      :supports_linking,
+      :enablement_type,
+      :skill_type)
+      include Aws::Structure
+    end
+
+    # The detailed information about an Alexa skill.
+    #
+    # @!attribute [rw] skill_id
+    #   The ARN of the skill.
+    #   @return [String]
+    #
+    # @!attribute [rw] skill_name
+    #   The name of the skill.
+    #   @return [String]
+    #
+    # @!attribute [rw] short_description
+    #   Short description about the skill.
+    #   @return [String]
+    #
+    # @!attribute [rw] icon_url
+    #   The URL where the skill icon resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_utterances
+    #   Sample utterances that interact with the skill.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] skill_details
+    #   Information about the skill.
+    #   @return [Types::SkillDetails]
+    #
+    # @!attribute [rw] supports_linking
+    #   Linking support for a skill.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SkillsStoreSkill AWS API Documentation
+    #
+    class SkillsStoreSkill < Struct.new(
+      :skill_id,
+      :skill_name,
+      :short_description,
+      :icon_url,
+      :sample_utterances,
+      :skill_details,
       :supports_linking)
+      include Aws::Structure
+    end
+
+    # A smart home appliance that can connect to a central system. Any
+    # domestic device can be a smart appliance.
+    #
+    # @!attribute [rw] friendly_name
+    #   The friendly name of the smart home appliance.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the smart home appliance.
+    #   @return [String]
+    #
+    # @!attribute [rw] manufacturer_name
+    #   The name of the manufacturer of the smart home appliance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SmartHomeAppliance AWS API Documentation
+    #
+    class SmartHomeAppliance < Struct.new(
+      :friendly_name,
+      :description,
+      :manufacturer_name)
       include Aws::Structure
     end
 
@@ -2415,14 +3397,36 @@ module Aws::AlexaForBusiness
     #
     class StartDeviceSyncResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass StartSmartHomeApplianceDiscoveryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         room_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] room_arn
+    #   The room where smart home appliance discovery was initiated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/StartSmartHomeApplianceDiscoveryRequest AWS API Documentation
+    #
+    class StartSmartHomeApplianceDiscoveryRequest < Struct.new(
+      :room_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/StartSmartHomeApplianceDiscoveryResponse AWS API Documentation
+    #
+    class StartSmartHomeApplianceDiscoveryResponse < Aws::EmptyStructure; end
+
     # A key-value pair that can be associated with a resource.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
     #
     #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       }
     #
     # @!attribute [rw] key
@@ -2448,8 +3452,8 @@ module Aws::AlexaForBusiness
     #         arn: "Arn", # required
     #         tags: [ # required
     #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
     #           },
     #         ],
     #       }
@@ -2539,6 +3543,62 @@ module Aws::AlexaForBusiness
     #
     class UpdateAddressBookResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateConferenceProviderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         conference_provider_arn: "Arn", # required
+    #         conference_provider_type: "CHIME", # required, accepts CHIME, BLUEJEANS, FUZE, GOOGLE_HANGOUTS, POLYCOM, RINGCENTRAL, SKYPE_FOR_BUSINESS, WEBEX, ZOOM, CUSTOM
+    #         ip_dial_in: {
+    #           endpoint: "Endpoint", # required
+    #           comms_protocol: "SIP", # required, accepts SIP, SIPS, H323
+    #         },
+    #         pstn_dial_in: {
+    #           country_code: "CountryCode", # required
+    #           phone_number: "PhoneNumber", # required
+    #           one_click_id_delay: "OneClickIdDelay", # required
+    #           one_click_pin_delay: "OneClickPinDelay", # required
+    #         },
+    #         meeting_setting: { # required
+    #           require_pin: "YES", # required, accepts YES, NO, OPTIONAL
+    #         },
+    #       }
+    #
+    # @!attribute [rw] conference_provider_arn
+    #   The ARN of the conference provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] conference_provider_type
+    #   The type of the conference provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_dial_in
+    #   The IP endpoint and protocol for calling.
+    #   @return [Types::IPDialIn]
+    #
+    # @!attribute [rw] pstn_dial_in
+    #   The information for PSTN conferencing.
+    #   @return [Types::PSTNDialIn]
+    #
+    # @!attribute [rw] meeting_setting
+    #   The meeting settings for the conference provider.
+    #   @return [Types::MeetingSetting]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateConferenceProviderRequest AWS API Documentation
+    #
+    class UpdateConferenceProviderRequest < Struct.new(
+      :conference_provider_arn,
+      :conference_provider_type,
+      :ip_dial_in,
+      :pstn_dial_in,
+      :meeting_setting)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateConferenceProviderResponse AWS API Documentation
+    #
+    class UpdateConferenceProviderResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateContactRequest
     #   data as a hash:
     #
@@ -2619,6 +3679,7 @@ module Aws::AlexaForBusiness
     #       {
     #         profile_arn: "Arn",
     #         profile_name: "ProfileName",
+    #         is_default: false,
     #         timezone: "Timezone",
     #         address: "Address",
     #         distance_unit: "METRIC", # accepts METRIC, IMPERIAL
@@ -2636,6 +3697,11 @@ module Aws::AlexaForBusiness
     # @!attribute [rw] profile_name
     #   The updated name for the room profile.
     #   @return [String]
+    #
+    # @!attribute [rw] is_default
+    #   Sets the profile as default if selected. If this is missing, no
+    #   update is done to the default status.
+    #   @return [Boolean]
     #
     # @!attribute [rw] timezone
     #   The updated timezone for the room profile.
@@ -2674,6 +3740,7 @@ module Aws::AlexaForBusiness
     class UpdateProfileRequest < Struct.new(
       :profile_arn,
       :profile_name,
+      :is_default,
       :timezone,
       :address,
       :distance_unit,
