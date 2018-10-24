@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.157 (2018-10-24)
+------------------
+
 * Feature - Aws::AlexaForBusiness - Updated the API, and documentation for Alexa For Business.
 
 * Feature - Aws::CodeStar - Updated the API, and documentation for AWS CodeStar.
