@@ -4,7 +4,7 @@ module Seahorse
 
       def initialize(options = {})
         @response = Response.new(context: options[:context])
-        @stream = options.delete(:stream)
+        @stream = options[:stream]
       end
 
       def context
@@ -26,7 +26,7 @@ module Seahorse
       end
 
       def wait
-        if error
+        if error && context.config.raise_response_errors
           raise error
         elsif @stream
           while !@stream.closed?; end
@@ -35,7 +35,7 @@ module Seahorse
       end
 
       def join!
-        if error
+        if error && context.config.raise_response_errors
           raise error
         elsif @stream
           @stream.close

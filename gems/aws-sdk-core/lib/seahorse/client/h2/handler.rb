@@ -71,11 +71,16 @@ module Seahorse
           end
         end
 
+        # H2 pseudo headers
+        # https://http2.github.io/http2-spec/#rfc.section.8.1.2.3
         def h2_headers(req)
           headers = {}
           headers[':scheme'] = req.endpoint.scheme
           headers[':method'] = req.http_method.capitalize
-          headers[':path'] = req.endpoint.path
+          headers[':path'] = req.endpoint.path.empty? ? '/' : req.endpoint.path
+          unless req.endpoint.query.empty?
+            headers[':path'] += "?#{req.endpoint.query}"
+          end
           req.headers.each_pair do |key, value|
             headers[key.downcase] = value
           end

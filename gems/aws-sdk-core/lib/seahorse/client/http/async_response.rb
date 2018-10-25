@@ -19,6 +19,23 @@ module Seahorse
           emit(:headers, @status_code, @headers)
         end
 
+        def signal_done(options = {})
+          # H2 only has header and body
+          # ':status' header will be sent back
+          if options.keys.sort == [:body, :headers]
+            signal_headers(options[:headers])
+            signal_data(options[:body])
+            signal_done
+          elsif options.empty?
+            @body.rewind if @body.respond_to?(:rewind)
+            @done = true
+            emit(:done)
+          else
+            msg = "options must be empty or must contain :headers and :body"
+            raise ArgumentError, msg
+          end
+        end
+
       end
     end
   end

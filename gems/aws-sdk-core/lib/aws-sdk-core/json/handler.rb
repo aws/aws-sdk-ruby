@@ -42,8 +42,14 @@ module Aws
           json = context.http_response.body_contents
           if json.is_a?(Array)
             # an array of emitted events
-            # initial repsonse is the first event arrived
-            resp_struct = json.shift.response
+            if json[0].respond_to?(:response)
+              # initial response exists
+              # it must be the first event arrived
+              resp_struct = json.shift.response
+            else
+              resp_struct = context.operation.output.shape.struct_class.new
+            end
+
             rules.shape.members.each do |name, ref|
               if ref.eventstream
                 resp_struct.send("#{name}=", json.to_enum)

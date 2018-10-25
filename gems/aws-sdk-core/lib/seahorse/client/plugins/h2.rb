@@ -12,6 +12,8 @@ module Seahorse
 
         option(:read_chunk_size, default: 1024, doc_type: Integer, docstring: '')
 
+        option(:raise_response_errors, default: true, doc_type: 'Boolean', docstring: '')
+
         # SSL Context
         option(:ssl_ca_bundle, default: nil, doc_type: String, docstring: '')
 
