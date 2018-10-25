@@ -2012,6 +2012,50 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Cancels the specified Capacity Reservation, releases the reserved
+    # capacity, and changes the Capacity Reservation's state to
+    # `cancelled`.
+    #
+    # Instances running in the reserved capacity continue running until you
+    # stop them. Stopped instances that target the Capacity Reservation can
+    # no longer launch. Modify these instances to either target a different
+    # Capacity Reservation, launch On-Demand Instance capacity, or run in
+    # any open Capacity Reservation that has matching attributes and
+    # sufficient capacity.
+    #
+    # @option params [required, String] :capacity_reservation_id
+    #   The ID of the Capacity Reservation to be cancelled.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::CancelCapacityReservationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelCapacityReservationResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_capacity_reservation({
+    #     capacity_reservation_id: "String", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelCapacityReservation AWS API Documentation
+    #
+    # @overload cancel_capacity_reservation(params = {})
+    # @param [Hash] params ({})
+    def cancel_capacity_reservation(params = {}, options = {})
+      req = build_request(:cancel_capacity_reservation, params)
+      req.send_request(options)
+    end
+
     # Cancels an active conversion task. The task can be the import of an
     # instance or volume. The action removes all artifacts of the
     # conversion, including a partially uploaded volume or instance. If the
@@ -2777,6 +2821,202 @@ module Aws::EC2
     # @param [Hash] params ({})
     def copy_snapshot(params = {}, options = {})
       req = build_request(:copy_snapshot, params)
+      req.send_request(options)
+    end
+
+    # Creates a new Capacity Reservation with the specified attributes.
+    #
+    # Capacity Reservations enable you to reserve capacity for your Amazon
+    # EC2 instances in a specific Availability Zone for any duration. This
+    # gives you the flexibility to selectively add capacity reservations and
+    # still get the Regional RI discounts for that usage. By creating
+    # Capacity Reservations, you ensure that you always have access to
+    # Amazon EC2 capacity when you need it, for as long as you need it. For
+    # more information, see [Capacity Reservations][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
+    #
+    # Your request to create a Capacity Reservation could fail if Amazon EC2
+    # does not have sufficient capacity to fulfill the request. If your
+    # request fails due to Amazon EC2 capacity constraints, either try again
+    # at a later time, try in a different Availability Zone, or request a
+    # smaller capacity reservation. If your application is flexible across
+    # instance types and sizes, try to create a Capacity Reservation with
+    # different instance attributes.
+    #
+    # Your request could also fail if the requested quantity exceeds your
+    # On-Demand Instance limit for the selected instance type. If your
+    # request fails due to limit constraints, increase your On-Demand
+    # Instance limit for the required instance type and try again. For more
+    # information about increasing your instance limits, see [Amazon EC2
+    # Service Limits][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html
+    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   Constraint: Maximum 64 ASCII characters.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [required, String] :instance_type
+    #   The instance type for which to reserve capacity. For more information,
+    #   see [Instance Types][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #
+    # @option params [required, String] :instance_platform
+    #   The type of operating system for which to reserve capacity.
+    #
+    # @option params [required, String] :availability_zone
+    #   The Availability Zone in which to create the Capacity Reservation.
+    #
+    # @option params [String] :tenancy
+    #   Indicates the tenancy of the Capacity Reservation. A Capacity
+    #   Reservation can have one of the following tenancy settings:
+    #
+    #   * `default` - The Capacity Reservation is created on hardware that is
+    #     shared with other AWS accounts.
+    #
+    #   * `dedicated` - The Capacity Reservation is created on single-tenant
+    #     hardware that is dedicated to a single AWS account.
+    #
+    # @option params [required, Integer] :instance_count
+    #   The number of instances for which to reserve capacity.
+    #
+    # @option params [Boolean] :ebs_optimized
+    #   Indicates whether the Capacity Reservation supports EBS-optimized
+    #   instances. This optimization provides dedicated throughput to Amazon
+    #   EBS and an optimized configuration stack to provide optimal I/O
+    #   performance. This optimization isn't available with all instance
+    #   types. Additional usage charges apply when using an EBS- optimized
+    #   instance.
+    #
+    # @option params [Boolean] :ephemeral_storage
+    #   Indicates whether the Capacity Reservation supports instances with
+    #   temporary, block-level storage.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_date
+    #   The date and time at which the Capacity Reservation expires. When a
+    #   Capacity Reservation expires, the reserved capacity is released and
+    #   you can no longer launch instances into it. The Capacity
+    #   Reservation's state changes to `expired` when it reaches its end date
+    #   and time.
+    #
+    #   You must provide an `EndDate` value if `EndDateType` is `limited`.
+    #   Omit `EndDate` if `EndDateType` is `unlimited`.
+    #
+    #   If the `EndDateType` is `limited`, the Capacity Reservation is
+    #   cancelled within an hour from the specified time. For example, if you
+    #   specify 5/31/2019, 13:30:55, the Capacity Reservation is guaranteed to
+    #   end between 13:30:55 and 14:30:55 on 5/31/2019.
+    #
+    # @option params [String] :end_date_type
+    #   Indicates the way in which the Capacity Reservation ends. A Capacity
+    #   Reservation can have one of the following end types:
+    #
+    #   * `unlimited` - The Capacity Reservation remains active until you
+    #     explicitly cancel it. Do not provide an `EndDate` if the
+    #     `EndDateType` is `unlimited`.
+    #
+    #   * `limited` - The Capacity Reservation expires automatically at a
+    #     specified date and time. You must provide an `EndDate` value if the
+    #     `EndDateType` value is `limited`.
+    #
+    # @option params [String] :instance_match_criteria
+    #   Indicates the type of instance launches that the Capacity Reservation
+    #   accepts. The options include:
+    #
+    #   * `open` - The Capacity Reservation automatically matches all
+    #     instances that have matching attributes (instance type, platform,
+    #     and Availability Zone). Instances that have matching attributes run
+    #     in the Capacity Reservation automatically without specifying any
+    #     additional parameters.
+    #
+    #   * `targeted` - The Capacity Reservation only accepts instances that
+    #     have matching attributes (instance type, platform, and Availability
+    #     Zone), and explicitly target the Capacity Reservation. This ensures
+    #     that only permitted instances can use the reserved capacity.
+    #
+    #   Default: `open`
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the Capacity Reservation during launch.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::CreateCapacityReservationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCapacityReservationResult#capacity_reservation #capacity_reservation} => Types::CapacityReservation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_capacity_reservation({
+    #     client_token: "String",
+    #     instance_type: "String", # required
+    #     instance_platform: "Linux/UNIX", # required, accepts Linux/UNIX, Red Hat Enterprise Linux, SUSE Linux, Windows, Windows with SQL Server, Windows with SQL Server Enterprise, Windows with SQL Server Standard, Windows with SQL Server Web
+    #     availability_zone: "String", # required
+    #     tenancy: "default", # accepts default, dedicated
+    #     instance_count: 1, # required
+    #     ebs_optimized: false,
+    #     ephemeral_storage: false,
+    #     end_date: Time.now,
+    #     end_date_type: "unlimited", # accepts unlimited, limited
+    #     instance_match_criteria: "open", # accepts open, targeted
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capacity_reservation.capacity_reservation_id #=> String
+    #   resp.capacity_reservation.instance_type #=> String
+    #   resp.capacity_reservation.instance_platform #=> String, one of "Linux/UNIX", "Red Hat Enterprise Linux", "SUSE Linux", "Windows", "Windows with SQL Server", "Windows with SQL Server Enterprise", "Windows with SQL Server Standard", "Windows with SQL Server Web"
+    #   resp.capacity_reservation.availability_zone #=> String
+    #   resp.capacity_reservation.tenancy #=> String, one of "default", "dedicated"
+    #   resp.capacity_reservation.total_instance_count #=> Integer
+    #   resp.capacity_reservation.available_instance_count #=> Integer
+    #   resp.capacity_reservation.ebs_optimized #=> Boolean
+    #   resp.capacity_reservation.ephemeral_storage #=> Boolean
+    #   resp.capacity_reservation.state #=> String, one of "active", "expired", "cancelled", "pending", "failed"
+    #   resp.capacity_reservation.end_date #=> Time
+    #   resp.capacity_reservation.end_date_type #=> String, one of "unlimited", "limited"
+    #   resp.capacity_reservation.instance_match_criteria #=> String, one of "open", "targeted"
+    #   resp.capacity_reservation.create_date #=> Time
+    #   resp.capacity_reservation.tags #=> Array
+    #   resp.capacity_reservation.tags[0].key #=> String
+    #   resp.capacity_reservation.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCapacityReservation AWS API Documentation
+    #
+    # @overload create_capacity_reservation(params = {})
+    # @param [Hash] params ({})
+    def create_capacity_reservation(params = {}, options = {})
+      req = build_request(:create_capacity_reservation, params)
       req.send_request(options)
     end
 
@@ -4063,6 +4303,12 @@ module Aws::EC2
     #         core_count: 1,
     #         threads_per_core: 1,
     #       },
+    #       capacity_reservation_specification: {
+    #         capacity_reservation_preference: "open", # accepts open, none
+    #         capacity_reservation_target: {
+    #           capacity_reservation_id: "String",
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -4288,6 +4534,12 @@ module Aws::EC2
     #         core_count: 1,
     #         threads_per_core: 1,
     #       },
+    #       capacity_reservation_specification: {
+    #         capacity_reservation_preference: "open", # accepts open, none
+    #         capacity_reservation_target: {
+    #           capacity_reservation_id: "String",
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -4366,6 +4618,8 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.credit_specification.cpu_credits #=> String
     #   resp.launch_template_version.launch_template_data.cpu_options.core_count #=> Integer
     #   resp.launch_template_version.launch_template_data.cpu_options.threads_per_core #=> Integer
+    #   resp.launch_template_version.launch_template_data.capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
+    #   resp.launch_template_version.launch_template_data.capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLaunchTemplateVersion AWS API Documentation
     #
@@ -8982,6 +9236,81 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Describes one or more of your Capacity Reservations. The results
+    # describe only the Capacity Reservations in the AWS Region that you're
+    # currently using.
+    #
+    # @option params [Array<String>] :capacity_reservation_ids
+    #   The ID of the Capacity Reservation.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the returned nextToken value.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeCapacityReservationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCapacityReservationsResult#next_token #next_token} => String
+    #   * {Types::DescribeCapacityReservationsResult#capacity_reservations #capacity_reservations} => Array&lt;Types::CapacityReservation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_capacity_reservations({
+    #     capacity_reservation_ids: ["String"],
+    #     next_token: "String",
+    #     max_results: 1,
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.capacity_reservations #=> Array
+    #   resp.capacity_reservations[0].capacity_reservation_id #=> String
+    #   resp.capacity_reservations[0].instance_type #=> String
+    #   resp.capacity_reservations[0].instance_platform #=> String, one of "Linux/UNIX", "Red Hat Enterprise Linux", "SUSE Linux", "Windows", "Windows with SQL Server", "Windows with SQL Server Enterprise", "Windows with SQL Server Standard", "Windows with SQL Server Web"
+    #   resp.capacity_reservations[0].availability_zone #=> String
+    #   resp.capacity_reservations[0].tenancy #=> String, one of "default", "dedicated"
+    #   resp.capacity_reservations[0].total_instance_count #=> Integer
+    #   resp.capacity_reservations[0].available_instance_count #=> Integer
+    #   resp.capacity_reservations[0].ebs_optimized #=> Boolean
+    #   resp.capacity_reservations[0].ephemeral_storage #=> Boolean
+    #   resp.capacity_reservations[0].state #=> String, one of "active", "expired", "cancelled", "pending", "failed"
+    #   resp.capacity_reservations[0].end_date #=> Time
+    #   resp.capacity_reservations[0].end_date_type #=> String, one of "unlimited", "limited"
+    #   resp.capacity_reservations[0].instance_match_criteria #=> String, one of "open", "targeted"
+    #   resp.capacity_reservations[0].create_date #=> Time
+    #   resp.capacity_reservations[0].tags #=> Array
+    #   resp.capacity_reservations[0].tags[0].key #=> String
+    #   resp.capacity_reservations[0].tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityReservations AWS API Documentation
+    #
+    # @overload describe_capacity_reservations(params = {})
+    # @param [Hash] params ({})
+    def describe_capacity_reservations(params = {}, options = {})
+      req = build_request(:describe_capacity_reservations, params)
+      req.send_request(options)
+    end
+
     # Describes one or more of your linked EC2-Classic instances. This
     # request only returns information about EC2-Classic instances linked to
     # a VPC through ClassicLink. You cannot use this request to return
@@ -11926,6 +12255,9 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].virtualization_type #=> String, one of "hvm", "paravirtual"
     #   resp.reservations[0].instances[0].cpu_options.core_count #=> Integer
     #   resp.reservations[0].instances[0].cpu_options.threads_per_core #=> Integer
+    #   resp.reservations[0].instances[0].capacity_reservation_id #=> String
+    #   resp.reservations[0].instances[0].capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
+    #   resp.reservations[0].instances[0].capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
     #   resp.reservations[0].owner_id #=> String
     #   resp.reservations[0].requester_id #=> String
     #   resp.reservations[0].reservation_id #=> String
@@ -12341,6 +12673,8 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.credit_specification.cpu_credits #=> String
     #   resp.launch_template_versions[0].launch_template_data.cpu_options.core_count #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.cpu_options.threads_per_core #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
+    #   resp.launch_template_versions[0].launch_template_data.capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplateVersions AWS API Documentation
@@ -19453,6 +19787,8 @@ module Aws::EC2
     #   resp.launch_template_data.credit_specification.cpu_credits #=> String
     #   resp.launch_template_data.cpu_options.core_count #=> Integer
     #   resp.launch_template_data.cpu_options.threads_per_core #=> Integer
+    #   resp.launch_template_data.capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
+    #   resp.launch_template_data.capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetLaunchTemplateData AWS API Documentation
     #
@@ -20088,6 +20424,80 @@ module Aws::EC2
     # @param [Hash] params ({})
     def import_volume(params = {}, options = {})
       req = build_request(:import_volume, params)
+      req.send_request(options)
+    end
+
+    # Modifies a Capacity Reservation's capacity and the conditions under
+    # which it is to be released. You cannot change a Capacity
+    # Reservation's instance type, EBS optimization, instance store
+    # settings, platform, Availability Zone, or instance eligibility. If you
+    # need to modify any of these attributes, we recommend that you cancel
+    # the Capacity Reservation, and then create a new one with the required
+    # attributes.
+    #
+    # @option params [required, String] :capacity_reservation_id
+    #   The ID of the Capacity Reservation.
+    #
+    # @option params [Integer] :instance_count
+    #   The number of instances for which to reserve capacity.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_date
+    #   The date and time at which the Capacity Reservation expires. When a
+    #   Capacity Reservation expires, the reserved capacity is released and
+    #   you can no longer launch instances into it. The Capacity
+    #   Reservation's state changes to `expired` when it reaches its end date
+    #   and time.
+    #
+    #   The Capacity Reservation is cancelled within an hour from the
+    #   specified time. For example, if you specify 5/31/2019, 13:30:55, the
+    #   Capacity Reservation is guaranteed to end between 13:30:55 and
+    #   14:30:55 on 5/31/2019.
+    #
+    #   You must provide an `EndDate` value if `EndDateType` is `limited`.
+    #   Omit `EndDate` if `EndDateType` is `unlimited`.
+    #
+    # @option params [String] :end_date_type
+    #   Indicates the way in which the Capacity Reservation ends. A Capacity
+    #   Reservation can have one of the following end types:
+    #
+    #   * `unlimited` - The Capacity Reservation remains active until you
+    #     explicitly cancel it. Do not provide an `EndDate` value if
+    #     `EndDateType` is `unlimited`.
+    #
+    #   * `limited` - The Capacity Reservation expires automatically at a
+    #     specified date and time. You must provide an `EndDate` value if
+    #     `EndDateType` is `limited`.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyCapacityReservationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyCapacityReservationResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_capacity_reservation({
+    #     capacity_reservation_id: "String", # required
+    #     instance_count: 1,
+    #     end_date: Time.now,
+    #     end_date_type: "unlimited", # accepts unlimited, limited
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyCapacityReservation AWS API Documentation
+    #
+    # @overload modify_capacity_reservation(params = {})
+    # @param [Hash] params ({})
+    def modify_capacity_reservation(params = {}, options = {})
+      req = build_request(:modify_capacity_reservation, params)
       req.send_request(options)
     end
 
@@ -20766,6 +21176,53 @@ module Aws::EC2
     # @param [Hash] params ({})
     def modify_instance_attribute(params = {}, options = {})
       req = build_request(:modify_instance_attribute, params)
+      req.send_request(options)
+    end
+
+    # Modifies the Capacity Reservation settings for a stopped instance. Use
+    # this action to configure an instance to target a specific Capacity
+    # Reservation, run in any `open` Capacity Reservation with matching
+    # attributes, or run On-Demand Instance capacity.
+    #
+    # @option params [required, String] :instance_id
+    #   The ID of the instance to be modified.
+    #
+    # @option params [required, Types::CapacityReservationSpecification] :capacity_reservation_specification
+    #   Information about the Capacity Reservation targeting option.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyInstanceCapacityReservationAttributesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyInstanceCapacityReservationAttributesResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_instance_capacity_reservation_attributes({
+    #     instance_id: "String", # required
+    #     capacity_reservation_specification: { # required
+    #       capacity_reservation_preference: "open", # accepts open, none
+    #       capacity_reservation_target: {
+    #         capacity_reservation_id: "String",
+    #       },
+    #     },
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceCapacityReservationAttributes AWS API Documentation
+    #
+    # @overload modify_instance_capacity_reservation_attributes(params = {})
+    # @param [Hash] params ({})
+    def modify_instance_capacity_reservation_attributes(params = {}, options = {})
+      req = build_request(:modify_instance_capacity_reservation_attributes, params)
       req.send_request(options)
     end
 
@@ -24915,6 +25372,9 @@ module Aws::EC2
     #
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html
     #
+    # @option params [Types::CapacityReservationSpecification] :capacity_reservation_specification
+    #   Information about the Capacity Reservation targeting option.
+    #
     # @return [Types::Reservation] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Reservation#groups #groups} => Array&lt;Types::GroupIdentifier&gt;
@@ -25085,6 +25545,12 @@ module Aws::EC2
     #       core_count: 1,
     #       threads_per_core: 1,
     #     },
+    #     capacity_reservation_specification: {
+    #       capacity_reservation_preference: "open", # accepts open, none
+    #       capacity_reservation_target: {
+    #         capacity_reservation_id: "String",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -25187,6 +25653,9 @@ module Aws::EC2
     #   resp.instances[0].virtualization_type #=> String, one of "hvm", "paravirtual"
     #   resp.instances[0].cpu_options.core_count #=> Integer
     #   resp.instances[0].cpu_options.threads_per_core #=> Integer
+    #   resp.instances[0].capacity_reservation_id #=> String
+    #   resp.instances[0].capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
+    #   resp.instances[0].capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
     #   resp.owner_id #=> String
     #   resp.requester_id #=> String
     #   resp.reservation_id #=> String
@@ -26124,7 +26593,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -289,6 +289,18 @@ module Aws::EC2
       data[:cpu_options]
     end
 
+    # The ID of the Capacity Reservation.
+    # @return [String]
+    def capacity_reservation_id
+      data[:capacity_reservation_id]
+    end
+
+    # Information about the Capacity Reservation targeting option.
+    # @return [Types::CapacityReservationSpecificationResponse]
+    def capacity_reservation_specification
+      data[:capacity_reservation_specification]
+    end
+
     # @!endgroup
 
     # @return [Client]

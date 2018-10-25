@@ -171,6 +171,12 @@ module Aws::EC2
     #       core_count: 1,
     #       threads_per_core: 1,
     #     },
+    #     capacity_reservation_specification: {
+    #       capacity_reservation_preference: "open", # accepts open, none
+    #       capacity_reservation_target: {
+    #         capacity_reservation_id: "String",
+    #       },
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
@@ -378,6 +384,8 @@ module Aws::EC2
     #
     #
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html
+    # @option options [Types::CapacityReservationSpecification] :capacity_reservation_specification
+    #   Information about the Capacity Reservation targeting option.
     # @return [Instance::Collection]
     def create_instances(options = {})
       batch = []
