@@ -1,6 +1,71 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2018-10-26)
+------------------
+
+* Feature - API update.
+
+1.31.0 (2018-10-24)
+------------------
+
+* Feature - API update.
+
+1.30.0 (2018-10-23)
+------------------
+
+* Feature - API update.
+
+1.29.0 (2018-10-19)
+------------------
+
+* Feature - API update.
+
+1.28.0 (2018-10-09)
+------------------
+
+* Feature - API update.
+
+1.27.0 (2018-10-04)
+------------------
+
+* Feature - API update.
+
+1.26.0 (2018-09-11)
+------------------
+
+* Feature - API update.
+
+1.25.0 (2018-09-06)
+------------------
+
+* Feature - Adds code paths and plugins for future SDK instrumentation and telemetry.
+
+1.24.0 (2018-09-05)
+------------------
+
+* Feature - API update.
+
+1.23.0 (2018-08-16)
+------------------
+
+* Feature - API update.
+
+1.22.0 (2018-08-08)
+------------------
+
+* Feature - API update.
+
+1.21.0 (2018-08-07)
+------------------
+
+* Feature - API update.
+
+1.20.0 (2018-08-02)
+------------------
+
+* Feature - API update.
+
 1.19.0 (2018-07-26)
 ------------------
 

@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -47,118 +49,138 @@ module Aws::SageMaker
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
     #
-    # @option options [String] :session_token
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [String] :secret_access_key
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [String] :session_token
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -168,16 +190,28 @@ module Aws::SageMaker
 
     # Adds or overwrites one or more tags for the specified Amazon SageMaker
     # resource. You can add tags to notebook instances, training jobs,
-    # models, endpoint configurations, and endpoints.
+    # hyperparameter tuning jobs, models, endpoint configurations, and
+    # endpoints.
     #
     # Each tag consists of a key and an optional value. Tag keys must be
-    # unique per resource. For more information about tags, see [Using Cost
-    # Allocation Tags][1] in the *AWS Billing and Cost Management User
-    # Guide*.
+    # unique per resource. For more information about tags, see For more
+    # information, see [AWS Tagging Strategies][1].
+    #
+    # <note markdown="1"> Tags that you add to a hyperparameter tuning job by calling this API
+    # are also added to any training jobs that the hyperparameter tuning job
+    # launches after you call this API, but not to training jobs that the
+    # hyperparameter tuning job launched before you called this API. To make
+    # sure that the tags associated with a hyperparameter tuning job are
+    # also added to all training jobs that the hyperparameter tuning job
+    # launches, add the tags when you first create the tuning job by
+    # specifying them in the `Tags` parameter of
+    # CreateHyperParameterTuningJob
+    #
+    #  </note>
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    # [1]: https://aws.amazon.com/answers/account-management/aws-tagging-strategies/
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to tag.
@@ -426,12 +460,14 @@ module Aws::SageMaker
     # @option params [Array<Types::Tag>] :tags
     #   An array of key-value pairs. You can use tags to categorize your AWS
     #   resources in different ways, for example, by purpose, owner, or
-    #   environment. For more information, see [Using Cost Allocation Tags][1]
-    #   in the *AWS Billing and Cost Management User Guide*.
+    #   environment. For more information, see [AWS Tagging Strategies][1].
+    #
+    #   Tags that you specify for the tuning job are also added to all
+    #   training jobs that the tuning job launches.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com//awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #   [1]: https://aws.amazon.com/answers/account-management/aws-tagging-strategies/
     #
     # @return [Types::CreateHyperParameterTuningJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -502,6 +538,7 @@ module Aws::SageMaker
     #           content_type: "ContentType",
     #           compression_type: "None", # accepts None, Gzip
     #           record_wrapper_type: "None", # accepts None, RecordIO
+    #           input_mode: "Pipe", # accepts Pipe, File
     #         },
     #       ],
     #       vpc_config: {
@@ -544,28 +581,33 @@ module Aws::SageMaker
     end
 
     # Creates a model in Amazon SageMaker. In the request, you name the
-    # model and describe one or more containers. For each container, you
+    # model and describe a primary container. For the primary container, you
     # specify the docker image containing inference code, artifacts (from
     # prior training), and custom environment map that the inference code
-    # uses when you deploy the model into production.
+    # uses when you deploy the model for predictions.
     #
-    # Use this API to create a model only if you want to use Amazon
-    # SageMaker hosting services. To host your model, you create an endpoint
-    # configuration with the `CreateEndpointConfig` API, and then create an
-    # endpoint with the `CreateEndpoint` API.
+    # Use this API to create a model if you want to use Amazon SageMaker
+    # hosting services or run a batch transform job.
     #
-    # Amazon SageMaker then deploys all of the containers that you defined
-    # for the model in the hosting environment.
+    # To host your model, you create an endpoint configuration with the
+    # `CreateEndpointConfig` API, and then create an endpoint with the
+    # `CreateEndpoint` API. Amazon SageMaker then deploys all of the
+    # containers that you defined for the model in the hosting environment.
+    #
+    # To run a batch transform using your model, you start a job with the
+    # `CreateTransformJob` API. Amazon SageMaker uses your model and your
+    # dataset to get inferences which are then saved to a specified S3
+    # location.
     #
     # In the `CreateModel` request, you must define a container with the
     # `PrimaryContainer` parameter.
     #
     # In the request, you also provide an IAM role that Amazon SageMaker can
     # assume to access model artifacts and docker image for deployment on ML
-    # compute hosting instances. In addition, you also use the IAM role to
-    # manage permissions the inference code needs. For example, if the
-    # inference code access any other AWS resources, you grant necessary
-    # permissions via this role.
+    # compute hosting instances or for batch transform jobs. In addition,
+    # you also use the IAM role to manage permissions the inference code
+    # needs. For example, if the inference code access any other AWS
+    # resources, you grant necessary permissions via this role.
     #
     # @option params [required, String] :model_name
     #   The name of the new model.
@@ -573,13 +615,14 @@ module Aws::SageMaker
     # @option params [required, Types::ContainerDefinition] :primary_container
     #   The location of the primary docker image containing inference code,
     #   associated artifacts, and custom environment map that the inference
-    #   code uses when the model is deployed into production.
+    #   code uses when the model is deployed for predictions.
     #
     # @option params [required, String] :execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker
     #   can assume to access model artifacts and docker image for deployment
-    #   on ML compute instances. Deploying on ML compute instances is part of
-    #   model hosting. For more information, see [Amazon SageMaker Roles][1].
+    #   on ML compute instances or for batch transform jobs. Deploying on ML
+    #   compute instances is part of model hosting. For more information, see
+    #   [Amazon SageMaker Roles][1].
     #
     #   <note markdown="1"> To be able to pass this role to Amazon SageMaker, the caller of this
     #   API must have the `iam:PassRole` permission.
@@ -602,7 +645,15 @@ module Aws::SageMaker
     # @option params [Types::VpcConfig] :vpc_config
     #   A VpcConfig object that specifies the VPC that you want your model to
     #   connect to. Control access to and from your model container by
-    #   configuring the VPC. For more information, see host-vpc.
+    #   configuring the VPC. `VpcConfig` is used in hosting services and in
+    #   batch transform. For more information, see [Protect Endpoints by Using
+    #   an Amazon Virtual Private Cloud][1] and [Protect Data in Batch
+    #   Transform Jobs by Using an Amazon Virtual Private Cloud][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
+    #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html
     #
     # @return [Types::CreateModelOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -735,8 +786,12 @@ module Aws::SageMaker
     #
     # @option params [String] :lifecycle_config_name
     #   The name of a lifecycle configuration to associate with the notebook
-    #   instance. For information about lifestyle configurations, see
-    #   notebook-lifecycle-config.
+    #   instance. For information about lifestyle configurations, see [Step
+    #   2.1: (Optional) Customize a Notebook Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
     #
     # @option params [String] :direct_internet_access
     #   Sets whether Amazon SageMaker provides internet access to the notebook
@@ -745,9 +800,17 @@ module Aws::SageMaker
     #   connect to Amazon SageMaker training and endpoint services unless your
     #   configure a NAT Gateway in your VPC.
     #
-    #   For more information, see appendix-notebook-and-internet-access. You
-    #   can set the value of this parameter to `Disabled` only if you set a
-    #   value for the `SubnetId` parameter.
+    #   For more information, see [Notebook Instances Are Internet-Enabled by
+    #   Default][1]. You can set the value of this parameter to `Disabled`
+    #   only if you set a value for the `SubnetId` parameter.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access
+    #
+    # @option params [Integer] :volume_size_in_gb
+    #   The size, in GB, of the ML storage volume to attach to the notebook
+    #   instance.
     #
     # @return [Types::CreateNotebookInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -770,6 +833,7 @@ module Aws::SageMaker
     #     ],
     #     lifecycle_config_name: "NotebookInstanceLifecycleConfigName",
     #     direct_internet_access: "Enabled", # accepts Enabled, Disabled
+    #     volume_size_in_gb: 1,
     #   })
     #
     # @example Response structure
@@ -803,18 +867,23 @@ module Aws::SageMaker
     # instance is not created or started.
     #
     # For information about notebook instance lifestyle configurations, see
-    # notebook-lifecycle-config.
+    # [Step 2.1: (Optional) Customize a Notebook Instance][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
     #
     # @option params [required, String] :notebook_instance_lifecycle_config_name
     #   The name of the lifecycle configuration.
     #
     # @option params [Array<Types::NotebookInstanceLifecycleHook>] :on_create
     #   A shell script that runs only once, when you create a notebook
-    #   instance.
+    #   instance. The shell script must be a base64-encoded string.
     #
     # @option params [Array<Types::NotebookInstanceLifecycleHook>] :on_start
     #   A shell script that runs every time you start a notebook instance,
-    #   including when you create the notebook instance.
+    #   including when you create the notebook instance. The shell script must
+    #   be a base64-encoded string.
     #
     # @return [Types::CreateNotebookInstanceLifecycleConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -854,6 +923,20 @@ module Aws::SageMaker
     # `Open` next to a notebook instance, Amazon SageMaker opens a new tab
     # showing the Jupyter server home page from the notebook instance. The
     # console uses this API to get the URL and show the page.
+    #
+    # You can restrict access to this API and to the URL that it returns to
+    # a list of IP addresses that you specify. To restrict access, attach an
+    # IAM policy that denies access to this API unless the call comes from
+    # an IP address in the specified list to every AWS Identity and Access
+    # Management user, group, or role used to access the notebook instance.
+    # Use the `NotIpAddress` condition operator and the `aws:SourceIP`
+    # condition context key to specify the list of IP addresses that you
+    # want to have access to the notebook instance. For more information,
+    # see [Limit Access to a Notebook Instance by IP Address][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/https:/docs.aws.amazon.com/sagemaker/latest/dg/howitworks-access-ws.html#nbi-ip-filter
     #
     # @option params [required, String] :notebook_instance_name
     #   The name of the notebook instance.
@@ -954,11 +1037,12 @@ module Aws::SageMaker
     #   algorithm and algorithm-specific metadata, including the input mode.
     #   For more information about algorithms provided by Amazon SageMaker,
     #   see [Algorithms][1]. For information about providing your own
-    #   algorithms, see your-algorithms.
+    #   algorithms, see [Using Your Own Algorithms with Amazon SageMaker][2].
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
+    #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker
@@ -980,7 +1064,7 @@ module Aws::SageMaker
     #
     #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
     #
-    # @option params [required, Array<Types::Channel>] :input_data_config
+    # @option params [Array<Types::Channel>] :input_data_config
     #   An array of `Channel` objects. Each channel is a named input source.
     #   `InputDataConfig` describes the input data and its location.
     #
@@ -1015,7 +1099,12 @@ module Aws::SageMaker
     # @option params [Types::VpcConfig] :vpc_config
     #   A VpcConfig object that specifies the VPC that you want your training
     #   job to connect to. Control access to and from your training container
-    #   by configuring the VPC. For more information, see train-vpc
+    #   by configuring the VPC. For more information, see [Protect Training
+    #   Jobs by Using an Amazon Virtual Private Cloud][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
     #
     # @option params [required, Types::StoppingCondition] :stopping_condition
     #   Sets a duration for training. Use this parameter to cap model training
@@ -1055,7 +1144,7 @@ module Aws::SageMaker
     #       training_input_mode: "Pipe", # required, accepts Pipe, File
     #     },
     #     role_arn: "RoleArn", # required
-    #     input_data_config: [ # required
+    #     input_data_config: [
     #       {
     #         channel_name: "ChannelName", # required
     #         data_source: { # required
@@ -1068,6 +1157,7 @@ module Aws::SageMaker
     #         content_type: "ContentType",
     #         compression_type: "None", # accepts None, Gzip
     #         record_wrapper_type: "None", # accepts None, RecordIO
+    #         input_mode: "Pipe", # accepts Pipe, File
     #       },
     #     ],
     #     output_data_config: { # required
@@ -1121,8 +1211,9 @@ module Aws::SageMaker
     #   unique within an AWS Region in an AWS account.
     #
     # * `ModelName` - Identifies the model to use. `ModelName` must be the
-    #   name of an existing Amazon SageMaker model within an AWS Region in
-    #   an AWS account.
+    #   name of an existing Amazon SageMaker model in the same AWS Region
+    #   and AWS account. For information on creating a model, see
+    #   CreateModel.
     #
     # * `TransformInput` - Describes the dataset to be transformed and the
     #   Amazon S3 location where it is stored.
@@ -1237,6 +1328,7 @@ module Aws::SageMaker
     #     transform_resources: { # required
     #       instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
     #       instance_count: 1, # required
+    #       volume_kms_key_id: "KmsKeyId",
     #     },
     #     tags: [
     #       {
@@ -1397,6 +1489,12 @@ module Aws::SageMaker
     #
     # To list a resource's tags, use the `ListTags` API.
     #
+    # <note markdown="1"> When you call this API to delete tags from a hyperparameter tuning
+    # job, the deleted tags are not removed from training jobs that the
+    # hyperparameter tuning job launched before you called this API.
+    #
+    #  </note>
+    #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource whose tags you want to
     #   delete.
@@ -1459,7 +1557,7 @@ module Aws::SageMaker
     #   resp.production_variants[0].desired_weight #=> Float
     #   resp.production_variants[0].current_instance_count #=> Integer
     #   resp.production_variants[0].desired_instance_count #=> Integer
-    #   resp.endpoint_status #=> String, one of "OutOfService", "Creating", "Updating", "RollingBack", "InService", "Deleting", "Failed"
+    #   resp.endpoint_status #=> String, one of "OutOfService", "Creating", "Updating", "SystemUpdating", "RollingBack", "InService", "Deleting", "Failed"
     #   resp.failure_reason #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
@@ -1578,6 +1676,7 @@ module Aws::SageMaker
     #   resp.training_job_definition.input_data_config[0].content_type #=> String
     #   resp.training_job_definition.input_data_config[0].compression_type #=> String, one of "None", "Gzip"
     #   resp.training_job_definition.input_data_config[0].record_wrapper_type #=> String, one of "None", "RecordIO"
+    #   resp.training_job_definition.input_data_config[0].input_mode #=> String, one of "Pipe", "File"
     #   resp.training_job_definition.vpc_config.security_group_ids #=> Array
     #   resp.training_job_definition.vpc_config.security_group_ids[0] #=> String
     #   resp.training_job_definition.vpc_config.subnets #=> Array
@@ -1692,6 +1791,7 @@ module Aws::SageMaker
     #   * {Types::DescribeNotebookInstanceOutput#creation_time #creation_time} => Time
     #   * {Types::DescribeNotebookInstanceOutput#notebook_instance_lifecycle_config_name #notebook_instance_lifecycle_config_name} => String
     #   * {Types::DescribeNotebookInstanceOutput#direct_internet_access #direct_internet_access} => String
+    #   * {Types::DescribeNotebookInstanceOutput#volume_size_in_gb #volume_size_in_gb} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -1717,6 +1817,7 @@ module Aws::SageMaker
     #   resp.creation_time #=> Time
     #   resp.notebook_instance_lifecycle_config_name #=> String
     #   resp.direct_internet_access #=> String, one of "Enabled", "Disabled"
+    #   resp.volume_size_in_gb #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstance AWS API Documentation
     #
@@ -1730,7 +1831,11 @@ module Aws::SageMaker
     # Returns a description of a notebook instance lifecycle configuration.
     #
     # For information about notebook instance lifestyle configurations, see
-    # notebook-lifecycle-config.
+    # [Step 2.1: (Optional) Customize a Notebook Instance][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
     #
     # @option params [required, String] :notebook_instance_lifecycle_config_name
     #   The name of the lifecycle configuration to describe.
@@ -1826,6 +1931,7 @@ module Aws::SageMaker
     #   resp.input_data_config[0].content_type #=> String
     #   resp.input_data_config[0].compression_type #=> String, one of "None", "Gzip"
     #   resp.input_data_config[0].record_wrapper_type #=> String, one of "None", "RecordIO"
+    #   resp.input_data_config[0].input_mode #=> String, one of "Pipe", "File"
     #   resp.output_data_config.kms_key_id #=> String
     #   resp.output_data_config.s3_output_path #=> String
     #   resp.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge"
@@ -1908,6 +2014,7 @@ module Aws::SageMaker
     #   resp.transform_output.kms_key_id #=> String
     #   resp.transform_resources.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge"
     #   resp.transform_resources.instance_count #=> Integer
+    #   resp.transform_resources.volume_kms_key_id #=> String
     #   resp.creation_time #=> Time
     #   resp.transform_start_time #=> Time
     #   resp.transform_end_time #=> Time
@@ -2039,7 +2146,7 @@ module Aws::SageMaker
     #     creation_time_after: Time.now,
     #     last_modified_time_before: Time.now,
     #     last_modified_time_after: Time.now,
-    #     status_equals: "OutOfService", # accepts OutOfService, Creating, Updating, RollingBack, InService, Deleting, Failed
+    #     status_equals: "OutOfService", # accepts OutOfService, Creating, Updating, SystemUpdating, RollingBack, InService, Deleting, Failed
     #   })
     #
     # @example Response structure
@@ -2049,7 +2156,7 @@ module Aws::SageMaker
     #   resp.endpoints[0].endpoint_arn #=> String
     #   resp.endpoints[0].creation_time #=> Time
     #   resp.endpoints[0].last_modified_time #=> Time
-    #   resp.endpoints[0].endpoint_status #=> String, one of "OutOfService", "Creating", "Updating", "RollingBack", "InService", "Deleting", "Failed"
+    #   resp.endpoints[0].endpoint_status #=> String, one of "OutOfService", "Creating", "Updating", "SystemUpdating", "RollingBack", "InService", "Deleting", "Failed"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpoints AWS API Documentation
@@ -2932,6 +3039,23 @@ module Aws::SageMaker
     #
     #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
     #
+    # @option params [String] :lifecycle_config_name
+    #   The name of a lifecycle configuration to associate with the notebook
+    #   instance. For information about lifestyle configurations, see [Step
+    #   2.1: (Optional) Customize a Notebook Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
+    #
+    # @option params [Boolean] :disassociate_lifecycle_config
+    #   Set to `true` to remove the notebook instance lifecycle configuration
+    #   currently associated with the notebook instance.
+    #
+    # @option params [Integer] :volume_size_in_gb
+    #   The size, in GB, of the ML storage volume to attach to the notebook
+    #   instance.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2940,6 +3064,9 @@ module Aws::SageMaker
     #     notebook_instance_name: "NotebookInstanceName", # required
     #     instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge
     #     role_arn: "RoleArn",
+    #     lifecycle_config_name: "NotebookInstanceLifecycleConfigName",
+    #     disassociate_lifecycle_config: false,
+    #     volume_size_in_gb: 1,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstance AWS API Documentation
@@ -3005,7 +3132,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -3071,14 +3198,15 @@ module Aws::SageMaker
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name                       | params                        | :delay   | :max_attempts |
-    # | --------------------------------- | ----------------------------- | -------- | ------------- |
-    # | endpoint_deleted                  | {#describe_endpoint}          | 30       | 60            |
-    # | endpoint_in_service               | {#describe_endpoint}          | 30       | 120           |
-    # | notebook_instance_deleted         | {#describe_notebook_instance} | 30       | 60            |
-    # | notebook_instance_in_service      | {#describe_notebook_instance} | 30       | 60            |
-    # | notebook_instance_stopped         | {#describe_notebook_instance} | 30       | 60            |
-    # | training_job_completed_or_stopped | {#describe_training_job}      | 120      | 180           |
+    # | waiter_name                        | params                        | :delay   | :max_attempts |
+    # | ---------------------------------- | ----------------------------- | -------- | ------------- |
+    # | endpoint_deleted                   | {#describe_endpoint}          | 30       | 60            |
+    # | endpoint_in_service                | {#describe_endpoint}          | 30       | 120           |
+    # | notebook_instance_deleted          | {#describe_notebook_instance} | 30       | 60            |
+    # | notebook_instance_in_service       | {#describe_notebook_instance} | 30       | 60            |
+    # | notebook_instance_stopped          | {#describe_notebook_instance} | 30       | 60            |
+    # | training_job_completed_or_stopped  | {#describe_training_job}      | 120      | 180           |
+    # | transform_job_completed_or_stopped | {#describe_transform_job}     | 60       | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -3134,7 +3262,8 @@ module Aws::SageMaker
         notebook_instance_deleted: Waiters::NotebookInstanceDeleted,
         notebook_instance_in_service: Waiters::NotebookInstanceInService,
         notebook_instance_stopped: Waiters::NotebookInstanceStopped,
-        training_job_completed_or_stopped: Waiters::TrainingJobCompletedOrStopped
+        training_job_completed_or_stopped: Waiters::TrainingJobCompletedOrStopped,
+        transform_job_completed_or_stopped: Waiters::TransformJobCompletedOrStopped
       }
     end
 

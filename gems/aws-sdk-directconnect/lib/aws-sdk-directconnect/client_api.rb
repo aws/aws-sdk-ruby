@@ -109,6 +109,7 @@ module Aws::DirectConnect
     InterconnectName = Shapes::StringShape.new(name: 'InterconnectName')
     InterconnectState = Shapes::StringShape.new(name: 'InterconnectState')
     Interconnects = Shapes::StructureShape.new(name: 'Interconnects')
+    JumboFrameCapable = Shapes::BooleanShape.new(name: 'JumboFrameCapable')
     Lag = Shapes::StructureShape.new(name: 'Lag')
     LagId = Shapes::StringShape.new(name: 'LagId')
     LagList = Shapes::ListShape.new(name: 'LagList')
@@ -125,6 +126,7 @@ module Aws::DirectConnect
     LocationName = Shapes::StringShape.new(name: 'LocationName')
     Locations = Shapes::StructureShape.new(name: 'Locations')
     LongAsn = Shapes::IntegerShape.new(name: 'LongAsn')
+    MTU = Shapes::IntegerShape.new(name: 'MTU')
     MaxResultSetSize = Shapes::IntegerShape.new(name: 'MaxResultSetSize')
     NewBGPPeer = Shapes::StructureShape.new(name: 'NewBGPPeer')
     NewPrivateVirtualInterface = Shapes::StructureShape.new(name: 'NewPrivateVirtualInterface')
@@ -155,6 +157,7 @@ module Aws::DirectConnect
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateLagRequest = Shapes::StructureShape.new(name: 'UpdateLagRequest')
+    UpdateVirtualInterfaceAttributesRequest = Shapes::StructureShape.new(name: 'UpdateVirtualInterfaceAttributesRequest')
     VLAN = Shapes::IntegerShape.new(name: 'VLAN')
     VirtualGateway = Shapes::StructureShape.new(name: 'VirtualGateway')
     VirtualGatewayId = Shapes::StringShape.new(name: 'VirtualGatewayId')
@@ -251,6 +254,7 @@ module Aws::DirectConnect
     Connection.add_member(:loa_issue_time, Shapes::ShapeRef.new(shape: LoaIssueTime, location_name: "loaIssueTime"))
     Connection.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, location_name: "lagId"))
     Connection.add_member(:aws_device, Shapes::ShapeRef.new(shape: AwsDevice, deprecated: true, location_name: "awsDevice"))
+    Connection.add_member(:jumbo_frame_capable, Shapes::ShapeRef.new(shape: JumboFrameCapable, location_name: "jumboFrameCapable"))
     Connection.add_member(:aws_device_v2, Shapes::ShapeRef.new(shape: AwsDeviceV2, location_name: "awsDeviceV2"))
     Connection.struct_class = Types::Connection
 
@@ -464,6 +468,7 @@ module Aws::DirectConnect
     Interconnect.add_member(:loa_issue_time, Shapes::ShapeRef.new(shape: LoaIssueTime, location_name: "loaIssueTime"))
     Interconnect.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, location_name: "lagId"))
     Interconnect.add_member(:aws_device, Shapes::ShapeRef.new(shape: AwsDevice, deprecated: true, location_name: "awsDevice"))
+    Interconnect.add_member(:jumbo_frame_capable, Shapes::ShapeRef.new(shape: JumboFrameCapable, location_name: "jumboFrameCapable"))
     Interconnect.add_member(:aws_device_v2, Shapes::ShapeRef.new(shape: AwsDeviceV2, location_name: "awsDeviceV2"))
     Interconnect.struct_class = Types::Interconnect
 
@@ -485,6 +490,7 @@ module Aws::DirectConnect
     Lag.add_member(:aws_device_v2, Shapes::ShapeRef.new(shape: AwsDeviceV2, location_name: "awsDeviceV2"))
     Lag.add_member(:connections, Shapes::ShapeRef.new(shape: ConnectionList, location_name: "connections"))
     Lag.add_member(:allows_hosted_connections, Shapes::ShapeRef.new(shape: BooleanFlag, location_name: "allowsHostedConnections"))
+    Lag.add_member(:jumbo_frame_capable, Shapes::ShapeRef.new(shape: JumboFrameCapable, location_name: "jumboFrameCapable"))
     Lag.struct_class = Types::Lag
 
     LagList.member = Shapes::ShapeRef.new(shape: Lag)
@@ -516,6 +522,7 @@ module Aws::DirectConnect
     NewPrivateVirtualInterface.add_member(:virtual_interface_name, Shapes::ShapeRef.new(shape: VirtualInterfaceName, required: true, location_name: "virtualInterfaceName"))
     NewPrivateVirtualInterface.add_member(:vlan, Shapes::ShapeRef.new(shape: VLAN, required: true, location_name: "vlan"))
     NewPrivateVirtualInterface.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, required: true, location_name: "asn"))
+    NewPrivateVirtualInterface.add_member(:mtu, Shapes::ShapeRef.new(shape: MTU, location_name: "mtu"))
     NewPrivateVirtualInterface.add_member(:auth_key, Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: "authKey"))
     NewPrivateVirtualInterface.add_member(:amazon_address, Shapes::ShapeRef.new(shape: AmazonAddress, location_name: "amazonAddress"))
     NewPrivateVirtualInterface.add_member(:customer_address, Shapes::ShapeRef.new(shape: CustomerAddress, location_name: "customerAddress"))
@@ -527,6 +534,7 @@ module Aws::DirectConnect
     NewPrivateVirtualInterfaceAllocation.add_member(:virtual_interface_name, Shapes::ShapeRef.new(shape: VirtualInterfaceName, required: true, location_name: "virtualInterfaceName"))
     NewPrivateVirtualInterfaceAllocation.add_member(:vlan, Shapes::ShapeRef.new(shape: VLAN, required: true, location_name: "vlan"))
     NewPrivateVirtualInterfaceAllocation.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, required: true, location_name: "asn"))
+    NewPrivateVirtualInterfaceAllocation.add_member(:mtu, Shapes::ShapeRef.new(shape: MTU, location_name: "mtu"))
     NewPrivateVirtualInterfaceAllocation.add_member(:auth_key, Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: "authKey"))
     NewPrivateVirtualInterfaceAllocation.add_member(:amazon_address, Shapes::ShapeRef.new(shape: AmazonAddress, location_name: "amazonAddress"))
     NewPrivateVirtualInterfaceAllocation.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
@@ -591,6 +599,10 @@ module Aws::DirectConnect
     UpdateLagRequest.add_member(:minimum_links, Shapes::ShapeRef.new(shape: Count, location_name: "minimumLinks"))
     UpdateLagRequest.struct_class = Types::UpdateLagRequest
 
+    UpdateVirtualInterfaceAttributesRequest.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, required: true, location_name: "virtualInterfaceId"))
+    UpdateVirtualInterfaceAttributesRequest.add_member(:mtu, Shapes::ShapeRef.new(shape: MTU, location_name: "mtu"))
+    UpdateVirtualInterfaceAttributesRequest.struct_class = Types::UpdateVirtualInterfaceAttributesRequest
+
     VirtualGateway.add_member(:virtual_gateway_id, Shapes::ShapeRef.new(shape: VirtualGatewayId, location_name: "virtualGatewayId"))
     VirtualGateway.add_member(:virtual_gateway_state, Shapes::ShapeRef.new(shape: VirtualGatewayState, location_name: "virtualGatewayState"))
     VirtualGateway.struct_class = Types::VirtualGateway
@@ -615,6 +627,8 @@ module Aws::DirectConnect
     VirtualInterface.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
     VirtualInterface.add_member(:virtual_interface_state, Shapes::ShapeRef.new(shape: VirtualInterfaceState, location_name: "virtualInterfaceState"))
     VirtualInterface.add_member(:customer_router_config, Shapes::ShapeRef.new(shape: RouterConfig, location_name: "customerRouterConfig"))
+    VirtualInterface.add_member(:mtu, Shapes::ShapeRef.new(shape: MTU, location_name: "mtu"))
+    VirtualInterface.add_member(:jumbo_frame_capable, Shapes::ShapeRef.new(shape: JumboFrameCapable, location_name: "jumboFrameCapable"))
     VirtualInterface.add_member(:virtual_gateway_id, Shapes::ShapeRef.new(shape: VirtualGatewayId, location_name: "virtualGatewayId"))
     VirtualInterface.add_member(:direct_connect_gateway_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayId, location_name: "directConnectGatewayId"))
     VirtualInterface.add_member(:route_filter_prefixes, Shapes::ShapeRef.new(shape: RouteFilterPrefixList, location_name: "routeFilterPrefixes"))
@@ -635,12 +649,15 @@ module Aws::DirectConnect
       api.version = "2012-10-25"
 
       api.metadata = {
+        "apiVersion" => "2012-10-25",
         "endpointPrefix" => "directconnect",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Direct Connect",
+        "serviceId" => "Direct Connect",
         "signatureVersion" => "v4",
         "targetPrefix" => "OvertureService",
+        "uid" => "directconnect-2012-10-25",
       }
 
       api.add_operation(:allocate_connection_on_interconnect, Seahorse::Model::Operation.new.tap do |o|
@@ -1085,6 +1102,16 @@ module Aws::DirectConnect
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateLagRequest)
         o.output = Shapes::ShapeRef.new(shape: Lag)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
+      api.add_operation(:update_virtual_interface_attributes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateVirtualInterfaceAttributes"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateVirtualInterfaceAttributesRequest)
+        o.output = Shapes::ShapeRef.new(shape: VirtualInterface)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)

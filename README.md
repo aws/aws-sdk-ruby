@@ -362,6 +362,7 @@ to be backwards compatible.
 | AWS Server Migration Service                          | Aws::SMS                             | aws-sdk-sms                             | 2016-10-24  |
 | AWS Service Catalog                                   | Aws::ServiceCatalog                  | aws-sdk-servicecatalog                  | 2015-12-10  |
 | AWS Shield                                            | Aws::Shield                          | aws-sdk-shield                          | 2016-06-02  |
+| AWS Signer                                            | Aws::Signer                          | aws-sdk-signer                          | 2017-08-25  |
 | AWS Step Functions                                    | Aws::States                          | aws-sdk-states                          | 2016-11-23  |
 | AWS Storage Gateway                                   | Aws::StorageGateway                  | aws-sdk-storagegateway                  | 2013-06-30  |
 | AWS Support                                           | Aws::Support                         | aws-sdk-support                         | 2013-04-15  |
@@ -375,7 +376,7 @@ to be backwards compatible.
 | Amazon AppStream                                      | Aws::AppStream                       | aws-sdk-appstream                       | 2016-12-01  |
 | Amazon Athena                                         | Aws::Athena                          | aws-sdk-athena                          | 2017-05-18  |
 | Amazon CloudDirectory                                 | Aws::CloudDirectory                  | aws-sdk-clouddirectory                  | 2017-01-11  |
-| Amazon CloudFront                                     | Aws::CloudFront                      | aws-sdk-cloudfront                      | 2017-10-30  |
+| Amazon CloudFront                                     | Aws::CloudFront                      | aws-sdk-cloudfront                      | 2018-06-18  |
 | Amazon CloudHSM                                       | Aws::CloudHSM                        | aws-sdk-cloudhsm                        | 2014-05-30  |
 | Amazon CloudSearch                                    | Aws::CloudSearch                     | aws-sdk-cloudsearch                     | 2013-01-01  |
 | Amazon CloudSearch Domain                             | Aws::CloudSearchDomain               | aws-sdk-cloudsearchdomain               | 2013-01-01  |

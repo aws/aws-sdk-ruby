@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -47,118 +49,138 @@ module Aws::CloudWatchEvents
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
     #
-    # @option options [String] :session_token
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [String] :secret_access_key
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [String] :session_token
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -168,12 +190,11 @@ module Aws::CloudWatchEvents
 
     # Deletes the specified rule.
     #
-    # You must remove all targets from a rule using RemoveTargets before you
-    # can delete the rule.
+    # Before you can delete the rule, you must remove all targets, using
+    # RemoveTargets.
     #
     # When you delete a rule, incoming events might continue to match to the
-    # deleted rule. Please allow a short period of time for changes to take
-    # effect.
+    # deleted rule. Allow a short period of time for changes to take effect.
     #
     # @option params [required, String] :name
     #   The name of the rule.
@@ -223,6 +244,9 @@ module Aws::CloudWatchEvents
 
     # Describes the specified rule.
     #
+    # DescribeRule does not list the targets of a rule. To see the targets
+    # associated with a rule, use ListTargetsByRule.
+    #
     # @option params [required, String] :name
     #   The name of the rule.
     #
@@ -265,8 +289,8 @@ module Aws::CloudWatchEvents
     # and won't self-trigger if it has a schedule expression.
     #
     # When you disable a rule, incoming events might continue to match to
-    # the disabled rule. Please allow a short period of time for changes to
-    # take effect.
+    # the disabled rule. Allow a short period of time for changes to take
+    # effect.
     #
     # @option params [required, String] :name
     #   The name of the rule.
@@ -292,8 +316,8 @@ module Aws::CloudWatchEvents
     # fails.
     #
     # When you enable a rule, incoming events might not immediately start
-    # matching to a newly enabled rule. Please allow a short period of time
-    # for changes to take effect.
+    # matching to a newly enabled rule. Allow a short period of time for
+    # changes to take effect.
     #
     # @option params [required, String] :name
     #   The name of the rule.
@@ -359,6 +383,9 @@ module Aws::CloudWatchEvents
 
     # Lists your Amazon CloudWatch Events rules. You can either list all the
     # rules or you can provide a prefix to match to the rule names.
+    #
+    # ListRules does not list the targets of a rule. To see the targets
+    # associated with a rule, use ListTargetsByRule.
     #
     # @option params [String] :name_prefix
     #   The prefix matching the rule name.
@@ -447,6 +474,14 @@ module Aws::CloudWatchEvents
     #   resp.targets[0].run_command_parameters.run_command_targets[0].values[0] #=> String
     #   resp.targets[0].ecs_parameters.task_definition_arn #=> String
     #   resp.targets[0].ecs_parameters.task_count #=> Integer
+    #   resp.targets[0].ecs_parameters.launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.targets[0].ecs_parameters.network_configuration.awsvpc_configuration.subnets #=> Array
+    #   resp.targets[0].ecs_parameters.network_configuration.awsvpc_configuration.subnets[0] #=> String
+    #   resp.targets[0].ecs_parameters.network_configuration.awsvpc_configuration.security_groups #=> Array
+    #   resp.targets[0].ecs_parameters.network_configuration.awsvpc_configuration.security_groups[0] #=> String
+    #   resp.targets[0].ecs_parameters.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.targets[0].ecs_parameters.platform_version #=> String
+    #   resp.targets[0].ecs_parameters.group #=> String
     #   resp.targets[0].batch_parameters.job_definition #=> String
     #   resp.targets[0].batch_parameters.job_name #=> String
     #   resp.targets[0].batch_parameters.array_properties.size #=> Integer
@@ -507,19 +542,23 @@ module Aws::CloudWatchEvents
       req.send_request(options)
     end
 
-    # Running `PutPermission` permits the specified AWS account to put
-    # events to your account's default *event bus*. CloudWatch Events rules
-    # in your account are triggered by these events arriving to your default
-    # event bus.
+    # Running `PutPermission` permits the specified AWS account or AWS
+    # organization to put events to your account's default *event bus*.
+    # CloudWatch Events rules in your account are triggered by these events
+    # arriving to your default event bus.
     #
     # For another account to send events to your account, that external
     # account must have a CloudWatch Events rule with your account's
     # default event bus as a target.
     #
     # To enable multiple AWS accounts to put events to your default event
-    # bus, run `PutPermission` once for each of these accounts.
+    # bus, run `PutPermission` once for each of these accounts. Or, if all
+    # the accounts are members of the same AWS organization, you can run
+    # `PutPermission` once specifying `Principal` as "*" and specifying
+    # the AWS organization ID in `Condition`, to grant permissions to all
+    # accounts in that organization.
     #
-    # The permission policy on the default event bus cannot exceed 10KB in
+    # The permission policy on the default event bus cannot exceed 10 KB in
     # size.
     #
     # @option params [required, String] :action
@@ -531,17 +570,35 @@ module Aws::CloudWatchEvents
     #   your default event bus. Specify "*" to permit any account to put
     #   events to your default event bus.
     #
-    #   If you specify "*", avoid creating rules that may match undesirable
-    #   events. To create more secure rules, make sure that the event pattern
-    #   for each rule contains an `account` field with a specific account ID
-    #   from which to receive events. Rules with an account field do not match
-    #   any events sent from other accounts.
+    #   If you specify "*" without specifying `Condition`, avoid creating
+    #   rules that may match undesirable events. To create more secure rules,
+    #   make sure that the event pattern for each rule contains an `account`
+    #   field with a specific account ID from which to receive events. Rules
+    #   with an account field do not match any events sent from other
+    #   accounts.
     #
     # @option params [required, String] :statement_id
     #   An identifier string for the external account that you are granting
     #   permissions to. If you later want to revoke the permission for this
     #   external account, specify this `StatementId` when you run
     #   RemovePermission.
+    #
+    # @option params [Types::Condition] :condition
+    #   This parameter enables you to limit the permission to accounts that
+    #   fulfill a certain condition, such as being a member of a certain AWS
+    #   organization. For more information about AWS Organizations, see [What
+    #   Is AWS Organizations][1] in the *AWS Organizations User Guide*.
+    #
+    #   If you specify `Condition` with an AWS organization ID, and specify
+    #   "*" as the value for `Principal`, you grant permission to all the
+    #   accounts in the named organization.
+    #
+    #   The `Condition` is a JSON string which must contain `Type`, `Key`, and
+    #   `Value` fields.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -551,6 +608,11 @@ module Aws::CloudWatchEvents
     #     action: "Action", # required
     #     principal: "Principal", # required
     #     statement_id: "StatementId", # required
+    #     condition: {
+    #       type: "String", # required
+    #       key: "String", # required
+    #       value: "String", # required
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPermission AWS API Documentation
@@ -566,14 +628,14 @@ module Aws::CloudWatchEvents
     # or based on value of the state. You can disable a rule using
     # DisableRule.
     #
-    # If you are updating an existing rule, the rule is completely replaced
-    # with what you specify in this `PutRule` command. If you omit arguments
-    # in `PutRule`, the old values for those arguments are not kept.
-    # Instead, they are replaced with null values.
+    # If you are updating an existing rule, the rule is replaced with what
+    # you specify in this `PutRule` command. If you omit arguments in
+    # `PutRule`, the old values for those arguments are not kept. Instead,
+    # they are replaced with null values.
     #
     # When you create or update a rule, incoming events might not
-    # immediately start matching to new or updated rules. Please allow a
-    # short period of time for changes to take effect.
+    # immediately start matching to new or updated rules. Allow a short
+    # period of time for changes to take effect.
     #
     # A rule must contain at least an EventPattern or ScheduleExpression.
     # Rules with EventPatterns are triggered when a matching event is
@@ -650,11 +712,15 @@ module Aws::CloudWatchEvents
     #
     # * EC2 instances
     #
+    # * SSM Run Command
+    #
+    # * SSM Automation
+    #
     # * AWS Lambda functions
     #
-    # * Streams in Amazon Kinesis Streams
+    # * Data streams in Amazon Kinesis Data Streams
     #
-    # * Delivery streams in Amazon Kinesis Firehose
+    # * Data delivery streams in Amazon Kinesis Data Firehose
     #
     # * Amazon ECS tasks
     #
@@ -662,7 +728,9 @@ module Aws::CloudWatchEvents
     #
     # * AWS Batch jobs
     #
-    # * Pipelines in Amazon Code Pipeline
+    # * AWS CodeBuild projects
+    #
+    # * Pipelines in AWS CodePipeline
     #
     # * Amazon Inspector assessment templates
     #
@@ -672,44 +740,46 @@ module Aws::CloudWatchEvents
     #
     # * The default event bus of another AWS account
     #
-    # Note that creating rules with built-in targets is supported only in
-    # the AWS Management Console.
+    # Creating rules with built-in targets is supported only in the AWS
+    # Management Console. The built-in targets are `EC2 CreateSnapshot API
+    # call`, `EC2 RebootInstances API call`, `EC2 StopInstances API call`,
+    # and `EC2 TerminateInstances API call`.
     #
     # For some target types, `PutTargets` provides target-specific
-    # parameters. If the target is an Amazon Kinesis stream, you can
-    # optionally specify which shard the event goes to by using the
-    # `KinesisParameters` argument. To invoke a command on multiple EC2
-    # instances with one rule, you can use the `RunCommandParameters` field.
+    # parameters. If the target is a Kinesis data stream, you can optionally
+    # specify which shard the event goes to by using the `KinesisParameters`
+    # argument. To invoke a command on multiple EC2 instances with one rule,
+    # you can use the `RunCommandParameters` field.
     #
     # To be able to make API calls against the resources that you own,
     # Amazon CloudWatch Events needs the appropriate permissions. For AWS
     # Lambda and Amazon SNS resources, CloudWatch Events relies on
-    # resource-based policies. For EC2 instances, Amazon Kinesis streams,
-    # and AWS Step Functions state machines, CloudWatch Events relies on IAM
+    # resource-based policies. For EC2 instances, Kinesis data streams, and
+    # AWS Step Functions state machines, CloudWatch Events relies on IAM
     # roles that you specify in the `RoleARN` argument in `PutTargets`. For
     # more information, see [Authentication and Access Control][1] in the
     # *Amazon CloudWatch Events User Guide*.
     #
     # If another AWS account is in the same region and has granted you
     # permission (using `PutPermission`), you can send events to that
-    # account by setting that account's event bus as a target of the rules
-    # in your account. To send the matched events to the other account,
-    # specify that account's event bus as the `Arn` when you run
+    # account. Set that account's event bus as a target of the rules in
+    # your account. To send the matched events to the other account, specify
+    # that account's event bus as the `Arn` value when you run
     # `PutTargets`. If your account sends events to another account, your
-    # account is charged for each sent event. Each event sent to antoher
+    # account is charged for each sent event. Each event sent to another
     # account is charged as a custom event. The account receiving the event
-    # is not charged. For more information on pricing, see [Amazon
-    # CloudWatch Pricing][2].
+    # is not charged. For more information, see [Amazon CloudWatch
+    # Pricing][2].
     #
     # For more information about enabling cross-account events, see
     # PutPermission.
     #
-    # **Input**, **InputPath** and **InputTransformer** are mutually
+    # **Input**, **InputPath**, and **InputTransformer** are mutually
     # exclusive and optional parameters of a target. When a rule is
     # triggered due to a matched event:
     #
     # * If none of the following arguments are specified for a target, then
-    #   the entire event is passed to the target in JSON form (unless the
+    #   the entire event is passed to the target in JSON format (unless the
     #   target is Amazon EC2 Run Command or Amazon ECS task, in which case
     #   nothing from the event is passed to the target).
     #
@@ -729,8 +799,8 @@ module Aws::CloudWatchEvents
     # dot notation, not bracket notation.
     #
     # When you add targets to a rule and the associated rule triggers soon
-    # after, new or updated targets might not be immediately invoked. Please
-    # allow a short period of time for changes to take effect.
+    # after, new or updated targets might not be immediately invoked. Allow
+    # a short period of time for changes to take effect.
     #
     # This action can partially fail if too many requests are made at the
     # same time. If that happens, `FailedEntryCount` is non-zero in the
@@ -784,6 +854,16 @@ module Aws::CloudWatchEvents
     #         ecs_parameters: {
     #           task_definition_arn: "Arn", # required
     #           task_count: 1,
+    #           launch_type: "EC2", # accepts EC2, FARGATE
+    #           network_configuration: {
+    #             awsvpc_configuration: {
+    #               subnets: ["String"], # required
+    #               security_groups: ["String"],
+    #               assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
+    #           },
+    #           platform_version: "String",
+    #           group: "String",
     #         },
     #         batch_parameters: {
     #           job_definition: "String", # required
@@ -850,8 +930,8 @@ module Aws::CloudWatchEvents
     # is triggered, those targets are no longer be invoked.
     #
     # When you remove a target, when the associated rule triggers, removed
-    # targets might continue to be invoked. Please allow a short period of
-    # time for changes to take effect.
+    # targets might continue to be invoked. Allow a short period of time for
+    # changes to take effect.
     #
     # This action can partially fail if too many requests are made at the
     # same time. If that happens, `FailedEntryCount` is non-zero in the
@@ -949,7 +1029,7 @@ module Aws::CloudWatchEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchevents'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -349,7 +349,7 @@ module Aws::RDS
     # @param [Hash] options ({})
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -391,13 +391,13 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Cannot be null, empty, or blank
+    #   * Can't be null, empty, or blank
     #
     #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-db-snapshot`
     # @option options [String] :kms_key_id
@@ -423,7 +423,7 @@ module Aws::RDS
     #   can't use encryption keys from one AWS Region in another AWS Region.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -488,7 +488,7 @@ module Aws::RDS
     #   your source DB instance uses Transparent Data Encryption for Oracle or
     #   Microsoft SQL Server, you must specify this option when copying across
     #   AWS Regions. For more information, see [Option Group
-    #   Considerations][1].
+    #   Considerations][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -562,6 +562,8 @@ module Aws::RDS
     #       },
     #     ],
     #     use_default_processor_features: false,
+    #     db_parameter_group_name: "String",
+    #     deletion_protection: false,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_instance_identifier
@@ -574,7 +576,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-snapshot-id`
     # @option options [String] :db_instance_class
@@ -621,21 +623,7 @@ module Aws::RDS
     #   true specifies an Internet-facing instance with a publicly resolvable
     #   DNS name, which resolves to a public IP address. A value of false
     #   specifies an internal instance with a DNS name that resolves to a
-    #   private IP address.
-    #
-    #   Default: The default behavior varies depending on whether a VPC has
-    #   been requested or not. The following list shows the default behavior
-    #   in each case.
-    #
-    #   * **Default VPC:** true
-    #
-    #   * **VPC:** false
-    #
-    #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance is
-    #   publicly accessible. If a specific DB subnet group has been specified
-    #   as part of the request and the PubliclyAccessible value has not been
-    #   set, the DB instance is private.
+    #   private IP address. For more information, see CreateDBInstance.
     # @option options [Boolean] :auto_minor_version_upgrade
     #   Indicates that minor version upgrades are applied automatically to the
     #   DB instance during the maintenance window.
@@ -695,7 +683,8 @@ module Aws::RDS
     #
     #   The provisioned IOPS value must follow the requirements for your
     #   database engine. For more information, see [Amazon RDS Provisioned
-    #   IOPS Storage to Improve Performance][1].
+    #   IOPS Storage to Improve Performance][1] in the *Amazon RDS User
+    #   Guide.*
     #
     #   Constraints: Must be an integer greater than 1000.
     #
@@ -711,7 +700,7 @@ module Aws::RDS
     #   instance
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -754,13 +743,42 @@ module Aws::RDS
     #   Default: `false`
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB instance is to export to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine being
+    #   used. For more information, see [Publishing Database Logs to Amazon
+    #   CloudWatch Logs][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     # @option options [Array<Types::ProcessorFeature>] :processor_features
     #   The number of CPU cores and the number of threads per core for the DB
     #   instance class of the DB instance.
     # @option options [Boolean] :use_default_processor_features
     #   A value that specifies that the DB instance class of the DB instance
     #   uses its default processor features.
+    # @option options [String] :db_parameter_group_name
+    #   The name of the DB parameter group to associate with this DB instance.
+    #   If this argument is omitted, the default DBParameterGroup for the
+    #   specified engine is used.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match the name of an existing DBParameterGroup.
+    #
+    #   * Must be 1 to 255 letters, numbers, or hyphens.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
+    # @option options [Boolean] :deletion_protection
+    #   Indicates if the DB instance should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false. For more information, see [ Deleting a DB
+    #   Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(db_snapshot_identifier: @snapshot_id)

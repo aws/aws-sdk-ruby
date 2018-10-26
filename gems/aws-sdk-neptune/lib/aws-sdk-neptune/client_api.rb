@@ -1308,11 +1308,15 @@ module Aws::Neptune
       api.version = "2014-10-31"
 
       api.metadata = {
+        "apiVersion" => "2014-10-31",
         "endpointPrefix" => "rds",
         "protocol" => "query",
+        "serviceAbbreviation" => "Amazon Neptune",
         "serviceFullName" => "Amazon Neptune",
+        "serviceId" => "Neptune",
         "signatureVersion" => "v4",
         "signingName" => "rds",
+        "uid" => "neptune-2014-10-31",
         "xmlNamespace" => "http://rds.amazonaws.com/doc/2014-10-31/",
       }
 

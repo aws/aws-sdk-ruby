@@ -135,6 +135,7 @@ module Aws::SecretsManager
 
     DeleteSecretRequest.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdType, required: true, location_name: "SecretId"))
     DeleteSecretRequest.add_member(:recovery_window_in_days, Shapes::ShapeRef.new(shape: RecoveryWindowInDaysType, location_name: "RecoveryWindowInDays", metadata: {"box"=>true}))
+    DeleteSecretRequest.add_member(:force_delete_without_recovery, Shapes::ShapeRef.new(shape: BooleanType, location_name: "ForceDeleteWithoutRecovery", metadata: {"box"=>true}))
     DeleteSecretRequest.struct_class = Types::DeleteSecretRequest
 
     DeleteSecretResponse.add_member(:arn, Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
@@ -333,13 +334,16 @@ module Aws::SecretsManager
       api.version = "2017-10-17"
 
       api.metadata = {
+        "apiVersion" => "2017-10-17",
         "endpointPrefix" => "secretsmanager",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Secrets Manager",
+        "serviceId" => "Secrets Manager",
         "signatureVersion" => "v4",
         "signingName" => "secretsmanager",
         "targetPrefix" => "secretsmanager",
+        "uid" => "secretsmanager-2017-10-17",
       }
 
       api.add_operation(:cancel_rotate_secret, Seahorse::Model::Operation.new.tap do |o|

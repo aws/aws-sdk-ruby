@@ -799,6 +799,24 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Configuration for the rollout of OTA updates.
+    #
+    # @note When making an API call, you may pass AwsJobExecutionsRolloutConfig
+    #   data as a hash:
+    #
+    #       {
+    #         maximum_per_minute: 1,
+    #       }
+    #
+    # @!attribute [rw] maximum_per_minute
+    #   The maximum number of OTA update job executions started per minute.
+    #   @return [Integer]
+    #
+    class AwsJobExecutionsRolloutConfig < Struct.new(
+      :maximum_per_minute)
+      include Aws::Structure
+    end
+
     # A Device Defender security profile behavior.
     #
     # @note When making an API call, you may pass Behavior
@@ -1342,19 +1360,25 @@ module Aws::IoT
     #
     #       {
     #         aws_signer_job_id: "SigningJobId",
+    #         start_signing_job_parameter: {
+    #           signing_profile_parameter: {
+    #             certificate_arn: "CertificateArn",
+    #             platform: "Platform",
+    #             certificate_path_on_device: "CertificatePathOnDevice",
+    #           },
+    #           signing_profile_name: "SigningProfileName",
+    #           destination: {
+    #             s3_destination: {
+    #               bucket: "S3Bucket",
+    #               prefix: "Prefix",
+    #             },
+    #           },
+    #         },
     #         custom_code_signing: {
     #           signature: {
-    #             stream: {
-    #               stream_id: "StreamId",
-    #               file_id: 1,
-    #             },
     #             inline_document: "data",
     #           },
     #           certificate_chain: {
-    #             stream: {
-    #               stream_id: "StreamId",
-    #               file_id: 1,
-    #             },
     #             certificate_name: "CertificateName",
     #             inline_document: "InlineDocument",
     #           },
@@ -1367,12 +1391,17 @@ module Aws::IoT
     #   The ID of the AWSSignerJob which was created to sign the file.
     #   @return [String]
     #
+    # @!attribute [rw] start_signing_job_parameter
+    #   Describes the code-signing job.
+    #   @return [Types::StartSigningJobParameter]
+    #
     # @!attribute [rw] custom_code_signing
     #   A custom method for code signing a file.
     #   @return [Types::CustomCodeSigning]
     #
     class CodeSigning < Struct.new(
       :aws_signer_job_id,
+      :start_signing_job_parameter,
       :custom_code_signing)
       include Aws::Structure
     end
@@ -1383,17 +1412,9 @@ module Aws::IoT
     #   data as a hash:
     #
     #       {
-    #         stream: {
-    #           stream_id: "StreamId",
-    #           file_id: 1,
-    #         },
     #         certificate_name: "CertificateName",
     #         inline_document: "InlineDocument",
     #       }
-    #
-    # @!attribute [rw] stream
-    #   A stream of the certificate chain files.
-    #   @return [Types::Stream]
     #
     # @!attribute [rw] certificate_name
     #   The name of the certificate.
@@ -1405,7 +1426,6 @@ module Aws::IoT
     #   @return [String]
     #
     class CodeSigningCertificateChain < Struct.new(
-      :stream,
       :certificate_name,
       :inline_document)
       include Aws::Structure
@@ -1417,16 +1437,8 @@ module Aws::IoT
     #   data as a hash:
     #
     #       {
-    #         stream: {
-    #           stream_id: "StreamId",
-    #           file_id: 1,
-    #         },
     #         inline_document: "data",
     #       }
-    #
-    # @!attribute [rw] stream
-    #   A stream of the code signing signature.
-    #   @return [Types::Stream]
     #
     # @!attribute [rw] inline_document
     #   A base64 encoded binary representation of the code signing
@@ -1434,7 +1446,6 @@ module Aws::IoT
     #   @return [String]
     #
     class CodeSigningSignature < Struct.new(
-      :stream,
       :inline_document)
       include Aws::Structure
     end
@@ -1579,6 +1590,9 @@ module Aws::IoT
     #         job_executions_rollout_config: {
     #           maximum_per_minute: 1,
     #         },
+    #         timeout_config: {
+    #           in_progress_timeout_in_minutes: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] job_id
@@ -1620,6 +1634,14 @@ module Aws::IoT
     #   Allows you to create a staged rollout of the job.
     #   @return [Types::JobExecutionsRolloutConfig]
     #
+    # @!attribute [rw] timeout_config
+    #   Specifies the amount of time each device has to finish its execution
+    #   of the job. The timer is started when the job execution status is
+    #   set to `IN_PROGRESS`. If the job execution status is not set to
+    #   another terminal state before the time expires, it will be
+    #   automatically set to `TIMED_OUT`.
+    #   @return [Types::TimeoutConfig]
+    #
     class CreateJobRequest < Struct.new(
       :job_id,
       :targets,
@@ -1628,7 +1650,8 @@ module Aws::IoT
       :description,
       :presigned_url_config,
       :target_selection,
-      :job_executions_rollout_config)
+      :job_executions_rollout_config,
+      :timeout_config)
       include Aws::Structure
     end
 
@@ -1704,29 +1727,45 @@ module Aws::IoT
     #         description: "OTAUpdateDescription",
     #         targets: ["Target"], # required
     #         target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
+    #         aws_job_executions_rollout_config: {
+    #           maximum_per_minute: 1,
+    #         },
     #         files: [ # required
     #           {
     #             file_name: "FileName",
     #             file_version: "OTAUpdateFileVersion",
-    #             file_source: {
-    #               stream_id: "StreamId",
-    #               file_id: 1,
+    #             file_location: {
+    #               stream: {
+    #                 stream_id: "StreamId",
+    #                 file_id: 1,
+    #               },
+    #               s3_location: {
+    #                 bucket: "S3Bucket",
+    #                 key: "S3Key",
+    #                 version: "S3Version",
+    #               },
     #             },
     #             code_signing: {
     #               aws_signer_job_id: "SigningJobId",
+    #               start_signing_job_parameter: {
+    #                 signing_profile_parameter: {
+    #                   certificate_arn: "CertificateArn",
+    #                   platform: "Platform",
+    #                   certificate_path_on_device: "CertificatePathOnDevice",
+    #                 },
+    #                 signing_profile_name: "SigningProfileName",
+    #                 destination: {
+    #                   s3_destination: {
+    #                     bucket: "S3Bucket",
+    #                     prefix: "Prefix",
+    #                   },
+    #                 },
+    #               },
     #               custom_code_signing: {
     #                 signature: {
-    #                   stream: {
-    #                     stream_id: "StreamId",
-    #                     file_id: 1,
-    #                   },
     #                   inline_document: "data",
     #                 },
     #                 certificate_chain: {
-    #                   stream: {
-    #                     stream_id: "StreamId",
-    #                     file_id: 1,
-    #                   },
     #                   certificate_name: "CertificateName",
     #                   inline_document: "InlineDocument",
     #                 },
@@ -1735,13 +1774,13 @@ module Aws::IoT
     #               },
     #             },
     #             attributes: {
-    #               "Key" => "Value",
+    #               "AttributeKey" => "Value",
     #             },
     #           },
     #         ],
     #         role_arn: "RoleArn", # required
     #         additional_parameters: {
-    #           "Key" => "Value",
+    #           "AttributeKey" => "Value",
     #         },
     #       }
     #
@@ -1767,6 +1806,10 @@ module Aws::IoT
     #   originally in the group. Valid values: CONTINUOUS \| SNAPSHOT.
     #   @return [String]
     #
+    # @!attribute [rw] aws_job_executions_rollout_config
+    #   Configuration for the rollout of OTA updates.
+    #   @return [Types::AwsJobExecutionsRolloutConfig]
+    #
     # @!attribute [rw] files
     #   The files to be streamed by the OTA update.
     #   @return [Array<Types::OTAUpdateFile>]
@@ -1785,6 +1828,7 @@ module Aws::IoT
       :description,
       :targets,
       :target_selection,
+      :aws_job_executions_rollout_config,
       :files,
       :role_arn,
       :additional_parameters)
@@ -2118,8 +2162,8 @@ module Aws::IoT
     #           {
     #             file_id: 1,
     #             s3_location: {
-    #               bucket: "S3Bucket", # required
-    #               key: "S3Key", # required
+    #               bucket: "S3Bucket",
+    #               key: "S3Key",
     #               version: "S3Version",
     #             },
     #           },
@@ -2554,17 +2598,9 @@ module Aws::IoT
     #
     #       {
     #         signature: {
-    #           stream: {
-    #             stream_id: "StreamId",
-    #             file_id: 1,
-    #           },
     #           inline_document: "data",
     #         },
     #         certificate_chain: {
-    #           stream: {
-    #             stream_id: "StreamId",
-    #             file_id: 1,
-    #           },
     #           certificate_name: "CertificateName",
     #           inline_document: "InlineDocument",
     #         },
@@ -2773,14 +2809,28 @@ module Aws::IoT
     #
     #       {
     #         ota_update_id: "OTAUpdateId", # required
+    #         delete_stream: false,
+    #         force_delete_aws_job: false,
     #       }
     #
     # @!attribute [rw] ota_update_id
     #   The OTA update ID to delete.
     #   @return [String]
     #
+    # @!attribute [rw] delete_stream
+    #   Specifies if the stream associated with an OTA update should be
+    #   deleted when the OTA update is deleted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] force_delete_aws_job
+    #   Specifies if the AWS Job associated with the OTA update should be
+    #   deleted with the OTA update is deleted.
+    #   @return [Boolean]
+    #
     class DeleteOTAUpdateRequest < Struct.new(
-      :ota_update_id)
+      :ota_update_id,
+      :delete_stream,
+      :force_delete_aws_job)
       include Aws::Structure
     end
 
@@ -3279,7 +3329,28 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] endpoint_type
-    #   The endpoint type.
+    #   The endpoint type. Valid endpoint types include:
+    #
+    #   * `iot:Data` - Returns a VeriSign signed data endpoint.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `iot:Data-ATS` - Returns an ATS signed data endpoint.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `iot:CredentialProvider` - Returns an AWS IoT credentials provider
+    #     API endpoint.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `iot:Jobs` - Returns an AWS IoT device management Jobs API
+    #     endpoint.
+    #
+    #   ^
     #   @return [String]
     #
     class DescribeEndpointRequest < Struct.new(
@@ -3855,6 +3926,27 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Describes the location of the updated firmware.
+    #
+    # @note When making an API call, you may pass Destination
+    #   data as a hash:
+    #
+    #       {
+    #         s3_destination: {
+    #           bucket: "S3Bucket",
+    #           prefix: "Prefix",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_destination
+    #   Describes the location in S3 of the updated firmware.
+    #   @return [Types::S3Destination]
+    #
+    class Destination < Struct.new(
+      :s3_destination)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DetachPolicyRequest
     #   data as a hash:
     #
@@ -4214,6 +4306,37 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The location of the OTA update.
+    #
+    # @note When making an API call, you may pass FileLocation
+    #   data as a hash:
+    #
+    #       {
+    #         stream: {
+    #           stream_id: "StreamId",
+    #           file_id: 1,
+    #         },
+    #         s3_location: {
+    #           bucket: "S3Bucket",
+    #           key: "S3Key",
+    #           version: "S3Version",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] stream
+    #   The stream that contains the OTA update.
+    #   @return [Types::Stream]
+    #
+    # @!attribute [rw] s3_location
+    #   The location of the updated firmware in S3.
+    #   @return [Types::S3Location]
+    #
+    class FileLocation < Struct.new(
+      :stream,
+      :s3_location)
+      include Aws::Structure
+    end
+
     # Describes an action that writes data to an Amazon Kinesis Firehose
     # stream.
     #
@@ -4293,8 +4416,13 @@ module Aws::IoT
     #   Thing indexing configuration.
     #   @return [Types::ThingIndexingConfiguration]
     #
+    # @!attribute [rw] thing_group_indexing_configuration
+    #   The index configuration.
+    #   @return [Types::ThingGroupIndexingConfiguration]
+    #
     class GetIndexingConfigurationResponse < Struct.new(
-      :thing_indexing_configuration)
+      :thing_indexing_configuration,
+      :thing_group_indexing_configuration)
       include Aws::Structure
     end
 
@@ -4659,8 +4787,8 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the job, one of `IN_PROGRESS`, `CANCELED`, or
-    #   `COMPLETED`.
+    #   The status of the job, one of `IN_PROGRESS`, `CANCELED`,
+    #   `DELETION_IN_PROGRESS` or `COMPLETED`.
     #   @return [String]
     #
     # @!attribute [rw] force_canceled
@@ -4707,6 +4835,14 @@ module Aws::IoT
     #   Details about the job process.
     #   @return [Types::JobProcessDetails]
     #
+    # @!attribute [rw] timeout_config
+    #   Specifies the amount of time each device has to finish its execution
+    #   of the job. A timer is started when the job execution status is set
+    #   to `IN_PROGRESS`. If the job execution status is not set to another
+    #   terminal state before the timer expires, it will be automatically
+    #   set to `TIMED_OUT`.
+    #   @return [Types::TimeoutConfig]
+    #
     class Job < Struct.new(
       :job_arn,
       :job_id,
@@ -4721,7 +4857,8 @@ module Aws::IoT
       :created_at,
       :last_updated_at,
       :completed_at,
-      :job_process_details)
+      :job_process_details,
+      :timeout_config)
       include Aws::Structure
     end
 
@@ -4734,7 +4871,7 @@ module Aws::IoT
     #
     # @!attribute [rw] status
     #   The status of the job execution (IN\_PROGRESS, QUEUED, FAILED,
-    #   SUCCESS, CANCELED, or REJECTED).
+    #   SUCCEEDED, TIMED\_OUT, CANCELED, or REJECTED).
     #   @return [String]
     #
     # @!attribute [rw] force_canceled
@@ -4778,6 +4915,11 @@ module Aws::IoT
     #   incremented each time they are updated by a device.
     #   @return [Integer]
     #
+    # @!attribute [rw] approximate_seconds_before_timed_out
+    #   The estimated number of seconds that remain before the job execution
+    #   status will be changed to `TIMED_OUT`.
+    #   @return [Integer]
+    #
     class JobExecution < Struct.new(
       :job_id,
       :status,
@@ -4788,7 +4930,8 @@ module Aws::IoT
       :started_at,
       :last_updated_at,
       :execution_number,
-      :version_number)
+      :version_number,
+      :approximate_seconds_before_timed_out)
       include Aws::Structure
     end
 
@@ -4930,6 +5073,10 @@ module Aws::IoT
     #   that was a target of the job.
     #   @return [Integer]
     #
+    # @!attribute [rw] number_of_timed_out_things
+    #   The number of things whose job execution status is `TIMED_OUT`.
+    #   @return [Integer]
+    #
     class JobProcessDetails < Struct.new(
       :processing_targets,
       :number_of_canceled_things,
@@ -4938,7 +5085,8 @@ module Aws::IoT
       :number_of_rejected_things,
       :number_of_queued_things,
       :number_of_in_progress_things,
-      :number_of_removed_things)
+      :number_of_removed_things,
+      :number_of_timed_out_things)
       include Aws::Structure
     end
 
@@ -5551,7 +5699,7 @@ module Aws::IoT
     #
     #       {
     #         job_id: "JobId", # required
-    #         status: "QUEUED", # accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, REJECTED, REMOVED, CANCELED
+    #         status: "QUEUED", # accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, TIMED_OUT, REJECTED, REMOVED, CANCELED
     #         max_results: 1,
     #         next_token: "NextToken",
     #       }
@@ -5600,7 +5748,7 @@ module Aws::IoT
     #
     #       {
     #         thing_name: "ThingName", # required
-    #         status: "QUEUED", # accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, REJECTED, REMOVED, CANCELED
+    #         status: "QUEUED", # accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, TIMED_OUT, REJECTED, REMOVED, CANCELED
     #         max_results: 1,
     #         next_token: "NextToken",
     #       }
@@ -7000,25 +7148,38 @@ module Aws::IoT
     #       {
     #         file_name: "FileName",
     #         file_version: "OTAUpdateFileVersion",
-    #         file_source: {
-    #           stream_id: "StreamId",
-    #           file_id: 1,
+    #         file_location: {
+    #           stream: {
+    #             stream_id: "StreamId",
+    #             file_id: 1,
+    #           },
+    #           s3_location: {
+    #             bucket: "S3Bucket",
+    #             key: "S3Key",
+    #             version: "S3Version",
+    #           },
     #         },
     #         code_signing: {
     #           aws_signer_job_id: "SigningJobId",
+    #           start_signing_job_parameter: {
+    #             signing_profile_parameter: {
+    #               certificate_arn: "CertificateArn",
+    #               platform: "Platform",
+    #               certificate_path_on_device: "CertificatePathOnDevice",
+    #             },
+    #             signing_profile_name: "SigningProfileName",
+    #             destination: {
+    #               s3_destination: {
+    #                 bucket: "S3Bucket",
+    #                 prefix: "Prefix",
+    #               },
+    #             },
+    #           },
     #           custom_code_signing: {
     #             signature: {
-    #               stream: {
-    #                 stream_id: "StreamId",
-    #                 file_id: 1,
-    #               },
     #               inline_document: "data",
     #             },
     #             certificate_chain: {
-    #               stream: {
-    #                 stream_id: "StreamId",
-    #                 file_id: 1,
-    #               },
     #               certificate_name: "CertificateName",
     #               inline_document: "InlineDocument",
     #             },
@@ -7027,7 +7188,7 @@ module Aws::IoT
     #           },
     #         },
     #         attributes: {
-    #           "Key" => "Value",
+    #           "AttributeKey" => "Value",
     #         },
     #       }
     #
@@ -7039,9 +7200,9 @@ module Aws::IoT
     #   The file version.
     #   @return [String]
     #
-    # @!attribute [rw] file_source
-    #   The source of the file.
-    #   @return [Types::Stream]
+    # @!attribute [rw] file_location
+    #   The location of the updated firmware.
+    #   @return [Types::FileLocation]
     #
     # @!attribute [rw] code_signing
     #   The code signing method of the file.
@@ -7054,7 +7215,7 @@ module Aws::IoT
     class OTAUpdateFile < Struct.new(
       :file_name,
       :file_version,
-      :file_source,
+      :file_location,
       :code_signing,
       :attributes)
       include Aws::Structure
@@ -7085,6 +7246,10 @@ module Aws::IoT
     # @!attribute [rw] targets
     #   The targets of the OTA update.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] aws_job_executions_rollout_config
+    #   Configuration for the rollout of OTA updates.
+    #   @return [Types::AwsJobExecutionsRolloutConfig]
     #
     # @!attribute [rw] target_selection
     #   Specifies whether the OTA update will continue to run (CONTINUOUS),
@@ -7127,6 +7292,7 @@ module Aws::IoT
       :last_modified_date,
       :description,
       :targets,
+      :aws_job_executions_rollout_config,
       :target_selection,
       :ota_update_files,
       :ota_update_status,
@@ -7939,27 +8105,51 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # The location in S3 the contains the files to stream.
+    # Describes the location of updated firmware in S3.
+    #
+    # @note When making an API call, you may pass S3Destination
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "S3Bucket",
+    #         prefix: "Prefix",
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The S3 bucket that contains the updated firmware.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The S3 prefix.
+    #   @return [String]
+    #
+    class S3Destination < Struct.new(
+      :bucket,
+      :prefix)
+      include Aws::Structure
+    end
+
+    # The S3 location.
     #
     # @note When making an API call, you may pass S3Location
     #   data as a hash:
     #
     #       {
-    #         bucket: "S3Bucket", # required
-    #         key: "S3Key", # required
+    #         bucket: "S3Bucket",
+    #         key: "S3Key",
     #         version: "S3Version",
     #       }
     #
     # @!attribute [rw] bucket
-    #   The S3 bucket that contains the file to stream.
+    #   The S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] key
-    #   The name of the file within the S3 bucket to stream.
+    #   The S3 key.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The file version.
+    #   The S3 bucket version.
     #   @return [String]
     #
     class S3Location < Struct.new(
@@ -8083,9 +8273,14 @@ module Aws::IoT
     #   The things that match the search query.
     #   @return [Array<Types::ThingDocument>]
     #
+    # @!attribute [rw] thing_groups
+    #   The thing groups that match the search query.
+    #   @return [Array<Types::ThingGroupDocument>]
+    #
     class SearchIndexResponse < Struct.new(
       :next_token,
-      :things)
+      :things,
+      :thing_groups)
       include Aws::Structure
     end
 
@@ -8263,6 +8458,36 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Describes the code-signing profile.
+    #
+    # @note When making an API call, you may pass SigningProfileParameter
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_arn: "CertificateArn",
+    #         platform: "Platform",
+    #         certificate_path_on_device: "CertificatePathOnDevice",
+    #       }
+    #
+    # @!attribute [rw] certificate_arn
+    #   Certificate ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   The hardware platform of your device.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_path_on_device
+    #   The location of the code-signing certificate on your device.
+    #   @return [String]
+    #
+    class SigningProfileParameter < Struct.new(
+      :certificate_arn,
+      :platform,
+      :certificate_path_on_device)
+      include Aws::Structure
+    end
+
     # Describes an action to publish to an Amazon SNS topic.
     #
     # @note When making an API call, you may pass SnsAction
@@ -8360,6 +8585,45 @@ module Aws::IoT
     #
     class StartOnDemandAuditTaskResponse < Struct.new(
       :task_id)
+      include Aws::Structure
+    end
+
+    # Information required to start a signing job.
+    #
+    # @note When making an API call, you may pass StartSigningJobParameter
+    #   data as a hash:
+    #
+    #       {
+    #         signing_profile_parameter: {
+    #           certificate_arn: "CertificateArn",
+    #           platform: "Platform",
+    #           certificate_path_on_device: "CertificatePathOnDevice",
+    #         },
+    #         signing_profile_name: "SigningProfileName",
+    #         destination: {
+    #           s3_destination: {
+    #             bucket: "S3Bucket",
+    #             prefix: "Prefix",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] signing_profile_parameter
+    #   Describes the code-signing profile.
+    #   @return [Types::SigningProfileParameter]
+    #
+    # @!attribute [rw] signing_profile_name
+    #   The code-signing profile name.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The location to write the code-signed file.
+    #   @return [Types::Destination]
+    #
+    class StartSigningJobParameter < Struct.new(
+      :signing_profile_parameter,
+      :signing_profile_name,
+      :destination)
       include Aws::Structure
     end
 
@@ -8493,8 +8757,8 @@ module Aws::IoT
     #       {
     #         file_id: 1,
     #         s3_location: {
-    #           bucket: "S3Bucket", # required
-    #           key: "S3Key", # required
+    #           bucket: "S3Bucket",
+    #           key: "S3Key",
     #           version: "S3Version",
     #         },
     #       }
@@ -8819,6 +9083,55 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The thing group search index document.
+    #
+    # @!attribute [rw] thing_group_name
+    #   The thing group name.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_group_id
+    #   The thing group ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_group_description
+    #   The thing group description.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   The thing group attributes.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] parent_group_names
+    #   Parent group names.
+    #   @return [Array<String>]
+    #
+    class ThingGroupDocument < Struct.new(
+      :thing_group_name,
+      :thing_group_id,
+      :thing_group_description,
+      :attributes,
+      :parent_group_names)
+      include Aws::Structure
+    end
+
+    # Thing group indexing configuration.
+    #
+    # @note When making an API call, you may pass ThingGroupIndexingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         thing_group_indexing_mode: "OFF", # required, accepts OFF, ON
+    #       }
+    #
+    # @!attribute [rw] thing_group_indexing_mode
+    #   Thing group indexing mode.
+    #   @return [String]
+    #
+    class ThingGroupIndexingConfiguration < Struct.new(
+      :thing_group_indexing_mode)
+      include Aws::Structure
+    end
+
     # Thing group metadata.
     #
     # @!attribute [rw] parent_group_name
@@ -8875,7 +9188,7 @@ module Aws::IoT
     #   data as a hash:
     #
     #       {
-    #         thing_indexing_mode: "OFF", # accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
+    #         thing_indexing_mode: "OFF", # required, accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
     #       }
     #
     # @!attribute [rw] thing_indexing_mode
@@ -8972,6 +9285,37 @@ module Aws::IoT
     class ThingTypeProperties < Struct.new(
       :thing_type_description,
       :searchable_attributes)
+      include Aws::Structure
+    end
+
+    # Specifies the amount of time each device has to finish its execution
+    # of the job. A timer is started when the job execution status is set to
+    # `IN_PROGRESS`. If the job execution status is not set to another
+    # terminal state before the timer expires, it will be automatically set
+    # to `TIMED_OUT`.
+    #
+    # @note When making an API call, you may pass TimeoutConfig
+    #   data as a hash:
+    #
+    #       {
+    #         in_progress_timeout_in_minutes: 1,
+    #       }
+    #
+    # @!attribute [rw] in_progress_timeout_in_minutes
+    #   Specifies the amount of time, in minutes, this device has to finish
+    #   execution of this job. A timer is started, or restarted, whenever
+    #   this job's execution status is specified as `IN_PROGRESS` with this
+    #   field populated. If the job execution status is not set to a
+    #   terminal state before the timer expires, or before another job
+    #   execution status update is sent with this field populated, the
+    #   status will be automatically set to `TIMED_OUT`. Note that
+    #   setting/resetting this timer has no effect on the job execution
+    #   timeout timer which may have been specified when the job was created
+    #   (`CreateJobExecution` using the field `timeoutConfig`).
+    #   @return [Integer]
+    #
+    class TimeoutConfig < Struct.new(
+      :in_progress_timeout_in_minutes)
       include Aws::Structure
     end
 
@@ -9574,7 +9918,10 @@ module Aws::IoT
     #
     #       {
     #         thing_indexing_configuration: {
-    #           thing_indexing_mode: "OFF", # accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
+    #           thing_indexing_mode: "OFF", # required, accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
+    #         },
+    #         thing_group_indexing_configuration: {
+    #           thing_group_indexing_mode: "OFF", # required, accepts OFF, ON
     #         },
     #       }
     #
@@ -9582,8 +9929,13 @@ module Aws::IoT
     #   Thing indexing configuration.
     #   @return [Types::ThingIndexingConfiguration]
     #
+    # @!attribute [rw] thing_group_indexing_configuration
+    #   Thing group indexing configuration.
+    #   @return [Types::ThingGroupIndexingConfiguration]
+    #
     class UpdateIndexingConfigurationRequest < Struct.new(
-      :thing_indexing_configuration)
+      :thing_indexing_configuration,
+      :thing_group_indexing_configuration)
       include Aws::Structure
     end
 
@@ -9812,8 +10164,8 @@ module Aws::IoT
     #           {
     #             file_id: 1,
     #             s3_location: {
-    #               bucket: "S3Bucket", # required
-    #               key: "S3Key", # required
+    #               bucket: "S3Bucket",
+    #               key: "S3Key",
     #               version: "S3Version",
     #             },
     #           },

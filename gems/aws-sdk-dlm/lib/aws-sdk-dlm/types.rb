@@ -60,7 +60,7 @@ module Aws::DLM
     #   @return [String]
     #
     # @!attribute [rw] policy_details
-    #   The configuration of the lifecycle policy.
+    #   The configuration details of the lifecycle policy.
     #
     #   Target tags cannot be re-used across lifecycle policies.
     #   @return [Types::PolicyDetails]
@@ -167,17 +167,18 @@ module Aws::DLM
     #   @return [Array<String>]
     #
     # @!attribute [rw] target_tags
-    #   The target tags.
+    #   The target tag for a policy.
     #
-    #   Tags are strings in the format `key:value`.
+    #   Tags are strings in the format `key=value`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags_to_add
-    #   The tags to add to the resources.
+    #   The tags to add to objects created by the policy.
     #
-    #   Tags are strings in the format `key:value`.
+    #   Tags are strings in the format `key=value`.
     #
-    #   These tags are added in addition to the AWS-added lifecycle tags.
+    #   These user-defined tags are added in addition to the AWS-added
+    #   lifecycle tags.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/GetLifecyclePoliciesRequest AWS API Documentation
@@ -337,11 +338,11 @@ module Aws::DLM
     #   @return [Array<String>]
     #
     # @!attribute [rw] target_tags
-    #   The target tags.
+    #   The single tag that identifies targeted resources for this policy.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] schedules
-    #   The schedule.
+    #   The schedule of policy-defined actions.
     #   @return [Array<Types::Schedule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/PolicyDetails AWS API Documentation
@@ -402,8 +403,8 @@ module Aws::DLM
     #   @return [String]
     #
     # @!attribute [rw] tags_to_add
-    #   The tags to add to policy-created resources. These tags are added in
-    #   addition to the default lifecycle tags.
+    #   The tags to apply to policy-created resources. These user-defined
+    #   tags are in addition to the AWS-added lifecycle tags.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] create_rule

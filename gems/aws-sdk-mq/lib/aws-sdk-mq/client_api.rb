@@ -254,6 +254,7 @@ module Aws::MQ
     DescribeBrokerOutput.add_member(:host_instance_type, Shapes::ShapeRef.new(shape: __string, location_name: "hostInstanceType"))
     DescribeBrokerOutput.add_member(:logs, Shapes::ShapeRef.new(shape: LogsSummary, location_name: "logs"))
     DescribeBrokerOutput.add_member(:maintenance_window_start_time, Shapes::ShapeRef.new(shape: WeeklyStartTime, location_name: "maintenanceWindowStartTime"))
+    DescribeBrokerOutput.add_member(:pending_engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "pendingEngineVersion"))
     DescribeBrokerOutput.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: __boolean, location_name: "publiclyAccessible"))
     DescribeBrokerOutput.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
     DescribeBrokerOutput.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "subnetIds"))
@@ -277,6 +278,7 @@ module Aws::MQ
     DescribeBrokerResponse.add_member(:host_instance_type, Shapes::ShapeRef.new(shape: __string, location_name: "hostInstanceType"))
     DescribeBrokerResponse.add_member(:logs, Shapes::ShapeRef.new(shape: LogsSummary, location_name: "logs"))
     DescribeBrokerResponse.add_member(:maintenance_window_start_time, Shapes::ShapeRef.new(shape: WeeklyStartTime, location_name: "maintenanceWindowStartTime"))
+    DescribeBrokerResponse.add_member(:pending_engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "pendingEngineVersion"))
     DescribeBrokerResponse.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: __boolean, location_name: "publiclyAccessible"))
     DescribeBrokerResponse.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
     DescribeBrokerResponse.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "subnetIds"))
@@ -419,22 +421,30 @@ module Aws::MQ
     SanitizationWarning.add_member(:reason, Shapes::ShapeRef.new(shape: SanitizationWarningReason, location_name: "reason"))
     SanitizationWarning.struct_class = Types::SanitizationWarning
 
+    UpdateBrokerInput.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: __boolean, location_name: "autoMinorVersionUpgrade"))
     UpdateBrokerInput.add_member(:configuration, Shapes::ShapeRef.new(shape: ConfigurationId, location_name: "configuration"))
+    UpdateBrokerInput.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "engineVersion"))
     UpdateBrokerInput.add_member(:logs, Shapes::ShapeRef.new(shape: Logs, location_name: "logs"))
     UpdateBrokerInput.struct_class = Types::UpdateBrokerInput
 
+    UpdateBrokerOutput.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: __boolean, location_name: "autoMinorVersionUpgrade"))
     UpdateBrokerOutput.add_member(:broker_id, Shapes::ShapeRef.new(shape: __string, location_name: "brokerId"))
     UpdateBrokerOutput.add_member(:configuration, Shapes::ShapeRef.new(shape: ConfigurationId, location_name: "configuration"))
+    UpdateBrokerOutput.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "engineVersion"))
     UpdateBrokerOutput.add_member(:logs, Shapes::ShapeRef.new(shape: Logs, location_name: "logs"))
     UpdateBrokerOutput.struct_class = Types::UpdateBrokerOutput
 
+    UpdateBrokerRequest.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: __boolean, location_name: "autoMinorVersionUpgrade"))
     UpdateBrokerRequest.add_member(:broker_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "broker-id"))
     UpdateBrokerRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: ConfigurationId, location_name: "configuration"))
+    UpdateBrokerRequest.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "engineVersion"))
     UpdateBrokerRequest.add_member(:logs, Shapes::ShapeRef.new(shape: Logs, location_name: "logs"))
     UpdateBrokerRequest.struct_class = Types::UpdateBrokerRequest
 
+    UpdateBrokerResponse.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: __boolean, location_name: "autoMinorVersionUpgrade"))
     UpdateBrokerResponse.add_member(:broker_id, Shapes::ShapeRef.new(shape: __string, location_name: "brokerId"))
     UpdateBrokerResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: ConfigurationId, location_name: "configuration"))
+    UpdateBrokerResponse.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "engineVersion"))
     UpdateBrokerResponse.add_member(:logs, Shapes::ShapeRef.new(shape: Logs, location_name: "logs"))
     UpdateBrokerResponse.struct_class = Types::UpdateBrokerResponse
 
@@ -522,12 +532,15 @@ module Aws::MQ
       api.version = "2017-11-27"
 
       api.metadata = {
+        "apiVersion" => "2017-11-27",
         "endpointPrefix" => "mq",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "serviceFullName" => "AmazonMQ",
+        "serviceId" => "mq",
         "signatureVersion" => "v4",
         "signingName" => "mq",
+        "uid" => "mq-2017-11-27",
       }
 
       api.add_operation(:create_broker, Seahorse::Model::Operation.new.tap do |o|
@@ -707,6 +720,7 @@ module Aws::MQ
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
       end)
 

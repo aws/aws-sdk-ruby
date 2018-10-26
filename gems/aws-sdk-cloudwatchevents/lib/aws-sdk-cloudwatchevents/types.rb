@@ -8,6 +8,46 @@
 module Aws::CloudWatchEvents
   module Types
 
+    # This structure specifies the VPC subnets and security groups for the
+    # task, and whether a public IP address is to be used. This structure is
+    # relevant only for ECS tasks that use the `awsvpc` network mode.
+    #
+    # @note When making an API call, you may pass AwsVpcConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         subnets: ["String"], # required
+    #         security_groups: ["String"],
+    #         assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] subnets
+    #   Specifies the subnets associated with the task. These subnets must
+    #   all be in the same VPC. You can specify as many as 16 subnets.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_groups
+    #   Specifies the security groups associated with the task. These
+    #   security groups must all be in the same VPC. You can specify as many
+    #   as five security groups. If you do not specify a security group, the
+    #   default security group for the VPC is used.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] assign_public_ip
+    #   Specifies whether the task's elastic network interface receives a
+    #   public IP address. You can specify `ENABLED` only when `LaunchType`
+    #   in `EcsParameters` is set to `FARGATE`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/AwsVpcConfiguration AWS API Documentation
+    #
+    class AwsVpcConfiguration < Struct.new(
+      :subnets,
+      :security_groups,
+      :assign_public_ip)
+      include Aws::Structure
+    end
+
     # The array properties for the submitted job, such as the size of the
     # array. The array size can be between 2 and 10,000. If you specify
     # array properties for a job, it becomes an array job. This parameter is
@@ -68,7 +108,7 @@ module Aws::CloudWatchEvents
     # @!attribute [rw] retry_strategy
     #   The retry strategy to use for failed jobs, if the target is an AWS
     #   Batch job. The retry strategy is the number of times to retry the
-    #   failed job execution. Valid values are 1 to 10. When you specify a
+    #   failed job execution. Valid values are 1–10. When you specify a
     #   retry strategy here, it overrides the retry strategy defined in the
     #   job definition.
     #   @return [Types::BatchRetryStrategy]
@@ -96,13 +136,56 @@ module Aws::CloudWatchEvents
     #
     # @!attribute [rw] attempts
     #   The number of times to attempt to retry, if the job fails. Valid
-    #   values are 1 to 10.
+    #   values are 1–10.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/BatchRetryStrategy AWS API Documentation
     #
     class BatchRetryStrategy < Struct.new(
       :attempts)
+      include Aws::Structure
+    end
+
+    # A JSON string which you can use to limit the event bus permissions you
+    # are granting to only accounts that fulfill the condition. Currently,
+    # the only supported condition is membership in a certain AWS
+    # organization. The string must contain `Type`, `Key`, and `Value`
+    # fields. The `Value` field specifies the ID of the AWS organization.
+    # Following is an example value for `Condition`\:
+    #
+    # `'\{"Type" : "StringEquals", "Key": "aws:PrincipalOrgID", "Value":
+    # "o-1234567890"\}'`
+    #
+    # @note When making an API call, you may pass Condition
+    #   data as a hash:
+    #
+    #       {
+    #         type: "String", # required
+    #         key: "String", # required
+    #         value: "String", # required
+    #       }
+    #
+    # @!attribute [rw] type
+    #   Specifies the type of condition. Currently the only supported value
+    #   is `StringEquals`.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   Specifies the key for the condition. Currently the only supported
+    #   key is `aws:PrincipalOrgID`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Specifies the value for the key. Currently, this must be the ID of
+    #   the organization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/Condition AWS API Documentation
+    #
+    class Condition < Struct.new(
+      :type,
+      :key,
+      :value)
       include Aws::Structure
     end
 
@@ -238,7 +321,7 @@ module Aws::CloudWatchEvents
     end
 
     # The custom parameters to be used when the target is an Amazon ECS
-    # cluster.
+    # task.
     #
     # @note When making an API call, you may pass EcsParameters
     #   data as a hash:
@@ -246,23 +329,80 @@ module Aws::CloudWatchEvents
     #       {
     #         task_definition_arn: "Arn", # required
     #         task_count: 1,
+    #         launch_type: "EC2", # accepts EC2, FARGATE
+    #         network_configuration: {
+    #           awsvpc_configuration: {
+    #             subnets: ["String"], # required
+    #             security_groups: ["String"],
+    #             assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #         },
+    #         platform_version: "String",
+    #         group: "String",
     #       }
     #
     # @!attribute [rw] task_definition_arn
     #   The ARN of the task definition to use if the event target is an
-    #   Amazon ECS cluster.
+    #   Amazon ECS task.
     #   @return [String]
     #
     # @!attribute [rw] task_count
-    #   The number of tasks to create based on the `TaskDefinition`. The
-    #   default is one.
+    #   The number of tasks to create based on `TaskDefinition`. The default
+    #   is 1.
     #   @return [Integer]
+    #
+    # @!attribute [rw] launch_type
+    #   Specifies the launch type on which your task is running. The launch
+    #   type that you specify here must match one of the launch type
+    #   (compatibilities) of the target task. The `FARGATE` value is
+    #   supported only in the Regions where AWS Fargate with Amazon ECS is
+    #   supported. For more information, see [AWS Fargate on Amazon ECS][1]
+    #   in the *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS-Fargate.html
+    #   @return [String]
+    #
+    # @!attribute [rw] network_configuration
+    #   Use this structure if the ECS task uses the `awsvpc` network mode.
+    #   This structure specifies the VPC subnets and security groups
+    #   associated with the task, and whether a public IP address is to be
+    #   used. This structure is required if `LaunchType` is `FARGATE`
+    #   because the `awsvpc` mode is required for Fargate tasks.
+    #
+    #   If you specify `NetworkConfiguration` when the target ECS task does
+    #   not use the `awsvpc` network mode, the task fails.
+    #   @return [Types::NetworkConfiguration]
+    #
+    # @!attribute [rw] platform_version
+    #   Specifies the platform version for the task. Specify only the
+    #   numeric portion of the platform version, such as `1.1.0`.
+    #
+    #   This structure is used only if `LaunchType` is `FARGATE`. For more
+    #   information about valid platform versions, see [AWS Fargate Platform
+    #   Versions][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
+    #   @return [String]
+    #
+    # @!attribute [rw] group
+    #   Specifies an ECS task group for the task. The maximum length is 255
+    #   characters.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EcsParameters AWS API Documentation
     #
     class EcsParameters < Struct.new(
       :task_definition_arn,
-      :task_count)
+      :task_count,
+      :launch_type,
+      :network_configuration,
+      :platform_version,
+      :group)
       include Aws::Structure
     end
 
@@ -298,14 +438,58 @@ module Aws::CloudWatchEvents
     #       }
     #
     # @!attribute [rw] input_paths_map
-    #   Map of JSON paths to be extracted from the event. These are
-    #   key-value pairs, where each value is a JSON path. You must use JSON
-    #   dot notation, not bracket notation.
+    #   Map of JSON paths to be extracted from the event. You can then
+    #   insert these in the template in `InputTemplate` to produce the
+    #   output you want to be sent to the target.
+    #
+    #   `InputPathsMap` is an array key-value pairs, where each value is a
+    #   valid JSON path. You can have as many as 10 key-value pairs. You
+    #   must use JSON dot notation, not bracket notation.
+    #
+    #   The keys cannot start with "AWS."
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] input_template
-    #   Input template where you can use the values of the keys from
-    #   `InputPathsMap` to customize the data sent to the target.
+    #   Input template where you specify placeholders that will be filled
+    #   with the values of the keys from `InputPathsMap` to customize the
+    #   data sent to the target. Enclose each `InputPathsMaps` value in
+    #   brackets: &lt;*value*&gt; The InputTemplate must be valid JSON.
+    #
+    #   If `InputTemplate` is a JSON object (surrounded by curly braces),
+    #   the following restrictions apply:
+    #
+    #   * The placeholder cannot be used as an object key.
+    #
+    #   * Object values cannot include quote marks.
+    #
+    #   The following example shows the syntax for using `InputPathsMap` and
+    #   `InputTemplate`.
+    #
+    #   ` "InputTransformer":`
+    #
+    #   `\{`
+    #
+    #   `"InputPathsMap": \{"instance": "$.detail.instance","status":
+    #   "$.detail.status"\},`
+    #
+    #   `"InputTemplate": "<instance> is in state <status>"`
+    #
+    #   `\}`
+    #
+    #   To have the `InputTemplate` include quote marks within a JSON
+    #   string, escape each quote marks with a slash, as in the following
+    #   example:
+    #
+    #   ` "InputTransformer":`
+    #
+    #   `\{`
+    #
+    #   `"InputPathsMap": \{"instance": "$.detail.instance","status":
+    #   "$.detail.status"\},`
+    #
+    #   `"InputTemplate": "<instance> is in state "<status>""`
+    #
+    #   `\}`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/InputTransformer AWS API Documentation
@@ -317,9 +501,9 @@ module Aws::CloudWatchEvents
     end
 
     # This object enables you to specify a JSON path to extract from the
-    # event and use as the partition key for the Amazon Kinesis stream, so
-    # that you can control the shard to which the event goes. If you do not
-    # include this parameter, the default is to use the `eventId` as the
+    # event and use as the partition key for the Amazon Kinesis data stream,
+    # so that you can control the shard to which the event goes. If you do
+    # not include this parameter, the default is to use the `eventId` as the
     # partition key.
     #
     # @note When making an API call, you may pass KinesisParameters
@@ -490,6 +674,33 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
+    # This structure specifies the network configuration for an ECS task.
+    #
+    # @note When making an API call, you may pass NetworkConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         awsvpc_configuration: {
+    #           subnets: ["String"], # required
+    #           security_groups: ["String"],
+    #           assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #       }
+    #
+    # @!attribute [rw] awsvpc_configuration
+    #   Use this structure to specify the VPC subnets and security groups
+    #   for the task, and whether a public IP address is to be used. This
+    #   structure is relevant only for ECS tasks that use the `awsvpc`
+    #   network mode.
+    #   @return [Types::AwsVpcConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/NetworkConfiguration AWS API Documentation
+    #
+    class NetworkConfiguration < Struct.new(
+      :awsvpc_configuration)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutEventsRequest
     #   data as a hash:
     #
@@ -532,8 +743,8 @@ module Aws::CloudWatchEvents
     #       }
     #
     # @!attribute [rw] time
-    #   The timestamp of the event, per [RFC3339][1]. If no timestamp is
-    #   provided, the timestamp of the PutEvents call is used.
+    #   The time stamp of the event, per [RFC3339][1]. If no time stamp is
+    #   provided, the time stamp of the PutEvents call is used.
     #
     #
     #
@@ -541,7 +752,7 @@ module Aws::CloudWatchEvents
     #   @return [Time]
     #
     # @!attribute [rw] source
-    #   The source of the event.
+    #   The source of the event. This field is required.
     #   @return [String]
     #
     # @!attribute [rw] resources
@@ -620,6 +831,11 @@ module Aws::CloudWatchEvents
     #         action: "Action", # required
     #         principal: "Principal", # required
     #         statement_id: "StatementId", # required
+    #         condition: {
+    #           type: "String", # required
+    #           key: "String", # required
+    #           value: "String", # required
+    #         },
     #       }
     #
     # @!attribute [rw] action
@@ -632,11 +848,12 @@ module Aws::CloudWatchEvents
     #   your default event bus. Specify "*" to permit any account to put
     #   events to your default event bus.
     #
-    #   If you specify "*", avoid creating rules that may match
-    #   undesirable events. To create more secure rules, make sure that the
-    #   event pattern for each rule contains an `account` field with a
-    #   specific account ID from which to receive events. Rules with an
-    #   account field do not match any events sent from other accounts.
+    #   If you specify "*" without specifying `Condition`, avoid creating
+    #   rules that may match undesirable events. To create more secure
+    #   rules, make sure that the event pattern for each rule contains an
+    #   `account` field with a specific account ID from which to receive
+    #   events. Rules with an account field do not match any events sent
+    #   from other accounts.
     #   @return [String]
     #
     # @!attribute [rw] statement_id
@@ -646,12 +863,32 @@ module Aws::CloudWatchEvents
     #   RemovePermission.
     #   @return [String]
     #
+    # @!attribute [rw] condition
+    #   This parameter enables you to limit the permission to accounts that
+    #   fulfill a certain condition, such as being a member of a certain AWS
+    #   organization. For more information about AWS Organizations, see
+    #   [What Is AWS Organizations][1] in the *AWS Organizations User
+    #   Guide*.
+    #
+    #   If you specify `Condition` with an AWS organization ID, and specify
+    #   "*" as the value for `Principal`, you grant permission to all the
+    #   accounts in the named organization.
+    #
+    #   The `Condition` is a JSON string which must contain `Type`, `Key`,
+    #   and `Value` fields.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html
+    #   @return [Types::Condition]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPermissionRequest AWS API Documentation
     #
     class PutPermissionRequest < Struct.new(
       :action,
       :principal,
-      :statement_id)
+      :statement_id,
+      :condition)
       include Aws::Structure
     end
 
@@ -753,6 +990,16 @@ module Aws::CloudWatchEvents
     #             ecs_parameters: {
     #               task_definition_arn: "Arn", # required
     #               task_count: 1,
+    #               launch_type: "EC2", # accepts EC2, FARGATE
+    #               network_configuration: {
+    #                 awsvpc_configuration: {
+    #                   subnets: ["String"], # required
+    #                   security_groups: ["String"],
+    #                   assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
+    #                 },
+    #               },
+    #               platform_version: "String",
+    #               group: "String",
     #             },
     #             batch_parameters: {
     #               job_definition: "String", # required
@@ -1040,10 +1287,9 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # Targets are the resources to be invoked when a rule is triggered.
-    # Target types include EC2 instances, AWS Lambda functions, Amazon
-    # Kinesis streams, Amazon ECS tasks, AWS Step Functions state machines,
-    # Run Command, and built-in targets.
+    # Targets are the resources to be invoked when a rule is triggered. For
+    # a complete list of services and resources that can be set as a target,
+    # see PutTargets.
     #
     # @note When making an API call, you may pass Target
     #   data as a hash:
@@ -1074,6 +1320,16 @@ module Aws::CloudWatchEvents
     #         ecs_parameters: {
     #           task_definition_arn: "Arn", # required
     #           task_count: 1,
+    #           launch_type: "EC2", # accepts EC2, FARGATE
+    #           network_configuration: {
+    #             awsvpc_configuration: {
+    #               subnets: ["String"], # required
+    #               security_groups: ["String"],
+    #               assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
+    #           },
+    #           platform_version: "String",
+    #           group: "String",
     #         },
     #         batch_parameters: {
     #           job_definition: "String", # required
@@ -1133,8 +1389,8 @@ module Aws::CloudWatchEvents
     #   @return [Types::InputTransformer]
     #
     # @!attribute [rw] kinesis_parameters
-    #   The custom parameter you can use to control shard assignment, when
-    #   the target is an Amazon Kinesis stream. If you do not include this
+    #   The custom parameter you can use to control the shard assignment,
+    #   when the target is a Kinesis data stream. If you do not include this
     #   parameter, the default is to use the `eventId` as the partition key.
     #   @return [Types::KinesisParameters]
     #
@@ -1155,9 +1411,9 @@ module Aws::CloudWatchEvents
     #   @return [Types::EcsParameters]
     #
     # @!attribute [rw] batch_parameters
-    #   Contains the job definition, job name, and other parameters if the
-    #   event target is an AWS Batch job. For more information about AWS
-    #   Batch, see [Jobs][1] in the *AWS Batch User Guide*.
+    #   If the event target is an AWS Batch job, this contains the job
+    #   definition, job name, and other parameters. For more information,
+    #   see [Jobs][1] in the *AWS Batch User Guide*.
     #
     #
     #
@@ -1167,6 +1423,9 @@ module Aws::CloudWatchEvents
     # @!attribute [rw] sqs_parameters
     #   Contains the message group ID to use when the target is a FIFO
     #   queue.
+    #
+    #   If you specify an SQS FIFO queue as a target, the queue must have
+    #   content-based deduplication enabled.
     #   @return [Types::SqsParameters]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/Target AWS API Documentation

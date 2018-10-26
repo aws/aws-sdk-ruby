@@ -23,6 +23,7 @@ module Aws::Organizations
     AccountJoinedMethod = Shapes::StringShape.new(name: 'AccountJoinedMethod')
     AccountName = Shapes::StringShape.new(name: 'AccountName')
     AccountNotFoundException = Shapes::StructureShape.new(name: 'AccountNotFoundException')
+    AccountOwnerNotVerifiedException = Shapes::StructureShape.new(name: 'AccountOwnerNotVerifiedException')
     AccountStatus = Shapes::StringShape.new(name: 'AccountStatus')
     Accounts = Shapes::ListShape.new(name: 'Accounts')
     ActionType = Shapes::StringShape.new(name: 'ActionType')
@@ -604,13 +605,16 @@ module Aws::Organizations
       api.version = "2016-11-28"
 
       api.metadata = {
+        "apiVersion" => "2016-11-28",
         "endpointPrefix" => "organizations",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "Organizations",
         "serviceFullName" => "AWS Organizations",
+        "serviceId" => "Organizations",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSOrganizationsV20161128",
-        "timestampFormat" => "unixTimestamp",
+        "uid" => "organizations-2016-11-28",
       }
 
       api.add_operation(:accept_handshake, Seahorse::Model::Operation.new.tap do |o|
@@ -986,6 +990,7 @@ module Aws::Organizations
         o.output = Shapes::ShapeRef.new(shape: InviteAccountToOrganizationResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AWSOrganizationsNotInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountOwnerNotVerifiedException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: HandshakeConstraintViolationException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateHandshakeException)

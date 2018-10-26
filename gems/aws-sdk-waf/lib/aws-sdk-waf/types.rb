@@ -191,7 +191,7 @@ module Aws::WAF
     #         action: "INSERT", # required, accepts INSERT, DELETE
     #         byte_match_tuple: { # required
     #           field_to_match: { # required
-    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #             data: "MatchFieldData",
     #           },
     #           target_string: "data", # required
@@ -229,7 +229,7 @@ module Aws::WAF
     #
     #       {
     #         field_to_match: { # required
-    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #           data: "MatchFieldData",
     #         },
     #         target_string: "data", # required
@@ -277,6 +277,15 @@ module Aws::WAF
     #     size constraint set. For more information, see
     #     CreateSizeConstraintSet.
     #
+    #   * `SINGLE_QUERY_ARG`\: The parameter in the query string that you
+    #     will inspect, such as *UserName* or *SalesRegion*. The maximum
+    #     length for `SINGLE_QUERY_ARG` is 30 characters.
+    #
+    #   * `ALL_QUERY_ARGS`\: Similar to `SINGLE_QUERY_ARG`, but instead of
+    #     inspecting a single parameter, AWS WAF inspects all parameters
+    #     within the query string for the value or regex pattern that you
+    #     specify in `TargetString`.
+    #
     #   If `TargetString` includes alphabetic characters A-Z and a-z, note
     #   that the value is case sensitive.
     #
@@ -303,10 +312,12 @@ module Aws::WAF
     #   specify a transformation, AWS WAF performs the transformation on
     #   `TargetString` before inspecting a request for a match.
     #
+    #   You can only specify a single type of TextTransformation.
+    #
     #   **CMD\_LINE**
     #
     #   When you're concerned that attackers are injecting an operating
-    #   system commandline command and using unusual formatting to disguise
+    #   system command line command and using unusual formatting to disguise
     #   some or all of the command, use this option to perform the following
     #   transformations:
     #
@@ -1147,6 +1158,29 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteLoggingConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the web ACL from which you want to
+    #   delete the LoggingConfiguration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteLoggingConfigurationRequest AWS API Documentation
+    #
+    class DeleteLoggingConfigurationRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteLoggingConfigurationResponse AWS API Documentation
+    #
+    class DeleteLoggingConfigurationResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeletePermissionPolicyRequest
     #   data as a hash:
     #
@@ -1537,7 +1571,7 @@ module Aws::WAF
     #   data as a hash:
     #
     #       {
-    #         type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #         type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #         data: "MatchFieldData",
     #       }
     #
@@ -1569,14 +1603,28 @@ module Aws::WAF
     #     block requests based on the length of the body, you can create a
     #     size constraint set. For more information, see
     #     CreateSizeConstraintSet.
+    #
+    #   * `SINGLE_QUERY_ARG`\: The parameter in the query string that you
+    #     will inspect, such as *UserName* or *SalesRegion*. The maximum
+    #     length for `SINGLE_QUERY_ARG` is 30 characters.
+    #
+    #   * `ALL_QUERY_ARGS`\: Similar to `SINGLE_QUERY_ARG`, but rather than
+    #     inspecting a single parameter, AWS WAF will inspect all parameters
+    #     within the query for the value or regex pattern that you specify
+    #     in `TargetString`.
     #   @return [String]
     #
     # @!attribute [rw] data
     #   When the value of `Type` is `HEADER`, enter the name of the header
     #   that you want AWS WAF to search, for example, `User-Agent` or
-    #   `Referer`. If the value of `Type` is any other value, omit `Data`.
+    #   `Referer`. The name of the header is not case sensitive.
     #
-    #   The name of the header is not case sensitive.
+    #   When the value of `Type` is `SINGLE_QUERY_ARG`, enter the name of
+    #   the parameter that you want AWS WAF to search, for example,
+    #   `UserName` or `SalesRegion`. The parameter name is not case
+    #   sensitive.
+    #
+    #   If the value of `Type` is any other value, omit `Data`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/FieldToMatch AWS API Documentation
@@ -1858,6 +1906,36 @@ module Aws::WAF
     #
     class GetIPSetResponse < Struct.new(
       :ip_set)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetLoggingConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the web ACL for which you want to
+    #   get the LoggingConfiguration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetLoggingConfigurationRequest AWS API Documentation
+    #
+    class GetLoggingConfigurationRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] logging_configuration
+    #   The LoggingConfiguration for the specified web ACL.
+    #   @return [Types::LoggingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetLoggingConfigurationResponse AWS API Documentation
+    #
+    class GetLoggingConfigurationResponse < Struct.new(
+      :logging_configuration)
       include Aws::Structure
     end
 
@@ -2444,14 +2522,15 @@ module Aws::WAF
 
     # Contains one or more IP addresses or blocks of IP addresses specified
     # in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports
-    # /8, /16, /24, and /32 IP address ranges for IPv4, and /24, /32, /48,
-    # /56, /64 and /128 for IPv6.
+    # IPv4 address ranges: /8 and any range between /16 through /32. AWS WAF
+    # supports IPv6 address ranges: /16, /24, /32, /48, /56, /64, and /128.
     #
     # To specify an individual IP address, you specify the four-part IP
     # address followed by a `/32`, for example, 192.0.2.0/31. To block a
-    # range of IP addresses, you can specify a `/128`, `/64`, `/56`, `/48`,
-    # `/32`, `/24`, `/16`, or `/8` CIDR. For more information about CIDR
-    # notation, see the Wikipedia entry [Classless Inter-Domain Routing][1].
+    # range of IP addresses, you can specify /8 or any range between /16
+    # through /32 (for IPv4) or /16, /24, /32, /48, /56, /64, or /128 (for
+    # IPv6). For more information about CIDR notation, see the Wikipedia
+    # entry [Classless Inter-Domain Routing][1].
     #
     #
     #
@@ -2814,6 +2893,61 @@ module Aws::WAF
     class ListIPSetsResponse < Struct.new(
       :next_marker,
       :ip_sets)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListLoggingConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_marker: "NextMarker",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] next_marker
+    #   If you specify a value for `Limit` and you have more
+    #   `LoggingConfigurations` than the value of `Limit`, AWS WAF returns a
+    #   `NextMarker` value in the response that allows you to list another
+    #   group of `LoggingConfigurations`. For the second and subsequent
+    #   `ListLoggingConfigurations` requests, specify the value of
+    #   `NextMarker` from the previous response to get information about
+    #   another batch of `ListLoggingConfigurations`.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   Specifies the number of `LoggingConfigurations` that you want AWS
+    #   WAF to return for this request. If you have more
+    #   `LoggingConfigurations` than the number that you specify for
+    #   `Limit`, the response includes a `NextMarker` value that you can use
+    #   to get another batch of `LoggingConfigurations`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListLoggingConfigurationsRequest AWS API Documentation
+    #
+    class ListLoggingConfigurationsRequest < Struct.new(
+      :next_marker,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] logging_configurations
+    #   An array of LoggingConfiguration objects.
+    #   @return [Array<Types::LoggingConfiguration>]
+    #
+    # @!attribute [rw] next_marker
+    #   If you have more `LoggingConfigurations` than the number that you
+    #   specified for `Limit` in the request, the response includes a
+    #   `NextMarker` value. To list more `LoggingConfigurations`, submit
+    #   another `ListLoggingConfigurations` request, and specify the
+    #   `NextMarker` value from the response in the `NextMarker` value in
+    #   the next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListLoggingConfigurationsResponse AWS API Documentation
+    #
+    class ListLoggingConfigurationsResponse < Struct.new(
+      :logging_configurations,
+      :next_marker)
       include Aws::Structure
     end
 
@@ -3363,6 +3497,47 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # The Amazon Kinesis Data Firehose delivery streams, `RedactedFields`
+    # information, and the web ACL Amazon Resource Name (ARN).
+    #
+    # @note When making an API call, you may pass LoggingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         log_destination_configs: ["ResourceArn"], # required
+    #         redacted_fields: [
+    #           {
+    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
+    #             data: "MatchFieldData",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the web ACL that you want to
+    #   associate with `LogDestinationConfigs`.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_destination_configs
+    #   An array of Amazon Kinesis Data Firehose delivery stream ARNs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] redacted_fields
+    #   The parts of the request that you want redacted from the logs. For
+    #   example, if you redact the cookie field, the cookie field in the
+    #   delivery stream will be `xxx`.
+    #   @return [Array<Types::FieldToMatch>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/LoggingConfiguration AWS API Documentation
+    #
+    class LoggingConfiguration < Struct.new(
+      :resource_arn,
+      :log_destination_configs,
+      :redacted_fields)
+      include Aws::Structure
+    end
+
     # Specifies the ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet,
     # RegexMatchSet, GeoMatchSet, and SizeConstraintSet objects that you
     # want to add to a `Rule` and, for each object, indicates whether you
@@ -3395,8 +3570,7 @@ module Aws::WAF
     #   @return [Boolean]
     #
     # @!attribute [rw] type
-    #   The type of predicate in a `Rule`, such as `ByteMatchSet` or
-    #   `IPSet`.
+    #   The type of predicate in a `Rule`, such as `ByteMatch` or `IPSet`.
     #   @return [String]
     #
     # @!attribute [rw] data_id
@@ -3411,6 +3585,46 @@ module Aws::WAF
       :negated,
       :type,
       :data_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutLoggingConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         logging_configuration: { # required
+    #           resource_arn: "ResourceArn", # required
+    #           log_destination_configs: ["ResourceArn"], # required
+    #           redacted_fields: [
+    #             {
+    #               type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
+    #               data: "MatchFieldData",
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] logging_configuration
+    #   The Amazon Kinesis Data Firehose delivery streams that contains the
+    #   inspected traffic information, the redacted fields details, and the
+    #   Amazon Resource Name (ARN) of the web ACL to monitor.
+    #   @return [Types::LoggingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/PutLoggingConfigurationRequest AWS API Documentation
+    #
+    class PutLoggingConfigurationRequest < Struct.new(
+      :logging_configuration)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] logging_configuration
+    #   The LoggingConfiguration that you submitted in the request.
+    #   @return [Types::LoggingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/PutLoggingConfigurationResponse AWS API Documentation
+    #
+    class PutLoggingConfigurationResponse < Struct.new(
+      :logging_configuration)
       include Aws::Structure
     end
 
@@ -3603,7 +3817,7 @@ module Aws::WAF
     #         action: "INSERT", # required, accepts INSERT, DELETE
     #         regex_match_tuple: { # required
     #           field_to_match: { # required
-    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #             data: "MatchFieldData",
     #           },
     #           text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -3651,7 +3865,7 @@ module Aws::WAF
     #
     #       {
     #         field_to_match: { # required
-    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #           data: "MatchFieldData",
     #         },
     #         text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -3667,6 +3881,8 @@ module Aws::WAF
     #   attackers use in web requests in an effort to bypass AWS WAF. If you
     #   specify a transformation, AWS WAF performs the transformation on
     #   `RegexPatternSet` before inspecting a request for a match.
+    #
+    #   You can only specify a single type of TextTransformation.
     #
     #   **CMD\_LINE**
     #
@@ -4125,7 +4341,7 @@ module Aws::WAF
     #
     #       {
     #         field_to_match: { # required
-    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #           data: "MatchFieldData",
     #         },
     #         text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -4142,6 +4358,8 @@ module Aws::WAF
     #   attackers use in web requests in an effort to bypass AWS WAF. If you
     #   specify a transformation, AWS WAF performs the transformation on
     #   `FieldToMatch` before inspecting a request for a match.
+    #
+    #   You can only specify a single type of TextTransformation.
     #
     #   Note that if you choose `BODY` for the value of `Type`, you must
     #   choose `NONE` for `TextTransformation` because CloudFront forwards
@@ -4341,7 +4559,7 @@ module Aws::WAF
     #         action: "INSERT", # required, accepts INSERT, DELETE
     #         size_constraint: { # required
     #           field_to_match: { # required
-    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #             data: "MatchFieldData",
     #           },
     #           text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -4450,7 +4668,7 @@ module Aws::WAF
     #         action: "INSERT", # required, accepts INSERT, DELETE
     #         sql_injection_match_tuple: { # required
     #           field_to_match: { # required
-    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #             data: "MatchFieldData",
     #           },
     #           text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -4486,7 +4704,7 @@ module Aws::WAF
     #
     #       {
     #         field_to_match: { # required
-    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #           data: "MatchFieldData",
     #         },
     #         text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -4503,10 +4721,12 @@ module Aws::WAF
     #   specify a transformation, AWS WAF performs the transformation on
     #   `FieldToMatch` before inspecting a request for a match.
     #
+    #   You can only specify a single type of TextTransformation.
+    #
     #   **CMD\_LINE**
     #
     #   When you're concerned that attackers are injecting an operating
-    #   system commandline command and using unusual formatting to disguise
+    #   system command line command and using unusual formatting to disguise
     #   some or all of the command, use this option to perform the following
     #   transformations:
     #
@@ -4664,7 +4884,7 @@ module Aws::WAF
     #             action: "INSERT", # required, accepts INSERT, DELETE
     #             byte_match_tuple: { # required
     #               field_to_match: { # required
-    #                 type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #                 type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #                 data: "MatchFieldData",
     #               },
     #               target_string: "data", # required
@@ -4817,6 +5037,8 @@ module Aws::WAF
     #   * IPSetUpdate: Contains `Action` and `IPSetDescriptor`
     #
     #   * IPSetDescriptor: Contains `Type` and `Value`
+    #
+    #   You can insert a maximum of 1000 addresses in a single request.
     #   @return [Array<Types::IPSetUpdate>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateIPSetRequest AWS API Documentation
@@ -4916,7 +5138,7 @@ module Aws::WAF
     #             action: "INSERT", # required, accepts INSERT, DELETE
     #             regex_match_tuple: { # required
     #               field_to_match: { # required
-    #                 type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #                 type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #                 data: "MatchFieldData",
     #               },
     #               text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -5157,7 +5379,7 @@ module Aws::WAF
     #             action: "INSERT", # required, accepts INSERT, DELETE
     #             size_constraint: { # required
     #               field_to_match: { # required
-    #                 type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #                 type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #                 data: "MatchFieldData",
     #               },
     #               text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -5227,7 +5449,7 @@ module Aws::WAF
     #             action: "INSERT", # required, accepts INSERT, DELETE
     #             sql_injection_match_tuple: { # required
     #               field_to_match: { # required
-    #                 type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #                 type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #                 data: "MatchFieldData",
     #               },
     #               text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -5382,7 +5604,7 @@ module Aws::WAF
     #             action: "INSERT", # required, accepts INSERT, DELETE
     #             xss_match_tuple: { # required
     #               field_to_match: { # required
-    #                 type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #                 type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #                 data: "MatchFieldData",
     #               },
     #               text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -5687,7 +5909,7 @@ module Aws::WAF
     #         action: "INSERT", # required, accepts INSERT, DELETE
     #         xss_match_tuple: { # required
     #           field_to_match: { # required
-    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #             data: "MatchFieldData",
     #           },
     #           text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -5722,7 +5944,7 @@ module Aws::WAF
     #
     #       {
     #         field_to_match: { # required
-    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #           data: "MatchFieldData",
     #         },
     #         text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -5739,10 +5961,12 @@ module Aws::WAF
     #   specify a transformation, AWS WAF performs the transformation on
     #   `FieldToMatch` before inspecting a request for a match.
     #
+    #   You can only specify a single type of TextTransformation.
+    #
     #   **CMD\_LINE**
     #
     #   When you're concerned that attackers are injecting an operating
-    #   system commandline command and using unusual formatting to disguise
+    #   system command line command and using unusual formatting to disguise
     #   some or all of the command, use this option to perform the following
     #   transformations:
     #

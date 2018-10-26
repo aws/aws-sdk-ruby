@@ -289,6 +289,18 @@ module Aws::EC2
       data[:cpu_options]
     end
 
+    # The ID of the Capacity Reservation.
+    # @return [String]
+    def capacity_reservation_id
+      data[:capacity_reservation_id]
+    end
+
+    # Information about the Capacity Reservation targeting option.
+    # @return [Types::CapacityReservationSpecificationResponse]
+    def capacity_reservation_specification
+      data[:capacity_reservation_specification]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -588,13 +600,13 @@ module Aws::EC2
     #         device_name: "String",
     #         virtual_name: "String",
     #         ebs: {
-    #           encrypted: false,
     #           delete_on_termination: false,
     #           iops: 1,
-    #           kms_key_id: "String",
     #           snapshot_id: "String",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #           encrypted: false,
+    #           kms_key_id: "String",
     #         },
     #         no_device: "String",
     #       },
@@ -606,7 +618,10 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   Information about one or more block device mappings.
+    #   Information about one or more block device mappings. This parameter
+    #   cannot be used to modify the encryption status of existing volumes or
+    #   snapshots. To create an AMI with encrypted snapshots, use the
+    #   CopyImage action.
     # @option options [String] :description
     #   A description for the new image.
     # @option options [Boolean] :dry_run

@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -47,118 +49,138 @@ module Aws::Organizations
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
     #
-    # @option options [String] :session_token
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [String] :secret_access_key
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [String] :session_token
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -180,7 +202,7 @@ module Aws::Organizations
     #   features in the organization, then the user must also have the
     #   `iam:CreateServiceLinkedRole` permission so that Organizations can
     #   create the required service-linked role named
-    #   *OrgsServiceLinkedRoleName*. For more information, see [AWS
+    #   *AWSServiceRoleForOrganizations*. For more information, see [AWS
     #   Organizations and Service-Linked Roles][1] in the *AWS Organizations
     #   User Guide*.
     #
@@ -543,26 +565,34 @@ module Aws::Organizations
 
     # Creates an AWS account that is automatically a member of the
     # organization whose credentials made the request. This is an
-    # asynchronous request that AWS performs in the background. If you want
-    # to check the status of the request later, you need the `OperationId`
-    # response element from this operation to provide as a parameter to the
-    # DescribeCreateAccountStatus operation.
+    # asynchronous request that AWS performs in the background. Because
+    # `CreateAccount` operates asynchronously, it can return a successful
+    # completion message even though account initialization might still be
+    # in progress. You might need to wait a few minutes before you can
+    # successfully access the account. To check the status of the request,
+    # do one of the following:
     #
-    # The user who calls the API for an invitation to join must have the
+    # * Use the `OperationId` response element from this operation to
+    #   provide as a parameter to the DescribeCreateAccountStatus operation.
+    #
+    # * Check the AWS CloudTrail log for the `CreateAccountResult` event.
+    #   For information on using AWS CloudTrail with Organizations, see
+    #   [Monitoring the Activity in Your Organization][1] in the *AWS
+    #   Organizations User Guide*.
+    #
+    #
+    #
+    # The user who calls the API to create an account must have the
     # `organizations:CreateAccount` permission. If you enabled all features
-    # in the organization, then the user must also have the
-    # `iam:CreateServiceLinkedRole` permission so that Organizations can
-    # create the required service-linked role named
-    # *OrgsServiceLinkedRoleName*. For more information, see [AWS
-    # Organizations and Service-Linked Roles][1] in the *AWS Organizations
-    # User Guide*.
+    # in the organization, AWS Organizations will create the required
+    # service-linked role named `AWSServiceRoleForOrganizations`. For more
+    # information, see [AWS Organizations and Service-Linked Roles][2] in
+    # the *AWS Organizations User Guide*.
     #
-    # The user in the master account who calls this API must also have the
-    # `iam:CreateRole` permission because AWS Organizations preconfigures
-    # the new member account with a role (named
-    # `OrganizationAccountAccessRole` by default) that grants users in the
-    # master account administrator permissions in the new member account.
-    # Principals in the master account can assume the role. AWS
+    # AWS Organizations preconfigures the new member account with a role
+    # (named `OrganizationAccountAccessRole` by default) that grants users
+    # in the master account administrator permissions in the new member
+    # account. Principals in the master account can assume the role. AWS
     # Organizations clones the company name and address information for the
     # new account from the organization's master account.
     #
@@ -570,54 +600,50 @@ module Aws::Organizations
     # account.
     #
     # For more information about creating accounts, see [Creating an AWS
-    # Account in Your Organization][2] in the *AWS Organizations User
+    # Account in Your Organization][3] in the *AWS Organizations User
     # Guide*.
     #
     # * When you create an account in an organization using the AWS
     #   Organizations console, API, or CLI commands, the information
     #   required for the account to operate as a standalone account, such as
-    #   a payment method and signing the End User Licence Agreement (EULA)
+    #   a payment method and signing the end user license agreement (EULA)
     #   is *not* automatically collected. If you must remove an account from
     #   your organization later, you can do so only after you provide the
     #   missing information. Follow the steps at [ To leave an organization
-    #   when all required account information has not yet been provided][3]
-    #   in the *AWS Organizations User Guide*.
+    #   as a member account][4] in the *AWS Organizations User Guide*.
     #
     # * If you get an exception that indicates that you exceeded your
-    #   account limits for the organization or that the operation failed
-    #   because your organization is still initializing, wait one hour and
-    #   then try again. If the error persists after an hour, then contact
-    #   [AWS Customer Support][4].
+    #   account limits for the organization, contact [AWS Support][5].
     #
-    # * Because `CreateAccount` operates asynchronously, it can return a
-    #   successful completion message even though account initialization
-    #   might still be in progress. You might need to wait a few minutes
-    #   before you can successfully access the account.
+    # * If you get an exception that indicates that the operation failed
+    #   because your organization is still initializing, wait one hour and
+    #   then try again. If the error persists, contact [AWS Support][5].
     #
     # <note markdown="1"> When you create a member account with this operation, you can choose
     # whether to create the account with the **IAM User and Role Access to
     # Billing Information** switch enabled. If you enable it, IAM users and
     # roles that have appropriate permissions can view billing information
-    # for the account. If you disable this, then only the account root user
-    # can access billing information. For information about how to disable
-    # this for an account, see [Granting Access to Your Billing Information
-    # and Tools][5].
+    # for the account. If you disable it, only the account root user can
+    # access billing information. For information about how to disable this
+    # switch for an account, see [Granting Access to Your Billing
+    # Information and Tools][6].
     #
     #  </note>
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integration_services.html#orgs_integration_service-linked-roles
-    # [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html
-    # [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
-    # [4]: https://console.aws.amazon.com/support/home#/
-    # [5]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html
+    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html
+    # [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs
+    # [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html
+    # [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
+    # [5]: https://console.aws.amazon.com/support/home#/
+    # [6]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html
     #
     # @option params [required, String] :email
     #   The email address of the owner to assign to the new member account.
     #   This email address must not already be associated with another AWS
     #   account. You must use a valid email address to complete account
-    #   creation. You cannot access the root user of the account or remove an
+    #   creation. You can't access the root user of the account or remove an
     #   account that was created with an invalid email address.
     #
     # @option params [required, String] :account_name
@@ -626,13 +652,13 @@ module Aws::Organizations
     # @option params [String] :role_name
     #   (Optional)
     #
-    #   The name of an IAM role that Organizations automatically preconfigures
-    #   in the new member account. This role trusts the master account,
-    #   allowing users in the master account to assume the role, as permitted
-    #   by the master account administrator. The role has administrator
-    #   permissions in the new member account.
+    #   The name of an IAM role that AWS Organizations automatically
+    #   preconfigures in the new member account. This role trusts the master
+    #   account, allowing users in the master account to assume the role, as
+    #   permitted by the master account administrator. The role has
+    #   administrator permissions in the new member account.
     #
-    #   If you do not specify this parameter, the role name defaults to
+    #   If you don't specify this parameter, the role name defaults to
     #   `OrganizationAccountAccessRole`.
     #
     #   For more information about how to use this role to access the member
@@ -655,14 +681,14 @@ module Aws::Organizations
     # @option params [String] :iam_user_access_to_billing
     #   If set to `ALLOW`, the new account enables IAM users to access account
     #   billing information *if* they have the required permissions. If set to
-    #   `DENY`, then only the root user of the new account can access account
+    #   `DENY`, only the root user of the new account can access account
     #   billing information. For more information, see [Activating Access to
     #   the Billing and Cost Management Console][1] in the *AWS Billing and
     #   Cost Management User Guide*.
     #
-    #   If you do not specify this parameter, the value defaults to ALLOW, and
-    #   IAM users and roles with the required permissions can access billing
-    #   information for the new account.
+    #   If you don't specify this parameter, the value defaults to `ALLOW`,
+    #   and IAM users and roles with the required permissions can access
+    #   billing information for the new account.
     #
     #
     #
@@ -1149,7 +1175,7 @@ module Aws::Organizations
 
     # Deletes the organization. You can delete an organization only by using
     # credentials from the master account. The organization must be empty of
-    # member accounts, organizational units (OUs), and policies.
+    # member accounts.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2202,7 +2228,7 @@ module Aws::Organizations
     #   you must specify the email address that is associated with the
     #   account.
     #
-    #   `--target Id=bill@example.com,Type=EMAIL`
+    #   `--target Id=diego@example.com,Type=EMAIL`
     #
     # @option params [String] :notes
     #   Additional information that you want to include in the generated email
@@ -2390,13 +2416,13 @@ module Aws::Organizations
     #
     # @option params [Integer] :max_results
     #   (Optional) Use this to limit the number of results you want included
-    #   in the response. If you do not include this parameter, it defaults to
-    #   a value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to get
-    #   the next part of the results. Note that Organizations might return
-    #   fewer results than the maximum even when there are more results
+    #   per page in the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the maximum you specify, the `NextToken` response
+    #   element is present and has a value (is not null). Include that value
+    #   as the `NextToken` request parameter in the next call to the operation
+    #   to get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more results
     #   available. You should check `NextToken` after every operation to
     #   ensure that you receive all of the results.
     #
@@ -2451,13 +2477,13 @@ module Aws::Organizations
     #
     # @option params [Integer] :max_results
     #   (Optional) Use this to limit the number of results you want included
-    #   in the response. If you do not include this parameter, it defaults to
-    #   a value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to get
-    #   the next part of the results. Note that Organizations might return
-    #   fewer results than the maximum even when there are more results
+    #   per page in the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the maximum you specify, the `NextToken` response
+    #   element is present and has a value (is not null). Include that value
+    #   as the `NextToken` request parameter in the next call to the operation
+    #   to get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more results
     #   available. You should check `NextToken` after every operation to
     #   ensure that you receive all of the results.
     #
@@ -2574,13 +2600,13 @@ module Aws::Organizations
     #
     # @option params [Integer] :max_results
     #   (Optional) Use this to limit the number of results you want included
-    #   in the response. If you do not include this parameter, it defaults to
-    #   a value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to get
-    #   the next part of the results. Note that Organizations might return
-    #   fewer results than the maximum even when there are more results
+    #   per page in the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the maximum you specify, the `NextToken` response
+    #   element is present and has a value (is not null). Include that value
+    #   as the `NextToken` request parameter in the next call to the operation
+    #   to get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more results
     #   available. You should check `NextToken` after every operation to
     #   ensure that you receive all of the results.
     #
@@ -2697,13 +2723,13 @@ module Aws::Organizations
     #
     # @option params [Integer] :max_results
     #   (Optional) Use this to limit the number of results you want included
-    #   in the response. If you do not include this parameter, it defaults to
-    #   a value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to get
-    #   the next part of the results. Note that Organizations might return
-    #   fewer results than the maximum even when there are more results
+    #   per page in the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the maximum you specify, the `NextToken` response
+    #   element is present and has a value (is not null). Include that value
+    #   as the `NextToken` request parameter in the next call to the operation
+    #   to get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more results
     #   available. You should check `NextToken` after every operation to
     #   ensure that you receive all of the results.
     #
@@ -2788,13 +2814,13 @@ module Aws::Organizations
     #
     # @option params [Integer] :max_results
     #   (Optional) Use this to limit the number of results you want included
-    #   in the response. If you do not include this parameter, it defaults to
-    #   a value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to get
-    #   the next part of the results. Note that Organizations might return
-    #   fewer results than the maximum even when there are more results
+    #   per page in the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the maximum you specify, the `NextToken` response
+    #   element is present and has a value (is not null). Include that value
+    #   as the `NextToken` request parameter in the next call to the operation
+    #   to get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more results
     #   available. You should check `NextToken` after every operation to
     #   ensure that you receive all of the results.
     #
@@ -2915,13 +2941,13 @@ module Aws::Organizations
     #
     # @option params [Integer] :max_results
     #   (Optional) Use this to limit the number of results you want included
-    #   in the response. If you do not include this parameter, it defaults to
-    #   a value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to get
-    #   the next part of the results. Note that Organizations might return
-    #   fewer results than the maximum even when there are more results
+    #   per page in the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the maximum you specify, the `NextToken` response
+    #   element is present and has a value (is not null). Include that value
+    #   as the `NextToken` request parameter in the next call to the operation
+    #   to get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more results
     #   available. You should check `NextToken` after every operation to
     #   ensure that you receive all of the results.
     #
@@ -3062,13 +3088,13 @@ module Aws::Organizations
     #
     # @option params [Integer] :max_results
     #   (Optional) Use this to limit the number of results you want included
-    #   in the response. If you do not include this parameter, it defaults to
-    #   a value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to get
-    #   the next part of the results. Note that Organizations might return
-    #   fewer results than the maximum even when there are more results
+    #   per page in the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the maximum you specify, the `NextToken` response
+    #   element is present and has a value (is not null). Include that value
+    #   as the `NextToken` request parameter in the next call to the operation
+    #   to get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more results
     #   available. You should check `NextToken` after every operation to
     #   ensure that you receive all of the results.
     #
@@ -3254,13 +3280,13 @@ module Aws::Organizations
     #
     # @option params [Integer] :max_results
     #   (Optional) Use this to limit the number of results you want included
-    #   in the response. If you do not include this parameter, it defaults to
-    #   a value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to get
-    #   the next part of the results. Note that Organizations might return
-    #   fewer results than the maximum even when there are more results
+    #   per page in the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the maximum you specify, the `NextToken` response
+    #   element is present and has a value (is not null). Include that value
+    #   as the `NextToken` request parameter in the next call to the operation
+    #   to get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more results
     #   available. You should check `NextToken` after every operation to
     #   ensure that you receive all of the results.
     #
@@ -3365,13 +3391,13 @@ module Aws::Organizations
     #
     # @option params [Integer] :max_results
     #   (Optional) Use this to limit the number of results you want included
-    #   in the response. If you do not include this parameter, it defaults to
-    #   a value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to get
-    #   the next part of the results. Note that Organizations might return
-    #   fewer results than the maximum even when there are more results
+    #   per page in the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the maximum you specify, the `NextToken` response
+    #   element is present and has a value (is not null). Include that value
+    #   as the `NextToken` request parameter in the next call to the operation
+    #   to get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more results
     #   available. You should check `NextToken` after every operation to
     #   ensure that you receive all of the results.
     #
@@ -3448,13 +3474,13 @@ module Aws::Organizations
     #
     # @option params [Integer] :max_results
     #   (Optional) Use this to limit the number of results you want included
-    #   in the response. If you do not include this parameter, it defaults to
-    #   a value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to get
-    #   the next part of the results. Note that Organizations might return
-    #   fewer results than the maximum even when there are more results
+    #   per page in the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the maximum you specify, the `NextToken` response
+    #   element is present and has a value (is not null). Include that value
+    #   as the `NextToken` request parameter in the next call to the operation
+    #   to get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more results
     #   available. You should check `NextToken` after every operation to
     #   ensure that you receive all of the results.
     #
@@ -3577,13 +3603,13 @@ module Aws::Organizations
     #
     # @option params [Integer] :max_results
     #   (Optional) Use this to limit the number of results you want included
-    #   in the response. If you do not include this parameter, it defaults to
-    #   a value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to get
-    #   the next part of the results. Note that Organizations might return
-    #   fewer results than the maximum even when there are more results
+    #   per page in the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the maximum you specify, the `NextToken` response
+    #   element is present and has a value (is not null). Include that value
+    #   as the `NextToken` request parameter in the next call to the operation
+    #   to get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more results
     #   available. You should check `NextToken` after every operation to
     #   ensure that you receive all of the results.
     #
@@ -3677,13 +3703,13 @@ module Aws::Organizations
     #
     # @option params [Integer] :max_results
     #   (Optional) Use this to limit the number of results you want included
-    #   in the response. If you do not include this parameter, it defaults to
-    #   a value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to get
-    #   the next part of the results. Note that Organizations might return
-    #   fewer results than the maximum even when there are more results
+    #   per page in the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the maximum you specify, the `NextToken` response
+    #   element is present and has a value (is not null). Include that value
+    #   as the `NextToken` request parameter in the next call to the operation
+    #   to get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more results
     #   available. You should check `NextToken` after every operation to
     #   ensure that you receive all of the results.
     #
@@ -3777,13 +3803,13 @@ module Aws::Organizations
     #
     # @option params [Integer] :max_results
     #   (Optional) Use this to limit the number of results you want included
-    #   in the response. If you do not include this parameter, it defaults to
-    #   a value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to get
-    #   the next part of the results. Note that Organizations might return
-    #   fewer results than the maximum even when there are more results
+    #   per page in the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the maximum you specify, the `NextToken` response
+    #   element is present and has a value (is not null). Include that value
+    #   as the `NextToken` request parameter in the next call to the operation
+    #   to get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more results
     #   available. You should check `NextToken` after every operation to
     #   ensure that you receive all of the results.
     #
@@ -4217,7 +4243,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

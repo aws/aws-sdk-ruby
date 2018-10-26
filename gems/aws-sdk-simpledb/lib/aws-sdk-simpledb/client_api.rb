@@ -175,10 +175,12 @@ module Aws::SimpleDB
       api.version = "2009-04-15"
 
       api.metadata = {
+        "apiVersion" => "2009-04-15",
         "endpointPrefix" => "sdb",
         "protocol" => "query",
         "serviceFullName" => "Amazon SimpleDB",
         "signatureVersion" => "v2",
+        "uid" => "sdb-2009-04-15",
         "xmlNamespace" => "http://sdb.amazonaws.com/doc/2009-04-15/",
       }
 

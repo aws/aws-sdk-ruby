@@ -19,8 +19,9 @@ module Aws::Health
     #
     # @!attribute [rw] event_arn
     #   The unique identifier for the event. Format:
-    #   `arn:aws:health:event-region::event/EVENT_TYPE_PLUS_ID `. Example:
-    #   `arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331`
+    #   `arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+    #   `. Example: `Example:
+    #   arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
     #   @return [String]
     #
     # @!attribute [rw] entity_value
@@ -177,8 +178,8 @@ module Aws::Health
     #
     # @!attribute [rw] event_arns
     #   A list of event ARNs (unique identifiers). For example:
-    #   `"arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331",
-    #   "arn:aws:health:us-west-1::event/AWS_EBS_LOST_VOLUME_xyz"`
+    #   `"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456",
+    #   "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"`
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEntityAggregatesRequest AWS API Documentation
@@ -305,8 +306,8 @@ module Aws::Health
     #
     # @!attribute [rw] event_arns
     #   A list of event ARNs (unique identifiers). For example:
-    #   `"arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331",
-    #   "arn:aws:health:us-west-1::event/AWS_EBS_LOST_VOLUME_xyz"`
+    #   `"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456",
+    #   "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"`
     #   @return [Array<String>]
     #
     # @!attribute [rw] locale
@@ -509,8 +510,9 @@ module Aws::Health
     #
     # @!attribute [rw] event_arn
     #   The unique identifier for the event. Format:
-    #   `arn:aws:health:event-region::event/EVENT_TYPE_PLUS_ID `. Example:
-    #   `arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331`
+    #   `arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+    #   `. Example: `Example:
+    #   arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
     #   @return [String]
     #
     # @!attribute [rw] count
@@ -552,8 +554,8 @@ module Aws::Health
     #
     # @!attribute [rw] event_arns
     #   A list of event ARNs (unique identifiers). For example:
-    #   `"arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331",
-    #   "arn:aws:health:us-west-1::event/AWS_EBS_LOST_VOLUME_xyz"`
+    #   `"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456",
+    #   "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"`
     #   @return [Array<String>]
     #
     # @!attribute [rw] entity_arns
@@ -597,8 +599,9 @@ module Aws::Health
     #
     # @!attribute [rw] arn
     #   The unique identifier for the event. Format:
-    #   `arn:aws:health:event-region::event/EVENT_TYPE_PLUS_ID `. Example:
-    #   `arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331`
+    #   `arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+    #   `. Example: `Example:
+    #   arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
     #   @return [String]
     #
     # @!attribute [rw] service
@@ -613,7 +616,8 @@ module Aws::Health
     #   @return [String]
     #
     # @!attribute [rw] event_type_category
-    #   The
+    #   The category of the event. Possible values are `issue`,
+    #   `scheduledChange`, and `accountNotification`.
     #   @return [String]
     #
     # @!attribute [rw] region
@@ -720,8 +724,9 @@ module Aws::Health
     #
     # @!attribute [rw] event_arn
     #   The unique identifier for the event. Format:
-    #   `arn:aws:health:event-region::event/EVENT_TYPE_PLUS_ID `. Example:
-    #   `arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331`
+    #   `arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+    #   `. Example: `Example:
+    #   arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
     #   @return [String]
     #
     # @!attribute [rw] error_name
@@ -784,8 +789,8 @@ module Aws::Health
     #
     # @!attribute [rw] event_arns
     #   A list of event ARNs (unique identifiers). For example:
-    #   `"arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331",
-    #   "arn:aws:health:us-west-1::event/AWS_EBS_LOST_VOLUME_xyz"`
+    #   `"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456",
+    #   "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"`
     #   @return [Array<String>]
     #
     # @!attribute [rw] event_type_codes

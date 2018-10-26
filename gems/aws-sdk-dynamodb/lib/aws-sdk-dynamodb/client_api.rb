@@ -42,6 +42,8 @@ module Aws::DynamoDB
     BackupStatus = Shapes::StringShape.new(name: 'BackupStatus')
     BackupSummaries = Shapes::ListShape.new(name: 'BackupSummaries')
     BackupSummary = Shapes::StructureShape.new(name: 'BackupSummary')
+    BackupType = Shapes::StringShape.new(name: 'BackupType')
+    BackupTypeFilter = Shapes::StringShape.new(name: 'BackupTypeFilter')
     BackupsInputLimit = Shapes::IntegerShape.new(name: 'BackupsInputLimit')
     BatchGetItemInput = Shapes::StructureShape.new(name: 'BatchGetItemInput')
     BatchGetItemOutput = Shapes::StructureShape.new(name: 'BatchGetItemOutput')
@@ -89,6 +91,8 @@ module Aws::DynamoDB
     DescribeBackupOutput = Shapes::StructureShape.new(name: 'DescribeBackupOutput')
     DescribeContinuousBackupsInput = Shapes::StructureShape.new(name: 'DescribeContinuousBackupsInput')
     DescribeContinuousBackupsOutput = Shapes::StructureShape.new(name: 'DescribeContinuousBackupsOutput')
+    DescribeEndpointsRequest = Shapes::StructureShape.new(name: 'DescribeEndpointsRequest')
+    DescribeEndpointsResponse = Shapes::StructureShape.new(name: 'DescribeEndpointsResponse')
     DescribeGlobalTableInput = Shapes::StructureShape.new(name: 'DescribeGlobalTableInput')
     DescribeGlobalTableOutput = Shapes::StructureShape.new(name: 'DescribeGlobalTableOutput')
     DescribeGlobalTableSettingsInput = Shapes::StructureShape.new(name: 'DescribeGlobalTableSettingsInput')
@@ -100,6 +104,8 @@ module Aws::DynamoDB
     DescribeTimeToLiveInput = Shapes::StructureShape.new(name: 'DescribeTimeToLiveInput')
     DescribeTimeToLiveOutput = Shapes::StructureShape.new(name: 'DescribeTimeToLiveOutput')
     Double = Shapes::FloatShape.new(name: 'Double')
+    Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
+    Endpoints = Shapes::ListShape.new(name: 'Endpoints')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExpectedAttributeMap = Shapes::MapShape.new(name: 'ExpectedAttributeMap')
     ExpectedAttributeValue = Shapes::StructureShape.new(name: 'ExpectedAttributeValue')
@@ -144,6 +150,7 @@ module Aws::DynamoDB
     ItemCount = Shapes::IntegerShape.new(name: 'ItemCount')
     ItemList = Shapes::ListShape.new(name: 'ItemList')
     KMSMasterKeyArn = Shapes::StringShape.new(name: 'KMSMasterKeyArn')
+    KMSMasterKeyId = Shapes::StringShape.new(name: 'KMSMasterKeyId')
     Key = Shapes::MapShape.new(name: 'Key')
     KeyConditions = Shapes::MapShape.new(name: 'KeyConditions')
     KeyExpression = Shapes::StringShape.new(name: 'KeyExpression')
@@ -365,7 +372,9 @@ module Aws::DynamoDB
     BackupDetails.add_member(:backup_name, Shapes::ShapeRef.new(shape: BackupName, required: true, location_name: "BackupName"))
     BackupDetails.add_member(:backup_size_bytes, Shapes::ShapeRef.new(shape: BackupSizeBytes, location_name: "BackupSizeBytes"))
     BackupDetails.add_member(:backup_status, Shapes::ShapeRef.new(shape: BackupStatus, required: true, location_name: "BackupStatus"))
+    BackupDetails.add_member(:backup_type, Shapes::ShapeRef.new(shape: BackupType, required: true, location_name: "BackupType"))
     BackupDetails.add_member(:backup_creation_date_time, Shapes::ShapeRef.new(shape: BackupCreationDateTime, required: true, location_name: "BackupCreationDateTime"))
+    BackupDetails.add_member(:backup_expiry_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "BackupExpiryDateTime"))
     BackupDetails.struct_class = Types::BackupDetails
 
     BackupSummaries.member = Shapes::ShapeRef.new(shape: BackupSummary)
@@ -376,7 +385,9 @@ module Aws::DynamoDB
     BackupSummary.add_member(:backup_arn, Shapes::ShapeRef.new(shape: BackupArn, location_name: "BackupArn"))
     BackupSummary.add_member(:backup_name, Shapes::ShapeRef.new(shape: BackupName, location_name: "BackupName"))
     BackupSummary.add_member(:backup_creation_date_time, Shapes::ShapeRef.new(shape: BackupCreationDateTime, location_name: "BackupCreationDateTime"))
+    BackupSummary.add_member(:backup_expiry_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "BackupExpiryDateTime"))
     BackupSummary.add_member(:backup_status, Shapes::ShapeRef.new(shape: BackupStatus, location_name: "BackupStatus"))
+    BackupSummary.add_member(:backup_type, Shapes::ShapeRef.new(shape: BackupType, location_name: "BackupType"))
     BackupSummary.add_member(:backup_size_bytes, Shapes::ShapeRef.new(shape: BackupSizeBytes, location_name: "BackupSizeBytes"))
     BackupSummary.struct_class = Types::BackupSummary
 
@@ -516,6 +527,11 @@ module Aws::DynamoDB
     DescribeContinuousBackupsOutput.add_member(:continuous_backups_description, Shapes::ShapeRef.new(shape: ContinuousBackupsDescription, location_name: "ContinuousBackupsDescription"))
     DescribeContinuousBackupsOutput.struct_class = Types::DescribeContinuousBackupsOutput
 
+    DescribeEndpointsRequest.struct_class = Types::DescribeEndpointsRequest
+
+    DescribeEndpointsResponse.add_member(:endpoints, Shapes::ShapeRef.new(shape: Endpoints, required: true, location_name: "Endpoints"))
+    DescribeEndpointsResponse.struct_class = Types::DescribeEndpointsResponse
+
     DescribeGlobalTableInput.add_member(:global_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "GlobalTableName"))
     DescribeGlobalTableInput.struct_class = Types::DescribeGlobalTableInput
 
@@ -548,6 +564,12 @@ module Aws::DynamoDB
 
     DescribeTimeToLiveOutput.add_member(:time_to_live_description, Shapes::ShapeRef.new(shape: TimeToLiveDescription, location_name: "TimeToLiveDescription"))
     DescribeTimeToLiveOutput.struct_class = Types::DescribeTimeToLiveOutput
+
+    Endpoint.add_member(:address, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Address"))
+    Endpoint.add_member(:cache_period_in_minutes, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "CachePeriodInMinutes"))
+    Endpoint.struct_class = Types::Endpoint
+
+    Endpoints.member = Shapes::ShapeRef.new(shape: Endpoint)
 
     ExpectedAttributeMap.key = Shapes::ShapeRef.new(shape: AttributeName)
     ExpectedAttributeMap.value = Shapes::ShapeRef.new(shape: ExpectedAttributeValue)
@@ -680,6 +702,7 @@ module Aws::DynamoDB
     ListBackupsInput.add_member(:time_range_lower_bound, Shapes::ShapeRef.new(shape: TimeRangeLowerBound, location_name: "TimeRangeLowerBound"))
     ListBackupsInput.add_member(:time_range_upper_bound, Shapes::ShapeRef.new(shape: TimeRangeUpperBound, location_name: "TimeRangeUpperBound"))
     ListBackupsInput.add_member(:exclusive_start_backup_arn, Shapes::ShapeRef.new(shape: BackupArn, location_name: "ExclusiveStartBackupArn"))
+    ListBackupsInput.add_member(:backup_type, Shapes::ShapeRef.new(shape: BackupTypeFilter, location_name: "BackupType"))
     ListBackupsInput.struct_class = Types::ListBackupsInput
 
     ListBackupsOutput.add_member(:backup_summaries, Shapes::ShapeRef.new(shape: BackupSummaries, location_name: "BackupSummaries"))
@@ -893,7 +916,9 @@ module Aws::DynamoDB
     SSEDescription.add_member(:kms_master_key_arn, Shapes::ShapeRef.new(shape: KMSMasterKeyArn, location_name: "KMSMasterKeyArn"))
     SSEDescription.struct_class = Types::SSEDescription
 
-    SSESpecification.add_member(:enabled, Shapes::ShapeRef.new(shape: SSEEnabled, required: true, location_name: "Enabled"))
+    SSESpecification.add_member(:enabled, Shapes::ShapeRef.new(shape: SSEEnabled, location_name: "Enabled"))
+    SSESpecification.add_member(:sse_type, Shapes::ShapeRef.new(shape: SSEType, location_name: "SSEType"))
+    SSESpecification.add_member(:kms_master_key_id, Shapes::ShapeRef.new(shape: KMSMasterKeyId, location_name: "KMSMasterKeyId"))
     SSESpecification.struct_class = Types::SSESpecification
 
     ScanInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TableName"))
@@ -1045,6 +1070,7 @@ module Aws::DynamoDB
     UpdateTableInput.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughput, location_name: "ProvisionedThroughput"))
     UpdateTableInput.add_member(:global_secondary_index_updates, Shapes::ShapeRef.new(shape: GlobalSecondaryIndexUpdateList, location_name: "GlobalSecondaryIndexUpdates"))
     UpdateTableInput.add_member(:stream_specification, Shapes::ShapeRef.new(shape: StreamSpecification, location_name: "StreamSpecification"))
+    UpdateTableInput.add_member(:sse_specification, Shapes::ShapeRef.new(shape: SSESpecification, location_name: "SSESpecification"))
     UpdateTableInput.struct_class = Types::UpdateTableInput
 
     UpdateTableOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))
@@ -1070,12 +1096,16 @@ module Aws::DynamoDB
       api.version = "2012-08-10"
 
       api.metadata = {
+        "apiVersion" => "2012-08-10",
         "endpointPrefix" => "dynamodb",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "serviceAbbreviation" => "DynamoDB",
         "serviceFullName" => "Amazon DynamoDB",
+        "serviceId" => "DynamoDB",
         "signatureVersion" => "v4",
         "targetPrefix" => "DynamoDB_20120810",
+        "uid" => "dynamodb-2012-08-10",
       }
 
       api.add_operation(:batch_get_item, Seahorse::Model::Operation.new.tap do |o|
@@ -1198,6 +1228,14 @@ module Aws::DynamoDB
         o.output = Shapes::ShapeRef.new(shape: DescribeContinuousBackupsOutput)
         o.errors << Shapes::ShapeRef.new(shape: TableNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:describe_endpoints, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeEndpoints"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeEndpointsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeEndpointsResponse)
       end)
 
       api.add_operation(:describe_global_table, Seahorse::Model::Operation.new.tap do |o|

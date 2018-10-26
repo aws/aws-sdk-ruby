@@ -157,6 +157,8 @@ module Aws::CloudTrail
 
     Event.add_member(:event_id, Shapes::ShapeRef.new(shape: String, location_name: "EventId"))
     Event.add_member(:event_name, Shapes::ShapeRef.new(shape: String, location_name: "EventName"))
+    Event.add_member(:read_only, Shapes::ShapeRef.new(shape: String, location_name: "ReadOnly"))
+    Event.add_member(:access_key_id, Shapes::ShapeRef.new(shape: String, location_name: "AccessKeyId"))
     Event.add_member(:event_time, Shapes::ShapeRef.new(shape: Date, location_name: "EventTime"))
     Event.add_member(:event_source, Shapes::ShapeRef.new(shape: String, location_name: "EventSource"))
     Event.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
@@ -341,12 +343,16 @@ module Aws::CloudTrail
       api.version = "2013-11-01"
 
       api.metadata = {
+        "apiVersion" => "2013-11-01",
         "endpointPrefix" => "cloudtrail",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "CloudTrail",
         "serviceFullName" => "AWS CloudTrail",
+        "serviceId" => "CloudTrail",
         "signatureVersion" => "v4",
         "targetPrefix" => "com.amazonaws.cloudtrail.v20131101.CloudTrail_20131101",
+        "uid" => "cloudtrail-2013-11-01",
       }
 
       api.add_operation(:add_tags, Seahorse::Model::Operation.new.tap do |o|

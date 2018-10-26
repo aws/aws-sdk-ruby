@@ -33,6 +33,7 @@ module AwsSdkCodeGenerator
         'eventheader' => false,
         'eventpayload' => false,
         # ignore
+        'synthetic' => false,
         'box' => false,
         'fault' => false,
         'error' => false,
@@ -58,7 +59,7 @@ module AwsSdkCodeGenerator
       }
 
       METADATA_KEYS = {
-        # keep
+        # keep all
         'endpointPrefix' => true,
         'signatureVersion' => true,
         'signingName' => true,
@@ -71,13 +72,12 @@ module AwsSdkCodeGenerator
         'xmlNamespace' => true,
         'protocolSettings' => {}, # current unused unless for h2 exclude
 
-        # ignore
-        'apiVersion' => false,
-        'checksumFormat' => false,
-        'globalEndpoint' => false,
-        'serviceAbbreviation' => false,
-        'uid' => false,
-        'serviceId' => false,
+        'serviceId' => true,
+        'apiVersion' => true,
+        'checksumFormat' => true,
+        'globalEndpoint' => true,
+        'serviceAbbreviation' => true,
+        'uid' => true,
       }
 
       # @option options [required, Service] :service

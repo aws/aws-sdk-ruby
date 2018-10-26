@@ -321,7 +321,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, String] :internet_gateway_id
-    #   The ID of the Internet gateway.
+    #   The ID of the internet gateway.
     # @return [EmptyStructure]
     def attach_internet_gateway(options = {})
       options = options.merge(vpc_id: @id)
@@ -561,7 +561,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, String] :internet_gateway_id
-    #   The ID of the Internet gateway.
+    #   The ID of the internet gateway.
     # @return [EmptyStructure]
     def detach_internet_gateway(options = {})
       options = options.merge(vpc_id: @id)
@@ -628,9 +628,9 @@ module Aws::EC2
     #   Indicates whether the DNS resolution is supported for the VPC. If
     #   enabled, queries to the Amazon provided DNS server at the
     #   169.254.169.253 IP address, or the reserved IP address at the base of
-    #   the VPC network range "plus two" will succeed. If disabled, the
-    #   Amazon provided DNS service in the VPC that resolves public DNS
-    #   hostnames to IP addresses is not enabled.
+    #   the VPC network range "plus two" succeed. If disabled, the Amazon
+    #   provided DNS service in the VPC that resolves public DNS hostnames to
+    #   IP addresses is not enabled.
     #
     #   You cannot modify the DNS resolution and DNS hostnames attributes in
     #   the same request. Use separate requests for each attribute.
@@ -1116,9 +1116,9 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<String>] :internet_gateway_ids
-    #   One or more Internet gateway IDs.
+    #   One or more internet gateway IDs.
     #
-    #   Default: Describes all your Internet gateways.
+    #   Default: Describes all your internet gateways.
     # @return [InternetGateway::Collection]
     def internet_gateways(options = {})
       batches = Enumerator.new do |y|
@@ -1170,9 +1170,6 @@ module Aws::EC2
     #
     #   * `entry.cidr` - The IPv4 CIDR range specified in the entry.
     #
-    #   * `entry.egress` - Indicates whether the entry applies to egress
-    #     traffic.
-    #
     #   * `entry.icmp.code` - The ICMP code specified in the entry, if any.
     #
     #   * `entry.icmp.type` - The ICMP type specified in the entry, if any.
@@ -1192,7 +1189,7 @@ module Aws::EC2
     #     \| `deny`).
     #
     #   * `entry.rule-number` - The number of an entry (in other words, rule)
-    #     in the ACL's set of entries.
+    #     in the set of ACL entries.
     #
     #   * `network-acl-id` - The ID of the network ACL.
     #
@@ -1374,20 +1371,22 @@ module Aws::EC2
     # @return [NetworkInterface::Collection]
     def network_interfaces(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = Aws::Util.deep_merge(options, filters: [{
           name: "vpc-id",
           values: [@id]
         }])
         resp = @client.describe_network_interfaces(options)
-        resp.data.network_interfaces.each do |n|
-          batch << NetworkInterface.new(
-            id: n.network_interface_id,
-            data: n,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.network_interfaces.each do |n|
+            batch << NetworkInterface.new(
+              id: n.network_interface_id,
+              data: n,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       NetworkInterface::Collection.new(batches)
     end
@@ -1486,6 +1485,8 @@ module Aws::EC2
     #     ],
     #     dry_run: false,
     #     route_table_ids: ["String"],
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -1562,6 +1563,12 @@ module Aws::EC2
     #   One or more route table IDs.
     #
     #   Default: Describes all your route tables.
+    # @option options [String] :next_token
+    #   The token to retrieve the next page of results.
+    # @option options [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another call with the returned
+    #   **NextToken** value. This value can be between 5 and 100.
     # @return [RouteTable::Collection]
     def route_tables(options = {})
       batches = Enumerator.new do |y|

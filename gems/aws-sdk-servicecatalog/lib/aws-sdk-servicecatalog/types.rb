@@ -168,6 +168,54 @@ module Aws::ServiceCatalog
     #
     class AssociateProductWithPortfolioOutput < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass AssociateServiceActionWithProvisioningArtifactInput
+    #   data as a hash:
+    #
+    #       {
+    #         product_id: "Id", # required
+    #         provisioning_artifact_id: "Id", # required
+    #         service_action_id: "Id", # required
+    #         accept_language: "AcceptLanguage",
+    #       }
+    #
+    # @!attribute [rw] product_id
+    #   The product identifier. For example, `prod-abcdzk7xy33qa`.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_artifact_id
+    #   The identifier of the provisioning artifact. For example,
+    #   `pa-4abcdjnxjj6ne`.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_action_id
+    #   The self-service action identifier. For example,
+    #   `act-fs7abcd89wxyz`.
+    #   @return [String]
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateServiceActionWithProvisioningArtifactInput AWS API Documentation
+    #
+    class AssociateServiceActionWithProvisioningArtifactInput < Struct.new(
+      :product_id,
+      :provisioning_artifact_id,
+      :service_action_id,
+      :accept_language)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateServiceActionWithProvisioningArtifactOutput AWS API Documentation
+    #
+    class AssociateServiceActionWithProvisioningArtifactOutput < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass AssociateTagOptionWithResourceInput
     #   data as a hash:
     #
@@ -195,6 +243,104 @@ module Aws::ServiceCatalog
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateTagOptionWithResourceOutput AWS API Documentation
     #
     class AssociateTagOptionWithResourceOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass BatchAssociateServiceActionWithProvisioningArtifactInput
+    #   data as a hash:
+    #
+    #       {
+    #         service_action_associations: [ # required
+    #           {
+    #             service_action_id: "Id", # required
+    #             product_id: "Id", # required
+    #             provisioning_artifact_id: "Id", # required
+    #           },
+    #         ],
+    #         accept_language: "AcceptLanguage",
+    #       }
+    #
+    # @!attribute [rw] service_action_associations
+    #   One or more associations, each consisting of the Action ID, the
+    #   Product ID, and the Provisioning Artifact ID.
+    #   @return [Array<Types::ServiceActionAssociation>]
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/BatchAssociateServiceActionWithProvisioningArtifactInput AWS API Documentation
+    #
+    class BatchAssociateServiceActionWithProvisioningArtifactInput < Struct.new(
+      :service_action_associations,
+      :accept_language)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failed_service_action_associations
+    #   An object that contains a list of errors, along with information to
+    #   help you identify the self-service action.
+    #   @return [Array<Types::FailedServiceActionAssociation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/BatchAssociateServiceActionWithProvisioningArtifactOutput AWS API Documentation
+    #
+    class BatchAssociateServiceActionWithProvisioningArtifactOutput < Struct.new(
+      :failed_service_action_associations)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchDisassociateServiceActionFromProvisioningArtifactInput
+    #   data as a hash:
+    #
+    #       {
+    #         service_action_associations: [ # required
+    #           {
+    #             service_action_id: "Id", # required
+    #             product_id: "Id", # required
+    #             provisioning_artifact_id: "Id", # required
+    #           },
+    #         ],
+    #         accept_language: "AcceptLanguage",
+    #       }
+    #
+    # @!attribute [rw] service_action_associations
+    #   One or more associations, each consisting of the Action ID, the
+    #   Product ID, and the Provisioning Artifact ID.
+    #   @return [Array<Types::ServiceActionAssociation>]
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/BatchDisassociateServiceActionFromProvisioningArtifactInput AWS API Documentation
+    #
+    class BatchDisassociateServiceActionFromProvisioningArtifactInput < Struct.new(
+      :service_action_associations,
+      :accept_language)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failed_service_action_associations
+    #   An object that contains a list of errors, along with information to
+    #   help you identify the self-service action.
+    #   @return [Array<Types::FailedServiceActionAssociation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/BatchDisassociateServiceActionFromProvisioningArtifactOutput AWS API Documentation
+    #
+    class BatchDisassociateServiceActionFromProvisioningArtifactOutput < Struct.new(
+      :failed_service_action_associations)
+      include Aws::Structure
+    end
 
     # Information about a CloudWatch dashboard.
     #
@@ -928,6 +1074,103 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateServiceActionInput
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ServiceActionName", # required
+    #         definition_type: "SSM_AUTOMATION", # required, accepts SSM_AUTOMATION
+    #         definition: { # required
+    #           "Name" => "ServiceActionDefinitionValue",
+    #         },
+    #         description: "ServiceActionDescription",
+    #         accept_language: "AcceptLanguage",
+    #         idempotency_token: "IdempotencyToken", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The self-service action name.
+    #   @return [String]
+    #
+    # @!attribute [rw] definition_type
+    #   The service action definition type. For example, `SSM_AUTOMATION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] definition
+    #   The self-service action definition. Can be one of the following:
+    #
+    #   Name
+    #
+    #   : The name of the AWS Systems Manager Document. For example,
+    #     `AWS-RestartEC2Instance`.
+    #
+    #   Version
+    #
+    #   : The AWS Systems Manager automation document version. For example,
+    #     `"Version": "1"`
+    #
+    #   AssumeRole
+    #
+    #   : The Amazon Resource Name (ARN) of the role that performs the
+    #     self-service actions on your behalf. For example, `"AssumeRole":
+    #     "arn:aws:iam::12345678910:role/ActionRole"`.
+    #
+    #     To reuse the provisioned product launch role, set to
+    #     `"AssumeRole": "LAUNCH_ROLE"`.
+    #
+    #   Parameters
+    #
+    #   : The list of parameters in JSON format.
+    #
+    #     For example: `[\{"Name":"InstanceId","Type":"TARGET"\}]`.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] description
+    #   The self-service action description.
+    #   @return [String]
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @!attribute [rw] idempotency_token
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests differ only by the idempotency token, the same
+    #   response is returned for each repeated request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateServiceActionInput AWS API Documentation
+    #
+    class CreateServiceActionInput < Struct.new(
+      :name,
+      :definition_type,
+      :definition,
+      :description,
+      :accept_language,
+      :idempotency_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_action_detail
+    #   An object containing information about the self-service action.
+    #   @return [Types::ServiceActionDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateServiceActionOutput AWS API Documentation
+    #
+    class CreateServiceActionOutput < Struct.new(
+      :service_action_detail)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateTagOptionInput
     #   data as a hash:
     #
@@ -1186,6 +1429,41 @@ module Aws::ServiceCatalog
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProvisioningArtifactOutput AWS API Documentation
     #
     class DeleteProvisioningArtifactOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteServiceActionInput
+    #   data as a hash:
+    #
+    #       {
+    #         id: "Id", # required
+    #         accept_language: "AcceptLanguage",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The self-service action identifier. For example,
+    #   `act-fs7abcd89wxyz`.
+    #   @return [String]
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteServiceActionInput AWS API Documentation
+    #
+    class DeleteServiceActionInput < Struct.new(
+      :id,
+      :accept_language)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteServiceActionOutput AWS API Documentation
+    #
+    class DeleteServiceActionOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteTagOptionInput
     #   data as a hash:
@@ -1829,6 +2107,47 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeServiceActionInput
+    #   data as a hash:
+    #
+    #       {
+    #         id: "Id", # required
+    #         accept_language: "AcceptLanguage",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The self-service action identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeServiceActionInput AWS API Documentation
+    #
+    class DescribeServiceActionInput < Struct.new(
+      :id,
+      :accept_language)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_action_detail
+    #   Detailed information about the self-service action.
+    #   @return [Types::ServiceActionDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeServiceActionOutput AWS API Documentation
+    #
+    class DescribeServiceActionOutput < Struct.new(
+      :service_action_detail)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeTagOptionInput
     #   data as a hash:
     #
@@ -1938,6 +2257,54 @@ module Aws::ServiceCatalog
     #
     class DisassociateProductFromPortfolioOutput < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DisassociateServiceActionFromProvisioningArtifactInput
+    #   data as a hash:
+    #
+    #       {
+    #         product_id: "Id", # required
+    #         provisioning_artifact_id: "Id", # required
+    #         service_action_id: "Id", # required
+    #         accept_language: "AcceptLanguage",
+    #       }
+    #
+    # @!attribute [rw] product_id
+    #   The product identifier. For example, `prod-abcdzk7xy33qa`.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_artifact_id
+    #   The identifier of the provisioning artifact. For example,
+    #   `pa-4abcdjnxjj6ne`.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_action_id
+    #   The self-service action identifier. For example,
+    #   `act-fs7abcd89wxyz`.
+    #   @return [String]
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateServiceActionFromProvisioningArtifactInput AWS API Documentation
+    #
+    class DisassociateServiceActionFromProvisioningArtifactInput < Struct.new(
+      :product_id,
+      :provisioning_artifact_id,
+      :service_action_id,
+      :accept_language)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateServiceActionFromProvisioningArtifactOutput AWS API Documentation
+    #
+    class DisassociateServiceActionFromProvisioningArtifactOutput < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DisassociateTagOptionFromResourceInput
     #   data as a hash:
     #
@@ -2015,6 +2382,101 @@ module Aws::ServiceCatalog
     #
     class ExecuteProvisionedProductPlanOutput < Struct.new(
       :record_detail)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ExecuteProvisionedProductServiceActionInput
+    #   data as a hash:
+    #
+    #       {
+    #         provisioned_product_id: "Id", # required
+    #         service_action_id: "Id", # required
+    #         execute_token: "IdempotencyToken", # required
+    #         accept_language: "AcceptLanguage",
+    #       }
+    #
+    # @!attribute [rw] provisioned_product_id
+    #   The identifier of the provisioned product.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_action_id
+    #   The self-service action identifier. For example,
+    #   `act-fs7abcd89wxyz`.
+    #   @return [String]
+    #
+    # @!attribute [rw] execute_token
+    #   An idempotency token that uniquely identifies the execute request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ExecuteProvisionedProductServiceActionInput AWS API Documentation
+    #
+    class ExecuteProvisionedProductServiceActionInput < Struct.new(
+      :provisioned_product_id,
+      :service_action_id,
+      :execute_token,
+      :accept_language)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] record_detail
+    #   An object containing detailed information about the result of
+    #   provisioning the product.
+    #   @return [Types::RecordDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ExecuteProvisionedProductServiceActionOutput AWS API Documentation
+    #
+    class ExecuteProvisionedProductServiceActionOutput < Struct.new(
+      :record_detail)
+      include Aws::Structure
+    end
+
+    # An object containing information about the error, along with
+    # identifying information about the self-service action and its
+    # associations.
+    #
+    # @!attribute [rw] service_action_id
+    #   The self-service action identifier. For example,
+    #   `act-fs7abcd89wxyz`.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_id
+    #   The product identifier. For example, `prod-abcdzk7xy33qa`.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_artifact_id
+    #   The identifier of the provisioning artifact. For example,
+    #   `pa-4abcdjnxjj6ne`.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code. Valid values are listed below.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A text description of the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/FailedServiceActionAssociation AWS API Documentation
+    #
+    class FailedServiceActionAssociation < Struct.new(
+      :service_action_id,
+      :product_id,
+      :provisioning_artifact_id,
+      :error_code,
+      :error_message)
       include Aws::Structure
     end
 
@@ -2527,6 +2989,68 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListProvisioningArtifactsForServiceActionInput
+    #   data as a hash:
+    #
+    #       {
+    #         service_action_id: "Id", # required
+    #         page_size: 1,
+    #         page_token: "PageToken",
+    #         accept_language: "AcceptLanguage",
+    #       }
+    #
+    # @!attribute [rw] service_action_id
+    #   The self-service action identifier. For example,
+    #   `act-fs7abcd89wxyz`.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of items to return with this call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] page_token
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
+    #   @return [String]
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisioningArtifactsForServiceActionInput AWS API Documentation
+    #
+    class ListProvisioningArtifactsForServiceActionInput < Struct.new(
+      :service_action_id,
+      :page_size,
+      :page_token,
+      :accept_language)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] provisioning_artifact_views
+    #   An array of objects with information about product views and
+    #   provisioning artifacts.
+    #   @return [Array<Types::ProvisioningArtifactView>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisioningArtifactsForServiceActionOutput AWS API Documentation
+    #
+    class ListProvisioningArtifactsForServiceActionOutput < Struct.new(
+      :provisioning_artifact_views,
+      :next_page_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListProvisioningArtifactsInput
     #   data as a hash:
     #
@@ -2733,6 +3257,129 @@ module Aws::ServiceCatalog
     class ListResourcesForTagOptionOutput < Struct.new(
       :resource_details,
       :page_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListServiceActionsForProvisioningArtifactInput
+    #   data as a hash:
+    #
+    #       {
+    #         product_id: "Id", # required
+    #         provisioning_artifact_id: "Id", # required
+    #         page_size: 1,
+    #         page_token: "PageToken",
+    #         accept_language: "AcceptLanguage",
+    #       }
+    #
+    # @!attribute [rw] product_id
+    #   The product identifier. For example, `prod-abcdzk7xy33qa`.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_artifact_id
+    #   The identifier of the provisioning artifact. For example,
+    #   `pa-4abcdjnxjj6ne`.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of items to return with this call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] page_token
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
+    #   @return [String]
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListServiceActionsForProvisioningArtifactInput AWS API Documentation
+    #
+    class ListServiceActionsForProvisioningArtifactInput < Struct.new(
+      :product_id,
+      :provisioning_artifact_id,
+      :page_size,
+      :page_token,
+      :accept_language)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_action_summaries
+    #   An object containing information about the self-service actions
+    #   associated with the provisioning artifact.
+    #   @return [Array<Types::ServiceActionSummary>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListServiceActionsForProvisioningArtifactOutput AWS API Documentation
+    #
+    class ListServiceActionsForProvisioningArtifactOutput < Struct.new(
+      :service_action_summaries,
+      :next_page_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListServiceActionsInput
+    #   data as a hash:
+    #
+    #       {
+    #         accept_language: "AcceptLanguage",
+    #         page_size: 1,
+    #         page_token: "PageToken",
+    #       }
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of items to return with this call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] page_token
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListServiceActionsInput AWS API Documentation
+    #
+    class ListServiceActionsInput < Struct.new(
+      :accept_language,
+      :page_size,
+      :page_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_action_summaries
+    #   An object containing information about the service actions
+    #   associated with the provisioning artifact.
+    #   @return [Array<Types::ServiceActionSummary>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListServiceActionsOutput AWS API Documentation
+    #
+    class ListServiceActionsOutput < Struct.new(
+      :service_action_summaries,
+      :next_page_token)
       include Aws::Structure
     end
 
@@ -3281,6 +3928,15 @@ module Aws::ServiceCatalog
     #   provisioned product.
     #   @return [String]
     #
+    # @!attribute [rw] product_id
+    #   The product identifier. For example, `prod-abcdzk7xy33qa`.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_artifact_id
+    #   The identifier of the provisioning artifact. For example,
+    #   `pa-4abcdjnxjj6ne`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionedProductDetail AWS API Documentation
     #
     class ProvisionedProductDetail < Struct.new(
@@ -3292,7 +3948,9 @@ module Aws::ServiceCatalog
       :status_message,
       :created_time,
       :idempotency_token,
-      :last_record_id)
+      :last_record_id,
+      :product_id,
+      :provisioning_artifact_id)
       include Aws::Structure
     end
 
@@ -3620,6 +4278,26 @@ module Aws::ServiceCatalog
       :description,
       :created_time,
       :provisioning_artifact_metadata)
+      include Aws::Structure
+    end
+
+    # An object that contains summary information about a product view and a
+    # provisioning artifact.
+    #
+    # @!attribute [rw] product_view_summary
+    #   Summary information about a product view.
+    #   @return [Types::ProductViewSummary]
+    #
+    # @!attribute [rw] provisioning_artifact
+    #   Information about a provisioning artifact. A provisioning artifact
+    #   is also known as a product version.
+    #   @return [Types::ProvisioningArtifact]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactView AWS API Documentation
+    #
+    class ProvisioningArtifactView < Struct.new(
+      :product_view_summary,
+      :provisioning_artifact)
       include Aws::Structure
     end
 
@@ -4298,6 +4976,89 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # A self-service action association consisting of the Action ID, the
+    # Product ID, and the Provisioning Artifact ID.
+    #
+    # @note When making an API call, you may pass ServiceActionAssociation
+    #   data as a hash:
+    #
+    #       {
+    #         service_action_id: "Id", # required
+    #         product_id: "Id", # required
+    #         provisioning_artifact_id: "Id", # required
+    #       }
+    #
+    # @!attribute [rw] service_action_id
+    #   The self-service action identifier. For example,
+    #   `act-fs7abcd89wxyz`.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_id
+    #   The product identifier. For example, `prod-abcdzk7xy33qa`.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_artifact_id
+    #   The identifier of the provisioning artifact. For example,
+    #   `pa-4abcdjnxjj6ne`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ServiceActionAssociation AWS API Documentation
+    #
+    class ServiceActionAssociation < Struct.new(
+      :service_action_id,
+      :product_id,
+      :provisioning_artifact_id)
+      include Aws::Structure
+    end
+
+    # An object containing detailed information about the self-service
+    # action.
+    #
+    # @!attribute [rw] service_action_summary
+    #   Summary information about the self-service action.
+    #   @return [Types::ServiceActionSummary]
+    #
+    # @!attribute [rw] definition
+    #   A map that defines the self-service action.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ServiceActionDetail AWS API Documentation
+    #
+    class ServiceActionDetail < Struct.new(
+      :service_action_summary,
+      :definition)
+      include Aws::Structure
+    end
+
+    # Detailed information about the self-service action.
+    #
+    # @!attribute [rw] id
+    #   The self-service action identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The self-service action name.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The self-service action description.
+    #   @return [String]
+    #
+    # @!attribute [rw] definition_type
+    #   The self-service action definition type. For example,
+    #   `SSM_AUTOMATION`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ServiceActionSummary AWS API Documentation
+    #
+    class ServiceActionSummary < Struct.new(
+      :id,
+      :name,
+      :description,
+      :definition_type)
+      include Aws::Structure
+    end
+
     # Information about a tag. A tag is a key-value pair. Tags are
     # propagated to the resources created when provisioning a product.
     #
@@ -4879,6 +5640,67 @@ module Aws::ServiceCatalog
       :key,
       :value,
       :use_previous_value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateServiceActionInput
+    #   data as a hash:
+    #
+    #       {
+    #         id: "Id", # required
+    #         name: "ServiceActionName",
+    #         definition: {
+    #           "Name" => "ServiceActionDefinitionValue",
+    #         },
+    #         description: "ServiceActionDescription",
+    #         accept_language: "AcceptLanguage",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The self-service action identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The self-service action name.
+    #   @return [String]
+    #
+    # @!attribute [rw] definition
+    #   A map that defines the self-service action.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] description
+    #   The self-service action description.
+    #   @return [String]
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateServiceActionInput AWS API Documentation
+    #
+    class UpdateServiceActionInput < Struct.new(
+      :id,
+      :name,
+      :definition,
+      :description,
+      :accept_language)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_action_detail
+    #   Detailed information about the self-service action.
+    #   @return [Types::ServiceActionDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateServiceActionOutput AWS API Documentation
+    #
+    class UpdateServiceActionOutput < Struct.new(
+      :service_action_detail)
       include Aws::Structure
     end
 

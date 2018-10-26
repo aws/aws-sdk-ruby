@@ -566,9 +566,23 @@ module Aws::DynamoDB
     #   DELETED.
     #   @return [String]
     #
+    # @!attribute [rw] backup_type
+    #   BackupType:
+    #
+    #   * `USER` - On-demand backup created by you.
+    #
+    #   * `SYSTEM` - On-demand backup automatically created by DynamoDB.
+    #   @return [String]
+    #
     # @!attribute [rw] backup_creation_date_time
     #   Time at which the backup was created. This is the request time of
     #   the backup.
+    #   @return [Time]
+    #
+    # @!attribute [rw] backup_expiry_date_time
+    #   Time at which the automatic on-demand backup created by DynamoDB
+    #   will expire. This `SYSTEM` on-demand backup expires automatically 35
+    #   days after its creation.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BackupDetails AWS API Documentation
@@ -578,7 +592,9 @@ module Aws::DynamoDB
       :backup_name,
       :backup_size_bytes,
       :backup_status,
-      :backup_creation_date_time)
+      :backup_type,
+      :backup_creation_date_time,
+      :backup_expiry_date_time)
       include Aws::Structure
     end
 
@@ -608,9 +624,23 @@ module Aws::DynamoDB
     #   Time at which the backup was created.
     #   @return [Time]
     #
+    # @!attribute [rw] backup_expiry_date_time
+    #   Time at which the automatic on-demand backup created by DynamoDB
+    #   will expire. This `SYSTEM` on-demand backup expires automatically 35
+    #   days after its creation.
+    #   @return [Time]
+    #
     # @!attribute [rw] backup_status
     #   Backup can be in one of the following states: CREATING, ACTIVE,
     #   DELETED.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_type
+    #   BackupType:
+    #
+    #   * `USER` - On-demand backup created by you.
+    #
+    #   * `SYSTEM` - On-demand backup automatically created by DynamoDB.
     #   @return [String]
     #
     # @!attribute [rw] backup_size_bytes
@@ -626,7 +656,9 @@ module Aws::DynamoDB
       :backup_arn,
       :backup_name,
       :backup_creation_date_time,
+      :backup_expiry_date_time,
       :backup_status,
+      :backup_type,
       :backup_size_bytes)
       include Aws::Structure
     end
@@ -1295,7 +1327,7 @@ module Aws::DynamoDB
     # on the table.
     #
     # @!attribute [rw] continuous_backups_status
-    #   `ContinuousBackupsStatus` can be one of the following states :
+    #   `ContinuousBackupsStatus` can be one of the following states:
     #   ENABLED, DISABLED
     #   @return [String]
     #
@@ -1528,7 +1560,9 @@ module Aws::DynamoDB
     #           stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
     #         },
     #         sse_specification: {
-    #           enabled: false, # required
+    #           enabled: false,
+    #           sse_type: "AES256", # accepts AES256, KMS
+    #           kms_master_key_id: "KMSMasterKeyId",
     #         },
     #       }
     #
@@ -2216,6 +2250,22 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeEndpointsRequest AWS API Documentation
+    #
+    class DescribeEndpointsRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] endpoints
+    #   @return [Array<Types::Endpoint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeEndpointsResponse AWS API Documentation
+    #
+    class DescribeEndpointsResponse < Struct.new(
+      :endpoints)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeGlobalTableInput
     #   data as a hash:
     #
@@ -2381,6 +2431,20 @@ module Aws::DynamoDB
     #
     class DescribeTimeToLiveOutput < Struct.new(
       :time_to_live_description)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] address
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_period_in_minutes
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Endpoint AWS API Documentation
+    #
+    class Endpoint < Struct.new(
+      :address,
+      :cache_period_in_minutes)
       include Aws::Structure
     end
 
@@ -3482,10 +3546,11 @@ module Aws::DynamoDB
     #         time_range_lower_bound: Time.now,
     #         time_range_upper_bound: Time.now,
     #         exclusive_start_backup_arn: "BackupArn",
+    #         backup_type: "USER", # accepts USER, SYSTEM, ALL
     #       }
     #
     # @!attribute [rw] table_name
-    #   The backups from the table specified by TableName are listed.
+    #   The backups from the table specified by `TableName` are listed.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -3510,6 +3575,18 @@ module Aws::DynamoDB
     #   to fetch the next page of results.
     #   @return [String]
     #
+    # @!attribute [rw] backup_type
+    #   The backups from the table specified by `BackupType` are listed.
+    #
+    #   Where `BackupType` can be:
+    #
+    #   * `USER` - On-demand backup created by you.
+    #
+    #   * `SYSTEM` - On-demand backup automatically created by DynamoDB.
+    #
+    #   * `ALL` - All types of on-demand backups (USER and SYSTEM).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListBackupsInput AWS API Documentation
     #
     class ListBackupsInput < Struct.new(
@@ -3517,7 +3594,8 @@ module Aws::DynamoDB
       :limit,
       :time_range_lower_bound,
       :time_range_upper_bound,
-      :exclusive_start_backup_arn)
+      :exclusive_start_backup_arn,
+      :backup_type)
       include Aws::Structure
     end
 
@@ -5357,6 +5435,8 @@ module Aws::DynamoDB
     #   * `DISABLING` - Server-side encryption is being disabled.
     #
     #   * `DISABLED` - Server-side encryption is disabled.
+    #
+    #   * `UPDATING` - Server-side encryption is being updated.
     #   @return [String]
     #
     # @!attribute [rw] sse_type
@@ -5387,7 +5467,9 @@ module Aws::DynamoDB
     #   data as a hash:
     #
     #       {
-    #         enabled: false, # required
+    #         enabled: false,
+    #         sse_type: "AES256", # accepts AES256, KMS
+    #         kms_master_key_id: "KMSMasterKeyId",
     #       }
     #
     # @!attribute [rw] enabled
@@ -5395,10 +5477,29 @@ module Aws::DynamoDB
     #   disabled (false) on the table.
     #   @return [Boolean]
     #
+    # @!attribute [rw] sse_type
+    #   Server-side encryption type:
+    #
+    #   * `AES256` - Server-side encryption which uses the AES256 algorithm.
+    #
+    #   * `KMS` - Server-side encryption which uses AWS Key Management
+    #     Service. (default)
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_master_key_id
+    #   The KMS Master Key (CMK) which should be used for the KMS
+    #   encryption. To specify a CMK, use its key ID, Amazon Resource Name
+    #   (ARN), alias name, or alias ARN. Note that you should only provide
+    #   this parameter if the key is different from the default DynamoDB KMS
+    #   Master Key alias/aws/dynamodb.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SSESpecification AWS API Documentation
     #
     class SSESpecification < Struct.new(
-      :enabled)
+      :enabled,
+      :sse_type,
+      :kms_master_key_id)
       include Aws::Structure
     end
 
@@ -7124,6 +7225,11 @@ module Aws::DynamoDB
     #           stream_enabled: false,
     #           stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
     #         },
+    #         sse_specification: {
+    #           enabled: false,
+    #           sse_type: "AES256", # accepts AES256, KMS
+    #           kms_master_key_id: "KMSMasterKeyId",
+    #         },
     #       }
     #
     # @!attribute [rw] attribute_definitions
@@ -7171,6 +7277,10 @@ module Aws::DynamoDB
     #    </note>
     #   @return [Types::StreamSpecification]
     #
+    # @!attribute [rw] sse_specification
+    #   The new server-side encryption settings for the specified table.
+    #   @return [Types::SSESpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTableInput AWS API Documentation
     #
     class UpdateTableInput < Struct.new(
@@ -7178,7 +7288,8 @@ module Aws::DynamoDB
       :table_name,
       :provisioned_throughput,
       :global_secondary_index_updates,
-      :stream_specification)
+      :stream_specification,
+      :sse_specification)
       include Aws::Structure
     end
 

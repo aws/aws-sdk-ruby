@@ -410,7 +410,7 @@ module Aws::Snowball
     #         shipping_option: "SECOND_DAY", # required, accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #         notification: {
     #           sns_topic_arn: "SnsTopicARN",
-    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #           notify_all: false,
     #         },
     #         forwarding_address_id: "AddressId",
@@ -559,7 +559,7 @@ module Aws::Snowball
     #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #         notification: {
     #           sns_topic_arn: "SnsTopicARN",
-    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #           notify_all: false,
     #         },
     #         cluster_id: "ClusterId",
@@ -1555,7 +1555,7 @@ module Aws::Snowball
     #
     #       {
     #         sns_topic_arn: "SnsTopicARN",
-    #         job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+    #         job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #         notify_all: false,
     #       }
     #
@@ -1733,7 +1733,7 @@ module Aws::Snowball
     #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #         notification: {
     #           sns_topic_arn: "SnsTopicARN",
-    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #           notify_all: false,
     #         },
     #         forwarding_address_id: "AddressId",
@@ -1807,7 +1807,7 @@ module Aws::Snowball
     #         role_arn: "RoleARN",
     #         notification: {
     #           sns_topic_arn: "SnsTopicARN",
-    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #           notify_all: false,
     #         },
     #         resources: {

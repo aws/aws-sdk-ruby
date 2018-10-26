@@ -559,10 +559,24 @@ module Aws::CloudWatch
     #
     # @!attribute [rw] start_time
     #   The time stamp indicating the earliest data to be returned.
+    #
+    #   For better performance, specify `StartTime` and `EndTime` values
+    #   that align with the value of the metric's `Period` and sync up with
+    #   the beginning and end of an hour. For example, if the `Period` of a
+    #   metric is 5 minutes, specifying 12:05 or 12:30 as `StartTime` can
+    #   get a faster response from CloudWatch then setting 12:07 or 12:29 as
+    #   the `StartTime`.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
     #   The time stamp indicating the latest data to be returned.
+    #
+    #   For better performance, specify `StartTime` and `EndTime` values
+    #   that align with the value of the metric's `Period` and sync up with
+    #   the beginning and end of an hour. For example, if the `Period` of a
+    #   metric is 5 minutes, specifying 12:05 or 12:30 as `EndTime` can get
+    #   a faster response from CloudWatch then setting 12:07 or 12:29 as the
+    #   `EndTime`.
     #   @return [Time]
     #
     # @!attribute [rw] next_token
@@ -731,7 +745,9 @@ module Aws::CloudWatch
     # @!attribute [rw] extended_statistics
     #   The percentile statistics. Specify values between p0.0 and p100.
     #   When calling `GetMetricStatistics`, you must specify either
-    #   `Statistics` or `ExtendedStatistics`, but not both.
+    #   `Statistics` or `ExtendedStatistics`, but not both. Percentile
+    #   statistics are not available for metrics when any of the metric
+    #   values are negative numbers.
     #   @return [Array<String>]
     #
     # @!attribute [rw] unit
@@ -769,6 +785,82 @@ module Aws::CloudWatch
     class GetMetricStatisticsOutput < Struct.new(
       :label,
       :datapoints)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetMetricWidgetImageInput
+    #   data as a hash:
+    #
+    #       {
+    #         metric_widget: "MetricWidget", # required
+    #         output_format: "OutputFormat",
+    #       }
+    #
+    # @!attribute [rw] metric_widget
+    #   A JSON string that defines the bitmap graph to be retrieved. The
+    #   string includes the metrics to include in the graph, statistics,
+    #   annotations, title, axis limits, and so on. You can include only one
+    #   `MetricWidget` parameter in each `GetMetricWidgetImage` call.
+    #
+    #   For more information about the syntax of `MetricWidget` see
+    #   CloudWatch-Metric-Widget-Structure.
+    #
+    #   If any metric on the graph could not load all the requested data
+    #   points, an orange triangle with an exclamation point appears next to
+    #   the graph legend.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_format
+    #   The format of the resulting image. Only PNG images are supported.
+    #
+    #   The default is `png`. If you specify `png`, the API returns an HTTP
+    #   response with the content-type set to `text/xml`. The image data is
+    #   in a `MetricWidgetImage` field. For example:
+    #
+    #   ` <GetMetricWidgetImageResponse
+    #   xmlns="http://monitoring.amazonaws.com/doc/2010-08-01/">`
+    #
+    #   ` <GetMetricWidgetImageResult>`
+    #
+    #   ` <MetricWidgetImage>`
+    #
+    #   ` iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQEAYAAAAip...`
+    #
+    #   ` </MetricWidgetImage>`
+    #
+    #   ` </GetMetricWidgetImageResult>`
+    #
+    #   ` <ResponseMetadata>`
+    #
+    #   ` <RequestId>6f0d4192-4d42-11e8-82c1-f539a07e0e3b</RequestId>`
+    #
+    #   ` </ResponseMetadata>`
+    #
+    #   `</GetMetricWidgetImageResponse>`
+    #
+    #   The `image/png` setting is intended only for custom HTTP requests.
+    #   For most use cases, and all actions using an AWS SDK, you should use
+    #   `png`. If you specify `image/png`, the HTTP response has a
+    #   content-type set to `image/png`, and the body of the response is a
+    #   PNG image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricWidgetImageInput AWS API Documentation
+    #
+    class GetMetricWidgetImageInput < Struct.new(
+      :metric_widget,
+      :output_format)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_widget_image
+    #   The image of the graph, in the output format specified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricWidgetImageOutput AWS API Documentation
+    #
+    class GetMetricWidgetImageOutput < Struct.new(
+      :metric_widget_image)
       include Aws::Structure
     end
 
@@ -1246,6 +1338,8 @@ module Aws::CloudWatch
     #           minimum: 1.0, # required
     #           maximum: 1.0, # required
     #         },
+    #         values: [1.0],
+    #         counts: [1.0],
     #         unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
     #         storage_resolution: 1,
     #       }
@@ -1277,6 +1371,31 @@ module Aws::CloudWatch
     #   The statistical values for the metric.
     #   @return [Types::StatisticSet]
     #
+    # @!attribute [rw] values
+    #   Array of numbers representing the values for the metric during the
+    #   period. Each unique value is listed just once in this array, and the
+    #   corresponding number in the `Counts` array specifies the number of
+    #   times that value occurred during the period. You can include up to
+    #   150 unique values in each `PutMetricData` action that specifies a
+    #   `Values` array.
+    #
+    #   Although the `Values` array accepts numbers of type `Double`,
+    #   CloudWatch rejects values that are either too small or too large.
+    #   Values must be in the range of 8.515920e-109 to 1.174271e+108 (Base
+    #   10) or 2e-360 to 2e360 (Base 2). In addition, special values (for
+    #   example, NaN, +Infinity, -Infinity) are not supported.
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] counts
+    #   Array of numbers that is used along with the `Values` array. Each
+    #   number in the `Count` array is the number of times the corresponding
+    #   value in the `Values` array occurred during the period.
+    #
+    #   If you omit the `Counts` array, the default of 1 is used as the
+    #   value for each count. If you include a `Counts` array, it must
+    #   include the same amount of values as the `Values` array.
+    #   @return [Array<Float>]
+    #
     # @!attribute [rw] unit
     #   The unit of the metric.
     #   @return [String]
@@ -1307,6 +1426,8 @@ module Aws::CloudWatch
       :timestamp,
       :value,
       :statistic_values,
+      :values,
+      :counts,
       :unit,
       :storage_resolution)
       include Aws::Structure
@@ -1463,19 +1584,19 @@ module Aws::CloudWatch
     #   from any other state. Each action is specified as an Amazon Resource
     #   Name (ARN).
     #
-    #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
-    #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover \|
-    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
-    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
-    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
+    #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
+    #   `arn:aws:automate:region:ec2:terminate` \|
+    #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
     #   @return [Array<String>]
     #
     # @!attribute [rw] alarm_actions
@@ -1483,19 +1604,19 @@ module Aws::CloudWatch
     #   state from any other state. Each action is specified as an Amazon
     #   Resource Name (ARN).
     #
-    #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
-    #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover \|
-    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
-    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
-    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
+    #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
+    #   `arn:aws:automate:region:ec2:terminate` \|
+    #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
     #   @return [Array<String>]
     #
     # @!attribute [rw] insufficient_data_actions
@@ -1503,19 +1624,19 @@ module Aws::CloudWatch
     #   `INSUFFICIENT_DATA` state from any other state. Each action is
     #   specified as an Amazon Resource Name (ARN).
     #
-    #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
-    #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover \|
-    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
-    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
-    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
+    #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
+    #   `arn:aws:automate:region:ec2:terminate` \|
+    #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   `>arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
     #   @return [Array<String>]
     #
     # @!attribute [rw] metric_name
@@ -1691,6 +1812,8 @@ module Aws::CloudWatch
     #               minimum: 1.0, # required
     #               maximum: 1.0, # required
     #             },
+    #             values: [1.0],
+    #             counts: [1.0],
     #             unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
     #             storage_resolution: 1,
     #           },
@@ -1706,7 +1829,8 @@ module Aws::CloudWatch
     #   @return [String]
     #
     # @!attribute [rw] metric_data
-    #   The data for the metric.
+    #   The data for the metric. The array can include no more than 20
+    #   metrics per call.
     #   @return [Array<Types::MetricDatum>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricDataInput AWS API Documentation

@@ -702,10 +702,13 @@
         "dnsSearchDomains":{"shape":"StringList"},
         "extraHosts":{"shape":"HostEntryList"},
         "dockerSecurityOptions":{"shape":"StringList"},
+        "interactive":{"shape":"BoxedBoolean"},
+        "pseudoTerminal":{"shape":"BoxedBoolean"},
         "dockerLabels":{"shape":"DockerLabelsMap"},
         "ulimits":{"shape":"UlimitList"},
         "logConfiguration":{"shape":"LogConfiguration"},
-        "healthCheck":{"shape":"HealthCheck"}
+        "healthCheck":{"shape":"HealthCheck"},
+        "systemControls":{"shape":"SystemControls"}
       }
     },
     "ContainerDefinitions":{
@@ -1038,6 +1041,16 @@
       "type":"map",
       "key":{"shape":"String"},
       "value":{"shape":"String"}
+    },
+    "DockerVolumeConfiguration":{
+      "type":"structure",
+      "members":{
+        "scope":{"shape":"Scope"},
+        "autoprovision":{"shape":"BoxedBoolean"},
+        "driver":{"shape":"String"},
+        "driverOpts":{"shape":"StringMap"},
+        "labels":{"shape":"StringMap"}
+      }
     },
     "Double":{"type":"double"},
     "EnvironmentVariables":{
@@ -1532,6 +1545,13 @@
         "DAEMON"
       ]
     },
+    "Scope":{
+      "type":"string",
+      "enum":[
+        "task",
+        "shared"
+      ]
+    },
     "ServerException":{
       "type":"structure",
       "members":{
@@ -1662,6 +1682,11 @@
       "type":"list",
       "member":{"shape":"String"}
     },
+    "StringMap":{
+      "type":"map",
+      "key":{"shape":"String"},
+      "value":{"shape":"String"}
+    },
     "SubmitContainerStateChangeRequest":{
       "type":"structure",
       "members":{
@@ -1699,6 +1724,17 @@
       "members":{
         "acknowledgment":{"shape":"String"}
       }
+    },
+    "SystemControl":{
+      "type":"structure",
+      "members":{
+        "namespace":{"shape":"String"},
+        "value":{"shape":"String"}
+      }
+    },
+    "SystemControls":{
+      "type":"list",
+      "member":{"shape":"SystemControl"}
     },
     "TargetNotFoundException":{
       "type":"structure",
@@ -1943,7 +1979,8 @@
       "type":"structure",
       "members":{
         "name":{"shape":"String"},
-        "host":{"shape":"HostVolumeProperties"}
+        "host":{"shape":"HostVolumeProperties"},
+        "dockerVolumeConfiguration":{"shape":"DockerVolumeConfiguration"}
       }
     },
     "VolumeFrom":{

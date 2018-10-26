@@ -52,6 +52,64 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # The persistent application settings for users of a stack.
+    #
+    # @note When making an API call, you may pass ApplicationSettings
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #         settings_group: "SettingsGroup",
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Enables or disables persistent application settings for users during
+    #   their streaming sessions.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] settings_group
+    #   The path prefix for the S3 bucket where users’ persistent
+    #   application settings are stored. You can allow the same persistent
+    #   application settings to be used across multiple stacks by specifying
+    #   the same settings group for each stack.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ApplicationSettings AWS API Documentation
+    #
+    class ApplicationSettings < Struct.new(
+      :enabled,
+      :settings_group)
+      include Aws::Structure
+    end
+
+    # Describes the persistent application settings for users of a stack.
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether persistent application settings are enabled for
+    #   users during their streaming sessions.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] settings_group
+    #   The path prefix for the S3 bucket where users’ persistent
+    #   application settings are stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The S3 bucket where users’ persistent application settings are
+    #   stored. When persistent application settings are enabled for the
+    #   first time for an account in an AWS Region, an S3 bucket is created.
+    #   The bucket is unique to the AWS account and the Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ApplicationSettingsResponse AWS API Documentation
+    #
+    class ApplicationSettingsResponse < Struct.new(
+      :enabled,
+      :settings_group,
+      :s3_bucket_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateFleetRequest
     #   data as a hash:
     #
@@ -79,6 +137,78 @@ module Aws::AppStream
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AssociateFleetResult AWS API Documentation
     #
     class AssociateFleetResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass BatchAssociateUserStackRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_stack_associations: [ # required
+    #           {
+    #             stack_name: "String", # required
+    #             user_name: "Username", # required
+    #             authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #             send_email_notification: false,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] user_stack_associations
+    #   The list of UserStackAssociation objects.
+    #   @return [Array<Types::UserStackAssociation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/BatchAssociateUserStackRequest AWS API Documentation
+    #
+    class BatchAssociateUserStackRequest < Struct.new(
+      :user_stack_associations)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] errors
+    #   The list of UserStackAssociationError objects.
+    #   @return [Array<Types::UserStackAssociationError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/BatchAssociateUserStackResult AWS API Documentation
+    #
+    class BatchAssociateUserStackResult < Struct.new(
+      :errors)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchDisassociateUserStackRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_stack_associations: [ # required
+    #           {
+    #             stack_name: "String", # required
+    #             user_name: "Username", # required
+    #             authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #             send_email_notification: false,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] user_stack_associations
+    #   The list of UserStackAssociation objects.
+    #   @return [Array<Types::UserStackAssociation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/BatchDisassociateUserStackRequest AWS API Documentation
+    #
+    class BatchDisassociateUserStackRequest < Struct.new(
+      :user_stack_associations)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] errors
+    #   The list of UserStackAssociationError objects.
+    #   @return [Array<Types::UserStackAssociationError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/BatchDisassociateUserStackResult AWS API Documentation
+    #
+    class BatchDisassociateUserStackResult < Struct.new(
+      :errors)
+      include Aws::Structure
+    end
 
     # Describes the capacity for a fleet.
     #
@@ -551,6 +681,10 @@ module Aws::AppStream
     #             permission: "ENABLED", # required, accepts ENABLED, DISABLED
     #           },
     #         ],
+    #         application_settings: {
+    #           enabled: false, # required
+    #           settings_group: "SettingsGroup",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -585,6 +719,13 @@ module Aws::AppStream
     #   streaming sessions. By default, these actions are enabled.
     #   @return [Array<Types::UserSetting>]
     #
+    # @!attribute [rw] application_settings
+    #   The persistent application settings for users of a stack. When these
+    #   settings are enabled, changes that users make to applications and
+    #   Windows settings are automatically saved after each session and
+    #   applied to the next session.
+    #   @return [Types::ApplicationSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStackRequest AWS API Documentation
     #
     class CreateStackRequest < Struct.new(
@@ -594,7 +735,8 @@ module Aws::AppStream
       :storage_connectors,
       :redirect_url,
       :feedback_url,
-      :user_settings)
+      :user_settings,
+      :application_settings)
       include Aws::Structure
     end
 
@@ -680,6 +822,62 @@ module Aws::AppStream
       :expires)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass CreateUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_name: "Username", # required
+    #         message_action: "SUPPRESS", # accepts SUPPRESS, RESEND
+    #         first_name: "UserAttributeValue",
+    #         last_name: "UserAttributeValue",
+    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #       }
+    #
+    # @!attribute [rw] user_name
+    #   The email address of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_action
+    #   The action to take for the welcome email that is sent to a user
+    #   after the user is created in the user pool. If you specify SUPPRESS,
+    #   no email is sent. If you specify RESEND, do not specify the first
+    #   name or last name of the user. If the value is null, the email is
+    #   sent.
+    #
+    #   <note markdown="1"> The temporary password in the welcome email is valid for only 7
+    #   days. If users don’t set their passwords within 7 days, you must
+    #   send them a new welcome email.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] first_name
+    #   The first name, or given name, of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_name
+    #   The last name, or surname, of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_type
+    #   The authentication type for the user. You must specify USERPOOL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUserRequest AWS API Documentation
+    #
+    class CreateUserRequest < Struct.new(
+      :user_name,
+      :message_action,
+      :first_name,
+      :last_name,
+      :authentication_type)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUserResult AWS API Documentation
+    #
+    class CreateUserResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteDirectoryConfigRequest
     #   data as a hash:
@@ -833,6 +1031,34 @@ module Aws::AppStream
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteStackResult AWS API Documentation
     #
     class DeleteStackResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_name: "Username", # required
+    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #       }
+    #
+    # @!attribute [rw] user_name
+    #   The email address of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_type
+    #   The authentication type for the user. You must specify USERPOOL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteUserRequest AWS API Documentation
+    #
+    class DeleteUserRequest < Struct.new(
+      :user_name,
+      :authentication_type)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteUserResult AWS API Documentation
+    #
+    class DeleteUserResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DescribeDirectoryConfigsRequest
     #   data as a hash:
@@ -990,7 +1216,7 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of each results page.
+    #   The maximum size of each page of results.
     #   @return [Integer]
     #
     # @!attribute [rw] shared_aws_account_ids
@@ -999,8 +1225,8 @@ module Aws::AppStream
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token to use to retrieve the next page of results. If
-    #   this value is empty, only the first page is retrieved.
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImagePermissionsRequest AWS API Documentation
@@ -1022,8 +1248,8 @@ module Aws::AppStream
     #   @return [Array<Types::SharedImagePermissions>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token to use to retrieve the next page of results. If
-    #   this value is empty, only the first page is retrieved.
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If there are no more pages, this value is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImagePermissionsResult AWS API Documentation
@@ -1047,7 +1273,7 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] names
-    #   The names of the images to describe.
+    #   The names of the public or private images to describe.
     #   @return [Array<String>]
     #
     # @!attribute [rw] arns
@@ -1059,8 +1285,8 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The pagination token to use to retrieve the next page of results. If
-    #   this value is empty, only the first page is retrieved.
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1083,8 +1309,8 @@ module Aws::AppStream
     #   @return [Array<Types::Image>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token to use to retrieve the next page of results. If
-    #   there are no more pages, this value is null.
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If there are no more pages, this value is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImagesResult AWS API Documentation
@@ -1206,6 +1432,116 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeUserStackAssociationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         stack_name: "String",
+    #         user_name: "Username",
+    #         authentication_type: "API", # accepts API, SAML, USERPOOL
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] stack_name
+    #   The name of the stack that is associated with the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name
+    #   The email address of the user who is associated with the stack.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_type
+    #   The authentication type for the user who is associated with the
+    #   stack. You must specify USERPOOL.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of each page of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeUserStackAssociationsRequest AWS API Documentation
+    #
+    class DescribeUserStackAssociationsRequest < Struct.new(
+      :stack_name,
+      :user_name,
+      :authentication_type,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_stack_associations
+    #   The UserStackAssociation objects.
+    #   @return [Array<Types::UserStackAssociation>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If there are no more pages, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeUserStackAssociationsResult AWS API Documentation
+    #
+    class DescribeUserStackAssociationsResult < Struct.new(
+      :user_stack_associations,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeUsersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] authentication_type
+    #   The authentication type for the users in the user pool to describe.
+    #   You must specify USERPOOL.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of each page of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeUsersRequest AWS API Documentation
+    #
+    class DescribeUsersRequest < Struct.new(
+      :authentication_type,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] users
+    #   Information about users in the user pool.
+    #   @return [Array<Types::User>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If there are no more pages, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeUsersResult AWS API Documentation
+    #
+    class DescribeUsersResult < Struct.new(
+      :users,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Configuration information for the directory used to join domains.
     #
     # @!attribute [rw] directory_name
@@ -1236,6 +1572,34 @@ module Aws::AppStream
       :created_time)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DisableUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_name: "Username", # required
+    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #       }
+    #
+    # @!attribute [rw] user_name
+    #   The email address of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_type
+    #   The authentication type for the user. You must specify USERPOOL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisableUserRequest AWS API Documentation
+    #
+    class DisableUserRequest < Struct.new(
+      :user_name,
+      :authentication_type)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisableUserResult AWS API Documentation
+    #
+    class DisableUserResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DisassociateFleetRequest
     #   data as a hash:
@@ -1293,6 +1657,34 @@ module Aws::AppStream
       :organizational_unit_distinguished_name)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass EnableUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_name: "Username", # required
+    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #       }
+    #
+    # @!attribute [rw] user_name
+    #   The email address of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_type
+    #   The authentication type for the user. You must specify USERPOOL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/EnableUserRequest AWS API Documentation
+    #
+    class EnableUserRequest < Struct.new(
+      :user_name,
+      :authentication_type)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/EnableUserResult AWS API Documentation
+    #
+    class EnableUserResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ExpireSessionRequest
     #   data as a hash:
@@ -1976,6 +2368,10 @@ module Aws::AppStream
     #   streaming sessions. By default these actions are enabled.
     #   @return [Array<Types::UserSetting>]
     #
+    # @!attribute [rw] application_settings
+    #   The persistent application settings for users of the stack.
+    #   @return [Types::ApplicationSettingsResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Stack AWS API Documentation
     #
     class Stack < Struct.new(
@@ -1988,7 +2384,8 @@ module Aws::AppStream
       :redirect_url,
       :feedback_url,
       :stack_errors,
-      :user_settings)
+      :user_settings,
+      :application_settings)
       include Aws::Structure
     end
 
@@ -2482,6 +2879,10 @@ module Aws::AppStream
     #             permission: "ENABLED", # required, accepts ENABLED, DISABLED
     #           },
     #         ],
+    #         application_settings: {
+    #           enabled: false, # required
+    #           settings_group: "SettingsGroup",
+    #         },
     #       }
     #
     # @!attribute [rw] display_name
@@ -2524,6 +2925,13 @@ module Aws::AppStream
     #   streaming sessions. By default, these actions are enabled.
     #   @return [Array<Types::UserSetting>]
     #
+    # @!attribute [rw] application_settings
+    #   The persistent application settings for users of a stack. When these
+    #   settings are enabled, changes that users make to applications and
+    #   Windows settings are automatically saved after each session and
+    #   applied to the next session.
+    #   @return [Types::ApplicationSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStackRequest AWS API Documentation
     #
     class UpdateStackRequest < Struct.new(
@@ -2535,7 +2943,8 @@ module Aws::AppStream
       :redirect_url,
       :feedback_url,
       :attributes_to_delete,
-      :user_settings)
+      :user_settings,
+      :application_settings)
       include Aws::Structure
     end
 
@@ -2547,6 +2956,66 @@ module Aws::AppStream
     #
     class UpdateStackResult < Struct.new(
       :stack)
+      include Aws::Structure
+    end
+
+    # Describes a user in the user pool.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name
+    #   The email address of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether the user in the user pool is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   The status of the user in the user pool. The status can be one of
+    #   the following:
+    #
+    #   * UNCONFIRMED – The user is created but not confirmed.
+    #
+    #   * CONFIRMED – The user is confirmed.
+    #
+    #   * ARCHIVED – The user is no longer active.
+    #
+    #   * COMPROMISED – The user is disabled because of a potential security
+    #     threat.
+    #
+    #   * UNKNOWN – The user status is not known.
+    #   @return [String]
+    #
+    # @!attribute [rw] first_name
+    #   The first name, or given name, of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_name
+    #   The last name, or surname, of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time the user was created in the user pool.
+    #   @return [Time]
+    #
+    # @!attribute [rw] authentication_type
+    #   The authentication type for the user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/User AWS API Documentation
+    #
+    class User < Struct.new(
+      :arn,
+      :user_name,
+      :enabled,
+      :status,
+      :first_name,
+      :last_name,
+      :created_time,
+      :authentication_type)
       include Aws::Structure
     end
 
@@ -2574,6 +3043,71 @@ module Aws::AppStream
     class UserSetting < Struct.new(
       :action,
       :permission)
+      include Aws::Structure
+    end
+
+    # Describes a user in the user pool and the associated stack.
+    #
+    # @note When making an API call, you may pass UserStackAssociation
+    #   data as a hash:
+    #
+    #       {
+    #         stack_name: "String", # required
+    #         user_name: "Username", # required
+    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #         send_email_notification: false,
+    #       }
+    #
+    # @!attribute [rw] stack_name
+    #   The name of the stack that is associated with the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name
+    #   The email address of the user who is associated with the stack.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_type
+    #   The authentication type for the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] send_email_notification
+    #   Specifies whether a welcome email is sent to a user after the user
+    #   is created in the user pool.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UserStackAssociation AWS API Documentation
+    #
+    class UserStackAssociation < Struct.new(
+      :stack_name,
+      :user_name,
+      :authentication_type,
+      :send_email_notification)
+      include Aws::Structure
+    end
+
+    # Describes the error that is returned when a user can’t be associated
+    # with or disassociated from a stack.
+    #
+    # @!attribute [rw] user_stack_association
+    #   Information about the user and associated stack.
+    #   @return [Types::UserStackAssociation]
+    #
+    # @!attribute [rw] error_code
+    #   The error code for the error that is returned when a user can’t be
+    #   associated with or disassociated from a stack.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message for the error that is returned when a user can’t
+    #   be associated with or disassociated from a stack.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UserStackAssociationError AWS API Documentation
+    #
+    class UserStackAssociationError < Struct.new(
+      :user_stack_association,
+      :error_code,
+      :error_message)
       include Aws::Structure
     end
 

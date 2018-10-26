@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 require 'aws-sdk-dynamodb/plugins/extended_retries.rb'
@@ -50,142 +52,162 @@ module Aws::DynamoDB
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
     add_plugin(Aws::DynamoDB::Plugins::ExtendedRetries)
     add_plugin(Aws::DynamoDB::Plugins::SimpleAttributes)
     add_plugin(Aws::DynamoDB::Plugins::CRC32Validation)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :compute_checksums (true)
-    #   When `true`, a CRC32 checksum is computed of every HTTP
-    #   response body and compared against the `X-Amz-Crc32` header.
-    #   If the checksums do not match, the request is re-sent.
-    #   Failures can be retried up to `:retry_limit` times.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Boolean] :compute_checksums (true)
+    #     When `true`, a CRC32 checksum is computed of every HTTP
+    #     response body and compared against the `X-Amz-Crc32` header.
+    #     If the checksums do not match, the request is re-sent.
+    #     Failures can be retried up to `:retry_limit` times.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [Integer] :retry_limit (10)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
     #
-    # @option options [String] :secret_access_key
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
-    # @option options [String] :session_token
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
     #
-    # @option options [Boolean] :simple_attributes (true)
-    #   Enables working with DynamoDB attribute values using
-    #   hashes, arrays, sets, integers, floats, booleans, and nil.
+    #   @option options [Integer] :retry_limit (10)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
     #
-    #   Disabling this option requires that all attribute values have
-    #   their types specified, e.g. `{ s: 'abc' }` instead of simply
-    #   `'abc'`.
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [String] :secret_access_key
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [String] :session_token
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Boolean] :simple_attributes (true)
+    #     Enables working with DynamoDB attribute values using
+    #     hashes, arrays, sets, integers, floats, booleans, and nil.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #     Disabling this option requires that all attribute values have
+    #     their types specified, e.g. `{ s: 'abc' }` instead of simply
+    #     `'abc'`.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -802,7 +824,9 @@ module Aws::DynamoDB
     #   resp.backup_details.backup_name #=> String
     #   resp.backup_details.backup_size_bytes #=> Integer
     #   resp.backup_details.backup_status #=> String, one of "CREATING", "DELETED", "AVAILABLE"
+    #   resp.backup_details.backup_type #=> String, one of "USER", "SYSTEM"
     #   resp.backup_details.backup_creation_date_time #=> Time
+    #   resp.backup_details.backup_expiry_date_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateBackup AWS API Documentation
     #
@@ -1208,7 +1232,9 @@ module Aws::DynamoDB
     #       stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
     #     },
     #     sse_specification: {
-    #       enabled: false, # required
+    #       enabled: false,
+    #       sse_type: "AES256", # accepts AES256, KMS
+    #       kms_master_key_id: "KMSMasterKeyId",
     #     },
     #   })
     #
@@ -1269,7 +1295,7 @@ module Aws::DynamoDB
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
     #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
-    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.table_description.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.table_description.sse_description.kms_master_key_arn #=> String
     #
@@ -1305,7 +1331,9 @@ module Aws::DynamoDB
     #   resp.backup_description.backup_details.backup_name #=> String
     #   resp.backup_description.backup_details.backup_size_bytes #=> Integer
     #   resp.backup_description.backup_details.backup_status #=> String, one of "CREATING", "DELETED", "AVAILABLE"
+    #   resp.backup_description.backup_details.backup_type #=> String, one of "USER", "SYSTEM"
     #   resp.backup_description.backup_details.backup_creation_date_time #=> Time
+    #   resp.backup_description.backup_details.backup_expiry_date_time #=> Time
     #   resp.backup_description.source_table_details.table_name #=> String
     #   resp.backup_description.source_table_details.table_id #=> String
     #   resp.backup_description.source_table_details.table_arn #=> String
@@ -1339,7 +1367,7 @@ module Aws::DynamoDB
     #   resp.backup_description.source_table_feature_details.stream_description.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.backup_description.source_table_feature_details.time_to_live_description.time_to_live_status #=> String, one of "ENABLING", "DISABLING", "ENABLED", "DISABLED"
     #   resp.backup_description.source_table_feature_details.time_to_live_description.attribute_name #=> String
-    #   resp.backup_description.source_table_feature_details.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.backup_description.source_table_feature_details.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.backup_description.source_table_feature_details.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.backup_description.source_table_feature_details.sse_description.kms_master_key_arn #=> String
     #
@@ -1738,7 +1766,7 @@ module Aws::DynamoDB
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
     #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
-    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.table_description.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.table_description.sse_description.kms_master_key_arn #=> String
     #
@@ -1775,7 +1803,9 @@ module Aws::DynamoDB
     #   resp.backup_description.backup_details.backup_name #=> String
     #   resp.backup_description.backup_details.backup_size_bytes #=> Integer
     #   resp.backup_description.backup_details.backup_status #=> String, one of "CREATING", "DELETED", "AVAILABLE"
+    #   resp.backup_description.backup_details.backup_type #=> String, one of "USER", "SYSTEM"
     #   resp.backup_description.backup_details.backup_creation_date_time #=> Time
+    #   resp.backup_description.backup_details.backup_expiry_date_time #=> Time
     #   resp.backup_description.source_table_details.table_name #=> String
     #   resp.backup_description.source_table_details.table_id #=> String
     #   resp.backup_description.source_table_details.table_arn #=> String
@@ -1809,7 +1839,7 @@ module Aws::DynamoDB
     #   resp.backup_description.source_table_feature_details.stream_description.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.backup_description.source_table_feature_details.time_to_live_description.time_to_live_status #=> String, one of "ENABLING", "DISABLING", "ENABLED", "DISABLED"
     #   resp.backup_description.source_table_feature_details.time_to_live_description.attribute_name #=> String
-    #   resp.backup_description.source_table_feature_details.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.backup_description.source_table_feature_details.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.backup_description.source_table_feature_details.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.backup_description.source_table_feature_details.sse_description.kms_master_key_arn #=> String
     #
@@ -1865,6 +1895,25 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def describe_continuous_backups(params = {}, options = {})
       req = build_request(:describe_continuous_backups, params)
+      req.send_request(options)
+    end
+
+    # @return [Types::DescribeEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEndpointsResponse#endpoints #endpoints} => Array&lt;Types::Endpoint&gt;
+    #
+    # @example Response structure
+    #
+    #   resp.endpoints #=> Array
+    #   resp.endpoints[0].address #=> String
+    #   resp.endpoints[0].cache_period_in_minutes #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeEndpoints AWS API Documentation
+    #
+    # @overload describe_endpoints(params = {})
+    # @param [Hash] params ({})
+    def describe_endpoints(params = {}, options = {})
+      req = build_request(:describe_endpoints, params)
       req.send_request(options)
     end
 
@@ -2217,7 +2266,7 @@ module Aws::DynamoDB
     #   resp.table.restore_summary.source_table_arn #=> String
     #   resp.table.restore_summary.restore_date_time #=> Time
     #   resp.table.restore_summary.restore_in_progress #=> Boolean
-    #   resp.table.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.table.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.table.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.table.sse_description.kms_master_key_arn #=> String
     #
@@ -2470,7 +2519,7 @@ module Aws::DynamoDB
     # You can call `ListBackups` a maximum of 5 times per second.
     #
     # @option params [String] :table_name
-    #   The backups from the table specified by TableName are listed.
+    #   The backups from the table specified by `TableName` are listed.
     #
     # @option params [Integer] :limit
     #   Maximum number of backups to return at once.
@@ -2490,6 +2539,17 @@ module Aws::DynamoDB
     #   `ExclusiveStartBackupArn` of a new `ListBackups` operation in order to
     #   fetch the next page of results.
     #
+    # @option params [String] :backup_type
+    #   The backups from the table specified by `BackupType` are listed.
+    #
+    #   Where `BackupType` can be:
+    #
+    #   * `USER` - On-demand backup created by you.
+    #
+    #   * `SYSTEM` - On-demand backup automatically created by DynamoDB.
+    #
+    #   * `ALL` - All types of on-demand backups (USER and SYSTEM).
+    #
     # @return [Types::ListBackupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListBackupsOutput#backup_summaries #backup_summaries} => Array&lt;Types::BackupSummary&gt;
@@ -2503,6 +2563,7 @@ module Aws::DynamoDB
     #     time_range_lower_bound: Time.now,
     #     time_range_upper_bound: Time.now,
     #     exclusive_start_backup_arn: "BackupArn",
+    #     backup_type: "USER", # accepts USER, SYSTEM, ALL
     #   })
     #
     # @example Response structure
@@ -2514,7 +2575,9 @@ module Aws::DynamoDB
     #   resp.backup_summaries[0].backup_arn #=> String
     #   resp.backup_summaries[0].backup_name #=> String
     #   resp.backup_summaries[0].backup_creation_date_time #=> Time
+    #   resp.backup_summaries[0].backup_expiry_date_time #=> Time
     #   resp.backup_summaries[0].backup_status #=> String, one of "CREATING", "DELETED", "AVAILABLE"
+    #   resp.backup_summaries[0].backup_type #=> String, one of "USER", "SYSTEM"
     #   resp.backup_summaries[0].backup_size_bytes #=> Integer
     #   resp.last_evaluated_backup_arn #=> String
     #
@@ -3631,7 +3694,7 @@ module Aws::DynamoDB
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
     #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
-    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.table_description.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.table_description.sse_description.kms_master_key_arn #=> String
     #
@@ -3768,7 +3831,7 @@ module Aws::DynamoDB
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
     #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
-    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.table_description.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.table_description.sse_description.kms_master_key_arn #=> String
     #
@@ -5058,6 +5121,9 @@ module Aws::DynamoDB
     #
     #    </note>
     #
+    # @option params [Types::SSESpecification] :sse_specification
+    #   The new server-side encryption settings for the specified table.
+    #
     # @return [Types::UpdateTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateTableOutput#table_description #table_description} => Types::TableDescription
@@ -5161,6 +5227,11 @@ module Aws::DynamoDB
     #       stream_enabled: false,
     #       stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
     #     },
+    #     sse_specification: {
+    #       enabled: false,
+    #       sse_type: "AES256", # accepts AES256, KMS
+    #       kms_master_key_id: "KMSMasterKeyId",
+    #     },
     #   })
     #
     # @example Response structure
@@ -5220,7 +5291,7 @@ module Aws::DynamoDB
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
     #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
-    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.table_description.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.table_description.sse_description.kms_master_key_arn #=> String
     #
@@ -5318,7 +5389,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

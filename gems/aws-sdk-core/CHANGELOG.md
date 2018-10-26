@@ -1,6 +1,84 @@
 Unreleased Changes
 ------------------
 
+3.35.0 (2018-10-24)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.34.0 (2018-10-23)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Allow 429 response code to trigger throttle detection
+
+3.33.0 (2018-10-22)
+------------------
+
+* Feature - Update to code paths and plugins for future SDK instrumentation and telemetry.
+
+3.32.0 (2018-10-18)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.31.0 (2018-10-16)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.30.0 (2018-10-04)
+------------------
+
+* Feature - Adds to code paths and plugins for future SDK instrumentation and telemetry.
+
+3.29.0 (2018-09-28)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.28.0 (2018-09-25)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.27.1 (2018-09-21)
+------------------
+
+* Issue - Fixes a bug in the `:response_target` plugin error callback. Under certain circumstances a special body object can be removed before its error callback is triggered, breaking retry logic.
+
+3.27.0 (2018-09-06)
+------------------
+
+* Feature - Adds code paths and plugins for future SDK instrumentation and telemetry to aws-sdk-sts.
+
+3.26.0 (2018-09-05)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Adds code paths and plugins for future SDK instrumentation and telemetry.
+
+3.25.0 (2018-08-29)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+* Issue - Add `:exclude_presign` option for #api_requests at client stubbing to allow excluding non-sent request from presigned url (Github Issue #1866)
+
+3.24.1 (2018-08-13)
+------------------
+
+* Issue - Update `ca-bundle.crt` file with newer root certificate authorities.
+
+3.24.0 (2018-08-03)
+------------------
+
+* Feature - Extensible Credential Providers, allows you to declare an executable to be run that outputs the credentials as a JSON payload allowing you to develop custom credential providers and easily add them to the credential resolution chain, [Docs](https://docs.aws.amazon.com/cli/latest/topic/config-vars.html#sourcing-credentials-from-external-processes)
+
 3.23.0 (2018-07-31)
 ------------------
 

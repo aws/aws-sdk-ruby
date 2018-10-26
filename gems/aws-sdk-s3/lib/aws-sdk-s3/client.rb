@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
 require 'aws-sdk-s3/plugins/accelerate.rb'
 require 'aws-sdk-s3/plugins/dualstack.rb'
@@ -61,6 +63,8 @@ module Aws::S3
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::Protocols::RestXml)
     add_plugin(Aws::S3::Plugins::Accelerate)
     add_plugin(Aws::S3::Plugins::Dualstack)
@@ -78,136 +82,154 @@ module Aws::S3
     add_plugin(Aws::S3::Plugins::BucketNameRestrictions)
     add_plugin(Aws::Plugins::EventStreamConfiguration)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :compute_checksums (true)
-    #   When `true` a MD5 checksum will be computed for every request that
-    #   sends a body.  When `false`, MD5 checksums will only be computed
-    #   for operations that require them.  Checksum errors returned by Amazon
-    #   S3 are automatically retried up to `:retry_limit` times.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Proc] :event_stream_handler
-    #   When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Boolean] :follow_redirects (true)
-    #   When `true`, this client will follow 307 redirects returned
-    #   by Amazon S3.
+    #   @option options [Boolean] :compute_checksums (true)
+    #     When `true` a MD5 checksum will be computed for every request that
+    #     sends a body.  When `false`, MD5 checksums will only be computed
+    #     for operations that require them.  Checksum errors returned by Amazon
+    #     S3 are automatically retried up to `:retry_limit` times.
     #
-    # @option options [Boolean] :force_path_style (false)
-    #   When set to `true`, the bucket name is always left in the
-    #   request URI and never moved to the host as a sub-domain.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Proc] :event_stream_handler
+    #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Boolean] :follow_redirects (true)
+    #     When `true`, this client will follow 307 redirects returned
+    #     by Amazon S3.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Boolean] :force_path_style (false)
+    #     When set to `true`, the bucket name is always left in the
+    #     request URI and never moved to the host as a sub-domain.
     #
-    # @option options [Boolean] :require_https_for_sse_cpk (true)
-    #   When `true`, the endpoint **must** be HTTPS for all operations
-    #   where server-side-encryption is used with customer-provided keys.
-    #   This should only be disabled for local testing.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Boolean] :require_https_for_sse_cpk (true)
+    #     When `true`, the endpoint **must** be HTTPS for all operations
+    #     where server-side-encryption is used with customer-provided keys.
+    #     This should only be disabled for local testing.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
     #
-    # @option options [String] :session_token
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
-    # @option options [Boolean] :use_accelerate_endpoint (false)
-    #   When set to `true`, accelerated bucket endpoints will be used
-    #   for all object operations. You must first enable accelerate for
-    #   each bucket.  [Go here for more information](http://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html).
+    #   @option options [String] :secret_access_key
     #
-    # @option options [Boolean] :use_dualstack_endpoint (false)
-    #   When set to `true`, IPv6-compatible bucket endpoints will be used
-    #   for all operations.
+    #   @option options [String] :session_token
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :use_accelerate_endpoint (false)
+    #     When set to `true`, accelerated bucket endpoints will be used
+    #     for all object operations. You must first enable accelerate for
+    #     each bucket.  [Go here for more information](http://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html).
+    #
+    #   @option options [Boolean] :use_dualstack_endpoint (false)
+    #     When set to `true`, IPv6-compatible bucket endpoints will be used
+    #     for all operations.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -1096,6 +1118,17 @@ module Aws::S3
     # Deletes the replication configuration from the bucket.
     #
     # @option params [required, String] :bucket
+    #   Deletes the replication subresource associated with the specified
+    #   bucket.
+    #
+    #   <note markdown="1"> There is usually some time lag before replication configuration
+    #   deletion is fully propagated to all the Amazon S3 systems.
+    #
+    #    </note>
+    #
+    #   For more information, see [Cross-Region Replication (CRR)](
+    #   https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html) in the
+    #   Amazon S3 Developer Guide.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1212,15 +1245,6 @@ module Aws::S3
     #   * {Types::DeleteObjectOutput#request_charged #request_charged} => String
     #
     #
-    # @example Example: To delete an object (from a non-versioned bucket)
-    #
-    #   # The following example deletes an object from a non-versioned bucket.
-    #
-    #   resp = client.delete_object({
-    #     bucket: "ExampleBucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
     # @example Example: To delete an object
     #
     #   # The following example deletes an object from an S3 bucket.
@@ -1233,6 +1257,15 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #   }
+    #
+    # @example Example: To delete an object (from a non-versioned bucket)
+    #
+    #   # The following example deletes an object from a non-versioned bucket.
+    #
+    #   resp = client.delete_object({
+    #     bucket: "ExampleBucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2210,7 +2243,15 @@ module Aws::S3
     #   resp.replication_configuration.role #=> String
     #   resp.replication_configuration.rules #=> Array
     #   resp.replication_configuration.rules[0].id #=> String
+    #   resp.replication_configuration.rules[0].priority #=> Integer
     #   resp.replication_configuration.rules[0].prefix #=> String
+    #   resp.replication_configuration.rules[0].filter.prefix #=> String
+    #   resp.replication_configuration.rules[0].filter.tag.key #=> String
+    #   resp.replication_configuration.rules[0].filter.tag.value #=> String
+    #   resp.replication_configuration.rules[0].filter.and.prefix #=> String
+    #   resp.replication_configuration.rules[0].filter.and.tags #=> Array
+    #   resp.replication_configuration.rules[0].filter.and.tags[0].key #=> String
+    #   resp.replication_configuration.rules[0].filter.and.tags[0].value #=> String
     #   resp.replication_configuration.rules[0].status #=> String, one of "Enabled", "Disabled"
     #   resp.replication_configuration.rules[0].source_selection_criteria.sse_kms_encrypted_objects.status #=> String, one of "Enabled", "Disabled"
     #   resp.replication_configuration.rules[0].destination.bucket #=> String
@@ -2218,6 +2259,7 @@ module Aws::S3
     #   resp.replication_configuration.rules[0].destination.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA"
     #   resp.replication_configuration.rules[0].destination.access_control_translation.owner #=> String, one of "Destination"
     #   resp.replication_configuration.rules[0].destination.encryption_configuration.replica_kms_key_id #=> String
+    #   resp.replication_configuration.rules[0].delete_marker_replication.status #=> String, one of "Enabled", "Disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketReplication AWS API Documentation
     #
@@ -4877,7 +4919,9 @@ module Aws::S3
     end
 
     # Creates a new replication configuration (or replaces an existing one,
-    # if present).
+    # if present). For more information, see [Cross-Region Replication
+    # (CRR)]( https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html) in
+    # the Amazon S3 Developer Guide.
     #
     # @option params [required, String] :bucket
     #
@@ -4921,7 +4965,24 @@ module Aws::S3
     #       rules: [ # required
     #         {
     #           id: "ID",
-    #           prefix: "Prefix", # required
+    #           priority: 1,
+    #           prefix: "Prefix",
+    #           filter: {
+    #             prefix: "Prefix",
+    #             tag: {
+    #               key: "ObjectKey", # required
+    #               value: "Value", # required
+    #             },
+    #             and: {
+    #               prefix: "Prefix",
+    #               tags: [
+    #                 {
+    #                   key: "ObjectKey", # required
+    #                   value: "Value", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
     #           status: "Enabled", # required, accepts Enabled, Disabled
     #           source_selection_criteria: {
     #             sse_kms_encrypted_objects: {
@@ -4938,6 +4999,9 @@ module Aws::S3
     #             encryption_configuration: {
     #               replica_kms_key_id: "ReplicaKmsKeyID",
     #             },
+    #           },
+    #           delete_marker_replication: {
+    #             status: "Enabled", # accepts Enabled, Disabled
     #           },
     #         },
     #       ],
@@ -5289,24 +5353,40 @@ module Aws::S3
     #   * {Types::PutObjectOutput#request_charged #request_charged} => String
     #
     #
-    # @example Example: To upload an object and specify server-side encryption and object tags
+    # @example Example: To create an object.
     #
-    #   # The following example uploads and object. The request specifies the optional server-side encryption option. The request
-    #   # also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.
+    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
     #
     #   resp = client.put_object({
     #     body: "filetoupload", 
     #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
+    #     key: "objectkey", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
+    #   }
+    #
+    # @example Example: To upload an object (specify optional headers)
+    #
+    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
+    #   # storage class and use server-side encryption.
+    #
+    #   resp = client.put_object({
+    #     body: "HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
     #     server_side_encryption: "AES256", 
-    #     tagging: "key1=value1&key2=value2", 
+    #     storage_class: "STANDARD_IA", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
     #     server_side_encryption: "AES256", 
-    #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
+    #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
     #   }
     #
     # @example Example: To upload an object and specify canned ACL.
@@ -5344,40 +5424,6 @@ module Aws::S3
     #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
     #   }
     #
-    # @example Example: To create an object.
-    #
-    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "objectkey", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
-    #   }
-    #
-    # @example Example: To upload an object and specify optional tags
-    #
-    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
-    #   # S3 returns version ID of the newly created object.
-    #
-    #   resp = client.put_object({
-    #     body: "c:\\HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #     tagging: "key1=value1&key2=value2", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
-    #   }
-    #
     # @example Example: To upload object and specify user-defined metadata
     #
     #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
@@ -5399,24 +5445,42 @@ module Aws::S3
     #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
     #   }
     #
-    # @example Example: To upload an object (specify optional headers)
+    # @example Example: To upload an object and specify optional tags
     #
-    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
-    #   # storage class and use server-side encryption.
+    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
+    #   # S3 returns version ID of the newly created object.
     #
     #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
+    #     body: "c:\\HappyFace.jpg", 
     #     bucket: "examplebucket", 
     #     key: "HappyFace.jpg", 
+    #     tagging: "key1=value1&key2=value2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
+    #   }
+    #
+    # @example Example: To upload an object and specify server-side encryption and object tags
+    #
+    #   # The following example uploads and object. The request specifies the optional server-side encryption option. The request
+    #   # also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
     #     server_side_encryption: "AES256", 
-    #     storage_class: "STANDARD_IA", 
+    #     tagging: "key1=value1&key2=value2", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
     #     server_side_encryption: "AES256", 
-    #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
+    #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
     #   }
     #
     # @example Streaming a file from disk
@@ -5734,6 +5798,8 @@ module Aws::S3
     #           json: {
     #             type: "DOCUMENT", # accepts DOCUMENT, LINES
     #           },
+    #           parquet: {
+    #           },
     #         },
     #         expression_type: "SQL", # required, accepts SQL
     #         expression: "Expression", # required
@@ -6014,6 +6080,8 @@ module Aws::S3
     #       json: {
     #         type: "DOCUMENT", # accepts DOCUMENT, LINES
     #       },
+    #       parquet: {
+    #       },
     #     },
     #     output_serialization: { # required
     #       csv: {
@@ -6287,6 +6355,26 @@ module Aws::S3
     #   * {Types::UploadPartCopyOutput#request_charged #request_charged} => String
     #
     #
+    # @example Example: To upload a part by copying data from an existing object as data source
+    #
+    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
+    #
+    #   resp = client.upload_part_copy({
+    #     bucket: "examplebucket", 
+    #     copy_source: "/bucketname/sourceobjectkey", 
+    #     key: "examplelargeobject", 
+    #     part_number: 1, 
+    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     copy_part_result: {
+    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
+    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
+    #     }, 
+    #   }
+    #
     # @example Example: To upload a part by copying byte range from an existing object as data source
     #
     #   # The following example uploads a part of a multipart upload by copying a specified byte range from an existing object as
@@ -6306,26 +6394,6 @@ module Aws::S3
     #     copy_part_result: {
     #       etag: "\"65d16d19e65a7508a51f043180edcc36\"", 
     #       last_modified: Time.parse("2016-12-29T21:44:28.000Z"), 
-    #     }, 
-    #   }
-    #
-    # @example Example: To upload a part by copying data from an existing object as data source
-    #
-    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
-    #
-    #   resp = client.upload_part_copy({
-    #     bucket: "examplebucket", 
-    #     copy_source: "/bucketname/sourceobjectkey", 
-    #     key: "examplelargeobject", 
-    #     part_number: 1, 
-    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     copy_part_result: {
-    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
-    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
     #     }, 
     #   }
     #
@@ -6384,7 +6452,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

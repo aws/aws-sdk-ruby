@@ -104,7 +104,7 @@ A delay randomiser function used by the default backoff function. Some predefine
         end
 
         def throttling_error?
-          !!(THROTTLING_ERRORS.include?(@name) || @name.match(/throttl/i))
+          !!(THROTTLING_ERRORS.include?(@name) || @name.match(/throttl/i) || @http_status_code == 429)
         end
 
         def checksum?
@@ -138,8 +138,20 @@ A delay randomiser function used by the default backoff function. Some predefine
             false
           end
         end
+          
+        def retryable?(context)
+          (expired_credentials? and refreshable_credentials?(context)) or
+            throttling_error? or
+            checksum? or
+            networking? or
+            server?
+        end
 
         private
+
+        def refreshable_credentials?(context)
+          context.config.credentials.respond_to?(:refresh!)
+        end
 
         def extract_name(error)
           if error.is_a?(Errors::ServiceError)
@@ -193,7 +205,7 @@ A delay randomiser function used by the default backoff function. Some predefine
         end
 
         def should_retry?(context, error)
-          retryable?(context, error) and
+          error.retryable?(context) and
           context.retries < retry_limit(context) and
           response_truncatable?(context)
         end

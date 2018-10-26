@@ -400,6 +400,7 @@ module Aws::ConfigService
     ConfigRule.add_member(:input_parameters, Shapes::ShapeRef.new(shape: StringWithCharLimit1024, location_name: "InputParameters"))
     ConfigRule.add_member(:maximum_execution_frequency, Shapes::ShapeRef.new(shape: MaximumExecutionFrequency, location_name: "MaximumExecutionFrequency"))
     ConfigRule.add_member(:config_rule_state, Shapes::ShapeRef.new(shape: ConfigRuleState, location_name: "ConfigRuleState"))
+    ConfigRule.add_member(:created_by, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "CreatedBy"))
     ConfigRule.struct_class = Types::ConfigRule
 
     ConfigRuleComplianceFilters.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName"))
@@ -921,12 +922,16 @@ module Aws::ConfigService
       api.version = "2014-11-12"
 
       api.metadata = {
+        "apiVersion" => "2014-11-12",
         "endpointPrefix" => "config",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "Config Service",
         "serviceFullName" => "AWS Config",
+        "serviceId" => "Config Service",
         "signatureVersion" => "v4",
         "targetPrefix" => "StarlingDoveService",
+        "uid" => "config-2014-11-12",
       }
 
       api.add_operation(:batch_get_resource_config, Seahorse::Model::Operation.new.tap do |o|

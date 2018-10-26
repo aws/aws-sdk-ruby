@@ -277,12 +277,16 @@ module Aws::ACMPCA
       api.version = "2017-08-22"
 
       api.metadata = {
+        "apiVersion" => "2017-08-22",
         "endpointPrefix" => "acm-pca",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "ACM-PCA",
         "serviceFullName" => "AWS Certificate Manager Private Certificate Authority",
+        "serviceId" => "ACM PCA",
         "signatureVersion" => "v4",
         "targetPrefix" => "ACMPrivateCA",
+        "uid" => "acm-pca-2017-08-22",
       }
 
       api.add_operation(:create_certificate_authority, Seahorse::Model::Operation.new.tap do |o|

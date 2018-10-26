@@ -215,7 +215,7 @@ module Aws::RDS
     #   The description for the DB parameter group.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -249,20 +249,20 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Cannot be null, empty, or blank
+    #   * Can't be null, empty, or blank
     #
     #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-db-parameter-group`
     # @option options [required, String] :target_db_parameter_group_description
     #   A description for the copied DB parameter group.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -304,6 +304,7 @@ module Aws::RDS
     #         is_modifiable: false,
     #         minimum_engine_version: "String",
     #         apply_method: "immediate", # accepts immediate, pending-reboot
+    #         supported_engine_modes: ["String"],
     #       },
     #     ],
     #   })
@@ -349,6 +350,7 @@ module Aws::RDS
     #         is_modifiable: false,
     #         minimum_engine_version: "String",
     #         apply_method: "immediate", # accepts immediate, pending-reboot
+    #         supported_engine_modes: ["String"],
     #       },
     #     ],
     #   })

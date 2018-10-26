@@ -41,6 +41,10 @@ module Aws::AutoScaling
     AutoScalingInstancesType = Shapes::StructureShape.new(name: 'AutoScalingInstancesType')
     AutoScalingNotificationTypes = Shapes::ListShape.new(name: 'AutoScalingNotificationTypes')
     AvailabilityZones = Shapes::ListShape.new(name: 'AvailabilityZones')
+    BatchDeleteScheduledActionAnswer = Shapes::StructureShape.new(name: 'BatchDeleteScheduledActionAnswer')
+    BatchDeleteScheduledActionType = Shapes::StructureShape.new(name: 'BatchDeleteScheduledActionType')
+    BatchPutScheduledUpdateGroupActionAnswer = Shapes::StructureShape.new(name: 'BatchPutScheduledUpdateGroupActionAnswer')
+    BatchPutScheduledUpdateGroupActionType = Shapes::StructureShape.new(name: 'BatchPutScheduledUpdateGroupActionType')
     BlockDeviceEbsDeleteOnTermination = Shapes::BooleanShape.new(name: 'BlockDeviceEbsDeleteOnTermination')
     BlockDeviceEbsEncrypted = Shapes::BooleanShape.new(name: 'BlockDeviceEbsEncrypted')
     BlockDeviceEbsIops = Shapes::IntegerShape.new(name: 'BlockDeviceEbsIops')
@@ -101,6 +105,8 @@ module Aws::AutoScaling
     ExecutePolicyType = Shapes::StructureShape.new(name: 'ExecutePolicyType')
     ExitStandbyAnswer = Shapes::StructureShape.new(name: 'ExitStandbyAnswer')
     ExitStandbyQuery = Shapes::StructureShape.new(name: 'ExitStandbyQuery')
+    FailedScheduledUpdateGroupActionRequest = Shapes::StructureShape.new(name: 'FailedScheduledUpdateGroupActionRequest')
+    FailedScheduledUpdateGroupActionRequests = Shapes::ListShape.new(name: 'FailedScheduledUpdateGroupActionRequests')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     Filters = Shapes::ListShape.new(name: 'Filters')
     ForceDelete = Shapes::BooleanShape.new(name: 'ForceDelete')
@@ -195,6 +201,8 @@ module Aws::AutoScaling
     ScheduledActionNames = Shapes::ListShape.new(name: 'ScheduledActionNames')
     ScheduledActionsType = Shapes::StructureShape.new(name: 'ScheduledActionsType')
     ScheduledUpdateGroupAction = Shapes::StructureShape.new(name: 'ScheduledUpdateGroupAction')
+    ScheduledUpdateGroupActionRequest = Shapes::StructureShape.new(name: 'ScheduledUpdateGroupActionRequest')
+    ScheduledUpdateGroupActionRequests = Shapes::ListShape.new(name: 'ScheduledUpdateGroupActionRequests')
     ScheduledUpdateGroupActions = Shapes::ListShape.new(name: 'ScheduledUpdateGroupActions')
     SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
     ServiceLinkedRoleFailure = Shapes::StructureShape.new(name: 'ServiceLinkedRoleFailure')
@@ -342,6 +350,20 @@ module Aws::AutoScaling
     AutoScalingNotificationTypes.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
 
     AvailabilityZones.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
+
+    BatchDeleteScheduledActionAnswer.add_member(:failed_scheduled_actions, Shapes::ShapeRef.new(shape: FailedScheduledUpdateGroupActionRequests, location_name: "FailedScheduledActions"))
+    BatchDeleteScheduledActionAnswer.struct_class = Types::BatchDeleteScheduledActionAnswer
+
+    BatchDeleteScheduledActionType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "AutoScalingGroupName"))
+    BatchDeleteScheduledActionType.add_member(:scheduled_action_names, Shapes::ShapeRef.new(shape: ScheduledActionNames, required: true, location_name: "ScheduledActionNames"))
+    BatchDeleteScheduledActionType.struct_class = Types::BatchDeleteScheduledActionType
+
+    BatchPutScheduledUpdateGroupActionAnswer.add_member(:failed_scheduled_update_group_actions, Shapes::ShapeRef.new(shape: FailedScheduledUpdateGroupActionRequests, location_name: "FailedScheduledUpdateGroupActions"))
+    BatchPutScheduledUpdateGroupActionAnswer.struct_class = Types::BatchPutScheduledUpdateGroupActionAnswer
+
+    BatchPutScheduledUpdateGroupActionType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "AutoScalingGroupName"))
+    BatchPutScheduledUpdateGroupActionType.add_member(:scheduled_update_group_actions, Shapes::ShapeRef.new(shape: ScheduledUpdateGroupActionRequests, required: true, location_name: "ScheduledUpdateGroupActions"))
+    BatchPutScheduledUpdateGroupActionType.struct_class = Types::BatchPutScheduledUpdateGroupActionType
 
     BlockDeviceMapping.add_member(:virtual_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "VirtualName"))
     BlockDeviceMapping.add_member(:device_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "DeviceName"))
@@ -591,6 +613,13 @@ module Aws::AutoScaling
     ExitStandbyQuery.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "AutoScalingGroupName"))
     ExitStandbyQuery.struct_class = Types::ExitStandbyQuery
 
+    FailedScheduledUpdateGroupActionRequest.add_member(:scheduled_action_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "ScheduledActionName"))
+    FailedScheduledUpdateGroupActionRequest.add_member(:error_code, Shapes::ShapeRef.new(shape: XmlStringMaxLen64, location_name: "ErrorCode"))
+    FailedScheduledUpdateGroupActionRequest.add_member(:error_message, Shapes::ShapeRef.new(shape: XmlString, location_name: "ErrorMessage"))
+    FailedScheduledUpdateGroupActionRequest.struct_class = Types::FailedScheduledUpdateGroupActionRequest
+
+    FailedScheduledUpdateGroupActionRequests.member = Shapes::ShapeRef.new(shape: FailedScheduledUpdateGroupActionRequest)
+
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: XmlString, location_name: "Name"))
     Filter.add_member(:values, Shapes::ShapeRef.new(shape: Values, location_name: "Values"))
     Filter.struct_class = Types::Filter
@@ -836,6 +865,17 @@ module Aws::AutoScaling
     ScheduledUpdateGroupAction.add_member(:desired_capacity, Shapes::ShapeRef.new(shape: AutoScalingGroupDesiredCapacity, location_name: "DesiredCapacity"))
     ScheduledUpdateGroupAction.struct_class = Types::ScheduledUpdateGroupAction
 
+    ScheduledUpdateGroupActionRequest.add_member(:scheduled_action_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "ScheduledActionName"))
+    ScheduledUpdateGroupActionRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: TimestampType, location_name: "StartTime"))
+    ScheduledUpdateGroupActionRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: TimestampType, location_name: "EndTime"))
+    ScheduledUpdateGroupActionRequest.add_member(:recurrence, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "Recurrence"))
+    ScheduledUpdateGroupActionRequest.add_member(:min_size, Shapes::ShapeRef.new(shape: AutoScalingGroupMinSize, location_name: "MinSize"))
+    ScheduledUpdateGroupActionRequest.add_member(:max_size, Shapes::ShapeRef.new(shape: AutoScalingGroupMaxSize, location_name: "MaxSize"))
+    ScheduledUpdateGroupActionRequest.add_member(:desired_capacity, Shapes::ShapeRef.new(shape: AutoScalingGroupDesiredCapacity, location_name: "DesiredCapacity"))
+    ScheduledUpdateGroupActionRequest.struct_class = Types::ScheduledUpdateGroupActionRequest
+
+    ScheduledUpdateGroupActionRequests.member = Shapes::ShapeRef.new(shape: ScheduledUpdateGroupActionRequest)
+
     ScheduledUpdateGroupActions.member = Shapes::ShapeRef.new(shape: ScheduledUpdateGroupAction)
 
     SecurityGroups.member = Shapes::ShapeRef.new(shape: XmlString)
@@ -932,10 +972,13 @@ module Aws::AutoScaling
       api.version = "2011-01-01"
 
       api.metadata = {
+        "apiVersion" => "2011-01-01",
         "endpointPrefix" => "autoscaling",
         "protocol" => "query",
         "serviceFullName" => "Auto Scaling",
+        "serviceId" => "Auto Scaling",
         "signatureVersion" => "v4",
+        "uid" => "autoscaling-2011-01-01",
         "xmlNamespace" => "http://autoscaling.amazonaws.com/doc/2011-01-01/",
       }
 
@@ -967,6 +1010,26 @@ module Aws::AutoScaling
         o.output = Shapes::ShapeRef.new(shape: AttachLoadBalancersResultType)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleFailure)
+      end)
+
+      api.add_operation(:batch_delete_scheduled_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchDeleteScheduledAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchDeleteScheduledActionType)
+        o.output = Shapes::ShapeRef.new(shape: BatchDeleteScheduledActionAnswer)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+      end)
+
+      api.add_operation(:batch_put_scheduled_update_group_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchPutScheduledUpdateGroupAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchPutScheduledUpdateGroupActionType)
+        o.output = Shapes::ShapeRef.new(shape: BatchPutScheduledUpdateGroupActionAnswer)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
       end)
 
       api.add_operation(:complete_lifecycle_action, Seahorse::Model::Operation.new.tap do |o|

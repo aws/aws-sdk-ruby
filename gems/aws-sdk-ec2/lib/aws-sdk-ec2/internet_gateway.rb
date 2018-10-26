@@ -31,13 +31,13 @@ module Aws::EC2
     end
     alias :internet_gateway_id :id
 
-    # Any VPCs attached to the Internet gateway.
+    # Any VPCs attached to the internet gateway.
     # @return [Array<Types::InternetGatewayAttachment>]
     def attachments
       data[:attachments]
     end
 
-    # Any tags assigned to the Internet gateway.
+    # Any tags assigned to the internet gateway.
     # @return [Array<Types::Tag>]
     def tags
       data[:tags]

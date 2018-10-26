@@ -1607,10 +1607,15 @@ module Aws::IAM
       api.version = "2010-05-08"
 
       api.metadata = {
+        "apiVersion" => "2010-05-08",
         "endpointPrefix" => "iam",
+        "globalEndpoint" => "iam.amazonaws.com",
         "protocol" => "query",
+        "serviceAbbreviation" => "IAM",
         "serviceFullName" => "AWS Identity and Access Management",
+        "serviceId" => "IAM",
         "signatureVersion" => "v4",
+        "uid" => "iam-2010-05-08",
         "xmlNamespace" => "https://iam.amazonaws.com/doc/2010-05-08/",
       }
 

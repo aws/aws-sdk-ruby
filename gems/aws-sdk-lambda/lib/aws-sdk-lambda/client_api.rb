@@ -514,10 +514,13 @@ module Aws::Lambda
       api.version = "2015-03-31"
 
       api.metadata = {
+        "apiVersion" => "2015-03-31",
         "endpointPrefix" => "lambda",
         "protocol" => "rest-json",
         "serviceFullName" => "AWS Lambda",
+        "serviceId" => "Lambda",
         "signatureVersion" => "v4",
+        "uid" => "lambda-2015-03-31",
       }
 
       api.add_operation(:add_permission, Seahorse::Model::Operation.new.tap do |o|

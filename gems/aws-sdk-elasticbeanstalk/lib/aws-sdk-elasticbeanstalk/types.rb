@@ -527,11 +527,15 @@ module Aws::ElasticBeanstalk
     #   @return [Float]
     #
     # @!attribute [rw] nice
+    #   Available on Linux environments only.
+    #
     #   Percentage of time that the CPU has spent in the `Nice` state over
     #   the last 10 seconds.
     #   @return [Float]
     #
     # @!attribute [rw] system
+    #   Available on Linux environments only.
+    #
     #   Percentage of time that the CPU has spent in the `System` state over
     #   the last 10 seconds.
     #   @return [Float]
@@ -542,17 +546,30 @@ module Aws::ElasticBeanstalk
     #   @return [Float]
     #
     # @!attribute [rw] io_wait
+    #   Available on Linux environments only.
+    #
     #   Percentage of time that the CPU has spent in the `I/O Wait` state
     #   over the last 10 seconds.
     #   @return [Float]
     #
     # @!attribute [rw] irq
+    #   Available on Linux environments only.
+    #
     #   Percentage of time that the CPU has spent in the `IRQ` state over
     #   the last 10 seconds.
     #   @return [Float]
     #
     # @!attribute [rw] soft_irq
+    #   Available on Linux environments only.
+    #
     #   Percentage of time that the CPU has spent in the `SoftIRQ` state
+    #   over the last 10 seconds.
+    #   @return [Float]
+    #
+    # @!attribute [rw] privileged
+    #   Available on Windows environments only.
+    #
+    #   Percentage of time that the CPU has spent in the `Privileged` state
     #   over the last 10 seconds.
     #   @return [Float]
     #
@@ -565,7 +582,8 @@ module Aws::ElasticBeanstalk
       :idle,
       :io_wait,
       :irq,
-      :soft_irq)
+      :soft_irq,
+      :privileged)
       include Aws::Structure
     end
 
@@ -2293,6 +2311,10 @@ module Aws::ElasticBeanstalk
     #
     # @!attribute [rw] instance_health_list
     #   Detailed health information about each instance.
+    #
+    #   The output differs slightly between Linux and Windows environments.
+    #   There is a difference in the members that are supported under the
+    #   `<CPUUtilization>` type.
     #   @return [Array<Types::SingleInstanceHealth>]
     #
     # @!attribute [rw] refreshed_at

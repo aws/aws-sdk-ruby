@@ -118,6 +118,8 @@ module Aws::S3
     DeleteBucketWebsiteRequest = Shapes::StructureShape.new(name: 'DeleteBucketWebsiteRequest')
     DeleteMarker = Shapes::BooleanShape.new(name: 'DeleteMarker')
     DeleteMarkerEntry = Shapes::StructureShape.new(name: 'DeleteMarkerEntry')
+    DeleteMarkerReplication = Shapes::StructureShape.new(name: 'DeleteMarkerReplication')
+    DeleteMarkerReplicationStatus = Shapes::StringShape.new(name: 'DeleteMarkerReplicationStatus')
     DeleteMarkerVersionId = Shapes::StringShape.new(name: 'DeleteMarkerVersionId')
     DeleteMarkers = Shapes::ListShape.new(name: 'DeleteMarkers', flattened: true)
     DeleteObjectOutput = Shapes::StructureShape.new(name: 'DeleteObjectOutput')
@@ -336,6 +338,7 @@ module Aws::S3
     OutputSerialization = Shapes::StructureShape.new(name: 'OutputSerialization')
     Owner = Shapes::StructureShape.new(name: 'Owner')
     OwnerOverride = Shapes::StringShape.new(name: 'OwnerOverride')
+    ParquetInput = Shapes::StructureShape.new(name: 'ParquetInput')
     Part = Shapes::StructureShape.new(name: 'Part')
     PartNumber = Shapes::IntegerShape.new(name: 'PartNumber')
     PartNumberMarker = Shapes::IntegerShape.new(name: 'PartNumberMarker')
@@ -345,6 +348,7 @@ module Aws::S3
     Permission = Shapes::StringShape.new(name: 'Permission')
     Policy = Shapes::StringShape.new(name: 'Policy')
     Prefix = Shapes::StringShape.new(name: 'Prefix')
+    Priority = Shapes::IntegerShape.new(name: 'Priority')
     Progress = Shapes::StructureShape.new(name: 'Progress')
     ProgressEvent = Shapes::StructureShape.new(name: 'ProgressEvent')
     Protocol = Shapes::StringShape.new(name: 'Protocol')
@@ -390,6 +394,8 @@ module Aws::S3
     ReplicaKmsKeyID = Shapes::StringShape.new(name: 'ReplicaKmsKeyID')
     ReplicationConfiguration = Shapes::StructureShape.new(name: 'ReplicationConfiguration')
     ReplicationRule = Shapes::StructureShape.new(name: 'ReplicationRule')
+    ReplicationRuleAndOperator = Shapes::StructureShape.new(name: 'ReplicationRuleAndOperator')
+    ReplicationRuleFilter = Shapes::StructureShape.new(name: 'ReplicationRuleFilter')
     ReplicationRuleStatus = Shapes::StringShape.new(name: 'ReplicationRuleStatus')
     ReplicationRules = Shapes::ListShape.new(name: 'ReplicationRules', flattened: true)
     ReplicationStatus = Shapes::StringShape.new(name: 'ReplicationStatus')
@@ -774,6 +780,9 @@ module Aws::S3
     DeleteMarkerEntry.add_member(:last_modified, Shapes::ShapeRef.new(shape: LastModified, location_name: "LastModified"))
     DeleteMarkerEntry.struct_class = Types::DeleteMarkerEntry
 
+    DeleteMarkerReplication.add_member(:status, Shapes::ShapeRef.new(shape: DeleteMarkerReplicationStatus, location_name: "Status"))
+    DeleteMarkerReplication.struct_class = Types::DeleteMarkerReplication
+
     DeleteMarkers.member = Shapes::ShapeRef.new(shape: DeleteMarkerEntry)
 
     DeleteObjectOutput.add_member(:delete_marker, Shapes::ShapeRef.new(shape: DeleteMarker, location: "header", location_name: "x-amz-delete-marker"))
@@ -1137,6 +1146,7 @@ module Aws::S3
     InputSerialization.add_member(:csv, Shapes::ShapeRef.new(shape: CSVInput, location_name: "CSV"))
     InputSerialization.add_member(:compression_type, Shapes::ShapeRef.new(shape: CompressionType, location_name: "CompressionType"))
     InputSerialization.add_member(:json, Shapes::ShapeRef.new(shape: JSONInput, location_name: "JSON"))
+    InputSerialization.add_member(:parquet, Shapes::ShapeRef.new(shape: ParquetInput, location_name: "Parquet"))
     InputSerialization.struct_class = Types::InputSerialization
 
     InventoryConfiguration.add_member(:destination, Shapes::ShapeRef.new(shape: InventoryDestination, required: true, location_name: "Destination"))
@@ -1465,6 +1475,8 @@ module Aws::S3
     Owner.add_member(:id, Shapes::ShapeRef.new(shape: ID, location_name: "ID"))
     Owner.struct_class = Types::Owner
 
+    ParquetInput.struct_class = Types::ParquetInput
+
     Part.add_member(:part_number, Shapes::ShapeRef.new(shape: PartNumber, location_name: "PartNumber"))
     Part.add_member(:last_modified, Shapes::ShapeRef.new(shape: LastModified, location_name: "LastModified"))
     Part.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location_name: "ETag"))
@@ -1716,11 +1728,23 @@ module Aws::S3
     ReplicationConfiguration.struct_class = Types::ReplicationConfiguration
 
     ReplicationRule.add_member(:id, Shapes::ShapeRef.new(shape: ID, location_name: "ID"))
-    ReplicationRule.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, required: true, location_name: "Prefix"))
+    ReplicationRule.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, location_name: "Priority"))
+    ReplicationRule.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, deprecated: true, location_name: "Prefix"))
+    ReplicationRule.add_member(:filter, Shapes::ShapeRef.new(shape: ReplicationRuleFilter, location_name: "Filter"))
     ReplicationRule.add_member(:status, Shapes::ShapeRef.new(shape: ReplicationRuleStatus, required: true, location_name: "Status"))
     ReplicationRule.add_member(:source_selection_criteria, Shapes::ShapeRef.new(shape: SourceSelectionCriteria, location_name: "SourceSelectionCriteria"))
     ReplicationRule.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, required: true, location_name: "Destination"))
+    ReplicationRule.add_member(:delete_marker_replication, Shapes::ShapeRef.new(shape: DeleteMarkerReplication, location_name: "DeleteMarkerReplication"))
     ReplicationRule.struct_class = Types::ReplicationRule
+
+    ReplicationRuleAndOperator.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    ReplicationRuleAndOperator.add_member(:tags, Shapes::ShapeRef.new(shape: TagSet, location_name: "Tag", metadata: {"flattened"=>true}))
+    ReplicationRuleAndOperator.struct_class = Types::ReplicationRuleAndOperator
+
+    ReplicationRuleFilter.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    ReplicationRuleFilter.add_member(:tag, Shapes::ShapeRef.new(shape: Tag, location_name: "Tag"))
+    ReplicationRuleFilter.add_member(:and, Shapes::ShapeRef.new(shape: ReplicationRuleAndOperator, location_name: "And"))
+    ReplicationRuleFilter.struct_class = Types::ReplicationRuleFilter
 
     ReplicationRules.member = Shapes::ShapeRef.new(shape: ReplicationRule)
 
@@ -1959,10 +1983,15 @@ module Aws::S3
       api.version = "2006-03-01"
 
       api.metadata = {
+        "apiVersion" => "2006-03-01",
+        "checksumFormat" => "md5",
         "endpointPrefix" => "s3",
+        "globalEndpoint" => "s3.amazonaws.com",
         "protocol" => "rest-xml",
+        "serviceAbbreviation" => "Amazon S3",
         "serviceFullName" => "Amazon Simple Storage Service",
-        "timestampFormat" => "rfc822",
+        "serviceId" => "S3",
+        "uid" => "s3-2006-03-01",
       }
 
       api.add_operation(:abort_multipart_upload, Seahorse::Model::Operation.new.tap do |o|

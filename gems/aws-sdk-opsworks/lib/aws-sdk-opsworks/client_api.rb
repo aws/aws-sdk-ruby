@@ -1256,12 +1256,15 @@ module Aws::OpsWorks
       api.version = "2013-02-18"
 
       api.metadata = {
+        "apiVersion" => "2013-02-18",
         "endpointPrefix" => "opsworks",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS OpsWorks",
+        "serviceId" => "OpsWorks",
         "signatureVersion" => "v4",
         "targetPrefix" => "OpsWorks_20130218",
+        "uid" => "opsworks-2013-02-18",
       }
 
       api.add_operation(:assign_instance, Seahorse::Model::Operation.new.tap do |o|

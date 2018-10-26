@@ -415,13 +415,17 @@ module Aws::CostExplorer
       api.version = "2017-10-25"
 
       api.metadata = {
+        "apiVersion" => "2017-10-25",
         "endpointPrefix" => "ce",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "AWS Cost Explorer",
         "serviceFullName" => "AWS Cost Explorer Service",
+        "serviceId" => "Cost Explorer",
         "signatureVersion" => "v4",
         "signingName" => "ce",
         "targetPrefix" => "AWSInsightsIndexService",
+        "uid" => "ce-2017-10-25",
       }
 
       api.add_operation(:get_cost_and_usage, Seahorse::Model::Operation.new.tap do |o|

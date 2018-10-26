@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -47,108 +49,128 @@ module Aws::SES
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
     #
-    # @option options [String] :session_token
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -2716,8 +2738,7 @@ module Aws::SES
     #   information, see [Verifying Email Addresses and Domains][1] in the
     #   *Amazon SES Developer Guide.*
     #
-    # * The total size of the message, including attachments, must be less
-    #   than 10 MB.
+    # * The maximum message size is 10 MB.
     #
     # * Each `Destination` parameter must include at least one recipient
     #   email address. The recipient address can be a To: address, a CC:
@@ -2726,6 +2747,15 @@ module Aws::SES
     #   *UserName@\[SubDomain.\]Domain.TopLevelDomain*), the entire message
     #   will be rejected, even if the message contains other recipients that
     #   are valid.
+    #
+    # * The message may not include more than 50 recipients, across the To:,
+    #   CC: and BCC: fields. If you need to send an email message to a
+    #   larger audience, you can divide your recipient list into groups of
+    #   50 or fewer, and then call the `SendBulkTemplatedEmail` operation
+    #   several times to send the message to each group.
+    #
+    # * The number of destinations you can contact in a single call to the
+    #   API may be limited by your account's maximum sending rate.
     #
     #
     #
@@ -2969,8 +2999,7 @@ module Aws::SES
     #   information, see [Verifying Email Addresses and Domains][1] in the
     #   *Amazon SES Developer Guide.*
     #
-    # * The total size of the message, including attachments, must be
-    #   smaller than 10 MB.
+    # * The maximum message size is 10 MB.
     #
     # * The message must include at least one recipient email address. The
     #   recipient address can be a To: address, a CC: address, or a BCC:
@@ -3201,48 +3230,52 @@ module Aws::SES
       req.send_request(options)
     end
 
-    # Composes an email message and immediately queues it for sending. When
-    # calling this operation, you may specify the message headers as well as
-    # the content. The `SendRawEmail` operation is particularly useful for
-    # sending multipart MIME emails (such as those that contain both a
-    # plain-text and an HTML version).
+    # Composes an email message and immediately queues it for sending.
     #
-    # In order to send email using the `SendRawEmail` operation, your
-    # message must meet the following requirements:
+    # This operation is more flexible than the `SendEmail` API operation.
+    # When you use the `SendRawEmail` operation, you can specify the headers
+    # of the message as well as its content. This flexibility is useful, for
+    # example, when you want to send a multipart MIME email (such a message
+    # that contains both a text and an HTML version). You can also use this
+    # operation to send messages that include attachments.
     #
-    # * The message must be sent from a verified email address or domain. If
-    #   you attempt to send email using a non-verified address or domain,
-    #   the operation will result in an "Email address not verified"
+    # The `SendRawEmail` operation has the following requirements:
+    #
+    # * You can only send email from [verified email addresses or
+    #   domains][1]. If you try to send email from an address that isn't
+    #   verified, the operation results in an "Email address not verified"
     #   error.
     #
-    # * If your account is still in the Amazon SES sandbox, you may only
-    #   send to verified addresses or domains, or to email addresses
-    #   associated with the Amazon SES Mailbox Simulator. For more
-    #   information, see [Verifying Email Addresses and Domains][1] in the
-    #   *Amazon SES Developer Guide.*
+    # * If your account is still in the [Amazon SES sandbox][2], you can
+    #   only send email to other verified addresses in your account, or to
+    #   addresses that are associated with the [Amazon SES mailbox
+    #   simulator][3].
     #
-    # * The total size of the message, including attachments, must be
-    #   smaller than 10 MB.
+    # * The maximum message size, including attachments, is 10 MB.
     #
-    # * The message must include at least one recipient email address. The
-    #   recipient address can be a To: address, a CC: address, or a BCC:
-    #   address. If a recipient email address is invalid (that is, it is not
-    #   in the format *UserName@\[SubDomain.\]Domain.TopLevelDomain*), the
-    #   entire message will be rejected, even if the message contains other
-    #   recipients that are valid.
+    # * Each message has to include at least one recipient address. A
+    #   recipient address includes any address on the To:, CC:, or BCC:
+    #   lines.
     #
-    # * The message may not include more than 50 recipients, across the To:,
-    #   CC: and BCC: fields. If you need to send an email message to a
-    #   larger audience, you can divide your recipient list into groups of
-    #   50 or fewer, and then call the `SendRawEmail` operation several
-    #   times to send the message to each group.
+    # * If you send a single message to more than one recipient address, and
+    #   one of the recipient addresses isn't in a valid format (that is,
+    #   it's not in the format
+    #   *UserName@\[SubDomain.\]Domain.TopLevelDomain*), Amazon SES rejects
+    #   the entire message, even if the other addresses are valid.
     #
-    # For every message that you send, the total number of recipients
-    # (including each recipient in the To:, CC: and BCC: fields) is counted
-    # against the maximum number of emails you can send in a 24-hour period
-    # (your *sending quota*). For more information about sending quotas in
-    # Amazon SES, see [Managing Your Amazon SES Sending Limits][2] in the
-    # *Amazon SES Developer Guide.*
+    # * Each message can include up to 50 recipient addresses across the
+    #   To:, CC:, or BCC: lines. If you need to send a single message to
+    #   more than 50 recipients, you have to split the list of recipient
+    #   addresses into groups of less than 50 recipients, and send separate
+    #   messages to each group.
+    #
+    # * Amazon SES allows you to specify 8-bit Content-Transfer-Encoding for
+    #   MIME message parts. However, if Amazon SES has to modify the
+    #   contents of your message (for example, if you use open and click
+    #   tracking), 8-bit content isn't preserved. For this reason, we
+    #   highly recommend that you encode all content that isn't 7-bit
+    #   ASCII. For more information, see [MIME Encoding][4] in the *Amazon
+    #   SES Developer Guide*.
     #
     # Additionally, keep the following considerations in mind when using the
     # `SendRawEmail` operation:
@@ -3276,13 +3309,23 @@ module Aws::SES
     #   From and Return Path addresses to the identity specified in
     #   `SourceIdentityArn`. For more information about sending
     #   authorization, see the [Using Sending Authorization with Amazon
-    #   SES][3] in the *Amazon SES Developer Guide.*
+    #   SES][5] in the *Amazon SES Developer Guide.*
+    #
+    # * For every message that you send, the total number of recipients
+    #   (including each recipient in the To:, CC: and BCC: fields) is
+    #   counted against the maximum number of emails you can send in a
+    #   24-hour period (your *sending quota*). For more information about
+    #   sending quotas in Amazon SES, see [Managing Your Amazon SES Sending
+    #   Limits][6] in the *Amazon SES Developer Guide.*
     #
     #
     #
     # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
-    # [2]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html
-    # [3]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    # [2]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/request-production-access.html
+    # [3]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mailbox-simulator.html
+    # [4]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html#send-email-mime-encoding
+    # [5]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    # [6]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html
     #
     # @option params [String] :source
     #   The identity's email address. If you do not provide a value for this
@@ -3319,27 +3362,35 @@ module Aws::SES
     #   BCC: addresses.
     #
     # @option params [required, Types::RawMessage] :raw_message
-    #   The raw text of the message. The client is responsible for ensuring
-    #   the following:
+    #   The raw email message itself. The message has to meet the following
+    #   criteria:
     #
-    #   * Message must contain a header and a body, separated by a blank line.
+    #   * The message has to contain a header and a body, separated by a blank
+    #     line.
     #
-    #   * All required header fields must be present.
+    #   * All of the required header fields must be present in the message.
     #
     #   * Each part of a multipart MIME message must be formatted properly.
     #
-    #   * MIME content types must be among those supported by Amazon SES. For
-    #     more information, go to the [Amazon SES Developer Guide][1].
+    #   * Attachments must be of a content type that Amazon SES supports. For
+    #     a list on unsupported content types, see [Unsupported Attachment
+    #     Types][1] in the *Amazon SES Developer Guide*.
     #
-    #   * Must be base64-encoded.
+    #   * The entire message must be base64-encoded.
     #
-    #   * Per [RFC 5321][2], the maximum length of each line of text,
+    #   * If any of the MIME parts in your message contain content that is
+    #     outside of the 7-bit ASCII character range, we highly recommend that
+    #     you encode that content. For more information, see [Sending Raw
+    #     Email][2] in the *Amazon SES Developer Guide*.
+    #
+    #   * Per [RFC 5321][3], the maximum length of each line of text,
     #     including the &lt;CRLF&gt;, must not exceed 1,000 characters.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mime-types.html
-    #   [2]: https://tools.ietf.org/html/rfc5321#section-4.5.3.1.6
+    #   [2]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html
+    #   [3]: https://tools.ietf.org/html/rfc5321#section-4.5.3.1.6
     #
     # @option params [String] :from_arn
     #   This parameter is used only for sending authorization. It is the ARN
@@ -3504,8 +3555,7 @@ module Aws::SES
     #   information, see [Verifying Email Addresses and Domains][1] in the
     #   *Amazon SES Developer Guide.*
     #
-    # * The total size of the message, including attachments, must be less
-    #   than 10 MB.
+    # * The maximum message size is 10 MB.
     #
     # * Calls to the `SendTemplatedEmail` operation may only include one
     #   `Destination` parameter. A destination is a set of recipients who
@@ -3995,16 +4045,13 @@ module Aws::SES
       req.send_request(options)
     end
 
-    # Given an identity (an email address or a domain), sets the Amazon
-    # Simple Notification Service (Amazon SNS) topic to which Amazon SES
-    # will publish bounce, complaint, and/or delivery notifications for
-    # emails sent with that identity as the `Source`.
-    #
-    # <note markdown="1"> Unless feedback forwarding is enabled, you must specify Amazon SNS
-    # topics for bounce and complaint notifications. For more information,
-    # see `SetIdentityFeedbackForwardingEnabled`.
-    #
-    #  </note>
+    # Sets an Amazon Simple Notification Service (Amazon SNS) topic to use
+    # when delivering notifications. When you use this operation, you
+    # specify a verified identity, such as an email address or domain. When
+    # you send an email that uses the chosen identity in the Source field,
+    # Amazon SES sends notifications to the topic you specified. You can
+    # send bounce, complaint, or delivery notifications (or any combination
+    # of the three) to the Amazon SNS topic that you specify.
     #
     # You can execute this operation no more than once per second.
     #
@@ -4016,9 +4063,14 @@ module Aws::SES
     # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html
     #
     # @option params [required, String] :identity
-    #   The identity for which the Amazon SNS topic will be set. You can
-    #   specify an identity by using its name or by using its Amazon Resource
-    #   Name (ARN). Examples: `user@example.com`, `example.com`,
+    #   The identity (email address or domain) that you want to set the Amazon
+    #   SNS topic for.
+    #
+    #   You can only specify a verified identity for this parameter.
+    #
+    #   You can specify an identity by using its name or by using its Amazon
+    #   Resource Name (ARN). The following examples are all valid identities:
+    #   `sender@example.com`, `example.com`,
     #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`.
     #
     # @option params [required, String] :notification_type
@@ -4789,7 +4841,7 @@ module Aws::SES
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ses'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

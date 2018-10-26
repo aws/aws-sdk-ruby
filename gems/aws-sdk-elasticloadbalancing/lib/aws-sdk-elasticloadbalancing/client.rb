@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -47,108 +49,128 @@ module Aws::ElasticLoadBalancing
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
     #
-    # @option options [String] :session_token
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -164,7 +186,7 @@ module Aws::ElasticLoadBalancing
     # updates its value.
     #
     # For more information, see [Tag Your Classic Load Balancer][1] in the
-    # *Classic Load Balancer Guide*.
+    # *Classic Load Balancers Guide*.
     #
     #
     #
@@ -225,7 +247,7 @@ module Aws::ElasticLoadBalancing
     # the previously associated security groups.
     #
     # For more information, see [Security Groups for Load Balancers in a
-    # VPC][1] in the *Classic Load Balancer Guide*.
+    # VPC][1] in the *Classic Load Balancers Guide*.
     #
     #
     #
@@ -287,7 +309,7 @@ module Aws::ElasticLoadBalancing
     #
     # The load balancer evenly distributes requests across all registered
     # subnets. For more information, see [Add or Remove Subnets for Your
-    # Load Balancer in a VPC][1] in the *Classic Load Balancer Guide*.
+    # Load Balancer in a VPC][1] in the *Classic Load Balancers Guide*.
     #
     #
     #
@@ -349,7 +371,7 @@ module Aws::ElasticLoadBalancing
     # state of your EC2 instances.
     #
     # For more information, see [Configure Health Checks for Your Load
-    # Balancer][1] in the *Classic Load Balancer Guide*.
+    # Balancer][1] in the *Classic Load Balancers Guide*.
     #
     #
     #
@@ -437,7 +459,7 @@ module Aws::ElasticLoadBalancing
     # session stops being sticky until a new application cookie is issued.
     #
     # For more information, see [Application-Controlled Session
-    # Stickiness][1] in the *Classic Load Balancer Guide*.
+    # Stickiness][1] in the *Classic Load Balancers Guide*.
     #
     #
     #
@@ -503,7 +525,7 @@ module Aws::ElasticLoadBalancing
     # configuration.
     #
     # For more information, see [Duration-Based Session Stickiness][1] in
-    # the *Classic Load Balancer Guide*.
+    # the *Classic Load Balancers Guide*.
     #
     #
     #
@@ -567,7 +589,7 @@ module Aws::ElasticLoadBalancing
     # You can create up to 20 load balancers per region per account. You can
     # request an increase for the number of load balancers for your account.
     # For more information, see [Limits for Your Classic Load Balancer][1]
-    # in the *Classic Load Balancer Guide*.
+    # in the *Classic Load Balancers Guide*.
     #
     #
     #
@@ -585,7 +607,7 @@ module Aws::ElasticLoadBalancing
     #   The listeners.
     #
     #   For more information, see [Listeners for Your Classic Load
-    #   Balancer][1] in the *Classic Load Balancer Guide*.
+    #   Balancer][1] in the *Classic Load Balancers Guide*.
     #
     #
     #
@@ -628,7 +650,7 @@ module Aws::ElasticLoadBalancing
     #   A list of tags to assign to the load balancer.
     #
     #   For more information about tagging your load balancer, see [Tag Your
-    #   Classic Load Balancer][1] in the *Classic Load Balancer Guide*.
+    #   Classic Load Balancer][1] in the *Classic Load Balancers Guide*.
     #
     #
     #
@@ -827,7 +849,7 @@ module Aws::ElasticLoadBalancing
     # properties of the existing listener.
     #
     # For more information, see [Listeners for Your Classic Load
-    # Balancer][1] in the *Classic Load Balancer Guide*.
+    # Balancer][1] in the *Classic Load Balancers Guide*.
     #
     #
     #
@@ -1119,7 +1141,7 @@ module Aws::ElasticLoadBalancing
     # deregistered from the load balancer.
     #
     # For more information, see [Register or De-Register EC2 Instances][1]
-    # in the *Classic Load Balancer Guide*.
+    # in the *Classic Load Balancers Guide*.
     #
     #
     #
@@ -1190,7 +1212,7 @@ module Aws::ElasticLoadBalancing
     # AWS account.
     #
     # For more information, see [Limits for Your Classic Load Balancer][1]
-    # in the *Classic Load Balancer Guide*.
+    # in the *Classic Load Balancers Guide*.
     #
     #
     #
@@ -1825,7 +1847,10 @@ module Aws::ElasticLoadBalancing
     end
 
     # Removes the specified Availability Zones from the set of Availability
-    # Zones for the specified load balancer.
+    # Zones for the specified load balancer in EC2-Classic or a default VPC.
+    #
+    # For load balancers in a non-default VPC, use
+    # DetachLoadBalancerFromSubnets.
     #
     # There must be at least one Availability Zone registered with a load
     # balancer at all times. After an Availability Zone is removed, all
@@ -1835,7 +1860,7 @@ module Aws::ElasticLoadBalancing
     # Availability Zones.
     #
     # For more information, see [Add or Remove Availability Zones][1] in the
-    # *Classic Load Balancer Guide*.
+    # *Classic Load Balancers Guide*.
     #
     #
     #
@@ -1892,13 +1917,15 @@ module Aws::ElasticLoadBalancing
     end
 
     # Adds the specified Availability Zones to the set of Availability Zones
-    # for the specified load balancer.
+    # for the specified load balancer in EC2-Classic or a default VPC.
+    #
+    # For load balancers in a non-default VPC, use
+    # AttachLoadBalancerToSubnets.
     #
     # The load balancer evenly distributes requests across all its
-    # registered Availability Zones that contain instances.
-    #
-    # For more information, see [Add or Remove Availability Zones][1] in the
-    # *Classic Load Balancer Guide*.
+    # registered Availability Zones that contain instances. For more
+    # information, see [Add or Remove Availability Zones][1] in the *Classic
+    # Load Balancers Guide*.
     #
     #
     #
@@ -1964,7 +1991,7 @@ module Aws::ElasticLoadBalancing
     # `ConnectionSettings` by specifying an idle connection timeout value
     # for your load balancer.
     #
-    # For more information, see the following in the *Classic Load Balancer
+    # For more information, see the following in the *Classic Load Balancers
     # Guide*\:
     #
     # * [Cross-Zone Load Balancing][1]
@@ -2120,7 +2147,7 @@ module Aws::ElasticLoadBalancing
     # DeregisterInstancesFromLoadBalancer.
     #
     # For more information, see [Register or De-Register EC2 Instances][1]
-    # in the *Classic Load Balancer Guide*.
+    # in the *Classic Load Balancers Guide*.
     #
     #
     #
@@ -2243,7 +2270,7 @@ module Aws::ElasticLoadBalancing
     #
     # For more information about updating your SSL certificate, see [Replace
     # the SSL Certificate for Your Load Balancer][1] in the *Classic Load
-    # Balancer Guide*.
+    # Balancers Guide*.
     #
     #
     #
@@ -2303,8 +2330,8 @@ module Aws::ElasticLoadBalancing
     #
     # For more information about enabling back-end instance authentication,
     # see [Configure Back-end Instance Authentication][1] in the *Classic
-    # Load Balancer Guide*. For more information about Proxy Protocol, see
-    # [Configure Proxy Protocol Support][2] in the *Classic Load Balancer
+    # Load Balancers Guide*. For more information about Proxy Protocol, see
+    # [Configure Proxy Protocol Support][2] in the *Classic Load Balancers
     # Guide*.
     #
     #
@@ -2363,7 +2390,7 @@ module Aws::ElasticLoadBalancing
     # For more information about setting policies, see [Update the SSL
     # Negotiation Configuration][1], [Duration-Based Session Stickiness][2],
     # and [Application-Controlled Session Stickiness][3] in the *Classic
-    # Load Balancer Guide*.
+    # Load Balancers Guide*.
     #
     #
     #
@@ -2427,7 +2454,7 @@ module Aws::ElasticLoadBalancing
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancing'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

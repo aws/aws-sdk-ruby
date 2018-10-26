@@ -231,9 +231,9 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [String] :egress_only_internet_gateway_id
-    #   \[IPv6 traffic only\] The ID of an egress-only Internet gateway.
+    #   \[IPv6 traffic only\] The ID of an egress-only internet gateway.
     # @option options [String] :gateway_id
-    #   The ID of an Internet gateway or virtual private gateway attached to
+    #   The ID of an internet gateway or virtual private gateway attached to
     #   your VPC.
     # @option options [String] :instance_id
     #   The ID of a NAT instance in your VPC. The operation fails if you

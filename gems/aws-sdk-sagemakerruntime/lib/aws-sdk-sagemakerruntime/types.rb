@@ -16,6 +16,7 @@ module Aws::SageMakerRuntime
     #         body: "data", # required
     #         content_type: "Header",
     #         accept: "Header",
+    #         custom_attributes: "CustomAttributesHeader",
     #       }
     #
     # @!attribute [rw] endpoint_name
@@ -31,6 +32,13 @@ module Aws::SageMakerRuntime
     #   Provides input data, in the format specified in the `ContentType`
     #   request header. Amazon SageMaker passes all of the data in the body
     #   to the model.
+    #
+    #   For information about the format of the request body, see [Common
+    #   Data Formats—Inference][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html
     #   @return [String]
     #
     # @!attribute [rw] content_type
@@ -41,18 +49,29 @@ module Aws::SageMakerRuntime
     #   The desired MIME type of the inference in the response.
     #   @return [String]
     #
+    # @!attribute [rw] custom_attributes
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointInput AWS API Documentation
     #
     class InvokeEndpointInput < Struct.new(
       :endpoint_name,
       :body,
       :content_type,
-      :accept)
+      :accept,
+      :custom_attributes)
       include Aws::Structure
     end
 
     # @!attribute [rw] body
     #   Includes the inference provided by the model.
+    #
+    #   For information about the format of the response body, see [Common
+    #   Data Formats—Inference][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html
     #   @return [String]
     #
     # @!attribute [rw] content_type
@@ -63,12 +82,16 @@ module Aws::SageMakerRuntime
     #   Identifies the production variant that was invoked.
     #   @return [String]
     #
+    # @!attribute [rw] custom_attributes
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointOutput AWS API Documentation
     #
     class InvokeEndpointOutput < Struct.new(
       :body,
       :content_type,
-      :invoked_production_variant)
+      :invoked_production_variant,
+      :custom_attributes)
       include Aws::Structure
     end
 

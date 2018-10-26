@@ -35,7 +35,8 @@ module Aws::Polly
     #   data as a hash:
     #
     #       {
-    #         language_code: "cy-GB", # accepts cy-GB, da-DK, de-DE, en-AU, en-GB, en-GB-WLS, en-IN, en-US, es-ES, es-US, fr-CA, fr-FR, is-IS, it-IT, ko-KR, ja-JP, nb-NO, nl-NL, pl-PL, pt-BR, pt-PT, ro-RO, ru-RU, sv-SE, tr-TR
+    #         language_code: "cmn-CN", # accepts cmn-CN, cy-GB, da-DK, de-DE, en-AU, en-GB, en-GB-WLS, en-IN, en-US, es-ES, es-US, fr-CA, fr-FR, is-IS, it-IT, ja-JP, hi-IN, ko-KR, nb-NO, nl-NL, pl-PL, pt-BR, pt-PT, ro-RO, ru-RU, sv-SE, tr-TR
+    #         include_additional_language_codes: false,
     #         next_token: "NextToken",
     #       }
     #
@@ -45,6 +46,15 @@ module Aws::Polly
     #   returned. If you don't specify this optional parameter, all
     #   available voices are returned.
     #   @return [String]
+    #
+    # @!attribute [rw] include_additional_language_codes
+    #   Boolean value indicating whether to return any bilingual voices that
+    #   use the specified language as an additional language. For instance,
+    #   if you request all languages that use US English (es-US), and there
+    #   is an Italian voice that speaks both Italian (it-IT) and US English,
+    #   that voice will be included if you specify `yes` but not if you
+    #   specify `no`.
+    #   @return [Boolean]
     #
     # @!attribute [rw] next_token
     #   An opaque pagination token returned from the previous
@@ -56,6 +66,7 @@ module Aws::Polly
     #
     class DescribeVoicesInput < Struct.new(
       :language_code,
+      :include_additional_language_codes,
       :next_token)
       include Aws::Structure
     end
@@ -313,9 +324,9 @@ module Aws::Polly
     #   @return [String]
     #
     # @!attribute [rw] synthesis_tasks
-    #   SynthesisTask object that provides information from the specified
-    #   task in the list request, including output format, creation time,
-    #   task status, and so on.
+    #   List of SynthesisTask objects that provides information from the
+    #   specified task in the list request, including output format,
+    #   creation time, task status, and so on.
     #   @return [Array<Types::SynthesisTask>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ListSpeechSynthesisTasksOutput AWS API Documentation
@@ -369,7 +380,8 @@ module Aws::Polly
     #         speech_mark_types: ["sentence"], # accepts sentence, ssml, viseme, word
     #         text: "Text", # required
     #         text_type: "ssml", # accepts ssml, text
-    #         voice_id: "Geraint", # required, accepts Geraint, Gwyneth, Mads, Naja, Hans, Marlene, Nicole, Russell, Amy, Brian, Emma, Raveena, Ivy, Joanna, Joey, Justin, Kendra, Kimberly, Matthew, Salli, Conchita, Enrique, Miguel, Penelope, Chantal, Celine, Lea, Mathieu, Dora, Karl, Carla, Giorgio, Mizuki, Liv, Lotte, Ruben, Ewa, Jacek, Jan, Maja, Ricardo, Vitoria, Cristiano, Ines, Carmen, Maxim, Tatyana, Astrid, Filiz, Vicki, Takumi, Seoyeon, Aditi
+    #         voice_id: "Geraint", # required, accepts Geraint, Gwyneth, Mads, Naja, Hans, Marlene, Nicole, Russell, Amy, Brian, Emma, Raveena, Ivy, Joanna, Joey, Justin, Kendra, Kimberly, Matthew, Salli, Conchita, Enrique, Miguel, Penelope, Chantal, Celine, Lea, Mathieu, Dora, Karl, Carla, Giorgio, Mizuki, Liv, Lotte, Ruben, Ewa, Jacek, Jan, Maja, Ricardo, Vitoria, Cristiano, Ines, Carmen, Maxim, Tatyana, Astrid, Filiz, Vicki, Takumi, Seoyeon, Aditi, Zhiyu
+    #         language_code: "cmn-CN", # accepts cmn-CN, cy-GB, da-DK, de-DE, en-AU, en-GB, en-GB-WLS, en-IN, en-US, es-ES, es-US, fr-CA, fr-FR, is-IS, it-IT, ja-JP, hi-IN, ko-KR, nb-NO, nl-NL, pl-PL, pt-BR, pt-PT, ro-RO, ru-RU, sv-SE, tr-TR
     #       }
     #
     # @!attribute [rw] lexicon_names
@@ -389,7 +401,7 @@ module Aws::Polly
     #   @return [String]
     #
     # @!attribute [rw] output_s3_key_prefix
-    #   The Amazon S3 Key prefix for the output speech file.
+    #   The Amazon S3 key prefix for the output speech file.
     #   @return [String]
     #
     # @!attribute [rw] sample_rate
@@ -425,6 +437,23 @@ module Aws::Polly
     #   Voice ID to use for the synthesis.
     #   @return [String]
     #
+    # @!attribute [rw] language_code
+    #   Optional language code for the Speech Synthesis request. This is
+    #   only necessary if using a bilingual voice, such as Aditi, which can
+    #   be used for either Indian English (en-IN) or Hindi (hi-IN).
+    #
+    #   If a bilingual voice is used and no language code is specified,
+    #   Amazon Polly will use the default language of the bilingual voice.
+    #   The default language for any voice is the one returned by the
+    #   [DescribeVoices][1] operation for the `LanguageCode` parameter. For
+    #   example, if no language code is specified, Aditi will use Indian
+    #   English rather than Hindi.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/StartSpeechSynthesisTaskInput AWS API Documentation
     #
     class StartSpeechSynthesisTaskInput < Struct.new(
@@ -437,7 +466,8 @@ module Aws::Polly
       :speech_mark_types,
       :text,
       :text_type,
-      :voice_id)
+      :voice_id,
+      :language_code)
       include Aws::Structure
     end
 
@@ -521,6 +551,23 @@ module Aws::Polly
     #   Voice ID to use for the synthesis.
     #   @return [String]
     #
+    # @!attribute [rw] language_code
+    #   Optional language code for a synthesis task. This is only necessary
+    #   if using a bilingual voice, such as Aditi, which can be used for
+    #   either Indian English (en-IN) or Hindi (hi-IN).
+    #
+    #   If a bilingual voice is used and no language code is specified,
+    #   Amazon Polly will use the default language of the bilingual voice.
+    #   The default language for any voice is the one returned by the
+    #   [DescribeVoices][1] operation for the `LanguageCode` parameter. For
+    #   example, if no language code is specified, Aditi will use Indian
+    #   English rather than Hindi.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/SynthesisTask AWS API Documentation
     #
     class SynthesisTask < Struct.new(
@@ -536,7 +583,8 @@ module Aws::Polly
       :sample_rate,
       :speech_mark_types,
       :text_type,
-      :voice_id)
+      :voice_id,
+      :language_code)
       include Aws::Structure
     end
 
@@ -550,7 +598,8 @@ module Aws::Polly
     #         speech_mark_types: ["sentence"], # accepts sentence, ssml, viseme, word
     #         text: "Text", # required
     #         text_type: "ssml", # accepts ssml, text
-    #         voice_id: "Geraint", # required, accepts Geraint, Gwyneth, Mads, Naja, Hans, Marlene, Nicole, Russell, Amy, Brian, Emma, Raveena, Ivy, Joanna, Joey, Justin, Kendra, Kimberly, Matthew, Salli, Conchita, Enrique, Miguel, Penelope, Chantal, Celine, Lea, Mathieu, Dora, Karl, Carla, Giorgio, Mizuki, Liv, Lotte, Ruben, Ewa, Jacek, Jan, Maja, Ricardo, Vitoria, Cristiano, Ines, Carmen, Maxim, Tatyana, Astrid, Filiz, Vicki, Takumi, Seoyeon, Aditi
+    #         voice_id: "Geraint", # required, accepts Geraint, Gwyneth, Mads, Naja, Hans, Marlene, Nicole, Russell, Amy, Brian, Emma, Raveena, Ivy, Joanna, Joey, Justin, Kendra, Kimberly, Matthew, Salli, Conchita, Enrique, Miguel, Penelope, Chantal, Celine, Lea, Mathieu, Dora, Karl, Carla, Giorgio, Mizuki, Liv, Lotte, Ruben, Ewa, Jacek, Jan, Maja, Ricardo, Vitoria, Cristiano, Ines, Carmen, Maxim, Tatyana, Astrid, Filiz, Vicki, Takumi, Seoyeon, Aditi, Zhiyu
+    #         language_code: "cmn-CN", # accepts cmn-CN, cy-GB, da-DK, de-DE, en-AU, en-GB, en-GB-WLS, en-IN, en-US, es-ES, es-US, fr-CA, fr-FR, is-IS, it-IT, ja-JP, hi-IN, ko-KR, nb-NO, nl-NL, pl-PL, pt-BR, pt-PT, ro-RO, ru-RU, sv-SE, tr-TR
     #       }
     #
     # @!attribute [rw] lexicon_names
@@ -568,6 +617,9 @@ module Aws::Polly
     #   The format in which the returned output will be encoded. For audio
     #   stream, this will be mp3, ogg\_vorbis, or pcm. For speech marks,
     #   this will be json.
+    #
+    #   When pcm is used, the content returned is audio/pcm in a signed
+    #   16-bit, 1 channel (mono), little-endian format.
     #   @return [String]
     #
     # @!attribute [rw] sample_rate
@@ -607,6 +659,23 @@ module Aws::Polly
     #   [1]: http://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html
     #   @return [String]
     #
+    # @!attribute [rw] language_code
+    #   Optional language code for the Synthesize Speech request. This is
+    #   only necessary if using a bilingual voice, such as Aditi, which can
+    #   be used for either Indian English (en-IN) or Hindi (hi-IN).
+    #
+    #   If a bilingual voice is used and no language code is specified,
+    #   Amazon Polly will use the default language of the bilingual voice.
+    #   The default language for any voice is the one returned by the
+    #   [DescribeVoices][1] operation for the `LanguageCode` parameter. For
+    #   example, if no language code is specified, Aditi will use Indian
+    #   English rather than Hindi.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/SynthesizeSpeechInput AWS API Documentation
     #
     class SynthesizeSpeechInput < Struct.new(
@@ -616,7 +685,8 @@ module Aws::Polly
       :speech_mark_types,
       :text,
       :text_type,
-      :voice_id)
+      :voice_id,
+      :language_code)
       include Aws::Structure
     end
 
@@ -680,6 +750,16 @@ module Aws::Polly
     #   application.
     #   @return [String]
     #
+    # @!attribute [rw] additional_language_codes
+    #   Additional codes for languages available for the specified voice in
+    #   addition to its default language.
+    #
+    #   For example, the default language for Aditi is Indian English
+    #   (en-IN) because it was first used for that language. Since Aditi is
+    #   bilingual and fluent in both Indian English and Hindi, this
+    #   parameter would show the code `hi-IN`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/Voice AWS API Documentation
     #
     class Voice < Struct.new(
@@ -687,7 +767,8 @@ module Aws::Polly
       :id,
       :language_code,
       :language_name,
-      :name)
+      :name,
+      :additional_language_codes)
       include Aws::Structure
     end
 

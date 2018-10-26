@@ -151,13 +151,17 @@ module Aws::MediaStore
       api.version = "2017-09-01"
 
       api.metadata = {
+        "apiVersion" => "2017-09-01",
         "endpointPrefix" => "mediastore",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "MediaStore",
         "serviceFullName" => "AWS Elemental MediaStore",
+        "serviceId" => "MediaStore",
         "signatureVersion" => "v4",
         "signingName" => "mediastore",
         "targetPrefix" => "MediaStore_20170901",
+        "uid" => "mediastore-2017-09-01",
       }
 
       api.add_operation(:create_container, Seahorse::Model::Operation.new.tap do |o|

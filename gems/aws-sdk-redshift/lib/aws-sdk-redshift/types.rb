@@ -406,6 +406,11 @@ module Aws::Redshift
     #   The name of the maintenance track for the cluster.
     #   @return [String]
     #
+    # @!attribute [rw] elastic_resize_number_of_node_options
+    #   Indicates the number of nodes the cluster can be resized to with the
+    #   elastic resize method.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -443,7 +448,8 @@ module Aws::Redshift
       :enhanced_vpc_routing,
       :iam_roles,
       :pending_actions,
-      :maintenance_track_name)
+      :maintenance_track_name,
+      :elastic_resize_number_of_node_options)
       include Aws::Structure
     end
 
@@ -4825,6 +4831,8 @@ module Aws::Redshift
     #         elastic_ip: "String",
     #         enhanced_vpc_routing: false,
     #         maintenance_track_name: "String",
+    #         encrypted: false,
+    #         kms_key_id: "String",
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -5074,6 +5082,20 @@ module Aws::Redshift
     #   applied.
     #   @return [String]
     #
+    # @!attribute [rw] encrypted
+    #   Indicates whether the cluster is encrypted. If the cluster is
+    #   encrypted and you provide a value for the `KmsKeyId` parameter, we
+    #   will encrypt the cluster with the provided `KmsKeyId`. If you don't
+    #   provide a `KmsKeyId`, we will encrypt with the default key. In the
+    #   China region we will use legacy encryption if you specify that the
+    #   cluster is encrypted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The AWS Key Management Service (KMS) key ID of the encryption key
+    #   that you want to use to encrypt data in the cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMessage AWS API Documentation
     #
     class ModifyClusterMessage < Struct.new(
@@ -5095,7 +5117,9 @@ module Aws::Redshift
       :publicly_accessible,
       :elastic_ip,
       :enhanced_vpc_routing,
-      :maintenance_track_name)
+      :maintenance_track_name,
+      :encrypted,
+      :kms_key_id)
       include Aws::Structure
     end
 
@@ -5529,6 +5553,11 @@ module Aws::Redshift
     #   during the next maintenance window.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_type
+    #   The encryption type for a cluster. Possible values are: KMS and
+    #   None. For the China region the possible values are None, and Legacy.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PendingModifiedValues AWS API Documentation
     #
     class PendingModifiedValues < Struct.new(
@@ -5541,7 +5570,8 @@ module Aws::Redshift
       :cluster_identifier,
       :publicly_accessible,
       :enhanced_vpc_routing,
-      :maintenance_track_name)
+      :maintenance_track_name,
+      :encryption_type)
       include Aws::Structure
     end
 
@@ -5875,6 +5905,61 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ResizeClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_identifier: "String", # required
+    #         cluster_type: "String",
+    #         node_type: "String",
+    #         number_of_nodes: 1, # required
+    #         classic: false,
+    #       }
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The unique identifier for the cluster to resize.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_type
+    #   The new cluster type for the specified cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_type
+    #   The new node type for the nodes you are adding.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_nodes
+    #   The new number of nodes for the cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] classic
+    #   A boolean value indicating whether the resize operation is using the
+    #   classic resize process. If you don't provide this parameter or set
+    #   the value to `false` the resize type is elastic.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeClusterMessage AWS API Documentation
+    #
+    class ResizeClusterMessage < Struct.new(
+      :cluster_identifier,
+      :cluster_type,
+      :node_type,
+      :number_of_nodes,
+      :classic)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster
+    #   Describes a cluster.
+    #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeClusterResult AWS API Documentation
+    #
+    class ResizeClusterResult < Struct.new(
+      :cluster)
+      include Aws::Structure
+    end
+
     # Describes the result of a cluster resize operation.
     #
     # @!attribute [rw] target_node_type
@@ -5951,6 +6036,23 @@ module Aws::Redshift
     #   Once the resize operation is complete, this value will be 0.
     #   @return [Integer]
     #
+    # @!attribute [rw] resize_type
+    #   An enum with possible values of ClassicResize and ElasticResize.
+    #   These values describe the type of resize operation being performed.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   An optional string to provide additional details about the resize
+    #   action.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_encryption_type
+    #   The type of encryption for the cluster after the resize is complete.
+    #
+    #   Possible values are `KMS` and `None`. In the China region possible
+    #   values are: `Legacy` and `None`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeProgressMessage AWS API Documentation
     #
     class ResizeProgressMessage < Struct.new(
@@ -5965,7 +6067,10 @@ module Aws::Redshift
       :total_resize_data_in_mega_bytes,
       :progress_in_mega_bytes,
       :elapsed_time_in_seconds,
-      :estimated_time_to_completion_in_seconds)
+      :estimated_time_to_completion_in_seconds,
+      :resize_type,
+      :message,
+      :target_encryption_type)
       include Aws::Structure
     end
 

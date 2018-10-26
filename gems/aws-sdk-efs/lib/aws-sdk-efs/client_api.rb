@@ -205,10 +205,14 @@ module Aws::EFS
       api.version = "2015-02-01"
 
       api.metadata = {
+        "apiVersion" => "2015-02-01",
         "endpointPrefix" => "elasticfilesystem",
         "protocol" => "rest-json",
+        "serviceAbbreviation" => "EFS",
         "serviceFullName" => "Amazon Elastic File System",
+        "serviceId" => "EFS",
         "signatureVersion" => "v4",
+        "uid" => "elasticfilesystem-2015-02-01",
       }
 
       api.add_operation(:create_file_system, Seahorse::Model::Operation.new.tap do |o|

@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -47,108 +49,128 @@ module Aws::Redshift
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
     #
-    # @option options [String] :session_token
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -894,6 +916,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
     #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -930,6 +953,7 @@ module Aws::Redshift
     #   resp.cluster.pending_actions #=> Array
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateCluster AWS API Documentation
     #
@@ -1778,6 +1802,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
     #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -1814,6 +1839,7 @@ module Aws::Redshift
     #   resp.cluster.pending_actions #=> Array
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCluster AWS API Documentation
     #
@@ -3012,6 +3038,7 @@ module Aws::Redshift
     #   resp.clusters[0].pending_modified_values.publicly_accessible #=> Boolean
     #   resp.clusters[0].pending_modified_values.enhanced_vpc_routing #=> Boolean
     #   resp.clusters[0].pending_modified_values.maintenance_track_name #=> String
+    #   resp.clusters[0].pending_modified_values.encryption_type #=> String
     #   resp.clusters[0].cluster_version #=> String
     #   resp.clusters[0].allow_version_upgrade #=> Boolean
     #   resp.clusters[0].number_of_nodes #=> Integer
@@ -3048,6 +3075,7 @@ module Aws::Redshift
     #   resp.clusters[0].pending_actions #=> Array
     #   resp.clusters[0].pending_actions[0] #=> String
     #   resp.clusters[0].maintenance_track_name #=> String
+    #   resp.clusters[0].elastic_resize_number_of_node_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusters AWS API Documentation
     #
@@ -3889,6 +3917,9 @@ module Aws::Redshift
     #   * {Types::ResizeProgressMessage#progress_in_mega_bytes #progress_in_mega_bytes} => Integer
     #   * {Types::ResizeProgressMessage#elapsed_time_in_seconds #elapsed_time_in_seconds} => Integer
     #   * {Types::ResizeProgressMessage#estimated_time_to_completion_in_seconds #estimated_time_to_completion_in_seconds} => Integer
+    #   * {Types::ResizeProgressMessage#resize_type #resize_type} => String
+    #   * {Types::ResizeProgressMessage#message #message} => String
+    #   * {Types::ResizeProgressMessage#target_encryption_type #target_encryption_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3913,6 +3944,9 @@ module Aws::Redshift
     #   resp.progress_in_mega_bytes #=> Integer
     #   resp.elapsed_time_in_seconds #=> Integer
     #   resp.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.resize_type #=> String
+    #   resp.message #=> String
+    #   resp.target_encryption_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeResize AWS API Documentation
     #
@@ -4314,6 +4348,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
     #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -4350,6 +4385,7 @@ module Aws::Redshift
     #   resp.cluster.pending_actions #=> Array
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopy AWS API Documentation
     #
@@ -4518,6 +4554,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
     #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -4554,6 +4591,7 @@ module Aws::Redshift
     #   resp.cluster.pending_actions #=> Array
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopy AWS API Documentation
     #
@@ -5022,6 +5060,18 @@ module Aws::Redshift
     #   the latest cluster release available for the maintenance track. At
     #   this point, the maintenance track name is applied.
     #
+    # @option params [Boolean] :encrypted
+    #   Indicates whether the cluster is encrypted. If the cluster is
+    #   encrypted and you provide a value for the `KmsKeyId` parameter, we
+    #   will encrypt the cluster with the provided `KmsKeyId`. If you don't
+    #   provide a `KmsKeyId`, we will encrypt with the default key. In the
+    #   China region we will use legacy encryption if you specify that the
+    #   cluster is encrypted.
+    #
+    # @option params [String] :kms_key_id
+    #   The AWS Key Management Service (KMS) key ID of the encryption key that
+    #   you want to use to encrypt data in the cluster.
+    #
     # @return [Types::ModifyClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyClusterResult#cluster #cluster} => Types::Cluster
@@ -5048,6 +5098,8 @@ module Aws::Redshift
     #     elastic_ip: "String",
     #     enhanced_vpc_routing: false,
     #     maintenance_track_name: "String",
+    #     encrypted: false,
+    #     kms_key_id: "String",
     #   })
     #
     # @example Response structure
@@ -5089,6 +5141,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
     #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -5125,6 +5178,7 @@ module Aws::Redshift
     #   resp.cluster.pending_actions #=> Array
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyCluster AWS API Documentation
     #
@@ -5198,6 +5252,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
     #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -5234,6 +5289,7 @@ module Aws::Redshift
     #   resp.cluster.pending_actions #=> Array
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterDbRevision AWS API Documentation
     #
@@ -5314,6 +5370,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
     #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -5350,6 +5407,7 @@ module Aws::Redshift
     #   resp.cluster.pending_actions #=> Array
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRoles AWS API Documentation
     #
@@ -5635,6 +5693,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
     #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -5671,6 +5730,7 @@ module Aws::Redshift
     #   resp.cluster.pending_actions #=> Array
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriod AWS API Documentation
     #
@@ -5806,6 +5866,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
     #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -5842,6 +5903,7 @@ module Aws::Redshift
     #   resp.cluster.pending_actions #=> Array
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootCluster AWS API Documentation
     #
@@ -5910,6 +5972,144 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def reset_cluster_parameter_group(params = {}, options = {})
       req = build_request(:reset_cluster_parameter_group, params)
+      req.send_request(options)
+    end
+
+    # Changes the size of the cluster. You can change the cluster's type,
+    # or change the number or type of nodes. The default behavior is to use
+    # the elastic resize method. With an elastic resize your cluster is
+    # avaialble for read and write operations more quickly than with the
+    # classic resize method.
+    #
+    # Elastic resize operations have the following restrictions:
+    #
+    # * You can only resize clusters of the following types:
+    #
+    #   * dc2.large
+    #
+    #   * dc2.8xlarge
+    #
+    #   * ds2.xlarge
+    #
+    #   * ds2.8xlarge
+    #
+    # * The type of nodes you add must match the node type for the cluster.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The unique identifier for the cluster to resize.
+    #
+    # @option params [String] :cluster_type
+    #   The new cluster type for the specified cluster.
+    #
+    # @option params [String] :node_type
+    #   The new node type for the nodes you are adding.
+    #
+    # @option params [required, Integer] :number_of_nodes
+    #   The new number of nodes for the cluster.
+    #
+    # @option params [Boolean] :classic
+    #   A boolean value indicating whether the resize operation is using the
+    #   classic resize process. If you don't provide this parameter or set
+    #   the value to `false` the resize type is elastic.
+    #
+    # @return [Types::ResizeClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResizeClusterResult#cluster #cluster} => Types::Cluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.resize_cluster({
+    #     cluster_identifier: "String", # required
+    #     cluster_type: "String",
+    #     node_type: "String",
+    #     number_of_nodes: 1, # required
+    #     classic: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster.cluster_identifier #=> String
+    #   resp.cluster.node_type #=> String
+    #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.modify_status #=> String
+    #   resp.cluster.master_username #=> String
+    #   resp.cluster.db_name #=> String
+    #   resp.cluster.endpoint.address #=> String
+    #   resp.cluster.endpoint.port #=> Integer
+    #   resp.cluster.cluster_create_time #=> Time
+    #   resp.cluster.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.cluster_security_groups #=> Array
+    #   resp.cluster.cluster_security_groups[0].cluster_security_group_name #=> String
+    #   resp.cluster.cluster_security_groups[0].status #=> String
+    #   resp.cluster.vpc_security_groups #=> Array
+    #   resp.cluster.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.cluster.vpc_security_groups[0].status #=> String
+    #   resp.cluster.cluster_parameter_groups #=> Array
+    #   resp.cluster.cluster_parameter_groups[0].parameter_group_name #=> String
+    #   resp.cluster.cluster_parameter_groups[0].parameter_apply_status #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list #=> Array
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_name #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_apply_status #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_apply_error_description #=> String
+    #   resp.cluster.cluster_subnet_group_name #=> String
+    #   resp.cluster.vpc_id #=> String
+    #   resp.cluster.availability_zone #=> String
+    #   resp.cluster.preferred_maintenance_window #=> String
+    #   resp.cluster.pending_modified_values.master_user_password #=> String
+    #   resp.cluster.pending_modified_values.node_type #=> String
+    #   resp.cluster.pending_modified_values.number_of_nodes #=> Integer
+    #   resp.cluster.pending_modified_values.cluster_type #=> String
+    #   resp.cluster.pending_modified_values.cluster_version #=> String
+    #   resp.cluster.pending_modified_values.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.pending_modified_values.cluster_identifier #=> String
+    #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
+    #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
+    #   resp.cluster.cluster_version #=> String
+    #   resp.cluster.allow_version_upgrade #=> Boolean
+    #   resp.cluster.number_of_nodes #=> Integer
+    #   resp.cluster.publicly_accessible #=> Boolean
+    #   resp.cluster.encrypted #=> Boolean
+    #   resp.cluster.restore_status.status #=> String
+    #   resp.cluster.restore_status.current_restore_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.restore_status.snapshot_size_in_mega_bytes #=> Integer
+    #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
+    #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
+    #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
+    #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
+    #   resp.cluster.hsm_status.status #=> String
+    #   resp.cluster.cluster_snapshot_copy_status.destination_region #=> String
+    #   resp.cluster.cluster_snapshot_copy_status.retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.snapshot_copy_grant_name #=> String
+    #   resp.cluster.cluster_public_key #=> String
+    #   resp.cluster.cluster_nodes #=> Array
+    #   resp.cluster.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.elastic_ip_status.elastic_ip #=> String
+    #   resp.cluster.elastic_ip_status.status #=> String
+    #   resp.cluster.cluster_revision_number #=> String
+    #   resp.cluster.tags #=> Array
+    #   resp.cluster.tags[0].key #=> String
+    #   resp.cluster.tags[0].value #=> String
+    #   resp.cluster.kms_key_id #=> String
+    #   resp.cluster.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.iam_roles #=> Array
+    #   resp.cluster.iam_roles[0].iam_role_arn #=> String
+    #   resp.cluster.iam_roles[0].apply_status #=> String
+    #   resp.cluster.pending_actions #=> Array
+    #   resp.cluster.pending_actions[0] #=> String
+    #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeCluster AWS API Documentation
+    #
+    # @overload resize_cluster(params = {})
+    # @param [Hash] params ({})
+    def resize_cluster(params = {}, options = {})
+      req = build_request(:resize_cluster, params)
       req.send_request(options)
     end
 
@@ -6206,6 +6406,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
     #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -6242,6 +6443,7 @@ module Aws::Redshift
     #   resp.cluster.pending_actions #=> Array
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshot AWS API Documentation
     #
@@ -6558,6 +6760,7 @@ module Aws::Redshift
     #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
     #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
     #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
     #   resp.cluster.cluster_version #=> String
     #   resp.cluster.allow_version_upgrade #=> Boolean
     #   resp.cluster.number_of_nodes #=> Integer
@@ -6594,6 +6797,7 @@ module Aws::Redshift
     #   resp.cluster.pending_actions #=> Array
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKey AWS API Documentation
     #
@@ -6617,7 +6821,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

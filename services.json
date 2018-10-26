@@ -52,7 +52,7 @@
     "models": "cloudformation/2010-05-15"
   },
   "CloudFront": {
-    "models": "cloudfront/2017-10-30"
+    "models": "cloudfront/2018-06-18"
   },
   "CloudHSM": {
     "models": "cloudhsm/2014-05-30"
@@ -467,6 +467,9 @@
   },
   "Shield": {
     "models": "shield/2016-06-02"
+  },
+  "Signer": {
+    "models": "signer/2017-08-25"
   },
   "SimpleDB": {
     "models": "sdb/2009-04-15"

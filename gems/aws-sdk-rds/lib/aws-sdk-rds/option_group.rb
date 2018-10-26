@@ -237,7 +237,7 @@ module Aws::RDS
     #   The description of the option group.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -271,20 +271,20 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Cannot be null, empty, or blank
+    #   * Can't be null, empty, or blank
     #
     #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-option-group`
     # @option options [required, String] :target_option_group_description
     #   The description for the copied option group.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #

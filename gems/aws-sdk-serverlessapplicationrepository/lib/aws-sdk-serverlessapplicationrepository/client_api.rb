@@ -323,12 +323,15 @@ module Aws::ServerlessApplicationRepository
       api.version = "2017-09-08"
 
       api.metadata = {
+        "apiVersion" => "2017-09-08",
         "endpointPrefix" => "serverlessrepo",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "serviceFullName" => "AWSServerlessApplicationRepository",
+        "serviceId" => "ServerlessApplicationRepository",
         "signatureVersion" => "v4",
         "signingName" => "serverlessrepo",
+        "uid" => "serverlessrepo-2017-09-08",
       }
 
       api.add_operation(:create_application, Seahorse::Model::Operation.new.tap do |o|

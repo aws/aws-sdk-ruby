@@ -401,12 +401,16 @@ module Aws::ServiceDiscovery
       api.version = "2017-03-14"
 
       api.metadata = {
+        "apiVersion" => "2017-03-14",
         "endpointPrefix" => "servicediscovery",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "ServiceDiscovery",
         "serviceFullName" => "Amazon Route 53 Auto Naming",
+        "serviceId" => "ServiceDiscovery",
         "signatureVersion" => "v4",
         "targetPrefix" => "Route53AutoNaming_v20170314",
+        "uid" => "servicediscovery-2017-03-14",
       }
 
       api.add_operation(:create_private_dns_namespace, Seahorse::Model::Operation.new.tap do |o|

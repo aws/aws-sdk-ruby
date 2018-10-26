@@ -112,6 +112,10 @@ module Aws
       end
     end
 
+    # Raised when a credentials provider process returns a JSON
+    # payload with either invalid version number or malformed contents
+    class InvalidProcessCredentialsPayload < RuntimeError; end
+
     # Raised when a client is constructed and region is not specified.
     class MissingRegionError < ArgumentError
       def initialize(*args)

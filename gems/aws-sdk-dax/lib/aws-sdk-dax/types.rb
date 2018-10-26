@@ -88,6 +88,11 @@ module Aws::DAX
     #   The parameter group being used by nodes in the cluster.
     #   @return [Types::ParameterGroupStatus]
     #
+    # @!attribute [rw] sse_description
+    #   The description of the server-side encryption status on the
+    #   specified DAX cluster.
+    #   @return [Types::SSEDescription]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -106,7 +111,8 @@ module Aws::DAX
       :subnet_group,
       :security_groups,
       :iam_role_arn,
-      :parameter_group)
+      :parameter_group,
+      :sse_description)
       include Aws::Structure
     end
 
@@ -131,6 +137,9 @@ module Aws::DAX
     #             value: "String",
     #           },
     #         ],
+    #         sse_specification: {
+    #           enabled: false, # required
+    #         },
     #       }
     #
     # @!attribute [rw] cluster_name
@@ -243,6 +252,11 @@ module Aws::DAX
     #   A set of tags to associate with the DAX cluster.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] sse_specification
+    #   Represents the settings used to enable server-side encryption on the
+    #   cluster.
+    #   @return [Types::SSESpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
@@ -257,7 +271,8 @@ module Aws::DAX
       :notification_topic_arn,
       :iam_role_arn,
       :parameter_group_name,
-      :tags)
+      :tags,
+      :sse_specification)
       include Aws::Structure
     end
 
@@ -1232,6 +1247,49 @@ module Aws::DAX
     #
     class RebootNodeResponse < Struct.new(
       :cluster)
+      include Aws::Structure
+    end
+
+    # The description of the server-side encryption status on the specified
+    # DAX cluster.
+    #
+    # @!attribute [rw] status
+    #   The current state of server-side encryption:
+    #
+    #   * `ENABLING` - Server-side encryption is being enabled.
+    #
+    #   * `ENABLED` - Server-side encryption is enabled.
+    #
+    #   * `DISABLING` - Server-side encryption is being disabled.
+    #
+    #   * `DISABLED` - Server-side encryption is disabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/SSEDescription AWS API Documentation
+    #
+    class SSEDescription < Struct.new(
+      :status)
+      include Aws::Structure
+    end
+
+    # Represents the settings used to enable server-side encryption.
+    #
+    # @note When making an API call, you may pass SSESpecification
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether server-side encryption is enabled (true) or
+    #   disabled (false) on the cluster.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/SSESpecification AWS API Documentation
+    #
+    class SSESpecification < Struct.new(
+      :enabled)
       include Aws::Structure
     end
 

@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -47,108 +49,128 @@ module Aws::Polly
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
     #
-    # @option options [String] :session_token
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -228,6 +250,14 @@ module Aws::Polly
     #   If you don't specify this optional parameter, all available voices
     #   are returned.
     #
+    # @option params [Boolean] :include_additional_language_codes
+    #   Boolean value indicating whether to return any bilingual voices that
+    #   use the specified language as an additional language. For instance, if
+    #   you request all languages that use US English (es-US), and there is an
+    #   Italian voice that speaks both Italian (it-IT) and US English, that
+    #   voice will be included if you specify `yes` but not if you specify
+    #   `no`.
+    #
     # @option params [String] :next_token
     #   An opaque pagination token returned from the previous `DescribeVoices`
     #   operation. If present, this indicates where to continue the listing.
@@ -277,7 +307,8 @@ module Aws::Polly
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_voices({
-    #     language_code: "cy-GB", # accepts cy-GB, da-DK, de-DE, en-AU, en-GB, en-GB-WLS, en-IN, en-US, es-ES, es-US, fr-CA, fr-FR, is-IS, it-IT, ko-KR, ja-JP, nb-NO, nl-NL, pl-PL, pt-BR, pt-PT, ro-RO, ru-RU, sv-SE, tr-TR
+    #     language_code: "cmn-CN", # accepts cmn-CN, cy-GB, da-DK, de-DE, en-AU, en-GB, en-GB-WLS, en-IN, en-US, es-ES, es-US, fr-CA, fr-FR, is-IS, it-IT, ja-JP, hi-IN, ko-KR, nb-NO, nl-NL, pl-PL, pt-BR, pt-PT, ro-RO, ru-RU, sv-SE, tr-TR
+    #     include_additional_language_codes: false,
     #     next_token: "NextToken",
     #   })
     #
@@ -285,10 +316,12 @@ module Aws::Polly
     #
     #   resp.voices #=> Array
     #   resp.voices[0].gender #=> String, one of "Female", "Male"
-    #   resp.voices[0].id #=> String, one of "Geraint", "Gwyneth", "Mads", "Naja", "Hans", "Marlene", "Nicole", "Russell", "Amy", "Brian", "Emma", "Raveena", "Ivy", "Joanna", "Joey", "Justin", "Kendra", "Kimberly", "Matthew", "Salli", "Conchita", "Enrique", "Miguel", "Penelope", "Chantal", "Celine", "Lea", "Mathieu", "Dora", "Karl", "Carla", "Giorgio", "Mizuki", "Liv", "Lotte", "Ruben", "Ewa", "Jacek", "Jan", "Maja", "Ricardo", "Vitoria", "Cristiano", "Ines", "Carmen", "Maxim", "Tatyana", "Astrid", "Filiz", "Vicki", "Takumi", "Seoyeon", "Aditi"
-    #   resp.voices[0].language_code #=> String, one of "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ko-KR", "ja-JP", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR"
+    #   resp.voices[0].id #=> String, one of "Geraint", "Gwyneth", "Mads", "Naja", "Hans", "Marlene", "Nicole", "Russell", "Amy", "Brian", "Emma", "Raveena", "Ivy", "Joanna", "Joey", "Justin", "Kendra", "Kimberly", "Matthew", "Salli", "Conchita", "Enrique", "Miguel", "Penelope", "Chantal", "Celine", "Lea", "Mathieu", "Dora", "Karl", "Carla", "Giorgio", "Mizuki", "Liv", "Lotte", "Ruben", "Ewa", "Jacek", "Jan", "Maja", "Ricardo", "Vitoria", "Cristiano", "Ines", "Carmen", "Maxim", "Tatyana", "Astrid", "Filiz", "Vicki", "Takumi", "Seoyeon", "Aditi", "Zhiyu"
+    #   resp.voices[0].language_code #=> String, one of "cmn-CN", "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ja-JP", "hi-IN", "ko-KR", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR"
     #   resp.voices[0].language_name #=> String
     #   resp.voices[0].name #=> String
+    #   resp.voices[0].additional_language_codes #=> Array
+    #   resp.voices[0].additional_language_codes[0] #=> String, one of "cmn-CN", "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ja-JP", "hi-IN", "ko-KR", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DescribeVoices AWS API Documentation
@@ -351,7 +384,7 @@ module Aws::Polly
     #   resp.lexicon.content #=> String
     #   resp.lexicon.name #=> String
     #   resp.lexicon_attributes.alphabet #=> String
-    #   resp.lexicon_attributes.language_code #=> String, one of "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ko-KR", "ja-JP", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR"
+    #   resp.lexicon_attributes.language_code #=> String, one of "cmn-CN", "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ja-JP", "hi-IN", "ko-KR", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR"
     #   resp.lexicon_attributes.last_modified #=> Time
     #   resp.lexicon_attributes.lexicon_arn #=> String
     #   resp.lexicon_attributes.lexemes_count #=> Integer
@@ -400,7 +433,8 @@ module Aws::Polly
     #   resp.synthesis_task.speech_mark_types #=> Array
     #   resp.synthesis_task.speech_mark_types[0] #=> String, one of "sentence", "ssml", "viseme", "word"
     #   resp.synthesis_task.text_type #=> String, one of "ssml", "text"
-    #   resp.synthesis_task.voice_id #=> String, one of "Geraint", "Gwyneth", "Mads", "Naja", "Hans", "Marlene", "Nicole", "Russell", "Amy", "Brian", "Emma", "Raveena", "Ivy", "Joanna", "Joey", "Justin", "Kendra", "Kimberly", "Matthew", "Salli", "Conchita", "Enrique", "Miguel", "Penelope", "Chantal", "Celine", "Lea", "Mathieu", "Dora", "Karl", "Carla", "Giorgio", "Mizuki", "Liv", "Lotte", "Ruben", "Ewa", "Jacek", "Jan", "Maja", "Ricardo", "Vitoria", "Cristiano", "Ines", "Carmen", "Maxim", "Tatyana", "Astrid", "Filiz", "Vicki", "Takumi", "Seoyeon", "Aditi"
+    #   resp.synthesis_task.voice_id #=> String, one of "Geraint", "Gwyneth", "Mads", "Naja", "Hans", "Marlene", "Nicole", "Russell", "Amy", "Brian", "Emma", "Raveena", "Ivy", "Joanna", "Joey", "Justin", "Kendra", "Kimberly", "Matthew", "Salli", "Conchita", "Enrique", "Miguel", "Penelope", "Chantal", "Celine", "Lea", "Mathieu", "Dora", "Karl", "Carla", "Giorgio", "Mizuki", "Liv", "Lotte", "Ruben", "Ewa", "Jacek", "Jan", "Maja", "Ricardo", "Vitoria", "Cristiano", "Ines", "Carmen", "Maxim", "Tatyana", "Astrid", "Filiz", "Vicki", "Takumi", "Seoyeon", "Aditi", "Zhiyu"
+    #   resp.synthesis_task.language_code #=> String, one of "cmn-CN", "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ja-JP", "hi-IN", "ko-KR", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/GetSpeechSynthesisTask AWS API Documentation
     #
@@ -464,7 +498,7 @@ module Aws::Polly
     #   resp.lexicons #=> Array
     #   resp.lexicons[0].name #=> String
     #   resp.lexicons[0].attributes.alphabet #=> String
-    #   resp.lexicons[0].attributes.language_code #=> String, one of "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ko-KR", "ja-JP", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR"
+    #   resp.lexicons[0].attributes.language_code #=> String, one of "cmn-CN", "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ja-JP", "hi-IN", "ko-KR", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR"
     #   resp.lexicons[0].attributes.last_modified #=> Time
     #   resp.lexicons[0].attributes.lexicon_arn #=> String
     #   resp.lexicons[0].attributes.lexemes_count #=> Integer
@@ -525,7 +559,8 @@ module Aws::Polly
     #   resp.synthesis_tasks[0].speech_mark_types #=> Array
     #   resp.synthesis_tasks[0].speech_mark_types[0] #=> String, one of "sentence", "ssml", "viseme", "word"
     #   resp.synthesis_tasks[0].text_type #=> String, one of "ssml", "text"
-    #   resp.synthesis_tasks[0].voice_id #=> String, one of "Geraint", "Gwyneth", "Mads", "Naja", "Hans", "Marlene", "Nicole", "Russell", "Amy", "Brian", "Emma", "Raveena", "Ivy", "Joanna", "Joey", "Justin", "Kendra", "Kimberly", "Matthew", "Salli", "Conchita", "Enrique", "Miguel", "Penelope", "Chantal", "Celine", "Lea", "Mathieu", "Dora", "Karl", "Carla", "Giorgio", "Mizuki", "Liv", "Lotte", "Ruben", "Ewa", "Jacek", "Jan", "Maja", "Ricardo", "Vitoria", "Cristiano", "Ines", "Carmen", "Maxim", "Tatyana", "Astrid", "Filiz", "Vicki", "Takumi", "Seoyeon", "Aditi"
+    #   resp.synthesis_tasks[0].voice_id #=> String, one of "Geraint", "Gwyneth", "Mads", "Naja", "Hans", "Marlene", "Nicole", "Russell", "Amy", "Brian", "Emma", "Raveena", "Ivy", "Joanna", "Joey", "Justin", "Kendra", "Kimberly", "Matthew", "Salli", "Conchita", "Enrique", "Miguel", "Penelope", "Chantal", "Celine", "Lea", "Mathieu", "Dora", "Karl", "Carla", "Giorgio", "Mizuki", "Liv", "Lotte", "Ruben", "Ewa", "Jacek", "Jan", "Maja", "Ricardo", "Vitoria", "Cristiano", "Ines", "Carmen", "Maxim", "Tatyana", "Astrid", "Filiz", "Vicki", "Takumi", "Seoyeon", "Aditi", "Zhiyu"
+    #   resp.synthesis_tasks[0].language_code #=> String, one of "cmn-CN", "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ja-JP", "hi-IN", "ko-KR", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ListSpeechSynthesisTasks AWS API Documentation
     #
@@ -611,7 +646,7 @@ module Aws::Polly
     #   Amazon S3 bucket name to which the output file will be saved.
     #
     # @option params [String] :output_s3_key_prefix
-    #   The Amazon S3 Key prefix for the output speech file.
+    #   The Amazon S3 key prefix for the output speech file.
     #
     # @option params [String] :sample_rate
     #   The audio frequency specified in Hz.
@@ -640,6 +675,22 @@ module Aws::Polly
     # @option params [required, String] :voice_id
     #   Voice ID to use for the synthesis.
     #
+    # @option params [String] :language_code
+    #   Optional language code for the Speech Synthesis request. This is only
+    #   necessary if using a bilingual voice, such as Aditi, which can be used
+    #   for either Indian English (en-IN) or Hindi (hi-IN).
+    #
+    #   If a bilingual voice is used and no language code is specified, Amazon
+    #   Polly will use the default language of the bilingual voice. The
+    #   default language for any voice is the one returned by the
+    #   [DescribeVoices][1] operation for the `LanguageCode` parameter. For
+    #   example, if no language code is specified, Aditi will use Indian
+    #   English rather than Hindi.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html
+    #
     # @return [Types::StartSpeechSynthesisTaskOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartSpeechSynthesisTaskOutput#synthesis_task #synthesis_task} => Types::SynthesisTask
@@ -656,7 +707,8 @@ module Aws::Polly
     #     speech_mark_types: ["sentence"], # accepts sentence, ssml, viseme, word
     #     text: "Text", # required
     #     text_type: "ssml", # accepts ssml, text
-    #     voice_id: "Geraint", # required, accepts Geraint, Gwyneth, Mads, Naja, Hans, Marlene, Nicole, Russell, Amy, Brian, Emma, Raveena, Ivy, Joanna, Joey, Justin, Kendra, Kimberly, Matthew, Salli, Conchita, Enrique, Miguel, Penelope, Chantal, Celine, Lea, Mathieu, Dora, Karl, Carla, Giorgio, Mizuki, Liv, Lotte, Ruben, Ewa, Jacek, Jan, Maja, Ricardo, Vitoria, Cristiano, Ines, Carmen, Maxim, Tatyana, Astrid, Filiz, Vicki, Takumi, Seoyeon, Aditi
+    #     voice_id: "Geraint", # required, accepts Geraint, Gwyneth, Mads, Naja, Hans, Marlene, Nicole, Russell, Amy, Brian, Emma, Raveena, Ivy, Joanna, Joey, Justin, Kendra, Kimberly, Matthew, Salli, Conchita, Enrique, Miguel, Penelope, Chantal, Celine, Lea, Mathieu, Dora, Karl, Carla, Giorgio, Mizuki, Liv, Lotte, Ruben, Ewa, Jacek, Jan, Maja, Ricardo, Vitoria, Cristiano, Ines, Carmen, Maxim, Tatyana, Astrid, Filiz, Vicki, Takumi, Seoyeon, Aditi, Zhiyu
+    #     language_code: "cmn-CN", # accepts cmn-CN, cy-GB, da-DK, de-DE, en-AU, en-GB, en-GB-WLS, en-IN, en-US, es-ES, es-US, fr-CA, fr-FR, is-IS, it-IT, ja-JP, hi-IN, ko-KR, nb-NO, nl-NL, pl-PL, pt-BR, pt-PT, ro-RO, ru-RU, sv-SE, tr-TR
     #   })
     #
     # @example Response structure
@@ -675,7 +727,8 @@ module Aws::Polly
     #   resp.synthesis_task.speech_mark_types #=> Array
     #   resp.synthesis_task.speech_mark_types[0] #=> String, one of "sentence", "ssml", "viseme", "word"
     #   resp.synthesis_task.text_type #=> String, one of "ssml", "text"
-    #   resp.synthesis_task.voice_id #=> String, one of "Geraint", "Gwyneth", "Mads", "Naja", "Hans", "Marlene", "Nicole", "Russell", "Amy", "Brian", "Emma", "Raveena", "Ivy", "Joanna", "Joey", "Justin", "Kendra", "Kimberly", "Matthew", "Salli", "Conchita", "Enrique", "Miguel", "Penelope", "Chantal", "Celine", "Lea", "Mathieu", "Dora", "Karl", "Carla", "Giorgio", "Mizuki", "Liv", "Lotte", "Ruben", "Ewa", "Jacek", "Jan", "Maja", "Ricardo", "Vitoria", "Cristiano", "Ines", "Carmen", "Maxim", "Tatyana", "Astrid", "Filiz", "Vicki", "Takumi", "Seoyeon", "Aditi"
+    #   resp.synthesis_task.voice_id #=> String, one of "Geraint", "Gwyneth", "Mads", "Naja", "Hans", "Marlene", "Nicole", "Russell", "Amy", "Brian", "Emma", "Raveena", "Ivy", "Joanna", "Joey", "Justin", "Kendra", "Kimberly", "Matthew", "Salli", "Conchita", "Enrique", "Miguel", "Penelope", "Chantal", "Celine", "Lea", "Mathieu", "Dora", "Karl", "Carla", "Giorgio", "Mizuki", "Liv", "Lotte", "Ruben", "Ewa", "Jacek", "Jan", "Maja", "Ricardo", "Vitoria", "Cristiano", "Ines", "Carmen", "Maxim", "Tatyana", "Astrid", "Filiz", "Vicki", "Takumi", "Seoyeon", "Aditi", "Zhiyu"
+    #   resp.synthesis_task.language_code #=> String, one of "cmn-CN", "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ja-JP", "hi-IN", "ko-KR", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/StartSpeechSynthesisTask AWS API Documentation
     #
@@ -711,6 +764,9 @@ module Aws::Polly
     #   stream, this will be mp3, ogg\_vorbis, or pcm. For speech marks, this
     #   will be json.
     #
+    #   When pcm is used, the content returned is audio/pcm in a signed
+    #   16-bit, 1 channel (mono), little-endian format.
+    #
     # @option params [String] :sample_rate
     #   The audio frequency specified in Hz.
     #
@@ -742,6 +798,22 @@ module Aws::Polly
     #
     #
     #   [1]: http://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html
+    #
+    # @option params [String] :language_code
+    #   Optional language code for the Synthesize Speech request. This is only
+    #   necessary if using a bilingual voice, such as Aditi, which can be used
+    #   for either Indian English (en-IN) or Hindi (hi-IN).
+    #
+    #   If a bilingual voice is used and no language code is specified, Amazon
+    #   Polly will use the default language of the bilingual voice. The
+    #   default language for any voice is the one returned by the
+    #   [DescribeVoices][1] operation for the `LanguageCode` parameter. For
+    #   example, if no language code is specified, Aditi will use Indian
+    #   English rather than Hindi.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html
     #
     # @return [Types::SynthesizeSpeechOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -781,7 +853,8 @@ module Aws::Polly
     #     speech_mark_types: ["sentence"], # accepts sentence, ssml, viseme, word
     #     text: "Text", # required
     #     text_type: "ssml", # accepts ssml, text
-    #     voice_id: "Geraint", # required, accepts Geraint, Gwyneth, Mads, Naja, Hans, Marlene, Nicole, Russell, Amy, Brian, Emma, Raveena, Ivy, Joanna, Joey, Justin, Kendra, Kimberly, Matthew, Salli, Conchita, Enrique, Miguel, Penelope, Chantal, Celine, Lea, Mathieu, Dora, Karl, Carla, Giorgio, Mizuki, Liv, Lotte, Ruben, Ewa, Jacek, Jan, Maja, Ricardo, Vitoria, Cristiano, Ines, Carmen, Maxim, Tatyana, Astrid, Filiz, Vicki, Takumi, Seoyeon, Aditi
+    #     voice_id: "Geraint", # required, accepts Geraint, Gwyneth, Mads, Naja, Hans, Marlene, Nicole, Russell, Amy, Brian, Emma, Raveena, Ivy, Joanna, Joey, Justin, Kendra, Kimberly, Matthew, Salli, Conchita, Enrique, Miguel, Penelope, Chantal, Celine, Lea, Mathieu, Dora, Karl, Carla, Giorgio, Mizuki, Liv, Lotte, Ruben, Ewa, Jacek, Jan, Maja, Ricardo, Vitoria, Cristiano, Ines, Carmen, Maxim, Tatyana, Astrid, Filiz, Vicki, Takumi, Seoyeon, Aditi, Zhiyu
+    #     language_code: "cmn-CN", # accepts cmn-CN, cy-GB, da-DK, de-DE, en-AU, en-GB, en-GB-WLS, en-IN, en-US, es-ES, es-US, fr-CA, fr-FR, is-IS, it-IT, ja-JP, hi-IN, ko-KR, nb-NO, nl-NL, pl-PL, pt-BR, pt-PT, ro-RO, ru-RU, sv-SE, tr-TR
     #   })
     #
     # @example Response structure
@@ -812,7 +885,7 @@ module Aws::Polly
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-polly'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

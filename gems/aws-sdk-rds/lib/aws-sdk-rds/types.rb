@@ -360,7 +360,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `my-cluster1`
     #   @return [String]
@@ -380,7 +380,7 @@ module Aws::RDS
     #
     #   * Must contain a valid ISO 8601 timestamp.
     #
-    #   * Cannot contain a timestamp set in the future.
+    #   * Can't contain a timestamp set in the future.
     #
     #   Example: `2017-07-08T18:00Z`
     #
@@ -492,6 +492,16 @@ module Aws::RDS
     # The configuration setting for the log types to be enabled for export
     # to CloudWatch Logs for a specific DB instance or DB cluster.
     #
+    # The `EnableLogTypes` and `DisableLogTypes` arrays determine which logs
+    # will be exported (or not exported) to CloudWatch Logs. The values
+    # within these arrays depend on the DB engine being used. For more
+    # information, see [Publishing Database Logs to Amazon CloudWatch Logs
+    # ][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #
     # @note When making an API call, you may pass CloudwatchLogsExportConfiguration
     #   data as a hash:
     #
@@ -534,7 +544,8 @@ module Aws::RDS
     # @!attribute [rw] source_db_cluster_parameter_group_identifier
     #   The identifier or Amazon Resource Name (ARN) for the source DB
     #   cluster parameter group. For information about creating an ARN, see
-    #   [ Constructing an RDS Amazon Resource Name (ARN)][1].
+    #   [ Constructing an ARN for Amazon RDS][1] in the *Amazon Aurora User
+    #   Guide*.
     #
     #   Constraints:
     #
@@ -551,7 +562,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
     #   @return [String]
     #
     # @!attribute [rw] target_db_cluster_parameter_group_identifier
@@ -559,13 +570,13 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Cannot be null, empty, or blank
+    #   * Can't be null, empty, or blank
     #
     #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-cluster-param-group1`
     #   @return [String]
@@ -576,7 +587,7 @@ module Aws::RDS
     #
     # @!attribute [rw] tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -641,13 +652,14 @@ module Aws::RDS
     #
     #   * If the source snapshot is in a different AWS Region than the copy,
     #     specify a valid DB cluster snapshot ARN. For more information, go
-    #     to [ Copying a DB Snapshot or DB Cluster Snapshot][1].
+    #     to [ Copying Snapshots Across AWS Regions][1] in the *Amazon
+    #     Aurora User Guide.*
     #
     #   Example: `my-cluster-snapshot1`
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_CopySnapshot.html#USER_CopySnapshot.AcrossRegions
     #   @return [String]
     #
     # @!attribute [rw] target_db_cluster_snapshot_identifier
@@ -660,7 +672,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `my-cluster-snapshot2`
     #   @return [String]
@@ -739,7 +751,7 @@ module Aws::RDS
     #
     # @!attribute [rw] tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -799,8 +811,8 @@ module Aws::RDS
     #
     # @!attribute [rw] source_db_parameter_group_identifier
     #   The identifier or ARN for the source DB parameter group. For
-    #   information about creating an ARN, see [ Constructing an RDS Amazon
-    #   Resource Name (ARN)][1].
+    #   information about creating an ARN, see [ Constructing an ARN for
+    #   Amazon RDS][1] in the *Amazon RDS User Guide*.
     #
     #   Constraints:
     #
@@ -819,13 +831,13 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Cannot be null, empty, or blank
+    #   * Can't be null, empty, or blank
     #
     #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-db-parameter-group`
     #   @return [String]
@@ -836,7 +848,7 @@ module Aws::RDS
     #
     # @!attribute [rw] tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -921,13 +933,13 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Cannot be null, empty, or blank
+    #   * Can't be null, empty, or blank
     #
     #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-db-snapshot`
     #   @return [String]
@@ -958,7 +970,7 @@ module Aws::RDS
     #
     # @!attribute [rw] tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -1032,7 +1044,7 @@ module Aws::RDS
     #   group. If your source DB instance uses Transparent Data Encryption
     #   for Oracle or Microsoft SQL Server, you must specify this option
     #   when copying across AWS Regions. For more information, see [Option
-    #   Group Considerations][1].
+    #   Group Considerations][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -1093,8 +1105,8 @@ module Aws::RDS
     #
     # @!attribute [rw] source_option_group_identifier
     #   The identifier or ARN for the source option group. For information
-    #   about creating an ARN, see [ Constructing an RDS Amazon Resource
-    #   Name (ARN)][1].
+    #   about creating an ARN, see [ Constructing an ARN for Amazon RDS][1]
+    #   in the *Amazon RDS User Guide*.
     #
     #   Constraints:
     #
@@ -1118,13 +1130,13 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Cannot be null, empty, or blank
+    #   * Can't be null, empty, or blank
     #
     #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-option-group`
     #   @return [String]
@@ -1135,7 +1147,7 @@ module Aws::RDS
     #
     # @!attribute [rw] tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -1195,17 +1207,26 @@ module Aws::RDS
     #         enable_iam_database_authentication: false,
     #         backtrack_window: 1,
     #         enable_cloudwatch_logs_exports: ["String"],
+    #         engine_mode: "String",
+    #         scaling_configuration: {
+    #           min_capacity: 1,
+    #           max_capacity: 1,
+    #           auto_pause: false,
+    #           seconds_until_auto_pause: 1,
+    #         },
+    #         deletion_protection: false,
     #         source_region: "String",
     #       }
     #
     # @!attribute [rw] availability_zones
     #   A list of EC2 Availability Zones that instances in the DB cluster
     #   can be created in. For information on AWS Regions and Availability
-    #   Zones, see [Regions and Availability Zones][1].
+    #   Zones, see [Choosing the Regions and Availability Zones][1] in the
+    #   *Amazon Aurora User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] backup_retention_period
@@ -1242,7 +1263,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `my-cluster1`
     #   @return [String]
@@ -1253,8 +1274,8 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * If supplied, must match the name of an existing
-    #     DBClusterParameterGroup.
+    #   * If supplied, must match the name of an existing DB cluster
+    #     parameter group.
     #
     #   ^
     #   @return [String]
@@ -1309,7 +1330,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #   @return [String]
     #
     # @!attribute [rw] master_user_password
@@ -1335,8 +1356,8 @@ module Aws::RDS
     #
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each AWS Region. To see the time blocks available,
-    #   see [ Adjusting the Preferred Maintenance Window][1] in the *Amazon
-    #   RDS User Guide.*
+    #   see [ Adjusting the Preferred DB Cluster Maintenance Window][1] in
+    #   the *Amazon Aurora User Guide.*
     #
     #   Constraints:
     #
@@ -1350,7 +1371,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora
     #   @return [String]
     #
     # @!attribute [rw] preferred_maintenance_window
@@ -1362,7 +1383,8 @@ module Aws::RDS
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each AWS Region, occurring on a random day of the
     #   week. To see the time blocks available, see [ Adjusting the
-    #   Preferred Maintenance Window][1] in the *Amazon RDS User Guide.*
+    #   Preferred DB Cluster Maintenance Window][1] in the *Amazon Aurora
+    #   User Guide.*
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
@@ -1370,7 +1392,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora
     #   @return [String]
     #
     # @!attribute [rw] replication_source_identifier
@@ -1380,7 +1402,7 @@ module Aws::RDS
     #
     # @!attribute [rw] tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -1485,8 +1507,30 @@ module Aws::RDS
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine
+    #   being used. For more information, see [Publishing Database Logs to
+    #   Amazon CloudWatch Logs][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] engine_mode
+    #   The DB engine mode of the DB cluster, either `provisioned`,
+    #   `serverless`, or `parallelquery`.
+    #   @return [String]
+    #
+    # @!attribute [rw] scaling_configuration
+    #   For DB clusters in `serverless` DB engine mode, the scaling
+    #   properties of the DB cluster.
+    #   @return [Types::ScalingConfiguration]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB cluster should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false.
+    #   @return [Boolean]
     #
     # @!attribute [rw] destination_region
     #   @return [String]
@@ -1523,6 +1567,9 @@ module Aws::RDS
       :enable_iam_database_authentication,
       :backtrack_window,
       :enable_cloudwatch_logs_exports,
+      :engine_mode,
+      :scaling_configuration,
+      :deletion_protection,
       :destination_region,
       :source_region)
       include Aws::Structure
@@ -1548,7 +1595,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must match the name of an existing DBClusterParameterGroup.
+    #   * Must match the name of an existing DB cluster parameter group.
     #
     #   ^
     #
@@ -1579,7 +1626,7 @@ module Aws::RDS
     #
     # @!attribute [rw] tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -1611,10 +1658,10 @@ module Aws::RDS
     end
 
     # @!attribute [rw] db_cluster
-    #   Contains the details of an Amazon RDS DB cluster.
+    #   Contains the details of an Amazon Aurora DB cluster.
     #
     #   This data type is used as a response element in the
-    #   DescribeDBClusters action.
+    #   DescribeDBClusters, StopDBCluster, and StartDBCluster actions.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterResult AWS API Documentation
@@ -1648,7 +1695,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `my-cluster1-snapshot1`
     #   @return [String]
@@ -1751,6 +1798,7 @@ module Aws::RDS
     #             value: "String",
     #           },
     #         ],
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] db_name
@@ -1769,7 +1817,7 @@ module Aws::RDS
     #
     #   * Must contain 1 to 64 letters or numbers.
     #
-    #   * Cannot be a word reserved by the specified database engine
+    #   * Can't be a word reserved by the specified database engine
     #
     #   **MariaDB**
     #
@@ -1781,7 +1829,7 @@ module Aws::RDS
     #
     #   * Must contain 1 to 64 letters or numbers.
     #
-    #   * Cannot be a word reserved by the specified database engine
+    #   * Can't be a word reserved by the specified database engine
     #
     #   **PostgreSQL**
     #
@@ -1796,7 +1844,7 @@ module Aws::RDS
     #   * Must begin with a letter or an underscore. Subsequent characters
     #     can be letters, underscores, or digits (0-9).
     #
-    #   * Cannot be a word reserved by the specified database engine
+    #   * Can't be a word reserved by the specified database engine
     #
     #   **Oracle**
     #
@@ -1808,7 +1856,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Cannot be longer than 8 characters
+    #   * Can't be longer than 8 characters
     #
     #   ^
     #
@@ -1826,7 +1874,7 @@ module Aws::RDS
     #
     #   * Must contain 1 to 64 letters or numbers.
     #
-    #   * Cannot be a word reserved by the specified database engine
+    #   * Can't be a word reserved by the specified database engine
     #   @return [String]
     #
     # @!attribute [rw] db_instance_identifier
@@ -1839,7 +1887,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `mydbinstance`
     #   @return [String]
@@ -1999,7 +2047,7 @@ module Aws::RDS
     #
     #   * Must be 1 to 16 letters or numbers.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #
     #   **Microsoft SQL Server**
     #
@@ -2011,7 +2059,7 @@ module Aws::RDS
     #
     #   * The first character must be a letter.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #
     #   **MySQL**
     #
@@ -2023,7 +2071,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #
     #   **Oracle**
     #
@@ -2035,7 +2083,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #
     #   **PostgreSQL**
     #
@@ -2047,7 +2095,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #   @return [String]
     #
     # @!attribute [rw] master_user_password
@@ -2156,7 +2204,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #   @return [String]
     #
     # @!attribute [rw] backup_retention_period
@@ -2176,13 +2224,14 @@ module Aws::RDS
     #
     #   * Must be a value from 0 to 35
     #
-    #   * Cannot be set to 0 if the DB instance is a source to Read Replicas
+    #   * Can't be set to 0 if the DB instance is a source to Read Replicas
     #   @return [Integer]
     #
     # @!attribute [rw] preferred_backup_window
     #   The daily time range during which automated backups are created if
     #   automated backups are enabled, using the `BackupRetentionPeriod`
-    #   parameter. For more information, see [The Backup Window][1].
+    #   parameter. For more information, see [The Backup Window][1] in the
+    #   *Amazon RDS User Guide*.
     #
     #   **Amazon Aurora**
     #
@@ -2192,7 +2241,8 @@ module Aws::RDS
     #
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each AWS Region. To see the time blocks available,
-    #   see [ Adjusting the Preferred DB Instance Maintenance Window][2].
+    #   see [ Adjusting the Preferred DB Instance Maintenance Window][2] in
+    #   the *Amazon RDS User Guide*.
     #
     #   Constraints:
     #
@@ -2332,12 +2382,10 @@ module Aws::RDS
     #   The amount of Provisioned IOPS (input/output operations per second)
     #   to be initially allocated for the DB instance. For information about
     #   valid Iops values, see see [Amazon RDS Provisioned IOPS Storage to
-    #   Improve Performance][1].
+    #   Improve Performance][1] in the *Amazon RDS User Guide*.
     #
     #   Constraints: Must be a multiple between 1 and 50 of the storage
-    #   amount for the DB instance. Must also be an integer multiple of
-    #   1000. For example, if the size of your DB instance is 500 GiB, then
-    #   your `Iops` value can be 2000, 3000, 4000, or 5000.
+    #   amount for the DB instance.
     #
     #
     #
@@ -2371,24 +2419,31 @@ module Aws::RDS
     #   of false specifies an internal instance with a DNS name that
     #   resolves to a private IP address.
     #
-    #   Default: The default behavior varies depending on whether a VPC has
-    #   been requested or not. The following list shows the default behavior
-    #   in each case.
+    #   Default: The default behavior varies depending on whether
+    #   `DBSubnetGroupName` is specified.
     #
-    #   * **Default VPC:** true
+    #   If `DBSubnetGroupName` is not specified, and `PubliclyAccessible` is
+    #   not specified, the following applies:
     #
-    #   * **VPC:** false
+    #   * If the default VPC in the target region doesn’t have an Internet
+    #     gateway attached to it, the DB instance is private.
     #
-    #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance is
-    #   publicly accessible. If a specific DB subnet group has been
-    #   specified as part of the request and the PubliclyAccessible value
-    #   has not been set, the DB instance is private.
+    #   * If the default VPC in the target region has an Internet gateway
+    #     attached to it, the DB instance is public.
+    #
+    #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` is not
+    #   specified, the following applies:
+    #
+    #   * If the subnets are part of a VPC that doesn’t have an Internet
+    #     gateway attached to it, the DB instance is private.
+    #
+    #   * If the subnets are part of a VPC that has an Internet gateway
+    #     attached to it, the DB instance is public.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -2482,7 +2537,7 @@ module Aws::RDS
     #   monitoring metrics to Amazon CloudWatch Logs. For example,
     #   `arn:aws:iam:123456789012:role/emaccess`. For information on
     #   creating a monitoring role, go to [Setting Up and Enabling Enhanced
-    #   Monitoring][1].
+    #   Monitoring][1] in the *Amazon RDS User Guide*.
     #
     #   If `MonitoringInterval` is set to a value other than 0, then you
     #   must supply a `MonitoringRoleArn` value.
@@ -2501,7 +2556,7 @@ module Aws::RDS
     #   A value that specifies the order in which an Aurora Replica is
     #   promoted to the primary instance after a failure of the existing
     #   primary instance. For more information, see [ Fault Tolerance for an
-    #   Aurora DB Cluster][1].
+    #   Aurora DB Cluster][1] in the *Amazon Aurora User Guide*.
     #
     #   Default: 1
     #
@@ -2509,7 +2564,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.FaultTolerance
     #   @return [Integer]
     #
     # @!attribute [rw] timezone
@@ -2568,13 +2623,31 @@ module Aws::RDS
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine
+    #   being used. For more information, see [Publishing Database Logs to
+    #   Amazon CloudWatch Logs ][1] in the *Amazon Relational Database
+    #   Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #   @return [Array<String>]
     #
     # @!attribute [rw] processor_features
     #   The number of CPU cores and the number of threads per core for the
     #   DB instance class of the DB instance.
     #   @return [Array<Types::ProcessorFeature>]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB instance should have deletion protection
+    #   enabled. The database can't be deleted when this value is set to
+    #   true. The default is false. For more information, see [ Deleting a
+    #   DB Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceMessage AWS API Documentation
     #
@@ -2622,7 +2695,8 @@ module Aws::RDS
       :performance_insights_kms_key_id,
       :performance_insights_retention_period,
       :enable_cloudwatch_logs_exports,
-      :processor_features)
+      :processor_features,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -2665,6 +2739,7 @@ module Aws::RDS
     #           },
     #         ],
     #         use_default_processor_features: false,
+    #         deletion_protection: false,
     #         source_region: "String",
     #       }
     #
@@ -2699,8 +2774,8 @@ module Aws::RDS
     #
     #   * If the source DB instance is in a different AWS Region than the
     #     Read Replica, specify a valid DB instance ARN. For more
-    #     information, go to [ Constructing a Amazon RDS Amazon Resource
-    #     Name (ARN)][1].
+    #     information, go to [ Constructing an ARN for Amazon RDS][1] in the
+    #     *Amazon RDS User Guide*.
     #
     #
     #
@@ -2771,26 +2846,13 @@ module Aws::RDS
     #   true specifies an Internet-facing instance with a publicly
     #   resolvable DNS name, which resolves to a public IP address. A value
     #   of false specifies an internal instance with a DNS name that
-    #   resolves to a private IP address.
-    #
-    #   Default: The default behavior varies depending on whether a VPC has
-    #   been requested or not. The following list shows the default behavior
-    #   in each case.
-    #
-    #   * **Default VPC:**true
-    #
-    #   * **VPC:**false
-    #
-    #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance is
-    #   publicly accessible. If a specific DB subnet group has been
-    #   specified as part of the request and the PubliclyAccessible value
-    #   has not been set, the DB instance is private.
+    #   resolves to a private IP address. For more information, see
+    #   CreateDBInstance.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -2858,7 +2920,7 @@ module Aws::RDS
     #   monitoring metrics to Amazon CloudWatch Logs. For example,
     #   `arn:aws:iam:123456789012:role/emaccess`. For information on
     #   creating a monitoring role, go to [To create an IAM role for Amazon
-    #   RDS Enhanced Monitoring][1].
+    #   RDS Enhanced Monitoring][1] in the *Amazon RDS User Guide*.
     #
     #   If `MonitoringInterval` is set to a value other than 0, then you
     #   must supply a `MonitoringRoleArn` value.
@@ -2963,7 +3025,7 @@ module Aws::RDS
     #   otherwise false.
     #
     #   For more information, see [Using Amazon Performance Insights][1] in
-    #   the *Amazon Relational Database Service User Guide*.
+    #   the *Amazon RDS User Guide*.
     #
     #
     #
@@ -2983,7 +3045,13 @@ module Aws::RDS
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
     #   The list of logs that the new DB instance is to export to CloudWatch
-    #   Logs.
+    #   Logs. The values in the list depend on the DB engine being used. For
+    #   more information, see [Publishing Database Logs to Amazon CloudWatch
+    #   Logs ][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #   @return [Array<String>]
     #
     # @!attribute [rw] processor_features
@@ -2994,6 +3062,17 @@ module Aws::RDS
     # @!attribute [rw] use_default_processor_features
     #   A value that specifies that the DB instance class of the DB instance
     #   uses its default processor features.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB instance should have deletion protection
+    #   enabled. The database can't be deleted when this value is set to
+    #   true. The default is false. For more information, see [ Deleting a
+    #   DB Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     #   @return [Boolean]
     #
     # @!attribute [rw] destination_region
@@ -3032,6 +3111,7 @@ module Aws::RDS
       :enable_cloudwatch_logs_exports,
       :processor_features,
       :use_default_processor_features,
+      :deletion_protection,
       :destination_region,
       :source_region)
       include Aws::Structure
@@ -3089,7 +3169,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   <note markdown="1"> This value is stored as a lowercase string.
     #
@@ -3119,7 +3199,7 @@ module Aws::RDS
     #
     # @!attribute [rw] tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -3174,7 +3254,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   * Must not be "Default"
     #
@@ -3187,7 +3267,7 @@ module Aws::RDS
     #
     # @!attribute [rw] tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -3236,13 +3316,13 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Cannot be null, empty, or blank
+    #   * Can't be null, empty, or blank
     #
     #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-snapshot-id`
     #   @return [String]
@@ -3260,7 +3340,7 @@ module Aws::RDS
     #
     # @!attribute [rw] tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -3325,7 +3405,7 @@ module Aws::RDS
     #
     # @!attribute [rw] tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -3399,8 +3479,8 @@ module Aws::RDS
     # @!attribute [rw] event_categories
     #   A list of event categories for a SourceType that you want to
     #   subscribe to. You can see a list of the categories for a given
-    #   SourceType in the [Events][1] topic in the Amazon RDS User Guide or
-    #   by using the **DescribeEventCategories** action.
+    #   SourceType in the [Events][1] topic in the *Amazon RDS User Guide*
+    #   or by using the **DescribeEventCategories** action.
     #
     #
     #
@@ -3438,7 +3518,7 @@ module Aws::RDS
     #
     # @!attribute [rw] tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -3495,7 +3575,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `myoptiongroup`
     #   @return [String]
@@ -3516,7 +3596,7 @@ module Aws::RDS
     #
     # @!attribute [rw] tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -3544,10 +3624,10 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # Contains the details of an Amazon RDS DB cluster.
+    # Contains the details of an Amazon Aurora DB cluster.
     #
-    # This data type is used as a response element in the DescribeDBClusters
-    # action.
+    # This data type is used as a response element in the
+    # DescribeDBClusters, StopDBCluster, and StartDBCluster actions.
     #
     # @!attribute [rw] allocated_storage
     #   For all database engines except Amazon Aurora, `AllocatedStorage`
@@ -3752,7 +3832,40 @@ module Aws::RDS
     # @!attribute [rw] enabled_cloudwatch_logs_exports
     #   A list of log types that this DB cluster is configured to export to
     #   CloudWatch Logs.
+    #
+    #   Log types vary by DB engine. For information about the log types for
+    #   each DB engine, see [Amazon RDS Database Log Files][1] in the
+    #   *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] capacity
+    #   @return [Integer]
+    #
+    # @!attribute [rw] engine_mode
+    #   The DB engine mode of the DB cluster, either `provisioned`,
+    #   `serverless`, or `parallelquery`.
+    #   @return [String]
+    #
+    # @!attribute [rw] scaling_configuration_info
+    #   Shows the scaling configuration for an Aurora DB cluster in
+    #   `serverless` DB engine mode.
+    #
+    #   For more information, see [Using Amazon Aurora Serverless][1] in the
+    #   *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
+    #   @return [Types::ScalingConfigurationInfo]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB cluster has deletion protection enabled. The
+    #   database can't be deleted when this value is set to true.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
     #
@@ -3795,7 +3908,11 @@ module Aws::RDS
       :earliest_backtrack_time,
       :backtrack_window,
       :backtrack_consumed_change_records,
-      :enabled_cloudwatch_logs_exports)
+      :enabled_cloudwatch_logs_exports,
+      :capacity,
+      :engine_mode,
+      :scaling_configuration_info,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -3872,6 +3989,41 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @!attribute [rw] db_cluster_identifier
+    #   A user-supplied DB cluster identifier. This identifier is the unique
+    #   key that identifies a DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] pending_capacity
+    #   A value that specifies the capacity that the DB cluster scales to
+    #   next.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] current_capacity
+    #   The current capacity of the DB cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] seconds_before_timeout
+    #   The number of seconds before a call to
+    #   `ModifyCurrentDBClusterCapacity` times out.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timeout_action
+    #   The timeout action of a call to `ModifyCurrentDBClusterCapacity`,
+    #   either `ForceApplyCapacityChange` or `RollbackCapacityChange`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterCapacityInfo AWS API Documentation
+    #
+    class DBClusterCapacityInfo < Struct.new(
+      :db_cluster_identifier,
+      :pending_capacity,
+      :current_capacity,
+      :seconds_before_timeout,
+      :timeout_action)
+      include Aws::Structure
+    end
+
     # Contains information about an instance that is part of a DB cluster.
     #
     # @!attribute [rw] db_instance_identifier
@@ -3892,11 +4044,11 @@ module Aws::RDS
     #   A value that specifies the order in which an Aurora Replica is
     #   promoted to the primary instance after a failure of the existing
     #   primary instance. For more information, see [ Fault Tolerance for an
-    #   Aurora DB Cluster][1].
+    #   Aurora DB Cluster][1] in the *Amazon Aurora User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.FaultTolerance
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterMember AWS API Documentation
@@ -4011,7 +4163,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   <note markdown="1"> This value is stored as a lowercase string.
     #
@@ -4067,11 +4219,15 @@ module Aws::RDS
     #     access other AWS services on your behalf.
     #   @return [String]
     #
+    # @!attribute [rw] feature_name
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterRole AWS API Documentation
     #
     class DBClusterRole < Struct.new(
       :role_arn,
-      :status)
+      :status,
+      :feature_name)
       include Aws::Structure
     end
 
@@ -4337,6 +4493,10 @@ module Aws::RDS
     #   replicas.
     #   @return [Boolean]
     #
+    # @!attribute [rw] supported_engine_modes
+    #   A list of the supported DB engine modes.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBEngineVersion AWS API Documentation
     #
     class DBEngineVersion < Struct.new(
@@ -4351,7 +4511,8 @@ module Aws::RDS
       :supported_timezones,
       :exportable_log_types,
       :supports_log_exports_to_cloudwatch_logs,
-      :supports_read_replica)
+      :supports_read_replica,
+      :supported_engine_modes)
       include Aws::Structure
     end
 
@@ -4515,8 +4676,12 @@ module Aws::RDS
     #   @return [Array<String>]
     #
     # @!attribute [rw] read_replica_db_cluster_identifiers
-    #   Contains one or more identifiers of Aurora DB clusters that are Read
-    #   Replicas of this DB instance.
+    #   Contains one or more identifiers of Aurora DB clusters to which the
+    #   RDS DB instance is replicated as a Read Replica. For example, when
+    #   you create an Aurora Read Replica of an RDS MySQL DB instance, the
+    #   Aurora MySQL DB cluster for the Aurora Read Replica is shown. This
+    #   output does not contain information about cross region Aurora Read
+    #   Replicas.
     #   @return [Array<String>]
     #
     # @!attribute [rw] license_model
@@ -4547,20 +4712,6 @@ module Aws::RDS
     #   resolvable DNS name, which resolves to a public IP address. A value
     #   of false specifies an internal instance with a DNS name that
     #   resolves to a private IP address.
-    #
-    #   Default: The default behavior varies depending on whether a VPC has
-    #   been requested or not. The following list shows the default behavior
-    #   in each case.
-    #
-    #   * **Default VPC:**true
-    #
-    #   * **VPC:**false
-    #
-    #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance is
-    #   publicly accessible. If a specific DB subnet group has been
-    #   specified as part of the request and the PubliclyAccessible value
-    #   has not been set, the DB instance is private.
     #   @return [Boolean]
     #
     # @!attribute [rw] status_infos
@@ -4637,11 +4788,11 @@ module Aws::RDS
     #   A value that specifies the order in which an Aurora Replica is
     #   promoted to the primary instance after a failure of the existing
     #   primary instance. For more information, see [ Fault Tolerance for an
-    #   Aurora DB Cluster][1].
+    #   Aurora DB Cluster][1] in the *Amazon Aurora User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.FaultTolerance
     #   @return [Integer]
     #
     # @!attribute [rw] db_instance_arn
@@ -4688,12 +4839,30 @@ module Aws::RDS
     # @!attribute [rw] enabled_cloudwatch_logs_exports
     #   A list of log types that this DB instance is configured to export to
     #   CloudWatch Logs.
+    #
+    #   Log types vary by DB engine. For information about the log types for
+    #   each DB engine, see [Amazon RDS Database Log Files][1] in the
+    #   *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] processor_features
     #   The number of CPU cores and the number of threads per core for the
     #   DB instance class of the DB instance.
     #   @return [Array<Types::ProcessorFeature>]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB instance has deletion protection enabled. The
+    #   database can't be deleted when this value is set to true. For more
+    #   information, see [ Deleting a DB Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
     #
@@ -4751,7 +4920,8 @@ module Aws::RDS
       :performance_insights_kms_key_id,
       :performance_insights_retention_period,
       :enabled_cloudwatch_logs_exports,
-      :processor_features)
+      :processor_features,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -4789,7 +4959,8 @@ module Aws::RDS
     #
     # @!attribute [rw] status
     #   Status of the DB instance. For a StatusType of read replica, the
-    #   values can be replicating, error, stopped, or terminated.
+    #   values can be replicating, replication stop point set, replication
+    #   stop point reached, error, stopped, or terminated.
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -5372,7 +5543,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterMessage AWS API Documentation
@@ -5400,7 +5571,7 @@ module Aws::RDS
     #
     #   * You can't delete a default DB cluster parameter group.
     #
-    #   * Cannot be associated with any DB clusters.
+    #   * Can't be associated with any DB clusters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterParameterGroupMessage AWS API Documentation
@@ -5411,10 +5582,10 @@ module Aws::RDS
     end
 
     # @!attribute [rw] db_cluster
-    #   Contains the details of an Amazon RDS DB cluster.
+    #   Contains the details of an Amazon Aurora DB cluster.
     #
     #   This data type is used as a response element in the
-    #   DescribeDBClusters action.
+    #   DescribeDBClusters, StopDBCluster, and StartDBCluster actions.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterResult AWS API Documentation
@@ -5515,9 +5686,9 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
-    #   * Cannot be specified when deleting a Read Replica.
+    #   * Can't be specified when deleting a Read Replica.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstanceMessage AWS API Documentation
@@ -5559,7 +5730,7 @@ module Aws::RDS
     #
     #   * You can't delete a default DB parameter group
     #
-    #   * Cannot be associated with any DB instances
+    #   * Can't be associated with any DB instances
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBParameterGroupMessage AWS API Documentation
@@ -5589,7 +5760,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   * Must not be "Default"
     #   @return [String]
@@ -5809,7 +5980,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `my-cluster1`
     #   @return [String]
@@ -7167,7 +7338,7 @@ module Aws::RDS
     #   * If the source type is `DBSnapshot`, a `DBSnapshotIdentifier` must
     #     be supplied.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #   @return [String]
     #
     # @!attribute [rw] source_type
@@ -7323,7 +7494,7 @@ module Aws::RDS
     #       }
     #
     # @!attribute [rw] option_group_name
-    #   The name of the option group to describe. Cannot be supplied
+    #   The name of the option group to describe. Can't be supplied
     #   together with EngineName or MajorEngineVersion.
     #   @return [String]
     #
@@ -8259,10 +8430,10 @@ module Aws::RDS
     end
 
     # @!attribute [rw] db_cluster
-    #   Contains the details of an Amazon RDS DB cluster.
+    #   Contains the details of an Amazon Aurora DB cluster.
     #
     #   This data type is used as a response element in the
-    #   DescribeDBClusters action.
+    #   DescribeDBClusters, StopDBCluster, and StartDBCluster actions.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBClusterResult AWS API Documentation
@@ -8352,7 +8523,8 @@ module Aws::RDS
     # @!attribute [rw] resource_name
     #   The Amazon RDS resource with tags to be listed. This value is an
     #   Amazon Resource Name (ARN). For information about creating an ARN,
-    #   see [ Constructing an RDS Amazon Resource Name (ARN)][1].
+    #   see [ Constructing an ARN for Amazon RDS][1] in the *Amazon RDS User
+    #   Guide*.
     #
     #
     #
@@ -8368,6 +8540,87 @@ module Aws::RDS
     class ListTagsForResourceMessage < Struct.new(
       :resource_name,
       :filters)
+      include Aws::Structure
+    end
+
+    # The minimum DB engine version required for each corresponding allowed
+    # value for an option setting.
+    #
+    # @!attribute [rw] allowed_value
+    #   The allowed value for an option setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] minimum_engine_version
+    #   The minimum DB engine version required for the allowed value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/MinimumEngineVersionPerAllowedValue AWS API Documentation
+    #
+    class MinimumEngineVersionPerAllowedValue < Struct.new(
+      :allowed_value,
+      :minimum_engine_version)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyCurrentDBClusterCapacityMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_identifier: "String", # required
+    #         capacity: 1,
+    #         seconds_before_timeout: 1,
+    #         timeout_action: "String",
+    #       }
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DB cluster identifier for the cluster being modified. This
+    #   parameter is not case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identifier of an existing DB cluster.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity
+    #   The DB cluster capacity.
+    #
+    #   Constraints:
+    #
+    #   * Value must be `2`, `4`, `8`, `16`, `32`, `64`, `128`, or `256`.
+    #
+    #   ^
+    #   @return [Integer]
+    #
+    # @!attribute [rw] seconds_before_timeout
+    #   The amount of time, in seconds, that Aurora Serverless tries to find
+    #   a scaling point to perform seamless scaling before enforcing the
+    #   timeout action. The default is 300.
+    #
+    #   * Value must be from 10 through 600.
+    #
+    #   ^
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timeout_action
+    #   The action to take when the timeout is reached, either
+    #   `ForceApplyCapacityChange` or `RollbackCapacityChange`.
+    #
+    #   `ForceApplyCapacityChange`, the default, sets the capacity to the
+    #   specified value as soon as possible.
+    #
+    #   `RollbackCapacityChange` ignores the capacity change if a scaling
+    #   point is not found in the timeout period.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyCurrentDBClusterCapacityMessage AWS API Documentation
+    #
+    class ModifyCurrentDBClusterCapacityMessage < Struct.new(
+      :db_cluster_identifier,
+      :capacity,
+      :seconds_before_timeout,
+      :timeout_action)
       include Aws::Structure
     end
 
@@ -8393,6 +8646,13 @@ module Aws::RDS
     #           disable_log_types: ["String"],
     #         },
     #         engine_version: "String",
+    #         scaling_configuration: {
+    #           min_capacity: 1,
+    #           max_capacity: 1,
+    #           auto_pause: false,
+    #           seconds_until_auto_pause: 1,
+    #         },
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -8416,7 +8676,7 @@ module Aws::RDS
     #
     #   * The first character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-cluster2`
     #   @return [String]
@@ -8429,12 +8689,13 @@ module Aws::RDS
     #   DB cluster are applied during the next maintenance window.
     #
     #   The `ApplyImmediately` parameter only affects the
-    #   `NewDBClusterIdentifier` and `MasterUserPassword` values. If you set
-    #   the `ApplyImmediately` parameter value to false, then changes to the
-    #   `NewDBClusterIdentifier` and `MasterUserPassword` values are applied
-    #   during the next maintenance window. All other changes are applied
-    #   immediately, regardless of the value of the `ApplyImmediately`
-    #   parameter.
+    #   `EnableIAMDatabaseAuthentication`, `MasterUserPassword`, and
+    #   `NewDBClusterIdentifier` values. If you set the `ApplyImmediately`
+    #   parameter value to false, then changes to the
+    #   `EnableIAMDatabaseAuthentication`, `MasterUserPassword`, and
+    #   `NewDBClusterIdentifier` values are applied during the next
+    #   maintenance window. All other changes are applied immediately,
+    #   regardless of the value of the `ApplyImmediately` parameter.
     #
     #   Default: `false`
     #   @return [Boolean]
@@ -8499,8 +8760,8 @@ module Aws::RDS
     #
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each AWS Region. To see the time blocks available,
-    #   see [ Adjusting the Preferred Maintenance Window][1] in the *Amazon
-    #   RDS User Guide.*
+    #   see [ Adjusting the Preferred DB Cluster Maintenance Window][1] in
+    #   the *Amazon Aurora User Guide.*
     #
     #   Constraints:
     #
@@ -8514,7 +8775,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora
     #   @return [String]
     #
     # @!attribute [rw] preferred_maintenance_window
@@ -8526,7 +8787,8 @@ module Aws::RDS
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each AWS Region, occurring on a random day of the
     #   week. To see the time blocks available, see [ Adjusting the
-    #   Preferred Maintenance Window][1] in the *Amazon RDS User Guide.*
+    #   Preferred DB Cluster Maintenance Window][1] in the *Amazon Aurora
+    #   User Guide.*
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
@@ -8534,7 +8796,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora
     #   @return [String]
     #
     # @!attribute [rw] enable_iam_database_authentication
@@ -8573,6 +8835,16 @@ module Aws::RDS
     #   DescribeDBEngineVersions.
     #   @return [String]
     #
+    # @!attribute [rw] scaling_configuration
+    #   The scaling properties of the DB cluster. You can only modify
+    #   scaling properties for DB clusters in `serverless` DB engine mode.
+    #   @return [Types::ScalingConfiguration]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB cluster has deletion protection enabled. The
+    #   database can't be deleted when this value is set to true.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterMessage AWS API Documentation
     #
     class ModifyDBClusterMessage < Struct.new(
@@ -8590,7 +8862,9 @@ module Aws::RDS
       :enable_iam_database_authentication,
       :backtrack_window,
       :cloudwatch_logs_export_configuration,
-      :engine_version)
+      :engine_version,
+      :scaling_configuration,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -8611,6 +8885,7 @@ module Aws::RDS
     #             is_modifiable: false,
     #             minimum_engine_version: "String",
     #             apply_method: "immediate", # accepts immediate, pending-reboot
+    #             supported_engine_modes: ["String"],
     #           },
     #         ],
     #       }
@@ -8632,10 +8907,10 @@ module Aws::RDS
     end
 
     # @!attribute [rw] db_cluster
-    #   Contains the details of an Amazon RDS DB cluster.
+    #   Contains the details of an Amazon Aurora DB cluster.
     #
     #   This data type is used as a response element in the
-    #   DescribeDBClusters action.
+    #   DescribeDBClusters, StopDBCluster, and StartDBCluster actions.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterResult AWS API Documentation
@@ -8770,6 +9045,7 @@ module Aws::RDS
     #           },
     #         ],
     #         use_default_processor_features: false,
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] db_instance_identifier
@@ -8819,7 +9095,7 @@ module Aws::RDS
     #   parameter to move your DB instance to a different VPC. If your DB
     #   instance is not in a VPC, you can also use this parameter to move
     #   your DB instance into a VPC. For more information, see [Updating the
-    #   VPC for a DB Instance][1].
+    #   VPC for a DB Instance][1] in the *Amazon RDS User Guide.*
     #
     #   Changing the subnet group causes an outage during the change. The
     #   change is applied during the next maintenance window, unless you
@@ -8875,9 +9151,10 @@ module Aws::RDS
     #   can cause an outage and are applied on the next call to
     #   RebootDBInstance, or the next failure reboot. Review the table of
     #   parameters in [Modifying a DB Instance and Using the Apply
-    #   Immediately Parameter][1] to see the impact that setting
-    #   `ApplyImmediately` to `true` or `false` has for each modified
-    #   parameter and to determine when the changes are applied.
+    #   Immediately Parameter][1] in the *Amazon RDS User Guide.* to see the
+    #   impact that setting `ApplyImmediately` to `true` or `false` has for
+    #   each modified parameter and to determine when the changes are
+    #   applied.
     #
     #   Default: `false`
     #
@@ -8976,7 +9253,7 @@ module Aws::RDS
     #   * Can be specified for a PostgreSQL Read Replica only if the source
     #     is running PostgreSQL 9.3.5
     #
-    #   * Cannot be set to 0 if the DB instance is a source to Read Replicas
+    #   * Can't be set to 0 if the DB instance is a source to Read Replicas
     #   @return [Integer]
     #
     # @!attribute [rw] preferred_backup_window
@@ -9137,7 +9414,7 @@ module Aws::RDS
     #
     #   * The first character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `mydbinstance`
     #   @return [String]
@@ -9281,7 +9558,7 @@ module Aws::RDS
     #   monitoring metrics to Amazon CloudWatch Logs. For example,
     #   `arn:aws:iam:123456789012:role/emaccess`. For information on
     #   creating a monitoring role, go to [To create an IAM role for Amazon
-    #   RDS Enhanced Monitoring][1].
+    #   RDS Enhanced Monitoring][1] in the *Amazon RDS User Guide.*
     #
     #   If `MonitoringInterval` is set to a value other than 0, then you
     #   must supply a `MonitoringRoleArn` value.
@@ -9300,7 +9577,7 @@ module Aws::RDS
     #   A value that specifies the order in which an Aurora Replica is
     #   promoted to the primary instance after a failure of the existing
     #   primary instance. For more information, see [ Fault Tolerance for an
-    #   Aurora DB Cluster][1].
+    #   Aurora DB Cluster][1] in the *Amazon Aurora User Guide*.
     #
     #   Default: 1
     #
@@ -9308,7 +9585,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.FaultTolerance
     #   @return [Integer]
     #
     # @!attribute [rw] enable_iam_database_authentication
@@ -9371,6 +9648,16 @@ module Aws::RDS
     #   uses its default processor features.
     #   @return [Boolean]
     #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB instance has deletion protection enabled. The
+    #   database can't be deleted when this value is set to true. For more
+    #   information, see [ Deleting a DB Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstanceMessage AWS API Documentation
     #
     class ModifyDBInstanceMessage < Struct.new(
@@ -9412,7 +9699,8 @@ module Aws::RDS
       :performance_insights_retention_period,
       :cloudwatch_logs_export_configuration,
       :processor_features,
-      :use_default_processor_features)
+      :use_default_processor_features,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -9447,6 +9735,7 @@ module Aws::RDS
     #             is_modifiable: false,
     #             minimum_engine_version: "String",
     #             apply_method: "immediate", # accepts immediate, pending-reboot
+    #             supported_engine_modes: ["String"],
     #           },
     #         ],
     #       }
@@ -9597,7 +9886,7 @@ module Aws::RDS
     #   You can specify this parameter when you upgrade an Oracle DB
     #   snapshot. The same option group considerations apply when upgrading
     #   a DB snapshot as when upgrading a DB instance. For more information,
-    #   see [Option Group Considerations][1].
+    #   see [Option Group Considerations][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -9711,8 +10000,8 @@ module Aws::RDS
     # @!attribute [rw] event_categories
     #   A list of event categories for a SourceType that you want to
     #   subscribe to. You can see a list of the categories for a given
-    #   SourceType in the [Events][1] topic in the Amazon RDS User Guide or
-    #   by using the **DescribeEventCategories** action.
+    #   SourceType in the [Events][1] topic in the *Amazon RDS User Guide*
+    #   or by using the **DescribeEventCategories** action.
     #
     #
     #
@@ -10148,6 +10437,16 @@ module Aws::RDS
     #   be changed from the default value.
     #   @return [Boolean]
     #
+    # @!attribute [rw] is_required
+    #   Boolean value where true indicates that a value must be specified
+    #   for this option setting of the option group option.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] minimum_engine_version_per_allowed_value
+    #   The minimum DB engine version required for the corresponding allowed
+    #   value for this option setting.
+    #   @return [Array<Types::MinimumEngineVersionPerAllowedValue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroupOptionSetting AWS API Documentation
     #
     class OptionGroupOptionSetting < Struct.new(
@@ -10156,7 +10455,9 @@ module Aws::RDS
       :default_value,
       :apply_type,
       :allowed_values,
-      :is_modifiable)
+      :is_modifiable,
+      :is_required,
+      :minimum_engine_version_per_allowed_value)
       include Aws::Structure
     end
 
@@ -10384,6 +10685,10 @@ module Aws::RDS
     #   of a DB instance.
     #   @return [Array<Types::AvailableProcessorFeature>]
     #
+    # @!attribute [rw] supported_engine_modes
+    #   A list of the supported DB engine modes.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OrderableDBInstanceOption AWS API Documentation
     #
     class OrderableDBInstanceOption < Struct.new(
@@ -10407,7 +10712,8 @@ module Aws::RDS
       :max_iops_per_db_instance,
       :min_iops_per_gib,
       :max_iops_per_gib,
-      :available_processor_features)
+      :available_processor_features,
+      :supported_engine_modes)
       include Aws::Structure
     end
 
@@ -10454,6 +10760,7 @@ module Aws::RDS
     #         is_modifiable: false,
     #         minimum_engine_version: "String",
     #         apply_method: "immediate", # accepts immediate, pending-reboot
+    #         supported_engine_modes: ["String"],
     #       }
     #
     # @!attribute [rw] parameter_name
@@ -10498,6 +10805,10 @@ module Aws::RDS
     #   Indicates when to apply parameter updates.
     #   @return [String]
     #
+    # @!attribute [rw] supported_engine_modes
+    #   The valid DB engine modes.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Parameter AWS API Documentation
     #
     class Parameter < Struct.new(
@@ -10510,7 +10821,8 @@ module Aws::RDS
       :allowed_values,
       :is_modifiable,
       :minimum_engine_version,
-      :apply_method)
+      :apply_method,
+      :supported_engine_modes)
       include Aws::Structure
     end
 
@@ -10799,10 +11111,10 @@ module Aws::RDS
     end
 
     # @!attribute [rw] db_cluster
-    #   Contains the details of an Amazon RDS DB cluster.
+    #   Contains the details of an Amazon Aurora DB cluster.
     #
     #   This data type is used as a response element in the
-    #   DescribeDBClusters action.
+    #   DescribeDBClusters, StopDBCluster, and StartDBCluster actions.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBClusterResult AWS API Documentation
@@ -10931,7 +11243,7 @@ module Aws::RDS
     #
     # @!attribute [rw] tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -11132,7 +11444,8 @@ module Aws::RDS
     # @!attribute [rw] resource_name
     #   The Amazon RDS resource that the tags are removed from. This value
     #   is an Amazon Resource Name (ARN). For information about creating an
-    #   ARN, see [ Constructing an RDS Amazon Resource Name (ARN)][1].
+    #   ARN, see [ Constructing an ARN for Amazon RDS][1] in the *Amazon RDS
+    #   User Guide.*
     #
     #
     #
@@ -11355,6 +11668,7 @@ module Aws::RDS
     #             is_modifiable: false,
     #             minimum_engine_version: "String",
     #             apply_method: "immediate", # accepts immediate, pending-reboot
+    #             supported_engine_modes: ["String"],
     #           },
     #         ],
     #       }
@@ -11403,6 +11717,7 @@ module Aws::RDS
     #             is_modifiable: false,
     #             minimum_engine_version: "String",
     #             apply_method: "immediate", # accepts immediate, pending-reboot
+    #             supported_engine_modes: ["String"],
     #           },
     #         ],
     #       }
@@ -11516,6 +11831,7 @@ module Aws::RDS
     #         s3_ingestion_role_arn: "String", # required
     #         backtrack_window: 1,
     #         enable_cloudwatch_logs_exports: ["String"],
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] availability_zones
@@ -11555,7 +11871,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `my-cluster1`
     #   @return [String]
@@ -11622,7 +11938,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #   @return [String]
     #
     # @!attribute [rw] master_user_password
@@ -11649,7 +11965,7 @@ module Aws::RDS
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each AWS Region. To see the time blocks available,
     #   see [ Adjusting the Preferred Maintenance Window][1] in the *Amazon
-    #   RDS User Guide.*
+    #   Aurora User Guide.*
     #
     #   Constraints:
     #
@@ -11663,7 +11979,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora
     #   @return [String]
     #
     # @!attribute [rw] preferred_maintenance_window
@@ -11675,7 +11991,7 @@ module Aws::RDS
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each AWS Region, occurring on a random day of the
     #   week. To see the time blocks available, see [ Adjusting the
-    #   Preferred Maintenance Window][1] in the *Amazon RDS User Guide.*
+    #   Preferred Maintenance Window][1] in the *Amazon Aurora User Guide.*
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
@@ -11683,12 +11999,12 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -11771,8 +12087,20 @@ module Aws::RDS
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB cluster is to export to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine
+    #   being used. For more information, see [Publishing Database Logs to
+    #   Amazon CloudWatch Logs][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB cluster should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3Message AWS API Documentation
     #
@@ -11803,15 +12131,16 @@ module Aws::RDS
       :s3_prefix,
       :s3_ingestion_role_arn,
       :backtrack_window,
-      :enable_cloudwatch_logs_exports)
+      :enable_cloudwatch_logs_exports,
+      :deletion_protection)
       include Aws::Structure
     end
 
     # @!attribute [rw] db_cluster
-    #   Contains the details of an Amazon RDS DB cluster.
+    #   Contains the details of an Amazon Aurora DB cluster.
     #
     #   This data type is used as a response element in the
-    #   DescribeDBClusters action.
+    #   DescribeDBClusters, StopDBCluster, and StartDBCluster actions.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3Result AWS API Documentation
@@ -11845,11 +12174,20 @@ module Aws::RDS
     #         enable_iam_database_authentication: false,
     #         backtrack_window: 1,
     #         enable_cloudwatch_logs_exports: ["String"],
+    #         engine_mode: "String",
+    #         scaling_configuration: {
+    #           min_capacity: 1,
+    #           max_capacity: 1,
+    #           auto_pause: false,
+    #           seconds_until_auto_pause: 1,
+    #         },
+    #         db_cluster_parameter_group_name: "String",
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] availability_zones
-    #   Provides the list of EC2 Availability Zones that instances in the
-    #   restored DB cluster can be created in.
+    #   Provides the list of Amazon EC2 Availability Zones that instances in
+    #   the restored DB cluster can be created in.
     #   @return [Array<String>]
     #
     # @!attribute [rw] db_cluster_identifier
@@ -11862,7 +12200,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-snapshot-id`
     #   @return [String]
@@ -11897,7 +12235,7 @@ module Aws::RDS
     # @!attribute [rw] port
     #   The port number on which the new DB cluster accepts connections.
     #
-    #   Constraints: Value must be `1150-65535`
+    #   Constraints: This value must be `1150-65535`
     #
     #   Default: The same port as the original DB cluster.
     #   @return [Integer]
@@ -11905,8 +12243,8 @@ module Aws::RDS
     # @!attribute [rw] db_subnet_group_name
     #   The name of the DB subnet group to use for the new DB cluster.
     #
-    #   Constraints: If supplied, must match the name of an existing
-    #   DBSubnetGroup.
+    #   Constraints: If supplied, must match the name of an existing DB
+    #   subnet group.
     #
     #   Example: `mySubnetgroup`
     #   @return [String]
@@ -11938,8 +12276,8 @@ module Aws::RDS
     #   cluster, then you can use the KMS key alias instead of the ARN for
     #   the KMS encryption key.
     #
-    #   If you do not specify a value for the `KmsKeyId` parameter, then the
-    #   following will occur:
+    #   If you don't specify a value for the `KmsKeyId` parameter, then the
+    #   following occurs:
     #
     #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier`
     #     is encrypted, then the restored DB cluster is encrypted using the
@@ -11972,9 +12310,48 @@ module Aws::RDS
     #   @return [Integer]
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
-    #   The list of logs that the restored DB cluster is to export to
-    #   CloudWatch Logs.
+    #   The list of logs that the restored DB cluster is to export to Amazon
+    #   CloudWatch Logs. The values in the list depend on the DB engine
+    #   being used. For more information, see [Publishing Database Logs to
+    #   Amazon CloudWatch Logs ][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] engine_mode
+    #   The DB engine mode of the DB cluster, either `provisioned`,
+    #   `serverless`, or `parallelquery`.
+    #   @return [String]
+    #
+    # @!attribute [rw] scaling_configuration
+    #   For DB clusters in `serverless` DB engine mode, the scaling
+    #   properties of the DB cluster.
+    #   @return [Types::ScalingConfiguration]
+    #
+    # @!attribute [rw] db_cluster_parameter_group_name
+    #   The name of the DB cluster parameter group to associate with this DB
+    #   cluster. If this argument is omitted, the default DB cluster
+    #   parameter group for the specified engine is used.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match the name of an existing default DB cluster
+    #     parameter group.
+    #
+    #   * Must be 1 to 255 letters, numbers, or hyphens.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB cluster should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshotMessage AWS API Documentation
     #
@@ -11993,15 +12370,19 @@ module Aws::RDS
       :kms_key_id,
       :enable_iam_database_authentication,
       :backtrack_window,
-      :enable_cloudwatch_logs_exports)
+      :enable_cloudwatch_logs_exports,
+      :engine_mode,
+      :scaling_configuration,
+      :db_cluster_parameter_group_name,
+      :deletion_protection)
       include Aws::Structure
     end
 
     # @!attribute [rw] db_cluster
-    #   Contains the details of an Amazon RDS DB cluster.
+    #   Contains the details of an Amazon Aurora DB cluster.
     #
     #   This data type is used as a response element in the
-    #   DescribeDBClusters action.
+    #   DescribeDBClusters, StopDBCluster, and StartDBCluster actions.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshotResult AWS API Documentation
@@ -12034,6 +12415,8 @@ module Aws::RDS
     #         enable_iam_database_authentication: false,
     #         backtrack_window: 1,
     #         enable_cloudwatch_logs_exports: ["String"],
+    #         db_cluster_parameter_group_name: "String",
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -12045,7 +12428,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #   @return [String]
     #
     # @!attribute [rw] restore_type
@@ -12088,9 +12471,9 @@ module Aws::RDS
     #   * Must be specified if `UseLatestRestorableTime` parameter is not
     #     provided
     #
-    #   * Cannot be specified if `UseLatestRestorableTime` parameter is true
+    #   * Can't be specified if `UseLatestRestorableTime` parameter is true
     #
-    #   * Cannot be specified if `RestoreType` parameter is `copy-on-write`
+    #   * Can't be specified if `RestoreType` parameter is `copy-on-write`
     #
     #   Example: `2015-03-07T23:45:00Z`
     #   @return [Time]
@@ -12101,7 +12484,7 @@ module Aws::RDS
     #
     #   Default: `false`
     #
-    #   Constraints: Cannot be specified if `RestoreToTime` parameter is
+    #   Constraints: Can't be specified if `RestoreToTime` parameter is
     #   provided.
     #   @return [Boolean]
     #
@@ -12132,7 +12515,7 @@ module Aws::RDS
     #
     # @!attribute [rw] tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -12154,8 +12537,8 @@ module Aws::RDS
     #   the source DB cluster. The new DB cluster is encrypted with the KMS
     #   key identified by the `KmsKeyId` parameter.
     #
-    #   If you do not specify a value for the `KmsKeyId` parameter, then the
-    #   following will occur:
+    #   If you don't specify a value for the `KmsKeyId` parameter, then the
+    #   following occurs:
     #
     #   * If the DB cluster is encrypted, then the restored DB cluster is
     #     encrypted using the KMS key that was used to encrypt the source DB
@@ -12191,8 +12574,37 @@ module Aws::RDS
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB cluster is to export to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine
+    #   being used. For more information, see [Publishing Database Logs to
+    #   Amazon CloudWatch Logs][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] db_cluster_parameter_group_name
+    #   The name of the DB cluster parameter group to associate with this DB
+    #   cluster. If this argument is omitted, the default DB cluster
+    #   parameter group for the specified engine is used.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match the name of an existing DB cluster
+    #     parameter group.
+    #
+    #   * Must be 1 to 255 letters, numbers, or hyphens.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB cluster should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTimeMessage AWS API Documentation
     #
@@ -12210,15 +12622,17 @@ module Aws::RDS
       :kms_key_id,
       :enable_iam_database_authentication,
       :backtrack_window,
-      :enable_cloudwatch_logs_exports)
+      :enable_cloudwatch_logs_exports,
+      :db_cluster_parameter_group_name,
+      :deletion_protection)
       include Aws::Structure
     end
 
     # @!attribute [rw] db_cluster
-    #   Contains the details of an Amazon RDS DB cluster.
+    #   Contains the details of an Amazon Aurora DB cluster.
     #
     #   This data type is used as a response element in the
-    #   DescribeDBClusters action.
+    #   DescribeDBClusters, StopDBCluster, and StartDBCluster actions.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTimeResult AWS API Documentation
@@ -12267,6 +12681,8 @@ module Aws::RDS
     #           },
     #         ],
     #         use_default_processor_features: false,
+    #         db_parameter_group_name: "String",
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] db_instance_identifier
@@ -12279,7 +12695,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-snapshot-id`
     #   @return [String]
@@ -12349,21 +12765,8 @@ module Aws::RDS
     #   true specifies an Internet-facing instance with a publicly
     #   resolvable DNS name, which resolves to a public IP address. A value
     #   of false specifies an internal instance with a DNS name that
-    #   resolves to a private IP address.
-    #
-    #   Default: The default behavior varies depending on whether a VPC has
-    #   been requested or not. The following list shows the default behavior
-    #   in each case.
-    #
-    #   * **Default VPC:** true
-    #
-    #   * **VPC:** false
-    #
-    #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance is
-    #   publicly accessible. If a specific DB subnet group has been
-    #   specified as part of the request and the PubliclyAccessible value
-    #   has not been set, the DB instance is private.
+    #   resolves to a private IP address. For more information, see
+    #   CreateDBInstance.
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -12433,7 +12836,8 @@ module Aws::RDS
     #
     #   The provisioned IOPS value must follow the requirements for your
     #   database engine. For more information, see [Amazon RDS Provisioned
-    #   IOPS Storage to Improve Performance][1].
+    #   IOPS Storage to Improve Performance][1] in the *Amazon RDS User
+    #   Guide.*
     #
     #   Constraints: Must be an integer greater than 1000.
     #
@@ -12454,7 +12858,7 @@ module Aws::RDS
     #
     # @!attribute [rw] tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -12513,7 +12917,13 @@ module Aws::RDS
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB instance is to export to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine
+    #   being used. For more information, see [Publishing Database Logs to
+    #   Amazon CloudWatch Logs][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #   @return [Array<String>]
     #
     # @!attribute [rw] processor_features
@@ -12524,6 +12934,33 @@ module Aws::RDS
     # @!attribute [rw] use_default_processor_features
     #   A value that specifies that the DB instance class of the DB instance
     #   uses its default processor features.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] db_parameter_group_name
+    #   The name of the DB parameter group to associate with this DB
+    #   instance. If this argument is omitted, the default DBParameterGroup
+    #   for the specified engine is used.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match the name of an existing DBParameterGroup.
+    #
+    #   * Must be 1 to 255 letters, numbers, or hyphens.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB instance should have deletion protection
+    #   enabled. The database can't be deleted when this value is set to
+    #   true. The default is false. For more information, see [ Deleting a
+    #   DB Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshotMessage AWS API Documentation
@@ -12553,7 +12990,9 @@ module Aws::RDS
       :enable_iam_database_authentication,
       :enable_cloudwatch_logs_exports,
       :processor_features,
-      :use_default_processor_features)
+      :use_default_processor_features,
+      :db_parameter_group_name,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -12627,6 +13066,7 @@ module Aws::RDS
     #           },
     #         ],
     #         use_default_processor_features: false,
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] db_name
@@ -12644,7 +13084,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `mydbinstance`
     #   @return [String]
@@ -12691,7 +13131,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #   @return [String]
     #
     # @!attribute [rw] master_user_password
@@ -12714,7 +13154,7 @@ module Aws::RDS
     # @!attribute [rw] availability_zone
     #   The Availability Zone that the DB instance is created in. For
     #   information about AWS Regions and Availability Zones, see [Regions
-    #   and Availability Zones][1].
+    #   and Availability Zones][1] in the *Amazon RDS User Guide.*
     #
     #   Default: A random, system-chosen Availability Zone in the
     #   endpoint's AWS Region.
@@ -12737,7 +13177,7 @@ module Aws::RDS
     # @!attribute [rw] preferred_maintenance_window
     #   The time range each week during which system maintenance can occur,
     #   in Universal Coordinated Time (UTC). For more information, see
-    #   [Amazon RDS Maintenance Window][1].
+    #   [Amazon RDS Maintenance Window][1] in the *Amazon RDS User Guide.*
     #
     #   Constraints:
     #
@@ -12771,7 +13211,7 @@ module Aws::RDS
     # @!attribute [rw] preferred_backup_window
     #   The time range each day during which automated backups are created
     #   if automated backups are enabled. For more information, see [The
-    #   Backup Window][1].
+    #   Backup Window][1] in the *Amazon RDS User Guide.*
     #
     #   Constraints:
     #
@@ -12827,7 +13267,7 @@ module Aws::RDS
     #   The amount of Provisioned IOPS (input/output operations per second)
     #   to allocate initially for the DB instance. For information about
     #   valid Iops values, see see [Amazon RDS Provisioned IOPS Storage to
-    #   Improve Performance][1].
+    #   Improve Performance][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -12841,13 +13281,18 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] publicly_accessible
-    #   Specifies whether the DB instance is publicly accessible or not. For
-    #   more information, see CreateDBInstance.
+    #   Specifies the accessibility options for the DB instance. A value of
+    #   true specifies an Internet-facing instance with a publicly
+    #   resolvable DNS name, which resolves to a public IP address. A value
+    #   of false specifies an internal instance with a DNS name that
+    #   resolves to a private IP address. For more information, see
+    #   CreateDBInstance.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
     #   A list of tags to associate with this DB instance. For more
-    #   information, see [Tagging Amazon RDS Resources][1].
+    #   information, see [Tagging Amazon RDS Resources][1] in the *Amazon
+    #   RDS User Guide.*
     #
     #
     #
@@ -12911,7 +13356,7 @@ module Aws::RDS
     #   monitoring metrics to Amazon CloudWatch Logs. For example,
     #   `arn:aws:iam:123456789012:role/emaccess`. For information on
     #   creating a monitoring role, see [Setting Up and Enabling Enhanced
-    #   Monitoring][1].
+    #   Monitoring][1] in the *Amazon RDS User Guide.*
     #
     #   If `MonitoringInterval` is set to a value other than 0, then you
     #   must supply a `MonitoringRoleArn` value.
@@ -12979,7 +13424,13 @@ module Aws::RDS
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB instance is to export to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine
+    #   being used. For more information, see [Publishing Database Logs to
+    #   Amazon CloudWatch Logs][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #   @return [Array<String>]
     #
     # @!attribute [rw] processor_features
@@ -12990,6 +13441,17 @@ module Aws::RDS
     # @!attribute [rw] use_default_processor_features
     #   A value that specifies that the DB instance class of the DB instance
     #   uses its default processor features.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB instance should have deletion protection
+    #   enabled. The database can't be deleted when this value is set to
+    #   true. The default is false. For more information, see [ Deleting a
+    #   DB Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3Message AWS API Documentation
@@ -13036,7 +13498,8 @@ module Aws::RDS
       :performance_insights_retention_period,
       :enable_cloudwatch_logs_exports,
       :processor_features,
-      :use_default_processor_features)
+      :use_default_processor_features,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -13095,6 +13558,8 @@ module Aws::RDS
     #           },
     #         ],
     #         use_default_processor_features: false,
+    #         db_parameter_group_name: "String",
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] source_db_instance_identifier
@@ -13116,7 +13581,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #   @return [String]
     #
     # @!attribute [rw] restore_time
@@ -13129,7 +13594,7 @@ module Aws::RDS
     #
     #   * Must be before the latest restorable time for the DB instance
     #
-    #   * Cannot be specified if UseLatestRestorableTime parameter is true
+    #   * Can't be specified if UseLatestRestorableTime parameter is true
     #
     #   Example: `2009-09-07T23:45:00Z`
     #   @return [Time]
@@ -13140,7 +13605,7 @@ module Aws::RDS
     #
     #   Default: `false`
     #
-    #   Constraints: Cannot be specified if RestoreTime parameter is
+    #   Constraints: Can't be specified if RestoreTime parameter is
     #   provided.
     #   @return [Boolean]
     #
@@ -13198,21 +13663,8 @@ module Aws::RDS
     #   true specifies an Internet-facing instance with a publicly
     #   resolvable DNS name, which resolves to a public IP address. A value
     #   of false specifies an internal instance with a DNS name that
-    #   resolves to a private IP address.
-    #
-    #   Default: The default behavior varies depending on whether a VPC has
-    #   been requested or not. The following list shows the default behavior
-    #   in each case.
-    #
-    #   * **Default VPC:**true
-    #
-    #   * **VPC:**false
-    #
-    #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance is
-    #   publicly accessible. If a specific DB subnet group has been
-    #   specified as part of the request and the PubliclyAccessible value
-    #   has not been set, the DB instance is private.
+    #   resolves to a private IP address. For more information, see
+    #   CreateDBInstance.
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -13298,7 +13750,7 @@ module Aws::RDS
     #
     # @!attribute [rw] tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -13352,7 +13804,13 @@ module Aws::RDS
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB instance is to export to
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. The values in the list depend on the DB engine
+    #   being used. For more information, see [Publishing Database Logs to
+    #   Amazon CloudWatch Logs][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #   @return [Array<String>]
     #
     # @!attribute [rw] processor_features
@@ -13363,6 +13821,33 @@ module Aws::RDS
     # @!attribute [rw] use_default_processor_features
     #   A value that specifies that the DB instance class of the DB instance
     #   uses its default processor features.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] db_parameter_group_name
+    #   The name of the DB parameter group to associate with this DB
+    #   instance. If this argument is omitted, the default DBParameterGroup
+    #   for the specified engine is used.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match the name of an existing DBParameterGroup.
+    #
+    #   * Must be 1 to 255 letters, numbers, or hyphens.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB instance should have deletion protection
+    #   enabled. The database can't be deleted when this value is set to
+    #   true. The default is false. For more information, see [ Deleting a
+    #   DB Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTimeMessage AWS API Documentation
@@ -13394,7 +13879,9 @@ module Aws::RDS
       :enable_iam_database_authentication,
       :enable_cloudwatch_logs_exports,
       :processor_features,
-      :use_default_processor_features)
+      :use_default_processor_features,
+      :db_parameter_group_name,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -13481,6 +13968,115 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # Contains the scaling configuration of an Aurora Serverless DB cluster.
+    #
+    # For more information, see [Using Amazon Aurora Serverless][1] in the
+    # *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
+    #
+    # @note When making an API call, you may pass ScalingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         min_capacity: 1,
+    #         max_capacity: 1,
+    #         auto_pause: false,
+    #         seconds_until_auto_pause: 1,
+    #       }
+    #
+    # @!attribute [rw] min_capacity
+    #   The minimum capacity for an Aurora DB cluster in `serverless` DB
+    #   engine mode.
+    #
+    #   Valid capacity values are `2`, `4`, `8`, `16`, `32`, `64`, `128`,
+    #   and `256`.
+    #
+    #   The minimum capacity must be less than or equal to the maximum
+    #   capacity.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_capacity
+    #   The maximum capacity for an Aurora DB cluster in `serverless` DB
+    #   engine mode.
+    #
+    #   Valid capacity values are `2`, `4`, `8`, `16`, `32`, `64`, `128`,
+    #   and `256`.
+    #
+    #   The maximum capacity must be greater than or equal to the minimum
+    #   capacity.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] auto_pause
+    #   A value that specifies whether to allow or disallow automatic pause
+    #   for an Aurora DB cluster in `serverless` DB engine mode. A DB
+    #   cluster can be paused only when it's idle (it has no connections).
+    #
+    #   <note markdown="1"> If a DB cluster is paused for more than seven days, the DB cluster
+    #   might be backed up with a snapshot. In this case, the DB cluster is
+    #   restored when there is a request to connect to it.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] seconds_until_auto_pause
+    #   The time, in seconds, before an Aurora DB cluster in `serverless`
+    #   mode is paused.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ScalingConfiguration AWS API Documentation
+    #
+    class ScalingConfiguration < Struct.new(
+      :min_capacity,
+      :max_capacity,
+      :auto_pause,
+      :seconds_until_auto_pause)
+      include Aws::Structure
+    end
+
+    # Shows the scaling configuration for an Aurora DB cluster in
+    # `serverless` DB engine mode.
+    #
+    # For more information, see [Using Amazon Aurora Serverless][1] in the
+    # *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
+    #
+    # @!attribute [rw] min_capacity
+    #   The maximum capacity for the Aurora DB cluster in `serverless` DB
+    #   engine mode.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_capacity
+    #   The maximum capacity for an Aurora DB cluster in `serverless` DB
+    #   engine mode.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] auto_pause
+    #   A value that indicates whether automatic pause is allowed for the
+    #   Aurora DB cluster in `serverless` DB engine mode.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] seconds_until_auto_pause
+    #   The remaining amount of time, in seconds, before the Aurora DB
+    #   cluster in `serverless` mode is paused. A DB cluster can be paused
+    #   only when it's idle (it has no connections).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ScalingConfigurationInfo AWS API Documentation
+    #
+    class ScalingConfigurationInfo < Struct.new(
+      :min_capacity,
+      :max_capacity,
+      :auto_pause,
+      :seconds_until_auto_pause)
+      include Aws::Structure
+    end
+
     # Contains an AWS Region name as the result of a successful call to the
     # DescribeSourceRegions action.
     #
@@ -13528,6 +14124,39 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartDBClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DB cluster identifier of the Amazon Aurora DB cluster to be
+    #   started. This parameter is stored as a lowercase string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBClusterMessage AWS API Documentation
+    #
+    class StartDBClusterMessage < Struct.new(
+      :db_cluster_identifier)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_cluster
+    #   Contains the details of an Amazon Aurora DB cluster.
+    #
+    #   This data type is used as a response element in the
+    #   DescribeDBClusters, StopDBCluster, and StartDBCluster actions.
+    #   @return [Types::DBCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBClusterResult AWS API Documentation
+    #
+    class StartDBClusterResult < Struct.new(
+      :db_cluster)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartDBInstanceMessage
     #   data as a hash:
     #
@@ -13557,6 +14186,39 @@ module Aws::RDS
     #
     class StartDBInstanceResult < Struct.new(
       :db_instance)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopDBClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DB cluster identifier of the Amazon Aurora DB cluster to be
+    #   stopped. This parameter is stored as a lowercase string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBClusterMessage AWS API Documentation
+    #
+    class StopDBClusterMessage < Struct.new(
+      :db_cluster_identifier)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_cluster
+    #   Contains the details of an Amazon Aurora DB cluster.
+    #
+    #   This data type is used as a response element in the
+    #   DescribeDBClusters, StopDBCluster, and StartDBCluster actions.
+    #   @return [Types::DBCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBClusterResult AWS API Documentation
+    #
+    class StopDBClusterResult < Struct.new(
+      :db_cluster)
       include Aws::Structure
     end
 

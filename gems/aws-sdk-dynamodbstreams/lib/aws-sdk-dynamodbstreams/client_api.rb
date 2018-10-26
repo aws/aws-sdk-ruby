@@ -192,6 +192,7 @@ module Aws::DynamoDBStreams
       api.version = "2012-08-10"
 
       api.metadata = {
+        "apiVersion" => "2012-08-10",
         "endpointPrefix" => "streams.dynamodb",
         "jsonVersion" => "1.0",
         "protocol" => "json",
@@ -199,6 +200,7 @@ module Aws::DynamoDBStreams
         "signatureVersion" => "v4",
         "signingName" => "dynamodb",
         "targetPrefix" => "DynamoDBStreams_20120810",
+        "uid" => "streams-dynamodb-2012-08-10",
       }
 
       api.add_operation(:describe_stream, Seahorse::Model::Operation.new.tap do |o|

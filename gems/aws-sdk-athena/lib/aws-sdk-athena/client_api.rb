@@ -70,6 +70,7 @@ module Aws::Athena
     RowList = Shapes::ListShape.new(name: 'RowList')
     StartQueryExecutionInput = Shapes::StructureShape.new(name: 'StartQueryExecutionInput')
     StartQueryExecutionOutput = Shapes::StructureShape.new(name: 'StartQueryExecutionOutput')
+    StatementType = Shapes::StringShape.new(name: 'StatementType')
     StopQueryExecutionInput = Shapes::StructureShape.new(name: 'StopQueryExecutionInput')
     StopQueryExecutionOutput = Shapes::StructureShape.new(name: 'StopQueryExecutionOutput')
     String = Shapes::StringShape.new(name: 'String')
@@ -150,6 +151,7 @@ module Aws::Athena
     GetQueryResultsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxQueryResults, location_name: "MaxResults"))
     GetQueryResultsInput.struct_class = Types::GetQueryResultsInput
 
+    GetQueryResultsOutput.add_member(:update_count, Shapes::ShapeRef.new(shape: Long, location_name: "UpdateCount"))
     GetQueryResultsOutput.add_member(:result_set, Shapes::ShapeRef.new(shape: ResultSet, location_name: "ResultSet"))
     GetQueryResultsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetQueryResultsOutput.struct_class = Types::GetQueryResultsOutput
@@ -183,6 +185,7 @@ module Aws::Athena
 
     QueryExecution.add_member(:query_execution_id, Shapes::ShapeRef.new(shape: QueryExecutionId, location_name: "QueryExecutionId"))
     QueryExecution.add_member(:query, Shapes::ShapeRef.new(shape: QueryString, location_name: "Query"))
+    QueryExecution.add_member(:statement_type, Shapes::ShapeRef.new(shape: StatementType, location_name: "StatementType"))
     QueryExecution.add_member(:result_configuration, Shapes::ShapeRef.new(shape: ResultConfiguration, location_name: "ResultConfiguration"))
     QueryExecution.add_member(:query_execution_context, Shapes::ShapeRef.new(shape: QueryExecutionContext, location_name: "QueryExecutionContext"))
     QueryExecution.add_member(:status, Shapes::ShapeRef.new(shape: QueryExecutionStatus, location_name: "Status"))
@@ -259,12 +262,15 @@ module Aws::Athena
       api.version = "2017-05-18"
 
       api.metadata = {
+        "apiVersion" => "2017-05-18",
         "endpointPrefix" => "athena",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon Athena",
+        "serviceId" => "Athena",
         "signatureVersion" => "v4",
         "targetPrefix" => "AmazonAthena",
+        "uid" => "athena-2017-05-18",
       }
 
       api.add_operation(:batch_get_named_query, Seahorse::Model::Operation.new.tap do |o|

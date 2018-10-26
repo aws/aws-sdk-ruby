@@ -1731,6 +1731,17 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
+    #   Deletes the replication subresource associated with the specified
+    #   bucket.
+    #
+    #   <note markdown="1"> There is usually some time lag before replication configuration
+    #   deletion is fully propagated to all the Amazon S3 systems.
+    #
+    #    </note>
+    #
+    #   For more information, see [Cross-Region Replication (CRR)](
+    #   https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html) in the
+    #   Amazon S3 Developer Guide.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketReplicationRequest AWS API Documentation
@@ -1819,6 +1830,31 @@ module Aws::S3
       :version_id,
       :is_latest,
       :last_modified)
+      include Aws::Structure
+    end
+
+    # Specifies whether Amazon S3 should replicate delete makers.
+    #
+    # @note When making an API call, you may pass DeleteMarkerReplication
+    #   data as a hash:
+    #
+    #       {
+    #         status: "Enabled", # accepts Enabled, Disabled
+    #       }
+    #
+    # @!attribute [rw] status
+    #   The status of the delete marker replication.
+    #
+    #   <note markdown="1"> In the current implementation, Amazon S3 does not replicate the
+    #   delete markers. Therefore, the status must be `Disabled`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteMarkerReplication AWS API Documentation
+    #
+    class DeleteMarkerReplication < Struct.new(
+      :status)
       include Aws::Structure
     end
 
@@ -2041,11 +2077,20 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   Amazon resource name (ARN) of the bucket where you want Amazon S3 to
     #   store replicas of the object identified by the rule.
+    #
+    #   If you have multiple rules in your replication configuration, all
+    #   rules must specify the same bucket as the destination. A replication
+    #   configuration can replicate objects only to one destination bucket.
     #   @return [String]
     #
     # @!attribute [rw] account
-    #   Account ID of the destination bucket. Currently this is only being
-    #   verified if Access Control Translation is enabled
+    #   Account ID of the destination bucket. Currently Amazon S3 verifies
+    #   this value only if Access Control Translation is enabled.
+    #
+    #   In a cross-account scenario, if you tell Amazon S3 to change replica
+    #   ownership to the AWS account that owns the destination bucket by
+    #   adding the `AccessControlTranslation` element, this is the account
+    #   ID of the destination bucket owner.
     #   @return [String]
     #
     # @!attribute [rw] storage_class
@@ -2054,11 +2099,17 @@ module Aws::S3
     #
     # @!attribute [rw] access_control_translation
     #   Container for information regarding the access control for replicas.
+    #
+    #   Use only in a cross-account scenario, where source and destination
+    #   bucket owners are not the same, when you want to change replica
+    #   ownership to the AWS account that owns the destination bucket. If
+    #   you don't add this element to the replication configuration, the
+    #   replicas are owned by same AWS account that owns the source object.
     #   @return [Types::AccessControlTranslation]
     #
     # @!attribute [rw] encryption_configuration
-    #   Container for information regarding encryption based configuration
-    #   for replicas.
+    #   Container that provides encryption-related information. You must
+    #   specify this element if the `SourceSelectionCriteria` is specified.
     #   @return [Types::EncryptionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Destination AWS API Documentation
@@ -2119,7 +2170,9 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] replica_kms_key_id
-    #   The id of the KMS key used to encrypt the replica object.
+    #   The ID of the AWS KMS key for the region where the destination
+    #   bucket resides. Amazon S3 uses this key to encrypt the replica
+    #   object.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/EncryptionConfiguration AWS API Documentation
@@ -3646,6 +3699,8 @@ module Aws::S3
     #         json: {
     #           type: "DOCUMENT", # accepts DOCUMENT, LINES
     #         },
+    #         parquet: {
+    #         },
     #       }
     #
     # @!attribute [rw] csv
@@ -3661,12 +3716,17 @@ module Aws::S3
     #   Specifies JSON as object's input serialization format.
     #   @return [Types::JSONInput]
     #
+    # @!attribute [rw] parquet
+    #   Specifies Parquet as object's input serialization format.
+    #   @return [Types::ParquetInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InputSerialization AWS API Documentation
     #
     class InputSerialization < Struct.new(
       :csv,
       :compression_type,
-      :json)
+      :json,
+      :parquet)
       include Aws::Structure
     end
 
@@ -5782,6 +5842,12 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ParquetInput AWS API Documentation
+    #
+    class ParquetInput < Aws::EmptyStructure; end
+
     # @!attribute [rw] part_number
     #   Part number identifying the part. This is a positive integer between
     #   1 and 10,000.
@@ -6536,7 +6602,24 @@ module Aws::S3
     #           rules: [ # required
     #             {
     #               id: "ID",
-    #               prefix: "Prefix", # required
+    #               priority: 1,
+    #               prefix: "Prefix",
+    #               filter: {
+    #                 prefix: "Prefix",
+    #                 tag: {
+    #                   key: "ObjectKey", # required
+    #                   value: "Value", # required
+    #                 },
+    #                 and: {
+    #                   prefix: "Prefix",
+    #                   tags: [
+    #                     {
+    #                       key: "ObjectKey", # required
+    #                       value: "Value", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
     #               status: "Enabled", # required, accepts Enabled, Disabled
     #               source_selection_criteria: {
     #                 sse_kms_encrypted_objects: {
@@ -6553,6 +6636,9 @@ module Aws::S3
     #                 encryption_configuration: {
     #                   replica_kms_key_id: "ReplicaKmsKeyID",
     #                 },
+    #               },
+    #               delete_marker_replication: {
+    #                 status: "Enabled", # accepts Enabled, Disabled
     #               },
     #             },
     #           ],
@@ -7345,7 +7431,24 @@ module Aws::S3
     #         rules: [ # required
     #           {
     #             id: "ID",
-    #             prefix: "Prefix", # required
+    #             priority: 1,
+    #             prefix: "Prefix",
+    #             filter: {
+    #               prefix: "Prefix",
+    #               tag: {
+    #                 key: "ObjectKey", # required
+    #                 value: "Value", # required
+    #               },
+    #               and: {
+    #                 prefix: "Prefix",
+    #                 tags: [
+    #                   {
+    #                     key: "ObjectKey", # required
+    #                     value: "Value", # required
+    #                   },
+    #                 ],
+    #               },
+    #             },
     #             status: "Enabled", # required, accepts Enabled, Disabled
     #             source_selection_criteria: {
     #               sse_kms_encrypted_objects: {
@@ -7363,6 +7466,9 @@ module Aws::S3
     #                 replica_kms_key_id: "ReplicaKmsKeyID",
     #               },
     #             },
+    #             delete_marker_replication: {
+    #               status: "Enabled", # accepts Enabled, Disabled
+    #             },
     #           },
     #         ],
     #       }
@@ -7373,9 +7479,9 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] rules
-    #   Container for information about a particular replication rule.
-    #   Replication configuration must have at least one rule and can
-    #   contain up to 1,000 rules.
+    #   Container for one or more replication rules. Replication
+    #   configuration must have at least one rule and can contain up to
+    #   1,000 rules.
     #   @return [Array<Types::ReplicationRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationConfiguration AWS API Documentation
@@ -7393,7 +7499,24 @@ module Aws::S3
     #
     #       {
     #         id: "ID",
-    #         prefix: "Prefix", # required
+    #         priority: 1,
+    #         prefix: "Prefix",
+    #         filter: {
+    #           prefix: "Prefix",
+    #           tag: {
+    #             key: "ObjectKey", # required
+    #             value: "Value", # required
+    #           },
+    #           and: {
+    #             prefix: "Prefix",
+    #             tags: [
+    #               {
+    #                 key: "ObjectKey", # required
+    #                 value: "Value", # required
+    #               },
+    #             ],
+    #           },
+    #         },
     #         status: "Enabled", # required, accepts Enabled, Disabled
     #         source_selection_criteria: {
     #           sse_kms_encrypted_objects: {
@@ -7411,6 +7534,9 @@ module Aws::S3
     #             replica_kms_key_id: "ReplicaKmsKeyID",
     #           },
     #         },
+    #         delete_marker_replication: {
+    #           status: "Enabled", # accepts Enabled, Disabled
+    #         },
     #       }
     #
     # @!attribute [rw] id
@@ -7418,33 +7544,152 @@ module Aws::S3
     #   characters.
     #   @return [String]
     #
+    # @!attribute [rw] priority
+    #   The priority associated with the rule. If you specify multiple rules
+    #   in a replication configuration, then Amazon S3 applies rule priority
+    #   in the event there are conflicts (two or more rules identify the
+    #   same object based on filter specified). The rule with higher
+    #   priority takes precedence. For example,
+    #
+    #   * Same object quality prefix based filter criteria If prefixes you
+    #     specified in multiple rules overlap.
+    #
+    #   * Same object qualify tag based filter criteria specified in
+    #     multiple rules
+    #
+    #   For more information, see [Cross-Region Replication (CRR)](
+    #   https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html) in the
+    #   Amazon S3 Developer Guide.
+    #   @return [Integer]
+    #
     # @!attribute [rw] prefix
     #   Object keyname prefix identifying one or more objects to which the
     #   rule applies. Maximum prefix length can be up to 1,024 characters.
-    #   Overlapping prefixes are not supported.
     #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   Filter that identifies subset of objects to which the replication
+    #   rule applies. A `Filter` must specify exactly one `Prefix`, `Tag`,
+    #   or an `And` child element.
+    #   @return [Types::ReplicationRuleFilter]
     #
     # @!attribute [rw] status
     #   The rule is ignored if status is not Enabled.
     #   @return [String]
     #
     # @!attribute [rw] source_selection_criteria
-    #   Container for filters that define which source objects should be
-    #   replicated.
+    #   Container that describes additional filters in identifying source
+    #   objects that you want to replicate. Currently, Amazon S3 supports
+    #   only the filter that you can specify for objects created with
+    #   server-side encryption using an AWS KMS-managed key. You can choose
+    #   to enable or disable replication of these objects.
+    #
+    #   if you want Amazon S3 to replicate objects created with server-side
+    #   encryption using AWS KMS-managed keys.
     #   @return [Types::SourceSelectionCriteria]
     #
     # @!attribute [rw] destination
     #   Container for replication destination information.
     #   @return [Types::Destination]
     #
+    # @!attribute [rw] delete_marker_replication
+    #   Specifies whether Amazon S3 should replicate delete makers.
+    #   @return [Types::DeleteMarkerReplication]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationRule AWS API Documentation
     #
     class ReplicationRule < Struct.new(
       :id,
+      :priority,
       :prefix,
+      :filter,
       :status,
       :source_selection_criteria,
-      :destination)
+      :destination,
+      :delete_marker_replication)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ReplicationRuleAndOperator
+    #   data as a hash:
+    #
+    #       {
+    #         prefix: "Prefix",
+    #         tags: [
+    #           {
+    #             key: "ObjectKey", # required
+    #             value: "Value", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] prefix
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationRuleAndOperator AWS API Documentation
+    #
+    class ReplicationRuleAndOperator < Struct.new(
+      :prefix,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Filter that identifies subset of objects to which the replication rule
+    # applies. A `Filter` must specify exactly one `Prefix`, `Tag`, or an
+    # `And` child element.
+    #
+    # @note When making an API call, you may pass ReplicationRuleFilter
+    #   data as a hash:
+    #
+    #       {
+    #         prefix: "Prefix",
+    #         tag: {
+    #           key: "ObjectKey", # required
+    #           value: "Value", # required
+    #         },
+    #         and: {
+    #           prefix: "Prefix",
+    #           tags: [
+    #             {
+    #               key: "ObjectKey", # required
+    #               value: "Value", # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] prefix
+    #   Object keyname prefix that identifies subset of objects to which the
+    #   rule applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag
+    #   Container for specifying a tag key and value.
+    #
+    #   The rule applies only to objects having the tag in its tagset.
+    #   @return [Types::Tag]
+    #
+    # @!attribute [rw] and
+    #   Container for specifying rule filters. These filters determine the
+    #   subset of objects to which the rule applies. The element is required
+    #   only if you specify more than one filter. For example:
+    #
+    #   * You specify both a `Prefix` and a `Tag` filters. Then you wrap
+    #     these in an `And` tag.
+    #
+    #   * You specify filter based on multiple tags. Then you wrap the `Tag`
+    #     elements in an `And` tag.
+    #   @return [Types::ReplicationRuleAndOperator]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationRuleFilter AWS API Documentation
+    #
+    class ReplicationRuleFilter < Struct.new(
+      :prefix,
+      :tag,
+      :and)
       include Aws::Structure
     end
 
@@ -7532,6 +7777,8 @@ module Aws::S3
     #               compression_type: "NONE", # accepts NONE, GZIP, BZIP2
     #               json: {
     #                 type: "DOCUMENT", # accepts DOCUMENT, LINES
+    #               },
+    #               parquet: {
     #               },
     #             },
     #             expression_type: "SQL", # required, accepts SQL
@@ -7651,6 +7898,8 @@ module Aws::S3
     #             compression_type: "NONE", # accepts NONE, GZIP, BZIP2
     #             json: {
     #               type: "DOCUMENT", # accepts DOCUMENT, LINES
+    #             },
+    #             parquet: {
     #             },
     #           },
     #           expression_type: "SQL", # required, accepts SQL
@@ -8078,6 +8327,8 @@ module Aws::S3
     #           json: {
     #             type: "DOCUMENT", # accepts DOCUMENT, LINES
     #           },
+    #           parquet: {
+    #           },
     #         },
     #         output_serialization: { # required
     #           csv: {
@@ -8187,6 +8438,8 @@ module Aws::S3
     #           compression_type: "NONE", # accepts NONE, GZIP, BZIP2
     #           json: {
     #             type: "DOCUMENT", # accepts DOCUMENT, LINES
+    #           },
+    #           parquet: {
     #           },
     #         },
     #         expression_type: "SQL", # required, accepts SQL
@@ -8329,7 +8582,8 @@ module Aws::S3
     #
     # @!attribute [rw] sse_kms_encrypted_objects
     #   Container for filter information of selection of KMS Encrypted S3
-    #   objects.
+    #   objects. The element is required if you include
+    #   `SourceSelectionCriteria` in the replication configuration.
     #   @return [Types::SseKmsEncryptedObjects]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SourceSelectionCriteria AWS API Documentation

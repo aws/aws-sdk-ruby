@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -47,108 +49,128 @@ module Aws::IoT
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
     #
-    # @option options [String] :session_token
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -695,6 +717,13 @@ module Aws::IoT
     # @option params [Types::JobExecutionsRolloutConfig] :job_executions_rollout_config
     #   Allows you to create a staged rollout of the job.
     #
+    # @option params [Types::TimeoutConfig] :timeout_config
+    #   Specifies the amount of time each device has to finish its execution
+    #   of the job. The timer is started when the job execution status is set
+    #   to `IN_PROGRESS`. If the job execution status is not set to another
+    #   terminal state before the time expires, it will be automatically set
+    #   to `TIMED_OUT`.
+    #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateJobResponse#job_arn #job_arn} => String
@@ -716,6 +745,9 @@ module Aws::IoT
     #     target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
     #     job_executions_rollout_config: {
     #       maximum_per_minute: 1,
+    #     },
+    #     timeout_config: {
+    #       in_progress_timeout_in_minutes: 1,
     #     },
     #   })
     #
@@ -789,6 +821,9 @@ module Aws::IoT
     #   even after the update was completed by all things originally in the
     #   group. Valid values: CONTINUOUS \| SNAPSHOT.
     #
+    # @option params [Types::AwsJobExecutionsRolloutConfig] :aws_job_executions_rollout_config
+    #   Configuration for the rollout of OTA updates.
+    #
     # @option params [required, Array<Types::OTAUpdateFile>] :files
     #   The files to be streamed by the OTA update.
     #
@@ -813,29 +848,45 @@ module Aws::IoT
     #     description: "OTAUpdateDescription",
     #     targets: ["Target"], # required
     #     target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
+    #     aws_job_executions_rollout_config: {
+    #       maximum_per_minute: 1,
+    #     },
     #     files: [ # required
     #       {
     #         file_name: "FileName",
     #         file_version: "OTAUpdateFileVersion",
-    #         file_source: {
-    #           stream_id: "StreamId",
-    #           file_id: 1,
+    #         file_location: {
+    #           stream: {
+    #             stream_id: "StreamId",
+    #             file_id: 1,
+    #           },
+    #           s3_location: {
+    #             bucket: "S3Bucket",
+    #             key: "S3Key",
+    #             version: "S3Version",
+    #           },
     #         },
     #         code_signing: {
     #           aws_signer_job_id: "SigningJobId",
+    #           start_signing_job_parameter: {
+    #             signing_profile_parameter: {
+    #               certificate_arn: "CertificateArn",
+    #               platform: "Platform",
+    #               certificate_path_on_device: "CertificatePathOnDevice",
+    #             },
+    #             signing_profile_name: "SigningProfileName",
+    #             destination: {
+    #               s3_destination: {
+    #                 bucket: "S3Bucket",
+    #                 prefix: "Prefix",
+    #               },
+    #             },
+    #           },
     #           custom_code_signing: {
     #             signature: {
-    #               stream: {
-    #                 stream_id: "StreamId",
-    #                 file_id: 1,
-    #               },
     #               inline_document: "data",
     #             },
     #             certificate_chain: {
-    #               stream: {
-    #                 stream_id: "StreamId",
-    #                 file_id: 1,
-    #               },
     #               certificate_name: "CertificateName",
     #               inline_document: "InlineDocument",
     #             },
@@ -844,13 +895,13 @@ module Aws::IoT
     #           },
     #         },
     #         attributes: {
-    #           "Key" => "Value",
+    #           "AttributeKey" => "Value",
     #         },
     #       },
     #     ],
     #     role_arn: "RoleArn", # required
     #     additional_parameters: {
-    #       "Key" => "Value",
+    #       "AttributeKey" => "Value",
     #     },
     #   })
     #
@@ -1155,8 +1206,8 @@ module Aws::IoT
     #       {
     #         file_id: 1,
     #         s3_location: {
-    #           bucket: "S3Bucket", # required
-    #           key: "S3Key", # required
+    #           bucket: "S3Bucket",
+    #           key: "S3Key",
     #           version: "S3Version",
     #         },
     #       },
@@ -1730,12 +1781,22 @@ module Aws::IoT
     # @option params [required, String] :ota_update_id
     #   The OTA update ID to delete.
     #
+    # @option params [Boolean] :delete_stream
+    #   Specifies if the stream associated with an OTA update should be
+    #   deleted when the OTA update is deleted.
+    #
+    # @option params [Boolean] :force_delete_aws_job
+    #   Specifies if the AWS Job associated with the OTA update should be
+    #   deleted with the OTA update is deleted.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_ota_update({
     #     ota_update_id: "OTAUpdateId", # required
+    #     delete_stream: false,
+    #     force_delete_aws_job: false,
     #   })
     #
     # @overload delete_ota_update(params = {})
@@ -2271,7 +2332,27 @@ module Aws::IoT
     # Returns a unique endpoint specific to the AWS account making the call.
     #
     # @option params [String] :endpoint_type
-    #   The endpoint type.
+    #   The endpoint type. Valid endpoint types include:
+    #
+    #   * `iot:Data` - Returns a VeriSign signed data endpoint.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `iot:Data-ATS` - Returns an ATS signed data endpoint.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `iot:CredentialProvider` - Returns an AWS IoT credentials provider
+    #     API endpoint.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `iot:Jobs` - Returns an AWS IoT device management Jobs API endpoint.
+    #
+    #   ^
     #
     # @return [Types::DescribeEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2389,6 +2470,8 @@ module Aws::IoT
     #   resp.job.job_process_details.number_of_queued_things #=> Integer
     #   resp.job.job_process_details.number_of_in_progress_things #=> Integer
     #   resp.job.job_process_details.number_of_removed_things #=> Integer
+    #   resp.job.job_process_details.number_of_timed_out_things #=> Integer
+    #   resp.job.timeout_config.in_progress_timeout_in_minutes #=> Integer
     #
     # @overload describe_job(params = {})
     # @param [Hash] params ({})
@@ -2424,7 +2507,7 @@ module Aws::IoT
     # @example Response structure
     #
     #   resp.execution.job_id #=> String
-    #   resp.execution.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "REJECTED", "REMOVED", "CANCELED"
+    #   resp.execution.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "TIMED_OUT", "REJECTED", "REMOVED", "CANCELED"
     #   resp.execution.force_canceled #=> Boolean
     #   resp.execution.status_details.details_map #=> Hash
     #   resp.execution.status_details.details_map["DetailsKey"] #=> String
@@ -2434,6 +2517,7 @@ module Aws::IoT
     #   resp.execution.last_updated_at #=> Time
     #   resp.execution.execution_number #=> Integer
     #   resp.execution.version_number #=> Integer
+    #   resp.execution.approximate_seconds_before_timed_out #=> Integer
     #
     # @overload describe_job_execution(params = {})
     # @param [Hash] params ({})
@@ -2956,10 +3040,12 @@ module Aws::IoT
     # @return [Types::GetIndexingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetIndexingConfigurationResponse#thing_indexing_configuration #thing_indexing_configuration} => Types::ThingIndexingConfiguration
+    #   * {Types::GetIndexingConfigurationResponse#thing_group_indexing_configuration #thing_group_indexing_configuration} => Types::ThingGroupIndexingConfiguration
     #
     # @example Response structure
     #
     #   resp.thing_indexing_configuration.thing_indexing_mode #=> String, one of "OFF", "REGISTRY", "REGISTRY_AND_SHADOW"
+    #   resp.thing_group_indexing_configuration.thing_group_indexing_mode #=> String, one of "OFF", "ON"
     #
     # @overload get_indexing_configuration(params = {})
     # @param [Hash] params ({})
@@ -3040,31 +3126,37 @@ module Aws::IoT
     #   resp.ota_update_info.description #=> String
     #   resp.ota_update_info.targets #=> Array
     #   resp.ota_update_info.targets[0] #=> String
+    #   resp.ota_update_info.aws_job_executions_rollout_config.maximum_per_minute #=> Integer
     #   resp.ota_update_info.target_selection #=> String, one of "CONTINUOUS", "SNAPSHOT"
     #   resp.ota_update_info.ota_update_files #=> Array
     #   resp.ota_update_info.ota_update_files[0].file_name #=> String
     #   resp.ota_update_info.ota_update_files[0].file_version #=> String
-    #   resp.ota_update_info.ota_update_files[0].file_source.stream_id #=> String
-    #   resp.ota_update_info.ota_update_files[0].file_source.file_id #=> Integer
+    #   resp.ota_update_info.ota_update_files[0].file_location.stream.stream_id #=> String
+    #   resp.ota_update_info.ota_update_files[0].file_location.stream.file_id #=> Integer
+    #   resp.ota_update_info.ota_update_files[0].file_location.s3_location.bucket #=> String
+    #   resp.ota_update_info.ota_update_files[0].file_location.s3_location.key #=> String
+    #   resp.ota_update_info.ota_update_files[0].file_location.s3_location.version #=> String
     #   resp.ota_update_info.ota_update_files[0].code_signing.aws_signer_job_id #=> String
-    #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.signature.stream.stream_id #=> String
-    #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.signature.stream.file_id #=> Integer
+    #   resp.ota_update_info.ota_update_files[0].code_signing.start_signing_job_parameter.signing_profile_parameter.certificate_arn #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.start_signing_job_parameter.signing_profile_parameter.platform #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.start_signing_job_parameter.signing_profile_parameter.certificate_path_on_device #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.start_signing_job_parameter.signing_profile_name #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.start_signing_job_parameter.destination.s3_destination.bucket #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.start_signing_job_parameter.destination.s3_destination.prefix #=> String
     #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.signature.inline_document #=> String
-    #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.certificate_chain.stream.stream_id #=> String
-    #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.certificate_chain.stream.file_id #=> Integer
     #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.certificate_chain.certificate_name #=> String
     #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.certificate_chain.inline_document #=> String
     #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.hash_algorithm #=> String
     #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.signature_algorithm #=> String
     #   resp.ota_update_info.ota_update_files[0].attributes #=> Hash
-    #   resp.ota_update_info.ota_update_files[0].attributes["Key"] #=> String
+    #   resp.ota_update_info.ota_update_files[0].attributes["AttributeKey"] #=> String
     #   resp.ota_update_info.ota_update_status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED"
     #   resp.ota_update_info.aws_iot_job_id #=> String
     #   resp.ota_update_info.aws_iot_job_arn #=> String
     #   resp.ota_update_info.error_info.code #=> String
     #   resp.ota_update_info.error_info.message #=> String
     #   resp.ota_update_info.additional_parameters #=> Hash
-    #   resp.ota_update_info.additional_parameters["Key"] #=> String
+    #   resp.ota_update_info.additional_parameters["AttributeKey"] #=> String
     #
     # @overload get_ota_update(params = {})
     # @param [Hash] params ({})
@@ -3829,7 +3921,7 @@ module Aws::IoT
     #
     #   resp = client.list_job_executions_for_job({
     #     job_id: "JobId", # required
-    #     status: "QUEUED", # accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, REJECTED, REMOVED, CANCELED
+    #     status: "QUEUED", # accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, TIMED_OUT, REJECTED, REMOVED, CANCELED
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -3838,7 +3930,7 @@ module Aws::IoT
     #
     #   resp.execution_summaries #=> Array
     #   resp.execution_summaries[0].thing_arn #=> String
-    #   resp.execution_summaries[0].job_execution_summary.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "REJECTED", "REMOVED", "CANCELED"
+    #   resp.execution_summaries[0].job_execution_summary.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "TIMED_OUT", "REJECTED", "REMOVED", "CANCELED"
     #   resp.execution_summaries[0].job_execution_summary.queued_at #=> Time
     #   resp.execution_summaries[0].job_execution_summary.started_at #=> Time
     #   resp.execution_summaries[0].job_execution_summary.last_updated_at #=> Time
@@ -3876,7 +3968,7 @@ module Aws::IoT
     #
     #   resp = client.list_job_executions_for_thing({
     #     thing_name: "ThingName", # required
-    #     status: "QUEUED", # accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, REJECTED, REMOVED, CANCELED
+    #     status: "QUEUED", # accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, TIMED_OUT, REJECTED, REMOVED, CANCELED
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -3885,7 +3977,7 @@ module Aws::IoT
     #
     #   resp.execution_summaries #=> Array
     #   resp.execution_summaries[0].job_id #=> String
-    #   resp.execution_summaries[0].job_execution_summary.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "REJECTED", "REMOVED", "CANCELED"
+    #   resp.execution_summaries[0].job_execution_summary.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "TIMED_OUT", "REJECTED", "REMOVED", "CANCELED"
     #   resp.execution_summaries[0].job_execution_summary.queued_at #=> Time
     #   resp.execution_summaries[0].job_execution_summary.started_at #=> Time
     #   resp.execution_summaries[0].job_execution_summary.last_updated_at #=> Time
@@ -5452,6 +5544,7 @@ module Aws::IoT
     #
     #   * {Types::SearchIndexResponse#next_token #next_token} => String
     #   * {Types::SearchIndexResponse#things #things} => Array&lt;Types::ThingDocument&gt;
+    #   * {Types::SearchIndexResponse#thing_groups #thing_groups} => Array&lt;Types::ThingGroupDocument&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -5475,6 +5568,14 @@ module Aws::IoT
     #   resp.things[0].attributes #=> Hash
     #   resp.things[0].attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.things[0].shadow #=> String
+    #   resp.thing_groups #=> Array
+    #   resp.thing_groups[0].thing_group_name #=> String
+    #   resp.thing_groups[0].thing_group_id #=> String
+    #   resp.thing_groups[0].thing_group_description #=> String
+    #   resp.thing_groups[0].attributes #=> Hash
+    #   resp.thing_groups[0].attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.thing_groups[0].parent_group_names #=> Array
+    #   resp.thing_groups[0].parent_group_names[0] #=> String
     #
     # @overload search_index(params = {})
     # @param [Hash] params ({})
@@ -6087,13 +6188,19 @@ module Aws::IoT
     # @option params [Types::ThingIndexingConfiguration] :thing_indexing_configuration
     #   Thing indexing configuration.
     #
+    # @option params [Types::ThingGroupIndexingConfiguration] :thing_group_indexing_configuration
+    #   Thing group indexing configuration.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_indexing_configuration({
     #     thing_indexing_configuration: {
-    #       thing_indexing_mode: "OFF", # accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
+    #       thing_indexing_mode: "OFF", # required, accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
+    #     },
+    #     thing_group_indexing_configuration: {
+    #       thing_group_indexing_mode: "OFF", # required, accepts OFF, ON
     #     },
     #   })
     #
@@ -6317,8 +6424,8 @@ module Aws::IoT
     #       {
     #         file_id: 1,
     #         s3_location: {
-    #           bucket: "S3Bucket", # required
-    #           key: "S3Key", # required
+    #           bucket: "S3Bucket",
+    #           key: "S3Key",
     #           version: "S3Version",
     #         },
     #       },
@@ -6518,7 +6625,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

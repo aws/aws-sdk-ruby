@@ -178,7 +178,7 @@ module Aws::WorkSpaces
     #               running_mode_auto_stop_timeout_in_minutes: 1,
     #               root_volume_size_gib: 1,
     #               user_volume_size_gib: 1,
-    #               compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS
+    #               compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO
     #             },
     #             tags: [
     #               {
@@ -740,7 +740,7 @@ module Aws::WorkSpaces
     #           running_mode_auto_stop_timeout_in_minutes: 1,
     #           root_volume_size_gib: 1,
     #           user_volume_size_gib: 1,
-    #           compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS
+    #           compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO
     #         },
     #       }
     #
@@ -1423,7 +1423,7 @@ module Aws::WorkSpaces
     #         running_mode_auto_stop_timeout_in_minutes: 1,
     #         root_volume_size_gib: 1,
     #         user_volume_size_gib: 1,
-    #         compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS
+    #         compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO
     #       }
     #
     # @!attribute [rw] running_mode
@@ -1485,7 +1485,7 @@ module Aws::WorkSpaces
     #           running_mode_auto_stop_timeout_in_minutes: 1,
     #           root_volume_size_gib: 1,
     #           user_volume_size_gib: 1,
-    #           compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS
+    #           compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO
     #         },
     #         tags: [
     #           {

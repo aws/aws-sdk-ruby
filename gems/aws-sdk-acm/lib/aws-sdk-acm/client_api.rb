@@ -277,12 +277,16 @@ module Aws::ACM
       api.version = "2015-12-08"
 
       api.metadata = {
+        "apiVersion" => "2015-12-08",
         "endpointPrefix" => "acm",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "ACM",
         "serviceFullName" => "AWS Certificate Manager",
+        "serviceId" => "ACM",
         "signatureVersion" => "v4",
         "targetPrefix" => "CertificateManager",
+        "uid" => "acm-2015-12-08",
       }
 
       api.add_operation(:add_tags_to_certificate, Seahorse::Model::Operation.new.tap do |o|

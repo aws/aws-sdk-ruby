@@ -80,6 +80,12 @@ module Aws::EC2
       data[:tags]
     end
 
+    # The ID of an address pool.
+    # @return [String]
+    def public_ipv_4_pool
+      data[:public_ipv_4_pool]
+    end
+
     # @!endgroup
 
     # @return [Client]

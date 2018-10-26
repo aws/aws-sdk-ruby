@@ -50,6 +50,8 @@ module Aws::Rekognition
     DeleteFacesResponse = Shapes::StructureShape.new(name: 'DeleteFacesResponse')
     DeleteStreamProcessorRequest = Shapes::StructureShape.new(name: 'DeleteStreamProcessorRequest')
     DeleteStreamProcessorResponse = Shapes::StructureShape.new(name: 'DeleteStreamProcessorResponse')
+    DescribeCollectionRequest = Shapes::StructureShape.new(name: 'DescribeCollectionRequest')
+    DescribeCollectionResponse = Shapes::StructureShape.new(name: 'DescribeCollectionResponse')
     DescribeStreamProcessorRequest = Shapes::StructureShape.new(name: 'DescribeStreamProcessorRequest')
     DescribeStreamProcessorResponse = Shapes::StructureShape.new(name: 'DescribeStreamProcessorResponse')
     DetectFacesRequest = Shapes::StructureShape.new(name: 'DetectFacesRequest')
@@ -135,6 +137,7 @@ module Aws::Rekognition
     ListStreamProcessorsRequest = Shapes::StructureShape.new(name: 'ListStreamProcessorsRequest')
     ListStreamProcessorsResponse = Shapes::StructureShape.new(name: 'ListStreamProcessorsResponse')
     MaxFaces = Shapes::IntegerShape.new(name: 'MaxFaces')
+    MaxFacesToIndex = Shapes::IntegerShape.new(name: 'MaxFacesToIndex')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     ModerationLabel = Shapes::StructureShape.new(name: 'ModerationLabel')
     ModerationLabels = Shapes::ListShape.new(name: 'ModerationLabels')
@@ -156,6 +159,9 @@ module Aws::Rekognition
     Polygon = Shapes::ListShape.new(name: 'Polygon')
     Pose = Shapes::StructureShape.new(name: 'Pose')
     ProvisionedThroughputExceededException = Shapes::StructureShape.new(name: 'ProvisionedThroughputExceededException')
+    QualityFilter = Shapes::StringShape.new(name: 'QualityFilter')
+    Reason = Shapes::StringShape.new(name: 'Reason')
+    Reasons = Shapes::ListShape.new(name: 'Reasons')
     RecognizeCelebritiesRequest = Shapes::StructureShape.new(name: 'RecognizeCelebritiesRequest')
     RecognizeCelebritiesResponse = Shapes::StructureShape.new(name: 'RecognizeCelebritiesResponse')
     RekognitionUniqueId = Shapes::StringShape.new(name: 'RekognitionUniqueId')
@@ -207,6 +213,8 @@ module Aws::Rekognition
     Timestamp = Shapes::IntegerShape.new(name: 'Timestamp')
     UInteger = Shapes::IntegerShape.new(name: 'UInteger')
     ULong = Shapes::IntegerShape.new(name: 'ULong')
+    UnindexedFace = Shapes::StructureShape.new(name: 'UnindexedFace')
+    UnindexedFaces = Shapes::ListShape.new(name: 'UnindexedFaces')
     Url = Shapes::StringShape.new(name: 'Url')
     Urls = Shapes::ListShape.new(name: 'Urls')
     Video = Shapes::StructureShape.new(name: 'Video')
@@ -329,6 +337,15 @@ module Aws::Rekognition
     DeleteStreamProcessorRequest.struct_class = Types::DeleteStreamProcessorRequest
 
     DeleteStreamProcessorResponse.struct_class = Types::DeleteStreamProcessorResponse
+
+    DescribeCollectionRequest.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "CollectionId"))
+    DescribeCollectionRequest.struct_class = Types::DescribeCollectionRequest
+
+    DescribeCollectionResponse.add_member(:face_count, Shapes::ShapeRef.new(shape: ULong, location_name: "FaceCount"))
+    DescribeCollectionResponse.add_member(:face_model_version, Shapes::ShapeRef.new(shape: String, location_name: "FaceModelVersion"))
+    DescribeCollectionResponse.add_member(:collection_arn, Shapes::ShapeRef.new(shape: String, location_name: "CollectionARN"))
+    DescribeCollectionResponse.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreationTimestamp"))
+    DescribeCollectionResponse.struct_class = Types::DescribeCollectionResponse
 
     DescribeStreamProcessorRequest.add_member(:name, Shapes::ShapeRef.new(shape: StreamProcessorName, required: true, location_name: "Name"))
     DescribeStreamProcessorRequest.struct_class = Types::DescribeStreamProcessorRequest
@@ -547,11 +564,14 @@ module Aws::Rekognition
     IndexFacesRequest.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "Image"))
     IndexFacesRequest.add_member(:external_image_id, Shapes::ShapeRef.new(shape: ExternalImageId, location_name: "ExternalImageId"))
     IndexFacesRequest.add_member(:detection_attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "DetectionAttributes"))
+    IndexFacesRequest.add_member(:max_faces, Shapes::ShapeRef.new(shape: MaxFacesToIndex, location_name: "MaxFaces"))
+    IndexFacesRequest.add_member(:quality_filter, Shapes::ShapeRef.new(shape: QualityFilter, location_name: "QualityFilter"))
     IndexFacesRequest.struct_class = Types::IndexFacesRequest
 
     IndexFacesResponse.add_member(:face_records, Shapes::ShapeRef.new(shape: FaceRecordList, location_name: "FaceRecords"))
     IndexFacesResponse.add_member(:orientation_correction, Shapes::ShapeRef.new(shape: OrientationCorrection, location_name: "OrientationCorrection"))
     IndexFacesResponse.add_member(:face_model_version, Shapes::ShapeRef.new(shape: String, location_name: "FaceModelVersion"))
+    IndexFacesResponse.add_member(:unindexed_faces, Shapes::ShapeRef.new(shape: UnindexedFaces, location_name: "UnindexedFaces"))
     IndexFacesResponse.struct_class = Types::IndexFacesResponse
 
     KinesisDataStream.add_member(:arn, Shapes::ShapeRef.new(shape: KinesisDataArn, location_name: "Arn"))
@@ -653,6 +673,8 @@ module Aws::Rekognition
     Pose.add_member(:yaw, Shapes::ShapeRef.new(shape: Degree, location_name: "Yaw"))
     Pose.add_member(:pitch, Shapes::ShapeRef.new(shape: Degree, location_name: "Pitch"))
     Pose.struct_class = Types::Pose
+
+    Reasons.member = Shapes::ShapeRef.new(shape: Reason)
 
     RecognizeCelebritiesRequest.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "Image"))
     RecognizeCelebritiesRequest.struct_class = Types::RecognizeCelebritiesRequest
@@ -792,6 +814,12 @@ module Aws::Rekognition
 
     TextDetectionList.member = Shapes::ShapeRef.new(shape: TextDetection)
 
+    UnindexedFace.add_member(:reasons, Shapes::ShapeRef.new(shape: Reasons, location_name: "Reasons"))
+    UnindexedFace.add_member(:face_detail, Shapes::ShapeRef.new(shape: FaceDetail, location_name: "FaceDetail"))
+    UnindexedFace.struct_class = Types::UnindexedFace
+
+    UnindexedFaces.member = Shapes::ShapeRef.new(shape: UnindexedFace)
+
     Urls.member = Shapes::ShapeRef.new(shape: Url)
 
     Video.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "S3Object"))
@@ -812,12 +840,15 @@ module Aws::Rekognition
       api.version = "2016-06-27"
 
       api.metadata = {
+        "apiVersion" => "2016-06-27",
         "endpointPrefix" => "rekognition",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon Rekognition",
+        "serviceId" => "Rekognition",
         "signatureVersion" => "v4",
         "targetPrefix" => "RekognitionService",
+        "uid" => "rekognition-2016-06-27",
       }
 
       api.add_operation(:compare_faces, Seahorse::Model::Operation.new.tap do |o|
@@ -906,6 +937,20 @@ module Aws::Rekognition
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+      end)
+
+      api.add_operation(:describe_collection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeCollection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeCollectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeCollectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:describe_stream_processor, Seahorse::Model::Operation.new.tap do |o|

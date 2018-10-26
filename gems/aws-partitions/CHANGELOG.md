@@ -1,6 +1,56 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2018-10-22)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.105.0 (2018-09-26)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.104.0 (2018-09-10)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.103.0 (2018-09-06)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.102.0 (2018-08-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Signer`.
+
+1.101.0 (2018-08-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::signer`.
+
+1.100.0 (2018-08-15)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.99.0 (2018-08-14)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.98.0 (2018-08-13)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SageMaker`.
+
+1.97.0 (2018-08-02)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
 1.96.0 (2018-07-12)
 ------------------
 

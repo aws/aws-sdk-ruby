@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -47,108 +49,128 @@ module Aws::XRay
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
     #
-    # @option options [String] :session_token
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -200,6 +222,121 @@ module Aws::XRay
       req.send_request(options)
     end
 
+    # Creates a rule to control sampling behavior for instrumented
+    # applications. Services retrieve rules with GetSamplingRules, and
+    # evaluate each rule in ascending order of *priority* for each request.
+    # If a rule matches, the service records a trace, borrowing it from the
+    # reservoir size. After 10 seconds, the service reports back to X-Ray
+    # with GetSamplingTargets to get updated versions of each in-use rule.
+    # The updated rule contains a trace quota that the service can use
+    # instead of borrowing from the reservoir.
+    #
+    # @option params [required, Types::SamplingRule] :sampling_rule
+    #   The rule definition.
+    #
+    # @return [Types::CreateSamplingRuleResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSamplingRuleResult#sampling_rule_record #sampling_rule_record} => Types::SamplingRuleRecord
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_sampling_rule({
+    #     sampling_rule: { # required
+    #       rule_name: "RuleName",
+    #       rule_arn: "String",
+    #       resource_arn: "ResourceARN", # required
+    #       priority: 1, # required
+    #       fixed_rate: 1.0, # required
+    #       reservoir_size: 1, # required
+    #       service_name: "ServiceName", # required
+    #       service_type: "ServiceType", # required
+    #       host: "Host", # required
+    #       http_method: "HTTPMethod", # required
+    #       url_path: "URLPath", # required
+    #       version: 1, # required
+    #       attributes: {
+    #         "AttributeKey" => "AttributeValue",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sampling_rule_record.sampling_rule.rule_name #=> String
+    #   resp.sampling_rule_record.sampling_rule.rule_arn #=> String
+    #   resp.sampling_rule_record.sampling_rule.resource_arn #=> String
+    #   resp.sampling_rule_record.sampling_rule.priority #=> Integer
+    #   resp.sampling_rule_record.sampling_rule.fixed_rate #=> Float
+    #   resp.sampling_rule_record.sampling_rule.reservoir_size #=> Integer
+    #   resp.sampling_rule_record.sampling_rule.service_name #=> String
+    #   resp.sampling_rule_record.sampling_rule.service_type #=> String
+    #   resp.sampling_rule_record.sampling_rule.host #=> String
+    #   resp.sampling_rule_record.sampling_rule.http_method #=> String
+    #   resp.sampling_rule_record.sampling_rule.url_path #=> String
+    #   resp.sampling_rule_record.sampling_rule.version #=> Integer
+    #   resp.sampling_rule_record.sampling_rule.attributes #=> Hash
+    #   resp.sampling_rule_record.sampling_rule.attributes["AttributeKey"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.sampling_rule_record.created_at #=> Time
+    #   resp.sampling_rule_record.modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CreateSamplingRule AWS API Documentation
+    #
+    # @overload create_sampling_rule(params = {})
+    # @param [Hash] params ({})
+    def create_sampling_rule(params = {}, options = {})
+      req = build_request(:create_sampling_rule, params)
+      req.send_request(options)
+    end
+
+    # Deletes a sampling rule.
+    #
+    # @option params [String] :rule_name
+    #   The name of the sampling rule. Specify a rule by either name or ARN,
+    #   but not both.
+    #
+    # @option params [String] :rule_arn
+    #   The ARN of the sampling rule. Specify a rule by either name or ARN,
+    #   but not both.
+    #
+    # @return [Types::DeleteSamplingRuleResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteSamplingRuleResult#sampling_rule_record #sampling_rule_record} => Types::SamplingRuleRecord
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_sampling_rule({
+    #     rule_name: "String",
+    #     rule_arn: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sampling_rule_record.sampling_rule.rule_name #=> String
+    #   resp.sampling_rule_record.sampling_rule.rule_arn #=> String
+    #   resp.sampling_rule_record.sampling_rule.resource_arn #=> String
+    #   resp.sampling_rule_record.sampling_rule.priority #=> Integer
+    #   resp.sampling_rule_record.sampling_rule.fixed_rate #=> Float
+    #   resp.sampling_rule_record.sampling_rule.reservoir_size #=> Integer
+    #   resp.sampling_rule_record.sampling_rule.service_name #=> String
+    #   resp.sampling_rule_record.sampling_rule.service_type #=> String
+    #   resp.sampling_rule_record.sampling_rule.host #=> String
+    #   resp.sampling_rule_record.sampling_rule.http_method #=> String
+    #   resp.sampling_rule_record.sampling_rule.url_path #=> String
+    #   resp.sampling_rule_record.sampling_rule.version #=> Integer
+    #   resp.sampling_rule_record.sampling_rule.attributes #=> Hash
+    #   resp.sampling_rule_record.sampling_rule.attributes["AttributeKey"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.sampling_rule_record.created_at #=> Time
+    #   resp.sampling_rule_record.modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/DeleteSamplingRule AWS API Documentation
+    #
+    # @overload delete_sampling_rule(params = {})
+    # @param [Hash] params ({})
+    def delete_sampling_rule(params = {}, options = {})
+      req = build_request(:delete_sampling_rule, params)
+      req.send_request(options)
+    end
+
     # Retrieves the current encryption configuration for X-Ray data.
     #
     # @return [Types::GetEncryptionConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -218,6 +355,138 @@ module Aws::XRay
     # @param [Hash] params ({})
     def get_encryption_config(params = {}, options = {})
       req = build_request(:get_encryption_config, params)
+      req.send_request(options)
+    end
+
+    # Retrieves all sampling rules.
+    #
+    # @option params [String] :next_token
+    #   Pagination token. Not used.
+    #
+    # @return [Types::GetSamplingRulesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSamplingRulesResult#sampling_rule_records #sampling_rule_records} => Array&lt;Types::SamplingRuleRecord&gt;
+    #   * {Types::GetSamplingRulesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_sampling_rules({
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sampling_rule_records #=> Array
+    #   resp.sampling_rule_records[0].sampling_rule.rule_name #=> String
+    #   resp.sampling_rule_records[0].sampling_rule.rule_arn #=> String
+    #   resp.sampling_rule_records[0].sampling_rule.resource_arn #=> String
+    #   resp.sampling_rule_records[0].sampling_rule.priority #=> Integer
+    #   resp.sampling_rule_records[0].sampling_rule.fixed_rate #=> Float
+    #   resp.sampling_rule_records[0].sampling_rule.reservoir_size #=> Integer
+    #   resp.sampling_rule_records[0].sampling_rule.service_name #=> String
+    #   resp.sampling_rule_records[0].sampling_rule.service_type #=> String
+    #   resp.sampling_rule_records[0].sampling_rule.host #=> String
+    #   resp.sampling_rule_records[0].sampling_rule.http_method #=> String
+    #   resp.sampling_rule_records[0].sampling_rule.url_path #=> String
+    #   resp.sampling_rule_records[0].sampling_rule.version #=> Integer
+    #   resp.sampling_rule_records[0].sampling_rule.attributes #=> Hash
+    #   resp.sampling_rule_records[0].sampling_rule.attributes["AttributeKey"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.sampling_rule_records[0].created_at #=> Time
+    #   resp.sampling_rule_records[0].modified_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingRules AWS API Documentation
+    #
+    # @overload get_sampling_rules(params = {})
+    # @param [Hash] params ({})
+    def get_sampling_rules(params = {}, options = {})
+      req = build_request(:get_sampling_rules, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about recent sampling results for all sampling
+    # rules.
+    #
+    # @option params [String] :next_token
+    #   Pagination token. Not used.
+    #
+    # @return [Types::GetSamplingStatisticSummariesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSamplingStatisticSummariesResult#sampling_statistic_summaries #sampling_statistic_summaries} => Array&lt;Types::SamplingStatisticSummary&gt;
+    #   * {Types::GetSamplingStatisticSummariesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_sampling_statistic_summaries({
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sampling_statistic_summaries #=> Array
+    #   resp.sampling_statistic_summaries[0].rule_name #=> String
+    #   resp.sampling_statistic_summaries[0].timestamp #=> Time
+    #   resp.sampling_statistic_summaries[0].request_count #=> Integer
+    #   resp.sampling_statistic_summaries[0].borrow_count #=> Integer
+    #   resp.sampling_statistic_summaries[0].sampled_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingStatisticSummaries AWS API Documentation
+    #
+    # @overload get_sampling_statistic_summaries(params = {})
+    # @param [Hash] params ({})
+    def get_sampling_statistic_summaries(params = {}, options = {})
+      req = build_request(:get_sampling_statistic_summaries, params)
+      req.send_request(options)
+    end
+
+    # Requests a sampling quota for rules that the service is using to
+    # sample requests.
+    #
+    # @option params [required, Array<Types::SamplingStatisticsDocument>] :sampling_statistics_documents
+    #   Information about rules that the service is using to sample requests.
+    #
+    # @return [Types::GetSamplingTargetsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSamplingTargetsResult#sampling_target_documents #sampling_target_documents} => Array&lt;Types::SamplingTargetDocument&gt;
+    #   * {Types::GetSamplingTargetsResult#last_rule_modification #last_rule_modification} => Time
+    #   * {Types::GetSamplingTargetsResult#unprocessed_statistics #unprocessed_statistics} => Array&lt;Types::UnprocessedStatistics&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_sampling_targets({
+    #     sampling_statistics_documents: [ # required
+    #       {
+    #         rule_name: "RuleName", # required
+    #         client_id: "ClientID", # required
+    #         timestamp: Time.now, # required
+    #         request_count: 1, # required
+    #         sampled_count: 1, # required
+    #         borrow_count: 1,
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sampling_target_documents #=> Array
+    #   resp.sampling_target_documents[0].rule_name #=> String
+    #   resp.sampling_target_documents[0].fixed_rate #=> Float
+    #   resp.sampling_target_documents[0].reservoir_quota #=> Integer
+    #   resp.sampling_target_documents[0].reservoir_quota_ttl #=> Time
+    #   resp.sampling_target_documents[0].interval #=> Integer
+    #   resp.last_rule_modification #=> Time
+    #   resp.unprocessed_statistics #=> Array
+    #   resp.unprocessed_statistics[0].rule_name #=> String
+    #   resp.unprocessed_statistics[0].error_code #=> String
+    #   resp.unprocessed_statistics[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingTargets AWS API Documentation
+    #
+    # @overload get_sampling_targets(params = {})
+    # @param [Hash] params ({})
+    def get_sampling_targets(params = {}, options = {})
+      req = build_request(:get_sampling_targets, params)
       req.send_request(options)
     end
 
@@ -676,6 +945,64 @@ module Aws::XRay
       req.send_request(options)
     end
 
+    # Modifies a sampling rule's configuration.
+    #
+    # @option params [required, Types::SamplingRuleUpdate] :sampling_rule_update
+    #   The rule and fields to change.
+    #
+    # @return [Types::UpdateSamplingRuleResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSamplingRuleResult#sampling_rule_record #sampling_rule_record} => Types::SamplingRuleRecord
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_sampling_rule({
+    #     sampling_rule_update: { # required
+    #       rule_name: "RuleName",
+    #       rule_arn: "String",
+    #       resource_arn: "ResourceARN",
+    #       priority: 1,
+    #       fixed_rate: 1.0,
+    #       reservoir_size: 1,
+    #       host: "Host",
+    #       service_name: "ServiceName",
+    #       service_type: "ServiceType",
+    #       http_method: "HTTPMethod",
+    #       url_path: "URLPath",
+    #       attributes: {
+    #         "AttributeKey" => "AttributeValue",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sampling_rule_record.sampling_rule.rule_name #=> String
+    #   resp.sampling_rule_record.sampling_rule.rule_arn #=> String
+    #   resp.sampling_rule_record.sampling_rule.resource_arn #=> String
+    #   resp.sampling_rule_record.sampling_rule.priority #=> Integer
+    #   resp.sampling_rule_record.sampling_rule.fixed_rate #=> Float
+    #   resp.sampling_rule_record.sampling_rule.reservoir_size #=> Integer
+    #   resp.sampling_rule_record.sampling_rule.service_name #=> String
+    #   resp.sampling_rule_record.sampling_rule.service_type #=> String
+    #   resp.sampling_rule_record.sampling_rule.host #=> String
+    #   resp.sampling_rule_record.sampling_rule.http_method #=> String
+    #   resp.sampling_rule_record.sampling_rule.url_path #=> String
+    #   resp.sampling_rule_record.sampling_rule.version #=> Integer
+    #   resp.sampling_rule_record.sampling_rule.attributes #=> Hash
+    #   resp.sampling_rule_record.sampling_rule.attributes["AttributeKey"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.sampling_rule_record.created_at #=> Time
+    #   resp.sampling_rule_record.modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UpdateSamplingRule AWS API Documentation
+    #
+    # @overload update_sampling_rule(params = {})
+    # @param [Hash] params ({})
+    def update_sampling_rule(params = {}, options = {})
+      req = build_request(:update_sampling_rule, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -689,7 +1016,7 @@ module Aws::XRay
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-xray'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -567,13 +567,16 @@ module Aws::Comprehend
       api.version = "2017-11-27"
 
       api.metadata = {
+        "apiVersion" => "2017-11-27",
         "endpointPrefix" => "comprehend",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon Comprehend",
+        "serviceId" => "Comprehend",
         "signatureVersion" => "v4",
         "signingName" => "comprehend",
         "targetPrefix" => "Comprehend_20171127",
+        "uid" => "comprehend-2017-11-27",
       }
 
       api.add_operation(:batch_detect_dominant_language, Seahorse::Model::Operation.new.tap do |o|

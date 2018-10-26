@@ -14,6 +14,7 @@ require_relative 'aws-sdk-core/credential_provider_chain'
 require_relative 'aws-sdk-core/ecs_credentials'
 require_relative 'aws-sdk-core/instance_profile_credentials'
 require_relative 'aws-sdk-core/shared_credentials'
+require_relative 'aws-sdk-core/process_credentials'
 
 # client modules
 
@@ -63,11 +64,18 @@ require_relative 'aws-sdk-core/xml'
 require_relative 'aws-sdk-core/json'
 
 # event stream
+
 require_relative 'aws-sdk-core/binary'
 require_relative 'aws-sdk-core/event_emitter'
 
 # endpoint discovery
+
 require_relative 'aws-sdk-core/endpoint_cache'
+
+# client metrics
+
+require_relative 'aws-sdk-core/client_side_monitoring/request_metrics'
+require_relative 'aws-sdk-core/client_side_monitoring/publisher'
 
 # aws-sdk-sts is vendored to support Aws::AssumeRoleCredentials
 

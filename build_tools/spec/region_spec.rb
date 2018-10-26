@@ -37,7 +37,8 @@ describe "ensure no hard-coded region" do
           next if val.strip[0] == "#"
           # skip known whitelists
           next if whitelist[key] && whitelist[key][File.basename(path)] == idx
-          expect(val).not_to match(/(us|eu|ap|sa|ca)-\w+-\d+/)        
+          # If we use \w+ we will get false positives for uid fields
+          expect(val).not_to match(/(us|eu|ap|sa|ca)-[a-zA-Z]+-\d+/)
         end
       end
 

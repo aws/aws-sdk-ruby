@@ -226,22 +226,23 @@ module Aws::EC2
     #   leaving the subnet).
     # @option options [Types::IcmpTypeCode] :icmp_type_code
     #   ICMP protocol: The ICMP or ICMPv6 type and code. Required if
-    #   specifying the ICMP protocol, or protocol 58 (ICMPv6) with an IPv6
-    #   CIDR block.
+    #   specifying protocol 1 (ICMP) or protocol 58 (ICMPv6) with an IPv6 CIDR
+    #   block.
     # @option options [String] :ipv_6_cidr_block
     #   The IPv6 network range to allow or deny, in CIDR notation (for example
     #   `2001:db8:1234:1a00::/64`).
     # @option options [Types::PortRange] :port_range
-    #   TCP or UDP protocols: The range of ports the rule applies to.
+    #   TCP or UDP protocols: The range of ports the rule applies to. Required
+    #   if specifying protocol 6 (TCP) or 17 (UDP).
     # @option options [required, String] :protocol
-    #   The protocol. A value of `-1` or `all` means all protocols. If you
-    #   specify `all`, `-1`, or a protocol number other than `6` (tcp), `17`
-    #   (udp), or `1` (icmp), traffic on all ports is allowed, regardless of
-    #   any ports or ICMP types or codes you specify. If you specify protocol
-    #   `58` (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP
-    #   types and codes allowed, regardless of any that you specify. If you
-    #   specify protocol `58` (ICMPv6) and specify an IPv6 CIDR block, you
-    #   must specify an ICMP type and code.
+    #   The protocol number. A value of "-1" means all protocols. If you
+    #   specify "-1" or a protocol number other than "6" (TCP), "17"
+    #   (UDP), or "1" (ICMP), traffic on all ports is allowed, regardless of
+    #   any ports or ICMP types or codes that you specify. If you specify
+    #   protocol "58" (ICMPv6) and specify an IPv4 CIDR block, traffic for
+    #   all ICMP types and codes allowed, regardless of any that you specify.
+    #   If you specify protocol "58" (ICMPv6) and specify an IPv6 CIDR
+    #   block, you must specify an ICMP type and code.
     # @option options [required, String] :rule_action
     #   Indicates whether to allow or deny the traffic that matches the rule.
     # @option options [required, Integer] :rule_number
@@ -392,23 +393,23 @@ module Aws::EC2
     #   Default: If no value is specified, we replace the ingress rule.
     # @option options [Types::IcmpTypeCode] :icmp_type_code
     #   ICMP protocol: The ICMP or ICMPv6 type and code. Required if
-    #   specifying the ICMP (1) protocol, or protocol 58 (ICMPv6) with an IPv6
-    #   CIDR block.
+    #   specifying protocol 1 (ICMP) or protocol 58 (ICMPv6) with an IPv6 CIDR
+    #   block.
     # @option options [String] :ipv_6_cidr_block
     #   The IPv6 network range to allow or deny, in CIDR notation (for example
     #   `2001:bd8:1234:1a00::/64`).
     # @option options [Types::PortRange] :port_range
     #   TCP or UDP protocols: The range of ports the rule applies to. Required
-    #   if specifying TCP (6) or UDP (17) for the protocol.
+    #   if specifying protocol 6 (TCP) or 17 (UDP).
     # @option options [required, String] :protocol
-    #   The IP protocol. You can specify `all` or `-1` to mean all protocols.
-    #   If you specify `all`, `-1`, or a protocol number other than `tcp`,
-    #   `udp`, or `icmp`, traffic on all ports is allowed, regardless of any
-    #   ports or ICMP types or codes you specify. If you specify protocol `58`
-    #   (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types
-    #   and codes allowed, regardless of any that you specify. If you specify
-    #   protocol `58` (ICMPv6) and specify an IPv6 CIDR block, you must
-    #   specify an ICMP type and code.
+    #   The protocol number. A value of "-1" means all protocols. If you
+    #   specify "-1" or a protocol number other than "6" (TCP), "17"
+    #   (UDP), or "1" (ICMP), traffic on all ports is allowed, regardless of
+    #   any ports or ICMP types or codes that you specify. If you specify
+    #   protocol "58" (ICMPv6) and specify an IPv4 CIDR block, traffic for
+    #   all ICMP types and codes allowed, regardless of any that you specify.
+    #   If you specify protocol "58" (ICMPv6) and specify an IPv6 CIDR
+    #   block, you must specify an ICMP type and code.
     # @option options [required, String] :rule_action
     #   Indicates whether to allow or deny the traffic that matches the rule.
     # @option options [required, Integer] :rule_number

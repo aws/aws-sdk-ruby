@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -47,108 +49,128 @@ module Aws::Pinpoint
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
     #
-    # @option options [String] :session_token
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -878,7 +900,7 @@ module Aws::Pinpoint
     #                 version: 1,
     #               },
     #             ],
-    #             source_type: "ALL", # accepts ALL, ANY
+    #             source_type: "ALL", # accepts ALL, ANY, NONE
     #             type: "ALL", # accepts ALL, ANY, NONE
     #           },
     #         ],
@@ -980,7 +1002,7 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups[0].source_segments #=> Array
     #   resp.segment_response.segment_groups.groups[0].source_segments[0].id #=> String
     #   resp.segment_response.segment_groups.groups[0].source_segments[0].version #=> Integer
-    #   resp.segment_response.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY"
+    #   resp.segment_response.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
@@ -1734,7 +1756,7 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups[0].source_segments #=> Array
     #   resp.segment_response.segment_groups.groups[0].source_segments[0].id #=> String
     #   resp.segment_response.segment_groups.groups[0].source_segments[0].version #=> Integer
-    #   resp.segment_response.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY"
+    #   resp.segment_response.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
@@ -1789,7 +1811,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Deletes endpoints associated with an user id.
+    # Deletes endpoints that are associated with a User ID.
     #
     # @option params [required, String] :application_id
     #
@@ -2419,6 +2441,7 @@ module Aws::Pinpoint
     #   resp.activities_response.item[0].timezones_total_count #=> Integer
     #   resp.activities_response.item[0].total_endpoint_count #=> Integer
     #   resp.activities_response.item[0].treatment_id #=> String
+    #   resp.activities_response.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignActivities AWS API Documentation
     #
@@ -3579,7 +3602,7 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups[0].source_segments #=> Array
     #   resp.segment_response.segment_groups.groups[0].source_segments[0].id #=> String
     #   resp.segment_response.segment_groups.groups[0].source_segments[0].version #=> Integer
-    #   resp.segment_response.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY"
+    #   resp.segment_response.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
@@ -3819,7 +3842,7 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups[0].source_segments #=> Array
     #   resp.segment_response.segment_groups.groups[0].source_segments[0].id #=> String
     #   resp.segment_response.segment_groups.groups[0].source_segments[0].version #=> Integer
-    #   resp.segment_response.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY"
+    #   resp.segment_response.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
@@ -3951,7 +3974,7 @@ module Aws::Pinpoint
     #   resp.segments_response.item[0].segment_groups.groups[0].source_segments #=> Array
     #   resp.segments_response.item[0].segment_groups.groups[0].source_segments[0].id #=> String
     #   resp.segments_response.item[0].segment_groups.groups[0].source_segments[0].version #=> Integer
-    #   resp.segments_response.item[0].segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY"
+    #   resp.segments_response.item[0].segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segments_response.item[0].segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segments_response.item[0].segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segments_response.item[0].segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
@@ -4081,7 +4104,7 @@ module Aws::Pinpoint
     #   resp.segments_response.item[0].segment_groups.groups[0].source_segments #=> Array
     #   resp.segments_response.item[0].segment_groups.groups[0].source_segments[0].id #=> String
     #   resp.segments_response.item[0].segment_groups.groups[0].source_segments[0].version #=> Integer
-    #   resp.segments_response.item[0].segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY"
+    #   resp.segments_response.item[0].segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segments_response.item[0].segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segments_response.item[0].segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segments_response.item[0].segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
@@ -4137,7 +4160,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Returns information about the endpoints associated with an user id.
+    # Returns information about the endpoints that are associated with a
+    # User ID.
     #
     # @option params [required, String] :application_id
     #
@@ -4283,6 +4307,106 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
+    # Use to record events for endpoints. This method creates events and
+    # creates or updates the endpoints that those events are associated
+    # with.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, Types::EventsRequest] :events_request
+    #   Put Events request
+    #
+    # @return [Types::PutEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutEventsResponse#events_response #events_response} => Types::EventsResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_events({
+    #     application_id: "__string", # required
+    #     events_request: { # required
+    #       batch_item: {
+    #         "__string" => {
+    #           endpoint: {
+    #             address: "__string",
+    #             attributes: {
+    #               "__string" => ["__string"],
+    #             },
+    #             channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU, CUSTOM
+    #             demographic: {
+    #               app_version: "__string",
+    #               locale: "__string",
+    #               make: "__string",
+    #               model: "__string",
+    #               model_version: "__string",
+    #               platform: "__string",
+    #               platform_version: "__string",
+    #               timezone: "__string",
+    #             },
+    #             effective_date: "__string",
+    #             endpoint_status: "__string",
+    #             location: {
+    #               city: "__string",
+    #               country: "__string",
+    #               latitude: 1.0,
+    #               longitude: 1.0,
+    #               postal_code: "__string",
+    #               region: "__string",
+    #             },
+    #             metrics: {
+    #               "__string" => 1.0,
+    #             },
+    #             opt_out: "__string",
+    #             request_id: "__string",
+    #             user: {
+    #               user_attributes: {
+    #                 "__string" => ["__string"],
+    #               },
+    #               user_id: "__string",
+    #             },
+    #           },
+    #           events: {
+    #             "__string" => {
+    #               attributes: {
+    #                 "__string" => "__string",
+    #               },
+    #               client_sdk_version: "__string",
+    #               event_type: "__string",
+    #               metrics: {
+    #                 "__string" => 1.0,
+    #               },
+    #               session: {
+    #                 duration: 1,
+    #                 id: "__string",
+    #                 start_timestamp: "__string",
+    #                 stop_timestamp: "__string",
+    #               },
+    #               timestamp: "__string",
+    #             },
+    #           },
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.events_response.results #=> Hash
+    #   resp.events_response.results["__string"].endpoint_item_response.message #=> String
+    #   resp.events_response.results["__string"].endpoint_item_response.status_code #=> Integer
+    #   resp.events_response.results["__string"].events_item_response #=> Hash
+    #   resp.events_response.results["__string"].events_item_response["__string"].message #=> String
+    #   resp.events_response.results["__string"].events_item_response["__string"].status_code #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/PutEvents AWS API Documentation
+    #
+    # @overload put_events(params = {})
+    # @param [Hash] params ({})
+    def put_events(params = {}, options = {})
+      req = build_request(:put_events, params)
+      req.send_request(options)
+    end
+
     # Used to remove the attributes for an app
     #
     # @option params [required, String] :application_id
@@ -4322,15 +4446,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Use this resource to send a direct message, which is a one time
-    # message that you send to a limited audience without creating a
-    # campaign. You can send the message to up to 100 recipients. You cannot
-    # use the message to engage a segment. When you send the message, Amazon
-    # Pinpoint delivers it immediately, and you cannot schedule the
-    # delivery. To engage a user segment, and to schedule the message
-    # delivery, create a campaign instead of sending a direct message. You
-    # can send a direct message as a push notification to your mobile app or
-    # as an SMS message to SMS-enabled devices.
+    # Used to send a direct message.
     #
     # @option params [required, String] :application_id
     #
@@ -4495,6 +4611,7 @@ module Aws::Pinpoint
     #           },
     #         },
     #       },
+    #       trace_id: "__string",
     #     },
     #   })
     #
@@ -4525,25 +4642,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Use this resource to message a list of users. Amazon Pinpoint sends
-    # the message to all of the endpoints that are associated with each
-    # user. A user represents an individual who is assigned a unique user
-    # ID, and this ID is assigned to one or more endpoints. For example, if
-    # an individual uses your app on multiple devices, your app could assign
-    # that person's user ID to the endpoint for each device. With the
-    # users-messages resource, you specify the message recipients as user
-    # IDs. For each user ID, Amazon Pinpoint delivers the message to all of
-    # the user's endpoints. Within the body of your request, you can
-    # specify a default message, and you can tailor your message for
-    # different channels, including those for mobile push and SMS. With this
-    # resource, you send a direct message, which is a one time message that
-    # you send to a limited audience without creating a campaign. You can
-    # send the message to up to 100 users per request. You cannot use the
-    # message to engage a segment. When you send the message, Amazon
-    # Pinpoint delivers it immediately, and you cannot schedule the
-    # delivery. To engage a user segment, and to schedule the message
-    # delivery, create a campaign instead of using the users-messages
-    # resource.
+    # Used to send a message to a list of users.
     #
     # @option params [required, String] :application_id
     #
@@ -4681,6 +4780,7 @@ module Aws::Pinpoint
     #           },
     #         },
     #       },
+    #       trace_id: "__string",
     #       users: {
     #         "__string" => {
     #           body_override: "__string",
@@ -5733,7 +5833,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Use to update a segment.
+    # Used to update a segment.
     #
     # @option params [required, String] :application_id
     #
@@ -5894,7 +5994,7 @@ module Aws::Pinpoint
     #                 version: 1,
     #               },
     #             ],
-    #             source_type: "ALL", # accepts ALL, ANY
+    #             source_type: "ALL", # accepts ALL, ANY, NONE
     #             type: "ALL", # accepts ALL, ANY, NONE
     #           },
     #         ],
@@ -5996,7 +6096,7 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups[0].source_segments #=> Array
     #   resp.segment_response.segment_groups.groups[0].source_segments[0].id #=> String
     #   resp.segment_response.segment_groups.groups[0].source_segments[0].version #=> Integer
-    #   resp.segment_response.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY"
+    #   resp.segment_response.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
@@ -6072,7 +6172,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

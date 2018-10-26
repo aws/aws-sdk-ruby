@@ -467,12 +467,15 @@ module Aws::ECR
       api.version = "2015-09-21"
 
       api.metadata = {
+        "apiVersion" => "2015-09-21",
         "endpointPrefix" => "ecr",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "Amazon ECR",
         "serviceFullName" => "Amazon EC2 Container Registry",
         "signatureVersion" => "v4",
         "targetPrefix" => "AmazonEC2ContainerRegistry_V20150921",
+        "uid" => "ecr-2015-09-21",
       }
 
       api.add_operation(:batch_check_layer_availability, Seahorse::Model::Operation.new.tap do |o|

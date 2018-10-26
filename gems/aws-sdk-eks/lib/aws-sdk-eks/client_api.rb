@@ -51,6 +51,7 @@ module Aws::EKS
     Cluster.add_member(:status, Shapes::ShapeRef.new(shape: ClusterStatus, location_name: "status"))
     Cluster.add_member(:certificate_authority, Shapes::ShapeRef.new(shape: Certificate, location_name: "certificateAuthority"))
     Cluster.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken"))
+    Cluster.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
     Cluster.struct_class = Types::Cluster
 
     CreateClusterRequest.add_member(:name, Shapes::ShapeRef.new(shape: ClusterName, required: true, location_name: "name"))
@@ -101,12 +102,16 @@ module Aws::EKS
       api.version = "2017-11-01"
 
       api.metadata = {
+        "apiVersion" => "2017-11-01",
         "endpointPrefix" => "eks",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "serviceAbbreviation" => "Amazon EKS",
         "serviceFullName" => "Amazon Elastic Container Service for Kubernetes",
+        "serviceId" => "EKS",
         "signatureVersion" => "v4",
         "signingName" => "eks",
+        "uid" => "eks-2017-11-01",
       }
 
       api.add_operation(:create_cluster, Seahorse::Model::Operation.new.tap do |o|

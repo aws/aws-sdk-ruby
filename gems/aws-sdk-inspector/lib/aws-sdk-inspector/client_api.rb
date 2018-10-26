@@ -130,6 +130,7 @@ module Aws::Inspector
     IocConfidence = Shapes::IntegerShape.new(name: 'IocConfidence')
     Ipv4Address = Shapes::StringShape.new(name: 'Ipv4Address')
     Ipv4AddressList = Shapes::ListShape.new(name: 'Ipv4AddressList')
+    Ipv6Addresses = Shapes::ListShape.new(name: 'Ipv6Addresses')
     KernelVersion = Shapes::StringShape.new(name: 'KernelVersion')
     LimitExceededErrorCode = Shapes::StringShape.new(name: 'LimitExceededErrorCode')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -160,6 +161,8 @@ module Aws::Inspector
     Message = Shapes::StringShape.new(name: 'Message')
     MessageType = Shapes::StringShape.new(name: 'MessageType')
     NamePattern = Shapes::StringShape.new(name: 'NamePattern')
+    NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
+    NetworkInterfaces = Shapes::ListShape.new(name: 'NetworkInterfaces')
     NoSuchEntityErrorCode = Shapes::StringShape.new(name: 'NoSuchEntityErrorCode')
     NoSuchEntityException = Shapes::StructureShape.new(name: 'NoSuchEntityException')
     NumericSeverity = Shapes::FloatShape.new(name: 'NumericSeverity')
@@ -171,6 +174,8 @@ module Aws::Inspector
     PreviewAgentsResponse = Shapes::StructureShape.new(name: 'PreviewAgentsResponse')
     PreviewGenerationInProgressException = Shapes::StructureShape.new(name: 'PreviewGenerationInProgressException')
     PreviewStatus = Shapes::StringShape.new(name: 'PreviewStatus')
+    PrivateIp = Shapes::StructureShape.new(name: 'PrivateIp')
+    PrivateIpAddresses = Shapes::ListShape.new(name: 'PrivateIpAddresses')
     ProviderName = Shapes::StringShape.new(name: 'ProviderName')
     RegisterCrossAccountAccessRoleRequest = Shapes::StructureShape.new(name: 'RegisterCrossAccountAccessRoleRequest')
     RemoveAttributesFromFindingsRequest = Shapes::StructureShape.new(name: 'RemoveAttributesFromFindingsRequest')
@@ -191,6 +196,8 @@ module Aws::Inspector
     ScopeList = Shapes::ListShape.new(name: 'ScopeList')
     ScopeType = Shapes::StringShape.new(name: 'ScopeType')
     ScopeValue = Shapes::StringShape.new(name: 'ScopeValue')
+    SecurityGroup = Shapes::StructureShape.new(name: 'SecurityGroup')
+    SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
     ServiceName = Shapes::StringShape.new(name: 'ServiceName')
     ServiceTemporarilyUnavailableException = Shapes::StructureShape.new(name: 'ServiceTemporarilyUnavailableException')
     SetTagsForResourceRequest = Shapes::StructureShape.new(name: 'SetTagsForResourceRequest')
@@ -207,6 +214,7 @@ module Aws::Inspector
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    Tags = Shapes::ListShape.new(name: 'Tags')
     TelemetryMetadata = Shapes::StructureShape.new(name: 'TelemetryMetadata')
     TelemetryMetadataList = Shapes::ListShape.new(name: 'TelemetryMetadataList')
     Text = Shapes::StringShape.new(name: 'Text')
@@ -360,6 +368,8 @@ module Aws::Inspector
     AssetAttributes.add_member(:ami_id, Shapes::ShapeRef.new(shape: AmiId, location_name: "amiId"))
     AssetAttributes.add_member(:hostname, Shapes::ShapeRef.new(shape: Hostname, location_name: "hostname"))
     AssetAttributes.add_member(:ipv4_addresses, Shapes::ShapeRef.new(shape: Ipv4AddressList, location_name: "ipv4Addresses"))
+    AssetAttributes.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    AssetAttributes.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: NetworkInterfaces, location_name: "networkInterfaces"))
     AssetAttributes.struct_class = Types::AssetAttributes
 
     Attribute.add_member(:key, Shapes::ShapeRef.new(shape: AttributeKey, required: true, location_name: "key"))
@@ -574,6 +584,8 @@ module Aws::Inspector
 
     Ipv4AddressList.member = Shapes::ShapeRef.new(shape: Ipv4Address)
 
+    Ipv6Addresses.member = Shapes::ShapeRef.new(shape: Text)
+
     ListAssessmentRunAgentsRequest.add_member(:assessment_run_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assessmentRunArn"))
     ListAssessmentRunAgentsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: AgentFilter, location_name: "filter"))
     ListAssessmentRunAgentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
@@ -659,6 +671,20 @@ module Aws::Inspector
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    NetworkInterface.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: Text, location_name: "networkInterfaceId"))
+    NetworkInterface.add_member(:subnet_id, Shapes::ShapeRef.new(shape: Text, location_name: "subnetId"))
+    NetworkInterface.add_member(:vpc_id, Shapes::ShapeRef.new(shape: Text, location_name: "vpcId"))
+    NetworkInterface.add_member(:private_dns_name, Shapes::ShapeRef.new(shape: Text, location_name: "privateDnsName"))
+    NetworkInterface.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: Text, location_name: "privateIpAddress"))
+    NetworkInterface.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: PrivateIpAddresses, location_name: "privateIpAddresses"))
+    NetworkInterface.add_member(:public_dns_name, Shapes::ShapeRef.new(shape: Text, location_name: "publicDnsName"))
+    NetworkInterface.add_member(:public_ip, Shapes::ShapeRef.new(shape: Text, location_name: "publicIp"))
+    NetworkInterface.add_member(:ipv6_addresses, Shapes::ShapeRef.new(shape: Ipv6Addresses, location_name: "ipv6Addresses"))
+    NetworkInterface.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroups, location_name: "securityGroups"))
+    NetworkInterface.struct_class = Types::NetworkInterface
+
+    NetworkInterfaces.member = Shapes::ShapeRef.new(shape: NetworkInterface)
+
     PreviewAgentsRequest.add_member(:preview_agents_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "previewAgentsArn"))
     PreviewAgentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     PreviewAgentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PreviewAgentsMaxResults, location_name: "maxResults"))
@@ -667,6 +693,12 @@ module Aws::Inspector
     PreviewAgentsResponse.add_member(:agent_previews, Shapes::ShapeRef.new(shape: AgentPreviewList, required: true, location_name: "agentPreviews"))
     PreviewAgentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     PreviewAgentsResponse.struct_class = Types::PreviewAgentsResponse
+
+    PrivateIp.add_member(:private_dns_name, Shapes::ShapeRef.new(shape: Text, location_name: "privateDnsName"))
+    PrivateIp.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: Text, location_name: "privateIpAddress"))
+    PrivateIp.struct_class = Types::PrivateIp
+
+    PrivateIpAddresses.member = Shapes::ShapeRef.new(shape: PrivateIp)
 
     RegisterCrossAccountAccessRoleRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "roleArn"))
     RegisterCrossAccountAccessRoleRequest.struct_class = Types::RegisterCrossAccountAccessRoleRequest
@@ -708,6 +740,12 @@ module Aws::Inspector
 
     ScopeList.member = Shapes::ShapeRef.new(shape: Scope)
 
+    SecurityGroup.add_member(:group_name, Shapes::ShapeRef.new(shape: Text, location_name: "groupName"))
+    SecurityGroup.add_member(:group_id, Shapes::ShapeRef.new(shape: Text, location_name: "groupId"))
+    SecurityGroup.struct_class = Types::SecurityGroup
+
+    SecurityGroups.member = Shapes::ShapeRef.new(shape: SecurityGroup)
+
     SetTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
     SetTagsForResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     SetTagsForResourceRequest.struct_class = Types::SetTagsForResourceRequest
@@ -743,6 +781,8 @@ module Aws::Inspector
 
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
 
+    Tags.member = Shapes::ShapeRef.new(shape: Tag)
+
     TelemetryMetadata.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, required: true, location_name: "messageType"))
     TelemetryMetadata.add_member(:count, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "count"))
     TelemetryMetadata.add_member(:data_size, Shapes::ShapeRef.new(shape: Long, location_name: "dataSize"))
@@ -775,12 +815,15 @@ module Aws::Inspector
       api.version = "2016-02-16"
 
       api.metadata = {
+        "apiVersion" => "2016-02-16",
         "endpointPrefix" => "inspector",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon Inspector",
+        "serviceId" => "Inspector",
         "signatureVersion" => "v4",
         "targetPrefix" => "InspectorService",
+        "uid" => "inspector-2016-02-16",
       }
 
       api.add_operation(:add_attributes_to_findings, Seahorse::Model::Operation.new.tap do |o|

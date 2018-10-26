@@ -144,6 +144,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-servicecatalog', '~> 1')
   spec.add_dependency('aws-sdk-servicediscovery', '~> 1')
   spec.add_dependency('aws-sdk-shield', '~> 1')
+  spec.add_dependency('aws-sdk-signer', '~> 1')
   spec.add_dependency('aws-sdk-simpledb', '~> 1')
   spec.add_dependency('aws-sdk-snowball', '~> 1')
   spec.add_dependency('aws-sdk-states', '~> 1')
