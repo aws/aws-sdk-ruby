@@ -297,7 +297,7 @@ module Aws::AlexaForBusiness
     # Associates a skill with a skill group.
     #
     # @option params [String] :skill_group_arn
-    #   The ARN of the skill group to associate the skill to.
+    #   The ARN of the skill group to associate the skill to. Required.
     #
     # @option params [required, String] :skill_id
     #   The unique identifier of the skill.
@@ -366,7 +366,7 @@ module Aws::AlexaForBusiness
     #   The name of the conference provider.
     #
     # @option params [required, String] :conference_provider_type
-    #   A string that represents a type within a list of predefined types.
+    #   Represents a type within a list of predefined types.
     #
     # @option params [Types::IPDialIn] :ip_dial_in
     #   The IP endpoint and protocol for calling.
@@ -985,7 +985,7 @@ module Aws::AlexaForBusiness
     # Disassociates a skill from a skill group.
     #
     # @option params [String] :skill_group_arn
-    #   The unique identifier of a skill.
+    #   The unique identifier of a skill. Required.
     #
     # @option params [required, String] :skill_id
     #   The ARN of a skill group to associate to a skill.
@@ -1361,8 +1361,8 @@ module Aws::AlexaForBusiness
     #   The tokens used for pagination.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of conference providers to be return per paginated
-    #   calls.
+    #   The maximum number of conference providers to be returned, per
+    #   paginated calls.
     #
     # @return [Types::ListConferenceProvidersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1520,7 +1520,7 @@ module Aws::AlexaForBusiness
     #   The tokens used for pagination.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of categories returned per paginated calls.
+    #   The maximum number of categories returned, per paginated calls.
     #
     # @return [Types::ListSkillsStoreCategoriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1620,7 +1620,7 @@ module Aws::AlexaForBusiness
     #   The room that the appliances are associated with.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of appliances to be return per paginated calls.
+    #   The maximum number of appliances to be returned, per paginated calls.
     #
     # @option params [String] :next_token
     #   The tokens used for pagination.
@@ -1763,9 +1763,9 @@ module Aws::AlexaForBusiness
     end
 
     # Links a user's account to a third-party skill provider. If this API
-    # is called by an assumed IAM role, the skill being linked must be a
-    # private skill, and the skill must be owned by the AWS account that
-    # assumed the IAM role.
+    # operation is called by an assumed IAM role, the skill being linked
+    # must be a private skill. Also, the skill must be owned by the AWS
+    # account that assumed the IAM role.
     #
     # @option params [required, Hash<String,String>] :authorization_result
     #   The authorization result specific to OAUTH code grant output. "Code”
@@ -2852,7 +2852,7 @@ module Aws::AlexaForBusiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-alexaforbusiness'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

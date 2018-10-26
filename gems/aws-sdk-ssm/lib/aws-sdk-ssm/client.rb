@@ -468,6 +468,9 @@ module Aws::SSM
     #   the new instance will process its association within the limit
     #   specified for MaxConcurrency.
     #
+    # @option params [String] :compliance_severity
+    #   The severity level to assign to the association.
+    #
     # @return [Types::CreateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -498,6 +501,7 @@ module Aws::SSM
     #     association_name: "AssociationName",
     #     max_errors: "MaxErrors",
     #     max_concurrency: "MaxConcurrency",
+    #     compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #   })
     #
     # @example Response structure
@@ -533,6 +537,7 @@ module Aws::SSM
     #   resp.association_description.association_name #=> String
     #   resp.association_description.max_errors #=> String
     #   resp.association_description.max_concurrency #=> String
+    #   resp.association_description.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociation AWS API Documentation
     #
@@ -590,6 +595,7 @@ module Aws::SSM
     #         association_name: "AssociationName",
     #         max_errors: "MaxErrors",
     #         max_concurrency: "MaxConcurrency",
+    #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #       },
     #     ],
     #   })
@@ -628,6 +634,7 @@ module Aws::SSM
     #   resp.successful[0].association_name #=> String
     #   resp.successful[0].max_errors #=> String
     #   resp.successful[0].max_concurrency #=> String
+    #   resp.successful[0].compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.failed #=> Array
     #   resp.failed[0].entry.name #=> String
     #   resp.failed[0].entry.instance_id #=> String
@@ -646,6 +653,7 @@ module Aws::SSM
     #   resp.failed[0].entry.association_name #=> String
     #   resp.failed[0].entry.max_errors #=> String
     #   resp.failed[0].entry.max_concurrency #=> String
+    #   resp.failed[0].entry.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.failed[0].message #=> String
     #   resp.failed[0].fault #=> String, one of "Client", "Server", "Unknown"
     #
@@ -1595,6 +1603,7 @@ module Aws::SSM
     #   resp.association_description.association_name #=> String
     #   resp.association_description.max_errors #=> String
     #   resp.association_description.max_concurrency #=> String
+    #   resp.association_description.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociation AWS API Documentation
     #
@@ -4603,6 +4612,7 @@ module Aws::SSM
     #   resp.association_versions[0].association_name #=> String
     #   resp.association_versions[0].max_errors #=> String
     #   resp.association_versions[0].max_concurrency #=> String
+    #   resp.association_versions[0].compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociationVersions AWS API Documentation
@@ -6615,6 +6625,9 @@ module Aws::SSM
     #   the new instance will process its association within the limit
     #   specified for MaxConcurrency.
     #
+    # @option params [String] :compliance_severity
+    #   The severity level to assign to the association.
+    #
     # @return [Types::UpdateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -6646,6 +6659,7 @@ module Aws::SSM
     #     association_version: "AssociationVersion",
     #     max_errors: "MaxErrors",
     #     max_concurrency: "MaxConcurrency",
+    #     compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #   })
     #
     # @example Response structure
@@ -6681,6 +6695,7 @@ module Aws::SSM
     #   resp.association_description.association_name #=> String
     #   resp.association_description.max_errors #=> String
     #   resp.association_description.max_concurrency #=> String
+    #   resp.association_description.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociation AWS API Documentation
     #
@@ -6753,6 +6768,7 @@ module Aws::SSM
     #   resp.association_description.association_name #=> String
     #   resp.association_description.max_errors #=> String
     #   resp.association_description.max_concurrency #=> String
+    #   resp.association_description.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationStatus AWS API Documentation
     #
@@ -7550,7 +7566,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

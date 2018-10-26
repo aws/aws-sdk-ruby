@@ -170,7 +170,7 @@ module Aws::AlexaForBusiness
     #       }
     #
     # @!attribute [rw] skill_group_arn
-    #   The ARN of the skill group to associate the skill to.
+    #   The ARN of the skill group to associate the skill to. Required.
     #   @return [String]
     #
     # @!attribute [rw] skill_id
@@ -413,7 +413,7 @@ module Aws::AlexaForBusiness
     #   @return [String]
     #
     # @!attribute [rw] conference_provider_type
-    #   A string that represents a type within a list of predefined types.
+    #   Represents a type within a list of predefined types.
     #   @return [String]
     #
     # @!attribute [rw] ip_dial_in
@@ -448,7 +448,7 @@ module Aws::AlexaForBusiness
     end
 
     # @!attribute [rw] conference_provider_arn
-    #   The ARN of the newly created conference provider.
+    #   The ARN of the newly-created conference provider.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateConferenceProviderResponse AWS API Documentation
@@ -1285,7 +1285,7 @@ module Aws::AlexaForBusiness
     #       }
     #
     # @!attribute [rw] skill_group_arn
-    #   The unique identifier of a skill.
+    #   The unique identifier of a skill. Required.
     #   @return [String]
     #
     # @!attribute [rw] skill_id
@@ -1685,7 +1685,7 @@ module Aws::AlexaForBusiness
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of conference providers to be return per
+    #   The maximum number of conference providers to be returned, per
     #   paginated calls.
     #   @return [Integer]
     #
@@ -1854,7 +1854,7 @@ module Aws::AlexaForBusiness
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of categories returned per paginated calls.
+    #   The maximum number of categories returned, per paginated calls.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkillsStoreCategoriesRequest AWS API Documentation
@@ -1942,7 +1942,8 @@ module Aws::AlexaForBusiness
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of appliances to be return per paginated calls.
+    #   The maximum number of appliances to be returned, per paginated
+    #   calls.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token

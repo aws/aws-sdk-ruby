@@ -28,6 +28,7 @@ module Aws::SSM
     AssociatedInstances = Shapes::StructureShape.new(name: 'AssociatedInstances')
     Association = Shapes::StructureShape.new(name: 'Association')
     AssociationAlreadyExists = Shapes::StructureShape.new(name: 'AssociationAlreadyExists')
+    AssociationComplianceSeverity = Shapes::StringShape.new(name: 'AssociationComplianceSeverity')
     AssociationDescription = Shapes::StructureShape.new(name: 'AssociationDescription')
     AssociationDescriptionList = Shapes::ListShape.new(name: 'AssociationDescriptionList')
     AssociationDoesNotExist = Shapes::StructureShape.new(name: 'AssociationDoesNotExist')
@@ -930,6 +931,7 @@ module Aws::SSM
     AssociationDescription.add_member(:association_name, Shapes::ShapeRef.new(shape: AssociationName, location_name: "AssociationName"))
     AssociationDescription.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
     AssociationDescription.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
+    AssociationDescription.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
     AssociationDescription.struct_class = Types::AssociationDescription
 
     AssociationDescriptionList.member = Shapes::ShapeRef.new(shape: AssociationDescription)
@@ -1008,6 +1010,7 @@ module Aws::SSM
     AssociationVersionInfo.add_member(:association_name, Shapes::ShapeRef.new(shape: AssociationName, location_name: "AssociationName"))
     AssociationVersionInfo.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
     AssociationVersionInfo.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
+    AssociationVersionInfo.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
     AssociationVersionInfo.struct_class = Types::AssociationVersionInfo
 
     AssociationVersionList.member = Shapes::ShapeRef.new(shape: AssociationVersionInfo)
@@ -1240,6 +1243,7 @@ module Aws::SSM
     CreateAssociationBatchRequestEntry.add_member(:association_name, Shapes::ShapeRef.new(shape: AssociationName, location_name: "AssociationName"))
     CreateAssociationBatchRequestEntry.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
     CreateAssociationBatchRequestEntry.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
+    CreateAssociationBatchRequestEntry.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
     CreateAssociationBatchRequestEntry.struct_class = Types::CreateAssociationBatchRequestEntry
 
     CreateAssociationBatchResult.add_member(:successful, Shapes::ShapeRef.new(shape: AssociationDescriptionList, location_name: "Successful"))
@@ -1256,6 +1260,7 @@ module Aws::SSM
     CreateAssociationRequest.add_member(:association_name, Shapes::ShapeRef.new(shape: AssociationName, location_name: "AssociationName"))
     CreateAssociationRequest.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
     CreateAssociationRequest.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
+    CreateAssociationRequest.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
     CreateAssociationRequest.struct_class = Types::CreateAssociationRequest
 
     CreateAssociationResult.add_member(:association_description, Shapes::ShapeRef.new(shape: AssociationDescription, location_name: "AssociationDescription"))
@@ -2989,6 +2994,7 @@ module Aws::SSM
     UpdateAssociationRequest.add_member(:association_version, Shapes::ShapeRef.new(shape: AssociationVersion, location_name: "AssociationVersion"))
     UpdateAssociationRequest.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
     UpdateAssociationRequest.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
+    UpdateAssociationRequest.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
     UpdateAssociationRequest.struct_class = Types::UpdateAssociationRequest
 
     UpdateAssociationResult.add_member(:association_description, Shapes::ShapeRef.new(shape: AssociationDescription, location_name: "AssociationDescription"))

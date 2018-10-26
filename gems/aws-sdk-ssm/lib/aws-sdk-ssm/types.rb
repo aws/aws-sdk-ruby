@@ -296,6 +296,10 @@ module Aws::SSM
     #   specified for MaxConcurrency.
     #   @return [String]
     #
+    # @!attribute [rw] compliance_severity
+    #   The severity level that is assigned to the association.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationDescription AWS API Documentation
     #
     class AssociationDescription < Struct.new(
@@ -316,7 +320,8 @@ module Aws::SSM
       :last_successful_execution_date,
       :association_name,
       :max_errors,
-      :max_concurrency)
+      :max_concurrency,
+      :compliance_severity)
       include Aws::Structure
     end
 
@@ -654,6 +659,10 @@ module Aws::SSM
     #   specified for MaxConcurrency.
     #   @return [String]
     #
+    # @!attribute [rw] compliance_severity
+    #   The severity level that is assigned to the association.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationVersionInfo AWS API Documentation
     #
     class AssociationVersionInfo < Struct.new(
@@ -668,7 +677,8 @@ module Aws::SSM
       :output_location,
       :association_name,
       :max_errors,
-      :max_concurrency)
+      :max_concurrency,
+      :compliance_severity)
       include Aws::Structure
     end
 
@@ -1960,6 +1970,7 @@ module Aws::SSM
     #             association_name: "AssociationName",
     #             max_errors: "MaxErrors",
     #             max_concurrency: "MaxConcurrency",
+    #             compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #           },
     #         ],
     #       }
@@ -2005,6 +2016,7 @@ module Aws::SSM
     #         association_name: "AssociationName",
     #         max_errors: "MaxErrors",
     #         max_concurrency: "MaxConcurrency",
+    #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #       }
     #
     # @!attribute [rw] name
@@ -2072,6 +2084,10 @@ module Aws::SSM
     #   specified for MaxConcurrency.
     #   @return [String]
     #
+    # @!attribute [rw] compliance_severity
+    #   The severity level to assign to the association.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationBatchRequestEntry AWS API Documentation
     #
     class CreateAssociationBatchRequestEntry < Struct.new(
@@ -2084,7 +2100,8 @@ module Aws::SSM
       :output_location,
       :association_name,
       :max_errors,
-      :max_concurrency)
+      :max_concurrency,
+      :compliance_severity)
       include Aws::Structure
     end
 
@@ -2131,6 +2148,7 @@ module Aws::SSM
     #         association_name: "AssociationName",
     #         max_errors: "MaxErrors",
     #         max_concurrency: "MaxConcurrency",
+    #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #       }
     #
     # @!attribute [rw] name
@@ -2199,6 +2217,10 @@ module Aws::SSM
     #   specified for MaxConcurrency.
     #   @return [String]
     #
+    # @!attribute [rw] compliance_severity
+    #   The severity level to assign to the association.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationRequest AWS API Documentation
     #
     class CreateAssociationRequest < Struct.new(
@@ -2211,7 +2233,8 @@ module Aws::SSM
       :output_location,
       :association_name,
       :max_errors,
-      :max_concurrency)
+      :max_concurrency,
+      :compliance_severity)
       include Aws::Structure
     end
 
@@ -12457,6 +12480,7 @@ module Aws::SSM
     #         association_version: "AssociationVersion",
     #         max_errors: "MaxErrors",
     #         max_concurrency: "MaxConcurrency",
+    #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #       }
     #
     # @!attribute [rw] association_id
@@ -12533,6 +12557,10 @@ module Aws::SSM
     #   specified for MaxConcurrency.
     #   @return [String]
     #
+    # @!attribute [rw] compliance_severity
+    #   The severity level to assign to the association.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationRequest AWS API Documentation
     #
     class UpdateAssociationRequest < Struct.new(
@@ -12546,7 +12574,8 @@ module Aws::SSM
       :association_name,
       :association_version,
       :max_errors,
-      :max_concurrency)
+      :max_concurrency,
+      :compliance_severity)
       include Aws::Structure
     end
 
