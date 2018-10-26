@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.159 (2018-10-26)
+------------------
+
 * Feature - Aws::AlexaForBusiness - Updated the documentation for Alexa For Business.
 
 * Feature - Aws::SageMaker - Updated the API, and documentation for Amazon SageMaker Service.
