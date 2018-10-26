@@ -144,7 +144,8 @@ A delay randomiser function used by the default backoff function. Some predefine
             throttling_error? or
             checksum? or
             networking? or
-            server?
+            server? or
+            endpoint_discovery?(context)
         end
 
         private
