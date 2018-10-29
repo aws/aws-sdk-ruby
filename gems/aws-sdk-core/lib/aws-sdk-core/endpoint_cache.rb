@@ -52,7 +52,7 @@ module Aws
         end
         # delete old value if exists
         @entries.delete(key)
-        @entries[key] = Endpoint.new(value.to_h)
+        @entries[key] = Endpoint.new(value.to_hash)
       end
     end
 

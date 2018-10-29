@@ -91,6 +91,7 @@ module Seahorse
           client = SpecHelper.client_with_plugin(foo: 'bar') do
             option(:foo)
             option(:endpoint, 'http://foo.com')
+            option(:regional_endpoint, false)
             before_initialize do |klass, options|
               yielded_class = klass
               yielded_options = options
@@ -109,6 +110,7 @@ module Seahorse
           initialized_client = nil
           client = SpecHelper.client_with_plugin do
             option(:endpoint, 'http://foo.com')
+            option(:regional_endpoint, false)
             after_initialize {|c| initialized_client = c }
           end
           expect(client).to be(initialized_client)
