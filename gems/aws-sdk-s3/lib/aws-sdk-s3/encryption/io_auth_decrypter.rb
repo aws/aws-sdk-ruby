@@ -21,7 +21,6 @@ module Aws
         end
 
         def write(chunk)
-          @last_chunk = chunk
           chunk = truncate_chunk(chunk)
           if chunk.bytesize > 0
             @bytes_written += chunk.bytesize
