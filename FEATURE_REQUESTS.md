@@ -364,3 +364,9 @@ See [related GitHub issue #1685](https://github.com/aws/aws-sdk-ruby/issues/1685
 Verifier currently makes http call directly, and does not use SNS client or Aws.config.
 
 See [related GitHub issue #1683](https://github.com/aws/aws-sdk-ruby/issues/1683).
+
+### Handle resource model typos
+
+Typos in resource models cannot be fixed directly without causing breaking changes.
+
+See [related GitHub issue #1837](https://github.com/aws/aws-sdk-ruby/issues/1837).
