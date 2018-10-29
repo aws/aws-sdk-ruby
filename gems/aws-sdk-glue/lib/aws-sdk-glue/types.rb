@@ -342,7 +342,9 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] version_ids
-    #   A list of the IDs of versions to be deleted.
+    #   A list of the IDs of versions to be deleted. A `VersionId` is a
+    #   string representation of an integer. Each version is incremented by
+    #   1.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchDeleteTableVersionRequest AWS API Documentation
@@ -819,7 +821,8 @@ module Aws::Glue
     #   * `PORT` - The port number, between 1024 and 65535, of the port on
     #     which the database host is listening for database connections.
     #
-    #   * `USER_NAME` - The name under which to log in to the database.
+    #   * `USER_NAME` - The name under which to log in to the database. The
+    #     value string for `USER_NAME` is "`USERNAME`".
     #
     #   * `PASSWORD` - A password, if one is used, for the user name.
     #
@@ -1027,16 +1030,12 @@ module Aws::Glue
     #
     # @!attribute [rw] configuration
     #   Crawler configuration information. This versioned JSON string allows
-    #   users to specify aspects of a Crawler's behavior.
+    #   users to specify aspects of a crawler's behavior. For more
+    #   information, see [Configuring a Crawler][1].
     #
-    #   You can use this field to force partitions to inherit metadata such
-    #   as classification, input format, output format, serde information,
-    #   and schema from their parent table, rather than detect this
-    #   information separately for each partition. Use the following JSON
-    #   string to specify that behavior:
     #
-    #   Example: `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
-    #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
     #   @return [String]
     #
     # @!attribute [rw] crawler_security_configuration
@@ -1339,16 +1338,12 @@ module Aws::Glue
     #
     # @!attribute [rw] configuration
     #   Crawler configuration information. This versioned JSON string allows
-    #   users to specify aspects of a Crawler's behavior.
+    #   users to specify aspects of a crawler's behavior. For more
+    #   information, see [Configuring a Crawler][1].
     #
-    #   You can use this field to force partitions to inherit metadata such
-    #   as classification, input format, output format, serde information,
-    #   and schema from their parent table, rather than detect this
-    #   information separately for each partition. Use the following JSON
-    #   string to specify that behavior:
     #
-    #   Example: `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
-    #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
     #   @return [String]
     #
     # @!attribute [rw] crawler_security_configuration
@@ -2594,6 +2589,28 @@ module Aws::Glue
     #
     class DeletePartitionResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         policy_hash_condition: "HashString",
+    #       }
+    #
+    # @!attribute [rw] policy_hash_condition
+    #   The hash value returned when this policy was set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteResourcePolicyRequest AWS API Documentation
+    #
+    class DeleteResourcePolicyRequest < Struct.new(
+      :policy_hash_condition)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteResourcePolicyResponse AWS API Documentation
+    #
+    class DeleteResourcePolicyResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteSecurityConfigurationRequest
     #   data as a hash:
     #
@@ -2679,7 +2696,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] version_id
-    #   The ID of the table version to be deleted.
+    #   The ID of the table version to be deleted. A `VersionID` is a string
+    #   representation of an integer. Each version is incremented by 1.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteTableVersionRequest AWS API Documentation
@@ -2784,8 +2802,10 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] private_address
-    #   A private DNS to access the DevEndpoint within a VPC, if the
-    #   DevEndpoint is created within one.
+    #   A private IP address to access the DevEndpoint within a VPC, if the
+    #   DevEndpoint is created within one. The PrivateAddress field is
+    #   present only when you create the DevEndpoint within your virtual
+    #   private cloud (VPC).
     #   @return [String]
     #
     # @!attribute [rw] zeppelin_remote_spark_interpreter_port
@@ -2793,7 +2813,9 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] public_address
-    #   The public VPC address used by this DevEndpoint.
+    #   The public IP address used by this DevEndpoint. The PublicAddress
+    #   field is present only when you create a non-VPC (virtual private
+    #   cloud) DevEndpoint.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -3411,6 +3433,37 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetDataCatalogEncryptionSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog for which to retrieve the security
+    #   configuration. If none is supplied, the AWS account ID is used by
+    #   default.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataCatalogEncryptionSettingsRequest AWS API Documentation
+    #
+    class GetDataCatalogEncryptionSettingsRequest < Struct.new(
+      :catalog_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_catalog_encryption_settings
+    #   The requested security configuration.
+    #   @return [Types::DataCatalogEncryptionSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataCatalogEncryptionSettingsResponse AWS API Documentation
+    #
+    class GetDataCatalogEncryptionSettingsResponse < Struct.new(
+      :data_catalog_encryption_settings)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetDatabaseRequest
     #   data as a hash:
     #
@@ -3908,6 +3961,97 @@ module Aws::Glue
     #
     # @!attribute [rw] expression
     #   An expression filtering the partitions to be returned.
+    #
+    #   The expression uses SQL syntax similar to the SQL `WHERE` filter
+    #   clause. The SQL statement parser [JSQLParser][1] parses the
+    #   expression.
+    #
+    #   *Operators*\: The following are the operators that you can use in
+    #   the `Expression` API call:
+    #
+    #   =
+    #
+    #   : Checks if the values of the two operands are equal or not; if yes,
+    #     then the condition becomes true.
+    #
+    #     Example: Assume 'variable a' holds 10 and 'variable b' holds
+    #     20.
+    #
+    #     (a = b) is not true.
+    #
+    #   &lt; &gt;
+    #
+    #   : Checks if the values of two operands are equal or not; if the
+    #     values are not equal, then the condition becomes true.
+    #
+    #     Example: (a &lt; &gt; b) is true.
+    #
+    #   &gt;
+    #
+    #   : Checks if the value of the left operand is greater than the value
+    #     of the right operand; if yes, then the condition becomes true.
+    #
+    #     Example: (a &gt; b) is not true.
+    #
+    #   &lt;
+    #
+    #   : Checks if the value of the left operand is less than the value of
+    #     the right operand; if yes, then the condition becomes true.
+    #
+    #     Example: (a &lt; b) is true.
+    #
+    #   &gt;=
+    #
+    #   : Checks if the value of the left operand is greater than or equal
+    #     to the value of the right operand; if yes, then the condition
+    #     becomes true.
+    #
+    #     Example: (a &gt;= b) is not true.
+    #
+    #   &lt;=
+    #
+    #   : Checks if the value of the left operand is less than or equal to
+    #     the value of the right operand; if yes, then the condition becomes
+    #     true.
+    #
+    #     Example: (a &lt;= b) is true.
+    #
+    #   AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL
+    #
+    #   : Logical operators.
+    #
+    #   *Supported Partition Key Types*\: The following are the the
+    #   supported partition keys.
+    #
+    #   * `string`
+    #
+    #   * `date`
+    #
+    #   * `timestamp`
+    #
+    #   * `int`
+    #
+    #   * `bigint`
+    #
+    #   * `long`
+    #
+    #   * `tinyint`
+    #
+    #   * `smallint`
+    #
+    #   * `decimal`
+    #
+    #   If an invalid type is encountered, an exception is thrown.
+    #
+    #   The following list shows the valid operators on each type. When you
+    #   define a crawler, the `partitionKey` type is created as a `STRING`,
+    #   to be compatible with the catalog partitions.
+    #
+    #   *Sample API Call*\:
+    #
+    #
+    #
+    #   [1]: http://jsqlparser.sourceforge.net/home.php
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4047,6 +4191,38 @@ module Aws::Glue
     class GetPlanResponse < Struct.new(
       :python_script,
       :scala_code)
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetResourcePolicyRequest AWS API Documentation
+    #
+    class GetResourcePolicyRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] policy_in_json
+    #   Contains the requested policy document, in JSON format.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_hash
+    #   Contains the hash value associated with this policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The date and time at which the policy was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The date and time at which the policy was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetResourcePolicyResponse AWS API Documentation
+    #
+    class GetResourcePolicyResponse < Struct.new(
+      :policy_in_json,
+      :policy_hash,
+      :create_time,
+      :update_time)
       include Aws::Structure
     end
 
@@ -4190,7 +4366,9 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] version_id
-    #   The ID value of the table version to be retrieved.
+    #   The ID value of the table version to be retrieved. A `VersionID` is
+    #   a string representation of an integer. Each version is incremented
+    #   by 1.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableVersionRequest AWS API Documentation
@@ -5613,6 +5791,54 @@ module Aws::Glue
     #
     class PutDataCatalogEncryptionSettingsResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass PutResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         policy_in_json: "PolicyJsonString", # required
+    #         policy_hash_condition: "HashString",
+    #         policy_exists_condition: "MUST_EXIST", # accepts MUST_EXIST, NOT_EXIST, NONE
+    #       }
+    #
+    # @!attribute [rw] policy_in_json
+    #   Contains the policy document to set, in JSON format.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_hash_condition
+    #   This is the hash value returned when the previous policy was set
+    #   using PutResourcePolicy. Its purpose is to prevent concurrent
+    #   modifications of a policy. Do not use this parameter if no previous
+    #   policy has been set.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_exists_condition
+    #   A value of `MUST_EXIST` is used to update a policy. A value of
+    #   `NOT_EXIST` is used to create a new policy. If a value of `NONE` or
+    #   a null value is used, the call will not depend on the existence of a
+    #   policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutResourcePolicyRequest AWS API Documentation
+    #
+    class PutResourcePolicyRequest < Struct.new(
+      :policy_in_json,
+      :policy_hash_condition,
+      :policy_exists_condition)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_hash
+    #   A hash of the policy that has just been set. This must be included
+    #   in a subsequent call that overwrites or updates this policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutResourcePolicyResponse AWS API Documentation
+    #
+    class PutResourcePolicyResponse < Struct.new(
+      :policy_hash)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ResetJobBookmarkRequest
     #   data as a hash:
     #
@@ -6520,7 +6746,9 @@ module Aws::Glue
     #   @return [Types::Table]
     #
     # @!attribute [rw] version_id
-    #   The ID value that identifies this table version.
+    #   The ID value that identifies this table version. A `VersionId` is a
+    #   string representation of an integer. Each version is incremented by
+    #   1.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TableVersion AWS API Documentation
@@ -6538,7 +6766,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] version_id
-    #   The ID value of the version in question.
+    #   The ID value of the version in question. A `VersionID` is a string
+    #   representation of an integer. Each version is incremented by 1.
     #   @return [String]
     #
     # @!attribute [rw] error_detail
@@ -6864,16 +7093,12 @@ module Aws::Glue
     #
     # @!attribute [rw] configuration
     #   Crawler configuration information. This versioned JSON string allows
-    #   users to specify aspects of a Crawler's behavior.
+    #   users to specify aspects of a crawler's behavior. For more
+    #   information, see [Configuring a Crawler][1].
     #
-    #   You can use this field to force partitions to inherit metadata such
-    #   as classification, input format, output format, serde information,
-    #   and schema from their parent table, rather than detect this
-    #   information separately for each partition. Use the following JSON
-    #   string to specify that behavior:
     #
-    #   Example: `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
-    #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
     #   @return [String]
     #
     # @!attribute [rw] crawler_security_configuration

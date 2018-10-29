@@ -9,8 +9,9 @@ module Aws
         @api = opts[:operation]
         @client_id = opts[:client_id]
         @timestamp = opts[:timestamp] # In epoch milliseconds
+        @region = opts[:region]
         @version = 1
-        @api_call = ApiCall.new(@service, @api, @client_id, @version, @timestamp)
+        @api_call = ApiCall.new(@service, @api, @client_id, @version, @timestamp, @region)
         @api_call_attempts = []
       end
 
@@ -41,19 +42,25 @@ module Aws
 
       class ApiCall
         attr_reader :service, :api, :client_id, :timestamp, :version,
-          :attempt_count, :latency
+          :attempt_count, :latency, :region, :max_retries_exceeded
 
-        def initialize(service, api, client_id, version, timestamp)
+        def initialize(service, api, client_id, version, timestamp, region)
           @service = service
           @api = api
           @client_id = client_id
           @version = version
           @timestamp = timestamp
+          @region = region
         end
 
         def complete(opts = {})
           @latency = opts[:latency]
           @attempt_count = opts[:attempt_count]
+          if opts[:final_error_retryable]
+            @max_retries_exceeded = 1
+          else
+            @max_retries_exceeded = 0
+          end
         end
 
         def to_json(*a)
@@ -65,7 +72,9 @@ module Aws
             "Timestamp" => @timestamp,
             "Version" => @version,
             "AttemptCount" => @attempt_count,
-            "Latency" => @latency
+            "Latency" => @latency,
+            "Region" => @region,
+            "MaxRetriesExceeded" => @max_retries_exceeded
           }.to_json
         end
       end

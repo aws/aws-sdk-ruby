@@ -56,121 +56,123 @@ module Aws::APIGateway
     add_plugin(Aws::Plugins::Protocols::RestJson)
     add_plugin(Aws::APIGateway::Plugins::ApplyContentTypeHeader)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [] :client_side_monitoring (false)
-    #   When `true`, client-side metrics will be collected for all API requests from
-    #   this client.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [] :client_side_monitoring_client_id ("")
-    #   Allows you to provide an identifier for this client which will be attached to
-    #   all generated client side metrics. Defaults to an empty string.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [] :client_side_monitoring_port (31000)
-    #   Required for publishing client metrics. The port that the client side monitoring
-    #   agent is running on, where client metrics will be published via UDP.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
-    #   Allows you to provide a custom client-side monitoring publisher class. By default,
-    #   will use the Client Side Monitoring Agent Publisher.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [String] :secret_access_key
     #
-    # @option options [String] :session_token
+    #   @option options [String] :session_token
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -186,7 +188,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/create-api-key.html
+    # [1]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/create-api-key.html
     #
     # @option params [String] :name
     #   The name of the ApiKey.
@@ -269,7 +271,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/create-authorizer.html
+    # [1]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/create-authorizer.html
     #
     # @option params [required, String] :rest_api_id
     #   \[Required\] The string identifier of the associated RestApi.
@@ -291,7 +293,7 @@ module Aws::APIGateway
     #   For a `TOKEN` or `REQUEST` authorizer, this is not defined.
     #
     # @option params [String] :auth_type
-    #   Optional customer-defined field, used in Swagger imports and exports
+    #   Optional customer-defined field, used in OpenAPI imports and exports
     #   without functional impact.
     #
     # @option params [String] :authorizer_uri
@@ -540,7 +542,7 @@ module Aws::APIGateway
     # @option params [required, String] :properties
     #   \[Required\] The new documentation content map of the targeted API
     #   entity. Enclosed key-value pairs are API-specific, but only
-    #   Swagger-compliant key-value pairs can be exported and, hence,
+    #   OpenAPI-compliant key-value pairs can be exported and, hence,
     #   published.
     #
     # @return [Types::DocumentationPart] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1332,7 +1334,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/delete-authorizer.html
+    # [1]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/delete-authorizer.html
     #
     # @option params [required, String] :rest_api_id
     #   \[Required\] The string identifier of the associated RestApi.
@@ -2071,7 +2073,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-authorizer.html
+    # [1]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-authorizer.html
     #
     # @option params [required, String] :rest_api_id
     #   \[Required\] The string identifier of the associated RestApi.
@@ -2128,7 +2130,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-authorizers.html
+    # [1]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-authorizers.html
     #
     # @option params [required, String] :rest_api_id
     #   \[Required\] The string identifier of the associated RestApi.
@@ -2696,15 +2698,15 @@ module Aws::APIGateway
     #   \[Required\] The name of the Stage that will be exported.
     #
     # @option params [required, String] :export_type
-    #   \[Required\] The type of export. Currently only 'swagger' is
-    #   supported.
+    #   \[Required\] The type of export. Acceptable values are 'oas30' for
+    #   OpenAPI 3.0.x and 'swagger' for Swagger/OpenAPI 2.0.
     #
     # @option params [Hash<String,String>] :parameters
     #   A key-value map of query string parameters that specify properties of
     #   the export, depending on the requested `exportType`. For `exportType`
-    #   `swagger`, any combination of the following parameters are supported:
-    #   `extensions='integrations'` or `extensions='apigateway'` will export
-    #   the API with x-amazon-apigateway-integration extensions.
+    #   `oas30` and `swagger`, any combination of the following parameters are
+    #   supported: `extensions='integrations'` or `extensions='apigateway'`
+    #   will export the API with x-amazon-apigateway-integration extensions.
     #   `extensions='authorizers'` will export the API with
     #   x-amazon-apigateway-authorizer extensions. `postman` will export the
     #   API with Postman extensions, allowing for import to the Postman tool
@@ -2712,8 +2714,8 @@ module Aws::APIGateway
     # @option params [String] :accepts
     #   The content-type of the export, for example `application/json`.
     #   Currently `application/json` and `application/yaml` are supported for
-    #   `exportType` of `swagger`. This should be specified in the `Accept`
-    #   header for direct API requests.
+    #   `exportType` of`oas30` and `swagger`. This should be specified in the
+    #   `Accept` header for direct API requests.
     #
     # @return [Types::ExportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4220,7 +4222,7 @@ module Aws::APIGateway
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-key-file-format.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-key-file-format.html
     #
     # @option params [required, String] :format
     #   A query parameter to specify the input format to imported API keys.
@@ -4272,7 +4274,7 @@ module Aws::APIGateway
     #
     # @option params [required, String, IO] :body
     #   \[Required\] Raw byte array representing the to-be-imported
-    #   documentation parts. To import from a Swagger file, this is a JSON
+    #   documentation parts. To import from an OpenAPI file, this is a JSON
     #   object.
     #
     # @return [Types::DocumentationPartIds] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -4340,7 +4342,7 @@ module Aws::APIGateway
     #
     # @option params [required, String, IO] :body
     #   \[Required\] The POST request body containing external API
-    #   definitions. Currently, only Swagger definition JSON files are
+    #   definitions. Currently, only OpenAPI definition JSON/YAML files are
     #   supported. The maximum size of the API definition file is 2MB.
     #
     # @return [Types::RestApi] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -4533,7 +4535,7 @@ module Aws::APIGateway
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/apigateway/api-reference/resource/vpc-link/#id
+    #   [1]: https://docs.aws.amazon.com/apigateway/api-reference/resource/vpc-link/#id
     #
     # @option params [String] :credentials
     #   Specifies whether credentials are required for a put integration.
@@ -4800,7 +4802,7 @@ module Aws::APIGateway
     #
     #
     #
-    #   [1]: http://petstore-demo-endpoint.execute-api.com/petstore/pets
+    #   [1]: https://petstore-demo-endpoint.execute-api.com/petstore/pets
     #
     # @option params [Hash<String,Boolean>] :request_parameters
     #   A key-value map defining required or optional method request
@@ -5018,7 +5020,7 @@ module Aws::APIGateway
     #
     # @option params [required, String, IO] :body
     #   \[Required\] The PUT request body containing external API definitions.
-    #   Currently, only Swagger definition JSON files are supported. The
+    #   Currently, only OpenAPI definition JSON/YAML files are supported. The
     #   maximum size of the API definition file is 2MB.
     #
     # @return [Types::RestApi] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -5110,7 +5112,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html
     #
     # @option params [required, String] :rest_api_id
     #   \[Required\] The string identifier of the associated RestApi.
@@ -5123,6 +5125,11 @@ module Aws::APIGateway
     #   \[Required\] A key-value map of headers to simulate an incoming
     #   invocation request. This is where the incoming authorization token, or
     #   identity source, should be specified.
+    #
+    # @option params [Hash<String,Array>] :multi_value_headers
+    #   \[Optional\] The headers as a map from string to list of values to
+    #   simulate an incoming invocation request. This is where the incoming
+    #   authorization token, or identity source, may be specified.
     #
     # @option params [String] :path_with_query_string
     #   \[Optional\] The URI path, including query string, of the simulated
@@ -5157,6 +5164,9 @@ module Aws::APIGateway
     #     authorizer_id: "String", # required
     #     headers: {
     #       "String" => "String",
+    #     },
+    #     multi_value_headers: {
+    #       "String" => ["String"],
     #     },
     #     path_with_query_string: "String",
     #     body: "String",
@@ -5211,6 +5221,10 @@ module Aws::APIGateway
     # @option params [Hash<String,String>] :headers
     #   A key-value map of headers to simulate an incoming invocation request.
     #
+    # @option params [Hash<String,Array>] :multi_value_headers
+    #   The headers as a map from string to list of values to simulate an
+    #   incoming invocation request.
+    #
     # @option params [String] :client_certificate_id
     #   A ClientCertificate identifier to use in the test invocation. API
     #   Gateway will use the certificate when making the HTTPS request to the
@@ -5225,6 +5239,7 @@ module Aws::APIGateway
     #   * {Types::TestInvokeMethodResponse#status #status} => Integer
     #   * {Types::TestInvokeMethodResponse#body #body} => String
     #   * {Types::TestInvokeMethodResponse#headers #headers} => Hash&lt;String,String&gt;
+    #   * {Types::TestInvokeMethodResponse#multi_value_headers #multi_value_headers} => Hash&lt;String,Array&lt;String&gt;&gt;
     #   * {Types::TestInvokeMethodResponse#log #log} => String
     #   * {Types::TestInvokeMethodResponse#latency #latency} => Integer
     #
@@ -5239,6 +5254,9 @@ module Aws::APIGateway
     #     headers: {
     #       "String" => "String",
     #     },
+    #     multi_value_headers: {
+    #       "String" => ["String"],
+    #     },
     #     client_certificate_id: "String",
     #     stage_variables: {
     #       "String" => "String",
@@ -5251,6 +5269,9 @@ module Aws::APIGateway
     #   resp.body #=> String
     #   resp.headers #=> Hash
     #   resp.headers["String"] #=> String
+    #   resp.multi_value_headers #=> Hash
+    #   resp.multi_value_headers["String"] #=> Array
+    #   resp.multi_value_headers["String"][0] #=> String
     #   resp.log #=> String
     #   resp.latency #=> Integer
     #
@@ -5392,7 +5413,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/update-authorizer.html
+    # [1]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/update-authorizer.html
     #
     # @option params [required, String] :rest_api_id
     #   \[Required\] The string identifier of the associated RestApi.
@@ -6641,7 +6662,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1485,6 +1485,8 @@ module Aws::EC2
     #     ],
     #     dry_run: false,
     #     route_table_ids: ["String"],
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -1561,6 +1563,12 @@ module Aws::EC2
     #   One or more route table IDs.
     #
     #   Default: Describes all your route tables.
+    # @option options [String] :next_token
+    #   The token to retrieve the next page of results.
+    # @option options [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another call with the returned
+    #   **NextToken** value. This value can be between 5 and 100.
     # @return [RouteTable::Collection]
     def route_tables(options = {})
       batches = Enumerator.new do |y|

@@ -146,6 +146,49 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
+    # A JSON string which you can use to limit the event bus permissions you
+    # are granting to only accounts that fulfill the condition. Currently,
+    # the only supported condition is membership in a certain AWS
+    # organization. The string must contain `Type`, `Key`, and `Value`
+    # fields. The `Value` field specifies the ID of the AWS organization.
+    # Following is an example value for `Condition`\:
+    #
+    # `'\{"Type" : "StringEquals", "Key": "aws:PrincipalOrgID", "Value":
+    # "o-1234567890"\}'`
+    #
+    # @note When making an API call, you may pass Condition
+    #   data as a hash:
+    #
+    #       {
+    #         type: "String", # required
+    #         key: "String", # required
+    #         value: "String", # required
+    #       }
+    #
+    # @!attribute [rw] type
+    #   Specifies the type of condition. Currently the only supported value
+    #   is `StringEquals`.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   Specifies the key for the condition. Currently the only supported
+    #   key is `aws:PrincipalOrgID`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Specifies the value for the key. Currently, this must be the ID of
+    #   the organization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/Condition AWS API Documentation
+    #
+    class Condition < Struct.new(
+      :type,
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteRuleRequest
     #   data as a hash:
     #
@@ -788,6 +831,11 @@ module Aws::CloudWatchEvents
     #         action: "Action", # required
     #         principal: "Principal", # required
     #         statement_id: "StatementId", # required
+    #         condition: {
+    #           type: "String", # required
+    #           key: "String", # required
+    #           value: "String", # required
+    #         },
     #       }
     #
     # @!attribute [rw] action
@@ -800,11 +848,12 @@ module Aws::CloudWatchEvents
     #   your default event bus. Specify "*" to permit any account to put
     #   events to your default event bus.
     #
-    #   If you specify "*", avoid creating rules that may match
-    #   undesirable events. To create more secure rules, make sure that the
-    #   event pattern for each rule contains an `account` field with a
-    #   specific account ID from which to receive events. Rules with an
-    #   account field do not match any events sent from other accounts.
+    #   If you specify "*" without specifying `Condition`, avoid creating
+    #   rules that may match undesirable events. To create more secure
+    #   rules, make sure that the event pattern for each rule contains an
+    #   `account` field with a specific account ID from which to receive
+    #   events. Rules with an account field do not match any events sent
+    #   from other accounts.
     #   @return [String]
     #
     # @!attribute [rw] statement_id
@@ -814,12 +863,32 @@ module Aws::CloudWatchEvents
     #   RemovePermission.
     #   @return [String]
     #
+    # @!attribute [rw] condition
+    #   This parameter enables you to limit the permission to accounts that
+    #   fulfill a certain condition, such as being a member of a certain AWS
+    #   organization. For more information about AWS Organizations, see
+    #   [What Is AWS Organizations][1] in the *AWS Organizations User
+    #   Guide*.
+    #
+    #   If you specify `Condition` with an AWS organization ID, and specify
+    #   "*" as the value for `Principal`, you grant permission to all the
+    #   accounts in the named organization.
+    #
+    #   The `Condition` is a JSON string which must contain `Type`, `Key`,
+    #   and `Value` fields.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html
+    #   @return [Types::Condition]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPermissionRequest AWS API Documentation
     #
     class PutPermissionRequest < Struct.new(
       :action,
       :principal,
-      :statement_id)
+      :statement_id,
+      :condition)
       include Aws::Structure
     end
 

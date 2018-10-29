@@ -552,6 +552,113 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteFileInput
+    #   data as a hash:
+    #
+    #       {
+    #         repository_name: "RepositoryName", # required
+    #         branch_name: "BranchName", # required
+    #         file_path: "Path", # required
+    #         parent_commit_id: "CommitId", # required
+    #         keep_empty_folders: false,
+    #         commit_message: "Message",
+    #         name: "Name",
+    #         email: "Email",
+    #       }
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository that contains the file to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] branch_name
+    #   The name of the branch where the commit will be made deleting the
+    #   file.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_path
+    #   The fully-qualified path to the file that will be deleted, including
+    #   the full name and extension of that file. For example,
+    #   /examples/file.md is a fully qualified path to a file named file.md
+    #   in a folder named examples.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_commit_id
+    #   The ID of the commit that is the tip of the branch where you want to
+    #   create the commit that will delete the file. This must be the HEAD
+    #   commit for the branch. The commit that deletes the file will be
+    #   created from this commit ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] keep_empty_folders
+    #   Specifies whether to delete the folder or directory that contains
+    #   the file you want to delete if that file is the only object in the
+    #   folder or directory. By default, empty folders will be deleted. This
+    #   includes empty folders that are part of the directory structure. For
+    #   example, if the path to a file is dir1/dir2/dir3/dir4, and dir2 and
+    #   dir3 are empty, deleting the last file in dir4 will also delete the
+    #   empty folders dir4, dir3, and dir2.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] commit_message
+    #   The commit message you want to include as part of deleting the file.
+    #   Commit messages are limited to 256 KB. If no message is specified, a
+    #   default message will be used.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the author of the commit that deletes the file. If no
+    #   name is specified, the user's ARN will be used as the author name
+    #   and committer name.
+    #   @return [String]
+    #
+    # @!attribute [rw] email
+    #   The email address for the commit that deletes the file. If no email
+    #   address is specified, the email address will be left blank.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteFileInput AWS API Documentation
+    #
+    class DeleteFileInput < Struct.new(
+      :repository_name,
+      :branch_name,
+      :file_path,
+      :parent_commit_id,
+      :keep_empty_folders,
+      :commit_message,
+      :name,
+      :email)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] commit_id
+    #   The full commit ID of the commit that contains the change that
+    #   deletes the file.
+    #   @return [String]
+    #
+    # @!attribute [rw] blob_id
+    #   The blob ID removed from the tree as part of deleting the file.
+    #   @return [String]
+    #
+    # @!attribute [rw] tree_id
+    #   The full SHA-1 pointer of the tree information for the commit that
+    #   contains the delete file change.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_path
+    #   The fully-qualified path to the file that will be deleted, including
+    #   the full name and extension of that file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteFileOutput AWS API Documentation
+    #
+    class DeleteFileOutput < Struct.new(
+      :commit_id,
+      :blob_id,
+      :tree_id,
+      :file_path)
+      include Aws::Structure
+    end
+
     # Represents the input of a delete repository operation.
     #
     # @note When making an API call, you may pass DeleteRepositoryInput
@@ -674,6 +781,61 @@ module Aws::CodeCommit
       :before_blob,
       :after_blob,
       :change_type)
+      include Aws::Structure
+    end
+
+    # Returns information about a file in a repository.
+    #
+    # @!attribute [rw] blob_id
+    #   The blob ID that contains the file information.
+    #   @return [String]
+    #
+    # @!attribute [rw] absolute_path
+    #   The fully-qualified path to the file in the repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] relative_path
+    #   The relative path of the file from the folder where the query
+    #   originated.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_mode
+    #   The extrapolated file mode permissions for the file. Valid values
+    #   include EXECUTABLE and NORMAL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/File AWS API Documentation
+    #
+    class File < Struct.new(
+      :blob_id,
+      :absolute_path,
+      :relative_path,
+      :file_mode)
+      include Aws::Structure
+    end
+
+    # Returns information about a folder in a repository.
+    #
+    # @!attribute [rw] tree_id
+    #   The full SHA-1 pointer of the tree information for the commit that
+    #   contains the folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] absolute_path
+    #   The fully-qualified path of the folder in the repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] relative_path
+    #   The relative path of the specified folder from the folder where the
+    #   query originated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/Folder AWS API Documentation
+    #
+    class Folder < Struct.new(
+      :tree_id,
+      :absolute_path,
+      :relative_path)
       include Aws::Structure
     end
 
@@ -1042,6 +1204,169 @@ module Aws::CodeCommit
     class GetDifferencesOutput < Struct.new(
       :differences,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetFileInput
+    #   data as a hash:
+    #
+    #       {
+    #         repository_name: "RepositoryName", # required
+    #         commit_specifier: "CommitName",
+    #         file_path: "Path", # required
+    #       }
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository that contains the file.
+    #   @return [String]
+    #
+    # @!attribute [rw] commit_specifier
+    #   The fully-quaified reference that identifies the commit that
+    #   contains the file. For example, you could specify a full commit ID,
+    #   a tag, a branch name, or a reference such as refs/heads/master. If
+    #   none is provided, then the head commit will be used.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_path
+    #   The fully-qualified path to the file, including the full name and
+    #   extension of the file. For example, /examples/file.md is the
+    #   fully-qualified path to a file named file.md in a folder named
+    #   examples.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetFileInput AWS API Documentation
+    #
+    class GetFileInput < Struct.new(
+      :repository_name,
+      :commit_specifier,
+      :file_path)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] commit_id
+    #   The full commit ID of the commit that contains the content returned
+    #   by GetFile.
+    #   @return [String]
+    #
+    # @!attribute [rw] blob_id
+    #   The blob ID of the object that represents the file content.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_path
+    #   The fully qualified path to the specified file. This returns the
+    #   name and extension of the file.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_mode
+    #   The extrapolated file mode permissions of the blob. Valid values
+    #   include strings such as EXECUTABLE and not numeric values.
+    #
+    #   <note markdown="1"> The file mode permissions returned by this API are not the standard
+    #   file mode permission values, such as 100644, but rather extrapolated
+    #   values. See below for a full list of supported return values.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] file_size
+    #   The size of the contents of the file, in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] file_content
+    #   The base-64 encoded binary data object that represents the content
+    #   of the file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetFileOutput AWS API Documentation
+    #
+    class GetFileOutput < Struct.new(
+      :commit_id,
+      :blob_id,
+      :file_path,
+      :file_mode,
+      :file_size,
+      :file_content)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetFolderInput
+    #   data as a hash:
+    #
+    #       {
+    #         repository_name: "RepositoryName", # required
+    #         commit_specifier: "CommitName",
+    #         folder_path: "Path", # required
+    #       }
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] commit_specifier
+    #   A fully-qualified reference used to identify a commit that contains
+    #   the version of the folder's content to return. A fully-qualified
+    #   reference can be a commit ID, branch name, tag, or reference such as
+    #   HEAD. If no specifier is provided, the folder content will be
+    #   returned as it exists in the HEAD commit.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_path
+    #   The fully-qualified path to the folder whose contents will be
+    #   returned, including the folder name. For example, /examples is a
+    #   fully-qualified path to a folder named examples that was created off
+    #   of the root directory (/) of a repository.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetFolderInput AWS API Documentation
+    #
+    class GetFolderInput < Struct.new(
+      :repository_name,
+      :commit_specifier,
+      :folder_path)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] commit_id
+    #   The full commit ID used as a reference for which version of the
+    #   folder content is returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_path
+    #   The fully-qualified path of the folder whose contents are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] tree_id
+    #   The full SHA-1 pointer of the tree information for the commit that
+    #   contains the folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] sub_folders
+    #   The list of folders that exist beneath the specified folder, if any.
+    #   @return [Array<Types::Folder>]
+    #
+    # @!attribute [rw] files
+    #   The list of files that exist in the specified folder, if any.
+    #   @return [Array<Types::File>]
+    #
+    # @!attribute [rw] symbolic_links
+    #   The list of symbolic links to other files and folders that exist in
+    #   the specified folder, if any.
+    #   @return [Array<Types::SymbolicLink>]
+    #
+    # @!attribute [rw] sub_modules
+    #   The list of submodules that exist in the specified folder, if any.
+    #   @return [Array<Types::SubModule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetFolderOutput AWS API Documentation
+    #
+    class GetFolderOutput < Struct.new(
+      :commit_id,
+      :folder_path,
+      :tree_id,
+      :sub_folders,
+      :files,
+      :symbolic_links,
+      :sub_modules)
       include Aws::Structure
     end
 
@@ -2001,16 +2326,16 @@ module Aws::CodeCommit
     #   is the commit where the pull request was or will be merged.
     #   @return [String]
     #
-    # @!attribute [rw] merge_base
-    #   The commit ID of the most recent commit that the source branch and
-    #   the destination branch have in common.
-    #   @return [String]
-    #
     # @!attribute [rw] source_commit
     #   The full commit ID of the tip of the source branch used to create
     #   the pull request. If the pull request branch is updated by a push
     #   while the pull request is open, the commit ID will change to reflect
     #   the new tip of the branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] merge_base
+    #   The commit ID of the most recent commit that the source branch and
+    #   the destination branch have in common.
     #   @return [String]
     #
     # @!attribute [rw] merge_metadata
@@ -2025,8 +2350,8 @@ module Aws::CodeCommit
       :source_reference,
       :destination_reference,
       :destination_commit,
-      :merge_base,
       :source_commit,
+      :merge_base,
       :merge_metadata)
       include Aws::Structure
     end
@@ -2337,6 +2662,63 @@ module Aws::CodeCommit
     class RepositoryTriggerExecutionFailure < Struct.new(
       :trigger,
       :failure_message)
+      include Aws::Structure
+    end
+
+    # Returns information about a submodule reference in a repository
+    # folder.
+    #
+    # @!attribute [rw] commit_id
+    #   The commit ID that contains the reference to the submodule.
+    #   @return [String]
+    #
+    # @!attribute [rw] absolute_path
+    #   The fully qualified path to the folder that contains the reference
+    #   to the submodule.
+    #   @return [String]
+    #
+    # @!attribute [rw] relative_path
+    #   The relative path of the submodule from the folder where the query
+    #   originated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/SubModule AWS API Documentation
+    #
+    class SubModule < Struct.new(
+      :commit_id,
+      :absolute_path,
+      :relative_path)
+      include Aws::Structure
+    end
+
+    # Returns information about a symbolic link in a repository folder.
+    #
+    # @!attribute [rw] blob_id
+    #   The blob ID that contains the information about the symbolic link.
+    #   @return [String]
+    #
+    # @!attribute [rw] absolute_path
+    #   The fully-qualified path to the folder that contains the symbolic
+    #   link.
+    #   @return [String]
+    #
+    # @!attribute [rw] relative_path
+    #   The relative path of the symbolic link from the folder where the
+    #   query originated.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_mode
+    #   The file mode permissions of the blob that cotains information about
+    #   the symbolic link.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/SymbolicLink AWS API Documentation
+    #
+    class SymbolicLink < Struct.new(
+      :blob_id,
+      :absolute_path,
+      :relative_path,
+      :file_mode)
       include Aws::Structure
     end
 

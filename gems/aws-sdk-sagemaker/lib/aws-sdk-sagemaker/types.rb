@@ -55,12 +55,13 @@ module Aws::SageMaker
     #
     # For more information about algorithms provided by Amazon SageMaker,
     # see [Algorithms][2]. For information about using your own algorithms,
-    # see your-algorithms.
+    # see [Using Your Own Algorithms with Amazon SageMaker][3].
     #
     #
     #
     # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateTrainingJob.html
     # [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
+    # [3]: http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
     #
     # @note When making an API call, you may pass AlgorithmSpecification
     #   data as a hash:
@@ -73,7 +74,12 @@ module Aws::SageMaker
     # @!attribute [rw] training_image
     #   The registry path of the Docker image that contains the training
     #   algorithm. For information about docker registry paths for built-in
-    #   algorithms, see sagemaker-algo-docker-registry-paths.
+    #   algorithms, see [Algorithms Provided by Amazon SageMaker: Common
+    #   Parameters][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html
     #   @return [String]
     #
     # @!attribute [rw] training_input_mode
@@ -156,6 +162,7 @@ module Aws::SageMaker
     #         content_type: "ContentType",
     #         compression_type: "None", # accepts None, Gzip
     #         record_wrapper_type: "None", # accepts None, RecordIO
+    #         input_mode: "Pipe", # accepts Pipe, File
     #       }
     #
     # @!attribute [rw] channel_name
@@ -193,6 +200,9 @@ module Aws::SageMaker
     #   [1]: https://mxnet.incubator.apache.org/architecture/note_data_loading.html#data-format
     #   @return [String]
     #
+    # @!attribute [rw] input_mode
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Channel AWS API Documentation
     #
     class Channel < Struct.new(
@@ -200,7 +210,8 @@ module Aws::SageMaker
       :data_source,
       :content_type,
       :compression_type,
-      :record_wrapper_type)
+      :record_wrapper_type,
+      :input_mode)
       include Aws::Structure
     end
 
@@ -504,6 +515,7 @@ module Aws::SageMaker
     #               content_type: "ContentType",
     #               compression_type: "None", # accepts None, Gzip
     #               record_wrapper_type: "None", # accepts None, RecordIO
+    #               input_mode: "Pipe", # accepts Pipe, File
     #             },
     #           ],
     #           vpc_config: {
@@ -556,12 +568,14 @@ module Aws::SageMaker
     # @!attribute [rw] tags
     #   An array of key-value pairs. You can use tags to categorize your AWS
     #   resources in different ways, for example, by purpose, owner, or
-    #   environment. For more information, see [Using Cost Allocation
-    #   Tags][1] in the *AWS Billing and Cost Management User Guide*.
+    #   environment. For more information, see [AWS Tagging Strategies][1].
+    #
+    #   Tags that you specify for the tuning job are also added to all
+    #   training jobs that the tuning job launches.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com//awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #   [1]: https://aws.amazon.com/answers/account-management/aws-tagging-strategies/
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateHyperParameterTuningJobRequest AWS API Documentation
@@ -651,9 +665,15 @@ module Aws::SageMaker
     # @!attribute [rw] vpc_config
     #   A VpcConfig object that specifies the VPC that you want your model
     #   to connect to. Control access to and from your model container by
-    #   configuring the VPC. `VpcConfig` is currently used in hosting
-    #   services but not in batch transform. For more information, see
-    #   host-vpc.
+    #   configuring the VPC. `VpcConfig` is used in hosting services and in
+    #   batch transform. For more information, see [Protect Endpoints by
+    #   Using an Amazon Virtual Private Cloud][1] and [Protect Data in Batch
+    #   Transform Jobs by Using an Amazon Virtual Private Cloud][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
+    #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelInput AWS API Documentation
@@ -696,6 +716,7 @@ module Aws::SageMaker
     #         ],
     #         lifecycle_config_name: "NotebookInstanceLifecycleConfigName",
     #         direct_internet_access: "Enabled", # accepts Enabled, Disabled
+    #         volume_size_in_gb: 1,
     #       }
     #
     # @!attribute [rw] notebook_instance_name
@@ -748,8 +769,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] lifecycle_config_name
     #   The name of a lifecycle configuration to associate with the notebook
-    #   instance. For information about lifestyle configurations, see
-    #   notebook-lifecycle-config.
+    #   instance. For information about lifestyle configurations, see [Step
+    #   2.1: (Optional) Customize a Notebook Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
     #   @return [String]
     #
     # @!attribute [rw] direct_internet_access
@@ -759,10 +784,19 @@ module Aws::SageMaker
     #   not be able to connect to Amazon SageMaker training and endpoint
     #   services unless your configure a NAT Gateway in your VPC.
     #
-    #   For more information, see appendix-notebook-and-internet-access. You
-    #   can set the value of this parameter to `Disabled` only if you set a
-    #   value for the `SubnetId` parameter.
+    #   For more information, see [Notebook Instances Are Internet-Enabled
+    #   by Default][1]. You can set the value of this parameter to
+    #   `Disabled` only if you set a value for the `SubnetId` parameter.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access
     #   @return [String]
+    #
+    # @!attribute [rw] volume_size_in_gb
+    #   The size, in GB, of the ML storage volume to attach to the notebook
+    #   instance.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstanceInput AWS API Documentation
     #
@@ -775,7 +809,8 @@ module Aws::SageMaker
       :kms_key_id,
       :tags,
       :lifecycle_config_name,
-      :direct_internet_access)
+      :direct_internet_access,
+      :volume_size_in_gb)
       include Aws::Structure
     end
 
@@ -802,12 +837,13 @@ module Aws::SageMaker
     #
     # @!attribute [rw] on_create
     #   A shell script that runs only once, when you create a notebook
-    #   instance.
+    #   instance. The shell script must be a base64-encoded string.
     #   @return [Array<Types::NotebookInstanceLifecycleHook>]
     #
     # @!attribute [rw] on_start
     #   A shell script that runs every time you start a notebook instance,
-    #   including when you create the notebook instance.
+    #   including when you create the notebook instance. The shell script
+    #   must be a base64-encoded string.
     #   @return [Array<Types::NotebookInstanceLifecycleHook>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstanceLifecycleConfigInput AWS API Documentation
@@ -889,7 +925,7 @@ module Aws::SageMaker
     #           training_input_mode: "Pipe", # required, accepts Pipe, File
     #         },
     #         role_arn: "RoleArn", # required
-    #         input_data_config: [ # required
+    #         input_data_config: [
     #           {
     #             channel_name: "ChannelName", # required
     #             data_source: { # required
@@ -902,6 +938,7 @@ module Aws::SageMaker
     #             content_type: "ContentType",
     #             compression_type: "None", # accepts None, Gzip
     #             record_wrapper_type: "None", # accepts None, RecordIO
+    #             input_mode: "Pipe", # accepts Pipe, File
     #           },
     #         ],
     #         output_data_config: { # required
@@ -954,11 +991,13 @@ module Aws::SageMaker
     #   algorithm and algorithm-specific metadata, including the input mode.
     #   For more information about algorithms provided by Amazon SageMaker,
     #   see [Algorithms][1]. For information about providing your own
-    #   algorithms, see your-algorithms.
+    #   algorithms, see [Using Your Own Algorithms with Amazon
+    #   SageMaker][2].
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
+    #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
     #   @return [Types::AlgorithmSpecification]
     #
     # @!attribute [rw] role_arn
@@ -1020,8 +1059,12 @@ module Aws::SageMaker
     # @!attribute [rw] vpc_config
     #   A VpcConfig object that specifies the VPC that you want your
     #   training job to connect to. Control access to and from your training
-    #   container by configuring the VPC. For more information, see
-    #   train-vpc
+    #   container by configuring the VPC. For more information, see [Protect
+    #   Training Jobs by Using an Amazon Virtual Private Cloud][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] stopping_condition
@@ -1364,9 +1407,9 @@ module Aws::SageMaker
     # Gets the Amazon EC2 Container Registry path of the docker image of the
     # model that is hosted in this ProductionVariant.
     #
-    # If you used the `registry/repository[:tag]` form to to specify the
-    # image path of the primary container when you created the model hosted
-    # in this `ProductionVariant`, the path resolves to a path of the form
+    # If you used the `registry/repository[:tag]` form to specify the image
+    # path of the primary container when you created the model hosted in
+    # this `ProductionVariant`, the path resolves to a path of the form
     # `registry/repository[@digest]`. A digest is a hash value that
     # identifies a specific version of an image. For information about
     # Amazon ECR paths, see [Pulling an Image][1] in the *Amazon ECR User
@@ -1488,6 +1531,38 @@ module Aws::SageMaker
     #
     # @!attribute [rw] endpoint_status
     #   The status of the endpoint.
+    #
+    #   * `OutOfService`\: Endpoint is not available to take incoming
+    #     requests.
+    #
+    #   * `Creating`\: CreateEndpoint is executing.
+    #
+    #   * `Updating`\: UpdateEndpoint or UpdateEndpointWeightsAndCapacities
+    #     is executing.
+    #
+    #   * `SystemUpdating`\: Endpoint is undergoing maintenance and cannot
+    #     be updated or deleted or re-scaled until it has completed. This
+    #     maintenance operation does not change any customer-specified
+    #     values such as VPC config, KMS encryption, model, instance type,
+    #     or instance count.
+    #
+    #   * `RollingBack`\: Endpoint fails to scale up or down or change its
+    #     variant weight and is in the process of rolling back to its
+    #     previous configuration. Once the rollback completes, endpoint
+    #     returns to an `InService` status. This transitional status only
+    #     applies to an endpoint that has autoscaling enabled and is
+    #     undergoing variant weight or capacity changes as part of an
+    #     UpdateEndpointWeightsAndCapacities call or when the
+    #     UpdateEndpointWeightsAndCapacities operation is called explicitly.
+    #
+    #   * `InService`\: Endpoint is available to process incoming requests.
+    #
+    #   * `Deleting`\: DeleteEndpoint is executing.
+    #
+    #   * `Failed`\: Endpoint could not be created, updated, or re-scaled.
+    #     Use DescribeEndpointOutput$FailureReason for information about the
+    #     failure. DeleteEndpoint is the only operation that can be
+    #     performed on a failed endpoint.
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
@@ -1642,7 +1717,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] vpc_config
     #   A VpcConfig object that specifies the VPC that this model has access
-    #   to. For more information, see host-vpc
+    #   to. For more information, see [Protect Endpoints by Using an Amazon
+    #   Virtual Private Cloud][1]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] creation_time
@@ -1802,7 +1882,11 @@ module Aws::SageMaker
     #   Returns the name of a notebook instance lifecycle configuration.
     #
     #   For information about notebook instance lifestyle configurations,
-    #   see notebook-lifecycle-config.
+    #   see [Step 2.1: (Optional) Customize a Notebook Instance][1]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
     #   @return [String]
     #
     # @!attribute [rw] direct_internet_access
@@ -1811,8 +1895,18 @@ module Aws::SageMaker
     #   instance does not have internet access, and cannot connect to Amazon
     #   SageMaker training and endpoint services*.
     #
-    #   For more information, see appendix-notebook-and-internet-access.
+    #   For more information, see [Notebook Instances Are Internet-Enabled
+    #   by Default][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access
     #   @return [String]
+    #
+    # @!attribute [rw] volume_size_in_gb
+    #   The size, in GB, of the ML storage volume attached to the notebook
+    #   instance.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstanceOutput AWS API Documentation
     #
@@ -1831,7 +1925,8 @@ module Aws::SageMaker
       :last_modified_time,
       :creation_time,
       :notebook_instance_lifecycle_config_name,
-      :direct_internet_access)
+      :direct_internet_access,
+      :volume_size_in_gb)
       include Aws::Structure
     end
 
@@ -1875,55 +1970,75 @@ module Aws::SageMaker
     # @!attribute [rw] training_job_status
     #   The status of the training job.
     #
-    #   For the `InProgress` status, Amazon SageMaker can return these
-    #   secondary statuses:
+    #   Amazon SageMaker provides the following training job statuses:
     #
-    #   * Starting - Preparing for training.
+    #   * `InProgress` - The training is in progress.
     #
-    #   * Downloading - Optional stage for algorithms that support File
-    #     training input mode. It indicates data is being downloaded to ML
-    #     storage volumes.
+    #   * `Completed` - The training job has completed.
     #
-    #   * Training - Training is in progress.
+    #   * `Failed` - The training job has failed. To see the reason for the
+    #     failure, see the `FailureReason` field in the response to a
+    #     `DescribeTrainingJobResponse` call.
     #
-    #   * Uploading - Training is complete and model upload is in progress.
+    #   * `Stopping` - The training job is stopping.
     #
-    #   For the `Stopped` training status, Amazon SageMaker can return these
-    #   secondary statuses:
+    #   * `Stopped` - The training job has stopped.
     #
-    #   * MaxRuntimeExceeded - Job stopped as a result of maximum allowed
-    #     runtime exceeded.
-    #
-    #   ^
+    #   For more detailed information, see `SecondaryStatus`.
     #   @return [String]
     #
     # @!attribute [rw] secondary_status
-    #   Provides granular information about the system state. For more
-    #   information, see `TrainingJobStatus`.
+    #   Provides detailed information about the state of the training job.
+    #   For detailed information on the secondary status of the training
+    #   job, see `StatusMessage` under SecondaryStatusTransition.
     #
-    #   * `Starting` - starting the training job.
+    #   Amazon SageMaker provides primary statuses and secondary statuses
+    #   that apply to each of them:
     #
-    #   * `Downloading` - downloading the input data.
+    #   InProgress
+    #   : * `Starting` - Starting the training job.
     #
-    #   * `Training` - model training is in progress.
+    #     * `Downloading` - An optional stage for algorithms that support
+    #       `File` training input mode. It indicates that data is being
+    #       downloaded to the ML storage volumes.
     #
-    #   * `Uploading` - uploading the trained model.
+    #     * `Training` - Training is in progress.
     #
-    #   * `Stopping` - stopping the training job.
+    #     * `Uploading` - Training is complete and the model artifacts are
+    #       being uploaded to the S3 location.
     #
-    #   * `Stopped` - the training job has stopped.
+    #   Completed
+    #   : * `Completed` - The training job has completed.
     #
-    #   * `MaxRuntimeExceeded` - the training job exceeded the specified max
-    #     run time and has been stopped.
+    #     ^
     #
-    #   * `Completed` - the training job has completed.
+    #   Failed
+    #   : * `Failed` - The training job has failed. The reason for the
+    #       failure is returned in the `FailureReason` field of
+    #       `DescribeTrainingJobResponse`.
     #
-    #   * `Failed` - the training job has failed. The failure reason is
-    #     stored in the `FailureReason` field of
-    #     `DescribeTrainingJobResponse`.
+    #     ^
     #
-    #   The valid values for `SecondaryStatus` are subject to change. They
-    #   primarily provide information on the progress of the training job.
+    #   Stopped
+    #   : * `MaxRuntimeExceeded` - The job stopped because it exceeded the
+    #       maximum allowed runtime.
+    #
+    #     * `Stopped` - The training job has stopped.
+    #
+    #   Stopping
+    #   : * `Stopping` - Stopping the training job.
+    #
+    #     ^
+    #
+    #   Valid values for `SecondaryStatus` are subject to change.
+    #
+    #   We no longer support the following secondary statuses:
+    #
+    #   * `LaunchingMLInstances`
+    #
+    #   * `PreparingTrainingStack`
+    #
+    #   * `DownloadingTrainingImage`
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
@@ -1962,7 +2077,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] vpc_config
     #   A VpcConfig object that specifies the VPC that this training job has
-    #   access to. For more information, see train-vpc.
+    #   access to. For more information, see [Protect Training Jobs by Using
+    #   an Amazon Virtual Private Cloud][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] stopping_condition
@@ -1997,9 +2117,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] secondary_status_transitions
-    #   To give an overview of the training job lifecycle,
-    #   `SecondaryStatusTransitions` is a log of time-ordered secondary
-    #   statuses that a training job has transitioned.
+    #   A history of all of the secondary statuses that the training job has
+    #   transitioned through.
     #   @return [Array<Types::SecondaryStatusTransition>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJobResponse AWS API Documentation
@@ -2212,6 +2331,41 @@ module Aws::SageMaker
     #
     # @!attribute [rw] endpoint_status
     #   The status of the endpoint.
+    #
+    #   * `OutOfService`\: Endpoint is not available to take incoming
+    #     requests.
+    #
+    #   * `Creating`\: CreateEndpoint is executing.
+    #
+    #   * `Updating`\: UpdateEndpoint or UpdateEndpointWeightsAndCapacities
+    #     is executing.
+    #
+    #   * `SystemUpdating`\: Endpoint is undergoing maintenance and cannot
+    #     be updated or deleted or re-scaled until it has completed. This
+    #     mainenance operation does not change any customer-specified values
+    #     such as VPC config, KMS encryption, model, instance type, or
+    #     instance count.
+    #
+    #   * `RollingBack`\: Endpoint fails to scale up or down or change its
+    #     variant weight and is in the process of rolling back to its
+    #     previous configuration. Once the rollback completes, endpoint
+    #     returns to an `InService` status. This transitional status only
+    #     applies to an endpoint that has autoscaling enabled and is
+    #     undergoing variant weight or capacity changes as part of an
+    #     UpdateEndpointWeightsAndCapacities call or when the
+    #     UpdateEndpointWeightsAndCapacities operation is called explicitly.
+    #
+    #   * `InService`\: Endpoint is available to process incoming requests.
+    #
+    #   * `Deleting`\: DeleteEndpoint is executing.
+    #
+    #   * `Failed`\: Endpoint could not be created, updated, or re-scaled.
+    #     Use DescribeEndpointOutput$FailureReason for information about the
+    #     failure. DeleteEndpoint is the only operation that can be
+    #     performed on a failed endpoint.
+    #
+    #   To get a list of endpoints with a specified status, use the
+    #   ListEndpointsInput$StatusEquals filter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EndpointSummary AWS API Documentation
@@ -2272,7 +2426,12 @@ module Aws::SageMaker
     # @!attribute [rw] training_image
     #   The registry path of the Docker image that contains the training
     #   algorithm. For information about Docker registry paths for built-in
-    #   algorithms, see sagemaker-algo-docker-registry-paths.
+    #   algorithms, see [Algorithms Provided by Amazon SageMaker: Common
+    #   Parameters][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html
     #   @return [String]
     #
     # @!attribute [rw] training_input_mode
@@ -2344,6 +2503,7 @@ module Aws::SageMaker
     #             content_type: "ContentType",
     #             compression_type: "None", # accepts None, Gzip
     #             record_wrapper_type: "None", # accepts None, RecordIO
+    #             input_mode: "Pipe", # accepts Pipe, File
     #           },
     #         ],
     #         vpc_config: {
@@ -2389,7 +2549,12 @@ module Aws::SageMaker
     #   The VpcConfig object that specifies the VPC that you want the
     #   training jobs that this hyperparameter tuning job launches to
     #   connect to. Control access to and from your training container by
-    #   configuring the VPC. For more information, see train-vpc.
+    #   configuring the VPC. For more information, see [Protect Training
+    #   Jobs by Using an Amazon Virtual Private Cloud][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] output_data_config
@@ -3600,7 +3765,7 @@ module Aws::SageMaker
     end
 
     # Specifies a metric that the training algorithm writes to `stderr` or
-    # `stdout`. Amazon SageMakerHyperparamter tuning captures all defined
+    # `stdout`. Amazon SageMakerhyperparameter tuning captures all defined
     # metrics. You specify one metric that a hyperparameter tuning job uses
     # as its objective metric to choose the best training job.
     #
@@ -3619,8 +3784,12 @@ module Aws::SageMaker
     # @!attribute [rw] regex
     #   A regular expression that searches the output of a training job and
     #   gets the value of the metric. For more information about using
-    #   regular expressions to define metrics, see
-    #   automatic-model-tuning-define-metrics.
+    #   regular expressions to define metrics, see [Defining Objective
+    #   Metrics][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MetricDefinition AWS API Documentation
@@ -3714,7 +3883,11 @@ module Aws::SageMaker
     # instance is not created or started.
     #
     # For information about notebook instance lifestyle configurations, see
-    # notebook-lifecycle-config.
+    # [Step 2.1: (Optional) Customize a Notebook Instance][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
     #
     # @note When making an API call, you may pass NotebookInstanceLifecycleHook
     #   data as a hash:
@@ -3773,7 +3946,11 @@ module Aws::SageMaker
     #   with this notebook instance.
     #
     #   For information about notebook instance lifestyle configurations,
-    #   see notebook-lifecycle-config.
+    #   see [Step 2.1: (Optional) Customize a Notebook Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/NotebookInstanceSummary AWS API Documentation
@@ -3837,18 +4014,33 @@ module Aws::SageMaker
     # @!attribute [rw] kms_key_id
     #   The AWS Key Management Service (AWS KMS) key that Amazon SageMaker
     #   uses to encrypt the model artifacts at rest using Amazon S3
-    #   server-side encryption.
+    #   server-side encryption. The `KmsKeyId` can be any of the following
+    #   formats:
     #
-    #   <note markdown="1"> If you don't provide the KMS key ID, Amazon SageMaker uses the
+    #   * // KMS Key ID
+    #
+    #     `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * // Amazon Resource Name (ARN) of a KMS Key
+    #
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * // KMS Key Alias
+    #
+    #     `"alias/ExampleAlias"`
+    #
+    #   * // Amazon Resource Name (ARN) of a KMS Key Alias
+    #
+    #     `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"`
+    #
+    #   If you don't provide the KMS key ID, Amazon SageMaker uses the
     #   default KMS key for Amazon S3 for your role's account. For more
-    #   information, see [KMS-Managed Encryption Keys][1] in Amazon Simple
-    #   Storage Service developer guide.
+    #   information, see [KMS-Managed Encryption Keys][1] in *Amazon Simple
+    #   Storage Service Developer Guide.*
     #
-    #    </note>
-    #
-    #   <note markdown="1"> The KMS key policy must grant permission to the IAM role you specify
-    #   in your `CreateTrainingJob` request. [Using Key Policies in AWS
-    #   KMS][2] in the AWS Key Management Service Developer Guide.
+    #   <note markdown="1"> The KMS key policy must grant permission to the IAM role that you
+    #   specify in your `CreateTrainingJob` request. [Using Key Policies in
+    #   AWS KMS][2] in the *AWS Key Management Service Developer Guide*.
     #
     #    </note>
     #
@@ -4063,9 +4255,18 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   The Amazon Resource Name (ARN) of a AWS Key Management Service key
-    #   that Amazon SageMaker uses to encrypt data on the storage volume
-    #   attached to the ML compute instance(s) that run the training job.
+    #   The AWS Key Management Service (AWS KMS) key that Amazon SageMaker
+    #   uses to encrypt data on the storage volume attached to the ML
+    #   compute instance(s) that run the training job. The `VolumeKmsKeyId`
+    #   can be any of the following formats:
+    #
+    #   * // KMS Key ID
+    #
+    #     `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * // Amazon Resource Name (ARN) of a KMS Key
+    #
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceConfig AWS API Documentation
@@ -4201,33 +4402,114 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Specifies a secondary status the job has transitioned into. It
-    # includes a start timestamp and later an end timestamp. The end
-    # timestamp is added either after the job transitions to a different
-    # secondary status or after the job has ended.
+    # An array element of
+    # DescribeTrainingJobResponse$SecondaryStatusTransitions. It provides
+    # additional details about a status that the training job has
+    # transitioned through. A training job can be in one of several states,
+    # for example, starting, downloading, training, or uploading. Within
+    # each state, there are a number of intermediate states. For example,
+    # within the starting state, Amazon SageMaker could be starting the
+    # training job or launching the ML instances. These transitional states
+    # are referred to as the job's secondary status.
     #
     # @!attribute [rw] status
-    #   Provides granular information about the system state. For more
-    #   information, see `SecondaryStatus` under the DescribeTrainingJob
-    #   response elements.
+    #   Contains a secondary status information from a training job.
+    #
+    #   Status might be one of the following secondary statuses:
+    #
+    #   InProgress
+    #   : * `Starting` - Starting the training job.
+    #
+    #     * `Downloading` - An optional stage for algorithms that support
+    #       `File` training input mode. It indicates that data is being
+    #       downloaded to the ML storage volumes.
+    #
+    #     * `Training` - Training is in progress.
+    #
+    #     * `Uploading` - Training is complete and the model artifacts are
+    #       being uploaded to the S3 location.
+    #
+    #   Completed
+    #   : * `Completed` - The training job has completed.
+    #
+    #     ^
+    #
+    #   Failed
+    #   : * `Failed` - The training job has failed. The reason for the
+    #       failure is returned in the `FailureReason` field of
+    #       `DescribeTrainingJobResponse`.
+    #
+    #     ^
+    #
+    #   Stopped
+    #   : * `MaxRuntimeExceeded` - The job stopped because it exceeded the
+    #       maximum allowed runtime.
+    #
+    #     * `Stopped` - The training job has stopped.
+    #
+    #   Stopping
+    #   : * `Stopping` - Stopping the training job.
+    #
+    #     ^
+    #
+    #   We no longer support the following secondary statuses:
+    #
+    #   * `LaunchingMLInstances`
+    #
+    #   * `PreparingTrainingStack`
+    #
+    #   * `DownloadingTrainingImage`
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   A timestamp that shows when the training job has entered this
-    #   secondary status.
+    #   A timestamp that shows when the training job transitioned to the
+    #   current secondary status state.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   A timestamp that shows when the secondary status has ended and the
-    #   job has transitioned into another secondary status. The `EndTime`
-    #   timestamp is also set after the training job has ended.
+    #   A timestamp that shows when the training job transitioned out of
+    #   this secondary status state into another secondary status state or
+    #   when the training job has ended.
     #   @return [Time]
     #
     # @!attribute [rw] status_message
-    #   Shows a brief description and other information about the secondary
-    #   status. For example, the `LaunchingMLInstances` secondary status
-    #   could show a status message of "Insufficent capacity error while
-    #   launching instances".
+    #   A detailed description of the progress within a secondary status.
+    #
+    #   Amazon SageMaker provides secondary statuses and status messages
+    #   that apply to each of them:
+    #
+    #   Starting
+    #   : * Starting the training job.
+    #
+    #     * Launching requested ML instances.
+    #
+    #     * Insufficient capacity error from EC2 while launching instances,
+    #       retrying!
+    #
+    #     * Launched instance was unhealthy, replacing it!
+    #
+    #     * Preparing the instances for training.
+    #
+    #   Training
+    #   : * Downloading the training image.
+    #
+    #     * Training image download completed. Training in progress.
+    #
+    #   Status messages are subject to change. Therefore, we recommend not
+    #   including them in code that programmatically initiates actions. For
+    #   examples, don't use status messages in if statements.
+    #
+    #   To have an overview of your training job's progress, view
+    #   `TrainingJobStatus` and `SecondaryStatus` in
+    #   DescribeTrainingJobResponse, and `StatusMessage` together. For
+    #   example, at the start of a training job, you might see the
+    #   following:
+    #
+    #   * `TrainingJobStatus` - InProgress
+    #
+    #   * `SecondaryStatus` - Training
+    #
+    #   * `StatusMessage` - Downloading the training image
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SecondaryStatusTransition AWS API Documentation
@@ -4528,8 +4810,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] compression_type
     #   Compressing data helps save on storage space. If your transform data
-    #   is compressed, specify the compression type.and Amazon SageMaker
-    #   will automatically decompress the data for the transform job
+    #   is compressed, specify the compression type. Amazon SageMaker
+    #   automatically decompresses the data for the transform job
     #   accordingly. The default value is `None`.
     #   @return [String]
     #
@@ -4563,9 +4845,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Provides a summary information for a transform job. Multiple
-    # TransformJobSummary objects are returned as a list after calling
-    # ListTransformJobs.
+    # Provides a summary of a transform job. Multiple TransformJobSummary
+    # objects are returned as a list after calling ListTransformJobs.
     #
     # @!attribute [rw] transform_job_name
     #   The name of the transform job.
@@ -4648,20 +4929,30 @@ module Aws::SageMaker
     #   S3 object. You should select a format that is most convenient to
     #   you. To concatenate the results in binary format, specify `None`. To
     #   add a newline character at the end of every transformed record,
-    #   specify `Line`. To assemble the output in RecordIO format, specify
-    #   `RecordIO`. The default value is `None`.
-    #
-    #   For information about the `RecordIO` format, see [Data Format][1].
-    #
-    #
-    #
-    #   [1]: http://mxnet.io/architecture/note_data_loading.html#data-format
+    #   specify `Line`.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The AWS Key Management Service (AWS KMS) key for Amazon S3
-    #   server-side encryption that Amazon SageMaker uses to encrypt the
-    #   transformed data.
+    #   The AWS Key Management Service (AWS KMS) key that Amazon SageMaker
+    #   uses to encrypt the model artifacts at rest using Amazon S3
+    #   server-side encryption. The `KmsKeyId` can be any of the following
+    #   formats:
+    #
+    #   * // KMS Key ID
+    #
+    #     `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * // Amazon Resource Name (ARN) of a KMS Key
+    #
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * // KMS Key Alias
+    #
+    #     `"alias/ExampleAlias"`
+    #
+    #   * // Amazon Resource Name (ARN) of a KMS Key Alias
+    #
+    #     `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"`
     #
     #   If you don't provide a KMS key ID, Amazon SageMaker uses the
     #   default KMS key for Amazon S3 for your role's account. For more
@@ -4715,10 +5006,18 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   The Amazon Resource Name (ARN) of a AWS Key Management Service key
-    #   that Amazon SageMaker uses to encrypt data on the storage volume
-    #   attached to the ML compute instance(s) that run the batch transform
-    #   job.
+    #   The AWS Key Management Service (AWS KMS) key that Amazon SageMaker
+    #   uses to encrypt data on the storage volume attached to the ML
+    #   compute instance(s) that run the batch transform job. The
+    #   `VolumeKmsKeyId` can be any of the following formats:
+    #
+    #   * // KMS Key ID
+    #
+    #     `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * // Amazon Resource Name (ARN) of a KMS Key
+    #
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformResources AWS API Documentation
@@ -4883,6 +5182,7 @@ module Aws::SageMaker
     #         role_arn: "RoleArn",
     #         lifecycle_config_name: "NotebookInstanceLifecycleConfigName",
     #         disassociate_lifecycle_config: false,
+    #         volume_size_in_gb: 1,
     #       }
     #
     # @!attribute [rw] notebook_instance_name
@@ -4910,14 +5210,23 @@ module Aws::SageMaker
     #
     # @!attribute [rw] lifecycle_config_name
     #   The name of a lifecycle configuration to associate with the notebook
-    #   instance. For information about lifestyle configurations, see
-    #   notebook-lifecycle-config.
+    #   instance. For information about lifestyle configurations, see [Step
+    #   2.1: (Optional) Customize a Notebook Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
     #   @return [String]
     #
     # @!attribute [rw] disassociate_lifecycle_config
     #   Set to `true` to remove the notebook instance lifecycle
     #   configuration currently associated with the notebook instance.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] volume_size_in_gb
+    #   The size, in GB, of the ML storage volume to attach to the notebook
+    #   instance.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstanceInput AWS API Documentation
     #
@@ -4926,7 +5235,8 @@ module Aws::SageMaker
       :instance_type,
       :role_arn,
       :lifecycle_config_name,
-      :disassociate_lifecycle_config)
+      :disassociate_lifecycle_config,
+      :volume_size_in_gb)
       include Aws::Structure
     end
 
@@ -4980,7 +5290,14 @@ module Aws::SageMaker
 
     # Specifies a VPC that your training jobs and hosted models have access
     # to. Control access to and from your training and model containers by
-    # configuring the VPC. For more information, see host-vpc and train-vpc.
+    # configuring the VPC. For more information, see [Protect Endpoints by
+    # Using an Amazon Virtual Private Cloud][1] and [Protect Training Jobs
+    # by Using an Amazon Virtual Private Cloud][2].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
+    # [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
     #
     # @note When making an API call, you may pass VpcConfig
     #   data as a hash:

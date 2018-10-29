@@ -54,131 +54,133 @@ module Aws::SSM
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [] :client_side_monitoring (false)
-    #   When `true`, client-side metrics will be collected for all API requests from
-    #   this client.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [] :client_side_monitoring_client_id ("")
-    #   Allows you to provide an identifier for this client which will be attached to
-    #   all generated client side metrics. Defaults to an empty string.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [] :client_side_monitoring_port (31000)
-    #   Required for publishing client metrics. The port that the client side monitoring
-    #   agent is running on, where client metrics will be published via UDP.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
-    #   Allows you to provide a custom client-side monitoring publisher class. By default,
-    #   will use the Client Side Monitoring Agent Publisher.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [String] :secret_access_key
     #
-    # @option options [String] :session_token
+    #   @option options [String] :session_token
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -304,6 +306,36 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Stops a Maintenance Window execution that is already in progress and
+    # cancels any tasks in the window that have not already starting
+    # running. (Tasks already in progress will continue to completion.)
+    #
+    # @option params [required, String] :window_execution_id
+    #   The ID of the Maintenance Window execution to stop.
+    #
+    # @return [Types::CancelMaintenanceWindowExecutionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelMaintenanceWindowExecutionResult#window_execution_id #window_execution_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_maintenance_window_execution({
+    #     window_execution_id: "MaintenanceWindowExecutionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.window_execution_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CancelMaintenanceWindowExecution AWS API Documentation
+    #
+    # @overload cancel_maintenance_window_execution(params = {})
+    # @param [Hash] params ({})
+    def cancel_maintenance_window_execution(params = {}, options = {})
+      req = build_request(:cancel_maintenance_window_execution, params)
+      req.send_request(options)
+    end
+
     # Registers your on-premises server or virtual machine with Amazon EC2
     # so that you can manage these resources using Run Command. An
     # on-premises server or virtual machine that has been registered with
@@ -407,6 +439,38 @@ module Aws::SSM
     # @option params [String] :association_name
     #   Specify a descriptive name for the association.
     #
+    # @option params [String] :max_errors
+    #   The number of errors that are allowed before the system stops sending
+    #   requests to run the association on additional targets. You can specify
+    #   either an absolute number of errors, for example 10, or a percentage
+    #   of the target set, for example 10%. If you specify 3, for example, the
+    #   system stops sending requests when the fourth error is received. If
+    #   you specify 0, then the system stops sending requests after the first
+    #   error is returned. If you run an association on 50 instances and set
+    #   MaxError to 10%, then the system stops sending the request when the
+    #   sixth error is received.
+    #
+    #   Executions that are already running an association when MaxErrors is
+    #   reached are allowed to complete, but some of these executions may fail
+    #   as well. If you need to ensure that there won't be more than
+    #   max-errors failed executions, set MaxConcurrency to 1 so that
+    #   executions proceed one at a time.
+    #
+    # @option params [String] :max_concurrency
+    #   The maximum number of targets allowed to run the association at the
+    #   same time. You can specify a number, for example 10, or a percentage
+    #   of the target set, for example 10%. The default value is 100%, which
+    #   means all targets run the association at the same time.
+    #
+    #   If a new instance starts and attempts to execute an association while
+    #   Systems Manager is executing MaxConcurrency associations, the
+    #   association is allowed to run. During the next association interval,
+    #   the new instance will process its association within the limit
+    #   specified for MaxConcurrency.
+    #
+    # @option params [String] :compliance_severity
+    #   The severity level to assign to the association.
+    #
     # @return [Types::CreateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -435,6 +499,9 @@ module Aws::SSM
     #       },
     #     },
     #     association_name: "AssociationName",
+    #     max_errors: "MaxErrors",
+    #     max_concurrency: "MaxConcurrency",
+    #     compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #   })
     #
     # @example Response structure
@@ -468,6 +535,9 @@ module Aws::SSM
     #   resp.association_description.last_execution_date #=> Time
     #   resp.association_description.last_successful_execution_date #=> Time
     #   resp.association_description.association_name #=> String
+    #   resp.association_description.max_errors #=> String
+    #   resp.association_description.max_concurrency #=> String
+    #   resp.association_description.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociation AWS API Documentation
     #
@@ -523,6 +593,9 @@ module Aws::SSM
     #           },
     #         },
     #         association_name: "AssociationName",
+    #         max_errors: "MaxErrors",
+    #         max_concurrency: "MaxConcurrency",
+    #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #       },
     #     ],
     #   })
@@ -559,6 +632,9 @@ module Aws::SSM
     #   resp.successful[0].last_execution_date #=> Time
     #   resp.successful[0].last_successful_execution_date #=> Time
     #   resp.successful[0].association_name #=> String
+    #   resp.successful[0].max_errors #=> String
+    #   resp.successful[0].max_concurrency #=> String
+    #   resp.successful[0].compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.failed #=> Array
     #   resp.failed[0].entry.name #=> String
     #   resp.failed[0].entry.instance_id #=> String
@@ -575,6 +651,9 @@ module Aws::SSM
     #   resp.failed[0].entry.output_location.s3_location.output_s3_bucket_name #=> String
     #   resp.failed[0].entry.output_location.s3_location.output_s3_key_prefix #=> String
     #   resp.failed[0].entry.association_name #=> String
+    #   resp.failed[0].entry.max_errors #=> String
+    #   resp.failed[0].entry.max_concurrency #=> String
+    #   resp.failed[0].entry.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.failed[0].message #=> String
     #   resp.failed[0].fault #=> String, one of "Client", "Server", "Unknown"
     #
@@ -689,9 +768,30 @@ module Aws::SSM
     #   specifying a description to help you organize your Maintenance
     #   Windows.
     #
+    # @option params [String] :start_date
+    #   The date and time, in ISO-8601 Extended format, for when you want the
+    #   Maintenance Window to become active. StartDate allows you to delay
+    #   activation of the Maintenance Window until the specified future date.
+    #
+    # @option params [String] :end_date
+    #   The date and time, in ISO-8601 Extended format, for when you want the
+    #   Maintenance Window to become inactive. EndDate allows you to set a
+    #   date and time in the future when the Maintenance Window will no longer
+    #   run.
+    #
     # @option params [required, String] :schedule
     #   The schedule of the Maintenance Window in the form of a cron or rate
     #   expression.
+    #
+    # @option params [String] :schedule_timezone
+    #   The time zone that the scheduled Maintenance Window executions are
+    #   based on, in Internet Assigned Numbers Authority (IANA) format. For
+    #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul". For
+    #   more information, see the [Time Zone Database][1] on the IANA website.
+    #
+    #
+    #
+    #   [1]: https://www.iana.org/time-zones
     #
     # @option params [required, Integer] :duration
     #   The duration of the Maintenance Window in hours.
@@ -725,7 +825,10 @@ module Aws::SSM
     #   resp = client.create_maintenance_window({
     #     name: "MaintenanceWindowName", # required
     #     description: "MaintenanceWindowDescription",
+    #     start_date: "MaintenanceWindowStringDateTime",
+    #     end_date: "MaintenanceWindowStringDateTime",
     #     schedule: "MaintenanceWindowSchedule", # required
+    #     schedule_timezone: "MaintenanceWindowTimezone",
     #     duration: 1, # required
     #     cutoff: 1, # required
     #     allow_unassociated_targets: false, # required
@@ -801,6 +904,22 @@ module Aws::SSM
     #
     #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #
+    # @option params [String] :rejected_patches_action
+    #   The action for Patch Manager to take on patches included in the
+    #   RejectedPackages list.
+    #
+    #   * **ALLOW\_AS\_DEPENDENCY**\: A package in the Rejected patches list
+    #     is installed only if it is a dependency of another package. It is
+    #     considered compliant with the patch baseline, and its status is
+    #     reported as *InstalledOther*. This is the default action if no
+    #     option is specified.
+    #
+    #   * **BLOCK**\: Packages in the RejectedPatches list, and packages that
+    #     include them as dependencies, are not installed under any
+    #     circumstances. If a package was installed before it was added to the
+    #     Rejected patches list, it is considered non-compliant with the patch
+    #     baseline, and its status is reported as *InstalledRejected*.
+    #
     # @option params [String] :description
     #   A description of the patch baseline.
     #
@@ -853,6 +972,7 @@ module Aws::SSM
     #     approved_patches_compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #     approved_patches_enable_non_security: false,
     #     rejected_patches: ["PatchId"],
+    #     rejected_patches_action: "ALLOW_AS_DEPENDENCY", # accepts ALLOW_AS_DEPENDENCY, BLOCK
     #     description: "BaselineDescription",
     #     sources: [
     #       {
@@ -1481,6 +1601,9 @@ module Aws::SSM
     #   resp.association_description.last_execution_date #=> Time
     #   resp.association_description.last_successful_execution_date #=> Time
     #   resp.association_description.association_name #=> String
+    #   resp.association_description.max_errors #=> String
+    #   resp.association_description.max_concurrency #=> String
+    #   resp.association_description.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociation AWS API Documentation
     #
@@ -2130,7 +2253,8 @@ module Aws::SSM
     #
     # @option params [Array<Types::InstanceInformationStringFilter>] :filters
     #   One or more filters. Use a filter to return a more specific list of
-    #   instances.
+    #   instances. You can filter on Amazon EC2 tag. Specify tags by using a
+    #   key-value mapping.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this call. The call also
@@ -2233,9 +2357,11 @@ module Aws::SSM
     #   resp.instance_patch_states[0].patch_group #=> String
     #   resp.instance_patch_states[0].baseline_id #=> String
     #   resp.instance_patch_states[0].snapshot_id #=> String
+    #   resp.instance_patch_states[0].install_override_list #=> String
     #   resp.instance_patch_states[0].owner_information #=> String
     #   resp.instance_patch_states[0].installed_count #=> Integer
     #   resp.instance_patch_states[0].installed_other_count #=> Integer
+    #   resp.instance_patch_states[0].installed_rejected_count #=> Integer
     #   resp.instance_patch_states[0].missing_count #=> Integer
     #   resp.instance_patch_states[0].failed_count #=> Integer
     #   resp.instance_patch_states[0].not_applicable_count #=> Integer
@@ -2303,9 +2429,11 @@ module Aws::SSM
     #   resp.instance_patch_states[0].patch_group #=> String
     #   resp.instance_patch_states[0].baseline_id #=> String
     #   resp.instance_patch_states[0].snapshot_id #=> String
+    #   resp.instance_patch_states[0].install_override_list #=> String
     #   resp.instance_patch_states[0].owner_information #=> String
     #   resp.instance_patch_states[0].installed_count #=> Integer
     #   resp.instance_patch_states[0].installed_other_count #=> Integer
+    #   resp.instance_patch_states[0].installed_rejected_count #=> Integer
     #   resp.instance_patch_states[0].missing_count #=> Integer
     #   resp.instance_patch_states[0].failed_count #=> Integer
     #   resp.instance_patch_states[0].not_applicable_count #=> Integer
@@ -2371,7 +2499,7 @@ module Aws::SSM
     #   resp.patches[0].kb_id #=> String
     #   resp.patches[0].classification #=> String
     #   resp.patches[0].severity #=> String
-    #   resp.patches[0].state #=> String, one of "INSTALLED", "INSTALLED_OTHER", "MISSING", "NOT_APPLICABLE", "FAILED"
+    #   resp.patches[0].state #=> String, one of "INSTALLED", "INSTALLED_OTHER", "INSTALLED_REJECTED", "MISSING", "NOT_APPLICABLE", "FAILED"
     #   resp.patches[0].installed_time #=> Time
     #   resp.next_token #=> String
     #
@@ -2636,6 +2764,76 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Retrieves information about upcoming executions of a Maintenance
+    # Window.
+    #
+    # @option params [String] :window_id
+    #   The ID of the Maintenance Window to retrieve information about.
+    #
+    # @option params [Array<Types::Target>] :targets
+    #   The instance ID or key/value pair to retrieve information about.
+    #
+    # @option params [String] :resource_type
+    #   The type of resource you want to retrieve information about. For
+    #   example, "INSTANCE".
+    #
+    # @option params [Array<Types::PatchOrchestratorFilter>] :filters
+    #   Filters used to limit the range of results. For example, you can limit
+    #   Maintenance Window executions to only those scheduled before or after
+    #   a certain date and time.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #
+    # @return [Types::DescribeMaintenanceWindowScheduleResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMaintenanceWindowScheduleResult#scheduled_window_executions #scheduled_window_executions} => Array&lt;Types::ScheduledWindowExecution&gt;
+    #   * {Types::DescribeMaintenanceWindowScheduleResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_maintenance_window_schedule({
+    #     window_id: "MaintenanceWindowId",
+    #     targets: [
+    #       {
+    #         key: "TargetKey",
+    #         values: ["TargetValue"],
+    #       },
+    #     ],
+    #     resource_type: "INSTANCE", # accepts INSTANCE
+    #     filters: [
+    #       {
+    #         key: "PatchOrchestratorFilterKey",
+    #         values: ["PatchOrchestratorFilterValue"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scheduled_window_executions #=> Array
+    #   resp.scheduled_window_executions[0].window_id #=> String
+    #   resp.scheduled_window_executions[0].name #=> String
+    #   resp.scheduled_window_executions[0].execution_time #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowSchedule AWS API Documentation
+    #
+    # @overload describe_maintenance_window_schedule(params = {})
+    # @param [Hash] params ({})
+    def describe_maintenance_window_schedule(params = {}, options = {})
+      req = build_request(:describe_maintenance_window_schedule, params)
+      req.send_request(options)
+    end
+
     # Lists the targets registered with the Maintenance Window.
     #
     # @option params [required, String] :window_id
@@ -2812,6 +3010,11 @@ module Aws::SSM
     #   resp.window_identities[0].enabled #=> Boolean
     #   resp.window_identities[0].duration #=> Integer
     #   resp.window_identities[0].cutoff #=> Integer
+    #   resp.window_identities[0].schedule #=> String
+    #   resp.window_identities[0].schedule_timezone #=> String
+    #   resp.window_identities[0].end_date #=> String
+    #   resp.window_identities[0].start_date #=> String
+    #   resp.window_identities[0].next_execution_time #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindows AWS API Documentation
@@ -2820,6 +3023,60 @@ module Aws::SSM
     # @param [Hash] params ({})
     def describe_maintenance_windows(params = {}, options = {})
       req = build_request(:describe_maintenance_windows, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about the Maintenance Windows targets or tasks
+    # that an instance is associated with.
+    #
+    # @option params [required, Array<Types::Target>] :targets
+    #   The instance ID or key/value pair to retrieve information about.
+    #
+    # @option params [required, String] :resource_type
+    #   The type of resource you want to retrieve information about. For
+    #   example, "INSTANCE".
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #
+    # @return [Types::DescribeMaintenanceWindowsForTargetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMaintenanceWindowsForTargetResult#window_identities #window_identities} => Array&lt;Types::MaintenanceWindowIdentityForTarget&gt;
+    #   * {Types::DescribeMaintenanceWindowsForTargetResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_maintenance_windows_for_target({
+    #     targets: [ # required
+    #       {
+    #         key: "TargetKey",
+    #         values: ["TargetValue"],
+    #       },
+    #     ],
+    #     resource_type: "INSTANCE", # required, accepts INSTANCE
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.window_identities #=> Array
+    #   resp.window_identities[0].window_id #=> String
+    #   resp.window_identities[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowsForTarget AWS API Documentation
+    #
+    # @overload describe_maintenance_windows_for_target(params = {})
+    # @param [Hash] params ({})
+    def describe_maintenance_windows_for_target(params = {}, options = {})
+      req = build_request(:describe_maintenance_windows_for_target, params)
       req.send_request(options)
     end
 
@@ -2962,6 +3219,7 @@ module Aws::SSM
     #   * {Types::DescribePatchGroupStateResult#instances #instances} => Integer
     #   * {Types::DescribePatchGroupStateResult#instances_with_installed_patches #instances_with_installed_patches} => Integer
     #   * {Types::DescribePatchGroupStateResult#instances_with_installed_other_patches #instances_with_installed_other_patches} => Integer
+    #   * {Types::DescribePatchGroupStateResult#instances_with_installed_rejected_patches #instances_with_installed_rejected_patches} => Integer
     #   * {Types::DescribePatchGroupStateResult#instances_with_missing_patches #instances_with_missing_patches} => Integer
     #   * {Types::DescribePatchGroupStateResult#instances_with_failed_patches #instances_with_failed_patches} => Integer
     #   * {Types::DescribePatchGroupStateResult#instances_with_not_applicable_patches #instances_with_not_applicable_patches} => Integer
@@ -2977,6 +3235,7 @@ module Aws::SSM
     #   resp.instances #=> Integer
     #   resp.instances_with_installed_patches #=> Integer
     #   resp.instances_with_installed_other_patches #=> Integer
+    #   resp.instances_with_installed_rejected_patches #=> Integer
     #   resp.instances_with_missing_patches #=> Integer
     #   resp.instances_with_failed_patches #=> Integer
     #   resp.instances_with_not_applicable_patches #=> Integer
@@ -3046,7 +3305,7 @@ module Aws::SSM
     #
     # @option params [required, String] :state
     #   The session status to retrieve a list of sessions for. For example,
-    #   "active".
+    #   "Active".
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this call. The call also
@@ -3585,7 +3844,11 @@ module Aws::SSM
     #   * {Types::GetMaintenanceWindowResult#window_id #window_id} => String
     #   * {Types::GetMaintenanceWindowResult#name #name} => String
     #   * {Types::GetMaintenanceWindowResult#description #description} => String
+    #   * {Types::GetMaintenanceWindowResult#start_date #start_date} => String
+    #   * {Types::GetMaintenanceWindowResult#end_date #end_date} => String
     #   * {Types::GetMaintenanceWindowResult#schedule #schedule} => String
+    #   * {Types::GetMaintenanceWindowResult#schedule_timezone #schedule_timezone} => String
+    #   * {Types::GetMaintenanceWindowResult#next_execution_time #next_execution_time} => String
     #   * {Types::GetMaintenanceWindowResult#duration #duration} => Integer
     #   * {Types::GetMaintenanceWindowResult#cutoff #cutoff} => Integer
     #   * {Types::GetMaintenanceWindowResult#allow_unassociated_targets #allow_unassociated_targets} => Boolean
@@ -3604,7 +3867,11 @@ module Aws::SSM
     #   resp.window_id #=> String
     #   resp.name #=> String
     #   resp.description #=> String
+    #   resp.start_date #=> String
+    #   resp.end_date #=> String
     #   resp.schedule #=> String
+    #   resp.schedule_timezone #=> String
+    #   resp.next_execution_time #=> String
     #   resp.duration #=> Integer
     #   resp.cutoff #=> Integer
     #   resp.allow_unassociated_targets #=> Boolean
@@ -4130,6 +4397,7 @@ module Aws::SSM
     #   * {Types::GetPatchBaselineResult#approved_patches_compliance_level #approved_patches_compliance_level} => String
     #   * {Types::GetPatchBaselineResult#approved_patches_enable_non_security #approved_patches_enable_non_security} => Boolean
     #   * {Types::GetPatchBaselineResult#rejected_patches #rejected_patches} => Array&lt;String&gt;
+    #   * {Types::GetPatchBaselineResult#rejected_patches_action #rejected_patches_action} => String
     #   * {Types::GetPatchBaselineResult#patch_groups #patch_groups} => Array&lt;String&gt;
     #   * {Types::GetPatchBaselineResult#created_date #created_date} => Time
     #   * {Types::GetPatchBaselineResult#modified_date #modified_date} => Time
@@ -4165,6 +4433,7 @@ module Aws::SSM
     #   resp.approved_patches_enable_non_security #=> Boolean
     #   resp.rejected_patches #=> Array
     #   resp.rejected_patches[0] #=> String
+    #   resp.rejected_patches_action #=> String, one of "ALLOW_AS_DEPENDENCY", "BLOCK"
     #   resp.patch_groups #=> Array
     #   resp.patch_groups[0] #=> String
     #   resp.created_date #=> Time
@@ -4341,6 +4610,9 @@ module Aws::SSM
     #   resp.association_versions[0].output_location.s3_location.output_s3_bucket_name #=> String
     #   resp.association_versions[0].output_location.s3_location.output_s3_key_prefix #=> String
     #   resp.association_versions[0].association_name #=> String
+    #   resp.association_versions[0].max_errors #=> String
+    #   resp.association_versions[0].max_concurrency #=> String
+    #   resp.association_versions[0].compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociationVersions AWS API Documentation
@@ -5856,7 +6128,7 @@ module Aws::SSM
     #   maximum of 50 IDs. If you prefer not to list individual instance IDs,
     #   you can instead send commands to a fleet of instances using the
     #   Targets parameter, which accepts EC2 tags. For more information about
-    #   how to use Targets, see [Sending Commands to a Fleet][1] in the *AWS
+    #   how to use targets, see [Sending Commands to a Fleet][1] in the *AWS
     #   Systems Manager User Guide*.
     #
     #
@@ -5867,7 +6139,7 @@ module Aws::SSM
     #   (Optional) An array of search criteria that targets instances using a
     #   Key,Value combination that you specify. Targets is required if you
     #   don't provide one or more instance IDs in the call. For more
-    #   information about how to use Targets, see [Sending Commands to a
+    #   information about how to use targets, see [Sending Commands to a
     #   Fleet][1] in the *AWS Systems Manager User Guide*.
     #
     #
@@ -6095,7 +6367,7 @@ module Aws::SSM
     #
     # @option params [String] :target_parameter_name
     #   The name of the parameter used as the target resource for the
-    #   rate-controlled execution. Required if you specify Targets.
+    #   rate-controlled execution. Required if you specify targets.
     #
     # @option params [Array<Types::Target>] :targets
     #   A key-value mapping to target resources. Required if you specify
@@ -6324,6 +6596,38 @@ module Aws::SSM
     #   ensure that this request succeeds, either specify `$LATEST`, or omit
     #   this parameter.
     #
+    # @option params [String] :max_errors
+    #   The number of errors that are allowed before the system stops sending
+    #   requests to run the association on additional targets. You can specify
+    #   either an absolute number of errors, for example 10, or a percentage
+    #   of the target set, for example 10%. If you specify 3, for example, the
+    #   system stops sending requests when the fourth error is received. If
+    #   you specify 0, then the system stops sending requests after the first
+    #   error is returned. If you run an association on 50 instances and set
+    #   MaxError to 10%, then the system stops sending the request when the
+    #   sixth error is received.
+    #
+    #   Executions that are already running an association when MaxErrors is
+    #   reached are allowed to complete, but some of these executions may fail
+    #   as well. If you need to ensure that there won't be more than
+    #   max-errors failed executions, set MaxConcurrency to 1 so that
+    #   executions proceed one at a time.
+    #
+    # @option params [String] :max_concurrency
+    #   The maximum number of targets allowed to run the association at the
+    #   same time. You can specify a number, for example 10, or a percentage
+    #   of the target set, for example 10%. The default value is 100%, which
+    #   means all targets run the association at the same time.
+    #
+    #   If a new instance starts and attempts to execute an association while
+    #   Systems Manager is executing MaxConcurrency associations, the
+    #   association is allowed to run. During the next association interval,
+    #   the new instance will process its association within the limit
+    #   specified for MaxConcurrency.
+    #
+    # @option params [String] :compliance_severity
+    #   The severity level to assign to the association.
+    #
     # @return [Types::UpdateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -6353,6 +6657,9 @@ module Aws::SSM
     #     ],
     #     association_name: "AssociationName",
     #     association_version: "AssociationVersion",
+    #     max_errors: "MaxErrors",
+    #     max_concurrency: "MaxConcurrency",
+    #     compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #   })
     #
     # @example Response structure
@@ -6386,6 +6693,9 @@ module Aws::SSM
     #   resp.association_description.last_execution_date #=> Time
     #   resp.association_description.last_successful_execution_date #=> Time
     #   resp.association_description.association_name #=> String
+    #   resp.association_description.max_errors #=> String
+    #   resp.association_description.max_concurrency #=> String
+    #   resp.association_description.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociation AWS API Documentation
     #
@@ -6456,6 +6766,9 @@ module Aws::SSM
     #   resp.association_description.last_execution_date #=> Time
     #   resp.association_description.last_successful_execution_date #=> Time
     #   resp.association_description.association_name #=> String
+    #   resp.association_description.max_errors #=> String
+    #   resp.association_description.max_concurrency #=> String
+    #   resp.association_description.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationStatus AWS API Documentation
     #
@@ -6582,9 +6895,35 @@ module Aws::SSM
     # @option params [String] :description
     #   An optional description for the update request.
     #
+    # @option params [String] :start_date
+    #   The time zone that the scheduled Maintenance Window executions are
+    #   based on, in Internet Assigned Numbers Authority (IANA) format. For
+    #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul". For
+    #   more information, see the [Time Zone Database][1] on the IANA website.
+    #
+    #
+    #
+    #   [1]: https://www.iana.org/time-zones
+    #
+    # @option params [String] :end_date
+    #   The date and time, in ISO-8601 Extended format, for when you want the
+    #   Maintenance Window to become inactive. EndDate allows you to set a
+    #   date and time in the future when the Maintenance Window will no longer
+    #   run.
+    #
     # @option params [String] :schedule
     #   The schedule of the Maintenance Window in the form of a cron or rate
     #   expression.
+    #
+    # @option params [String] :schedule_timezone
+    #   The time zone that the scheduled Maintenance Window executions are
+    #   based on, in Internet Assigned Numbers Authority (IANA) format. For
+    #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul". For
+    #   more information, see the [Time Zone Database][1] on the IANA website.
+    #
+    #
+    #
+    #   [1]: https://www.iana.org/time-zones
     #
     # @option params [Integer] :duration
     #   The duration of the Maintenance Window in hours.
@@ -6610,7 +6949,10 @@ module Aws::SSM
     #   * {Types::UpdateMaintenanceWindowResult#window_id #window_id} => String
     #   * {Types::UpdateMaintenanceWindowResult#name #name} => String
     #   * {Types::UpdateMaintenanceWindowResult#description #description} => String
+    #   * {Types::UpdateMaintenanceWindowResult#start_date #start_date} => String
+    #   * {Types::UpdateMaintenanceWindowResult#end_date #end_date} => String
     #   * {Types::UpdateMaintenanceWindowResult#schedule #schedule} => String
+    #   * {Types::UpdateMaintenanceWindowResult#schedule_timezone #schedule_timezone} => String
     #   * {Types::UpdateMaintenanceWindowResult#duration #duration} => Integer
     #   * {Types::UpdateMaintenanceWindowResult#cutoff #cutoff} => Integer
     #   * {Types::UpdateMaintenanceWindowResult#allow_unassociated_targets #allow_unassociated_targets} => Boolean
@@ -6622,7 +6964,10 @@ module Aws::SSM
     #     window_id: "MaintenanceWindowId", # required
     #     name: "MaintenanceWindowName",
     #     description: "MaintenanceWindowDescription",
+    #     start_date: "MaintenanceWindowStringDateTime",
+    #     end_date: "MaintenanceWindowStringDateTime",
     #     schedule: "MaintenanceWindowSchedule",
+    #     schedule_timezone: "MaintenanceWindowTimezone",
     #     duration: 1,
     #     cutoff: 1,
     #     allow_unassociated_targets: false,
@@ -6635,7 +6980,10 @@ module Aws::SSM
     #   resp.window_id #=> String
     #   resp.name #=> String
     #   resp.description #=> String
+    #   resp.start_date #=> String
+    #   resp.end_date #=> String
     #   resp.schedule #=> String
+    #   resp.schedule_timezone #=> String
     #   resp.duration #=> Integer
     #   resp.cutoff #=> Integer
     #   resp.allow_unassociated_targets #=> Boolean
@@ -7071,6 +7419,22 @@ module Aws::SSM
     #
     #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #
+    # @option params [String] :rejected_patches_action
+    #   The action for Patch Manager to take on patches included in the
+    #   RejectedPackages list.
+    #
+    #   * **ALLOW\_AS\_DEPENDENCY**\: A package in the Rejected patches list
+    #     is installed only if it is a dependency of another package. It is
+    #     considered compliant with the patch baseline, and its status is
+    #     reported as *InstalledOther*. This is the default action if no
+    #     option is specified.
+    #
+    #   * **BLOCK**\: Packages in the RejectedPatches list, and packages that
+    #     include them as dependencies, are not installed under any
+    #     circumstances. If a package was installed before it was added to the
+    #     Rejected patches list, it is considered non-compliant with the patch
+    #     baseline, and its status is reported as *InstalledRejected*.
+    #
     # @option params [String] :description
     #   A description of the patch baseline.
     #
@@ -7095,6 +7459,7 @@ module Aws::SSM
     #   * {Types::UpdatePatchBaselineResult#approved_patches_compliance_level #approved_patches_compliance_level} => String
     #   * {Types::UpdatePatchBaselineResult#approved_patches_enable_non_security #approved_patches_enable_non_security} => Boolean
     #   * {Types::UpdatePatchBaselineResult#rejected_patches #rejected_patches} => Array&lt;String&gt;
+    #   * {Types::UpdatePatchBaselineResult#rejected_patches_action #rejected_patches_action} => String
     #   * {Types::UpdatePatchBaselineResult#created_date #created_date} => Time
     #   * {Types::UpdatePatchBaselineResult#modified_date #modified_date} => Time
     #   * {Types::UpdatePatchBaselineResult#description #description} => String
@@ -7134,6 +7499,7 @@ module Aws::SSM
     #     approved_patches_compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #     approved_patches_enable_non_security: false,
     #     rejected_patches: ["PatchId"],
+    #     rejected_patches_action: "ALLOW_AS_DEPENDENCY", # accepts ALLOW_AS_DEPENDENCY, BLOCK
     #     description: "BaselineDescription",
     #     sources: [
     #       {
@@ -7168,6 +7534,7 @@ module Aws::SSM
     #   resp.approved_patches_enable_non_security #=> Boolean
     #   resp.rejected_patches #=> Array
     #   resp.rejected_patches[0] #=> String
+    #   resp.rejected_patches_action #=> String, one of "ALLOW_AS_DEPENDENCY", "BLOCK"
     #   resp.created_date #=> Time
     #   resp.modified_date #=> Time
     #   resp.description #=> String
@@ -7199,7 +7566,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

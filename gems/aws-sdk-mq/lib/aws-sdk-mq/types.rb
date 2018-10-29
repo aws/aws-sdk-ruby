@@ -19,7 +19,8 @@ module Aws::MQ
     #   @return [Array<String>]
     #
     # @!attribute [rw] ip_address
-    #   The IP address of the ENI attached to the broker.
+    #   The IP address of the Elastic Network Interface (ENI) attached to
+    #   the broker.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/BrokerInstance AWS API Documentation
@@ -239,7 +240,7 @@ module Aws::MQ
     #
     # @!attribute [rw] engine_version
     #   Required. The version of the broker engine. Note: Currently, Amazon
-    #   MQ supports only 5.15.0.
+    #   MQ supports only 5.15.6 and 5.15.0.
     #   @return [String]
     #
     # @!attribute [rw] host_instance_type
@@ -451,7 +452,7 @@ module Aws::MQ
     #
     # @!attribute [rw] engine_version
     #   Required. The version of the broker engine. Note: Currently, Amazon
-    #   MQ supports only 5.15.0.
+    #   MQ supports only 5.15.6 and 5.15.0.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -698,7 +699,7 @@ module Aws::MQ
     class DeleteUserResponse < Aws::EmptyStructure; end
 
     # The version of the broker engine. Note: Currently, Amazon MQ supports
-    # only 5.15.0.
+    # only 5.15.6 and 5.15.0.
     #
     # @!attribute [rw] auto_minor_version_upgrade
     #   Required. Enables automatic upgrades to new minor versions for
@@ -749,7 +750,7 @@ module Aws::MQ
     #
     # @!attribute [rw] engine_version
     #   The version of the broker engine. Note: Currently, Amazon MQ
-    #   supports only 5.15.0.
+    #   supports only 5.15.6 and 5.15.0.
     #   @return [String]
     #
     # @!attribute [rw] host_instance_type
@@ -764,6 +765,10 @@ module Aws::MQ
     # @!attribute [rw] maintenance_window_start_time
     #   The parameters that determine the WeeklyStartTime.
     #   @return [Types::WeeklyStartTime]
+    #
+    # @!attribute [rw] pending_engine_version
+    #   The version of the broker engine to upgrade to.
+    #   @return [String]
     #
     # @!attribute [rw] publicly_accessible
     #   Required. Enables connections from applications outside of the VPC
@@ -804,6 +809,7 @@ module Aws::MQ
       :host_instance_type,
       :logs,
       :maintenance_window_start_time,
+      :pending_engine_version,
       :publicly_accessible,
       :security_groups,
       :subnet_ids,
@@ -879,6 +885,9 @@ module Aws::MQ
     #   begins to apply pending updates or patches to the broker.
     #   @return [Types::WeeklyStartTime]
     #
+    # @!attribute [rw] pending_engine_version
+    #   @return [String]
+    #
     # @!attribute [rw] publicly_accessible
     #   @return [Boolean]
     #
@@ -908,6 +917,7 @@ module Aws::MQ
       :host_instance_type,
       :logs,
       :maintenance_window_start_time,
+      :pending_engine_version,
       :publicly_accessible,
       :security_groups,
       :subnet_ids,
@@ -1472,7 +1482,8 @@ module Aws::MQ
     #   @return [Boolean]
     #
     # @!attribute [rw] audit_log_group
-    #   Location of CloudWatch Log group where audit logs will be sent.
+    #   The location of the CloudWatch Logs log group where audit logs are
+    #   sent.
     #   @return [String]
     #
     # @!attribute [rw] general
@@ -1480,7 +1491,8 @@ module Aws::MQ
     #   @return [Boolean]
     #
     # @!attribute [rw] general_log_group
-    #   Location of CloudWatch Log group where general logs will be sent.
+    #   The location of the CloudWatch Logs log group where general logs are
+    #   sent.
     #   @return [String]
     #
     # @!attribute [rw] pending
@@ -1567,9 +1579,21 @@ module Aws::MQ
 
     # Updates the broker using the specified properties.
     #
+    # @!attribute [rw] auto_minor_version_upgrade
+    #   Enables automatic upgrades to new minor versions for brokers, as
+    #   Apache releases the versions. The automatic upgrades occur during
+    #   the maintenance window of the broker or after a manual broker
+    #   reboot.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] configuration
     #   A list of information about the configuration.
     #   @return [Types::ConfigurationId]
+    #
+    # @!attribute [rw] engine_version
+    #   The version of the broker engine. Note: Currently, Amazon MQ
+    #   supports only 5.15.6 and 5.15.0.
+    #   @return [String]
     #
     # @!attribute [rw] logs
     #   Enables Amazon CloudWatch logging for brokers.
@@ -1578,12 +1602,19 @@ module Aws::MQ
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerInput AWS API Documentation
     #
     class UpdateBrokerInput < Struct.new(
+      :auto_minor_version_upgrade,
       :configuration,
+      :engine_version,
       :logs)
       include Aws::Structure
     end
 
     # Returns information about the updated broker.
+    #
+    # @!attribute [rw] auto_minor_version_upgrade
+    #   The new value of automatic upgrades to new minor version for
+    #   brokers.
+    #   @return [Boolean]
     #
     # @!attribute [rw] broker_id
     #   Required. The unique ID that Amazon MQ generates for the broker.
@@ -1593,6 +1624,10 @@ module Aws::MQ
     #   The ID of the updated configuration.
     #   @return [Types::ConfigurationId]
     #
+    # @!attribute [rw] engine_version
+    #   The version of the broker engine to upgrade to.
+    #   @return [String]
+    #
     # @!attribute [rw] logs
     #   The list of information about logs to be enabled for the specified
     #   broker.
@@ -1601,8 +1636,10 @@ module Aws::MQ
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerOutput AWS API Documentation
     #
     class UpdateBrokerOutput < Struct.new(
+      :auto_minor_version_upgrade,
       :broker_id,
       :configuration,
+      :engine_version,
       :logs)
       include Aws::Structure
     end
@@ -1611,16 +1648,21 @@ module Aws::MQ
     #   data as a hash:
     #
     #       {
+    #         auto_minor_version_upgrade: false,
     #         broker_id: "__string", # required
     #         configuration: {
     #           id: "__string",
     #           revision: 1,
     #         },
+    #         engine_version: "__string",
     #         logs: {
     #           audit: false,
     #           general: false,
     #         },
     #       }
+    #
+    # @!attribute [rw] auto_minor_version_upgrade
+    #   @return [Boolean]
     #
     # @!attribute [rw] broker_id
     #   @return [String]
@@ -1628,6 +1670,9 @@ module Aws::MQ
     # @!attribute [rw] configuration
     #   A list of information about the configuration.
     #   @return [Types::ConfigurationId]
+    #
+    # @!attribute [rw] engine_version
+    #   @return [String]
     #
     # @!attribute [rw] logs
     #   The list of information about logs to be enabled for the specified
@@ -1637,18 +1682,26 @@ module Aws::MQ
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerRequest AWS API Documentation
     #
     class UpdateBrokerRequest < Struct.new(
+      :auto_minor_version_upgrade,
       :broker_id,
       :configuration,
+      :engine_version,
       :logs)
       include Aws::Structure
     end
 
+    # @!attribute [rw] auto_minor_version_upgrade
+    #   @return [Boolean]
+    #
     # @!attribute [rw] broker_id
     #   @return [String]
     #
     # @!attribute [rw] configuration
     #   A list of information about the configuration.
     #   @return [Types::ConfigurationId]
+    #
+    # @!attribute [rw] engine_version
+    #   @return [String]
     #
     # @!attribute [rw] logs
     #   The list of information about logs to be enabled for the specified
@@ -1658,8 +1711,10 @@ module Aws::MQ
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerResponse AWS API Documentation
     #
     class UpdateBrokerResponse < Struct.new(
+      :auto_minor_version_upgrade,
       :broker_id,
       :configuration,
+      :engine_version,
       :logs)
       include Aws::Structure
     end

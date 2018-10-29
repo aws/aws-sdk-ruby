@@ -71,6 +71,7 @@ module Aws::Glue
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     ConcurrentRunsExceededException = Shapes::StructureShape.new(name: 'ConcurrentRunsExceededException')
     Condition = Shapes::StructureShape.new(name: 'Condition')
+    ConditionCheckFailureException = Shapes::StructureShape.new(name: 'ConditionCheckFailureException')
     ConditionList = Shapes::ListShape.new(name: 'ConditionList')
     Connection = Shapes::StructureShape.new(name: 'Connection')
     ConnectionInput = Shapes::StructureShape.new(name: 'ConnectionInput')
@@ -144,6 +145,8 @@ module Aws::Glue
     DeleteJobResponse = Shapes::StructureShape.new(name: 'DeleteJobResponse')
     DeletePartitionRequest = Shapes::StructureShape.new(name: 'DeletePartitionRequest')
     DeletePartitionResponse = Shapes::StructureShape.new(name: 'DeletePartitionResponse')
+    DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
+    DeleteResourcePolicyResponse = Shapes::StructureShape.new(name: 'DeleteResourcePolicyResponse')
     DeleteSecurityConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteSecurityConfigurationRequest')
     DeleteSecurityConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteSecurityConfigurationResponse')
     DeleteTableRequest = Shapes::StructureShape.new(name: 'DeleteTableRequest')
@@ -169,6 +172,7 @@ module Aws::Glue
     ErrorString = Shapes::StringShape.new(name: 'ErrorString')
     ExecutionProperty = Shapes::StructureShape.new(name: 'ExecutionProperty')
     ExecutionTime = Shapes::IntegerShape.new(name: 'ExecutionTime')
+    ExistCondition = Shapes::StringShape.new(name: 'ExistCondition')
     FieldType = Shapes::StringShape.new(name: 'FieldType')
     FilterString = Shapes::StringShape.new(name: 'FilterString')
     FormatString = Shapes::StringShape.new(name: 'FormatString')
@@ -191,6 +195,8 @@ module Aws::Glue
     GetCrawlerResponse = Shapes::StructureShape.new(name: 'GetCrawlerResponse')
     GetCrawlersRequest = Shapes::StructureShape.new(name: 'GetCrawlersRequest')
     GetCrawlersResponse = Shapes::StructureShape.new(name: 'GetCrawlersResponse')
+    GetDataCatalogEncryptionSettingsRequest = Shapes::StructureShape.new(name: 'GetDataCatalogEncryptionSettingsRequest')
+    GetDataCatalogEncryptionSettingsResponse = Shapes::StructureShape.new(name: 'GetDataCatalogEncryptionSettingsResponse')
     GetDatabaseRequest = Shapes::StructureShape.new(name: 'GetDatabaseRequest')
     GetDatabaseResponse = Shapes::StructureShape.new(name: 'GetDatabaseResponse')
     GetDatabasesRequest = Shapes::StructureShape.new(name: 'GetDatabasesRequest')
@@ -217,6 +223,8 @@ module Aws::Glue
     GetPartitionsResponse = Shapes::StructureShape.new(name: 'GetPartitionsResponse')
     GetPlanRequest = Shapes::StructureShape.new(name: 'GetPlanRequest')
     GetPlanResponse = Shapes::StructureShape.new(name: 'GetPlanResponse')
+    GetResourcePolicyRequest = Shapes::StructureShape.new(name: 'GetResourcePolicyRequest')
+    GetResourcePolicyResponse = Shapes::StructureShape.new(name: 'GetResourcePolicyResponse')
     GetSecurityConfigurationRequest = Shapes::StructureShape.new(name: 'GetSecurityConfigurationRequest')
     GetSecurityConfigurationResponse = Shapes::StructureShape.new(name: 'GetSecurityConfigurationResponse')
     GetSecurityConfigurationsRequest = Shapes::StructureShape.new(name: 'GetSecurityConfigurationsRequest')
@@ -241,6 +249,7 @@ module Aws::Glue
     GlueEncryptionException = Shapes::StructureShape.new(name: 'GlueEncryptionException')
     GrokClassifier = Shapes::StructureShape.new(name: 'GrokClassifier')
     GrokPattern = Shapes::StringShape.new(name: 'GrokPattern')
+    HashString = Shapes::StringShape.new(name: 'HashString')
     IdString = Shapes::StringShape.new(name: 'IdString')
     IdempotentParameterMismatchException = Shapes::StructureShape.new(name: 'IdempotentParameterMismatchException')
     ImportCatalogToGlueRequest = Shapes::StructureShape.new(name: 'ImportCatalogToGlueRequest')
@@ -309,6 +318,7 @@ module Aws::Glue
     Path = Shapes::StringShape.new(name: 'Path')
     PathList = Shapes::ListShape.new(name: 'PathList')
     PhysicalConnectionRequirements = Shapes::StructureShape.new(name: 'PhysicalConnectionRequirements')
+    PolicyJsonString = Shapes::StringShape.new(name: 'PolicyJsonString')
     Predecessor = Shapes::StructureShape.new(name: 'Predecessor')
     PredecessorList = Shapes::ListShape.new(name: 'PredecessorList')
     Predicate = Shapes::StructureShape.new(name: 'Predicate')
@@ -317,6 +327,8 @@ module Aws::Glue
     PublicKeysList = Shapes::ListShape.new(name: 'PublicKeysList')
     PutDataCatalogEncryptionSettingsRequest = Shapes::StructureShape.new(name: 'PutDataCatalogEncryptionSettingsRequest')
     PutDataCatalogEncryptionSettingsResponse = Shapes::StructureShape.new(name: 'PutDataCatalogEncryptionSettingsResponse')
+    PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
+    PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
     PythonScript = Shapes::StringShape.new(name: 'PythonScript')
     ResetJobBookmarkRequest = Shapes::StructureShape.new(name: 'ResetJobBookmarkRequest')
     ResetJobBookmarkResponse = Shapes::StructureShape.new(name: 'ResetJobBookmarkResponse')
@@ -857,6 +869,11 @@ module Aws::Glue
 
     DeletePartitionResponse.struct_class = Types::DeletePartitionResponse
 
+    DeleteResourcePolicyRequest.add_member(:policy_hash_condition, Shapes::ShapeRef.new(shape: HashString, location_name: "PolicyHashCondition"))
+    DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
+
+    DeleteResourcePolicyResponse.struct_class = Types::DeleteResourcePolicyResponse
+
     DeleteSecurityConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     DeleteSecurityConfigurationRequest.struct_class = Types::DeleteSecurityConfigurationRequest
 
@@ -1010,6 +1027,12 @@ module Aws::Glue
     GetCrawlersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetCrawlersResponse.struct_class = Types::GetCrawlersResponse
 
+    GetDataCatalogEncryptionSettingsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    GetDataCatalogEncryptionSettingsRequest.struct_class = Types::GetDataCatalogEncryptionSettingsRequest
+
+    GetDataCatalogEncryptionSettingsResponse.add_member(:data_catalog_encryption_settings, Shapes::ShapeRef.new(shape: DataCatalogEncryptionSettings, location_name: "DataCatalogEncryptionSettings"))
+    GetDataCatalogEncryptionSettingsResponse.struct_class = Types::GetDataCatalogEncryptionSettingsResponse
+
     GetDatabaseRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     GetDatabaseRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     GetDatabaseRequest.struct_class = Types::GetDatabaseRequest
@@ -1118,6 +1141,14 @@ module Aws::Glue
     GetPlanResponse.add_member(:python_script, Shapes::ShapeRef.new(shape: PythonScript, location_name: "PythonScript"))
     GetPlanResponse.add_member(:scala_code, Shapes::ShapeRef.new(shape: ScalaCode, location_name: "ScalaCode"))
     GetPlanResponse.struct_class = Types::GetPlanResponse
+
+    GetResourcePolicyRequest.struct_class = Types::GetResourcePolicyRequest
+
+    GetResourcePolicyResponse.add_member(:policy_in_json, Shapes::ShapeRef.new(shape: PolicyJsonString, location_name: "PolicyInJson"))
+    GetResourcePolicyResponse.add_member(:policy_hash, Shapes::ShapeRef.new(shape: HashString, location_name: "PolicyHash"))
+    GetResourcePolicyResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateTime"))
+    GetResourcePolicyResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdateTime"))
+    GetResourcePolicyResponse.struct_class = Types::GetResourcePolicyResponse
 
     GetSecurityConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     GetSecurityConfigurationRequest.struct_class = Types::GetSecurityConfigurationRequest
@@ -1402,6 +1433,14 @@ module Aws::Glue
     PutDataCatalogEncryptionSettingsRequest.struct_class = Types::PutDataCatalogEncryptionSettingsRequest
 
     PutDataCatalogEncryptionSettingsResponse.struct_class = Types::PutDataCatalogEncryptionSettingsResponse
+
+    PutResourcePolicyRequest.add_member(:policy_in_json, Shapes::ShapeRef.new(shape: PolicyJsonString, required: true, location_name: "PolicyInJson"))
+    PutResourcePolicyRequest.add_member(:policy_hash_condition, Shapes::ShapeRef.new(shape: HashString, location_name: "PolicyHashCondition"))
+    PutResourcePolicyRequest.add_member(:policy_exists_condition, Shapes::ShapeRef.new(shape: ExistCondition, location_name: "PolicyExistsCondition"))
+    PutResourcePolicyRequest.struct_class = Types::PutResourcePolicyRequest
+
+    PutResourcePolicyResponse.add_member(:policy_hash, Shapes::ShapeRef.new(shape: HashString, location_name: "PolicyHash"))
+    PutResourcePolicyResponse.struct_class = Types::PutResourcePolicyResponse
 
     ResetJobBookmarkRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "JobName"))
     ResetJobBookmarkRequest.struct_class = Types::ResetJobBookmarkRequest
@@ -2068,6 +2107,19 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
       end)
 
+      api.add_operation(:delete_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ConditionCheckFailureException)
+      end)
+
       api.add_operation(:delete_security_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteSecurityConfiguration"
         o.http_method = "POST"
@@ -2231,6 +2283,17 @@ module Aws::Glue
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_data_catalog_encryption_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDataCatalogEncryptionSettings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDataCatalogEncryptionSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDataCatalogEncryptionSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
       end)
 
       api.add_operation(:get_database, Seahorse::Model::Operation.new.tap do |o|
@@ -2420,6 +2483,18 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
       end)
 
+      api.add_operation(:get_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
       api.add_operation(:get_security_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetSecurityConfiguration"
         o.http_method = "POST"
@@ -2589,6 +2664,19 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:put_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ConditionCheckFailureException)
       end)
 
       api.add_operation(:reset_job_bookmark, Seahorse::Model::Operation.new.tap do |o|

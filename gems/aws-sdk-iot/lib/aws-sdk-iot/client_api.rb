@@ -27,6 +27,7 @@ module Aws::IoT
     AlertTargets = Shapes::MapShape.new(name: 'AlertTargets')
     AllowAutoRegistration = Shapes::BooleanShape.new(name: 'AllowAutoRegistration')
     Allowed = Shapes::StructureShape.new(name: 'Allowed')
+    ApproximateSecondsBeforeTimedOut = Shapes::IntegerShape.new(name: 'ApproximateSecondsBeforeTimedOut')
     AscendingOrder = Shapes::BooleanShape.new(name: 'AscendingOrder')
     AssociateTargetsWithJobRequest = Shapes::StructureShape.new(name: 'AssociateTargetsWithJobRequest')
     AssociateTargetsWithJobResponse = Shapes::StructureShape.new(name: 'AssociateTargetsWithJobResponse')
@@ -328,6 +329,7 @@ module Aws::IoT
     ImplicitDeny = Shapes::StructureShape.new(name: 'ImplicitDeny')
     InProgressChecksCount = Shapes::IntegerShape.new(name: 'InProgressChecksCount')
     InProgressThings = Shapes::IntegerShape.new(name: 'InProgressThings')
+    InProgressTimeoutInMinutes = Shapes::IntegerShape.new(name: 'InProgressTimeoutInMinutes')
     IndexName = Shapes::StringShape.new(name: 'IndexName')
     IndexNamesList = Shapes::ListShape.new(name: 'IndexNamesList')
     IndexNotReadyException = Shapes::StructureShape.new(name: 'IndexNotReadyException')
@@ -691,6 +693,8 @@ module Aws::IoT
     ThingTypeName = Shapes::StringShape.new(name: 'ThingTypeName')
     ThingTypeProperties = Shapes::StructureShape.new(name: 'ThingTypeProperties')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    TimedOutThings = Shapes::IntegerShape.new(name: 'TimedOutThings')
+    TimeoutConfig = Shapes::StructureShape.new(name: 'TimeoutConfig')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Token = Shapes::StringShape.new(name: 'Token')
     TokenKeyName = Shapes::StringShape.new(name: 'TokenKeyName')
@@ -1077,6 +1081,7 @@ module Aws::IoT
     CreateJobRequest.add_member(:presigned_url_config, Shapes::ShapeRef.new(shape: PresignedUrlConfig, location_name: "presignedUrlConfig"))
     CreateJobRequest.add_member(:target_selection, Shapes::ShapeRef.new(shape: TargetSelection, location_name: "targetSelection"))
     CreateJobRequest.add_member(:job_executions_rollout_config, Shapes::ShapeRef.new(shape: JobExecutionsRolloutConfig, location_name: "jobExecutionsRolloutConfig"))
+    CreateJobRequest.add_member(:timeout_config, Shapes::ShapeRef.new(shape: TimeoutConfig, location_name: "timeoutConfig"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
 
     CreateJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, location_name: "jobArn"))
@@ -1665,6 +1670,7 @@ module Aws::IoT
     Job.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateType, location_name: "lastUpdatedAt"))
     Job.add_member(:completed_at, Shapes::ShapeRef.new(shape: DateType, location_name: "completedAt"))
     Job.add_member(:job_process_details, Shapes::ShapeRef.new(shape: JobProcessDetails, location_name: "jobProcessDetails"))
+    Job.add_member(:timeout_config, Shapes::ShapeRef.new(shape: TimeoutConfig, location_name: "timeoutConfig"))
     Job.struct_class = Types::Job
 
     JobExecution.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
@@ -1677,6 +1683,7 @@ module Aws::IoT
     JobExecution.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateType, location_name: "lastUpdatedAt"))
     JobExecution.add_member(:execution_number, Shapes::ShapeRef.new(shape: ExecutionNumber, location_name: "executionNumber"))
     JobExecution.add_member(:version_number, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "versionNumber"))
+    JobExecution.add_member(:approximate_seconds_before_timed_out, Shapes::ShapeRef.new(shape: ApproximateSecondsBeforeTimedOut, location_name: "approximateSecondsBeforeTimedOut"))
     JobExecution.struct_class = Types::JobExecution
 
     JobExecutionStatusDetails.add_member(:details_map, Shapes::ShapeRef.new(shape: DetailsMap, location_name: "detailsMap"))
@@ -1712,6 +1719,7 @@ module Aws::IoT
     JobProcessDetails.add_member(:number_of_queued_things, Shapes::ShapeRef.new(shape: QueuedThings, location_name: "numberOfQueuedThings"))
     JobProcessDetails.add_member(:number_of_in_progress_things, Shapes::ShapeRef.new(shape: InProgressThings, location_name: "numberOfInProgressThings"))
     JobProcessDetails.add_member(:number_of_removed_things, Shapes::ShapeRef.new(shape: RemovedThings, location_name: "numberOfRemovedThings"))
+    JobProcessDetails.add_member(:number_of_timed_out_things, Shapes::ShapeRef.new(shape: TimedOutThings, location_name: "numberOfTimedOutThings"))
     JobProcessDetails.struct_class = Types::JobProcessDetails
 
     JobSummary.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, location_name: "jobArn"))
@@ -2557,6 +2565,9 @@ module Aws::IoT
     ThingTypeProperties.add_member(:thing_type_description, Shapes::ShapeRef.new(shape: ThingTypeDescription, location_name: "thingTypeDescription"))
     ThingTypeProperties.add_member(:searchable_attributes, Shapes::ShapeRef.new(shape: SearchableAttributes, location_name: "searchableAttributes"))
     ThingTypeProperties.struct_class = Types::ThingTypeProperties
+
+    TimeoutConfig.add_member(:in_progress_timeout_in_minutes, Shapes::ShapeRef.new(shape: InProgressTimeoutInMinutes, location_name: "inProgressTimeoutInMinutes"))
+    TimeoutConfig.struct_class = Types::TimeoutConfig
 
     TopicRule.add_member(:rule_name, Shapes::ShapeRef.new(shape: RuleName, location_name: "ruleName"))
     TopicRule.add_member(:sql, Shapes::ShapeRef.new(shape: SQL, location_name: "sql"))

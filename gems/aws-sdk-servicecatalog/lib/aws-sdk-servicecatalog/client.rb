@@ -54,131 +54,133 @@ module Aws::ServiceCatalog
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [] :client_side_monitoring (false)
-    #   When `true`, client-side metrics will be collected for all API requests from
-    #   this client.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [] :client_side_monitoring_client_id ("")
-    #   Allows you to provide an identifier for this client which will be attached to
-    #   all generated client side metrics. Defaults to an empty string.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [] :client_side_monitoring_port (31000)
-    #   Required for publishing client metrics. The port that the client side monitoring
-    #   agent is running on, where client metrics will be published via UDP.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
-    #   Allows you to provide a custom client-side monitoring publisher class. By default,
-    #   will use the Client Side Monitoring Agent Publisher.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [String] :secret_access_key
     #
-    # @option options [String] :session_token
+    #   @option options [String] :session_token
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -298,6 +300,47 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
+    # Associates a self-service action with a provisioning artifact.
+    #
+    # @option params [required, String] :product_id
+    #   The product identifier. For example, `prod-abcdzk7xy33qa`.
+    #
+    # @option params [required, String] :provisioning_artifact_id
+    #   The identifier of the provisioning artifact. For example,
+    #   `pa-4abcdjnxjj6ne`.
+    #
+    # @option params [required, String] :service_action_id
+    #   The self-service action identifier. For example, `act-fs7abcd89wxyz`.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_service_action_with_provisioning_artifact({
+    #     product_id: "Id", # required
+    #     provisioning_artifact_id: "Id", # required
+    #     service_action_id: "Id", # required
+    #     accept_language: "AcceptLanguage",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateServiceActionWithProvisioningArtifact AWS API Documentation
+    #
+    # @overload associate_service_action_with_provisioning_artifact(params = {})
+    # @param [Hash] params ({})
+    def associate_service_action_with_provisioning_artifact(params = {}, options = {})
+      req = build_request(:associate_service_action_with_provisioning_artifact, params)
+      req.send_request(options)
+    end
+
     # Associate the specified TagOption with the specified portfolio or
     # product.
     #
@@ -322,6 +365,107 @@ module Aws::ServiceCatalog
     # @param [Hash] params ({})
     def associate_tag_option_with_resource(params = {}, options = {})
       req = build_request(:associate_tag_option_with_resource, params)
+      req.send_request(options)
+    end
+
+    # Associates multiple self-service actions with provisioning artifacts.
+    #
+    # @option params [required, Array<Types::ServiceActionAssociation>] :service_action_associations
+    #   One or more associations, each consisting of the Action ID, the
+    #   Product ID, and the Provisioning Artifact ID.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @return [Types::BatchAssociateServiceActionWithProvisioningArtifactOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchAssociateServiceActionWithProvisioningArtifactOutput#failed_service_action_associations #failed_service_action_associations} => Array&lt;Types::FailedServiceActionAssociation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_associate_service_action_with_provisioning_artifact({
+    #     service_action_associations: [ # required
+    #       {
+    #         service_action_id: "Id", # required
+    #         product_id: "Id", # required
+    #         provisioning_artifact_id: "Id", # required
+    #       },
+    #     ],
+    #     accept_language: "AcceptLanguage",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failed_service_action_associations #=> Array
+    #   resp.failed_service_action_associations[0].service_action_id #=> String
+    #   resp.failed_service_action_associations[0].product_id #=> String
+    #   resp.failed_service_action_associations[0].provisioning_artifact_id #=> String
+    #   resp.failed_service_action_associations[0].error_code #=> String, one of "DUPLICATE_RESOURCE", "INTERNAL_FAILURE", "LIMIT_EXCEEDED", "RESOURCE_NOT_FOUND", "THROTTLING"
+    #   resp.failed_service_action_associations[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/BatchAssociateServiceActionWithProvisioningArtifact AWS API Documentation
+    #
+    # @overload batch_associate_service_action_with_provisioning_artifact(params = {})
+    # @param [Hash] params ({})
+    def batch_associate_service_action_with_provisioning_artifact(params = {}, options = {})
+      req = build_request(:batch_associate_service_action_with_provisioning_artifact, params)
+      req.send_request(options)
+    end
+
+    # Disassociates a batch of self-service actions from the specified
+    # provisioning artifact.
+    #
+    # @option params [required, Array<Types::ServiceActionAssociation>] :service_action_associations
+    #   One or more associations, each consisting of the Action ID, the
+    #   Product ID, and the Provisioning Artifact ID.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @return [Types::BatchDisassociateServiceActionFromProvisioningArtifactOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDisassociateServiceActionFromProvisioningArtifactOutput#failed_service_action_associations #failed_service_action_associations} => Array&lt;Types::FailedServiceActionAssociation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_disassociate_service_action_from_provisioning_artifact({
+    #     service_action_associations: [ # required
+    #       {
+    #         service_action_id: "Id", # required
+    #         product_id: "Id", # required
+    #         provisioning_artifact_id: "Id", # required
+    #       },
+    #     ],
+    #     accept_language: "AcceptLanguage",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failed_service_action_associations #=> Array
+    #   resp.failed_service_action_associations[0].service_action_id #=> String
+    #   resp.failed_service_action_associations[0].product_id #=> String
+    #   resp.failed_service_action_associations[0].provisioning_artifact_id #=> String
+    #   resp.failed_service_action_associations[0].error_code #=> String, one of "DUPLICATE_RESOURCE", "INTERNAL_FAILURE", "LIMIT_EXCEEDED", "RESOURCE_NOT_FOUND", "THROTTLING"
+    #   resp.failed_service_action_associations[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/BatchDisassociateServiceActionFromProvisioningArtifact AWS API Documentation
+    #
+    # @overload batch_disassociate_service_action_from_provisioning_artifact(params = {})
+    # @param [Hash] params ({})
+    def batch_disassociate_service_action_from_provisioning_artifact(params = {}, options = {})
+      req = build_request(:batch_disassociate_service_action_from_provisioning_artifact, params)
       req.send_request(options)
     end
 
@@ -917,6 +1061,97 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
+    # Creates a self-service action.
+    #
+    # @option params [required, String] :name
+    #   The self-service action name.
+    #
+    # @option params [required, String] :definition_type
+    #   The service action definition type. For example, `SSM_AUTOMATION`.
+    #
+    # @option params [required, Hash<String,String>] :definition
+    #   The self-service action definition. Can be one of the following:
+    #
+    #   Name
+    #
+    #   : The name of the AWS Systems Manager Document. For example,
+    #     `AWS-RestartEC2Instance`.
+    #
+    #   Version
+    #
+    #   : The AWS Systems Manager automation document version. For example,
+    #     `"Version": "1"`
+    #
+    #   AssumeRole
+    #
+    #   : The Amazon Resource Name (ARN) of the role that performs the
+    #     self-service actions on your behalf. For example, `"AssumeRole":
+    #     "arn:aws:iam::12345678910:role/ActionRole"`.
+    #
+    #     To reuse the provisioned product launch role, set to `"AssumeRole":
+    #     "LAUNCH_ROLE"`.
+    #
+    #   Parameters
+    #
+    #   : The list of parameters in JSON format.
+    #
+    #     For example: `[\{"Name":"InstanceId","Type":"TARGET"\}]`.
+    #
+    # @option params [String] :description
+    #   The self-service action description.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @option params [required, String] :idempotency_token
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests differ only by the idempotency token, the same
+    #   response is returned for each repeated request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateServiceActionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateServiceActionOutput#service_action_detail #service_action_detail} => Types::ServiceActionDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_service_action({
+    #     name: "ServiceActionName", # required
+    #     definition_type: "SSM_AUTOMATION", # required, accepts SSM_AUTOMATION
+    #     definition: { # required
+    #       "Name" => "ServiceActionDefinitionValue",
+    #     },
+    #     description: "ServiceActionDescription",
+    #     accept_language: "AcceptLanguage",
+    #     idempotency_token: "IdempotencyToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_action_detail.service_action_summary.id #=> String
+    #   resp.service_action_detail.service_action_summary.name #=> String
+    #   resp.service_action_detail.service_action_summary.description #=> String
+    #   resp.service_action_detail.service_action_summary.definition_type #=> String, one of "SSM_AUTOMATION"
+    #   resp.service_action_detail.definition #=> Hash
+    #   resp.service_action_detail.definition["ServiceActionDefinitionKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateServiceAction AWS API Documentation
+    #
+    # @overload create_service_action(params = {})
+    # @param [Hash] params ({})
+    def create_service_action(params = {}, options = {})
+      req = build_request(:create_service_action, params)
+      req.send_request(options)
+    end
+
     # Creates a TagOption.
     #
     # @option params [required, String] :key
@@ -1166,6 +1401,38 @@ module Aws::ServiceCatalog
     # @param [Hash] params ({})
     def delete_provisioning_artifact(params = {}, options = {})
       req = build_request(:delete_provisioning_artifact, params)
+      req.send_request(options)
+    end
+
+    # Deletes a self-service action.
+    #
+    # @option params [required, String] :id
+    #   The self-service action identifier. For example, `act-fs7abcd89wxyz`.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_service_action({
+    #     id: "Id", # required
+    #     accept_language: "AcceptLanguage",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteServiceAction AWS API Documentation
+    #
+    # @overload delete_service_action(params = {})
+    # @param [Hash] params ({})
+    def delete_service_action(params = {}, options = {})
+      req = build_request(:delete_service_action, params)
       req.send_request(options)
     end
 
@@ -1550,6 +1817,8 @@ module Aws::ServiceCatalog
     #   resp.provisioned_product_detail.created_time #=> Time
     #   resp.provisioned_product_detail.idempotency_token #=> String
     #   resp.provisioned_product_detail.last_record_id #=> String
+    #   resp.provisioned_product_detail.product_id #=> String
+    #   resp.provisioned_product_detail.provisioning_artifact_id #=> String
     #   resp.cloud_watch_dashboards #=> Array
     #   resp.cloud_watch_dashboards[0].name #=> String
     #
@@ -1855,6 +2124,49 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
+    # Describes a self-service action.
+    #
+    # @option params [required, String] :id
+    #   The self-service action identifier.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @return [Types::DescribeServiceActionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeServiceActionOutput#service_action_detail #service_action_detail} => Types::ServiceActionDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_service_action({
+    #     id: "Id", # required
+    #     accept_language: "AcceptLanguage",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_action_detail.service_action_summary.id #=> String
+    #   resp.service_action_detail.service_action_summary.name #=> String
+    #   resp.service_action_detail.service_action_summary.description #=> String
+    #   resp.service_action_detail.service_action_summary.definition_type #=> String, one of "SSM_AUTOMATION"
+    #   resp.service_action_detail.definition #=> Hash
+    #   resp.service_action_detail.definition["ServiceActionDefinitionKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeServiceAction AWS API Documentation
+    #
+    # @overload describe_service_action(params = {})
+    # @param [Hash] params ({})
+    def describe_service_action(params = {}, options = {})
+      req = build_request(:describe_service_action, params)
+      req.send_request(options)
+    end
+
     # Gets information about the specified TagOption.
     #
     # @option params [required, String] :id
@@ -1959,6 +2271,48 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
+    # Disassociates the specified self-service action association from the
+    # specified provisioning artifact.
+    #
+    # @option params [required, String] :product_id
+    #   The product identifier. For example, `prod-abcdzk7xy33qa`.
+    #
+    # @option params [required, String] :provisioning_artifact_id
+    #   The identifier of the provisioning artifact. For example,
+    #   `pa-4abcdjnxjj6ne`.
+    #
+    # @option params [required, String] :service_action_id
+    #   The self-service action identifier. For example, `act-fs7abcd89wxyz`.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_service_action_from_provisioning_artifact({
+    #     product_id: "Id", # required
+    #     provisioning_artifact_id: "Id", # required
+    #     service_action_id: "Id", # required
+    #     accept_language: "AcceptLanguage",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateServiceActionFromProvisioningArtifact AWS API Documentation
+    #
+    # @overload disassociate_service_action_from_provisioning_artifact(params = {})
+    # @param [Hash] params ({})
+    def disassociate_service_action_from_provisioning_artifact(params = {}, options = {})
+      req = build_request(:disassociate_service_action_from_provisioning_artifact, params)
+      req.send_request(options)
+    end
+
     # Disassociates the specified TagOption from the specified resource.
     #
     # @option params [required, String] :resource_id
@@ -2046,6 +2400,71 @@ module Aws::ServiceCatalog
     # @param [Hash] params ({})
     def execute_provisioned_product_plan(params = {}, options = {})
       req = build_request(:execute_provisioned_product_plan, params)
+      req.send_request(options)
+    end
+
+    # Executes a self-service action against a provisioned product.
+    #
+    # @option params [required, String] :provisioned_product_id
+    #   The identifier of the provisioned product.
+    #
+    # @option params [required, String] :service_action_id
+    #   The self-service action identifier. For example, `act-fs7abcd89wxyz`.
+    #
+    # @option params [required, String] :execute_token
+    #   An idempotency token that uniquely identifies the execute request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @return [Types::ExecuteProvisionedProductServiceActionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExecuteProvisionedProductServiceActionOutput#record_detail #record_detail} => Types::RecordDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.execute_provisioned_product_service_action({
+    #     provisioned_product_id: "Id", # required
+    #     service_action_id: "Id", # required
+    #     execute_token: "IdempotencyToken", # required
+    #     accept_language: "AcceptLanguage",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.record_detail.record_id #=> String
+    #   resp.record_detail.provisioned_product_name #=> String
+    #   resp.record_detail.status #=> String, one of "CREATED", "IN_PROGRESS", "IN_PROGRESS_IN_ERROR", "SUCCEEDED", "FAILED"
+    #   resp.record_detail.created_time #=> Time
+    #   resp.record_detail.updated_time #=> Time
+    #   resp.record_detail.provisioned_product_type #=> String
+    #   resp.record_detail.record_type #=> String
+    #   resp.record_detail.provisioned_product_id #=> String
+    #   resp.record_detail.product_id #=> String
+    #   resp.record_detail.provisioning_artifact_id #=> String
+    #   resp.record_detail.path_id #=> String
+    #   resp.record_detail.record_errors #=> Array
+    #   resp.record_detail.record_errors[0].code #=> String
+    #   resp.record_detail.record_errors[0].description #=> String
+    #   resp.record_detail.record_tags #=> Array
+    #   resp.record_detail.record_tags[0].key #=> String
+    #   resp.record_detail.record_tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ExecuteProvisionedProductServiceAction AWS API Documentation
+    #
+    # @overload execute_provisioned_product_service_action(params = {})
+    # @param [Hash] params ({})
+    def execute_provisioned_product_service_action(params = {}, options = {})
+      req = build_request(:execute_provisioned_product_service_action, params)
       req.send_request(options)
     end
 
@@ -2533,6 +2952,71 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
+    # Lists all provisioning artifacts (also known as versions) for the
+    # specified self-service action.
+    #
+    # @option params [required, String] :service_action_id
+    #   The self-service action identifier. For example, `act-fs7abcd89wxyz`.
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of items to return with this call.
+    #
+    # @option params [String] :page_token
+    #   The page token for the next set of results. To retrieve the first set
+    #   of results, use null.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @return [Types::ListProvisioningArtifactsForServiceActionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProvisioningArtifactsForServiceActionOutput#provisioning_artifact_views #provisioning_artifact_views} => Array&lt;Types::ProvisioningArtifactView&gt;
+    #   * {Types::ListProvisioningArtifactsForServiceActionOutput#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_provisioning_artifacts_for_service_action({
+    #     service_action_id: "Id", # required
+    #     page_size: 1,
+    #     page_token: "PageToken",
+    #     accept_language: "AcceptLanguage",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.provisioning_artifact_views #=> Array
+    #   resp.provisioning_artifact_views[0].product_view_summary.id #=> String
+    #   resp.provisioning_artifact_views[0].product_view_summary.product_id #=> String
+    #   resp.provisioning_artifact_views[0].product_view_summary.name #=> String
+    #   resp.provisioning_artifact_views[0].product_view_summary.owner #=> String
+    #   resp.provisioning_artifact_views[0].product_view_summary.short_description #=> String
+    #   resp.provisioning_artifact_views[0].product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE"
+    #   resp.provisioning_artifact_views[0].product_view_summary.distributor #=> String
+    #   resp.provisioning_artifact_views[0].product_view_summary.has_default_path #=> Boolean
+    #   resp.provisioning_artifact_views[0].product_view_summary.support_email #=> String
+    #   resp.provisioning_artifact_views[0].product_view_summary.support_description #=> String
+    #   resp.provisioning_artifact_views[0].product_view_summary.support_url #=> String
+    #   resp.provisioning_artifact_views[0].provisioning_artifact.id #=> String
+    #   resp.provisioning_artifact_views[0].provisioning_artifact.name #=> String
+    #   resp.provisioning_artifact_views[0].provisioning_artifact.description #=> String
+    #   resp.provisioning_artifact_views[0].provisioning_artifact.created_time #=> Time
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisioningArtifactsForServiceAction AWS API Documentation
+    #
+    # @overload list_provisioning_artifacts_for_service_action(params = {})
+    # @param [Hash] params ({})
+    def list_provisioning_artifacts_for_service_action(params = {}, options = {})
+      req = build_request(:list_provisioning_artifacts_for_service_action, params)
+      req.send_request(options)
+    end
+
     # Lists the specified requests or all performed requests.
     #
     # @option params [String] :accept_language
@@ -2658,6 +3142,114 @@ module Aws::ServiceCatalog
     # @param [Hash] params ({})
     def list_resources_for_tag_option(params = {}, options = {})
       req = build_request(:list_resources_for_tag_option, params)
+      req.send_request(options)
+    end
+
+    # Lists all self-service actions.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of items to return with this call.
+    #
+    # @option params [String] :page_token
+    #   The page token for the next set of results. To retrieve the first set
+    #   of results, use null.
+    #
+    # @return [Types::ListServiceActionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListServiceActionsOutput#service_action_summaries #service_action_summaries} => Array&lt;Types::ServiceActionSummary&gt;
+    #   * {Types::ListServiceActionsOutput#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_service_actions({
+    #     accept_language: "AcceptLanguage",
+    #     page_size: 1,
+    #     page_token: "PageToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_action_summaries #=> Array
+    #   resp.service_action_summaries[0].id #=> String
+    #   resp.service_action_summaries[0].name #=> String
+    #   resp.service_action_summaries[0].description #=> String
+    #   resp.service_action_summaries[0].definition_type #=> String, one of "SSM_AUTOMATION"
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListServiceActions AWS API Documentation
+    #
+    # @overload list_service_actions(params = {})
+    # @param [Hash] params ({})
+    def list_service_actions(params = {}, options = {})
+      req = build_request(:list_service_actions, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of self-service actions associated with the
+    # specified Product ID and Provisioning Artifact ID.
+    #
+    # @option params [required, String] :product_id
+    #   The product identifier. For example, `prod-abcdzk7xy33qa`.
+    #
+    # @option params [required, String] :provisioning_artifact_id
+    #   The identifier of the provisioning artifact. For example,
+    #   `pa-4abcdjnxjj6ne`.
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of items to return with this call.
+    #
+    # @option params [String] :page_token
+    #   The page token for the next set of results. To retrieve the first set
+    #   of results, use null.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @return [Types::ListServiceActionsForProvisioningArtifactOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListServiceActionsForProvisioningArtifactOutput#service_action_summaries #service_action_summaries} => Array&lt;Types::ServiceActionSummary&gt;
+    #   * {Types::ListServiceActionsForProvisioningArtifactOutput#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_service_actions_for_provisioning_artifact({
+    #     product_id: "Id", # required
+    #     provisioning_artifact_id: "Id", # required
+    #     page_size: 1,
+    #     page_token: "PageToken",
+    #     accept_language: "AcceptLanguage",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_action_summaries #=> Array
+    #   resp.service_action_summaries[0].id #=> String
+    #   resp.service_action_summaries[0].name #=> String
+    #   resp.service_action_summaries[0].description #=> String
+    #   resp.service_action_summaries[0].definition_type #=> String, one of "SSM_AUTOMATION"
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListServiceActionsForProvisioningArtifact AWS API Documentation
+    #
+    # @overload list_service_actions_for_provisioning_artifact(params = {})
+    # @param [Hash] params ({})
+    def list_service_actions_for_provisioning_artifact(params = {}, options = {})
+      req = build_request(:list_service_actions_for_provisioning_artifact, params)
       req.send_request(options)
     end
 
@@ -2905,6 +3497,8 @@ module Aws::ServiceCatalog
     #   resp.provisioned_products[0].created_time #=> Time
     #   resp.provisioned_products[0].idempotency_token #=> String
     #   resp.provisioned_products[0].last_record_id #=> String
+    #   resp.provisioned_products[0].product_id #=> String
+    #   resp.provisioned_products[0].provisioning_artifact_id #=> String
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ScanProvisionedProducts AWS API Documentation
@@ -3635,6 +4229,63 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
+    # Updates a self-service action.
+    #
+    # @option params [required, String] :id
+    #   The self-service action identifier.
+    #
+    # @option params [String] :name
+    #   The self-service action name.
+    #
+    # @option params [Hash<String,String>] :definition
+    #   A map that defines the self-service action.
+    #
+    # @option params [String] :description
+    #   The self-service action description.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @return [Types::UpdateServiceActionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateServiceActionOutput#service_action_detail #service_action_detail} => Types::ServiceActionDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_service_action({
+    #     id: "Id", # required
+    #     name: "ServiceActionName",
+    #     definition: {
+    #       "Name" => "ServiceActionDefinitionValue",
+    #     },
+    #     description: "ServiceActionDescription",
+    #     accept_language: "AcceptLanguage",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_action_detail.service_action_summary.id #=> String
+    #   resp.service_action_detail.service_action_summary.name #=> String
+    #   resp.service_action_detail.service_action_summary.description #=> String
+    #   resp.service_action_detail.service_action_summary.definition_type #=> String, one of "SSM_AUTOMATION"
+    #   resp.service_action_detail.definition #=> Hash
+    #   resp.service_action_detail.definition["ServiceActionDefinitionKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateServiceAction AWS API Documentation
+    #
+    # @overload update_service_action(params = {})
+    # @param [Hash] params ({})
+    def update_service_action(params = {}, options = {})
+      req = build_request(:update_service_action, params)
+      req.send_request(options)
+    end
+
     # Updates the specified TagOption.
     #
     # @option params [required, String] :id
@@ -3687,7 +4338,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1590,6 +1590,9 @@ module Aws::IoT
     #         job_executions_rollout_config: {
     #           maximum_per_minute: 1,
     #         },
+    #         timeout_config: {
+    #           in_progress_timeout_in_minutes: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] job_id
@@ -1631,6 +1634,14 @@ module Aws::IoT
     #   Allows you to create a staged rollout of the job.
     #   @return [Types::JobExecutionsRolloutConfig]
     #
+    # @!attribute [rw] timeout_config
+    #   Specifies the amount of time each device has to finish its execution
+    #   of the job. The timer is started when the job execution status is
+    #   set to `IN_PROGRESS`. If the job execution status is not set to
+    #   another terminal state before the time expires, it will be
+    #   automatically set to `TIMED_OUT`.
+    #   @return [Types::TimeoutConfig]
+    #
     class CreateJobRequest < Struct.new(
       :job_id,
       :targets,
@@ -1639,7 +1650,8 @@ module Aws::IoT
       :description,
       :presigned_url_config,
       :target_selection,
-      :job_executions_rollout_config)
+      :job_executions_rollout_config,
+      :timeout_config)
       include Aws::Structure
     end
 
@@ -3317,8 +3329,28 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] endpoint_type
-    #   The endpoint type (such as `iot:Data`, `iot:CredentialProvider` and
-    #   `iot:Jobs`).
+    #   The endpoint type. Valid endpoint types include:
+    #
+    #   * `iot:Data` - Returns a VeriSign signed data endpoint.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `iot:Data-ATS` - Returns an ATS signed data endpoint.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `iot:CredentialProvider` - Returns an AWS IoT credentials provider
+    #     API endpoint.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `iot:Jobs` - Returns an AWS IoT device management Jobs API
+    #     endpoint.
+    #
+    #   ^
     #   @return [String]
     #
     class DescribeEndpointRequest < Struct.new(
@@ -4755,8 +4787,8 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the job, one of `IN_PROGRESS`, `CANCELED`, or
-    #   `COMPLETED`.
+    #   The status of the job, one of `IN_PROGRESS`, `CANCELED`,
+    #   `DELETION_IN_PROGRESS` or `COMPLETED`.
     #   @return [String]
     #
     # @!attribute [rw] force_canceled
@@ -4803,6 +4835,14 @@ module Aws::IoT
     #   Details about the job process.
     #   @return [Types::JobProcessDetails]
     #
+    # @!attribute [rw] timeout_config
+    #   Specifies the amount of time each device has to finish its execution
+    #   of the job. A timer is started when the job execution status is set
+    #   to `IN_PROGRESS`. If the job execution status is not set to another
+    #   terminal state before the timer expires, it will be automatically
+    #   set to `TIMED_OUT`.
+    #   @return [Types::TimeoutConfig]
+    #
     class Job < Struct.new(
       :job_arn,
       :job_id,
@@ -4817,7 +4857,8 @@ module Aws::IoT
       :created_at,
       :last_updated_at,
       :completed_at,
-      :job_process_details)
+      :job_process_details,
+      :timeout_config)
       include Aws::Structure
     end
 
@@ -4830,7 +4871,7 @@ module Aws::IoT
     #
     # @!attribute [rw] status
     #   The status of the job execution (IN\_PROGRESS, QUEUED, FAILED,
-    #   SUCCESS, CANCELED, or REJECTED).
+    #   SUCCEEDED, TIMED\_OUT, CANCELED, or REJECTED).
     #   @return [String]
     #
     # @!attribute [rw] force_canceled
@@ -4874,6 +4915,11 @@ module Aws::IoT
     #   incremented each time they are updated by a device.
     #   @return [Integer]
     #
+    # @!attribute [rw] approximate_seconds_before_timed_out
+    #   The estimated number of seconds that remain before the job execution
+    #   status will be changed to `TIMED_OUT`.
+    #   @return [Integer]
+    #
     class JobExecution < Struct.new(
       :job_id,
       :status,
@@ -4884,7 +4930,8 @@ module Aws::IoT
       :started_at,
       :last_updated_at,
       :execution_number,
-      :version_number)
+      :version_number,
+      :approximate_seconds_before_timed_out)
       include Aws::Structure
     end
 
@@ -5026,6 +5073,10 @@ module Aws::IoT
     #   that was a target of the job.
     #   @return [Integer]
     #
+    # @!attribute [rw] number_of_timed_out_things
+    #   The number of things whose job execution status is `TIMED_OUT`.
+    #   @return [Integer]
+    #
     class JobProcessDetails < Struct.new(
       :processing_targets,
       :number_of_canceled_things,
@@ -5034,7 +5085,8 @@ module Aws::IoT
       :number_of_rejected_things,
       :number_of_queued_things,
       :number_of_in_progress_things,
-      :number_of_removed_things)
+      :number_of_removed_things,
+      :number_of_timed_out_things)
       include Aws::Structure
     end
 
@@ -5647,7 +5699,7 @@ module Aws::IoT
     #
     #       {
     #         job_id: "JobId", # required
-    #         status: "QUEUED", # accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, REJECTED, REMOVED, CANCELED
+    #         status: "QUEUED", # accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, TIMED_OUT, REJECTED, REMOVED, CANCELED
     #         max_results: 1,
     #         next_token: "NextToken",
     #       }
@@ -5696,7 +5748,7 @@ module Aws::IoT
     #
     #       {
     #         thing_name: "ThingName", # required
-    #         status: "QUEUED", # accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, REJECTED, REMOVED, CANCELED
+    #         status: "QUEUED", # accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, TIMED_OUT, REJECTED, REMOVED, CANCELED
     #         max_results: 1,
     #         next_token: "NextToken",
     #       }
@@ -9233,6 +9285,37 @@ module Aws::IoT
     class ThingTypeProperties < Struct.new(
       :thing_type_description,
       :searchable_attributes)
+      include Aws::Structure
+    end
+
+    # Specifies the amount of time each device has to finish its execution
+    # of the job. A timer is started when the job execution status is set to
+    # `IN_PROGRESS`. If the job execution status is not set to another
+    # terminal state before the timer expires, it will be automatically set
+    # to `TIMED_OUT`.
+    #
+    # @note When making an API call, you may pass TimeoutConfig
+    #   data as a hash:
+    #
+    #       {
+    #         in_progress_timeout_in_minutes: 1,
+    #       }
+    #
+    # @!attribute [rw] in_progress_timeout_in_minutes
+    #   Specifies the amount of time, in minutes, this device has to finish
+    #   execution of this job. A timer is started, or restarted, whenever
+    #   this job's execution status is specified as `IN_PROGRESS` with this
+    #   field populated. If the job execution status is not set to a
+    #   terminal state before the timer expires, or before another job
+    #   execution status update is sent with this field populated, the
+    #   status will be automatically set to `TIMED_OUT`. Note that
+    #   setting/resetting this timer has no effect on the job execution
+    #   timeout timer which may have been specified when the job was created
+    #   (`CreateJobExecution` using the field `timeoutConfig`).
+    #   @return [Integer]
+    #
+    class TimeoutConfig < Struct.new(
+      :in_progress_timeout_in_minutes)
       include Aws::Structure
     end
 

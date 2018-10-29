@@ -332,6 +332,7 @@ module Aws::SQS
         "protocol" => "query",
         "serviceAbbreviation" => "Amazon SQS",
         "serviceFullName" => "Amazon Simple Queue Service",
+        "serviceId" => "SQS",
         "signatureVersion" => "v4",
         "uid" => "sqs-2012-11-05",
         "xmlNamespace" => "http://queue.amazonaws.com/doc/2012-11-05/",

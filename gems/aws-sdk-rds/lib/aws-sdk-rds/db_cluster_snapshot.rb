@@ -344,7 +344,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `my-cluster-snapshot2`
     # @option options [String] :kms_key_id
@@ -480,11 +480,13 @@ module Aws::RDS
     #       auto_pause: false,
     #       seconds_until_auto_pause: 1,
     #     },
+    #     db_cluster_parameter_group_name: "String",
+    #     deletion_protection: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :availability_zones
-    #   Provides the list of EC2 Availability Zones that instances in the
-    #   restored DB cluster can be created in.
+    #   Provides the list of Amazon EC2 Availability Zones that instances in
+    #   the restored DB cluster can be created in.
     # @option options [required, String] :db_cluster_identifier
     #   The name of the DB cluster to create from the DB snapshot or DB
     #   cluster snapshot. This parameter isn't case-sensitive.
@@ -495,7 +497,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-snapshot-id`
     # @option options [required, String] :engine
@@ -509,14 +511,14 @@ module Aws::RDS
     # @option options [Integer] :port
     #   The port number on which the new DB cluster accepts connections.
     #
-    #   Constraints: Value must be `1150-65535`
+    #   Constraints: This value must be `1150-65535`
     #
     #   Default: The same port as the original DB cluster.
     # @option options [String] :db_subnet_group_name
     #   The name of the DB subnet group to use for the new DB cluster.
     #
-    #   Constraints: If supplied, must match the name of an existing
-    #   DBSubnetGroup.
+    #   Constraints: If supplied, must match the name of an existing DB subnet
+    #   group.
     #
     #   Example: `mySubnetgroup`
     # @option options [String] :database_name
@@ -537,8 +539,8 @@ module Aws::RDS
     #   cluster, then you can use the KMS key alias instead of the ARN for the
     #   KMS encryption key.
     #
-    #   If you do not specify a value for the `KmsKeyId` parameter, then the
-    #   following will occur:
+    #   If you don't specify a value for the `KmsKeyId` parameter, then the
+    #   following occurs:
     #
     #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier` is
     #     encrypted, then the restored DB cluster is encrypted using the KMS
@@ -564,7 +566,7 @@ module Aws::RDS
     #
     #   ^
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
-    #   The list of logs that the restored DB cluster is to export to
+    #   The list of logs that the restored DB cluster is to export to Amazon
     #   CloudWatch Logs. The values in the list depend on the DB engine being
     #   used. For more information, see [Publishing Database Logs to Amazon
     #   CloudWatch Logs ][1] in the *Amazon Aurora User Guide*.
@@ -578,6 +580,25 @@ module Aws::RDS
     # @option options [Types::ScalingConfiguration] :scaling_configuration
     #   For DB clusters in `serverless` DB engine mode, the scaling properties
     #   of the DB cluster.
+    # @option options [String] :db_cluster_parameter_group_name
+    #   The name of the DB cluster parameter group to associate with this DB
+    #   cluster. If this argument is omitted, the default DB cluster parameter
+    #   group for the specified engine is used.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match the name of an existing default DB cluster
+    #     parameter group.
+    #
+    #   * Must be 1 to 255 letters, numbers, or hyphens.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
+    # @option options [Boolean] :deletion_protection
+    #   Indicates if the DB cluster should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false.
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(snapshot_identifier: @snapshot_id)

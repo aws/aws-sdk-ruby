@@ -154,6 +154,19 @@ module Aws::CodeBuild
     #   built.
     #   @return [String]
     #
+    # @!attribute [rw] resolved_source_version
+    #   An identifier for the version of this build's source code.
+    #
+    #   * For AWS CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the
+    #     commit ID.
+    #
+    #   * For AWS CodePipeline, the source revision provided by AWS
+    #     CodePipeline.
+    #
+    #   * For Amazon Simple Storage Service (Amazon S3), this does not
+    #     apply.
+    #   @return [String]
+    #
     # @!attribute [rw] project_name
     #   The name of the AWS CodeBuild project.
     #   @return [String]
@@ -271,6 +284,7 @@ module Aws::CodeBuild
       :current_phase,
       :build_status,
       :source_version,
+      :resolved_source_version,
       :project_name,
       :phases,
       :source,
@@ -1884,7 +1898,7 @@ module Aws::CodeBuild
     #   The ARN of an S3 bucket and the path prefix for S3 logs. If your
     #   Amazon S3 bucket name is `my-bucket`, and your path prefix is
     #   `build-log`, then acceptable formats are `my-bucket/build-log` or
-    #   `aws:s3:::my-bucket/build-log`.
+    #   `arn:aws:s3:::my-bucket/build-log`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/S3LogsConfig AWS API Documentation

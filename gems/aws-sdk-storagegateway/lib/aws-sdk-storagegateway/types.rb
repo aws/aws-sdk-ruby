@@ -86,7 +86,7 @@ module Aws::StorageGateway
     # @!attribute [rw] gateway_type
     #   A value that defines the type of gateway to activate. The type
     #   specified is critical to all later functions of the gateway and
-    #   cannot be changed after activation. The default value is `STORED`.
+    #   cannot be changed after activation. The default value is `CACHED`.
     #
     #   Valid Values: "STORED", "CACHED", "VTL", "FILE\_S3"
     #   @return [String]
@@ -3378,27 +3378,58 @@ module Aws::StorageGateway
     #
     #       {
     #         file_share_arn: "FileShareARN", # required
+    #         folder_list: ["Folder"],
+    #         recursive: false,
     #       }
     #
     # @!attribute [rw] file_share_arn
     #   The Amazon Resource Name (ARN) of the file share.
     #   @return [String]
     #
+    # @!attribute [rw] folder_list
+    #   A comma-separated list of the paths of folders to refresh in the
+    #   cache. The default is \[`"/"`\]. The default refreshes objects and
+    #   folders at the root of the Amazon S3 bucket. If `Recursive` is set
+    #   to "true", the entire S3 bucket that the file share has access to
+    #   is refreshed.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] recursive
+    #   A value that specifies whether to recursively refresh folders in the
+    #   cache. The refresh includes folders that were in the cache the last
+    #   time the gateway listed the folder's contents. If this value set to
+    #   "true", each folder that is listed in `FolderList` is recursively
+    #   updated. Otherwise, subfolders listed in `FolderList` are not
+    #   refreshed. Only objects that are in folders listed directly under
+    #   `FolderList` are found and used for the update. The default is
+    #   "true".
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RefreshCacheInput AWS API Documentation
     #
     class RefreshCacheInput < Struct.new(
-      :file_share_arn)
+      :file_share_arn,
+      :folder_list,
+      :recursive)
       include Aws::Structure
     end
 
+    # RefreshCacheOutput
+    #
     # @!attribute [rw] file_share_arn
     #   The Amazon Resource Name (ARN) of the file share.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_id
+    #   The randomly generated ID of the notification that was sent. This ID
+    #   is in UUID format.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RefreshCacheOutput AWS API Documentation
     #
     class RefreshCacheOutput < Struct.new(
-      :file_share_arn)
+      :file_share_arn,
+      :notification_id)
       include Aws::Structure
     end
 

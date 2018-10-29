@@ -1,6 +1,50 @@
 Unreleased Changes
 ------------------
 
+3.35.0 (2018-10-24)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.34.0 (2018-10-23)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Allow 429 response code to trigger throttle detection
+
+3.33.0 (2018-10-22)
+------------------
+
+* Feature - Update to code paths and plugins for future SDK instrumentation and telemetry.
+
+3.32.0 (2018-10-18)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.31.0 (2018-10-16)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.30.0 (2018-10-04)
+------------------
+
+* Feature - Adds to code paths and plugins for future SDK instrumentation and telemetry.
+
+3.29.0 (2018-09-28)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.28.0 (2018-09-25)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
 3.27.1 (2018-09-21)
 ------------------
 

@@ -778,7 +778,7 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         name: "__string", # required
+    #         name: "__stringMin1", # required
     #         selector_settings: {
     #           audio_language_selection: {
     #             language_code: "__string", # required
@@ -924,7 +924,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # A list of schedule actions to create.
+    # A list of schedule actions to create (in a request) or that have been
+    # created (in a response).
     #
     # @note When making an API call, you may pass BatchScheduleActionCreateRequest
     #   data as a hash:
@@ -990,7 +991,7 @@ module Aws::MediaLive
     #             },
     #             schedule_action_start_settings: { # required
     #               fixed_mode_schedule_action_start_settings: {
-    #                 time: "__string",
+    #                 time: "__string", # required
     #               },
     #             },
     #           },
@@ -1008,10 +1009,10 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # Returned list of created schedule actions.
+    # List of actions that have been created in the schedule.
     #
     # @!attribute [rw] schedule_actions
-    #   Returned list of created schedule actions.
+    #   List of actions that have been created in the schedule.
     #   @return [Array<Types::ScheduleAction>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchScheduleActionCreateResult AWS API Documentation
@@ -1031,7 +1032,7 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] action_names
-    #   A list of schedule actions to delete, identified by unique name.
+    #   A list of schedule actions to delete.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchScheduleActionDeleteRequest AWS API Documentation
@@ -1041,10 +1042,10 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # Returned list of deleted schedule actions.
+    # List of actions that have been deleted from the schedule.
     #
     # @!attribute [rw] schedule_actions
-    #   Returned list of deleted schedule actions.
+    #   List of actions that have been deleted from the schedule.
     #   @return [Array<Types::ScheduleAction>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchScheduleActionDeleteResult AWS API Documentation
@@ -1054,8 +1055,9 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # A schedule update, including actions to insert, and action names to
-    # delete.
+    # A request to create actions (add actions to the schedule), delete
+    # actions (remove actions from the schedule), or both create and delete
+    # actions.
     #
     # @note When making an API call, you may pass BatchUpdateScheduleRequest
     #   data as a hash:
@@ -1123,7 +1125,7 @@ module Aws::MediaLive
     #               },
     #               schedule_action_start_settings: { # required
     #                 fixed_mode_schedule_action_start_settings: {
-    #                   time: "__string",
+    #                   time: "__string", # required
     #                 },
     #               },
     #             },
@@ -1155,11 +1157,11 @@ module Aws::MediaLive
     end
 
     # @!attribute [rw] creates
-    #   Returned list of created schedule actions.
+    #   List of actions that have been created in the schedule.
     #   @return [Types::BatchScheduleActionCreateResult]
     #
     # @!attribute [rw] deletes
-    #   Returned list of deleted schedule actions.
+    #   List of actions that have been deleted from the schedule.
     #   @return [Types::BatchScheduleActionDeleteResult]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchUpdateScheduleResponse AWS API Documentation
@@ -1706,7 +1708,7 @@ module Aws::MediaLive
     #
     #       {
     #         language_code: "__string",
-    #         name: "__string", # required
+    #         name: "__stringMin1", # required
     #         selector_settings: {
     #           arib_source_settings: {
     #           },
@@ -2320,7 +2322,7 @@ module Aws::MediaLive
     #                   key_format_versions: "__string",
     #                   key_provider_settings: {
     #                     static_key_settings: {
-    #                       key_provider_server: { # required
+    #                       key_provider_server: {
     #                         password_param: "__string",
     #                         uri: "__string", # required
     #                         username: "__string",
@@ -2610,7 +2612,8 @@ module Aws::MediaLive
     #                   par_denominator: 1,
     #                   par_numerator: 1,
     #                   profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
-    #                   rate_control_mode: "CBR", # accepts CBR, VBR
+    #                   qvbr_quality_level: 1,
+    #                   rate_control_mode: "CBR", # accepts CBR, QVBR, VBR
     #                   scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #                   scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                   slices: 1,
@@ -2636,7 +2639,7 @@ module Aws::MediaLive
     #             input_settings: {
     #               audio_selectors: [
     #                 {
-    #                   name: "__string", # required
+    #                   name: "__stringMin1", # required
     #                   selector_settings: {
     #                     audio_language_selection: {
     #                       language_code: "__string", # required
@@ -2651,7 +2654,7 @@ module Aws::MediaLive
     #               caption_selectors: [
     #                 {
     #                   language_code: "__string",
-    #                   name: "__string", # required
+    #                   name: "__stringMin1", # required
     #                   selector_settings: {
     #                     arib_source_settings: {
     #                     },
@@ -2731,6 +2734,7 @@ module Aws::MediaLive
     #   @return [Types::InputSpecification]
     #
     # @!attribute [rw] log_level
+    #   The log level the user wants for their channel.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2976,6 +2980,7 @@ module Aws::MediaLive
     #   @return [Types::InputSpecification]
     #
     # @!attribute [rw] log_level
+    #   The log level the user wants for their channel.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -3184,6 +3189,7 @@ module Aws::MediaLive
     #   @return [Types::InputSpecification]
     #
     # @!attribute [rw] log_level
+    #   The log level the user wants for their channel.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -4319,7 +4325,7 @@ module Aws::MediaLive
     #                 key_format_versions: "__string",
     #                 key_provider_settings: {
     #                   static_key_settings: {
-    #                     key_provider_server: { # required
+    #                     key_provider_server: {
     #                       password_param: "__string",
     #                       uri: "__string", # required
     #                       username: "__string",
@@ -4609,7 +4615,8 @@ module Aws::MediaLive
     #                 par_denominator: 1,
     #                 par_numerator: 1,
     #                 profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
-    #                 rate_control_mode: "CBR", # accepts CBR, VBR
+    #                 qvbr_quality_level: 1,
+    #                 rate_control_mode: "CBR", # accepts CBR, QVBR, VBR
     #                 scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #                 scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                 slices: 1,
@@ -4717,17 +4724,21 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # Fixed mode schedule action start settings
+    # Start time for the action.
     #
     # @note When making an API call, you may pass FixedModeScheduleActionStartSettings
     #   data as a hash:
     #
     #       {
-    #         time: "__string",
+    #         time: "__string", # required
     #       }
     #
     # @!attribute [rw] time
-    #   Fixed timestamp action start. Conforms to ISO-8601.
+    #   Start time for the action to start in the channel. (Not the time for
+    #   the action to be added to the schedule: actions are always added to
+    #   the schedule immediately.) UTC format: yyyy-mm-ddThh:mm:ss.nnnZ. All
+    #   the letters are digits (for example, mm might be 01) except for the
+    #   two constants "T" for time and "Z" for "UTC format".
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FixedModeScheduleActionStartSettings AWS API Documentation
@@ -4763,14 +4774,10 @@ module Aws::MediaLive
     #   @return [Integer]
     #
     # @!attribute [rw] input_end_action
-    #   Indicates the action to take when an input completes (e.g.
-    #   end-of-file.) Options include immediately switching to the next
-    #   sequential input (via "switchInput"), switching to the next input
-    #   and looping back to the first input when last input ends (via
-    #   "switchAndLoopInputs") or not switching inputs and instead
-    #   transcoding black / color / slate images per the "Input Loss
-    #   Behavior" configuration until an activateInput REST command is
-    #   received (via "none").
+    #   Indicates the action to take when the input completes (e.g.
+    #   end-of-file). Options include looping on the input (via
+    #   "switchAndLoopInputs") or transcoding black / color / slate images
+    #   per the "Input Loss Behavior" configuration (via "none").
     #   @return [String]
     #
     # @!attribute [rw] input_loss_behavior
@@ -4831,7 +4838,8 @@ module Aws::MediaLive
     #         par_denominator: 1,
     #         par_numerator: 1,
     #         profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
-    #         rate_control_mode: "CBR", # accepts CBR, VBR
+    #         qvbr_quality_level: 1,
+    #         rate_control_mode: "CBR", # accepts CBR, QVBR, VBR
     #         scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #         slices: 1,
@@ -4944,7 +4952,8 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] max_bitrate
-    #   Maximum bitrate in bits/second (for VBR mode only).
+    #   Maximum bitrate in bits/second (for VBR and QVBR modes only).
+    #   Required when rateControlMode is "qvbr".
     #   @return [Integer]
     #
     # @!attribute [rw] min_i_interval
@@ -4984,8 +4993,19 @@ module Aws::MediaLive
     #   H.264 Profile.
     #   @return [String]
     #
+    # @!attribute [rw] qvbr_quality_level
+    #   Target quality value. Applicable only to QVBR mode. 1 is the lowest
+    #   quality and 10 is the highest and approaches lossless. Typical
+    #   levels for content distribution are between 6 and 8.
+    #   @return [Integer]
+    #
     # @!attribute [rw] rate_control_mode
-    #   Rate control mode.
+    #   Rate control mode. - CBR: Constant Bit Rate - VBR: Variable Bit Rate
+    #   - QVBR: Encoder dynamically controls the bitrate to meet the desired
+    #   quality (specified through the qvbrQualityLevel field). The bitrate
+    #   will not exceed the bitrate specified in the maxBitrate field and
+    #   will not fall below the bitrate required to meet the desired quality
+    #   level.
     #   @return [String]
     #
     # @!attribute [rw] scan_type
@@ -4994,8 +5014,9 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] scene_change_detect
-    #   Scene change detection. Inserts I-frames on scene changes when
-    #   enabled.
+    #   Scene change detection. - On: inserts I-frames when scene change is
+    #   detected. - Off: does not force an I-frame when scene change is
+    #   detected.
     #   @return [String]
     #
     # @!attribute [rw] slices
@@ -5061,6 +5082,7 @@ module Aws::MediaLive
       :par_denominator,
       :par_numerator,
       :profile,
+      :qvbr_quality_level,
       :rate_control_mode,
       :scan_type,
       :scene_change_detect,
@@ -5291,7 +5313,7 @@ module Aws::MediaLive
     #         key_format_versions: "__string",
     #         key_provider_settings: {
     #           static_key_settings: {
-    #             key_provider_server: { # required
+    #             key_provider_server: {
     #               password_param: "__string",
     #               uri: "__string", # required
     #               username: "__string",
@@ -5865,7 +5887,7 @@ module Aws::MediaLive
     #         input_settings: {
     #           audio_selectors: [
     #             {
-    #               name: "__string", # required
+    #               name: "__stringMin1", # required
     #               selector_settings: {
     #                 audio_language_selection: {
     #                   language_code: "__string", # required
@@ -5880,7 +5902,7 @@ module Aws::MediaLive
     #           caption_selectors: [
     #             {
     #               language_code: "__string",
-    #               name: "__string", # required
+    #               name: "__stringMin1", # required
     #               selector_settings: {
     #                 arib_source_settings: {
     #                 },
@@ -6169,7 +6191,7 @@ module Aws::MediaLive
     #       {
     #         audio_selectors: [
     #           {
-    #             name: "__string", # required
+    #             name: "__stringMin1", # required
     #             selector_settings: {
     #               audio_language_selection: {
     #                 language_code: "__string", # required
@@ -6184,7 +6206,7 @@ module Aws::MediaLive
     #         caption_selectors: [
     #           {
     #             language_code: "__string",
-    #             name: "__string", # required
+    #             name: "__stringMin1", # required
     #             selector_settings: {
     #               arib_source_settings: {
     #               },
@@ -6443,7 +6465,7 @@ module Aws::MediaLive
     #
     #       {
     #         static_key_settings: {
-    #           key_provider_server: { # required
+    #           key_provider_server: {
     #             password_param: "__string",
     #             uri: "__string", # required
     #             username: "__string",
@@ -7477,16 +7499,7 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] send_delay_ms
-    #   Outputs that are "output locked" can use this delay. Assign a
-    #   delay to the output that is "secondary". Do not assign a delay to
-    #   the "primary" output. The delay means that the primary output will
-    #   always reach the downstream system before the secondary, which helps
-    #   ensure that the downstream system always uses the primary output.
-    #   (If there were no delay, the downstream system might flip-flop
-    #   between whichever output happens to arrive first.) If the primary
-    #   fails, the downstream system will switch to the secondary output.
-    #   When the primary is restarted, the downstream system will switch
-    #   back to the primary (because once again it is always arriving first)
+    #   Number of milliseconds to delay the output from the second pipeline.
     #   @return [Integer]
     #
     # @!attribute [rw] sparse_track_type
@@ -8032,7 +8045,7 @@ module Aws::MediaLive
     #             key_format_versions: "__string",
     #             key_provider_settings: {
     #               static_key_settings: {
-    #                 key_provider_server: { # required
+    #                 key_provider_server: {
     #                   password_param: "__string",
     #                   uri: "__string", # required
     #                   username: "__string",
@@ -8380,7 +8393,7 @@ module Aws::MediaLive
     #           key_format_versions: "__string",
     #           key_provider_settings: {
     #             static_key_settings: {
-    #               key_provider_server: { # required
+    #               key_provider_server: {
     #                 password_param: "__string",
     #                 uri: "__string", # required
     #                 username: "__string",
@@ -8723,12 +8736,19 @@ module Aws::MediaLive
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] start
+    #   Requested reservation start time (UTC) in ISO-8601 format. The
+    #   specified time must be between the first day of the current month
+    #   and one year from now. If no value is given, the default is now.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PurchaseOffering AWS API Documentation
     #
     class PurchaseOffering < Struct.new(
       :count,
       :name,
-      :request_id)
+      :request_id,
+      :start)
       include Aws::Structure
     end
 
@@ -8736,10 +8756,11 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         count: 1,
+    #         count: 1, # required
     #         name: "__string",
     #         offering_id: "__string", # required
     #         request_id: "__string",
+    #         start: "__string",
     #       }
     #
     # @!attribute [rw] count
@@ -8756,13 +8777,17 @@ module Aws::MediaLive
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] start
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PurchaseOfferingRequest AWS API Documentation
     #
     class PurchaseOfferingRequest < Struct.new(
       :count,
       :name,
       :offering_id,
-      :request_id)
+      :request_id,
+      :start)
       include Aws::Structure
     end
 
@@ -9099,7 +9124,7 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # A single schedule action.
+    # Contains information on a single schedule action.
     #
     # @note When making an API call, you may pass ScheduleAction
     #   data as a hash:
@@ -9163,13 +9188,18 @@ module Aws::MediaLive
     #         },
     #         schedule_action_start_settings: { # required
     #           fixed_mode_schedule_action_start_settings: {
-    #             time: "__string",
+    #             time: "__string", # required
     #           },
     #         },
     #       }
     #
     # @!attribute [rw] action_name
-    #   The name of the action, must be unique within the schedule.
+    #   The name of the action, must be unique within the schedule. This
+    #   name provides the main reference to an action once it is added to
+    #   the schedule. A name is unique if it is no longer in the schedule.
+    #   The schedule is automatically cleaned up to remove actions with a
+    #   start time of more than 1 hour ago (approximately) so at that point
+    #   a name can be reused.
     #   @return [String]
     #
     # @!attribute [rw] schedule_action_settings
@@ -9177,7 +9207,7 @@ module Aws::MediaLive
     #   @return [Types::ScheduleActionSettings]
     #
     # @!attribute [rw] schedule_action_start_settings
-    #   When the action takes effect.
+    #   The time for the action to start in the channel.
     #   @return [Types::ScheduleActionStartSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleAction AWS API Documentation
@@ -9189,7 +9219,7 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # Settings for a single schedule action.
+    # Holds the settings for a single schedule action.
     #
     # @note When making an API call, you may pass ScheduleActionSettings
     #   data as a hash:
@@ -9251,23 +9281,23 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] scte_35_return_to_network_settings
-    #   SCTE-35 Return to Network Settings
+    #   Settings for SCTE-35 return\_to\_network message
     #   @return [Types::Scte35ReturnToNetworkScheduleActionSettings]
     #
     # @!attribute [rw] scte_35_splice_insert_settings
-    #   SCTE-35 Splice Insert Settings
+    #   Settings for SCTE-35 splice\_insert message
     #   @return [Types::Scte35SpliceInsertScheduleActionSettings]
     #
     # @!attribute [rw] scte_35_time_signal_settings
-    #   SCTE-35 Time Signal Settings
+    #   Settings for SCTE-35 time\_signal message
     #   @return [Types::Scte35TimeSignalScheduleActionSettings]
     #
     # @!attribute [rw] static_image_activate_settings
-    #   Static Image Activate
+    #   Settings to activate a static image overlay
     #   @return [Types::StaticImageActivateScheduleActionSettings]
     #
     # @!attribute [rw] static_image_deactivate_settings
-    #   Static Image Deactivate
+    #   Settings to deactivate a static image overlay
     #   @return [Types::StaticImageDeactivateScheduleActionSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleActionSettings AWS API Documentation
@@ -9281,19 +9311,19 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # When the schedule action starts.
+    # Settings to specify the start time for an action.
     #
     # @note When making an API call, you may pass ScheduleActionStartSettings
     #   data as a hash:
     #
     #       {
     #         fixed_mode_schedule_action_start_settings: {
-    #           time: "__string",
+    #           time: "__string", # required
     #         },
     #       }
     #
     # @!attribute [rw] fixed_mode_schedule_action_start_settings
-    #   Fixed timestamp action start. Conforms to ISO-8601.
+    #   Holds the start time for the action.
     #   @return [Types::FixedModeScheduleActionStartSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleActionStartSettings AWS API Documentation
@@ -9303,14 +9333,14 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # A complete schedule description.
+    # Results of a schedule describe.
     #
     # @!attribute [rw] next_token
     #   The next token; for use in pagination.
     #   @return [String]
     #
     # @!attribute [rw] schedule_actions
-    #   The list of schedule actions.
+    #   The list of actions in the schedule.
     #   @return [Array<Types::ScheduleAction>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleDescribeResultModel AWS API Documentation
@@ -9386,7 +9416,10 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # SCTE-35 Delivery Restrictions.
+    # Corresponds to SCTE-35 delivery\_not\_restricted\_flag parameter. To
+    # declare delivery restrictions, include this element and its four
+    # "restriction" flags. To declare that there are no restrictions, omit
+    # this element.
     #
     # @note When making an API call, you may pass Scte35DeliveryRestrictions
     #   data as a hash:
@@ -9399,19 +9432,19 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] archive_allowed_flag
-    #   SCTE-35 segmentation\_descriptor archive\_allowed\_flag.
+    #   Corresponds to SCTE-35 archive\_allowed\_flag.
     #   @return [String]
     #
     # @!attribute [rw] device_restrictions
-    #   SCTE-35 segmentation\_descriptor web\_delivery\_allowed\_flag.
+    #   Corresponds to SCTE-35 device\_restrictions parameter.
     #   @return [String]
     #
     # @!attribute [rw] no_regional_blackout_flag
-    #   SCTE-35 segmentation\_descriptor no\_regional\_blackout\_flag.
+    #   Corresponds to SCTE-35 no\_regional\_blackout\_flag parameter.
     #   @return [String]
     #
     # @!attribute [rw] web_delivery_allowed_flag
-    #   SCTE-35 segmentation\_descriptor web\_delivery\_allowed\_flag.
+    #   Corresponds to SCTE-35 web\_delivery\_allowed\_flag parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35DeliveryRestrictions AWS API Documentation
@@ -9424,7 +9457,7 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # SCTE-35 Descriptor.
+    # Holds one set of SCTE-35 Descriptor Settings.
     #
     # @note When making an API call, you may pass Scte35Descriptor
     #   data as a hash:
@@ -9500,7 +9533,7 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # SCTE-35 Return to Network Settings.
+    # Settings for a SCTE-35 return\_to\_network message.
     #
     # @note When making an API call, you may pass Scte35ReturnToNetworkScheduleActionSettings
     #   data as a hash:
@@ -9521,7 +9554,7 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # SCTE-35 Segmentation Descriptor.
+    # Corresponds to SCTE-35 segmentation\_descriptor.
     #
     # @note When making an API call, you may pass Scte35SegmentationDescriptor
     #   data as a hash:
@@ -9546,49 +9579,70 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] delivery_restrictions
-    #   SCTE-35 delivery restrictions.
+    #   Holds the four SCTE-35 delivery restriction parameters.
     #   @return [Types::Scte35DeliveryRestrictions]
     #
     # @!attribute [rw] segment_num
-    #   SCTE-35 segmentation\_descriptor segment\_num.
+    #   Corresponds to SCTE-35 segment\_num. A value that is valid for the
+    #   specified segmentation\_type\_id.
     #   @return [Integer]
     #
     # @!attribute [rw] segmentation_cancel_indicator
-    #   SCTE-35 segmentation\_descriptor
-    #   segmentation\_event\_cancel\_indicator.
+    #   Corresponds to SCTE-35 segmentation\_event\_cancel\_indicator.
     #   @return [String]
     #
     # @!attribute [rw] segmentation_duration
-    #   SCTE-35 segmentation\_descriptor segmentation\_duration specified in
-    #   90 KHz clock ticks.
+    #   Corresponds to SCTE-35 segmentation\_duration. Optional. The
+    #   duration for the time\_signal, in 90 KHz ticks. To convert seconds
+    #   to ticks, multiple the seconds by 90,000. Enter time in 90 KHz clock
+    #   ticks. If you do not enter a duration, the time\_signal will
+    #   continue until you insert a cancellation message.
     #   @return [Integer]
     #
     # @!attribute [rw] segmentation_event_id
-    #   SCTE-35 segmentation\_descriptor segmentation\_event\_id.
+    #   Corresponds to SCTE-35 segmentation\_event\_id.
     #   @return [Integer]
     #
     # @!attribute [rw] segmentation_type_id
-    #   SCTE-35 segmentation\_descriptor segmentation\_type\_id.
+    #   Corresponds to SCTE-35 segmentation\_type\_id. One of the
+    #   segmentation\_type\_id values listed in the SCTE-35 specification.
+    #   On the console, enter the ID in decimal (for example, "52"). In
+    #   the CLI, API, or an SDK, enter the ID in hex (for example, "0x34")
+    #   or decimal (for example, "52").
     #   @return [Integer]
     #
     # @!attribute [rw] segmentation_upid
-    #   SCTE-35 segmentation\_descriptor segmentation\_upid as a hex string.
+    #   Corresponds to SCTE-35 segmentation\_upid. Enter a string containing
+    #   the hexadecimal representation of the characters that make up the
+    #   SCTE-35 segmentation\_upid value. Must contain an even number of hex
+    #   characters. Do not include spaces between each hex pair. For
+    #   example, the ASCII "ADS Information" becomes hex
+    #   "41445320496e666f726d6174696f6e.
     #   @return [String]
     #
     # @!attribute [rw] segmentation_upid_type
-    #   SCTE-35 segmentation\_descriptor segmentation\_upid\_type.
+    #   Corresponds to SCTE-35 segmentation\_upid\_type. On the console,
+    #   enter one of the types listed in the SCTE-35 specification,
+    #   converted to a decimal. For example, "0x0C" hex from the
+    #   specification is "12" in decimal. In the CLI, API, or an SDK,
+    #   enter one of the types listed in the SCTE-35 specification, in
+    #   either hex (for example, "0x0C" ) or in decimal (for example,
+    #   "12").
     #   @return [Integer]
     #
     # @!attribute [rw] segments_expected
-    #   SCTE-35 segmentation\_descriptor segments\_expected.
+    #   Corresponds to SCTE-35 segments\_expected. A value that is valid for
+    #   the specified segmentation\_type\_id.
     #   @return [Integer]
     #
     # @!attribute [rw] sub_segment_num
-    #   SCTE-35 segmentation\_descriptor sub\_segment\_num.
+    #   Corresponds to SCTE-35 sub\_segment\_num. A value that is valid for
+    #   the specified segmentation\_type\_id.
     #   @return [Integer]
     #
     # @!attribute [rw] sub_segments_expected
-    #   SCTE-35 segmentation\_descriptor sub\_segments\_expected.
+    #   Corresponds to SCTE-35 sub\_segments\_expected. A value that is
+    #   valid for the specified segmentation\_type\_id.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35SegmentationDescriptor AWS API Documentation
@@ -9642,7 +9696,7 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # SCTE-35 Splice Insert Settings.
+    # Settings for a SCTE-35 splice\_insert message.
     #
     # @note When making an API call, you may pass Scte35SpliceInsertScheduleActionSettings
     #   data as a hash:
@@ -9653,9 +9707,13 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] duration
-    #   The duration for the SCTE-35 splice\_insert specified in 90KHz clock
-    #   ticks. When duration is not specified the expectation is that a
-    #   Scte35ReturnToNetwork action will be scheduled.
+    #   Optional, the duration for the splice\_insert, in 90 KHz ticks. To
+    #   convert seconds to ticks, multiple the seconds by 90,000. If you
+    #   enter a duration, there is an expectation that the downstream system
+    #   can read the duration and cue in at that time. If you do not enter a
+    #   duration, the splice\_insert will continue indefinitely and there is
+    #   an expectation that you will enter a return\_to\_network to end the
+    #   splice\_insert at the appropriate time.
     #   @return [Integer]
     #
     # @!attribute [rw] splice_event_id
@@ -9705,7 +9763,7 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # SCTE-35 Time Signal Settings.
+    # Settings for a SCTE-35 time\_signal.
     #
     # @note When making an API call, you may pass Scte35TimeSignalScheduleActionSettings
     #   data as a hash:
@@ -9837,6 +9895,7 @@ module Aws::MediaLive
     #   @return [Types::InputSpecification]
     #
     # @!attribute [rw] log_level
+    #   The log level the user wants for their channel.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -9869,7 +9928,7 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # Static image activate.
+    # Settings for the action to activate a static image.
     #
     # @note When making an API call, you may pass StaticImageActivateScheduleActionSettings
     #   data as a hash:
@@ -9892,53 +9951,68 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] duration
-    #   The duration in milliseconds for the image to remain in the video.
-    #   If omitted or set to 0, duration is infinite and image will remain
-    #   until explicitly deactivated.
+    #   The duration in milliseconds for the image to remain on the video.
+    #   If omitted or set to 0 the duration is unlimited and the image will
+    #   remain until it is explicitly deactivated.
     #   @return [Integer]
     #
     # @!attribute [rw] fade_in
-    #   The time in milliseconds for the image to fade in. Defaults to 0.
+    #   The time in milliseconds for the image to fade in. The fade-in
+    #   starts at the start time of the overlay. Default is 0 (no fade-in).
     #   @return [Integer]
     #
     # @!attribute [rw] fade_out
-    #   The time in milliseconds for the image to fade out. Defaults to 0.
+    #   Applies only if a duration is specified. The time in milliseconds
+    #   for the image to fade out. The fade-out starts when the duration
+    #   time is hit, so it effectively extends the duration. Default is 0
+    #   (no fade-out).
     #   @return [Integer]
     #
     # @!attribute [rw] height
-    #   The height of the image when inserted into the video. Defaults to
-    #   the native height of the image.
+    #   The height of the image when inserted into the video, in pixels. The
+    #   overlay will be scaled up or down to the specified height. Leave
+    #   blank to use the native height of the overlay.
     #   @return [Integer]
     #
     # @!attribute [rw] image
-    #   The image to overlay on the video. Must be a 32 bit BMP, PNG, or TGA
-    #   file. Must not be larger than the input video.
+    #   The location and filename of the image file to overlay on the video.
+    #   The file must be a 32-bit BMP, PNG, or TGA file, and must not be
+    #   larger (in pixels) than the input video.
     #   @return [Types::InputLocation]
     #
     # @!attribute [rw] image_x
-    #   Placement of the left edge of the image on the horizontal axis in
-    #   pixels. 0 is the left edge of the frame. Defaults to 0.
+    #   Placement of the left edge of the overlay relative to the left edge
+    #   of the video frame, in pixels. 0 (the default) is the left edge of
+    #   the frame. If the placement causes the overlay to extend beyond the
+    #   right edge of the underlying video, then the overlay is cropped on
+    #   the right.
     #   @return [Integer]
     #
     # @!attribute [rw] image_y
-    #   Placement of the top edge of the image on the vertical axis in
-    #   pixels. 0 is the top edge of the frame. Defaults to 0.
+    #   Placement of the top edge of the overlay relative to the top edge of
+    #   the video frame, in pixels. 0 (the default) is the top edge of the
+    #   frame. If the placement causes the overlay to extend beyond the
+    #   bottom edge of the underlying video, then the overlay is cropped on
+    #   the bottom.
     #   @return [Integer]
     #
     # @!attribute [rw] layer
-    #   The Z order of the inserted image. Images with higher layer values
-    #   will be inserted on top of images with lower layer values. Permitted
-    #   values are 0-7 inclusive. Defaults to 0.
+    #   The number of the layer, 0 to 7. There are 8 layers that can be
+    #   overlaid on the video, each layer with a different image. The layers
+    #   are in Z order, which means that overlays with higher values of
+    #   layer are inserted on top of overlays with lower values of layer.
+    #   Default is 0.
     #   @return [Integer]
     #
     # @!attribute [rw] opacity
     #   Opacity of image where 0 is transparent and 100 is fully opaque.
-    #   Defaults to 100.
+    #   Default is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] width
-    #   The width of the image when inserted into the video. Defaults to the
-    #   native width of the image.
+    #   The width of the image when inserted into the video, in pixels. The
+    #   overlay will be scaled up or down to the specified width. Leave
+    #   blank to use the native width of the overlay.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StaticImageActivateScheduleActionSettings AWS API Documentation
@@ -9957,7 +10031,7 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # Static image deactivate.
+    # Settings for the action to deactivate the image in a specific layer.
     #
     # @note When making an API call, you may pass StaticImageDeactivateScheduleActionSettings
     #   data as a hash:
@@ -9968,13 +10042,12 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] fade_out
-    #   The time in milliseconds for the image to fade out. Defaults to 0.
+    #   The time in milliseconds for the image to fade out. Default is 0 (no
+    #   fade-out).
     #   @return [Integer]
     #
     # @!attribute [rw] layer
-    #   The Z order of the inserted image. Images with higher layer values
-    #   will be inserted on top of images with lower layer values. Permitted
-    #   values are 0-7 inclusive. Defaults to 0.
+    #   The image overlay layer to deactivate, 0 to 7. Default is 0.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StaticImageDeactivateScheduleActionSettings AWS API Documentation
@@ -9989,7 +10062,7 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         key_provider_server: { # required
+    #         key_provider_server: {
     #           password_param: "__string",
     #           uri: "__string", # required
     #           username: "__string",
@@ -10052,6 +10125,7 @@ module Aws::MediaLive
     #   @return [Types::InputSpecification]
     #
     # @!attribute [rw] log_level
+    #   The log level the user wants for their channel.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -10356,8 +10430,8 @@ module Aws::MediaLive
     #   UDP output buffering in milliseconds. Larger values increase latency
     #   through the transcoder but simultaneously assist the transcoder in
     #   maintaining a constant, low-jitter UDP/RTP output while
-    #   accommodating clock recovery, input switching, input disruptions,
-    #   picture reordering, etc.
+    #   accommodating clock recovery, input disruptions, picture reordering,
+    #   etc.
     #   @return [Integer]
     #
     # @!attribute [rw] container_settings
@@ -10729,7 +10803,7 @@ module Aws::MediaLive
     #                   key_format_versions: "__string",
     #                   key_provider_settings: {
     #                     static_key_settings: {
-    #                       key_provider_server: { # required
+    #                       key_provider_server: {
     #                         password_param: "__string",
     #                         uri: "__string", # required
     #                         username: "__string",
@@ -11019,7 +11093,8 @@ module Aws::MediaLive
     #                   par_denominator: 1,
     #                   par_numerator: 1,
     #                   profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
-    #                   rate_control_mode: "CBR", # accepts CBR, VBR
+    #                   qvbr_quality_level: 1,
+    #                   rate_control_mode: "CBR", # accepts CBR, QVBR, VBR
     #                   scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #                   scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                   slices: 1,
@@ -11045,7 +11120,7 @@ module Aws::MediaLive
     #             input_settings: {
     #               audio_selectors: [
     #                 {
-    #                   name: "__string", # required
+    #                   name: "__stringMin1", # required
     #                   selector_settings: {
     #                     audio_language_selection: {
     #                       language_code: "__string", # required
@@ -11060,7 +11135,7 @@ module Aws::MediaLive
     #               caption_selectors: [
     #                 {
     #                   language_code: "__string",
-    #                   name: "__string", # required
+    #                   name: "__stringMin1", # required
     #                   selector_settings: {
     #                     arib_source_settings: {
     #                     },
@@ -11141,6 +11216,7 @@ module Aws::MediaLive
     #   @return [Types::InputSpecification]
     #
     # @!attribute [rw] log_level
+    #   The log level the user wants for their channel.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -11373,7 +11449,8 @@ module Aws::MediaLive
     #           par_denominator: 1,
     #           par_numerator: 1,
     #           profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
-    #           rate_control_mode: "CBR", # accepts CBR, VBR
+    #           qvbr_quality_level: 1,
+    #           rate_control_mode: "CBR", # accepts CBR, QVBR, VBR
     #           scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #           scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #           slices: 1,
@@ -11429,7 +11506,8 @@ module Aws::MediaLive
     #             par_denominator: 1,
     #             par_numerator: 1,
     #             profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
-    #             rate_control_mode: "CBR", # accepts CBR, VBR
+    #             qvbr_quality_level: 1,
+    #             rate_control_mode: "CBR", # accepts CBR, QVBR, VBR
     #             scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #             slices: 1,

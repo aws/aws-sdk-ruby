@@ -360,7 +360,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `my-cluster1`
     #   @return [String]
@@ -380,7 +380,7 @@ module Aws::RDS
     #
     #   * Must contain a valid ISO 8601 timestamp.
     #
-    #   * Cannot contain a timestamp set in the future.
+    #   * Can't contain a timestamp set in the future.
     #
     #   Example: `2017-07-08T18:00Z`
     #
@@ -570,13 +570,13 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Cannot be null, empty, or blank
+    #   * Can't be null, empty, or blank
     #
     #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-cluster-param-group1`
     #   @return [String]
@@ -672,7 +672,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `my-cluster-snapshot2`
     #   @return [String]
@@ -831,13 +831,13 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Cannot be null, empty, or blank
+    #   * Can't be null, empty, or blank
     #
     #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-db-parameter-group`
     #   @return [String]
@@ -933,13 +933,13 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Cannot be null, empty, or blank
+    #   * Can't be null, empty, or blank
     #
     #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-db-snapshot`
     #   @return [String]
@@ -1130,13 +1130,13 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Cannot be null, empty, or blank
+    #   * Can't be null, empty, or blank
     #
     #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-option-group`
     #   @return [String]
@@ -1214,6 +1214,7 @@ module Aws::RDS
     #           auto_pause: false,
     #           seconds_until_auto_pause: 1,
     #         },
+    #         deletion_protection: false,
     #         source_region: "String",
     #       }
     #
@@ -1262,7 +1263,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `my-cluster1`
     #   @return [String]
@@ -1273,8 +1274,8 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * If supplied, must match the name of an existing
-    #     DBClusterParameterGroup.
+    #   * If supplied, must match the name of an existing DB cluster
+    #     parameter group.
     #
     #   ^
     #   @return [String]
@@ -1329,7 +1330,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #   @return [String]
     #
     # @!attribute [rw] master_user_password
@@ -1525,6 +1526,12 @@ module Aws::RDS
     #   properties of the DB cluster.
     #   @return [Types::ScalingConfiguration]
     #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB cluster should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] destination_region
     #   @return [String]
     #
@@ -1562,6 +1569,7 @@ module Aws::RDS
       :enable_cloudwatch_logs_exports,
       :engine_mode,
       :scaling_configuration,
+      :deletion_protection,
       :destination_region,
       :source_region)
       include Aws::Structure
@@ -1587,7 +1595,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must match the name of an existing DBClusterParameterGroup.
+    #   * Must match the name of an existing DB cluster parameter group.
     #
     #   ^
     #
@@ -1687,7 +1695,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `my-cluster1-snapshot1`
     #   @return [String]
@@ -1790,6 +1798,7 @@ module Aws::RDS
     #             value: "String",
     #           },
     #         ],
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] db_name
@@ -1808,7 +1817,7 @@ module Aws::RDS
     #
     #   * Must contain 1 to 64 letters or numbers.
     #
-    #   * Cannot be a word reserved by the specified database engine
+    #   * Can't be a word reserved by the specified database engine
     #
     #   **MariaDB**
     #
@@ -1820,7 +1829,7 @@ module Aws::RDS
     #
     #   * Must contain 1 to 64 letters or numbers.
     #
-    #   * Cannot be a word reserved by the specified database engine
+    #   * Can't be a word reserved by the specified database engine
     #
     #   **PostgreSQL**
     #
@@ -1835,7 +1844,7 @@ module Aws::RDS
     #   * Must begin with a letter or an underscore. Subsequent characters
     #     can be letters, underscores, or digits (0-9).
     #
-    #   * Cannot be a word reserved by the specified database engine
+    #   * Can't be a word reserved by the specified database engine
     #
     #   **Oracle**
     #
@@ -1847,7 +1856,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Cannot be longer than 8 characters
+    #   * Can't be longer than 8 characters
     #
     #   ^
     #
@@ -1865,7 +1874,7 @@ module Aws::RDS
     #
     #   * Must contain 1 to 64 letters or numbers.
     #
-    #   * Cannot be a word reserved by the specified database engine
+    #   * Can't be a word reserved by the specified database engine
     #   @return [String]
     #
     # @!attribute [rw] db_instance_identifier
@@ -1878,7 +1887,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `mydbinstance`
     #   @return [String]
@@ -2038,7 +2047,7 @@ module Aws::RDS
     #
     #   * Must be 1 to 16 letters or numbers.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #
     #   **Microsoft SQL Server**
     #
@@ -2050,7 +2059,7 @@ module Aws::RDS
     #
     #   * The first character must be a letter.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #
     #   **MySQL**
     #
@@ -2062,7 +2071,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #
     #   **Oracle**
     #
@@ -2074,7 +2083,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #
     #   **PostgreSQL**
     #
@@ -2086,7 +2095,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #   @return [String]
     #
     # @!attribute [rw] master_user_password
@@ -2195,7 +2204,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #   @return [String]
     #
     # @!attribute [rw] backup_retention_period
@@ -2215,7 +2224,7 @@ module Aws::RDS
     #
     #   * Must be a value from 0 to 35
     #
-    #   * Cannot be set to 0 if the DB instance is a source to Read Replicas
+    #   * Can't be set to 0 if the DB instance is a source to Read Replicas
     #   @return [Integer]
     #
     # @!attribute [rw] preferred_backup_window
@@ -2376,9 +2385,7 @@ module Aws::RDS
     #   Improve Performance][1] in the *Amazon RDS User Guide*.
     #
     #   Constraints: Must be a multiple between 1 and 50 of the storage
-    #   amount for the DB instance. Must also be an integer multiple of
-    #   1000. For example, if the size of your DB instance is 500 GiB, then
-    #   your `Iops` value can be 2000, 3000, 4000, or 5000.
+    #   amount for the DB instance.
     #
     #
     #
@@ -2631,6 +2638,17 @@ module Aws::RDS
     #   DB instance class of the DB instance.
     #   @return [Array<Types::ProcessorFeature>]
     #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB instance should have deletion protection
+    #   enabled. The database can't be deleted when this value is set to
+    #   true. The default is false. For more information, see [ Deleting a
+    #   DB Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceMessage AWS API Documentation
     #
     class CreateDBInstanceMessage < Struct.new(
@@ -2677,7 +2695,8 @@ module Aws::RDS
       :performance_insights_kms_key_id,
       :performance_insights_retention_period,
       :enable_cloudwatch_logs_exports,
-      :processor_features)
+      :processor_features,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -2720,6 +2739,7 @@ module Aws::RDS
     #           },
     #         ],
     #         use_default_processor_features: false,
+    #         deletion_protection: false,
     #         source_region: "String",
     #       }
     #
@@ -3044,6 +3064,17 @@ module Aws::RDS
     #   uses its default processor features.
     #   @return [Boolean]
     #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB instance should have deletion protection
+    #   enabled. The database can't be deleted when this value is set to
+    #   true. The default is false. For more information, see [ Deleting a
+    #   DB Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    #   @return [Boolean]
+    #
     # @!attribute [rw] destination_region
     #   @return [String]
     #
@@ -3080,6 +3111,7 @@ module Aws::RDS
       :enable_cloudwatch_logs_exports,
       :processor_features,
       :use_default_processor_features,
+      :deletion_protection,
       :destination_region,
       :source_region)
       include Aws::Structure
@@ -3137,7 +3169,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   <note markdown="1"> This value is stored as a lowercase string.
     #
@@ -3222,7 +3254,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   * Must not be "Default"
     #
@@ -3284,13 +3316,13 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Cannot be null, empty, or blank
+    #   * Can't be null, empty, or blank
     #
     #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-snapshot-id`
     #   @return [String]
@@ -3543,7 +3575,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `myoptiongroup`
     #   @return [String]
@@ -3830,6 +3862,11 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
     #   @return [Types::ScalingConfigurationInfo]
     #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB cluster has deletion protection enabled. The
+    #   database can't be deleted when this value is set to true.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -3874,7 +3911,8 @@ module Aws::RDS
       :enabled_cloudwatch_logs_exports,
       :capacity,
       :engine_mode,
-      :scaling_configuration_info)
+      :scaling_configuration_info,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -4125,7 +4163,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   <note markdown="1"> This value is stored as a lowercase string.
     #
@@ -4816,6 +4854,16 @@ module Aws::RDS
     #   DB instance class of the DB instance.
     #   @return [Array<Types::ProcessorFeature>]
     #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB instance has deletion protection enabled. The
+    #   database can't be deleted when this value is set to true. For more
+    #   information, see [ Deleting a DB Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -4872,7 +4920,8 @@ module Aws::RDS
       :performance_insights_kms_key_id,
       :performance_insights_retention_period,
       :enabled_cloudwatch_logs_exports,
-      :processor_features)
+      :processor_features,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -5494,7 +5543,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterMessage AWS API Documentation
@@ -5522,7 +5571,7 @@ module Aws::RDS
     #
     #   * You can't delete a default DB cluster parameter group.
     #
-    #   * Cannot be associated with any DB clusters.
+    #   * Can't be associated with any DB clusters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterParameterGroupMessage AWS API Documentation
@@ -5637,9 +5686,9 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
-    #   * Cannot be specified when deleting a Read Replica.
+    #   * Can't be specified when deleting a Read Replica.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstanceMessage AWS API Documentation
@@ -5681,7 +5730,7 @@ module Aws::RDS
     #
     #   * You can't delete a default DB parameter group
     #
-    #   * Cannot be associated with any DB instances
+    #   * Can't be associated with any DB instances
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBParameterGroupMessage AWS API Documentation
@@ -5711,7 +5760,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   * Must not be "Default"
     #   @return [String]
@@ -5931,7 +5980,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `my-cluster1`
     #   @return [String]
@@ -7289,7 +7338,7 @@ module Aws::RDS
     #   * If the source type is `DBSnapshot`, a `DBSnapshotIdentifier` must
     #     be supplied.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #   @return [String]
     #
     # @!attribute [rw] source_type
@@ -7445,7 +7494,7 @@ module Aws::RDS
     #       }
     #
     # @!attribute [rw] option_group_name
-    #   The name of the option group to describe. Cannot be supplied
+    #   The name of the option group to describe. Can't be supplied
     #   together with EngineName or MajorEngineVersion.
     #   @return [String]
     #
@@ -8494,6 +8543,25 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The minimum DB engine version required for each corresponding allowed
+    # value for an option setting.
+    #
+    # @!attribute [rw] allowed_value
+    #   The allowed value for an option setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] minimum_engine_version
+    #   The minimum DB engine version required for the allowed value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/MinimumEngineVersionPerAllowedValue AWS API Documentation
+    #
+    class MinimumEngineVersionPerAllowedValue < Struct.new(
+      :allowed_value,
+      :minimum_engine_version)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ModifyCurrentDBClusterCapacityMessage
     #   data as a hash:
     #
@@ -8584,6 +8652,7 @@ module Aws::RDS
     #           auto_pause: false,
     #           seconds_until_auto_pause: 1,
     #         },
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -8607,7 +8676,7 @@ module Aws::RDS
     #
     #   * The first character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-cluster2`
     #   @return [String]
@@ -8771,6 +8840,11 @@ module Aws::RDS
     #   scaling properties for DB clusters in `serverless` DB engine mode.
     #   @return [Types::ScalingConfiguration]
     #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB cluster has deletion protection enabled. The
+    #   database can't be deleted when this value is set to true.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterMessage AWS API Documentation
     #
     class ModifyDBClusterMessage < Struct.new(
@@ -8789,7 +8863,8 @@ module Aws::RDS
       :backtrack_window,
       :cloudwatch_logs_export_configuration,
       :engine_version,
-      :scaling_configuration)
+      :scaling_configuration,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -8970,6 +9045,7 @@ module Aws::RDS
     #           },
     #         ],
     #         use_default_processor_features: false,
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] db_instance_identifier
@@ -9177,7 +9253,7 @@ module Aws::RDS
     #   * Can be specified for a PostgreSQL Read Replica only if the source
     #     is running PostgreSQL 9.3.5
     #
-    #   * Cannot be set to 0 if the DB instance is a source to Read Replicas
+    #   * Can't be set to 0 if the DB instance is a source to Read Replicas
     #   @return [Integer]
     #
     # @!attribute [rw] preferred_backup_window
@@ -9338,7 +9414,7 @@ module Aws::RDS
     #
     #   * The first character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `mydbinstance`
     #   @return [String]
@@ -9572,6 +9648,16 @@ module Aws::RDS
     #   uses its default processor features.
     #   @return [Boolean]
     #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB instance has deletion protection enabled. The
+    #   database can't be deleted when this value is set to true. For more
+    #   information, see [ Deleting a DB Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstanceMessage AWS API Documentation
     #
     class ModifyDBInstanceMessage < Struct.new(
@@ -9613,7 +9699,8 @@ module Aws::RDS
       :performance_insights_retention_period,
       :cloudwatch_logs_export_configuration,
       :processor_features,
-      :use_default_processor_features)
+      :use_default_processor_features,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -10350,6 +10437,16 @@ module Aws::RDS
     #   be changed from the default value.
     #   @return [Boolean]
     #
+    # @!attribute [rw] is_required
+    #   Boolean value where true indicates that a value must be specified
+    #   for this option setting of the option group option.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] minimum_engine_version_per_allowed_value
+    #   The minimum DB engine version required for the corresponding allowed
+    #   value for this option setting.
+    #   @return [Array<Types::MinimumEngineVersionPerAllowedValue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroupOptionSetting AWS API Documentation
     #
     class OptionGroupOptionSetting < Struct.new(
@@ -10358,7 +10455,9 @@ module Aws::RDS
       :default_value,
       :apply_type,
       :allowed_values,
-      :is_modifiable)
+      :is_modifiable,
+      :is_required,
+      :minimum_engine_version_per_allowed_value)
       include Aws::Structure
     end
 
@@ -11732,6 +11831,7 @@ module Aws::RDS
     #         s3_ingestion_role_arn: "String", # required
     #         backtrack_window: 1,
     #         enable_cloudwatch_logs_exports: ["String"],
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] availability_zones
@@ -11771,7 +11871,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `my-cluster1`
     #   @return [String]
@@ -11838,7 +11938,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #   @return [String]
     #
     # @!attribute [rw] master_user_password
@@ -11996,6 +12096,12 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #   @return [Array<String>]
     #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB cluster should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3Message AWS API Documentation
     #
     class RestoreDBClusterFromS3Message < Struct.new(
@@ -12025,7 +12131,8 @@ module Aws::RDS
       :s3_prefix,
       :s3_ingestion_role_arn,
       :backtrack_window,
-      :enable_cloudwatch_logs_exports)
+      :enable_cloudwatch_logs_exports,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -12074,11 +12181,13 @@ module Aws::RDS
     #           auto_pause: false,
     #           seconds_until_auto_pause: 1,
     #         },
+    #         db_cluster_parameter_group_name: "String",
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] availability_zones
-    #   Provides the list of EC2 Availability Zones that instances in the
-    #   restored DB cluster can be created in.
+    #   Provides the list of Amazon EC2 Availability Zones that instances in
+    #   the restored DB cluster can be created in.
     #   @return [Array<String>]
     #
     # @!attribute [rw] db_cluster_identifier
@@ -12091,7 +12200,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-snapshot-id`
     #   @return [String]
@@ -12126,7 +12235,7 @@ module Aws::RDS
     # @!attribute [rw] port
     #   The port number on which the new DB cluster accepts connections.
     #
-    #   Constraints: Value must be `1150-65535`
+    #   Constraints: This value must be `1150-65535`
     #
     #   Default: The same port as the original DB cluster.
     #   @return [Integer]
@@ -12134,8 +12243,8 @@ module Aws::RDS
     # @!attribute [rw] db_subnet_group_name
     #   The name of the DB subnet group to use for the new DB cluster.
     #
-    #   Constraints: If supplied, must match the name of an existing
-    #   DBSubnetGroup.
+    #   Constraints: If supplied, must match the name of an existing DB
+    #   subnet group.
     #
     #   Example: `mySubnetgroup`
     #   @return [String]
@@ -12167,8 +12276,8 @@ module Aws::RDS
     #   cluster, then you can use the KMS key alias instead of the ARN for
     #   the KMS encryption key.
     #
-    #   If you do not specify a value for the `KmsKeyId` parameter, then the
-    #   following will occur:
+    #   If you don't specify a value for the `KmsKeyId` parameter, then the
+    #   following occurs:
     #
     #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier`
     #     is encrypted, then the restored DB cluster is encrypted using the
@@ -12201,7 +12310,7 @@ module Aws::RDS
     #   @return [Integer]
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
-    #   The list of logs that the restored DB cluster is to export to
+    #   The list of logs that the restored DB cluster is to export to Amazon
     #   CloudWatch Logs. The values in the list depend on the DB engine
     #   being used. For more information, see [Publishing Database Logs to
     #   Amazon CloudWatch Logs ][1] in the *Amazon Aurora User Guide*.
@@ -12220,6 +12329,29 @@ module Aws::RDS
     #   For DB clusters in `serverless` DB engine mode, the scaling
     #   properties of the DB cluster.
     #   @return [Types::ScalingConfiguration]
+    #
+    # @!attribute [rw] db_cluster_parameter_group_name
+    #   The name of the DB cluster parameter group to associate with this DB
+    #   cluster. If this argument is omitted, the default DB cluster
+    #   parameter group for the specified engine is used.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match the name of an existing default DB cluster
+    #     parameter group.
+    #
+    #   * Must be 1 to 255 letters, numbers, or hyphens.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB cluster should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshotMessage AWS API Documentation
     #
@@ -12240,7 +12372,9 @@ module Aws::RDS
       :backtrack_window,
       :enable_cloudwatch_logs_exports,
       :engine_mode,
-      :scaling_configuration)
+      :scaling_configuration,
+      :db_cluster_parameter_group_name,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -12281,6 +12415,8 @@ module Aws::RDS
     #         enable_iam_database_authentication: false,
     #         backtrack_window: 1,
     #         enable_cloudwatch_logs_exports: ["String"],
+    #         db_cluster_parameter_group_name: "String",
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -12292,7 +12428,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #   @return [String]
     #
     # @!attribute [rw] restore_type
@@ -12335,9 +12471,9 @@ module Aws::RDS
     #   * Must be specified if `UseLatestRestorableTime` parameter is not
     #     provided
     #
-    #   * Cannot be specified if `UseLatestRestorableTime` parameter is true
+    #   * Can't be specified if `UseLatestRestorableTime` parameter is true
     #
-    #   * Cannot be specified if `RestoreType` parameter is `copy-on-write`
+    #   * Can't be specified if `RestoreType` parameter is `copy-on-write`
     #
     #   Example: `2015-03-07T23:45:00Z`
     #   @return [Time]
@@ -12348,7 +12484,7 @@ module Aws::RDS
     #
     #   Default: `false`
     #
-    #   Constraints: Cannot be specified if `RestoreToTime` parameter is
+    #   Constraints: Can't be specified if `RestoreToTime` parameter is
     #   provided.
     #   @return [Boolean]
     #
@@ -12401,8 +12537,8 @@ module Aws::RDS
     #   the source DB cluster. The new DB cluster is encrypted with the KMS
     #   key identified by the `KmsKeyId` parameter.
     #
-    #   If you do not specify a value for the `KmsKeyId` parameter, then the
-    #   following will occur:
+    #   If you don't specify a value for the `KmsKeyId` parameter, then the
+    #   following occurs:
     #
     #   * If the DB cluster is encrypted, then the restored DB cluster is
     #     encrypted using the KMS key that was used to encrypt the source DB
@@ -12447,6 +12583,29 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #   @return [Array<String>]
     #
+    # @!attribute [rw] db_cluster_parameter_group_name
+    #   The name of the DB cluster parameter group to associate with this DB
+    #   cluster. If this argument is omitted, the default DB cluster
+    #   parameter group for the specified engine is used.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match the name of an existing DB cluster
+    #     parameter group.
+    #
+    #   * Must be 1 to 255 letters, numbers, or hyphens.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB cluster should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
@@ -12463,7 +12622,9 @@ module Aws::RDS
       :kms_key_id,
       :enable_iam_database_authentication,
       :backtrack_window,
-      :enable_cloudwatch_logs_exports)
+      :enable_cloudwatch_logs_exports,
+      :db_cluster_parameter_group_name,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -12520,6 +12681,8 @@ module Aws::RDS
     #           },
     #         ],
     #         use_default_processor_features: false,
+    #         db_parameter_group_name: "String",
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] db_instance_identifier
@@ -12532,7 +12695,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-snapshot-id`
     #   @return [String]
@@ -12773,6 +12936,33 @@ module Aws::RDS
     #   uses its default processor features.
     #   @return [Boolean]
     #
+    # @!attribute [rw] db_parameter_group_name
+    #   The name of the DB parameter group to associate with this DB
+    #   instance. If this argument is omitted, the default DBParameterGroup
+    #   for the specified engine is used.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match the name of an existing DBParameterGroup.
+    #
+    #   * Must be 1 to 255 letters, numbers, or hyphens.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB instance should have deletion protection
+    #   enabled. The database can't be deleted when this value is set to
+    #   true. The default is false. For more information, see [ Deleting a
+    #   DB Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshotMessage AWS API Documentation
     #
     class RestoreDBInstanceFromDBSnapshotMessage < Struct.new(
@@ -12800,7 +12990,9 @@ module Aws::RDS
       :enable_iam_database_authentication,
       :enable_cloudwatch_logs_exports,
       :processor_features,
-      :use_default_processor_features)
+      :use_default_processor_features,
+      :db_parameter_group_name,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -12874,6 +13066,7 @@ module Aws::RDS
     #           },
     #         ],
     #         use_default_processor_features: false,
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] db_name
@@ -12891,7 +13084,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `mydbinstance`
     #   @return [String]
@@ -12938,7 +13131,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #   @return [String]
     #
     # @!attribute [rw] master_user_password
@@ -13250,6 +13443,17 @@ module Aws::RDS
     #   uses its default processor features.
     #   @return [Boolean]
     #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB instance should have deletion protection
+    #   enabled. The database can't be deleted when this value is set to
+    #   true. The default is false. For more information, see [ Deleting a
+    #   DB Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3Message AWS API Documentation
     #
     class RestoreDBInstanceFromS3Message < Struct.new(
@@ -13294,7 +13498,8 @@ module Aws::RDS
       :performance_insights_retention_period,
       :enable_cloudwatch_logs_exports,
       :processor_features,
-      :use_default_processor_features)
+      :use_default_processor_features,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -13353,6 +13558,8 @@ module Aws::RDS
     #           },
     #         ],
     #         use_default_processor_features: false,
+    #         db_parameter_group_name: "String",
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] source_db_instance_identifier
@@ -13374,7 +13581,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #   @return [String]
     #
     # @!attribute [rw] restore_time
@@ -13387,7 +13594,7 @@ module Aws::RDS
     #
     #   * Must be before the latest restorable time for the DB instance
     #
-    #   * Cannot be specified if UseLatestRestorableTime parameter is true
+    #   * Can't be specified if UseLatestRestorableTime parameter is true
     #
     #   Example: `2009-09-07T23:45:00Z`
     #   @return [Time]
@@ -13398,7 +13605,7 @@ module Aws::RDS
     #
     #   Default: `false`
     #
-    #   Constraints: Cannot be specified if RestoreTime parameter is
+    #   Constraints: Can't be specified if RestoreTime parameter is
     #   provided.
     #   @return [Boolean]
     #
@@ -13616,6 +13823,33 @@ module Aws::RDS
     #   uses its default processor features.
     #   @return [Boolean]
     #
+    # @!attribute [rw] db_parameter_group_name
+    #   The name of the DB parameter group to associate with this DB
+    #   instance. If this argument is omitted, the default DBParameterGroup
+    #   for the specified engine is used.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match the name of an existing DBParameterGroup.
+    #
+    #   * Must be 1 to 255 letters, numbers, or hyphens.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the DB instance should have deletion protection
+    #   enabled. The database can't be deleted when this value is set to
+    #   true. The default is false. For more information, see [ Deleting a
+    #   DB Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBInstanceToPointInTimeMessage < Struct.new(
@@ -13645,7 +13879,9 @@ module Aws::RDS
       :enable_iam_database_authentication,
       :enable_cloudwatch_logs_exports,
       :processor_features,
-      :use_default_processor_features)
+      :use_default_processor_features,
+      :db_parameter_group_name,
+      :deletion_protection)
       include Aws::Structure
     end
 

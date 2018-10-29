@@ -54,121 +54,123 @@ module Aws::CloudFront
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestXml)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [] :client_side_monitoring (false)
-    #   When `true`, client-side metrics will be collected for all API requests from
-    #   this client.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [] :client_side_monitoring_client_id ("")
-    #   Allows you to provide an identifier for this client which will be attached to
-    #   all generated client side metrics. Defaults to an empty string.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [] :client_side_monitoring_port (31000)
-    #   Required for publishing client metrics. The port that the client side monitoring
-    #   agent is running on, where client metrics will be published via UDP.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
-    #   Allows you to provide a custom client-side monitoring publisher class. By default,
-    #   will use the Client Side Monitoring Agent Publisher.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [String] :secret_access_key
     #
-    # @option options [String] :session_token
+    #   @option options [String] :session_token
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -223,8 +225,28 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Creates a new web distribution. Send a `POST` request to the
-    # `/CloudFront API version/distribution`/`distribution ID` resource.
+    # Creates a new web distribution. You create a CloudFront distribution
+    # to tell CloudFront where you want content to be delivered from, and
+    # the details about how to track and manage content delivery. Send a
+    # `POST` request to the `/CloudFront API
+    # version/distribution`/`distribution ID` resource.
+    #
+    # When you update a distribution, there are more required fields than
+    # when you create a distribution. When you update your distribution by
+    # using UpdateDistribution, follow the steps included in the
+    # documentation to get the current configuration and then make your
+    # updates. This helps to make sure that you include all of the required
+    # fields. To view a summary, see [Required Fields for Create
+    # Distribution and Update Distribution][1] in the *Amazon CloudFront
+    # Developer Guide*.
+    #
+    # If you are using Adobe Flash Media Server's RTMP protocol, you set up
+    # a different kind of CloudFront distribution. For more information, see
+    # CreateStreamingDistribution.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-overview-required-fields.html
     #
     # @option params [required, Types::DistributionConfig] :distribution_config
     #   The distribution's configuration information.
@@ -3102,36 +3124,57 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Updates the configuration for a web distribution. Perform the
-    # following steps.
+    # Updates the configuration for a web distribution.
+    #
+    # When you update a distribution, there are more required fields than
+    # when you create a distribution. When you update your distribution by
+    # using this API action, follow the steps here to get the current
+    # configuration and then make your updates, to make sure that you
+    # include all of the required fields. To view a summary, see [Required
+    # Fields for Create Distribution and Update Distribution][1] in the
+    # *Amazon CloudFront Developer Guide*.
+    #
+    # The update process includes getting the current distribution
+    # configuration, updating the XML document that is returned to make your
+    # changes, and then submitting an `UpdateDistribution` request to make
+    # the updates.
     #
     # For information about updating a distribution using the CloudFront
-    # console, see [Creating or Updating a Web Distribution Using the
-    # CloudFront Console ][1] in the *Amazon CloudFront Developer Guide*.
+    # console instead, see [Creating a Distribution][2] in the *Amazon
+    # CloudFront Developer Guide*.
     #
     # **To update a web distribution using the CloudFront API**
     #
     # 1.  Submit a GetDistributionConfig request to get the current
     #     configuration and an `Etag` header for the distribution.
     #
-    #     <note markdown="1"> If you update the distribution again, you need to get a new `Etag`
+    #     <note markdown="1"> If you update the distribution again, you must get a new `Etag`
     #     header.
     #
     #      </note>
     #
     # 2.  Update the XML document that was returned in the response to your
-    #     `GetDistributionConfig` request to include the desired changes.
-    #     You can't change the value of `CallerReference`. If you try to
-    #     change this value, CloudFront returns an `IllegalUpdate` error.
-    #     Note that you must strip out the ETag parameter that is returned.
+    #     `GetDistributionConfig` request to include your changes.
     #
-    #     The new configuration replaces the existing configuration; the
-    #     values that you specify in an `UpdateDistribution` request are not
-    #     merged into the existing configuration. When you add, delete, or
-    #     replace values in an element that allows multiple values (for
-    #     example, `CNAME`), you must specify all of the values that you
-    #     want to appear in the updated distribution. In addition, you must
-    #     update the corresponding `Quantity` element.
+    #     When you edit the XML file, be aware of the following:
+    #
+    #      * You must strip out the ETag parameter that is returned.
+    #
+    #     * Additional fields are required when you update a distribution.
+    #       There may be fields included in the XML file for features that
+    #       you haven't configured for your distribution. This is expected
+    #       and required to successfully update the distribution.
+    #
+    #     * You can't change the value of `CallerReference`. If you try to
+    #       change this value, CloudFront returns an `IllegalUpdate` error.
+    #
+    #     * The new configuration replaces the existing configuration; the
+    #       values that you specify in an `UpdateDistribution` request are
+    #       not merged into your existing configuration. When you add,
+    #       delete, or replace values in an element that allows multiple
+    #       values (for example, `CNAME`), you must specify all of the
+    #       values that you want to appear in the updated distribution. In
+    #       addition, you must update the corresponding `Quantity` element.
     #
     # 3.  Submit an `UpdateDistribution` request to update the configuration
     #     for your distribution:
@@ -3151,21 +3194,10 @@ module Aws::CloudFront
     #     changes have propagated. When propagation is complete, the value
     #     of `Status` is `Deployed`.
     #
-    #     Beginning with the 2012-05-05 version of the CloudFront API, we
-    #     made substantial changes to the format of the XML document that
-    #     you include in the request body when you create or update a
-    #     distribution. With previous versions of the API, we discovered
-    #     that it was too easy to accidentally delete one or more values for
-    #     an element that accepts multiple values, for example, CNAMEs and
-    #     trusted signers. Our changes for the 2012-05-05 release are
-    #     intended to prevent these accidental deletions and to notify you
-    #     when there's a mismatch between the number of values you say
-    #     you're specifying in the `Quantity` element and the number of
-    #     values you're actually specifying.
     #
     #
-    #
-    # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-creating-console.html
+    # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-overview-required-fields.html
+    # [2]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-creating-console.html
     #
     # @option params [required, Types::DistributionConfig] :distribution_config
     #   The distribution's configuration information.
@@ -3825,7 +3857,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

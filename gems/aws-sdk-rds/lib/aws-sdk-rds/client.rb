@@ -56,121 +56,123 @@ module Aws::RDS
     add_plugin(Aws::Plugins::Protocols::Query)
     add_plugin(Aws::RDS::Plugins::CrossRegionCopying)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [] :client_side_monitoring (false)
-    #   When `true`, client-side metrics will be collected for all API requests from
-    #   this client.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [] :client_side_monitoring_client_id ("")
-    #   Allows you to provide an identifier for this client which will be attached to
-    #   all generated client side metrics. Defaults to an empty string.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [] :client_side_monitoring_port (31000)
-    #   Required for publishing client metrics. The port that the client side monitoring
-    #   agent is running on, where client metrics will be published via UDP.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
-    #   Allows you to provide a custom client-side monitoring publisher class. By default,
-    #   will use the Client Side Monitoring Agent Publisher.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [String] :secret_access_key
     #
-    # @option options [String] :session_token
+    #   @option options [String] :session_token
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -552,7 +554,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `my-cluster1`
     #
@@ -571,7 +573,7 @@ module Aws::RDS
     #
     #   * Must contain a valid ISO 8601 timestamp.
     #
-    #   * Cannot contain a timestamp set in the future.
+    #   * Can't contain a timestamp set in the future.
     #
     #   Example: `2017-07-08T18:00Z`
     #
@@ -655,13 +657,13 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Cannot be null, empty, or blank
+    #   * Can't be null, empty, or blank
     #
     #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-cluster-param-group1`
     #
@@ -839,7 +841,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `my-cluster-snapshot2`
     #
@@ -1016,13 +1018,13 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Cannot be null, empty, or blank
+    #   * Can't be null, empty, or blank
     #
     #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-db-parameter-group`
     #
@@ -1136,13 +1138,13 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Cannot be null, empty, or blank
+    #   * Can't be null, empty, or blank
     #
     #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-db-snapshot`
     #
@@ -1355,13 +1357,13 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Cannot be null, empty, or blank
+    #   * Can't be null, empty, or blank
     #
     #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-option-group`
     #
@@ -1509,7 +1511,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `my-cluster1`
     #
@@ -1519,8 +1521,8 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * If supplied, must match the name of an existing
-    #     DBClusterParameterGroup.
+    #   * If supplied, must match the name of an existing DB cluster parameter
+    #     group.
     #
     #   ^
     #
@@ -1569,7 +1571,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #
     # @option params [String] :master_user_password
     #   The password for the master database user. This password can contain
@@ -1748,6 +1750,11 @@ module Aws::RDS
     #   For DB clusters in `serverless` DB engine mode, the scaling properties
     #   of the DB cluster.
     #
+    # @option params [Boolean] :deletion_protection
+    #   Indicates if the DB cluster should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false.
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -1822,6 +1829,7 @@ module Aws::RDS
     #       auto_pause: false,
     #       seconds_until_auto_pause: 1,
     #     },
+    #     deletion_protection: false,
     #     source_region: "String",
     #   })
     #
@@ -1886,6 +1894,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -1937,7 +1946,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must match the name of an existing DBClusterParameterGroup.
+    #   * Must match the name of an existing DB cluster parameter group.
     #
     #   ^
     #
@@ -2040,7 +2049,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `my-cluster1-snapshot1`
     #
@@ -2143,7 +2152,7 @@ module Aws::RDS
     #
     #   * Must contain 1 to 64 letters or numbers.
     #
-    #   * Cannot be a word reserved by the specified database engine
+    #   * Can't be a word reserved by the specified database engine
     #
     #   **MariaDB**
     #
@@ -2155,7 +2164,7 @@ module Aws::RDS
     #
     #   * Must contain 1 to 64 letters or numbers.
     #
-    #   * Cannot be a word reserved by the specified database engine
+    #   * Can't be a word reserved by the specified database engine
     #
     #   **PostgreSQL**
     #
@@ -2170,7 +2179,7 @@ module Aws::RDS
     #   * Must begin with a letter or an underscore. Subsequent characters can
     #     be letters, underscores, or digits (0-9).
     #
-    #   * Cannot be a word reserved by the specified database engine
+    #   * Can't be a word reserved by the specified database engine
     #
     #   **Oracle**
     #
@@ -2182,7 +2191,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Cannot be longer than 8 characters
+    #   * Can't be longer than 8 characters
     #
     #   ^
     #
@@ -2200,7 +2209,7 @@ module Aws::RDS
     #
     #   * Must contain 1 to 64 letters or numbers.
     #
-    #   * Cannot be a word reserved by the specified database engine
+    #   * Can't be a word reserved by the specified database engine
     #
     # @option params [required, String] :db_instance_identifier
     #   The DB instance identifier. This parameter is stored as a lowercase
@@ -2212,7 +2221,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `mydbinstance`
     #
@@ -2367,7 +2376,7 @@ module Aws::RDS
     #
     #   * Must be 1 to 16 letters or numbers.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #
     #   **Microsoft SQL Server**
     #
@@ -2379,7 +2388,7 @@ module Aws::RDS
     #
     #   * The first character must be a letter.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #
     #   **MySQL**
     #
@@ -2391,7 +2400,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #
     #   **Oracle**
     #
@@ -2403,7 +2412,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #
     #   **PostgreSQL**
     #
@@ -2415,7 +2424,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #
     # @option params [String] :master_user_password
     #   The password for the master user. The password can include any
@@ -2515,7 +2524,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     # @option params [Integer] :backup_retention_period
     #   The number of days for which automated backups are retained. Setting
@@ -2533,7 +2542,7 @@ module Aws::RDS
     #
     #   * Must be a value from 0 to 35
     #
-    #   * Cannot be set to 0 if the DB instance is a source to Read Replicas
+    #   * Can't be set to 0 if the DB instance is a source to Read Replicas
     #
     # @option params [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
@@ -2685,9 +2694,7 @@ module Aws::RDS
     #   Improve Performance][1] in the *Amazon RDS User Guide*.
     #
     #   Constraints: Must be a multiple between 1 and 50 of the storage amount
-    #   for the DB instance. Must also be an integer multiple of 1000. For
-    #   example, if the size of your DB instance is 500 GiB, then your `Iops`
-    #   value can be 2000, 3000, 4000, or 5000.
+    #   for the DB instance.
     #
     #
     #
@@ -2915,6 +2922,16 @@ module Aws::RDS
     #   The number of CPU cores and the number of threads per core for the DB
     #   instance class of the DB instance.
     #
+    # @option params [Boolean] :deletion_protection
+    #   Indicates if the DB instance should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false. For more information, see [ Deleting a DB
+    #   Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -2996,6 +3013,7 @@ module Aws::RDS
     #         value: "String",
     #       },
     #     ],
+    #     deletion_protection: false,
     #   })
     #
     # @example Response structure
@@ -3104,6 +3122,7 @@ module Aws::RDS
     #   resp.db_instance.processor_features #=> Array
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
+    #   resp.db_instance.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -3427,6 +3446,16 @@ module Aws::RDS
     #   A value that specifies that the DB instance class of the DB instance
     #   uses its default processor features.
     #
+    # @option params [Boolean] :deletion_protection
+    #   Indicates if the DB instance should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false. For more information, see [ Deleting a DB
+    #   Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -3500,6 +3529,7 @@ module Aws::RDS
     #       },
     #     ],
     #     use_default_processor_features: false,
+    #     deletion_protection: false,
     #     source_region: "String",
     #   })
     #
@@ -3609,6 +3639,7 @@ module Aws::RDS
     #   resp.db_instance.processor_features #=> Array
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
+    #   resp.db_instance.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -3656,7 +3687,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   <note markdown="1"> This value is stored as a lowercase string.
     #
@@ -3758,7 +3789,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   * Must not be "Default"
     #
@@ -3841,13 +3872,13 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Cannot be null, empty, or blank
+    #   * Can't be null, empty, or blank
     #
     #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-snapshot-id`
     #
@@ -4194,7 +4225,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `myoptiongroup`
     #
@@ -4348,7 +4379,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     # @return [Types::DeleteDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4439,6 +4470,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -4469,7 +4501,7 @@ module Aws::RDS
     #
     #   * You can't delete a default DB cluster parameter group.
     #
-    #   * Cannot be associated with any DB clusters.
+    #   * Can't be associated with any DB clusters.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4652,9 +4684,9 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
-    #   * Cannot be specified when deleting a Read Replica.
+    #   * Can't be specified when deleting a Read Replica.
     #
     # @return [Types::DeleteDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4790,6 +4822,7 @@ module Aws::RDS
     #   resp.db_instance.processor_features #=> Array
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
+    #   resp.db_instance.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -4812,7 +4845,7 @@ module Aws::RDS
     #
     #   * You can't delete a default DB parameter group
     #
-    #   * Cannot be associated with any DB instances
+    #   * Can't be associated with any DB instances
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4860,7 +4893,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   * Must not be "Default"
     #
@@ -5250,7 +5283,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `my-cluster1`
     #
@@ -5920,6 +5953,7 @@ module Aws::RDS
     #   resp.db_clusters[0].scaling_configuration_info.max_capacity #=> Integer
     #   resp.db_clusters[0].scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_clusters[0].scaling_configuration_info.seconds_until_auto_pause #=> Integer
+    #   resp.db_clusters[0].deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusters AWS API Documentation
     #
@@ -6245,6 +6279,7 @@ module Aws::RDS
     #   resp.db_instances[0].processor_features #=> Array
     #   resp.db_instances[0].processor_features[0].name #=> String
     #   resp.db_instances[0].processor_features[0].value #=> String
+    #   resp.db_instances[0].deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstances AWS API Documentation
     #
@@ -7289,7 +7324,7 @@ module Aws::RDS
     #   * If the source type is `DBSnapshot`, a `DBSnapshotIdentifier` must be
     #     supplied.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     # @option params [String] :source_type
     #   The event source to retrieve events for. If no value is specified, all
@@ -7496,6 +7531,10 @@ module Aws::RDS
     #   resp.option_group_options[0].option_group_option_settings[0].apply_type #=> String
     #   resp.option_group_options[0].option_group_option_settings[0].allowed_values #=> String
     #   resp.option_group_options[0].option_group_option_settings[0].is_modifiable #=> Boolean
+    #   resp.option_group_options[0].option_group_option_settings[0].is_required #=> Boolean
+    #   resp.option_group_options[0].option_group_option_settings[0].minimum_engine_version_per_allowed_value #=> Array
+    #   resp.option_group_options[0].option_group_option_settings[0].minimum_engine_version_per_allowed_value[0].allowed_value #=> String
+    #   resp.option_group_options[0].option_group_option_settings[0].minimum_engine_version_per_allowed_value[0].minimum_engine_version #=> String
     #   resp.option_group_options[0].option_group_option_versions #=> Array
     #   resp.option_group_options[0].option_group_option_versions[0].version #=> String
     #   resp.option_group_options[0].option_group_option_versions[0].is_default #=> Boolean
@@ -7513,7 +7552,7 @@ module Aws::RDS
     # Describes the available option groups.
     #
     # @option params [String] :option_group_name
-    #   The name of the option group to describe. Cannot be supplied together
+    #   The name of the option group to describe. Can't be supplied together
     #   with EngineName or MajorEngineVersion.
     #
     # @option params [Array<Types::Filter>] :filters
@@ -8483,6 +8522,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -8688,7 +8728,7 @@ module Aws::RDS
     #
     #   * The first character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-cluster2`
     #
@@ -8834,6 +8874,10 @@ module Aws::RDS
     #   The scaling properties of the DB cluster. You can only modify scaling
     #   properties for DB clusters in `serverless` DB engine mode.
     #
+    # @option params [Boolean] :deletion_protection
+    #   Indicates if the DB cluster has deletion protection enabled. The
+    #   database can't be deleted when this value is set to true.
+    #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -8885,6 +8929,7 @@ module Aws::RDS
     #       auto_pause: false,
     #       seconds_until_auto_pause: 1,
     #     },
+    #     deletion_protection: false,
     #   })
     #
     # @example Response structure
@@ -8948,6 +8993,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -9358,7 +9404,7 @@ module Aws::RDS
     #   * Can be specified for a PostgreSQL Read Replica only if the source is
     #     running PostgreSQL 9.3.5
     #
-    #   * Cannot be set to 0 if the DB instance is a source to Read Replicas
+    #   * Can't be set to 0 if the DB instance is a source to Read Replicas
     #
     # @option params [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
@@ -9506,7 +9552,7 @@ module Aws::RDS
     #
     #   * The first character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `mydbinstance`
     #
@@ -9717,6 +9763,15 @@ module Aws::RDS
     #   A value that specifies that the DB instance class of the DB instance
     #   uses its default processor features.
     #
+    # @option params [Boolean] :deletion_protection
+    #   Indicates if the DB instance has deletion protection enabled. The
+    #   database can't be deleted when this value is set to true. For more
+    #   information, see [ Deleting a DB Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -9793,6 +9848,7 @@ module Aws::RDS
     #       },
     #     ],
     #     use_default_processor_features: false,
+    #     deletion_protection: false,
     #   })
     #
     # @example Response structure
@@ -9901,6 +9957,7 @@ module Aws::RDS
     #   resp.db_instance.processor_features #=> Array
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
+    #   resp.db_instance.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -10707,6 +10764,7 @@ module Aws::RDS
     #   resp.db_instance.processor_features #=> Array
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
+    #   resp.db_instance.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -10802,6 +10860,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -11065,6 +11124,7 @@ module Aws::RDS
     #   resp.db_instance.processor_features #=> Array
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
+    #   resp.db_instance.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -11458,7 +11518,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `my-cluster1`
     #
@@ -11518,7 +11578,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #
     # @option params [required, String] :master_user_password
     #   The password for the master database user. This password can contain
@@ -11660,6 +11720,11 @@ module Aws::RDS
     #
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #
+    # @option params [Boolean] :deletion_protection
+    #   Indicates if the DB cluster should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false.
+    #
     # @return [Types::RestoreDBClusterFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromS3Result#db_cluster #db_cluster} => Types::DBCluster
@@ -11699,6 +11764,7 @@ module Aws::RDS
     #     s3_ingestion_role_arn: "String", # required
     #     backtrack_window: 1,
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     deletion_protection: false,
     #   })
     #
     # @example Response structure
@@ -11762,6 +11828,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -11791,8 +11858,8 @@ module Aws::RDS
     # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
     #
     # @option params [Array<String>] :availability_zones
-    #   Provides the list of EC2 Availability Zones that instances in the
-    #   restored DB cluster can be created in.
+    #   Provides the list of Amazon EC2 Availability Zones that instances in
+    #   the restored DB cluster can be created in.
     #
     # @option params [required, String] :db_cluster_identifier
     #   The name of the DB cluster to create from the DB snapshot or DB
@@ -11804,7 +11871,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-snapshot-id`
     #
@@ -11835,15 +11902,15 @@ module Aws::RDS
     # @option params [Integer] :port
     #   The port number on which the new DB cluster accepts connections.
     #
-    #   Constraints: Value must be `1150-65535`
+    #   Constraints: This value must be `1150-65535`
     #
     #   Default: The same port as the original DB cluster.
     #
     # @option params [String] :db_subnet_group_name
     #   The name of the DB subnet group to use for the new DB cluster.
     #
-    #   Constraints: If supplied, must match the name of an existing
-    #   DBSubnetGroup.
+    #   Constraints: If supplied, must match the name of an existing DB subnet
+    #   group.
     #
     #   Example: `mySubnetgroup`
     #
@@ -11869,8 +11936,8 @@ module Aws::RDS
     #   cluster, then you can use the KMS key alias instead of the ARN for the
     #   KMS encryption key.
     #
-    #   If you do not specify a value for the `KmsKeyId` parameter, then the
-    #   following will occur:
+    #   If you don't specify a value for the `KmsKeyId` parameter, then the
+    #   following occurs:
     #
     #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier` is
     #     encrypted, then the restored DB cluster is encrypted using the KMS
@@ -11899,7 +11966,7 @@ module Aws::RDS
     #   ^
     #
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
-    #   The list of logs that the restored DB cluster is to export to
+    #   The list of logs that the restored DB cluster is to export to Amazon
     #   CloudWatch Logs. The values in the list depend on the DB engine being
     #   used. For more information, see [Publishing Database Logs to Amazon
     #   CloudWatch Logs ][1] in the *Amazon Aurora User Guide*.
@@ -11915,6 +11982,27 @@ module Aws::RDS
     # @option params [Types::ScalingConfiguration] :scaling_configuration
     #   For DB clusters in `serverless` DB engine mode, the scaling properties
     #   of the DB cluster.
+    #
+    # @option params [String] :db_cluster_parameter_group_name
+    #   The name of the DB cluster parameter group to associate with this DB
+    #   cluster. If this argument is omitted, the default DB cluster parameter
+    #   group for the specified engine is used.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match the name of an existing default DB cluster
+    #     parameter group.
+    #
+    #   * Must be 1 to 255 letters, numbers, or hyphens.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
+    #
+    # @option params [Boolean] :deletion_protection
+    #   Indicates if the DB cluster should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false.
     #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11967,6 +12055,8 @@ module Aws::RDS
     #       auto_pause: false,
     #       seconds_until_auto_pause: 1,
     #     },
+    #     db_cluster_parameter_group_name: "String",
+    #     deletion_protection: false,
     #   })
     #
     # @example Response structure
@@ -12030,6 +12120,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -12072,7 +12163,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     # @option params [String] :restore_type
     #   The type of restore to be performed. You can specify one of the
@@ -12112,9 +12203,9 @@ module Aws::RDS
     #   * Must be specified if `UseLatestRestorableTime` parameter is not
     #     provided
     #
-    #   * Cannot be specified if `UseLatestRestorableTime` parameter is true
+    #   * Can't be specified if `UseLatestRestorableTime` parameter is true
     #
-    #   * Cannot be specified if `RestoreType` parameter is `copy-on-write`
+    #   * Can't be specified if `RestoreType` parameter is `copy-on-write`
     #
     #   Example: `2015-03-07T23:45:00Z`
     #
@@ -12124,7 +12215,7 @@ module Aws::RDS
     #
     #   Default: `false`
     #
-    #   Constraints: Cannot be specified if `RestoreToTime` parameter is
+    #   Constraints: Can't be specified if `RestoreToTime` parameter is
     #   provided.
     #
     # @option params [Integer] :port
@@ -12171,8 +12262,8 @@ module Aws::RDS
     #   source DB cluster. The new DB cluster is encrypted with the KMS key
     #   identified by the `KmsKeyId` parameter.
     #
-    #   If you do not specify a value for the `KmsKeyId` parameter, then the
-    #   following will occur:
+    #   If you don't specify a value for the `KmsKeyId` parameter, then the
+    #   following occurs:
     #
     #   * If the DB cluster is encrypted, then the restored DB cluster is
     #     encrypted using the KMS key that was used to encrypt the source DB
@@ -12212,6 +12303,27 @@ module Aws::RDS
     #
     #
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #
+    # @option params [String] :db_cluster_parameter_group_name
+    #   The name of the DB cluster parameter group to associate with this DB
+    #   cluster. If this argument is omitted, the default DB cluster parameter
+    #   group for the specified engine is used.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match the name of an existing DB cluster parameter
+    #     group.
+    #
+    #   * Must be 1 to 255 letters, numbers, or hyphens.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
+    #
+    # @option params [Boolean] :deletion_protection
+    #   Indicates if the DB cluster should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false.
     #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12256,6 +12368,8 @@ module Aws::RDS
     #     enable_iam_database_authentication: false,
     #     backtrack_window: 1,
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     db_cluster_parameter_group_name: "String",
+    #     deletion_protection: false,
     #   })
     #
     # @example Response structure
@@ -12319,6 +12433,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -12366,7 +12481,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-snapshot-id`
     #
@@ -12580,6 +12695,31 @@ module Aws::RDS
     #   A value that specifies that the DB instance class of the DB instance
     #   uses its default processor features.
     #
+    # @option params [String] :db_parameter_group_name
+    #   The name of the DB parameter group to associate with this DB instance.
+    #   If this argument is omitted, the default DBParameterGroup for the
+    #   specified engine is used.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match the name of an existing DBParameterGroup.
+    #
+    #   * Must be 1 to 255 letters, numbers, or hyphens.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
+    #
+    # @option params [Boolean] :deletion_protection
+    #   Indicates if the DB instance should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false. For more information, see [ Deleting a DB
+    #   Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    #
     # @return [Types::RestoreDBInstanceFromDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromDBSnapshotResult#db_instance #db_instance} => Types::DBInstance
@@ -12717,6 +12857,8 @@ module Aws::RDS
     #       },
     #     ],
     #     use_default_processor_features: false,
+    #     db_parameter_group_name: "String",
+    #     deletion_protection: false,
     #   })
     #
     # @example Response structure
@@ -12825,6 +12967,7 @@ module Aws::RDS
     #   resp.db_instance.processor_features #=> Array
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
+    #   resp.db_instance.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -12860,7 +13003,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `mydbinstance`
     #
@@ -12902,7 +13045,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #
     # @option params [String] :master_user_password
     #   The password for the master user. The password can include any
@@ -13173,6 +13316,16 @@ module Aws::RDS
     #   A value that specifies that the DB instance class of the DB instance
     #   uses its default processor features.
     #
+    # @option params [Boolean] :deletion_protection
+    #   Indicates if the DB instance should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false. For more information, see [ Deleting a DB
+    #   Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    #
     # @return [Types::RestoreDBInstanceFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromS3Result#db_instance #db_instance} => Types::DBInstance
@@ -13232,6 +13385,7 @@ module Aws::RDS
     #       },
     #     ],
     #     use_default_processor_features: false,
+    #     deletion_protection: false,
     #   })
     #
     # @example Response structure
@@ -13340,6 +13494,7 @@ module Aws::RDS
     #   resp.db_instance.processor_features #=> Array
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
+    #   resp.db_instance.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -13387,7 +13542,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     # @option params [Time,DateTime,Date,Integer,String] :restore_time
     #   The date and time to restore from.
@@ -13399,7 +13554,7 @@ module Aws::RDS
     #
     #   * Must be before the latest restorable time for the DB instance
     #
-    #   * Cannot be specified if UseLatestRestorableTime parameter is true
+    #   * Can't be specified if UseLatestRestorableTime parameter is true
     #
     #   Example: `2009-09-07T23:45:00Z`
     #
@@ -13409,7 +13564,7 @@ module Aws::RDS
     #
     #   Default: `false`
     #
-    #   Constraints: Cannot be specified if RestoreTime parameter is provided.
+    #   Constraints: Can't be specified if RestoreTime parameter is provided.
     #
     # @option params [String] :db_instance_class
     #   The compute and memory capacity of the Amazon RDS DB instance, for
@@ -13600,6 +13755,31 @@ module Aws::RDS
     #   A value that specifies that the DB instance class of the DB instance
     #   uses its default processor features.
     #
+    # @option params [String] :db_parameter_group_name
+    #   The name of the DB parameter group to associate with this DB instance.
+    #   If this argument is omitted, the default DBParameterGroup for the
+    #   specified engine is used.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match the name of an existing DBParameterGroup.
+    #
+    #   * Must be 1 to 255 letters, numbers, or hyphens.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
+    #
+    # @option params [Boolean] :deletion_protection
+    #   Indicates if the DB instance should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false. For more information, see [ Deleting a DB
+    #   Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    #
     # @return [Types::RestoreDBInstanceToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceToPointInTimeResult#db_instance #db_instance} => Types::DBInstance
@@ -13740,6 +13920,8 @@ module Aws::RDS
     #       },
     #     ],
     #     use_default_processor_features: false,
+    #     db_parameter_group_name: "String",
+    #     deletion_protection: false,
     #   })
     #
     # @example Response structure
@@ -13848,6 +14030,7 @@ module Aws::RDS
     #   resp.db_instance.processor_features #=> Array
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
+    #   resp.db_instance.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -13951,6 +14134,13 @@ module Aws::RDS
     # console, the stop-db-cluster AWS CLI command, or the StopDBCluster
     # action.
     #
+    # For more information, see [ Stopping and Starting an Aurora
+    # Cluster][1] in the *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-cluster-stop-start.html
+    #
     # @option params [required, String] :db_cluster_identifier
     #   The DB cluster identifier of the Amazon Aurora DB cluster to be
     #   started. This parameter is stored as a lowercase string.
@@ -14026,6 +14216,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -14171,6 +14362,7 @@ module Aws::RDS
     #   resp.db_instance.processor_features #=> Array
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
+    #   resp.db_instance.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -14185,6 +14377,13 @@ module Aws::RDS
     # retains the DB cluster's metadata, including its endpoints and DB
     # parameter groups. Aurora also retains the transaction logs so you can
     # do a point-in-time restore if necessary.
+    #
+    # For more information, see [ Stopping and Starting an Aurora
+    # Cluster][1] in the *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-cluster-stop-start.html
     #
     # @option params [required, String] :db_cluster_identifier
     #   The DB cluster identifier of the Amazon Aurora DB cluster to be
@@ -14261,6 +14460,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -14413,6 +14613,7 @@ module Aws::RDS
     #   resp.db_instance.processor_features #=> Array
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
+    #   resp.db_instance.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -14436,7 +14637,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

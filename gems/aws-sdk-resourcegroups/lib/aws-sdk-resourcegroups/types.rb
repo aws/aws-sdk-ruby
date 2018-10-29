@@ -226,6 +226,52 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
+    # A filter name and value pair that is used to obtain more specific
+    # results from a list of groups.
+    #
+    # @note When making an API call, you may pass GroupFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "resource-type", # required, accepts resource-type
+    #         values: ["GroupFilterValue"], # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the filter. Filter names are case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   One or more filter values. Allowed filter values vary by group
+    #   filter name, and are case-sensitive.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GroupFilter AWS API Documentation
+    #
+    class GroupFilter < Struct.new(
+      :name,
+      :values)
+      include Aws::Structure
+    end
+
+    # The ARN and group name of a group.
+    #
+    # @!attribute [rw] group_name
+    #   The name of a resource group.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_arn
+    #   The ARN of a resource group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GroupIdentifier AWS API Documentation
+    #
+    class GroupIdentifier < Struct.new(
+      :group_name,
+      :group_arn)
+      include Aws::Structure
+    end
+
     # The underlying resource query of a resource group. Resources that
     # match query results are part of the group.
     #
@@ -322,9 +368,26 @@ module Aws::ResourceGroups
     #   data as a hash:
     #
     #       {
+    #         filters: [
+    #           {
+    #             name: "resource-type", # required, accepts resource-type
+    #             values: ["GroupFilterValue"], # required
+    #           },
+    #         ],
     #         max_results: 1,
     #         next_token: "NextToken",
     #       }
+    #
+    # @!attribute [rw] filters
+    #   Filters, formatted as GroupFilter objects, that you want to apply to
+    #   a ListGroups operation.
+    #
+    #   * `group-type` - Filter groups by resource type. Specify up to five
+    #     group types in the format AWS::ServiceCode::ResourceType. For
+    #     example, AWS::EC2::Instance, or AWS::S3::Bucket.
+    #
+    #   ^
+    #   @return [Array<Types::GroupFilter>]
     #
     # @!attribute [rw] max_results
     #   The maximum number of resource group results that are returned by
@@ -340,11 +403,17 @@ module Aws::ResourceGroups
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupsInput AWS API Documentation
     #
     class ListGroupsInput < Struct.new(
+      :filters,
       :max_results,
       :next_token)
       include Aws::Structure
     end
 
+    # @!attribute [rw] group_identifiers
+    #   A list of GroupIdentifier objects. Each identifier is an object that
+    #   contains both the GroupName and the GroupArn.
+    #   @return [Array<Types::GroupIdentifier>]
+    #
     # @!attribute [rw] groups
     #   A list of resource groups.
     #   @return [Array<Types::Group>]
@@ -357,6 +426,7 @@ module Aws::ResourceGroups
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupsOutput AWS API Documentation
     #
     class ListGroupsOutput < Struct.new(
+      :group_identifiers,
       :groups,
       :next_token)
       include Aws::Structure

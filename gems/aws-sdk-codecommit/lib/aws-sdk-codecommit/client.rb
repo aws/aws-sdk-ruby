@@ -54,131 +54,133 @@ module Aws::CodeCommit
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [] :client_side_monitoring (false)
-    #   When `true`, client-side metrics will be collected for all API requests from
-    #   this client.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [] :client_side_monitoring_client_id ("")
-    #   Allows you to provide an identifier for this client which will be attached to
-    #   all generated client side metrics. Defaults to an empty string.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [] :client_side_monitoring_port (31000)
-    #   Required for publishing client metrics. The port that the client side monitoring
-    #   agent is running on, where client metrics will be published via UDP.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
-    #   Allows you to provide a custom client-side monitoring publisher class. By default,
-    #   will use the Client Side Monitoring Agent Publisher.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [String] :secret_access_key
     #
-    # @option options [String] :session_token
+    #   @option options [String] :session_token
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -336,8 +338,8 @@ module Aws::CodeCommit
     #   resp.pull_request.pull_request_targets[0].source_reference #=> String
     #   resp.pull_request.pull_request_targets[0].destination_reference #=> String
     #   resp.pull_request.pull_request_targets[0].destination_commit #=> String
-    #   resp.pull_request.pull_request_targets[0].merge_base #=> String
     #   resp.pull_request.pull_request_targets[0].source_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_base #=> String
     #   resp.pull_request.pull_request_targets[0].merge_metadata.is_merged #=> Boolean
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merged_by #=> String
     #   resp.pull_request.client_request_token #=> String
@@ -481,6 +483,88 @@ module Aws::CodeCommit
     # @param [Hash] params ({})
     def delete_comment_content(params = {}, options = {})
       req = build_request(:delete_comment_content, params)
+      req.send_request(options)
+    end
+
+    # Deletes a specified file from a specified branch. A commit is created
+    # on the branch that contains the revision. The file will still exist in
+    # the commits prior to the commit that contains the deletion.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository that contains the file to delete.
+    #
+    # @option params [required, String] :branch_name
+    #   The name of the branch where the commit will be made deleting the
+    #   file.
+    #
+    # @option params [required, String] :file_path
+    #   The fully-qualified path to the file that will be deleted, including
+    #   the full name and extension of that file. For example,
+    #   /examples/file.md is a fully qualified path to a file named file.md in
+    #   a folder named examples.
+    #
+    # @option params [required, String] :parent_commit_id
+    #   The ID of the commit that is the tip of the branch where you want to
+    #   create the commit that will delete the file. This must be the HEAD
+    #   commit for the branch. The commit that deletes the file will be
+    #   created from this commit ID.
+    #
+    # @option params [Boolean] :keep_empty_folders
+    #   Specifies whether to delete the folder or directory that contains the
+    #   file you want to delete if that file is the only object in the folder
+    #   or directory. By default, empty folders will be deleted. This includes
+    #   empty folders that are part of the directory structure. For example,
+    #   if the path to a file is dir1/dir2/dir3/dir4, and dir2 and dir3 are
+    #   empty, deleting the last file in dir4 will also delete the empty
+    #   folders dir4, dir3, and dir2.
+    #
+    # @option params [String] :commit_message
+    #   The commit message you want to include as part of deleting the file.
+    #   Commit messages are limited to 256 KB. If no message is specified, a
+    #   default message will be used.
+    #
+    # @option params [String] :name
+    #   The name of the author of the commit that deletes the file. If no name
+    #   is specified, the user's ARN will be used as the author name and
+    #   committer name.
+    #
+    # @option params [String] :email
+    #   The email address for the commit that deletes the file. If no email
+    #   address is specified, the email address will be left blank.
+    #
+    # @return [Types::DeleteFileOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteFileOutput#commit_id #commit_id} => String
+    #   * {Types::DeleteFileOutput#blob_id #blob_id} => String
+    #   * {Types::DeleteFileOutput#tree_id #tree_id} => String
+    #   * {Types::DeleteFileOutput#file_path #file_path} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_file({
+    #     repository_name: "RepositoryName", # required
+    #     branch_name: "BranchName", # required
+    #     file_path: "Path", # required
+    #     parent_commit_id: "CommitId", # required
+    #     keep_empty_folders: false,
+    #     commit_message: "Message",
+    #     name: "Name",
+    #     email: "Email",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.commit_id #=> String
+    #   resp.blob_id #=> String
+    #   resp.tree_id #=> String
+    #   resp.file_path #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteFile AWS API Documentation
+    #
+    # @overload delete_file(params = {})
+    # @param [Hash] params ({})
+    def delete_file(params = {}, options = {})
+      req = build_request(:delete_file, params)
       req.send_request(options)
     end
 
@@ -953,6 +1037,128 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Returns the base-64 encoded contents of a specified file and its
+    # metadata.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository that contains the file.
+    #
+    # @option params [String] :commit_specifier
+    #   The fully-quaified reference that identifies the commit that contains
+    #   the file. For example, you could specify a full commit ID, a tag, a
+    #   branch name, or a reference such as refs/heads/master. If none is
+    #   provided, then the head commit will be used.
+    #
+    # @option params [required, String] :file_path
+    #   The fully-qualified path to the file, including the full name and
+    #   extension of the file. For example, /examples/file.md is the
+    #   fully-qualified path to a file named file.md in a folder named
+    #   examples.
+    #
+    # @return [Types::GetFileOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFileOutput#commit_id #commit_id} => String
+    #   * {Types::GetFileOutput#blob_id #blob_id} => String
+    #   * {Types::GetFileOutput#file_path #file_path} => String
+    #   * {Types::GetFileOutput#file_mode #file_mode} => String
+    #   * {Types::GetFileOutput#file_size #file_size} => Integer
+    #   * {Types::GetFileOutput#file_content #file_content} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_file({
+    #     repository_name: "RepositoryName", # required
+    #     commit_specifier: "CommitName",
+    #     file_path: "Path", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.commit_id #=> String
+    #   resp.blob_id #=> String
+    #   resp.file_path #=> String
+    #   resp.file_mode #=> String, one of "EXECUTABLE", "NORMAL", "SYMLINK"
+    #   resp.file_size #=> Integer
+    #   resp.file_content #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetFile AWS API Documentation
+    #
+    # @overload get_file(params = {})
+    # @param [Hash] params ({})
+    def get_file(params = {}, options = {})
+      req = build_request(:get_file, params)
+      req.send_request(options)
+    end
+
+    # Returns the contents of a specified folder in a repository.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository.
+    #
+    # @option params [String] :commit_specifier
+    #   A fully-qualified reference used to identify a commit that contains
+    #   the version of the folder's content to return. A fully-qualified
+    #   reference can be a commit ID, branch name, tag, or reference such as
+    #   HEAD. If no specifier is provided, the folder content will be returned
+    #   as it exists in the HEAD commit.
+    #
+    # @option params [required, String] :folder_path
+    #   The fully-qualified path to the folder whose contents will be
+    #   returned, including the folder name. For example, /examples is a
+    #   fully-qualified path to a folder named examples that was created off
+    #   of the root directory (/) of a repository.
+    #
+    # @return [Types::GetFolderOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFolderOutput#commit_id #commit_id} => String
+    #   * {Types::GetFolderOutput#folder_path #folder_path} => String
+    #   * {Types::GetFolderOutput#tree_id #tree_id} => String
+    #   * {Types::GetFolderOutput#sub_folders #sub_folders} => Array&lt;Types::Folder&gt;
+    #   * {Types::GetFolderOutput#files #files} => Array&lt;Types::File&gt;
+    #   * {Types::GetFolderOutput#symbolic_links #symbolic_links} => Array&lt;Types::SymbolicLink&gt;
+    #   * {Types::GetFolderOutput#sub_modules #sub_modules} => Array&lt;Types::SubModule&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_folder({
+    #     repository_name: "RepositoryName", # required
+    #     commit_specifier: "CommitName",
+    #     folder_path: "Path", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.commit_id #=> String
+    #   resp.folder_path #=> String
+    #   resp.tree_id #=> String
+    #   resp.sub_folders #=> Array
+    #   resp.sub_folders[0].tree_id #=> String
+    #   resp.sub_folders[0].absolute_path #=> String
+    #   resp.sub_folders[0].relative_path #=> String
+    #   resp.files #=> Array
+    #   resp.files[0].blob_id #=> String
+    #   resp.files[0].absolute_path #=> String
+    #   resp.files[0].relative_path #=> String
+    #   resp.files[0].file_mode #=> String, one of "EXECUTABLE", "NORMAL", "SYMLINK"
+    #   resp.symbolic_links #=> Array
+    #   resp.symbolic_links[0].blob_id #=> String
+    #   resp.symbolic_links[0].absolute_path #=> String
+    #   resp.symbolic_links[0].relative_path #=> String
+    #   resp.symbolic_links[0].file_mode #=> String, one of "EXECUTABLE", "NORMAL", "SYMLINK"
+    #   resp.sub_modules #=> Array
+    #   resp.sub_modules[0].commit_id #=> String
+    #   resp.sub_modules[0].absolute_path #=> String
+    #   resp.sub_modules[0].relative_path #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetFolder AWS API Documentation
+    #
+    # @overload get_folder(params = {})
+    # @param [Hash] params ({})
+    def get_folder(params = {}, options = {})
+      req = build_request(:get_folder, params)
+      req.send_request(options)
+    end
+
     # Returns information about merge conflicts between the before and after
     # commit IDs for a pull request in a repository.
     #
@@ -1031,8 +1237,8 @@ module Aws::CodeCommit
     #   resp.pull_request.pull_request_targets[0].source_reference #=> String
     #   resp.pull_request.pull_request_targets[0].destination_reference #=> String
     #   resp.pull_request.pull_request_targets[0].destination_commit #=> String
-    #   resp.pull_request.pull_request_targets[0].merge_base #=> String
     #   resp.pull_request.pull_request_targets[0].source_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_base #=> String
     #   resp.pull_request.pull_request_targets[0].merge_metadata.is_merged #=> Boolean
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merged_by #=> String
     #   resp.pull_request.client_request_token #=> String
@@ -1304,8 +1510,8 @@ module Aws::CodeCommit
     #   resp.pull_request.pull_request_targets[0].source_reference #=> String
     #   resp.pull_request.pull_request_targets[0].destination_reference #=> String
     #   resp.pull_request.pull_request_targets[0].destination_commit #=> String
-    #   resp.pull_request.pull_request_targets[0].merge_base #=> String
     #   resp.pull_request.pull_request_targets[0].source_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_base #=> String
     #   resp.pull_request.pull_request_targets[0].merge_metadata.is_merged #=> Boolean
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merged_by #=> String
     #   resp.pull_request.client_request_token #=> String
@@ -1831,8 +2037,8 @@ module Aws::CodeCommit
     #   resp.pull_request.pull_request_targets[0].source_reference #=> String
     #   resp.pull_request.pull_request_targets[0].destination_reference #=> String
     #   resp.pull_request.pull_request_targets[0].destination_commit #=> String
-    #   resp.pull_request.pull_request_targets[0].merge_base #=> String
     #   resp.pull_request.pull_request_targets[0].source_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_base #=> String
     #   resp.pull_request.pull_request_targets[0].merge_metadata.is_merged #=> Boolean
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merged_by #=> String
     #   resp.pull_request.client_request_token #=> String
@@ -1882,8 +2088,8 @@ module Aws::CodeCommit
     #   resp.pull_request.pull_request_targets[0].source_reference #=> String
     #   resp.pull_request.pull_request_targets[0].destination_reference #=> String
     #   resp.pull_request.pull_request_targets[0].destination_commit #=> String
-    #   resp.pull_request.pull_request_targets[0].merge_base #=> String
     #   resp.pull_request.pull_request_targets[0].source_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_base #=> String
     #   resp.pull_request.pull_request_targets[0].merge_metadata.is_merged #=> Boolean
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merged_by #=> String
     #   resp.pull_request.client_request_token #=> String
@@ -1932,8 +2138,8 @@ module Aws::CodeCommit
     #   resp.pull_request.pull_request_targets[0].source_reference #=> String
     #   resp.pull_request.pull_request_targets[0].destination_reference #=> String
     #   resp.pull_request.pull_request_targets[0].destination_commit #=> String
-    #   resp.pull_request.pull_request_targets[0].merge_base #=> String
     #   resp.pull_request.pull_request_targets[0].source_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_base #=> String
     #   resp.pull_request.pull_request_targets[0].merge_metadata.is_merged #=> Boolean
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merged_by #=> String
     #   resp.pull_request.client_request_token #=> String
@@ -2032,7 +2238,7 @@ module Aws::CodeCommit
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codecommit'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

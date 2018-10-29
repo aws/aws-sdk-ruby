@@ -15,10 +15,10 @@ module Aws
 
       class LatencyHandler < Seahorse::Client::Handler
         def call(context)
-          start_time = Time.now
+          start_time = Aws::Util.monotonic_milliseconds
           resp = @handler.call(context)
-          end_time = Time.now
-          latency = ((end_time - start_time) * 1000).to_i
+          end_time = Aws::Util.monotonic_milliseconds
+          latency = end_time - start_time
           context.metadata[:current_call_attempt].request_latency = latency
           resp
         end

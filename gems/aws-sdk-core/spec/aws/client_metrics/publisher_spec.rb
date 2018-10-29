@@ -30,6 +30,7 @@ module Aws
           operation: "StubOperation",
           client_id: "",
           timestamp: 1526502682104,
+          region: "us-stubbed-1"
         )
         rm.add_call_attempt(example_attempt)
         rm.api_call.complete(
@@ -69,6 +70,7 @@ module Aws
           operation: "StubOperation",
           client_id: "FooClient",
           timestamp: 1526502682104,
+          region: "us-stubbed-1"
         )
         rm.add_call_attempt(example_failed_attempt)
         rm.api_call.complete(
@@ -89,7 +91,7 @@ module Aws
         allow(UDPSocket).to receive(:new) { stub_socket }
         expect(stub_socket).to receive(:connect).twice
         expect(stub_socket).to receive(:send).with(
-          '{"Type":"ApiCall","Service":"StubService","Api":"StubOperation","ClientId":"","Timestamp":1526502682104,"Version":1,"AttemptCount":1,"Latency":123}',
+          '{"Type":"ApiCall","Service":"StubService","Api":"StubOperation","ClientId":"","Timestamp":1526502682104,"Version":1,"AttemptCount":1,"Latency":123,"Region":"us-stubbed-1","MaxRetriesExceeded":0}',
           0
         )
         expect(stub_socket).to receive(:send).with(
@@ -105,7 +107,7 @@ module Aws
         allow(UDPSocket).to receive(:new) { stub_socket }
         expect(stub_socket).to receive(:connect).twice
         expect(stub_socket).to receive(:send).with(
-          '{"Type":"ApiCall","Service":"StubService","Api":"StubOperation","ClientId":"FooClient","Timestamp":1526502682104,"Version":1,"AttemptCount":1,"Latency":123}',
+          '{"Type":"ApiCall","Service":"StubService","Api":"StubOperation","ClientId":"FooClient","Timestamp":1526502682104,"Version":1,"AttemptCount":1,"Latency":123,"Region":"us-stubbed-1","MaxRetriesExceeded":0}',
           0
         )
         expect(stub_socket).to receive(:send).with(

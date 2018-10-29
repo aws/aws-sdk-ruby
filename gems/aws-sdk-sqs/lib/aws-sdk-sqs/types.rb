@@ -21,7 +21,7 @@ module Aws::SQS
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue to which permissions are added.
     #
-    #   Queue URLs are case-sensitive.
+    #   Queue URLs and names are case-sensitive.
     #   @return [String]
     #
     # @!attribute [rw] label
@@ -41,30 +41,16 @@ module Aws::SQS
     #
     #
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/glos-chap.html#P
-    #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/AWSCredentials.html
+    #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-making-api-requests.html#sqs-api-request-authentication
     #   @return [Array<String>]
     #
     # @!attribute [rw] actions
     #   The action the client wants to allow for the specified principal.
-    #   The following values are valid:
+    #   Valid values: the name of any action or `*`.
     #
-    #   * `*`
-    #
-    #   * `ChangeMessageVisibility`
-    #
-    #   * `DeleteMessage`
-    #
-    #   * `GetQueueAttributes`
-    #
-    #   * `GetQueueUrl`
-    #
-    #   * `ReceiveMessage`
-    #
-    #   * `SendMessage`
-    #
-    #   For more information about these actions, see [Understanding
-    #   Permissions][1] in the *Amazon Simple Queue Service Developer
-    #   Guide*.
+    #   For more information about these actions, see [Overview of Managing
+    #   Access Permissions to Your Amazon Simple Queue Service Resource][1]
+    #   in the *Amazon Simple Queue Service Developer Guide*.
     #
     #   Specifying `SendMessage`, `DeleteMessage`, or
     #   `ChangeMessageVisibility` for `ActionName.n` also grants permissions
@@ -74,7 +60,7 @@ module Aws::SQS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/acp-overview.html#PermissionTypes
+    #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-overview-of-managing-access.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/AddPermissionRequest AWS API Documentation
@@ -87,15 +73,15 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    # This is used in the responses of batch API to give a detailed
-    # description of the result of an action on each entry in the request.
+    # Gives a detailed description of the result of an action on each entry
+    # in the request.
     #
     # @!attribute [rw] id
     #   The `Id` of an entry in a batch request.
     #   @return [String]
     #
     # @!attribute [rw] sender_fault
-    #   Specifies whether the error happened due to the sender's fault.
+    #   Specifies whether the error happened due to the producer.
     #   @return [Boolean]
     #
     # @!attribute [rw] code
@@ -134,7 +120,7 @@ module Aws::SQS
     #   The URL of the Amazon SQS queue whose messages' visibility is
     #   changed.
     #
-    #   Queue URLs are case-sensitive.
+    #   Queue URLs and names are case-sensitive.
     #   @return [String]
     #
     # @!attribute [rw] entries
@@ -158,11 +144,11 @@ module Aws::SQS
     # value starting with `1`. For example, a parameter list for this action
     # might look like this:
     #
-    # `&amp;ChangeMessageVisibilityBatchRequestEntry.1.Id=change_visibility_msg_2`
+    # `&ChangeMessageVisibilityBatchRequestEntry.1.Id=change_visibility_msg_2`
     #
-    # `&amp;ChangeMessageVisibilityBatchRequestEntry.1.ReceiptHandle=<replaceable>Your_Receipt_Handle</replaceable>`
+    # `&ChangeMessageVisibilityBatchRequestEntry.1.ReceiptHandle=your_receipt_handle`
     #
-    # `&amp;ChangeMessageVisibilityBatchRequestEntry.1.VisibilityTimeout=45`
+    # `&ChangeMessageVisibilityBatchRequestEntry.1.VisibilityTimeout=45`
     #
     # @note When making an API call, you may pass ChangeMessageVisibilityBatchRequestEntry
     #   data as a hash:
@@ -246,7 +232,7 @@ module Aws::SQS
     #   The URL of the Amazon SQS queue whose message's visibility is
     #   changed.
     #
-    #   Queue URLs are case-sensitive.
+    #   Queue URLs and names are case-sensitive.
     #   @return [String]
     #
     # @!attribute [rw] receipt_handle
@@ -289,7 +275,7 @@ module Aws::SQS
     #
     #   * A FIFO queue name must end with the `.fifo` suffix.
     #
-    #   Queue names are case-sensitive.
+    #   Queue URLs and names are case-sensitive.
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -300,18 +286,17 @@ module Aws::SQS
     #
     #   * `DelaySeconds` - The length of time, in seconds, for which the
     #     delivery of all messages in the queue is delayed. Valid values: An
-    #     integer from 0 to 900 seconds (15 minutes). The default is 0
-    #     (zero).
+    #     integer from 0 to 900 seconds (15 minutes). Default: 0.
     #
     #   * `MaximumMessageSize` - The limit of how many bytes a message can
     #     contain before Amazon SQS rejects it. Valid values: An integer
-    #     from 1,024 bytes (1 KiB) to 262,144 bytes (256 KiB). The default
-    #     is 262,144 (256 KiB).
+    #     from 1,024 bytes (1 KiB) to 262,144 bytes (256 KiB). Default:
+    #     262,144 (256 KiB).
     #
     #   * `MessageRetentionPeriod` - The length of time, in seconds, for
     #     which Amazon SQS retains a message. Valid values: An integer from
-    #     60 seconds (1 minute) to 1,209,600 seconds (14 days). The default
-    #     is 345,600 (4 days).
+    #     60 seconds (1 minute) to 1,209,600 seconds (14 days). Default:
+    #     345,600 (4 days).
     #
     #   * `Policy` - The queue's policy. A valid AWS policy. For more
     #     information about policy structure, see [Overview of AWS IAM
@@ -319,8 +304,8 @@ module Aws::SQS
     #
     #   * `ReceiveMessageWaitTimeSeconds` - The length of time, in seconds,
     #     for which a ` ReceiveMessage ` action waits for a message to
-    #     arrive. Valid values: An integer from 0 to 20 (seconds). The
-    #     default is 0 (zero).
+    #     arrive. Valid values: An integer from 0 to 20 (seconds). Default:
+    #     0.
     #
     #   * `RedrivePolicy` - The string that includes the parameters for the
     #     dead-letter queue functionality of the source queue. For more
@@ -334,6 +319,9 @@ module Aws::SQS
     #
     #     * `maxReceiveCount` - The number of times a message is delivered
     #       to the source queue before being moved to the dead-letter queue.
+    #       When the `ReceiveCount` for a message exceeds the
+    #       `maxReceiveCount` for a queue, Amazon SQS moves the message to
+    #       the dead-letter-queue.
     #
     #     <note markdown="1"> The dead-letter queue of a FIFO queue must also be a FIFO queue.
     #     Similarly, the dead-letter queue of a standard queue must also be
@@ -341,10 +329,11 @@ module Aws::SQS
     #
     #      </note>
     #
-    #   * `VisibilityTimeout` - The visibility timeout for the queue. Valid
-    #     values: An integer from 0 to 43,200 (12 hours). The default is 30.
-    #     For more information about the visibility timeout, see [Visibility
-    #     Timeout][3] in the *Amazon Simple Queue Service Developer Guide*.
+    #   * `VisibilityTimeout` - The visibility timeout for the queue, in
+    #     seconds. Valid values: An integer from 0 to 43,200 (12 hours).
+    #     Default: 30. For more information about the visibility timeout,
+    #     see [Visibility Timeout][3] in the *Amazon Simple Queue Service
+    #     Developer Guide*.
     #
     #   The following attributes apply only to [server-side-encryption][4]\:
     #
@@ -359,7 +348,7 @@ module Aws::SQS
     #     for which Amazon SQS can reuse a [data key][7] to encrypt or
     #     decrypt messages before calling AWS KMS again. An integer
     #     representing seconds, between 60 seconds (1 minute) and 86,400
-    #     seconds (24 hours). The default is 300 (5 minutes). A shorter time
+    #     seconds (24 hours). Default: 300 (5 minutes). A shorter time
     #     period provides better security but results in more calls to KMS
     #     which might incur charges after Free Tier. For more information,
     #     see [How Does the Data Key Reuse Period Work?][8].
@@ -408,21 +397,6 @@ module Aws::SQS
     #       the same as the one generated for the first
     #       `MessageDeduplicationId`, the two messages are treated as
     #       duplicates and only one copy of the message is delivered.
-    #
-    #   Any other valid special request parameters (such as the following)
-    #   are ignored:
-    #
-    #   * `ApproximateNumberOfMessages`
-    #
-    #   * `ApproximateNumberOfMessagesDelayed`
-    #
-    #   * `ApproximateNumberOfMessagesNotVisible`
-    #
-    #   * `CreatedTimestamp`
-    #
-    #   * `LastModifiedTimestamp`
-    #
-    #   * `QueueArn`
     #
     #
     #
@@ -476,7 +450,7 @@ module Aws::SQS
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue from which messages are deleted.
     #
-    #   Queue URLs are case-sensitive.
+    #   Queue URLs and names are case-sensitive.
     #   @return [String]
     #
     # @!attribute [rw] entries
@@ -566,7 +540,7 @@ module Aws::SQS
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue from which messages are deleted.
     #
-    #   Queue URLs are case-sensitive.
+    #   Queue URLs and names are case-sensitive.
     #   @return [String]
     #
     # @!attribute [rw] receipt_handle
@@ -591,7 +565,7 @@ module Aws::SQS
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue to delete.
     #
-    #   Queue URLs are case-sensitive.
+    #   Queue URLs and names are case-sensitive.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteQueueRequest AWS API Documentation
@@ -613,7 +587,7 @@ module Aws::SQS
     #   The URL of the Amazon SQS queue whose attribute information is
     #   retrieved.
     #
-    #   Queue URLs are case-sensitive.
+    #   Queue URLs and names are case-sensitive.
     #   @return [String]
     #
     # @!attribute [rw] attribute_names
@@ -630,26 +604,28 @@ module Aws::SQS
     #   * `All` - Returns all values.
     #
     #   * `ApproximateNumberOfMessages` - Returns the approximate number of
-    #     visible messages in a queue. For more information, see [Resources
-    #     Required to Process Messages][1] in the *Amazon Simple Queue
-    #     Service Developer Guide*.
+    #     messages available for retrieval from the queue.
     #
     #   * `ApproximateNumberOfMessagesDelayed` - Returns the approximate
-    #     number of messages that are waiting to be added to the queue.
+    #     number of messages in the queue that are delayed and not available
+    #     for reading immediately. This can happen when the queue is
+    #     configured as a delay queue or when a message has been sent with a
+    #     delay parameter.
     #
     #   * `ApproximateNumberOfMessagesNotVisible` - Returns the approximate
-    #     number of messages that have not timed-out and aren't deleted.
-    #     For more information, see [Resources Required to Process
-    #     Messages][1] in the *Amazon Simple Queue Service Developer Guide*.
+    #     number of messages that are in flight. Messages are considered to
+    #     be *in flight* if they have been sent to a client but have not yet
+    #     been deleted or have not yet reached the end of their visibility
+    #     window.
     #
     #   * `CreatedTimestamp` - Returns the time when the queue was created
-    #     in seconds ([epoch time][2]).
+    #     in seconds ([epoch time][1]).
     #
     #   * `DelaySeconds` - Returns the default delay on the queue in
     #     seconds.
     #
     #   * `LastModifiedTimestamp` - Returns the time when the queue was last
-    #     changed in seconds ([epoch time][2]).
+    #     changed in seconds ([epoch time][1]).
     #
     #   * `MaximumMessageSize` - Returns the limit of how many bytes a
     #     message can contain before Amazon SQS rejects it.
@@ -668,7 +644,7 @@ module Aws::SQS
     #   * `RedrivePolicy` - Returns the string that includes the parameters
     #     for dead-letter queue functionality of the source queue. For more
     #     information about the redrive policy and dead-letter queues, see
-    #     [Using Amazon SQS Dead-Letter Queues][3] in the *Amazon Simple
+    #     [Using Amazon SQS Dead-Letter Queues][2] in the *Amazon Simple
     #     Queue Service Developer Guide*.
     #
     #     * `deadLetterTargetArn` - The Amazon Resource Name (ARN) of the
@@ -677,52 +653,54 @@ module Aws::SQS
     #
     #     * `maxReceiveCount` - The number of times a message is delivered
     #       to the source queue before being moved to the dead-letter queue.
+    #       When the `ReceiveCount` for a message exceeds the
+    #       `maxReceiveCount` for a queue, Amazon SQS moves the message to
+    #       the dead-letter-queue.
     #
     #   * `VisibilityTimeout` - Returns the visibility timeout for the
     #     queue. For more information about the visibility timeout, see
-    #     [Visibility Timeout][4] in the *Amazon Simple Queue Service
+    #     [Visibility Timeout][3] in the *Amazon Simple Queue Service
     #     Developer Guide*.
     #
-    #   The following attributes apply only to [server-side-encryption][5]\:
+    #   The following attributes apply only to [server-side-encryption][4]\:
     #
     #   * `KmsMasterKeyId` - Returns the ID of an AWS-managed customer
     #     master key (CMK) for Amazon SQS or a custom CMK. For more
-    #     information, see [Key Terms][6].
+    #     information, see [Key Terms][5].
     #
     #   * `KmsDataKeyReusePeriodSeconds` - Returns the length of time, in
     #     seconds, for which Amazon SQS can reuse a data key to encrypt or
     #     decrypt messages before calling AWS KMS again. For more
-    #     information, see [How Does the Data Key Reuse Period Work?][7].
+    #     information, see [How Does the Data Key Reuse Period Work?][6].
     #
     #   The following attributes apply only to [FIFO (first-in-first-out)
-    #   queues][8]\:
+    #   queues][7]\:
     #
     #   * `FifoQueue` - Returns whether the queue is FIFO. For more
-    #     information, see [FIFO Queue Logic][9] in the *Amazon Simple Queue
+    #     information, see [FIFO Queue Logic][8] in the *Amazon Simple Queue
     #     Service Developer Guide*.
     #
-    #     <note markdown="1"> To determine whether a queue is [FIFO][8], you can check whether
+    #     <note markdown="1"> To determine whether a queue is [FIFO][7], you can check whether
     #     `QueueName` ends with the `.fifo` suffix.
     #
     #      </note>
     #
     #   * `ContentBasedDeduplication` - Returns whether content-based
     #     deduplication is enabled for the queue. For more information, see
-    #     [Exactly-Once Processing][10] in the *Amazon Simple Queue Service
+    #     [Exactly-Once Processing][9] in the *Amazon Simple Queue Service
     #     Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-resources-required-process-messages.html
-    #   [2]: http://en.wikipedia.org/wiki/Unix_time
-    #   [3]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html
-    #   [4]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
-    #   [5]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html
-    #   [6]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms
-    #   [7]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-how-does-the-data-key-reuse-period-work
-    #   [8]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html
-    #   [9]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic
-    #   [10]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
+    #   [1]: http://en.wikipedia.org/wiki/Unix_time
+    #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html
+    #   [3]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
+    #   [4]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html
+    #   [5]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms
+    #   [6]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-how-does-the-data-key-reuse-period-work
+    #   [7]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html
+    #   [8]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic
+    #   [9]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueAttributesRequest AWS API Documentation
@@ -759,7 +737,7 @@ module Aws::SQS
     #   characters. Valid values: alphanumeric characters, hyphens (`-`),
     #   and underscores (`_`).
     #
-    #   Queue names are case-sensitive.
+    #   Queue URLs and names are case-sensitive.
     #   @return [String]
     #
     # @!attribute [rw] queue_owner_aws_account_id
@@ -774,12 +752,12 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    # For more information, see [Responses][1] in the *Amazon Simple Queue
-    # Service Developer Guide*.
+    # For more information, see [Interpreting Responses][1] in the *Amazon
+    # Simple Queue Service Developer Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/UnderstandingResponses.html
+    # [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-api-responses.html
     #
     # @!attribute [rw] queue_url
     #   The URL of the queue.
@@ -802,7 +780,7 @@ module Aws::SQS
     # @!attribute [rw] queue_url
     #   The URL of a dead-letter queue.
     #
-    #   Queue URLs are case-sensitive.
+    #   Queue URLs and names are case-sensitive.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListDeadLetterSourceQueuesRequest AWS API Documentation
@@ -866,7 +844,7 @@ module Aws::SQS
     #   A string to use for filtering the list results. Only those queues
     #   whose name begins with the specified string are returned.
     #
-    #   Queue names are case-sensitive.
+    #   Queue URLs and names are case-sensitive.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListQueuesRequest AWS API Documentation
@@ -912,10 +890,26 @@ module Aws::SQS
     #   @return [String]
     #
     # @!attribute [rw] attributes
-    #   `SenderId`, `SentTimestamp`, `ApproximateReceiveCount`, and/or
-    #   `ApproximateFirstReceiveTimestamp`. `SentTimestamp` and
-    #   `ApproximateFirstReceiveTimestamp` are each returned as an integer
-    #   representing the [epoch time][1] in milliseconds.
+    #   A map of the attributes requested in ` ReceiveMessage ` to their
+    #   respective values. Supported attributes:
+    #
+    #   * `ApproximateReceiveCount`
+    #
+    #   * `ApproximateFirstReceiveTimestamp`
+    #
+    #   * `MessageDeduplicationId`
+    #
+    #   * `MessageGroupId`
+    #
+    #   * `SenderId`
+    #
+    #   * `SentTimestamp`
+    #
+    #   * `SequenceNumber`
+    #
+    #   `ApproximateFirstReceiveTimestamp` and `SentTimestamp` are each
+    #   returned as an integer representing the [epoch time][1] in
+    #   milliseconds.
     #
     #
     #
@@ -936,12 +930,12 @@ module Aws::SQS
     #
     # @!attribute [rw] message_attributes
     #   Each message attribute consists of a `Name`, `Type`, and `Value`.
-    #   For more information, see [Message Attribute Items and
-    #   Validation][1] in the *Amazon Simple Queue Service Developer Guide*.
+    #   For more information, see [Amazon SQS Message Attributes][1] in the
+    #   *Amazon Simple Queue Service Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html#message-attributes-items-validation
+    #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html
     #   @return [Hash<String,Types::MessageAttributeValue>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/Message AWS API Documentation
@@ -1004,13 +998,13 @@ module Aws::SQS
     #   `Number`, and `Binary`. For the `Number` data type, you must use
     #   `StringValue`.
     #
-    #   You can also append custom labels. For more information, see
-    #   [Message Attribute Data Types and Validation][1] in the *Amazon
-    #   Simple Queue Service Developer Guide*.
+    #   You can also append custom labels. For more information, see [Amazon
+    #   SQS Message Attributes][1] in the *Amazon Simple Queue Service
+    #   Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html#message-attributes-data-types-validation
+    #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/MessageAttributeValue AWS API Documentation
@@ -1035,7 +1029,7 @@ module Aws::SQS
     #   The URL of the queue from which the `PurgeQueue` action deletes
     #   messages.
     #
-    #   Queue URLs are case-sensitive.
+    #   Queue URLs and names are case-sensitive.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/PurgeQueueRequest AWS API Documentation
@@ -1061,12 +1055,12 @@ module Aws::SQS
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue from which messages are received.
     #
-    #   Queue URLs are case-sensitive.
+    #   Queue URLs and names are case-sensitive.
     #   @return [String]
     #
     # @!attribute [rw] attribute_names
-    #   A list of attributes that need to be returned along with each
-    #   message. These attributes include:
+    #   A list of s that need to be returned along with each message. These
+    #   attributes include:
     #
     #   * `All` - Returns all values.
     #
@@ -1089,46 +1083,13 @@ module Aws::SQS
     #     queue ([epoch time][1] in milliseconds).
     #
     #   * `MessageDeduplicationId` - Returns the value provided by the
-    #     sender that calls the ` SendMessage ` action.
+    #     producer that calls the ` SendMessage ` action.
     #
-    #   * `MessageGroupId` - Returns the value provided by the sender that
+    #   * `MessageGroupId` - Returns the value provided by the producer that
     #     calls the ` SendMessage ` action. Messages with the same
     #     `MessageGroupId` are returned in sequence.
     #
     #   * `SequenceNumber` - Returns the value provided by Amazon SQS.
-    #
-    #   Any other valid special request parameters (such as the following)
-    #   are ignored:
-    #
-    #   * `ApproximateNumberOfMessages`
-    #
-    #   * `ApproximateNumberOfMessagesDelayed`
-    #
-    #   * `ApproximateNumberOfMessagesNotVisible`
-    #
-    #   * `CreatedTimestamp`
-    #
-    #   * `ContentBasedDeduplication`
-    #
-    #   * `DelaySeconds`
-    #
-    #   * `FifoQueue`
-    #
-    #   * `LastModifiedTimestamp`
-    #
-    #   * `MaximumMessageSize`
-    #
-    #   * `MessageRetentionPeriod`
-    #
-    #   * `Policy`
-    #
-    #   * `QueueArn`,
-    #
-    #   * `ReceiveMessageWaitTimeSeconds`
-    #
-    #   * `RedrivePolicy`
-    #
-    #   * `VisibilityTimeout`
     #
     #
     #
@@ -1161,7 +1122,7 @@ module Aws::SQS
     # @!attribute [rw] max_number_of_messages
     #   The maximum number of messages to return. Amazon SQS never returns
     #   more messages than this value (however, fewer messages might be
-    #   returned). Valid values are 1 to 10. Default is 1.
+    #   returned). Valid values: 1 to 10. Default: 1.
     #   @return [Integer]
     #
     # @!attribute [rw] visibility_timeout
@@ -1209,13 +1170,13 @@ module Aws::SQS
     #     [Visibility Timeout][1] in the *Amazon Simple Queue Service
     #     Developer Guide*.
     #
-    #     If a caller of the `ReceiveMessage` action is still processing
+    #     If a caller of the `ReceiveMessage` action still processes
     #     messages when the visibility timeout expires and messages become
-    #     visible, another worker reading from the same queue can receive
+    #     visible, another worker consuming from the same queue can receive
     #     the same messages and therefore process duplicates. Also, if a
-    #     reader whose message processing time is longer than the visibility
-    #     timeout tries to delete the processed messages, the action fails
-    #     with an error.
+    #     consumer whose message processing time is longer than the
+    #     visibility timeout tries to delete the processed messages, the
+    #     action fails with an error.
     #
     #      To mitigate this effect, ensure that your application observes a
     #     safe threshold before the visibility timeout expires and extend
@@ -1244,7 +1205,7 @@ module Aws::SQS
     #
     #
     #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
-    #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queue-recommendations.html#using-receiverequestattemptid-request-parameter
+    #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-receiverequestattemptid-request-parameter.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ReceiveMessageRequest AWS API Documentation
@@ -1284,7 +1245,7 @@ module Aws::SQS
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue from which permissions are removed.
     #
-    #   Queue URLs are case-sensitive.
+    #   Queue URLs and names are case-sensitive.
     #   @return [String]
     #
     # @!attribute [rw] label
@@ -1328,7 +1289,7 @@ module Aws::SQS
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue to which batched messages are sent.
     #
-    #   Queue URLs are case-sensitive.
+    #   Queue URLs and names are case-sensitive.
     #   @return [String]
     #
     # @!attribute [rw] entries
@@ -1372,6 +1333,10 @@ module Aws::SQS
     #
     #   <note markdown="1"> The `Id`s of a batch request need to be unique within a request
     #
+    #    This identifier can have up to 80 characters. The following
+    #   characters are accepted: alphanumeric characters, hyphens(-), and
+    #   underscores (\_).
+    #
     #    </note>
     #   @return [String]
     #
@@ -1394,12 +1359,12 @@ module Aws::SQS
     #
     # @!attribute [rw] message_attributes
     #   Each message attribute consists of a `Name`, `Type`, and `Value`.
-    #   For more information, see [Message Attribute Items and
-    #   Validation][1] in the *Amazon Simple Queue Service Developer Guide*.
+    #   For more information, see [Amazon SQS Message Attributes][1] in the
+    #   *Amazon Simple Queue Service Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html#message-attributes-items-validation
+    #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html
     #   @return [Hash<String,Types::MessageAttributeValue>]
     #
     # @!attribute [rw] message_deduplication_id
@@ -1440,13 +1405,16 @@ module Aws::SQS
     #     `MessageDeduplicationId`, the two messages are treated as
     #     duplicates and only one copy of the message is delivered.
     #
-    #   <note markdown="1"> The `MessageDeduplicationId` is available to the recipient of the
+    #   <note markdown="1"> The `MessageDeduplicationId` is available to the consumer of the
     #   message (this can be useful for troubleshooting delivery issues).
     #
     #    If a message is sent successfully but the acknowledgement is lost
     #   and the message is resent with the same `MessageDeduplicationId`
     #   after the deduplication interval, Amazon SQS can't detect duplicate
     #   messages.
+    #
+    #    Amazon SQS continues to keep track of the message deduplication ID
+    #   even after the message is received and deleted.
     #
     #    </note>
     #
@@ -1462,7 +1430,7 @@ module Aws::SQS
     #
     #
     #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
-    #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queue-recommendations.html#using-messagededuplicationid-property
+    #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html
     #   @return [String]
     #
     # @!attribute [rw] message_group_id
@@ -1474,8 +1442,8 @@ module Aws::SQS
     #   might be processed out of order). To interleave multiple ordered
     #   streams within a single queue, use `MessageGroupId` values (for
     #   example, session data for multiple users). In this scenario,
-    #   multiple readers can process the queue, but the session data of each
-    #   user is processed in a FIFO fashion.
+    #   multiple consumers can process the queue, but the session data of
+    #   each user is processed in a FIFO fashion.
     #
     #   * You must associate a non-empty `MessageGroupId` with a message. If
     #     you don't provide a `MessageGroupId`, the action fails.
@@ -1485,7 +1453,7 @@ module Aws::SQS
     #     are sorted by time sent. The caller can't specify a
     #     `MessageGroupId`.
     #
-    #   The length of `MessageGroupId` is 128 characters. Valid values are
+    #   The length of `MessageGroupId` is 128 characters. Valid values:
     #   alphanumeric characters and punctuation ``
     #   (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~) ``.
     #
@@ -1498,7 +1466,7 @@ module Aws::SQS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queue-recommendations.html#using-messagegroupid-property
+    #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessageBatchRequestEntry AWS API Documentation
@@ -1613,7 +1581,7 @@ module Aws::SQS
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue to which a message is sent.
     #
-    #   Queue URLs are case-sensitive.
+    #   Queue URLs and names are case-sensitive.
     #   @return [String]
     #
     # @!attribute [rw] message_body
@@ -1648,12 +1616,12 @@ module Aws::SQS
     #
     # @!attribute [rw] message_attributes
     #   Each message attribute consists of a `Name`, `Type`, and `Value`.
-    #   For more information, see [Message Attribute Items and
-    #   Validation][1] in the *Amazon Simple Queue Service Developer Guide*.
+    #   For more information, see [Amazon SQS Message Attributes][1] in the
+    #   *Amazon Simple Queue Service Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html#message-attributes-items-validation
+    #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html
     #   @return [Hash<String,Types::MessageAttributeValue>]
     #
     # @!attribute [rw] message_deduplication_id
@@ -1694,13 +1662,16 @@ module Aws::SQS
     #     `MessageDeduplicationId`, the two messages are treated as
     #     duplicates and only one copy of the message is delivered.
     #
-    #   <note markdown="1"> The `MessageDeduplicationId` is available to the recipient of the
+    #   <note markdown="1"> The `MessageDeduplicationId` is available to the consumer of the
     #   message (this can be useful for troubleshooting delivery issues).
     #
     #    If a message is sent successfully but the acknowledgement is lost
     #   and the message is resent with the same `MessageDeduplicationId`
     #   after the deduplication interval, Amazon SQS can't detect duplicate
     #   messages.
+    #
+    #    Amazon SQS continues to keep track of the message deduplication ID
+    #   even after the message is received and deleted.
     #
     #    </note>
     #
@@ -1716,7 +1687,7 @@ module Aws::SQS
     #
     #
     #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
-    #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queue-recommendations.html#using-messagededuplicationid-property
+    #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html
     #   @return [String]
     #
     # @!attribute [rw] message_group_id
@@ -1728,8 +1699,8 @@ module Aws::SQS
     #   might be processed out of order). To interleave multiple ordered
     #   streams within a single queue, use `MessageGroupId` values (for
     #   example, session data for multiple users). In this scenario,
-    #   multiple readers can process the queue, but the session data of each
-    #   user is processed in a FIFO fashion.
+    #   multiple consumers can process the queue, but the session data of
+    #   each user is processed in a FIFO fashion.
     #
     #   * You must associate a non-empty `MessageGroupId` with a message. If
     #     you don't provide a `MessageGroupId`, the action fails.
@@ -1739,7 +1710,7 @@ module Aws::SQS
     #     are sorted by time sent. The caller can't specify a
     #     `MessageGroupId`.
     #
-    #   The length of `MessageGroupId` is 128 characters. Valid values are
+    #   The length of `MessageGroupId` is 128 characters. Valid values:
     #   alphanumeric characters and punctuation ``
     #   (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~) ``.
     #
@@ -1752,7 +1723,7 @@ module Aws::SQS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queue-recommendations.html#using-messagegroupid-property
+    #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessageRequest AWS API Documentation
@@ -1836,7 +1807,7 @@ module Aws::SQS
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue whose attributes are set.
     #
-    #   Queue URLs are case-sensitive.
+    #   Queue URLs and names are case-sensitive.
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -1848,17 +1819,17 @@ module Aws::SQS
     #
     #   * `DelaySeconds` - The length of time, in seconds, for which the
     #     delivery of all messages in the queue is delayed. Valid values: An
-    #     integer from 0 to 900 (15 minutes). The default is 0 (zero).
+    #     integer from 0 to 900 (15 minutes). Default: 0.
     #
     #   * `MaximumMessageSize` - The limit of how many bytes a message can
     #     contain before Amazon SQS rejects it. Valid values: An integer
-    #     from 1,024 bytes (1 KiB) up to 262,144 bytes (256 KiB). The
-    #     default is 262,144 (256 KiB).
+    #     from 1,024 bytes (1 KiB) up to 262,144 bytes (256 KiB). Default:
+    #     262,144 (256 KiB).
     #
     #   * `MessageRetentionPeriod` - The length of time, in seconds, for
     #     which Amazon SQS retains a message. Valid values: An integer
     #     representing seconds, from 60 (1 minute) to 1,209,600 (14 days).
-    #     The default is 345,600 (4 days).
+    #     Default: 345,600 (4 days).
     #
     #   * `Policy` - The queue's policy. A valid AWS policy. For more
     #     information about policy structure, see [Overview of AWS IAM
@@ -1866,8 +1837,8 @@ module Aws::SQS
     #
     #   * `ReceiveMessageWaitTimeSeconds` - The length of time, in seconds,
     #     for which a ` ReceiveMessage ` action waits for a message to
-    #     arrive. Valid values: an integer from 0 to 20 (seconds). The
-    #     default is 0.
+    #     arrive. Valid values: an integer from 0 to 20 (seconds). Default:
+    #     0.
     #
     #   * `RedrivePolicy` - The string that includes the parameters for the
     #     dead-letter queue functionality of the source queue. For more
@@ -1881,6 +1852,9 @@ module Aws::SQS
     #
     #     * `maxReceiveCount` - The number of times a message is delivered
     #       to the source queue before being moved to the dead-letter queue.
+    #       When the `ReceiveCount` for a message exceeds the
+    #       `maxReceiveCount` for a queue, Amazon SQS moves the message to
+    #       the dead-letter-queue.
     #
     #     <note markdown="1"> The dead-letter queue of a FIFO queue must also be a FIFO queue.
     #     Similarly, the dead-letter queue of a standard queue must also be
@@ -1888,10 +1862,11 @@ module Aws::SQS
     #
     #      </note>
     #
-    #   * `VisibilityTimeout` - The visibility timeout for the queue. Valid
-    #     values: an integer from 0 to 43,200 (12 hours). The default is 30.
-    #     For more information about the visibility timeout, see [Visibility
-    #     Timeout][3] in the *Amazon Simple Queue Service Developer Guide*.
+    #   * `VisibilityTimeout` - The visibility timeout for the queue, in
+    #     seconds. Valid values: an integer from 0 to 43,200 (12 hours).
+    #     Default: 30. For more information about the visibility timeout,
+    #     see [Visibility Timeout][3] in the *Amazon Simple Queue Service
+    #     Developer Guide*.
     #
     #   The following attributes apply only to [server-side-encryption][4]\:
     #
@@ -1906,7 +1881,7 @@ module Aws::SQS
     #     for which Amazon SQS can reuse a [data key][7] to encrypt or
     #     decrypt messages before calling AWS KMS again. An integer
     #     representing seconds, between 60 seconds (1 minute) and 86,400
-    #     seconds (24 hours). The default is 300 (5 minutes). A shorter time
+    #     seconds (24 hours). Default: 300 (5 minutes). A shorter time
     #     period provides better security but results in more calls to KMS
     #     which might incur charges after Free Tier. For more information,
     #     see [How Does the Data Key Reuse Period Work?][8].
@@ -1945,21 +1920,6 @@ module Aws::SQS
     #       the same as the one generated for the first
     #       `MessageDeduplicationId`, the two messages are treated as
     #       duplicates and only one copy of the message is delivered.
-    #
-    #   Any other valid special request parameters (such as the following)
-    #   are ignored:
-    #
-    #   * `ApproximateNumberOfMessages`
-    #
-    #   * `ApproximateNumberOfMessagesDelayed`
-    #
-    #   * `ApproximateNumberOfMessagesNotVisible`
-    #
-    #   * `CreatedTimestamp`
-    #
-    #   * `LastModifiedTimestamp`
-    #
-    #   * `QueueArn`
     #
     #
     #

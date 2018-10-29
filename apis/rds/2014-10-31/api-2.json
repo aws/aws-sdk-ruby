@@ -2081,7 +2081,8 @@
         "BacktrackWindow":{"shape":"LongOptional"},
         "EnableCloudwatchLogsExports":{"shape":"LogTypeList"},
         "EngineMode":{"shape":"String"},
-        "ScalingConfiguration":{"shape":"ScalingConfiguration"}
+        "ScalingConfiguration":{"shape":"ScalingConfiguration"},
+        "DeletionProtection":{"shape":"BooleanOptional"}
       }
     },
     "CreateDBClusterParameterGroupMessage":{
@@ -2179,7 +2180,8 @@
         "PerformanceInsightsKMSKeyId":{"shape":"String"},
         "PerformanceInsightsRetentionPeriod":{"shape":"IntegerOptional"},
         "EnableCloudwatchLogsExports":{"shape":"LogTypeList"},
-        "ProcessorFeatures":{"shape":"ProcessorFeatureList"}
+        "ProcessorFeatures":{"shape":"ProcessorFeatureList"},
+        "DeletionProtection":{"shape":"BooleanOptional"}
       }
     },
     "CreateDBInstanceReadReplicaMessage":{
@@ -2213,7 +2215,8 @@
         "PerformanceInsightsRetentionPeriod":{"shape":"IntegerOptional"},
         "EnableCloudwatchLogsExports":{"shape":"LogTypeList"},
         "ProcessorFeatures":{"shape":"ProcessorFeatureList"},
-        "UseDefaultProcessorFeatures":{"shape":"BooleanOptional"}
+        "UseDefaultProcessorFeatures":{"shape":"BooleanOptional"},
+        "DeletionProtection":{"shape":"BooleanOptional"}
       }
     },
     "CreateDBInstanceReadReplicaResult":{
@@ -2392,7 +2395,8 @@
         "EnabledCloudwatchLogsExports":{"shape":"LogTypeList"},
         "Capacity":{"shape":"IntegerOptional"},
         "EngineMode":{"shape":"String"},
-        "ScalingConfigurationInfo":{"shape":"ScalingConfigurationInfo"}
+        "ScalingConfigurationInfo":{"shape":"ScalingConfigurationInfo"},
+        "DeletionProtection":{"shape":"Boolean"}
       },
       "wrapper":true
     },
@@ -2788,7 +2792,8 @@
         "PerformanceInsightsKMSKeyId":{"shape":"String"},
         "PerformanceInsightsRetentionPeriod":{"shape":"IntegerOptional"},
         "EnabledCloudwatchLogsExports":{"shape":"LogTypeList"},
-        "ProcessorFeatures":{"shape":"ProcessorFeatureList"}
+        "ProcessorFeatures":{"shape":"ProcessorFeatureList"},
+        "DeletionProtection":{"shape":"Boolean"}
       },
       "wrapper":true
     },
@@ -4188,6 +4193,20 @@
     },
     "Long":{"type":"long"},
     "LongOptional":{"type":"long"},
+    "MinimumEngineVersionPerAllowedValue":{
+      "type":"structure",
+      "members":{
+        "AllowedValue":{"shape":"String"},
+        "MinimumEngineVersion":{"shape":"String"}
+      }
+    },
+    "MinimumEngineVersionPerAllowedValueList":{
+      "type":"list",
+      "member":{
+        "shape":"MinimumEngineVersionPerAllowedValue",
+        "locationName":"MinimumEngineVersionPerAllowedValue"
+      }
+    },
     "ModifyCurrentDBClusterCapacityMessage":{
       "type":"structure",
       "required":["DBClusterIdentifier"],
@@ -4217,7 +4236,8 @@
         "BacktrackWindow":{"shape":"LongOptional"},
         "CloudwatchLogsExportConfiguration":{"shape":"CloudwatchLogsExportConfiguration"},
         "EngineVersion":{"shape":"String"},
-        "ScalingConfiguration":{"shape":"ScalingConfiguration"}
+        "ScalingConfiguration":{"shape":"ScalingConfiguration"},
+        "DeletionProtection":{"shape":"BooleanOptional"}
       }
     },
     "ModifyDBClusterParameterGroupMessage":{
@@ -4298,7 +4318,8 @@
         "PerformanceInsightsRetentionPeriod":{"shape":"IntegerOptional"},
         "CloudwatchLogsExportConfiguration":{"shape":"CloudwatchLogsExportConfiguration"},
         "ProcessorFeatures":{"shape":"ProcessorFeatureList"},
-        "UseDefaultProcessorFeatures":{"shape":"BooleanOptional"}
+        "UseDefaultProcessorFeatures":{"shape":"BooleanOptional"},
+        "DeletionProtection":{"shape":"BooleanOptional"}
       }
     },
     "ModifyDBInstanceResult":{
@@ -4515,7 +4536,9 @@
         "DefaultValue":{"shape":"String"},
         "ApplyType":{"shape":"String"},
         "AllowedValues":{"shape":"String"},
-        "IsModifiable":{"shape":"Boolean"}
+        "IsModifiable":{"shape":"Boolean"},
+        "IsRequired":{"shape":"Boolean"},
+        "MinimumEngineVersionPerAllowedValue":{"shape":"MinimumEngineVersionPerAllowedValueList"}
       }
     },
     "OptionGroupOptionSettingsList":{
@@ -5124,7 +5147,8 @@
         "S3Prefix":{"shape":"String"},
         "S3IngestionRoleArn":{"shape":"String"},
         "BacktrackWindow":{"shape":"LongOptional"},
-        "EnableCloudwatchLogsExports":{"shape":"LogTypeList"}
+        "EnableCloudwatchLogsExports":{"shape":"LogTypeList"},
+        "DeletionProtection":{"shape":"BooleanOptional"}
       }
     },
     "RestoreDBClusterFromS3Result":{
@@ -5157,7 +5181,9 @@
         "BacktrackWindow":{"shape":"LongOptional"},
         "EnableCloudwatchLogsExports":{"shape":"LogTypeList"},
         "EngineMode":{"shape":"String"},
-        "ScalingConfiguration":{"shape":"ScalingConfiguration"}
+        "ScalingConfiguration":{"shape":"ScalingConfiguration"},
+        "DBClusterParameterGroupName":{"shape":"String"},
+        "DeletionProtection":{"shape":"BooleanOptional"}
       }
     },
     "RestoreDBClusterFromSnapshotResult":{
@@ -5186,7 +5212,9 @@
         "KmsKeyId":{"shape":"String"},
         "EnableIAMDatabaseAuthentication":{"shape":"BooleanOptional"},
         "BacktrackWindow":{"shape":"LongOptional"},
-        "EnableCloudwatchLogsExports":{"shape":"LogTypeList"}
+        "EnableCloudwatchLogsExports":{"shape":"LogTypeList"},
+        "DBClusterParameterGroupName":{"shape":"String"},
+        "DeletionProtection":{"shape":"BooleanOptional"}
       }
     },
     "RestoreDBClusterToPointInTimeResult":{
@@ -5226,7 +5254,9 @@
         "EnableIAMDatabaseAuthentication":{"shape":"BooleanOptional"},
         "EnableCloudwatchLogsExports":{"shape":"LogTypeList"},
         "ProcessorFeatures":{"shape":"ProcessorFeatureList"},
-        "UseDefaultProcessorFeatures":{"shape":"BooleanOptional"}
+        "UseDefaultProcessorFeatures":{"shape":"BooleanOptional"},
+        "DBParameterGroupName":{"shape":"String"},
+        "DeletionProtection":{"shape":"BooleanOptional"}
       }
     },
     "RestoreDBInstanceFromDBSnapshotResult":{
@@ -5288,7 +5318,8 @@
         "PerformanceInsightsRetentionPeriod":{"shape":"IntegerOptional"},
         "EnableCloudwatchLogsExports":{"shape":"LogTypeList"},
         "ProcessorFeatures":{"shape":"ProcessorFeatureList"},
-        "UseDefaultProcessorFeatures":{"shape":"BooleanOptional"}
+        "UseDefaultProcessorFeatures":{"shape":"BooleanOptional"},
+        "DeletionProtection":{"shape":"BooleanOptional"}
       }
     },
     "RestoreDBInstanceFromS3Result":{
@@ -5330,7 +5361,9 @@
         "EnableIAMDatabaseAuthentication":{"shape":"BooleanOptional"},
         "EnableCloudwatchLogsExports":{"shape":"LogTypeList"},
         "ProcessorFeatures":{"shape":"ProcessorFeatureList"},
-        "UseDefaultProcessorFeatures":{"shape":"BooleanOptional"}
+        "UseDefaultProcessorFeatures":{"shape":"BooleanOptional"},
+        "DBParameterGroupName":{"shape":"String"},
+        "DeletionProtection":{"shape":"BooleanOptional"}
       }
     },
     "RestoreDBInstanceToPointInTimeResult":{

@@ -80,6 +80,7 @@ module Aws::GuardDuty
     FindingCriteria = Shapes::StructureShape.new(name: 'FindingCriteria')
     FindingId = Shapes::StringShape.new(name: 'FindingId')
     FindingIds = Shapes::ListShape.new(name: 'FindingIds')
+    FindingPublishingFrequency = Shapes::StringShape.new(name: 'FindingPublishingFrequency')
     FindingStatisticType = Shapes::StringShape.new(name: 'FindingStatisticType')
     FindingStatisticTypes = Shapes::ListShape.new(name: 'FindingStatisticTypes')
     FindingStatistics = Shapes::StructureShape.new(name: 'FindingStatistics')
@@ -204,8 +205,8 @@ module Aws::GuardDuty
     __timestamp = Shapes::TimestampShape.new(name: '__timestamp')
 
     AcceptInvitationRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
-    AcceptInvitationRequest.add_member(:invitation_id, Shapes::ShapeRef.new(shape: InvitationId, location_name: "invitationId"))
-    AcceptInvitationRequest.add_member(:master_id, Shapes::ShapeRef.new(shape: MasterId, location_name: "masterId"))
+    AcceptInvitationRequest.add_member(:invitation_id, Shapes::ShapeRef.new(shape: InvitationId, required: true, location_name: "invitationId"))
+    AcceptInvitationRequest.add_member(:master_id, Shapes::ShapeRef.new(shape: MasterId, required: true, location_name: "masterId"))
     AcceptInvitationRequest.struct_class = Types::AcceptInvitationRequest
 
     AcceptInvitationResponse.struct_class = Types::AcceptInvitationResponse
@@ -232,7 +233,7 @@ module Aws::GuardDuty
     Action.struct_class = Types::Action
 
     ArchiveFindingsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
-    ArchiveFindingsRequest.add_member(:finding_ids, Shapes::ShapeRef.new(shape: FindingIds, location_name: "findingIds"))
+    ArchiveFindingsRequest.add_member(:finding_ids, Shapes::ShapeRef.new(shape: FindingIds, required: true, location_name: "findingIds"))
     ArchiveFindingsRequest.struct_class = Types::ArchiveFindingsRequest
 
     ArchiveFindingsResponse.struct_class = Types::ArchiveFindingsResponse
@@ -259,7 +260,9 @@ module Aws::GuardDuty
     Country.add_member(:country_name, Shapes::ShapeRef.new(shape: __string, location_name: "countryName"))
     Country.struct_class = Types::Country
 
-    CreateDetectorRequest.add_member(:enable, Shapes::ShapeRef.new(shape: Enable, location_name: "enable"))
+    CreateDetectorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __stringMin0Max64, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDetectorRequest.add_member(:enable, Shapes::ShapeRef.new(shape: Enable, required: true, location_name: "enable"))
+    CreateDetectorRequest.add_member(:finding_publishing_frequency, Shapes::ShapeRef.new(shape: FindingPublishingFrequency, location_name: "findingPublishingFrequency"))
     CreateDetectorRequest.struct_class = Types::CreateDetectorRequest
 
     CreateDetectorResponse.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, location_name: "detectorId"))
@@ -269,25 +272,26 @@ module Aws::GuardDuty
     CreateFilterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __stringMin0Max64, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateFilterRequest.add_member(:description, Shapes::ShapeRef.new(shape: FilterDescription, location_name: "description"))
     CreateFilterRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
-    CreateFilterRequest.add_member(:finding_criteria, Shapes::ShapeRef.new(shape: FindingCriteria, location_name: "findingCriteria"))
-    CreateFilterRequest.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, location_name: "name"))
+    CreateFilterRequest.add_member(:finding_criteria, Shapes::ShapeRef.new(shape: FindingCriteria, required: true, location_name: "findingCriteria"))
+    CreateFilterRequest.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, required: true, location_name: "name"))
     CreateFilterRequest.add_member(:rank, Shapes::ShapeRef.new(shape: FilterRank, location_name: "rank"))
     CreateFilterRequest.struct_class = Types::CreateFilterRequest
 
     CreateFilterResponse.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, location_name: "name"))
     CreateFilterResponse.struct_class = Types::CreateFilterResponse
 
-    CreateIPSetRequest.add_member(:activate, Shapes::ShapeRef.new(shape: Activate, location_name: "activate"))
+    CreateIPSetRequest.add_member(:activate, Shapes::ShapeRef.new(shape: Activate, required: true, location_name: "activate"))
+    CreateIPSetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __stringMin0Max64, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateIPSetRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
-    CreateIPSetRequest.add_member(:format, Shapes::ShapeRef.new(shape: IpSetFormat, location_name: "format"))
-    CreateIPSetRequest.add_member(:location, Shapes::ShapeRef.new(shape: Location, location_name: "location"))
-    CreateIPSetRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    CreateIPSetRequest.add_member(:format, Shapes::ShapeRef.new(shape: IpSetFormat, required: true, location_name: "format"))
+    CreateIPSetRequest.add_member(:location, Shapes::ShapeRef.new(shape: Location, required: true, location_name: "location"))
+    CreateIPSetRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateIPSetRequest.struct_class = Types::CreateIPSetRequest
 
     CreateIPSetResponse.add_member(:ip_set_id, Shapes::ShapeRef.new(shape: IpSetId, location_name: "ipSetId"))
     CreateIPSetResponse.struct_class = Types::CreateIPSetResponse
 
-    CreateMembersRequest.add_member(:account_details, Shapes::ShapeRef.new(shape: AccountDetails, location_name: "accountDetails"))
+    CreateMembersRequest.add_member(:account_details, Shapes::ShapeRef.new(shape: AccountDetails, required: true, location_name: "accountDetails"))
     CreateMembersRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
     CreateMembersRequest.struct_class = Types::CreateMembersRequest
 
@@ -300,17 +304,18 @@ module Aws::GuardDuty
 
     CreateSampleFindingsResponse.struct_class = Types::CreateSampleFindingsResponse
 
-    CreateThreatIntelSetRequest.add_member(:activate, Shapes::ShapeRef.new(shape: Activate, location_name: "activate"))
+    CreateThreatIntelSetRequest.add_member(:activate, Shapes::ShapeRef.new(shape: Activate, required: true, location_name: "activate"))
+    CreateThreatIntelSetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __stringMin0Max64, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateThreatIntelSetRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
-    CreateThreatIntelSetRequest.add_member(:format, Shapes::ShapeRef.new(shape: ThreatIntelSetFormat, location_name: "format"))
-    CreateThreatIntelSetRequest.add_member(:location, Shapes::ShapeRef.new(shape: Location, location_name: "location"))
-    CreateThreatIntelSetRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    CreateThreatIntelSetRequest.add_member(:format, Shapes::ShapeRef.new(shape: ThreatIntelSetFormat, required: true, location_name: "format"))
+    CreateThreatIntelSetRequest.add_member(:location, Shapes::ShapeRef.new(shape: Location, required: true, location_name: "location"))
+    CreateThreatIntelSetRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateThreatIntelSetRequest.struct_class = Types::CreateThreatIntelSetRequest
 
     CreateThreatIntelSetResponse.add_member(:threat_intel_set_id, Shapes::ShapeRef.new(shape: ThreatIntelSetId, location_name: "threatIntelSetId"))
     CreateThreatIntelSetResponse.struct_class = Types::CreateThreatIntelSetResponse
 
-    DeclineInvitationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
+    DeclineInvitationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, required: true, location_name: "accountIds"))
     DeclineInvitationsRequest.struct_class = Types::DeclineInvitationsRequest
 
     DeclineInvitationsResponse.add_member(:unprocessed_accounts, Shapes::ShapeRef.new(shape: UnprocessedAccounts, location_name: "unprocessedAccounts"))
@@ -333,13 +338,13 @@ module Aws::GuardDuty
 
     DeleteIPSetResponse.struct_class = Types::DeleteIPSetResponse
 
-    DeleteInvitationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
+    DeleteInvitationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, required: true, location_name: "accountIds"))
     DeleteInvitationsRequest.struct_class = Types::DeleteInvitationsRequest
 
     DeleteInvitationsResponse.add_member(:unprocessed_accounts, Shapes::ShapeRef.new(shape: UnprocessedAccounts, location_name: "unprocessedAccounts"))
     DeleteInvitationsResponse.struct_class = Types::DeleteInvitationsResponse
 
-    DeleteMembersRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
+    DeleteMembersRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, required: true, location_name: "accountIds"))
     DeleteMembersRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
     DeleteMembersRequest.struct_class = Types::DeleteMembersRequest
 
@@ -359,7 +364,7 @@ module Aws::GuardDuty
 
     DisassociateFromMasterAccountResponse.struct_class = Types::DisassociateFromMasterAccountResponse
 
-    DisassociateMembersRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
+    DisassociateMembersRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, required: true, location_name: "accountIds"))
     DisassociateMembersRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
     DisassociateMembersRequest.struct_class = Types::DisassociateMembersRequest
 
@@ -418,6 +423,7 @@ module Aws::GuardDuty
     GetDetectorRequest.struct_class = Types::GetDetectorRequest
 
     GetDetectorResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    GetDetectorResponse.add_member(:finding_publishing_frequency, Shapes::ShapeRef.new(shape: FindingPublishingFrequency, location_name: "findingPublishingFrequency"))
     GetDetectorResponse.add_member(:service_role, Shapes::ShapeRef.new(shape: ServiceRole, location_name: "serviceRole"))
     GetDetectorResponse.add_member(:status, Shapes::ShapeRef.new(shape: DetectorStatus, location_name: "status"))
     GetDetectorResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
@@ -435,7 +441,7 @@ module Aws::GuardDuty
     GetFilterResponse.struct_class = Types::GetFilterResponse
 
     GetFindingsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
-    GetFindingsRequest.add_member(:finding_ids, Shapes::ShapeRef.new(shape: FindingIds, location_name: "findingIds"))
+    GetFindingsRequest.add_member(:finding_ids, Shapes::ShapeRef.new(shape: FindingIds, required: true, location_name: "findingIds"))
     GetFindingsRequest.add_member(:sort_criteria, Shapes::ShapeRef.new(shape: SortCriteria, location_name: "sortCriteria"))
     GetFindingsRequest.struct_class = Types::GetFindingsRequest
 
@@ -444,7 +450,7 @@ module Aws::GuardDuty
 
     GetFindingsStatisticsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
     GetFindingsStatisticsRequest.add_member(:finding_criteria, Shapes::ShapeRef.new(shape: FindingCriteria, location_name: "findingCriteria"))
-    GetFindingsStatisticsRequest.add_member(:finding_statistic_types, Shapes::ShapeRef.new(shape: FindingStatisticTypes, location_name: "findingStatisticTypes"))
+    GetFindingsStatisticsRequest.add_member(:finding_statistic_types, Shapes::ShapeRef.new(shape: FindingStatisticTypes, required: true, location_name: "findingStatisticTypes"))
     GetFindingsStatisticsRequest.struct_class = Types::GetFindingsStatisticsRequest
 
     GetFindingsStatisticsResponse.add_member(:finding_statistics, Shapes::ShapeRef.new(shape: FindingStatistics, location_name: "findingStatistics"))
@@ -471,7 +477,7 @@ module Aws::GuardDuty
     GetMasterAccountResponse.add_member(:master, Shapes::ShapeRef.new(shape: Master, location_name: "master"))
     GetMasterAccountResponse.struct_class = Types::GetMasterAccountResponse
 
-    GetMembersRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
+    GetMembersRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, required: true, location_name: "accountIds"))
     GetMembersRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
     GetMembersRequest.struct_class = Types::GetMembersRequest
 
@@ -515,7 +521,7 @@ module Aws::GuardDuty
 
     Invitations.member = Shapes::ShapeRef.new(shape: Invitation)
 
-    InviteMembersRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
+    InviteMembersRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, required: true, location_name: "accountIds"))
     InviteMembersRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
     InviteMembersRequest.add_member(:disable_email_notification, Shapes::ShapeRef.new(shape: __boolean, location_name: "disableEmailNotification"))
     InviteMembersRequest.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
@@ -700,14 +706,14 @@ module Aws::GuardDuty
     SortCriteria.add_member(:order_by, Shapes::ShapeRef.new(shape: OrderBy, location_name: "orderBy"))
     SortCriteria.struct_class = Types::SortCriteria
 
-    StartMonitoringMembersRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
+    StartMonitoringMembersRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, required: true, location_name: "accountIds"))
     StartMonitoringMembersRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
     StartMonitoringMembersRequest.struct_class = Types::StartMonitoringMembersRequest
 
     StartMonitoringMembersResponse.add_member(:unprocessed_accounts, Shapes::ShapeRef.new(shape: UnprocessedAccounts, location_name: "unprocessedAccounts"))
     StartMonitoringMembersResponse.struct_class = Types::StartMonitoringMembersResponse
 
-    StopMonitoringMembersRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
+    StopMonitoringMembersRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, required: true, location_name: "accountIds"))
     StopMonitoringMembersRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
     StopMonitoringMembersRequest.struct_class = Types::StopMonitoringMembersRequest
 
@@ -723,7 +729,7 @@ module Aws::GuardDuty
     ThreatIntelSetIds.member = Shapes::ShapeRef.new(shape: ThreatIntelSetId)
 
     UnarchiveFindingsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
-    UnarchiveFindingsRequest.add_member(:finding_ids, Shapes::ShapeRef.new(shape: FindingIds, location_name: "findingIds"))
+    UnarchiveFindingsRequest.add_member(:finding_ids, Shapes::ShapeRef.new(shape: FindingIds, required: true, location_name: "findingIds"))
     UnarchiveFindingsRequest.struct_class = Types::UnarchiveFindingsRequest
 
     UnarchiveFindingsResponse.struct_class = Types::UnarchiveFindingsResponse
@@ -736,6 +742,7 @@ module Aws::GuardDuty
 
     UpdateDetectorRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
     UpdateDetectorRequest.add_member(:enable, Shapes::ShapeRef.new(shape: Enable, location_name: "enable"))
+    UpdateDetectorRequest.add_member(:finding_publishing_frequency, Shapes::ShapeRef.new(shape: FindingPublishingFrequency, location_name: "findingPublishingFrequency"))
     UpdateDetectorRequest.struct_class = Types::UpdateDetectorRequest
 
     UpdateDetectorResponse.struct_class = Types::UpdateDetectorResponse
@@ -753,8 +760,8 @@ module Aws::GuardDuty
 
     UpdateFindingsFeedbackRequest.add_member(:comments, Shapes::ShapeRef.new(shape: Comments, location_name: "comments"))
     UpdateFindingsFeedbackRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
-    UpdateFindingsFeedbackRequest.add_member(:feedback, Shapes::ShapeRef.new(shape: Feedback, location_name: "feedback"))
-    UpdateFindingsFeedbackRequest.add_member(:finding_ids, Shapes::ShapeRef.new(shape: FindingIds, location_name: "findingIds"))
+    UpdateFindingsFeedbackRequest.add_member(:feedback, Shapes::ShapeRef.new(shape: Feedback, required: true, location_name: "feedback"))
+    UpdateFindingsFeedbackRequest.add_member(:finding_ids, Shapes::ShapeRef.new(shape: FindingIds, required: true, location_name: "findingIds"))
     UpdateFindingsFeedbackRequest.struct_class = Types::UpdateFindingsFeedbackRequest
 
     UpdateFindingsFeedbackResponse.struct_class = Types::UpdateFindingsFeedbackResponse
