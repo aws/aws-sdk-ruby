@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Adding support for endpoint discovery for service operations when available, to enable this feature, set `:endpoint_discovery` to `true` for the client.
+
 3.35.0 (2018-10-24)
 ------------------
 
