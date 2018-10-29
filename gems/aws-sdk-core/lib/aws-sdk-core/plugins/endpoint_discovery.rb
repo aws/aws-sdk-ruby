@@ -66,7 +66,10 @@ backgrounds very 60 secs (default). Defaults to `false`.
             context.http_request.headers['x-amz-api-version'] = context.config.api.version
             _apply_endpoint_discovery_user_agent(context)
           elsif discovery_cfg = context.operation.endpoint_discovery
-            endpoint = _discover_endpoint(context, discovery_cfg["required"])
+            endpoint = _discover_endpoint(
+              context,
+              Aws::Util.str_2_bool(discovery_cfg["required"])
+            )
             context.http_request.endpoint = _valid_uri(endpoint.address) if endpoint
             if endpoint || context.config.endpoint_discovery
               _apply_endpoint_discovery_user_agent(context)
@@ -149,16 +152,7 @@ backgrounds very 60 secs (default). Defaults to `false`.
       def self.resolve_endpoint_discovery(cfg)
         env = ENV['AWS_ENABLE_ENDPOINT_DISCOVERY']
         shared_cfg = Aws.shared_config.endpoint_discovery(profile: cfg.profile)
-        str_2_bool(env) || str_2_bool(shared_cfg)
-      end
-
-      def self.str_2_bool(str)
-        case str.to_s
-        when "true" then true
-        when "false" then false
-        else
-          nil
-        end
+        Aws::Util.str_2_bool(env) || Aws::Util.str_2_bool(shared_cfg)
       end
 
     end
