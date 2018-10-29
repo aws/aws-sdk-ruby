@@ -18,7 +18,6 @@ Unreleased Changes
 ------------------
 
 * Feature - API update.
->>>>>>> origin/master
 
 1.20.0 (2018-09-19)
 ------------------
