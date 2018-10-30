@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.160 (2018-10-30)
+------------------
+
 * Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
 
 * Feature - Aws::Chime - Added support for a new service, Amazon Chime.
