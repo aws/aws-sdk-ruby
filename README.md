@@ -298,8 +298,8 @@ to be backwards compatible.
 | AWS IoT Data Plane                                    | IoTDataPlane                    | 2015-05-28  |
 | AWS IoT Jobs Data Plane                               | IoTJobsDataPlane                | 2017-09-29  |
 | AWS Key Management Service                            | KMS                             | 2014-11-01  |
-| AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
 | AWS Lambda                                            | Lambda                          | 2015-03-31  |
+| AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
 | AWS Marketplace Commerce Analytics                    | MarketplaceCommerceAnalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | MarketplaceEntitlementService   | 2017-01-11  |
 | AWS MediaTailor                                       | MediaTailor                     | 2018-04-23  |
@@ -330,6 +330,7 @@ to be backwards compatible.
 | Amazon API Gateway                                    | APIGateway                      | 2015-07-09  |
 | Amazon AppStream                                      | AppStream                       | 2016-12-01  |
 | Amazon Athena                                         | Athena                          | 2017-05-18  |
+| Amazon Chime                                          | Chime                           | 2018-05-01  |
 | Amazon CloudDirectory                                 | CloudDirectory                  | 2017-01-11  |
 | Amazon CloudFront                                     | CloudFront                      | 2018-06-18  |
 | Amazon CloudHSM                                       | CloudHSM                        | 2014-05-30  |

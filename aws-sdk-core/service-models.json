@@ -51,6 +51,10 @@
     "models": "budgets/2016-10-20",
     "endpoint": "budgets"
   },
+  "Chime": {
+    "models": "chime/2018-05-01",
+    "endpoint": "chime"
+  },
   "Cloud9": {
     "models": "cloud9/2017-09-23",
     "endpoint": "cloud9"

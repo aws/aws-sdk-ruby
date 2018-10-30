@@ -36,6 +36,7 @@ module Aws
     AutoScalingPlans
     Batch
     Budgets
+    Chime
     Cloud9
     CloudDirectory
     CloudFormation
