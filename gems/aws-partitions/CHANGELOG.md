@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2018-10-30)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Chime`.
+
 1.106.0 (2018-10-22)
 ------------------
 

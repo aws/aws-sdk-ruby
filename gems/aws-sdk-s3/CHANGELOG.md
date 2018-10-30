@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.23.1 (2018-10-30)
+------------------
+
 * Issue - Support multipart upload empty stream (GitHub Issue #1880)
 * Issue - Aws::S3::Encryption::IOAuthDecrypter - Fixes issue where the body tag being split across packets could cause GCM decryption to fail intermittently.
 

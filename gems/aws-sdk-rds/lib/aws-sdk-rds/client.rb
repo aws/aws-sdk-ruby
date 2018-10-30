@@ -3123,6 +3123,9 @@ module Aws::RDS
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
     #   resp.db_instance.deletion_protection #=> Boolean
+    #   resp.db_instance.listener_endpoint.address #=> String
+    #   resp.db_instance.listener_endpoint.port #=> Integer
+    #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -3640,6 +3643,9 @@ module Aws::RDS
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
     #   resp.db_instance.deletion_protection #=> Boolean
+    #   resp.db_instance.listener_endpoint.address #=> String
+    #   resp.db_instance.listener_endpoint.port #=> Integer
+    #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -4823,6 +4829,9 @@ module Aws::RDS
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
     #   resp.db_instance.deletion_protection #=> Boolean
+    #   resp.db_instance.listener_endpoint.address #=> String
+    #   resp.db_instance.listener_endpoint.port #=> Integer
+    #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -6280,6 +6289,9 @@ module Aws::RDS
     #   resp.db_instances[0].processor_features[0].name #=> String
     #   resp.db_instances[0].processor_features[0].value #=> String
     #   resp.db_instances[0].deletion_protection #=> Boolean
+    #   resp.db_instances[0].listener_endpoint.address #=> String
+    #   resp.db_instances[0].listener_endpoint.port #=> Integer
+    #   resp.db_instances[0].listener_endpoint.hosted_zone_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstances AWS API Documentation
     #
@@ -9958,6 +9970,9 @@ module Aws::RDS
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
     #   resp.db_instance.deletion_protection #=> Boolean
+    #   resp.db_instance.listener_endpoint.address #=> String
+    #   resp.db_instance.listener_endpoint.port #=> Integer
+    #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -10765,6 +10780,9 @@ module Aws::RDS
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
     #   resp.db_instance.deletion_protection #=> Boolean
+    #   resp.db_instance.listener_endpoint.address #=> String
+    #   resp.db_instance.listener_endpoint.port #=> Integer
+    #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -11125,6 +11143,9 @@ module Aws::RDS
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
     #   resp.db_instance.deletion_protection #=> Boolean
+    #   resp.db_instance.listener_endpoint.address #=> String
+    #   resp.db_instance.listener_endpoint.port #=> Integer
+    #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -12968,6 +12989,9 @@ module Aws::RDS
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
     #   resp.db_instance.deletion_protection #=> Boolean
+    #   resp.db_instance.listener_endpoint.address #=> String
+    #   resp.db_instance.listener_endpoint.port #=> Integer
+    #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -13495,6 +13519,9 @@ module Aws::RDS
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
     #   resp.db_instance.deletion_protection #=> Boolean
+    #   resp.db_instance.listener_endpoint.address #=> String
+    #   resp.db_instance.listener_endpoint.port #=> Integer
+    #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -14031,6 +14058,9 @@ module Aws::RDS
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
     #   resp.db_instance.deletion_protection #=> Boolean
+    #   resp.db_instance.listener_endpoint.address #=> String
+    #   resp.db_instance.listener_endpoint.port #=> Integer
+    #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -14363,6 +14393,9 @@ module Aws::RDS
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
     #   resp.db_instance.deletion_protection #=> Boolean
+    #   resp.db_instance.listener_endpoint.address #=> String
+    #   resp.db_instance.listener_endpoint.port #=> Integer
+    #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -14614,6 +14647,9 @@ module Aws::RDS
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
     #   resp.db_instance.deletion_protection #=> Boolean
+    #   resp.db_instance.listener_endpoint.address #=> String
+    #   resp.db_instance.listener_endpoint.port #=> Integer
+    #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -14637,7 +14673,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

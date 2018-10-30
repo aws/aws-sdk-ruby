@@ -16,6 +16,7 @@ module Aws
   autoload :AutoScalingPlans, 'aws-sdk-autoscalingplans'
   autoload :Batch, 'aws-sdk-batch'
   autoload :Budgets, 'aws-sdk-budgets'
+  autoload :Chime, 'aws-sdk-chime'
   autoload :Cloud9, 'aws-sdk-cloud9'
   autoload :CloudDirectory, 'aws-sdk-clouddirectory'
   autoload :CloudFormation, 'aws-sdk-cloudformation'
