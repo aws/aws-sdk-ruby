@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ConfigService - Updated the API for AWS Config.
+
+* Feature - Aws::Greengrass - Updated the API, and documentation for AWS Greengrass.
+
+* Feature - Aws::MediaStoreData - Updated the API, and documentation for AWS Elemental MediaStore Data Plane.
+
+* Feature - Aws::SecretsManager - Updated the documentation for AWS Secrets Manager.
+
 2.11.160 (2018-10-30)
 ------------------
 
