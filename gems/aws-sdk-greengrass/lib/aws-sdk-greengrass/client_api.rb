@@ -16,6 +16,12 @@ module Aws::Greengrass
     AssociateServiceRoleToAccountRequest = Shapes::StructureShape.new(name: 'AssociateServiceRoleToAccountRequest')
     AssociateServiceRoleToAccountResponse = Shapes::StructureShape.new(name: 'AssociateServiceRoleToAccountResponse')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    BulkDeployment = Shapes::StructureShape.new(name: 'BulkDeployment')
+    BulkDeploymentMetrics = Shapes::StructureShape.new(name: 'BulkDeploymentMetrics')
+    BulkDeploymentResult = Shapes::StructureShape.new(name: 'BulkDeploymentResult')
+    BulkDeploymentResults = Shapes::ListShape.new(name: 'BulkDeploymentResults')
+    BulkDeploymentStatus = Shapes::StringShape.new(name: 'BulkDeploymentStatus')
+    BulkDeployments = Shapes::ListShape.new(name: 'BulkDeployments')
     ConnectivityInfo = Shapes::StructureShape.new(name: 'ConnectivityInfo')
     Core = Shapes::StructureShape.new(name: 'Core')
     CoreDefinitionVersion = Shapes::StructureShape.new(name: 'CoreDefinitionVersion')
@@ -88,6 +94,8 @@ module Aws::Greengrass
     GeneralError = Shapes::StructureShape.new(name: 'GeneralError')
     GetAssociatedRoleRequest = Shapes::StructureShape.new(name: 'GetAssociatedRoleRequest')
     GetAssociatedRoleResponse = Shapes::StructureShape.new(name: 'GetAssociatedRoleResponse')
+    GetBulkDeploymentStatusRequest = Shapes::StructureShape.new(name: 'GetBulkDeploymentStatusRequest')
+    GetBulkDeploymentStatusResponse = Shapes::StructureShape.new(name: 'GetBulkDeploymentStatusResponse')
     GetConnectivityInfoRequest = Shapes::StructureShape.new(name: 'GetConnectivityInfoRequest')
     GetConnectivityInfoResponse = Shapes::StructureShape.new(name: 'GetConnectivityInfoResponse')
     GetCoreDefinitionRequest = Shapes::StructureShape.new(name: 'GetCoreDefinitionRequest')
@@ -132,6 +140,10 @@ module Aws::Greengrass
     GroupOwnerSetting = Shapes::StructureShape.new(name: 'GroupOwnerSetting')
     GroupVersion = Shapes::StructureShape.new(name: 'GroupVersion')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
+    ListBulkDeploymentDetailedReportsRequest = Shapes::StructureShape.new(name: 'ListBulkDeploymentDetailedReportsRequest')
+    ListBulkDeploymentDetailedReportsResponse = Shapes::StructureShape.new(name: 'ListBulkDeploymentDetailedReportsResponse')
+    ListBulkDeploymentsRequest = Shapes::StructureShape.new(name: 'ListBulkDeploymentsRequest')
+    ListBulkDeploymentsResponse = Shapes::StructureShape.new(name: 'ListBulkDeploymentsResponse')
     ListCoreDefinitionVersionsRequest = Shapes::StructureShape.new(name: 'ListCoreDefinitionVersionsRequest')
     ListCoreDefinitionVersionsResponse = Shapes::StructureShape.new(name: 'ListCoreDefinitionVersionsResponse')
     ListCoreDefinitionsRequest = Shapes::StructureShape.new(name: 'ListCoreDefinitionsRequest')
@@ -184,6 +196,10 @@ module Aws::Greengrass
     S3UrlSignerRole = Shapes::StringShape.new(name: 'S3UrlSignerRole')
     SageMakerMachineLearningModelResourceData = Shapes::StructureShape.new(name: 'SageMakerMachineLearningModelResourceData')
     SoftwareToUpdate = Shapes::StringShape.new(name: 'SoftwareToUpdate')
+    StartBulkDeploymentRequest = Shapes::StructureShape.new(name: 'StartBulkDeploymentRequest')
+    StartBulkDeploymentResponse = Shapes::StructureShape.new(name: 'StartBulkDeploymentResponse')
+    StopBulkDeploymentRequest = Shapes::StructureShape.new(name: 'StopBulkDeploymentRequest')
+    StopBulkDeploymentResponse = Shapes::StructureShape.new(name: 'StopBulkDeploymentResponse')
     Subscription = Shapes::StructureShape.new(name: 'Subscription')
     SubscriptionDefinitionVersion = Shapes::StructureShape.new(name: 'SubscriptionDefinitionVersion')
     UpdateAgentLogLevel = Shapes::StringShape.new(name: 'UpdateAgentLogLevel')
@@ -227,7 +243,8 @@ module Aws::Greengrass
     __long = Shapes::IntegerShape.new(name: '__long')
     __mapOf__string = Shapes::MapShape.new(name: '__mapOf__string')
     __string = Shapes::StringShape.new(name: '__string')
-    __timestamp = Shapes::TimestampShape.new(name: '__timestamp')
+    __timestampIso8601 = Shapes::TimestampShape.new(name: '__timestampIso8601', timestampFormat: "iso8601")
+    __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
 
     AssociateRoleToGroupRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "GroupId"))
     AssociateRoleToGroupRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "RoleArn"))
@@ -241,6 +258,30 @@ module Aws::Greengrass
 
     AssociateServiceRoleToAccountResponse.add_member(:associated_at, Shapes::ShapeRef.new(shape: __string, location_name: "AssociatedAt"))
     AssociateServiceRoleToAccountResponse.struct_class = Types::AssociateServiceRoleToAccountResponse
+
+    BulkDeployment.add_member(:bulk_deployment_arn, Shapes::ShapeRef.new(shape: __string, location_name: "BulkDeploymentArn"))
+    BulkDeployment.add_member(:bulk_deployment_id, Shapes::ShapeRef.new(shape: __string, location_name: "BulkDeploymentId"))
+    BulkDeployment.add_member(:created_at, Shapes::ShapeRef.new(shape: __string, location_name: "CreatedAt"))
+    BulkDeployment.struct_class = Types::BulkDeployment
+
+    BulkDeploymentMetrics.add_member(:invalid_input_records, Shapes::ShapeRef.new(shape: __integer, location_name: "InvalidInputRecords"))
+    BulkDeploymentMetrics.add_member(:records_processed, Shapes::ShapeRef.new(shape: __integer, location_name: "RecordsProcessed"))
+    BulkDeploymentMetrics.add_member(:retry_attempts, Shapes::ShapeRef.new(shape: __integer, location_name: "RetryAttempts"))
+    BulkDeploymentMetrics.struct_class = Types::BulkDeploymentMetrics
+
+    BulkDeploymentResult.add_member(:created_at, Shapes::ShapeRef.new(shape: __string, location_name: "CreatedAt"))
+    BulkDeploymentResult.add_member(:deployment_arn, Shapes::ShapeRef.new(shape: __string, location_name: "DeploymentArn"))
+    BulkDeploymentResult.add_member(:deployment_id, Shapes::ShapeRef.new(shape: __string, location_name: "DeploymentId"))
+    BulkDeploymentResult.add_member(:deployment_status, Shapes::ShapeRef.new(shape: __string, location_name: "DeploymentStatus"))
+    BulkDeploymentResult.add_member(:deployment_type, Shapes::ShapeRef.new(shape: DeploymentType, location_name: "DeploymentType"))
+    BulkDeploymentResult.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "ErrorDetails"))
+    BulkDeploymentResult.add_member(:error_message, Shapes::ShapeRef.new(shape: __string, location_name: "ErrorMessage"))
+    BulkDeploymentResult.add_member(:group_arn, Shapes::ShapeRef.new(shape: __string, location_name: "GroupArn"))
+    BulkDeploymentResult.struct_class = Types::BulkDeploymentResult
+
+    BulkDeploymentResults.member = Shapes::ShapeRef.new(shape: BulkDeploymentResult)
+
+    BulkDeployments.member = Shapes::ShapeRef.new(shape: BulkDeployment)
 
     ConnectivityInfo.add_member(:host_address, Shapes::ShapeRef.new(shape: __string, location_name: "HostAddress"))
     ConnectivityInfo.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
@@ -582,6 +623,16 @@ module Aws::Greengrass
     GetAssociatedRoleResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "RoleArn"))
     GetAssociatedRoleResponse.struct_class = Types::GetAssociatedRoleResponse
 
+    GetBulkDeploymentStatusRequest.add_member(:bulk_deployment_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "BulkDeploymentId"))
+    GetBulkDeploymentStatusRequest.struct_class = Types::GetBulkDeploymentStatusRequest
+
+    GetBulkDeploymentStatusResponse.add_member(:bulk_deployment_metrics, Shapes::ShapeRef.new(shape: BulkDeploymentMetrics, location_name: "BulkDeploymentMetrics"))
+    GetBulkDeploymentStatusResponse.add_member(:bulk_deployment_status, Shapes::ShapeRef.new(shape: BulkDeploymentStatus, location_name: "BulkDeploymentStatus"))
+    GetBulkDeploymentStatusResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __string, location_name: "CreatedAt"))
+    GetBulkDeploymentStatusResponse.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "ErrorDetails"))
+    GetBulkDeploymentStatusResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: __string, location_name: "ErrorMessage"))
+    GetBulkDeploymentStatusResponse.struct_class = Types::GetBulkDeploymentStatusResponse
+
     GetConnectivityInfoRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ThingName"))
     GetConnectivityInfoRequest.struct_class = Types::GetConnectivityInfoRequest
 
@@ -609,6 +660,7 @@ module Aws::Greengrass
     GetCoreDefinitionVersionResponse.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: __string, location_name: "CreationTimestamp"))
     GetCoreDefinitionVersionResponse.add_member(:definition, Shapes::ShapeRef.new(shape: CoreDefinitionVersion, location_name: "Definition"))
     GetCoreDefinitionVersionResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
+    GetCoreDefinitionVersionResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
     GetCoreDefinitionVersionResponse.add_member(:version, Shapes::ShapeRef.new(shape: __string, location_name: "Version"))
     GetCoreDefinitionVersionResponse.struct_class = Types::GetCoreDefinitionVersionResponse
 
@@ -637,12 +689,14 @@ module Aws::Greengrass
 
     GetDeviceDefinitionVersionRequest.add_member(:device_definition_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "DeviceDefinitionId"))
     GetDeviceDefinitionVersionRequest.add_member(:device_definition_version_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "DeviceDefinitionVersionId"))
+    GetDeviceDefinitionVersionRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "NextToken"))
     GetDeviceDefinitionVersionRequest.struct_class = Types::GetDeviceDefinitionVersionRequest
 
     GetDeviceDefinitionVersionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
     GetDeviceDefinitionVersionResponse.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: __string, location_name: "CreationTimestamp"))
     GetDeviceDefinitionVersionResponse.add_member(:definition, Shapes::ShapeRef.new(shape: DeviceDefinitionVersion, location_name: "Definition"))
     GetDeviceDefinitionVersionResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
+    GetDeviceDefinitionVersionResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
     GetDeviceDefinitionVersionResponse.add_member(:version, Shapes::ShapeRef.new(shape: __string, location_name: "Version"))
     GetDeviceDefinitionVersionResponse.struct_class = Types::GetDeviceDefinitionVersionResponse
 
@@ -660,12 +714,14 @@ module Aws::Greengrass
 
     GetFunctionDefinitionVersionRequest.add_member(:function_definition_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "FunctionDefinitionId"))
     GetFunctionDefinitionVersionRequest.add_member(:function_definition_version_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "FunctionDefinitionVersionId"))
+    GetFunctionDefinitionVersionRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "NextToken"))
     GetFunctionDefinitionVersionRequest.struct_class = Types::GetFunctionDefinitionVersionRequest
 
     GetFunctionDefinitionVersionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
     GetFunctionDefinitionVersionResponse.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: __string, location_name: "CreationTimestamp"))
     GetFunctionDefinitionVersionResponse.add_member(:definition, Shapes::ShapeRef.new(shape: FunctionDefinitionVersion, location_name: "Definition"))
     GetFunctionDefinitionVersionResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
+    GetFunctionDefinitionVersionResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
     GetFunctionDefinitionVersionResponse.add_member(:version, Shapes::ShapeRef.new(shape: __string, location_name: "Version"))
     GetFunctionDefinitionVersionResponse.struct_class = Types::GetFunctionDefinitionVersionResponse
 
@@ -723,6 +779,7 @@ module Aws::Greengrass
 
     GetLoggerDefinitionVersionRequest.add_member(:logger_definition_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "LoggerDefinitionId"))
     GetLoggerDefinitionVersionRequest.add_member(:logger_definition_version_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "LoggerDefinitionVersionId"))
+    GetLoggerDefinitionVersionRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "NextToken"))
     GetLoggerDefinitionVersionRequest.struct_class = Types::GetLoggerDefinitionVersionRequest
 
     GetLoggerDefinitionVersionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
@@ -773,6 +830,7 @@ module Aws::Greengrass
     GetSubscriptionDefinitionResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
     GetSubscriptionDefinitionResponse.struct_class = Types::GetSubscriptionDefinitionResponse
 
+    GetSubscriptionDefinitionVersionRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "NextToken"))
     GetSubscriptionDefinitionVersionRequest.add_member(:subscription_definition_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "SubscriptionDefinitionId"))
     GetSubscriptionDefinitionVersionRequest.add_member(:subscription_definition_version_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "SubscriptionDefinitionVersionId"))
     GetSubscriptionDefinitionVersionRequest.struct_class = Types::GetSubscriptionDefinitionVersionRequest
@@ -781,6 +839,7 @@ module Aws::Greengrass
     GetSubscriptionDefinitionVersionResponse.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: __string, location_name: "CreationTimestamp"))
     GetSubscriptionDefinitionVersionResponse.add_member(:definition, Shapes::ShapeRef.new(shape: SubscriptionDefinitionVersion, location_name: "Definition"))
     GetSubscriptionDefinitionVersionResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
+    GetSubscriptionDefinitionVersionResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
     GetSubscriptionDefinitionVersionResponse.add_member(:version, Shapes::ShapeRef.new(shape: __string, location_name: "Version"))
     GetSubscriptionDefinitionVersionResponse.struct_class = Types::GetSubscriptionDefinitionVersionResponse
 
@@ -813,6 +872,23 @@ module Aws::Greengrass
     GroupVersion.add_member(:resource_definition_version_arn, Shapes::ShapeRef.new(shape: __string, location_name: "ResourceDefinitionVersionArn"))
     GroupVersion.add_member(:subscription_definition_version_arn, Shapes::ShapeRef.new(shape: __string, location_name: "SubscriptionDefinitionVersionArn"))
     GroupVersion.struct_class = Types::GroupVersion
+
+    ListBulkDeploymentDetailedReportsRequest.add_member(:bulk_deployment_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "BulkDeploymentId"))
+    ListBulkDeploymentDetailedReportsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "MaxResults"))
+    ListBulkDeploymentDetailedReportsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "NextToken"))
+    ListBulkDeploymentDetailedReportsRequest.struct_class = Types::ListBulkDeploymentDetailedReportsRequest
+
+    ListBulkDeploymentDetailedReportsResponse.add_member(:deployments, Shapes::ShapeRef.new(shape: BulkDeploymentResults, location_name: "Deployments"))
+    ListBulkDeploymentDetailedReportsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
+    ListBulkDeploymentDetailedReportsResponse.struct_class = Types::ListBulkDeploymentDetailedReportsResponse
+
+    ListBulkDeploymentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "MaxResults"))
+    ListBulkDeploymentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "NextToken"))
+    ListBulkDeploymentsRequest.struct_class = Types::ListBulkDeploymentsRequest
+
+    ListBulkDeploymentsResponse.add_member(:bulk_deployments, Shapes::ShapeRef.new(shape: BulkDeployments, location_name: "BulkDeployments"))
+    ListBulkDeploymentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
+    ListBulkDeploymentsResponse.struct_class = Types::ListBulkDeploymentsResponse
 
     ListCoreDefinitionVersionsRequest.add_member(:core_definition_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "CoreDefinitionId"))
     ListCoreDefinitionVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "MaxResults"))
@@ -1010,6 +1086,20 @@ module Aws::Greengrass
     SageMakerMachineLearningModelResourceData.add_member(:sage_maker_job_arn, Shapes::ShapeRef.new(shape: __string, location_name: "SageMakerJobArn"))
     SageMakerMachineLearningModelResourceData.struct_class = Types::SageMakerMachineLearningModelResourceData
 
+    StartBulkDeploymentRequest.add_member(:amzn_client_token, Shapes::ShapeRef.new(shape: __string, location: "header", location_name: "X-Amzn-Client-Token"))
+    StartBulkDeploymentRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "ExecutionRoleArn"))
+    StartBulkDeploymentRequest.add_member(:input_file_uri, Shapes::ShapeRef.new(shape: __string, location_name: "InputFileUri"))
+    StartBulkDeploymentRequest.struct_class = Types::StartBulkDeploymentRequest
+
+    StartBulkDeploymentResponse.add_member(:bulk_deployment_arn, Shapes::ShapeRef.new(shape: __string, location_name: "BulkDeploymentArn"))
+    StartBulkDeploymentResponse.add_member(:bulk_deployment_id, Shapes::ShapeRef.new(shape: __string, location_name: "BulkDeploymentId"))
+    StartBulkDeploymentResponse.struct_class = Types::StartBulkDeploymentResponse
+
+    StopBulkDeploymentRequest.add_member(:bulk_deployment_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "BulkDeploymentId"))
+    StopBulkDeploymentRequest.struct_class = Types::StopBulkDeploymentRequest
+
+    StopBulkDeploymentResponse.struct_class = Types::StopBulkDeploymentResponse
+
     Subscription.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
     Subscription.add_member(:source, Shapes::ShapeRef.new(shape: __string, location_name: "Source"))
     Subscription.add_member(:subject, Shapes::ShapeRef.new(shape: __string, location_name: "Subject"))
@@ -1125,6 +1215,7 @@ module Aws::Greengrass
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "serviceFullName" => "AWS Greengrass",
+        "serviceId" => "Greengrass",
         "signatureVersion" => "v4",
         "signingName" => "greengrass",
         "uid" => "greengrass-2017-06-07",
@@ -1397,6 +1488,15 @@ module Aws::Greengrass
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
+      api.add_operation(:get_bulk_deployment_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBulkDeploymentStatus"
+        o.http_method = "GET"
+        o.http_request_uri = "/greengrass/bulk/deployments/{BulkDeploymentId}/status"
+        o.input = Shapes::ShapeRef.new(shape: GetBulkDeploymentStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetBulkDeploymentStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
       api.add_operation(:get_connectivity_info, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetConnectivityInfo"
         o.http_method = "GET"
@@ -1571,6 +1671,24 @@ module Aws::Greengrass
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
+      api.add_operation(:list_bulk_deployment_detailed_reports, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBulkDeploymentDetailedReports"
+        o.http_method = "GET"
+        o.http_request_uri = "/greengrass/bulk/deployments/{BulkDeploymentId}/detailed-reports"
+        o.input = Shapes::ShapeRef.new(shape: ListBulkDeploymentDetailedReportsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListBulkDeploymentDetailedReportsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:list_bulk_deployments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBulkDeployments"
+        o.http_method = "GET"
+        o.http_request_uri = "/greengrass/bulk/deployments"
+        o.input = Shapes::ShapeRef.new(shape: ListBulkDeploymentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListBulkDeploymentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
       api.add_operation(:list_core_definition_versions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListCoreDefinitionVersions"
         o.http_method = "GET"
@@ -1715,6 +1833,24 @@ module Aws::Greengrass
         o.http_request_uri = "/greengrass/groups/{GroupId}/deployments/$reset"
         o.input = Shapes::ShapeRef.new(shape: ResetDeploymentsRequest)
         o.output = Shapes::ShapeRef.new(shape: ResetDeploymentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:start_bulk_deployment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartBulkDeployment"
+        o.http_method = "POST"
+        o.http_request_uri = "/greengrass/bulk/deployments"
+        o.input = Shapes::ShapeRef.new(shape: StartBulkDeploymentRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartBulkDeploymentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:stop_bulk_deployment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopBulkDeployment"
+        o.http_method = "PUT"
+        o.http_request_uri = "/greengrass/bulk/deployments/{BulkDeploymentId}/$stop"
+        o.input = Shapes::ShapeRef.new(shape: StopBulkDeploymentRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopBulkDeploymentResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
