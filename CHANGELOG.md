@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.161 (2018-10-31)
+------------------
+
 * Feature - Aws::ConfigService - Updated the API for AWS Config.
 
 * Feature - Aws::Greengrass - Updated the API, and documentation for AWS Greengrass.
