@@ -14,6 +14,7 @@ module Aws::ServiceCatalog
     #       {
     #         accept_language: "AcceptLanguage",
     #         portfolio_id: "Id", # required
+    #         portfolio_share_type: "IMPORTED", # accepts IMPORTED, AWS_SERVICECATALOG, AWS_ORGANIZATIONS
     #       }
     #
     # @!attribute [rw] accept_language
@@ -30,11 +31,29 @@ module Aws::ServiceCatalog
     #   The portfolio identifier.
     #   @return [String]
     #
+    # @!attribute [rw] portfolio_share_type
+    #   The type of shared portfolios to accept. The default is to accept
+    #   imported portfolios.
+    #
+    #   * `AWS_ORGANIZATIONS` - Accept portfolios shared by the master
+    #     account of your organization.
+    #
+    #   * `IMPORTED` - Accept imported portfolios.
+    #
+    #   * `AWS_SERVICECATALOG` - Not supported. (Throws
+    #     ResourceNotFoundException.)
+    #
+    #   For example, `aws servicecatalog accept-portfolio-share
+    #   --portfolio-id "port-2qwzkwxt3y5fk" --portfolio-share-type
+    #   AWS_ORGANIZATIONS`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AcceptPortfolioShareInput AWS API Documentation
     #
     class AcceptPortfolioShareInput < Struct.new(
       :accept_language,
-      :portfolio_id)
+      :portfolio_id,
+      :portfolio_share_type)
       include Aws::Structure
     end
 
@@ -700,7 +719,11 @@ module Aws::ServiceCatalog
     #       {
     #         accept_language: "AcceptLanguage",
     #         portfolio_id: "Id", # required
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
+    #         organization_node: {
+    #           type: "ORGANIZATION", # accepts ORGANIZATION, ORGANIZATIONAL_UNIT, ACCOUNT
+    #           value: "OrganizationNodeValue",
+    #         },
     #       }
     #
     # @!attribute [rw] accept_language
@@ -718,21 +741,39 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID.
+    #   The AWS account ID. For example, `123456789012`.
     #   @return [String]
+    #
+    # @!attribute [rw] organization_node
+    #   The organization node to whom you are going to share. If
+    #   `OrganizationNode` is passed in, `PortfolioShare` will be created
+    #   for the node and its children (when applies), and a
+    #   `PortfolioShareToken` will be returned in the output in order for
+    #   the administrator to monitor the status of the `PortfolioShare`
+    #   creation process.
+    #   @return [Types::OrganizationNode]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolioShareInput AWS API Documentation
     #
     class CreatePortfolioShareInput < Struct.new(
       :accept_language,
       :portfolio_id,
-      :account_id)
+      :account_id,
+      :organization_node)
       include Aws::Structure
     end
 
+    # @!attribute [rw] portfolio_share_token
+    #   The portfolio share unique identifier. This will only be returned if
+    #   portfolio is shared to an organization node.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolioShareOutput AWS API Documentation
     #
-    class CreatePortfolioShareOutput < Aws::EmptyStructure; end
+    class CreatePortfolioShareOutput < Struct.new(
+      :portfolio_share_token)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass CreateProductInput
     #   data as a hash:
@@ -1280,7 +1321,11 @@ module Aws::ServiceCatalog
     #       {
     #         accept_language: "AcceptLanguage",
     #         portfolio_id: "Id", # required
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
+    #         organization_node: {
+    #           type: "ORGANIZATION", # accepts ORGANIZATION, ORGANIZATIONAL_UNIT, ACCOUNT
+    #           value: "OrganizationNodeValue",
+    #         },
     #       }
     #
     # @!attribute [rw] accept_language
@@ -1301,18 +1346,31 @@ module Aws::ServiceCatalog
     #   The AWS account ID.
     #   @return [String]
     #
+    # @!attribute [rw] organization_node
+    #   The organization node to whom you are going to stop sharing.
+    #   @return [Types::OrganizationNode]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolioShareInput AWS API Documentation
     #
     class DeletePortfolioShareInput < Struct.new(
       :accept_language,
       :portfolio_id,
-      :account_id)
+      :account_id,
+      :organization_node)
       include Aws::Structure
     end
 
+    # @!attribute [rw] portfolio_share_token
+    #   The portfolio share unique identifier. This will only be returned if
+    #   delete is made to an organization node.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolioShareOutput AWS API Documentation
     #
-    class DeletePortfolioShareOutput < Aws::EmptyStructure; end
+    class DeletePortfolioShareOutput < Struct.new(
+      :portfolio_share_token)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass DeleteProductInput
     #   data as a hash:
@@ -1638,6 +1696,58 @@ module Aws::ServiceCatalog
       :portfolio_detail,
       :tags,
       :tag_options)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribePortfolioShareStatusInput
+    #   data as a hash:
+    #
+    #       {
+    #         portfolio_share_token: "PortfolioShareToken", # required
+    #       }
+    #
+    # @!attribute [rw] portfolio_share_token
+    #   The token for the portfolio share operation. This token is returned
+    #   either by CreatePortfolioShare or by DeletePortfolioShare.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribePortfolioShareStatusInput AWS API Documentation
+    #
+    class DescribePortfolioShareStatusInput < Struct.new(
+      :portfolio_share_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] portfolio_share_token
+    #   The token for the portfolio share operation. For example,
+    #   `share-6v24abcdefghi`.
+    #   @return [String]
+    #
+    # @!attribute [rw] portfolio_id
+    #   The portfolio identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_node_value
+    #   Organization node identifier. It can be either account id,
+    #   organizational unit id or organization id.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of the portfolio share operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_details
+    #   Information about the portfolio share operation.
+    #   @return [Types::ShareDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribePortfolioShareStatusOutput AWS API Documentation
+    #
+    class DescribePortfolioShareStatusOutput < Struct.new(
+      :portfolio_share_token,
+      :portfolio_id,
+      :organization_node_value,
+      :status,
+      :share_details)
       include Aws::Structure
     end
 
@@ -2177,6 +2287,16 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisableAWSOrganizationsAccessInput AWS API Documentation
+    #
+    class DisableAWSOrganizationsAccessInput < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisableAWSOrganizationsAccessOutput AWS API Documentation
+    #
+    class DisableAWSOrganizationsAccessOutput < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DisassociatePrincipalFromPortfolioInput
     #   data as a hash:
     #
@@ -2333,6 +2453,16 @@ module Aws::ServiceCatalog
     #
     class DisassociateTagOptionFromResourceOutput < Aws::EmptyStructure; end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/EnableAWSOrganizationsAccessInput AWS API Documentation
+    #
+    class EnableAWSOrganizationsAccessInput < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/EnableAWSOrganizationsAccessOutput AWS API Documentation
+    #
+    class EnableAWSOrganizationsAccessOutput < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass ExecuteProvisionedProductPlanInput
     #   data as a hash:
     #
@@ -2480,6 +2610,23 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/GetAWSOrganizationsAccessStatusInput AWS API Documentation
+    #
+    class GetAWSOrganizationsAccessStatusInput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] access_status
+    #   The status of the portfolio share feature.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/GetAWSOrganizationsAccessStatusOutput AWS API Documentation
+    #
+    class GetAWSOrganizationsAccessStatusOutput < Struct.new(
+      :access_status)
+      include Aws::Structure
+    end
+
     # Summary information about a product path for a user.
     #
     # @!attribute [rw] id
@@ -2515,7 +2662,7 @@ module Aws::ServiceCatalog
     #         accept_language: "AcceptLanguage",
     #         page_token: "PageToken",
     #         page_size: 1,
-    #         portfolio_share_type: "IMPORTED", # accepts IMPORTED, AWS_SERVICECATALOG
+    #         portfolio_share_type: "IMPORTED", # accepts IMPORTED, AWS_SERVICECATALOG, AWS_ORGANIZATIONS
     #       }
     #
     # @!attribute [rw] accept_language
@@ -2540,6 +2687,9 @@ module Aws::ServiceCatalog
     # @!attribute [rw] portfolio_share_type
     #   The type of shared portfolios to list. The default is to list
     #   imported portfolios.
+    #
+    #   * `AWS_ORGANIZATIONS` - List portfolios shared by the master account
+    #     of your organization
     #
     #   * `AWS_SERVICECATALOG` - List default portfolios
     #
@@ -2695,6 +2845,80 @@ module Aws::ServiceCatalog
     #
     class ListLaunchPathsOutput < Struct.new(
       :launch_path_summaries,
+      :next_page_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListOrganizationPortfolioAccessInput
+    #   data as a hash:
+    #
+    #       {
+    #         accept_language: "AcceptLanguage",
+    #         portfolio_id: "Id", # required
+    #         organization_node_type: "ORGANIZATION", # required, accepts ORGANIZATION, ORGANIZATIONAL_UNIT, ACCOUNT
+    #         page_token: "PageToken",
+    #         page_size: 1,
+    #       }
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @!attribute [rw] portfolio_id
+    #   The portfolio identifier. For example, `port-2abcdext3y5fk`.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_node_type
+    #   The organization node type that will be returned in the output.
+    #
+    #   * `ORGANIZATION` - Organization that has access to the portfolio.
+    #
+    #   * `ORGANIZATIONAL_UNIT` - Organizational unit that has access to the
+    #     portfolio within your organization.
+    #
+    #   * `ACCOUNT` - Account that has access to the portfolio within your
+    #     organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_token
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of items to return with this call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListOrganizationPortfolioAccessInput AWS API Documentation
+    #
+    class ListOrganizationPortfolioAccessInput < Struct.new(
+      :accept_language,
+      :portfolio_id,
+      :organization_node_type,
+      :page_token,
+      :page_size)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_nodes
+    #   Displays information about the organization nodes.
+    #   @return [Array<Types::OrganizationNode>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListOrganizationPortfolioAccessOutput AWS API Documentation
+    #
+    class ListOrganizationPortfolioAccessOutput < Struct.new(
+      :organization_nodes,
       :next_page_token)
       include Aws::Structure
     end
@@ -3465,6 +3689,28 @@ module Aws::ServiceCatalog
     class ListTagOptionsOutput < Struct.new(
       :tag_option_details,
       :page_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass OrganizationNode
+    #   data as a hash:
+    #
+    #       {
+    #         type: "ORGANIZATION", # accepts ORGANIZATION, ORGANIZATIONAL_UNIT, ACCOUNT
+    #         value: "OrganizationNodeValue",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/OrganizationNode AWS API Documentation
+    #
+    class OrganizationNode < Struct.new(
+      :type,
+      :value)
       include Aws::Structure
     end
 
@@ -4487,6 +4733,7 @@ module Aws::ServiceCatalog
     #       {
     #         accept_language: "AcceptLanguage",
     #         portfolio_id: "Id", # required
+    #         portfolio_share_type: "IMPORTED", # accepts IMPORTED, AWS_SERVICECATALOG, AWS_ORGANIZATIONS
     #       }
     #
     # @!attribute [rw] accept_language
@@ -4503,11 +4750,29 @@ module Aws::ServiceCatalog
     #   The portfolio identifier.
     #   @return [String]
     #
+    # @!attribute [rw] portfolio_share_type
+    #   The type of shared portfolios to reject. The default is to reject
+    #   imported portfolios.
+    #
+    #   * `AWS_ORGANIZATIONS` - Reject portfolios shared by the master
+    #     account of your organization.
+    #
+    #   * `IMPORTED` - Reject imported portfolios.
+    #
+    #   * `AWS_SERVICECATALOG` - Not supported. (Throws
+    #     ResourceNotFoundException.)
+    #
+    #   For example, `aws servicecatalog reject-portfolio-share
+    #   --portfolio-id "port-2qwzkwxt3y5fk" --portfolio-share-type
+    #   AWS_ORGANIZATIONS`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RejectPortfolioShareInput AWS API Documentation
     #
     class RejectPortfolioShareInput < Struct.new(
       :accept_language,
-      :portfolio_id)
+      :portfolio_id,
+      :portfolio_share_type)
       include Aws::Structure
     end
 
@@ -5059,6 +5324,47 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # Information about the portfolio share operation.
+    #
+    # @!attribute [rw] successful_shares
+    #   List of accounts for whom the operation succeeded.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] share_errors
+    #   List of errors.
+    #   @return [Array<Types::ShareError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ShareDetails AWS API Documentation
+    #
+    class ShareDetails < Struct.new(
+      :successful_shares,
+      :share_errors)
+      include Aws::Structure
+    end
+
+    # Errors that occurred during the portfolio share operation.
+    #
+    # @!attribute [rw] accounts
+    #   List of accounts impacted by the error.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] message
+    #   Information about the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   Error type that happened when processing the operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ShareError AWS API Documentation
+    #
+    class ShareError < Struct.new(
+      :accounts,
+      :message,
+      :error)
+      include Aws::Structure
+    end
+
     # Information about a tag. A tag is a key-value pair. Tags are
     # propagated to the resources created when provisioning a product.
     #
@@ -5486,7 +5792,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] product_id
-    #   The identifier of the provisioned product.
+    #   The identifier of the product.
     #   @return [String]
     #
     # @!attribute [rw] provisioning_artifact_id

@@ -202,6 +202,21 @@ module Aws::ServiceCatalog
     # @option params [required, String] :portfolio_id
     #   The portfolio identifier.
     #
+    # @option params [String] :portfolio_share_type
+    #   The type of shared portfolios to accept. The default is to accept
+    #   imported portfolios.
+    #
+    #   * `AWS_ORGANIZATIONS` - Accept portfolios shared by the master account
+    #     of your organization.
+    #
+    #   * `IMPORTED` - Accept imported portfolios.
+    #
+    #   * `AWS_SERVICECATALOG` - Not supported. (Throws
+    #     ResourceNotFoundException.)
+    #
+    #   For example, `aws servicecatalog accept-portfolio-share --portfolio-id
+    #   "port-2qwzkwxt3y5fk" --portfolio-share-type AWS_ORGANIZATIONS`
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -209,6 +224,7 @@ module Aws::ServiceCatalog
     #   resp = client.accept_portfolio_share({
     #     accept_language: "AcceptLanguage",
     #     portfolio_id: "Id", # required
+    #     portfolio_share_type: "IMPORTED", # accepts IMPORTED, AWS_SERVICECATALOG, AWS_ORGANIZATIONS
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AcceptPortfolioShare AWS API Documentation
@@ -720,7 +736,11 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Shares the specified portfolio with the specified account.
+    # Shares the specified portfolio with the specified account or
+    # organization node. Shares to an organization node can only be created
+    # by the master account of an Organization. AWSOrganizationsAccess must
+    # be enabled in order to create a portfolio share to an organization
+    # node.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -734,18 +754,35 @@ module Aws::ServiceCatalog
     # @option params [required, String] :portfolio_id
     #   The portfolio identifier.
     #
-    # @option params [required, String] :account_id
-    #   The AWS account ID.
+    # @option params [String] :account_id
+    #   The AWS account ID. For example, `123456789012`.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @option params [Types::OrganizationNode] :organization_node
+    #   The organization node to whom you are going to share. If
+    #   `OrganizationNode` is passed in, `PortfolioShare` will be created for
+    #   the node and its children (when applies), and a `PortfolioShareToken`
+    #   will be returned in the output in order for the administrator to
+    #   monitor the status of the `PortfolioShare` creation process.
+    #
+    # @return [Types::CreatePortfolioShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePortfolioShareOutput#portfolio_share_token #portfolio_share_token} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_portfolio_share({
     #     accept_language: "AcceptLanguage",
     #     portfolio_id: "Id", # required
-    #     account_id: "AccountId", # required
+    #     account_id: "AccountId",
+    #     organization_node: {
+    #       type: "ORGANIZATION", # accepts ORGANIZATION, ORGANIZATIONAL_UNIT, ACCOUNT
+    #       value: "OrganizationNodeValue",
+    #     },
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.portfolio_share_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolioShare AWS API Documentation
     #
@@ -1254,7 +1291,9 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Stops sharing the specified portfolio with the specified account.
+    # Stops sharing the specified portfolio with the specified account or
+    # organization node. Shares to an organization node can only be deleted
+    # by the master account of an Organization.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -1268,18 +1307,31 @@ module Aws::ServiceCatalog
     # @option params [required, String] :portfolio_id
     #   The portfolio identifier.
     #
-    # @option params [required, String] :account_id
+    # @option params [String] :account_id
     #   The AWS account ID.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @option params [Types::OrganizationNode] :organization_node
+    #   The organization node to whom you are going to stop sharing.
+    #
+    # @return [Types::DeletePortfolioShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeletePortfolioShareOutput#portfolio_share_token #portfolio_share_token} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_portfolio_share({
     #     accept_language: "AcceptLanguage",
     #     portfolio_id: "Id", # required
-    #     account_id: "AccountId", # required
+    #     account_id: "AccountId",
+    #     organization_node: {
+    #       type: "ORGANIZATION", # accepts ORGANIZATION, ORGANIZATIONAL_UNIT, ACCOUNT
+    #       value: "OrganizationNodeValue",
+    #     },
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.portfolio_share_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolioShare AWS API Documentation
     #
@@ -1599,6 +1651,50 @@ module Aws::ServiceCatalog
     # @param [Hash] params ({})
     def describe_portfolio(params = {}, options = {})
       req = build_request(:describe_portfolio, params)
+      req.send_request(options)
+    end
+
+    # Gets the status of the specified portfolio share operation. This API
+    # can only be called by the master account in the organization.
+    #
+    # @option params [required, String] :portfolio_share_token
+    #   The token for the portfolio share operation. This token is returned
+    #   either by CreatePortfolioShare or by DeletePortfolioShare.
+    #
+    # @return [Types::DescribePortfolioShareStatusOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePortfolioShareStatusOutput#portfolio_share_token #portfolio_share_token} => String
+    #   * {Types::DescribePortfolioShareStatusOutput#portfolio_id #portfolio_id} => String
+    #   * {Types::DescribePortfolioShareStatusOutput#organization_node_value #organization_node_value} => String
+    #   * {Types::DescribePortfolioShareStatusOutput#status #status} => String
+    #   * {Types::DescribePortfolioShareStatusOutput#share_details #share_details} => Types::ShareDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_portfolio_share_status({
+    #     portfolio_share_token: "PortfolioShareToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.portfolio_share_token #=> String
+    #   resp.portfolio_id #=> String
+    #   resp.organization_node_value #=> String
+    #   resp.status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED", "COMPLETED_WITH_ERRORS", "ERROR"
+    #   resp.share_details.successful_shares #=> Array
+    #   resp.share_details.successful_shares[0] #=> String
+    #   resp.share_details.share_errors #=> Array
+    #   resp.share_details.share_errors[0].accounts #=> Array
+    #   resp.share_details.share_errors[0].accounts[0] #=> String
+    #   resp.share_details.share_errors[0].message #=> String
+    #   resp.share_details.share_errors[0].error #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribePortfolioShareStatus AWS API Documentation
+    #
+    # @overload describe_portfolio_share_status(params = {})
+    # @param [Hash] params ({})
+    def describe_portfolio_share_status(params = {}, options = {})
+      req = build_request(:describe_portfolio_share_status, params)
       req.send_request(options)
     end
 
@@ -2198,6 +2294,24 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
+    # Disable portfolio sharing through AWS Organizations feature. This
+    # feature will not delete your current shares but it will prevent you
+    # from creating new shares throughout your organization. Current shares
+    # will not be in sync with your organization structure if it changes
+    # after calling this API. This API can only be called by the master
+    # account in the organization.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisableAWSOrganizationsAccess AWS API Documentation
+    #
+    # @overload disable_aws_organizations_access(params = {})
+    # @param [Hash] params ({})
+    def disable_aws_organizations_access(params = {}, options = {})
+      req = build_request(:disable_aws_organizations_access, params)
+      req.send_request(options)
+    end
+
     # Disassociates a previously associated principal ARN from a specified
     # portfolio.
     #
@@ -2339,6 +2453,26 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
+    # Enable portfolio sharing feature through AWS Organizations. This API
+    # will allow Service Catalog to receive updates on your organization in
+    # order to sync your shares with the current structure. This API can
+    # only be called by the master account in the organization.
+    #
+    # By calling this API Service Catalog will use FAS credentials to call
+    # organizations:EnableAWSServiceAccess so that your shares can be in
+    # sync with any changes in your AWS Organizations.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/EnableAWSOrganizationsAccess AWS API Documentation
+    #
+    # @overload enable_aws_organizations_access(params = {})
+    # @param [Hash] params ({})
+    def enable_aws_organizations_access(params = {}, options = {})
+      req = build_request(:enable_aws_organizations_access, params)
+      req.send_request(options)
+    end
+
     # Provisions or modifies a product based on the resource changes for the
     # specified plan.
     #
@@ -2468,6 +2602,26 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
+    # Get the Access Status for AWS Organization portfolio share feature.
+    # This API can only be called by the master account in the organization.
+    #
+    # @return [Types::GetAWSOrganizationsAccessStatusOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAWSOrganizationsAccessStatusOutput#access_status #access_status} => String
+    #
+    # @example Response structure
+    #
+    #   resp.access_status #=> String, one of "ENABLED", "UNDER_CHANGE", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/GetAWSOrganizationsAccessStatus AWS API Documentation
+    #
+    # @overload get_aws_organizations_access_status(params = {})
+    # @param [Hash] params ({})
+    def get_aws_organizations_access_status(params = {}, options = {})
+      req = build_request(:get_aws_organizations_access_status, params)
+      req.send_request(options)
+    end
+
     # Lists all portfolios for which sharing was accepted by this account.
     #
     # @option params [String] :accept_language
@@ -2490,6 +2644,9 @@ module Aws::ServiceCatalog
     #   The type of shared portfolios to list. The default is to list imported
     #   portfolios.
     #
+    #   * `AWS_ORGANIZATIONS` - List portfolios shared by the master account
+    #     of your organization
+    #
     #   * `AWS_SERVICECATALOG` - List default portfolios
     #
     #   * `IMPORTED` - List imported portfolios
@@ -2505,7 +2662,7 @@ module Aws::ServiceCatalog
     #     accept_language: "AcceptLanguage",
     #     page_token: "PageToken",
     #     page_size: 1,
-    #     portfolio_share_type: "IMPORTED", # accepts IMPORTED, AWS_SERVICECATALOG
+    #     portfolio_share_type: "IMPORTED", # accepts IMPORTED, AWS_SERVICECATALOG, AWS_ORGANIZATIONS
     #   })
     #
     # @example Response structure
@@ -2641,6 +2798,71 @@ module Aws::ServiceCatalog
     # @param [Hash] params ({})
     def list_launch_paths(params = {}, options = {})
       req = build_request(:list_launch_paths, params)
+      req.send_request(options)
+    end
+
+    # Lists the organization nodes that have access to the specified
+    # portfolio. This API can only be called by the master account in the
+    # organization.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @option params [required, String] :portfolio_id
+    #   The portfolio identifier. For example, `port-2abcdext3y5fk`.
+    #
+    # @option params [required, String] :organization_node_type
+    #   The organization node type that will be returned in the output.
+    #
+    #   * `ORGANIZATION` - Organization that has access to the portfolio.
+    #
+    #   * `ORGANIZATIONAL_UNIT` - Organizational unit that has access to the
+    #     portfolio within your organization.
+    #
+    #   * `ACCOUNT` - Account that has access to the portfolio within your
+    #     organization.
+    #
+    # @option params [String] :page_token
+    #   The page token for the next set of results. To retrieve the first set
+    #   of results, use null.
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of items to return with this call.
+    #
+    # @return [Types::ListOrganizationPortfolioAccessOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOrganizationPortfolioAccessOutput#organization_nodes #organization_nodes} => Array&lt;Types::OrganizationNode&gt;
+    #   * {Types::ListOrganizationPortfolioAccessOutput#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_organization_portfolio_access({
+    #     accept_language: "AcceptLanguage",
+    #     portfolio_id: "Id", # required
+    #     organization_node_type: "ORGANIZATION", # required, accepts ORGANIZATION, ORGANIZATIONAL_UNIT, ACCOUNT
+    #     page_token: "PageToken",
+    #     page_size: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.organization_nodes #=> Array
+    #   resp.organization_nodes[0].type #=> String, one of "ORGANIZATION", "ORGANIZATIONAL_UNIT", "ACCOUNT"
+    #   resp.organization_nodes[0].value #=> String
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListOrganizationPortfolioAccess AWS API Documentation
+    #
+    # @overload list_organization_portfolio_access(params = {})
+    # @param [Hash] params ({})
+    def list_organization_portfolio_access(params = {}, options = {})
+      req = build_request(:list_organization_portfolio_access, params)
       req.send_request(options)
     end
 
@@ -3427,6 +3649,21 @@ module Aws::ServiceCatalog
     # @option params [required, String] :portfolio_id
     #   The portfolio identifier.
     #
+    # @option params [String] :portfolio_share_type
+    #   The type of shared portfolios to reject. The default is to reject
+    #   imported portfolios.
+    #
+    #   * `AWS_ORGANIZATIONS` - Reject portfolios shared by the master account
+    #     of your organization.
+    #
+    #   * `IMPORTED` - Reject imported portfolios.
+    #
+    #   * `AWS_SERVICECATALOG` - Not supported. (Throws
+    #     ResourceNotFoundException.)
+    #
+    #   For example, `aws servicecatalog reject-portfolio-share --portfolio-id
+    #   "port-2qwzkwxt3y5fk" --portfolio-share-type AWS_ORGANIZATIONS`
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3434,6 +3671,7 @@ module Aws::ServiceCatalog
     #   resp = client.reject_portfolio_share({
     #     accept_language: "AcceptLanguage",
     #     portfolio_id: "Id", # required
+    #     portfolio_share_type: "IMPORTED", # accepts IMPORTED, AWS_SERVICECATALOG, AWS_ORGANIZATIONS
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RejectPortfolioShare AWS API Documentation
@@ -4090,7 +4328,7 @@ module Aws::ServiceCatalog
     #   `ProvisionedProductName` and `ProvisionedProductId`.
     #
     # @option params [String] :product_id
-    #   The identifier of the provisioned product.
+    #   The identifier of the product.
     #
     # @option params [String] :provisioning_artifact_id
     #   The identifier of the provisioning artifact.
@@ -4338,7 +4576,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
