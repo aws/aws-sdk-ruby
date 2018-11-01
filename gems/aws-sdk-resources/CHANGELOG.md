@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.26.0 (2018-10-30)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-chime` gem.
+
 3.25.0 (2018-08-28)
 ------------------
 

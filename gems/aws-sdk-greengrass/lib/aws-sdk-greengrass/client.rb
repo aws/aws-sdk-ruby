@@ -350,7 +350,9 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # Creates a deployment.
+    # Creates a deployment. ''CreateDeployment'' requests are idempotent
+    # with respect to the ''X-Amzn-Client-Token'' token and the request
+    # parameters.
     #
     # @option params [String] :amzn_client_token
     #
@@ -1425,6 +1427,45 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
+    # Returns the status of a bulk deployment.
+    #
+    # @option params [required, String] :bulk_deployment_id
+    #
+    # @return [Types::GetBulkDeploymentStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBulkDeploymentStatusResponse#bulk_deployment_metrics #bulk_deployment_metrics} => Types::BulkDeploymentMetrics
+    #   * {Types::GetBulkDeploymentStatusResponse#bulk_deployment_status #bulk_deployment_status} => String
+    #   * {Types::GetBulkDeploymentStatusResponse#created_at #created_at} => String
+    #   * {Types::GetBulkDeploymentStatusResponse#error_details #error_details} => Array&lt;Types::ErrorDetail&gt;
+    #   * {Types::GetBulkDeploymentStatusResponse#error_message #error_message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_bulk_deployment_status({
+    #     bulk_deployment_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bulk_deployment_metrics.invalid_input_records #=> Integer
+    #   resp.bulk_deployment_metrics.records_processed #=> Integer
+    #   resp.bulk_deployment_metrics.retry_attempts #=> Integer
+    #   resp.bulk_deployment_status #=> String, one of "Initializing", "Running", "Completed", "Stopping", "Stopped", "Failed"
+    #   resp.created_at #=> String
+    #   resp.error_details #=> Array
+    #   resp.error_details[0].detailed_error_code #=> String
+    #   resp.error_details[0].detailed_error_message #=> String
+    #   resp.error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetBulkDeploymentStatus AWS API Documentation
+    #
+    # @overload get_bulk_deployment_status(params = {})
+    # @param [Hash] params ({})
+    def get_bulk_deployment_status(params = {}, options = {})
+      req = build_request(:get_bulk_deployment_status, params)
+      req.send_request(options)
+    end
+
     # Retrieves the connectivity information for a core.
     #
     # @option params [required, String] :thing_name
@@ -1509,6 +1550,7 @@ module Aws::Greengrass
     #   * {Types::GetCoreDefinitionVersionResponse#creation_timestamp #creation_timestamp} => String
     #   * {Types::GetCoreDefinitionVersionResponse#definition #definition} => Types::CoreDefinitionVersion
     #   * {Types::GetCoreDefinitionVersionResponse#id #id} => String
+    #   * {Types::GetCoreDefinitionVersionResponse#next_token #next_token} => String
     #   * {Types::GetCoreDefinitionVersionResponse#version #version} => String
     #
     # @example Request syntax with placeholder values
@@ -1528,6 +1570,7 @@ module Aws::Greengrass
     #   resp.definition.cores[0].sync_shadow #=> Boolean
     #   resp.definition.cores[0].thing_arn #=> String
     #   resp.id #=> String
+    #   resp.next_token #=> String
     #   resp.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetCoreDefinitionVersion AWS API Documentation
@@ -1624,12 +1667,15 @@ module Aws::Greengrass
     #
     # @option params [required, String] :device_definition_version_id
     #
+    # @option params [String] :next_token
+    #
     # @return [Types::GetDeviceDefinitionVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDeviceDefinitionVersionResponse#arn #arn} => String
     #   * {Types::GetDeviceDefinitionVersionResponse#creation_timestamp #creation_timestamp} => String
     #   * {Types::GetDeviceDefinitionVersionResponse#definition #definition} => Types::DeviceDefinitionVersion
     #   * {Types::GetDeviceDefinitionVersionResponse#id #id} => String
+    #   * {Types::GetDeviceDefinitionVersionResponse#next_token #next_token} => String
     #   * {Types::GetDeviceDefinitionVersionResponse#version #version} => String
     #
     # @example Request syntax with placeholder values
@@ -1637,6 +1683,7 @@ module Aws::Greengrass
     #   resp = client.get_device_definition_version({
     #     device_definition_id: "__string", # required
     #     device_definition_version_id: "__string", # required
+    #     next_token: "__string",
     #   })
     #
     # @example Response structure
@@ -1649,6 +1696,7 @@ module Aws::Greengrass
     #   resp.definition.devices[0].sync_shadow #=> Boolean
     #   resp.definition.devices[0].thing_arn #=> String
     #   resp.id #=> String
+    #   resp.next_token #=> String
     #   resp.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeviceDefinitionVersion AWS API Documentation
@@ -1708,12 +1756,15 @@ module Aws::Greengrass
     #
     # @option params [required, String] :function_definition_version_id
     #
+    # @option params [String] :next_token
+    #
     # @return [Types::GetFunctionDefinitionVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetFunctionDefinitionVersionResponse#arn #arn} => String
     #   * {Types::GetFunctionDefinitionVersionResponse#creation_timestamp #creation_timestamp} => String
     #   * {Types::GetFunctionDefinitionVersionResponse#definition #definition} => Types::FunctionDefinitionVersion
     #   * {Types::GetFunctionDefinitionVersionResponse#id #id} => String
+    #   * {Types::GetFunctionDefinitionVersionResponse#next_token #next_token} => String
     #   * {Types::GetFunctionDefinitionVersionResponse#version #version} => String
     #
     # @example Request syntax with placeholder values
@@ -1721,6 +1772,7 @@ module Aws::Greengrass
     #   resp = client.get_function_definition_version({
     #     function_definition_id: "__string", # required
     #     function_definition_version_id: "__string", # required
+    #     next_token: "__string",
     #   })
     #
     # @example Response structure
@@ -1743,6 +1795,7 @@ module Aws::Greengrass
     #   resp.definition.functions[0].function_configuration.timeout #=> Integer
     #   resp.definition.functions[0].id #=> String
     #   resp.id #=> String
+    #   resp.next_token #=> String
     #   resp.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetFunctionDefinitionVersion AWS API Documentation
@@ -1947,6 +2000,8 @@ module Aws::Greengrass
     #
     # @option params [required, String] :logger_definition_version_id
     #
+    # @option params [String] :next_token
+    #
     # @return [Types::GetLoggerDefinitionVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetLoggerDefinitionVersionResponse#arn #arn} => String
@@ -1960,6 +2015,7 @@ module Aws::Greengrass
     #   resp = client.get_logger_definition_version({
     #     logger_definition_id: "__string", # required
     #     logger_definition_version_id: "__string", # required
+    #     next_token: "__string",
     #   })
     #
     # @example Response structure
@@ -2138,6 +2194,8 @@ module Aws::Greengrass
 
     # Retrieves information about a subscription definition version.
     #
+    # @option params [String] :next_token
+    #
     # @option params [required, String] :subscription_definition_id
     #
     # @option params [required, String] :subscription_definition_version_id
@@ -2148,11 +2206,13 @@ module Aws::Greengrass
     #   * {Types::GetSubscriptionDefinitionVersionResponse#creation_timestamp #creation_timestamp} => String
     #   * {Types::GetSubscriptionDefinitionVersionResponse#definition #definition} => Types::SubscriptionDefinitionVersion
     #   * {Types::GetSubscriptionDefinitionVersionResponse#id #id} => String
+    #   * {Types::GetSubscriptionDefinitionVersionResponse#next_token #next_token} => String
     #   * {Types::GetSubscriptionDefinitionVersionResponse#version #version} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_subscription_definition_version({
+    #     next_token: "__string",
     #     subscription_definition_id: "__string", # required
     #     subscription_definition_version_id: "__string", # required
     #   })
@@ -2167,6 +2227,7 @@ module Aws::Greengrass
     #   resp.definition.subscriptions[0].subject #=> String
     #   resp.definition.subscriptions[0].target #=> String
     #   resp.id #=> String
+    #   resp.next_token #=> String
     #   resp.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetSubscriptionDefinitionVersion AWS API Documentation
@@ -2175,6 +2236,87 @@ module Aws::Greengrass
     # @param [Hash] params ({})
     def get_subscription_definition_version(params = {}, options = {})
       req = build_request(:get_subscription_definition_version, params)
+      req.send_request(options)
+    end
+
+    # Gets a paginated list of the deployments that have been started in a
+    # bulk deployment operation, and their current deployment status.
+    #
+    # @option params [required, String] :bulk_deployment_id
+    #
+    # @option params [String] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListBulkDeploymentDetailedReportsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBulkDeploymentDetailedReportsResponse#deployments #deployments} => Array&lt;Types::BulkDeploymentResult&gt;
+    #   * {Types::ListBulkDeploymentDetailedReportsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_bulk_deployment_detailed_reports({
+    #     bulk_deployment_id: "__string", # required
+    #     max_results: "__string",
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deployments #=> Array
+    #   resp.deployments[0].created_at #=> String
+    #   resp.deployments[0].deployment_arn #=> String
+    #   resp.deployments[0].deployment_id #=> String
+    #   resp.deployments[0].deployment_status #=> String
+    #   resp.deployments[0].deployment_type #=> String, one of "NewDeployment", "Redeployment", "ResetDeployment", "ForceResetDeployment"
+    #   resp.deployments[0].error_details #=> Array
+    #   resp.deployments[0].error_details[0].detailed_error_code #=> String
+    #   resp.deployments[0].error_details[0].detailed_error_message #=> String
+    #   resp.deployments[0].error_message #=> String
+    #   resp.deployments[0].group_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListBulkDeploymentDetailedReports AWS API Documentation
+    #
+    # @overload list_bulk_deployment_detailed_reports(params = {})
+    # @param [Hash] params ({})
+    def list_bulk_deployment_detailed_reports(params = {}, options = {})
+      req = build_request(:list_bulk_deployment_detailed_reports, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of bulk deployments.
+    #
+    # @option params [String] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListBulkDeploymentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBulkDeploymentsResponse#bulk_deployments #bulk_deployments} => Array&lt;Types::BulkDeployment&gt;
+    #   * {Types::ListBulkDeploymentsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_bulk_deployments({
+    #     max_results: "__string",
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bulk_deployments #=> Array
+    #   resp.bulk_deployments[0].bulk_deployment_arn #=> String
+    #   resp.bulk_deployments[0].bulk_deployment_id #=> String
+    #   resp.bulk_deployments[0].created_at #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListBulkDeployments AWS API Documentation
+    #
+    # @overload list_bulk_deployments(params = {})
+    # @param [Hash] params ({})
+    def list_bulk_deployments(params = {}, options = {})
+      req = build_request(:list_bulk_deployments, params)
       req.send_request(options)
     end
 
@@ -2829,6 +2971,83 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
+    # Deploys multiple groups in one operation. This action starts the bulk
+    # deployment of a specified set of group versions. Each group version
+    # deployment will be triggered with an adaptive rate that has a fixed
+    # upper limit. We recommend that you include an
+    # ''X-Amzn-Client-Token'' token in every ''StartBulkDeployment''
+    # request. These requests are idempotent with respect to the token and
+    # the request parameters.
+    #
+    # @option params [String] :amzn_client_token
+    #
+    # @option params [String] :execution_role_arn
+    #   The ARN of the execution role to associate with the bulk deployment
+    #   operation. This IAM role must allow the
+    #   ''greengrass:CreateDeployment'' action for all group versions that
+    #   are listed in the input file. This IAM role must have access to the S3
+    #   bucket containing the input file.
+    #
+    # @option params [String] :input_file_uri
+    #   The URI of the input file contained in the S3 bucket. The execution
+    #   role must have ''getObject'' permissions on this bucket to access
+    #   the input file. The input file is a JSON-serialized, line delimited
+    #   file with UTF-8 encoding that provides a list of group and version IDs
+    #   and the deployment type. This file must be less than 100MB. Currently,
+    #   Greengrass; supports only ''NewDeployment'' deployment types.
+    #
+    # @return [Types::StartBulkDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartBulkDeploymentResponse#bulk_deployment_arn #bulk_deployment_arn} => String
+    #   * {Types::StartBulkDeploymentResponse#bulk_deployment_id #bulk_deployment_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_bulk_deployment({
+    #     amzn_client_token: "__string",
+    #     execution_role_arn: "__string",
+    #     input_file_uri: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bulk_deployment_arn #=> String
+    #   resp.bulk_deployment_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/StartBulkDeployment AWS API Documentation
+    #
+    # @overload start_bulk_deployment(params = {})
+    # @param [Hash] params ({})
+    def start_bulk_deployment(params = {}, options = {})
+      req = build_request(:start_bulk_deployment, params)
+      req.send_request(options)
+    end
+
+    # Stops the execution of a bulk deployment. This action returns a status
+    # of ''Stopping'' until the deployment is stopped. You cannot start
+    # a new bulk deployment while a previous deployment is in the
+    # ''Stopping'' state. This action doesn't rollback completed
+    # deployments or cancel pending deployments.
+    #
+    # @option params [required, String] :bulk_deployment_id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_bulk_deployment({
+    #     bulk_deployment_id: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/StopBulkDeployment AWS API Documentation
+    #
+    # @overload stop_bulk_deployment(params = {})
+    # @param [Hash] params ({})
+    def stop_bulk_deployment(params = {}, options = {})
+      req = build_request(:stop_bulk_deployment, params)
+      req.send_request(options)
+    end
+
     # Updates the connectivity information for the core. Any devices that
     # belong to the group which has this core will receive this information
     # in order to find the location of the core and connect to it.
@@ -3088,7 +3307,7 @@ module Aws::Greengrass
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-greengrass'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

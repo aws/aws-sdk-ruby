@@ -4864,6 +4864,10 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] listener_endpoint
+    #   Specifies the listener connection endpoint for SQL Server Always On.
+    #   @return [Types::Endpoint]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -4921,7 +4925,8 @@ module Aws::RDS
       :performance_insights_retention_period,
       :enabled_cloudwatch_logs_exports,
       :processor_features,
-      :deletion_protection)
+      :deletion_protection,
+      :listener_endpoint)
       include Aws::Structure
     end
 

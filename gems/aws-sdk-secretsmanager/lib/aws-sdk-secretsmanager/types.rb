@@ -2002,13 +2002,13 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] version_stage
-    #   The list of staging labels to add to this version.
+    #   The staging label to add to this version.
     #   @return [String]
     #
     # @!attribute [rw] remove_from_version_id
     #   Specifies the secret version ID of the version that the staging
-    #   labels are to be removed from. If the staging label you are trying
-    #   to attach to one version is already attached to a different version,
+    #   label is to be removed from. If the staging label you are trying to
+    #   attach to one version is already attached to a different version,
     #   then you must include this parameter and specify the version that
     #   the label is to be removed from. If the label is attached and you
     #   either do not specify this parameter, or the version ID does not
@@ -2017,12 +2017,12 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] move_to_version_id
     #   (Optional) The secret version ID that you want to add the staging
-    #   labels to. If you want to remove a label from a version, then do not
+    #   label to. If you want to remove a label from a version, then do not
     #   specify this parameter.
     #
-    #   If any of the staging labels are already attached to a different
-    #   version of the secret, then you must also specify the
-    #   `RemoveFromVersionId` parameter.
+    #   If the staging label is already attached to a different version of
+    #   the secret, then you must also specify the `RemoveFromVersionId`
+    #   parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/UpdateSecretVersionStageRequest AWS API Documentation
@@ -2036,11 +2036,11 @@ module Aws::SecretsManager
     end
 
     # @!attribute [rw] arn
-    #   The ARN of the secret with the staging labels that were modified.
+    #   The ARN of the secret with the staging label that was modified.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The friendly name of the secret with the staging labels that were
+    #   The friendly name of the secret with the staging label that was
     #   modified.
     #   @return [String]
     #

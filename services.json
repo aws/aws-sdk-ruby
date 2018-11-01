@@ -42,6 +42,9 @@
   "Budgets": {
     "models": "budgets/2016-10-20"
   },
+  "Chime": {
+    "models": "chime/2018-05-01"
+  },
   "Cloud9": {
     "models": "cloud9/2017-09-23"
   },

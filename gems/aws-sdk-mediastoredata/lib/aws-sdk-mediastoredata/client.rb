@@ -329,11 +329,25 @@ module Aws::MediaStoreData
     #   &lt;folder name&gt;/&lt;folder name&gt;/&lt;file name&gt;
     #
     # @option params [Integer] :max_results
-    #   The maximum results to return. The service might return fewer results.
+    #   The maximum number of results to return per API request. For example,
+    #   you submit a `ListItems` request with `MaxResults` set at 500.
+    #   Although 2,000 items match your request, the service returns no more
+    #   than the first 500 items. (The service also returns a `NextToken`
+    #   value that you can use to fetch the next batch of results.) The
+    #   service might return fewer results than the `MaxResults` value.
+    #
+    #   If `MaxResults` is not included in the request, the service defaults
+    #   to pagination with a maximum of 1,000 results per page.
     #
     # @option params [String] :next_token
-    #   The `NextToken` received in the `ListItemsResponse` for the same
-    #   container and path. Tokens expire after 15 minutes.
+    #   The token that identifies which batch of results that you want to see.
+    #   For example, you submit a `ListItems` request with `MaxResults` set at
+    #   500. The service returns the first batch of results (up to 500) and a
+    #   `NextToken` value. To see the next batch of results, you can submit
+    #   the `ListItems` request a second time and specify the `NextToken`
+    #   value.
+    #
+    #   Tokens expire after 15 minutes.
     #
     # @return [Types::ListItemsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -369,7 +383,7 @@ module Aws::MediaStoreData
     end
 
     # Uploads an object to the specified path. Object sizes are limited to
-    # 10 MB.
+    # 25 MB.
     #
     # @option params [required, String, IO] :body
     #   The bytes to be stored.
@@ -470,7 +484,7 @@ module Aws::MediaStoreData
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediastoredata'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -22,8 +22,10 @@ module Aws
 
         def write(chunk)
           chunk = truncate_chunk(chunk)
-          @bytes_written += chunk.bytesize
-          @decrypter.write(chunk)
+          if chunk.bytesize > 0
+            @bytes_written += chunk.bytesize
+            @decrypter.write(chunk)
+          end
         end
 
         def finalize
@@ -39,8 +41,12 @@ module Aws
         def truncate_chunk(chunk)
           if chunk.bytesize + @bytes_written <= @max_bytes
             chunk
-          else
+          elsif @bytes_written < @max_bytes
             chunk[0..(@max_bytes - @bytes_written - 1)]
+          else
+            # If the tag was sent over after the full body has been read,
+            # we don't want to accidentally append it.
+            ""
           end
         end
 

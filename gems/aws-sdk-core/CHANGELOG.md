@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Feature - Adding support for endpoint discovery for service operations when available, to enable this feature, set `:endpoint_discovery` to `true` for the client.
 
+3.36.0 (2018-10-30)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
 3.35.0 (2018-10-24)
 ------------------
 
