@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.163 (2018-11-02)
+------------------
+
 * Feature - Aws::CloudDirectory - Updated the API, and documentation for Amazon CloudDirectory.
 
 * Feature - Aws::Rekognition - Updated the API, and documentation for Amazon Rekognition.
