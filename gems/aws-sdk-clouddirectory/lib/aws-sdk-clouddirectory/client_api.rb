@@ -76,6 +76,8 @@ module Aws::CloudDirectory
     BatchListObjectChildrenResponse = Shapes::StructureShape.new(name: 'BatchListObjectChildrenResponse')
     BatchListObjectParentPaths = Shapes::StructureShape.new(name: 'BatchListObjectParentPaths')
     BatchListObjectParentPathsResponse = Shapes::StructureShape.new(name: 'BatchListObjectParentPathsResponse')
+    BatchListObjectParents = Shapes::StructureShape.new(name: 'BatchListObjectParents')
+    BatchListObjectParentsResponse = Shapes::StructureShape.new(name: 'BatchListObjectParentsResponse')
     BatchListObjectPolicies = Shapes::StructureShape.new(name: 'BatchListObjectPolicies')
     BatchListObjectPoliciesResponse = Shapes::StructureShape.new(name: 'BatchListObjectPoliciesResponse')
     BatchListOutgoingTypedLinks = Shapes::StructureShape.new(name: 'BatchListOutgoingTypedLinks')
@@ -264,6 +266,8 @@ module Aws::CloudDirectory
     ObjectAttributeUpdate = Shapes::StructureShape.new(name: 'ObjectAttributeUpdate')
     ObjectAttributeUpdateList = Shapes::ListShape.new(name: 'ObjectAttributeUpdateList')
     ObjectIdentifier = Shapes::StringShape.new(name: 'ObjectIdentifier')
+    ObjectIdentifierAndLinkNameList = Shapes::ListShape.new(name: 'ObjectIdentifierAndLinkNameList')
+    ObjectIdentifierAndLinkNameTuple = Shapes::StructureShape.new(name: 'ObjectIdentifierAndLinkNameTuple')
     ObjectIdentifierList = Shapes::ListShape.new(name: 'ObjectIdentifierList')
     ObjectIdentifierToLinkNameMap = Shapes::MapShape.new(name: 'ObjectIdentifierToLinkNameMap')
     ObjectNotDetachedException = Shapes::StructureShape.new(name: 'ObjectNotDetachedException')
@@ -587,6 +591,15 @@ module Aws::CloudDirectory
     BatchListObjectParentPathsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     BatchListObjectParentPathsResponse.struct_class = Types::BatchListObjectParentPathsResponse
 
+    BatchListObjectParents.add_member(:object_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "ObjectReference"))
+    BatchListObjectParents.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    BatchListObjectParents.add_member(:max_results, Shapes::ShapeRef.new(shape: NumberResults, location_name: "MaxResults"))
+    BatchListObjectParents.struct_class = Types::BatchListObjectParents
+
+    BatchListObjectParentsResponse.add_member(:parent_links, Shapes::ShapeRef.new(shape: ObjectIdentifierAndLinkNameList, location_name: "ParentLinks"))
+    BatchListObjectParentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    BatchListObjectParentsResponse.struct_class = Types::BatchListObjectParentsResponse
+
     BatchListObjectPolicies.add_member(:object_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "ObjectReference"))
     BatchListObjectPolicies.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     BatchListObjectPolicies.add_member(:max_results, Shapes::ShapeRef.new(shape: NumberResults, location_name: "MaxResults"))
@@ -635,6 +648,7 @@ module Aws::CloudDirectory
     BatchReadOperation.add_member(:list_object_parent_paths, Shapes::ShapeRef.new(shape: BatchListObjectParentPaths, location_name: "ListObjectParentPaths"))
     BatchReadOperation.add_member(:get_object_information, Shapes::ShapeRef.new(shape: BatchGetObjectInformation, location_name: "GetObjectInformation"))
     BatchReadOperation.add_member(:get_object_attributes, Shapes::ShapeRef.new(shape: BatchGetObjectAttributes, location_name: "GetObjectAttributes"))
+    BatchReadOperation.add_member(:list_object_parents, Shapes::ShapeRef.new(shape: BatchListObjectParents, location_name: "ListObjectParents"))
     BatchReadOperation.add_member(:list_object_policies, Shapes::ShapeRef.new(shape: BatchListObjectPolicies, location_name: "ListObjectPolicies"))
     BatchReadOperation.add_member(:list_policy_attachments, Shapes::ShapeRef.new(shape: BatchListPolicyAttachments, location_name: "ListPolicyAttachments"))
     BatchReadOperation.add_member(:lookup_policy, Shapes::ShapeRef.new(shape: BatchLookupPolicy, location_name: "LookupPolicy"))
@@ -673,6 +687,7 @@ module Aws::CloudDirectory
     BatchReadSuccessfulResponse.add_member(:list_outgoing_typed_links, Shapes::ShapeRef.new(shape: BatchListOutgoingTypedLinksResponse, location_name: "ListOutgoingTypedLinks"))
     BatchReadSuccessfulResponse.add_member(:list_incoming_typed_links, Shapes::ShapeRef.new(shape: BatchListIncomingTypedLinksResponse, location_name: "ListIncomingTypedLinks"))
     BatchReadSuccessfulResponse.add_member(:get_link_attributes, Shapes::ShapeRef.new(shape: BatchGetLinkAttributesResponse, location_name: "GetLinkAttributes"))
+    BatchReadSuccessfulResponse.add_member(:list_object_parents, Shapes::ShapeRef.new(shape: BatchListObjectParentsResponse, location_name: "ListObjectParents"))
     BatchReadSuccessfulResponse.struct_class = Types::BatchReadSuccessfulResponse
 
     BatchRemoveFacetFromObject.add_member(:schema_facet, Shapes::ShapeRef.new(shape: SchemaFacet, required: true, location_name: "SchemaFacet"))
@@ -1107,10 +1122,12 @@ module Aws::CloudDirectory
     ListObjectParentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListObjectParentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: NumberResults, location_name: "MaxResults"))
     ListObjectParentsRequest.add_member(:consistency_level, Shapes::ShapeRef.new(shape: ConsistencyLevel, location: "header", location_name: "x-amz-consistency-level"))
+    ListObjectParentsRequest.add_member(:include_all_links_to_each_parent, Shapes::ShapeRef.new(shape: Bool, location_name: "IncludeAllLinksToEachParent"))
     ListObjectParentsRequest.struct_class = Types::ListObjectParentsRequest
 
     ListObjectParentsResponse.add_member(:parents, Shapes::ShapeRef.new(shape: ObjectIdentifierToLinkNameMap, location_name: "Parents"))
     ListObjectParentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListObjectParentsResponse.add_member(:parent_links, Shapes::ShapeRef.new(shape: ObjectIdentifierAndLinkNameList, location_name: "ParentLinks"))
     ListObjectParentsResponse.struct_class = Types::ListObjectParentsResponse
 
     ListObjectPoliciesRequest.add_member(:directory_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "header", location_name: "x-amz-data-partition"))
@@ -1210,6 +1227,12 @@ module Aws::CloudDirectory
     ObjectAttributeUpdate.struct_class = Types::ObjectAttributeUpdate
 
     ObjectAttributeUpdateList.member = Shapes::ShapeRef.new(shape: ObjectAttributeUpdate)
+
+    ObjectIdentifierAndLinkNameList.member = Shapes::ShapeRef.new(shape: ObjectIdentifierAndLinkNameTuple)
+
+    ObjectIdentifierAndLinkNameTuple.add_member(:object_identifier, Shapes::ShapeRef.new(shape: ObjectIdentifier, location_name: "ObjectIdentifier"))
+    ObjectIdentifierAndLinkNameTuple.add_member(:link_name, Shapes::ShapeRef.new(shape: LinkName, location_name: "LinkName"))
+    ObjectIdentifierAndLinkNameTuple.struct_class = Types::ObjectIdentifierAndLinkNameTuple
 
     ObjectIdentifierList.member = Shapes::ShapeRef.new(shape: ObjectIdentifier)
 
@@ -1418,6 +1441,7 @@ module Aws::CloudDirectory
         "endpointPrefix" => "clouddirectory",
         "protocol" => "rest-json",
         "serviceFullName" => "Amazon CloudDirectory",
+        "serviceId" => "CloudDirectory",
         "signatureVersion" => "v4",
         "signingName" => "clouddirectory",
         "uid" => "clouddirectory-2017-01-11",

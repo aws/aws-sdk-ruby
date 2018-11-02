@@ -110,6 +110,8 @@ module Aws::Rekognition
     ImageTooLargeException = Shapes::StructureShape.new(name: 'ImageTooLargeException')
     IndexFacesRequest = Shapes::StructureShape.new(name: 'IndexFacesRequest')
     IndexFacesResponse = Shapes::StructureShape.new(name: 'IndexFacesResponse')
+    Instance = Shapes::StructureShape.new(name: 'Instance')
+    Instances = Shapes::ListShape.new(name: 'Instances')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
     InvalidImageFormatException = Shapes::StructureShape.new(name: 'InvalidImageFormatException')
     InvalidPaginationTokenException = Shapes::StructureShape.new(name: 'InvalidPaginationTokenException')
@@ -147,6 +149,8 @@ module Aws::Rekognition
     OrientationCorrection = Shapes::StringShape.new(name: 'OrientationCorrection')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
+    Parent = Shapes::StructureShape.new(name: 'Parent')
+    Parents = Shapes::ListShape.new(name: 'Parents')
     Percent = Shapes::FloatShape.new(name: 'Percent')
     PersonDetail = Shapes::StructureShape.new(name: 'PersonDetail')
     PersonDetection = Shapes::StructureShape.new(name: 'PersonDetection')
@@ -377,6 +381,7 @@ module Aws::Rekognition
 
     DetectLabelsResponse.add_member(:labels, Shapes::ShapeRef.new(shape: Labels, location_name: "Labels"))
     DetectLabelsResponse.add_member(:orientation_correction, Shapes::ShapeRef.new(shape: OrientationCorrection, location_name: "OrientationCorrection"))
+    DetectLabelsResponse.add_member(:label_model_version, Shapes::ShapeRef.new(shape: String, location_name: "LabelModelVersion"))
     DetectLabelsResponse.struct_class = Types::DetectLabelsResponse
 
     DetectModerationLabelsRequest.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "Image"))
@@ -574,6 +579,12 @@ module Aws::Rekognition
     IndexFacesResponse.add_member(:unindexed_faces, Shapes::ShapeRef.new(shape: UnindexedFaces, location_name: "UnindexedFaces"))
     IndexFacesResponse.struct_class = Types::IndexFacesResponse
 
+    Instance.add_member(:bounding_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "BoundingBox"))
+    Instance.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
+    Instance.struct_class = Types::Instance
+
+    Instances.member = Shapes::ShapeRef.new(shape: Instance)
+
     KinesisDataStream.add_member(:arn, Shapes::ShapeRef.new(shape: KinesisDataArn, location_name: "Arn"))
     KinesisDataStream.struct_class = Types::KinesisDataStream
 
@@ -582,6 +593,8 @@ module Aws::Rekognition
 
     Label.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     Label.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
+    Label.add_member(:instances, Shapes::ShapeRef.new(shape: Instances, location_name: "Instances"))
+    Label.add_member(:parents, Shapes::ShapeRef.new(shape: Parents, location_name: "Parents"))
     Label.struct_class = Types::Label
 
     LabelDetection.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
@@ -644,6 +657,11 @@ module Aws::Rekognition
     NotificationChannel.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: SNSTopicArn, required: true, location_name: "SNSTopicArn"))
     NotificationChannel.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     NotificationChannel.struct_class = Types::NotificationChannel
+
+    Parent.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    Parent.struct_class = Types::Parent
+
+    Parents.member = Shapes::ShapeRef.new(shape: Parent)
 
     PersonDetail.add_member(:index, Shapes::ShapeRef.new(shape: PersonIndex, location_name: "Index"))
     PersonDetail.add_member(:bounding_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "BoundingBox"))

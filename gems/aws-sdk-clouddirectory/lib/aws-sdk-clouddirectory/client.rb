@@ -402,11 +402,11 @@ module Aws::CloudDirectory
     end
 
     # Attaches a typed link to a specified source and target object. For
-    # more information, see [Typed link][1].
+    # more information, see [Typed Links][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #
     # @option params [required, String] :directory_arn
     #   The Amazon Resource Name (ARN) of the directory where you want to
@@ -550,6 +550,13 @@ module Aws::CloudDirectory
     #             facet_name: "FacetName",
     #           },
     #           attribute_names: ["AttributeName"], # required
+    #         },
+    #         list_object_parents: {
+    #           object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           next_token: "NextToken",
+    #           max_results: 1,
     #         },
     #         list_object_policies: {
     #           object_reference: { # required
@@ -812,6 +819,10 @@ module Aws::CloudDirectory
     #   resp.responses[0].successful_response.get_link_attributes.attributes[0].value.boolean_value #=> Boolean
     #   resp.responses[0].successful_response.get_link_attributes.attributes[0].value.number_value #=> String
     #   resp.responses[0].successful_response.get_link_attributes.attributes[0].value.datetime_value #=> Time
+    #   resp.responses[0].successful_response.list_object_parents.parent_links #=> Array
+    #   resp.responses[0].successful_response.list_object_parents.parent_links[0].object_identifier #=> String
+    #   resp.responses[0].successful_response.list_object_parents.parent_links[0].link_name #=> String
+    #   resp.responses[0].successful_response.list_object_parents.next_token #=> String
     #   resp.responses[0].exception_response.type #=> String, one of "ValidationException", "InvalidArnException", "ResourceNotFoundException", "InvalidNextTokenException", "AccessDeniedException", "NotNodeException", "FacetValidationException", "CannotListParentOfRootException", "NotIndexException", "NotPolicyException", "DirectoryNotEnabledException", "LimitExceededException", "InternalServiceException"
     #   resp.responses[0].exception_response.message #=> String
     #
@@ -1132,6 +1143,14 @@ module Aws::CloudDirectory
     # Creates a Directory by copying the published schema into the
     # directory. A directory cannot be created without a schema.
     #
+    # You can also quickly create a directory using a managed schema, called
+    # the `QuickStartSchema`. For more information, see [Managed Schema][1]
+    # in the *Amazon Cloud Directory Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_managed.html
+    #
     # @option params [required, String] :name
     #   The name of the Directory. Should be unique per account, per region.
     #
@@ -1208,7 +1227,7 @@ module Aws::CloudDirectory
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies
     #
     # @option params [String] :facet_style
     #   There are two different styles that you can define on any given facet,
@@ -1265,11 +1284,12 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # Creates an index object. See [Indexing][1] for more information.
+    # Creates an index object. See [Indexing and search][1] for more
+    # information.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/indexing_search.html
     #
     # @option params [required, String] :directory_arn
     #   The ARN of the directory where the index should be created.
@@ -1439,11 +1459,11 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # Creates a TypedLinkFacet. For more information, see [Typed link][1].
+    # Creates a TypedLinkFacet. For more information, see [Typed Links][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #
     # @option params [required, String] :schema_arn
     #   The Amazon Resource Name (ARN) that is associated with the schema. For
@@ -1556,7 +1576,13 @@ module Aws::CloudDirectory
     end
 
     # Deletes an object and its associated attributes. Only objects with no
-    # children and no parents can be deleted.
+    # children and no parents can be deleted. The maximum number of
+    # attributes that can be deleted during an object deletion is 30. For
+    # more information, see [Amazon Cloud Directory Limits][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html
     #
     # @option params [required, String] :directory_arn
     #   The Amazon Resource Name (ARN) that is associated with the Directory
@@ -1615,11 +1641,11 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # Deletes a TypedLinkFacet. For more information, see [Typed link][1].
+    # Deletes a TypedLinkFacet. For more information, see [Typed Links][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #
     # @option params [required, String] :schema_arn
     #   The Amazon Resource Name (ARN) that is associated with the schema. For
@@ -1765,11 +1791,11 @@ module Aws::CloudDirectory
     end
 
     # Detaches a typed link from a specified source and target object. For
-    # more information, see [Typed link][1].
+    # more information, see [Typed Links][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #
     # @option params [required, String] :directory_arn
     #   The Amazon Resource Name (ARN) of the directory where you want to
@@ -1980,11 +2006,11 @@ module Aws::CloudDirectory
     # @option params [required, String] :directory_arn
     #   The Amazon Resource Name (ARN) that is associated with the Directory
     #   where the typed link resides. For more information, see arns or [Typed
-    #   link][1].
+    #   Links][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #
     # @option params [required, Types::TypedLinkSpecifier] :typed_link_specifier
     #   Allows a typed link specifier to be accepted as input.
@@ -2162,7 +2188,7 @@ module Aws::CloudDirectory
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_schemas.html#jsonformat
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_jsonformat.html#schemas_json
     #
     # @option params [required, String] :schema_arn
     #   The ARN of the schema to retrieve.
@@ -2193,11 +2219,11 @@ module Aws::CloudDirectory
     end
 
     # Returns the identity attribute order for a specific TypedLinkFacet.
-    # For more information, see [Typed link][1].
+    # For more information, see [Typed Links][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #
     # @option params [required, String] :schema_arn
     #   The Amazon Resource Name (ARN) that is associated with the schema. For
@@ -2512,11 +2538,11 @@ module Aws::CloudDirectory
     # Returns a paginated list of all the incoming TypedLinkSpecifier
     # information for an object. It also supports filtering by typed link
     # facet and identity attributes. For more information, see [Typed
-    # link][1].
+    # Links][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #
     # @option params [required, String] :directory_arn
     #   The Amazon Resource Name (ARN) of the directory where you want to list
@@ -2626,12 +2652,12 @@ module Aws::CloudDirectory
     #
     # @option params [Integer] :max_results
     #   The maximum number of objects in a single page to retrieve from the
-    #   index during a request. For more information, see [AWS Directory
-    #   Service Limits][1].
+    #   index during a request. For more information, see [Amazon Cloud
+    #   Directory Limits][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html#limits_cd
+    #   [1]: http://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html
     #
     # @option params [String] :next_token
     #   The pagination token.
@@ -2887,7 +2913,7 @@ module Aws::CloudDirectory
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html
     #
     # @option params [required, String] :directory_arn
     #   The ARN of the directory to which the parent path applies.
@@ -2959,10 +2985,15 @@ module Aws::CloudDirectory
     #   update of an object is reflected in a subsequent read operation of
     #   that same object.
     #
+    # @option params [Boolean] :include_all_links_to_each_parent
+    #   When set to True, returns all ListObjectParentsResponse$ParentLinks.
+    #   There could be multiple links between a parent-child pair.
+    #
     # @return [Types::ListObjectParentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListObjectParentsResponse#parents #parents} => Hash&lt;String,String&gt;
     #   * {Types::ListObjectParentsResponse#next_token #next_token} => String
+    #   * {Types::ListObjectParentsResponse#parent_links #parent_links} => Array&lt;Types::ObjectIdentifierAndLinkNameTuple&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2974,6 +3005,7 @@ module Aws::CloudDirectory
     #     next_token: "NextToken",
     #     max_results: 1,
     #     consistency_level: "SERIALIZABLE", # accepts SERIALIZABLE, EVENTUAL
+    #     include_all_links_to_each_parent: false,
     #   })
     #
     # @example Response structure
@@ -2981,6 +3013,9 @@ module Aws::CloudDirectory
     #   resp.parents #=> Hash
     #   resp.parents["ObjectIdentifier"] #=> String
     #   resp.next_token #=> String
+    #   resp.parent_links #=> Array
+    #   resp.parent_links[0].object_identifier #=> String
+    #   resp.parent_links[0].link_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectParents AWS API Documentation
     #
@@ -3048,11 +3083,11 @@ module Aws::CloudDirectory
     # Returns a paginated list of all the outgoing TypedLinkSpecifier
     # information for an object. It also supports filtering by typed link
     # facet and identity attributes. For more information, see [Typed
-    # link][1].
+    # Links][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #
     # @option params [required, String] :directory_arn
     #   The Amazon Resource Name (ARN) of the directory where you want to list
@@ -3293,11 +3328,11 @@ module Aws::CloudDirectory
     end
 
     # Returns a paginated list of all attribute definitions for a particular
-    # TypedLinkFacet. For more information, see [Typed link][1].
+    # TypedLinkFacet. For more information, see [Typed Links][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #
     # @option params [required, String] :schema_arn
     #   The Amazon Resource Name (ARN) that is associated with the schema. For
@@ -3354,11 +3389,11 @@ module Aws::CloudDirectory
     end
 
     # Returns a paginated list of `TypedLink` facet names for a particular
-    # schema. For more information, see [Typed link][1].
+    # schema. For more information, see [Typed Links][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #
     # @option params [required, String] :schema_arn
     #   The Amazon Resource Name (ARN) that is associated with the schema. For
@@ -3408,7 +3443,7 @@ module Aws::CloudDirectory
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies
     #
     # @option params [required, String] :directory_arn
     #   The Amazon Resource Name (ARN) that is associated with the Directory.
@@ -3510,7 +3545,7 @@ module Aws::CloudDirectory
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_schemas.html#jsonformat
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_jsonformat.html#schemas_json
     #
     # @option params [required, String] :schema_arn
     #   The ARN of the schema to update.
@@ -3718,11 +3753,11 @@ module Aws::CloudDirectory
     # @option params [required, String] :directory_arn
     #   The Amazon Resource Name (ARN) that is associated with the Directory
     #   where the updated typed link resides. For more information, see arns
-    #   or [Typed link][1].
+    #   or [Typed Links][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #
     # @option params [required, Types::TypedLinkSpecifier] :typed_link_specifier
     #   Allows a typed link specifier to be accepted as input.
@@ -3881,11 +3916,11 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # Updates a TypedLinkFacet. For more information, see [Typed link][1].
+    # Updates a TypedLinkFacet. For more information, see [Typed Links][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #
     # @option params [required, String] :schema_arn
     #   The Amazon Resource Name (ARN) that is associated with the schema. For
@@ -3906,11 +3941,11 @@ module Aws::CloudDirectory
     #   specified are presumed to match the entire range. Filters are
     #   interpreted in the order of the attributes on the typed link facet,
     #   not the order in which they are supplied to any API calls. For more
-    #   information about identity attributes, see [Typed link][1].
+    #   information about identity attributes, see [Typed Links][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4065,7 +4100,7 @@ module Aws::CloudDirectory
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-clouddirectory'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

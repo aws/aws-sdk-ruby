@@ -959,6 +959,19 @@ module Aws::Rekognition
     #
     #  </note>
     #
+    # `DetectLabels` returns bounding boxes for instances of common object
+    # labels in an array of objects. An `Instance` object contains a object,
+    # for the location of the label on the image. It also includes the
+    # confidence by which the bounding box was detected.
+    #
+    # `DetectLabels` also returns a hierarchical taxonomy of detected
+    # labels. For example, a detected car might be assigned the label *car*.
+    # The label *car* has two parent labels: *Vehicle* (its parent) and
+    # *Transportation* (its grandparent). The response returns the entire
+    # list of ancestors for a label. Each ancestor is a unique label in the
+    # response. In the previous example, *Car*, *Vehicle*, and
+    # *Transportation* are returned as unique labels in the response.
+    #
     # This is a stateless API operation. That is, the operation does not
     # persist any data.
     #
@@ -987,6 +1000,7 @@ module Aws::Rekognition
     #
     #   * {Types::DetectLabelsResponse#labels #labels} => Array&lt;Types::Label&gt;
     #   * {Types::DetectLabelsResponse#orientation_correction #orientation_correction} => String
+    #   * {Types::DetectLabelsResponse#label_model_version #label_model_version} => String
     #
     #
     # @example Example: To detect labels
@@ -1038,7 +1052,16 @@ module Aws::Rekognition
     #   resp.labels #=> Array
     #   resp.labels[0].name #=> String
     #   resp.labels[0].confidence #=> Float
+    #   resp.labels[0].instances #=> Array
+    #   resp.labels[0].instances[0].bounding_box.width #=> Float
+    #   resp.labels[0].instances[0].bounding_box.height #=> Float
+    #   resp.labels[0].instances[0].bounding_box.left #=> Float
+    #   resp.labels[0].instances[0].bounding_box.top #=> Float
+    #   resp.labels[0].instances[0].confidence #=> Float
+    #   resp.labels[0].parents #=> Array
+    #   resp.labels[0].parents[0].name #=> String
     #   resp.orientation_correction #=> String, one of "ROTATE_0", "ROTATE_90", "ROTATE_180", "ROTATE_270"
+    #   resp.label_model_version #=> String
     #
     # @overload detect_labels(params = {})
     # @param [Hash] params ({})
@@ -1765,6 +1788,13 @@ module Aws::Rekognition
     # with the token value returned from the previous call to
     # `GetLabelDetection`.
     #
+    # <note markdown="1"> `GetLabelDetection` doesn't return a hierarchical taxonomy, or
+    # bounding box information, for detected labels. `GetLabelDetection`
+    # returns `null` for the `Parents` and `Instances` attributes of the
+    # object which is returned in the `Labels` array.
+    #
+    #  </note>
+    #
     # @option params [required, String] :job_id
     #   Job identifier for the label detection operation for which you want
     #   results returned. You get the job identifer from an initial call to
@@ -1821,6 +1851,14 @@ module Aws::Rekognition
     #   resp.labels[0].timestamp #=> Integer
     #   resp.labels[0].label.name #=> String
     #   resp.labels[0].label.confidence #=> Float
+    #   resp.labels[0].label.instances #=> Array
+    #   resp.labels[0].label.instances[0].bounding_box.width #=> Float
+    #   resp.labels[0].label.instances[0].bounding_box.height #=> Float
+    #   resp.labels[0].label.instances[0].bounding_box.left #=> Float
+    #   resp.labels[0].label.instances[0].bounding_box.top #=> Float
+    #   resp.labels[0].label.instances[0].confidence #=> Float
+    #   resp.labels[0].label.parents #=> Array
+    #   resp.labels[0].label.parents[0].name #=> String
     #
     # @overload get_label_detection(params = {})
     # @param [Hash] params ({})
@@ -1829,22 +1867,22 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Gets the person tracking results of a Amazon Rekognition Video
-    # analysis started by .
+    # Gets the path tracking results of a Amazon Rekognition Video analysis
+    # started by .
     #
-    # The person detection operation is started by a call to
+    # The person path tracking operation is started by a call to
     # `StartPersonTracking` which returns a job identifier (`JobId`). When
-    # the person detection operation finishes, Amazon Rekognition Video
-    # publishes a completion status to the Amazon Simple Notification
-    # Service topic registered in the initial call to `StartPersonTracking`.
+    # the operation finishes, Amazon Rekognition Video publishes a
+    # completion status to the Amazon Simple Notification Service topic
+    # registered in the initial call to `StartPersonTracking`.
     #
-    # To get the results of the person tracking operation, first check that
-    # the status value published to the Amazon SNS topic is `SUCCEEDED`. If
-    # so, call and pass the job identifier (`JobId`) from the initial call
-    # to `StartPersonTracking`.
+    # To get the results of the person path tracking operation, first check
+    # that the status value published to the Amazon SNS topic is
+    # `SUCCEEDED`. If so, call and pass the job identifier (`JobId`) from
+    # the initial call to `StartPersonTracking`.
     #
     # `GetPersonTracking` returns an array, `Persons`, of tracked persons
-    # and the time(s) they were tracked in the video.
+    # and the time(s) their paths were tracked in the video.
     #
     # <note markdown="1"> `GetPersonTracking` only returns the default facial attributes
     # (`BoundingBox`, `Confidence`, `Landmarks`, `Pose`, and `Quality`). The
@@ -1856,9 +1894,9 @@ module Aws::Rekognition
     #
     #  </note>
     #
-    # By default, the array is sorted by the time(s) a person is tracked in
-    # the video. You can sort by tracked persons by specifying `INDEX` for
-    # the `SortBy` input parameter.
+    # By default, the array is sorted by the time(s) a person's path is
+    # tracked in the video. You can sort by tracked persons by specifying
+    # `INDEX` for the `SortBy` input parameter.
     #
     # Use the `MaxResults` parameter to limit the number of items returned.
     # If there are more results than specified in `MaxResults`, the value of
@@ -3158,7 +3196,9 @@ module Aws::Rekognition
     #   certain Amazon Rekognition is that the moderated content is correctly
     #   identified. 0 is the lowest confidence. 100 is the highest confidence.
     #   Amazon Rekognition doesn't return any moderated content labels with a
-    #   confidence level lower than this specified value.
+    #   confidence level lower than this specified value. If you don't
+    #   specify `MinConfidence`, `GetContentModeration` returns labels with
+    #   confidence values greater than or equal to 50 percent.
     #
     # @option params [String] :client_request_token
     #   Idempotent token used to identify the start request. If you use the
@@ -3216,7 +3256,7 @@ module Aws::Rekognition
     # (`JobId`) that you use to get the results of the operation. When face
     # detection is finished, Amazon Rekognition Video publishes a completion
     # status to the Amazon Simple Notification Service topic that you
-    # specify in `NotificationChannel`. To get the results of the label
+    # specify in `NotificationChannel`. To get the results of the face
     # detection operation, first check that the status value published to
     # the Amazon SNS topic is `SUCCEEDED`. If so, call and pass the job
     # identifier (`JobId`) from the initial call to `StartFaceDetection`.
@@ -3444,15 +3484,16 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Starts the asynchronous tracking of persons in a stored video.
+    # Starts the asynchronous tracking of a person's path in a stored
+    # video.
     #
-    # Amazon Rekognition Video can track persons in a video stored in an
-    # Amazon S3 bucket. Use Video to specify the bucket name and the
-    # filename of the video. `StartPersonTracking` returns a job identifier
-    # (`JobId`) which you use to get the results of the operation. When
-    # label detection is finished, Amazon Rekognition publishes a completion
-    # status to the Amazon Simple Notification Service topic that you
-    # specify in `NotificationChannel`.
+    # Amazon Rekognition Video can track the path of people in a video
+    # stored in an Amazon S3 bucket. Use Video to specify the bucket name
+    # and the filename of the video. `StartPersonTracking` returns a job
+    # identifier (`JobId`) which you use to get the results of the
+    # operation. When label detection is finished, Amazon Rekognition
+    # publishes a completion status to the Amazon Simple Notification
+    # Service topic that you specify in `NotificationChannel`.
     #
     # To get the results of the person detection operation, first check that
     # the status value published to the Amazon SNS topic is `SUCCEEDED`. If
@@ -3566,7 +3607,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

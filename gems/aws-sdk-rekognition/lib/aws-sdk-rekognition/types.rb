@@ -46,10 +46,10 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Identifies the bounding box around the face or text. The `left`
-    # (x-coordinate) and `top` (y-coordinate) are coordinates representing
-    # the top and left sides of the bounding box. Note that the upper-left
-    # corner of the image is the origin (0,0).
+    # Identifies the bounding box around the label, face, or text. The
+    # `left` (x-coordinate) and `top` (y-coordinate) are coordinates
+    # representing the top and left sides of the bounding box. Note that the
+    # upper-left corner of the image is the origin (0,0).
     #
     # The `top` and `left` values returned are ratios of the overall image
     # size. For example, if the input image is 700x200 pixels, and the
@@ -809,22 +809,31 @@ module Aws::Rekognition
     #   @return [Array<Types::Label>]
     #
     # @!attribute [rw] orientation_correction
-    #   The orientation of the input image (counter-clockwise direction). If
-    #   your application displays the image, you can use this value to
-    #   correct the orientation. If Amazon Rekognition detects that the
-    #   input image was rotated (for example, by 90 degrees), it first
-    #   corrects the orientation before detecting the labels.
+    #   The value of `OrientationCorrection` is always null.
     #
-    #   <note markdown="1"> If the input image Exif metadata populates the orientation field,
-    #   Amazon Rekognition does not perform orientation correction and the
-    #   value of OrientationCorrection will be null.
+    #   If the input image is in .jpeg format, it might contain exchangeable
+    #   image (Exif) metadata that includes the image's orientation. Amazon
+    #   Rekognition uses this orientation information to perform image
+    #   correction - the bounding box coordinates are translated to
+    #   represent object locations after the orientation information in the
+    #   Exif metadata is used to correct the image orientation. Images in
+    #   .png format don't contain Exif metadata.
     #
-    #    </note>
+    #   Amazon Rekognition doesn’t perform image correction for images in
+    #   .png format and .jpeg images without orientation information in the
+    #   image Exif metadata. The bounding box coordinates are not translated
+    #   and represent the object locations before the image is rotated.
+    #   @return [String]
+    #
+    # @!attribute [rw] label_model_version
+    #   Version number of the label detection model that was used to detect
+    #   labels.
     #   @return [String]
     #
     class DetectLabelsResponse < Struct.new(
       :labels,
-      :orientation_correction)
+      :orientation_correction,
+      :label_model_version)
       include Aws::Structure
     end
 
@@ -1211,7 +1220,7 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Information about where text detected by is located on an image.
+    # Information about where the text detected by is located on an image.
     #
     # @!attribute [rw] bounding_box
     #   An axis-aligned coarse representation of the detected text's
@@ -1720,9 +1729,9 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] persons
-    #   An array of the persons detected in the video and the times they are
-    #   tracked throughout the video. An array element will exist for each
-    #   time the person is tracked.
+    #   An array of the persons detected in the video and the time(s) their
+    #   path was tracked throughout the video. An array element will exist
+    #   for each time a person's path is tracked.
     #   @return [Array<Types::PersonDetection>]
     #
     class GetPersonTrackingResponse < Struct.new(
@@ -1947,6 +1956,23 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # An instance of a label detected by .
+    #
+    # @!attribute [rw] bounding_box
+    #   The position of the label instance on the image.
+    #   @return [Types::BoundingBox]
+    #
+    # @!attribute [rw] confidence
+    #   The confidence that Amazon Rekognition Image has in the accuracy of
+    #   the bounding box.
+    #   @return [Float]
+    #
+    class Instance < Struct.new(
+      :bounding_box,
+      :confidence)
+      include Aws::Structure
+    end
+
     # The Kinesis data stream Amazon Rekognition to which the analysis
     # results of a Amazon Rekognition stream processor are streamed. For
     # more information, see CreateStreamProcessor in the Amazon Rekognition
@@ -1989,20 +2015,52 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Structure containing details about the detected label, including name,
-    # and level of confidence.
+    # Structure containing details about the detected label, including the
+    # name, and level of confidence.
+    #
+    # The Amazon Rekognition Image operation operation returns a
+    # hierarchical taxonomy (`Parents`) for detected labels and also
+    # bounding box information (`Instances`) for detected labels. Amazon
+    # Rekognition Video doesn't return this information and returns `null`
+    # for the `Parents` and `Instances` attributes.
     #
     # @!attribute [rw] name
-    #   The name (label) of the object.
+    #   The name (label) of the object or scene.
     #   @return [String]
     #
     # @!attribute [rw] confidence
     #   Level of confidence.
     #   @return [Float]
     #
+    # @!attribute [rw] instances
+    #   If `Label` represents an object, `Instances` contains the bounding
+    #   boxes for each instance of the detected object. Bounding boxes are
+    #   returned for common object labels such as people, cars, furniture,
+    #   apparel or pets.
+    #
+    #   <note markdown="1"> Amazon Rekognition Video does not support bounding box information
+    #   for detected labels. The value of `Instances` is returned as `null`
+    #   by `GetLabelDetection`.
+    #
+    #    </note>
+    #   @return [Array<Types::Instance>]
+    #
+    # @!attribute [rw] parents
+    #   The parent labels for a label. The response includes all ancestor
+    #   labels.
+    #
+    #   <note markdown="1"> Amazon Rekognition Video does not support a hierarchical taxonomy of
+    #   detected labels. The value of `Parents` is returned as `null` by
+    #   `GetLabelDetection`.
+    #
+    #    </note>
+    #   @return [Array<Types::Parent>]
+    #
     class Label < Struct.new(
       :name,
-      :confidence)
+      :confidence,
+      :instances,
+      :parents)
       include Aws::Structure
     end
 
@@ -2285,6 +2343,17 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # A parent label for a label. A label can have 0, 1, or more parents.
+    #
+    # @!attribute [rw] name
+    #   The name of the parent label.
+    #   @return [String]
+    #
+    class Parent < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
     # Details about a person detected in a video analysis request.
     #
     # @!attribute [rw] index
@@ -2308,21 +2377,21 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Details and tracking information for a single time a person is tracked
-    # in a video. Amazon Rekognition operations that track persons return an
-    # array of `PersonDetection` objects with elements for each time a
-    # person is tracked in a video.
+    # Details and path tracking information for a single time a person's
+    # path is tracked in a video. Amazon Rekognition operations that track
+    # people's paths return an array of `PersonDetection` objects with
+    # elements for each time a person's path is tracked in a video.
     #
     # For more information, see API\_GetPersonTracking in the Amazon
     # Rekognition Developer Guide.
     #
     # @!attribute [rw] timestamp
     #   The time, in milliseconds from the start of the video, that the
-    #   person was tracked.
+    #   person's path was tracked.
     #   @return [Integer]
     #
     # @!attribute [rw] person
-    #   Details about a person tracked in a video.
+    #   Details about a person whose path was tracked in a video.
     #   @return [Types::PersonDetail]
     #
     class PersonDetection < Struct.new(
@@ -2742,7 +2811,9 @@ module Aws::Rekognition
     #   how certain Amazon Rekognition is that the moderated content is
     #   correctly identified. 0 is the lowest confidence. 100 is the highest
     #   confidence. Amazon Rekognition doesn't return any moderated content
-    #   labels with a confidence level lower than this specified value.
+    #   labels with a confidence level lower than this specified value. If
+    #   you don't specify `MinConfidence`, `GetContentModeration` returns
+    #   labels with confidence values greater than or equal to 50 percent.
     #   @return [Float]
     #
     # @!attribute [rw] client_request_token
