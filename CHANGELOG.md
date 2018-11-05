@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.164 (2018-11-05)
+------------------
+
 * Feature - Aws::ServerlessApplicationRepository - Updated the API, and documentation for AWSServerlessApplicationRepository.
 
 * Feature - Aws::EKS - Updated the waiters for Amazon Elastic Container Service for Kubernetes.
