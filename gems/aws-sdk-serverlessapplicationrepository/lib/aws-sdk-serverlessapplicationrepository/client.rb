@@ -273,6 +273,9 @@ module Aws::ServerlessApplicationRepository
     #   resp.version.parameter_definitions[0].referenced_by_resources #=> Array
     #   resp.version.parameter_definitions[0].referenced_by_resources[0] #=> String
     #   resp.version.parameter_definitions[0].type #=> String
+    #   resp.version.required_capabilities #=> Array
+    #   resp.version.required_capabilities[0] #=> String, one of "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_RESOURCE_POLICY"
+    #   resp.version.resources_supported #=> Boolean
     #   resp.version.semantic_version #=> String
     #   resp.version.source_code_url #=> String
     #   resp.version.template_url #=> String
@@ -303,6 +306,8 @@ module Aws::ServerlessApplicationRepository
     #   * {Types::CreateApplicationVersionResponse#application_id #application_id} => String
     #   * {Types::CreateApplicationVersionResponse#creation_time #creation_time} => String
     #   * {Types::CreateApplicationVersionResponse#parameter_definitions #parameter_definitions} => Array&lt;Types::ParameterDefinition&gt;
+    #   * {Types::CreateApplicationVersionResponse#required_capabilities #required_capabilities} => Array&lt;String&gt;
+    #   * {Types::CreateApplicationVersionResponse#resources_supported #resources_supported} => Boolean
     #   * {Types::CreateApplicationVersionResponse#semantic_version #semantic_version} => String
     #   * {Types::CreateApplicationVersionResponse#source_code_url #source_code_url} => String
     #   * {Types::CreateApplicationVersionResponse#template_url #template_url} => String
@@ -337,6 +342,9 @@ module Aws::ServerlessApplicationRepository
     #   resp.parameter_definitions[0].referenced_by_resources #=> Array
     #   resp.parameter_definitions[0].referenced_by_resources[0] #=> String
     #   resp.parameter_definitions[0].type #=> String
+    #   resp.required_capabilities #=> Array
+    #   resp.required_capabilities[0] #=> String, one of "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_RESOURCE_POLICY"
+    #   resp.resources_supported #=> Boolean
     #   resp.semantic_version #=> String
     #   resp.source_code_url #=> String
     #   resp.template_url #=> String
@@ -354,11 +362,35 @@ module Aws::ServerlessApplicationRepository
     #
     # @option params [required, String] :application_id
     #
+    # @option params [Array<String>] :capabilities
+    #
+    # @option params [String] :change_set_name
+    #
+    # @option params [String] :client_token
+    #
+    # @option params [String] :description
+    #
+    # @option params [Array<String>] :notification_arns
+    #
     # @option params [Array<Types::ParameterValue>] :parameter_overrides
+    #
+    # @option params [Array<String>] :resource_types
+    #
+    # @option params [Types::RollbackConfiguration] :rollback_configuration
+    #   This property corresponds to the *AWS CloudFormation [
+    #   RollbackConfiguration][1]* Data Type.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration
     #
     # @option params [String] :semantic_version
     #
     # @option params [required, String] :stack_name
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #
+    # @option params [String] :template_id
     #
     # @return [Types::CreateCloudFormationChangeSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -371,14 +403,36 @@ module Aws::ServerlessApplicationRepository
     #
     #   resp = client.create_cloud_formation_change_set({
     #     application_id: "__string", # required
+    #     capabilities: ["__string"],
+    #     change_set_name: "__string",
+    #     client_token: "__string",
+    #     description: "__string",
+    #     notification_arns: ["__string"],
     #     parameter_overrides: [
     #       {
     #         name: "__string", # required
     #         value: "__string", # required
     #       },
     #     ],
+    #     resource_types: ["__string"],
+    #     rollback_configuration: {
+    #       monitoring_time_in_minutes: 1,
+    #       rollback_triggers: [
+    #         {
+    #           arn: "__string", # required
+    #           type: "__string", # required
+    #         },
+    #       ],
+    #     },
     #     semantic_version: "__string",
     #     stack_name: "__string", # required
+    #     tags: [
+    #       {
+    #         key: "__string", # required
+    #         value: "__string", # required
+    #       },
+    #     ],
+    #     template_id: "__string",
     #   })
     #
     # @example Response structure
@@ -394,6 +448,48 @@ module Aws::ServerlessApplicationRepository
     # @param [Hash] params ({})
     def create_cloud_formation_change_set(params = {}, options = {})
       req = build_request(:create_cloud_formation_change_set, params)
+      req.send_request(options)
+    end
+
+    # Creates an AWS CloudFormation template.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [String] :semantic_version
+    #
+    # @return [Types::CreateCloudFormationTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCloudFormationTemplateResponse#application_id #application_id} => String
+    #   * {Types::CreateCloudFormationTemplateResponse#creation_time #creation_time} => String
+    #   * {Types::CreateCloudFormationTemplateResponse#expiration_time #expiration_time} => String
+    #   * {Types::CreateCloudFormationTemplateResponse#semantic_version #semantic_version} => String
+    #   * {Types::CreateCloudFormationTemplateResponse#status #status} => String
+    #   * {Types::CreateCloudFormationTemplateResponse#template_id #template_id} => String
+    #   * {Types::CreateCloudFormationTemplateResponse#template_url #template_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_cloud_formation_template({
+    #     application_id: "__string", # required
+    #     semantic_version: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_id #=> String
+    #   resp.creation_time #=> String
+    #   resp.expiration_time #=> String
+    #   resp.semantic_version #=> String
+    #   resp.status #=> String, one of "PREPARING", "ACTIVE", "EXPIRED"
+    #   resp.template_id #=> String
+    #   resp.template_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateCloudFormationTemplate AWS API Documentation
+    #
+    # @overload create_cloud_formation_template(params = {})
+    # @param [Hash] params ({})
+    def create_cloud_formation_template(params = {}, options = {})
+      req = build_request(:create_cloud_formation_template, params)
       req.send_request(options)
     end
 
@@ -476,6 +572,9 @@ module Aws::ServerlessApplicationRepository
     #   resp.version.parameter_definitions[0].referenced_by_resources #=> Array
     #   resp.version.parameter_definitions[0].referenced_by_resources[0] #=> String
     #   resp.version.parameter_definitions[0].type #=> String
+    #   resp.version.required_capabilities #=> Array
+    #   resp.version.required_capabilities[0] #=> String, one of "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_RESOURCE_POLICY"
+    #   resp.version.resources_supported #=> Boolean
     #   resp.version.semantic_version #=> String
     #   resp.version.source_code_url #=> String
     #   resp.version.template_url #=> String
@@ -518,6 +617,48 @@ module Aws::ServerlessApplicationRepository
     # @param [Hash] params ({})
     def get_application_policy(params = {}, options = {})
       req = build_request(:get_application_policy, params)
+      req.send_request(options)
+    end
+
+    # Gets the specified AWS CloudFormation template.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, String] :template_id
+    #
+    # @return [Types::GetCloudFormationTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCloudFormationTemplateResponse#application_id #application_id} => String
+    #   * {Types::GetCloudFormationTemplateResponse#creation_time #creation_time} => String
+    #   * {Types::GetCloudFormationTemplateResponse#expiration_time #expiration_time} => String
+    #   * {Types::GetCloudFormationTemplateResponse#semantic_version #semantic_version} => String
+    #   * {Types::GetCloudFormationTemplateResponse#status #status} => String
+    #   * {Types::GetCloudFormationTemplateResponse#template_id #template_id} => String
+    #   * {Types::GetCloudFormationTemplateResponse#template_url #template_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_cloud_formation_template({
+    #     application_id: "__string", # required
+    #     template_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_id #=> String
+    #   resp.creation_time #=> String
+    #   resp.expiration_time #=> String
+    #   resp.semantic_version #=> String
+    #   resp.status #=> String, one of "PREPARING", "ACTIVE", "EXPIRED"
+    #   resp.template_id #=> String
+    #   resp.template_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/GetCloudFormationTemplate AWS API Documentation
+    #
+    # @overload get_cloud_formation_template(params = {})
+    # @param [Hash] params ({})
+    def get_cloud_formation_template(params = {}, options = {})
+      req = build_request(:get_cloud_formation_template, params)
       req.send_request(options)
     end
 
@@ -601,9 +742,8 @@ module Aws::ServerlessApplicationRepository
       req.send_request(options)
     end
 
-    # Sets the permission policy for an application. See [Application
-    # Permissions][1] for the list of supported actions that can be used
-    # with this operation.
+    # Sets the permission policy for an application. For the list of actions
+    # supported for this operation, see [Application Permissions][1] .
     #
     #
     #
@@ -721,6 +861,9 @@ module Aws::ServerlessApplicationRepository
     #   resp.version.parameter_definitions[0].referenced_by_resources #=> Array
     #   resp.version.parameter_definitions[0].referenced_by_resources[0] #=> String
     #   resp.version.parameter_definitions[0].type #=> String
+    #   resp.version.required_capabilities #=> Array
+    #   resp.version.required_capabilities[0] #=> String, one of "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_RESOURCE_POLICY"
+    #   resp.version.resources_supported #=> Boolean
     #   resp.version.semantic_version #=> String
     #   resp.version.source_code_url #=> String
     #   resp.version.template_url #=> String
@@ -747,7 +890,7 @@ module Aws::ServerlessApplicationRepository
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-serverlessapplicationrepository'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
