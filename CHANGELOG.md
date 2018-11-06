@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
+
+* Feature - Aws::CodeBuild - Updated the documentation for AWS CodeBuild.
+
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::Pinpoint - Updated the API, and documentation for Amazon Pinpoint.
+
+* Feature - Aws::WAFRegional - Updated the API, and documentation for AWS WAF Regional.
+
+* Feature - Aws::PinpointEmail - Added support for a new service, Amazon Pinpoint Email Service.
+
 * Issue - Aws::S3::Encryption::IOAuthDecrypter - Backport fix for GCM decryption.
 
 2.11.164 (2018-11-05)

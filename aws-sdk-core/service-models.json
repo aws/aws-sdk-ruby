@@ -434,6 +434,10 @@
     "models": "pinpoint/2016-12-01",
     "endpoint": "pinpoint"
   },
+  "PinpointEmail": {
+    "models": "pinpoint-email/2018-07-26",
+    "endpoint": "email"
+  },
   "Polly": {
     "models": "polly/2016-06-10",
     "endpoint": "polly"

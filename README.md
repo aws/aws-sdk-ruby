@@ -376,6 +376,7 @@ to be backwards compatible.
 | Amazon Mechanical Turk                                | MTurk                           | 2017-01-17  |
 | Amazon Neptune                                        | Neptune                         | 2014-10-31  |
 | Amazon Pinpoint                                       | Pinpoint                        | 2016-12-01  |
+| Amazon Pinpoint Email Service                         | PinpointEmail                   | 2018-07-26  |
 | Amazon Polly                                          | Polly                           | 2016-06-10  |
 | Amazon Redshift                                       | Redshift                        | 2012-12-01  |
 | Amazon Rekognition                                    | Rekognition                     | 2016-06-27  |

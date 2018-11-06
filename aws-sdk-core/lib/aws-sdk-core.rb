@@ -132,6 +132,7 @@ module Aws
     Organizations
     PI
     Pinpoint
+    PinpointEmail
     Polly
     Pricing
     RDS
