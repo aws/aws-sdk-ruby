@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.27.0 (2018-11-06)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-pinpointemail` gem.
+
 3.26.0 (2018-10-30)
 ------------------
 

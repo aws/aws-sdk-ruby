@@ -6246,6 +6246,10 @@ module Aws::APIGateway
     #   Stage.
     #   @return [Boolean]
     #
+    # @!attribute [rw] web_acl_arn
+    #   The ARN of the WebAcl associated with the Stage.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The collection of tags. Each tag element is associated with a given
     #   resource.
@@ -6273,6 +6277,7 @@ module Aws::APIGateway
       :access_log_settings,
       :canary_settings,
       :tracing_enabled,
+      :web_acl_arn,
       :tags,
       :created_date,
       :last_updated_date)

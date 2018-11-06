@@ -112,6 +112,7 @@ module Aws
   autoload :Organizations, 'aws-sdk-organizations'
   autoload :PI, 'aws-sdk-pi'
   autoload :Pinpoint, 'aws-sdk-pinpoint'
+  autoload :PinpointEmail, 'aws-sdk-pinpointemail'
   autoload :Polly, 'aws-sdk-polly'
   autoload :Pricing, 'aws-sdk-pricing'
   autoload :RDS, 'aws-sdk-rds'

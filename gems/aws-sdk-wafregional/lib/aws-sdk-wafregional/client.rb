@@ -1197,6 +1197,7 @@ module Aws::WAFRegional
     #   resp.web_acl.rules[0].action.type #=> String, one of "BLOCK", "ALLOW", "COUNT"
     #   resp.web_acl.rules[0].override_action.type #=> String, one of "NONE", "COUNT"
     #   resp.web_acl.rules[0].type #=> String, one of "REGULAR", "RATE_BASED", "GROUP"
+    #   resp.web_acl.web_acl_arn #=> String
     #   resp.change_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateWebACL AWS API Documentation
@@ -2927,6 +2928,7 @@ module Aws::WAFRegional
     #   resp.web_acl.rules[0].action.type #=> String, one of "BLOCK", "ALLOW", "COUNT"
     #   resp.web_acl.rules[0].override_action.type #=> String, one of "NONE", "COUNT"
     #   resp.web_acl.rules[0].type #=> String, one of "REGULAR", "RATE_BASED", "GROUP"
+    #   resp.web_acl.web_acl_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetWebACL AWS API Documentation
     #
@@ -3424,6 +3426,10 @@ module Aws::WAFRegional
     #   The unique identifier (ID) of the web ACL for which to list the
     #   associated resources.
     #
+    # @option params [String] :resource_type
+    #   The type of resource to list, either and application load balancer or
+    #   Amazon API Gateway.
+    #
     # @return [Types::ListResourcesForWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListResourcesForWebACLResponse#resource_arns #resource_arns} => Array&lt;String&gt;
@@ -3432,6 +3438,7 @@ module Aws::WAFRegional
     #
     #   resp = client.list_resources_for_web_acl({
     #     web_acl_id: "ResourceId", # required
+    #     resource_type: "APPLICATION_LOAD_BALANCER", # accepts APPLICATION_LOAD_BALANCER, API_GATEWAY
     #   })
     #
     # @example Response structure
@@ -3863,28 +3870,25 @@ module Aws::WAFRegional
     # You can access information about all traffic that AWS WAF inspects
     # using the following steps:
     #
-    # 1.  Create an Amazon Kinesis Data Firehose delivery stream. For more
-    #     information, see [Creating an Amazon Kinesis Data Firehose
-    #     Delivery Stream][1].
+    # 1.  Create an Amazon Kinesis Data Firehose .
     #
-    # 2.  Associate that delivery stream to your web ACL using a
+    # 2.  Associate that firehose to your web ACL using a
     #     `PutLoggingConfiguration` request.
     #
     # When you successfully enable logging using a `PutLoggingConfiguration`
     # request, AWS WAF will create a service linked role with the necessary
-    # permissions to write logs to the Amazon Kinesis Data Firehose delivery
-    # stream. For more information, see [Logging Web ACL Traffic
-    # Information][2] in the *AWS WAF Developer Guide*.
+    # permissions to write logs to the Amazon Kinesis Data Firehose. For
+    # more information, see [Logging Web ACL Traffic Information][1] in the
+    # *AWS WAF Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/firehose/latest/dev/what-is-this-service.html
-    # [2]: http://docs.aws.amazon.com/waf/latest/developerguide/logging.html
+    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/logging.html
     #
     # @option params [required, Types::LoggingConfiguration] :logging_configuration
-    #   The Amazon Kinesis Data Firehose delivery streams that contains the
-    #   inspected traffic information, the redacted fields details, and the
-    #   Amazon Resource Name (ARN) of the web ACL to monitor.
+    #   The Amazon Kinesis Data Firehose that contains the inspected traffic
+    #   information, the redacted fields details, and the Amazon Resource Name
+    #   (ARN) of the web ACL to monitor.
     #
     # @return [Types::PutLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5385,7 +5389,7 @@ module Aws::WAFRegional
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafregional'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

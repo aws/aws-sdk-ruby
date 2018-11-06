@@ -1485,8 +1485,6 @@ module Aws::EC2
     #     ],
     #     dry_run: false,
     #     route_table_ids: ["String"],
-    #     next_token: "String",
-    #     max_results: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -1563,29 +1561,25 @@ module Aws::EC2
     #   One or more route table IDs.
     #
     #   Default: Describes all your route tables.
-    # @option options [String] :next_token
-    #   The token to retrieve the next page of results.
-    # @option options [Integer] :max_results
-    #   The maximum number of results to return in a single call. To retrieve
-    #   the remaining results, make another call with the returned
-    #   **NextToken** value. This value can be between 5 and 100.
     # @return [RouteTable::Collection]
     def route_tables(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = Aws::Util.deep_merge(options, filters: [{
           name: "vpc-id",
           values: [@id]
         }])
         resp = @client.describe_route_tables(options)
-        resp.data.route_tables.each do |r|
-          batch << RouteTable.new(
-            id: r.route_table_id,
-            data: r,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.route_tables.each do |r|
+            batch << RouteTable.new(
+              id: r.route_table_id,
+              data: r,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       RouteTable::Collection.new(batches)
     end
@@ -1602,8 +1596,6 @@ module Aws::EC2
     #     group_ids: ["String"],
     #     group_names: ["String"],
     #     dry_run: false,
-    #     next_token: "String",
-    #     max_results: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -1702,30 +1694,25 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [String] :next_token
-    #   The token to request the next page of results.
-    # @option options [Integer] :max_results
-    #   The maximum number of results to return in a single call. To retrieve
-    #   the remaining results, make another request with the returned
-    #   `NextToken` value. This value can be between 5 and 1000. If this
-    #   parameter is not specified, then all results are returned.
     # @return [SecurityGroup::Collection]
     def security_groups(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = Aws::Util.deep_merge(options, filters: [{
           name: "vpc-id",
           values: [@id]
         }])
         resp = @client.describe_security_groups(options)
-        resp.data.security_groups.each do |s|
-          batch << SecurityGroup.new(
-            id: s.group_id,
-            data: s,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.security_groups.each do |s|
+            batch << SecurityGroup.new(
+              id: s.group_id,
+              data: s,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       SecurityGroup::Collection.new(batches)
     end

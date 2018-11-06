@@ -3892,13 +3892,13 @@ module Aws::EC2
     ImportInstanceTaskDetails.add_member(:volumes, Shapes::ShapeRef.new(shape: ImportInstanceVolumeDetailSet, location_name: "volumes"))
     ImportInstanceTaskDetails.struct_class = Types::ImportInstanceTaskDetails
 
-    ImportInstanceVolumeDetailItem.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, required: true, location_name: "availabilityZone"))
-    ImportInstanceVolumeDetailItem.add_member(:bytes_converted, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "bytesConverted"))
+    ImportInstanceVolumeDetailItem.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    ImportInstanceVolumeDetailItem.add_member(:bytes_converted, Shapes::ShapeRef.new(shape: Long, location_name: "bytesConverted"))
     ImportInstanceVolumeDetailItem.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
-    ImportInstanceVolumeDetailItem.add_member(:image, Shapes::ShapeRef.new(shape: DiskImageDescription, required: true, location_name: "image"))
-    ImportInstanceVolumeDetailItem.add_member(:status, Shapes::ShapeRef.new(shape: String, required: true, location_name: "status"))
+    ImportInstanceVolumeDetailItem.add_member(:image, Shapes::ShapeRef.new(shape: DiskImageDescription, location_name: "image"))
+    ImportInstanceVolumeDetailItem.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
     ImportInstanceVolumeDetailItem.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
-    ImportInstanceVolumeDetailItem.add_member(:volume, Shapes::ShapeRef.new(shape: DiskImageVolumeDescription, required: true, location_name: "volume"))
+    ImportInstanceVolumeDetailItem.add_member(:volume, Shapes::ShapeRef.new(shape: DiskImageVolumeDescription, location_name: "volume"))
     ImportInstanceVolumeDetailItem.struct_class = Types::ImportInstanceVolumeDetailItem
 
     ImportInstanceVolumeDetailSet.member = Shapes::ShapeRef.new(shape: ImportInstanceVolumeDetailItem, location_name: "item")
@@ -5708,8 +5708,8 @@ module Aws::EC2
 
     SecurityGroupList.member = Shapes::ShapeRef.new(shape: SecurityGroup, location_name: "item")
 
-    SecurityGroupReference.add_member(:group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "groupId"))
-    SecurityGroupReference.add_member(:referencing_vpc_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "referencingVpcId"))
+    SecurityGroupReference.add_member(:group_id, Shapes::ShapeRef.new(shape: String, location_name: "groupId"))
+    SecurityGroupReference.add_member(:referencing_vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "referencingVpcId"))
     SecurityGroupReference.add_member(:vpc_peering_connection_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcPeeringConnectionId"))
     SecurityGroupReference.struct_class = Types::SecurityGroupReference
 
@@ -5949,7 +5949,7 @@ module Aws::EC2
     StaleIpPermissionSet.member = Shapes::ShapeRef.new(shape: StaleIpPermission, location_name: "item")
 
     StaleSecurityGroup.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
-    StaleSecurityGroup.add_member(:group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "groupId"))
+    StaleSecurityGroup.add_member(:group_id, Shapes::ShapeRef.new(shape: String, location_name: "groupId"))
     StaleSecurityGroup.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
     StaleSecurityGroup.add_member(:stale_ip_permissions, Shapes::ShapeRef.new(shape: StaleIpPermissionSet, location_name: "staleIpPermissions"))
     StaleSecurityGroup.add_member(:stale_ip_permissions_egress, Shapes::ShapeRef.new(shape: StaleIpPermissionSet, location_name: "staleIpPermissionsEgress"))
@@ -7756,6 +7756,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeRouteTablesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeRouteTablesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_scheduled_instance_availability, Seahorse::Model::Operation.new.tap do |o|
@@ -7788,6 +7794,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeSecurityGroupsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeSecurityGroupsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_snapshot_attribute, Seahorse::Model::Operation.new.tap do |o|

@@ -328,6 +328,7 @@ module Aws
             'Organizations' => 'organizations',
             'PI' => 'pi',
             'Pinpoint' => 'pinpoint',
+            'PinpointEmail' => 'email',
             'Polly' => 'polly',
             'Pricing' => 'api.pricing',
             'RDS' => 'rds',

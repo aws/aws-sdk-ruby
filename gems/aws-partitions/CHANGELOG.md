@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.108.0 (2018-11-06)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::PinpointEmail`.
+
 1.107.0 (2018-10-30)
 ------------------
 

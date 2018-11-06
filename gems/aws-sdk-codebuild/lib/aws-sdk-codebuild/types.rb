@@ -738,7 +738,7 @@ module Aws::CodeBuild
     #   A regular expression used to determine which branches in a
     #   repository are built when a webhook is triggered. If the name of a
     #   branch matches the regular expression, then it is built. If it
-    #   doesn't match, then it is not. If branchFilter is empty, then all
+    #   doesn't match, then it is not. If `branchFilter` is empty, then all
     #   branches are built.
     #   @return [String]
     #
@@ -751,8 +751,8 @@ module Aws::CodeBuild
     end
 
     # @!attribute [rw] webhook
-    #   Information about a webhook in GitHub that connects repository
-    #   events to a build project in AWS CodeBuild.
+    #   Information about a webhook that connects repository events to a
+    #   build project in AWS CodeBuild.
     #   @return [Types::Webhook]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhookOutput AWS API Documentation
@@ -1332,8 +1332,8 @@ module Aws::CodeBuild
     #   @return [Time]
     #
     # @!attribute [rw] webhook
-    #   Information about a webhook in GitHub that connects repository
-    #   events to a build project in AWS CodeBuild.
+    #   Information about a webhook that connects repository events to a
+    #   build project in AWS CodeBuild.
     #   @return [Types::Webhook]
     #
     # @!attribute [rw] vpc_config
@@ -1749,8 +1749,13 @@ module Aws::CodeBuild
     #     `).
     #
     #   * For source code in an Amazon Simple Storage Service (Amazon S3)
-    #     input bucket, the path to the ZIP file that contains the source
-    #     code (for example, ` bucket-name/path/to/object-name.zip`)
+    #     input bucket, one of the following.
+    #
+    #     * The path to the ZIP file that contains the source code (for
+    #       example, ` bucket-name/path/to/object-name.zip`).
+    #
+    #     * The path to the folder that contains the source code (for
+    #       example, ` bucket-name/path/to/source-code/folder/`).
     #
     #   * For source code in a GitHub repository, the HTTPS clone URL to the
     #     repository that contains the source and the build spec. Also, you
@@ -1804,8 +1809,9 @@ module Aws::CodeBuild
     # @!attribute [rw] report_build_status
     #   Set to true to report the status of a build's start and finish to
     #   your source provider. This option is only valid when your source
-    #   provider is GitHub. If this is set and you use a different source
-    #   provider, an invalidInputException is thrown.
+    #   provider is GitHub, GitHub Enterprise, or Bitbucket. If this is set
+    #   and you use a different source provider, an invalidInputException is
+    #   thrown.
     #   @return [Boolean]
     #
     # @!attribute [rw] insecure_ssl
@@ -2125,7 +2131,8 @@ module Aws::CodeBuild
     # @!attribute [rw] report_build_status_override
     #   Set to true to report to your source provider the status of a
     #   build's start and completion. If you use this option with a source
-    #   provider other than GitHub, an invalidInputException is thrown.
+    #   provider other than GitHub, GitHub Enterprise, or Bitbucket, an
+    #   invalidInputException is thrown.
     #   @return [Boolean]
     #
     # @!attribute [rw] environment_type_override
@@ -2515,13 +2522,14 @@ module Aws::CodeBuild
     #   A regular expression used to determine which branches in a
     #   repository are built when a webhook is triggered. If the name of a
     #   branch matches the regular expression, then it is built. If it
-    #   doesn't match, then it is not. If branchFilter is empty, then all
+    #   doesn't match, then it is not. If `branchFilter` is empty, then all
     #   branches are built.
     #   @return [String]
     #
     # @!attribute [rw] rotate_secret
-    #   A boolean value that specifies whether the associated repository's
-    #   secret token should be updated.
+    #   A boolean value that specifies whether the associated GitHub
+    #   repository's secret token should be updated. If you use Bitbucket
+    #   for your repository then `rotateSecret` is ignored.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateWebhookInput AWS API Documentation
@@ -2578,8 +2586,8 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # Information about a webhook in GitHub that connects repository events
-    # to a build project in AWS CodeBuild.
+    # Information about a webhook that connects repository events to a build
+    # project in AWS CodeBuild.
     #
     # @!attribute [rw] url
     #   The URL to the webhook.
@@ -2591,13 +2599,17 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] secret
     #   The secret token of the associated repository.
+    #
+    #   <note markdown="1"> A Bitbucket webhook does not support `secret`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] branch_filter
     #   A regular expression used to determine which branches in a
     #   repository are built when a webhook is triggered. If the name of a
     #   branch matches the regular expression, then it is built. If it
-    #   doesn't match, then it is not. If branchFilter is empty, then all
+    #   doesn't match, then it is not. If `branchFilter` is empty, then all
     #   branches are built.
     #   @return [String]
     #

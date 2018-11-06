@@ -122,6 +122,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-organizations', '~> 1')
   spec.add_dependency('aws-sdk-pi', '~> 1')
   spec.add_dependency('aws-sdk-pinpoint', '~> 1')
+  spec.add_dependency('aws-sdk-pinpointemail', '~> 1')
   spec.add_dependency('aws-sdk-polly', '~> 1')
   spec.add_dependency('aws-sdk-pricing', '~> 1')
   spec.add_dependency('aws-sdk-rds', '~> 1')

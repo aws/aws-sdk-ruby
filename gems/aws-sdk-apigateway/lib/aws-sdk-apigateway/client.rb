@@ -1057,6 +1057,7 @@ module Aws::APIGateway
     #   * {Types::Stage#access_log_settings #access_log_settings} => Types::AccessLogSettings
     #   * {Types::Stage#canary_settings #canary_settings} => Types::CanarySettings
     #   * {Types::Stage#tracing_enabled #tracing_enabled} => Boolean
+    #   * {Types::Stage#web_acl_arn #web_acl_arn} => String
     #   * {Types::Stage#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::Stage#created_date #created_date} => Time
     #   * {Types::Stage#last_updated_date #last_updated_date} => Time
@@ -1119,6 +1120,7 @@ module Aws::APIGateway
     #   resp.canary_settings.stage_variable_overrides["String"] #=> String
     #   resp.canary_settings.use_stage_cache #=> Boolean
     #   resp.tracing_enabled #=> Boolean
+    #   resp.web_acl_arn #=> String
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
     #   resp.created_date #=> Time
@@ -3735,6 +3737,7 @@ module Aws::APIGateway
     #   * {Types::Stage#access_log_settings #access_log_settings} => Types::AccessLogSettings
     #   * {Types::Stage#canary_settings #canary_settings} => Types::CanarySettings
     #   * {Types::Stage#tracing_enabled #tracing_enabled} => Boolean
+    #   * {Types::Stage#web_acl_arn #web_acl_arn} => String
     #   * {Types::Stage#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::Stage#created_date #created_date} => Time
     #   * {Types::Stage#last_updated_date #last_updated_date} => Time
@@ -3777,6 +3780,7 @@ module Aws::APIGateway
     #   resp.canary_settings.stage_variable_overrides["String"] #=> String
     #   resp.canary_settings.use_stage_cache #=> Boolean
     #   resp.tracing_enabled #=> Boolean
+    #   resp.web_acl_arn #=> String
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
     #   resp.created_date #=> Time
@@ -3840,6 +3844,7 @@ module Aws::APIGateway
     #   resp.item[0].canary_settings.stage_variable_overrides["String"] #=> String
     #   resp.item[0].canary_settings.use_stage_cache #=> Boolean
     #   resp.item[0].tracing_enabled #=> Boolean
+    #   resp.item[0].web_acl_arn #=> String
     #   resp.item[0].tags #=> Hash
     #   resp.item[0].tags["String"] #=> String
     #   resp.item[0].created_date #=> Time
@@ -6424,6 +6429,7 @@ module Aws::APIGateway
     #   * {Types::Stage#access_log_settings #access_log_settings} => Types::AccessLogSettings
     #   * {Types::Stage#canary_settings #canary_settings} => Types::CanarySettings
     #   * {Types::Stage#tracing_enabled #tracing_enabled} => Boolean
+    #   * {Types::Stage#web_acl_arn #web_acl_arn} => String
     #   * {Types::Stage#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::Stage#created_date #created_date} => Time
     #   * {Types::Stage#last_updated_date #last_updated_date} => Time
@@ -6474,6 +6480,7 @@ module Aws::APIGateway
     #   resp.canary_settings.stage_variable_overrides["String"] #=> String
     #   resp.canary_settings.use_stage_cache #=> Boolean
     #   resp.tracing_enabled #=> Boolean
+    #   resp.web_acl_arn #=> String
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
     #   resp.created_date #=> Time
@@ -6662,7 +6669,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

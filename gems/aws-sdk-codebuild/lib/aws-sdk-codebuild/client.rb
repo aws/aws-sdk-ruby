@@ -956,9 +956,9 @@ module Aws::CodeBuild
     end
 
     # For an existing AWS CodeBuild build project that has its source code
-    # stored in a GitHub repository, enables AWS CodeBuild to begin
-    # automatically rebuilding the source code every time a code change is
-    # pushed to the repository.
+    # stored in a GitHub or Bitbucket repository, enables AWS CodeBuild to
+    # begin automatically rebuilding the source code every time a code
+    # change is pushed to the repository.
     #
     # If you enable webhooks for an AWS CodeBuild project, and the project
     # is used as a build step in AWS CodePipeline, then two identical builds
@@ -981,7 +981,7 @@ module Aws::CodeBuild
     #   A regular expression used to determine which branches in a repository
     #   are built when a webhook is triggered. If the name of a branch matches
     #   the regular expression, then it is built. If it doesn't match, then
-    #   it is not. If branchFilter is empty, then all branches are built.
+    #   it is not. If `branchFilter` is empty, then all branches are built.
     #
     # @return [Types::CreateWebhookOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1034,9 +1034,9 @@ module Aws::CodeBuild
     end
 
     # For an existing AWS CodeBuild build project that has its source code
-    # stored in a GitHub repository, stops AWS CodeBuild from automatically
-    # rebuilding the source code every time a code change is pushed to the
-    # repository.
+    # stored in a GitHub or Bitbucket repository, stops AWS CodeBuild from
+    # automatically rebuilding the source code every time a code change is
+    # pushed to the repository.
     #
     # @option params [required, String] :project_name
     #   The name of the AWS CodeBuild project.
@@ -1350,7 +1350,8 @@ module Aws::CodeBuild
     # @option params [Boolean] :report_build_status_override
     #   Set to true to report to your source provider the status of a build's
     #   start and completion. If you use this option with a source provider
-    #   other than GitHub, an invalidInputException is thrown.
+    #   other than GitHub, GitHub Enterprise, or Bitbucket, an
+    #   invalidInputException is thrown.
     #
     # @option params [String] :environment_type_override
     #   A container type for this build that overrides the one specified in
@@ -1966,6 +1967,11 @@ module Aws::CodeBuild
 
     # Updates the webhook associated with an AWS CodeBuild build project.
     #
+    # <note markdown="1"> If you use Bitbucket for your repository then `rotateSecret` is
+    # ignored.
+    #
+    #  </note>
+    #
     # @option params [required, String] :project_name
     #   The name of the AWS CodeBuild project.
     #
@@ -1973,11 +1979,12 @@ module Aws::CodeBuild
     #   A regular expression used to determine which branches in a repository
     #   are built when a webhook is triggered. If the name of a branch matches
     #   the regular expression, then it is built. If it doesn't match, then
-    #   it is not. If branchFilter is empty, then all branches are built.
+    #   it is not. If `branchFilter` is empty, then all branches are built.
     #
     # @option params [Boolean] :rotate_secret
-    #   A boolean value that specifies whether the associated repository's
-    #   secret token should be updated.
+    #   A boolean value that specifies whether the associated GitHub
+    #   repository's secret token should be updated. If you use Bitbucket for
+    #   your repository then `rotateSecret` is ignored.
     #
     # @return [Types::UpdateWebhookOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2021,7 +2028,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

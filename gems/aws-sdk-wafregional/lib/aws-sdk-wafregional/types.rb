@@ -3201,6 +3201,7 @@ module Aws::WAFRegional
     #
     #       {
     #         web_acl_id: "ResourceId", # required
+    #         resource_type: "APPLICATION_LOAD_BALANCER", # accepts APPLICATION_LOAD_BALANCER, API_GATEWAY
     #       }
     #
     # @!attribute [rw] web_acl_id
@@ -3208,10 +3209,16 @@ module Aws::WAFRegional
     #   associated resources.
     #   @return [String]
     #
+    # @!attribute [rw] resource_type
+    #   The type of resource to list, either and application load balancer
+    #   or Amazon API Gateway.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListResourcesForWebACLRequest AWS API Documentation
     #
     class ListResourcesForWebACLRequest < Struct.new(
-      :web_acl_id)
+      :web_acl_id,
+      :resource_type)
       include Aws::Structure
     end
 
@@ -3612,8 +3619,8 @@ module Aws::WAFRegional
       include Aws::Structure
     end
 
-    # The Amazon Kinesis Data Firehose delivery streams, `RedactedFields`
-    # information, and the web ACL Amazon Resource Name (ARN).
+    # The Amazon Kinesis Data Firehose, `RedactedFields` information, and
+    # the web ACL Amazon Resource Name (ARN).
     #
     # @note When making an API call, you may pass LoggingConfiguration
     #   data as a hash:
@@ -3635,13 +3642,13 @@ module Aws::WAFRegional
     #   @return [String]
     #
     # @!attribute [rw] log_destination_configs
-    #   An array of Amazon Kinesis Data Firehose delivery stream ARNs.
+    #   An array of Amazon Kinesis Data Firehose ARNs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] redacted_fields
     #   The parts of the request that you want redacted from the logs. For
     #   example, if you redact the cookie field, the cookie field in the
-    #   delivery stream will be `xxx`.
+    #   firehose will be `xxx`.
     #   @return [Array<Types::FieldToMatch>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/LoggingConfiguration AWS API Documentation
@@ -3720,9 +3727,9 @@ module Aws::WAFRegional
     #       }
     #
     # @!attribute [rw] logging_configuration
-    #   The Amazon Kinesis Data Firehose delivery streams that contains the
-    #   inspected traffic information, the redacted fields details, and the
-    #   Amazon Resource Name (ARN) of the web ACL to monitor.
+    #   The Amazon Kinesis Data Firehose that contains the inspected traffic
+    #   information, the redacted fields details, and the Amazon Resource
+    #   Name (ARN) of the web ACL to monitor.
     #   @return [Types::LoggingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/PutLoggingConfigurationRequest AWS API Documentation
@@ -5875,6 +5882,10 @@ module Aws::WAFRegional
     #   priority of the `Rule`, and the ID of the `Rule`.
     #   @return [Array<Types::ActivatedRule>]
     #
+    # @!attribute [rw] web_acl_arn
+    #   Tha Amazon Resource Name (ARN) of the web ACL.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WebACL AWS API Documentation
     #
     class WebACL < Struct.new(
@@ -5882,7 +5893,8 @@ module Aws::WAFRegional
       :name,
       :metric_name,
       :default_action,
-      :rules)
+      :rules,
+      :web_acl_arn)
       include Aws::Structure
     end
 

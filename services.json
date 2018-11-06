@@ -359,6 +359,9 @@
   "Pinpoint": {
     "models": "pinpoint/2016-12-01"
   },
+  "PinpointEmail": {
+    "models": "pinpoint-email/2018-07-26"
+  },
   "Polly": {
     "models": "polly/2016-06-10"
   },

@@ -97,6 +97,7 @@ module Aws::Pinpoint
     Duration = Shapes::StringShape.new(name: 'Duration')
     EmailChannelRequest = Shapes::StructureShape.new(name: 'EmailChannelRequest')
     EmailChannelResponse = Shapes::StructureShape.new(name: 'EmailChannelResponse')
+    EmailMessage = Shapes::StructureShape.new(name: 'EmailMessage')
     EndpointBatchItem = Shapes::StructureShape.new(name: 'EndpointBatchItem')
     EndpointBatchRequest = Shapes::StructureShape.new(name: 'EndpointBatchRequest')
     EndpointDemographic = Shapes::StructureShape.new(name: 'EndpointDemographic')
@@ -247,6 +248,7 @@ module Aws::Pinpoint
     PutEventsRequest = Shapes::StructureShape.new(name: 'PutEventsRequest')
     PutEventsResponse = Shapes::StructureShape.new(name: 'PutEventsResponse')
     QuietTime = Shapes::StructureShape.new(name: 'QuietTime')
+    RawEmail = Shapes::StructureShape.new(name: 'RawEmail')
     RecencyDimension = Shapes::StructureShape.new(name: 'RecencyDimension')
     RecencyType = Shapes::StringShape.new(name: 'RecencyType')
     RemoveAttributesRequest = Shapes::StructureShape.new(name: 'RemoveAttributesRequest')
@@ -274,6 +276,8 @@ module Aws::Pinpoint
     SendUsersMessagesResponse = Shapes::StructureShape.new(name: 'SendUsersMessagesResponse')
     Session = Shapes::StructureShape.new(name: 'Session')
     SetDimension = Shapes::StructureShape.new(name: 'SetDimension')
+    SimpleEmail = Shapes::StructureShape.new(name: 'SimpleEmail')
+    SimpleEmailPart = Shapes::StructureShape.new(name: 'SimpleEmailPart')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     TreatmentResource = Shapes::StructureShape.new(name: 'TreatmentResource')
@@ -312,6 +316,7 @@ module Aws::Pinpoint
     WriteEventStream = Shapes::StructureShape.new(name: 'WriteEventStream')
     WriteSegmentRequest = Shapes::StructureShape.new(name: 'WriteSegmentRequest')
     WriteTreatmentResource = Shapes::StructureShape.new(name: 'WriteTreatmentResource')
+    __blob = Shapes::BlobShape.new(name: '__blob')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
     __integer = Shapes::IntegerShape.new(name: '__integer')
@@ -819,10 +824,12 @@ module Aws::Pinpoint
     DirectMessageConfiguration.add_member(:baidu_message, Shapes::ShapeRef.new(shape: BaiduMessage, location_name: "BaiduMessage"))
     DirectMessageConfiguration.add_member(:default_message, Shapes::ShapeRef.new(shape: DefaultMessage, location_name: "DefaultMessage"))
     DirectMessageConfiguration.add_member(:default_push_notification_message, Shapes::ShapeRef.new(shape: DefaultPushNotificationMessage, location_name: "DefaultPushNotificationMessage"))
+    DirectMessageConfiguration.add_member(:email_message, Shapes::ShapeRef.new(shape: EmailMessage, location_name: "EmailMessage"))
     DirectMessageConfiguration.add_member(:gcm_message, Shapes::ShapeRef.new(shape: GCMMessage, location_name: "GCMMessage"))
     DirectMessageConfiguration.add_member(:sms_message, Shapes::ShapeRef.new(shape: SMSMessage, location_name: "SMSMessage"))
     DirectMessageConfiguration.struct_class = Types::DirectMessageConfiguration
 
+    EmailChannelRequest.add_member(:configuration_set, Shapes::ShapeRef.new(shape: __string, location_name: "ConfigurationSet"))
     EmailChannelRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
     EmailChannelRequest.add_member(:from_address, Shapes::ShapeRef.new(shape: __string, location_name: "FromAddress"))
     EmailChannelRequest.add_member(:identity, Shapes::ShapeRef.new(shape: __string, location_name: "Identity"))
@@ -830,6 +837,7 @@ module Aws::Pinpoint
     EmailChannelRequest.struct_class = Types::EmailChannelRequest
 
     EmailChannelResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, location_name: "ApplicationId"))
+    EmailChannelResponse.add_member(:configuration_set, Shapes::ShapeRef.new(shape: __string, location_name: "ConfigurationSet"))
     EmailChannelResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: __string, location_name: "CreationDate"))
     EmailChannelResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
     EmailChannelResponse.add_member(:from_address, Shapes::ShapeRef.new(shape: __string, location_name: "FromAddress"))
@@ -844,6 +852,15 @@ module Aws::Pinpoint
     EmailChannelResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "RoleArn"))
     EmailChannelResponse.add_member(:version, Shapes::ShapeRef.new(shape: __integer, location_name: "Version"))
     EmailChannelResponse.struct_class = Types::EmailChannelResponse
+
+    EmailMessage.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
+    EmailMessage.add_member(:feedback_forwarding_address, Shapes::ShapeRef.new(shape: __string, location_name: "FeedbackForwardingAddress"))
+    EmailMessage.add_member(:from_address, Shapes::ShapeRef.new(shape: __string, location_name: "FromAddress"))
+    EmailMessage.add_member(:raw_email, Shapes::ShapeRef.new(shape: RawEmail, location_name: "RawEmail"))
+    EmailMessage.add_member(:reply_to_addresses, Shapes::ShapeRef.new(shape: ListOf__string, location_name: "ReplyToAddresses"))
+    EmailMessage.add_member(:simple_email, Shapes::ShapeRef.new(shape: SimpleEmail, location_name: "SimpleEmail"))
+    EmailMessage.add_member(:substitutions, Shapes::ShapeRef.new(shape: MapOfListOf__string, location_name: "Substitutions"))
+    EmailMessage.struct_class = Types::EmailMessage
 
     EndpointBatchItem.add_member(:address, Shapes::ShapeRef.new(shape: __string, location_name: "Address"))
     EndpointBatchItem.add_member(:attributes, Shapes::ShapeRef.new(shape: MapOfListOf__string, location_name: "Attributes"))
@@ -1562,6 +1579,9 @@ module Aws::Pinpoint
     QuietTime.add_member(:start, Shapes::ShapeRef.new(shape: __string, location_name: "Start"))
     QuietTime.struct_class = Types::QuietTime
 
+    RawEmail.add_member(:data, Shapes::ShapeRef.new(shape: __blob, location_name: "Data"))
+    RawEmail.struct_class = Types::RawEmail
+
     RecencyDimension.add_member(:duration, Shapes::ShapeRef.new(shape: Duration, location_name: "Duration"))
     RecencyDimension.add_member(:recency_type, Shapes::ShapeRef.new(shape: RecencyType, location_name: "RecencyType"))
     RecencyDimension.struct_class = Types::RecencyDimension
@@ -1718,6 +1738,15 @@ module Aws::Pinpoint
     SetDimension.add_member(:dimension_type, Shapes::ShapeRef.new(shape: DimensionType, location_name: "DimensionType"))
     SetDimension.add_member(:values, Shapes::ShapeRef.new(shape: ListOf__string, location_name: "Values"))
     SetDimension.struct_class = Types::SetDimension
+
+    SimpleEmail.add_member(:html_part, Shapes::ShapeRef.new(shape: SimpleEmailPart, location_name: "HtmlPart"))
+    SimpleEmail.add_member(:subject, Shapes::ShapeRef.new(shape: SimpleEmailPart, location_name: "Subject"))
+    SimpleEmail.add_member(:text_part, Shapes::ShapeRef.new(shape: SimpleEmailPart, location_name: "TextPart"))
+    SimpleEmail.struct_class = Types::SimpleEmail
+
+    SimpleEmailPart.add_member(:charset, Shapes::ShapeRef.new(shape: __string, location_name: "Charset"))
+    SimpleEmailPart.add_member(:data, Shapes::ShapeRef.new(shape: __string, location_name: "Data"))
+    SimpleEmailPart.struct_class = Types::SimpleEmailPart
 
     TreatmentResource.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
     TreatmentResource.add_member(:message_configuration, Shapes::ShapeRef.new(shape: MessageConfiguration, location_name: "MessageConfiguration"))

@@ -1185,6 +1185,7 @@ module Aws::APIGateway
     Stage.add_member(:access_log_settings, Shapes::ShapeRef.new(shape: AccessLogSettings, location_name: "accessLogSettings"))
     Stage.add_member(:canary_settings, Shapes::ShapeRef.new(shape: CanarySettings, location_name: "canarySettings"))
     Stage.add_member(:tracing_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "tracingEnabled"))
+    Stage.add_member(:web_acl_arn, Shapes::ShapeRef.new(shape: String, location_name: "webAclArn"))
     Stage.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
     Stage.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
     Stage.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))

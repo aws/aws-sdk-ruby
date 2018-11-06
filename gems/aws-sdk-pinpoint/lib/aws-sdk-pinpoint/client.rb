@@ -1492,6 +1492,7 @@ module Aws::Pinpoint
     # @example Response structure
     #
     #   resp.email_channel_response.application_id #=> String
+    #   resp.email_channel_response.configuration_set #=> String
     #   resp.email_channel_response.creation_date #=> String
     #   resp.email_channel_response.enabled #=> Boolean
     #   resp.email_channel_response.from_address #=> String
@@ -3136,6 +3137,7 @@ module Aws::Pinpoint
     # @example Response structure
     #
     #   resp.email_channel_response.application_id #=> String
+    #   resp.email_channel_response.configuration_set #=> String
     #   resp.email_channel_response.creation_date #=> String
     #   resp.email_channel_response.enabled #=> Boolean
     #   resp.email_channel_response.from_address #=> String
@@ -4227,7 +4229,7 @@ module Aws::Pinpoint
     # Returns information about the specified phone number.
     #
     # @option params [required, Types::NumberValidateRequest] :number_validate_request
-    #   Phone Number Information request.
+    #   Phone Number Validate request.
     #
     # @return [Types::PhoneNumberValidateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4314,7 +4316,7 @@ module Aws::Pinpoint
     # @option params [required, String] :application_id
     #
     # @option params [required, Types::EventsRequest] :events_request
-    #   Put Events request
+    #   A set of events to process.
     #
     # @return [Types::PutEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4577,6 +4579,32 @@ module Aws::Pinpoint
     #           title: "__string",
     #           url: "__string",
     #         },
+    #         email_message: {
+    #           body: "__string",
+    #           feedback_forwarding_address: "__string",
+    #           from_address: "__string",
+    #           raw_email: {
+    #             data: "data",
+    #           },
+    #           reply_to_addresses: ["__string"],
+    #           simple_email: {
+    #             html_part: {
+    #               charset: "__string",
+    #               data: "__string",
+    #             },
+    #             subject: {
+    #               charset: "__string",
+    #               data: "__string",
+    #             },
+    #             text_part: {
+    #               charset: "__string",
+    #               data: "__string",
+    #             },
+    #           },
+    #           substitutions: {
+    #             "__string" => ["__string"],
+    #           },
+    #         },
     #         gcm_message: {
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #           body: "__string",
@@ -4745,6 +4773,32 @@ module Aws::Pinpoint
     #           },
     #           title: "__string",
     #           url: "__string",
+    #         },
+    #         email_message: {
+    #           body: "__string",
+    #           feedback_forwarding_address: "__string",
+    #           from_address: "__string",
+    #           raw_email: {
+    #             data: "data",
+    #           },
+    #           reply_to_addresses: ["__string"],
+    #           simple_email: {
+    #             html_part: {
+    #               charset: "__string",
+    #               data: "__string",
+    #             },
+    #             subject: {
+    #               charset: "__string",
+    #               data: "__string",
+    #             },
+    #             text_part: {
+    #               charset: "__string",
+    #               data: "__string",
+    #             },
+    #           },
+    #           substitutions: {
+    #             "__string" => ["__string"],
+    #           },
     #         },
     #         gcm_message: {
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -5610,6 +5664,7 @@ module Aws::Pinpoint
     #   resp = client.update_email_channel({
     #     application_id: "__string", # required
     #     email_channel_request: { # required
+    #       configuration_set: "__string",
     #       enabled: false,
     #       from_address: "__string",
     #       identity: "__string",
@@ -5620,6 +5675,7 @@ module Aws::Pinpoint
     # @example Response structure
     #
     #   resp.email_channel_response.application_id #=> String
+    #   resp.email_channel_response.configuration_set #=> String
     #   resp.email_channel_response.creation_date #=> String
     #   resp.email_channel_response.enabled #=> Boolean
     #   resp.email_channel_response.from_address #=> String
@@ -5650,7 +5706,7 @@ module Aws::Pinpoint
     # @option params [required, String] :endpoint_id
     #
     # @option params [required, Types::EndpointRequest] :endpoint_request
-    #   Endpoint update request
+    #   An endpoint update request.
     #
     # @return [Types::UpdateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6172,7 +6228,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
