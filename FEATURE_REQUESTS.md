@@ -370,3 +370,9 @@ See [related GitHub issue #1683](https://github.com/aws/aws-sdk-ruby/issues/1683
 Typos in resource models cannot be fixed directly without causing breaking changes.
 
 See [related GitHub issue #1837](https://github.com/aws/aws-sdk-ruby/issues/1837).
+
+### Support ca_bundle in ~/.aws/config
+
+Match CLI support of ca_bundle being specified in config
+
+See [related GitHub issue #1907](https://github.com/aws/aws-sdk-ruby/issues/1907)
