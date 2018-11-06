@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.165 (2018-11-06)
+------------------
+
 * Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
 
 * Feature - Aws::CodeBuild - Updated the documentation for AWS CodeBuild.
