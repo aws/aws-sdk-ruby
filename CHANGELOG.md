@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::S3::Encryption::IOAuthDecrypter - Backport fix for GCM decryption.
+
 2.11.164 (2018-11-05)
 ------------------
 
