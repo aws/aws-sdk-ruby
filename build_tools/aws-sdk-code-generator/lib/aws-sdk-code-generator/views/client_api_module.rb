@@ -38,6 +38,7 @@ module AwsSdkCodeGenerator
         'fault' => false,
         'error' => false,
         'deprecated' => false,
+        'deprecatedMessage' => false,
         'type' => false,
         'documentation' => false,
         'members' => false,
