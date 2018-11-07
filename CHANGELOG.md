@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.166 (2018-11-07)
+------------------
+
 * Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
 
 * Feature - Aws::DatabaseMigrationService - Updated the waiters for AWS Database Migration Service.
