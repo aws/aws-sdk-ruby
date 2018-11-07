@@ -186,7 +186,7 @@ module AwsSdkCodeGenerator
               # "endpointdiscovery" trait per operation
               # contains hash values of configuration,
               # current acked field: "required"
-              o.endpoint_discovery_exist = true
+              o.endpoint_discovery_available = true
               o.endpoint_discovery = operation['endpointdiscovery'].inject([]) do |a, (k, v)|
                 a << { key: k.inspect, value: v.inspect }
                 a
@@ -469,7 +469,7 @@ module AwsSdkCodeGenerator
         attr_accessor :deprecated
 
         # @return [Boolean]
-        attr_accessor :endpoint_discovery_exist
+        attr_accessor :endpoint_discovery_available
 
         # @return [Boolean]
         attr_accessor :endpoint_operation

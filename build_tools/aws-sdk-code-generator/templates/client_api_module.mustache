@@ -42,13 +42,13 @@ module {{module_name}}
         {{#endpoint_operation}}
         o.endpoint_operation = true
         {{/endpoint_operation}}
-        {{#endpoint_discovery_exist}}
+        {{#endpoint_discovery_available}}
         o.endpoint_discovery = {
           {{#endpoint_discovery}}
           {{{key}}} => {{{value}}},
           {{/endpoint_discovery}}
         }
-        {{/endpoint_discovery_exist}}
+        {{/endpoint_discovery_available}}
         {{#authorizer}}
         o.authorizer = "{{authorizer}}"
         {{/authorizer}}
