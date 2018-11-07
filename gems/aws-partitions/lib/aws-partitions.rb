@@ -234,6 +234,7 @@ module Aws
             'AutoScalingPlans' => 'autoscaling',
             'Batch' => 'batch',
             'Budgets' => 'budgets',
+            'Chime' => 'chime',
             'Cloud9' => 'cloud9',
             'CloudDirectory' => 'clouddirectory',
             'CloudFormation' => 'cloudformation',

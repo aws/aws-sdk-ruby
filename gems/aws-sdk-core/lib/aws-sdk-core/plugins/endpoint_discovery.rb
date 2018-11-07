@@ -51,7 +51,7 @@ requests fetching endpoints information. Defaults to 60 sec.
         doc_type: 'Boolean',
         docstring: <<-DOCS
 When set to `true`, a thread polling for endpoints will be running in
-backgrounds very 60 secs (default). Defaults to `false`.
+the background every 60 secs (default). Defaults to `false`.
         DOCS
       )
 

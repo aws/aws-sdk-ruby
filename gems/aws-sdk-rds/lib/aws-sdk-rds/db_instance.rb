@@ -452,6 +452,12 @@ module Aws::RDS
       data[:deletion_protection]
     end
 
+    # Specifies the listener connection endpoint for SQL Server Always On.
+    # @return [Types::Endpoint]
+    def listener_endpoint
+      data[:listener_endpoint]
+    end
+
     # @!endgroup
 
     # @return [Client]

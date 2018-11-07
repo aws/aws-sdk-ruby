@@ -72,6 +72,107 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
+    # Information about a bulk deployment.
+    #
+    # @!attribute [rw] bulk_deployment_arn
+    #   The ARN of the bulk deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] bulk_deployment_id
+    #   The ID of the bulk deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time, in ISO format, when the deployment was created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/BulkDeployment AWS API Documentation
+    #
+    class BulkDeployment < Struct.new(
+      :bulk_deployment_arn,
+      :bulk_deployment_id,
+      :created_at)
+      include Aws::Structure
+    end
+
+    # Relevant metrics on input records processed during bulk deployment.
+    #
+    # @!attribute [rw] invalid_input_records
+    #   The total number of records that returned a non-retryable error. For
+    #   example, this can occur if a group record from the input file uses
+    #   an invalid format or specifies a nonexistent group version, or if
+    #   the execution role doesn't grant permission to deploy a group or
+    #   group version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] records_processed
+    #   The total number of group records from the input file that have been
+    #   processed so far, or attempted.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] retry_attempts
+    #   The total number of retry attempts during the bulk deployment.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/BulkDeploymentMetrics AWS API Documentation
+    #
+    class BulkDeploymentMetrics < Struct.new(
+      :invalid_input_records,
+      :records_processed,
+      :retry_attempts)
+      include Aws::Structure
+    end
+
+    # Information about an individual group deployment in a bulk deployment
+    # operation.
+    #
+    # @!attribute [rw] created_at
+    #   The time, in ISO format, when the deployment was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_arn
+    #   The ARN of the group deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_id
+    #   The ID of the group deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_status
+    #   The current status of the group deployment: ''Pending'',
+    #   ''InProgress'', ''Success'', or ''Failure''.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_type
+    #   The type of the deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_details
+    #   Details about the error.
+    #   @return [Array<Types::ErrorDetail>]
+    #
+    # @!attribute [rw] error_message
+    #   The error message for a failed deployment
+    #   @return [String]
+    #
+    # @!attribute [rw] group_arn
+    #   The ARN of the Greengrass group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/BulkDeploymentResult AWS API Documentation
+    #
+    class BulkDeploymentResult < Struct.new(
+      :created_at,
+      :deployment_arn,
+      :deployment_id,
+      :deployment_status,
+      :deployment_type,
+      :error_details,
+      :error_message,
+      :group_arn)
+      include Aws::Structure
+    end
+
     # Information about a Greengrass core's connectivity.
     #
     # @note When making an API call, you may pass ConnectivityInfo
@@ -127,7 +228,9 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The ID of the core.
+    #   A descriptive or arbitrary ID for the core. This value must be
+    #   unique within the core definition version. Max length is 128
+    #   characters with pattern ''\[a‑zA‑Z0‑9:\_‑\]+''.
     #   @return [String]
     #
     # @!attribute [rw] sync_shadow
@@ -1576,7 +1679,9 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The ID of the device.
+    #   A descriptive or arbitrary ID for the device. This value must be
+    #   unique within the device definition version. Max length is 128
+    #   characters with pattern ''\[a‑zA‑Z0‑9:\_‑\]+''.
     #   @return [String]
     #
     # @!attribute [rw] sync_shadow
@@ -1734,7 +1839,9 @@ module Aws::Greengrass
     #   @return [Types::FunctionConfiguration]
     #
     # @!attribute [rw] id
-    #   The ID of the Lambda function.
+    #   A descriptive or arbitrary ID for the function. This value must be
+    #   unique within the function definition version. Max length is 128
+    #   characters with pattern ''\[a‑zA‑Z0‑9:\_‑\]+''.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/Function AWS API Documentation
@@ -1956,6 +2063,57 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetBulkDeploymentStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bulk_deployment_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] bulk_deployment_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetBulkDeploymentStatusRequest AWS API Documentation
+    #
+    class GetBulkDeploymentStatusRequest < Struct.new(
+      :bulk_deployment_id)
+      include Aws::Structure
+    end
+
+    # Information about the status of a bulk deployment at the time of the
+    # request.
+    #
+    # @!attribute [rw] bulk_deployment_metrics
+    #   Relevant metrics on input records processed during bulk deployment.
+    #   @return [Types::BulkDeploymentMetrics]
+    #
+    # @!attribute [rw] bulk_deployment_status
+    #   The status of the bulk deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time, in ISO format, when the deployment was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_details
+    #   Error details
+    #   @return [Array<Types::ErrorDetail>]
+    #
+    # @!attribute [rw] error_message
+    #   Error message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetBulkDeploymentStatusResponse AWS API Documentation
+    #
+    class GetBulkDeploymentStatusResponse < Struct.new(
+      :bulk_deployment_metrics,
+      :bulk_deployment_status,
+      :created_at,
+      :error_details,
+      :error_message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetConnectivityInfoRequest
     #   data as a hash:
     #
@@ -2081,6 +2239,11 @@ module Aws::Greengrass
     #   The ID of the core definition version.
     #   @return [String]
     #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or ''null'' if there are
+    #   no additional results.
+    #   @return [String]
+    #
     # @!attribute [rw] version
     #   The version of the core definition version.
     #   @return [String]
@@ -2092,6 +2255,7 @@ module Aws::Greengrass
       :creation_timestamp,
       :definition,
       :id,
+      :next_token,
       :version)
       include Aws::Structure
     end
@@ -2121,7 +2285,8 @@ module Aws::Greengrass
     # Information about the status of a deployment for a group.
     #
     # @!attribute [rw] deployment_status
-    #   The status of the deployment.
+    #   The status of the deployment: ''Pending'', ''InProgress'',
+    #   ''Success'', or ''Failure''.
     #   @return [String]
     #
     # @!attribute [rw] deployment_type
@@ -2209,6 +2374,7 @@ module Aws::Greengrass
     #       {
     #         device_definition_id: "__string", # required
     #         device_definition_version_id: "__string", # required
+    #         next_token: "__string",
     #       }
     #
     # @!attribute [rw] device_definition_id
@@ -2217,11 +2383,15 @@ module Aws::Greengrass
     # @!attribute [rw] device_definition_version_id
     #   @return [String]
     #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeviceDefinitionVersionRequest AWS API Documentation
     #
     class GetDeviceDefinitionVersionRequest < Struct.new(
       :device_definition_id,
-      :device_definition_version_id)
+      :device_definition_version_id,
+      :next_token)
       include Aws::Structure
     end
 
@@ -2242,6 +2412,11 @@ module Aws::Greengrass
     #   The ID of the device definition version.
     #   @return [String]
     #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or ''null'' if there are
+    #   no additional results.
+    #   @return [String]
+    #
     # @!attribute [rw] version
     #   The version of the device definition version.
     #   @return [String]
@@ -2253,6 +2428,7 @@ module Aws::Greengrass
       :creation_timestamp,
       :definition,
       :id,
+      :next_token,
       :version)
       include Aws::Structure
     end
@@ -2314,6 +2490,7 @@ module Aws::Greengrass
     #       {
     #         function_definition_id: "__string", # required
     #         function_definition_version_id: "__string", # required
+    #         next_token: "__string",
     #       }
     #
     # @!attribute [rw] function_definition_id
@@ -2322,11 +2499,15 @@ module Aws::Greengrass
     # @!attribute [rw] function_definition_version_id
     #   @return [String]
     #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetFunctionDefinitionVersionRequest AWS API Documentation
     #
     class GetFunctionDefinitionVersionRequest < Struct.new(
       :function_definition_id,
-      :function_definition_version_id)
+      :function_definition_version_id,
+      :next_token)
       include Aws::Structure
     end
 
@@ -2349,6 +2530,11 @@ module Aws::Greengrass
     #   The ID of the function definition version.
     #   @return [String]
     #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or ''null'' if there are
+    #   no additional results.
+    #   @return [String]
+    #
     # @!attribute [rw] version
     #   The version of the function definition version.
     #   @return [String]
@@ -2360,6 +2546,7 @@ module Aws::Greengrass
       :creation_timestamp,
       :definition,
       :id,
+      :next_token,
       :version)
       include Aws::Structure
     end
@@ -2608,6 +2795,7 @@ module Aws::Greengrass
     #       {
     #         logger_definition_id: "__string", # required
     #         logger_definition_version_id: "__string", # required
+    #         next_token: "__string",
     #       }
     #
     # @!attribute [rw] logger_definition_id
@@ -2616,11 +2804,15 @@ module Aws::Greengrass
     # @!attribute [rw] logger_definition_version_id
     #   @return [String]
     #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetLoggerDefinitionVersionRequest AWS API Documentation
     #
     class GetLoggerDefinitionVersionRequest < Struct.new(
       :logger_definition_id,
-      :logger_definition_version_id)
+      :logger_definition_version_id,
+      :next_token)
       include Aws::Structure
     end
 
@@ -2842,9 +3034,13 @@ module Aws::Greengrass
     #   data as a hash:
     #
     #       {
+    #         next_token: "__string",
     #         subscription_definition_id: "__string", # required
     #         subscription_definition_version_id: "__string", # required
     #       }
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
     #
     # @!attribute [rw] subscription_definition_id
     #   @return [String]
@@ -2855,6 +3051,7 @@ module Aws::Greengrass
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetSubscriptionDefinitionVersionRequest AWS API Documentation
     #
     class GetSubscriptionDefinitionVersionRequest < Struct.new(
+      :next_token,
       :subscription_definition_id,
       :subscription_definition_version_id)
       include Aws::Structure
@@ -2879,6 +3076,11 @@ module Aws::Greengrass
     #   The ID of the subscription definition version.
     #   @return [String]
     #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or ''null'' if there are
+    #   no additional results.
+    #   @return [String]
+    #
     # @!attribute [rw] version
     #   The version of the subscription definition version.
     #   @return [String]
@@ -2890,6 +3092,7 @@ module Aws::Greengrass
       :creation_timestamp,
       :definition,
       :id,
+      :next_token,
       :version)
       include Aws::Structure
     end
@@ -3059,6 +3262,90 @@ module Aws::Greengrass
       :logger_definition_version_arn,
       :resource_definition_version_arn,
       :subscription_definition_version_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListBulkDeploymentDetailedReportsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bulk_deployment_id: "__string", # required
+    #         max_results: "__string",
+    #         next_token: "__string",
+    #       }
+    #
+    # @!attribute [rw] bulk_deployment_id
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListBulkDeploymentDetailedReportsRequest AWS API Documentation
+    #
+    class ListBulkDeploymentDetailedReportsRequest < Struct.new(
+      :bulk_deployment_id,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] deployments
+    #   A list of the individual group deployments in the bulk deployment
+    #   operation.
+    #   @return [Array<Types::BulkDeploymentResult>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or ''null'' if there are
+    #   no additional results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListBulkDeploymentDetailedReportsResponse AWS API Documentation
+    #
+    class ListBulkDeploymentDetailedReportsResponse < Struct.new(
+      :deployments,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListBulkDeploymentsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: "__string",
+    #         next_token: "__string",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListBulkDeploymentsRequest AWS API Documentation
+    #
+    class ListBulkDeploymentsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bulk_deployments
+    #   A list of bulk deployments.
+    #   @return [Array<Types::BulkDeployment>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or ''null'' if there are
+    #   no additional results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListBulkDeploymentsResponse AWS API Documentation
+    #
+    class ListBulkDeploymentsResponse < Struct.new(
+      :bulk_deployments,
+      :next_token)
       include Aws::Structure
     end
 
@@ -3772,7 +4059,7 @@ module Aws::Greengrass
     # @!attribute [rw] source_path
     #   The local absolute path of the volume resource on the host. The
     #   source path for a volume resource type cannot start with
-    #   ''/sys''.
+    #   ''/proc'' or ''/sys''.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/LocalVolumeResourceData AWS API Documentation
@@ -3802,7 +4089,9 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The id of the logger.
+    #   A descriptive or arbitrary ID for the logger. This value must be
+    #   unique within the logger definition version. Max length is 128
+    #   characters with pattern ''\[a‑zA‑Z0‑9:\_‑\]+''.
     #   @return [String]
     #
     # @!attribute [rw] level
@@ -4160,6 +4449,86 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
+    # Information about a bulk deployment. You cannot start a new bulk
+    # deployment while another one is still running or in a non-terminal
+    # state.
+    #
+    # @note When making an API call, you may pass StartBulkDeploymentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         amzn_client_token: "__string",
+    #         execution_role_arn: "__string",
+    #         input_file_uri: "__string",
+    #       }
+    #
+    # @!attribute [rw] amzn_client_token
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The ARN of the execution role to associate with the bulk deployment
+    #   operation. This IAM role must allow the
+    #   ''greengrass:CreateDeployment'' action for all group versions
+    #   that are listed in the input file. This IAM role must have access to
+    #   the S3 bucket containing the input file.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_file_uri
+    #   The URI of the input file contained in the S3 bucket. The execution
+    #   role must have ''getObject'' permissions on this bucket to
+    #   access the input file. The input file is a JSON-serialized, line
+    #   delimited file with UTF-8 encoding that provides a list of group and
+    #   version IDs and the deployment type. This file must be less than
+    #   100MB. Currently, Greengrass; supports only ''NewDeployment''
+    #   deployment types.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/StartBulkDeploymentRequest AWS API Documentation
+    #
+    class StartBulkDeploymentRequest < Struct.new(
+      :amzn_client_token,
+      :execution_role_arn,
+      :input_file_uri)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bulk_deployment_arn
+    #   The ARN of the bulk deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] bulk_deployment_id
+    #   The ID of the bulk deployment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/StartBulkDeploymentResponse AWS API Documentation
+    #
+    class StartBulkDeploymentResponse < Struct.new(
+      :bulk_deployment_arn,
+      :bulk_deployment_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopBulkDeploymentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bulk_deployment_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] bulk_deployment_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/StopBulkDeploymentRequest AWS API Documentation
+    #
+    class StopBulkDeploymentRequest < Struct.new(
+      :bulk_deployment_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/StopBulkDeploymentResponse AWS API Documentation
+    #
+    class StopBulkDeploymentResponse < Aws::EmptyStructure; end
+
     # Information about a subscription.
     #
     # @note When making an API call, you may pass Subscription
@@ -4173,7 +4542,9 @@ module Aws::Greengrass
     #       }
     #
     # @!attribute [rw] id
-    #   The id of the subscription.
+    #   A descriptive or arbitrary ID for the subscription. This value must
+    #   be unique within the subscription definition version. Max length is
+    #   128 characters with pattern ''\[a‑zA‑Z0‑9:\_‑\]+''.
     #   @return [String]
     #
     # @!attribute [rw] source

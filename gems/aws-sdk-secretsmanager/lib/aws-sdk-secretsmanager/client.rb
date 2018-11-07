@@ -329,10 +329,10 @@ module Aws::SecretsManager
     #   managed customer master key (CMK) with the alias
     #   `aws/secretsmanager`. If this key doesn't already exist in your
     #   account then Secrets Manager creates it for you automatically. All
-    #   users in the same AWS account automatically have access to use the
-    #   default CMK. Note that if an Secrets Manager API call results in AWS
-    #   having to create the account's AWS-managed CMK, it can result in a
-    #   one-time significant delay in returning the result.
+    #   users and roles in the same AWS account automatically have access to
+    #   use the default CMK. Note that if an Secrets Manager API call
+    #   results in AWS having to create the account's AWS-managed CMK, it
+    #   can result in a one-time significant delay in returning the result.
     #
     # * If the secret is in a different AWS account from the credentials
     #   calling an API that requires encryption or decryption of the secret
@@ -363,6 +363,9 @@ module Aws::SecretsManager
     # * kms:Decrypt - needed only if you use a customer-managed AWS KMS key
     #   to encrypt the secret. You do not need this permission to use the
     #   account's default AWS managed CMK for Secrets Manager.
+    #
+    # * secretsmanager:TagResource - needed only if you include the `Tags`
+    #   parameter.
     #
     # **Related operations**
     #
@@ -1713,10 +1716,10 @@ module Aws::SecretsManager
     #   managed customer master key (CMK) with the alias
     #   `aws/secretsmanager`. If this key doesn't already exist in your
     #   account then Secrets Manager creates it for you automatically. All
-    #   users in the same AWS account automatically have access to use the
-    #   default CMK. Note that if an Secrets Manager API call results in AWS
-    #   having to create the account's AWS-managed CMK, it can result in a
-    #   one-time significant delay in returning the result.
+    #   users and roles in the same AWS account automatically have access to
+    #   use the default CMK. Note that if an Secrets Manager API call
+    #   results in AWS having to create the account's AWS-managed CMK, it
+    #   can result in a one-time significant delay in returning the result.
     #
     # * If the secret is in a different AWS account from the credentials
     #   calling an API that requires encryption or decryption of the secret
@@ -2402,10 +2405,10 @@ module Aws::SecretsManager
     #   managed customer master key (CMK) with the alias
     #   `aws/secretsmanager`. If this key doesn't already exist in your
     #   account then Secrets Manager creates it for you automatically. All
-    #   users in the same AWS account automatically have access to use the
-    #   default CMK. Note that if an Secrets Manager API call results in AWS
-    #   having to create the account's AWS-managed CMK, it can result in a
-    #   one-time significant delay in returning the result.
+    #   users and roles in the same AWS account automatically have access to
+    #   use the default CMK. Note that if an Secrets Manager API call
+    #   results in AWS having to create the account's AWS-managed CMK, it
+    #   can result in a one-time significant delay in returning the result.
     #
     # * If the secret is in a different AWS account from the credentials
     #   calling an API that requires encryption or decryption of the secret
@@ -2719,11 +2722,11 @@ module Aws::SecretsManager
     #    </note>
     #
     # @option params [required, String] :version_stage
-    #   The list of staging labels to add to this version.
+    #   The staging label to add to this version.
     #
     # @option params [String] :remove_from_version_id
-    #   Specifies the secret version ID of the version that the staging labels
-    #   are to be removed from. If the staging label you are trying to attach
+    #   Specifies the secret version ID of the version that the staging label
+    #   is to be removed from. If the staging label you are trying to attach
     #   to one version is already attached to a different version, then you
     #   must include this parameter and specify the version that the label is
     #   to be removed from. If the label is attached and you either do not
@@ -2732,12 +2735,12 @@ module Aws::SecretsManager
     #
     # @option params [String] :move_to_version_id
     #   (Optional) The secret version ID that you want to add the staging
-    #   labels to. If you want to remove a label from a version, then do not
+    #   label to. If you want to remove a label from a version, then do not
     #   specify this parameter.
     #
-    #   If any of the staging labels are already attached to a different
-    #   version of the secret, then you must also specify the
-    #   `RemoveFromVersionId` parameter.
+    #   If the staging label is already attached to a different version of the
+    #   secret, then you must also specify the `RemoveFromVersionId`
+    #   parameter.
     #
     # @return [Types::UpdateSecretVersionStageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2835,7 +2838,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
