@@ -34,6 +34,16 @@ module Aws
       end
     end
 
+    # Rasied when endpoint discovery failed for operations
+    # that requires endpoints from endpoint discovery
+    class EndpointDiscoveryError < RuntimeError
+      def initialize(*args)
+        msg = 'Endpoint discovery failed for the operation or discovered endpoint is not working, '\
+          'request will keep failing until endpoint discovery succeeds or :endpoint option is provided.'
+        super(msg)
+      end
+    end
+
     # Raised when EventStream Parser failed to parse
     # a raw event message
     class EventStreamParserError < RuntimeError; end

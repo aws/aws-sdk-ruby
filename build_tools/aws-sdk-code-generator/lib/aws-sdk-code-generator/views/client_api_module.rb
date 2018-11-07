@@ -181,6 +181,17 @@ module AwsSdkCodeGenerator
             end
             o.error_shape_names = operation.fetch('errors', []).map {|e| e['shape'] }
             o.deprecated = true if operation['deprecated']
+            o.endpoint_operation = true if operation['endpointoperation']
+            if operation.key?('endpointdiscovery')
+              # "endpointdiscovery" trait per operation
+              # contains hash values of configuration,
+              # current acked field: "required"
+              o.endpoint_discovery_available = true
+              o.endpoint_discovery = operation['endpointdiscovery'].inject([]) do |a, (k, v)|
+                a << { key: k.inspect, value: v.inspect }
+                a
+              end
+            end
             o.authorizer = operation['authorizer'] if operation.key?('authorizer')
             o.authtype = operation['authtype'] if operation.key?('authtype')
             o.require_apikey = operation['requiresApiKey'] if operation.key?('requiresApiKey')
@@ -202,6 +213,13 @@ module AwsSdkCodeGenerator
             end
           end
         end
+      end
+
+      def endpoint_operation
+        @service.api['operations'].each do |name, ref|
+          return underscore(name) if ref['endpointoperation']
+        end
+        nil
       end
 
       private
@@ -449,6 +467,15 @@ module AwsSdkCodeGenerator
 
         # @return [Boolean]
         attr_accessor :deprecated
+
+        # @return [Boolean]
+        attr_accessor :endpoint_discovery_available
+
+        # @return [Boolean]
+        attr_accessor :endpoint_operation
+
+        # @return [Array]
+        attr_accessor :endpoint_discovery
 
         # @return [String,nil]
         attr_accessor :authtype

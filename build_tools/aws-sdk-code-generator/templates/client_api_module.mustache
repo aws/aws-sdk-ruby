@@ -27,6 +27,9 @@ module {{module_name}}
         {{{key}}} => {{{value}}},
         {{/metadata}}
       }
+      {{#endpoint_operation}}
+      api.endpoint_operation = :{{endpoint_operation}}
+      {{/endpoint_operation}}
       {{#operations}}
 
       api.add_operation(:{{method_name}}, Seahorse::Model::Operation.new.tap do |o|
@@ -36,6 +39,16 @@ module {{module_name}}
         {{#deprecated}}
         o.deprecated = true
         {{/deprecated}}
+        {{#endpoint_operation}}
+        o.endpoint_operation = true
+        {{/endpoint_operation}}
+        {{#endpoint_discovery_available}}
+        o.endpoint_discovery = {
+          {{#endpoint_discovery}}
+          {{{key}}} => {{{value}}},
+          {{/endpoint_discovery}}
+        }
+        {{/endpoint_discovery_available}}
         {{#authorizer}}
         o.authorizer = "{{authorizer}}"
         {{/authorizer}}

@@ -1107,11 +1107,14 @@ module Aws::DynamoDB
         "targetPrefix" => "DynamoDB_20120810",
         "uid" => "dynamodb-2012-08-10",
       }
+      api.endpoint_operation = :describe_endpoints
 
       api.add_operation(:batch_get_item, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchGetItem"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: BatchGetItemInput)
         o.output = Shapes::ShapeRef.new(shape: BatchGetItemOutput)
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
@@ -1128,6 +1131,8 @@ module Aws::DynamoDB
         o.name = "BatchWriteItem"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: BatchWriteItemInput)
         o.output = Shapes::ShapeRef.new(shape: BatchWriteItemOutput)
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
@@ -1140,6 +1145,8 @@ module Aws::DynamoDB
         o.name = "CreateBackup"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: CreateBackupInput)
         o.output = Shapes::ShapeRef.new(shape: CreateBackupOutput)
         o.errors << Shapes::ShapeRef.new(shape: TableNotFoundException)
@@ -1154,6 +1161,8 @@ module Aws::DynamoDB
         o.name = "CreateGlobalTable"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: CreateGlobalTableInput)
         o.output = Shapes::ShapeRef.new(shape: CreateGlobalTableOutput)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1166,6 +1175,8 @@ module Aws::DynamoDB
         o.name = "CreateTable"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: CreateTableInput)
         o.output = Shapes::ShapeRef.new(shape: CreateTableOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
@@ -1177,6 +1188,8 @@ module Aws::DynamoDB
         o.name = "DeleteBackup"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: DeleteBackupInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteBackupOutput)
         o.errors << Shapes::ShapeRef.new(shape: BackupNotFoundException)
@@ -1189,6 +1202,8 @@ module Aws::DynamoDB
         o.name = "DeleteItem"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: DeleteItemInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteItemOutput)
         o.errors << Shapes::ShapeRef.new(shape: ConditionalCheckFailedException)
@@ -1202,6 +1217,8 @@ module Aws::DynamoDB
         o.name = "DeleteTable"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: DeleteTableInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteTableOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
@@ -1214,6 +1231,8 @@ module Aws::DynamoDB
         o.name = "DescribeBackup"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: DescribeBackupInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeBackupOutput)
         o.errors << Shapes::ShapeRef.new(shape: BackupNotFoundException)
@@ -1224,6 +1243,8 @@ module Aws::DynamoDB
         o.name = "DescribeContinuousBackups"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: DescribeContinuousBackupsInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeContinuousBackupsOutput)
         o.errors << Shapes::ShapeRef.new(shape: TableNotFoundException)
@@ -1234,6 +1255,7 @@ module Aws::DynamoDB
         o.name = "DescribeEndpoints"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_operation = true
         o.input = Shapes::ShapeRef.new(shape: DescribeEndpointsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeEndpointsResponse)
       end)
@@ -1242,6 +1264,8 @@ module Aws::DynamoDB
         o.name = "DescribeGlobalTable"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: DescribeGlobalTableInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeGlobalTableOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
@@ -1252,6 +1276,8 @@ module Aws::DynamoDB
         o.name = "DescribeGlobalTableSettings"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: DescribeGlobalTableSettingsInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeGlobalTableSettingsOutput)
         o.errors << Shapes::ShapeRef.new(shape: GlobalTableNotFoundException)
@@ -1262,6 +1288,8 @@ module Aws::DynamoDB
         o.name = "DescribeLimits"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: DescribeLimitsInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeLimitsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
@@ -1271,6 +1299,8 @@ module Aws::DynamoDB
         o.name = "DescribeTable"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: DescribeTableInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeTableOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1281,6 +1311,8 @@ module Aws::DynamoDB
         o.name = "DescribeTimeToLive"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: DescribeTimeToLiveInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeTimeToLiveOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1291,6 +1323,8 @@ module Aws::DynamoDB
         o.name = "GetItem"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: GetItemInput)
         o.output = Shapes::ShapeRef.new(shape: GetItemOutput)
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
@@ -1302,6 +1336,8 @@ module Aws::DynamoDB
         o.name = "ListBackups"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: ListBackupsInput)
         o.output = Shapes::ShapeRef.new(shape: ListBackupsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
@@ -1311,6 +1347,8 @@ module Aws::DynamoDB
         o.name = "ListGlobalTables"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: ListGlobalTablesInput)
         o.output = Shapes::ShapeRef.new(shape: ListGlobalTablesOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
@@ -1320,6 +1358,8 @@ module Aws::DynamoDB
         o.name = "ListTables"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: ListTablesInput)
         o.output = Shapes::ShapeRef.new(shape: ListTablesOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
@@ -1335,6 +1375,8 @@ module Aws::DynamoDB
         o.name = "ListTagsOfResource"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: ListTagsOfResourceInput)
         o.output = Shapes::ShapeRef.new(shape: ListTagsOfResourceOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1345,6 +1387,8 @@ module Aws::DynamoDB
         o.name = "PutItem"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: PutItemInput)
         o.output = Shapes::ShapeRef.new(shape: PutItemOutput)
         o.errors << Shapes::ShapeRef.new(shape: ConditionalCheckFailedException)
@@ -1358,6 +1402,8 @@ module Aws::DynamoDB
         o.name = "Query"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: QueryInput)
         o.output = Shapes::ShapeRef.new(shape: QueryOutput)
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
@@ -1375,6 +1421,8 @@ module Aws::DynamoDB
         o.name = "RestoreTableFromBackup"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: RestoreTableFromBackupInput)
         o.output = Shapes::ShapeRef.new(shape: RestoreTableFromBackupOutput)
         o.errors << Shapes::ShapeRef.new(shape: TableAlreadyExistsException)
@@ -1389,6 +1437,8 @@ module Aws::DynamoDB
         o.name = "RestoreTableToPointInTime"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: RestoreTableToPointInTimeInput)
         o.output = Shapes::ShapeRef.new(shape: RestoreTableToPointInTimeOutput)
         o.errors << Shapes::ShapeRef.new(shape: TableAlreadyExistsException)
@@ -1404,6 +1454,8 @@ module Aws::DynamoDB
         o.name = "Scan"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: ScanInput)
         o.output = Shapes::ShapeRef.new(shape: ScanOutput)
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
@@ -1421,6 +1473,8 @@ module Aws::DynamoDB
         o.name = "TagResource"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: TagResourceInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1433,6 +1487,8 @@ module Aws::DynamoDB
         o.name = "UntagResource"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1445,6 +1501,8 @@ module Aws::DynamoDB
         o.name = "UpdateContinuousBackups"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: UpdateContinuousBackupsInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateContinuousBackupsOutput)
         o.errors << Shapes::ShapeRef.new(shape: TableNotFoundException)
@@ -1456,6 +1514,8 @@ module Aws::DynamoDB
         o.name = "UpdateGlobalTable"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: UpdateGlobalTableInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateGlobalTableOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
@@ -1469,6 +1529,8 @@ module Aws::DynamoDB
         o.name = "UpdateGlobalTableSettings"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: UpdateGlobalTableSettingsInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateGlobalTableSettingsOutput)
         o.errors << Shapes::ShapeRef.new(shape: GlobalTableNotFoundException)
@@ -1483,6 +1545,8 @@ module Aws::DynamoDB
         o.name = "UpdateItem"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: UpdateItemInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateItemOutput)
         o.errors << Shapes::ShapeRef.new(shape: ConditionalCheckFailedException)
@@ -1496,6 +1560,8 @@ module Aws::DynamoDB
         o.name = "UpdateTable"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: UpdateTableInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateTableOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
@@ -1508,6 +1574,8 @@ module Aws::DynamoDB
         o.name = "UpdateTimeToLive"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
         o.input = Shapes::ShapeRef.new(shape: UpdateTimeToLiveInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateTimeToLiveOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)

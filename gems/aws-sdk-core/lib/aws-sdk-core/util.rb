@@ -52,6 +52,15 @@ module Aws
         end
       end
 
+      def str_2_bool(str)
+        case str.to_s
+        when "true" then true
+        when "false" then false
+        else
+          nil
+        end
+      end
+
     end
   end
 end

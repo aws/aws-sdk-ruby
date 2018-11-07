@@ -120,12 +120,32 @@ A delay randomiser function used by the default backoff function. Some predefine
           (500..599).include?(@http_status_code)
         end
 
+        def endpoint_discovery?(context)
+          return false unless context.operation.endpoint_discovery
+
+          if @http_status_code == 421 ||
+            extract_name(@error) == 'InvalidEndpointException'
+            @error = Errors::EndpointDiscoveryError.new
+          end
+
+          # When endpoint discovery error occurs
+          # evict the endpoint from cache
+          if @error.is_a?(Errors::EndpointDiscoveryError)
+            key = context.config.endpoint_cache.extract_key(context)
+            context.config.endpoint_cache.delete(key)
+            true
+          else
+            false
+          end
+        end
+          
         def retryable?(context)
           (expired_credentials? and refreshable_credentials?(context)) or
             throttling_error? or
             checksum? or
             networking? or
-            server?
+            server? or
+            endpoint_discovery?(context)
         end
 
         private

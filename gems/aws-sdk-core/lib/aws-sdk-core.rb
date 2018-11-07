@@ -64,8 +64,13 @@ require_relative 'aws-sdk-core/xml'
 require_relative 'aws-sdk-core/json'
 
 # event stream
+
 require_relative 'aws-sdk-core/binary'
 require_relative 'aws-sdk-core/event_emitter'
+
+# endpoint discovery
+
+require_relative 'aws-sdk-core/endpoint_cache'
 
 # client metrics
 

@@ -136,6 +136,13 @@ module Aws
       end
     end
 
+    def endpoint_discovery(opts = {})
+      p = opts[:profile] || @profile_name
+      if @config_enabled && @parsed_config
+        @parsed_config.fetch(p, {})["endpoint_discovery_enabled"]
+      end
+    end
+
     def credentials_process(profile)
       validate_profile_exists(profile)
       @parsed_config[profile]['credential_process']
