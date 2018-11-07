@@ -4284,7 +4284,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -4359,7 +4359,7 @@ module Aws::DatabaseMigrationService
     # | replication_task_ready         | {#describe_replication_tasks}     | 15       | 60            |
     # | replication_task_running       | {#describe_replication_tasks}     | 15       | 60            |
     # | replication_task_stopped       | {#describe_replication_tasks}     | 15       | 60            |
-    # | test_connection_succeeds       | {#test_connection}                | 5        | 60            |
+    # | test_connection_succeeds       | {#describe_connections}           | 5        | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

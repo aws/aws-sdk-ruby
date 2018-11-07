@@ -17759,7 +17759,9 @@ module Aws::EC2
     #           },
     #         ],
     #         dry_run: false,
+    #         encrypted: false,
     #         hypervisor: "String",
+    #         kms_key_id: "String",
     #         license_type: "String",
     #         platform: "String",
     #         role_name: "String",
@@ -17794,10 +17796,54 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] encrypted
+    #   Specifies whether the destination AMI of the imported image should
+    #   be encrypted. The default CMK for EBS is used unless you specify a
+    #   non-default AWS Key Management Service (AWS KMS) CMK using
+    #   `KmsKeyId`. For more information, see [Amazon EBS Encryption][1] in
+    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #   @return [Boolean]
+    #
     # @!attribute [rw] hypervisor
     #   The target hypervisor platform.
     #
     #   Valid values: `xen`
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   An identifier for the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) to use when creating the encrypted AMI. This
+    #   parameter is only required if you want to use a non-default CMK; if
+    #   this parameter is not specified, the default CMK for EBS is used. If
+    #   a `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #
+    #   The CMK identifier may be provided in any of the following formats:
+    #
+    #   * Key ID
+    #
+    #   * Key alias, in the form `alias/ExampleAlias `
+    #
+    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
+    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     owner, the `key` namespace, and then the CMK ID. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #
+    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
+    #     namespace, followed by the region of the CMK, the AWS account ID
+    #     of the CMK owner, the `alias` namespace, and then the CMK alias.
+    #     For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #
+    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you
+    #   call may appear to complete even though you provided an invalid
+    #   identifier. This action will eventually report failure.
+    #
+    #   The specified CMK must exist in the region that the AMI is being
+    #   copied to.
     #   @return [String]
     #
     # @!attribute [rw] license_type
@@ -17836,7 +17882,9 @@ module Aws::EC2
       :description,
       :disk_containers,
       :dry_run,
+      :encrypted,
       :hypervisor,
+      :kms_key_id,
       :license_type,
       :platform,
       :role_name)
@@ -17853,6 +17901,10 @@ module Aws::EC2
     #   A description of the import task.
     #   @return [String]
     #
+    # @!attribute [rw] encrypted
+    #   Indicates whether the AMI is encypted.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] hypervisor
     #   The target hypervisor of the import task.
     #   @return [String]
@@ -17863,6 +17915,11 @@ module Aws::EC2
     #
     # @!attribute [rw] import_task_id
     #   The task ID of the import image task.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The identifier for the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) that was used to create the encrypted AMI.
     #   @return [String]
     #
     # @!attribute [rw] license_type
@@ -17894,9 +17951,11 @@ module Aws::EC2
     class ImportImageResult < Struct.new(
       :architecture,
       :description,
+      :encrypted,
       :hypervisor,
       :image_id,
       :import_task_id,
+      :kms_key_id,
       :license_type,
       :platform,
       :progress,
@@ -17918,6 +17977,10 @@ module Aws::EC2
     #   A description of the import task.
     #   @return [String]
     #
+    # @!attribute [rw] encrypted
+    #   Indicates whether the image is encrypted.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] hypervisor
     #   The target hypervisor for the import task.
     #
@@ -17931,6 +17994,11 @@ module Aws::EC2
     #
     # @!attribute [rw] import_task_id
     #   The ID of the import image task.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The identifier for the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) that was used to create the encrypted image.
     #   @return [String]
     #
     # @!attribute [rw] license_type
@@ -17962,9 +18030,11 @@ module Aws::EC2
     class ImportImageTask < Struct.new(
       :architecture,
       :description,
+      :encrypted,
       :hypervisor,
       :image_id,
       :import_task_id,
+      :kms_key_id,
       :license_type,
       :platform,
       :progress,
@@ -18311,6 +18381,8 @@ module Aws::EC2
     #           },
     #         },
     #         dry_run: false,
+    #         encrypted: false,
+    #         kms_key_id: "String",
     #         role_name: "String",
     #       }
     #
@@ -18337,6 +18409,50 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] encrypted
+    #   Specifies whether the destination snapshot of the imported image
+    #   should be encrypted. The default CMK for EBS is used unless you
+    #   specify a non-default AWS Key Management Service (AWS KMS) CMK using
+    #   `KmsKeyId`. For more information, see [Amazon EBS Encryption][1] in
+    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_id
+    #   An identifier for the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) to use when creating the encrypted snapshot. This
+    #   parameter is only required if you want to use a non-default CMK; if
+    #   this parameter is not specified, the default CMK for EBS is used. If
+    #   a `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #
+    #   The CMK identifier may be provided in any of the following formats:
+    #
+    #   * Key ID
+    #
+    #   * Key alias, in the form `alias/ExampleAlias `
+    #
+    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
+    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     owner, the `key` namespace, and then the CMK ID. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #
+    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
+    #     namespace, followed by the region of the CMK, the AWS account ID
+    #     of the CMK owner, the `alias` namespace, and then the CMK alias.
+    #     For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #
+    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you
+    #   call may appear to complete even though you provided an invalid
+    #   identifier. This action will eventually report failure.
+    #
+    #   The specified CMK must exist in the region that the snapshot is
+    #   being copied to.
+    #   @return [String]
+    #
     # @!attribute [rw] role_name
     #   The name of the role to use when not using the default role,
     #   'vmimport'.
@@ -18350,6 +18466,8 @@ module Aws::EC2
       :description,
       :disk_container,
       :dry_run,
+      :encrypted,
+      :kms_key_id,
       :role_name)
       include Aws::Structure
     end
@@ -29364,8 +29482,17 @@ module Aws::EC2
     #   The size of the disk in the snapshot, in GiB.
     #   @return [Float]
     #
+    # @!attribute [rw] encrypted
+    #   Indicates whether the snapshot is encrypted.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] format
     #   The format of the disk image from which the snapshot is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The identifier for the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) that was used to create the encrypted snapshot.
     #   @return [String]
     #
     # @!attribute [rw] progress
@@ -29397,7 +29524,9 @@ module Aws::EC2
     class SnapshotTaskDetail < Struct.new(
       :description,
       :disk_image_size,
+      :encrypted,
       :format,
+      :kms_key_id,
       :progress,
       :snapshot_id,
       :status,

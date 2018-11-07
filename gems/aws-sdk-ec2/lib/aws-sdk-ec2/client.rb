@@ -11233,9 +11233,11 @@ module Aws::EC2
     #   resp.import_image_tasks #=> Array
     #   resp.import_image_tasks[0].architecture #=> String
     #   resp.import_image_tasks[0].description #=> String
+    #   resp.import_image_tasks[0].encrypted #=> Boolean
     #   resp.import_image_tasks[0].hypervisor #=> String
     #   resp.import_image_tasks[0].image_id #=> String
     #   resp.import_image_tasks[0].import_task_id #=> String
+    #   resp.import_image_tasks[0].kms_key_id #=> String
     #   resp.import_image_tasks[0].license_type #=> String
     #   resp.import_image_tasks[0].platform #=> String
     #   resp.import_image_tasks[0].progress #=> String
@@ -11313,7 +11315,9 @@ module Aws::EC2
     #   resp.import_snapshot_tasks[0].import_task_id #=> String
     #   resp.import_snapshot_tasks[0].snapshot_task_detail.description #=> String
     #   resp.import_snapshot_tasks[0].snapshot_task_detail.disk_image_size #=> Float
+    #   resp.import_snapshot_tasks[0].snapshot_task_detail.encrypted #=> Boolean
     #   resp.import_snapshot_tasks[0].snapshot_task_detail.format #=> String
+    #   resp.import_snapshot_tasks[0].snapshot_task_detail.kms_key_id #=> String
     #   resp.import_snapshot_tasks[0].snapshot_task_detail.progress #=> String
     #   resp.import_snapshot_tasks[0].snapshot_task_detail.snapshot_id #=> String
     #   resp.import_snapshot_tasks[0].snapshot_task_detail.status #=> String
@@ -19973,10 +19977,52 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [Boolean] :encrypted
+    #   Specifies whether the destination AMI of the imported image should be
+    #   encrypted. The default CMK for EBS is used unless you specify a
+    #   non-default AWS Key Management Service (AWS KMS) CMK using `KmsKeyId`.
+    #   For more information, see [Amazon EBS Encryption][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #
     # @option params [String] :hypervisor
     #   The target hypervisor platform.
     #
     #   Valid values: `xen`
+    #
+    # @option params [String] :kms_key_id
+    #   An identifier for the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) to use when creating the encrypted AMI. This
+    #   parameter is only required if you want to use a non-default CMK; if
+    #   this parameter is not specified, the default CMK for EBS is used. If a
+    #   `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #
+    #   The CMK identifier may be provided in any of the following formats:
+    #
+    #   * Key ID
+    #
+    #   * Key alias, in the form `alias/ExampleAlias `
+    #
+    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
+    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     owner, the `key` namespace, and then the CMK ID. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #
+    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
+    #     namespace, followed by the region of the CMK, the AWS account ID of
+    #     the CMK owner, the `alias` namespace, and then the CMK alias. For
+    #     example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #
+    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you call
+    #   may appear to complete even though you provided an invalid identifier.
+    #   This action will eventually report failure.
+    #
+    #   The specified CMK must exist in the region that the AMI is being
+    #   copied to.
     #
     # @option params [String] :license_type
     #   The license type to be used for the Amazon Machine Image (AMI) after
@@ -20006,9 +20052,11 @@ module Aws::EC2
     #
     #   * {Types::ImportImageResult#architecture #architecture} => String
     #   * {Types::ImportImageResult#description #description} => String
+    #   * {Types::ImportImageResult#encrypted #encrypted} => Boolean
     #   * {Types::ImportImageResult#hypervisor #hypervisor} => String
     #   * {Types::ImportImageResult#image_id #image_id} => String
     #   * {Types::ImportImageResult#import_task_id #import_task_id} => String
+    #   * {Types::ImportImageResult#kms_key_id #kms_key_id} => String
     #   * {Types::ImportImageResult#license_type #license_type} => String
     #   * {Types::ImportImageResult#platform #platform} => String
     #   * {Types::ImportImageResult#progress #progress} => String
@@ -20042,7 +20090,9 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
+    #     encrypted: false,
     #     hypervisor: "String",
+    #     kms_key_id: "String",
     #     license_type: "String",
     #     platform: "String",
     #     role_name: "String",
@@ -20052,9 +20102,11 @@ module Aws::EC2
     #
     #   resp.architecture #=> String
     #   resp.description #=> String
+    #   resp.encrypted #=> Boolean
     #   resp.hypervisor #=> String
     #   resp.image_id #=> String
     #   resp.import_task_id #=> String
+    #   resp.kms_key_id #=> String
     #   resp.license_type #=> String
     #   resp.platform #=> String
     #   resp.progress #=> String
@@ -20277,6 +20329,48 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [Boolean] :encrypted
+    #   Specifies whether the destination snapshot of the imported image
+    #   should be encrypted. The default CMK for EBS is used unless you
+    #   specify a non-default AWS Key Management Service (AWS KMS) CMK using
+    #   `KmsKeyId`. For more information, see [Amazon EBS Encryption][1] in
+    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #
+    # @option params [String] :kms_key_id
+    #   An identifier for the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) to use when creating the encrypted snapshot. This
+    #   parameter is only required if you want to use a non-default CMK; if
+    #   this parameter is not specified, the default CMK for EBS is used. If a
+    #   `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #
+    #   The CMK identifier may be provided in any of the following formats:
+    #
+    #   * Key ID
+    #
+    #   * Key alias, in the form `alias/ExampleAlias `
+    #
+    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
+    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     owner, the `key` namespace, and then the CMK ID. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #
+    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
+    #     namespace, followed by the region of the CMK, the AWS account ID of
+    #     the CMK owner, the `alias` namespace, and then the CMK alias. For
+    #     example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #
+    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you call
+    #   may appear to complete even though you provided an invalid identifier.
+    #   This action will eventually report failure.
+    #
+    #   The specified CMK must exist in the region that the snapshot is being
+    #   copied to.
+    #
     # @option params [String] :role_name
     #   The name of the role to use when not using the default role,
     #   'vmimport'.
@@ -20308,6 +20402,8 @@ module Aws::EC2
     #       },
     #     },
     #     dry_run: false,
+    #     encrypted: false,
+    #     kms_key_id: "String",
     #     role_name: "String",
     #   })
     #
@@ -20317,7 +20413,9 @@ module Aws::EC2
     #   resp.import_task_id #=> String
     #   resp.snapshot_task_detail.description #=> String
     #   resp.snapshot_task_detail.disk_image_size #=> Float
+    #   resp.snapshot_task_detail.encrypted #=> Boolean
     #   resp.snapshot_task_detail.format #=> String
+    #   resp.snapshot_task_detail.kms_key_id #=> String
     #   resp.snapshot_task_detail.progress #=> String
     #   resp.snapshot_task_detail.snapshot_id #=> String
     #   resp.snapshot_task_detail.status #=> String
@@ -26593,7 +26691,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

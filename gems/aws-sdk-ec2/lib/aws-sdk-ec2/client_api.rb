@@ -3829,7 +3829,9 @@ module Aws::EC2
     ImportImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     ImportImageRequest.add_member(:disk_containers, Shapes::ShapeRef.new(shape: ImageDiskContainerList, location_name: "DiskContainer"))
     ImportImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ImportImageRequest.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "Encrypted"))
     ImportImageRequest.add_member(:hypervisor, Shapes::ShapeRef.new(shape: String, location_name: "Hypervisor"))
+    ImportImageRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     ImportImageRequest.add_member(:license_type, Shapes::ShapeRef.new(shape: String, location_name: "LicenseType"))
     ImportImageRequest.add_member(:platform, Shapes::ShapeRef.new(shape: String, location_name: "Platform"))
     ImportImageRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: String, location_name: "RoleName"))
@@ -3837,9 +3839,11 @@ module Aws::EC2
 
     ImportImageResult.add_member(:architecture, Shapes::ShapeRef.new(shape: String, location_name: "architecture"))
     ImportImageResult.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    ImportImageResult.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
     ImportImageResult.add_member(:hypervisor, Shapes::ShapeRef.new(shape: String, location_name: "hypervisor"))
     ImportImageResult.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
     ImportImageResult.add_member(:import_task_id, Shapes::ShapeRef.new(shape: String, location_name: "importTaskId"))
+    ImportImageResult.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
     ImportImageResult.add_member(:license_type, Shapes::ShapeRef.new(shape: String, location_name: "licenseType"))
     ImportImageResult.add_member(:platform, Shapes::ShapeRef.new(shape: String, location_name: "platform"))
     ImportImageResult.add_member(:progress, Shapes::ShapeRef.new(shape: String, location_name: "progress"))
@@ -3850,9 +3854,11 @@ module Aws::EC2
 
     ImportImageTask.add_member(:architecture, Shapes::ShapeRef.new(shape: String, location_name: "architecture"))
     ImportImageTask.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    ImportImageTask.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
     ImportImageTask.add_member(:hypervisor, Shapes::ShapeRef.new(shape: String, location_name: "hypervisor"))
     ImportImageTask.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
     ImportImageTask.add_member(:import_task_id, Shapes::ShapeRef.new(shape: String, location_name: "importTaskId"))
+    ImportImageTask.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
     ImportImageTask.add_member(:license_type, Shapes::ShapeRef.new(shape: String, location_name: "licenseType"))
     ImportImageTask.add_member(:platform, Shapes::ShapeRef.new(shape: String, location_name: "platform"))
     ImportImageTask.add_member(:progress, Shapes::ShapeRef.new(shape: String, location_name: "progress"))
@@ -3917,6 +3923,8 @@ module Aws::EC2
     ImportSnapshotRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     ImportSnapshotRequest.add_member(:disk_container, Shapes::ShapeRef.new(shape: SnapshotDiskContainer, location_name: "DiskContainer"))
     ImportSnapshotRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ImportSnapshotRequest.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "Encrypted"))
+    ImportSnapshotRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     ImportSnapshotRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: String, location_name: "RoleName"))
     ImportSnapshotRequest.struct_class = Types::ImportSnapshotRequest
 
@@ -5797,7 +5805,9 @@ module Aws::EC2
 
     SnapshotTaskDetail.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     SnapshotTaskDetail.add_member(:disk_image_size, Shapes::ShapeRef.new(shape: Double, location_name: "diskImageSize"))
+    SnapshotTaskDetail.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
     SnapshotTaskDetail.add_member(:format, Shapes::ShapeRef.new(shape: String, location_name: "format"))
+    SnapshotTaskDetail.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
     SnapshotTaskDetail.add_member(:progress, Shapes::ShapeRef.new(shape: String, location_name: "progress"))
     SnapshotTaskDetail.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
     SnapshotTaskDetail.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
