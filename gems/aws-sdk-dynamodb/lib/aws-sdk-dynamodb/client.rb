@@ -108,7 +108,7 @@ module Aws::DynamoDB
     #
     #   @option options [Boolean] :active_endpoint_cache (false)
     #     When set to `true`, a thread polling for endpoints will be running in
-    #     backgrounds very 60 secs (default). Defaults to `false`.
+    #     the background every 60 secs (default). Defaults to `false`.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from

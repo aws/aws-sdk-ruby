@@ -74,7 +74,8 @@
       "Aws::CloudSearchDomain::Plugins::SwitchToPost"
     ],
     "removePlugins": [
-      "Aws::Plugins::RegionalEndpoint"
+      "Aws::Plugins::RegionalEndpoint",
+      "Aws::Plugins::EndpointDiscovery"
     ]
   },
   "CloudTrail": {
