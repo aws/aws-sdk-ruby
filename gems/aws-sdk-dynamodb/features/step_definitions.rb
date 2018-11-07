@@ -11,11 +11,11 @@ When(/^I enable endpoint discovery at client$/) do
   @ed_client = Aws::DynamoDB::Client.new(endpoint_discovery: true)
 end
 
-When(/^I make #describe_limits call$/) do
+When(/^I make describe_limits call$/) do
   @resp = @ed_client.describe_limits
 end
 
-Then(/^I expect #describe_endpoints is called first$/) do
+Then(/^I expect describe_endpoints is called first$/) do
   expect(ApiCallTracker.called_operations.first).to eq(:describe_endpoints)
 end
 

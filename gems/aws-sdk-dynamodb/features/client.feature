@@ -19,7 +19,7 @@ Feature: Amazon DynamoDB
   @endpointdiscovery
   Scenario: Endpoint Discovery
     When I enable endpoint discovery at client
-    And I make #describe_limits call
-    Then I expect #describe_endpoints is called first
+    And I make describe_limits call
+    Then I expect describe_endpoints is called first
     And I expect API call is made through discovered endpoint
     And discovered endpoint is cached
