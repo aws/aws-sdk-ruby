@@ -55,6 +55,13 @@ module {{module_name}}
         {{#authtype}}
         o['authtype'] = "{{.}}"
         {{/authtype}}
+        {{#endpoint_trait}}
+        o.endpoint_pattern = {
+          {{#endpoint_pattern}}
+          {{{key}}} => {{{value}}},
+          {{/endpoint_pattern}}
+        }
+        {{/endpoint_trait}}
         {{#require_apikey}}
         o.require_apikey = {{require_apikey}}
         {{/require_apikey}}

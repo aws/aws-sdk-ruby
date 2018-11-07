@@ -191,6 +191,14 @@ module AwsSdkCodeGenerator
                 a << { key: k.inspect, value: v.inspect }
                 a
               end
+            # endpoint trait cannot be co-exist with endpoint discovery
+            elsif operation.key?('endpoint')
+              # endpoint trait per operation, cannot be enabled with endpoint discovery
+              o.endpoint_trait = true
+              o.endpoint_pattern = operation['endpoint'].inject([]) do |a, (k, v)|
+                a << { key: k.inspect, value: v.inspect }
+                a
+              end
             end
             o.authorizer = operation['authorizer'] if operation.key?('authorizer')
             o.authtype = operation['authtype'] if operation.key?('authtype')
@@ -479,6 +487,12 @@ module AwsSdkCodeGenerator
 
         # @return [String,nil]
         attr_accessor :authtype
+
+        # @return [Boolean]
+        attr_accessor :endpoint_trait
+
+        # @return [Array]
+        attr_accessor :endpoint_pattern
 
         # APIG only
         # @return [Boolean]
