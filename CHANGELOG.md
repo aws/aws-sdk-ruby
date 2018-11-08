@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.167 (2018-11-08)
+------------------
+
 * Feature - Aws::DLM - Updated the API, and documentation for Amazon Data Lifecycle Manager.
 
 * Feature - Aws::CloudWatchEvents - Updated the documentation for Amazon CloudWatch Events.
