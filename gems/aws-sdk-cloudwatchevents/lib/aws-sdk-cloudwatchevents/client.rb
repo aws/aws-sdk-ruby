@@ -579,8 +579,18 @@ module Aws::CloudWatchEvents
     # the AWS organization ID in `Condition`, to grant permissions to all
     # accounts in that organization.
     #
+    # If you grant permissions using an organization, then accounts in that
+    # organization must specify a `RoleArn` with proper permissions when
+    # they use `PutTarget` to add your account's event bus as a target. For
+    # more information, see [Sending and Receiving Events Between AWS
+    # Accounts][1] in the *Amazon CloudWatch Events User Guide*.
+    #
     # The permission policy on the default event bus cannot exceed 10 KB in
     # size.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEvents-CrossAccountEventDelivery.html
     #
     # @option params [required, String] :action
     #   The action that you are enabling the other account to perform.
@@ -670,6 +680,26 @@ module Aws::CloudWatchEvents
     # in event patterns and rules. Be sure to use the correct ARN characters
     # when creating event patterns so that they match the ARN syntax in the
     # event you want to match.
+    #
+    # In CloudWatch Events, it is possible to create rules that lead to
+    # infinite loops, where a rule is fired repeatedly. For example, a rule
+    # might detect that ACLs have changed on an S3 bucket, and trigger
+    # software to change them to the desired state. If the rule is not
+    # written carefully, the subsequent change to the ACLs fires the rule
+    # again, creating an infinite loop.
+    #
+    # To prevent this, write the rules so that the triggered actions do not
+    # re-fire the same rule. For example, your rule could fire only if ACLs
+    # are found to be in a bad state, instead of after any change.
+    #
+    # An infinite loop can quickly cause higher than expected charges. We
+    # recommend that you use budgeting, which alerts you when charges exceed
+    # your specified limit. For more information, see [Managing Your Costs
+    # with Budgets][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/budgets-managing-costs.html
     #
     # @option params [required, String] :name
     #   The name of the rule that you are creating or updating.
@@ -792,6 +822,13 @@ module Aws::CloudWatchEvents
     # is not charged. For more information, see [Amazon CloudWatch
     # Pricing][2].
     #
+    # If you are setting the event bus of another account as the target, and
+    # that account granted permission to your account through an
+    # organization instead of directly by the account ID, then you must
+    # specify a `RoleArn` with proper permissions in the `Target` structure.
+    # For more information, see [Sending and Receiving Events Between AWS
+    # Accounts][3] in the *Amazon CloudWatch Events User Guide*.
+    #
     # For more information about enabling cross-account events, see
     # PutPermission.
     #
@@ -832,6 +869,7 @@ module Aws::CloudWatchEvents
     #
     # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/auth-and-access-control-cwe.html
     # [2]: https://aws.amazon.com/cloudwatch/pricing/
+    # [3]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEvents-CrossAccountEventDelivery.html
     #
     # @option params [required, String] :rule
     #   The name of the rule.
@@ -1050,7 +1088,7 @@ module Aws::CloudWatchEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchevents'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

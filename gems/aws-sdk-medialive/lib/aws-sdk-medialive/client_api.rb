@@ -152,6 +152,8 @@ module Aws::MediaLive
     FecOutputSettings = Shapes::StructureShape.new(name: 'FecOutputSettings')
     FixedAfd = Shapes::StringShape.new(name: 'FixedAfd')
     FixedModeScheduleActionStartSettings = Shapes::StructureShape.new(name: 'FixedModeScheduleActionStartSettings')
+    FollowModeScheduleActionStartSettings = Shapes::StructureShape.new(name: 'FollowModeScheduleActionStartSettings')
+    FollowPoint = Shapes::StringShape.new(name: 'FollowPoint')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     GatewayTimeoutException = Shapes::StructureShape.new(name: 'GatewayTimeoutException')
     GlobalConfiguration = Shapes::StructureShape.new(name: 'GlobalConfiguration')
@@ -232,6 +234,7 @@ module Aws::MediaLive
     InputSourceRequest = Shapes::StructureShape.new(name: 'InputSourceRequest')
     InputSpecification = Shapes::StructureShape.new(name: 'InputSpecification')
     InputState = Shapes::StringShape.new(name: 'InputState')
+    InputSwitchScheduleActionSettings = Shapes::StructureShape.new(name: 'InputSwitchScheduleActionSettings')
     InputType = Shapes::StringShape.new(name: 'InputType')
     InputWhitelistRule = Shapes::StructureShape.new(name: 'InputWhitelistRule')
     InputWhitelistRuleCidr = Shapes::StructureShape.new(name: 'InputWhitelistRuleCidr')
@@ -998,6 +1001,10 @@ module Aws::MediaLive
     FixedModeScheduleActionStartSettings.add_member(:time, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "time"))
     FixedModeScheduleActionStartSettings.struct_class = Types::FixedModeScheduleActionStartSettings
 
+    FollowModeScheduleActionStartSettings.add_member(:follow_point, Shapes::ShapeRef.new(shape: FollowPoint, required: true, location_name: "followPoint"))
+    FollowModeScheduleActionStartSettings.add_member(:reference_action_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "referenceActionName"))
+    FollowModeScheduleActionStartSettings.struct_class = Types::FollowModeScheduleActionStartSettings
+
     GlobalConfiguration.add_member(:initial_audio_gain, Shapes::ShapeRef.new(shape: __integerMinNegative60Max60, location_name: "initialAudioGain"))
     GlobalConfiguration.add_member(:input_end_action, Shapes::ShapeRef.new(shape: GlobalConfigurationInputEndAction, location_name: "inputEndAction"))
     GlobalConfiguration.add_member(:input_loss_behavior, Shapes::ShapeRef.new(shape: InputLossBehavior, location_name: "inputLossBehavior"))
@@ -1141,6 +1148,7 @@ module Aws::MediaLive
     Input.add_member(:type, Shapes::ShapeRef.new(shape: InputType, location_name: "type"))
     Input.struct_class = Types::Input
 
+    InputAttachment.add_member(:input_attachment_name, Shapes::ShapeRef.new(shape: __string, location_name: "inputAttachmentName"))
     InputAttachment.add_member(:input_id, Shapes::ShapeRef.new(shape: __string, location_name: "inputId"))
     InputAttachment.add_member(:input_settings, Shapes::ShapeRef.new(shape: InputSettings, location_name: "inputSettings"))
     InputAttachment.struct_class = Types::InputAttachment
@@ -1204,6 +1212,9 @@ module Aws::MediaLive
     InputSpecification.add_member(:maximum_bitrate, Shapes::ShapeRef.new(shape: InputMaximumBitrate, location_name: "maximumBitrate"))
     InputSpecification.add_member(:resolution, Shapes::ShapeRef.new(shape: InputResolution, location_name: "resolution"))
     InputSpecification.struct_class = Types::InputSpecification
+
+    InputSwitchScheduleActionSettings.add_member(:input_attachment_name_reference, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "inputAttachmentNameReference"))
+    InputSwitchScheduleActionSettings.struct_class = Types::InputSwitchScheduleActionSettings
 
     InputWhitelistRule.add_member(:cidr, Shapes::ShapeRef.new(shape: __string, location_name: "cidr"))
     InputWhitelistRule.struct_class = Types::InputWhitelistRule
@@ -1529,6 +1540,7 @@ module Aws::MediaLive
     ScheduleAction.add_member(:schedule_action_start_settings, Shapes::ShapeRef.new(shape: ScheduleActionStartSettings, required: true, location_name: "scheduleActionStartSettings"))
     ScheduleAction.struct_class = Types::ScheduleAction
 
+    ScheduleActionSettings.add_member(:input_switch_settings, Shapes::ShapeRef.new(shape: InputSwitchScheduleActionSettings, location_name: "inputSwitchSettings"))
     ScheduleActionSettings.add_member(:scte_35_return_to_network_settings, Shapes::ShapeRef.new(shape: Scte35ReturnToNetworkScheduleActionSettings, location_name: "scte35ReturnToNetworkSettings"))
     ScheduleActionSettings.add_member(:scte_35_splice_insert_settings, Shapes::ShapeRef.new(shape: Scte35SpliceInsertScheduleActionSettings, location_name: "scte35SpliceInsertSettings"))
     ScheduleActionSettings.add_member(:scte_35_time_signal_settings, Shapes::ShapeRef.new(shape: Scte35TimeSignalScheduleActionSettings, location_name: "scte35TimeSignalSettings"))
@@ -1537,6 +1549,7 @@ module Aws::MediaLive
     ScheduleActionSettings.struct_class = Types::ScheduleActionSettings
 
     ScheduleActionStartSettings.add_member(:fixed_mode_schedule_action_start_settings, Shapes::ShapeRef.new(shape: FixedModeScheduleActionStartSettings, location_name: "fixedModeScheduleActionStartSettings"))
+    ScheduleActionStartSettings.add_member(:follow_mode_schedule_action_start_settings, Shapes::ShapeRef.new(shape: FollowModeScheduleActionStartSettings, location_name: "followModeScheduleActionStartSettings"))
     ScheduleActionStartSettings.struct_class = Types::ScheduleActionStartSettings
 
     ScheduleDescribeResultModel.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))

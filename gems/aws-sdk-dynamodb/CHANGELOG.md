@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2018-11-08)
+------------------
+
 * Feature - Support `endpointdiscovery` for DynamoDB operations, set `:endpoint_discovery` to `true` to enable this feature
 
 1.15.0 (2018-10-24)

@@ -239,6 +239,7 @@ module Aws::DLM
     #       schedules: [
     #         {
     #           name: "ScheduleName",
+    #           copy_tags: false,
     #           tags_to_add: [
     #             {
     #               key: "String", # required
@@ -381,6 +382,7 @@ module Aws::DLM
     #   resp.policy.policy_details.target_tags[0].value #=> String
     #   resp.policy.policy_details.schedules #=> Array
     #   resp.policy.policy_details.schedules[0].name #=> String
+    #   resp.policy.policy_details.schedules[0].copy_tags #=> Boolean
     #   resp.policy.policy_details.schedules[0].tags_to_add #=> Array
     #   resp.policy.policy_details.schedules[0].tags_to_add[0].key #=> String
     #   resp.policy.policy_details.schedules[0].tags_to_add[0].value #=> String
@@ -439,6 +441,7 @@ module Aws::DLM
     #       schedules: [
     #         {
     #           name: "ScheduleName",
+    #           copy_tags: false,
     #           tags_to_add: [
     #             {
     #               key: "String", # required
@@ -480,7 +483,7 @@ module Aws::DLM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dlm'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
