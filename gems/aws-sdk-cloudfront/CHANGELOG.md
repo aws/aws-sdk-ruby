@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Update operation names sending over the wire. This has zero affect on current API code usage.
+
 1.10.0 (2018-10-24)
 ------------------
 
