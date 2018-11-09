@@ -935,6 +935,9 @@ module Aws::MediaLive
     #           {
     #             action_name: "__string", # required
     #             schedule_action_settings: { # required
+    #               input_switch_settings: {
+    #                 input_attachment_name_reference: "__string", # required
+    #               },
     #               scte_35_return_to_network_settings: {
     #                 splice_event_id: 1, # required
     #               },
@@ -992,6 +995,10 @@ module Aws::MediaLive
     #             schedule_action_start_settings: { # required
     #               fixed_mode_schedule_action_start_settings: {
     #                 time: "__string", # required
+    #               },
+    #               follow_mode_schedule_action_start_settings: {
+    #                 follow_point: "END", # required, accepts END, START
+    #                 reference_action_name: "__string", # required
     #               },
     #             },
     #           },
@@ -1069,6 +1076,9 @@ module Aws::MediaLive
     #             {
     #               action_name: "__string", # required
     #               schedule_action_settings: { # required
+    #                 input_switch_settings: {
+    #                   input_attachment_name_reference: "__string", # required
+    #                 },
     #                 scte_35_return_to_network_settings: {
     #                   splice_event_id: 1, # required
     #                 },
@@ -1126,6 +1136,10 @@ module Aws::MediaLive
     #               schedule_action_start_settings: { # required
     #                 fixed_mode_schedule_action_start_settings: {
     #                   time: "__string", # required
+    #                 },
+    #                 follow_mode_schedule_action_start_settings: {
+    #                   follow_point: "END", # required, accepts END, START
+    #                   reference_action_name: "__string", # required
     #                 },
     #               },
     #             },
@@ -2635,6 +2649,7 @@ module Aws::MediaLive
     #         },
     #         input_attachments: [
     #           {
+    #             input_attachment_name: "__string",
     #             input_id: "__string",
     #             input_settings: {
     #               audio_selectors: [
@@ -2843,7 +2858,7 @@ module Aws::MediaLive
     #             username: "__string",
     #           },
     #         ],
-    #         type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL
+    #         type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE
     #       }
     #
     # @!attribute [rw] destinations
@@ -4748,6 +4763,33 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Settings to specify if an action follows another.
+    #
+    # @note When making an API call, you may pass FollowModeScheduleActionStartSettings
+    #   data as a hash:
+    #
+    #       {
+    #         follow_point: "END", # required, accepts END, START
+    #         reference_action_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] follow_point
+    #   Identifies whether this action starts relative to the start or
+    #   relative to the end of the reference action.
+    #   @return [String]
+    #
+    # @!attribute [rw] reference_action_name
+    #   The action name of another action that this one refers to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FollowModeScheduleActionStartSettings AWS API Documentation
+    #
+    class FollowModeScheduleActionStartSettings < Struct.new(
+      :follow_point,
+      :reference_action_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GlobalConfiguration
     #   data as a hash:
     #
@@ -4774,10 +4816,13 @@ module Aws::MediaLive
     #   @return [Integer]
     #
     # @!attribute [rw] input_end_action
-    #   Indicates the action to take when the input completes (e.g.
-    #   end-of-file). Options include looping on the input (via
-    #   "switchAndLoopInputs") or transcoding black / color / slate images
-    #   per the "Input Loss Behavior" configuration (via "none").
+    #   Indicates the action to take when the current input completes (e.g.
+    #   end-of-file). When switchAndLoopInputs is configured the encoder
+    #   will restart at the beginning of the first input. When "none" is
+    #   configured the encoder will transcode either black, a solid color,
+    #   or a user specified slate images per the "Input Loss Behavior"
+    #   configuration until the next input switch occurs (which is
+    #   controlled through the Channel Schedule API).
     #   @return [String]
     #
     # @!attribute [rw] input_loss_behavior
@@ -5883,6 +5928,7 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         input_attachment_name: "__string",
     #         input_id: "__string",
     #         input_settings: {
     #           audio_selectors: [
@@ -5957,6 +6003,11 @@ module Aws::MediaLive
     #         },
     #       }
     #
+    # @!attribute [rw] input_attachment_name
+    #   User-specified name for the attachment. This is required if the user
+    #   wants to use this input in an input switch action.
+    #   @return [String]
+    #
     # @!attribute [rw] input_id
     #   The ID of the input
     #   @return [String]
@@ -5968,6 +6019,7 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputAttachment AWS API Documentation
     #
     class InputAttachment < Struct.new(
+      :input_attachment_name,
       :input_id,
       :input_settings)
       include Aws::Structure
@@ -6404,6 +6456,27 @@ module Aws::MediaLive
       :codec,
       :maximum_bitrate,
       :resolution)
+      include Aws::Structure
+    end
+
+    # Settings for the action to switch an input.
+    #
+    # @note When making an API call, you may pass InputSwitchScheduleActionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         input_attachment_name_reference: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] input_attachment_name_reference
+    #   The name of the input attachment that should be switched to by this
+    #   action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputSwitchScheduleActionSettings AWS API Documentation
+    #
+    class InputSwitchScheduleActionSettings < Struct.new(
+      :input_attachment_name_reference)
       include Aws::Structure
     end
 
@@ -9132,6 +9205,9 @@ module Aws::MediaLive
     #       {
     #         action_name: "__string", # required
     #         schedule_action_settings: { # required
+    #           input_switch_settings: {
+    #             input_attachment_name_reference: "__string", # required
+    #           },
     #           scte_35_return_to_network_settings: {
     #             splice_event_id: 1, # required
     #           },
@@ -9190,6 +9266,10 @@ module Aws::MediaLive
     #           fixed_mode_schedule_action_start_settings: {
     #             time: "__string", # required
     #           },
+    #           follow_mode_schedule_action_start_settings: {
+    #             follow_point: "END", # required, accepts END, START
+    #             reference_action_name: "__string", # required
+    #           },
     #         },
     #       }
     #
@@ -9225,6 +9305,9 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         input_switch_settings: {
+    #           input_attachment_name_reference: "__string", # required
+    #         },
     #         scte_35_return_to_network_settings: {
     #           splice_event_id: 1, # required
     #         },
@@ -9280,6 +9363,10 @@ module Aws::MediaLive
     #         },
     #       }
     #
+    # @!attribute [rw] input_switch_settings
+    #   Settings to switch an input
+    #   @return [Types::InputSwitchScheduleActionSettings]
+    #
     # @!attribute [rw] scte_35_return_to_network_settings
     #   Settings for SCTE-35 return\_to\_network message
     #   @return [Types::Scte35ReturnToNetworkScheduleActionSettings]
@@ -9303,6 +9390,7 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleActionSettings AWS API Documentation
     #
     class ScheduleActionSettings < Struct.new(
+      :input_switch_settings,
       :scte_35_return_to_network_settings,
       :scte_35_splice_insert_settings,
       :scte_35_time_signal_settings,
@@ -9320,16 +9408,25 @@ module Aws::MediaLive
     #         fixed_mode_schedule_action_start_settings: {
     #           time: "__string", # required
     #         },
+    #         follow_mode_schedule_action_start_settings: {
+    #           follow_point: "END", # required, accepts END, START
+    #           reference_action_name: "__string", # required
+    #         },
     #       }
     #
     # @!attribute [rw] fixed_mode_schedule_action_start_settings
     #   Holds the start time for the action.
     #   @return [Types::FixedModeScheduleActionStartSettings]
     #
+    # @!attribute [rw] follow_mode_schedule_action_start_settings
+    #   Specifies an action to follow for scheduling this action.
+    #   @return [Types::FollowModeScheduleActionStartSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleActionStartSettings AWS API Documentation
     #
     class ScheduleActionStartSettings < Struct.new(
-      :fixed_mode_schedule_action_start_settings)
+      :fixed_mode_schedule_action_start_settings,
+      :follow_mode_schedule_action_start_settings)
       include Aws::Structure
     end
 
@@ -10430,8 +10527,8 @@ module Aws::MediaLive
     #   UDP output buffering in milliseconds. Larger values increase latency
     #   through the transcoder but simultaneously assist the transcoder in
     #   maintaining a constant, low-jitter UDP/RTP output while
-    #   accommodating clock recovery, input disruptions, picture reordering,
-    #   etc.
+    #   accommodating clock recovery, input switching, input disruptions,
+    #   picture reordering, etc.
     #   @return [Integer]
     #
     # @!attribute [rw] container_settings
@@ -11116,6 +11213,7 @@ module Aws::MediaLive
     #         },
     #         input_attachments: [
     #           {
+    #             input_attachment_name: "__string",
     #             input_id: "__string",
     #             input_settings: {
     #               audio_selectors: [

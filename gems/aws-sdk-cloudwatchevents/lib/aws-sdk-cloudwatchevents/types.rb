@@ -1291,6 +1291,17 @@ module Aws::CloudWatchEvents
     # a complete list of services and resources that can be set as a target,
     # see PutTargets.
     #
+    # If you are setting the event bus of another account as the target, and
+    # that account granted permission to your account through an
+    # organization instead of directly by the account ID, then you must
+    # specify a `RoleArn` with proper permissions in the `Target` structure.
+    # For more information, see [Sending and Receiving Events Between AWS
+    # Accounts][1] in the *Amazon CloudWatch Events User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEvents-CrossAccountEventDelivery.html
+    #
     # @note When making an API call, you may pass Target
     #   data as a hash:
     #

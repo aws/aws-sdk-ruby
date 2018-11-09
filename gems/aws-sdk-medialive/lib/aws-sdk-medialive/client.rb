@@ -223,6 +223,9 @@ module Aws::MediaLive
     #         {
     #           action_name: "__string", # required
     #           schedule_action_settings: { # required
+    #             input_switch_settings: {
+    #               input_attachment_name_reference: "__string", # required
+    #             },
     #             scte_35_return_to_network_settings: {
     #               splice_event_id: 1, # required
     #             },
@@ -281,6 +284,10 @@ module Aws::MediaLive
     #             fixed_mode_schedule_action_start_settings: {
     #               time: "__string", # required
     #             },
+    #             follow_mode_schedule_action_start_settings: {
+    #               follow_point: "END", # required, accepts END, START
+    #               reference_action_name: "__string", # required
+    #             },
     #           },
     #         },
     #       ],
@@ -294,6 +301,7 @@ module Aws::MediaLive
     #
     #   resp.creates.schedule_actions #=> Array
     #   resp.creates.schedule_actions[0].action_name #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.input_switch_settings.input_attachment_name_reference #=> String
     #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
     #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.duration #=> Integer
     #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.splice_event_id #=> Integer
@@ -327,8 +335,11 @@ module Aws::MediaLive
     #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.fade_out #=> Integer
     #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.layer #=> Integer
     #   resp.creates.schedule_actions[0].schedule_action_start_settings.fixed_mode_schedule_action_start_settings.time #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_start_settings.follow_mode_schedule_action_start_settings.follow_point #=> String, one of "END", "START"
+    #   resp.creates.schedule_actions[0].schedule_action_start_settings.follow_mode_schedule_action_start_settings.reference_action_name #=> String
     #   resp.deletes.schedule_actions #=> Array
     #   resp.deletes.schedule_actions[0].action_name #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.input_switch_settings.input_attachment_name_reference #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
     #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.duration #=> Integer
     #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.splice_event_id #=> Integer
@@ -362,6 +373,8 @@ module Aws::MediaLive
     #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.fade_out #=> Integer
     #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.layer #=> Integer
     #   resp.deletes.schedule_actions[0].schedule_action_start_settings.fixed_mode_schedule_action_start_settings.time #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_start_settings.follow_mode_schedule_action_start_settings.follow_point #=> String, one of "END", "START"
+    #   resp.deletes.schedule_actions[0].schedule_action_start_settings.follow_mode_schedule_action_start_settings.reference_action_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchUpdateSchedule AWS API Documentation
     #
@@ -1012,6 +1025,7 @@ module Aws::MediaLive
     #     },
     #     input_attachments: [
     #       {
+    #         input_attachment_name: "__string",
     #         input_id: "__string",
     #         input_settings: {
     #           audio_selectors: [
@@ -1526,6 +1540,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.channel.id #=> String
     #   resp.channel.input_attachments #=> Array
+    #   resp.channel.input_attachments[0].input_attachment_name #=> String
     #   resp.channel.input_attachments[0].input_id #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].name #=> String
@@ -1614,7 +1629,7 @@ module Aws::MediaLive
     #         username: "__string",
     #       },
     #     ],
-    #     type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL
+    #     type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE
     #   })
     #
     # @example Response structure
@@ -1635,7 +1650,7 @@ module Aws::MediaLive
     #   resp.input.sources[0].url #=> String
     #   resp.input.sources[0].username #=> String
     #   resp.input.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
-    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL"
+    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInput AWS API Documentation
     #
@@ -2136,6 +2151,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.id #=> String
     #   resp.input_attachments #=> Array
+    #   resp.input_attachments[0].input_attachment_name #=> String
     #   resp.input_attachments[0].input_id #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.input_attachments[0].input_settings.audio_selectors[0].name #=> String
@@ -2746,6 +2762,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.id #=> String
     #   resp.input_attachments #=> Array
+    #   resp.input_attachments[0].input_attachment_name #=> String
     #   resp.input_attachments[0].input_id #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.input_attachments[0].input_settings.audio_selectors[0].name #=> String
@@ -2836,7 +2853,7 @@ module Aws::MediaLive
     #   resp.sources[0].url #=> String
     #   resp.sources[0].username #=> String
     #   resp.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
-    #   resp.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL"
+    #   resp.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInput AWS API Documentation
     #
@@ -3028,6 +3045,7 @@ module Aws::MediaLive
     #   resp.next_token #=> String
     #   resp.schedule_actions #=> Array
     #   resp.schedule_actions[0].action_name #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.input_switch_settings.input_attachment_name_reference #=> String
     #   resp.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
     #   resp.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.duration #=> Integer
     #   resp.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.splice_event_id #=> Integer
@@ -3061,6 +3079,8 @@ module Aws::MediaLive
     #   resp.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.fade_out #=> Integer
     #   resp.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.layer #=> Integer
     #   resp.schedule_actions[0].schedule_action_start_settings.fixed_mode_schedule_action_start_settings.time #=> String
+    #   resp.schedule_actions[0].schedule_action_start_settings.follow_mode_schedule_action_start_settings.follow_point #=> String, one of "END", "START"
+    #   resp.schedule_actions[0].schedule_action_start_settings.follow_mode_schedule_action_start_settings.reference_action_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeSchedule AWS API Documentation
     #
@@ -3104,6 +3124,7 @@ module Aws::MediaLive
     #   resp.channels[0].egress_endpoints[0].source_ip #=> String
     #   resp.channels[0].id #=> String
     #   resp.channels[0].input_attachments #=> Array
+    #   resp.channels[0].input_attachments[0].input_attachment_name #=> String
     #   resp.channels[0].input_attachments[0].input_id #=> String
     #   resp.channels[0].input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.channels[0].input_attachments[0].input_settings.audio_selectors[0].name #=> String
@@ -3231,7 +3252,7 @@ module Aws::MediaLive
     #   resp.inputs[0].sources[0].url #=> String
     #   resp.inputs[0].sources[0].username #=> String
     #   resp.inputs[0].state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
-    #   resp.inputs[0].type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL"
+    #   resp.inputs[0].type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListInputs AWS API Documentation
@@ -3908,6 +3929,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.id #=> String
     #   resp.input_attachments #=> Array
+    #   resp.input_attachments[0].input_attachment_name #=> String
     #   resp.input_attachments[0].input_id #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.input_attachments[0].input_settings.audio_selectors[0].name #=> String
@@ -4411,6 +4433,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.id #=> String
     #   resp.input_attachments #=> Array
+    #   resp.input_attachments[0].input_attachment_name #=> String
     #   resp.input_attachments[0].input_id #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.input_attachments[0].input_settings.audio_selectors[0].name #=> String
@@ -5098,6 +5121,7 @@ module Aws::MediaLive
     #     },
     #     input_attachments: [
     #       {
+    #         input_attachment_name: "__string",
     #         input_id: "__string",
     #         input_settings: {
     #           audio_selectors: [
@@ -5610,6 +5634,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.channel.id #=> String
     #   resp.channel.input_attachments #=> Array
+    #   resp.channel.input_attachments[0].input_attachment_name #=> String
     #   resp.channel.input_attachments[0].input_id #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].name #=> String
@@ -5714,7 +5739,7 @@ module Aws::MediaLive
     #   resp.input.sources[0].url #=> String
     #   resp.input.sources[0].username #=> String
     #   resp.input.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
-    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL"
+    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInput AWS API Documentation
     #
@@ -5778,7 +5803,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

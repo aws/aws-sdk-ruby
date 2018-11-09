@@ -26,6 +26,7 @@ module Aws::DLM
     #           schedules: [
     #             {
     #               name: "ScheduleName",
+    #               copy_tags: false,
     #               tags_to_add: [
     #                 {
     #                   key: "String", # required
@@ -315,6 +316,7 @@ module Aws::DLM
     #         schedules: [
     #           {
     #             name: "ScheduleName",
+    #             copy_tags: false,
     #             tags_to_add: [
     #               {
     #                 key: "String", # required
@@ -382,6 +384,7 @@ module Aws::DLM
     #
     #       {
     #         name: "ScheduleName",
+    #         copy_tags: false,
     #         tags_to_add: [
     #           {
     #             key: "String", # required
@@ -402,6 +405,9 @@ module Aws::DLM
     #   The name of the schedule.
     #   @return [String]
     #
+    # @!attribute [rw] copy_tags
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags_to_add
     #   The tags to apply to policy-created resources. These user-defined
     #   tags are in addition to the AWS-added lifecycle tags.
@@ -419,6 +425,7 @@ module Aws::DLM
     #
     class Schedule < Struct.new(
       :name,
+      :copy_tags,
       :tags_to_add,
       :create_rule,
       :retain_rule)
@@ -470,6 +477,7 @@ module Aws::DLM
     #           schedules: [
     #             {
     #               name: "ScheduleName",
+    #               copy_tags: false,
     #               tags_to_add: [
     #                 {
     #                   key: "String", # required
