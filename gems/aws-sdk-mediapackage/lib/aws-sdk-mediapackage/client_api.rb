@@ -343,6 +343,7 @@ module Aws::MediaPackage
     RotateIngestEndpointCredentialsResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     RotateIngestEndpointCredentialsResponse.struct_class = Types::RotateIngestEndpointCredentialsResponse
 
+    SpekeKeyProvider.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: __string, location_name: "certificateArn"))
     SpekeKeyProvider.add_member(:resource_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "resourceId"))
     SpekeKeyProvider.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "roleArn"))
     SpekeKeyProvider.add_member(:system_ids, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "systemIds"))
