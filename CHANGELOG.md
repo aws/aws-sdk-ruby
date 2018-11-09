@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.168 (2018-11-09)
+------------------
+
 * Feature - Aws::MediaPackage - Updated the API, and documentation for AWS Elemental MediaPackage.
 
 2.11.167 (2018-11-08)
