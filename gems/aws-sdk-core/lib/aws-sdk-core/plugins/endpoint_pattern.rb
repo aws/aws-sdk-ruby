@@ -3,8 +3,19 @@ module Aws
     # @api private
     class EndpointPattern < Seahorse::Client::Plugin
 
+      option(:disable_host_prefix_injection,
+        default: false,
+        doc_type: 'Boolean',
+        docstring: <<-DOCS
+Set to true to disable SDK automatically adding host prefix
+to default service endpoint when available.
+        DOCS
+      )
+
       def add_handlers(handlers, config)
-        handlers.add(Handler, priority: 90)
+        if config.regional_endpoint && !config.disable_host_prefix_injection
+          handlers.add(Handler, priority: 90)
+        end
       end
 
       class Handler < Seahorse::Client::Handler
@@ -22,17 +33,17 @@ module Aws
         def _apply_endpoint_trait(context, trait)
           # currently only support host pattern
           ori_host = context.http_request.endpoint.host
-          if pattern = trait.host
-            context.http_request.endpoint.host = pattern.gsub(/\{.+?\}/) do |label|
+          if pattern = trait['hostPrefix']
+            host_prefix = pattern.gsub(/\{.+?\}/) do |label|
               label = label.delete("{}")
               _replace_label_value(
                 ori_host, label, context.operation.input, context.params)
             end
+            context.http_request.endpoint.host = host_prefix + context.http_request.endpoint.host
           end
         end
 
         def _replace_label_value(ori, label, input_ref, params)
-          return ori if label == '@' # host identifier
           name, _ = input_ref.shape.member_by_location_name(label)
           if params[name].nil?
             raise Errors::MissingEndpointHostLabelValue.new(name)

@@ -44,6 +44,20 @@ module Aws
       end
     end
 
+    # raised when hostLabel member is not provided
+    # at operation input when endpoint trait is available
+    # with 'hostPrefix' requirement
+    class MissingEndpointHostLabelValue < RuntimeError
+
+      def initialize(name)
+        msg = "Missing required parameter #{name} to construct"\
+          " endpoint host prefix. You can disable host prefix by"\
+          " setting :disable_host_prefix_injection to `true`."
+        super(msg)
+      end
+
+    end
+
     # Raised when EventStream Parser failed to parse
     # a raw event message
     class EventStreamParserError < RuntimeError; end
