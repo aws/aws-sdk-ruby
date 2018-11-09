@@ -1243,7 +1243,7 @@ module Aws::CloudFront
       }
 
       api.add_operation(:create_cloud_front_origin_access_identity, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateCloudFrontOriginAccessIdentity"
+        o.name = "CreateCloudFrontOriginAccessIdentity2018_06_18"
         o.http_method = "POST"
         o.http_request_uri = "/2018-06-18/origin-access-identity/cloudfront"
         o.input = Shapes::ShapeRef.new(shape: CreateCloudFrontOriginAccessIdentityRequest)
@@ -1256,7 +1256,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:create_distribution, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateDistribution"
+        o.name = "CreateDistribution2018_06_18"
         o.http_method = "POST"
         o.http_request_uri = "/2018-06-18/distribution"
         o.input = Shapes::ShapeRef.new(shape: CreateDistributionRequest)
@@ -1307,7 +1307,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:create_distribution_with_tags, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateDistributionWithTags"
+        o.name = "CreateDistributionWithTags2018_06_18"
         o.http_method = "POST"
         o.http_request_uri = "/2018-06-18/distribution?WithTags"
         o.input = Shapes::ShapeRef.new(shape: CreateDistributionWithTagsRequest)
@@ -1359,7 +1359,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:create_field_level_encryption_config, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateFieldLevelEncryptionConfig"
+        o.name = "CreateFieldLevelEncryptionConfig2018_06_18"
         o.http_method = "POST"
         o.http_request_uri = "/2018-06-18/field-level-encryption"
         o.input = Shapes::ShapeRef.new(shape: CreateFieldLevelEncryptionConfigRequest)
@@ -1375,7 +1375,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:create_field_level_encryption_profile, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateFieldLevelEncryptionProfile"
+        o.name = "CreateFieldLevelEncryptionProfile2018_06_18"
         o.http_method = "POST"
         o.http_request_uri = "/2018-06-18/field-level-encryption-profile"
         o.input = Shapes::ShapeRef.new(shape: CreateFieldLevelEncryptionProfileRequest)
@@ -1391,7 +1391,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:create_invalidation, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateInvalidation"
+        o.name = "CreateInvalidation2018_06_18"
         o.http_method = "POST"
         o.http_request_uri = "/2018-06-18/distribution/{DistributionId}/invalidation"
         o.input = Shapes::ShapeRef.new(shape: CreateInvalidationRequest)
@@ -1406,7 +1406,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:create_public_key, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreatePublicKey"
+        o.name = "CreatePublicKey2018_06_18"
         o.http_method = "POST"
         o.http_request_uri = "/2018-06-18/public-key"
         o.input = Shapes::ShapeRef.new(shape: CreatePublicKeyRequest)
@@ -1417,7 +1417,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:create_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateStreamingDistribution"
+        o.name = "CreateStreamingDistribution2018_06_18"
         o.http_method = "POST"
         o.http_request_uri = "/2018-06-18/streaming-distribution"
         o.input = Shapes::ShapeRef.new(shape: CreateStreamingDistributionRequest)
@@ -1437,7 +1437,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:create_streaming_distribution_with_tags, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateStreamingDistributionWithTags"
+        o.name = "CreateStreamingDistributionWithTags2018_06_18"
         o.http_method = "POST"
         o.http_request_uri = "/2018-06-18/streaming-distribution?WithTags"
         o.input = Shapes::ShapeRef.new(shape: CreateStreamingDistributionWithTagsRequest)
@@ -1458,7 +1458,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:delete_cloud_front_origin_access_identity, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeleteCloudFrontOriginAccessIdentity"
+        o.name = "DeleteCloudFrontOriginAccessIdentity2018_06_18"
         o.http_method = "DELETE"
         o.http_request_uri = "/2018-06-18/origin-access-identity/cloudfront/{Id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteCloudFrontOriginAccessIdentityRequest)
@@ -1471,7 +1471,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:delete_distribution, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeleteDistribution"
+        o.name = "DeleteDistribution2018_06_18"
         o.http_method = "DELETE"
         o.http_request_uri = "/2018-06-18/distribution/{Id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteDistributionRequest)
@@ -1484,7 +1484,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:delete_field_level_encryption_config, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeleteFieldLevelEncryptionConfig"
+        o.name = "DeleteFieldLevelEncryptionConfig2018_06_18"
         o.http_method = "DELETE"
         o.http_request_uri = "/2018-06-18/field-level-encryption/{Id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteFieldLevelEncryptionConfigRequest)
@@ -1497,7 +1497,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:delete_field_level_encryption_profile, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeleteFieldLevelEncryptionProfile"
+        o.name = "DeleteFieldLevelEncryptionProfile2018_06_18"
         o.http_method = "DELETE"
         o.http_request_uri = "/2018-06-18/field-level-encryption-profile/{Id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteFieldLevelEncryptionProfileRequest)
@@ -1510,7 +1510,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:delete_public_key, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeletePublicKey"
+        o.name = "DeletePublicKey2018_06_18"
         o.http_method = "DELETE"
         o.http_request_uri = "/2018-06-18/public-key/{Id}"
         o.input = Shapes::ShapeRef.new(shape: DeletePublicKeyRequest)
@@ -1523,7 +1523,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:delete_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeleteStreamingDistribution"
+        o.name = "DeleteStreamingDistribution2018_06_18"
         o.http_method = "DELETE"
         o.http_request_uri = "/2018-06-18/streaming-distribution/{Id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteStreamingDistributionRequest)
@@ -1536,7 +1536,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:get_cloud_front_origin_access_identity, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetCloudFrontOriginAccessIdentity"
+        o.name = "GetCloudFrontOriginAccessIdentity2018_06_18"
         o.http_method = "GET"
         o.http_request_uri = "/2018-06-18/origin-access-identity/cloudfront/{Id}"
         o.input = Shapes::ShapeRef.new(shape: GetCloudFrontOriginAccessIdentityRequest)
@@ -1546,7 +1546,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:get_cloud_front_origin_access_identity_config, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetCloudFrontOriginAccessIdentityConfig"
+        o.name = "GetCloudFrontOriginAccessIdentityConfig2018_06_18"
         o.http_method = "GET"
         o.http_request_uri = "/2018-06-18/origin-access-identity/cloudfront/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: GetCloudFrontOriginAccessIdentityConfigRequest)
@@ -1556,7 +1556,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:get_distribution, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetDistribution"
+        o.name = "GetDistribution2018_06_18"
         o.http_method = "GET"
         o.http_request_uri = "/2018-06-18/distribution/{Id}"
         o.input = Shapes::ShapeRef.new(shape: GetDistributionRequest)
@@ -1566,7 +1566,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:get_distribution_config, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetDistributionConfig"
+        o.name = "GetDistributionConfig2018_06_18"
         o.http_method = "GET"
         o.http_request_uri = "/2018-06-18/distribution/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: GetDistributionConfigRequest)
@@ -1576,7 +1576,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:get_field_level_encryption, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetFieldLevelEncryption"
+        o.name = "GetFieldLevelEncryption2018_06_18"
         o.http_method = "GET"
         o.http_request_uri = "/2018-06-18/field-level-encryption/{Id}"
         o.input = Shapes::ShapeRef.new(shape: GetFieldLevelEncryptionRequest)
@@ -1586,7 +1586,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:get_field_level_encryption_config, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetFieldLevelEncryptionConfig"
+        o.name = "GetFieldLevelEncryptionConfig2018_06_18"
         o.http_method = "GET"
         o.http_request_uri = "/2018-06-18/field-level-encryption/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: GetFieldLevelEncryptionConfigRequest)
@@ -1596,7 +1596,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:get_field_level_encryption_profile, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetFieldLevelEncryptionProfile"
+        o.name = "GetFieldLevelEncryptionProfile2018_06_18"
         o.http_method = "GET"
         o.http_request_uri = "/2018-06-18/field-level-encryption-profile/{Id}"
         o.input = Shapes::ShapeRef.new(shape: GetFieldLevelEncryptionProfileRequest)
@@ -1606,7 +1606,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:get_field_level_encryption_profile_config, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetFieldLevelEncryptionProfileConfig"
+        o.name = "GetFieldLevelEncryptionProfileConfig2018_06_18"
         o.http_method = "GET"
         o.http_request_uri = "/2018-06-18/field-level-encryption-profile/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: GetFieldLevelEncryptionProfileConfigRequest)
@@ -1616,7 +1616,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:get_invalidation, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetInvalidation"
+        o.name = "GetInvalidation2018_06_18"
         o.http_method = "GET"
         o.http_request_uri = "/2018-06-18/distribution/{DistributionId}/invalidation/{Id}"
         o.input = Shapes::ShapeRef.new(shape: GetInvalidationRequest)
@@ -1627,7 +1627,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:get_public_key, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetPublicKey"
+        o.name = "GetPublicKey2018_06_18"
         o.http_method = "GET"
         o.http_request_uri = "/2018-06-18/public-key/{Id}"
         o.input = Shapes::ShapeRef.new(shape: GetPublicKeyRequest)
@@ -1637,7 +1637,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:get_public_key_config, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetPublicKeyConfig"
+        o.name = "GetPublicKeyConfig2018_06_18"
         o.http_method = "GET"
         o.http_request_uri = "/2018-06-18/public-key/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: GetPublicKeyConfigRequest)
@@ -1647,7 +1647,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:get_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetStreamingDistribution"
+        o.name = "GetStreamingDistribution2018_06_18"
         o.http_method = "GET"
         o.http_request_uri = "/2018-06-18/streaming-distribution/{Id}"
         o.input = Shapes::ShapeRef.new(shape: GetStreamingDistributionRequest)
@@ -1657,7 +1657,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:get_streaming_distribution_config, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetStreamingDistributionConfig"
+        o.name = "GetStreamingDistributionConfig2018_06_18"
         o.http_method = "GET"
         o.http_request_uri = "/2018-06-18/streaming-distribution/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: GetStreamingDistributionConfigRequest)
@@ -1667,7 +1667,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:list_cloud_front_origin_access_identities, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListCloudFrontOriginAccessIdentities"
+        o.name = "ListCloudFrontOriginAccessIdentities2018_06_18"
         o.http_method = "GET"
         o.http_request_uri = "/2018-06-18/origin-access-identity/cloudfront"
         o.input = Shapes::ShapeRef.new(shape: ListCloudFrontOriginAccessIdentitiesRequest)
@@ -1683,7 +1683,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:list_distributions, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListDistributions"
+        o.name = "ListDistributions2018_06_18"
         o.http_method = "GET"
         o.http_request_uri = "/2018-06-18/distribution"
         o.input = Shapes::ShapeRef.new(shape: ListDistributionsRequest)
@@ -1699,7 +1699,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:list_distributions_by_web_acl_id, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListDistributionsByWebACLId"
+        o.name = "ListDistributionsByWebACLId2018_06_18"
         o.http_method = "GET"
         o.http_request_uri = "/2018-06-18/distributionsByWebACLId/{WebACLId}"
         o.input = Shapes::ShapeRef.new(shape: ListDistributionsByWebACLIdRequest)
@@ -1709,7 +1709,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:list_field_level_encryption_configs, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListFieldLevelEncryptionConfigs"
+        o.name = "ListFieldLevelEncryptionConfigs2018_06_18"
         o.http_method = "GET"
         o.http_request_uri = "/2018-06-18/field-level-encryption"
         o.input = Shapes::ShapeRef.new(shape: ListFieldLevelEncryptionConfigsRequest)
@@ -1718,7 +1718,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:list_field_level_encryption_profiles, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListFieldLevelEncryptionProfiles"
+        o.name = "ListFieldLevelEncryptionProfiles2018_06_18"
         o.http_method = "GET"
         o.http_request_uri = "/2018-06-18/field-level-encryption-profile"
         o.input = Shapes::ShapeRef.new(shape: ListFieldLevelEncryptionProfilesRequest)
@@ -1727,7 +1727,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:list_invalidations, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListInvalidations"
+        o.name = "ListInvalidations2018_06_18"
         o.http_method = "GET"
         o.http_request_uri = "/2018-06-18/distribution/{DistributionId}/invalidation"
         o.input = Shapes::ShapeRef.new(shape: ListInvalidationsRequest)
@@ -1745,7 +1745,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:list_public_keys, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListPublicKeys"
+        o.name = "ListPublicKeys2018_06_18"
         o.http_method = "GET"
         o.http_request_uri = "/2018-06-18/public-key"
         o.input = Shapes::ShapeRef.new(shape: ListPublicKeysRequest)
@@ -1754,7 +1754,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:list_streaming_distributions, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListStreamingDistributions"
+        o.name = "ListStreamingDistributions2018_06_18"
         o.http_method = "GET"
         o.http_request_uri = "/2018-06-18/streaming-distribution"
         o.input = Shapes::ShapeRef.new(shape: ListStreamingDistributionsRequest)
@@ -1770,7 +1770,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListTagsForResource"
+        o.name = "ListTagsForResource2018_06_18"
         o.http_method = "GET"
         o.http_request_uri = "/2018-06-18/tagging"
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
@@ -1782,7 +1782,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "TagResource"
+        o.name = "TagResource2018_06_18"
         o.http_method = "POST"
         o.http_request_uri = "/2018-06-18/tagging?Operation=Tag"
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
@@ -1794,7 +1794,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UntagResource"
+        o.name = "UntagResource2018_06_18"
         o.http_method = "POST"
         o.http_request_uri = "/2018-06-18/tagging?Operation=Untag"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
@@ -1806,7 +1806,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:update_cloud_front_origin_access_identity, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdateCloudFrontOriginAccessIdentity"
+        o.name = "UpdateCloudFrontOriginAccessIdentity2018_06_18"
         o.http_method = "PUT"
         o.http_request_uri = "/2018-06-18/origin-access-identity/cloudfront/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: UpdateCloudFrontOriginAccessIdentityRequest)
@@ -1822,7 +1822,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:update_distribution, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdateDistribution"
+        o.name = "UpdateDistribution2018_06_18"
         o.http_method = "PUT"
         o.http_request_uri = "/2018-06-18/distribution/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: UpdateDistributionRequest)
@@ -1873,7 +1873,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:update_field_level_encryption_config, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdateFieldLevelEncryptionConfig"
+        o.name = "UpdateFieldLevelEncryptionConfig2018_06_18"
         o.http_method = "PUT"
         o.http_request_uri = "/2018-06-18/field-level-encryption/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: UpdateFieldLevelEncryptionConfigRequest)
@@ -1892,7 +1892,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:update_field_level_encryption_profile, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdateFieldLevelEncryptionProfile"
+        o.name = "UpdateFieldLevelEncryptionProfile2018_06_18"
         o.http_method = "PUT"
         o.http_request_uri = "/2018-06-18/field-level-encryption-profile/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: UpdateFieldLevelEncryptionProfileRequest)
@@ -1912,7 +1912,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:update_public_key, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdatePublicKey"
+        o.name = "UpdatePublicKey2018_06_18"
         o.http_method = "PUT"
         o.http_request_uri = "/2018-06-18/public-key/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: UpdatePublicKeyRequest)
@@ -1927,7 +1927,7 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:update_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdateStreamingDistribution"
+        o.name = "UpdateStreamingDistribution2018_06_18"
         o.http_method = "PUT"
         o.http_request_uri = "/2018-06-18/streaming-distribution/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: UpdateStreamingDistributionRequest)

@@ -169,7 +169,7 @@ module AwsSdkCodeGenerator
       def operations
         @service.api['operations'].map do |operation_name, operation|
           Operation.new.tap do |o|
-            o.name = operation_name
+            o.name = operation['name'] || operation_name
             o.method_name = underscore(operation_name)
             o.http_method = operation['http']['method']
             o.http_request_uri = operation['http']['requestUri']
