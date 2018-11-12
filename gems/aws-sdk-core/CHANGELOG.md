@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Adding `TransactionInProgressException` for throttling retry
+
 3.37.0 (2018-11-08)
 ------------------
 
