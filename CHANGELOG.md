@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.169 (2018-11-12)
+------------------
+
 * Feature - Aws::Batch - Updated the API, documentation, and integration test for AWS Batch.
 
 * Feature - Aws::Budgets - Updated the API, and documentation for AWS Budgets.
