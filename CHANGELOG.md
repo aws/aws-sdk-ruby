@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Batch - Updated the API, documentation, and integration test for AWS Batch.
+
+* Feature - Aws::Budgets - Updated the API, and documentation for AWS Budgets.
+
+* Feature - Aws::CloudFormation - Updated the API, and documentation for AWS CloudFormation.
+
+* Feature - Aws::CodePipeline - Updated the API, documentation, and integration test for AWS CodePipeline.
+
+* Feature - Aws::Firehose - Updated the API, documentation, and integration test for Amazon Kinesis Firehose.
+
+* Feature - Aws::Polly - Updated the API for Amazon Polly.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
 2.11.168 (2018-11-09)
 ------------------
 
