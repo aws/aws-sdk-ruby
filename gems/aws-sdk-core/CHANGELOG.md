@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.38.0 (2018-11-12)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
 * Feature - Adding `TransactionInProgressException` for throttling retry
 
 3.37.0 (2018-11-08)

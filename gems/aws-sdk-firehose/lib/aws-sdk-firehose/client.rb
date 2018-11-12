@@ -317,6 +317,20 @@ module Aws::Firehose
     # @option params [Types::SplunkDestinationConfiguration] :splunk_destination_configuration
     #   The destination in Splunk. You can specify only one destination.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A set of tags to assign to the delivery stream. A tag is a key-value
+    #   pair that you can define and assign to AWS resources. Tags are
+    #   metadata. For example, you can add friendly names and descriptions or
+    #   other types of information that can help you distinguish the delivery
+    #   stream. For more information about tags, see [Using Cost Allocation
+    #   Tags][1] in the AWS Billing and Cost Management User Guide.
+    #
+    #   You can specify up to 50 tags when creating a delivery stream.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    #
     # @return [Types::CreateDeliveryStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDeliveryStreamOutput#delivery_stream_arn #delivery_stream_arn} => String
@@ -638,6 +652,12 @@ module Aws::Firehose
     #         log_stream_name: "LogStreamName",
     #       },
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -721,6 +741,7 @@ module Aws::Firehose
     #   resp.delivery_stream_description.delivery_stream_name #=> String
     #   resp.delivery_stream_description.delivery_stream_arn #=> String
     #   resp.delivery_stream_description.delivery_stream_status #=> String, one of "CREATING", "DELETING", "ACTIVE"
+    #   resp.delivery_stream_description.delivery_stream_encryption_configuration.status #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING"
     #   resp.delivery_stream_description.delivery_stream_type #=> String, one of "DirectPut", "KinesisStreamAsSource"
     #   resp.delivery_stream_description.version_id #=> String
     #   resp.delivery_stream_description.create_timestamp #=> Time
@@ -905,16 +926,16 @@ module Aws::Firehose
       req.send_request(options)
     end
 
-    # Lists your delivery streams.
+    # Lists your delivery streams in alphabetical order of their names.
     #
     # The number of delivery streams might be too large to return using a
     # single call to `ListDeliveryStreams`. You can limit the number of
     # delivery streams returned, using the **Limit** parameter. To determine
     # whether there are more delivery streams to list, check the value of
     # `HasMoreDeliveryStreams` in the output. If there are more delivery
-    # streams to list, you can request them by specifying the name of the
-    # last delivery stream returned in the call in the
-    # `ExclusiveStartDeliveryStreamName` parameter of a subsequent call.
+    # streams to list, you can request them by calling this operation again
+    # and setting the `ExclusiveStartDeliveryStreamName` parameter to the
+    # name of the last delivery stream returned in the last call.
     #
     # @option params [Integer] :limit
     #   The maximum number of delivery streams to list. The default value is
@@ -933,7 +954,10 @@ module Aws::Firehose
     #   streams of all types are returned.
     #
     # @option params [String] :exclusive_start_delivery_stream_name
-    #   The name of the delivery stream to start the list with.
+    #   The list of delivery streams returned by this call to
+    #   `ListDeliveryStreams` will start with the delivery stream whose name
+    #   comes alphabetically immediately after the name you specify in
+    #   `ExclusiveStartDeliveryStreamName`.
     #
     # @return [Types::ListDeliveryStreamsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1047,6 +1071,10 @@ module Aws::Firehose
     # the records to the destination. If the destination is unreachable for
     # more than 24 hours, the data is no longer available.
     #
+    # Don't concatenate two or more base64 strings to form the data fields
+    # of your records. Instead, concatenate the raw data, then perform
+    # base64 encoding.
+    #
     #
     #
     # [1]: http://docs.aws.amazon.com/firehose/latest/dev/limits.html
@@ -1060,6 +1088,7 @@ module Aws::Firehose
     # @return [Types::PutRecordOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutRecordOutput#record_id #record_id} => String
+    #   * {Types::PutRecordOutput#encrypted #encrypted} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -1073,6 +1102,7 @@ module Aws::Firehose
     # @example Response structure
     #
     #   resp.record_id #=> String
+    #   resp.encrypted #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecord AWS API Documentation
     #
@@ -1115,22 +1145,24 @@ module Aws::Firehose
     #
     # The PutRecordBatch response includes a count of failed records,
     # **FailedPutCount**, and an array of responses, **RequestResponses**.
-    # Each entry in the **RequestResponses** array provides additional
-    # information about the processed record. It directly correlates with a
-    # record in the request array using the same ordering, from the top to
-    # the bottom. The response array always includes the same number of
-    # records as the request array. **RequestResponses** includes both
-    # successfully and unsuccessfully processed records. Kinesis Data
-    # Firehose tries to process all records in each PutRecordBatch request.
-    # A single record failure does not stop the processing of subsequent
-    # records.
+    # Even if the PutRecordBatch call succeeds, the value of
+    # **FailedPutCount** may be greater than 0, indicating that there are
+    # records for which the operation didn't succeed. Each entry in the
+    # **RequestResponses** array provides additional information about the
+    # processed record. It directly correlates with a record in the request
+    # array using the same ordering, from the top to the bottom. The
+    # response array always includes the same number of records as the
+    # request array. **RequestResponses** includes both successfully and
+    # unsuccessfully processed records. Kinesis Data Firehose tries to
+    # process all records in each PutRecordBatch request. A single record
+    # failure does not stop the processing of subsequent records.
     #
     # A successfully processed record includes a **RecordId** value, which
     # is unique for the record. An unsuccessfully processed record includes
     # **ErrorCode** and **ErrorMessage** values. **ErrorCode** reflects the
     # type of error, and is one of the following values:
-    # `ServiceUnavailable` or `InternalFailure`. **ErrorMessage** provides
-    # more detailed information about the error.
+    # `ServiceUnavailableException` or `InternalFailure`. **ErrorMessage**
+    # provides more detailed information about the error.
     #
     # If there is an internal server error or a timeout, the write might
     # have completed or it might have failed. If **FailedPutCount** is
@@ -1149,6 +1181,10 @@ module Aws::Firehose
     # send the records to the destination. If the destination is unreachable
     # for more than 24 hours, the data is no longer available.
     #
+    # Don't concatenate two or more base64 strings to form the data fields
+    # of your records. Instead, concatenate the raw data, then perform
+    # base64 encoding.
+    #
     #
     #
     # [1]: http://docs.aws.amazon.com/firehose/latest/dev/limits.html
@@ -1162,6 +1198,7 @@ module Aws::Firehose
     # @return [Types::PutRecordBatchOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutRecordBatchOutput#failed_put_count #failed_put_count} => Integer
+    #   * {Types::PutRecordBatchOutput#encrypted #encrypted} => Boolean
     #   * {Types::PutRecordBatchOutput#request_responses #request_responses} => Array&lt;Types::PutRecordBatchResponseEntry&gt;
     #
     # @example Request syntax with placeholder values
@@ -1178,6 +1215,7 @@ module Aws::Firehose
     # @example Response structure
     #
     #   resp.failed_put_count #=> Integer
+    #   resp.encrypted #=> Boolean
     #   resp.request_responses #=> Array
     #   resp.request_responses[0].record_id #=> String
     #   resp.request_responses[0].error_code #=> String
@@ -1189,6 +1227,88 @@ module Aws::Firehose
     # @param [Hash] params ({})
     def put_record_batch(params = {}, options = {})
       req = build_request(:put_record_batch, params)
+      req.send_request(options)
+    end
+
+    # Enables server-side encryption (SSE) for the delivery stream. This
+    # operation is asynchronous. It returns immediately. When you invoke it,
+    # Kinesis Firehose first sets the status of the stream to `ENABLING`
+    # then to `ENABLED`. You can continue to read and write data to your
+    # stream while its status is `ENABLING` but they won't get encrypted.
+    # It can take up to 5 seconds after the encryption status changes to
+    # `ENABLED` before all records written to the delivery stream are
+    # encrypted.
+    #
+    # To check the encryption state of a delivery stream, use
+    # DescribeDeliveryStream.
+    #
+    # You can only enable SSE for a delivery stream that uses `DirectPut` as
+    # its source.
+    #
+    # The `StartDeliveryStreamEncryption` and `StopDeliveryStreamEncryption`
+    # operations have a combined limit of 25 calls per delivery stream per
+    # 24 hours. For example, you reach the limit if you call
+    # `StartDeliveryStreamEncryption` thirteen times and
+    # `StopDeliveryStreamEncryption` twelve times for the same stream in a
+    # 24-hour period.
+    #
+    # @option params [required, String] :delivery_stream_name
+    #   The name of the delivery stream for which you want to enable
+    #   server-side encryption (SSE).
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_delivery_stream_encryption({
+    #     delivery_stream_name: "DeliveryStreamName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/StartDeliveryStreamEncryption AWS API Documentation
+    #
+    # @overload start_delivery_stream_encryption(params = {})
+    # @param [Hash] params ({})
+    def start_delivery_stream_encryption(params = {}, options = {})
+      req = build_request(:start_delivery_stream_encryption, params)
+      req.send_request(options)
+    end
+
+    # Disables server-side encryption (SSE) for the delivery stream. This
+    # operation is asynchronous. It returns immediately. When you invoke it,
+    # Kinesis Firehose first sets the status of the stream to `DISABLING`
+    # then to `DISABLED`. You can continue to read and write data to your
+    # stream while its status is `DISABLING`. It can take up to 5 seconds
+    # after the encryption status changes to `DISABLED` before all records
+    # written to the delivery stream are no longer subject to encryption.
+    #
+    # To check the encryption state of a delivery stream, use
+    # DescribeDeliveryStream.
+    #
+    # The `StartDeliveryStreamEncryption` and `StopDeliveryStreamEncryption`
+    # operations have a combined limit of 25 calls per delivery stream per
+    # 24 hours. For example, you reach the limit if you call
+    # `StartDeliveryStreamEncryption` thirteen times and
+    # `StopDeliveryStreamEncryption` twelve times for the same stream in a
+    # 24-hour period.
+    #
+    # @option params [required, String] :delivery_stream_name
+    #   The name of the delivery stream for which you want to disable
+    #   server-side encryption (SSE).
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_delivery_stream_encryption({
+    #     delivery_stream_name: "DeliveryStreamName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/StopDeliveryStreamEncryption AWS API Documentation
+    #
+    # @overload stop_delivery_stream_encryption(params = {})
+    # @param [Hash] params ({})
+    def stop_delivery_stream_encryption(params = {}, options = {})
+      req = build_request(:stop_delivery_stream_encryption, params)
       req.send_request(options)
     end
 
@@ -1679,7 +1799,7 @@ module Aws::Firehose
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-firehose'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

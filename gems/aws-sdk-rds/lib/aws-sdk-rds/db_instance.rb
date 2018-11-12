@@ -779,10 +779,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     16384.
+    #     32768.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #     16384.
+    #     32768.
     #
     #   * Magnetic storage (standard): Must be an integer from 10 to 3072.
     #
@@ -1641,7 +1641,7 @@ module Aws::RDS
     #
     #   * For MySQL 5.7, minor version 5.7.16 or higher
     #
-    #   * Aurora 5.6 or higher.
+    #   * Aurora MySQL 5.6 or higher
     #
     #   Default: `false`
     # @option options [Boolean] :enable_performance_insights
@@ -2022,7 +2022,7 @@ module Aws::RDS
     #   * Must be a value from 0 to 35
     #
     #   * Can be specified for a MySQL Read Replica only if the source is
-    #     running MySQL 5.6
+    #     running MySQL 5.6 or later
     #
     #   * Can be specified for a PostgreSQL Read Replica only if the source is
     #     running PostgreSQL 9.3.5

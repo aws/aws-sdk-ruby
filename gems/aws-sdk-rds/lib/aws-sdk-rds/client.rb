@@ -1870,6 +1870,8 @@ module Aws::RDS
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
     #   resp.db_cluster.reader_endpoint #=> String
+    #   resp.db_cluster.custom_endpoints #=> Array
+    #   resp.db_cluster.custom_endpoints[0] #=> String
     #   resp.db_cluster.multi_az #=> Boolean
     #   resp.db_cluster.engine #=> String
     #   resp.db_cluster.engine_version #=> String
@@ -1923,6 +1925,76 @@ module Aws::RDS
     # @param [Hash] params ({})
     def create_db_cluster(params = {}, options = {})
       req = build_request(:create_db_cluster, params)
+      req.send_request(options)
+    end
+
+    # Creates a new custom endpoint and associates it with an Amazon Aurora
+    # DB cluster.
+    #
+    # @option params [required, String] :db_cluster_identifier
+    #   The DB cluster identifier of the DB cluster associated with the
+    #   endpoint. This parameter is stored as a lowercase string.
+    #
+    # @option params [required, String] :db_cluster_endpoint_identifier
+    #   The identifier to use for the new endpoint. This parameter is stored
+    #   as a lowercase string.
+    #
+    # @option params [required, String] :endpoint_type
+    #   The type of the endpoint. One of: `READER`, `ANY`.
+    #
+    # @option params [Array<String>] :static_members
+    #   List of DB instance identifiers that are part of the custom endpoint
+    #   group.
+    #
+    # @option params [Array<String>] :excluded_members
+    #   List of DB instance identifiers that aren't part of the custom
+    #   endpoint group. All other eligible instances are reachable through the
+    #   custom endpoint. Only relevant if the list of static members is empty.
+    #
+    # @return [Types::DBClusterEndpoint] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DBClusterEndpoint#db_cluster_endpoint_identifier #db_cluster_endpoint_identifier} => String
+    #   * {Types::DBClusterEndpoint#db_cluster_identifier #db_cluster_identifier} => String
+    #   * {Types::DBClusterEndpoint#db_cluster_endpoint_resource_identifier #db_cluster_endpoint_resource_identifier} => String
+    #   * {Types::DBClusterEndpoint#endpoint #endpoint} => String
+    #   * {Types::DBClusterEndpoint#status #status} => String
+    #   * {Types::DBClusterEndpoint#endpoint_type #endpoint_type} => String
+    #   * {Types::DBClusterEndpoint#custom_endpoint_type #custom_endpoint_type} => String
+    #   * {Types::DBClusterEndpoint#static_members #static_members} => Array&lt;String&gt;
+    #   * {Types::DBClusterEndpoint#excluded_members #excluded_members} => Array&lt;String&gt;
+    #   * {Types::DBClusterEndpoint#db_cluster_endpoint_arn #db_cluster_endpoint_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_db_cluster_endpoint({
+    #     db_cluster_identifier: "String", # required
+    #     db_cluster_endpoint_identifier: "String", # required
+    #     endpoint_type: "String", # required
+    #     static_members: ["String"],
+    #     excluded_members: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_cluster_endpoint_identifier #=> String
+    #   resp.db_cluster_identifier #=> String
+    #   resp.db_cluster_endpoint_resource_identifier #=> String
+    #   resp.endpoint #=> String
+    #   resp.status #=> String
+    #   resp.endpoint_type #=> String
+    #   resp.custom_endpoint_type #=> String
+    #   resp.static_members #=> Array
+    #   resp.static_members[0] #=> String
+    #   resp.excluded_members #=> Array
+    #   resp.excluded_members[0] #=> String
+    #   resp.db_cluster_endpoint_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterEndpoint AWS API Documentation
+    #
+    # @overload create_db_cluster_endpoint(params = {})
+    # @param [Hash] params ({})
+    def create_db_cluster_endpoint(params = {}, options = {})
+      req = build_request(:create_db_cluster_endpoint, params)
       req.send_request(options)
     end
 
@@ -2302,10 +2374,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     16384.
+    #     32768.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #     16384.
+    #     32768.
     #
     #   * Magnetic storage (standard): Must be an integer from 10 to 3072.
     #
@@ -3193,7 +3265,7 @@ module Aws::RDS
     #     DB instance.
     #
     #   * Can specify a DB instance that is a MySQL Read Replica only if the
-    #     source is running MySQL 5.6.
+    #     source is running MySQL 5.6 or later.
     #
     #   * Can specify a DB instance that is a PostgreSQL DB instance only if
     #     the source is running PostgreSQL 9.3.5 or later (9.4.7 and higher
@@ -3428,7 +3500,7 @@ module Aws::RDS
     #
     #   * For MySQL 5.7, minor version 5.7.16 or higher
     #
-    #   * Aurora 5.6 or higher.
+    #   * Aurora MySQL 5.6 or higher
     #
     #   Default: `false`
     #
@@ -4452,6 +4524,8 @@ module Aws::RDS
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
     #   resp.db_cluster.reader_endpoint #=> String
+    #   resp.db_cluster.custom_endpoints #=> Array
+    #   resp.db_cluster.custom_endpoints[0] #=> String
     #   resp.db_cluster.multi_az #=> Boolean
     #   resp.db_cluster.engine #=> String
     #   resp.db_cluster.engine_version #=> String
@@ -4505,6 +4579,56 @@ module Aws::RDS
     # @param [Hash] params ({})
     def delete_db_cluster(params = {}, options = {})
       req = build_request(:delete_db_cluster, params)
+      req.send_request(options)
+    end
+
+    # Deletes a custom endpoint and removes it from an Amazon Aurora DB
+    # cluster.
+    #
+    # @option params [required, String] :db_cluster_endpoint_identifier
+    #   The identifier associated with the custom endpoint. This parameter is
+    #   stored as a lowercase string.
+    #
+    # @return [Types::DBClusterEndpoint] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DBClusterEndpoint#db_cluster_endpoint_identifier #db_cluster_endpoint_identifier} => String
+    #   * {Types::DBClusterEndpoint#db_cluster_identifier #db_cluster_identifier} => String
+    #   * {Types::DBClusterEndpoint#db_cluster_endpoint_resource_identifier #db_cluster_endpoint_resource_identifier} => String
+    #   * {Types::DBClusterEndpoint#endpoint #endpoint} => String
+    #   * {Types::DBClusterEndpoint#status #status} => String
+    #   * {Types::DBClusterEndpoint#endpoint_type #endpoint_type} => String
+    #   * {Types::DBClusterEndpoint#custom_endpoint_type #custom_endpoint_type} => String
+    #   * {Types::DBClusterEndpoint#static_members #static_members} => Array&lt;String&gt;
+    #   * {Types::DBClusterEndpoint#excluded_members #excluded_members} => Array&lt;String&gt;
+    #   * {Types::DBClusterEndpoint#db_cluster_endpoint_arn #db_cluster_endpoint_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_db_cluster_endpoint({
+    #     db_cluster_endpoint_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_cluster_endpoint_identifier #=> String
+    #   resp.db_cluster_identifier #=> String
+    #   resp.db_cluster_endpoint_resource_identifier #=> String
+    #   resp.endpoint #=> String
+    #   resp.status #=> String
+    #   resp.endpoint_type #=> String
+    #   resp.custom_endpoint_type #=> String
+    #   resp.static_members #=> Array
+    #   resp.static_members[0] #=> String
+    #   resp.excluded_members #=> Array
+    #   resp.excluded_members[0] #=> String
+    #   resp.db_cluster_endpoint_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterEndpoint AWS API Documentation
+    #
+    # @overload delete_db_cluster_endpoint(params = {})
+    # @param [Hash] params ({})
+    def delete_db_cluster_endpoint(params = {}, options = {})
+      req = build_request(:delete_db_cluster_endpoint, params)
       req.send_request(options)
     end
 
@@ -5414,6 +5538,91 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Returns information about endpoints for an Amazon Aurora DB cluster.
+    #
+    # @option params [String] :db_cluster_identifier
+    #   The DB cluster identifier of the DB cluster associated with the
+    #   endpoint. This parameter is stored as a lowercase string.
+    #
+    # @option params [String] :db_cluster_endpoint_identifier
+    #   The identifier of the endpoint to describe. This parameter is stored
+    #   as a lowercase string.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   A set of name-value pairs that define which endpoints to include in
+    #   the output. The filters are specified as name-value pairs, in the
+    #   format `Name=endpoint_type,Values=endpoint_type1,endpoint_type2,...`.
+    #   `Name` can be one of: `db-cluster-endpoint-type`,
+    #   `db-cluster-endpoint-custom-type`, `db-cluster-endpoint-id`,
+    #   `db-cluster-endpoint-status`. `Values` for the `
+    #   db-cluster-endpoint-type` filter can be one or more of: `reader`,
+    #   `writer`, `custom`. `Values` for the `db-cluster-endpoint-custom-type`
+    #   filter can be one or more of: `reader`, `any`. `Values` for the
+    #   `db-cluster-endpoint-status` filter can be one or more of:
+    #   `available`, `creating`, `deleting`, `modifying`.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous
+    #   DescribeDBClusterEndpoints request. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #
+    # @return [Types::DBClusterEndpointMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DBClusterEndpointMessage#marker #marker} => String
+    #   * {Types::DBClusterEndpointMessage#db_cluster_endpoints #db_cluster_endpoints} => Array&lt;Types::DBClusterEndpoint&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_db_cluster_endpoints({
+    #     db_cluster_identifier: "String",
+    #     db_cluster_endpoint_identifier: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.db_cluster_endpoints #=> Array
+    #   resp.db_cluster_endpoints[0].db_cluster_endpoint_identifier #=> String
+    #   resp.db_cluster_endpoints[0].db_cluster_identifier #=> String
+    #   resp.db_cluster_endpoints[0].db_cluster_endpoint_resource_identifier #=> String
+    #   resp.db_cluster_endpoints[0].endpoint #=> String
+    #   resp.db_cluster_endpoints[0].status #=> String
+    #   resp.db_cluster_endpoints[0].endpoint_type #=> String
+    #   resp.db_cluster_endpoints[0].custom_endpoint_type #=> String
+    #   resp.db_cluster_endpoints[0].static_members #=> Array
+    #   resp.db_cluster_endpoints[0].static_members[0] #=> String
+    #   resp.db_cluster_endpoints[0].excluded_members #=> Array
+    #   resp.db_cluster_endpoints[0].excluded_members[0] #=> String
+    #   resp.db_cluster_endpoints[0].db_cluster_endpoint_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterEndpoints AWS API Documentation
+    #
+    # @overload describe_db_cluster_endpoints(params = {})
+    # @param [Hash] params ({})
+    def describe_db_cluster_endpoints(params = {}, options = {})
+      req = build_request(:describe_db_cluster_endpoints, params)
+      req.send_request(options)
+    end
+
     # Returns a list of `DBClusterParameterGroup` descriptions. If a
     # `DBClusterParameterGroupName` parameter is specified, the list will
     # contain only the description of the specified DB cluster parameter
@@ -5938,6 +6147,8 @@ module Aws::RDS
     #   resp.db_clusters[0].earliest_restorable_time #=> Time
     #   resp.db_clusters[0].endpoint #=> String
     #   resp.db_clusters[0].reader_endpoint #=> String
+    #   resp.db_clusters[0].custom_endpoints #=> Array
+    #   resp.db_clusters[0].custom_endpoints[0] #=> String
     #   resp.db_clusters[0].multi_az #=> Boolean
     #   resp.db_clusters[0].engine #=> String
     #   resp.db_clusters[0].engine_version #=> String
@@ -8510,6 +8721,8 @@ module Aws::RDS
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
     #   resp.db_cluster.reader_endpoint #=> String
+    #   resp.db_cluster.custom_endpoints #=> Array
+    #   resp.db_cluster.custom_endpoints[0] #=> String
     #   resp.db_cluster.multi_az #=> Boolean
     #   resp.db_cluster.engine #=> String
     #   resp.db_cluster.engine_version #=> String
@@ -8981,6 +9194,8 @@ module Aws::RDS
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
     #   resp.db_cluster.reader_endpoint #=> String
+    #   resp.db_cluster.custom_endpoints #=> Array
+    #   resp.db_cluster.custom_endpoints[0] #=> String
     #   resp.db_cluster.multi_az #=> Boolean
     #   resp.db_cluster.engine #=> String
     #   resp.db_cluster.engine_version #=> String
@@ -9034,6 +9249,70 @@ module Aws::RDS
     # @param [Hash] params ({})
     def modify_db_cluster(params = {}, options = {})
       req = build_request(:modify_db_cluster, params)
+      req.send_request(options)
+    end
+
+    # Modifies the properties of an endpoint in an Amazon Aurora DB cluster.
+    #
+    # @option params [required, String] :db_cluster_endpoint_identifier
+    #   The identifier of the endpoint to modify. This parameter is stored as
+    #   a lowercase string.
+    #
+    # @option params [String] :endpoint_type
+    #   The type of the endpoint. One of: `READER`, `ANY`.
+    #
+    # @option params [Array<String>] :static_members
+    #   List of DB instance identifiers that are part of the custom endpoint
+    #   group.
+    #
+    # @option params [Array<String>] :excluded_members
+    #   List of DB instance identifiers that aren't part of the custom
+    #   endpoint group. All other eligible instances are reachable through the
+    #   custom endpoint. Only relevant if the list of static members is empty.
+    #
+    # @return [Types::DBClusterEndpoint] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DBClusterEndpoint#db_cluster_endpoint_identifier #db_cluster_endpoint_identifier} => String
+    #   * {Types::DBClusterEndpoint#db_cluster_identifier #db_cluster_identifier} => String
+    #   * {Types::DBClusterEndpoint#db_cluster_endpoint_resource_identifier #db_cluster_endpoint_resource_identifier} => String
+    #   * {Types::DBClusterEndpoint#endpoint #endpoint} => String
+    #   * {Types::DBClusterEndpoint#status #status} => String
+    #   * {Types::DBClusterEndpoint#endpoint_type #endpoint_type} => String
+    #   * {Types::DBClusterEndpoint#custom_endpoint_type #custom_endpoint_type} => String
+    #   * {Types::DBClusterEndpoint#static_members #static_members} => Array&lt;String&gt;
+    #   * {Types::DBClusterEndpoint#excluded_members #excluded_members} => Array&lt;String&gt;
+    #   * {Types::DBClusterEndpoint#db_cluster_endpoint_arn #db_cluster_endpoint_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_db_cluster_endpoint({
+    #     db_cluster_endpoint_identifier: "String", # required
+    #     endpoint_type: "String",
+    #     static_members: ["String"],
+    #     excluded_members: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_cluster_endpoint_identifier #=> String
+    #   resp.db_cluster_identifier #=> String
+    #   resp.db_cluster_endpoint_resource_identifier #=> String
+    #   resp.endpoint #=> String
+    #   resp.status #=> String
+    #   resp.endpoint_type #=> String
+    #   resp.custom_endpoint_type #=> String
+    #   resp.static_members #=> Array
+    #   resp.static_members[0] #=> String
+    #   resp.excluded_members #=> Array
+    #   resp.excluded_members[0] #=> String
+    #   resp.db_cluster_endpoint_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterEndpoint AWS API Documentation
+    #
+    # @overload modify_db_cluster_endpoint(params = {})
+    # @param [Hash] params ({})
+    def modify_db_cluster_endpoint(params = {}, options = {})
+      req = build_request(:modify_db_cluster_endpoint, params)
       req.send_request(options)
     end
 
@@ -9432,7 +9711,7 @@ module Aws::RDS
     #   * Must be a value from 0 to 35
     #
     #   * Can be specified for a MySQL Read Replica only if the source is
-    #     running MySQL 5.6
+    #     running MySQL 5.6 or later
     #
     #   * Can be specified for a PostgreSQL Read Replica only if the source is
     #     running PostgreSQL 9.3.5
@@ -10854,6 +11133,8 @@ module Aws::RDS
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
     #   resp.db_cluster.reader_endpoint #=> String
+    #   resp.db_cluster.custom_endpoints #=> Array
+    #   resp.db_cluster.custom_endpoints[0] #=> String
     #   resp.db_cluster.multi_az #=> Boolean
     #   resp.db_cluster.engine #=> String
     #   resp.db_cluster.engine_version #=> String
@@ -11825,6 +12106,8 @@ module Aws::RDS
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
     #   resp.db_cluster.reader_endpoint #=> String
+    #   resp.db_cluster.custom_endpoints #=> Array
+    #   resp.db_cluster.custom_endpoints[0] #=> String
     #   resp.db_cluster.multi_az #=> Boolean
     #   resp.db_cluster.engine #=> String
     #   resp.db_cluster.engine_version #=> String
@@ -12117,6 +12400,8 @@ module Aws::RDS
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
     #   resp.db_cluster.reader_endpoint #=> String
+    #   resp.db_cluster.custom_endpoints #=> Array
+    #   resp.db_cluster.custom_endpoints[0] #=> String
     #   resp.db_cluster.multi_az #=> Boolean
     #   resp.db_cluster.engine #=> String
     #   resp.db_cluster.engine_version #=> String
@@ -12430,6 +12715,8 @@ module Aws::RDS
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
     #   resp.db_cluster.reader_endpoint #=> String
+    #   resp.db_cluster.custom_endpoints #=> Array
+    #   resp.db_cluster.custom_endpoints[0] #=> String
     #   resp.db_cluster.multi_az #=> Boolean
     #   resp.db_cluster.engine #=> String
     #   resp.db_cluster.engine_version #=> String
@@ -14222,6 +14509,8 @@ module Aws::RDS
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
     #   resp.db_cluster.reader_endpoint #=> String
+    #   resp.db_cluster.custom_endpoints #=> Array
+    #   resp.db_cluster.custom_endpoints[0] #=> String
     #   resp.db_cluster.multi_az #=> Boolean
     #   resp.db_cluster.engine #=> String
     #   resp.db_cluster.engine_version #=> String
@@ -14469,6 +14758,8 @@ module Aws::RDS
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
     #   resp.db_cluster.reader_endpoint #=> String
+    #   resp.db_cluster.custom_endpoints #=> Array
+    #   resp.db_cluster.custom_endpoints[0] #=> String
     #   resp.db_cluster.multi_az #=> Boolean
     #   resp.db_cluster.engine #=> String
     #   resp.db_cluster.engine_version #=> String
@@ -14694,7 +14985,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -389,12 +389,7 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] parameters
     #   A list of `Parameter` structures that specify input parameters for
-    #   the change set. For more information, see the [Parameter][1] data
-    #   type.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html
+    #   the change set. For more information, see the Parameter data type.
     #   @return [Array<Types::Parameter>]
     #
     # @!attribute [rw] capabilities
@@ -1600,6 +1595,109 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeStackDriftDetectionStatusInput
+    #   data as a hash:
+    #
+    #       {
+    #         stack_drift_detection_id: "StackDriftDetectionId", # required
+    #       }
+    #
+    # @!attribute [rw] stack_drift_detection_id
+    #   The ID of the drift detection results of this operation.
+    #
+    #   AWS CloudFormation generates new results, with a new drift detection
+    #   ID, each time this operation is run. However, the number of drift
+    #   results AWS CloudFormation retains for any given stack, and for how
+    #   long, may vary.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackDriftDetectionStatusInput AWS API Documentation
+    #
+    class DescribeStackDriftDetectionStatusInput < Struct.new(
+      :stack_drift_detection_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stack_id
+    #   The ID of the stack.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_drift_detection_id
+    #   The ID of the drift detection results of this operation.
+    #
+    #   AWS CloudFormation generates new results, with a new drift detection
+    #   ID, each time this operation is run. However, the number of reports
+    #   AWS CloudFormation retains for any given stack, and for how long,
+    #   may vary.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_drift_status
+    #   Status of the stack's actual configuration compared to its expected
+    #   configuration.
+    #
+    #   * `DRIFTED`\: The stack differs from its expected template
+    #     configuration. A stack is considered to have drifted if one or
+    #     more of its resources have drifted.
+    #
+    #   * `NOT_CHECKED`\: AWS CloudFormation has not checked if the stack
+    #     differs from its expected template configuration.
+    #
+    #   * `IN_SYNC`\: The stack's actual configuration matches its expected
+    #     template configuration.
+    #
+    #   * `UNKNOWN`\: This value is reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] detection_status
+    #   The status of the stack drift detection operation.
+    #
+    #   * `DETECTION_COMPLETE`\: The stack drift detection operation has
+    #     successfully completed for all resources in the stack that support
+    #     drift detection. (Resources that do not currently support stack
+    #     detection remain unchecked.)
+    #
+    #     If you specified logical resource IDs for AWS CloudFormation to
+    #     use as a filter for the stack drift detection operation, only the
+    #     resources with those logical IDs are checked for drift.
+    #
+    #   * `DETECTION_FAILED`\: The stack drift detection operation has
+    #     failed for at least one resource in the stack. Results will be
+    #     available for resources on which AWS CloudFormation successfully
+    #     completed drift detection.
+    #
+    #   * `DETECTION_IN_PROGRESS`\: The stack drift detection operation is
+    #     currently in progress.
+    #   @return [String]
+    #
+    # @!attribute [rw] detection_status_reason
+    #   The reason the stack drift detection operation has its current
+    #   status.
+    #   @return [String]
+    #
+    # @!attribute [rw] drifted_stack_resource_count
+    #   Total number of stack resources that have drifted. This is NULL
+    #   until the drift detection operation reaches a status of
+    #   `DETECTION_COMPLETE`. This value will be 0 for stacks whose drift
+    #   status is `IN_SYNC`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timestamp
+    #   Time at which the stack drift detection operation was initiated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackDriftDetectionStatusOutput AWS API Documentation
+    #
+    class DescribeStackDriftDetectionStatusOutput < Struct.new(
+      :stack_id,
+      :stack_drift_detection_id,
+      :stack_drift_status,
+      :detection_status,
+      :detection_status_reason,
+      :drifted_stack_resource_count,
+      :timestamp)
+      include Aws::Structure
+    end
+
     # The input for DescribeStackEvents action.
     #
     # @note When making an API call, you may pass DescribeStackEventsInput
@@ -1695,6 +1793,93 @@ module Aws::CloudFormation
     #
     class DescribeStackInstanceOutput < Struct.new(
       :stack_instance)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeStackResourceDriftsInput
+    #   data as a hash:
+    #
+    #       {
+    #         stack_name: "StackNameOrId", # required
+    #         stack_resource_drift_status_filters: ["IN_SYNC"], # accepts IN_SYNC, MODIFIED, DELETED, NOT_CHECKED
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] stack_name
+    #   The name of the stack for which you want drift information.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_resource_drift_status_filters
+    #   The resource drift status values to use as filters for the resource
+    #   drift results returned.
+    #
+    #   * `DELETED`\: The resource differs from its expected template
+    #     configuration in that the resource has been deleted.
+    #
+    #   * `MODIFIED`\: One or more resource properties differ from their
+    #     expected template values.
+    #
+    #   * `IN_SYNC`\: The resources's actual configuration matches its
+    #     expected template configuration.
+    #
+    #   * `NOT_CHECKED`\: AWS CloudFormation does not currently return this
+    #     value.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   A string that identifies the next page of stack resource drift
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned with a single call. If
+    #   the number of available results exceeds this maximum, the response
+    #   includes a `NextToken` value that you can assign to the `NextToken`
+    #   request parameter to get the next set of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResourceDriftsInput AWS API Documentation
+    #
+    class DescribeStackResourceDriftsInput < Struct.new(
+      :stack_name,
+      :stack_resource_drift_status_filters,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stack_resource_drifts
+    #   Drift information for the resources that have been checked for drift
+    #   in the specified stack. This includes actual and expected
+    #   configuration values for resources where AWS CloudFormation detects
+    #   drift.
+    #
+    #   For a given stack, there will be one `StackResourceDrift` for each
+    #   stack resource that has been checked for drift. Resources that have
+    #   not yet been checked for drift are not included. Resources that do
+    #   not currently support drift detection are not checked, and so not
+    #   included. For a list of resources that support drift detection, see
+    #   [Resources that Support Drift Detection][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html
+    #   @return [Array<Types::StackResourceDrift>]
+    #
+    # @!attribute [rw] next_token
+    #   If the request doesn't return all of the remaining results,
+    #   `NextToken` is set to a token. To retrieve the next set of results,
+    #   call `DescribeStackResourceDrifts` again and assign that token to
+    #   the request object's `NextToken` parameter. If the request returns
+    #   all results, `NextToken` is set to `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResourceDriftsOutput AWS API Documentation
+    #
+    class DescribeStackResourceDriftsOutput < Struct.new(
+      :stack_resource_drifts,
+      :next_token)
       include Aws::Structure
     end
 
@@ -1935,6 +2120,84 @@ module Aws::CloudFormation
     class DescribeStacksOutput < Struct.new(
       :stacks,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DetectStackDriftInput
+    #   data as a hash:
+    #
+    #       {
+    #         stack_name: "StackNameOrId", # required
+    #         logical_resource_ids: ["LogicalResourceId"],
+    #       }
+    #
+    # @!attribute [rw] stack_name
+    #   The name of the stack for which you want to detect drift.
+    #   @return [String]
+    #
+    # @!attribute [rw] logical_resource_ids
+    #   The logical names of any resources you want to use as filters.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DetectStackDriftInput AWS API Documentation
+    #
+    class DetectStackDriftInput < Struct.new(
+      :stack_name,
+      :logical_resource_ids)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stack_drift_detection_id
+    #   The ID of the drift detection results of this operation.
+    #
+    #   AWS CloudFormation generates new results, with a new drift detection
+    #   ID, each time this operation is run. However, the number of drift
+    #   results AWS CloudFormation retains for any given stack, and for how
+    #   long, may vary.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DetectStackDriftOutput AWS API Documentation
+    #
+    class DetectStackDriftOutput < Struct.new(
+      :stack_drift_detection_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DetectStackResourceDriftInput
+    #   data as a hash:
+    #
+    #       {
+    #         stack_name: "StackNameOrId", # required
+    #         logical_resource_id: "LogicalResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] stack_name
+    #   The name of the stack to which the resource belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] logical_resource_id
+    #   The logical name of the resource for which to return drift
+    #   information.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DetectStackResourceDriftInput AWS API Documentation
+    #
+    class DetectStackResourceDriftInput < Struct.new(
+      :stack_name,
+      :logical_resource_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stack_resource_drift
+    #   Information about whether the resource's actual configuration has
+    #   drifted from its expected template configuration, including actual
+    #   and expected property values and any differences detected.
+    #   @return [Types::StackResourceDrift]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DetectStackResourceDriftOutput AWS API Documentation
+    #
+    class DetectStackResourceDriftOutput < Struct.new(
+      :stack_resource_drift)
       include Aws::Structure
     end
 
@@ -2968,6 +3231,76 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # Context information that enables AWS CloudFormation to uniquely
+    # identify a resource. AWS CloudFormation uses context key-value pairs
+    # in cases where a resource's logical and physical IDs are not enough
+    # to uniquely identify that resource. Each context key-value pair
+    # specifies a resource that contains the targeted resource.
+    #
+    # @!attribute [rw] key
+    #   The resource context key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The resource context value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/PhysicalResourceIdContextKeyValuePair AWS API Documentation
+    #
+    class PhysicalResourceIdContextKeyValuePair < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # Information about a resource property whose actual value differs from
+    # its expected value, as defined in the stack template and any values
+    # specified as template parameters. These will be present only for
+    # resources whose `StackResourceDriftStatus` is `MODIFIED`. For more
+    # information, see [Detecting Unregulated Configuration Changes to
+    # Stacks and Resources][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
+    #
+    # @!attribute [rw] property_path
+    #   The fully-qualified path to the resource property.
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_value
+    #   The expected property value of the resource property, as defined in
+    #   the stack template and any values specified as template parameters.
+    #   @return [String]
+    #
+    # @!attribute [rw] actual_value
+    #   The actual property value of the resource property.
+    #   @return [String]
+    #
+    # @!attribute [rw] difference_type
+    #   The type of property difference.
+    #
+    #   * `ADD`\: A value has been added to a resource property that is an
+    #     array or list data type.
+    #
+    #   * `REMOVE`\: The property has been removed from the current resource
+    #     configuration.
+    #
+    #   * `NOT_EQUAL`\: The current property value differs from its expected
+    #     value (as defined in the stack template and any values specified
+    #     as template parameters).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/PropertyDifference AWS API Documentation
+    #
+    class PropertyDifference < Struct.new(
+      :property_path,
+      :expected_value,
+      :actual_value,
+      :difference_type)
+      include Aws::Structure
+    end
+
     # The `ResourceChange` structure describes the resource and the action
     # that AWS CloudFormation will perform on it if you execute this change
     # set.
@@ -3485,6 +3818,18 @@ module Aws::CloudFormation
     #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
     #   @return [String]
     #
+    # @!attribute [rw] drift_information
+    #   Information on whether a stack's actual configuration differs, or
+    #   has *drifted*, from it's expected configuration, as defined in the
+    #   stack template and any values specified as template parameters. For
+    #   more information, see [Detecting Unregulated Configuration Changes
+    #   to Stacks and Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
+    #   @return [Types::StackDriftInformation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Stack AWS API Documentation
     #
     class Stack < Struct.new(
@@ -3508,7 +3853,82 @@ module Aws::CloudFormation
       :tags,
       :enable_termination_protection,
       :parent_id,
-      :root_id)
+      :root_id,
+      :drift_information)
+      include Aws::Structure
+    end
+
+    # Contains information about whether the stack's actual configuration
+    # differs, or has *drifted*, from its expected configuration, as defined
+    # in the stack template and any values specified as template parameters.
+    # A stack is considered to have drifted if one or more of its resources
+    # have drifted.
+    #
+    # @!attribute [rw] stack_drift_status
+    #   Status of the stack's actual configuration compared to its expected
+    #   template configuration.
+    #
+    #   * `DRIFTED`\: The stack differs from its expected template
+    #     configuration. A stack is considered to have drifted if one or
+    #     more of its resources have drifted.
+    #
+    #   * `NOT_CHECKED`\: AWS CloudFormation has not checked if the stack
+    #     differs from its expected template configuration.
+    #
+    #   * `IN_SYNC`\: The stack's actual configuration matches its expected
+    #     template configuration.
+    #
+    #   * `UNKNOWN`\: This value is reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_check_timestamp
+    #   Most recent time when a drift detection operation was initiated on
+    #   the stack, or any of its individual resources that support drift
+    #   detection.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackDriftInformation AWS API Documentation
+    #
+    class StackDriftInformation < Struct.new(
+      :stack_drift_status,
+      :last_check_timestamp)
+      include Aws::Structure
+    end
+
+    # Contains information about whether the stack's actual configuration
+    # differs, or has *drifted*, from its expected configuration, as defined
+    # in the stack template and any values specified as template parameters.
+    # A stack is considered to have drifted if one or more of its resources
+    # have drifted.
+    #
+    # @!attribute [rw] stack_drift_status
+    #   Status of the stack's actual configuration compared to its expected
+    #   template configuration.
+    #
+    #   * `DRIFTED`\: The stack differs from its expected template
+    #     configuration. A stack is considered to have drifted if one or
+    #     more of its resources have drifted.
+    #
+    #   * `NOT_CHECKED`\: AWS CloudFormation has not checked if the stack
+    #     differs from its expected template configuration.
+    #
+    #   * `IN_SYNC`\: The stack's actual configuration matches its expected
+    #     template configuration.
+    #
+    #   * `UNKNOWN`\: This value is reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_check_timestamp
+    #   Most recent time when a drift detection operation was initiated on
+    #   the stack, or any of its individual resources that support drift
+    #   detection.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackDriftInformationSummary AWS API Documentation
+    #
+    class StackDriftInformationSummary < Struct.new(
+      :stack_drift_status,
+      :last_check_timestamp)
       include Aws::Structure
     end
 
@@ -3777,6 +4197,18 @@ module Aws::CloudFormation
     #   User defined description associated with the resource.
     #   @return [String]
     #
+    # @!attribute [rw] drift_information
+    #   Information about whether the resource's actual configuration
+    #   differs, or has *drifted*, from its expected configuration, as
+    #   defined in the stack template and any values specified as template
+    #   parameters. For more information, see [Detecting Unregulated
+    #   Configuration Changes to Stacks and Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
+    #   @return [Types::StackResourceDriftInformation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackResource AWS API Documentation
     #
     class StackResource < Struct.new(
@@ -3788,7 +4220,8 @@ module Aws::CloudFormation
       :timestamp,
       :resource_status,
       :resource_status_reason,
-      :description)
+      :description,
+      :drift_information)
       include Aws::Structure
     end
 
@@ -3846,6 +4279,18 @@ module Aws::CloudFormation
     #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-metadata.html
     #   @return [String]
     #
+    # @!attribute [rw] drift_information
+    #   Information about whether the resource's actual configuration
+    #   differs, or has *drifted*, from its expected configuration, as
+    #   defined in the stack template and any values specified as template
+    #   parameters. For more information, see [Detecting Unregulated
+    #   Configuration Changes to Stacks and Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
+    #   @return [Types::StackResourceDriftInformation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackResourceDetail AWS API Documentation
     #
     class StackResourceDetail < Struct.new(
@@ -3858,7 +4303,203 @@ module Aws::CloudFormation
       :resource_status,
       :resource_status_reason,
       :description,
-      :metadata)
+      :metadata,
+      :drift_information)
+      include Aws::Structure
+    end
+
+    # Contains the drift information for a resource that has been checked
+    # for drift. This includes actual and expected property values for
+    # resources in which AWS CloudFormation has detected drift. Only
+    # resource properties explicitly defined in the stack template are
+    # checked for drift. For more information, see [Detecting Unregulated
+    # Configuration Changes to Stacks and Resources][1].
+    #
+    # Resources that do not currently support drift detection cannot be
+    # checked. For a list of resources that support drift detection, see
+    # [Resources that Support Drift Detection][2].
+    #
+    # Use DetectStackResourceDrift to detect drift on individual resources,
+    # or DetectStackDrift to detect drift on all resources in a given stack
+    # that support drift detection.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
+    # [2]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html
+    #
+    # @!attribute [rw] stack_id
+    #   The ID of the stack.
+    #   @return [String]
+    #
+    # @!attribute [rw] logical_resource_id
+    #   The logical name of the resource specified in the template.
+    #   @return [String]
+    #
+    # @!attribute [rw] physical_resource_id
+    #   The name or unique identifier that corresponds to a physical
+    #   instance ID of a resource supported by AWS CloudFormation.
+    #   @return [String]
+    #
+    # @!attribute [rw] physical_resource_id_context
+    #   Context information that enables AWS CloudFormation to uniquely
+    #   identify a resource. AWS CloudFormation uses context key-value pairs
+    #   in cases where a resource's logical and physical IDs are not enough
+    #   to uniquely identify that resource. Each context key-value pair
+    #   specifies a unique resource that contains the targeted resource.
+    #   @return [Array<Types::PhysicalResourceIdContextKeyValuePair>]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_properties
+    #   A JSON structure containing the expected property values of the
+    #   stack resource, as defined in the stack template and any values
+    #   specified as template parameters.
+    #
+    #   For resources whose `StackResourceDriftStatus` is `DELETED`, this
+    #   structure will not be present.
+    #   @return [String]
+    #
+    # @!attribute [rw] actual_properties
+    #   A JSON structure containing the actual property values of the stack
+    #   resource.
+    #
+    #   For resources whose `StackResourceDriftStatus` is `DELETED`, this
+    #   structure will not be present.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_differences
+    #   A collection of the resource properties whose actual values differ
+    #   from their expected values. These will be present only for resources
+    #   whose `StackResourceDriftStatus` is `MODIFIED`.
+    #   @return [Array<Types::PropertyDifference>]
+    #
+    # @!attribute [rw] stack_resource_drift_status
+    #   Status of the resource's actual configuration compared to its
+    #   expected configuration
+    #
+    #   * `DELETED`\: The resource differs from its expected template
+    #     configuration because the resource has been deleted.
+    #
+    #   * `MODIFIED`\: One or more resource properties differ from their
+    #     expected values (as defined in the stack template and any values
+    #     specified as template parameters).
+    #
+    #   * `IN_SYNC`\: The resources's actual configuration matches its
+    #     expected template configuration.
+    #
+    #   * `NOT_CHECKED`\: AWS CloudFormation does not currently return this
+    #     value.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   Time at which AWS CloudFormation performed drift detection on the
+    #   stack resource.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackResourceDrift AWS API Documentation
+    #
+    class StackResourceDrift < Struct.new(
+      :stack_id,
+      :logical_resource_id,
+      :physical_resource_id,
+      :physical_resource_id_context,
+      :resource_type,
+      :expected_properties,
+      :actual_properties,
+      :property_differences,
+      :stack_resource_drift_status,
+      :timestamp)
+      include Aws::Structure
+    end
+
+    # Contains information about whether the resource's actual
+    # configuration differs, or has *drifted*, from its expected
+    # configuration.
+    #
+    # @!attribute [rw] stack_resource_drift_status
+    #   Status of the resource's actual configuration compared to its
+    #   expected configuration
+    #
+    #   * `DELETED`\: The resource differs from its expected configuration
+    #     in that it has been deleted.
+    #
+    #   * `MODIFIED`\: The resource differs from its expected configuration.
+    #
+    #   * `NOT_CHECKED`\: AWS CloudFormation has not checked if the resource
+    #     differs from its expected configuration.
+    #
+    #     Any resources that do not currently support drift detection have a
+    #     status of `NOT_CHECKED`. For more information, see [Resources that
+    #     Support Drift Detection][1].
+    #
+    #   * `IN_SYNC`\: The resources's actual configuration matches its
+    #     expected configuration.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html
+    #   @return [String]
+    #
+    # @!attribute [rw] last_check_timestamp
+    #   When AWS CloudFormation last checked if the resource had drifted
+    #   from its expected configuration.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackResourceDriftInformation AWS API Documentation
+    #
+    class StackResourceDriftInformation < Struct.new(
+      :stack_resource_drift_status,
+      :last_check_timestamp)
+      include Aws::Structure
+    end
+
+    # Summarizes information about whether the resource's actual
+    # configuration differs, or has *drifted*, from its expected
+    # configuration.
+    #
+    # @!attribute [rw] stack_resource_drift_status
+    #   Status of the resource's actual configuration compared to its
+    #   expected configuration
+    #
+    #   * `DELETED`\: The resource differs from its expected configuration
+    #     in that it has been deleted.
+    #
+    #   * `MODIFIED`\: The resource differs from its expected configuration.
+    #
+    #   * `NOT_CHECKED`\: AWS CloudFormation has not checked if the resource
+    #     differs from its expected configuration.
+    #
+    #     Any resources that do not currently support drift detection have a
+    #     status of `NOT_CHECKED`. For more information, see [Resources that
+    #     Support Drift Detection][1]. If you performed an
+    #     ContinueUpdateRollback operation on a stack, any resources
+    #     included in `ResourcesToSkip` will also have a status of
+    #     `NOT_CHECKED`. For more information on skipping resources during
+    #     rollback operations, see [Continue Rolling Back an Update][2] in
+    #     the AWS CloudFormation User Guide.
+    #
+    #   * `IN_SYNC`\: The resources's actual configuration matches its
+    #     expected configuration.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html
+    #   [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html
+    #   @return [String]
+    #
+    # @!attribute [rw] last_check_timestamp
+    #   When AWS CloudFormation last checked if the resource had drifted
+    #   from its expected configuration.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackResourceDriftInformationSummary AWS API Documentation
+    #
+    class StackResourceDriftInformationSummary < Struct.new(
+      :stack_resource_drift_status,
+      :last_check_timestamp)
       include Aws::Structure
     end
 
@@ -3894,6 +4535,18 @@ module Aws::CloudFormation
     #   Success/failure message associated with the resource.
     #   @return [String]
     #
+    # @!attribute [rw] drift_information
+    #   Information about whether the resource's actual configuration
+    #   differs, or has *drifted*, from its expected configuration, as
+    #   defined in the stack template and any values specified as template
+    #   parameters. For more information, see [Detecting Unregulated
+    #   Configuration Changes to Stacks and Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
+    #   @return [Types::StackResourceDriftInformationSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackResourceSummary AWS API Documentation
     #
     class StackResourceSummary < Struct.new(
@@ -3902,7 +4555,8 @@ module Aws::CloudFormation
       :resource_type,
       :last_updated_timestamp,
       :resource_status,
-      :resource_status_reason)
+      :resource_status_reason,
+      :drift_information)
       include Aws::Structure
     end
 
@@ -4418,6 +5072,18 @@ module Aws::CloudFormation
     #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
     #   @return [String]
     #
+    # @!attribute [rw] drift_information
+    #   Summarizes information on whether a stack's actual configuration
+    #   differs, or has *drifted*, from it's expected configuration, as
+    #   defined in the stack template and any values specified as template
+    #   parameters. For more information, see [Detecting Unregulated
+    #   Configuration Changes to Stacks and Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
+    #   @return [Types::StackDriftInformationSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSummary AWS API Documentation
     #
     class StackSummary < Struct.new(
@@ -4430,7 +5096,8 @@ module Aws::CloudFormation
       :stack_status,
       :stack_status_reason,
       :parent_id,
-      :root_id)
+      :root_id,
+      :drift_information)
       include Aws::Structure
     end
 

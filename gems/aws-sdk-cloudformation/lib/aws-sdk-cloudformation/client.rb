@@ -403,11 +403,7 @@ module Aws::CloudFormation
     #
     # @option params [Array<Types::Parameter>] :parameters
     #   A list of `Parameter` structures that specify input parameters for the
-    #   change set. For more information, see the [Parameter][1] data type.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html
+    #   change set. For more information, see the Parameter data type.
     #
     # @option params [Array<String>] :capabilities
     #   A list of values that you must specify before AWS CloudFormation can
@@ -1490,6 +1486,69 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
+    # Returns information about a stack drift detection operation. A stack
+    # drift detection operation detects whether a stack's actual
+    # configuration differs, or has *drifted*, from it's expected
+    # configuration, as defined in the stack template and any values
+    # specified as template parameters. A stack is considered to have
+    # drifted if one or more of its resources have drifted. For more
+    # information on stack and resource drift, see [Detecting Unregulated
+    # Configuration Changes to Stacks and Resources][1].
+    #
+    # Use DetectStackDrift to initiate a stack drift detection operation.
+    # `DetectStackDrift` returns a `StackDriftDetectionId` you can use to
+    # monitor the progress of the operation using
+    # `DescribeStackDriftDetectionStatus`. Once the drift detection
+    # operation has completed, use DescribeStackResourceDrifts to return
+    # drift information about the stack and its resources.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
+    #
+    # @option params [required, String] :stack_drift_detection_id
+    #   The ID of the drift detection results of this operation.
+    #
+    #   AWS CloudFormation generates new results, with a new drift detection
+    #   ID, each time this operation is run. However, the number of drift
+    #   results AWS CloudFormation retains for any given stack, and for how
+    #   long, may vary.
+    #
+    # @return [Types::DescribeStackDriftDetectionStatusOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeStackDriftDetectionStatusOutput#stack_id #stack_id} => String
+    #   * {Types::DescribeStackDriftDetectionStatusOutput#stack_drift_detection_id #stack_drift_detection_id} => String
+    #   * {Types::DescribeStackDriftDetectionStatusOutput#stack_drift_status #stack_drift_status} => String
+    #   * {Types::DescribeStackDriftDetectionStatusOutput#detection_status #detection_status} => String
+    #   * {Types::DescribeStackDriftDetectionStatusOutput#detection_status_reason #detection_status_reason} => String
+    #   * {Types::DescribeStackDriftDetectionStatusOutput#drifted_stack_resource_count #drifted_stack_resource_count} => Integer
+    #   * {Types::DescribeStackDriftDetectionStatusOutput#timestamp #timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_stack_drift_detection_status({
+    #     stack_drift_detection_id: "StackDriftDetectionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.stack_id #=> String
+    #   resp.stack_drift_detection_id #=> String
+    #   resp.stack_drift_status #=> String, one of "DRIFTED", "IN_SYNC", "UNKNOWN", "NOT_CHECKED"
+    #   resp.detection_status #=> String, one of "DETECTION_IN_PROGRESS", "DETECTION_FAILED", "DETECTION_COMPLETE"
+    #   resp.detection_status_reason #=> String
+    #   resp.drifted_stack_resource_count #=> Integer
+    #   resp.timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackDriftDetectionStatus AWS API Documentation
+    #
+    # @overload describe_stack_drift_detection_status(params = {})
+    # @param [Hash] params ({})
+    def describe_stack_drift_detection_status(params = {}, options = {})
+      req = build_request(:describe_stack_drift_detection_status, params)
+      req.send_request(options)
+    end
+
     # Returns all stack related events for a specified stack in reverse
     # chronological order. For more information about a stack's event
     # history, go to [Stacks][1] in the AWS CloudFormation User Guide.
@@ -1651,6 +1710,8 @@ module Aws::CloudFormation
     #   resp.stack_resource_detail.resource_status_reason #=> String
     #   resp.stack_resource_detail.description #=> String
     #   resp.stack_resource_detail.metadata #=> String
+    #   resp.stack_resource_detail.drift_information.stack_resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED"
+    #   resp.stack_resource_detail.drift_information.last_check_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResource AWS API Documentation
     #
@@ -1658,6 +1719,99 @@ module Aws::CloudFormation
     # @param [Hash] params ({})
     def describe_stack_resource(params = {}, options = {})
       req = build_request(:describe_stack_resource, params)
+      req.send_request(options)
+    end
+
+    # Returns drift information for the resources that have been checked for
+    # drift in the specified stack. This includes actual and expected
+    # configuration values for resources where AWS CloudFormation detects
+    # configuration drift.
+    #
+    # For a given stack, there will be one `StackResourceDrift` for each
+    # stack resource that has been checked for drift. Resources that have
+    # not yet been checked for drift are not included. Resources that do not
+    # currently support drift detection are not checked, and so not
+    # included. For a list of resources that support drift detection, see
+    # [Resources that Support Drift Detection][1].
+    #
+    # Use DetectStackResourceDrift to detect drift on individual resources,
+    # or DetectStackDrift to detect drift on all supported resources for a
+    # given stack.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html
+    #
+    # @option params [required, String] :stack_name
+    #   The name of the stack for which you want drift information.
+    #
+    # @option params [Array<String>] :stack_resource_drift_status_filters
+    #   The resource drift status values to use as filters for the resource
+    #   drift results returned.
+    #
+    #   * `DELETED`\: The resource differs from its expected template
+    #     configuration in that the resource has been deleted.
+    #
+    #   * `MODIFIED`\: One or more resource properties differ from their
+    #     expected template values.
+    #
+    #   * `IN_SYNC`\: The resources's actual configuration matches its
+    #     expected template configuration.
+    #
+    #   * `NOT_CHECKED`\: AWS CloudFormation does not currently return this
+    #     value.
+    #
+    # @option params [String] :next_token
+    #   A string that identifies the next page of stack resource drift
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned with a single call. If
+    #   the number of available results exceeds this maximum, the response
+    #   includes a `NextToken` value that you can assign to the `NextToken`
+    #   request parameter to get the next set of results.
+    #
+    # @return [Types::DescribeStackResourceDriftsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeStackResourceDriftsOutput#stack_resource_drifts #stack_resource_drifts} => Array&lt;Types::StackResourceDrift&gt;
+    #   * {Types::DescribeStackResourceDriftsOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_stack_resource_drifts({
+    #     stack_name: "StackNameOrId", # required
+    #     stack_resource_drift_status_filters: ["IN_SYNC"], # accepts IN_SYNC, MODIFIED, DELETED, NOT_CHECKED
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.stack_resource_drifts #=> Array
+    #   resp.stack_resource_drifts[0].stack_id #=> String
+    #   resp.stack_resource_drifts[0].logical_resource_id #=> String
+    #   resp.stack_resource_drifts[0].physical_resource_id #=> String
+    #   resp.stack_resource_drifts[0].physical_resource_id_context #=> Array
+    #   resp.stack_resource_drifts[0].physical_resource_id_context[0].key #=> String
+    #   resp.stack_resource_drifts[0].physical_resource_id_context[0].value #=> String
+    #   resp.stack_resource_drifts[0].resource_type #=> String
+    #   resp.stack_resource_drifts[0].expected_properties #=> String
+    #   resp.stack_resource_drifts[0].actual_properties #=> String
+    #   resp.stack_resource_drifts[0].property_differences #=> Array
+    #   resp.stack_resource_drifts[0].property_differences[0].property_path #=> String
+    #   resp.stack_resource_drifts[0].property_differences[0].expected_value #=> String
+    #   resp.stack_resource_drifts[0].property_differences[0].actual_value #=> String
+    #   resp.stack_resource_drifts[0].property_differences[0].difference_type #=> String, one of "ADD", "REMOVE", "NOT_EQUAL"
+    #   resp.stack_resource_drifts[0].stack_resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED"
+    #   resp.stack_resource_drifts[0].timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResourceDrifts AWS API Documentation
+    #
+    # @overload describe_stack_resource_drifts(params = {})
+    # @param [Hash] params ({})
+    def describe_stack_resource_drifts(params = {}, options = {})
+      req = build_request(:describe_stack_resource_drifts, params)
       req.send_request(options)
     end
 
@@ -1747,6 +1901,8 @@ module Aws::CloudFormation
     #   resp.stack_resources[0].resource_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE"
     #   resp.stack_resources[0].resource_status_reason #=> String
     #   resp.stack_resources[0].description #=> String
+    #   resp.stack_resources[0].drift_information.stack_resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED"
+    #   resp.stack_resources[0].drift_information.last_check_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResources AWS API Documentation
     #
@@ -1923,6 +2079,8 @@ module Aws::CloudFormation
     #   resp.stacks[0].enable_termination_protection #=> Boolean
     #   resp.stacks[0].parent_id #=> String
     #   resp.stacks[0].root_id #=> String
+    #   resp.stacks[0].drift_information.stack_drift_status #=> String, one of "DRIFTED", "IN_SYNC", "UNKNOWN", "NOT_CHECKED"
+    #   resp.stacks[0].drift_information.last_check_timestamp #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStacks AWS API Documentation
@@ -1931,6 +2089,140 @@ module Aws::CloudFormation
     # @param [Hash] params ({})
     def describe_stacks(params = {}, options = {})
       req = build_request(:describe_stacks, params)
+      req.send_request(options)
+    end
+
+    # Detects whether a stack's actual configuration differs, or has
+    # *drifted*, from it's expected configuration, as defined in the stack
+    # template and any values specified as template parameters. For each
+    # resource in the stack that supports drift detection, AWS
+    # CloudFormation compares the actual configuration of the resource with
+    # its expected template configuration. Only resource properties
+    # explicitly defined in the stack template are checked for drift. A
+    # stack is considered to have drifted if one or more of its resources
+    # differ from their expected template configurations. For more
+    # information, see [Detecting Unregulated Configuration Changes to
+    # Stacks and Resources][1].
+    #
+    # Use `DetectStackDrift` to detect drift on all supported resources for
+    # a given stack, or DetectStackResourceDrift to detect drift on
+    # individual resources.
+    #
+    # For a list of stack resources that currently support drift detection,
+    # see [Resources that Support Drift Detection][2].
+    #
+    # `DetectStackDrift` can take up to several minutes, depending on the
+    # number of resources contained within the stack. Use
+    # DescribeStackDriftDetectionStatus to monitor the progress of a detect
+    # stack drift operation. Once the drift detection operation has
+    # completed, use DescribeStackResourceDrifts to return drift information
+    # about the stack and its resources.
+    #
+    # When detecting drift on a stack, AWS CloudFormation does not detect
+    # drift on any nested stacks belonging to that stack. Perform
+    # `DetectStackDrift` directly on the nested stack itself.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
+    # [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html
+    #
+    # @option params [required, String] :stack_name
+    #   The name of the stack for which you want to detect drift.
+    #
+    # @option params [Array<String>] :logical_resource_ids
+    #   The logical names of any resources you want to use as filters.
+    #
+    # @return [Types::DetectStackDriftOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DetectStackDriftOutput#stack_drift_detection_id #stack_drift_detection_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.detect_stack_drift({
+    #     stack_name: "StackNameOrId", # required
+    #     logical_resource_ids: ["LogicalResourceId"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.stack_drift_detection_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DetectStackDrift AWS API Documentation
+    #
+    # @overload detect_stack_drift(params = {})
+    # @param [Hash] params ({})
+    def detect_stack_drift(params = {}, options = {})
+      req = build_request(:detect_stack_drift, params)
+      req.send_request(options)
+    end
+
+    # Returns information about whether a resource's actual configuration
+    # differs, or has *drifted*, from it's expected configuration, as
+    # defined in the stack template and any values specified as template
+    # parameters. This information includes actual and expected property
+    # values for resources in which AWS CloudFormation detects drift. Only
+    # resource properties explicitly defined in the stack template are
+    # checked for drift. For more information about stack and resource
+    # drift, see [Detecting Unregulated Configuration Changes to Stacks and
+    # Resources][1].
+    #
+    # Use `DetectStackResourceDrift` to detect drift on individual
+    # resources, or DetectStackDrift to detect drift on all resources in a
+    # given stack that support drift detection.
+    #
+    # Resources that do not currently support drift detection cannot be
+    # checked. For a list of resources that support drift detection, see
+    # [Resources that Support Drift Detection][2].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
+    # [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html
+    #
+    # @option params [required, String] :stack_name
+    #   The name of the stack to which the resource belongs.
+    #
+    # @option params [required, String] :logical_resource_id
+    #   The logical name of the resource for which to return drift
+    #   information.
+    #
+    # @return [Types::DetectStackResourceDriftOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DetectStackResourceDriftOutput#stack_resource_drift #stack_resource_drift} => Types::StackResourceDrift
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.detect_stack_resource_drift({
+    #     stack_name: "StackNameOrId", # required
+    #     logical_resource_id: "LogicalResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.stack_resource_drift.stack_id #=> String
+    #   resp.stack_resource_drift.logical_resource_id #=> String
+    #   resp.stack_resource_drift.physical_resource_id #=> String
+    #   resp.stack_resource_drift.physical_resource_id_context #=> Array
+    #   resp.stack_resource_drift.physical_resource_id_context[0].key #=> String
+    #   resp.stack_resource_drift.physical_resource_id_context[0].value #=> String
+    #   resp.stack_resource_drift.resource_type #=> String
+    #   resp.stack_resource_drift.expected_properties #=> String
+    #   resp.stack_resource_drift.actual_properties #=> String
+    #   resp.stack_resource_drift.property_differences #=> Array
+    #   resp.stack_resource_drift.property_differences[0].property_path #=> String
+    #   resp.stack_resource_drift.property_differences[0].expected_value #=> String
+    #   resp.stack_resource_drift.property_differences[0].actual_value #=> String
+    #   resp.stack_resource_drift.property_differences[0].difference_type #=> String, one of "ADD", "REMOVE", "NOT_EQUAL"
+    #   resp.stack_resource_drift.stack_resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED"
+    #   resp.stack_resource_drift.timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DetectStackResourceDrift AWS API Documentation
+    #
+    # @overload detect_stack_resource_drift(params = {})
+    # @param [Hash] params ({})
+    def detect_stack_resource_drift(params = {}, options = {})
+      req = build_request(:detect_stack_resource_drift, params)
       req.send_request(options)
     end
 
@@ -2487,6 +2779,8 @@ module Aws::CloudFormation
     #   resp.stack_resource_summaries[0].last_updated_timestamp #=> Time
     #   resp.stack_resource_summaries[0].resource_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE"
     #   resp.stack_resource_summaries[0].resource_status_reason #=> String
+    #   resp.stack_resource_summaries[0].drift_information.stack_resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED"
+    #   resp.stack_resource_summaries[0].drift_information.last_check_timestamp #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackResources AWS API Documentation
@@ -2704,6 +2998,8 @@ module Aws::CloudFormation
     #   resp.stack_summaries[0].stack_status_reason #=> String
     #   resp.stack_summaries[0].parent_id #=> String
     #   resp.stack_summaries[0].root_id #=> String
+    #   resp.stack_summaries[0].drift_information.stack_drift_status #=> String, one of "DRIFTED", "IN_SYNC", "UNKNOWN", "NOT_CHECKED"
+    #   resp.stack_summaries[0].drift_information.last_check_timestamp #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStacks AWS API Documentation
@@ -3517,16 +3813,14 @@ module Aws::CloudFormation
     # Updates termination protection for the specified stack. If a user
     # attempts to delete a stack with termination protection enabled, the
     # operation fails and the stack remains unchanged. For more information,
-    # see [Protecting a Stack From Being Deleted][1] in the *AWS
-    # CloudFormation User Guide*.
+    # see [Protecting a Stack From Being
+    # Deleted](AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html)
+    # in the *AWS CloudFormation User Guide*.
     #
-    # For [nested stacks][2], termination protection is set on the root
-    # stack and cannot be changed directly on the nested stack.
-    #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html
-    # [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
+    # For [nested
+    # stacks](AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html),
+    # termination protection is set on the root stack and cannot be changed
+    # directly on the nested stack.
     #
     # @option params [required, Boolean] :enable_termination_protection
     #   Whether to enable termination protection on the specified stack.
@@ -3640,7 +3934,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

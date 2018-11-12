@@ -74,6 +74,7 @@ module Aws::Batch
     JobSummaryList = Shapes::ListShape.new(name: 'JobSummaryList')
     JobTimeout = Shapes::StructureShape.new(name: 'JobTimeout')
     KeyValuePair = Shapes::StructureShape.new(name: 'KeyValuePair')
+    LaunchTemplateSpecification = Shapes::StructureShape.new(name: 'LaunchTemplateSpecification')
     ListJobsRequest = Shapes::StructureShape.new(name: 'ListJobsRequest')
     ListJobsResponse = Shapes::StructureShape.new(name: 'ListJobsResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
@@ -162,12 +163,13 @@ module Aws::Batch
     ComputeResource.add_member(:instance_types, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "instanceTypes"))
     ComputeResource.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
     ComputeResource.add_member(:subnets, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "subnets"))
-    ComputeResource.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "securityGroupIds"))
+    ComputeResource.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "securityGroupIds"))
     ComputeResource.add_member(:ec2_key_pair, Shapes::ShapeRef.new(shape: String, location_name: "ec2KeyPair"))
     ComputeResource.add_member(:instance_role, Shapes::ShapeRef.new(shape: String, required: true, location_name: "instanceRole"))
     ComputeResource.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     ComputeResource.add_member(:bid_percentage, Shapes::ShapeRef.new(shape: Integer, location_name: "bidPercentage"))
     ComputeResource.add_member(:spot_iam_fleet_role, Shapes::ShapeRef.new(shape: String, location_name: "spotIamFleetRole"))
+    ComputeResource.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplateSpecification, location_name: "launchTemplate"))
     ComputeResource.struct_class = Types::ComputeResource
 
     ComputeResourceUpdate.add_member(:minv_cpus, Shapes::ShapeRef.new(shape: Integer, location_name: "minvCpus"))
@@ -363,6 +365,11 @@ module Aws::Batch
     KeyValuePair.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     KeyValuePair.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     KeyValuePair.struct_class = Types::KeyValuePair
+
+    LaunchTemplateSpecification.add_member(:launch_template_id, Shapes::ShapeRef.new(shape: String, location_name: "launchTemplateId"))
+    LaunchTemplateSpecification.add_member(:launch_template_name, Shapes::ShapeRef.new(shape: String, location_name: "launchTemplateName"))
+    LaunchTemplateSpecification.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
+    LaunchTemplateSpecification.struct_class = Types::LaunchTemplateSpecification
 
     ListJobsRequest.add_member(:job_queue, Shapes::ShapeRef.new(shape: String, location_name: "jobQueue"))
     ListJobsRequest.add_member(:array_job_id, Shapes::ShapeRef.new(shape: String, location_name: "arrayJobId"))

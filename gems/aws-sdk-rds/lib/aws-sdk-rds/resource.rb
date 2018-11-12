@@ -598,10 +598,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     16384.
+    #     32768.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #     16384.
+    #     32768.
     #
     #   * Magnetic storage (standard): Must be an integer from 10 to 3072.
     #

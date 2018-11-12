@@ -202,9 +202,19 @@ module Aws::Batch
     #
     # @!attribute [rw] state
     #   The state of the compute environment. The valid values are `ENABLED`
-    #   or `DISABLED`. An `ENABLED` state indicates that you can register
-    #   instances with the compute environment and that the associated
-    #   instances can accept jobs.
+    #   or `DISABLED`.
+    #
+    #   If the state is `ENABLED`, then the AWS Batch scheduler can attempt
+    #   to place jobs from an associated job queue on the compute resources
+    #   within the environment. If the compute environment is managed, then
+    #   it can scale its instances out or in automatically, based on job
+    #   queue demand.
+    #
+    #   If the state is `DISABLED`, then the AWS Batch scheduler does not
+    #   attempt to place jobs within the environment. Jobs in a `STARTING`
+    #   or `RUNNING` state continue to progress normally. Managed compute
+    #   environments in the `DISABLED` state do not scale out; however, they
+    #   scale in to `minvCpus` value once instances become idle.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -284,7 +294,7 @@ module Aws::Batch
     #         instance_types: ["String"], # required
     #         image_id: "String",
     #         subnets: ["String"], # required
-    #         security_group_ids: ["String"], # required
+    #         security_group_ids: ["String"],
     #         ec2_key_pair: "String",
     #         instance_role: "String", # required
     #         tags: {
@@ -292,6 +302,11 @@ module Aws::Batch
     #         },
     #         bid_percentage: 1,
     #         spot_iam_fleet_role: "String",
+    #         launch_template: {
+    #           launch_template_id: "String",
+    #           launch_template_name: "String",
+    #           version: "String",
+    #         },
     #       }
     #
     # @!attribute [rw] type
@@ -299,7 +314,8 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] minv_cpus
-    #   The minimum number of EC2 vCPUs that an environment should maintain.
+    #   The minimum number of EC2 vCPUs that an environment should maintain
+    #   (even if the compute environment is `DISABLED`).
     #   @return [Integer]
     #
     # @!attribute [rw] maxv_cpus
@@ -358,17 +374,27 @@ module Aws::Batch
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] bid_percentage
-    #   The minimum percentage that a Spot Instance price must be when
+    #   The maximum percentage that a Spot Instance price can be when
     #   compared with the On-Demand price for that instance type before
-    #   instances are launched. For example, if your bid percentage is 20%,
-    #   then the Spot price must be below 20% of the current On-Demand price
-    #   for that EC2 instance.
+    #   instances are launched. For example, if your maximum percentage is
+    #   20%, then the Spot price must be below 20% of the current On-Demand
+    #   price for that EC2 instance. You always pay the lowest (market)
+    #   price and never more than your maximum percentage. If you leave this
+    #   field empty, the default value is 100% of the On-Demand price.
     #   @return [Integer]
     #
     # @!attribute [rw] spot_iam_fleet_role
     #   The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role
     #   applied to a `SPOT` compute environment.
     #   @return [String]
+    #
+    # @!attribute [rw] launch_template
+    #   The launch template to use for your compute resources. Any other
+    #   compute resource parameters that you specify in a
+    #   CreateComputeEnvironment API operation override the same parameters
+    #   in the launch template. You must specify either the launch template
+    #   ID or launch template name in the request, but not both.
+    #   @return [Types::LaunchTemplateSpecification]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ComputeResource AWS API Documentation
     #
@@ -385,7 +411,8 @@ module Aws::Batch
       :instance_role,
       :tags,
       :bid_percentage,
-      :spot_iam_fleet_role)
+      :spot_iam_fleet_role,
+      :launch_template)
       include Aws::Structure
     end
 
@@ -858,7 +885,7 @@ module Aws::Batch
     #           instance_types: ["String"], # required
     #           image_id: "String",
     #           subnets: ["String"], # required
-    #           security_group_ids: ["String"], # required
+    #           security_group_ids: ["String"],
     #           ec2_key_pair: "String",
     #           instance_role: "String", # required
     #           tags: {
@@ -866,6 +893,11 @@ module Aws::Batch
     #           },
     #           bid_percentage: 1,
     #           spot_iam_fleet_role: "String",
+    #           launch_template: {
+    #             launch_template_id: "String",
+    #             launch_template_name: "String",
+    #             version: "String",
+    #           },
     #         },
     #         service_role: "String", # required
     #       }
@@ -876,7 +908,12 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of the compute environment.
+    #   The type of the compute environment. For more information, see
+    #   [Compute Environments][1] in the *AWS Batch User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -1456,6 +1493,16 @@ module Aws::Batch
     #
     # @!attribute [rw] status
     #   The current status for the job.
+    #
+    #   <note markdown="1"> If your jobs do not progress to `STARTING`, see [Jobs Stuck in
+    #   `RUNNABLE` Status][1] in the troubleshooting section of the *AWS
+    #   Batch User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#job_stuck_in_runnable
     #   @return [String]
     #
     # @!attribute [rw] attempts
@@ -1698,6 +1745,42 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # An object representing a launch template associated with a compute
+    # resource. You must specify either the launch template ID or launch
+    # template name in the request, but not both.
+    #
+    # @note When making an API call, you may pass LaunchTemplateSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         launch_template_id: "String",
+    #         launch_template_name: "String",
+    #         version: "String",
+    #       }
+    #
+    # @!attribute [rw] launch_template_id
+    #   The ID of the launch template.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_name
+    #   The name of the launch template.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version number of the launch template.
+    #
+    #   Default: The default version of the launch template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/LaunchTemplateSpecification AWS API Documentation
+    #
+    class LaunchTemplateSpecification < Struct.new(
+      :launch_template_id,
+      :launch_template_name,
+      :version)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListJobsRequest
     #   data as a hash:
     #
@@ -1711,12 +1794,14 @@ module Aws::Batch
     #
     # @!attribute [rw] job_queue
     #   The name or full Amazon Resource Name (ARN) of the job queue with
-    #   which to list jobs.
+    #   which to list jobs. You must specify either a job queue or an array
+    #   job ID.
     #   @return [String]
     #
     # @!attribute [rw] array_job_id
     #   The job ID for an array job. Specifying an array job ID with this
-    #   parameter lists all child jobs from within the specified array.
+    #   parameter lists all child jobs from within the specified array. You
+    #   must specify either a job queue or an array job ID.
     #   @return [String]
     #
     # @!attribute [rw] job_status

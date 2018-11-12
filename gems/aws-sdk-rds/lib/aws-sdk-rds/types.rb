@@ -1174,6 +1174,54 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateDBClusterEndpointMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_identifier: "String", # required
+    #         db_cluster_endpoint_identifier: "String", # required
+    #         endpoint_type: "String", # required
+    #         static_members: ["String"],
+    #         excluded_members: ["String"],
+    #       }
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DB cluster identifier of the DB cluster associated with the
+    #   endpoint. This parameter is stored as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_endpoint_identifier
+    #   The identifier to use for the new endpoint. This parameter is stored
+    #   as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_type
+    #   The type of the endpoint. One of: `READER`, `ANY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] static_members
+    #   List of DB instance identifiers that are part of the custom endpoint
+    #   group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] excluded_members
+    #   List of DB instance identifiers that aren't part of the custom
+    #   endpoint group. All other eligible instances are reachable through
+    #   the custom endpoint. Only relevant if the list of static members is
+    #   empty.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterEndpointMessage AWS API Documentation
+    #
+    class CreateDBClusterEndpointMessage < Struct.new(
+      :db_cluster_identifier,
+      :db_cluster_endpoint_identifier,
+      :endpoint_type,
+      :static_members,
+      :excluded_members)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDBClusterMessage
     #   data as a hash:
     #
@@ -1949,10 +1997,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     16384.
+    #     32768.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #     16384.
+    #     32768.
     #
     #   * Magnetic storage (standard): Must be an integer from 10 to 3072.
     #
@@ -2760,7 +2808,7 @@ module Aws::RDS
     #     PostgreSQL DB instance.
     #
     #   * Can specify a DB instance that is a MySQL Read Replica only if the
-    #     source is running MySQL 5.6.
+    #     source is running MySQL 5.6 or later.
     #
     #   * Can specify a DB instance that is a PostgreSQL DB instance only if
     #     the source is running PostgreSQL 9.3.5 or later (9.4.7 and higher
@@ -3015,7 +3063,7 @@ module Aws::RDS
     #
     #   * For MySQL 5.7, minor version 5.7.16 or higher
     #
-    #   * Aurora 5.6 or higher.
+    #   * Aurora MySQL 5.6 or higher
     #
     #   Default: `false`
     #   @return [Boolean]
@@ -3709,6 +3757,10 @@ module Aws::RDS
     #   endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] custom_endpoints
+    #   Identifies all custom endpoints associated with the cluster.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] multi_az
     #   Specifies whether the DB cluster has instances in multiple
     #   Availability Zones.
@@ -3883,6 +3935,7 @@ module Aws::RDS
       :earliest_restorable_time,
       :endpoint,
       :reader_endpoint,
+      :custom_endpoints,
       :multi_az,
       :engine,
       :engine_version,
@@ -4021,6 +4074,105 @@ module Aws::RDS
       :current_capacity,
       :seconds_before_timeout,
       :timeout_action)
+      include Aws::Structure
+    end
+
+    # This data type represents the information you need to connect to an
+    # Amazon Aurora DB cluster. This data type is used as a response element
+    # in the following actions:
+    #
+    # * CreateDBClusterEndpoint
+    #
+    # * DescribeDBClusterEndpoints
+    #
+    # * ModifyDBClusterEndpoint
+    #
+    # * DeleteDBClusterEndpoint
+    #
+    # For the data structure that represents Amazon RDS DB instance
+    # endpoints, see Endpoint.
+    #
+    # @!attribute [rw] db_cluster_endpoint_identifier
+    #   The identifier associated with the endpoint. This parameter is
+    #   stored as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DB cluster identifier of the DB cluster associated with the
+    #   endpoint. This parameter is stored as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_endpoint_resource_identifier
+    #   A unique system-generated identifier for an endpoint. It remains the
+    #   same for the whole life of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   The DNS address of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the endpoint. One of: `creating`, `available`,
+    #   `deleting`, `modifying`.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_type
+    #   The type of the endpoint. One of: `READER`, `WRITER`, `CUSTOM`.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_endpoint_type
+    #   The type associated with a custom endpoint. One of: `READER`, `ANY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] static_members
+    #   List of DB instance identifiers that are part of the custom endpoint
+    #   group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] excluded_members
+    #   List of DB instance identifiers that aren't part of the custom
+    #   endpoint group. All other eligible instances are reachable through
+    #   the custom endpoint. Only relevant if the list of static members is
+    #   empty.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] db_cluster_endpoint_arn
+    #   The Amazon Resource Name (ARN) for the endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterEndpoint AWS API Documentation
+    #
+    class DBClusterEndpoint < Struct.new(
+      :db_cluster_endpoint_identifier,
+      :db_cluster_identifier,
+      :db_cluster_endpoint_resource_identifier,
+      :endpoint,
+      :status,
+      :endpoint_type,
+      :custom_endpoint_type,
+      :static_members,
+      :excluded_members,
+      :db_cluster_endpoint_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   DescribeDBClusterEndpoints request. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the
+    #   value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_endpoints
+    #   Contains the details of the endpoints associated with the cluster
+    #   and matching any filter conditions.
+    #   @return [Array<Types::DBClusterEndpoint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterEndpointMessage AWS API Documentation
+    #
+    class DBClusterEndpointMessage < Struct.new(
+      :marker,
+      :db_cluster_endpoints)
       include Aws::Structure
     end
 
@@ -5499,6 +5651,25 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteDBClusterEndpointMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_endpoint_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] db_cluster_endpoint_identifier
+    #   The identifier associated with the custom endpoint. This parameter
+    #   is stored as a lowercase string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterEndpointMessage AWS API Documentation
+    #
+    class DeleteDBClusterEndpointMessage < Struct.new(
+      :db_cluster_endpoint_identifier)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteDBClusterMessage
     #   data as a hash:
     #
@@ -6056,6 +6227,77 @@ module Aws::RDS
     class DescribeDBClusterBacktracksMessage < Struct.new(
       :db_cluster_identifier,
       :backtrack_identifier,
+      :filters,
+      :max_records,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeDBClusterEndpointsMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_identifier: "String",
+    #         db_cluster_endpoint_identifier: "String",
+    #         filters: [
+    #           {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         ],
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DB cluster identifier of the DB cluster associated with the
+    #   endpoint. This parameter is stored as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_endpoint_identifier
+    #   The identifier of the endpoint to describe. This parameter is stored
+    #   as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A set of name-value pairs that define which endpoints to include in
+    #   the output. The filters are specified as name-value pairs, in the
+    #   format
+    #   `Name=endpoint_type,Values=endpoint_type1,endpoint_type2,...`.
+    #   `Name` can be one of: `db-cluster-endpoint-type`,
+    #   `db-cluster-endpoint-custom-type`, `db-cluster-endpoint-id`,
+    #   `db-cluster-endpoint-status`. `Values` for the `
+    #   db-cluster-endpoint-type` filter can be one or more of: `reader`,
+    #   `writer`, `custom`. `Values` for the
+    #   `db-cluster-endpoint-custom-type` filter can be one or more of:
+    #   `reader`, `any`. `Values` for the `db-cluster-endpoint-status`
+    #   filter can be one or more of: `available`, `creating`, `deleting`,
+    #   `modifying`.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   DescribeDBClusterEndpoints request. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the
+    #   value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterEndpointsMessage AWS API Documentation
+    #
+    class DescribeDBClusterEndpointsMessage < Struct.new(
+      :db_cluster_identifier,
+      :db_cluster_endpoint_identifier,
       :filters,
       :max_records,
       :marker)
@@ -8157,13 +8399,18 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # This data type is used as a response element in the following actions:
+    # This data type represents the information you need to connect to an
+    # Amazon RDS DB instance. This data type is used as a response element
+    # in the following actions:
     #
     # * CreateDBInstance
     #
     # * DescribeDBInstances
     #
     # * DeleteDBInstance
+    #
+    # For the data structure that represents Amazon Aurora DB cluster
+    # endpoints, see DBClusterEndpoint.
     #
     # @!attribute [rw] address
     #   Specifies the DNS address of the DB instance.
@@ -8462,6 +8709,8 @@ module Aws::RDS
     #
     # * DescribeDBClusterBacktracks
     #
+    # * DescribeDBClusterEndpoints
+    #
     # * DescribeDBClusters
     #
     # * DescribeDBInstances
@@ -8626,6 +8875,47 @@ module Aws::RDS
       :capacity,
       :seconds_before_timeout,
       :timeout_action)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyDBClusterEndpointMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_endpoint_identifier: "String", # required
+    #         endpoint_type: "String",
+    #         static_members: ["String"],
+    #         excluded_members: ["String"],
+    #       }
+    #
+    # @!attribute [rw] db_cluster_endpoint_identifier
+    #   The identifier of the endpoint to modify. This parameter is stored
+    #   as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_type
+    #   The type of the endpoint. One of: `READER`, `ANY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] static_members
+    #   List of DB instance identifiers that are part of the custom endpoint
+    #   group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] excluded_members
+    #   List of DB instance identifiers that aren't part of the custom
+    #   endpoint group. All other eligible instances are reachable through
+    #   the custom endpoint. Only relevant if the list of static members is
+    #   empty.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterEndpointMessage AWS API Documentation
+    #
+    class ModifyDBClusterEndpointMessage < Struct.new(
+      :db_cluster_endpoint_identifier,
+      :endpoint_type,
+      :static_members,
+      :excluded_members)
       include Aws::Structure
     end
 
@@ -9253,7 +9543,7 @@ module Aws::RDS
     #   * Must be a value from 0 to 35
     #
     #   * Can be specified for a MySQL Read Replica only if the source is
-    #     running MySQL 5.6
+    #     running MySQL 5.6 or later
     #
     #   * Can be specified for a PostgreSQL Read Replica only if the source
     #     is running PostgreSQL 9.3.5

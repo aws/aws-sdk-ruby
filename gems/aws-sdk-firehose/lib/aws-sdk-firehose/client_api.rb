@@ -34,6 +34,8 @@ module Aws::Firehose
     DeliveryStartTimestamp = Shapes::TimestampShape.new(name: 'DeliveryStartTimestamp')
     DeliveryStreamARN = Shapes::StringShape.new(name: 'DeliveryStreamARN')
     DeliveryStreamDescription = Shapes::StructureShape.new(name: 'DeliveryStreamDescription')
+    DeliveryStreamEncryptionConfiguration = Shapes::StructureShape.new(name: 'DeliveryStreamEncryptionConfiguration')
+    DeliveryStreamEncryptionStatus = Shapes::StringShape.new(name: 'DeliveryStreamEncryptionStatus')
     DeliveryStreamName = Shapes::StringShape.new(name: 'DeliveryStreamName')
     DeliveryStreamNameList = Shapes::ListShape.new(name: 'DeliveryStreamNameList')
     DeliveryStreamStatus = Shapes::StringShape.new(name: 'DeliveryStreamStatus')
@@ -148,6 +150,10 @@ module Aws::Firehose
     SplunkRetryDurationInSeconds = Shapes::IntegerShape.new(name: 'SplunkRetryDurationInSeconds')
     SplunkRetryOptions = Shapes::StructureShape.new(name: 'SplunkRetryOptions')
     SplunkS3BackupMode = Shapes::StringShape.new(name: 'SplunkS3BackupMode')
+    StartDeliveryStreamEncryptionInput = Shapes::StructureShape.new(name: 'StartDeliveryStreamEncryptionInput')
+    StartDeliveryStreamEncryptionOutput = Shapes::StructureShape.new(name: 'StartDeliveryStreamEncryptionOutput')
+    StopDeliveryStreamEncryptionInput = Shapes::StructureShape.new(name: 'StopDeliveryStreamEncryptionInput')
+    StopDeliveryStreamEncryptionOutput = Shapes::StructureShape.new(name: 'StopDeliveryStreamEncryptionOutput')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagDeliveryStreamInput = Shapes::StructureShape.new(name: 'TagDeliveryStreamInput')
     TagDeliveryStreamInputTagList = Shapes::ListShape.new(name: 'TagDeliveryStreamInputTagList')
@@ -187,6 +193,7 @@ module Aws::Firehose
     CreateDeliveryStreamInput.add_member(:redshift_destination_configuration, Shapes::ShapeRef.new(shape: RedshiftDestinationConfiguration, location_name: "RedshiftDestinationConfiguration"))
     CreateDeliveryStreamInput.add_member(:elasticsearch_destination_configuration, Shapes::ShapeRef.new(shape: ElasticsearchDestinationConfiguration, location_name: "ElasticsearchDestinationConfiguration"))
     CreateDeliveryStreamInput.add_member(:splunk_destination_configuration, Shapes::ShapeRef.new(shape: SplunkDestinationConfiguration, location_name: "SplunkDestinationConfiguration"))
+    CreateDeliveryStreamInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagDeliveryStreamInputTagList, location_name: "Tags"))
     CreateDeliveryStreamInput.struct_class = Types::CreateDeliveryStreamInput
 
     CreateDeliveryStreamOutput.add_member(:delivery_stream_arn, Shapes::ShapeRef.new(shape: DeliveryStreamARN, location_name: "DeliveryStreamARN"))
@@ -206,6 +213,7 @@ module Aws::Firehose
     DeliveryStreamDescription.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "DeliveryStreamName"))
     DeliveryStreamDescription.add_member(:delivery_stream_arn, Shapes::ShapeRef.new(shape: DeliveryStreamARN, required: true, location_name: "DeliveryStreamARN"))
     DeliveryStreamDescription.add_member(:delivery_stream_status, Shapes::ShapeRef.new(shape: DeliveryStreamStatus, required: true, location_name: "DeliveryStreamStatus"))
+    DeliveryStreamDescription.add_member(:delivery_stream_encryption_configuration, Shapes::ShapeRef.new(shape: DeliveryStreamEncryptionConfiguration, location_name: "DeliveryStreamEncryptionConfiguration"))
     DeliveryStreamDescription.add_member(:delivery_stream_type, Shapes::ShapeRef.new(shape: DeliveryStreamType, required: true, location_name: "DeliveryStreamType"))
     DeliveryStreamDescription.add_member(:version_id, Shapes::ShapeRef.new(shape: DeliveryStreamVersionId, required: true, location_name: "VersionId"))
     DeliveryStreamDescription.add_member(:create_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateTimestamp"))
@@ -214,6 +222,9 @@ module Aws::Firehose
     DeliveryStreamDescription.add_member(:destinations, Shapes::ShapeRef.new(shape: DestinationDescriptionList, required: true, location_name: "Destinations"))
     DeliveryStreamDescription.add_member(:has_more_destinations, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "HasMoreDestinations"))
     DeliveryStreamDescription.struct_class = Types::DeliveryStreamDescription
+
+    DeliveryStreamEncryptionConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: DeliveryStreamEncryptionStatus, location_name: "Status"))
+    DeliveryStreamEncryptionConfiguration.struct_class = Types::DeliveryStreamEncryptionConfiguration
 
     DeliveryStreamNameList.member = Shapes::ShapeRef.new(shape: DeliveryStreamName)
 
@@ -418,6 +429,7 @@ module Aws::Firehose
     PutRecordBatchInput.struct_class = Types::PutRecordBatchInput
 
     PutRecordBatchOutput.add_member(:failed_put_count, Shapes::ShapeRef.new(shape: NonNegativeIntegerObject, required: true, location_name: "FailedPutCount"))
+    PutRecordBatchOutput.add_member(:encrypted, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "Encrypted"))
     PutRecordBatchOutput.add_member(:request_responses, Shapes::ShapeRef.new(shape: PutRecordBatchResponseEntryList, required: true, location_name: "RequestResponses"))
     PutRecordBatchOutput.struct_class = Types::PutRecordBatchOutput
 
@@ -435,6 +447,7 @@ module Aws::Firehose
     PutRecordInput.struct_class = Types::PutRecordInput
 
     PutRecordOutput.add_member(:record_id, Shapes::ShapeRef.new(shape: PutResponseRecordId, required: true, location_name: "RecordId"))
+    PutRecordOutput.add_member(:encrypted, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "Encrypted"))
     PutRecordOutput.struct_class = Types::PutRecordOutput
 
     Record.add_member(:data, Shapes::ShapeRef.new(shape: Data, required: true, location_name: "Data"))
@@ -559,6 +572,16 @@ module Aws::Firehose
     SplunkRetryOptions.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: SplunkRetryDurationInSeconds, location_name: "DurationInSeconds"))
     SplunkRetryOptions.struct_class = Types::SplunkRetryOptions
 
+    StartDeliveryStreamEncryptionInput.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "DeliveryStreamName"))
+    StartDeliveryStreamEncryptionInput.struct_class = Types::StartDeliveryStreamEncryptionInput
+
+    StartDeliveryStreamEncryptionOutput.struct_class = Types::StartDeliveryStreamEncryptionOutput
+
+    StopDeliveryStreamEncryptionInput.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "DeliveryStreamName"))
+    StopDeliveryStreamEncryptionInput.struct_class = Types::StopDeliveryStreamEncryptionInput
+
+    StopDeliveryStreamEncryptionOutput.struct_class = Types::StopDeliveryStreamEncryptionOutput
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
     Tag.struct_class = Types::Tag
@@ -679,6 +702,30 @@ module Aws::Firehose
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:start_delivery_stream_encryption, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartDeliveryStreamEncryption"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartDeliveryStreamEncryptionInput)
+        o.output = Shapes::ShapeRef.new(shape: StartDeliveryStreamEncryptionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:stop_delivery_stream_encryption, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopDeliveryStreamEncryption"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopDeliveryStreamEncryptionInput)
+        o.output = Shapes::ShapeRef.new(shape: StopDeliveryStreamEncryptionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:tag_delivery_stream, Seahorse::Model::Operation.new.tap do |o|
