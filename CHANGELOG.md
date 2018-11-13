@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Budgets - Updated the documentation for AWS Budgets.
+
+* Feature - Aws::Chime - Updated the API, and documentation for Amazon Chime.
+
+* Feature - Aws::Redshift - Updated the API, and documentation for Amazon Redshift.
+
 2.11.169 (2018-11-12)
 ------------------
 
