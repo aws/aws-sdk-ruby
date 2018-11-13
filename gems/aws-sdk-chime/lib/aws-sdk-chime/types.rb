@@ -481,12 +481,17 @@ module Aws::Chime
     #
     #       {
     #         account_id: "NonEmptyString", # required
+    #         user_email: "EmailAddress",
     #         max_results: 1,
     #         next_token: "String",
     #       }
     #
     # @!attribute [rw] account_id
     #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_email
+    #   Optional. The user email address used to filter results. Maximum 1.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -502,6 +507,7 @@ module Aws::Chime
     #
     class ListUsersRequest < Struct.new(
       :account_id,
+      :user_email,
       :max_results,
       :next_token)
       include Aws::Structure

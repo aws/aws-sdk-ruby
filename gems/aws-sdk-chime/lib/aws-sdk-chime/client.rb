@@ -496,6 +496,9 @@ module Aws::Chime
     # Retrieves details for the specified user ID, such as primary email
     # address, license type, and personal meeting PIN.
     #
+    # To retrieve user details with an email address instead of a user ID,
+    # use the ListUsers action, and then filter by email address.
+    #
     # @option params [required, String] :account_id
     #   The Amazon Chime account ID.
     #
@@ -627,10 +630,15 @@ module Aws::Chime
       req.send_request(options)
     end
 
-    # Lists the users that belong to the specified Amazon Chime account.
+    # Lists the users that belong to the specified Amazon Chime account. You
+    # can specify an email address to list only the user that the email
+    # address belongs to.
     #
     # @option params [required, String] :account_id
     #   The Amazon Chime account ID.
+    #
+    # @option params [String] :user_email
+    #   Optional. The user email address used to filter results. Maximum 1.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call. Defaults to
@@ -648,6 +656,7 @@ module Aws::Chime
     #
     #   resp = client.list_users({
     #     account_id: "NonEmptyString", # required
+    #     user_email: "EmailAddress",
     #     max_results: 1,
     #     next_token: "String",
     #   })
@@ -882,7 +891,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -48,6 +48,35 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # A name value pair that describes an aspect of an account.
+    #
+    # @!attribute [rw] attribute_name
+    #   The name of the attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_values
+    #   A list of attribute values.
+    #   @return [Array<Types::AttributeValueTarget>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AccountAttribute AWS API Documentation
+    #
+    class AccountAttribute < Struct.new(
+      :attribute_name,
+      :attribute_values)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_attributes
+    #   A list of attributes assigned to an account.
+    #   @return [Array<Types::AccountAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AccountAttributeList AWS API Documentation
+    #
+    class AccountAttributeList < Struct.new(
+      :account_attributes)
+      include Aws::Structure
+    end
+
     # Describes an AWS customer account authorized to restore a snapshot.
     #
     # @!attribute [rw] account_id
@@ -66,6 +95,19 @@ module Aws::Redshift
     class AccountWithRestoreAccess < Struct.new(
       :account_id,
       :account_alias)
+      include Aws::Structure
+    end
+
+    # Describes an attribute value.
+    #
+    # @!attribute [rw] attribute_value
+    #   The value of the attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AttributeValueTarget AWS API Documentation
+    #
+    class AttributeValueTarget < Struct.new(
+      :attribute_value)
       include Aws::Structure
     end
 
@@ -186,6 +228,25 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CancelResizeMessage
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The unique identifier for the cluster whose resize operation you
+    #   wish to cancel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CancelResizeMessage AWS API Documentation
+    #
+    class CancelResizeMessage < Struct.new(
+      :cluster_identifier)
+      include Aws::Structure
+    end
+
     # Describes a cluster.
     #
     # @!attribute [rw] cluster_identifier
@@ -200,6 +261,8 @@ module Aws::Redshift
     #   The current state of the cluster. Possible values are the following:
     #
     #   * `available`
+    #
+    #   * `cancelling-resize`
     #
     #   * `creating`
     #
@@ -339,6 +402,11 @@ module Aws::Redshift
     #   snapshot.
     #   @return [Types::RestoreStatus]
     #
+    # @!attribute [rw] data_transfer_progress
+    #   Describes the status of a cluster while it is in the process of
+    #   resizing with an incremental resize.
+    #   @return [Types::DataTransferProgress]
+    #
     # @!attribute [rw] hsm_status
     #   A value that reports whether the Amazon Redshift cluster has
     #   finished applying any hardware security module (HSM) settings
@@ -411,6 +479,19 @@ module Aws::Redshift
     #   elastic resize method.
     #   @return [String]
     #
+    # @!attribute [rw] deferred_maintenance_windows
+    #   Describes a group of `DeferredMaintenanceWindow` objects.
+    #   @return [Array<Types::DeferredMaintenanceWindow>]
+    #
+    # @!attribute [rw] resize_info
+    #   Returns the following:
+    #
+    #   * AllowCancelResize: a boolean value indicating if the resize
+    #     operation can be cancelled.
+    #
+    #   * ResizeType: Returns ClassicResize
+    #   @return [Types::ResizeInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -437,6 +518,7 @@ module Aws::Redshift
       :publicly_accessible,
       :encrypted,
       :restore_status,
+      :data_transfer_progress,
       :hsm_status,
       :cluster_snapshot_copy_status,
       :cluster_public_key,
@@ -449,7 +531,9 @@ module Aws::Redshift
       :iam_roles,
       :pending_actions,
       :maintenance_track_name,
-      :elastic_resize_number_of_node_options)
+      :elastic_resize_number_of_node_options,
+      :deferred_maintenance_windows,
+      :resize_info)
       include Aws::Structure
     end
 
@@ -1812,7 +1896,7 @@ module Aws::Redshift
     #   Specifies the Amazon Redshift event categories to be published by
     #   the event notification subscription.
     #
-    #   Values: Configuration, Management, Monitoring, Security
+    #   Values: configuration, management, monitoring, security
     #   @return [Array<String>]
     #
     # @!attribute [rw] severity
@@ -2089,6 +2173,49 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # Describes the status of a cluster while it is in the process of
+    # resizing with an incremental resize.
+    #
+    # @!attribute [rw] status
+    #   Describes the status of the cluster. While the transfer is in
+    #   progress the status is `transferringdata`.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_rate_in_mega_bytes_per_second
+    #   Describes the data transfer rate in MB's per second.
+    #   @return [Float]
+    #
+    # @!attribute [rw] total_data_in_mega_bytes
+    #   Describes the total amount of data to be transfered in megabytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_transferred_in_mega_bytes
+    #   Describes the total amount of data that has been transfered in
+    #   MB's.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] estimated_time_to_completion_in_seconds
+    #   Describes the estimated number of seconds remaining to complete the
+    #   transfer.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] elapsed_time_in_seconds
+    #   Describes the number of seconds that have elapsed during the data
+    #   transfer.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DataTransferProgress AWS API Documentation
+    #
+    class DataTransferProgress < Struct.new(
+      :status,
+      :current_rate_in_mega_bytes_per_second,
+      :total_data_in_mega_bytes,
+      :data_transferred_in_mega_bytes,
+      :estimated_time_to_completion_in_seconds,
+      :elapsed_time_in_seconds)
+      include Aws::Structure
+    end
+
     # Describes the default cluster parameters for a parameter group family.
     #
     # @!attribute [rw] parameter_group_family
@@ -2115,6 +2242,31 @@ module Aws::Redshift
       :parameter_group_family,
       :marker,
       :parameters)
+      include Aws::Structure
+    end
+
+    # Describes a deferred maintenance window
+    #
+    # @!attribute [rw] defer_maintenance_identifier
+    #   A unique identifier for the maintenance window.
+    #   @return [String]
+    #
+    # @!attribute [rw] defer_maintenance_start_time
+    #   A timestamp for the beginning of the time period when we defer
+    #   maintenance.
+    #   @return [Time]
+    #
+    # @!attribute [rw] defer_maintenance_end_time
+    #   A timestamp for the end of the time period when we defer
+    #   maintenance.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeferredMaintenanceWindow AWS API Documentation
+    #
+    class DeferredMaintenanceWindow < Struct.new(
+      :defer_maintenance_identifier,
+      :defer_maintenance_start_time,
+      :defer_maintenance_end_time)
       include Aws::Structure
     end
 
@@ -2393,6 +2545,24 @@ module Aws::Redshift
     class DeleteTagsMessage < Struct.new(
       :resource_name,
       :tag_keys)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAccountAttributesMessage
+    #   data as a hash:
+    #
+    #       {
+    #         attribute_names: ["String"],
+    #       }
+    #
+    # @!attribute [rw] attribute_names
+    #   A list of attribute names.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeAccountAttributesMessage AWS API Documentation
+    #
+    class DescribeAccountAttributesMessage < Struct.new(
+      :attribute_names)
       include Aws::Structure
     end
 
@@ -4808,6 +4978,70 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ModifyClusterMaintenanceMessage
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_identifier: "String", # required
+    #         defer_maintenance: false,
+    #         defer_maintenance_identifier: "String",
+    #         defer_maintenance_start_time: Time.now,
+    #         defer_maintenance_end_time: Time.now,
+    #         defer_maintenance_duration: 1,
+    #       }
+    #
+    # @!attribute [rw] cluster_identifier
+    #   A unique identifier for the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] defer_maintenance
+    #   A boolean indicating whether to enable the deferred maintenance
+    #   window.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] defer_maintenance_identifier
+    #   A unique identifier for the deferred maintenance window.
+    #   @return [String]
+    #
+    # @!attribute [rw] defer_maintenance_start_time
+    #   A timestamp indicating the start time for the deferred maintenance
+    #   window.
+    #   @return [Time]
+    #
+    # @!attribute [rw] defer_maintenance_end_time
+    #   A timestamp indicating end time for the deferred maintenance window.
+    #   If you specify an end time, you can't specify a duration.
+    #   @return [Time]
+    #
+    # @!attribute [rw] defer_maintenance_duration
+    #   An integer indicating the duration of the maintenance window in
+    #   days. If you specify a duration, you can't specify an end time. The
+    #   duration must be 14 days or less.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMaintenanceMessage AWS API Documentation
+    #
+    class ModifyClusterMaintenanceMessage < Struct.new(
+      :cluster_identifier,
+      :defer_maintenance,
+      :defer_maintenance_identifier,
+      :defer_maintenance_start_time,
+      :defer_maintenance_end_time,
+      :defer_maintenance_duration)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster
+    #   Describes a cluster.
+    #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMaintenanceResult AWS API Documentation
+    #
+    class ModifyClusterMaintenanceResult < Struct.new(
+      :cluster)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ModifyClusterMessage
     #   data as a hash:
     #
@@ -5272,7 +5506,7 @@ module Aws::Redshift
     #   Specifies the Amazon Redshift event categories to be published by
     #   the event notification subscription.
     #
-    #   Values: Configuration, Management, Monitoring, Security
+    #   Values: configuration, management, monitoring, security
     #   @return [Array<String>]
     #
     # @!attribute [rw] severity
@@ -5960,6 +6194,24 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # Describes a resize operation.
+    #
+    # @!attribute [rw] resize_type
+    #   Returns the value `ClassicResize`.
+    #   @return [String]
+    #
+    # @!attribute [rw] allow_cancel_resize
+    #   A boolean value indicating if the resize operation can be cancelled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeInfo AWS API Documentation
+    #
+    class ResizeInfo < Struct.new(
+      :resize_type,
+      :allow_cancel_resize)
+      include Aws::Structure
+    end
+
     # Describes the result of a cluster resize operation.
     #
     # @!attribute [rw] target_node_type
@@ -5981,7 +6233,8 @@ module Aws::Redshift
     # @!attribute [rw] status
     #   The status of the resize operation.
     #
-    #   Valid Values: `NONE` \| `IN_PROGRESS` \| `FAILED` \| `SUCCEEDED`
+    #   Valid Values: `NONE` \| `IN_PROGRESS` \| `FAILED` \| `SUCCEEDED` \|
+    #   `CANCELLING`
     #   @return [String]
     #
     # @!attribute [rw] import_tables_completed
@@ -6957,6 +7210,19 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # Describes the operations that are allowed on a maintenance track.
+    #
+    # @!attribute [rw] operation_name
+    #   A list of the supported operations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SupportedOperation AWS API Documentation
+    #
+    class SupportedOperation < Struct.new(
+      :operation_name)
+      include Aws::Structure
+    end
+
     # A list of supported platforms for orderable clusters.
     #
     # @!attribute [rw] name
@@ -7207,11 +7473,16 @@ module Aws::Redshift
     #   The cluster version for the new maintenance track.
     #   @return [String]
     #
+    # @!attribute [rw] supported_operations
+    #   A list of operations supported by the maintenance track.
+    #   @return [Array<Types::SupportedOperation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/UpdateTarget AWS API Documentation
     #
     class UpdateTarget < Struct.new(
       :maintenance_track_name,
-      :database_version)
+      :database_version,
+      :supported_operations)
       include Aws::Structure
     end
 

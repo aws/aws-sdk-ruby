@@ -78,6 +78,19 @@ module Aws::Budgets
     # @!attribute [rw] cost_filters
     #   The cost filters, such as service or region, that are applied to a
     #   budget.
+    #
+    #   AWS Budgets supports the following services as a filter for RI
+    #   budgets:
+    #
+    #   * Amazon Elastic Compute Cloud - Compute
+    #
+    #   * Amazon Redshift
+    #
+    #   * Amazon Relational Database Service
+    #
+    #   * Amazon ElastiCache
+    #
+    #   * Amazon Elasticsearch Service
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] cost_types
@@ -719,8 +732,9 @@ module Aws::Budgets
     #
     #   For `DAILY` budgets, the history saves the state of the budget for
     #   the last 60 days. For `MONTHLY` budgets, the history saves the state
-    #   of the budget for the last 12 months. For `QUARTERLY` budgets, the
-    #   history saves the state of the budget for the last four quarters.
+    #   of the budget for the current month plus the last 12 months. For
+    #   `QUARTERLY` budgets, the history saves the state of the budget for
+    #   the last four quarters.
     #   @return [Types::BudgetPerformanceHistory]
     #
     # @!attribute [rw] next_token

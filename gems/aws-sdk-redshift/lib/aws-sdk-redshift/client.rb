@@ -421,6 +421,66 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Cancels a resize operation.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The unique identifier for the cluster whose resize operation you wish
+    #   to cancel.
+    #
+    # @return [Types::ResizeProgressMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResizeProgressMessage#target_node_type #target_node_type} => String
+    #   * {Types::ResizeProgressMessage#target_number_of_nodes #target_number_of_nodes} => Integer
+    #   * {Types::ResizeProgressMessage#target_cluster_type #target_cluster_type} => String
+    #   * {Types::ResizeProgressMessage#status #status} => String
+    #   * {Types::ResizeProgressMessage#import_tables_completed #import_tables_completed} => Array&lt;String&gt;
+    #   * {Types::ResizeProgressMessage#import_tables_in_progress #import_tables_in_progress} => Array&lt;String&gt;
+    #   * {Types::ResizeProgressMessage#import_tables_not_started #import_tables_not_started} => Array&lt;String&gt;
+    #   * {Types::ResizeProgressMessage#avg_resize_rate_in_mega_bytes_per_second #avg_resize_rate_in_mega_bytes_per_second} => Float
+    #   * {Types::ResizeProgressMessage#total_resize_data_in_mega_bytes #total_resize_data_in_mega_bytes} => Integer
+    #   * {Types::ResizeProgressMessage#progress_in_mega_bytes #progress_in_mega_bytes} => Integer
+    #   * {Types::ResizeProgressMessage#elapsed_time_in_seconds #elapsed_time_in_seconds} => Integer
+    #   * {Types::ResizeProgressMessage#estimated_time_to_completion_in_seconds #estimated_time_to_completion_in_seconds} => Integer
+    #   * {Types::ResizeProgressMessage#resize_type #resize_type} => String
+    #   * {Types::ResizeProgressMessage#message #message} => String
+    #   * {Types::ResizeProgressMessage#target_encryption_type #target_encryption_type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_resize({
+    #     cluster_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.target_node_type #=> String
+    #   resp.target_number_of_nodes #=> Integer
+    #   resp.target_cluster_type #=> String
+    #   resp.status #=> String
+    #   resp.import_tables_completed #=> Array
+    #   resp.import_tables_completed[0] #=> String
+    #   resp.import_tables_in_progress #=> Array
+    #   resp.import_tables_in_progress[0] #=> String
+    #   resp.import_tables_not_started #=> Array
+    #   resp.import_tables_not_started[0] #=> String
+    #   resp.avg_resize_rate_in_mega_bytes_per_second #=> Float
+    #   resp.total_resize_data_in_mega_bytes #=> Integer
+    #   resp.progress_in_mega_bytes #=> Integer
+    #   resp.elapsed_time_in_seconds #=> Integer
+    #   resp.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.resize_type #=> String
+    #   resp.message #=> String
+    #   resp.target_encryption_type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CancelResize AWS API Documentation
+    #
+    # @overload cancel_resize(params = {})
+    # @param [Hash] params ({})
+    def cancel_resize(params = {}, options = {})
+      req = build_request(:cancel_resize, params)
+      req.send_request(options)
+    end
+
     # Copies the specified automated cluster snapshot to a new manual
     # cluster snapshot. The source must be an automated snapshot and it must
     # be in the available state.
@@ -949,6 +1009,12 @@ module Aws::Redshift
     #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
     #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
     #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
     #   resp.cluster.hsm_status.status #=> String
@@ -975,6 +1041,12 @@ module Aws::Redshift
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
     #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateCluster AWS API Documentation
     #
@@ -1398,7 +1470,7 @@ module Aws::Redshift
     #   Specifies the Amazon Redshift event categories to be published by the
     #   event notification subscription.
     #
-    #   Values: Configuration, Management, Monitoring, Security
+    #   Values: configuration, management, monitoring, security
     #
     # @option params [String] :severity
     #   Specifies the Amazon Redshift event severity to be published by the
@@ -1835,6 +1907,12 @@ module Aws::Redshift
     #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
     #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
     #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
     #   resp.cluster.hsm_status.status #=> String
@@ -1861,6 +1939,12 @@ module Aws::Redshift
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
     #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCluster AWS API Documentation
     #
@@ -2159,6 +2243,37 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def delete_tags(params = {}, options = {})
       req = build_request(:delete_tags, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of attributes attached to an account
+    #
+    # @option params [Array<String>] :attribute_names
+    #   A list of attribute names.
+    #
+    # @return [Types::AccountAttributeList] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AccountAttributeList#account_attributes #account_attributes} => Array&lt;Types::AccountAttribute&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_account_attributes({
+    #     attribute_names: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_attributes #=> Array
+    #   resp.account_attributes[0].attribute_name #=> String
+    #   resp.account_attributes[0].attribute_values #=> Array
+    #   resp.account_attributes[0].attribute_values[0].attribute_value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeAccountAttributes AWS API Documentation
+    #
+    # @overload describe_account_attributes(params = {})
+    # @param [Hash] params ({})
+    def describe_account_attributes(params = {}, options = {})
+      req = build_request(:describe_account_attributes, params)
       req.send_request(options)
     end
 
@@ -2849,6 +2964,8 @@ module Aws::Redshift
     #   resp.maintenance_tracks[0].update_targets #=> Array
     #   resp.maintenance_tracks[0].update_targets[0].maintenance_track_name #=> String
     #   resp.maintenance_tracks[0].update_targets[0].database_version #=> String
+    #   resp.maintenance_tracks[0].update_targets[0].supported_operations #=> Array
+    #   resp.maintenance_tracks[0].update_targets[0].supported_operations[0].operation_name #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterTracks AWS API Documentation
@@ -3071,6 +3188,12 @@ module Aws::Redshift
     #   resp.clusters[0].restore_status.progress_in_mega_bytes #=> Integer
     #   resp.clusters[0].restore_status.elapsed_time_in_seconds #=> Integer
     #   resp.clusters[0].restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.clusters[0].data_transfer_progress.status #=> String
+    #   resp.clusters[0].data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.clusters[0].data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.clusters[0].data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.clusters[0].data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.clusters[0].data_transfer_progress.elapsed_time_in_seconds #=> Integer
     #   resp.clusters[0].hsm_status.hsm_client_certificate_identifier #=> String
     #   resp.clusters[0].hsm_status.hsm_configuration_identifier #=> String
     #   resp.clusters[0].hsm_status.status #=> String
@@ -3097,6 +3220,12 @@ module Aws::Redshift
     #   resp.clusters[0].pending_actions[0] #=> String
     #   resp.clusters[0].maintenance_track_name #=> String
     #   resp.clusters[0].elastic_resize_number_of_node_options #=> String
+    #   resp.clusters[0].deferred_maintenance_windows #=> Array
+    #   resp.clusters[0].deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.clusters[0].deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.clusters[0].deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.clusters[0].resize_info.resize_type #=> String
+    #   resp.clusters[0].resize_info.allow_cancel_resize #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusters AWS API Documentation
     #
@@ -4381,6 +4510,12 @@ module Aws::Redshift
     #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
     #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
     #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
     #   resp.cluster.hsm_status.status #=> String
@@ -4407,6 +4542,12 @@ module Aws::Redshift
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
     #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopy AWS API Documentation
     #
@@ -4587,6 +4728,12 @@ module Aws::Redshift
     #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
     #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
     #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
     #   resp.cluster.hsm_status.status #=> String
@@ -4613,6 +4760,12 @@ module Aws::Redshift
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
     #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopy AWS API Documentation
     #
@@ -5174,6 +5327,12 @@ module Aws::Redshift
     #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
     #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
     #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
     #   resp.cluster.hsm_status.status #=> String
@@ -5200,6 +5359,12 @@ module Aws::Redshift
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
     #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyCluster AWS API Documentation
     #
@@ -5285,6 +5450,12 @@ module Aws::Redshift
     #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
     #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
     #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
     #   resp.cluster.hsm_status.status #=> String
@@ -5311,6 +5482,12 @@ module Aws::Redshift
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
     #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterDbRevision AWS API Documentation
     #
@@ -5403,6 +5580,12 @@ module Aws::Redshift
     #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
     #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
     #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
     #   resp.cluster.hsm_status.status #=> String
@@ -5429,6 +5612,12 @@ module Aws::Redshift
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
     #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRoles AWS API Documentation
     #
@@ -5436,6 +5625,146 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def modify_cluster_iam_roles(params = {}, options = {})
       req = build_request(:modify_cluster_iam_roles, params)
+      req.send_request(options)
+    end
+
+    # Modifies the maintenance settings of a cluster. For example, you can
+    # defer a maintenance window. You can also update or cancel a deferment.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   A unique identifier for the cluster.
+    #
+    # @option params [Boolean] :defer_maintenance
+    #   A boolean indicating whether to enable the deferred maintenance
+    #   window.
+    #
+    # @option params [String] :defer_maintenance_identifier
+    #   A unique identifier for the deferred maintenance window.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :defer_maintenance_start_time
+    #   A timestamp indicating the start time for the deferred maintenance
+    #   window.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :defer_maintenance_end_time
+    #   A timestamp indicating end time for the deferred maintenance window.
+    #   If you specify an end time, you can't specify a duration.
+    #
+    # @option params [Integer] :defer_maintenance_duration
+    #   An integer indicating the duration of the maintenance window in days.
+    #   If you specify a duration, you can't specify an end time. The
+    #   duration must be 14 days or less.
+    #
+    # @return [Types::ModifyClusterMaintenanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyClusterMaintenanceResult#cluster #cluster} => Types::Cluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_cluster_maintenance({
+    #     cluster_identifier: "String", # required
+    #     defer_maintenance: false,
+    #     defer_maintenance_identifier: "String",
+    #     defer_maintenance_start_time: Time.now,
+    #     defer_maintenance_end_time: Time.now,
+    #     defer_maintenance_duration: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster.cluster_identifier #=> String
+    #   resp.cluster.node_type #=> String
+    #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.modify_status #=> String
+    #   resp.cluster.master_username #=> String
+    #   resp.cluster.db_name #=> String
+    #   resp.cluster.endpoint.address #=> String
+    #   resp.cluster.endpoint.port #=> Integer
+    #   resp.cluster.cluster_create_time #=> Time
+    #   resp.cluster.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.cluster_security_groups #=> Array
+    #   resp.cluster.cluster_security_groups[0].cluster_security_group_name #=> String
+    #   resp.cluster.cluster_security_groups[0].status #=> String
+    #   resp.cluster.vpc_security_groups #=> Array
+    #   resp.cluster.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.cluster.vpc_security_groups[0].status #=> String
+    #   resp.cluster.cluster_parameter_groups #=> Array
+    #   resp.cluster.cluster_parameter_groups[0].parameter_group_name #=> String
+    #   resp.cluster.cluster_parameter_groups[0].parameter_apply_status #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list #=> Array
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_name #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_apply_status #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_apply_error_description #=> String
+    #   resp.cluster.cluster_subnet_group_name #=> String
+    #   resp.cluster.vpc_id #=> String
+    #   resp.cluster.availability_zone #=> String
+    #   resp.cluster.preferred_maintenance_window #=> String
+    #   resp.cluster.pending_modified_values.master_user_password #=> String
+    #   resp.cluster.pending_modified_values.node_type #=> String
+    #   resp.cluster.pending_modified_values.number_of_nodes #=> Integer
+    #   resp.cluster.pending_modified_values.cluster_type #=> String
+    #   resp.cluster.pending_modified_values.cluster_version #=> String
+    #   resp.cluster.pending_modified_values.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.pending_modified_values.cluster_identifier #=> String
+    #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
+    #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
+    #   resp.cluster.cluster_version #=> String
+    #   resp.cluster.allow_version_upgrade #=> Boolean
+    #   resp.cluster.number_of_nodes #=> Integer
+    #   resp.cluster.publicly_accessible #=> Boolean
+    #   resp.cluster.encrypted #=> Boolean
+    #   resp.cluster.restore_status.status #=> String
+    #   resp.cluster.restore_status.current_restore_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.restore_status.snapshot_size_in_mega_bytes #=> Integer
+    #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
+    #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
+    #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
+    #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
+    #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
+    #   resp.cluster.hsm_status.status #=> String
+    #   resp.cluster.cluster_snapshot_copy_status.destination_region #=> String
+    #   resp.cluster.cluster_snapshot_copy_status.retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.snapshot_copy_grant_name #=> String
+    #   resp.cluster.cluster_public_key #=> String
+    #   resp.cluster.cluster_nodes #=> Array
+    #   resp.cluster.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.elastic_ip_status.elastic_ip #=> String
+    #   resp.cluster.elastic_ip_status.status #=> String
+    #   resp.cluster.cluster_revision_number #=> String
+    #   resp.cluster.tags #=> Array
+    #   resp.cluster.tags[0].key #=> String
+    #   resp.cluster.tags[0].value #=> String
+    #   resp.cluster.kms_key_id #=> String
+    #   resp.cluster.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.iam_roles #=> Array
+    #   resp.cluster.iam_roles[0].iam_role_arn #=> String
+    #   resp.cluster.iam_roles[0].apply_status #=> String
+    #   resp.cluster.pending_actions #=> Array
+    #   resp.cluster.pending_actions[0] #=> String
+    #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMaintenance AWS API Documentation
+    #
+    # @overload modify_cluster_maintenance(params = {})
+    # @param [Hash] params ({})
+    def modify_cluster_maintenance(params = {}, options = {})
+      req = build_request(:modify_cluster_maintenance, params)
       req.send_request(options)
     end
 
@@ -5587,7 +5916,7 @@ module Aws::Redshift
     #   Specifies the Amazon Redshift event categories to be published by the
     #   event notification subscription.
     #
-    #   Values: Configuration, Management, Monitoring, Security
+    #   Values: configuration, management, monitoring, security
     #
     # @option params [String] :severity
     #   Specifies the Amazon Redshift event severity to be published by the
@@ -5726,6 +6055,12 @@ module Aws::Redshift
     #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
     #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
     #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
     #   resp.cluster.hsm_status.status #=> String
@@ -5752,6 +6087,12 @@ module Aws::Redshift
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
     #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriod AWS API Documentation
     #
@@ -5899,6 +6240,12 @@ module Aws::Redshift
     #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
     #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
     #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
     #   resp.cluster.hsm_status.status #=> String
@@ -5925,6 +6272,12 @@ module Aws::Redshift
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
     #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootCluster AWS API Documentation
     #
@@ -6098,6 +6451,12 @@ module Aws::Redshift
     #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
     #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
     #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
     #   resp.cluster.hsm_status.status #=> String
@@ -6124,6 +6483,12 @@ module Aws::Redshift
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
     #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeCluster AWS API Documentation
     #
@@ -6439,6 +6804,12 @@ module Aws::Redshift
     #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
     #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
     #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
     #   resp.cluster.hsm_status.status #=> String
@@ -6465,6 +6836,12 @@ module Aws::Redshift
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
     #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshot AWS API Documentation
     #
@@ -6793,6 +7170,12 @@ module Aws::Redshift
     #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
     #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
     #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
     #   resp.cluster.hsm_status.status #=> String
@@ -6819,6 +7202,12 @@ module Aws::Redshift
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
     #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKey AWS API Documentation
     #
@@ -6842,7 +7231,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
