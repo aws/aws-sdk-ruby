@@ -316,18 +316,18 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :health_status
-    #   The health status of the instance. Set to `Healthy` if you want the
-    #   instance to remain in service. Set to `Unhealthy` if you want the
-    #   instance to be out of service. Amazon EC2 Auto Scaling will terminate
-    #   and replace the unhealthy instance.
+    #   The health status of the instance. Set to `Healthy` to have the
+    #   instance remain in service. Set to `Unhealthy` to have the instance be
+    #   out of service. Amazon EC2 Auto Scaling terminates and replaces the
+    #   unhealthy instance.
     # @option options [Boolean] :should_respect_grace_period
     #   If the Auto Scaling group of the specified instance has a
     #   `HealthCheckGracePeriod` specified for the group, by default, this
-    #   call will respect the grace period. Set this to `False`, if you do not
-    #   want the call to respect the grace period associated with the group.
+    #   call respects the grace period. Set this to `False`, to have the call
+    #   not respect the grace period associated with the group.
     #
-    #   For more information, see the description of the health check grace
-    #   period for CreateAutoScalingGroup.
+    #   For more information about the health check grace period, see
+    #   CreateAutoScalingGroup.
     # @return [EmptyStructure]
     def set_health(options = {})
       options = options.merge(instance_id: @id)

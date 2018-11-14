@@ -15,7 +15,7 @@ module Aws::ResourceGroups
     #         name: "GroupName", # required
     #         description: "GroupDescription",
     #         resource_query: { # required
-    #           type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0
+    #           type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0, CLOUDFORMATION_STACK_1_0
     #           query: "Query", # required
     #         },
     #         tags: {
@@ -356,11 +356,19 @@ module Aws::ResourceGroups
     #   request, to get more results.
     #   @return [String]
     #
+    # @!attribute [rw] query_errors
+    #   A list of `QueryError` objects. Each error is an object that
+    #   contains `ErrorCode` and `Message` structures. Possible values for
+    #   `ErrorCode` are `CLOUDFORMATION_STACK_INACTIVE` and
+    #   `CLOUDFORMATION_STACK_NOT_EXISTING`.
+    #   @return [Array<Types::QueryError>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupResourcesOutput AWS API Documentation
     #
     class ListGroupResourcesOutput < Struct.new(
       :resource_identifiers,
-      :next_token)
+      :next_token,
+      :query_errors)
       include Aws::Structure
     end
 
@@ -382,9 +390,9 @@ module Aws::ResourceGroups
     #   Filters, formatted as GroupFilter objects, that you want to apply to
     #   a ListGroups operation.
     #
-    #   * `group-type` - Filter groups by resource type. Specify up to five
-    #     group types in the format AWS::ServiceCode::ResourceType. For
-    #     example, AWS::EC2::Instance, or AWS::S3::Bucket.
+    #   * `resource-type` - Filter groups by resource type. Specify up to
+    #     five resource types in the format AWS::ServiceCode::ResourceType.
+    #     For example, AWS::EC2::Instance, or AWS::S3::Bucket.
     #
     #   ^
     #   @return [Array<Types::GroupFilter>]
@@ -429,6 +437,35 @@ module Aws::ResourceGroups
       :group_identifiers,
       :groups,
       :next_token)
+      include Aws::Structure
+    end
+
+    # A two-part error structure that can occur in `ListGroupResources` or
+    # `SearchResources` operations on CloudFormation stack-based queries.
+    # The error occurs if the CloudFormation stack on which the query is
+    # based either does not exist, or has a status that renders the stack
+    # inactive. A `QueryError` occurrence does not necessarily mean that AWS
+    # Resource Groups could not complete the operation, but the resulting
+    # group might have no member resources.
+    #
+    # @!attribute [rw] error_code
+    #   Possible values are `CLOUDFORMATION_STACK_INACTIVE` and
+    #   `CLOUDFORMATION_STACK_NOT_EXISTING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message that explains the `ErrorCode` value. Messages might state
+    #   that the specified CloudFormation stack does not exist (or no longer
+    #   exists). For `CLOUDFORMATION_STACK_INACTIVE`, the message typically
+    #   states that the CloudFormation stack has a status that is not (or no
+    #   longer) active, such as `CREATE_FAILED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/QueryError AWS API Documentation
+    #
+    class QueryError < Struct.new(
+      :error_code,
+      :message)
       include Aws::Structure
     end
 
@@ -485,21 +522,55 @@ module Aws::ResourceGroups
     #   data as a hash:
     #
     #       {
-    #         type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0
+    #         type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0, CLOUDFORMATION_STACK_1_0
     #         query: "Query", # required
     #       }
     #
     # @!attribute [rw] type
-    #   The type of the query. The valid value in this release is
-    #   `TAG_FILTERS_1_0`.
+    #   The type of the query. The valid values in this release are
+    #   `TAG_FILTERS_1_0` and `CLOUDFORMATION_STACK_1_0`.
     #
     #   <i> <code>TAG_FILTERS_1_0:</code> </i> A JSON syntax that lets you
     #   specify a collection of simple tag filters for resource types and
-    #   tags, as supported by the AWS Tagging API GetResources operation.
-    #   When more than one element is present, only resources that match all
-    #   filters are part of the result. If a filter specifies more than one
-    #   value for a key, a resource matches the filter if its tag value
-    #   matches any of the specified values.
+    #   tags, as supported by the AWS Tagging API [GetResources][1]
+    #   operation. If you specify more than one tag key, only resources that
+    #   match all tag keys, and at least one value of each specified tag
+    #   key, are returned in your query. If you specify more than one value
+    #   for a tag key, a resource matches the filter if it has a tag key
+    #   value that matches *any* of the specified values.
+    #
+    #   For example, consider the following sample query for resources that
+    #   have two tags, `Stage` and `Version`, with two values each.
+    #   (`[\{"Key":"Stage","Values":["Test","Deploy"]\},\{"Key":"Version","Values":["1","2"]\}]`)
+    #   The results of this query might include the following.
+    #
+    #   * An EC2 instance that has the following two tags:
+    #     `\{"Key":"Stage","Values":["Deploy"]\}`, and
+    #     `\{"Key":"Version","Values":["2"]\}`
+    #
+    #   * An S3 bucket that has the following two tags:
+    #     \\\{"Key":"Stage","Values":\["Test","Deploy"\]\\}, and
+    #     \\\{"Key":"Version","Values":\["1"\]\\}
+    #
+    #   The query would not return the following results, however. The
+    #   following EC2 instance does not have all tag keys specified in the
+    #   filter, so it is rejected. The RDS database has all of the tag keys,
+    #   but no values that match at least one of the specified tag key
+    #   values in the filter.
+    #
+    #   * An EC2 instance that has only the following tag:
+    #     `\{"Key":"Stage","Values":["Deploy"]\}`.
+    #
+    #   * An RDS database that has the following two tags:
+    #     `\{"Key":"Stage","Values":["Archived"]\}`, and
+    #     `\{"Key":"Version","Values":["4"]\}`
+    #
+    #   <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i> A JSON syntax that
+    #   lets you specify a CloudFormation stack ARN.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html
     #   @return [String]
     #
     # @!attribute [rw] query
@@ -519,7 +590,7 @@ module Aws::ResourceGroups
     #
     #       {
     #         resource_query: { # required
-    #           type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0
+    #           type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0, CLOUDFORMATION_STACK_1_0
     #           query: "Query", # required
     #         },
     #         max_results: 1,
@@ -563,11 +634,19 @@ module Aws::ResourceGroups
     #   request, to get more results.
     #   @return [String]
     #
+    # @!attribute [rw] query_errors
+    #   A list of `QueryError` objects. Each error is an object that
+    #   contains `ErrorCode` and `Message` structures. Possible values for
+    #   `ErrorCode` are `CLOUDFORMATION_STACK_INACTIVE` and
+    #   `CLOUDFORMATION_STACK_NOT_EXISTING`.
+    #   @return [Array<Types::QueryError>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/SearchResourcesOutput AWS API Documentation
     #
     class SearchResourcesOutput < Struct.new(
       :resource_identifiers,
-      :next_token)
+      :next_token,
+      :query_errors)
       include Aws::Structure
     end
 
@@ -701,7 +780,7 @@ module Aws::ResourceGroups
     #       {
     #         group_name: "GroupName", # required
     #         resource_query: { # required
-    #           type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0
+    #           type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0, CLOUDFORMATION_STACK_1_0
     #           query: "Query", # required
     #         },
     #       }

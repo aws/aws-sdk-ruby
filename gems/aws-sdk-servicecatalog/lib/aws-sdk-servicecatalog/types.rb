@@ -556,15 +556,35 @@ module Aws::ServiceCatalog
     #
     #   : Specify the `RoleArn` property as follows:
     #
-    #     \\"RoleArn\\" :
-    #     \\"arn:aws:iam::123456789012:role/LaunchRole\\"
+    #     `\{"RoleArn" : "arn:aws:iam::123456789012:role/LaunchRole"\}`
+    #
+    #     You cannot have both a `LAUNCH` and a `STACKSET` constraint.
+    #
+    #     You also cannot have more than one `LAUNCH` constraint on a
+    #     product and portfolio.
     #
     #   NOTIFICATION
     #
     #   : Specify the `NotificationArns` property as follows:
     #
-    #     \\"NotificationArns\\" :
-    #     \[\\"arn:aws:sns:us-east-1:123456789012:Topic\\"\]
+    #     `\{"NotificationArns" :
+    #     ["arn:aws:sns:us-east-1:123456789012:Topic"]\}`
+    #
+    #   STACKSET
+    #
+    #   : Specify the `Parameters` property as follows:
+    #
+    #     `\{"Version": "String", "Properties": \{"AccountList": [ "String"
+    #     ], "RegionList": [ "String" ], "AdminRole": "String",
+    #     "ExecutionRole": "String"\}\}`
+    #
+    #     You cannot have both a `LAUNCH` and a `STACKSET` constraint.
+    #
+    #     You also cannot have more than one `STACKSET` constraint on a
+    #     product and portfolio.
+    #
+    #     Products with a `STACKSET` constraint will launch an AWS
+    #     CloudFormation stack set.
     #
     #   TEMPLATE
     #
@@ -582,6 +602,8 @@ module Aws::ServiceCatalog
     #   * `LAUNCH`
     #
     #   * `NOTIFICATION`
+    #
+    #   * `STACKSET`
     #
     #   * `TEMPLATE`
     #   @return [String]
@@ -2139,13 +2161,19 @@ module Aws::ServiceCatalog
     #   Information about the TagOptions associated with the resource.
     #   @return [Array<Types::TagOptionSummary>]
     #
+    # @!attribute [rw] provisioning_artifact_preferences
+    #   An object that contains information about preferences, such as
+    #   regions and accounts, for the provisioning artifact.
+    #   @return [Types::ProvisioningArtifactPreferences]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningParametersOutput AWS API Documentation
     #
     class DescribeProvisioningParametersOutput < Struct.new(
       :provisioning_artifact_parameters,
       :constraint_summaries,
       :usage_instructions,
-      :tag_options)
+      :tag_options,
+      :provisioning_artifact_preferences)
       include Aws::Structure
     end
 
@@ -3923,6 +3951,14 @@ module Aws::ServiceCatalog
     #             value: "ParameterValue",
     #           },
     #         ],
+    #         provisioning_preferences: {
+    #           stack_set_accounts: ["AccountId"],
+    #           stack_set_regions: ["Region"],
+    #           stack_set_failure_tolerance_count: 1,
+    #           stack_set_failure_tolerance_percentage: 1,
+    #           stack_set_max_concurrency_count: 1,
+    #           stack_set_max_concurrency_percentage: 1,
+    #         },
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -3968,6 +4004,11 @@ module Aws::ServiceCatalog
     #   provisioning the product.
     #   @return [Array<Types::ProvisioningParameter>]
     #
+    # @!attribute [rw] provisioning_preferences
+    #   An object that contains information about the provisioning
+    #   preferences for a stack set.
+    #   @return [Types::ProvisioningPreferences]
+    #
     # @!attribute [rw] tags
     #   One or more tags.
     #   @return [Array<Types::Tag>]
@@ -3994,6 +4035,7 @@ module Aws::ServiceCatalog
       :path_id,
       :provisioned_product_name,
       :provisioning_parameters,
+      :provisioning_preferences,
       :tags,
       :notification_arns,
       :provision_token)
@@ -4022,7 +4064,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of provisioned product. The supported value is `CFN_STACK`.
+    #   The type of provisioned product. The supported values are
+    #   `CFN_STACK` and `CFN_STACKSET`.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -4127,7 +4170,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of provisioned product. The supported value is `CFN_STACK`.
+    #   The type of provisioned product. The supported values are
+    #   `CFN_STACK` and `CFN_STACKSET`.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -4439,6 +4483,44 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # The user-defined preferences that will be applied during product
+    # provisioning, unless overridden by `ProvisioningPreferences` or
+    # `UpdateProvisioningPreferences`.
+    #
+    # For more information on maximum concurrent accounts and failure
+    # tolerance, see [Stack set operation options][1] in the *AWS
+    # CloudFormation User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options
+    #
+    # @!attribute [rw] stack_set_accounts
+    #   One or more AWS accounts where stack instances are deployed from the
+    #   stack set. These accounts can be scoped in
+    #   `ProvisioningPreferences$StackSetAccounts` and
+    #   `UpdateProvisioningPreferences$StackSetAccounts`.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] stack_set_regions
+    #   One or more AWS Regions where stack instances are deployed from the
+    #   stack set. These regions can be scoped in
+    #   `ProvisioningPreferences$StackSetRegions` and
+    #   `UpdateProvisioningPreferences$StackSetRegions`.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactPreferences AWS API Documentation
+    #
+    class ProvisioningArtifactPreferences < Struct.new(
+      :stack_set_accounts,
+      :stack_set_regions)
+      include Aws::Structure
+    end
+
     # Information about a provisioning artifact (also known as a version)
     # for a product.
     #
@@ -4573,6 +4655,131 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # The user-defined preferences that will be applied when updating a
+    # provisioned product. Not all preferences are applicable to all
+    # provisioned product types.
+    #
+    # @note When making an API call, you may pass ProvisioningPreferences
+    #   data as a hash:
+    #
+    #       {
+    #         stack_set_accounts: ["AccountId"],
+    #         stack_set_regions: ["Region"],
+    #         stack_set_failure_tolerance_count: 1,
+    #         stack_set_failure_tolerance_percentage: 1,
+    #         stack_set_max_concurrency_count: 1,
+    #         stack_set_max_concurrency_percentage: 1,
+    #       }
+    #
+    # @!attribute [rw] stack_set_accounts
+    #   One or more AWS accounts that will have access to the provisioned
+    #   product.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    #   The AWS accounts specified should be within the list of accounts in
+    #   the `STACKSET` constraint. To get the list of accounts in the
+    #   `STACKSET` constraint, use the `DescribeProvisioningParameters`
+    #   operation.
+    #
+    #   If no values are specified, the default value is all accounts from
+    #   the `STACKSET` constraint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] stack_set_regions
+    #   One or more AWS Regions where the provisioned product will be
+    #   available.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    #   The specified regions should be within the list of regions from the
+    #   `STACKSET` constraint. To get the list of regions in the `STACKSET`
+    #   constraint, use the `DescribeProvisioningParameters` operation.
+    #
+    #   If no values are specified, the default value is all regions from
+    #   the `STACKSET` constraint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] stack_set_failure_tolerance_count
+    #   The number of accounts, per region, for which this operation can
+    #   fail before AWS Service Catalog stops the operation in that region.
+    #   If the operation is stopped in a region, AWS Service Catalog
+    #   doesn't attempt the operation in any subsequent regions.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    #   Conditional: You must specify either `StackSetFailureToleranceCount`
+    #   or `StackSetFailureTolerancePercentage`, but not both.
+    #
+    #   The default value is `0` if no value is specified.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stack_set_failure_tolerance_percentage
+    #   The percentage of accounts, per region, for which this stack
+    #   operation can fail before AWS Service Catalog stops the operation in
+    #   that region. If the operation is stopped in a region, AWS Service
+    #   Catalog doesn't attempt the operation in any subsequent regions.
+    #
+    #   When calculating the number of accounts based on the specified
+    #   percentage, AWS Service Catalog rounds down to the next whole
+    #   number.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    #   Conditional: You must specify either `StackSetFailureToleranceCount`
+    #   or `StackSetFailureTolerancePercentage`, but not both.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stack_set_max_concurrency_count
+    #   The maximum number of accounts in which to perform this operation at
+    #   one time. This is dependent on the value of
+    #   `StackSetFailureToleranceCount`. `StackSetMaxConcurrentCount` is at
+    #   most one more than the `StackSetFailureToleranceCount`.
+    #
+    #   Note that this setting lets you specify the maximum for operations.
+    #   For large deployments, under certain circumstances the actual number
+    #   of accounts acted upon concurrently may be lower due to service
+    #   throttling.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    #   Conditional: You must specify either `StackSetMaxConcurrentCount` or
+    #   `StackSetMaxConcurrentPercentage`, but not both.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stack_set_max_concurrency_percentage
+    #   The maximum percentage of accounts in which to perform this
+    #   operation at one time.
+    #
+    #   When calculating the number of accounts based on the specified
+    #   percentage, AWS Service Catalog rounds down to the next whole
+    #   number. This is true except in cases where rounding down would
+    #   result is zero. In this case, AWS Service Catalog sets the number as
+    #   `1` instead.
+    #
+    #   Note that this setting lets you specify the maximum for operations.
+    #   For large deployments, under certain circumstances the actual number
+    #   of accounts acted upon concurrently may be lower due to service
+    #   throttling.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    #   Conditional: You must specify either `StackSetMaxConcurrentCount` or
+    #   `StackSetMaxConcurrentPercentage`, but not both.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningPreferences AWS API Documentation
+    #
+    class ProvisioningPreferences < Struct.new(
+      :stack_set_accounts,
+      :stack_set_regions,
+      :stack_set_failure_tolerance_count,
+      :stack_set_failure_tolerance_percentage,
+      :stack_set_max_concurrency_count,
+      :stack_set_max_concurrency_percentage)
+      include Aws::Structure
+    end
+
     # Information about a request operation.
     #
     # @!attribute [rw] record_id
@@ -4610,7 +4817,8 @@ module Aws::ServiceCatalog
     #   @return [Time]
     #
     # @!attribute [rw] provisioned_product_type
-    #   The type of provisioned product. The supported value is `CFN_STACK`.
+    #   The type of provisioned product. The supported values are
+    #   `CFN_STACK` and `CFN_STACKSET`.
     #   @return [String]
     #
     # @!attribute [rw] record_type
@@ -5768,6 +5976,15 @@ module Aws::ServiceCatalog
     #             use_previous_value: false,
     #           },
     #         ],
+    #         provisioning_preferences: {
+    #           stack_set_accounts: ["AccountId"],
+    #           stack_set_regions: ["Region"],
+    #           stack_set_failure_tolerance_count: 1,
+    #           stack_set_failure_tolerance_percentage: 1,
+    #           stack_set_max_concurrency_count: 1,
+    #           stack_set_max_concurrency_percentage: 1,
+    #           stack_set_operation_type: "CREATE", # accepts CREATE, UPDATE, DELETE
+    #         },
     #         update_token: "IdempotencyToken", # required
     #       }
     #
@@ -5808,6 +6025,11 @@ module Aws::ServiceCatalog
     #   The new parameters.
     #   @return [Array<Types::UpdateProvisioningParameter>]
     #
+    # @!attribute [rw] provisioning_preferences
+    #   An object that contains information about the provisioning
+    #   preferences for a stack set.
+    #   @return [Types::UpdateProvisioningPreferences]
+    #
     # @!attribute [rw] update_token
     #   The idempotency token that uniquely identifies the provisioning
     #   update request.
@@ -5826,6 +6048,7 @@ module Aws::ServiceCatalog
       :provisioning_artifact_id,
       :path_id,
       :provisioning_parameters,
+      :provisioning_preferences,
       :update_token)
       include Aws::Structure
     end
@@ -5946,6 +6169,158 @@ module Aws::ServiceCatalog
       :key,
       :value,
       :use_previous_value)
+      include Aws::Structure
+    end
+
+    # The user-defined preferences that will be applied when updating a
+    # provisioned product. Not all preferences are applicable to all
+    # provisioned product types.
+    #
+    # @note When making an API call, you may pass UpdateProvisioningPreferences
+    #   data as a hash:
+    #
+    #       {
+    #         stack_set_accounts: ["AccountId"],
+    #         stack_set_regions: ["Region"],
+    #         stack_set_failure_tolerance_count: 1,
+    #         stack_set_failure_tolerance_percentage: 1,
+    #         stack_set_max_concurrency_count: 1,
+    #         stack_set_max_concurrency_percentage: 1,
+    #         stack_set_operation_type: "CREATE", # accepts CREATE, UPDATE, DELETE
+    #       }
+    #
+    # @!attribute [rw] stack_set_accounts
+    #   One or more AWS accounts that will have access to the provisioned
+    #   product.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    #   The AWS accounts specified should be within the list of accounts in
+    #   the `STACKSET` constraint. To get the list of accounts in the
+    #   `STACKSET` constraint, use the `DescribeProvisioningParameters`
+    #   operation.
+    #
+    #   If no values are specified, the default value is all accounts from
+    #   the `STACKSET` constraint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] stack_set_regions
+    #   One or more AWS Regions where the provisioned product will be
+    #   available.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    #   The specified regions should be within the list of regions from the
+    #   `STACKSET` constraint. To get the list of regions in the `STACKSET`
+    #   constraint, use the `DescribeProvisioningParameters` operation.
+    #
+    #   If no values are specified, the default value is all regions from
+    #   the `STACKSET` constraint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] stack_set_failure_tolerance_count
+    #   The number of accounts, per region, for which this operation can
+    #   fail before AWS Service Catalog stops the operation in that region.
+    #   If the operation is stopped in a region, AWS Service Catalog
+    #   doesn't attempt the operation in any subsequent regions.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    #   Conditional: You must specify either `StackSetFailureToleranceCount`
+    #   or `StackSetFailureTolerancePercentage`, but not both.
+    #
+    #   The default value is `0` if no value is specified.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stack_set_failure_tolerance_percentage
+    #   The percentage of accounts, per region, for which this stack
+    #   operation can fail before AWS Service Catalog stops the operation in
+    #   that region. If the operation is stopped in a region, AWS Service
+    #   Catalog doesn't attempt the operation in any subsequent regions.
+    #
+    #   When calculating the number of accounts based on the specified
+    #   percentage, AWS Service Catalog rounds down to the next whole
+    #   number.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    #   Conditional: You must specify either `StackSetFailureToleranceCount`
+    #   or `StackSetFailureTolerancePercentage`, but not both.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stack_set_max_concurrency_count
+    #   The maximum number of accounts in which to perform this operation at
+    #   one time. This is dependent on the value of
+    #   `StackSetFailureToleranceCount`. `StackSetMaxConcurrentCount` is at
+    #   most one more than the `StackSetFailureToleranceCount`.
+    #
+    #   Note that this setting lets you specify the maximum for operations.
+    #   For large deployments, under certain circumstances the actual number
+    #   of accounts acted upon concurrently may be lower due to service
+    #   throttling.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    #   Conditional: You must specify either `StackSetMaxConcurrentCount` or
+    #   `StackSetMaxConcurrentPercentage`, but not both.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stack_set_max_concurrency_percentage
+    #   The maximum percentage of accounts in which to perform this
+    #   operation at one time.
+    #
+    #   When calculating the number of accounts based on the specified
+    #   percentage, AWS Service Catalog rounds down to the next whole
+    #   number. This is true except in cases where rounding down would
+    #   result is zero. In this case, AWS Service Catalog sets the number as
+    #   `1` instead.
+    #
+    #   Note that this setting lets you specify the maximum for operations.
+    #   For large deployments, under certain circumstances the actual number
+    #   of accounts acted upon concurrently may be lower due to service
+    #   throttling.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    #   Conditional: You must specify either `StackSetMaxConcurrentCount` or
+    #   `StackSetMaxConcurrentPercentage`, but not both.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stack_set_operation_type
+    #   Determines what action AWS Service Catalog performs to a stack set
+    #   or a stack instance represented by the provisioned product. The
+    #   default value is `UPDATE` if nothing is specified.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    #   CREATE
+    #
+    #   : Creates a new stack instance in the stack set represented by the
+    #     provisioned product. In this case, only new stack instances are
+    #     created based on accounts and regions; if new ProductId or
+    #     ProvisioningArtifactID are passed, they will be ignored.
+    #
+    #   UPDATE
+    #
+    #   : Updates the stack set represented by the provisioned product and
+    #     also its stack instances.
+    #
+    #   DELETE
+    #
+    #   : Deletes a stack instance in the stack set represented by the
+    #     provisioned product.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisioningPreferences AWS API Documentation
+    #
+    class UpdateProvisioningPreferences < Struct.new(
+      :stack_set_accounts,
+      :stack_set_regions,
+      :stack_set_failure_tolerance_count,
+      :stack_set_failure_tolerance_percentage,
+      :stack_set_max_concurrency_count,
+      :stack_set_max_concurrency_percentage,
+      :stack_set_operation_type)
       include Aws::Structure
     end
 

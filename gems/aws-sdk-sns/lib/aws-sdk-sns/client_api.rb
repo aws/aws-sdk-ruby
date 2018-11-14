@@ -45,6 +45,13 @@ module Aws::SNS
     InternalErrorException = Shapes::StructureShape.new(name: 'InternalErrorException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
+    InvalidSecurityException = Shapes::StructureShape.new(name: 'InvalidSecurityException')
+    KMSAccessDeniedException = Shapes::StructureShape.new(name: 'KMSAccessDeniedException')
+    KMSDisabledException = Shapes::StructureShape.new(name: 'KMSDisabledException')
+    KMSInvalidStateException = Shapes::StructureShape.new(name: 'KMSInvalidStateException')
+    KMSNotFoundException = Shapes::StructureShape.new(name: 'KMSNotFoundException')
+    KMSOptInRequired = Shapes::StructureShape.new(name: 'KMSOptInRequired')
+    KMSThrottlingException = Shapes::StructureShape.new(name: 'KMSThrottlingException')
     ListEndpointsByPlatformApplicationInput = Shapes::StructureShape.new(name: 'ListEndpointsByPlatformApplicationInput')
     ListEndpointsByPlatformApplicationResponse = Shapes::StructureShape.new(name: 'ListEndpointsByPlatformApplicationResponse')
     ListOfEndpoints = Shapes::ListShape.new(name: 'ListOfEndpoints')
@@ -153,6 +160,7 @@ module Aws::SNS
     CreatePlatformEndpointInput.struct_class = Types::CreatePlatformEndpointInput
 
     CreateTopicInput.add_member(:name, Shapes::ShapeRef.new(shape: topicName, required: true, location_name: "Name"))
+    CreateTopicInput.add_member(:attributes, Shapes::ShapeRef.new(shape: TopicAttributesMap, location_name: "Attributes"))
     CreateTopicInput.struct_class = Types::CreateTopicInput
 
     CreateTopicResponse.add_member(:topic_arn, Shapes::ShapeRef.new(shape: topicARN, location_name: "TopicArn"))
@@ -435,6 +443,7 @@ module Aws::SNS
         o.errors << Shapes::ShapeRef.new(shape: TopicLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurityException)
       end)
 
       api.add_operation(:delete_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -529,6 +538,7 @@ module Aws::SNS
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurityException)
       end)
 
       api.add_operation(:list_endpoints_by_platform_application, Seahorse::Model::Operation.new.tap do |o|
@@ -650,6 +660,13 @@ module Aws::SNS
         o.errors << Shapes::ShapeRef.new(shape: EndpointDisabledException)
         o.errors << Shapes::ShapeRef.new(shape: PlatformApplicationDisabledException)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSOptInRequired)
+        o.errors << Shapes::ShapeRef.new(shape: KMSThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurityException)
       end)
 
       api.add_operation(:remove_permission, Seahorse::Model::Operation.new.tap do |o|
@@ -723,6 +740,7 @@ module Aws::SNS
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurityException)
       end)
 
       api.add_operation(:subscribe, Seahorse::Model::Operation.new.tap do |o|
@@ -737,6 +755,7 @@ module Aws::SNS
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurityException)
       end)
 
       api.add_operation(:unsubscribe, Seahorse::Model::Operation.new.tap do |o|
@@ -749,6 +768,7 @@ module Aws::SNS
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurityException)
       end)
     end
 

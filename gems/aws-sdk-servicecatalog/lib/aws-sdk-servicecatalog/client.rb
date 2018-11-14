@@ -610,14 +610,35 @@ module Aws::ServiceCatalog
     #
     #   : Specify the `RoleArn` property as follows:
     #
-    #     \\"RoleArn\\" : \\"arn:aws:iam::123456789012:role/LaunchRole\\"
+    #     `\{"RoleArn" : "arn:aws:iam::123456789012:role/LaunchRole"\}`
+    #
+    #     You cannot have both a `LAUNCH` and a `STACKSET` constraint.
+    #
+    #     You also cannot have more than one `LAUNCH` constraint on a product
+    #     and portfolio.
     #
     #   NOTIFICATION
     #
     #   : Specify the `NotificationArns` property as follows:
     #
-    #     \\"NotificationArns\\" :
-    #     \[\\"arn:aws:sns:us-east-1:123456789012:Topic\\"\]
+    #     `\{"NotificationArns" :
+    #     ["arn:aws:sns:us-east-1:123456789012:Topic"]\}`
+    #
+    #   STACKSET
+    #
+    #   : Specify the `Parameters` property as follows:
+    #
+    #     `\{"Version": "String", "Properties": \{"AccountList": [ "String" ],
+    #     "RegionList": [ "String" ], "AdminRole": "String", "ExecutionRole":
+    #     "String"\}\}`
+    #
+    #     You cannot have both a `LAUNCH` and a `STACKSET` constraint.
+    #
+    #     You also cannot have more than one `STACKSET` constraint on a
+    #     product and portfolio.
+    #
+    #     Products with a `STACKSET` constraint will launch an AWS
+    #     CloudFormation stack set.
     #
     #   TEMPLATE
     #
@@ -634,6 +655,8 @@ module Aws::ServiceCatalog
     #   * `LAUNCH`
     #
     #   * `NOTIFICATION`
+    #
+    #   * `STACKSET`
     #
     #   * `TEMPLATE`
     #
@@ -2126,6 +2149,7 @@ module Aws::ServiceCatalog
     #   * {Types::DescribeProvisioningParametersOutput#constraint_summaries #constraint_summaries} => Array&lt;Types::ConstraintSummary&gt;
     #   * {Types::DescribeProvisioningParametersOutput#usage_instructions #usage_instructions} => Array&lt;Types::UsageInstruction&gt;
     #   * {Types::DescribeProvisioningParametersOutput#tag_options #tag_options} => Array&lt;Types::TagOptionSummary&gt;
+    #   * {Types::DescribeProvisioningParametersOutput#provisioning_artifact_preferences #provisioning_artifact_preferences} => Types::ProvisioningArtifactPreferences
     #
     # @example Request syntax with placeholder values
     #
@@ -2156,6 +2180,10 @@ module Aws::ServiceCatalog
     #   resp.tag_options[0].key #=> String
     #   resp.tag_options[0].values #=> Array
     #   resp.tag_options[0].values[0] #=> String
+    #   resp.provisioning_artifact_preferences.stack_set_accounts #=> Array
+    #   resp.provisioning_artifact_preferences.stack_set_accounts[0] #=> String
+    #   resp.provisioning_artifact_preferences.stack_set_regions #=> Array
+    #   resp.provisioning_artifact_preferences.stack_set_regions[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningParameters AWS API Documentation
     #
@@ -3585,6 +3613,10 @@ module Aws::ServiceCatalog
     #   Parameters specified by the administrator that are required for
     #   provisioning the product.
     #
+    # @option params [Types::ProvisioningPreferences] :provisioning_preferences
+    #   An object that contains information about the provisioning preferences
+    #   for a stack set.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   One or more tags.
     #
@@ -3617,6 +3649,14 @@ module Aws::ServiceCatalog
     #         value: "ParameterValue",
     #       },
     #     ],
+    #     provisioning_preferences: {
+    #       stack_set_accounts: ["AccountId"],
+    #       stack_set_regions: ["Region"],
+    #       stack_set_failure_tolerance_count: 1,
+    #       stack_set_failure_tolerance_percentage: 1,
+    #       stack_set_max_concurrency_count: 1,
+    #       stack_set_max_concurrency_percentage: 1,
+    #     },
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -4361,6 +4401,10 @@ module Aws::ServiceCatalog
     # @option params [Array<Types::UpdateProvisioningParameter>] :provisioning_parameters
     #   The new parameters.
     #
+    # @option params [Types::UpdateProvisioningPreferences] :provisioning_preferences
+    #   An object that contains information about the provisioning preferences
+    #   for a stack set.
+    #
     # @option params [required, String] :update_token
     #   The idempotency token that uniquely identifies the provisioning update
     #   request.
@@ -4388,6 +4432,15 @@ module Aws::ServiceCatalog
     #         use_previous_value: false,
     #       },
     #     ],
+    #     provisioning_preferences: {
+    #       stack_set_accounts: ["AccountId"],
+    #       stack_set_regions: ["Region"],
+    #       stack_set_failure_tolerance_count: 1,
+    #       stack_set_failure_tolerance_percentage: 1,
+    #       stack_set_max_concurrency_count: 1,
+    #       stack_set_max_concurrency_percentage: 1,
+    #       stack_set_operation_type: "CREATE", # accepts CREATE, UPDATE, DELETE
+    #     },
     #     update_token: "IdempotencyToken", # required
     #   })
     #
@@ -4597,7 +4650,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

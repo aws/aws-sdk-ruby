@@ -278,6 +278,7 @@ module Aws::ServiceCatalog
     ProvisioningArtifactName = Shapes::StringShape.new(name: 'ProvisioningArtifactName')
     ProvisioningArtifactParameter = Shapes::StructureShape.new(name: 'ProvisioningArtifactParameter')
     ProvisioningArtifactParameters = Shapes::ListShape.new(name: 'ProvisioningArtifactParameters')
+    ProvisioningArtifactPreferences = Shapes::StructureShape.new(name: 'ProvisioningArtifactPreferences')
     ProvisioningArtifactProperties = Shapes::StructureShape.new(name: 'ProvisioningArtifactProperties')
     ProvisioningArtifactPropertyName = Shapes::StringShape.new(name: 'ProvisioningArtifactPropertyName')
     ProvisioningArtifactPropertyValue = Shapes::StringShape.new(name: 'ProvisioningArtifactPropertyValue')
@@ -289,6 +290,7 @@ module Aws::ServiceCatalog
     ProvisioningArtifacts = Shapes::ListShape.new(name: 'ProvisioningArtifacts')
     ProvisioningParameter = Shapes::StructureShape.new(name: 'ProvisioningParameter')
     ProvisioningParameters = Shapes::ListShape.new(name: 'ProvisioningParameters')
+    ProvisioningPreferences = Shapes::StructureShape.new(name: 'ProvisioningPreferences')
     RecordDetail = Shapes::StructureShape.new(name: 'RecordDetail')
     RecordDetails = Shapes::ListShape.new(name: 'RecordDetails')
     RecordError = Shapes::StructureShape.new(name: 'RecordError')
@@ -301,6 +303,7 @@ module Aws::ServiceCatalog
     RecordTagValue = Shapes::StringShape.new(name: 'RecordTagValue')
     RecordTags = Shapes::ListShape.new(name: 'RecordTags')
     RecordType = Shapes::StringShape.new(name: 'RecordType')
+    Region = Shapes::StringShape.new(name: 'Region')
     RejectPortfolioShareInput = Shapes::StructureShape.new(name: 'RejectPortfolioShareInput')
     RejectPortfolioShareOutput = Shapes::StructureShape.new(name: 'RejectPortfolioShareOutput')
     Replacement = Shapes::StringShape.new(name: 'Replacement')
@@ -356,6 +359,13 @@ module Aws::ServiceCatalog
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     SourceProvisioningArtifactProperties = Shapes::ListShape.new(name: 'SourceProvisioningArtifactProperties')
     SourceProvisioningArtifactPropertiesMap = Shapes::MapShape.new(name: 'SourceProvisioningArtifactPropertiesMap')
+    StackSetAccounts = Shapes::ListShape.new(name: 'StackSetAccounts')
+    StackSetFailureToleranceCount = Shapes::IntegerShape.new(name: 'StackSetFailureToleranceCount')
+    StackSetFailureTolerancePercentage = Shapes::IntegerShape.new(name: 'StackSetFailureTolerancePercentage')
+    StackSetMaxConcurrencyCount = Shapes::IntegerShape.new(name: 'StackSetMaxConcurrencyCount')
+    StackSetMaxConcurrencyPercentage = Shapes::IntegerShape.new(name: 'StackSetMaxConcurrencyPercentage')
+    StackSetOperationType = Shapes::StringShape.new(name: 'StackSetOperationType')
+    StackSetRegions = Shapes::ListShape.new(name: 'StackSetRegions')
     Status = Shapes::StringShape.new(name: 'Status')
     StatusDetail = Shapes::StringShape.new(name: 'StatusDetail')
     StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
@@ -393,6 +403,7 @@ module Aws::ServiceCatalog
     UpdateProvisioningArtifactOutput = Shapes::StructureShape.new(name: 'UpdateProvisioningArtifactOutput')
     UpdateProvisioningParameter = Shapes::StructureShape.new(name: 'UpdateProvisioningParameter')
     UpdateProvisioningParameters = Shapes::ListShape.new(name: 'UpdateProvisioningParameters')
+    UpdateProvisioningPreferences = Shapes::StructureShape.new(name: 'UpdateProvisioningPreferences')
     UpdateServiceActionInput = Shapes::StructureShape.new(name: 'UpdateServiceActionInput')
     UpdateServiceActionOutput = Shapes::StructureShape.new(name: 'UpdateServiceActionOutput')
     UpdateTagOptionInput = Shapes::StructureShape.new(name: 'UpdateTagOptionInput')
@@ -757,6 +768,7 @@ module Aws::ServiceCatalog
     DescribeProvisioningParametersOutput.add_member(:constraint_summaries, Shapes::ShapeRef.new(shape: ConstraintSummaries, location_name: "ConstraintSummaries"))
     DescribeProvisioningParametersOutput.add_member(:usage_instructions, Shapes::ShapeRef.new(shape: UsageInstructions, location_name: "UsageInstructions"))
     DescribeProvisioningParametersOutput.add_member(:tag_options, Shapes::ShapeRef.new(shape: TagOptionSummaries, location_name: "TagOptions"))
+    DescribeProvisioningParametersOutput.add_member(:provisioning_artifact_preferences, Shapes::ShapeRef.new(shape: ProvisioningArtifactPreferences, location_name: "ProvisioningArtifactPreferences"))
     DescribeProvisioningParametersOutput.struct_class = Types::DescribeProvisioningParametersOutput
 
     DescribeRecordInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
@@ -1097,6 +1109,7 @@ module Aws::ServiceCatalog
     ProvisionProductInput.add_member(:path_id, Shapes::ShapeRef.new(shape: Id, location_name: "PathId"))
     ProvisionProductInput.add_member(:provisioned_product_name, Shapes::ShapeRef.new(shape: ProvisionedProductName, required: true, location_name: "ProvisionedProductName"))
     ProvisionProductInput.add_member(:provisioning_parameters, Shapes::ShapeRef.new(shape: ProvisioningParameters, location_name: "ProvisioningParameters"))
+    ProvisionProductInput.add_member(:provisioning_preferences, Shapes::ShapeRef.new(shape: ProvisioningPreferences, location_name: "ProvisioningPreferences"))
     ProvisionProductInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     ProvisionProductInput.add_member(:notification_arns, Shapes::ShapeRef.new(shape: NotificationArns, location_name: "NotificationArns"))
     ProvisionProductInput.add_member(:provision_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "ProvisionToken", metadata: {"idempotencyToken"=>true}))
@@ -1200,6 +1213,10 @@ module Aws::ServiceCatalog
 
     ProvisioningArtifactParameters.member = Shapes::ShapeRef.new(shape: ProvisioningArtifactParameter)
 
+    ProvisioningArtifactPreferences.add_member(:stack_set_accounts, Shapes::ShapeRef.new(shape: StackSetAccounts, location_name: "StackSetAccounts"))
+    ProvisioningArtifactPreferences.add_member(:stack_set_regions, Shapes::ShapeRef.new(shape: StackSetRegions, location_name: "StackSetRegions"))
+    ProvisioningArtifactPreferences.struct_class = Types::ProvisioningArtifactPreferences
+
     ProvisioningArtifactProperties.add_member(:name, Shapes::ShapeRef.new(shape: ProvisioningArtifactName, location_name: "Name"))
     ProvisioningArtifactProperties.add_member(:description, Shapes::ShapeRef.new(shape: ProvisioningArtifactDescription, location_name: "Description"))
     ProvisioningArtifactProperties.add_member(:info, Shapes::ShapeRef.new(shape: ProvisioningArtifactInfo, required: true, location_name: "Info"))
@@ -1228,6 +1245,14 @@ module Aws::ServiceCatalog
     ProvisioningParameter.struct_class = Types::ProvisioningParameter
 
     ProvisioningParameters.member = Shapes::ShapeRef.new(shape: ProvisioningParameter)
+
+    ProvisioningPreferences.add_member(:stack_set_accounts, Shapes::ShapeRef.new(shape: StackSetAccounts, location_name: "StackSetAccounts"))
+    ProvisioningPreferences.add_member(:stack_set_regions, Shapes::ShapeRef.new(shape: StackSetRegions, location_name: "StackSetRegions"))
+    ProvisioningPreferences.add_member(:stack_set_failure_tolerance_count, Shapes::ShapeRef.new(shape: StackSetFailureToleranceCount, location_name: "StackSetFailureToleranceCount"))
+    ProvisioningPreferences.add_member(:stack_set_failure_tolerance_percentage, Shapes::ShapeRef.new(shape: StackSetFailureTolerancePercentage, location_name: "StackSetFailureTolerancePercentage"))
+    ProvisioningPreferences.add_member(:stack_set_max_concurrency_count, Shapes::ShapeRef.new(shape: StackSetMaxConcurrencyCount, location_name: "StackSetMaxConcurrencyCount"))
+    ProvisioningPreferences.add_member(:stack_set_max_concurrency_percentage, Shapes::ShapeRef.new(shape: StackSetMaxConcurrencyPercentage, location_name: "StackSetMaxConcurrencyPercentage"))
+    ProvisioningPreferences.struct_class = Types::ProvisioningPreferences
 
     RecordDetail.add_member(:record_id, Shapes::ShapeRef.new(shape: Id, location_name: "RecordId"))
     RecordDetail.add_member(:provisioned_product_name, Shapes::ShapeRef.new(shape: ProvisionedProductName, location_name: "ProvisionedProductName"))
@@ -1395,6 +1420,10 @@ module Aws::ServiceCatalog
     SourceProvisioningArtifactPropertiesMap.key = Shapes::ShapeRef.new(shape: ProvisioningArtifactPropertyName)
     SourceProvisioningArtifactPropertiesMap.value = Shapes::ShapeRef.new(shape: ProvisioningArtifactPropertyValue)
 
+    StackSetAccounts.member = Shapes::ShapeRef.new(shape: AccountId)
+
+    StackSetRegions.member = Shapes::ShapeRef.new(shape: Region)
+
     SuccessfulShares.member = Shapes::ShapeRef.new(shape: AccountId)
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
@@ -1478,6 +1507,7 @@ module Aws::ServiceCatalog
     UpdateProvisionedProductInput.add_member(:provisioning_artifact_id, Shapes::ShapeRef.new(shape: Id, location_name: "ProvisioningArtifactId"))
     UpdateProvisionedProductInput.add_member(:path_id, Shapes::ShapeRef.new(shape: Id, location_name: "PathId"))
     UpdateProvisionedProductInput.add_member(:provisioning_parameters, Shapes::ShapeRef.new(shape: UpdateProvisioningParameters, location_name: "ProvisioningParameters"))
+    UpdateProvisionedProductInput.add_member(:provisioning_preferences, Shapes::ShapeRef.new(shape: UpdateProvisioningPreferences, location_name: "ProvisioningPreferences"))
     UpdateProvisionedProductInput.add_member(:update_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "UpdateToken", metadata: {"idempotencyToken"=>true}))
     UpdateProvisionedProductInput.struct_class = Types::UpdateProvisionedProductInput
 
@@ -1503,6 +1533,15 @@ module Aws::ServiceCatalog
     UpdateProvisioningParameter.struct_class = Types::UpdateProvisioningParameter
 
     UpdateProvisioningParameters.member = Shapes::ShapeRef.new(shape: UpdateProvisioningParameter)
+
+    UpdateProvisioningPreferences.add_member(:stack_set_accounts, Shapes::ShapeRef.new(shape: StackSetAccounts, location_name: "StackSetAccounts"))
+    UpdateProvisioningPreferences.add_member(:stack_set_regions, Shapes::ShapeRef.new(shape: StackSetRegions, location_name: "StackSetRegions"))
+    UpdateProvisioningPreferences.add_member(:stack_set_failure_tolerance_count, Shapes::ShapeRef.new(shape: StackSetFailureToleranceCount, location_name: "StackSetFailureToleranceCount"))
+    UpdateProvisioningPreferences.add_member(:stack_set_failure_tolerance_percentage, Shapes::ShapeRef.new(shape: StackSetFailureTolerancePercentage, location_name: "StackSetFailureTolerancePercentage"))
+    UpdateProvisioningPreferences.add_member(:stack_set_max_concurrency_count, Shapes::ShapeRef.new(shape: StackSetMaxConcurrencyCount, location_name: "StackSetMaxConcurrencyCount"))
+    UpdateProvisioningPreferences.add_member(:stack_set_max_concurrency_percentage, Shapes::ShapeRef.new(shape: StackSetMaxConcurrencyPercentage, location_name: "StackSetMaxConcurrencyPercentage"))
+    UpdateProvisioningPreferences.add_member(:stack_set_operation_type, Shapes::ShapeRef.new(shape: StackSetOperationType, location_name: "StackSetOperationType"))
+    UpdateProvisioningPreferences.struct_class = Types::UpdateProvisioningPreferences
 
     UpdateServiceActionInput.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
     UpdateServiceActionInput.add_member(:name, Shapes::ShapeRef.new(shape: ServiceActionName, location_name: "Name"))

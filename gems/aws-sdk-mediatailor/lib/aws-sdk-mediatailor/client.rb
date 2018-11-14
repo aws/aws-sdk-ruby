@@ -228,11 +228,13 @@ module Aws::MediaTailor
     #
     #   * {Types::GetPlaybackConfigurationResponse#ad_decision_server_url #ad_decision_server_url} => String
     #   * {Types::GetPlaybackConfigurationResponse#cdn_configuration #cdn_configuration} => Types::CdnConfiguration
+    #   * {Types::GetPlaybackConfigurationResponse#dash_configuration #dash_configuration} => Types::DashConfiguration
     #   * {Types::GetPlaybackConfigurationResponse#hls_configuration #hls_configuration} => Types::HlsConfiguration
     #   * {Types::GetPlaybackConfigurationResponse#name #name} => String
     #   * {Types::GetPlaybackConfigurationResponse#playback_endpoint_prefix #playback_endpoint_prefix} => String
     #   * {Types::GetPlaybackConfigurationResponse#session_initialization_endpoint_prefix #session_initialization_endpoint_prefix} => String
     #   * {Types::GetPlaybackConfigurationResponse#slate_ad_url #slate_ad_url} => String
+    #   * {Types::GetPlaybackConfigurationResponse#transcode_profile_name #transcode_profile_name} => String
     #   * {Types::GetPlaybackConfigurationResponse#video_content_source_url #video_content_source_url} => String
     #
     # @example Request syntax with placeholder values
@@ -246,11 +248,13 @@ module Aws::MediaTailor
     #   resp.ad_decision_server_url #=> String
     #   resp.cdn_configuration.ad_segment_url_prefix #=> String
     #   resp.cdn_configuration.content_segment_url_prefix #=> String
+    #   resp.dash_configuration.manifest_endpoint_prefix #=> String
     #   resp.hls_configuration.manifest_endpoint_prefix #=> String
     #   resp.name #=> String
     #   resp.playback_endpoint_prefix #=> String
     #   resp.session_initialization_endpoint_prefix #=> String
     #   resp.slate_ad_url #=> String
+    #   resp.transcode_profile_name #=> String
     #   resp.video_content_source_url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetPlaybackConfiguration AWS API Documentation
@@ -331,6 +335,12 @@ module Aws::MediaTailor
     #   that are designated for dynamic ad content. The slate must be a
     #   high-quality asset that contains both audio and video.
     #
+    # @option params [String] :transcode_profile_name
+    #   Associate this playbackConfiguration with a custom transcode profile,
+    #   overriding MediaTailor's dynamic transcoding defaults. Do not include
+    #   this field if you have not setup custom profiles with the MediaTailor
+    #   service team.
+    #
     # @option params [String] :video_content_source_url
     #   The URL prefix for the master playlist for the stream, minus the asset
     #   ID. The maximum length is 512 characters.
@@ -339,11 +349,13 @@ module Aws::MediaTailor
     #
     #   * {Types::PutPlaybackConfigurationResponse#ad_decision_server_url #ad_decision_server_url} => String
     #   * {Types::PutPlaybackConfigurationResponse#cdn_configuration #cdn_configuration} => Types::CdnConfiguration
+    #   * {Types::PutPlaybackConfigurationResponse#dash_configuration #dash_configuration} => Types::DashConfiguration
     #   * {Types::PutPlaybackConfigurationResponse#hls_configuration #hls_configuration} => Types::HlsConfiguration
     #   * {Types::PutPlaybackConfigurationResponse#name #name} => String
     #   * {Types::PutPlaybackConfigurationResponse#playback_endpoint_prefix #playback_endpoint_prefix} => String
     #   * {Types::PutPlaybackConfigurationResponse#session_initialization_endpoint_prefix #session_initialization_endpoint_prefix} => String
     #   * {Types::PutPlaybackConfigurationResponse#slate_ad_url #slate_ad_url} => String
+    #   * {Types::PutPlaybackConfigurationResponse#transcode_profile_name #transcode_profile_name} => String
     #   * {Types::PutPlaybackConfigurationResponse#video_content_source_url #video_content_source_url} => String
     #
     # @example Request syntax with placeholder values
@@ -356,6 +368,7 @@ module Aws::MediaTailor
     #     },
     #     name: "__string",
     #     slate_ad_url: "__string",
+    #     transcode_profile_name: "__string",
     #     video_content_source_url: "__string",
     #   })
     #
@@ -364,11 +377,13 @@ module Aws::MediaTailor
     #   resp.ad_decision_server_url #=> String
     #   resp.cdn_configuration.ad_segment_url_prefix #=> String
     #   resp.cdn_configuration.content_segment_url_prefix #=> String
+    #   resp.dash_configuration.manifest_endpoint_prefix #=> String
     #   resp.hls_configuration.manifest_endpoint_prefix #=> String
     #   resp.name #=> String
     #   resp.playback_endpoint_prefix #=> String
     #   resp.session_initialization_endpoint_prefix #=> String
     #   resp.slate_ad_url #=> String
+    #   resp.transcode_profile_name #=> String
     #   resp.video_content_source_url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PutPlaybackConfiguration AWS API Documentation
@@ -393,7 +408,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

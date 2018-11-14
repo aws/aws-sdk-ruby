@@ -237,7 +237,7 @@ module Aws::ResourceGroups
     #     name: "GroupName", # required
     #     description: "GroupDescription",
     #     resource_query: { # required
-    #       type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0
+    #       type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0, CLOUDFORMATION_STACK_1_0
     #       query: "Query", # required
     #     },
     #     tags: {
@@ -250,7 +250,7 @@ module Aws::ResourceGroups
     #   resp.group.group_arn #=> String
     #   resp.group.name #=> String
     #   resp.group.description #=> String
-    #   resp.resource_query.type #=> String, one of "TAG_FILTERS_1_0"
+    #   resp.resource_query.type #=> String, one of "TAG_FILTERS_1_0", "CLOUDFORMATION_STACK_1_0"
     #   resp.resource_query.query #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
@@ -345,7 +345,7 @@ module Aws::ResourceGroups
     # @example Response structure
     #
     #   resp.group_query.group_name #=> String
-    #   resp.group_query.resource_query.type #=> String, one of "TAG_FILTERS_1_0"
+    #   resp.group_query.resource_query.type #=> String, one of "TAG_FILTERS_1_0", "CLOUDFORMATION_STACK_1_0"
     #   resp.group_query.resource_query.query #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetGroupQuery AWS API Documentation
@@ -420,6 +420,7 @@ module Aws::ResourceGroups
     #
     #   * {Types::ListGroupResourcesOutput#resource_identifiers #resource_identifiers} => Array&lt;Types::ResourceIdentifier&gt;
     #   * {Types::ListGroupResourcesOutput#next_token #next_token} => String
+    #   * {Types::ListGroupResourcesOutput#query_errors #query_errors} => Array&lt;Types::QueryError&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -441,6 +442,9 @@ module Aws::ResourceGroups
     #   resp.resource_identifiers[0].resource_arn #=> String
     #   resp.resource_identifiers[0].resource_type #=> String
     #   resp.next_token #=> String
+    #   resp.query_errors #=> Array
+    #   resp.query_errors[0].error_code #=> String, one of "CLOUDFORMATION_STACK_INACTIVE", "CLOUDFORMATION_STACK_NOT_EXISTING"
+    #   resp.query_errors[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupResources AWS API Documentation
     #
@@ -457,8 +461,8 @@ module Aws::ResourceGroups
     #   Filters, formatted as GroupFilter objects, that you want to apply to a
     #   ListGroups operation.
     #
-    #   * `group-type` - Filter groups by resource type. Specify up to five
-    #     group types in the format AWS::ServiceCode::ResourceType. For
+    #   * `resource-type` - Filter groups by resource type. Specify up to five
+    #     resource types in the format AWS::ServiceCode::ResourceType. For
     #     example, AWS::EC2::Instance, or AWS::S3::Bucket.
     #
     #   ^
@@ -532,12 +536,13 @@ module Aws::ResourceGroups
     #
     #   * {Types::SearchResourcesOutput#resource_identifiers #resource_identifiers} => Array&lt;Types::ResourceIdentifier&gt;
     #   * {Types::SearchResourcesOutput#next_token #next_token} => String
+    #   * {Types::SearchResourcesOutput#query_errors #query_errors} => Array&lt;Types::QueryError&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_resources({
     #     resource_query: { # required
-    #       type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0
+    #       type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0, CLOUDFORMATION_STACK_1_0
     #       query: "Query", # required
     #     },
     #     max_results: 1,
@@ -550,6 +555,9 @@ module Aws::ResourceGroups
     #   resp.resource_identifiers[0].resource_arn #=> String
     #   resp.resource_identifiers[0].resource_type #=> String
     #   resp.next_token #=> String
+    #   resp.query_errors #=> Array
+    #   resp.query_errors[0].error_code #=> String, one of "CLOUDFORMATION_STACK_INACTIVE", "CLOUDFORMATION_STACK_NOT_EXISTING"
+    #   resp.query_errors[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/SearchResources AWS API Documentation
     #
@@ -693,7 +701,7 @@ module Aws::ResourceGroups
     #   resp = client.update_group_query({
     #     group_name: "GroupName", # required
     #     resource_query: { # required
-    #       type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0
+    #       type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0, CLOUDFORMATION_STACK_1_0
     #       query: "Query", # required
     #     },
     #   })
@@ -701,7 +709,7 @@ module Aws::ResourceGroups
     # @example Response structure
     #
     #   resp.group_query.group_name #=> String
-    #   resp.group_query.resource_query.type #=> String, one of "TAG_FILTERS_1_0"
+    #   resp.group_query.resource_query.type #=> String, one of "TAG_FILTERS_1_0", "CLOUDFORMATION_STACK_1_0"
     #   resp.group_query.resource_query.query #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UpdateGroupQuery AWS API Documentation
@@ -726,7 +734,7 @@ module Aws::ResourceGroups
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resourcegroups'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
