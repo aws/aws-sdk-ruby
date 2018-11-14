@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AutoScaling - Updated the API, and documentation for Auto Scaling.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::MediaTailor - Updated the API, and documentation for AWS MediaTailor.
+
+* Feature - Aws::ResourceGroups - Updated the API, and documentation for AWS Resource Groups.
+
+* Feature - Aws::SageMaker - Updated the API, and documentation for Amazon SageMaker Service.
+
+* Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
+
+* Feature - Aws::SNS - Updated the API, documentation, and integration test for Amazon Simple Notification Service.
+
 2.11.170 (2018-11-13)
 ------------------
 
