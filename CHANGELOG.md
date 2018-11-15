@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.172 (2018-11-15)
+------------------
+
 * Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
 
 * Feature - Aws::Comprehend - Updated the API, and documentation for Amazon Comprehend.
