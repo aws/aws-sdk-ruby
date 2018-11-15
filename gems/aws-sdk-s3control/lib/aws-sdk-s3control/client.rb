@@ -23,6 +23,10 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
+require 'aws-sdk-s3control/plugins/s3_control_dns.rb'
+require 'aws-sdk-s3control/plugins/s3_signer.rb'
+require 'aws-sdk-s3control/plugins/dualstack.rb'
+require 'aws-sdk-s3control/plugins/s3_host_id.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:s3control)
 
@@ -53,6 +57,10 @@ module Aws::S3Control
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::Protocols::RestXml)
+    add_plugin(Aws::S3Control::Plugins::S3ControlDns)
+    add_plugin(Aws::S3Control::Plugins::S3Signer)
+    add_plugin(Aws::S3Control::Plugins::Dualstack)
+    add_plugin(Aws::S3Control::Plugins::S3HostId)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -186,6 +194,10 @@ module Aws::S3Control
     #
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :use_dualstack_endpoint (false)
+    #     When set to `true`, IPv6-compatible bucket endpoints will be used
+    #     for all operations.
     #
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before

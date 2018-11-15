@@ -435,7 +435,19 @@
     ]
   },
   "S3Control": {
-    "models": "s3control/2018-08-20"
+    "models": "s3control/2018-08-20",
+    "dependencies": {
+      "aws-sigv4": "~> 1.0"
+    },
+    "removePlugins": [
+      "Aws::Plugins::SignatureV4"
+    ],
+    "addPlugins": [
+      "Aws::S3Control::Plugins::S3ControlDns",
+      "Aws::S3Control::Plugins::S3Signer",
+      "Aws::S3Control::Plugins::Dualstack",
+      "Aws::S3Control::Plugins::S3HostId"
+    ]
   },
   "SES": {
     "models": "email/2010-12-01"

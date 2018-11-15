@@ -5,6 +5,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+require 'aws-sigv4'
 require 'aws-sdk-core'
 
 require_relative 'aws-sdk-s3control/types'
