@@ -968,7 +968,7 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # Deletes the cors configuration information set for the bucket.
+    # Deletes the CORS configuration information set for the bucket.
     #
     # @option params [required, String] :bucket
     #
@@ -1136,20 +1136,18 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # Deletes the replication configuration from the bucket.
+    # Deletes the replication configuration from the bucket. For information
+    # about replication configuration, see [Cross-Region Replication (CRR)](
+    # https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html) in the
+    # *Amazon S3 Developer Guide*.
     #
     # @option params [required, String] :bucket
-    #   Deletes the replication subresource associated with the specified
-    #   bucket.
+    #   The bucket name.
     #
-    #   <note markdown="1"> There is usually some time lag before replication configuration
-    #   deletion is fully propagated to all the Amazon S3 systems.
+    #   <note markdown="1"> It can take a while to propagate the deletion of a replication
+    #   configuration to all Amazon S3 systems.
     #
     #    </note>
-    #
-    #   For more information, see [Cross-Region Replication (CRR)](
-    #   https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html) in the
-    #   Amazon S3 Developer Guide.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1266,6 +1264,15 @@ module Aws::S3
     #   * {Types::DeleteObjectOutput#request_charged #request_charged} => String
     #
     #
+    # @example Example: To delete an object (from a non-versioned bucket)
+    #
+    #   # The following example deletes an object from a non-versioned bucket.
+    #
+    #   resp = client.delete_object({
+    #     bucket: "ExampleBucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
     # @example Example: To delete an object
     #
     #   # The following example deletes an object from an S3 bucket.
@@ -1278,15 +1285,6 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #   }
-    #
-    # @example Example: To delete an object (from a non-versioned bucket)
-    #
-    #   # The following example deletes an object from a non-versioned bucket.
-    #
-    #   resp = client.delete_object({
-    #     bucket: "ExampleBucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -1404,42 +1402,6 @@ module Aws::S3
     #   * {Types::DeleteObjectsOutput#errors #errors} => Array&lt;Types::Error&gt;
     #
     #
-    # @example Example: To delete multiple object versions from a versioned bucket
-    #
-    #   # The following example deletes objects from a bucket. The request specifies object versions. S3 deletes specific object
-    #   # versions and returns the key and versions of deleted objects in the response.
-    #
-    #   resp = client.delete_objects({
-    #     bucket: "examplebucket", 
-    #     delete: {
-    #       objects: [
-    #         {
-    #           key: "HappyFace.jpg", 
-    #           version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
-    #         }, 
-    #         {
-    #           key: "HappyFace.jpg", 
-    #           version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
-    #         }, 
-    #       ], 
-    #       quiet: false, 
-    #     }, 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     deleted: [
-    #       {
-    #         key: "HappyFace.jpg", 
-    #         version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
-    #       }, 
-    #       {
-    #         key: "HappyFace.jpg", 
-    #         version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
-    #       }, 
-    #     ], 
-    #   }
-    #
     # @example Example: To delete multiple objects from a versioned bucket
     #
     #   # The following example deletes objects from a bucket. The bucket is versioned, and the request does not specify the
@@ -1472,6 +1434,42 @@ module Aws::S3
     #         delete_marker: true, 
     #         delete_marker_version_id: "iOd_ORxhkKe_e8G8_oSGxt2PjsCZKlkt", 
     #         key: "objectkey2", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To delete multiple object versions from a versioned bucket
+    #
+    #   # The following example deletes objects from a bucket. The request specifies object versions. S3 deletes specific object
+    #   # versions and returns the key and versions of deleted objects in the response.
+    #
+    #   resp = client.delete_objects({
+    #     bucket: "examplebucket", 
+    #     delete: {
+    #       objects: [
+    #         {
+    #           key: "HappyFace.jpg", 
+    #           version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
+    #         }, 
+    #         {
+    #           key: "HappyFace.jpg", 
+    #           version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
+    #         }, 
+    #       ], 
+    #       quiet: false, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deleted: [
+    #       {
+    #         key: "HappyFace.jpg", 
+    #         version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
+    #       }, 
+    #       {
+    #         key: "HappyFace.jpg", 
+    #         version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
     #       }, 
     #     ], 
     #   }
@@ -1513,6 +1511,29 @@ module Aws::S3
     # @param [Hash] params ({})
     def delete_objects(params = {}, options = {})
       req = build_request(:delete_objects, params)
+      req.send_request(options)
+    end
+
+    # Removes the Public Access Block configuration for an Amazon S3 bucket.
+    #
+    # @option params [required, String] :bucket
+    #   The Amazon S3 bucket whose Public Access Block configuration you want
+    #   to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_public_access_block({
+    #     bucket: "BucketName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeletePublicAccessBlock AWS API Documentation
+    #
+    # @overload delete_public_access_block(params = {})
+    # @param [Hash] params ({})
+    def delete_public_access_block(params = {}, options = {})
+      req = build_request(:delete_public_access_block, params)
       req.send_request(options)
     end
 
@@ -1627,7 +1648,7 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # Returns the cors configuration for the bucket.
+    # Returns the CORS configuration for the bucket.
     #
     # @option params [required, String] :bucket
     #
@@ -2219,7 +2240,43 @@ module Aws::S3
       req.send_request(options, &block)
     end
 
+    # Retrieves the policy status for an Amazon S3 bucket, indicating
+    # whether the bucket is public.
+    #
+    # @option params [required, String] :bucket
+    #   The name of the Amazon S3 bucket whose public-policy status you want
+    #   to retrieve.
+    #
+    # @return [Types::GetBucketPolicyStatusOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBucketPolicyStatusOutput#policy_status #policy_status} => Types::PolicyStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_bucket_policy_status({
+    #     bucket: "BucketName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy_status.is_public #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketPolicyStatus AWS API Documentation
+    #
+    # @overload get_bucket_policy_status(params = {})
+    # @param [Hash] params ({})
+    def get_bucket_policy_status(params = {}, options = {})
+      req = build_request(:get_bucket_policy_status, params)
+      req.send_request(options)
+    end
+
     # Returns the replication configuration of a bucket.
+    #
+    # <note markdown="1"> It can take a while to propagate the put or delete a replication
+    # configuration to all Amazon S3 systems. Therefore, a get request soon
+    # after put or delete can return a wrong result.
+    #
+    #  </note>
     #
     # @option params [required, String] :bucket
     #
@@ -2983,6 +3040,39 @@ module Aws::S3
     def get_object_torrent(params = {}, options = {}, &block)
       req = build_request(:get_object_torrent, params)
       req.send_request(options, &block)
+    end
+
+    # Retrieves the Public Access Block configuration for an Amazon S3
+    # bucket.
+    #
+    # @option params [required, String] :bucket
+    #   The name of the Amazon S3 bucket whose Public Access Block
+    #   configuration you want to retrieve.
+    #
+    # @return [Types::GetPublicAccessBlockOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPublicAccessBlockOutput#public_access_block_configuration #public_access_block_configuration} => Types::PublicAccessBlockConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_public_access_block({
+    #     bucket: "BucketName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.public_access_block_configuration.block_public_acls #=> Boolean
+    #   resp.public_access_block_configuration.ignore_public_acls #=> Boolean
+    #   resp.public_access_block_configuration.block_public_policy #=> Boolean
+    #   resp.public_access_block_configuration.restrict_public_buckets #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetPublicAccessBlock AWS API Documentation
+    #
+    # @overload get_public_access_block(params = {})
+    # @param [Hash] params ({})
+    def get_public_access_block(params = {}, options = {})
+      req = build_request(:get_public_access_block, params)
+      req.send_request(options)
     end
 
     # This operation is useful to determine if a bucket exists and you have
@@ -4292,7 +4382,7 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # Sets the cors configuration for a bucket.
+    # Sets the CORS configuration for a bucket.
     #
     # @option params [required, String] :bucket
     #
@@ -4803,8 +4893,9 @@ module Aws::S3
     # @option params [required, String] :bucket
     #
     # @option params [required, Types::NotificationConfiguration] :notification_configuration
-    #   Container for specifying the notification configuration of the bucket.
-    #   If this element is empty, notifications are turned off on the bucket.
+    #   A container for specifying the notification configuration of the
+    #   bucket. If this element is empty, notifications are turned off for the
+    #   bucket.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4939,18 +5030,18 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # Creates a new replication configuration (or replaces an existing one,
-    # if present). For more information, see [Cross-Region Replication
-    # (CRR)]( https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html) in
-    # the Amazon S3 Developer Guide.
+    # Creates a replication configuration or replaces an existing one. For
+    # more information, see [Cross-Region Replication (CRR)](
+    # https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html) in the
+    # *Amazon S3 Developer Guide*.
     #
     # @option params [required, String] :bucket
     #
     # @option params [String] :content_md5
     #
     # @option params [required, Types::ReplicationConfiguration] :replication_configuration
-    #   Container for replication rules. You can add as many as 1,000 rules.
-    #   Total replication configuration size can be up to 2 MB.
+    #   A container for replication rules. You can add up to 1,000 rules. The
+    #   maximum size of a replication configuration is 2 MB.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5360,7 +5451,7 @@ module Aws::S3
     #
     # @option params [String] :tagging
     #   The tag-set for the object. The tag-set must be encoded as URL Query
-    #   parameters
+    #   parameters. (For example, "Key1=Value1")
     #
     # @return [Types::PutObjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5388,61 +5479,6 @@ module Aws::S3
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
     #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
-    #   }
-    #
-    # @example Example: To upload an object (specify optional headers)
-    #
-    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
-    #   # storage class and use server-side encryption.
-    #
-    #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #     server_side_encryption: "AES256", 
-    #     storage_class: "STANDARD_IA", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     server_side_encryption: "AES256", 
-    #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
-    #   }
-    #
-    # @example Example: To upload an object and specify canned ACL.
-    #
-    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
-    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     acl: "authenticated-read", 
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
-    #   }
-    #
-    # @example Example: To upload an object
-    #
-    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
-    #   # syntax. S3 returns VersionId of the newly created object.
-    #
-    #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
     #   }
     #
     # @example Example: To upload object and specify user-defined metadata
@@ -5482,6 +5518,61 @@ module Aws::S3
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
     #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
+    #   }
+    #
+    # @example Example: To upload an object
+    #
+    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
+    #   # syntax. S3 returns VersionId of the newly created object.
+    #
+    #   resp = client.put_object({
+    #     body: "HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
+    #   }
+    #
+    # @example Example: To upload an object and specify canned ACL.
+    #
+    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
+    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     acl: "authenticated-read", 
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
+    #   }
+    #
+    # @example Example: To upload an object (specify optional headers)
+    #
+    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
+    #   # storage class and use server-side encryption.
+    #
+    #   resp = client.put_object({
+    #     body: "HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #     server_side_encryption: "AES256", 
+    #     storage_class: "STANDARD_IA", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     server_side_encryption: "AES256", 
+    #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
     #   }
     #
     # @example Example: To upload an object and specify server-side encryption and object tags
@@ -5747,6 +5838,44 @@ module Aws::S3
       req.send_request(options)
     end
 
+    # Creates or modifies the Public Access Block configuration for an
+    # Amazon S3 bucket.
+    #
+    # @option params [required, String] :bucket
+    #   The name of the Amazon S3 bucket whose Public Access Block
+    #   configuration you want to set.
+    #
+    # @option params [String] :content_md5
+    #   The MD5 hash of the `PutPublicBlock` request body.
+    #
+    # @option params [required, Types::PublicAccessBlockConfiguration] :public_access_block_configuration
+    #   The Public Access Block configuration that you want to apply to this
+    #   Amazon S3 bucket.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_public_access_block({
+    #     bucket: "BucketName", # required
+    #     content_md5: "ContentMD5",
+    #     public_access_block_configuration: { # required
+    #       block_public_acls: false,
+    #       ignore_public_acls: false,
+    #       block_public_policy: false,
+    #       restrict_public_buckets: false,
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutPublicAccessBlock AWS API Documentation
+    #
+    # @overload put_public_access_block(params = {})
+    # @param [Hash] params ({})
+    def put_public_access_block(params = {}, options = {})
+      req = build_request(:put_public_access_block, params)
+      req.send_request(options)
+    end
+
     # Restores an archived copy of an object back into Amazon S3
     #
     # @option params [required, String] :bucket
@@ -5903,14 +6032,14 @@ module Aws::S3
     # serialization format for the response.
     #
     # @option params [required, String] :bucket
-    #   The S3 Bucket.
+    #   The S3 bucket.
     #
     # @option params [required, String] :key
-    #   The Object Key.
+    #   The object key.
     #
     # @option params [String] :sse_customer_algorithm
-    #   The SSE Algorithm used to encrypt the object. For more information, go
-    #   to [ Server-Side Encryption (Using Customer-Provided Encryption
+    #   The SSE Algorithm used to encrypt the object. For more information,
+    #   see [ Server-Side Encryption (Using Customer-Provided Encryption
     #   Keys][1].
     #
     #
@@ -5918,7 +6047,7 @@ module Aws::S3
     #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
     #
     # @option params [String] :sse_customer_key
-    #   The SSE Customer Key. For more information, go to [ Server-Side
+    #   The SSE Customer Key. For more information, see [ Server-Side
     #   Encryption (Using Customer-Provided Encryption Keys][1].
     #
     #
@@ -5926,7 +6055,7 @@ module Aws::S3
     #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
     #
     # @option params [String] :sse_customer_key_md5
-    #   The SSE Customer Key MD5. For more information, go to [ Server-Side
+    #   The SSE Customer Key MD5. For more information, see [ Server-Side
     #   Encryption (Using Customer-Provided Encryption Keys][1].
     #
     #
@@ -5937,7 +6066,7 @@ module Aws::S3
     #   The expression that is used to query the object.
     #
     # @option params [required, String] :expression_type
-    #   The type of the provided expression (e.g., SQL).
+    #   The type of the provided expression (for example., SQL).
     #
     # @option params [Types::RequestProgress] :request_progress
     #   Specifies if periodic request progress information should be enabled.
@@ -6376,26 +6505,6 @@ module Aws::S3
     #   * {Types::UploadPartCopyOutput#request_charged #request_charged} => String
     #
     #
-    # @example Example: To upload a part by copying data from an existing object as data source
-    #
-    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
-    #
-    #   resp = client.upload_part_copy({
-    #     bucket: "examplebucket", 
-    #     copy_source: "/bucketname/sourceobjectkey", 
-    #     key: "examplelargeobject", 
-    #     part_number: 1, 
-    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     copy_part_result: {
-    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
-    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
-    #     }, 
-    #   }
-    #
     # @example Example: To upload a part by copying byte range from an existing object as data source
     #
     #   # The following example uploads a part of a multipart upload by copying a specified byte range from an existing object as
@@ -6415,6 +6524,26 @@ module Aws::S3
     #     copy_part_result: {
     #       etag: "\"65d16d19e65a7508a51f043180edcc36\"", 
     #       last_modified: Time.parse("2016-12-29T21:44:28.000Z"), 
+    #     }, 
+    #   }
+    #
+    # @example Example: To upload a part by copying data from an existing object as data source
+    #
+    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
+    #
+    #   resp = client.upload_part_copy({
+    #     bucket: "examplebucket", 
+    #     copy_source: "/bucketname/sourceobjectkey", 
+    #     key: "examplelargeobject", 
+    #     part_number: 1, 
+    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     copy_part_result: {
+    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
+    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
     #     }, 
     #   }
     #
@@ -6473,7 +6602,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.23.1'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

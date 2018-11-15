@@ -25,6 +25,7 @@ module Aws::DirectConnect
     AwsDeviceV2 = Shapes::StringShape.new(name: 'AwsDeviceV2')
     BGPAuthKey = Shapes::StringShape.new(name: 'BGPAuthKey')
     BGPPeer = Shapes::StructureShape.new(name: 'BGPPeer')
+    BGPPeerId = Shapes::StringShape.new(name: 'BGPPeerId')
     BGPPeerList = Shapes::ListShape.new(name: 'BGPPeerList')
     BGPPeerState = Shapes::StringShape.new(name: 'BGPPeerState')
     BGPStatus = Shapes::StringShape.new(name: 'BGPStatus')
@@ -103,6 +104,7 @@ module Aws::DirectConnect
     DisassociateConnectionFromLagRequest = Shapes::StructureShape.new(name: 'DisassociateConnectionFromLagRequest')
     DuplicateTagKeysException = Shapes::StructureShape.new(name: 'DuplicateTagKeysException')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    HasLogicalRedundancy = Shapes::StringShape.new(name: 'HasLogicalRedundancy')
     Interconnect = Shapes::StructureShape.new(name: 'Interconnect')
     InterconnectId = Shapes::StringShape.new(name: 'InterconnectId')
     InterconnectList = Shapes::ListShape.new(name: 'InterconnectList')
@@ -210,6 +212,7 @@ module Aws::DirectConnect
     AssociateVirtualInterfaceRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
     AssociateVirtualInterfaceRequest.struct_class = Types::AssociateVirtualInterfaceRequest
 
+    BGPPeer.add_member(:bgp_peer_id, Shapes::ShapeRef.new(shape: BGPPeerId, location_name: "bgpPeerId"))
     BGPPeer.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, location_name: "asn"))
     BGPPeer.add_member(:auth_key, Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: "authKey"))
     BGPPeer.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
@@ -256,6 +259,7 @@ module Aws::DirectConnect
     Connection.add_member(:aws_device, Shapes::ShapeRef.new(shape: AwsDevice, deprecated: true, location_name: "awsDevice"))
     Connection.add_member(:jumbo_frame_capable, Shapes::ShapeRef.new(shape: JumboFrameCapable, location_name: "jumboFrameCapable"))
     Connection.add_member(:aws_device_v2, Shapes::ShapeRef.new(shape: AwsDeviceV2, location_name: "awsDeviceV2"))
+    Connection.add_member(:has_logical_redundancy, Shapes::ShapeRef.new(shape: HasLogicalRedundancy, location_name: "hasLogicalRedundancy"))
     Connection.struct_class = Types::Connection
 
     ConnectionList.member = Shapes::ShapeRef.new(shape: Connection)
@@ -314,6 +318,7 @@ module Aws::DirectConnect
     DeleteBGPPeerRequest.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, location_name: "virtualInterfaceId"))
     DeleteBGPPeerRequest.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, location_name: "asn"))
     DeleteBGPPeerRequest.add_member(:customer_address, Shapes::ShapeRef.new(shape: CustomerAddress, location_name: "customerAddress"))
+    DeleteBGPPeerRequest.add_member(:bgp_peer_id, Shapes::ShapeRef.new(shape: BGPPeerId, location_name: "bgpPeerId"))
     DeleteBGPPeerRequest.struct_class = Types::DeleteBGPPeerRequest
 
     DeleteBGPPeerResponse.add_member(:virtual_interface, Shapes::ShapeRef.new(shape: VirtualInterface, location_name: "virtualInterface"))
@@ -470,6 +475,7 @@ module Aws::DirectConnect
     Interconnect.add_member(:aws_device, Shapes::ShapeRef.new(shape: AwsDevice, deprecated: true, location_name: "awsDevice"))
     Interconnect.add_member(:jumbo_frame_capable, Shapes::ShapeRef.new(shape: JumboFrameCapable, location_name: "jumboFrameCapable"))
     Interconnect.add_member(:aws_device_v2, Shapes::ShapeRef.new(shape: AwsDeviceV2, location_name: "awsDeviceV2"))
+    Interconnect.add_member(:has_logical_redundancy, Shapes::ShapeRef.new(shape: HasLogicalRedundancy, location_name: "hasLogicalRedundancy"))
     Interconnect.struct_class = Types::Interconnect
 
     InterconnectList.member = Shapes::ShapeRef.new(shape: Interconnect)
@@ -491,6 +497,7 @@ module Aws::DirectConnect
     Lag.add_member(:connections, Shapes::ShapeRef.new(shape: ConnectionList, location_name: "connections"))
     Lag.add_member(:allows_hosted_connections, Shapes::ShapeRef.new(shape: BooleanFlag, location_name: "allowsHostedConnections"))
     Lag.add_member(:jumbo_frame_capable, Shapes::ShapeRef.new(shape: JumboFrameCapable, location_name: "jumboFrameCapable"))
+    Lag.add_member(:has_logical_redundancy, Shapes::ShapeRef.new(shape: HasLogicalRedundancy, location_name: "hasLogicalRedundancy"))
     Lag.struct_class = Types::Lag
 
     LagList.member = Shapes::ShapeRef.new(shape: Lag)

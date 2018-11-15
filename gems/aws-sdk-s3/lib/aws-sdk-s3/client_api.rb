@@ -128,6 +128,7 @@ module Aws::S3
     DeleteObjectTaggingRequest = Shapes::StructureShape.new(name: 'DeleteObjectTaggingRequest')
     DeleteObjectsOutput = Shapes::StructureShape.new(name: 'DeleteObjectsOutput')
     DeleteObjectsRequest = Shapes::StructureShape.new(name: 'DeleteObjectsRequest')
+    DeletePublicAccessBlockRequest = Shapes::StructureShape.new(name: 'DeletePublicAccessBlockRequest')
     DeletedObject = Shapes::StructureShape.new(name: 'DeletedObject')
     DeletedObjects = Shapes::ListShape.new(name: 'DeletedObjects', flattened: true)
     Delimiter = Shapes::StringShape.new(name: 'Delimiter')
@@ -187,6 +188,8 @@ module Aws::S3
     GetBucketNotificationConfigurationRequest = Shapes::StructureShape.new(name: 'GetBucketNotificationConfigurationRequest')
     GetBucketPolicyOutput = Shapes::StructureShape.new(name: 'GetBucketPolicyOutput')
     GetBucketPolicyRequest = Shapes::StructureShape.new(name: 'GetBucketPolicyRequest')
+    GetBucketPolicyStatusOutput = Shapes::StructureShape.new(name: 'GetBucketPolicyStatusOutput')
+    GetBucketPolicyStatusRequest = Shapes::StructureShape.new(name: 'GetBucketPolicyStatusRequest')
     GetBucketReplicationOutput = Shapes::StructureShape.new(name: 'GetBucketReplicationOutput')
     GetBucketReplicationRequest = Shapes::StructureShape.new(name: 'GetBucketReplicationRequest')
     GetBucketRequestPaymentOutput = Shapes::StructureShape.new(name: 'GetBucketRequestPaymentOutput')
@@ -205,6 +208,8 @@ module Aws::S3
     GetObjectTaggingRequest = Shapes::StructureShape.new(name: 'GetObjectTaggingRequest')
     GetObjectTorrentOutput = Shapes::StructureShape.new(name: 'GetObjectTorrentOutput')
     GetObjectTorrentRequest = Shapes::StructureShape.new(name: 'GetObjectTorrentRequest')
+    GetPublicAccessBlockOutput = Shapes::StructureShape.new(name: 'GetPublicAccessBlockOutput')
+    GetPublicAccessBlockRequest = Shapes::StructureShape.new(name: 'GetPublicAccessBlockRequest')
     GlacierJobParameters = Shapes::StructureShape.new(name: 'GlacierJobParameters')
     Grant = Shapes::StructureShape.new(name: 'Grant')
     GrantFullControl = Shapes::StringShape.new(name: 'GrantFullControl')
@@ -244,6 +249,7 @@ module Aws::S3
     InventorySchedule = Shapes::StructureShape.new(name: 'InventorySchedule')
     IsEnabled = Shapes::BooleanShape.new(name: 'IsEnabled')
     IsLatest = Shapes::BooleanShape.new(name: 'IsLatest')
+    IsPublic = Shapes::BooleanShape.new(name: 'IsPublic')
     IsTruncated = Shapes::BooleanShape.new(name: 'IsTruncated')
     JSONInput = Shapes::StructureShape.new(name: 'JSONInput')
     JSONOutput = Shapes::StructureShape.new(name: 'JSONOutput')
@@ -347,11 +353,13 @@ module Aws::S3
     Payer = Shapes::StringShape.new(name: 'Payer')
     Permission = Shapes::StringShape.new(name: 'Permission')
     Policy = Shapes::StringShape.new(name: 'Policy')
+    PolicyStatus = Shapes::StructureShape.new(name: 'PolicyStatus')
     Prefix = Shapes::StringShape.new(name: 'Prefix')
     Priority = Shapes::IntegerShape.new(name: 'Priority')
     Progress = Shapes::StructureShape.new(name: 'Progress')
     ProgressEvent = Shapes::StructureShape.new(name: 'ProgressEvent')
     Protocol = Shapes::StringShape.new(name: 'Protocol')
+    PublicAccessBlockConfiguration = Shapes::StructureShape.new(name: 'PublicAccessBlockConfiguration')
     PutBucketAccelerateConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketAccelerateConfigurationRequest')
     PutBucketAclRequest = Shapes::StructureShape.new(name: 'PutBucketAclRequest')
     PutBucketAnalyticsConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketAnalyticsConfigurationRequest')
@@ -376,6 +384,7 @@ module Aws::S3
     PutObjectRequest = Shapes::StructureShape.new(name: 'PutObjectRequest')
     PutObjectTaggingOutput = Shapes::StructureShape.new(name: 'PutObjectTaggingOutput')
     PutObjectTaggingRequest = Shapes::StructureShape.new(name: 'PutObjectTaggingRequest')
+    PutPublicAccessBlockRequest = Shapes::StructureShape.new(name: 'PutPublicAccessBlockRequest')
     QueueArn = Shapes::StringShape.new(name: 'QueueArn')
     QueueConfiguration = Shapes::StructureShape.new(name: 'QueueConfiguration')
     QueueConfigurationDeprecated = Shapes::StructureShape.new(name: 'QueueConfigurationDeprecated')
@@ -437,6 +446,7 @@ module Aws::S3
     ServerSideEncryptionConfiguration = Shapes::StructureShape.new(name: 'ServerSideEncryptionConfiguration')
     ServerSideEncryptionRule = Shapes::StructureShape.new(name: 'ServerSideEncryptionRule')
     ServerSideEncryptionRules = Shapes::ListShape.new(name: 'ServerSideEncryptionRules', flattened: true)
+    Setting = Shapes::BooleanShape.new(name: 'Setting')
     Size = Shapes::IntegerShape.new(name: 'Size')
     SourceSelectionCriteria = Shapes::StructureShape.new(name: 'SourceSelectionCriteria')
     SseKmsEncryptedObjects = Shapes::StructureShape.new(name: 'SseKmsEncryptedObjects')
@@ -818,6 +828,9 @@ module Aws::S3
     DeleteObjectsRequest[:payload] = :delete
     DeleteObjectsRequest[:payload_member] = DeleteObjectsRequest.member(:delete)
 
+    DeletePublicAccessBlockRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    DeletePublicAccessBlockRequest.struct_class = Types::DeletePublicAccessBlockRequest
+
     DeletedObject.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key"))
     DeletedObject.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId"))
     DeletedObject.add_member(:delete_marker, Shapes::ShapeRef.new(shape: DeleteMarker, location_name: "DeleteMarker"))
@@ -953,6 +966,14 @@ module Aws::S3
     GetBucketPolicyRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
     GetBucketPolicyRequest.struct_class = Types::GetBucketPolicyRequest
 
+    GetBucketPolicyStatusOutput.add_member(:policy_status, Shapes::ShapeRef.new(shape: PolicyStatus, location_name: "PolicyStatus"))
+    GetBucketPolicyStatusOutput.struct_class = Types::GetBucketPolicyStatusOutput
+    GetBucketPolicyStatusOutput[:payload] = :policy_status
+    GetBucketPolicyStatusOutput[:payload_member] = GetBucketPolicyStatusOutput.member(:policy_status)
+
+    GetBucketPolicyStatusRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    GetBucketPolicyStatusRequest.struct_class = Types::GetBucketPolicyStatusRequest
+
     GetBucketReplicationOutput.add_member(:replication_configuration, Shapes::ShapeRef.new(shape: ReplicationConfiguration, location_name: "ReplicationConfiguration"))
     GetBucketReplicationOutput.struct_class = Types::GetBucketReplicationOutput
     GetBucketReplicationOutput[:payload] = :replication_configuration
@@ -1073,6 +1094,14 @@ module Aws::S3
     GetObjectTorrentRequest.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, required: true, location: "uri", location_name: "Key"))
     GetObjectTorrentRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
     GetObjectTorrentRequest.struct_class = Types::GetObjectTorrentRequest
+
+    GetPublicAccessBlockOutput.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, location_name: "PublicAccessBlockConfiguration"))
+    GetPublicAccessBlockOutput.struct_class = Types::GetPublicAccessBlockOutput
+    GetPublicAccessBlockOutput[:payload] = :public_access_block_configuration
+    GetPublicAccessBlockOutput[:payload_member] = GetPublicAccessBlockOutput.member(:public_access_block_configuration)
+
+    GetPublicAccessBlockRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    GetPublicAccessBlockRequest.struct_class = Types::GetPublicAccessBlockRequest
 
     GlacierJobParameters.add_member(:tier, Shapes::ShapeRef.new(shape: Tier, required: true, location_name: "Tier"))
     GlacierJobParameters.struct_class = Types::GlacierJobParameters
@@ -1485,6 +1514,9 @@ module Aws::S3
 
     Parts.member = Shapes::ShapeRef.new(shape: Part)
 
+    PolicyStatus.add_member(:is_public, Shapes::ShapeRef.new(shape: IsPublic, location_name: "IsPublic"))
+    PolicyStatus.struct_class = Types::PolicyStatus
+
     Progress.add_member(:bytes_scanned, Shapes::ShapeRef.new(shape: BytesScanned, location_name: "BytesScanned"))
     Progress.add_member(:bytes_processed, Shapes::ShapeRef.new(shape: BytesProcessed, location_name: "BytesProcessed"))
     Progress.add_member(:bytes_returned, Shapes::ShapeRef.new(shape: BytesReturned, location_name: "BytesReturned"))
@@ -1492,6 +1524,12 @@ module Aws::S3
 
     ProgressEvent.add_member(:details, Shapes::ShapeRef.new(shape: Progress, eventpayload: true, eventpayload_type: 'structure', location_name: "Details", metadata: {"eventpayload"=>true}))
     ProgressEvent.struct_class = Types::ProgressEvent
+
+    PublicAccessBlockConfiguration.add_member(:block_public_acls, Shapes::ShapeRef.new(shape: Setting, location_name: "BlockPublicAcls"))
+    PublicAccessBlockConfiguration.add_member(:ignore_public_acls, Shapes::ShapeRef.new(shape: Setting, location_name: "IgnorePublicAcls"))
+    PublicAccessBlockConfiguration.add_member(:block_public_policy, Shapes::ShapeRef.new(shape: Setting, location_name: "BlockPublicPolicy"))
+    PublicAccessBlockConfiguration.add_member(:restrict_public_buckets, Shapes::ShapeRef.new(shape: Setting, location_name: "RestrictPublicBuckets"))
+    PublicAccessBlockConfiguration.struct_class = Types::PublicAccessBlockConfiguration
 
     PutBucketAccelerateConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
     PutBucketAccelerateConfigurationRequest.add_member(:accelerate_configuration, Shapes::ShapeRef.new(shape: AccelerateConfiguration, required: true, location_name: "AccelerateConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
@@ -1694,6 +1732,13 @@ module Aws::S3
     PutObjectTaggingRequest.struct_class = Types::PutObjectTaggingRequest
     PutObjectTaggingRequest[:payload] = :tagging
     PutObjectTaggingRequest[:payload_member] = PutObjectTaggingRequest.member(:tagging)
+
+    PutPublicAccessBlockRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    PutPublicAccessBlockRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutPublicAccessBlockRequest.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, required: true, location_name: "PublicAccessBlockConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
+    PutPublicAccessBlockRequest.struct_class = Types::PutPublicAccessBlockRequest
+    PutPublicAccessBlockRequest[:payload] = :public_access_block_configuration
+    PutPublicAccessBlockRequest[:payload_member] = PutPublicAccessBlockRequest.member(:public_access_block_configuration)
 
     QueueConfiguration.add_member(:id, Shapes::ShapeRef.new(shape: NotificationId, location_name: "Id"))
     QueueConfiguration.add_member(:queue_arn, Shapes::ShapeRef.new(shape: QueueArn, required: true, location_name: "Queue"))
@@ -2150,6 +2195,14 @@ module Aws::S3
         o.output = Shapes::ShapeRef.new(shape: DeleteObjectsOutput)
       end)
 
+      api.add_operation(:delete_public_access_block, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePublicAccessBlock"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/{Bucket}?publicAccessBlock"
+        o.input = Shapes::ShapeRef.new(shape: DeletePublicAccessBlockRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
       api.add_operation(:get_bucket_accelerate_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketAccelerateConfiguration"
         o.http_method = "GET"
@@ -2264,6 +2317,14 @@ module Aws::S3
         o.output = Shapes::ShapeRef.new(shape: GetBucketPolicyOutput)
       end)
 
+      api.add_operation(:get_bucket_policy_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBucketPolicyStatus"
+        o.http_method = "GET"
+        o.http_request_uri = "/{Bucket}?policyStatus"
+        o.input = Shapes::ShapeRef.new(shape: GetBucketPolicyStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetBucketPolicyStatusOutput)
+      end)
+
       api.add_operation(:get_bucket_replication, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketReplication"
         o.http_method = "GET"
@@ -2336,6 +2397,14 @@ module Aws::S3
         o.http_request_uri = "/{Bucket}/{Key+}?torrent"
         o.input = Shapes::ShapeRef.new(shape: GetObjectTorrentRequest)
         o.output = Shapes::ShapeRef.new(shape: GetObjectTorrentOutput)
+      end)
+
+      api.add_operation(:get_public_access_block, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPublicAccessBlock"
+        o.http_method = "GET"
+        o.http_request_uri = "/{Bucket}?publicAccessBlock"
+        o.input = Shapes::ShapeRef.new(shape: GetPublicAccessBlockRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPublicAccessBlockOutput)
       end)
 
       api.add_operation(:head_bucket, Seahorse::Model::Operation.new.tap do |o|
@@ -2635,6 +2704,14 @@ module Aws::S3
         o.http_request_uri = "/{Bucket}/{Key+}?tagging"
         o.input = Shapes::ShapeRef.new(shape: PutObjectTaggingRequest)
         o.output = Shapes::ShapeRef.new(shape: PutObjectTaggingOutput)
+      end)
+
+      api.add_operation(:put_public_access_block, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutPublicAccessBlock"
+        o.http_method = "PUT"
+        o.http_request_uri = "/{Bucket}?publicAccessBlock"
+        o.input = Shapes::ShapeRef.new(shape: PutPublicAccessBlockRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
       api.add_operation(:restore_object, Seahorse::Model::Operation.new.tap do |o|

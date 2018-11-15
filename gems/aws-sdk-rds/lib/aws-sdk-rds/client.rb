@@ -1340,6 +1340,7 @@ module Aws::RDS
     #   resp.db_snapshot.processor_features #=> Array
     #   resp.db_snapshot.processor_features[0].name #=> String
     #   resp.db_snapshot.processor_features[0].value #=> String
+    #   resp.db_snapshot.dbi_resource_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshot AWS API Documentation
     #
@@ -4063,6 +4064,7 @@ module Aws::RDS
     #   resp.db_snapshot.processor_features #=> Array
     #   resp.db_snapshot.processor_features[0].name #=> String
     #   resp.db_snapshot.processor_features[0].value #=> String
+    #   resp.db_snapshot.dbi_resource_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshot AWS API Documentation
     #
@@ -4801,31 +4803,30 @@ module Aws::RDS
     #   ^
     #
     # @option params [Boolean] :skip_final_snapshot
-    #   Determines whether a final DB snapshot is created before the DB
-    #   instance is deleted. If `true` is specified, no DBSnapshot is created.
-    #   If `false` is specified, a DB snapshot is created before the DB
-    #   instance is deleted.
+    #   A value that indicates whether a final DB snapshot is created before
+    #   the DB instance is deleted. If `true` is specified, no DB snapshot is
+    #   created. If `false` is specified, a DB snapshot is created before the
+    #   DB instance is deleted.
     #
-    #   Note that when a DB instance is in a failure state and has a status of
-    #   'failed', 'incompatible-restore', or 'incompatible-network', it
-    #   can only be deleted when the SkipFinalSnapshot parameter is set to
-    #   "true".
+    #   When a DB instance is in a failure state and has a status of `failed`,
+    #   `incompatible-restore`, or `incompatible-network`, you can only delete
+    #   it when the `SkipFinalSnapshot` parameter is set to `true`.
     #
     #   Specify `true` when deleting a Read Replica.
     #
-    #   <note markdown="1"> The FinalDBSnapshotIdentifier parameter must be specified if
-    #   SkipFinalSnapshot is `false`.
+    #   <note markdown="1"> The `FinalDBSnapshotIdentifier` parameter must be specified if
+    #   `SkipFinalSnapshot` is `false`.
     #
     #    </note>
     #
     #   Default: `false`
     #
     # @option params [String] :final_db_snapshot_identifier
-    #   The DBSnapshotIdentifier of the new DBSnapshot created when
-    #   SkipFinalSnapshot is set to `false`.
+    #   The `DBSnapshotIdentifier` of the new DB snapshot created when
+    #   `SkipFinalSnapshot` is set to `false`.
     #
-    #   <note markdown="1"> Specifying this parameter and also setting the SkipFinalShapshot
-    #   parameter to true results in an error.
+    #   <note markdown="1"> Specifying this parameter and also setting the `SkipFinalShapshot`
+    #   parameter to `true` results in an error.
     #
     #    </note>
     #
@@ -4833,11 +4834,16 @@ module Aws::RDS
     #
     #   * Must be 1 to 255 letters or numbers.
     #
-    #   * First character must be a letter
+    #   * First character must be a letter.
     #
-    #   * Can't end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   * Can't be specified when deleting a Read Replica.
+    #
+    # @option params [Boolean] :delete_automated_backups
+    #   A value that indicates whether to remove automated backups immediately
+    #   after the DB instance is deleted. This parameter isn't
+    #   case-sensitive. This parameter defaults to `true`.
     #
     # @return [Types::DeleteDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4865,6 +4871,7 @@ module Aws::RDS
     #     db_instance_identifier: "String", # required
     #     skip_final_snapshot: false,
     #     final_db_snapshot_identifier: "String",
+    #     delete_automated_backups: false,
     #   })
     #
     # @example Response structure
@@ -4987,7 +4994,60 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Deletes a specified DBParameterGroup. The DBParameterGroup to be
+    # Deletes automated backups based on the source instance's
+    # `DbiResourceId` value or the restorable instance's resource ID.
+    #
+    # @option params [required, String] :dbi_resource_id
+    #   The identifier for the source DB instance, which can't be changed and
+    #   which is unique to an AWS Region.
+    #
+    # @return [Types::DeleteDBInstanceAutomatedBackupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDBInstanceAutomatedBackupResult#db_instance_automated_backup #db_instance_automated_backup} => Types::DBInstanceAutomatedBackup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_db_instance_automated_backup({
+    #     dbi_resource_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_instance_automated_backup.db_instance_arn #=> String
+    #   resp.db_instance_automated_backup.dbi_resource_id #=> String
+    #   resp.db_instance_automated_backup.region #=> String
+    #   resp.db_instance_automated_backup.db_instance_identifier #=> String
+    #   resp.db_instance_automated_backup.restore_window.earliest_time #=> Time
+    #   resp.db_instance_automated_backup.restore_window.latest_time #=> Time
+    #   resp.db_instance_automated_backup.allocated_storage #=> Integer
+    #   resp.db_instance_automated_backup.status #=> String
+    #   resp.db_instance_automated_backup.port #=> Integer
+    #   resp.db_instance_automated_backup.availability_zone #=> String
+    #   resp.db_instance_automated_backup.vpc_id #=> String
+    #   resp.db_instance_automated_backup.instance_create_time #=> Time
+    #   resp.db_instance_automated_backup.master_username #=> String
+    #   resp.db_instance_automated_backup.engine #=> String
+    #   resp.db_instance_automated_backup.engine_version #=> String
+    #   resp.db_instance_automated_backup.license_model #=> String
+    #   resp.db_instance_automated_backup.iops #=> Integer
+    #   resp.db_instance_automated_backup.option_group_name #=> String
+    #   resp.db_instance_automated_backup.tde_credential_arn #=> String
+    #   resp.db_instance_automated_backup.encrypted #=> Boolean
+    #   resp.db_instance_automated_backup.storage_type #=> String
+    #   resp.db_instance_automated_backup.kms_key_id #=> String
+    #   resp.db_instance_automated_backup.timezone #=> String
+    #   resp.db_instance_automated_backup.iam_database_authentication_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstanceAutomatedBackup AWS API Documentation
+    #
+    # @overload delete_db_instance_automated_backup(params = {})
+    # @param [Hash] params ({})
+    def delete_db_instance_automated_backup(params = {}, options = {})
+      req = build_request(:delete_db_instance_automated_backup, params)
+      req.send_request(options)
+    end
+
+    # Deletes a specified DB parameter group. The DB parameter group to be
     # deleted can't be associated with any DB instances.
     #
     # @option params [required, String] :db_parameter_group_name
@@ -5077,15 +5137,15 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Deletes a DBSnapshot. If the snapshot is being copied, the copy
+    # Deletes a DB snapshot. If the snapshot is being copied, the copy
     # operation is terminated.
     #
-    # <note markdown="1"> The DBSnapshot must be in the `available` state to be deleted.
+    # <note markdown="1"> The DB snapshot must be in the `available` state to be deleted.
     #
     #  </note>
     #
     # @option params [required, String] :db_snapshot_identifier
-    #   The DBSnapshot identifier.
+    #   The DB snapshot identifier.
     #
     #   Constraints: Must be the name of an existing DB snapshot in the
     #   `available` state.
@@ -5146,6 +5206,7 @@ module Aws::RDS
     #   resp.db_snapshot.processor_features #=> Array
     #   resp.db_snapshot.processor_features[0].name #=> String
     #   resp.db_snapshot.processor_features[0].value #=> String
+    #   resp.db_snapshot.dbi_resource_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot AWS API Documentation
     #
@@ -6336,6 +6397,121 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Displays backups for both current and deleted instances. For example,
+    # use this operation to find details about automated backups for
+    # previously deleted instances. Current instances with retention periods
+    # greater than zero (0) are returned for both the
+    # `DescribeDBInstanceAutomatedBackups` and `DescribeDBInstances`
+    # operations.
+    #
+    # All parameters are optional.
+    #
+    # @option params [String] :dbi_resource_id
+    #   The resource ID of the DB instance that is the source of the automated
+    #   backup. This parameter isn't case-sensitive.
+    #
+    # @option params [String] :db_instance_identifier
+    #   (Optional) The user-supplied instance identifier. If this parameter is
+    #   specified, it must match the identifier of an existing DB instance. It
+    #   returns information from the specific DB instance' automated backup.
+    #   This parameter isn't case-sensitive.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   A filter that specifies which resources to return based on status.
+    #
+    #   Supported filters are the following:
+    #
+    #   * `status`
+    #
+    #     * `active` - automated backups for current instances
+    #
+    #     * `retained` - automated backups for deleted instances
+    #
+    #     * `creating` - automated backups that are waiting for the first
+    #       automated snapshot to be available
+    #
+    #   * `db-instance-id` - Accepts DB instance identifiers and Amazon
+    #     Resource Names (ARNs) for DB instances. The results list includes
+    #     only information about the DB instance automated backupss identified
+    #     by these ARNs.
+    #
+    #   * `dbi-resource-id` - Accepts DB instance resource identifiers and DB
+    #     Amazon Resource Names (ARNs) for DB instances. The results list
+    #     includes only information about the DB instance resources identified
+    #     by these ARNs.
+    #
+    #   Returns all resources by default. The status for each resource is
+    #   specified in the response.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    # @option params [String] :marker
+    #   The pagination token provided in the previous request. If this
+    #   parameter is specified the response includes only records beyond the
+    #   marker, up to `MaxRecords`.
+    #
+    # @return [Types::DBInstanceAutomatedBackupMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DBInstanceAutomatedBackupMessage#marker #marker} => String
+    #   * {Types::DBInstanceAutomatedBackupMessage#db_instance_automated_backups #db_instance_automated_backups} => Array&lt;Types::DBInstanceAutomatedBackup&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_db_instance_automated_backups({
+    #     dbi_resource_id: "String",
+    #     db_instance_identifier: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.db_instance_automated_backups #=> Array
+    #   resp.db_instance_automated_backups[0].db_instance_arn #=> String
+    #   resp.db_instance_automated_backups[0].dbi_resource_id #=> String
+    #   resp.db_instance_automated_backups[0].region #=> String
+    #   resp.db_instance_automated_backups[0].db_instance_identifier #=> String
+    #   resp.db_instance_automated_backups[0].restore_window.earliest_time #=> Time
+    #   resp.db_instance_automated_backups[0].restore_window.latest_time #=> Time
+    #   resp.db_instance_automated_backups[0].allocated_storage #=> Integer
+    #   resp.db_instance_automated_backups[0].status #=> String
+    #   resp.db_instance_automated_backups[0].port #=> Integer
+    #   resp.db_instance_automated_backups[0].availability_zone #=> String
+    #   resp.db_instance_automated_backups[0].vpc_id #=> String
+    #   resp.db_instance_automated_backups[0].instance_create_time #=> Time
+    #   resp.db_instance_automated_backups[0].master_username #=> String
+    #   resp.db_instance_automated_backups[0].engine #=> String
+    #   resp.db_instance_automated_backups[0].engine_version #=> String
+    #   resp.db_instance_automated_backups[0].license_model #=> String
+    #   resp.db_instance_automated_backups[0].iops #=> Integer
+    #   resp.db_instance_automated_backups[0].option_group_name #=> String
+    #   resp.db_instance_automated_backups[0].tde_credential_arn #=> String
+    #   resp.db_instance_automated_backups[0].encrypted #=> Boolean
+    #   resp.db_instance_automated_backups[0].storage_type #=> String
+    #   resp.db_instance_automated_backups[0].kms_key_id #=> String
+    #   resp.db_instance_automated_backups[0].timezone #=> String
+    #   resp.db_instance_automated_backups[0].iam_database_authentication_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstanceAutomatedBackups AWS API Documentation
+    #
+    # @overload describe_db_instance_automated_backups(params = {})
+    # @param [Hash] params ({})
+    def describe_db_instance_automated_backups(params = {}, options = {})
+      req = build_request(:describe_db_instance_automated_backups, params)
+      req.send_request(options)
+    end
+
     # Returns information about provisioned RDS instances. This API supports
     # pagination.
     #
@@ -7044,6 +7220,9 @@ module Aws::RDS
     #   You can share a manual DB snapshot as public by using the
     #   ModifyDBSnapshotAttribute API.
     #
+    # @option params [String] :dbi_resource_id
+    #   A specific DB resource ID to describe.
+    #
     # @return [Types::DBSnapshotMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DBSnapshotMessage#marker #marker} => String
@@ -7081,6 +7260,7 @@ module Aws::RDS
     #     marker: "String",
     #     include_shared: false,
     #     include_public: false,
+    #     dbi_resource_id: "String",
     #   })
     #
     # @example Response structure
@@ -7116,6 +7296,7 @@ module Aws::RDS
     #   resp.db_snapshots[0].processor_features #=> Array
     #   resp.db_snapshots[0].processor_features[0].name #=> String
     #   resp.db_snapshots[0].processor_features[0].value #=> String
+    #   resp.db_snapshots[0].dbi_resource_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshots AWS API Documentation
     #
@@ -10476,6 +10657,7 @@ module Aws::RDS
     #   resp.db_snapshot.processor_features #=> Array
     #   resp.db_snapshot.processor_features[0].name #=> String
     #   resp.db_snapshot.processor_features[0].value #=> String
+    #   resp.db_snapshot.dbi_resource_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshot AWS API Documentation
     #
@@ -13859,7 +14041,7 @@ module Aws::RDS
     #
     #  </note>
     #
-    # @option params [required, String] :source_db_instance_identifier
+    # @option params [String] :source_db_instance_identifier
     #   The identifier of the source DB instance from which to restore.
     #
     #   Constraints:
@@ -14115,6 +14297,9 @@ module Aws::RDS
     #
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     #
+    # @option params [String] :source_dbi_resource_id
+    #   The resource ID of the source DB instance from which to restore.
+    #
     # @return [Types::RestoreDBInstanceToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceToPointInTimeResult#db_instance #db_instance} => Types::DBInstance
@@ -14218,7 +14403,7 @@ module Aws::RDS
     # @example Request syntax with placeholder values
     #
     #   resp = client.restore_db_instance_to_point_in_time({
-    #     source_db_instance_identifier: "String", # required
+    #     source_db_instance_identifier: "String",
     #     target_db_instance_identifier: "String", # required
     #     restore_time: Time.now,
     #     use_latest_restorable_time: false,
@@ -14257,6 +14442,7 @@ module Aws::RDS
     #     use_default_processor_features: false,
     #     db_parameter_group_name: "String",
     #     deletion_protection: false,
+    #     source_dbi_resource_id: "String",
     #   })
     #
     # @example Response structure
@@ -14571,7 +14757,7 @@ module Aws::RDS
     # console, the stop-db-instance AWS CLI command, or the StopDBInstance
     # action.
     #
-    # For more information, see [ Starting an Amazon RDS DB Instance That
+    # For more information, see [ Starting an Amazon RDS DB instance That
     # Was Previously Stopped][1] in the *Amazon RDS User Guide.*
     #
     # <note markdown="1"> This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For
@@ -14985,7 +15171,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

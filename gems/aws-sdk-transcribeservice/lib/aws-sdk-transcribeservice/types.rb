@@ -13,7 +13,7 @@ module Aws::TranscribeService
     #
     #       {
     #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-UK
+    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR
     #         phrases: ["Phrase"], # required
     #       }
     #
@@ -440,7 +440,7 @@ module Aws::TranscribeService
     #
     #       {
     #         transcription_job_name: "TranscriptionJobName", # required
-    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-UK
+    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR
     #         media_sample_rate_hertz: 1,
     #         media_format: "mp3", # required, accepts mp3, mp4, wav, flac
     #         media: { # required
@@ -456,8 +456,9 @@ module Aws::TranscribeService
     #       }
     #
     # @!attribute [rw] transcription_job_name
-    #   The name of the job. You can't use the strings "." or ".." in
-    #   the job name. The name must be unique within an AWS account.
+    #   The name of the job. Note that you can't use the strings "." or
+    #   ".." by themselves as the job name. The name must also be unique
+    #   within an AWS account.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -679,7 +680,7 @@ module Aws::TranscribeService
     #
     #       {
     #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-UK
+    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR
     #         phrases: ["Phrase"], # required
     #       }
     #

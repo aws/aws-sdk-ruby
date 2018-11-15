@@ -30,7 +30,18 @@ module Aws::Comprehend
     BatchItemError = Shapes::StructureShape.new(name: 'BatchItemError')
     BatchItemErrorList = Shapes::ListShape.new(name: 'BatchItemErrorList')
     BatchSizeLimitExceededException = Shapes::StructureShape.new(name: 'BatchSizeLimitExceededException')
+    ClassifierEvaluationMetrics = Shapes::StructureShape.new(name: 'ClassifierEvaluationMetrics')
+    ClassifierMetadata = Shapes::StructureShape.new(name: 'ClassifierMetadata')
     ClientRequestTokenString = Shapes::StringShape.new(name: 'ClientRequestTokenString')
+    ComprehendArnName = Shapes::StringShape.new(name: 'ComprehendArnName')
+    CreateDocumentClassifierRequest = Shapes::StructureShape.new(name: 'CreateDocumentClassifierRequest')
+    CreateDocumentClassifierResponse = Shapes::StructureShape.new(name: 'CreateDocumentClassifierResponse')
+    DeleteDocumentClassifierRequest = Shapes::StructureShape.new(name: 'DeleteDocumentClassifierRequest')
+    DeleteDocumentClassifierResponse = Shapes::StructureShape.new(name: 'DeleteDocumentClassifierResponse')
+    DescribeDocumentClassificationJobRequest = Shapes::StructureShape.new(name: 'DescribeDocumentClassificationJobRequest')
+    DescribeDocumentClassificationJobResponse = Shapes::StructureShape.new(name: 'DescribeDocumentClassificationJobResponse')
+    DescribeDocumentClassifierRequest = Shapes::StructureShape.new(name: 'DescribeDocumentClassifierRequest')
+    DescribeDocumentClassifierResponse = Shapes::StructureShape.new(name: 'DescribeDocumentClassifierResponse')
     DescribeDominantLanguageDetectionJobRequest = Shapes::StructureShape.new(name: 'DescribeDominantLanguageDetectionJobRequest')
     DescribeDominantLanguageDetectionJobResponse = Shapes::StructureShape.new(name: 'DescribeDominantLanguageDetectionJobResponse')
     DescribeEntitiesDetectionJobRequest = Shapes::StructureShape.new(name: 'DescribeEntitiesDetectionJobRequest')
@@ -51,10 +62,19 @@ module Aws::Comprehend
     DetectSentimentResponse = Shapes::StructureShape.new(name: 'DetectSentimentResponse')
     DetectSyntaxRequest = Shapes::StructureShape.new(name: 'DetectSyntaxRequest')
     DetectSyntaxResponse = Shapes::StructureShape.new(name: 'DetectSyntaxResponse')
+    DocumentClassificationJobFilter = Shapes::StructureShape.new(name: 'DocumentClassificationJobFilter')
+    DocumentClassificationJobProperties = Shapes::StructureShape.new(name: 'DocumentClassificationJobProperties')
+    DocumentClassificationJobPropertiesList = Shapes::ListShape.new(name: 'DocumentClassificationJobPropertiesList')
+    DocumentClassifierArn = Shapes::StringShape.new(name: 'DocumentClassifierArn')
+    DocumentClassifierFilter = Shapes::StructureShape.new(name: 'DocumentClassifierFilter')
+    DocumentClassifierInputDataConfig = Shapes::StructureShape.new(name: 'DocumentClassifierInputDataConfig')
+    DocumentClassifierProperties = Shapes::StructureShape.new(name: 'DocumentClassifierProperties')
+    DocumentClassifierPropertiesList = Shapes::ListShape.new(name: 'DocumentClassifierPropertiesList')
     DominantLanguage = Shapes::StructureShape.new(name: 'DominantLanguage')
     DominantLanguageDetectionJobFilter = Shapes::StructureShape.new(name: 'DominantLanguageDetectionJobFilter')
     DominantLanguageDetectionJobProperties = Shapes::StructureShape.new(name: 'DominantLanguageDetectionJobProperties')
     DominantLanguageDetectionJobPropertiesList = Shapes::ListShape.new(name: 'DominantLanguageDetectionJobPropertiesList')
+    Double = Shapes::FloatShape.new(name: 'Double')
     EntitiesDetectionJobFilter = Shapes::StructureShape.new(name: 'EntitiesDetectionJobFilter')
     EntitiesDetectionJobProperties = Shapes::StructureShape.new(name: 'EntitiesDetectionJobProperties')
     EntitiesDetectionJobPropertiesList = Shapes::ListShape.new(name: 'EntitiesDetectionJobPropertiesList')
@@ -77,6 +97,10 @@ module Aws::Comprehend
     KeyPhrasesDetectionJobProperties = Shapes::StructureShape.new(name: 'KeyPhrasesDetectionJobProperties')
     KeyPhrasesDetectionJobPropertiesList = Shapes::ListShape.new(name: 'KeyPhrasesDetectionJobPropertiesList')
     LanguageCode = Shapes::StringShape.new(name: 'LanguageCode')
+    ListDocumentClassificationJobsRequest = Shapes::StructureShape.new(name: 'ListDocumentClassificationJobsRequest')
+    ListDocumentClassificationJobsResponse = Shapes::StructureShape.new(name: 'ListDocumentClassificationJobsResponse')
+    ListDocumentClassifiersRequest = Shapes::StructureShape.new(name: 'ListDocumentClassifiersRequest')
+    ListDocumentClassifiersResponse = Shapes::StructureShape.new(name: 'ListDocumentClassifiersResponse')
     ListDominantLanguageDetectionJobsRequest = Shapes::StructureShape.new(name: 'ListDominantLanguageDetectionJobsRequest')
     ListDominantLanguageDetectionJobsResponse = Shapes::StructureShape.new(name: 'ListDominantLanguageDetectionJobsResponse')
     ListEntitiesDetectionJobsRequest = Shapes::StructureShape.new(name: 'ListEntitiesDetectionJobsRequest')
@@ -97,16 +121,23 @@ module Aws::Comprehend
     ListTopicsDetectionJobsRequest = Shapes::StructureShape.new(name: 'ListTopicsDetectionJobsRequest')
     ListTopicsDetectionJobsResponse = Shapes::StructureShape.new(name: 'ListTopicsDetectionJobsResponse')
     MaxResultsInteger = Shapes::IntegerShape.new(name: 'MaxResultsInteger')
+    ModelStatus = Shapes::StringShape.new(name: 'ModelStatus')
     NumberOfTopicsInteger = Shapes::IntegerShape.new(name: 'NumberOfTopicsInteger')
     OutputDataConfig = Shapes::StructureShape.new(name: 'OutputDataConfig')
     PartOfSpeechTag = Shapes::StructureShape.new(name: 'PartOfSpeechTag')
     PartOfSpeechTagType = Shapes::StringShape.new(name: 'PartOfSpeechTagType')
+    ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
+    ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
+    ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceUnavailableException = Shapes::StructureShape.new(name: 'ResourceUnavailableException')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SentimentDetectionJobFilter = Shapes::StructureShape.new(name: 'SentimentDetectionJobFilter')
     SentimentDetectionJobProperties = Shapes::StructureShape.new(name: 'SentimentDetectionJobProperties')
     SentimentDetectionJobPropertiesList = Shapes::ListShape.new(name: 'SentimentDetectionJobPropertiesList')
     SentimentScore = Shapes::StructureShape.new(name: 'SentimentScore')
     SentimentType = Shapes::StringShape.new(name: 'SentimentType')
+    StartDocumentClassificationJobRequest = Shapes::StructureShape.new(name: 'StartDocumentClassificationJobRequest')
+    StartDocumentClassificationJobResponse = Shapes::StructureShape.new(name: 'StartDocumentClassificationJobResponse')
     StartDominantLanguageDetectionJobRequest = Shapes::StructureShape.new(name: 'StartDominantLanguageDetectionJobRequest')
     StartDominantLanguageDetectionJobResponse = Shapes::StructureShape.new(name: 'StartDominantLanguageDetectionJobResponse')
     StartEntitiesDetectionJobRequest = Shapes::StructureShape.new(name: 'StartEntitiesDetectionJobRequest')
@@ -204,6 +235,45 @@ module Aws::Comprehend
 
     BatchItemErrorList.member = Shapes::ShapeRef.new(shape: BatchItemError)
 
+    ClassifierEvaluationMetrics.add_member(:accuracy, Shapes::ShapeRef.new(shape: Double, location_name: "Accuracy"))
+    ClassifierEvaluationMetrics.add_member(:precision, Shapes::ShapeRef.new(shape: Double, location_name: "Precision"))
+    ClassifierEvaluationMetrics.add_member(:recall, Shapes::ShapeRef.new(shape: Double, location_name: "Recall"))
+    ClassifierEvaluationMetrics.add_member(:f1_score, Shapes::ShapeRef.new(shape: Double, location_name: "F1Score"))
+    ClassifierEvaluationMetrics.struct_class = Types::ClassifierEvaluationMetrics
+
+    ClassifierMetadata.add_member(:number_of_labels, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfLabels"))
+    ClassifierMetadata.add_member(:number_of_trained_documents, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfTrainedDocuments"))
+    ClassifierMetadata.add_member(:number_of_test_documents, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfTestDocuments"))
+    ClassifierMetadata.add_member(:evaluation_metrics, Shapes::ShapeRef.new(shape: ClassifierEvaluationMetrics, location_name: "EvaluationMetrics"))
+    ClassifierMetadata.struct_class = Types::ClassifierMetadata
+
+    CreateDocumentClassifierRequest.add_member(:document_classifier_name, Shapes::ShapeRef.new(shape: ComprehendArnName, required: true, location_name: "DocumentClassifierName"))
+    CreateDocumentClassifierRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "DataAccessRoleArn"))
+    CreateDocumentClassifierRequest.add_member(:input_data_config, Shapes::ShapeRef.new(shape: DocumentClassifierInputDataConfig, required: true, location_name: "InputDataConfig"))
+    CreateDocumentClassifierRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateDocumentClassifierRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
+    CreateDocumentClassifierRequest.struct_class = Types::CreateDocumentClassifierRequest
+
+    CreateDocumentClassifierResponse.add_member(:document_classifier_arn, Shapes::ShapeRef.new(shape: DocumentClassifierArn, location_name: "DocumentClassifierArn"))
+    CreateDocumentClassifierResponse.struct_class = Types::CreateDocumentClassifierResponse
+
+    DeleteDocumentClassifierRequest.add_member(:document_classifier_arn, Shapes::ShapeRef.new(shape: DocumentClassifierArn, required: true, location_name: "DocumentClassifierArn"))
+    DeleteDocumentClassifierRequest.struct_class = Types::DeleteDocumentClassifierRequest
+
+    DeleteDocumentClassifierResponse.struct_class = Types::DeleteDocumentClassifierResponse
+
+    DescribeDocumentClassificationJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    DescribeDocumentClassificationJobRequest.struct_class = Types::DescribeDocumentClassificationJobRequest
+
+    DescribeDocumentClassificationJobResponse.add_member(:document_classification_job_properties, Shapes::ShapeRef.new(shape: DocumentClassificationJobProperties, location_name: "DocumentClassificationJobProperties"))
+    DescribeDocumentClassificationJobResponse.struct_class = Types::DescribeDocumentClassificationJobResponse
+
+    DescribeDocumentClassifierRequest.add_member(:document_classifier_arn, Shapes::ShapeRef.new(shape: DocumentClassifierArn, required: true, location_name: "DocumentClassifierArn"))
+    DescribeDocumentClassifierRequest.struct_class = Types::DescribeDocumentClassifierRequest
+
+    DescribeDocumentClassifierResponse.add_member(:document_classifier_properties, Shapes::ShapeRef.new(shape: DocumentClassifierProperties, location_name: "DocumentClassifierProperties"))
+    DescribeDocumentClassifierResponse.struct_class = Types::DescribeDocumentClassifierResponse
+
     DescribeDominantLanguageDetectionJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     DescribeDominantLanguageDetectionJobRequest.struct_class = Types::DescribeDominantLanguageDetectionJobRequest
 
@@ -268,6 +338,49 @@ module Aws::Comprehend
 
     DetectSyntaxResponse.add_member(:syntax_tokens, Shapes::ShapeRef.new(shape: ListOfSyntaxTokens, location_name: "SyntaxTokens"))
     DetectSyntaxResponse.struct_class = Types::DetectSyntaxResponse
+
+    DocumentClassificationJobFilter.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
+    DocumentClassificationJobFilter.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    DocumentClassificationJobFilter.add_member(:submit_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeBefore"))
+    DocumentClassificationJobFilter.add_member(:submit_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeAfter"))
+    DocumentClassificationJobFilter.struct_class = Types::DocumentClassificationJobFilter
+
+    DocumentClassificationJobProperties.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    DocumentClassificationJobProperties.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
+    DocumentClassificationJobProperties.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    DocumentClassificationJobProperties.add_member(:message, Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
+    DocumentClassificationJobProperties.add_member(:submit_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTime"))
+    DocumentClassificationJobProperties.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    DocumentClassificationJobProperties.add_member(:document_classifier_arn, Shapes::ShapeRef.new(shape: DocumentClassifierArn, location_name: "DocumentClassifierArn"))
+    DocumentClassificationJobProperties.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
+    DocumentClassificationJobProperties.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig"))
+    DocumentClassificationJobProperties.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
+    DocumentClassificationJobProperties.struct_class = Types::DocumentClassificationJobProperties
+
+    DocumentClassificationJobPropertiesList.member = Shapes::ShapeRef.new(shape: DocumentClassificationJobProperties)
+
+    DocumentClassifierFilter.add_member(:status, Shapes::ShapeRef.new(shape: ModelStatus, location_name: "Status"))
+    DocumentClassifierFilter.add_member(:submit_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeBefore"))
+    DocumentClassifierFilter.add_member(:submit_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeAfter"))
+    DocumentClassifierFilter.struct_class = Types::DocumentClassifierFilter
+
+    DocumentClassifierInputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
+    DocumentClassifierInputDataConfig.struct_class = Types::DocumentClassifierInputDataConfig
+
+    DocumentClassifierProperties.add_member(:document_classifier_arn, Shapes::ShapeRef.new(shape: DocumentClassifierArn, location_name: "DocumentClassifierArn"))
+    DocumentClassifierProperties.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
+    DocumentClassifierProperties.add_member(:status, Shapes::ShapeRef.new(shape: ModelStatus, location_name: "Status"))
+    DocumentClassifierProperties.add_member(:message, Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
+    DocumentClassifierProperties.add_member(:submit_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTime"))
+    DocumentClassifierProperties.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    DocumentClassifierProperties.add_member(:training_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TrainingStartTime"))
+    DocumentClassifierProperties.add_member(:training_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TrainingEndTime"))
+    DocumentClassifierProperties.add_member(:input_data_config, Shapes::ShapeRef.new(shape: DocumentClassifierInputDataConfig, location_name: "InputDataConfig"))
+    DocumentClassifierProperties.add_member(:classifier_metadata, Shapes::ShapeRef.new(shape: ClassifierMetadata, location_name: "ClassifierMetadata"))
+    DocumentClassifierProperties.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
+    DocumentClassifierProperties.struct_class = Types::DocumentClassifierProperties
+
+    DocumentClassifierPropertiesList.member = Shapes::ShapeRef.new(shape: DocumentClassifierProperties)
 
     DominantLanguage.add_member(:language_code, Shapes::ShapeRef.new(shape: String, location_name: "LanguageCode"))
     DominantLanguage.add_member(:score, Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
@@ -348,6 +461,24 @@ module Aws::Comprehend
     KeyPhrasesDetectionJobProperties.struct_class = Types::KeyPhrasesDetectionJobProperties
 
     KeyPhrasesDetectionJobPropertiesList.member = Shapes::ShapeRef.new(shape: KeyPhrasesDetectionJobProperties)
+
+    ListDocumentClassificationJobsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: DocumentClassificationJobFilter, location_name: "Filter"))
+    ListDocumentClassificationJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListDocumentClassificationJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListDocumentClassificationJobsRequest.struct_class = Types::ListDocumentClassificationJobsRequest
+
+    ListDocumentClassificationJobsResponse.add_member(:document_classification_job_properties_list, Shapes::ShapeRef.new(shape: DocumentClassificationJobPropertiesList, location_name: "DocumentClassificationJobPropertiesList"))
+    ListDocumentClassificationJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListDocumentClassificationJobsResponse.struct_class = Types::ListDocumentClassificationJobsResponse
+
+    ListDocumentClassifiersRequest.add_member(:filter, Shapes::ShapeRef.new(shape: DocumentClassifierFilter, location_name: "Filter"))
+    ListDocumentClassifiersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListDocumentClassifiersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListDocumentClassifiersRequest.struct_class = Types::ListDocumentClassifiersRequest
+
+    ListDocumentClassifiersResponse.add_member(:document_classifier_properties_list, Shapes::ShapeRef.new(shape: DocumentClassifierPropertiesList, location_name: "DocumentClassifierPropertiesList"))
+    ListDocumentClassifiersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListDocumentClassifiersResponse.struct_class = Types::ListDocumentClassifiersResponse
 
     ListDominantLanguageDetectionJobsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: DominantLanguageDetectionJobFilter, location_name: "Filter"))
     ListDominantLanguageDetectionJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -444,6 +575,18 @@ module Aws::Comprehend
     SentimentScore.add_member(:neutral, Shapes::ShapeRef.new(shape: Float, location_name: "Neutral"))
     SentimentScore.add_member(:mixed, Shapes::ShapeRef.new(shape: Float, location_name: "Mixed"))
     SentimentScore.struct_class = Types::SentimentScore
+
+    StartDocumentClassificationJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
+    StartDocumentClassificationJobRequest.add_member(:document_classifier_arn, Shapes::ShapeRef.new(shape: DocumentClassifierArn, required: true, location_name: "DocumentClassifierArn"))
+    StartDocumentClassificationJobRequest.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, required: true, location_name: "InputDataConfig"))
+    StartDocumentClassificationJobRequest.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, required: true, location_name: "OutputDataConfig"))
+    StartDocumentClassificationJobRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "DataAccessRoleArn"))
+    StartDocumentClassificationJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartDocumentClassificationJobRequest.struct_class = Types::StartDocumentClassificationJobRequest
+
+    StartDocumentClassificationJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    StartDocumentClassificationJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    StartDocumentClassificationJobResponse.struct_class = Types::StartDocumentClassificationJobResponse
 
     StartDominantLanguageDetectionJobRequest.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, required: true, location_name: "InputDataConfig"))
     StartDominantLanguageDetectionJobRequest.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, required: true, location_name: "OutputDataConfig"))
@@ -643,6 +786,58 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:create_document_classifier, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDocumentClassifier"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateDocumentClassifierRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateDocumentClassifierResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_document_classifier, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDocumentClassifier"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDocumentClassifierRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDocumentClassifierResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:describe_document_classification_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDocumentClassificationJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDocumentClassificationJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDocumentClassificationJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: JobNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:describe_document_classifier, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDocumentClassifier"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDocumentClassifierRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDocumentClassifierResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:describe_dominant_language_detection_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeDominantLanguageDetectionJob"
         o.http_method = "POST"
@@ -762,6 +957,30 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:list_document_classification_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDocumentClassificationJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListDocumentClassificationJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDocumentClassificationJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidFilterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:list_document_classifiers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDocumentClassifiers"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListDocumentClassifiersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDocumentClassifiersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidFilterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:list_dominant_language_detection_jobs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDominantLanguageDetectionJobs"
         o.http_method = "POST"
@@ -850,6 +1069,19 @@ module Aws::Comprehend
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:start_document_classification_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartDocumentClassificationJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartDocumentClassificationJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartDocumentClassificationJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:start_dominant_language_detection_job, Seahorse::Model::Operation.new.tap do |o|

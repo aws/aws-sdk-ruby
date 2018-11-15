@@ -254,6 +254,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#aws_device #aws_device} => String
     #   * {Types::Connection#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
+    #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -281,6 +282,7 @@ module Aws::DirectConnect
     #   resp.aws_device #=> String
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.aws_device_v2 #=> String
+    #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateConnectionOnInterconnect AWS API Documentation
     #
@@ -333,6 +335,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#aws_device #aws_device} => String
     #   * {Types::Connection#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
+    #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -360,6 +363,7 @@ module Aws::DirectConnect
     #   resp.aws_device #=> String
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.aws_device_v2 #=> String
+    #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateHostedConnection AWS API Documentation
     #
@@ -455,6 +459,7 @@ module Aws::DirectConnect
     #   resp.route_filter_prefixes #=> Array
     #   resp.route_filter_prefixes[0].cidr #=> String
     #   resp.bgp_peers #=> Array
+    #   resp.bgp_peers[0].bgp_peer_id #=> String
     #   resp.bgp_peers[0].asn #=> Integer
     #   resp.bgp_peers[0].auth_key #=> String
     #   resp.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
@@ -572,6 +577,7 @@ module Aws::DirectConnect
     #   resp.route_filter_prefixes #=> Array
     #   resp.route_filter_prefixes[0].cidr #=> String
     #   resp.bgp_peers #=> Array
+    #   resp.bgp_peers[0].bgp_peer_id #=> String
     #   resp.bgp_peers[0].asn #=> Integer
     #   resp.bgp_peers[0].auth_key #=> String
     #   resp.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
@@ -635,6 +641,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#aws_device #aws_device} => String
     #   * {Types::Connection#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
+    #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -659,6 +666,7 @@ module Aws::DirectConnect
     #   resp.aws_device #=> String
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.aws_device_v2 #=> String
+    #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateConnectionWithLag AWS API Documentation
     #
@@ -701,6 +709,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#aws_device #aws_device} => String
     #   * {Types::Connection#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
+    #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -725,6 +734,7 @@ module Aws::DirectConnect
     #   resp.aws_device #=> String
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.aws_device_v2 #=> String
+    #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateHostedConnection AWS API Documentation
     #
@@ -814,6 +824,7 @@ module Aws::DirectConnect
     #   resp.route_filter_prefixes #=> Array
     #   resp.route_filter_prefixes[0].cidr #=> String
     #   resp.bgp_peers #=> Array
+    #   resp.bgp_peers[0].bgp_peer_id #=> String
     #   resp.bgp_peers[0].asn #=> Integer
     #   resp.bgp_peers[0].auth_key #=> String
     #   resp.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
@@ -943,11 +954,13 @@ module Aws::DirectConnect
 
     # Creates a BGP peer on the specified virtual interface.
     #
-    # The BGP peer cannot be in the same address family (IPv4/IPv6) of an
-    # existing BGP peer on the virtual interface.
+    # You must create a BGP peer for the corresponding address family
+    # (IPv4/IPv6) in order to access AWS resources that also use that
+    # address family.
     #
-    # You must create a BGP peer for the corresponding address family in
-    # order to access AWS resources that also use that address family.
+    # If logical redundancy is not supported by the connection,
+    # interconnect, or LAG, the BGP peer cannot be in the same address
+    # family as an existing BGP peer on the virtual interface.
     #
     # When creating a IPv6 BGP peer, omit the Amazon address and customer
     # address. IPv6 addresses are automatically assigned from the Amazon
@@ -1003,6 +1016,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface.route_filter_prefixes #=> Array
     #   resp.virtual_interface.route_filter_prefixes[0].cidr #=> String
     #   resp.virtual_interface.bgp_peers #=> Array
+    #   resp.virtual_interface.bgp_peers[0].bgp_peer_id #=> String
     #   resp.virtual_interface.bgp_peers[0].asn #=> Integer
     #   resp.virtual_interface.bgp_peers[0].auth_key #=> String
     #   resp.virtual_interface.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
@@ -1067,6 +1081,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#aws_device #aws_device} => String
     #   * {Types::Connection#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
+    #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1093,6 +1108,7 @@ module Aws::DirectConnect
     #   resp.aws_device #=> String
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.aws_device_v2 #=> String
+    #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateConnection AWS API Documentation
     #
@@ -1241,6 +1257,7 @@ module Aws::DirectConnect
     #   * {Types::Interconnect#aws_device #aws_device} => String
     #   * {Types::Interconnect#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Interconnect#aws_device_v2 #aws_device_v2} => String
+    #   * {Types::Interconnect#has_logical_redundancy #has_logical_redundancy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1264,6 +1281,7 @@ module Aws::DirectConnect
     #   resp.aws_device #=> String
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.aws_device_v2 #=> String
+    #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateInterconnect AWS API Documentation
     #
@@ -1334,6 +1352,7 @@ module Aws::DirectConnect
     #   * {Types::Lag#connections #connections} => Array&lt;Types::Connection&gt;
     #   * {Types::Lag#allows_hosted_connections #allows_hosted_connections} => Boolean
     #   * {Types::Lag#jumbo_frame_capable #jumbo_frame_capable} => Boolean
+    #   * {Types::Lag#has_logical_redundancy #has_logical_redundancy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1373,8 +1392,10 @@ module Aws::DirectConnect
     #   resp.connections[0].aws_device #=> String
     #   resp.connections[0].jumbo_frame_capable #=> Boolean
     #   resp.connections[0].aws_device_v2 #=> String
+    #   resp.connections[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
     #   resp.allows_hosted_connections #=> Boolean
     #   resp.jumbo_frame_capable #=> Boolean
+    #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateLag AWS API Documentation
     #
@@ -1468,6 +1489,7 @@ module Aws::DirectConnect
     #   resp.route_filter_prefixes #=> Array
     #   resp.route_filter_prefixes[0].cidr #=> String
     #   resp.bgp_peers #=> Array
+    #   resp.bgp_peers[0].bgp_peer_id #=> String
     #   resp.bgp_peers[0].asn #=> Integer
     #   resp.bgp_peers[0].auth_key #=> String
     #   resp.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
@@ -1572,6 +1594,7 @@ module Aws::DirectConnect
     #   resp.route_filter_prefixes #=> Array
     #   resp.route_filter_prefixes[0].cidr #=> String
     #   resp.bgp_peers #=> Array
+    #   resp.bgp_peers[0].bgp_peer_id #=> String
     #   resp.bgp_peers[0].asn #=> Integer
     #   resp.bgp_peers[0].auth_key #=> String
     #   resp.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
@@ -1592,8 +1615,8 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
-    # Deletes the BGP peer on the specified virtual interface with the
-    # specified customer address and ASN.
+    # Deletes the specified BGP peer on the specified virtual interface with
+    # the specified customer address and ASN.
     #
     # You cannot delete the last BGP peer from a virtual interface.
     #
@@ -1607,6 +1630,9 @@ module Aws::DirectConnect
     # @option params [String] :customer_address
     #   The IP address assigned to the customer interface.
     #
+    # @option params [String] :bgp_peer_id
+    #   The ID of the BGP peer.
+    #
     # @return [Types::DeleteBGPPeerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteBGPPeerResponse#virtual_interface #virtual_interface} => Types::VirtualInterface
@@ -1617,6 +1643,7 @@ module Aws::DirectConnect
     #     virtual_interface_id: "VirtualInterfaceId",
     #     asn: 1,
     #     customer_address: "CustomerAddress",
+    #     bgp_peer_id: "BGPPeerId",
     #   })
     #
     # @example Response structure
@@ -1643,6 +1670,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface.route_filter_prefixes #=> Array
     #   resp.virtual_interface.route_filter_prefixes[0].cidr #=> String
     #   resp.virtual_interface.bgp_peers #=> Array
+    #   resp.virtual_interface.bgp_peers[0].bgp_peer_id #=> String
     #   resp.virtual_interface.bgp_peers[0].asn #=> Integer
     #   resp.virtual_interface.bgp_peers[0].auth_key #=> String
     #   resp.virtual_interface.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
@@ -1689,6 +1717,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#aws_device #aws_device} => String
     #   * {Types::Connection#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
+    #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1712,6 +1741,7 @@ module Aws::DirectConnect
     #   resp.aws_device #=> String
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.aws_device_v2 #=> String
+    #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteConnection AWS API Documentation
     #
@@ -1850,6 +1880,7 @@ module Aws::DirectConnect
     #   * {Types::Lag#connections #connections} => Array&lt;Types::Connection&gt;
     #   * {Types::Lag#allows_hosted_connections #allows_hosted_connections} => Boolean
     #   * {Types::Lag#jumbo_frame_capable #jumbo_frame_capable} => Boolean
+    #   * {Types::Lag#has_logical_redundancy #has_logical_redundancy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1885,8 +1916,10 @@ module Aws::DirectConnect
     #   resp.connections[0].aws_device #=> String
     #   resp.connections[0].jumbo_frame_capable #=> Boolean
     #   resp.connections[0].aws_device_v2 #=> String
+    #   resp.connections[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
     #   resp.allows_hosted_connections #=> Boolean
     #   resp.jumbo_frame_capable #=> Boolean
+    #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteLag AWS API Documentation
     #
@@ -2010,6 +2043,7 @@ module Aws::DirectConnect
     #   resp.connections[0].aws_device #=> String
     #   resp.connections[0].jumbo_frame_capable #=> Boolean
     #   resp.connections[0].aws_device_v2 #=> String
+    #   resp.connections[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnections AWS API Documentation
     #
@@ -2059,6 +2093,7 @@ module Aws::DirectConnect
     #   resp.connections[0].aws_device #=> String
     #   resp.connections[0].jumbo_frame_capable #=> Boolean
     #   resp.connections[0].aws_device_v2 #=> String
+    #   resp.connections[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionsOnInterconnect AWS API Documentation
     #
@@ -2262,6 +2297,7 @@ module Aws::DirectConnect
     #   resp.connections[0].aws_device #=> String
     #   resp.connections[0].jumbo_frame_capable #=> Boolean
     #   resp.connections[0].aws_device_v2 #=> String
+    #   resp.connections[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeHostedConnections AWS API Documentation
     #
@@ -2355,6 +2391,7 @@ module Aws::DirectConnect
     #   resp.interconnects[0].aws_device #=> String
     #   resp.interconnects[0].jumbo_frame_capable #=> Boolean
     #   resp.interconnects[0].aws_device_v2 #=> String
+    #   resp.interconnects[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnects AWS API Documentation
     #
@@ -2409,8 +2446,10 @@ module Aws::DirectConnect
     #   resp.lags[0].connections[0].aws_device #=> String
     #   resp.lags[0].connections[0].jumbo_frame_capable #=> Boolean
     #   resp.lags[0].connections[0].aws_device_v2 #=> String
+    #   resp.lags[0].connections[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
     #   resp.lags[0].allows_hosted_connections #=> Boolean
     #   resp.lags[0].jumbo_frame_capable #=> Boolean
+    #   resp.lags[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLags AWS API Documentation
     #
@@ -2606,6 +2645,7 @@ module Aws::DirectConnect
     #   resp.virtual_interfaces[0].route_filter_prefixes #=> Array
     #   resp.virtual_interfaces[0].route_filter_prefixes[0].cidr #=> String
     #   resp.virtual_interfaces[0].bgp_peers #=> Array
+    #   resp.virtual_interfaces[0].bgp_peers[0].bgp_peer_id #=> String
     #   resp.virtual_interfaces[0].bgp_peers[0].asn #=> Integer
     #   resp.virtual_interfaces[0].bgp_peers[0].auth_key #=> String
     #   resp.virtual_interfaces[0].bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
@@ -2662,6 +2702,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#aws_device #aws_device} => String
     #   * {Types::Connection#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
+    #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2686,6 +2727,7 @@ module Aws::DirectConnect
     #   resp.aws_device #=> String
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.aws_device_v2 #=> String
+    #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DisassociateConnectionFromLag AWS API Documentation
     #
@@ -2802,6 +2844,7 @@ module Aws::DirectConnect
     #   * {Types::Lag#connections #connections} => Array&lt;Types::Connection&gt;
     #   * {Types::Lag#allows_hosted_connections #allows_hosted_connections} => Boolean
     #   * {Types::Lag#jumbo_frame_capable #jumbo_frame_capable} => Boolean
+    #   * {Types::Lag#has_logical_redundancy #has_logical_redundancy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2839,8 +2882,10 @@ module Aws::DirectConnect
     #   resp.connections[0].aws_device #=> String
     #   resp.connections[0].jumbo_frame_capable #=> Boolean
     #   resp.connections[0].aws_device_v2 #=> String
+    #   resp.connections[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
     #   resp.allows_hosted_connections #=> Boolean
     #   resp.jumbo_frame_capable #=> Boolean
+    #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateLag AWS API Documentation
     #
@@ -2927,6 +2972,7 @@ module Aws::DirectConnect
     #   resp.route_filter_prefixes #=> Array
     #   resp.route_filter_prefixes[0].cidr #=> String
     #   resp.bgp_peers #=> Array
+    #   resp.bgp_peers[0].bgp_peer_id #=> String
     #   resp.bgp_peers[0].asn #=> Integer
     #   resp.bgp_peers[0].auth_key #=> String
     #   resp.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
@@ -2960,7 +3006,7 @@ module Aws::DirectConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directconnect'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

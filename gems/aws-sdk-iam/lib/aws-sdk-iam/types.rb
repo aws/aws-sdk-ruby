@@ -1076,6 +1076,12 @@ module Aws::IAM
     #         role_name: "roleNameType", # required
     #         assume_role_policy_document: "policyDocumentType", # required
     #         description: "roleDescriptionType",
+    #         tags: [
+    #           {
+    #             key: "tagKeyType", # required
+    #             value: "tagValueType", # required
+    #           },
+    #         ],
     #         max_session_duration: 1,
     #         permissions_boundary: "arnType",
     #       }
@@ -1141,6 +1147,23 @@ module Aws::IAM
     #   A description of the role.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that you want to attach to the newly created role.
+    #   Each tag consists of a key name and an associated value. For more
+    #   information about tagging, see [Tagging IAM Identities][1] in the
+    #   *IAM User Guide*.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed
+    #   number of tags per role, then the entire request fails and the role
+    #   is not created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
+    #
     # @!attribute [rw] max_session_duration
     #   The maximum session duration (in seconds) that you want to set for
     #   the specified role. If you do not specify a value for this setting,
@@ -1176,6 +1199,7 @@ module Aws::IAM
       :role_name,
       :assume_role_policy_document,
       :description,
+      :tags,
       :max_session_duration,
       :permissions_boundary)
       include Aws::Structure
@@ -1263,9 +1287,20 @@ module Aws::IAM
     #       }
     #
     # @!attribute [rw] aws_service_name
-    #   The AWS service to which this role is attached. You use a string
-    #   similar to a URL but without the http:// in front. For example:
-    #   `elasticbeanstalk.amazonaws.com`
+    #   The service principal for the AWS service to which this role is
+    #   attached. You use a string similar to a URL but without the http://
+    #   in front. For example: `elasticbeanstalk.amazonaws.com`.
+    #
+    #   Service principals are unique and case-sensitive. To find the exact
+    #   service principal for your service-linked role, see [AWS Services
+    #   That Work with IAM][1] in the *IAM User Guide* and look for the
+    #   services that have <b>Yes </b>in the **Service-Linked Role** column.
+    #   Choose the **Yes** link to view the service-linked role
+    #   documentation for that service.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1273,12 +1308,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] custom_suffix
-    #   A string that you provide, which is combined with the service name
-    #   to form the complete role name. If you make multiple requests for
-    #   the same service, then you must supply a different `CustomSuffix`
-    #   for each request. Otherwise the request fails with a duplicate role
-    #   name error. For example, you could add `-1` or `-debug` to the
-    #   suffix.
+    #   A string that you provide, which is combined with the
+    #   service-provided prefix to form the complete role name. If you make
+    #   multiple requests for the same service, then you must supply a
+    #   different `CustomSuffix` for each request. Otherwise the request
+    #   fails with a duplicate role name error. For example, you could add
+    #   `-1` or `-debug` to the suffix.
+    #
+    #   Some services do not support the `CustomSuffix` parameter. If you
+    #   provide an optional suffix and the operation fails, try the
+    #   operation again without the suffix.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceLinkedRoleRequest AWS API Documentation
@@ -1361,6 +1400,12 @@ module Aws::IAM
     #       {
     #         path: "pathType",
     #         user_name: "userNameType", # required
+    #         tags: [
+    #           {
+    #             key: "tagKeyType", # required
+    #             value: "tagValueType", # required
+    #           },
+    #         ],
     #         permissions_boundary: "arnType",
     #       }
     #
@@ -1399,6 +1444,23 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that you want to attach to the newly created user.
+    #   Each tag consists of a key name and an associated value. For more
+    #   information about tagging, see [Tagging IAM Identities][1] in the
+    #   *IAM User Guide*.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed
+    #   number of tags per user, then the entire request fails and the user
+    #   is not created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
+    #
     # @!attribute [rw] permissions_boundary
     #   The ARN of the policy that is used to set the permissions boundary
     #   for the user.
@@ -1409,6 +1471,7 @@ module Aws::IAM
     class CreateUserRequest < Struct.new(
       :path,
       :user_name,
+      :tags,
       :permissions_boundary)
       include Aws::Structure
     end
@@ -5289,6 +5352,88 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListRoleTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         role_name: "roleNameType", # required
+    #         marker: "markerType",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] role_name
+    #   The name of the IAM role for which you want to see the list of tags.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: \_+=,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   Use this parameter only when paginating results and only after you
+    #   receive a response indicating that the results are truncated. Set it
+    #   to the value of the `Marker` element in the response to indicate
+    #   where the next call should start.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items that you want in the response. If additional
+    #   items exist beyond the maximum that you specify, the `IsTruncated`
+    #   response element is `true`.
+    #
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when more results are
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true`, and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRoleTagsRequest AWS API Documentation
+    #
+    class ListRoleTagsRequest < Struct.new(
+      :role_name,
+      :marker,
+      :max_items)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The list of tags currently that is attached to the role. Each tag
+    #   consists of a key name and an associated value. If no tags are
+    #   attached to the specified role, the response contains an empty list.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] is_truncated
+    #   A flag that indicates whether there are more items to return. If
+    #   your results were truncated, you can use the `Marker` request
+    #   parameter to make a subsequent pagination request that retrieves
+    #   more items. Note that IAM might return fewer than the `MaxItems`
+    #   number of results even when more results are available. Check
+    #   `IsTruncated` after every call to ensure that you receive all of
+    #   your results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] marker
+    #   When `IsTruncated` is `true`, this element is present and contains
+    #   the value to use for the `Marker` parameter in a subsequent
+    #   pagination request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRoleTagsResponse AWS API Documentation
+    #
+    class ListRoleTagsResponse < Struct.new(
+      :tags,
+      :is_truncated,
+      :marker)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListRolesRequest
     #   data as a hash:
     #
@@ -5778,6 +5923,88 @@ module Aws::IAM
     #
     class ListUserPoliciesResponse < Struct.new(
       :policy_names,
+      :is_truncated,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListUserTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_name: "existingUserNameType", # required
+    #         marker: "markerType",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] user_name
+    #   The name of the IAM user whose tags you want to see.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   Use this parameter only when paginating results and only after you
+    #   receive a response indicating that the results are truncated. Set it
+    #   to the value of the `Marker` element in the response to indicate
+    #   where the next call should start.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items that you want in the response. If additional
+    #   items exist beyond the maximum that you specify, the `IsTruncated`
+    #   response element is `true`.
+    #
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when more results are
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true`, and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListUserTagsRequest AWS API Documentation
+    #
+    class ListUserTagsRequest < Struct.new(
+      :user_name,
+      :marker,
+      :max_items)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The list of tags that are currently attached to the user. Each tag
+    #   consists of a key name and an associated value. If no tags are
+    #   attached to the specified user, the response contains an empty list.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] is_truncated
+    #   A flag that indicates whether there are more items to return. If
+    #   your results were truncated, you can use the `Marker` request
+    #   parameter to make a subsequent pagination request that retrieves
+    #   more items. Note that IAM might return fewer than the `MaxItems`
+    #   number of results even when more results are available. Check
+    #   `IsTruncated` after every call to ensure that you receive all of
+    #   your results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] marker
+    #   When `IsTruncated` is `true`, this element is present and contains
+    #   the value to use for the `Marker` parameter in a subsequent
+    #   pagination request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListUserTagsResponse AWS API Documentation
+    #
+    class ListUserTagsResponse < Struct.new(
+      :tags,
       :is_truncated,
       :marker)
       include Aws::Structure
@@ -7168,6 +7395,16 @@ module Aws::IAM
     #   A description of the role that you provide.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that are attached to the specified role. For more
+    #   information about tagging, see [Tagging IAM Identities][1] in the
+    #   *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
+    #
     # @!attribute [rw] max_session_duration
     #   The maximum session duration (in seconds) for the specified role.
     #   Anyone who uses the AWS CLI or API to assume the role can specify
@@ -7197,6 +7434,7 @@ module Aws::IAM
       :create_date,
       :assume_role_policy_document,
       :description,
+      :tags,
       :max_session_duration,
       :permissions_boundary)
       include Aws::Structure
@@ -7270,6 +7508,16 @@ module Aws::IAM
     #   the role's access (permissions) policies.
     #   @return [Array<Types::AttachedPolicy>]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that are attached to the specified role. For more
+    #   information about tagging, see [Tagging IAM Identities][1] in the
+    #   *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
+    #
     # @!attribute [rw] permissions_boundary
     #   The ARN of the policy used to set the permissions boundary for the
     #   role.
@@ -7294,6 +7542,7 @@ module Aws::IAM
       :instance_profile_list,
       :role_policy_list,
       :attached_managed_policies,
+      :tags,
       :permissions_boundary)
       include Aws::Structure
     end
@@ -8221,6 +8470,199 @@ module Aws::IAM
       :source_policy_type,
       :start_position,
       :end_position)
+      include Aws::Structure
+    end
+
+    # A structure that represents user-provided metadata that can be
+    # associated with a resource such as an IAM user or role. For more
+    # information about tagging, see [Tagging IAM Identities][1] in the *IAM
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "tagKeyType", # required
+    #         value: "tagValueType", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key name that can be used to look up or retrieve the associated
+    #   value. For example, `Department` or `Cost Center` are common
+    #   choices.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value associated with this tag. For example, tags with a key
+    #   name of `Department` could have values such as `Human Resources`,
+    #   `Accounting`, and `Support`. Tags with a key name of `Cost Center`
+    #   might have values that consist of the number associated with the
+    #   different cost centers in your company. Typically, many resources
+    #   have tags with the same key name but with different values.
+    #
+    #   <note markdown="1"> AWS always interprets the tag `Value` as a single string. If you
+    #   need to store an array, you can store comma-separated values in the
+    #   string. However, you must interpret the value in your code.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagRoleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         role_name: "roleNameType", # required
+    #         tags: [ # required
+    #           {
+    #             key: "tagKeyType", # required
+    #             value: "tagValueType", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] role_name
+    #   The name of the role that you want to add tags to.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: \_+=,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags that you want to attach to the role. Each tag
+    #   consists of a key name and an associated value. You can specify this
+    #   with a JSON string.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/TagRoleRequest AWS API Documentation
+    #
+    class TagRoleRequest < Struct.new(
+      :role_name,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_name: "existingUserNameType", # required
+    #         tags: [ # required
+    #           {
+    #             key: "tagKeyType", # required
+    #             value: "tagValueType", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] user_name
+    #   The name of the user that you want to add tags to.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags that you want to attach to the user. Each tag
+    #   consists of a key name and an associated value.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/TagUserRequest AWS API Documentation
+    #
+    class TagUserRequest < Struct.new(
+      :user_name,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagRoleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         role_name: "roleNameType", # required
+    #         tag_keys: ["tagKeyType"], # required
+    #       }
+    #
+    # @!attribute [rw] role_name
+    #   The name of the IAM role from which you want to remove tags.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: \_+=,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of key names as a simple array of strings. The tags with
+    #   matching keys are removed from the specified role.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UntagRoleRequest AWS API Documentation
+    #
+    class UntagRoleRequest < Struct.new(
+      :role_name,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_name: "existingUserNameType", # required
+    #         tag_keys: ["tagKeyType"], # required
+    #       }
+    #
+    # @!attribute [rw] user_name
+    #   The name of the IAM user from which you want to remove tags.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of key names as a simple array of strings. The tags with
+    #   matching keys are removed from the specified user.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UntagUserRequest AWS API Documentation
+    #
+    class UntagUserRequest < Struct.new(
+      :user_name,
+      :tag_keys)
       include Aws::Structure
     end
 
@@ -9354,6 +9796,16 @@ module Aws::IAM
     #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that are associated with the specified user. For more
+    #   information about tagging, see [Tagging IAM Identities][1] in the
+    #   *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
+    #
     # @!attribute [rw] permissions_boundary
     #   The ARN of the policy used to set the permissions boundary for the
     #   user.
@@ -9375,6 +9827,7 @@ module Aws::IAM
       :arn,
       :create_date,
       :password_last_used,
+      :tags,
       :permissions_boundary)
       include Aws::Structure
     end
@@ -9441,6 +9894,16 @@ module Aws::IAM
     #   A list of the managed policies attached to the user.
     #   @return [Array<Types::AttachedPolicy>]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that are associated with the specified user. For more
+    #   information about tagging, see [Tagging IAM Identities][1] in the
+    #   *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
+    #
     # @!attribute [rw] permissions_boundary
     #   The ARN of the policy used to set the permissions boundary for the
     #   user.
@@ -9464,6 +9927,7 @@ module Aws::IAM
       :user_policy_list,
       :group_list,
       :attached_managed_policies,
+      :tags,
       :permissions_boundary)
       include Aws::Structure
     end

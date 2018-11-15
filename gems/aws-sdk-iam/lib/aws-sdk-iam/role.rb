@@ -89,6 +89,18 @@ module Aws::IAM
       data[:description]
     end
 
+    # A list of tags that are attached to the specified role. For more
+    # information about tagging, see [Tagging IAM Identities][1] in the *IAM
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    # @return [Array<Types::Tag>]
+    def tags
+      data[:tags]
+    end
+
     # The maximum session duration (in seconds) for the specified role.
     # Anyone who uses the AWS CLI or API to assume the role can specify the
     # duration using the optional `DurationSeconds` API parameter or

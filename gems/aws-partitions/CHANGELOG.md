@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+1.114.0 (2018-11-15)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::S3Control`.
+
+* Feature - Added support for enumerating regions for `Aws::Route53Resolver`.
+
+* Feature - Added support for enumerating regions for `Aws::RAM`.
+
+* Feature - Added support for enumerating regions for `Aws::PinpointSMSVoice`.
+
 1.113.0 (2018-11-14)
 ------------------
 

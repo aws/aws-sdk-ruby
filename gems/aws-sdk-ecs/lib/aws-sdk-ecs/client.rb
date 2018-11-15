@@ -234,6 +234,13 @@ module Aws::ECS
     #   (uppercase and lowercase), numbers, hyphens, and underscores are
     #   allowed.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The metadata that you apply to the cluster to help you categorize and
+    #   organize them. Each tag consists of a key and an optional value, both
+    #   of which you define. Tag keys can have a maximum character length of
+    #   128 characters, and tag values can have a maximum length of 256
+    #   characters.
+    #
     # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResponse#cluster #cluster} => Types::Cluster
@@ -264,6 +271,12 @@ module Aws::ECS
     #
     #   resp = client.create_cluster({
     #     cluster_name: "String",
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -278,6 +291,9 @@ module Aws::ECS
     #   resp.cluster.statistics #=> Array
     #   resp.cluster.statistics[0].name #=> String
     #   resp.cluster.statistics[0].value #=> String
+    #   resp.cluster.tags #=> Array
+    #   resp.cluster.tags[0].key #=> String
+    #   resp.cluster.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateCluster AWS API Documentation
     #
@@ -403,7 +419,7 @@ module Aws::ECS
     #
     #   Services with tasks that use the `awsvpc` network mode (for example,
     #   those with the Fargate launch type) only support Application Load
-    #   Balancers and Network Load Balancers; Classic Load Balancers are not
+    #   Balancers and Network Load Balancers. Classic Load Balancers are not
     #   supported. Also, when you create any target groups for these services,
     #   you must choose `ip` as the target type, not `instance`, because tasks
     #   that use the `awsvpc` network mode are associated with an elastic
@@ -413,9 +429,9 @@ module Aws::ECS
     #   The details of the service discovery registries to assign to this
     #   service. For more information, see [Service Discovery][1].
     #
-    #   <note markdown="1"> Service discovery is supported for Fargate tasks if using platform
-    #   version v1.1.0 or later. For more information, see [AWS Fargate
-    #   Platform Versions][2].
+    #   <note markdown="1"> Service discovery is supported for Fargate tasks if you are using
+    #   platform version v1.1.0 or later. For more information, see [AWS
+    #   Fargate Platform Versions][2].
     #
     #    </note>
     #
@@ -475,7 +491,7 @@ module Aws::ECS
     #   An array of placement constraint objects to use for tasks in your
     #   service. You can specify a maximum of 10 constraints per task (this
     #   limit includes constraints in the task definition and those specified
-    #   at run time).
+    #   at runtime).
     #
     # @option params [Array<Types::PlacementStrategy>] :placement_strategy
     #   The placement strategy objects to use for tasks in your service. You
@@ -484,7 +500,7 @@ module Aws::ECS
     # @option params [Types::NetworkConfiguration] :network_configuration
     #   The network configuration for the service. This parameter is required
     #   for task definitions that use the `awsvpc` network mode to receive
-    #   their own Elastic Network Interface, and it is not supported for other
+    #   their own elastic network interface, and it is not supported for other
     #   network modes. For more information, see [Task Networking][1] in the
     #   *Amazon Elastic Container Service Developer Guide*.
     #
@@ -517,9 +533,10 @@ module Aws::ECS
     #
     #   * `DAEMON`-The daemon scheduling strategy deploys exactly one task on
     #     each active container instance that meets all of the task placement
-    #     constraints that you specify in your cluster. When using this
-    #     strategy, there is no need to specify a desired number of tasks, a
-    #     task placement strategy, or use Service Auto Scaling policies.
+    #     constraints that you specify in your cluster. When you are using
+    #     this strategy, there is no need to specify a desired number of
+    #     tasks, a task placement strategy, or use Service Auto Scaling
+    #     policies.
     #
     #     <note markdown="1"> Fargate tasks do not support the `DAEMON` scheduling strategy.
     #
@@ -528,6 +545,31 @@ module Aws::ECS
     #
     #
     #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguideecs_services.html
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The metadata that you apply to the service to help you categorize and
+    #   organize them. Each tag consists of a key and an optional value, both
+    #   of which you define. When a service is deleted, the tags are deleted
+    #   as well. Tag keys can have a maximum character length of 128
+    #   characters, and tag values can have a maximum length of 256
+    #   characters.
+    #
+    # @option params [Boolean] :enable_ecs_managed_tags
+    #   Specifies whether to enable Amazon ECS managed tags for the tasks
+    #   within the service. For more information, see [Tagging Your Amazon ECS
+    #   Resources][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/Using_Tags.html
+    #
+    # @option params [String] :propagate_tags
+    #   Specifies whether to propagate the tags from the task definition or
+    #   the service to the tasks. If no value is specified, the tags are not
+    #   propagated. Tags can only be propagated to the tasks within the
+    #   service during service creation. To add tags to a task after service
+    #   creation, use the TagResource API action.
     #
     # @return [Types::CreateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -703,6 +745,14 @@ module Aws::ECS
     #     },
     #     health_check_grace_period_seconds: 1,
     #     scheduling_strategy: "REPLICA", # accepts REPLICA, DAEMON
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #     enable_ecs_managed_tags: false,
+    #     propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE
     #   })
     #
     # @example Response structure
@@ -764,6 +814,12 @@ module Aws::ECS
     #   resp.service.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.service.health_check_grace_period_seconds #=> Integer
     #   resp.service.scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
+    #   resp.service.tags #=> Array
+    #   resp.service.tags[0].key #=> String
+    #   resp.service.tags[0].value #=> String
+    #   resp.service.created_by #=> String
+    #   resp.service.enable_ecs_managed_tags #=> Boolean
+    #   resp.service.propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateService AWS API Documentation
     #
@@ -771,6 +827,53 @@ module Aws::ECS
     # @param [Hash] params ({})
     def create_service(params = {}, options = {})
       req = build_request(:create_service, params)
+      req.send_request(options)
+    end
+
+    # Modifies the ARN and resource ID format of a resource for a specified
+    # IAM user, IAM role, or the root user for an account. You can specify
+    # whether the new ARN and resource ID format are disabled for new
+    # resources that are created.
+    #
+    # @option params [required, String] :name
+    #   The resource name for which to disable the new format. If
+    #   `serviceLongArnFormat` is specified, the ARN for your Amazon ECS
+    #   services is affected. If `taskLongArnFormat` is specified, the ARN and
+    #   resource ID for your Amazon ECS tasks is affected. If
+    #   `containerInstanceLongArnFormat` is specified, the ARN and resource ID
+    #   for your Amazon ECS container instances is affected.
+    #
+    # @option params [String] :principal_arn
+    #   The ARN of the principal, which can be an IAM user, IAM role, or the
+    #   root user. If you specify the root user, it modifies the ARN and
+    #   resource ID format for all IAM users, IAM roles, and the root user of
+    #   the account unless an IAM user or role explicitly overrides these
+    #   settings for themselves. If this field is omitted, the setting are
+    #   changed only for the authenticated user.
+    #
+    # @return [Types::DeleteAccountSettingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteAccountSettingResponse#setting #setting} => Types::Setting
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_account_setting({
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat
+    #     principal_arn: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat"
+    #   resp.setting.value #=> String
+    #   resp.setting.principal_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteAccountSetting AWS API Documentation
+    #
+    # @overload delete_account_setting(params = {})
+    # @param [Hash] params ({})
+    def delete_account_setting(params = {}, options = {})
+      req = build_request(:delete_account_setting, params)
       req.send_request(options)
     end
 
@@ -875,6 +978,9 @@ module Aws::ECS
     #   resp.cluster.statistics #=> Array
     #   resp.cluster.statistics[0].name #=> String
     #   resp.cluster.statistics[0].value #=> String
+    #   resp.cluster.tags #=> Array
+    #   resp.cluster.tags[0].key #=> String
+    #   resp.cluster.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteCluster AWS API Documentation
     #
@@ -893,20 +999,20 @@ module Aws::ECS
     #
     # <note markdown="1"> When you delete a service, if there are still running tasks that
     # require cleanup, the service status moves from `ACTIVE` to `DRAINING`,
-    # and the service is no longer visible in the console or in ListServices
-    # API operations. After the tasks have stopped, then the service status
-    # moves from `DRAINING` to `INACTIVE`. Services in the `DRAINING` or
-    # `INACTIVE` status can still be viewed with DescribeServices API
-    # operations. However, in the future, `INACTIVE` services may be cleaned
-    # up and purged from Amazon ECS record keeping, and DescribeServices API
-    # operations on those services return a `ServiceNotFoundException`
-    # error.
+    # and the service is no longer visible in the console or in the
+    # ListServices API operation. After the tasks have stopped, then the
+    # service status moves from `DRAINING` to `INACTIVE`. Services in the
+    # `DRAINING` or `INACTIVE` status can still be viewed with the
+    # DescribeServices API operation. However, in the future, `INACTIVE`
+    # services may be cleaned up and purged from Amazon ECS record keeping,
+    # and DescribeServices calls on those services return a
+    # `ServiceNotFoundException` error.
     #
     #  </note>
     #
     # If you attempt to create a new service with the same name as an
-    # existing service in either `ACTIVE` or `DRAINING` status, you will
-    # receive an error.
+    # existing service in either `ACTIVE` or `DRAINING` status, you receive
+    # an error.
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -1006,6 +1112,12 @@ module Aws::ECS
     #   resp.service.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.service.health_check_grace_period_seconds #=> Integer
     #   resp.service.scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
+    #   resp.service.tags #=> Array
+    #   resp.service.tags[0].key #=> String
+    #   resp.service.tags[0].value #=> String
+    #   resp.service.created_by #=> String
+    #   resp.service.enable_ecs_managed_tags #=> Boolean
+    #   resp.service.propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteService AWS API Documentation
     #
@@ -1025,7 +1137,7 @@ module Aws::ECS
     # tasks from consuming resources.
     #
     # Deregistering a container instance removes the instance from a
-    # cluster, but it does not terminate the EC2 instance; if you are
+    # cluster, but it does not terminate the EC2 instance. If you are
     # finished using the instance, be sure to terminate it in the Amazon EC2
     # console to stop billing.
     #
@@ -1135,6 +1247,9 @@ module Aws::ECS
     #   resp.container_instance.attachments[0].details #=> Array
     #   resp.container_instance.attachments[0].details[0].name #=> String
     #   resp.container_instance.attachments[0].details[0].value #=> String
+    #   resp.container_instance.tags #=> Array
+    #   resp.container_instance.tags[0].key #=> String
+    #   resp.container_instance.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterContainerInstance AWS API Documentation
     #
@@ -1159,7 +1274,7 @@ module Aws::ECS
     # have not yet taken effect).
     #
     # <note markdown="1"> At this time, `INACTIVE` task definitions remain discoverable in your
-    # account indefinitely; however, this behavior is subject to change in
+    # account indefinitely. However, this behavior is subject to change in
     # the future, so you should not rely on `INACTIVE` task definitions
     # persisting beyond the lifecycle of any associated tasks and services.
     #
@@ -1227,6 +1342,9 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].size #=> Integer
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options #=> Array
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
+    #   resp.task_definition.container_definitions[0].secrets #=> Array
+    #   resp.task_definition.container_definitions[0].secrets[0].name #=> String
+    #   resp.task_definition.container_definitions[0].secrets[0].value_from #=> String
     #   resp.task_definition.container_definitions[0].hostname #=> String
     #   resp.task_definition.container_definitions[0].user #=> String
     #   resp.task_definition.container_definitions[0].working_directory #=> String
@@ -1362,7 +1480,7 @@ module Aws::ECS
     #
     #   resp = client.describe_clusters({
     #     clusters: ["String"],
-    #     include: ["STATISTICS"], # accepts STATISTICS
+    #     include: ["STATISTICS"], # accepts STATISTICS, TAGS
     #   })
     #
     # @example Response structure
@@ -1378,6 +1496,9 @@ module Aws::ECS
     #   resp.clusters[0].statistics #=> Array
     #   resp.clusters[0].statistics[0].name #=> String
     #   resp.clusters[0].statistics[0].value #=> String
+    #   resp.clusters[0].tags #=> Array
+    #   resp.clusters[0].tags[0].key #=> String
+    #   resp.clusters[0].tags[0].value #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -1403,6 +1524,12 @@ module Aws::ECS
     # @option params [required, Array<String>] :container_instances
     #   A list of up to 100 container instance IDs or full Amazon Resource
     #   Name (ARN) entries.
+    #
+    # @option params [Array<String>] :include
+    #   Specifies whether you want to see the resource tags for the container
+    #   instance. If `TAGS` is specified, the tags are included in the
+    #   response. If this field is omitted, tags are not included in the
+    #   response.
     #
     # @return [Types::DescribeContainerInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1502,6 +1629,7 @@ module Aws::ECS
     #   resp = client.describe_container_instances({
     #     cluster: "String",
     #     container_instances: ["String"], # required
+    #     include: ["TAGS"], # accepts TAGS
     #   })
     #
     # @example Response structure
@@ -1547,6 +1675,9 @@ module Aws::ECS
     #   resp.container_instances[0].attachments[0].details #=> Array
     #   resp.container_instances[0].attachments[0].details[0].name #=> String
     #   resp.container_instances[0].attachments[0].details[0].value #=> String
+    #   resp.container_instances[0].tags #=> Array
+    #   resp.container_instances[0].tags[0].key #=> String
+    #   resp.container_instances[0].tags[0].value #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -1570,6 +1701,11 @@ module Aws::ECS
     # @option params [required, Array<String>] :services
     #   A list of services to describe. You may specify up to 10 services to
     #   describe in a single operation.
+    #
+    # @option params [Array<String>] :include
+    #   Specifies whether you want to see the resource tags for the service.
+    #   If `TAGS` is specified, the tags are included in the response. If this
+    #   field is omitted, tags are not included in the response.
     #
     # @return [Types::DescribeServicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1636,6 +1772,7 @@ module Aws::ECS
     #   resp = client.describe_services({
     #     cluster: "String",
     #     services: ["String"], # required
+    #     include: ["TAGS"], # accepts TAGS
     #   })
     #
     # @example Response structure
@@ -1698,6 +1835,12 @@ module Aws::ECS
     #   resp.services[0].network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.services[0].health_check_grace_period_seconds #=> Integer
     #   resp.services[0].scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
+    #   resp.services[0].tags #=> Array
+    #   resp.services[0].tags[0].key #=> String
+    #   resp.services[0].tags[0].value #=> String
+    #   resp.services[0].created_by #=> String
+    #   resp.services[0].enable_ecs_managed_tags #=> Boolean
+    #   resp.services[0].propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE"
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -1726,9 +1869,15 @@ module Aws::ECS
     #   (`family:revision`) for a specific revision in the family, or full
     #   Amazon Resource Name (ARN) of the task definition to describe.
     #
+    # @option params [Array<String>] :include
+    #   Specifies whether to see the resource tags for the task definition. If
+    #   `TAGS` is specified, the tags are included in the response. If this
+    #   field is omitted, tags are not included in the response.
+    #
     # @return [Types::DescribeTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeTaskDefinitionResponse#task_definition #task_definition} => Types::TaskDefinition
+    #   * {Types::DescribeTaskDefinitionResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #
     #
     # @example Example: To describe a task definition
@@ -1797,6 +1946,7 @@ module Aws::ECS
     #
     #   resp = client.describe_task_definition({
     #     task_definition: "String", # required
+    #     include: ["TAGS"], # accepts TAGS
     #   })
     #
     # @example Response structure
@@ -1846,6 +1996,9 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].size #=> Integer
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options #=> Array
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
+    #   resp.task_definition.container_definitions[0].secrets #=> Array
+    #   resp.task_definition.container_definitions[0].secrets[0].name #=> String
+    #   resp.task_definition.container_definitions[0].secrets[0].value_from #=> String
     #   resp.task_definition.container_definitions[0].hostname #=> String
     #   resp.task_definition.container_definitions[0].user #=> String
     #   resp.task_definition.container_definitions[0].working_directory #=> String
@@ -1911,6 +2064,9 @@ module Aws::ECS
     #   resp.task_definition.requires_compatibilities[0] #=> String, one of "EC2", "FARGATE"
     #   resp.task_definition.cpu #=> String
     #   resp.task_definition.memory #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskDefinition AWS API Documentation
     #
@@ -1930,6 +2086,11 @@ module Aws::ECS
     #
     # @option params [required, Array<String>] :tasks
     #   A list of up to 100 task IDs or full ARN entries.
+    #
+    # @option params [Array<String>] :include
+    #   Specifies whether you want to see the resource tags for the task. If
+    #   `TAGS` is specified, the tags are included in the response. If this
+    #   field is omitted, tags are not included in the response.
     #
     # @return [Types::DescribeTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1991,6 +2152,7 @@ module Aws::ECS
     #   resp = client.describe_tasks({
     #     cluster: "String",
     #     tasks: ["String"], # required
+    #     include: ["TAGS"], # accepts TAGS
     #   })
     #
     # @example Response structure
@@ -2036,6 +2198,7 @@ module Aws::ECS
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
+    #   resp.tasks[0].stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated"
     #   resp.tasks[0].connectivity #=> String, one of "CONNECTED", "DISCONNECTED"
     #   resp.tasks[0].connectivity_at #=> Time
     #   resp.tasks[0].pull_started_at #=> Time
@@ -2056,6 +2219,9 @@ module Aws::ECS
     #   resp.tasks[0].attachments[0].details[0].name #=> String
     #   resp.tasks[0].attachments[0].details[0].value #=> String
     #   resp.tasks[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
+    #   resp.tasks[0].tags #=> Array
+    #   resp.tasks[0].tags[0].key #=> String
+    #   resp.tasks[0].tags[0].value #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -2086,8 +2252,8 @@ module Aws::ECS
     #   `.
     #
     # @option params [String] :cluster
-    #   The short name or full Amazon Resource Name (ARN) of the cluster that
-    #   the container instance belongs to.
+    #   The short name or full Amazon Resource Name (ARN) of the cluster to
+    #   which the container instance belongs.
     #
     # @return [Types::DiscoverPollEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2112,6 +2278,85 @@ module Aws::ECS
     # @param [Hash] params ({})
     def discover_poll_endpoint(params = {}, options = {})
       req = build_request(:discover_poll_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Lists the account settings for an Amazon ECS resource for a specified
+    # principal.
+    #
+    # @option params [String] :name
+    #   The resource name you want to list the account settings for.
+    #
+    # @option params [String] :value
+    #   The value of the account settings with which to filter results. You
+    #   must also specify an account setting name to use this parameter.
+    #
+    # @option params [String] :principal_arn
+    #   The ARN of the principal, which can be an IAM user, IAM role, or the
+    #   root user. If this field is omitted, the account settings are listed
+    #   only for the authenticated user.
+    #
+    # @option params [Boolean] :effective_settings
+    #   Specifies whether to return the effective settings. If `true`, the
+    #   account settings for the root user or the default setting for the
+    #   `principalArn`. If `false`, the account settings for the
+    #   `principalArn` are returned if they are set. Otherwise, no account
+    #   settings are returned.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListAccountSettings` request where `maxResults` was used and the
+    #   results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `nextToken`
+    #   value.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
+    #   to retrieve the next items in a list and not for other programmatic
+    #   purposes.
+    #
+    #    </note>
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of account setting results returned by
+    #   `ListAccountSettings` in paginated output. When this parameter is
+    #   used, `ListAccountSettings` only returns `maxResults` results in a
+    #   single page along with a `nextToken` response element. The remaining
+    #   results of the initial request can be seen by sending another
+    #   `ListAccountSettings` request with the returned `nextToken` value.
+    #   This value can be between 1 and 10. If this parameter is not used,
+    #   then `ListAccountSettings` returns up to 10 results and a `nextToken`
+    #   value if applicable.
+    #
+    # @return [Types::ListAccountSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAccountSettingsResponse#settings #settings} => Array&lt;Types::Setting&gt;
+    #   * {Types::ListAccountSettingsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_account_settings({
+    #     name: "serviceLongArnFormat", # accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat
+    #     value: "String",
+    #     principal_arn: "String",
+    #     effective_settings: false,
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.settings #=> Array
+    #   resp.settings[0].name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat"
+    #   resp.settings[0].value #=> String
+    #   resp.settings[0].principal_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListAccountSettings AWS API Documentation
+    #
+    # @overload list_account_settings(params = {})
+    # @param [Hash] params ({})
+    def list_account_settings(params = {}, options = {})
+      req = build_request(:list_account_settings, params)
       req.send_request(options)
     end
 
@@ -2390,7 +2635,7 @@ module Aws::ECS
     #   returns `maxResults` results in a single page along with a `nextToken`
     #   response element. The remaining results of the initial request can be
     #   seen by sending another `ListServices` request with the returned
-    #   `nextToken` value. This value can be between 1 and 10. If this
+    #   `nextToken` value. This value can be between 1 and 100. If this
     #   parameter is not used, then `ListServices` returns up to 10 results
     #   and a `nextToken` value if applicable.
     #
@@ -2442,6 +2687,57 @@ module Aws::ECS
     # @param [Hash] params ({})
     def list_services(params = {}, options = {})
       req = build_request(:list_services, params)
+      req.send_request(options)
+    end
+
+    # List the tags for an Amazon ECS resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource for which
+    #   to list the tags. Currently, the supported resources are Amazon ECS
+    #   tasks, services, task definitions, clusters, and container instances.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    #
+    # @example Example: To list the tags for a cluster.
+    #
+    #   # This example lists the tags for the 'dev' cluster.
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "arn:aws:ecs:region:aws_account_id:cluster/dev", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tags: [
+    #       {
+    #         key: "team", 
+    #         value: "dev", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -2737,15 +3033,15 @@ module Aws::ECS
     # @option params [String] :desired_status
     #   The task desired status with which to filter the `ListTasks` results.
     #   Specifying a `desiredStatus` of `STOPPED` limits the results to tasks
-    #   that Amazon ECS has set the desired status to `STOPPED`, which can be
+    #   that Amazon ECS has set the desired status to `STOPPED`. This can be
     #   useful for debugging tasks that are not starting properly or have died
     #   or finished. The default status filter is `RUNNING`, which shows tasks
     #   that Amazon ECS has set the desired status to `RUNNING`.
     #
     #   <note markdown="1"> Although you can filter results based on a desired status of
-    #   `PENDING`, this does not return any results because Amazon ECS never
-    #   sets the desired status of a task to that value (only a task's
-    #   `lastStatus` may have a value of `PENDING`).
+    #   `PENDING`, this does not return any results. Amazon ECS never sets the
+    #   desired status of a task to that value (only a task's `lastStatus`
+    #   may have a value of `PENDING`).
     #
     #    </note>
     #
@@ -2817,6 +3113,59 @@ module Aws::ECS
     # @param [Hash] params ({})
     def list_tasks(params = {}, options = {})
       req = build_request(:list_tasks, params)
+      req.send_request(options)
+    end
+
+    # Modifies the ARN and resource ID format of a resource for a specified
+    # IAM user, IAM role, or the root user for an account. You can specify
+    # whether the new ARN and resource ID format are enabled for new
+    # resources that are created. Enabling this setting is required to use
+    # new Amazon ECS features such as resource tagging.
+    #
+    # @option params [required, String] :name
+    #   The resource name for which to enable the new format. If
+    #   `serviceLongArnFormat` is specified, the ARN for your Amazon ECS
+    #   services is affected. If `taskLongArnFormat` is specified, the ARN and
+    #   resource ID for your Amazon ECS tasks is affected. If
+    #   `containerInstanceLongArnFormat` is specified, the ARN and resource ID
+    #   for your Amazon ECS container instances is affected.
+    #
+    # @option params [required, String] :value
+    #   The account setting value for the specified principal ARN. Accepted
+    #   values are `ENABLED` and `DISABLED`.
+    #
+    # @option params [String] :principal_arn
+    #   The ARN of the principal, which can be an IAM user, IAM role, or the
+    #   root user. If you specify the root user, it modifies the ARN and
+    #   resource ID format for all IAM users, IAM roles, and the root user of
+    #   the account unless an IAM user or role explicitly overrides these
+    #   settings for themselves. If this field is omitted, the setting are
+    #   changed only for the authenticated user.
+    #
+    # @return [Types::PutAccountSettingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutAccountSettingResponse#setting #setting} => Types::Setting
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_account_setting({
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat
+    #     value: "String", # required
+    #     principal_arn: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat"
+    #   resp.setting.value #=> String
+    #   resp.setting.principal_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAccountSetting AWS API Documentation
+    #
+    # @overload put_account_setting(params = {})
+    # @param [Hash] params ({})
+    def put_account_setting(params = {}, options = {})
+      req = build_request(:put_account_setting, params)
       req.send_request(options)
     end
 
@@ -2914,6 +3263,13 @@ module Aws::ECS
     #   The container instance attributes that this container instance
     #   supports.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The metadata that you apply to the container instance to help you
+    #   categorize and organize them. Each tag consists of a key and an
+    #   optional value, both of which you define. Tag keys can have a maximum
+    #   character length of 128 characters, and tag values can have a maximum
+    #   length of 256 characters.
+    #
     # @return [Types::RegisterContainerInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterContainerInstanceResponse#container_instance #container_instance} => Types::ContainerInstance
@@ -2946,6 +3302,12 @@ module Aws::ECS
     #         value: "String",
     #         target_type: "container-instance", # accepts container-instance
     #         target_id: "String",
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
     #       },
     #     ],
     #   })
@@ -2992,6 +3354,9 @@ module Aws::ECS
     #   resp.container_instance.attachments[0].details #=> Array
     #   resp.container_instance.attachments[0].details[0].name #=> String
     #   resp.container_instance.attachments[0].details[0].value #=> String
+    #   resp.container_instance.tags #=> Array
+    #   resp.container_instance.tags[0].key #=> String
+    #   resp.container_instance.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterContainerInstance AWS API Documentation
     #
@@ -3057,14 +3422,15 @@ module Aws::ECS
     # @option params [String] :network_mode
     #   The Docker networking mode to use for the containers in the task. The
     #   valid values are `none`, `bridge`, `awsvpc`, and `host`. The default
-    #   Docker network mode is `bridge`. If using the Fargate launch type, the
-    #   `awsvpc` network mode is required. If using the EC2 launch type, any
-    #   network mode can be used. If the network mode is set to `none`, you
-    #   can't specify port mappings in your container definitions, and the
-    #   task's containers do not have external connectivity. The `host` and
-    #   `awsvpc` network modes offer the highest networking performance for
-    #   containers because they use the EC2 network stack instead of the
-    #   virtualized network stack provided by the `bridge` mode.
+    #   Docker network mode is `bridge`. If you are using the Fargate launch
+    #   type, the `awsvpc` network mode is required. If you are using the EC2
+    #   launch type, any network mode can be used. If the network mode is set
+    #   to `none`, you can't specify port mappings in your container
+    #   definitions, and the task's containers do not have external
+    #   connectivity. The `host` and `awsvpc` network modes offer the highest
+    #   networking performance for containers because they use the EC2 network
+    #   stack instead of the virtualized network stack provided by the
+    #   `bridge` mode.
     #
     #   With the `host` and `awsvpc` network modes, exposed container ports
     #   are mapped directly to the corresponding host port (for the `host`
@@ -3072,8 +3438,8 @@ module Aws::ECS
     #   `awsvpc` network mode), so you cannot take advantage of dynamic host
     #   port mappings.
     #
-    #   If the network mode is `awsvpc`, the task is allocated an Elastic
-    #   Network Interface, and you must specify a NetworkConfiguration when
+    #   If the network mode is `awsvpc`, the task is allocated an elastic
+    #   network interface, and you must specify a NetworkConfiguration when
     #   you create a service or run a task with the task definition. For more
     #   information, see [Task Networking][1] in the *Amazon Elastic Container
     #   Service Developer Guide*.
@@ -3105,7 +3471,7 @@ module Aws::ECS
     # @option params [Array<Types::TaskDefinitionPlacementConstraint>] :placement_constraints
     #   An array of placement constraint objects to use for the task. You can
     #   specify a maximum of 10 constraints per task (this limit includes
-    #   constraints in the task definition and those specified at run time).
+    #   constraints in the task definition and those specified at runtime).
     #
     # @option params [Array<String>] :requires_compatibilities
     #   The launch type required by the task. If no value is specified, it
@@ -3124,13 +3490,13 @@ module Aws::ECS
     #
     #    </note>
     #
-    #   If using the EC2 launch type, this field is optional. Supported values
-    #   are between `128` CPU units (`0.125` vCPUs) and `10240` CPU units
-    #   (`10` vCPUs).
+    #   If you are using the EC2 launch type, this field is optional.
+    #   Supported values are between `128` CPU units (`0.125` vCPUs) and
+    #   `10240` CPU units (`10` vCPUs).
     #
-    #   If using the Fargate launch type, this field is required and you must
-    #   use one of the following values, which determines your range of
-    #   supported values for the `memory` parameter:
+    #   If you are using the Fargate launch type, this field is required and
+    #   you must use one of the following values, which determines your range
+    #   of supported values for the `memory` parameter:
     #
     #   * 256 (.25 vCPU) - Available `memory` values: 512 (0.5 GB), 1024 (1
     #     GB), 2048 (2 GB)
@@ -3160,11 +3526,11 @@ module Aws::ECS
     #
     #    </note>
     #
-    #   If using the EC2 launch type, this field is optional.
+    #   If you are using the EC2 launch type, this field is optional.
     #
-    #   If using the Fargate launch type, this field is required and you must
-    #   use one of the following values, which determines your range of
-    #   supported values for the `cpu` parameter:
+    #   If you are using the Fargate launch type, this field is required and
+    #   you must use one of the following values, which determines your range
+    #   of supported values for the `cpu` parameter:
     #
     #   * 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available `cpu` values: 256
     #     (.25 vCPU)
@@ -3181,9 +3547,17 @@ module Aws::ECS
     #   * Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) -
     #     Available `cpu` values: 4096 (4 vCPU)
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The metadata that you apply to the task definition to help you
+    #   categorize and organize them. Each tag consists of a key and an
+    #   optional value, both of which you define. Tag keys can have a maximum
+    #   character length of 128 characters, and tag values can have a maximum
+    #   length of 256 characters.
+    #
     # @return [Types::RegisterTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterTaskDefinitionResponse#task_definition #task_definition} => Types::TaskDefinition
+    #   * {Types::RegisterTaskDefinitionResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #
     #
     # @example Example: To register a task definition
@@ -3311,6 +3685,12 @@ module Aws::ECS
     #             },
     #           ],
     #         },
+    #         secrets: [
+    #           {
+    #             name: "String", # required
+    #             value_from: "String", # required
+    #           },
+    #         ],
     #         hostname: "String",
     #         user: "String",
     #         working_directory: "String",
@@ -3387,6 +3767,12 @@ module Aws::ECS
     #     requires_compatibilities: ["EC2"], # accepts EC2, FARGATE
     #     cpu: "String",
     #     memory: "String",
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -3436,6 +3822,9 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].size #=> Integer
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options #=> Array
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
+    #   resp.task_definition.container_definitions[0].secrets #=> Array
+    #   resp.task_definition.container_definitions[0].secrets[0].name #=> String
+    #   resp.task_definition.container_definitions[0].secrets[0].value_from #=> String
     #   resp.task_definition.container_definitions[0].hostname #=> String
     #   resp.task_definition.container_definitions[0].user #=> String
     #   resp.task_definition.container_definitions[0].working_directory #=> String
@@ -3501,6 +3890,9 @@ module Aws::ECS
     #   resp.task_definition.requires_compatibilities[0] #=> String, one of "EC2", "FARGATE"
     #   resp.task_definition.cpu #=> String
     #   resp.task_definition.memory #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinition AWS API Documentation
     #
@@ -3525,8 +3917,8 @@ module Aws::ECS
     # distributed nature of the system supporting the API. This means that
     # the result of an API command you run that affects your Amazon ECS
     # resources might not be immediately visible to all subsequent commands
-    # you run. You should keep this in mind when you carry out an API
-    # command that immediately follows a previous API command.
+    # you run. Keep this in mind when you carry out an API command that
+    # immediately follows a previous API command.
     #
     # To manage eventual consistency, you can do the following:
     #
@@ -3577,7 +3969,7 @@ module Aws::ECS
     #   cluster. You can specify up to 10 tasks per call.
     #
     # @option params [String] :started_by
-    #   An optional tag specified when a task is started. For example if you
+    #   An optional tag specified when a task is started. For example, if you
     #   automatically trigger a task to run a batch process job, you could
     #   apply a unique identifier for that job to your task with the
     #   `startedBy` parameter. You can then identify which tasks belong to
@@ -3596,7 +3988,7 @@ module Aws::ECS
     # @option params [Array<Types::PlacementConstraint>] :placement_constraints
     #   An array of placement constraint objects to use for the task. You can
     #   specify up to 10 constraints per task (including constraints in the
-    #   task definition and those specified at run time).
+    #   task definition and those specified at runtime).
     #
     # @option params [Array<Types::PlacementStrategy>] :placement_strategy
     #   The placement strategy objects to use for the task. You can specify a
@@ -3612,13 +4004,34 @@ module Aws::ECS
     # @option params [Types::NetworkConfiguration] :network_configuration
     #   The network configuration for the task. This parameter is required for
     #   task definitions that use the `awsvpc` network mode to receive their
-    #   own Elastic Network Interface, and it is not supported for other
+    #   own elastic network interface, and it is not supported for other
     #   network modes. For more information, see [Task Networking][1] in the
     #   *Amazon Elastic Container Service Developer Guide*.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The metadata that you apply to the task to help you categorize and
+    #   organize them. Each tag consists of a key and an optional value, both
+    #   of which you define. Tag keys can have a maximum character length of
+    #   128 characters, and tag values can have a maximum length of 256
+    #   characters.
+    #
+    # @option params [Boolean] :enable_ecs_managed_tags
+    #   Specifies whether to enable Amazon ECS managed tags for the task. For
+    #   more information, see [Tagging Your Amazon ECS Resources][1] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/Using_Tags.html
+    #
+    # @option params [String] :propagate_tags
+    #   Specifies whether to propagate the tags from the task definition or
+    #   the service to the task. If no value is specified, the tags are not
+    #   propagated.
     #
     # @return [Types::RunTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3711,6 +4124,14 @@ module Aws::ECS
     #         assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
     #       },
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #     enable_ecs_managed_tags: false,
+    #     propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE
     #   })
     #
     # @example Response structure
@@ -3756,6 +4177,7 @@ module Aws::ECS
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
+    #   resp.tasks[0].stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated"
     #   resp.tasks[0].connectivity #=> String, one of "CONNECTED", "DISCONNECTED"
     #   resp.tasks[0].connectivity_at #=> Time
     #   resp.tasks[0].pull_started_at #=> Time
@@ -3776,6 +4198,9 @@ module Aws::ECS
     #   resp.tasks[0].attachments[0].details[0].name #=> String
     #   resp.tasks[0].attachments[0].details[0].value #=> String
     #   resp.tasks[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
+    #   resp.tasks[0].tags #=> Array
+    #   resp.tasks[0].tags[0].key #=> String
+    #   resp.tasks[0].tags[0].value #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -3831,7 +4256,7 @@ module Aws::ECS
     #   up to 10 container instances.
     #
     # @option params [String] :started_by
-    #   An optional tag specified when a task is started. For example if you
+    #   An optional tag specified when a task is started. For example, if you
     #   automatically trigger a task to run a batch process job, you could
     #   apply a unique identifier for that job to your task with the
     #   `startedBy` parameter. You can then identify which tasks belong to
@@ -3851,6 +4276,27 @@ module Aws::ECS
     #   The VPC subnet and security group configuration for tasks that receive
     #   their own elastic network interface by using the `awsvpc` networking
     #   mode.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The metadata that you apply to the task to help you categorize and
+    #   organize them. Each tag consists of a key and an optional value, both
+    #   of which you define. Tag keys can have a maximum character length of
+    #   128 characters, and tag values can have a maximum length of 256
+    #   characters.
+    #
+    # @option params [Boolean] :enable_ecs_managed_tags
+    #   Specifies whether to enable Amazon ECS managed tags for the task. For
+    #   more information, see [Tagging Your Amazon ECS Resources][1] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/Using_Tags.html
+    #
+    # @option params [String] :propagate_tags
+    #   Specifies whether to propagate the tags from the task definition or
+    #   the service to the task. If no value is specified, the tags are not
+    #   propagated.
     #
     # @return [Types::StartTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3891,6 +4337,14 @@ module Aws::ECS
     #         assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
     #       },
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #     enable_ecs_managed_tags: false,
+    #     propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE
     #   })
     #
     # @example Response structure
@@ -3936,6 +4390,7 @@ module Aws::ECS
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
+    #   resp.tasks[0].stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated"
     #   resp.tasks[0].connectivity #=> String, one of "CONNECTED", "DISCONNECTED"
     #   resp.tasks[0].connectivity_at #=> Time
     #   resp.tasks[0].pull_started_at #=> Time
@@ -3956,6 +4411,9 @@ module Aws::ECS
     #   resp.tasks[0].attachments[0].details[0].name #=> String
     #   resp.tasks[0].attachments[0].details[0].value #=> String
     #   resp.tasks[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
+    #   resp.tasks[0].tags #=> Array
+    #   resp.tasks[0].tags[0].key #=> String
+    #   resp.tasks[0].tags[0].value #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -3969,7 +4427,8 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # Stops a running task.
+    # Stops a running task. Any tags associated with the task will be
+    # deleted.
     #
     # When StopTask is called on a task, the equivalent of `docker stop` is
     # issued to the containers running in the task. This results in a
@@ -4058,6 +4517,7 @@ module Aws::ECS
     #   resp.task.started_by #=> String
     #   resp.task.version #=> Integer
     #   resp.task.stopped_reason #=> String
+    #   resp.task.stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated"
     #   resp.task.connectivity #=> String, one of "CONNECTED", "DISCONNECTED"
     #   resp.task.connectivity_at #=> Time
     #   resp.task.pull_started_at #=> Time
@@ -4078,6 +4538,9 @@ module Aws::ECS
     #   resp.task.attachments[0].details[0].name #=> String
     #   resp.task.attachments[0].details[0].value #=> String
     #   resp.task.health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
+    #   resp.task.tags #=> Array
+    #   resp.task.tags[0].key #=> String
+    #   resp.task.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTask AWS API Documentation
     #
@@ -4180,13 +4643,13 @@ module Aws::ECS
     #   Any attachments associated with the state change request.
     #
     # @option params [Time,DateTime,Date,Integer,String] :pull_started_at
-    #   The Unix time stamp for when the container image pull began.
+    #   The Unix timestamp for when the container image pull began.
     #
     # @option params [Time,DateTime,Date,Integer,String] :pull_stopped_at
-    #   The Unix time stamp for when the container image pull completed.
+    #   The Unix timestamp for when the container image pull completed.
     #
     # @option params [Time,DateTime,Date,Integer,String] :execution_stopped_at
-    #   The Unix time stamp for when the task execution stopped.
+    #   The Unix timestamp for when the task execution stopped.
     #
     # @return [Types::SubmitTaskStateChangeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4236,6 +4699,107 @@ module Aws::ECS
     # @param [Hash] params ({})
     def submit_task_state_change(params = {}, options = {})
       req = build_request(:submit_task_state_change, params)
+      req.send_request(options)
+    end
+
+    # Associates the specified tags to a resource with the specified
+    # `resourceArn`. If existing tags on a resource are not specified in the
+    # request parameters, they are not changed. When a resource is deleted,
+    # the tags associated with that resource are deleted as well.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which to add tags.
+    #   Currently, the supported resources are Amazon ECS tasks, services,
+    #   task definitions, clusters, and container instances.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tags to add to the resource. A tag is an array of key-value pairs.
+    #   Tag keys can have a maximum character length of 128 characters, and
+    #   tag values can have a maximum length of 256 characters.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To tag a cluster.
+    #
+    #   # This example tags the 'dev' cluster with key 'team' and value 'dev'.
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "arn:aws:ecs:region:aws_account_id:cluster/dev", 
+    #     tags: [
+    #       {
+    #         key: "team", 
+    #         value: "dev", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "String", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Deletes specified tags from a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource from which to delete
+    #   tags. Currently, the supported resources are Amazon ECS tasks,
+    #   services, task definitions, clusters, and container instances.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The keys of the tags to be removed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To untag a cluster.
+    #
+    #   # This example deletes the 'team' tag from the 'dev' cluster.
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "arn:aws:ecs:region:aws_account_id:cluster/dev", 
+    #     tag_keys: [
+    #       "team", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "String", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -4319,6 +4883,9 @@ module Aws::ECS
     #   resp.container_instance.attachments[0].details #=> Array
     #   resp.container_instance.attachments[0].details[0].name #=> String
     #   resp.container_instance.attachments[0].details[0].value #=> String
+    #   resp.container_instance.tags #=> Array
+    #   resp.container_instance.tags[0].key #=> String
+    #   resp.container_instance.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerAgent AWS API Documentation
     #
@@ -4371,7 +4938,7 @@ module Aws::ECS
     #   have stopped.
     #
     # Any `PENDING` or `RUNNING` tasks that do not belong to a service are
-    # not affected; you must wait for them to finish or stop them manually.
+    # not affected. You must wait for them to finish or stop them manually.
     #
     # A container instance has completed draining when it has no more
     # `RUNNING` tasks. You can verify this using ListTasks.
@@ -4447,6 +5014,9 @@ module Aws::ECS
     #   resp.container_instances[0].attachments[0].details #=> Array
     #   resp.container_instances[0].attachments[0].details[0].name #=> String
     #   resp.container_instances[0].attachments[0].details[0].value #=> String
+    #   resp.container_instances[0].tags #=> Array
+    #   resp.container_instances[0].tags[0].key #=> String
+    #   resp.container_instances[0].tags[0].value #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -4728,6 +5298,12 @@ module Aws::ECS
     #   resp.service.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.service.health_check_grace_period_seconds #=> Integer
     #   resp.service.scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
+    #   resp.service.tags #=> Array
+    #   resp.service.tags[0].key #=> String
+    #   resp.service.tags[0].value #=> String
+    #   resp.service.created_by #=> String
+    #   resp.service.enable_ecs_managed_tags #=> Boolean
+    #   resp.service.propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateService AWS API Documentation
     #
@@ -4751,7 +5327,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

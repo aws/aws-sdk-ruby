@@ -432,7 +432,7 @@ module Aws::Comprehend
     #   resp.result_list[0].syntax_tokens[0].text #=> String
     #   resp.result_list[0].syntax_tokens[0].begin_offset #=> Integer
     #   resp.result_list[0].syntax_tokens[0].end_offset #=> Integer
-    #   resp.result_list[0].syntax_tokens[0].part_of_speech.tag #=> String, one of "ADJ", "ADP", "ADV", "AUX", "CONJ", "DET", "INTJ", "NOUN", "NUM", "O", "PART", "PRON", "PROPN", "PUNCT", "SCONJ", "SYM", "VERB"
+    #   resp.result_list[0].syntax_tokens[0].part_of_speech.tag #=> String, one of "ADJ", "ADP", "ADV", "AUX", "CONJ", "CCONJ", "DET", "INTJ", "NOUN", "NUM", "O", "PART", "PRON", "PROPN", "PUNCT", "SCONJ", "SYM", "VERB"
     #   resp.result_list[0].syntax_tokens[0].part_of_speech.score #=> Float
     #   resp.error_list #=> Array
     #   resp.error_list[0].index #=> Integer
@@ -445,6 +445,181 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def batch_detect_syntax(params = {}, options = {})
       req = build_request(:batch_detect_syntax, params)
+      req.send_request(options)
+    end
+
+    # Creates a new document classifier that you can use to categorize
+    # documents. To create a classifier you provide a set of training
+    # documents that are labeled with the categories that you want to use.
+    # After the classifier is trained you can use it to categorize a set of
+    # unlabeled documents into those categories.
+    #
+    # @option params [required, String] :document_classifier_name
+    #   The name of the document classifier.
+    #
+    # @option params [required, String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Management
+    #   (IAM) role that grants Amazon Comprehend read access to your input
+    #   data.
+    #
+    # @option params [required, Types::DocumentClassifierInputDataConfig] :input_data_config
+    #   Specifies the format and location of the input data for the job.
+    #
+    # @option params [String] :client_request_token
+    #   A unique identifier for the request. If you don't set the client
+    #   request token, Amazon Comprehend generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :language_code
+    #   The language of the input documents. You can create a document
+    #   classifier in any of the languages supported by Amazon Comprehend.
+    #   However, all documents must be in the same language.
+    #
+    # @return [Types::CreateDocumentClassifierResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDocumentClassifierResponse#document_classifier_arn #document_classifier_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_document_classifier({
+    #     document_classifier_name: "ComprehendArnName", # required
+    #     data_access_role_arn: "IamRoleArn", # required
+    #     input_data_config: { # required
+    #       s3_uri: "S3Uri", # required
+    #     },
+    #     client_request_token: "ClientRequestTokenString",
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.document_classifier_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateDocumentClassifier AWS API Documentation
+    #
+    # @overload create_document_classifier(params = {})
+    # @param [Hash] params ({})
+    def create_document_classifier(params = {}, options = {})
+      req = build_request(:create_document_classifier, params)
+      req.send_request(options)
+    end
+
+    # Deletes a previously created document classifier
+    #
+    # Only those classifiers that are in terminated states (IN\_ERROR,
+    # TRAINED) will be deleted. If an active inference job is using the
+    # model, a `ResourceInUseException` will be returned.
+    #
+    # This is an asynchronous action that puts the classifier into a
+    # DELETING state, and it is then removed by a background job. Once
+    # removed, the classifier disappears from your account and is no longer
+    # available for use.
+    #
+    # @option params [required, String] :document_classifier_arn
+    #   The Amazon Resource Name (ARN) that identifies the document
+    #   classifier.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_document_classifier({
+    #     document_classifier_arn: "DocumentClassifierArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DeleteDocumentClassifier AWS API Documentation
+    #
+    # @overload delete_document_classifier(params = {})
+    # @param [Hash] params ({})
+    def delete_document_classifier(params = {}, options = {})
+      req = build_request(:delete_document_classifier, params)
+      req.send_request(options)
+    end
+
+    # Gets the properties associated with a document classification job. Use
+    # this operation to get the status of a classification job.
+    #
+    # @option params [required, String] :job_id
+    #   The identifier that Amazon Comprehend generated for the job. The
+    #   operation returns this identifier in its response.
+    #
+    # @return [Types::DescribeDocumentClassificationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDocumentClassificationJobResponse#document_classification_job_properties #document_classification_job_properties} => Types::DocumentClassificationJobProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_document_classification_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.document_classification_job_properties.job_id #=> String
+    #   resp.document_classification_job_properties.job_name #=> String
+    #   resp.document_classification_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.document_classification_job_properties.message #=> String
+    #   resp.document_classification_job_properties.submit_time #=> Time
+    #   resp.document_classification_job_properties.end_time #=> Time
+    #   resp.document_classification_job_properties.document_classifier_arn #=> String
+    #   resp.document_classification_job_properties.input_data_config.s3_uri #=> String
+    #   resp.document_classification_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.document_classification_job_properties.output_data_config.s3_uri #=> String
+    #   resp.document_classification_job_properties.data_access_role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeDocumentClassificationJob AWS API Documentation
+    #
+    # @overload describe_document_classification_job(params = {})
+    # @param [Hash] params ({})
+    def describe_document_classification_job(params = {}, options = {})
+      req = build_request(:describe_document_classification_job, params)
+      req.send_request(options)
+    end
+
+    # Gets the properties associated with a document classifier.
+    #
+    # @option params [required, String] :document_classifier_arn
+    #   The Amazon Resource Name (ARN) that identifies the document
+    #   classifier. The operation returns this identifier in its response.
+    #
+    # @return [Types::DescribeDocumentClassifierResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDocumentClassifierResponse#document_classifier_properties #document_classifier_properties} => Types::DocumentClassifierProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_document_classifier({
+    #     document_classifier_arn: "DocumentClassifierArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.document_classifier_properties.document_classifier_arn #=> String
+    #   resp.document_classifier_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
+    #   resp.document_classifier_properties.status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "IN_ERROR", "TRAINED"
+    #   resp.document_classifier_properties.message #=> String
+    #   resp.document_classifier_properties.submit_time #=> Time
+    #   resp.document_classifier_properties.end_time #=> Time
+    #   resp.document_classifier_properties.training_start_time #=> Time
+    #   resp.document_classifier_properties.training_end_time #=> Time
+    #   resp.document_classifier_properties.input_data_config.s3_uri #=> String
+    #   resp.document_classifier_properties.classifier_metadata.number_of_labels #=> Integer
+    #   resp.document_classifier_properties.classifier_metadata.number_of_trained_documents #=> Integer
+    #   resp.document_classifier_properties.classifier_metadata.number_of_test_documents #=> Integer
+    #   resp.document_classifier_properties.classifier_metadata.evaluation_metrics.accuracy #=> Float
+    #   resp.document_classifier_properties.classifier_metadata.evaluation_metrics.precision #=> Float
+    #   resp.document_classifier_properties.classifier_metadata.evaluation_metrics.recall #=> Float
+    #   resp.document_classifier_properties.classifier_metadata.evaluation_metrics.f1_score #=> Float
+    #   resp.document_classifier_properties.data_access_role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeDocumentClassifier AWS API Documentation
+    #
+    # @overload describe_document_classifier(params = {})
+    # @param [Hash] params ({})
+    def describe_document_classifier(params = {}, options = {})
+      req = build_request(:describe_document_classifier, params)
       req.send_request(options)
     end
 
@@ -829,7 +1004,7 @@ module Aws::Comprehend
     #   resp.syntax_tokens[0].text #=> String
     #   resp.syntax_tokens[0].begin_offset #=> Integer
     #   resp.syntax_tokens[0].end_offset #=> Integer
-    #   resp.syntax_tokens[0].part_of_speech.tag #=> String, one of "ADJ", "ADP", "ADV", "AUX", "CONJ", "DET", "INTJ", "NOUN", "NUM", "O", "PART", "PRON", "PROPN", "PUNCT", "SCONJ", "SYM", "VERB"
+    #   resp.syntax_tokens[0].part_of_speech.tag #=> String, one of "ADJ", "ADP", "ADV", "AUX", "CONJ", "CCONJ", "DET", "INTJ", "NOUN", "NUM", "O", "PART", "PRON", "PROPN", "PUNCT", "SCONJ", "SYM", "VERB"
     #   resp.syntax_tokens[0].part_of_speech.score #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectSyntax AWS API Documentation
@@ -838,6 +1013,126 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def detect_syntax(params = {}, options = {})
       req = build_request(:detect_syntax, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of the documentation classification jobs that you have
+    # submitted.
+    #
+    # @option params [Types::DocumentClassificationJobFilter] :filter
+    #   Filters the jobs that are returned. You can filter jobs on their
+    #   names, status, or the date and time that they were submitted. You can
+    #   only set one filter at a time.
+    #
+    # @option params [String] :next_token
+    #   Identifies the next page of results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in each page. The default is
+    #   100.
+    #
+    # @return [Types::ListDocumentClassificationJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDocumentClassificationJobsResponse#document_classification_job_properties_list #document_classification_job_properties_list} => Array&lt;Types::DocumentClassificationJobProperties&gt;
+    #   * {Types::ListDocumentClassificationJobsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_document_classification_jobs({
+    #     filter: {
+    #       job_name: "JobName",
+    #       job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
+    #       submit_time_before: Time.now,
+    #       submit_time_after: Time.now,
+    #     },
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.document_classification_job_properties_list #=> Array
+    #   resp.document_classification_job_properties_list[0].job_id #=> String
+    #   resp.document_classification_job_properties_list[0].job_name #=> String
+    #   resp.document_classification_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.document_classification_job_properties_list[0].message #=> String
+    #   resp.document_classification_job_properties_list[0].submit_time #=> Time
+    #   resp.document_classification_job_properties_list[0].end_time #=> Time
+    #   resp.document_classification_job_properties_list[0].document_classifier_arn #=> String
+    #   resp.document_classification_job_properties_list[0].input_data_config.s3_uri #=> String
+    #   resp.document_classification_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.document_classification_job_properties_list[0].output_data_config.s3_uri #=> String
+    #   resp.document_classification_job_properties_list[0].data_access_role_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDocumentClassificationJobs AWS API Documentation
+    #
+    # @overload list_document_classification_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_document_classification_jobs(params = {}, options = {})
+      req = build_request(:list_document_classification_jobs, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of the document classifiers that you have created.
+    #
+    # @option params [Types::DocumentClassifierFilter] :filter
+    #   Filters the jobs that are returned. You can filter jobs on their name,
+    #   status, or the date and time that they were submitted. You can only
+    #   set one filter at a time.
+    #
+    # @option params [String] :next_token
+    #   Identifies the next page of results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in each page. The default is
+    #   100.
+    #
+    # @return [Types::ListDocumentClassifiersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDocumentClassifiersResponse#document_classifier_properties_list #document_classifier_properties_list} => Array&lt;Types::DocumentClassifierProperties&gt;
+    #   * {Types::ListDocumentClassifiersResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_document_classifiers({
+    #     filter: {
+    #       status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, IN_ERROR, TRAINED
+    #       submit_time_before: Time.now,
+    #       submit_time_after: Time.now,
+    #     },
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.document_classifier_properties_list #=> Array
+    #   resp.document_classifier_properties_list[0].document_classifier_arn #=> String
+    #   resp.document_classifier_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
+    #   resp.document_classifier_properties_list[0].status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "IN_ERROR", "TRAINED"
+    #   resp.document_classifier_properties_list[0].message #=> String
+    #   resp.document_classifier_properties_list[0].submit_time #=> Time
+    #   resp.document_classifier_properties_list[0].end_time #=> Time
+    #   resp.document_classifier_properties_list[0].training_start_time #=> Time
+    #   resp.document_classifier_properties_list[0].training_end_time #=> Time
+    #   resp.document_classifier_properties_list[0].input_data_config.s3_uri #=> String
+    #   resp.document_classifier_properties_list[0].classifier_metadata.number_of_labels #=> Integer
+    #   resp.document_classifier_properties_list[0].classifier_metadata.number_of_trained_documents #=> Integer
+    #   resp.document_classifier_properties_list[0].classifier_metadata.number_of_test_documents #=> Integer
+    #   resp.document_classifier_properties_list[0].classifier_metadata.evaluation_metrics.accuracy #=> Float
+    #   resp.document_classifier_properties_list[0].classifier_metadata.evaluation_metrics.precision #=> Float
+    #   resp.document_classifier_properties_list[0].classifier_metadata.evaluation_metrics.recall #=> Float
+    #   resp.document_classifier_properties_list[0].classifier_metadata.evaluation_metrics.f1_score #=> Float
+    #   resp.document_classifier_properties_list[0].data_access_role_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDocumentClassifiers AWS API Documentation
+    #
+    # @overload list_document_classifiers(params = {})
+    # @param [Hash] params ({})
+    def list_document_classifiers(params = {}, options = {})
+      req = build_request(:list_document_classifiers, params)
       req.send_request(options)
     end
 
@@ -1125,6 +1420,69 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Starts an asynchronous document classification job. Use the operation
+    # to track the progress of the job.
+    #
+    # @option params [String] :job_name
+    #   The identifier of the job.
+    #
+    # @option params [required, String] :document_classifier_arn
+    #   The Amazon Resource Name (ARN) of the document classifier to use to
+    #   process the job.
+    #
+    # @option params [required, Types::InputDataConfig] :input_data_config
+    #   Specifies the format and location of the input data for the job.
+    #
+    # @option params [required, Types::OutputDataConfig] :output_data_config
+    #   Specifies where to send the output files.
+    #
+    # @option params [required, String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   your input data.
+    #
+    # @option params [String] :client_request_token
+    #   A unique identifier for the request. If you do not set the client
+    #   request token, Amazon Comprehend generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartDocumentClassificationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDocumentClassificationJobResponse#job_id #job_id} => String
+    #   * {Types::StartDocumentClassificationJobResponse#job_status #job_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_document_classification_job({
+    #     job_name: "JobName",
+    #     document_classifier_arn: "DocumentClassifierArn", # required
+    #     input_data_config: { # required
+    #       s3_uri: "S3Uri", # required
+    #       input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #     },
+    #     output_data_config: { # required
+    #       s3_uri: "S3Uri", # required
+    #     },
+    #     data_access_role_arn: "IamRoleArn", # required
+    #     client_request_token: "ClientRequestTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartDocumentClassificationJob AWS API Documentation
+    #
+    # @overload start_document_classification_job(params = {})
+    # @param [Hash] params ({})
+    def start_document_classification_job(params = {}, options = {})
+      req = build_request(:start_document_classification_job, params)
+      req.send_request(options)
+    end
+
     # Starts an asynchronous dominant language detection job for a
     # collection of documents. Use the operation to track the status of a
     # job.
@@ -1212,8 +1570,12 @@ module Aws::Comprehend
     #   The identifier of the job.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. You can specify English ("en")
-    #   or Spanish ("es"). All documents must be in the same language.
+    #   The language of the input documents. All documents must be in the same
+    #   language. You can specify any of the languages supported by Amazon
+    #   Comprehend: English ("en"), Spanish ("es"), French ("fr"),
+    #   German ("de"), Italian ("it"), or Portuguese ("pt"). If custom
+    #   entities recognition is used, this parameter is ignored and the
+    #   language used for training the model is used instead.
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the request. If you don't set the client
@@ -1644,7 +2006,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

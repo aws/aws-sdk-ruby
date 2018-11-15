@@ -381,6 +381,227 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # Describes the result metrics for the test data associated with an
+    # documentation classifier.
+    #
+    # @!attribute [rw] accuracy
+    #   The fraction of the labels that were correct recognized. It is
+    #   computed by dividing the number of labels in the test documents that
+    #   were correctly recognized by the total number of labels in the test
+    #   documents.
+    #   @return [Float]
+    #
+    # @!attribute [rw] precision
+    #   A measure of the usefulness of the classifier results in the test
+    #   data. High precision means that the classifier returned
+    #   substantially more relevant results than irrelevant ones.
+    #   @return [Float]
+    #
+    # @!attribute [rw] recall
+    #   A measure of how complete the classifier results are for the test
+    #   data. High recall means that the classifier returned most of the
+    #   relevant results.
+    #   @return [Float]
+    #
+    # @!attribute [rw] f1_score
+    #   A measure of how accurate the classifier results are for the test
+    #   data. It is derived from the `Precision` and `Recall` values. The
+    #   `F1Score` is the harmonic average of the two scores. The highest
+    #   score is 1, and the worst score is 0.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ClassifierEvaluationMetrics AWS API Documentation
+    #
+    class ClassifierEvaluationMetrics < Struct.new(
+      :accuracy,
+      :precision,
+      :recall,
+      :f1_score)
+      include Aws::Structure
+    end
+
+    # Provides information about a document classifier.
+    #
+    # @!attribute [rw] number_of_labels
+    #   The number of labels in the input data.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_trained_documents
+    #   The number of documents in the input data that were used to train
+    #   the classifier. Typically this is 80 to 90 percent of the input
+    #   documents.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_test_documents
+    #   The number of documents in the input data that were used to test the
+    #   classifier. Typically this is 10 to 20 percent of the input
+    #   documents.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] evaluation_metrics
+    #   Describes the result metrics for the test data associated with an
+    #   documentation classifier.
+    #   @return [Types::ClassifierEvaluationMetrics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ClassifierMetadata AWS API Documentation
+    #
+    class ClassifierMetadata < Struct.new(
+      :number_of_labels,
+      :number_of_trained_documents,
+      :number_of_test_documents,
+      :evaluation_metrics)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateDocumentClassifierRequest
+    #   data as a hash:
+    #
+    #       {
+    #         document_classifier_name: "ComprehendArnName", # required
+    #         data_access_role_arn: "IamRoleArn", # required
+    #         input_data_config: { # required
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #         client_request_token: "ClientRequestTokenString",
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #       }
+    #
+    # @!attribute [rw] document_classifier_name
+    #   The name of the document classifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Management
+    #   (IAM) role that grants Amazon Comprehend read access to your input
+    #   data.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_data_config
+    #   Specifies the format and location of the input data for the job.
+    #   @return [Types::DocumentClassifierInputDataConfig]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique identifier for the request. If you don't set the client
+    #   request token, Amazon Comprehend generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language of the input documents. You can create a document
+    #   classifier in any of the languages supported by Amazon Comprehend.
+    #   However, all documents must be in the same language.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateDocumentClassifierRequest AWS API Documentation
+    #
+    class CreateDocumentClassifierRequest < Struct.new(
+      :document_classifier_name,
+      :data_access_role_arn,
+      :input_data_config,
+      :client_request_token,
+      :language_code)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] document_classifier_arn
+    #   The Amazon Resource Name (ARN) that identifies the document
+    #   classifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateDocumentClassifierResponse AWS API Documentation
+    #
+    class CreateDocumentClassifierResponse < Struct.new(
+      :document_classifier_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteDocumentClassifierRequest
+    #   data as a hash:
+    #
+    #       {
+    #         document_classifier_arn: "DocumentClassifierArn", # required
+    #       }
+    #
+    # @!attribute [rw] document_classifier_arn
+    #   The Amazon Resource Name (ARN) that identifies the document
+    #   classifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DeleteDocumentClassifierRequest AWS API Documentation
+    #
+    class DeleteDocumentClassifierRequest < Struct.new(
+      :document_classifier_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DeleteDocumentClassifierResponse AWS API Documentation
+    #
+    class DeleteDocumentClassifierResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DescribeDocumentClassificationJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The identifier that Amazon Comprehend generated for the job. The
+    #   operation returns this identifier in its response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeDocumentClassificationJobRequest AWS API Documentation
+    #
+    class DescribeDocumentClassificationJobRequest < Struct.new(
+      :job_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] document_classification_job_properties
+    #   An object that describes the properties associated with the document
+    #   classification job.
+    #   @return [Types::DocumentClassificationJobProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeDocumentClassificationJobResponse AWS API Documentation
+    #
+    class DescribeDocumentClassificationJobResponse < Struct.new(
+      :document_classification_job_properties)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeDocumentClassifierRequest
+    #   data as a hash:
+    #
+    #       {
+    #         document_classifier_arn: "DocumentClassifierArn", # required
+    #       }
+    #
+    # @!attribute [rw] document_classifier_arn
+    #   The Amazon Resource Name (ARN) that identifies the document
+    #   classifier. The operation returns this identifier in its response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeDocumentClassifierRequest AWS API Documentation
+    #
+    class DescribeDocumentClassifierRequest < Struct.new(
+      :document_classifier_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] document_classifier_properties
+    #   An object that contains the properties associated with a document
+    #   classifier.
+    #   @return [Types::DocumentClassifierProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeDocumentClassifierResponse AWS API Documentation
+    #
+    class DescribeDocumentClassifierResponse < Struct.new(
+      :document_classifier_properties)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeDominantLanguageDetectionJobRequest
     #   data as a hash:
     #
@@ -740,6 +961,267 @@ module Aws::Comprehend
     #
     class DetectSyntaxResponse < Struct.new(
       :syntax_tokens)
+      include Aws::Structure
+    end
+
+    # Provides information for filtering a list of document classification
+    # jobs. For more information, see the operation. You can provide only
+    # one filter parameter in each request.
+    #
+    # @note When making an API call, you may pass DocumentClassificationJobFilter
+    #   data as a hash:
+    #
+    #       {
+    #         job_name: "JobName",
+    #         job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
+    #         submit_time_before: Time.now,
+    #         submit_time_after: Time.now,
+    #       }
+    #
+    # @!attribute [rw] job_name
+    #   Filters on the name of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   Filters the list based on job status. Returns only jobs with the
+    #   specified status.
+    #   @return [String]
+    #
+    # @!attribute [rw] submit_time_before
+    #   Filters the list of jobs based on the time that the job was
+    #   submitted for processing. Returns only jobs submitted after the
+    #   specified time. Jobs are returned in ascending order, oldest to
+    #   newest.
+    #   @return [Time]
+    #
+    # @!attribute [rw] submit_time_after
+    #   Filters the list of jobs based on the time that the job was
+    #   submitted for processing. Returns only jobs submitted before the
+    #   specified time. Jobs are returned in descending order, newest to
+    #   oldest.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassificationJobFilter AWS API Documentation
+    #
+    class DocumentClassificationJobFilter < Struct.new(
+      :job_name,
+      :job_status,
+      :submit_time_before,
+      :submit_time_after)
+      include Aws::Structure
+    end
+
+    # Provides information about a document classification job.
+    #
+    # @!attribute [rw] job_id
+    #   The identifier assigned to the document classification job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The name that you assigned to the document classification job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   The current status of the document classification job. If the status
+    #   is `FAILED`, the `Message` field shows the reason for the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A description of the status of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] submit_time
+    #   The time that the document classification job was submitted for
+    #   processing.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time that the document classification job completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] document_classifier_arn
+    #   The Amazon Resource Name (ARN) that identifies the document
+    #   classifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_data_config
+    #   The input data configuration that you supplied when you created the
+    #   document classification job.
+    #   @return [Types::InputDataConfig]
+    #
+    # @!attribute [rw] output_data_config
+    #   The output data configuration that you supplied when you created the
+    #   document classification job.
+    #   @return [Types::OutputDataConfig]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   your input data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassificationJobProperties AWS API Documentation
+    #
+    class DocumentClassificationJobProperties < Struct.new(
+      :job_id,
+      :job_name,
+      :job_status,
+      :message,
+      :submit_time,
+      :end_time,
+      :document_classifier_arn,
+      :input_data_config,
+      :output_data_config,
+      :data_access_role_arn)
+      include Aws::Structure
+    end
+
+    # Provides information for filtering a list of document classifiers. You
+    # can only specify one filtering parameter in a request. For more
+    # information, see the operation.
+    #
+    # @note When making an API call, you may pass DocumentClassifierFilter
+    #   data as a hash:
+    #
+    #       {
+    #         status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, IN_ERROR, TRAINED
+    #         submit_time_before: Time.now,
+    #         submit_time_after: Time.now,
+    #       }
+    #
+    # @!attribute [rw] status
+    #   Filters the list of classifiers based on status.
+    #   @return [String]
+    #
+    # @!attribute [rw] submit_time_before
+    #   Filters the list of classifiers based on the time that the
+    #   classifier was submitted for processing. Returns only classifiers
+    #   submitted before the specified time. Classifiers are returned in
+    #   ascending order, oldest to newest.
+    #   @return [Time]
+    #
+    # @!attribute [rw] submit_time_after
+    #   Filters the list of classifiers based on the time that the
+    #   classifier was submitted for processing. Returns only classifiers
+    #   submitted after the specified time. Classifiers are returned in
+    #   descending order, newest to oldest.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassifierFilter AWS API Documentation
+    #
+    class DocumentClassifierFilter < Struct.new(
+      :status,
+      :submit_time_before,
+      :submit_time_after)
+      include Aws::Structure
+    end
+
+    # The input properties for training a document classifier.
+    #
+    # For more information on how the input file is formatted, see
+    # how-document-classification-training-data.
+    #
+    # @note When making an API call, you may pass DocumentClassifierInputDataConfig
+    #   data as a hash:
+    #
+    #       {
+    #         s3_uri: "S3Uri", # required
+    #       }
+    #
+    # @!attribute [rw] s3_uri
+    #   The Amazon S3 URI for the input data. The S3 bucket must be in the
+    #   same region as the API endpoint that you are calling. The URI can
+    #   point to a single input file or it can provide the prefix for a
+    #   collection of input files.
+    #
+    #   For example, if you use the URI `S3://bucketName/prefix`, if the
+    #   prefix is a single file, Amazon Comprehend uses that file as input.
+    #   If more than one file begins with the prefix, Amazon Comprehend uses
+    #   all of them as input.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassifierInputDataConfig AWS API Documentation
+    #
+    class DocumentClassifierInputDataConfig < Struct.new(
+      :s3_uri)
+      include Aws::Structure
+    end
+
+    # Provides information about a document classifier.
+    #
+    # @!attribute [rw] document_classifier_arn
+    #   The Amazon Resource Name (ARN) that identifies the document
+    #   classifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code for the language of the documents that the
+    #   classifier was trained on.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the document classifier. The the status is `TRAINED`
+    #   the classifier is ready to use. If the status is `FAILED` you can
+    #   see additional information about why the classifier wasn't trained
+    #   in the `Message` field.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Additional information about the status of the classifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] submit_time
+    #   The time that the document classifier was submitted for training.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time that training the document classifier completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] training_start_time
+    #   Indicates the time when the training starts on documentation
+    #   classifiers. You are billed for the time interval between this time
+    #   and the value of TrainingEndTime.
+    #   @return [Time]
+    #
+    # @!attribute [rw] training_end_time
+    #   The time that training of the document classifier was completed.
+    #   Indicates the time when the training completes on documentation
+    #   classifiers. You are billed for the time interval between this time
+    #   and the value of TrainingStartTime.
+    #   @return [Time]
+    #
+    # @!attribute [rw] input_data_config
+    #   The input data configuration that you supplied when you created the
+    #   document classifier for training.
+    #   @return [Types::DocumentClassifierInputDataConfig]
+    #
+    # @!attribute [rw] classifier_metadata
+    #   Information about the document classifier, including the number of
+    #   documents used for training the classifier, the number of documents
+    #   used for test the classifier, and an accuracy rating.
+    #   @return [Types::ClassifierMetadata]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Management
+    #   (IAM) role that grants Amazon Comprehend read access to your input
+    #   data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassifierProperties AWS API Documentation
+    #
+    class DocumentClassifierProperties < Struct.new(
+      :document_classifier_arn,
+      :language_code,
+      :status,
+      :message,
+      :submit_time,
+      :end_time,
+      :training_start_time,
+      :training_end_time,
+      :input_data_config,
+      :classifier_metadata,
+      :data_access_role_arn)
       include Aws::Structure
     end
 
@@ -1216,6 +1698,113 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListDocumentClassificationJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filter: {
+    #           job_name: "JobName",
+    #           job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
+    #           submit_time_before: Time.now,
+    #           submit_time_after: Time.now,
+    #         },
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] filter
+    #   Filters the jobs that are returned. You can filter jobs on their
+    #   names, status, or the date and time that they were submitted. You
+    #   can only set one filter at a time.
+    #   @return [Types::DocumentClassificationJobFilter]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in each page. The default is
+    #   100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDocumentClassificationJobsRequest AWS API Documentation
+    #
+    class ListDocumentClassificationJobsRequest < Struct.new(
+      :filter,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] document_classification_job_properties_list
+    #   A list containing the properties of each job returned.
+    #   @return [Array<Types::DocumentClassificationJobProperties>]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDocumentClassificationJobsResponse AWS API Documentation
+    #
+    class ListDocumentClassificationJobsResponse < Struct.new(
+      :document_classification_job_properties_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListDocumentClassifiersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filter: {
+    #           status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, IN_ERROR, TRAINED
+    #           submit_time_before: Time.now,
+    #           submit_time_after: Time.now,
+    #         },
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] filter
+    #   Filters the jobs that are returned. You can filter jobs on their
+    #   name, status, or the date and time that they were submitted. You can
+    #   only set one filter at a time.
+    #   @return [Types::DocumentClassifierFilter]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in each page. The default is
+    #   100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDocumentClassifiersRequest AWS API Documentation
+    #
+    class ListDocumentClassifiersRequest < Struct.new(
+      :filter,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] document_classifier_properties_list
+    #   A list containing the properties of each job returned.
+    #   @return [Array<Types::DocumentClassifierProperties>]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDocumentClassifiersResponse AWS API Documentation
+    #
+    class ListDocumentClassifiersResponse < Struct.new(
+      :document_classifier_properties_list,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListDominantLanguageDetectionJobsRequest
     #   data as a hash:
     #
@@ -1680,6 +2269,97 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartDocumentClassificationJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_name: "JobName",
+    #         document_classifier_arn: "DocumentClassifierArn", # required
+    #         input_data_config: { # required
+    #           s3_uri: "S3Uri", # required
+    #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #         },
+    #         output_data_config: { # required
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #         data_access_role_arn: "IamRoleArn", # required
+    #         client_request_token: "ClientRequestTokenString",
+    #       }
+    #
+    # @!attribute [rw] job_name
+    #   The identifier of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_classifier_arn
+    #   The Amazon Resource Name (ARN) of the document classifier to use to
+    #   process the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_data_config
+    #   Specifies the format and location of the input data for the job.
+    #   @return [Types::InputDataConfig]
+    #
+    # @!attribute [rw] output_data_config
+    #   Specifies where to send the output files.
+    #   @return [Types::OutputDataConfig]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   your input data.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique identifier for the request. If you do not set the client
+    #   request token, Amazon Comprehend generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartDocumentClassificationJobRequest AWS API Documentation
+    #
+    class StartDocumentClassificationJobRequest < Struct.new(
+      :job_name,
+      :document_classifier_arn,
+      :input_data_config,
+      :output_data_config,
+      :data_access_role_arn,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identifier generated for the job. To get the status of the job,
+    #   use this identifier with the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   The status of the job:
+    #
+    #   * SUBMITTED - The job has been received and queued for processing.
+    #
+    #   * IN\_PROGRESS - Amazon Comprehend is processing the job.
+    #
+    #   * COMPLETED - The job was successfully completed and the output is
+    #     available.
+    #
+    #   * FAILED - The job did not complete. For details, use the operation.
+    #
+    #   * STOP\_REQUESTED - Amazon Comprehend has received a stop request
+    #     for the job and is processing the request.
+    #
+    #   * STOPPED - The job was successfully stopped without completing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartDocumentClassificationJobResponse AWS API Documentation
+    #
+    class StartDocumentClassificationJobResponse < Struct.new(
+      :job_id,
+      :job_status)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartDominantLanguageDetectionJobRequest
     #   data as a hash:
     #
@@ -1807,9 +2487,12 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
-    #   language.
+    #   The language of the input documents. All documents must be in the
+    #   same language. You can specify any of the languages supported by
+    #   Amazon Comprehend: English ("en"), Spanish ("es"), French
+    #   ("fr"), German ("de"), Italian ("it"), or Portuguese ("pt").
+    #   If custom entities recognition is used, this parameter is ignored
+    #   and the language used for training the model is used instead.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -1850,6 +2533,11 @@ module Aws::Comprehend
     #
     #   * FAILED - The job did not complete. To get details, use the
     #     operation.
+    #
+    #   * STOP\_REQUESTED - Amazon Comprehend has received a stop request
+    #     for the job and is processing the request.
+    #
+    #   * STOPPED - The job was successfully stopped without completing.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartEntitiesDetectionJobResponse AWS API Documentation

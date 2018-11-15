@@ -1985,6 +1985,7 @@ module Aws::RDS
     #     ],
     #     include_shared: false,
     #     include_public: false,
+    #     dbi_resource_id: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_instance_identifier
@@ -2052,6 +2053,8 @@ module Aws::RDS
     #
     #   You can share a manual DB snapshot as public by using the
     #   ModifyDBSnapshotAttribute API.
+    # @option options [String] :dbi_resource_id
+    #   A specific DB resource ID to describe.
     # @return [DBSnapshot::Collection]
     def db_snapshots(options = {})
       batches = Enumerator.new do |y|
