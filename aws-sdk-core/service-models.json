@@ -438,6 +438,10 @@
     "models": "pinpoint-email/2018-07-26",
     "endpoint": "email"
   },
+  "PinpointSMSVoice": {
+    "models": "sms-voice/2018-09-05",
+    "endpoint": "sms-voice.pinpoint"
+  },
   "Polly": {
     "models": "polly/2016-06-10",
     "endpoint": "polly"
@@ -445,6 +449,10 @@
   "Pricing": {
     "models": "pricing/2017-10-15",
     "endpoint": "api.pricing"
+  },
+  "RAM": {
+    "models": "ram/2018-01-04",
+    "endpoint": "ram"
   },
   "RDS": {
     "models": "rds/2014-10-31",
@@ -474,9 +482,17 @@
     "models": "route53domains/2014-05-15",
     "endpoint": "route53domains"
   },
+  "Route53Resolver": {
+    "models": "route53resolver/2018-04-01",
+    "endpoint": "route53resolver"
+  },
   "S3": {
     "models": "s3/2006-03-01",
     "endpoint": "s3"
+  },
+  "S3Control": {
+    "models": "s3control/2018-08-20",
+    "endpoint": "s3-control"
   },
   "SES": {
     "models": "email/2010-12-01",

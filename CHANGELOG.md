@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
+
+* Feature - Aws::Comprehend - Updated the API, and documentation for Amazon Comprehend.
+
+* Feature - Aws::DirectConnect - Updated the API, and documentation for AWS Direct Connect.
+
+* Feature - Aws::DatabaseMigrationService - Updated the API, documentation, and waiters for AWS Database Migration Service.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+* Feature - Aws::IAM - Updated the API, and documentation for AWS Identity and Access Management.
+
+* Feature - Aws::Pinpoint - Updated the API, and documentation for Amazon Pinpoint.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::Redshift - Updated the API, and documentation for Amazon Redshift.
+
+* Feature - Aws::S3 - Updated the API, and documentation for Amazon Simple Storage Service.
+
+* Feature - Aws::TranscribeService - Updated the API, and documentation for Amazon Transcribe Service.
+
+* Feature - Aws::RAM - Added support for a new service, AWS Resource Access Manager.
+
+* Feature - Aws::Route53Resolver - Added support for a new service, Amazon Route 53 Resolver.
+
+* Feature - Aws::S3Control - Added support for a new service, AWS S3 Control.
+
+* Feature - Aws::PinpointSMSVoice - Added support for a new service, Amazon Pinpoint SMS and Voice Service.
+
 2.11.171 (2018-11-14)
 ------------------
 

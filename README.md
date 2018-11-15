@@ -298,8 +298,8 @@ to be backwards compatible.
 | AWS IoT Data Plane                                    | IoTDataPlane                    | 2015-05-28  |
 | AWS IoT Jobs Data Plane                               | IoTJobsDataPlane                | 2017-09-29  |
 | AWS Key Management Service                            | KMS                             | 2014-11-01  |
-| AWS Lambda                                            | Lambda                          | 2015-03-31  |
 | AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
+| AWS Lambda                                            | Lambda                          | 2015-03-31  |
 | AWS Marketplace Commerce Analytics                    | MarketplaceCommerceAnalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | MarketplaceEntitlementService   | 2017-01-11  |
 | AWS MediaTailor                                       | MediaTailor                     | 2018-04-23  |
@@ -310,8 +310,10 @@ to be backwards compatible.
 | AWS Organizations                                     | Organizations                   | 2016-11-28  |
 | AWS Performance Insights                              | PI                              | 2018-02-27  |
 | AWS Price List Service                                | Pricing                         | 2017-10-15  |
+| AWS Resource Access Manager                           | RAM                             | 2018-01-04  |
 | AWS Resource Groups                                   | ResourceGroups                  | 2017-11-27  |
 | AWS Resource Groups Tagging API                       | ResourceGroupsTaggingAPI        | 2017-01-26  |
+| AWS S3 Control                                        | S3Control                       | 2018-08-20  |
 | AWS Secrets Manager                                   | SecretsManager                  | 2017-10-17  |
 | AWS Security Token Service                            | STS                             | 2011-06-15  |
 | AWS Server Migration Service                          | SMS                             | 2016-10-24  |
@@ -377,6 +379,7 @@ to be backwards compatible.
 | Amazon Neptune                                        | Neptune                         | 2014-10-31  |
 | Amazon Pinpoint                                       | Pinpoint                        | 2016-12-01  |
 | Amazon Pinpoint Email Service                         | PinpointEmail                   | 2018-07-26  |
+| Amazon Pinpoint SMS and Voice Service                 | PinpointSMSVoice                | 2018-09-05  |
 | Amazon Polly                                          | Polly                           | 2016-06-10  |
 | Amazon Redshift                                       | Redshift                        | 2012-12-01  |
 | Amazon Rekognition                                    | Rekognition                     | 2016-06-27  |
@@ -384,6 +387,7 @@ to be backwards compatible.
 | Amazon Route 53                                       | Route53                         | 2013-04-01  |
 | Amazon Route 53 Auto Naming                           | ServiceDiscovery                | 2017-03-14  |
 | Amazon Route 53 Domains                               | Route53Domains                  | 2014-05-15  |
+| Amazon Route 53 Resolver                              | Route53Resolver                 | 2018-04-01  |
 | Amazon SageMaker Runtime                              | SageMakerRuntime                | 2017-05-13  |
 | Amazon SageMaker Service                              | SageMaker                       | 2017-07-24  |
 | Amazon Simple Email Service                           | SES                             | 2010-12-01  |

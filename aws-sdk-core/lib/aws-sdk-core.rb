@@ -133,8 +133,10 @@ module Aws
     PI
     Pinpoint
     PinpointEmail
+    PinpointSMSVoice
     Polly
     Pricing
+    RAM
     RDS
     Redshift
     Rekognition
@@ -142,7 +144,9 @@ module Aws
     ResourceGroupsTaggingAPI
     Route53
     Route53Domains
+    Route53Resolver
     S3
+    S3Control
     SES
     SMS
     SNS
