@@ -272,6 +272,13 @@ module Aws
         Aws::Plugins::S3RequestSigner
       ))
 
+      plugins('AWS S3 Control', add: %w(
+        Aws::Plugins::S3HostId
+        Aws::Plugins::S3ControlDns
+        Aws::Plugins::S3ControlDualstack
+        Aws::Plugins::S3ControlSigner
+      ))
+
       api('Amazon Simple Queue Service') do |api|
         api['metadata']['errorPrefix'] = 'AWS.SimpleQueueService.'
       end
