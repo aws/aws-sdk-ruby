@@ -1215,7 +1215,7 @@ module Aws::MediaPackage
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackage'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.9.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 
