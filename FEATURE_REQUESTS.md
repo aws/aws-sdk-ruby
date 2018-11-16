@@ -376,3 +376,15 @@ See [related GitHub issue #1837](https://github.com/aws/aws-sdk-ruby/issues/1837
 Match CLI support of ca_bundle being specified in config
 
 See [related GitHub issue #1907](https://github.com/aws/aws-sdk-ruby/issues/1907)
+
+### Retrieve data from response headers for streaming S3 objects
+
+Pull in data from response headers on Object#get
+
+See [related GitHub issue #1913](https://github.com/aws/aws-sdk-ruby/issues/1913)
+
+### Add Aws::S3::Object#head method
+
+Add method for parity with Client#head_object
+
+See [related GitHub issue #1912](https://github.com/aws/aws-sdk-ruby/issues/1912)
