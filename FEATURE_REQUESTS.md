@@ -364,3 +364,27 @@ See [related GitHub issue #1685](https://github.com/aws/aws-sdk-ruby/issues/1685
 Verifier currently makes http call directly, and does not use SNS client or Aws.config.
 
 See [related GitHub issue #1683](https://github.com/aws/aws-sdk-ruby/issues/1683).
+
+### Handle resource model typos
+
+Typos in resource models cannot be fixed directly without causing breaking changes.
+
+See [related GitHub issue #1837](https://github.com/aws/aws-sdk-ruby/issues/1837).
+
+### Support ca_bundle in ~/.aws/config
+
+Match CLI support of ca_bundle being specified in config
+
+See [related GitHub issue #1907](https://github.com/aws/aws-sdk-ruby/issues/1907)
+
+### Retrieve data from response headers for streaming S3 objects
+
+Pull in data from response headers on Object#get
+
+See [related GitHub issue #1913](https://github.com/aws/aws-sdk-ruby/issues/1913)
+
+### Add Aws::S3::Object#head method
+
+Add method for parity with Client#head_object
+
+See [related GitHub issue #1912](https://github.com/aws/aws-sdk-ruby/issues/1912)
