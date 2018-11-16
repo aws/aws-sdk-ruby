@@ -11,8 +11,10 @@ module Aws::SSM
 
     include Seahorse::Model
 
+    Account = Shapes::StringShape.new(name: 'Account')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountIdList = Shapes::ListShape.new(name: 'AccountIdList')
+    Accounts = Shapes::ListShape.new(name: 'Accounts')
     Activation = Shapes::StructureShape.new(name: 'Activation')
     ActivationCode = Shapes::StringShape.new(name: 'ActivationCode')
     ActivationDescription = Shapes::StringShape.new(name: 'ActivationDescription')
@@ -88,6 +90,7 @@ module Aws::SSM
     AutomationParameterValue = Shapes::StringShape.new(name: 'AutomationParameterValue')
     AutomationParameterValueList = Shapes::ListShape.new(name: 'AutomationParameterValueList')
     AutomationStepNotFoundException = Shapes::StructureShape.new(name: 'AutomationStepNotFoundException')
+    AutomationType = Shapes::StringShape.new(name: 'AutomationType')
     BaselineDescription = Shapes::StringShape.new(name: 'BaselineDescription')
     BaselineId = Shapes::StringShape.new(name: 'BaselineId')
     BaselineName = Shapes::StringShape.new(name: 'BaselineName')
@@ -311,6 +314,7 @@ module Aws::SSM
     EffectivePatchList = Shapes::ListShape.new(name: 'EffectivePatchList')
     ErrorCount = Shapes::IntegerShape.new(name: 'ErrorCount')
     ExecutionMode = Shapes::StringShape.new(name: 'ExecutionMode')
+    ExecutionRoleName = Shapes::StringShape.new(name: 'ExecutionRoleName')
     ExpirationDate = Shapes::TimestampShape.new(name: 'ExpirationDate')
     FailedCreateAssociation = Shapes::StructureShape.new(name: 'FailedCreateAssociation')
     FailedCreateAssociationList = Shapes::ListShape.new(name: 'FailedCreateAssociationList')
@@ -710,6 +714,7 @@ module Aws::SSM
     PlatformType = Shapes::StringShape.new(name: 'PlatformType')
     PlatformTypeList = Shapes::ListShape.new(name: 'PlatformTypeList')
     Product = Shapes::StringShape.new(name: 'Product')
+    ProgressCounters = Shapes::StructureShape.new(name: 'ProgressCounters')
     PutComplianceItemsRequest = Shapes::StructureShape.new(name: 'PutComplianceItemsRequest')
     PutComplianceItemsResult = Shapes::StructureShape.new(name: 'PutComplianceItemsResult')
     PutInventoryMessage = Shapes::StringShape.new(name: 'PutInventoryMessage')
@@ -717,6 +722,8 @@ module Aws::SSM
     PutInventoryResult = Shapes::StructureShape.new(name: 'PutInventoryResult')
     PutParameterRequest = Shapes::StructureShape.new(name: 'PutParameterRequest')
     PutParameterResult = Shapes::StructureShape.new(name: 'PutParameterResult')
+    Region = Shapes::StringShape.new(name: 'Region')
+    Regions = Shapes::ListShape.new(name: 'Regions')
     RegisterDefaultPatchBaselineRequest = Shapes::StructureShape.new(name: 'RegisterDefaultPatchBaselineRequest')
     RegisterDefaultPatchBaselineResult = Shapes::StructureShape.new(name: 'RegisterDefaultPatchBaselineResult')
     RegisterPatchBaselineForPatchGroupRequest = Shapes::StructureShape.new(name: 'RegisterPatchBaselineForPatchGroupRequest')
@@ -832,6 +839,8 @@ module Aws::SSM
     TargetCount = Shapes::IntegerShape.new(name: 'TargetCount')
     TargetInUseException = Shapes::StructureShape.new(name: 'TargetInUseException')
     TargetKey = Shapes::StringShape.new(name: 'TargetKey')
+    TargetLocation = Shapes::StructureShape.new(name: 'TargetLocation')
+    TargetLocations = Shapes::ListShape.new(name: 'TargetLocations')
     TargetMap = Shapes::MapShape.new(name: 'TargetMap')
     TargetMapKey = Shapes::StringShape.new(name: 'TargetMapKey')
     TargetMapValue = Shapes::StringShape.new(name: 'TargetMapValue')
@@ -880,6 +889,8 @@ module Aws::SSM
     Version = Shapes::StringShape.new(name: 'Version')
 
     AccountIdList.member = Shapes::ShapeRef.new(shape: AccountId)
+
+    Accounts.member = Shapes::ShapeRef.new(shape: Account)
 
     Activation.add_member(:activation_id, Shapes::ShapeRef.new(shape: ActivationId, location_name: "ActivationId"))
     Activation.add_member(:description, Shapes::ShapeRef.new(shape: ActivationDescription, location_name: "Description"))
@@ -1038,6 +1049,8 @@ module Aws::SSM
     AutomationExecution.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
     AutomationExecution.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
     AutomationExecution.add_member(:target, Shapes::ShapeRef.new(shape: String, location_name: "Target"))
+    AutomationExecution.add_member(:target_locations, Shapes::ShapeRef.new(shape: TargetLocations, location_name: "TargetLocations", metadata: {"box"=>true}))
+    AutomationExecution.add_member(:progress_counters, Shapes::ShapeRef.new(shape: ProgressCounters, location_name: "ProgressCounters"))
     AutomationExecution.struct_class = Types::AutomationExecution
 
     AutomationExecutionFilter.add_member(:key, Shapes::ShapeRef.new(shape: AutomationExecutionFilterKey, required: true, location_name: "Key"))
@@ -1069,6 +1082,7 @@ module Aws::SSM
     AutomationExecutionMetadata.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
     AutomationExecutionMetadata.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
     AutomationExecutionMetadata.add_member(:target, Shapes::ShapeRef.new(shape: String, location_name: "Target"))
+    AutomationExecutionMetadata.add_member(:automation_type, Shapes::ShapeRef.new(shape: AutomationType, location_name: "AutomationType"))
     AutomationExecutionMetadata.struct_class = Types::AutomationExecutionMetadata
 
     AutomationExecutionMetadataList.member = Shapes::ShapeRef.new(shape: AutomationExecutionMetadata)
@@ -2676,6 +2690,13 @@ module Aws::SSM
 
     PlatformTypeList.member = Shapes::ShapeRef.new(shape: PlatformType)
 
+    ProgressCounters.add_member(:total_steps, Shapes::ShapeRef.new(shape: Integer, location_name: "TotalSteps"))
+    ProgressCounters.add_member(:success_steps, Shapes::ShapeRef.new(shape: Integer, location_name: "SuccessSteps"))
+    ProgressCounters.add_member(:failed_steps, Shapes::ShapeRef.new(shape: Integer, location_name: "FailedSteps"))
+    ProgressCounters.add_member(:cancelled_steps, Shapes::ShapeRef.new(shape: Integer, location_name: "CancelledSteps"))
+    ProgressCounters.add_member(:timed_out_steps, Shapes::ShapeRef.new(shape: Integer, location_name: "TimedOutSteps"))
+    ProgressCounters.struct_class = Types::ProgressCounters
+
     PutComplianceItemsRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ComplianceResourceId, required: true, location_name: "ResourceId"))
     PutComplianceItemsRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ComplianceResourceType, required: true, location_name: "ResourceType"))
     PutComplianceItemsRequest.add_member(:compliance_type, Shapes::ShapeRef.new(shape: ComplianceTypeName, required: true, location_name: "ComplianceType"))
@@ -2704,6 +2725,8 @@ module Aws::SSM
 
     PutParameterResult.add_member(:version, Shapes::ShapeRef.new(shape: PSParameterVersion, location_name: "Version"))
     PutParameterResult.struct_class = Types::PutParameterResult
+
+    Regions.member = Shapes::ShapeRef.new(shape: Region)
 
     RegisterDefaultPatchBaselineRequest.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, required: true, location_name: "BaselineId"))
     RegisterDefaultPatchBaselineRequest.struct_class = Types::RegisterDefaultPatchBaselineRequest
@@ -2899,6 +2922,7 @@ module Aws::SSM
     StartAutomationExecutionRequest.add_member(:target_maps, Shapes::ShapeRef.new(shape: TargetMaps, location_name: "TargetMaps"))
     StartAutomationExecutionRequest.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
     StartAutomationExecutionRequest.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
+    StartAutomationExecutionRequest.add_member(:target_locations, Shapes::ShapeRef.new(shape: TargetLocations, location_name: "TargetLocations", metadata: {"box"=>true}))
     StartAutomationExecutionRequest.struct_class = Types::StartAutomationExecutionRequest
 
     StartAutomationExecutionResult.add_member(:automation_execution_id, Shapes::ShapeRef.new(shape: AutomationExecutionId, location_name: "AutomationExecutionId"))
@@ -2934,6 +2958,8 @@ module Aws::SSM
     StepExecution.add_member(:next_step, Shapes::ShapeRef.new(shape: String, location_name: "NextStep", metadata: {"box"=>true}))
     StepExecution.add_member(:is_critical, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsCritical", metadata: {"box"=>true}))
     StepExecution.add_member(:valid_next_steps, Shapes::ShapeRef.new(shape: ValidNextStepList, location_name: "ValidNextSteps"))
+    StepExecution.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets", metadata: {"box"=>true}))
+    StepExecution.add_member(:target_location, Shapes::ShapeRef.new(shape: TargetLocation, location_name: "TargetLocation", metadata: {"box"=>true}))
     StepExecution.struct_class = Types::StepExecution
 
     StepExecutionFilter.add_member(:key, Shapes::ShapeRef.new(shape: StepExecutionFilterKey, required: true, location_name: "Key"))
@@ -2963,6 +2989,15 @@ module Aws::SSM
     Target.add_member(:key, Shapes::ShapeRef.new(shape: TargetKey, location_name: "Key"))
     Target.add_member(:values, Shapes::ShapeRef.new(shape: TargetValues, location_name: "Values"))
     Target.struct_class = Types::Target
+
+    TargetLocation.add_member(:accounts, Shapes::ShapeRef.new(shape: Accounts, location_name: "Accounts"))
+    TargetLocation.add_member(:regions, Shapes::ShapeRef.new(shape: Regions, location_name: "Regions"))
+    TargetLocation.add_member(:target_location_max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "TargetLocationMaxConcurrency", metadata: {"box"=>true}))
+    TargetLocation.add_member(:target_location_max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "TargetLocationMaxErrors", metadata: {"box"=>true}))
+    TargetLocation.add_member(:execution_role_name, Shapes::ShapeRef.new(shape: ExecutionRoleName, location_name: "ExecutionRoleName", metadata: {"box"=>true}))
+    TargetLocation.struct_class = Types::TargetLocation
+
+    TargetLocations.member = Shapes::ShapeRef.new(shape: TargetLocation)
 
     TargetMap.key = Shapes::ShapeRef.new(shape: TargetMapKey)
     TargetMap.value = Shapes::ShapeRef.new(shape: TargetMapValueList)

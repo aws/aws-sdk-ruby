@@ -213,10 +213,10 @@ module Aws::WorkSpaces
     # directory.
     #
     # @option params [required, String] :directory_id
-    #   The ID of the directory.
+    #   The identifier of the directory.
     #
     # @option params [required, Array<String>] :group_ids
-    #   The IDs of one or more IP access control groups.
+    #   The identifiers of one or more IP access control groups.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -242,7 +242,7 @@ module Aws::WorkSpaces
     # CIDR address ranges specified in the rules.
     #
     # @option params [required, String] :group_id
-    #   The ID of the group.
+    #   The identifier of the group.
     #
     # @option params [required, Array<Types::IpRuleItem>] :user_rules
     #   The rules to add to the group.
@@ -328,7 +328,8 @@ module Aws::WorkSpaces
     # Creates the specified tags for the specified WorkSpace.
     #
     # @option params [required, String] :resource_id
-    #   The ID of the WorkSpace. To find this ID, use DescribeWorkspaces.
+    #   The identifier of the WorkSpace. To find this ID, use
+    #   DescribeWorkspaces.
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   The tags. Each WorkSpace can have a maximum of 50 tags.
@@ -454,7 +455,7 @@ module Aws::WorkSpaces
     # directory.
     #
     # @option params [required, String] :group_id
-    #   The ID of the IP access control group.
+    #   The identifier of the IP access control group.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -476,7 +477,8 @@ module Aws::WorkSpaces
     # Deletes the specified tags from the specified WorkSpace.
     #
     # @option params [required, String] :resource_id
-    #   The ID of the WorkSpace. To find this ID, use DescribeWorkspaces.
+    #   The identifier of the WorkSpace. To find this ID, use
+    #   DescribeWorkspaces.
     #
     # @option params [required, Array<String>] :tag_keys
     #   The tag keys.
@@ -499,14 +501,97 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Deletes the specified image from your account. To delete an image, you
+    # must first delete any bundles that are associated with the image.
+    #
+    # @option params [required, String] :image_id
+    #   The identifier of the image.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_workspace_image({
+    #     image_id: "WorkspaceImageId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteWorkspaceImage AWS API Documentation
+    #
+    # @overload delete_workspace_image(params = {})
+    # @param [Hash] params ({})
+    def delete_workspace_image(params = {}, options = {})
+      req = build_request(:delete_workspace_image, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list that describes the configuration of bring your own
+    # license (BYOL) for the specified account.
+    #
+    # @return [Types::DescribeAccountResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAccountResult#dedicated_tenancy_support #dedicated_tenancy_support} => String
+    #   * {Types::DescribeAccountResult#dedicated_tenancy_management_cidr_range #dedicated_tenancy_management_cidr_range} => String
+    #
+    # @example Response structure
+    #
+    #   resp.dedicated_tenancy_support #=> String, one of "ENABLED", "DISABLED"
+    #   resp.dedicated_tenancy_management_cidr_range #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeAccount AWS API Documentation
+    #
+    # @overload describe_account(params = {})
+    # @param [Hash] params ({})
+    def describe_account(params = {}, options = {})
+      req = build_request(:describe_account, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list that describes modifications to the configuration of
+    # bring your own license (BYOL) for the specified account.
+    #
+    # @option params [String] :next_token
+    #   If you received a `NextToken` from a previous call that was paginated,
+    #   provide this token to receive the next set of results.
+    #
+    # @return [Types::DescribeAccountModificationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAccountModificationsResult#account_modifications #account_modifications} => Array&lt;Types::AccountModification&gt;
+    #   * {Types::DescribeAccountModificationsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_account_modifications({
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_modifications #=> Array
+    #   resp.account_modifications[0].modification_state #=> String, one of "PENDING", "COMPLETED", "FAILED"
+    #   resp.account_modifications[0].dedicated_tenancy_support #=> String, one of "ENABLED", "DISABLED"
+    #   resp.account_modifications[0].dedicated_tenancy_management_cidr_range #=> String
+    #   resp.account_modifications[0].start_time #=> Time
+    #   resp.account_modifications[0].error_code #=> String
+    #   resp.account_modifications[0].error_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeAccountModifications AWS API Documentation
+    #
+    # @overload describe_account_modifications(params = {})
+    # @param [Hash] params ({})
+    def describe_account_modifications(params = {}, options = {})
+      req = build_request(:describe_account_modifications, params)
+      req.send_request(options)
+    end
+
     # Describes one or more of your IP access control groups.
     #
     # @option params [Array<String>] :group_ids
-    #   The IDs of one or more IP access control groups.
+    #   The identifiers of one or more IP access control groups.
     #
     # @option params [String] :next_token
-    #   The token for the next set of results. (You received this token from a
-    #   previous call.)
+    #   If you received a `NextToken` from a previous call that was paginated,
+    #   provide this token to receive the next set of results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return.
@@ -547,7 +632,8 @@ module Aws::WorkSpaces
     # Describes the specified tags for the specified WorkSpace.
     #
     # @option params [required, String] :resource_id
-    #   The ID of the WorkSpace. To find this ID, use DescribeWorkspaces.
+    #   The identifier of the WorkSpace. To find this ID, use
+    #   DescribeWorkspaces.
     #
     # @return [Types::DescribeTagsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -574,17 +660,17 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Describes the available WorkSpace bundles.
+    # Retrieves a list that describes the available WorkSpace bundles.
     #
     # You can filter the results using either bundle ID or owner, but not
     # both.
     #
     # @option params [Array<String>] :bundle_ids
-    #   The IDs of the bundles. This parameter cannot be combined with any
-    #   other filter.
+    #   The identifiers of the bundles. You cannot combine this parameter with
+    #   any other filter.
     #
     # @option params [String] :owner
-    #   The owner of the bundles. This parameter cannot be combined with any
+    #   The owner of the bundles. You cannot combine this parameter with any
     #   other filter.
     #
     #   Specify `AMAZON` to describe the bundles provided by AWS or null to
@@ -636,8 +722,8 @@ module Aws::WorkSpaces
     #   directories are retrieved.
     #
     # @option params [String] :next_token
-    #   The token for the next set of results. (You received this token from a
-    #   previous call.)
+    #   If you received a `NextToken` from a previous call that was paginated,
+    #   provide this token to receive the next set of results.
     #
     # @return [Types::DescribeWorkspaceDirectoriesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -685,39 +771,88 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Retrieves a list that describes one or more specified images, if the
+    # image identifiers are provided. Otherwise, all images in the account
+    # are described.
+    #
+    # @option params [Array<String>] :image_ids
+    #   The identifier of the image.
+    #
+    # @option params [String] :next_token
+    #   If you received a `NextToken` from a previous call that was paginated,
+    #   provide this token to receive the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return.
+    #
+    # @return [Types::DescribeWorkspaceImagesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeWorkspaceImagesResult#images #images} => Array&lt;Types::WorkspaceImage&gt;
+    #   * {Types::DescribeWorkspaceImagesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_workspace_images({
+    #     image_ids: ["WorkspaceImageId"],
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.images #=> Array
+    #   resp.images[0].image_id #=> String
+    #   resp.images[0].name #=> String
+    #   resp.images[0].description #=> String
+    #   resp.images[0].operating_system.type #=> String, one of "WINDOWS", "LINUX"
+    #   resp.images[0].state #=> String, one of "AVAILABLE", "PENDING", "ERROR"
+    #   resp.images[0].required_tenancy #=> String, one of "DEFAULT", "DEDICATED"
+    #   resp.images[0].error_code #=> String
+    #   resp.images[0].error_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceImages AWS API Documentation
+    #
+    # @overload describe_workspace_images(params = {})
+    # @param [Hash] params ({})
+    def describe_workspace_images(params = {}, options = {})
+      req = build_request(:describe_workspace_images, params)
+      req.send_request(options)
+    end
+
     # Describes the specified WorkSpaces.
     #
-    # You can filter the results using bundle ID, directory ID, or owner,
-    # but you can specify only one filter at a time.
+    # You can filter the results by using the bundle identifier, directory
+    # identifier, or owner, but you can specify only one filter at a time.
     #
     # @option params [Array<String>] :workspace_ids
-    #   The IDs of the WorkSpaces. This parameter cannot be combined with any
-    #   other filter.
+    #   The identifiers of the WorkSpaces. You cannot combine this parameter
+    #   with any other filter.
     #
     #   Because the CreateWorkspaces operation is asynchronous, the identifier
     #   it returns is not immediately available. If you immediately call
     #   DescribeWorkspaces with this identifier, no information is returned.
     #
     # @option params [String] :directory_id
-    #   The ID of the directory. In addition, you can optionally specify a
-    #   specific directory user (see `UserName`). This parameter cannot be
-    #   combined with any other filter.
+    #   The identifier of the directory. In addition, you can optionally
+    #   specify a specific directory user (see `UserName`). You cannot combine
+    #   this parameter with any other filter.
     #
     # @option params [String] :user_name
     #   The name of the directory user. You must specify this parameter with
     #   `DirectoryId`.
     #
     # @option params [String] :bundle_id
-    #   The ID of the bundle. All WorkSpaces that are created from this bundle
-    #   are retrieved. This parameter cannot be combined with any other
-    #   filter.
+    #   The identifier of the bundle. All WorkSpaces that are created from
+    #   this bundle are retrieved. You cannot combine this parameter with any
+    #   other filter.
     #
     # @option params [Integer] :limit
     #   The maximum number of items to return.
     #
     # @option params [String] :next_token
-    #   The token for the next set of results. (You received this token from a
-    #   previous call.)
+    #   If you received a `NextToken` from a previous call that was paginated,
+    #   provide this token to receive the next set of results.
     #
     # @return [Types::DescribeWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -777,8 +912,8 @@ module Aws::WorkSpaces
     #   WorkSpaces.
     #
     # @option params [String] :next_token
-    #   The token for the next set of results. (You received this token from a
-    #   previous call.)
+    #   If you received a `NextToken` from a previous call that was paginated,
+    #   provide this token to receive the next set of results.
     #
     # @return [Types::DescribeWorkspacesConnectionStatusResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -814,10 +949,10 @@ module Aws::WorkSpaces
     # directory.
     #
     # @option params [required, String] :directory_id
-    #   The ID of the directory.
+    #   The identifier of the directory.
     #
     # @option params [required, Array<String>] :group_ids
-    #   The IDs of one or more IP access control groups.
+    #   The identifiers of one or more IP access control groups.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -837,10 +972,134 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Imports the specified Windows 7 or Windows 10 bring your own license
+    # (BYOL) image into Amazon WorkSpaces. The image must be an already
+    # licensed EC2 image that is in your AWS account, and you must own the
+    # image.
+    #
+    # @option params [required, String] :ec2_image_id
+    #   The identifier of the EC2 image.
+    #
+    # @option params [required, String] :ingestion_process
+    #   The ingestion process to be used when importing the image.
+    #
+    # @option params [required, String] :image_name
+    #   The name of the WorkSpace image.
+    #
+    # @option params [required, String] :image_description
+    #   The description of the WorkSpace image.
+    #
+    # @return [Types::ImportWorkspaceImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportWorkspaceImageResult#image_id #image_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_workspace_image({
+    #     ec2_image_id: "Ec2ImageId", # required
+    #     ingestion_process: "BYOL_REGULAR", # required, accepts BYOL_REGULAR, BYOL_GRAPHICS, BYOL_GRAPHICSPRO
+    #     image_name: "WorkspaceImageName", # required
+    #     image_description: "WorkspaceImageDescription", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ImportWorkspaceImage AWS API Documentation
+    #
+    # @overload import_workspace_image(params = {})
+    # @param [Hash] params ({})
+    def import_workspace_image(params = {}, options = {})
+      req = build_request(:import_workspace_image, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks,
+    # that you can use for the network management interface when you enable
+    # bring your own license (BYOL).
+    #
+    # The management network interface is connected to a secure Amazon
+    # WorkSpaces management network. It is used for interactive streaming of
+    # the WorkSpace desktop to Amazon WorkSpaces clients, and to allow
+    # Amazon WorkSpaces to manage the WorkSpace.
+    #
+    # @option params [required, String] :management_cidr_range_constraint
+    #   The IP address range to search. Specify an IP address range that is
+    #   compatible with your network and in CIDR notation (that is, specify
+    #   the range as an IPv4 CIDR block).
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return.
+    #
+    # @option params [String] :next_token
+    #   If you received a `NextToken` from a previous call that was paginated,
+    #   provide this token to receive the next set of results.
+    #
+    # @return [Types::ListAvailableManagementCidrRangesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAvailableManagementCidrRangesResult#management_cidr_ranges #management_cidr_ranges} => Array&lt;String&gt;
+    #   * {Types::ListAvailableManagementCidrRangesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_available_management_cidr_ranges({
+    #     management_cidr_range_constraint: "ManagementCidrRangeConstraint", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.management_cidr_ranges #=> Array
+    #   resp.management_cidr_ranges[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ListAvailableManagementCidrRanges AWS API Documentation
+    #
+    # @overload list_available_management_cidr_ranges(params = {})
+    # @param [Hash] params ({})
+    def list_available_management_cidr_ranges(params = {}, options = {})
+      req = build_request(:list_available_management_cidr_ranges, params)
+      req.send_request(options)
+    end
+
+    # Modifies the configuration of bring your own license (BYOL) for the
+    # specified account.
+    #
+    # @option params [String] :dedicated_tenancy_support
+    #   The status of BYOL.
+    #
+    # @option params [String] :dedicated_tenancy_management_cidr_range
+    #   The IP address range, specified as an IPv4 CIDR block, for the
+    #   management network interface. Specify an IP address range that is
+    #   compatible with your network and in CIDR notation (that is, specify
+    #   the range as an IPv4 CIDR block). The CIDR block size must be /16 (for
+    #   example, 203.0.113.25/16). It must also be specified as available by
+    #   the `ListAvailableManagementCidrRanges` operation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_account({
+    #     dedicated_tenancy_support: "ENABLED", # accepts ENABLED
+    #     dedicated_tenancy_management_cidr_range: "DedicatedTenancyManagementCidrRange",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyAccount AWS API Documentation
+    #
+    # @overload modify_account(params = {})
+    # @param [Hash] params ({})
+    def modify_account(params = {}, options = {})
+      req = build_request(:modify_account, params)
+      req.send_request(options)
+    end
+
     # Modifies the specified WorkSpace properties.
     #
     # @option params [required, String] :workspace_id
-    #   The ID of the WorkSpace.
+    #   The identifier of the WorkSpace.
     #
     # @option params [required, Types::WorkspaceProperties] :workspace_properties
     #   The properties of the WorkSpace.
@@ -878,7 +1137,7 @@ module Aws::WorkSpaces
     # `ADMIN_MAINTENANCE` state.
     #
     # @option params [required, String] :workspace_id
-    #   The ID of the WorkSpace.
+    #   The identifier of the WorkSpace.
     #
     # @option params [required, String] :workspace_state
     #   The WorkSpace state.
@@ -994,7 +1253,7 @@ module Aws::WorkSpaces
     # Removes one or more rules from the specified IP access control group.
     #
     # @option params [required, String] :group_id
-    #   The ID of the group.
+    #   The identifier of the group.
     #
     # @option params [required, Array<String>] :user_rules
     #   The rules to remove from the group.
@@ -1141,7 +1400,7 @@ module Aws::WorkSpaces
     # with the specified rules.
     #
     # @option params [required, String] :group_id
-    #   The ID of the group.
+    #   The identifier of the group.
     #
     # @option params [required, Array<Types::IpRuleItem>] :user_rules
     #   One or more rules.
@@ -1182,7 +1441,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

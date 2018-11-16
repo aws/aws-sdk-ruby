@@ -450,9 +450,9 @@ module Aws::Comprehend
 
     # Creates a new document classifier that you can use to categorize
     # documents. To create a classifier you provide a set of training
-    # documents that are labeled with the categories that you want to use.
-    # After the classifier is trained you can use it to categorize a set of
-    # unlabeled documents into those categories.
+    # documents that labeled with the categories that you want to use. After
+    # the classifier is trained you can use it to categorize a set of
+    # labeled documents into the categories.
     #
     # @option params [required, String] :document_classifier_name
     #   The name of the document classifier.
@@ -473,9 +473,8 @@ module Aws::Comprehend
     #   not need to pass this option.**
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. You can create a document
-    #   classifier in any of the languages supported by Amazon Comprehend.
-    #   However, all documents must be in the same language.
+    #   The language of the input documents. You can specify English ("en")
+    #   or Spanish ("es"). All documents must be in the same language.
     #
     # @return [Types::CreateDocumentClassifierResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -503,6 +502,79 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def create_document_classifier(params = {}, options = {})
       req = build_request(:create_document_classifier, params)
+      req.send_request(options)
+    end
+
+    # Creates an entity recognizer using submitted files. After your
+    # `CreateEntityRecognizer` request is submitted, you can check job
+    # status using the API.
+    #
+    # @option params [required, String] :recognizer_name
+    #   The name given to the newly created recognizer. Recognizer names can
+    #   be a maximum of 256 characters. Alphanumeric characters, hyphens (-)
+    #   and underscores (\_) are allowed. The name must be unique in the
+    #   account/region.
+    #
+    # @option params [required, String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Management
+    #   (IAM) role that grants Amazon Comprehend read access to your input
+    #   data.
+    #
+    # @option params [required, Types::EntityRecognizerInputDataConfig] :input_data_config
+    #   Specifies the format and location of the input data. The S3 bucket
+    #   containing the input data must be located in the same region as the
+    #   entity recognizer being created.
+    #
+    # @option params [String] :client_request_token
+    #   A unique identifier for the request. If you don't set the client
+    #   request token, Amazon Comprehend generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :language_code
+    #   The language of the input documents. All documents must be in the same
+    #   language. Only English ("en") is currently supported.
+    #
+    # @return [Types::CreateEntityRecognizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateEntityRecognizerResponse#entity_recognizer_arn #entity_recognizer_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_entity_recognizer({
+    #     recognizer_name: "ComprehendArnName", # required
+    #     data_access_role_arn: "IamRoleArn", # required
+    #     input_data_config: { # required
+    #       entity_types: [ # required
+    #         {
+    #           type: "EntityTypeName", # required
+    #         },
+    #       ],
+    #       documents: { # required
+    #         s3_uri: "S3Uri", # required
+    #       },
+    #       annotations: {
+    #         s3_uri: "S3Uri", # required
+    #       },
+    #       entity_list: {
+    #         s3_uri: "S3Uri", # required
+    #       },
+    #     },
+    #     client_request_token: "ClientRequestTokenString",
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entity_recognizer_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateEntityRecognizer AWS API Documentation
+    #
+    # @overload create_entity_recognizer(params = {})
+    # @param [Hash] params ({})
+    def create_entity_recognizer(params = {}, options = {})
+      req = build_request(:create_entity_recognizer, params)
       req.send_request(options)
     end
 
@@ -535,6 +607,37 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def delete_document_classifier(params = {}, options = {})
       req = build_request(:delete_document_classifier, params)
+      req.send_request(options)
+    end
+
+    # Deletes an entity recognizer.
+    #
+    # Only those recognizers that are in terminated states (IN\_ERROR,
+    # TRAINED) will be deleted. If an active inference job is using the
+    # model, a `ResourceInUseException` will be returned.
+    #
+    # This is an asynchronous action that puts the recognizer into a
+    # DELETING state, and it is then removed by a background job. Once
+    # removed, the recognizer disappears from your account and is no longer
+    # available for use.
+    #
+    # @option params [required, String] :entity_recognizer_arn
+    #   The Amazon Resource Name (ARN) that identifies the entity recognizer.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_entity_recognizer({
+    #     entity_recognizer_arn: "EntityRecognizerArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DeleteEntityRecognizer AWS API Documentation
+    #
+    # @overload delete_entity_recognizer(params = {})
+    # @param [Hash] params ({})
+    def delete_entity_recognizer(params = {}, options = {})
+      req = build_request(:delete_entity_recognizer, params)
       req.send_request(options)
     end
 
@@ -687,6 +790,7 @@ module Aws::Comprehend
     #   resp.entities_detection_job_properties.message #=> String
     #   resp.entities_detection_job_properties.submit_time #=> Time
     #   resp.entities_detection_job_properties.end_time #=> Time
+    #   resp.entities_detection_job_properties.entity_recognizer_arn #=> String
     #   resp.entities_detection_job_properties.input_data_config.s3_uri #=> String
     #   resp.entities_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.entities_detection_job_properties.output_data_config.s3_uri #=> String
@@ -699,6 +803,56 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def describe_entities_detection_job(params = {}, options = {})
       req = build_request(:describe_entities_detection_job, params)
+      req.send_request(options)
+    end
+
+    # Provides details about an entity recognizer including status, S3
+    # buckets containing training data, recognizer metadata, metrics, and so
+    # on.
+    #
+    # @option params [required, String] :entity_recognizer_arn
+    #   The Amazon Resource Name (ARN) that identifies the entity recognizer.
+    #
+    # @return [Types::DescribeEntityRecognizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEntityRecognizerResponse#entity_recognizer_properties #entity_recognizer_properties} => Types::EntityRecognizerProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_entity_recognizer({
+    #     entity_recognizer_arn: "EntityRecognizerArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entity_recognizer_properties.entity_recognizer_arn #=> String
+    #   resp.entity_recognizer_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
+    #   resp.entity_recognizer_properties.status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "IN_ERROR", "TRAINED"
+    #   resp.entity_recognizer_properties.message #=> String
+    #   resp.entity_recognizer_properties.submit_time #=> Time
+    #   resp.entity_recognizer_properties.end_time #=> Time
+    #   resp.entity_recognizer_properties.training_start_time #=> Time
+    #   resp.entity_recognizer_properties.training_end_time #=> Time
+    #   resp.entity_recognizer_properties.input_data_config.entity_types #=> Array
+    #   resp.entity_recognizer_properties.input_data_config.entity_types[0].type #=> String
+    #   resp.entity_recognizer_properties.input_data_config.documents.s3_uri #=> String
+    #   resp.entity_recognizer_properties.input_data_config.annotations.s3_uri #=> String
+    #   resp.entity_recognizer_properties.input_data_config.entity_list.s3_uri #=> String
+    #   resp.entity_recognizer_properties.recognizer_metadata.number_of_trained_documents #=> Integer
+    #   resp.entity_recognizer_properties.recognizer_metadata.number_of_test_documents #=> Integer
+    #   resp.entity_recognizer_properties.recognizer_metadata.evaluation_metrics.precision #=> Float
+    #   resp.entity_recognizer_properties.recognizer_metadata.evaluation_metrics.recall #=> Float
+    #   resp.entity_recognizer_properties.recognizer_metadata.evaluation_metrics.f1_score #=> Float
+    #   resp.entity_recognizer_properties.recognizer_metadata.entity_types #=> Array
+    #   resp.entity_recognizer_properties.recognizer_metadata.entity_types[0].type #=> String
+    #   resp.entity_recognizer_properties.data_access_role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEntityRecognizer AWS API Documentation
+    #
+    # @overload describe_entity_recognizer(params = {})
+    # @param [Hash] params ({})
+    def describe_entity_recognizer(params = {}, options = {})
+      req = build_request(:describe_entity_recognizer, params)
       req.send_request(options)
     end
 
@@ -1234,6 +1388,7 @@ module Aws::Comprehend
     #   resp.entities_detection_job_properties_list[0].message #=> String
     #   resp.entities_detection_job_properties_list[0].submit_time #=> Time
     #   resp.entities_detection_job_properties_list[0].end_time #=> Time
+    #   resp.entities_detection_job_properties_list[0].entity_recognizer_arn #=> String
     #   resp.entities_detection_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.entities_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.entities_detection_job_properties_list[0].output_data_config.s3_uri #=> String
@@ -1247,6 +1402,79 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def list_entities_detection_jobs(params = {}, options = {})
       req = build_request(:list_entities_detection_jobs, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of the properties of all entity recognizers that you
+    # created, including recognizers currently in training. Allows you to
+    # filter the list of recognizers based on criteria such as status and
+    # submission time. This call returns up to 500 entity recognizers in the
+    # list, with a default number of 100 recognizers in the list.
+    #
+    # The results of this list are not in any particular order. Please get
+    # the list and sort locally if needed.
+    #
+    # @option params [Types::EntityRecognizerFilter] :filter
+    #   Filters the list of entities returned. You can filter on `Status`,
+    #   `SubmitTimeBefore`, or `SubmitTimeAfter`. You can only set one filter
+    #   at a time.
+    #
+    # @option params [String] :next_token
+    #   Identifies the next page of results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return on each page. The default is
+    #   100.
+    #
+    # @return [Types::ListEntityRecognizersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEntityRecognizersResponse#entity_recognizer_properties_list #entity_recognizer_properties_list} => Array&lt;Types::EntityRecognizerProperties&gt;
+    #   * {Types::ListEntityRecognizersResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_entity_recognizers({
+    #     filter: {
+    #       status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, IN_ERROR, TRAINED
+    #       submit_time_before: Time.now,
+    #       submit_time_after: Time.now,
+    #     },
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entity_recognizer_properties_list #=> Array
+    #   resp.entity_recognizer_properties_list[0].entity_recognizer_arn #=> String
+    #   resp.entity_recognizer_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
+    #   resp.entity_recognizer_properties_list[0].status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "IN_ERROR", "TRAINED"
+    #   resp.entity_recognizer_properties_list[0].message #=> String
+    #   resp.entity_recognizer_properties_list[0].submit_time #=> Time
+    #   resp.entity_recognizer_properties_list[0].end_time #=> Time
+    #   resp.entity_recognizer_properties_list[0].training_start_time #=> Time
+    #   resp.entity_recognizer_properties_list[0].training_end_time #=> Time
+    #   resp.entity_recognizer_properties_list[0].input_data_config.entity_types #=> Array
+    #   resp.entity_recognizer_properties_list[0].input_data_config.entity_types[0].type #=> String
+    #   resp.entity_recognizer_properties_list[0].input_data_config.documents.s3_uri #=> String
+    #   resp.entity_recognizer_properties_list[0].input_data_config.annotations.s3_uri #=> String
+    #   resp.entity_recognizer_properties_list[0].input_data_config.entity_list.s3_uri #=> String
+    #   resp.entity_recognizer_properties_list[0].recognizer_metadata.number_of_trained_documents #=> Integer
+    #   resp.entity_recognizer_properties_list[0].recognizer_metadata.number_of_test_documents #=> Integer
+    #   resp.entity_recognizer_properties_list[0].recognizer_metadata.evaluation_metrics.precision #=> Float
+    #   resp.entity_recognizer_properties_list[0].recognizer_metadata.evaluation_metrics.recall #=> Float
+    #   resp.entity_recognizer_properties_list[0].recognizer_metadata.evaluation_metrics.f1_score #=> Float
+    #   resp.entity_recognizer_properties_list[0].recognizer_metadata.entity_types #=> Array
+    #   resp.entity_recognizer_properties_list[0].recognizer_metadata.entity_types[0].type #=> String
+    #   resp.entity_recognizer_properties_list[0].data_access_role_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEntityRecognizers AWS API Documentation
+    #
+    # @overload list_entity_recognizers(params = {})
+    # @param [Hash] params ({})
+    def list_entity_recognizers(params = {}, options = {})
+      req = build_request(:list_entity_recognizers, params)
       req.send_request(options)
     end
 
@@ -1550,6 +1778,11 @@ module Aws::Comprehend
     # Starts an asynchronous entity detection job for a collection of
     # documents. Use the operation to track the status of a job.
     #
+    # This API can be used for either standard entity detection or custom
+    # entity recognition. In order to be used for custom entity recognition,
+    # the optional `EntityRecognizerArn` must be used in order to provide
+    # access to the recognizer being used to detect the custom entity.
+    #
     # @option params [required, Types::InputDataConfig] :input_data_config
     #   Specifies the format and location of the input data for the job.
     #
@@ -1568,6 +1801,11 @@ module Aws::Comprehend
     #
     # @option params [String] :job_name
     #   The identifier of the job.
+    #
+    # @option params [String] :entity_recognizer_arn
+    #   The Amazon Resource Name (ARN) that identifies the specific entity
+    #   recognizer to be used by the `StartEntitiesDetectionJob`. This ARN is
+    #   optional and is only used for a custom entity recognition job.
     #
     # @option params [required, String] :language_code
     #   The language of the input documents. All documents must be in the same
@@ -1601,6 +1839,7 @@ module Aws::Comprehend
     #     },
     #     data_access_role_arn: "IamRoleArn", # required
     #     job_name: "JobName",
+    #     entity_recognizer_arn: "EntityRecognizerArn",
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt
     #     client_request_token: "ClientRequestTokenString",
     #   })
@@ -2006,7 +2245,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.9.1'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -8,6 +8,49 @@
 module Aws::WorkSpaces
   module Types
 
+    # Describes a modification to the configuration of bring your own
+    # license (BYOL) for the specified account.
+    #
+    # @!attribute [rw] modification_state
+    #   The state of the modification to the configuration of BYOL.
+    #   @return [String]
+    #
+    # @!attribute [rw] dedicated_tenancy_support
+    #   The status of BYOL (whether BYOL is being enabled or disabled).
+    #   @return [String]
+    #
+    # @!attribute [rw] dedicated_tenancy_management_cidr_range
+    #   The IP address range, specified as an IPv4 CIDR block, for the
+    #   management network interface used for the account.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp when the modification of the BYOL configuration was
+    #   started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] error_code
+    #   The error code that is returned if the configuration of BYOL cannot
+    #   be modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The text of the error message that is returned if the configuration
+    #   of BYOL cannot be modified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AccountModification AWS API Documentation
+    #
+    class AccountModification < Struct.new(
+      :modification_state,
+      :dedicated_tenancy_support,
+      :dedicated_tenancy_management_cidr_range,
+      :start_time,
+      :error_code,
+      :error_message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateIpGroupsRequest
     #   data as a hash:
     #
@@ -17,11 +60,11 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] directory_id
-    #   The ID of the directory.
+    #   The identifier of the directory.
     #   @return [String]
     #
     # @!attribute [rw] group_ids
-    #   The IDs of one or more IP access control groups.
+    #   The identifiers of one or more IP access control groups.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AssociateIpGroupsRequest AWS API Documentation
@@ -50,7 +93,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] group_id
-    #   The ID of the group.
+    #   The identifier of the group.
     #   @return [String]
     #
     # @!attribute [rw] user_rules
@@ -69,7 +112,7 @@ module Aws::WorkSpaces
     #
     class AuthorizeIpRulesResult < Aws::EmptyStructure; end
 
-    # Information about the compute type.
+    # Describes the compute type.
     #
     # @!attribute [rw] name
     #   The compute type.
@@ -118,7 +161,7 @@ module Aws::WorkSpaces
     end
 
     # @!attribute [rw] group_id
-    #   The ID of the group.
+    #   The identifier of the group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateIpGroupResult AWS API Documentation
@@ -142,7 +185,8 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] resource_id
-    #   The ID of the WorkSpace. To find this ID, use DescribeWorkspaces.
+    #   The identifier of the WorkSpace. To find this ID, use
+    #   DescribeWorkspaces.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -222,10 +266,10 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Information about defaults used to create a WorkSpace.
+    # Describes the default values used to create a WorkSpace.
     #
     # @!attribute [rw] enable_work_docs
-    #   Indicates whether the directory is enabled for Amazon WorkDocs.
+    #   Specifies whether the directory is enabled for Amazon WorkDocs.
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_internet_access
@@ -244,7 +288,7 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] user_enabled_as_local_administrator
-    #   Indicates whether the WorkSpace user is an administrator on the
+    #   Specifies whether the WorkSpace user is an administrator on the
     #   WorkSpace.
     #   @return [Boolean]
     #
@@ -267,7 +311,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] group_id
-    #   The ID of the IP access control group.
+    #   The identifier of the IP access control group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteIpGroupRequest AWS API Documentation
@@ -290,7 +334,8 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] resource_id
-    #   The ID of the WorkSpace. To find this ID, use DescribeWorkspaces.
+    #   The identifier of the WorkSpace. To find this ID, use
+    #   DescribeWorkspaces.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -309,6 +354,92 @@ module Aws::WorkSpaces
     #
     class DeleteTagsResult < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteWorkspaceImageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image_id: "WorkspaceImageId", # required
+    #       }
+    #
+    # @!attribute [rw] image_id
+    #   The identifier of the image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteWorkspaceImageRequest AWS API Documentation
+    #
+    class DeleteWorkspaceImageRequest < Struct.new(
+      :image_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteWorkspaceImageResult AWS API Documentation
+    #
+    class DeleteWorkspaceImageResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DescribeAccountModificationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If you received a `NextToken` from a previous call that was
+    #   paginated, provide this token to receive the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeAccountModificationsRequest AWS API Documentation
+    #
+    class DescribeAccountModificationsRequest < Struct.new(
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_modifications
+    #   The list of modifications to the configuration of BYOL.
+    #   @return [Array<Types::AccountModification>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results, or null if no
+    #   more results are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeAccountModificationsResult AWS API Documentation
+    #
+    class DescribeAccountModificationsResult < Struct.new(
+      :account_modifications,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeAccountRequest AWS API Documentation
+    #
+    class DescribeAccountRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] dedicated_tenancy_support
+    #   The status of BYOL (whether BYOL is enabled or disabled).
+    #   @return [String]
+    #
+    # @!attribute [rw] dedicated_tenancy_management_cidr_range
+    #   The IP address range, specified as an IPv4 CIDR block, used for the
+    #   management network interface.
+    #
+    #   The management network interface is connected to a secure Amazon
+    #   WorkSpaces management network. It is used for interactive streaming
+    #   of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow
+    #   Amazon WorkSpaces to manage the WorkSpace.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeAccountResult AWS API Documentation
+    #
+    class DescribeAccountResult < Struct.new(
+      :dedicated_tenancy_support,
+      :dedicated_tenancy_management_cidr_range)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeIpGroupsRequest
     #   data as a hash:
     #
@@ -319,12 +450,12 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] group_ids
-    #   The IDs of one or more IP access control groups.
+    #   The identifiers of one or more IP access control groups.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results. (You received this token from
-    #   a previous call.)
+    #   If you received a `NextToken` from a previous call that was
+    #   paginated, provide this token to receive the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -345,9 +476,8 @@ module Aws::WorkSpaces
     #   @return [Array<Types::WorkspacesIpGroup>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next set of results, or null if
-    #   there are no more results available. This token is valid for one day
-    #   and must be used within that time frame.
+    #   The token to use to retrieve the next set of results, or null if no
+    #   more results are available.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeIpGroupsResult AWS API Documentation
@@ -366,7 +496,8 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] resource_id
-    #   The ID of the WorkSpace. To find this ID, use DescribeWorkspaces.
+    #   The identifier of the WorkSpace. To find this ID, use
+    #   DescribeWorkspaces.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeTagsRequest AWS API Documentation
@@ -397,12 +528,12 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] bundle_ids
-    #   The IDs of the bundles. This parameter cannot be combined with any
-    #   other filter.
+    #   The identifiers of the bundles. You cannot combine this parameter
+    #   with any other filter.
     #   @return [Array<String>]
     #
     # @!attribute [rw] owner
-    #   The owner of the bundles. This parameter cannot be combined with any
+    #   The owner of the bundles. You cannot combine this parameter with any
     #   other filter.
     #
     #   Specify `AMAZON` to describe the bundles provided by AWS or null to
@@ -455,8 +586,8 @@ module Aws::WorkSpaces
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results. (You received this token from
-    #   a previous call.)
+    #   If you received a `NextToken` from a previous call that was
+    #   paginated, provide this token to receive the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceDirectoriesRequest AWS API Documentation
@@ -472,15 +603,62 @@ module Aws::WorkSpaces
     #   @return [Array<Types::WorkspaceDirectory>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next set of results, or null if
-    #   there are no more results available. This token is valid for one day
-    #   and must be used within that time frame.
+    #   The token to use to retrieve the next set of results, or null if no
+    #   more results are available.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceDirectoriesResult AWS API Documentation
     #
     class DescribeWorkspaceDirectoriesResult < Struct.new(
       :directories,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeWorkspaceImagesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image_ids: ["WorkspaceImageId"],
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] image_ids
+    #   The identifier of the image.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   If you received a `NextToken` from a previous call that was
+    #   paginated, provide this token to receive the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceImagesRequest AWS API Documentation
+    #
+    class DescribeWorkspaceImagesRequest < Struct.new(
+      :image_ids,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] images
+    #   Information about the images.
+    #   @return [Array<Types::WorkspaceImage>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results, or null if no
+    #   more results are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceImagesResult AWS API Documentation
+    #
+    class DescribeWorkspaceImagesResult < Struct.new(
+      :images,
       :next_token)
       include Aws::Structure
     end
@@ -499,8 +677,8 @@ module Aws::WorkSpaces
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results. (You received this token from
-    #   a previous call.)
+    #   If you received a `NextToken` from a previous call that was
+    #   paginated, provide this token to receive the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesConnectionStatusRequest AWS API Documentation
@@ -516,8 +694,8 @@ module Aws::WorkSpaces
     #   @return [Array<Types::WorkspaceConnectionStatus>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next set of results, or null if
-    #   there are no more results available.
+    #   The token to use to retrieve the next set of results, or null if no
+    #   more results are available.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesConnectionStatusResult AWS API Documentation
@@ -541,8 +719,8 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] workspace_ids
-    #   The IDs of the WorkSpaces. This parameter cannot be combined with
-    #   any other filter.
+    #   The identifiers of the WorkSpaces. You cannot combine this parameter
+    #   with any other filter.
     #
     #   Because the CreateWorkspaces operation is asynchronous, the
     #   identifier it returns is not immediately available. If you
@@ -551,9 +729,9 @@ module Aws::WorkSpaces
     #   @return [Array<String>]
     #
     # @!attribute [rw] directory_id
-    #   The ID of the directory. In addition, you can optionally specify a
-    #   specific directory user (see `UserName`). This parameter cannot be
-    #   combined with any other filter.
+    #   The identifier of the directory. In addition, you can optionally
+    #   specify a specific directory user (see `UserName`). You cannot
+    #   combine this parameter with any other filter.
     #   @return [String]
     #
     # @!attribute [rw] user_name
@@ -562,9 +740,9 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] bundle_id
-    #   The ID of the bundle. All WorkSpaces that are created from this
-    #   bundle are retrieved. This parameter cannot be combined with any
-    #   other filter.
+    #   The identifier of the bundle. All WorkSpaces that are created from
+    #   this bundle are retrieved. You cannot combine this parameter with
+    #   any other filter.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -572,8 +750,8 @@ module Aws::WorkSpaces
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results. (You received this token from
-    #   a previous call.)
+    #   If you received a `NextToken` from a previous call that was
+    #   paginated, provide this token to receive the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesRequest AWS API Documentation
@@ -596,9 +774,8 @@ module Aws::WorkSpaces
     #   @return [Array<Types::Workspace>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next set of results, or null if
-    #   there are no more results available. This token is valid for one day
-    #   and must be used within that time frame.
+    #   The token to use to retrieve the next set of results, or null if no
+    #   more results are available.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesResult AWS API Documentation
@@ -618,11 +795,11 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] directory_id
-    #   The ID of the directory.
+    #   The identifier of the directory.
     #   @return [String]
     #
     # @!attribute [rw] group_ids
-    #   The IDs of one or more IP access control groups.
+    #   The identifiers of one or more IP access control groups.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DisassociateIpGroupsRequest AWS API Documentation
@@ -637,18 +814,19 @@ module Aws::WorkSpaces
     #
     class DisassociateIpGroupsResult < Aws::EmptyStructure; end
 
-    # Information about a WorkSpace that could not be created.
+    # Describes a WorkSpace that cannot be created.
     #
     # @!attribute [rw] workspace_request
     #   Information about the WorkSpace.
     #   @return [Types::WorkspaceRequest]
     #
     # @!attribute [rw] error_code
-    #   The error code.
+    #   The error code that is returned if the WorkSpace cannot be created.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   The textual error message.
+    #   The text of the error message that is returned if the WorkSpace
+    #   cannot be created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/FailedCreateWorkspaceRequest AWS API Documentation
@@ -660,21 +838,21 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Information about a WorkSpace that could not be rebooted
-    # (RebootWorkspaces), rebuilt (RebuildWorkspaces), terminated
-    # (TerminateWorkspaces), started (StartWorkspaces), or stopped
-    # (StopWorkspaces).
+    # Describes a WorkSpace that could not be rebooted. (RebootWorkspaces),
+    # rebuilt (RebuildWorkspaces), terminated (TerminateWorkspaces), started
+    # (StartWorkspaces), or stopped (StopWorkspaces).
     #
     # @!attribute [rw] workspace_id
     #   The identifier of the WorkSpace.
     #   @return [String]
     #
     # @!attribute [rw] error_code
-    #   The error code.
+    #   The error code that is returned if the WorkSpace cannot be rebooted.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   The textual error message.
+    #   The text of the error message that is returned if the WorkSpace
+    #   cannot be rebooted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/FailedWorkspaceChangeRequest AWS API Documentation
@@ -686,7 +864,54 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Information about a rule for an IP access control group.
+    # @note When making an API call, you may pass ImportWorkspaceImageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         ec2_image_id: "Ec2ImageId", # required
+    #         ingestion_process: "BYOL_REGULAR", # required, accepts BYOL_REGULAR, BYOL_GRAPHICS, BYOL_GRAPHICSPRO
+    #         image_name: "WorkspaceImageName", # required
+    #         image_description: "WorkspaceImageDescription", # required
+    #       }
+    #
+    # @!attribute [rw] ec2_image_id
+    #   The identifier of the EC2 image.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingestion_process
+    #   The ingestion process to be used when importing the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_name
+    #   The name of the WorkSpace image.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_description
+    #   The description of the WorkSpace image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ImportWorkspaceImageRequest AWS API Documentation
+    #
+    class ImportWorkspaceImageRequest < Struct.new(
+      :ec2_image_id,
+      :ingestion_process,
+      :image_name,
+      :image_description)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_id
+    #   The identifier of the WorkSpace image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ImportWorkspaceImageResult AWS API Documentation
+    #
+    class ImportWorkspaceImageResult < Struct.new(
+      :image_id)
+      include Aws::Structure
+    end
+
+    # Describes a rule for an IP access control group.
     #
     # @note When making an API call, you may pass IpRuleItem
     #   data as a hash:
@@ -712,7 +937,58 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Information about a WorkSpace modification.
+    # @note When making an API call, you may pass ListAvailableManagementCidrRangesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         management_cidr_range_constraint: "ManagementCidrRangeConstraint", # required
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] management_cidr_range_constraint
+    #   The IP address range to search. Specify an IP address range that is
+    #   compatible with your network and in CIDR notation (that is, specify
+    #   the range as an IPv4 CIDR block).
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If you received a `NextToken` from a previous call that was
+    #   paginated, provide this token to receive the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ListAvailableManagementCidrRangesRequest AWS API Documentation
+    #
+    class ListAvailableManagementCidrRangesRequest < Struct.new(
+      :management_cidr_range_constraint,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] management_cidr_ranges
+    #   The list of available IP address ranges, specified as IPv4 CIDR
+    #   blocks.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results, or null if no
+    #   more results are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ListAvailableManagementCidrRangesResult AWS API Documentation
+    #
+    class ListAvailableManagementCidrRangesResult < Struct.new(
+      :management_cidr_ranges,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Describes a WorkSpace modification.
     #
     # @!attribute [rw] resource
     #   The resource.
@@ -730,6 +1006,39 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ModifyAccountRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dedicated_tenancy_support: "ENABLED", # accepts ENABLED
+    #         dedicated_tenancy_management_cidr_range: "DedicatedTenancyManagementCidrRange",
+    #       }
+    #
+    # @!attribute [rw] dedicated_tenancy_support
+    #   The status of BYOL.
+    #   @return [String]
+    #
+    # @!attribute [rw] dedicated_tenancy_management_cidr_range
+    #   The IP address range, specified as an IPv4 CIDR block, for the
+    #   management network interface. Specify an IP address range that is
+    #   compatible with your network and in CIDR notation (that is, specify
+    #   the range as an IPv4 CIDR block). The CIDR block size must be /16
+    #   (for example, 203.0.113.25/16). It must also be specified as
+    #   available by the `ListAvailableManagementCidrRanges` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyAccountRequest AWS API Documentation
+    #
+    class ModifyAccountRequest < Struct.new(
+      :dedicated_tenancy_support,
+      :dedicated_tenancy_management_cidr_range)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyAccountResult AWS API Documentation
+    #
+    class ModifyAccountResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass ModifyWorkspacePropertiesRequest
     #   data as a hash:
     #
@@ -745,7 +1054,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] workspace_id
-    #   The ID of the WorkSpace.
+    #   The identifier of the WorkSpace.
     #   @return [String]
     #
     # @!attribute [rw] workspace_properties
@@ -773,7 +1082,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] workspace_id
-    #   The ID of the WorkSpace.
+    #   The identifier of the WorkSpace.
     #   @return [String]
     #
     # @!attribute [rw] workspace_state
@@ -792,7 +1101,20 @@ module Aws::WorkSpaces
     #
     class ModifyWorkspaceStateResult < Aws::EmptyStructure; end
 
-    # Information used to reboot a WorkSpace.
+    # The operating system that the image is running.
+    #
+    # @!attribute [rw] type
+    #   The operating system.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/OperatingSystem AWS API Documentation
+    #
+    class OperatingSystem < Struct.new(
+      :type)
+      include Aws::Structure
+    end
+
+    # Describes the information used to reboot a WorkSpace.
     #
     # @note When making an API call, you may pass RebootRequest
     #   data as a hash:
@@ -802,7 +1124,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] workspace_id
-    #   The ID of the WorkSpace.
+    #   The identifier of the WorkSpace.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebootRequest AWS API Documentation
@@ -845,7 +1167,7 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Information used to rebuild a WorkSpace.
+    # Describes the information used to rebuild a WorkSpace.
     #
     # @note When making an API call, you may pass RebuildRequest
     #   data as a hash:
@@ -855,7 +1177,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] workspace_id
-    #   The ID of the WorkSpace.
+    #   The identifier of the WorkSpace.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebuildRequest AWS API Documentation
@@ -888,7 +1210,7 @@ module Aws::WorkSpaces
     end
 
     # @!attribute [rw] failed_requests
-    #   Information about the WorkSpace if it could not be rebuilt.
+    #   Information about the WorkSpace that could not be rebuilt.
     #   @return [Array<Types::FailedWorkspaceChangeRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebuildWorkspacesResult AWS API Documentation
@@ -907,7 +1229,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] group_id
-    #   The ID of the group.
+    #   The identifier of the group.
     #   @return [String]
     #
     # @!attribute [rw] user_rules
@@ -926,7 +1248,7 @@ module Aws::WorkSpaces
     #
     class RevokeIpRulesResult < Aws::EmptyStructure; end
 
-    # Information about the root volume for a WorkSpace bundle.
+    # Describes the root volume for a WorkSpace bundle.
     #
     # @!attribute [rw] capacity
     #   The size of the root volume.
@@ -949,7 +1271,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] workspace_id
-    #   The ID of the WorkSpace.
+    #   The identifier of the WorkSpace.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StartRequest AWS API Documentation
@@ -992,7 +1314,7 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Information used to stop a WorkSpace.
+    # Describes the information used to stop a WorkSpace.
     #
     # @note When making an API call, you may pass StopRequest
     #   data as a hash:
@@ -1002,7 +1324,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] workspace_id
-    #   The ID of the WorkSpace.
+    #   The identifier of the WorkSpace.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StopRequest AWS API Documentation
@@ -1045,7 +1367,7 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Information about a tag.
+    # Describes a tag.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -1071,7 +1393,7 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Information used to terminate a WorkSpace.
+    # Describes the information used to terminate a WorkSpace.
     #
     # @note When making an API call, you may pass TerminateRequest
     #   data as a hash:
@@ -1081,7 +1403,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] workspace_id
-    #   The ID of the WorkSpace.
+    #   The identifier of the WorkSpace.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/TerminateRequest AWS API Documentation
@@ -1138,7 +1460,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] group_id
-    #   The ID of the group.
+    #   The identifier of the group.
     #   @return [String]
     #
     # @!attribute [rw] user_rules
@@ -1157,7 +1479,7 @@ module Aws::WorkSpaces
     #
     class UpdateRulesOfIpGroupResult < Aws::EmptyStructure; end
 
-    # Information about the user storage for a WorkSpace bundle.
+    # Describes the user storage for a WorkSpace bundle.
     #
     # @!attribute [rw] capacity
     #   The size of the user storage.
@@ -1170,7 +1492,7 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Information about a WorkSpace.
+    # Describes a WorkSpace.
     #
     # @!attribute [rw] workspace_id
     #   The identifier of the WorkSpace.
@@ -1202,12 +1524,12 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   If the WorkSpace could not be created, contains a textual error
-    #   message that describes the failure.
+    #   The text of the error message that is returned if the WorkSpace
+    #   cannot be created.
     #   @return [String]
     #
     # @!attribute [rw] error_code
-    #   If the WorkSpace could not be created, contains the error code.
+    #   The error code that is returned if the WorkSpace cannot be created.
     #   @return [String]
     #
     # @!attribute [rw] computer_name
@@ -1255,7 +1577,7 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Information about a WorkSpace bundle.
+    # Describes a WorkSpace bundle.
     #
     # @!attribute [rw] bundle_id
     #   The bundle identifier.
@@ -1307,7 +1629,7 @@ module Aws::WorkSpaces
     # Describes the connection status of a WorkSpace.
     #
     # @!attribute [rw] workspace_id
-    #   The ID of the WorkSpace.
+    #   The identifier of the WorkSpace.
     #   @return [String]
     #
     # @!attribute [rw] connection_state
@@ -1316,7 +1638,7 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] connection_state_check_timestamp
-    #   The timestamp of the connection state check.
+    #   The timestamp of the connection status check.
     #   @return [Time]
     #
     # @!attribute [rw] last_known_user_connection_timestamp
@@ -1333,8 +1655,8 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Information about an AWS Directory Service directory for use with
-    # Amazon WorkSpaces.
+    # Describes an AWS Directory Service directory that is used with Amazon
+    # WorkSpaces.
     #
     # @!attribute [rw] directory_id
     #   The directory identifier.
@@ -1413,7 +1735,57 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Information about a WorkSpace.
+    # Describes a WorkSpace image.
+    #
+    # @!attribute [rw] image_id
+    #   The identifier of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] operating_system
+    #   The operating system that the image is running.
+    #   @return [Types::OperatingSystem]
+    #
+    # @!attribute [rw] state
+    #   The status of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] required_tenancy
+    #   Specifies whether the image is running on dedicated hardware. When
+    #   bring your own license (BYOL) is enabled, this value is set to
+    #   DEDICATED.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code that is returned for the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The text of the error message that is returned for the image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceImage AWS API Documentation
+    #
+    class WorkspaceImage < Struct.new(
+      :image_id,
+      :name,
+      :description,
+      :operating_system,
+      :state,
+      :required_tenancy,
+      :error_code,
+      :error_message)
+      include Aws::Structure
+    end
+
+    # Describes a WorkSpace.
     #
     # @note When making an API call, you may pass WorkspaceProperties
     #   data as a hash:
@@ -1468,7 +1840,7 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Information used to create a WorkSpace.
+    # Describes the information used to create a WorkSpace.
     #
     # @note When making an API call, you may pass WorkspaceRequest
     #   data as a hash:
@@ -1545,10 +1917,10 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Information about an IP access control group.
+    # Describes an IP access control group.
     #
     # @!attribute [rw] group_id
-    #   The ID of the group.
+    #   The identifier of the group.
     #   @return [String]
     #
     # @!attribute [rw] group_name

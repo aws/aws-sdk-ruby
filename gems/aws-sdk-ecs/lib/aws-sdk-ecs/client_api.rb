@@ -101,6 +101,7 @@ module Aws::ECS
     HostVolumeProperties = Shapes::StructureShape.new(name: 'HostVolumeProperties')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
+    IpcMode = Shapes::StringShape.new(name: 'IpcMode')
     KernelCapabilities = Shapes::StructureShape.new(name: 'KernelCapabilities')
     KeyValuePair = Shapes::StructureShape.new(name: 'KeyValuePair')
     LaunchType = Shapes::StringShape.new(name: 'LaunchType')
@@ -139,6 +140,7 @@ module Aws::ECS
     NetworkInterfaces = Shapes::ListShape.new(name: 'NetworkInterfaces')
     NetworkMode = Shapes::StringShape.new(name: 'NetworkMode')
     NoUpdateAvailableException = Shapes::StructureShape.new(name: 'NoUpdateAvailableException')
+    PidMode = Shapes::StringShape.new(name: 'PidMode')
     PlacementConstraint = Shapes::StructureShape.new(name: 'PlacementConstraint')
     PlacementConstraintType = Shapes::StringShape.new(name: 'PlacementConstraintType')
     PlacementConstraints = Shapes::ListShape.new(name: 'PlacementConstraints')
@@ -775,6 +777,8 @@ module Aws::ECS
     RegisterTaskDefinitionRequest.add_member(:cpu, Shapes::ShapeRef.new(shape: String, location_name: "cpu"))
     RegisterTaskDefinitionRequest.add_member(:memory, Shapes::ShapeRef.new(shape: String, location_name: "memory"))
     RegisterTaskDefinitionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    RegisterTaskDefinitionRequest.add_member(:pid_mode, Shapes::ShapeRef.new(shape: PidMode, location_name: "pidMode"))
+    RegisterTaskDefinitionRequest.add_member(:ipc_mode, Shapes::ShapeRef.new(shape: IpcMode, location_name: "ipcMode"))
     RegisterTaskDefinitionRequest.struct_class = Types::RegisterTaskDefinitionRequest
 
     RegisterTaskDefinitionResponse.add_member(:task_definition, Shapes::ShapeRef.new(shape: TaskDefinition, location_name: "taskDefinition"))
@@ -999,6 +1003,8 @@ module Aws::ECS
     TaskDefinition.add_member(:requires_compatibilities, Shapes::ShapeRef.new(shape: CompatibilityList, location_name: "requiresCompatibilities"))
     TaskDefinition.add_member(:cpu, Shapes::ShapeRef.new(shape: String, location_name: "cpu"))
     TaskDefinition.add_member(:memory, Shapes::ShapeRef.new(shape: String, location_name: "memory"))
+    TaskDefinition.add_member(:pid_mode, Shapes::ShapeRef.new(shape: PidMode, location_name: "pidMode"))
+    TaskDefinition.add_member(:ipc_mode, Shapes::ShapeRef.new(shape: IpcMode, location_name: "ipcMode"))
     TaskDefinition.struct_class = Types::TaskDefinition
 
     TaskDefinitionFieldList.member = Shapes::ShapeRef.new(shape: TaskDefinitionField)

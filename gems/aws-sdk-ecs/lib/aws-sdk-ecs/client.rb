@@ -1410,6 +1410,8 @@ module Aws::ECS
     #   resp.task_definition.requires_compatibilities[0] #=> String, one of "EC2", "FARGATE"
     #   resp.task_definition.cpu #=> String
     #   resp.task_definition.memory #=> String
+    #   resp.task_definition.pid_mode #=> String, one of "host", "task"
+    #   resp.task_definition.ipc_mode #=> String, one of "host", "task", "none"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterTaskDefinition AWS API Documentation
     #
@@ -2064,6 +2066,8 @@ module Aws::ECS
     #   resp.task_definition.requires_compatibilities[0] #=> String, one of "EC2", "FARGATE"
     #   resp.task_definition.cpu #=> String
     #   resp.task_definition.memory #=> String
+    #   resp.task_definition.pid_mode #=> String, one of "host", "task"
+    #   resp.task_definition.ipc_mode #=> String, one of "host", "task", "none"
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -3425,8 +3429,8 @@ module Aws::ECS
     #   Docker network mode is `bridge`. If you are using the Fargate launch
     #   type, the `awsvpc` network mode is required. If you are using the EC2
     #   launch type, any network mode can be used. If the network mode is set
-    #   to `none`, you can't specify port mappings in your container
-    #   definitions, and the task's containers do not have external
+    #   to `none`, you cannot specify port mappings in your container
+    #   definitions, and the tasks containers do not have external
     #   connectivity. The `host` and `awsvpc` network modes offer the highest
     #   networking performance for containers because they use the EC2 network
     #   stack instead of the virtualized network stack provided by the
@@ -3439,18 +3443,26 @@ module Aws::ECS
     #   port mappings.
     #
     #   If the network mode is `awsvpc`, the task is allocated an elastic
-    #   network interface, and you must specify a NetworkConfiguration when
-    #   you create a service or run a task with the task definition. For more
-    #   information, see [Task Networking][1] in the *Amazon Elastic Container
-    #   Service Developer Guide*.
+    #   network interface, and you must specify a NetworkConfiguration value
+    #   when you create a service or run a task with the task definition. For
+    #   more information, see [Task Networking][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
     #
-    #   If the network mode is `host`, you can't run multiple instantiations
+    #   <note markdown="1"> Currently, only Amazon ECS-optimized AMIs, other Amazon Linux variants
+    #   with the `ecs-init` package, or AWS Fargate infrastructure support the
+    #   `awsvpc` network mode.
+    #
+    #    </note>
+    #
+    #   If the network mode is `host`, you cannot run multiple instantiations
     #   of the same task on a single container instance when port mappings are
     #   used.
     #
     #   Docker for Windows uses different network modes than Docker for Linux.
     #   When you register a task definition with Windows containers, you must
-    #   not specify a network mode.
+    #   not specify a network mode. If you use the console to register a task
+    #   definition with Windows containers, you must choose the `<default>`
+    #   network mode object.
     #
     #   For more information, see [Network settings][2] in the *Docker run
     #   reference*.
@@ -3526,11 +3538,11 @@ module Aws::ECS
     #
     #    </note>
     #
-    #   If you are using the EC2 launch type, this field is optional.
+    #   If using the EC2 launch type, this field is optional.
     #
-    #   If you are using the Fargate launch type, this field is required and
-    #   you must use one of the following values, which determines your range
-    #   of supported values for the `cpu` parameter:
+    #   If using the Fargate launch type, this field is required and you must
+    #   use one of the following values, which determines your range of
+    #   supported values for the `cpu` parameter:
     #
     #   * 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available `cpu` values: 256
     #     (.25 vCPU)
@@ -3553,6 +3565,70 @@ module Aws::ECS
     #   optional value, both of which you define. Tag keys can have a maximum
     #   character length of 128 characters, and tag values can have a maximum
     #   length of 256 characters.
+    #
+    # @option params [String] :pid_mode
+    #   The process namespace to use for the containers in the task. The valid
+    #   values are `host` or `task`. If `host` is specified, then all
+    #   containers within the tasks that specified the `host` PID mode on the
+    #   same container instance share the same IPC resources with the host
+    #   Amazon EC2 instance. If `task` is specified, all containers within the
+    #   specified task share the same process namespace. If no value is
+    #   specified, the default is a private namespace. For more information,
+    #   see [PID settings][1] in the *Docker run reference*.
+    #
+    #   If the `host` PID mode is used, be aware that there is a heightened
+    #   risk of undesired process namespace expose. For more information, see
+    #   [Docker security][2].
+    #
+    #   <note markdown="1"> This parameter is not supported for Windows containers or tasks using
+    #   the Fargate launch type.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/reference/run/#pid-settings---pid
+    #   [2]: https://docs.docker.com/engine/security/security/
+    #
+    # @option params [String] :ipc_mode
+    #   The IPC resource namespace to use for the containers in the task. The
+    #   valid values are `host`, `task`, or `none`. If `host` is specified,
+    #   then all containers within the tasks that specified the `host` IPC
+    #   mode on the same container instance share the same IPC resources with
+    #   the host Amazon EC2 instance. If `task` is specified, all containers
+    #   within the specified task share the same IPC resources. If `none` is
+    #   specified, then IPC resources within the containers of a task are
+    #   private and not shared with other containers in a task or on the
+    #   container instance. If no value is specified, then the IPC resource
+    #   namespace sharing depends on the Docker daemon setting on the
+    #   container instance. For more information, see [IPC settings][1] in the
+    #   *Docker run reference*.
+    #
+    #   If the `host` IPC mode is used, be aware that there is a heightened
+    #   risk of undesired IPC namespace expose. For more information, see
+    #   [Docker security][2].
+    #
+    #   If you are setting namespaced kernel parameters using `systemControls`
+    #   for the containers in the task, the following will apply to your IPC
+    #   resource namespace. For more information, see [System Controls][3] in
+    #   the *Amazon Elastic Container Service Developer Guide*.
+    #
+    #   * For tasks that use the `host` IPC mode, IPC namespace related
+    #     `systemControls` are not supported.
+    #
+    #   * For tasks that use the `task` IPC mode, IPC namespace related
+    #     `systemControls` will apply to all containers within a task.
+    #
+    #   <note markdown="1"> This parameter is not supported for Windows containers or tasks using
+    #   the Fargate launch type.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/reference/run/#ipc-settings---ipc
+    #   [2]: https://docs.docker.com/engine/security/security/
+    #   [3]: http://docs.aws.amazon.com/AmazonECS/latest/developerguidetask_definition_parameters.html
     #
     # @return [Types::RegisterTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3773,6 +3849,8 @@ module Aws::ECS
     #         value: "TagValue",
     #       },
     #     ],
+    #     pid_mode: "host", # accepts host, task
+    #     ipc_mode: "host", # accepts host, task, none
     #   })
     #
     # @example Response structure
@@ -3890,6 +3968,8 @@ module Aws::ECS
     #   resp.task_definition.requires_compatibilities[0] #=> String, one of "EC2", "FARGATE"
     #   resp.task_definition.cpu #=> String
     #   resp.task_definition.memory #=> String
+    #   resp.task_definition.pid_mode #=> String, one of "host", "task"
+    #   resp.task_definition.ipc_mode #=> String, one of "host", "task", "none"
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -5327,7 +5407,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.23.1'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -489,9 +489,9 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can create a document
-    #   classifier in any of the languages supported by Amazon Comprehend.
-    #   However, all documents must be in the same language.
+    #   The language of the input documents. You can specify English
+    #   ("en") or Spanish ("es"). All documents must be in the same
+    #   language.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateDocumentClassifierRequest AWS API Documentation
@@ -517,6 +517,87 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateEntityRecognizerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         recognizer_name: "ComprehendArnName", # required
+    #         data_access_role_arn: "IamRoleArn", # required
+    #         input_data_config: { # required
+    #           entity_types: [ # required
+    #             {
+    #               type: "EntityTypeName", # required
+    #             },
+    #           ],
+    #           documents: { # required
+    #             s3_uri: "S3Uri", # required
+    #           },
+    #           annotations: {
+    #             s3_uri: "S3Uri", # required
+    #           },
+    #           entity_list: {
+    #             s3_uri: "S3Uri", # required
+    #           },
+    #         },
+    #         client_request_token: "ClientRequestTokenString",
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #       }
+    #
+    # @!attribute [rw] recognizer_name
+    #   The name given to the newly created recognizer. Recognizer names can
+    #   be a maximum of 256 characters. Alphanumeric characters, hyphens (-)
+    #   and underscores (\_) are allowed. The name must be unique in the
+    #   account/region.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Management
+    #   (IAM) role that grants Amazon Comprehend read access to your input
+    #   data.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_data_config
+    #   Specifies the format and location of the input data. The S3 bucket
+    #   containing the input data must be located in the same region as the
+    #   entity recognizer being created.
+    #   @return [Types::EntityRecognizerInputDataConfig]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique identifier for the request. If you don't set the client
+    #   request token, Amazon Comprehend generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language of the input documents. All documents must be in the
+    #   same language. Only English ("en") is currently supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateEntityRecognizerRequest AWS API Documentation
+    #
+    class CreateEntityRecognizerRequest < Struct.new(
+      :recognizer_name,
+      :data_access_role_arn,
+      :input_data_config,
+      :client_request_token,
+      :language_code)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entity_recognizer_arn
+    #   The Amazon Resource Name (ARN) that identifies the entity
+    #   recognizer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateEntityRecognizerResponse AWS API Documentation
+    #
+    class CreateEntityRecognizerResponse < Struct.new(
+      :entity_recognizer_arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteDocumentClassifierRequest
     #   data as a hash:
     #
@@ -539,6 +620,29 @@ module Aws::Comprehend
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DeleteDocumentClassifierResponse AWS API Documentation
     #
     class DeleteDocumentClassifierResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteEntityRecognizerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         entity_recognizer_arn: "EntityRecognizerArn", # required
+    #       }
+    #
+    # @!attribute [rw] entity_recognizer_arn
+    #   The Amazon Resource Name (ARN) that identifies the entity
+    #   recognizer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DeleteEntityRecognizerRequest AWS API Documentation
+    #
+    class DeleteEntityRecognizerRequest < Struct.new(
+      :entity_recognizer_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DeleteEntityRecognizerResponse AWS API Documentation
+    #
+    class DeleteEntityRecognizerResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DescribeDocumentClassificationJobRequest
     #   data as a hash:
@@ -661,6 +765,36 @@ module Aws::Comprehend
     #
     class DescribeEntitiesDetectionJobResponse < Struct.new(
       :entities_detection_job_properties)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeEntityRecognizerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         entity_recognizer_arn: "EntityRecognizerArn", # required
+    #       }
+    #
+    # @!attribute [rw] entity_recognizer_arn
+    #   The Amazon Resource Name (ARN) that identifies the entity
+    #   recognizer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEntityRecognizerRequest AWS API Documentation
+    #
+    class DescribeEntityRecognizerRequest < Struct.new(
+      :entity_recognizer_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entity_recognizer_properties
+    #   Describes information associated with an entity recognizer.
+    #   @return [Types::EntityRecognizerProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEntityRecognizerResponse AWS API Documentation
+    #
+    class DescribeEntityRecognizerResponse < Struct.new(
+      :entity_recognizer_properties)
       include Aws::Structure
     end
 
@@ -1431,6 +1565,11 @@ module Aws::Comprehend
     #   The time that the entities detection job completed
     #   @return [Time]
     #
+    # @!attribute [rw] entity_recognizer_arn
+    #   The Amazon Resource Name (ARN) that identifies the entity
+    #   recognizer.
+    #   @return [String]
+    #
     # @!attribute [rw] input_data_config
     #   The input data configuration that you supplied when you created the
     #   entities detection job.
@@ -1459,6 +1598,7 @@ module Aws::Comprehend
       :message,
       :submit_time,
       :end_time,
+      :entity_recognizer_arn,
       :input_data_config,
       :output_data_config,
       :language_code,
@@ -1506,6 +1646,324 @@ module Aws::Comprehend
       :text,
       :begin_offset,
       :end_offset)
+      include Aws::Structure
+    end
+
+    # Describes the annotations associated with a entity recognizer.
+    #
+    # @note When making an API call, you may pass EntityRecognizerAnnotations
+    #   data as a hash:
+    #
+    #       {
+    #         s3_uri: "S3Uri", # required
+    #       }
+    #
+    # @!attribute [rw] s3_uri
+    #   Specifies the Amazon S3 location where the annotations for an entity
+    #   recognizer are located. The URI must be in the same region as the
+    #   API endpoint that you are calling.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerAnnotations AWS API Documentation
+    #
+    class EntityRecognizerAnnotations < Struct.new(
+      :s3_uri)
+      include Aws::Structure
+    end
+
+    # Describes the training documents submitted with an entity recognizer.
+    #
+    # @note When making an API call, you may pass EntityRecognizerDocuments
+    #   data as a hash:
+    #
+    #       {
+    #         s3_uri: "S3Uri", # required
+    #       }
+    #
+    # @!attribute [rw] s3_uri
+    #   Specifies the Amazon S3 location where the training documents for an
+    #   entity recognizer are located. The URI must be in the same region as
+    #   the API endpoint that you are calling.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerDocuments AWS API Documentation
+    #
+    class EntityRecognizerDocuments < Struct.new(
+      :s3_uri)
+      include Aws::Structure
+    end
+
+    # Describes the entity recognizer submitted with an entity recognizer.
+    #
+    # @note When making an API call, you may pass EntityRecognizerEntityList
+    #   data as a hash:
+    #
+    #       {
+    #         s3_uri: "S3Uri", # required
+    #       }
+    #
+    # @!attribute [rw] s3_uri
+    #   Specifies the Amazon S3 location where the entity list is located.
+    #   The URI must be in the same region as the API endpoint that you are
+    #   calling.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerEntityList AWS API Documentation
+    #
+    class EntityRecognizerEntityList < Struct.new(
+      :s3_uri)
+      include Aws::Structure
+    end
+
+    # Detailed information about the accuracy of an entity recognizer.
+    #
+    # @!attribute [rw] precision
+    #   A measure of the usefulness of the recognizer results in the test
+    #   data. High precision means that the recognizer returned
+    #   substantially more relevant results than irrelevant ones.
+    #   @return [Float]
+    #
+    # @!attribute [rw] recall
+    #   A measure of how complete the recognizer results are for the test
+    #   data. High recall means that the recognizer returned most of the
+    #   relevant results.
+    #   @return [Float]
+    #
+    # @!attribute [rw] f1_score
+    #   A measure of how accurate the recognizer results are for the test
+    #   data. It is derived from the `Precision` and `Recall` values. The
+    #   `F1Score` is the harmonic average of the two scores. The highest
+    #   score is 1, and the worst score is 0.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerEvaluationMetrics AWS API Documentation
+    #
+    class EntityRecognizerEvaluationMetrics < Struct.new(
+      :precision,
+      :recall,
+      :f1_score)
+      include Aws::Structure
+    end
+
+    # Provides information for filtering a list of entity recognizers. You
+    # can only specify one filtering parameter in a request. For more
+    # information, see the operation./&gt;
+    #
+    # @note When making an API call, you may pass EntityRecognizerFilter
+    #   data as a hash:
+    #
+    #       {
+    #         status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, IN_ERROR, TRAINED
+    #         submit_time_before: Time.now,
+    #         submit_time_after: Time.now,
+    #       }
+    #
+    # @!attribute [rw] status
+    #   The status of an entity recognizer.
+    #   @return [String]
+    #
+    # @!attribute [rw] submit_time_before
+    #   Filters the list of entities based on the time that the list was
+    #   submitted for processing. Returns only jobs submitted before the
+    #   specified time. Jobs are returned in descending order, newest to
+    #   oldest.
+    #   @return [Time]
+    #
+    # @!attribute [rw] submit_time_after
+    #   Filters the list of entities based on the time that the list was
+    #   submitted for processing. Returns only jobs submitted after the
+    #   specified time. Jobs are returned in ascending order, oldest to
+    #   newest.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerFilter AWS API Documentation
+    #
+    class EntityRecognizerFilter < Struct.new(
+      :status,
+      :submit_time_before,
+      :submit_time_after)
+      include Aws::Structure
+    end
+
+    # Specifies the format and location of the input data.
+    #
+    # @note When making an API call, you may pass EntityRecognizerInputDataConfig
+    #   data as a hash:
+    #
+    #       {
+    #         entity_types: [ # required
+    #           {
+    #             type: "EntityTypeName", # required
+    #           },
+    #         ],
+    #         documents: { # required
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #         annotations: {
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #         entity_list: {
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] entity_types
+    #   The entity types in the input data for an entity recognizer.
+    #   @return [Array<Types::EntityTypesListItem>]
+    #
+    # @!attribute [rw] documents
+    #   S3 location of the documents folder for an entity recognizer
+    #   @return [Types::EntityRecognizerDocuments]
+    #
+    # @!attribute [rw] annotations
+    #   S3 location of the annotations file for an entity recognizer.
+    #   @return [Types::EntityRecognizerAnnotations]
+    #
+    # @!attribute [rw] entity_list
+    #   S3 location of the entity list for an entity recognizer.
+    #   @return [Types::EntityRecognizerEntityList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerInputDataConfig AWS API Documentation
+    #
+    class EntityRecognizerInputDataConfig < Struct.new(
+      :entity_types,
+      :documents,
+      :annotations,
+      :entity_list)
+      include Aws::Structure
+    end
+
+    # Detailed information about an entity recognizer.
+    #
+    # @!attribute [rw] number_of_trained_documents
+    #   The number of documents in the input data that were used to train
+    #   the entity recognizer. Typically this is 80 to 90 percent of the
+    #   input documents.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_test_documents
+    #   The number of documents in the input data that were used to test the
+    #   entity recognizer. Typically this is 10 to 20 percent of the input
+    #   documents.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] evaluation_metrics
+    #   Detailed information about the accuracy of an entity recognizer.
+    #   @return [Types::EntityRecognizerEvaluationMetrics]
+    #
+    # @!attribute [rw] entity_types
+    #   Entity types from the metadata of an entity recognizer.
+    #   @return [Array<Types::EntityRecognizerMetadataEntityTypesListItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerMetadata AWS API Documentation
+    #
+    class EntityRecognizerMetadata < Struct.new(
+      :number_of_trained_documents,
+      :number_of_test_documents,
+      :evaluation_metrics,
+      :entity_types)
+      include Aws::Structure
+    end
+
+    # Individual item from the list of entity types in the metadata of an
+    # entity recognizer.
+    #
+    # @!attribute [rw] type
+    #   Type of entity from the list of entity types in the metadata of an
+    #   entity recognizer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerMetadataEntityTypesListItem AWS API Documentation
+    #
+    class EntityRecognizerMetadataEntityTypesListItem < Struct.new(
+      :type)
+      include Aws::Structure
+    end
+
+    # Describes information about an entity recognizer.
+    #
+    # @!attribute [rw] entity_recognizer_arn
+    #   The Amazon Resource Name (ARN) that identifies the entity
+    #   recognizer.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language of the input documents. All documents must be in the
+    #   same language. Only English ("en") is currently supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Provides the status of the entity recognizer.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A description of the status of the recognizer.
+    #   @return [String]
+    #
+    # @!attribute [rw] submit_time
+    #   The time that the recognizer was submitted for processing.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time that the recognizer creation completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] training_start_time
+    #   The time that training of the entity recognizer started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] training_end_time
+    #   The time that training of the entity recognizer was completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] input_data_config
+    #   The input data properties of an entity recognizer.
+    #   @return [Types::EntityRecognizerInputDataConfig]
+    #
+    # @!attribute [rw] recognizer_metadata
+    #   Provides information about an entity recognizer.
+    #   @return [Types::EntityRecognizerMetadata]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Management
+    #   (IAM) role that grants Amazon Comprehend read access to your input
+    #   data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerProperties AWS API Documentation
+    #
+    class EntityRecognizerProperties < Struct.new(
+      :entity_recognizer_arn,
+      :language_code,
+      :status,
+      :message,
+      :submit_time,
+      :end_time,
+      :training_start_time,
+      :training_end_time,
+      :input_data_config,
+      :recognizer_metadata,
+      :data_access_role_arn)
+      include Aws::Structure
+    end
+
+    # Information about an individual item on a list of entity types.
+    #
+    # @note When making an API call, you may pass EntityTypesListItem
+    #   data as a hash:
+    #
+    #       {
+    #         type: "EntityTypeName", # required
+    #       }
+    #
+    # @!attribute [rw] type
+    #   Entity type of an item on an entity type list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityTypesListItem AWS API Documentation
+    #
+    class EntityTypesListItem < Struct.new(
+      :type)
       include Aws::Structure
     end
 
@@ -1909,6 +2367,59 @@ module Aws::Comprehend
     #
     class ListEntitiesDetectionJobsResponse < Struct.new(
       :entities_detection_job_properties_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListEntityRecognizersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filter: {
+    #           status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, IN_ERROR, TRAINED
+    #           submit_time_before: Time.now,
+    #           submit_time_after: Time.now,
+    #         },
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] filter
+    #   Filters the list of entities returned. You can filter on `Status`,
+    #   `SubmitTimeBefore`, or `SubmitTimeAfter`. You can only set one
+    #   filter at a time.
+    #   @return [Types::EntityRecognizerFilter]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return on each page. The default is
+    #   100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEntityRecognizersRequest AWS API Documentation
+    #
+    class ListEntityRecognizersRequest < Struct.new(
+      :filter,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entity_recognizer_properties_list
+    #   The list of properties of an entity recognizer.
+    #   @return [Array<Types::EntityRecognizerProperties>]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEntityRecognizersResponse AWS API Documentation
+    #
+    class ListEntityRecognizersResponse < Struct.new(
+      :entity_recognizer_properties_list,
       :next_token)
       include Aws::Structure
     end
@@ -2459,6 +2970,7 @@ module Aws::Comprehend
     #         },
     #         data_access_role_arn: "IamRoleArn", # required
     #         job_name: "JobName",
+    #         entity_recognizer_arn: "EntityRecognizerArn",
     #         language_code: "en", # required, accepts en, es, fr, de, it, pt
     #         client_request_token: "ClientRequestTokenString",
     #       }
@@ -2486,6 +2998,12 @@ module Aws::Comprehend
     #   The identifier of the job.
     #   @return [String]
     #
+    # @!attribute [rw] entity_recognizer_arn
+    #   The Amazon Resource Name (ARN) that identifies the specific entity
+    #   recognizer to be used by the `StartEntitiesDetectionJob`. This ARN
+    #   is optional and is only used for a custom entity recognition job.
+    #   @return [String]
+    #
     # @!attribute [rw] language_code
     #   The language of the input documents. All documents must be in the
     #   same language. You can specify any of the languages supported by
@@ -2510,6 +3028,7 @@ module Aws::Comprehend
       :output_data_config,
       :data_access_role_arn,
       :job_name,
+      :entity_recognizer_arn,
       :language_code,
       :client_request_token)
       include Aws::Structure
