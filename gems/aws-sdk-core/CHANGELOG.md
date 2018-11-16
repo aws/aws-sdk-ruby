@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Adding support for endpoint trait (host prefix) per operation, to disable this feature, set `:disable_host_prefix_injection` to `false` for the client.
+
 3.38.0 (2018-11-12)
 ------------------
 
