@@ -395,7 +395,7 @@ module Aws::S3
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [String] :tagging
     #   The tag-set for the object. The tag-set must be encoded as URL Query
-    #   parameters
+    #   parameters. (For example, "Key1=Value1")
     # @return [Object]
     def put_object(options = {})
       options = options.merge(bucket: @name)

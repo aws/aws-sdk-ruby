@@ -1,6 +1,32 @@
 Unreleased Changes
 ------------------
 
+1.114.0 (2018-11-15)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::S3Control`.
+
+* Feature - Added support for enumerating regions for `Aws::Route53Resolver`.
+
+* Feature - Added support for enumerating regions for `Aws::RAM`.
+
+* Feature - Added support for enumerating regions for `Aws::PinpointSMSVoice`.
+
+1.113.0 (2018-11-14)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.112.0 (2018-11-13)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.111.0 (2018-11-09)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
 1.110.0 (2018-11-08)
 ------------------
 

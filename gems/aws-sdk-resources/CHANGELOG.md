@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+3.28.0 (2018-11-15)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-s3control` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-route53resolver` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-ram` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-pinpointsmsvoice` gem.
+
 3.27.0 (2018-11-06)
 ------------------
 

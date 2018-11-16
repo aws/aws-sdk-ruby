@@ -248,39 +248,63 @@ module Aws::Batch
     # Creates an AWS Batch compute environment. You can create `MANAGED` or
     # `UNMANAGED` compute environments.
     #
-    # In a managed compute environment, AWS Batch manages the compute
-    # resources within the environment, based on the compute resources that
-    # you specify. Instances launched into a managed compute environment use
-    # a recent, approved version of the Amazon ECS-optimized AMI. You can
-    # choose to use Amazon EC2 On-Demand Instances in your managed compute
-    # environment, or you can use Amazon EC2 Spot Instances that only launch
-    # when the Spot bid price is below a specified percentage of the
-    # On-Demand price.
+    # In a managed compute environment, AWS Batch manages the capacity and
+    # instance types of the compute resources within the environment, based
+    # on the compute resource specification that you define or [launch
+    # template][1] that you specify when you create the compute environment.
+    # You can choose to use Amazon EC2 On-Demand Instances or Spot Instances
+    # in your managed compute environment. You can optionally set a maximum
+    # price so that Spot Instances only launch when the Spot Instance price
+    # is below a specified percentage of the On-Demand price.
     #
     # In an unmanaged compute environment, you can manage your own compute
     # resources. This provides more compute resource configuration options,
     # such as using a custom AMI, but you must ensure that your AMI meets
     # the Amazon ECS container instance AMI specification. For more
-    # information, see [Container Instance AMIs][1] in the *Amazon Elastic
+    # information, see [Container Instance AMIs][2] in the *Amazon Elastic
     # Container Service Developer Guide*. After you have created your
     # unmanaged compute environment, you can use the
     # DescribeComputeEnvironments operation to find the Amazon ECS cluster
     # that is associated with it and then manually launch your container
     # instances into that Amazon ECS cluster. For more information, see
-    # [Launching an Amazon ECS Container Instance][2] in the *Amazon Elastic
+    # [Launching an Amazon ECS Container Instance][3] in the *Amazon Elastic
     # Container Service Developer Guide*.
     #
+    # <note markdown="1"> AWS Batch does not upgrade the AMIs in a compute environment after it
+    # is created (for example, when a newer version of the Amazon
+    # ECS-optimized AMI is available). You are responsible for the
+    # management of the guest operating system (including updates and
+    # security patches) and any additional application software or utilities
+    # that you install on the compute resources. To use a new AMI for your
+    # AWS Batch jobs:
+    #
+    #  1.  Create a new compute environment with the new AMI.
+    #
+    # 2.  Add the compute environment to an existing job queue.
+    #
+    # 3.  Remove the old compute environment from your job queue.
+    #
+    # 4.  Delete the old compute environment.
+    #
+    #  </note>
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/container_instance_AMIs.html
-    # [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html
+    #
+    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
+    # [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/container_instance_AMIs.html
+    # [3]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html
     #
     # @option params [required, String] :compute_environment_name
     #   The name for your compute environment. Up to 128 letters (uppercase
     #   and lowercase), numbers, hyphens, and underscores are allowed.
     #
     # @option params [required, String] :type
-    #   The type of the compute environment.
+    #   The type of the compute environment. For more information, see
+    #   [Compute Environments][1] in the *AWS Batch User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
     #
     # @option params [String] :state
     #   The state of the compute environment. If the state is `ENABLED`, then
@@ -414,7 +438,7 @@ module Aws::Batch
     #       instance_types: ["String"], # required
     #       image_id: "String",
     #       subnets: ["String"], # required
-    #       security_group_ids: ["String"], # required
+    #       security_group_ids: ["String"],
     #       ec2_key_pair: "String",
     #       instance_role: "String", # required
     #       tags: {
@@ -422,6 +446,11 @@ module Aws::Batch
     #       },
     #       bid_percentage: 1,
     #       spot_iam_fleet_role: "String",
+    #       launch_template: {
+    #         launch_template_id: "String",
+    #         launch_template_name: "String",
+    #         version: "String",
+    #       },
     #     },
     #     service_role: "String", # required
     #   })
@@ -798,6 +827,9 @@ module Aws::Batch
     #   resp.compute_environments[0].compute_resources.tags["String"] #=> String
     #   resp.compute_environments[0].compute_resources.bid_percentage #=> Integer
     #   resp.compute_environments[0].compute_resources.spot_iam_fleet_role #=> String
+    #   resp.compute_environments[0].compute_resources.launch_template.launch_template_id #=> String
+    #   resp.compute_environments[0].compute_resources.launch_template.launch_template_name #=> String
+    #   resp.compute_environments[0].compute_resources.launch_template.version #=> String
     #   resp.compute_environments[0].service_role #=> String
     #   resp.next_token #=> String
     #
@@ -1178,17 +1210,24 @@ module Aws::Batch
       req.send_request(options)
     end
 
-    # Returns a list of task jobs for a specified job queue. You can filter
-    # the results by job status with the `jobStatus` parameter. If you do
-    # not specify a status, only `RUNNING` jobs are returned.
+    # Returns a list of AWS Batch jobs. You must specify either a job queue
+    # to return a list of jobs in that job queue, or an array job ID to
+    # return a list of that job's children. You cannot specify both a job
+    # queue and an array job ID.
+    #
+    # You can filter the results by job status with the `jobStatus`
+    # parameter. If you do not specify a status, only `RUNNING` jobs are
+    # returned.
     #
     # @option params [String] :job_queue
     #   The name or full Amazon Resource Name (ARN) of the job queue with
-    #   which to list jobs.
+    #   which to list jobs. You must specify either a job queue or an array
+    #   job ID.
     #
     # @option params [String] :array_job_id
     #   The job ID for an array job. Specifying an array job ID with this
-    #   parameter lists all child jobs from within the specified array.
+    #   parameter lists all child jobs from within the specified array. You
+    #   must specify either a job queue or an array job ID.
     #
     # @option params [String] :job_status
     #   The job status with which to filter jobs in the specified queue. If
@@ -1791,7 +1830,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

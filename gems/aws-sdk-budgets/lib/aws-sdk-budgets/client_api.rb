@@ -14,7 +14,10 @@ module Aws::Budgets
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     Budget = Shapes::StructureShape.new(name: 'Budget')
     BudgetName = Shapes::StringShape.new(name: 'BudgetName')
+    BudgetPerformanceHistory = Shapes::StructureShape.new(name: 'BudgetPerformanceHistory')
     BudgetType = Shapes::StringShape.new(name: 'BudgetType')
+    BudgetedAndActualAmounts = Shapes::StructureShape.new(name: 'BudgetedAndActualAmounts')
+    BudgetedAndActualAmountsList = Shapes::ListShape.new(name: 'BudgetedAndActualAmountsList')
     Budgets = Shapes::ListShape.new(name: 'Budgets')
     CalculatedSpend = Shapes::StructureShape.new(name: 'CalculatedSpend')
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
@@ -33,6 +36,8 @@ module Aws::Budgets
     DeleteNotificationResponse = Shapes::StructureShape.new(name: 'DeleteNotificationResponse')
     DeleteSubscriberRequest = Shapes::StructureShape.new(name: 'DeleteSubscriberRequest')
     DeleteSubscriberResponse = Shapes::StructureShape.new(name: 'DeleteSubscriberResponse')
+    DescribeBudgetPerformanceHistoryRequest = Shapes::StructureShape.new(name: 'DescribeBudgetPerformanceHistoryRequest')
+    DescribeBudgetPerformanceHistoryResponse = Shapes::StructureShape.new(name: 'DescribeBudgetPerformanceHistoryResponse')
     DescribeBudgetRequest = Shapes::StructureShape.new(name: 'DescribeBudgetRequest')
     DescribeBudgetResponse = Shapes::StructureShape.new(name: 'DescribeBudgetResponse')
     DescribeBudgetsRequest = Shapes::StructureShape.new(name: 'DescribeBudgetsRequest')
@@ -52,6 +57,7 @@ module Aws::Budgets
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     Notification = Shapes::StructureShape.new(name: 'Notification')
+    NotificationState = Shapes::StringShape.new(name: 'NotificationState')
     NotificationThreshold = Shapes::FloatShape.new(name: 'NotificationThreshold')
     NotificationType = Shapes::StringShape.new(name: 'NotificationType')
     NotificationWithSubscribers = Shapes::StructureShape.new(name: 'NotificationWithSubscribers')
@@ -84,7 +90,23 @@ module Aws::Budgets
     Budget.add_member(:time_period, Shapes::ShapeRef.new(shape: TimePeriod, location_name: "TimePeriod"))
     Budget.add_member(:calculated_spend, Shapes::ShapeRef.new(shape: CalculatedSpend, location_name: "CalculatedSpend"))
     Budget.add_member(:budget_type, Shapes::ShapeRef.new(shape: BudgetType, required: true, location_name: "BudgetType"))
+    Budget.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: GenericTimestamp, location_name: "LastUpdatedTime"))
     Budget.struct_class = Types::Budget
+
+    BudgetPerformanceHistory.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, location_name: "BudgetName"))
+    BudgetPerformanceHistory.add_member(:budget_type, Shapes::ShapeRef.new(shape: BudgetType, location_name: "BudgetType"))
+    BudgetPerformanceHistory.add_member(:cost_filters, Shapes::ShapeRef.new(shape: CostFilters, location_name: "CostFilters"))
+    BudgetPerformanceHistory.add_member(:cost_types, Shapes::ShapeRef.new(shape: CostTypes, location_name: "CostTypes"))
+    BudgetPerformanceHistory.add_member(:time_unit, Shapes::ShapeRef.new(shape: TimeUnit, location_name: "TimeUnit"))
+    BudgetPerformanceHistory.add_member(:budgeted_and_actual_amounts_list, Shapes::ShapeRef.new(shape: BudgetedAndActualAmountsList, location_name: "BudgetedAndActualAmountsList"))
+    BudgetPerformanceHistory.struct_class = Types::BudgetPerformanceHistory
+
+    BudgetedAndActualAmounts.add_member(:budgeted_amount, Shapes::ShapeRef.new(shape: Spend, location_name: "BudgetedAmount"))
+    BudgetedAndActualAmounts.add_member(:actual_amount, Shapes::ShapeRef.new(shape: Spend, location_name: "ActualAmount"))
+    BudgetedAndActualAmounts.add_member(:time_period, Shapes::ShapeRef.new(shape: TimePeriod, location_name: "TimePeriod"))
+    BudgetedAndActualAmounts.struct_class = Types::BudgetedAndActualAmounts
+
+    BudgetedAndActualAmountsList.member = Shapes::ShapeRef.new(shape: BudgetedAndActualAmounts)
 
     Budgets.member = Shapes::ShapeRef.new(shape: Budget)
 
@@ -152,6 +174,17 @@ module Aws::Budgets
 
     DeleteSubscriberResponse.struct_class = Types::DeleteSubscriberResponse
 
+    DescribeBudgetPerformanceHistoryRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
+    DescribeBudgetPerformanceHistoryRequest.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
+    DescribeBudgetPerformanceHistoryRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: TimePeriod, location_name: "TimePeriod"))
+    DescribeBudgetPerformanceHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeBudgetPerformanceHistoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
+    DescribeBudgetPerformanceHistoryRequest.struct_class = Types::DescribeBudgetPerformanceHistoryRequest
+
+    DescribeBudgetPerformanceHistoryResponse.add_member(:budget_performance_history, Shapes::ShapeRef.new(shape: BudgetPerformanceHistory, location_name: "BudgetPerformanceHistory"))
+    DescribeBudgetPerformanceHistoryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
+    DescribeBudgetPerformanceHistoryResponse.struct_class = Types::DescribeBudgetPerformanceHistoryResponse
+
     DescribeBudgetRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
     DescribeBudgetRequest.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
     DescribeBudgetRequest.struct_class = Types::DescribeBudgetRequest
@@ -195,6 +228,7 @@ module Aws::Budgets
     Notification.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperator, required: true, location_name: "ComparisonOperator"))
     Notification.add_member(:threshold, Shapes::ShapeRef.new(shape: NotificationThreshold, required: true, location_name: "Threshold"))
     Notification.add_member(:threshold_type, Shapes::ShapeRef.new(shape: ThresholdType, location_name: "ThresholdType"))
+    Notification.add_member(:notification_state, Shapes::ShapeRef.new(shape: NotificationState, location_name: "NotificationState"))
     Notification.struct_class = Types::Notification
 
     NotificationWithSubscribers.add_member(:notification, Shapes::ShapeRef.new(shape: Notification, required: true, location_name: "Notification"))
@@ -341,6 +375,19 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:describe_budget_performance_history, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeBudgetPerformanceHistory"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeBudgetPerformanceHistoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeBudgetPerformanceHistoryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
       end)
 
       api.add_operation(:describe_budgets, Seahorse::Model::Operation.new.tap do |o|

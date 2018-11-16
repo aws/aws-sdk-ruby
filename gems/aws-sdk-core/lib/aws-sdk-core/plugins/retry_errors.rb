@@ -79,6 +79,7 @@ A delay randomiser function used by the default backoff function. Some predefine
           'ThrottlingException',                    # json services
           'RequestThrottled',                       # sqs
           'ProvisionedThroughputExceededException', # dynamodb
+          'TransactionInProgressException',         # dynamodb
           'RequestLimitExceeded',                   # ec2
           'BandwidthLimitExceeded',                 # cloud search
           'LimitExceededException',                 # kinesis

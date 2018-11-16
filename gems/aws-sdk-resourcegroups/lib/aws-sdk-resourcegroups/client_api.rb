@@ -47,6 +47,10 @@ module Aws::ResourceGroups
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     Query = Shapes::StringShape.new(name: 'Query')
+    QueryError = Shapes::StructureShape.new(name: 'QueryError')
+    QueryErrorCode = Shapes::StringShape.new(name: 'QueryErrorCode')
+    QueryErrorList = Shapes::ListShape.new(name: 'QueryErrorList')
+    QueryErrorMessage = Shapes::StringShape.new(name: 'QueryErrorMessage')
     QueryType = Shapes::StringShape.new(name: 'QueryType')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceFilter = Shapes::StructureShape.new(name: 'ResourceFilter')
@@ -144,6 +148,7 @@ module Aws::ResourceGroups
 
     ListGroupResourcesOutput.add_member(:resource_identifiers, Shapes::ShapeRef.new(shape: ResourceIdentifierList, location_name: "ResourceIdentifiers"))
     ListGroupResourcesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListGroupResourcesOutput.add_member(:query_errors, Shapes::ShapeRef.new(shape: QueryErrorList, location_name: "QueryErrors"))
     ListGroupResourcesOutput.struct_class = Types::ListGroupResourcesOutput
 
     ListGroupsInput.add_member(:filters, Shapes::ShapeRef.new(shape: GroupFilterList, location_name: "Filters"))
@@ -155,6 +160,12 @@ module Aws::ResourceGroups
     ListGroupsOutput.add_member(:groups, Shapes::ShapeRef.new(shape: GroupList, deprecated: true, location_name: "Groups", metadata: {"deprecatedMessage"=>"This field is deprecated, use GroupIdentifiers instead."}))
     ListGroupsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListGroupsOutput.struct_class = Types::ListGroupsOutput
+
+    QueryError.add_member(:error_code, Shapes::ShapeRef.new(shape: QueryErrorCode, location_name: "ErrorCode"))
+    QueryError.add_member(:message, Shapes::ShapeRef.new(shape: QueryErrorMessage, location_name: "Message"))
+    QueryError.struct_class = Types::QueryError
+
+    QueryErrorList.member = Shapes::ShapeRef.new(shape: QueryError)
 
     ResourceFilter.add_member(:name, Shapes::ShapeRef.new(shape: ResourceFilterName, required: true, location_name: "Name"))
     ResourceFilter.add_member(:values, Shapes::ShapeRef.new(shape: ResourceFilterValues, required: true, location_name: "Values"))
@@ -181,6 +192,7 @@ module Aws::ResourceGroups
 
     SearchResourcesOutput.add_member(:resource_identifiers, Shapes::ShapeRef.new(shape: ResourceIdentifierList, location_name: "ResourceIdentifiers"))
     SearchResourcesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    SearchResourcesOutput.add_member(:query_errors, Shapes::ShapeRef.new(shape: QueryErrorList, location_name: "QueryErrors"))
     SearchResourcesOutput.struct_class = Types::SearchResourcesOutput
 
     TagInput.add_member(:arn, Shapes::ShapeRef.new(shape: GroupArn, required: true, location: "uri", location_name: "Arn"))

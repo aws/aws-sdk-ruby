@@ -220,7 +220,7 @@ module Aws::Budgets
     # @option params [Array<Types::NotificationWithSubscribers>] :notifications_with_subscribers
     #   A notification that you want to associate with a budget. A budget can
     #   have up to five notifications, and each notification can have one SNS
-    #   subscriber and up to ten email subscribers. If you include
+    #   subscriber and up to 10 email subscribers. If you include
     #   notifications and subscribers in your `CreateBudget` call, AWS creates
     #   the notifications and subscribers for you.
     #
@@ -268,6 +268,7 @@ module Aws::Budgets
     #         },
     #       },
     #       budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE
+    #       last_updated_time: Time.now,
     #     },
     #     notifications_with_subscribers: [
     #       {
@@ -276,6 +277,7 @@ module Aws::Budgets
     #           comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #           threshold: 1.0, # required
     #           threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
+    #           notification_state: "OK", # accepts OK, ALARM
     #         },
     #         subscribers: [ # required
     #           {
@@ -302,7 +304,7 @@ module Aws::Budgets
     #   create a notification for.
     #
     # @option params [required, String] :budget_name
-    #   The name of the budget that you want AWS to notified you about. Budget
+    #   The name of the budget that you want AWS to notify you about. Budget
     #   names must be unique within an account.
     #
     # @option params [required, Types::Notification] :notification
@@ -311,7 +313,7 @@ module Aws::Budgets
     # @option params [required, Array<Types::Subscriber>] :subscribers
     #   A list of subscribers that you want to associate with the
     #   notification. Each notification can have one SNS subscriber and up to
-    #   ten email subscribers.
+    #   10 email subscribers.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -325,6 +327,7 @@ module Aws::Budgets
     #       comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #       threshold: 1.0, # required
     #       threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
+    #       notification_state: "OK", # accepts OK, ALARM
     #     },
     #     subscribers: [ # required
     #       {
@@ -345,8 +348,8 @@ module Aws::Budgets
     # notification before you create the subscriber.
     #
     # @option params [required, String] :account_id
-    #   The `accountId` associated with the budget that you want to create a
-    #   subscriber for.
+    #   The `accountId` that is associated with the budget that you want to
+    #   create a subscriber for.
     #
     # @option params [required, String] :budget_name
     #   The name of the budget that you want to subscribe to. Budget names
@@ -370,6 +373,7 @@ module Aws::Budgets
     #       comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #       threshold: 1.0, # required
     #       threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
+    #       notification_state: "OK", # accepts OK, ALARM
     #     },
     #     subscriber: { # required
     #       subscription_type: "SNS", # required, accepts SNS, EMAIL
@@ -386,8 +390,8 @@ module Aws::Budgets
 
     # Deletes a budget. You can delete your budget at any time.
     #
-    # **Deleting a budget also deletes the notifications and subscribers
-    # associated with that budget.**
+    # Deleting a budget also deletes the notifications and subscribers that
+    # are associated with that budget.
     #
     # @option params [required, String] :account_id
     #   The `accountId` that is associated with the budget that you want to
@@ -414,8 +418,8 @@ module Aws::Budgets
 
     # Deletes a notification.
     #
-    # **Deleting a notification also deletes the subscribers associated with
-    # the notification.**
+    # Deleting a notification also deletes the subscribers that are
+    # associated with the notification.
     #
     # @option params [required, String] :account_id
     #   The `accountId` that is associated with the budget whose notification
@@ -439,6 +443,7 @@ module Aws::Budgets
     #       comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #       threshold: 1.0, # required
     #       threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
+    #       notification_state: "OK", # accepts OK, ALARM
     #     },
     #   })
     #
@@ -451,8 +456,8 @@ module Aws::Budgets
 
     # Deletes a subscriber.
     #
-    # **Deleting the last subscriber to a notification also deletes the
-    # notification.**
+    # Deleting the last subscriber to a notification also deletes the
+    # notification.
     #
     # @option params [required, String] :account_id
     #   The `accountId` that is associated with the budget whose subscriber
@@ -479,6 +484,7 @@ module Aws::Budgets
     #       comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #       threshold: 1.0, # required
     #       threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
+    #       notification_state: "OK", # accepts OK, ALARM
     #     },
     #     subscriber: { # required
     #       subscription_type: "SNS", # required, accepts SNS, EMAIL
@@ -540,6 +546,7 @@ module Aws::Budgets
     #   resp.budget.calculated_spend.forecasted_spend.amount #=> String
     #   resp.budget.calculated_spend.forecasted_spend.unit #=> String
     #   resp.budget.budget_type #=> String, one of "USAGE", "COST", "RI_UTILIZATION", "RI_COVERAGE"
+    #   resp.budget.last_updated_time #=> Time
     #
     # @overload describe_budget(params = {})
     # @param [Hash] params ({})
@@ -548,19 +555,93 @@ module Aws::Budgets
       req.send_request(options)
     end
 
-    # Lists the budgets associated with an account.
+    # Describes the history for `DAILY`, `MONTHLY`, and `QUARTERLY` budgets.
+    # Budget history isn't available for `ANNUAL` budgets.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the user. It should be a 12-digit number.
+    #
+    # @option params [required, String] :budget_name
+    #   A string that represents the budget name. The ":" and "\\"
+    #   characters aren't allowed.
+    #
+    # @option params [Types::TimePeriod] :time_period
+    #   Retrieves how often the budget went into an `ALARM` state for the
+    #   specified time period.
+    #
+    # @option params [Integer] :max_results
+    #   An integer that represents how many entries a paginated response
+    #   contains. The maximum is 100.
+    #
+    # @option params [String] :next_token
+    #   A generic string.
+    #
+    # @return [Types::DescribeBudgetPerformanceHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBudgetPerformanceHistoryResponse#budget_performance_history #budget_performance_history} => Types::BudgetPerformanceHistory
+    #   * {Types::DescribeBudgetPerformanceHistoryResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_budget_performance_history({
+    #     account_id: "AccountId", # required
+    #     budget_name: "BudgetName", # required
+    #     time_period: {
+    #       start: Time.now,
+    #       end: Time.now,
+    #     },
+    #     max_results: 1,
+    #     next_token: "GenericString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.budget_performance_history.budget_name #=> String
+    #   resp.budget_performance_history.budget_type #=> String, one of "USAGE", "COST", "RI_UTILIZATION", "RI_COVERAGE"
+    #   resp.budget_performance_history.cost_filters #=> Hash
+    #   resp.budget_performance_history.cost_filters["GenericString"] #=> Array
+    #   resp.budget_performance_history.cost_filters["GenericString"][0] #=> String
+    #   resp.budget_performance_history.cost_types.include_tax #=> Boolean
+    #   resp.budget_performance_history.cost_types.include_subscription #=> Boolean
+    #   resp.budget_performance_history.cost_types.use_blended #=> Boolean
+    #   resp.budget_performance_history.cost_types.include_refund #=> Boolean
+    #   resp.budget_performance_history.cost_types.include_credit #=> Boolean
+    #   resp.budget_performance_history.cost_types.include_upfront #=> Boolean
+    #   resp.budget_performance_history.cost_types.include_recurring #=> Boolean
+    #   resp.budget_performance_history.cost_types.include_other_subscription #=> Boolean
+    #   resp.budget_performance_history.cost_types.include_support #=> Boolean
+    #   resp.budget_performance_history.cost_types.include_discount #=> Boolean
+    #   resp.budget_performance_history.cost_types.use_amortized #=> Boolean
+    #   resp.budget_performance_history.time_unit #=> String, one of "DAILY", "MONTHLY", "QUARTERLY", "ANNUALLY"
+    #   resp.budget_performance_history.budgeted_and_actual_amounts_list #=> Array
+    #   resp.budget_performance_history.budgeted_and_actual_amounts_list[0].budgeted_amount.amount #=> String
+    #   resp.budget_performance_history.budgeted_and_actual_amounts_list[0].budgeted_amount.unit #=> String
+    #   resp.budget_performance_history.budgeted_and_actual_amounts_list[0].actual_amount.amount #=> String
+    #   resp.budget_performance_history.budgeted_and_actual_amounts_list[0].actual_amount.unit #=> String
+    #   resp.budget_performance_history.budgeted_and_actual_amounts_list[0].time_period.start #=> Time
+    #   resp.budget_performance_history.budgeted_and_actual_amounts_list[0].time_period.end #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload describe_budget_performance_history(params = {})
+    # @param [Hash] params ({})
+    def describe_budget_performance_history(params = {}, options = {})
+      req = build_request(:describe_budget_performance_history, params)
+      req.send_request(options)
+    end
+
+    # Lists the budgets that are associated with an account.
     #
     # @option params [required, String] :account_id
     #   The `accountId` that is associated with the budgets that you want
     #   descriptions of.
     #
     # @option params [Integer] :max_results
-    #   Optional integer. Specifies the maximum number of results to return in
-    #   response.
+    #   An optional integer that represents how many entries a paginated
+    #   response contains. The maximum is 100.
     #
     # @option params [String] :next_token
-    #   The pagination token that indicates the next set of results to
-    #   retrieve.
+    #   The pagination token that you include in your request to indicate the
+    #   next set of results that you want to retrieve.
     #
     # @return [Types::DescribeBudgetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -603,6 +684,7 @@ module Aws::Budgets
     #   resp.budgets[0].calculated_spend.forecasted_spend.amount #=> String
     #   resp.budgets[0].calculated_spend.forecasted_spend.unit #=> String
     #   resp.budgets[0].budget_type #=> String, one of "USAGE", "COST", "RI_UTILIZATION", "RI_COVERAGE"
+    #   resp.budgets[0].last_updated_time #=> Time
     #   resp.next_token #=> String
     #
     # @overload describe_budgets(params = {})
@@ -612,7 +694,7 @@ module Aws::Budgets
       req.send_request(options)
     end
 
-    # Lists the notifications associated with a budget.
+    # Lists the notifications that are associated with a budget.
     #
     # @option params [required, String] :account_id
     #   The `accountId` that is associated with the budget whose notifications
@@ -622,12 +704,12 @@ module Aws::Budgets
     #   The name of the budget whose notifications you want descriptions of.
     #
     # @option params [Integer] :max_results
-    #   Optional integer. Specifies the maximum number of results to return in
-    #   response.
+    #   An optional integer that represents how many entries a paginated
+    #   response contains. The maximum is 100.
     #
     # @option params [String] :next_token
-    #   The pagination token that indicates the next set of results to
-    #   retrieve.
+    #   The pagination token that you include in your request to indicate the
+    #   next set of results that you want to retrieve.
     #
     # @return [Types::DescribeNotificationsForBudgetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -650,6 +732,7 @@ module Aws::Budgets
     #   resp.notifications[0].comparison_operator #=> String, one of "GREATER_THAN", "LESS_THAN", "EQUAL_TO"
     #   resp.notifications[0].threshold #=> Float
     #   resp.notifications[0].threshold_type #=> String, one of "PERCENTAGE", "ABSOLUTE_VALUE"
+    #   resp.notifications[0].notification_state #=> String, one of "OK", "ALARM"
     #   resp.next_token #=> String
     #
     # @overload describe_notifications_for_budget(params = {})
@@ -659,7 +742,7 @@ module Aws::Budgets
       req.send_request(options)
     end
 
-    # Lists the subscribers associated with a notification.
+    # Lists the subscribers that are associated with a notification.
     #
     # @option params [required, String] :account_id
     #   The `accountId` that is associated with the budget whose subscribers
@@ -672,12 +755,12 @@ module Aws::Budgets
     #   The notification whose subscribers you want to list.
     #
     # @option params [Integer] :max_results
-    #   Optional integer. Specifies the maximum number of results to return in
-    #   response.
+    #   An optional integer that represents how many entries a paginated
+    #   response contains. The maximum is 100.
     #
     # @option params [String] :next_token
-    #   The pagination token that indicates the next set of results to
-    #   retrieve.
+    #   The pagination token that you include in your request to indicate the
+    #   next set of results that you want to retrieve.
     #
     # @return [Types::DescribeSubscribersForNotificationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -694,6 +777,7 @@ module Aws::Budgets
     #       comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #       threshold: 1.0, # required
     #       threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
+    #       notification_state: "OK", # accepts OK, ALARM
     #     },
     #     max_results: 1,
     #     next_token: "GenericString",
@@ -714,7 +798,7 @@ module Aws::Budgets
     end
 
     # Updates a budget. You can change every part of a budget except for the
-    # `budgetName` and the `calculatedSpend`. When a budget is modified, the
+    # `budgetName` and the `calculatedSpend`. When you modify a budget, the
     # `calculatedSpend` drops to zero until AWS has new usage data to use
     # for forecasting.
     #
@@ -769,6 +853,7 @@ module Aws::Budgets
     #         },
     #       },
     #       budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE
+    #       last_updated_time: Time.now,
     #     },
     #   })
     #
@@ -789,7 +874,7 @@ module Aws::Budgets
     #   The name of the budget whose notification you want to update.
     #
     # @option params [required, Types::Notification] :old_notification
-    #   The previous notification associated with a budget.
+    #   The previous notification that is associated with a budget.
     #
     # @option params [required, Types::Notification] :new_notification
     #   The updated notification to be associated with a budget.
@@ -806,12 +891,14 @@ module Aws::Budgets
     #       comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #       threshold: 1.0, # required
     #       threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
+    #       notification_state: "OK", # accepts OK, ALARM
     #     },
     #     new_notification: { # required
     #       notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
     #       comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #       threshold: 1.0, # required
     #       threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
+    #       notification_state: "OK", # accepts OK, ALARM
     #     },
     #   })
     #
@@ -835,10 +922,10 @@ module Aws::Budgets
     #   The notification whose subscriber you want to update.
     #
     # @option params [required, Types::Subscriber] :old_subscriber
-    #   The previous subscriber associated with a budget notification.
+    #   The previous subscriber that is associated with a budget notification.
     #
     # @option params [required, Types::Subscriber] :new_subscriber
-    #   The updated subscriber associated with a budget notification.
+    #   The updated subscriber that is associated with a budget notification.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -852,6 +939,7 @@ module Aws::Budgets
     #       comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #       threshold: 1.0, # required
     #       threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
+    #       notification_state: "OK", # accepts OK, ALARM
     #     },
     #     old_subscriber: { # required
     #       subscription_type: "SNS", # required, accepts SNS, EMAIL
@@ -883,7 +971,7 @@ module Aws::Budgets
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-budgets'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.14.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

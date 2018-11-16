@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.1 (2018-11-16)
+------------------
+
+* Issue - Update version dependency on `aws-sdk-core` to support endpoint discovery.
+
 1.15.0 (2018-11-08)
 ------------------
 

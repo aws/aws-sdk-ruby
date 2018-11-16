@@ -233,6 +233,17 @@ module Aws::DatabaseMigrationService
     #           auth_source: "String",
     #           kms_key_id: "String",
     #         },
+    #         kinesis_settings: {
+    #           stream_arn: "String",
+    #           message_format: "json", # accepts json
+    #           service_access_role_arn: "String",
+    #         },
+    #         elasticsearch_settings: {
+    #           service_access_role_arn: "String", # required
+    #           endpoint_uri: "String", # required
+    #           full_load_error_percentage: 1,
+    #           error_retry_duration: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] endpoint_identifier
@@ -247,17 +258,17 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] engine_name
     #   The type of engine for the endpoint. Valid values, depending on the
-    #   EndPointType, include mysql, oracle, postgres, mariadb, aurora,
-    #   aurora-postgresql, redshift, s3, db2, azuredb, sybase, dynamodb,
-    #   mongodb, and sqlserver.
+    #   `EndPointType` value, include `mysql`, `oracle`, `postgres`,
+    #   `mariadb`, `aurora`, `aurora-postgresql`, `redshift`, `s3`, `db2`,
+    #   `azuredb`, `sybase`, `dynamodb`, `mongodb`, and `sqlserver`.
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The user name to be used to login to the endpoint database.
+    #   The user name to be used to log in to the endpoint database.
     #   @return [String]
     #
     # @!attribute [rw] password
-    #   The password to be used to login to the endpoint database.
+    #   The password to be used to log in to the endpoint database.
     #   @return [String]
     #
     # @!attribute [rw] server_name
@@ -277,12 +288,11 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The KMS key identifier that will be used to encrypt the connection
-    #   parameters. If you do not specify a value for the KmsKeyId
-    #   parameter, then AWS DMS will use your default encryption key. AWS
-    #   KMS creates the default encryption key for your AWS account. Your
-    #   AWS account has a different default encryption key for each AWS
-    #   region.
+    #   The AWS KMS key identifier to use to encrypt the connection
+    #   parameters. If you don't specify a value for the `KmsKeyId`
+    #   parameter, then AWS DMS uses your default encryption key. AWS KMS
+    #   creates the default encryption key for your AWS account. Your AWS
+    #   account has a different default encryption key for each AWS Region.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -294,17 +304,14 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] ssl_mode
-    #   The SSL mode to use for the SSL connection.
-    #
-    #   SSL mode can be one of four values: none, require, verify-ca,
-    #   verify-full.
-    #
-    #   The default value is none.
+    #   The Secure Sockets Layer (SSL) mode to use for the SSL connection.
+    #   The SSL mode can be one of four values: `none`, `require`,
+    #   `verify-ca`, `verify-full`. The default value is `none`.
     #   @return [String]
     #
     # @!attribute [rw] service_access_role_arn
-    #   The Amazon Resource Name (ARN) for the service access role you want
-    #   to use to create the endpoint.
+    #   The Amazon Resource Name (ARN) for the service access role that you
+    #   want to use to create the endpoint.
     #   @return [String]
     #
     # @!attribute [rw] external_table_definition
@@ -313,10 +320,9 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] dynamo_db_settings
     #   Settings in JSON format for the target Amazon DynamoDB endpoint. For
-    #   more information about the available settings, see the **Using
-    #   Object Mapping to Migrate Data to DynamoDB** section at [ Using an
-    #   Amazon DynamoDB Database as a Target for AWS Database Migration
-    #   Service][1].
+    #   more information about the available settings, see [Using Object
+    #   Mapping to Migrate Data to DynamoDB][1] in the *AWS Database
+    #   Migration Service User Guide.*
     #
     #
     #
@@ -325,50 +331,71 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] s3_settings
     #   Settings in JSON format for the target Amazon S3 endpoint. For more
-    #   information about the available settings, see the **Extra Connection
-    #   Attributes** section at [ Using Amazon S3 as a Target for AWS
-    #   Database Migration Service][1].
+    #   information about the available settings, see [Extra Connection
+    #   Attributes When Using Amazon S3 as a Target for AWS DMS][1] in the
+    #   *AWS Database Migration Service User Guide.*
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html
+    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring
     #   @return [Types::S3Settings]
     #
     # @!attribute [rw] dms_transfer_settings
-    #   The settings in JSON format for the DMS Transfer type source
+    #   The settings in JSON format for the DMS transfer type of source
     #   endpoint.
     #
-    #   Attributes include:
+    #   Possible attributes include the following:
     #
-    #   * serviceAccessRoleArn - The IAM role that has permission to access
-    #     the Amazon S3 bucket.
+    #   * `serviceAccessRoleArn` - The IAM role that has permission to
+    #     access the Amazon S3 bucket.
     #
-    #   * bucketName - The name of the S3 bucket to use.
+    #   * `bucketName` - The name of the S3 bucket to use.
     #
-    #   * compressionType - An optional parameter to use GZIP to compress
-    #     the target files. Set to NONE (the default) or do not use to leave
-    #     the files uncompressed.
+    #   * `compressionType` - An optional parameter to use GZIP to compress
+    #     the target files. To use GZIP, set this value to `NONE` (the
+    #     default). To keep the files uncompressed, don't use this value.
     #
-    #   Shorthand syntax: ServiceAccessRoleArn=string
-    #   ,BucketName=string,CompressionType=string
+    #   Shorthand syntax for these attributes is as follows:
+    #   `ServiceAccessRoleArn=string,BucketName=string,CompressionType=string`
     #
-    #   JSON syntax:
-    #
-    #   \\\{ "ServiceAccessRoleArn": "string", "BucketName":
-    #   "string", "CompressionType": "none"\|"gzip" \\}
+    #   JSON syntax for these attributes is as follows: `\{
+    #   "ServiceAccessRoleArn": "string", "BucketName": "string",
+    #   "CompressionType": "none"|"gzip" \} `
     #   @return [Types::DmsTransferSettings]
     #
     # @!attribute [rw] mongo_db_settings
     #   Settings in JSON format for the source MongoDB endpoint. For more
-    #   information about the available settings, see the **Configuration
-    #   Properties When Using MongoDB as a Source for AWS Database Migration
-    #   Service** section at [ Using MongoDB as a Target for AWS Database
-    #   Migration Service][1].
+    #   information about the available settings, see the configuration
+    #   properties section in [ Using MongoDB as a Target for AWS Database
+    #   Migration Service][1] in the *AWS Database Migration Service User
+    #   Guide.*
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html
     #   @return [Types::MongoDbSettings]
+    #
+    # @!attribute [rw] kinesis_settings
+    #   Settings in JSON format for the target Amazon Kinesis Data Streams
+    #   endpoint. For more information about the available settings, see
+    #   [Using Object Mapping to Migrate Data to a Kinesis Data Stream][1]
+    #   in the *AWS Database Migration User Guide.*
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping
+    #   @return [Types::KinesisSettings]
+    #
+    # @!attribute [rw] elasticsearch_settings
+    #   Settings in JSON format for the target Elasticsearch endpoint. For
+    #   more information about the available settings, see [Extra Connection
+    #   Attributes When Using Elasticsearch as a Target for AWS DMS][1] in
+    #   the *AWS Database Migration User Guide.*
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration
+    #   @return [Types::ElasticsearchSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpointMessage AWS API Documentation
     #
@@ -391,7 +418,9 @@ module Aws::DatabaseMigrationService
       :dynamo_db_settings,
       :s3_settings,
       :dms_transfer_settings,
-      :mongo_db_settings)
+      :mongo_db_settings,
+      :kinesis_settings,
+      :elasticsearch_settings)
       include Aws::Structure
     end
 
@@ -448,9 +477,9 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] event_categories
     #   A list of event categories for a source type that you want to
     #   subscribe to. You can see a list of the categories for a given
-    #   source type by calling the **DescribeEventCategories** action or in
-    #   the topic [ Working with Events and Notifications][1] in the AWS
-    #   Database Migration Service User Guide.
+    #   source type by calling the `DescribeEventCategories` action or in
+    #   the topic [Working with Events and Notifications][1] in the *AWS
+    #   Database Migration Service User Guide.*
     #
     #
     #
@@ -466,8 +495,8 @@ module Aws::DatabaseMigrationService
     #   @return [Array<String>]
     #
     # @!attribute [rw] enabled
-    #   A Boolean value; set to **true** to activate the subscription, or
-    #   set to **false** to create the subscription but not activate it.
+    #   A Boolean value; set to `true` to activate the subscription, or set
+    #   to `false` to create the subscription but not activate it.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
@@ -520,6 +549,7 @@ module Aws::DatabaseMigrationService
     #         ],
     #         kms_key_id: "String",
     #         publicly_accessible: false,
+    #         dns_name_servers: "String",
     #       }
     #
     # @!attribute [rw] replication_instance_identifier
@@ -607,12 +637,12 @@ module Aws::DatabaseMigrationService
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] kms_key_id
-    #   The KMS key identifier that will be used to encrypt the content on
-    #   the replication instance. If you do not specify a value for the
-    #   KmsKeyId parameter, then AWS DMS will use your default encryption
-    #   key. AWS KMS creates the default encryption key for your AWS
-    #   account. Your AWS account has a different default encryption key for
-    #   each AWS region.
+    #   The AWS KMS key identifier that is used to encrypt the content on
+    #   the replication instance. If you don't specify a value for the
+    #   `KmsKeyId` parameter, then AWS DMS uses your default encryption key.
+    #   AWS KMS creates the default encryption key for your AWS account.
+    #   Your AWS account has a different default encryption key for each AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] publicly_accessible
@@ -621,6 +651,10 @@ module Aws::DatabaseMigrationService
     #   value of `false` represents an instance with a private IP address.
     #   The default value is `true`.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] dns_name_servers
+    #   A list of DNS name servers supported for the replication instance.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationInstanceMessage AWS API Documentation
     #
@@ -637,7 +671,8 @@ module Aws::DatabaseMigrationService
       :auto_minor_version_upgrade,
       :tags,
       :kms_key_id,
-      :publicly_accessible)
+      :publicly_accessible,
+      :dns_name_servers)
       include Aws::Structure
     end
 
@@ -774,7 +809,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] replication_task_settings
     #   Settings for the task, such as target metadata settings. For a
     #   complete list of task settings, see [Task Settings for AWS Database
-    #   Migration Service Tasks][1].
+    #   Migration Service Tasks][1] in the *AWS Database Migration User
+    #   Guide.*
     #
     #
     #
@@ -2085,6 +2121,45 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ElasticsearchSettings
+    #   data as a hash:
+    #
+    #       {
+    #         service_access_role_arn: "String", # required
+    #         endpoint_uri: "String", # required
+    #         full_load_error_percentage: 1,
+    #         error_retry_duration: 1,
+    #       }
+    #
+    # @!attribute [rw] service_access_role_arn
+    #   The Amazon Resource Name (ARN) used by service to access the IAM
+    #   role.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_uri
+    #   The endpoint for the ElasticSearch cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] full_load_error_percentage
+    #   The maximum percentage of records that can fail to be written before
+    #   a full load operation stops.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] error_retry_duration
+    #   The maximum number of seconds that DMS retries failed API requests
+    #   to the Elasticsearch cluster.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ElasticsearchSettings AWS API Documentation
+    #
+    class ElasticsearchSettings < Struct.new(
+      :service_access_role_arn,
+      :endpoint_uri,
+      :full_load_error_percentage,
+      :error_retry_duration)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] endpoint_identifier
     #   The database endpoint identifier. Identifiers must begin with a
     #   letter; must contain only ASCII letters, digits, and hyphens; and
@@ -2133,12 +2208,12 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The KMS key identifier that will be used to encrypt the connection
-    #   parameters. If you do not specify a value for the KmsKeyId
-    #   parameter, then AWS DMS will use your default encryption key. AWS
-    #   KMS creates the default encryption key for your AWS account. Your
-    #   AWS account has a different default encryption key for each AWS
-    #   region.
+    #   The AWS KMS key identifier that is used to encrypt the content on
+    #   the replication instance. If you don't specify a value for the
+    #   `KmsKeyId` parameter, then AWS DMS uses your default encryption key.
+    #   AWS KMS creates the default encryption key for your AWS account.
+    #   Your AWS account has a different default encryption key for each AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_arn
@@ -2185,33 +2260,42 @@ module Aws::DatabaseMigrationService
     #   @return [Types::S3Settings]
     #
     # @!attribute [rw] dms_transfer_settings
-    #   The settings in JSON format for the DMS Transfer type source
+    #   The settings in JSON format for the DMS transfer type of source
     #   endpoint.
     #
-    #   Attributes include:
+    #   Possible attributes include the following:
     #
-    #   * serviceAccessRoleArn - The IAM role that has permission to access
-    #     the Amazon S3 bucket.
+    #   * `serviceAccessRoleArn` - The IAM role that has permission to
+    #     access the Amazon S3 bucket.
     #
-    #   * bucketName - The name of the S3 bucket to use.
+    #   * `bucketName` - The name of the S3 bucket to use.
     #
-    #   * compressionType - An optional parameter to use GZIP to compress
-    #     the target files. Set to NONE (the default) or do not use to leave
-    #     the files uncompressed.
+    #   * `compressionType` - An optional parameter to use GZIP to compress
+    #     the target files. To use GZIP, set this value to `NONE` (the
+    #     default). To keep the files uncompressed, don't use this value.
     #
-    #   Shorthand syntax: ServiceAccessRoleArn=string
-    #   ,BucketName=string,CompressionType=string
+    #   Shorthand syntax for these attributes is as follows:
+    #   `ServiceAccessRoleArn=string,BucketName=string,CompressionType=string`
     #
-    #   JSON syntax:
-    #
-    #   \\\{ "ServiceAccessRoleArn": "string", "BucketName":
-    #   "string", "CompressionType": "none"\|"gzip" \\}
+    #   JSON syntax for these attributes is as follows: `\{
+    #   "ServiceAccessRoleArn": "string", "BucketName": "string",
+    #   "CompressionType": "none"|"gzip" \} `
     #   @return [Types::DmsTransferSettings]
     #
     # @!attribute [rw] mongo_db_settings
     #   The settings for the MongoDB source endpoint. For more information,
     #   see the `MongoDbSettings` structure.
     #   @return [Types::MongoDbSettings]
+    #
+    # @!attribute [rw] kinesis_settings
+    #   The settings for the Amazon Kinesis source endpoint. For more
+    #   information, see the `KinesisSettings` structure.
+    #   @return [Types::KinesisSettings]
+    #
+    # @!attribute [rw] elasticsearch_settings
+    #   The settings for the Elasticsearch source endpoint. For more
+    #   information, see the `ElasticsearchSettings` structure.
+    #   @return [Types::ElasticsearchSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Endpoint AWS API Documentation
     #
@@ -2236,7 +2320,9 @@ module Aws::DatabaseMigrationService
       :dynamo_db_settings,
       :s3_settings,
       :dms_transfer_settings,
-      :mongo_db_settings)
+      :mongo_db_settings,
+      :kinesis_settings,
+      :elasticsearch_settings)
       include Aws::Structure
     end
 
@@ -2440,6 +2526,39 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass KinesisSettings
+    #   data as a hash:
+    #
+    #       {
+    #         stream_arn: "String",
+    #         message_format: "json", # accepts json
+    #         service_access_role_arn: "String",
+    #       }
+    #
+    # @!attribute [rw] stream_arn
+    #   The Amazon Resource Name (ARN) for the Amazon Kinesis Data Streams
+    #   endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_format
+    #   The output format for the records created on the endpoint. The
+    #   message format is `JSON`.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_access_role_arn
+    #   The Amazon Resource Name (ARN) for the IAM role that DMS uses to
+    #   write to the Amazon Kinesis data stream.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/KinesisSettings AWS API Documentation
+    #
+    class KinesisSettings < Struct.new(
+      :stream_arn,
+      :message_format,
+      :service_access_role_arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTagsForResourceMessage
     #   data as a hash:
     #
@@ -2518,6 +2637,17 @@ module Aws::DatabaseMigrationService
     #           auth_source: "String",
     #           kms_key_id: "String",
     #         },
+    #         kinesis_settings: {
+    #           stream_arn: "String",
+    #           message_format: "json", # accepts json
+    #           service_access_role_arn: "String",
+    #         },
+    #         elasticsearch_settings: {
+    #           service_access_role_arn: "String", # required
+    #           endpoint_uri: "String", # required
+    #           full_load_error_percentage: 1,
+    #           error_retry_duration: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] endpoint_arn
@@ -2592,10 +2722,9 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] dynamo_db_settings
     #   Settings in JSON format for the target Amazon DynamoDB endpoint. For
-    #   more information about the available settings, see the **Using
-    #   Object Mapping to Migrate Data to DynamoDB** section at [ Using an
-    #   Amazon DynamoDB Database as a Target for AWS Database Migration
-    #   Service][1].
+    #   more information about the available settings, see [Using Object
+    #   Mapping to Migrate Data to DynamoDB][1] in the *AWS Database
+    #   Migration Service User Guide.*
     #
     #
     #
@@ -2603,21 +2732,21 @@ module Aws::DatabaseMigrationService
     #   @return [Types::DynamoDbSettings]
     #
     # @!attribute [rw] s3_settings
-    #   Settings in JSON format for the target S3 endpoint. For more
-    #   information about the available settings, see the **Extra Connection
-    #   Attributes** section at [ Using Amazon S3 as a Target for AWS
-    #   Database Migration Service][1].
+    #   Settings in JSON format for the target Amazon S3 endpoint. For more
+    #   information about the available settings, see [Extra Connection
+    #   Attributes When Using Amazon S3 as a Target for AWS DMS][1] in the
+    #   *AWS Database Migration Service User Guide.*
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html
+    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring
     #   @return [Types::S3Settings]
     #
     # @!attribute [rw] dms_transfer_settings
-    #   The settings in JSON format for the DMS Transfer type source
+    #   The settings in JSON format for the DMS transfer type of source
     #   endpoint.
     #
-    #   Attributes include:
+    #   Attributes include the following:
     #
     #   * serviceAccessRoleArn - The IAM role that has permission to access
     #     the Amazon S3 bucket.
@@ -2639,15 +2768,37 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] mongo_db_settings
     #   Settings in JSON format for the source MongoDB endpoint. For more
-    #   information about the available settings, see the **Configuration
-    #   Properties When Using MongoDB as a Source for AWS Database Migration
-    #   Service** section at [ Using Amazon S3 as a Target for AWS Database
-    #   Migration Service][1].
+    #   information about the available settings, see the configuration
+    #   properties section in [ Using MongoDB as a Target for AWS Database
+    #   Migration Service][1] in the *AWS Database Migration Service User
+    #   Guide.*
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html
     #   @return [Types::MongoDbSettings]
+    #
+    # @!attribute [rw] kinesis_settings
+    #   Settings in JSON format for the target Amazon Kinesis Data Streams
+    #   endpoint. For more information about the available settings, see
+    #   [Using Object Mapping to Migrate Data to a Kinesis Data Stream][1]
+    #   in the *AWS Database Migration User Guide.*
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping
+    #   @return [Types::KinesisSettings]
+    #
+    # @!attribute [rw] elasticsearch_settings
+    #   Settings in JSON format for the target Elasticsearch endpoint. For
+    #   more information about the available settings, see [Extra Connection
+    #   Attributes When Using Elasticsearch as a Target for AWS DMS][1] in
+    #   the *AWS Database Migration User Guide.*
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration
+    #   @return [Types::ElasticsearchSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpointMessage AWS API Documentation
     #
@@ -2669,7 +2820,9 @@ module Aws::DatabaseMigrationService
       :dynamo_db_settings,
       :s3_settings,
       :dms_transfer_settings,
-      :mongo_db_settings)
+      :mongo_db_settings,
+      :kinesis_settings,
+      :elasticsearch_settings)
       include Aws::Structure
     end
 
@@ -3115,12 +3268,12 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The KMS key identifier that will be used to encrypt the connection
-    #   parameters. If you do not specify a value for the KmsKeyId
-    #   parameter, then AWS DMS will use your default encryption key. AWS
-    #   KMS creates the default encryption key for your AWS account. Your
-    #   AWS account has a different default encryption key for each AWS
-    #   region.
+    #   The AWS KMS key identifier that is used to encrypt the content on
+    #   the replication instance. If you don't specify a value for the
+    #   `KmsKeyId` parameter, then AWS DMS uses your default encryption key.
+    #   AWS KMS creates the default encryption key for your AWS account.
+    #   Your AWS account has a different default encryption key for each AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MongoDbSettings AWS API Documentation
@@ -3449,12 +3602,12 @@ module Aws::DatabaseMigrationService
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The KMS key identifier that is used to encrypt the content on the
-    #   replication instance. If you do not specify a value for the KmsKeyId
-    #   parameter, then AWS DMS will use your default encryption key. AWS
-    #   KMS creates the default encryption key for your AWS account. Your
-    #   AWS account has a different default encryption key for each AWS
-    #   region.
+    #   The AWS KMS key identifier that is used to encrypt the content on
+    #   the replication instance. If you don't specify a value for the
+    #   `KmsKeyId` parameter, then AWS DMS uses your default encryption key.
+    #   AWS KMS creates the default encryption key for your AWS account.
+    #   Your AWS account has a different default encryption key for each AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] replication_instance_arn
@@ -3494,6 +3647,10 @@ module Aws::DatabaseMigrationService
     #   the Free DMS program.
     #   @return [Time]
     #
+    # @!attribute [rw] dns_name_servers
+    #   The DNS name servers for the replication instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationInstance AWS API Documentation
     #
     class ReplicationInstance < Struct.new(
@@ -3518,7 +3675,8 @@ module Aws::DatabaseMigrationService
       :replication_instance_private_ip_addresses,
       :publicly_accessible,
       :secondary_availability_zone,
-      :free_until)
+      :free_until,
+      :dns_name_servers)
       include Aws::Structure
     end
 

@@ -236,8 +236,9 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [required, Types::NotificationConfiguration] :notification_configuration
-    #   Container for specifying the notification configuration of the bucket.
-    #   If this element is empty, notifications are turned off on the bucket.
+    #   A container for specifying the notification configuration of the
+    #   bucket. If this element is empty, notifications are turned off for the
+    #   bucket.
     # @return [EmptyStructure]
     def put(options = {})
       options = options.merge(bucket: @bucket_name)

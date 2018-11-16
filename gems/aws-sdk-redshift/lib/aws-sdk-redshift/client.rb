@@ -411,6 +411,9 @@ module Aws::Redshift
     #   resp.snapshot.restorable_node_types[0] #=> String
     #   resp.snapshot.enhanced_vpc_routing #=> Boolean
     #   resp.snapshot.maintenance_track_name #=> String
+    #   resp.snapshot.manual_snapshot_retention_period #=> Integer
+    #   resp.snapshot.manual_snapshot_remaining_days #=> Integer
+    #   resp.snapshot.snapshot_retention_start_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeSnapshotAccess AWS API Documentation
     #
@@ -418,6 +421,158 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def authorize_snapshot_access(params = {}, options = {})
       req = build_request(:authorize_snapshot_access, params)
+      req.send_request(options)
+    end
+
+    # Deletes a set of cluster snapshots.
+    #
+    # @option params [required, Array<Types::DeleteClusterSnapshotMessage>] :identifiers
+    #   A list of indentifiers for the snapshots you want to delete.
+    #
+    # @return [Types::BatchDeleteClusterSnapshotsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDeleteClusterSnapshotsResult#resources #resources} => Array&lt;String&gt;
+    #   * {Types::BatchDeleteClusterSnapshotsResult#errors #errors} => Array&lt;Types::SnapshotErrorMessage&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_delete_cluster_snapshots({
+    #     identifiers: [ # required
+    #       {
+    #         snapshot_identifier: "String", # required
+    #         snapshot_cluster_identifier: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resources #=> Array
+    #   resp.resources[0] #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].snapshot_identifier #=> String
+    #   resp.errors[0].snapshot_cluster_identifier #=> String
+    #   resp.errors[0].failure_code #=> String
+    #   resp.errors[0].failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/BatchDeleteClusterSnapshots AWS API Documentation
+    #
+    # @overload batch_delete_cluster_snapshots(params = {})
+    # @param [Hash] params ({})
+    def batch_delete_cluster_snapshots(params = {}, options = {})
+      req = build_request(:batch_delete_cluster_snapshots, params)
+      req.send_request(options)
+    end
+
+    # Modifies the settings for a list of snapshots.
+    #
+    # @option params [required, Array<String>] :snapshot_identifier_list
+    #   A list of snapshot identifiers you want to modify.
+    #
+    # @option params [Integer] :manual_snapshot_retention_period
+    #   The number of days that a manual snapshot is retained. If you specify
+    #   the value -1, the manual snapshot is retained indefinitely.
+    #
+    #   The number must be either -1 or an integer between 1 and 3,653.
+    #
+    #   If you decrease the manual snapshot retention period from its current
+    #   value, existing manual snapshots that fall outside of the new
+    #   retention period will return an error. If you want to suppress the
+    #   errors and delete the snapshots, use the force option.
+    #
+    # @option params [Boolean] :force
+    #   A boolean value indicating whether to override an exception if the
+    #   retention period has passed.
+    #
+    # @return [Types::BatchModifyClusterSnapshotsOutputMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchModifyClusterSnapshotsOutputMessage#resources #resources} => Array&lt;String&gt;
+    #   * {Types::BatchModifyClusterSnapshotsOutputMessage#errors #errors} => Array&lt;Types::SnapshotErrorMessage&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_modify_cluster_snapshots({
+    #     snapshot_identifier_list: ["String"], # required
+    #     manual_snapshot_retention_period: 1,
+    #     force: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resources #=> Array
+    #   resp.resources[0] #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].snapshot_identifier #=> String
+    #   resp.errors[0].snapshot_cluster_identifier #=> String
+    #   resp.errors[0].failure_code #=> String
+    #   resp.errors[0].failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/BatchModifyClusterSnapshots AWS API Documentation
+    #
+    # @overload batch_modify_cluster_snapshots(params = {})
+    # @param [Hash] params ({})
+    def batch_modify_cluster_snapshots(params = {}, options = {})
+      req = build_request(:batch_modify_cluster_snapshots, params)
+      req.send_request(options)
+    end
+
+    # Cancels a resize operation.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The unique identifier for the cluster that you want to cancel a resize
+    #   operation for.
+    #
+    # @return [Types::ResizeProgressMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResizeProgressMessage#target_node_type #target_node_type} => String
+    #   * {Types::ResizeProgressMessage#target_number_of_nodes #target_number_of_nodes} => Integer
+    #   * {Types::ResizeProgressMessage#target_cluster_type #target_cluster_type} => String
+    #   * {Types::ResizeProgressMessage#status #status} => String
+    #   * {Types::ResizeProgressMessage#import_tables_completed #import_tables_completed} => Array&lt;String&gt;
+    #   * {Types::ResizeProgressMessage#import_tables_in_progress #import_tables_in_progress} => Array&lt;String&gt;
+    #   * {Types::ResizeProgressMessage#import_tables_not_started #import_tables_not_started} => Array&lt;String&gt;
+    #   * {Types::ResizeProgressMessage#avg_resize_rate_in_mega_bytes_per_second #avg_resize_rate_in_mega_bytes_per_second} => Float
+    #   * {Types::ResizeProgressMessage#total_resize_data_in_mega_bytes #total_resize_data_in_mega_bytes} => Integer
+    #   * {Types::ResizeProgressMessage#progress_in_mega_bytes #progress_in_mega_bytes} => Integer
+    #   * {Types::ResizeProgressMessage#elapsed_time_in_seconds #elapsed_time_in_seconds} => Integer
+    #   * {Types::ResizeProgressMessage#estimated_time_to_completion_in_seconds #estimated_time_to_completion_in_seconds} => Integer
+    #   * {Types::ResizeProgressMessage#resize_type #resize_type} => String
+    #   * {Types::ResizeProgressMessage#message #message} => String
+    #   * {Types::ResizeProgressMessage#target_encryption_type #target_encryption_type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_resize({
+    #     cluster_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.target_node_type #=> String
+    #   resp.target_number_of_nodes #=> Integer
+    #   resp.target_cluster_type #=> String
+    #   resp.status #=> String
+    #   resp.import_tables_completed #=> Array
+    #   resp.import_tables_completed[0] #=> String
+    #   resp.import_tables_in_progress #=> Array
+    #   resp.import_tables_in_progress[0] #=> String
+    #   resp.import_tables_not_started #=> Array
+    #   resp.import_tables_not_started[0] #=> String
+    #   resp.avg_resize_rate_in_mega_bytes_per_second #=> Float
+    #   resp.total_resize_data_in_mega_bytes #=> Integer
+    #   resp.progress_in_mega_bytes #=> Integer
+    #   resp.elapsed_time_in_seconds #=> Integer
+    #   resp.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.resize_type #=> String
+    #   resp.message #=> String
+    #   resp.target_encryption_type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CancelResize AWS API Documentation
+    #
+    # @overload cancel_resize(params = {})
+    # @param [Hash] params ({})
+    def cancel_resize(params = {}, options = {})
+      req = build_request(:cancel_resize, params)
       req.send_request(options)
     end
 
@@ -477,6 +632,14 @@ module Aws::Redshift
     #
     #   * Must be unique for the AWS account that is making the request.
     #
+    # @option params [Integer] :manual_snapshot_retention_period
+    #   The number of days that a manual snapshot is retained. If the value is
+    #   -1, the manual snapshot is retained indefinitely.
+    #
+    #   The value must be either -1 or an integer between 1 and 3,653.
+    #
+    #   The default value is -1.
+    #
     # @return [Types::CopyClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CopyClusterSnapshotResult#snapshot #snapshot} => Types::Snapshot
@@ -487,6 +650,7 @@ module Aws::Redshift
     #     source_snapshot_identifier: "String", # required
     #     source_snapshot_cluster_identifier: "String",
     #     target_snapshot_identifier: "String", # required
+    #     manual_snapshot_retention_period: 1,
     #   })
     #
     # @example Response structure
@@ -526,6 +690,9 @@ module Aws::Redshift
     #   resp.snapshot.restorable_node_types[0] #=> String
     #   resp.snapshot.enhanced_vpc_routing #=> Boolean
     #   resp.snapshot.maintenance_track_name #=> String
+    #   resp.snapshot.manual_snapshot_retention_period #=> Integer
+    #   resp.snapshot.manual_snapshot_remaining_days #=> Integer
+    #   resp.snapshot.snapshot_retention_start_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CopyClusterSnapshot AWS API Documentation
     #
@@ -735,6 +902,13 @@ module Aws::Redshift
     #
     #   Constraints: Must be a value from 0 to 35.
     #
+    # @option params [Integer] :manual_snapshot_retention_period
+    #   The default number of days to retain a manual snapshot. If the value
+    #   is -1, the snapshot is retained indefinitely. This setting does not
+    #   change the retention period of existing snapshots.
+    #
+    #   The value must be either -1 or an integer between 1 and 3,653
+    #
     # @option params [Integer] :port
     #   The port number on which the cluster accepts incoming connections.
     #
@@ -856,6 +1030,9 @@ module Aws::Redshift
     #   cluster. If you don't provide a maintenance track name, the cluster
     #   is assigned to the `current` track.
     #
+    # @option params [String] :snapshot_schedule_identifier
+    #   A unique identifier for the snapshot schedule.
+    #
     # @return [Types::CreateClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResult#cluster #cluster} => Types::Cluster
@@ -876,6 +1053,7 @@ module Aws::Redshift
     #     preferred_maintenance_window: "String",
     #     cluster_parameter_group_name: "String",
     #     automated_snapshot_retention_period: 1,
+    #     manual_snapshot_retention_period: 1,
     #     port: 1,
     #     cluster_version: "String",
     #     allow_version_upgrade: false,
@@ -896,6 +1074,7 @@ module Aws::Redshift
     #     additional_info: "String",
     #     iam_roles: ["String"],
     #     maintenance_track_name: "String",
+    #     snapshot_schedule_identifier: "String",
     #   })
     #
     # @example Response structure
@@ -910,6 +1089,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.manual_snapshot_retention_period #=> Integer
     #   resp.cluster.cluster_security_groups #=> Array
     #   resp.cluster.cluster_security_groups[0].cluster_security_group_name #=> String
     #   resp.cluster.cluster_security_groups[0].status #=> String
@@ -949,11 +1129,18 @@ module Aws::Redshift
     #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
     #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
     #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
     #   resp.cluster.hsm_status.status #=> String
     #   resp.cluster.cluster_snapshot_copy_status.destination_region #=> String
     #   resp.cluster.cluster_snapshot_copy_status.retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.manual_snapshot_retention_period #=> Integer
     #   resp.cluster.cluster_snapshot_copy_status.snapshot_copy_grant_name #=> String
     #   resp.cluster.cluster_public_key #=> String
     #   resp.cluster.cluster_nodes #=> Array
@@ -975,6 +1162,14 @@ module Aws::Redshift
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
     #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.snapshot_schedule_identifier #=> String
+    #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateCluster AWS API Documentation
     #
@@ -1183,6 +1378,14 @@ module Aws::Redshift
     # @option params [required, String] :cluster_identifier
     #   The cluster identifier for which you want a snapshot.
     #
+    # @option params [Integer] :manual_snapshot_retention_period
+    #   The number of days that a manual snapshot is retained. If the value is
+    #   -1, the manual snapshot is retained indefinitely.
+    #
+    #   The value must be either -1 or an integer between 1 and 3,653.
+    #
+    #   The default value is -1.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tag instances.
     #
@@ -1195,6 +1398,7 @@ module Aws::Redshift
     #   resp = client.create_cluster_snapshot({
     #     snapshot_identifier: "String", # required
     #     cluster_identifier: "String", # required
+    #     manual_snapshot_retention_period: 1,
     #     tags: [
     #       {
     #         key: "String",
@@ -1240,6 +1444,9 @@ module Aws::Redshift
     #   resp.snapshot.restorable_node_types[0] #=> String
     #   resp.snapshot.enhanced_vpc_routing #=> Boolean
     #   resp.snapshot.maintenance_track_name #=> String
+    #   resp.snapshot.manual_snapshot_retention_period #=> Integer
+    #   resp.snapshot.manual_snapshot_remaining_days #=> Integer
+    #   resp.snapshot.snapshot_retention_start_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSnapshot AWS API Documentation
     #
@@ -1398,7 +1605,7 @@ module Aws::Redshift
     #   Specifies the Amazon Redshift event categories to be published by the
     #   event notification subscription.
     #
-    #   Values: Configuration, Management, Monitoring, Security
+    #   Values: configuration, management, monitoring, security
     #
     # @option params [String] :severity
     #   Specifies the Amazon Redshift event severity to be published by the
@@ -1667,6 +1874,71 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Creates a new snapshot schedule.
+    #
+    # @option params [Array<String>] :schedule_definitions
+    #   The definition of the snapshot schedule. The definition is made up of
+    #   schedule expressions. For example, "cron(30 12 *)" or "rate(12
+    #   hours)".
+    #
+    # @option params [String] :schedule_identifier
+    #   A unique identifier for a snapshot schedule. Only alphanumeric
+    #   characters are allowed for the identifier.
+    #
+    # @option params [String] :schedule_description
+    #   The description of the snapshot schedule.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #
+    # @option params [Boolean] :dry_run
+    #
+    # @option params [Integer] :next_invocations
+    #
+    # @return [Types::SnapshotSchedule] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SnapshotSchedule#schedule_definitions #schedule_definitions} => Array&lt;String&gt;
+    #   * {Types::SnapshotSchedule#schedule_identifier #schedule_identifier} => String
+    #   * {Types::SnapshotSchedule#schedule_description #schedule_description} => String
+    #   * {Types::SnapshotSchedule#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::SnapshotSchedule#next_invocations #next_invocations} => Array&lt;Time&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_snapshot_schedule({
+    #     schedule_definitions: ["String"],
+    #     schedule_identifier: "String",
+    #     schedule_description: "String",
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     dry_run: false,
+    #     next_invocations: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schedule_definitions #=> Array
+    #   resp.schedule_definitions[0] #=> String
+    #   resp.schedule_identifier #=> String
+    #   resp.schedule_description #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.next_invocations #=> Array
+    #   resp.next_invocations[0] #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateSnapshotSchedule AWS API Documentation
+    #
+    # @overload create_snapshot_schedule(params = {})
+    # @param [Hash] params ({})
+    def create_snapshot_schedule(params = {}, options = {})
+      req = build_request(:create_snapshot_schedule, params)
+      req.send_request(options)
+    end
+
     # Adds one or more tags to a specified resource.
     #
     # A resource can have up to 50 tags. If you try to create more than 50
@@ -1772,6 +2044,14 @@ module Aws::Redshift
     #
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #
+    # @option params [Integer] :final_cluster_snapshot_retention_period
+    #   The number of days that a manual snapshot is retained. If the value is
+    #   -1, the manual snapshot is retained indefinitely.
+    #
+    #   The value must be either -1 or an integer between 1 and 3,653.
+    #
+    #   The default value is -1.
+    #
     # @return [Types::DeleteClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteClusterResult#cluster #cluster} => Types::Cluster
@@ -1782,6 +2062,7 @@ module Aws::Redshift
     #     cluster_identifier: "String", # required
     #     skip_final_cluster_snapshot: false,
     #     final_cluster_snapshot_identifier: "String",
+    #     final_cluster_snapshot_retention_period: 1,
     #   })
     #
     # @example Response structure
@@ -1796,6 +2077,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.manual_snapshot_retention_period #=> Integer
     #   resp.cluster.cluster_security_groups #=> Array
     #   resp.cluster.cluster_security_groups[0].cluster_security_group_name #=> String
     #   resp.cluster.cluster_security_groups[0].status #=> String
@@ -1835,11 +2117,18 @@ module Aws::Redshift
     #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
     #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
     #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
     #   resp.cluster.hsm_status.status #=> String
     #   resp.cluster.cluster_snapshot_copy_status.destination_region #=> String
     #   resp.cluster.cluster_snapshot_copy_status.retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.manual_snapshot_retention_period #=> Integer
     #   resp.cluster.cluster_snapshot_copy_status.snapshot_copy_grant_name #=> String
     #   resp.cluster.cluster_public_key #=> String
     #   resp.cluster.cluster_nodes #=> Array
@@ -1861,6 +2150,14 @@ module Aws::Redshift
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
     #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.snapshot_schedule_identifier #=> String
+    #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCluster AWS API Documentation
     #
@@ -1954,7 +2251,7 @@ module Aws::Redshift
     #   The unique identifier of the manual snapshot to be deleted.
     #
     #   Constraints: Must be the name of an existing snapshot that is in the
-    #   `available` state.
+    #   `available`, `failed`, or `cancelled` state.
     #
     # @option params [String] :snapshot_cluster_identifier
     #   The unique identifier of the cluster the snapshot was created from.
@@ -2012,6 +2309,9 @@ module Aws::Redshift
     #   resp.snapshot.restorable_node_types[0] #=> String
     #   resp.snapshot.enhanced_vpc_routing #=> Boolean
     #   resp.snapshot.maintenance_track_name #=> String
+    #   resp.snapshot.manual_snapshot_retention_period #=> Integer
+    #   resp.snapshot.manual_snapshot_remaining_days #=> Integer
+    #   resp.snapshot.snapshot_retention_start_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSnapshot AWS API Documentation
     #
@@ -2133,6 +2433,28 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Deletes a snapshot schedule.
+    #
+    # @option params [required, String] :schedule_identifier
+    #   A unique identifier of the snapshot schedule to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_snapshot_schedule({
+    #     schedule_identifier: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteSnapshotSchedule AWS API Documentation
+    #
+    # @overload delete_snapshot_schedule(params = {})
+    # @param [Hash] params ({})
+    def delete_snapshot_schedule(params = {}, options = {})
+      req = build_request(:delete_snapshot_schedule, params)
+      req.send_request(options)
+    end
+
     # Deletes a tag or tags from a resource. You must provide the ARN of the
     # resource from which you want to delete the tag or tags.
     #
@@ -2159,6 +2481,37 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def delete_tags(params = {}, options = {})
       req = build_request(:delete_tags, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of attributes attached to an account
+    #
+    # @option params [Array<String>] :attribute_names
+    #   A list of attribute names.
+    #
+    # @return [Types::AccountAttributeList] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AccountAttributeList#account_attributes #account_attributes} => Array&lt;Types::AccountAttribute&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_account_attributes({
+    #     attribute_names: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_attributes #=> Array
+    #   resp.account_attributes[0].attribute_name #=> String
+    #   resp.account_attributes[0].attribute_values #=> Array
+    #   resp.account_attributes[0].attribute_values[0].attribute_value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeAccountAttributes AWS API Documentation
+    #
+    # @overload describe_account_attributes(params = {})
+    # @param [Hash] params ({})
+    def describe_account_attributes(params = {}, options = {})
+      req = build_request(:describe_account_attributes, params)
       req.send_request(options)
     end
 
@@ -2642,6 +2995,8 @@ module Aws::Redshift
     #   deleted. If `ClusterExists` is set to `true`, `ClusterIdentifier` is
     #   required.
     #
+    # @option params [Array<Types::SnapshotSortingEntity>] :sorting_entities
+    #
     # @return [Types::SnapshotMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SnapshotMessage#marker #marker} => String
@@ -2661,6 +3016,12 @@ module Aws::Redshift
     #     tag_keys: ["String"],
     #     tag_values: ["String"],
     #     cluster_exists: false,
+    #     sorting_entities: [
+    #       {
+    #         attribute: "SOURCE_TYPE", # required, accepts SOURCE_TYPE, TOTAL_SIZE, CREATE_TIME
+    #         sort_order: "ASC", # accepts ASC, DESC
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2702,6 +3063,9 @@ module Aws::Redshift
     #   resp.snapshots[0].restorable_node_types[0] #=> String
     #   resp.snapshots[0].enhanced_vpc_routing #=> Boolean
     #   resp.snapshots[0].maintenance_track_name #=> String
+    #   resp.snapshots[0].manual_snapshot_retention_period #=> Integer
+    #   resp.snapshots[0].manual_snapshot_remaining_days #=> Integer
+    #   resp.snapshots[0].snapshot_retention_start_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSnapshots AWS API Documentation
     #
@@ -2849,6 +3213,8 @@ module Aws::Redshift
     #   resp.maintenance_tracks[0].update_targets #=> Array
     #   resp.maintenance_tracks[0].update_targets[0].maintenance_track_name #=> String
     #   resp.maintenance_tracks[0].update_targets[0].database_version #=> String
+    #   resp.maintenance_tracks[0].update_targets[0].supported_operations #=> Array
+    #   resp.maintenance_tracks[0].update_targets[0].supported_operations[0].operation_name #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterTracks AWS API Documentation
@@ -3032,6 +3398,7 @@ module Aws::Redshift
     #   resp.clusters[0].endpoint.port #=> Integer
     #   resp.clusters[0].cluster_create_time #=> Time
     #   resp.clusters[0].automated_snapshot_retention_period #=> Integer
+    #   resp.clusters[0].manual_snapshot_retention_period #=> Integer
     #   resp.clusters[0].cluster_security_groups #=> Array
     #   resp.clusters[0].cluster_security_groups[0].cluster_security_group_name #=> String
     #   resp.clusters[0].cluster_security_groups[0].status #=> String
@@ -3071,11 +3438,18 @@ module Aws::Redshift
     #   resp.clusters[0].restore_status.progress_in_mega_bytes #=> Integer
     #   resp.clusters[0].restore_status.elapsed_time_in_seconds #=> Integer
     #   resp.clusters[0].restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.clusters[0].data_transfer_progress.status #=> String
+    #   resp.clusters[0].data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.clusters[0].data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.clusters[0].data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.clusters[0].data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.clusters[0].data_transfer_progress.elapsed_time_in_seconds #=> Integer
     #   resp.clusters[0].hsm_status.hsm_client_certificate_identifier #=> String
     #   resp.clusters[0].hsm_status.hsm_configuration_identifier #=> String
     #   resp.clusters[0].hsm_status.status #=> String
     #   resp.clusters[0].cluster_snapshot_copy_status.destination_region #=> String
     #   resp.clusters[0].cluster_snapshot_copy_status.retention_period #=> Integer
+    #   resp.clusters[0].cluster_snapshot_copy_status.manual_snapshot_retention_period #=> Integer
     #   resp.clusters[0].cluster_snapshot_copy_status.snapshot_copy_grant_name #=> String
     #   resp.clusters[0].cluster_public_key #=> String
     #   resp.clusters[0].cluster_nodes #=> Array
@@ -3097,6 +3471,14 @@ module Aws::Redshift
     #   resp.clusters[0].pending_actions[0] #=> String
     #   resp.clusters[0].maintenance_track_name #=> String
     #   resp.clusters[0].elastic_resize_number_of_node_options #=> String
+    #   resp.clusters[0].deferred_maintenance_windows #=> Array
+    #   resp.clusters[0].deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.clusters[0].deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.clusters[0].deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.clusters[0].snapshot_schedule_identifier #=> String
+    #   resp.clusters[0].snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.clusters[0].resize_info.resize_type #=> String
+    #   resp.clusters[0].resize_info.allow_cancel_resize #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusters AWS API Documentation
     #
@@ -4065,6 +4447,97 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Returns a list of snapshot schedules.
+    #
+    # @option params [String] :cluster_identifier
+    #   The unique identifier for the cluster whose snapshot schedules you
+    #   want to view.
+    #
+    # @option params [String] :schedule_identifier
+    #   A unique identifier for a snapshot schedule.
+    #
+    # @option params [Array<String>] :tag_keys
+    #   The key value for a snapshot schedule tag.
+    #
+    # @option params [Array<String>] :tag_values
+    #   The value corresponding to the key of the snapshot schedule tag.
+    #
+    # @option params [String] :marker
+    #   A value that indicates the starting point for the next set of response
+    #   records in a subsequent request. If a value is returned in a response,
+    #   you can retrieve the next set of records by providing this returned
+    #   marker value in the `marker` parameter and retrying the command. If
+    #   the `marker` field is empty, all response records have been retrieved
+    #   for the request.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number or response records to return in each call. If the
+    #   number of remaining response records exceeds the specified
+    #   `MaxRecords` value, a value is returned in a `marker` field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned `marker` value.
+    #
+    # @return [Types::DescribeSnapshotSchedulesOutputMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSnapshotSchedulesOutputMessage#snapshot_schedules #snapshot_schedules} => Array&lt;Types::SnapshotSchedule&gt;
+    #   * {Types::DescribeSnapshotSchedulesOutputMessage#marker #marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_snapshot_schedules({
+    #     cluster_identifier: "String",
+    #     schedule_identifier: "String",
+    #     tag_keys: ["String"],
+    #     tag_values: ["String"],
+    #     marker: "String",
+    #     max_records: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapshot_schedules #=> Array
+    #   resp.snapshot_schedules[0].schedule_definitions #=> Array
+    #   resp.snapshot_schedules[0].schedule_definitions[0] #=> String
+    #   resp.snapshot_schedules[0].schedule_identifier #=> String
+    #   resp.snapshot_schedules[0].schedule_description #=> String
+    #   resp.snapshot_schedules[0].tags #=> Array
+    #   resp.snapshot_schedules[0].tags[0].key #=> String
+    #   resp.snapshot_schedules[0].tags[0].value #=> String
+    #   resp.snapshot_schedules[0].next_invocations #=> Array
+    #   resp.snapshot_schedules[0].next_invocations[0] #=> Time
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeSnapshotSchedules AWS API Documentation
+    #
+    # @overload describe_snapshot_schedules(params = {})
+    # @param [Hash] params ({})
+    def describe_snapshot_schedules(params = {}, options = {})
+      req = build_request(:describe_snapshot_schedules, params)
+      req.send_request(options)
+    end
+
+    # Returns the total amount of snapshot usage and provisioned storage for
+    # a user in megabytes.
+    #
+    # @return [Types::CustomerStorageMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CustomerStorageMessage#total_backup_size_in_mega_bytes #total_backup_size_in_mega_bytes} => Float
+    #   * {Types::CustomerStorageMessage#total_provisioned_storage_in_mega_bytes #total_provisioned_storage_in_mega_bytes} => Float
+    #
+    # @example Response structure
+    #
+    #   resp.total_backup_size_in_mega_bytes #=> Float
+    #   resp.total_provisioned_storage_in_mega_bytes #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeStorage AWS API Documentation
+    #
+    # @overload describe_storage(params = {})
+    # @param [Hash] params ({})
+    def describe_storage(params = {}, options = {})
+      req = build_request(:describe_storage, params)
+      req.send_request(options)
+    end
+
     # Lists the status of one or more table restore requests made using the
     # RestoreTableFromClusterSnapshot API action. If you don't specify a
     # value for the `TableRestoreRequestId` parameter, then
@@ -4342,6 +4815,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.manual_snapshot_retention_period #=> Integer
     #   resp.cluster.cluster_security_groups #=> Array
     #   resp.cluster.cluster_security_groups[0].cluster_security_group_name #=> String
     #   resp.cluster.cluster_security_groups[0].status #=> String
@@ -4381,11 +4855,18 @@ module Aws::Redshift
     #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
     #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
     #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
     #   resp.cluster.hsm_status.status #=> String
     #   resp.cluster.cluster_snapshot_copy_status.destination_region #=> String
     #   resp.cluster.cluster_snapshot_copy_status.retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.manual_snapshot_retention_period #=> Integer
     #   resp.cluster.cluster_snapshot_copy_status.snapshot_copy_grant_name #=> String
     #   resp.cluster.cluster_public_key #=> String
     #   resp.cluster.cluster_nodes #=> Array
@@ -4407,6 +4888,14 @@ module Aws::Redshift
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
     #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.snapshot_schedule_identifier #=> String
+    #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopy AWS API Documentation
     #
@@ -4523,6 +5012,13 @@ module Aws::Redshift
     #   The name of the snapshot copy grant to use when snapshots of an AWS
     #   KMS-encrypted cluster are copied to the destination region.
     #
+    # @option params [Integer] :manual_snapshot_retention_period
+    #   The number of days to retain newly copied snapshots in the destination
+    #   region after they are copied from the source region. If the value is
+    #   -1, the manual snapshot is retained indefinitely.
+    #
+    #   The value must be either -1 or an integer between 1 and 3,653.
+    #
     # @return [Types::EnableSnapshotCopyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EnableSnapshotCopyResult#cluster #cluster} => Types::Cluster
@@ -4534,6 +5030,7 @@ module Aws::Redshift
     #     destination_region: "String", # required
     #     retention_period: 1,
     #     snapshot_copy_grant_name: "String",
+    #     manual_snapshot_retention_period: 1,
     #   })
     #
     # @example Response structure
@@ -4548,6 +5045,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.manual_snapshot_retention_period #=> Integer
     #   resp.cluster.cluster_security_groups #=> Array
     #   resp.cluster.cluster_security_groups[0].cluster_security_group_name #=> String
     #   resp.cluster.cluster_security_groups[0].status #=> String
@@ -4587,11 +5085,18 @@ module Aws::Redshift
     #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
     #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
     #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
     #   resp.cluster.hsm_status.status #=> String
     #   resp.cluster.cluster_snapshot_copy_status.destination_region #=> String
     #   resp.cluster.cluster_snapshot_copy_status.retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.manual_snapshot_retention_period #=> Integer
     #   resp.cluster.cluster_snapshot_copy_status.snapshot_copy_grant_name #=> String
     #   resp.cluster.cluster_public_key #=> String
     #   resp.cluster.cluster_nodes #=> Array
@@ -4613,6 +5118,14 @@ module Aws::Redshift
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
     #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.snapshot_schedule_identifier #=> String
+    #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopy AWS API Documentation
     #
@@ -4974,6 +5487,16 @@ module Aws::Redshift
     #
     #   Constraints: Must be a value from 0 to 35.
     #
+    # @option params [Integer] :manual_snapshot_retention_period
+    #   The default for number of days that a newly created manual snapshot is
+    #   retained. If the value is -1, the manual snapshot is retained
+    #   indefinitely. This value will not retroactively change the retention
+    #   periods of existing manual snapshots
+    #
+    #   The value must be either -1 or an integer between 1 and 3,653.
+    #
+    #   The default value is -1.
+    #
     # @option params [String] :preferred_maintenance_window
     #   The weekly time range (in UTC) during which system maintenance can
     #   occur, if necessary. If system maintenance is necessary during the
@@ -5109,6 +5632,7 @@ module Aws::Redshift
     #     master_user_password: "String",
     #     cluster_parameter_group_name: "String",
     #     automated_snapshot_retention_period: 1,
+    #     manual_snapshot_retention_period: 1,
     #     preferred_maintenance_window: "String",
     #     cluster_version: "String",
     #     allow_version_upgrade: false,
@@ -5135,6 +5659,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.manual_snapshot_retention_period #=> Integer
     #   resp.cluster.cluster_security_groups #=> Array
     #   resp.cluster.cluster_security_groups[0].cluster_security_group_name #=> String
     #   resp.cluster.cluster_security_groups[0].status #=> String
@@ -5174,11 +5699,18 @@ module Aws::Redshift
     #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
     #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
     #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
     #   resp.cluster.hsm_status.status #=> String
     #   resp.cluster.cluster_snapshot_copy_status.destination_region #=> String
     #   resp.cluster.cluster_snapshot_copy_status.retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.manual_snapshot_retention_period #=> Integer
     #   resp.cluster.cluster_snapshot_copy_status.snapshot_copy_grant_name #=> String
     #   resp.cluster.cluster_public_key #=> String
     #   resp.cluster.cluster_nodes #=> Array
@@ -5200,6 +5732,14 @@ module Aws::Redshift
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
     #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.snapshot_schedule_identifier #=> String
+    #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyCluster AWS API Documentation
     #
@@ -5246,6 +5786,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.manual_snapshot_retention_period #=> Integer
     #   resp.cluster.cluster_security_groups #=> Array
     #   resp.cluster.cluster_security_groups[0].cluster_security_group_name #=> String
     #   resp.cluster.cluster_security_groups[0].status #=> String
@@ -5285,11 +5826,18 @@ module Aws::Redshift
     #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
     #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
     #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
     #   resp.cluster.hsm_status.status #=> String
     #   resp.cluster.cluster_snapshot_copy_status.destination_region #=> String
     #   resp.cluster.cluster_snapshot_copy_status.retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.manual_snapshot_retention_period #=> Integer
     #   resp.cluster.cluster_snapshot_copy_status.snapshot_copy_grant_name #=> String
     #   resp.cluster.cluster_public_key #=> String
     #   resp.cluster.cluster_nodes #=> Array
@@ -5311,6 +5859,14 @@ module Aws::Redshift
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
     #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.snapshot_schedule_identifier #=> String
+    #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterDbRevision AWS API Documentation
     #
@@ -5364,6 +5920,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.manual_snapshot_retention_period #=> Integer
     #   resp.cluster.cluster_security_groups #=> Array
     #   resp.cluster.cluster_security_groups[0].cluster_security_group_name #=> String
     #   resp.cluster.cluster_security_groups[0].status #=> String
@@ -5403,11 +5960,18 @@ module Aws::Redshift
     #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
     #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
     #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
     #   resp.cluster.hsm_status.status #=> String
     #   resp.cluster.cluster_snapshot_copy_status.destination_region #=> String
     #   resp.cluster.cluster_snapshot_copy_status.retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.manual_snapshot_retention_period #=> Integer
     #   resp.cluster.cluster_snapshot_copy_status.snapshot_copy_grant_name #=> String
     #   resp.cluster.cluster_public_key #=> String
     #   resp.cluster.cluster_nodes #=> Array
@@ -5429,6 +5993,14 @@ module Aws::Redshift
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
     #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.snapshot_schedule_identifier #=> String
+    #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRoles AWS API Documentation
     #
@@ -5436,6 +6008,150 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def modify_cluster_iam_roles(params = {}, options = {})
       req = build_request(:modify_cluster_iam_roles, params)
+      req.send_request(options)
+    end
+
+    # Modifies the maintenance settings of a cluster. For example, you can
+    # defer a maintenance window. You can also update or cancel a deferment.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   A unique identifier for the cluster.
+    #
+    # @option params [Boolean] :defer_maintenance
+    #   A boolean indicating whether to enable the deferred maintenance
+    #   window.
+    #
+    # @option params [String] :defer_maintenance_identifier
+    #   A unique identifier for the deferred maintenance window.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :defer_maintenance_start_time
+    #   A timestamp indicating the start time for the deferred maintenance
+    #   window.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :defer_maintenance_end_time
+    #   A timestamp indicating end time for the deferred maintenance window.
+    #   If you specify an end time, you can't specify a duration.
+    #
+    # @option params [Integer] :defer_maintenance_duration
+    #   An integer indicating the duration of the maintenance window in days.
+    #   If you specify a duration, you can't specify an end time. The
+    #   duration must be 14 days or less.
+    #
+    # @return [Types::ModifyClusterMaintenanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyClusterMaintenanceResult#cluster #cluster} => Types::Cluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_cluster_maintenance({
+    #     cluster_identifier: "String", # required
+    #     defer_maintenance: false,
+    #     defer_maintenance_identifier: "String",
+    #     defer_maintenance_start_time: Time.now,
+    #     defer_maintenance_end_time: Time.now,
+    #     defer_maintenance_duration: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster.cluster_identifier #=> String
+    #   resp.cluster.node_type #=> String
+    #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.modify_status #=> String
+    #   resp.cluster.master_username #=> String
+    #   resp.cluster.db_name #=> String
+    #   resp.cluster.endpoint.address #=> String
+    #   resp.cluster.endpoint.port #=> Integer
+    #   resp.cluster.cluster_create_time #=> Time
+    #   resp.cluster.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.manual_snapshot_retention_period #=> Integer
+    #   resp.cluster.cluster_security_groups #=> Array
+    #   resp.cluster.cluster_security_groups[0].cluster_security_group_name #=> String
+    #   resp.cluster.cluster_security_groups[0].status #=> String
+    #   resp.cluster.vpc_security_groups #=> Array
+    #   resp.cluster.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.cluster.vpc_security_groups[0].status #=> String
+    #   resp.cluster.cluster_parameter_groups #=> Array
+    #   resp.cluster.cluster_parameter_groups[0].parameter_group_name #=> String
+    #   resp.cluster.cluster_parameter_groups[0].parameter_apply_status #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list #=> Array
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_name #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_apply_status #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_apply_error_description #=> String
+    #   resp.cluster.cluster_subnet_group_name #=> String
+    #   resp.cluster.vpc_id #=> String
+    #   resp.cluster.availability_zone #=> String
+    #   resp.cluster.preferred_maintenance_window #=> String
+    #   resp.cluster.pending_modified_values.master_user_password #=> String
+    #   resp.cluster.pending_modified_values.node_type #=> String
+    #   resp.cluster.pending_modified_values.number_of_nodes #=> Integer
+    #   resp.cluster.pending_modified_values.cluster_type #=> String
+    #   resp.cluster.pending_modified_values.cluster_version #=> String
+    #   resp.cluster.pending_modified_values.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.pending_modified_values.cluster_identifier #=> String
+    #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
+    #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
+    #   resp.cluster.cluster_version #=> String
+    #   resp.cluster.allow_version_upgrade #=> Boolean
+    #   resp.cluster.number_of_nodes #=> Integer
+    #   resp.cluster.publicly_accessible #=> Boolean
+    #   resp.cluster.encrypted #=> Boolean
+    #   resp.cluster.restore_status.status #=> String
+    #   resp.cluster.restore_status.current_restore_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.restore_status.snapshot_size_in_mega_bytes #=> Integer
+    #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
+    #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
+    #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
+    #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
+    #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
+    #   resp.cluster.hsm_status.status #=> String
+    #   resp.cluster.cluster_snapshot_copy_status.destination_region #=> String
+    #   resp.cluster.cluster_snapshot_copy_status.retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.manual_snapshot_retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.snapshot_copy_grant_name #=> String
+    #   resp.cluster.cluster_public_key #=> String
+    #   resp.cluster.cluster_nodes #=> Array
+    #   resp.cluster.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.elastic_ip_status.elastic_ip #=> String
+    #   resp.cluster.elastic_ip_status.status #=> String
+    #   resp.cluster.cluster_revision_number #=> String
+    #   resp.cluster.tags #=> Array
+    #   resp.cluster.tags[0].key #=> String
+    #   resp.cluster.tags[0].value #=> String
+    #   resp.cluster.kms_key_id #=> String
+    #   resp.cluster.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.iam_roles #=> Array
+    #   resp.cluster.iam_roles[0].iam_role_arn #=> String
+    #   resp.cluster.iam_roles[0].apply_status #=> String
+    #   resp.cluster.pending_actions #=> Array
+    #   resp.cluster.pending_actions[0] #=> String
+    #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.snapshot_schedule_identifier #=> String
+    #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMaintenance AWS API Documentation
+    #
+    # @overload modify_cluster_maintenance(params = {})
+    # @param [Hash] params ({})
+    def modify_cluster_maintenance(params = {}, options = {})
+      req = build_request(:modify_cluster_maintenance, params)
       req.send_request(options)
     end
 
@@ -5498,6 +6214,119 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def modify_cluster_parameter_group(params = {}, options = {})
       req = build_request(:modify_cluster_parameter_group, params)
+      req.send_request(options)
+    end
+
+    # Modifies the settings for a snapshot.
+    #
+    # @option params [required, String] :snapshot_identifier
+    #   The identifier of the snapshot whose setting you want to modify.
+    #
+    # @option params [Integer] :manual_snapshot_retention_period
+    #   The number of days that a manual snapshot is retained. If the value is
+    #   -1, the manual snapshot is retained indefinitely.
+    #
+    #   If the manual snapshot falls outside of the new retention period, you
+    #   can specify the force option to immediately delete the snapshot.
+    #
+    #   The value must be either -1 or an integer between 1 and 3,653.
+    #
+    # @option params [Boolean] :force
+    #   A Boolean option to override an exception if the retention period has
+    #   already passed.
+    #
+    # @return [Types::ModifyClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyClusterSnapshotResult#snapshot #snapshot} => Types::Snapshot
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_cluster_snapshot({
+    #     snapshot_identifier: "String", # required
+    #     manual_snapshot_retention_period: 1,
+    #     force: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapshot.snapshot_identifier #=> String
+    #   resp.snapshot.cluster_identifier #=> String
+    #   resp.snapshot.snapshot_create_time #=> Time
+    #   resp.snapshot.status #=> String
+    #   resp.snapshot.port #=> Integer
+    #   resp.snapshot.availability_zone #=> String
+    #   resp.snapshot.cluster_create_time #=> Time
+    #   resp.snapshot.master_username #=> String
+    #   resp.snapshot.cluster_version #=> String
+    #   resp.snapshot.snapshot_type #=> String
+    #   resp.snapshot.node_type #=> String
+    #   resp.snapshot.number_of_nodes #=> Integer
+    #   resp.snapshot.db_name #=> String
+    #   resp.snapshot.vpc_id #=> String
+    #   resp.snapshot.encrypted #=> Boolean
+    #   resp.snapshot.kms_key_id #=> String
+    #   resp.snapshot.encrypted_with_hsm #=> Boolean
+    #   resp.snapshot.accounts_with_restore_access #=> Array
+    #   resp.snapshot.accounts_with_restore_access[0].account_id #=> String
+    #   resp.snapshot.accounts_with_restore_access[0].account_alias #=> String
+    #   resp.snapshot.owner_account #=> String
+    #   resp.snapshot.total_backup_size_in_mega_bytes #=> Float
+    #   resp.snapshot.actual_incremental_backup_size_in_mega_bytes #=> Float
+    #   resp.snapshot.backup_progress_in_mega_bytes #=> Float
+    #   resp.snapshot.current_backup_rate_in_mega_bytes_per_second #=> Float
+    #   resp.snapshot.estimated_seconds_to_completion #=> Integer
+    #   resp.snapshot.elapsed_time_in_seconds #=> Integer
+    #   resp.snapshot.source_region #=> String
+    #   resp.snapshot.tags #=> Array
+    #   resp.snapshot.tags[0].key #=> String
+    #   resp.snapshot.tags[0].value #=> String
+    #   resp.snapshot.restorable_node_types #=> Array
+    #   resp.snapshot.restorable_node_types[0] #=> String
+    #   resp.snapshot.enhanced_vpc_routing #=> Boolean
+    #   resp.snapshot.maintenance_track_name #=> String
+    #   resp.snapshot.manual_snapshot_retention_period #=> Integer
+    #   resp.snapshot.manual_snapshot_remaining_days #=> Integer
+    #   resp.snapshot.snapshot_retention_start_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSnapshot AWS API Documentation
+    #
+    # @overload modify_cluster_snapshot(params = {})
+    # @param [Hash] params ({})
+    def modify_cluster_snapshot(params = {}, options = {})
+      req = build_request(:modify_cluster_snapshot, params)
+      req.send_request(options)
+    end
+
+    # Modifies a snapshot schedule for a cluster.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   A unique identifier for the cluster whose snapshot schedule you want
+    #   to modify.
+    #
+    # @option params [String] :schedule_identifier
+    #   A unique alphanumeric identifier for the schedule you want to
+    #   associate with the cluster.
+    #
+    # @option params [Boolean] :disassociate_schedule
+    #   A boolean to indicate whether to remove the assoiciation between the
+    #   cluster and the schedule.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_cluster_snapshot_schedule({
+    #     cluster_identifier: "String", # required
+    #     schedule_identifier: "String",
+    #     disassociate_schedule: false,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSnapshotSchedule AWS API Documentation
+    #
+    # @overload modify_cluster_snapshot_schedule(params = {})
+    # @param [Hash] params ({})
+    def modify_cluster_snapshot_schedule(params = {}, options = {})
+      req = build_request(:modify_cluster_snapshot_schedule, params)
       req.send_request(options)
     end
 
@@ -5587,7 +6416,7 @@ module Aws::Redshift
     #   Specifies the Amazon Redshift event categories to be published by the
     #   event notification subscription.
     #
-    #   Values: Configuration, Management, Monitoring, Security
+    #   Values: configuration, management, monitoring, security
     #
     # @option params [String] :severity
     #   Specifies the Amazon Redshift event severity to be published by the
@@ -5642,13 +6471,19 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Modifies the number of days to retain automated snapshots in the
-    # destination region after they are copied from the source region.
+    # Modifies the number of days to retain snapshots in the destination
+    # region after they are copied from the source region. By default, this
+    # only changes the retention period of copied automated snapshots. The
+    # retention periods for both new and existing copied automated snapshots
+    # will be updated with the new retention period. You can set the manual
+    # option to change only the retention periods of copied manual
+    # snapshots. If you set this option only newly copied manual snapshots
+    # will have the new retention period
     #
     # @option params [required, String] :cluster_identifier
     #   The unique identifier of the cluster for which you want to change the
-    #   retention period for automated snapshots that are copied to a
-    #   destination region.
+    #   retention period for either automated or manual snapshots that are
+    #   copied to a destination region.
     #
     #   Constraints: Must be the valid name of an existing cluster that has
     #   cross-region snapshot copy enabled.
@@ -5657,12 +6492,29 @@ module Aws::Redshift
     #   The number of days to retain automated snapshots in the destination
     #   region after they are copied from the source region.
     #
+    #   By default, this only changes the retention period of copied automated
+    #   snapshots.
+    #
     #   If you decrease the retention period for automated snapshots that are
     #   copied to a destination region, Amazon Redshift will delete any
     #   existing automated snapshots that were copied to the destination
     #   region and that fall outside of the new retention period.
     #
-    #   Constraints: Must be at least 1 and no more than 35.
+    #   Constraints: Must be at least 1 and no more than 35 for automated
+    #   snapshots.
+    #
+    #   If you specify the `manual` option, only newly copied manual snapshots
+    #   will have the new retention period.
+    #
+    #   If you specify the value of -1 newly copied manual snapshots are
+    #   retained indefinitely.
+    #
+    #   Constraints: The number of days must be either -1 or an integer
+    #   between 1 and 3,653 for manual snapshots.
+    #
+    # @option params [Boolean] :manual
+    #   Indicates whether to apply the snapshot retention period to newly
+    #   copied manual snapshots instead of automated snapshots.
     #
     # @return [Types::ModifySnapshotCopyRetentionPeriodResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5673,6 +6525,7 @@ module Aws::Redshift
     #   resp = client.modify_snapshot_copy_retention_period({
     #     cluster_identifier: "String", # required
     #     retention_period: 1, # required
+    #     manual: false,
     #   })
     #
     # @example Response structure
@@ -5687,6 +6540,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.manual_snapshot_retention_period #=> Integer
     #   resp.cluster.cluster_security_groups #=> Array
     #   resp.cluster.cluster_security_groups[0].cluster_security_group_name #=> String
     #   resp.cluster.cluster_security_groups[0].status #=> String
@@ -5726,11 +6580,18 @@ module Aws::Redshift
     #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
     #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
     #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
     #   resp.cluster.hsm_status.status #=> String
     #   resp.cluster.cluster_snapshot_copy_status.destination_region #=> String
     #   resp.cluster.cluster_snapshot_copy_status.retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.manual_snapshot_retention_period #=> Integer
     #   resp.cluster.cluster_snapshot_copy_status.snapshot_copy_grant_name #=> String
     #   resp.cluster.cluster_public_key #=> String
     #   resp.cluster.cluster_nodes #=> Array
@@ -5752,6 +6613,14 @@ module Aws::Redshift
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
     #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.snapshot_schedule_identifier #=> String
+    #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriod AWS API Documentation
     #
@@ -5759,6 +6628,53 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def modify_snapshot_copy_retention_period(params = {}, options = {})
       req = build_request(:modify_snapshot_copy_retention_period, params)
+      req.send_request(options)
+    end
+
+    # Modifies a snapshot schedule. Any schedule associate with a cluster
+    # will be modified asynchronously.
+    #
+    # @option params [required, String] :schedule_identifier
+    #   A unique alphanumeric identifier of the schedule to modify.
+    #
+    # @option params [required, Array<String>] :schedule_definitions
+    #   An updated list of schedule definitions. A schedule definition is made
+    #   up of schedule expressions. For example, "cron(30 12 *)" or
+    #   "rate(12 hours)".
+    #
+    # @return [Types::SnapshotSchedule] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SnapshotSchedule#schedule_definitions #schedule_definitions} => Array&lt;String&gt;
+    #   * {Types::SnapshotSchedule#schedule_identifier #schedule_identifier} => String
+    #   * {Types::SnapshotSchedule#schedule_description #schedule_description} => String
+    #   * {Types::SnapshotSchedule#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::SnapshotSchedule#next_invocations #next_invocations} => Array&lt;Time&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_snapshot_schedule({
+    #     schedule_identifier: "String", # required
+    #     schedule_definitions: ["String"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schedule_definitions #=> Array
+    #   resp.schedule_definitions[0] #=> String
+    #   resp.schedule_identifier #=> String
+    #   resp.schedule_description #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.next_invocations #=> Array
+    #   resp.next_invocations[0] #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotSchedule AWS API Documentation
+    #
+    # @overload modify_snapshot_schedule(params = {})
+    # @param [Hash] params ({})
+    def modify_snapshot_schedule(params = {}, options = {})
+      req = build_request(:modify_snapshot_schedule, params)
       req.send_request(options)
     end
 
@@ -5860,6 +6776,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.manual_snapshot_retention_period #=> Integer
     #   resp.cluster.cluster_security_groups #=> Array
     #   resp.cluster.cluster_security_groups[0].cluster_security_group_name #=> String
     #   resp.cluster.cluster_security_groups[0].status #=> String
@@ -5899,11 +6816,18 @@ module Aws::Redshift
     #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
     #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
     #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
     #   resp.cluster.hsm_status.status #=> String
     #   resp.cluster.cluster_snapshot_copy_status.destination_region #=> String
     #   resp.cluster.cluster_snapshot_copy_status.retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.manual_snapshot_retention_period #=> Integer
     #   resp.cluster.cluster_snapshot_copy_status.snapshot_copy_grant_name #=> String
     #   resp.cluster.cluster_public_key #=> String
     #   resp.cluster.cluster_nodes #=> Array
@@ -5925,6 +6849,14 @@ module Aws::Redshift
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
     #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.snapshot_schedule_identifier #=> String
+    #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootCluster AWS API Documentation
     #
@@ -5998,8 +6930,8 @@ module Aws::Redshift
 
     # Changes the size of the cluster. You can change the cluster's type,
     # or change the number or type of nodes. The default behavior is to use
-    # the elastic resize method. With an elastic resize your cluster is
-    # avaialble for read and write operations more quickly than with the
+    # the elastic resize method. With an elastic resize, your cluster is
+    # available for read and write operations more quickly than with the
     # classic resize method.
     #
     # Elastic resize operations have the following restrictions:
@@ -6014,7 +6946,8 @@ module Aws::Redshift
     #
     #   * ds2.8xlarge
     #
-    # * The type of nodes you add must match the node type for the cluster.
+    # * The type of nodes that you add must match the node type for the
+    #   cluster.
     #
     # @option params [required, String] :cluster_identifier
     #   The unique identifier for the cluster to resize.
@@ -6031,7 +6964,7 @@ module Aws::Redshift
     # @option params [Boolean] :classic
     #   A boolean value indicating whether the resize operation is using the
     #   classic resize process. If you don't provide this parameter or set
-    #   the value to `false` the resize type is elastic.
+    #   the value to `false`, the resize type is elastic.
     #
     # @return [Types::ResizeClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6059,6 +6992,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.manual_snapshot_retention_period #=> Integer
     #   resp.cluster.cluster_security_groups #=> Array
     #   resp.cluster.cluster_security_groups[0].cluster_security_group_name #=> String
     #   resp.cluster.cluster_security_groups[0].status #=> String
@@ -6098,11 +7032,18 @@ module Aws::Redshift
     #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
     #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
     #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
     #   resp.cluster.hsm_status.status #=> String
     #   resp.cluster.cluster_snapshot_copy_status.destination_region #=> String
     #   resp.cluster.cluster_snapshot_copy_status.retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.manual_snapshot_retention_period #=> Integer
     #   resp.cluster.cluster_snapshot_copy_status.snapshot_copy_grant_name #=> String
     #   resp.cluster.cluster_public_key #=> String
     #   resp.cluster.cluster_nodes #=> Array
@@ -6124,6 +7065,14 @@ module Aws::Redshift
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
     #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.snapshot_schedule_identifier #=> String
+    #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeCluster AWS API Documentation
     #
@@ -6296,6 +7245,8 @@ module Aws::Redshift
     #
     #   Constraints: Must be a value from 0 to 35.
     #
+    # @option params [Integer] :manual_snapshot_retention_period
+    #
     # @option params [String] :kms_key_id
     #   The AWS Key Management Service (KMS) key ID of the encryption key that
     #   you want to use to encrypt data in the cluster that you restore from a
@@ -6356,6 +7307,9 @@ module Aws::Redshift
     #   then change the cluster to be on the trailing track. In this case, the
     #   snapshot and the source cluster are on different tracks.
     #
+    # @option params [String] :snapshot_schedule_identifier
+    #   A unique identifier for the snapshot schedule.
+    #
     # @return [Types::RestoreFromClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreFromClusterSnapshotResult#cluster #cluster} => Types::Cluster
@@ -6380,12 +7334,14 @@ module Aws::Redshift
     #     vpc_security_group_ids: ["String"],
     #     preferred_maintenance_window: "String",
     #     automated_snapshot_retention_period: 1,
+    #     manual_snapshot_retention_period: 1,
     #     kms_key_id: "String",
     #     node_type: "String",
     #     enhanced_vpc_routing: false,
     #     additional_info: "String",
     #     iam_roles: ["String"],
     #     maintenance_track_name: "String",
+    #     snapshot_schedule_identifier: "String",
     #   })
     #
     # @example Response structure
@@ -6400,6 +7356,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.manual_snapshot_retention_period #=> Integer
     #   resp.cluster.cluster_security_groups #=> Array
     #   resp.cluster.cluster_security_groups[0].cluster_security_group_name #=> String
     #   resp.cluster.cluster_security_groups[0].status #=> String
@@ -6439,11 +7396,18 @@ module Aws::Redshift
     #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
     #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
     #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
     #   resp.cluster.hsm_status.status #=> String
     #   resp.cluster.cluster_snapshot_copy_status.destination_region #=> String
     #   resp.cluster.cluster_snapshot_copy_status.retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.manual_snapshot_retention_period #=> Integer
     #   resp.cluster.cluster_snapshot_copy_status.snapshot_copy_grant_name #=> String
     #   resp.cluster.cluster_public_key #=> String
     #   resp.cluster.cluster_nodes #=> Array
@@ -6465,6 +7429,14 @@ module Aws::Redshift
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
     #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.snapshot_schedule_identifier #=> String
+    #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshot AWS API Documentation
     #
@@ -6713,6 +7685,9 @@ module Aws::Redshift
     #   resp.snapshot.restorable_node_types[0] #=> String
     #   resp.snapshot.enhanced_vpc_routing #=> Boolean
     #   resp.snapshot.maintenance_track_name #=> String
+    #   resp.snapshot.manual_snapshot_retention_period #=> Integer
+    #   resp.snapshot.manual_snapshot_remaining_days #=> Integer
+    #   resp.snapshot.snapshot_retention_start_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeSnapshotAccess AWS API Documentation
     #
@@ -6754,6 +7729,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.manual_snapshot_retention_period #=> Integer
     #   resp.cluster.cluster_security_groups #=> Array
     #   resp.cluster.cluster_security_groups[0].cluster_security_group_name #=> String
     #   resp.cluster.cluster_security_groups[0].status #=> String
@@ -6793,11 +7769,18 @@ module Aws::Redshift
     #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
     #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
     #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
     #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
     #   resp.cluster.hsm_status.status #=> String
     #   resp.cluster.cluster_snapshot_copy_status.destination_region #=> String
     #   resp.cluster.cluster_snapshot_copy_status.retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.manual_snapshot_retention_period #=> Integer
     #   resp.cluster.cluster_snapshot_copy_status.snapshot_copy_grant_name #=> String
     #   resp.cluster.cluster_public_key #=> String
     #   resp.cluster.cluster_nodes #=> Array
@@ -6819,6 +7802,14 @@ module Aws::Redshift
     #   resp.cluster.pending_actions[0] #=> String
     #   resp.cluster.maintenance_track_name #=> String
     #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.snapshot_schedule_identifier #=> String
+    #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKey AWS API Documentation
     #
@@ -6842,7 +7833,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.15.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

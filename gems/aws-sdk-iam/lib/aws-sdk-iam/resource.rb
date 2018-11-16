@@ -344,6 +344,12 @@ module Aws::IAM
     #     role_name: "roleNameType", # required
     #     assume_role_policy_document: "policyDocumentType", # required
     #     description: "roleDescriptionType",
+    #     tags: [
+    #       {
+    #         key: "tagKeyType", # required
+    #         value: "tagValueType", # required
+    #       },
+    #     ],
     #     max_session_duration: 1,
     #     permissions_boundary: "arnType",
     #   })
@@ -401,6 +407,21 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     # @option options [String] :description
     #   A description of the role.
+    # @option options [Array<Types::Tag>] :tags
+    #   A list of tags that you want to attach to the newly created role. Each
+    #   tag consists of a key name and an associated value. For more
+    #   information about tagging, see [Tagging IAM Identities][1] in the *IAM
+    #   User Guide*.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed number
+    #   of tags per role, then the entire request fails and the role is not
+    #   created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @option options [Integer] :max_session_duration
     #   The maximum session duration (in seconds) that you want to set for the
     #   specified role. If you do not specify a value for this setting, the
@@ -635,6 +656,12 @@ module Aws::IAM
     #   user = iam.create_user({
     #     path: "pathType",
     #     user_name: "userNameType", # required
+    #     tags: [
+    #       {
+    #         key: "tagKeyType", # required
+    #         value: "tagValueType", # required
+    #       },
+    #     ],
     #     permissions_boundary: "arnType",
     #   })
     # @param [Hash] options ({})
@@ -668,6 +695,21 @@ module Aws::IAM
     #
     #
     #   [1]: http://wikipedia.org/wiki/regex
+    # @option options [Array<Types::Tag>] :tags
+    #   A list of tags that you want to attach to the newly created user. Each
+    #   tag consists of a key name and an associated value. For more
+    #   information about tagging, see [Tagging IAM Identities][1] in the *IAM
+    #   User Guide*.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed number
+    #   of tags per user, then the entire request fails and the user is not
+    #   created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @option options [String] :permissions_boundary
     #   The ARN of the policy that is used to set the permissions boundary for
     #   the user.

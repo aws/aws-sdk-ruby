@@ -135,7 +135,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Container for information regarding the access control for replicas.
+    # A container for information about access control for replicas.
     #
     # @note When making an API call, you may pass AccessControlTranslation
     #   data as a hash:
@@ -557,21 +557,21 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] comments
-    #   Single character used to indicate a row should be ignored when
+    #   The single character used to indicate a row should be ignored when
     #   present at the start of a row.
     #   @return [String]
     #
     # @!attribute [rw] quote_escape_character
-    #   Single character used for escaping the quote character inside an
+    #   The single character used for escaping the quote character inside an
     #   already escaped value.
     #   @return [String]
     #
     # @!attribute [rw] record_delimiter
-    #   Value used to separate individual records.
+    #   The value used to separate individual records.
     #   @return [String]
     #
     # @!attribute [rw] field_delimiter
-    #   Value used to separate individual fields in a record.
+    #   The value used to separate individual fields in a record.
     #   @return [String]
     #
     # @!attribute [rw] quote_character
@@ -616,20 +616,20 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] quote_escape_character
-    #   Single character used for escaping the quote character inside an
+    #   Th single character used for escaping the quote character inside an
     #   already escaped value.
     #   @return [String]
     #
     # @!attribute [rw] record_delimiter
-    #   Value used to separate individual records.
+    #   The value used to separate individual records.
     #   @return [String]
     #
     # @!attribute [rw] field_delimiter
-    #   Value used to separate individual fields in a record.
+    #   The value used to separate individual fields in a record.
     #   @return [String]
     #
     # @!attribute [rw] quote_character
-    #   Value used for escaping where the field delimiter is part of the
+    #   The value used for escaping where the field delimiter is part of the
     #   value.
     #   @return [String]
     #
@@ -656,13 +656,13 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] id
-    #   Optional unique identifier for configurations in a notification
+    #   An optional unique identifier for configurations in a notification
     #   configuration. If you don't provide one, Amazon S3 will assign an
     #   ID.
     #   @return [String]
     #
     # @!attribute [rw] event
-    #   Bucket event for which to send notifications.
+    #   The bucket event for which to send notifications.
     #   @return [String]
     #
     # @!attribute [rw] events
@@ -1731,17 +1731,12 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
-    #   Deletes the replication subresource associated with the specified
-    #   bucket.
+    #   The bucket name.
     #
-    #   <note markdown="1"> There is usually some time lag before replication configuration
-    #   deletion is fully propagated to all the Amazon S3 systems.
+    #   <note markdown="1"> It can take a while to propagate the deletion of a replication
+    #   configuration to all Amazon S3 systems.
     #
     #    </note>
-    #
-    #   For more information, see [Cross-Region Replication (CRR)](
-    #   https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html) in the
-    #   Amazon S3 Developer Guide.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketReplicationRequest AWS API Documentation
@@ -1845,8 +1840,8 @@ module Aws::S3
     # @!attribute [rw] status
     #   The status of the delete marker replication.
     #
-    #   <note markdown="1"> In the current implementation, Amazon S3 does not replicate the
-    #   delete markers. Therefore, the status must be `Disabled`.
+    #   <note markdown="1"> In the current implementation, Amazon S3 doesn't replicate the
+    #   delete markers. The status must be `Disabled`.
     #
     #    </note>
     #   @return [String]
@@ -2035,6 +2030,25 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeletePublicAccessBlockRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "BucketName", # required
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The Amazon S3 bucket whose Public Access Block configuration you
+    #   want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeletePublicAccessBlockRequest AWS API Documentation
+    #
+    class DeletePublicAccessBlockRequest < Struct.new(
+      :bucket)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] key
     #   @return [String]
     #
@@ -2057,7 +2071,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Container for replication destination information.
+    # A container for information about the replication destination.
     #
     # @note When making an API call, you may pass Destination
     #   data as a hash:
@@ -2075,41 +2089,43 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
-    #   Amazon resource name (ARN) of the bucket where you want Amazon S3 to
-    #   store replicas of the object identified by the rule.
+    #   The Amazon Resource Name (ARN) of the bucket where you want Amazon
+    #   S3 to store replicas of the object identified by the rule.
     #
-    #   If you have multiple rules in your replication configuration, all
+    #   If there are multiple rules in your replication configuration, all
     #   rules must specify the same bucket as the destination. A replication
-    #   configuration can replicate objects only to one destination bucket.
+    #   configuration can replicate objects to only one destination bucket.
     #   @return [String]
     #
     # @!attribute [rw] account
-    #   Account ID of the destination bucket. Currently Amazon S3 verifies
-    #   this value only if Access Control Translation is enabled.
+    #   The account ID of the destination bucket. Currently, Amazon S3
+    #   verifies this value only if Access Control Translation is enabled.
     #
-    #   In a cross-account scenario, if you tell Amazon S3 to change replica
-    #   ownership to the AWS account that owns the destination bucket by
-    #   adding the `AccessControlTranslation` element, this is the account
-    #   ID of the destination bucket owner.
+    #   In a cross-account scenario, if you change replica ownership to the
+    #   AWS account that owns the destination bucket by adding the
+    #   `AccessControlTranslation` element, this is the account ID of the
+    #   owner of the destination bucket.
     #   @return [String]
     #
     # @!attribute [rw] storage_class
-    #   The class of storage used to store the object.
+    #   The class of storage used to store the object. By default Amazon S3
+    #   uses storage class of the source object when creating a replica.
     #   @return [String]
     #
     # @!attribute [rw] access_control_translation
-    #   Container for information regarding the access control for replicas.
+    #   A container for information about access control for replicas.
     #
-    #   Use only in a cross-account scenario, where source and destination
-    #   bucket owners are not the same, when you want to change replica
+    #   Use this element only in a cross-account scenario where source and
+    #   destination bucket owners are not the same to change replica
     #   ownership to the AWS account that owns the destination bucket. If
     #   you don't add this element to the replication configuration, the
     #   replicas are owned by same AWS account that owns the source object.
     #   @return [Types::AccessControlTranslation]
     #
     # @!attribute [rw] encryption_configuration
-    #   Container that provides encryption-related information. You must
-    #   specify this element if the `SourceSelectionCriteria` is specified.
+    #   A container that provides information about encryption. If
+    #   `SourceSelectionCriteria` is specified, you must specify this
+    #   element.
     #   @return [Types::EncryptionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Destination AWS API Documentation
@@ -2159,8 +2175,8 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Container for information regarding encryption based configuration for
-    # replicas.
+    # A container for information about the encryption-based configuration
+    # for replicas.
     #
     # @note When making an API call, you may pass EncryptionConfiguration
     #   data as a hash:
@@ -2170,7 +2186,7 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] replica_kms_key_id
-    #   The ID of the AWS KMS key for the region where the destination
+    #   The ID of the AWS KMS key for the AWS Region where the destination
     #   bucket resides. Amazon S3 uses this key to encrypt the replica
     #   object.
     #   @return [String]
@@ -2229,8 +2245,8 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Container for key value pair that defines the criteria for the filter
-    # rule.
+    # A container for a key value pair that defines the criteria for the
+    # filter rule.
     #
     # @note When making an API call, you may pass FilterRule
     #   data as a hash:
@@ -2241,12 +2257,12 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] name
-    #   Object key name prefix or suffix identifying one or more objects to
-    #   which the filtering rule applies. Maximum prefix length can be up to
+    #   The object key name prefix or suffix identifying one or more objects
+    #   to which the filtering rule applies. The maximum prefix length is
     #   1,024 characters. Overlapping prefixes and suffixes are not
-    #   supported. For more information, go to [Configuring Event
-    #   Notifications][1] in the Amazon Simple Storage Service Developer
-    #   Guide.
+    #   supported. For more information, see [Configuring Event
+    #   Notifications][1] in the *Amazon Simple Storage Service Developer
+    #   Guide*.
     #
     #
     #
@@ -2649,9 +2665,39 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @!attribute [rw] policy_status
+    #   The public-policy status for this bucket.
+    #   @return [Types::PolicyStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketPolicyStatusOutput AWS API Documentation
+    #
+    class GetBucketPolicyStatusOutput < Struct.new(
+      :policy_status)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetBucketPolicyStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "BucketName", # required
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The name of the Amazon S3 bucket whose public-policy status you want
+    #   to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketPolicyStatusRequest AWS API Documentation
+    #
+    class GetBucketPolicyStatusRequest < Struct.new(
+      :bucket)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] replication_configuration
-    #   Container for replication rules. You can add as many as 1,000 rules.
-    #   Total replication configuration size can be up to 2 MB.
+    #   A container for replication rules. You can add up to 1,000 rules.
+    #   The maximum size of a replication configuration is 2 MB.
     #   @return [Types::ReplicationConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketReplicationOutput AWS API Documentation
@@ -3271,6 +3317,37 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @!attribute [rw] public_access_block_configuration
+    #   The Public Access Block configuration currently in effect for this
+    #   Amazon S3 bucket.
+    #   @return [Types::PublicAccessBlockConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetPublicAccessBlockOutput AWS API Documentation
+    #
+    class GetPublicAccessBlockOutput < Struct.new(
+      :public_access_block_configuration)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetPublicAccessBlockRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "BucketName", # required
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The name of the Amazon S3 bucket whose Public Access Block
+    #   configuration you want to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetPublicAccessBlockRequest AWS API Documentation
+    #
+    class GetPublicAccessBlockRequest < Struct.new(
+      :bucket)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GlacierJobParameters
     #   data as a hash:
     #
@@ -3851,12 +3928,11 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] sses3
-    #   Specifies the use of SSE-S3 to encrypt delievered Inventory reports.
+    #   Specifies the use of SSE-S3 to encrypt delivered Inventory reports.
     #   @return [Types::SSES3]
     #
     # @!attribute [rw] ssekms
-    #   Specifies the use of SSE-KMS to encrypt delievered Inventory
-    #   reports.
+    #   Specifies the use of SSE-KMS to encrypt delivered Inventory reports.
     #   @return [Types::SSEKMS]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryEncryption AWS API Documentation
@@ -3990,7 +4066,8 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Container for specifying the AWS Lambda notification configuration.
+    # A container for specifying the configuration for AWS Lambda
+    # notifications.
     #
     # @note When making an API call, you may pass LambdaFunctionConfiguration
     #   data as a hash:
@@ -4012,23 +4089,23 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] id
-    #   Optional unique identifier for configurations in a notification
+    #   An optional unique identifier for configurations in a notification
     #   configuration. If you don't provide one, Amazon S3 will assign an
     #   ID.
     #   @return [String]
     #
     # @!attribute [rw] lambda_function_arn
-    #   Lambda cloud function ARN that Amazon S3 can invoke when it detects
-    #   events of the specified type.
+    #   The Amazon Resource Name (ARN) of the Lambda cloud function that
+    #   Amazon S3 can invoke when it detects events of the specified type.
     #   @return [String]
     #
     # @!attribute [rw] events
     #   @return [Array<String>]
     #
     # @!attribute [rw] filter
-    #   Container for object key name filtering rules. For information about
-    #   key name filtering, go to [Configuring Event Notifications][1] in
-    #   the Amazon Simple Storage Service Developer Guide.
+    #   A container for object key name filtering rules. For information
+    #   about key name filtering, see [Configuring Event Notifications][1]
+    #   in the *Amazon Simple Storage Service Developer Guide*.
     #
     #
     #
@@ -5436,12 +5513,12 @@ module Aws::S3
     end
 
     # Container for the transition rule that describes when noncurrent
-    # objects transition to the STANDARD\_IA, ONEZONE\_IA or GLACIER storage
-    # class. If your bucket is versioning-enabled (or versioning is
+    # objects transition to the STANDARD\_IA, ONEZONE\_IA, or GLACIER
+    # storage class. If your bucket is versioning-enabled (or versioning is
     # suspended), you can set this action to request that Amazon S3
-    # transition noncurrent object versions to the STANDARD\_IA, ONEZONE\_IA
-    # or GLACIER storage class at a specific period in the object's
-    # lifetime.
+    # transition noncurrent object versions to the STANDARD\_IA,
+    # ONEZONE\_IA, or GLACIER storage class at a specific period in the
+    # object's lifetime.
     #
     # @note When making an API call, you may pass NoncurrentVersionTransition
     #   data as a hash:
@@ -5475,8 +5552,9 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Container for specifying the notification configuration of the bucket.
-    # If this element is empty, notifications are turned off on the bucket.
+    # A container for specifying the notification configuration of the
+    # bucket. If this element is empty, notifications are turned off for the
+    # bucket.
     #
     # @note When making an API call, you may pass NotificationConfiguration
     #   data as a hash:
@@ -5596,9 +5674,9 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Container for object key name filtering rules. For information about
-    # key name filtering, go to [Configuring Event Notifications][1] in the
-    # Amazon Simple Storage Service Developer Guide.
+    # A container for object key name filtering rules. For information about
+    # key name filtering, see [Configuring Event Notifications][1] in the
+    # *Amazon Simple Storage Service Developer Guide*.
     #
     #
     #
@@ -5619,7 +5697,7 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] key
-    #   Container for object key name prefix and suffix filtering rules.
+    #   A container for object key name prefix and suffix filtering rules.
     #   @return [Types::S3KeyFilter]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NotificationConfigurationFilter AWS API Documentation
@@ -5862,7 +5940,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] size
-    #   Size of the uploaded part data.
+    #   Size in bytes of the uploaded part data.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Part AWS API Documentation
@@ -5875,16 +5953,30 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # The container element for this bucket's public-policy status.
+    #
+    # @!attribute [rw] is_public
+    #   The public-policy status for this bucket. `TRUE` indicates that this
+    #   bucket is public. `FALSE` indicates that the bucket is not public.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PolicyStatus AWS API Documentation
+    #
+    class PolicyStatus < Struct.new(
+      :is_public)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] bytes_scanned
-    #   Current number of object bytes scanned.
+    #   The current number of object bytes scanned.
     #   @return [Integer]
     #
     # @!attribute [rw] bytes_processed
-    #   Current number of uncompressed object bytes processed.
+    #   The current number of uncompressed object bytes processed.
     #   @return [Integer]
     #
     # @!attribute [rw] bytes_returned
-    #   Current number of bytes of records payload data returned.
+    #   The current number of bytes of records payload data returned.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Progress AWS API Documentation
@@ -5905,6 +5997,117 @@ module Aws::S3
     class ProgressEvent < Struct.new(
       :details,
       :event_type)
+      include Aws::Structure
+    end
+
+    # The container element for all Public Access Block configuration
+    # options. You can enable the configuration options in any combination.
+    #
+    # Amazon S3 considers a bucket policy public unless at least one of the
+    # following conditions is true:
+    #
+    # 1.  The policy limits access to a set of CIDRs using `aws:SourceIp`.
+    #     For more information on CIDR, see
+    #     [http://www.rfc-editor.org/rfc/rfc4632.txt][1]
+    #
+    # 2.  The policy grants permissions, not including any "bad actions,"
+    #     to one of the following:
+    #
+    #     * A fixed AWS principal, user, role, or service principal
+    #
+    #     * A fixed `aws:SourceArn`
+    #
+    #     * A fixed `aws:SourceVpc`
+    #
+    #     * A fixed `aws:SourceVpce`
+    #
+    #     * A fixed `aws:SourceOwner`
+    #
+    #     * A fixed `aws:SourceAccount`
+    #
+    #     * A fixed value of
+    #       `s3:x-amz-server-side-encryption-aws-kms-key-id`
+    #
+    #     * A fixed value of `aws:userid` outside the pattern
+    #       "`AROLEID:*`"
+    #
+    # "Bad actions" are those that could expose the data inside a bucket
+    # to reads or writes by the public. These actions are `s3:Get*`,
+    # `s3:List*`, `s3:AbortMultipartUpload`, `s3:Delete*`, `s3:Put*`, and
+    # `s3:RestoreObject`.
+    #
+    # The star notation for bad actions indicates that all matching
+    # operations are considered bad actions. For example, because `s3:Get*`
+    # is a bad action, `s3:GetObject`, `s3:GetObjectVersion`, and
+    # `s3:GetObjectAcl` are all bad actions.
+    #
+    #
+    #
+    # [1]: http://www.rfc-editor.org/rfc/rfc4632.txt
+    #
+    # @note When making an API call, you may pass PublicAccessBlockConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         block_public_acls: false,
+    #         ignore_public_acls: false,
+    #         block_public_policy: false,
+    #         restrict_public_buckets: false,
+    #       }
+    #
+    # @!attribute [rw] block_public_acls
+    #   Specifies whether Amazon S3 should block public ACLs for this
+    #   bucket. Setting this element to `TRUE` causes the following
+    #   behavior:
+    #
+    #   * PUT Bucket acl and PUT Object acl calls will fail if the specified
+    #     ACL allows public access.
+    #
+    #   * PUT Object calls will fail if the request includes an object ACL.
+    #
+    #   Note that enabling this setting doesn't affect existing policies or
+    #   ACLs.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ignore_public_acls
+    #   Specifies whether Amazon S3 should ignore public ACLs for this
+    #   bucket. Setting this element to `TRUE` causes Amazon S3 to ignore
+    #   all public ACLs on this bucket and any objects that it contains.
+    #
+    #   Note that enabling this setting doesn't affect the persistence of
+    #   any existing ACLs and doesn't prevent new public ACLs from being
+    #   set.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] block_public_policy
+    #   Specifies whether Amazon S3 should block public bucket policies for
+    #   this bucket. Setting this element to `TRUE` causes Amazon S3 to
+    #   reject calls to PUT Bucket policy if the specified bucket policy
+    #   allows public access.
+    #
+    #   Note that enabling this setting doesn't affect existing bucket
+    #   policies.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] restrict_public_buckets
+    #   Specifies whether Amazon S3 should restrict public bucket policies
+    #   for this bucket. If this element is set to `TRUE`, then only the
+    #   bucket owner and AWS Services can access this bucket if it has a
+    #   public policy.
+    #
+    #   Note that enabling this setting doesn't affect previously stored
+    #   bucket policies, except that public and cross-account access within
+    #   any public bucket policy, including non-public delegation to
+    #   specific accounts, is blocked.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PublicAccessBlockConfiguration AWS API Documentation
+    #
+    class PublicAccessBlockConfiguration < Struct.new(
+      :block_public_acls,
+      :ignore_public_acls,
+      :block_public_policy,
+      :restrict_public_buckets)
       include Aws::Structure
     end
 
@@ -6496,8 +6699,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] notification_configuration
-    #   Container for specifying the notification configuration of the
-    #   bucket. If this element is empty, notifications are turned off on
+    #   A container for specifying the notification configuration of the
+    #   bucket. If this element is empty, notifications are turned off for
     #   the bucket.
     #   @return [Types::NotificationConfiguration]
     #
@@ -6652,8 +6855,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] replication_configuration
-    #   Container for replication rules. You can add as many as 1,000 rules.
-    #   Total replication configuration size can be up to 2 MB.
+    #   A container for replication rules. You can add up to 1,000 rules.
+    #   The maximum size of a replication configuration is 2 MB.
     #   @return [Types::ReplicationConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketReplicationRequest AWS API Documentation
@@ -7149,7 +7352,7 @@ module Aws::S3
     #
     # @!attribute [rw] tagging
     #   The tag-set for the object. The tag-set must be encoded as URL Query
-    #   parameters
+    #   parameters. (For example, "Key1=Value1")
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectRequest AWS API Documentation
@@ -7238,8 +7441,46 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Container for specifying an configuration when you want Amazon S3 to
-    # publish events to an Amazon Simple Queue Service (Amazon SQS) queue.
+    # @note When making an API call, you may pass PutPublicAccessBlockRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "BucketName", # required
+    #         content_md5: "ContentMD5",
+    #         public_access_block_configuration: { # required
+    #           block_public_acls: false,
+    #           ignore_public_acls: false,
+    #           block_public_policy: false,
+    #           restrict_public_buckets: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The name of the Amazon S3 bucket whose Public Access Block
+    #   configuration you want to set.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_md5
+    #   The MD5 hash of the `PutPublicBlock` request body.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_access_block_configuration
+    #   The Public Access Block configuration that you want to apply to this
+    #   Amazon S3 bucket.
+    #   @return [Types::PublicAccessBlockConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutPublicAccessBlockRequest AWS API Documentation
+    #
+    class PutPublicAccessBlockRequest < Struct.new(
+      :bucket,
+      :content_md5,
+      :public_access_block_configuration)
+      include Aws::Structure
+    end
+
+    # A container for specifying the configuration for publication of
+    # messages to an Amazon Simple Queue Service (Amazon SQS) queue.when
+    # Amazon S3 detects specified events.
     #
     # @note When making an API call, you may pass QueueConfiguration
     #   data as a hash:
@@ -7261,23 +7502,24 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] id
-    #   Optional unique identifier for configurations in a notification
+    #   An optional unique identifier for configurations in a notification
     #   configuration. If you don't provide one, Amazon S3 will assign an
     #   ID.
     #   @return [String]
     #
     # @!attribute [rw] queue_arn
-    #   Amazon SQS queue ARN to which Amazon S3 will publish a message when
-    #   it detects events of specified type.
+    #   The Amazon Resource Name (ARN) of the Amazon SQS queue to which
+    #   Amazon S3 will publish a message when it detects events of the
+    #   specified type.
     #   @return [String]
     #
     # @!attribute [rw] events
     #   @return [Array<String>]
     #
     # @!attribute [rw] filter
-    #   Container for object key name filtering rules. For information about
-    #   key name filtering, go to [Configuring Event Notifications][1] in
-    #   the Amazon Simple Storage Service Developer Guide.
+    #   A container for object key name filtering rules. For information
+    #   about key name filtering, see [Configuring Event Notifications][1]
+    #   in the *Amazon Simple Storage Service Developer Guide*.
     #
     #
     #
@@ -7305,13 +7547,13 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] id
-    #   Optional unique identifier for configurations in a notification
+    #   An optional unique identifier for configurations in a notification
     #   configuration. If you don't provide one, Amazon S3 will assign an
     #   ID.
     #   @return [String]
     #
     # @!attribute [rw] event
-    #   Bucket event for which to send notifications.
+    #   The bucket event for which to send notifications.
     #   @return [String]
     #
     # @!attribute [rw] events
@@ -7420,8 +7662,8 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Container for replication rules. You can add as many as 1,000 rules.
-    # Total replication configuration size can be up to 2 MB.
+    # A container for replication rules. You can add up to 1,000 rules. The
+    # maximum size of a replication configuration is 2 MB.
     #
     # @note When making an API call, you may pass ReplicationConfiguration
     #   data as a hash:
@@ -7474,14 +7716,15 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] role
-    #   Amazon Resource Name (ARN) of an IAM role for Amazon S3 to assume
-    #   when replicating the objects.
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that Amazon S3 can assume when replicating the
+    #   objects.
     #   @return [String]
     #
     # @!attribute [rw] rules
-    #   Container for one or more replication rules. Replication
-    #   configuration must have at least one rule and can contain up to
-    #   1,000 rules.
+    #   A container for one or more replication rules. A replication
+    #   configuration must have at least one rule and can contain a maximum
+    #   of 1,000 rules.
     #   @return [Array<Types::ReplicationRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationConfiguration AWS API Documentation
@@ -7492,7 +7735,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Container for information about a particular replication rule.
+    # A container for information about a specific replication rule.
     #
     # @note When making an API call, you may pass ReplicationRule
     #   data as a hash:
@@ -7540,56 +7783,57 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] id
-    #   Unique identifier for the rule. The value cannot be longer than 255
+    #   A unique identifier for the rule. The maximum value is 255
     #   characters.
     #   @return [String]
     #
     # @!attribute [rw] priority
     #   The priority associated with the rule. If you specify multiple rules
-    #   in a replication configuration, then Amazon S3 applies rule priority
-    #   in the event there are conflicts (two or more rules identify the
-    #   same object based on filter specified). The rule with higher
-    #   priority takes precedence. For example,
+    #   in a replication configuration, Amazon S3 prioritizes the rules to
+    #   prevent conflicts when filtering. If two or more rules identify the
+    #   same object based on a specified filter, the rule with higher
+    #   priority takes precedence. For example:
     #
     #   * Same object quality prefix based filter criteria If prefixes you
-    #     specified in multiple rules overlap.
+    #     specified in multiple rules overlap
     #
     #   * Same object qualify tag based filter criteria specified in
     #     multiple rules
     #
     #   For more information, see [Cross-Region Replication (CRR)](
     #   https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html) in the
-    #   Amazon S3 Developer Guide.
+    #   *Amazon S3 Developer Guide*.
     #   @return [Integer]
     #
     # @!attribute [rw] prefix
-    #   Object keyname prefix identifying one or more objects to which the
-    #   rule applies. Maximum prefix length can be up to 1,024 characters.
+    #   An object keyname prefix that identifies the object or objects to
+    #   which the rule applies. The maximum prefix length is 1,024
+    #   characters.
     #   @return [String]
     #
     # @!attribute [rw] filter
-    #   Filter that identifies subset of objects to which the replication
-    #   rule applies. A `Filter` must specify exactly one `Prefix`, `Tag`,
-    #   or an `And` child element.
+    #   A filter that identifies the subset of objects to which the
+    #   replication rule applies. A `Filter` must specify exactly one
+    #   `Prefix`, `Tag`, or an `And` child element.
     #   @return [Types::ReplicationRuleFilter]
     #
     # @!attribute [rw] status
-    #   The rule is ignored if status is not Enabled.
+    #   If status isn't enabled, the rule is ignored.
     #   @return [String]
     #
     # @!attribute [rw] source_selection_criteria
-    #   Container that describes additional filters in identifying source
-    #   objects that you want to replicate. Currently, Amazon S3 supports
-    #   only the filter that you can specify for objects created with
-    #   server-side encryption using an AWS KMS-managed key. You can choose
-    #   to enable or disable replication of these objects.
+    #   A container that describes additional filters for identifying the
+    #   source objects that you want to replicate. You can choose to enable
+    #   or disable the replication of these objects. Currently, Amazon S3
+    #   supports only the filter that you can specify for objects created
+    #   with server-side encryption using an AWS KMS-Managed Key (SSE-KMS).
     #
-    #   if you want Amazon S3 to replicate objects created with server-side
-    #   encryption using AWS KMS-managed keys.
+    #   If you want Amazon S3 to replicate objects created with server-side
+    #   encryption using AWS KMS-Managed Keys.
     #   @return [Types::SourceSelectionCriteria]
     #
     # @!attribute [rw] destination
-    #   Container for replication destination information.
+    #   A container for information about the replication destination.
     #   @return [Types::Destination]
     #
     # @!attribute [rw] delete_marker_replication
@@ -7637,9 +7881,9 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Filter that identifies subset of objects to which the replication rule
-    # applies. A `Filter` must specify exactly one `Prefix`, `Tag`, or an
-    # `And` child element.
+    # A filter that identifies the subset of objects to which the
+    # replication rule applies. A `Filter` must specify exactly one
+    # `Prefix`, `Tag`, or an `And` child element.
     #
     # @note When making an API call, you may pass ReplicationRuleFilter
     #   data as a hash:
@@ -7662,25 +7906,25 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] prefix
-    #   Object keyname prefix that identifies subset of objects to which the
-    #   rule applies.
+    #   An object keyname prefix that identifies the subset of objects to
+    #   which the rule applies.
     #   @return [String]
     #
     # @!attribute [rw] tag
-    #   Container for specifying a tag key and value.
+    #   A container for specifying a tag key and value.
     #
-    #   The rule applies only to objects having the tag in its tagset.
+    #   The rule applies only to objects that have the tag in their tag set.
     #   @return [Types::Tag]
     #
     # @!attribute [rw] and
-    #   Container for specifying rule filters. These filters determine the
-    #   subset of objects to which the rule applies. The element is required
-    #   only if you specify more than one filter. For example:
+    #   A container for specifying rule filters. The filters determine the
+    #   subset of objects to which the rule applies. This element is
+    #   required only if you specify more than one filter. For example:
     #
-    #   * You specify both a `Prefix` and a `Tag` filters. Then you wrap
-    #     these in an `And` tag.
+    #   * If you specify both a `Prefix` and a `Tag` filter, wrap these
+    #     filters in an `And` tag.
     #
-    #   * You specify filter based on multiple tags. Then you wrap the `Tag`
+    #   * If you specify a filter based on multiple tags, wrap the `Tag`
     #     elements in an `And` tag.
     #   @return [Types::ReplicationRuleAndOperator]
     #
@@ -8029,8 +8273,7 @@ module Aws::S3
     # @!attribute [rw] redirect
     #   Container for redirect information. You can redirect requests to
     #   another host, to another page, or with another protocol. In the
-    #   event of an error, you can can specify a different error code to
-    #   return.
+    #   event of an error, you can specify a different error code to return.
     #   @return [Types::Redirect]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RoutingRule AWS API Documentation
@@ -8092,11 +8335,11 @@ module Aws::S3
     #
     # @!attribute [rw] noncurrent_version_transition
     #   Container for the transition rule that describes when noncurrent
-    #   objects transition to the STANDARD\_IA, ONEZONE\_IA or GLACIER
+    #   objects transition to the STANDARD\_IA, ONEZONE\_IA, or GLACIER
     #   storage class. If your bucket is versioning-enabled (or versioning
     #   is suspended), you can set this action to request that Amazon S3
     #   transition noncurrent object versions to the STANDARD\_IA,
-    #   ONEZONE\_IA or GLACIER storage class at a specific period in the
+    #   ONEZONE\_IA, or GLACIER storage class at a specific period in the
     #   object's lifetime.
     #   @return [Types::NoncurrentVersionTransition]
     #
@@ -8129,7 +8372,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Container for object key name prefix and suffix filtering rules.
+    # A container for object key name prefix and suffix filtering rules.
     #
     # @note When making an API call, you may pass S3KeyFilter
     #   data as a hash:
@@ -8144,8 +8387,8 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] filter_rules
-    #   A list of containers for key value pair that defines the criteria
-    #   for the filter rule.
+    #   A list of containers for the key value pair that defines the
+    #   criteria for the filter rule.
     #   @return [Array<Types::FilterRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/S3KeyFilter AWS API Documentation
@@ -8247,7 +8490,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Specifies the use of SSE-KMS to encrypt delievered Inventory reports.
+    # Specifies the use of SSE-KMS to encrypt delivered Inventory reports.
     #
     # @note When making an API call, you may pass SSEKMS
     #   data as a hash:
@@ -8268,7 +8511,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Specifies the use of SSE-S3 to encrypt delievered Inventory reports.
+    # Specifies the use of SSE-S3 to encrypt delivered Inventory reports.
     #
     # @api private
     #
@@ -8288,12 +8531,12 @@ module Aws::S3
 
     # Request to filter the contents of an Amazon S3 object based on a
     # simple Structured Query Language (SQL) statement. In the request,
-    # along with the SQL expression, you must also specify a data
-    # serialization format (JSON or CSV) of the object. Amazon S3 uses this
-    # to parse object data into records, and returns only records that match
-    # the specified SQL expression. You must also specify the data
-    # serialization format for the response. For more information, go to
-    # [S3Select API Documentation][1].
+    # along with the SQL expression, you must specify a data serialization
+    # format (JSON or CSV) of the object. Amazon S3 uses this to parse
+    # object data into records. It returns only records that match the
+    # specified SQL expression. You must also specify the data serialization
+    # format for the response. For more information, see [S3Select API
+    # Documentation][1].
     #
     #
     #
@@ -8345,16 +8588,16 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
-    #   The S3 Bucket.
+    #   The S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] key
-    #   The Object Key.
+    #   The object key.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
     #   The SSE Algorithm used to encrypt the object. For more information,
-    #   go to [ Server-Side Encryption (Using Customer-Provided Encryption
+    #   see [ Server-Side Encryption (Using Customer-Provided Encryption
     #   Keys][1].
     #
     #
@@ -8363,7 +8606,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key
-    #   The SSE Customer Key. For more information, go to [ Server-Side
+    #   The SSE Customer Key. For more information, see [ Server-Side
     #   Encryption (Using Customer-Provided Encryption Keys][1].
     #
     #
@@ -8372,7 +8615,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
-    #   The SSE Customer Key MD5. For more information, go to [ Server-Side
+    #   The SSE Customer Key MD5. For more information, see [ Server-Side
     #   Encryption (Using Customer-Provided Encryption Keys][1].
     #
     #
@@ -8385,7 +8628,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expression_type
-    #   The type of the provided expression (e.g., SQL).
+    #   The type of the provided expression (for example., SQL).
     #   @return [String]
     #
     # @!attribute [rw] request_progress
@@ -8568,7 +8811,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Container for filters that define which source objects should be
+    # A container for filters that define which source objects should be
     # replicated.
     #
     # @note When making an API call, you may pass SourceSelectionCriteria
@@ -8581,9 +8824,9 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] sse_kms_encrypted_objects
-    #   Container for filter information of selection of KMS Encrypted S3
-    #   objects. The element is required if you include
-    #   `SourceSelectionCriteria` in the replication configuration.
+    #   A container for filter information for the selection of S3 objects
+    #   encrypted with AWS KMS. If you include `SourceSelectionCriteria` in
+    #   the replication configuration, this element is required.
     #   @return [Types::SseKmsEncryptedObjects]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SourceSelectionCriteria AWS API Documentation
@@ -8593,8 +8836,8 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Container for filter information of selection of KMS Encrypted S3
-    # objects.
+    # A container for filter information for the selection of S3 objects
+    # encrypted with AWS KMS.
     #
     # @note When making an API call, you may pass SseKmsEncryptedObjects
     #   data as a hash:
@@ -8604,8 +8847,8 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] status
-    #   The replication for KMS encrypted S3 objects is disabled if status
-    #   is not Enabled.
+    #   If the status is not `Enabled`, replication for S3 objects encrypted
+    #   with AWS KMS is disabled.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SseKmsEncryptedObjects AWS API Documentation
@@ -8616,15 +8859,15 @@ module Aws::S3
     end
 
     # @!attribute [rw] bytes_scanned
-    #   Total number of object bytes scanned.
+    #   The total number of object bytes scanned.
     #   @return [Integer]
     #
     # @!attribute [rw] bytes_processed
-    #   Total number of uncompressed object bytes processed.
+    #   The total number of uncompressed object bytes processed.
     #   @return [Integer]
     #
     # @!attribute [rw] bytes_returned
-    #   Total number of bytes of records payload data returned.
+    #   The total number of bytes of records payload data returned.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Stats AWS API Documentation
@@ -8784,9 +9027,9 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Container for specifying the configuration when you want Amazon S3 to
-    # publish events to an Amazon Simple Notification Service (Amazon SNS)
-    # topic.
+    # A container for specifying the configuration for publication of
+    # messages to an Amazon Simple Notification Service (Amazon SNS)
+    # topic.when Amazon S3 detects specified events.
     #
     # @note When making an API call, you may pass TopicConfiguration
     #   data as a hash:
@@ -8808,23 +9051,24 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] id
-    #   Optional unique identifier for configurations in a notification
+    #   An optional unique identifier for configurations in a notification
     #   configuration. If you don't provide one, Amazon S3 will assign an
     #   ID.
     #   @return [String]
     #
     # @!attribute [rw] topic_arn
-    #   Amazon SNS topic ARN to which Amazon S3 will publish a message when
-    #   it detects events of specified type.
+    #   The Amazon Resource Name (ARN) of the Amazon SNS topic to which
+    #   Amazon S3 will publish a message when it detects events of the
+    #   specified type.
     #   @return [String]
     #
     # @!attribute [rw] events
     #   @return [Array<String>]
     #
     # @!attribute [rw] filter
-    #   Container for object key name filtering rules. For information about
-    #   key name filtering, go to [Configuring Event Notifications][1] in
-    #   the Amazon Simple Storage Service Developer Guide.
+    #   A container for object key name filtering rules. For information
+    #   about key name filtering, see [Configuring Event Notifications][1]
+    #   in the *Amazon Simple Storage Service Developer Guide*.
     #
     #
     #
@@ -8852,7 +9096,7 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] id
-    #   Optional unique identifier for configurations in a notification
+    #   An optional unique identifier for configurations in a notification
     #   configuration. If you don't provide one, Amazon S3 will assign an
     #   ID.
     #   @return [String]

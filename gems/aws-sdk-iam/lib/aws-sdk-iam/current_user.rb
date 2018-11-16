@@ -101,6 +101,18 @@ module Aws::IAM
       data[:password_last_used]
     end
 
+    # A list of tags that are associated with the specified user. For more
+    # information about tagging, see [Tagging IAM Identities][1] in the *IAM
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    # @return [Array<Types::Tag>]
+    def tags
+      data[:tags]
+    end
+
     # The ARN of the policy used to set the permissions boundary for the
     # user.
     #

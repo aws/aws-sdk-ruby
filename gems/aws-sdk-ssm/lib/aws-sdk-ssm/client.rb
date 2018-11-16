@@ -430,7 +430,7 @@ module Aws::SSM
     # document and configures the instance as specified.
     #
     # If you associate a document with an instance that already has an
-    # associated document, the system throws the AssociationAlreadyExists
+    # associated document, the system returns the AssociationAlreadyExists
     # exception.
     #
     # @option params [required, String] :name
@@ -577,7 +577,7 @@ module Aws::SSM
     # document and configures the instance as specified.
     #
     # If you associate a document with an instance that already has an
-    # associated document, the system throws the AssociationAlreadyExists
+    # associated document, the system returns the AssociationAlreadyExists
     # exception.
     #
     # @option params [required, Array<Types::CreateAssociationBatchRequestEntry>] :entries
@@ -1801,7 +1801,7 @@ module Aws::SSM
     #   resp = client.describe_automation_executions({
     #     filters: [
     #       {
-    #         key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter
+    #         key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType
     #         values: ["AutomationExecutionFilterValue"], # required
     #       },
     #     ],
@@ -1843,6 +1843,7 @@ module Aws::SSM
     #   resp.automation_execution_metadata_list[0].max_concurrency #=> String
     #   resp.automation_execution_metadata_list[0].max_errors #=> String
     #   resp.automation_execution_metadata_list[0].target #=> String
+    #   resp.automation_execution_metadata_list[0].automation_type #=> String, one of "CrossAccount", "Local"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAutomationExecutions AWS API Documentation
@@ -1931,6 +1932,17 @@ module Aws::SSM
     #   resp.step_executions[0].is_critical #=> Boolean
     #   resp.step_executions[0].valid_next_steps #=> Array
     #   resp.step_executions[0].valid_next_steps[0] #=> String
+    #   resp.step_executions[0].targets #=> Array
+    #   resp.step_executions[0].targets[0].key #=> String
+    #   resp.step_executions[0].targets[0].values #=> Array
+    #   resp.step_executions[0].targets[0].values[0] #=> String
+    #   resp.step_executions[0].target_location.accounts #=> Array
+    #   resp.step_executions[0].target_location.accounts[0] #=> String
+    #   resp.step_executions[0].target_location.regions #=> Array
+    #   resp.step_executions[0].target_location.regions[0] #=> String
+    #   resp.step_executions[0].target_location.target_location_max_concurrency #=> String
+    #   resp.step_executions[0].target_location.target_location_max_errors #=> String
+    #   resp.step_executions[0].target_location.execution_role_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAutomationStepExecutions AWS API Documentation
@@ -2993,7 +3005,8 @@ module Aws::SSM
     #
     # @option params [Array<Types::MaintenanceWindowFilter>] :filters
     #   Optional filters used to narrow down the scope of the returned
-    #   Maintenance Windows. Supported filter keys are Name and Enabled.
+    #   Maintenance Windows. Supported filter keys are **Name** and
+    #   **Enabled**.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this call. The call also
@@ -3440,6 +3453,17 @@ module Aws::SSM
     #   resp.automation_execution.step_executions[0].is_critical #=> Boolean
     #   resp.automation_execution.step_executions[0].valid_next_steps #=> Array
     #   resp.automation_execution.step_executions[0].valid_next_steps[0] #=> String
+    #   resp.automation_execution.step_executions[0].targets #=> Array
+    #   resp.automation_execution.step_executions[0].targets[0].key #=> String
+    #   resp.automation_execution.step_executions[0].targets[0].values #=> Array
+    #   resp.automation_execution.step_executions[0].targets[0].values[0] #=> String
+    #   resp.automation_execution.step_executions[0].target_location.accounts #=> Array
+    #   resp.automation_execution.step_executions[0].target_location.accounts[0] #=> String
+    #   resp.automation_execution.step_executions[0].target_location.regions #=> Array
+    #   resp.automation_execution.step_executions[0].target_location.regions[0] #=> String
+    #   resp.automation_execution.step_executions[0].target_location.target_location_max_concurrency #=> String
+    #   resp.automation_execution.step_executions[0].target_location.target_location_max_errors #=> String
+    #   resp.automation_execution.step_executions[0].target_location.execution_role_name #=> String
     #   resp.automation_execution.step_executions_truncated #=> Boolean
     #   resp.automation_execution.parameters #=> Hash
     #   resp.automation_execution.parameters["AutomationParameterKey"] #=> Array
@@ -3468,6 +3492,19 @@ module Aws::SSM
     #   resp.automation_execution.max_concurrency #=> String
     #   resp.automation_execution.max_errors #=> String
     #   resp.automation_execution.target #=> String
+    #   resp.automation_execution.target_locations #=> Array
+    #   resp.automation_execution.target_locations[0].accounts #=> Array
+    #   resp.automation_execution.target_locations[0].accounts[0] #=> String
+    #   resp.automation_execution.target_locations[0].regions #=> Array
+    #   resp.automation_execution.target_locations[0].regions[0] #=> String
+    #   resp.automation_execution.target_locations[0].target_location_max_concurrency #=> String
+    #   resp.automation_execution.target_locations[0].target_location_max_errors #=> String
+    #   resp.automation_execution.target_locations[0].execution_role_name #=> String
+    #   resp.automation_execution.progress_counters.total_steps #=> Integer
+    #   resp.automation_execution.progress_counters.success_steps #=> Integer
+    #   resp.automation_execution.progress_counters.failed_steps #=> Integer
+    #   resp.automation_execution.progress_counters.cancelled_steps #=> Integer
+    #   resp.automation_execution.progress_counters.timed_out_steps #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetAutomationExecution AWS API Documentation
     #
@@ -6421,6 +6458,17 @@ module Aws::SSM
     #   max-errors failed executions, set max-concurrency to 1 so the
     #   executions proceed one at a time.
     #
+    # @option params [Array<Types::TargetLocation>] :target_locations
+    #   A location is a combination of AWS Regions and/or AWS accounts where
+    #   you want to execute the Automation. Use this action to start an
+    #   Automation in multiple Regions and multiple accounts. For more
+    #   information, see [Concurrently Executing Automations in Multiple AWS
+    #   Regions and Accounts][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html
+    #
     # @return [Types::StartAutomationExecutionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartAutomationExecutionResult#automation_execution_id #automation_execution_id} => String
@@ -6449,6 +6497,15 @@ module Aws::SSM
     #     ],
     #     max_concurrency: "MaxConcurrency",
     #     max_errors: "MaxErrors",
+    #     target_locations: [
+    #       {
+    #         accounts: ["Account"],
+    #         regions: ["Region"],
+    #         target_location_max_concurrency: "MaxConcurrency",
+    #         target_location_max_errors: "MaxErrors",
+    #         execution_role_name: "ExecutionRoleName",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -7587,7 +7644,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1174,6 +1174,54 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateDBClusterEndpointMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_identifier: "String", # required
+    #         db_cluster_endpoint_identifier: "String", # required
+    #         endpoint_type: "String", # required
+    #         static_members: ["String"],
+    #         excluded_members: ["String"],
+    #       }
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DB cluster identifier of the DB cluster associated with the
+    #   endpoint. This parameter is stored as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_endpoint_identifier
+    #   The identifier to use for the new endpoint. This parameter is stored
+    #   as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_type
+    #   The type of the endpoint. One of: `READER`, `ANY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] static_members
+    #   List of DB instance identifiers that are part of the custom endpoint
+    #   group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] excluded_members
+    #   List of DB instance identifiers that aren't part of the custom
+    #   endpoint group. All other eligible instances are reachable through
+    #   the custom endpoint. Only relevant if the list of static members is
+    #   empty.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterEndpointMessage AWS API Documentation
+    #
+    class CreateDBClusterEndpointMessage < Struct.new(
+      :db_cluster_identifier,
+      :db_cluster_endpoint_identifier,
+      :endpoint_type,
+      :static_members,
+      :excluded_members)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDBClusterMessage
     #   data as a hash:
     #
@@ -1949,10 +1997,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     16384.
+    #     32768.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #     16384.
+    #     32768.
     #
     #   * Magnetic storage (standard): Must be an integer from 10 to 3072.
     #
@@ -2760,7 +2808,7 @@ module Aws::RDS
     #     PostgreSQL DB instance.
     #
     #   * Can specify a DB instance that is a MySQL Read Replica only if the
-    #     source is running MySQL 5.6.
+    #     source is running MySQL 5.6 or later.
     #
     #   * Can specify a DB instance that is a PostgreSQL DB instance only if
     #     the source is running PostgreSQL 9.3.5 or later (9.4.7 and higher
@@ -3015,7 +3063,7 @@ module Aws::RDS
     #
     #   * For MySQL 5.7, minor version 5.7.16 or higher
     #
-    #   * Aurora 5.6 or higher.
+    #   * Aurora MySQL 5.6 or higher
     #
     #   Default: `false`
     #   @return [Boolean]
@@ -3709,6 +3757,10 @@ module Aws::RDS
     #   endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] custom_endpoints
+    #   Identifies all custom endpoints associated with the cluster.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] multi_az
     #   Specifies whether the DB cluster has instances in multiple
     #   Availability Zones.
@@ -3883,6 +3935,7 @@ module Aws::RDS
       :earliest_restorable_time,
       :endpoint,
       :reader_endpoint,
+      :custom_endpoints,
       :multi_az,
       :engine,
       :engine_version,
@@ -4021,6 +4074,105 @@ module Aws::RDS
       :current_capacity,
       :seconds_before_timeout,
       :timeout_action)
+      include Aws::Structure
+    end
+
+    # This data type represents the information you need to connect to an
+    # Amazon Aurora DB cluster. This data type is used as a response element
+    # in the following actions:
+    #
+    # * CreateDBClusterEndpoint
+    #
+    # * DescribeDBClusterEndpoints
+    #
+    # * ModifyDBClusterEndpoint
+    #
+    # * DeleteDBClusterEndpoint
+    #
+    # For the data structure that represents Amazon RDS DB instance
+    # endpoints, see Endpoint.
+    #
+    # @!attribute [rw] db_cluster_endpoint_identifier
+    #   The identifier associated with the endpoint. This parameter is
+    #   stored as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DB cluster identifier of the DB cluster associated with the
+    #   endpoint. This parameter is stored as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_endpoint_resource_identifier
+    #   A unique system-generated identifier for an endpoint. It remains the
+    #   same for the whole life of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   The DNS address of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the endpoint. One of: `creating`, `available`,
+    #   `deleting`, `modifying`.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_type
+    #   The type of the endpoint. One of: `READER`, `WRITER`, `CUSTOM`.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_endpoint_type
+    #   The type associated with a custom endpoint. One of: `READER`, `ANY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] static_members
+    #   List of DB instance identifiers that are part of the custom endpoint
+    #   group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] excluded_members
+    #   List of DB instance identifiers that aren't part of the custom
+    #   endpoint group. All other eligible instances are reachable through
+    #   the custom endpoint. Only relevant if the list of static members is
+    #   empty.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] db_cluster_endpoint_arn
+    #   The Amazon Resource Name (ARN) for the endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterEndpoint AWS API Documentation
+    #
+    class DBClusterEndpoint < Struct.new(
+      :db_cluster_endpoint_identifier,
+      :db_cluster_identifier,
+      :db_cluster_endpoint_resource_identifier,
+      :endpoint,
+      :status,
+      :endpoint_type,
+      :custom_endpoint_type,
+      :static_members,
+      :excluded_members,
+      :db_cluster_endpoint_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   DescribeDBClusterEndpoints request. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the
+    #   value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_endpoints
+    #   Contains the details of the endpoints associated with the cluster
+    #   and matching any filter conditions.
+    #   @return [Array<Types::DBClusterEndpoint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterEndpointMessage AWS API Documentation
+    #
+    class DBClusterEndpointMessage < Struct.new(
+      :marker,
+      :db_cluster_endpoints)
       include Aws::Structure
     end
 
@@ -4930,6 +5082,178 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # An automated backup of a DB instance. It it consists of system
+    # backups, transaction logs, and the database instance properties that
+    # existed at the time you deleted the source instance.
+    #
+    # @!attribute [rw] db_instance_arn
+    #   The Amazon Resource Name (ARN) for the automated backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] dbi_resource_id
+    #   The identifier for the source DB instance, which can't be changed
+    #   and which is unique to an AWS Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The AWS Region associated with the automated backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_instance_identifier
+    #   The customer id of the instance that is/was associated with the
+    #   automated backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_window
+    #   Earliest and latest time an instance can be restored to.
+    #   @return [Types::RestoreWindow]
+    #
+    # @!attribute [rw] allocated_storage
+    #   Specifies the allocated storage size in gibibytes (GiB).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   Provides a list of status information for an automated backup:
+    #
+    #   * `active` - automated backups for current instances
+    #
+    #   * `retained` - automated backups for deleted instances
+    #
+    #   * `creating` - automated backups that are waiting for the first
+    #     automated snapshot to be available.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port number that the automated backup used for connections.
+    #
+    #   Default: Inherits from the source DB instance
+    #
+    #   Valid Values: `1150-65535`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone that the automated backup was created in. For
+    #   information on AWS Regions and Availability Zones, see [Regions and
+    #   Availability Zones][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   Provides the VPC ID associated with the DB instance
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_create_time
+    #   Provides the date and time that the DB instance was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] master_username
+    #   The license model of an automated backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The name of the database engine for this automated backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   The version of the database engine for the automated backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] license_model
+    #   License model information for the automated backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] iops
+    #   The IOPS (I/O operations per second) value for the automated backup.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] option_group_name
+    #   The option group the automated backup is associated with. If
+    #   omitted, the default option group for the engine specified is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] tde_credential_arn
+    #   The ARN from the key store with which the automated backup is
+    #   associated for TDE encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] encrypted
+    #   Specifies whether the automated backup is encrypted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] storage_type
+    #   Specifies the storage type associated with the automated backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The AWS KMS key ID for an automated backup. The KMS key ID is the
+    #   Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias
+    #   for the KMS encryption key.
+    #   @return [String]
+    #
+    # @!attribute [rw] timezone
+    #   The time zone of the automated backup. In most cases, the `Timezone`
+    #   element is empty. `Timezone` content appears only for Microsoft SQL
+    #   Server DB instances that were created with a time zone specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_database_authentication_enabled
+    #   True if mapping of AWS Identity and Access Management (IAM) accounts
+    #   to database accounts is enabled, and otherwise false.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceAutomatedBackup AWS API Documentation
+    #
+    class DBInstanceAutomatedBackup < Struct.new(
+      :db_instance_arn,
+      :dbi_resource_id,
+      :region,
+      :db_instance_identifier,
+      :restore_window,
+      :allocated_storage,
+      :status,
+      :port,
+      :availability_zone,
+      :vpc_id,
+      :instance_create_time,
+      :master_username,
+      :engine,
+      :engine_version,
+      :license_model,
+      :iops,
+      :option_group_name,
+      :tde_credential_arn,
+      :encrypted,
+      :storage_type,
+      :kms_key_id,
+      :timezone,
+      :iam_database_authentication_enabled)
+      include Aws::Structure
+    end
+
+    # Contains the result of a successful invocation of the
+    # DescribeDBInstanceAutomatedBackups action.
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords` .
+    #   @return [String]
+    #
+    # @!attribute [rw] db_instance_automated_backups
+    #   A list of DBInstanceAutomatedBackup instances.
+    #   @return [Array<Types::DBInstanceAutomatedBackup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceAutomatedBackupMessage AWS API Documentation
+    #
+    class DBInstanceAutomatedBackupMessage < Struct.new(
+      :marker,
+      :db_instance_automated_backups)
+      include Aws::Structure
+    end
+
     # Contains the result of a successful invocation of the
     # DescribeDBInstances action.
     #
@@ -5326,6 +5650,11 @@ module Aws::RDS
     #   created.
     #   @return [Array<Types::ProcessorFeature>]
     #
+    # @!attribute [rw] dbi_resource_id
+    #   The identifier for the source DB instance, which can't be changed
+    #   and which is unique to an AWS Region.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshot AWS API Documentation
     #
     class DBSnapshot < Struct.new(
@@ -5355,7 +5684,8 @@ module Aws::RDS
       :db_snapshot_arn,
       :timezone,
       :iam_database_authentication_enabled,
-      :processor_features)
+      :processor_features,
+      :dbi_resource_id)
       include Aws::Structure
     end
 
@@ -5499,6 +5829,25 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteDBClusterEndpointMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_endpoint_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] db_cluster_endpoint_identifier
+    #   The identifier associated with the custom endpoint. This parameter
+    #   is stored as a lowercase string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterEndpointMessage AWS API Documentation
+    #
+    class DeleteDBClusterEndpointMessage < Struct.new(
+      :db_cluster_endpoint_identifier)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteDBClusterMessage
     #   data as a hash:
     #
@@ -5635,6 +5984,40 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # Parameter input for the `DeleteDBInstanceAutomatedBackup` operation.
+    #
+    # @note When making an API call, you may pass DeleteDBInstanceAutomatedBackupMessage
+    #   data as a hash:
+    #
+    #       {
+    #         dbi_resource_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] dbi_resource_id
+    #   The identifier for the source DB instance, which can't be changed
+    #   and which is unique to an AWS Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstanceAutomatedBackupMessage AWS API Documentation
+    #
+    class DeleteDBInstanceAutomatedBackupMessage < Struct.new(
+      :dbi_resource_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_instance_automated_backup
+    #   An automated backup of a DB instance. It it consists of system
+    #   backups, transaction logs, and the database instance properties that
+    #   existed at the time you deleted the source instance.
+    #   @return [Types::DBInstanceAutomatedBackup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstanceAutomatedBackupResult AWS API Documentation
+    #
+    class DeleteDBInstanceAutomatedBackupResult < Struct.new(
+      :db_instance_automated_backup)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteDBInstanceMessage
     #   data as a hash:
     #
@@ -5642,6 +6025,7 @@ module Aws::RDS
     #         db_instance_identifier: "String", # required
     #         skip_final_snapshot: false,
     #         final_db_snapshot_identifier: "String",
+    #         delete_automated_backups: false,
     #       }
     #
     # @!attribute [rw] db_instance_identifier
@@ -5656,20 +6040,20 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] skip_final_snapshot
-    #   Determines whether a final DB snapshot is created before the DB
-    #   instance is deleted. If `true` is specified, no DBSnapshot is
-    #   created. If `false` is specified, a DB snapshot is created before
+    #   A value that indicates whether a final DB snapshot is created before
+    #   the DB instance is deleted. If `true` is specified, no DB snapshot
+    #   is created. If `false` is specified, a DB snapshot is created before
     #   the DB instance is deleted.
     #
-    #   Note that when a DB instance is in a failure state and has a status
-    #   of 'failed', 'incompatible-restore', or
-    #   'incompatible-network', it can only be deleted when the
-    #   SkipFinalSnapshot parameter is set to "true".
+    #   When a DB instance is in a failure state and has a status of
+    #   `failed`, `incompatible-restore`, or `incompatible-network`, you can
+    #   only delete it when the `SkipFinalSnapshot` parameter is set to
+    #   `true`.
     #
     #   Specify `true` when deleting a Read Replica.
     #
-    #   <note markdown="1"> The FinalDBSnapshotIdentifier parameter must be specified if
-    #   SkipFinalSnapshot is `false`.
+    #   <note markdown="1"> The `FinalDBSnapshotIdentifier` parameter must be specified if
+    #   `SkipFinalSnapshot` is `false`.
     #
     #    </note>
     #
@@ -5677,11 +6061,11 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] final_db_snapshot_identifier
-    #   The DBSnapshotIdentifier of the new DBSnapshot created when
-    #   SkipFinalSnapshot is set to `false`.
+    #   The `DBSnapshotIdentifier` of the new DB snapshot created when
+    #   `SkipFinalSnapshot` is set to `false`.
     #
-    #   <note markdown="1"> Specifying this parameter and also setting the SkipFinalShapshot
-    #   parameter to true results in an error.
+    #   <note markdown="1"> Specifying this parameter and also setting the `SkipFinalShapshot`
+    #   parameter to `true` results in an error.
     #
     #    </note>
     #
@@ -5689,19 +6073,26 @@ module Aws::RDS
     #
     #   * Must be 1 to 255 letters or numbers.
     #
-    #   * First character must be a letter
+    #   * First character must be a letter.
     #
-    #   * Can't end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   * Can't be specified when deleting a Read Replica.
     #   @return [String]
+    #
+    # @!attribute [rw] delete_automated_backups
+    #   A value that indicates whether to remove automated backups
+    #   immediately after the DB instance is deleted. This parameter isn't
+    #   case-sensitive. This parameter defaults to `true`.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstanceMessage AWS API Documentation
     #
     class DeleteDBInstanceMessage < Struct.new(
       :db_instance_identifier,
       :skip_final_snapshot,
-      :final_db_snapshot_identifier)
+      :final_db_snapshot_identifier,
+      :delete_automated_backups)
       include Aws::Structure
     end
 
@@ -5785,7 +6176,7 @@ module Aws::RDS
     #       }
     #
     # @!attribute [rw] db_snapshot_identifier
-    #   The DBSnapshot identifier.
+    #   The DB snapshot identifier.
     #
     #   Constraints: Must be the name of an existing DB snapshot in the
     #   `available` state.
@@ -6056,6 +6447,77 @@ module Aws::RDS
     class DescribeDBClusterBacktracksMessage < Struct.new(
       :db_cluster_identifier,
       :backtrack_identifier,
+      :filters,
+      :max_records,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeDBClusterEndpointsMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_identifier: "String",
+    #         db_cluster_endpoint_identifier: "String",
+    #         filters: [
+    #           {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         ],
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DB cluster identifier of the DB cluster associated with the
+    #   endpoint. This parameter is stored as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_endpoint_identifier
+    #   The identifier of the endpoint to describe. This parameter is stored
+    #   as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A set of name-value pairs that define which endpoints to include in
+    #   the output. The filters are specified as name-value pairs, in the
+    #   format
+    #   `Name=endpoint_type,Values=endpoint_type1,endpoint_type2,...`.
+    #   `Name` can be one of: `db-cluster-endpoint-type`,
+    #   `db-cluster-endpoint-custom-type`, `db-cluster-endpoint-id`,
+    #   `db-cluster-endpoint-status`. `Values` for the `
+    #   db-cluster-endpoint-type` filter can be one or more of: `reader`,
+    #   `writer`, `custom`. `Values` for the
+    #   `db-cluster-endpoint-custom-type` filter can be one or more of:
+    #   `reader`, `any`. `Values` for the `db-cluster-endpoint-status`
+    #   filter can be one or more of: `available`, `creating`, `deleting`,
+    #   `modifying`.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   DescribeDBClusterEndpoints request. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the
+    #   value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterEndpointsMessage AWS API Documentation
+    #
+    class DescribeDBClusterEndpointsMessage < Struct.new(
+      :db_cluster_identifier,
+      :db_cluster_endpoint_identifier,
       :filters,
       :max_records,
       :marker)
@@ -6516,6 +6978,88 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # Parameter input for DescribeDBInstanceAutomatedBackups.
+    #
+    # @note When making an API call, you may pass DescribeDBInstanceAutomatedBackupsMessage
+    #   data as a hash:
+    #
+    #       {
+    #         dbi_resource_id: "String",
+    #         db_instance_identifier: "String",
+    #         filters: [
+    #           {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         ],
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] dbi_resource_id
+    #   The resource ID of the DB instance that is the source of the
+    #   automated backup. This parameter isn't case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_instance_identifier
+    #   (Optional) The user-supplied instance identifier. If this parameter
+    #   is specified, it must match the identifier of an existing DB
+    #   instance. It returns information from the specific DB instance'
+    #   automated backup. This parameter isn't case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A filter that specifies which resources to return based on status.
+    #
+    #   Supported filters are the following:
+    #
+    #   * `status`
+    #
+    #     * `active` - automated backups for current instances
+    #
+    #     * `retained` - automated backups for deleted instances
+    #
+    #     * `creating` - automated backups that are waiting for the first
+    #       automated snapshot to be available
+    #
+    #   * `db-instance-id` - Accepts DB instance identifiers and Amazon
+    #     Resource Names (ARNs) for DB instances. The results list includes
+    #     only information about the DB instance automated backupss
+    #     identified by these ARNs.
+    #
+    #   * `dbi-resource-id` - Accepts DB instance resource identifiers and
+    #     DB Amazon Resource Names (ARNs) for DB instances. The results list
+    #     includes only information about the DB instance resources
+    #     identified by these ARNs.
+    #
+    #   Returns all resources by default. The status for each resource is
+    #   specified in the response.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   The pagination token provided in the previous request. If this
+    #   parameter is specified the response includes only records beyond the
+    #   marker, up to `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstanceAutomatedBackupsMessage AWS API Documentation
+    #
+    class DescribeDBInstanceAutomatedBackupsMessage < Struct.new(
+      :dbi_resource_id,
+      :db_instance_identifier,
+      :filters,
+      :max_records,
+      :marker)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeDBInstancesMessage
     #   data as a hash:
     #
@@ -6929,6 +7473,7 @@ module Aws::RDS
     #         marker: "String",
     #         include_shared: false,
     #         include_public: false,
+    #         dbi_resource_id: "String",
     #       }
     #
     # @!attribute [rw] db_instance_identifier
@@ -7027,6 +7572,10 @@ module Aws::RDS
     #   ModifyDBSnapshotAttribute API.
     #   @return [Boolean]
     #
+    # @!attribute [rw] dbi_resource_id
+    #   A specific DB resource ID to describe.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshotsMessage AWS API Documentation
     #
     class DescribeDBSnapshotsMessage < Struct.new(
@@ -7037,7 +7586,8 @@ module Aws::RDS
       :max_records,
       :marker,
       :include_shared,
-      :include_public)
+      :include_public,
+      :dbi_resource_id)
       include Aws::Structure
     end
 
@@ -8157,13 +8707,18 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # This data type is used as a response element in the following actions:
+    # This data type represents the information you need to connect to an
+    # Amazon RDS DB instance. This data type is used as a response element
+    # in the following actions:
     #
     # * CreateDBInstance
     #
     # * DescribeDBInstances
     #
     # * DeleteDBInstance
+    #
+    # For the data structure that represents Amazon Aurora DB cluster
+    # endpoints, see DBClusterEndpoint.
     #
     # @!attribute [rw] address
     #   Specifies the DNS address of the DB instance.
@@ -8462,6 +9017,8 @@ module Aws::RDS
     #
     # * DescribeDBClusterBacktracks
     #
+    # * DescribeDBClusterEndpoints
+    #
     # * DescribeDBClusters
     #
     # * DescribeDBInstances
@@ -8626,6 +9183,47 @@ module Aws::RDS
       :capacity,
       :seconds_before_timeout,
       :timeout_action)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyDBClusterEndpointMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_endpoint_identifier: "String", # required
+    #         endpoint_type: "String",
+    #         static_members: ["String"],
+    #         excluded_members: ["String"],
+    #       }
+    #
+    # @!attribute [rw] db_cluster_endpoint_identifier
+    #   The identifier of the endpoint to modify. This parameter is stored
+    #   as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_type
+    #   The type of the endpoint. One of: `READER`, `ANY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] static_members
+    #   List of DB instance identifiers that are part of the custom endpoint
+    #   group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] excluded_members
+    #   List of DB instance identifiers that aren't part of the custom
+    #   endpoint group. All other eligible instances are reachable through
+    #   the custom endpoint. Only relevant if the list of static members is
+    #   empty.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterEndpointMessage AWS API Documentation
+    #
+    class ModifyDBClusterEndpointMessage < Struct.new(
+      :db_cluster_endpoint_identifier,
+      :endpoint_type,
+      :static_members,
+      :excluded_members)
       include Aws::Structure
     end
 
@@ -9253,7 +9851,7 @@ module Aws::RDS
     #   * Must be a value from 0 to 35
     #
     #   * Can be specified for a MySQL Read Replica only if the source is
-    #     running MySQL 5.6
+    #     running MySQL 5.6 or later
     #
     #   * Can be specified for a PostgreSQL Read Replica only if the source
     #     is running PostgreSQL 9.3.5
@@ -13526,7 +14124,7 @@ module Aws::RDS
     #   data as a hash:
     #
     #       {
-    #         source_db_instance_identifier: "String", # required
+    #         source_db_instance_identifier: "String",
     #         target_db_instance_identifier: "String", # required
     #         restore_time: Time.now,
     #         use_latest_restorable_time: false,
@@ -13565,6 +14163,7 @@ module Aws::RDS
     #         use_default_processor_features: false,
     #         db_parameter_group_name: "String",
     #         deletion_protection: false,
+    #         source_dbi_resource_id: "String",
     #       }
     #
     # @!attribute [rw] source_db_instance_identifier
@@ -13855,6 +14454,10 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] source_dbi_resource_id
+    #   The resource ID of the source DB instance from which to restore.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBInstanceToPointInTimeMessage < Struct.new(
@@ -13886,7 +14489,8 @@ module Aws::RDS
       :processor_features,
       :use_default_processor_features,
       :db_parameter_group_name,
-      :deletion_protection)
+      :deletion_protection,
+      :source_dbi_resource_id)
       include Aws::Structure
     end
 
@@ -13901,6 +14505,24 @@ module Aws::RDS
     #
     class RestoreDBInstanceToPointInTimeResult < Struct.new(
       :db_instance)
+      include Aws::Structure
+    end
+
+    # Earliest and latest time an instance can be restored to:
+    #
+    # @!attribute [rw] earliest_time
+    #   The earliest time you can restore an instance to.
+    #   @return [Time]
+    #
+    # @!attribute [rw] latest_time
+    #   The latest time you can restore an instance to.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreWindow AWS API Documentation
+    #
+    class RestoreWindow < Struct.new(
+      :earliest_time,
+      :latest_time)
       include Aws::Structure
     end
 

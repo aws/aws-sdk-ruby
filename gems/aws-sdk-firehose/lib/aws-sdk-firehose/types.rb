@@ -456,6 +456,12 @@ module Aws::Firehose
     #             log_stream_name: "LogStreamName",
     #           },
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] delivery_stream_name
@@ -505,6 +511,22 @@ module Aws::Firehose
     #   The destination in Splunk. You can specify only one destination.
     #   @return [Types::SplunkDestinationConfiguration]
     #
+    # @!attribute [rw] tags
+    #   A set of tags to assign to the delivery stream. A tag is a key-value
+    #   pair that you can define and assign to AWS resources. Tags are
+    #   metadata. For example, you can add friendly names and descriptions
+    #   or other types of information that can help you distinguish the
+    #   delivery stream. For more information about tags, see [Using Cost
+    #   Allocation Tags][1] in the AWS Billing and Cost Management User
+    #   Guide.
+    #
+    #   You can specify up to 50 tags when creating a delivery stream.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CreateDeliveryStreamInput AWS API Documentation
     #
     class CreateDeliveryStreamInput < Struct.new(
@@ -515,7 +537,8 @@ module Aws::Firehose
       :extended_s3_destination_configuration,
       :redshift_destination_configuration,
       :elasticsearch_destination_configuration,
-      :splunk_destination_configuration)
+      :splunk_destination_configuration,
+      :tags)
       include Aws::Structure
     end
 
@@ -667,6 +690,11 @@ module Aws::Firehose
     #   The status of the delivery stream.
     #   @return [String]
     #
+    # @!attribute [rw] delivery_stream_encryption_configuration
+    #   Indicates the server-side encryption (SSE) status for the delivery
+    #   stream.
+    #   @return [Types::DeliveryStreamEncryptionConfiguration]
+    #
     # @!attribute [rw] delivery_stream_type
     #   The delivery stream type. This can be one of the following values:
     #
@@ -711,6 +739,7 @@ module Aws::Firehose
       :delivery_stream_name,
       :delivery_stream_arn,
       :delivery_stream_status,
+      :delivery_stream_encryption_configuration,
       :delivery_stream_type,
       :version_id,
       :create_timestamp,
@@ -718,6 +747,21 @@ module Aws::Firehose
       :source,
       :destinations,
       :has_more_destinations)
+      include Aws::Structure
+    end
+
+    # Indicates the server-side encryption (SSE) status for the delivery
+    # stream.
+    #
+    # @!attribute [rw] status
+    #   For a full description of the different values of this status, see
+    #   StartDeliveryStreamEncryption and StopDeliveryStreamEncryption.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DeliveryStreamEncryptionConfiguration AWS API Documentation
+    #
+    class DeliveryStreamEncryptionConfiguration < Struct.new(
+      :status)
       include Aws::Structure
     end
 
@@ -2010,7 +2054,10 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] exclusive_start_delivery_stream_name
-    #   The name of the delivery stream to start the list with.
+    #   The list of delivery streams returned by this call to
+    #   `ListDeliveryStreams` will start with the delivery stream whose name
+    #   comes alphabetically immediately after the name you specify in
+    #   `ExclusiveStartDeliveryStreamName`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ListDeliveryStreamsInput AWS API Documentation
@@ -2484,8 +2531,16 @@ module Aws::Firehose
     end
 
     # @!attribute [rw] failed_put_count
-    #   The number of records that might have failed processing.
+    #   The number of records that might have failed processing. This number
+    #   might be greater than 0 even if the PutRecordBatch call succeeds.
+    #   Check `FailedPutCount` to determine whether there are records that
+    #   you need to resend.
     #   @return [Integer]
+    #
+    # @!attribute [rw] encrypted
+    #   Indicates whether server-side encryption (SSE) was enabled during
+    #   this operation.
+    #   @return [Boolean]
     #
     # @!attribute [rw] request_responses
     #   The results array. For each record, the index of the response
@@ -2496,6 +2551,7 @@ module Aws::Firehose
     #
     class PutRecordBatchOutput < Struct.new(
       :failed_put_count,
+      :encrypted,
       :request_responses)
       include Aws::Structure
     end
@@ -2557,10 +2613,16 @@ module Aws::Firehose
     #   The ID of the record.
     #   @return [String]
     #
+    # @!attribute [rw] encrypted
+    #   Indicates whether server-side encryption (SSE) was enabled during
+    #   this operation.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecordOutput AWS API Documentation
     #
     class PutRecordOutput < Struct.new(
-      :record_id)
+      :record_id,
+      :encrypted)
       include Aws::Structure
     end
 
@@ -2576,7 +2638,7 @@ module Aws::Firehose
     # @!attribute [rw] data
     #   The data blob, which is base64-encoded when the blob is serialized.
     #   The maximum size of the data blob, before base64-encoding, is 1,000
-    #   KB.
+    #   KiB.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/Record AWS API Documentation
@@ -3714,6 +3776,52 @@ module Aws::Firehose
       :duration_in_seconds)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass StartDeliveryStreamEncryptionInput
+    #   data as a hash:
+    #
+    #       {
+    #         delivery_stream_name: "DeliveryStreamName", # required
+    #       }
+    #
+    # @!attribute [rw] delivery_stream_name
+    #   The name of the delivery stream for which you want to enable
+    #   server-side encryption (SSE).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/StartDeliveryStreamEncryptionInput AWS API Documentation
+    #
+    class StartDeliveryStreamEncryptionInput < Struct.new(
+      :delivery_stream_name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/StartDeliveryStreamEncryptionOutput AWS API Documentation
+    #
+    class StartDeliveryStreamEncryptionOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass StopDeliveryStreamEncryptionInput
+    #   data as a hash:
+    #
+    #       {
+    #         delivery_stream_name: "DeliveryStreamName", # required
+    #       }
+    #
+    # @!attribute [rw] delivery_stream_name
+    #   The name of the delivery stream for which you want to disable
+    #   server-side encryption (SSE).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/StopDeliveryStreamEncryptionInput AWS API Documentation
+    #
+    class StopDeliveryStreamEncryptionInput < Struct.new(
+      :delivery_stream_name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/StopDeliveryStreamEncryptionOutput AWS API Documentation
+    #
+    class StopDeliveryStreamEncryptionOutput < Aws::EmptyStructure; end
 
     # Metadata that you can assign to a delivery stream, consisting of a
     # key-value pair.

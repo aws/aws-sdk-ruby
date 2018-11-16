@@ -357,6 +357,110 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
+    # Retrieves a forecast for how much Amazon Web Services predicts that
+    # you will spend over the forecast time period that you select, based on
+    # your past costs.
+    #
+    # @option params [required, Types::DateInterval] :time_period
+    #   The period of time that you want the forecast to cover.
+    #
+    # @option params [required, String] :metric
+    #   Which metric Cost Explorer uses to create your forecast. For more
+    #   information about blended and unblended rates, see [Why does the
+    #   "blended" annotation appear on some line items in my bill?][1].
+    #
+    #   Valid values for a `GetCostForecast` call are the following:
+    #
+    #   * AmortizedCost
+    #
+    #   * BlendedCost
+    #
+    #   * NetAmortizedCost
+    #
+    #   * NetUnblendedCost
+    #
+    #   * UnblendedCost
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/
+    #
+    # @option params [required, String] :granularity
+    #   How granular you want the forecast to be. You can get 3 months of
+    #   `DAILY` forecasts or 12 months of `MONTHLY` forecasts.
+    #
+    # @option params [Types::Expression] :filter
+    #   The filters that you want to use to filter your forecast. Cost
+    #   Explorer API supports all of the Cost Explorer filters.
+    #
+    # @option params [Integer] :prediction_interval_level
+    #   Cost Explorer always returns the mean forecast as a single point. You
+    #   can request a prediction interval around the mean by specifying a
+    #   confidence level. The higher the confidence level, the more confident
+    #   Cost Explorer is about the actual value falling in the prediction
+    #   interval. Higher confidence levels result in wider prediction
+    #   intervals.
+    #
+    # @return [Types::GetCostForecastResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCostForecastResponse#total #total} => Types::MetricValue
+    #   * {Types::GetCostForecastResponse#forecast_results_by_time #forecast_results_by_time} => Array&lt;Types::ForecastResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_cost_forecast({
+    #     time_period: { # required
+    #       start: "YearMonthDay", # required
+    #       end: "YearMonthDay", # required
+    #     },
+    #     metric: "BLENDED_COST", # required, accepts BLENDED_COST, UNBLENDED_COST, AMORTIZED_COST, NET_UNBLENDED_COST, NET_AMORTIZED_COST, USAGE_QUANTITY, NORMALIZED_USAGE_AMOUNT
+    #     granularity: "DAILY", # required, accepts DAILY, MONTHLY, HOURLY
+    #     filter: {
+    #       or: [
+    #         {
+    #           # recursive Expression
+    #         },
+    #       ],
+    #       and: [
+    #         {
+    #           # recursive Expression
+    #         },
+    #       ],
+    #       not: {
+    #         # recursive Expression
+    #       },
+    #       dimensions: {
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
+    #         values: ["Value"],
+    #       },
+    #       tags: {
+    #         key: "TagKey",
+    #         values: ["Value"],
+    #       },
+    #     },
+    #     prediction_interval_level: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.total.amount #=> String
+    #   resp.total.unit #=> String
+    #   resp.forecast_results_by_time #=> Array
+    #   resp.forecast_results_by_time[0].time_period.start #=> String
+    #   resp.forecast_results_by_time[0].time_period.end #=> String
+    #   resp.forecast_results_by_time[0].mean_value #=> String
+    #   resp.forecast_results_by_time[0].prediction_interval_lower_bound #=> String
+    #   resp.forecast_results_by_time[0].prediction_interval_upper_bound #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetCostForecast AWS API Documentation
+    #
+    # @overload get_cost_forecast(params = {})
+    # @param [Hash] params ({})
+    def get_cost_forecast(params = {}, options = {})
+      req = build_request(:get_cost_forecast, params)
+      req.send_request(options)
+    end
+
     # Retrieves all available filter values for a specified filter over a
     # period of time. You can search the dimension values for an arbitrary
     # string.
@@ -1082,7 +1186,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

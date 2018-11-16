@@ -417,12 +417,22 @@ module Aws::CodePipeline
     #     pipeline: { # required
     #       name: "PipelineName", # required
     #       role_arn: "RoleArn", # required
-    #       artifact_store: { # required
+    #       artifact_store: {
     #         type: "S3", # required, accepts S3
     #         location: "ArtifactStoreLocation", # required
     #         encryption_key: {
     #           id: "EncryptionKeyId", # required
     #           type: "KMS", # required, accepts KMS
+    #         },
+    #       },
+    #       artifact_stores: {
+    #         "AWSRegionName" => {
+    #           type: "S3", # required, accepts S3
+    #           location: "ArtifactStoreLocation", # required
+    #           encryption_key: {
+    #             id: "EncryptionKeyId", # required
+    #             type: "KMS", # required, accepts KMS
+    #           },
     #         },
     #       },
     #       stages: [ # required
@@ -458,6 +468,7 @@ module Aws::CodePipeline
     #                 },
     #               ],
     #               role_arn: "RoleArn",
+    #               region: "AWSRegionName",
     #             },
     #           ],
     #         },
@@ -474,6 +485,11 @@ module Aws::CodePipeline
     #   resp.pipeline.artifact_store.location #=> String
     #   resp.pipeline.artifact_store.encryption_key.id #=> String
     #   resp.pipeline.artifact_store.encryption_key.type #=> String, one of "KMS"
+    #   resp.pipeline.artifact_stores #=> Hash
+    #   resp.pipeline.artifact_stores["AWSRegionName"].type #=> String, one of "S3"
+    #   resp.pipeline.artifact_stores["AWSRegionName"].location #=> String
+    #   resp.pipeline.artifact_stores["AWSRegionName"].encryption_key.id #=> String
+    #   resp.pipeline.artifact_stores["AWSRegionName"].encryption_key.type #=> String, one of "KMS"
     #   resp.pipeline.stages #=> Array
     #   resp.pipeline.stages[0].name #=> String
     #   resp.pipeline.stages[0].blockers #=> Array
@@ -493,6 +509,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].input_artifacts #=> Array
     #   resp.pipeline.stages[0].actions[0].input_artifacts[0].name #=> String
     #   resp.pipeline.stages[0].actions[0].role_arn #=> String
+    #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreatePipeline AWS API Documentation
@@ -792,6 +809,11 @@ module Aws::CodePipeline
     #   resp.pipeline.artifact_store.location #=> String
     #   resp.pipeline.artifact_store.encryption_key.id #=> String
     #   resp.pipeline.artifact_store.encryption_key.type #=> String, one of "KMS"
+    #   resp.pipeline.artifact_stores #=> Hash
+    #   resp.pipeline.artifact_stores["AWSRegionName"].type #=> String, one of "S3"
+    #   resp.pipeline.artifact_stores["AWSRegionName"].location #=> String
+    #   resp.pipeline.artifact_stores["AWSRegionName"].encryption_key.id #=> String
+    #   resp.pipeline.artifact_stores["AWSRegionName"].encryption_key.type #=> String, one of "KMS"
     #   resp.pipeline.stages #=> Array
     #   resp.pipeline.stages[0].name #=> String
     #   resp.pipeline.stages[0].blockers #=> Array
@@ -811,6 +833,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].input_artifacts #=> Array
     #   resp.pipeline.stages[0].actions[0].input_artifacts[0].name #=> String
     #   resp.pipeline.stages[0].actions[0].role_arn #=> String
+    #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.version #=> Integer
     #   resp.metadata.pipeline_arn #=> String
     #   resp.metadata.created #=> Time
@@ -1755,6 +1778,13 @@ module Aws::CodePipeline
     # @option params [required, String] :name
     #   The name of the pipeline to start.
     #
+    # @option params [String] :client_request_token
+    #   The system-generated unique ID used to identify a unique execution
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::StartPipelineExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartPipelineExecutionOutput#pipeline_execution_id #pipeline_execution_id} => String
@@ -1763,6 +1793,7 @@ module Aws::CodePipeline
     #
     #   resp = client.start_pipeline_execution({
     #     name: "PipelineName", # required
+    #     client_request_token: "ClientRequestToken",
     #   })
     #
     # @example Response structure
@@ -1796,12 +1827,22 @@ module Aws::CodePipeline
     #     pipeline: { # required
     #       name: "PipelineName", # required
     #       role_arn: "RoleArn", # required
-    #       artifact_store: { # required
+    #       artifact_store: {
     #         type: "S3", # required, accepts S3
     #         location: "ArtifactStoreLocation", # required
     #         encryption_key: {
     #           id: "EncryptionKeyId", # required
     #           type: "KMS", # required, accepts KMS
+    #         },
+    #       },
+    #       artifact_stores: {
+    #         "AWSRegionName" => {
+    #           type: "S3", # required, accepts S3
+    #           location: "ArtifactStoreLocation", # required
+    #           encryption_key: {
+    #             id: "EncryptionKeyId", # required
+    #             type: "KMS", # required, accepts KMS
+    #           },
     #         },
     #       },
     #       stages: [ # required
@@ -1837,6 +1878,7 @@ module Aws::CodePipeline
     #                 },
     #               ],
     #               role_arn: "RoleArn",
+    #               region: "AWSRegionName",
     #             },
     #           ],
     #         },
@@ -1853,6 +1895,11 @@ module Aws::CodePipeline
     #   resp.pipeline.artifact_store.location #=> String
     #   resp.pipeline.artifact_store.encryption_key.id #=> String
     #   resp.pipeline.artifact_store.encryption_key.type #=> String, one of "KMS"
+    #   resp.pipeline.artifact_stores #=> Hash
+    #   resp.pipeline.artifact_stores["AWSRegionName"].type #=> String, one of "S3"
+    #   resp.pipeline.artifact_stores["AWSRegionName"].location #=> String
+    #   resp.pipeline.artifact_stores["AWSRegionName"].encryption_key.id #=> String
+    #   resp.pipeline.artifact_stores["AWSRegionName"].encryption_key.type #=> String, one of "KMS"
     #   resp.pipeline.stages #=> Array
     #   resp.pipeline.stages[0].name #=> String
     #   resp.pipeline.stages[0].blockers #=> Array
@@ -1872,6 +1919,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].input_artifacts #=> Array
     #   resp.pipeline.stages[0].actions[0].input_artifacts[0].name #=> String
     #   resp.pipeline.stages[0].actions[0].role_arn #=> String
+    #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/UpdatePipeline AWS API Documentation
@@ -1896,7 +1944,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

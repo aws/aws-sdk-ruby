@@ -28,6 +28,8 @@ module Aws::IAM
     BootstrapDatum = Shapes::BlobShape.new(name: 'BootstrapDatum')
     ChangePasswordRequest = Shapes::StructureShape.new(name: 'ChangePasswordRequest')
     ColumnNumber = Shapes::IntegerShape.new(name: 'ColumnNumber')
+    ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
+    ConcurrentModificationMessage = Shapes::StringShape.new(name: 'ConcurrentModificationMessage')
     ContextEntry = Shapes::StructureShape.new(name: 'ContextEntry')
     ContextEntryListType = Shapes::ListShape.new(name: 'ContextEntryListType')
     ContextKeyNameType = Shapes::StringShape.new(name: 'ContextKeyNameType')
@@ -190,6 +192,8 @@ module Aws::IAM
     ListPolicyVersionsResponse = Shapes::StructureShape.new(name: 'ListPolicyVersionsResponse')
     ListRolePoliciesRequest = Shapes::StructureShape.new(name: 'ListRolePoliciesRequest')
     ListRolePoliciesResponse = Shapes::StructureShape.new(name: 'ListRolePoliciesResponse')
+    ListRoleTagsRequest = Shapes::StructureShape.new(name: 'ListRoleTagsRequest')
+    ListRoleTagsResponse = Shapes::StructureShape.new(name: 'ListRoleTagsResponse')
     ListRolesRequest = Shapes::StructureShape.new(name: 'ListRolesRequest')
     ListRolesResponse = Shapes::StructureShape.new(name: 'ListRolesResponse')
     ListSAMLProvidersRequest = Shapes::StructureShape.new(name: 'ListSAMLProvidersRequest')
@@ -204,6 +208,8 @@ module Aws::IAM
     ListSigningCertificatesResponse = Shapes::StructureShape.new(name: 'ListSigningCertificatesResponse')
     ListUserPoliciesRequest = Shapes::StructureShape.new(name: 'ListUserPoliciesRequest')
     ListUserPoliciesResponse = Shapes::StructureShape.new(name: 'ListUserPoliciesResponse')
+    ListUserTagsRequest = Shapes::StructureShape.new(name: 'ListUserTagsRequest')
+    ListUserTagsResponse = Shapes::StructureShape.new(name: 'ListUserTagsResponse')
     ListUsersRequest = Shapes::StructureShape.new(name: 'ListUsersRequest')
     ListUsersResponse = Shapes::StructureShape.new(name: 'ListUsersResponse')
     ListVirtualMFADevicesRequest = Shapes::StructureShape.new(name: 'ListVirtualMFADevicesRequest')
@@ -286,8 +292,13 @@ module Aws::IAM
     SimulationPolicyListType = Shapes::ListShape.new(name: 'SimulationPolicyListType')
     Statement = Shapes::StructureShape.new(name: 'Statement')
     StatementListType = Shapes::ListShape.new(name: 'StatementListType')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagRoleRequest = Shapes::StructureShape.new(name: 'TagRoleRequest')
+    TagUserRequest = Shapes::StructureShape.new(name: 'TagUserRequest')
     UnmodifiableEntityException = Shapes::StructureShape.new(name: 'UnmodifiableEntityException')
     UnrecognizedPublicKeyEncodingException = Shapes::StructureShape.new(name: 'UnrecognizedPublicKeyEncodingException')
+    UntagRoleRequest = Shapes::StructureShape.new(name: 'UntagRoleRequest')
+    UntagUserRequest = Shapes::StructureShape.new(name: 'UntagUserRequest')
     UpdateAccessKeyRequest = Shapes::StructureShape.new(name: 'UpdateAccessKeyRequest')
     UpdateAccountPasswordPolicyRequest = Shapes::StructureShape.new(name: 'UpdateAccountPasswordPolicyRequest')
     UpdateAssumeRolePolicyRequest = Shapes::StructureShape.new(name: 'UpdateAssumeRolePolicyRequest')
@@ -407,6 +418,10 @@ module Aws::IAM
     summaryKeyType = Shapes::StringShape.new(name: 'summaryKeyType')
     summaryMapType = Shapes::MapShape.new(name: 'summaryMapType')
     summaryValueType = Shapes::IntegerShape.new(name: 'summaryValueType')
+    tagKeyListType = Shapes::ListShape.new(name: 'tagKeyListType')
+    tagKeyType = Shapes::StringShape.new(name: 'tagKeyType')
+    tagListType = Shapes::ListShape.new(name: 'tagListType')
+    tagValueType = Shapes::StringShape.new(name: 'tagValueType')
     thumbprintListType = Shapes::ListShape.new(name: 'thumbprintListType')
     thumbprintType = Shapes::StringShape.new(name: 'thumbprintType')
     unmodifiableEntityMessage = Shapes::StringShape.new(name: 'unmodifiableEntityMessage')
@@ -546,6 +561,7 @@ module Aws::IAM
     CreateRoleRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: roleNameType, required: true, location_name: "RoleName"))
     CreateRoleRequest.add_member(:assume_role_policy_document, Shapes::ShapeRef.new(shape: policyDocumentType, required: true, location_name: "AssumeRolePolicyDocument"))
     CreateRoleRequest.add_member(:description, Shapes::ShapeRef.new(shape: roleDescriptionType, location_name: "Description"))
+    CreateRoleRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, location_name: "Tags"))
     CreateRoleRequest.add_member(:max_session_duration, Shapes::ShapeRef.new(shape: roleMaxSessionDurationType, location_name: "MaxSessionDuration"))
     CreateRoleRequest.add_member(:permissions_boundary, Shapes::ShapeRef.new(shape: arnType, location_name: "PermissionsBoundary"))
     CreateRoleRequest.struct_class = Types::CreateRoleRequest
@@ -577,6 +593,7 @@ module Aws::IAM
 
     CreateUserRequest.add_member(:path, Shapes::ShapeRef.new(shape: pathType, location_name: "Path"))
     CreateUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, required: true, location_name: "UserName"))
+    CreateUserRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, location_name: "Tags"))
     CreateUserRequest.add_member(:permissions_boundary, Shapes::ShapeRef.new(shape: arnType, location_name: "PermissionsBoundary"))
     CreateUserRequest.struct_class = Types::CreateUserRequest
 
@@ -1055,6 +1072,16 @@ module Aws::IAM
     ListRolePoliciesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
     ListRolePoliciesResponse.struct_class = Types::ListRolePoliciesResponse
 
+    ListRoleTagsRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: roleNameType, required: true, location_name: "RoleName"))
+    ListRoleTagsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListRoleTagsRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: maxItemsType, location_name: "MaxItems"))
+    ListRoleTagsRequest.struct_class = Types::ListRoleTagsRequest
+
+    ListRoleTagsResponse.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, required: true, location_name: "Tags"))
+    ListRoleTagsResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
+    ListRoleTagsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListRoleTagsResponse.struct_class = Types::ListRoleTagsResponse
+
     ListRolesRequest.add_member(:path_prefix, Shapes::ShapeRef.new(shape: pathPrefixType, location_name: "PathPrefix"))
     ListRolesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
     ListRolesRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: maxItemsType, location_name: "MaxItems"))
@@ -1116,6 +1143,16 @@ module Aws::IAM
     ListUserPoliciesResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
     ListUserPoliciesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
     ListUserPoliciesResponse.struct_class = Types::ListUserPoliciesResponse
+
+    ListUserTagsRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: existingUserNameType, required: true, location_name: "UserName"))
+    ListUserTagsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListUserTagsRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: maxItemsType, location_name: "MaxItems"))
+    ListUserTagsRequest.struct_class = Types::ListUserTagsRequest
+
+    ListUserTagsResponse.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, required: true, location_name: "Tags"))
+    ListUserTagsResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
+    ListUserTagsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListUserTagsResponse.struct_class = Types::ListUserTagsResponse
 
     ListUsersRequest.add_member(:path_prefix, Shapes::ShapeRef.new(shape: pathPrefixType, location_name: "PathPrefix"))
     ListUsersRequest.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
@@ -1294,6 +1331,7 @@ module Aws::IAM
     Role.add_member(:create_date, Shapes::ShapeRef.new(shape: dateType, required: true, location_name: "CreateDate"))
     Role.add_member(:assume_role_policy_document, Shapes::ShapeRef.new(shape: policyDocumentType, location_name: "AssumeRolePolicyDocument"))
     Role.add_member(:description, Shapes::ShapeRef.new(shape: roleDescriptionType, location_name: "Description"))
+    Role.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, location_name: "Tags"))
     Role.add_member(:max_session_duration, Shapes::ShapeRef.new(shape: roleMaxSessionDurationType, location_name: "MaxSessionDuration"))
     Role.add_member(:permissions_boundary, Shapes::ShapeRef.new(shape: AttachedPermissionsBoundary, location_name: "PermissionsBoundary"))
     Role.struct_class = Types::Role
@@ -1307,6 +1345,7 @@ module Aws::IAM
     RoleDetail.add_member(:instance_profile_list, Shapes::ShapeRef.new(shape: instanceProfileListType, location_name: "InstanceProfileList"))
     RoleDetail.add_member(:role_policy_list, Shapes::ShapeRef.new(shape: policyDetailListType, location_name: "RolePolicyList"))
     RoleDetail.add_member(:attached_managed_policies, Shapes::ShapeRef.new(shape: attachedPoliciesListType, location_name: "AttachedManagedPolicies"))
+    RoleDetail.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, location_name: "Tags"))
     RoleDetail.add_member(:permissions_boundary, Shapes::ShapeRef.new(shape: AttachedPermissionsBoundary, location_name: "PermissionsBoundary"))
     RoleDetail.struct_class = Types::RoleDetail
 
@@ -1422,6 +1461,26 @@ module Aws::IAM
 
     StatementListType.member = Shapes::ShapeRef.new(shape: Statement)
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: tagKeyType, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: tagValueType, required: true, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagRoleRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: roleNameType, required: true, location_name: "RoleName"))
+    TagRoleRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, required: true, location_name: "Tags"))
+    TagRoleRequest.struct_class = Types::TagRoleRequest
+
+    TagUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: existingUserNameType, required: true, location_name: "UserName"))
+    TagUserRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, required: true, location_name: "Tags"))
+    TagUserRequest.struct_class = Types::TagUserRequest
+
+    UntagRoleRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: roleNameType, required: true, location_name: "RoleName"))
+    UntagRoleRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: tagKeyListType, required: true, location_name: "TagKeys"))
+    UntagRoleRequest.struct_class = Types::UntagRoleRequest
+
+    UntagUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: existingUserNameType, required: true, location_name: "UserName"))
+    UntagUserRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: tagKeyListType, required: true, location_name: "TagKeys"))
+    UntagUserRequest.struct_class = Types::UntagUserRequest
+
     UpdateAccessKeyRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: existingUserNameType, location_name: "UserName"))
     UpdateAccessKeyRequest.add_member(:access_key_id, Shapes::ShapeRef.new(shape: accessKeyIdType, required: true, location_name: "AccessKeyId"))
     UpdateAccessKeyRequest.add_member(:status, Shapes::ShapeRef.new(shape: statusType, required: true, location_name: "Status"))
@@ -1532,6 +1591,7 @@ module Aws::IAM
     User.add_member(:arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "Arn"))
     User.add_member(:create_date, Shapes::ShapeRef.new(shape: dateType, required: true, location_name: "CreateDate"))
     User.add_member(:password_last_used, Shapes::ShapeRef.new(shape: dateType, location_name: "PasswordLastUsed"))
+    User.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, location_name: "Tags"))
     User.add_member(:permissions_boundary, Shapes::ShapeRef.new(shape: AttachedPermissionsBoundary, location_name: "PermissionsBoundary"))
     User.struct_class = Types::User
 
@@ -1543,6 +1603,7 @@ module Aws::IAM
     UserDetail.add_member(:user_policy_list, Shapes::ShapeRef.new(shape: policyDetailListType, location_name: "UserPolicyList"))
     UserDetail.add_member(:group_list, Shapes::ShapeRef.new(shape: groupNameListType, location_name: "GroupList"))
     UserDetail.add_member(:attached_managed_policies, Shapes::ShapeRef.new(shape: attachedPoliciesListType, location_name: "AttachedManagedPolicies"))
+    UserDetail.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, location_name: "Tags"))
     UserDetail.add_member(:permissions_boundary, Shapes::ShapeRef.new(shape: AttachedPermissionsBoundary, location_name: "PermissionsBoundary"))
     UserDetail.struct_class = Types::UserDetail
 
@@ -1591,6 +1652,10 @@ module Aws::IAM
 
     summaryMapType.key = Shapes::ShapeRef.new(shape: summaryKeyType)
     summaryMapType.value = Shapes::ShapeRef.new(shape: summaryValueType)
+
+    tagKeyListType.member = Shapes::ShapeRef.new(shape: tagKeyType)
+
+    tagListType.member = Shapes::ShapeRef.new(shape: Tag)
 
     thumbprintListType.member = Shapes::ShapeRef.new(shape: thumbprintType)
 
@@ -1815,6 +1880,7 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: EntityAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: MalformedPolicyDocumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
@@ -1862,6 +1928,8 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: EntityAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
@@ -2015,6 +2083,7 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: DeleteConflictException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: UnmodifiableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
@@ -2114,6 +2183,7 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: DeleteConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
@@ -2713,6 +2783,16 @@ module Aws::IAM
         )
       end)
 
+      api.add_operation(:list_role_tags, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRoleTags"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListRoleTagsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRoleTagsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:list_roles, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListRoles"
         o.http_method = "POST"
@@ -2812,6 +2892,16 @@ module Aws::IAM
             "marker" => "marker"
           }
         )
+      end)
+
+      api.add_operation(:list_user_tags, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListUserTags"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListUserTagsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListUserTagsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
       api.add_operation(:list_users, Seahorse::Model::Operation.new.tap do |o|
@@ -3009,6 +3099,54 @@ module Aws::IAM
         )
       end)
 
+      api.add_operation(:tag_role, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagRole"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagRoleRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:tag_user, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagUser"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagUserRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:untag_role, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagRole"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagRoleRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:untag_user, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagUser"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagUserRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:update_access_key, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateAccessKey"
         o.http_method = "POST"
@@ -3166,6 +3304,7 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: EntityAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: EntityTemporarilyUnmodifiableException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 

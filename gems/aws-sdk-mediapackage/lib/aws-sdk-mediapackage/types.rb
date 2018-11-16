@@ -95,6 +95,7 @@ module Aws::MediaPackage
     #       {
     #         key_rotation_interval_seconds: 1,
     #         speke_key_provider: { # required
+    #           certificate_arn: "__string",
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -164,6 +165,7 @@ module Aws::MediaPackage
     #         encryption: {
     #           key_rotation_interval_seconds: 1,
     #           speke_key_provider: { # required
+    #             certificate_arn: "__string",
     #             resource_id: "__string", # required
     #             role_arn: "__string", # required
     #             system_ids: ["__string"], # required
@@ -277,6 +279,7 @@ module Aws::MediaPackage
     #           encryption: {
     #             key_rotation_interval_seconds: 1,
     #             speke_key_provider: { # required
+    #               certificate_arn: "__string",
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required
@@ -306,6 +309,7 @@ module Aws::MediaPackage
     #           encryption: {
     #             key_rotation_interval_seconds: 1,
     #             speke_key_provider: { # required
+    #               certificate_arn: "__string",
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required
@@ -334,6 +338,7 @@ module Aws::MediaPackage
     #             key_rotation_interval_seconds: 1,
     #             repeat_ext_x_key: false,
     #             speke_key_provider: { # required
+    #               certificate_arn: "__string",
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required
@@ -357,6 +362,7 @@ module Aws::MediaPackage
     #         mss_package: {
     #           encryption: {
     #             speke_key_provider: { # required
+    #               certificate_arn: "__string",
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required
@@ -503,6 +509,7 @@ module Aws::MediaPackage
     #       {
     #         key_rotation_interval_seconds: 1,
     #         speke_key_provider: { # required
+    #           certificate_arn: "__string",
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -537,6 +544,7 @@ module Aws::MediaPackage
     #         encryption: {
     #           key_rotation_interval_seconds: 1,
     #           speke_key_provider: { # required
+    #             certificate_arn: "__string",
     #             resource_id: "__string", # required
     #             role_arn: "__string", # required
     #             system_ids: ["__string"], # required
@@ -792,6 +800,7 @@ module Aws::MediaPackage
     #         key_rotation_interval_seconds: 1,
     #         repeat_ext_x_key: false,
     #         speke_key_provider: { # required
+    #           certificate_arn: "__string",
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -1002,6 +1011,7 @@ module Aws::MediaPackage
     #           key_rotation_interval_seconds: 1,
     #           repeat_ext_x_key: false,
     #           speke_key_provider: { # required
+    #             certificate_arn: "__string",
     #             resource_id: "__string", # required
     #             role_arn: "__string", # required
     #             system_ids: ["__string"], # required
@@ -1202,6 +1212,7 @@ module Aws::MediaPackage
     #
     #       {
     #         speke_key_provider: { # required
+    #           certificate_arn: "__string",
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -1230,6 +1241,7 @@ module Aws::MediaPackage
     #       {
     #         encryption: {
     #           speke_key_provider: { # required
+    #             certificate_arn: "__string",
     #             resource_id: "__string", # required
     #             role_arn: "__string", # required
     #             system_ids: ["__string"], # required
@@ -1592,11 +1604,18 @@ module Aws::MediaPackage
     #   data as a hash:
     #
     #       {
+    #         certificate_arn: "__string",
     #         resource_id: "__string", # required
     #         role_arn: "__string", # required
     #         system_ids: ["__string"], # required
     #         url: "__string", # required
     #       }
+    #
+    # @!attribute [rw] certificate_arn
+    #   An Amazon Resource Name (ARN) of a Certificate Manager certificate
+    #   that MediaPackage will use for enforcing secure end-to-end data
+    #   transfer with the key provider service.
+    #   @return [String]
     #
     # @!attribute [rw] resource_id
     #   The resource ID to include in key requests.
@@ -1618,6 +1637,7 @@ module Aws::MediaPackage
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/SpekeKeyProvider AWS API Documentation
     #
     class SpekeKeyProvider < Struct.new(
+      :certificate_arn,
       :resource_id,
       :role_arn,
       :system_ids,
@@ -1710,6 +1730,7 @@ module Aws::MediaPackage
     #           encryption: {
     #             key_rotation_interval_seconds: 1,
     #             speke_key_provider: { # required
+    #               certificate_arn: "__string",
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required
@@ -1739,6 +1760,7 @@ module Aws::MediaPackage
     #           encryption: {
     #             key_rotation_interval_seconds: 1,
     #             speke_key_provider: { # required
+    #               certificate_arn: "__string",
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required
@@ -1767,6 +1789,7 @@ module Aws::MediaPackage
     #             key_rotation_interval_seconds: 1,
     #             repeat_ext_x_key: false,
     #             speke_key_provider: { # required
+    #               certificate_arn: "__string",
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required
@@ -1790,6 +1813,7 @@ module Aws::MediaPackage
     #         mss_package: {
     #           encryption: {
     #             speke_key_provider: { # required
+    #               certificate_arn: "__string",
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required

@@ -788,6 +788,16 @@ module Aws::SSM
     #   The target of the execution.
     #   @return [String]
     #
+    # @!attribute [rw] target_locations
+    #   The combination of AWS Regions and/or AWS accounts where you want to
+    #   execute the Automation.
+    #   @return [Array<Types::TargetLocation>]
+    #
+    # @!attribute [rw] progress_counters
+    #   An aggregate of step execution statuses displayed in the AWS Console
+    #   for a multi-Region and multi-account Automation execution.
+    #   @return [Types::ProgressCounters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AutomationExecution AWS API Documentation
     #
     class AutomationExecution < Struct.new(
@@ -813,7 +823,9 @@ module Aws::SSM
       :resolved_targets,
       :max_concurrency,
       :max_errors,
-      :target)
+      :target,
+      :target_locations,
+      :progress_counters)
       include Aws::Structure
     end
 
@@ -824,7 +836,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter
+    #         key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType
     #         values: ["AutomationExecutionFilterValue"], # required
     #       }
     #
@@ -938,6 +950,18 @@ module Aws::SSM
     #   The list of execution outputs as defined in the Automation document.
     #   @return [String]
     #
+    # @!attribute [rw] automation_type
+    #   Use this filter with DescribeAutomationExecution. Specify either
+    #   Local of CrossAccount. CrossAccount is an Automation that executes
+    #   in multiple AWS Regions and accounts. For more information, see
+    #   [Concurrently Executing Automations in Multiple AWS Regions and
+    #   Accounts][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AutomationExecutionMetadata AWS API Documentation
     #
     class AutomationExecutionMetadata < Struct.new(
@@ -961,7 +985,8 @@ module Aws::SSM
       :resolved_targets,
       :max_concurrency,
       :max_errors,
-      :target)
+      :target,
+      :automation_type)
       include Aws::Structure
     end
 
@@ -1274,45 +1299,43 @@ module Aws::SSM
     # @!attribute [rw] value
     #   The filter value. Valid values for each filter key are as follows:
     #
-    #   * InvokedAfter: A timestamp to limit your results. For example,
-    #     specify `2018-07-07T00:00:00Z` to see results occurring July 7,
-    #     2018, and later.
+    #   * **InvokedAfter**\: Specify a timestamp to limit your results. For
+    #     example, specify `2018-07-07T00:00:00Z` to see a list of command
+    #     executions occurring July 7, 2018, and later.
     #
-    #   * InvokedBefore: A timestamp to limit your results. For example,
-    #     specify `2018-07-07T00:00:00Z` to see results before July 7, 2018.
+    #   * **InvokedBefore**\: Specify a timestamp to limit your results. For
+    #     example, specify `2018-07-07T00:00:00Z` to see a list of command
+    #     executions from before July 7, 2018.
     #
-    #   * Status: Specify a valid command status to see a list of all
+    #   * **Status**\: Specify a valid command status to see a list of all
     #     command executions with that status. Status values you can specify
     #     include:
     #
-    #     * Pending
+    #     * `Pending`
     #
-    #     * InProgress
+    #     * `InProgress`
     #
-    #     * Success
+    #     * `Success`
     #
-    #     * Cancelled
+    #     * `Cancelled`
     #
-    #     * Failed
+    #     * `Failed`
     #
-    #     * TimedOut
+    #     * `TimedOut`
     #
-    #     * Cancelling
+    #     * `Cancelling`
     #
-    #   * DocumentName: The name of the SSM document for which you want to
-    #     see command results.
+    #   * **DocumentName**\: Specify name of the SSM document for which you
+    #     want to see command execution results. For example, specify
+    #     `AWS-RunPatchBaseline` to see command executions that used this
+    #     SSM document to perform security patching operations on instances.
     #
-    #     For example, specify `AWS-RunPatchBaseline` to see command
-    #     executions that used this SSM document to perform security
-    #     patching operations on instances.
+    #   * **ExecutionStage**\: Specify one of the following values:
     #
-    #   * ExecutionStage: An enum whose value can be either `Executing` or
-    #     `Complete`.
-    #
-    #     * Specify `Executing` to see a list of command executions that are
+    #     * `Executing`\: Returns a list of command executions that are
     #       currently still running.
     #
-    #     * Specify `Complete` to see a list of command exeuctions that have
+    #     * `Complete`\: Returns a list of command executions that have
     #       already completed.
     #   @return [String]
     #
@@ -1986,7 +2009,7 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Describes the association of a Systems Manager document and an
+    # Describes the association of a Systems Manager SSM document and an
     # instance.
     #
     # @note When making an API call, you may pass CreateAssociationBatchRequestEntry
@@ -3366,7 +3389,7 @@ module Aws::SSM
     #       {
     #         filters: [
     #           {
-    #             key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter
+    #             key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType
     #             values: ["AutomationExecutionFilterValue"], # required
     #           },
     #         ],
@@ -4574,7 +4597,8 @@ module Aws::SSM
     #
     # @!attribute [rw] filters
     #   Optional filters used to narrow down the scope of the returned
-    #   Maintenance Windows. Supported filter keys are Name and Enabled.
+    #   Maintenance Windows. Supported filter keys are **Name** and
+    #   **Enabled**.
     #   @return [Array<Types::MaintenanceWindowFilter>]
     #
     # @!attribute [rw] max_results
@@ -9022,7 +9046,7 @@ module Aws::SSM
     #
     # @!attribute [rw] timeout_seconds
     #   If this time is reached and the command has not already started
-    #   executing, it doesn not execute.
+    #   executing, it doesn't run.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowRunCommandParameters AWS API Documentation
@@ -10531,6 +10555,46 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # An aggregate of step execution statuses displayed in the AWS Console
+    # for a multi-Region and multi-account Automation execution.
+    #
+    # @!attribute [rw] total_steps
+    #   The total number of steps executed in all specified AWS Regions and
+    #   accounts for the current Automation execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] success_steps
+    #   The total number of steps that successfully completed in all
+    #   specified AWS Regions and accounts for the current Automation
+    #   execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_steps
+    #   The total number of steps that failed to execute in all specified
+    #   AWS Regions and accounts for the current Automation execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cancelled_steps
+    #   The total number of steps that the system cancelled in all specified
+    #   AWS Regions and accounts for the current Automation execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timed_out_steps
+    #   The total number of steps that timed out in all specified AWS
+    #   Regions and accounts for the current Automation execution.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ProgressCounters AWS API Documentation
+    #
+    class ProgressCounters < Struct.new(
+      :total_steps,
+      :success_steps,
+      :failed_steps,
+      :cancelled_steps,
+      :timed_out_steps)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutComplianceItemsRequest
     #   data as a hash:
     #
@@ -12001,6 +12065,15 @@ module Aws::SSM
     #         ],
     #         max_concurrency: "MaxConcurrency",
     #         max_errors: "MaxErrors",
+    #         target_locations: [
+    #           {
+    #             accounts: ["Account"],
+    #             regions: ["Region"],
+    #             target_location_max_concurrency: "MaxConcurrency",
+    #             target_location_max_errors: "MaxErrors",
+    #             execution_role_name: "ExecutionRoleName",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] document_name
@@ -12066,6 +12139,18 @@ module Aws::SSM
     #   executions proceed one at a time.
     #   @return [String]
     #
+    # @!attribute [rw] target_locations
+    #   A location is a combination of AWS Regions and/or AWS accounts where
+    #   you want to execute the Automation. Use this action to start an
+    #   Automation in multiple Regions and multiple accounts. For more
+    #   information, see [Concurrently Executing Automations in Multiple AWS
+    #   Regions and Accounts][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html
+    #   @return [Array<Types::TargetLocation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartAutomationExecutionRequest AWS API Documentation
     #
     class StartAutomationExecutionRequest < Struct.new(
@@ -12078,7 +12163,8 @@ module Aws::SSM
       :targets,
       :target_maps,
       :max_concurrency,
-      :max_errors)
+      :max_errors,
+      :target_locations)
       include Aws::Structure
     end
 
@@ -12263,6 +12349,15 @@ module Aws::SSM
     #   support the automation to go to another specific step.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] targets
+    #   The targets for the step execution.
+    #   @return [Array<Types::Target>]
+    #
+    # @!attribute [rw] target_location
+    #   The combination of AWS Regions and accounts targeted by the current
+    #   Automation execution.
+    #   @return [Types::TargetLocation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StepExecution AWS API Documentation
     #
     class StepExecution < Struct.new(
@@ -12285,7 +12380,9 @@ module Aws::SSM
       :is_end,
       :next_step,
       :is_critical,
-      :valid_next_steps)
+      :valid_next_steps,
+      :targets,
+      :target_location)
       include Aws::Structure
     end
 
@@ -12420,6 +12517,55 @@ module Aws::SSM
     class Target < Struct.new(
       :key,
       :values)
+      include Aws::Structure
+    end
+
+    # The combination of AWS Regions and accounts targeted by the current
+    # Automation execution.
+    #
+    # @note When making an API call, you may pass TargetLocation
+    #   data as a hash:
+    #
+    #       {
+    #         accounts: ["Account"],
+    #         regions: ["Region"],
+    #         target_location_max_concurrency: "MaxConcurrency",
+    #         target_location_max_errors: "MaxErrors",
+    #         execution_role_name: "ExecutionRoleName",
+    #       }
+    #
+    # @!attribute [rw] accounts
+    #   The AWS accounts targeted by the current Automation execution.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] regions
+    #   The AWS Regions targeted by the current Automation execution.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] target_location_max_concurrency
+    #   The maxium number of AWS accounts and AWS regions allowed to run the
+    #   Automation concurrently
+    #   @return [String]
+    #
+    # @!attribute [rw] target_location_max_errors
+    #   The maxium number of errors allowed before the system stops queueing
+    #   additional Automation executions for the currently executing
+    #   Automation.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role_name
+    #   The Automation execution role used by the currently executing
+    #   Automation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/TargetLocation AWS API Documentation
+    #
+    class TargetLocation < Struct.new(
+      :accounts,
+      :regions,
+      :target_location_max_concurrency,
+      :target_location_max_errors,
+      :execution_role_name)
       include Aws::Structure
     end
 

@@ -33,29 +33,29 @@ module Aws::SNS
     # A map of the topic's attributes. Attributes in this map include the
     # following:
     #
-    # * `TopicArn` -- the topic's ARN
+    # * `TopicArn` – the topic's ARN
     #
-    # * `Owner` -- the AWS account ID of the topic's owner
+    # * `Owner` – the AWS account ID of the topic's owner
     #
-    # * `Policy` -- the JSON serialization of the topic's access control
+    # * `Policy` – the JSON serialization of the topic's access control
     #   policy
     #
-    # * `DisplayName` -- the human-readable name used in the "From" field
+    # * `DisplayName` – the human-readable name used in the "From" field
     #   for notifications to email and email-json endpoints
     #
-    # * `SubscriptionsPending` -- the number of subscriptions pending
+    # * `SubscriptionsPending` – the number of subscriptions pending
     #   confirmation on this topic
     #
-    # * `SubscriptionsConfirmed` -- the number of confirmed subscriptions on
+    # * `SubscriptionsConfirmed` – the number of confirmed subscriptions on
     #   this topic
     #
-    # * `SubscriptionsDeleted` -- the number of deleted subscriptions on
-    #   this topic
+    # * `SubscriptionsDeleted` – the number of deleted subscriptions on this
+    #   topic
     #
-    # * `DeliveryPolicy` -- the JSON serialization of the topic's delivery
+    # * `DeliveryPolicy` – the JSON serialization of the topic's delivery
     #   policy
     #
-    # * `EffectiveDeliveryPolicy` -- the JSON serialization of the effective
+    # * `EffectiveDeliveryPolicy` – the JSON serialization of the effective
     #   delivery policy that takes into account system defaults
     # @return [Hash<String,String>]
     def attributes
@@ -191,6 +191,10 @@ module Aws::SNS
     # @option options [required, String] :message
     #   The message you want to send.
     #
+    #   The `Message` parameter is always a string. If you set
+    #   `MessageStructure` to `json`, you must string-encode the `Message`
+    #   parameter.
+    #
     #   If you are publishing to a topic and you want to send the same message
     #   to all transport protocols, include the text of the message as a
     #   String value. If you want to send different messages for each
@@ -202,16 +206,20 @@ module Aws::SNS
     #   Constraints:
     #
     #   * With the exception of SMS, messages must be UTF-8 encoded strings
-    #     and at most 256 KB in size (262144 bytes, not 262144 characters).
+    #     and at most 256 KB in size (262,144 bytes, not 262,144 characters).
     #
-    #   * For SMS, each message can contain up to 140 bytes, and the character
-    #     limit depends on the encoding scheme. For example, an SMS message
-    #     can contain 160 GSM characters, 140 ASCII characters, or 70 UCS-2
-    #     characters. If you publish a message that exceeds the size limit,
-    #     Amazon SNS sends it as multiple messages, each fitting within the
-    #     size limit. Messages are not cut off in the middle of a word but on
-    #     whole-word boundaries. The total size limit for a single SMS publish
-    #     action is 1600 bytes.
+    #   * For SMS, each message can contain up to 140 characters. This
+    #     character limit depends on the encoding schema. For example, an SMS
+    #     message can contain 160 GSM characters, 140 ASCII characters, or 70
+    #     UCS-2 characters.
+    #
+    #     If you publish a message that exceeds this size limit, Amazon SNS
+    #     sends the message as multiple messages, each fitting within the size
+    #     limit. Messages aren't truncated mid-word but are cut off at
+    #     whole-word boundaries.
+    #
+    #     The total size limit for a single SMS `Publish` action is 1,600
+    #     characters.
     #
     #   JSON-specific constraints:
     #
@@ -304,10 +312,19 @@ module Aws::SNS
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :attribute_name
-    #   The name of the attribute you want to set. Only a subset of the
-    #   topic's attributes are mutable.
+    #   A map of attributes with their corresponding values.
     #
-    #   Valid values: `Policy` \| `DisplayName` \| `DeliveryPolicy`
+    #   The following lists the names, descriptions, and values of the special
+    #   request parameters that the `SetTopicAttributes` action uses:
+    #
+    #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
+    #     failed deliveries to HTTP/S endpoints.
+    #
+    #   * `DisplayName` – The display name to use for a topic with SMS
+    #     subscriptions.
+    #
+    #   * `Policy` – The policy that defines who can access your topic. By
+    #     default, only the topic owner can publish or subscribe to the topic.
     # @option options [String] :attribute_value
     #   The new value for the attribute.
     # @return [EmptyStructure]
@@ -331,22 +348,22 @@ module Aws::SNS
     # @option options [required, String] :protocol
     #   The protocol you want to use. Supported protocols include:
     #
-    #   * `http` -- delivery of JSON-encoded message via HTTP POST
+    #   * `http` – delivery of JSON-encoded message via HTTP POST
     #
-    #   * `https` -- delivery of JSON-encoded message via HTTPS POST
+    #   * `https` – delivery of JSON-encoded message via HTTPS POST
     #
-    #   * `email` -- delivery of message via SMTP
+    #   * `email` – delivery of message via SMTP
     #
-    #   * `email-json` -- delivery of JSON-encoded message via SMTP
+    #   * `email-json` – delivery of JSON-encoded message via SMTP
     #
-    #   * `sms` -- delivery of message via SMS
+    #   * `sms` – delivery of message via SMS
     #
-    #   * `sqs` -- delivery of JSON-encoded message to an Amazon SQS queue
+    #   * `sqs` – delivery of JSON-encoded message to an Amazon SQS queue
     #
-    #   * `application` -- delivery of JSON-encoded message to an EndpointArn
+    #   * `application` – delivery of JSON-encoded message to an EndpointArn
     #     for a mobile app and device.
     #
-    #   * `lambda` -- delivery of JSON-encoded message to an AWS Lambda
+    #   * `lambda` – delivery of JSON-encoded message to an AWS Lambda
     #     function.
     # @option options [String] :endpoint
     #   The endpoint that you want to receive notifications. Endpoints vary by
@@ -374,9 +391,22 @@ module Aws::SNS
     #   * For the `lambda` protocol, the endpoint is the ARN of an AWS Lambda
     #     function.
     # @option options [Hash<String,String>] :attributes
-    #   Assigns attributes to the subscription as a map of key-value pairs.
-    #   You can assign any attribute that is supported by the
-    #   `SetSubscriptionAttributes` action.
+    #   A map of attributes with their corresponding values.
+    #
+    #   The following lists the names, descriptions, and values of the special
+    #   request parameters that the `SetTopicAttributes` action uses:
+    #
+    #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
+    #     failed deliveries to HTTP/S endpoints.
+    #
+    #   * `FilterPolicy` – The simple JSON object that lets your subscriber
+    #     receive only a subset of messages, rather than receiving every
+    #     message published to the topic.
+    #
+    #   * `RawMessageDelivery` – When set to `true`, enables raw message
+    #     delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need
+    #     for the endpoints to process JSON formatting, which is otherwise
+    #     created for Amazon SNS metadata.
     # @option options [Boolean] :return_subscription_arn
     #   Sets whether the response from the `Subscribe` request includes the
     #   subscription ARN, even if the subscription is not yet confirmed.

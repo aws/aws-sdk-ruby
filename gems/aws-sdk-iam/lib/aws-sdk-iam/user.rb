@@ -106,6 +106,18 @@ module Aws::IAM
       data[:password_last_used]
     end
 
+    # A list of tags that are associated with the specified user. For more
+    # information about tagging, see [Tagging IAM Identities][1] in the *IAM
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    # @return [Array<Types::Tag>]
+    def tags
+      data[:tags]
+    end
+
     # The ARN of the policy used to set the permissions boundary for the
     # user.
     #
@@ -333,6 +345,12 @@ module Aws::IAM
     #
     #   user = user.create({
     #     path: "pathType",
+    #     tags: [
+    #       {
+    #         key: "tagKeyType", # required
+    #         value: "tagValueType", # required
+    #       },
+    #     ],
     #     permissions_boundary: "arnType",
     #   })
     # @param [Hash] options ({})
@@ -354,6 +372,21 @@ module Aws::IAM
     #
     #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
+    # @option options [Array<Types::Tag>] :tags
+    #   A list of tags that you want to attach to the newly created user. Each
+    #   tag consists of a key name and an associated value. For more
+    #   information about tagging, see [Tagging IAM Identities][1] in the *IAM
+    #   User Guide*.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed number
+    #   of tags per user, then the entire request fails and the user is not
+    #   created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @option options [String] :permissions_boundary
     #   The ARN of the policy that is used to set the permissions boundary for
     #   the user.

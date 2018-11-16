@@ -39,10 +39,14 @@ module Aws::CostExplorer
     Estimated = Shapes::BooleanShape.new(name: 'Estimated')
     Expression = Shapes::StructureShape.new(name: 'Expression')
     Expressions = Shapes::ListShape.new(name: 'Expressions')
+    ForecastResult = Shapes::StructureShape.new(name: 'ForecastResult')
+    ForecastResultsByTime = Shapes::ListShape.new(name: 'ForecastResultsByTime')
     GenericBoolean = Shapes::BooleanShape.new(name: 'GenericBoolean')
     GenericString = Shapes::StringShape.new(name: 'GenericString')
     GetCostAndUsageRequest = Shapes::StructureShape.new(name: 'GetCostAndUsageRequest')
     GetCostAndUsageResponse = Shapes::StructureShape.new(name: 'GetCostAndUsageResponse')
+    GetCostForecastRequest = Shapes::StructureShape.new(name: 'GetCostForecastRequest')
+    GetCostForecastResponse = Shapes::StructureShape.new(name: 'GetCostForecastResponse')
     GetDimensionValuesRequest = Shapes::StructureShape.new(name: 'GetDimensionValuesRequest')
     GetDimensionValuesResponse = Shapes::StructureShape.new(name: 'GetDimensionValuesResponse')
     GetReservationCoverageRequest = Shapes::StructureShape.new(name: 'GetReservationCoverageRequest')
@@ -66,6 +70,7 @@ module Aws::CostExplorer
     Keys = Shapes::ListShape.new(name: 'Keys')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     LookbackPeriodInDays = Shapes::StringShape.new(name: 'LookbackPeriodInDays')
+    Metric = Shapes::StringShape.new(name: 'Metric')
     MetricAmount = Shapes::StringShape.new(name: 'MetricAmount')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
     MetricNames = Shapes::ListShape.new(name: 'MetricNames')
@@ -80,6 +85,7 @@ module Aws::CostExplorer
     OnDemandHours = Shapes::StringShape.new(name: 'OnDemandHours')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     PaymentOption = Shapes::StringShape.new(name: 'PaymentOption')
+    PredictionIntervalLevel = Shapes::IntegerShape.new(name: 'PredictionIntervalLevel')
     PurchasedHours = Shapes::StringShape.new(name: 'PurchasedHours')
     RDSInstanceDetails = Shapes::StructureShape.new(name: 'RDSInstanceDetails')
     RedshiftInstanceDetails = Shapes::StructureShape.new(name: 'RedshiftInstanceDetails')
@@ -188,6 +194,14 @@ module Aws::CostExplorer
 
     Expressions.member = Shapes::ShapeRef.new(shape: Expression)
 
+    ForecastResult.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, location_name: "TimePeriod"))
+    ForecastResult.add_member(:mean_value, Shapes::ShapeRef.new(shape: GenericString, location_name: "MeanValue"))
+    ForecastResult.add_member(:prediction_interval_lower_bound, Shapes::ShapeRef.new(shape: GenericString, location_name: "PredictionIntervalLowerBound"))
+    ForecastResult.add_member(:prediction_interval_upper_bound, Shapes::ShapeRef.new(shape: GenericString, location_name: "PredictionIntervalUpperBound"))
+    ForecastResult.struct_class = Types::ForecastResult
+
+    ForecastResultsByTime.member = Shapes::ShapeRef.new(shape: ForecastResult)
+
     GetCostAndUsageRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, location_name: "TimePeriod"))
     GetCostAndUsageRequest.add_member(:granularity, Shapes::ShapeRef.new(shape: Granularity, location_name: "Granularity"))
     GetCostAndUsageRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
@@ -200,6 +214,17 @@ module Aws::CostExplorer
     GetCostAndUsageResponse.add_member(:group_definitions, Shapes::ShapeRef.new(shape: GroupDefinitions, location_name: "GroupDefinitions"))
     GetCostAndUsageResponse.add_member(:results_by_time, Shapes::ShapeRef.new(shape: ResultsByTime, location_name: "ResultsByTime"))
     GetCostAndUsageResponse.struct_class = Types::GetCostAndUsageResponse
+
+    GetCostForecastRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
+    GetCostForecastRequest.add_member(:metric, Shapes::ShapeRef.new(shape: Metric, required: true, location_name: "Metric"))
+    GetCostForecastRequest.add_member(:granularity, Shapes::ShapeRef.new(shape: Granularity, required: true, location_name: "Granularity"))
+    GetCostForecastRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
+    GetCostForecastRequest.add_member(:prediction_interval_level, Shapes::ShapeRef.new(shape: PredictionIntervalLevel, location_name: "PredictionIntervalLevel"))
+    GetCostForecastRequest.struct_class = Types::GetCostForecastRequest
+
+    GetCostForecastResponse.add_member(:total, Shapes::ShapeRef.new(shape: MetricValue, location_name: "Total"))
+    GetCostForecastResponse.add_member(:forecast_results_by_time, Shapes::ShapeRef.new(shape: ForecastResultsByTime, location_name: "ForecastResultsByTime"))
+    GetCostForecastResponse.struct_class = Types::GetCostForecastResponse
 
     GetDimensionValuesRequest.add_member(:search_string, Shapes::ShapeRef.new(shape: SearchString, location_name: "SearchString"))
     GetDimensionValuesRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
@@ -440,6 +465,16 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: RequestChangedException)
+      end)
+
+      api.add_operation(:get_cost_forecast, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCostForecast"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCostForecastRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCostForecastResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
       end)
 
       api.add_operation(:get_dimension_values, Seahorse::Model::Operation.new.tap do |o|

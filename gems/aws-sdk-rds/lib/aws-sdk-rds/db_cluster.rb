@@ -126,6 +126,12 @@ module Aws::RDS
       data[:reader_endpoint]
     end
 
+    # Identifies all custom endpoints associated with the cluster.
+    # @return [Array<String>]
+    def custom_endpoints
+      data[:custom_endpoints]
+    end
+
     # Specifies whether the DB cluster has instances in multiple
     # Availability Zones.
     # @return [Boolean]

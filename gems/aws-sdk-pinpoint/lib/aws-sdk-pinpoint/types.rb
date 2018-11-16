@@ -444,7 +444,8 @@ module Aws::Pinpoint
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] media_url
-    #   The URL that points to a video used in the push notification.
+    #   A URL that refers to the location of an image or video that you want
+    #   to display in the push notification.
     #   @return [String]
     #
     # @!attribute [rw] preferred_authentication_method
@@ -1034,7 +1035,7 @@ module Aws::Pinpoint
     #
     #       {
     #         body_override: "__string",
-    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU, CUSTOM
+    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #         context: {
     #           "__string" => "__string",
     #         },
@@ -1128,9 +1129,22 @@ module Aws::Pinpoint
     #   @return [Types::CampaignLimits]
     #
     # @!attribute [rw] quiet_time
-    #   The default quiet time for the app. Each campaign for this app sends
-    #   no messages during this time unless the campaign overrides the
-    #   default with a quiet time of its own.
+    #   The default quiet time for the app. Campaigns in the app don't send
+    #   messages to endpoints during the quiet time. Note: Make sure that
+    #   your endpoints include the Demographics.Timezone attribute if you
+    #   plan to enable a quiet time for your app. If your endpoints don't
+    #   include this attribute, they'll receive the messages that you send
+    #   them, even if quiet time is enabled. When you set up an app to use
+    #   quiet time, campaigns in that app don't send messages during the
+    #   time range you specified, as long as all of the following are true:
+    #   - The endpoint includes a valid Demographic.Timezone attribute. -
+    #   The current time in the endpoint's time zone is later than or equal
+    #   to the time specified in the QuietTime.Start attribute for the app
+    #   (or campaign, if applicable). - The current time in the endpoint's
+    #   time zone is earlier than or equal to the time specified in the
+    #   QuietTime.End attribute for the app (or campaign, if applicable).
+    #   Individual campaigns within the app can have their own quiet time
+    #   settings, which override the quiet time settings at the app level.
     #   @return [Types::QuietTime]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ApplicationSettingsResource AWS API Documentation
@@ -1471,6 +1485,53 @@ module Aws::Pinpoint
       :from_address,
       :html_body,
       :title)
+      include Aws::Structure
+    end
+
+    # An object that defines the events that cause the campaign to be sent.
+    #
+    # @note When making an API call, you may pass CampaignEventFilter
+    #   data as a hash:
+    #
+    #       {
+    #         dimensions: {
+    #           attributes: {
+    #             "__string" => {
+    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               values: ["__string"],
+    #             },
+    #           },
+    #           event_type: {
+    #             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #             values: ["__string"],
+    #           },
+    #           metrics: {
+    #             "__string" => {
+    #               comparison_operator: "__string",
+    #               value: 1.0,
+    #             },
+    #           },
+    #         },
+    #         filter_type: "SYSTEM", # accepts SYSTEM, ENDPOINT
+    #       }
+    #
+    # @!attribute [rw] dimensions
+    #   An object that defines the dimensions for the event filter.
+    #   @return [Types::EventDimensions]
+    #
+    # @!attribute [rw] filter_type
+    #   The type of event that causes the campaign to be sent. Possible
+    #   values: SYSTEM - Send the campaign when a system event occurs. See
+    #   the System resource for more information. ENDPOINT - Send the
+    #   campaign when an endpoint event occurs. See the Event resource for
+    #   more information.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignEventFilter AWS API Documentation
+    #
+    class CampaignEventFilter < Struct.new(
+      :dimensions,
+      :filter_type)
       include Aws::Structure
     end
 
@@ -1942,7 +2003,28 @@ module Aws::Pinpoint
     #               },
     #               schedule: {
     #                 end_time: "__string",
-    #                 frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY
+    #                 event_filter: {
+    #                   dimensions: {
+    #                     attributes: {
+    #                       "__string" => {
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"],
+    #                       },
+    #                     },
+    #                     event_type: {
+    #                       dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"],
+    #                     },
+    #                     metrics: {
+    #                       "__string" => {
+    #                         comparison_operator: "__string",
+    #                         value: 1.0,
+    #                       },
+    #                     },
+    #                   },
+    #                   filter_type: "SYSTEM", # accepts SYSTEM, ENDPOINT
+    #                 },
+    #                 frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
     #                 is_local_time: false,
     #                 quiet_time: {
     #                   end: "__string",
@@ -2056,7 +2138,28 @@ module Aws::Pinpoint
     #           name: "__string",
     #           schedule: {
     #             end_time: "__string",
-    #             frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY
+    #             event_filter: {
+    #               dimensions: {
+    #                 attributes: {
+    #                   "__string" => {
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"],
+    #                   },
+    #                 },
+    #                 event_type: {
+    #                   dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   values: ["__string"],
+    #                 },
+    #                 metrics: {
+    #                   "__string" => {
+    #                     comparison_operator: "__string",
+    #                     value: 1.0,
+    #                   },
+    #                 },
+    #               },
+    #               filter_type: "SYSTEM", # accepts SYSTEM, ENDPOINT
+    #             },
+    #             frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
     #             is_local_time: false,
     #             quiet_time: {
     #               end: "__string",
@@ -2906,6 +3009,34 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteVoiceChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteVoiceChannelRequest AWS API Documentation
+    #
+    class DeleteVoiceChannelRequest < Struct.new(
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_channel_response
+    #   Voice Channel Response.
+    #   @return [Types::VoiceChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteVoiceChannelResponse AWS API Documentation
+    #
+    class DeleteVoiceChannelResponse < Struct.new(
+      :voice_channel_response)
+      include Aws::Structure
+    end
+
     # Message definitions for the default message and any messages that are
     # tailored for specific channels.
     #
@@ -3056,6 +3187,15 @@ module Aws::Pinpoint
     #             "__string" => ["__string"],
     #           },
     #         },
+    #         voice_message: {
+    #           body: "__string",
+    #           language_code: "__string",
+    #           origination_number: "__string",
+    #           substitutions: {
+    #             "__string" => ["__string"],
+    #           },
+    #           voice_id: "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] adm_message
@@ -3094,6 +3234,10 @@ module Aws::Pinpoint
     #   The message to SMS channels. Overrides the default message.
     #   @return [Types::SMSMessage]
     #
+    # @!attribute [rw] voice_message
+    #   The message to Voice channels. Overrides the default message.
+    #   @return [Types::VoiceMessage]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DirectMessageConfiguration AWS API Documentation
     #
     class DirectMessageConfiguration < Struct.new(
@@ -3104,7 +3248,8 @@ module Aws::Pinpoint
       :default_push_notification_message,
       :email_message,
       :gcm_message,
-      :sms_message)
+      :sms_message,
+      :voice_message)
       include Aws::Structure
     end
 
@@ -3326,7 +3471,7 @@ module Aws::Pinpoint
     #         attributes: {
     #           "__string" => ["__string"],
     #         },
-    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU, CUSTOM
+    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #         demographic: {
     #           app_version: "__string",
     #           locale: "__string",
@@ -3456,7 +3601,7 @@ module Aws::Pinpoint
     #             attributes: {
     #               "__string" => ["__string"],
     #             },
-    #             channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU, CUSTOM
+    #             channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #             demographic: {
     #               app_version: "__string",
     #               locale: "__string",
@@ -3658,11 +3803,11 @@ module Aws::Pinpoint
     #   - An error occurred when delivering the message to the endpoint.
     #   Amazon Pinpoint won't attempt to send the message again. TIMEOUT -
     #   The message couldn't be sent within the timeout period. QUIET\_TIME
-    #   - The local time for the endpoint was within the Quiet Hours for the
-    #   campaign. DAILY\_CAP - The endpoint has received the maximum number
-    #   of messages it can receive within a 24-hour period. HOLDOUT - The
-    #   endpoint was in a hold out treatment for the campaign. THROTTLED -
-    #   Amazon Pinpoint throttled sending to this endpoint. EXPIRED - The
+    #   - The local time for the endpoint was within the QuietTime for the
+    #   campaign or app. DAILY\_CAP - The endpoint has received the maximum
+    #   number of messages it can receive within a 24-hour period. HOLDOUT -
+    #   The endpoint was in a hold out treatment for the campaign. THROTTLED
+    #   - Amazon Pinpoint throttled sending to this endpoint. EXPIRED - The
     #   endpoint address is expired. CAMPAIGN\_CAP - The endpoint received
     #   the maximum number of messages allowed by the campaign.
     #   SERVICE\_FAILURE - A service-level failure prevented Amazon Pinpoint
@@ -3707,7 +3852,7 @@ module Aws::Pinpoint
     #         attributes: {
     #           "__string" => ["__string"],
     #         },
-    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU, CUSTOM
+    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #         demographic: {
     #           app_version: "__string",
     #           locale: "__string",
@@ -4088,6 +4233,57 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Event dimensions.
+    #
+    # @note When making an API call, you may pass EventDimensions
+    #   data as a hash:
+    #
+    #       {
+    #         attributes: {
+    #           "__string" => {
+    #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #             values: ["__string"],
+    #           },
+    #         },
+    #         event_type: {
+    #           dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #           values: ["__string"],
+    #         },
+    #         metrics: {
+    #           "__string" => {
+    #             comparison_operator: "__string",
+    #             value: 1.0,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] attributes
+    #   Custom attributes that your app reports to Amazon Pinpoint. You can
+    #   use these attributes as selection criteria when you create an event
+    #   filter.
+    #   @return [Hash<String,Types::AttributeDimension>]
+    #
+    # @!attribute [rw] event_type
+    #   The name of the event that causes the campaign to be sent. This can
+    #   be a standard event type that Amazon Pinpoint generates, such as
+    #   \_session.start, or a custom event that's specific to your app.
+    #   @return [Types::SetDimension]
+    #
+    # @!attribute [rw] metrics
+    #   Custom metrics that your app reports to Amazon Pinpoint. You can use
+    #   these attributes as selection criteria when you create an event
+    #   filter.
+    #   @return [Hash<String,Types::MetricDimension>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EventDimensions AWS API Documentation
+    #
+    class EventDimensions < Struct.new(
+      :attributes,
+      :event_type,
+      :metrics)
+      include Aws::Structure
+    end
+
     # A complex object that holds the status code and message as a result of
     # processing an event.
     #
@@ -4166,7 +4362,7 @@ module Aws::Pinpoint
     #           attributes: {
     #             "__string" => ["__string"],
     #           },
-    #           channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU, CUSTOM
+    #           channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #           demographic: {
     #             app_version: "__string",
     #             locale: "__string",
@@ -4250,7 +4446,7 @@ module Aws::Pinpoint
     #               attributes: {
     #                 "__string" => ["__string"],
     #               },
-    #               channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU, CUSTOM
+    #               channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #               demographic: {
     #                 app_version: "__string",
     #                 locale: "__string",
@@ -5854,6 +6050,34 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetVoiceChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetVoiceChannelRequest AWS API Documentation
+    #
+    class GetVoiceChannelRequest < Struct.new(
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_channel_response
+    #   Voice Channel Response.
+    #   @return [Types::VoiceChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetVoiceChannelResponse AWS API Documentation
+    #
+    class GetVoiceChannelResponse < Struct.new(
+      :voice_channel_response)
+      include Aws::Structure
+    end
+
     # Import job request.
     #
     # @note When making an API call, you may pass ImportJobRequest
@@ -6163,8 +6387,8 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] media_url
-    #   The URL that points to the media resource, for example a .mp4 or
-    #   .gif file.
+    #   A URL that refers to the location of an image or video that you want
+    #   to display in the push notification.
     #   @return [String]
     #
     # @!attribute [rw] raw_content
@@ -6376,7 +6600,7 @@ module Aws::Pinpoint
     #         addresses: {
     #           "__string" => {
     #             body_override: "__string",
-    #             channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU, CUSTOM
+    #             channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #             context: {
     #               "__string" => "__string",
     #             },
@@ -6547,6 +6771,15 @@ module Aws::Pinpoint
     #               "__string" => ["__string"],
     #             },
     #           },
+    #           voice_message: {
+    #             body: "__string",
+    #             language_code: "__string",
+    #             origination_number: "__string",
+    #             substitutions: {
+    #               "__string" => ["__string"],
+    #             },
+    #             voice_id: "__string",
+    #           },
     #         },
     #         trace_id: "__string",
     #       }
@@ -6632,11 +6865,11 @@ module Aws::Pinpoint
     #   - An error occurred when delivering the message to the endpoint.
     #   Amazon Pinpoint won't attempt to send the message again. TIMEOUT -
     #   The message couldn't be sent within the timeout period. QUIET\_TIME
-    #   - The local time for the endpoint was within the Quiet Hours for the
-    #   campaign. DAILY\_CAP - The endpoint has received the maximum number
-    #   of messages it can receive within a 24-hour period. HOLDOUT - The
-    #   endpoint was in a hold out treatment for the campaign. THROTTLED -
-    #   Amazon Pinpoint throttled sending to this endpoint. EXPIRED - The
+    #   - The local time for the endpoint was within the QuietTime for the
+    #   campaign or app. DAILY\_CAP - The endpoint has received the maximum
+    #   number of messages it can receive within a 24-hour period. HOLDOUT -
+    #   The endpoint was in a hold out treatment for the campaign. THROTTLED
+    #   - Amazon Pinpoint throttled sending to this endpoint. EXPIRED - The
     #   endpoint address is expired. CAMPAIGN\_CAP - The endpoint received
     #   the maximum number of messages allowed by the campaign.
     #   SERVICE\_FAILURE - A service-level failure prevented Amazon Pinpoint
@@ -6687,7 +6920,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   Value to be compared.
+    #   The value to be compared.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/MetricDimension AWS API Documentation
@@ -6858,7 +7091,7 @@ module Aws::Pinpoint
     #         attributes: {
     #           "__string" => ["__string"],
     #         },
-    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU, CUSTOM
+    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #         demographic: {
     #           app_version: "__string",
     #           locale: "__string",
@@ -7013,7 +7246,7 @@ module Aws::Pinpoint
     #                 attributes: {
     #                   "__string" => ["__string"],
     #                 },
-    #                 channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU, CUSTOM
+    #                 channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #                 demographic: {
     #                   app_version: "__string",
     #                   locale: "__string",
@@ -7140,6 +7373,8 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] data
+    #   The raw email message itself. Then entire message must be
+    #   base64-encoded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/RawEmail AWS API Documentation
@@ -7396,7 +7631,28 @@ module Aws::Pinpoint
     #
     #       {
     #         end_time: "__string",
-    #         frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY
+    #         event_filter: {
+    #           dimensions: {
+    #             attributes: {
+    #               "__string" => {
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 values: ["__string"],
+    #               },
+    #             },
+    #             event_type: {
+    #               dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               values: ["__string"],
+    #             },
+    #             metrics: {
+    #               "__string" => {
+    #                 comparison_operator: "__string",
+    #                 value: 1.0,
+    #               },
+    #             },
+    #           },
+    #           filter_type: "SYSTEM", # accepts SYSTEM, ENDPOINT
+    #         },
+    #         frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
     #         is_local_time: false,
     #         quiet_time: {
     #           end: "__string",
@@ -7410,9 +7666,14 @@ module Aws::Pinpoint
     #   The scheduled time that the campaign ends in ISO 8601 format.
     #   @return [String]
     #
+    # @!attribute [rw] event_filter
+    #   Defines the type of events that can trigger the campaign. Used when
+    #   the Frequency is set to EVENT.
+    #   @return [Types::CampaignEventFilter]
+    #
     # @!attribute [rw] frequency
-    #   How often the campaign delivers messages. Valid values: ONCE,
-    #   HOURLY, DAILY, WEEKLY, MONTHLY
+    #   How often the campaign delivers messages. Valid values: ONCE HOURLY
+    #   DAILY WEEKLY MONTHLY EVENT
     #   @return [String]
     #
     # @!attribute [rw] is_local_time
@@ -7421,7 +7682,20 @@ module Aws::Pinpoint
     #   @return [Boolean]
     #
     # @!attribute [rw] quiet_time
-    #   The time during which the campaign sends no messages.
+    #   The default quiet time for the campaign. The campaign doesn't send
+    #   messages to endpoints during the quiet time. Note: Make sure that
+    #   your endpoints include the Demographics.Timezone attribute if you
+    #   plan to enable a quiet time for your campaign. If your endpoints
+    #   don't include this attribute, they'll receive the messages that
+    #   you send them, even if quiet time is enabled. When you set up a
+    #   campaign to use quiet time, the campaign doesn't send messages
+    #   during the time range you specified, as long as all of the following
+    #   are true: - The endpoint includes a valid Demographic.Timezone
+    #   attribute. - The current time in the endpoint's time zone is later
+    #   than or equal to the time specified in the QuietTime.Start attribute
+    #   for the campaign. - The current time in the endpoint's time zone is
+    #   earlier than or equal to the time specified in the QuietTime.End
+    #   attribute for the campaign.
     #   @return [Types::QuietTime]
     #
     # @!attribute [rw] start_time
@@ -7440,6 +7714,7 @@ module Aws::Pinpoint
     #
     class Schedule < Struct.new(
       :end_time,
+      :event_filter,
       :frequency,
       :is_local_time,
       :quiet_time,
@@ -8074,7 +8349,7 @@ module Aws::Pinpoint
     #           addresses: {
     #             "__string" => {
     #               body_override: "__string",
-    #               channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU, CUSTOM
+    #               channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #               context: {
     #                 "__string" => "__string",
     #               },
@@ -8244,6 +8519,15 @@ module Aws::Pinpoint
     #               substitutions: {
     #                 "__string" => ["__string"],
     #               },
+    #             },
+    #             voice_message: {
+    #               body: "__string",
+    #               language_code: "__string",
+    #               origination_number: "__string",
+    #               substitutions: {
+    #                 "__string" => ["__string"],
+    #               },
+    #               voice_id: "__string",
     #             },
     #           },
     #           trace_id: "__string",
@@ -8428,6 +8712,15 @@ module Aws::Pinpoint
     #             substitutions: {
     #               "__string" => ["__string"],
     #             },
+    #           },
+    #           voice_message: {
+    #             body: "__string",
+    #             language_code: "__string",
+    #             origination_number: "__string",
+    #             substitutions: {
+    #               "__string" => ["__string"],
+    #             },
+    #             voice_id: "__string",
     #           },
     #         },
     #         trace_id: "__string",
@@ -8659,6 +8952,15 @@ module Aws::Pinpoint
     #               substitutions: {
     #                 "__string" => ["__string"],
     #               },
+    #             },
+    #             voice_message: {
+    #               body: "__string",
+    #               language_code: "__string",
+    #               origination_number: "__string",
+    #               substitutions: {
+    #                 "__string" => ["__string"],
+    #               },
+    #               voice_id: "__string",
     #             },
     #           },
     #           trace_id: "__string",
@@ -9300,7 +9602,28 @@ module Aws::Pinpoint
     #               },
     #               schedule: {
     #                 end_time: "__string",
-    #                 frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY
+    #                 event_filter: {
+    #                   dimensions: {
+    #                     attributes: {
+    #                       "__string" => {
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         values: ["__string"],
+    #                       },
+    #                     },
+    #                     event_type: {
+    #                       dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"],
+    #                     },
+    #                     metrics: {
+    #                       "__string" => {
+    #                         comparison_operator: "__string",
+    #                         value: 1.0,
+    #                       },
+    #                     },
+    #                   },
+    #                   filter_type: "SYSTEM", # accepts SYSTEM, ENDPOINT
+    #                 },
+    #                 frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
     #                 is_local_time: false,
     #                 quiet_time: {
     #                   end: "__string",
@@ -9414,7 +9737,28 @@ module Aws::Pinpoint
     #           name: "__string",
     #           schedule: {
     #             end_time: "__string",
-    #             frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY
+    #             event_filter: {
+    #               dimensions: {
+    #                 attributes: {
+    #                   "__string" => {
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"],
+    #                   },
+    #                 },
+    #                 event_type: {
+    #                   dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   values: ["__string"],
+    #                 },
+    #                 metrics: {
+    #                   "__string" => {
+    #                     comparison_operator: "__string",
+    #                     value: 1.0,
+    #                   },
+    #                 },
+    #               },
+    #               filter_type: "SYSTEM", # accepts SYSTEM, ENDPOINT
+    #             },
+    #             frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
     #             is_local_time: false,
     #             quiet_time: {
     #               end: "__string",
@@ -9511,7 +9855,7 @@ module Aws::Pinpoint
     #           attributes: {
     #             "__string" => ["__string"],
     #           },
-    #           channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU, CUSTOM
+    #           channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #           demographic: {
     #             app_version: "__string",
     #             locale: "__string",
@@ -9588,7 +9932,7 @@ module Aws::Pinpoint
     #               attributes: {
     #                 "__string" => ["__string"],
     #               },
-    #               channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU, CUSTOM
+    #               channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #               demographic: {
     #                 app_version: "__string",
     #                 locale: "__string",
@@ -9915,6 +10259,167 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateVoiceChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         voice_channel_request: { # required
+    #           enabled: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_channel_request
+    #   Voice Channel Request
+    #   @return [Types::VoiceChannelRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateVoiceChannelRequest AWS API Documentation
+    #
+    class UpdateVoiceChannelRequest < Struct.new(
+      :application_id,
+      :voice_channel_request)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_channel_response
+    #   Voice Channel Response.
+    #   @return [Types::VoiceChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateVoiceChannelResponse AWS API Documentation
+    #
+    class UpdateVoiceChannelResponse < Struct.new(
+      :voice_channel_response)
+      include Aws::Structure
+    end
+
+    # Voice Channel Request
+    #
+    # @note When making an API call, you may pass VoiceChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/VoiceChannelRequest AWS API Documentation
+    #
+    class VoiceChannelRequest < Struct.new(
+      :enabled)
+      include Aws::Structure
+    end
+
+    # Voice Channel Response.
+    #
+    # @!attribute [rw] application_id
+    #   Application id
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date that the settings were last updated in ISO 8601 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] has_credential
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] id
+    #   Channel ID. Not used, only for backwards compatibility.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_archived
+    #   Is this channel archived
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] last_modified_by
+    #   Who made the last change
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   Last date this was updated
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   Platform type. Will be "Voice"
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   Version of channel
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/VoiceChannelResponse AWS API Documentation
+    #
+    class VoiceChannelResponse < Struct.new(
+      :application_id,
+      :creation_date,
+      :enabled,
+      :has_credential,
+      :id,
+      :is_archived,
+      :last_modified_by,
+      :last_modified_date,
+      :platform,
+      :version)
+      include Aws::Structure
+    end
+
+    # Voice Message.
+    #
+    # @note When making an API call, you may pass VoiceMessage
+    #   data as a hash:
+    #
+    #       {
+    #         body: "__string",
+    #         language_code: "__string",
+    #         origination_number: "__string",
+    #         substitutions: {
+    #           "__string" => ["__string"],
+    #         },
+    #         voice_id: "__string",
+    #       }
+    #
+    # @!attribute [rw] body
+    #   The message body of the notification, the email body or the text
+    #   message.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   Language of sent message
+    #   @return [String]
+    #
+    # @!attribute [rw] origination_number
+    #   Is the number from the pool or messaging service to send from.
+    #   @return [String]
+    #
+    # @!attribute [rw] substitutions
+    #   Default message substitutions. Can be overridden by individual
+    #   address substitutions.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] voice_id
+    #   Voice ID of sent message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/VoiceMessage AWS API Documentation
+    #
+    class VoiceMessage < Struct.new(
+      :body,
+      :language_code,
+      :origination_number,
+      :substitutions,
+      :voice_id)
+      include Aws::Structure
+    end
+
     # Creating application setting request
     #
     # @note When making an API call, you may pass WriteApplicationSettingsRequest
@@ -9954,9 +10459,22 @@ module Aws::Pinpoint
     #   @return [Types::CampaignLimits]
     #
     # @!attribute [rw] quiet_time
-    #   The default quiet time for the app. Each campaign for this app sends
-    #   no messages during this time unless the campaign overrides the
-    #   default with a quiet time of its own.
+    #   The default quiet time for the app. Campaigns in the app don't send
+    #   messages to endpoints during the quiet time. Note: Make sure that
+    #   your endpoints include the Demographics.Timezone attribute if you
+    #   plan to enable a quiet time for your app. If your endpoints don't
+    #   include this attribute, they'll receive the messages that you send
+    #   them, even if quiet time is enabled. When you set up an app to use
+    #   quiet time, campaigns in that app don't send messages during the
+    #   time range you specified, as long as all of the following are true:
+    #   - The endpoint includes a valid Demographic.Timezone attribute. -
+    #   The current time in the endpoint's time zone is later than or equal
+    #   to the time specified in the QuietTime.Start attribute for the app
+    #   (or campaign, if applicable). - The current time in the endpoint's
+    #   time zone is earlier than or equal to the time specified in the
+    #   QuietTime.End attribute for the app (or campaign, if applicable).
+    #   Individual campaigns within the app can have their own quiet time
+    #   settings, which override the quiet time settings at the app level.
     #   @return [Types::QuietTime]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteApplicationSettingsRequest AWS API Documentation
@@ -10062,7 +10580,28 @@ module Aws::Pinpoint
     #             },
     #             schedule: {
     #               end_time: "__string",
-    #               frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY
+    #               event_filter: {
+    #                 dimensions: {
+    #                   attributes: {
+    #                     "__string" => {
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"],
+    #                     },
+    #                   },
+    #                   event_type: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"],
+    #                   },
+    #                   metrics: {
+    #                     "__string" => {
+    #                       comparison_operator: "__string",
+    #                       value: 1.0,
+    #                     },
+    #                   },
+    #                 },
+    #                 filter_type: "SYSTEM", # accepts SYSTEM, ENDPOINT
+    #               },
+    #               frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
     #               is_local_time: false,
     #               quiet_time: {
     #                 end: "__string",
@@ -10176,7 +10715,28 @@ module Aws::Pinpoint
     #         name: "__string",
     #         schedule: {
     #           end_time: "__string",
-    #           frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY
+    #           event_filter: {
+    #             dimensions: {
+    #               attributes: {
+    #                 "__string" => {
+    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   values: ["__string"],
+    #                 },
+    #               },
+    #               event_type: {
+    #                 dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 values: ["__string"],
+    #               },
+    #               metrics: {
+    #                 "__string" => {
+    #                   comparison_operator: "__string",
+    #                   value: 1.0,
+    #                 },
+    #               },
+    #             },
+    #             filter_type: "SYSTEM", # accepts SYSTEM, ENDPOINT
+    #           },
+    #           frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
     #           is_local_time: false,
     #           quiet_time: {
     #             end: "__string",
@@ -10566,7 +11126,28 @@ module Aws::Pinpoint
     #         },
     #         schedule: {
     #           end_time: "__string",
-    #           frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY
+    #           event_filter: {
+    #             dimensions: {
+    #               attributes: {
+    #                 "__string" => {
+    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   values: ["__string"],
+    #                 },
+    #               },
+    #               event_type: {
+    #                 dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 values: ["__string"],
+    #               },
+    #               metrics: {
+    #                 "__string" => {
+    #                   comparison_operator: "__string",
+    #                   value: 1.0,
+    #                 },
+    #               },
+    #             },
+    #             filter_type: "SYSTEM", # accepts SYSTEM, ENDPOINT
+    #           },
+    #           frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
     #           is_local_time: false,
     #           quiet_time: {
     #             end: "__string",

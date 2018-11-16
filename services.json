@@ -364,11 +364,17 @@
   "PinpointEmail": {
     "models": "pinpoint-email/2018-07-26"
   },
+  "PinpointSMSVoice": {
+    "models": "sms-voice/2018-09-05"
+  },
   "Polly": {
     "models": "polly/2016-06-10"
   },
   "Pricing": {
     "models": "pricing/2017-10-15"
+  },
+  "RAM": {
+    "models": "ram/2018-01-04"
   },
   "RDS": {
     "models": "rds/2014-10-31",
@@ -400,6 +406,9 @@
   "Route53Domains": {
     "models": "route53domains/2014-05-15"
   },
+  "Route53Resolver": {
+    "models": "route53resolver/2018-04-01"
+  },
   "S3": {
     "models": "s3/2006-03-01",
     "dependencies": {
@@ -424,6 +433,21 @@
       "Aws::S3::Plugins::UrlEncodedKeys",
       "Aws::S3::Plugins::S3Signer",
       "Aws::S3::Plugins::BucketNameRestrictions"
+    ]
+  },
+  "S3Control": {
+    "models": "s3control/2018-08-20",
+    "dependencies": {
+      "aws-sigv4": "~> 1.0"
+    },
+    "removePlugins": [
+      "Aws::Plugins::SignatureV4"
+    ],
+    "addPlugins": [
+      "Aws::S3Control::Plugins::S3ControlDns",
+      "Aws::S3Control::Plugins::S3Signer",
+      "Aws::S3Control::Plugins::Dualstack",
+      "Aws::S3Control::Plugins::S3HostId"
     ]
   },
   "SES": {

@@ -291,6 +291,7 @@ module Aws::MediaPackage
     #       encryption: {
     #         key_rotation_interval_seconds: 1,
     #         speke_key_provider: { # required
+    #           certificate_arn: "__string",
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -320,6 +321,7 @@ module Aws::MediaPackage
     #       encryption: {
     #         key_rotation_interval_seconds: 1,
     #         speke_key_provider: { # required
+    #           certificate_arn: "__string",
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -348,6 +350,7 @@ module Aws::MediaPackage
     #         key_rotation_interval_seconds: 1,
     #         repeat_ext_x_key: false,
     #         speke_key_provider: { # required
+    #           certificate_arn: "__string",
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -371,6 +374,7 @@ module Aws::MediaPackage
     #     mss_package: {
     #       encryption: {
     #         speke_key_provider: { # required
+    #           certificate_arn: "__string",
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -395,6 +399,7 @@ module Aws::MediaPackage
     #   resp.arn #=> String
     #   resp.channel_id #=> String
     #   resp.cmaf_package.encryption.key_rotation_interval_seconds #=> Integer
+    #   resp.cmaf_package.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.system_ids #=> Array
@@ -415,6 +420,7 @@ module Aws::MediaPackage
     #   resp.cmaf_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.cmaf_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.dash_package.encryption.key_rotation_interval_seconds #=> Integer
+    #   resp.dash_package.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.dash_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.dash_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.dash_package.encryption.speke_key_provider.system_ids #=> Array
@@ -437,6 +443,7 @@ module Aws::MediaPackage
     #   resp.hls_package.encryption.encryption_method #=> String, one of "AES_128", "SAMPLE_AES"
     #   resp.hls_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.hls_package.encryption.repeat_ext_x_key #=> Boolean
+    #   resp.hls_package.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.hls_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.hls_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.hls_package.encryption.speke_key_provider.system_ids #=> Array
@@ -453,6 +460,7 @@ module Aws::MediaPackage
     #   resp.hls_package.use_audio_rendition_group #=> Boolean
     #   resp.id #=> String
     #   resp.manifest_name #=> String
+    #   resp.mss_package.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.mss_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.mss_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.mss_package.encryption.speke_key_provider.system_ids #=> Array
@@ -588,6 +596,7 @@ module Aws::MediaPackage
     #   resp.arn #=> String
     #   resp.channel_id #=> String
     #   resp.cmaf_package.encryption.key_rotation_interval_seconds #=> Integer
+    #   resp.cmaf_package.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.system_ids #=> Array
@@ -608,6 +617,7 @@ module Aws::MediaPackage
     #   resp.cmaf_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.cmaf_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.dash_package.encryption.key_rotation_interval_seconds #=> Integer
+    #   resp.dash_package.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.dash_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.dash_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.dash_package.encryption.speke_key_provider.system_ids #=> Array
@@ -630,6 +640,7 @@ module Aws::MediaPackage
     #   resp.hls_package.encryption.encryption_method #=> String, one of "AES_128", "SAMPLE_AES"
     #   resp.hls_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.hls_package.encryption.repeat_ext_x_key #=> Boolean
+    #   resp.hls_package.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.hls_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.hls_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.hls_package.encryption.speke_key_provider.system_ids #=> Array
@@ -646,6 +657,7 @@ module Aws::MediaPackage
     #   resp.hls_package.use_audio_rendition_group #=> Boolean
     #   resp.id #=> String
     #   resp.manifest_name #=> String
+    #   resp.mss_package.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.mss_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.mss_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.mss_package.encryption.speke_key_provider.system_ids #=> Array
@@ -739,6 +751,7 @@ module Aws::MediaPackage
     #   resp.origin_endpoints[0].arn #=> String
     #   resp.origin_endpoints[0].channel_id #=> String
     #   resp.origin_endpoints[0].cmaf_package.encryption.key_rotation_interval_seconds #=> Integer
+    #   resp.origin_endpoints[0].cmaf_package.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.origin_endpoints[0].cmaf_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.origin_endpoints[0].cmaf_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.origin_endpoints[0].cmaf_package.encryption.speke_key_provider.system_ids #=> Array
@@ -759,6 +772,7 @@ module Aws::MediaPackage
     #   resp.origin_endpoints[0].cmaf_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.origin_endpoints[0].cmaf_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.origin_endpoints[0].dash_package.encryption.key_rotation_interval_seconds #=> Integer
+    #   resp.origin_endpoints[0].dash_package.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.origin_endpoints[0].dash_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.origin_endpoints[0].dash_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.origin_endpoints[0].dash_package.encryption.speke_key_provider.system_ids #=> Array
@@ -781,6 +795,7 @@ module Aws::MediaPackage
     #   resp.origin_endpoints[0].hls_package.encryption.encryption_method #=> String, one of "AES_128", "SAMPLE_AES"
     #   resp.origin_endpoints[0].hls_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.origin_endpoints[0].hls_package.encryption.repeat_ext_x_key #=> Boolean
+    #   resp.origin_endpoints[0].hls_package.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.origin_endpoints[0].hls_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.origin_endpoints[0].hls_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.origin_endpoints[0].hls_package.encryption.speke_key_provider.system_ids #=> Array
@@ -797,6 +812,7 @@ module Aws::MediaPackage
     #   resp.origin_endpoints[0].hls_package.use_audio_rendition_group #=> Boolean
     #   resp.origin_endpoints[0].id #=> String
     #   resp.origin_endpoints[0].manifest_name #=> String
+    #   resp.origin_endpoints[0].mss_package.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.origin_endpoints[0].mss_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.origin_endpoints[0].mss_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.origin_endpoints[0].mss_package.encryption.speke_key_provider.system_ids #=> Array
@@ -991,6 +1007,7 @@ module Aws::MediaPackage
     #       encryption: {
     #         key_rotation_interval_seconds: 1,
     #         speke_key_provider: { # required
+    #           certificate_arn: "__string",
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -1020,6 +1037,7 @@ module Aws::MediaPackage
     #       encryption: {
     #         key_rotation_interval_seconds: 1,
     #         speke_key_provider: { # required
+    #           certificate_arn: "__string",
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -1048,6 +1066,7 @@ module Aws::MediaPackage
     #         key_rotation_interval_seconds: 1,
     #         repeat_ext_x_key: false,
     #         speke_key_provider: { # required
+    #           certificate_arn: "__string",
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -1071,6 +1090,7 @@ module Aws::MediaPackage
     #     mss_package: {
     #       encryption: {
     #         speke_key_provider: { # required
+    #           certificate_arn: "__string",
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -1095,6 +1115,7 @@ module Aws::MediaPackage
     #   resp.arn #=> String
     #   resp.channel_id #=> String
     #   resp.cmaf_package.encryption.key_rotation_interval_seconds #=> Integer
+    #   resp.cmaf_package.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.system_ids #=> Array
@@ -1115,6 +1136,7 @@ module Aws::MediaPackage
     #   resp.cmaf_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.cmaf_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.dash_package.encryption.key_rotation_interval_seconds #=> Integer
+    #   resp.dash_package.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.dash_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.dash_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.dash_package.encryption.speke_key_provider.system_ids #=> Array
@@ -1137,6 +1159,7 @@ module Aws::MediaPackage
     #   resp.hls_package.encryption.encryption_method #=> String, one of "AES_128", "SAMPLE_AES"
     #   resp.hls_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.hls_package.encryption.repeat_ext_x_key #=> Boolean
+    #   resp.hls_package.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.hls_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.hls_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.hls_package.encryption.speke_key_provider.system_ids #=> Array
@@ -1153,6 +1176,7 @@ module Aws::MediaPackage
     #   resp.hls_package.use_audio_rendition_group #=> Boolean
     #   resp.id #=> String
     #   resp.manifest_name #=> String
+    #   resp.mss_package.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.mss_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.mss_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.mss_package.encryption.speke_key_provider.system_ids #=> Array
@@ -1191,7 +1215,7 @@ module Aws::MediaPackage
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackage'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

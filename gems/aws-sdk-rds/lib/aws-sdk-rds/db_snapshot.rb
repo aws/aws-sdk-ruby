@@ -204,6 +204,13 @@ module Aws::RDS
       data[:processor_features]
     end
 
+    # The identifier for the source DB instance, which can't be changed and
+    # which is unique to an AWS Region.
+    # @return [String]
+    def dbi_resource_id
+      data[:dbi_resource_id]
+    end
+
     # @!endgroup
 
     # @return [Client]

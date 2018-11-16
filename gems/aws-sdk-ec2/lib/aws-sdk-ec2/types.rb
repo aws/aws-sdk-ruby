@@ -3456,6 +3456,85 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the instances that could not be launched by the fleet.
+    #
+    # @!attribute [rw] launch_template_and_overrides
+    #   The launch templates and overrides that were used for launching the
+    #   instances. Any parameters that you specify in the Overrides override
+    #   the same parameters in the launch template.
+    #   @return [Types::LaunchTemplateAndOverridesResponse]
+    #
+    # @!attribute [rw] lifecycle
+    #   Indicates if the instance that could not be launched was a Spot
+    #   Instance or On-Demand Instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code that indicates why the instance could not be
+    #   launched. For more information about error codes, see [Error
+    #   Codes][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message that describes why the instance could not be
+    #   launched. For more information about error messages, see ee [Error
+    #   Codes][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFleetError AWS API Documentation
+    #
+    class CreateFleetError < Struct.new(
+      :launch_template_and_overrides,
+      :lifecycle,
+      :error_code,
+      :error_message)
+      include Aws::Structure
+    end
+
+    # Describes the instances that were launched by the fleet.
+    #
+    # @!attribute [rw] launch_template_and_overrides
+    #   The launch templates and overrides that were used for launching the
+    #   instances. Any parameters that you specify in the Overrides override
+    #   the same parameters in the launch template.
+    #   @return [Types::LaunchTemplateAndOverridesResponse]
+    #
+    # @!attribute [rw] lifecycle
+    #   Indicates if the instance that was launched is a Spot Instance or
+    #   On-Demand Instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_ids
+    #   The IDs of the instances.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   The value is `Windows` for Windows instances; otherwise blank.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFleetInstance AWS API Documentation
+    #
+    class CreateFleetInstance < Struct.new(
+      :launch_template_and_overrides,
+      :lifecycle,
+      :instance_ids,
+      :instance_type,
+      :platform)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateFleetRequest
     #   data as a hash:
     #
@@ -3466,9 +3545,13 @@ module Aws::EC2
     #           allocation_strategy: "lowest-price", # accepts lowest-price, diversified
     #           instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #           instance_pools_to_use_count: 1,
+    #           single_instance_type: false,
+    #           min_target_capacity: 1,
     #         },
     #         on_demand_options: {
     #           allocation_strategy: "lowest-price", # accepts lowest-price, prioritized
+    #           single_instance_type: false,
+    #           min_target_capacity: 1,
     #         },
     #         excess_capacity_termination_policy: "no-termination", # accepts no-termination, termination
     #         launch_template_configs: [ # required
@@ -3486,6 +3569,14 @@ module Aws::EC2
     #                 availability_zone: "String",
     #                 weighted_capacity: 1.0,
     #                 priority: 1.0,
+    #                 placement: {
+    #                   availability_zone: "String",
+    #                   affinity: "String",
+    #                   group_name: "String",
+    #                   host_id: "String",
+    #                   tenancy: "default", # accepts default, dedicated, host
+    #                   spread_domain: "String",
+    #                 },
     #               },
     #             ],
     #           },
@@ -3497,7 +3588,7 @@ module Aws::EC2
     #           default_target_capacity_type: "spot", # accepts spot, on-demand
     #         },
     #         terminate_instances_with_expiration: false,
-    #         type: "request", # accepts request, maintain
+    #         type: "request", # accepts request, maintain, instant
     #         valid_from: Time.now,
     #         valid_until: Time.now,
     #         replace_unhealthy_instances: false,
@@ -3560,15 +3651,15 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] type
-    #   The type of request. Indicates whether the EC2 Fleet only `requests`
-    #   the target capacity, or also attempts to `maintain` it. If you
-    #   request a certain target capacity, EC2 Fleet only places the
-    #   required requests. It does not attempt to replenish instances if
-    #   capacity is diminished, and does not submit requests in alternative
-    #   capacity pools if capacity is unavailable. To maintain a certain
-    #   target capacity, EC2 Fleet places the required requests to meet this
-    #   target capacity. It also automatically replenishes any interrupted
-    #   Spot Instances. Default: `maintain`.
+    #   The type of request. `instant` indicates whether the EC2 Fleet
+    #   submits a one-time request for your desired capacity. `request`
+    #   indicates whether the EC2 Fleet submits ongoing requests until your
+    #   desired capacity is fulfilled, but does not attempt to submit
+    #   requests in alternative capacity pools if capacity is unavailable or
+    #   maintain the capacity. `maintain` indicates whether the EC2 Fleet
+    #   submits ongoing requests until your desired capacity is fulfilled,
+    #   and continues to maintain your desired capacity by replenishing
+    #   interrupted Spot Instances. Default: `maintain`.
     #   @return [String]
     #
     # @!attribute [rw] valid_from
@@ -3624,10 +3715,22 @@ module Aws::EC2
     #   The ID of the EC2 Fleet.
     #   @return [String]
     #
+    # @!attribute [rw] errors
+    #   Information about the instances that could not be launched by the
+    #   fleet. Valid only when **Type** is set to `instant`.
+    #   @return [Array<Types::CreateFleetError>]
+    #
+    # @!attribute [rw] instances
+    #   Information about the instances that were launched by the fleet.
+    #   Valid only when **Type** is set to `instant`.
+    #   @return [Array<Types::CreateFleetInstance>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFleetResult AWS API Documentation
     #
     class CreateFleetResult < Struct.new(
-      :fleet_id)
+      :fleet_id,
+      :errors,
+      :instances)
       include Aws::Structure
     end
 
@@ -8295,6 +8398,49 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the instances that could not be launched by the fleet.
+    #
+    # @!attribute [rw] launch_template_and_overrides
+    #   The launch templates and overrides that were used for launching the
+    #   instances. Any parameters that you specify in the Overrides override
+    #   the same parameters in the launch template.
+    #   @return [Types::LaunchTemplateAndOverridesResponse]
+    #
+    # @!attribute [rw] lifecycle
+    #   Indicates if the instance that could not be launched was a Spot
+    #   Instance or On-Demand Instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code that indicates why the instance could not be
+    #   launched. For more information about error codes, see [Error
+    #   Codes][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message that describes why the instance could not be
+    #   launched. For more information about error messages, see ee [Error
+    #   Codes][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetError AWS API Documentation
+    #
+    class DescribeFleetError < Struct.new(
+      :launch_template_and_overrides,
+      :lifecycle,
+      :error_code,
+      :error_message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeFleetHistoryRequest
     #   data as a hash:
     #
@@ -8467,6 +8613,42 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the instances that were launched by the fleet.
+    #
+    # @!attribute [rw] launch_template_and_overrides
+    #   The launch templates and overrides that were used for launching the
+    #   instances. Any parameters that you specify in the Overrides override
+    #   the same parameters in the launch template.
+    #   @return [Types::LaunchTemplateAndOverridesResponse]
+    #
+    # @!attribute [rw] lifecycle
+    #   Indicates if the instance that was launched is a Spot Instance or
+    #   On-Demand Instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_ids
+    #   The IDs of the instances.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   The value is `Windows` for Windows instances; otherwise blank.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetsInstances AWS API Documentation
+    #
+    class DescribeFleetsInstances < Struct.new(
+      :launch_template_and_overrides,
+      :lifecycle,
+      :instance_ids,
+      :instance_type,
+      :platform)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeFleetsRequest
     #   data as a hash:
     #
@@ -8522,7 +8704,8 @@ module Aws::EC2
     #   * `replace-unhealthy-instances` - Indicates whether EC2 Fleet should
     #     replace unhealthy instances (`true` \| `false`).
     #
-    #   * `type` - The type of request (`request` \| `maintain`).
+    #   * `type` - The type of request (`instant` \| `request` \|
+    #     `maintain`).
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetsRequest AWS API Documentation
@@ -10415,7 +10598,7 @@ module Aws::EC2
     # @!attribute [rw] max_results
     #   The maximum number of results to return in a single call. To
     #   retrieve the remaining results, make another call with the returned
-    #   `NextToken` value. This value can be between 5 and 1000.
+    #   `NextToken` value. This value can be between 1 and 200.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplatesRequest AWS API Documentation
@@ -16199,6 +16382,16 @@ module Aws::EC2
     #   The tags for an EC2 Fleet resource.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] errors
+    #   Information about the instances that could not be launched by the
+    #   fleet. Valid only when **Type** is set to `instant`.
+    #   @return [Array<Types::DescribeFleetError>]
+    #
+    # @!attribute [rw] instances
+    #   Information about the instances that were launched by the fleet.
+    #   Valid only when **Type** is set to `instant`.
+    #   @return [Array<Types::DescribeFleetsInstances>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetData AWS API Documentation
     #
     class FleetData < Struct.new(
@@ -16219,7 +16412,9 @@ module Aws::EC2
       :replace_unhealthy_instances,
       :spot_options,
       :on_demand_options,
-      :tags)
+      :tags,
+      :errors,
+      :instances)
       include Aws::Structure
     end
 
@@ -16261,6 +16456,14 @@ module Aws::EC2
     #             availability_zone: "String",
     #             weighted_capacity: 1.0,
     #             priority: 1.0,
+    #             placement: {
+    #               availability_zone: "String",
+    #               affinity: "String",
+    #               group_name: "String",
+    #               host_id: "String",
+    #               tenancy: "default", # accepts default, dedicated, host
+    #               spread_domain: "String",
+    #             },
     #           },
     #         ],
     #       }
@@ -16316,6 +16519,10 @@ module Aws::EC2
     #   has the lowest priority.
     #   @return [Float]
     #
+    # @!attribute [rw] placement
+    #   The location where the instance launched, if applicable.
+    #   @return [Types::PlacementResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateOverrides AWS API Documentation
     #
     class FleetLaunchTemplateOverrides < Struct.new(
@@ -16324,7 +16531,8 @@ module Aws::EC2
       :subnet_id,
       :availability_zone,
       :weighted_capacity,
-      :priority)
+      :priority,
+      :placement)
       include Aws::Structure
     end
 
@@ -16340,6 +16548,14 @@ module Aws::EC2
     #         availability_zone: "String",
     #         weighted_capacity: 1.0,
     #         priority: 1.0,
+    #         placement: {
+    #           availability_zone: "String",
+    #           affinity: "String",
+    #           group_name: "String",
+    #           host_id: "String",
+    #           tenancy: "default", # accepts default, dedicated, host
+    #           spread_domain: "String",
+    #         },
     #       }
     #
     # @!attribute [rw] instance_type
@@ -16373,6 +16589,10 @@ module Aws::EC2
     #   template override has the lowest priority.
     #   @return [Float]
     #
+    # @!attribute [rw] placement
+    #   The location where the instance launched, if applicable.
+    #   @return [Types::Placement]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateOverridesRequest AWS API Documentation
     #
     class FleetLaunchTemplateOverridesRequest < Struct.new(
@@ -16381,7 +16601,8 @@ module Aws::EC2
       :subnet_id,
       :availability_zone,
       :weighted_capacity,
-      :priority)
+      :priority,
+      :placement)
       include Aws::Structure
     end
 
@@ -20157,6 +20378,25 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes a launch template and overrides.
+    #
+    # @!attribute [rw] launch_template_specification
+    #   The launch template.
+    #   @return [Types::FleetLaunchTemplateSpecification]
+    #
+    # @!attribute [rw] overrides
+    #   Any parameters that you specify override the same parameters in the
+    #   launch template.
+    #   @return [Types::FleetLaunchTemplateOverrides]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateAndOverridesResponse AWS API Documentation
+    #
+    class LaunchTemplateAndOverridesResponse < Struct.new(
+      :launch_template_specification,
+      :overrides)
+      include Aws::Structure
+    end
+
     # Describes a block device mapping.
     #
     # @!attribute [rw] device_name
@@ -23760,10 +24000,23 @@ module Aws::EC2
     #   `lowest-price`.
     #   @return [String]
     #
+    # @!attribute [rw] single_instance_type
+    #   Indicates that the fleet uses a single instance type to launch all
+    #   On-Demand Instances in the fleet.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] min_target_capacity
+    #   The minimum target capacity for On-Demand Instances in the fleet. If
+    #   the minimum target capacity is not reached, the fleet launches no
+    #   instances.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/OnDemandOptions AWS API Documentation
     #
     class OnDemandOptions < Struct.new(
-      :allocation_strategy)
+      :allocation_strategy,
+      :single_instance_type,
+      :min_target_capacity)
       include Aws::Structure
     end
 
@@ -23774,6 +24027,8 @@ module Aws::EC2
     #
     #       {
     #         allocation_strategy: "lowest-price", # accepts lowest-price, prioritized
+    #         single_instance_type: false,
+    #         min_target_capacity: 1,
     #       }
     #
     # @!attribute [rw] allocation_strategy
@@ -23786,10 +24041,23 @@ module Aws::EC2
     #   `lowest-price`.
     #   @return [String]
     #
+    # @!attribute [rw] single_instance_type
+    #   Indicates that the fleet uses a single instance type to launch all
+    #   On-Demand Instances in the fleet.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] min_target_capacity
+    #   The minimum target capacity for On-Demand Instances in the fleet. If
+    #   the minimum target capacity is not reached, the fleet launches no
+    #   instances.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/OnDemandOptionsRequest AWS API Documentation
     #
     class OnDemandOptionsRequest < Struct.new(
-      :allocation_strategy)
+      :allocation_strategy,
+      :single_instance_type,
+      :min_target_capacity)
       include Aws::Structure
     end
 
@@ -23963,6 +24231,19 @@ module Aws::EC2
       :group_name,
       :state,
       :strategy)
+      include Aws::Structure
+    end
+
+    # Describes the placement of an instance.
+    #
+    # @!attribute [rw] group_name
+    #   The name of the placement group the instance is in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PlacementResponse AWS API Documentation
+    #
+    class PlacementResponse < Struct.new(
+      :group_name)
       include Aws::Structure
     end
 
@@ -25864,7 +26145,7 @@ module Aws::EC2
     #           target_capacity: 1, # required
     #           on_demand_target_capacity: 1,
     #           terminate_instances_with_expiration: false,
-    #           type: "request", # accepts request, maintain
+    #           type: "request", # accepts request, maintain, instant
     #           valid_from: Time.now,
     #           valid_until: Time.now,
     #           replace_unhealthy_instances: false,
@@ -29963,7 +30244,7 @@ module Aws::EC2
     #         target_capacity: 1, # required
     #         on_demand_target_capacity: 1,
     #         terminate_instances_with_expiration: false,
-    #         type: "request", # accepts request, maintain
+    #         type: "request", # accepts request, maintain, instant
     #         valid_from: Time.now,
     #         valid_until: Time.now,
     #         replace_unhealthy_instances: false,
@@ -30427,12 +30708,25 @@ module Aws::EC2
     #   that you specify.
     #   @return [Integer]
     #
+    # @!attribute [rw] single_instance_type
+    #   Indicates that the fleet uses a single instance type to launch all
+    #   Spot Instances in the fleet.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] min_target_capacity
+    #   The minimum target capacity for Spot Instances in the fleet. If the
+    #   minimum target capacity is not reached, the fleet launches no
+    #   instances.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotOptions AWS API Documentation
     #
     class SpotOptions < Struct.new(
       :allocation_strategy,
       :instance_interruption_behavior,
-      :instance_pools_to_use_count)
+      :instance_pools_to_use_count,
+      :single_instance_type,
+      :min_target_capacity)
       include Aws::Structure
     end
 
@@ -30445,6 +30739,8 @@ module Aws::EC2
     #         allocation_strategy: "lowest-price", # accepts lowest-price, diversified
     #         instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #         instance_pools_to_use_count: 1,
+    #         single_instance_type: false,
+    #         min_target_capacity: 1,
     #       }
     #
     # @!attribute [rw] allocation_strategy
@@ -30465,12 +30761,25 @@ module Aws::EC2
     #   that you specify.
     #   @return [Integer]
     #
+    # @!attribute [rw] single_instance_type
+    #   Indicates that the fleet uses a single instance type to launch all
+    #   Spot Instances in the fleet.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] min_target_capacity
+    #   The minimum target capacity for Spot Instances in the fleet. If the
+    #   minimum target capacity is not reached, the fleet launches no
+    #   instances.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotOptionsRequest AWS API Documentation
     #
     class SpotOptionsRequest < Struct.new(
       :allocation_strategy,
       :instance_interruption_behavior,
-      :instance_pools_to_use_count)
+      :instance_pools_to_use_count,
+      :single_instance_type,
+      :min_target_capacity)
       include Aws::Structure
     end
 

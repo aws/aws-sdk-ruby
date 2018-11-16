@@ -458,25 +458,53 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Starts a hyperparameter tuning job.
+    # Starts a hyperparameter tuning job. A hyperparameter tuning job finds
+    # the best version of a model by running many training jobs on your
+    # dataset using the algorithm you choose and values for hyperparameters
+    # within ranges that you specify. It then chooses the hyperparameter
+    # values that result in a model that performs the best, as measured by
+    # an objective metric that you choose.
     #
     # @option params [required, String] :hyper_parameter_tuning_job_name
     #   The name of the tuning job. This name is the prefix for the names of
     #   all training jobs that this tuning job launches. The name must be
-    #   unique within the same AWS account and AWS Region. Names are not case
-    #   sensitive, and must be between 1-32 characters.
+    #   unique within the same AWS account and AWS Region. The name must have
+    #   \\\{ \\} to \\\{ \\} characters. Valid characters are a-z, A-Z, 0-9,
+    #   and : + = @ \_ % - (hyphen). The name is not case sensitive.
     #
     # @option params [required, Types::HyperParameterTuningJobConfig] :hyper_parameter_tuning_job_config
     #   The HyperParameterTuningJobConfig object that describes the tuning
-    #   job, including the search strategy, metric used to evaluate training
-    #   jobs, ranges of parameters to search, and resource limits for the
-    #   tuning job.
+    #   job, including the search strategy, the objective metric used to
+    #   evaluate training jobs, ranges of parameters to search, and resource
+    #   limits for the tuning job. For more information, see
+    #   automatic-model-tuning
     #
     # @option params [required, Types::HyperParameterTrainingJobDefinition] :training_job_definition
     #   The HyperParameterTrainingJobDefinition object that describes the
     #   training jobs that this tuning job launches, including static
     #   hyperparameters, input data configuration, output data configuration,
     #   resource configuration, and stopping condition.
+    #
+    # @option params [Types::HyperParameterTuningJobWarmStartConfig] :warm_start_config
+    #   Specifies configuration for starting the hyperparameter tuning job
+    #   using one or more previous tuning jobs as a starting point. The
+    #   results of previous tuning jobs are used to inform which combinations
+    #   of hyperparameters to search over in the new tuning job.
+    #
+    #   All training jobs launched by the new hyperparameter tuning job are
+    #   evaluated by using the objective metric. If you specify
+    #   `IDENTICAL_DATA_AND_ALGORITHM` as the `WarmStartType` for the warm
+    #   start configuration, the training job that performs the best in the
+    #   new tuning job is compared to the best training jobs from the parent
+    #   tuning jobs. From these, the training job that performs the best as
+    #   measured by the objective metric is returned as the overall best
+    #   training job.
+    #
+    #   <note markdown="1"> All training jobs launched by parent hyperparameter tuning jobs and
+    #   the new hyperparameter tuning jobs count against the limit of training
+    #   jobs for the tuning job.
+    #
+    #    </note>
     #
     # @option params [Array<Types::Tag>] :tags
     #   An array of key-value pairs. You can use tags to categorize your AWS
@@ -536,7 +564,7 @@ module Aws::SageMaker
     #         "ParameterKey" => "ParameterValue",
     #       },
     #       algorithm_specification: { # required
-    #         training_image: "AlgorithmImage", # required
+    #         training_image: "AlgorithmImage",
     #         training_input_mode: "Pipe", # required, accepts Pipe, File
     #         metric_definitions: [
     #           {
@@ -546,7 +574,7 @@ module Aws::SageMaker
     #         ],
     #       },
     #       role_arn: "RoleArn", # required
-    #       input_data_config: [ # required
+    #       input_data_config: [
     #         {
     #           channel_name: "ChannelName", # required
     #           data_source: { # required
@@ -579,6 +607,14 @@ module Aws::SageMaker
     #       stopping_condition: { # required
     #         max_runtime_in_seconds: 1,
     #       },
+    #     },
+    #     warm_start_config: {
+    #       parent_hyper_parameter_tuning_jobs: [ # required
+    #         {
+    #           hyper_parameter_tuning_job_name: "HyperParameterTuningJobName",
+    #         },
+    #       ],
+    #       warm_start_type: "IdenticalDataAndAlgorithm", # required, accepts IdenticalDataAndAlgorithm, TransferLearning
     #     },
     #     tags: [
     #       {
@@ -799,7 +835,13 @@ module Aws::SageMaker
     # @option params [String] :kms_key_id
     #   If you provide a AWS KMS key ID, Amazon SageMaker uses it to encrypt
     #   data at rest on the ML storage volume that is attached to your
-    #   notebook instance.
+    #   notebook instance. The KMS key you provide must be enabled. For
+    #   information, see [Enabling and Disabling Keys][1] in the *AWS Key
+    #   Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags to associate with the notebook instance. You can add
@@ -831,7 +873,7 @@ module Aws::SageMaker
     #
     # @option params [Integer] :volume_size_in_gb
     #   The size, in GB, of the ML storage volume to attach to the notebook
-    #   instance.
+    #   instance. The default value is 5 GB.
     #
     # @return [Types::CreateNotebookInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -841,7 +883,7 @@ module Aws::SageMaker
     #
     #   resp = client.create_notebook_instance({
     #     notebook_instance_name: "NotebookInstanceName", # required
-    #     instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge
+    #     instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge
     #     subnet_id: "SubnetId",
     #     security_group_ids: ["SecurityGroupId"],
     #     role_arn: "RoleArn", # required
@@ -957,7 +999,7 @@ module Aws::SageMaker
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/https:/docs.aws.amazon.com/sagemaker/latest/dg/howitworks-access-ws.html#nbi-ip-filter
+    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/howitworks-access-ws.html#nbi-ip-filter
     #
     # @option params [required, String] :notebook_instance_name
     #   The name of the notebook instance.
@@ -1161,8 +1203,14 @@ module Aws::SageMaker
     #       "ParameterKey" => "ParameterValue",
     #     },
     #     algorithm_specification: { # required
-    #       training_image: "AlgorithmImage", # required
+    #       training_image: "AlgorithmImage",
     #       training_input_mode: "Pipe", # required, accepts Pipe, File
+    #       metric_definitions: [
+    #         {
+    #           name: "MetricName", # required
+    #           regex: "MetricRegex", # required
+    #         },
+    #       ],
     #     },
     #     role_arn: "RoleArn", # required
     #     input_data_config: [
@@ -1652,6 +1700,8 @@ module Aws::SageMaker
     #   * {Types::DescribeHyperParameterTuningJobResponse#training_job_status_counters #training_job_status_counters} => Types::TrainingJobStatusCounters
     #   * {Types::DescribeHyperParameterTuningJobResponse#objective_status_counters #objective_status_counters} => Types::ObjectiveStatusCounters
     #   * {Types::DescribeHyperParameterTuningJobResponse#best_training_job #best_training_job} => Types::HyperParameterTrainingJobSummary
+    #   * {Types::DescribeHyperParameterTuningJobResponse#overall_best_training_job #overall_best_training_job} => Types::HyperParameterTrainingJobSummary
+    #   * {Types::DescribeHyperParameterTuningJobResponse#warm_start_config #warm_start_config} => Types::HyperParameterTuningJobWarmStartConfig
     #   * {Types::DescribeHyperParameterTuningJobResponse#failure_reason #failure_reason} => String
     #
     # @example Request syntax with placeholder values
@@ -1723,6 +1773,7 @@ module Aws::SageMaker
     #   resp.objective_status_counters.failed #=> Integer
     #   resp.best_training_job.training_job_name #=> String
     #   resp.best_training_job.training_job_arn #=> String
+    #   resp.best_training_job.tuning_job_name #=> String
     #   resp.best_training_job.creation_time #=> Time
     #   resp.best_training_job.training_start_time #=> Time
     #   resp.best_training_job.training_end_time #=> Time
@@ -1734,6 +1785,23 @@ module Aws::SageMaker
     #   resp.best_training_job.final_hyper_parameter_tuning_job_objective_metric.metric_name #=> String
     #   resp.best_training_job.final_hyper_parameter_tuning_job_objective_metric.value #=> Float
     #   resp.best_training_job.objective_status #=> String, one of "Succeeded", "Pending", "Failed"
+    #   resp.overall_best_training_job.training_job_name #=> String
+    #   resp.overall_best_training_job.training_job_arn #=> String
+    #   resp.overall_best_training_job.tuning_job_name #=> String
+    #   resp.overall_best_training_job.creation_time #=> Time
+    #   resp.overall_best_training_job.training_start_time #=> Time
+    #   resp.overall_best_training_job.training_end_time #=> Time
+    #   resp.overall_best_training_job.training_job_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
+    #   resp.overall_best_training_job.tuned_hyper_parameters #=> Hash
+    #   resp.overall_best_training_job.tuned_hyper_parameters["ParameterKey"] #=> String
+    #   resp.overall_best_training_job.failure_reason #=> String
+    #   resp.overall_best_training_job.final_hyper_parameter_tuning_job_objective_metric.type #=> String, one of "Maximize", "Minimize"
+    #   resp.overall_best_training_job.final_hyper_parameter_tuning_job_objective_metric.metric_name #=> String
+    #   resp.overall_best_training_job.final_hyper_parameter_tuning_job_objective_metric.value #=> Float
+    #   resp.overall_best_training_job.objective_status #=> String, one of "Succeeded", "Pending", "Failed"
+    #   resp.warm_start_config.parent_hyper_parameter_tuning_jobs #=> Array
+    #   resp.warm_start_config.parent_hyper_parameter_tuning_jobs[0].hyper_parameter_tuning_job_name #=> String
+    #   resp.warm_start_config.warm_start_type #=> String, one of "IdenticalDataAndAlgorithm", "TransferLearning"
     #   resp.failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHyperParameterTuningJob AWS API Documentation
@@ -1827,7 +1895,7 @@ module Aws::SageMaker
     #   resp.notebook_instance_status #=> String, one of "Pending", "InService", "Stopping", "Stopped", "Failed", "Deleting", "Updating"
     #   resp.failure_reason #=> String
     #   resp.url #=> String
-    #   resp.instance_type #=> String, one of "ml.t2.medium", "ml.t2.large", "ml.t2.xlarge", "ml.t2.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge"
+    #   resp.instance_type #=> String, one of "ml.t2.medium", "ml.t2.large", "ml.t2.xlarge", "ml.t2.2xlarge", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5d.xlarge", "ml.c5d.2xlarge", "ml.c5d.4xlarge", "ml.c5d.9xlarge", "ml.c5d.18xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge"
     #   resp.subnet_id #=> String
     #   resp.security_groups #=> Array
     #   resp.security_groups[0] #=> String
@@ -1923,6 +1991,7 @@ module Aws::SageMaker
     #   * {Types::DescribeTrainingJobResponse#training_end_time #training_end_time} => Time
     #   * {Types::DescribeTrainingJobResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::DescribeTrainingJobResponse#secondary_status_transitions #secondary_status_transitions} => Array&lt;Types::SecondaryStatusTransition&gt;
+    #   * {Types::DescribeTrainingJobResponse#final_metric_data_list #final_metric_data_list} => Array&lt;Types::MetricData&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1943,6 +2012,9 @@ module Aws::SageMaker
     #   resp.hyper_parameters["ParameterKey"] #=> String
     #   resp.algorithm_specification.training_image #=> String
     #   resp.algorithm_specification.training_input_mode #=> String, one of "Pipe", "File"
+    #   resp.algorithm_specification.metric_definitions #=> Array
+    #   resp.algorithm_specification.metric_definitions[0].name #=> String
+    #   resp.algorithm_specification.metric_definitions[0].regex #=> String
     #   resp.role_arn #=> String
     #   resp.input_data_config #=> Array
     #   resp.input_data_config[0].channel_name #=> String
@@ -1973,6 +2045,10 @@ module Aws::SageMaker
     #   resp.secondary_status_transitions[0].start_time #=> Time
     #   resp.secondary_status_transitions[0].end_time #=> Time
     #   resp.secondary_status_transitions[0].status_message #=> String
+    #   resp.final_metric_data_list #=> Array
+    #   resp.final_metric_data_list[0].metric_name #=> String
+    #   resp.final_metric_data_list[0].value #=> Float
+    #   resp.final_metric_data_list[0].timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJob AWS API Documentation
     #
@@ -2504,7 +2580,7 @@ module Aws::SageMaker
     #   resp.notebook_instances[0].notebook_instance_arn #=> String
     #   resp.notebook_instances[0].notebook_instance_status #=> String, one of "Pending", "InService", "Stopping", "Stopped", "Failed", "Deleting", "Updating"
     #   resp.notebook_instances[0].url #=> String
-    #   resp.notebook_instances[0].instance_type #=> String, one of "ml.t2.medium", "ml.t2.large", "ml.t2.xlarge", "ml.t2.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge"
+    #   resp.notebook_instances[0].instance_type #=> String, one of "ml.t2.medium", "ml.t2.large", "ml.t2.xlarge", "ml.t2.2xlarge", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5d.xlarge", "ml.c5d.2xlarge", "ml.c5d.4xlarge", "ml.c5d.9xlarge", "ml.c5d.18xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge"
     #   resp.notebook_instances[0].creation_time #=> Time
     #   resp.notebook_instances[0].last_modified_time #=> Time
     #   resp.notebook_instances[0].notebook_instance_lifecycle_config_name #=> String
@@ -2689,6 +2765,7 @@ module Aws::SageMaker
     #   resp.training_job_summaries #=> Array
     #   resp.training_job_summaries[0].training_job_name #=> String
     #   resp.training_job_summaries[0].training_job_arn #=> String
+    #   resp.training_job_summaries[0].tuning_job_name #=> String
     #   resp.training_job_summaries[0].creation_time #=> Time
     #   resp.training_job_summaries[0].training_start_time #=> Time
     #   resp.training_job_summaries[0].training_end_time #=> Time
@@ -3075,7 +3152,7 @@ module Aws::SageMaker
     #
     # @option params [Integer] :volume_size_in_gb
     #   The size, in GB, of the ML storage volume to attach to the notebook
-    #   instance.
+    #   instance. The default value is 5 GB.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3083,7 +3160,7 @@ module Aws::SageMaker
     #
     #   resp = client.update_notebook_instance({
     #     notebook_instance_name: "NotebookInstanceName", # required
-    #     instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge
+    #     instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge
     #     role_arn: "RoleArn",
     #     lifecycle_config_name: "NotebookInstanceLifecycleConfigName",
     #     disassociate_lifecycle_config: false,
@@ -3153,7 +3230,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

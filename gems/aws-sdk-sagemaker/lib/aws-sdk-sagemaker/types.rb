@@ -67,8 +67,14 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         training_image: "AlgorithmImage", # required
+    #         training_image: "AlgorithmImage",
     #         training_input_mode: "Pipe", # required, accepts Pipe, File
+    #         metric_definitions: [
+    #           {
+    #             name: "MetricName", # required
+    #             regex: "MetricRegex", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] training_image
@@ -110,11 +116,18 @@ module Aws::SageMaker
     #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
     #   @return [String]
     #
+    # @!attribute [rw] metric_definitions
+    #   A list of metric definition objects. Each object specifies the
+    #   metric name and regular expressions used to parse algorithm logs.
+    #   Amazon SageMaker publishes each metric to Amazon CloudWatch.
+    #   @return [Array<Types::MetricDefinition>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmSpecification AWS API Documentation
     #
     class AlgorithmSpecification < Struct.new(
       :training_image,
-      :training_input_mode)
+      :training_input_mode,
+      :metric_definitions)
       include Aws::Structure
     end
 
@@ -201,6 +214,18 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] input_mode
+    #   (Optional) The input mode to use for the data channel in a training
+    #   job. If you don't set a value for `InputMode`, Amazon SageMaker
+    #   uses the value set for `TrainingInputMode`. Use this parameter to
+    #   override the `TrainingInputMode` setting in a AlgorithmSpecification
+    #   request when you have a channel that needs a different input mode
+    #   from the training job's general setting. To download the data from
+    #   Amazon Simple Storage Service (Amazon S3) to the provisioned ML
+    #   storage volume, and mount the directory to a Docker volume, use
+    #   `File` input mode. To stream data directly from Amazon S3 to the
+    #   container, choose `Pipe` input mode.
+    #
+    #   To use a model for incremental training, choose `File` input model.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Channel AWS API Documentation
@@ -258,7 +283,7 @@ module Aws::SageMaker
     #   you provide. AWS STS is activated in your IAM user account by
     #   default. If you previously deactivated AWS STS for a region, you
     #   need to reactivate AWS STS for that region. For more information,
-    #   see [Activating and Deactivating AWS STS i an AWS Region][1] in the
+    #   see [Activating and Deactivating AWS STS in an AWS Region][1] in the
     #   *AWS Identity and Access Management User Guide*.
     #
     #
@@ -492,7 +517,7 @@ module Aws::SageMaker
     #             "ParameterKey" => "ParameterValue",
     #           },
     #           algorithm_specification: { # required
-    #             training_image: "AlgorithmImage", # required
+    #             training_image: "AlgorithmImage",
     #             training_input_mode: "Pipe", # required, accepts Pipe, File
     #             metric_definitions: [
     #               {
@@ -502,7 +527,7 @@ module Aws::SageMaker
     #             ],
     #           },
     #           role_arn: "RoleArn", # required
-    #           input_data_config: [ # required
+    #           input_data_config: [
     #             {
     #               channel_name: "ChannelName", # required
     #               data_source: { # required
@@ -536,6 +561,14 @@ module Aws::SageMaker
     #             max_runtime_in_seconds: 1,
     #           },
     #         },
+    #         warm_start_config: {
+    #           parent_hyper_parameter_tuning_jobs: [ # required
+    #             {
+    #               hyper_parameter_tuning_job_name: "HyperParameterTuningJobName",
+    #             },
+    #           ],
+    #           warm_start_type: "IdenticalDataAndAlgorithm", # required, accepts IdenticalDataAndAlgorithm, TransferLearning
+    #         },
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -547,15 +580,17 @@ module Aws::SageMaker
     # @!attribute [rw] hyper_parameter_tuning_job_name
     #   The name of the tuning job. This name is the prefix for the names of
     #   all training jobs that this tuning job launches. The name must be
-    #   unique within the same AWS account and AWS Region. Names are not
-    #   case sensitive, and must be between 1-32 characters.
+    #   unique within the same AWS account and AWS Region. The name must
+    #   have \\\{ \\} to \\\{ \\} characters. Valid characters are a-z, A-Z,
+    #   0-9, and : + = @ \_ % - (hyphen). The name is not case sensitive.
     #   @return [String]
     #
     # @!attribute [rw] hyper_parameter_tuning_job_config
     #   The HyperParameterTuningJobConfig object that describes the tuning
-    #   job, including the search strategy, metric used to evaluate training
-    #   jobs, ranges of parameters to search, and resource limits for the
-    #   tuning job.
+    #   job, including the search strategy, the objective metric used to
+    #   evaluate training jobs, ranges of parameters to search, and resource
+    #   limits for the tuning job. For more information, see
+    #   automatic-model-tuning
     #   @return [Types::HyperParameterTuningJobConfig]
     #
     # @!attribute [rw] training_job_definition
@@ -564,6 +599,29 @@ module Aws::SageMaker
     #   hyperparameters, input data configuration, output data
     #   configuration, resource configuration, and stopping condition.
     #   @return [Types::HyperParameterTrainingJobDefinition]
+    #
+    # @!attribute [rw] warm_start_config
+    #   Specifies configuration for starting the hyperparameter tuning job
+    #   using one or more previous tuning jobs as a starting point. The
+    #   results of previous tuning jobs are used to inform which
+    #   combinations of hyperparameters to search over in the new tuning
+    #   job.
+    #
+    #   All training jobs launched by the new hyperparameter tuning job are
+    #   evaluated by using the objective metric. If you specify
+    #   `IDENTICAL_DATA_AND_ALGORITHM` as the `WarmStartType` for the warm
+    #   start configuration, the training job that performs the best in the
+    #   new tuning job is compared to the best training jobs from the parent
+    #   tuning jobs. From these, the training job that performs the best as
+    #   measured by the objective metric is returned as the overall best
+    #   training job.
+    #
+    #   <note markdown="1"> All training jobs launched by parent hyperparameter tuning jobs and
+    #   the new hyperparameter tuning jobs count against the limit of
+    #   training jobs for the tuning job.
+    #
+    #    </note>
+    #   @return [Types::HyperParameterTuningJobWarmStartConfig]
     #
     # @!attribute [rw] tags
     #   An array of key-value pairs. You can use tags to categorize your AWS
@@ -584,12 +642,14 @@ module Aws::SageMaker
       :hyper_parameter_tuning_job_name,
       :hyper_parameter_tuning_job_config,
       :training_job_definition,
+      :warm_start_config,
       :tags)
       include Aws::Structure
     end
 
     # @!attribute [rw] hyper_parameter_tuning_job_arn
-    #   The Amazon Resource Name (ARN) of the tuning job.
+    #   The Amazon Resource Name (ARN) of the tuning job. Amazon SageMaker
+    #   assigns an ARN to a hyperparameter tuning job when you create it.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateHyperParameterTuningJobResponse AWS API Documentation
@@ -703,7 +763,7 @@ module Aws::SageMaker
     #
     #       {
     #         notebook_instance_name: "NotebookInstanceName", # required
-    #         instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge
+    #         instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge
     #         subnet_id: "SubnetId",
     #         security_group_ids: ["SecurityGroupId"],
     #         role_arn: "RoleArn", # required
@@ -759,7 +819,13 @@ module Aws::SageMaker
     # @!attribute [rw] kms_key_id
     #   If you provide a AWS KMS key ID, Amazon SageMaker uses it to encrypt
     #   data at rest on the ML storage volume that is attached to your
-    #   notebook instance.
+    #   notebook instance. The KMS key you provide must be enabled. For
+    #   information, see [Enabling and Disabling Keys][1] in the *AWS Key
+    #   Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -795,7 +861,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] volume_size_in_gb
     #   The size, in GB, of the ML storage volume to attach to the notebook
-    #   instance.
+    #   instance. The default value is 5 GB.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstanceInput AWS API Documentation
@@ -921,8 +987,14 @@ module Aws::SageMaker
     #           "ParameterKey" => "ParameterValue",
     #         },
     #         algorithm_specification: { # required
-    #           training_image: "AlgorithmImage", # required
+    #           training_image: "AlgorithmImage",
     #           training_input_mode: "Pipe", # required, accepts Pipe, File
+    #           metric_definitions: [
+    #             {
+    #               name: "MetricName", # required
+    #               regex: "MetricRegex", # required
+    #             },
+    #           ],
     #         },
     #         role_arn: "RoleArn", # required
     #         input_data_config: [
@@ -1660,6 +1732,22 @@ module Aws::SageMaker
     #   completed with the best current HyperParameterTuningJobObjective.
     #   @return [Types::HyperParameterTrainingJobSummary]
     #
+    # @!attribute [rw] overall_best_training_job
+    #   If the hyperparameter tuning job is an incremental tuning job with a
+    #   `WarmStartType` of `IDENTICAL_DATA_AND_ALGORITHM`, this is the
+    #   TrainingJobSummary for the training job with the best objective
+    #   metric value of all training jobs launched by this tuning job and
+    #   all parent jobs specified for the incremental tuning job.
+    #   @return [Types::HyperParameterTrainingJobSummary]
+    #
+    # @!attribute [rw] warm_start_config
+    #   The configuration for starting the hyperparameter parameter tuning
+    #   job using one or more previous tuning jobs as a starting point. The
+    #   results of previous tuning jobs are used to inform which
+    #   combinations of hyperparameters to search over in the new tuning
+    #   job.
+    #   @return [Types::HyperParameterTuningJobWarmStartConfig]
+    #
     # @!attribute [rw] failure_reason
     #   If the tuning job failed, the reason it failed.
     #   @return [String]
@@ -1678,6 +1766,8 @@ module Aws::SageMaker
       :training_job_status_counters,
       :objective_status_counters,
       :best_training_job,
+      :overall_best_training_job,
+      :warm_start_config,
       :failure_reason)
       include Aws::Structure
     end
@@ -2121,6 +2211,12 @@ module Aws::SageMaker
     #   transitioned through.
     #   @return [Array<Types::SecondaryStatusTransition>]
     #
+    # @!attribute [rw] final_metric_data_list
+    #   A collection of `MetricData` objects that specify the names, values,
+    #   and dates and times that the training algorithm emitted to Amazon
+    #   CloudWatch.
+    #   @return [Array<Types::MetricData>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJobResponse AWS API Documentation
     #
     class DescribeTrainingJobResponse < Struct.new(
@@ -2143,7 +2239,8 @@ module Aws::SageMaker
       :training_start_time,
       :training_end_time,
       :last_modified_time,
-      :secondary_status_transitions)
+      :secondary_status_transitions,
+      :final_metric_data_list)
       include Aws::Structure
     end
 
@@ -2413,7 +2510,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         training_image: "AlgorithmImage", # required
+    #         training_image: "AlgorithmImage",
     #         training_input_mode: "Pipe", # required, accepts Pipe, File
     #         metric_definitions: [
     #           {
@@ -2480,7 +2577,7 @@ module Aws::SageMaker
     #           "ParameterKey" => "ParameterValue",
     #         },
     #         algorithm_specification: { # required
-    #           training_image: "AlgorithmImage", # required
+    #           training_image: "AlgorithmImage",
     #           training_input_mode: "Pipe", # required, accepts Pipe, File
     #           metric_definitions: [
     #             {
@@ -2490,7 +2587,7 @@ module Aws::SageMaker
     #           ],
     #         },
     #         role_arn: "RoleArn", # required
-    #         input_data_config: [ # required
+    #         input_data_config: [
     #           {
     #             channel_name: "ChannelName", # required
     #             data_source: { # required
@@ -2611,6 +2708,9 @@ module Aws::SageMaker
     #   The Amazon Resource Name (ARN) of the training job.
     #   @return [String]
     #
+    # @!attribute [rw] tuning_job_name
+    #   @return [String]
+    #
     # @!attribute [rw] creation_time
     #   The date and time that the training job was created.
     #   @return [Time]
@@ -2671,6 +2771,7 @@ module Aws::SageMaker
     class HyperParameterTrainingJobSummary < Struct.new(
       :training_job_name,
       :training_job_arn,
+      :tuning_job_name,
       :creation_time,
       :training_start_time,
       :training_end_time,
@@ -2843,6 +2944,84 @@ module Aws::SageMaker
       :training_job_status_counters,
       :objective_status_counters,
       :resource_limits)
+      include Aws::Structure
+    end
+
+    # Specifies the configuration for a hyperparameter tuning job that uses
+    # one or more previous hyperparameter tuning jobs as a starting point.
+    # The results of previous tuning jobs are used to inform which
+    # combinations of hyperparameters to search over in the new tuning job.
+    #
+    # All training jobs launched by the new hyperparameter tuning job are
+    # evaluated by using the objective metric, and the training job that
+    # performs the best is compared to the best training jobs from the
+    # parent tuning jobs. From these, the training job that performs the
+    # best as measured by the objective metric is returned as the overall
+    # best training job.
+    #
+    # <note markdown="1"> All training jobs launched by parent hyperparameter tuning jobs and
+    # the new hyperparameter tuning jobs count against the limit of training
+    # jobs for the tuning job.
+    #
+    #  </note>
+    #
+    # @note When making an API call, you may pass HyperParameterTuningJobWarmStartConfig
+    #   data as a hash:
+    #
+    #       {
+    #         parent_hyper_parameter_tuning_jobs: [ # required
+    #           {
+    #             hyper_parameter_tuning_job_name: "HyperParameterTuningJobName",
+    #           },
+    #         ],
+    #         warm_start_type: "IdenticalDataAndAlgorithm", # required, accepts IdenticalDataAndAlgorithm, TransferLearning
+    #       }
+    #
+    # @!attribute [rw] parent_hyper_parameter_tuning_jobs
+    #   An array of hyperparameter tuning jobs that are used as the starting
+    #   point for the new hyperparameter tuning job. For more information
+    #   about warm starting a hyperparameter tuning job, see [Using a
+    #   Previous Hyperparameter Tuning Job as a Starting Point][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/automatic-model-tuning-incremental
+    #   @return [Array<Types::ParentHyperParameterTuningJob>]
+    #
+    # @!attribute [rw] warm_start_type
+    #   Specifies one of the following:
+    #
+    #   IDENTICAL\_DATA\_AND\_ALGORITHM
+    #
+    #   : The new hyperparameter tuning job uses the same input data and
+    #     training image as the parent tuning jobs. You can change the
+    #     hyperparameter ranges to search and the maximum number of training
+    #     jobs that the hyperparameter tuning job launches. You cannot use a
+    #     new version of the training algorithm, unless the changes in the
+    #     new version do not affect the algorithm itself. For example,
+    #     changes that improve logging or adding support for a different
+    #     data format are allowed. The objective metric for the new tuning
+    #     job must be the same as for all parent jobs.
+    #
+    #   TRANSFER\_LEARNING
+    #
+    #   : The new hyperparameter tuning job can include input data,
+    #     hyperparameter ranges, maximum number of concurrent training jobs,
+    #     and maximum number of training jobs that are different than those
+    #     of its parent hyperparameter tuning jobs. The training image can
+    #     also be a different versionfrom the version used in the parent
+    #     hyperparameter tuning job. You can also change hyperparameters
+    #     from tunable to static, and from static to tunable, but the total
+    #     number of static plus tunable hyperparameters must remain the same
+    #     as it is in all parent jobs. The objective metric for the new
+    #     tuning job must be the same as for all parent jobs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTuningJobWarmStartConfig AWS API Documentation
+    #
+    class HyperParameterTuningJobWarmStartConfig < Struct.new(
+      :parent_hyper_parameter_tuning_jobs,
+      :warm_start_type)
       include Aws::Structure
     end
 
@@ -3764,6 +3943,30 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The name, value, and date and time of a metric that was emitted to
+    # Amazon CloudWatch.
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the metric.
+    #   @return [Float]
+    #
+    # @!attribute [rw] timestamp
+    #   The date and time that the algorithm emitted the metric.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MetricData AWS API Documentation
+    #
+    class MetricData < Struct.new(
+      :metric_name,
+      :value,
+      :timestamp)
+      include Aws::Structure
+    end
+
     # Specifies a metric that the training algorithm writes to `stderr` or
     # `stdout`. Amazon SageMakerhyperparameter tuning captures all defined
     # metrics. You specify one metric that a hyperparameter tuning job uses
@@ -4064,7 +4267,17 @@ module Aws::SageMaker
     end
 
     # Specifies ranges of integer, continuous, and categorical
-    # hyperparameters that a hyperparameter tuning job searches.
+    # hyperparameters that a hyperparameter tuning job searches. The
+    # hyperparameter tuning job launches training jobs with hyperparameter
+    # values within these ranges to find the combination of values that
+    # result in the training job with the best performance as measured by
+    # the objective metric of the hyperparameter tuning job.
+    #
+    # <note markdown="1"> You can specify a maximum of 20 hyperparameters that a hyperparameter
+    # tuning job can search over. Every possible value of a categorical
+    # parameter range counts against this limit.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass ParameterRanges
     #   data as a hash:
@@ -4115,6 +4328,28 @@ module Aws::SageMaker
       :integer_parameter_ranges,
       :continuous_parameter_ranges,
       :categorical_parameter_ranges)
+      include Aws::Structure
+    end
+
+    # A previously completed or stopped hyperparameter tuning job to be used
+    # as a starting point for a new hyperparameter tuning job.
+    #
+    # @note When making an API call, you may pass ParentHyperParameterTuningJob
+    #   data as a hash:
+    #
+    #       {
+    #         hyper_parameter_tuning_job_name: "HyperParameterTuningJobName",
+    #       }
+    #
+    # @!attribute [rw] hyper_parameter_tuning_job_name
+    #   The name of the hyperparameter tuning job to be used as a starting
+    #   point for a new hyperparameter tuning job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ParentHyperParameterTuningJob AWS API Documentation
+    #
+    class ParentHyperParameterTuningJob < Struct.new(
+      :hyper_parameter_tuning_job_name)
       include Aws::Structure
     end
 
@@ -4358,7 +4593,7 @@ module Aws::SageMaker
     #
     #     `s3://customer_bucket/some/prefix/relative/path/to/custdata-1`
     #
-    #     `s3://customer_bucket/some/prefix/relative/path/custdata-1`
+    #     `s3://customer_bucket/some/prefix/relative/path/custdata-2`
     #
     #     `...`
     #
@@ -4678,7 +4913,7 @@ module Aws::SageMaker
     # categorized by status.
     #
     # @!attribute [rw] completed
-    #   The number of completed training jobs launched by a hyperparameter
+    #   The number of completed training jobs launched by the hyperparameter
     #   tuning job.
     #   @return [Integer]
     #
@@ -5178,7 +5413,7 @@ module Aws::SageMaker
     #
     #       {
     #         notebook_instance_name: "NotebookInstanceName", # required
-    #         instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge
+    #         instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge
     #         role_arn: "RoleArn",
     #         lifecycle_config_name: "NotebookInstanceLifecycleConfigName",
     #         disassociate_lifecycle_config: false,
@@ -5225,7 +5460,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] volume_size_in_gb
     #   The size, in GB, of the ML storage volume to attach to the notebook
-    #   instance.
+    #   instance. The default value is 5 GB.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstanceInput AWS API Documentation

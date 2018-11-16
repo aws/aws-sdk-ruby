@@ -333,7 +333,28 @@ module Aws::Pinpoint
     #           },
     #           schedule: {
     #             end_time: "__string",
-    #             frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY
+    #             event_filter: {
+    #               dimensions: {
+    #                 attributes: {
+    #                   "__string" => {
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"],
+    #                   },
+    #                 },
+    #                 event_type: {
+    #                   dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   values: ["__string"],
+    #                 },
+    #                 metrics: {
+    #                   "__string" => {
+    #                     comparison_operator: "__string",
+    #                     value: 1.0,
+    #                   },
+    #                 },
+    #               },
+    #               filter_type: "SYSTEM", # accepts SYSTEM, ENDPOINT
+    #             },
+    #             frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
     #             is_local_time: false,
     #             quiet_time: {
     #               end: "__string",
@@ -447,7 +468,28 @@ module Aws::Pinpoint
     #       name: "__string",
     #       schedule: {
     #         end_time: "__string",
-    #         frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY
+    #         event_filter: {
+    #           dimensions: {
+    #             attributes: {
+    #               "__string" => {
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 values: ["__string"],
+    #               },
+    #             },
+    #             event_type: {
+    #               dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               values: ["__string"],
+    #             },
+    #             metrics: {
+    #               "__string" => {
+    #                 comparison_operator: "__string",
+    #                 value: 1.0,
+    #               },
+    #             },
+    #           },
+    #           filter_type: "SYSTEM", # accepts SYSTEM, ENDPOINT
+    #         },
+    #         frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
     #         is_local_time: false,
     #         quiet_time: {
     #           end: "__string",
@@ -535,7 +577,18 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.end_time #=> String
-    #   resp.campaign_response.additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY"
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values #=> Array
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.event_type.values #=> Array
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.event_type.values[0] #=> String
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.metrics #=> Hash
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].value #=> Float
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
+    #   resp.campaign_response.additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
     #   resp.campaign_response.additional_treatments[0].schedule.is_local_time #=> Boolean
     #   resp.campaign_response.additional_treatments[0].schedule.quiet_time.end #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.quiet_time.start #=> String
@@ -629,7 +682,18 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.name #=> String
     #   resp.campaign_response.schedule.end_time #=> String
-    #   resp.campaign_response.schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY"
+    #   resp.campaign_response.schedule.event_filter.dimensions.attributes #=> Hash
+    #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].values #=> Array
+    #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.campaign_response.schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.schedule.event_filter.dimensions.event_type.values #=> Array
+    #   resp.campaign_response.schedule.event_filter.dimensions.event_type.values[0] #=> String
+    #   resp.campaign_response.schedule.event_filter.dimensions.metrics #=> Hash
+    #   resp.campaign_response.schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.campaign_response.schedule.event_filter.dimensions.metrics["__string"].value #=> Float
+    #   resp.campaign_response.schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
+    #   resp.campaign_response.schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
     #   resp.campaign_response.schedule.is_local_time #=> Boolean
     #   resp.campaign_response.schedule.quiet_time.end #=> String
     #   resp.campaign_response.schedule.quiet_time.start #=> String
@@ -1380,7 +1444,18 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.end_time #=> String
-    #   resp.campaign_response.additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY"
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values #=> Array
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.event_type.values #=> Array
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.event_type.values[0] #=> String
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.metrics #=> Hash
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].value #=> Float
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
+    #   resp.campaign_response.additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
     #   resp.campaign_response.additional_treatments[0].schedule.is_local_time #=> Boolean
     #   resp.campaign_response.additional_treatments[0].schedule.quiet_time.end #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.quiet_time.start #=> String
@@ -1474,7 +1549,18 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.name #=> String
     #   resp.campaign_response.schedule.end_time #=> String
-    #   resp.campaign_response.schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY"
+    #   resp.campaign_response.schedule.event_filter.dimensions.attributes #=> Hash
+    #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].values #=> Array
+    #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.campaign_response.schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.schedule.event_filter.dimensions.event_type.values #=> Array
+    #   resp.campaign_response.schedule.event_filter.dimensions.event_type.values[0] #=> String
+    #   resp.campaign_response.schedule.event_filter.dimensions.metrics #=> Hash
+    #   resp.campaign_response.schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.campaign_response.schedule.event_filter.dimensions.metrics["__string"].value #=> Float
+    #   resp.campaign_response.schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
+    #   resp.campaign_response.schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
     #   resp.campaign_response.schedule.is_local_time #=> Boolean
     #   resp.campaign_response.schedule.quiet_time.end #=> String
     #   resp.campaign_response.schedule.quiet_time.start #=> String
@@ -1561,7 +1647,7 @@ module Aws::Pinpoint
     #   resp.endpoint_response.attributes #=> Hash
     #   resp.endpoint_response.attributes["__string"] #=> Array
     #   resp.endpoint_response.attributes["__string"][0] #=> String
-    #   resp.endpoint_response.channel_type #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.endpoint_response.channel_type #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.endpoint_response.cohort_id #=> String
     #   resp.endpoint_response.creation_date #=> String
     #   resp.endpoint_response.demographic.app_version #=> String
@@ -1858,7 +1944,7 @@ module Aws::Pinpoint
     #   resp.endpoints_response.item[0].attributes #=> Hash
     #   resp.endpoints_response.item[0].attributes["__string"] #=> Array
     #   resp.endpoints_response.item[0].attributes["__string"][0] #=> String
-    #   resp.endpoints_response.item[0].channel_type #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.endpoints_response.item[0].channel_type #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.endpoints_response.item[0].cohort_id #=> String
     #   resp.endpoints_response.item[0].creation_date #=> String
     #   resp.endpoints_response.item[0].demographic.app_version #=> String
@@ -1893,6 +1979,42 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def delete_user_endpoints(params = {}, options = {})
       req = build_request(:delete_user_endpoints, params)
+      req.send_request(options)
+    end
+
+    # Delete an Voice channel
+    #
+    # @option params [required, String] :application_id
+    #
+    # @return [Types::DeleteVoiceChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteVoiceChannelResponse#voice_channel_response #voice_channel_response} => Types::VoiceChannelResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_voice_channel({
+    #     application_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.voice_channel_response.application_id #=> String
+    #   resp.voice_channel_response.creation_date #=> String
+    #   resp.voice_channel_response.enabled #=> Boolean
+    #   resp.voice_channel_response.has_credential #=> Boolean
+    #   resp.voice_channel_response.id #=> String
+    #   resp.voice_channel_response.is_archived #=> Boolean
+    #   resp.voice_channel_response.last_modified_by #=> String
+    #   resp.voice_channel_response.last_modified_date #=> String
+    #   resp.voice_channel_response.platform #=> String
+    #   resp.voice_channel_response.version #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteVoiceChannel AWS API Documentation
+    #
+    # @overload delete_voice_channel(params = {})
+    # @param [Hash] params ({})
+    def delete_voice_channel(params = {}, options = {})
+      req = build_request(:delete_voice_channel, params)
       req.send_request(options)
     end
 
@@ -2308,7 +2430,18 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.end_time #=> String
-    #   resp.campaign_response.additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY"
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values #=> Array
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.event_type.values #=> Array
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.event_type.values[0] #=> String
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.metrics #=> Hash
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].value #=> Float
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
+    #   resp.campaign_response.additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
     #   resp.campaign_response.additional_treatments[0].schedule.is_local_time #=> Boolean
     #   resp.campaign_response.additional_treatments[0].schedule.quiet_time.end #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.quiet_time.start #=> String
@@ -2402,7 +2535,18 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.name #=> String
     #   resp.campaign_response.schedule.end_time #=> String
-    #   resp.campaign_response.schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY"
+    #   resp.campaign_response.schedule.event_filter.dimensions.attributes #=> Hash
+    #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].values #=> Array
+    #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.campaign_response.schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.schedule.event_filter.dimensions.event_type.values #=> Array
+    #   resp.campaign_response.schedule.event_filter.dimensions.event_type.values[0] #=> String
+    #   resp.campaign_response.schedule.event_filter.dimensions.metrics #=> Hash
+    #   resp.campaign_response.schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.campaign_response.schedule.event_filter.dimensions.metrics["__string"].value #=> Float
+    #   resp.campaign_response.schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
+    #   resp.campaign_response.schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
     #   resp.campaign_response.schedule.is_local_time #=> Boolean
     #   resp.campaign_response.schedule.quiet_time.end #=> String
     #   resp.campaign_response.schedule.quiet_time.start #=> String
@@ -2566,7 +2710,18 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.end_time #=> String
-    #   resp.campaign_response.additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY"
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values #=> Array
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.event_type.values #=> Array
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.event_type.values[0] #=> String
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.metrics #=> Hash
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].value #=> Float
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
+    #   resp.campaign_response.additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
     #   resp.campaign_response.additional_treatments[0].schedule.is_local_time #=> Boolean
     #   resp.campaign_response.additional_treatments[0].schedule.quiet_time.end #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.quiet_time.start #=> String
@@ -2660,7 +2815,18 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.name #=> String
     #   resp.campaign_response.schedule.end_time #=> String
-    #   resp.campaign_response.schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY"
+    #   resp.campaign_response.schedule.event_filter.dimensions.attributes #=> Hash
+    #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].values #=> Array
+    #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.campaign_response.schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.schedule.event_filter.dimensions.event_type.values #=> Array
+    #   resp.campaign_response.schedule.event_filter.dimensions.event_type.values[0] #=> String
+    #   resp.campaign_response.schedule.event_filter.dimensions.metrics #=> Hash
+    #   resp.campaign_response.schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.campaign_response.schedule.event_filter.dimensions.metrics["__string"].value #=> Float
+    #   resp.campaign_response.schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
+    #   resp.campaign_response.schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
     #   resp.campaign_response.schedule.is_local_time #=> Boolean
     #   resp.campaign_response.schedule.quiet_time.end #=> String
     #   resp.campaign_response.schedule.quiet_time.start #=> String
@@ -2778,7 +2944,18 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.end_time #=> String
-    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY"
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values #=> Array
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.event_type.values #=> Array
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.event_type.values[0] #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.metrics #=> Hash
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].value #=> Float
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.is_local_time #=> Boolean
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.quiet_time.end #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.quiet_time.start #=> String
@@ -2872,7 +3049,18 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaigns_response.item[0].name #=> String
     #   resp.campaigns_response.item[0].schedule.end_time #=> String
-    #   resp.campaigns_response.item[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY"
+    #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.attributes #=> Hash
+    #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.attributes["__string"].values #=> Array
+    #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.event_type.values #=> Array
+    #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.event_type.values[0] #=> String
+    #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.metrics #=> Hash
+    #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.metrics["__string"].value #=> Float
+    #   resp.campaigns_response.item[0].schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
+    #   resp.campaigns_response.item[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
     #   resp.campaigns_response.item[0].schedule.is_local_time #=> Boolean
     #   resp.campaigns_response.item[0].schedule.quiet_time.end #=> String
     #   resp.campaigns_response.item[0].schedule.quiet_time.start #=> String
@@ -2988,7 +3176,18 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.end_time #=> String
-    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY"
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values #=> Array
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.event_type.values #=> Array
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.event_type.values[0] #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.metrics #=> Hash
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].value #=> Float
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.is_local_time #=> Boolean
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.quiet_time.end #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.quiet_time.start #=> String
@@ -3082,7 +3281,18 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaigns_response.item[0].name #=> String
     #   resp.campaigns_response.item[0].schedule.end_time #=> String
-    #   resp.campaigns_response.item[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY"
+    #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.attributes #=> Hash
+    #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.attributes["__string"].values #=> Array
+    #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.event_type.values #=> Array
+    #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.event_type.values[0] #=> String
+    #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.metrics #=> Hash
+    #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.metrics["__string"].value #=> Float
+    #   resp.campaigns_response.item[0].schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
+    #   resp.campaigns_response.item[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
     #   resp.campaigns_response.item[0].schedule.is_local_time #=> Boolean
     #   resp.campaigns_response.item[0].schedule.quiet_time.end #=> String
     #   resp.campaigns_response.item[0].schedule.quiet_time.start #=> String
@@ -3206,7 +3416,7 @@ module Aws::Pinpoint
     #   resp.endpoint_response.attributes #=> Hash
     #   resp.endpoint_response.attributes["__string"] #=> Array
     #   resp.endpoint_response.attributes["__string"][0] #=> String
-    #   resp.endpoint_response.channel_type #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.endpoint_response.channel_type #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.endpoint_response.cohort_id #=> String
     #   resp.endpoint_response.creation_date #=> String
     #   resp.endpoint_response.demographic.app_version #=> String
@@ -4209,7 +4419,7 @@ module Aws::Pinpoint
     #   resp.endpoints_response.item[0].attributes #=> Hash
     #   resp.endpoints_response.item[0].attributes["__string"] #=> Array
     #   resp.endpoints_response.item[0].attributes["__string"][0] #=> String
-    #   resp.endpoints_response.item[0].channel_type #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.endpoints_response.item[0].channel_type #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.endpoints_response.item[0].cohort_id #=> String
     #   resp.endpoints_response.item[0].creation_date #=> String
     #   resp.endpoints_response.item[0].demographic.app_version #=> String
@@ -4244,6 +4454,42 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def get_user_endpoints(params = {}, options = {})
       req = build_request(:get_user_endpoints, params)
+      req.send_request(options)
+    end
+
+    # Get a Voice Channel
+    #
+    # @option params [required, String] :application_id
+    #
+    # @return [Types::GetVoiceChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetVoiceChannelResponse#voice_channel_response #voice_channel_response} => Types::VoiceChannelResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_voice_channel({
+    #     application_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.voice_channel_response.application_id #=> String
+    #   resp.voice_channel_response.creation_date #=> String
+    #   resp.voice_channel_response.enabled #=> Boolean
+    #   resp.voice_channel_response.has_credential #=> Boolean
+    #   resp.voice_channel_response.id #=> String
+    #   resp.voice_channel_response.is_archived #=> Boolean
+    #   resp.voice_channel_response.last_modified_by #=> String
+    #   resp.voice_channel_response.last_modified_date #=> String
+    #   resp.voice_channel_response.platform #=> String
+    #   resp.voice_channel_response.version #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetVoiceChannel AWS API Documentation
+    #
+    # @overload get_voice_channel(params = {})
+    # @param [Hash] params ({})
+    def get_voice_channel(params = {}, options = {})
+      req = build_request(:get_voice_channel, params)
       req.send_request(options)
     end
 
@@ -4355,7 +4601,7 @@ module Aws::Pinpoint
     #             attributes: {
     #               "__string" => ["__string"],
     #             },
-    #             channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU, CUSTOM
+    #             channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #             demographic: {
     #               app_version: "__string",
     #               locale: "__string",
@@ -4488,7 +4734,7 @@ module Aws::Pinpoint
     #       addresses: {
     #         "__string" => {
     #           body_override: "__string",
-    #           channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU, CUSTOM
+    #           channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #           context: {
     #             "__string" => "__string",
     #           },
@@ -4658,6 +4904,15 @@ module Aws::Pinpoint
     #           substitutions: {
     #             "__string" => ["__string"],
     #           },
+    #         },
+    #         voice_message: {
+    #           body: "__string",
+    #           language_code: "__string",
+    #           origination_number: "__string",
+    #           substitutions: {
+    #             "__string" => ["__string"],
+    #           },
+    #           voice_id: "__string",
     #         },
     #       },
     #       trace_id: "__string",
@@ -4853,6 +5108,15 @@ module Aws::Pinpoint
     #           substitutions: {
     #             "__string" => ["__string"],
     #           },
+    #         },
+    #         voice_message: {
+    #           body: "__string",
+    #           language_code: "__string",
+    #           origination_number: "__string",
+    #           substitutions: {
+    #             "__string" => ["__string"],
+    #           },
+    #           voice_id: "__string",
     #         },
     #       },
     #       trace_id: "__string",
@@ -5351,7 +5615,28 @@ module Aws::Pinpoint
     #           },
     #           schedule: {
     #             end_time: "__string",
-    #             frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY
+    #             event_filter: {
+    #               dimensions: {
+    #                 attributes: {
+    #                   "__string" => {
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"],
+    #                   },
+    #                 },
+    #                 event_type: {
+    #                   dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   values: ["__string"],
+    #                 },
+    #                 metrics: {
+    #                   "__string" => {
+    #                     comparison_operator: "__string",
+    #                     value: 1.0,
+    #                   },
+    #                 },
+    #               },
+    #               filter_type: "SYSTEM", # accepts SYSTEM, ENDPOINT
+    #             },
+    #             frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
     #             is_local_time: false,
     #             quiet_time: {
     #               end: "__string",
@@ -5465,7 +5750,28 @@ module Aws::Pinpoint
     #       name: "__string",
     #       schedule: {
     #         end_time: "__string",
-    #         frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY
+    #         event_filter: {
+    #           dimensions: {
+    #             attributes: {
+    #               "__string" => {
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 values: ["__string"],
+    #               },
+    #             },
+    #             event_type: {
+    #               dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               values: ["__string"],
+    #             },
+    #             metrics: {
+    #               "__string" => {
+    #                 comparison_operator: "__string",
+    #                 value: 1.0,
+    #               },
+    #             },
+    #           },
+    #           filter_type: "SYSTEM", # accepts SYSTEM, ENDPOINT
+    #         },
+    #         frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
     #         is_local_time: false,
     #         quiet_time: {
     #           end: "__string",
@@ -5553,7 +5859,18 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.end_time #=> String
-    #   resp.campaign_response.additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY"
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values #=> Array
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.event_type.values #=> Array
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.event_type.values[0] #=> String
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.metrics #=> Hash
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].value #=> Float
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
+    #   resp.campaign_response.additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
     #   resp.campaign_response.additional_treatments[0].schedule.is_local_time #=> Boolean
     #   resp.campaign_response.additional_treatments[0].schedule.quiet_time.end #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.quiet_time.start #=> String
@@ -5647,7 +5964,18 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.name #=> String
     #   resp.campaign_response.schedule.end_time #=> String
-    #   resp.campaign_response.schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY"
+    #   resp.campaign_response.schedule.event_filter.dimensions.attributes #=> Hash
+    #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].values #=> Array
+    #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.campaign_response.schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.schedule.event_filter.dimensions.event_type.values #=> Array
+    #   resp.campaign_response.schedule.event_filter.dimensions.event_type.values[0] #=> String
+    #   resp.campaign_response.schedule.event_filter.dimensions.metrics #=> Hash
+    #   resp.campaign_response.schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.campaign_response.schedule.event_filter.dimensions.metrics["__string"].value #=> Float
+    #   resp.campaign_response.schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
+    #   resp.campaign_response.schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
     #   resp.campaign_response.schedule.is_local_time #=> Boolean
     #   resp.campaign_response.schedule.quiet_time.end #=> String
     #   resp.campaign_response.schedule.quiet_time.start #=> String
@@ -5743,7 +6071,7 @@ module Aws::Pinpoint
     #       attributes: {
     #         "__string" => ["__string"],
     #       },
-    #       channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU, CUSTOM
+    #       channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #       demographic: {
     #         app_version: "__string",
     #         locale: "__string",
@@ -5814,7 +6142,7 @@ module Aws::Pinpoint
     #           attributes: {
     #             "__string" => ["__string"],
     #           },
-    #           channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU, CUSTOM
+    #           channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #           demographic: {
     #             app_version: "__string",
     #             locale: "__string",
@@ -6236,6 +6564,48 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
+    # Update an Voice channel
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, Types::VoiceChannelRequest] :voice_channel_request
+    #   Voice Channel Request
+    #
+    # @return [Types::UpdateVoiceChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateVoiceChannelResponse#voice_channel_response #voice_channel_response} => Types::VoiceChannelResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_voice_channel({
+    #     application_id: "__string", # required
+    #     voice_channel_request: { # required
+    #       enabled: false,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.voice_channel_response.application_id #=> String
+    #   resp.voice_channel_response.creation_date #=> String
+    #   resp.voice_channel_response.enabled #=> Boolean
+    #   resp.voice_channel_response.has_credential #=> Boolean
+    #   resp.voice_channel_response.id #=> String
+    #   resp.voice_channel_response.is_archived #=> Boolean
+    #   resp.voice_channel_response.last_modified_by #=> String
+    #   resp.voice_channel_response.last_modified_date #=> String
+    #   resp.voice_channel_response.platform #=> String
+    #   resp.voice_channel_response.version #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateVoiceChannel AWS API Documentation
+    #
+    # @overload update_voice_channel(params = {})
+    # @param [Hash] params ({})
+    def update_voice_channel(params = {}, options = {})
+      req = build_request(:update_voice_channel, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -6249,7 +6619,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

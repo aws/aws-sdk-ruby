@@ -255,6 +255,10 @@ module Aws::DirectConnect
 
     # Information about a BGP peer.
     #
+    # @!attribute [rw] bgp_peer_id
+    #   The ID of the BGP peer.
+    #   @return [String]
+    #
     # @!attribute [rw] asn
     #   The autonomous system (AS) number for Border Gateway Protocol (BGP)
     #   configuration.
@@ -312,6 +316,7 @@ module Aws::DirectConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/BGPPeer AWS API Documentation
     #
     class BGPPeer < Struct.new(
+      :bgp_peer_id,
       :asn,
       :auth_key,
       :address_family,
@@ -591,6 +596,11 @@ module Aws::DirectConnect
     #   terminates.
     #   @return [String]
     #
+    # @!attribute [rw] has_logical_redundancy
+    #   Indicates whether the connection supports a secondary BGP peer in
+    #   the same address family (IPv4/IPv6).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Connection AWS API Documentation
     #
     class Connection < Struct.new(
@@ -607,7 +617,8 @@ module Aws::DirectConnect
       :lag_id,
       :aws_device,
       :jumbo_frame_capable,
-      :aws_device_v2)
+      :aws_device_v2,
+      :has_logical_redundancy)
       include Aws::Structure
     end
 
@@ -931,6 +942,7 @@ module Aws::DirectConnect
     #         virtual_interface_id: "VirtualInterfaceId",
     #         asn: 1,
     #         customer_address: "CustomerAddress",
+    #         bgp_peer_id: "BGPPeerId",
     #       }
     #
     # @!attribute [rw] virtual_interface_id
@@ -946,12 +958,17 @@ module Aws::DirectConnect
     #   The IP address assigned to the customer interface.
     #   @return [String]
     #
+    # @!attribute [rw] bgp_peer_id
+    #   The ID of the BGP peer.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteBGPPeerRequest AWS API Documentation
     #
     class DeleteBGPPeerRequest < Struct.new(
       :virtual_interface_id,
       :asn,
-      :customer_address)
+      :customer_address,
+      :bgp_peer_id)
       include Aws::Structure
     end
 
@@ -1836,6 +1853,11 @@ module Aws::DirectConnect
     #   terminates.
     #   @return [String]
     #
+    # @!attribute [rw] has_logical_redundancy
+    #   Indicates whether the interconnect supports a secondary BGP in the
+    #   same address family (IPv4/IPv6).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Interconnect AWS API Documentation
     #
     class Interconnect < Struct.new(
@@ -1849,7 +1871,8 @@ module Aws::DirectConnect
       :lag_id,
       :aws_device,
       :jumbo_frame_capable,
-      :aws_device_v2)
+      :aws_device_v2,
+      :has_logical_redundancy)
       include Aws::Structure
     end
 
@@ -1940,6 +1963,11 @@ module Aws::DirectConnect
     #   Indicates whether jumbo frames (9001 MTU) are supported.
     #   @return [Boolean]
     #
+    # @!attribute [rw] has_logical_redundancy
+    #   Indicates whether the LAG supports a secondary BGP peer in the same
+    #   address family (IPv4/IPv6).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Lag AWS API Documentation
     #
     class Lag < Struct.new(
@@ -1956,7 +1984,8 @@ module Aws::DirectConnect
       :aws_device_v2,
       :connections,
       :allows_hosted_connections,
-      :jumbo_frame_capable)
+      :jumbo_frame_capable,
+      :has_logical_redundancy)
       include Aws::Structure
     end
 
