@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.173 (2018-11-16)
+------------------
+
 * Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
 
 * Feature - Aws::Comprehend - Updated the API, and documentation for Amazon Comprehend.
