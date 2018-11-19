@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.174 (2018-11-19)
+------------------
+
 * Feature - Aws::Batch - Updated the API, and documentation for AWS Batch.
 
 * Feature - Aws::CloudFormation - Updated the API, and documentation for AWS CloudFormation.
