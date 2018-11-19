@@ -3380,6 +3380,12 @@ module Aws::RDS
     #
     #   Example: `mySubnetgroup`
     #
+    # @option params [Array<String>] :vpc_security_group_ids
+    #   A list of EC2 VPC security groups to associate with the Read Replica.
+    #
+    #   Default: The default EC2 VPC security group for the DB subnet group's
+    #   VPC.
+    #
     # @option params [String] :storage_type
     #   Specifies the storage type to be associated with the Read Replica.
     #
@@ -3608,6 +3614,7 @@ module Aws::RDS
     #       },
     #     ],
     #     db_subnet_group_name: "String",
+    #     vpc_security_group_ids: ["String"],
     #     storage_type: "String",
     #     copy_tags_to_snapshot: false,
     #     monitoring_interval: 1,
@@ -13164,6 +13171,12 @@ module Aws::RDS
     #   The password for the given ARN from the key store in order to access
     #   the device.
     #
+    # @option params [Array<String>] :vpc_security_group_ids
+    #   A list of EC2 VPC security groups to associate with this DB instance.
+    #
+    #   Default: The default EC2 VPC security group for the DB subnet group's
+    #   VPC.
+    #
     # @option params [String] :domain
     #   Specify the Active Directory Domain to restore the instance in.
     #
@@ -13356,6 +13369,7 @@ module Aws::RDS
     #     storage_type: "String",
     #     tde_credential_arn: "String",
     #     tde_credential_password: "String",
+    #     vpc_security_group_ids: ["String"],
     #     domain: "String",
     #     copy_tags_to_snapshot: false,
     #     domain_iam_role_name: "String",
@@ -14234,6 +14248,12 @@ module Aws::RDS
     #   The password for the given ARN from the key store in order to access
     #   the device.
     #
+    # @option params [Array<String>] :vpc_security_group_ids
+    #   A list of EC2 VPC security groups to associate with this DB instance.
+    #
+    #   Default: The default EC2 VPC security group for the DB subnet group's
+    #   VPC.
+    #
     # @option params [String] :domain
     #   Specify the Active Directory Domain to restore the instance in.
     #
@@ -14429,6 +14449,7 @@ module Aws::RDS
     #     storage_type: "String",
     #     tde_credential_arn: "String",
     #     tde_credential_password: "String",
+    #     vpc_security_group_ids: ["String"],
     #     domain: "String",
     #     domain_iam_role_name: "String",
     #     enable_iam_database_authentication: false,
@@ -15171,7 +15192,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.38.1'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -233,6 +233,35 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Associates the Amazon Resource Name (ARN) of an AWS Certificate
+    # Manager (ACM) certificate with an AWS Elemental MediaConvert resource.
+    #
+    # @note When making an API call, you may pass AssociateCertificateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the ACM certificate that you want to associate with your
+    #   MediaConvert resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AssociateCertificateRequest AWS API Documentation
+    #
+    class AssociateCertificateRequest < Struct.new(
+      :arn)
+      include Aws::Structure
+    end
+
+    # Successful association of Certificate Manager Amazon Resource Name
+    # (ARN) with Mediaconvert returns an OK message.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AssociateCertificateResponse AWS API Documentation
+    #
+    class AssociateCertificateResponse < Aws::EmptyStructure; end
+
     # Audio codec settings (CodecSettings) under (AudioDescriptions)
     # contains the group of settings related to audio encoding. The settings
     # in this group vary depending on the value you choose for Audio codec
@@ -983,7 +1012,7 @@ module Aws::MediaConvert
     #             x_position: 1,
     #             y_position: 1,
     #           },
-    #           destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #           destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #           dvb_sub_destination_settings: {
     #             alignment: "CENTERED", # accepts CENTERED, LEFT
     #             background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -1036,6 +1065,9 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] language_description
+    #   Human readable information to indicate captions available for
+    #   players (eg. English, or Spanish). Alphanumeric characters, spaces,
+    #   and underscore are legal.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CaptionDescription AWS API Documentation
@@ -1075,7 +1107,7 @@ module Aws::MediaConvert
     #             x_position: 1,
     #             y_position: 1,
     #           },
-    #           destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #           destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #           dvb_sub_destination_settings: {
     #             alignment: "CENTERED", # accepts CENTERED, LEFT
     #             background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -1165,7 +1197,7 @@ module Aws::MediaConvert
     #           x_position: 1,
     #           y_position: 1,
     #         },
-    #         destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #         destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #         dvb_sub_destination_settings: {
     #           alignment: "CENTERED", # accepts CENTERED, LEFT
     #           background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -1200,8 +1232,8 @@ module Aws::MediaConvert
     #   @return [Types::BurninDestinationSettings]
     #
     # @!attribute [rw] destination_type
-    #   Type of Caption output, including Burn-In, Embedded, SCC, SRT, TTML,
-    #   WebVTT, DVB-Sub, Teletext.
+    #   Type of Caption output, including Burn-In, Embedded (with or without
+    #   SCTE20), SCC, SMI, SRT, TTML, WebVTT, DVB-Sub, Teletext.
     #   @return [String]
     #
     # @!attribute [rw] dvb_sub_destination_settings
@@ -1259,7 +1291,7 @@ module Aws::MediaConvert
     #             source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
     #             time_delta: 1,
     #           },
-    #           source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
+    #           source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE
     #           teletext_source_settings: {
     #             page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #           },
@@ -1324,7 +1356,7 @@ module Aws::MediaConvert
     #           source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
     #           time_delta: 1,
     #         },
-    #         source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
+    #         source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE
     #         teletext_source_settings: {
     #           page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #         },
@@ -1434,7 +1466,7 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] static_key_provider
-    #   Settings for use with a SPEKE key provider.
+    #   Use these settings to set up encryption with a static key provider.
     #   @return [Types::StaticKeyProvider]
     #
     # @!attribute [rw] type
@@ -1884,7 +1916,7 @@ module Aws::MediaConvert
     #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
     #                       time_delta: 1,
     #                     },
-    #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
+    #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE
     #                     teletext_source_settings: {
     #                       page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                     },
@@ -1892,10 +1924,33 @@ module Aws::MediaConvert
     #                 },
     #               },
     #               deblock_filter: "ENABLED", # accepts ENABLED, DISABLED
+    #               decryption_settings: {
+    #                 decryption_mode: "AES_CTR", # accepts AES_CTR, AES_CBC, AES_GCM
+    #                 encrypted_decryption_key: "__stringMin24Max512PatternAZaZ0902",
+    #                 initialization_vector: "__stringMin16Max24PatternAZaZ0922AZaZ0916",
+    #                 kms_key_region: "__stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912",
+    #               },
     #               denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
     #               file_input: "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MM",
     #               filter_enable: "AUTO", # accepts AUTO, DISABLE, FORCE
     #               filter_strength: 1,
+    #               image_inserter: {
+    #                 insertable_images: [
+    #                   {
+    #                     duration: 1,
+    #                     fade_in: 1,
+    #                     fade_out: 1,
+    #                     height: 1,
+    #                     image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                     image_x: 1,
+    #                     image_y: 1,
+    #                     layer: 1,
+    #                     opacity: 1,
+    #                     start_time: "__stringPattern01D20305D205D",
+    #                     width: 1,
+    #                   },
+    #                 ],
+    #               },
     #               input_clippings: [
     #                 {
     #                   end_timecode: "__stringPattern010920405090509092",
@@ -1927,6 +1982,20 @@ module Aws::MediaConvert
     #               },
     #             },
     #           ],
+    #           motion_image_inserter: {
+    #             framerate: {
+    #               framerate_denominator: 1,
+    #               framerate_numerator: 1,
+    #             },
+    #             input: "__stringMin14Max1285PatternS3Mov09Png",
+    #             insertion_mode: "MOV", # accepts MOV, PNG
+    #             offset: {
+    #               image_x: 1,
+    #               image_y: 1,
+    #             },
+    #             playback: "ONCE", # accepts ONCE, REPEAT
+    #             start_time: "__stringMin11Max11Pattern01D20305D205D",
+    #           },
     #           nielsen_configuration: {
     #             breakout_code: 1,
     #             distributor_id: "__string",
@@ -1969,6 +2038,7 @@ module Aws::MediaConvert
     #                   destination: "__stringPatternS3",
     #                   encryption: {
     #                     speke_key_provider: {
+    #                       certificate_arn: "__stringPatternArnAwsAcm",
     #                       resource_id: "__string",
     #                       system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                       url: "__stringPatternHttps",
@@ -2005,6 +2075,7 @@ module Aws::MediaConvert
     #                     encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                     initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     speke_key_provider: {
+    #                       certificate_arn: "__stringPatternArnAwsAcm",
     #                       resource_id: "__string",
     #                       system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                       url: "__stringPatternHttps",
@@ -2037,6 +2108,7 @@ module Aws::MediaConvert
     #                   destination: "__stringPatternS3",
     #                   encryption: {
     #                     speke_key_provider: {
+    #                       certificate_arn: "__stringPatternArnAwsAcm",
     #                       resource_id: "__string",
     #                       system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                       url: "__stringPatternHttps",
@@ -2165,7 +2237,7 @@ module Aws::MediaConvert
     #                           x_position: 1,
     #                           y_position: 1,
     #                         },
-    #                         destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #                         destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                         dvb_sub_destination_settings: {
     #                           alignment: "CENTERED", # accepts CENTERED, LEFT
     #                           background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -2686,7 +2758,7 @@ module Aws::MediaConvert
     #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
     #                       time_delta: 1,
     #                     },
-    #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
+    #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE
     #                     teletext_source_settings: {
     #                       page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                     },
@@ -2697,6 +2769,23 @@ module Aws::MediaConvert
     #               denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
     #               filter_enable: "AUTO", # accepts AUTO, DISABLE, FORCE
     #               filter_strength: 1,
+    #               image_inserter: {
+    #                 insertable_images: [
+    #                   {
+    #                     duration: 1,
+    #                     fade_in: 1,
+    #                     fade_out: 1,
+    #                     height: 1,
+    #                     image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                     image_x: 1,
+    #                     image_y: 1,
+    #                     layer: 1,
+    #                     opacity: 1,
+    #                     start_time: "__stringPattern01D20305D205D",
+    #                     width: 1,
+    #                   },
+    #                 ],
+    #               },
     #               input_clippings: [
     #                 {
     #                   end_timecode: "__stringPattern010920405090509092",
@@ -2728,6 +2817,20 @@ module Aws::MediaConvert
     #               },
     #             },
     #           ],
+    #           motion_image_inserter: {
+    #             framerate: {
+    #               framerate_denominator: 1,
+    #               framerate_numerator: 1,
+    #             },
+    #             input: "__stringMin14Max1285PatternS3Mov09Png",
+    #             insertion_mode: "MOV", # accepts MOV, PNG
+    #             offset: {
+    #               image_x: 1,
+    #               image_y: 1,
+    #             },
+    #             playback: "ONCE", # accepts ONCE, REPEAT
+    #             start_time: "__stringMin11Max11Pattern01D20305D205D",
+    #           },
     #           nielsen_configuration: {
     #             breakout_code: 1,
     #             distributor_id: "__string",
@@ -2770,6 +2873,7 @@ module Aws::MediaConvert
     #                   destination: "__stringPatternS3",
     #                   encryption: {
     #                     speke_key_provider: {
+    #                       certificate_arn: "__stringPatternArnAwsAcm",
     #                       resource_id: "__string",
     #                       system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                       url: "__stringPatternHttps",
@@ -2806,6 +2910,7 @@ module Aws::MediaConvert
     #                     encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                     initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     speke_key_provider: {
+    #                       certificate_arn: "__stringPatternArnAwsAcm",
     #                       resource_id: "__string",
     #                       system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                       url: "__stringPatternHttps",
@@ -2838,6 +2943,7 @@ module Aws::MediaConvert
     #                   destination: "__stringPatternS3",
     #                   encryption: {
     #                     speke_key_provider: {
+    #                       certificate_arn: "__stringPatternArnAwsAcm",
     #                       resource_id: "__string",
     #                       system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                       url: "__stringPatternHttps",
@@ -2966,7 +3072,7 @@ module Aws::MediaConvert
     #                           x_position: 1,
     #                           y_position: 1,
     #                         },
-    #                         destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #                         destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                         dvb_sub_destination_settings: {
     #                           alignment: "CENTERED", # accepts CENTERED, LEFT
     #                           background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -3528,7 +3634,7 @@ module Aws::MediaConvert
     #                   x_position: 1,
     #                   y_position: 1,
     #                 },
-    #                 destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #                 destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                 dvb_sub_destination_settings: {
     #                   alignment: "CENTERED", # accepts CENTERED, LEFT
     #                   background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -4009,6 +4115,7 @@ module Aws::MediaConvert
     #
     #       {
     #         speke_key_provider: {
+    #           certificate_arn: "__stringPatternArnAwsAcm",
     #           resource_id: "__string",
     #           system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #           url: "__stringPatternHttps",
@@ -4037,6 +4144,7 @@ module Aws::MediaConvert
     #         destination: "__stringPatternS3",
     #         encryption: {
     #           speke_key_provider: {
+    #             certificate_arn: "__stringPatternArnAwsAcm",
     #             resource_id: "__string",
     #             system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #             url: "__stringPatternHttps",
@@ -4103,9 +4211,14 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] write_segment_timeline_in_representation
-    #   When ENABLED, segment durations are indicated in the manifest using
-    #   SegmentTimeline and SegmentTimeline will be promoted down into
-    #   Representation from AdaptationSet.
+    #   When you enable Precise segment duration in manifests
+    #   (writeSegmentTimelineInRepresentation), your DASH manifest shows
+    #   precise segment durations. The segment duration information appears
+    #   inside the SegmentTimeline element, inside SegmentTemplate at the
+    #   Representation level. When this feature isn't enabled, the segment
+    #   durations in your DASH manifest are approximate. The segment
+    #   duration information appears in the duration attribute of the
+    #   SegmentTemplate element.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DashIsoGroupSettings AWS API Documentation
@@ -4311,6 +4424,36 @@ module Aws::MediaConvert
       :next_token)
       include Aws::Structure
     end
+
+    # Removes an association between the Amazon Resource Name (ARN) of an
+    # AWS Certificate Manager (ACM) certificate and an AWS Elemental
+    # MediaConvert resource.
+    #
+    # @note When making an API call, you may pass DisassociateCertificateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the ACM certificate that you want to disassociate from
+    #   your MediaConvert resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DisassociateCertificateRequest AWS API Documentation
+    #
+    class DisassociateCertificateRequest < Struct.new(
+      :arn)
+      include Aws::Structure
+    end
+
+    # Successful disassociation of Certificate Manager Amazon Resource Name
+    # (ARN) with Mediaconvert returns an OK message.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DisassociateCertificateResponse AWS API Documentation
+    #
+    class DisassociateCertificateResponse < Aws::EmptyStructure; end
 
     # Inserts DVB Network Information Table (NIT) at the specified table
     # repetition interval.
@@ -6042,6 +6185,7 @@ module Aws::MediaConvert
     #         encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #         initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #         speke_key_provider: {
+    #           certificate_arn: "__stringPatternArnAwsAcm",
     #           resource_id: "__string",
     #           system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #           url: "__stringPatternHttps",
@@ -6079,7 +6223,7 @@ module Aws::MediaConvert
     #   @return [Types::SpekeKeyProvider]
     #
     # @!attribute [rw] static_key_provider
-    #   Settings for use with a SPEKE key provider.
+    #   Use these settings to set up encryption with a static key provider.
     #   @return [Types::StaticKeyProvider]
     #
     # @!attribute [rw] type
@@ -6125,6 +6269,7 @@ module Aws::MediaConvert
     #           encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #           initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           speke_key_provider: {
+    #             certificate_arn: "__stringPatternArnAwsAcm",
     #             resource_id: "__string",
     #             system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #             url: "__stringPatternHttps",
@@ -6410,8 +6555,8 @@ module Aws::MediaConvert
     end
 
     # Enable the Image inserter (ImageInserter) feature to include a graphic
-    # overlay on your video. Enable or disable this feature for each output
-    # individually. This setting is disabled by default.
+    # overlay on your video. Enable or disable this feature for each input
+    # or output individually. This setting is disabled by default.
     #
     # @note When making an API call, you may pass ImageInserter
     #   data as a hash:
@@ -6435,8 +6580,8 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] insertable_images
-    #   Image to insert. Must be 32 bit windows BMP, PNG, or TGA file. Must
-    #   not be larger than the output frames.
+    #   Specify the images that you want to overlay on your video. The
+    #   images must be PNG or TGA files.
     #   @return [Array<Types::InsertableImage>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ImageInserter AWS API Documentation
@@ -6502,7 +6647,7 @@ module Aws::MediaConvert
     #                 source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
     #                 time_delta: 1,
     #               },
-    #               source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
+    #               source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE
     #               teletext_source_settings: {
     #                 page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #               },
@@ -6510,10 +6655,33 @@ module Aws::MediaConvert
     #           },
     #         },
     #         deblock_filter: "ENABLED", # accepts ENABLED, DISABLED
+    #         decryption_settings: {
+    #           decryption_mode: "AES_CTR", # accepts AES_CTR, AES_CBC, AES_GCM
+    #           encrypted_decryption_key: "__stringMin24Max512PatternAZaZ0902",
+    #           initialization_vector: "__stringMin16Max24PatternAZaZ0922AZaZ0916",
+    #           kms_key_region: "__stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912",
+    #         },
     #         denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
     #         file_input: "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MM",
     #         filter_enable: "AUTO", # accepts AUTO, DISABLE, FORCE
     #         filter_strength: 1,
+    #         image_inserter: {
+    #           insertable_images: [
+    #             {
+    #               duration: 1,
+    #               fade_in: 1,
+    #               fade_out: 1,
+    #               height: 1,
+    #               image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #               image_x: 1,
+    #               image_y: 1,
+    #               layer: 1,
+    #               opacity: 1,
+    #               start_time: "__stringPattern01D20305D205D",
+    #               width: 1,
+    #             },
+    #           ],
+    #         },
     #         input_clippings: [
     #           {
     #             end_timecode: "__stringPattern010920405090509092",
@@ -6569,6 +6737,11 @@ module Aws::MediaConvert
     #   MPEG2 and uncompressed video inputs.
     #   @return [String]
     #
+    # @!attribute [rw] decryption_settings
+    #   If the input file is encrypted, decryption settings to decrypt the
+    #   media file
+    #   @return [Types::InputDecryptionSettings]
+    #
     # @!attribute [rw] denoise_filter
     #   Enable Denoise (InputDenoiseFilter) to filter noise from the input.
     #   Default is disabled. Only applicable to MPEG2, H.264, H.265, and
@@ -6599,6 +6772,12 @@ module Aws::MediaConvert
     #   input filter settings (Deblock and Denoise). The range is -5 to 5.
     #   Default is 0.
     #   @return [Integer]
+    #
+    # @!attribute [rw] image_inserter
+    #   Enable the Image inserter (ImageInserter) feature to include a
+    #   graphic overlay on your video. Enable or disable this feature for
+    #   each input individually. This setting is disabled by default.
+    #   @return [Types::ImageInserter]
     #
     # @!attribute [rw] input_clippings
     #   (InputClippings) contains sets of start and end times that together
@@ -6647,10 +6826,12 @@ module Aws::MediaConvert
       :audio_selectors,
       :caption_selectors,
       :deblock_filter,
+      :decryption_settings,
       :denoise_filter,
       :file_input,
       :filter_enable,
       :filter_strength,
+      :image_inserter,
       :input_clippings,
       :program_number,
       :psi_control,
@@ -6702,6 +6883,44 @@ module Aws::MediaConvert
     class InputClipping < Struct.new(
       :end_timecode,
       :start_timecode)
+      include Aws::Structure
+    end
+
+    # Specify the decryption settings used to decrypt encrypted input
+    #
+    # @note When making an API call, you may pass InputDecryptionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         decryption_mode: "AES_CTR", # accepts AES_CTR, AES_CBC, AES_GCM
+    #         encrypted_decryption_key: "__stringMin24Max512PatternAZaZ0902",
+    #         initialization_vector: "__stringMin16Max24PatternAZaZ0922AZaZ0916",
+    #         kms_key_region: "__stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912",
+    #       }
+    #
+    # @!attribute [rw] decryption_mode
+    #   This specifies how the encrypted file needs to be decrypted.
+    #   @return [String]
+    #
+    # @!attribute [rw] encrypted_decryption_key
+    #   Decryption key either 128 or 192 or 256 bits encrypted with KMS
+    #   @return [String]
+    #
+    # @!attribute [rw] initialization_vector
+    #   Initialization Vector 96 bits (CTR/GCM mode only) or 128 bits.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_region
+    #   The AWS region in which decryption key was encrypted with KMS
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/InputDecryptionSettings AWS API Documentation
+    #
+    class InputDecryptionSettings < Struct.new(
+      :decryption_mode,
+      :encrypted_decryption_key,
+      :initialization_vector,
+      :kms_key_region)
       include Aws::Structure
     end
 
@@ -6761,7 +6980,7 @@ module Aws::MediaConvert
     #                 source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
     #                 time_delta: 1,
     #               },
-    #               source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
+    #               source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE
     #               teletext_source_settings: {
     #                 page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #               },
@@ -6772,6 +6991,23 @@ module Aws::MediaConvert
     #         denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
     #         filter_enable: "AUTO", # accepts AUTO, DISABLE, FORCE
     #         filter_strength: 1,
+    #         image_inserter: {
+    #           insertable_images: [
+    #             {
+    #               duration: 1,
+    #               fade_in: 1,
+    #               fade_out: 1,
+    #               height: 1,
+    #               image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #               image_x: 1,
+    #               image_y: 1,
+    #               layer: 1,
+    #               opacity: 1,
+    #               start_time: "__stringPattern01D20305D205D",
+    #               width: 1,
+    #             },
+    #           ],
+    #         },
     #         input_clippings: [
     #           {
     #             end_timecode: "__stringPattern010920405090509092",
@@ -6851,6 +7087,12 @@ module Aws::MediaConvert
     #   Default is 0.
     #   @return [Integer]
     #
+    # @!attribute [rw] image_inserter
+    #   Enable the Image inserter (ImageInserter) feature to include a
+    #   graphic overlay on your video. Enable or disable this feature for
+    #   each input individually. This setting is disabled by default.
+    #   @return [Types::ImageInserter]
+    #
     # @!attribute [rw] input_clippings
     #   (InputClippings) contains sets of start and end times that together
     #   specify a portion of the input to be used in the outputs. If you
@@ -6901,6 +7143,7 @@ module Aws::MediaConvert
       :denoise_filter,
       :filter_enable,
       :filter_strength,
+      :image_inserter,
       :input_clippings,
       :program_number,
       :psi_control,
@@ -6909,7 +7152,7 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Settings for Insertable Image
+    # Settings that specify how your overlay appears.
     #
     # @note When making an API call, you may pass InsertableImage
     #   data as a hash:
@@ -6929,51 +7172,55 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] duration
-    #   Use Duration (Duration) to set the time, in milliseconds, for the
-    #   image to remain on the output video.
+    #   Set the time, in milliseconds, for the image to remain on the output
+    #   video.
     #   @return [Integer]
     #
     # @!attribute [rw] fade_in
-    #   Use Fade in (FadeIut) to set the length, in milliseconds, of the
-    #   inserted image fade in. If you don't specify a value for Fade in,
-    #   the image will appear abruptly at the Start time.
+    #   Set the length of time, in milliseconds, between the Start time that
+    #   you specify for the image insertion and the time that the image
+    #   appears at full opacity. Full opacity is the level that you specify
+    #   for the opacity setting. If you don't specify a value for Fade-in,
+    #   the image will appear abruptly at the overlay start time.
     #   @return [Integer]
     #
     # @!attribute [rw] fade_out
-    #   Use Fade out (FadeOut) to set the length, in milliseconds, of the
-    #   inserted image fade out. If you don't specify a value for Fade out,
-    #   the image will disappear abruptly at the end of the inserted image
-    #   duration.
+    #   Specify the length of time, in milliseconds, between the end of the
+    #   time that you have specified for the image overlay Duration and when
+    #   the overlaid image has faded to total transparency. If you don't
+    #   specify a value for Fade-out, the image will disappear abruptly at
+    #   the end of the inserted image duration.
     #   @return [Integer]
     #
     # @!attribute [rw] height
-    #   Specify the Height (Height) of the inserted image. Use a value that
-    #   is less than or equal to the video resolution height. Leave this
-    #   setting blank to use the native height of the image.
+    #   Specify the height of the inserted image in pixels. If you specify a
+    #   value that's larger than the video resolution height, the service
+    #   will crop your overlaid image to fit. To use the native height of
+    #   the image, keep this setting blank.
     #   @return [Integer]
     #
     # @!attribute [rw] image_inserter_input
     #   Use Image location (imageInserterInput) to specify the Amazon S3
-    #   location of the image to be inserted into the output. Use a 32 bit
-    #   BMP, PNG, or TGA file that fits inside the video frame.
+    #   location of the image to be inserted into the output. Use a PNG or
+    #   TGA file that fits inside the video frame.
     #   @return [String]
     #
     # @!attribute [rw] image_x
     #   Use Left (ImageX) to set the distance, in pixels, between the
-    #   inserted image and the left edge of the frame. Required for BMP, PNG
-    #   and TGA input.
+    #   inserted image and the left edge of the video frame. Required for
+    #   any image overlay that you specify.
     #   @return [Integer]
     #
     # @!attribute [rw] image_y
     #   Use Top (ImageY) to set the distance, in pixels, between the
-    #   inserted image and the top edge of the video frame. Required for
-    #   BMP, PNG and TGA input.
+    #   overlaid image and the top edge of the video frame. Required for any
+    #   image overlay that you specify.
     #   @return [Integer]
     #
     # @!attribute [rw] layer
-    #   Use Layer (Layer) to specify how overlapping inserted images appear.
-    #   Images with higher values of layer appear on top of images with
-    #   lower values of layer.
+    #   Specify how overlapping inserted images appear. Images with higher
+    #   values for Layer appear on top of images with lower values for
+    #   Layer.
     #   @return [Integer]
     #
     # @!attribute [rw] opacity
@@ -6989,9 +7236,10 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] width
-    #   Specify the Width (Width) of the inserted image. Use a value that is
-    #   less than or equal to the video resolution width. Leave this setting
-    #   blank to use the native width of the image.
+    #   Specify the width of the inserted image in pixels. If you specify a
+    #   value that's larger than the video resolution width, the service
+    #   will crop your overlaid image to fit. To use the native width of the
+    #   image, keep this setting blank.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/InsertableImage AWS API Documentation
@@ -7168,7 +7416,7 @@ module Aws::MediaConvert
     #                     source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
     #                     time_delta: 1,
     #                   },
-    #                   source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
+    #                   source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE
     #                   teletext_source_settings: {
     #                     page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                   },
@@ -7176,10 +7424,33 @@ module Aws::MediaConvert
     #               },
     #             },
     #             deblock_filter: "ENABLED", # accepts ENABLED, DISABLED
+    #             decryption_settings: {
+    #               decryption_mode: "AES_CTR", # accepts AES_CTR, AES_CBC, AES_GCM
+    #               encrypted_decryption_key: "__stringMin24Max512PatternAZaZ0902",
+    #               initialization_vector: "__stringMin16Max24PatternAZaZ0922AZaZ0916",
+    #               kms_key_region: "__stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912",
+    #             },
     #             denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
     #             file_input: "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MM",
     #             filter_enable: "AUTO", # accepts AUTO, DISABLE, FORCE
     #             filter_strength: 1,
+    #             image_inserter: {
+    #               insertable_images: [
+    #                 {
+    #                   duration: 1,
+    #                   fade_in: 1,
+    #                   fade_out: 1,
+    #                   height: 1,
+    #                   image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                   image_x: 1,
+    #                   image_y: 1,
+    #                   layer: 1,
+    #                   opacity: 1,
+    #                   start_time: "__stringPattern01D20305D205D",
+    #                   width: 1,
+    #                 },
+    #               ],
+    #             },
     #             input_clippings: [
     #               {
     #                 end_timecode: "__stringPattern010920405090509092",
@@ -7211,6 +7482,20 @@ module Aws::MediaConvert
     #             },
     #           },
     #         ],
+    #         motion_image_inserter: {
+    #           framerate: {
+    #             framerate_denominator: 1,
+    #             framerate_numerator: 1,
+    #           },
+    #           input: "__stringMin14Max1285PatternS3Mov09Png",
+    #           insertion_mode: "MOV", # accepts MOV, PNG
+    #           offset: {
+    #             image_x: 1,
+    #             image_y: 1,
+    #           },
+    #           playback: "ONCE", # accepts ONCE, REPEAT
+    #           start_time: "__stringMin11Max11Pattern01D20305D205D",
+    #         },
     #         nielsen_configuration: {
     #           breakout_code: 1,
     #           distributor_id: "__string",
@@ -7253,6 +7538,7 @@ module Aws::MediaConvert
     #                 destination: "__stringPatternS3",
     #                 encryption: {
     #                   speke_key_provider: {
+    #                     certificate_arn: "__stringPatternArnAwsAcm",
     #                     resource_id: "__string",
     #                     system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                     url: "__stringPatternHttps",
@@ -7289,6 +7575,7 @@ module Aws::MediaConvert
     #                   encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                   initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   speke_key_provider: {
+    #                     certificate_arn: "__stringPatternArnAwsAcm",
     #                     resource_id: "__string",
     #                     system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                     url: "__stringPatternHttps",
@@ -7321,6 +7608,7 @@ module Aws::MediaConvert
     #                 destination: "__stringPatternS3",
     #                 encryption: {
     #                   speke_key_provider: {
+    #                     certificate_arn: "__stringPatternArnAwsAcm",
     #                     resource_id: "__string",
     #                     system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                     url: "__stringPatternHttps",
@@ -7449,7 +7737,7 @@ module Aws::MediaConvert
     #                         x_position: 1,
     #                         y_position: 1,
     #                       },
-    #                       destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #                       destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                       dvb_sub_destination_settings: {
     #                         alignment: "CENTERED", # accepts CENTERED, LEFT
     #                         background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -7843,6 +8131,11 @@ module Aws::MediaConvert
     #   concantenated together to create the output.
     #   @return [Array<Types::Input>]
     #
+    # @!attribute [rw] motion_image_inserter
+    #   Overlay motion graphics on top of your video. The motion graphics
+    #   that you specify here appear on all outputs in all output groups.
+    #   @return [Types::MotionImageInserter]
+    #
     # @!attribute [rw] nielsen_configuration
     #   Settings for Nielsen Configuration
     #   @return [Types::NielsenConfiguration]
@@ -7880,6 +8173,7 @@ module Aws::MediaConvert
       :ad_avail_offset,
       :avail_blanking,
       :inputs,
+      :motion_image_inserter,
       :nielsen_configuration,
       :output_groups,
       :timecode_config,
@@ -8010,7 +8304,7 @@ module Aws::MediaConvert
     #                     source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
     #                     time_delta: 1,
     #                   },
-    #                   source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
+    #                   source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE
     #                   teletext_source_settings: {
     #                     page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                   },
@@ -8021,6 +8315,23 @@ module Aws::MediaConvert
     #             denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
     #             filter_enable: "AUTO", # accepts AUTO, DISABLE, FORCE
     #             filter_strength: 1,
+    #             image_inserter: {
+    #               insertable_images: [
+    #                 {
+    #                   duration: 1,
+    #                   fade_in: 1,
+    #                   fade_out: 1,
+    #                   height: 1,
+    #                   image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                   image_x: 1,
+    #                   image_y: 1,
+    #                   layer: 1,
+    #                   opacity: 1,
+    #                   start_time: "__stringPattern01D20305D205D",
+    #                   width: 1,
+    #                 },
+    #               ],
+    #             },
     #             input_clippings: [
     #               {
     #                 end_timecode: "__stringPattern010920405090509092",
@@ -8052,6 +8363,20 @@ module Aws::MediaConvert
     #             },
     #           },
     #         ],
+    #         motion_image_inserter: {
+    #           framerate: {
+    #             framerate_denominator: 1,
+    #             framerate_numerator: 1,
+    #           },
+    #           input: "__stringMin14Max1285PatternS3Mov09Png",
+    #           insertion_mode: "MOV", # accepts MOV, PNG
+    #           offset: {
+    #             image_x: 1,
+    #             image_y: 1,
+    #           },
+    #           playback: "ONCE", # accepts ONCE, REPEAT
+    #           start_time: "__stringMin11Max11Pattern01D20305D205D",
+    #         },
     #         nielsen_configuration: {
     #           breakout_code: 1,
     #           distributor_id: "__string",
@@ -8094,6 +8419,7 @@ module Aws::MediaConvert
     #                 destination: "__stringPatternS3",
     #                 encryption: {
     #                   speke_key_provider: {
+    #                     certificate_arn: "__stringPatternArnAwsAcm",
     #                     resource_id: "__string",
     #                     system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                     url: "__stringPatternHttps",
@@ -8130,6 +8456,7 @@ module Aws::MediaConvert
     #                   encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                   initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   speke_key_provider: {
+    #                     certificate_arn: "__stringPatternArnAwsAcm",
     #                     resource_id: "__string",
     #                     system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                     url: "__stringPatternHttps",
@@ -8162,6 +8489,7 @@ module Aws::MediaConvert
     #                 destination: "__stringPatternS3",
     #                 encryption: {
     #                   speke_key_provider: {
+    #                     certificate_arn: "__stringPatternArnAwsAcm",
     #                     resource_id: "__string",
     #                     system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                     url: "__stringPatternHttps",
@@ -8290,7 +8618,7 @@ module Aws::MediaConvert
     #                         x_position: 1,
     #                         y_position: 1,
     #                       },
-    #                       destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #                       destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                       dvb_sub_destination_settings: {
     #                         alignment: "CENTERED", # accepts CENTERED, LEFT
     #                         background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -8684,6 +9012,11 @@ module Aws::MediaConvert
     #   you can include multiple inputs when referencing a job template.
     #   @return [Array<Types::InputTemplate>]
     #
+    # @!attribute [rw] motion_image_inserter
+    #   Overlay motion graphics on top of your video. The motion graphics
+    #   that you specify here appear on all outputs in all output groups.
+    #   @return [Types::MotionImageInserter]
+    #
     # @!attribute [rw] nielsen_configuration
     #   Settings for Nielsen Configuration
     #   @return [Types::NielsenConfiguration]
@@ -8721,6 +9054,7 @@ module Aws::MediaConvert
       :ad_avail_offset,
       :avail_blanking,
       :inputs,
+      :motion_image_inserter,
       :nielsen_configuration,
       :output_groups,
       :timecode_config,
@@ -9481,6 +9815,161 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Overlay motion graphics on top of your video at the time that you
+    # specify.
+    #
+    # @note When making an API call, you may pass MotionImageInserter
+    #   data as a hash:
+    #
+    #       {
+    #         framerate: {
+    #           framerate_denominator: 1,
+    #           framerate_numerator: 1,
+    #         },
+    #         input: "__stringMin14Max1285PatternS3Mov09Png",
+    #         insertion_mode: "MOV", # accepts MOV, PNG
+    #         offset: {
+    #           image_x: 1,
+    #           image_y: 1,
+    #         },
+    #         playback: "ONCE", # accepts ONCE, REPEAT
+    #         start_time: "__stringMin11Max11Pattern01D20305D205D",
+    #       }
+    #
+    # @!attribute [rw] framerate
+    #   If your motion graphic asset is a .mov file, keep this setting
+    #   unspecified. If your motion graphic asset is a series of .png files,
+    #   specify the framerate of the overlay in frames per second, as a
+    #   fraction. For example, specify 24 fps as 24/1. Make sure that the
+    #   number of images in your series matches the framerate and your
+    #   intended overlay duration. For example, if you want a 30-second
+    #   overlay at 30 fps, you should have 900 .png images. This overlay
+    #   framerate doesn't need to match the framerate of the underlying
+    #   video.
+    #   @return [Types::MotionImageInsertionFramerate]
+    #
+    # @!attribute [rw] input
+    #   Specify the .mov file or series of .png files that you want to
+    #   overlay on your video. For .png files, provide the file name of the
+    #   first file in the series. Make sure that the names of the .png files
+    #   end with sequential numbers that specify the order that they are
+    #   played in. For example, overlay\_000.png, overlay\_001.png,
+    #   overlay\_002.png, and so on. The sequence must start at zero, and
+    #   each image file name must have the same number of digits. Pad your
+    #   initial file names with enough zeros to complete the sequence. For
+    #   example, if the first image is overlay\_0.png, there can be only 10
+    #   images in the sequence, with the last image being overlay\_9.png.
+    #   But if the first image is overlay\_00.png, there can be 100 images
+    #   in the sequence.
+    #   @return [String]
+    #
+    # @!attribute [rw] insertion_mode
+    #   Choose the type of motion graphic asset that you are providing for
+    #   your overlay. You can choose either a .mov file or a series of .png
+    #   files.
+    #   @return [String]
+    #
+    # @!attribute [rw] offset
+    #   Use Offset to specify the placement of your motion graphic overlay
+    #   on the video frame. Specify in pixels, from the upper-left corner of
+    #   the frame. If you don't specify an offset, the service scales your
+    #   overlay to the full size of the frame. Otherwise, the service
+    #   inserts the overlay at its native resolution and scales the size up
+    #   or down with any video scaling.
+    #   @return [Types::MotionImageInsertionOffset]
+    #
+    # @!attribute [rw] playback
+    #   Specify whether your motion graphic overlay repeats on a loop or
+    #   plays only once.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   Specify when the motion overlay begins. Use timecode format
+    #   (HH:MM:SS:FF or HH:MM:SS;FF). Make sure that the timecode you
+    #   provide here takes into account how you have set up your timecode
+    #   configuration under both job settings and input settings. The
+    #   simplest way to do that is to set both to start at 0. If you need to
+    #   set up your job to follow timecodes embedded in your source that
+    #   don't start at zero, make sure that you specify a start time that
+    #   is after the first embedded timecode. For more information, see
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/setting-up-timecode.html
+    #   Find job-wide and input timecode configuration settings in your JSON
+    #   job settings specification at settings>timecodeConfig>source and
+    #   settings>inputs>timecodeSource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MotionImageInserter AWS API Documentation
+    #
+    class MotionImageInserter < Struct.new(
+      :framerate,
+      :input,
+      :insertion_mode,
+      :offset,
+      :playback,
+      :start_time)
+      include Aws::Structure
+    end
+
+    # For motion overlays that don't have a built-in framerate, specify the
+    # framerate of the overlay in frames per second, as a fraction. For
+    # example, specify 24 fps as 24/1. The overlay framerate doesn't need
+    # to match the framerate of the underlying video.
+    #
+    # @note When making an API call, you may pass MotionImageInsertionFramerate
+    #   data as a hash:
+    #
+    #       {
+    #         framerate_denominator: 1,
+    #         framerate_numerator: 1,
+    #       }
+    #
+    # @!attribute [rw] framerate_denominator
+    #   The bottom of the fraction that expresses your overlay framerate.
+    #   For example, if your framerate is 24 fps, set this value to 1.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] framerate_numerator
+    #   The top of the fraction that expresses your overlay framerate. For
+    #   example, if your framerate is 24 fps, set this value to 24.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MotionImageInsertionFramerate AWS API Documentation
+    #
+    class MotionImageInsertionFramerate < Struct.new(
+      :framerate_denominator,
+      :framerate_numerator)
+      include Aws::Structure
+    end
+
+    # Specify the offset between the upper-left corner of the video frame
+    # and the top left corner of the overlay.
+    #
+    # @note When making an API call, you may pass MotionImageInsertionOffset
+    #   data as a hash:
+    #
+    #       {
+    #         image_x: 1,
+    #         image_y: 1,
+    #       }
+    #
+    # @!attribute [rw] image_x
+    #   Set the distance, in pixels, between the overlay and the left edge
+    #   of the video frame.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] image_y
+    #   Set the distance, in pixels, between the overlay and the top edge of
+    #   the video frame.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MotionImageInsertionOffset AWS API Documentation
+    #
+    class MotionImageInsertionOffset < Struct.new(
+      :image_x,
+      :image_y)
+      include Aws::Structure
+    end
+
     # Settings for MOV Container.
     #
     # @note When making an API call, you may pass MovSettings
@@ -9893,6 +10382,7 @@ module Aws::MediaConvert
     #
     #       {
     #         speke_key_provider: {
+    #           certificate_arn: "__stringPatternArnAwsAcm",
     #           resource_id: "__string",
     #           system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #           url: "__stringPatternHttps",
@@ -9921,6 +10411,7 @@ module Aws::MediaConvert
     #         destination: "__stringPatternS3",
     #         encryption: {
     #           speke_key_provider: {
+    #             certificate_arn: "__stringPatternArnAwsAcm",
     #             resource_id: "__string",
     #             system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #             url: "__stringPatternHttps",
@@ -10228,7 +10719,7 @@ module Aws::MediaConvert
     #                 x_position: 1,
     #                 y_position: 1,
     #               },
-    #               destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #               destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #               dvb_sub_destination_settings: {
     #                 alignment: "CENTERED", # accepts CENTERED, LEFT
     #                 background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -10738,6 +11229,7 @@ module Aws::MediaConvert
     #             destination: "__stringPatternS3",
     #             encryption: {
     #               speke_key_provider: {
+    #                 certificate_arn: "__stringPatternArnAwsAcm",
     #                 resource_id: "__string",
     #                 system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                 url: "__stringPatternHttps",
@@ -10774,6 +11266,7 @@ module Aws::MediaConvert
     #               encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #               initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               speke_key_provider: {
+    #                 certificate_arn: "__stringPatternArnAwsAcm",
     #                 resource_id: "__string",
     #                 system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                 url: "__stringPatternHttps",
@@ -10806,6 +11299,7 @@ module Aws::MediaConvert
     #             destination: "__stringPatternS3",
     #             encryption: {
     #               speke_key_provider: {
+    #                 certificate_arn: "__stringPatternArnAwsAcm",
     #                 resource_id: "__string",
     #                 system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                 url: "__stringPatternHttps",
@@ -10934,7 +11428,7 @@ module Aws::MediaConvert
     #                     x_position: 1,
     #                     y_position: 1,
     #                   },
-    #                   destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #                   destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                   dvb_sub_destination_settings: {
     #                     alignment: "CENTERED", # accepts CENTERED, LEFT
     #                     background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -11380,6 +11874,7 @@ module Aws::MediaConvert
     #           destination: "__stringPatternS3",
     #           encryption: {
     #             speke_key_provider: {
+    #               certificate_arn: "__stringPatternArnAwsAcm",
     #               resource_id: "__string",
     #               system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #               url: "__stringPatternHttps",
@@ -11416,6 +11911,7 @@ module Aws::MediaConvert
     #             encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #             initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #             speke_key_provider: {
+    #               certificate_arn: "__stringPatternArnAwsAcm",
     #               resource_id: "__string",
     #               system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #               url: "__stringPatternHttps",
@@ -11448,6 +11944,7 @@ module Aws::MediaConvert
     #           destination: "__stringPatternS3",
     #           encryption: {
     #             speke_key_provider: {
+    #               certificate_arn: "__stringPatternArnAwsAcm",
     #               resource_id: "__string",
     #               system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #               url: "__stringPatternHttps",
@@ -11702,7 +12199,7 @@ module Aws::MediaConvert
     #                 x_position: 1,
     #                 y_position: 1,
     #               },
-    #               destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #               destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #               dvb_sub_destination_settings: {
     #                 alignment: "CENTERED", # accepts CENTERED, LEFT
     #                 background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -12396,7 +12893,7 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] reserved_slots
-    #   Specifies the number of reserved transcode slots (RTSs) for this
+    #   Specifies the number of reserved transcode slots (RTS) for this
     #   queue. The number of RTS determines how many jobs the queue can
     #   process in parallel; each RTS can process one job at a time. To
     #   increase this number, create a replacement contract through the AWS
@@ -12444,7 +12941,7 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] reserved_slots
-    #   Specifies the number of reserved transcode slots (RTSs) for this
+    #   Specifies the number of reserved transcode slots (RTS) for this
     #   queue. The number of RTS determines how many jobs the queue can
     #   process in parallel; each RTS can process one job at a time. To
     #   increase this number, create a replacement contract through the AWS
@@ -12511,10 +13008,17 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
+    #         certificate_arn: "__stringPatternArnAwsAcm",
     #         resource_id: "__string",
     #         system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #         url: "__stringPatternHttps",
     #       }
+    #
+    # @!attribute [rw] certificate_arn
+    #   Optional AWS Certificate Manager ARN for a certificate to send to
+    #   the keyprovider. The certificate holds a key used by the keyprovider
+    #   to encrypt the keys in its response.
+    #   @return [String]
     #
     # @!attribute [rw] resource_id
     #   The SPEKE-compliant server uses Resource ID (ResourceId) to identify
@@ -12535,13 +13039,14 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/SpekeKeyProvider AWS API Documentation
     #
     class SpekeKeyProvider < Struct.new(
+      :certificate_arn,
       :resource_id,
       :system_ids,
       :url)
       include Aws::Structure
     end
 
-    # Settings for use with a SPEKE key provider.
+    # Use these settings to set up encryption with a static key provider.
     #
     # @note When making an API call, you may pass StaticKeyProvider
     #   data as a hash:
@@ -12962,7 +13467,7 @@ module Aws::MediaConvert
     #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
     #                       time_delta: 1,
     #                     },
-    #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
+    #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE
     #                     teletext_source_settings: {
     #                       page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                     },
@@ -12973,6 +13478,23 @@ module Aws::MediaConvert
     #               denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
     #               filter_enable: "AUTO", # accepts AUTO, DISABLE, FORCE
     #               filter_strength: 1,
+    #               image_inserter: {
+    #                 insertable_images: [
+    #                   {
+    #                     duration: 1,
+    #                     fade_in: 1,
+    #                     fade_out: 1,
+    #                     height: 1,
+    #                     image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                     image_x: 1,
+    #                     image_y: 1,
+    #                     layer: 1,
+    #                     opacity: 1,
+    #                     start_time: "__stringPattern01D20305D205D",
+    #                     width: 1,
+    #                   },
+    #                 ],
+    #               },
     #               input_clippings: [
     #                 {
     #                   end_timecode: "__stringPattern010920405090509092",
@@ -13004,6 +13526,20 @@ module Aws::MediaConvert
     #               },
     #             },
     #           ],
+    #           motion_image_inserter: {
+    #             framerate: {
+    #               framerate_denominator: 1,
+    #               framerate_numerator: 1,
+    #             },
+    #             input: "__stringMin14Max1285PatternS3Mov09Png",
+    #             insertion_mode: "MOV", # accepts MOV, PNG
+    #             offset: {
+    #               image_x: 1,
+    #               image_y: 1,
+    #             },
+    #             playback: "ONCE", # accepts ONCE, REPEAT
+    #             start_time: "__stringMin11Max11Pattern01D20305D205D",
+    #           },
     #           nielsen_configuration: {
     #             breakout_code: 1,
     #             distributor_id: "__string",
@@ -13046,6 +13582,7 @@ module Aws::MediaConvert
     #                   destination: "__stringPatternS3",
     #                   encryption: {
     #                     speke_key_provider: {
+    #                       certificate_arn: "__stringPatternArnAwsAcm",
     #                       resource_id: "__string",
     #                       system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                       url: "__stringPatternHttps",
@@ -13082,6 +13619,7 @@ module Aws::MediaConvert
     #                     encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                     initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     speke_key_provider: {
+    #                       certificate_arn: "__stringPatternArnAwsAcm",
     #                       resource_id: "__string",
     #                       system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                       url: "__stringPatternHttps",
@@ -13114,6 +13652,7 @@ module Aws::MediaConvert
     #                   destination: "__stringPatternS3",
     #                   encryption: {
     #                     speke_key_provider: {
+    #                       certificate_arn: "__stringPatternArnAwsAcm",
     #                       resource_id: "__string",
     #                       system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                       url: "__stringPatternHttps",
@@ -13242,7 +13781,7 @@ module Aws::MediaConvert
     #                           x_position: 1,
     #                           y_position: 1,
     #                         },
-    #                         destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #                         destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                         dvb_sub_destination_settings: {
     #                           alignment: "CENTERED", # accepts CENTERED, LEFT
     #                           background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -13795,7 +14334,7 @@ module Aws::MediaConvert
     #                   x_position: 1,
     #                   y_position: 1,
     #                 },
-    #                 destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #                 destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                 dvb_sub_destination_settings: {
     #                   alignment: "CENTERED", # accepts CENTERED, LEFT
     #                   background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -14407,7 +14946,8 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] codec
-    #   Type of video codec
+    #   Specifies the video codec. This must be equal to one of the enum
+    #   values defined by the object VideoCodec.
     #   @return [String]
     #
     # @!attribute [rw] frame_capture_settings
@@ -14682,13 +15222,13 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] afd_signaling
-    #   This setting only applies to H.264 and MPEG2 outputs. Use Insert AFD
-    #   signaling (AfdSignaling) to specify whether the service includes AFD
-    #   values in the output video data and what those values are. * Choose
-    #   None to remove all AFD values from this output. * Choose Fixed to
-    #   ignore input AFD values and instead encode the value specified in
-    #   the job. * Choose Auto to calculate output AFD values based on the
-    #   input AFD scaler data.
+    #   This setting only applies to H.264, H.265, and MPEG2 outputs. Use
+    #   Insert AFD signaling (AfdSignaling) to specify whether the service
+    #   includes AFD values in the output video data and what those values
+    #   are. * Choose None to remove all AFD values from this output. *
+    #   Choose Fixed to ignore input AFD values and instead encode the value
+    #   specified in the job. * Choose Auto to calculate output AFD values
+    #   based on the input AFD scaler data.
     #   @return [String]
     #
     # @!attribute [rw] anti_alias

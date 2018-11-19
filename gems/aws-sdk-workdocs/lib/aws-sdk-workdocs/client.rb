@@ -329,6 +329,7 @@ module Aws::WorkDocs
     #
     #   resp.share_results #=> Array
     #   resp.share_results[0].principal_id #=> String
+    #   resp.share_results[0].invitee_principal_id #=> String
     #   resp.share_results[0].role #=> String, one of "VIEWER", "CONTRIBUTOR", "OWNER", "COOWNER"
     #   resp.share_results[0].status #=> String, one of "SUCCESS", "FAILURE"
     #   resp.share_results[0].share_id #=> String
@@ -551,15 +552,16 @@ module Aws::WorkDocs
       req.send_request(options)
     end
 
-    # Configure WorkDocs to use Amazon SNS notifications.
+    # Configure Amazon WorkDocs to use Amazon SNS notifications. The
+    # endpoint receives a confirmation message, and must confirm the
+    # subscription.
     #
-    # The endpoint receives a confirmation message, and must confirm the
-    # subscription. For more information, see [Confirm the Subscription][1]
-    # in the *Amazon Simple Notification Service Developer Guide*.
+    # For more information, see [Subscribe to Notifications][1] in the
+    # *Amazon WorkDocs Developer Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/dg/SendMessageToHttp.html#SendMessageToHttp.confirm
+    # [1]: http://docs.aws.amazon.com/workdocs/latest/developerguide/subscribe-notifications.html
     #
     # @option params [required, String] :organization_id
     #   The ID of the organization.
@@ -989,10 +991,23 @@ module Aws::WorkDocs
     #   The ID of the organization. This is a mandatory parameter when using
     #   administrative API (SigV4) requests.
     #
+    # @option params [String] :activity_types
+    #   Specifies which activity types to include in the response. If this
+    #   field is left empty, all activity types are returned.
+    #
+    # @option params [String] :resource_id
+    #   The document or folder ID for which to describe activity types.
+    #
     # @option params [String] :user_id
     #   The ID of the user who performed the action. The response includes
     #   activities pertaining to this user. This is an optional parameter and
     #   is only applicable for administrative API (SigV4) requests.
+    #
+    # @option params [Boolean] :include_indirect_activities
+    #   Includes indirect activities. An indirect activity results from a
+    #   direct activity performed on a parent resource. For example, sharing a
+    #   parent folder (the direct activity) shares all of the subfolders and
+    #   documents within the parent folder (the indirect activity).
     #
     # @option params [Integer] :limit
     #   The maximum number of items to return.
@@ -1012,7 +1027,10 @@ module Aws::WorkDocs
     #     start_time: Time.now,
     #     end_time: Time.now,
     #     organization_id: "IdType",
+    #     activity_types: "ActivityNamesFilterType",
+    #     resource_id: "IdType",
     #     user_id: "IdType",
+    #     include_indirect_activities: false,
     #     limit: 1,
     #     marker: "MarkerType",
     #   })
@@ -1020,8 +1038,9 @@ module Aws::WorkDocs
     # @example Response structure
     #
     #   resp.user_activities #=> Array
-    #   resp.user_activities[0].type #=> String, one of "DOCUMENT_CHECKED_IN", "DOCUMENT_CHECKED_OUT", "DOCUMENT_RENAMED", "DOCUMENT_VERSION_UPLOADED", "DOCUMENT_VERSION_DELETED", "DOCUMENT_RECYCLED", "DOCUMENT_RESTORED", "DOCUMENT_REVERTED", "DOCUMENT_SHARED", "DOCUMENT_UNSHARED", "DOCUMENT_SHARE_PERMISSION_CHANGED", "DOCUMENT_SHAREABLE_LINK_CREATED", "DOCUMENT_SHAREABLE_LINK_REMOVED", "DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED", "DOCUMENT_MOVED", "DOCUMENT_COMMENT_ADDED", "DOCUMENT_COMMENT_DELETED", "DOCUMENT_ANNOTATION_ADDED", "DOCUMENT_ANNOTATION_DELETED", "FOLDER_CREATED", "FOLDER_DELETED", "FOLDER_RENAMED", "FOLDER_RECYCLED", "FOLDER_RESTORED", "FOLDER_SHARED", "FOLDER_UNSHARED", "FOLDER_SHARE_PERMISSION_CHANGED", "FOLDER_SHAREABLE_LINK_CREATED", "FOLDER_SHAREABLE_LINK_REMOVED", "FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED", "FOLDER_MOVED"
+    #   resp.user_activities[0].type #=> String, one of "DOCUMENT_CHECKED_IN", "DOCUMENT_CHECKED_OUT", "DOCUMENT_RENAMED", "DOCUMENT_VERSION_UPLOADED", "DOCUMENT_VERSION_DELETED", "DOCUMENT_VERSION_VIEWED", "DOCUMENT_VERSION_DOWNLOADED", "DOCUMENT_RECYCLED", "DOCUMENT_RESTORED", "DOCUMENT_REVERTED", "DOCUMENT_SHARED", "DOCUMENT_UNSHARED", "DOCUMENT_SHARE_PERMISSION_CHANGED", "DOCUMENT_SHAREABLE_LINK_CREATED", "DOCUMENT_SHAREABLE_LINK_REMOVED", "DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED", "DOCUMENT_MOVED", "DOCUMENT_COMMENT_ADDED", "DOCUMENT_COMMENT_DELETED", "DOCUMENT_ANNOTATION_ADDED", "DOCUMENT_ANNOTATION_DELETED", "FOLDER_CREATED", "FOLDER_DELETED", "FOLDER_RENAMED", "FOLDER_RECYCLED", "FOLDER_RESTORED", "FOLDER_SHARED", "FOLDER_UNSHARED", "FOLDER_SHARE_PERMISSION_CHANGED", "FOLDER_SHAREABLE_LINK_CREATED", "FOLDER_SHAREABLE_LINK_REMOVED", "FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED", "FOLDER_MOVED"
     #   resp.user_activities[0].time_stamp #=> Time
+    #   resp.user_activities[0].is_indirect_activity #=> Boolean
     #   resp.user_activities[0].organization_id #=> String
     #   resp.user_activities[0].initiator.id #=> String
     #   resp.user_activities[0].initiator.username #=> String
@@ -1342,7 +1361,8 @@ module Aws::WorkDocs
       req.send_request(options)
     end
 
-    # Describes the groups specified by query.
+    # Describes the groups specified by the query. Groups are defined by the
+    # underlying Active Directory.
     #
     # @option params [String] :authentication_token
     #   Amazon WorkDocs authentication token. Do not set this field when using
@@ -1493,6 +1513,15 @@ module Aws::WorkDocs
     # the `RecycleBin`. `RootFolder` is the root of user's files and
     # folders and `RecycleBin` is the root of recycled items. This is not a
     # valid action for SigV4 (administrative API) clients.
+    #
+    # This action requires an authentication token. To get an authentication
+    # token, register an application with Amazon WorkDocs. For more
+    # information, see [Authentication and Access Control for User
+    # Applications][1] in the *Amazon WorkDocs Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/workdocs/latest/developerguide/wd-auth-user.html
     #
     # @option params [required, String] :authentication_token
     #   Amazon WorkDocs authentication token. Do not set this field when using
@@ -1976,6 +2005,94 @@ module Aws::WorkDocs
       req.send_request(options)
     end
 
+    # Retrieves a collection of resources, including folders and documents.
+    # The only `CollectionType` supported is `SHARED_WITH_ME`.
+    #
+    # @option params [String] :authentication_token
+    #   The Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API operation
+    #   using AWS credentials.
+    #
+    # @option params [String] :user_id
+    #   The user ID for the resource collection. This is a required field for
+    #   accessing the API operation using IAM credentials.
+    #
+    # @option params [String] :collection_type
+    #   The collection type.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of resources to return.
+    #
+    # @option params [String] :marker
+    #   The marker for the next set of results. This marker was received from
+    #   a previous call.
+    #
+    # @return [Types::GetResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcesResponse#folders #folders} => Array&lt;Types::FolderMetadata&gt;
+    #   * {Types::GetResourcesResponse#documents #documents} => Array&lt;Types::DocumentMetadata&gt;
+    #   * {Types::GetResourcesResponse#marker #marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resources({
+    #     authentication_token: "AuthenticationHeaderType",
+    #     user_id: "IdType",
+    #     collection_type: "SHARED_WITH_ME", # accepts SHARED_WITH_ME
+    #     limit: 1,
+    #     marker: "PageMarkerType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.folders #=> Array
+    #   resp.folders[0].id #=> String
+    #   resp.folders[0].name #=> String
+    #   resp.folders[0].creator_id #=> String
+    #   resp.folders[0].parent_folder_id #=> String
+    #   resp.folders[0].created_timestamp #=> Time
+    #   resp.folders[0].modified_timestamp #=> Time
+    #   resp.folders[0].resource_state #=> String, one of "ACTIVE", "RESTORING", "RECYCLING", "RECYCLED"
+    #   resp.folders[0].signature #=> String
+    #   resp.folders[0].labels #=> Array
+    #   resp.folders[0].labels[0] #=> String
+    #   resp.folders[0].size #=> Integer
+    #   resp.folders[0].latest_version_size #=> Integer
+    #   resp.documents #=> Array
+    #   resp.documents[0].id #=> String
+    #   resp.documents[0].creator_id #=> String
+    #   resp.documents[0].parent_folder_id #=> String
+    #   resp.documents[0].created_timestamp #=> Time
+    #   resp.documents[0].modified_timestamp #=> Time
+    #   resp.documents[0].latest_version_metadata.id #=> String
+    #   resp.documents[0].latest_version_metadata.name #=> String
+    #   resp.documents[0].latest_version_metadata.content_type #=> String
+    #   resp.documents[0].latest_version_metadata.size #=> Integer
+    #   resp.documents[0].latest_version_metadata.signature #=> String
+    #   resp.documents[0].latest_version_metadata.status #=> String, one of "INITIALIZED", "ACTIVE"
+    #   resp.documents[0].latest_version_metadata.created_timestamp #=> Time
+    #   resp.documents[0].latest_version_metadata.modified_timestamp #=> Time
+    #   resp.documents[0].latest_version_metadata.content_created_timestamp #=> Time
+    #   resp.documents[0].latest_version_metadata.content_modified_timestamp #=> Time
+    #   resp.documents[0].latest_version_metadata.creator_id #=> String
+    #   resp.documents[0].latest_version_metadata.thumbnail #=> Hash
+    #   resp.documents[0].latest_version_metadata.thumbnail["DocumentThumbnailType"] #=> String
+    #   resp.documents[0].latest_version_metadata.source #=> Hash
+    #   resp.documents[0].latest_version_metadata.source["DocumentSourceType"] #=> String
+    #   resp.documents[0].resource_state #=> String, one of "ACTIVE", "RESTORING", "RECYCLING", "RECYCLED"
+    #   resp.documents[0].labels #=> Array
+    #   resp.documents[0].labels[0] #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetResources AWS API Documentation
+    #
+    # @overload get_resources(params = {})
+    # @param [Hash] params ({})
+    def get_resources(params = {}, options = {})
+      req = build_request(:get_resources, params)
+      req.send_request(options)
+    end
+
     # Creates a new document object and version object.
     #
     # The client specifies the parent folder ID and name of the document to
@@ -2355,7 +2472,7 @@ module Aws::WorkDocs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workdocs'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

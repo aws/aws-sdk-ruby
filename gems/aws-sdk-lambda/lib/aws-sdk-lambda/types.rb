@@ -363,10 +363,17 @@ module Aws::Lambda
     #
     # @!attribute [rw] event_source_arn
     #   The Amazon Resource Name (ARN) of the event source.
+    #
+    #   * **Amazon Kinesis** - The ARN of the data stream or a stream
+    #     consumer.
+    #
+    #   * **Amazon DynamoDB Streams** - The ARN of the stream.
+    #
+    #   * **Amazon Simple Queue Service** - The ARN of the queue.
     #   @return [String]
     #
     # @!attribute [rw] function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -381,47 +388,32 @@ module Aws::Lambda
     #   * **Partial ARN** - `123456789012:function:MyFunction`.
     #
     #   The length constraint applies only to the full ARN. If you specify
-    #   only the function name, it is limited to 64 characters in length.
+    #   only the function name, it's limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   Set to false to disable the event source upon creation.
+    #   Disables the event source mapping to pause polling and invocation.
     #   @return [Boolean]
     #
     # @!attribute [rw] batch_size
-    #   The largest number of records that AWS Lambda will retrieve from
-    #   your event source at the time of invoking your function. Your
-    #   function receives an event with all the retrieved records. The
-    #   default for Amazon Kinesis and Amazon DynamoDB is 100 records. Both
-    #   the default and maximum for Amazon SQS are 10 messages.
+    #   The maximum number of items to retrieve in a single batch.
+    #
+    #   * **Amazon Kinesis** - Default 100. Max 10,000.
+    #
+    #   * **Amazon DynamoDB Streams** - Default 100. Max 1,000.
+    #
+    #   * **Amazon Simple Queue Service** - Default 10. Max 10.
     #   @return [Integer]
     #
     # @!attribute [rw] starting_position
-    #   The position in the DynamoDB or Kinesis stream where AWS Lambda
-    #   should start reading. For more information, see
-    #   [GetShardIterator][1] in the *Amazon Kinesis API Reference Guide* or
-    #   [GetShardIterator][2] in the *Amazon DynamoDB API Reference Guide*.
-    #   The `AT_TIMESTAMP` value is supported only for [Kinesis streams][3].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_streams_GetShardIterator.html
-    #   [3]: http://docs.aws.amazon.com/streams/latest/dev/amazon-kinesis-streams.html
+    #   The position in a stream from which to start reading. Required for
+    #   Amazon Kinesis and Amazon DynamoDB Streams sources. `AT_TIMESTAMP`
+    #   is only supported for Amazon Kinesis streams.
     #   @return [String]
     #
     # @!attribute [rw] starting_position_timestamp
-    #   The timestamp of the data record from which to start reading. Used
-    #   with [shard iterator type][1] AT\_TIMESTAMP. If a record with this
-    #   exact timestamp does not exist, the iterator returned is for the
-    #   next (later) record. If the timestamp is older than the current trim
-    #   horizon, the iterator returned is for the oldest untrimmed data
-    #   record (TRIM\_HORIZON). Valid only for [Kinesis streams][2].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType
-    #   [2]: http://docs.aws.amazon.com/streams/latest/dev/amazon-kinesis-streams.html
+    #   With `StartingPosition` set to `AT_TIMESTAMP`, the Unix time in
+    #   seconds from which to start reading.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMappingRequest AWS API Documentation
@@ -441,7 +433,7 @@ module Aws::Lambda
     #
     #       {
     #         function_name: "FunctionName", # required
-    #         runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x
+    #         runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x
     #         role: "RoleArn", # required
     #         handler: "Handler", # required
     #         code: { # required
@@ -671,7 +663,7 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] uuid
-    #   The event source mapping ID.
+    #   The identifier of the event source mapping.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteEventSourceMappingRequest AWS API Documentation
@@ -807,49 +799,44 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # Describes mapping between an Amazon Kinesis or DynamoDB stream and a
-    # Lambda function.
+    # A mapping between an AWS resource and an AWS Lambda function. See
+    # CreateEventSourceMapping for details.
     #
     # @!attribute [rw] uuid
-    #   The AWS Lambda assigned opaque identifier for the mapping.
+    #   The identifier of the event source mapping.
     #   @return [String]
     #
     # @!attribute [rw] batch_size
-    #   The largest number of records that AWS Lambda will retrieve from
-    #   your event source at the time of invoking your function. Your
-    #   function receives an event with all the retrieved records.
+    #   The maximum number of items to retrieve in a single batch.
     #   @return [Integer]
     #
     # @!attribute [rw] event_source_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Kinesis or DynamoDB
-    #   stream that is the source of events.
+    #   The Amazon Resource Name (ARN) of the event source.
     #   @return [String]
     #
     # @!attribute [rw] function_arn
-    #   The Lambda function to invoke when AWS Lambda detects an event on
-    #   the poll-based source.
+    #   The ARN of the Lambda function.
     #   @return [String]
     #
     # @!attribute [rw] last_modified
-    #   The UTC time string indicating the last time the event mapping was
-    #   updated.
+    #   The date that the event source mapping was last updated, in Unix
+    #   time seconds.
     #   @return [Time]
     #
     # @!attribute [rw] last_processing_result
     #   The result of the last AWS Lambda invocation of your Lambda
-    #   function. This value will be null if an SQS queue is the event
-    #   source.
+    #   function.
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The state of the event source mapping. It can be `Creating`,
-    #   `Enabled`, `Disabled`, `Enabling`, `Disabling`, `Updating`, or
-    #   `Deleting`.
+    #   The state of the event source mapping. It can be one of the
+    #   following: `Creating`, `Enabling`, `Enabled`, `Disabling`,
+    #   `Disabled`, `Updating`, or `Deleting`.
     #   @return [String]
     #
     # @!attribute [rw] state_transition_reason
-    #   The reason the event source mapping is in its current state. It is
-    #   either user-requested or an AWS Lambda-initiated state transition.
+    #   The cause of the last state change, either `User initiated` or
+    #   `Lambda initiated`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EventSourceMappingConfiguration AWS API Documentation
@@ -1103,7 +1090,7 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] uuid
-    #   The AWS Lambda assigned ID of the event source mapping.
+    #   The identifier of the event source mapping.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetEventSourceMappingRequest AWS API Documentation
@@ -1572,12 +1559,18 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] event_source_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Kinesis or DynamoDB
-    #   stream. (This parameter is optional.)
+    #   The Amazon Resource Name (ARN) of the event source.
+    #
+    #   * **Amazon Kinesis** - The ARN of the data stream or a stream
+    #     consumer.
+    #
+    #   * **Amazon DynamoDB Streams** - The ARN of the stream.
+    #
+    #   * **Amazon Simple Queue Service** - The ARN of the queue.
     #   @return [String]
     #
     # @!attribute [rw] function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1592,18 +1585,15 @@ module Aws::Lambda
     #   * **Partial ARN** - `123456789012:function:MyFunction`.
     #
     #   The length constraint applies only to the full ARN. If you specify
-    #   only the function name, it is limited to 64 characters in length.
+    #   only the function name, it's limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] marker
-    #   Optional string. An opaque pagination token returned from a previous
-    #   `ListEventSourceMappings` operation. If present, specifies to
-    #   continue the list from where the returning call left off.
+    #   A pagination token returned by a previous call.
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Optional integer. Specifies the maximum number of event sources to
-    #   return in response. This value must be greater than 0.
+    #   The maximum number of event source mappings to return.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappingsRequest AWS API Documentation
@@ -1616,14 +1606,13 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # Contains a list of event sources (see EventSourceMappingConfiguration)
-    #
     # @!attribute [rw] next_marker
-    #   A string, present if there are more event source mappings.
+    #   A pagination token that's returned when the response doesn't
+    #   contain all event source mappings.
     #   @return [String]
     #
     # @!attribute [rw] event_source_mappings
-    #   An array of `EventSourceMappingConfiguration` objects.
+    #   A list of event source mappings.
     #   @return [Array<Types::EventSourceMappingConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappingsResponse AWS API Documentation
@@ -2142,11 +2131,11 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] uuid
-    #   The event source mapping identifier.
+    #   The identifier of the event source mapping.
     #   @return [String]
     #
     # @!attribute [rw] function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2161,18 +2150,21 @@ module Aws::Lambda
     #   * **Partial ARN** - `123456789012:function:MyFunction`.
     #
     #   The length constraint applies only to the full ARN. If you specify
-    #   only the function name, it is limited to 64 characters in length.
+    #   only the function name, it's limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   Specifies whether AWS Lambda should actively poll the stream or not.
-    #   If disabled, AWS Lambda will not poll the stream.
+    #   Disables the event source mapping to pause polling and invocation.
     #   @return [Boolean]
     #
     # @!attribute [rw] batch_size
-    #   The largest number of records that AWS Lambda will retrieve from
-    #   your event source at the time of invoking your function. Your
-    #   function receives an event with all the retrieved records.
+    #   The maximum number of items to retrieve in a single batch.
+    #
+    #   * **Amazon Kinesis** - Default 100. Max 10,000.
+    #
+    #   * **Amazon DynamoDB Streams** - Default 100. Max 1,000.
+    #
+    #   * **Amazon Simple Queue Service** - Default 10. Max 10.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMappingRequest AWS API Documentation
@@ -2301,7 +2293,7 @@ module Aws::Lambda
     #             "EnvironmentVariableName" => "EnvironmentVariableValue",
     #           },
     #         },
-    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x
+    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x
     #         dead_letter_config: {
     #           target_arn: "ResourceArn",
     #         },

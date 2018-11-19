@@ -340,6 +340,13 @@ module Aws::CloudTrail
     #
     #   * 12345678-1234-1234-1234-123456789012
     #
+    # @option params [Boolean] :is_organization_trail
+    #   Specifies whether the trail is created for all accounts in an
+    #   organization in AWS Organizations, or only for the current AWS
+    #   account. The default is false, and cannot be true unless the call is
+    #   made on behalf of an AWS account that is the master account for an
+    #   organization in AWS Organizations.
+    #
     # @return [Types::CreateTrailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTrailResponse#name #name} => String
@@ -354,6 +361,7 @@ module Aws::CloudTrail
     #   * {Types::CreateTrailResponse#cloud_watch_logs_log_group_arn #cloud_watch_logs_log_group_arn} => String
     #   * {Types::CreateTrailResponse#cloud_watch_logs_role_arn #cloud_watch_logs_role_arn} => String
     #   * {Types::CreateTrailResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::CreateTrailResponse#is_organization_trail #is_organization_trail} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -368,6 +376,7 @@ module Aws::CloudTrail
     #     cloud_watch_logs_log_group_arn: "String",
     #     cloud_watch_logs_role_arn: "String",
     #     kms_key_id: "String",
+    #     is_organization_trail: false,
     #   })
     #
     # @example Response structure
@@ -384,6 +393,7 @@ module Aws::CloudTrail
     #   resp.cloud_watch_logs_log_group_arn #=> String
     #   resp.cloud_watch_logs_role_arn #=> String
     #   resp.kms_key_id #=> String
+    #   resp.is_organization_trail #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateTrail AWS API Documentation
     #
@@ -450,7 +460,10 @@ module Aws::CloudTrail
     # @option params [Boolean] :include_shadow_trails
     #   Specifies whether to include shadow trails in the response. A shadow
     #   trail is the replication in a region of a trail that was created in a
-    #   different region. The default is true.
+    #   different region, or in the case of an organization trail, the
+    #   replication of an organization trail in member accounts. If you do not
+    #   include shadow trails, organization trails in a member account and
+    #   region replication trails will not be returned. The default is true.
     #
     # @return [Types::DescribeTrailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -480,6 +493,7 @@ module Aws::CloudTrail
     #   resp.trail_list[0].cloud_watch_logs_role_arn #=> String
     #   resp.trail_list[0].kms_key_id #=> String
     #   resp.trail_list[0].has_custom_event_selectors #=> Boolean
+    #   resp.trail_list[0].is_organization_trail #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeTrails AWS API Documentation
     #
@@ -1142,6 +1156,18 @@ module Aws::CloudTrail
     #
     #   * 12345678-1234-1234-1234-123456789012
     #
+    # @option params [Boolean] :is_organization_trail
+    #   Specifies whether the trail is applied to all accounts in an
+    #   organization in AWS Organizations, or only for the current AWS
+    #   account. The default is false, and cannot be true unless the call is
+    #   made on behalf of an AWS account that is the master account for an
+    #   organization in AWS Organizations. If the trail is not an organization
+    #   trail and this is set to true, the trail will be created in all AWS
+    #   accounts that belong to the organization. If the trail is an
+    #   organization trail and this is set to false, the trail will remain in
+    #   the current AWS account but be deleted from all member accounts in the
+    #   organization.
+    #
     # @return [Types::UpdateTrailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateTrailResponse#name #name} => String
@@ -1156,6 +1182,7 @@ module Aws::CloudTrail
     #   * {Types::UpdateTrailResponse#cloud_watch_logs_log_group_arn #cloud_watch_logs_log_group_arn} => String
     #   * {Types::UpdateTrailResponse#cloud_watch_logs_role_arn #cloud_watch_logs_role_arn} => String
     #   * {Types::UpdateTrailResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::UpdateTrailResponse#is_organization_trail #is_organization_trail} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -1170,6 +1197,7 @@ module Aws::CloudTrail
     #     cloud_watch_logs_log_group_arn: "String",
     #     cloud_watch_logs_role_arn: "String",
     #     kms_key_id: "String",
+    #     is_organization_trail: false,
     #   })
     #
     # @example Response structure
@@ -1186,6 +1214,7 @@ module Aws::CloudTrail
     #   resp.cloud_watch_logs_log_group_arn #=> String
     #   resp.cloud_watch_logs_role_arn #=> String
     #   resp.kms_key_id #=> String
+    #   resp.is_organization_trail #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateTrail AWS API Documentation
     #
@@ -1209,7 +1238,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

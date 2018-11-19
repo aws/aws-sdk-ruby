@@ -646,6 +646,7 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device.instances[0].instance_profile.reboot_after_use #=> Boolean
     #   resp.remote_access_session.device.instances[0].instance_profile.name #=> String
     #   resp.remote_access_session.device.instances[0].instance_profile.description #=> String
+    #   resp.remote_access_session.device.availability #=> String, one of "TEMPORARY_NOT_AVAILABLE", "BUSY", "AVAILABLE", "HIGHLY_AVAILABLE"
     #   resp.remote_access_session.instance_arn #=> String
     #   resp.remote_access_session.remote_debug_enabled #=> Boolean
     #   resp.remote_access_session.remote_record_enabled #=> Boolean
@@ -723,6 +724,26 @@ module Aws::DeviceFarm
     #   * XCTEST\_TEST\_PACKAGE: An XCode test package upload.
     #
     #   * XCTEST\_UI\_TEST\_PACKAGE: An XCode UI test package upload.
+    #
+    #   * APPIUM\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test spec
+    #     upload.
+    #
+    #   * APPIUM\_JAVA\_TESTNG\_TEST\_SPEC: An Appium Java TestNG test spec
+    #     upload.
+    #
+    #   * APPIUM\_PYTHON\_TEST\_SPEC: An Appium Python test spec upload.
+    #
+    #   * APPIUM\_WEB\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test spec
+    #     upload.
+    #
+    #   * APPIUM\_WEB\_JAVA\_TESTNG\_TEST\_SPEC: An Appium Java TestNG test
+    #     spec upload.
+    #
+    #   * APPIUM\_WEB\_PYTHON\_TEST\_SPEC: An Appium Python test spec upload.
+    #
+    #   * INSTRUMENTATION\_TEST\_SPEC: An instrumentation test spec upload.
+    #
+    #   * XCTEST\_UI\_TEST\_SPEC: An XCode UI test spec upload.
     #
     #   **Note** If you call `CreateUpload` with `WEB_APP` specified, AWS
     #   Device Farm throws an `ArgumentException` error.
@@ -1230,6 +1251,7 @@ module Aws::DeviceFarm
     #   resp.device.instances[0].instance_profile.reboot_after_use #=> Boolean
     #   resp.device.instances[0].instance_profile.name #=> String
     #   resp.device.instances[0].instance_profile.description #=> String
+    #   resp.device.availability #=> String, one of "TEMPORARY_NOT_AVAILABLE", "BUSY", "AVAILABLE", "HIGHLY_AVAILABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevice AWS API Documentation
     #
@@ -1484,6 +1506,7 @@ module Aws::DeviceFarm
     #   resp.compatible_devices[0].device.instances[0].instance_profile.reboot_after_use #=> Boolean
     #   resp.compatible_devices[0].device.instances[0].instance_profile.name #=> String
     #   resp.compatible_devices[0].device.instances[0].instance_profile.description #=> String
+    #   resp.compatible_devices[0].device.availability #=> String, one of "TEMPORARY_NOT_AVAILABLE", "BUSY", "AVAILABLE", "HIGHLY_AVAILABLE"
     #   resp.compatible_devices[0].compatible #=> Boolean
     #   resp.compatible_devices[0].incompatibility_messages #=> Array
     #   resp.compatible_devices[0].incompatibility_messages[0].message #=> String
@@ -1525,6 +1548,7 @@ module Aws::DeviceFarm
     #   resp.incompatible_devices[0].device.instances[0].instance_profile.reboot_after_use #=> Boolean
     #   resp.incompatible_devices[0].device.instances[0].instance_profile.name #=> String
     #   resp.incompatible_devices[0].device.instances[0].instance_profile.description #=> String
+    #   resp.incompatible_devices[0].device.availability #=> String, one of "TEMPORARY_NOT_AVAILABLE", "BUSY", "AVAILABLE", "HIGHLY_AVAILABLE"
     #   resp.incompatible_devices[0].compatible #=> Boolean
     #   resp.incompatible_devices[0].incompatibility_messages #=> Array
     #   resp.incompatible_devices[0].incompatibility_messages[0].message #=> String
@@ -1657,6 +1681,7 @@ module Aws::DeviceFarm
     #   resp.job.device.instances[0].instance_profile.reboot_after_use #=> Boolean
     #   resp.job.device.instances[0].instance_profile.name #=> String
     #   resp.job.device.instances[0].instance_profile.description #=> String
+    #   resp.job.device.availability #=> String, one of "TEMPORARY_NOT_AVAILABLE", "BUSY", "AVAILABLE", "HIGHLY_AVAILABLE"
     #   resp.job.instance_arn #=> String
     #   resp.job.device_minutes.total #=> Float
     #   resp.job.device_minutes.metered #=> Float
@@ -1937,6 +1962,7 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device.instances[0].instance_profile.reboot_after_use #=> Boolean
     #   resp.remote_access_session.device.instances[0].instance_profile.name #=> String
     #   resp.remote_access_session.device.instances[0].instance_profile.description #=> String
+    #   resp.remote_access_session.device.availability #=> String, one of "TEMPORARY_NOT_AVAILABLE", "BUSY", "AVAILABLE", "HIGHLY_AVAILABLE"
     #   resp.remote_access_session.instance_arn #=> String
     #   resp.remote_access_session.remote_debug_enabled #=> Boolean
     #   resp.remote_access_session.remote_record_enabled #=> Boolean
@@ -2075,6 +2101,13 @@ module Aws::DeviceFarm
     #   resp.run.web_url #=> String
     #   resp.run.skip_app_resign #=> Boolean
     #   resp.run.test_spec_arn #=> String
+    #   resp.run.device_selection_result.filters #=> Array
+    #   resp.run.device_selection_result.filters[0].attribute #=> String, one of "ARN", "PLATFORM", "OS_VERSION", "MODEL", "AVAILABILITY", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE"
+    #   resp.run.device_selection_result.filters[0].operator #=> String, one of "EQUALS", "LESS_THAN", "LESS_THAN_OR_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUALS", "IN", "NOT_IN", "CONTAINS"
+    #   resp.run.device_selection_result.filters[0].values #=> Array
+    #   resp.run.device_selection_result.filters[0].values[0] #=> String
+    #   resp.run.device_selection_result.matched_devices_count #=> Integer
+    #   resp.run.device_selection_result.max_devices #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRun AWS API Documentation
     #
@@ -2574,6 +2607,75 @@ module Aws::DeviceFarm
     #   operation, which can be used to return the next set of items in the
     #   list.
     #
+    # @option params [Array<Types::DeviceFilter>] :filters
+    #   Used to select a set of devices. A filter is made up of an attribute,
+    #   an operator, and one or more values.
+    #
+    #   * Attribute: The aspect of a device such as platform or model used as
+    #     the selction criteria in a device filter.
+    #
+    #     Allowed values include:
+    #
+    #     * ARN: The Amazon Resource Name (ARN) of the device. For example,
+    #       "arn:aws:devicefarm:us-west-2::device:12345Example".
+    #
+    #     * PLATFORM: The device platform. Valid values are "ANDROID" or
+    #       "IOS".
+    #
+    #     * OS\_VERSION: The operating system version. For example,
+    #       "10.3.2".
+    #
+    #     * MODEL: The device model. For example, "iPad 5th Gen".
+    #
+    #     * AVAILABILITY: The current availability of the device. Valid values
+    #       are "AVAILABLE", "HIGHLY\_AVAILABLE", "BUSY", or
+    #       "TEMPORARY\_NOT\_AVAILABLE".
+    #
+    #     * FORM\_FACTOR: The device form factor. Valid values are "PHONE"
+    #       or "TABLET".
+    #
+    #     * MANUFACTURER: The device manufacturer. For example, "Apple".
+    #
+    #     * REMOTE\_ACCESS\_ENABLED: Whether the device is enabled for remote
+    #       access.
+    #
+    #     * REMOTE\_DEBUG\_ENABLED: Whether the device is enabled for remote
+    #       debugging.
+    #
+    #     * INSTANCE\_ARN: The Amazon Resource Name (ARN) of the device
+    #       instance.
+    #
+    #     * INSTANCE\_LABELS: The label of the device instance.
+    #
+    #     * FLEET\_TYPE: The fleet type. Valid values are "PUBLIC" or
+    #       "PRIVATE".
+    #
+    #   * Operator: The filter operator.
+    #
+    #     * The EQUALS operator is available for every attribute except
+    #       INSTANCE\_LABELS.
+    #
+    #     * The CONTAINS operator is available for the INSTANCE\_LABELS and
+    #       MODEL attributes.
+    #
+    #     * The IN and NOT\_IN operators are available for the ARN,
+    #       OS\_VERSION, MODEL, MANUFACTURER, and INSTANCE\_ARN attributes.
+    #
+    #     * The LESS\_THAN, GREATER\_THAN, LESS\_THAN\_OR\_EQUALS, and
+    #       GREATER\_THAN\_OR\_EQUALS operators are also available for the
+    #       OS\_VERSION attribute.
+    #
+    #   * Values: An array of one or more filter values.
+    #
+    #     * The IN and NOT operators can take a values array that has more
+    #       than one element.
+    #
+    #     * The other operators require an array with a single element.
+    #
+    #     * In a request, the AVAILABILITY attribute takes "AVAILABLE",
+    #       "HIGHLY\_AVAILABLE", "BUSY", or "TEMPORARY\_NOT\_AVAILABLE"
+    #       as values.
+    #
     # @return [Types::ListDevicesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListDevicesResult#devices #devices} => Array&lt;Types::Device&gt;
@@ -2597,6 +2699,13 @@ module Aws::DeviceFarm
     #   resp = client.list_devices({
     #     arn: "AmazonResourceName",
     #     next_token: "PaginationToken",
+    #     filters: [
+    #       {
+    #         attribute: "ARN", # accepts ARN, PLATFORM, OS_VERSION, MODEL, AVAILABILITY, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
+    #         operator: "EQUALS", # accepts EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, NOT_IN, CONTAINS
+    #         values: ["String"],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2638,6 +2747,7 @@ module Aws::DeviceFarm
     #   resp.devices[0].instances[0].instance_profile.reboot_after_use #=> Boolean
     #   resp.devices[0].instances[0].instance_profile.name #=> String
     #   resp.devices[0].instances[0].instance_profile.description #=> String
+    #   resp.devices[0].availability #=> String, one of "TEMPORARY_NOT_AVAILABLE", "BUSY", "AVAILABLE", "HIGHLY_AVAILABLE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDevices AWS API Documentation
@@ -2779,6 +2889,7 @@ module Aws::DeviceFarm
     #   resp.jobs[0].device.instances[0].instance_profile.reboot_after_use #=> Boolean
     #   resp.jobs[0].device.instances[0].instance_profile.name #=> String
     #   resp.jobs[0].device.instances[0].instance_profile.description #=> String
+    #   resp.jobs[0].device.availability #=> String, one of "TEMPORARY_NOT_AVAILABLE", "BUSY", "AVAILABLE", "HIGHLY_AVAILABLE"
     #   resp.jobs[0].instance_arn #=> String
     #   resp.jobs[0].device_minutes.total #=> Float
     #   resp.jobs[0].device_minutes.metered #=> Float
@@ -3309,6 +3420,7 @@ module Aws::DeviceFarm
     #   resp.remote_access_sessions[0].device.instances[0].instance_profile.reboot_after_use #=> Boolean
     #   resp.remote_access_sessions[0].device.instances[0].instance_profile.name #=> String
     #   resp.remote_access_sessions[0].device.instances[0].instance_profile.description #=> String
+    #   resp.remote_access_sessions[0].device.availability #=> String, one of "TEMPORARY_NOT_AVAILABLE", "BUSY", "AVAILABLE", "HIGHLY_AVAILABLE"
     #   resp.remote_access_sessions[0].instance_arn #=> String
     #   resp.remote_access_sessions[0].remote_debug_enabled #=> Boolean
     #   resp.remote_access_sessions[0].remote_record_enabled #=> Boolean
@@ -3460,6 +3572,13 @@ module Aws::DeviceFarm
     #   resp.runs[0].web_url #=> String
     #   resp.runs[0].skip_app_resign #=> Boolean
     #   resp.runs[0].test_spec_arn #=> String
+    #   resp.runs[0].device_selection_result.filters #=> Array
+    #   resp.runs[0].device_selection_result.filters[0].attribute #=> String, one of "ARN", "PLATFORM", "OS_VERSION", "MODEL", "AVAILABILITY", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE"
+    #   resp.runs[0].device_selection_result.filters[0].operator #=> String, one of "EQUALS", "LESS_THAN", "LESS_THAN_OR_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUALS", "IN", "NOT_IN", "CONTAINS"
+    #   resp.runs[0].device_selection_result.filters[0].values #=> Array
+    #   resp.runs[0].device_selection_result.filters[0].values[0] #=> String
+    #   resp.runs[0].device_selection_result.matched_devices_count #=> Integer
+    #   resp.runs[0].device_selection_result.max_devices #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRuns AWS API Documentation
@@ -3471,11 +3590,10 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
-    # Gets information about samples, given an AWS Device Farm project ARN
+    # Gets information about samples, given an AWS Device Farm job ARN.
     #
     # @option params [required, String] :arn
-    #   The Amazon Resource Name (ARN) of the project for which you want to
-    #   list samples.
+    #   The Amazon Resource Name (ARN) of the job used to list samples.
     #
     # @option params [String] :next_token
     #   An identifier that was returned from the previous call to this
@@ -3757,6 +3875,7 @@ module Aws::DeviceFarm
     #   resp.unique_problems["ExecutionResult"][0].problems[0].device.instances[0].instance_profile.reboot_after_use #=> Boolean
     #   resp.unique_problems["ExecutionResult"][0].problems[0].device.instances[0].instance_profile.name #=> String
     #   resp.unique_problems["ExecutionResult"][0].problems[0].device.instances[0].instance_profile.description #=> String
+    #   resp.unique_problems["ExecutionResult"][0].problems[0].device.availability #=> String, one of "TEMPORARY_NOT_AVAILABLE", "BUSY", "AVAILABLE", "HIGHLY_AVAILABLE"
     #   resp.unique_problems["ExecutionResult"][0].problems[0].result #=> String, one of "PENDING", "PASSED", "WARNED", "FAILED", "SKIPPED", "ERRORED", "STOPPED"
     #   resp.unique_problems["ExecutionResult"][0].problems[0].message #=> String
     #   resp.next_token #=> String
@@ -4122,8 +4241,21 @@ module Aws::DeviceFarm
     # @option params [String] :app_arn
     #   The ARN of the app to schedule a run.
     #
-    # @option params [required, String] :device_pool_arn
+    # @option params [String] :device_pool_arn
     #   The ARN of the device pool for the run to be scheduled.
+    #
+    #   Either <b> <code>devicePoolArn</code> </b> or <b>
+    #   <code>deviceSelectionConfiguration</code> </b> are required in a
+    #   request.
+    #
+    # @option params [Types::DeviceSelectionConfiguration] :device_selection_configuration
+    #   The filter criteria used to dynamically select a set of devices for a
+    #   test run, as well as the maximum number of devices to be included in
+    #   the run.
+    #
+    #   Either <b> <code>devicePoolArn</code> </b> or <b>
+    #   <code>deviceSelectionConfiguration</code> </b> are required in a
+    #   request.
     #
     # @option params [String] :name
     #   The name for the run to be scheduled.
@@ -4168,7 +4300,17 @@ module Aws::DeviceFarm
     #   resp = client.schedule_run({
     #     project_arn: "AmazonResourceName", # required
     #     app_arn: "AmazonResourceName",
-    #     device_pool_arn: "AmazonResourceName", # required
+    #     device_pool_arn: "AmazonResourceName",
+    #     device_selection_configuration: {
+    #       filters: [ # required
+    #         {
+    #           attribute: "ARN", # accepts ARN, PLATFORM, OS_VERSION, MODEL, AVAILABILITY, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
+    #           operator: "EQUALS", # accepts EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, NOT_IN, CONTAINS
+    #           values: ["String"],
+    #         },
+    #       ],
+    #       max_devices: 1, # required
+    #     },
     #     name: "Name",
     #     test: { # required
     #       type: "BUILTIN_FUZZ", # required, accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, WEB_PERFORMANCE_PROFILE, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI, REMOTE_ACCESS_RECORD, REMOTE_ACCESS_REPLAY
@@ -4271,6 +4413,13 @@ module Aws::DeviceFarm
     #   resp.run.web_url #=> String
     #   resp.run.skip_app_resign #=> Boolean
     #   resp.run.test_spec_arn #=> String
+    #   resp.run.device_selection_result.filters #=> Array
+    #   resp.run.device_selection_result.filters[0].attribute #=> String, one of "ARN", "PLATFORM", "OS_VERSION", "MODEL", "AVAILABILITY", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE"
+    #   resp.run.device_selection_result.filters[0].operator #=> String, one of "EQUALS", "LESS_THAN", "LESS_THAN_OR_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUALS", "IN", "NOT_IN", "CONTAINS"
+    #   resp.run.device_selection_result.filters[0].values #=> Array
+    #   resp.run.device_selection_result.filters[0].values[0] #=> String
+    #   resp.run.device_selection_result.matched_devices_count #=> Integer
+    #   resp.run.device_selection_result.max_devices #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRun AWS API Documentation
     #
@@ -4357,6 +4506,7 @@ module Aws::DeviceFarm
     #   resp.job.device.instances[0].instance_profile.reboot_after_use #=> Boolean
     #   resp.job.device.instances[0].instance_profile.name #=> String
     #   resp.job.device.instances[0].instance_profile.description #=> String
+    #   resp.job.device.availability #=> String, one of "TEMPORARY_NOT_AVAILABLE", "BUSY", "AVAILABLE", "HIGHLY_AVAILABLE"
     #   resp.job.instance_arn #=> String
     #   resp.job.device_minutes.total #=> Float
     #   resp.job.device_minutes.metered #=> Float
@@ -4435,6 +4585,7 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device.instances[0].instance_profile.reboot_after_use #=> Boolean
     #   resp.remote_access_session.device.instances[0].instance_profile.name #=> String
     #   resp.remote_access_session.device.instances[0].instance_profile.description #=> String
+    #   resp.remote_access_session.device.availability #=> String, one of "TEMPORARY_NOT_AVAILABLE", "BUSY", "AVAILABLE", "HIGHLY_AVAILABLE"
     #   resp.remote_access_session.instance_arn #=> String
     #   resp.remote_access_session.remote_debug_enabled #=> Boolean
     #   resp.remote_access_session.remote_record_enabled #=> Boolean
@@ -4556,6 +4707,13 @@ module Aws::DeviceFarm
     #   resp.run.web_url #=> String
     #   resp.run.skip_app_resign #=> Boolean
     #   resp.run.test_spec_arn #=> String
+    #   resp.run.device_selection_result.filters #=> Array
+    #   resp.run.device_selection_result.filters[0].attribute #=> String, one of "ARN", "PLATFORM", "OS_VERSION", "MODEL", "AVAILABILITY", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE"
+    #   resp.run.device_selection_result.filters[0].operator #=> String, one of "EQUALS", "LESS_THAN", "LESS_THAN_OR_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUALS", "IN", "NOT_IN", "CONTAINS"
+    #   resp.run.device_selection_result.filters[0].values #=> Array
+    #   resp.run.device_selection_result.filters[0].values[0] #=> String
+    #   resp.run.device_selection_result.matched_devices_count #=> Integer
+    #   resp.run.device_selection_result.max_devices #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRun AWS API Documentation
     #
@@ -5035,7 +5193,7 @@ module Aws::DeviceFarm
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devicefarm'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

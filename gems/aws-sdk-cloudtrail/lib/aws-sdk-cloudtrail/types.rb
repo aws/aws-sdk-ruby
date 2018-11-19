@@ -65,6 +65,7 @@ module Aws::CloudTrail
     #         cloud_watch_logs_log_group_arn: "String",
     #         cloud_watch_logs_role_arn: "String",
     #         kms_key_id: "String",
+    #         is_organization_trail: false,
     #       }
     #
     # @!attribute [rw] name
@@ -165,6 +166,14 @@ module Aws::CloudTrail
     #   * 12345678-1234-1234-1234-123456789012
     #   @return [String]
     #
+    # @!attribute [rw] is_organization_trail
+    #   Specifies whether the trail is created for all accounts in an
+    #   organization in AWS Organizations, or only for the current AWS
+    #   account. The default is false, and cannot be true unless the call is
+    #   made on behalf of an AWS account that is the master account for an
+    #   organization in AWS Organizations.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateTrailRequest AWS API Documentation
     #
     class CreateTrailRequest < Struct.new(
@@ -177,7 +186,8 @@ module Aws::CloudTrail
       :enable_log_file_validation,
       :cloud_watch_logs_log_group_arn,
       :cloud_watch_logs_role_arn,
-      :kms_key_id)
+      :kms_key_id,
+      :is_organization_trail)
       include Aws::Structure
     end
 
@@ -253,6 +263,10 @@ module Aws::CloudTrail
     #   `arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012`
     #   @return [String]
     #
+    # @!attribute [rw] is_organization_trail
+    #   Specifies whether the trail is an organization trail.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateTrailResponse AWS API Documentation
     #
     class CreateTrailResponse < Struct.new(
@@ -267,7 +281,8 @@ module Aws::CloudTrail
       :log_file_validation_enabled,
       :cloud_watch_logs_log_group_arn,
       :cloud_watch_logs_role_arn,
-      :kms_key_id)
+      :kms_key_id,
+      :is_organization_trail)
       include Aws::Structure
     end
 
@@ -461,7 +476,11 @@ module Aws::CloudTrail
     # @!attribute [rw] include_shadow_trails
     #   Specifies whether to include shadow trails in the response. A shadow
     #   trail is the replication in a region of a trail that was created in
-    #   a different region. The default is true.
+    #   a different region, or in the case of an organization trail, the
+    #   replication of an organization trail in member accounts. If you do
+    #   not include shadow trails, organization trails in a member account
+    #   and region replication trails will not be returned. The default is
+    #   true.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeTrailsRequest AWS API Documentation
@@ -1417,6 +1436,10 @@ module Aws::CloudTrail
     #   Specifies if the trail has custom event selectors.
     #   @return [Boolean]
     #
+    # @!attribute [rw] is_organization_trail
+    #   Specifies whether the trail is an organization trail.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/Trail AWS API Documentation
     #
     class Trail < Struct.new(
@@ -1433,7 +1456,8 @@ module Aws::CloudTrail
       :cloud_watch_logs_log_group_arn,
       :cloud_watch_logs_role_arn,
       :kms_key_id,
-      :has_custom_event_selectors)
+      :has_custom_event_selectors,
+      :is_organization_trail)
       include Aws::Structure
     end
 
@@ -1453,6 +1477,7 @@ module Aws::CloudTrail
     #         cloud_watch_logs_log_group_arn: "String",
     #         cloud_watch_logs_role_arn: "String",
     #         kms_key_id: "String",
+    #         is_organization_trail: false,
     #       }
     #
     # @!attribute [rw] name
@@ -1562,6 +1587,19 @@ module Aws::CloudTrail
     #   * 12345678-1234-1234-1234-123456789012
     #   @return [String]
     #
+    # @!attribute [rw] is_organization_trail
+    #   Specifies whether the trail is applied to all accounts in an
+    #   organization in AWS Organizations, or only for the current AWS
+    #   account. The default is false, and cannot be true unless the call is
+    #   made on behalf of an AWS account that is the master account for an
+    #   organization in AWS Organizations. If the trail is not an
+    #   organization trail and this is set to true, the trail will be
+    #   created in all AWS accounts that belong to the organization. If the
+    #   trail is an organization trail and this is set to false, the trail
+    #   will remain in the current AWS account but be deleted from all
+    #   member accounts in the organization.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateTrailRequest AWS API Documentation
     #
     class UpdateTrailRequest < Struct.new(
@@ -1574,7 +1612,8 @@ module Aws::CloudTrail
       :enable_log_file_validation,
       :cloud_watch_logs_log_group_arn,
       :cloud_watch_logs_role_arn,
-      :kms_key_id)
+      :kms_key_id,
+      :is_organization_trail)
       include Aws::Structure
     end
 
@@ -1650,6 +1689,10 @@ module Aws::CloudTrail
     #   `arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012`
     #   @return [String]
     #
+    # @!attribute [rw] is_organization_trail
+    #   Specifies whether the trail is an organization trail.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateTrailResponse AWS API Documentation
     #
     class UpdateTrailResponse < Struct.new(
@@ -1664,7 +1707,8 @@ module Aws::CloudTrail
       :log_file_validation_enabled,
       :cloud_watch_logs_log_group_arn,
       :cloud_watch_logs_role_arn,
-      :kms_key_id)
+      :kms_key_id,
+      :is_organization_trail)
       include Aws::Structure
     end
 

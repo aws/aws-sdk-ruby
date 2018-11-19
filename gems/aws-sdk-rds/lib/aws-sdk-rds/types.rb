@@ -2769,6 +2769,7 @@ module Aws::RDS
     #           },
     #         ],
     #         db_subnet_group_name: "String",
+    #         vpc_security_group_ids: ["String"],
     #         storage_type: "String",
     #         copy_tags_to_snapshot: false,
     #         monitoring_interval: 1,
@@ -2934,6 +2935,14 @@ module Aws::RDS
     #
     #   Example: `mySubnetgroup`
     #   @return [String]
+    #
+    # @!attribute [rw] vpc_security_group_ids
+    #   A list of EC2 VPC security groups to associate with the Read
+    #   Replica.
+    #
+    #   Default: The default EC2 VPC security group for the DB subnet
+    #   group's VPC.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] storage_type
     #   Specifies the storage type to be associated with the Read Replica.
@@ -3146,6 +3155,7 @@ module Aws::RDS
       :publicly_accessible,
       :tags,
       :db_subnet_group_name,
+      :vpc_security_group_ids,
       :storage_type,
       :copy_tags_to_snapshot,
       :monitoring_interval,
@@ -13272,6 +13282,7 @@ module Aws::RDS
     #         storage_type: "String",
     #         tde_credential_arn: "String",
     #         tde_credential_password: "String",
+    #         vpc_security_group_ids: ["String"],
     #         domain: "String",
     #         copy_tags_to_snapshot: false,
     #         domain_iam_role_name: "String",
@@ -13490,6 +13501,14 @@ module Aws::RDS
     #   the device.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_security_group_ids
+    #   A list of EC2 VPC security groups to associate with this DB
+    #   instance.
+    #
+    #   Default: The default EC2 VPC security group for the DB subnet
+    #   group's VPC.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] domain
     #   Specify the Active Directory Domain to restore the instance in.
     #   @return [String]
@@ -13587,6 +13606,7 @@ module Aws::RDS
       :storage_type,
       :tde_credential_arn,
       :tde_credential_password,
+      :vpc_security_group_ids,
       :domain,
       :copy_tags_to_snapshot,
       :domain_iam_role_name,
@@ -14150,6 +14170,7 @@ module Aws::RDS
     #         storage_type: "String",
     #         tde_credential_arn: "String",
     #         tde_credential_password: "String",
+    #         vpc_security_group_ids: ["String"],
     #         domain: "String",
     #         domain_iam_role_name: "String",
     #         enable_iam_database_authentication: false,
@@ -14383,6 +14404,14 @@ module Aws::RDS
     #   the device.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_security_group_ids
+    #   A list of EC2 VPC security groups to associate with this DB
+    #   instance.
+    #
+    #   Default: The default EC2 VPC security group for the DB subnet
+    #   group's VPC.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] domain
     #   Specify the Active Directory Domain to restore the instance in.
     #   @return [String]
@@ -14482,6 +14511,7 @@ module Aws::RDS
       :storage_type,
       :tde_credential_arn,
       :tde_credential_password,
+      :vpc_security_group_ids,
       :domain,
       :domain_iam_role_name,
       :enable_iam_database_authentication,

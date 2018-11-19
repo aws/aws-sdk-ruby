@@ -199,6 +199,30 @@ module Aws::MediaConvert
 
     # @!group API Operations
 
+    # Associates an AWS Certificate Manager (ACM) Amazon Resource Name (ARN)
+    # with AWS Elemental MediaConvert.
+    #
+    # @option params [required, String] :arn
+    #   The ARN of the ACM certificate that you want to associate with your
+    #   MediaConvert resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_certificate({
+    #     arn: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AssociateCertificate AWS API Documentation
+    #
+    # @overload associate_certificate(params = {})
+    # @param [Hash] params ({})
+    def associate_certificate(params = {}, options = {})
+      req = build_request(:associate_certificate, params)
+      req.send_request(options)
+    end
+
     # Permanently remove a job from a queue. Once you have canceled a job,
     # you can't start it again. You can't delete a running job.
     #
@@ -329,7 +353,7 @@ module Aws::MediaConvert
     #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
     #                   time_delta: 1,
     #                 },
-    #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
+    #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE
     #                 teletext_source_settings: {
     #                   page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                 },
@@ -337,10 +361,33 @@ module Aws::MediaConvert
     #             },
     #           },
     #           deblock_filter: "ENABLED", # accepts ENABLED, DISABLED
+    #           decryption_settings: {
+    #             decryption_mode: "AES_CTR", # accepts AES_CTR, AES_CBC, AES_GCM
+    #             encrypted_decryption_key: "__stringMin24Max512PatternAZaZ0902",
+    #             initialization_vector: "__stringMin16Max24PatternAZaZ0922AZaZ0916",
+    #             kms_key_region: "__stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912",
+    #           },
     #           denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
     #           file_input: "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MM",
     #           filter_enable: "AUTO", # accepts AUTO, DISABLE, FORCE
     #           filter_strength: 1,
+    #           image_inserter: {
+    #             insertable_images: [
+    #               {
+    #                 duration: 1,
+    #                 fade_in: 1,
+    #                 fade_out: 1,
+    #                 height: 1,
+    #                 image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                 image_x: 1,
+    #                 image_y: 1,
+    #                 layer: 1,
+    #                 opacity: 1,
+    #                 start_time: "__stringPattern01D20305D205D",
+    #                 width: 1,
+    #               },
+    #             ],
+    #           },
     #           input_clippings: [
     #             {
     #               end_timecode: "__stringPattern010920405090509092",
@@ -372,6 +419,20 @@ module Aws::MediaConvert
     #           },
     #         },
     #       ],
+    #       motion_image_inserter: {
+    #         framerate: {
+    #           framerate_denominator: 1,
+    #           framerate_numerator: 1,
+    #         },
+    #         input: "__stringMin14Max1285PatternS3Mov09Png",
+    #         insertion_mode: "MOV", # accepts MOV, PNG
+    #         offset: {
+    #           image_x: 1,
+    #           image_y: 1,
+    #         },
+    #         playback: "ONCE", # accepts ONCE, REPEAT
+    #         start_time: "__stringMin11Max11Pattern01D20305D205D",
+    #       },
     #       nielsen_configuration: {
     #         breakout_code: 1,
     #         distributor_id: "__string",
@@ -414,6 +475,7 @@ module Aws::MediaConvert
     #               destination: "__stringPatternS3",
     #               encryption: {
     #                 speke_key_provider: {
+    #                   certificate_arn: "__stringPatternArnAwsAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -450,6 +512,7 @@ module Aws::MediaConvert
     #                 encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                 initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                 speke_key_provider: {
+    #                   certificate_arn: "__stringPatternArnAwsAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -482,6 +545,7 @@ module Aws::MediaConvert
     #               destination: "__stringPatternS3",
     #               encryption: {
     #                 speke_key_provider: {
+    #                   certificate_arn: "__stringPatternArnAwsAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -610,7 +674,7 @@ module Aws::MediaConvert
     #                       x_position: 1,
     #                       y_position: 1,
     #                     },
-    #                     destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #                     destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                     dvb_sub_destination_settings: {
     #                       alignment: "CENTERED", # accepts CENTERED, LEFT
     #                       background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -1042,13 +1106,29 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCC", "TTML", "STL", "SRT", "TELETEXT", "NULL_SOURCE"
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
     #   resp.job.settings.inputs[0].deblock_filter #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job.settings.inputs[0].decryption_settings.decryption_mode #=> String, one of "AES_CTR", "AES_CBC", "AES_GCM"
+    #   resp.job.settings.inputs[0].decryption_settings.encrypted_decryption_key #=> String
+    #   resp.job.settings.inputs[0].decryption_settings.initialization_vector #=> String
+    #   resp.job.settings.inputs[0].decryption_settings.kms_key_region #=> String
     #   resp.job.settings.inputs[0].denoise_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.inputs[0].file_input #=> String
     #   resp.job.settings.inputs[0].filter_enable #=> String, one of "AUTO", "DISABLE", "FORCE"
     #   resp.job.settings.inputs[0].filter_strength #=> Integer
+    #   resp.job.settings.inputs[0].image_inserter.insertable_images #=> Array
+    #   resp.job.settings.inputs[0].image_inserter.insertable_images[0].duration #=> Integer
+    #   resp.job.settings.inputs[0].image_inserter.insertable_images[0].fade_in #=> Integer
+    #   resp.job.settings.inputs[0].image_inserter.insertable_images[0].fade_out #=> Integer
+    #   resp.job.settings.inputs[0].image_inserter.insertable_images[0].height #=> Integer
+    #   resp.job.settings.inputs[0].image_inserter.insertable_images[0].image_inserter_input #=> String
+    #   resp.job.settings.inputs[0].image_inserter.insertable_images[0].image_x #=> Integer
+    #   resp.job.settings.inputs[0].image_inserter.insertable_images[0].image_y #=> Integer
+    #   resp.job.settings.inputs[0].image_inserter.insertable_images[0].layer #=> Integer
+    #   resp.job.settings.inputs[0].image_inserter.insertable_images[0].opacity #=> Integer
+    #   resp.job.settings.inputs[0].image_inserter.insertable_images[0].start_time #=> String
+    #   resp.job.settings.inputs[0].image_inserter.insertable_images[0].width #=> Integer
     #   resp.job.settings.inputs[0].input_clippings #=> Array
     #   resp.job.settings.inputs[0].input_clippings[0].end_timecode #=> String
     #   resp.job.settings.inputs[0].input_clippings[0].start_timecode #=> String
@@ -1071,6 +1151,14 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.job.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job.settings.inputs[0].video_selector.program_number #=> Integer
+    #   resp.job.settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
+    #   resp.job.settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
+    #   resp.job.settings.motion_image_inserter.input #=> String
+    #   resp.job.settings.motion_image_inserter.insertion_mode #=> String, one of "MOV", "PNG"
+    #   resp.job.settings.motion_image_inserter.offset.image_x #=> Integer
+    #   resp.job.settings.motion_image_inserter.offset.image_y #=> Integer
+    #   resp.job.settings.motion_image_inserter.playback #=> String, one of "ONCE", "REPEAT"
+    #   resp.job.settings.motion_image_inserter.start_time #=> String
     #   resp.job.settings.nielsen_configuration.breakout_code #=> Integer
     #   resp.job.settings.nielsen_configuration.distributor_id #=> String
     #   resp.job.settings.output_groups #=> Array
@@ -1100,6 +1188,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
@@ -1127,6 +1216,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
@@ -1152,6 +1242,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
@@ -1247,7 +1338,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "SCC", "SRT", "TELETEXT", "TTML", "WEBVTT"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
@@ -1648,7 +1739,7 @@ module Aws::MediaConvert
     #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
     #                   time_delta: 1,
     #                 },
-    #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
+    #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE
     #                 teletext_source_settings: {
     #                   page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                 },
@@ -1659,6 +1750,23 @@ module Aws::MediaConvert
     #           denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
     #           filter_enable: "AUTO", # accepts AUTO, DISABLE, FORCE
     #           filter_strength: 1,
+    #           image_inserter: {
+    #             insertable_images: [
+    #               {
+    #                 duration: 1,
+    #                 fade_in: 1,
+    #                 fade_out: 1,
+    #                 height: 1,
+    #                 image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                 image_x: 1,
+    #                 image_y: 1,
+    #                 layer: 1,
+    #                 opacity: 1,
+    #                 start_time: "__stringPattern01D20305D205D",
+    #                 width: 1,
+    #               },
+    #             ],
+    #           },
     #           input_clippings: [
     #             {
     #               end_timecode: "__stringPattern010920405090509092",
@@ -1690,6 +1798,20 @@ module Aws::MediaConvert
     #           },
     #         },
     #       ],
+    #       motion_image_inserter: {
+    #         framerate: {
+    #           framerate_denominator: 1,
+    #           framerate_numerator: 1,
+    #         },
+    #         input: "__stringMin14Max1285PatternS3Mov09Png",
+    #         insertion_mode: "MOV", # accepts MOV, PNG
+    #         offset: {
+    #           image_x: 1,
+    #           image_y: 1,
+    #         },
+    #         playback: "ONCE", # accepts ONCE, REPEAT
+    #         start_time: "__stringMin11Max11Pattern01D20305D205D",
+    #       },
     #       nielsen_configuration: {
     #         breakout_code: 1,
     #         distributor_id: "__string",
@@ -1732,6 +1854,7 @@ module Aws::MediaConvert
     #               destination: "__stringPatternS3",
     #               encryption: {
     #                 speke_key_provider: {
+    #                   certificate_arn: "__stringPatternArnAwsAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -1768,6 +1891,7 @@ module Aws::MediaConvert
     #                 encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                 initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                 speke_key_provider: {
+    #                   certificate_arn: "__stringPatternArnAwsAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -1800,6 +1924,7 @@ module Aws::MediaConvert
     #               destination: "__stringPatternS3",
     #               encryption: {
     #                 speke_key_provider: {
+    #                   certificate_arn: "__stringPatternArnAwsAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -1928,7 +2053,7 @@ module Aws::MediaConvert
     #                       x_position: 1,
     #                       y_position: 1,
     #                     },
-    #                     destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #                     destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                     dvb_sub_destination_settings: {
     #                       alignment: "CENTERED", # accepts CENTERED, LEFT
     #                       background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -2353,12 +2478,24 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCC", "TTML", "STL", "SRT", "TELETEXT", "NULL_SOURCE"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
     #   resp.job_template.settings.inputs[0].deblock_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].denoise_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].filter_enable #=> String, one of "AUTO", "DISABLE", "FORCE"
     #   resp.job_template.settings.inputs[0].filter_strength #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images #=> Array
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].duration #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].fade_in #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].fade_out #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].height #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].image_inserter_input #=> String
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].image_x #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].image_y #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].layer #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].opacity #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].start_time #=> String
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].width #=> Integer
     #   resp.job_template.settings.inputs[0].input_clippings #=> Array
     #   resp.job_template.settings.inputs[0].input_clippings[0].end_timecode #=> String
     #   resp.job_template.settings.inputs[0].input_clippings[0].start_timecode #=> String
@@ -2381,6 +2518,14 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.program_number #=> Integer
+    #   resp.job_template.settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
+    #   resp.job_template.settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
+    #   resp.job_template.settings.motion_image_inserter.input #=> String
+    #   resp.job_template.settings.motion_image_inserter.insertion_mode #=> String, one of "MOV", "PNG"
+    #   resp.job_template.settings.motion_image_inserter.offset.image_x #=> Integer
+    #   resp.job_template.settings.motion_image_inserter.offset.image_y #=> Integer
+    #   resp.job_template.settings.motion_image_inserter.playback #=> String, one of "ONCE", "REPEAT"
+    #   resp.job_template.settings.motion_image_inserter.start_time #=> String
     #   resp.job_template.settings.nielsen_configuration.breakout_code #=> Integer
     #   resp.job_template.settings.nielsen_configuration.distributor_id #=> String
     #   resp.job_template.settings.output_groups #=> Array
@@ -2410,6 +2555,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
@@ -2437,6 +2583,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
@@ -2462,6 +2609,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
@@ -2557,7 +2705,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "SCC", "SRT", "TELETEXT", "TTML", "WEBVTT"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
@@ -3006,7 +3154,7 @@ module Aws::MediaConvert
     #               x_position: 1,
     #               y_position: 1,
     #             },
-    #             destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #             destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #             dvb_sub_destination_settings: {
     #               alignment: "CENTERED", # accepts CENTERED, LEFT
     #               background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -3452,7 +3600,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "SCC", "SRT", "TELETEXT", "TTML", "WEBVTT"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
@@ -3926,6 +4074,31 @@ module Aws::MediaConvert
       req.send_request(options)
     end
 
+    # Removes an association between the Amazon Resource Name (ARN) of an
+    # AWS Certificate Manager (ACM) certificate and an AWS Elemental
+    # MediaConvert resource.
+    #
+    # @option params [required, String] :arn
+    #   The ARN of the ACM certificate that you want to disassociate from your
+    #   MediaConvert resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_certificate({
+    #     arn: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DisassociateCertificate AWS API Documentation
+    #
+    # @overload disassociate_certificate(params = {})
+    # @param [Hash] params ({})
+    def disassociate_certificate(params = {}, options = {})
+      req = build_request(:disassociate_certificate, params)
+      req.send_request(options)
+    end
+
     # Retrieve the JSON for a specific completed transcoding job.
     #
     # @option params [required, String] :id
@@ -3991,13 +4164,29 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCC", "TTML", "STL", "SRT", "TELETEXT", "NULL_SOURCE"
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
     #   resp.job.settings.inputs[0].deblock_filter #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job.settings.inputs[0].decryption_settings.decryption_mode #=> String, one of "AES_CTR", "AES_CBC", "AES_GCM"
+    #   resp.job.settings.inputs[0].decryption_settings.encrypted_decryption_key #=> String
+    #   resp.job.settings.inputs[0].decryption_settings.initialization_vector #=> String
+    #   resp.job.settings.inputs[0].decryption_settings.kms_key_region #=> String
     #   resp.job.settings.inputs[0].denoise_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.inputs[0].file_input #=> String
     #   resp.job.settings.inputs[0].filter_enable #=> String, one of "AUTO", "DISABLE", "FORCE"
     #   resp.job.settings.inputs[0].filter_strength #=> Integer
+    #   resp.job.settings.inputs[0].image_inserter.insertable_images #=> Array
+    #   resp.job.settings.inputs[0].image_inserter.insertable_images[0].duration #=> Integer
+    #   resp.job.settings.inputs[0].image_inserter.insertable_images[0].fade_in #=> Integer
+    #   resp.job.settings.inputs[0].image_inserter.insertable_images[0].fade_out #=> Integer
+    #   resp.job.settings.inputs[0].image_inserter.insertable_images[0].height #=> Integer
+    #   resp.job.settings.inputs[0].image_inserter.insertable_images[0].image_inserter_input #=> String
+    #   resp.job.settings.inputs[0].image_inserter.insertable_images[0].image_x #=> Integer
+    #   resp.job.settings.inputs[0].image_inserter.insertable_images[0].image_y #=> Integer
+    #   resp.job.settings.inputs[0].image_inserter.insertable_images[0].layer #=> Integer
+    #   resp.job.settings.inputs[0].image_inserter.insertable_images[0].opacity #=> Integer
+    #   resp.job.settings.inputs[0].image_inserter.insertable_images[0].start_time #=> String
+    #   resp.job.settings.inputs[0].image_inserter.insertable_images[0].width #=> Integer
     #   resp.job.settings.inputs[0].input_clippings #=> Array
     #   resp.job.settings.inputs[0].input_clippings[0].end_timecode #=> String
     #   resp.job.settings.inputs[0].input_clippings[0].start_timecode #=> String
@@ -4020,6 +4209,14 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.job.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job.settings.inputs[0].video_selector.program_number #=> Integer
+    #   resp.job.settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
+    #   resp.job.settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
+    #   resp.job.settings.motion_image_inserter.input #=> String
+    #   resp.job.settings.motion_image_inserter.insertion_mode #=> String, one of "MOV", "PNG"
+    #   resp.job.settings.motion_image_inserter.offset.image_x #=> Integer
+    #   resp.job.settings.motion_image_inserter.offset.image_y #=> Integer
+    #   resp.job.settings.motion_image_inserter.playback #=> String, one of "ONCE", "REPEAT"
+    #   resp.job.settings.motion_image_inserter.start_time #=> String
     #   resp.job.settings.nielsen_configuration.breakout_code #=> Integer
     #   resp.job.settings.nielsen_configuration.distributor_id #=> String
     #   resp.job.settings.output_groups #=> Array
@@ -4049,6 +4246,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
@@ -4076,6 +4274,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
@@ -4101,6 +4300,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
@@ -4196,7 +4396,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "SCC", "SRT", "TELETEXT", "TTML", "WEBVTT"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
@@ -4562,12 +4762,24 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCC", "TTML", "STL", "SRT", "TELETEXT", "NULL_SOURCE"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
     #   resp.job_template.settings.inputs[0].deblock_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].denoise_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].filter_enable #=> String, one of "AUTO", "DISABLE", "FORCE"
     #   resp.job_template.settings.inputs[0].filter_strength #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images #=> Array
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].duration #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].fade_in #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].fade_out #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].height #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].image_inserter_input #=> String
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].image_x #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].image_y #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].layer #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].opacity #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].start_time #=> String
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].width #=> Integer
     #   resp.job_template.settings.inputs[0].input_clippings #=> Array
     #   resp.job_template.settings.inputs[0].input_clippings[0].end_timecode #=> String
     #   resp.job_template.settings.inputs[0].input_clippings[0].start_timecode #=> String
@@ -4590,6 +4802,14 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.program_number #=> Integer
+    #   resp.job_template.settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
+    #   resp.job_template.settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
+    #   resp.job_template.settings.motion_image_inserter.input #=> String
+    #   resp.job_template.settings.motion_image_inserter.insertion_mode #=> String, one of "MOV", "PNG"
+    #   resp.job_template.settings.motion_image_inserter.offset.image_x #=> Integer
+    #   resp.job_template.settings.motion_image_inserter.offset.image_y #=> Integer
+    #   resp.job_template.settings.motion_image_inserter.playback #=> String, one of "ONCE", "REPEAT"
+    #   resp.job_template.settings.motion_image_inserter.start_time #=> String
     #   resp.job_template.settings.nielsen_configuration.breakout_code #=> Integer
     #   resp.job_template.settings.nielsen_configuration.distributor_id #=> String
     #   resp.job_template.settings.output_groups #=> Array
@@ -4619,6 +4839,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
@@ -4646,6 +4867,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
@@ -4671,6 +4893,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
@@ -4766,7 +4989,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "SCC", "SRT", "TELETEXT", "TTML", "WEBVTT"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
@@ -5178,7 +5401,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "SCC", "SRT", "TELETEXT", "TTML", "WEBVTT"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
@@ -5595,12 +5818,24 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCC", "TTML", "STL", "SRT", "TELETEXT", "NULL_SOURCE"
+    #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE"
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
     #   resp.job_templates[0].settings.inputs[0].deblock_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.inputs[0].denoise_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.inputs[0].filter_enable #=> String, one of "AUTO", "DISABLE", "FORCE"
     #   resp.job_templates[0].settings.inputs[0].filter_strength #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].image_inserter.insertable_images #=> Array
+    #   resp.job_templates[0].settings.inputs[0].image_inserter.insertable_images[0].duration #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].image_inserter.insertable_images[0].fade_in #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].image_inserter.insertable_images[0].fade_out #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].image_inserter.insertable_images[0].height #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].image_inserter.insertable_images[0].image_inserter_input #=> String
+    #   resp.job_templates[0].settings.inputs[0].image_inserter.insertable_images[0].image_x #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].image_inserter.insertable_images[0].image_y #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].image_inserter.insertable_images[0].layer #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].image_inserter.insertable_images[0].opacity #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].image_inserter.insertable_images[0].start_time #=> String
+    #   resp.job_templates[0].settings.inputs[0].image_inserter.insertable_images[0].width #=> Integer
     #   resp.job_templates[0].settings.inputs[0].input_clippings #=> Array
     #   resp.job_templates[0].settings.inputs[0].input_clippings[0].end_timecode #=> String
     #   resp.job_templates[0].settings.inputs[0].input_clippings[0].start_timecode #=> String
@@ -5623,6 +5858,14 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.job_templates[0].settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job_templates[0].settings.inputs[0].video_selector.program_number #=> Integer
+    #   resp.job_templates[0].settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
+    #   resp.job_templates[0].settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
+    #   resp.job_templates[0].settings.motion_image_inserter.input #=> String
+    #   resp.job_templates[0].settings.motion_image_inserter.insertion_mode #=> String, one of "MOV", "PNG"
+    #   resp.job_templates[0].settings.motion_image_inserter.offset.image_x #=> Integer
+    #   resp.job_templates[0].settings.motion_image_inserter.offset.image_y #=> Integer
+    #   resp.job_templates[0].settings.motion_image_inserter.playback #=> String, one of "ONCE", "REPEAT"
+    #   resp.job_templates[0].settings.motion_image_inserter.start_time #=> String
     #   resp.job_templates[0].settings.nielsen_configuration.breakout_code #=> Integer
     #   resp.job_templates[0].settings.nielsen_configuration.distributor_id #=> String
     #   resp.job_templates[0].settings.output_groups #=> Array
@@ -5652,6 +5895,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
@@ -5679,6 +5923,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids #=> Array
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
@@ -5704,6 +5949,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids #=> Array
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
@@ -5799,7 +6045,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "SCC", "SRT", "TELETEXT", "TTML", "WEBVTT"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
@@ -6195,13 +6441,29 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCC", "TTML", "STL", "SRT", "TELETEXT", "NULL_SOURCE"
+    #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE"
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
     #   resp.jobs[0].settings.inputs[0].deblock_filter #=> String, one of "ENABLED", "DISABLED"
+    #   resp.jobs[0].settings.inputs[0].decryption_settings.decryption_mode #=> String, one of "AES_CTR", "AES_CBC", "AES_GCM"
+    #   resp.jobs[0].settings.inputs[0].decryption_settings.encrypted_decryption_key #=> String
+    #   resp.jobs[0].settings.inputs[0].decryption_settings.initialization_vector #=> String
+    #   resp.jobs[0].settings.inputs[0].decryption_settings.kms_key_region #=> String
     #   resp.jobs[0].settings.inputs[0].denoise_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].settings.inputs[0].file_input #=> String
     #   resp.jobs[0].settings.inputs[0].filter_enable #=> String, one of "AUTO", "DISABLE", "FORCE"
     #   resp.jobs[0].settings.inputs[0].filter_strength #=> Integer
+    #   resp.jobs[0].settings.inputs[0].image_inserter.insertable_images #=> Array
+    #   resp.jobs[0].settings.inputs[0].image_inserter.insertable_images[0].duration #=> Integer
+    #   resp.jobs[0].settings.inputs[0].image_inserter.insertable_images[0].fade_in #=> Integer
+    #   resp.jobs[0].settings.inputs[0].image_inserter.insertable_images[0].fade_out #=> Integer
+    #   resp.jobs[0].settings.inputs[0].image_inserter.insertable_images[0].height #=> Integer
+    #   resp.jobs[0].settings.inputs[0].image_inserter.insertable_images[0].image_inserter_input #=> String
+    #   resp.jobs[0].settings.inputs[0].image_inserter.insertable_images[0].image_x #=> Integer
+    #   resp.jobs[0].settings.inputs[0].image_inserter.insertable_images[0].image_y #=> Integer
+    #   resp.jobs[0].settings.inputs[0].image_inserter.insertable_images[0].layer #=> Integer
+    #   resp.jobs[0].settings.inputs[0].image_inserter.insertable_images[0].opacity #=> Integer
+    #   resp.jobs[0].settings.inputs[0].image_inserter.insertable_images[0].start_time #=> String
+    #   resp.jobs[0].settings.inputs[0].image_inserter.insertable_images[0].width #=> Integer
     #   resp.jobs[0].settings.inputs[0].input_clippings #=> Array
     #   resp.jobs[0].settings.inputs[0].input_clippings[0].end_timecode #=> String
     #   resp.jobs[0].settings.inputs[0].input_clippings[0].start_timecode #=> String
@@ -6224,6 +6486,14 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.jobs[0].settings.inputs[0].video_selector.pid #=> Integer
     #   resp.jobs[0].settings.inputs[0].video_selector.program_number #=> Integer
+    #   resp.jobs[0].settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
+    #   resp.jobs[0].settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
+    #   resp.jobs[0].settings.motion_image_inserter.input #=> String
+    #   resp.jobs[0].settings.motion_image_inserter.insertion_mode #=> String, one of "MOV", "PNG"
+    #   resp.jobs[0].settings.motion_image_inserter.offset.image_x #=> Integer
+    #   resp.jobs[0].settings.motion_image_inserter.offset.image_y #=> Integer
+    #   resp.jobs[0].settings.motion_image_inserter.playback #=> String, one of "ONCE", "REPEAT"
+    #   resp.jobs[0].settings.motion_image_inserter.start_time #=> String
     #   resp.jobs[0].settings.nielsen_configuration.breakout_code #=> Integer
     #   resp.jobs[0].settings.nielsen_configuration.distributor_id #=> String
     #   resp.jobs[0].settings.output_groups #=> Array
@@ -6253,6 +6523,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
@@ -6280,6 +6551,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids #=> Array
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
@@ -6305,6 +6577,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids #=> Array
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
@@ -6400,7 +6673,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "SCC", "SRT", "TELETEXT", "TTML", "WEBVTT"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
@@ -6847,7 +7120,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
-    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "SCC", "SRT", "TELETEXT", "TTML", "WEBVTT"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
@@ -7379,7 +7652,7 @@ module Aws::MediaConvert
     #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
     #                   time_delta: 1,
     #                 },
-    #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
+    #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE
     #                 teletext_source_settings: {
     #                   page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                 },
@@ -7390,6 +7663,23 @@ module Aws::MediaConvert
     #           denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
     #           filter_enable: "AUTO", # accepts AUTO, DISABLE, FORCE
     #           filter_strength: 1,
+    #           image_inserter: {
+    #             insertable_images: [
+    #               {
+    #                 duration: 1,
+    #                 fade_in: 1,
+    #                 fade_out: 1,
+    #                 height: 1,
+    #                 image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                 image_x: 1,
+    #                 image_y: 1,
+    #                 layer: 1,
+    #                 opacity: 1,
+    #                 start_time: "__stringPattern01D20305D205D",
+    #                 width: 1,
+    #               },
+    #             ],
+    #           },
     #           input_clippings: [
     #             {
     #               end_timecode: "__stringPattern010920405090509092",
@@ -7421,6 +7711,20 @@ module Aws::MediaConvert
     #           },
     #         },
     #       ],
+    #       motion_image_inserter: {
+    #         framerate: {
+    #           framerate_denominator: 1,
+    #           framerate_numerator: 1,
+    #         },
+    #         input: "__stringMin14Max1285PatternS3Mov09Png",
+    #         insertion_mode: "MOV", # accepts MOV, PNG
+    #         offset: {
+    #           image_x: 1,
+    #           image_y: 1,
+    #         },
+    #         playback: "ONCE", # accepts ONCE, REPEAT
+    #         start_time: "__stringMin11Max11Pattern01D20305D205D",
+    #       },
     #       nielsen_configuration: {
     #         breakout_code: 1,
     #         distributor_id: "__string",
@@ -7463,6 +7767,7 @@ module Aws::MediaConvert
     #               destination: "__stringPatternS3",
     #               encryption: {
     #                 speke_key_provider: {
+    #                   certificate_arn: "__stringPatternArnAwsAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -7499,6 +7804,7 @@ module Aws::MediaConvert
     #                 encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                 initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                 speke_key_provider: {
+    #                   certificate_arn: "__stringPatternArnAwsAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -7531,6 +7837,7 @@ module Aws::MediaConvert
     #               destination: "__stringPatternS3",
     #               encryption: {
     #                 speke_key_provider: {
+    #                   certificate_arn: "__stringPatternArnAwsAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -7659,7 +7966,7 @@ module Aws::MediaConvert
     #                       x_position: 1,
     #                       y_position: 1,
     #                     },
-    #                     destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #                     destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                     dvb_sub_destination_settings: {
     #                       alignment: "CENTERED", # accepts CENTERED, LEFT
     #                       background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -8081,12 +8388,24 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCC", "TTML", "STL", "SRT", "TELETEXT", "NULL_SOURCE"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
     #   resp.job_template.settings.inputs[0].deblock_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].denoise_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].filter_enable #=> String, one of "AUTO", "DISABLE", "FORCE"
     #   resp.job_template.settings.inputs[0].filter_strength #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images #=> Array
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].duration #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].fade_in #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].fade_out #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].height #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].image_inserter_input #=> String
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].image_x #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].image_y #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].layer #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].opacity #=> Integer
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].start_time #=> String
+    #   resp.job_template.settings.inputs[0].image_inserter.insertable_images[0].width #=> Integer
     #   resp.job_template.settings.inputs[0].input_clippings #=> Array
     #   resp.job_template.settings.inputs[0].input_clippings[0].end_timecode #=> String
     #   resp.job_template.settings.inputs[0].input_clippings[0].start_timecode #=> String
@@ -8109,6 +8428,14 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.program_number #=> Integer
+    #   resp.job_template.settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
+    #   resp.job_template.settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
+    #   resp.job_template.settings.motion_image_inserter.input #=> String
+    #   resp.job_template.settings.motion_image_inserter.insertion_mode #=> String, one of "MOV", "PNG"
+    #   resp.job_template.settings.motion_image_inserter.offset.image_x #=> Integer
+    #   resp.job_template.settings.motion_image_inserter.offset.image_y #=> Integer
+    #   resp.job_template.settings.motion_image_inserter.playback #=> String, one of "ONCE", "REPEAT"
+    #   resp.job_template.settings.motion_image_inserter.start_time #=> String
     #   resp.job_template.settings.nielsen_configuration.breakout_code #=> Integer
     #   resp.job_template.settings.nielsen_configuration.distributor_id #=> String
     #   resp.job_template.settings.output_groups #=> Array
@@ -8138,6 +8465,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
@@ -8165,6 +8493,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
@@ -8190,6 +8519,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
@@ -8285,7 +8615,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "SCC", "SRT", "TELETEXT", "TTML", "WEBVTT"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
@@ -8728,7 +9058,7 @@ module Aws::MediaConvert
     #               x_position: 1,
     #               y_position: 1,
     #             },
-    #             destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #             destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #             dvb_sub_destination_settings: {
     #               alignment: "CENTERED", # accepts CENTERED, LEFT
     #               background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -9171,7 +9501,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "SCC", "SRT", "TELETEXT", "TTML", "WEBVTT"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
@@ -9535,7 +9865,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

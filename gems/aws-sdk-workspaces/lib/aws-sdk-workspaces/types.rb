@@ -112,6 +112,46 @@ module Aws::WorkSpaces
     #
     class AuthorizeIpRulesResult < Aws::EmptyStructure; end
 
+    # Describes an Amazon WorkSpaces client.
+    #
+    # @note When making an API call, you may pass ClientProperties
+    #   data as a hash:
+    #
+    #       {
+    #         reconnect_enabled: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] reconnect_enabled
+    #   Specifies whether users can cache their credentials on the Amazon
+    #   WorkSpaces client. When enabled, users can choose to reconnect to
+    #   their WorkSpaces without re-entering their credentials.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ClientProperties AWS API Documentation
+    #
+    class ClientProperties < Struct.new(
+      :reconnect_enabled)
+      include Aws::Structure
+    end
+
+    # Information about the Amazon WorkSpaces client.
+    #
+    # @!attribute [rw] resource_id
+    #   The resource identifier, in the form of a directory ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_properties
+    #   Information about the Amazon WorkSpaces client.
+    #   @return [Types::ClientProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ClientPropertiesResult AWS API Documentation
+    #
+    class ClientPropertiesResult < Struct.new(
+      :resource_id,
+      :client_properties)
+      include Aws::Structure
+    end
+
     # Describes the compute type.
     #
     # @!attribute [rw] name
@@ -437,6 +477,35 @@ module Aws::WorkSpaces
     class DescribeAccountResult < Struct.new(
       :dedicated_tenancy_support,
       :dedicated_tenancy_management_cidr_range)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeClientPropertiesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_ids: ["NonEmptyString"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_ids
+    #   The resource identifiers, in the form of directory IDs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeClientPropertiesRequest AWS API Documentation
+    #
+    class DescribeClientPropertiesRequest < Struct.new(
+      :resource_ids)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_properties_list
+    #   Information about the specified Amazon WorkSpaces clients.
+    #   @return [Array<Types::ClientPropertiesResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeClientPropertiesResult AWS API Documentation
+    #
+    class DescribeClientPropertiesResult < Struct.new(
+      :client_properties_list)
       include Aws::Structure
     end
 
@@ -1038,6 +1107,36 @@ module Aws::WorkSpaces
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyAccountResult AWS API Documentation
     #
     class ModifyAccountResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass ModifyClientPropertiesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "NonEmptyString", # required
+    #         client_properties: {
+    #           reconnect_enabled: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   The resource identifiers, in the form of directory IDs.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_properties
+    #   Information about the Amazon WorkSpaces client.
+    #   @return [Types::ClientProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyClientPropertiesRequest AWS API Documentation
+    #
+    class ModifyClientPropertiesRequest < Struct.new(
+      :resource_id,
+      :client_properties)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyClientPropertiesResult AWS API Documentation
+    #
+    class ModifyClientPropertiesResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ModifyWorkspacePropertiesRequest
     #   data as a hash:

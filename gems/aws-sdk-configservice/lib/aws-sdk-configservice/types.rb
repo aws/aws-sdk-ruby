@@ -144,6 +144,52 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # The details that identify a resource that is collected by AWS Config
+    # aggregator, including the resource type, ID, (if available) the custom
+    # resource name, the source account, and source region.
+    #
+    # @note When making an API call, you may pass AggregateResourceIdentifier
+    #   data as a hash:
+    #
+    #       {
+    #         source_account_id: "AccountId", # required
+    #         source_region: "AwsRegion", # required
+    #         resource_id: "ResourceId", # required
+    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::CodePipeline::Pipeline
+    #         resource_name: "ResourceName",
+    #       }
+    #
+    # @!attribute [rw] source_account_id
+    #   The 12-digit account ID of the source account.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_region
+    #   The source region where data is aggregated.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the AWS resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the AWS resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the AWS resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/AggregateResourceIdentifier AWS API Documentation
+    #
+    class AggregateResourceIdentifier < Struct.new(
+      :source_account_id,
+      :source_region,
+      :resource_id,
+      :resource_type,
+      :resource_name)
+      include Aws::Structure
+    end
+
     # The current sync status between the source and the aggregator account.
     #
     # @!attribute [rw] source_id
@@ -231,7 +277,7 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The 12 digit AWS account ID associated with the resource.
+    #   The 12-digit AWS account ID associated with the resource.
     #   @return [String]
     #
     # @!attribute [rw] configuration_item_capture_time
@@ -302,6 +348,56 @@ module Aws::ConfigService
       :resource_creation_time,
       :configuration,
       :supplementary_configuration)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchGetAggregateResourceConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
+    #         resource_identifiers: [ # required
+    #           {
+    #             source_account_id: "AccountId", # required
+    #             source_region: "AwsRegion", # required
+    #             resource_id: "ResourceId", # required
+    #             resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::CodePipeline::Pipeline
+    #             resource_name: "ResourceName",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] configuration_aggregator_name
+    #   The name of the configuration aggregator.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifiers
+    #   A list of aggregate ResourceIdentifiers objects.
+    #   @return [Array<Types::AggregateResourceIdentifier>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/BatchGetAggregateResourceConfigRequest AWS API Documentation
+    #
+    class BatchGetAggregateResourceConfigRequest < Struct.new(
+      :configuration_aggregator_name,
+      :resource_identifiers)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] base_configuration_items
+    #   A list that contains the current configuration of one or more
+    #   resources.
+    #   @return [Array<Types::BaseConfigurationItem>]
+    #
+    # @!attribute [rw] unprocessed_resource_identifiers
+    #   A list of resource identifiers that were not processed with current
+    #   scope. The list is empty if all the resources are processed.
+    #   @return [Array<Types::AggregateResourceIdentifier>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/BatchGetAggregateResourceConfigResponse AWS API Documentation
+    #
+    class BatchGetAggregateResourceConfigResponse < Struct.new(
+      :base_configuration_items,
+      :unprocessed_resource_identifiers)
       include Aws::Structure
     end
 
@@ -2485,6 +2581,125 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetAggregateDiscoveredResourceCountsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
+    #         filters: {
+    #           resource_type: "AWS::EC2::CustomerGateway", # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::CodePipeline::Pipeline
+    #           account_id: "AccountId",
+    #           region: "AwsRegion",
+    #         },
+    #         group_by_key: "RESOURCE_TYPE", # accepts RESOURCE_TYPE, ACCOUNT_ID, AWS_REGION
+    #         limit: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] configuration_aggregator_name
+    #   The name of the configuration aggregator.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters the results based on the `ResourceCountFilters` object.
+    #   @return [Types::ResourceCountFilters]
+    #
+    # @!attribute [rw] group_by_key
+    #   The key to group the resource counts.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of GroupedResourceCount objects returned on each
+    #   page. The default is 1000. You cannot specify a number greater than
+    #   1000. If you specify 0, AWS Config uses the default.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateDiscoveredResourceCountsRequest AWS API Documentation
+    #
+    class GetAggregateDiscoveredResourceCountsRequest < Struct.new(
+      :configuration_aggregator_name,
+      :filters,
+      :group_by_key,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] total_discovered_resources
+    #   The total number of resources that are present in an aggregator with
+    #   the filters that you provide.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] group_by_key
+    #   The key passed into the request object. If `GroupByKey` is not
+    #   provided, the result will be empty.
+    #   @return [String]
+    #
+    # @!attribute [rw] grouped_resource_counts
+    #   Returns a list of GroupedResourceCount objects.
+    #   @return [Array<Types::GroupedResourceCount>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateDiscoveredResourceCountsResponse AWS API Documentation
+    #
+    class GetAggregateDiscoveredResourceCountsResponse < Struct.new(
+      :total_discovered_resources,
+      :group_by_key,
+      :grouped_resource_counts,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAggregateResourceConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
+    #         resource_identifier: { # required
+    #           source_account_id: "AccountId", # required
+    #           source_region: "AwsRegion", # required
+    #           resource_id: "ResourceId", # required
+    #           resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::CodePipeline::Pipeline
+    #           resource_name: "ResourceName",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] configuration_aggregator_name
+    #   The name of the configuration aggregator.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   An object that identifies aggregate resource.
+    #   @return [Types::AggregateResourceIdentifier]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateResourceConfigRequest AWS API Documentation
+    #
+    class GetAggregateResourceConfigRequest < Struct.new(
+      :configuration_aggregator_name,
+      :resource_identifier)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration_item
+    #   Returns a `ConfigurationItem` object.
+    #   @return [Types::ConfigurationItem]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateResourceConfigResponse AWS API Documentation
+    #
+    class GetAggregateResourceConfigResponse < Struct.new(
+      :configuration_item)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetComplianceDetailsByConfigRuleRequest
     #   data as a hash:
     #
@@ -2820,6 +3035,94 @@ module Aws::ConfigService
     #
     class GetResourceConfigHistoryResponse < Struct.new(
       :configuration_items,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # The count of resources that are grouped by the group name.
+    #
+    # @!attribute [rw] group_name
+    #   The name of the group that can be region, account ID, or resource
+    #   type. For example, region1, region2 if the region was chosen as
+    #   `GroupByKey`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_count
+    #   The number of resources in the group.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GroupedResourceCount AWS API Documentation
+    #
+    class GroupedResourceCount < Struct.new(
+      :group_name,
+      :resource_count)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAggregateDiscoveredResourcesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
+    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::CodePipeline::Pipeline
+    #         filters: {
+    #           account_id: "AccountId",
+    #           resource_id: "ResourceId",
+    #           resource_name: "ResourceName",
+    #           region: "AwsRegion",
+    #         },
+    #         limit: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] configuration_aggregator_name
+    #   The name of the configuration aggregator.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resources that you want AWS Config to list in the
+    #   response.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters the results based on the `ResourceFilters` object.
+    #   @return [Types::ResourceFilters]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of resource identifiers returned on each page.
+    #   The default is 100. You cannot specify a number greater than 100. If
+    #   you specify 0, AWS Config uses the default.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListAggregateDiscoveredResourcesRequest AWS API Documentation
+    #
+    class ListAggregateDiscoveredResourcesRequest < Struct.new(
+      :configuration_aggregator_name,
+      :resource_type,
+      :filters,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_identifiers
+    #   Returns a list of `ResourceIdentifiers` objects.
+    #   @return [Array<Types::AggregateResourceIdentifier>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListAggregateDiscoveredResourcesResponse AWS API Documentation
+    #
+    class ListAggregateDiscoveredResourcesResponse < Struct.new(
+      :resource_identifiers,
       :next_token)
       include Aws::Structure
     end
@@ -3390,6 +3693,78 @@ module Aws::ConfigService
     class ResourceCount < Struct.new(
       :resource_type,
       :count)
+      include Aws::Structure
+    end
+
+    # Filters the resource count based on account ID, region, and resource
+    # type.
+    #
+    # @note When making an API call, you may pass ResourceCountFilters
+    #   data as a hash:
+    #
+    #       {
+    #         resource_type: "AWS::EC2::CustomerGateway", # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::CodePipeline::Pipeline
+    #         account_id: "AccountId",
+    #         region: "AwsRegion",
+    #       }
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the AWS resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The 12-digit ID of the account.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The region where the account is located.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ResourceCountFilters AWS API Documentation
+    #
+    class ResourceCountFilters < Struct.new(
+      :resource_type,
+      :account_id,
+      :region)
+      include Aws::Structure
+    end
+
+    # Filters the results by resource account ID, region, resource ID, and
+    # resource name.
+    #
+    # @note When making an API call, you may pass ResourceFilters
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId",
+    #         resource_id: "ResourceId",
+    #         resource_name: "ResourceName",
+    #         region: "AwsRegion",
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The 12-digit source account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The source region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ResourceFilters AWS API Documentation
+    #
+    class ResourceFilters < Struct.new(
+      :account_id,
+      :resource_id,
+      :resource_name,
+      :region)
       include Aws::Structure
     end
 

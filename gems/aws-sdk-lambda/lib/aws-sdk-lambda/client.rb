@@ -419,45 +419,35 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Identifies a poll-based event source for a Lambda function. It can be
-    # either an Amazon Kinesis or DynamoDB stream. AWS Lambda invokes the
-    # specified function when records are posted to the event source.
+    # Creates a mapping between an event source and an AWS Lambda function.
+    # Lambda reads items from the event source and triggers the function.
     #
-    # This association between a poll-based source and a Lambda function is
-    # called the event source mapping.
+    # For details about each event source type, see the following topics.
     #
-    # You provide mapping information (for example, which stream or SQS
-    # queue to read from and which Lambda function to invoke) in the request
-    # body.
+    # * [Using AWS Lambda with Amazon Kinesis][1]
     #
-    # Amazon Kinesis or DynamoDB stream event sources can be associated with
-    # multiple AWS Lambda functions and a given Lambda function can be
-    # associated with multiple AWS event sources. For Amazon SQS, you can
-    # configure multiple queues as event sources for a single Lambda
-    # function, but an SQS queue can be mapped only to a single Lambda
-    # function.
+    # * [Using AWS Lambda with Amazon SQS][2]
     #
-    # You can configure an SQS queue in an account separate from your Lambda
-    # function's account. Also the queue needs to reside in the same AWS
-    # region as your function.
-    #
-    # If you are using versioning, you can specify a specific function
-    # version or an alias via the function name parameter. For more
-    # information about versioning, see [AWS Lambda Function Versioning and
-    # Aliases][1].
-    #
-    # This operation requires permission for the
-    # `lambda:CreateEventSourceMapping` action.
+    # * [Using AWS Lambda with Amazon DynamoDB][3]
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+    # [1]: http://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html
+    # [2]: http://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html
+    # [3]: http://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html
     #
     # @option params [required, String] :event_source_arn
     #   The Amazon Resource Name (ARN) of the event source.
     #
+    #   * **Amazon Kinesis** - The ARN of the data stream or a stream
+    #     consumer.
+    #
+    #   * **Amazon DynamoDB Streams** - The ARN of the stream.
+    #
+    #   * **Amazon Simple Queue Service** - The ARN of the queue.
+    #
     # @option params [required, String] :function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -472,43 +462,28 @@ module Aws::Lambda
     #   * **Partial ARN** - `123456789012:function:MyFunction`.
     #
     #   The length constraint applies only to the full ARN. If you specify
-    #   only the function name, it is limited to 64 characters in length.
+    #   only the function name, it's limited to 64 characters in length.
     #
     # @option params [Boolean] :enabled
-    #   Set to false to disable the event source upon creation.
+    #   Disables the event source mapping to pause polling and invocation.
     #
     # @option params [Integer] :batch_size
-    #   The largest number of records that AWS Lambda will retrieve from your
-    #   event source at the time of invoking your function. Your function
-    #   receives an event with all the retrieved records. The default for
-    #   Amazon Kinesis and Amazon DynamoDB is 100 records. Both the default
-    #   and maximum for Amazon SQS are 10 messages.
+    #   The maximum number of items to retrieve in a single batch.
+    #
+    #   * **Amazon Kinesis** - Default 100. Max 10,000.
+    #
+    #   * **Amazon DynamoDB Streams** - Default 100. Max 1,000.
+    #
+    #   * **Amazon Simple Queue Service** - Default 10. Max 10.
     #
     # @option params [String] :starting_position
-    #   The position in the DynamoDB or Kinesis stream where AWS Lambda should
-    #   start reading. For more information, see [GetShardIterator][1] in the
-    #   *Amazon Kinesis API Reference Guide* or [GetShardIterator][2] in the
-    #   *Amazon DynamoDB API Reference Guide*. The `AT_TIMESTAMP` value is
-    #   supported only for [Kinesis streams][3].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_streams_GetShardIterator.html
-    #   [3]: http://docs.aws.amazon.com/streams/latest/dev/amazon-kinesis-streams.html
+    #   The position in a stream from which to start reading. Required for
+    #   Amazon Kinesis and Amazon DynamoDB Streams sources. `AT_TIMESTAMP` is
+    #   only supported for Amazon Kinesis streams.
     #
     # @option params [Time,DateTime,Date,Integer,String] :starting_position_timestamp
-    #   The timestamp of the data record from which to start reading. Used
-    #   with [shard iterator type][1] AT\_TIMESTAMP. If a record with this
-    #   exact timestamp does not exist, the iterator returned is for the next
-    #   (later) record. If the timestamp is older than the current trim
-    #   horizon, the iterator returned is for the oldest untrimmed data record
-    #   (TRIM\_HORIZON). Valid only for [Kinesis streams][2].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType
-    #   [2]: http://docs.aws.amazon.com/streams/latest/dev/amazon-kinesis-streams.html
+    #   With `StartingPosition` set to `AT_TIMESTAMP`, the Unix time in
+    #   seconds from which to start reading.
     #
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -712,7 +687,7 @@ module Aws::Lambda
     #
     #   resp = client.create_function({
     #     function_name: "FunctionName", # required
-    #     runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x
+    #     runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x
     #     role: "RoleArn", # required
     #     handler: "Handler", # required
     #     code: { # required
@@ -750,7 +725,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -839,14 +814,10 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Removes an event source mapping. This means AWS Lambda will no longer
-    # invoke the function for events in the associated source.
-    #
-    # This operation requires permission for the
-    # `lambda:DeleteEventSourceMapping` action.
+    # Deletes an event source mapping.
     #
     # @option params [required, String] :uuid
-    #   The event source mapping ID.
+    #   The identifier of the event source mapping.
     #
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1127,14 +1098,10 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Returns configuration information for the specified event source
-    # mapping (see CreateEventSourceMapping).
-    #
-    # This operation requires permission for the
-    # `lambda:GetEventSourceMapping` action.
+    # Returns details about an event source mapping.
     #
     # @option params [required, String] :uuid
-    #   The AWS Lambda assigned ID of the event source mapping.
+    #   The identifier of the event source mapping.
     #
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1291,7 +1258,7 @@ module Aws::Lambda
     #
     #   resp.configuration.function_name #=> String
     #   resp.configuration.function_arn #=> String
-    #   resp.configuration.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x"
+    #   resp.configuration.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x"
     #   resp.configuration.role #=> String
     #   resp.configuration.handler #=> String
     #   resp.configuration.code_size #=> Integer
@@ -1434,7 +1401,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -1852,21 +1819,21 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Returns a list of event source mappings you created using the
-    # `CreateEventSourceMapping` (see CreateEventSourceMapping).
-    #
-    # For each mapping, the API returns configuration information. You can
-    # optionally specify filters to retrieve specific event source mappings.
-    #
-    # This operation requires permission for the
-    # `lambda:ListEventSourceMappings` action.
+    # Lists event source mappings. Specify an `EventSourceArn` to only show
+    # event source mappings for a single event source.
     #
     # @option params [String] :event_source_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Kinesis or DynamoDB
-    #   stream. (This parameter is optional.)
+    #   The Amazon Resource Name (ARN) of the event source.
+    #
+    #   * **Amazon Kinesis** - The ARN of the data stream or a stream
+    #     consumer.
+    #
+    #   * **Amazon DynamoDB Streams** - The ARN of the stream.
+    #
+    #   * **Amazon Simple Queue Service** - The ARN of the queue.
     #
     # @option params [String] :function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1881,16 +1848,13 @@ module Aws::Lambda
     #   * **Partial ARN** - `123456789012:function:MyFunction`.
     #
     #   The length constraint applies only to the full ARN. If you specify
-    #   only the function name, it is limited to 64 characters in length.
+    #   only the function name, it's limited to 64 characters in length.
     #
     # @option params [String] :marker
-    #   Optional string. An opaque pagination token returned from a previous
-    #   `ListEventSourceMappings` operation. If present, specifies to continue
-    #   the list from where the returning call left off.
+    #   A pagination token returned by a previous call.
     #
     # @option params [Integer] :max_items
-    #   Optional integer. Specifies the maximum number of event sources to
-    #   return in response. This value must be greater than 0.
+    #   The maximum number of event source mappings to return.
     #
     # @return [Types::ListEventSourceMappingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2001,7 +1965,7 @@ module Aws::Lambda
     #   resp.functions #=> Array
     #   resp.functions[0].function_name #=> String
     #   resp.functions[0].function_arn #=> String
-    #   resp.functions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x"
+    #   resp.functions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x"
     #   resp.functions[0].role #=> String
     #   resp.functions[0].handler #=> String
     #   resp.functions[0].code_size #=> Integer
@@ -2146,7 +2110,7 @@ module Aws::Lambda
     #   resp.versions #=> Array
     #   resp.versions[0].function_name #=> String
     #   resp.versions[0].function_arn #=> String
-    #   resp.versions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x"
+    #   resp.versions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x"
     #   resp.versions[0].role #=> String
     #   resp.versions[0].handler #=> String
     #   resp.versions[0].code_size #=> Integer
@@ -2290,7 +2254,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -2665,25 +2629,15 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # You can update an event source mapping. This is useful if you want to
-    # change the parameters of the existing mapping without losing your
-    # position in the stream. You can change which function will receive the
-    # stream records, but to change the stream itself, you must create a new
-    # mapping.
-    #
-    # If you disable the event source mapping, AWS Lambda stops polling. If
-    # you enable again, it will resume polling from the time it had stopped
-    # polling, so you don't lose processing of any records. However, if you
-    # delete event source mapping and create it again, it will reset.
-    #
-    # This operation requires permission for the
-    # `lambda:UpdateEventSourceMapping` action.
+    # Updates an event source mapping. You can change the function that AWS
+    # Lambda invokes, or pause invocation and resume later from the same
+    # location.
     #
     # @option params [required, String] :uuid
-    #   The event source mapping identifier.
+    #   The identifier of the event source mapping.
     #
     # @option params [String] :function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2698,16 +2652,19 @@ module Aws::Lambda
     #   * **Partial ARN** - `123456789012:function:MyFunction`.
     #
     #   The length constraint applies only to the full ARN. If you specify
-    #   only the function name, it is limited to 64 characters in length.
+    #   only the function name, it's limited to 64 characters in length.
     #
     # @option params [Boolean] :enabled
-    #   Specifies whether AWS Lambda should actively poll the stream or not.
-    #   If disabled, AWS Lambda will not poll the stream.
+    #   Disables the event source mapping to pause polling and invocation.
     #
     # @option params [Integer] :batch_size
-    #   The largest number of records that AWS Lambda will retrieve from your
-    #   event source at the time of invoking your function. Your function
-    #   receives an event with all the retrieved records.
+    #   The maximum number of items to retrieve in a single batch.
+    #
+    #   * **Amazon Kinesis** - Default 100. Max 10,000.
+    #
+    #   * **Amazon DynamoDB Streams** - Default 100. Max 1,000.
+    #
+    #   * **Amazon Simple Queue Service** - Default 10. Max 10.
     #
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2919,7 +2876,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -3124,7 +3081,7 @@ module Aws::Lambda
     #         "EnvironmentVariableName" => "EnvironmentVariableValue",
     #       },
     #     },
-    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x
+    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x
     #     dead_letter_config: {
     #       target_arn: "ResourceArn",
     #     },
@@ -3139,7 +3096,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -3186,7 +3143,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

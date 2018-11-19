@@ -25,6 +25,9 @@ module Aws::WorkSpaces
     BundleIdList = Shapes::ListShape.new(name: 'BundleIdList')
     BundleList = Shapes::ListShape.new(name: 'BundleList')
     BundleOwner = Shapes::StringShape.new(name: 'BundleOwner')
+    ClientProperties = Shapes::StructureShape.new(name: 'ClientProperties')
+    ClientPropertiesList = Shapes::ListShape.new(name: 'ClientPropertiesList')
+    ClientPropertiesResult = Shapes::StructureShape.new(name: 'ClientPropertiesResult')
     Compute = Shapes::StringShape.new(name: 'Compute')
     ComputeType = Shapes::StructureShape.new(name: 'ComputeType')
     ComputerName = Shapes::StringShape.new(name: 'ComputerName')
@@ -52,6 +55,8 @@ module Aws::WorkSpaces
     DescribeAccountModificationsResult = Shapes::StructureShape.new(name: 'DescribeAccountModificationsResult')
     DescribeAccountRequest = Shapes::StructureShape.new(name: 'DescribeAccountRequest')
     DescribeAccountResult = Shapes::StructureShape.new(name: 'DescribeAccountResult')
+    DescribeClientPropertiesRequest = Shapes::StructureShape.new(name: 'DescribeClientPropertiesRequest')
+    DescribeClientPropertiesResult = Shapes::StructureShape.new(name: 'DescribeClientPropertiesResult')
     DescribeIpGroupsRequest = Shapes::StructureShape.new(name: 'DescribeIpGroupsRequest')
     DescribeIpGroupsResult = Shapes::StructureShape.new(name: 'DescribeIpGroupsResult')
     DescribeTagsRequest = Shapes::StructureShape.new(name: 'DescribeTagsRequest')
@@ -110,6 +115,8 @@ module Aws::WorkSpaces
     ModificationStateList = Shapes::ListShape.new(name: 'ModificationStateList')
     ModifyAccountRequest = Shapes::StructureShape.new(name: 'ModifyAccountRequest')
     ModifyAccountResult = Shapes::StructureShape.new(name: 'ModifyAccountResult')
+    ModifyClientPropertiesRequest = Shapes::StructureShape.new(name: 'ModifyClientPropertiesRequest')
+    ModifyClientPropertiesResult = Shapes::StructureShape.new(name: 'ModifyClientPropertiesResult')
     ModifyWorkspacePropertiesRequest = Shapes::StructureShape.new(name: 'ModifyWorkspacePropertiesRequest')
     ModifyWorkspacePropertiesResult = Shapes::StructureShape.new(name: 'ModifyWorkspacePropertiesResult')
     ModifyWorkspaceStateRequest = Shapes::StructureShape.new(name: 'ModifyWorkspaceStateRequest')
@@ -128,10 +135,12 @@ module Aws::WorkSpaces
     RebuildWorkspaceRequests = Shapes::ListShape.new(name: 'RebuildWorkspaceRequests')
     RebuildWorkspacesRequest = Shapes::StructureShape.new(name: 'RebuildWorkspacesRequest')
     RebuildWorkspacesResult = Shapes::StructureShape.new(name: 'RebuildWorkspacesResult')
+    ReconnectEnum = Shapes::StringShape.new(name: 'ReconnectEnum')
     RegistrationCode = Shapes::StringShape.new(name: 'RegistrationCode')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceAssociatedException = Shapes::StructureShape.new(name: 'ResourceAssociatedException')
     ResourceCreationFailedException = Shapes::StructureShape.new(name: 'ResourceCreationFailedException')
+    ResourceIdList = Shapes::ListShape.new(name: 'ResourceIdList')
     ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceUnavailableException = Shapes::StructureShape.new(name: 'ResourceUnavailableException')
@@ -224,6 +233,15 @@ module Aws::WorkSpaces
 
     BundleList.member = Shapes::ShapeRef.new(shape: WorkspaceBundle)
 
+    ClientProperties.add_member(:reconnect_enabled, Shapes::ShapeRef.new(shape: ReconnectEnum, location_name: "ReconnectEnabled"))
+    ClientProperties.struct_class = Types::ClientProperties
+
+    ClientPropertiesList.member = Shapes::ShapeRef.new(shape: ClientPropertiesResult)
+
+    ClientPropertiesResult.add_member(:resource_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceId"))
+    ClientPropertiesResult.add_member(:client_properties, Shapes::ShapeRef.new(shape: ClientProperties, location_name: "ClientProperties"))
+    ClientPropertiesResult.struct_class = Types::ClientPropertiesResult
+
     ComputeType.add_member(:name, Shapes::ShapeRef.new(shape: Compute, location_name: "Name"))
     ComputeType.struct_class = Types::ComputeType
 
@@ -285,6 +303,12 @@ module Aws::WorkSpaces
     DescribeAccountResult.add_member(:dedicated_tenancy_support, Shapes::ShapeRef.new(shape: DedicatedTenancySupportResultEnum, location_name: "DedicatedTenancySupport"))
     DescribeAccountResult.add_member(:dedicated_tenancy_management_cidr_range, Shapes::ShapeRef.new(shape: DedicatedTenancyManagementCidrRange, location_name: "DedicatedTenancyManagementCidrRange"))
     DescribeAccountResult.struct_class = Types::DescribeAccountResult
+
+    DescribeClientPropertiesRequest.add_member(:resource_ids, Shapes::ShapeRef.new(shape: ResourceIdList, required: true, location_name: "ResourceIds"))
+    DescribeClientPropertiesRequest.struct_class = Types::DescribeClientPropertiesRequest
+
+    DescribeClientPropertiesResult.add_member(:client_properties_list, Shapes::ShapeRef.new(shape: ClientPropertiesList, location_name: "ClientPropertiesList"))
+    DescribeClientPropertiesResult.struct_class = Types::DescribeClientPropertiesResult
 
     DescribeIpGroupsRequest.add_member(:group_ids, Shapes::ShapeRef.new(shape: IpGroupIdList, location_name: "GroupIds"))
     DescribeIpGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
@@ -421,6 +445,12 @@ module Aws::WorkSpaces
 
     ModifyAccountResult.struct_class = Types::ModifyAccountResult
 
+    ModifyClientPropertiesRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ResourceId"))
+    ModifyClientPropertiesRequest.add_member(:client_properties, Shapes::ShapeRef.new(shape: ClientProperties, location_name: "ClientProperties"))
+    ModifyClientPropertiesRequest.struct_class = Types::ModifyClientPropertiesRequest
+
+    ModifyClientPropertiesResult.struct_class = Types::ModifyClientPropertiesResult
+
     ModifyWorkspacePropertiesRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "WorkspaceId"))
     ModifyWorkspacePropertiesRequest.add_member(:workspace_properties, Shapes::ShapeRef.new(shape: WorkspaceProperties, required: true, location_name: "WorkspaceProperties"))
     ModifyWorkspacePropertiesRequest.struct_class = Types::ModifyWorkspacePropertiesRequest
@@ -457,6 +487,8 @@ module Aws::WorkSpaces
 
     RebuildWorkspacesResult.add_member(:failed_requests, Shapes::ShapeRef.new(shape: FailedRebuildWorkspaceRequests, location_name: "FailedRequests"))
     RebuildWorkspacesResult.struct_class = Types::RebuildWorkspacesResult
+
+    ResourceIdList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
     RevokeIpRulesRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: IpGroupId, required: true, location_name: "GroupId"))
     RevokeIpRulesRequest.add_member(:user_rules, Shapes::ShapeRef.new(shape: IpRevokedRuleList, required: true, location_name: "UserRules"))
@@ -743,6 +775,17 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:describe_client_properties, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeClientProperties"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeClientPropertiesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeClientPropertiesResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:describe_ip_groups, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeIpGroups"
         o.http_method = "POST"
@@ -870,6 +913,17 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:modify_client_properties, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyClientProperties"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyClientPropertiesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyClientPropertiesResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:modify_workspace_properties, Seahorse::Model::Operation.new.tap do |o|

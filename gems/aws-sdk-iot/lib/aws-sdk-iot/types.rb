@@ -8,6 +8,72 @@
 module Aws::IoT
   module Types
 
+    # Details of abort criteria to abort the job.
+    #
+    # @note When making an API call, you may pass AbortConfig
+    #   data as a hash:
+    #
+    #       {
+    #         criteria_list: [ # required
+    #           {
+    #             failure_type: "FAILED", # required, accepts FAILED, REJECTED, TIMED_OUT, ALL
+    #             action: "CANCEL", # required, accepts CANCEL
+    #             threshold_percentage: 1.0, # required
+    #             min_number_of_executed_things: 1, # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] criteria_list
+    #   The list of abort criteria to define rules to abort the job.
+    #   @return [Array<Types::AbortCriteria>]
+    #
+    class AbortConfig < Struct.new(
+      :criteria_list)
+      include Aws::Structure
+    end
+
+    # Details of abort criteria to define rules to abort the job.
+    #
+    # @note When making an API call, you may pass AbortCriteria
+    #   data as a hash:
+    #
+    #       {
+    #         failure_type: "FAILED", # required, accepts FAILED, REJECTED, TIMED_OUT, ALL
+    #         action: "CANCEL", # required, accepts CANCEL
+    #         threshold_percentage: 1.0, # required
+    #         min_number_of_executed_things: 1, # required
+    #       }
+    #
+    # @!attribute [rw] failure_type
+    #   The type of job execution failure to define a rule to initiate a job
+    #   abort.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The type of abort action to initiate a job abort.
+    #   @return [String]
+    #
+    # @!attribute [rw] threshold_percentage
+    #   The threshold as a percentage of the total number of executed things
+    #   that will initiate a job abort.
+    #
+    #   AWS IoT supports up to two digits after the decimal (for example,
+    #   10.9 and 10.99, but not 10.999).
+    #   @return [Float]
+    #
+    # @!attribute [rw] min_number_of_executed_things
+    #   Minimum number of executed things before evaluating an abort rule.
+    #   @return [Integer]
+    #
+    class AbortCriteria < Struct.new(
+      :failure_type,
+      :action,
+      :threshold_percentage,
+      :min_number_of_executed_things)
+      include Aws::Structure
+    end
+
     # The input for the AcceptCertificateTransfer operation.
     #
     # @note When making an API call, you may pass AcceptCertificateTransferRequest
@@ -251,6 +317,42 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AddThingToBillingGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         billing_group_name: "BillingGroupName",
+    #         billing_group_arn: "BillingGroupArn",
+    #         thing_name: "ThingName",
+    #         thing_arn: "ThingArn",
+    #       }
+    #
+    # @!attribute [rw] billing_group_name
+    #   The name of the billing group.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_group_arn
+    #   The ARN of the billing group.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the thing to be added to the billing group.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_arn
+    #   The ARN of the thing to be added to the billing group.
+    #   @return [String]
+    #
+    class AddThingToBillingGroupRequest < Struct.new(
+      :billing_group_name,
+      :billing_group_arn,
+      :thing_name,
+      :thing_arn)
+      include Aws::Structure
+    end
+
+    class AddThingToBillingGroupResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass AddThingToThingGroupRequest
     #   data as a hash:
     #
@@ -259,6 +361,7 @@ module Aws::IoT
     #         thing_group_arn: "ThingGroupArn",
     #         thing_name: "ThingName",
     #         thing_arn: "ThingArn",
+    #         override_dynamic_groups: false,
     #       }
     #
     # @!attribute [rw] thing_group_name
@@ -277,11 +380,19 @@ module Aws::IoT
     #   The ARN of the thing to add to a group.
     #   @return [String]
     #
+    # @!attribute [rw] override_dynamic_groups
+    #   Override dynamic thing groups with static thing groups when 10-group
+    #   limit is reached. If a thing belongs to 10 thing groups, and one or
+    #   more of those groups are dynamic thing groups, adding a thing to a
+    #   static group removes the thing from the last dynamic group.
+    #   @return [Boolean]
+    #
     class AddThingToThingGroupRequest < Struct.new(
       :thing_group_name,
       :thing_group_arn,
       :thing_name,
-      :thing_arn)
+      :thing_arn,
+      :override_dynamic_groups)
       include Aws::Structure
     end
 
@@ -384,7 +495,11 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] target
-    #   The identity to which the policy is attached.
+    #   The [identity][1] to which the policy is attached.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-security-identity.html
     #   @return [String]
     #
     class AttachPolicyRequest < Struct.new(
@@ -893,6 +1008,35 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Additional information about the billing group.
+    #
+    # @!attribute [rw] creation_date
+    #   The date the billing group was created.
+    #   @return [Time]
+    #
+    class BillingGroupMetadata < Struct.new(
+      :creation_date)
+      include Aws::Structure
+    end
+
+    # The properties of a billing group.
+    #
+    # @note When making an API call, you may pass BillingGroupProperties
+    #   data as a hash:
+    #
+    #       {
+    #         billing_group_description: "BillingGroupDescription",
+    #       }
+    #
+    # @!attribute [rw] billing_group_description
+    #   The description of the billing group.
+    #   @return [String]
+    #
+    class BillingGroupProperties < Struct.new(
+      :billing_group_description)
+      include Aws::Structure
+    end
+
     # A CA certificate.
     #
     # @!attribute [rw] certificate_arn
@@ -1087,12 +1231,18 @@ module Aws::IoT
     #
     #       {
     #         job_id: "JobId", # required
+    #         reason_code: "ReasonCode",
     #         comment: "Comment",
     #         force: false,
     #       }
     #
     # @!attribute [rw] job_id
     #   The unique identifier you assigned to this job when it was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason_code
+    #   (Optional)A reason code string that explains why the job was
+    #   canceled.
     #   @return [String]
     #
     # @!attribute [rw] comment
@@ -1112,6 +1262,7 @@ module Aws::IoT
     #
     class CancelJobRequest < Struct.new(
       :job_id,
+      :reason_code,
       :comment,
       :force)
       include Aws::Structure
@@ -1526,6 +1677,60 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateBillingGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         billing_group_name: "BillingGroupName", # required
+    #         billing_group_properties: {
+    #           billing_group_description: "BillingGroupDescription",
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] billing_group_name
+    #   The name you wish to give to the billing group.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_group_properties
+    #   The properties of the billing group.
+    #   @return [Types::BillingGroupProperties]
+    #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the billing group.
+    #   @return [Array<Types::Tag>]
+    #
+    class CreateBillingGroupRequest < Struct.new(
+      :billing_group_name,
+      :billing_group_properties,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] billing_group_name
+    #   The name you gave to the billing group.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_group_arn
+    #   The ARN of the billing group.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_group_id
+    #   The ID of the billing group.
+    #   @return [String]
+    #
+    class CreateBillingGroupResponse < Struct.new(
+      :billing_group_name,
+      :billing_group_arn,
+      :billing_group_id)
+      include Aws::Structure
+    end
+
     # The input for the CreateCertificateFromCsr operation.
     #
     # @note When making an API call, you may pass CreateCertificateFromCsrRequest
@@ -1573,6 +1778,114 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateDynamicThingGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         thing_group_name: "ThingGroupName", # required
+    #         thing_group_properties: {
+    #           thing_group_description: "ThingGroupDescription",
+    #           attribute_payload: {
+    #             attributes: {
+    #               "AttributeName" => "AttributeValue",
+    #             },
+    #             merge: false,
+    #           },
+    #         },
+    #         index_name: "IndexName",
+    #         query_string: "QueryString", # required
+    #         query_version: "QueryVersion",
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] thing_group_name
+    #   The dynamic thing group name to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_group_properties
+    #   The dynamic thing group properties.
+    #   @return [Types::ThingGroupProperties]
+    #
+    # @!attribute [rw] index_name
+    #   The dynamic thing group index name.
+    #
+    #   <note markdown="1"> Currently one index is supported: "AWS\_Things".
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   The dynamic thing group search query string.
+    #
+    #   See [Query Syntax][1] for information about query string syntax.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html
+    #   @return [String]
+    #
+    # @!attribute [rw] query_version
+    #   The dynamic thing group query version.
+    #
+    #   <note markdown="1"> Currently one query version is supported: "2017-09-30". If not
+    #   specified, the query version defaults to this value.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the dynamic thing group.
+    #   @return [Array<Types::Tag>]
+    #
+    class CreateDynamicThingGroupRequest < Struct.new(
+      :thing_group_name,
+      :thing_group_properties,
+      :index_name,
+      :query_string,
+      :query_version,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] thing_group_name
+    #   The dynamic thing group name.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_group_arn
+    #   The dynamic thing group ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_group_id
+    #   The dynamic thing group ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The dynamic thing group index name.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   The dynamic thing group search query string.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_version
+    #   The dynamic thing group query version.
+    #   @return [String]
+    #
+    class CreateDynamicThingGroupResponse < Struct.new(
+      :thing_group_name,
+      :thing_group_arn,
+      :thing_group_id,
+      :index_name,
+      :query_string,
+      :query_version)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateJobRequest
     #   data as a hash:
     #
@@ -1589,10 +1902,34 @@ module Aws::IoT
     #         target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
     #         job_executions_rollout_config: {
     #           maximum_per_minute: 1,
+    #           exponential_rate: {
+    #             base_rate_per_minute: 1, # required
+    #             increment_factor: 1.0, # required
+    #             rate_increase_criteria: { # required
+    #               number_of_notified_things: 1,
+    #               number_of_succeeded_things: 1,
+    #             },
+    #           },
+    #         },
+    #         abort_config: {
+    #           criteria_list: [ # required
+    #             {
+    #               failure_type: "FAILED", # required, accepts FAILED, REJECTED, TIMED_OUT, ALL
+    #               action: "CANCEL", # required, accepts CANCEL
+    #               threshold_percentage: 1.0, # required
+    #               min_number_of_executed_things: 1, # required
+    #             },
+    #           ],
     #         },
     #         timeout_config: {
     #           in_progress_timeout_in_minutes: 1,
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] job_id
@@ -1611,6 +1948,18 @@ module Aws::IoT
     #
     # @!attribute [rw] document
     #   The job document.
+    #
+    #   <note markdown="1"> If the job document resides in an S3 bucket, you must use a
+    #   placeholder link when specifying the document.
+    #
+    #    The placeholder link is of the following form:
+    #
+    #    `$\{aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key\}`
+    #
+    #    where *bucket* is your bucket name and *key* is the object in the
+    #   bucket to which you are linking.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1634,6 +1983,10 @@ module Aws::IoT
     #   Allows you to create a staged rollout of the job.
     #   @return [Types::JobExecutionsRolloutConfig]
     #
+    # @!attribute [rw] abort_config
+    #   Allows you to create criteria to abort a job.
+    #   @return [Types::AbortConfig]
+    #
     # @!attribute [rw] timeout_config
     #   Specifies the amount of time each device has to finish its execution
     #   of the job. The timer is started when the job execution status is
@@ -1641,6 +1994,10 @@ module Aws::IoT
     #   another terminal state before the time expires, it will be
     #   automatically set to `TIMED_OUT`.
     #   @return [Types::TimeoutConfig]
+    #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the job.
+    #   @return [Array<Types::Tag>]
     #
     class CreateJobRequest < Struct.new(
       :job_id,
@@ -1651,7 +2008,9 @@ module Aws::IoT
       :presigned_url_config,
       :target_selection,
       :job_executions_rollout_config,
-      :timeout_config)
+      :abort_config,
+      :timeout_config,
+      :tags)
       include Aws::Structure
     end
 
@@ -2109,6 +2468,12 @@ module Aws::IoT
     #             role_arn: "RoleArn", # required
     #           },
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] security_profile_name
@@ -2130,11 +2495,16 @@ module Aws::IoT
     #   (thing) violates a behavior.
     #   @return [Hash<String,Types::AlertTarget>]
     #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the security profile.
+    #   @return [Array<Types::Tag>]
+    #
     class CreateSecurityProfileRequest < Struct.new(
       :security_profile_name,
       :security_profile_description,
       :behaviors,
-      :alert_targets)
+      :alert_targets,
+      :tags)
       include Aws::Structure
     end
 
@@ -2235,6 +2605,12 @@ module Aws::IoT
     #             merge: false,
     #           },
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] thing_group_name
@@ -2249,10 +2625,15 @@ module Aws::IoT
     #   The thing group properties.
     #   @return [Types::ThingGroupProperties]
     #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the thing group.
+    #   @return [Array<Types::Tag>]
+    #
     class CreateThingGroupRequest < Struct.new(
       :thing_group_name,
       :parent_group_name,
-      :thing_group_properties)
+      :thing_group_properties,
+      :tags)
       include Aws::Structure
     end
 
@@ -2289,6 +2670,7 @@ module Aws::IoT
     #           },
     #           merge: false,
     #         },
+    #         billing_group_name: "BillingGroupName",
     #       }
     #
     # @!attribute [rw] thing_name
@@ -2306,10 +2688,15 @@ module Aws::IoT
     #   `\{"attributes":\{"string1":"string2"\}\}`
     #   @return [Types::AttributePayload]
     #
+    # @!attribute [rw] billing_group_name
+    #   The name of the billing group the thing will be added to.
+    #   @return [String]
+    #
     class CreateThingRequest < Struct.new(
       :thing_name,
       :thing_type_name,
-      :attribute_payload)
+      :attribute_payload,
+      :billing_group_name)
       include Aws::Structure
     end
 
@@ -2345,6 +2732,12 @@ module Aws::IoT
     #           thing_type_description: "ThingTypeDescription",
     #           searchable_attributes: ["AttributeName"],
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] thing_type_name
@@ -2357,9 +2750,14 @@ module Aws::IoT
     #   list of searchable thing attribute names.
     #   @return [Types::ThingTypeProperties]
     #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the thing type.
+    #   @return [Array<Types::Tag>]
+    #
     class CreateThingTypeRequest < Struct.new(
       :thing_type_name,
-      :thing_type_properties)
+      :thing_type_properties,
+      :tags)
       include Aws::Structure
     end
 
@@ -2668,6 +3066,33 @@ module Aws::IoT
 
     class DeleteAuthorizerResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteBillingGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         billing_group_name: "BillingGroupName", # required
+    #         expected_version: 1,
+    #       }
+    #
+    # @!attribute [rw] billing_group_name
+    #   The name of the billing group.
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_version
+    #   The expected version of the billing group. If the version of the
+    #   billing group does not match the expected version specified in the
+    #   request, the `DeleteBillingGroup` request is rejected with a
+    #   `VersionConflictException`.
+    #   @return [Integer]
+    #
+    class DeleteBillingGroupRequest < Struct.new(
+      :billing_group_name,
+      :expected_version)
+      include Aws::Structure
+    end
+
+    class DeleteBillingGroupResponse < Aws::EmptyStructure; end
+
     # Input for the DeleteCACertificate operation.
     #
     # @note When making an API call, you may pass DeleteCACertificateRequest
@@ -2715,6 +3140,30 @@ module Aws::IoT
       :force_delete)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteDynamicThingGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         thing_group_name: "ThingGroupName", # required
+    #         expected_version: 1,
+    #       }
+    #
+    # @!attribute [rw] thing_group_name
+    #   The name of the dynamic thing group to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_version
+    #   The expected version of the dynamic thing group to delete.
+    #   @return [Integer]
+    #
+    class DeleteDynamicThingGroupRequest < Struct.new(
+      :thing_group_name,
+      :expected_version)
+      include Aws::Structure
+    end
+
+    class DeleteDynamicThingGroupResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteJobExecutionRequest
     #   data as a hash:
@@ -3242,6 +3691,56 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeBillingGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         billing_group_name: "BillingGroupName", # required
+    #       }
+    #
+    # @!attribute [rw] billing_group_name
+    #   The name of the billing group.
+    #   @return [String]
+    #
+    class DescribeBillingGroupRequest < Struct.new(
+      :billing_group_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] billing_group_name
+    #   The name of the billing group.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_group_id
+    #   The ID of the billing group.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_group_arn
+    #   The ARN of the billing group.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the billing group.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] billing_group_properties
+    #   The properties of the billing group.
+    #   @return [Types::BillingGroupProperties]
+    #
+    # @!attribute [rw] billing_group_metadata
+    #   Additional information about the billing group.
+    #   @return [Types::BillingGroupMetadata]
+    #
+    class DescribeBillingGroupResponse < Struct.new(
+      :billing_group_name,
+      :billing_group_id,
+      :billing_group_arn,
+      :version,
+      :billing_group_properties,
+      :billing_group_metadata)
+      include Aws::Structure
+    end
+
     # The input for the DescribeCACertificate operation.
     #
     # @note When making an API call, you may pass DescribeCACertificateRequest
@@ -3421,10 +3920,17 @@ module Aws::IoT
     #   Contains a value that specifies the type of indexing performed.
     #   Valid values are:
     #
-    #   1.  REGISTRY – Your thing index will contain only registry data.
+    #   * REGISTRY – Your thing index will contain only registry data.
     #
-    #   2.  REGISTRY\_AND\_SHADOW - Your thing index will contain registry
-    #       and shadow data.
+    #   * REGISTRY\_AND\_SHADOW - Your thing index will contain registry
+    #     data and shadow data.
+    #
+    #   * REGISTRY\_AND\_CONNECTIVITY\_STATUS - Your thing index will
+    #     contain registry data and thing connectivity status data.
+    #
+    #   * REGISTRY\_AND\_SHADOW\_AND\_CONNECTIVITY\_STATUS - Your thing
+    #     index will contain registry data, shadow data, and thing
+    #     connectivity status data.
     #   @return [String]
     #
     class DescribeIndexResponse < Struct.new(
@@ -3716,13 +4222,33 @@ module Aws::IoT
     #   Thing group metadata.
     #   @return [Types::ThingGroupMetadata]
     #
+    # @!attribute [rw] index_name
+    #   The dynamic thing group index name.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   The dynamic thing group search query string.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_version
+    #   The dynamic thing group query version.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The dynamic thing group status.
+    #   @return [String]
+    #
     class DescribeThingGroupResponse < Struct.new(
       :thing_group_name,
       :thing_group_id,
       :thing_group_arn,
       :version,
       :thing_group_properties,
-      :thing_group_metadata)
+      :thing_group_metadata,
+      :index_name,
+      :query_string,
+      :query_version,
+      :status)
       include Aws::Structure
     end
 
@@ -3861,6 +4387,10 @@ module Aws::IoT
     #    </note>
     #   @return [Integer]
     #
+    # @!attribute [rw] billing_group_name
+    #   The name of the billing group the thing belongs to.
+    #   @return [String]
+    #
     class DescribeThingResponse < Struct.new(
       :default_client_id,
       :thing_name,
@@ -3868,7 +4398,8 @@ module Aws::IoT
       :thing_arn,
       :thing_type_name,
       :attributes,
-      :version)
+      :version,
+      :billing_group_name)
       include Aws::Structure
     end
 
@@ -4303,6 +4834,44 @@ module Aws::IoT
     #
     class ExplicitDeny < Struct.new(
       :policies)
+      include Aws::Structure
+    end
+
+    # Allows you to create an exponential rate of rollout for a job.
+    #
+    # @note When making an API call, you may pass ExponentialRolloutRate
+    #   data as a hash:
+    #
+    #       {
+    #         base_rate_per_minute: 1, # required
+    #         increment_factor: 1.0, # required
+    #         rate_increase_criteria: { # required
+    #           number_of_notified_things: 1,
+    #           number_of_succeeded_things: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] base_rate_per_minute
+    #   The minimum number of things that will be notified of a pending job,
+    #   per minute at the start of job rollout. This parameter allows you to
+    #   define the initial rate of rollout.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] increment_factor
+    #   The exponential factor to increase the rate of rollout for a job.
+    #   @return [Float]
+    #
+    # @!attribute [rw] rate_increase_criteria
+    #   The criteria to initiate the increase in rate of rollout for a job.
+    #
+    #   AWS IoT supports up to one digit after the decimal (for example,
+    #   1.5, but not 1.55).
+    #   @return [Types::RateIncreaseCriteria]
+    #
+    class ExponentialRolloutRate < Struct.new(
+      :base_rate_per_minute,
+      :increment_factor,
+      :rate_increase_criteria)
       include Aws::Structure
     end
 
@@ -4796,6 +5365,10 @@ module Aws::IoT
     #   parameter set to `true`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] reason_code
+    #   If the job was updated, provides the reason code for the update.
+    #   @return [String]
+    #
     # @!attribute [rw] comment
     #   If the job was updated, describes the reason for the update.
     #   @return [String]
@@ -4816,6 +5389,10 @@ module Aws::IoT
     # @!attribute [rw] job_executions_rollout_config
     #   Allows you to create a staged rollout of a job.
     #   @return [Types::JobExecutionsRolloutConfig]
+    #
+    # @!attribute [rw] abort_config
+    #   Configuration for criteria to abort the job.
+    #   @return [Types::AbortConfig]
     #
     # @!attribute [rw] created_at
     #   The time, in milliseconds since the epoch, when the job was created.
@@ -4849,11 +5426,13 @@ module Aws::IoT
       :target_selection,
       :status,
       :force_canceled,
+      :reason_code,
       :comment,
       :targets,
       :description,
       :presigned_url_config,
       :job_executions_rollout_config,
+      :abort_config,
       :created_at,
       :last_updated_at,
       :completed_at,
@@ -4917,7 +5496,11 @@ module Aws::IoT
     #
     # @!attribute [rw] approximate_seconds_before_timed_out
     #   The estimated number of seconds that remain before the job execution
-    #   status will be changed to `TIMED_OUT`.
+    #   status will be changed to `TIMED_OUT`. The timeout interval can be
+    #   anywhere between 1 minute and 7 days (1 to 10080 minutes). The
+    #   actual job execution timeout can occur up to 60 seconds later than
+    #   the estimated duration. This value will not be included if the job
+    #   execution has reached a terminal status.
     #   @return [Integer]
     #
     class JobExecution < Struct.new(
@@ -5023,6 +5606,14 @@ module Aws::IoT
     #
     #       {
     #         maximum_per_minute: 1,
+    #         exponential_rate: {
+    #           base_rate_per_minute: 1, # required
+    #           increment_factor: 1.0, # required
+    #           rate_increase_criteria: { # required
+    #             number_of_notified_things: 1,
+    #             number_of_succeeded_things: 1,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] maximum_per_minute
@@ -5030,8 +5621,14 @@ module Aws::IoT
     #   per minute. This parameter allows you to create a staged rollout.
     #   @return [Integer]
     #
+    # @!attribute [rw] exponential_rate
+    #   The rate of increase for a job rollout. This parameter allows you to
+    #   define an exponential rate for a job rollout.
+    #   @return [Types::ExponentialRolloutRate]
+    #
     class JobExecutionsRolloutConfig < Struct.new(
-      :maximum_per_minute)
+      :maximum_per_minute,
+      :exponential_rate)
       include Aws::Structure
     end
 
@@ -5503,6 +6100,50 @@ module Aws::IoT
     class ListAuthorizersResponse < Struct.new(
       :authorizers,
       :next_marker)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListBillingGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         name_prefix_filter: "BillingGroupName",
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name_prefix_filter
+    #   Limit the results to billing groups whose names have the given
+    #   prefix.
+    #   @return [String]
+    #
+    class ListBillingGroupsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :name_prefix_filter)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] billing_groups
+    #   The list of billing groups.
+    #   @return [Array<Types::GroupNameAndArn>]
+    #
+    # @!attribute [rw] next_token
+    #   The token used to get the next set of results, or **null** if there
+    #   are no additional results.
+    #   @return [String]
+    #
+    class ListBillingGroupsResponse < Struct.new(
+      :billing_groups,
+      :next_token)
       include Aws::Structure
     end
 
@@ -6392,6 +7033,43 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results.
+    #   @return [String]
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The list of tags assigned to the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] next_token
+    #   The token used to get the next set of results, or **null** if there
+    #   are no additional results.
+    #   @return [String]
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTargetsForPolicyRequest
     #   data as a hash:
     #
@@ -6746,6 +7424,49 @@ module Aws::IoT
     #
     class ListThingTypesResponse < Struct.new(
       :thing_types,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListThingsInBillingGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         billing_group_name: "BillingGroupName", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] billing_group_name
+    #   The name of the billing group.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per request.
+    #   @return [Integer]
+    #
+    class ListThingsInBillingGroupRequest < Struct.new(
+      :billing_group_name,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] things
+    #   A list of things in the billing group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token used to get the next set of results, or **null** if there
+    #   are no additional results.
+    #   @return [String]
+    #
+    class ListThingsInBillingGroupResponse < Struct.new(
+      :things,
       :next_token)
       include Aws::Structure
     end
@@ -7469,6 +8190,33 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Allows you to define a criteria to initiate the increase in rate of
+    # rollout for a job.
+    #
+    # @note When making an API call, you may pass RateIncreaseCriteria
+    #   data as a hash:
+    #
+    #       {
+    #         number_of_notified_things: 1,
+    #         number_of_succeeded_things: 1,
+    #       }
+    #
+    # @!attribute [rw] number_of_notified_things
+    #   The threshold for number of notified things that will initiate the
+    #   increase in rate of rollout.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_succeeded_things
+    #   The threshold for number of succeeded things that will initiate the
+    #   increase in rate of rollout.
+    #   @return [Integer]
+    #
+    class RateIncreaseCriteria < Struct.new(
+      :number_of_notified_things,
+      :number_of_succeeded_things)
+      include Aws::Structure
+    end
+
     # The input to the RegisterCACertificate operation.
     #
     # @note When making an API call, you may pass RegisterCACertificateRequest
@@ -7703,6 +8451,42 @@ module Aws::IoT
       :additional_info)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass RemoveThingFromBillingGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         billing_group_name: "BillingGroupName",
+    #         billing_group_arn: "BillingGroupArn",
+    #         thing_name: "ThingName",
+    #         thing_arn: "ThingArn",
+    #       }
+    #
+    # @!attribute [rw] billing_group_name
+    #   The name of the billing group.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_group_arn
+    #   The ARN of the billing group.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the thing to be removed from the billing group.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_arn
+    #   The ARN of the thing to be removed from the billing group.
+    #   @return [String]
+    #
+    class RemoveThingFromBillingGroupRequest < Struct.new(
+      :billing_group_name,
+      :billing_group_arn,
+      :thing_name,
+      :thing_arn)
+      include Aws::Structure
+    end
+
+    class RemoveThingFromBillingGroupResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass RemoveThingFromThingGroupRequest
     #   data as a hash:
@@ -8849,6 +9633,59 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # A set of key/value pairs that are used to manage the resource.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The tag's key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The tag's value.
+    #   @return [String]
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The new or modified tags for the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # Statistics for the checks performed during the audit.
     #
     # @!attribute [rw] total_checks
@@ -9047,6 +9884,25 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The connectivity status of the thing.
+    #
+    # @!attribute [rw] connected
+    #   True if the thing is connected to the AWS IoT service, false if it
+    #   is not connected.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] timestamp
+    #   The epoch time (in milliseconds) when the thing last connected or
+    #   disconnected. Note that if the thing has been disconnected for more
+    #   than a few weeks, the time value can be missing.
+    #   @return [Integer]
+    #
+    class ThingConnectivity < Struct.new(
+      :connected,
+      :timestamp)
+      include Aws::Structure
+    end
+
     # The thing search index document.
     #
     # @!attribute [rw] thing_name
@@ -9073,13 +9929,19 @@ module Aws::IoT
     #   The shadow.
     #   @return [String]
     #
+    # @!attribute [rw] connectivity
+    #   Indicates whether or not the thing is connected to the AWS IoT
+    #   service.
+    #   @return [Types::ThingConnectivity]
+    #
     class ThingDocument < Struct.new(
       :thing_name,
       :thing_id,
       :thing_type_name,
       :thing_group_names,
       :attributes,
-      :shadow)
+      :shadow,
+      :connectivity)
       include Aws::Structure
     end
 
@@ -9182,13 +10044,19 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # Thing indexing configuration.
+    # The thing indexing configuration. For more information, see [Managing
+    # Thing Indexing][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/managing-index.html
     #
     # @note When making an API call, you may pass ThingIndexingConfiguration
     #   data as a hash:
     #
     #       {
     #         thing_indexing_mode: "OFF", # required, accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
+    #         thing_connectivity_indexing_mode: "OFF", # accepts OFF, STATUS
     #       }
     #
     # @!attribute [rw] thing_indexing_mode
@@ -9202,8 +10070,19 @@ module Aws::IoT
     #   * OFF - Thing indexing is disabled.
     #   @return [String]
     #
+    # @!attribute [rw] thing_connectivity_indexing_mode
+    #   Thing connectivity indexing mode. Valid values are:
+    #
+    #   * STATUS – Your thing index will contain connectivity status. In
+    #     order to enable thing connectivity indexing, thingIndexMode must
+    #     not be set to OFF.
+    #
+    #   * OFF - Thing connectivity status indexing is disabled.
+    #   @return [String]
+    #
     class ThingIndexingConfiguration < Struct.new(
-      :thing_indexing_mode)
+      :thing_indexing_mode,
+      :thing_connectivity_indexing_mode)
       include Aws::Structure
     end
 
@@ -9303,15 +10182,12 @@ module Aws::IoT
     #
     # @!attribute [rw] in_progress_timeout_in_minutes
     #   Specifies the amount of time, in minutes, this device has to finish
-    #   execution of this job. A timer is started, or restarted, whenever
-    #   this job's execution status is specified as `IN_PROGRESS` with this
-    #   field populated. If the job execution status is not set to a
-    #   terminal state before the timer expires, or before another job
-    #   execution status update is sent with this field populated, the
-    #   status will be automatically set to `TIMED_OUT`. Note that
-    #   setting/resetting this timer has no effect on the job execution
-    #   timeout timer which may have been specified when the job was created
-    #   (`CreateJobExecution` using the field `timeoutConfig`).
+    #   execution of this job. The timeout interval can be anywhere between
+    #   1 minute and 7 days (1 to 10080 minutes). The in progress timer
+    #   can't be updated and will apply to all job executions for the job.
+    #   Whenever a job execution remains in the IN\_PROGRESS status for
+    #   longer than this interval, the job execution will fail and switch to
+    #   the terminal `TIMED_OUT` status.
     #   @return [Integer]
     #
     class TimeoutConfig < Struct.new(
@@ -9699,6 +10575,30 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of the keys of the tags to be removed from the resource.
+    #   @return [Array<String>]
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateAccountAuditConfigurationRequest
     #   data as a hash:
     #
@@ -9810,6 +10710,48 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateBillingGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         billing_group_name: "BillingGroupName", # required
+    #         billing_group_properties: { # required
+    #           billing_group_description: "BillingGroupDescription",
+    #         },
+    #         expected_version: 1,
+    #       }
+    #
+    # @!attribute [rw] billing_group_name
+    #   The name of the billing group.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_group_properties
+    #   The properties of the billing group.
+    #   @return [Types::BillingGroupProperties]
+    #
+    # @!attribute [rw] expected_version
+    #   The expected version of the billing group. If the version of the
+    #   billing group does not match the expected version specified in the
+    #   request, the `UpdateBillingGroup` request is rejected with a
+    #   `VersionConflictException`.
+    #   @return [Integer]
+    #
+    class UpdateBillingGroupRequest < Struct.new(
+      :billing_group_name,
+      :billing_group_properties,
+      :expected_version)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] version
+    #   The latest version of the billing group.
+    #   @return [Integer]
+    #
+    class UpdateBillingGroupResponse < Struct.new(
+      :version)
+      include Aws::Structure
+    end
+
     # The input to the UpdateCACertificate operation.
     #
     # @note When making an API call, you may pass UpdateCACertificateRequest
@@ -9891,6 +10833,78 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateDynamicThingGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         thing_group_name: "ThingGroupName", # required
+    #         thing_group_properties: { # required
+    #           thing_group_description: "ThingGroupDescription",
+    #           attribute_payload: {
+    #             attributes: {
+    #               "AttributeName" => "AttributeValue",
+    #             },
+    #             merge: false,
+    #           },
+    #         },
+    #         expected_version: 1,
+    #         index_name: "IndexName",
+    #         query_string: "QueryString",
+    #         query_version: "QueryVersion",
+    #       }
+    #
+    # @!attribute [rw] thing_group_name
+    #   The name of the dynamic thing group to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_group_properties
+    #   The dynamic thing group properties to update.
+    #   @return [Types::ThingGroupProperties]
+    #
+    # @!attribute [rw] expected_version
+    #   The expected version of the dynamic thing group to update.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] index_name
+    #   The dynamic thing group index to update.
+    #
+    #   <note markdown="1"> Currently one index is supported: 'AWS\_Things'.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   The dynamic thing group search query string to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_version
+    #   The dynamic thing group query version to update.
+    #
+    #   <note markdown="1"> Currently one query version is supported: "2017-09-30". If not
+    #   specified, the query version defaults to this value.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    class UpdateDynamicThingGroupRequest < Struct.new(
+      :thing_group_name,
+      :thing_group_properties,
+      :expected_version,
+      :index_name,
+      :query_string,
+      :query_version)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] version
+    #   The dynamic thing group version.
+    #   @return [Integer]
+    #
+    class UpdateDynamicThingGroupResponse < Struct.new(
+      :version)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateEventConfigurationsRequest
     #   data as a hash:
     #
@@ -9919,6 +10933,7 @@ module Aws::IoT
     #       {
     #         thing_indexing_configuration: {
     #           thing_indexing_mode: "OFF", # required, accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
+    #           thing_connectivity_indexing_mode: "OFF", # accepts OFF, STATUS
     #         },
     #         thing_group_indexing_configuration: {
     #           thing_group_indexing_mode: "OFF", # required, accepts OFF, ON
@@ -9940,6 +10955,80 @@ module Aws::IoT
     end
 
     class UpdateIndexingConfigurationResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #         description: "JobDescription",
+    #         presigned_url_config: {
+    #           role_arn: "RoleArn",
+    #           expires_in_sec: 1,
+    #         },
+    #         job_executions_rollout_config: {
+    #           maximum_per_minute: 1,
+    #           exponential_rate: {
+    #             base_rate_per_minute: 1, # required
+    #             increment_factor: 1.0, # required
+    #             rate_increase_criteria: { # required
+    #               number_of_notified_things: 1,
+    #               number_of_succeeded_things: 1,
+    #             },
+    #           },
+    #         },
+    #         abort_config: {
+    #           criteria_list: [ # required
+    #             {
+    #               failure_type: "FAILED", # required, accepts FAILED, REJECTED, TIMED_OUT, ALL
+    #               action: "CANCEL", # required, accepts CANCEL
+    #               threshold_percentage: 1.0, # required
+    #               min_number_of_executed_things: 1, # required
+    #             },
+    #           ],
+    #         },
+    #         timeout_config: {
+    #           in_progress_timeout_in_minutes: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID of the job to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A short text description of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] presigned_url_config
+    #   Configuration information for pre-signed S3 URLs.
+    #   @return [Types::PresignedUrlConfig]
+    #
+    # @!attribute [rw] job_executions_rollout_config
+    #   Allows you to create a staged rollout of the job.
+    #   @return [Types::JobExecutionsRolloutConfig]
+    #
+    # @!attribute [rw] abort_config
+    #   Allows you to create criteria to abort a job.
+    #   @return [Types::AbortConfig]
+    #
+    # @!attribute [rw] timeout_config
+    #   Specifies the amount of time each device has to finish its execution
+    #   of the job. The timer is started when the job execution status is
+    #   set to `IN_PROGRESS`. If the job execution status is not set to
+    #   another terminal state before the time expires, it will be
+    #   automatically set to `TIMED_OUT`.
+    #   @return [Types::TimeoutConfig]
+    #
+    class UpdateJobRequest < Struct.new(
+      :job_id,
+      :description,
+      :presigned_url_config,
+      :job_executions_rollout_config,
+      :abort_config,
+      :timeout_config)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdateRoleAliasRequest
     #   data as a hash:
@@ -10275,6 +11364,7 @@ module Aws::IoT
     #         thing_name: "ThingName",
     #         thing_groups_to_add: ["ThingGroupName"],
     #         thing_groups_to_remove: ["ThingGroupName"],
+    #         override_dynamic_groups: false,
     #       }
     #
     # @!attribute [rw] thing_name
@@ -10289,10 +11379,18 @@ module Aws::IoT
     #   The groups from which the thing will be removed.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] override_dynamic_groups
+    #   Override dynamic thing groups with static thing groups when 10-group
+    #   limit is reached. If a thing belongs to 10 thing groups, and one or
+    #   more of those groups are dynamic thing groups, adding a thing to a
+    #   static group removes the thing from the last dynamic group.
+    #   @return [Boolean]
+    #
     class UpdateThingGroupsForThingRequest < Struct.new(
       :thing_name,
       :thing_groups_to_add,
-      :thing_groups_to_remove)
+      :thing_groups_to_remove,
+      :override_dynamic_groups)
       include Aws::Structure
     end
 

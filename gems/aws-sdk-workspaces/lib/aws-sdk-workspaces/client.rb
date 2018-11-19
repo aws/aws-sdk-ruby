@@ -584,6 +584,37 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Retrieves a list that describes one or more specified Amazon
+    # WorkSpaces clients.
+    #
+    # @option params [required, Array<String>] :resource_ids
+    #   The resource identifiers, in the form of directory IDs.
+    #
+    # @return [Types::DescribeClientPropertiesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeClientPropertiesResult#client_properties_list #client_properties_list} => Array&lt;Types::ClientPropertiesResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_client_properties({
+    #     resource_ids: ["NonEmptyString"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.client_properties_list #=> Array
+    #   resp.client_properties_list[0].resource_id #=> String
+    #   resp.client_properties_list[0].client_properties.reconnect_enabled #=> String, one of "ENABLED", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeClientProperties AWS API Documentation
+    #
+    # @overload describe_client_properties(params = {})
+    # @param [Hash] params ({})
+    def describe_client_properties(params = {}, options = {})
+      req = build_request(:describe_client_properties, params)
+      req.send_request(options)
+    end
+
     # Describes one or more of your IP access control groups.
     #
     # @option params [Array<String>] :group_ids
@@ -1096,6 +1127,34 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Modifies the properties of the specified Amazon WorkSpaces client.
+    #
+    # @option params [required, String] :resource_id
+    #   The resource identifiers, in the form of directory IDs.
+    #
+    # @option params [Types::ClientProperties] :client_properties
+    #   Information about the Amazon WorkSpaces client.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_client_properties({
+    #     resource_id: "NonEmptyString", # required
+    #     client_properties: {
+    #       reconnect_enabled: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyClientProperties AWS API Documentation
+    #
+    # @overload modify_client_properties(params = {})
+    # @param [Hash] params ({})
+    def modify_client_properties(params = {}, options = {})
+      req = build_request(:modify_client_properties, params)
+      req.send_request(options)
+    end
+
     # Modifies the specified WorkSpace properties.
     #
     # @option params [required, String] :workspace_id
@@ -1441,7 +1500,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

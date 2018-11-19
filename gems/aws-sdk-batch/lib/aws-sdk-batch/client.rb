@@ -249,13 +249,17 @@ module Aws::Batch
     # `UNMANAGED` compute environments.
     #
     # In a managed compute environment, AWS Batch manages the capacity and
-    # instance types of the compute resources within the environment, based
-    # on the compute resource specification that you define or [launch
-    # template][1] that you specify when you create the compute environment.
-    # You can choose to use Amazon EC2 On-Demand Instances or Spot Instances
-    # in your managed compute environment. You can optionally set a maximum
-    # price so that Spot Instances only launch when the Spot Instance price
-    # is below a specified percentage of the On-Demand price.
+    # instance types of the compute resources within the environment. This
+    # is based on the compute resource specification that you define or the
+    # [launch template][1] that you specify when you create the compute
+    # environment. You can choose to use Amazon EC2 On-Demand Instances or
+    # Spot Instances in your managed compute environment. You can optionally
+    # set a maximum price so that Spot Instances only launch when the Spot
+    # Instance price is below a specified percentage of the On-Demand price.
+    #
+    # <note markdown="1"> Multi-node parallel jobs are not supported on Spot Instances.
+    #
+    #  </note>
     #
     # In an unmanaged compute environment, you can manage your own compute
     # resources. This provides more compute resource configuration options,
@@ -265,7 +269,7 @@ module Aws::Batch
     # Container Service Developer Guide*. After you have created your
     # unmanaged compute environment, you can use the
     # DescribeComputeEnvironments operation to find the Amazon ECS cluster
-    # that is associated with it and then manually launch your container
+    # that is associated with it. Then, manually launch your container
     # instances into that Amazon ECS cluster. For more information, see
     # [Launching an Amazon ECS Container Instance][3] in the *Amazon Elastic
     # Container Service Developer Guide*.
@@ -444,6 +448,7 @@ module Aws::Batch
     #       tags: {
     #         "String" => "String",
     #       },
+    #       placement_group: "String",
     #       bid_percentage: 1,
     #       spot_iam_fleet_role: "String",
     #       launch_template: {
@@ -489,10 +494,10 @@ module Aws::Batch
     # @option params [required, Integer] :priority
     #   The priority of the job queue. Job queues with a higher priority (or a
     #   higher integer value for the `priority` parameter) are evaluated first
-    #   when associated with same compute environment. Priority is determined
-    #   in descending order, for example, a job queue with a priority value of
-    #   `10` is given scheduling preference over a job queue with a priority
-    #   value of `1`.
+    #   when associated with the same compute environment. Priority is
+    #   determined in descending order, for example, a job queue with a
+    #   priority value of `10` is given scheduling preference over a job queue
+    #   with a priority value of `1`.
     #
     # @option params [required, Array<Types::ComputeEnvironmentOrder>] :compute_environment_order
     #   The set of compute environments mapped to a job queue and their order
@@ -825,6 +830,7 @@ module Aws::Batch
     #   resp.compute_environments[0].compute_resources.instance_role #=> String
     #   resp.compute_environments[0].compute_resources.tags #=> Hash
     #   resp.compute_environments[0].compute_resources.tags["String"] #=> String
+    #   resp.compute_environments[0].compute_resources.placement_group #=> String
     #   resp.compute_environments[0].compute_resources.bid_percentage #=> Integer
     #   resp.compute_environments[0].compute_resources.spot_iam_fleet_role #=> String
     #   resp.compute_environments[0].compute_resources.launch_template.launch_template_id #=> String
@@ -967,7 +973,36 @@ module Aws::Batch
     #   resp.job_definitions[0].container_properties.ulimits[0].name #=> String
     #   resp.job_definitions[0].container_properties.ulimits[0].soft_limit #=> Integer
     #   resp.job_definitions[0].container_properties.user #=> String
+    #   resp.job_definitions[0].container_properties.instance_type #=> String
     #   resp.job_definitions[0].timeout.attempt_duration_seconds #=> Integer
+    #   resp.job_definitions[0].node_properties.num_nodes #=> Integer
+    #   resp.job_definitions[0].node_properties.main_node #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].target_nodes #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.image #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.vcpus #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.memory #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.command #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.command[0] #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.job_role_arn #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes[0].host.source_path #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes[0].name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.environment #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.environment[0].name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.environment[0].value #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.mount_points #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.mount_points[0].container_path #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.mount_points[0].read_only #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.mount_points[0].source_volume #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.readonly_root_filesystem #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.privileged #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.ulimits #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.ulimits[0].hard_limit #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.ulimits[0].name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.ulimits[0].soft_limit #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.user #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.instance_type #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobDefinitions AWS API Documentation
@@ -1153,6 +1188,10 @@ module Aws::Batch
     #   resp.jobs[0].attempts[0].container.exit_code #=> Integer
     #   resp.jobs[0].attempts[0].container.reason #=> String
     #   resp.jobs[0].attempts[0].container.log_stream_name #=> String
+    #   resp.jobs[0].attempts[0].container.network_interfaces #=> Array
+    #   resp.jobs[0].attempts[0].container.network_interfaces[0].attachment_id #=> String
+    #   resp.jobs[0].attempts[0].container.network_interfaces[0].ipv6_address #=> String
+    #   resp.jobs[0].attempts[0].container.network_interfaces[0].private_ipv_4_address #=> String
     #   resp.jobs[0].attempts[0].started_at #=> Integer
     #   resp.jobs[0].attempts[0].stopped_at #=> Integer
     #   resp.jobs[0].attempts[0].status_reason #=> String
@@ -1195,6 +1234,41 @@ module Aws::Batch
     #   resp.jobs[0].container.container_instance_arn #=> String
     #   resp.jobs[0].container.task_arn #=> String
     #   resp.jobs[0].container.log_stream_name #=> String
+    #   resp.jobs[0].container.instance_type #=> String
+    #   resp.jobs[0].container.network_interfaces #=> Array
+    #   resp.jobs[0].container.network_interfaces[0].attachment_id #=> String
+    #   resp.jobs[0].container.network_interfaces[0].ipv6_address #=> String
+    #   resp.jobs[0].container.network_interfaces[0].private_ipv_4_address #=> String
+    #   resp.jobs[0].node_details.node_index #=> Integer
+    #   resp.jobs[0].node_details.is_main_node #=> Boolean
+    #   resp.jobs[0].node_properties.num_nodes #=> Integer
+    #   resp.jobs[0].node_properties.main_node #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].target_nodes #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.image #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.vcpus #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.memory #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.command #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.command[0] #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.job_role_arn #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes[0].host.source_path #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes[0].name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.environment #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.environment[0].name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.environment[0].value #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.mount_points #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.mount_points[0].container_path #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.mount_points[0].read_only #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.mount_points[0].source_volume #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.readonly_root_filesystem #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.privileged #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.ulimits #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.ulimits[0].hard_limit #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.ulimits[0].name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.ulimits[0].soft_limit #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.user #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.instance_type #=> String
     #   resp.jobs[0].array_properties.status_summary #=> Hash
     #   resp.jobs[0].array_properties.status_summary["String"] #=> Integer
     #   resp.jobs[0].array_properties.size #=> Integer
@@ -1210,10 +1284,15 @@ module Aws::Batch
       req.send_request(options)
     end
 
-    # Returns a list of AWS Batch jobs. You must specify either a job queue
-    # to return a list of jobs in that job queue, or an array job ID to
-    # return a list of that job's children. You cannot specify both a job
-    # queue and an array job ID.
+    # Returns a list of AWS Batch jobs.
+    #
+    # You must specify only one of the following:
+    #
+    # * a job queue ID to return a list of jobs in that job queue
+    #
+    # * a multi-node parallel job ID to return a list of that job's nodes
+    #
+    # * an array job ID to return a list of that job's children
     #
     # You can filter the results by job status with the `jobStatus`
     # parameter. If you do not specify a status, only `RUNNING` jobs are
@@ -1221,13 +1300,16 @@ module Aws::Batch
     #
     # @option params [String] :job_queue
     #   The name or full Amazon Resource Name (ARN) of the job queue with
-    #   which to list jobs. You must specify either a job queue or an array
-    #   job ID.
+    #   which to list jobs.
     #
     # @option params [String] :array_job_id
     #   The job ID for an array job. Specifying an array job ID with this
-    #   parameter lists all child jobs from within the specified array. You
-    #   must specify either a job queue or an array job ID.
+    #   parameter lists all child jobs from within the specified array.
+    #
+    # @option params [String] :multi_node_job_id
+    #   The job ID for a multi-node parallel job. Specifying a multi-node
+    #   parallel job ID with this parameter lists all nodes that are
+    #   associated with the specified job.
     #
     # @option params [String] :job_status
     #   The job status with which to filter jobs in the specified queue. If
@@ -1304,6 +1386,7 @@ module Aws::Batch
     #   resp = client.list_jobs({
     #     job_queue: "String",
     #     array_job_id: "String",
+    #     multi_node_job_id: "String",
     #     job_status: "SUBMITTED", # accepts SUBMITTED, PENDING, RUNNABLE, STARTING, RUNNING, SUCCEEDED, FAILED
     #     max_results: 1,
     #     next_token: "String",
@@ -1323,6 +1406,9 @@ module Aws::Batch
     #   resp.job_summary_list[0].container.reason #=> String
     #   resp.job_summary_list[0].array_properties.size #=> Integer
     #   resp.job_summary_list[0].array_properties.index #=> Integer
+    #   resp.job_summary_list[0].node_properties.is_main_node #=> Boolean
+    #   resp.job_summary_list[0].node_properties.num_nodes #=> Integer
+    #   resp.job_summary_list[0].node_properties.node_index #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListJobs AWS API Documentation
@@ -1351,8 +1437,22 @@ module Aws::Batch
     #   parameter defaults from the job definition.
     #
     # @option params [Types::ContainerProperties] :container_properties
-    #   An object with various properties specific for container-based jobs.
-    #   This parameter is required if the `type` parameter is `container`.
+    #   An object with various properties specific to single-node
+    #   container-based jobs. If the job definition's `type` parameter is
+    #   `container`, then you must specify either `containerProperties` or
+    #   `nodeProperties`.
+    #
+    # @option params [Types::NodeProperties] :node_properties
+    #   An object with various properties specific to multi-node parallel
+    #   jobs. If you specify node properties for a job, it becomes a
+    #   multi-node parallel job. For more information, see [Multi-node
+    #   Parallel Jobs][1] in the *AWS Batch User Guide*. If the job
+    #   definition's `type` parameter is `container`, then you must specify
+    #   either `containerProperties` or `nodeProperties`.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/multi-node-parallel-jobs.html
     #
     # @option params [Types::RetryStrategy] :retry_strategy
     #   The retry strategy to use for failed jobs that are submitted with this
@@ -1410,14 +1510,14 @@ module Aws::Batch
     #
     #   resp = client.register_job_definition({
     #     job_definition_name: "String", # required
-    #     type: "container", # required, accepts container
+    #     type: "container", # required, accepts container, multinode
     #     parameters: {
     #       "String" => "String",
     #     },
     #     container_properties: {
-    #       image: "String", # required
-    #       vcpus: 1, # required
-    #       memory: 1, # required
+    #       image: "String",
+    #       vcpus: 1,
+    #       memory: 1,
     #       command: ["String"],
     #       job_role_arn: "String",
     #       volumes: [
@@ -1451,6 +1551,55 @@ module Aws::Batch
     #         },
     #       ],
     #       user: "String",
+    #       instance_type: "String",
+    #     },
+    #     node_properties: {
+    #       num_nodes: 1, # required
+    #       main_node: 1, # required
+    #       node_range_properties: [ # required
+    #         {
+    #           target_nodes: "String", # required
+    #           container: {
+    #             image: "String",
+    #             vcpus: 1,
+    #             memory: 1,
+    #             command: ["String"],
+    #             job_role_arn: "String",
+    #             volumes: [
+    #               {
+    #                 host: {
+    #                   source_path: "String",
+    #                 },
+    #                 name: "String",
+    #               },
+    #             ],
+    #             environment: [
+    #               {
+    #                 name: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #             mount_points: [
+    #               {
+    #                 container_path: "String",
+    #                 read_only: false,
+    #                 source_volume: "String",
+    #               },
+    #             ],
+    #             readonly_root_filesystem: false,
+    #             privileged: false,
+    #             ulimits: [
+    #               {
+    #                 hard_limit: 1, # required
+    #                 name: "String", # required
+    #                 soft_limit: 1, # required
+    #               },
+    #             ],
+    #             user: "String",
+    #             instance_type: "String",
+    #           },
+    #         },
+    #       ],
     #     },
     #     retry_strategy: {
     #       attempts: 1,
@@ -1502,9 +1651,9 @@ module Aws::Batch
     #   20 jobs. You can specify a `SEQUENTIAL` type dependency without
     #   specifying a job ID for array jobs so that each child array job
     #   completes sequentially, starting at index 0. You can also specify an
-    #   `N_TO_N` type dependency with a job ID for array jobs so that each
-    #   index child of this job must wait for the corresponding index child of
-    #   each dependency to complete before it can begin.
+    #   `N_TO_N` type dependency with a job ID for array jobs. In that case,
+    #   each index child of this job must wait for the corresponding index
+    #   child of each dependency to complete before it can begin.
     #
     # @option params [required, String] :job_definition
     #   The job definition used by this job. This value can be either a
@@ -1527,6 +1676,10 @@ module Aws::Batch
     #   variables (that are specified in the job definition or Docker image)
     #   on a container or add new environment variables to it with an
     #   `environment` override.
+    #
+    # @option params [Types::NodeOverrides] :node_overrides
+    #   A list of node overrides in JSON format that specify the node range to
+    #   target and the container overrides for that node range.
     #
     # @option params [Types::RetryStrategy] :retry_strategy
     #   The retry strategy to use for failed jobs from this SubmitJob
@@ -1592,10 +1745,30 @@ module Aws::Batch
     #       vcpus: 1,
     #       memory: 1,
     #       command: ["String"],
+    #       instance_type: "String",
     #       environment: [
     #         {
     #           name: "String",
     #           value: "String",
+    #         },
+    #       ],
+    #     },
+    #     node_overrides: {
+    #       node_property_overrides: [
+    #         {
+    #           target_nodes: "String", # required
+    #           container_overrides: {
+    #             vcpus: 1,
+    #             memory: 1,
+    #             command: ["String"],
+    #             instance_type: "String",
+    #             environment: [
+    #               {
+    #                 name: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
     #         },
     #       ],
     #     },
@@ -1757,10 +1930,10 @@ module Aws::Batch
     # @option params [Integer] :priority
     #   The priority of the job queue. Job queues with a higher priority (or a
     #   higher integer value for the `priority` parameter) are evaluated first
-    #   when associated with same compute environment. Priority is determined
-    #   in descending order, for example, a job queue with a priority value of
-    #   `10` is given scheduling preference over a job queue with a priority
-    #   value of `1`.
+    #   when associated with the same compute environment. Priority is
+    #   determined in descending order, for example, a job queue with a
+    #   priority value of `10` is given scheduling preference over a job queue
+    #   with a priority value of `1`.
     #
     # @option params [Array<Types::ComputeEnvironmentOrder>] :compute_environment_order
     #   Details the set of compute environments mapped to a job queue and
@@ -1830,7 +2003,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.10.1'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

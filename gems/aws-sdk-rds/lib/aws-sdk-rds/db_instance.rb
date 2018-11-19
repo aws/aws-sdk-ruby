@@ -1417,6 +1417,7 @@ module Aws::RDS
     #       },
     #     ],
     #     db_subnet_group_name: "String",
+    #     vpc_security_group_ids: ["String"],
     #     storage_type: "String",
     #     copy_tags_to_snapshot: false,
     #     monitoring_interval: 1,
@@ -1526,6 +1527,11 @@ module Aws::RDS
     #       outside of any VPC.
     #
     #   Example: `mySubnetgroup`
+    # @option options [Array<String>] :vpc_security_group_ids
+    #   A list of EC2 VPC security groups to associate with the Read Replica.
+    #
+    #   Default: The default EC2 VPC security group for the DB subnet group's
+    #   VPC.
     # @option options [String] :storage_type
     #   Specifies the storage type to be associated with the Read Replica.
     #
@@ -2482,6 +2488,7 @@ module Aws::RDS
     #     storage_type: "String",
     #     tde_credential_arn: "String",
     #     tde_credential_password: "String",
+    #     vpc_security_group_ids: ["String"],
     #     domain: "String",
     #     domain_iam_role_name: "String",
     #     enable_iam_database_authentication: false,
@@ -2662,6 +2669,11 @@ module Aws::RDS
     # @option options [String] :tde_credential_password
     #   The password for the given ARN from the key store in order to access
     #   the device.
+    # @option options [Array<String>] :vpc_security_group_ids
+    #   A list of EC2 VPC security groups to associate with this DB instance.
+    #
+    #   Default: The default EC2 VPC security group for the DB subnet group's
+    #   VPC.
     # @option options [String] :domain
     #   Specify the Active Directory Domain to restore the instance in.
     # @option options [String] :domain_iam_role_name
