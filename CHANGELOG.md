@@ -1,6 +1,32 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Batch - Updated the API, and documentation for AWS Batch.
+
+* Feature - Aws::CloudFormation - Updated the API, and documentation for AWS CloudFormation.
+
+* Feature - Aws::CloudTrail - Updated the API, and documentation for AWS CloudTrail.
+
+* Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
+
+* Feature - Aws::DeviceFarm - Updated the API, and documentation for AWS Device Farm.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::IoT - Updated the API, documentation, and integration test for AWS IoT.
+
+* Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
+
+* Feature - Aws::Lightsail - Updated the API for Amazon Lightsail.
+
+* Feature - Aws::MediaConvert - Updated the API, and documentation for AWS Elemental MediaConvert.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::WorkDocs - Updated the API, and documentation for Amazon WorkDocs.
+
+* Feature - Aws::WorkSpaces - Updated the API, and documentation for Amazon WorkSpaces.
+
 2.11.173 (2018-11-16)
 ------------------
 
