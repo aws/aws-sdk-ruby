@@ -136,8 +136,10 @@ module Aws
     PinpointSMSVoice
     Polly
     Pricing
+    QuickSight
     RAM
     RDS
+    RDSDataService
     Redshift
     Rekognition
     ResourceGroups

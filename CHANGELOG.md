@@ -1,6 +1,28 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AppSync - Updated the API, and documentation for AWS AppSync.
+
+* Feature - Aws::AutoScalingPlans - Updated the API, and documentation for AWS Auto Scaling Plans.
+
+* Feature - Aws::DeviceFarm - Updated the API, and documentation for AWS Device Farm.
+
+* Feature - Aws::MediaLive - Updated the API, and documentation for AWS Elemental MediaLive.
+
+* Feature - Aws::CloudWatch - Updated the API, and documentation for Amazon CloudWatch.
+
+* Feature - Aws::Redshift - Updated the documentation for Amazon Redshift.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
+* Feature - Aws::XRay - Updated the API, and documentation for AWS X-Ray.
+
+* Feature - Aws::CloudFront - Added support for the new 2018-11-05 API version of Amazon CloudFront.
+
+* Feature - Aws::QuickSight - Added support for a new service, Amazon QuickSight.
+
+* Feature - Aws::RDSDataService - Added support for a new service, AWS RDS DataService.
+
 2.11.174 (2018-11-19)
 ------------------
 

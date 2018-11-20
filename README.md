@@ -298,8 +298,8 @@ to be backwards compatible.
 | AWS IoT Data Plane                                    | IoTDataPlane                    | 2015-05-28  |
 | AWS IoT Jobs Data Plane                               | IoTJobsDataPlane                | 2017-09-29  |
 | AWS Key Management Service                            | KMS                             | 2014-11-01  |
-| AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
 | AWS Lambda                                            | Lambda                          | 2015-03-31  |
+| AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
 | AWS Marketplace Commerce Analytics                    | MarketplaceCommerceAnalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | MarketplaceEntitlementService   | 2017-01-11  |
 | AWS MediaTailor                                       | MediaTailor                     | 2018-04-23  |
@@ -310,6 +310,7 @@ to be backwards compatible.
 | AWS Organizations                                     | Organizations                   | 2016-11-28  |
 | AWS Performance Insights                              | PI                              | 2018-02-27  |
 | AWS Price List Service                                | Pricing                         | 2017-10-15  |
+| AWS RDS DataService                                   | RDSDataService                  | 2018-08-01  |
 | AWS Resource Access Manager                           | RAM                             | 2018-01-04  |
 | AWS Resource Groups                                   | ResourceGroups                  | 2017-11-27  |
 | AWS Resource Groups Tagging API                       | ResourceGroupsTaggingAPI        | 2017-01-26  |
@@ -334,7 +335,7 @@ to be backwards compatible.
 | Amazon Athena                                         | Athena                          | 2017-05-18  |
 | Amazon Chime                                          | Chime                           | 2018-05-01  |
 | Amazon CloudDirectory                                 | CloudDirectory                  | 2017-01-11  |
-| Amazon CloudFront                                     | CloudFront                      | 2018-06-18  |
+| Amazon CloudFront                                     | CloudFront                      | 2018-11-05  |
 | Amazon CloudHSM                                       | CloudHSM                        | 2014-05-30  |
 | Amazon CloudSearch                                    | CloudSearch                     | 2013-01-01  |
 | Amazon CloudSearch Domain                             | CloudSearchDomain               | 2013-01-01  |
@@ -381,6 +382,7 @@ to be backwards compatible.
 | Amazon Pinpoint Email Service                         | PinpointEmail                   | 2018-07-26  |
 | Amazon Pinpoint SMS and Voice Service                 | PinpointSMSVoice                | 2018-09-05  |
 | Amazon Polly                                          | Polly                           | 2016-06-10  |
+| Amazon QuickSight                                     | QuickSight                      | 2018-04-01  |
 | Amazon Redshift                                       | Redshift                        | 2012-12-01  |
 | Amazon Rekognition                                    | Rekognition                     | 2016-06-27  |
 | Amazon Relational Database Service                    | RDS                             | 2014-10-31  |
@@ -405,8 +407,8 @@ to be backwards compatible.
 | AmazonMQ                                              | MQ                              | 2017-11-27  |
 | Application Auto Scaling                              | ApplicationAutoScaling          | 2016-02-06  |
 | Auto Scaling                                          | AutoScaling                     | 2011-01-01  |
-| Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
 | Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
+| Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
 | Firewall Management Service                           | FMS                             | 2018-01-01  |
 
 ## License

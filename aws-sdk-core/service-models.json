@@ -68,7 +68,7 @@
     "endpoint": "cloudformation"
   },
   "CloudFront": {
-    "models": "cloudfront/2018-06-18",
+    "models": "cloudfront/2018-11-05",
     "endpoint": "cloudfront"
   },
   "CloudHSM": {
@@ -450,6 +450,10 @@
     "models": "pricing/2017-10-15",
     "endpoint": "api.pricing"
   },
+  "QuickSight": {
+    "models": "quicksight/2018-04-01",
+    "endpoint": "quicksight"
+  },
   "RAM": {
     "models": "ram/2018-01-04",
     "endpoint": "ram"
@@ -457,6 +461,10 @@
   "RDS": {
     "models": "rds/2014-10-31",
     "endpoint": "rds"
+  },
+  "RDSDataService": {
+    "models": "rds-data/2018-08-01",
+    "endpoint": "rds-data"
   },
   "Redshift": {
     "models": "redshift/2012-12-01",
