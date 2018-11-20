@@ -42,6 +42,6 @@ require_relative 'aws-sdk-s3control/customizations'
 # @service
 module Aws::S3Control
 
-  GEM_VERSION = '1.0.1'
+  GEM_VERSION = '1.1.0'
 
 end

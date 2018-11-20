@@ -142,6 +142,44 @@ module Aws::XRay
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         group_name: "GroupName", # required
+    #         filter_expression: "FilterExpression",
+    #       }
+    #
+    # @!attribute [rw] group_name
+    #   The case-sensitive name of the new group. Default is a reserved name
+    #   and names must be unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_expression
+    #   The filter expression defining criteria by which to group traces.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CreateGroupRequest AWS API Documentation
+    #
+    class CreateGroupRequest < Struct.new(
+      :group_name,
+      :filter_expression)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group
+    #   The group that was created. Contains the name of the group that was
+    #   created, the ARN of the group that was generated based on the group
+    #   name, and the filter expression that was assigned to the group.
+    #   @return [Types::Group]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CreateGroupResult AWS API Documentation
+    #
+    class CreateGroupResult < Struct.new(
+      :group)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateSamplingRuleRequest
     #   data as a hash:
     #
@@ -186,6 +224,34 @@ module Aws::XRay
       :sampling_rule_record)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         group_name: "GroupName",
+    #         group_arn: "GroupARN",
+    #       }
+    #
+    # @!attribute [rw] group_name
+    #   The case-sensitive name of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_arn
+    #   The ARN of the group that was generated on creation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/DeleteGroupRequest AWS API Documentation
+    #
+    class DeleteGroupRequest < Struct.new(
+      :group_name,
+      :group_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/DeleteGroupResult AWS API Documentation
+    #
+    class DeleteGroupResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteSamplingRuleRequest
     #   data as a hash:
@@ -391,6 +457,77 @@ module Aws::XRay
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         group_name: "GroupName",
+    #         group_arn: "GroupARN",
+    #       }
+    #
+    # @!attribute [rw] group_name
+    #   The case-sensitive name of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_arn
+    #   The ARN of the group that was generated on creation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroupRequest AWS API Documentation
+    #
+    class GetGroupRequest < Struct.new(
+      :group_name,
+      :group_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group
+    #   The group that was requested. Contains the name of the group, the
+    #   ARN of the group, and the filter expression that assigned to the
+    #   group.
+    #   @return [Types::Group]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroupResult AWS API Documentation
+    #
+    class GetGroupResult < Struct.new(
+      :group)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "GetGroupsNextToken",
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token. Not used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroupsRequest AWS API Documentation
+    #
+    class GetGroupsRequest < Struct.new(
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] groups
+    #   The collection of all active groups.
+    #   @return [Array<Types::GroupSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token. Not used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroupsResult AWS API Documentation
+    #
+    class GetGroupsResult < Struct.new(
+      :groups,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetSamplingRulesRequest
     #   data as a hash:
     #
@@ -519,6 +656,8 @@ module Aws::XRay
     #       {
     #         start_time: Time.now, # required
     #         end_time: Time.now, # required
+    #         group_name: "GroupName",
+    #         group_arn: "GroupARN",
     #         next_token: "String",
     #       }
     #
@@ -530,6 +669,14 @@ module Aws::XRay
     #   The end of the time frame for which to generate a graph.
     #   @return [Time]
     #
+    # @!attribute [rw] group_name
+    #   The name of a group to generate a graph based on.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_arn
+    #   The ARN of a group to generate a graph based on.
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   Pagination token. Not used.
     #   @return [String]
@@ -539,6 +686,8 @@ module Aws::XRay
     class GetServiceGraphRequest < Struct.new(
       :start_time,
       :end_time,
+      :group_name,
+      :group_arn,
       :next_token)
       include Aws::Structure
     end
@@ -556,6 +705,12 @@ module Aws::XRay
     #   specified time frame.
     #   @return [Array<Types::Service>]
     #
+    # @!attribute [rw] contains_old_group_versions
+    #   A flag indicating whether or not the group's filter expression has
+    #   been consistent, or if the returned service graph may show traces
+    #   from an older version of the group's filter expression.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] next_token
     #   Pagination token. Not used.
     #   @return [String]
@@ -566,6 +721,7 @@ module Aws::XRay
       :start_time,
       :end_time,
       :services,
+      :contains_old_group_versions,
       :next_token)
       include Aws::Structure
     end
@@ -683,6 +839,52 @@ module Aws::XRay
       :approximate_time,
       :traces_processed_count,
       :next_token)
+      include Aws::Structure
+    end
+
+    # Details and metadata for a group.
+    #
+    # @!attribute [rw] group_name
+    #   The unique case-sensitive name of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_arn
+    #   The ARN of the group generated based on the GroupName.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_expression
+    #   The filter expression defining the parameters to include traces.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Group AWS API Documentation
+    #
+    class Group < Struct.new(
+      :group_name,
+      :group_arn,
+      :filter_expression)
+      include Aws::Structure
+    end
+
+    # Details for a group without metadata.
+    #
+    # @!attribute [rw] group_name
+    #   The unique case-sensitive name of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_arn
+    #   The ARN of the group generated based on the GroupName.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_expression
+    #   The filter expression defining the parameters to include traces.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GroupSummary AWS API Documentation
+    #
+    class GroupSummary < Struct.new(
+      :group_name,
+      :group_arn,
+      :filter_expression)
       include Aws::Structure
     end
 
@@ -1598,6 +1800,50 @@ module Aws::XRay
       :id,
       :error_code,
       :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         group_name: "GroupName",
+    #         group_arn: "GroupARN",
+    #         filter_expression: "FilterExpression",
+    #       }
+    #
+    # @!attribute [rw] group_name
+    #   The case-sensitive name of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_arn
+    #   The ARN that was generated upon create.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_expression
+    #   The updated filter expression defining criteria by which to group
+    #   traces.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UpdateGroupRequest AWS API Documentation
+    #
+    class UpdateGroupRequest < Struct.new(
+      :group_name,
+      :group_arn,
+      :filter_expression)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group
+    #   The group that was updated. Contains the name of the group that was
+    #   updated, the ARN of the group that was updated, and the updated
+    #   filter expression assigned to the group.
+    #   @return [Types::Group]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UpdateGroupResult AWS API Documentation
+    #
+    class UpdateGroupResult < Struct.new(
+      :group)
       include Aws::Structure
     end
 

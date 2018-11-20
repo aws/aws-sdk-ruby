@@ -16,6 +16,7 @@ require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
@@ -47,6 +48,7 @@ module Aws::XRay
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
     add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
@@ -123,6 +125,10 @@ module Aws::XRay
     #   @option options [Boolean] :convert_params (true)
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
+    #
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
@@ -243,6 +249,41 @@ module Aws::XRay
       req.send_request(options)
     end
 
+    # Creates a group resource with a name and a filter expression.
+    #
+    # @option params [required, String] :group_name
+    #   The case-sensitive name of the new group. Default is a reserved name
+    #   and names must be unique.
+    #
+    # @option params [String] :filter_expression
+    #   The filter expression defining criteria by which to group traces.
+    #
+    # @return [Types::CreateGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateGroupResult#group #group} => Types::Group
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_group({
+    #     group_name: "GroupName", # required
+    #     filter_expression: "FilterExpression",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.group.group_name #=> String
+    #   resp.group.group_arn #=> String
+    #   resp.group.filter_expression #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CreateGroup AWS API Documentation
+    #
+    # @overload create_group(params = {})
+    # @param [Hash] params ({})
+    def create_group(params = {}, options = {})
+      req = build_request(:create_group, params)
+      req.send_request(options)
+    end
+
     # Creates a rule to control sampling behavior for instrumented
     # applications. Services retrieve rules with GetSamplingRules, and
     # evaluate each rule in ascending order of *priority* for each request.
@@ -306,6 +347,32 @@ module Aws::XRay
     # @param [Hash] params ({})
     def create_sampling_rule(params = {}, options = {})
       req = build_request(:create_sampling_rule, params)
+      req.send_request(options)
+    end
+
+    # Deletes a group resource.
+    #
+    # @option params [String] :group_name
+    #   The case-sensitive name of the group.
+    #
+    # @option params [String] :group_arn
+    #   The ARN of the group that was generated on creation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_group({
+    #     group_name: "GroupName",
+    #     group_arn: "GroupARN",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/DeleteGroup AWS API Documentation
+    #
+    # @overload delete_group(params = {})
+    # @param [Hash] params ({})
+    def delete_group(params = {}, options = {})
+      req = build_request(:delete_group, params)
       req.send_request(options)
     end
 
@@ -376,6 +443,73 @@ module Aws::XRay
     # @param [Hash] params ({})
     def get_encryption_config(params = {}, options = {})
       req = build_request(:get_encryption_config, params)
+      req.send_request(options)
+    end
+
+    # Retrieves group resource details.
+    #
+    # @option params [String] :group_name
+    #   The case-sensitive name of the group.
+    #
+    # @option params [String] :group_arn
+    #   The ARN of the group that was generated on creation.
+    #
+    # @return [Types::GetGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetGroupResult#group #group} => Types::Group
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_group({
+    #     group_name: "GroupName",
+    #     group_arn: "GroupARN",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.group.group_name #=> String
+    #   resp.group.group_arn #=> String
+    #   resp.group.filter_expression #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroup AWS API Documentation
+    #
+    # @overload get_group(params = {})
+    # @param [Hash] params ({})
+    def get_group(params = {}, options = {})
+      req = build_request(:get_group, params)
+      req.send_request(options)
+    end
+
+    # Retrieves all active group details.
+    #
+    # @option params [String] :next_token
+    #   Pagination token. Not used.
+    #
+    # @return [Types::GetGroupsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetGroupsResult#groups #groups} => Array&lt;Types::GroupSummary&gt;
+    #   * {Types::GetGroupsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_groups({
+    #     next_token: "GetGroupsNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.groups #=> Array
+    #   resp.groups[0].group_name #=> String
+    #   resp.groups[0].group_arn #=> String
+    #   resp.groups[0].filter_expression #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroups AWS API Documentation
+    #
+    # @overload get_groups(params = {})
+    # @param [Hash] params ({})
+    def get_groups(params = {}, options = {})
+      req = build_request(:get_groups, params)
       req.send_request(options)
     end
 
@@ -524,6 +658,12 @@ module Aws::XRay
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   The end of the time frame for which to generate a graph.
     #
+    # @option params [String] :group_name
+    #   The name of a group to generate a graph based on.
+    #
+    # @option params [String] :group_arn
+    #   The ARN of a group to generate a graph based on.
+    #
     # @option params [String] :next_token
     #   Pagination token. Not used.
     #
@@ -532,6 +672,7 @@ module Aws::XRay
     #   * {Types::GetServiceGraphResult#start_time #start_time} => Time
     #   * {Types::GetServiceGraphResult#end_time #end_time} => Time
     #   * {Types::GetServiceGraphResult#services #services} => Array&lt;Types::Service&gt;
+    #   * {Types::GetServiceGraphResult#contains_old_group_versions #contains_old_group_versions} => Boolean
     #   * {Types::GetServiceGraphResult#next_token #next_token} => String
     #
     # @example Request syntax with placeholder values
@@ -539,6 +680,8 @@ module Aws::XRay
     #   resp = client.get_service_graph({
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
+    #     group_name: "GroupName",
+    #     group_arn: "GroupARN",
     #     next_token: "String",
     #   })
     #
@@ -591,6 +734,7 @@ module Aws::XRay
     #   resp.services[0].response_time_histogram #=> Array
     #   resp.services[0].response_time_histogram[0].value #=> Float
     #   resp.services[0].response_time_histogram[0].count #=> Integer
+    #   resp.contains_old_group_versions #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetServiceGraph AWS API Documentation
@@ -966,6 +1110,45 @@ module Aws::XRay
       req.send_request(options)
     end
 
+    # Updates a group resource.
+    #
+    # @option params [String] :group_name
+    #   The case-sensitive name of the group.
+    #
+    # @option params [String] :group_arn
+    #   The ARN that was generated upon create.
+    #
+    # @option params [String] :filter_expression
+    #   The updated filter expression defining criteria by which to group
+    #   traces.
+    #
+    # @return [Types::UpdateGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateGroupResult#group #group} => Types::Group
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_group({
+    #     group_name: "GroupName",
+    #     group_arn: "GroupARN",
+    #     filter_expression: "FilterExpression",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.group.group_name #=> String
+    #   resp.group.group_arn #=> String
+    #   resp.group.filter_expression #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UpdateGroup AWS API Documentation
+    #
+    # @overload update_group(params = {})
+    # @param [Hash] params ({})
+    def update_group(params = {}, options = {})
+      req = build_request(:update_group, params)
+      req.send_request(options)
+    end
+
     # Modifies a sampling rule's configuration.
     #
     # @option params [required, Types::SamplingRuleUpdate] :sampling_rule_update
@@ -1037,7 +1220,7 @@ module Aws::XRay
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-xray'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

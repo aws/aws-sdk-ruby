@@ -2351,6 +2351,7 @@ module Aws::MediaLive
     #                   output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #                   program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #                   program_date_time_period: 1,
+    #                   redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                   segment_length: 1,
     #                   segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
     #                   segments_per_subdirectory: 1,
@@ -2388,6 +2389,7 @@ module Aws::MediaLive
     #                   cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
     #                   cache_length: 1,
     #                   caption_data: "ALL", # accepts ALL, FIELD1_608, FIELD1_AND_FIELD2_608
+    #                   input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #                   restart_delay: 1,
     #                 },
     #                 udp_group_settings: {
@@ -4355,6 +4357,7 @@ module Aws::MediaLive
     #                 output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #                 program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #                 program_date_time_period: 1,
+    #                 redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                 segment_length: 1,
     #                 segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
     #                 segments_per_subdirectory: 1,
@@ -4392,6 +4395,7 @@ module Aws::MediaLive
     #                 cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
     #                 cache_length: 1,
     #                 caption_data: "ALL", # accepts ALL, FIELD1_608, FIELD1_AND_FIELD2_608
+    #                 input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #                 restart_delay: 1,
     #               },
     #               udp_group_settings: {
@@ -5373,6 +5377,7 @@ module Aws::MediaLive
     #         output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #         program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #         program_date_time_period: 1,
+    #         redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #         segment_length: 1,
     #         segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
     #         segments_per_subdirectory: 1,
@@ -5543,6 +5548,11 @@ module Aws::MediaLive
     #   Period of insertion of EXT-X-PROGRAM-DATE-TIME entry, in seconds.
     #   @return [Integer]
     #
+    # @!attribute [rw] redundant_manifest
+    #   When set to "enabled", includes the media playlists from both
+    #   pipelines in the master manifest (.m3u8) file.
+    #   @return [String]
+    #
     # @!attribute [rw] segment_length
     #   Length of MPEG-2 Transport Stream segments to create (in seconds).
     #   Note that segments will end on the next keyframe after this number
@@ -5615,6 +5625,7 @@ module Aws::MediaLive
       :output_selection,
       :program_date_time,
       :program_date_time_period,
+      :redundant_manifest,
       :segment_length,
       :segmentation_mode,
       :segments_per_subdirectory,
@@ -8133,6 +8144,7 @@ module Aws::MediaLive
     #             output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #             program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #             program_date_time_period: 1,
+    #             redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #             segment_length: 1,
     #             segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
     #             segments_per_subdirectory: 1,
@@ -8170,6 +8182,7 @@ module Aws::MediaLive
     #             cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
     #             cache_length: 1,
     #             caption_data: "ALL", # accepts ALL, FIELD1_608, FIELD1_AND_FIELD2_608
+    #             input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #             restart_delay: 1,
     #           },
     #           udp_group_settings: {
@@ -8481,6 +8494,7 @@ module Aws::MediaLive
     #           output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #           program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #           program_date_time_period: 1,
+    #           redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #           segment_length: 1,
     #           segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
     #           segments_per_subdirectory: 1,
@@ -8518,6 +8532,7 @@ module Aws::MediaLive
     #           cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
     #           cache_length: 1,
     #           caption_data: "ALL", # accepts ALL, FIELD1_608, FIELD1_AND_FIELD2_608
+    #           input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #           restart_delay: 1,
     #         },
     #         udp_group_settings: {
@@ -9106,6 +9121,7 @@ module Aws::MediaLive
     #         cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
     #         cache_length: 1,
     #         caption_data: "ALL", # accepts ALL, FIELD1_608, FIELD1_AND_FIELD2_608
+    #         input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #         restart_delay: 1,
     #       }
     #
@@ -9138,6 +9154,13 @@ module Aws::MediaLive
     #   will be passed.
     #   @return [String]
     #
+    # @!attribute [rw] input_loss_action
+    #   Controls the behavior of this RTMP group if input becomes
+    #   unavailable. - emitOutput: Emit a slate until input returns. -
+    #   pauseOutput: Stop transmitting data until input returns. This does
+    #   not close the underlying RTMP connection.
+    #   @return [String]
+    #
     # @!attribute [rw] restart_delay
     #   If a streaming output fails, number of seconds to wait until a
     #   restart is initiated. A value of 0 means never restart.
@@ -9150,6 +9173,7 @@ module Aws::MediaLive
       :cache_full_behavior,
       :cache_length,
       :caption_data,
+      :input_loss_action,
       :restart_delay)
       include Aws::Structure
     end
@@ -10915,6 +10939,7 @@ module Aws::MediaLive
     #                   output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #                   program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #                   program_date_time_period: 1,
+    #                   redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                   segment_length: 1,
     #                   segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
     #                   segments_per_subdirectory: 1,
@@ -10952,6 +10977,7 @@ module Aws::MediaLive
     #                   cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
     #                   cache_length: 1,
     #                   caption_data: "ALL", # accepts ALL, FIELD1_608, FIELD1_AND_FIELD2_608
+    #                   input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #                   restart_delay: 1,
     #                 },
     #                 udp_group_settings: {

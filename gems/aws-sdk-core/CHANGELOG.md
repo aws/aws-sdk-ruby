@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.39.0 (2018-11-20)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated the list of parameters to filter when logging.
+
 * Feature - Adding support for endpoint trait (host prefix) per operation, to disable this feature, set `:disable_host_prefix_injection` to `false` for the client.
 
 3.38.0 (2018-11-12)

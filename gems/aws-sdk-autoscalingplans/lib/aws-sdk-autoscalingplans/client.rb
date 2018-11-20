@@ -16,6 +16,7 @@ require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
@@ -47,6 +48,7 @@ module Aws::AutoScalingPlans
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
     add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
@@ -123,6 +125,10 @@ module Aws::AutoScalingPlans
     #   @option options [Boolean] :convert_params (true)
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
+    #
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
@@ -211,11 +217,6 @@ module Aws::AutoScalingPlans
 
     # Creates a scaling plan.
     #
-    # A scaling plan contains a set of instructions used to configure
-    # dynamic scaling for the scalable resources in your application. AWS
-    # Auto Scaling creates target tracking scaling policies based on the
-    # scaling instructions in your scaling plan.
-    #
     # @option params [required, String] :scaling_plan_name
     #   The name of the scaling plan. Names cannot contain vertical bars,
     #   colons, or forward slashes.
@@ -276,6 +277,28 @@ module Aws::AutoScalingPlans
     #             estimated_instance_warmup: 1,
     #           },
     #         ],
+    #         predefined_load_metric_specification: {
+    #           predefined_load_metric_type: "ASGTotalCPUUtilization", # required, accepts ASGTotalCPUUtilization, ASGTotalNetworkIn, ASGTotalNetworkOut, ALBTargetGroupRequestCount
+    #           resource_label: "ResourceLabel",
+    #         },
+    #         customized_load_metric_specification: {
+    #           metric_name: "MetricName", # required
+    #           namespace: "MetricNamespace", # required
+    #           dimensions: [
+    #             {
+    #               name: "MetricDimensionName", # required
+    #               value: "MetricDimensionValue", # required
+    #             },
+    #           ],
+    #           statistic: "Average", # required, accepts Average, Minimum, Maximum, SampleCount, Sum
+    #           unit: "MetricUnit",
+    #         },
+    #         scheduled_action_buffer_time: 1,
+    #         predictive_scaling_max_capacity_behavior: "SetForecastCapacityToMaxCapacity", # accepts SetForecastCapacityToMaxCapacity, SetMaxCapacityToForecastCapacity, SetMaxCapacityAboveForecastCapacity
+    #         predictive_scaling_max_capacity_buffer: 1,
+    #         predictive_scaling_mode: "ForecastAndScale", # accepts ForecastAndScale, ForecastOnly
+    #         scaling_policy_update_behavior: "KeepExternalPolicies", # accepts KeepExternalPolicies, ReplaceExternalPolicies
+    #         disable_dynamic_scaling: false,
     #       },
     #     ],
     #   })
@@ -295,11 +318,17 @@ module Aws::AutoScalingPlans
 
     # Deletes the specified scaling plan.
     #
+    # Deleting a scaling plan deletes the underlying ScalingInstruction for
+    # all of the scalable resources that are covered by the plan.
+    #
+    # If the plan has launched resources or has scaling activities in
+    # progress, you must delete those resources separately.
+    #
     # @option params [required, String] :scaling_plan_name
     #   The name of the scaling plan.
     #
     # @option params [required, Integer] :scaling_plan_version
-    #   The version of the scaling plan.
+    #   The version number of the scaling plan.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -325,10 +354,10 @@ module Aws::AutoScalingPlans
     #   The name of the scaling plan.
     #
     # @option params [required, Integer] :scaling_plan_version
-    #   The version of the scaling plan.
+    #   The version number of the scaling plan.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of scalable resources to return. This value can be
+    #   The maximum number of scalable resources to return. The value must be
     #   between 1 and 50. The default value is 50.
     #
     # @option params [String] :next_token
@@ -386,14 +415,14 @@ module Aws::AutoScalingPlans
       req.send_request(options)
     end
 
-    # Describes the specified scaling plans or all of your scaling plans.
+    # Describes one or more of your scaling plans.
     #
     # @option params [Array<String>] :scaling_plan_names
     #   The names of the scaling plans (up to 10). If you specify application
     #   sources, you cannot specify scaling plan names.
     #
     # @option params [Integer] :scaling_plan_version
-    #   The version of the scaling plan. If you specify a scaling plan
+    #   The version number of the scaling plan. If you specify a scaling plan
     #   version, you must also specify a scaling plan name.
     #
     # @option params [Array<Types::ApplicationSource>] :application_sources
@@ -463,6 +492,21 @@ module Aws::AutoScalingPlans
     #   resp.scaling_plans[0].scaling_instructions[0].target_tracking_configurations[0].scale_out_cooldown #=> Integer
     #   resp.scaling_plans[0].scaling_instructions[0].target_tracking_configurations[0].scale_in_cooldown #=> Integer
     #   resp.scaling_plans[0].scaling_instructions[0].target_tracking_configurations[0].estimated_instance_warmup #=> Integer
+    #   resp.scaling_plans[0].scaling_instructions[0].predefined_load_metric_specification.predefined_load_metric_type #=> String, one of "ASGTotalCPUUtilization", "ASGTotalNetworkIn", "ASGTotalNetworkOut", "ALBTargetGroupRequestCount"
+    #   resp.scaling_plans[0].scaling_instructions[0].predefined_load_metric_specification.resource_label #=> String
+    #   resp.scaling_plans[0].scaling_instructions[0].customized_load_metric_specification.metric_name #=> String
+    #   resp.scaling_plans[0].scaling_instructions[0].customized_load_metric_specification.namespace #=> String
+    #   resp.scaling_plans[0].scaling_instructions[0].customized_load_metric_specification.dimensions #=> Array
+    #   resp.scaling_plans[0].scaling_instructions[0].customized_load_metric_specification.dimensions[0].name #=> String
+    #   resp.scaling_plans[0].scaling_instructions[0].customized_load_metric_specification.dimensions[0].value #=> String
+    #   resp.scaling_plans[0].scaling_instructions[0].customized_load_metric_specification.statistic #=> String, one of "Average", "Minimum", "Maximum", "SampleCount", "Sum"
+    #   resp.scaling_plans[0].scaling_instructions[0].customized_load_metric_specification.unit #=> String
+    #   resp.scaling_plans[0].scaling_instructions[0].scheduled_action_buffer_time #=> Integer
+    #   resp.scaling_plans[0].scaling_instructions[0].predictive_scaling_max_capacity_behavior #=> String, one of "SetForecastCapacityToMaxCapacity", "SetMaxCapacityToForecastCapacity", "SetMaxCapacityAboveForecastCapacity"
+    #   resp.scaling_plans[0].scaling_instructions[0].predictive_scaling_max_capacity_buffer #=> Integer
+    #   resp.scaling_plans[0].scaling_instructions[0].predictive_scaling_mode #=> String, one of "ForecastAndScale", "ForecastOnly"
+    #   resp.scaling_plans[0].scaling_instructions[0].scaling_policy_update_behavior #=> String, one of "KeepExternalPolicies", "ReplaceExternalPolicies"
+    #   resp.scaling_plans[0].scaling_instructions[0].disable_dynamic_scaling #=> Boolean
     #   resp.scaling_plans[0].status_code #=> String, one of "Active", "ActiveWithProblems", "CreationInProgress", "CreationFailed", "DeletionInProgress", "DeletionFailed", "UpdateInProgress", "UpdateFailed"
     #   resp.scaling_plans[0].status_message #=> String
     #   resp.scaling_plans[0].status_start_time #=> Time
@@ -478,28 +522,139 @@ module Aws::AutoScalingPlans
       req.send_request(options)
     end
 
-    # Updates the scaling plan for the specified scaling plan.
+    # Retrieves the forecast data for a scalable resource.
     #
-    # You cannot update a scaling plan if it is in the process of being
-    # created, updated, or deleted.
-    #
-    # @option params [Types::ApplicationSource] :application_source
-    #   A CloudFormation stack or set of tags.
+    # Capacity forecasts are represented as predicted values, or data
+    # points, that are calculated using historical data points from a
+    # specified CloudWatch load metric. Data points are available for up to
+    # 56 days.
     #
     # @option params [required, String] :scaling_plan_name
     #   The name of the scaling plan.
     #
-    # @option params [Array<Types::ScalingInstruction>] :scaling_instructions
-    #   The scaling instructions.
+    # @option params [required, Integer] :scaling_plan_version
+    #   The version number of the scaling plan.
+    #
+    # @option params [required, String] :service_namespace
+    #   The namespace of the AWS service.
+    #
+    # @option params [required, String] :resource_id
+    #   The ID of the resource. This string consists of the resource type and
+    #   unique identifier.
+    #
+    #   * Auto Scaling group - The resource type is `autoScalingGroup` and the
+    #     unique identifier is the name of the Auto Scaling group. Example:
+    #     `autoScalingGroup/my-asg`.
+    #
+    #   * ECS service - The resource type is `service` and the unique
+    #     identifier is the cluster name and service name. Example:
+    #     `service/default/sample-webapp`.
+    #
+    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot Fleet request ID. Example:
+    #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
+    #
+    #   * DynamoDB table - The resource type is `table` and the unique
+    #     identifier is the resource ID. Example: `table/my-table`.
+    #
+    #   * DynamoDB global secondary index - The resource type is `index` and
+    #     the unique identifier is the resource ID. Example:
+    #     `table/my-table/index/my-table-index`.
+    #
+    #   * Aurora DB cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #
+    # @option params [required, String] :scalable_dimension
+    #   The scalable dimension for the resource.
+    #
+    # @option params [required, String] :forecast_data_type
+    #   The type of forecast data to get.
+    #
+    #   * `LoadForecast`\: The load metric forecast.
+    #
+    #   * `CapacityForecast`\: The capacity forecast.
+    #
+    #   * `ScheduledActionMinCapacity`\: The minimum capacity for each
+    #     scheduled scaling action. This data is calculated as the larger of
+    #     two values: the capacity forecast or the minimum capacity in the
+    #     scaling instruction.
+    #
+    #   * `ScheduledActionMaxCapacity`\: The maximum capacity for each
+    #     scheduled scaling action. The calculation used is determined by the
+    #     predictive scaling maximum capacity behavior setting in the scaling
+    #     instruction.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   The inclusive start time of the time range for the forecast data to
+    #   get. The date and time can be at most 56 days before the current date
+    #   and time.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_time
+    #   The exclusive end time of the time range for the forecast data to get.
+    #   The maximum time duration between the start and end time is seven
+    #   days.
+    #
+    #   Although this parameter can accept a date and time that is more than
+    #   two days in the future, the availability of forecast data has limits.
+    #   AWS Auto Scaling only issues forecasts for periods of two days in
+    #   advance.
+    #
+    # @return [Types::GetScalingPlanResourceForecastDataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetScalingPlanResourceForecastDataResponse#datapoints #datapoints} => Array&lt;Types::Datapoint&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_scaling_plan_resource_forecast_data({
+    #     scaling_plan_name: "ScalingPlanName", # required
+    #     scaling_plan_version: 1, # required
+    #     service_namespace: "autoscaling", # required, accepts autoscaling, ecs, ec2, rds, dynamodb
+    #     resource_id: "XmlString", # required
+    #     scalable_dimension: "autoscaling:autoScalingGroup:DesiredCapacity", # required, accepts autoscaling:autoScalingGroup:DesiredCapacity, ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, rds:cluster:ReadReplicaCount, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
+    #     forecast_data_type: "CapacityForecast", # required, accepts CapacityForecast, LoadForecast, ScheduledActionMinCapacity, ScheduledActionMaxCapacity
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.datapoints #=> Array
+    #   resp.datapoints[0].timestamp #=> Time
+    #   resp.datapoints[0].value #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/GetScalingPlanResourceForecastData AWS API Documentation
+    #
+    # @overload get_scaling_plan_resource_forecast_data(params = {})
+    # @param [Hash] params ({})
+    def get_scaling_plan_resource_forecast_data(params = {}, options = {})
+      req = build_request(:get_scaling_plan_resource_forecast_data, params)
+      req.send_request(options)
+    end
+
+    # Updates the specified scaling plan.
+    #
+    # You cannot update a scaling plan if it is in the process of being
+    # created, updated, or deleted.
+    #
+    # @option params [required, String] :scaling_plan_name
+    #   The name of the scaling plan.
     #
     # @option params [required, Integer] :scaling_plan_version
-    #   The version number.
+    #   The version number of the scaling plan.
+    #
+    # @option params [Types::ApplicationSource] :application_source
+    #   A CloudFormation stack or set of tags.
+    #
+    # @option params [Array<Types::ScalingInstruction>] :scaling_instructions
+    #   The scaling instructions.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_scaling_plan({
+    #     scaling_plan_name: "ScalingPlanName", # required
+    #     scaling_plan_version: 1, # required
     #     application_source: {
     #       cloud_formation_stack_arn: "XmlString",
     #       tag_filters: [
@@ -509,7 +664,6 @@ module Aws::AutoScalingPlans
     #         },
     #       ],
     #     },
-    #     scaling_plan_name: "ScalingPlanName", # required
     #     scaling_instructions: [
     #       {
     #         service_namespace: "autoscaling", # required, accepts autoscaling, ecs, ec2, rds, dynamodb
@@ -542,9 +696,30 @@ module Aws::AutoScalingPlans
     #             estimated_instance_warmup: 1,
     #           },
     #         ],
+    #         predefined_load_metric_specification: {
+    #           predefined_load_metric_type: "ASGTotalCPUUtilization", # required, accepts ASGTotalCPUUtilization, ASGTotalNetworkIn, ASGTotalNetworkOut, ALBTargetGroupRequestCount
+    #           resource_label: "ResourceLabel",
+    #         },
+    #         customized_load_metric_specification: {
+    #           metric_name: "MetricName", # required
+    #           namespace: "MetricNamespace", # required
+    #           dimensions: [
+    #             {
+    #               name: "MetricDimensionName", # required
+    #               value: "MetricDimensionValue", # required
+    #             },
+    #           ],
+    #           statistic: "Average", # required, accepts Average, Minimum, Maximum, SampleCount, Sum
+    #           unit: "MetricUnit",
+    #         },
+    #         scheduled_action_buffer_time: 1,
+    #         predictive_scaling_max_capacity_behavior: "SetForecastCapacityToMaxCapacity", # accepts SetForecastCapacityToMaxCapacity, SetMaxCapacityToForecastCapacity, SetMaxCapacityAboveForecastCapacity
+    #         predictive_scaling_max_capacity_buffer: 1,
+    #         predictive_scaling_mode: "ForecastAndScale", # accepts ForecastAndScale, ForecastOnly
+    #         scaling_policy_update_behavior: "KeepExternalPolicies", # accepts KeepExternalPolicies, ReplaceExternalPolicies
+    #         disable_dynamic_scaling: false,
     #       },
     #     ],
-    #     scaling_plan_version: 1, # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/UpdateScalingPlan AWS API Documentation
@@ -569,7 +744,7 @@ module Aws::AutoScalingPlans
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscalingplans'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -241,7 +241,7 @@ module Aws::Redshift
     #       }
     #
     # @!attribute [rw] identifiers
-    #   A list of indentifiers for the snapshots you want to delete.
+    #   A list of identifiers for the snapshots that you want to delete.
     #   @return [Array<Types::DeleteClusterSnapshotMessage>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/BatchDeleteClusterSnapshotsRequest AWS API Documentation
@@ -356,6 +356,10 @@ module Aws::Redshift
     #
     #   * `available`
     #
+    #   * `available, prep-for-resize`
+    #
+    #   * `available, resize-cleanup`
+    #
     #   * `cancelling-resize`
     #
     #   * `creating`
@@ -419,10 +423,10 @@ module Aws::Redshift
     #
     # @!attribute [rw] manual_snapshot_retention_period
     #   The default number of days to retain a manual snapshot. If the value
-    #   is -1, the snapshot is retained indefinitely. This setting does not
+    #   is -1, the snapshot is retained indefinitely. This setting doesn't
     #   change the retention period of existing snapshots.
     #
-    #   The value must be either -1 or an integer between 1 and 3,653
+    #   The value must be either -1 or an integer between 1 and 3,653.
     #   @return [Integer]
     #
     # @!attribute [rw] cluster_security_groups
@@ -479,7 +483,7 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] allow_version_upgrade
-    #   A Boolean value that, if `true`, indicates that major version
+    #   A boolean value that, if `true`, indicates that major version
     #   upgrades will be applied automatically to the cluster during the
     #   maintenance window.
     #   @return [Boolean]
@@ -489,12 +493,12 @@ module Aws::Redshift
     #   @return [Integer]
     #
     # @!attribute [rw] publicly_accessible
-    #   A Boolean value that, if `true`, indicates that the cluster can be
+    #   A boolean value that, if `true`, indicates that the cluster can be
     #   accessed from a public network.
     #   @return [Boolean]
     #
     # @!attribute [rw] encrypted
-    #   A Boolean value that, if `true`, indicates that data in the cluster
+    #   A boolean value that, if `true`, indicates that data in the cluster
     #   is encrypted at rest.
     #   @return [Boolean]
     #
@@ -1524,10 +1528,10 @@ module Aws::Redshift
     #
     # @!attribute [rw] manual_snapshot_retention_period
     #   The default number of days to retain a manual snapshot. If the value
-    #   is -1, the snapshot is retained indefinitely. This setting does not
+    #   is -1, the snapshot is retained indefinitely. This setting doesn't
     #   change the retention period of existing snapshots.
     #
-    #   The value must be either -1 or an integer between 1 and 3,653
+    #   The value must be either -1 or an integer between 1 and 3,653.
     #   @return [Integer]
     #
     # @!attribute [rw] port
@@ -2067,8 +2071,8 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   A Boolean value; set to `true` to activate the subscription, set to
-    #   `false` to create the subscription but not active it.
+    #   A boolean value; set to `true` to activate the subscription, and set
+    #   to `false` to create the subscription but not activate it.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
@@ -2313,8 +2317,8 @@ module Aws::Redshift
     #
     # @!attribute [rw] schedule_definitions
     #   The definition of the snapshot schedule. The definition is made up
-    #   of schedule expressions. For example, "cron(30 12 *)" or
-    #   "rate(12 hours)".
+    #   of schedule expressions, for example "cron(30 12 *)" or "rate(12
+    #   hours)".
     #   @return [Array<String>]
     #
     # @!attribute [rw] schedule_identifier
@@ -4529,9 +4533,9 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] destination_region
-    #   The destination region that you want to copy snapshots to.
+    #   The destination AWS Region that you want to copy snapshots to.
     #
-    #   Constraints: Must be the name of a valid region. For more
+    #   Constraints: Must be the name of a valid AWS Region. For more
     #   information, see [Regions and Endpoints][1] in the Amazon Web
     #   Services General Reference.
     #
@@ -4556,8 +4560,9 @@ module Aws::Redshift
     #
     # @!attribute [rw] manual_snapshot_retention_period
     #   The number of days to retain newly copied snapshots in the
-    #   destination region after they are copied from the source region. If
-    #   the value is -1, the manual snapshot is retained indefinitely.
+    #   destination AWS Region after they are copied from the source AWS
+    #   Region. If the value is -1, the manual snapshot is retained
+    #   indefinitely.
     #
     #   The value must be either -1 or an integer between 1 and 3,653.
     #   @return [Integer]
@@ -4769,8 +4774,8 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   A Boolean value indicating whether the subscription is enabled.
-    #   `true` indicates the subscription is enabled.
+    #   A boolean value indicating whether the subscription is enabled;
+    #   `true` indicates that the subscription is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
@@ -5559,8 +5564,8 @@ module Aws::Redshift
     # @!attribute [rw] manual_snapshot_retention_period
     #   The default for number of days that a newly created manual snapshot
     #   is retained. If the value is -1, the manual snapshot is retained
-    #   indefinitely. This value will not retroactively change the retention
-    #   periods of existing manual snapshots
+    #   indefinitely. This value doesn't retroactively change the retention
+    #   periods of existing manual snapshots.
     #
     #   The value must be either -1 or an integer between 1 and 3,653.
     #
@@ -5845,7 +5850,7 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] schedule_identifier
-    #   A unique alphanumeric identifier for the schedule you want to
+    #   A unique alphanumeric identifier for the schedule that you want to
     #   associate with the cluster.
     #   @return [String]
     #
@@ -6008,7 +6013,7 @@ module Aws::Redshift
     # @!attribute [rw] cluster_identifier
     #   The unique identifier of the cluster for which you want to change
     #   the retention period for either automated or manual snapshots that
-    #   are copied to a destination region.
+    #   are copied to a destination AWS Region.
     #
     #   Constraints: Must be the valid name of an existing cluster that has
     #   cross-region snapshot copy enabled.
@@ -6016,15 +6021,15 @@ module Aws::Redshift
     #
     # @!attribute [rw] retention_period
     #   The number of days to retain automated snapshots in the destination
-    #   region after they are copied from the source region.
+    #   AWS Region after they are copied from the source AWS Region.
     #
     #   By default, this only changes the retention period of copied
     #   automated snapshots.
     #
     #   If you decrease the retention period for automated snapshots that
-    #   are copied to a destination region, Amazon Redshift will delete any
-    #   existing automated snapshots that were copied to the destination
-    #   region and that fall outside of the new retention period.
+    #   are copied to a destination AWS Region, Amazon Redshift deletes any
+    #   existing automated snapshots that were copied to the destination AWS
+    #   Region and that fall outside of the new retention period.
     #
     #   Constraints: Must be at least 1 and no more than 35 for automated
     #   snapshots.
@@ -6078,7 +6083,7 @@ module Aws::Redshift
     #
     # @!attribute [rw] schedule_definitions
     #   An updated list of schedule definitions. A schedule definition is
-    #   made up of schedule expressions. For example, "cron(30 12 *)" or
+    #   made up of schedule expressions, for example, "cron(30 12 *)" or
     #   "rate(12 hours)".
     #   @return [Array<String>]
     #
@@ -7425,13 +7430,13 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] snapshot_create_time
-    #   The time (UTC) when Amazon Redshift began the snapshot. A snapshot
-    #   contains a copy of the cluster data as of this exact time.
+    #   The time (in UTC format) when Amazon Redshift began the snapshot. A
+    #   snapshot contains a copy of the cluster data as of this exact time.
     #   @return [Time]
     #
     # @!attribute [rw] status
     #   The snapshot status. The value of the status depends on the API
-    #   operation used.
+    #   operation used:
     #
     #   * CreateClusterSnapshot and CopyClusterSnapshot returns status as
     #     "creating".
@@ -7465,7 +7470,7 @@ module Aws::Redshift
     #
     # @!attribute [rw] snapshot_type
     #   The snapshot type. Snapshots created using CreateClusterSnapshot and
-    #   CopyClusterSnapshot will be of type "manual".
+    #   CopyClusterSnapshot are of type "manual".
     #   @return [String]
     #
     # @!attribute [rw] node_type
@@ -7993,8 +7998,8 @@ module Aws::Redshift
     #   @return [Types::Tag]
     #
     # @!attribute [rw] resource_name
-    #   The Amazon Resource Name (ARN) with which the tag is associated. For
-    #   example, `arn:aws:redshift:us-east-1:123456789:cluster:t1`.
+    #   The Amazon Resource Name (ARN) with which the tag is associated, for
+    #   example: `arn:aws:redshift:us-east-1:123456789:cluster:t1`.
     #   @return [String]
     #
     # @!attribute [rw] resource_type

@@ -201,6 +201,7 @@ module Aws::MediaLive
     HlsOutputSelection = Shapes::StringShape.new(name: 'HlsOutputSelection')
     HlsOutputSettings = Shapes::StructureShape.new(name: 'HlsOutputSettings')
     HlsProgramDateTime = Shapes::StringShape.new(name: 'HlsProgramDateTime')
+    HlsRedundantManifest = Shapes::StringShape.new(name: 'HlsRedundantManifest')
     HlsSegmentationMode = Shapes::StringShape.new(name: 'HlsSegmentationMode')
     HlsSettings = Shapes::StructureShape.new(name: 'HlsSettings')
     HlsStreamInfResolution = Shapes::StringShape.new(name: 'HlsStreamInfResolution')
@@ -220,6 +221,7 @@ module Aws::MediaLive
     InputLocation = Shapes::StructureShape.new(name: 'InputLocation')
     InputLossActionForHlsOut = Shapes::StringShape.new(name: 'InputLossActionForHlsOut')
     InputLossActionForMsSmoothOut = Shapes::StringShape.new(name: 'InputLossActionForMsSmoothOut')
+    InputLossActionForRtmpOut = Shapes::StringShape.new(name: 'InputLossActionForRtmpOut')
     InputLossActionForUdpOut = Shapes::StringShape.new(name: 'InputLossActionForUdpOut')
     InputLossBehavior = Shapes::StructureShape.new(name: 'InputLossBehavior')
     InputLossImageType = Shapes::StringShape.new(name: 'InputLossImageType')
@@ -1098,6 +1100,7 @@ module Aws::MediaLive
     HlsGroupSettings.add_member(:output_selection, Shapes::ShapeRef.new(shape: HlsOutputSelection, location_name: "outputSelection"))
     HlsGroupSettings.add_member(:program_date_time, Shapes::ShapeRef.new(shape: HlsProgramDateTime, location_name: "programDateTime"))
     HlsGroupSettings.add_member(:program_date_time_period, Shapes::ShapeRef.new(shape: __integerMin0Max3600, location_name: "programDateTimePeriod"))
+    HlsGroupSettings.add_member(:redundant_manifest, Shapes::ShapeRef.new(shape: HlsRedundantManifest, location_name: "redundantManifest"))
     HlsGroupSettings.add_member(:segment_length, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "segmentLength"))
     HlsGroupSettings.add_member(:segmentation_mode, Shapes::ShapeRef.new(shape: HlsSegmentationMode, location_name: "segmentationMode"))
     HlsGroupSettings.add_member(:segments_per_subdirectory, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "segmentsPerSubdirectory"))
@@ -1526,6 +1529,7 @@ module Aws::MediaLive
     RtmpGroupSettings.add_member(:cache_full_behavior, Shapes::ShapeRef.new(shape: RtmpCacheFullBehavior, location_name: "cacheFullBehavior"))
     RtmpGroupSettings.add_member(:cache_length, Shapes::ShapeRef.new(shape: __integerMin30, location_name: "cacheLength"))
     RtmpGroupSettings.add_member(:caption_data, Shapes::ShapeRef.new(shape: RtmpCaptionData, location_name: "captionData"))
+    RtmpGroupSettings.add_member(:input_loss_action, Shapes::ShapeRef.new(shape: InputLossActionForRtmpOut, location_name: "inputLossAction"))
     RtmpGroupSettings.add_member(:restart_delay, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "restartDelay"))
     RtmpGroupSettings.struct_class = Types::RtmpGroupSettings
 

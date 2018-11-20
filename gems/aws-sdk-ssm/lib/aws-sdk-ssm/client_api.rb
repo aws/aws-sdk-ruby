@@ -68,6 +68,19 @@ module Aws::SSM
     AssociationVersionInfo = Shapes::StructureShape.new(name: 'AssociationVersionInfo')
     AssociationVersionLimitExceeded = Shapes::StructureShape.new(name: 'AssociationVersionLimitExceeded')
     AssociationVersionList = Shapes::ListShape.new(name: 'AssociationVersionList')
+    AttachmentContent = Shapes::StructureShape.new(name: 'AttachmentContent')
+    AttachmentContentList = Shapes::ListShape.new(name: 'AttachmentContentList')
+    AttachmentHash = Shapes::StringShape.new(name: 'AttachmentHash')
+    AttachmentHashType = Shapes::StringShape.new(name: 'AttachmentHashType')
+    AttachmentInformation = Shapes::StructureShape.new(name: 'AttachmentInformation')
+    AttachmentInformationList = Shapes::ListShape.new(name: 'AttachmentInformationList')
+    AttachmentName = Shapes::StringShape.new(name: 'AttachmentName')
+    AttachmentUrl = Shapes::StringShape.new(name: 'AttachmentUrl')
+    AttachmentsSource = Shapes::StructureShape.new(name: 'AttachmentsSource')
+    AttachmentsSourceKey = Shapes::StringShape.new(name: 'AttachmentsSourceKey')
+    AttachmentsSourceList = Shapes::ListShape.new(name: 'AttachmentsSourceList')
+    AttachmentsSourceValue = Shapes::StringShape.new(name: 'AttachmentsSourceValue')
+    AttachmentsSourceValues = Shapes::ListShape.new(name: 'AttachmentsSourceValues')
     AttributeName = Shapes::StringShape.new(name: 'AttributeName')
     AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
     AutomationActionName = Shapes::StringShape.new(name: 'AutomationActionName')
@@ -154,6 +167,7 @@ module Aws::SSM
     CompliantSummary = Shapes::StructureShape.new(name: 'CompliantSummary')
     ComputerName = Shapes::StringShape.new(name: 'ComputerName')
     ConnectionStatus = Shapes::StringShape.new(name: 'ConnectionStatus')
+    ContentLength = Shapes::IntegerShape.new(name: 'ContentLength')
     CreateActivationRequest = Shapes::StructureShape.new(name: 'CreateActivationRequest')
     CreateActivationResult = Shapes::StructureShape.new(name: 'CreateActivationResult')
     CreateAssociationBatchRequest = Shapes::StructureShape.new(name: 'CreateAssociationBatchRequest')
@@ -299,15 +313,18 @@ module Aws::SSM
     DocumentSchemaVersion = Shapes::StringShape.new(name: 'DocumentSchemaVersion')
     DocumentSha1 = Shapes::StringShape.new(name: 'DocumentSha1')
     DocumentStatus = Shapes::StringShape.new(name: 'DocumentStatus')
+    DocumentStatusInformation = Shapes::StringShape.new(name: 'DocumentStatusInformation')
     DocumentType = Shapes::StringShape.new(name: 'DocumentType')
     DocumentVersion = Shapes::StringShape.new(name: 'DocumentVersion')
     DocumentVersionInfo = Shapes::StructureShape.new(name: 'DocumentVersionInfo')
     DocumentVersionLimitExceeded = Shapes::StructureShape.new(name: 'DocumentVersionLimitExceeded')
     DocumentVersionList = Shapes::ListShape.new(name: 'DocumentVersionList')
+    DocumentVersionName = Shapes::StringShape.new(name: 'DocumentVersionName')
     DocumentVersionNumber = Shapes::StringShape.new(name: 'DocumentVersionNumber')
     DoesNotExistException = Shapes::StructureShape.new(name: 'DoesNotExistException')
     DryRun = Shapes::BooleanShape.new(name: 'DryRun')
     DuplicateDocumentContent = Shapes::StructureShape.new(name: 'DuplicateDocumentContent')
+    DuplicateDocumentVersionName = Shapes::StructureShape.new(name: 'DuplicateDocumentVersionName')
     DuplicateInstanceId = Shapes::StructureShape.new(name: 'DuplicateInstanceId')
     EffectiveInstanceAssociationMaxResults = Shapes::IntegerShape.new(name: 'EffectiveInstanceAssociationMaxResults')
     EffectivePatch = Shapes::StructureShape.new(name: 'EffectivePatch')
@@ -1026,6 +1043,28 @@ module Aws::SSM
 
     AssociationVersionList.member = Shapes::ShapeRef.new(shape: AssociationVersionInfo)
 
+    AttachmentContent.add_member(:name, Shapes::ShapeRef.new(shape: AttachmentName, location_name: "Name"))
+    AttachmentContent.add_member(:size, Shapes::ShapeRef.new(shape: ContentLength, location_name: "Size"))
+    AttachmentContent.add_member(:hash, Shapes::ShapeRef.new(shape: AttachmentHash, location_name: "Hash"))
+    AttachmentContent.add_member(:hash_type, Shapes::ShapeRef.new(shape: AttachmentHashType, location_name: "HashType"))
+    AttachmentContent.add_member(:url, Shapes::ShapeRef.new(shape: AttachmentUrl, location_name: "Url"))
+    AttachmentContent.struct_class = Types::AttachmentContent
+
+    AttachmentContentList.member = Shapes::ShapeRef.new(shape: AttachmentContent)
+
+    AttachmentInformation.add_member(:name, Shapes::ShapeRef.new(shape: AttachmentName, location_name: "Name"))
+    AttachmentInformation.struct_class = Types::AttachmentInformation
+
+    AttachmentInformationList.member = Shapes::ShapeRef.new(shape: AttachmentInformation)
+
+    AttachmentsSource.add_member(:key, Shapes::ShapeRef.new(shape: AttachmentsSourceKey, location_name: "Key"))
+    AttachmentsSource.add_member(:values, Shapes::ShapeRef.new(shape: AttachmentsSourceValues, location_name: "Values"))
+    AttachmentsSource.struct_class = Types::AttachmentsSource
+
+    AttachmentsSourceList.member = Shapes::ShapeRef.new(shape: AttachmentsSource)
+
+    AttachmentsSourceValues.member = Shapes::ShapeRef.new(shape: AttachmentsSourceValue)
+
     AutomationExecution.add_member(:automation_execution_id, Shapes::ShapeRef.new(shape: AutomationExecutionId, location_name: "AutomationExecutionId"))
     AutomationExecution.add_member(:document_name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "DocumentName"))
     AutomationExecution.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
@@ -1281,7 +1320,9 @@ module Aws::SSM
     CreateAssociationResult.struct_class = Types::CreateAssociationResult
 
     CreateDocumentRequest.add_member(:content, Shapes::ShapeRef.new(shape: DocumentContent, required: true, location_name: "Content"))
+    CreateDocumentRequest.add_member(:attachments, Shapes::ShapeRef.new(shape: AttachmentsSourceList, location_name: "Attachments"))
     CreateDocumentRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, required: true, location_name: "Name"))
+    CreateDocumentRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: DocumentVersionName, location_name: "VersionName"))
     CreateDocumentRequest.add_member(:document_type, Shapes::ShapeRef.new(shape: DocumentType, location_name: "DocumentType"))
     CreateDocumentRequest.add_member(:document_format, Shapes::ShapeRef.new(shape: DocumentFormat, location_name: "DocumentFormat"))
     CreateDocumentRequest.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, location_name: "TargetType"))
@@ -1498,6 +1539,7 @@ module Aws::SSM
 
     DescribeDocumentRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, required: true, location_name: "Name"))
     DescribeDocumentRequest.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
+    DescribeDocumentRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: DocumentVersionName, location_name: "VersionName"))
     DescribeDocumentRequest.struct_class = Types::DescribeDocumentRequest
 
     DescribeDocumentResult.add_member(:document, Shapes::ShapeRef.new(shape: DocumentDescription, location_name: "Document"))
@@ -1712,15 +1754,18 @@ module Aws::SSM
 
     DocumentDefaultVersionDescription.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "Name"))
     DocumentDefaultVersionDescription.add_member(:default_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DefaultVersion"))
+    DocumentDefaultVersionDescription.add_member(:default_version_name, Shapes::ShapeRef.new(shape: DocumentVersionName, location_name: "DefaultVersionName"))
     DocumentDefaultVersionDescription.struct_class = Types::DocumentDefaultVersionDescription
 
     DocumentDescription.add_member(:sha_1, Shapes::ShapeRef.new(shape: DocumentSha1, location_name: "Sha1"))
     DocumentDescription.add_member(:hash, Shapes::ShapeRef.new(shape: DocumentHash, location_name: "Hash"))
     DocumentDescription.add_member(:hash_type, Shapes::ShapeRef.new(shape: DocumentHashType, location_name: "HashType"))
     DocumentDescription.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, location_name: "Name"))
+    DocumentDescription.add_member(:version_name, Shapes::ShapeRef.new(shape: DocumentVersionName, location_name: "VersionName"))
     DocumentDescription.add_member(:owner, Shapes::ShapeRef.new(shape: DocumentOwner, location_name: "Owner"))
     DocumentDescription.add_member(:created_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedDate"))
     DocumentDescription.add_member(:status, Shapes::ShapeRef.new(shape: DocumentStatus, location_name: "Status"))
+    DocumentDescription.add_member(:status_information, Shapes::ShapeRef.new(shape: DocumentStatusInformation, location_name: "StatusInformation"))
     DocumentDescription.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
     DocumentDescription.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionInDocument, location_name: "Description"))
     DocumentDescription.add_member(:parameters, Shapes::ShapeRef.new(shape: DocumentParameterList, location_name: "Parameters"))
@@ -1732,6 +1777,7 @@ module Aws::SSM
     DocumentDescription.add_member(:document_format, Shapes::ShapeRef.new(shape: DocumentFormat, location_name: "DocumentFormat"))
     DocumentDescription.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, location_name: "TargetType"))
     DocumentDescription.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    DocumentDescription.add_member(:attachments_information, Shapes::ShapeRef.new(shape: AttachmentInformationList, location_name: "AttachmentsInformation"))
     DocumentDescription.struct_class = Types::DocumentDescription
 
     DocumentFilter.add_member(:key, Shapes::ShapeRef.new(shape: DocumentFilterKey, required: true, location_name: "key"))
@@ -1742,6 +1788,7 @@ module Aws::SSM
 
     DocumentIdentifier.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, location_name: "Name"))
     DocumentIdentifier.add_member(:owner, Shapes::ShapeRef.new(shape: DocumentOwner, location_name: "Owner"))
+    DocumentIdentifier.add_member(:version_name, Shapes::ShapeRef.new(shape: DocumentVersionName, location_name: "VersionName"))
     DocumentIdentifier.add_member(:platform_types, Shapes::ShapeRef.new(shape: PlatformTypeList, location_name: "PlatformTypes"))
     DocumentIdentifier.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
     DocumentIdentifier.add_member(:document_type, Shapes::ShapeRef.new(shape: DocumentType, location_name: "DocumentType"))
@@ -1771,9 +1818,12 @@ module Aws::SSM
 
     DocumentVersionInfo.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "Name"))
     DocumentVersionInfo.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
+    DocumentVersionInfo.add_member(:version_name, Shapes::ShapeRef.new(shape: DocumentVersionName, location_name: "VersionName"))
     DocumentVersionInfo.add_member(:created_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedDate"))
     DocumentVersionInfo.add_member(:is_default_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsDefaultVersion"))
     DocumentVersionInfo.add_member(:document_format, Shapes::ShapeRef.new(shape: DocumentFormat, location_name: "DocumentFormat"))
+    DocumentVersionInfo.add_member(:status, Shapes::ShapeRef.new(shape: DocumentStatus, location_name: "Status"))
+    DocumentVersionInfo.add_member(:status_information, Shapes::ShapeRef.new(shape: DocumentStatusInformation, location_name: "StatusInformation"))
     DocumentVersionInfo.struct_class = Types::DocumentVersionInfo
 
     DocumentVersionList.member = Shapes::ShapeRef.new(shape: DocumentVersionInfo)
@@ -1851,15 +1901,20 @@ module Aws::SSM
     GetDeployablePatchSnapshotForInstanceResult.struct_class = Types::GetDeployablePatchSnapshotForInstanceResult
 
     GetDocumentRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, required: true, location_name: "Name"))
+    GetDocumentRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: DocumentVersionName, location_name: "VersionName"))
     GetDocumentRequest.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
     GetDocumentRequest.add_member(:document_format, Shapes::ShapeRef.new(shape: DocumentFormat, location_name: "DocumentFormat"))
     GetDocumentRequest.struct_class = Types::GetDocumentRequest
 
     GetDocumentResult.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, location_name: "Name"))
+    GetDocumentResult.add_member(:version_name, Shapes::ShapeRef.new(shape: DocumentVersionName, location_name: "VersionName"))
     GetDocumentResult.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
+    GetDocumentResult.add_member(:status, Shapes::ShapeRef.new(shape: DocumentStatus, location_name: "Status"))
+    GetDocumentResult.add_member(:status_information, Shapes::ShapeRef.new(shape: DocumentStatusInformation, location_name: "StatusInformation"))
     GetDocumentResult.add_member(:content, Shapes::ShapeRef.new(shape: DocumentContent, location_name: "Content"))
     GetDocumentResult.add_member(:document_type, Shapes::ShapeRef.new(shape: DocumentType, location_name: "DocumentType"))
     GetDocumentResult.add_member(:document_format, Shapes::ShapeRef.new(shape: DocumentFormat, location_name: "DocumentFormat"))
+    GetDocumentResult.add_member(:attachments_content, Shapes::ShapeRef.new(shape: AttachmentContentList, location_name: "AttachmentsContent"))
     GetDocumentResult.struct_class = Types::GetDocumentResult
 
     GetInventoryRequest.add_member(:filters, Shapes::ShapeRef.new(shape: InventoryFilterList, location_name: "Filters"))
@@ -3051,7 +3106,9 @@ module Aws::SSM
     UpdateDocumentDefaultVersionResult.struct_class = Types::UpdateDocumentDefaultVersionResult
 
     UpdateDocumentRequest.add_member(:content, Shapes::ShapeRef.new(shape: DocumentContent, required: true, location_name: "Content"))
+    UpdateDocumentRequest.add_member(:attachments, Shapes::ShapeRef.new(shape: AttachmentsSourceList, location_name: "Attachments"))
     UpdateDocumentRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, required: true, location_name: "Name"))
+    UpdateDocumentRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: DocumentVersionName, location_name: "VersionName"))
     UpdateDocumentRequest.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
     UpdateDocumentRequest.add_member(:document_format, Shapes::ShapeRef.new(shape: DocumentFormat, location_name: "DocumentFormat"))
     UpdateDocumentRequest.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, location_name: "TargetType"))
@@ -4465,10 +4522,12 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: DocumentVersionLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateDocumentContent)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateDocumentVersionName)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDocumentContent)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDocumentVersion)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDocumentSchemaVersion)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDocument)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDocumentOperation)
       end)
 
       api.add_operation(:update_document_default_version, Seahorse::Model::Operation.new.tap do |o|

@@ -16,6 +16,7 @@ require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
@@ -47,6 +48,7 @@ module Aws::Redshift
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
     add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
@@ -123,6 +125,10 @@ module Aws::Redshift
     #   @option options [Boolean] :convert_params (true)
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
+    #
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
@@ -260,7 +266,7 @@ module Aws::Redshift
     # If you authorize access to an Amazon EC2 security group, specify
     # *EC2SecurityGroupName* and *EC2SecurityGroupOwnerId*. The Amazon EC2
     # security group and Amazon Redshift cluster must be in the same AWS
-    # region.
+    # Region.
     #
     # If you authorize access to a CIDR/IP address range, specify *CIDRIP*.
     # For an overview of CIDR blocks, see the Wikipedia article on
@@ -427,7 +433,7 @@ module Aws::Redshift
     # Deletes a set of cluster snapshots.
     #
     # @option params [required, Array<Types::DeleteClusterSnapshotMessage>] :identifiers
-    #   A list of indentifiers for the snapshots you want to delete.
+    #   A list of identifiers for the snapshots that you want to delete.
     #
     # @return [Types::BatchDeleteClusterSnapshotsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -904,10 +910,10 @@ module Aws::Redshift
     #
     # @option params [Integer] :manual_snapshot_retention_period
     #   The default number of days to retain a manual snapshot. If the value
-    #   is -1, the snapshot is retained indefinitely. This setting does not
+    #   is -1, the snapshot is retained indefinitely. This setting doesn't
     #   change the retention period of existing snapshots.
     #
-    #   The value must be either -1 or an integer between 1 and 3,653
+    #   The value must be either -1 or an integer between 1 and 3,653.
     #
     # @option params [Integer] :port
     #   The port number on which the cluster accepts incoming connections.
@@ -1614,8 +1620,8 @@ module Aws::Redshift
     #   Values: ERROR, INFO
     #
     # @option params [Boolean] :enabled
-    #   A Boolean value; set to `true` to activate the subscription, set to
-    #   `false` to create the subscription but not active it.
+    #   A boolean value; set to `true` to activate the subscription, and set
+    #   to `false` to create the subscription but not activate it.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tag instances.
@@ -1878,7 +1884,7 @@ module Aws::Redshift
     #
     # @option params [Array<String>] :schedule_definitions
     #   The definition of the snapshot schedule. The definition is made up of
-    #   schedule expressions. For example, "cron(30 12 *)" or "rate(12
+    #   schedule expressions, for example "cron(30 12 *)" or "rate(12
     #   hours)".
     #
     # @option params [String] :schedule_identifier
@@ -4068,7 +4074,7 @@ module Aws::Redshift
 
     # Returns a list of orderable cluster options. Before you create a new
     # cluster you can use this operation to find what options are available,
-    # such as the EC2 Availability Zones (AZ) in the specific AWS region
+    # such as the EC2 Availability Zones (AZ) in the specific AWS Region
     # that you can specify, and the node types you can request. The node
     # types differ by available storage, memory, CPU and price. With the
     # cost involved you might want to obtain a list of cluster options in
@@ -4990,11 +4996,11 @@ module Aws::Redshift
     #   not already have cross-region snapshot copy enabled.
     #
     # @option params [required, String] :destination_region
-    #   The destination region that you want to copy snapshots to.
+    #   The destination AWS Region that you want to copy snapshots to.
     #
-    #   Constraints: Must be the name of a valid region. For more information,
-    #   see [Regions and Endpoints][1] in the Amazon Web Services General
-    #   Reference.
+    #   Constraints: Must be the name of a valid AWS Region. For more
+    #   information, see [Regions and Endpoints][1] in the Amazon Web Services
+    #   General Reference.
     #
     #
     #
@@ -5014,8 +5020,8 @@ module Aws::Redshift
     #
     # @option params [Integer] :manual_snapshot_retention_period
     #   The number of days to retain newly copied snapshots in the destination
-    #   region after they are copied from the source region. If the value is
-    #   -1, the manual snapshot is retained indefinitely.
+    #   AWS Region after they are copied from the source AWS Region. If the
+    #   value is -1, the manual snapshot is retained indefinitely.
     #
     #   The value must be either -1 or an integer between 1 and 3,653.
     #
@@ -5490,8 +5496,8 @@ module Aws::Redshift
     # @option params [Integer] :manual_snapshot_retention_period
     #   The default for number of days that a newly created manual snapshot is
     #   retained. If the value is -1, the manual snapshot is retained
-    #   indefinitely. This value will not retroactively change the retention
-    #   periods of existing manual snapshots
+    #   indefinitely. This value doesn't retroactively change the retention
+    #   periods of existing manual snapshots.
     #
     #   The value must be either -1 or an integer between 1 and 3,653.
     #
@@ -6304,7 +6310,7 @@ module Aws::Redshift
     #   to modify.
     #
     # @option params [String] :schedule_identifier
-    #   A unique alphanumeric identifier for the schedule you want to
+    #   A unique alphanumeric identifier for the schedule that you want to
     #   associate with the cluster.
     #
     # @option params [Boolean] :disassociate_schedule
@@ -6471,34 +6477,34 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Modifies the number of days to retain snapshots in the destination
-    # region after they are copied from the source region. By default, this
-    # only changes the retention period of copied automated snapshots. The
-    # retention periods for both new and existing copied automated snapshots
-    # will be updated with the new retention period. You can set the manual
-    # option to change only the retention periods of copied manual
-    # snapshots. If you set this option only newly copied manual snapshots
-    # will have the new retention period
+    # Modifies the number of days to retain snapshots in the destination AWS
+    # Region after they are copied from the source AWS Region. By default,
+    # this operation only changes the retention period of copied automated
+    # snapshots. The retention periods for both new and existing copied
+    # automated snapshots are updated with the new retention period. You can
+    # set the manual option to change only the retention periods of copied
+    # manual snapshots. If you set this option, only newly copied manual
+    # snapshots have the new retention period.
     #
     # @option params [required, String] :cluster_identifier
     #   The unique identifier of the cluster for which you want to change the
     #   retention period for either automated or manual snapshots that are
-    #   copied to a destination region.
+    #   copied to a destination AWS Region.
     #
     #   Constraints: Must be the valid name of an existing cluster that has
     #   cross-region snapshot copy enabled.
     #
     # @option params [required, Integer] :retention_period
     #   The number of days to retain automated snapshots in the destination
-    #   region after they are copied from the source region.
+    #   AWS Region after they are copied from the source AWS Region.
     #
     #   By default, this only changes the retention period of copied automated
     #   snapshots.
     #
     #   If you decrease the retention period for automated snapshots that are
-    #   copied to a destination region, Amazon Redshift will delete any
-    #   existing automated snapshots that were copied to the destination
-    #   region and that fall outside of the new retention period.
+    #   copied to a destination AWS Region, Amazon Redshift deletes any
+    #   existing automated snapshots that were copied to the destination AWS
+    #   Region and that fall outside of the new retention period.
     #
     #   Constraints: Must be at least 1 and no more than 35 for automated
     #   snapshots.
@@ -6631,15 +6637,15 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Modifies a snapshot schedule. Any schedule associate with a cluster
-    # will be modified asynchronously.
+    # Modifies a snapshot schedule. Any schedule associated with a cluster
+    # is modified asynchronously.
     #
     # @option params [required, String] :schedule_identifier
     #   A unique alphanumeric identifier of the schedule to modify.
     #
     # @option params [required, Array<String>] :schedule_definitions
     #   An updated list of schedule definitions. A schedule definition is made
-    #   up of schedule expressions. For example, "cron(30 12 *)" or
+    #   up of schedule expressions, for example, "cron(30 12 *)" or
     #   "rate(12 hours)".
     #
     # @return [Types::SnapshotSchedule] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -7833,7 +7839,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.15.1'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

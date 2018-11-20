@@ -16,6 +16,7 @@ require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
@@ -47,6 +48,7 @@ module Aws::CloudWatch
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
     add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
@@ -123,6 +125,10 @@ module Aws::CloudWatch
     #   @option options [Boolean] :convert_params (true)
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
+    #
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
@@ -380,6 +386,19 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].comparison_operator #=> String, one of "GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold"
     #   resp.metric_alarms[0].treat_missing_data #=> String
     #   resp.metric_alarms[0].evaluate_low_sample_count_percentile #=> String
+    #   resp.metric_alarms[0].metrics #=> Array
+    #   resp.metric_alarms[0].metrics[0].id #=> String
+    #   resp.metric_alarms[0].metrics[0].metric_stat.metric.namespace #=> String
+    #   resp.metric_alarms[0].metrics[0].metric_stat.metric.metric_name #=> String
+    #   resp.metric_alarms[0].metrics[0].metric_stat.metric.dimensions #=> Array
+    #   resp.metric_alarms[0].metrics[0].metric_stat.metric.dimensions[0].name #=> String
+    #   resp.metric_alarms[0].metrics[0].metric_stat.metric.dimensions[0].value #=> String
+    #   resp.metric_alarms[0].metrics[0].metric_stat.period #=> Integer
+    #   resp.metric_alarms[0].metrics[0].metric_stat.stat #=> String
+    #   resp.metric_alarms[0].metrics[0].metric_stat.unit #=> String, one of "Seconds", "Microseconds", "Milliseconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"
+    #   resp.metric_alarms[0].metrics[0].expression #=> String
+    #   resp.metric_alarms[0].metrics[0].label #=> String
+    #   resp.metric_alarms[0].metrics[0].return_data #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarms AWS API Documentation
@@ -473,6 +492,19 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].comparison_operator #=> String, one of "GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold"
     #   resp.metric_alarms[0].treat_missing_data #=> String
     #   resp.metric_alarms[0].evaluate_low_sample_count_percentile #=> String
+    #   resp.metric_alarms[0].metrics #=> Array
+    #   resp.metric_alarms[0].metrics[0].id #=> String
+    #   resp.metric_alarms[0].metrics[0].metric_stat.metric.namespace #=> String
+    #   resp.metric_alarms[0].metrics[0].metric_stat.metric.metric_name #=> String
+    #   resp.metric_alarms[0].metrics[0].metric_stat.metric.dimensions #=> Array
+    #   resp.metric_alarms[0].metrics[0].metric_stat.metric.dimensions[0].name #=> String
+    #   resp.metric_alarms[0].metrics[0].metric_stat.metric.dimensions[0].value #=> String
+    #   resp.metric_alarms[0].metrics[0].metric_stat.period #=> Integer
+    #   resp.metric_alarms[0].metrics[0].metric_stat.stat #=> String
+    #   resp.metric_alarms[0].metrics[0].metric_stat.unit #=> String, one of "Seconds", "Microseconds", "Milliseconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"
+    #   resp.metric_alarms[0].metrics[0].expression #=> String
+    #   resp.metric_alarms[0].metrics[0].label #=> String
+    #   resp.metric_alarms[0].metrics[0].return_data #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmsForMetric AWS API Documentation
     #
@@ -1184,20 +1216,19 @@ module Aws::CloudWatch
     end
 
     # Creates or updates an alarm and associates it with the specified
-    # metric. Optionally, this operation can associate one or more Amazon
-    # SNS resources with the alarm.
+    # metric or metric math expression.
     #
     # When this operation creates an alarm, the alarm state is immediately
-    # set to `INSUFFICIENT_DATA`. The alarm is evaluated and its state is
-    # set appropriately. Any actions associated with the state are then
-    # executed.
+    # set to `INSUFFICIENT_DATA`. The alarm is then evaluated and its state
+    # is set appropriately. Any actions associated with the new state are
+    # then executed.
     #
     # When you update an existing alarm, its state is left unchanged, but
     # the update completely overwrites the previous configuration of the
     # alarm.
     #
     # If you are an IAM user, you must have Amazon EC2 permissions for some
-    # operations:
+    # alarm operations:
     #
     # * `iam:CreateServiceLinkedRole` for all alarms with EC2 actions
     #
@@ -1228,15 +1259,15 @@ module Aws::CloudWatch
     # The first time you create an alarm in the AWS Management Console, the
     # CLI, or by using the PutMetricAlarm API, CloudWatch creates the
     # necessary service-linked role for you. The service-linked role is
-    # called `AWSServiceRoleForCloudWatchEvents`. For more information about
-    # service-linked roles, see [AWS service-linked role][1].
+    # called `AWSServiceRoleForCloudWatchEvents`. For more information, see
+    # [AWS service-linked role][1].
     #
     #
     #
     # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role
     #
     # @option params [required, String] :alarm_name
-    #   The name for the alarm. This name must be unique within the AWS
+    #   The name for the alarm. This name must be unique within your AWS
     #   account.
     #
     # @option params [String] :alarm_description
@@ -1244,7 +1275,7 @@ module Aws::CloudWatch
     #
     # @option params [Boolean] :actions_enabled
     #   Indicates whether actions should be executed during any changes to the
-    #   alarm state.
+    #   alarm state. The default is TRUE.
     #
     # @option params [Array<String>] :ok_actions
     #   The actions to execute when this alarm transitions to an `OK` state
@@ -1254,6 +1285,7 @@ module Aws::CloudWatch
     #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
     #   `arn:aws:automate:region:ec2:terminate` \|
     #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
     #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #   `
@@ -1303,30 +1335,36 @@ module Aws::CloudWatch
     #   \|
     #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
     #
-    # @option params [required, String] :metric_name
+    # @option params [String] :metric_name
     #   The name for the metric associated with the alarm.
     #
-    # @option params [required, String] :namespace
-    #   The namespace for the metric associated with the alarm.
+    #   If you are creating an alarm based on a math expression, you cannot
+    #   specify this parameter, or any of the `Dimensions`, `Period`,
+    #   `Namespace`, `Statistic`, or `ExtendedStatistic` parameters. Instead,
+    #   you specify all this information in the `Metrics` array.
+    #
+    # @option params [String] :namespace
+    #   The namespace for the metric associated specified in `MetricName`.
     #
     # @option params [String] :statistic
-    #   The statistic for the metric associated with the alarm, other than
+    #   The statistic for the metric specified in `MetricName`, other than
     #   percentile. For percentile statistics, use `ExtendedStatistic`. When
-    #   you call `PutMetricAlarm`, you must specify either `Statistic` or
-    #   `ExtendedStatistic,` but not both.
+    #   you call `PutMetricAlarm` and specify a `MetricName`, you must specify
+    #   either `Statistic` or `ExtendedStatistic,` but not both.
     #
     # @option params [String] :extended_statistic
-    #   The percentile statistic for the metric associated with the alarm.
-    #   Specify a value between p0.0 and p100. When you call `PutMetricAlarm`,
-    #   you must specify either `Statistic` or `ExtendedStatistic,` but not
-    #   both.
+    #   The percentile statistic for the metric specified in `MetricName`.
+    #   Specify a value between p0.0 and p100. When you call `PutMetricAlarm`
+    #   and specify a `MetricName`, you must specify either `Statistic` or
+    #   `ExtendedStatistic,` but not both.
     #
     # @option params [Array<Types::Dimension>] :dimensions
-    #   The dimensions for the metric associated with the alarm.
+    #   The dimensions for the metric specified in `MetricName`.
     #
-    # @option params [required, Integer] :period
-    #   The period, in seconds, over which the specified statistic is applied.
-    #   Valid values are 10, 30, and any multiple of 60.
+    # @option params [Integer] :period
+    #   The length, in seconds, used each time the metric specified in
+    #   `MetricName` is evaluated. Valid values are 10, 30, and any multiple
+    #   of 60.
     #
     #   Be sure to specify 10 or 30 only for metrics that are stored by a
     #   `PutMetricData` call with a `StorageResolution` of 1. If you specify a
@@ -1361,7 +1399,7 @@ module Aws::CloudWatch
     #
     # @option params [required, Integer] :evaluation_periods
     #   The number of periods over which data is compared to the specified
-    #   threshold. If you are setting an alarm which requires that a number of
+    #   threshold. If you are setting an alarm that requires that a number of
     #   consecutive data points be breaching to trigger the alarm, this value
     #   specifies that number. If you are setting an "M out of N" alarm,
     #   this value is the N.
@@ -1415,6 +1453,18 @@ module Aws::CloudWatch
     #
     #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#percentiles-with-low-samples
     #
+    # @option params [Array<Types::MetricDataQuery>] :metrics
+    #   An array of `MetricDataQuery` structures that enable you to create an
+    #   alarm based on the result of a metric math expression. Each item in
+    #   the `Metrics` array either retrieves a metric or performs a math
+    #   expression.
+    #
+    #   If you use the `Metrics` parameter, you cannot include the
+    #   `MetricName`, `Dimensions`, `Period`, `Namespace`, `Statistic`, or
+    #   `ExtendedStatistic` parameters of `PutMetricAlarm` in the same
+    #   operation. Instead, you retrieve the metrics you are using in your
+    #   math expression as part of the `Metrics` array.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1426,8 +1476,8 @@ module Aws::CloudWatch
     #     ok_actions: ["ResourceName"],
     #     alarm_actions: ["ResourceName"],
     #     insufficient_data_actions: ["ResourceName"],
-    #     metric_name: "MetricName", # required
-    #     namespace: "Namespace", # required
+    #     metric_name: "MetricName",
+    #     namespace: "Namespace",
     #     statistic: "SampleCount", # accepts SampleCount, Average, Sum, Minimum, Maximum
     #     extended_statistic: "ExtendedStatistic",
     #     dimensions: [
@@ -1436,7 +1486,7 @@ module Aws::CloudWatch
     #         value: "DimensionValue", # required
     #       },
     #     ],
-    #     period: 1, # required
+    #     period: 1,
     #     unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
     #     evaluation_periods: 1, # required
     #     datapoints_to_alarm: 1,
@@ -1444,6 +1494,29 @@ module Aws::CloudWatch
     #     comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
     #     treat_missing_data: "TreatMissingData",
     #     evaluate_low_sample_count_percentile: "EvaluateLowSampleCountPercentile",
+    #     metrics: [
+    #       {
+    #         id: "MetricId", # required
+    #         metric_stat: {
+    #           metric: { # required
+    #             namespace: "Namespace",
+    #             metric_name: "MetricName",
+    #             dimensions: [
+    #               {
+    #                 name: "DimensionName", # required
+    #                 value: "DimensionValue", # required
+    #               },
+    #             ],
+    #           },
+    #           period: 1, # required
+    #           stat: "Stat", # required
+    #           unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #         },
+    #         expression: "MetricExpression",
+    #         label: "MetricLabel",
+    #         return_data: false,
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricAlarm AWS API Documentation
@@ -1455,11 +1528,11 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
-    # Publishes metric data to Amazon CloudWatch. CloudWatch associates the
-    # data with the specified metric. If the specified metric does not
-    # exist, CloudWatch creates the metric. When CloudWatch creates a
-    # metric, it can take up to fifteen minutes for the metric to appear in
-    # calls to ListMetrics.
+    # Publishes metric data points to Amazon CloudWatch. CloudWatch
+    # associates the data points with the specified metric. If the specified
+    # metric does not exist, CloudWatch creates the metric. When CloudWatch
+    # creates a metric, it can take up to fifteen minutes for the metric to
+    # appear in calls to ListMetrics.
     #
     # You can publish either individual data points in the `Value` field, or
     # arrays of values and the number of times each value occurred during
@@ -1489,11 +1562,9 @@ module Aws::CloudWatch
     # GetMetricStatistics from the time they are submitted.
     #
     # CloudWatch needs raw data points to calculate percentile statistics.
-    # These raw data points could be published individually or as part of
-    # `Values` and `Counts` arrays. If you publish data using statistic sets
-    # in the `StatisticValues` field instead, you can only retrieve
-    # percentile statistics for this data if one of the following conditions
-    # is true:
+    # If you publish data using a statistic set instead, you can only
+    # retrieve percentile statistics for this data if one of the following
+    # conditions is true:
     #
     # * The `SampleCount` value of the statistic set is 1 and `Min`, `Max`,
     #   and `Sum` are all equal.
@@ -1614,7 +1685,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

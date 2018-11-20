@@ -16,6 +16,7 @@ require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
@@ -47,6 +48,7 @@ module Aws::SSM
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
     add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
@@ -123,6 +125,10 @@ module Aws::SSM
     #   @option options [Boolean] :convert_params (true)
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
+    #
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
@@ -695,6 +701,10 @@ module Aws::SSM
     # @option params [required, String] :content
     #   A valid JSON or YAML string.
     #
+    # @option params [Array<Types::AttachmentsSource>] :attachments
+    #   A list of key and value pairs that describe attachments to a version
+    #   of a document.
+    #
     # @option params [required, String] :name
     #   A name for the Systems Manager document.
     #
@@ -707,9 +717,15 @@ module Aws::SSM
     #
     #   * `amzn`
     #
+    # @option params [String] :version_name
+    #   An optional field specifying the version of the artifact you are
+    #   creating with the document. For example, "Release 12, Update 6".
+    #   This value is unique across all versions of a document, and cannot be
+    #   changed.
+    #
     # @option params [String] :document_type
-    #   The type of document to create. Valid document types include: Policy,
-    #   Automation, and Command.
+    #   The type of document to create. Valid document types include:
+    #   `Command`, `Policy`, `Automation`, `Session`, and `Package`.
     #
     # @option params [String] :document_format
     #   Specify the document format for the request. The document format can
@@ -736,8 +752,15 @@ module Aws::SSM
     #
     #   resp = client.create_document({
     #     content: "DocumentContent", # required
+    #     attachments: [
+    #       {
+    #         key: "SourceUrl", # accepts SourceUrl
+    #         values: ["AttachmentsSourceValue"],
+    #       },
+    #     ],
     #     name: "DocumentName", # required
-    #     document_type: "Command", # accepts Command, Policy, Automation, Session
+    #     version_name: "DocumentVersionName",
+    #     document_type: "Command", # accepts Command, Policy, Automation, Session, Package
     #     document_format: "YAML", # accepts YAML, JSON
     #     target_type: "TargetType",
     #   })
@@ -748,9 +771,11 @@ module Aws::SSM
     #   resp.document_description.hash #=> String
     #   resp.document_description.hash_type #=> String, one of "Sha256", "Sha1"
     #   resp.document_description.name #=> String
+    #   resp.document_description.version_name #=> String
     #   resp.document_description.owner #=> String
     #   resp.document_description.created_date #=> Time
-    #   resp.document_description.status #=> String, one of "Creating", "Active", "Updating", "Deleting"
+    #   resp.document_description.status #=> String, one of "Creating", "Active", "Updating", "Deleting", "Failed"
+    #   resp.document_description.status_information #=> String
     #   resp.document_description.document_version #=> String
     #   resp.document_description.description #=> String
     #   resp.document_description.parameters #=> Array
@@ -760,7 +785,7 @@ module Aws::SSM
     #   resp.document_description.parameters[0].default_value #=> String
     #   resp.document_description.platform_types #=> Array
     #   resp.document_description.platform_types[0] #=> String, one of "Windows", "Linux"
-    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session"
+    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package"
     #   resp.document_description.schema_version #=> String
     #   resp.document_description.latest_version #=> String
     #   resp.document_description.default_version #=> String
@@ -769,6 +794,8 @@ module Aws::SSM
     #   resp.document_description.tags #=> Array
     #   resp.document_description.tags[0].key #=> String
     #   resp.document_description.tags[0].value #=> String
+    #   resp.document_description.attachments_information #=> Array
+    #   resp.document_description.attachments_information[0].name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateDocument AWS API Documentation
     #
@@ -2020,6 +2047,11 @@ module Aws::SSM
     #   The document version for which you want information. Can be a specific
     #   version or the default version.
     #
+    # @option params [String] :version_name
+    #   An optional field specifying the version of the artifact associated
+    #   with the document. For example, "Release 12, Update 6". This value
+    #   is unique across all versions of a document, and cannot be changed.
+    #
     # @return [Types::DescribeDocumentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeDocumentResult#document #document} => Types::DocumentDescription
@@ -2029,6 +2061,7 @@ module Aws::SSM
     #   resp = client.describe_document({
     #     name: "DocumentARN", # required
     #     document_version: "DocumentVersion",
+    #     version_name: "DocumentVersionName",
     #   })
     #
     # @example Response structure
@@ -2037,9 +2070,11 @@ module Aws::SSM
     #   resp.document.hash #=> String
     #   resp.document.hash_type #=> String, one of "Sha256", "Sha1"
     #   resp.document.name #=> String
+    #   resp.document.version_name #=> String
     #   resp.document.owner #=> String
     #   resp.document.created_date #=> Time
-    #   resp.document.status #=> String, one of "Creating", "Active", "Updating", "Deleting"
+    #   resp.document.status #=> String, one of "Creating", "Active", "Updating", "Deleting", "Failed"
+    #   resp.document.status_information #=> String
     #   resp.document.document_version #=> String
     #   resp.document.description #=> String
     #   resp.document.parameters #=> Array
@@ -2049,7 +2084,7 @@ module Aws::SSM
     #   resp.document.parameters[0].default_value #=> String
     #   resp.document.platform_types #=> Array
     #   resp.document.platform_types[0] #=> String, one of "Windows", "Linux"
-    #   resp.document.document_type #=> String, one of "Command", "Policy", "Automation", "Session"
+    #   resp.document.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package"
     #   resp.document.schema_version #=> String
     #   resp.document.latest_version #=> String
     #   resp.document.default_version #=> String
@@ -2058,6 +2093,8 @@ module Aws::SSM
     #   resp.document.tags #=> Array
     #   resp.document.tags[0].key #=> String
     #   resp.document.tags[0].value #=> String
+    #   resp.document.attachments_information #=> Array
+    #   resp.document.attachments_information[0].name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocument AWS API Documentation
     #
@@ -3702,6 +3739,11 @@ module Aws::SSM
     # @option params [required, String] :name
     #   The name of the Systems Manager document.
     #
+    # @option params [String] :version_name
+    #   An optional field specifying the version of the artifact associated
+    #   with the document. For example, "Release 12, Update 6". This value
+    #   is unique across all versions of a document, and cannot be changed.
+    #
     # @option params [String] :document_version
     #   The document version for which you want information.
     #
@@ -3712,15 +3754,20 @@ module Aws::SSM
     # @return [Types::GetDocumentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDocumentResult#name #name} => String
+    #   * {Types::GetDocumentResult#version_name #version_name} => String
     #   * {Types::GetDocumentResult#document_version #document_version} => String
+    #   * {Types::GetDocumentResult#status #status} => String
+    #   * {Types::GetDocumentResult#status_information #status_information} => String
     #   * {Types::GetDocumentResult#content #content} => String
     #   * {Types::GetDocumentResult#document_type #document_type} => String
     #   * {Types::GetDocumentResult#document_format #document_format} => String
+    #   * {Types::GetDocumentResult#attachments_content #attachments_content} => Array&lt;Types::AttachmentContent&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_document({
     #     name: "DocumentARN", # required
+    #     version_name: "DocumentVersionName",
     #     document_version: "DocumentVersion",
     #     document_format: "YAML", # accepts YAML, JSON
     #   })
@@ -3728,10 +3775,19 @@ module Aws::SSM
     # @example Response structure
     #
     #   resp.name #=> String
+    #   resp.version_name #=> String
     #   resp.document_version #=> String
+    #   resp.status #=> String, one of "Creating", "Active", "Updating", "Deleting", "Failed"
+    #   resp.status_information #=> String
     #   resp.content #=> String
-    #   resp.document_type #=> String, one of "Command", "Policy", "Automation", "Session"
+    #   resp.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package"
     #   resp.document_format #=> String, one of "YAML", "JSON"
+    #   resp.attachments_content #=> Array
+    #   resp.attachments_content[0].name #=> String
+    #   resp.attachments_content[0].size #=> Integer
+    #   resp.attachments_content[0].hash #=> String
+    #   resp.attachments_content[0].hash_type #=> String, one of "Sha256"
+    #   resp.attachments_content[0].url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDocument AWS API Documentation
     #
@@ -5102,9 +5158,12 @@ module Aws::SSM
     #   resp.document_versions #=> Array
     #   resp.document_versions[0].name #=> String
     #   resp.document_versions[0].document_version #=> String
+    #   resp.document_versions[0].version_name #=> String
     #   resp.document_versions[0].created_date #=> Time
     #   resp.document_versions[0].is_default_version #=> Boolean
     #   resp.document_versions[0].document_format #=> String, one of "YAML", "JSON"
+    #   resp.document_versions[0].status #=> String, one of "Creating", "Active", "Updating", "Deleting", "Failed"
+    #   resp.document_versions[0].status_information #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListDocumentVersions AWS API Documentation
@@ -5164,10 +5223,11 @@ module Aws::SSM
     #   resp.document_identifiers #=> Array
     #   resp.document_identifiers[0].name #=> String
     #   resp.document_identifiers[0].owner #=> String
+    #   resp.document_identifiers[0].version_name #=> String
     #   resp.document_identifiers[0].platform_types #=> Array
     #   resp.document_identifiers[0].platform_types[0] #=> String, one of "Windows", "Linux"
     #   resp.document_identifiers[0].document_version #=> String
-    #   resp.document_identifiers[0].document_type #=> String, one of "Command", "Policy", "Automation", "Session"
+    #   resp.document_identifiers[0].document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package"
     #   resp.document_identifiers[0].schema_version #=> String
     #   resp.document_identifiers[0].document_format #=> String, one of "YAML", "JSON"
     #   resp.document_identifiers[0].target_type #=> String
@@ -6860,10 +6920,20 @@ module Aws::SSM
     # The document you want to update.
     #
     # @option params [required, String] :content
-    #   The content in a document that you want to update.
+    #   A valid JSON or YAML string.
+    #
+    # @option params [Array<Types::AttachmentsSource>] :attachments
+    #   A list of key and value pairs that describe attachments to a version
+    #   of a document.
     #
     # @option params [required, String] :name
     #   The name of the document that you want to update.
+    #
+    # @option params [String] :version_name
+    #   An optional field specifying the version of the artifact you are
+    #   updating with the document. For example, "Release 12, Update 6".
+    #   This value is unique across all versions of a document, and cannot be
+    #   changed.
     #
     # @option params [String] :document_version
     #   The version of the document that you want to update.
@@ -6883,7 +6953,14 @@ module Aws::SSM
     #
     #   resp = client.update_document({
     #     content: "DocumentContent", # required
+    #     attachments: [
+    #       {
+    #         key: "SourceUrl", # accepts SourceUrl
+    #         values: ["AttachmentsSourceValue"],
+    #       },
+    #     ],
     #     name: "DocumentName", # required
+    #     version_name: "DocumentVersionName",
     #     document_version: "DocumentVersion",
     #     document_format: "YAML", # accepts YAML, JSON
     #     target_type: "TargetType",
@@ -6895,9 +6972,11 @@ module Aws::SSM
     #   resp.document_description.hash #=> String
     #   resp.document_description.hash_type #=> String, one of "Sha256", "Sha1"
     #   resp.document_description.name #=> String
+    #   resp.document_description.version_name #=> String
     #   resp.document_description.owner #=> String
     #   resp.document_description.created_date #=> Time
-    #   resp.document_description.status #=> String, one of "Creating", "Active", "Updating", "Deleting"
+    #   resp.document_description.status #=> String, one of "Creating", "Active", "Updating", "Deleting", "Failed"
+    #   resp.document_description.status_information #=> String
     #   resp.document_description.document_version #=> String
     #   resp.document_description.description #=> String
     #   resp.document_description.parameters #=> Array
@@ -6907,7 +6986,7 @@ module Aws::SSM
     #   resp.document_description.parameters[0].default_value #=> String
     #   resp.document_description.platform_types #=> Array
     #   resp.document_description.platform_types[0] #=> String, one of "Windows", "Linux"
-    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session"
+    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package"
     #   resp.document_description.schema_version #=> String
     #   resp.document_description.latest_version #=> String
     #   resp.document_description.default_version #=> String
@@ -6916,6 +6995,8 @@ module Aws::SSM
     #   resp.document_description.tags #=> Array
     #   resp.document_description.tags[0].key #=> String
     #   resp.document_description.tags[0].value #=> String
+    #   resp.document_description.attachments_information #=> Array
+    #   resp.document_description.attachments_information[0].name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateDocument AWS API Documentation
     #
@@ -6951,6 +7032,7 @@ module Aws::SSM
     #
     #   resp.description.name #=> String
     #   resp.description.default_version #=> String
+    #   resp.description.default_version_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateDocumentDefaultVersion AWS API Documentation
     #
@@ -7644,7 +7726,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

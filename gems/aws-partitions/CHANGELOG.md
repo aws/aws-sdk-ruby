@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.115.0 (2018-11-20)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::RDSDataService`.
+
+* Feature - Added support for enumerating regions for `Aws::QuickSight`.
+
 1.114.0 (2018-11-15)
 ------------------
 

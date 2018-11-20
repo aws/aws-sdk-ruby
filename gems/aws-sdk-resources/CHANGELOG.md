@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.29.0 (2018-11-20)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-rdsdataservice` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-quicksight` gem.
+
 3.28.0 (2018-11-15)
 ------------------
 

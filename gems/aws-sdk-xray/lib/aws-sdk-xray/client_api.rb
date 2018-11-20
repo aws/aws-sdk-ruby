@@ -23,10 +23,15 @@ module Aws::XRay
     BackendConnectionErrors = Shapes::StructureShape.new(name: 'BackendConnectionErrors')
     BatchGetTracesRequest = Shapes::StructureShape.new(name: 'BatchGetTracesRequest')
     BatchGetTracesResult = Shapes::StructureShape.new(name: 'BatchGetTracesResult')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BorrowCount = Shapes::IntegerShape.new(name: 'BorrowCount')
     ClientID = Shapes::StringShape.new(name: 'ClientID')
+    CreateGroupRequest = Shapes::StructureShape.new(name: 'CreateGroupRequest')
+    CreateGroupResult = Shapes::StructureShape.new(name: 'CreateGroupResult')
     CreateSamplingRuleRequest = Shapes::StructureShape.new(name: 'CreateSamplingRuleRequest')
     CreateSamplingRuleResult = Shapes::StructureShape.new(name: 'CreateSamplingRuleResult')
+    DeleteGroupRequest = Shapes::StructureShape.new(name: 'DeleteGroupRequest')
+    DeleteGroupResult = Shapes::StructureShape.new(name: 'DeleteGroupResult')
     DeleteSamplingRuleRequest = Shapes::StructureShape.new(name: 'DeleteSamplingRuleRequest')
     DeleteSamplingRuleResult = Shapes::StructureShape.new(name: 'DeleteSamplingRuleResult')
     Double = Shapes::FloatShape.new(name: 'Double')
@@ -45,6 +50,11 @@ module Aws::XRay
     FixedRate = Shapes::FloatShape.new(name: 'FixedRate')
     GetEncryptionConfigRequest = Shapes::StructureShape.new(name: 'GetEncryptionConfigRequest')
     GetEncryptionConfigResult = Shapes::StructureShape.new(name: 'GetEncryptionConfigResult')
+    GetGroupRequest = Shapes::StructureShape.new(name: 'GetGroupRequest')
+    GetGroupResult = Shapes::StructureShape.new(name: 'GetGroupResult')
+    GetGroupsNextToken = Shapes::StringShape.new(name: 'GetGroupsNextToken')
+    GetGroupsRequest = Shapes::StructureShape.new(name: 'GetGroupsRequest')
+    GetGroupsResult = Shapes::StructureShape.new(name: 'GetGroupsResult')
     GetSamplingRulesRequest = Shapes::StructureShape.new(name: 'GetSamplingRulesRequest')
     GetSamplingRulesResult = Shapes::StructureShape.new(name: 'GetSamplingRulesResult')
     GetSamplingStatisticSummariesRequest = Shapes::StructureShape.new(name: 'GetSamplingStatisticSummariesRequest')
@@ -57,6 +67,11 @@ module Aws::XRay
     GetTraceGraphResult = Shapes::StructureShape.new(name: 'GetTraceGraphResult')
     GetTraceSummariesRequest = Shapes::StructureShape.new(name: 'GetTraceSummariesRequest')
     GetTraceSummariesResult = Shapes::StructureShape.new(name: 'GetTraceSummariesResult')
+    Group = Shapes::StructureShape.new(name: 'Group')
+    GroupARN = Shapes::StringShape.new(name: 'GroupARN')
+    GroupName = Shapes::StringShape.new(name: 'GroupName')
+    GroupSummary = Shapes::StructureShape.new(name: 'GroupSummary')
+    GroupSummaryList = Shapes::ListShape.new(name: 'GroupSummaryList')
     HTTPMethod = Shapes::StringShape.new(name: 'HTTPMethod')
     Histogram = Shapes::ListShape.new(name: 'Histogram')
     HistogramEntry = Shapes::StructureShape.new(name: 'HistogramEntry')
@@ -125,6 +140,8 @@ module Aws::XRay
     UnprocessedTraceIdList = Shapes::ListShape.new(name: 'UnprocessedTraceIdList')
     UnprocessedTraceSegment = Shapes::StructureShape.new(name: 'UnprocessedTraceSegment')
     UnprocessedTraceSegmentList = Shapes::ListShape.new(name: 'UnprocessedTraceSegmentList')
+    UpdateGroupRequest = Shapes::StructureShape.new(name: 'UpdateGroupRequest')
+    UpdateGroupResult = Shapes::StructureShape.new(name: 'UpdateGroupResult')
     UpdateSamplingRuleRequest = Shapes::StructureShape.new(name: 'UpdateSamplingRuleRequest')
     UpdateSamplingRuleResult = Shapes::StructureShape.new(name: 'UpdateSamplingRuleResult')
     ValueWithServiceIds = Shapes::StructureShape.new(name: 'ValueWithServiceIds')
@@ -168,11 +185,24 @@ module Aws::XRay
     BatchGetTracesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     BatchGetTracesResult.struct_class = Types::BatchGetTracesResult
 
+    CreateGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, required: true, location_name: "GroupName"))
+    CreateGroupRequest.add_member(:filter_expression, Shapes::ShapeRef.new(shape: FilterExpression, location_name: "FilterExpression"))
+    CreateGroupRequest.struct_class = Types::CreateGroupRequest
+
+    CreateGroupResult.add_member(:group, Shapes::ShapeRef.new(shape: Group, location_name: "Group"))
+    CreateGroupResult.struct_class = Types::CreateGroupResult
+
     CreateSamplingRuleRequest.add_member(:sampling_rule, Shapes::ShapeRef.new(shape: SamplingRule, required: true, location_name: "SamplingRule"))
     CreateSamplingRuleRequest.struct_class = Types::CreateSamplingRuleRequest
 
     CreateSamplingRuleResult.add_member(:sampling_rule_record, Shapes::ShapeRef.new(shape: SamplingRuleRecord, location_name: "SamplingRuleRecord"))
     CreateSamplingRuleResult.struct_class = Types::CreateSamplingRuleResult
+
+    DeleteGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, location_name: "GroupName"))
+    DeleteGroupRequest.add_member(:group_arn, Shapes::ShapeRef.new(shape: GroupARN, location_name: "GroupARN"))
+    DeleteGroupRequest.struct_class = Types::DeleteGroupRequest
+
+    DeleteGroupResult.struct_class = Types::DeleteGroupResult
 
     DeleteSamplingRuleRequest.add_member(:rule_name, Shapes::ShapeRef.new(shape: String, location_name: "RuleName"))
     DeleteSamplingRuleRequest.add_member(:rule_arn, Shapes::ShapeRef.new(shape: String, location_name: "RuleARN"))
@@ -217,6 +247,20 @@ module Aws::XRay
     GetEncryptionConfigResult.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfig, location_name: "EncryptionConfig"))
     GetEncryptionConfigResult.struct_class = Types::GetEncryptionConfigResult
 
+    GetGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, location_name: "GroupName"))
+    GetGroupRequest.add_member(:group_arn, Shapes::ShapeRef.new(shape: GroupARN, location_name: "GroupARN"))
+    GetGroupRequest.struct_class = Types::GetGroupRequest
+
+    GetGroupResult.add_member(:group, Shapes::ShapeRef.new(shape: Group, location_name: "Group"))
+    GetGroupResult.struct_class = Types::GetGroupResult
+
+    GetGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GetGroupsNextToken, location_name: "NextToken"))
+    GetGroupsRequest.struct_class = Types::GetGroupsRequest
+
+    GetGroupsResult.add_member(:groups, Shapes::ShapeRef.new(shape: GroupSummaryList, location_name: "Groups"))
+    GetGroupsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetGroupsResult.struct_class = Types::GetGroupsResult
+
     GetSamplingRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetSamplingRulesRequest.struct_class = Types::GetSamplingRulesRequest
 
@@ -241,12 +285,15 @@ module Aws::XRay
 
     GetServiceGraphRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
     GetServiceGraphRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
+    GetServiceGraphRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, location_name: "GroupName"))
+    GetServiceGraphRequest.add_member(:group_arn, Shapes::ShapeRef.new(shape: GroupARN, location_name: "GroupARN"))
     GetServiceGraphRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetServiceGraphRequest.struct_class = Types::GetServiceGraphRequest
 
     GetServiceGraphResult.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
     GetServiceGraphResult.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
     GetServiceGraphResult.add_member(:services, Shapes::ShapeRef.new(shape: ServiceList, location_name: "Services"))
+    GetServiceGraphResult.add_member(:contains_old_group_versions, Shapes::ShapeRef.new(shape: Boolean, location_name: "ContainsOldGroupVersions"))
     GetServiceGraphResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetServiceGraphResult.struct_class = Types::GetServiceGraphResult
 
@@ -270,6 +317,18 @@ module Aws::XRay
     GetTraceSummariesResult.add_member(:traces_processed_count, Shapes::ShapeRef.new(shape: NullableLong, location_name: "TracesProcessedCount"))
     GetTraceSummariesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetTraceSummariesResult.struct_class = Types::GetTraceSummariesResult
+
+    Group.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "GroupName"))
+    Group.add_member(:group_arn, Shapes::ShapeRef.new(shape: String, location_name: "GroupARN"))
+    Group.add_member(:filter_expression, Shapes::ShapeRef.new(shape: String, location_name: "FilterExpression"))
+    Group.struct_class = Types::Group
+
+    GroupSummary.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "GroupName"))
+    GroupSummary.add_member(:group_arn, Shapes::ShapeRef.new(shape: String, location_name: "GroupARN"))
+    GroupSummary.add_member(:filter_expression, Shapes::ShapeRef.new(shape: String, location_name: "FilterExpression"))
+    GroupSummary.struct_class = Types::GroupSummary
+
+    GroupSummaryList.member = Shapes::ShapeRef.new(shape: GroupSummary)
 
     Histogram.member = Shapes::ShapeRef.new(shape: HistogramEntry)
 
@@ -467,6 +526,14 @@ module Aws::XRay
 
     UnprocessedTraceSegmentList.member = Shapes::ShapeRef.new(shape: UnprocessedTraceSegment)
 
+    UpdateGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, location_name: "GroupName"))
+    UpdateGroupRequest.add_member(:group_arn, Shapes::ShapeRef.new(shape: GroupARN, location_name: "GroupARN"))
+    UpdateGroupRequest.add_member(:filter_expression, Shapes::ShapeRef.new(shape: FilterExpression, location_name: "FilterExpression"))
+    UpdateGroupRequest.struct_class = Types::UpdateGroupRequest
+
+    UpdateGroupResult.add_member(:group, Shapes::ShapeRef.new(shape: Group, location_name: "Group"))
+    UpdateGroupResult.struct_class = Types::UpdateGroupResult
+
     UpdateSamplingRuleRequest.add_member(:sampling_rule_update, Shapes::ShapeRef.new(shape: SamplingRuleUpdate, required: true, location_name: "SamplingRuleUpdate"))
     UpdateSamplingRuleRequest.struct_class = Types::UpdateSamplingRuleRequest
 
@@ -510,6 +577,16 @@ module Aws::XRay
         )
       end)
 
+      api.add_operation(:create_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/CreateGroup"
+        o.input = Shapes::ShapeRef.new(shape: CreateGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateGroupResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+      end)
+
       api.add_operation(:create_sampling_rule, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateSamplingRule"
         o.http_method = "POST"
@@ -519,6 +596,16 @@ module Aws::XRay
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
         o.errors << Shapes::ShapeRef.new(shape: RuleLimitExceededException)
+      end)
+
+      api.add_operation(:delete_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/DeleteGroup"
+        o.input = Shapes::ShapeRef.new(shape: DeleteGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteGroupResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
       end)
 
       api.add_operation(:delete_sampling_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -537,6 +624,26 @@ module Aws::XRay
         o.http_request_uri = "/EncryptionConfig"
         o.input = Shapes::ShapeRef.new(shape: GetEncryptionConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: GetEncryptionConfigResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+      end)
+
+      api.add_operation(:get_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/GetGroup"
+        o.input = Shapes::ShapeRef.new(shape: GetGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetGroupResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+      end)
+
+      api.add_operation(:get_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetGroups"
+        o.http_method = "POST"
+        o.http_request_uri = "/Groups"
+        o.input = Shapes::ShapeRef.new(shape: GetGroupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetGroupsResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
       end)
@@ -642,6 +749,16 @@ module Aws::XRay
         o.http_request_uri = "/TraceSegments"
         o.input = Shapes::ShapeRef.new(shape: PutTraceSegmentsRequest)
         o.output = Shapes::ShapeRef.new(shape: PutTraceSegmentsResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+      end)
+
+      api.add_operation(:update_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/UpdateGroup"
+        o.input = Shapes::ShapeRef.new(shape: UpdateGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateGroupResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
       end)

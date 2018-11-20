@@ -682,6 +682,81 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # A structure that includes attributes that describe a document
+    # attachment.
+    #
+    # @!attribute [rw] name
+    #   The name of an attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] size
+    #   The size of an attachment in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] hash
+    #   The cryptographic hash value of the document content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hash_type
+    #   The hash algorithm used to calculate the hash value.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL location of the attachment content.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AttachmentContent AWS API Documentation
+    #
+    class AttachmentContent < Struct.new(
+      :name,
+      :size,
+      :hash,
+      :hash_type,
+      :url)
+      include Aws::Structure
+    end
+
+    # An attribute of an attachment, such as the attachment name or size.
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AttachmentInformation AWS API Documentation
+    #
+    class AttachmentInformation < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # A key and value pair that identifies the location of an attachment to
+    # a document.
+    #
+    # @note When making an API call, you may pass AttachmentsSource
+    #   data as a hash:
+    #
+    #       {
+    #         key: "SourceUrl", # accepts SourceUrl
+    #         values: ["AttachmentsSourceValue"],
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key of a key and value pair that identifies the location of an
+    #   attachment to a document.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The URL of the location of a document attachment, such as the URL of
+    #   an Amazon S3 bucket.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AttachmentsSource AWS API Documentation
+    #
+    class AttachmentsSource < Struct.new(
+      :key,
+      :values)
+      include Aws::Structure
+    end
+
     # Detailed information about the current state of an individual
     # Automation execution.
     #
@@ -2277,8 +2352,15 @@ module Aws::SSM
     #
     #       {
     #         content: "DocumentContent", # required
+    #         attachments: [
+    #           {
+    #             key: "SourceUrl", # accepts SourceUrl
+    #             values: ["AttachmentsSourceValue"],
+    #           },
+    #         ],
     #         name: "DocumentName", # required
-    #         document_type: "Command", # accepts Command, Policy, Automation, Session
+    #         version_name: "DocumentVersionName",
+    #         document_type: "Command", # accepts Command, Policy, Automation, Session, Package
     #         document_format: "YAML", # accepts YAML, JSON
     #         target_type: "TargetType",
     #       }
@@ -2286,6 +2368,11 @@ module Aws::SSM
     # @!attribute [rw] content
     #   A valid JSON or YAML string.
     #   @return [String]
+    #
+    # @!attribute [rw] attachments
+    #   A list of key and value pairs that describe attachments to a version
+    #   of a document.
+    #   @return [Array<Types::AttachmentsSource>]
     #
     # @!attribute [rw] name
     #   A name for the Systems Manager document.
@@ -2300,9 +2387,16 @@ module Aws::SSM
     #   * `amzn`
     #   @return [String]
     #
+    # @!attribute [rw] version_name
+    #   An optional field specifying the version of the artifact you are
+    #   creating with the document. For example, "Release 12, Update 6".
+    #   This value is unique across all versions of a document, and cannot
+    #   be changed.
+    #   @return [String]
+    #
     # @!attribute [rw] document_type
     #   The type of document to create. Valid document types include:
-    #   Policy, Automation, and Command.
+    #   `Command`, `Policy`, `Automation`, `Session`, and `Package`.
     #   @return [String]
     #
     # @!attribute [rw] document_format
@@ -2328,7 +2422,9 @@ module Aws::SSM
     #
     class CreateDocumentRequest < Struct.new(
       :content,
+      :attachments,
       :name,
+      :version_name,
       :document_type,
       :document_format,
       :target_type)
@@ -3606,6 +3702,7 @@ module Aws::SSM
     #       {
     #         name: "DocumentARN", # required
     #         document_version: "DocumentVersion",
+    #         version_name: "DocumentVersionName",
     #       }
     #
     # @!attribute [rw] name
@@ -3617,11 +3714,18 @@ module Aws::SSM
     #   specific version or the default version.
     #   @return [String]
     #
+    # @!attribute [rw] version_name
+    #   An optional field specifying the version of the artifact associated
+    #   with the document. For example, "Release 12, Update 6". This value
+    #   is unique across all versions of a document, and cannot be changed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocumentRequest AWS API Documentation
     #
     class DescribeDocumentRequest < Struct.new(
       :name,
-      :document_version)
+      :document_version,
+      :version_name)
       include Aws::Structure
     end
 
@@ -4968,11 +5072,16 @@ module Aws::SSM
     #   The default version of the document.
     #   @return [String]
     #
+    # @!attribute [rw] default_version_name
+    #   The default version of the artifact associated with the document.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentDefaultVersionDescription AWS API Documentation
     #
     class DocumentDefaultVersionDescription < Struct.new(
       :name,
-      :default_version)
+      :default_version,
+      :default_version_name)
       include Aws::Structure
     end
 
@@ -4992,7 +5101,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] hash_type
-    #   Sha256 or Sha1.
+    #   The hash type of the document. Valid values include `Sha256` or
+    #   `Sha1`.
     #
     #   <note markdown="1"> Sha1 hashes have been deprecated.
     #
@@ -5001,6 +5111,10 @@ module Aws::SSM
     #
     # @!attribute [rw] name
     #   The name of the Systems Manager document.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   The version of the artifact associated with the document.
     #   @return [String]
     #
     # @!attribute [rw] owner
@@ -5013,6 +5127,13 @@ module Aws::SSM
     #
     # @!attribute [rw] status
     #   The status of the Systems Manager document.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_information
+    #   A message returned by AWS Systems Manager that explains the `Status`
+    #   value. For example, a `Failed` status might be explained by the
+    #   `StatusInformation` message, "The specified S3 bucket does not
+    #   exist. Verify that the URL of the S3 bucket is correct."
     #   @return [String]
     #
     # @!attribute [rw] document_version
@@ -5067,6 +5188,11 @@ module Aws::SSM
     #   The tags, or metadata, that have been applied to the document.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] attachments_information
+    #   Details about the document attachments, including names, locations,
+    #   sizes, etc.
+    #   @return [Array<Types::AttachmentInformation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentDescription AWS API Documentation
     #
     class DocumentDescription < Struct.new(
@@ -5074,9 +5200,11 @@ module Aws::SSM
       :hash,
       :hash_type,
       :name,
+      :version_name,
       :owner,
       :created_date,
       :status,
+      :status_information,
       :document_version,
       :description,
       :parameters,
@@ -5087,7 +5215,8 @@ module Aws::SSM
       :default_version,
       :document_format,
       :target_type,
-      :tags)
+      :tags,
+      :attachments_information)
       include Aws::Structure
     end
 
@@ -5125,6 +5254,12 @@ module Aws::SSM
     #
     # @!attribute [rw] owner
     #   The AWS user account that created the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   An optional field specifying the version of the artifact associated
+    #   with the document. For example, "Release 12, Update 6". This value
+    #   is unique across all versions of a document, and cannot be changed.
     #   @return [String]
     #
     # @!attribute [rw] platform_types
@@ -5167,6 +5302,7 @@ module Aws::SSM
     class DocumentIdentifier < Struct.new(
       :name,
       :owner,
+      :version_name,
       :platform_types,
       :document_version,
       :document_type,
@@ -5275,6 +5411,12 @@ module Aws::SSM
     #   The document version.
     #   @return [String]
     #
+    # @!attribute [rw] version_name
+    #   The version of the artifact associated with the document. For
+    #   example, "Release 12, Update 6". This value is unique across all
+    #   versions of a document, and cannot be changed.
+    #   @return [String]
+    #
     # @!attribute [rw] created_date
     #   The date the document was created.
     #   @return [Time]
@@ -5287,14 +5429,29 @@ module Aws::SSM
     #   The document format, either JSON or YAML.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   The status of the Systems Manager document, such as `Creating`,
+    #   `Active`, `Failed`, and `Deleting`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_information
+    #   A message returned by AWS Systems Manager that explains the `Status`
+    #   value. For example, a `Failed` status might be explained by the
+    #   `StatusInformation` message, "The specified S3 bucket does not
+    #   exist. Verify that the URL of the S3 bucket is correct."
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentVersionInfo AWS API Documentation
     #
     class DocumentVersionInfo < Struct.new(
       :name,
       :document_version,
+      :version_name,
       :created_date,
       :is_default_version,
-      :document_format)
+      :document_format,
+      :status,
+      :status_information)
       include Aws::Structure
     end
 
@@ -5745,12 +5902,19 @@ module Aws::SSM
     #
     #       {
     #         name: "DocumentARN", # required
+    #         version_name: "DocumentVersionName",
     #         document_version: "DocumentVersion",
     #         document_format: "YAML", # accepts YAML, JSON
     #       }
     #
     # @!attribute [rw] name
     #   The name of the Systems Manager document.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   An optional field specifying the version of the artifact associated
+    #   with the document. For example, "Release 12, Update 6". This value
+    #   is unique across all versions of a document, and cannot be changed.
     #   @return [String]
     #
     # @!attribute [rw] document_version
@@ -5766,6 +5930,7 @@ module Aws::SSM
     #
     class GetDocumentRequest < Struct.new(
       :name,
+      :version_name,
       :document_version,
       :document_format)
       include Aws::Structure
@@ -5775,8 +5940,26 @@ module Aws::SSM
     #   The name of the Systems Manager document.
     #   @return [String]
     #
+    # @!attribute [rw] version_name
+    #   The version of the artifact associated with the document. For
+    #   example, "Release 12, Update 6". This value is unique across all
+    #   versions of a document, and cannot be changed.
+    #   @return [String]
+    #
     # @!attribute [rw] document_version
     #   The document version.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the Systems Manager document, such as `Creating`,
+    #   `Active`, `Updating`, `Failed`, and `Deleting`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_information
+    #   A message returned by AWS Systems Manager that explains the `Status`
+    #   value. For example, a `Failed` status might be explained by the
+    #   `StatusInformation` message, "The specified S3 bucket does not
+    #   exist. Verify that the URL of the S3 bucket is correct."
     #   @return [String]
     #
     # @!attribute [rw] content
@@ -5791,14 +5974,23 @@ module Aws::SSM
     #   The document format, either JSON or YAML.
     #   @return [String]
     #
+    # @!attribute [rw] attachments_content
+    #   A description of the document attachments, including names,
+    #   locations, sizes, etc.
+    #   @return [Array<Types::AttachmentContent>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDocumentResult AWS API Documentation
     #
     class GetDocumentResult < Struct.new(
       :name,
+      :version_name,
       :document_version,
+      :status,
+      :status_information,
       :content,
       :document_type,
-      :document_format)
+      :document_format,
+      :attachments_content)
       include Aws::Structure
     end
 
@@ -12825,18 +13017,37 @@ module Aws::SSM
     #
     #       {
     #         content: "DocumentContent", # required
+    #         attachments: [
+    #           {
+    #             key: "SourceUrl", # accepts SourceUrl
+    #             values: ["AttachmentsSourceValue"],
+    #           },
+    #         ],
     #         name: "DocumentName", # required
+    #         version_name: "DocumentVersionName",
     #         document_version: "DocumentVersion",
     #         document_format: "YAML", # accepts YAML, JSON
     #         target_type: "TargetType",
     #       }
     #
     # @!attribute [rw] content
-    #   The content in a document that you want to update.
+    #   A valid JSON or YAML string.
     #   @return [String]
+    #
+    # @!attribute [rw] attachments
+    #   A list of key and value pairs that describe attachments to a version
+    #   of a document.
+    #   @return [Array<Types::AttachmentsSource>]
     #
     # @!attribute [rw] name
     #   The name of the document that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   An optional field specifying the version of the artifact you are
+    #   updating with the document. For example, "Release 12, Update 6".
+    #   This value is unique across all versions of a document, and cannot
+    #   be changed.
     #   @return [String]
     #
     # @!attribute [rw] document_version
@@ -12857,7 +13068,9 @@ module Aws::SSM
     #
     class UpdateDocumentRequest < Struct.new(
       :content,
+      :attachments,
       :name,
+      :version_name,
       :document_version,
       :document_format,
       :target_type)

@@ -55,7 +55,7 @@
     "models": "cloudformation/2010-05-15"
   },
   "CloudFront": {
-    "models": "cloudfront/2018-06-18"
+    "models": "cloudfront/2018-11-05"
   },
   "CloudHSM": {
     "models": "cloudhsm/2014-05-30"
@@ -373,6 +373,9 @@
   "Pricing": {
     "models": "pricing/2017-10-15"
   },
+  "QuickSight": {
+    "models": "quicksight/2018-04-01"
+  },
   "RAM": {
     "models": "ram/2018-01-04"
   },
@@ -384,6 +387,9 @@
     "dependencies": {
       "aws-sigv4": "~> 1.0"
     }
+  },
+  "RDSDataService": {
+    "models": "rds-data/2018-08-01"
   },
   "Redshift": {
     "models": "redshift/2012-12-01"

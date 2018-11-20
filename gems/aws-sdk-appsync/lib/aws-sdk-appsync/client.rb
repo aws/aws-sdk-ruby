@@ -16,6 +16,7 @@ require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
@@ -47,6 +48,7 @@ module Aws::AppSync
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
     add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
@@ -123,6 +125,10 @@ module Aws::AppSync
     #   @option options [Boolean] :convert_params (true)
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
+    #
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
@@ -256,20 +262,23 @@ module Aws::AppSync
     #   The type of the `DataSource`.
     #
     # @option params [String] :service_role_arn
-    #   The IAM service role ARN for the data source. The system assumes this
-    #   role when accessing the data source.
+    #   The AWS IAM service role ARN for the data source. The system assumes
+    #   this role when accessing the data source.
     #
     # @option params [Types::DynamodbDataSourceConfig] :dynamodb_config
-    #   DynamoDB settings.
+    #   Amazon DynamoDB settings.
     #
     # @option params [Types::LambdaDataSourceConfig] :lambda_config
     #   AWS Lambda settings.
     #
     # @option params [Types::ElasticsearchDataSourceConfig] :elasticsearch_config
-    #   Amazon Elasticsearch settings.
+    #   Amazon Elasticsearch Service settings.
     #
     # @option params [Types::HttpDataSourceConfig] :http_config
-    #   Http endpoint settings.
+    #   HTTP endpoint settings.
+    #
+    # @option params [Types::RelationalDatabaseDataSourceConfig] :relational_database_config
+    #   Relational database settings.
     #
     # @return [Types::CreateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -281,7 +290,7 @@ module Aws::AppSync
     #     api_id: "String", # required
     #     name: "ResourceName", # required
     #     description: "String",
-    #     type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE, HTTP
+    #     type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE, HTTP, RELATIONAL_DATABASE
     #     service_role_arn: "String",
     #     dynamodb_config: {
     #       table_name: "String", # required
@@ -297,6 +306,23 @@ module Aws::AppSync
     #     },
     #     http_config: {
     #       endpoint: "String",
+    #       authorization_config: {
+    #         authorization_type: "AWS_IAM", # required, accepts AWS_IAM
+    #         aws_iam_config: {
+    #           signing_region: "String",
+    #           signing_service_name: "String",
+    #         },
+    #       },
+    #     },
+    #     relational_database_config: {
+    #       relational_database_source_type: "RDS_HTTP_ENDPOINT", # accepts RDS_HTTP_ENDPOINT
+    #       rds_http_endpoint_config: {
+    #         aws_region: "String",
+    #         db_cluster_identifier: "String",
+    #         database_name: "String",
+    #         schema: "String",
+    #         aws_secret_store_arn: "String",
+    #       },
     #     },
     #   })
     #
@@ -305,7 +331,7 @@ module Aws::AppSync
     #   resp.data_source.data_source_arn #=> String
     #   resp.data_source.name #=> String
     #   resp.data_source.description #=> String
-    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP"
+    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP", "RELATIONAL_DATABASE"
     #   resp.data_source.service_role_arn #=> String
     #   resp.data_source.dynamodb_config.table_name #=> String
     #   resp.data_source.dynamodb_config.aws_region #=> String
@@ -314,6 +340,15 @@ module Aws::AppSync
     #   resp.data_source.elasticsearch_config.endpoint #=> String
     #   resp.data_source.elasticsearch_config.aws_region #=> String
     #   resp.data_source.http_config.endpoint #=> String
+    #   resp.data_source.http_config.authorization_config.authorization_type #=> String, one of "AWS_IAM"
+    #   resp.data_source.http_config.authorization_config.aws_iam_config.signing_region #=> String
+    #   resp.data_source.http_config.authorization_config.aws_iam_config.signing_service_name #=> String
+    #   resp.data_source.relational_database_config.relational_database_source_type #=> String, one of "RDS_HTTP_ENDPOINT"
+    #   resp.data_source.relational_database_config.rds_http_endpoint_config.aws_region #=> String
+    #   resp.data_source.relational_database_config.rds_http_endpoint_config.db_cluster_identifier #=> String
+    #   resp.data_source.relational_database_config.rds_http_endpoint_config.database_name #=> String
+    #   resp.data_source.relational_database_config.rds_http_endpoint_config.schema #=> String
+    #   resp.data_source.relational_database_config.rds_http_endpoint_config.aws_secret_store_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateDataSource AWS API Documentation
     #
@@ -324,22 +359,87 @@ module Aws::AppSync
       req.send_request(options)
     end
 
+    # Creates a `Function` object.
+    #
+    # A function is a reusable entity. Multiple functions can be used to
+    # compose the resolver logic.
+    #
+    # @option params [required, String] :api_id
+    #   The GraphQL API ID.
+    #
+    # @option params [required, String] :name
+    #   The `Function` name. The function name does not have to be unique.
+    #
+    # @option params [String] :description
+    #   The `Function` description.
+    #
+    # @option params [required, String] :data_source_name
+    #   The `Function` `DataSource` name.
+    #
+    # @option params [required, String] :request_mapping_template
+    #   The `Function` request mapping template. Functions support only the
+    #   2018-05-29 version of the request mapping template.
+    #
+    # @option params [String] :response_mapping_template
+    #   The `Function` response mapping template.
+    #
+    # @option params [required, String] :function_version
+    #   The `version` of the request mapping template. Currently the supported
+    #   value is 2018-05-29.
+    #
+    # @return [Types::CreateFunctionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFunctionResponse#function_configuration #function_configuration} => Types::FunctionConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_function({
+    #     api_id: "String", # required
+    #     name: "ResourceName", # required
+    #     description: "String",
+    #     data_source_name: "ResourceName", # required
+    #     request_mapping_template: "MappingTemplate", # required
+    #     response_mapping_template: "MappingTemplate",
+    #     function_version: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.function_configuration.function_id #=> String
+    #   resp.function_configuration.function_arn #=> String
+    #   resp.function_configuration.name #=> String
+    #   resp.function_configuration.description #=> String
+    #   resp.function_configuration.data_source_name #=> String
+    #   resp.function_configuration.request_mapping_template #=> String
+    #   resp.function_configuration.response_mapping_template #=> String
+    #   resp.function_configuration.function_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateFunction AWS API Documentation
+    #
+    # @overload create_function(params = {})
+    # @param [Hash] params ({})
+    def create_function(params = {}, options = {})
+      req = build_request(:create_function, params)
+      req.send_request(options)
+    end
+
     # Creates a `GraphqlApi` object.
     #
     # @option params [required, String] :name
     #   A user-supplied name for the `GraphqlApi`.
     #
     # @option params [Types::LogConfig] :log_config
-    #   The Amazon CloudWatch logs configuration.
+    #   The Amazon CloudWatch Logs configuration.
     #
     # @option params [required, String] :authentication_type
-    #   The authentication type: API key, IAM, or Amazon Cognito User Pools.
+    #   The authentication type: API key, AWS IAM, or Amazon Cognito user
+    #   pools.
     #
     # @option params [Types::UserPoolConfig] :user_pool_config
-    #   The Amazon Cognito User Pool configuration.
+    #   The Amazon Cognito user pool configuration.
     #
     # @option params [Types::OpenIDConnectConfig] :open_id_connect_config
-    #   The Open Id Connect configuration configuration.
+    #   The OpenID Connect configuration.
     #
     # @return [Types::CreateGraphqlApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -410,7 +510,7 @@ module Aws::AppSync
     # @option params [required, String] :field_name
     #   The name of the field to attach the resolver to.
     #
-    # @option params [required, String] :data_source_name
+    # @option params [String] :data_source_name
     #   The name of the data source for which the resolver is being created.
     #
     # @option params [required, String] :request_mapping_template
@@ -423,6 +523,21 @@ module Aws::AppSync
     # @option params [String] :response_mapping_template
     #   The mapping template to be used for responses from the data source.
     #
+    # @option params [String] :kind
+    #   The resolver type.
+    #
+    #   * **UNIT**\: A UNIT resolver type. A UNIT resolver is the default
+    #     resolver type. A UNIT resolver enables you to execute a GraphQL
+    #     query against a single data source.
+    #
+    #   * **PIPELINE**\: A PIPELINE resolver type. A PIPELINE resolver enables
+    #     you to execute a series of `Function` in a serial manner. You can
+    #     use a pipeline resolver to execute a GraphQL query against multiple
+    #     data sources.
+    #
+    # @option params [Types::PipelineConfig] :pipeline_config
+    #   The `PipelineConfig`.
+    #
     # @return [Types::CreateResolverResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateResolverResponse#resolver #resolver} => Types::Resolver
@@ -433,9 +548,13 @@ module Aws::AppSync
     #     api_id: "String", # required
     #     type_name: "ResourceName", # required
     #     field_name: "ResourceName", # required
-    #     data_source_name: "ResourceName", # required
+    #     data_source_name: "ResourceName",
     #     request_mapping_template: "MappingTemplate", # required
     #     response_mapping_template: "MappingTemplate",
+    #     kind: "UNIT", # accepts UNIT, PIPELINE
+    #     pipeline_config: {
+    #       functions: ["String"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -446,6 +565,9 @@ module Aws::AppSync
     #   resp.resolver.resolver_arn #=> String
     #   resp.resolver.request_mapping_template #=> String
     #   resp.resolver.response_mapping_template #=> String
+    #   resp.resolver.kind #=> String, one of "UNIT", "PIPELINE"
+    #   resp.resolver.pipeline_config.functions #=> Array
+    #   resp.resolver.pipeline_config.functions[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateResolver AWS API Documentation
     #
@@ -555,6 +677,32 @@ module Aws::AppSync
       req.send_request(options)
     end
 
+    # Deletes a `Function`.
+    #
+    # @option params [required, String] :api_id
+    #   The GraphQL API ID.
+    #
+    # @option params [required, String] :function_id
+    #   The `Function` ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_function({
+    #     api_id: "String", # required
+    #     function_id: "ResourceName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteFunction AWS API Documentation
+    #
+    # @overload delete_function(params = {})
+    # @param [Hash] params ({})
+    def delete_function(params = {}, options = {})
+      req = build_request(:delete_function, params)
+      req.send_request(options)
+    end
+
     # Deletes a `GraphqlApi` object.
     #
     # @option params [required, String] :api_id
@@ -657,7 +805,7 @@ module Aws::AppSync
     #   resp.data_source.data_source_arn #=> String
     #   resp.data_source.name #=> String
     #   resp.data_source.description #=> String
-    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP"
+    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP", "RELATIONAL_DATABASE"
     #   resp.data_source.service_role_arn #=> String
     #   resp.data_source.dynamodb_config.table_name #=> String
     #   resp.data_source.dynamodb_config.aws_region #=> String
@@ -666,6 +814,15 @@ module Aws::AppSync
     #   resp.data_source.elasticsearch_config.endpoint #=> String
     #   resp.data_source.elasticsearch_config.aws_region #=> String
     #   resp.data_source.http_config.endpoint #=> String
+    #   resp.data_source.http_config.authorization_config.authorization_type #=> String, one of "AWS_IAM"
+    #   resp.data_source.http_config.authorization_config.aws_iam_config.signing_region #=> String
+    #   resp.data_source.http_config.authorization_config.aws_iam_config.signing_service_name #=> String
+    #   resp.data_source.relational_database_config.relational_database_source_type #=> String, one of "RDS_HTTP_ENDPOINT"
+    #   resp.data_source.relational_database_config.rds_http_endpoint_config.aws_region #=> String
+    #   resp.data_source.relational_database_config.rds_http_endpoint_config.db_cluster_identifier #=> String
+    #   resp.data_source.relational_database_config.rds_http_endpoint_config.database_name #=> String
+    #   resp.data_source.relational_database_config.rds_http_endpoint_config.schema #=> String
+    #   resp.data_source.relational_database_config.rds_http_endpoint_config.aws_secret_store_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetDataSource AWS API Documentation
     #
@@ -673,6 +830,45 @@ module Aws::AppSync
     # @param [Hash] params ({})
     def get_data_source(params = {}, options = {})
       req = build_request(:get_data_source, params)
+      req.send_request(options)
+    end
+
+    # Get a `Function`.
+    #
+    # @option params [required, String] :api_id
+    #   The GraphQL API ID.
+    #
+    # @option params [required, String] :function_id
+    #   The `Function` ID.
+    #
+    # @return [Types::GetFunctionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFunctionResponse#function_configuration #function_configuration} => Types::FunctionConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_function({
+    #     api_id: "String", # required
+    #     function_id: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.function_configuration.function_id #=> String
+    #   resp.function_configuration.function_arn #=> String
+    #   resp.function_configuration.name #=> String
+    #   resp.function_configuration.description #=> String
+    #   resp.function_configuration.data_source_name #=> String
+    #   resp.function_configuration.request_mapping_template #=> String
+    #   resp.function_configuration.response_mapping_template #=> String
+    #   resp.function_configuration.function_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetFunction AWS API Documentation
+    #
+    # @overload get_function(params = {})
+    # @param [Hash] params ({})
+    def get_function(params = {}, options = {})
+      req = build_request(:get_function, params)
       req.send_request(options)
     end
 
@@ -782,6 +978,9 @@ module Aws::AppSync
     #   resp.resolver.resolver_arn #=> String
     #   resp.resolver.request_mapping_template #=> String
     #   resp.resolver.response_mapping_template #=> String
+    #   resp.resolver.kind #=> String, one of "UNIT", "PIPELINE"
+    #   resp.resolver.pipeline_config.functions #=> Array
+    #   resp.resolver.pipeline_config.functions[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetResolver AWS API Documentation
     #
@@ -944,7 +1143,7 @@ module Aws::AppSync
     #   resp.data_sources[0].data_source_arn #=> String
     #   resp.data_sources[0].name #=> String
     #   resp.data_sources[0].description #=> String
-    #   resp.data_sources[0].type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP"
+    #   resp.data_sources[0].type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP", "RELATIONAL_DATABASE"
     #   resp.data_sources[0].service_role_arn #=> String
     #   resp.data_sources[0].dynamodb_config.table_name #=> String
     #   resp.data_sources[0].dynamodb_config.aws_region #=> String
@@ -953,6 +1152,15 @@ module Aws::AppSync
     #   resp.data_sources[0].elasticsearch_config.endpoint #=> String
     #   resp.data_sources[0].elasticsearch_config.aws_region #=> String
     #   resp.data_sources[0].http_config.endpoint #=> String
+    #   resp.data_sources[0].http_config.authorization_config.authorization_type #=> String, one of "AWS_IAM"
+    #   resp.data_sources[0].http_config.authorization_config.aws_iam_config.signing_region #=> String
+    #   resp.data_sources[0].http_config.authorization_config.aws_iam_config.signing_service_name #=> String
+    #   resp.data_sources[0].relational_database_config.relational_database_source_type #=> String, one of "RDS_HTTP_ENDPOINT"
+    #   resp.data_sources[0].relational_database_config.rds_http_endpoint_config.aws_region #=> String
+    #   resp.data_sources[0].relational_database_config.rds_http_endpoint_config.db_cluster_identifier #=> String
+    #   resp.data_sources[0].relational_database_config.rds_http_endpoint_config.database_name #=> String
+    #   resp.data_sources[0].relational_database_config.rds_http_endpoint_config.schema #=> String
+    #   resp.data_sources[0].relational_database_config.rds_http_endpoint_config.aws_secret_store_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListDataSources AWS API Documentation
@@ -961,6 +1169,54 @@ module Aws::AppSync
     # @param [Hash] params ({})
     def list_data_sources(params = {}, options = {})
       req = build_request(:list_data_sources, params)
+      req.send_request(options)
+    end
+
+    # List multiple functions.
+    #
+    # @option params [required, String] :api_id
+    #   The GraphQL API ID.
+    #
+    # @option params [String] :next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which can be used to return the next set of items in the
+    #   list.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results you want the request to return.
+    #
+    # @return [Types::ListFunctionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFunctionsResponse#functions #functions} => Array&lt;Types::FunctionConfiguration&gt;
+    #   * {Types::ListFunctionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_functions({
+    #     api_id: "String", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.functions #=> Array
+    #   resp.functions[0].function_id #=> String
+    #   resp.functions[0].function_arn #=> String
+    #   resp.functions[0].name #=> String
+    #   resp.functions[0].description #=> String
+    #   resp.functions[0].data_source_name #=> String
+    #   resp.functions[0].request_mapping_template #=> String
+    #   resp.functions[0].response_mapping_template #=> String
+    #   resp.functions[0].function_version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListFunctions AWS API Documentation
+    #
+    # @overload list_functions(params = {})
+    # @param [Hash] params ({})
+    def list_functions(params = {}, options = {})
+      req = build_request(:list_functions, params)
       req.send_request(options)
     end
 
@@ -1055,6 +1311,9 @@ module Aws::AppSync
     #   resp.resolvers[0].resolver_arn #=> String
     #   resp.resolvers[0].request_mapping_template #=> String
     #   resp.resolvers[0].response_mapping_template #=> String
+    #   resp.resolvers[0].kind #=> String, one of "UNIT", "PIPELINE"
+    #   resp.resolvers[0].pipeline_config.functions #=> Array
+    #   resp.resolvers[0].pipeline_config.functions[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListResolvers AWS API Documentation
@@ -1063,6 +1322,59 @@ module Aws::AppSync
     # @param [Hash] params ({})
     def list_resolvers(params = {}, options = {})
       req = build_request(:list_resolvers, params)
+      req.send_request(options)
+    end
+
+    # List the resolvers that are associated with a specific function.
+    #
+    # @option params [required, String] :api_id
+    #   The API ID.
+    #
+    # @option params [required, String] :function_id
+    #   The Function ID.
+    #
+    # @option params [String] :next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which you can use to return the next set of items in the
+    #   list.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results you want the request to return.
+    #
+    # @return [Types::ListResolversByFunctionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResolversByFunctionResponse#resolvers #resolvers} => Array&lt;Types::Resolver&gt;
+    #   * {Types::ListResolversByFunctionResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resolvers_by_function({
+    #     api_id: "String", # required
+    #     function_id: "String", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resolvers #=> Array
+    #   resp.resolvers[0].type_name #=> String
+    #   resp.resolvers[0].field_name #=> String
+    #   resp.resolvers[0].data_source_name #=> String
+    #   resp.resolvers[0].resolver_arn #=> String
+    #   resp.resolvers[0].request_mapping_template #=> String
+    #   resp.resolvers[0].response_mapping_template #=> String
+    #   resp.resolvers[0].kind #=> String, one of "UNIT", "PIPELINE"
+    #   resp.resolvers[0].pipeline_config.functions #=> Array
+    #   resp.resolvers[0].pipeline_config.functions[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListResolversByFunction AWS API Documentation
+    #
+    # @overload list_resolvers_by_function(params = {})
+    # @param [Hash] params ({})
+    def list_resolvers_by_function(params = {}, options = {})
+      req = build_request(:list_resolvers_by_function, params)
       req.send_request(options)
     end
 
@@ -1153,7 +1465,7 @@ module Aws::AppSync
     # Updates an API key.
     #
     # @option params [required, String] :api_id
-    #   The ID for the GraphQL API
+    #   The ID for the GraphQL API.
     #
     # @option params [required, String] :id
     #   The API key ID.
@@ -1211,16 +1523,19 @@ module Aws::AppSync
     #   The new service role ARN for the data source.
     #
     # @option params [Types::DynamodbDataSourceConfig] :dynamodb_config
-    #   The new DynamoDB configuration.
+    #   The new Amazon DynamoDB configuration.
     #
     # @option params [Types::LambdaDataSourceConfig] :lambda_config
-    #   The new Lambda configuration.
+    #   The new AWS Lambda configuration.
     #
     # @option params [Types::ElasticsearchDataSourceConfig] :elasticsearch_config
-    #   The new Elasticsearch configuration.
+    #   The new Elasticsearch Service configuration.
     #
     # @option params [Types::HttpDataSourceConfig] :http_config
-    #   The new http endpoint configuration
+    #   The new HTTP endpoint configuration.
+    #
+    # @option params [Types::RelationalDatabaseDataSourceConfig] :relational_database_config
+    #   The new relational database configuration.
     #
     # @return [Types::UpdateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1232,7 +1547,7 @@ module Aws::AppSync
     #     api_id: "String", # required
     #     name: "ResourceName", # required
     #     description: "String",
-    #     type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE, HTTP
+    #     type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE, HTTP, RELATIONAL_DATABASE
     #     service_role_arn: "String",
     #     dynamodb_config: {
     #       table_name: "String", # required
@@ -1248,6 +1563,23 @@ module Aws::AppSync
     #     },
     #     http_config: {
     #       endpoint: "String",
+    #       authorization_config: {
+    #         authorization_type: "AWS_IAM", # required, accepts AWS_IAM
+    #         aws_iam_config: {
+    #           signing_region: "String",
+    #           signing_service_name: "String",
+    #         },
+    #       },
+    #     },
+    #     relational_database_config: {
+    #       relational_database_source_type: "RDS_HTTP_ENDPOINT", # accepts RDS_HTTP_ENDPOINT
+    #       rds_http_endpoint_config: {
+    #         aws_region: "String",
+    #         db_cluster_identifier: "String",
+    #         database_name: "String",
+    #         schema: "String",
+    #         aws_secret_store_arn: "String",
+    #       },
     #     },
     #   })
     #
@@ -1256,7 +1588,7 @@ module Aws::AppSync
     #   resp.data_source.data_source_arn #=> String
     #   resp.data_source.name #=> String
     #   resp.data_source.description #=> String
-    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP"
+    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP", "RELATIONAL_DATABASE"
     #   resp.data_source.service_role_arn #=> String
     #   resp.data_source.dynamodb_config.table_name #=> String
     #   resp.data_source.dynamodb_config.aws_region #=> String
@@ -1265,6 +1597,15 @@ module Aws::AppSync
     #   resp.data_source.elasticsearch_config.endpoint #=> String
     #   resp.data_source.elasticsearch_config.aws_region #=> String
     #   resp.data_source.http_config.endpoint #=> String
+    #   resp.data_source.http_config.authorization_config.authorization_type #=> String, one of "AWS_IAM"
+    #   resp.data_source.http_config.authorization_config.aws_iam_config.signing_region #=> String
+    #   resp.data_source.http_config.authorization_config.aws_iam_config.signing_service_name #=> String
+    #   resp.data_source.relational_database_config.relational_database_source_type #=> String, one of "RDS_HTTP_ENDPOINT"
+    #   resp.data_source.relational_database_config.rds_http_endpoint_config.aws_region #=> String
+    #   resp.data_source.relational_database_config.rds_http_endpoint_config.db_cluster_identifier #=> String
+    #   resp.data_source.relational_database_config.rds_http_endpoint_config.database_name #=> String
+    #   resp.data_source.relational_database_config.rds_http_endpoint_config.schema #=> String
+    #   resp.data_source.relational_database_config.rds_http_endpoint_config.aws_secret_store_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateDataSource AWS API Documentation
     #
@@ -1272,6 +1613,71 @@ module Aws::AppSync
     # @param [Hash] params ({})
     def update_data_source(params = {}, options = {})
       req = build_request(:update_data_source, params)
+      req.send_request(options)
+    end
+
+    # Updates a `Function` object.
+    #
+    # @option params [required, String] :api_id
+    #   The GraphQL API ID.
+    #
+    # @option params [required, String] :name
+    #   The `Function` name.
+    #
+    # @option params [String] :description
+    #   The `Function` description.
+    #
+    # @option params [required, String] :function_id
+    #   The function ID.
+    #
+    # @option params [required, String] :data_source_name
+    #   The `Function` `DataSource` name.
+    #
+    # @option params [required, String] :request_mapping_template
+    #   The `Function` request mapping template. Functions support only the
+    #   2018-05-29 version of the request mapping template.
+    #
+    # @option params [String] :response_mapping_template
+    #   The `Function` request mapping template.
+    #
+    # @option params [required, String] :function_version
+    #   The `version` of the request mapping template. Currently the supported
+    #   value is 2018-05-29.
+    #
+    # @return [Types::UpdateFunctionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFunctionResponse#function_configuration #function_configuration} => Types::FunctionConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_function({
+    #     api_id: "String", # required
+    #     name: "ResourceName", # required
+    #     description: "String",
+    #     function_id: "ResourceName", # required
+    #     data_source_name: "ResourceName", # required
+    #     request_mapping_template: "MappingTemplate", # required
+    #     response_mapping_template: "MappingTemplate",
+    #     function_version: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.function_configuration.function_id #=> String
+    #   resp.function_configuration.function_arn #=> String
+    #   resp.function_configuration.name #=> String
+    #   resp.function_configuration.description #=> String
+    #   resp.function_configuration.data_source_name #=> String
+    #   resp.function_configuration.request_mapping_template #=> String
+    #   resp.function_configuration.response_mapping_template #=> String
+    #   resp.function_configuration.function_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateFunction AWS API Documentation
+    #
+    # @overload update_function(params = {})
+    # @param [Hash] params ({})
+    def update_function(params = {}, options = {})
+      req = build_request(:update_function, params)
       req.send_request(options)
     end
 
@@ -1284,18 +1690,17 @@ module Aws::AppSync
     #   The new name for the `GraphqlApi` object.
     #
     # @option params [Types::LogConfig] :log_config
-    #   The Amazon CloudWatch logs configuration for the `GraphqlApi` object.
+    #   The Amazon CloudWatch Logs configuration for the `GraphqlApi` object.
     #
     # @option params [String] :authentication_type
     #   The new authentication type for the `GraphqlApi` object.
     #
     # @option params [Types::UserPoolConfig] :user_pool_config
-    #   The new Amazon Cognito User Pool configuration for the `GraphqlApi`
+    #   The new Amazon Cognito user pool configuration for the `GraphqlApi`
     #   object.
     #
     # @option params [Types::OpenIDConnectConfig] :open_id_connect_config
-    #   The Open Id Connect configuration configuration for the `GraphqlApi`
-    #   object.
+    #   The OpenID Connect configuration for the `GraphqlApi` object.
     #
     # @return [Types::UpdateGraphqlApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1364,7 +1769,7 @@ module Aws::AppSync
     # @option params [required, String] :field_name
     #   The new field name.
     #
-    # @option params [required, String] :data_source_name
+    # @option params [String] :data_source_name
     #   The new data source name.
     #
     # @option params [required, String] :request_mapping_template
@@ -1372,6 +1777,21 @@ module Aws::AppSync
     #
     # @option params [String] :response_mapping_template
     #   The new response mapping template.
+    #
+    # @option params [String] :kind
+    #   The resolver type.
+    #
+    #   * **UNIT**\: A UNIT resolver type. A UNIT resolver is the default
+    #     resolver type. A UNIT resolver enables you to execute a GraphQL
+    #     query against a single data source.
+    #
+    #   * **PIPELINE**\: A PIPELINE resolver type. A PIPELINE resolver enables
+    #     you to execute a series of `Function` in a serial manner. You can
+    #     use a pipeline resolver to execute a GraphQL query against multiple
+    #     data sources.
+    #
+    # @option params [Types::PipelineConfig] :pipeline_config
+    #   The `PipelineConfig`.
     #
     # @return [Types::UpdateResolverResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1383,9 +1803,13 @@ module Aws::AppSync
     #     api_id: "String", # required
     #     type_name: "ResourceName", # required
     #     field_name: "ResourceName", # required
-    #     data_source_name: "ResourceName", # required
+    #     data_source_name: "ResourceName",
     #     request_mapping_template: "MappingTemplate", # required
     #     response_mapping_template: "MappingTemplate",
+    #     kind: "UNIT", # accepts UNIT, PIPELINE
+    #     pipeline_config: {
+    #       functions: ["String"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -1396,6 +1820,9 @@ module Aws::AppSync
     #   resp.resolver.resolver_arn #=> String
     #   resp.resolver.request_mapping_template #=> String
     #   resp.resolver.response_mapping_template #=> String
+    #   resp.resolver.kind #=> String, one of "UNIT", "PIPELINE"
+    #   resp.resolver.pipeline_config.functions #=> Array
+    #   resp.resolver.pipeline_config.functions[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateResolver AWS API Documentation
     #
@@ -1463,7 +1890,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

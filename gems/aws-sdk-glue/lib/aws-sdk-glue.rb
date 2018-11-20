@@ -42,6 +42,6 @@ require_relative 'aws-sdk-glue/customizations'
 # @service
 module Aws::Glue
 
-  GEM_VERSION = '1.20.0'
+  GEM_VERSION = '1.21.0'
 
 end
