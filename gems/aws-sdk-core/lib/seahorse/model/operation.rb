@@ -31,6 +31,9 @@ module Seahorse
       # @return [String, nil]
       attr_accessor :documentation
 
+      # @return [Hash, nil]
+      attr_accessor :endpoint_pattern
+
       # @return [String, nil]
       attr_accessor :authorizer
 

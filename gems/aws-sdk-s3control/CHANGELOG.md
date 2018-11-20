@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support S3 Control plugin working with endpoint trait.
+
 1.0.1 (2018-11-16)
 ------------------
 

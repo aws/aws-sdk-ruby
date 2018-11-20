@@ -75,7 +75,8 @@
     ],
     "removePlugins": [
       "Aws::Plugins::RegionalEndpoint",
-      "Aws::Plugins::EndpointDiscovery"
+      "Aws::Plugins::EndpointDiscovery",
+      "Aws::Plugins::EndpointPattern"
     ]
   },
   "CloudTrail": {
