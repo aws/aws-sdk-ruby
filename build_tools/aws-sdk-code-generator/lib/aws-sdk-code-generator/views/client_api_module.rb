@@ -298,7 +298,7 @@ module AwsSdkCodeGenerator
         line += shape_ref_eventheader(ref)
         line += shape_ref_location(ref)
         line += shape_ref_location_name(member_name, ref)
-        line += shape_ref_metadata(ref)
+        line += shape_ref_metadata(ref, member_name)
         line += ")"
         line
       end
@@ -367,9 +367,12 @@ module AwsSdkCodeGenerator
         location_name ? ", location_name: #{location_name.inspect}" : ""
       end
 
-      def shape_ref_metadata(member_ref)
+      def shape_ref_metadata(member_ref, member_name)
         metadata = member_ref.inject({}) do |hash, (key, value)|
           hash[key] = value unless SKIP_TRAITS.include?(key)
+          if key == 'hostLabel'
+            hash['hostLabelName'] = member_name
+          end
           hash
         end
         if metadata.empty?

@@ -46,8 +46,9 @@ to default service endpoint when available.
         def _replace_label_value(ori, label, input_ref, params)
           name = nil
           input_ref.shape.members.each do |m_name, ref|
-            next unless ref.shape.name == label
-            name = m_name
+            if ref['hostLabel'] && ref['hostLabelName'] == label
+              name = m_name
+            end
           end
           if name.nil? || params[name].nil?
             raise Errors::MissingEndpointHostLabelValue.new(name)
