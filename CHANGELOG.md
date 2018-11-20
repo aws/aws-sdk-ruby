@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.175 (2018-11-20)
+------------------
+
 * Feature - Aws::AppSync - Updated the API, and documentation for AWS AppSync.
 
 * Feature - Aws::AutoScalingPlans - Updated the API, and documentation for AWS Auto Scaling Plans.
