@@ -20,6 +20,8 @@ module Aws
         resolve_region(cfg)
       end
 
+      option(:regional_endpoint, false)
+
       option(:endpoint) do |cfg|
         endpoint_prefix = cfg.api.metadata['endpointPrefix']
         if cfg.region && endpoint_prefix

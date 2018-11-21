@@ -200,6 +200,7 @@ module Aws
   autoload :EagerLoader, 'aws-sdk-core/eager_loader'
   autoload :ECSCredentials, 'aws-sdk-core/ecs_credentials'
   autoload :EndpointProvider, 'aws-sdk-core/endpoint_provider'
+  autoload :EndpointCache, 'aws-sdk-core/endpoint_cache'
   autoload :Errors, 'aws-sdk-core/errors'
   autoload :IniParser, 'aws-sdk-core/ini_parser'
   autoload :InstanceProfileCredentials, 'aws-sdk-core/instance_profile_credentials'
@@ -259,6 +260,8 @@ module Aws
     autoload :HelpfulSocketErrors, 'aws-sdk-core/plugins/helpful_socket_errors'
     autoload :IdempotencyToken, 'aws-sdk-core/plugins/idempotency_token'
     autoload :JsonvalueConverter, 'aws-sdk-core/plugins/jsonvalue_converter'
+    autoload :EndpointDiscovery, 'aws-sdk-core/plugins/endpoint_discovery'
+    autoload :EndpointPattern, 'aws-sdk-core/plugins/endpoint_pattern'
     autoload :Logging, 'aws-sdk-core/plugins/logging'
     autoload :MachineLearningPredictEndpoint, 'aws-sdk-core/plugins/machine_learning_predict_endpoint'
     autoload :ParamConverter, 'aws-sdk-core/plugins/param_converter'
@@ -575,10 +578,10 @@ module Aws
   service_added do |name, svc_module, options|
     if paginators = options[:paginators]
       paginators = Json.load_file(paginators) unless Hash === paginators
-      svc_module::Client.api.operations.each do |_, operation|
-        if rules = paginators['pagination'][operation.name]
-          operation[:pager] = Pager.new(rules)
-        end
+      paginators['pagination'].each do |n, rules|
+        op_name = Seahorse::Util.underscore(n)
+        operation = svc_module::Client.api.operation(op_name)
+        operation[:pager] = Pager.new(rules)
       end
     end
   end

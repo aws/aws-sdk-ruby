@@ -22,8 +22,17 @@ module Seahorse
       # @return [Boolean]
       attr_accessor :deprecated
 
+      # @return [Boolean]
+      attr_accessor :endpoint_operation
+
+      # @return [Hash]
+      attr_accessor :endpoint_discovery
+
       # @return [String, nil]
       attr_accessor :documentation
+
+      # @return [Hash, nil]
+      attr_accessor :endpoint_pattern
 
       # @return [ShapeRef, nil]
       attr_accessor :input

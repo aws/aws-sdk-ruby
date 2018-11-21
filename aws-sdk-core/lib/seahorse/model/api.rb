@@ -5,6 +5,7 @@ module Seahorse
       def initialize
         @metadata = {}
         @operations = {}
+        @endpoint_operation = nil
       end
 
       # @return [String, nil]
@@ -12,6 +13,9 @@ module Seahorse
 
       # @return [Hash]
       attr_accessor :metadata
+
+      # @return [Symbol|nil]
+      attr_accessor :endpoint_operation
 
       def operations(&block)
         if block_given?

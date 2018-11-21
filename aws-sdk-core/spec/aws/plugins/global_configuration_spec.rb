@@ -19,9 +19,11 @@ module Aws
         })
         svc = Aws.add_service(:Svc, api: api)::Client
         svc.remove_plugin(RegionalEndpoint)
+        svc.remove_plugin(EndpointDiscovery)
         svc.remove_plugin(RequestSigner)
         svc.add_plugin(GlobalConfiguration)
         svc.add_plugin(plugin { option(:endpoint, 'http://foo.com') })
+        svc.add_plugin(plugin { option(:regional_endpoint, false) })
         svc.add_plugin(plugin { option(:property, 'plugin-default') })
         allow(Aws).to receive(:config).and_return({})
       end
