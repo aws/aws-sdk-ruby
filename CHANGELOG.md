@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Rekognition - Updated the API, and documentation for Amazon Rekognition.
+
 * Feature - Support endpoint discovery and endpoint traits
 
 2.11.175 (2018-11-20)
