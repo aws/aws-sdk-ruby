@@ -274,39 +274,37 @@ module Aws::Rekognition
     #   @return [Array<Types::ComparedFace>]
     #
     # @!attribute [rw] source_image_orientation_correction
-    #   The orientation of the source image (counterclockwise direction). If
-    #   your application displays the source image, you can use this value
-    #   to correct image orientation. The bounding box coordinates returned
-    #   in `SourceImageFace` represent the location of the face before the
-    #   image orientation is corrected.
+    #   The value of `SourceImageOrientationCorrection` is always null.
     #
-    #   <note markdown="1"> If the source image is in .jpeg format, it might contain
-    #   exchangeable image (Exif) metadata that includes the image's
-    #   orientation. If the Exif metadata for the source image populates the
-    #   orientation field, the value of `OrientationCorrection` is null. The
-    #   `SourceImageFace` bounding box coordinates represent the location of
-    #   the face after Exif metadata is used to correct the orientation.
-    #   Images in .png format don't contain Exif metadata.
+    #   If the input image is in .jpeg format, it might contain exchangeable
+    #   image file format (Exif) metadata that includes the image's
+    #   orientation. Amazon Rekognition uses this orientation information to
+    #   perform image correction. The bounding box coordinates are
+    #   translated to represent object locations after the orientation
+    #   information in the Exif metadata is used to correct the image
+    #   orientation. Images in .png format don't contain Exif metadata.
     #
-    #    </note>
+    #   Amazon Rekognition doesn’t perform image correction for images in
+    #   .png format and .jpeg images without orientation information in the
+    #   image Exif metadata. The bounding box coordinates aren't translated
+    #   and represent the object locations before the image is rotated.
     #   @return [String]
     #
     # @!attribute [rw] target_image_orientation_correction
-    #   The orientation of the target image (in counterclockwise direction).
-    #   If your application displays the target image, you can use this
-    #   value to correct the orientation of the image. The bounding box
-    #   coordinates returned in `FaceMatches` and `UnmatchedFaces` represent
-    #   face locations before the image orientation is corrected.
+    #   The value of `TargetImageOrientationCorrection` is always null.
     #
-    #   <note markdown="1"> If the target image is in .jpg format, it might contain Exif
-    #   metadata that includes the orientation of the image. If the Exif
-    #   metadata for the target image populates the orientation field, the
-    #   value of `OrientationCorrection` is null. The bounding box
-    #   coordinates in `FaceMatches` and `UnmatchedFaces` represent the
-    #   location of the face after Exif metadata is used to correct the
+    #   If the input image is in .jpeg format, it might contain exchangeable
+    #   image file format (Exif) metadata that includes the image's
+    #   orientation. Amazon Rekognition uses this orientation information to
+    #   perform image correction. The bounding box coordinates are
+    #   translated to represent object locations after the orientation
+    #   information in the Exif metadata is used to correct the image
     #   orientation. Images in .png format don't contain Exif metadata.
     #
-    #    </note>
+    #   Amazon Rekognition doesn’t perform image correction for images in
+    #   .png format and .jpeg images without orientation information in the
+    #   image Exif metadata. The bounding box coordinates aren't translated
+    #   and represent the object locations before the image is rotated.
     #   @return [String]
     #
     class CompareFacesResponse < Struct.new(
@@ -737,21 +735,20 @@ module Aws::Rekognition
     #   @return [Array<Types::FaceDetail>]
     #
     # @!attribute [rw] orientation_correction
-    #   The orientation of the input image (counter-clockwise direction). If
-    #   your application displays the image, you can use this value to
-    #   correct image orientation. The bounding box coordinates returned in
-    #   `FaceDetails` represent face locations before the image orientation
-    #   is corrected.
+    #   The value of `OrientationCorrection` is always null.
     #
-    #   <note markdown="1"> If the input image is in .jpeg format, it might contain exchangeable
-    #   image (Exif) metadata that includes the image's orientation. If so,
-    #   and the Exif metadata for the input image populates the orientation
-    #   field, the value of `OrientationCorrection` is null. The
-    #   `FaceDetails` bounding box coordinates represent face locations
-    #   after Exif metadata is used to correct the image orientation. Images
-    #   in .png format don't contain Exif metadata.
+    #   If the input image is in .jpeg format, it might contain exchangeable
+    #   image file format (Exif) metadata that includes the image's
+    #   orientation. Amazon Rekognition uses this orientation information to
+    #   perform image correction. The bounding box coordinates are
+    #   translated to represent object locations after the orientation
+    #   information in the Exif metadata is used to correct the image
+    #   orientation. Images in .png format don't contain Exif metadata.
     #
-    #    </note>
+    #   Amazon Rekognition doesn’t perform image correction for images in
+    #   .png format and .jpeg images without orientation information in the
+    #   image Exif metadata. The bounding box coordinates aren't translated
+    #   and represent the object locations before the image is rotated.
     #   @return [String]
     #
     class DetectFacesResponse < Struct.new(
@@ -812,16 +809,16 @@ module Aws::Rekognition
     #   The value of `OrientationCorrection` is always null.
     #
     #   If the input image is in .jpeg format, it might contain exchangeable
-    #   image (Exif) metadata that includes the image's orientation. Amazon
-    #   Rekognition uses this orientation information to perform image
-    #   correction - the bounding box coordinates are translated to
-    #   represent object locations after the orientation information in the
-    #   Exif metadata is used to correct the image orientation. Images in
-    #   .png format don't contain Exif metadata.
+    #   image file format (Exif) metadata that includes the image's
+    #   orientation. Amazon Rekognition uses this orientation information to
+    #   perform image correction. The bounding box coordinates are
+    #   translated to represent object locations after the orientation
+    #   information in the Exif metadata is used to correct the image
+    #   orientation. Images in .png format don't contain Exif metadata.
     #
     #   Amazon Rekognition doesn’t perform image correction for images in
     #   .png format and .jpeg images without orientation information in the
-    #   image Exif metadata. The bounding box coordinates are not translated
+    #   image Exif metadata. The bounding box coordinates aren't translated
     #   and represent the object locations before the image is rotated.
     #   @return [String]
     #
@@ -1919,20 +1916,31 @@ module Aws::Rekognition
     #   @return [Array<Types::FaceRecord>]
     #
     # @!attribute [rw] orientation_correction
-    #   The orientation of the input image (counterclockwise direction). If
-    #   your application displays the image, you can use this value to
-    #   correct image orientation. The bounding box coordinates returned in
-    #   `FaceRecords` represent face locations before the image orientation
-    #   is corrected.
+    #   If your collection is associated with a face detection model that's
+    #   later than version 3.0, the value of `OrientationCorrection` is
+    #   always null and no orientation information is returned.
     #
-    #   <note markdown="1"> If the input image is in jpeg format, it might contain exchangeable
-    #   image (Exif) metadata. If so, and the Exif metadata populates the
-    #   orientation field, the value of `OrientationCorrection` is null. The
-    #   bounding box coordinates in `FaceRecords` represent face locations
-    #   after Exif metadata is used to correct the image orientation. Images
-    #   in .png format don't contain Exif metadata.
+    #   If your collection is associated with a face detection model that's
+    #   version 3.0 or earlier, the following applies:
     #
-    #    </note>
+    #   * If the input image is in .jpeg format, it might contain
+    #     exchangeable image file format (Exif) metadata that includes the
+    #     image's orientation. Amazon Rekognition uses this orientation
+    #     information to perform image correction - the bounding box
+    #     coordinates are translated to represent object locations after the
+    #     orientation information in the Exif metadata is used to correct
+    #     the image orientation. Images in .png format don't contain Exif
+    #     metadata. The value of `OrientationCorrection` is null.
+    #
+    #   * If the image doesn't contain orientation information in its Exif
+    #     metadata, Amazon Rekognition returns an estimated orientation
+    #     (ROTATE\_0, ROTATE\_90, ROTATE\_180, ROTATE\_270). Amazon
+    #     Rekognition doesn’t perform image correction for images. The
+    #     bounding box coordinates aren't translated and represent the
+    #     object locations before the image is rotated.
+    #
+    #   Bounding box information is returned in the `FaceRecords` array. You
+    #   can get the version of the face detection model by calling .
     #   @return [String]
     #
     # @!attribute [rw] face_model_version
