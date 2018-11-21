@@ -54,6 +54,10 @@ module Aws
           location_name = meta.delete('locationName')
           location_name ||= options[:member_name] unless location == 'headers'
           documentation = @docs.shape_ref_docs(shape.name, options[:target])
+          if meta['hostLabel']
+            # used for endpoint pattern
+            meta['hostLabelName'] = options[:member_name]
+          end
 
           ShapeRef.new(
             shape: shape,

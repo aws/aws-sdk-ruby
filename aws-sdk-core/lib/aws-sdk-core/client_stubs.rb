@@ -18,6 +18,19 @@ module Aws
         end
         @config.stub_responses = true
       end
+
+      # When a client is stubbed allow the user to access the requests made
+      @api_requests = []
+
+      requests = @api_requests
+      self.handle do |context|
+        requests << {
+          operation_name: context.operation_name,
+          params: context.params,
+          context: context
+        }
+        @handler.call(context)
+      end
     end
 
     # Configures what data / errors should be returned from the named operation
@@ -164,6 +177,27 @@ module Aws
         msg = 'stubbing is not enabled; enable stubbing in the constructor '
         msg << 'with `:stub_responses => true`'
         raise msg
+      end
+    end
+
+    # Allows you to access all of the requests that the stubbed client has made
+    #
+    # @params [Boolean] exclude_presign Setting to true for filtering out not sent requests from
+    #                 generating presigned urls. Default to false.
+    # @return [Array] Returns an array of the api requests made, each request object contains the
+    #                 :operation_name, :params, and :context of the request. 
+    # @raise [NotImplementedError] Raises `NotImplementedError` when the client is not stubbed
+    def api_requests(options = {})
+      if config.stub_responses
+        if options[:exclude_presign]
+          @api_requests.reject {|req| req[:context][:presigned_url] }
+        else
+          @api_requests
+        end
+      else
+        msg = 'This method is only implemented for stubbed clients, and is '
+        msg << 'available when you enable stubbing in the constructor with `stub_responses: true`'
+        raise NotImplementedError.new(msg)
       end
     end
 

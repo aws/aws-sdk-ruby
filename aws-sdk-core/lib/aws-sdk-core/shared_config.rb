@@ -128,6 +128,13 @@ module Aws
       end
     end
 
+    def endpoint_discovery(opts = {})
+      p = opts[:profile] || @profile_name
+      if @config_enabled && @parsed_config
+        @parsed_config.fetch(p, {})["endpoint_discovery_enabled"]
+      end
+    end
+
     private
     def credentials_present?
       (@parsed_credentials && !@parsed_credentials.empty?) ||

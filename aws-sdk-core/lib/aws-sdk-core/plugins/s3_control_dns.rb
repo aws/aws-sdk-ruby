@@ -7,7 +7,9 @@ module Aws
 
       class Handler < Seahorse::Client::Handler
         def call(context)
-          move_account_id_to_subdomain(context)
+          if context.operation.endpoint_pattern.nil?
+            move_account_id_to_subdomain(context)
+          end
           @handler.call(context)
         end
 

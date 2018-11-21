@@ -47,7 +47,13 @@ def client_for(suite, test_case)
     when 'rest-xml'  then Aws::Plugins::Protocols::RestXml
     end
   )
-  client_class.new(endpoint:'http://example.com')
+  client_class.add_plugin(Aws::Plugins::RegionalEndpoint)
+  client_class.add_plugin(Aws::Plugins::EndpointPattern)
+  client_class.new(
+    region: 'us-east-1',
+    regional_endpoint: true,
+    endpoint: suite['clientEndpoint'] ? suite['clientEndpoint'] : 'http://example.com'
+  )
 end
 
 def underscore(str)
@@ -77,6 +83,12 @@ end
 def normalize_headers(hash)
   hash.each.with_object({}) do |(k,v),headers|
     headers[k.downcase] = v.to_s
+  end
+end
+
+def match_req_host(group, test_case, http_req, it)
+  if expected_host = test_case['serialized']['host']
+    it.expect(http_req.endpoint.host).to eq(expected_host)
   end
 end
 
@@ -149,6 +161,7 @@ fixtures.each do |directory, files|
           request_params = format_data(input_shape, test_case['params'] || {})
           client.operation_name(request_params)
 
+          match_req_host(group, test_case, ctx.http_request, self)
           match_req_method(group, test_case, ctx.http_request, self)
           match_req_uri(group, test_case, ctx.http_request, self)
           match_req_headers(group, test_case, ctx.http_request, self)

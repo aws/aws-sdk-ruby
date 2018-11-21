@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support endpoint discovery and endpoint traits
+
 2.11.175 (2018-11-20)
 ------------------
 

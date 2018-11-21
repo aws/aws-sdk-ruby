@@ -12,6 +12,7 @@ module Aws
         )
         cfg = Seahorse::Client::Configuration.new
         cfg.add_option(:endpoint, 'http://svc-name.us-west-2.amazonaws.com')
+        cfg.add_option(:regional_endpoint, false)
         cfg.add_option(:api, api)
         cfg.add_option(:region) { 'region-name' }
         cfg.add_option(:region_defaults) {{}}
@@ -75,6 +76,7 @@ module Aws
             api = Api::Builder.build({})
             cfg = Seahorse::Client::Configuration.new
             cfg.add_option(:endpoint, 'http://uniqueness.svc-name.us-west-2.amazonaws.com')
+            cfg.add_option(:regional_endpoint, false)
             cfg.add_option(:api, api)
             cfg.add_option(:region) { 'us-west-2' }
             cfg.add_option(:region_defaults) {{}}

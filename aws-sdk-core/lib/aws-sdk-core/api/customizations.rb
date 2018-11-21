@@ -94,7 +94,9 @@ module Aws
       plugins('Amazon CloudSearch Domain',
         add: %w(Aws::Plugins::CSDConditionalSigning
           Aws::Plugins::CSDSwitchToPost),
-        remove: %w(Aws::Plugins::RegionalEndpoint),
+        remove: %w(Aws::Plugins::RegionalEndpoint
+          Aws::Plugins::EndpointPattern
+          Aws::Plugins::EndpointDiscovery),
       )
 
       plugins('Amazon DynamoDB', add: %w(

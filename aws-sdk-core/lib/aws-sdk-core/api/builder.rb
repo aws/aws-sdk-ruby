@@ -58,7 +58,18 @@ module Aws
         api = Seahorse::Model::Api.new
         api.metadata = definition['metadata'] || {}
         api.version = api.metadata['apiVersion']
+        if op = has_endpoint_operation?(definition['operations'])
+          api.endpoint_operation = op
+        end
         api
+      end
+
+      def has_endpoint_operation?(ops)
+        return nil if ops.nil?
+        ops.each do |name, op|
+          return underscore(name) if op['endpointoperation']
+        end
+        nil
       end
 
       def build_shape_map(definition, api, docs)
@@ -76,16 +87,28 @@ module Aws
       def build_operation(name, definition, shapes, docs)
         http = definition['http'] || {}
         op = Seahorse::Model::Operation.new
-        op.name = name
+        op.name = definition['name'] || name
         op.http_method = http['method']
         op.http_request_uri = http['requestUri'] || '/'
         op.documentation = docs.operation_docs(name)
         op.deprecated = !!definition['deprecated']
+        op.endpoint_operation = !!definition['endpointoperation']
         op.input = shapes.shape_ref(definition['input'])
         op.output = shapes.shape_ref(definition['output'])
         op['authtype'] = definition['authtype'] unless definition['authtype'].nil?
         (definition['errors'] || []).each do |error|
           op.errors << shapes.shape_ref(error)
+        end
+        if definition['endpointdiscovery']
+          op.endpoint_discovery = {}
+          definition['endpointdiscovery'].each do |k, v|
+            op.endpoint_discovery[k] = v
+          end
+        elsif definition['endpoint']
+          op.endpoint_pattern = {}
+          definition['endpoint'].each do |k, v|
+            op.endpoint_pattern[k] = v
+          end
         end
         op
       end

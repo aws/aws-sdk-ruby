@@ -197,7 +197,13 @@ module Seahorse
 
         def value_at(opt_name)
           value = @struct[opt_name]
-          value.is_a?(Defaults) ? resolve_defaults(opt_name, value) : value
+          if value.is_a?(Defaults)
+            # this config value is used by endpoint discovery etc
+            @struct[:regional_endpoint] = true if opt_name == :endpoint
+            resolve_defaults(opt_name, value)
+          else
+            value
+          end
         end
 
         def resolve_defaults(opt_name, defaults)

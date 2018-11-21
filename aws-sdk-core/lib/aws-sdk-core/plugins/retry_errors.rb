@@ -71,6 +71,25 @@ module Aws
           (500..599).include?(@http_status_code)
         end
 
+        def endpoint_discovery?(context)
+          return false unless context.operation.endpoint_discovery
+
+          if @http_status_code == 421 ||
+            extract_name(@error) == 'InvalidEndpointException'
+            @error = Errors::EndpointDiscoveryError.new
+          end
+
+          # When endpoint discovery error occurs
+          # evict the endpoint from cache
+          if @error.is_a?(Errors::EndpointDiscoveryError)
+            key = context.config.endpoint_cache.extract_key(context)
+            context.config.endpoint_cache.delete(key)
+            true
+          else
+            false
+          end
+        end
+
         private
 
         def extract_name(error)
@@ -135,7 +154,8 @@ module Aws
           error.throttling_error? or
           error.checksum? or
           error.networking? or
-          error.server?
+          error.server? or
+          error.endpoint_discovery?(context)
         end
 
         def refreshable_credentials?(context)
