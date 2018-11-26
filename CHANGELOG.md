@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3 - Updated the API, and documentation for Amazon Simple Storage Service.
+
+* Feature - Aws::Snowball - Updated the API, and documentation for Amazon Import/Export Snowball.
+
+* Feature - Aws::Amplify - Added support for a new service, AWS Amplify.
+
+* Feature - Aws::DataSync - Added support for a new service, AWS DataSync.
+
+* Feature - Aws::RoboMaker - Added support for a new service, AWS RoboMaker.
+
+* Feature - Aws::Transfer - Added support for a new service, AWS Transfer for SFTP.
+
 2.11.176 (2018-11-21)
 ------------------
 

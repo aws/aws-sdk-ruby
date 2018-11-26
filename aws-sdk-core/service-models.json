@@ -15,6 +15,10 @@
     "models": "alexaforbusiness/2017-11-09",
     "endpoint": "a4b"
   },
+  "Amplify": {
+    "models": "amplify/2017-07-25",
+    "endpoint": "amplify"
+  },
   "AppStream": {
     "models": "appstream/2016-12-01",
     "endpoint": "appstream2"
@@ -165,6 +169,10 @@
   "DataPipeline": {
     "models": "datapipeline/2012-10-29",
     "endpoint": "datapipeline"
+  },
+  "DataSync": {
+    "models": "datasync/2018-11-09",
+    "endpoint": "datasync"
   },
   "DatabaseMigrationService": {
     "models": "dms/2016-01-01",
@@ -482,6 +490,10 @@
     "models": "resourcegroupstaggingapi/2017-01-26",
     "endpoint": "tagging"
   },
+  "RoboMaker": {
+    "models": "robomaker/2018-06-29",
+    "endpoint": "robomaker"
+  },
   "Route53": {
     "models": "route53/2013-04-01",
     "endpoint": "route53"
@@ -585,6 +597,10 @@
   "TranscribeService": {
     "models": "transcribe/2017-10-26",
     "endpoint": "transcribe"
+  },
+  "Transfer": {
+    "models": "transfer/2018-11-05",
+    "endpoint": "transfer"
   },
   "Translate": {
     "models": "translate/2017-07-01",

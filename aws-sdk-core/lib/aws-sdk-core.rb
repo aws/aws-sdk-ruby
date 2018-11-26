@@ -27,6 +27,7 @@ module Aws
     ACMPCA
     APIGateway
     AlexaForBusiness
+    Amplify
     AppStream
     AppSync
     ApplicationAutoScaling
@@ -65,6 +66,7 @@ module Aws
     DAX
     DLM
     DataPipeline
+    DataSync
     DatabaseMigrationService
     DeviceFarm
     DirectConnect
@@ -144,6 +146,7 @@ module Aws
     Rekognition
     ResourceGroups
     ResourceGroupsTaggingAPI
+    RoboMaker
     Route53
     Route53Domains
     Route53Resolver
@@ -170,6 +173,7 @@ module Aws
     StorageGateway
     Support
     TranscribeService
+    Transfer
     Translate
     WAF
     WAFRegional

@@ -256,6 +256,7 @@ to be backwards compatible.
 
 | Service Name                                          | Service Class                   | API Version |
 | ----------------------------------------------------- | ------------------------------- | ----------- |
+| AWS Amplify                                           | Amplify                         | 2017-07-25  |
 | AWS AppSync                                           | AppSync                         | 2017-07-25  |
 | AWS Application Discovery Service                     | ApplicationDiscoveryService     | 2015-11-01  |
 | AWS Auto Scaling Plans                                | AutoScalingPlans                | 2018-01-06  |
@@ -276,6 +277,7 @@ to be backwards compatible.
 | AWS Cost Explorer Service                             | CostExplorer                    | 2017-10-25  |
 | AWS Cost and Usage Report Service                     | CostandUsageReportService       | 2017-01-06  |
 | AWS Data Pipeline                                     | DataPipeline                    | 2012-10-29  |
+| AWS DataSync                                          | DataSync                        | 2018-11-09  |
 | AWS Database Migration Service                        | DatabaseMigrationService        | 2016-01-01  |
 | AWS Device Farm                                       | DeviceFarm                      | 2015-06-23  |
 | AWS Direct Connect                                    | DirectConnect                   | 2012-10-25  |
@@ -314,6 +316,7 @@ to be backwards compatible.
 | AWS Resource Access Manager                           | RAM                             | 2018-01-04  |
 | AWS Resource Groups                                   | ResourceGroups                  | 2017-11-27  |
 | AWS Resource Groups Tagging API                       | ResourceGroupsTaggingAPI        | 2017-01-26  |
+| AWS RoboMaker                                         | RoboMaker                       | 2018-06-29  |
 | AWS S3 Control                                        | S3Control                       | 2018-08-20  |
 | AWS Secrets Manager                                   | SecretsManager                  | 2017-10-17  |
 | AWS Security Token Service                            | STS                             | 2011-06-15  |
@@ -324,6 +327,7 @@ to be backwards compatible.
 | AWS Step Functions                                    | States                          | 2016-11-23  |
 | AWS Storage Gateway                                   | StorageGateway                  | 2013-06-30  |
 | AWS Support                                           | Support                         | 2013-04-15  |
+| AWS Transfer for SFTP                                 | Transfer                        | 2018-11-05  |
 | AWS WAF                                               | WAF                             | 2015-08-24  |
 | AWS WAF Regional                                      | WAFRegional                     | 2016-11-28  |
 | AWS X-Ray                                             | XRay                            | 2016-04-12  |
