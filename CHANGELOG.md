@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.177 (2018-11-26)
+------------------
+
 * Feature - Aws::S3 - Updated the API, and documentation for Amazon Simple Storage Service.
 
 * Feature - Aws::Snowball - Updated the API, and documentation for Amazon Import/Export Snowball.
