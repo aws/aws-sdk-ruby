@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+3.30.0 (2018-11-26)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-transfer` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-robomaker` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-datasync` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-amplify` gem.
+
 3.29.0 (2018-11-20)
 ------------------
 

@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2018-11-26)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Transfer`.
+
+* Feature - Added support for enumerating regions for `Aws::RoboMaker`.
+
+* Feature - Added support for enumerating regions for `Aws::DataSync`.
+
+* Feature - Added support for enumerating regions for `Aws::Amplify`.
+
 1.115.0 (2018-11-20)
 ------------------
 

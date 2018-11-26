@@ -301,6 +301,7 @@ to be backwards compatible.
 
 | Service Name                                          | Service Module                       | gem_name                                | API Version |
 | ----------------------------------------------------- | ------------------------------------ | --------------------------------------- | ----------- |
+| AWS Amplify                                           | Aws::Amplify                         | aws-sdk-amplify                         | 2017-07-25  |
 | AWS AppSync                                           | Aws::AppSync                         | aws-sdk-appsync                         | 2017-07-25  |
 | AWS Application Discovery Service                     | Aws::ApplicationDiscoveryService     | aws-sdk-applicationdiscoveryservice     | 2015-11-01  |
 | AWS Auto Scaling Plans                                | Aws::AutoScalingPlans                | aws-sdk-autoscalingplans                | 2018-01-06  |
@@ -321,6 +322,7 @@ to be backwards compatible.
 | AWS Cost Explorer Service                             | Aws::CostExplorer                    | aws-sdk-costexplorer                    | 2017-10-25  |
 | AWS Cost and Usage Report Service                     | Aws::CostandUsageReportService       | aws-sdk-costandusagereportservice       | 2017-01-06  |
 | AWS Data Pipeline                                     | Aws::DataPipeline                    | aws-sdk-datapipeline                    | 2012-10-29  |
+| AWS DataSync                                          | Aws::DataSync                        | aws-sdk-datasync                        | 2018-11-09  |
 | AWS Database Migration Service                        | Aws::DatabaseMigrationService        | aws-sdk-databasemigrationservice        | 2016-01-01  |
 | AWS Device Farm                                       | Aws::DeviceFarm                      | aws-sdk-devicefarm                      | 2015-06-23  |
 | AWS Direct Connect                                    | Aws::DirectConnect                   | aws-sdk-directconnect                   | 2012-10-25  |
@@ -359,6 +361,7 @@ to be backwards compatible.
 | AWS Resource Access Manager                           | Aws::RAM                             | aws-sdk-ram                             | 2018-01-04  |
 | AWS Resource Groups                                   | Aws::ResourceGroups                  | aws-sdk-resourcegroups                  | 2017-11-27  |
 | AWS Resource Groups Tagging API                       | Aws::ResourceGroupsTaggingAPI        | aws-sdk-resourcegroupstaggingapi        | 2017-01-26  |
+| AWS RoboMaker                                         | Aws::RoboMaker                       | aws-sdk-robomaker                       | 2018-06-29  |
 | AWS S3 Control                                        | Aws::S3Control                       | aws-sdk-s3control                       | 2018-08-20  |
 | AWS Secrets Manager                                   | Aws::SecretsManager                  | aws-sdk-secretsmanager                  | 2017-10-17  |
 | AWS Security Token Service                            | Aws::STS                             | aws-sdk-core                            | 2011-06-15  |
@@ -369,6 +372,7 @@ to be backwards compatible.
 | AWS Step Functions                                    | Aws::States                          | aws-sdk-states                          | 2016-11-23  |
 | AWS Storage Gateway                                   | Aws::StorageGateway                  | aws-sdk-storagegateway                  | 2013-06-30  |
 | AWS Support                                           | Aws::Support                         | aws-sdk-support                         | 2013-04-15  |
+| AWS Transfer for SFTP                                 | Aws::Transfer                        | aws-sdk-transfer                        | 2018-11-05  |
 | AWS WAF                                               | Aws::WAF                             | aws-sdk-waf                             | 2015-08-24  |
 | AWS WAF Regional                                      | Aws::WAFRegional                     | aws-sdk-wafregional                     | 2016-11-28  |
 | AWS X-Ray                                             | Aws::XRay                            | aws-sdk-xray                            | 2016-04-12  |

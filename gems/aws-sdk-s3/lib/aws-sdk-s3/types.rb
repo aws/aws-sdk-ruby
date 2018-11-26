@@ -401,13 +401,13 @@ module Aws::S3
     #               {
     #                 date: Time.now,
     #                 days: 1,
-    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
+    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
     #               },
     #             ],
     #             noncurrent_version_transitions: [
     #               {
     #                 noncurrent_days: 1,
-    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
+    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
     #               },
     #             ],
     #             noncurrent_version_expiration: {
@@ -972,7 +972,7 @@ module Aws::S3
     #         metadata_directive: "COPY", # accepts COPY, REPLACE
     #         tagging_directive: "COPY", # accepts COPY, REPLACE
     #         server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
+    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
     #         website_redirect_location: "WebsiteRedirectLocation",
     #         sse_customer_algorithm: "SSECustomerAlgorithm",
     #         sse_customer_key: "SSECustomerKey",
@@ -1397,7 +1397,7 @@ module Aws::S3
     #           "MetadataKey" => "MetadataValue",
     #         },
     #         server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
+    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
     #         website_redirect_location: "WebsiteRedirectLocation",
     #         sse_customer_algorithm: "SSECustomerAlgorithm",
     #         sse_customer_key: "SSECustomerKey",
@@ -2038,7 +2038,7 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
-    #   The Amazon S3 bucket whose Public Access Block configuration you
+    #   The Amazon S3 bucket whose `PublicAccessBlock` configuration you
     #   want to delete.
     #   @return [String]
     #
@@ -2079,7 +2079,7 @@ module Aws::S3
     #       {
     #         bucket: "BucketName", # required
     #         account: "AccountId",
-    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
+    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
     #         access_control_translation: {
     #           owner: "Destination", # required, accepts Destination
     #         },
@@ -2666,7 +2666,7 @@ module Aws::S3
     end
 
     # @!attribute [rw] policy_status
-    #   The public-policy status for this bucket.
+    #   The policy status for the specified bucket.
     #   @return [Types::PolicyStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketPolicyStatusOutput AWS API Documentation
@@ -2684,8 +2684,8 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
-    #   The name of the Amazon S3 bucket whose public-policy status you want
-    #   to retrieve.
+    #   The name of the Amazon S3 bucket whose policy status you want to
+    #   retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketPolicyStatusRequest AWS API Documentation
@@ -3318,7 +3318,7 @@ module Aws::S3
     end
 
     # @!attribute [rw] public_access_block_configuration
-    #   The Public Access Block configuration currently in effect for this
+    #   The `PublicAccessBlock` configuration currently in effect for this
     #   Amazon S3 bucket.
     #   @return [Types::PublicAccessBlockConfiguration]
     #
@@ -3337,7 +3337,7 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
-    #   The name of the Amazon S3 bucket whose Public Access Block
+    #   The name of the Amazon S3 bucket whose `PublicAccessBlock`
     #   configuration you want to retrieve.
     #   @return [String]
     #
@@ -4139,11 +4139,11 @@ module Aws::S3
     #             transition: {
     #               date: Time.now,
     #               days: 1,
-    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
+    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
     #             },
     #             noncurrent_version_transition: {
     #               noncurrent_days: 1,
-    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
+    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
     #             },
     #             noncurrent_version_expiration: {
     #               noncurrent_days: 1,
@@ -4232,13 +4232,13 @@ module Aws::S3
     #           {
     #             date: Time.now,
     #             days: 1,
-    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
+    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
     #           },
     #         ],
     #         noncurrent_version_transitions: [
     #           {
     #             noncurrent_days: 1,
-    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
+    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
     #           },
     #         ],
     #         noncurrent_version_expiration: {
@@ -5513,19 +5513,19 @@ module Aws::S3
     end
 
     # Container for the transition rule that describes when noncurrent
-    # objects transition to the STANDARD\_IA, ONEZONE\_IA, or GLACIER
-    # storage class. If your bucket is versioning-enabled (or versioning is
-    # suspended), you can set this action to request that Amazon S3
-    # transition noncurrent object versions to the STANDARD\_IA,
-    # ONEZONE\_IA, or GLACIER storage class at a specific period in the
-    # object's lifetime.
+    # objects transition to the STANDARD\_IA, ONEZONE\_IA,
+    # INTELLIGENT\_TIERING or GLACIER storage class. If your bucket is
+    # versioning-enabled (or versioning is suspended), you can set this
+    # action to request that Amazon S3 transition noncurrent object versions
+    # to the STANDARD\_IA, ONEZONE\_IA, INTELLIGENT\_TIERING or GLACIER
+    # storage class at a specific period in the object's lifetime.
     #
     # @note When making an API call, you may pass NoncurrentVersionTransition
     #   data as a hash:
     #
     #       {
     #         noncurrent_days: 1,
-    #         storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
+    #         storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
     #       }
     #
     # @!attribute [rw] noncurrent_days
@@ -5848,7 +5848,7 @@ module Aws::S3
     #               value: "MetadataValue",
     #             },
     #           ],
-    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
+    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
     #         },
     #       }
     #
@@ -5953,11 +5953,11 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # The container element for this bucket's public-policy status.
+    # The container element for a bucket's policy status.
     #
     # @!attribute [rw] is_public
-    #   The public-policy status for this bucket. `TRUE` indicates that this
-    #   bucket is public. `FALSE` indicates that the bucket is not public.
+    #   The policy status for this bucket. `TRUE` indicates that this bucket
+    #   is public. `FALSE` indicates that the bucket is not public.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PolicyStatus AWS API Documentation
@@ -6000,51 +6000,6 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # The container element for all Public Access Block configuration
-    # options. You can enable the configuration options in any combination.
-    #
-    # Amazon S3 considers a bucket policy public unless at least one of the
-    # following conditions is true:
-    #
-    # 1.  The policy limits access to a set of CIDRs using `aws:SourceIp`.
-    #     For more information on CIDR, see
-    #     [http://www.rfc-editor.org/rfc/rfc4632.txt][1]
-    #
-    # 2.  The policy grants permissions, not including any "bad actions,"
-    #     to one of the following:
-    #
-    #     * A fixed AWS principal, user, role, or service principal
-    #
-    #     * A fixed `aws:SourceArn`
-    #
-    #     * A fixed `aws:SourceVpc`
-    #
-    #     * A fixed `aws:SourceVpce`
-    #
-    #     * A fixed `aws:SourceOwner`
-    #
-    #     * A fixed `aws:SourceAccount`
-    #
-    #     * A fixed value of
-    #       `s3:x-amz-server-side-encryption-aws-kms-key-id`
-    #
-    #     * A fixed value of `aws:userid` outside the pattern
-    #       "`AROLEID:*`"
-    #
-    # "Bad actions" are those that could expose the data inside a bucket
-    # to reads or writes by the public. These actions are `s3:Get*`,
-    # `s3:List*`, `s3:AbortMultipartUpload`, `s3:Delete*`, `s3:Put*`, and
-    # `s3:RestoreObject`.
-    #
-    # The star notation for bad actions indicates that all matching
-    # operations are considered bad actions. For example, because `s3:Get*`
-    # is a bad action, `s3:GetObject`, `s3:GetObjectVersion`, and
-    # `s3:GetObjectAcl` are all bad actions.
-    #
-    #
-    #
-    # [1]: http://www.rfc-editor.org/rfc/rfc4632.txt
-    #
     # @note When making an API call, you may pass PublicAccessBlockConfiguration
     #   data as a hash:
     #
@@ -6056,27 +6011,26 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] block_public_acls
-    #   Specifies whether Amazon S3 should block public ACLs for this
-    #   bucket. Setting this element to `TRUE` causes the following
-    #   behavior:
+    #   Specifies whether Amazon S3 should block public access control lists
+    #   (ACLs) for this bucket and objects in this bucket. Setting this
+    #   element to `TRUE` causes the following behavior:
     #
-    #   * PUT Bucket acl and PUT Object acl calls will fail if the specified
-    #     ACL allows public access.
+    #   * PUT Bucket acl and PUT Object acl calls fail if the specified ACL
+    #     is public.
     #
-    #   * PUT Object calls will fail if the request includes an object ACL.
+    #   * PUT Object calls fail if the request includes a public ACL.
     #
-    #   Note that enabling this setting doesn't affect existing policies or
-    #   ACLs.
+    #   Enabling this setting doesn't affect existing policies or ACLs.
     #   @return [Boolean]
     #
     # @!attribute [rw] ignore_public_acls
     #   Specifies whether Amazon S3 should ignore public ACLs for this
-    #   bucket. Setting this element to `TRUE` causes Amazon S3 to ignore
-    #   all public ACLs on this bucket and any objects that it contains.
+    #   bucket and objects in this bucket. Setting this element to `TRUE`
+    #   causes Amazon S3 to ignore all public ACLs on this bucket and
+    #   objects in this bucket.
     #
-    #   Note that enabling this setting doesn't affect the persistence of
-    #   any existing ACLs and doesn't prevent new public ACLs from being
-    #   set.
+    #   Enabling this setting doesn't affect the persistence of any
+    #   existing ACLs and doesn't prevent new public ACLs from being set.
     #   @return [Boolean]
     #
     # @!attribute [rw] block_public_policy
@@ -6085,20 +6039,19 @@ module Aws::S3
     #   reject calls to PUT Bucket policy if the specified bucket policy
     #   allows public access.
     #
-    #   Note that enabling this setting doesn't affect existing bucket
-    #   policies.
+    #   Enabling this setting doesn't affect existing bucket policies.
     #   @return [Boolean]
     #
     # @!attribute [rw] restrict_public_buckets
     #   Specifies whether Amazon S3 should restrict public bucket policies
-    #   for this bucket. If this element is set to `TRUE`, then only the
-    #   bucket owner and AWS Services can access this bucket if it has a
-    #   public policy.
+    #   for this bucket. Setting this element to `TRUE` restricts access to
+    #   this bucket to only AWS services and authorized users within this
+    #   account if the bucket has a public policy.
     #
-    #   Note that enabling this setting doesn't affect previously stored
-    #   bucket policies, except that public and cross-account access within
-    #   any public bucket policy, including non-public delegation to
-    #   specific accounts, is blocked.
+    #   Enabling this setting doesn't affect previously stored bucket
+    #   policies, except that public and cross-account access within any
+    #   public bucket policy, including non-public delegation to specific
+    #   accounts, is blocked.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PublicAccessBlockConfiguration AWS API Documentation
@@ -6454,13 +6407,13 @@ module Aws::S3
     #                 {
     #                   date: Time.now,
     #                   days: 1,
-    #                   storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
+    #                   storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
     #                 },
     #               ],
     #               noncurrent_version_transitions: [
     #                 {
     #                   noncurrent_days: 1,
-    #                   storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
+    #                   storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
     #                 },
     #               ],
     #               noncurrent_version_expiration: {
@@ -6508,11 +6461,11 @@ module Aws::S3
     #               transition: {
     #                 date: Time.now,
     #                 days: 1,
-    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
+    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
     #               },
     #               noncurrent_version_transition: {
     #                 noncurrent_days: 1,
-    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
+    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
     #               },
     #               noncurrent_version_expiration: {
     #                 noncurrent_days: 1,
@@ -6832,7 +6785,7 @@ module Aws::S3
     #               destination: { # required
     #                 bucket: "BucketName", # required
     #                 account: "AccountId",
-    #                 storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
+    #                 storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
     #                 access_control_translation: {
     #                   owner: "Destination", # required, accepts Destination
     #                 },
@@ -7217,7 +7170,7 @@ module Aws::S3
     #           "MetadataKey" => "MetadataValue",
     #         },
     #         server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
+    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
     #         website_redirect_location: "WebsiteRedirectLocation",
     #         sse_customer_algorithm: "SSECustomerAlgorithm",
     #         sse_customer_key: "SSECustomerKey",
@@ -7456,17 +7409,25 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
-    #   The name of the Amazon S3 bucket whose Public Access Block
+    #   The name of the Amazon S3 bucket whose `PublicAccessBlock`
     #   configuration you want to set.
     #   @return [String]
     #
     # @!attribute [rw] content_md5
-    #   The MD5 hash of the `PutPublicBlock` request body.
+    #   The MD5 hash of the `PutPublicAccessBlock` request body.
     #   @return [String]
     #
     # @!attribute [rw] public_access_block_configuration
-    #   The Public Access Block configuration that you want to apply to this
-    #   Amazon S3 bucket.
+    #   The `PublicAccessBlock` configuration that you want to apply to this
+    #   Amazon S3 bucket. You can enable the configuration options in any
+    #   combination. For more information about when &amp;S3; considers a
+    #   bucket or object public, see For more information about when Amazon
+    #   S3 considers a bucket or object public, see [The Meaning of
+    #   "Public"][1] in the Amazon Simple Storage Service Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
     #   @return [Types::PublicAccessBlockConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutPublicAccessBlockRequest AWS API Documentation
@@ -7700,7 +7661,7 @@ module Aws::S3
     #             destination: { # required
     #               bucket: "BucketName", # required
     #               account: "AccountId",
-    #               storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
+    #               storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
     #               access_control_translation: {
     #                 owner: "Destination", # required, accepts Destination
     #               },
@@ -7769,7 +7730,7 @@ module Aws::S3
     #         destination: { # required
     #           bucket: "BucketName", # required
     #           account: "AccountId",
-    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
+    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
     #           access_control_translation: {
     #             owner: "Destination", # required, accepts Destination
     #           },
@@ -8076,7 +8037,7 @@ module Aws::S3
     #                   value: "MetadataValue",
     #                 },
     #               ],
-    #               storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
+    #               storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
     #             },
     #           },
     #         },
@@ -8197,7 +8158,7 @@ module Aws::S3
     #                 value: "MetadataValue",
     #               },
     #             ],
-    #             storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
+    #             storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
     #           },
     #         },
     #       }
@@ -8299,11 +8260,11 @@ module Aws::S3
     #         transition: {
     #           date: Time.now,
     #           days: 1,
-    #           storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
+    #           storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
     #         },
     #         noncurrent_version_transition: {
     #           noncurrent_days: 1,
-    #           storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
+    #           storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
     #         },
     #         noncurrent_version_expiration: {
     #           noncurrent_days: 1,
@@ -8335,12 +8296,13 @@ module Aws::S3
     #
     # @!attribute [rw] noncurrent_version_transition
     #   Container for the transition rule that describes when noncurrent
-    #   objects transition to the STANDARD\_IA, ONEZONE\_IA, or GLACIER
-    #   storage class. If your bucket is versioning-enabled (or versioning
-    #   is suspended), you can set this action to request that Amazon S3
-    #   transition noncurrent object versions to the STANDARD\_IA,
-    #   ONEZONE\_IA, or GLACIER storage class at a specific period in the
-    #   object's lifetime.
+    #   objects transition to the STANDARD\_IA, ONEZONE\_IA,
+    #   INTELLIGENT\_TIERING or GLACIER storage class. If your bucket is
+    #   versioning-enabled (or versioning is suspended), you can set this
+    #   action to request that Amazon S3 transition noncurrent object
+    #   versions to the STANDARD\_IA, ONEZONE\_IA, INTELLIGENT\_TIERING or
+    #   GLACIER storage class at a specific period in the object's
+    #   lifetime.
     #   @return [Types::NoncurrentVersionTransition]
     #
     # @!attribute [rw] noncurrent_version_expiration
@@ -8439,7 +8401,7 @@ module Aws::S3
     #             value: "MetadataValue",
     #           },
     #         ],
-    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
+    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
     #       }
     #
     # @!attribute [rw] bucket_name
@@ -9129,7 +9091,7 @@ module Aws::S3
     #       {
     #         date: Time.now,
     #         days: 1,
-    #         storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
+    #         storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
     #       }
     #
     # @!attribute [rw] date

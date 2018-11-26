@@ -14,6 +14,9 @@
   "AlexaForBusiness": {
     "models": "alexaforbusiness/2017-11-09"
   },
+  "Amplify": {
+    "models": "amplify/2017-07-25"
+  },
   "AppStream": {
     "models": "appstream/2016-12-01"
   },
@@ -138,6 +141,9 @@
   },
   "DataPipeline": {
     "models": "datapipeline/2012-10-29"
+  },
+  "DataSync": {
+    "models": "datasync/2018-11-09"
   },
   "DatabaseMigrationService": {
     "models": "dms/2016-01-01"
@@ -403,6 +409,9 @@
   "ResourceGroupsTaggingAPI": {
     "models": "resourcegroupstaggingapi/2017-01-26"
   },
+  "RoboMaker": {
+    "models": "robomaker/2018-06-29"
+  },
   "Route53": {
     "models": "route53/2013-04-01",
     "addPlugins": [
@@ -526,6 +535,9 @@
   },
   "TranscribeService": {
     "models": "transcribe/2017-10-26"
+  },
+  "Transfer": {
+    "models": "transfer/2018-11-05"
   },
   "Translate": {
     "models": "translate/2017-07-01"
