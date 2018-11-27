@@ -1,6 +1,22 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::Greengrass - Updated the API, and documentation for AWS Greengrass.
+
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
+* Feature - Aws::IoTAnalytics - Updated the API, and documentation for AWS IoT Analytics.
+
+* Feature - Aws::KMS - Updated the API, and documentation for AWS Key Management Service.
+
+* Feature - Aws::S3 - Updated the API, and documentation for Amazon Simple Storage Service.
+
+* Feature - Aws::SMS - Updated the API, documentation, and integration test for AWS Server Migration Service.
+
+* Feature - Aws::GlobalAccelerator - Added support for a new service, AWS Global Accelerator.
+
 2.11.177 (2018-11-26)
 ------------------
 

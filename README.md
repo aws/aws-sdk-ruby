@@ -288,6 +288,7 @@ to be backwards compatible.
 | AWS Elemental MediaPackage                            | MediaPackage                    | 2017-10-12  |
 | AWS Elemental MediaStore                              | MediaStore                      | 2017-09-01  |
 | AWS Elemental MediaStore Data Plane                   | MediaStoreData                  | 2017-09-01  |
+| AWS Global Accelerator                                | GlobalAccelerator               | 2018-08-08  |
 | AWS Glue                                              | Glue                            | 2017-03-31  |
 | AWS Greengrass                                        | Greengrass                      | 2017-06-07  |
 | AWS Health APIs and Notifications                     | Health                          | 2016-08-04  |
@@ -300,8 +301,8 @@ to be backwards compatible.
 | AWS IoT Data Plane                                    | IoTDataPlane                    | 2015-05-28  |
 | AWS IoT Jobs Data Plane                               | IoTJobsDataPlane                | 2017-09-29  |
 | AWS Key Management Service                            | KMS                             | 2014-11-01  |
-| AWS Lambda                                            | Lambda                          | 2015-03-31  |
 | AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
+| AWS Lambda                                            | Lambda                          | 2015-03-31  |
 | AWS Marketplace Commerce Analytics                    | MarketplaceCommerceAnalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | MarketplaceEntitlementService   | 2017-01-11  |
 | AWS MediaTailor                                       | MediaTailor                     | 2018-04-23  |

@@ -262,6 +262,10 @@
     "models": "glacier/2012-06-01",
     "endpoint": "glacier"
   },
+  "GlobalAccelerator": {
+    "models": "globalaccelerator/2018-08-08",
+    "endpoint": "globalaccelerator"
+  },
   "Glue": {
     "models": "glue/2017-03-31",
     "endpoint": "glue"

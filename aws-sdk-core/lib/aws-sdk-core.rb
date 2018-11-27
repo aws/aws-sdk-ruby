@@ -89,6 +89,7 @@ module Aws
     Firehose
     GameLift
     Glacier
+    GlobalAccelerator
     Glue
     Greengrass
     GuardDuty
