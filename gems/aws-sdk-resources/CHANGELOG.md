@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.31.0 (2018-11-27)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-globalaccelerator` gem.
+
 3.30.0 (2018-11-26)
 ------------------
 

@@ -1525,6 +1525,8 @@ module Aws::EC2
     #
     #   * `route.nat-gateway-id` - The ID of a NAT gateway.
     #
+    #   * `route.transit-gateway-id` - The ID of a transit gateway.
+    #
     #   * `route.origin` - Describes how the route was created.
     #     `CreateRouteTable` indicates that the route was automatically
     #     created when the route table was created; `CreateRoute` indicates
@@ -1550,6 +1552,8 @@ module Aws::EC2
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
+    #
+    #   * `transit-gateway-id` - The ID of a transit gateway.
     #
     #   * `vpc-id` - The ID of the VPC for the route table.
     # @option options [Boolean] :dry_run

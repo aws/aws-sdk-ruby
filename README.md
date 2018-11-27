@@ -333,6 +333,7 @@ to be backwards compatible.
 | AWS Elemental MediaPackage                            | Aws::MediaPackage                    | aws-sdk-mediapackage                    | 2017-10-12  |
 | AWS Elemental MediaStore                              | Aws::MediaStore                      | aws-sdk-mediastore                      | 2017-09-01  |
 | AWS Elemental MediaStore Data Plane                   | Aws::MediaStoreData                  | aws-sdk-mediastoredata                  | 2017-09-01  |
+| AWS Global Accelerator                                | Aws::GlobalAccelerator               | aws-sdk-globalaccelerator               | 2018-08-08  |
 | AWS Glue                                              | Aws::Glue                            | aws-sdk-glue                            | 2017-03-31  |
 | AWS Greengrass                                        | Aws::Greengrass                      | aws-sdk-greengrass                      | 2017-06-07  |
 | AWS Health APIs and Notifications                     | Aws::Health                          | aws-sdk-health                          | 2016-08-04  |
@@ -345,8 +346,8 @@ to be backwards compatible.
 | AWS IoT Data Plane                                    | Aws::IoTDataPlane                    | aws-sdk-iotdataplane                    | 2015-05-28  |
 | AWS IoT Jobs Data Plane                               | Aws::IoTJobsDataPlane                | aws-sdk-iotjobsdataplane                | 2017-09-29  |
 | AWS Key Management Service                            | Aws::KMS                             | aws-sdk-kms                             | 2014-11-01  |
-| AWS Lambda                                            | Aws::Lambda                          | aws-sdk-lambda                          | 2015-03-31  |
 | AWS Lambda                                            | Aws::LambdaPreview                   | aws-sdk-lambdapreview                   | 2014-11-11  |
+| AWS Lambda                                            | Aws::Lambda                          | aws-sdk-lambda                          | 2015-03-31  |
 | AWS Marketplace Commerce Analytics                    | Aws::MarketplaceCommerceAnalytics    | aws-sdk-marketplacecommerceanalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | Aws::MarketplaceEntitlementService   | aws-sdk-marketplaceentitlementservice   | 2017-01-11  |
 | AWS MediaTailor                                       | Aws::MediaTailor                     | aws-sdk-mediatailor                     | 2018-04-23  |

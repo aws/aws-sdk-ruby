@@ -337,6 +337,8 @@ module Aws::IoTAnalytics
     #   created. The list of triggers can be empty or contain up to five
     #   **DataSetTrigger** objects.
     #
+    # @option params [Array<Types::DatasetContentDeliveryRule>] :content_delivery_rules
+    #
     # @option params [Types::RetentionPeriod] :retention_period
     #   \[Optional\] How long, in days, message data is kept for the data set.
     #   If not given or set to null, the latest version of the dataset content
@@ -400,6 +402,17 @@ module Aws::IoTAnalytics
     #         },
     #         dataset: {
     #           name: "DatasetName", # required
+    #         },
+    #       },
+    #     ],
+    #     content_delivery_rules: [
+    #       {
+    #         entry_name: "EntryName",
+    #         destination: { # required
+    #           iot_events_destination_configuration: {
+    #             input_name: "IotEventsInputName", # required
+    #             role_arn: "RoleArn", # required
+    #           },
     #         },
     #       },
     #     ],
@@ -800,6 +813,10 @@ module Aws::IoTAnalytics
     #   resp.dataset.triggers #=> Array
     #   resp.dataset.triggers[0].schedule.expression #=> String
     #   resp.dataset.triggers[0].dataset.name #=> String
+    #   resp.dataset.content_delivery_rules #=> Array
+    #   resp.dataset.content_delivery_rules[0].entry_name #=> String
+    #   resp.dataset.content_delivery_rules[0].destination.iot_events_destination_configuration.input_name #=> String
+    #   resp.dataset.content_delivery_rules[0].destination.iot_events_destination_configuration.role_arn #=> String
     #   resp.dataset.status #=> String, one of "CREATING", "ACTIVE", "DELETING"
     #   resp.dataset.creation_time #=> Time
     #   resp.dataset.last_update_time #=> Time
@@ -1510,6 +1527,8 @@ module Aws::IoTAnalytics
     #   A list of "DatasetTrigger" objects. The list can be empty or can
     #   contain up to five **DataSetTrigger** objects.
     #
+    # @option params [Array<Types::DatasetContentDeliveryRule>] :content_delivery_rules
+    #
     # @option params [Types::RetentionPeriod] :retention_period
     #   How long, in days, message data is kept for the data set.
     #
@@ -1563,6 +1582,17 @@ module Aws::IoTAnalytics
     #         },
     #         dataset: {
     #           name: "DatasetName", # required
+    #         },
+    #       },
+    #     ],
+    #     content_delivery_rules: [
+    #       {
+    #         entry_name: "EntryName",
+    #         destination: { # required
+    #           iot_events_destination_configuration: {
+    #             input_name: "IotEventsInputName", # required
+    #             role_arn: "RoleArn", # required
+    #           },
     #         },
     #       },
     #     ],
@@ -1709,7 +1739,7 @@ module Aws::IoTAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotanalytics'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

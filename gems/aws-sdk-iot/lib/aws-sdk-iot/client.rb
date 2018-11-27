@@ -1756,6 +1756,11 @@ module Aws::IoT
     #             channel_name: "ChannelName",
     #             role_arn: "AwsArn",
     #           },
+    #           iot_events: {
+    #             input_name: "InputName", # required
+    #             message_id: "MessageId",
+    #             role_arn: "AwsArn", # required
+    #           },
     #           step_functions: {
     #             execution_name_prefix: "ExecutionNamePrefix",
     #             state_machine_name: "StateMachineName", # required
@@ -1846,6 +1851,11 @@ module Aws::IoT
     #           channel_arn: "AwsArn",
     #           channel_name: "ChannelName",
     #           role_arn: "AwsArn",
+    #         },
+    #         iot_events: {
+    #           input_name: "InputName", # required
+    #           message_id: "MessageId",
+    #           role_arn: "AwsArn", # required
     #         },
     #         step_functions: {
     #           execution_name_prefix: "ExecutionNamePrefix",
@@ -3731,6 +3741,9 @@ module Aws::IoT
     #   resp.rule.actions[0].iot_analytics.channel_arn #=> String
     #   resp.rule.actions[0].iot_analytics.channel_name #=> String
     #   resp.rule.actions[0].iot_analytics.role_arn #=> String
+    #   resp.rule.actions[0].iot_events.input_name #=> String
+    #   resp.rule.actions[0].iot_events.message_id #=> String
+    #   resp.rule.actions[0].iot_events.role_arn #=> String
     #   resp.rule.actions[0].step_functions.execution_name_prefix #=> String
     #   resp.rule.actions[0].step_functions.state_machine_name #=> String
     #   resp.rule.actions[0].step_functions.role_arn #=> String
@@ -3787,6 +3800,9 @@ module Aws::IoT
     #   resp.rule.error_action.iot_analytics.channel_arn #=> String
     #   resp.rule.error_action.iot_analytics.channel_name #=> String
     #   resp.rule.error_action.iot_analytics.role_arn #=> String
+    #   resp.rule.error_action.iot_events.input_name #=> String
+    #   resp.rule.error_action.iot_events.message_id #=> String
+    #   resp.rule.error_action.iot_events.role_arn #=> String
     #   resp.rule.error_action.step_functions.execution_name_prefix #=> String
     #   resp.rule.error_action.step_functions.state_machine_name #=> String
     #   resp.rule.error_action.step_functions.role_arn #=> String
@@ -5946,6 +5962,11 @@ module Aws::IoT
     #             channel_name: "ChannelName",
     #             role_arn: "AwsArn",
     #           },
+    #           iot_events: {
+    #             input_name: "InputName", # required
+    #             message_id: "MessageId",
+    #             role_arn: "AwsArn", # required
+    #           },
     #           step_functions: {
     #             execution_name_prefix: "ExecutionNamePrefix",
     #             state_machine_name: "StateMachineName", # required
@@ -6036,6 +6057,11 @@ module Aws::IoT
     #           channel_arn: "AwsArn",
     #           channel_name: "ChannelName",
     #           role_arn: "AwsArn",
+    #         },
+    #         iot_events: {
+    #           input_name: "InputName", # required
+    #           message_id: "MessageId",
+    #           role_arn: "AwsArn", # required
     #         },
     #         step_functions: {
     #           execution_name_prefix: "ExecutionNamePrefix",
@@ -7390,7 +7416,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

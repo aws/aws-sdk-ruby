@@ -69,6 +69,7 @@ module Aws
   autoload :Firehose, 'aws-sdk-firehose'
   autoload :GameLift, 'aws-sdk-gamelift'
   autoload :Glacier, 'aws-sdk-glacier'
+  autoload :GlobalAccelerator, 'aws-sdk-globalaccelerator'
   autoload :Glue, 'aws-sdk-glue'
   autoload :Greengrass, 'aws-sdk-greengrass'
   autoload :GuardDuty, 'aws-sdk-guardduty'

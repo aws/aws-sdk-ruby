@@ -63,6 +63,44 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AcceptTransitGatewayVpcAttachmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_attachment_id: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptTransitGatewayVpcAttachmentRequest AWS API Documentation
+    #
+    class AcceptTransitGatewayVpcAttachmentRequest < Struct.new(
+      :transit_gateway_attachment_id,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_vpc_attachment
+    #   The VPC attachment.
+    #   @return [Types::TransitGatewayVpcAttachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptTransitGatewayVpcAttachmentResult AWS API Documentation
+    #
+    class AcceptTransitGatewayVpcAttachmentResult < Struct.new(
+      :transit_gateway_vpc_attachment)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AcceptVpcEndpointConnectionsRequest
     #   data as a hash:
     #
@@ -393,7 +431,7 @@ module Aws::EC2
     #         quantity: 1, # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -821,6 +859,50 @@ module Aws::EC2
     class AssociateSubnetCidrBlockResult < Struct.new(
       :ipv_6_cidr_block_association,
       :subnet_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AssociateTransitGatewayRouteTableRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_route_table_id: "String", # required
+    #         transit_gateway_attachment_id: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_route_table_id
+    #   The ID of the transit gateway route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateTransitGatewayRouteTableRequest AWS API Documentation
+    #
+    class AssociateTransitGatewayRouteTableRequest < Struct.new(
+      :transit_gateway_route_table_id,
+      :transit_gateway_attachment_id,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] association
+    #   The ID of the association.
+    #   @return [Types::TransitGatewayAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateTransitGatewayRouteTableResult AWS API Documentation
+    #
+    class AssociateTransitGatewayRouteTableResult < Struct.new(
+      :association)
       include Aws::Structure
     end
 
@@ -3073,7 +3155,7 @@ module Aws::EC2
     #         instance_match_criteria: "open", # accepts open, targeted
     #         tag_specifications: [
     #           {
-    #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -3568,7 +3650,7 @@ module Aws::EC2
     #             },
     #             overrides: [
     #               {
-    #                 instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal
+    #                 instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #                 max_price: "String",
     #                 subnet_id: "String",
     #                 availability_zone: "String",
@@ -3599,7 +3681,7 @@ module Aws::EC2
     #         replace_unhealthy_instances: false,
     #         tag_specifications: [
     #           {
-    #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -4212,7 +4294,7 @@ module Aws::EC2
     #             },
     #           ],
     #           image_id: "String",
-    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal
+    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #           key_name: "String",
     #           monitoring: {
     #             enabled: false,
@@ -4231,7 +4313,7 @@ module Aws::EC2
     #           user_data: "String",
     #           tag_specifications: [
     #             {
-    #               resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #               resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #               tags: [
     #                 {
     #                   key: "String",
@@ -4383,7 +4465,7 @@ module Aws::EC2
     #             },
     #           ],
     #           image_id: "String",
-    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal
+    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #           key_name: "String",
     #           monitoring: {
     #             enabled: false,
@@ -4402,7 +4484,7 @@ module Aws::EC2
     #           user_data: "String",
     #           tag_specifications: [
     #             {
-    #               resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #               resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #               tags: [
     #                 {
     #                   key: "String",
@@ -4998,6 +5080,7 @@ module Aws::EC2
     #         gateway_id: "String",
     #         instance_id: "String",
     #         nat_gateway_id: "String",
+    #         transit_gateway_id: "String",
     #         network_interface_id: "String",
     #         route_table_id: "String", # required
     #         vpc_peering_connection_id: "String",
@@ -5039,6 +5122,10 @@ module Aws::EC2
     #   \[IPv4 traffic only\] The ID of a NAT gateway.
     #   @return [String]
     #
+    # @!attribute [rw] transit_gateway_id
+    #   The ID of a transit gateway.
+    #   @return [String]
+    #
     # @!attribute [rw] network_interface_id
     #   The ID of a network interface.
     #   @return [String]
@@ -5061,6 +5148,7 @@ module Aws::EC2
       :gateway_id,
       :instance_id,
       :nat_gateway_id,
+      :transit_gateway_id,
       :network_interface_id,
       :route_table_id,
       :vpc_peering_connection_id)
@@ -5192,7 +5280,7 @@ module Aws::EC2
     #         volume_id: "String", # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -5383,6 +5471,288 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateTransitGatewayRequest
+    #   data as a hash:
+    #
+    #       {
+    #         description: "String",
+    #         options: {
+    #           amazon_side_asn: 1,
+    #           auto_accept_shared_attachments: "enable", # accepts enable, disable
+    #           default_route_table_association: "enable", # accepts enable, disable
+    #           default_route_table_propagation: "enable", # accepts enable, disable
+    #           vpn_ecmp_support: "enable", # accepts enable, disable
+    #           dns_support: "enable", # accepts enable, disable
+    #         },
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] description
+    #   A description of the transit gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] options
+    #   The transit gateway options.
+    #   @return [Types::TransitGatewayRequestOptions]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the transit gateway.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayRequest AWS API Documentation
+    #
+    class CreateTransitGatewayRequest < Struct.new(
+      :description,
+      :options,
+      :tag_specifications,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway
+    #   Information about the transit gateway.
+    #   @return [Types::TransitGateway]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayResult AWS API Documentation
+    #
+    class CreateTransitGatewayResult < Struct.new(
+      :transit_gateway)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateTransitGatewayRouteRequest
+    #   data as a hash:
+    #
+    #       {
+    #         destination_cidr_block: "String", # required
+    #         transit_gateway_route_table_id: "String", # required
+    #         transit_gateway_attachment_id: "String",
+    #         blackhole: false,
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] destination_cidr_block
+    #   The CIDR range used for destination matches. Routing decisions are
+    #   based on the most specific match.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_route_table_id
+    #   The ID of the transit gateway route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] blackhole
+    #   Indicates whether traffic matching this route is to be dropped.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayRouteRequest AWS API Documentation
+    #
+    class CreateTransitGatewayRouteRequest < Struct.new(
+      :destination_cidr_block,
+      :transit_gateway_route_table_id,
+      :transit_gateway_attachment_id,
+      :blackhole,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] route
+    #   Information about the route.
+    #   @return [Types::TransitGatewayRoute]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayRouteResult AWS API Documentation
+    #
+    class CreateTransitGatewayRouteResult < Struct.new(
+      :route)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateTransitGatewayRouteTableRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_id: "String", # required
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_id
+    #   The ID of the transit gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the transit gateway route table.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayRouteTableRequest AWS API Documentation
+    #
+    class CreateTransitGatewayRouteTableRequest < Struct.new(
+      :transit_gateway_id,
+      :tag_specifications,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_route_table
+    #   Information about the transit gateway route table.
+    #   @return [Types::TransitGatewayRouteTable]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayRouteTableResult AWS API Documentation
+    #
+    class CreateTransitGatewayRouteTableResult < Struct.new(
+      :transit_gateway_route_table)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateTransitGatewayVpcAttachmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_id: "String", # required
+    #         vpc_id: "String", # required
+    #         subnet_ids: ["String"], # required
+    #         options: {
+    #           dns_support: "enable", # accepts enable, disable
+    #           ipv_6_support: "enable", # accepts enable, disable
+    #         },
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_id
+    #   The ID of the transit gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   The IDs of one or more subnets. You can specify only one subnet per
+    #   Availability Zone. You must specify at least one subnet, but we
+    #   recommend that you specify two subnets for better availability. The
+    #   transit gateway uses one IP address from each specified subnet.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] options
+    #   The VPC attachment options.
+    #   @return [Types::CreateTransitGatewayVpcAttachmentRequestOptions]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the VPC attachment.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayVpcAttachmentRequest AWS API Documentation
+    #
+    class CreateTransitGatewayVpcAttachmentRequest < Struct.new(
+      :transit_gateway_id,
+      :vpc_id,
+      :subnet_ids,
+      :options,
+      :tag_specifications,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # Describes the options for a VPC attachment.
+    #
+    # @note When making an API call, you may pass CreateTransitGatewayVpcAttachmentRequestOptions
+    #   data as a hash:
+    #
+    #       {
+    #         dns_support: "enable", # accepts enable, disable
+    #         ipv_6_support: "enable", # accepts enable, disable
+    #       }
+    #
+    # @!attribute [rw] dns_support
+    #   Enable or disable DNS support. The default is `enable`.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_6_support
+    #   Enable or disable IPv6 support. The default is `enable`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayVpcAttachmentRequestOptions AWS API Documentation
+    #
+    class CreateTransitGatewayVpcAttachmentRequestOptions < Struct.new(
+      :dns_support,
+      :ipv_6_support)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_vpc_attachment
+    #   Information about the VPC attachment.
+    #   @return [Types::TransitGatewayVpcAttachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayVpcAttachmentResult AWS API Documentation
+    #
+    class CreateTransitGatewayVpcAttachmentResult < Struct.new(
+      :transit_gateway_vpc_attachment)
+      include Aws::Structure
+    end
+
     # Describes the user or group to be added or removed from the
     # permissions for a volume.
     #
@@ -5466,7 +5836,7 @@ module Aws::EC2
     #         dry_run: false,
     #         tag_specifications: [
     #           {
-    #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -5500,9 +5870,13 @@ module Aws::EC2
     #
     # @!attribute [rw] iops
     #   The number of I/O operations per second (IOPS) to provision for the
-    #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 32000
-    #   IOPS for volumes in most regions. For exceptions, see [Amazon EBS
-    #   Volume Types][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to
+    #   64,000IOPS for volumes in most regions. Maximum IOPS of 64,000 is
+    #   guaranteed only on [Nitro-based
+    #   instances](AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
+    #   Other instance families guarantee performance up to 32,000 IOPS. For
+    #   more information, see [Amazon EBS Volume Types][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
     #
     #   This parameter is valid only for Provisioned IOPS SSD (io1) volumes.
     #
@@ -5543,8 +5917,8 @@ module Aws::EC2
     # @!attribute [rw] size
     #   The size of the volume, in GiBs.
     #
-    #   Constraints: 1-16384 for `gp2`, 4-16384 for `io1`, 500-16384 for
-    #   `st1`, 500-16384 for `sc1`, and 1-1024 for `standard`. If you
+    #   Constraints: 1-16,384 for `gp2`, 4-16,384 for `io1`, 500-16,384 for
+    #   `st1`, 500-16,384 for `sc1`, and 1-1,024 for `standard`. If you
     #   specify a snapshot, the volume size must be equal to or larger than
     #   the snapshot size.
     #
@@ -5992,7 +6366,8 @@ module Aws::EC2
     #       {
     #         customer_gateway_id: "String", # required
     #         type: "String", # required
-    #         vpn_gateway_id: "String", # required
+    #         vpn_gateway_id: "String",
+    #         transit_gateway_id: "String",
     #         dry_run: false,
     #         options: {
     #           static_routes_only: false,
@@ -6014,7 +6389,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] vpn_gateway_id
-    #   The ID of the virtual private gateway.
+    #   The ID of the virtual private gateway. If you specify a virtual
+    #   private gateway, you cannot specify a transit gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_id
+    #   The ID of the transit gateway. If you specify a transit gateway, you
+    #   cannot specify a virtual private gateway.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -6034,6 +6415,7 @@ module Aws::EC2
       :customer_gateway_id,
       :type,
       :vpn_gateway_id,
+      :transit_gateway_id,
       :dry_run,
       :options)
       include Aws::Structure
@@ -7133,6 +7515,165 @@ module Aws::EC2
       :dry_run,
       :resources,
       :tags)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteTransitGatewayRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_id: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_id
+    #   The ID of the transit gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTransitGatewayRequest AWS API Documentation
+    #
+    class DeleteTransitGatewayRequest < Struct.new(
+      :transit_gateway_id,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway
+    #   Information about the deleted transit gateway.
+    #   @return [Types::TransitGateway]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTransitGatewayResult AWS API Documentation
+    #
+    class DeleteTransitGatewayResult < Struct.new(
+      :transit_gateway)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteTransitGatewayRouteRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_route_table_id: "String", # required
+    #         destination_cidr_block: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_route_table_id
+    #   The ID of the transit gateway route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_cidr_block
+    #   The CIDR range for the route. This must match the CIDR for the route
+    #   exactly.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTransitGatewayRouteRequest AWS API Documentation
+    #
+    class DeleteTransitGatewayRouteRequest < Struct.new(
+      :transit_gateway_route_table_id,
+      :destination_cidr_block,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] route
+    #   Information about the route.
+    #   @return [Types::TransitGatewayRoute]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTransitGatewayRouteResult AWS API Documentation
+    #
+    class DeleteTransitGatewayRouteResult < Struct.new(
+      :route)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteTransitGatewayRouteTableRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_route_table_id: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_route_table_id
+    #   The ID of the transit gateway route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTransitGatewayRouteTableRequest AWS API Documentation
+    #
+    class DeleteTransitGatewayRouteTableRequest < Struct.new(
+      :transit_gateway_route_table_id,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_route_table
+    #   Information about the deleted transit gateway route table.
+    #   @return [Types::TransitGatewayRouteTable]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTransitGatewayRouteTableResult AWS API Documentation
+    #
+    class DeleteTransitGatewayRouteTableResult < Struct.new(
+      :transit_gateway_route_table)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteTransitGatewayVpcAttachmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_attachment_id: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTransitGatewayVpcAttachmentRequest AWS API Documentation
+    #
+    class DeleteTransitGatewayVpcAttachmentRequest < Struct.new(
+      :transit_gateway_attachment_id,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_vpc_attachment
+    #   Information about the deleted VPC attachment.
+    #   @return [Types::TransitGatewayVpcAttachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTransitGatewayVpcAttachmentResult AWS API Documentation
+    #
+    class DeleteTransitGatewayVpcAttachmentResult < Struct.new(
+      :transit_gateway_vpc_attachment)
       include Aws::Structure
     end
 
@@ -8301,7 +8842,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] elastic_gpu_ids
-    #   One or more Elastic GPU IDs.
+    #   One or more Elastic Graphics accelerator IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
@@ -8315,18 +8856,19 @@ module Aws::EC2
     #   One or more filters.
     #
     #   * `availability-zone` - The Availability Zone in which the Elastic
-    #     GPU resides.
+    #     Graphics accelerator resides.
     #
-    #   * `elastic-gpu-health` - The status of the Elastic GPU (`OK` \|
-    #     `IMPAIRED`).
+    #   * `elastic-gpu-health` - The status of the Elastic Graphics
+    #     accelerator (`OK` \| `IMPAIRED`).
     #
-    #   * `elastic-gpu-state` - The state of the Elastic GPU (`ATTACHED`).
+    #   * `elastic-gpu-state` - The state of the Elastic Graphics
+    #     accelerator (`ATTACHED`).
     #
-    #   * `elastic-gpu-type` - The type of Elastic GPU; for example,
-    #     `eg1.medium`.
+    #   * `elastic-gpu-type` - The type of Elastic Graphics accelerator; for
+    #     example, `eg1.medium`.
     #
-    #   * `instance-id` - The ID of the instance to which the Elastic GPU is
-    #     associated.
+    #   * `instance-id` - The ID of the instance to which the Elastic
+    #     Graphics accelerator is associated.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -8351,7 +8893,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] elastic_gpu_set
-    #   Information about the Elastic GPUs.
+    #   Information about the Elastic Graphics accelerators.
     #   @return [Array<Types::ElasticGpus>]
     #
     # @!attribute [rw] max_results
@@ -11707,7 +12249,7 @@ module Aws::EC2
     #           },
     #         ],
     #         include_marketplace: false,
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         max_duration: 1,
     #         max_instance_count: 1,
     #         min_duration: 1,
@@ -12069,6 +12611,8 @@ module Aws::EC2
     #
     #   * `route.nat-gateway-id` - The ID of a NAT gateway.
     #
+    #   * `route.transit-gateway-id` - The ID of a transit gateway.
+    #
     #   * `route.origin` - Describes how the route was created.
     #     `CreateRouteTable` indicates that the route was automatically
     #     created when the route table was created; `CreateRoute` indicates
@@ -12094,6 +12638,8 @@ module Aws::EC2
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
+    #
+    #   * `transit-gateway-id` - The ID of a transit gateway.
     #
     #   * `vpc-id` - The ID of the VPC for the route table.
     #   @return [Array<Types::Filter>]
@@ -13211,7 +13757,7 @@ module Aws::EC2
     #         availability_zone: "String",
     #         dry_run: false,
     #         end_time: Time.now,
-    #         instance_types: ["t1.micro"], # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal
+    #         instance_types: ["t1.micro"], # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         max_results: 1,
     #         next_token: "String",
     #         product_descriptions: ["String"],
@@ -13546,6 +14092,356 @@ module Aws::EC2
     class DescribeTagsResult < Struct.new(
       :next_token,
       :tags)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeTransitGatewayAttachmentsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_attachment_ids: ["String"],
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "String",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_attachment_ids
+    #   The IDs of the attachments.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `association-id` - The ID of the association.
+    #
+    #   * `association-route-table-id` - The ID of the route table for the
+    #     transit gateway.
+    #
+    #   * `associate-state` - The state of the association (`associating` \|
+    #     `associated` \| `disassociating`).
+    #
+    #   * `resource-id` - The ID of the resource.
+    #
+    #   * `resource-type` - The resource type (`vpc` \| `vpn`).
+    #
+    #   * `state` - The state of the attachment (`pendingAcceptance` \|
+    #     `pending` \| `available` \| `modifying` \| `deleting` \| `deleted`
+    #     \| `failed` \| `rejected`).
+    #
+    #   * `transit-gateway-attachment-id` - The ID of the attachment.
+    #
+    #   * `transit-gateway-id` - The ID of the transit gateway.
+    #
+    #   * `transit-gateway-owner` - The ID of the AWS account that owns the
+    #     transit gateway.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTransitGatewayAttachmentsRequest AWS API Documentation
+    #
+    class DescribeTransitGatewayAttachmentsRequest < Struct.new(
+      :transit_gateway_attachment_ids,
+      :filters,
+      :max_results,
+      :next_token,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_attachments
+    #   Information about the attachments.
+    #   @return [Array<Types::TransitGatewayAttachment>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTransitGatewayAttachmentsResult AWS API Documentation
+    #
+    class DescribeTransitGatewayAttachmentsResult < Struct.new(
+      :transit_gateway_attachments,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeTransitGatewayRouteTablesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_route_table_ids: ["String"],
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "String",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_route_table_ids
+    #   The IDs of the transit gateway route tables.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `default-association-route-table` - Indicates whether this is the
+    #     default association route table for the transit gateway (`true` \|
+    #     `false`).
+    #
+    #   * `default-propagation-route-table` - Indicates whether this is the
+    #     default propagation route table for the transit gateway (`true` \|
+    #     `false`).
+    #
+    #   * `transit-gateway-id` - The ID of the transit gateway.
+    #
+    #   * `transit-gateway-route-table-id` - The ID of the transit gateway
+    #     route table.
+    #
+    #   * `transit-gateway-route-table-state` - The state (`pending` \|
+    #     `available` \| `deleting` \| `deleted`).
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTransitGatewayRouteTablesRequest AWS API Documentation
+    #
+    class DescribeTransitGatewayRouteTablesRequest < Struct.new(
+      :transit_gateway_route_table_ids,
+      :filters,
+      :max_results,
+      :next_token,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_route_tables
+    #   Information about the transit gateway route tables.
+    #   @return [Array<Types::TransitGatewayRouteTable>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTransitGatewayRouteTablesResult AWS API Documentation
+    #
+    class DescribeTransitGatewayRouteTablesResult < Struct.new(
+      :transit_gateway_route_tables,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeTransitGatewayVpcAttachmentsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_attachment_ids: ["String"],
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "String",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_attachment_ids
+    #   The IDs of the attachments.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `transit-gateway-attachment-id` - The ID of the attachment.
+    #
+    #   * `transit-gateway-attachment-state` - The state of the attachment
+    #     (`pendingAcceptance` \| `pending` \| `available` \| `modifying` \|
+    #     `deleting` \| `deleted` \| `failed` \| `rejected`).
+    #
+    #   * `transit-gateway-id` - The ID of the transit gateway.
+    #
+    #   * `vpc-id` - The ID of the VPC.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTransitGatewayVpcAttachmentsRequest AWS API Documentation
+    #
+    class DescribeTransitGatewayVpcAttachmentsRequest < Struct.new(
+      :transit_gateway_attachment_ids,
+      :filters,
+      :max_results,
+      :next_token,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_vpc_attachments
+    #   Information about the VPC attachments.
+    #   @return [Array<Types::TransitGatewayVpcAttachment>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTransitGatewayVpcAttachmentsResult AWS API Documentation
+    #
+    class DescribeTransitGatewayVpcAttachmentsResult < Struct.new(
+      :transit_gateway_vpc_attachments,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeTransitGatewaysRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_ids: ["String"],
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "String",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_ids
+    #   The IDs of the transit gateways.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `amazon-side-asn` - The private ASN for the Amazon side of a BGP
+    #     session.
+    #
+    #   * `association-default-route-table-id` - The ID of the default
+    #     association route table.
+    #
+    #   * `default-route-table-association` - Indicates whether resource
+    #     attachments are automatically associated with the default
+    #     association route table (`enable` \| `disable`).
+    #
+    #   * `default-route-table-propagation` - Indicates whether resource
+    #     attachments automatically propagate routes to the default
+    #     propagation route table (`enable` \| `disable`).
+    #
+    #   * `owner-account-id` - The ID of the AWS account that owns the
+    #     transit gateway.
+    #
+    #   * `propagation-default-route-table-id` - The ID of the default
+    #     propagation route table.
+    #
+    #   * `transit-gateway-id` - The ID of the transit gateway.
+    #
+    #   * `transit-gateway-state` - The state of the transit gateway
+    #     (`pending` \| `available` \| `deleting` \| `deleted`).
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTransitGatewaysRequest AWS API Documentation
+    #
+    class DescribeTransitGatewaysRequest < Struct.new(
+      :transit_gateway_ids,
+      :filters,
+      :max_results,
+      :next_token,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateways
+    #   Information about the transit gateways.
+    #   @return [Array<Types::TransitGateway>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTransitGatewaysResult AWS API Documentation
+    #
+    class DescribeTransitGatewaysResult < Struct.new(
+      :transit_gateways,
+      :next_token)
       include Aws::Structure
     end
 
@@ -15188,6 +16084,50 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisableTransitGatewayRouteTablePropagationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_route_table_id: "String", # required
+    #         transit_gateway_attachment_id: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_route_table_id
+    #   The ID of the propagation route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableTransitGatewayRouteTablePropagationRequest AWS API Documentation
+    #
+    class DisableTransitGatewayRouteTablePropagationRequest < Struct.new(
+      :transit_gateway_route_table_id,
+      :transit_gateway_attachment_id,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] propagation
+    #   Information about route propagation.
+    #   @return [Types::TransitGatewayPropagation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableTransitGatewayRouteTablePropagationResult AWS API Documentation
+    #
+    class DisableTransitGatewayRouteTablePropagationResult < Struct.new(
+      :propagation)
+      include Aws::Structure
+    end
+
     # Contains the parameters for DisableVgwRoutePropagation.
     #
     # @note When making an API call, you may pass DisableVgwRoutePropagationRequest
@@ -15404,6 +16344,50 @@ module Aws::EC2
     class DisassociateSubnetCidrBlockResult < Struct.new(
       :ipv_6_cidr_block_association,
       :subnet_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DisassociateTransitGatewayRouteTableRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_route_table_id: "String", # required
+    #         transit_gateway_attachment_id: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_route_table_id
+    #   The ID of the transit gateway route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateTransitGatewayRouteTableRequest AWS API Documentation
+    #
+    class DisassociateTransitGatewayRouteTableRequest < Struct.new(
+      :transit_gateway_route_table_id,
+      :transit_gateway_attachment_id,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] association
+    #   Information about the association.
+    #   @return [Types::TransitGatewayAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateTransitGatewayRouteTableResult AWS API Documentation
+    #
+    class DisassociateTransitGatewayRouteTableResult < Struct.new(
+      :association)
       include Aws::Structure
     end
 
@@ -15634,8 +16618,13 @@ module Aws::EC2
     #   see [Amazon EBS Volume Types][1] in the *Amazon Elastic Compute
     #   Cloud User Guide*.
     #
-    #   Constraint: Range is 100-20000 IOPS for `io1` volumes and 100-10000
-    #   IOPS for `gp2` volumes.
+    #   Constraints: Range is 100-10,000 IOPS for `gp2` volumes and 100 to
+    #   64,000IOPS for `io1` volumes in most regions. Maximum `io1`IOPS of
+    #   64,000 is guaranteed only on [Nitro-based
+    #   instances](AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
+    #   Other instance families guarantee performance up to 32,000 IOPS. For
+    #   more information, see [Amazon EBS Volume Types][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
     #
     #   Condition: This parameter is required for requests to create `io1`
     #   volumes; it is not used in requests to create `gp2`, `st1`, `sc1`,
@@ -15785,10 +16774,11 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the association between an instance and an Elastic GPU.
+    # Describes the association between an instance and an Elastic Graphics
+    # accelerator.
     #
     # @!attribute [rw] elastic_gpu_id
-    #   The ID of the Elastic GPU.
+    #   The ID of the Elastic Graphics accelerator.
     #   @return [String]
     #
     # @!attribute [rw] elastic_gpu_association_id
@@ -15797,11 +16787,12 @@ module Aws::EC2
     #
     # @!attribute [rw] elastic_gpu_association_state
     #   The state of the association between the instance and the Elastic
-    #   GPU.
+    #   Graphics accelerator.
     #   @return [String]
     #
     # @!attribute [rw] elastic_gpu_association_time
-    #   The time the Elastic GPU was associated with the instance.
+    #   The time the Elastic Graphics accelerator was associated with the
+    #   instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticGpuAssociation AWS API Documentation
@@ -15814,7 +16805,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the status of an Elastic GPU.
+    # Describes the status of an Elastic Graphics accelerator.
     #
     # @!attribute [rw] status
     #   The health status.
@@ -15827,7 +16818,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # A specification for an Elastic GPU.
+    # A specification for an Elastic Graphics accelerator.
     #
     # @note When making an API call, you may pass ElasticGpuSpecification
     #   data as a hash:
@@ -15837,7 +16828,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] type
-    #   The type of Elastic GPU.
+    #   The type of Elastic Graphics accelerator.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticGpuSpecification AWS API Documentation
@@ -15860,30 +16851,32 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes an Elastic GPU.
+    # Describes an Elastic Graphics accelerator.
     #
     # @!attribute [rw] elastic_gpu_id
-    #   The ID of the Elastic GPU.
+    #   The ID of the Elastic Graphics accelerator.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
-    #   The Availability Zone in the which the Elastic GPU resides.
+    #   The Availability Zone in the which the Elastic Graphics accelerator
+    #   resides.
     #   @return [String]
     #
     # @!attribute [rw] elastic_gpu_type
-    #   The type of Elastic GPU.
+    #   The type of Elastic Graphics accelerator.
     #   @return [String]
     #
     # @!attribute [rw] elastic_gpu_health
-    #   The status of the Elastic GPU.
+    #   The status of the Elastic Graphics accelerator.
     #   @return [Types::ElasticGpuHealth]
     #
     # @!attribute [rw] elastic_gpu_state
-    #   The state of the Elastic GPU.
+    #   The state of the Elastic Graphics accelerator.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The ID of the instance to which the Elastic GPU is attached.
+    #   The ID of the instance to which the Elastic Graphics accelerator is
+    #   attached.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticGpus AWS API Documentation
@@ -15895,6 +16888,50 @@ module Aws::EC2
       :elastic_gpu_health,
       :elastic_gpu_state,
       :instance_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass EnableTransitGatewayRouteTablePropagationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_route_table_id: "String", # required
+    #         transit_gateway_attachment_id: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_route_table_id
+    #   The ID of the propagation route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableTransitGatewayRouteTablePropagationRequest AWS API Documentation
+    #
+    class EnableTransitGatewayRouteTablePropagationRequest < Struct.new(
+      :transit_gateway_route_table_id,
+      :transit_gateway_attachment_id,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] propagation
+    #   Information about route propagation.
+    #   @return [Types::TransitGatewayPropagation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableTransitGatewayRouteTablePropagationResult AWS API Documentation
+    #
+    class EnableTransitGatewayRouteTablePropagationResult < Struct.new(
+      :propagation)
       include Aws::Structure
     end
 
@@ -16221,6 +17258,76 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ExportTransitGatewayRoutesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_route_table_id: "String", # required
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         s3_bucket: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_route_table_id
+    #   The ID of the route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `transit-gateway-route-destination-cidr-block` - The CIDR range.
+    #
+    #   * `transit-gateway-route-state` - The state of the route (`active`
+    #     \| `blackhole`).
+    #
+    #   * `transit-gateway-route-transit-gateway-attachment-id` - The ID of
+    #     the attachment.
+    #
+    #   * `transit-gateway-route-type` - The route type (`static` \|
+    #     `propagated`).
+    #
+    #   * `transit-gateway-route-vpn-connection-id` - The ID of the VPN
+    #     connection.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] s3_bucket
+    #   The name of the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportTransitGatewayRoutesRequest AWS API Documentation
+    #
+    class ExportTransitGatewayRoutesRequest < Struct.new(
+      :transit_gateway_route_table_id,
+      :filters,
+      :s3_bucket,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] s3_location
+    #   The URL of the exported file in Amazon S3. For example,
+    #   s3://*bucket\_name*/VPCTransitGateway/TransitGatewayRouteTables/*file\_name*.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportTransitGatewayRoutesResult AWS API Documentation
+    #
+    class ExportTransitGatewayRoutesResult < Struct.new(
+      :s3_location)
+      include Aws::Structure
+    end
+
     # A filter name and value pair that is used to return a more specific
     # list of results from a describe operation. Filters can be used to
     # match a set of resources by specific criteria, such as tags,
@@ -16448,7 +17555,7 @@ module Aws::EC2
     #         },
     #         overrides: [
     #           {
-    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal
+    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #             max_price: "String",
     #             subnet_id: "String",
     #             availability_zone: "String",
@@ -16540,7 +17647,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         max_price: "String",
     #         subnet_id: "String",
     #         availability_zone: "String",
@@ -17240,6 +18347,232 @@ module Aws::EC2
       :target_configuration_value_rollup,
       :target_configuration_value_set,
       :validation_failure_reason)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetTransitGatewayAttachmentPropagationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_attachment_id: "String", # required
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "String",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `transit-gateway-route-table-id` - The ID of the transit gateway
+    #     route table.
+    #
+    #   ^
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetTransitGatewayAttachmentPropagationsRequest AWS API Documentation
+    #
+    class GetTransitGatewayAttachmentPropagationsRequest < Struct.new(
+      :transit_gateway_attachment_id,
+      :filters,
+      :max_results,
+      :next_token,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_attachment_propagations
+    #   Information about the propagation route tables.
+    #   @return [Array<Types::TransitGatewayAttachmentPropagation>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetTransitGatewayAttachmentPropagationsResult AWS API Documentation
+    #
+    class GetTransitGatewayAttachmentPropagationsResult < Struct.new(
+      :transit_gateway_attachment_propagations,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetTransitGatewayRouteTableAssociationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_route_table_id: "String", # required
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "String",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_route_table_id
+    #   The ID of the transit gateway route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `association-id` - The ID of the association.
+    #
+    #   * `resource-id` - The ID of the resource.
+    #
+    #   * `resource-type` - The resource type (`vpc` \| `vpn`).
+    #
+    #   * `transit-gateway-attachment-id` - The ID of the attachment.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetTransitGatewayRouteTableAssociationsRequest AWS API Documentation
+    #
+    class GetTransitGatewayRouteTableAssociationsRequest < Struct.new(
+      :transit_gateway_route_table_id,
+      :filters,
+      :max_results,
+      :next_token,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] associations
+    #   Information about the associations.
+    #   @return [Array<Types::TransitGatewayRouteTableAssociation>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetTransitGatewayRouteTableAssociationsResult AWS API Documentation
+    #
+    class GetTransitGatewayRouteTableAssociationsResult < Struct.new(
+      :associations,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetTransitGatewayRouteTablePropagationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_route_table_id: "String", # required
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "String",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_route_table_id
+    #   The ID of the transit gateway route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `resource-id` - The ID of the resource.
+    #
+    #   * `resource-type` - The resource type (`vpc` \| `vpn`).
+    #
+    #   * `transit-gateway-attachment-id` - The ID of the attachment.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetTransitGatewayRouteTablePropagationsRequest AWS API Documentation
+    #
+    class GetTransitGatewayRouteTablePropagationsRequest < Struct.new(
+      :transit_gateway_route_table_id,
+      :filters,
+      :max_results,
+      :next_token,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_route_table_propagations
+    #   Information about the route table propagations.
+    #   @return [Array<Types::TransitGatewayRouteTablePropagation>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetTransitGatewayRouteTablePropagationsResult AWS API Documentation
+    #
+    class GetTransitGatewayRouteTablePropagationsResult < Struct.new(
+      :transit_gateway_route_table_propagations,
+      :next_token)
       include Aws::Structure
     end
 
@@ -18270,11 +19603,11 @@ module Aws::EC2
     #
     #       {
     #         additional_info: "String",
-    #         architecture: "i386", # accepts i386, x86_64
+    #         architecture: "i386", # accepts i386, x86_64, arm64
     #         group_ids: ["String"],
     #         group_names: ["String"],
     #         instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         monitoring: false,
     #         placement: {
     #           availability_zone: "String",
@@ -18384,11 +19717,11 @@ module Aws::EC2
     #         dry_run: false,
     #         launch_specification: {
     #           additional_info: "String",
-    #           architecture: "i386", # accepts i386, x86_64
+    #           architecture: "i386", # accepts i386, x86_64, arm64
     #           group_ids: ["String"],
     #           group_names: ["String"],
     #           instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
-    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal
+    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #           monitoring: false,
     #           placement: {
     #             availability_zone: "String",
@@ -20558,7 +21891,7 @@ module Aws::EC2
     #         },
     #         overrides: [
     #           {
-    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal
+    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #             spot_price: "String",
     #             subnet_id: "String",
     #             availability_zone: "String",
@@ -21025,7 +22358,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         spot_price: "String",
     #         subnet_id: "String",
     #         availability_zone: "String",
@@ -21318,7 +22651,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -22519,7 +23852,7 @@ module Aws::EC2
     #           {
     #             availability_zone: "String",
     #             instance_count: 1,
-    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal
+    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #             platform: "String",
     #             scope: "Availability Zone", # accepts Availability Zone, Region
     #           },
@@ -22728,6 +24061,92 @@ module Aws::EC2
       :assign_ipv_6_address_on_creation,
       :map_public_ip_on_launch,
       :subnet_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyTransitGatewayVpcAttachmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_attachment_id: "String", # required
+    #         add_subnet_ids: ["String"],
+    #         remove_subnet_ids: ["String"],
+    #         options: {
+    #           dns_support: "enable", # accepts enable, disable
+    #           ipv_6_support: "enable", # accepts enable, disable
+    #         },
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] add_subnet_ids
+    #   The IDs of one or more subnets to add. You can specify at most one
+    #   subnet per Availability Zone.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] remove_subnet_ids
+    #   The IDs of one or more subnets to remove.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] options
+    #   The new VPC attachment options.
+    #   @return [Types::ModifyTransitGatewayVpcAttachmentRequestOptions]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayVpcAttachmentRequest AWS API Documentation
+    #
+    class ModifyTransitGatewayVpcAttachmentRequest < Struct.new(
+      :transit_gateway_attachment_id,
+      :add_subnet_ids,
+      :remove_subnet_ids,
+      :options,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # Describes the options for a VPC attachment.
+    #
+    # @note When making an API call, you may pass ModifyTransitGatewayVpcAttachmentRequestOptions
+    #   data as a hash:
+    #
+    #       {
+    #         dns_support: "enable", # accepts enable, disable
+    #         ipv_6_support: "enable", # accepts enable, disable
+    #       }
+    #
+    # @!attribute [rw] dns_support
+    #   Enable or disable DNS support. The default is `enable`.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_6_support
+    #   Enable or disable IPv6 support. The default is `enable`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayVpcAttachmentRequestOptions AWS API Documentation
+    #
+    class ModifyTransitGatewayVpcAttachmentRequestOptions < Struct.new(
+      :dns_support,
+      :ipv_6_support)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_vpc_attachment
+    #   Information about the modified attachment.
+    #   @return [Types::TransitGatewayVpcAttachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayVpcAttachmentResult AWS API Documentation
+    #
+    class ModifyTransitGatewayVpcAttachmentResult < Struct.new(
+      :transit_gateway_vpc_attachment)
       include Aws::Structure
     end
 
@@ -25042,7 +26461,7 @@ module Aws::EC2
     #
     #       {
     #         image_location: "String",
-    #         architecture: "i386", # accepts i386, x86_64
+    #         architecture: "i386", # accepts i386, x86_64, arm64
     #         block_device_mappings: [
     #           {
     #             device_name: "String",
@@ -25178,6 +26597,44 @@ module Aws::EC2
     #
     class RegisterImageResult < Struct.new(
       :image_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RejectTransitGatewayVpcAttachmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_attachment_id: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RejectTransitGatewayVpcAttachmentRequest AWS API Documentation
+    #
+    class RejectTransitGatewayVpcAttachmentRequest < Struct.new(
+      :transit_gateway_attachment_id,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_vpc_attachment
+    #   Information about the attachment.
+    #   @return [Types::TransitGatewayVpcAttachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RejectTransitGatewayVpcAttachmentResult AWS API Documentation
+    #
+    class RejectTransitGatewayVpcAttachmentResult < Struct.new(
+      :transit_gateway_vpc_attachment)
       include Aws::Structure
     end
 
@@ -25523,6 +26980,7 @@ module Aws::EC2
     #         gateway_id: "String",
     #         instance_id: "String",
     #         nat_gateway_id: "String",
+    #         transit_gateway_id: "String",
     #         network_interface_id: "String",
     #         route_table_id: "String", # required
     #         vpc_peering_connection_id: "String",
@@ -25563,6 +27021,10 @@ module Aws::EC2
     #   \[IPv4 traffic only\] The ID of a NAT gateway.
     #   @return [String]
     #
+    # @!attribute [rw] transit_gateway_id
+    #   The ID of a transit gateway.
+    #   @return [String]
+    #
     # @!attribute [rw] network_interface_id
     #   The ID of a network interface.
     #   @return [String]
@@ -25585,6 +27047,7 @@ module Aws::EC2
       :gateway_id,
       :instance_id,
       :nat_gateway_id,
+      :transit_gateway_id,
       :network_interface_id,
       :route_table_id,
       :vpc_peering_connection_id)
@@ -25632,6 +27095,63 @@ module Aws::EC2
     #
     class ReplaceRouteTableAssociationResult < Struct.new(
       :new_association_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ReplaceTransitGatewayRouteRequest
+    #   data as a hash:
+    #
+    #       {
+    #         destination_cidr_block: "String", # required
+    #         transit_gateway_route_table_id: "String", # required
+    #         transit_gateway_attachment_id: "String",
+    #         blackhole: false,
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] destination_cidr_block
+    #   The CIDR range used for the destination match. Routing decisions are
+    #   based on the most specific match.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_route_table_id
+    #   The ID of the route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] blackhole
+    #   Indicates whether traffic matching this route is to be dropped.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceTransitGatewayRouteRequest AWS API Documentation
+    #
+    class ReplaceTransitGatewayRouteRequest < Struct.new(
+      :destination_cidr_block,
+      :transit_gateway_route_table_id,
+      :transit_gateway_attachment_id,
+      :blackhole,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] route
+    #   Information about the modified route.
+    #   @return [Types::TransitGatewayRoute]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceTransitGatewayRouteResult AWS API Documentation
+    #
+    class ReplaceTransitGatewayRouteResult < Struct.new(
+      :route)
       include Aws::Structure
     end
 
@@ -25774,7 +27294,7 @@ module Aws::EC2
     #           },
     #         ],
     #         image_id: "String",
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         key_name: "String",
     #         monitoring: {
     #           enabled: false,
@@ -25793,7 +27313,7 @@ module Aws::EC2
     #         user_data: "String",
     #         tag_specifications: [
     #           {
-    #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -26062,7 +27582,7 @@ module Aws::EC2
     #                 name: "String",
     #               },
     #               image_id: "String",
-    #               instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal
+    #               instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #               kernel_id: "String",
     #               key_name: "String",
     #               monitoring: {
@@ -26105,7 +27625,7 @@ module Aws::EC2
     #               weighted_capacity: 1.0,
     #               tag_specifications: [
     #                 {
-    #                   resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #                   resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #                   tags: [
     #                     {
     #                       key: "String",
@@ -26125,7 +27645,7 @@ module Aws::EC2
     #               },
     #               overrides: [
     #                 {
-    #                   instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal
+    #                   instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #                   spot_price: "String",
     #                   subnet_id: "String",
     #                   availability_zone: "String",
@@ -26234,7 +27754,7 @@ module Aws::EC2
     #             name: "String",
     #           },
     #           image_id: "String",
-    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal
+    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #           kernel_id: "String",
     #           key_name: "String",
     #           monitoring: {
@@ -26450,7 +27970,7 @@ module Aws::EC2
     #           name: "String",
     #         },
     #         image_id: "String",
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         kernel_id: "String",
     #         key_name: "String",
     #         monitoring: {
@@ -26810,7 +28330,7 @@ module Aws::EC2
     #       {
     #         availability_zone: "String",
     #         instance_count: 1,
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         platform: "String",
     #         scope: "Availability Zone", # accepts Availability Zone, Region
     #       }
@@ -27759,6 +29279,10 @@ module Aws::EC2
     #   The ID of a NAT gateway.
     #   @return [String]
     #
+    # @!attribute [rw] transit_gateway_id
+    #   The ID of a transit gateway.
+    #   @return [String]
+    #
     # @!attribute [rw] network_interface_id
     #   The ID of the network interface.
     #   @return [String]
@@ -27783,7 +29307,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] vpc_peering_connection_id
-    #   The ID of the VPC peering connection.
+    #   The ID of a VPC peering connection.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Route AWS API Documentation
@@ -27797,6 +29321,7 @@ module Aws::EC2
       :instance_id,
       :instance_owner_id,
       :nat_gateway_id,
+      :transit_gateway_id,
       :network_interface_id,
       :origin,
       :state,
@@ -27915,7 +29440,7 @@ module Aws::EC2
     #           },
     #         ],
     #         image_id: "String",
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         ipv_6_address_count: 1,
     #         ipv_6_addresses: [
     #           {
@@ -27985,7 +29510,7 @@ module Aws::EC2
     #         ],
     #         tag_specifications: [
     #           {
-    #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -29280,6 +30805,80 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass SearchTransitGatewayRoutesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_route_table_id: "String", # required
+    #         filters: [ # required
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_route_table_id
+    #   The ID of the transit gateway route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `transit-gateway-route-destination-cidr-block` - The CIDR range.
+    #
+    #   * `transit-gateway-route-state` - The state of the route (`active`
+    #     \| `blackhole`).
+    #
+    #   * `transit-gateway-route-transit-gateway-attachment-id` - The ID of
+    #     the attachment.
+    #
+    #   * `transit-gateway-route-type` - The route type (`static` \|
+    #     `propagated`).
+    #
+    #   * `transit-gateway-route-vpn-connection-id` - The ID of the VPN
+    #     connection.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of routes to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SearchTransitGatewayRoutesRequest AWS API Documentation
+    #
+    class SearchTransitGatewayRoutesRequest < Struct.new(
+      :transit_gateway_route_table_id,
+      :filters,
+      :max_results,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] routes
+    #   Information about the routes.
+    #   @return [Array<Types::TransitGatewayRoute>]
+    #
+    # @!attribute [rw] additional_routes_available
+    #   Indicates whether there are additional routes available.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SearchTransitGatewayRoutesResult AWS API Documentation
+    #
+    class SearchTransitGatewayRoutesResult < Struct.new(
+      :routes,
+      :additional_routes_available)
+      include Aws::Structure
+    end
+
     # Describes a security group
     #
     # @!attribute [rw] description
@@ -29879,7 +31478,7 @@ module Aws::EC2
     #           name: "String",
     #         },
     #         image_id: "String",
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         kernel_id: "String",
     #         key_name: "String",
     #         monitoring: {
@@ -29922,7 +31521,7 @@ module Aws::EC2
     #         weighted_capacity: 1.0,
     #         tag_specifications: [
     #           {
-    #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -30161,7 +31760,7 @@ module Aws::EC2
     #               name: "String",
     #             },
     #             image_id: "String",
-    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal
+    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #             kernel_id: "String",
     #             key_name: "String",
     #             monitoring: {
@@ -30204,7 +31803,7 @@ module Aws::EC2
     #             weighted_capacity: 1.0,
     #             tag_specifications: [
     #               {
-    #                 resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #                 resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #                 tags: [
     #                   {
     #                     key: "String",
@@ -30224,7 +31823,7 @@ module Aws::EC2
     #             },
     #             overrides: [
     #               {
-    #                 instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal
+    #                 instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #                 spot_price: "String",
     #                 subnet_id: "String",
     #                 availability_zone: "String",
@@ -30429,7 +32028,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -31336,7 +32935,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -31598,6 +33197,546 @@ module Aws::EC2
     #
     class TerminateInstancesResult < Struct.new(
       :terminating_instances)
+      include Aws::Structure
+    end
+
+    # Describes a transit gateway.
+    #
+    # @!attribute [rw] transit_gateway_id
+    #   The ID of the transit gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_arn
+    #   The Amazon Resource Name (ARN) of the transit gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the transit gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the AWS account ID that owns the transit gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the transit gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The creation time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] options
+    #   The transit gateway options.
+    #   @return [Types::TransitGatewayOptions]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the transit gateway.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGateway AWS API Documentation
+    #
+    class TransitGateway < Struct.new(
+      :transit_gateway_id,
+      :transit_gateway_arn,
+      :state,
+      :owner_id,
+      :description,
+      :creation_time,
+      :options,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Describes an association between a resource attachment and a transit
+    # gateway route table.
+    #
+    # @!attribute [rw] transit_gateway_route_table_id
+    #   The ID of the transit gateway route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayAssociation AWS API Documentation
+    #
+    class TransitGatewayAssociation < Struct.new(
+      :transit_gateway_route_table_id,
+      :transit_gateway_attachment_id,
+      :resource_id,
+      :resource_type,
+      :state)
+      include Aws::Structure
+    end
+
+    # Describes an attachment between a resource and a transit gateway.
+    #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_id
+    #   The ID of the transit gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_owner_id
+    #   The ID of the AWS account that owns the transit gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner_id
+    #   The ID of the AWS account that owns the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The attachment state.
+    #   @return [String]
+    #
+    # @!attribute [rw] association
+    #   The association.
+    #   @return [Types::TransitGatewayAttachmentAssociation]
+    #
+    # @!attribute [rw] creation_time
+    #   The creation time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the attachment.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayAttachment AWS API Documentation
+    #
+    class TransitGatewayAttachment < Struct.new(
+      :transit_gateway_attachment_id,
+      :transit_gateway_id,
+      :transit_gateway_owner_id,
+      :resource_owner_id,
+      :resource_type,
+      :resource_id,
+      :state,
+      :association,
+      :creation_time,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Describes an association.
+    #
+    # @!attribute [rw] transit_gateway_route_table_id
+    #   The ID of the route table for the transit gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayAttachmentAssociation AWS API Documentation
+    #
+    class TransitGatewayAttachmentAssociation < Struct.new(
+      :transit_gateway_route_table_id,
+      :state)
+      include Aws::Structure
+    end
+
+    # Describes a propagation route table.
+    #
+    # @!attribute [rw] transit_gateway_route_table_id
+    #   The ID of the propagation route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the propagation route table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayAttachmentPropagation AWS API Documentation
+    #
+    class TransitGatewayAttachmentPropagation < Struct.new(
+      :transit_gateway_route_table_id,
+      :state)
+      include Aws::Structure
+    end
+
+    # Describes the options for a transit gateway.
+    #
+    # @!attribute [rw] amazon_side_asn
+    #   A private Autonomous System Number (ASN) for the Amazon side of a
+    #   BGP session. The range is 64512 to 65534 for 16-bit ASNs and
+    #   4200000000 to 4294967294 for 32-bit ASNs.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] auto_accept_shared_attachments
+    #   Indicates whether attachment requests are automatically accepted.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_route_table_association
+    #   Indicates whether resource attachments are automatically associated
+    #   with the default association route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_default_route_table_id
+    #   The ID of the default association route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_route_table_propagation
+    #   Indicates whether resource attachments automatically propagate
+    #   routes to the default propagation route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] propagation_default_route_table_id
+    #   The ID of the default propagation route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_ecmp_support
+    #   Indicates whether Equal Cost Multipath Protocol support is enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_support
+    #   Indicates whether DNS support is enabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayOptions AWS API Documentation
+    #
+    class TransitGatewayOptions < Struct.new(
+      :amazon_side_asn,
+      :auto_accept_shared_attachments,
+      :default_route_table_association,
+      :association_default_route_table_id,
+      :default_route_table_propagation,
+      :propagation_default_route_table_id,
+      :vpn_ecmp_support,
+      :dns_support)
+      include Aws::Structure
+    end
+
+    # Describes route propagation.
+    #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_route_table_id
+    #   The ID of the transit gateway route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayPropagation AWS API Documentation
+    #
+    class TransitGatewayPropagation < Struct.new(
+      :transit_gateway_attachment_id,
+      :resource_id,
+      :resource_type,
+      :transit_gateway_route_table_id,
+      :state)
+      include Aws::Structure
+    end
+
+    # Describes the options for a transit gateway.
+    #
+    # @note When making an API call, you may pass TransitGatewayRequestOptions
+    #   data as a hash:
+    #
+    #       {
+    #         amazon_side_asn: 1,
+    #         auto_accept_shared_attachments: "enable", # accepts enable, disable
+    #         default_route_table_association: "enable", # accepts enable, disable
+    #         default_route_table_propagation: "enable", # accepts enable, disable
+    #         vpn_ecmp_support: "enable", # accepts enable, disable
+    #         dns_support: "enable", # accepts enable, disable
+    #       }
+    #
+    # @!attribute [rw] amazon_side_asn
+    #   A private Autonomous System Number (ASN) for the Amazon side of a
+    #   BGP session. The range is 64512 to 65534 for 16-bit ASNs and
+    #   4200000000 to 4294967294 for 32-bit ASNs.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] auto_accept_shared_attachments
+    #   Enable or disable automatic acceptance of attachment requests. The
+    #   default is `disable`.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_route_table_association
+    #   Enable or disable automatic association with the default association
+    #   route table. The default is `enable`.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_route_table_propagation
+    #   Enable or disable automatic propagation of routes to the default
+    #   propagation route table. The default is `enable`.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_ecmp_support
+    #   Enable or disable Equal Cost Multipath Protocol support.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_support
+    #   Enable or disable DNS support.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayRequestOptions AWS API Documentation
+    #
+    class TransitGatewayRequestOptions < Struct.new(
+      :amazon_side_asn,
+      :auto_accept_shared_attachments,
+      :default_route_table_association,
+      :default_route_table_propagation,
+      :vpn_ecmp_support,
+      :dns_support)
+      include Aws::Structure
+    end
+
+    # Describes a route for a transit gateway route table.
+    #
+    # @!attribute [rw] destination_cidr_block
+    #   The CIDR block used for destination matches.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_attachments
+    #   The attachments.
+    #   @return [Array<Types::TransitGatewayRouteAttachment>]
+    #
+    # @!attribute [rw] type
+    #   The route type.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the route.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayRoute AWS API Documentation
+    #
+    class TransitGatewayRoute < Struct.new(
+      :destination_cidr_block,
+      :transit_gateway_attachments,
+      :type,
+      :state)
+      include Aws::Structure
+    end
+
+    # Describes a route attachment.
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayRouteAttachment AWS API Documentation
+    #
+    class TransitGatewayRouteAttachment < Struct.new(
+      :resource_id,
+      :transit_gateway_attachment_id,
+      :resource_type)
+      include Aws::Structure
+    end
+
+    # Describes a transit gateway route table.
+    #
+    # @!attribute [rw] transit_gateway_route_table_id
+    #   The ID of the transit gateway route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_id
+    #   The ID of the transit gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the transit gateway route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_association_route_table
+    #   Indicates whether this is the default association route table for
+    #   the transit gateway.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] default_propagation_route_table
+    #   Indicates whether this is the default propagation route table for
+    #   the transit gateway.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] creation_time
+    #   The creation time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the route table.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayRouteTable AWS API Documentation
+    #
+    class TransitGatewayRouteTable < Struct.new(
+      :transit_gateway_route_table_id,
+      :transit_gateway_id,
+      :state,
+      :default_association_route_table,
+      :default_propagation_route_table,
+      :creation_time,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Describes an association between a route table and a resource
+    # attachment.
+    #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayRouteTableAssociation AWS API Documentation
+    #
+    class TransitGatewayRouteTableAssociation < Struct.new(
+      :transit_gateway_attachment_id,
+      :resource_id,
+      :resource_type,
+      :state)
+      include Aws::Structure
+    end
+
+    # Describes a route table propagation.
+    #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayRouteTablePropagation AWS API Documentation
+    #
+    class TransitGatewayRouteTablePropagation < Struct.new(
+      :transit_gateway_attachment_id,
+      :resource_id,
+      :resource_type,
+      :state)
+      include Aws::Structure
+    end
+
+    # Describes a VPC attachment.
+    #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_id
+    #   The ID of the transit gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_owner_id
+    #   The ID of the AWS account that owns the VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the VPC attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   The IDs of the subnets.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] creation_time
+    #   The creation time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] options
+    #   The VPC attachment options.
+    #   @return [Types::TransitGatewayVpcAttachmentOptions]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the VPC attachment.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayVpcAttachment AWS API Documentation
+    #
+    class TransitGatewayVpcAttachment < Struct.new(
+      :transit_gateway_attachment_id,
+      :transit_gateway_id,
+      :vpc_id,
+      :vpc_owner_id,
+      :state,
+      :subnet_ids,
+      :creation_time,
+      :options,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Describes the VPC attachment options.
+    #
+    # @!attribute [rw] dns_support
+    #   Indicates whether DNS support is enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_6_support
+    #   Indicates whether IPv6 support is enabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayVpcAttachmentOptions AWS API Documentation
+    #
+    class TransitGatewayVpcAttachmentOptions < Struct.new(
+      :dns_support,
+      :ipv_6_support)
       include Aws::Structure
     end
 
@@ -32193,8 +34332,13 @@ module Aws::EC2
     #   performance, I/O credits, and bursting, see [Amazon EBS Volume
     #   Types][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
-    #   Constraint: Range is 100-32000 IOPS for io1 volumes and 100-10000
-    #   IOPS for `gp2` volumes.
+    #   Constraints: Range is 100-10,000 IOPS for `gp2` volumes and 100 to
+    #   64,000IOPS for `io1` volumes in most regions. Maximum `io1`IOPS of
+    #   64,000 is guaranteed only on [Nitro-based
+    #   instances](AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
+    #   Other instance families guarantee performance up to 32,000 IOPS. For
+    #   more information, see [Amazon EBS Volume Types][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
     #
     #   Condition: This parameter is required for requests to create `io1`
     #   volumes; it is not used in requests to create `gp2`, `st1`, `sc1`,
@@ -32934,6 +35078,10 @@ module Aws::EC2
     #   connection.
     #   @return [String]
     #
+    # @!attribute [rw] transit_gateway_id
+    #   The ID of the transit gateway associated with the VPN connection.
+    #   @return [String]
+    #
     # @!attribute [rw] options
     #   The VPN connection options.
     #   @return [Types::VpnConnectionOptions]
@@ -32960,6 +35108,7 @@ module Aws::EC2
       :type,
       :vpn_connection_id,
       :vpn_gateway_id,
+      :transit_gateway_id,
       :options,
       :routes,
       :tags,

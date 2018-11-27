@@ -51,6 +51,9 @@ module Aws::IoTAnalytics
     DatasetActionType = Shapes::StringShape.new(name: 'DatasetActionType')
     DatasetActions = Shapes::ListShape.new(name: 'DatasetActions')
     DatasetArn = Shapes::StringShape.new(name: 'DatasetArn')
+    DatasetContentDeliveryDestination = Shapes::StructureShape.new(name: 'DatasetContentDeliveryDestination')
+    DatasetContentDeliveryRule = Shapes::StructureShape.new(name: 'DatasetContentDeliveryRule')
+    DatasetContentDeliveryRules = Shapes::ListShape.new(name: 'DatasetContentDeliveryRules')
     DatasetContentState = Shapes::StringShape.new(name: 'DatasetContentState')
     DatasetContentStatus = Shapes::StructureShape.new(name: 'DatasetContentStatus')
     DatasetContentSummaries = Shapes::ListShape.new(name: 'DatasetContentSummaries')
@@ -105,6 +108,8 @@ module Aws::IoTAnalytics
     IncludeStatisticsFlag = Shapes::BooleanShape.new(name: 'IncludeStatisticsFlag')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    IotEventsDestinationConfiguration = Shapes::StructureShape.new(name: 'IotEventsDestinationConfiguration')
+    IotEventsInputName = Shapes::StringShape.new(name: 'IotEventsInputName')
     LambdaActivity = Shapes::StructureShape.new(name: 'LambdaActivity')
     LambdaName = Shapes::StringShape.new(name: 'LambdaName')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -281,6 +286,7 @@ module Aws::IoTAnalytics
     CreateDatasetRequest.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetName, required: true, location_name: "datasetName"))
     CreateDatasetRequest.add_member(:actions, Shapes::ShapeRef.new(shape: DatasetActions, required: true, location_name: "actions"))
     CreateDatasetRequest.add_member(:triggers, Shapes::ShapeRef.new(shape: DatasetTriggers, location_name: "triggers"))
+    CreateDatasetRequest.add_member(:content_delivery_rules, Shapes::ShapeRef.new(shape: DatasetContentDeliveryRules, location_name: "contentDeliveryRules"))
     CreateDatasetRequest.add_member(:retention_period, Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "retentionPeriod"))
     CreateDatasetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateDatasetRequest.struct_class = Types::CreateDatasetRequest
@@ -313,6 +319,7 @@ module Aws::IoTAnalytics
     Dataset.add_member(:arn, Shapes::ShapeRef.new(shape: DatasetArn, location_name: "arn"))
     Dataset.add_member(:actions, Shapes::ShapeRef.new(shape: DatasetActions, location_name: "actions"))
     Dataset.add_member(:triggers, Shapes::ShapeRef.new(shape: DatasetTriggers, location_name: "triggers"))
+    Dataset.add_member(:content_delivery_rules, Shapes::ShapeRef.new(shape: DatasetContentDeliveryRules, location_name: "contentDeliveryRules"))
     Dataset.add_member(:status, Shapes::ShapeRef.new(shape: DatasetStatus, location_name: "status"))
     Dataset.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
     Dataset.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
@@ -331,6 +338,15 @@ module Aws::IoTAnalytics
     DatasetActionSummary.struct_class = Types::DatasetActionSummary
 
     DatasetActions.member = Shapes::ShapeRef.new(shape: DatasetAction)
+
+    DatasetContentDeliveryDestination.add_member(:iot_events_destination_configuration, Shapes::ShapeRef.new(shape: IotEventsDestinationConfiguration, location_name: "iotEventsDestinationConfiguration"))
+    DatasetContentDeliveryDestination.struct_class = Types::DatasetContentDeliveryDestination
+
+    DatasetContentDeliveryRule.add_member(:entry_name, Shapes::ShapeRef.new(shape: EntryName, location_name: "entryName"))
+    DatasetContentDeliveryRule.add_member(:destination, Shapes::ShapeRef.new(shape: DatasetContentDeliveryDestination, required: true, location_name: "destination"))
+    DatasetContentDeliveryRule.struct_class = Types::DatasetContentDeliveryRule
+
+    DatasetContentDeliveryRules.member = Shapes::ShapeRef.new(shape: DatasetContentDeliveryRule)
 
     DatasetContentStatus.add_member(:state, Shapes::ShapeRef.new(shape: DatasetContentState, location_name: "state"))
     DatasetContentStatus.add_member(:reason, Shapes::ShapeRef.new(shape: Reason, location_name: "reason"))
@@ -476,6 +492,10 @@ module Aws::IoTAnalytics
     GetDatasetContentResponse.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "timestamp"))
     GetDatasetContentResponse.add_member(:status, Shapes::ShapeRef.new(shape: DatasetContentStatus, location_name: "status"))
     GetDatasetContentResponse.struct_class = Types::GetDatasetContentResponse
+
+    IotEventsDestinationConfiguration.add_member(:input_name, Shapes::ShapeRef.new(shape: IotEventsInputName, required: true, location_name: "inputName"))
+    IotEventsDestinationConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    IotEventsDestinationConfiguration.struct_class = Types::IotEventsDestinationConfiguration
 
     LambdaActivity.add_member(:name, Shapes::ShapeRef.new(shape: ActivityName, required: true, location_name: "name"))
     LambdaActivity.add_member(:lambda_name, Shapes::ShapeRef.new(shape: LambdaName, required: true, location_name: "lambdaName"))
@@ -677,6 +697,7 @@ module Aws::IoTAnalytics
     UpdateDatasetRequest.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetName, required: true, location: "uri", location_name: "datasetName"))
     UpdateDatasetRequest.add_member(:actions, Shapes::ShapeRef.new(shape: DatasetActions, required: true, location_name: "actions"))
     UpdateDatasetRequest.add_member(:triggers, Shapes::ShapeRef.new(shape: DatasetTriggers, location_name: "triggers"))
+    UpdateDatasetRequest.add_member(:content_delivery_rules, Shapes::ShapeRef.new(shape: DatasetContentDeliveryRules, location_name: "contentDeliveryRules"))
     UpdateDatasetRequest.add_member(:retention_period, Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "retentionPeriod"))
     UpdateDatasetRequest.struct_class = Types::UpdateDatasetRequest
 

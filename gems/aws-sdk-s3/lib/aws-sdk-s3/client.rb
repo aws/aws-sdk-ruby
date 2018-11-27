@@ -554,6 +554,16 @@ module Aws::S3
     #   in conjunction with the TaggingDirective. The tag-set must be encoded
     #   as URL Query parameters
     #
+    # @option params [String] :object_lock_mode
+    #   The Object Lock mode that you want to apply to the copied object.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
+    #   The date and time when you want the copied object's Object Lock to
+    #   expire.
+    #
+    # @option params [String] :object_lock_legal_hold_status
+    #   Specifies whether you want to apply a Legal Hold to the copied object.
+    #
     # @return [Types::CopyObjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CopyObjectOutput#copy_object_result #copy_object_result} => Types::CopyObjectResult
@@ -612,7 +622,7 @@ module Aws::S3
     #     metadata_directive: "COPY", # accepts COPY, REPLACE
     #     tagging_directive: "COPY", # accepts COPY, REPLACE
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -623,6 +633,9 @@ module Aws::S3
     #     copy_source_sse_customer_key_md5: "CopySourceSSECustomerKeyMD5",
     #     request_payer: "requester", # accepts requester
     #     tagging: "TaggingHeader",
+    #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
+    #     object_lock_retain_until_date: Time.now,
+    #     object_lock_legal_hold_status: "ON", # accepts ON, OFF
     #   })
     #
     # @example Response structure
@@ -673,6 +686,10 @@ module Aws::S3
     # @option params [String] :grant_write_acp
     #   Allows grantee to write the ACL for the applicable bucket.
     #
+    # @option params [Boolean] :object_lock_enabled_for_bucket
+    #   Specifies whether you want S3 Object Lock to be enabled for the new
+    #   bucket.
+    #
     # @return [Types::CreateBucketOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBucketOutput#location #location} => String
@@ -720,6 +737,7 @@ module Aws::S3
     #     grant_read_acp: "GrantReadACP",
     #     grant_write: "GrantWrite",
     #     grant_write_acp: "GrantWriteACP",
+    #     object_lock_enabled_for_bucket: false,
     #   })
     #
     # @example Response structure
@@ -832,6 +850,17 @@ module Aws::S3
     #   The tag-set for the object. The tag-set must be encoded as URL Query
     #   parameters
     #
+    # @option params [String] :object_lock_mode
+    #   Specifies the Object Lock mode that you want to apply to the uploaded
+    #   object.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
+    #   Specifies the date and time when you want the Object Lock to expire.
+    #
+    # @option params [String] :object_lock_legal_hold_status
+    #   Specifies whether you want to apply a Legal Hold to the uploaded
+    #   object.
+    #
     # @return [Types::CreateMultipartUploadOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMultipartUploadOutput#abort_date #abort_date} => Time
@@ -882,7 +911,7 @@ module Aws::S3
     #       "MetadataKey" => "MetadataValue",
     #     },
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -890,6 +919,9 @@ module Aws::S3
     #     ssekms_key_id: "SSEKMSKeyId",
     #     request_payer: "requester", # accepts requester
     #     tagging: "TaggingHeader",
+    #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
+    #     object_lock_retain_until_date: Time.now,
+    #     object_lock_legal_hold_status: "ON", # accepts ON, OFF
     #   })
     #
     # @example Response structure
@@ -1263,6 +1295,8 @@ module Aws::S3
     #   buckets can be found at
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
+    # @option params [Boolean] :bypass_governance_retention
+    #
     # @return [Types::DeleteObjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteObjectOutput#delete_marker #delete_marker} => Boolean
@@ -1300,6 +1334,7 @@ module Aws::S3
     #     mfa: "MFA",
     #     version_id: "ObjectVersionId",
     #     request_payer: "requester", # accepts requester
+    #     bypass_governance_retention: false,
     #   })
     #
     # @example Response structure
@@ -1401,6 +1436,11 @@ module Aws::S3
     #   buckets can be found at
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
+    # @option params [Boolean] :bypass_governance_retention
+    #   Specifies whether you want to delete this object even if it has a
+    #   Governance-type Object Lock in place. You must have sufficient
+    #   permissions to perform this operation.
+    #
     # @return [Types::DeleteObjectsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteObjectsOutput#deleted #deleted} => Array&lt;Types::DeletedObject&gt;
@@ -1495,6 +1535,7 @@ module Aws::S3
     #     },
     #     mfa: "MFA",
     #     request_payer: "requester", # accepts requester
+    #     bypass_governance_retention: false,
     #   })
     #
     # @example Response structure
@@ -1782,7 +1823,7 @@ module Aws::S3
     #   resp.inventory_configuration.id #=> String
     #   resp.inventory_configuration.included_object_versions #=> String, one of "All", "Current"
     #   resp.inventory_configuration.optional_fields #=> Array
-    #   resp.inventory_configuration.optional_fields[0] #=> String, one of "Size", "LastModifiedDate", "StorageClass", "ETag", "IsMultipartUploaded", "ReplicationStatus", "EncryptionStatus"
+    #   resp.inventory_configuration.optional_fields[0] #=> String, one of "Size", "LastModifiedDate", "StorageClass", "ETag", "IsMultipartUploaded", "ReplicationStatus", "EncryptionStatus", "ObjectLockRetainUntilDate", "ObjectLockMode", "ObjectLockLegalHoldStatus"
     #   resp.inventory_configuration.schedule.frequency #=> String, one of "Daily", "Weekly"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketInventoryConfiguration AWS API Documentation
@@ -2129,18 +2170,18 @@ module Aws::S3
     #
     #   resp.topic_configuration.id #=> String
     #   resp.topic_configuration.events #=> Array
-    #   resp.topic_configuration.events[0] #=> String, one of "s3:ReducedRedundancyLostObject", "s3:ObjectCreated:*", "s3:ObjectCreated:Put", "s3:ObjectCreated:Post", "s3:ObjectCreated:Copy", "s3:ObjectCreated:CompleteMultipartUpload", "s3:ObjectRemoved:*", "s3:ObjectRemoved:Delete", "s3:ObjectRemoved:DeleteMarkerCreated"
-    #   resp.topic_configuration.event #=> String, one of "s3:ReducedRedundancyLostObject", "s3:ObjectCreated:*", "s3:ObjectCreated:Put", "s3:ObjectCreated:Post", "s3:ObjectCreated:Copy", "s3:ObjectCreated:CompleteMultipartUpload", "s3:ObjectRemoved:*", "s3:ObjectRemoved:Delete", "s3:ObjectRemoved:DeleteMarkerCreated"
+    #   resp.topic_configuration.events[0] #=> String, one of "s3:ReducedRedundancyLostObject", "s3:ObjectCreated:*", "s3:ObjectCreated:Put", "s3:ObjectCreated:Post", "s3:ObjectCreated:Copy", "s3:ObjectCreated:CompleteMultipartUpload", "s3:ObjectRemoved:*", "s3:ObjectRemoved:Delete", "s3:ObjectRemoved:DeleteMarkerCreated", "s3:ObjectRestore:Post", "s3:ObjectRestore:Completed"
+    #   resp.topic_configuration.event #=> String, one of "s3:ReducedRedundancyLostObject", "s3:ObjectCreated:*", "s3:ObjectCreated:Put", "s3:ObjectCreated:Post", "s3:ObjectCreated:Copy", "s3:ObjectCreated:CompleteMultipartUpload", "s3:ObjectRemoved:*", "s3:ObjectRemoved:Delete", "s3:ObjectRemoved:DeleteMarkerCreated", "s3:ObjectRestore:Post", "s3:ObjectRestore:Completed"
     #   resp.topic_configuration.topic #=> String
     #   resp.queue_configuration.id #=> String
-    #   resp.queue_configuration.event #=> String, one of "s3:ReducedRedundancyLostObject", "s3:ObjectCreated:*", "s3:ObjectCreated:Put", "s3:ObjectCreated:Post", "s3:ObjectCreated:Copy", "s3:ObjectCreated:CompleteMultipartUpload", "s3:ObjectRemoved:*", "s3:ObjectRemoved:Delete", "s3:ObjectRemoved:DeleteMarkerCreated"
+    #   resp.queue_configuration.event #=> String, one of "s3:ReducedRedundancyLostObject", "s3:ObjectCreated:*", "s3:ObjectCreated:Put", "s3:ObjectCreated:Post", "s3:ObjectCreated:Copy", "s3:ObjectCreated:CompleteMultipartUpload", "s3:ObjectRemoved:*", "s3:ObjectRemoved:Delete", "s3:ObjectRemoved:DeleteMarkerCreated", "s3:ObjectRestore:Post", "s3:ObjectRestore:Completed"
     #   resp.queue_configuration.events #=> Array
-    #   resp.queue_configuration.events[0] #=> String, one of "s3:ReducedRedundancyLostObject", "s3:ObjectCreated:*", "s3:ObjectCreated:Put", "s3:ObjectCreated:Post", "s3:ObjectCreated:Copy", "s3:ObjectCreated:CompleteMultipartUpload", "s3:ObjectRemoved:*", "s3:ObjectRemoved:Delete", "s3:ObjectRemoved:DeleteMarkerCreated"
+    #   resp.queue_configuration.events[0] #=> String, one of "s3:ReducedRedundancyLostObject", "s3:ObjectCreated:*", "s3:ObjectCreated:Put", "s3:ObjectCreated:Post", "s3:ObjectCreated:Copy", "s3:ObjectCreated:CompleteMultipartUpload", "s3:ObjectRemoved:*", "s3:ObjectRemoved:Delete", "s3:ObjectRemoved:DeleteMarkerCreated", "s3:ObjectRestore:Post", "s3:ObjectRestore:Completed"
     #   resp.queue_configuration.queue #=> String
     #   resp.cloud_function_configuration.id #=> String
-    #   resp.cloud_function_configuration.event #=> String, one of "s3:ReducedRedundancyLostObject", "s3:ObjectCreated:*", "s3:ObjectCreated:Put", "s3:ObjectCreated:Post", "s3:ObjectCreated:Copy", "s3:ObjectCreated:CompleteMultipartUpload", "s3:ObjectRemoved:*", "s3:ObjectRemoved:Delete", "s3:ObjectRemoved:DeleteMarkerCreated"
+    #   resp.cloud_function_configuration.event #=> String, one of "s3:ReducedRedundancyLostObject", "s3:ObjectCreated:*", "s3:ObjectCreated:Put", "s3:ObjectCreated:Post", "s3:ObjectCreated:Copy", "s3:ObjectCreated:CompleteMultipartUpload", "s3:ObjectRemoved:*", "s3:ObjectRemoved:Delete", "s3:ObjectRemoved:DeleteMarkerCreated", "s3:ObjectRestore:Post", "s3:ObjectRestore:Completed"
     #   resp.cloud_function_configuration.events #=> Array
-    #   resp.cloud_function_configuration.events[0] #=> String, one of "s3:ReducedRedundancyLostObject", "s3:ObjectCreated:*", "s3:ObjectCreated:Put", "s3:ObjectCreated:Post", "s3:ObjectCreated:Copy", "s3:ObjectCreated:CompleteMultipartUpload", "s3:ObjectRemoved:*", "s3:ObjectRemoved:Delete", "s3:ObjectRemoved:DeleteMarkerCreated"
+    #   resp.cloud_function_configuration.events[0] #=> String, one of "s3:ReducedRedundancyLostObject", "s3:ObjectCreated:*", "s3:ObjectCreated:Put", "s3:ObjectCreated:Post", "s3:ObjectCreated:Copy", "s3:ObjectCreated:CompleteMultipartUpload", "s3:ObjectRemoved:*", "s3:ObjectRemoved:Delete", "s3:ObjectRemoved:DeleteMarkerCreated", "s3:ObjectRestore:Post", "s3:ObjectRestore:Completed"
     #   resp.cloud_function_configuration.cloud_function #=> String
     #   resp.cloud_function_configuration.invocation_role #=> String
     #
@@ -2176,7 +2217,7 @@ module Aws::S3
     #   resp.topic_configurations[0].id #=> String
     #   resp.topic_configurations[0].topic_arn #=> String
     #   resp.topic_configurations[0].events #=> Array
-    #   resp.topic_configurations[0].events[0] #=> String, one of "s3:ReducedRedundancyLostObject", "s3:ObjectCreated:*", "s3:ObjectCreated:Put", "s3:ObjectCreated:Post", "s3:ObjectCreated:Copy", "s3:ObjectCreated:CompleteMultipartUpload", "s3:ObjectRemoved:*", "s3:ObjectRemoved:Delete", "s3:ObjectRemoved:DeleteMarkerCreated"
+    #   resp.topic_configurations[0].events[0] #=> String, one of "s3:ReducedRedundancyLostObject", "s3:ObjectCreated:*", "s3:ObjectCreated:Put", "s3:ObjectCreated:Post", "s3:ObjectCreated:Copy", "s3:ObjectCreated:CompleteMultipartUpload", "s3:ObjectRemoved:*", "s3:ObjectRemoved:Delete", "s3:ObjectRemoved:DeleteMarkerCreated", "s3:ObjectRestore:Post", "s3:ObjectRestore:Completed"
     #   resp.topic_configurations[0].filter.key.filter_rules #=> Array
     #   resp.topic_configurations[0].filter.key.filter_rules[0].name #=> String, one of "prefix", "suffix"
     #   resp.topic_configurations[0].filter.key.filter_rules[0].value #=> String
@@ -2184,7 +2225,7 @@ module Aws::S3
     #   resp.queue_configurations[0].id #=> String
     #   resp.queue_configurations[0].queue_arn #=> String
     #   resp.queue_configurations[0].events #=> Array
-    #   resp.queue_configurations[0].events[0] #=> String, one of "s3:ReducedRedundancyLostObject", "s3:ObjectCreated:*", "s3:ObjectCreated:Put", "s3:ObjectCreated:Post", "s3:ObjectCreated:Copy", "s3:ObjectCreated:CompleteMultipartUpload", "s3:ObjectRemoved:*", "s3:ObjectRemoved:Delete", "s3:ObjectRemoved:DeleteMarkerCreated"
+    #   resp.queue_configurations[0].events[0] #=> String, one of "s3:ReducedRedundancyLostObject", "s3:ObjectCreated:*", "s3:ObjectCreated:Put", "s3:ObjectCreated:Post", "s3:ObjectCreated:Copy", "s3:ObjectCreated:CompleteMultipartUpload", "s3:ObjectRemoved:*", "s3:ObjectRemoved:Delete", "s3:ObjectRemoved:DeleteMarkerCreated", "s3:ObjectRestore:Post", "s3:ObjectRestore:Completed"
     #   resp.queue_configurations[0].filter.key.filter_rules #=> Array
     #   resp.queue_configurations[0].filter.key.filter_rules[0].name #=> String, one of "prefix", "suffix"
     #   resp.queue_configurations[0].filter.key.filter_rules[0].value #=> String
@@ -2192,7 +2233,7 @@ module Aws::S3
     #   resp.lambda_function_configurations[0].id #=> String
     #   resp.lambda_function_configurations[0].lambda_function_arn #=> String
     #   resp.lambda_function_configurations[0].events #=> Array
-    #   resp.lambda_function_configurations[0].events[0] #=> String, one of "s3:ReducedRedundancyLostObject", "s3:ObjectCreated:*", "s3:ObjectCreated:Put", "s3:ObjectCreated:Post", "s3:ObjectCreated:Copy", "s3:ObjectCreated:CompleteMultipartUpload", "s3:ObjectRemoved:*", "s3:ObjectRemoved:Delete", "s3:ObjectRemoved:DeleteMarkerCreated"
+    #   resp.lambda_function_configurations[0].events[0] #=> String, one of "s3:ReducedRedundancyLostObject", "s3:ObjectCreated:*", "s3:ObjectCreated:Put", "s3:ObjectCreated:Post", "s3:ObjectCreated:Copy", "s3:ObjectCreated:CompleteMultipartUpload", "s3:ObjectRemoved:*", "s3:ObjectRemoved:Delete", "s3:ObjectRemoved:DeleteMarkerCreated", "s3:ObjectRestore:Post", "s3:ObjectRestore:Completed"
     #   resp.lambda_function_configurations[0].filter.key.filter_rules #=> Array
     #   resp.lambda_function_configurations[0].filter.key.filter_rules[0].name #=> String, one of "prefix", "suffix"
     #   resp.lambda_function_configurations[0].filter.key.filter_rules[0].value #=> String
@@ -2341,7 +2382,7 @@ module Aws::S3
     #   resp.replication_configuration.rules[0].source_selection_criteria.sse_kms_encrypted_objects.status #=> String, one of "Enabled", "Disabled"
     #   resp.replication_configuration.rules[0].destination.bucket #=> String
     #   resp.replication_configuration.rules[0].destination.account #=> String
-    #   resp.replication_configuration.rules[0].destination.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING"
+    #   resp.replication_configuration.rules[0].destination.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER"
     #   resp.replication_configuration.rules[0].destination.access_control_translation.owner #=> String, one of "Destination"
     #   resp.replication_configuration.rules[0].destination.encryption_configuration.replica_kms_key_id #=> String
     #   resp.replication_configuration.rules[0].delete_marker_replication.status #=> String, one of "Enabled", "Disabled"
@@ -2663,6 +2704,9 @@ module Aws::S3
     #   * {Types::GetObjectOutput#replication_status #replication_status} => String
     #   * {Types::GetObjectOutput#parts_count #parts_count} => Integer
     #   * {Types::GetObjectOutput#tag_count #tag_count} => Integer
+    #   * {Types::GetObjectOutput#object_lock_mode #object_lock_mode} => String
+    #   * {Types::GetObjectOutput#object_lock_retain_until_date #object_lock_retain_until_date} => Time
+    #   * {Types::GetObjectOutput#object_lock_legal_hold_status #object_lock_legal_hold_status} => String
     #
     #
     # @example Example: To retrieve an object
@@ -2789,11 +2833,14 @@ module Aws::S3
     #   resp.sse_customer_algorithm #=> String
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
-    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING"
+    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER"
     #   resp.request_charged #=> String, one of "requester"
     #   resp.replication_status #=> String, one of "COMPLETE", "PENDING", "FAILED", "REPLICA"
     #   resp.parts_count #=> Integer
     #   resp.tag_count #=> Integer
+    #   resp.object_lock_mode #=> String, one of "GOVERNANCE", "COMPLIANCE"
+    #   resp.object_lock_retain_until_date #=> Time
+    #   resp.object_lock_legal_hold_status #=> String, one of "ON", "OFF"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObject AWS API Documentation
     #
@@ -2906,6 +2953,134 @@ module Aws::S3
     # @param [Hash] params ({})
     def get_object_acl(params = {}, options = {})
       req = build_request(:get_object_acl, params)
+      req.send_request(options)
+    end
+
+    # Gets an object's current Legal Hold status.
+    #
+    # @option params [required, String] :bucket
+    #   The bucket containing the object whose Legal Hold status you want to
+    #   retrieve.
+    #
+    # @option params [required, String] :key
+    #   The key name for the object whose Legal Hold status you want to
+    #   retrieve.
+    #
+    # @option params [String] :version_id
+    #   The version ID of the object whose Legal Hold status you want to
+    #   retrieve.
+    #
+    # @option params [String] :request_payer
+    #   Confirms that the requester knows that she or he will be charged for
+    #   the request. Bucket owners need not specify this parameter in their
+    #   requests. Documentation on downloading objects from requester pays
+    #   buckets can be found at
+    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #
+    # @return [Types::GetObjectLegalHoldOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetObjectLegalHoldOutput#legal_hold #legal_hold} => Types::ObjectLockLegalHold
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_object_legal_hold({
+    #     bucket: "BucketName", # required
+    #     key: "ObjectKey", # required
+    #     version_id: "ObjectVersionId",
+    #     request_payer: "requester", # accepts requester
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.legal_hold.status #=> String, one of "ON", "OFF"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectLegalHold AWS API Documentation
+    #
+    # @overload get_object_legal_hold(params = {})
+    # @param [Hash] params ({})
+    def get_object_legal_hold(params = {}, options = {})
+      req = build_request(:get_object_legal_hold, params)
+      req.send_request(options)
+    end
+
+    # Gets the Object Lock configuration for a bucket. The rule specified in
+    # the Object Lock configuration will be applied by default to every new
+    # object placed in the specified bucket.
+    #
+    # @option params [required, String] :bucket
+    #   The bucket whose Object Lock configuration you want to retrieve.
+    #
+    # @return [Types::GetObjectLockConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetObjectLockConfigurationOutput#object_lock_configuration #object_lock_configuration} => Types::ObjectLockConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_object_lock_configuration({
+    #     bucket: "BucketName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.object_lock_configuration.object_lock_enabled #=> String, one of "Enabled"
+    #   resp.object_lock_configuration.rule.default_retention.mode #=> String, one of "GOVERNANCE", "COMPLIANCE"
+    #   resp.object_lock_configuration.rule.default_retention.days #=> Integer
+    #   resp.object_lock_configuration.rule.default_retention.years #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectLockConfiguration AWS API Documentation
+    #
+    # @overload get_object_lock_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_object_lock_configuration(params = {}, options = {})
+      req = build_request(:get_object_lock_configuration, params)
+      req.send_request(options)
+    end
+
+    # Retrieves an object's retention settings.
+    #
+    # @option params [required, String] :bucket
+    #   The bucket containing the object whose retention settings you want to
+    #   retrieve.
+    #
+    # @option params [required, String] :key
+    #   The key name for the object whose retention settings you want to
+    #   retrieve.
+    #
+    # @option params [String] :version_id
+    #   The version ID for the object whose retention settings you want to
+    #   retrieve.
+    #
+    # @option params [String] :request_payer
+    #   Confirms that the requester knows that she or he will be charged for
+    #   the request. Bucket owners need not specify this parameter in their
+    #   requests. Documentation on downloading objects from requester pays
+    #   buckets can be found at
+    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #
+    # @return [Types::GetObjectRetentionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetObjectRetentionOutput#retention #retention} => Types::ObjectLockRetention
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_object_retention({
+    #     bucket: "BucketName", # required
+    #     key: "ObjectKey", # required
+    #     version_id: "ObjectVersionId",
+    #     request_payer: "requester", # accepts requester
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.retention.mode #=> String, one of "GOVERNANCE", "COMPLIANCE"
+    #   resp.retention.retain_until_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectRetention AWS API Documentation
+    #
+    # @overload get_object_retention(params = {})
+    # @param [Hash] params ({})
+    def get_object_retention(params = {}, options = {})
+      req = build_request(:get_object_retention, params)
       req.send_request(options)
     end
 
@@ -3203,6 +3378,9 @@ module Aws::S3
     #   * {Types::HeadObjectOutput#request_charged #request_charged} => String
     #   * {Types::HeadObjectOutput#replication_status #replication_status} => String
     #   * {Types::HeadObjectOutput#parts_count #parts_count} => Integer
+    #   * {Types::HeadObjectOutput#object_lock_mode #object_lock_mode} => String
+    #   * {Types::HeadObjectOutput#object_lock_retain_until_date #object_lock_retain_until_date} => Time
+    #   * {Types::HeadObjectOutput#object_lock_legal_hold_status #object_lock_legal_hold_status} => String
     #
     #
     # @example Example: To retrieve metadata of an object without returning the object itself
@@ -3269,10 +3447,13 @@ module Aws::S3
     #   resp.sse_customer_algorithm #=> String
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
-    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING"
+    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER"
     #   resp.request_charged #=> String, one of "requester"
     #   resp.replication_status #=> String, one of "COMPLETE", "PENDING", "FAILED", "REPLICA"
     #   resp.parts_count #=> Integer
+    #   resp.object_lock_mode #=> String, one of "GOVERNANCE", "COMPLIANCE"
+    #   resp.object_lock_retain_until_date #=> Time
+    #   resp.object_lock_legal_hold_status #=> String, one of "ON", "OFF"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadObject AWS API Documentation
     #
@@ -3376,7 +3557,7 @@ module Aws::S3
     #   resp.inventory_configuration_list[0].id #=> String
     #   resp.inventory_configuration_list[0].included_object_versions #=> String, one of "All", "Current"
     #   resp.inventory_configuration_list[0].optional_fields #=> Array
-    #   resp.inventory_configuration_list[0].optional_fields[0] #=> String, one of "Size", "LastModifiedDate", "StorageClass", "ETag", "IsMultipartUploaded", "ReplicationStatus", "EncryptionStatus"
+    #   resp.inventory_configuration_list[0].optional_fields[0] #=> String, one of "Size", "LastModifiedDate", "StorageClass", "ETag", "IsMultipartUploaded", "ReplicationStatus", "EncryptionStatus", "ObjectLockRetainUntilDate", "ObjectLockMode", "ObjectLockLegalHoldStatus"
     #   resp.inventory_configuration_list[0].schedule.frequency #=> String, one of "Daily", "Weekly"
     #   resp.is_truncated #=> Boolean
     #   resp.next_continuation_token #=> String
@@ -3668,7 +3849,7 @@ module Aws::S3
     #   resp.uploads[0].upload_id #=> String
     #   resp.uploads[0].key #=> String
     #   resp.uploads[0].initiated #=> Time
-    #   resp.uploads[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING"
+    #   resp.uploads[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER"
     #   resp.uploads[0].owner.display_name #=> String
     #   resp.uploads[0].owner.id #=> String
     #   resp.uploads[0].initiator.id #=> String
@@ -4204,7 +4385,7 @@ module Aws::S3
     #   resp.initiator.display_name #=> String
     #   resp.owner.display_name #=> String
     #   resp.owner.id #=> String
-    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING"
+    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER"
     #   resp.request_charged #=> String, one of "requester"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListParts AWS API Documentation
@@ -4555,7 +4736,7 @@ module Aws::S3
     #       },
     #       id: "InventoryId", # required
     #       included_object_versions: "All", # required, accepts All, Current
-    #       optional_fields: ["Size"], # accepts Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, EncryptionStatus
+    #       optional_fields: ["Size"], # accepts Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, EncryptionStatus, ObjectLockRetainUntilDate, ObjectLockMode, ObjectLockLegalHoldStatus
     #       schedule: { # required
     #         frequency: "Daily", # required, accepts Daily, Weekly
     #       },
@@ -4866,20 +5047,20 @@ module Aws::S3
     #     notification_configuration: { # required
     #       topic_configuration: {
     #         id: "NotificationId",
-    #         events: ["s3:ReducedRedundancyLostObject"], # accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated
-    #         event: "s3:ReducedRedundancyLostObject", # accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated
+    #         events: ["s3:ReducedRedundancyLostObject"], # accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated, s3:ObjectRestore:Post, s3:ObjectRestore:Completed
+    #         event: "s3:ReducedRedundancyLostObject", # accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated, s3:ObjectRestore:Post, s3:ObjectRestore:Completed
     #         topic: "TopicArn",
     #       },
     #       queue_configuration: {
     #         id: "NotificationId",
-    #         event: "s3:ReducedRedundancyLostObject", # accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated
-    #         events: ["s3:ReducedRedundancyLostObject"], # accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated
+    #         event: "s3:ReducedRedundancyLostObject", # accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated, s3:ObjectRestore:Post, s3:ObjectRestore:Completed
+    #         events: ["s3:ReducedRedundancyLostObject"], # accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated, s3:ObjectRestore:Post, s3:ObjectRestore:Completed
     #         queue: "QueueArn",
     #       },
     #       cloud_function_configuration: {
     #         id: "NotificationId",
-    #         event: "s3:ReducedRedundancyLostObject", # accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated
-    #         events: ["s3:ReducedRedundancyLostObject"], # accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated
+    #         event: "s3:ReducedRedundancyLostObject", # accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated, s3:ObjectRestore:Post, s3:ObjectRestore:Completed
+    #         events: ["s3:ReducedRedundancyLostObject"], # accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated, s3:ObjectRestore:Post, s3:ObjectRestore:Completed
     #         cloud_function: "CloudFunction",
     #         invocation_role: "CloudFunctionInvocationRole",
     #       },
@@ -4934,7 +5115,7 @@ module Aws::S3
     #         {
     #           id: "NotificationId",
     #           topic_arn: "TopicArn", # required
-    #           events: ["s3:ReducedRedundancyLostObject"], # required, accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated
+    #           events: ["s3:ReducedRedundancyLostObject"], # required, accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated, s3:ObjectRestore:Post, s3:ObjectRestore:Completed
     #           filter: {
     #             key: {
     #               filter_rules: [
@@ -4951,7 +5132,7 @@ module Aws::S3
     #         {
     #           id: "NotificationId",
     #           queue_arn: "QueueArn", # required
-    #           events: ["s3:ReducedRedundancyLostObject"], # required, accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated
+    #           events: ["s3:ReducedRedundancyLostObject"], # required, accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated, s3:ObjectRestore:Post, s3:ObjectRestore:Completed
     #           filter: {
     #             key: {
     #               filter_rules: [
@@ -4968,7 +5149,7 @@ module Aws::S3
     #         {
     #           id: "NotificationId",
     #           lambda_function_arn: "LambdaFunctionArn", # required
-    #           events: ["s3:ReducedRedundancyLostObject"], # required, accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated
+    #           events: ["s3:ReducedRedundancyLostObject"], # required, accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated, s3:ObjectRestore:Post, s3:ObjectRestore:Completed
     #           filter: {
     #             key: {
     #               filter_rules: [
@@ -5111,7 +5292,7 @@ module Aws::S3
     #           destination: { # required
     #             bucket: "BucketName", # required
     #             account: "AccountId",
-    #             storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
+    #             storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
     #             access_control_translation: {
     #               owner: "Destination", # required, accepts Destination
     #             },
@@ -5460,6 +5641,15 @@ module Aws::S3
     #   The tag-set for the object. The tag-set must be encoded as URL Query
     #   parameters. (For example, "Key1=Value1")
     #
+    # @option params [String] :object_lock_mode
+    #   The Object Lock mode that you want to apply to this object.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
+    #   The date and time when you want this object's Object Lock to expire.
+    #
+    # @option params [String] :object_lock_legal_hold_status
+    #   The Legal Hold status that you want to apply to the specified object.
+    #
     # @return [Types::PutObjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutObjectOutput#expiration #expiration} => String
@@ -5631,7 +5821,7 @@ module Aws::S3
     #       "MetadataKey" => "MetadataValue",
     #     },
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -5639,6 +5829,9 @@ module Aws::S3
     #     ssekms_key_id: "SSEKMSKeyId",
     #     request_payer: "requester", # accepts requester
     #     tagging: "TaggingHeader",
+    #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
+    #     object_lock_retain_until_date: Time.now,
+    #     object_lock_legal_hold_status: "ON", # accepts ON, OFF
     #   })
     #
     # @example Response structure
@@ -5772,6 +5965,183 @@ module Aws::S3
       req.send_request(options)
     end
 
+    # Applies a Legal Hold configuration to the specified object.
+    #
+    # @option params [required, String] :bucket
+    #   The bucket containing the object that you want to place a Legal Hold
+    #   on.
+    #
+    # @option params [required, String] :key
+    #   The key name for the object that you want to place a Legal Hold on.
+    #
+    # @option params [Types::ObjectLockLegalHold] :legal_hold
+    #   Container element for the Legal Hold configuration you want to apply
+    #   to the specified object.
+    #
+    # @option params [String] :request_payer
+    #   Confirms that the requester knows that she or he will be charged for
+    #   the request. Bucket owners need not specify this parameter in their
+    #   requests. Documentation on downloading objects from requester pays
+    #   buckets can be found at
+    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #
+    # @option params [String] :version_id
+    #   The version ID of the object that you want to place a Legal Hold on.
+    #
+    # @option params [String] :content_md5
+    #   The MD5 signature for the configuration included in your request.
+    #
+    # @return [Types::PutObjectLegalHoldOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutObjectLegalHoldOutput#request_charged #request_charged} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_object_legal_hold({
+    #     bucket: "BucketName", # required
+    #     key: "ObjectKey", # required
+    #     legal_hold: {
+    #       status: "ON", # accepts ON, OFF
+    #     },
+    #     request_payer: "requester", # accepts requester
+    #     version_id: "ObjectVersionId",
+    #     content_md5: "ContentMD5",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_charged #=> String, one of "requester"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectLegalHold AWS API Documentation
+    #
+    # @overload put_object_legal_hold(params = {})
+    # @param [Hash] params ({})
+    def put_object_legal_hold(params = {}, options = {})
+      req = build_request(:put_object_legal_hold, params)
+      req.send_request(options)
+    end
+
+    # Places an Object Lock configuration on the specified bucket. The rule
+    # specified in the Object Lock configuration will be applied by default
+    # to every new object placed in the specified bucket.
+    #
+    # @option params [required, String] :bucket
+    #   The bucket whose Object Lock configuration you want to create or
+    #   replace.
+    #
+    # @option params [Types::ObjectLockConfiguration] :object_lock_configuration
+    #   The Object Lock configuration that you want to apply to the specified
+    #   bucket.
+    #
+    # @option params [String] :request_payer
+    #   Confirms that the requester knows that she or he will be charged for
+    #   the request. Bucket owners need not specify this parameter in their
+    #   requests. Documentation on downloading objects from requester pays
+    #   buckets can be found at
+    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #
+    # @option params [String] :token
+    #
+    # @option params [String] :content_md5
+    #   The MD5 signature for the configuration included in your request.
+    #
+    # @return [Types::PutObjectLockConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutObjectLockConfigurationOutput#request_charged #request_charged} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_object_lock_configuration({
+    #     bucket: "BucketName", # required
+    #     object_lock_configuration: {
+    #       object_lock_enabled: "Enabled", # accepts Enabled
+    #       rule: {
+    #         default_retention: {
+    #           mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
+    #           days: 1,
+    #           years: 1,
+    #         },
+    #       },
+    #     },
+    #     request_payer: "requester", # accepts requester
+    #     token: "ObjectLockToken",
+    #     content_md5: "ContentMD5",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_charged #=> String, one of "requester"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectLockConfiguration AWS API Documentation
+    #
+    # @overload put_object_lock_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_object_lock_configuration(params = {}, options = {})
+      req = build_request(:put_object_lock_configuration, params)
+      req.send_request(options)
+    end
+
+    # Places an Object Retention configuration on an object.
+    #
+    # @option params [required, String] :bucket
+    #   The bucket that contains the object you want to apply this Object
+    #   Retention configuration to.
+    #
+    # @option params [required, String] :key
+    #   The key name for the object that you want to apply this Object
+    #   Retention configuration to.
+    #
+    # @option params [Types::ObjectLockRetention] :retention
+    #   The container element for the Object Retention configuration.
+    #
+    # @option params [String] :request_payer
+    #   Confirms that the requester knows that she or he will be charged for
+    #   the request. Bucket owners need not specify this parameter in their
+    #   requests. Documentation on downloading objects from requester pays
+    #   buckets can be found at
+    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #
+    # @option params [String] :version_id
+    #   The version ID for the object that you want to apply this Object
+    #   Retention configuration to.
+    #
+    # @option params [Boolean] :bypass_governance_retention
+    #
+    # @option params [String] :content_md5
+    #   The MD5 signature for the configuration included in your request.
+    #
+    # @return [Types::PutObjectRetentionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutObjectRetentionOutput#request_charged #request_charged} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_object_retention({
+    #     bucket: "BucketName", # required
+    #     key: "ObjectKey", # required
+    #     retention: {
+    #       mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
+    #       retain_until_date: Time.now,
+    #     },
+    #     request_payer: "requester", # accepts requester
+    #     version_id: "ObjectVersionId",
+    #     bypass_governance_retention: false,
+    #     content_md5: "ContentMD5",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_charged #=> String, one of "requester"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectRetention AWS API Documentation
+    #
+    # @overload put_object_retention(params = {})
+    # @param [Hash] params ({})
+    def put_object_retention(params = {}, options = {})
+      req = build_request(:put_object_retention, params)
+      req.send_request(options)
+    end
+
     # Sets the supplied tag-set to an object that already exists in a bucket
     #
     # @option params [required, String] :bucket
@@ -5858,10 +6228,9 @@ module Aws::S3
     # @option params [required, Types::PublicAccessBlockConfiguration] :public_access_block_configuration
     #   The `PublicAccessBlock` configuration that you want to apply to this
     #   Amazon S3 bucket. You can enable the configuration options in any
-    #   combination. For more information about when &amp;S3; considers a
-    #   bucket or object public, see For more information about when Amazon S3
-    #   considers a bucket or object public, see [The Meaning of
-    #   "Public"][1] in the Amazon Simple Storage Service Developer Guide.
+    #   combination. For more information about when Amazon S3 considers a
+    #   bucket or object public, see [The Meaning of "Public"][1] in the
+    #   *Amazon Simple Storage Service Developer Guide*.
     #
     #
     #
@@ -6017,7 +6386,7 @@ module Aws::S3
     #               value: "MetadataValue",
     #             },
     #           ],
-    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
+    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
     #         },
     #       },
     #     },
@@ -6617,7 +6986,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

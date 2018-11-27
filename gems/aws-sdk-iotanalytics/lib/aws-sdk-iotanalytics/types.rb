@@ -431,6 +431,17 @@ module Aws::IoTAnalytics
     #             },
     #           },
     #         ],
+    #         content_delivery_rules: [
+    #           {
+    #             entry_name: "EntryName",
+    #             destination: { # required
+    #               iot_events_destination_configuration: {
+    #                 input_name: "IotEventsInputName", # required
+    #                 role_arn: "RoleArn", # required
+    #               },
+    #             },
+    #           },
+    #         ],
     #         retention_period: {
     #           unlimited: false,
     #           number_of_days: 1,
@@ -458,6 +469,9 @@ module Aws::IoTAnalytics
     #   up to five **DataSetTrigger** objects.
     #   @return [Array<Types::DatasetTrigger>]
     #
+    # @!attribute [rw] content_delivery_rules
+    #   @return [Array<Types::DatasetContentDeliveryRule>]
+    #
     # @!attribute [rw] retention_period
     #   \[Optional\] How long, in days, message data is kept for the data
     #   set. If not given or set to null, the latest version of the dataset
@@ -473,6 +487,7 @@ module Aws::IoTAnalytics
       :dataset_name,
       :actions,
       :triggers,
+      :content_delivery_rules,
       :retention_period,
       :tags)
       include Aws::Structure
@@ -686,6 +701,9 @@ module Aws::IoTAnalytics
     #   automatically updated.
     #   @return [Array<Types::DatasetTrigger>]
     #
+    # @!attribute [rw] content_delivery_rules
+    #   @return [Array<Types::DatasetContentDeliveryRule>]
+    #
     # @!attribute [rw] status
     #   The status of the data set.
     #   @return [String]
@@ -708,6 +726,7 @@ module Aws::IoTAnalytics
       :arn,
       :actions,
       :triggers,
+      :content_delivery_rules,
       :status,
       :creation_time,
       :last_update_time,
@@ -794,6 +813,49 @@ module Aws::IoTAnalytics
     class DatasetActionSummary < Struct.new(
       :action_name,
       :action_type)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DatasetContentDeliveryDestination
+    #   data as a hash:
+    #
+    #       {
+    #         iot_events_destination_configuration: {
+    #           input_name: "IotEventsInputName", # required
+    #           role_arn: "RoleArn", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] iot_events_destination_configuration
+    #   @return [Types::IotEventsDestinationConfiguration]
+    #
+    class DatasetContentDeliveryDestination < Struct.new(
+      :iot_events_destination_configuration)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DatasetContentDeliveryRule
+    #   data as a hash:
+    #
+    #       {
+    #         entry_name: "EntryName",
+    #         destination: { # required
+    #           iot_events_destination_configuration: {
+    #             input_name: "IotEventsInputName", # required
+    #             role_arn: "RoleArn", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] entry_name
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   @return [Types::DatasetContentDeliveryDestination]
+    #
+    class DatasetContentDeliveryRule < Struct.new(
+      :entry_name,
+      :destination)
       include Aws::Structure
     end
 
@@ -1498,6 +1560,26 @@ module Aws::IoTAnalytics
       :entries,
       :timestamp,
       :status)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass IotEventsDestinationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         input_name: "IotEventsInputName", # required
+    #         role_arn: "RoleArn", # required
+    #       }
+    #
+    # @!attribute [rw] input_name
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   @return [String]
+    #
+    class IotEventsDestinationConfiguration < Struct.new(
+      :input_name,
+      :role_arn)
       include Aws::Structure
     end
 
@@ -2667,6 +2749,17 @@ module Aws::IoTAnalytics
     #             },
     #           },
     #         ],
+    #         content_delivery_rules: [
+    #           {
+    #             entry_name: "EntryName",
+    #             destination: { # required
+    #               iot_events_destination_configuration: {
+    #                 input_name: "IotEventsInputName", # required
+    #                 role_arn: "RoleArn", # required
+    #               },
+    #             },
+    #           },
+    #         ],
     #         retention_period: {
     #           unlimited: false,
     #           number_of_days: 1,
@@ -2686,6 +2779,9 @@ module Aws::IoTAnalytics
     #   contain up to five **DataSetTrigger** objects.
     #   @return [Array<Types::DatasetTrigger>]
     #
+    # @!attribute [rw] content_delivery_rules
+    #   @return [Array<Types::DatasetContentDeliveryRule>]
+    #
     # @!attribute [rw] retention_period
     #   How long, in days, message data is kept for the data set.
     #   @return [Types::RetentionPeriod]
@@ -2694,6 +2790,7 @@ module Aws::IoTAnalytics
       :dataset_name,
       :actions,
       :triggers,
+      :content_delivery_rules,
       :retention_period)
       include Aws::Structure
     end

@@ -268,7 +268,7 @@ module Aws::S3
     #     metadata_directive: "COPY", # accepts COPY, REPLACE
     #     tagging_directive: "COPY", # accepts COPY, REPLACE
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -279,6 +279,9 @@ module Aws::S3
     #     copy_source_sse_customer_key_md5: "CopySourceSSECustomerKeyMD5",
     #     request_payer: "requester", # accepts requester
     #     tagging: "TaggingHeader",
+    #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
+    #     object_lock_retain_until_date: Time.now,
+    #     object_lock_legal_hold_status: "ON", # accepts ON, OFF
     #   })
     # @param [Hash] options ({})
     # @option options [String] :acl
@@ -376,6 +379,13 @@ module Aws::S3
     #   The tag-set for the object destination object this value must be used
     #   in conjunction with the TaggingDirective. The tag-set must be encoded
     #   as URL Query parameters
+    # @option options [String] :object_lock_mode
+    #   The Object Lock mode that you want to apply to the copied object.
+    # @option options [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
+    #   The date and time when you want the copied object's Object Lock to
+    #   expire.
+    # @option options [String] :object_lock_legal_hold_status
+    #   Specifies whether you want to apply a Legal Hold to the copied object.
     # @return [Types::CopyObjectOutput]
     def copy_from(options = {})
       options = options.merge(
@@ -392,6 +402,7 @@ module Aws::S3
     #     mfa: "MFA",
     #     version_id: "ObjectVersionId",
     #     request_payer: "requester", # accepts requester
+    #     bypass_governance_retention: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :mfa
@@ -405,6 +416,7 @@ module Aws::S3
     #   requests. Documentation on downloading objects from requester pays
     #   buckets can be found at
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    # @option options [Boolean] :bypass_governance_retention
     # @return [Types::DeleteObjectOutput]
     def delete(options = {})
       options = options.merge(
@@ -519,7 +531,7 @@ module Aws::S3
     #       "MetadataKey" => "MetadataValue",
     #     },
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -527,6 +539,9 @@ module Aws::S3
     #     ssekms_key_id: "SSEKMSKeyId",
     #     request_payer: "requester", # accepts requester
     #     tagging: "TaggingHeader",
+    #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
+    #     object_lock_retain_until_date: Time.now,
+    #     object_lock_legal_hold_status: "ON", # accepts ON, OFF
     #   })
     # @param [Hash] options ({})
     # @option options [String] :acl
@@ -593,6 +608,14 @@ module Aws::S3
     # @option options [String] :tagging
     #   The tag-set for the object. The tag-set must be encoded as URL Query
     #   parameters
+    # @option options [String] :object_lock_mode
+    #   Specifies the Object Lock mode that you want to apply to the uploaded
+    #   object.
+    # @option options [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
+    #   Specifies the date and time when you want the Object Lock to expire.
+    # @option options [String] :object_lock_legal_hold_status
+    #   Specifies whether you want to apply a Legal Hold to the uploaded
+    #   object.
     # @return [MultipartUpload]
     def initiate_multipart_upload(options = {})
       options = options.merge(
@@ -629,7 +652,7 @@ module Aws::S3
     #       "MetadataKey" => "MetadataValue",
     #     },
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -637,6 +660,9 @@ module Aws::S3
     #     ssekms_key_id: "SSEKMSKeyId",
     #     request_payer: "requester", # accepts requester
     #     tagging: "TaggingHeader",
+    #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
+    #     object_lock_retain_until_date: Time.now,
+    #     object_lock_legal_hold_status: "ON", # accepts ON, OFF
     #   })
     # @param [Hash] options ({})
     # @option options [String] :acl
@@ -710,6 +736,12 @@ module Aws::S3
     # @option options [String] :tagging
     #   The tag-set for the object. The tag-set must be encoded as URL Query
     #   parameters. (For example, "Key1=Value1")
+    # @option options [String] :object_lock_mode
+    #   The Object Lock mode that you want to apply to this object.
+    # @option options [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
+    #   The date and time when you want this object's Object Lock to expire.
+    # @option options [String] :object_lock_legal_hold_status
+    #   The Legal Hold status that you want to apply to the specified object.
     # @return [Types::PutObjectOutput]
     def put(options = {})
       options = options.merge(
@@ -801,7 +833,7 @@ module Aws::S3
     #               value: "MetadataValue",
     #             },
     #           ],
-    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
+    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
     #         },
     #       },
     #     },
@@ -945,6 +977,7 @@ module Aws::S3
       #   object_summary.batch_delete!({
       #     mfa: "MFA",
       #     request_payer: "requester", # accepts requester
+      #     bypass_governance_retention: false,
       #   })
       # @param options ({})
       # @option options [String] :mfa
@@ -956,6 +989,10 @@ module Aws::S3
       #   requests. Documentation on downloading objects from requester pays
       #   buckets can be found at
       #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+      # @option options [Boolean] :bypass_governance_retention
+      #   Specifies whether you want to delete this object even if it has a
+      #   Governance-type Object Lock in place. You must have sufficient
+      #   permissions to perform this operation.
       # @return [void]
       def batch_delete!(options = {})
         batch_enum.each do |batch|

@@ -223,6 +223,7 @@ module Aws::S3
     #     grant_read_acp: "GrantReadACP",
     #     grant_write: "GrantWrite",
     #     grant_write_acp: "GrantWriteACP",
+    #     object_lock_enabled_for_bucket: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :acl
@@ -240,6 +241,9 @@ module Aws::S3
     #   bucket.
     # @option options [String] :grant_write_acp
     #   Allows grantee to write the ACL for the applicable bucket.
+    # @option options [Boolean] :object_lock_enabled_for_bucket
+    #   Specifies whether you want S3 Object Lock to be enabled for the new
+    #   bucket.
     # @return [Types::CreateBucketOutput]
     def create(options = {})
       options = options.merge(bucket: @name)
@@ -272,6 +276,7 @@ module Aws::S3
     #     },
     #     mfa: "MFA",
     #     request_payer: "requester", # accepts requester
+    #     bypass_governance_retention: false,
     #   })
     # @param [Hash] options ({})
     # @option options [required, Types::Delete] :delete
@@ -284,6 +289,10 @@ module Aws::S3
     #   requests. Documentation on downloading objects from requester pays
     #   buckets can be found at
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    # @option options [Boolean] :bypass_governance_retention
+    #   Specifies whether you want to delete this object even if it has a
+    #   Governance-type Object Lock in place. You must have sufficient
+    #   permissions to perform this operation.
     # @return [Types::DeleteObjectsOutput]
     def delete_objects(options = {})
       options = options.merge(bucket: @name)
@@ -313,7 +322,7 @@ module Aws::S3
     #       "MetadataKey" => "MetadataValue",
     #     },
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -321,6 +330,9 @@ module Aws::S3
     #     ssekms_key_id: "SSEKMSKeyId",
     #     request_payer: "requester", # accepts requester
     #     tagging: "TaggingHeader",
+    #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
+    #     object_lock_retain_until_date: Time.now,
+    #     object_lock_legal_hold_status: "ON", # accepts ON, OFF
     #   })
     # @param [Hash] options ({})
     # @option options [String] :acl
@@ -396,6 +408,12 @@ module Aws::S3
     # @option options [String] :tagging
     #   The tag-set for the object. The tag-set must be encoded as URL Query
     #   parameters. (For example, "Key1=Value1")
+    # @option options [String] :object_lock_mode
+    #   The Object Lock mode that you want to apply to this object.
+    # @option options [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
+    #   The date and time when you want this object's Object Lock to expire.
+    # @option options [String] :object_lock_legal_hold_status
+    #   The Legal Hold status that you want to apply to the specified object.
     # @return [Object]
     def put_object(options = {})
       options = options.merge(bucket: @name)

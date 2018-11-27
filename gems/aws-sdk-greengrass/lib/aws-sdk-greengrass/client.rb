@@ -205,10 +205,9 @@ module Aws::Greengrass
 
     # @!group API Operations
 
-    # Associates a role with a group. Your AWS Greengrass core will use the
-    # role to access AWS cloud services. The role's permissions should
-    # allow Greengrass core Lambda functions to perform actions against the
-    # cloud.
+    # Associates a role with a group. Your Greengrass core will use the role
+    # to access AWS cloud services. The role's permissions should allow
+    # Greengrass core Lambda functions to perform actions against the cloud.
     #
     # @option params [required, String] :group_id
     #
@@ -239,8 +238,8 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # Associates a role with your account. AWS Greengrass will use the role
-    # to access your Lambda functions and AWS IoT resources. This is
+    # Associates a role with your account. AWS IoT Greengrass will use the
+    # role to access your Lambda functions and AWS IoT resources. This is
     # necessary for deployments to succeed. The role must have at least
     # minimum permissions in the policy
     # ''AWSGreengrassResourceAccessRolePolicy''.
@@ -271,10 +270,117 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
+    # Creates a connector definition. You may provide the initial version of
+    # the connector definition now or use
+    # ''CreateConnectorDefinitionVersion'' at a later time.
+    #
+    # @option params [String] :amzn_client_token
+    #
+    # @option params [Types::ConnectorDefinitionVersion] :initial_version
+    #   Information about the connector definition version, which is a
+    #   container for connectors.
+    #
+    # @option params [String] :name
+    #
+    # @return [Types::CreateConnectorDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateConnectorDefinitionResponse#arn #arn} => String
+    #   * {Types::CreateConnectorDefinitionResponse#creation_timestamp #creation_timestamp} => String
+    #   * {Types::CreateConnectorDefinitionResponse#id #id} => String
+    #   * {Types::CreateConnectorDefinitionResponse#last_updated_timestamp #last_updated_timestamp} => String
+    #   * {Types::CreateConnectorDefinitionResponse#latest_version #latest_version} => String
+    #   * {Types::CreateConnectorDefinitionResponse#latest_version_arn #latest_version_arn} => String
+    #   * {Types::CreateConnectorDefinitionResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_connector_definition({
+    #     amzn_client_token: "__string",
+    #     initial_version: {
+    #       connectors: [
+    #         {
+    #           connector_arn: "__string",
+    #           id: "__string",
+    #           parameters: {
+    #             "__string" => "__string",
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     name: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.creation_timestamp #=> String
+    #   resp.id #=> String
+    #   resp.last_updated_timestamp #=> String
+    #   resp.latest_version #=> String
+    #   resp.latest_version_arn #=> String
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateConnectorDefinition AWS API Documentation
+    #
+    # @overload create_connector_definition(params = {})
+    # @param [Hash] params ({})
+    def create_connector_definition(params = {}, options = {})
+      req = build_request(:create_connector_definition, params)
+      req.send_request(options)
+    end
+
+    # Creates a version of a connector definition which has already been
+    # defined.
+    #
+    # @option params [String] :amzn_client_token
+    #
+    # @option params [required, String] :connector_definition_id
+    #
+    # @option params [Array<Types::Connector>] :connectors
+    #
+    # @return [Types::CreateConnectorDefinitionVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateConnectorDefinitionVersionResponse#arn #arn} => String
+    #   * {Types::CreateConnectorDefinitionVersionResponse#creation_timestamp #creation_timestamp} => String
+    #   * {Types::CreateConnectorDefinitionVersionResponse#id #id} => String
+    #   * {Types::CreateConnectorDefinitionVersionResponse#version #version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_connector_definition_version({
+    #     amzn_client_token: "__string",
+    #     connector_definition_id: "__string", # required
+    #     connectors: [
+    #       {
+    #         connector_arn: "__string",
+    #         id: "__string",
+    #         parameters: {
+    #           "__string" => "__string",
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.creation_timestamp #=> String
+    #   resp.id #=> String
+    #   resp.version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateConnectorDefinitionVersion AWS API Documentation
+    #
+    # @overload create_connector_definition_version(params = {})
+    # @param [Hash] params ({})
+    def create_connector_definition_version(params = {}, options = {})
+      req = build_request(:create_connector_definition_version, params)
+      req.send_request(options)
+    end
+
     # Creates a core definition. You may provide the initial version of the
     # core definition now or use ''CreateCoreDefinitionVersion'' at a
-    # later time. AWS Greengrass groups must each contain exactly one AWS
-    # Greengrass core.
+    # later time. Greengrass groups must each contain exactly one Greengrass
+    # core.
     #
     # @option params [String] :amzn_client_token
     #
@@ -330,8 +436,7 @@ module Aws::Greengrass
     end
 
     # Creates a version of a core definition that has already been defined.
-    # AWS Greengrass groups must each contain exactly one AWS Greengrass
-    # core.
+    # Greengrass groups must each contain exactly one Greengrass core.
     #
     # @option params [String] :amzn_client_token
     #
@@ -557,6 +662,11 @@ module Aws::Greengrass
     #   resp = client.create_function_definition({
     #     amzn_client_token: "__string",
     #     initial_version: {
+    #       default_config: {
+    #         execution: {
+    #           isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
+    #         },
+    #       },
     #       functions: [
     #         {
     #           function_arn: "__string",
@@ -564,6 +674,13 @@ module Aws::Greengrass
     #             encoding_type: "binary", # accepts binary, json
     #             environment: {
     #               access_sysfs: false,
+    #               execution: {
+    #                 isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
+    #                 run_as: {
+    #                   gid: 1,
+    #                   uid: 1,
+    #                 },
+    #               },
     #               resource_access_policies: [
     #                 {
     #                   permission: "ro", # accepts ro, rw
@@ -611,6 +728,10 @@ module Aws::Greengrass
     #
     # @option params [String] :amzn_client_token
     #
+    # @option params [Types::FunctionDefaultConfig] :default_config
+    #   Default configuration that will apply to all Lambda functions in the
+    #   group.
+    #
     # @option params [required, String] :function_definition_id
     #
     # @option params [Array<Types::Function>] :functions
@@ -626,6 +747,11 @@ module Aws::Greengrass
     #
     #   resp = client.create_function_definition_version({
     #     amzn_client_token: "__string",
+    #     default_config: {
+    #       execution: {
+    #         isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
+    #       },
+    #     },
     #     function_definition_id: "__string", # required
     #     functions: [
     #       {
@@ -634,6 +760,13 @@ module Aws::Greengrass
     #           encoding_type: "binary", # accepts binary, json
     #           environment: {
     #             access_sysfs: false,
+    #             execution: {
+    #               isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
+    #               run_as: {
+    #                 gid: 1,
+    #                 uid: 1,
+    #               },
+    #             },
     #             resource_access_policies: [
     #               {
     #                 permission: "ro", # accepts ro, rw
@@ -672,7 +805,10 @@ module Aws::Greengrass
     end
 
     # Creates a group. You may provide the initial version of the group or
-    # use ''CreateGroupVersion'' at a later time.
+    # use ''CreateGroupVersion'' at a later time. Tip: You can use the
+    # ''gg\_group\_setup'' package
+    # (https://github.com/awslabs/aws-greengrass-group-setup) as a library
+    # or command-line application to create and deploy Greengrass groups.
     #
     # @option params [String] :amzn_client_token
     #
@@ -696,6 +832,7 @@ module Aws::Greengrass
     #   resp = client.create_group({
     #     amzn_client_token: "__string",
     #     initial_version: {
+    #       connector_definition_version_arn: "__string",
     #       core_definition_version_arn: "__string",
     #       device_definition_version_arn: "__string",
     #       function_definition_version_arn: "__string",
@@ -760,6 +897,8 @@ module Aws::Greengrass
     #
     # @option params [String] :amzn_client_token
     #
+    # @option params [String] :connector_definition_version_arn
+    #
     # @option params [String] :core_definition_version_arn
     #
     # @option params [String] :device_definition_version_arn
@@ -785,6 +924,7 @@ module Aws::Greengrass
     #
     #   resp = client.create_group_version({
     #     amzn_client_token: "__string",
+    #     connector_definition_version_arn: "__string",
     #     core_definition_version_arn: "__string",
     #     device_definition_version_arn: "__string",
     #     function_definition_version_arn: "__string",
@@ -971,6 +1111,10 @@ module Aws::Greengrass
     #               destination_path: "__string",
     #               sage_maker_job_arn: "__string",
     #             },
+    #             secrets_manager_secret_resource_data: {
+    #               arn: "__string",
+    #               additional_staging_labels_to_download: ["__string"],
+    #             },
     #           },
     #         },
     #       ],
@@ -1045,6 +1189,10 @@ module Aws::Greengrass
     #           sage_maker_machine_learning_model_resource_data: {
     #             destination_path: "__string",
     #             sage_maker_job_arn: "__string",
+    #           },
+    #           secrets_manager_secret_resource_data: {
+    #             arn: "__string",
+    #             additional_staging_labels_to_download: ["__string"],
     #           },
     #         },
     #       },
@@ -1228,6 +1376,27 @@ module Aws::Greengrass
     # @param [Hash] params ({})
     def create_subscription_definition_version(params = {}, options = {})
       req = build_request(:create_subscription_definition_version, params)
+      req.send_request(options)
+    end
+
+    # Deletes a connector definition.
+    #
+    # @option params [required, String] :connector_definition_id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_connector_definition({
+    #     connector_definition_id: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteConnectorDefinition AWS API Documentation
+    #
+    # @overload delete_connector_definition(params = {})
+    # @param [Hash] params ({})
+    def delete_connector_definition(params = {}, options = {})
+      req = build_request(:delete_connector_definition, params)
       req.send_request(options)
     end
 
@@ -1526,6 +1695,95 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
+    # Retrieves information about a connector definition.
+    #
+    # @option params [required, String] :connector_definition_id
+    #
+    # @return [Types::GetConnectorDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConnectorDefinitionResponse#arn #arn} => String
+    #   * {Types::GetConnectorDefinitionResponse#creation_timestamp #creation_timestamp} => String
+    #   * {Types::GetConnectorDefinitionResponse#id #id} => String
+    #   * {Types::GetConnectorDefinitionResponse#last_updated_timestamp #last_updated_timestamp} => String
+    #   * {Types::GetConnectorDefinitionResponse#latest_version #latest_version} => String
+    #   * {Types::GetConnectorDefinitionResponse#latest_version_arn #latest_version_arn} => String
+    #   * {Types::GetConnectorDefinitionResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_connector_definition({
+    #     connector_definition_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.creation_timestamp #=> String
+    #   resp.id #=> String
+    #   resp.last_updated_timestamp #=> String
+    #   resp.latest_version #=> String
+    #   resp.latest_version_arn #=> String
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetConnectorDefinition AWS API Documentation
+    #
+    # @overload get_connector_definition(params = {})
+    # @param [Hash] params ({})
+    def get_connector_definition(params = {}, options = {})
+      req = build_request(:get_connector_definition, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a connector definition version, including
+    # the connectors that the version contains. Connectors are prebuilt
+    # modules that interact with local infrastructure, device protocols,
+    # AWS, and other cloud services.
+    #
+    # @option params [required, String] :connector_definition_id
+    #
+    # @option params [required, String] :connector_definition_version_id
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::GetConnectorDefinitionVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConnectorDefinitionVersionResponse#arn #arn} => String
+    #   * {Types::GetConnectorDefinitionVersionResponse#creation_timestamp #creation_timestamp} => String
+    #   * {Types::GetConnectorDefinitionVersionResponse#definition #definition} => Types::ConnectorDefinitionVersion
+    #   * {Types::GetConnectorDefinitionVersionResponse#id #id} => String
+    #   * {Types::GetConnectorDefinitionVersionResponse#next_token #next_token} => String
+    #   * {Types::GetConnectorDefinitionVersionResponse#version #version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_connector_definition_version({
+    #     connector_definition_id: "__string", # required
+    #     connector_definition_version_id: "__string", # required
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.creation_timestamp #=> String
+    #   resp.definition.connectors #=> Array
+    #   resp.definition.connectors[0].connector_arn #=> String
+    #   resp.definition.connectors[0].id #=> String
+    #   resp.definition.connectors[0].parameters #=> Hash
+    #   resp.definition.connectors[0].parameters["__string"] #=> String
+    #   resp.id #=> String
+    #   resp.next_token #=> String
+    #   resp.version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetConnectorDefinitionVersion AWS API Documentation
+    #
+    # @overload get_connector_definition_version(params = {})
+    # @param [Hash] params ({})
+    def get_connector_definition_version(params = {}, options = {})
+      req = build_request(:get_connector_definition_version, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about a core definition version.
     #
     # @option params [required, String] :core_definition_id
@@ -1806,10 +2064,14 @@ module Aws::Greengrass
     #
     #   resp.arn #=> String
     #   resp.creation_timestamp #=> String
+    #   resp.definition.default_config.execution.isolation_mode #=> String, one of "GreengrassContainer", "NoContainer"
     #   resp.definition.functions #=> Array
     #   resp.definition.functions[0].function_arn #=> String
     #   resp.definition.functions[0].function_configuration.encoding_type #=> String, one of "binary", "json"
     #   resp.definition.functions[0].function_configuration.environment.access_sysfs #=> Boolean
+    #   resp.definition.functions[0].function_configuration.environment.execution.isolation_mode #=> String, one of "GreengrassContainer", "NoContainer"
+    #   resp.definition.functions[0].function_configuration.environment.execution.run_as.gid #=> Integer
+    #   resp.definition.functions[0].function_configuration.environment.execution.run_as.uid #=> Integer
     #   resp.definition.functions[0].function_configuration.environment.resource_access_policies #=> Array
     #   resp.definition.functions[0].function_configuration.environment.resource_access_policies[0].permission #=> String, one of "ro", "rw"
     #   resp.definition.functions[0].function_configuration.environment.resource_access_policies[0].resource_id #=> String
@@ -1964,6 +2226,7 @@ module Aws::Greengrass
     #
     #   resp.arn #=> String
     #   resp.creation_timestamp #=> String
+    #   resp.definition.connector_definition_version_arn #=> String
     #   resp.definition.core_definition_version_arn #=> String
     #   resp.definition.device_definition_version_arn #=> String
     #   resp.definition.function_definition_version_arn #=> String
@@ -2147,6 +2410,9 @@ module Aws::Greengrass
     #   resp.definition.resources[0].resource_data_container.s3_machine_learning_model_resource_data.s3_uri #=> String
     #   resp.definition.resources[0].resource_data_container.sage_maker_machine_learning_model_resource_data.destination_path #=> String
     #   resp.definition.resources[0].resource_data_container.sage_maker_machine_learning_model_resource_data.sage_maker_job_arn #=> String
+    #   resp.definition.resources[0].resource_data_container.secrets_manager_secret_resource_data.arn #=> String
+    #   resp.definition.resources[0].resource_data_container.secrets_manager_secret_resource_data.additional_staging_labels_to_download #=> Array
+    #   resp.definition.resources[0].resource_data_container.secrets_manager_secret_resource_data.additional_staging_labels_to_download[0] #=> String
     #   resp.id #=> String
     #   resp.version #=> String
     #
@@ -2344,6 +2610,87 @@ module Aws::Greengrass
     # @param [Hash] params ({})
     def list_bulk_deployments(params = {}, options = {})
       req = build_request(:list_bulk_deployments, params)
+      req.send_request(options)
+    end
+
+    # Lists the versions of a connector definition, which are containers for
+    # connectors. Connectors run on the Greengrass core and contain built-in
+    # integration with local infrastructure, device protocols, AWS, and
+    # other cloud services.
+    #
+    # @option params [required, String] :connector_definition_id
+    #
+    # @option params [String] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListConnectorDefinitionVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListConnectorDefinitionVersionsResponse#next_token #next_token} => String
+    #   * {Types::ListConnectorDefinitionVersionsResponse#versions #versions} => Array&lt;Types::VersionInformation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_connector_definition_versions({
+    #     connector_definition_id: "__string", # required
+    #     max_results: "__string",
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.versions #=> Array
+    #   resp.versions[0].arn #=> String
+    #   resp.versions[0].creation_timestamp #=> String
+    #   resp.versions[0].id #=> String
+    #   resp.versions[0].version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListConnectorDefinitionVersions AWS API Documentation
+    #
+    # @overload list_connector_definition_versions(params = {})
+    # @param [Hash] params ({})
+    def list_connector_definition_versions(params = {}, options = {})
+      req = build_request(:list_connector_definition_versions, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of connector definitions.
+    #
+    # @option params [String] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListConnectorDefinitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListConnectorDefinitionsResponse#definitions #definitions} => Array&lt;Types::DefinitionInformation&gt;
+    #   * {Types::ListConnectorDefinitionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_connector_definitions({
+    #     max_results: "__string",
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.definitions #=> Array
+    #   resp.definitions[0].arn #=> String
+    #   resp.definitions[0].creation_timestamp #=> String
+    #   resp.definitions[0].id #=> String
+    #   resp.definitions[0].last_updated_timestamp #=> String
+    #   resp.definitions[0].latest_version #=> String
+    #   resp.definitions[0].latest_version_arn #=> String
+    #   resp.definitions[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListConnectorDefinitions AWS API Documentation
+    #
+    # @overload list_connector_definitions(params = {})
+    # @param [Hash] params ({})
+    def list_connector_definitions(params = {}, options = {})
+      req = build_request(:list_connector_definitions, params)
       req.send_request(options)
     end
 
@@ -3020,8 +3367,9 @@ module Aws::Greengrass
     #   role must have ''getObject'' permissions on this bucket to access
     #   the input file. The input file is a JSON-serialized, line delimited
     #   file with UTF-8 encoding that provides a list of group and version IDs
-    #   and the deployment type. This file must be less than 100MB. Currently,
-    #   Greengrass; supports only ''NewDeployment'' deployment types.
+    #   and the deployment type. This file must be less than 100 MB.
+    #   Currently, AWS IoT Greengrass supports only ''NewDeployment''
+    #   deployment types.
     #
     # @return [Types::StartBulkDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3114,6 +3462,30 @@ module Aws::Greengrass
     # @param [Hash] params ({})
     def update_connectivity_info(params = {}, options = {})
       req = build_request(:update_connectivity_info, params)
+      req.send_request(options)
+    end
+
+    # Updates a connector definition.
+    #
+    # @option params [required, String] :connector_definition_id
+    #
+    # @option params [String] :name
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_connector_definition({
+    #     connector_definition_id: "__string", # required
+    #     name: "__string",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateConnectorDefinition AWS API Documentation
+    #
+    # @overload update_connector_definition(params = {})
+    # @param [Hash] params ({})
+    def update_connector_definition(params = {}, options = {})
+      req = build_request(:update_connector_definition, params)
       req.send_request(options)
     end
 
@@ -3334,7 +3706,7 @@ module Aws::Greengrass
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-greengrass'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

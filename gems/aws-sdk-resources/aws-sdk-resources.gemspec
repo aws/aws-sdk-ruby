@@ -79,6 +79,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-firehose', '~> 1')
   spec.add_dependency('aws-sdk-gamelift', '~> 1')
   spec.add_dependency('aws-sdk-glacier', '~> 1')
+  spec.add_dependency('aws-sdk-globalaccelerator', '~> 1')
   spec.add_dependency('aws-sdk-glue', '~> 1')
   spec.add_dependency('aws-sdk-greengrass', '~> 1')
   spec.add_dependency('aws-sdk-guardduty', '~> 1')

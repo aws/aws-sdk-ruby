@@ -228,6 +228,9 @@
       "Aws::Glacier::Plugins::Checksums"
     ]
   },
+  "GlobalAccelerator": {
+    "models": "globalaccelerator/2018-08-08"
+  },
   "Glue": {
     "models": "glue/2017-03-31"
   },

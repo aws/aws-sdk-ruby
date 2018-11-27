@@ -286,6 +286,7 @@ module Aws
             'Firehose' => 'firehose',
             'GameLift' => 'gamelift',
             'Glacier' => 'glacier',
+            'GlobalAccelerator' => 'globalaccelerator',
             'Glue' => 'glue',
             'Greengrass' => 'greengrass',
             'GuardDuty' => 'guardduty',

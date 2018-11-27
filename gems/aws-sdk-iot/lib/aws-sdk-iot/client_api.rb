@@ -364,6 +364,7 @@ module Aws::IoT
     IndexSchema = Shapes::StringShape.new(name: 'IndexSchema')
     IndexStatus = Shapes::StringShape.new(name: 'IndexStatus')
     InlineDocument = Shapes::StringShape.new(name: 'InlineDocument')
+    InputName = Shapes::StringShape.new(name: 'InputName')
     InternalException = Shapes::StructureShape.new(name: 'InternalException')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
     InvalidQueryException = Shapes::StructureShape.new(name: 'InvalidQueryException')
@@ -371,6 +372,7 @@ module Aws::IoT
     InvalidResponseException = Shapes::StructureShape.new(name: 'InvalidResponseException')
     InvalidStateTransitionException = Shapes::StructureShape.new(name: 'InvalidStateTransitionException')
     IotAnalyticsAction = Shapes::StructureShape.new(name: 'IotAnalyticsAction')
+    IotEventsAction = Shapes::StructureShape.new(name: 'IotEventsAction')
     IsAuthenticated = Shapes::BooleanShape.new(name: 'IsAuthenticated')
     IsDefaultVersion = Shapes::BooleanShape.new(name: 'IsDefaultVersion')
     IsDisabled = Shapes::BooleanShape.new(name: 'IsDisabled')
@@ -499,6 +501,7 @@ module Aws::IoT
     MaximumPerMinute = Shapes::IntegerShape.new(name: 'MaximumPerMinute')
     Message = Shapes::StringShape.new(name: 'Message')
     MessageFormat = Shapes::StringShape.new(name: 'MessageFormat')
+    MessageId = Shapes::StringShape.new(name: 'MessageId')
     MetricValue = Shapes::StructureShape.new(name: 'MetricValue')
     MinimumNumberOfExecutedThings = Shapes::IntegerShape.new(name: 'MinimumNumberOfExecutedThings')
     MissingContextValue = Shapes::StringShape.new(name: 'MissingContextValue')
@@ -847,6 +850,7 @@ module Aws::IoT
     Action.add_member(:elasticsearch, Shapes::ShapeRef.new(shape: ElasticsearchAction, location_name: "elasticsearch"))
     Action.add_member(:salesforce, Shapes::ShapeRef.new(shape: SalesforceAction, location_name: "salesforce"))
     Action.add_member(:iot_analytics, Shapes::ShapeRef.new(shape: IotAnalyticsAction, location_name: "iotAnalytics"))
+    Action.add_member(:iot_events, Shapes::ShapeRef.new(shape: IotEventsAction, location_name: "iotEvents"))
     Action.add_member(:step_functions, Shapes::ShapeRef.new(shape: StepFunctionsAction, location_name: "stepFunctions"))
     Action.struct_class = Types::Action
 
@@ -1808,6 +1812,11 @@ module Aws::IoT
     IotAnalyticsAction.add_member(:channel_name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "channelName"))
     IotAnalyticsAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, location_name: "roleArn"))
     IotAnalyticsAction.struct_class = Types::IotAnalyticsAction
+
+    IotEventsAction.add_member(:input_name, Shapes::ShapeRef.new(shape: InputName, required: true, location_name: "inputName"))
+    IotEventsAction.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, location_name: "messageId"))
+    IotEventsAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
+    IotEventsAction.struct_class = Types::IotEventsAction
 
     Job.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, location_name: "jobArn"))
     Job.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))

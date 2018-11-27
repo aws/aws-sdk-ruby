@@ -186,6 +186,11 @@ module Aws::IoT
     #           channel_name: "ChannelName",
     #           role_arn: "AwsArn",
     #         },
+    #         iot_events: {
+    #           input_name: "InputName", # required
+    #           message_id: "MessageId",
+    #           role_arn: "AwsArn", # required
+    #         },
     #         step_functions: {
     #           execution_name_prefix: "ExecutionNamePrefix",
     #           state_machine_name: "StateMachineName", # required
@@ -251,6 +256,10 @@ module Aws::IoT
     #   Sends message data to an AWS IoT Analytics channel.
     #   @return [Types::IotAnalyticsAction]
     #
+    # @!attribute [rw] iot_events
+    #   Sends an input to an AWS IoT Events detector.
+    #   @return [Types::IotEventsAction]
+    #
     # @!attribute [rw] step_functions
     #   Starts execution of a Step Functions state machine.
     #   @return [Types::StepFunctionsAction]
@@ -270,6 +279,7 @@ module Aws::IoT
       :elasticsearch,
       :salesforce,
       :iot_analytics,
+      :iot_events,
       :step_functions)
       include Aws::Structure
     end
@@ -2875,6 +2885,11 @@ module Aws::IoT
     #                 channel_name: "ChannelName",
     #                 role_arn: "AwsArn",
     #               },
+    #               iot_events: {
+    #                 input_name: "InputName", # required
+    #                 message_id: "MessageId",
+    #                 role_arn: "AwsArn", # required
+    #               },
     #               step_functions: {
     #                 execution_name_prefix: "ExecutionNamePrefix",
     #                 state_machine_name: "StateMachineName", # required
@@ -2965,6 +2980,11 @@ module Aws::IoT
     #               channel_arn: "AwsArn",
     #               channel_name: "ChannelName",
     #               role_arn: "AwsArn",
+    #             },
+    #             iot_events: {
+    #               input_name: "InputName", # required
+    #               message_id: "MessageId",
+    #               role_arn: "AwsArn", # required
     #             },
     #             step_functions: {
     #               execution_name_prefix: "ExecutionNamePrefix",
@@ -5330,6 +5350,39 @@ module Aws::IoT
     class IotAnalyticsAction < Struct.new(
       :channel_arn,
       :channel_name,
+      :role_arn)
+      include Aws::Structure
+    end
+
+    # Sends an input to an AWS IoT Events detector.
+    #
+    # @note When making an API call, you may pass IotEventsAction
+    #   data as a hash:
+    #
+    #       {
+    #         input_name: "InputName", # required
+    #         message_id: "MessageId",
+    #         role_arn: "AwsArn", # required
+    #       }
+    #
+    # @!attribute [rw] input_name
+    #   The name of the AWS IoT Events input.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_id
+    #   \[Optional\] Use this to ensure that only one input (message) with a
+    #   given messageId will be processed by an AWS IoT Events detector.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role that grants AWS IoT permission to send an input
+    #   to an AWS IoT Events detector.
+    #   ("Action":"iotevents:BatchPutMessage").
+    #   @return [String]
+    #
+    class IotEventsAction < Struct.new(
+      :input_name,
+      :message_id,
       :role_arn)
       include Aws::Structure
     end
@@ -8617,6 +8670,11 @@ module Aws::IoT
     #                 channel_name: "ChannelName",
     #                 role_arn: "AwsArn",
     #               },
+    #               iot_events: {
+    #                 input_name: "InputName", # required
+    #                 message_id: "MessageId",
+    #                 role_arn: "AwsArn", # required
+    #               },
     #               step_functions: {
     #                 execution_name_prefix: "ExecutionNamePrefix",
     #                 state_machine_name: "StateMachineName", # required
@@ -8707,6 +8765,11 @@ module Aws::IoT
     #               channel_arn: "AwsArn",
     #               channel_name: "ChannelName",
     #               role_arn: "AwsArn",
+    #             },
+    #             iot_events: {
+    #               input_name: "InputName", # required
+    #               message_id: "MessageId",
+    #               role_arn: "AwsArn", # required
     #             },
     #             step_functions: {
     #               execution_name_prefix: "ExecutionNamePrefix",
@@ -10364,6 +10427,11 @@ module Aws::IoT
     #               channel_name: "ChannelName",
     #               role_arn: "AwsArn",
     #             },
+    #             iot_events: {
+    #               input_name: "InputName", # required
+    #               message_id: "MessageId",
+    #               role_arn: "AwsArn", # required
+    #             },
     #             step_functions: {
     #               execution_name_prefix: "ExecutionNamePrefix",
     #               state_machine_name: "StateMachineName", # required
@@ -10454,6 +10522,11 @@ module Aws::IoT
     #             channel_arn: "AwsArn",
     #             channel_name: "ChannelName",
     #             role_arn: "AwsArn",
+    #           },
+    #           iot_events: {
+    #             input_name: "InputName", # required
+    #             message_id: "MessageId",
+    #             role_arn: "AwsArn", # required
     #           },
     #           step_functions: {
     #             execution_name_prefix: "ExecutionNamePrefix",

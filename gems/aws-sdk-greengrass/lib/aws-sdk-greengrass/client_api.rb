@@ -23,8 +23,14 @@ module Aws::Greengrass
     BulkDeploymentStatus = Shapes::StringShape.new(name: 'BulkDeploymentStatus')
     BulkDeployments = Shapes::ListShape.new(name: 'BulkDeployments')
     ConnectivityInfo = Shapes::StructureShape.new(name: 'ConnectivityInfo')
+    Connector = Shapes::StructureShape.new(name: 'Connector')
+    ConnectorDefinitionVersion = Shapes::StructureShape.new(name: 'ConnectorDefinitionVersion')
     Core = Shapes::StructureShape.new(name: 'Core')
     CoreDefinitionVersion = Shapes::StructureShape.new(name: 'CoreDefinitionVersion')
+    CreateConnectorDefinitionRequest = Shapes::StructureShape.new(name: 'CreateConnectorDefinitionRequest')
+    CreateConnectorDefinitionResponse = Shapes::StructureShape.new(name: 'CreateConnectorDefinitionResponse')
+    CreateConnectorDefinitionVersionRequest = Shapes::StructureShape.new(name: 'CreateConnectorDefinitionVersionRequest')
+    CreateConnectorDefinitionVersionResponse = Shapes::StructureShape.new(name: 'CreateConnectorDefinitionVersionResponse')
     CreateCoreDefinitionRequest = Shapes::StructureShape.new(name: 'CreateCoreDefinitionRequest')
     CreateCoreDefinitionResponse = Shapes::StructureShape.new(name: 'CreateCoreDefinitionResponse')
     CreateCoreDefinitionVersionRequest = Shapes::StructureShape.new(name: 'CreateCoreDefinitionVersionRequest')
@@ -60,6 +66,8 @@ module Aws::Greengrass
     CreateSubscriptionDefinitionVersionRequest = Shapes::StructureShape.new(name: 'CreateSubscriptionDefinitionVersionRequest')
     CreateSubscriptionDefinitionVersionResponse = Shapes::StructureShape.new(name: 'CreateSubscriptionDefinitionVersionResponse')
     DefinitionInformation = Shapes::StructureShape.new(name: 'DefinitionInformation')
+    DeleteConnectorDefinitionRequest = Shapes::StructureShape.new(name: 'DeleteConnectorDefinitionRequest')
+    DeleteConnectorDefinitionResponse = Shapes::StructureShape.new(name: 'DeleteConnectorDefinitionResponse')
     DeleteCoreDefinitionRequest = Shapes::StructureShape.new(name: 'DeleteCoreDefinitionRequest')
     DeleteCoreDefinitionResponse = Shapes::StructureShape.new(name: 'DeleteCoreDefinitionResponse')
     DeleteDeviceDefinitionRequest = Shapes::StructureShape.new(name: 'DeleteDeviceDefinitionRequest')
@@ -90,7 +98,12 @@ module Aws::Greengrass
     Function = Shapes::StructureShape.new(name: 'Function')
     FunctionConfiguration = Shapes::StructureShape.new(name: 'FunctionConfiguration')
     FunctionConfigurationEnvironment = Shapes::StructureShape.new(name: 'FunctionConfigurationEnvironment')
+    FunctionDefaultConfig = Shapes::StructureShape.new(name: 'FunctionDefaultConfig')
+    FunctionDefaultExecutionConfig = Shapes::StructureShape.new(name: 'FunctionDefaultExecutionConfig')
     FunctionDefinitionVersion = Shapes::StructureShape.new(name: 'FunctionDefinitionVersion')
+    FunctionExecutionConfig = Shapes::StructureShape.new(name: 'FunctionExecutionConfig')
+    FunctionIsolationMode = Shapes::StringShape.new(name: 'FunctionIsolationMode')
+    FunctionRunAsConfig = Shapes::StructureShape.new(name: 'FunctionRunAsConfig')
     GeneralError = Shapes::StructureShape.new(name: 'GeneralError')
     GetAssociatedRoleRequest = Shapes::StructureShape.new(name: 'GetAssociatedRoleRequest')
     GetAssociatedRoleResponse = Shapes::StructureShape.new(name: 'GetAssociatedRoleResponse')
@@ -98,6 +111,10 @@ module Aws::Greengrass
     GetBulkDeploymentStatusResponse = Shapes::StructureShape.new(name: 'GetBulkDeploymentStatusResponse')
     GetConnectivityInfoRequest = Shapes::StructureShape.new(name: 'GetConnectivityInfoRequest')
     GetConnectivityInfoResponse = Shapes::StructureShape.new(name: 'GetConnectivityInfoResponse')
+    GetConnectorDefinitionRequest = Shapes::StructureShape.new(name: 'GetConnectorDefinitionRequest')
+    GetConnectorDefinitionResponse = Shapes::StructureShape.new(name: 'GetConnectorDefinitionResponse')
+    GetConnectorDefinitionVersionRequest = Shapes::StructureShape.new(name: 'GetConnectorDefinitionVersionRequest')
+    GetConnectorDefinitionVersionResponse = Shapes::StructureShape.new(name: 'GetConnectorDefinitionVersionResponse')
     GetCoreDefinitionRequest = Shapes::StructureShape.new(name: 'GetCoreDefinitionRequest')
     GetCoreDefinitionResponse = Shapes::StructureShape.new(name: 'GetCoreDefinitionResponse')
     GetCoreDefinitionVersionRequest = Shapes::StructureShape.new(name: 'GetCoreDefinitionVersionRequest')
@@ -144,6 +161,10 @@ module Aws::Greengrass
     ListBulkDeploymentDetailedReportsResponse = Shapes::StructureShape.new(name: 'ListBulkDeploymentDetailedReportsResponse')
     ListBulkDeploymentsRequest = Shapes::StructureShape.new(name: 'ListBulkDeploymentsRequest')
     ListBulkDeploymentsResponse = Shapes::StructureShape.new(name: 'ListBulkDeploymentsResponse')
+    ListConnectorDefinitionVersionsRequest = Shapes::StructureShape.new(name: 'ListConnectorDefinitionVersionsRequest')
+    ListConnectorDefinitionVersionsResponse = Shapes::StructureShape.new(name: 'ListConnectorDefinitionVersionsResponse')
+    ListConnectorDefinitionsRequest = Shapes::StructureShape.new(name: 'ListConnectorDefinitionsRequest')
+    ListConnectorDefinitionsResponse = Shapes::StructureShape.new(name: 'ListConnectorDefinitionsResponse')
     ListCoreDefinitionVersionsRequest = Shapes::StructureShape.new(name: 'ListCoreDefinitionVersionsRequest')
     ListCoreDefinitionVersionsResponse = Shapes::StructureShape.new(name: 'ListCoreDefinitionVersionsResponse')
     ListCoreDefinitionsRequest = Shapes::StructureShape.new(name: 'ListCoreDefinitionsRequest')
@@ -195,6 +216,7 @@ module Aws::Greengrass
     S3MachineLearningModelResourceData = Shapes::StructureShape.new(name: 'S3MachineLearningModelResourceData')
     S3UrlSignerRole = Shapes::StringShape.new(name: 'S3UrlSignerRole')
     SageMakerMachineLearningModelResourceData = Shapes::StructureShape.new(name: 'SageMakerMachineLearningModelResourceData')
+    SecretsManagerSecretResourceData = Shapes::StructureShape.new(name: 'SecretsManagerSecretResourceData')
     SoftwareToUpdate = Shapes::StringShape.new(name: 'SoftwareToUpdate')
     StartBulkDeploymentRequest = Shapes::StructureShape.new(name: 'StartBulkDeploymentRequest')
     StartBulkDeploymentResponse = Shapes::StructureShape.new(name: 'StartBulkDeploymentResponse')
@@ -205,6 +227,8 @@ module Aws::Greengrass
     UpdateAgentLogLevel = Shapes::StringShape.new(name: 'UpdateAgentLogLevel')
     UpdateConnectivityInfoRequest = Shapes::StructureShape.new(name: 'UpdateConnectivityInfoRequest')
     UpdateConnectivityInfoResponse = Shapes::StructureShape.new(name: 'UpdateConnectivityInfoResponse')
+    UpdateConnectorDefinitionRequest = Shapes::StructureShape.new(name: 'UpdateConnectorDefinitionRequest')
+    UpdateConnectorDefinitionResponse = Shapes::StructureShape.new(name: 'UpdateConnectorDefinitionResponse')
     UpdateCoreDefinitionRequest = Shapes::StructureShape.new(name: 'UpdateCoreDefinitionRequest')
     UpdateCoreDefinitionResponse = Shapes::StructureShape.new(name: 'UpdateCoreDefinitionResponse')
     UpdateDeviceDefinitionRequest = Shapes::StructureShape.new(name: 'UpdateDeviceDefinitionRequest')
@@ -229,6 +253,7 @@ module Aws::Greengrass
     __double = Shapes::FloatShape.new(name: '__double')
     __integer = Shapes::IntegerShape.new(name: '__integer')
     __listOfConnectivityInfo = Shapes::ListShape.new(name: '__listOfConnectivityInfo')
+    __listOfConnector = Shapes::ListShape.new(name: '__listOfConnector')
     __listOfCore = Shapes::ListShape.new(name: '__listOfCore')
     __listOfDefinitionInformation = Shapes::ListShape.new(name: '__listOfDefinitionInformation')
     __listOfDevice = Shapes::ListShape.new(name: '__listOfDevice')
@@ -240,6 +265,7 @@ module Aws::Greengrass
     __listOfResourceAccessPolicy = Shapes::ListShape.new(name: '__listOfResourceAccessPolicy')
     __listOfSubscription = Shapes::ListShape.new(name: '__listOfSubscription')
     __listOfVersionInformation = Shapes::ListShape.new(name: '__listOfVersionInformation')
+    __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __long = Shapes::IntegerShape.new(name: '__long')
     __mapOf__string = Shapes::MapShape.new(name: '__mapOf__string')
     __string = Shapes::StringShape.new(name: '__string')
@@ -289,6 +315,14 @@ module Aws::Greengrass
     ConnectivityInfo.add_member(:port_number, Shapes::ShapeRef.new(shape: __integer, location_name: "PortNumber"))
     ConnectivityInfo.struct_class = Types::ConnectivityInfo
 
+    Connector.add_member(:connector_arn, Shapes::ShapeRef.new(shape: __string, location_name: "ConnectorArn"))
+    Connector.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
+    Connector.add_member(:parameters, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "Parameters"))
+    Connector.struct_class = Types::Connector
+
+    ConnectorDefinitionVersion.add_member(:connectors, Shapes::ShapeRef.new(shape: __listOfConnector, location_name: "Connectors"))
+    ConnectorDefinitionVersion.struct_class = Types::ConnectorDefinitionVersion
+
     Core.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: __string, location_name: "CertificateArn"))
     Core.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
     Core.add_member(:sync_shadow, Shapes::ShapeRef.new(shape: __boolean, location_name: "SyncShadow"))
@@ -297,6 +331,31 @@ module Aws::Greengrass
 
     CoreDefinitionVersion.add_member(:cores, Shapes::ShapeRef.new(shape: __listOfCore, location_name: "Cores"))
     CoreDefinitionVersion.struct_class = Types::CoreDefinitionVersion
+
+    CreateConnectorDefinitionRequest.add_member(:amzn_client_token, Shapes::ShapeRef.new(shape: __string, location: "header", location_name: "X-Amzn-Client-Token"))
+    CreateConnectorDefinitionRequest.add_member(:initial_version, Shapes::ShapeRef.new(shape: ConnectorDefinitionVersion, location_name: "InitialVersion"))
+    CreateConnectorDefinitionRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
+    CreateConnectorDefinitionRequest.struct_class = Types::CreateConnectorDefinitionRequest
+
+    CreateConnectorDefinitionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
+    CreateConnectorDefinitionResponse.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: __string, location_name: "CreationTimestamp"))
+    CreateConnectorDefinitionResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
+    CreateConnectorDefinitionResponse.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: __string, location_name: "LastUpdatedTimestamp"))
+    CreateConnectorDefinitionResponse.add_member(:latest_version, Shapes::ShapeRef.new(shape: __string, location_name: "LatestVersion"))
+    CreateConnectorDefinitionResponse.add_member(:latest_version_arn, Shapes::ShapeRef.new(shape: __string, location_name: "LatestVersionArn"))
+    CreateConnectorDefinitionResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
+    CreateConnectorDefinitionResponse.struct_class = Types::CreateConnectorDefinitionResponse
+
+    CreateConnectorDefinitionVersionRequest.add_member(:amzn_client_token, Shapes::ShapeRef.new(shape: __string, location: "header", location_name: "X-Amzn-Client-Token"))
+    CreateConnectorDefinitionVersionRequest.add_member(:connector_definition_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ConnectorDefinitionId"))
+    CreateConnectorDefinitionVersionRequest.add_member(:connectors, Shapes::ShapeRef.new(shape: __listOfConnector, location_name: "Connectors"))
+    CreateConnectorDefinitionVersionRequest.struct_class = Types::CreateConnectorDefinitionVersionRequest
+
+    CreateConnectorDefinitionVersionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
+    CreateConnectorDefinitionVersionResponse.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: __string, location_name: "CreationTimestamp"))
+    CreateConnectorDefinitionVersionResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
+    CreateConnectorDefinitionVersionResponse.add_member(:version, Shapes::ShapeRef.new(shape: __string, location_name: "Version"))
+    CreateConnectorDefinitionVersionResponse.struct_class = Types::CreateConnectorDefinitionVersionResponse
 
     CreateCoreDefinitionRequest.add_member(:amzn_client_token, Shapes::ShapeRef.new(shape: __string, location: "header", location_name: "X-Amzn-Client-Token"))
     CreateCoreDefinitionRequest.add_member(:initial_version, Shapes::ShapeRef.new(shape: CoreDefinitionVersion, location_name: "InitialVersion"))
@@ -374,6 +433,7 @@ module Aws::Greengrass
     CreateFunctionDefinitionResponse.struct_class = Types::CreateFunctionDefinitionResponse
 
     CreateFunctionDefinitionVersionRequest.add_member(:amzn_client_token, Shapes::ShapeRef.new(shape: __string, location: "header", location_name: "X-Amzn-Client-Token"))
+    CreateFunctionDefinitionVersionRequest.add_member(:default_config, Shapes::ShapeRef.new(shape: FunctionDefaultConfig, location_name: "DefaultConfig"))
     CreateFunctionDefinitionVersionRequest.add_member(:function_definition_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "FunctionDefinitionId"))
     CreateFunctionDefinitionVersionRequest.add_member(:functions, Shapes::ShapeRef.new(shape: __listOfFunction, location_name: "Functions"))
     CreateFunctionDefinitionVersionRequest.struct_class = Types::CreateFunctionDefinitionVersionRequest
@@ -406,6 +466,7 @@ module Aws::Greengrass
     CreateGroupResponse.struct_class = Types::CreateGroupResponse
 
     CreateGroupVersionRequest.add_member(:amzn_client_token, Shapes::ShapeRef.new(shape: __string, location: "header", location_name: "X-Amzn-Client-Token"))
+    CreateGroupVersionRequest.add_member(:connector_definition_version_arn, Shapes::ShapeRef.new(shape: __string, location_name: "ConnectorDefinitionVersionArn"))
     CreateGroupVersionRequest.add_member(:core_definition_version_arn, Shapes::ShapeRef.new(shape: __string, location_name: "CoreDefinitionVersionArn"))
     CreateGroupVersionRequest.add_member(:device_definition_version_arn, Shapes::ShapeRef.new(shape: __string, location_name: "DeviceDefinitionVersionArn"))
     CreateGroupVersionRequest.add_member(:function_definition_version_arn, Shapes::ShapeRef.new(shape: __string, location_name: "FunctionDefinitionVersionArn"))
@@ -518,6 +579,11 @@ module Aws::Greengrass
     DefinitionInformation.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
     DefinitionInformation.struct_class = Types::DefinitionInformation
 
+    DeleteConnectorDefinitionRequest.add_member(:connector_definition_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ConnectorDefinitionId"))
+    DeleteConnectorDefinitionRequest.struct_class = Types::DeleteConnectorDefinitionRequest
+
+    DeleteConnectorDefinitionResponse.struct_class = Types::DeleteConnectorDefinitionResponse
+
     DeleteCoreDefinitionRequest.add_member(:core_definition_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "CoreDefinitionId"))
     DeleteCoreDefinitionRequest.struct_class = Types::DeleteCoreDefinitionRequest
 
@@ -605,12 +671,28 @@ module Aws::Greengrass
     FunctionConfiguration.struct_class = Types::FunctionConfiguration
 
     FunctionConfigurationEnvironment.add_member(:access_sysfs, Shapes::ShapeRef.new(shape: __boolean, location_name: "AccessSysfs"))
+    FunctionConfigurationEnvironment.add_member(:execution, Shapes::ShapeRef.new(shape: FunctionExecutionConfig, location_name: "Execution"))
     FunctionConfigurationEnvironment.add_member(:resource_access_policies, Shapes::ShapeRef.new(shape: __listOfResourceAccessPolicy, location_name: "ResourceAccessPolicies"))
     FunctionConfigurationEnvironment.add_member(:variables, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "Variables"))
     FunctionConfigurationEnvironment.struct_class = Types::FunctionConfigurationEnvironment
 
+    FunctionDefaultConfig.add_member(:execution, Shapes::ShapeRef.new(shape: FunctionDefaultExecutionConfig, location_name: "Execution"))
+    FunctionDefaultConfig.struct_class = Types::FunctionDefaultConfig
+
+    FunctionDefaultExecutionConfig.add_member(:isolation_mode, Shapes::ShapeRef.new(shape: FunctionIsolationMode, location_name: "IsolationMode"))
+    FunctionDefaultExecutionConfig.struct_class = Types::FunctionDefaultExecutionConfig
+
+    FunctionDefinitionVersion.add_member(:default_config, Shapes::ShapeRef.new(shape: FunctionDefaultConfig, location_name: "DefaultConfig"))
     FunctionDefinitionVersion.add_member(:functions, Shapes::ShapeRef.new(shape: __listOfFunction, location_name: "Functions"))
     FunctionDefinitionVersion.struct_class = Types::FunctionDefinitionVersion
+
+    FunctionExecutionConfig.add_member(:isolation_mode, Shapes::ShapeRef.new(shape: FunctionIsolationMode, location_name: "IsolationMode"))
+    FunctionExecutionConfig.add_member(:run_as, Shapes::ShapeRef.new(shape: FunctionRunAsConfig, location_name: "RunAs"))
+    FunctionExecutionConfig.struct_class = Types::FunctionExecutionConfig
+
+    FunctionRunAsConfig.add_member(:gid, Shapes::ShapeRef.new(shape: __integer, location_name: "Gid"))
+    FunctionRunAsConfig.add_member(:uid, Shapes::ShapeRef.new(shape: __integer, location_name: "Uid"))
+    FunctionRunAsConfig.struct_class = Types::FunctionRunAsConfig
 
     GeneralError.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "ErrorDetails"))
     GeneralError.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "Message"))
@@ -639,6 +721,31 @@ module Aws::Greengrass
     GetConnectivityInfoResponse.add_member(:connectivity_info, Shapes::ShapeRef.new(shape: __listOfConnectivityInfo, location_name: "ConnectivityInfo"))
     GetConnectivityInfoResponse.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     GetConnectivityInfoResponse.struct_class = Types::GetConnectivityInfoResponse
+
+    GetConnectorDefinitionRequest.add_member(:connector_definition_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ConnectorDefinitionId"))
+    GetConnectorDefinitionRequest.struct_class = Types::GetConnectorDefinitionRequest
+
+    GetConnectorDefinitionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
+    GetConnectorDefinitionResponse.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: __string, location_name: "CreationTimestamp"))
+    GetConnectorDefinitionResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
+    GetConnectorDefinitionResponse.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: __string, location_name: "LastUpdatedTimestamp"))
+    GetConnectorDefinitionResponse.add_member(:latest_version, Shapes::ShapeRef.new(shape: __string, location_name: "LatestVersion"))
+    GetConnectorDefinitionResponse.add_member(:latest_version_arn, Shapes::ShapeRef.new(shape: __string, location_name: "LatestVersionArn"))
+    GetConnectorDefinitionResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
+    GetConnectorDefinitionResponse.struct_class = Types::GetConnectorDefinitionResponse
+
+    GetConnectorDefinitionVersionRequest.add_member(:connector_definition_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ConnectorDefinitionId"))
+    GetConnectorDefinitionVersionRequest.add_member(:connector_definition_version_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ConnectorDefinitionVersionId"))
+    GetConnectorDefinitionVersionRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "NextToken"))
+    GetConnectorDefinitionVersionRequest.struct_class = Types::GetConnectorDefinitionVersionRequest
+
+    GetConnectorDefinitionVersionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
+    GetConnectorDefinitionVersionResponse.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: __string, location_name: "CreationTimestamp"))
+    GetConnectorDefinitionVersionResponse.add_member(:definition, Shapes::ShapeRef.new(shape: ConnectorDefinitionVersion, location_name: "Definition"))
+    GetConnectorDefinitionVersionResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
+    GetConnectorDefinitionVersionResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
+    GetConnectorDefinitionVersionResponse.add_member(:version, Shapes::ShapeRef.new(shape: __string, location_name: "Version"))
+    GetConnectorDefinitionVersionResponse.struct_class = Types::GetConnectorDefinitionVersionResponse
 
     GetCoreDefinitionRequest.add_member(:core_definition_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "CoreDefinitionId"))
     GetCoreDefinitionRequest.struct_class = Types::GetCoreDefinitionRequest
@@ -865,6 +972,7 @@ module Aws::Greengrass
     GroupOwnerSetting.add_member(:group_owner, Shapes::ShapeRef.new(shape: __string, location_name: "GroupOwner"))
     GroupOwnerSetting.struct_class = Types::GroupOwnerSetting
 
+    GroupVersion.add_member(:connector_definition_version_arn, Shapes::ShapeRef.new(shape: __string, location_name: "ConnectorDefinitionVersionArn"))
     GroupVersion.add_member(:core_definition_version_arn, Shapes::ShapeRef.new(shape: __string, location_name: "CoreDefinitionVersionArn"))
     GroupVersion.add_member(:device_definition_version_arn, Shapes::ShapeRef.new(shape: __string, location_name: "DeviceDefinitionVersionArn"))
     GroupVersion.add_member(:function_definition_version_arn, Shapes::ShapeRef.new(shape: __string, location_name: "FunctionDefinitionVersionArn"))
@@ -889,6 +997,23 @@ module Aws::Greengrass
     ListBulkDeploymentsResponse.add_member(:bulk_deployments, Shapes::ShapeRef.new(shape: BulkDeployments, location_name: "BulkDeployments"))
     ListBulkDeploymentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
     ListBulkDeploymentsResponse.struct_class = Types::ListBulkDeploymentsResponse
+
+    ListConnectorDefinitionVersionsRequest.add_member(:connector_definition_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ConnectorDefinitionId"))
+    ListConnectorDefinitionVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "MaxResults"))
+    ListConnectorDefinitionVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "NextToken"))
+    ListConnectorDefinitionVersionsRequest.struct_class = Types::ListConnectorDefinitionVersionsRequest
+
+    ListConnectorDefinitionVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
+    ListConnectorDefinitionVersionsResponse.add_member(:versions, Shapes::ShapeRef.new(shape: __listOfVersionInformation, location_name: "Versions"))
+    ListConnectorDefinitionVersionsResponse.struct_class = Types::ListConnectorDefinitionVersionsResponse
+
+    ListConnectorDefinitionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "MaxResults"))
+    ListConnectorDefinitionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "NextToken"))
+    ListConnectorDefinitionsRequest.struct_class = Types::ListConnectorDefinitionsRequest
+
+    ListConnectorDefinitionsResponse.add_member(:definitions, Shapes::ShapeRef.new(shape: __listOfDefinitionInformation, location_name: "Definitions"))
+    ListConnectorDefinitionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
+    ListConnectorDefinitionsResponse.struct_class = Types::ListConnectorDefinitionsResponse
 
     ListCoreDefinitionVersionsRequest.add_member(:core_definition_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "CoreDefinitionId"))
     ListCoreDefinitionVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "MaxResults"))
@@ -1073,6 +1198,7 @@ module Aws::Greengrass
     ResourceDataContainer.add_member(:local_volume_resource_data, Shapes::ShapeRef.new(shape: LocalVolumeResourceData, location_name: "LocalVolumeResourceData"))
     ResourceDataContainer.add_member(:s3_machine_learning_model_resource_data, Shapes::ShapeRef.new(shape: S3MachineLearningModelResourceData, location_name: "S3MachineLearningModelResourceData"))
     ResourceDataContainer.add_member(:sage_maker_machine_learning_model_resource_data, Shapes::ShapeRef.new(shape: SageMakerMachineLearningModelResourceData, location_name: "SageMakerMachineLearningModelResourceData"))
+    ResourceDataContainer.add_member(:secrets_manager_secret_resource_data, Shapes::ShapeRef.new(shape: SecretsManagerSecretResourceData, location_name: "SecretsManagerSecretResourceData"))
     ResourceDataContainer.struct_class = Types::ResourceDataContainer
 
     ResourceDefinitionVersion.add_member(:resources, Shapes::ShapeRef.new(shape: __listOfResource, location_name: "Resources"))
@@ -1085,6 +1211,10 @@ module Aws::Greengrass
     SageMakerMachineLearningModelResourceData.add_member(:destination_path, Shapes::ShapeRef.new(shape: __string, location_name: "DestinationPath"))
     SageMakerMachineLearningModelResourceData.add_member(:sage_maker_job_arn, Shapes::ShapeRef.new(shape: __string, location_name: "SageMakerJobArn"))
     SageMakerMachineLearningModelResourceData.struct_class = Types::SageMakerMachineLearningModelResourceData
+
+    SecretsManagerSecretResourceData.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "ARN"))
+    SecretsManagerSecretResourceData.add_member(:additional_staging_labels_to_download, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "AdditionalStagingLabelsToDownload"))
+    SecretsManagerSecretResourceData.struct_class = Types::SecretsManagerSecretResourceData
 
     StartBulkDeploymentRequest.add_member(:amzn_client_token, Shapes::ShapeRef.new(shape: __string, location: "header", location_name: "X-Amzn-Client-Token"))
     StartBulkDeploymentRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "ExecutionRoleArn"))
@@ -1116,6 +1246,12 @@ module Aws::Greengrass
     UpdateConnectivityInfoResponse.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     UpdateConnectivityInfoResponse.add_member(:version, Shapes::ShapeRef.new(shape: __string, location_name: "Version"))
     UpdateConnectivityInfoResponse.struct_class = Types::UpdateConnectivityInfoResponse
+
+    UpdateConnectorDefinitionRequest.add_member(:connector_definition_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ConnectorDefinitionId"))
+    UpdateConnectorDefinitionRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
+    UpdateConnectorDefinitionRequest.struct_class = Types::UpdateConnectorDefinitionRequest
+
+    UpdateConnectorDefinitionResponse.struct_class = Types::UpdateConnectorDefinitionResponse
 
     UpdateCoreDefinitionRequest.add_member(:core_definition_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "CoreDefinitionId"))
     UpdateCoreDefinitionRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
@@ -1178,6 +1314,8 @@ module Aws::Greengrass
 
     __listOfConnectivityInfo.member = Shapes::ShapeRef.new(shape: ConnectivityInfo)
 
+    __listOfConnector.member = Shapes::ShapeRef.new(shape: Connector)
+
     __listOfCore.member = Shapes::ShapeRef.new(shape: Core)
 
     __listOfDefinitionInformation.member = Shapes::ShapeRef.new(shape: DefinitionInformation)
@@ -1199,6 +1337,8 @@ module Aws::Greengrass
     __listOfSubscription.member = Shapes::ShapeRef.new(shape: Subscription)
 
     __listOfVersionInformation.member = Shapes::ShapeRef.new(shape: VersionInformation)
+
+    __listOf__string.member = Shapes::ShapeRef.new(shape: __string)
 
     __mapOf__string.key = Shapes::ShapeRef.new(shape: __string)
     __mapOf__string.value = Shapes::ShapeRef.new(shape: __string)
@@ -1239,6 +1379,24 @@ module Aws::Greengrass
         o.output = Shapes::ShapeRef.new(shape: AssociateServiceRoleToAccountResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:create_connector_definition, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateConnectorDefinition"
+        o.http_method = "POST"
+        o.http_request_uri = "/greengrass/definition/connectors"
+        o.input = Shapes::ShapeRef.new(shape: CreateConnectorDefinitionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateConnectorDefinitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:create_connector_definition_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateConnectorDefinitionVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/greengrass/definition/connectors/{ConnectorDefinitionId}/versions"
+        o.input = Shapes::ShapeRef.new(shape: CreateConnectorDefinitionVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateConnectorDefinitionVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
       api.add_operation(:create_core_definition, Seahorse::Model::Operation.new.tap do |o|
@@ -1396,6 +1554,15 @@ module Aws::Greengrass
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
+      api.add_operation(:delete_connector_definition, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteConnectorDefinition"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/greengrass/definition/connectors/{ConnectorDefinitionId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteConnectorDefinitionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteConnectorDefinitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
       api.add_operation(:delete_core_definition, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteCoreDefinition"
         o.http_method = "DELETE"
@@ -1505,6 +1672,24 @@ module Aws::Greengrass
         o.output = Shapes::ShapeRef.new(shape: GetConnectivityInfoResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:get_connector_definition, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetConnectorDefinition"
+        o.http_method = "GET"
+        o.http_request_uri = "/greengrass/definition/connectors/{ConnectorDefinitionId}"
+        o.input = Shapes::ShapeRef.new(shape: GetConnectorDefinitionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetConnectorDefinitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:get_connector_definition_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetConnectorDefinitionVersion"
+        o.http_method = "GET"
+        o.http_request_uri = "/greengrass/definition/connectors/{ConnectorDefinitionId}/versions/{ConnectorDefinitionVersionId}"
+        o.input = Shapes::ShapeRef.new(shape: GetConnectorDefinitionVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetConnectorDefinitionVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
       api.add_operation(:get_core_definition, Seahorse::Model::Operation.new.tap do |o|
@@ -1689,6 +1874,23 @@ module Aws::Greengrass
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
+      api.add_operation(:list_connector_definition_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListConnectorDefinitionVersions"
+        o.http_method = "GET"
+        o.http_request_uri = "/greengrass/definition/connectors/{ConnectorDefinitionId}/versions"
+        o.input = Shapes::ShapeRef.new(shape: ListConnectorDefinitionVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListConnectorDefinitionVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:list_connector_definitions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListConnectorDefinitions"
+        o.http_method = "GET"
+        o.http_request_uri = "/greengrass/definition/connectors"
+        o.input = Shapes::ShapeRef.new(shape: ListConnectorDefinitionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListConnectorDefinitionsResponse)
+      end)
+
       api.add_operation(:list_core_definition_versions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListCoreDefinitionVersions"
         o.http_method = "GET"
@@ -1862,6 +2064,15 @@ module Aws::Greengrass
         o.output = Shapes::ShapeRef.new(shape: UpdateConnectivityInfoResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:update_connector_definition, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateConnectorDefinition"
+        o.http_method = "PUT"
+        o.http_request_uri = "/greengrass/definition/connectors/{ConnectorDefinitionId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateConnectorDefinitionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateConnectorDefinitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
       api.add_operation(:update_core_definition, Seahorse::Model::Operation.new.tap do |o|

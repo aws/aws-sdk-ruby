@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.117.0 (2018-11-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::GlobalAccelerator`.
+
 1.116.0 (2018-11-26)
 ------------------
 

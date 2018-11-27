@@ -70,7 +70,7 @@ module Aws::EC2
     #       },
     #     ],
     #     image_id: "String",
-    #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal
+    #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #     ipv_6_address_count: 1,
     #     ipv_6_addresses: [
     #       {
@@ -140,7 +140,7 @@ module Aws::EC2
     #     ],
     #     tag_specifications: [
     #       {
-    #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -651,7 +651,7 @@ module Aws::EC2
     #     volume_id: "String", # required
     #     tag_specifications: [
     #       {
-    #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -766,7 +766,7 @@ module Aws::EC2
     #     dry_run: false,
     #     tag_specifications: [
     #       {
-    #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -796,9 +796,13 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     # @option options [Integer] :iops
     #   The number of I/O operations per second (IOPS) to provision for the
-    #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 32000
-    #   IOPS for volumes in most regions. For exceptions, see [Amazon EBS
-    #   Volume Types][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to
+    #   64,000IOPS for volumes in most regions. Maximum IOPS of 64,000 is
+    #   guaranteed only on [Nitro-based
+    #   instances](AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
+    #   Other instance families guarantee performance up to 32,000 IOPS. For
+    #   more information, see [Amazon EBS Volume Types][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
     #
     #   This parameter is valid only for Provisioned IOPS SSD (io1) volumes.
     #
@@ -835,10 +839,10 @@ module Aws::EC2
     # @option options [Integer] :size
     #   The size of the volume, in GiBs.
     #
-    #   Constraints: 1-16384 for `gp2`, 4-16384 for `io1`, 500-16384 for
-    #   `st1`, 500-16384 for `sc1`, and 1-1024 for `standard`. If you specify
-    #   a snapshot, the volume size must be equal to or larger than the
-    #   snapshot size.
+    #   Constraints: 1-16,384 for `gp2`, 4-16,384 for `io1`, 500-16,384 for
+    #   `st1`, 500-16,384 for `sc1`, and 1-1,024 for `standard`. If you
+    #   specify a snapshot, the volume size must be equal to or larger than
+    #   the snapshot size.
     #
     #   Default: If you're creating the volume from a snapshot and don't
     #   specify a volume size, the default is the snapshot size.
@@ -1006,7 +1010,7 @@ module Aws::EC2
     #
     #   image = ec2.register_image({
     #     image_location: "String",
-    #     architecture: "i386", # accepts i386, x86_64
+    #     architecture: "i386", # accepts i386, x86_64, arm64
     #     block_device_mappings: [
     #       {
     #         device_name: "String",
@@ -2207,6 +2211,8 @@ module Aws::EC2
     #
     #   * `route.nat-gateway-id` - The ID of a NAT gateway.
     #
+    #   * `route.transit-gateway-id` - The ID of a transit gateway.
+    #
     #   * `route.origin` - Describes how the route was created.
     #     `CreateRouteTable` indicates that the route was automatically
     #     created when the route table was created; `CreateRoute` indicates
@@ -2232,6 +2238,8 @@ module Aws::EC2
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
+    #
+    #   * `transit-gateway-id` - The ID of a transit gateway.
     #
     #   * `vpc-id` - The ID of the VPC for the route table.
     # @option options [Boolean] :dry_run
