@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.178 (2018-11-27)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::Greengrass - Updated the API, and documentation for AWS Greengrass.
