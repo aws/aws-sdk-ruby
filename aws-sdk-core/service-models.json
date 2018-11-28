@@ -142,6 +142,10 @@
     "models": "comprehend/2017-11-27",
     "endpoint": "comprehend"
   },
+  "ComprehendMedical": {
+    "models": "comprehendmedical/2018-10-30",
+    "endpoint": "comprehendmedical"
+  },
   "ConfigService": {
     "models": "config/2014-11-12",
     "endpoint": "config"
@@ -330,6 +334,10 @@
     "models": "kinesisanalytics/2015-08-14",
     "endpoint": "kinesisanalytics"
   },
+  "KinesisAnalyticsV2": {
+    "models": "kinesisanalyticsv2/2018-05-23",
+    "endpoint": "kinesisanalytics"
+  },
   "KinesisVideo": {
     "models": "kinesisvideo/2017-09-30",
     "endpoint": "kinesisvideo"
@@ -389,6 +397,10 @@
   "MarketplaceMetering": {
     "models": "meteringmarketplace/2016-01-14",
     "endpoint": "metering.marketplace"
+  },
+  "MediaConnect": {
+    "models": "mediaconnect/2018-11-14",
+    "endpoint": "mediaconnect"
   },
   "MediaConvert": {
     "models": "mediaconvert/2017-08-29",

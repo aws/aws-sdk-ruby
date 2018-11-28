@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeDeploy - Updated the API, documentation, and integration test for AWS CodeDeploy.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+* Feature - Aws::KinesisAnalytics - Updated the API, and documentation for Amazon Kinesis Analytics.
+
+* Feature - Aws::CloudWatchLogs - Updated the API, and documentation for Amazon CloudWatch Logs.
+
+* Feature - Aws::MarketplaceMetering - Updated the API, and documentation for AWSMarketplace Metering.
+
+* Feature - Aws::Translate - Updated the API, and documentation for Amazon Translate.
+
+* Feature - Aws::ComprehendMedical - Added support for a new service, AWS Comprehend Medical.
+
+* Feature - Aws::KinesisAnalyticsV2 - Added support for a new service, Amazon Kinesis Analytics.
+
+* Feature - Aws::MediaConnect - Added support for a new service, AWS MediaConnect.
+
 2.11.178 (2018-11-27)
 ------------------
 

@@ -273,6 +273,7 @@ to be backwards compatible.
 | AWS CodeDeploy                                        | CodeDeploy                      | 2014-10-06  |
 | AWS CodePipeline                                      | CodePipeline                    | 2015-07-09  |
 | AWS CodeStar                                          | CodeStar                        | 2017-04-19  |
+| AWS Comprehend Medical                                | ComprehendMedical               | 2018-10-30  |
 | AWS Config                                            | ConfigService                   | 2014-11-12  |
 | AWS Cost Explorer Service                             | CostExplorer                    | 2017-10-25  |
 | AWS Cost and Usage Report Service                     | CostandUsageReportService       | 2017-01-06  |
@@ -301,10 +302,11 @@ to be backwards compatible.
 | AWS IoT Data Plane                                    | IoTDataPlane                    | 2015-05-28  |
 | AWS IoT Jobs Data Plane                               | IoTJobsDataPlane                | 2017-09-29  |
 | AWS Key Management Service                            | KMS                             | 2014-11-01  |
-| AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
 | AWS Lambda                                            | Lambda                          | 2015-03-31  |
+| AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
 | AWS Marketplace Commerce Analytics                    | MarketplaceCommerceAnalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | MarketplaceEntitlementService   | 2017-01-11  |
+| AWS MediaConnect                                      | MediaConnect                    | 2018-11-14  |
 | AWS MediaTailor                                       | MediaTailor                     | 2018-04-23  |
 | AWS Migration Hub                                     | MigrationHub                    | 2017-05-31  |
 | AWS Mobile                                            | Mobile                          | 2017-07-01  |
@@ -372,6 +374,7 @@ to be backwards compatible.
 | Amazon Inspector                                      | Inspector                       | 2016-02-16  |
 | Amazon Kinesis                                        | Kinesis                         | 2013-12-02  |
 | Amazon Kinesis Analytics                              | KinesisAnalytics                | 2015-08-14  |
+| Amazon Kinesis Analytics                              | KinesisAnalyticsV2              | 2018-05-23  |
 | Amazon Kinesis Firehose                               | Firehose                        | 2015-08-04  |
 | Amazon Kinesis Video Streams                          | KinesisVideo                    | 2017-09-30  |
 | Amazon Kinesis Video Streams Archived Media           | KinesisVideoArchivedMedia       | 2017-09-30  |

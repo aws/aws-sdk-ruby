@@ -59,6 +59,7 @@ module Aws
     CognitoIdentityProvider
     CognitoSync
     Comprehend
+    ComprehendMedical
     ConfigService
     Connect
     CostExplorer
@@ -106,6 +107,7 @@ module Aws
     KMS
     Kinesis
     KinesisAnalytics
+    KinesisAnalyticsV2
     KinesisVideo
     KinesisVideoArchivedMedia
     KinesisVideoMedia
@@ -121,6 +123,7 @@ module Aws
     MarketplaceCommerceAnalytics
     MarketplaceEntitlementService
     MarketplaceMetering
+    MediaConnect
     MediaConvert
     MediaLive
     MediaPackage
