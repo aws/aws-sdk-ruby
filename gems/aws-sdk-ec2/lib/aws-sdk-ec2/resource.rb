@@ -688,6 +688,7 @@ module Aws::EC2
     #
     #   subnet = ec2.create_subnet({
     #     availability_zone: "String",
+    #     availability_zone_id: "String",
     #     cidr_block: "String", # required
     #     ipv_6_cidr_block: "String",
     #     vpc_id: "String", # required
@@ -700,6 +701,8 @@ module Aws::EC2
     #   Default: AWS selects one for you. If you create more than one subnet
     #   in your VPC, we may not necessarily select a different zone for each
     #   subnet.
+    # @option options [String] :availability_zone_id
+    #   The AZ ID of the subnet.
     # @option options [required, String] :cidr_block
     #   The IPv4 network range for the subnet, in CIDR notation. For example,
     #   `10.0.0.0/24`.
@@ -1210,11 +1213,14 @@ module Aws::EC2
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters.
     #
-    #   * `dhcp-options-id` - The ID of a set of DHCP options.
+    #   * `dhcp-options-id` - The ID of a DHCP options set.
     #
     #   * `key` - The key for one of the options (for example, `domain-name`).
     #
     #   * `value` - The value for one of the options.
+    #
+    #   * `owner-id` - The ID of the AWS account that owns the DHCP options
+    #     set.
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
@@ -1733,6 +1739,9 @@ module Aws::EC2
     #
     #   * `internet-gateway-id` - The ID of the Internet gateway.
     #
+    #   * `owner-id` - The ID of the AWS account that owns the internet
+    #     gateway.
+    #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
@@ -1883,6 +1892,8 @@ module Aws::EC2
     #     in the set of ACL entries.
     #
     #   * `network-acl-id` - The ID of the network ACL.
+    #
+    #   * `owner-id` - The ID of the AWS account that owns the network ACL.
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
@@ -2188,6 +2199,8 @@ module Aws::EC2
     #   * `association.main` - Indicates whether the route table is the main
     #     route table for the VPC (`true` \| `false`). Route tables that do
     #     not have an association ID are not returned in the response.
+    #
+    #   * `owner-id` - The ID of the AWS account that owns the route table.
     #
     #   * `route-table-id` - The ID of the route table.
     #
@@ -2526,20 +2539,23 @@ module Aws::EC2
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters.
     #
-    #   * `availabilityZone` - The Availability Zone for the subnet. You can
-    #     also use `availability-zone` as the filter name.
+    #   * `availability-zone` - The Availability Zone for the subnet. You can
+    #     also use `availabilityZone` as the filter name.
+    #
+    #   * `availability-zone-id` - The ID of the Availability Zone for the
+    #     subnet. You can also use `availabilityZoneId` as the filter name.
     #
     #   * `available-ip-address-count` - The number of IPv4 addresses in the
     #     subnet that are available.
     #
-    #   * `cidrBlock` - The IPv4 CIDR block of the subnet. The CIDR block you
+    #   * `cidr-block` - The IPv4 CIDR block of the subnet. The CIDR block you
     #     specify must exactly match the subnet's CIDR block for information
     #     to be returned for the subnet. You can also use `cidr` or
-    #     `cidr-block` as the filter names.
+    #     `cidrBlock` as the filter names.
     #
-    #   * `defaultForAz` - Indicates whether this is the default subnet for
-    #     the Availability Zone. You can also use `default-for-az` as the
-    #     filter name.
+    #   * `default-for-az` - Indicates whether this is the default subnet for
+    #     the Availability Zone. You can also use `defaultForAz` as the filter
+    #     name.
     #
     #   * `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
     #     associated with the subnet.
@@ -2550,7 +2566,11 @@ module Aws::EC2
     #   * `ipv6-cidr-block-association.state` - The state of an IPv6 CIDR
     #     block associated with the subnet.
     #
+    #   * `owner-id` - The ID of the AWS account that owns the subnet.
+    #
     #   * `state` - The state of the subnet (`pending` \| `available`).
+    #
+    #   * `subnet-arn` - The Amazon Resource Name (ARN) of the subnet.
     #
     #   * `subnet-id` - The ID of the subnet.
     #
@@ -2906,6 +2926,8 @@ module Aws::EC2
     #     block associated with the VPC.
     #
     #   * `isDefault` - Indicates whether the VPC is the default VPC.
+    #
+    #   * `owner-id` - The ID of the AWS account that owns the VPC.
     #
     #   * `state` - The state of the VPC (`pending` \| `available`).
     #

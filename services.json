@@ -121,6 +121,9 @@
   "Comprehend": {
     "models": "comprehend/2017-11-27"
   },
+  "ComprehendMedical": {
+    "models": "comprehendmedical/2018-10-30"
+  },
   "ConfigService": {
     "models": "config/2014-11-12"
   },
@@ -280,6 +283,9 @@
   "KinesisAnalytics": {
     "models": "kinesisanalytics/2015-08-14"
   },
+  "KinesisAnalyticsV2": {
+    "models": "kinesisanalyticsv2/2018-05-23"
+  },
   "KinesisVideo": {
     "models": "kinesisvideo/2017-09-30"
   },
@@ -327,6 +333,9 @@
   },
   "MarketplaceMetering": {
     "models": "meteringmarketplace/2016-01-14"
+  },
+  "MediaConnect": {
+    "models": "mediaconnect/2018-11-14"
   },
   "MediaConvert": {
     "models": "mediaconvert/2017-08-29"

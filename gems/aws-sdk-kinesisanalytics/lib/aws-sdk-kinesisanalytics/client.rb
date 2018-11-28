@@ -408,7 +408,7 @@ module Aws::KinesisAnalytics
     # If you want Amazon Kinesis Analytics to deliver data from an
     # in-application stream within your application to an external
     # destination (such as an Amazon Kinesis stream, an Amazon Kinesis
-    # Firehose delivery stream, or an Amazon Lambda function), you add the
+    # Firehose delivery stream, or an AWS Lambda function), you add the
     # relevant configuration to your application using this operation. You
     # can configure one or more outputs for your application. Each output
     # configuration maps an in-application stream and an external
@@ -416,13 +416,13 @@ module Aws::KinesisAnalytics
     #
     # You can use one of the output configurations to deliver data from your
     # in-application error stream to an external destination so that you can
-    # analyze the errors. For conceptual information, see [Understanding
+    # analyze the errors. For more information, see [Understanding
     # Application Output (Destination)][1].
     #
-    # Note that any configuration update, including adding a streaming
-    # source using this operation, results in a new version of the
-    # application. You can use the DescribeApplication operation to find the
-    # current application version.
+    # Any configuration update, including adding a streaming source using
+    # this operation, results in a new version of the application. You can
+    # use the DescribeApplication operation to find the current application
+    # version.
     #
     # For the limits on the number of application inputs and outputs you can
     # configure, see [Limits][2].
@@ -449,7 +449,7 @@ module Aws::KinesisAnalytics
     #   An array of objects, each describing one output configuration. In the
     #   output configuration, you specify the name of an in-application
     #   stream, a destination (that is, an Amazon Kinesis stream, an Amazon
-    #   Kinesis Firehose delivery stream, or an Amazon Lambda function), and
+    #   Kinesis Firehose delivery stream, or an AWS Lambda function), and
     #   record the formation to use when writing to the destination.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -474,7 +474,7 @@ module Aws::KinesisAnalytics
     #         role_arn: "RoleARN", # required
     #       },
     #       destination_schema: { # required
-    #         record_format_type: "JSON", # accepts JSON, CSV
+    #         record_format_type: "JSON", # required, accepts JSON, CSV
     #       },
     #     },
     #   })
@@ -640,8 +640,8 @@ module Aws::KinesisAnalytics
     #   in-application streams to up to three destinations.
     #
     #   These destinations can be Amazon Kinesis streams, Amazon Kinesis
-    #   Firehose delivery streams, Amazon Lambda destinations, or any
-    #   combination of the three.
+    #   Firehose delivery streams, AWS Lambda destinations, or any combination
+    #   of the three.
     #
     #   In the configuration, you specify the in-application stream name, the
     #   destination stream or Lambda function Amazon Resource Name (ARN), and
@@ -755,7 +755,7 @@ module Aws::KinesisAnalytics
     #           role_arn: "RoleARN", # required
     #         },
     #         destination_schema: { # required
-    #           record_format_type: "JSON", # accepts JSON, CSV
+    #           record_format_type: "JSON", # required, accepts JSON, CSV
     #         },
     #       },
     #     ],
@@ -1099,7 +1099,8 @@ module Aws::KinesisAnalytics
     #   records from the specified streaming source discovery purposes.
     #
     # @option params [Types::S3Configuration] :s3_configuration
-    #   Specify this parameter to discover a schema from data in an S3 object.
+    #   Specify this parameter to discover a schema from data in an Amazon S3
+    #   object.
     #
     # @option params [Types::InputProcessingConfiguration] :input_processing_configuration
     #   The InputProcessingConfiguration to use to preprocess the records
@@ -1386,7 +1387,7 @@ module Aws::KinesisAnalytics
     #             role_arn_update: "RoleARN",
     #           },
     #           destination_schema_update: {
-    #             record_format_type: "JSON", # accepts JSON, CSV
+    #             record_format_type: "JSON", # required, accepts JSON, CSV
     #           },
     #         },
     #       ],
@@ -1455,7 +1456,7 @@ module Aws::KinesisAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisanalytics'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

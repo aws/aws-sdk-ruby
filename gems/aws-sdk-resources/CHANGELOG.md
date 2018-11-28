@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+3.32.0 (2018-11-28)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-mediaconnect` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-kinesisanalyticsv2` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-comprehendmedical` gem.
+
 3.31.0 (2018-11-27)
 ------------------
 

@@ -3284,6 +3284,7 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.subnet.availability_zone #=> String
+    #   resp.subnet.availability_zone_id #=> String
     #   resp.subnet.available_ip_address_count #=> Integer
     #   resp.subnet.cidr_block #=> String
     #   resp.subnet.default_for_az #=> Boolean
@@ -3291,6 +3292,7 @@ module Aws::EC2
     #   resp.subnet.state #=> String, one of "pending", "available"
     #   resp.subnet.subnet_id #=> String
     #   resp.subnet.vpc_id #=> String
+    #   resp.subnet.owner_id #=> String
     #   resp.subnet.assign_ipv_6_address_on_creation #=> Boolean
     #   resp.subnet.ipv_6_cidr_block_association_set #=> Array
     #   resp.subnet.ipv_6_cidr_block_association_set[0].association_id #=> String
@@ -3300,6 +3302,7 @@ module Aws::EC2
     #   resp.subnet.tags #=> Array
     #   resp.subnet.tags[0].key #=> String
     #   resp.subnet.tags[0].value #=> String
+    #   resp.subnet.subnet_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDefaultSubnet AWS API Documentation
     #
@@ -3352,6 +3355,7 @@ module Aws::EC2
     #   resp.vpc.dhcp_options_id #=> String
     #   resp.vpc.state #=> String, one of "pending", "available"
     #   resp.vpc.vpc_id #=> String
+    #   resp.vpc.owner_id #=> String
     #   resp.vpc.instance_tenancy #=> String, one of "default", "dedicated", "host"
     #   resp.vpc.ipv_6_cidr_block_association_set #=> Array
     #   resp.vpc.ipv_6_cidr_block_association_set[0].association_id #=> String
@@ -3496,6 +3500,7 @@ module Aws::EC2
     #   resp.dhcp_options.dhcp_configurations[0].values #=> Array
     #   resp.dhcp_options.dhcp_configurations[0].values[0] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.dhcp_options.dhcp_options_id #=> String
+    #   resp.dhcp_options.owner_id #=> String
     #   resp.dhcp_options.tags #=> Array
     #   resp.dhcp_options.tags[0].key #=> String
     #   resp.dhcp_options.tags[0].value #=> String
@@ -4208,6 +4213,7 @@ module Aws::EC2
     #   resp.internet_gateway.attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached"
     #   resp.internet_gateway.attachments[0].vpc_id #=> String
     #   resp.internet_gateway.internet_gateway_id #=> String
+    #   resp.internet_gateway.owner_id #=> String
     #   resp.internet_gateway.tags #=> Array
     #   resp.internet_gateway.tags[0].key #=> String
     #   resp.internet_gateway.tags[0].value #=> String
@@ -4999,6 +5005,7 @@ module Aws::EC2
     #   resp.network_acl.tags[0].key #=> String
     #   resp.network_acl.tags[0].value #=> String
     #   resp.network_acl.vpc_id #=> String
+    #   resp.network_acl.owner_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkAcl AWS API Documentation
     #
@@ -5751,6 +5758,7 @@ module Aws::EC2
     #   resp.route_table.tags[0].key #=> String
     #   resp.route_table.tags[0].value #=> String
     #   resp.route_table.vpc_id #=> String
+    #   resp.route_table.owner_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRouteTable AWS API Documentation
     #
@@ -6120,6 +6128,9 @@ module Aws::EC2
     #   in your VPC, we may not necessarily select a different zone for each
     #   subnet.
     #
+    # @option params [String] :availability_zone_id
+    #   The AZ ID of the subnet.
+    #
     # @option params [required, String] :cidr_block
     #   The IPv4 network range for the subnet, in CIDR notation. For example,
     #   `10.0.0.0/24`.
@@ -6168,6 +6179,7 @@ module Aws::EC2
     #
     #   resp = client.create_subnet({
     #     availability_zone: "String",
+    #     availability_zone_id: "String",
     #     cidr_block: "String", # required
     #     ipv_6_cidr_block: "String",
     #     vpc_id: "String", # required
@@ -6177,6 +6189,7 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.subnet.availability_zone #=> String
+    #   resp.subnet.availability_zone_id #=> String
     #   resp.subnet.available_ip_address_count #=> Integer
     #   resp.subnet.cidr_block #=> String
     #   resp.subnet.default_for_az #=> Boolean
@@ -6184,6 +6197,7 @@ module Aws::EC2
     #   resp.subnet.state #=> String, one of "pending", "available"
     #   resp.subnet.subnet_id #=> String
     #   resp.subnet.vpc_id #=> String
+    #   resp.subnet.owner_id #=> String
     #   resp.subnet.assign_ipv_6_address_on_creation #=> Boolean
     #   resp.subnet.ipv_6_cidr_block_association_set #=> Array
     #   resp.subnet.ipv_6_cidr_block_association_set[0].association_id #=> String
@@ -6193,6 +6207,7 @@ module Aws::EC2
     #   resp.subnet.tags #=> Array
     #   resp.subnet.tags[0].key #=> String
     #   resp.subnet.tags[0].value #=> String
+    #   resp.subnet.subnet_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSubnet AWS API Documentation
     #
@@ -6914,6 +6929,7 @@ module Aws::EC2
     #   resp.vpc.dhcp_options_id #=> String
     #   resp.vpc.state #=> String, one of "pending", "available"
     #   resp.vpc.vpc_id #=> String
+    #   resp.vpc.owner_id #=> String
     #   resp.vpc.instance_tenancy #=> String, one of "default", "dedicated", "host"
     #   resp.vpc.ipv_6_cidr_block_association_set #=> Array
     #   resp.vpc.ipv_6_cidr_block_association_set[0].association_id #=> String
@@ -10286,11 +10302,14 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
     #
-    #   * `dhcp-options-id` - The ID of a set of DHCP options.
+    #   * `dhcp-options-id` - The ID of a DHCP options set.
     #
     #   * `key` - The key for one of the options (for example, `domain-name`).
     #
     #   * `value` - The value for one of the options.
+    #
+    #   * `owner-id` - The ID of the AWS account that owns the DHCP options
+    #     set.
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
@@ -10366,6 +10385,7 @@ module Aws::EC2
     #   resp.dhcp_options[0].dhcp_configurations[0].values #=> Array
     #   resp.dhcp_options[0].dhcp_configurations[0].values[0] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.dhcp_options[0].dhcp_options_id #=> String
+    #   resp.dhcp_options[0].owner_id #=> String
     #   resp.dhcp_options[0].tags #=> Array
     #   resp.dhcp_options[0].tags[0].key #=> String
     #   resp.dhcp_options[0].tags[0].value #=> String
@@ -13007,6 +13027,9 @@ module Aws::EC2
     #
     #   * `internet-gateway-id` - The ID of the Internet gateway.
     #
+    #   * `owner-id` - The ID of the AWS account that owns the internet
+    #     gateway.
+    #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
@@ -13085,6 +13108,7 @@ module Aws::EC2
     #   resp.internet_gateways[0].attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached"
     #   resp.internet_gateways[0].attachments[0].vpc_id #=> String
     #   resp.internet_gateways[0].internet_gateway_id #=> String
+    #   resp.internet_gateways[0].owner_id #=> String
     #   resp.internet_gateways[0].tags #=> Array
     #   resp.internet_gateways[0].tags[0].key #=> String
     #   resp.internet_gateways[0].tags[0].value #=> String
@@ -13782,6 +13806,8 @@ module Aws::EC2
     #
     #   * `network-acl-id` - The ID of the network ACL.
     #
+    #   * `owner-id` - The ID of the AWS account that owns the network ACL.
+    #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
@@ -13893,6 +13919,7 @@ module Aws::EC2
     #   resp.network_acls[0].tags[0].key #=> String
     #   resp.network_acls[0].tags[0].value #=> String
     #   resp.network_acls[0].vpc_id #=> String
+    #   resp.network_acls[0].owner_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkAcls AWS API Documentation
     #
@@ -15331,6 +15358,8 @@ module Aws::EC2
     #     route table for the VPC (`true` \| `false`). Route tables that do
     #     not have an association ID are not returned in the response.
     #
+    #   * `owner-id` - The ID of the AWS account that owns the route table.
+    #
     #   * `route-table-id` - The ID of the route table.
     #
     #   * `route.destination-cidr-block` - The IPv4 CIDR range specified in a
@@ -15492,6 +15521,7 @@ module Aws::EC2
     #   resp.route_tables[0].tags[0].key #=> String
     #   resp.route_tables[0].tags[0].value #=> String
     #   resp.route_tables[0].vpc_id #=> String
+    #   resp.route_tables[0].owner_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRouteTables AWS API Documentation
@@ -17423,20 +17453,23 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
     #
-    #   * `availabilityZone` - The Availability Zone for the subnet. You can
-    #     also use `availability-zone` as the filter name.
+    #   * `availability-zone` - The Availability Zone for the subnet. You can
+    #     also use `availabilityZone` as the filter name.
+    #
+    #   * `availability-zone-id` - The ID of the Availability Zone for the
+    #     subnet. You can also use `availabilityZoneId` as the filter name.
     #
     #   * `available-ip-address-count` - The number of IPv4 addresses in the
     #     subnet that are available.
     #
-    #   * `cidrBlock` - The IPv4 CIDR block of the subnet. The CIDR block you
+    #   * `cidr-block` - The IPv4 CIDR block of the subnet. The CIDR block you
     #     specify must exactly match the subnet's CIDR block for information
     #     to be returned for the subnet. You can also use `cidr` or
-    #     `cidr-block` as the filter names.
+    #     `cidrBlock` as the filter names.
     #
-    #   * `defaultForAz` - Indicates whether this is the default subnet for
-    #     the Availability Zone. You can also use `default-for-az` as the
-    #     filter name.
+    #   * `default-for-az` - Indicates whether this is the default subnet for
+    #     the Availability Zone. You can also use `defaultForAz` as the filter
+    #     name.
     #
     #   * `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
     #     associated with the subnet.
@@ -17447,7 +17480,11 @@ module Aws::EC2
     #   * `ipv6-cidr-block-association.state` - The state of an IPv6 CIDR
     #     block associated with the subnet.
     #
+    #   * `owner-id` - The ID of the AWS account that owns the subnet.
+    #
     #   * `state` - The state of the subnet (`pending` \| `available`).
+    #
+    #   * `subnet-arn` - The Amazon Resource Name (ARN) of the subnet.
     #
     #   * `subnet-id` - The ID of the subnet.
     #
@@ -17527,6 +17564,7 @@ module Aws::EC2
     #
     #   resp.subnets #=> Array
     #   resp.subnets[0].availability_zone #=> String
+    #   resp.subnets[0].availability_zone_id #=> String
     #   resp.subnets[0].available_ip_address_count #=> Integer
     #   resp.subnets[0].cidr_block #=> String
     #   resp.subnets[0].default_for_az #=> Boolean
@@ -17534,6 +17572,7 @@ module Aws::EC2
     #   resp.subnets[0].state #=> String, one of "pending", "available"
     #   resp.subnets[0].subnet_id #=> String
     #   resp.subnets[0].vpc_id #=> String
+    #   resp.subnets[0].owner_id #=> String
     #   resp.subnets[0].assign_ipv_6_address_on_creation #=> Boolean
     #   resp.subnets[0].ipv_6_cidr_block_association_set #=> Array
     #   resp.subnets[0].ipv_6_cidr_block_association_set[0].association_id #=> String
@@ -17543,6 +17582,7 @@ module Aws::EC2
     #   resp.subnets[0].tags #=> Array
     #   resp.subnets[0].tags[0].key #=> String
     #   resp.subnets[0].tags[0].value #=> String
+    #   resp.subnets[0].subnet_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSubnets AWS API Documentation
     #
@@ -19441,6 +19481,8 @@ module Aws::EC2
     #
     #   * `isDefault` - Indicates whether the VPC is the default VPC.
     #
+    #   * `owner-id` - The ID of the AWS account that owns the VPC.
+    #
     #   * `state` - The state of the VPC (`pending` \| `available`).
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
@@ -19521,6 +19563,7 @@ module Aws::EC2
     #   resp.vpcs[0].dhcp_options_id #=> String
     #   resp.vpcs[0].state #=> String, one of "pending", "available"
     #   resp.vpcs[0].vpc_id #=> String
+    #   resp.vpcs[0].owner_id #=> String
     #   resp.vpcs[0].instance_tenancy #=> String, one of "default", "dedicated", "host"
     #   resp.vpcs[0].ipv_6_cidr_block_association_set #=> Array
     #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].association_id #=> String
@@ -28418,7 +28461,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

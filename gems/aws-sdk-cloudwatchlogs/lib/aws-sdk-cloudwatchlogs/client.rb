@@ -314,12 +314,12 @@ module Aws::CloudWatchLogs
     #
     # @option params [required, Integer] :from
     #   The start time of the range for the request, expressed as the number
-    #   of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a time
-    #   stamp earlier than this time are not exported.
+    #   of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a
+    #   timestamp earlier than this time are not exported.
     #
     # @option params [required, Integer] :to
     #   The end time of the range for the request, expressed as the number of
-    #   milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a time stamp
+    #   milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp
     #   later than this time are not exported.
     #
     # @option params [required, String] :destination
@@ -933,6 +933,59 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Returns a list of CloudWatch Logs Insights queries that are scheduled,
+    # executing, or have been executed recently in this account. You can
+    # request all queries, or limit it to queries of a specific log group or
+    # queries with a certain status.
+    #
+    # @option params [String] :log_group_name
+    #   Limits the returned queries to only those for the specified log group.
+    #
+    # @option params [String] :status
+    #   Limits the returned queries to only those that have the specified
+    #   status. Valid values are `Cancelled`, `Complete`, `Failed`, `Running`,
+    #   and `Scheduled`.
+    #
+    # @option params [Integer] :max_results
+    #   Limits the number of returned queries to the specified number.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. The token expires after
+    #   24 hours.
+    #
+    # @return [Types::DescribeQueriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeQueriesResponse#queries #queries} => Array&lt;Types::QueryInfo&gt;
+    #   * {Types::DescribeQueriesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_queries({
+    #     log_group_name: "LogGroupName",
+    #     status: "Scheduled", # accepts Scheduled, Running, Complete, Failed, Cancelled
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.queries #=> Array
+    #   resp.queries[0].query_id #=> String
+    #   resp.queries[0].query_string #=> String
+    #   resp.queries[0].status #=> String, one of "Scheduled", "Running", "Complete", "Failed", "Cancelled"
+    #   resp.queries[0].create_time #=> Integer
+    #   resp.queries[0].log_group_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeQueries AWS API Documentation
+    #
+    # @overload describe_queries(params = {})
+    # @param [Hash] params ({})
+    def describe_queries(params = {}, options = {})
+      req = build_request(:describe_queries, params)
+      req.send_request(options)
+    end
+
     # Lists the resource policies in this account.
     #
     # @option params [String] :next_token
@@ -1075,9 +1128,8 @@ module Aws::CloudWatchLogs
     #   Filters the results to only logs from the log streams in this list.
     #
     #   If you specify a value for both `logStreamNamePrefix` and
-    #   `logStreamNames`, but the value for `logStreamNamePrefix` does not
-    #   match any log stream names specified in `logStreamNames`, the action
-    #   returns an `InvalidParameterException` error.
+    #   `logStreamNames`, the action returns an `InvalidParameterException`
+    #   error.
     #
     # @option params [String] :log_stream_name_prefix
     #   Filters the results to include only events from log streams that have
@@ -1090,12 +1142,12 @@ module Aws::CloudWatchLogs
     #
     # @option params [Integer] :start_time
     #   The start of the time range, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp before this
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a timestamp before this
     #   time are not returned.
     #
     # @option params [Integer] :end_time
     #   The end of the time range, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp later than
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than
     #   this time are not returned.
     #
     # @option params [String] :filter_pattern
@@ -1179,13 +1231,13 @@ module Aws::CloudWatchLogs
     #
     # @option params [Integer] :start_time
     #   The start of the time range, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp equal to this
-    #   time or later than this time are included. Events with a time stamp
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a timestamp equal to this
+    #   time or later than this time are included. Events with a timestamp
     #   earlier than this time are not included.
     #
     # @option params [Integer] :end_time
     #   The end of the time range, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp equal to or
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a timestamp equal to or
     #   later than this time are not included.
     #
     # @option params [String] :next_token
@@ -1235,6 +1287,136 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def get_log_events(params = {}, options = {})
       req = build_request(:get_log_events, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the fields that are included in log events in the
+    # specified log group, along with the percentage of log events that
+    # contain each field. The search is limited to a time period that you
+    # specify.
+    #
+    # In the results, fields that start with @ are fields generated by
+    # CloudWatch Logs. For example, `@timestamp` is the timestamp of each
+    # log event.
+    #
+    # The response results are sorted by the frequency percentage, starting
+    # with the highest percentage.
+    #
+    # @option params [required, String] :log_group_name
+    #   The name of the log group to search.
+    #
+    # @option params [Integer] :time
+    #   The time to set as the center of the query. If you specify `time`, the
+    #   8 minutes before and 8 minutes after this time are searched. If you
+    #   omit `time`, the past 15 minutes are queried.
+    #
+    #   The `time` value is specified as epoch time, the number of seconds
+    #   since January 1, 1970, 00:00:00 UTC.
+    #
+    # @return [Types::GetLogGroupFieldsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLogGroupFieldsResponse#log_group_fields #log_group_fields} => Array&lt;Types::LogGroupField&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_log_group_fields({
+    #     log_group_name: "LogGroupName", # required
+    #     time: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.log_group_fields #=> Array
+    #   resp.log_group_fields[0].name #=> String
+    #   resp.log_group_fields[0].percent #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogGroupFields AWS API Documentation
+    #
+    # @overload get_log_group_fields(params = {})
+    # @param [Hash] params ({})
+    def get_log_group_fields(params = {}, options = {})
+      req = build_request(:get_log_group_fields, params)
+      req.send_request(options)
+    end
+
+    # Retrieves all the fields and values of a single log event. All fields
+    # are retrieved, even if the original query that produced the
+    # `logRecordPointer` retrieved only a subset of fields. Fields are
+    # returned as field name/field value pairs.
+    #
+    # Additionally, the entire unparsed log event is returned within
+    # `@message`.
+    #
+    # @option params [required, String] :log_record_pointer
+    #   The pointer corresponding to the log event record you want to
+    #   retrieve. You get this from the response of a `GetQueryResults`
+    #   operation. In that response, the value of the `@ptr` field for a log
+    #   event is the value to use as `logRecordPointer` to retrieve that
+    #   complete log event record.
+    #
+    # @return [Types::GetLogRecordResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLogRecordResponse#log_record #log_record} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_log_record({
+    #     log_record_pointer: "LogRecordPointer", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.log_record #=> Hash
+    #   resp.log_record["Field"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogRecord AWS API Documentation
+    #
+    # @overload get_log_record(params = {})
+    # @param [Hash] params ({})
+    def get_log_record(params = {}, options = {})
+      req = build_request(:get_log_record, params)
+      req.send_request(options)
+    end
+
+    # Returns the results from the specified query. If the query is in
+    # progress, partial results of that current execution are returned. Only
+    # the fields requested in the query are returned.
+    #
+    # `GetQueryResults` does not start a query execution. To run a query,
+    # use .
+    #
+    # @option params [required, String] :query_id
+    #   The ID number of the query.
+    #
+    # @return [Types::GetQueryResultsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetQueryResultsResponse#results #results} => Array&lt;Array&lt;Types::ResultField&gt;&gt;
+    #   * {Types::GetQueryResultsResponse#statistics #statistics} => Types::QueryStatistics
+    #   * {Types::GetQueryResultsResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_query_results({
+    #     query_id: "QueryId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0] #=> Array
+    #   resp.results[0][0].field #=> String
+    #   resp.results[0][0].value #=> String
+    #   resp.statistics.records_matched #=> Float
+    #   resp.statistics.records_scanned #=> Float
+    #   resp.statistics.bytes_scanned #=> Float
+    #   resp.status #=> String, one of "Scheduled", "Running", "Complete", "Failed", "Cancelled"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetQueryResults AWS API Documentation
+    #
+    # @overload get_query_results(params = {})
+    # @param [Hash] params ({})
+    def get_query_results(params = {}, options = {})
+      req = build_request(:get_query_results, params)
       req.send_request(options)
     end
 
@@ -1378,7 +1560,7 @@ module Aws::CloudWatchLogs
     #   retention period of the log group.
     #
     # * The log events in the batch must be in chronological ordered by
-    #   their time stamp. The time stamp is the time the event occurred,
+    #   their timestamp. The timestamp is the time the event occurred,
     #   expressed as the number of milliseconds after Jan 1, 1970 00:00:00
     #   UTC. (In AWS Tools for PowerShell and the AWS SDK for .NET, the
     #   timestamp is specified in .NET format: yyyy-mm-ddThh:mm:ss. For
@@ -1655,6 +1837,98 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Schedules a query of a log group using CloudWatch Logs Insights. You
+    # specify the log group to query, the query string to use, and the time
+    # to query.
+    #
+    # For more information, see [CloudWatch Logs Insights Query Syntax][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
+    #
+    # @option params [required, String] :log_group_name
+    #   The log group on which to perform the query.
+    #
+    # @option params [required, Integer] :start_time
+    #   The time to start the query. Specified as epoch time, the number of
+    #   seconds since January 1, 1970, 00:00:00 UTC.
+    #
+    # @option params [required, Integer] :end_time
+    #   The time to end this query, if it is still running. Specified as epoch
+    #   time, the number of seconds since January 1, 1970, 00:00:00 UTC.
+    #
+    # @option params [required, String] :query_string
+    #   The query string to use. For more information, see [CloudWatch Logs
+    #   Insights Query Syntax][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of log events to return in the query. If the query
+    #   string uses the `fields` command, only the specified fields and their
+    #   values are returned.
+    #
+    # @return [Types::StartQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartQueryResponse#query_id #query_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_query({
+    #     log_group_name: "LogGroupName", # required
+    #     start_time: 1, # required
+    #     end_time: 1, # required
+    #     query_string: "QueryString", # required
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.query_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/StartQuery AWS API Documentation
+    #
+    # @overload start_query(params = {})
+    # @param [Hash] params ({})
+    def start_query(params = {}, options = {})
+      req = build_request(:start_query, params)
+      req.send_request(options)
+    end
+
+    # Stops a CloudWatch Logs Insights query that is in progress. If the
+    # query has already ended, the operation returns an error indicating
+    # that the specified query is not running.
+    #
+    # @option params [required, String] :query_id
+    #   The ID number of the query to stop. If necessary, you can use
+    #   `DescribeQueries` to find this ID number.
+    #
+    # @return [Types::StopQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopQueryResponse#success #success} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_query({
+    #     query_id: "QueryId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.success #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/StopQuery AWS API Documentation
+    #
+    # @overload stop_query(params = {})
+    # @param [Hash] params ({})
+    def stop_query(params = {}, options = {})
+      req = build_request(:stop_query, params)
+      req.send_request(options)
+    end
+
     # Adds or updates the specified tags for the specified log group.
     #
     # To list the tags for a log group, use ListTagsLogGroup. To remove
@@ -1699,9 +1973,9 @@ module Aws::CloudWatchLogs
     #
     # @option params [required, String] :filter_pattern
     #   A symbolic description of how CloudWatch Logs should interpret the
-    #   data in each log event. For example, a log event may contain time
-    #   stamps, IP addresses, strings, and so on. You use the filter pattern
-    #   to specify what to look for in the log event message.
+    #   data in each log event. For example, a log event may contain
+    #   timestamps, IP addresses, strings, and so on. You use the filter
+    #   pattern to specify what to look for in the log event message.
     #
     # @option params [required, Array<String>] :log_event_messages
     #   The log event messages to test.
@@ -1776,7 +2050,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

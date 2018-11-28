@@ -215,34 +215,265 @@ module Aws::Translate
 
     # @!group API Operations
 
+    # A synchronous action that deletes a custom terminology.
+    #
+    # @option params [required, String] :name
+    #   The name of the custom terminology being deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_terminology({
+    #     name: "ResourceName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/DeleteTerminology AWS API Documentation
+    #
+    # @overload delete_terminology(params = {})
+    # @param [Hash] params ({})
+    def delete_terminology(params = {}, options = {})
+      req = build_request(:delete_terminology, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a custom terminology.
+    #
+    # @option params [required, String] :name
+    #   The name of the custom terminology being retrieved.
+    #
+    # @option params [required, String] :terminology_data_format
+    #   The data format of the custom terminology being retrieved, either CSV
+    #   or TMX.
+    #
+    # @return [Types::GetTerminologyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTerminologyResponse#terminology_properties #terminology_properties} => Types::TerminologyProperties
+    #   * {Types::GetTerminologyResponse#terminology_data_location #terminology_data_location} => Types::TerminologyDataLocation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_terminology({
+    #     name: "ResourceName", # required
+    #     terminology_data_format: "CSV", # required, accepts CSV, TMX
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.terminology_properties.name #=> String
+    #   resp.terminology_properties.description #=> String
+    #   resp.terminology_properties.arn #=> String
+    #   resp.terminology_properties.source_language_code #=> String
+    #   resp.terminology_properties.target_language_codes #=> Array
+    #   resp.terminology_properties.target_language_codes[0] #=> String
+    #   resp.terminology_properties.encryption_key.type #=> String, one of "KMS"
+    #   resp.terminology_properties.encryption_key.id #=> String
+    #   resp.terminology_properties.size_bytes #=> Integer
+    #   resp.terminology_properties.term_count #=> Integer
+    #   resp.terminology_properties.created_at #=> Time
+    #   resp.terminology_properties.last_updated_at #=> Time
+    #   resp.terminology_data_location.repository_type #=> String
+    #   resp.terminology_data_location.location #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/GetTerminology AWS API Documentation
+    #
+    # @overload get_terminology(params = {})
+    # @param [Hash] params ({})
+    def get_terminology(params = {}, options = {})
+      req = build_request(:get_terminology, params)
+      req.send_request(options)
+    end
+
+    # Creates or updates a custom terminology, depending on whether or not
+    # one already exists for the given terminology name. Importing a
+    # terminology with the same name as an existing one will merge the
+    # terminologies based on the chosen merge strategy. Currently, the only
+    # supported merge strategy is OVERWRITE, and so the imported terminology
+    # will overwrite an existing terminology of the same name.
+    #
+    # If you import a terminology that overwrites an existing one, the new
+    # terminology take up to 10 minutes to fully propagate and be available
+    # for use in a translation due to cache policies with the DataPlane
+    # service that performs the translations.
+    #
+    # @option params [required, String] :name
+    #   The name of the custom terminology being imported.
+    #
+    # @option params [required, String] :merge_strategy
+    #   The merge strategy of the custom terminology being imported.
+    #   Currently, only the OVERWRITE merge strategy is supported. In this
+    #   case, the imported terminology will overwrite an existing terminology
+    #   of the same name.
+    #
+    # @option params [String] :description
+    #   The description of the custom terminology being imported.
+    #
+    # @option params [required, Types::TerminologyData] :terminology_data
+    #   The terminology data for the custom terminology being imported.
+    #
+    # @option params [Types::EncryptionKey] :encryption_key
+    #   The encryption key for the custom terminology being imported.
+    #
+    # @return [Types::ImportTerminologyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportTerminologyResponse#terminology_properties #terminology_properties} => Types::TerminologyProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_terminology({
+    #     name: "ResourceName", # required
+    #     merge_strategy: "OVERWRITE", # required, accepts OVERWRITE
+    #     description: "Description",
+    #     terminology_data: { # required
+    #       file: "data", # required
+    #       format: "CSV", # required, accepts CSV, TMX
+    #     },
+    #     encryption_key: {
+    #       type: "KMS", # required, accepts KMS
+    #       id: "EncryptionKeyID", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.terminology_properties.name #=> String
+    #   resp.terminology_properties.description #=> String
+    #   resp.terminology_properties.arn #=> String
+    #   resp.terminology_properties.source_language_code #=> String
+    #   resp.terminology_properties.target_language_codes #=> Array
+    #   resp.terminology_properties.target_language_codes[0] #=> String
+    #   resp.terminology_properties.encryption_key.type #=> String, one of "KMS"
+    #   resp.terminology_properties.encryption_key.id #=> String
+    #   resp.terminology_properties.size_bytes #=> Integer
+    #   resp.terminology_properties.term_count #=> Integer
+    #   resp.terminology_properties.created_at #=> Time
+    #   resp.terminology_properties.last_updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ImportTerminology AWS API Documentation
+    #
+    # @overload import_terminology(params = {})
+    # @param [Hash] params ({})
+    def import_terminology(params = {}, options = {})
+      req = build_request(:import_terminology, params)
+      req.send_request(options)
+    end
+
+    # Provides a list of custom terminologies associated with your account.
+    #
+    # @option params [String] :next_token
+    #   If the result of the request to ListTerminologies was truncated,
+    #   include the NextToken to fetch the next group of custom terminologies.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of custom terminologies returned per list request.
+    #
+    # @return [Types::ListTerminologiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTerminologiesResponse#terminology_properties_list #terminology_properties_list} => Array&lt;Types::TerminologyProperties&gt;
+    #   * {Types::ListTerminologiesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_terminologies({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.terminology_properties_list #=> Array
+    #   resp.terminology_properties_list[0].name #=> String
+    #   resp.terminology_properties_list[0].description #=> String
+    #   resp.terminology_properties_list[0].arn #=> String
+    #   resp.terminology_properties_list[0].source_language_code #=> String
+    #   resp.terminology_properties_list[0].target_language_codes #=> Array
+    #   resp.terminology_properties_list[0].target_language_codes[0] #=> String
+    #   resp.terminology_properties_list[0].encryption_key.type #=> String, one of "KMS"
+    #   resp.terminology_properties_list[0].encryption_key.id #=> String
+    #   resp.terminology_properties_list[0].size_bytes #=> Integer
+    #   resp.terminology_properties_list[0].term_count #=> Integer
+    #   resp.terminology_properties_list[0].created_at #=> Time
+    #   resp.terminology_properties_list[0].last_updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ListTerminologies AWS API Documentation
+    #
+    # @overload list_terminologies(params = {})
+    # @param [Hash] params ({})
+    def list_terminologies(params = {}, options = {})
+      req = build_request(:list_terminologies, params)
+      req.send_request(options)
+    end
+
     # Translates input text from the source language to the target language.
-    # You can translate between English (en) and one of the following
-    # languages, or between one of the following languages and English.
+    # It is not necessary to use English (en) as either the source or the
+    # target language but not all language combinations are supported by
+    # Amazon Translate. For more information, see [Supported Language
+    # Pairs][1].
     #
     # * Arabic (ar)
     #
     # * Chinese (Simplified) (zh)
     #
+    # * Chinese (Traditional) (zh-TW)
+    #
+    # * Czech (cs)
+    #
+    # * Danish (da)
+    #
+    # * Dutch (nl)
+    #
+    # * English (en)
+    #
+    # * Finnish (fi)
+    #
     # * French (fr)
     #
     # * German (de)
     #
+    # * Hebrew (he)
+    #
+    # * Indonesian (id)
+    #
+    # * Italian (it)
+    #
+    # * Japanese (ja)
+    #
+    # * Korean (ko)
+    #
+    # * Polish (pl)
+    #
     # * Portuguese (pt)
     #
+    # * Russian (ru)
+    #
     # * Spanish (es)
+    #
+    # * Swedish (sv)
+    #
+    # * Turkish (tr)
     #
     # To have Amazon Translate determine the source language of your text,
     # you can specify `auto` in the `SourceLanguageCode` field. If you
     # specify `auto`, Amazon Translate will call Amazon Comprehend to
     # determine the source language.
     #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/translate/latest/dg/pairs.html
+    #
     # @option params [required, String] :text
-    #   The text to translate.
+    #   The text to translate. The text string can be a maximum of 5,000 bytes
+    #   long. Depending on your character set, this may be fewer than 5,000
+    #   characters.
+    #
+    # @option params [Array<String>] :terminology_names
+    #   The TerminologyNames list that is taken as input to the TranslateText
+    #   request. This has a minimum length of 0 and a maximum length of 1.
     #
     # @option params [required, String] :source_language_code
-    #   One of the supported language codes for the source text. If the
-    #   `TargetLanguageCode` is not "en", the `SourceLanguageCode` must be
-    #   "en".
+    #   The language code for the language of the source text. The language
+    #   must be a language supported by Amazon Translate.
     #
     #   To have Amazon Translate determine the source language of your text,
     #   you can specify `auto` in the `SourceLanguageCode` field. If you
@@ -250,20 +481,21 @@ module Aws::Translate
     #   determine the source language.
     #
     # @option params [required, String] :target_language_code
-    #   One of the supported language codes for the target text. If the
-    #   `SourceLanguageCode` is not "en", the `TargetLanguageCode` must be
-    #   "en".
+    #   The language code requested for the language of the target text. The
+    #   language must be a language supported by Amazon Translate.
     #
     # @return [Types::TranslateTextResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::TranslateTextResponse#translated_text #translated_text} => String
     #   * {Types::TranslateTextResponse#source_language_code #source_language_code} => String
     #   * {Types::TranslateTextResponse#target_language_code #target_language_code} => String
+    #   * {Types::TranslateTextResponse#applied_terminologies #applied_terminologies} => Array&lt;Types::AppliedTerminology&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.translate_text({
     #     text: "BoundedLengthString", # required
+    #     terminology_names: ["ResourceName"],
     #     source_language_code: "LanguageCodeString", # required
     #     target_language_code: "LanguageCodeString", # required
     #   })
@@ -273,6 +505,11 @@ module Aws::Translate
     #   resp.translated_text #=> String
     #   resp.source_language_code #=> String
     #   resp.target_language_code #=> String
+    #   resp.applied_terminologies #=> Array
+    #   resp.applied_terminologies[0].name #=> String
+    #   resp.applied_terminologies[0].terms #=> Array
+    #   resp.applied_terminologies[0].terms[0].source_text #=> String
+    #   resp.applied_terminologies[0].terms[0].target_text #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TranslateText AWS API Documentation
     #
@@ -296,7 +533,7 @@ module Aws::Translate
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-translate'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

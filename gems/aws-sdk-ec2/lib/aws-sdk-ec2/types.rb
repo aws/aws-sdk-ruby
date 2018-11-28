@@ -5374,6 +5374,7 @@ module Aws::EC2
     #
     #       {
     #         availability_zone: "String",
+    #         availability_zone_id: "String",
     #         cidr_block: "String", # required
     #         ipv_6_cidr_block: "String",
     #         vpc_id: "String", # required
@@ -5386,6 +5387,10 @@ module Aws::EC2
     #   Default: AWS selects one for you. If you create more than one subnet
     #   in your VPC, we may not necessarily select a different zone for each
     #   subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The AZ ID of the subnet.
     #   @return [String]
     #
     # @!attribute [rw] cidr_block
@@ -5413,6 +5418,7 @@ module Aws::EC2
     #
     class CreateSubnetRequest < Struct.new(
       :availability_zone,
+      :availability_zone_id,
       :cidr_block,
       :ipv_6_cidr_block,
       :vpc_id,
@@ -8721,12 +8727,15 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters.
     #
-    #   * `dhcp-options-id` - The ID of a set of DHCP options.
+    #   * `dhcp-options-id` - The ID of a DHCP options set.
     #
     #   * `key` - The key for one of the options (for example,
     #     `domain-name`).
     #
     #   * `value` - The value for one of the options.
+    #
+    #   * `owner-id` - The ID of the AWS account that owns the DHCP options
+    #     set.
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
     #     to the resource. Use the tag key in the filter name and the tag
@@ -10873,6 +10882,9 @@ module Aws::EC2
     #
     #   * `internet-gateway-id` - The ID of the Internet gateway.
     #
+    #   * `owner-id` - The ID of the AWS account that owns the internet
+    #     gateway.
+    #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
     #     to the resource. Use the tag key in the filter name and the tag
     #     value as the filter value. For example, to find all resources that
@@ -11388,6 +11400,8 @@ module Aws::EC2
     #     rule) in the set of ACL entries.
     #
     #   * `network-acl-id` - The ID of the network ACL.
+    #
+    #   * `owner-id` - The ID of the AWS account that owns the network ACL.
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
     #     to the resource. Use the tag key in the filter name and the tag
@@ -12588,6 +12602,8 @@ module Aws::EC2
     #   * `association.main` - Indicates whether the route table is the main
     #     route table for the VPC (`true` \| `false`). Route tables that do
     #     not have an association ID are not returned in the response.
+    #
+    #   * `owner-id` - The ID of the AWS account that owns the route table.
     #
     #   * `route-table-id` - The ID of the route table.
     #
@@ -13938,19 +13954,22 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters.
     #
-    #   * `availabilityZone` - The Availability Zone for the subnet. You can
-    #     also use `availability-zone` as the filter name.
+    #   * `availability-zone` - The Availability Zone for the subnet. You
+    #     can also use `availabilityZone` as the filter name.
+    #
+    #   * `availability-zone-id` - The ID of the Availability Zone for the
+    #     subnet. You can also use `availabilityZoneId` as the filter name.
     #
     #   * `available-ip-address-count` - The number of IPv4 addresses in the
     #     subnet that are available.
     #
-    #   * `cidrBlock` - The IPv4 CIDR block of the subnet. The CIDR block
+    #   * `cidr-block` - The IPv4 CIDR block of the subnet. The CIDR block
     #     you specify must exactly match the subnet's CIDR block for
     #     information to be returned for the subnet. You can also use `cidr`
-    #     or `cidr-block` as the filter names.
+    #     or `cidrBlock` as the filter names.
     #
-    #   * `defaultForAz` - Indicates whether this is the default subnet for
-    #     the Availability Zone. You can also use `default-for-az` as the
+    #   * `default-for-az` - Indicates whether this is the default subnet
+    #     for the Availability Zone. You can also use `defaultForAz` as the
     #     filter name.
     #
     #   * `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
@@ -13962,7 +13981,11 @@ module Aws::EC2
     #   * `ipv6-cidr-block-association.state` - The state of an IPv6 CIDR
     #     block associated with the subnet.
     #
+    #   * `owner-id` - The ID of the AWS account that owns the subnet.
+    #
     #   * `state` - The state of the subnet (`pending` \| `available`).
+    #
+    #   * `subnet-arn` - The Amazon Resource Name (ARN) of the subnet.
     #
     #   * `subnet-id` - The ID of the subnet.
     #
@@ -15616,6 +15639,8 @@ module Aws::EC2
     #
     #   * `isDefault` - Indicates whether the VPC is the default VPC.
     #
+    #   * `owner-id` - The ID of the AWS account that owns the VPC.
+    #
     #   * `state` - The state of the VPC (`pending` \| `available`).
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
@@ -16071,6 +16096,10 @@ module Aws::EC2
     #   The ID of the set of DHCP options.
     #   @return [String]
     #
+    # @!attribute [rw] owner_id
+    #   The ID of the AWS account that owns the DHCP options set.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   Any tags assigned to the DHCP options set.
     #   @return [Array<Types::Tag>]
@@ -16080,6 +16109,7 @@ module Aws::EC2
     class DhcpOptions < Struct.new(
       :dhcp_configurations,
       :dhcp_options_id,
+      :owner_id,
       :tags)
       include Aws::Structure
     end
@@ -21249,6 +21279,10 @@ module Aws::EC2
     #   The ID of the internet gateway.
     #   @return [String]
     #
+    # @!attribute [rw] owner_id
+    #   The ID of the AWS account that owns the internet gateway.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   Any tags assigned to the internet gateway.
     #   @return [Array<Types::Tag>]
@@ -21258,6 +21292,7 @@ module Aws::EC2
     class InternetGateway < Struct.new(
       :attachments,
       :internet_gateway_id,
+      :owner_id,
       :tags)
       include Aws::Structure
     end
@@ -24977,6 +25012,10 @@ module Aws::EC2
     #   The ID of the VPC for the network ACL.
     #   @return [String]
     #
+    # @!attribute [rw] owner_id
+    #   The ID of the AWS account that owns the network ACL.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkAcl AWS API Documentation
     #
     class NetworkAcl < Struct.new(
@@ -24985,7 +25024,8 @@ module Aws::EC2
       :is_default,
       :network_acl_id,
       :tags,
-      :vpc_id)
+      :vpc_id,
+      :owner_id)
       include Aws::Structure
     end
 
@@ -29355,6 +29395,10 @@ module Aws::EC2
     #   The ID of the VPC.
     #   @return [String]
     #
+    # @!attribute [rw] owner_id
+    #   The ID of the AWS account that owns the route table.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RouteTable AWS API Documentation
     #
     class RouteTable < Struct.new(
@@ -29363,7 +29407,8 @@ module Aws::EC2
       :route_table_id,
       :routes,
       :tags,
-      :vpc_id)
+      :vpc_id,
+      :owner_id)
       include Aws::Structure
     end
 
@@ -32752,6 +32797,10 @@ module Aws::EC2
     #   The Availability Zone of the subnet.
     #   @return [String]
     #
+    # @!attribute [rw] availability_zone_id
+    #   The AZ ID of the subnet.
+    #   @return [String]
+    #
     # @!attribute [rw] available_ip_address_count
     #   The number of unused private IPv4 addresses in the subnet. The IPv4
     #   addresses for any stopped instances are considered unavailable.
@@ -32783,6 +32832,10 @@ module Aws::EC2
     #   The ID of the VPC the subnet is in.
     #   @return [String]
     #
+    # @!attribute [rw] owner_id
+    #   The ID of the AWS account that owns the subnet.
+    #   @return [String]
+    #
     # @!attribute [rw] assign_ipv_6_address_on_creation
     #   Indicates whether a network interface created in this subnet
     #   (including a network interface created by RunInstances) receives an
@@ -32797,10 +32850,15 @@ module Aws::EC2
     #   Any tags assigned to the subnet.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] subnet_arn
+    #   The Amazon Resource Name (ARN) of the subnet.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Subnet AWS API Documentation
     #
     class Subnet < Struct.new(
       :availability_zone,
+      :availability_zone_id,
       :available_ip_address_count,
       :cidr_block,
       :default_for_az,
@@ -32808,9 +32866,11 @@ module Aws::EC2
       :state,
       :subnet_id,
       :vpc_id,
+      :owner_id,
       :assign_ipv_6_address_on_creation,
       :ipv_6_cidr_block_association_set,
-      :tags)
+      :tags,
+      :subnet_arn)
       include Aws::Structure
     end
 
@@ -34656,6 +34716,10 @@ module Aws::EC2
     #   The ID of the VPC.
     #   @return [String]
     #
+    # @!attribute [rw] owner_id
+    #   The ID of the AWS account that owns the VPC.
+    #   @return [String]
+    #
     # @!attribute [rw] instance_tenancy
     #   The allowed tenancy of instances launched into the VPC.
     #   @return [String]
@@ -34683,6 +34747,7 @@ module Aws::EC2
       :dhcp_options_id,
       :state,
       :vpc_id,
+      :owner_id,
       :instance_tenancy,
       :ipv_6_cidr_block_association_set,
       :cidr_block_association_set,

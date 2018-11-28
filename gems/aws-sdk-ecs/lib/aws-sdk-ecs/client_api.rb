@@ -66,6 +66,8 @@ module Aws::ECS
     DeleteServiceResponse = Shapes::StructureShape.new(name: 'DeleteServiceResponse')
     Deployment = Shapes::StructureShape.new(name: 'Deployment')
     DeploymentConfiguration = Shapes::StructureShape.new(name: 'DeploymentConfiguration')
+    DeploymentController = Shapes::StructureShape.new(name: 'DeploymentController')
+    DeploymentControllerType = Shapes::StringShape.new(name: 'DeploymentControllerType')
     Deployments = Shapes::ListShape.new(name: 'Deployments')
     DeregisterContainerInstanceRequest = Shapes::StructureShape.new(name: 'DeregisterContainerInstanceRequest')
     DeregisterContainerInstanceResponse = Shapes::StructureShape.new(name: 'DeregisterContainerInstanceResponse')
@@ -167,6 +169,8 @@ module Aws::ECS
     Resources = Shapes::ListShape.new(name: 'Resources')
     RunTaskRequest = Shapes::StructureShape.new(name: 'RunTaskRequest')
     RunTaskResponse = Shapes::StructureShape.new(name: 'RunTaskResponse')
+    Scale = Shapes::StructureShape.new(name: 'Scale')
+    ScaleUnit = Shapes::StringShape.new(name: 'ScaleUnit')
     SchedulingStrategy = Shapes::StringShape.new(name: 'SchedulingStrategy')
     Scope = Shapes::StringShape.new(name: 'Scope')
     Secret = Shapes::StructureShape.new(name: 'Secret')
@@ -186,6 +190,7 @@ module Aws::ECS
     SettingName = Shapes::StringShape.new(name: 'SettingName')
     Settings = Shapes::ListShape.new(name: 'Settings')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
+    StabilityStatus = Shapes::StringShape.new(name: 'StabilityStatus')
     StartTaskRequest = Shapes::StructureShape.new(name: 'StartTaskRequest')
     StartTaskResponse = Shapes::StructureShape.new(name: 'StartTaskResponse')
     Statistics = Shapes::ListShape.new(name: 'Statistics')
@@ -221,6 +226,8 @@ module Aws::ECS
     TaskField = Shapes::StringShape.new(name: 'TaskField')
     TaskFieldList = Shapes::ListShape.new(name: 'TaskFieldList')
     TaskOverride = Shapes::StructureShape.new(name: 'TaskOverride')
+    TaskSet = Shapes::StructureShape.new(name: 'TaskSet')
+    TaskSets = Shapes::ListShape.new(name: 'TaskSets')
     TaskStopCode = Shapes::StringShape.new(name: 'TaskStopCode')
     Tasks = Shapes::ListShape.new(name: 'Tasks')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
@@ -405,6 +412,7 @@ module Aws::ECS
     CreateServiceRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     CreateServiceRequest.add_member(:health_check_grace_period_seconds, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "healthCheckGracePeriodSeconds"))
     CreateServiceRequest.add_member(:scheduling_strategy, Shapes::ShapeRef.new(shape: SchedulingStrategy, location_name: "schedulingStrategy"))
+    CreateServiceRequest.add_member(:deployment_controller, Shapes::ShapeRef.new(shape: DeploymentController, location_name: "deploymentController"))
     CreateServiceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateServiceRequest.add_member(:enable_ecs_managed_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableECSManagedTags"))
     CreateServiceRequest.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: PropagateTags, location_name: "propagateTags"))
@@ -457,6 +465,9 @@ module Aws::ECS
     DeploymentConfiguration.add_member(:maximum_percent, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "maximumPercent"))
     DeploymentConfiguration.add_member(:minimum_healthy_percent, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "minimumHealthyPercent"))
     DeploymentConfiguration.struct_class = Types::DeploymentConfiguration
+
+    DeploymentController.add_member(:type, Shapes::ShapeRef.new(shape: DeploymentControllerType, required: true, location_name: "type"))
+    DeploymentController.struct_class = Types::DeploymentController
 
     Deployments.member = Shapes::ShapeRef.new(shape: Deployment)
 
@@ -820,6 +831,10 @@ module Aws::ECS
     RunTaskResponse.add_member(:failures, Shapes::ShapeRef.new(shape: Failures, location_name: "failures"))
     RunTaskResponse.struct_class = Types::RunTaskResponse
 
+    Scale.add_member(:value, Shapes::ShapeRef.new(shape: Double, location_name: "value"))
+    Scale.add_member(:unit, Shapes::ShapeRef.new(shape: ScaleUnit, location_name: "unit"))
+    Scale.struct_class = Types::Scale
+
     Secret.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     Secret.add_member(:value_from, Shapes::ShapeRef.new(shape: String, required: true, location_name: "valueFrom"))
     Secret.struct_class = Types::Secret
@@ -839,6 +854,7 @@ module Aws::ECS
     Service.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
     Service.add_member(:task_definition, Shapes::ShapeRef.new(shape: String, location_name: "taskDefinition"))
     Service.add_member(:deployment_configuration, Shapes::ShapeRef.new(shape: DeploymentConfiguration, location_name: "deploymentConfiguration"))
+    Service.add_member(:task_sets, Shapes::ShapeRef.new(shape: TaskSets, location_name: "taskSets"))
     Service.add_member(:deployments, Shapes::ShapeRef.new(shape: Deployments, location_name: "deployments"))
     Service.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, location_name: "roleArn"))
     Service.add_member(:events, Shapes::ShapeRef.new(shape: ServiceEvents, location_name: "events"))
@@ -848,6 +864,7 @@ module Aws::ECS
     Service.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     Service.add_member(:health_check_grace_period_seconds, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "healthCheckGracePeriodSeconds"))
     Service.add_member(:scheduling_strategy, Shapes::ShapeRef.new(shape: SchedulingStrategy, location_name: "schedulingStrategy"))
+    Service.add_member(:deployment_controller, Shapes::ShapeRef.new(shape: DeploymentController, location_name: "deploymentController"))
     Service.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     Service.add_member(:created_by, Shapes::ShapeRef.new(shape: String, location_name: "createdBy"))
     Service.add_member(:enable_ecs_managed_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableECSManagedTags"))
@@ -1021,6 +1038,28 @@ module Aws::ECS
     TaskOverride.add_member(:task_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskRoleArn"))
     TaskOverride.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "executionRoleArn"))
     TaskOverride.struct_class = Types::TaskOverride
+
+    TaskSet.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
+    TaskSet.add_member(:task_set_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskSetArn"))
+    TaskSet.add_member(:started_by, Shapes::ShapeRef.new(shape: String, location_name: "startedBy"))
+    TaskSet.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "externalId"))
+    TaskSet.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
+    TaskSet.add_member(:task_definition, Shapes::ShapeRef.new(shape: String, location_name: "taskDefinition"))
+    TaskSet.add_member(:computed_desired_count, Shapes::ShapeRef.new(shape: Integer, location_name: "computedDesiredCount"))
+    TaskSet.add_member(:pending_count, Shapes::ShapeRef.new(shape: Integer, location_name: "pendingCount"))
+    TaskSet.add_member(:running_count, Shapes::ShapeRef.new(shape: Integer, location_name: "runningCount"))
+    TaskSet.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    TaskSet.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    TaskSet.add_member(:launch_type, Shapes::ShapeRef.new(shape: LaunchType, location_name: "launchType"))
+    TaskSet.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
+    TaskSet.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
+    TaskSet.add_member(:load_balancers, Shapes::ShapeRef.new(shape: LoadBalancers, location_name: "loadBalancers"))
+    TaskSet.add_member(:scale, Shapes::ShapeRef.new(shape: Scale, location_name: "scale"))
+    TaskSet.add_member(:stability_status, Shapes::ShapeRef.new(shape: StabilityStatus, location_name: "stabilityStatus"))
+    TaskSet.add_member(:stability_status_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "stabilityStatusAt"))
+    TaskSet.struct_class = Types::TaskSet
+
+    TaskSets.member = Shapes::ShapeRef.new(shape: TaskSet)
 
     Tasks.member = Shapes::ShapeRef.new(shape: Task)
 

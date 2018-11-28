@@ -2175,6 +2175,7 @@ module Aws::EC2
     CreateSpotDatafeedSubscriptionResult.struct_class = Types::CreateSpotDatafeedSubscriptionResult
 
     CreateSubnetRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
+    CreateSubnetRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZoneId"))
     CreateSubnetRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CidrBlock"))
     CreateSubnetRequest.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6CidrBlock"))
     CreateSubnetRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VpcId"))
@@ -3562,6 +3563,7 @@ module Aws::EC2
 
     DhcpOptions.add_member(:dhcp_configurations, Shapes::ShapeRef.new(shape: DhcpConfigurationList, location_name: "dhcpConfigurationSet"))
     DhcpOptions.add_member(:dhcp_options_id, Shapes::ShapeRef.new(shape: String, location_name: "dhcpOptionsId"))
+    DhcpOptions.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     DhcpOptions.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     DhcpOptions.struct_class = Types::DhcpOptions
 
@@ -4536,6 +4538,7 @@ module Aws::EC2
 
     InternetGateway.add_member(:attachments, Shapes::ShapeRef.new(shape: InternetGatewayAttachmentList, location_name: "attachmentSet"))
     InternetGateway.add_member(:internet_gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "internetGatewayId"))
+    InternetGateway.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     InternetGateway.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     InternetGateway.struct_class = Types::InternetGateway
 
@@ -5142,6 +5145,7 @@ module Aws::EC2
     NetworkAcl.add_member(:network_acl_id, Shapes::ShapeRef.new(shape: String, location_name: "networkAclId"))
     NetworkAcl.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     NetworkAcl.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
+    NetworkAcl.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     NetworkAcl.struct_class = Types::NetworkAcl
 
     NetworkAclAssociation.add_member(:network_acl_association_id, Shapes::ShapeRef.new(shape: String, location_name: "networkAclAssociationId"))
@@ -5904,6 +5908,7 @@ module Aws::EC2
     RouteTable.add_member(:routes, Shapes::ShapeRef.new(shape: RouteList, location_name: "routeSet"))
     RouteTable.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     RouteTable.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
+    RouteTable.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     RouteTable.struct_class = Types::RouteTable
 
     RouteTableAssociation.add_member(:main, Shapes::ShapeRef.new(shape: Boolean, location_name: "main"))
@@ -6404,6 +6409,7 @@ module Aws::EC2
     StorageLocation.struct_class = Types::StorageLocation
 
     Subnet.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    Subnet.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
     Subnet.add_member(:available_ip_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "availableIpAddressCount"))
     Subnet.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "cidrBlock"))
     Subnet.add_member(:default_for_az, Shapes::ShapeRef.new(shape: Boolean, location_name: "defaultForAz"))
@@ -6411,9 +6417,11 @@ module Aws::EC2
     Subnet.add_member(:state, Shapes::ShapeRef.new(shape: SubnetState, location_name: "state"))
     Subnet.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "subnetId"))
     Subnet.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
+    Subnet.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     Subnet.add_member(:assign_ipv_6_address_on_creation, Shapes::ShapeRef.new(shape: Boolean, location_name: "assignIpv6AddressOnCreation"))
     Subnet.add_member(:ipv_6_cidr_block_association_set, Shapes::ShapeRef.new(shape: SubnetIpv6CidrBlockAssociationSet, location_name: "ipv6CidrBlockAssociationSet"))
     Subnet.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    Subnet.add_member(:subnet_arn, Shapes::ShapeRef.new(shape: String, location_name: "subnetArn"))
     Subnet.struct_class = Types::Subnet
 
     SubnetCidrBlockState.add_member(:state, Shapes::ShapeRef.new(shape: SubnetCidrBlockStateCode, location_name: "state"))
@@ -6821,6 +6829,7 @@ module Aws::EC2
     Vpc.add_member(:dhcp_options_id, Shapes::ShapeRef.new(shape: String, location_name: "dhcpOptionsId"))
     Vpc.add_member(:state, Shapes::ShapeRef.new(shape: VpcState, location_name: "state"))
     Vpc.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
+    Vpc.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     Vpc.add_member(:instance_tenancy, Shapes::ShapeRef.new(shape: Tenancy, location_name: "instanceTenancy"))
     Vpc.add_member(:ipv_6_cidr_block_association_set, Shapes::ShapeRef.new(shape: VpcIpv6CidrBlockAssociationSet, location_name: "ipv6CidrBlockAssociationSet"))
     Vpc.add_member(:cidr_block_association_set, Shapes::ShapeRef.new(shape: VpcCidrBlockAssociationSet, location_name: "cidrBlockAssociationSet"))

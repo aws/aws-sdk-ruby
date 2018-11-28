@@ -141,8 +141,8 @@ module Aws::ECS
     # @!attribute [rw] security_groups
     #   The security groups associated with the task or service. If you do
     #   not specify a security group, the default security group for the VPC
-    #   is used. There is a limit of 5 security groups able to be specified
-    #   per `AwsVpcConfiguration`.
+    #   is used. There is a limit of five security groups able to be
+    #   specified per `AwsVpcConfiguration`.
     #
     #   <note markdown="1"> All specified security groups must be from the same VPC.
     #
@@ -540,7 +540,7 @@ module Aws::ECS
     #   * **Agent versions less than or equal to 1.1.0:** Null and zero CPU
     #     values are passed to Docker as 0, which Docker then converts to
     #     1,024 CPU shares. CPU values of 1 are passed to Docker as 1, which
-    #     the Linux kernel converts to 2 CPU shares.
+    #     the Linux kernel converts to two CPU shares.
     #
     #   * **Agent versions greater than or equal to 1.2.0:** Null, zero, and
     #     CPU values of 1 are passed to Docker as 2.
@@ -1531,6 +1531,9 @@ module Aws::ECS
     #         },
     #         health_check_grace_period_seconds: 1,
     #         scheduling_strategy: "REPLICA", # accepts REPLICA, DAEMON
+    #         deployment_controller: {
+    #           type: "ECS", # required, accepts ECS, CODE_DEPLOY
+    #         },
     #         tags: [
     #           {
     #             key: "TagKey",
@@ -1563,10 +1566,28 @@ module Aws::ECS
     #
     # @!attribute [rw] load_balancers
     #   A load balancer object representing the load balancer to use with
-    #   your service. Currently, you are limited to one load balancer or
-    #   target group per service. After you create a service, the load
-    #   balancer name or target group ARN, container name, and container
-    #   port specified in the service definition are immutable.
+    #   your service.
+    #
+    #   If the service is using the `ECS` deployment controller, you are
+    #   limited to one load balancer or target group.
+    #
+    #   If the service is using the `CODE_DEPLOY` deployment controller, the
+    #   service is required to use either an Application Load Balancer or
+    #   Network Load Balancer. When creating an AWS CodeDeploy deployment
+    #   group, you specify two target groups (referred to as a
+    #   `targetGroupPair`). During a deployment, AWS CodeDeploy determines
+    #   which task set in your service has the status `PRIMARY` and
+    #   associates one target group with it, and then associates the other
+    #   target group with the replacement task set. The load balancer can
+    #   also have up to two listeners: a required listener for production
+    #   traffic and an optional listener that allows you perform validation
+    #   tests with Lambda functions before routing production traffic to it.
+    #
+    #   After you create a service using the `ECS` deployment controller,
+    #   the load balancer name or target group ARN, container name, and
+    #   container port specified in the service definition are immutable. If
+    #   you are using the `CODE_DEPLOY` deployment controller, these values
+    #   can be changed when updating the service.
     #
     #   For Classic Load Balancers, this object must contain the load
     #   balancer name, the container name (as it appears in a container
@@ -1619,12 +1640,26 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] launch_type
-    #   The launch type on which to run your service.
+    #   The launch type on which to run your service. For more information,
+    #   see [Amazon ECS Launch Types][1] in the *Amazon Elastic Container
+    #   Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
     #   @return [String]
     #
     # @!attribute [rw] platform_version
-    #   The platform version on which to run your service. If one is not
-    #   specified, the latest version is used by default.
+    #   The platform version on which your tasks in the service are running.
+    #   A platform version is only specified for tasks using the Fargate
+    #   launch type. If one is not specified, the `LATEST` platform version
+    #   is used by default. For more information, see [AWS Fargate Platform
+    #   Versions][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #   @return [String]
     #
     # @!attribute [rw] role
@@ -1695,7 +1730,7 @@ module Aws::ECS
     #   your service is configured to use a load balancer. If your
     #   service's tasks take a while to start and respond to Elastic Load
     #   Balancing health checks, you can specify a health check grace period
-    #   of up to 7,200 seconds during which the ECS service scheduler
+    #   of up to 7,200 seconds. During that time, the ECS service scheduler
     #   ignores health check status. This grace period can prevent the ECS
     #   service scheduler from marking tasks as unhealthy and stopping them
     #   before they have time to come up.
@@ -1711,7 +1746,8 @@ module Aws::ECS
     #     desired number of tasks across your cluster. By default, the
     #     service scheduler spreads tasks across Availability Zones. You can
     #     use task placement strategies and constraints to customize task
-    #     placement decisions.
+    #     placement decisions. This scheduler strategy is required if using
+    #     the `CODE_DEPLOY` deployment controller.
     #
     #   * `DAEMON`-The daemon scheduling strategy deploys exactly one task
     #     on each active container instance that meets all of the task
@@ -1720,14 +1756,20 @@ module Aws::ECS
     #     number of tasks, a task placement strategy, or use Service Auto
     #     Scaling policies.
     #
-    #     <note markdown="1"> Fargate tasks do not support the `DAEMON` scheduling strategy.
+    #     <note markdown="1"> Tasks using the Fargate launch type or the `CODE_DEPLOY`
+    #     deploymenet controller do not support the `DAEMON` scheduling
+    #     strategy.
     #
     #      </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguideecs_services.html
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
     #   @return [String]
+    #
+    # @!attribute [rw] deployment_controller
+    #   The deployment controller to use for the service.
+    #   @return [Types::DeploymentController]
     #
     # @!attribute [rw] tags
     #   The metadata that you apply to the service to help you categorize
@@ -1776,6 +1818,7 @@ module Aws::ECS
       :network_configuration,
       :health_check_grace_period_seconds,
       :scheduling_strategy,
+      :deployment_controller,
       :tags,
       :enable_ecs_managed_tags,
       :propagate_tags)
@@ -1784,6 +1827,15 @@ module Aws::ECS
 
     # @!attribute [rw] service
     #   The full description of your service following the create call.
+    #
+    #   If a service is using the `ECS` deployment controller, the
+    #   `deploymentController` and `taskSets` parameters will not be
+    #   returned.
+    #
+    #   If the service is using the `CODE_DEPLOY` deployment controller, the
+    #   `deploymentController`, `taskSets` and `deployments` parameters will
+    #   be returned, however the `deployments` parameter will be an empty
+    #   list.
     #   @return [Types::Service]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateServiceResponse AWS API Documentation
@@ -1962,23 +2014,33 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # The details of an Amazon ECS service deployment.
+    # The details of an Amazon ECS service deployment. This is used when a
+    # service uses the `CODE_DEPLOY` deployment controller type.
     #
     # @!attribute [rw] id
     #   The ID of the deployment.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the deployment. Valid values are `PRIMARY` for the
-    #   most recent deployment, `ACTIVE` for previous deployments that still
-    #   have tasks running, but are being replaced with the `PRIMARY`
-    #   deployment, and `INACTIVE` for deployments that have been completely
-    #   replaced.
+    #   The status of the deployment. The following describes each state:
+    #
+    #   PRIMARY
+    #
+    #   : The most recent deployment of a service.
+    #
+    #   ACTIVE
+    #
+    #   : A service deployment that still has running tasks, but are in the
+    #     process of being replaced with a new `PRIMARY` deployment.
+    #
+    #   INACTIVE
+    #
+    #   : A deployment that has been completely replaced.
     #   @return [String]
     #
     # @!attribute [rw] task_definition
-    #   The most recent task definition that was specified for the service
-    #   to use.
+    #   The most recent task definition that was specified for the tasks in
+    #   the service to use.
     #   @return [String]
     #
     # @!attribute [rw] desired_count
@@ -1997,19 +2059,34 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] created_at
-    #   The Unix timestamp for when the service was created.
+    #   The Unix timestamp for when the service deployment was created.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   The Unix timestamp for when the service was last updated.
+    #   The Unix timestamp for when the service deployment was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] launch_type
-    #   The launch type on which your service is running.
+    #   The launch type the tasks in the service are using. For more
+    #   information, see [Amazon ECS Launch Types][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
     #   @return [String]
     #
     # @!attribute [rw] platform_version
-    #   The platform version on which your service is running.
+    #   The platform version on which your tasks in the service are running.
+    #   A platform version is only specified for tasks using the Fargate
+    #   launch type. If one is not specified, the `LATEST` platform version
+    #   is used by default. For more information, see [AWS Fargate Platform
+    #   Versions][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #   @return [String]
     #
     # @!attribute [rw] network_configuration
@@ -2047,20 +2124,55 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] maximum_percent
-    #   The upper limit (as a percentage of the service's `desiredCount`)
-    #   of the number of tasks that are allowed in the `RUNNING` or
-    #   `PENDING` state in a service during a deployment. The maximum number
-    #   of tasks during a deployment is the `desiredCount` multiplied by
-    #   `maximumPercent`/100, rounded down to the nearest integer value.
+    #   If a service is using the rolling update (`ECS`) deployment type,
+    #   the **maximum percent** parameter represents an upper limit on the
+    #   number of tasks in a service that are allowed in the `RUNNING` or
+    #   `PENDING` state during a deployment, as a percentage of the desired
+    #   number of tasks (rounded down to the nearest integer), and while any
+    #   container instances are in the `DRAINING` state if the service
+    #   contains tasks using the EC2 launch type. This parameter enables you
+    #   to define the deployment batch size. For example, if your service
+    #   has a desired number of four tasks and a maximum percent value of
+    #   200%, the scheduler may start four new tasks before stopping the
+    #   four older tasks (provided that the cluster resources required to do
+    #   this are available). The default value for maximum percent is 200%.
+    #
+    #   If a service is using the blue/green (`CODE_DEPLOY`) deployment type
+    #   and tasks that use the EC2 launch type, the **maximum percent**
+    #   value is set to the default value and is used to define the upper
+    #   limit on the number of the tasks in the service that remain in the
+    #   `RUNNING` state while the container instances are in the `DRAINING`
+    #   state. If the tasks in the service use the Fargate launch type, the
+    #   maximum percent value is not used, although it is returned when
+    #   describing your service.
     #   @return [Integer]
     #
     # @!attribute [rw] minimum_healthy_percent
-    #   The lower limit (as a percentage of the service's `desiredCount`)
-    #   of the number of running tasks that must remain in the `RUNNING`
-    #   state in a service during a deployment. The minimum number of
-    #   healthy tasks during a deployment is the `desiredCount` multiplied
-    #   by `minimumHealthyPercent`/100, rounded up to the nearest integer
-    #   value.
+    #   If a service is using the rolling update (`ECS`) deployment type,
+    #   the **minimum healthy percent** represents a lower limit on the
+    #   number of tasks in a service that must remain in the `RUNNING` state
+    #   during a deployment, as a percentage of the desired number of tasks
+    #   (rounded up to the nearest integer), and while any container
+    #   instances are in the `DRAINING` state if the service contains tasks
+    #   using the EC2 launch type. This parameter enables you to deploy
+    #   without using additional cluster capacity. For example, if your
+    #   service has a desired number of four tasks and a minimum healthy
+    #   percent of 50%, the scheduler may stop two existing tasks to free up
+    #   cluster capacity before starting two new tasks. Tasks for services
+    #   that *do not* use a load balancer are considered healthy if they are
+    #   in the `RUNNING` state; tasks for services that *do* use a load
+    #   balancer are considered healthy if they are in the `RUNNING` state
+    #   and they are reported as healthy by the load balancer. The default
+    #   value for minimum healthy percent is 100%.
+    #
+    #   If a service is using the blue/green (`CODE_DEPLOY`) deployment type
+    #   and tasks that use the EC2 launch type, the **minimum healthy
+    #   percent** value is set to the default value and is used to define
+    #   the lower limit on the number of the tasks in the service that
+    #   remain in the `RUNNING` state while the container instances are in
+    #   the `DRAINING` state. If the tasks in the service use the Fargate
+    #   launch type, the minimum healthy percent value is not used, although
+    #   it is returned when describing your service.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentConfiguration AWS API Documentation
@@ -2068,6 +2180,56 @@ module Aws::ECS
     class DeploymentConfiguration < Struct.new(
       :maximum_percent,
       :minimum_healthy_percent)
+      include Aws::Structure
+    end
+
+    # The deployment controller to use for the service. For more
+    # information, see [Amazon ECS Deployment Types][1] in the *Amazon
+    # Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
+    #
+    # @note When making an API call, you may pass DeploymentController
+    #   data as a hash:
+    #
+    #       {
+    #         type: "ECS", # required, accepts ECS, CODE_DEPLOY
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The deployment controller type to use.
+    #
+    #   There are two deployment controller types available:
+    #
+    #   ECS
+    #
+    #   : The rolling update (`ECS`) deployment type involves replacing the
+    #     current running version of the container with the latest version.
+    #     The number of containers Amazon ECS adds or removes from the
+    #     service during a rolling update is controlled by adjusting the
+    #     minimum and maximum number of healthy tasks allowed during a
+    #     service deployment, as specified in the DeploymentConfiguration.
+    #
+    #   CODE\_DEPLOY
+    #
+    #   : The blue/green (`CODE_DEPLOY`) deployment type uses the blue/green
+    #     deployment model powered by AWS CodeDeploy, which allows you to
+    #     verify a new deployment of a service before sending production
+    #     traffic to it. For more information, see [Amazon ECS Deployment
+    #     Types][1] in the *Amazon Elastic Container Service Developer
+    #     Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentController AWS API Documentation
+    #
+    class DeploymentController < Struct.new(
+      :type)
       include Aws::Structure
     end
 
@@ -3742,6 +3904,19 @@ module Aws::ECS
 
     # Details on a load balancer that is used with a service.
     #
+    # If the service is using the `ECS` deployment controller, you are
+    # limited to one load balancer or target group.
+    #
+    # If the service is using the `CODE_DEPLOY` deployment controller, the
+    # service is required to use either an Application Load Balancer or
+    # Network Load Balancer. When you are creating an AWS CodeDeploy
+    # deployment group, you specify two target groups (referred to as a
+    # `targetGroupPair`). Each target group binds to a separate task set in
+    # the deployment. The load balancer can also have up to two listeners, a
+    # required listener for production traffic and an optional listener that
+    # allows you to test new revisions of the service before routing
+    # production traffic to it.
+    #
     # Services with tasks that use the `awsvpc` network mode (for example,
     # those with the Fargate launch type) only support Application Load
     # Balancers and Network Load Balancers. Classic Load Balancers are not
@@ -3762,7 +3937,10 @@ module Aws::ECS
     #
     # @!attribute [rw] target_group_arn
     #   The full Amazon Resource Name (ARN) of the Elastic Load Balancing
-    #   target group associated with a service.
+    #   target group or groups associated with a service. For services using
+    #   the `ECS` deployment controller, you are limited to one target
+    #   group. For services using the `CODE_DEPLOY` deployment controller,
+    #   you are required to define two target groups for the load balancer.
     #
     #   If your service's task definition uses the `awsvpc` network mode
     #   (which is required for the Fargate launch type), you must choose
@@ -4152,10 +4330,10 @@ module Aws::ECS
     #   host port that was previously specified in a running task is also
     #   reserved while the task is running (after a task stops, the host
     #   port is released). The current reserved ports are displayed in the
-    #   `remainingResources` of DescribeContainerInstances output, and a
+    #   `remainingResources` of DescribeContainerInstances output. A
     #   container instance may have up to 100 reserved ports at a time,
-    #   including the default reserved ports (automatically assigned ports
-    #   do not count toward the 100 reserved ports limit).
+    #   including the default reserved ports. Aautomatically assigned ports
+    #   do not count toward the 100 reserved ports limit.
     #   @return [Integer]
     #
     # @!attribute [rw] protocol
@@ -4784,7 +4962,7 @@ module Aws::ECS
     #
     #   [1]: https://docs.docker.com/engine/reference/run/#ipc-settings---ipc
     #   [2]: https://docs.docker.com/engine/security/security/
-    #   [3]: http://docs.aws.amazon.com/AmazonECS/latest/developerguidetask_definition_parameters.html
+    #   [3]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinitionRequest AWS API Documentation
@@ -5030,12 +5208,25 @@ module Aws::ECS
     #   @return [Array<Types::PlacementStrategy>]
     #
     # @!attribute [rw] launch_type
-    #   The launch type on which to run your task.
+    #   The launch type on which to run your task. For more information, see
+    #   [Amazon ECS Launch Types][1] in the *Amazon Elastic Container
+    #   Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
     #   @return [String]
     #
     # @!attribute [rw] platform_version
-    #   The platform version on which to run your task. If one is not
-    #   specified, the latest version is used by default.
+    #   The platform version the task should run. A platform version is only
+    #   specified for tasks using the Fargate launch type. If one is not
+    #   specified, the `LATEST` platform version is used by default. For
+    #   more information, see [AWS Fargate Platform Versions][1] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #   @return [String]
     #
     # @!attribute [rw] network_configuration
@@ -5111,6 +5302,27 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # A floating-point percentage of the desired number of tasks to place
+    # and keep running in the service. This is used when a service uses the
+    # `CODE_DEPLOY` deployment controller type.
+    #
+    # @!attribute [rw] value
+    #   The value, specified as a percent total of a service's
+    #   `desiredCount`, to scale the task set.
+    #   @return [Float]
+    #
+    # @!attribute [rw] unit
+    #   The unit of measure for the scale value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Scale AWS API Documentation
+    #
+    class Scale < Struct.new(
+      :value,
+      :unit)
+      include Aws::Structure
+    end
+
     # An object representing the secret to expose to your container.
     #
     # @note When making an API call, you may pass Secret
@@ -5172,9 +5384,9 @@ module Aws::ECS
     #   those with the Fargate launch type) only support Application Load
     #   Balancers and Network Load Balancers. Classic Load Balancers are not
     #   supported. Also, when you create any target groups for these
-    #   services, you must choose `ip` as the target type, not `instance`,
-    #   because tasks that use the `awsvpc` network mode are associated with
-    #   an elastic network interface, not an Amazon EC2 instance.
+    #   services, you must choose `ip` as the target type, not `instance`.
+    #   Tasks that use the `awsvpc` network mode are associated with an
+    #   elastic network interface, not an Amazon EC2 instance.
     #   @return [Array<Types::LoadBalancer>]
     #
     # @!attribute [rw] service_registries
@@ -5201,13 +5413,22 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] launch_type
-    #   The launch type on which your service is running.
+    #   The launch type on which your service is running. For more
+    #   information, see [Amazon ECS Launch Types][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
     #   @return [String]
     #
     # @!attribute [rw] platform_version
-    #   The platform version on which your task is running. For more
-    #   information, see [AWS Fargate Platform Versions][1] in the *Amazon
-    #   Elastic Container Service Developer Guide*.
+    #   The platform version on which your tasks in the service are running.
+    #   A platform version is only specified for tasks using the Fargate
+    #   launch type. If one is not specified, the `LATEST` platform version
+    #   is used by default. For more information, see [AWS Fargate Platform
+    #   Versions][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
     #
     #
     #
@@ -5225,6 +5446,13 @@ module Aws::ECS
     #   during the deployment and the ordering of stopping and starting
     #   tasks.
     #   @return [Types::DeploymentConfiguration]
+    #
+    # @!attribute [rw] task_sets
+    #   Information about a set of Amazon ECS tasks in an AWS CodeDeploy
+    #   deployment. An Amazon ECS task set includes details such as the
+    #   desired number of tasks, how many tasks are running, and whether the
+    #   task set serves production traffic.
+    #   @return [Array<Types::TaskSet>]
     #
     # @!attribute [rw] deployments
     #   The current state of deployments for the service.
@@ -5289,8 +5517,12 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguideecs_services.html
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
     #   @return [String]
+    #
+    # @!attribute [rw] deployment_controller
+    #   The deployment controller type the service is using.
+    #   @return [Types::DeploymentController]
     #
     # @!attribute [rw] tags
     #   The metadata that you apply to the service to help you categorize
@@ -5337,6 +5569,7 @@ module Aws::ECS
       :platform_version,
       :task_definition,
       :deployment_configuration,
+      :task_sets,
       :deployments,
       :role_arn,
       :events,
@@ -5346,6 +5579,7 @@ module Aws::ECS
       :network_configuration,
       :health_check_grace_period_seconds,
       :scheduling_strategy,
+      :deployment_controller,
       :tags,
       :created_by,
       :enable_ecs_managed_tags,
@@ -5881,7 +6115,7 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] namespace
-    #   The namespaced kernel parameter to set a `value` for.
+    #   The namespaced kernel parameter for which to set a `value`.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -6085,13 +6319,13 @@ module Aws::ECS
     #   change that triggers a CloudWatch event, the version counter is
     #   incremented. If you are replicating your Amazon ECS task state with
     #   CloudWatch Events, you can compare the version of a task reported by
-    #   the Amazon ECS APIs with the version reported in CloudWatch Events
-    #   for the task (inside the `detail` object) to verify that the version
-    #   in your event stream is current.
+    #   the Amazon ECS API actionss with the version reported in CloudWatch
+    #   Events for the task (inside the `detail` object) to verify that the
+    #   version in your event stream is current.
     #   @return [Integer]
     #
     # @!attribute [rw] stopped_reason
-    #   The reason the task was stopped.
+    #   The reason that the task was stopped.
     #   @return [String]
     #
     # @!attribute [rw] stop_code
@@ -6145,13 +6379,22 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] launch_type
-    #   The launch type on which your task is running.
+    #   The launch type on which your task is running. For more information,
+    #   see [Amazon ECS Launch Types][1] in the *Amazon Elastic Container
+    #   Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
     #   @return [String]
     #
     # @!attribute [rw] platform_version
-    #   The platform version on which your task is running. For more
-    #   information, see [AWS Fargate Platform Versions][1] in the *Amazon
-    #   Elastic Container Service Developer Guide*.
+    #   The platform version on which your task is running. A platform
+    #   version is only specified for tasks using the Fargate launch type.
+    #   If one is not specified, the `LATEST` platform version is used by
+    #   default. For more information, see [AWS Fargate Platform
+    #   Versions][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
     #
     #
     #
@@ -6322,9 +6565,9 @@ module Aws::ECS
     #   The revision of the task in a particular family. The revision is a
     #   version number of a task definition in a family. When you register a
     #   task definition for the first time, the revision is `1`. Each time
-    #   you register a new revision of a task definition in the same family,
-    #   the revision value always increases by one (even if you have
-    #   deregistered previous revisions in this family).
+    #   that you register a new revision of a task definition in the same
+    #   family, the revision value always increases by one, even if you have
+    #   deregistered previous revisions in this family.
     #   @return [Integer]
     #
     # @!attribute [rw] volumes
@@ -6348,12 +6591,13 @@ module Aws::ECS
     #
     # @!attribute [rw] requires_attributes
     #   The container instance attributes required by your task. This field
-    #   is not valid if using the Fargate launch type for your task.
+    #   is not valid if you are using the Fargate launch type for your task.
     #   @return [Array<Types::Attribute>]
     #
     # @!attribute [rw] placement_constraints
     #   An array of placement constraint objects to use for tasks. This
-    #   field is not valid if using the Fargate launch type for your task.
+    #   field is not valid if you are using the Fargate launch type for your
+    #   task.
     #   @return [Array<Types::TaskDefinitionPlacementConstraint>]
     #
     # @!attribute [rw] compatibilities
@@ -6367,7 +6611,7 @@ module Aws::ECS
     #   @return [Array<String>]
     #
     # @!attribute [rw] requires_compatibilities
-    #   The launch type the task is using.
+    #   The launch type that the task is using.
     #   @return [Array<String>]
     #
     # @!attribute [rw] cpu
@@ -6481,7 +6725,7 @@ module Aws::ECS
     #
     #   [1]: https://docs.docker.com/engine/reference/run/#ipc-settings---ipc
     #   [2]: https://docs.docker.com/engine/security/security/
-    #   [3]: http://docs.aws.amazon.com/AmazonECS/latest/developerguidetask_definition_parameters.html
+    #   [3]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskDefinition AWS API Documentation
@@ -6599,6 +6843,163 @@ module Aws::ECS
       :container_overrides,
       :task_role_arn,
       :execution_role_arn)
+      include Aws::Structure
+    end
+
+    # Information about a set of Amazon ECS tasks in an AWS CodeDeploy
+    # deployment. An Amazon ECS task set includes details such as the
+    # desired number of tasks, how many tasks are running, and whether the
+    # task set serves production traffic.
+    #
+    # @!attribute [rw] id
+    #   The ID of the task set.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_set_arn
+    #   The Amazon Resource Name (ARN) of the task set.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_by
+    #   The tag specified when a task set is started. If the task is started
+    #   by an AWS CodeDeploy deployment, then the `startedBy` parameter is
+    #   `CODE_DEPLOY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_id
+    #   The deployment ID of the AWS CodeDeploy deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the task set. The following describes each state:
+    #
+    #   PRIMARY
+    #
+    #   : The task set is serving production traffic.
+    #
+    #   ACTIVE
+    #
+    #   : The task set is not serving production traffic.
+    #
+    #   DRAINING
+    #
+    #   : The tasks in the task set are being stopped and their
+    #     corresponding targets are being deregistered from their target
+    #     group.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_definition
+    #   The task definition the task set is using.
+    #   @return [String]
+    #
+    # @!attribute [rw] computed_desired_count
+    #   The computed desired count for the task set. This is calculated by
+    #   multiplying the service's `desiredCount` by the task set's `scale`
+    #   percentage.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pending_count
+    #   The number of tasks in the task set that are in the `PENDING` status
+    #   during a deployment. A task in the `PENDING` state is preparing to
+    #   enter the `RUNNING` state. A task set enters the `PENDING` status
+    #   when it launches for the first time, or when it is restarted after
+    #   being in the `STOPPED` state.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] running_count
+    #   The number of tasks in the task set that are in the `RUNNING` status
+    #   during a deployment. A task in the `RUNNING` state is running and
+    #   ready for use.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] created_at
+    #   The Unix timestamp for when the task set was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The Unix timestamp for when the task set was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] launch_type
+    #   The launch type the tasks in the task set are using. For more
+    #   information, see [Amazon ECS Launch Types][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
+    #   @return [String]
+    #
+    # @!attribute [rw] platform_version
+    #   The platform version on which the tasks in the task set are running.
+    #   A platform version is only specified for tasks using the Fargate
+    #   launch type. If one is not specified, the `LATEST` platform version
+    #   is used by default. For more information, see [AWS Fargate Platform
+    #   Versions][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
+    #   @return [String]
+    #
+    # @!attribute [rw] network_configuration
+    #   The network configuration for the task set.
+    #   @return [Types::NetworkConfiguration]
+    #
+    # @!attribute [rw] load_balancers
+    #   Details on a load balancer that is used with a task set.
+    #   @return [Array<Types::LoadBalancer>]
+    #
+    # @!attribute [rw] scale
+    #   A floating-point percentage of the desired number of tasks to place
+    #   and keep running in the service.
+    #   @return [Types::Scale]
+    #
+    # @!attribute [rw] stability_status
+    #   The stability status, which indicates whether the task set has
+    #   reached a steady state. If the following conditions are met, the
+    #   task set will be in `STEADY_STATE`\:
+    #
+    #   * The task `runningCount` is equal to the `computedDesiredCount`.
+    #
+    #   * The `pendingCount` is `0`.
+    #
+    #   * There are no tasks running on container instances in the
+    #     `DRAINING` status.
+    #
+    #   * All tasks are reporting a healthy status from the load balancers,
+    #     service discovery, and container health checks.
+    #
+    #   If any of those conditions are not met, the stability status returns
+    #   `STABILIZING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] stability_status_at
+    #   The Unix timestamp for when the task set stability status was
+    #   retrieved.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskSet AWS API Documentation
+    #
+    class TaskSet < Struct.new(
+      :id,
+      :task_set_arn,
+      :started_by,
+      :external_id,
+      :status,
+      :task_definition,
+      :computed_desired_count,
+      :pending_count,
+      :running_count,
+      :created_at,
+      :updated_at,
+      :launch_type,
+      :platform_version,
+      :network_configuration,
+      :load_balancers,
+      :scale,
+      :stability_status,
+      :stability_status_at)
       include Aws::Structure
     end
 
@@ -6868,7 +7269,16 @@ module Aws::ECS
     #   @return [Types::NetworkConfiguration]
     #
     # @!attribute [rw] platform_version
-    #   The platform version that your service should run.
+    #   The platform version on which your tasks in the service are running.
+    #   A platform version is only specified for tasks using the Fargate
+    #   launch type. If one is not specified, the `LATEST` platform version
+    #   is used by default. For more information, see [AWS Fargate Platform
+    #   Versions][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #   @return [String]
     #
     # @!attribute [rw] force_new_deployment
@@ -6887,7 +7297,7 @@ module Aws::ECS
     #   your service is configured to use a load balancer. If your
     #   service's tasks take a while to start and respond to Elastic Load
     #   Balancing health checks, you can specify a health check grace period
-    #   of up to 1,800 seconds during which the ECS service scheduler
+    #   of up to 1,800 seconds. During that time, the ECS service scheduler
     #   ignores the Elastic Load Balancing health check status. This grace
     #   period can prevent the ECS service scheduler from marking tasks as
     #   unhealthy and stopping them before they have time to come up.
@@ -6964,7 +7374,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguideusing_data_volumes.html
+    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html
     #
     # @note When making an API call, you may pass Volume
     #   data as a hash:
@@ -7001,8 +7411,8 @@ module Aws::ECS
     #   parameter determine whether your bind mount host volume persists on
     #   the host container instance and where it is stored. If the `host`
     #   parameter is empty, then the Docker daemon assigns a host path for
-    #   your data volume, but the data is not guaranteed to persist after
-    #   the containers associated with it stop running.
+    #   your data volume. However, the data is not guaranteed to persist
+    #   after the containers associated with it stop running.
     #
     #   Windows containers can mount whole directories on the same drive as
     #   `$env:ProgramData`. Windows containers cannot mount directories on a
@@ -7039,8 +7449,8 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] source_container
-    #   The name of another container within the same task definition to
-    #   mount volumes from.
+    #   The name of another container within the same task definition from
+    #   which to mount volumes.
     #   @return [String]
     #
     # @!attribute [rw] read_only

@@ -322,42 +322,56 @@ module Aws::ECS
     # the *Amazon Elastic Container Service Developer Guide*.
     #
     # You can optionally specify a deployment configuration for your
-    # service. During a deployment, the service scheduler uses the
-    # `minimumHealthyPercent` and `maximumPercent` parameters to determine
-    # the deployment strategy. The deployment is triggered by changing the
-    # task definition or the desired count of a service with an
+    # service. The deployment is triggered by changing properties, such as
+    # the task definition or the desired count of a service, with an
     # UpdateService operation.
     #
-    # The `minimumHealthyPercent` represents a lower limit on the number of
-    # your service's tasks that must remain in the `RUNNING` state during a
-    # deployment, as a percentage of the `desiredCount` (rounded up to the
-    # nearest integer). This parameter enables you to deploy without using
-    # additional cluster capacity. For example, if your service has a
-    # `desiredCount` of four tasks and a `minimumHealthyPercent` of 50%, the
-    # scheduler can stop two existing tasks to free up cluster capacity
-    # before starting two new tasks. Tasks for services that *do not* use a
-    # load balancer are considered healthy if they are in the `RUNNING`
-    # state. Tasks for services that *do* use a load balancer are considered
-    # healthy if they are in the `RUNNING` state and the container instance
-    # they are hosted on is reported as healthy by the load balancer. The
-    # default value for a replica service for `minimumHealthyPercent` is 50%
-    # in the console and 100% for the AWS CLI, the AWS SDKs, and the APIs.
-    # The default value for a daemon service for `minimumHealthyPercent` is
-    # 0% for the AWS CLI, the AWS SDKs, and the APIs and 50% for the
-    # console.
+    # If a service is using the `ECS` deployment controller, the **minimum
+    # healthy percent** represents a lower limit on the number of tasks in a
+    # service that must remain in the `RUNNING` state during a deployment,
+    # as a percentage of the desired number of tasks (rounded up to the
+    # nearest integer), and while any container instances are in the
+    # `DRAINING` state if the service contains tasks using the EC2 launch
+    # type. This parameter enables you to deploy without using additional
+    # cluster capacity. For example, if your service has a desired number of
+    # four tasks and a minimum healthy percent of 50%, the scheduler may
+    # stop two existing tasks to free up cluster capacity before starting
+    # two new tasks. Tasks for services that *do not* use a load balancer
+    # are considered healthy if they are in the `RUNNING` state; tasks for
+    # services that *do* use a load balancer are considered healthy if they
+    # are in the `RUNNING` state and they are reported as healthy by the
+    # load balancer. The default value for minimum healthy percent is 100%.
     #
-    # The `maximumPercent` parameter represents an upper limit on the number
-    # of your service's tasks that are allowed in the `RUNNING` or
-    # `PENDING` state during a deployment, as a percentage of the
-    # `desiredCount` (rounded down to the nearest integer). This parameter
-    # enables you to define the deployment batch size. For example, if your
-    # replica service has a `desiredCount` of four tasks and a
-    # `maximumPercent` value of 200%, the scheduler can start four new tasks
-    # before stopping the four older tasks (provided that the cluster
-    # resources required to do this are available). The default value for a
-    # replica service for `maximumPercent` is 200%. If you are using a
-    # daemon service type, the `maximumPercent` should remain at 100%, which
-    # is the default value.
+    # If a service is using the `ECS` deployment controller, the **maximum
+    # percent** parameter represents an upper limit on the number of tasks
+    # in a service that are allowed in the `RUNNING` or `PENDING` state
+    # during a deployment, as a percentage of the desired number of tasks
+    # (rounded down to the nearest integer), and while any container
+    # instances are in the `DRAINING` state if the service contains tasks
+    # using the EC2 launch type. This parameter enables you to define the
+    # deployment batch size. For example, if your service has a desired
+    # number of four tasks and a maximum percent value of 200%, the
+    # scheduler may start four new tasks before stopping the four older
+    # tasks (provided that the cluster resources required to do this are
+    # available). The default value for maximum percent is 200%.
+    #
+    # If a service is using the `CODE_DEPLOY` deployment controller and
+    # tasks that use the EC2 launch type, the **minimum healthy percent**
+    # and **maximum percent** values are only used to define the lower and
+    # upper limit on the number of the tasks in the service that remain in
+    # the `RUNNING` state while the container instances are in the
+    # `DRAINING` state. If the tasks in the service use the Fargate launch
+    # type, the minimum healthy percent and maximum percent values are not
+    # used, although they are currently visible when describing your
+    # service.
+    #
+    # Tasks for services that *do not* use a load balancer are considered
+    # healthy if they are in the `RUNNING` state. Tasks for services that
+    # *do* use a load balancer are considered healthy if they are in the
+    # `RUNNING` state and the container instance they are hosted on is
+    # reported as healthy by the load balancer. The default value for a
+    # replica service for `minimumHealthyPercent` is 100%. The default value
+    # for a daemon service for `minimumHealthyPercent` is 0%.
     #
     # When the service scheduler launches new tasks, it determines task
     # placement in your cluster using the following logic:
@@ -405,10 +419,28 @@ module Aws::ECS
     #
     # @option params [Array<Types::LoadBalancer>] :load_balancers
     #   A load balancer object representing the load balancer to use with your
-    #   service. Currently, you are limited to one load balancer or target
-    #   group per service. After you create a service, the load balancer name
-    #   or target group ARN, container name, and container port specified in
-    #   the service definition are immutable.
+    #   service.
+    #
+    #   If the service is using the `ECS` deployment controller, you are
+    #   limited to one load balancer or target group.
+    #
+    #   If the service is using the `CODE_DEPLOY` deployment controller, the
+    #   service is required to use either an Application Load Balancer or
+    #   Network Load Balancer. When creating an AWS CodeDeploy deployment
+    #   group, you specify two target groups (referred to as a
+    #   `targetGroupPair`). During a deployment, AWS CodeDeploy determines
+    #   which task set in your service has the status `PRIMARY` and associates
+    #   one target group with it, and then associates the other target group
+    #   with the replacement task set. The load balancer can also have up to
+    #   two listeners: a required listener for production traffic and an
+    #   optional listener that allows you perform validation tests with Lambda
+    #   functions before routing production traffic to it.
+    #
+    #   After you create a service using the `ECS` deployment controller, the
+    #   load balancer name or target group ARN, container name, and container
+    #   port specified in the service definition are immutable. If you are
+    #   using the `CODE_DEPLOY` deployment controller, these values can be
+    #   changed when updating the service.
     #
     #   For Classic Load Balancers, this object must contain the load balancer
     #   name, the container name (as it appears in a container definition),
@@ -455,11 +487,25 @@ module Aws::ECS
     #   idempotency of the request. Up to 32 ASCII characters are allowed.
     #
     # @option params [String] :launch_type
-    #   The launch type on which to run your service.
+    #   The launch type on which to run your service. For more information,
+    #   see [Amazon ECS Launch Types][1] in the *Amazon Elastic Container
+    #   Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
     #
     # @option params [String] :platform_version
-    #   The platform version on which to run your service. If one is not
-    #   specified, the latest version is used by default.
+    #   The platform version on which your tasks in the service are running. A
+    #   platform version is only specified for tasks using the Fargate launch
+    #   type. If one is not specified, the `LATEST` platform version is used
+    #   by default. For more information, see [AWS Fargate Platform
+    #   Versions][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #
     # @option params [String] :role
     #   The name or full Amazon Resource Name (ARN) of the IAM role that
@@ -520,10 +566,11 @@ module Aws::ECS
     #   after a task has first started. This is only valid if your service is
     #   configured to use a load balancer. If your service's tasks take a
     #   while to start and respond to Elastic Load Balancing health checks,
-    #   you can specify a health check grace period of up to 7,200 seconds
-    #   during which the ECS service scheduler ignores health check status.
-    #   This grace period can prevent the ECS service scheduler from marking
-    #   tasks as unhealthy and stopping them before they have time to come up.
+    #   you can specify a health check grace period of up to 7,200 seconds.
+    #   During that time, the ECS service scheduler ignores health check
+    #   status. This grace period can prevent the ECS service scheduler from
+    #   marking tasks as unhealthy and stopping them before they have time to
+    #   come up.
     #
     # @option params [String] :scheduling_strategy
     #   The scheduling strategy to use for the service. For more information,
@@ -535,7 +582,8 @@ module Aws::ECS
     #     desired number of tasks across your cluster. By default, the service
     #     scheduler spreads tasks across Availability Zones. You can use task
     #     placement strategies and constraints to customize task placement
-    #     decisions.
+    #     decisions. This scheduler strategy is required if using the
+    #     `CODE_DEPLOY` deployment controller.
     #
     #   * `DAEMON`-The daemon scheduling strategy deploys exactly one task on
     #     each active container instance that meets all of the task placement
@@ -544,13 +592,17 @@ module Aws::ECS
     #     tasks, a task placement strategy, or use Service Auto Scaling
     #     policies.
     #
-    #     <note markdown="1"> Fargate tasks do not support the `DAEMON` scheduling strategy.
+    #     <note markdown="1"> Tasks using the Fargate launch type or the `CODE_DEPLOY` deploymenet
+    #     controller do not support the `DAEMON` scheduling strategy.
     #
     #      </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguideecs_services.html
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
+    #
+    # @option params [Types::DeploymentController] :deployment_controller
+    #   The deployment controller to use for the service.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the service to help you categorize and
@@ -751,6 +803,9 @@ module Aws::ECS
     #     },
     #     health_check_grace_period_seconds: 1,
     #     scheduling_strategy: "REPLICA", # accepts REPLICA, DAEMON
+    #     deployment_controller: {
+    #       type: "ECS", # required, accepts ECS, CODE_DEPLOY
+    #     },
     #     tags: [
     #       {
     #         key: "TagKey",
@@ -785,6 +840,34 @@ module Aws::ECS
     #   resp.service.task_definition #=> String
     #   resp.service.deployment_configuration.maximum_percent #=> Integer
     #   resp.service.deployment_configuration.minimum_healthy_percent #=> Integer
+    #   resp.service.task_sets #=> Array
+    #   resp.service.task_sets[0].id #=> String
+    #   resp.service.task_sets[0].task_set_arn #=> String
+    #   resp.service.task_sets[0].started_by #=> String
+    #   resp.service.task_sets[0].external_id #=> String
+    #   resp.service.task_sets[0].status #=> String
+    #   resp.service.task_sets[0].task_definition #=> String
+    #   resp.service.task_sets[0].computed_desired_count #=> Integer
+    #   resp.service.task_sets[0].pending_count #=> Integer
+    #   resp.service.task_sets[0].running_count #=> Integer
+    #   resp.service.task_sets[0].created_at #=> Time
+    #   resp.service.task_sets[0].updated_at #=> Time
+    #   resp.service.task_sets[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.service.task_sets[0].platform_version #=> String
+    #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.subnets #=> Array
+    #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
+    #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.security_groups #=> Array
+    #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.security_groups[0] #=> String
+    #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.service.task_sets[0].load_balancers #=> Array
+    #   resp.service.task_sets[0].load_balancers[0].target_group_arn #=> String
+    #   resp.service.task_sets[0].load_balancers[0].load_balancer_name #=> String
+    #   resp.service.task_sets[0].load_balancers[0].container_name #=> String
+    #   resp.service.task_sets[0].load_balancers[0].container_port #=> Integer
+    #   resp.service.task_sets[0].scale.value #=> Float
+    #   resp.service.task_sets[0].scale.unit #=> String, one of "PERCENT"
+    #   resp.service.task_sets[0].stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
+    #   resp.service.task_sets[0].stability_status_at #=> Time
     #   resp.service.deployments #=> Array
     #   resp.service.deployments[0].id #=> String
     #   resp.service.deployments[0].status #=> String
@@ -820,6 +903,7 @@ module Aws::ECS
     #   resp.service.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.service.health_check_grace_period_seconds #=> Integer
     #   resp.service.scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
+    #   resp.service.deployment_controller.type #=> String, one of "ECS", "CODE_DEPLOY"
     #   resp.service.tags #=> Array
     #   resp.service.tags[0].key #=> String
     #   resp.service.tags[0].value #=> String
@@ -1083,6 +1167,34 @@ module Aws::ECS
     #   resp.service.task_definition #=> String
     #   resp.service.deployment_configuration.maximum_percent #=> Integer
     #   resp.service.deployment_configuration.minimum_healthy_percent #=> Integer
+    #   resp.service.task_sets #=> Array
+    #   resp.service.task_sets[0].id #=> String
+    #   resp.service.task_sets[0].task_set_arn #=> String
+    #   resp.service.task_sets[0].started_by #=> String
+    #   resp.service.task_sets[0].external_id #=> String
+    #   resp.service.task_sets[0].status #=> String
+    #   resp.service.task_sets[0].task_definition #=> String
+    #   resp.service.task_sets[0].computed_desired_count #=> Integer
+    #   resp.service.task_sets[0].pending_count #=> Integer
+    #   resp.service.task_sets[0].running_count #=> Integer
+    #   resp.service.task_sets[0].created_at #=> Time
+    #   resp.service.task_sets[0].updated_at #=> Time
+    #   resp.service.task_sets[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.service.task_sets[0].platform_version #=> String
+    #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.subnets #=> Array
+    #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
+    #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.security_groups #=> Array
+    #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.security_groups[0] #=> String
+    #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.service.task_sets[0].load_balancers #=> Array
+    #   resp.service.task_sets[0].load_balancers[0].target_group_arn #=> String
+    #   resp.service.task_sets[0].load_balancers[0].load_balancer_name #=> String
+    #   resp.service.task_sets[0].load_balancers[0].container_name #=> String
+    #   resp.service.task_sets[0].load_balancers[0].container_port #=> Integer
+    #   resp.service.task_sets[0].scale.value #=> Float
+    #   resp.service.task_sets[0].scale.unit #=> String, one of "PERCENT"
+    #   resp.service.task_sets[0].stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
+    #   resp.service.task_sets[0].stability_status_at #=> Time
     #   resp.service.deployments #=> Array
     #   resp.service.deployments[0].id #=> String
     #   resp.service.deployments[0].status #=> String
@@ -1118,6 +1230,7 @@ module Aws::ECS
     #   resp.service.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.service.health_check_grace_period_seconds #=> Integer
     #   resp.service.scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
+    #   resp.service.deployment_controller.type #=> String, one of "ECS", "CODE_DEPLOY"
     #   resp.service.tags #=> Array
     #   resp.service.tags[0].key #=> String
     #   resp.service.tags[0].value #=> String
@@ -1275,9 +1388,9 @@ module Aws::ECS
     #
     # You cannot use an `INACTIVE` task definition to run new tasks or
     # create new services, and you cannot update an existing service to
-    # reference an `INACTIVE` task definition (although there may be up to a
+    # reference an `INACTIVE` task definition. However, there may be up to a
     # 10-minute window following deregistration where these restrictions
-    # have not yet taken effect).
+    # have not yet taken effect.
     #
     # <note markdown="1"> At this time, `INACTIVE` task definitions remain discoverable in your
     # account indefinitely. However, this behavior is subject to change in
@@ -1808,6 +1921,34 @@ module Aws::ECS
     #   resp.services[0].task_definition #=> String
     #   resp.services[0].deployment_configuration.maximum_percent #=> Integer
     #   resp.services[0].deployment_configuration.minimum_healthy_percent #=> Integer
+    #   resp.services[0].task_sets #=> Array
+    #   resp.services[0].task_sets[0].id #=> String
+    #   resp.services[0].task_sets[0].task_set_arn #=> String
+    #   resp.services[0].task_sets[0].started_by #=> String
+    #   resp.services[0].task_sets[0].external_id #=> String
+    #   resp.services[0].task_sets[0].status #=> String
+    #   resp.services[0].task_sets[0].task_definition #=> String
+    #   resp.services[0].task_sets[0].computed_desired_count #=> Integer
+    #   resp.services[0].task_sets[0].pending_count #=> Integer
+    #   resp.services[0].task_sets[0].running_count #=> Integer
+    #   resp.services[0].task_sets[0].created_at #=> Time
+    #   resp.services[0].task_sets[0].updated_at #=> Time
+    #   resp.services[0].task_sets[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.services[0].task_sets[0].platform_version #=> String
+    #   resp.services[0].task_sets[0].network_configuration.awsvpc_configuration.subnets #=> Array
+    #   resp.services[0].task_sets[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
+    #   resp.services[0].task_sets[0].network_configuration.awsvpc_configuration.security_groups #=> Array
+    #   resp.services[0].task_sets[0].network_configuration.awsvpc_configuration.security_groups[0] #=> String
+    #   resp.services[0].task_sets[0].network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.services[0].task_sets[0].load_balancers #=> Array
+    #   resp.services[0].task_sets[0].load_balancers[0].target_group_arn #=> String
+    #   resp.services[0].task_sets[0].load_balancers[0].load_balancer_name #=> String
+    #   resp.services[0].task_sets[0].load_balancers[0].container_name #=> String
+    #   resp.services[0].task_sets[0].load_balancers[0].container_port #=> Integer
+    #   resp.services[0].task_sets[0].scale.value #=> Float
+    #   resp.services[0].task_sets[0].scale.unit #=> String, one of "PERCENT"
+    #   resp.services[0].task_sets[0].stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
+    #   resp.services[0].task_sets[0].stability_status_at #=> Time
     #   resp.services[0].deployments #=> Array
     #   resp.services[0].deployments[0].id #=> String
     #   resp.services[0].deployments[0].status #=> String
@@ -1843,6 +1984,7 @@ module Aws::ECS
     #   resp.services[0].network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.services[0].health_check_grace_period_seconds #=> Integer
     #   resp.services[0].scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
+    #   resp.services[0].deployment_controller.type #=> String, one of "ECS", "CODE_DEPLOY"
     #   resp.services[0].tags #=> Array
     #   resp.services[0].tags[0].key #=> String
     #   resp.services[0].tags[0].value #=> String
@@ -3634,7 +3776,7 @@ module Aws::ECS
     #
     #   [1]: https://docs.docker.com/engine/reference/run/#ipc-settings---ipc
     #   [2]: https://docs.docker.com/engine/security/security/
-    #   [3]: http://docs.aws.amazon.com/AmazonECS/latest/developerguidetask_definition_parameters.html
+    #   [3]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
     #
     # @return [Types::RegisterTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4081,11 +4223,24 @@ module Aws::ECS
     #   maximum of five strategy rules per task.
     #
     # @option params [String] :launch_type
-    #   The launch type on which to run your task.
+    #   The launch type on which to run your task. For more information, see
+    #   [Amazon ECS Launch Types][1] in the *Amazon Elastic Container Service
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
     #
     # @option params [String] :platform_version
-    #   The platform version on which to run your task. If one is not
-    #   specified, the latest version is used by default.
+    #   The platform version the task should run. A platform version is only
+    #   specified for tasks using the Fargate launch type. If one is not
+    #   specified, the `LATEST` platform version is used by default. For more
+    #   information, see [AWS Fargate Platform Versions][1] in the *Amazon
+    #   Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #
     # @option params [Types::NetworkConfiguration] :network_configuration
     #   The network configuration for the task. This parameter is required for
@@ -4518,10 +4673,10 @@ module Aws::ECS
     #
     # When StopTask is called on a task, the equivalent of `docker stop` is
     # issued to the containers running in the task. This results in a
-    # `SIGTERM` and a default 30-second timeout, after which `SIGKILL` is
-    # sent and the containers are forcibly stopped. If the container handles
-    # the `SIGTERM` gracefully and exits within 30 seconds from receiving
-    # it, no `SIGKILL` is sent.
+    # `SIGTERM` value and a default 30-second timeout, after which the
+    # `SIGKILL` value is sent and the containers are forcibly stopped. If
+    # the container handles the `SIGTERM` value gracefully and exits within
+    # 30 seconds from receiving it, no `SIGKILL` value is sent.
     #
     # <note markdown="1"> The default 30-second timeout can be configured on the Amazon ECS
     # container agent with the `ECS_CONTAINER_STOP_TIMEOUT` variable. For
@@ -5017,11 +5172,11 @@ module Aws::ECS
     # * The `maximumPercent` parameter represents an upper limit on the
     #   number of running tasks during task replacement, which enables you
     #   to define the replacement batch size. For example, if `desiredCount`
-    #   of four tasks, a maximum of 200% starts four new tasks before
-    #   stopping the four tasks to be drained (provided that the cluster
-    #   resources required to do this are available). If the maximum is
-    #   100%, then replacement tasks can't start until the draining tasks
-    #   have stopped.
+    #   is four tasks, a maximum of 200% starts four new tasks before
+    #   stopping the four tasks to be drained, provided that the cluster
+    #   resources required to do this are available. If the maximum is 100%,
+    #   then replacement tasks can't start until the draining tasks have
+    #   stopped.
     #
     # Any `PENDING` or `RUNNING` tasks that do not belong to a service are
     # not affected. You must wait for them to finish or stop them manually.
@@ -5116,8 +5271,19 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # Modifies the desired count, deployment configuration, network
-    # configuration, or task definition used in a service.
+    # Modifies the parameters of a service.
+    #
+    # For services using the rolling update (`ECS`) deployment controller,
+    # the desired count, deployment configuration, network configuration, or
+    # task definition used can be updated.
+    #
+    # For services using the blue/green (`CODE_DEPLOY`) deployment
+    # controller, only the desired count, deployment configuration, and
+    # health check grace period can be updated using this API. If the
+    # network configuration, platform version, or task definition need to be
+    # updated, a new AWS CodeDeploy deployment should be created. For more
+    # information, see [CreateDeployment][1] in the *AWS CodeDeploy API
+    # Reference*.
     #
     # You can add to or subtract from the number of instantiations of a task
     # definition in a service by specifying the cluster that the service is
@@ -5205,6 +5371,10 @@ module Aws::ECS
     #   Zone (based on the previous steps), favoring container instances
     #   with the largest number of running tasks for this service.
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html
+    #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
     #   your service is running on. If you do not specify a cluster, the
@@ -5249,7 +5419,16 @@ module Aws::ECS
     #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #
     # @option params [String] :platform_version
-    #   The platform version that your service should run.
+    #   The platform version on which your tasks in the service are running. A
+    #   platform version is only specified for tasks using the Fargate launch
+    #   type. If one is not specified, the `LATEST` platform version is used
+    #   by default. For more information, see [AWS Fargate Platform
+    #   Versions][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #
     # @option params [Boolean] :force_new_deployment
     #   Whether to force a new deployment of the service. Deployments are not
@@ -5265,8 +5444,8 @@ module Aws::ECS
     #   after a task has first started. This is only valid if your service is
     #   configured to use a load balancer. If your service's tasks take a
     #   while to start and respond to Elastic Load Balancing health checks,
-    #   you can specify a health check grace period of up to 1,800 seconds
-    #   during which the ECS service scheduler ignores the Elastic Load
+    #   you can specify a health check grace period of up to 1,800 seconds.
+    #   During that time, the ECS service scheduler ignores the Elastic Load
     #   Balancing health check status. This grace period can prevent the ECS
     #   service scheduler from marking tasks as unhealthy and stopping them
     #   before they have time to come up.
@@ -5349,6 +5528,34 @@ module Aws::ECS
     #   resp.service.task_definition #=> String
     #   resp.service.deployment_configuration.maximum_percent #=> Integer
     #   resp.service.deployment_configuration.minimum_healthy_percent #=> Integer
+    #   resp.service.task_sets #=> Array
+    #   resp.service.task_sets[0].id #=> String
+    #   resp.service.task_sets[0].task_set_arn #=> String
+    #   resp.service.task_sets[0].started_by #=> String
+    #   resp.service.task_sets[0].external_id #=> String
+    #   resp.service.task_sets[0].status #=> String
+    #   resp.service.task_sets[0].task_definition #=> String
+    #   resp.service.task_sets[0].computed_desired_count #=> Integer
+    #   resp.service.task_sets[0].pending_count #=> Integer
+    #   resp.service.task_sets[0].running_count #=> Integer
+    #   resp.service.task_sets[0].created_at #=> Time
+    #   resp.service.task_sets[0].updated_at #=> Time
+    #   resp.service.task_sets[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.service.task_sets[0].platform_version #=> String
+    #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.subnets #=> Array
+    #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
+    #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.security_groups #=> Array
+    #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.security_groups[0] #=> String
+    #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.service.task_sets[0].load_balancers #=> Array
+    #   resp.service.task_sets[0].load_balancers[0].target_group_arn #=> String
+    #   resp.service.task_sets[0].load_balancers[0].load_balancer_name #=> String
+    #   resp.service.task_sets[0].load_balancers[0].container_name #=> String
+    #   resp.service.task_sets[0].load_balancers[0].container_port #=> Integer
+    #   resp.service.task_sets[0].scale.value #=> Float
+    #   resp.service.task_sets[0].scale.unit #=> String, one of "PERCENT"
+    #   resp.service.task_sets[0].stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
+    #   resp.service.task_sets[0].stability_status_at #=> Time
     #   resp.service.deployments #=> Array
     #   resp.service.deployments[0].id #=> String
     #   resp.service.deployments[0].status #=> String
@@ -5384,6 +5591,7 @@ module Aws::ECS
     #   resp.service.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.service.health_check_grace_period_seconds #=> Integer
     #   resp.service.scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
+    #   resp.service.deployment_controller.type #=> String, one of "ECS", "CODE_DEPLOY"
     #   resp.service.tags #=> Array
     #   resp.service.tags[0].key #=> String
     #   resp.service.tags[0].value #=> String
@@ -5413,7 +5621,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

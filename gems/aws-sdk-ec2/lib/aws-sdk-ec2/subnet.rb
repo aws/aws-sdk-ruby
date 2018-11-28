@@ -37,6 +37,12 @@ module Aws::EC2
       data[:availability_zone]
     end
 
+    # The AZ ID of the subnet.
+    # @return [String]
+    def availability_zone_id
+      data[:availability_zone_id]
+    end
+
     # The number of unused private IPv4 addresses in the subnet. The IPv4
     # addresses for any stopped instances are considered unavailable.
     # @return [Integer]
@@ -76,6 +82,12 @@ module Aws::EC2
       data[:vpc_id]
     end
 
+    # The ID of the AWS account that owns the subnet.
+    # @return [String]
+    def owner_id
+      data[:owner_id]
+    end
+
     # Indicates whether a network interface created in this subnet
     # (including a network interface created by RunInstances) receives an
     # IPv6 address.
@@ -94,6 +106,12 @@ module Aws::EC2
     # @return [Array<Types::Tag>]
     def tags
       data[:tags]
+    end
+
+    # The Amazon Resource Name (ARN) of the subnet.
+    # @return [String]
+    def subnet_arn
+      data[:subnet_arn]
     end
 
     # @!endgroup

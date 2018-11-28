@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+1.118.0 (2018-11-28)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::MediaConnect`.
+
+* Feature - Added support for enumerating regions for `Aws::KinesisAnalyticsV2`.
+
+* Feature - Added support for enumerating regions for `Aws::ComprehendMedical`.
+
 1.117.0 (2018-11-27)
 ------------------
 

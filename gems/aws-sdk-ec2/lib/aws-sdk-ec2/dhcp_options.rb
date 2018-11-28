@@ -37,6 +37,12 @@ module Aws::EC2
       data[:dhcp_configurations]
     end
 
+    # The ID of the AWS account that owns the DHCP options set.
+    # @return [String]
+    def owner_id
+      data[:owner_id]
+    end
+
     # Any tags assigned to the DHCP options set.
     # @return [Array<Types::Tag>]
     def tags

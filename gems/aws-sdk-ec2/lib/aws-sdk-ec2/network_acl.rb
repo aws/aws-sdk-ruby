@@ -61,6 +61,12 @@ module Aws::EC2
       data[:vpc_id]
     end
 
+    # The ID of the AWS account that owns the network ACL.
+    # @return [String]
+    def owner_id
+      data[:owner_id]
+    end
+
     # @!endgroup
 
     # @return [Client]
