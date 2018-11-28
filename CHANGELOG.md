@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::FSx - Added support for a new service, Amazon FSx.
+
+* Feature - Aws::SecurityHub - Added support for a new service, AWS SecurityHub.
+
 2.11.179 (2018-11-28)
 ------------------
 

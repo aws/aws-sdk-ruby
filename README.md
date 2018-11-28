@@ -302,8 +302,8 @@ to be backwards compatible.
 | AWS IoT Data Plane                                    | IoTDataPlane                    | 2015-05-28  |
 | AWS IoT Jobs Data Plane                               | IoTJobsDataPlane                | 2017-09-29  |
 | AWS Key Management Service                            | KMS                             | 2014-11-01  |
-| AWS Lambda                                            | Lambda                          | 2015-03-31  |
 | AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
+| AWS Lambda                                            | Lambda                          | 2015-03-31  |
 | AWS Marketplace Commerce Analytics                    | MarketplaceCommerceAnalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | MarketplaceEntitlementService   | 2017-01-11  |
 | AWS MediaConnect                                      | MediaConnect                    | 2018-11-14  |
@@ -323,6 +323,7 @@ to be backwards compatible.
 | AWS S3 Control                                        | S3Control                       | 2018-08-20  |
 | AWS Secrets Manager                                   | SecretsManager                  | 2017-10-17  |
 | AWS Security Token Service                            | STS                             | 2011-06-15  |
+| AWS SecurityHub                                       | SecurityHub                     | 2018-10-26  |
 | AWS Server Migration Service                          | SMS                             | 2016-10-24  |
 | AWS Service Catalog                                   | ServiceCatalog                  | 2015-12-10  |
 | AWS Shield                                            | Shield                          | 2016-06-02  |
@@ -367,14 +368,15 @@ to be backwards compatible.
 | Amazon Elastic MapReduce                              | EMR                             | 2009-03-31  |
 | Amazon Elastic Transcoder                             | ElasticTranscoder               | 2012-09-25  |
 | Amazon Elasticsearch Service                          | ElasticsearchService            | 2015-01-01  |
+| Amazon FSx                                            | FSx                             | 2018-03-01  |
 | Amazon GameLift                                       | GameLift                        | 2015-10-01  |
 | Amazon Glacier                                        | Glacier                         | 2012-06-01  |
 | Amazon GuardDuty                                      | GuardDuty                       | 2017-11-28  |
 | Amazon Import/Export Snowball                         | Snowball                        | 2016-06-30  |
 | Amazon Inspector                                      | Inspector                       | 2016-02-16  |
 | Amazon Kinesis                                        | Kinesis                         | 2013-12-02  |
-| Amazon Kinesis Analytics                              | KinesisAnalytics                | 2015-08-14  |
 | Amazon Kinesis Analytics                              | KinesisAnalyticsV2              | 2018-05-23  |
+| Amazon Kinesis Analytics                              | KinesisAnalytics                | 2015-08-14  |
 | Amazon Kinesis Firehose                               | Firehose                        | 2015-08-04  |
 | Amazon Kinesis Video Streams                          | KinesisVideo                    | 2017-09-30  |
 | Amazon Kinesis Video Streams Archived Media           | KinesisVideoArchivedMedia       | 2017-09-30  |

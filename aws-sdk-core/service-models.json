@@ -254,6 +254,10 @@
     "models": "fms/2018-01-01",
     "endpoint": "fms"
   },
+  "FSx": {
+    "models": "fsx/2018-03-01",
+    "endpoint": "fsx"
+  },
   "Firehose": {
     "models": "firehose/2015-08-04",
     "endpoint": "firehose"
@@ -569,6 +573,10 @@
   "SecretsManager": {
     "models": "secretsmanager/2017-10-17",
     "endpoint": "secretsmanager"
+  },
+  "SecurityHub": {
+    "models": "securityhub/2018-10-26",
+    "endpoint": "securityhub"
   },
   "ServerlessApplicationRepository": {
     "models": "serverlessrepo/2017-09-08",

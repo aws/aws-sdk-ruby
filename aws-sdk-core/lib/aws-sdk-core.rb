@@ -87,6 +87,7 @@ module Aws
     ElasticTranscoder
     ElasticsearchService
     FMS
+    FSx
     Firehose
     GameLift
     Glacier
@@ -166,6 +167,7 @@ module Aws
     SageMaker
     SageMakerRuntime
     SecretsManager
+    SecurityHub
     ServerlessApplicationRepository
     ServiceCatalog
     ServiceDiscovery
