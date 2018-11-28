@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.180 (2018-11-28)
+------------------
+
 * Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
 
 * Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
