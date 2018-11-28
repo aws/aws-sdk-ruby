@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.119.0 (2018-11-28)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SecurityHub`.
+
+* Feature - Added support for enumerating regions for `Aws::FSx`.
+
 1.118.0 (2018-11-28)
 ------------------
 

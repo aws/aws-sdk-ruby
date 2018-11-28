@@ -1772,7 +1772,7 @@ module Aws::RDS
     #
     # @option params [String] :engine_mode
     #   The DB engine mode of the DB cluster, either `provisioned`,
-    #   `serverless`, or `parallelquery`.
+    #   `serverless`, `parallelquery`, or `global`.
     #
     # @option params [Types::ScalingConfiguration] :scaling_configuration
     #   For DB clusters in `serverless` DB engine mode, the scaling properties
@@ -1782,6 +1782,10 @@ module Aws::RDS
     #   Indicates if the DB cluster should have deletion protection enabled.
     #   The database can't be deleted when this value is set to true. The
     #   default is false.
+    #
+    # @option params [String] :global_cluster_identifier
+    #   The global cluster ID of an Aurora cluster that becomes the primary
+    #   cluster in the new global database cluster.
     #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -1858,6 +1862,7 @@ module Aws::RDS
     #       seconds_until_auto_pause: 1,
     #     },
     #     deletion_protection: false,
+    #     global_cluster_identifier: "String",
     #     source_region: "String",
     #   })
     #
@@ -1925,6 +1930,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -2561,7 +2567,8 @@ module Aws::RDS
     #   Default: The default DB security group for the database engine.
     #
     # @option params [Array<String>] :vpc_security_group_ids
-    #   A list of EC2 VPC security groups to associate with this DB instance.
+    #   A list of Amazon EC2 VPC security groups to associate with this DB
+    #   instance.
     #
     #   **Amazon Aurora**
     #
@@ -2724,9 +2731,9 @@ module Aws::RDS
     #   Type: Integer
     #
     # @option params [Boolean] :multi_az
-    #   Specifies if the DB instance is a Multi-AZ deployment. You can't set
-    #   the AvailabilityZone parameter if the MultiAZ parameter is set to
-    #   true.
+    #   A value that specifies whether the DB instance is a Multi-AZ
+    #   deployment. You can't set the AvailabilityZone parameter if the
+    #   MultiAZ parameter is set to true.
     #
     # @option params [String] :engine_version
     #   The version number of the database engine to use.
@@ -4328,6 +4335,85 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Creates an Aurora global database spread across multiple regions. The
+    # global database contains a single primary cluster with read-write
+    # capability, and a read-only secondary cluster that receives data from
+    # the primary cluster through high-speed replication performed by the
+    # Aurora storage subsystem.
+    #
+    # You can create a global database that is initially empty, and then add
+    # a primary cluster and a secondary cluster to it. Or you can specify an
+    # existing Aurora cluster during the create operation, and this cluster
+    # becomes the primary cluster of the global database.
+    #
+    # @option params [String] :global_cluster_identifier
+    #   The cluster identifier of the new global database cluster.
+    #
+    # @option params [String] :source_db_cluster_identifier
+    #   The Amazon Resource Name (ARN) to use as the primary cluster of the
+    #   global database. This parameter is optional.
+    #
+    # @option params [String] :engine
+    #   Provides the name of the database engine to be used for this DB
+    #   cluster.
+    #
+    # @option params [String] :engine_version
+    #   The engine version of the Aurora global database.
+    #
+    # @option params [Boolean] :deletion_protection
+    #   The deletion protection setting for the new global database. The
+    #   global database can't be deleted when this value is set to true.
+    #
+    # @option params [String] :database_name
+    #   The name for your database of up to 64 alpha-numeric characters. If
+    #   you do not provide a name, Amazon Aurora will not create a database in
+    #   the global database cluster you are creating.
+    #
+    # @option params [Boolean] :storage_encrypted
+    #   The storage encryption setting for the new global database cluster.
+    #
+    # @return [Types::CreateGlobalClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateGlobalClusterResult#global_cluster #global_cluster} => Types::GlobalCluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_global_cluster({
+    #     global_cluster_identifier: "String",
+    #     source_db_cluster_identifier: "String",
+    #     engine: "String",
+    #     engine_version: "String",
+    #     deletion_protection: false,
+    #     database_name: "String",
+    #     storage_encrypted: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_cluster.global_cluster_identifier #=> String
+    #   resp.global_cluster.global_cluster_resource_id #=> String
+    #   resp.global_cluster.global_cluster_arn #=> String
+    #   resp.global_cluster.status #=> String
+    #   resp.global_cluster.engine #=> String
+    #   resp.global_cluster.engine_version #=> String
+    #   resp.global_cluster.database_name #=> String
+    #   resp.global_cluster.storage_encrypted #=> Boolean
+    #   resp.global_cluster.deletion_protection #=> Boolean
+    #   resp.global_cluster.global_cluster_members #=> Array
+    #   resp.global_cluster.global_cluster_members[0].db_cluster_arn #=> String
+    #   resp.global_cluster.global_cluster_members[0].readers #=> Array
+    #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
+    #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateGlobalCluster AWS API Documentation
+    #
+    # @overload create_global_cluster(params = {})
+    # @param [Hash] params ({})
+    def create_global_cluster(params = {}, options = {})
+      req = build_request(:create_global_cluster, params)
+      req.send_request(options)
+    end
+
     # Creates a new option group. You can create up to 20 option groups.
     #
     # @option params [required, String] :option_group_name
@@ -4587,6 +4673,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -5329,6 +5416,48 @@ module Aws::RDS
     # @param [Hash] params ({})
     def delete_event_subscription(params = {}, options = {})
       req = build_request(:delete_event_subscription, params)
+      req.send_request(options)
+    end
+
+    # Deletes a global database cluster. The primary and secondary clusters
+    # must already be detached or destroyed first.
+    #
+    # @option params [required, String] :global_cluster_identifier
+    #   The cluster identifier of the global database cluster being deleted.
+    #
+    # @return [Types::DeleteGlobalClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteGlobalClusterResult#global_cluster #global_cluster} => Types::GlobalCluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_global_cluster({
+    #     global_cluster_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_cluster.global_cluster_identifier #=> String
+    #   resp.global_cluster.global_cluster_resource_id #=> String
+    #   resp.global_cluster.global_cluster_arn #=> String
+    #   resp.global_cluster.status #=> String
+    #   resp.global_cluster.engine #=> String
+    #   resp.global_cluster.engine_version #=> String
+    #   resp.global_cluster.database_name #=> String
+    #   resp.global_cluster.storage_encrypted #=> Boolean
+    #   resp.global_cluster.deletion_protection #=> Boolean
+    #   resp.global_cluster.global_cluster_members #=> Array
+    #   resp.global_cluster.global_cluster_members[0].db_cluster_arn #=> String
+    #   resp.global_cluster.global_cluster_members[0].readers #=> Array
+    #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
+    #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteGlobalCluster AWS API Documentation
+    #
+    # @overload delete_global_cluster(params = {})
+    # @param [Hash] params ({})
+    def delete_global_cluster(params = {}, options = {})
+      req = build_request(:delete_global_cluster, params)
       req.send_request(options)
     end
 
@@ -6269,6 +6398,7 @@ module Aws::RDS
     #   resp.db_clusters[0].scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_clusters[0].scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_clusters[0].deletion_protection #=> Boolean
+    #   resp.db_clusters[0].http_endpoint_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusters AWS API Documentation
     #
@@ -7881,6 +8011,101 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Returns information about Aurora global database clusters. This API
+    # supports pagination.
+    #
+    # For more information on Amazon Aurora, see [ What Is Amazon
+    # Aurora?][1] in the *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
+    #
+    # @option params [String] :global_cluster_identifier
+    #   The user-supplied DB cluster identifier. If this parameter is
+    #   specified, information from only the specific DB cluster is returned.
+    #   This parameter isn't case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match an existing DBClusterIdentifier.
+    #
+    #   ^
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   A filter that specifies one or more global DB clusters to describe.
+    #
+    #   Supported filters:
+    #
+    #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
+    #     Amazon Resource Names (ARNs). The results list will only include
+    #     information about the DB clusters identified by these ARNs.
+    #
+    #   ^
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous
+    #   DescribeGlobalClusters request. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #
+    # @return [Types::GlobalClustersMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GlobalClustersMessage#marker #marker} => String
+    #   * {Types::GlobalClustersMessage#global_clusters #global_clusters} => Array&lt;Types::GlobalCluster&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_global_clusters({
+    #     global_cluster_identifier: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.global_clusters #=> Array
+    #   resp.global_clusters[0].global_cluster_identifier #=> String
+    #   resp.global_clusters[0].global_cluster_resource_id #=> String
+    #   resp.global_clusters[0].global_cluster_arn #=> String
+    #   resp.global_clusters[0].status #=> String
+    #   resp.global_clusters[0].engine #=> String
+    #   resp.global_clusters[0].engine_version #=> String
+    #   resp.global_clusters[0].database_name #=> String
+    #   resp.global_clusters[0].storage_encrypted #=> Boolean
+    #   resp.global_clusters[0].deletion_protection #=> Boolean
+    #   resp.global_clusters[0].global_cluster_members #=> Array
+    #   resp.global_clusters[0].global_cluster_members[0].db_cluster_arn #=> String
+    #   resp.global_clusters[0].global_cluster_members[0].readers #=> Array
+    #   resp.global_clusters[0].global_cluster_members[0].readers[0] #=> String
+    #   resp.global_clusters[0].global_cluster_members[0].is_writer #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeGlobalClusters AWS API Documentation
+    #
+    # @overload describe_global_clusters(params = {})
+    # @param [Hash] params ({})
+    def describe_global_clusters(params = {}, options = {})
+      req = build_request(:describe_global_clusters, params)
+      req.send_request(options)
+    end
+
     # Describes all available options.
     #
     # @option params [required, String] :engine_name
@@ -8856,7 +9081,7 @@ module Aws::RDS
     #
     # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
     #
-    # @option params [String] :db_cluster_identifier
+    # @option params [required, String] :db_cluster_identifier
     #   A DB cluster identifier to force a failover for. This parameter is not
     #   case-sensitive.
     #
@@ -8895,7 +9120,7 @@ module Aws::RDS
     # @example Request syntax with placeholder values
     #
     #   resp = client.failover_db_cluster({
-    #     db_cluster_identifier: "String",
+    #     db_cluster_identifier: "String", # required
     #     target_db_instance_identifier: "String",
     #   })
     #
@@ -8963,6 +9188,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -9318,6 +9544,28 @@ module Aws::RDS
     #   Indicates if the DB cluster has deletion protection enabled. The
     #   database can't be deleted when this value is set to true.
     #
+    # @option params [Boolean] :enable_http_endpoint
+    #   <note markdown="1"> HTTP endpoint functionality is in beta for Aurora Serverless and is
+    #   subject to change.
+    #
+    #    </note>
+    #
+    #   A value that indicates whether to enable the HTTP endpoint for an
+    #   Aurora Serverless DB cluster. By default, the HTTP endpoint is
+    #   disabled.
+    #
+    #   When enabled, the HTTP endpoint provides a connectionless web service
+    #   API for running SQL queries on the Aurora Serverless DB cluster. You
+    #   can also query your database from inside the RDS console with the
+    #   query editor.
+    #
+    #   For more information about Aurora Serverless, see [Using Amazon Aurora
+    #   Serverless][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
+    #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -9370,6 +9618,7 @@ module Aws::RDS
     #       seconds_until_auto_pause: 1,
     #     },
     #     deletion_protection: false,
+    #     enable_http_endpoint: false,
     #   })
     #
     # @example Response structure
@@ -9436,6 +9685,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -10952,6 +11202,84 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Modify a setting for an Amazon Aurora global cluster. You can change
+    # one or more database configuration parameters by specifying these
+    # parameters and the new values in the request. For more information on
+    # Amazon Aurora, see [ What Is Amazon Aurora?][1] in the *Amazon Aurora
+    # User Guide.*
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
+    #
+    # @option params [String] :global_cluster_identifier
+    #   The DB cluster identifier for the global cluster being modified. This
+    #   parameter is not case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identifier of an existing global database cluster.
+    #
+    #   ^
+    #
+    # @option params [String] :new_global_cluster_identifier
+    #   The new cluster identifier for the global database cluster when
+    #   modifying a global database cluster. This value is stored as a
+    #   lowercase string.
+    #
+    #   Constraints:
+    #
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens
+    #
+    #   * The first character must be a letter
+    #
+    #   * Can't end with a hyphen or contain two consecutive hyphens
+    #
+    #   Example: `my-cluster2`
+    #
+    # @option params [Boolean] :deletion_protection
+    #   Indicates if the global database cluster has deletion protection
+    #   enabled. The global database cluster can't be deleted when this value
+    #   is set to true.
+    #
+    # @return [Types::ModifyGlobalClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyGlobalClusterResult#global_cluster #global_cluster} => Types::GlobalCluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_global_cluster({
+    #     global_cluster_identifier: "String",
+    #     new_global_cluster_identifier: "String",
+    #     deletion_protection: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_cluster.global_cluster_identifier #=> String
+    #   resp.global_cluster.global_cluster_resource_id #=> String
+    #   resp.global_cluster.global_cluster_arn #=> String
+    #   resp.global_cluster.status #=> String
+    #   resp.global_cluster.engine #=> String
+    #   resp.global_cluster.engine_version #=> String
+    #   resp.global_cluster.database_name #=> String
+    #   resp.global_cluster.storage_encrypted #=> Boolean
+    #   resp.global_cluster.deletion_protection #=> Boolean
+    #   resp.global_cluster.global_cluster_members #=> Array
+    #   resp.global_cluster.global_cluster_members[0].db_cluster_arn #=> String
+    #   resp.global_cluster.global_cluster_members[0].readers #=> Array
+    #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
+    #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyGlobalCluster AWS API Documentation
+    #
+    # @overload modify_global_cluster(params = {})
+    # @param [Hash] params ({})
+    def modify_global_cluster(params = {}, options = {})
+      req = build_request(:modify_global_cluster, params)
+      req.send_request(options)
+    end
+
     # Modifies an existing option group.
     #
     # @option params [required, String] :option_group_name
@@ -11376,6 +11704,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -11650,6 +11979,56 @@ module Aws::RDS
     # @param [Hash] params ({})
     def reboot_db_instance(params = {}, options = {})
       req = build_request(:reboot_db_instance, params)
+      req.send_request(options)
+    end
+
+    # Detaches an Aurora secondary cluster from an Aurora global database
+    # cluster. The cluster becomes a standalone cluster with read-write
+    # capability instead of being read-only and receiving data from a
+    # primary cluster in a different region.
+    #
+    # @option params [String] :global_cluster_identifier
+    #   The cluster identifier to detach from the Aurora global database
+    #   cluster.
+    #
+    # @option params [String] :db_cluster_identifier
+    #   The Amazon Resource Name (ARN) identifying the cluster that was
+    #   detached from the Aurora global database cluster.
+    #
+    # @return [Types::RemoveFromGlobalClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RemoveFromGlobalClusterResult#global_cluster #global_cluster} => Types::GlobalCluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_from_global_cluster({
+    #     global_cluster_identifier: "String",
+    #     db_cluster_identifier: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_cluster.global_cluster_identifier #=> String
+    #   resp.global_cluster.global_cluster_resource_id #=> String
+    #   resp.global_cluster.global_cluster_arn #=> String
+    #   resp.global_cluster.status #=> String
+    #   resp.global_cluster.engine #=> String
+    #   resp.global_cluster.engine_version #=> String
+    #   resp.global_cluster.database_name #=> String
+    #   resp.global_cluster.storage_encrypted #=> Boolean
+    #   resp.global_cluster.deletion_protection #=> Boolean
+    #   resp.global_cluster.global_cluster_members #=> Array
+    #   resp.global_cluster.global_cluster_members[0].db_cluster_arn #=> String
+    #   resp.global_cluster.global_cluster_members[0].readers #=> Array
+    #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
+    #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveFromGlobalCluster AWS API Documentation
+    #
+    # @overload remove_from_global_cluster(params = {})
+    # @param [Hash] params ({})
+    def remove_from_global_cluster(params = {}, options = {})
+      req = build_request(:remove_from_global_cluster, params)
       req.send_request(options)
     end
 
@@ -12349,6 +12728,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -12643,6 +13023,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -12958,6 +13339,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -14770,6 +15152,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -15019,6 +15402,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -15198,7 +15582,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

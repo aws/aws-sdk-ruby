@@ -349,6 +349,30 @@ module Aws::RDS
       data[:deletion_protection]
     end
 
+    # <note markdown="1"> HTTP endpoint functionality is in beta for Aurora Serverless and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    # Value that is `true` if the HTTP endpoint for an Aurora Serverless DB
+    # cluster is enabled and `false` otherwise.
+    #
+    # When enabled, the HTTP endpoint provides a connectionless web service
+    # API for running SQL queries on the Aurora Serverless DB cluster. You
+    # can also query your database from inside the RDS console with the
+    # query editor.
+    #
+    # For more information about Aurora Serverless, see [Using Amazon Aurora
+    # Serverless][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
+    # @return [Boolean]
+    def http_endpoint_enabled
+      data[:http_endpoint_enabled]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -520,6 +544,7 @@ module Aws::RDS
     #       seconds_until_auto_pause: 1,
     #     },
     #     deletion_protection: false,
+    #     global_cluster_identifier: "String",
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -760,7 +785,7 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     # @option options [String] :engine_mode
     #   The DB engine mode of the DB cluster, either `provisioned`,
-    #   `serverless`, or `parallelquery`.
+    #   `serverless`, `parallelquery`, or `global`.
     # @option options [Types::ScalingConfiguration] :scaling_configuration
     #   For DB clusters in `serverless` DB engine mode, the scaling properties
     #   of the DB cluster.
@@ -768,6 +793,9 @@ module Aws::RDS
     #   Indicates if the DB cluster should have deletion protection enabled.
     #   The database can't be deleted when this value is set to true. The
     #   default is false.
+    # @option options [String] :global_cluster_identifier
+    #   The global cluster ID of an Aurora cluster that becomes the primary
+    #   cluster in the new global database cluster.
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -917,6 +945,7 @@ module Aws::RDS
     #       seconds_until_auto_pause: 1,
     #     },
     #     deletion_protection: false,
+    #     enable_http_endpoint: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :new_db_cluster_identifier
@@ -1063,6 +1092,27 @@ module Aws::RDS
     # @option options [Boolean] :deletion_protection
     #   Indicates if the DB cluster has deletion protection enabled. The
     #   database can't be deleted when this value is set to true.
+    # @option options [Boolean] :enable_http_endpoint
+    #   <note markdown="1"> HTTP endpoint functionality is in beta for Aurora Serverless and is
+    #   subject to change.
+    #
+    #    </note>
+    #
+    #   A value that indicates whether to enable the HTTP endpoint for an
+    #   Aurora Serverless DB cluster. By default, the HTTP endpoint is
+    #   disabled.
+    #
+    #   When enabled, the HTTP endpoint provides a connectionless web service
+    #   API for running SQL queries on the Aurora Serverless DB cluster. You
+    #   can also query your database from inside the RDS console with the
+    #   query editor.
+    #
+    #   For more information about Aurora Serverless, see [Using Amazon Aurora
+    #   Serverless][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
     # @return [DBCluster]
     def modify(options = {})
       options = options.merge(db_cluster_identifier: @id)

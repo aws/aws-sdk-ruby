@@ -1263,6 +1263,7 @@ module Aws::RDS
     #           seconds_until_auto_pause: 1,
     #         },
     #         deletion_protection: false,
+    #         global_cluster_identifier: "String",
     #         source_region: "String",
     #       }
     #
@@ -1566,7 +1567,7 @@ module Aws::RDS
     #
     # @!attribute [rw] engine_mode
     #   The DB engine mode of the DB cluster, either `provisioned`,
-    #   `serverless`, or `parallelquery`.
+    #   `serverless`, `parallelquery`, or `global`.
     #   @return [String]
     #
     # @!attribute [rw] scaling_configuration
@@ -1579,6 +1580,11 @@ module Aws::RDS
     #   The database can't be deleted when this value is set to true. The
     #   default is false.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] global_cluster_identifier
+    #   The global cluster ID of an Aurora cluster that becomes the primary
+    #   cluster in the new global database cluster.
+    #   @return [String]
     #
     # @!attribute [rw] destination_region
     #   @return [String]
@@ -1618,6 +1624,7 @@ module Aws::RDS
       :engine_mode,
       :scaling_configuration,
       :deletion_protection,
+      :global_cluster_identifier,
       :destination_region,
       :source_region)
       include Aws::Structure
@@ -2183,7 +2190,7 @@ module Aws::RDS
     #   @return [Array<String>]
     #
     # @!attribute [rw] vpc_security_group_ids
-    #   A list of EC2 VPC security groups to associate with this DB
+    #   A list of Amazon EC2 VPC security groups to associate with this DB
     #   instance.
     #
     #   **Amazon Aurora**
@@ -2358,9 +2365,9 @@ module Aws::RDS
     #   @return [Integer]
     #
     # @!attribute [rw] multi_az
-    #   Specifies if the DB instance is a Multi-AZ deployment. You can't
-    #   set the AvailabilityZone parameter if the MultiAZ parameter is set
-    #   to true.
+    #   A value that specifies whether the DB instance is a Multi-AZ
+    #   deployment. You can't set the AvailabilityZone parameter if the
+    #   MultiAZ parameter is set to true.
     #   @return [Boolean]
     #
     # @!attribute [rw] engine_version
@@ -3608,6 +3615,76 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateGlobalClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         global_cluster_identifier: "String",
+    #         source_db_cluster_identifier: "String",
+    #         engine: "String",
+    #         engine_version: "String",
+    #         deletion_protection: false,
+    #         database_name: "String",
+    #         storage_encrypted: false,
+    #       }
+    #
+    # @!attribute [rw] global_cluster_identifier
+    #   The cluster identifier of the new global database cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_db_cluster_identifier
+    #   The Amazon Resource Name (ARN) to use as the primary cluster of the
+    #   global database. This parameter is optional.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   Provides the name of the database engine to be used for this DB
+    #   cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   The engine version of the Aurora global database.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   The deletion protection setting for the new global database. The
+    #   global database can't be deleted when this value is set to true.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] database_name
+    #   The name for your database of up to 64 alpha-numeric characters. If
+    #   you do not provide a name, Amazon Aurora will not create a database
+    #   in the global database cluster you are creating.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_encrypted
+    #   The storage encryption setting for the new global database cluster.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateGlobalClusterMessage AWS API Documentation
+    #
+    class CreateGlobalClusterMessage < Struct.new(
+      :global_cluster_identifier,
+      :source_db_cluster_identifier,
+      :engine,
+      :engine_version,
+      :deletion_protection,
+      :database_name,
+      :storage_encrypted)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_cluster
+    #   A data type representing an Aurora global database.
+    #   @return [Types::GlobalCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateGlobalClusterResult AWS API Documentation
+    #
+    class CreateGlobalClusterResult < Struct.new(
+      :global_cluster)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateOptionGroupMessage
     #   data as a hash:
     #
@@ -3929,6 +4006,28 @@ module Aws::RDS
     #   database can't be deleted when this value is set to true.
     #   @return [Boolean]
     #
+    # @!attribute [rw] http_endpoint_enabled
+    #   <note markdown="1"> HTTP endpoint functionality is in beta for Aurora Serverless and is
+    #   subject to change.
+    #
+    #    </note>
+    #
+    #   Value that is `true` if the HTTP endpoint for an Aurora Serverless
+    #   DB cluster is enabled and `false` otherwise.
+    #
+    #   When enabled, the HTTP endpoint provides a connectionless web
+    #   service API for running SQL queries on the Aurora Serverless DB
+    #   cluster. You can also query your database from inside the RDS
+    #   console with the query editor.
+    #
+    #   For more information about Aurora Serverless, see [Using Amazon
+    #   Aurora Serverless][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -3975,7 +4074,8 @@ module Aws::RDS
       :capacity,
       :engine_mode,
       :scaling_configuration_info,
-      :deletion_protection)
+      :deletion_protection,
+      :http_endpoint_enabled)
       include Aws::Structure
     end
 
@@ -6273,6 +6373,35 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteGlobalClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         global_cluster_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] global_cluster_identifier
+    #   The cluster identifier of the global database cluster being deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteGlobalClusterMessage AWS API Documentation
+    #
+    class DeleteGlobalClusterMessage < Struct.new(
+      :global_cluster_identifier)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_cluster
+    #   A data type representing an Aurora global database.
+    #   @return [Types::GlobalCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteGlobalClusterResult AWS API Documentation
+    #
+    class DeleteGlobalClusterResult < Struct.new(
+      :global_cluster)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteOptionGroupMessage
     #   data as a hash:
     #
@@ -7983,6 +8112,73 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeGlobalClustersMessage
+    #   data as a hash:
+    #
+    #       {
+    #         global_cluster_identifier: "String",
+    #         filters: [
+    #           {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         ],
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] global_cluster_identifier
+    #   The user-supplied DB cluster identifier. If this parameter is
+    #   specified, information from only the specific DB cluster is
+    #   returned. This parameter isn't case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match an existing DBClusterIdentifier.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A filter that specifies one or more global DB clusters to describe.
+    #
+    #   Supported filters:
+    #
+    #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
+    #     Amazon Resource Names (ARNs). The results list will only include
+    #     information about the DB clusters identified by these ARNs.
+    #
+    #   ^
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   DescribeGlobalClusters request. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeGlobalClustersMessage AWS API Documentation
+    #
+    class DescribeGlobalClustersMessage < Struct.new(
+      :global_cluster_identifier,
+      :filters,
+      :max_records,
+      :marker)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeOptionGroupOptionsMessage
     #   data as a hash:
     #
@@ -8969,7 +9165,7 @@ module Aws::RDS
     #   data as a hash:
     #
     #       {
-    #         db_cluster_identifier: "String",
+    #         db_cluster_identifier: "String", # required
     #         target_db_instance_identifier: "String",
     #       }
     #
@@ -9056,6 +9252,115 @@ module Aws::RDS
     class Filter < Struct.new(
       :name,
       :values)
+      include Aws::Structure
+    end
+
+    # A data type representing an Aurora global database.
+    #
+    # @!attribute [rw] global_cluster_identifier
+    #   Contains a user-supplied global database cluster identifier. This
+    #   identifier is the unique key that identifies a global database
+    #   cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_cluster_resource_id
+    #   The AWS Region-unique, immutable identifier for the global database
+    #   cluster. This identifier is found in AWS CloudTrail log entries
+    #   whenever the AWS KMS key for the DB cluster is accessed.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_cluster_arn
+    #   The Amazon Resource Name (ARN) for the global database cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Specifies the current state of this global database cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The Aurora database engine used by the global database cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   Indicates the database engine version.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The default database name within the new global database cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_encrypted
+    #   The storage encryption setting for the global database cluster.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] deletion_protection
+    #   The deletion protection setting for the new global database cluster.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] global_cluster_members
+    #   The list of cluster IDs for secondary clusters within the global
+    #   database cluster. Currently limited to 1 item.
+    #   @return [Array<Types::GlobalClusterMember>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/GlobalCluster AWS API Documentation
+    #
+    class GlobalCluster < Struct.new(
+      :global_cluster_identifier,
+      :global_cluster_resource_id,
+      :global_cluster_arn,
+      :status,
+      :engine,
+      :engine_version,
+      :database_name,
+      :storage_encrypted,
+      :deletion_protection,
+      :global_cluster_members)
+      include Aws::Structure
+    end
+
+    # A data structure with information about any primary and secondary
+    # clusters associated with an Aurora global database.
+    #
+    # @!attribute [rw] db_cluster_arn
+    #   The Amazon Resource Name (ARN) for each Aurora cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] readers
+    #   The Amazon Resource Name (ARN) for each read-only secondary cluster
+    #   associated with the Aurora global database.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] is_writer
+    #   Specifies whether the Aurora cluster is the primary cluster (that
+    #   is, has read-write capability) for the Aurora global database with
+    #   which it is associated.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/GlobalClusterMember AWS API Documentation
+    #
+    class GlobalClusterMember < Struct.new(
+      :db_cluster_arn,
+      :readers,
+      :is_writer)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeGlobalClusters` request. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the
+    #   value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_clusters
+    #   The list of global clusters returned by this request.
+    #   @return [Array<Types::GlobalCluster>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/GlobalClustersMessage AWS API Documentation
+    #
+    class GlobalClustersMessage < Struct.new(
+      :marker,
+      :global_clusters)
       include Aws::Structure
     end
 
@@ -9266,6 +9571,7 @@ module Aws::RDS
     #           seconds_until_auto_pause: 1,
     #         },
     #         deletion_protection: false,
+    #         enable_http_endpoint: false,
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -9458,6 +9764,29 @@ module Aws::RDS
     #   database can't be deleted when this value is set to true.
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_http_endpoint
+    #   <note markdown="1"> HTTP endpoint functionality is in beta for Aurora Serverless and is
+    #   subject to change.
+    #
+    #    </note>
+    #
+    #   A value that indicates whether to enable the HTTP endpoint for an
+    #   Aurora Serverless DB cluster. By default, the HTTP endpoint is
+    #   disabled.
+    #
+    #   When enabled, the HTTP endpoint provides a connectionless web
+    #   service API for running SQL queries on the Aurora Serverless DB
+    #   cluster. You can also query your database from inside the RDS
+    #   console with the query editor.
+    #
+    #   For more information about Aurora Serverless, see [Using Amazon
+    #   Aurora Serverless][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterMessage AWS API Documentation
     #
     class ModifyDBClusterMessage < Struct.new(
@@ -9477,7 +9806,8 @@ module Aws::RDS
       :cloudwatch_logs_export_configuration,
       :engine_version,
       :scaling_configuration,
-      :deletion_protection)
+      :deletion_protection,
+      :enable_http_endpoint)
       include Aws::Structure
     end
 
@@ -10645,6 +10975,68 @@ module Aws::RDS
     #
     class ModifyEventSubscriptionResult < Struct.new(
       :event_subscription)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyGlobalClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         global_cluster_identifier: "String",
+    #         new_global_cluster_identifier: "String",
+    #         deletion_protection: false,
+    #       }
+    #
+    # @!attribute [rw] global_cluster_identifier
+    #   The DB cluster identifier for the global cluster being modified.
+    #   This parameter is not case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identifier of an existing global database cluster.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] new_global_cluster_identifier
+    #   The new cluster identifier for the global database cluster when
+    #   modifying a global database cluster. This value is stored as a
+    #   lowercase string.
+    #
+    #   Constraints:
+    #
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens
+    #
+    #   * The first character must be a letter
+    #
+    #   * Can't end with a hyphen or contain two consecutive hyphens
+    #
+    #   Example: `my-cluster2`
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the global database cluster has deletion protection
+    #   enabled. The global database cluster can't be deleted when this
+    #   value is set to true.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyGlobalClusterMessage AWS API Documentation
+    #
+    class ModifyGlobalClusterMessage < Struct.new(
+      :global_cluster_identifier,
+      :new_global_cluster_identifier,
+      :deletion_protection)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_cluster
+    #   A data type representing an Aurora global database.
+    #   @return [Types::GlobalCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyGlobalClusterResult AWS API Documentation
+    #
+    class ModifyGlobalClusterResult < Struct.new(
+      :global_cluster)
       include Aws::Structure
     end
 
@@ -11978,6 +12370,43 @@ module Aws::RDS
     class RecurringCharge < Struct.new(
       :recurring_charge_amount,
       :recurring_charge_frequency)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RemoveFromGlobalClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         global_cluster_identifier: "String",
+    #         db_cluster_identifier: "String",
+    #       }
+    #
+    # @!attribute [rw] global_cluster_identifier
+    #   The cluster identifier to detach from the Aurora global database
+    #   cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The Amazon Resource Name (ARN) identifying the cluster that was
+    #   detached from the Aurora global database cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveFromGlobalClusterMessage AWS API Documentation
+    #
+    class RemoveFromGlobalClusterMessage < Struct.new(
+      :global_cluster_identifier,
+      :db_cluster_identifier)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_cluster
+    #   A data type representing an Aurora global database.
+    #   @return [Types::GlobalCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveFromGlobalClusterResult AWS API Documentation
+    #
+    class RemoveFromGlobalClusterResult < Struct.new(
+      :global_cluster)
       include Aws::Structure
     end
 

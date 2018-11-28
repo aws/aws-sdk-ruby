@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.33.0 (2018-11-28)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-securityhub` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-fsx` gem.
+
 3.32.0 (2018-11-28)
 ------------------
 

@@ -517,10 +517,18 @@ module Aws::DynamoDB
     #   resp.consumed_capacity #=> Array
     #   resp.consumed_capacity[0].table_name #=> String
     #   resp.consumed_capacity[0].capacity_units #=> Float
+    #   resp.consumed_capacity[0].read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].write_capacity_units #=> Float
+    #   resp.consumed_capacity[0].table.read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].table.write_capacity_units #=> Float
     #   resp.consumed_capacity[0].table.capacity_units #=> Float
     #   resp.consumed_capacity[0].local_secondary_indexes #=> Hash
+    #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].capacity_units #=> Float
     #   resp.consumed_capacity[0].global_secondary_indexes #=> Hash
+    #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].capacity_units #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchGetItem AWS API Documentation
@@ -780,10 +788,18 @@ module Aws::DynamoDB
     #   resp.consumed_capacity #=> Array
     #   resp.consumed_capacity[0].table_name #=> String
     #   resp.consumed_capacity[0].capacity_units #=> Float
+    #   resp.consumed_capacity[0].read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].write_capacity_units #=> Float
+    #   resp.consumed_capacity[0].table.read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].table.write_capacity_units #=> Float
     #   resp.consumed_capacity[0].table.capacity_units #=> Float
     #   resp.consumed_capacity[0].local_secondary_indexes #=> Hash
+    #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].capacity_units #=> Float
     #   resp.consumed_capacity[0].global_secondary_indexes #=> Hash
+    #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].capacity_units #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchWriteItem AWS API Documentation
@@ -1090,10 +1106,24 @@ module Aws::DynamoDB
     #     the global secondary index, consisting of read and write capacity
     #     units.
     #
-    # @option params [required, Types::ProvisionedThroughput] :provisioned_throughput
+    # @option params [String] :billing_mode
+    #   Controls how you are charged for read and write throughput and how you
+    #   manage capacity. This setting can be changed later.
+    #
+    #   * `PROVISIONED` - Sets the billing mode to `PROVISIONED`. We recommend
+    #     using `PROVISIONED` for predictable workloads.
+    #
+    #   * `PAY_PER_REQUEST` - Sets the billing mode to `PAY_PER_REQUEST`. We
+    #     recommend using `PAY_PER_REQUEST` for unpredictable workloads.
+    #
+    # @option params [Types::ProvisionedThroughput] :provisioned_throughput
     #   Represents the provisioned throughput settings for a specified table
     #   or index. The settings can be modified using the `UpdateTable`
     #   operation.
+    #
+    #   If you set BillingMode as `PROVISIONED`, you must specify this
+    #   property. If you set BillingMode as `PAY_PER_REQUEST`, you cannot
+    #   specify this property.
     #
     #   For current minimum and maximum provisioned throughput values, see
     #   [Limits][1] in the *Amazon DynamoDB Developer Guide*.
@@ -1244,13 +1274,14 @@ module Aws::DynamoDB
     #           projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
     #           non_key_attributes: ["NonKeyAttributeName"],
     #         },
-    #         provisioned_throughput: { # required
+    #         provisioned_throughput: {
     #           read_capacity_units: 1, # required
     #           write_capacity_units: 1, # required
     #         },
     #       },
     #     ],
-    #     provisioned_throughput: { # required
+    #     billing_mode: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
+    #     provisioned_throughput: {
     #       read_capacity_units: 1, # required
     #       write_capacity_units: 1, # required
     #     },
@@ -1285,6 +1316,8 @@ module Aws::DynamoDB
     #   resp.table_description.item_count #=> Integer
     #   resp.table_description.table_arn #=> String
     #   resp.table_description.table_id #=> String
+    #   resp.table_description.billing_mode_summary.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
+    #   resp.table_description.billing_mode_summary.last_update_to_pay_per_request_date_time #=> Time
     #   resp.table_description.local_secondary_indexes #=> Array
     #   resp.table_description.local_secondary_indexes[0].index_name #=> String
     #   resp.table_description.local_secondary_indexes[0].key_schema #=> Array
@@ -1372,6 +1405,7 @@ module Aws::DynamoDB
     #   resp.backup_description.source_table_details.provisioned_throughput.read_capacity_units #=> Integer
     #   resp.backup_description.source_table_details.provisioned_throughput.write_capacity_units #=> Integer
     #   resp.backup_description.source_table_details.item_count #=> Integer
+    #   resp.backup_description.source_table_details.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
     #   resp.backup_description.source_table_feature_details.local_secondary_indexes #=> Array
     #   resp.backup_description.source_table_feature_details.local_secondary_indexes[0].index_name #=> String
     #   resp.backup_description.source_table_feature_details.local_secondary_indexes[0].key_schema #=> Array
@@ -1657,10 +1691,18 @@ module Aws::DynamoDB
     #   resp.attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.consumed_capacity.table_name #=> String
     #   resp.consumed_capacity.capacity_units #=> Float
+    #   resp.consumed_capacity.read_capacity_units #=> Float
+    #   resp.consumed_capacity.write_capacity_units #=> Float
+    #   resp.consumed_capacity.table.read_capacity_units #=> Float
+    #   resp.consumed_capacity.table.write_capacity_units #=> Float
     #   resp.consumed_capacity.table.capacity_units #=> Float
     #   resp.consumed_capacity.local_secondary_indexes #=> Hash
+    #   resp.consumed_capacity.local_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity.local_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.local_secondary_indexes["IndexName"].capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes #=> Hash
+    #   resp.consumed_capacity.global_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity.global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
     #   resp.item_collection_metrics.item_collection_key #=> Hash
     #   resp.item_collection_metrics.item_collection_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
@@ -1756,6 +1798,8 @@ module Aws::DynamoDB
     #   resp.table_description.item_count #=> Integer
     #   resp.table_description.table_arn #=> String
     #   resp.table_description.table_id #=> String
+    #   resp.table_description.billing_mode_summary.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
+    #   resp.table_description.billing_mode_summary.last_update_to_pay_per_request_date_time #=> Time
     #   resp.table_description.local_secondary_indexes #=> Array
     #   resp.table_description.local_secondary_indexes[0].index_name #=> String
     #   resp.table_description.local_secondary_indexes[0].key_schema #=> Array
@@ -1844,6 +1888,7 @@ module Aws::DynamoDB
     #   resp.backup_description.source_table_details.provisioned_throughput.read_capacity_units #=> Integer
     #   resp.backup_description.source_table_details.provisioned_throughput.write_capacity_units #=> Integer
     #   resp.backup_description.source_table_details.item_count #=> Integer
+    #   resp.backup_description.source_table_details.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
     #   resp.backup_description.source_table_feature_details.local_secondary_indexes #=> Array
     #   resp.backup_description.source_table_feature_details.local_secondary_indexes[0].index_name #=> String
     #   resp.backup_description.source_table_feature_details.local_secondary_indexes[0].key_schema #=> Array
@@ -1999,6 +2044,8 @@ module Aws::DynamoDB
     #   resp.replica_settings #=> Array
     #   resp.replica_settings[0].region_name #=> String
     #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.replica_settings[0].replica_billing_mode_summary.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
+    #   resp.replica_settings[0].replica_billing_mode_summary.last_update_to_pay_per_request_date_time #=> Time
     #   resp.replica_settings[0].replica_provisioned_read_capacity_units #=> Integer
     #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.minimum_units #=> Integer
     #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.maximum_units #=> Integer
@@ -2256,6 +2303,8 @@ module Aws::DynamoDB
     #   resp.table.item_count #=> Integer
     #   resp.table.table_arn #=> String
     #   resp.table.table_id #=> String
+    #   resp.table.billing_mode_summary.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
+    #   resp.table.billing_mode_summary.last_update_to_pay_per_request_date_time #=> Time
     #   resp.table.local_secondary_indexes #=> Array
     #   resp.table.local_secondary_indexes[0].index_name #=> String
     #   resp.table.local_secondary_indexes[0].key_schema #=> Array
@@ -2518,10 +2567,18 @@ module Aws::DynamoDB
     #   resp.item["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.consumed_capacity.table_name #=> String
     #   resp.consumed_capacity.capacity_units #=> Float
+    #   resp.consumed_capacity.read_capacity_units #=> Float
+    #   resp.consumed_capacity.write_capacity_units #=> Float
+    #   resp.consumed_capacity.table.read_capacity_units #=> Float
+    #   resp.consumed_capacity.table.write_capacity_units #=> Float
     #   resp.consumed_capacity.table.capacity_units #=> Float
     #   resp.consumed_capacity.local_secondary_indexes #=> Hash
+    #   resp.consumed_capacity.local_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity.local_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.local_secondary_indexes["IndexName"].capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes #=> Hash
+    #   resp.consumed_capacity.global_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity.global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GetItem AWS API Documentation
@@ -3079,10 +3136,18 @@ module Aws::DynamoDB
     #   resp.attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.consumed_capacity.table_name #=> String
     #   resp.consumed_capacity.capacity_units #=> Float
+    #   resp.consumed_capacity.read_capacity_units #=> Float
+    #   resp.consumed_capacity.write_capacity_units #=> Float
+    #   resp.consumed_capacity.table.read_capacity_units #=> Float
+    #   resp.consumed_capacity.table.write_capacity_units #=> Float
     #   resp.consumed_capacity.table.capacity_units #=> Float
     #   resp.consumed_capacity.local_secondary_indexes #=> Hash
+    #   resp.consumed_capacity.local_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity.local_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.local_secondary_indexes["IndexName"].capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes #=> Hash
+    #   resp.consumed_capacity.global_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity.global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
     #   resp.item_collection_metrics.item_collection_key #=> Hash
     #   resp.item_collection_metrics.item_collection_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
@@ -3611,10 +3676,18 @@ module Aws::DynamoDB
     #   resp.last_evaluated_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.consumed_capacity.table_name #=> String
     #   resp.consumed_capacity.capacity_units #=> Float
+    #   resp.consumed_capacity.read_capacity_units #=> Float
+    #   resp.consumed_capacity.write_capacity_units #=> Float
+    #   resp.consumed_capacity.table.read_capacity_units #=> Float
+    #   resp.consumed_capacity.table.write_capacity_units #=> Float
     #   resp.consumed_capacity.table.capacity_units #=> Float
     #   resp.consumed_capacity.local_secondary_indexes #=> Hash
+    #   resp.consumed_capacity.local_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity.local_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.local_secondary_indexes["IndexName"].capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes #=> Hash
+    #   resp.consumed_capacity.global_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity.global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Query AWS API Documentation
@@ -3684,6 +3757,8 @@ module Aws::DynamoDB
     #   resp.table_description.item_count #=> Integer
     #   resp.table_description.table_arn #=> String
     #   resp.table_description.table_id #=> String
+    #   resp.table_description.billing_mode_summary.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
+    #   resp.table_description.billing_mode_summary.last_update_to_pay_per_request_date_time #=> Time
     #   resp.table_description.local_secondary_indexes #=> Array
     #   resp.table_description.local_secondary_indexes[0].index_name #=> String
     #   resp.table_description.local_secondary_indexes[0].key_schema #=> Array
@@ -3821,6 +3896,8 @@ module Aws::DynamoDB
     #   resp.table_description.item_count #=> Integer
     #   resp.table_description.table_arn #=> String
     #   resp.table_description.table_id #=> String
+    #   resp.table_description.billing_mode_summary.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
+    #   resp.table_description.billing_mode_summary.last_update_to_pay_per_request_date_time #=> Time
     #   resp.table_description.local_secondary_indexes #=> Array
     #   resp.table_description.local_secondary_indexes[0].index_name #=> String
     #   resp.table_description.local_secondary_indexes[0].key_schema #=> Array
@@ -4298,10 +4375,18 @@ module Aws::DynamoDB
     #   resp.last_evaluated_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.consumed_capacity.table_name #=> String
     #   resp.consumed_capacity.capacity_units #=> Float
+    #   resp.consumed_capacity.read_capacity_units #=> Float
+    #   resp.consumed_capacity.write_capacity_units #=> Float
+    #   resp.consumed_capacity.table.read_capacity_units #=> Float
+    #   resp.consumed_capacity.table.write_capacity_units #=> Float
     #   resp.consumed_capacity.table.capacity_units #=> Float
     #   resp.consumed_capacity.local_secondary_indexes #=> Hash
+    #   resp.consumed_capacity.local_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity.local_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.local_secondary_indexes["IndexName"].capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes #=> Hash
+    #   resp.consumed_capacity.global_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity.global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Scan AWS API Documentation
@@ -4352,6 +4437,309 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def tag_resource(params = {}, options = {})
       req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # `TransactGetItems` is a synchronous operation that atomically
+    # retrieves multiple items from one or more tables (but not from
+    # indexes) in a single account and region. A `TransactGetItems` call can
+    # contain up to 10 `TransactGetItem` objects, each of which contains a
+    # `Get` structure that specifies an item to retrieve from a table in the
+    # account and region. A call to `TransactGetItems` cannot retrieve items
+    # from tables in more than one AWS account or region.
+    #
+    # DynamoDB rejects the entire `TransactGetItems` request if any of the
+    # following is true:
+    #
+    # * A conflicting operation is in the process of updating an item to be
+    #   read.
+    #
+    # * There is insufficient provisioned capacity for the transaction to be
+    #   completed.
+    #
+    # * There is a user error, such as an invalid data format.
+    #
+    # @option params [required, Array<Types::TransactGetItem>] :transact_items
+    #   An ordered array of up to 10 `TransactGetItem` objects, each of which
+    #   contains a `Get` structure.
+    #
+    # @option params [String] :return_consumed_capacity
+    #   A value of `TOTAL` causes consumed capacity information to be
+    #   returned, and a value of `NONE` prevents that information from being
+    #   returned. No other value is valid.
+    #
+    # @return [Types::TransactGetItemsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TransactGetItemsOutput#consumed_capacity #consumed_capacity} => Array&lt;Types::ConsumedCapacity&gt;
+    #   * {Types::TransactGetItemsOutput#responses #responses} => Array&lt;Types::ItemResponse&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.transact_get_items({
+    #     transact_items: [ # required
+    #       {
+    #         get: { # required
+    #           key: { # required
+    #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #           table_name: "TableName", # required
+    #           projection_expression: "ProjectionExpression",
+    #           expression_attribute_names: {
+    #             "ExpressionAttributeNameVariable" => "AttributeName",
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.consumed_capacity #=> Array
+    #   resp.consumed_capacity[0].table_name #=> String
+    #   resp.consumed_capacity[0].capacity_units #=> Float
+    #   resp.consumed_capacity[0].read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].write_capacity_units #=> Float
+    #   resp.consumed_capacity[0].table.read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].table.write_capacity_units #=> Float
+    #   resp.consumed_capacity[0].table.capacity_units #=> Float
+    #   resp.consumed_capacity[0].local_secondary_indexes #=> Hash
+    #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].write_capacity_units #=> Float
+    #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].capacity_units #=> Float
+    #   resp.consumed_capacity[0].global_secondary_indexes #=> Hash
+    #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].write_capacity_units #=> Float
+    #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].capacity_units #=> Float
+    #   resp.responses #=> Array
+    #   resp.responses[0].item #=> Hash
+    #   resp.responses[0].item["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TransactGetItems AWS API Documentation
+    #
+    # @overload transact_get_items(params = {})
+    # @param [Hash] params ({})
+    def transact_get_items(params = {}, options = {})
+      req = build_request(:transact_get_items, params)
+      req.send_request(options)
+    end
+
+    # `TransactWriteItems` is a synchronous write operation that groups up
+    # to 10 action requests. These actions can target items in different
+    # tables, but not in different AWS accounts or regions, and no two
+    # actions can target the same item. For example, you cannot both
+    # `ConditionCheck` and `Update` the same item.
+    #
+    # The actions are completed atomically so that either all of them
+    # succeed, or all of them fail. They are defined by the following
+    # objects:
+    #
+    # * `Put`  —   Initiates a `PutItem` operation to write a new item. This
+    #   structure specifies the primary key of the item to be written, the
+    #   name of the table to write it in, an optional condition expression
+    #   that must be satisfied for the write to succeed, a list of the
+    #   item's attributes, and a field indicating whether or not to
+    #   retrieve the item's attributes if the condition is not met.
+    #
+    # * `Update`  —   Initiates an `UpdateItem` operation to update an
+    #   existing item. This structure specifies the primary key of the item
+    #   to be updated, the name of the table where it resides, an optional
+    #   condition expression that must be satisfied for the update to
+    #   succeed, an expression that defines one or more attributes to be
+    #   updated, and a field indicating whether or not to retrieve the
+    #   item's attributes if the condition is not met.
+    #
+    # * `Delete`  —   Initiates a `DeleteItem` operation to delete an
+    #   existing item. This structure specifies the primary key of the item
+    #   to be deleted, the name of the table where it resides, an optional
+    #   condition expression that must be satisfied for the deletion to
+    #   succeed, and a field indicating whether or not to retrieve the
+    #   item's attributes if the condition is not met.
+    #
+    # * `ConditionCheck`  —   Applies a condition to an item that is not
+    #   being modified by the transaction. This structure specifies the
+    #   primary key of the item to be checked, the name of the table where
+    #   it resides, a condition expression that must be satisfied for the
+    #   transaction to succeed, and a field indicating whether or not to
+    #   retrieve the item's attributes if the condition is not met.
+    #
+    # DynamoDB rejects the entire `TransactWriteItems` request if any of the
+    # following is true:
+    #
+    # * A condition in one of the condition expressions is not met.
+    #
+    # * A conflicting operation is in the process of updating the same item.
+    #
+    # * There is insufficient provisioned capacity for the transaction to be
+    #   completed.
+    #
+    # * An item size becomes too large (bigger than 400 KB), a Local
+    #   Secondary Index (LSI) becomes too large, or a similar validation
+    #   error occurs because of changes made by the transaction.
+    #
+    # * There is a user error, such as an invalid data format.
+    #
+    # @option params [required, Array<Types::TransactWriteItem>] :transact_items
+    #   An ordered array of up to 10 `TransactWriteItem` objects, each of
+    #   which contains a `ConditionCheck`, `Put`, `Update`, or `Delete`
+    #   object. These can operate on items in different tables, but the tables
+    #   must reside in the same AWS account and region, and no two of them can
+    #   operate on the same item.
+    #
+    # @option params [String] :return_consumed_capacity
+    #   Determines the level of detail about provisioned throughput
+    #   consumption that is returned in the response:
+    #
+    #   * `INDEXES` - The response includes the aggregate `ConsumedCapacity`
+    #     for the operation, together with `ConsumedCapacity` for each table
+    #     and secondary index that was accessed.
+    #
+    #     Note that some operations, such as `GetItem` and `BatchGetItem`, do
+    #     not access any indexes at all. In these cases, specifying `INDEXES`
+    #     will only return `ConsumedCapacity` information for table(s).
+    #
+    #   * `TOTAL` - The response includes only the aggregate
+    #     `ConsumedCapacity` for the operation.
+    #
+    #   * `NONE` - No `ConsumedCapacity` details are included in the response.
+    #
+    # @option params [String] :return_item_collection_metrics
+    #   Determines whether item collection metrics are returned. If set to
+    #   `SIZE`, the response includes statistics about item collections (if
+    #   any), that were modified during the operation and are returned in the
+    #   response. If set to `NONE` (the default), no statistics are returned.
+    #
+    # @option params [String] :client_request_token
+    #   Providing a `ClientRequestToken` makes the call to
+    #   `TransactWriteItems` idempotent, meaning that multiple identical calls
+    #   have the same effect as one single call.
+    #
+    #   Although multiple identical calls using the same client request token
+    #   produce the same result on the server (no side effects), the responses
+    #   to the calls may not be the same. If the `ReturnConsumedCapacity>`
+    #   parameter is set, then the initial `TransactWriteItems` call returns
+    #   the amount of write capacity units consumed in making the changes, and
+    #   subsequent `TransactWriteItems` calls with the same client token
+    #   return the amount of read capacity units consumed in reading the item.
+    #
+    #   A client request token is valid for 10 minutes after the first request
+    #   that uses it completes. After 10 minutes, any request with the same
+    #   client token is treated as a new request. Do not resubmit the same
+    #   request with the same client token for more than 10 minutes or the
+    #   result may not be idempotent.
+    #
+    #   If you submit a request with the same client token but a change in
+    #   other parameters within the 10 minute idempotency window, DynamoDB
+    #   returns an `IdempotentParameterMismatch` exception.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::TransactWriteItemsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TransactWriteItemsOutput#consumed_capacity #consumed_capacity} => Array&lt;Types::ConsumedCapacity&gt;
+    #   * {Types::TransactWriteItemsOutput#item_collection_metrics #item_collection_metrics} => Hash&lt;String,Array&lt;Types::ItemCollectionMetrics&gt;&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.transact_write_items({
+    #     transact_items: [ # required
+    #       {
+    #         condition_check: {
+    #           key: { # required
+    #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #           table_name: "TableName", # required
+    #           condition_expression: "ConditionExpression", # required
+    #           expression_attribute_names: {
+    #             "ExpressionAttributeNameVariable" => "AttributeName",
+    #           },
+    #           expression_attribute_values: {
+    #             "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #           return_values_on_condition_check_failure: "ALL_OLD", # accepts ALL_OLD, NONE
+    #         },
+    #         put: {
+    #           item: { # required
+    #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #           table_name: "TableName", # required
+    #           condition_expression: "ConditionExpression",
+    #           expression_attribute_names: {
+    #             "ExpressionAttributeNameVariable" => "AttributeName",
+    #           },
+    #           expression_attribute_values: {
+    #             "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #           return_values_on_condition_check_failure: "ALL_OLD", # accepts ALL_OLD, NONE
+    #         },
+    #         delete: {
+    #           key: { # required
+    #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #           table_name: "TableName", # required
+    #           condition_expression: "ConditionExpression",
+    #           expression_attribute_names: {
+    #             "ExpressionAttributeNameVariable" => "AttributeName",
+    #           },
+    #           expression_attribute_values: {
+    #             "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #           return_values_on_condition_check_failure: "ALL_OLD", # accepts ALL_OLD, NONE
+    #         },
+    #         update: {
+    #           key: { # required
+    #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #           update_expression: "UpdateExpression", # required
+    #           table_name: "TableName", # required
+    #           condition_expression: "ConditionExpression",
+    #           expression_attribute_names: {
+    #             "ExpressionAttributeNameVariable" => "AttributeName",
+    #           },
+    #           expression_attribute_values: {
+    #             "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #           return_values_on_condition_check_failure: "ALL_OLD", # accepts ALL_OLD, NONE
+    #         },
+    #       },
+    #     ],
+    #     return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
+    #     return_item_collection_metrics: "SIZE", # accepts SIZE, NONE
+    #     client_request_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.consumed_capacity #=> Array
+    #   resp.consumed_capacity[0].table_name #=> String
+    #   resp.consumed_capacity[0].capacity_units #=> Float
+    #   resp.consumed_capacity[0].read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].write_capacity_units #=> Float
+    #   resp.consumed_capacity[0].table.read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].table.write_capacity_units #=> Float
+    #   resp.consumed_capacity[0].table.capacity_units #=> Float
+    #   resp.consumed_capacity[0].local_secondary_indexes #=> Hash
+    #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].write_capacity_units #=> Float
+    #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].capacity_units #=> Float
+    #   resp.consumed_capacity[0].global_secondary_indexes #=> Hash
+    #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].write_capacity_units #=> Float
+    #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].capacity_units #=> Float
+    #   resp.item_collection_metrics #=> Hash
+    #   resp.item_collection_metrics["TableName"] #=> Array
+    #   resp.item_collection_metrics["TableName"][0].item_collection_key #=> Hash
+    #   resp.item_collection_metrics["TableName"][0].item_collection_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.item_collection_metrics["TableName"][0].size_estimate_range_gb #=> Array
+    #   resp.item_collection_metrics["TableName"][0].size_estimate_range_gb[0] #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TransactWriteItems AWS API Documentation
+    #
+    # @overload transact_write_items(params = {})
+    # @param [Hash] params ({})
+    def transact_write_items(params = {}, options = {})
+      req = build_request(:transact_write_items, params)
       req.send_request(options)
     end
 
@@ -4516,6 +4904,11 @@ module Aws::DynamoDB
     # @option params [required, String] :global_table_name
     #   The name of the global table
     #
+    # @option params [String] :global_table_billing_mode
+    #   The billing mode of the global table. If `GlobalTableBillingMode` is
+    #   not specified, the global table defaults to `PROVISIONED` capacity
+    #   billing mode.
+    #
     # @option params [Integer] :global_table_provisioned_write_capacity_units
     #   The maximum number of writes consumed per second before DynamoDB
     #   returns a `ThrottlingException.`
@@ -4541,6 +4934,7 @@ module Aws::DynamoDB
     #
     #   resp = client.update_global_table_settings({
     #     global_table_name: "TableName", # required
+    #     global_table_billing_mode: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
     #     global_table_provisioned_write_capacity_units: 1,
     #     global_table_provisioned_write_capacity_auto_scaling_settings_update: {
     #       minimum_units: 1,
@@ -4628,6 +5022,8 @@ module Aws::DynamoDB
     #   resp.replica_settings #=> Array
     #   resp.replica_settings[0].region_name #=> String
     #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.replica_settings[0].replica_billing_mode_summary.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
+    #   resp.replica_settings[0].replica_billing_mode_summary.last_update_to_pay_per_request_date_time #=> Time
     #   resp.replica_settings[0].replica_provisioned_read_capacity_units #=> Integer
     #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.minimum_units #=> Integer
     #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.maximum_units #=> Integer
@@ -5068,10 +5464,18 @@ module Aws::DynamoDB
     #   resp.attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.consumed_capacity.table_name #=> String
     #   resp.consumed_capacity.capacity_units #=> Float
+    #   resp.consumed_capacity.read_capacity_units #=> Float
+    #   resp.consumed_capacity.write_capacity_units #=> Float
+    #   resp.consumed_capacity.table.read_capacity_units #=> Float
+    #   resp.consumed_capacity.table.write_capacity_units #=> Float
     #   resp.consumed_capacity.table.capacity_units #=> Float
     #   resp.consumed_capacity.local_secondary_indexes #=> Hash
+    #   resp.consumed_capacity.local_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity.local_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.local_secondary_indexes["IndexName"].capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes #=> Hash
+    #   resp.consumed_capacity.global_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity.global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
     #   resp.item_collection_metrics.item_collection_key #=> Hash
     #   resp.item_collection_metrics.item_collection_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
@@ -5116,6 +5520,20 @@ module Aws::DynamoDB
     #
     # @option params [required, String] :table_name
     #   The name of the table to be updated.
+    #
+    # @option params [String] :billing_mode
+    #   Controls how you are charged for read and write throughput and how you
+    #   manage capacity. When switching from pay-per-request to provisioned
+    #   capacity, initial provisioned capacity values must be set. The initial
+    #   provisioned capacity values are estimated based on the consumed read
+    #   and write capacity of your table and global secondary indexes over the
+    #   past 30 minutes.
+    #
+    #   * `PROVISIONED` - Sets the billing mode to `PROVISIONED`. We recommend
+    #     using `PROVISIONED` for predictable workloads.
+    #
+    #   * `PAY_PER_REQUEST` - Sets the billing mode to `PAY_PER_REQUEST`. We
+    #     recommend using `PAY_PER_REQUEST` for unpredictable workloads.
     #
     # @option params [Types::ProvisionedThroughput] :provisioned_throughput
     #   The new provisioned throughput settings for the specified table or
@@ -5215,6 +5633,7 @@ module Aws::DynamoDB
     #       },
     #     ],
     #     table_name: "TableName", # required
+    #     billing_mode: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
     #     provisioned_throughput: {
     #       read_capacity_units: 1, # required
     #       write_capacity_units: 1, # required
@@ -5240,7 +5659,7 @@ module Aws::DynamoDB
     #             projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
     #             non_key_attributes: ["NonKeyAttributeName"],
     #           },
-    #           provisioned_throughput: { # required
+    #           provisioned_throughput: {
     #             read_capacity_units: 1, # required
     #             write_capacity_units: 1, # required
     #           },
@@ -5281,6 +5700,8 @@ module Aws::DynamoDB
     #   resp.table_description.item_count #=> Integer
     #   resp.table_description.table_arn #=> String
     #   resp.table_description.table_id #=> String
+    #   resp.table_description.billing_mode_summary.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
+    #   resp.table_description.billing_mode_summary.last_update_to_pay_per_request_date_time #=> Time
     #   resp.table_description.local_secondary_indexes #=> Array
     #   resp.table_description.local_secondary_indexes[0].index_name #=> String
     #   resp.table_description.local_secondary_indexes[0].key_schema #=> Array
@@ -5416,7 +5837,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

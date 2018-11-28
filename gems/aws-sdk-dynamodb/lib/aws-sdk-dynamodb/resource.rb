@@ -274,13 +274,14 @@ module Aws::DynamoDB
     #           projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
     #           non_key_attributes: ["NonKeyAttributeName"],
     #         },
-    #         provisioned_throughput: { # required
+    #         provisioned_throughput: {
     #           read_capacity_units: 1, # required
     #           write_capacity_units: 1, # required
     #         },
     #       },
     #     ],
-    #     provisioned_throughput: { # required
+    #     billing_mode: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
+    #     provisioned_throughput: {
     #       read_capacity_units: 1, # required
     #       write_capacity_units: 1, # required
     #     },
@@ -423,10 +424,23 @@ module Aws::DynamoDB
     #   * `ProvisionedThroughput` - The provisioned throughput settings for
     #     the global secondary index, consisting of read and write capacity
     #     units.
-    # @option options [required, Types::ProvisionedThroughput] :provisioned_throughput
+    # @option options [String] :billing_mode
+    #   Controls how you are charged for read and write throughput and how you
+    #   manage capacity. This setting can be changed later.
+    #
+    #   * `PROVISIONED` - Sets the billing mode to `PROVISIONED`. We recommend
+    #     using `PROVISIONED` for predictable workloads.
+    #
+    #   * `PAY_PER_REQUEST` - Sets the billing mode to `PAY_PER_REQUEST`. We
+    #     recommend using `PAY_PER_REQUEST` for unpredictable workloads.
+    # @option options [Types::ProvisionedThroughput] :provisioned_throughput
     #   Represents the provisioned throughput settings for a specified table
     #   or index. The settings can be modified using the `UpdateTable`
     #   operation.
+    #
+    #   If you set BillingMode as `PROVISIONED`, you must specify this
+    #   property. If you set BillingMode as `PAY_PER_REQUEST`, you cannot
+    #   specify this property.
     #
     #   For current minimum and maximum provisioned throughput values, see
     #   [Limits][1] in the *Amazon DynamoDB Developer Guide*.
