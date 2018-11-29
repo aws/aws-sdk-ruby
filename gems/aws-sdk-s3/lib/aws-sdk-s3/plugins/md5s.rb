@@ -13,6 +13,8 @@ module Aws
           :put_bucket_lifecycle,
           :put_bucket_policy,
           :put_bucket_tagging,
+          :put_object_legal_hold,
+          :put_object_retention
         ]
 
         # @api private
