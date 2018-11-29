@@ -257,6 +257,7 @@ to be backwards compatible.
 | Service Name                                          | Service Class                   | API Version |
 | ----------------------------------------------------- | ------------------------------- | ----------- |
 | AWS Amplify                                           | Amplify                         | 2017-07-25  |
+| AWS App Mesh                                          | AppMesh                         | 2018-10-01  |
 | AWS AppSync                                           | AppSync                         | 2017-07-25  |
 | AWS Application Discovery Service                     | ApplicationDiscoveryService     | 2015-11-01  |
 | AWS Auto Scaling Plans                                | AutoScalingPlans                | 2018-01-06  |
@@ -264,6 +265,7 @@ to be backwards compatible.
 | AWS Budgets                                           | Budgets                         | 2016-10-20  |
 | AWS Certificate Manager                               | ACM                             | 2015-12-08  |
 | AWS Certificate Manager Private Certificate Authority | ACMPCA                          | 2017-08-22  |
+| AWS Cloud Map                                         | ServiceDiscovery                | 2017-03-14  |
 | AWS Cloud9                                            | Cloud9                          | 2017-09-23  |
 | AWS CloudFormation                                    | CloudFormation                  | 2010-05-15  |
 | AWS CloudHSM V2                                       | CloudHSMV2                      | 2017-04-28  |
@@ -304,6 +306,7 @@ to be backwards compatible.
 | AWS Key Management Service                            | KMS                             | 2014-11-01  |
 | AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
 | AWS Lambda                                            | Lambda                          | 2015-03-31  |
+| AWS License Manager                                   | LicenseManager                  | 2018-08-01  |
 | AWS Marketplace Commerce Analytics                    | MarketplaceCommerceAnalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | MarketplaceEntitlementService   | 2017-01-11  |
 | AWS MediaConnect                                      | MediaConnect                    | 2018-11-14  |
@@ -375,8 +378,8 @@ to be backwards compatible.
 | Amazon Import/Export Snowball                         | Snowball                        | 2016-06-30  |
 | Amazon Inspector                                      | Inspector                       | 2016-02-16  |
 | Amazon Kinesis                                        | Kinesis                         | 2013-12-02  |
-| Amazon Kinesis Analytics                              | KinesisAnalyticsV2              | 2018-05-23  |
 | Amazon Kinesis Analytics                              | KinesisAnalytics                | 2015-08-14  |
+| Amazon Kinesis Analytics                              | KinesisAnalyticsV2              | 2018-05-23  |
 | Amazon Kinesis Firehose                               | Firehose                        | 2015-08-04  |
 | Amazon Kinesis Video Streams                          | KinesisVideo                    | 2017-09-30  |
 | Amazon Kinesis Video Streams Archived Media           | KinesisVideoArchivedMedia       | 2017-09-30  |
@@ -397,7 +400,6 @@ to be backwards compatible.
 | Amazon Rekognition                                    | Rekognition                     | 2016-06-27  |
 | Amazon Relational Database Service                    | RDS                             | 2014-10-31  |
 | Amazon Route 53                                       | Route53                         | 2013-04-01  |
-| Amazon Route 53 Auto Naming                           | ServiceDiscovery                | 2017-03-14  |
 | Amazon Route 53 Domains                               | Route53Domains                  | 2014-05-15  |
 | Amazon Route 53 Resolver                              | Route53Resolver                 | 2018-04-01  |
 | Amazon SageMaker Runtime                              | SageMakerRuntime                | 2017-05-13  |
@@ -417,8 +419,8 @@ to be backwards compatible.
 | AmazonMQ                                              | MQ                              | 2017-11-27  |
 | Application Auto Scaling                              | ApplicationAutoScaling          | 2016-02-06  |
 | Auto Scaling                                          | AutoScaling                     | 2011-01-01  |
-| Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
 | Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
+| Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
 | Firewall Management Service                           | FMS                             | 2018-01-01  |
 
 ## License

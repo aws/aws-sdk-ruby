@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::Lightsail - Updated the API, and documentation for Amazon Lightsail.
+
+* Feature - Aws::SageMaker - Updated the API, and documentation for Amazon SageMaker Service.
+
+* Feature - Aws::ServiceDiscovery - Updated the API, and documentation for AWS Cloud Map.
+
+* Feature - Aws::AppMesh - Added support for a new service, AWS App Mesh.
+
+* Feature - Aws::LicenseManager - Added support for a new service, AWS License Manager.
+
 2.11.180 (2018-11-28)
 ------------------
 

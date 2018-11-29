@@ -19,6 +19,10 @@
     "models": "amplify/2017-07-25",
     "endpoint": "amplify"
   },
+  "AppMesh": {
+    "models": "appmesh/2018-10-01",
+    "endpoint": "appmesh"
+  },
   "AppStream": {
     "models": "appstream/2016-12-01",
     "endpoint": "appstream2"
@@ -369,6 +373,10 @@
   "LexModelBuildingService": {
     "models": "lex-models/2017-04-19",
     "endpoint": "models.lex"
+  },
+  "LicenseManager": {
+    "models": "license-manager/2018-08-01",
+    "endpoint": "license-manager"
   },
   "Lightsail": {
     "models": "lightsail/2016-11-28",

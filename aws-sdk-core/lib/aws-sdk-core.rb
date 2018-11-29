@@ -28,6 +28,7 @@ module Aws
     APIGateway
     AlexaForBusiness
     Amplify
+    AppMesh
     AppStream
     AppSync
     ApplicationAutoScaling
@@ -116,6 +117,7 @@ module Aws
     LambdaPreview
     Lex
     LexModelBuildingService
+    LicenseManager
     Lightsail
     MQ
     MTurk
